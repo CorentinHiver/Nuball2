@@ -7,8 +7,8 @@
 #define FATIMA
 #define DSSD_TRIG
 
-// #define CORENTIN
-#define DATA2
+#define CORENTIN
+// #define DATA2
 
 #include "../lib/utils.hpp"
 #include "../lib/Classes/Event.hpp"
@@ -57,20 +57,20 @@ struct quick_parameters
 
   std::mutex mutex;
 
-  bool getNextRunMulti(std::string & run)
+  bool getNextRun(std::string & run)
   {
-    mutex.lock();
+    if (nb_threads>1) mutex.lock();
     if (current_run<runs.size())
     {
       run = runs[current_run];
       current_run++;
-      mutex.unlock();
+      if (nb_threads>1) mutex.unlock();
       return true;
     }
     else
     {
       current_run++;
-      mutex.unlock();
+      if (nb_threads>1) mutex.unlock();
       return false;
     }
   }
@@ -84,6 +84,8 @@ void convertRun(quick_parameters & param);
 int main(int argc, char ** argv)
 {
   quick_parameters qp;
+  if (argc == 2 && strcmp(argv[1],"-m")==0) qp.nb_threads = 1;
+  else if (argc == 3 && strcmp(argv[1],"-m")==0) qp.nb_threads = atoi(argv[2]);
 
   // Parameters p;
   // p.readParameters();
@@ -100,49 +102,35 @@ int main(int argc, char ** argv)
 
   checkThreadsNb(qp.nb_threads, qp.runs.size());
 
-  for (int i = 0; i<qp.nb_threads; i++)
+  if(qp.nb_threads == 1)
   {
-    // Run in parallel this command :
-    //                              vvvvvvvvvvvv
-    threads.emplace_back([&qp](){convertRun(qp);});
-    //                              ^^^^^^^^^^^^
-    //Note : the parameter "this" in the lambda allows all instances of run_thread() to have access to the members of the main NearLine object
+    convertRun(qp);
   }
-  for(size_t i = 0; i < threads.size(); i++) threads.at(i).join(); //Closes threads
-  // print("NUMBER HITS : ", m_counter);
-  threads.resize(0);
-  threads.clear();
-  std::cout << "Multi-threading is over !" << std::endl;
+
+  else
+  {
+    for (int i = 0; i<qp.nb_threads; i++)
+    {
+      // Run in parallel this command :
+      //                              vvvvvvvvvvvv
+      threads.emplace_back([&qp](){convertRun(qp);});
+      //                              ^^^^^^^^^^^^
+      //Note : the parameter "this" in the lambda allows all instances of run_thread() to have access to the members of the main NearLine object
+    }
+    for(size_t i = 0; i < threads.size(); i++) threads.at(i).join(); //Closes threads
+    // print("NUMBER HITS : ", m_counter);
+    threads.resize(0);
+    threads.clear();
+    std::cout << "Multi-threading is over !" << std::endl;
+  }
 
   return 1;
 }
 
-// void run_thread(quick_parameters & param)
-// {
-//   if(param.stop) return;
-//   //Sets the file to treat :
-//   std::string run = "";
-//   while(!param.stop)
-//   {
-//     param.mutex.lock();
-//     stop = param.getNextRun(run);
-//     param.mutex.unlock();
-//     if(!param.stop)
-//     {
-//       convertRun(param, run);
-//     }
-//     else
-//     {
-//       break;
-//     }
-//   }
-//   std::cout << "Worker on " << run << " finished" << std::endl;
-// }
-
 void convertRun(quick_parameters & param)
 {
   std::string run = "";
-  while(param.getNextRunMulti(run))
+  while(param.getNextRun(run))
   {
     print(run);
     std::string pathRun = param.dataPath+run;
