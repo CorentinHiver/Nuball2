@@ -1204,6 +1204,20 @@ UShort_t checkThreads(UShort_t nOfThreads, UInt_t const &numberFiles)
   return nOfThreads;
 }
 
+void checkThreadsNb(UShort_t & nOfThreads, UInt_t const &numberFiles)
+{
+  if(nOfThreads > std::thread::hardware_concurrency())
+  {
+    nOfThreads = std::thread::hardware_concurrency();
+    std::cout << "Number of threads too large (hardware) -> reset to " << nOfThreads << std::endl;
+  }
+  if(nOfThreads > numberFiles)
+  {
+    nOfThreads = numberFiles;
+    std::cout << "Number of threads too large (too few files to be processed) -> reset to " << nOfThreads << std::endl;
+  }
+}
+
 std::vector<Detector> Type_det;
 
 void set_type_det(Labels const & labels)

@@ -17,29 +17,113 @@ Labels g_labelToName;
 #include "Modules/EachDetector.hpp"
 
 
-int main(int argc, char ** argv)
+struct quick_parameters
 {
   #ifdef N_SI_129
-  std::string outDir = "129/";
-  std::string fileID = "ID/index_129.dat";
-  std::string runs_list = "Parameters/runs_pulsed_129.list";
-  std::string dataPath = "~/faster_data/N-SI-129-root/";
+  std::string const outDir = "129/";
+  std::string const fileID = "ID/index_129.dat";
+  std::string const runs_list = "Parameters/runs_pulsed_129.list";
+  std::string const dataPath = "~/faster_data/N-SI-129-root/";
 
-  int nb_max_evts_in_file = 10000000; // 10 millions evts ~ 400 Mb
+  int const nb_max_evts_in_file = 1000000; // 10 millions evts ~ 400 Mb
+  UShort_t nb_threads = 4;
+
+  std::vector<std::string> runs;
+  size_t current_run = 0;
+
+
+  std::mutex mutex;
+  // bool stop = false;
+
+  bool getNextRunMulti(std::string & run)
+  {
+    mutex.lock();
+    if (current_run<runs.size())
+    {
+      run = runs[current_run];
+      current_run++;
+      mutex.unlock();
+      return true;
+    }
+    else
+    {
+      current_run++;
+      mutex.unlock();
+      return false;
+    }
+  }
+
   #endif //N_SI_129x
+};
+
+void convertRun(quick_parameters & param);
+// void run_thread(quick_parameters & param);
+
+int main(int argc, char ** argv)
+{
+  quick_parameters qp;
 
   // Parameters p;
   // p.readParameters();
 
   // Initialize arrays
-  g_labelToName = arrayID(fileID);
+  g_labelToName = arrayID(qp.fileID);
   auto m_nb_labels = g_labelToName.size();
   setArrays(m_nb_labels);
+  if (qp.nb_threads>1) TThread::Initialize();
 
-  auto runs = listFileReader(runs_list);
-  for (auto const & run : runs)
+  qp.runs = listFileReader(qp.runs_list);
+
+  std::vector<std::thread> threads;
+
+  checkThreadsNb(qp.nb_threads, qp.runs.size());
+
+  for (int i = 0; i<qp.nb_threads; i++)
   {
-    std::string pathRun = dataPath+run;
+    // Run in parallel this command :
+    //                              vvvvvvvvvvvv
+    threads.emplace_back([&qp](){convertRun(qp);});
+    //                              ^^^^^^^^^^^^
+    //Note : the parameter "this" in the lambda allows all instances of run_thread() to have access to the members of the main NearLine object
+  }
+  for(size_t i = 0; i < threads.size(); i++) threads.at(i).join(); //Closes threads
+  // print("NUMBER HITS : ", m_counter);
+  threads.resize(0);
+  threads.clear();
+  std::cout << "Multi-threading is over !" << std::endl;
+
+  return 1;
+}
+
+// void run_thread(quick_parameters & param)
+// {
+//   if(param.stop) return;
+//   //Sets the file to treat :
+//   std::string run = "";
+//   while(!param.stop)
+//   {
+//     param.mutex.lock();
+//     stop = param.getNextRun(run);
+//     param.mutex.unlock();
+//     if(!param.stop)
+//     {
+//       convertRun(param, run);
+//     }
+//     else
+//     {
+//       break;
+//     }
+//   }
+//   std::cout << "Worker on " << run << " finished" << std::endl;
+// }
+
+void convertRun(quick_parameters & param)
+{
+  std::string run = "";
+  while(param.getNextRunMulti(run))
+  {
+    print(run);
+    std::string pathRun = param.dataPath+run;
     TChain chain("Nuball");
     std::string rootFiles = pathRun+"/*.root";
     chain.Add(rootFiles.c_str());
@@ -48,29 +132,33 @@ int main(int argc, char ** argv)
     Sorted_Event event_s;
 
     int nb_evts = chain.GetEntries();
-    int nb_files = nb_evts/nb_max_evts_in_file+1;
+    // int nb_files = nb_evts/param.nb_max_evts_in_file+1;
 
-    for (int file_nb = 0; file_nb<nb_files; file_nb ++)
+    int i = 0;
+    int file_nb = 0;
+    while(i<nb_evts)
     {// Write in files of more or less the same size
       auto outTree = new TTree("Nuball", "New conversion");
       event.writeTo(outTree);
-      for (int i = 0; i<nb_max_evts_in_file; i++)
+      while(i<nb_evts)
       {
-        if (i>nb_evts) break; // To write the last file, we have to stop before the max evts number
         chain.GetEntry(i);
+        if (i%100000 && outTree->GetEntries() > param.nb_max_evts_in_file) break;
+        // if (i%10000) print(i);
         event_s.sortEvent(event);
         #ifdef DSSD_TRIG
         if (event_s.DSSDMult > 0) outTree->Fill();
-        #endif //DSSD_TRIG        
+        #endif //DSSD_TRIG
+        i++;
       }// End events loop
-      std::string outName = outDir+run+"_"+std::to_string(file_nb+1)+".root";
-      std::unique_ptr<TFile> file(TFile::Open(outName.c_str(),"recreate"));
+      file_nb++;
+      std::string outName = param.outDir+run+"_"+std::to_string(file_nb)+".root";
+      auto file = TFile::Open(outName.c_str(),"recreate");
       outTree -> Write();
       file    -> Write();
       file    -> Close();
+      delete file;
       print(outName,"written...");
     }// End files loop
-  }// End runs loop
-
-  return 1;
+  }
 }
