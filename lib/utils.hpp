@@ -622,8 +622,6 @@ void setlabelToPariscrystal (Label const & nb_labels)
   }
 }
 
-
-
 std::vector<Double_t> Ge_Labels =
 { 25 ,26 ,27 ,28,  31 ,32 ,33 ,34 , 37 ,38 ,39 ,40 , 43 ,44 ,45 ,46 , 49 ,50 ,51 ,52 , 55 ,56 ,57 ,58 ,
   61 ,62 ,63 ,64,  67 ,68 ,69 ,70 , 73 ,74 ,75 ,76 , 79 ,80 ,81 ,82 , 85 ,86 ,87 ,88 , 91 ,92 ,93 ,94 ,
@@ -999,6 +997,20 @@ int check_new_file(std::string folderName, std::string & lastFile)
   }
   closedir(dp);
   return ret;
+}
+
+std::vector<std::string> listFileReader(std::string const & filename)
+{
+  std::vector<std::string> list;
+
+  std::ifstream listfile(filename,std::ios::in);
+
+  std::string line;
+  while(getline(listfile,line))
+  {
+    list.push_back(line);
+  }
+  return list;
 }
 
 template <class N, class D> std::string procent(N n, D d)
