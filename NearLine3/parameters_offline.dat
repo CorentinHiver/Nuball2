@@ -1,0 +1,65 @@
+# INPUTS:
+ID: ID/index_120.dat
+
+# TIMESHIFT_DATA: load: Timeshifts/Uranium.dat
+# TIMESHIFT_DATA: load: Timeshifts/Uranium238_9_deltaT.dat
+# TIMESHIFT_DATA: load: Timeshifts/run_oct2022_60.dat
+# TIMESHIFT_DATA: load: Timeshifts/run_no_target_after_Ta_replacement.dat
+# TIMESHIFT_DATA: load: Timeshifts/run_oct2022_60_deltaT.dat
+
+# CALIBRATION: Calibration/residues_Th232/test232Th.dat
+# CALIBRATION: Calibration/152Eu_after/152Eu_after_108.dat
+CALIBRATION: Calibration/152Eu_run.dat
+
+THRESHOLD: 10 //keV
+
+NB_THREADS: 2
+
+BINNING: calibrated: LaBr3: 10000 0 10000 Ge: 20000 0 10000
+BINNING: uncalibrated: LaBr3: 10000 0 1000000
+BINNING: bidim: Ge: 5000 0 5000 LaBr3: 1000 0 5000
+
+# DATADIR: /home/corentin/faster_data/N-SI-120/Uranium238_9/ nb: 4
+# DATADIR: /home/corentin/faster_data/N-SI-120/152Eu_after_108/ nb: 8
+# DATADIR: /home/corentin/faster_data/N-SI-120/run_oct2022_60.fast/
+# DATADIR: /home/corentin/faster_data/N-SI-120/no_target/ nb: 6
+# DATADIR: /home/corentin/faster_data/N-SI-120/run_no_target_after_Ta_replacement/
+DATADIR: /home/corentin/faster_data/N-SI-120/run_no_target_after_Au_replacement/
+# DATADIR: /home/corentin/faster_data/N-SI-120/run_oct2022_20.fast/
+
+# DATADIR: tests_faster2root/
+
+# OUTDIR: Calibration/152Eu_after/
+# OUTDIR: Analyse/
+# OUTDIR: Timeshifts/
+# OUTDIR: spectra/
+# OUTDIR: Analyse/
+
+# GAMMA_FLASH= 26.5 (ns)
+# GAMMA_FLASH= 39 (ns)
+
+
+# TEMP_TREE_ON_DISK
+
+# --------
+# OUTPUTS:
+# --------
+
+# ANALYSE: timewindow: 350 time_ref: R1A1_FATIMA_LaBr3 outRoot: Analyse/run_no_target_after_Ta_replacement.root
+
+TIMESHIFT: time_reference: R1A2_FATIMA_LaBr3 timewindow: 1500 mult: 2 3 -
+outRoot: run_no_target_after_Au_replacement.root outData: run_no_target_after_Au_replacement.dat
+# outRoot: run_oct2022_60_deltaT_garbage.root outData: run_oct2022_60_deltaT_garbage.dat
+# outRoot: Uranium238_9_deltaT.root outData: Uranium238_9_deltaT.dat mult: 2 3
+# outRoot: run_oct2022_27.root outData: run_oct2022_27.dat mult: 2 4
+# outRoot: Timeshifts/garbage.root outData: Timeshifts/garbage.dat
+# TIMESHIFT: time_reference: R1A1_FATIMA_LaBr3 timewindow: 1500 outRoot: timeshifts_tests_root.root outData: deltaT_test_root.dat
+
+# CALIBRATE: source: 152Eu outCalib: 152Eu_after_108.dat outRoot: 152Eu_after_108.root
+
+# FASTER2ROOT: timewindow: 1500 outDir: tests_faster2root/ eventbuild
+# FASTER2ROOT: timewindow: 1500 outDir: tests_faster2root/ eventbuild throwsingles
+
+# HISTOGRAM: run_no_target_after_Ta_replacement.root
+# HISTOGRAM: calibrated: Ge_Clover LaBr3 outRoot: run_oct2022_60_calibrated.root
+# HISTOGRAM: calibrated: Ge_Clover LaBr3 outRoot: Uranium23_97_calib232Th.root

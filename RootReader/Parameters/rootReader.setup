@@ -1,0 +1,4 @@
+EachDetector:
+BINNING: Ge: 6000 0 6000
+BINNING: BGO: 600 0 6000
+end

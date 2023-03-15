@@ -1,0 +1,207 @@
+#ifndef EVENT_H
+#define EVENT_H
+
+#include "Hit.h"
+
+class Event
+{
+public:
+
+  Event(){initialise();}
+
+  Event (Hit const & hit)
+  {
+    initialise(1);
+    *this = hit;
+  }
+
+  Event(TTree * tree, std::string const & options = "mltnN")
+  {
+    initialise();
+    connect(tree, options);
+  }
+
+  void initialise(int i_max = 255);
+
+  Hit operator[] (Int_t const & i);
+
+  void operator= (Hit const & hit);
+
+  void connect(TTree * tree, std::string const & options = "mltnN");
+
+  void connect(std::unique_ptr<TTree> tree, std::string const & options)
+  {
+    connect(tree.get());
+  }
+
+  void writeTo(TTree * tree, std::string const & options = "mltnN");
+
+  void push_back(Hit const & hit);
+  void push_front(Hit const & hit);
+
+  void Print();
+  void clear() { mult = 0; }
+  size_t size() const { return static_cast<size_t>(mult); }
+  bool isSingle() const {return (mult == 1);}
+
+  int      mult = 0;
+  UShort_t labels [255];
+  Float_t  nrjs   [255];
+  Float_t  nrj2s  [255];
+  Time     times  [255];
+  Bool_t   pileups[255];
+  Detector types  [255];
+
+private:
+
+  bool read_m = false;
+  bool read_l = false;
+  bool read_t = false;
+  bool read_E = false;
+  bool read_E2 = false;
+  bool read_p = false;
+
+  bool write_m = false;
+  bool write_l = false;
+  bool write_t = false;
+  bool write_E = false;
+  bool write_E2 = false;
+  bool write_p = false;
+};
+
+inline void Event::initialise(int i_max )
+{
+  for (int i = 0; i<i_max; i++)
+  {
+    labels  [i] = 0;
+    nrjs    [i] = 0;
+    nrj2s   [i] = 0;
+    times   [i] = 0;
+    pileups [i] = 0;
+    types   [i] = null;
+  }
+}
+
+inline Hit Event::operator[] (Int_t const & i)
+{
+  Hit ret;
+  ret.nrjcal = nrjs[i];
+  ret.nrj2   = nrj2s[i];
+  ret.label  = labels[i];
+  ret.time   = times[i];
+  ret.pileup = pileups[i];
+  ret.type   = types[i];
+  return ret;
+}
+
+inline void Event::operator= (Hit const & hit)
+{
+  labels[0]  = hit.label;
+  nrjs[0]    = hit.nrjcal;
+  nrj2s[0]   = hit.nrj2;
+  times[0]   = hit.time;
+  pileups[0] = hit.pileup;
+  types[0]   = type_det(hit.label);
+  mult = 1;
+}
+
+void Event::writeTo(TTree * tree, std::string const & options)
+{
+  for (auto const & e : options)
+  {
+    switch (e)
+    {
+      case ('m') : if (read_m ) write_m  = true; break;
+      case ('l') : if (read_l ) write_l  = true; break;
+      case ('t') : if (read_t ) write_t  = true; break;
+      case ('n') : if (read_E ) write_E  = true; break;
+      case ('N') : if (read_E2) write_E2 = true; break;
+      case ('p') : if (read_p ) write_p  = true; break;
+    }
+  }
+
+  tree -> ResetBranchAddresses();
+  if (write_m ) tree -> Branch("mult"   , &mult   );
+  if (write_l ) tree -> Branch("label"  , &labels , "label[mult]/s" );
+  if (write_t ) tree -> Branch("time"   , &times  , "time[mult]/l"  );
+  if (write_E ) tree -> Branch("nrj"    , &nrjs   , "nrj[mult]/F"   );
+  if (write_E2) tree -> Branch("nrj2"   , &nrj2s  , "nrj2[mult]/F"  );
+  if (write_p ) tree -> Branch("pileup" , &pileups, "pileup[mult]/O");
+
+  tree -> SetBranchStatus("*",true);
+}
+
+void Event::connect(TTree * tree, std::string const & options)
+{
+  for (auto const & e : options)
+  {
+    switch (e)
+    {
+      case ('m') : read_m  = true; break;
+      case ('l') : read_l  = true; break;
+      case ('t') : read_t  = true; break;
+      case ('n') : read_E  = true; break;
+      case ('N') : read_E2 = true; break;
+      case ('p') : read_p  = true; break;
+    }
+  }
+
+  tree -> ResetBranchAddresses();
+
+  if (read_m) tree -> SetBranchAddress("mult"   , &mult   );
+  if (read_l) tree -> SetBranchAddress("label"  , &labels );
+  if (read_t) tree -> SetBranchAddress("time"   , &times  );
+  if (read_E) tree -> SetBranchAddress("nrj"    , &nrjs   );
+  if (read_E2) tree -> SetBranchAddress("nrj2"  , &nrj2s  );
+  if (read_p) tree -> SetBranchAddress("pileup" , &pileups);
+
+  tree -> SetBranchStatus("*",true);
+}
+
+inline void Event::push_back(Hit const & hit)
+{
+  labels[mult]  = hit.label;
+  nrjs[mult]    = hit.nrjcal;
+  nrj2s[mult]   = hit.nrj2;
+  times[mult]   = hit.time;
+  pileups[mult] = hit.pileup;
+  types[mult]   = static_cast<Detector> (hit.type);
+  mult++;
+}
+
+inline void Event::push_front(Hit const & hit)
+{
+  for (unsigned char i = 0; i<mult; i++)
+  {
+    labels[mult+1]  = labels[mult];
+    nrjs[mult+1]    = nrjs[mult];
+    nrj2s[mult+1]   = nrj2s[mult];
+    times[mult+1]   = times[mult];
+    pileups[mult+1] = pileups[mult];
+    types[mult+1]   = types[mult];
+  }
+  labels[0]  = hit.label;
+  nrjs[0]    = hit.nrjcal;
+  nrj2s[0]   = hit.nrjcal;
+  times[0]   = hit.time;
+  pileups[0] = hit.pileup;
+  types[0]   = type_det(hit.label);
+  mult++;
+}
+
+inline void Event::Print()
+{
+  for (unsigned char i = 0; i<mult;i++)
+  {
+    print(
+      "label :",labels[i],
+      "time :" ,times[i],
+      (types[i]) ? "type : "+type_str[types[i]] : "",
+      (nrjs[i]) ? "energy :"+std::to_string(nrjs[i]) : "",
+      (nrj2s[i]) ? "energy2 :"+std::to_string(nrj2s[i]) : "",
+      (pileups[i]) ? "pileup" : ""
+    );
+  }
+}
+
+#endif //EVENT_H

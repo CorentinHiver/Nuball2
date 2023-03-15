@@ -1,0 +1,110 @@
+# INPUTS:
+# ID: ID/index_131.dat
+# ID: ID/index_122.dat
+# ID: ID/index_120.dat
+ID: ID/index_129.dat
+
+TIMESHIFT_DATA: /home/corentin/faster_data/N-SI-129-root/Timeshifts/run_50.dT
+# TIMESHIFT_DATA: 129/Timeshifts/run_70.dat
+# TIMESHIFT_DATA: Timeshifts/Uranium238_9_deltaT.dat
+# TIMESHIFT_DATA: Timeshifts/Uranium238_97_deltaT.dat
+# TIMESHIFT_DATA: 120/Timeshifts/run_oct2022_20.dat
+# TIMESHIFT_DATA: Timeshifts/run_oct2022_27_deltaT.dat
+# TIMESHIFT_DATA: Timeshifts/run_oct2022_60_deltaT.dat
+# TIMESHIFT_DATA: Timeshifts/run_oct2022_120_deltaT.dat
+# TIMESHIFT_DATA: Timeshifts/run_60.dat
+# TIMESHIFT_DATA: Timeshifts/run_49.dat
+# TIMESHIFT_DATA: Timeshifts/proton_Au.dat
+
+CALIBRATION: Calibration/calib_129.dat
+# CALIBRATION: Calibration/calib_120.dat
+# CALIBRATION: Calibration/residues_Th232/test232Th.dat
+# CALIBRATION: Calibration/152Eu_Uranium238_after_108.dat
+# CALIBRATION: Calibration/152Eu_after/152Eu_after_108.dat
+# CALIBRATION: Calibration/152Eu_run.dat
+# CALIBRATION: Calibration/Paris.dat
+# CALIBRATION: Calibration/run_12/run_12.dat
+# CALIBRATION: Calibration/152Eu_N_SI_122.dat
+# CALIBRATION: Calibration/152Eu_DSSD_commissioning.dat
+
+# THRESHOLD: 10 //keV
+
+NB_THREADS: 5
+
+BINNING: calibrated: Ge: 14000 0 7000
+# BINNING: uncalibrated: DSSD: 1000 0 50000
+# BINNING: bidim: Ge: 5000 0 5000 LaBr3: 1000 0 5000
+
+
+
+# DATADIR: /home/corentin/faster_data/N-SI-120/Uranium238_9.fast/ nb: 4
+# DATADIR: /home/corentin/faster_data/N-SI-120/Uranium238_97.fast/ nb: 10
+# DATADIR: /home/corentin/faster_data/N-SI-120/152Eu_after_108.fast/ nb: 8
+# DATADIR: /home/corentin/faster_data/N-SI-120/run_oct2022_20.fast/ nb: 1
+# DATADIR: /home/corentin/faster_data/N-SI-120/Uranium238_9.fast/ nb: 1
+# DATADIR: /home/corentin/faster_data/N-SI-120/run_oct2022_20.fast/ nb: 5
+# DATADIR: /home/corentin/faster_data/N-SI-120/run_oct2022_120.fast/ nb: 1
+# DATADIR: /home/corentin/faster_data/N-SI-122/run_60.fast/ nb: 1
+# DATAFILE: /home/corentin/faster_data/N-SI-120/run_oct2022_20.fast/run_oct2022_20_0002.fast
+# DATAFILE: /home/corentin/faster_data/N-SI-120/Uranium238_96.fast/Uranium238_96_0002.fast
+# DATADIR: /home/corentin/faster_data/N-SI-122/run_49.fast/ nb: 1
+# DATADIR: Eventbuilding_tests/faster2root/ root_eventbuild
+# DATADIR: /home/corentin/faster_data/N-SI-122/run_12.fast/ nb: 3
+
+# DATADIR: /home/corentin/faster_data/N-SI-131/alpha_30.fast/
+# DATADIR: /home/corentin/faster_data/N-SI-131/alpha_27.fast/ nb: 50
+# DATADIR: /home/corentin/faster_data/N-SI-131/proton_24.fast/
+
+DATADIR: /home/corentin/faster_data/N-SI-129/run_50.fast/ nb: 5
+# DATADIR: /home/corentin/faster_data/N-SI-85/run_Alpha_8.fast/
+
+# OUTDIR: Calibration/run_12/
+# OUTDIR: Analyse/
+# OUTDIR: Eventbuilding_tests
+# OUTDIR: DSSD_checks/
+# OUTDIR: 85/
+# OUTDIR: 129/
+# OUTDIR: 120/
+
+# EDEN_TO_LICORNE_DISTANCE= 268 (cm)
+# GAMMA_FLASH= 35 (ns)
+# GAMMA_FLASH= 26.5 (ns)
+# GAMMA_FLASH= 39 (ns)
+
+
+# TEMP_TREE_ON_DISK
+
+# --------
+# OUTPUTS:
+# --------
+USE_RF: 50 ns
+
+# PARIS_BIDIM: outroot: Paris_bidim_152Eu_12.root bins: 1000
+
+# RF_CHECK: timewindow: 1500 RF_shift: 50 time_ref: PARIS_BR1D2 outRoot: run_49.root
+
+# ANALYSE: time_ref: R1A1_FATIMA_LaBr3 outRoot: test.root
+# ANALYSE: time_ref: R1A9_FATIMA_LaBr3 outRoot: run_50.root
+
+# ANALYSE: time_ref: R1A9_FATIMA_LaBr3 outRoot: run_70.root
+
+# ANALYSE: time_ref: R1A9_FATIMA_LaBr3 outRoot: run_2.root
+# ANALYSE: time_ref: R1A9_FATIMA_LaBr3 outRoot: run_70.root
+# ANALYSE: time_ref: R1A1_FATIMA_LaBr3 outRoot: tests_RF.root
+
+# TIMESHIFT: time_reference: R1A9_FATIMA_LaBr3 timewindow: 1500 mult: 2 3 -
+# outRoot: run_50.root outData: run_50.dat verbose
+
+# TIMESHIFT: time_reference: PARIS_FR1D1 timewindow: 1500 mult: 2 3 -
+# TIMESHIFT: time_reference: R1A2_FATIMA_LaBr3 timewindow: 1500 mult: 2 3 -
+
+# CALIBRATE: source: 152Eu outCalib: 152Eu_oct2022_before.dat outRoot: 152Eu_oct2022_before.root verbose
+
+# FASTER2ROOT: outDir: faster2root/ trigger: 2 C2 C1L2
+FASTER2ROOT: outDir: tests_faster2root/ raw
+
+# RF_CHECK: timewindow: 350 time_ref: R1A1_FATIMA_LaBr3 RF_shift: 40
+
+# HISTOGRAM: to_throw.root
+# HISTOGRAM: calibrated: Ge_Clover Paris DSSD outRoot: test_DSSD.root
+# HISTOGRAM: calibrated: Ge_Clover LaBr3 outRoot: Uranium23_97_calib232Th.root

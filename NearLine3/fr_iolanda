@@ -1,0 +1,20 @@
+ID: ID/index_129.dat
+
+NB_THREADS: 1
+
+BINNING: bidim: Paris: 10000 0 1000000
+
+# DATADIR: /home/corentin/faster_data/N-SI-131/run_2.fast/ nb: 1
+DATADIR: /home/corentin/faster_data/N-SI-129/cal_AmBeNi_3.fast/ nb: 1
+# DATADIR: /home/corentin/faster_data/N-SI-129/cal_paris_back_CsCo_1.fast/ nb: 5
+# DATADIR: /home/corentin/faster_data/N-SI-129/cal_paris_front_CsCo_2.fast/ nb: 1
+
+# FASTER2ROOT: raw outDir: faster2root/129/cal_paris_back_CsCo_1
+# FASTER2ROOT: raw outDir: faster2root/129/cal_AmBeNi_3
+# FASTER2ROOT: raw outDir: faster2root/131/run_2/
+
+# HISTOGRAM: cal_AmBeNi_3.root
+# HISTOGRAM: cal_paris_back_CsCo_1.root
+PARIS_BIDIM: outRoot: cal_AmBeNi_3.root
+# PARIS_BIDIM: outRoot: cal_paris_back_CsCo_1.root
+# ANALYSE: outRoot: cal_paris_back_CsCo_1.root
