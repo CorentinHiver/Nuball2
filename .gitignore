@@ -1,3 +1,5 @@
 *.root
 *.png
 NearLine/NearLine-lib/Modules/Analyse_W.hpp
+RootReader/ManipConvertor
+RootReader/ManipReader
