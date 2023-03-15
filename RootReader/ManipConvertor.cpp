@@ -7,8 +7,8 @@
 #define FATIMA
 #define DSSD_TRIG
 
-#define CORENTIN
-// #define DATA2
+// #define CORENTIN
+#define DATA2
 
 #include "../lib/utils.hpp"
 #include "../lib/Classes/Event.hpp"
@@ -139,28 +139,34 @@ void convertRun(quick_parameters & param)
     chain.Add(rootFiles.c_str());
 
     Event event(&chain);
-    Sorted_Event event_s;
+    // Sorted_Event event_s;
 
     int nb_evts = chain.GetEntries();
-    // int nb_files = nb_evts/param.nb_max_evts_in_file+1;
-
-    int i = 0;
+    int evt = 0;
     int file_nb = 0;
-    while(i<nb_evts)
+    while(evt<nb_evts)
     {// Write in files of more or less the same size
       auto outTree = new TTree("Nuball", "New conversion");
       event.writeTo(outTree);
-      while(i<nb_evts)
+      while(evt<nb_evts)
       {
-        chain.GetEntry(i);
-        if (i%100000 && outTree->GetEntries() > param.nb_max_evts_in_file) break;
+        chain.GetEntry(evt);
+        if (evt%100000 && outTree->GetEntries() > param.nb_max_evts_in_file) break;
         // if (i%10000) print(i);
-        event_s.sortEvent(event);
+        // event_s.sortEvent(event);
         #ifdef DSSD_TRIG
-        if (event_s.DSSDMult > 0) outTree->Fill();
+        for (int i = 0; i<event.mult; i++)
+        {
+          if (isDSSD[event.labels[i]])
+          {
+            outTree->Fill();
+            break;
+          }
+        }
         #endif //DSSD_TRIG
-        i++;
+        evt++;
       }// End events loop
+
       file_nb++;
       std::string outName = param.outDir+run+"_"+std::to_string(file_nb)+".root";
       auto file = TFile::Open(outName.c_str(),"recreate");
@@ -170,5 +176,5 @@ void convertRun(quick_parameters & param)
       delete file;
       print(outName,"written...");
     }// End files loop
-  }
+  }// End runs loop
 }
