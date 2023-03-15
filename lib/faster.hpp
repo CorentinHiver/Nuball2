@@ -1,7 +1,7 @@
 #ifndef FASTER_H_CO
 #define FASTER_H_CO
 
-#include "Hit.h"
+#include "Classes/Hit.h"
 #ifdef FASTERAC
 // ******* fasterac includes ******* //
 #include "fasterac/adc.h"

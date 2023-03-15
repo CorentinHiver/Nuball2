@@ -1,6 +1,6 @@
 #ifndef SORTED_EVENT_H
 #define SORTED_EVENT_H
-#include "utils.hpp"
+#include "../utils.hpp"
 #include "Event.hpp"
 
 class Sorted_Event

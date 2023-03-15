@@ -11,9 +11,9 @@
 #define FATIMA
 #endif //N_SI_120
 
-#include "lib/utils.hpp"
-#include "lib/Event.hpp"
-#include "lib/FilesManager.hpp"
+#include "../lib/utils.hpp"
+#include "../lib/Classes/Event.hpp"
+#include "../lib/Classes/FilesManager.hpp"
 
 Labels g_labelToName;
 
@@ -103,7 +103,7 @@ int main(int argc, char** argv)
     for (auto i = 0; i<size; i++)
     {
       tree->GetEntry(i);
-      event_s.setEvent(event);
+      event_s.sortEvent(event);
       // ed.Fill(event);
       // ma.FillRaw(event);
       rc.FillRaw(event);

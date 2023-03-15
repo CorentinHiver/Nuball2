@@ -1,7 +1,7 @@
 #ifndef EACHDETECTOR_H
 #define EACHDETECTOR_H
 
-#include "/home/corentin/Onedrive/FASTER/NearLine3/NearLine-lib/Classes/Sorted_Event.hpp"
+#include "../../lib/Classes/Sorted_Event.hpp"
 
 class EachDetector
 {

@@ -53,7 +53,7 @@
 #include "TTreeIndex.h"
 // #include "boost/array.hpp"
 
-#include "Hit.h"
+#include "Classes/Hit.h"
 #ifdef FASTERAC
 #include "faster.hpp"
 #endif //FASTERAC

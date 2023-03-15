@@ -24,25 +24,25 @@ public:
 
   void SetBinsGe(int const & bins, Float_t const & min, Float_t const & max)
   {
-    m_Ge_bins = bins; m_Ge_min = min; m_Ge_max = max;
+    m_bins_Ge = bins; m_min_Ge = min; m_max_Ge = max;
   }
 
   void SetBinsBGO(int const & bins, Float_t const & min, Float_t const & max)
   {
-    m_BGO_bins = bins; m_BGO_min = min; m_BGO_max = max;
+    m_bins_BGO = bins; m_min_BGO = min; m_max_BGO = max;
   }
 
   void SetBinsLaBr3(int const & bins, Float_t const & min, Float_t const & max)
   {
-    m_LaBr3_bins = bins; m_LaBr3_min = min; m_LaBr3_max = max;
+    m_bins_LaBr3 = bins; m_min_LaBr3 = min; m_max_LaBr3 = max;
   }
 
 private:
 
   // ---- Variables ---- //
-  int m_Ge_bins = 6000; Float_t m_Ge_min = 0; Float_t m_Ge_max = 6000;
-  int m_BGO_bins = 600; Float_t m_BGO_min = 0; Float_t m_BGO_max = 6000;
-  int m_LaBr3_bins = 1000; Float_t m_LaBr3_min = 0; Float_t m_LaBr3_max = 6000;
+  int m_bins_Ge = 6000; Float_t m_min_Ge = 0; Float_t m_max_Ge = 6000;
+  int m_bins_BGO = 600; Float_t m_min_BGO = 0; Float_t m_max_BGO = 6000;
+  int m_bins_LaBr3 = 1000; Float_t m_min_LaBr3 = 0; Float_t m_max_LaBr3 = 6000;
 
   // ---- Histograms ---- //
   TH2F* m_BGO_VS_Clover = nullptr;
@@ -76,11 +76,11 @@ bool Matrices::setParameters(std::string const & parameters)
 void Matrices::Initialize()
 {
   m_Clean_Ge_bidim = new TH2F("Clean Ge bidim", "Clean Ge bidim",
-      m_Ge_bins,m_Ge_min,m_Ge_max, m_Ge_bins,m_Ge_min,m_Ge_max);
+      m_bins_Ge,m_min_Ge,m_max_Ge, m_bins_Ge,m_min_Ge,m_max_Ge);
   m_BGO_VS_Clover = new TH2F("BGO VS Clover", "BGO VS Clover",
-      m_Ge_bins,m_Ge_min,m_Ge_max, m_BGO_bins,m_BGO_min,m_BGO_max);
+      m_bins_Ge,m_min_Ge,m_max_Ge, m_bins_BGO,m_min_BGO,m_max_BGO);
   m_LaBr3_VS_Clover = new TH2F("Paris VS Clover", "Paris VS Clover",
-      m_Ge_bins,m_Ge_min,m_Ge_max, m_LaBr3_bins,m_LaBr3_min,m_LaBr3_max);
+      m_bins_Ge,m_min_Ge,m_max_Ge, m_bins_LaBr3,m_min_LaBr3,m_max_LaBr3);
 
   m_each_BGO_VS_all_Clover.resize(48, nullptr);
   m_each_LaBr3_VS_all_Clover.resize(74, nullptr);
@@ -91,12 +91,12 @@ void Matrices::Initialize()
     if (isBGO[label])
     {
       m_each_BGO_VS_all_Clover[labelToBGOcrystal[label]] = new TH2F(name.c_str(), name.c_str(),
-          m_Ge_bins,m_Ge_min,m_Ge_max, m_BGO_bins,m_BGO_min,m_BGO_max);
+          m_bins_Ge,m_min_Ge,m_max_Ge, m_bins_BGO,m_min_BGO,m_max_BGO);
     }
     else if (isParis[label])
     {
       m_each_LaBr3_VS_all_Clover[labelToPariscrystal[label]] = new TH2F(name.c_str(), name.c_str(),
-          m_Ge_bins,m_Ge_min,m_Ge_max, m_LaBr3_bins,m_LaBr3_min,m_LaBr3_max);
+          m_bins_Ge,m_min_Ge,m_max_Ge, m_bins_LaBr3,m_min_LaBr3,m_max_LaBr3);
     }
   }
 }

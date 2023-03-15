@@ -6,10 +6,11 @@
 #define USE_DSSD
 #define FATIMA
 
-#include "lib/utils.hpp"
+#include "../lib/utils.hpp"
+#include "../lib/Classes/Event.hpp"
+#include "../lib/Classes/FilesManager.hpp"
+
 Labels g_labelToName;
-#include "lib/Event.hpp"
-#include "lib/FilesManager.hpp"
 
 #include "Classes/Parameters.hpp"
 #include "Modules/EachDetector.hpp"
