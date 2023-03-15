@@ -7,6 +7,9 @@
 #define FATIMA
 #define DSSD_TRIG
 
+#define CORENTIN
+#define DATA2
+
 #include "../lib/utils.hpp"
 #include "../lib/Classes/Event.hpp"
 #include "../lib/Classes/FilesManager.hpp"
@@ -20,20 +23,30 @@ Labels g_labelToName;
 struct quick_parameters
 {
   #ifdef N_SI_129
+  #if defined (CORENTIN)
   std::string const outDir = "129/";
   std::string const fileID = "ID/index_129.dat";
   std::string const runs_list = "Parameters/runs_pulsed_129.list";
   std::string const dataPath = "~/faster_data/N-SI-129-root/";
-
-  int const nb_max_evts_in_file = 1000000; // 10 millions evts ~ 400 Mb
   UShort_t nb_threads = 4;
+  int const nb_max_evts_in_file = 1000000; // 1 millions evts ~ 40 Mb/fichier
+
+  #elif defined (DATA2)
+  std::string const outDir = "129/";
+  std::string const fileID = "ID/index_129.dat";
+  std::string const runs_list = "Parameters/runs_pulsed_129.list";
+  std::string const dataPath = "~/faster_data/N-SI-129-root/";
+  UShort_t nb_threads = 10;
+  int const nb_max_evts_in_file = 10000000; // 10 millions evts ~ 400 Mb/fichier
+
+  #endif
+
 
   std::vector<std::string> runs;
   size_t current_run = 0;
 
 
   std::mutex mutex;
-  // bool stop = false;
 
   bool getNextRunMulti(std::string & run)
   {
