@@ -7,7 +7,7 @@
 #define FATIMA
 #define DSSD_TRIG
 
-#define CORENTIN
+// #define CORENTIN
 #define DATA2
 
 #include "../lib/utils.hpp"
@@ -22,25 +22,34 @@ Labels g_labelToName;
 
 struct quick_parameters
 {
-  #ifdef N_SI_129
-  #if defined (CORENTIN)
+#ifdef N_SI_129
+#if defined (CORENTIN)
+
+    #ifdef DSSD_TRIG
+  std::string const outDir = "129/DSSD_TRIG/";
+    #else
   std::string const outDir = "129/";
+    #endif //DSSD_TRIG
   std::string const fileID = "ID/index_129.dat";
   std::string const runs_list = "Parameters/runs_pulsed_129.list";
   std::string const dataPath = "~/faster_data/N-SI-129-root/";
   UShort_t nb_threads = 4;
   int const nb_max_evts_in_file = 1000000; // 1 millions evts ~ 40 Mb/fichier
 
-  #elif defined (DATA2)
+#elif defined (DATA2)
+
+    #ifdef DSSD_TRIG
+  std::string const outDir = "129/DSSD_TRIG/";
+    #else
   std::string const outDir = "129/";
+    #endif //DSSD_TRIG
   std::string const fileID = "ID/index_129.dat";
-  std::string const runs_list = "Parameters/runs_pulsed_129.list";
-  std::string const dataPath = "~/faster_data/N-SI-129-root/";
+  std::string const runs_list = "Parameters/list_runs.list";
+  std::string const dataPath = "/srv/data/nuball2/N-SI-129-root/";
   UShort_t nb_threads = 10;
   int const nb_max_evts_in_file = 10000000; // 10 millions evts ~ 400 Mb/fichier
 
-  #endif
-
+#endif
 
   std::vector<std::string> runs;
   size_t current_run = 0;
