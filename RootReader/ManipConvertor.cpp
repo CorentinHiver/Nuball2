@@ -61,7 +61,7 @@ int main(int argc, char ** argv)
         event_s.sortEvent(event);
         #ifdef DSSD_TRIG
         if (event_s.DSSDMult > 0) outTree->Fill();
-        #endif DSSD_TRIG        
+        #endif //DSSD_TRIG        
       }// End events loop
       std::string outName = outDir+run+"_"+std::to_string(file_nb+1)+".root";
       std::unique_ptr<TFile> file(TFile::Open(outName.c_str(),"recreate"));
