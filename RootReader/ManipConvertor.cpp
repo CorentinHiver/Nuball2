@@ -7,8 +7,8 @@
 #define FATIMA
 #define DSSD_TRIG
 
-// #define CORENTIN
-#define DATA2
+#define CORENTIN
+// #define DATA2
 
 #include "../lib/utils.hpp"
 #include "../lib/Classes/Event.hpp"
@@ -18,6 +18,7 @@ Labels g_labelToName;
 
 #include "Classes/Parameters.hpp"
 #include "Modules/EachDetector.hpp"
+
 
 
 struct quick_parameters
@@ -134,11 +135,11 @@ void convertRun(quick_parameters & param)
   {
     print(run);
     std::string pathRun = param.dataPath+run;
-    TChain chain("Nuball");
     std::string rootFiles = pathRun+"/*.root";
+    TChain chain ("Nuball");
     chain.Add(rootFiles.c_str());
 
-    Event event(&chain);
+    Event event(&chain,"mltnN");
     // Sorted_Event event_s;
 
     int nb_evts = chain.GetEntries();
@@ -146,34 +147,36 @@ void convertRun(quick_parameters & param)
     int file_nb = 0;
     while(evt<nb_evts)
     {// Write in files of more or less the same size
-      auto outTree = new TTree("Nuball", "New conversion");
-      event.writeTo(outTree);
+      std::unique_ptr<TTree> outTree (new TTree("Nuball", "New conversion"));
+      event.writeTo(outTree.get());
       while(evt<nb_evts)
       {
-        chain.GetEntry(evt);
         if (evt%100000 && outTree->GetEntries() > param.nb_max_evts_in_file) break;
-        // if (i%10000) print(i);
-        // event_s.sortEvent(event);
+        chain.GetEntry(evt);
+
+        bool trig = false;
         #ifdef DSSD_TRIG
         for (int i = 0; i<event.mult; i++)
         {
           if (isDSSD[event.labels[i]])
           {
-            outTree->Fill();
+            trig = true;
             break;
           }
         }
         #endif //DSSD_TRIG
+        if (trig) outTree->Fill();
+
         evt++;
       }// End events loop
 
       file_nb++;
       std::string outName = param.outDir+run+"_"+std::to_string(file_nb)+".root";
-      auto file = TFile::Open(outName.c_str(),"recreate");
+      std::unique_ptr<TFile> file (TFile::Open(outName.c_str(),"recreate"));
+      file    -> cd   ();
       outTree -> Write();
       file    -> Write();
       file    -> Close();
-      delete file;
       print(outName,"written...");
     }// End files loop
   }// End runs loop

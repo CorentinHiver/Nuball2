@@ -15,7 +15,7 @@ public:
     *this = hit;
   }
 
-  Event(TTree * tree, std::string const & options = "mltnN")
+  Event(TTree * tree, std::string const & options = "ltnN")
   {
     initialise();
     connect(tree, options);
@@ -27,14 +27,14 @@ public:
 
   void operator= (Hit const & hit);
 
-  void connect(TTree * tree, std::string const & options = "mltnN");
+  void connect(TTree * tree, std::string const & options = "ltnN");
 
   void connect(std::unique_ptr<TTree> tree, std::string const & options)
   {
     connect(tree.get());
   }
 
-  void writeTo(TTree * tree, std::string const & options = "mltnN");
+  void writeTo(TTree * tree, std::string const & options = "ltnN");
 
   void push_back(Hit const & hit);
   void push_front(Hit const & hit);
@@ -54,14 +54,12 @@ public:
 
 private:
 
-  bool read_m = false;
   bool read_l = false;
   bool read_t = false;
   bool read_E = false;
   bool read_E2 = false;
   bool read_p = false;
 
-  bool write_m = false;
   bool write_l = false;
   bool write_t = false;
   bool write_E = false;
@@ -107,11 +105,11 @@ inline void Event::operator= (Hit const & hit)
 
 void Event::writeTo(TTree * tree, std::string const & options)
 {
+  if (!tree) {print("Output tree at address 0x00 !"); return;}
   for (auto const & e : options)
   {
     switch (e)
     {
-      case ('m') : if (read_m ) write_m  = true; break;
       case ('l') : if (read_l ) write_l  = true; break;
       case ('t') : if (read_t ) write_t  = true; break;
       case ('n') : if (read_E ) write_E  = true; break;
@@ -121,7 +119,7 @@ void Event::writeTo(TTree * tree, std::string const & options)
   }
 
   tree -> ResetBranchAddresses();
-  if (write_m ) tree -> Branch("mult"   , &mult   );
+                tree -> Branch("mult"   , &mult   );
   if (write_l ) tree -> Branch("label"  , &labels , "label[mult]/s" );
   if (write_t ) tree -> Branch("time"   , &times  , "time[mult]/l"  );
   if (write_E ) tree -> Branch("nrj"    , &nrjs   , "nrj[mult]/F"   );
@@ -133,11 +131,11 @@ void Event::writeTo(TTree * tree, std::string const & options)
 
 void Event::connect(TTree * tree, std::string const & options)
 {
+  if (!tree) {print("Input tree at address 0x00 !"); return;}
   for (auto const & e : options)
   {
     switch (e)
     {
-      case ('m') : read_m  = true; break;
       case ('l') : read_l  = true; break;
       case ('t') : read_t  = true; break;
       case ('n') : read_E  = true; break;
@@ -148,12 +146,18 @@ void Event::connect(TTree * tree, std::string const & options)
 
   tree -> ResetBranchAddresses();
 
-  if (read_m) tree -> SetBranchAddress("mult"   , &mult   );
-  if (read_l) tree -> SetBranchAddress("label"  , &labels );
-  if (read_t) tree -> SetBranchAddress("time"   , &times  );
-  if (read_E) tree -> SetBranchAddress("nrj"    , &nrjs   );
-  if (read_E2) tree -> SetBranchAddress("nrj2"  , &nrj2s  );
-  if (read_p) tree -> SetBranchAddress("pileup" , &pileups);
+  tree -> SetBranchAddress("mult"   , &mult   );
+  tree -> SetBranchAddress("label"  , &labels );
+  tree -> SetBranchAddress("time"   , &times  );
+  tree -> SetBranchAddress("nrj"    , &nrjs   );
+  tree -> SetBranchAddress("nrj2"   , &nrj2s  );
+  tree -> SetBranchAddress("pileup" , &pileups);
+
+  if (read_l ) tree -> SetBranchStatus("label",  true);
+  if (read_t ) tree -> SetBranchStatus("time",   true);
+  if (read_E ) tree -> SetBranchStatus("nrj",    true);
+  if (read_E2) tree -> SetBranchStatus("nrj2",   true);
+  if (read_p ) tree -> SetBranchStatus("pileup", true);
 
   tree -> SetBranchStatus("*",true);
 }
