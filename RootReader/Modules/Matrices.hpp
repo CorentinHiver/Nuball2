@@ -14,11 +14,11 @@ public:
     for (auto histo : m_each_LaBr3_VS_all_Clover) if (histo) delete histo;
 
   }
+  bool setParameters(std::string const & parameters);
   void Initialize();
   void FillRaw(Event const & event);
   void FillSorted(Sorted_Event const & event);
   void Write(std::string const & outRoot);
-  bool setParameters(std::string const & parameters);
 
   void setSorted_Event(Sorted_Event * evt) {m_s_event = evt;}
 

@@ -22,6 +22,7 @@ Labels g_labelToName;
 #include "Modules/EachDetector.hpp"
 #include "Modules/Matrices.hpp"
 #include "Modules/RunCheck.hpp"
+#include "Modules/AnalyseIsomer.hpp"
 
 /*
 * USAGE:
@@ -49,14 +50,14 @@ int main(int argc, char** argv)
 #endif
 
   // Parameters :
-  Parameters p;
-  if (!p.setParameters(argc, argv)) return (-1);
-  p.readParameters();
+  // Parameters p;
+  // if (!p.setParameters(argc, argv)) return (-1);
+  // p.readParameters();
 
-  std::string  outRoot = outDir+"default.root";
-  outRoot=p.files().getListFolders()[0];
-  if(outRoot.back() == '/') outRoot.pop_back();
-  outRoot=outDir+outRoot;
+  // std::string  outRoot = outDir+"default.root";
+  // outRoot=p.files().getListFolders()[0];
+  // if(outRoot.back() == '/') outRoot.pop_back();
+  // outRoot=outDir+outRoot;
 
 // Initialize arrays
   g_labelToName = arrayID(fileID);
@@ -64,15 +65,19 @@ int main(int argc, char** argv)
   setArrays(m_nb_labels);
 
   // EachDetector module : one histogram of each kind for each detector
-  EachDetector ed;
-  ed.setParameters(p.get_ed_setup());
+  // EachDetector ed;
+  // ed.setParameters(p.get_ed_setup());
   // ed.Initialize(m_nb_labels);
+
+  // Raw analysis of the isomer :
+  AnalyseIsomer ai;
+  ai.Initialize();
 
   // Matrices ma;
   // ma.Initialize();
 
-  RunCheck rc;
-  rc.Initialize();
+  // RunCheck rc;
+  // rc.Initialize();
 
   // Pre-sorting code :
   Sorted_Event event_s;
@@ -80,15 +85,17 @@ int main(int argc, char** argv)
 
   // Loop over files :
   std::string rootfile;
-  while(p.files().nextFileName(rootfile))
-  {
+  // while(p.files().nextFileName(rootfile))
+  // {
     print("Treating",rootfile);
     Event event;
     RF_Manager rf;
 
-    std::unique_ptr<TFile> file (TFile::Open(rootfile.c_str(), "READ"));
-    if (file->IsZombie()) {print(rootfile, "is a Zombie !");continue;}
-    std::unique_ptr<TTree> tree (file->Get<TTree>("Nuball"));
+    // std::unique_ptr<TFile> file (TFile::Open(rootfile.c_str(), "READ"));
+    // if (file->IsZombie()) {print(rootfile, "is a Zombie !");continue;}
+    // std::unique_ptr<TTree> tree (file->Get<TTree>("Nuball"));
+    std::unique_ptr<TChain> tree (new TChain("Nuball"));
+    tree -> Add("../Data_129/*.root");
     tree -> SetBranchAddress("mult" , &event.mult);
     tree -> SetBranchAddress("label", &event.labels);
     tree -> SetBranchAddress("nrj"  , &event.nrjs);
@@ -98,21 +105,24 @@ int main(int argc, char** argv)
     auto size = tree->GetEntries();
 
     // ed.SetRF(&rf);
-    rc.SetRF(&rf);
-
+    // rc.SetRF(&rf);
+    print(size,"events to treat");
     for (auto i = 0; i<size; i++)
     {
+      if (i%10000000 == 0)print(i);
       tree->GetEntry(i);
       event_s.sortEvent(event);
       // ed.Fill(event);
       // ma.FillRaw(event);
-      rc.FillRaw(event);
-      rc.FillSorted(event_s);
+      // rc.FillRaw(event);
+      // rc.FillSorted(event_s);
+      ai.FillSorted(event_s);
     }
-  }
+  // }
 
   // ed.Write(outRoot+"_ed.root");
   // ma.Write(outRoot+"_ma.root");
-  rc.Write(outRoot+"_rc.root");
+  // rc.Write(outRoot+"_rc.root");
+  ai.Write("129/Analyse/Isomere.root");
   return 1;
 }
