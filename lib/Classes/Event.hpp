@@ -159,7 +159,6 @@ void Event::connect(TTree * tree, std::string const & options)
   if (read_E2) tree -> SetBranchStatus("nrj2",   true);
   if (read_p ) tree -> SetBranchStatus("pileup", true);
 
-  tree -> SetBranchStatus("*",true);
 }
 
 inline void Event::push_back(Hit const & hit)

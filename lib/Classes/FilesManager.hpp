@@ -37,7 +37,7 @@ public:
   std::string operator[] (int const & n) {return getFile(n)        ;}
   void operator=(ListFiles const & list) {return setListFiles(list);}
 
-private:
+protected:
   size_t      m_filesCursor = 0;
   std::string m_currentFile = "";
   ListFiles   m_listFiles;
