@@ -7,8 +7,8 @@
 #define FATIMA
 #define DSSD_TRIG
 
-#define CORENTIN
-// #define DATA2
+// #define CORENTIN
+#define DATA2
 
 #include "../lib/utils.hpp"
 #include "../lib/Classes/Event.hpp"
@@ -171,7 +171,9 @@ void convertRun(quick_parameters & param)
       }// End events loop
 
       file_nb++;
-      std::string outName = param.outDir+run+"_"+std::to_string(file_nb)+".root";
+      std::string outPath = param.outDir+run+"/";
+      if (!folder_exists(getPath(outPath))) gSystem -> Exec(("mkdir "+getPath(outPath)).c_str());
+      std::string outName = outPath+run+"_"+std::to_string(file_nb)+".root";
       std::unique_ptr<TFile> file (TFile::Open(outName.c_str(),"recreate"));
       file    -> cd   ();
       outTree -> Write();
