@@ -1282,58 +1282,6 @@ void NearLine::m_fr_sum_counters()
   outfile.close();
 }
 
-void NearLine::m_fr_trigger_buffer(Event const & event, Counters & arg)
-{
-  arg.BGO.fill(false);
-  arg.Ge.fill(false);
-  for (unsigned char i = 0; i<event.mult; i++)
-  {
-    const Label& label = event.labels[i];
-    if(isGe[label])
-    {
-      arg.RawGeMult++;
-      arg.Ge [labelToClover_fast[label]] = true;
-    }
-    else if (isBGO[label])
-    {
-      arg.BGO[labelToClover_fast[label]] = true;
-    }
-    else if (isLaBr3[label])
-    {
-      #ifdef FATIMA
-      arg.LaBr3Mult++;
-      arg.ModulesMult++;
-      #endif //FATIMA
-    }
-    else if (isParis[label])
-    {
-      #ifdef PARIS
-      arg.ParisMult++;
-      arg.ModulesMult++;
-      #endif //PARIS
-    }
-    else if (isDSSD[label])
-    {
-      #ifdef USE_DSSD
-      arg.DSSDMult++;
-      #endif //USE_DSSD
-    }
-  }
-
-  //Compton-rejection :
-  for (unsigned char i = 0; i<24; i++)
-  {
-    if(arg.BGO[i] || arg.Ge[i]) arg.ModulesMult++;
-    if(arg.Ge[i])
-    {
-      if(!arg.BGO[i])
-      {
-        arg.CleanGeMult++;
-      }
-    }
-  }
-}
-
 void NearLine::m_fr_Write()
 {
   print("Writing to faster2root_histo.root");

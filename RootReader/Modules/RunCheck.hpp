@@ -81,7 +81,8 @@ void RunCheck::FillRaw(Event const & event)
 
     if (label == 251)
     {
-      m_rf->period = (time-m_rf->last_hit)/1000.;
+      m_rf->period = nrj;
+      // m_rf->period = (time-m_rf->last_hit)/1000.;
       m_rf->last_hit = time;
       continue;
     }

@@ -29,6 +29,8 @@ bool AnalyseIsomer::setParameters(std::string const & parameters)
 void AnalyseIsomer::Initialize()
 {
   Ge_spectra = new TH1F("Ge spectra","Ge spectra", 14000,0,7000);
+  Ge_spectra_delayed = new TH1F("Ge spectra delayed","Ge spectra delayed", 14000,0,7000);
+  Ge_spectra_delayed = new TH1F("Ge spectra delayed","Ge spectra delayed", 14000,0,7000);
   GeDelayed_VS_GeDelayed = new TH2F("Ge spectra bidim delayed","Ge spectra bidim delayed", 14000,0,7000, 3500,0,7000);
 }
 
@@ -42,14 +44,14 @@ void AnalyseIsomer::FillSorted(Sorted_Event const & event)
   for (size_t loop_i = 0; loop_i<event.clover_hits.size(); loop_i++)
   {
     auto const & label_i = event.clover_hits[loop_i];
-    if (event.BGO[label_i]) continue;
     auto const & nrj_i = event.nrj_clover[loop_i];
+    if (event.BGO[label_i] || nrj_i<5) continue;
     Ge_spectra->Fill(nrj_i);
     for (size_t loop_j = loop_i+1; loop_j<event.clover_hits.size(); loop_j++)
     {
       auto const & label_j = event.clover_hits[loop_j];
-      if (event.BGO[label_j] && !event.DSSDPrompt) continue;
       auto const & nrj_j = event.nrj_clover[loop_j];
+      if (event.BGO[label_j] || nrj_j<5) continue;
       if (event.delayed_Ge[label_i] && event.delayed_Ge[label_j])
       {
         GeDelayed_VS_GeDelayed -> Fill(nrj_i,nrj_j);
@@ -66,6 +68,7 @@ void AnalyseIsomer::Write(std::string const & outRoot)
   GeDelayed_VS_GeDelayed->Write();
   oufile->Write();
   oufile->Close();
+  print("Writting analysis in", outRoot);
   if(Ge_spectra) delete Ge_spectra;
   if (GeDelayed_VS_GeDelayed) delete GeDelayed_VS_GeDelayed;
 }

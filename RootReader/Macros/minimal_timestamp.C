@@ -51,7 +51,7 @@ void minimal_timestamp()
     tree->GetEntry(i);
     for (auto hit = 0; hit<mult; hit++)
     {
-      if(prev_timestamp>times[hit]) print("Oups");
+      if(prev_timestamp>times[hit]) print("timestamps inversés !");
       if (labels[hit] == 251)
       {
         rf_time = times[hit];
@@ -63,7 +63,7 @@ void minimal_timestamp()
 
       relative_shifted = (times[hit]+rf_shift-rf_time)%rf_period;
       relative_time = relative_shifted-rf_shift;
-      if (relative_shifted<0)print("Oups");
+      if (relative_shifted<0) print("Relative timestamps négatif !");
       timestamps[labels[hit]] -> Fill(relative_time/_ns);
       prev_timestamp = times[hit];
     }
