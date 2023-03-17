@@ -2,13 +2,16 @@
 struct quick_parameters
 {
 #ifdef N_SI_129
+
+#if defined (DSSD_TRIG)
+  std::string const outDir = "129/DSSD_TRIG/";
+#elif defined (M2G1_TRIG)
+  std::string const outDir = "129/M2G1_TRIG/";
+#endif //DSSD_TRIG
+
 #if defined (CORENTIN)
 
     #ifdef DSSD_TRIG
-  std::string const outDir = "129/DSSD_TRIG/";
-    #else
-  std::string const outDir = "129/";
-    #endif //DSSD_TRIG
   std::string const fileID = "ID/index_129.dat";
   std::string const runs_list = "Parameters/runs_pulsed_129.list";
   std::string const dataPath = "~/faster_data/N-SI-129-root/";
@@ -16,15 +19,10 @@ struct quick_parameters
   int const nb_max_evts_in_file = 1000000; // 1 millions evts/fichier
 
 #elif defined (DATA2)
-    #ifdef DSSD_TRIG
-  std::string const outDir = "129/DSSD_TRIG/";
-    #else
-  std::string const outDir = "129/";
-    #endif //DSSD_TRIG
   std::string const fileID = "ID/index_129.dat";
-  std::string const runs_list = "Parameters/list_runs.list";
-  std::string const dataPath = "/srv/data/nuball2/N-SI-129-root/";
-  UShort_t nb_threads = 10;
+  std::string const runs_list = "Parameters/list_runs_pulsed.list";
+  std::string const dataPath = "/srv/data/nuball2/N-SI-129-root/M2G1_TRIG/";
+  UShort_t nb_threads = 3;
   int const nb_max_evts_in_file = 5000000; // 5 millions evts/fichier
 
 #endif
