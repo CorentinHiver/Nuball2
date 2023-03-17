@@ -37,6 +37,9 @@ public:
   size_t size() const { return static_cast<size_t>(mult); }
   bool isSingle() const {return (mult == 1);}
 
+  bool const & readTime() const {return read_T;}
+  bool const & readtime() const {return read_t;}
+
   int      mult = 0;
   UShort_t labels [255];
   Float_t  nrjs   [255];

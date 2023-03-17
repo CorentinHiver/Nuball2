@@ -13,8 +13,8 @@
 #define COUNT_EVENT
 #endif //COUNT_EVENT CONDITION
 
-// #define CORENTIN
-#define DATA2
+#define CORENTIN
+// #define DATA2
 
 #include "../lib/utils.hpp"
 #include "../lib/Classes/Event.hpp"
@@ -115,7 +115,7 @@ void convertRun(quick_parameters & param)
       while(evt<nb_evts)
       {
         if (evt%100000 == 0 && outTree->GetEntries() > param.nb_max_evts_in_file) break;
-        chain.GetEntry(evt++);
+        chain.GetEntry(evt+=10000);
         bool trig = false;
 
         for (int i = 0; i<event.mult; i++)
@@ -162,13 +162,16 @@ void convertRun(quick_parameters & param)
       std::string outPath = param.outDir+run+"/";
       create_folder_if_none(outPath);
       std::string outName = outPath+run+"_"+std::to_string(file_nb)+".root";
+
       std::unique_ptr<TFile> file (TFile::Open(outName.c_str(),"recreate"));
       file    -> cd   ();
       outTree -> Write();
       file    -> Write();
       file    -> Close();
       print(outName,"written...");
+
     }// End files loop
+    chain.Reset();
   }// End runs loop
 }
 

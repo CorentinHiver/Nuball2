@@ -7,26 +7,17 @@
 class Counters
 {
 public:
-  void clear()
+  Counters()
   {
-    for (uchar i = 0; i<Clovers; i++)
+    for (int i = 0; i<256; i++) list_clovers[255] = 0;
+    for (int i = 0; i<24; i++)
     {
-      auto const & clover = list_clovers[i];
-      Ge_Clover [clover] = false;
-      BGO_Clover[clover] = false;
+      Ge_Clover[i] = false;
+      BGO_Clover[i] = false;
     }
-
-    mult = 0;
-    RawGe=0;
-    GeCleanClovers=0;
-    GeClovers=0;
-    Clovers=0;
-    Modules=0;
-    LaBr3Mult=0;
-    ParisMult=0;
-    DSSDMult=0;
   }
 
+  void clear();
   void count_event(Event const & event);
 
   uchar mult = 0;
@@ -42,7 +33,28 @@ public:
   uchar list_clovers[255];
   std::array<Bool_t, 24> Ge_Clover;
   std::array<Bool_t, 24> BGO_Clover;
+
 };
+
+void Counters::clear()
+{
+  for (uchar i = 0; i<Clovers; i++)
+  {
+    auto const & clover = list_clovers[i];
+    Ge_Clover [clover] = false;
+    BGO_Clover[clover] = false;
+  }
+
+  mult = 0;
+  RawGe=0;
+  GeCleanClovers=0;
+  GeClovers=0;
+  Clovers=0;
+  Modules=0;
+  LaBr3Mult=0;
+  ParisMult=0;
+  DSSDMult=0;
+}
 
 void Counters::count_event(Event const & event)
 {

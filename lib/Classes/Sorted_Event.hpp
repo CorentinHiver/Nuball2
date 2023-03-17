@@ -134,11 +134,12 @@ void Sorted_Event::sortEvent(Event const & event)
 {
   this->reset();
   RawMult = event.size();
-  unsigned char clover_label = 0;
-  for (unsigned char i = 0; i<event.size(); i++)
+  uchar clover_label = 0;
+  for (uchar i = 0; i<event.size(); i++)
   {
-    // TBD: 50000ll -> m_RF_shift
-    times[i] = (m_rf) ? m_rf->pulse_ToF(event.times[i],50000ll) : (event.times[i]-event.times[0])/_ns;
+    // #ifdef PULSED
+    if (event.readtime()) times[i] = (m_rf) ? m_rf->pulse_ToF(event.times[i], 50000ll) : (event.times[i]-event.times[0])/_ns;
+    if (event.readTime()) times[i] = event.Times[i];
 
     if (isGe[event.labels[i]])
     {
@@ -154,8 +155,12 @@ void Sorted_Event::sortEvent(Event const & event)
         maxE[clover_label] = event.nrjs[i];
         maxE_hit[clover_label] = i;
         // We want to get the timing from this crystal and not the others :
-        if (m_rf) time_clover[clover_label] = m_rf->pulse_ToF(event.times[i], 50000ll)/_ns;
-        else time_clover[clover_label] = (event.times[i]-event.times[0])/_ns;
+        if (event.readtime())
+        {
+          if (m_rf) time_clover[clover_label] = m_rf->pulse_ToF(event.times[i], 50000ll)/_ns;
+          else time_clover[clover_label] = (event.times[i]-event.times[0])/_ns;
+        }
+        if (event.readTime()) time_clover[clover_label] = event.Times[i];
       }
 
       // To prevent double entry : (if two or more crystals of the same clover have a hit, then there is only one hit in the whole clover)
