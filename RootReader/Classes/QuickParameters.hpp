@@ -11,7 +11,6 @@ struct quick_parameters
 
 #if defined (CORENTIN)
 
-    #ifdef DSSD_TRIG
   std::string const fileID = "ID/index_129.dat";
   std::string const runs_list = "Parameters/runs_pulsed_129.list";
   std::string const dataPath = "~/faster_data/N-SI-129-root/";
