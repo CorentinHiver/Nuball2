@@ -5,10 +5,16 @@
 #define QDC2
 #define USE_DSSD
 #define FATIMA
-#define DSSD_TRIG
+#define M2G1_TRIG
+// #define NO_TRIG
+// #define DSSD_TRIG
 
-// #define CORENTIN
-#define DATA2
+#if defined(M2G1_TRIG)
+#define COUNT_EVENT
+#endif //COUNT_EVENT CONDITION
+
+#define CORENTIN
+// #define DATA2
 
 #include "../lib/utils.hpp"
 #include "../lib/Classes/Event.hpp"
@@ -17,67 +23,8 @@
 Labels g_labelToName;
 
 #include "Classes/Parameters.hpp"
+#include "Classes/QuickParameters.hpp"
 #include "Modules/EachDetector.hpp"
-
-
-
-struct quick_parameters
-{
-#ifdef N_SI_129
-#if defined (CORENTIN)
-
-    #ifdef DSSD_TRIG
-  std::string const outDir = "129/DSSD_TRIG/";
-    #else
-  std::string const outDir = "129/";
-    #endif //DSSD_TRIG
-  std::string const fileID = "ID/index_129.dat";
-  std::string const runs_list = "Parameters/runs_pulsed_129.list";
-  std::string const dataPath = "~/faster_data/N-SI-129-root/";
-  UShort_t nb_threads = 4;
-  int const nb_max_evts_in_file = 1000000; // 1 millions evts ~ 40 Mb/fichier
-
-#elif defined (DATA2)
-
-    #ifdef DSSD_TRIG
-  std::string const outDir = "129/DSSD_TRIG/";
-    #else
-  std::string const outDir = "129/";
-    #endif //DSSD_TRIG
-  std::string const fileID = "ID/index_129.dat";
-  std::string const runs_list = "Parameters/list_runs.list";
-  std::string const dataPath = "/srv/data/nuball2/N-SI-129-root/";
-  UShort_t nb_threads = 10;
-  int const nb_max_evts_in_file = 10000000; // 10 millions evts ~ 400 Mb/fichier
-
-#endif
-
-  std::vector<std::string> runs;
-  size_t current_run = 0;
-
-
-  std::mutex mutex;
-
-  bool getNextRun(std::string & run)
-  {
-    if (nb_threads>1) mutex.lock();
-    if (current_run<runs.size())
-    {
-      run = runs[current_run];
-      current_run++;
-      if (nb_threads>1) mutex.unlock();
-      return true;
-    }
-    else
-    {
-      current_run++;
-      if (nb_threads>1) mutex.unlock();
-      return false;
-    }
-  }
-
-  #endif //N_SI_129x
-};
 
 void convertRun(quick_parameters & param);
 // void run_thread(quick_parameters & param);
@@ -130,6 +77,8 @@ int main(int argc, char ** argv)
 
 void convertRun(quick_parameters & param)
 {
+  TRandom rand(time(0));
+
   std::string run = "";
   while(param.getNextRun(run))
   {
@@ -140,39 +89,78 @@ void convertRun(quick_parameters & param)
     chain.Add(rootFiles.c_str());
 
     Event event(&chain,"mltnN");
-    // Sorted_Event event_s;
 
     int nb_evts = chain.GetEntries();
     int evt = 0;
     int file_nb = 0;
+
+    #ifdef COUNT_EVENT
+    Counters counter;
+    #endif //COUNT_EVENT
+
+    RF_Manager rf;
+    chain.GetEntry(0);
+    for (size_t i = 0; i<event.size(); i++) if (event.labels[i] == 251) rf.last_hit = event.times[i];
+
     while(evt<nb_evts)
     {// Write in files of more or less the same size
       std::unique_ptr<TTree> outTree (new TTree("Nuball", "New conversion"));
-      event.writeTo(outTree.get());
+
+      event.writeTo(outTree.get(),"lTnN");
+      Time RFtime = 0;
+      outTree->Branch("RFtime",&RFtime);
+      Float_t RFperiod = 399998.;
+      outTree->Branch("RFperiod",&RFperiod);
+
       while(evt<nb_evts)
       {
-        if (evt%100000 && outTree->GetEntries() > param.nb_max_evts_in_file) break;
-        chain.GetEntry(evt);
-
+        if (evt%100000 == 0 && outTree->GetEntries() > param.nb_max_evts_in_file) break;
+        chain.GetEntry(evt++);
         bool trig = false;
-        #ifdef DSSD_TRIG
+
         for (int i = 0; i<event.mult; i++)
         {
-          if (isDSSD[event.labels[i]])
+          auto const & label = event.labels[i];
+          auto const & time = event.times[i];
+        #ifdef DSSD_TRIG
+          if (isDSSD[label])
           {
             trig = true;
             break;
           }
-        }
         #endif //DSSD_TRIG
-        if (trig) outTree->Fill();
 
-        evt++;
+          if (rf.period!=0) event.Times[i] = rf.pulse_ToF(time,param.RF_shift)/_ns;
+          if (label == 251)
+          {
+            RFperiod = (time+rand.Uniform(0,1)-rf.last_hit)/1000.;
+            rf.period = static_cast<Time>(RFperiod);
+            rf.last_hit = time+rand.Uniform(0,1);
+          }
+        }
+
+      #ifdef NO_TRIG
+        trig = true;
+      #endif //NO_TRIG
+
+      #ifdef COUNT_EVENT
+        counter.count_event(event);
+      #endif //COUNT_EVENT
+
+      #ifdef M2G1_TRIG
+        if (counter.Modules>1 && counter.GeClovers>0) trig = true;
+      #endif //M2G1_TRIG
+
+        if (trig)
+        {
+          RFtime = rf.last_hit;
+          outTree->Fill();
+        }
       }// End events loop
 
       file_nb++;
       std::string outPath = param.outDir+run+"/";
-      if (!folder_exists(getPath(outPath))) gSystem -> Exec(("mkdir "+getPath(outPath)).c_str());
+      create_folder_if_none(outPath);
       std::string outName = outPath+run+"_"+std::to_string(file_nb)+".root";
       std::unique_ptr<TFile> file (TFile::Open(outName.c_str(),"recreate"));
       file    -> cd   ();
@@ -183,3 +171,35 @@ void convertRun(quick_parameters & param)
     }// End files loop
   }// End runs loop
 }
+
+
+// ----------------------------------------------- //
+// --------------------- //
+//     IDEE TIMING       //
+// --------------------- //
+// if (label == 251)
+// {
+    //Instead of  :
+
+    // rf.period = (time+rand.Uniform(0,1)-rf.last_hit)/1000;
+
+    //Go seek for the next RF Hit and calculate the mean
+    // bool seek = true;
+    // auto next_RF = evt;
+    // while(seek)
+    // {
+    //   chain.GetEntry(next_RF++);
+    //   for (size_t i = 0; i<event.size(); i++)
+    //   {
+    //     if (event.labels[i] == 251)
+    //     {
+    //       rf.period = ((event.times[i]-time+rand.Uniform(0,1))/1000 + (time-rf.last_hit+rand.Uniform(0,1))/1000)/2;
+    //       seek = false;
+    //     }
+    //   }
+    // }
+
+    // rf.last_hit = time+rand.Uniform(0,1);
+// }
+
+// ----------------------------------------------- //

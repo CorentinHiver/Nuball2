@@ -24,16 +24,9 @@ public:
   void initialise(int i_max = 255);
 
   Hit operator[] (Int_t const & i);
-
   void operator= (Hit const & hit);
 
   void connect(TTree * tree, std::string const & options = "ltnN");
-
-  void connect(std::unique_ptr<TTree> tree, std::string const & options)
-  {
-    connect(tree.get());
-  }
-
   void writeTo(TTree * tree, std::string const & options = "ltnN");
 
   void push_back(Hit const & hit);
@@ -49,6 +42,7 @@ public:
   Float_t  nrjs   [255];
   Float_t  nrj2s  [255];
   Time     times  [255];
+  Float_t  Times  [255];
   Bool_t   pileups[255];
   Detector types  [255];
 
@@ -56,12 +50,14 @@ private:
 
   bool read_l = false;
   bool read_t = false;
+  bool read_T = false;
   bool read_E = false;
   bool read_E2 = false;
   bool read_p = false;
 
   bool write_l = false;
   bool write_t = false;
+  bool write_T = false;
   bool write_E = false;
   bool write_E2 = false;
   bool write_p = false;
@@ -110,18 +106,21 @@ void Event::writeTo(TTree * tree, std::string const & options)
   {
     switch (e)
     {
-      case ('l') : if (read_l ) write_l  = true; break;
-      case ('t') : if (read_t ) write_t  = true; break;
-      case ('n') : if (read_E ) write_E  = true; break;
-      case ('N') : if (read_E2) write_E2 = true; break;
-      case ('p') : if (read_p ) write_p  = true; break;
+      case ('l') : write_l  = true; break; // if (read_l ) - add at location "... : * write..."
+      case ('t') : write_t  = true; break; // if (read_t ) - add at location "... : * write..."
+      case ('T') : write_T  = true; break; // if (read_T ) - add at location "... : * write..."
+      case ('n') : write_E  = true; break; // if (read_E ) - add at location "... : * write..."
+      case ('N') : write_E2 = true; break; // if (read_E2) - add at location "... : * write..."
+      case ('p') : write_p  = true; break; // if (read_p ) - add at location "... : * write..."
     }
   }
 
   tree -> ResetBranchAddresses();
+
                 tree -> Branch("mult"   , &mult   );
   if (write_l ) tree -> Branch("label"  , &labels , "label[mult]/s" );
   if (write_t ) tree -> Branch("time"   , &times  , "time[mult]/l"  );
+  if (write_T ) tree -> Branch("Time"   , &Times  , "Time[mult]/F"  );
   if (write_E ) tree -> Branch("nrj"    , &nrjs   , "nrj[mult]/F"   );
   if (write_E2) tree -> Branch("nrj2"   , &nrj2s  , "nrj2[mult]/F"  );
   if (write_p ) tree -> Branch("pileup" , &pileups, "pileup[mult]/O");
@@ -138,6 +137,7 @@ void Event::connect(TTree * tree, std::string const & options)
     {
       case ('l') : read_l  = true; break;
       case ('t') : read_t  = true; break;
+      case ('T') : read_T  = true; break;
       case ('n') : read_E  = true; break;
       case ('N') : read_E2 = true; break;
       case ('p') : read_p  = true; break;
@@ -146,18 +146,38 @@ void Event::connect(TTree * tree, std::string const & options)
 
   tree -> ResetBranchAddresses();
 
-  tree -> SetBranchAddress("mult"   , &mult   );
-  tree -> SetBranchAddress("label"  , &labels );
-  tree -> SetBranchAddress("time"   , &times  );
-  tree -> SetBranchAddress("nrj"    , &nrjs   );
-  tree -> SetBranchAddress("nrj2"   , &nrj2s  );
-  tree -> SetBranchAddress("pileup" , &pileups);
+  tree -> SetBranchAddress("mult" , &mult  );
 
-  if (read_l ) tree -> SetBranchStatus("label",  true);
-  if (read_t ) tree -> SetBranchStatus("time",   true);
-  if (read_E ) tree -> SetBranchStatus("nrj",    true);
-  if (read_E2) tree -> SetBranchStatus("nrj2",   true);
-  if (read_p ) tree -> SetBranchStatus("pileup", true);
+  if (read_l )
+  {
+    tree -> SetBranchAddress("label",&labels);
+    tree -> SetBranchStatus ("label",  true );
+  }
+  if (read_t )
+  {
+    tree -> SetBranchAddress("time", &times);
+    tree -> SetBranchStatus ("time",   true);
+  }
+  if (read_T )
+  {
+    tree -> SetBranchAddress("Time", &Times);
+    tree -> SetBranchStatus ("Time",   true);
+  }
+  if (read_E )
+  {
+    tree -> SetBranchAddress("nrj",   &nrjs);
+    tree -> SetBranchStatus ("nrj",    true);
+  }
+  if (read_E2)
+  {
+    tree -> SetBranchAddress("nrj2", &nrj2s);
+    tree -> SetBranchStatus ("nrj2",   true);
+  }
+  if (read_p )
+  {
+    tree -> SetBranchAddress("pileup" , &pileups);
+    tree -> SetBranchStatus ("pileup", true);
+  }
 
 }
 
@@ -206,5 +226,8 @@ inline void Event::Print()
     );
   }
 }
+
+// Include useful classes
+#include "Counters.hpp"
 
 #endif //EVENT_H

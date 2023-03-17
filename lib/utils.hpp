@@ -63,6 +63,8 @@
 //     UNITS     //
 // ------------- //
 
+typedef unsigned short int ushort;
+typedef unsigned char uchar;
 
 Float_t _ns = 1000;
 
@@ -165,20 +167,6 @@ using Labels     = std::vector < std::string > ;
 using TimeshiftMap = std::unordered_map < UShort_t, Int_t       > ;
 using LabelsMap    = std::unordered_map < UShort_t, std::string > ;
 using MapDetector  = std::unordered_map < Detector, Float_t     > ;
-
-class Counters
-{
-public:
-  size_t RawGeMult=0;
-  size_t CleanGeMult=0;
-  size_t ModulesMult=0;
-  size_t LaBr3Mult=0;
-  size_t ParisMult=0;
-  size_t DSSDMult=0;
-
-  std::array<Bool_t, 24> Ge;
-  std::array<Bool_t, 24> BGO;
-};
 
 class RF_Manager
 {
@@ -925,6 +913,7 @@ bool file_exists(std::string fileName)
   return false;
 }
 
+
 bool folder_exists(std::string folderName)
 {
   if (folderName.back() != '/') folderName.push_back('/');
@@ -940,6 +929,19 @@ bool folder_exists(std::string folderName, Bool_t verbose)
   if (folder_exists(folderName)) return true;
   if (verbose) std::cout << "Folder " << folderName << " not found..." << std::endl;
   return false;
+}
+
+void create_folder_if_none(std::string const & folderName="")
+{
+  if (folderName=="")
+  {
+    print("No folder asked for !");
+  }
+  else if(!folder_exists(folderName))
+  {
+    print("Creating folder", folderName);
+    gSystem -> Exec(("mkdir "+folderName).c_str());
+  }
 }
 
 int nb_files_in_folder(std::string folderName)

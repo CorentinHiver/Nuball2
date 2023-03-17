@@ -13,6 +13,7 @@ public:
   void sortEvent(){sortEvent(*m_event);}
   void setEvent (Event * event) {m_event = event;}
   void setRF(RF_Manager *rf) {m_rf = rf;}
+  void fillEvent(Event & event);
 
   std::array<Float_t, 2000> times;
   RF_Manager *m_rf = nullptr;
@@ -71,6 +72,13 @@ private:
   Event * m_event;
 };
 
+void Sorted_Event::fillEvent(Event & event)
+{
+  event.clear();
+  event.mult = RawMult;
+
+}
+
 void Sorted_Event::reset()
 { // Reset all the data and counters
 
@@ -125,6 +133,7 @@ void Sorted_Event::reset()
 void Sorted_Event::sortEvent(Event const & event)
 {
   this->reset();
+  RawMult = event.size();
   unsigned char clover_label = 0;
   for (unsigned char i = 0; i<event.size(); i++)
   {
@@ -183,13 +192,13 @@ void Sorted_Event::sortEvent(Event const & event)
     {
       DSSD_hits.push_back(i);
       auto const & time = times[i];
-      #ifdef N_SI_129
+    #ifdef N_SI_129
       auto const & nrj = event.nrjs[i];
       if (time>-5 && time<15 && nrj>8500 && nrj<11000) DSSDFirstBlob = true;
       else if (time> 3 && time<18 && nrj>5500 && nrj<7500) DSSDSecondBlob = true;
       else if (time>10 && time<20 && nrj>3800 && nrj<5500) DSSDThirdBlob = true;
       else if (time>25 && time<70 && nrj>2000 && nrj<3500) DSSDTail = true;
-      #endif //N_SI_129
+    #endif //N_SI_129
       if (time>0&&time<50)DSSDPrompt=true;
       bool isRing = isDSSD_Ring[event.labels[i]];
       DSSD_is_Ring.push_back(isRing);
