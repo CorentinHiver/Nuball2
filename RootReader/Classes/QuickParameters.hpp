@@ -20,7 +20,7 @@ struct quick_parameters
 #elif defined (DATA2)
   std::string const fileID = "ID/index_129.dat";
   std::string const runs_list = "Parameters/list_runs_pulsed.list";
-  std::string const dataPath = "/srv/data/nuball2/N-SI-129-root/M2G1_TRIG/";
+  std::string const dataPath = "/srv/data/nuball2/N-SI-129-root/DSSD_TRIG/";
   UShort_t nb_threads = 3;
   int const nb_max_evts_in_file = 5000000; // 5 millions evts/fichier
 
