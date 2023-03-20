@@ -43,7 +43,7 @@ public:
   Bool_t is_single() const {return (this->status() == 0 && m_single_hit.label>0);}
   Hit & singleHit() {return m_single_hit;}
   Hit & olderHit() {return m_older_hit;}
-  unsigned char const & status() const { return m_status; }
+  uchar const & status() const { return m_status; }
   ULong64_t const & getShift() const {return m_shift;}
   Time const & get_RF_ref_time() const {return RF_ref_time;}
 
@@ -60,7 +60,7 @@ public:
   void printBuffer();
 
   // Public members :
-  unsigned char mult = 1;
+  uchar mult = 1;
   Int_t         n_evt = 0;
   Time RF_ref_time = 0;
 
@@ -75,7 +75,7 @@ private:
   Hit       m_older_hit = m_empty_hit;
   Time      m_time_window = 500000ull; // 500 000 ps by default (ull = unsigned long long)
   Bool_t    coincON = false;
-  unsigned char m_status = 0;
+  uchar m_status = 0;
 
   //With beam pulse
   Time m_shift = 0;
@@ -147,7 +147,7 @@ void EventBuilder::set_last_hit(Hit const & hit)
 
 Bool_t EventBuilder::build(Hit const & hit)
 {//return true when an event is ready to be processed
-  if (m_status == 2 || mult>254) this->flush(); //because nb_evts is on unsigned char so < 255
+  if (m_status == 2 || mult>254) this->flush(); //because nb_evts is on uchar so < 255
   if (!coincON)
   {// No coincidence going on. If there is, go ...
     if (coincidence(hit))

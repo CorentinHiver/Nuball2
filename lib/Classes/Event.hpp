@@ -3,6 +3,22 @@
 
 #include "Hit.h"
 
+/*
+
+READ/WRITE OPTIONS :
+
+l : label               UShort_t
+t : absolute timestamp  ULong64_t
+T : relative timestamp  Float_t
+n : energy              Float_t
+N : energy QDC2         Float_t
+p : pileup              Bool_t
+
+R : RFtime              ULong64_t
+P : RFperiod            Float_t
+
+*/
+
 class Event
 {
 public:
@@ -40,7 +56,10 @@ public:
   bool const & readTime() const {return read_T;}
   bool const & readtime() const {return read_t;}
 
-  int      mult = 0;
+  int      mult     = 0;
+  Time     RFtime   = 0;
+  Float_t  RFperiod = 399998.;
+
   UShort_t labels [255];
   Float_t  nrjs   [255];
   Float_t  nrj2s  [255];
@@ -57,6 +76,8 @@ private:
   bool read_E = false;
   bool read_E2 = false;
   bool read_p = false;
+  bool read_RFt = false;
+  bool read_RFp = false;
 
   bool write_l = false;
   bool write_t = false;
@@ -64,6 +85,8 @@ private:
   bool write_E = false;
   bool write_E2 = false;
   bool write_p = false;
+  bool write_RFt = false;
+  bool write_RFp = false;
 };
 
 inline void Event::initialise(int i_max )
@@ -109,24 +132,28 @@ void Event::writeTo(TTree * tree, std::string const & options)
   {
     switch (e)
     {
-      case ('l') : write_l  = true; break; // if (read_l ) - add at location "... : * write..."
-      case ('t') : write_t  = true; break; // if (read_t ) - add at location "... : * write..."
-      case ('T') : write_T  = true; break; // if (read_T ) - add at location "... : * write..."
-      case ('n') : write_E  = true; break; // if (read_E ) - add at location "... : * write..."
-      case ('N') : write_E2 = true; break; // if (read_E2) - add at location "... : * write..."
-      case ('p') : write_p  = true; break; // if (read_p ) - add at location "... : * write..."
+      case ('l') : write_l    =  true;  break;
+      case ('t') : write_t    =  true;  break;
+      case ('T') : write_T    =  true;  break;
+      case ('n') : write_E    =  true;  break;
+      case ('N') : write_E2   =  true;  break;
+      case ('p') : write_p    =  true;  break;
+      case ('R') : write_RFt  =  true;  break;
+      case ('P') : write_RFp  =  true;  break;
     }
   }
 
   tree -> ResetBranchAddresses();
 
-                tree -> Branch("mult"   , &mult   );
-  if (write_l ) tree -> Branch("label"  , &labels , "label[mult]/s" );
-  if (write_t ) tree -> Branch("time"   , &times  , "time[mult]/l"  );
-  if (write_T ) tree -> Branch("Time"   , &Times  , "Time[mult]/F"  );
-  if (write_E ) tree -> Branch("nrj"    , &nrjs   , "nrj[mult]/F"   );
-  if (write_E2) tree -> Branch("nrj2"   , &nrj2s  , "nrj2[mult]/F"  );
-  if (write_p ) tree -> Branch("pileup" , &pileups, "pileup[mult]/O");
+                   tree -> Branch("mult"     , &mult);
+  if (write_l   )  tree -> Branch("label"    , &labels , "label[mult]/s" );
+  if (write_t   )  tree -> Branch("time"     , &times  , "time[mult]/l"  );
+  if (write_T   )  tree -> Branch("Time"     , &Times  , "Time[mult]/F"  );
+  if (write_E   )  tree -> Branch("nrj"      , &nrjs   , "nrj[mult]/F"   );
+  if (write_E2  )  tree -> Branch("nrj2"     , &nrj2s  , "nrj2[mult]/F"  );
+  if (write_p   )  tree -> Branch("pileup"   , &pileups, "pileup[mult]/O");
+  if (write_RFt )  tree -> Branch("RFtime"   , &RFtime  );
+  if (write_RFp )  tree -> Branch("RFperiod" , &RFperiod);
 
   tree -> SetBranchStatus("*",true);
 }
@@ -138,50 +165,27 @@ void Event::connect(TTree * tree, std::string const & options)
   {
     switch (e)
     {
-      case ('l') : read_l  = true; break;
-      case ('t') : read_t  = true; break;
-      case ('T') : read_T  = true; break;
-      case ('n') : read_E  = true; break;
-      case ('N') : read_E2 = true; break;
-      case ('p') : read_p  = true; break;
+      case ('l') : read_l    =  true;  break;
+      case ('t') : read_t    =  true;  break;
+      case ('T') : read_T    =  true;  break;
+      case ('n') : read_E    =  true;  break;
+      case ('N') : read_E2   =  true;  break;
+      case ('p') : read_p    =  true;  break;
+      case ('R') : read_RFt  =  true;  break;
+      case ('P') : read_RFp  =  true;  break;
     }
   }
-
   tree -> ResetBranchAddresses();
-
-  tree -> SetBranchAddress("mult" , &mult  );
-
-  if (read_l )
-  {
-    tree -> SetBranchAddress("label",&labels);
-    tree -> SetBranchStatus ("label",  true );
-  }
-  if (read_t )
-  {
-    tree -> SetBranchAddress("time", &times);
-    tree -> SetBranchStatus ("time",   true);
-  }
-  if (read_T )
-  {
-    tree -> SetBranchAddress("Time", &Times);
-    tree -> SetBranchStatus ("Time",   true);
-  }
-  if (read_E )
-  {
-    tree -> SetBranchAddress("nrj",   &nrjs);
-    tree -> SetBranchStatus ("nrj",    true);
-  }
-  if (read_E2)
-  {
-    tree -> SetBranchAddress("nrj2", &nrj2s);
-    tree -> SetBranchStatus ("nrj2",   true);
-  }
-  if (read_p )
-  {
-    tree -> SetBranchAddress("pileup" , &pileups);
-    tree -> SetBranchStatus ("pileup", true);
-  }
-
+               tree -> SetBranchAddress("mult"    , &mult    );
+  if (read_l ) tree -> SetBranchAddress("label"   , &labels  );
+  if (read_t ) tree -> SetBranchAddress("time"    , &times   );
+  if (read_T ) tree -> SetBranchAddress("Time"    , &Times   );
+  if (read_E ) tree -> SetBranchAddress("nrj"     , &nrjs    );
+  if (read_E2) tree -> SetBranchAddress("nrj2"    , &nrj2s   );
+  if (read_p ) tree -> SetBranchAddress("pileup"  , &pileups );
+  if (read_p ) tree -> SetBranchAddress("RFtime"  , &RFtime  );
+  if (read_p ) tree -> SetBranchAddress("RFperiod", &RFperiod);
+  tree -> SetBranchStatus("*",true);
 }
 
 inline void Event::push_back(Hit const & hit)
@@ -197,7 +201,7 @@ inline void Event::push_back(Hit const & hit)
 
 inline void Event::push_front(Hit const & hit)
 {
-  for (unsigned char i = 0; i<mult; i++)
+  for (uchar i = 0; i<mult; i++)
   {
     labels[mult+1]  = labels[mult];
     nrjs[mult+1]    = nrjs[mult];
@@ -217,7 +221,7 @@ inline void Event::push_front(Hit const & hit)
 
 inline void Event::Print()
 {
-  for (unsigned char i = 0; i<mult;i++)
+  for (uchar i = 0; i<mult;i++)
   {
     print(
       "label :",labels[i],

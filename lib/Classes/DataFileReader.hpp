@@ -40,7 +40,7 @@ public:
   Bool_t ReadFast();
   Bool_t ReadFastGroup();
   //Faster functions
-  void switch_alias(unsigned char const & _alias, faster_data_p const & _data,  Bool_t & _write);
+  void switch_alias(uchar const & _alias, faster_data_p const & _data,  Bool_t & _write);
   void readFastGroup(faster_data_p const & _data);
   Bool_t ReadFastData(faster_data_p const & _data);
   #endif //NO_FASTERAC
@@ -84,7 +84,7 @@ private:
   #ifndef NO_FASTERAC
   faster_file_reader_p   m_reader = NULL;
   faster_data_p          m_data;
-  unsigned char          m_alias = 0;
+  uchar          m_alias = 0;
   #endif //NO_FASTERAC
   //For treating groups :
   Bool_t                 m_isGroup  = false;
@@ -246,7 +246,7 @@ while(!m_write)
 return m_write;
 }
 
-void DataFileReader::switch_alias(unsigned char const & _alias, faster_data_p const & _data,  Bool_t & _write)
+void DataFileReader::switch_alias(uchar const & _alias, faster_data_p const & _data,  Bool_t & _write)
 {//Treat the specific part of data
   _write = false;
   // !!! ATTENTION : HARD CODE, TO IMPROVE !!!!
@@ -331,7 +331,7 @@ Bool_t DataFileReader::ReadFastData(faster_data_p const & _data)
     #endif
   }
   m_hit->time = faster_data_hr_clock_ns(_data) * 1000;// Store the time in ps
-  // Treat(faster_data_p const & _data, unsigned char const & m_alias)
+  // Treat(faster_data_p const & _data, uchar const & m_alias)
   switch_alias(m_alias, _data, write);
   #ifdef FASTER_GROUP
   if (write && m_isGroup)

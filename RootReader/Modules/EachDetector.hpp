@@ -110,12 +110,13 @@ void EachDetector::Initialize(size_t nb_labels)
 {
   m_nb_labels = nb_labels;
 
-  times.resize(nb_labels);
+  times.resize(nb_labels, nullptr);
   spectra.resize(nb_labels, nullptr);
   spectra2.resize(nb_labels, nullptr);
   preprompt.resize(nb_labels, nullptr);
   prompt.resize(nb_labels, nullptr);
   delayed.resize(nb_labels, nullptr);
+
   if (time_nrj_bidim) times_nrj.resize(nb_labels, nullptr);
 
   Ge_spectra = new TH1F("Raw Ge Spectra", "Raw Ge Spectra", 12000,0,6000);
@@ -195,7 +196,9 @@ void EachDetector::Fill(Event const & event)
     }
     else if (label>m_nb_labels) continue;
 
-    auto const time = m_rf->pulse_ToF(event.times[loop],50000ull)/_ns;
+    Float_t time = 0;
+    if (event.readtime()) time = m_rf->pulse_ToF(event.times[loop],50000ull)/_ns;
+    else if (event.readTime()) time = event.Times[loop];
     auto nrj = event.nrjs[loop];
     auto nrj2 = event.nrj2s[loop];
 

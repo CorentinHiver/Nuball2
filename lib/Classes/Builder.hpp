@@ -14,7 +14,7 @@ public:
   Bool_t isSingle() const {return (this->status() == 0 && m_single_hit.label>0);}
   Hit & singleHit() {return m_single_hit;}
   Event getSingleEvent() {return Event(m_single_hit);}
-  unsigned char const & status() const { return m_status; }
+  uchar const & status() const { return m_status; }
 
   Event* getEvent() const {return m_event;}
   UShort_t size() const {return m_event -> size();}
@@ -36,7 +36,7 @@ protected:
   Hit m_single_hit = m_empty_hit;
 
   Bool_t coincON = false;
-  unsigned char m_status = 0;
+  uchar m_status = 0;
 };
 
 #endif //BUILDER_H

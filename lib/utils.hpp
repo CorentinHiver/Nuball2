@@ -3,7 +3,6 @@
 
 // *********** STD includes ********* //
 #include <array>
-#include <chrono>
 #include <iomanip>
 #include <iostream>
 #include <fstream>
@@ -54,6 +53,7 @@
 // #include "boost/array.hpp"
 
 #include "Classes/Hit.h"
+#include "Classes/Timer.hpp"
 #ifdef FASTERAC
 #include "faster.hpp"
 #endif //FASTERAC
@@ -63,8 +63,8 @@
 //     UNITS     //
 // ------------- //
 
-typedef unsigned short int ushort;
-typedef unsigned char uchar;
+typedef unsigned short int  ushort;
+typedef unsigned char       uchar;
 
 Float_t _ns = 1000;
 
@@ -80,10 +80,10 @@ struct GHit
 
 struct Clover_Hit
 {//Add-backed Clover hit
-  unsigned char clover = 0; //From 1 to 24
+  uchar clover = 0; //From 1 to 24
   Float_t       nrjcal = 0;
   Float_t       time   = 0.;
-  unsigned char I = -1; // channel avec le plus d'énergie
+  uchar I = -1; // channel avec le plus d'énergie
 };
 
 struct DSSD_Hit
@@ -98,7 +98,7 @@ using DSSD_Event = std::vector < DSSD_Hit >;
 
 struct LaBr3_Hit
 {
-  unsigned char label   = 0;
+  uchar label   = 0;
   Float_t       nrjcal  = 0;
   ULong64_t     time    = 0;
 };
@@ -118,8 +118,8 @@ public:
     else if (l<800) { back = false; ring = 3; label = l-700; }
   }
   Bool_t        back    = false; //0 back, 1 front
-  unsigned char ring    = 0;
-  unsigned char label   = 0;
+  uchar ring    = 0;
+  uchar label   = 0;
 };
 
 class Paris_Hit
@@ -132,18 +132,18 @@ public:
   Detector      type = null;
   Time          time    = 0;
   static std::vector<char> labelToSide;
-  static std::vector<unsigned char> labelToRing;
-  static std::vector<unsigned char> labelToLabel;
+  static std::vector<uchar> labelToRing;
+  static std::vector<uchar> labelToLabel;
 };
 
 
 std::vector<char> labelToSide;
-std::vector<unsigned char> labelToRing;
-std::vector<unsigned char> labelToLabel;
+std::vector<uchar> labelToRing;
+std::vector<uchar> labelToLabel;
 
 struct BGO_Hit
 {
-  unsigned char clover = 0;
+  uchar clover = 0;
   Float_t       nrjcal = 0;
 };
 //------------------//
@@ -480,7 +480,7 @@ inline UShort_t labelToClover(UShort_t const & label)
   return ( (label+1)/6 - 4 );
 }
 
-std::array<unsigned char,167> labelToClover_fast;
+std::array<uchar,167> labelToClover_fast;
 void setLabelToClover_fast ()
 {
   for (int i = 23; i<167; i++)
@@ -489,7 +489,7 @@ void setLabelToClover_fast ()
   }
 }
 
-std::array<unsigned char,167> labelToCloverCrystal_fast;
+std::array<uchar,167> labelToCloverCrystal_fast;
 void setlabelToCloverCrystal_fast ()
 {
   for (int i = 23; i<167; i++)
@@ -1006,11 +1006,17 @@ std::vector<std::string> listFileReader(std::string const & filename)
   std::vector<std::string> list;
 
   std::ifstream listfile(filename,std::ios::in);
-
-  std::string line;
-  while(getline(listfile,line))
+  if(!listfile.good())
   {
-    list.push_back(line);
+    print("List file", filename, "not found !");
+  }
+  else
+  {
+    std::string line;
+    while(getline(listfile,line))
+    {
+      list.push_back(line);
+    }
   }
   return list;
 }
@@ -1359,6 +1365,8 @@ std::map<std::string,int> paris_vmaxchan =
   {"PARIS_FR3D9", 62500},  {"PARIS_FR3D10", 59500}, {"PARIS_FR3D11", 50000}, {"PARIS_FR3D12", 58500}
 };
 #endif //PARIS
+
+
 
 
 #endif //UTILS_H_CO

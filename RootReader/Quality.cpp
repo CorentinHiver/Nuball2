@@ -1,6 +1,11 @@
 #define N_SI_129
 // #define N_SI_120
 
+/*
+ * The goal of this piece of code is to analyse the quality of each run
+ *
+*/
+
 #ifdef N_SI_129
 #define PARIS
 #define FATIMA

@@ -29,14 +29,16 @@
 #endif //QDC2
 
 // NearLine3 v1
-#include "Classes/FilesManager.hpp"
-#include "Classes/EventBuilder.hpp"
-#include "Classes/CoincBuilder.hpp"
-#include "Classes/CoincBuilder2.hpp"
-#include "Classes/MTTHist.hpp"
-#include "Classes/FasterReader.hpp"
-#include "Classes/Calibration.hpp"
-#include "Classes/Sorted_Event.hpp"
+#include "../../lib/Classes/FilesManager.hpp"
+#include "../../lib/Classes/EventBuilder.hpp"
+#include "../../lib/Classes/CoincBuilder.hpp"
+#include "../../lib/Classes/CoincBuilder2.hpp"
+#include "../../lib/Classes/FasterReader.hpp"
+#include "../../lib/Classes/Calibration.hpp"
+#include "../../lib/Classes/Sorted_Event.hpp"
+
+#include "../../lib/MTObjects/MTTHist.hpp"
+#include "../../lib/MTObjects/MTCounter.hpp"
 
 // Forward declaration of the modules :
 class ParisBidim;
@@ -210,13 +212,12 @@ private:
   Bool_t   m_fr_throw_singles = false;
   Long64_t m_fr_shift         = 0;
   Trigger  m_fr_trigger;
-  MTCounter<Float_t>  m_fr_raw_run_size;
-  MTCounter<Float_t>  m_fr_treated_run_size;
-  MTCounter<Int_t>    m_fr_raw_counter;
-  MTCounter<Int_t>    m_fr_treated_counter;
+  MTCounter  m_fr_raw_run_size;
+  MTCounter  m_fr_treated_run_size;
+  MTCounter  m_fr_raw_counter;
+  MTCounter  m_fr_treated_counter;
   void     m_fr_Initialize();
   void     m_fr_Write();
-  void     m_fr_trigger_buffer(Event const & event, Counters &arg);
   void     m_fr_sum_counters();
 
 
@@ -302,6 +303,8 @@ Bool_t NearLine::launch()
 
   // First checks the configuration loaded :
   if (!this -> configOk()) return false;
+
+  MTObject::Initialize(m_nb_threads);
 
   // Initialise all the histograms and some other variables :
   if (!this -> Initialize()) return false;
@@ -404,7 +407,7 @@ void NearLine::faster2root(std::string filename, int thread_nb)
   std::unique_ptr<TTree> rootTree (new TTree(("tempTree"+std::to_string(thread_nb)).c_str(), ("tempTree"+std::to_string(thread_nb)).c_str()));
 
   auto file_size = size_file(filename);
-  m_fr_raw_run_size[thread_nb]+=file_size;
+  m_fr_raw_run_size+=file_size;
   rootTree.reset(new TTree("tempTree","tempTree"));
   rootTree -> Branch("label"  , &hit.label );
   rootTree -> Branch("time"   , &hit.time  );
@@ -423,7 +426,7 @@ void NearLine::faster2root(std::string filename, int thread_nb)
     time_shift(hit);
     m_calib.calibrate(hit);
     rootTree -> Fill();
-    m_fr_raw_counter[thread_nb]++;
+    m_fr_raw_counter++;
     #ifdef QDC2
     hit.nrj2 = 0; // In order to clean the data, as nrj2 never gets cleaned if there is no QDC2 in the next hit
     #endif //QDC2
@@ -513,9 +516,9 @@ void NearLine::faster2root(std::string filename, int thread_nb)
       }
       if (event.build(i_hit))
       {
-        m_fr_treated_counter[thread_nb]+=event.size();
+        m_fr_treated_counter+=event.size();
         Counters arg;
-        m_fr_trigger_buffer(buffer, arg);
+        arg.count_event(buffer);
 
         bool trig = true;
       #if defined (NO_TRIG)
@@ -579,7 +582,7 @@ void NearLine::faster2root(std::string filename, int thread_nb)
   outFile -> cd();
   outTree -> Write();
   outFile -> Close();
-  m_fr_treated_run_size[thread_nb]+=size_file(outfile);
+  m_fr_treated_run_size+=size_file(outfile);
 
   auto end = std::chrono::high_resolution_clock::now();
   auto dT = std::chrono::duration<double, std::milli>(end - start).count();
@@ -635,7 +638,7 @@ Bool_t NearLine::processFile(std::string filename, int thread_nb)
   RF_Manager rf;
   Long64_t m_rf_period_test = 399998000;
   size_t counter_rf = 0;
-  // while(reader.Read() && counter<5000000)
+  // while(reader.Read() && counter<5000)
   // while(reader.Read() && counter<100)
   while(reader.Read())
   {
@@ -645,7 +648,8 @@ Bool_t NearLine::processFile(std::string filename, int thread_nb)
     #endif //PARIS
 
     // RAW SPECTRA //
-    if (m_hr && hit.label<m_hr_histo.size() && m_hr_histo[hit.label].exists())  m_hr_histo[hit.label][thread_nb] -> Fill(hit.nrj);
+    if (m_hr && hit.label<m_hr_histo.size() && m_hr_histo[hit.label].exists())  m_hr_histo[hit.label].Fill(hit.nrj);
+    // if (m_hr && hit.label<m_hr_histo.size() && m_hr_histo[hit.label].exists())  m_hr_histo[hit.label][thread_nb] -> Fill(hit.nrj);
 
     // Align the timestamp :
     if (m_apply_timeshift) time_shift (hit);
@@ -923,10 +927,6 @@ void NearLine::m_hr_Initialize()
 
 void NearLine::m_fr_Initialize()
 {
-  m_fr_raw_run_size.init();
-  m_fr_treated_run_size.init();
-  m_fr_raw_counter.init();
-  m_fr_treated_counter.init();
   // m_use_threshold = false;
   // m_fr_Ge_raw.reset("Raw spectra","Raw spectra",m_bins_calib[Ge],m_min_calib[Ge],m_max_calib[Ge]) ;
   // m_fr_Ge_prompt.reset("Prompt spectra","Prompt spectra",m_bins_calib[Ge],m_min_calib[Ge],m_max_calib[Ge]) ;
@@ -966,14 +966,14 @@ void NearLine::m_hc_Initialize()
       l++;
     }
 
-    // m_hc_bidim_histo_Ge -> GetYaxis() -> Set(m_bins_bidim[Ge],m_min_bidim[Ge],m_max_bidim[Ge]);
-    // m_hc_bidim_histo_Ge -> GetXaxis() -> Set(Ge_Labels.size()-1,Ge_Labels.data());
-    // m_hc_bidim_histo_Ge -> GetXaxis() -> SetCanExtend();
-    // m_hc_bidim_histo_Ge -> GetXaxis() -> SetAlphanumeric();
-    // for (size_t i = 0; i<Ge_Labels.size(); i++)
-    // {
-    //
-    // }
+    m_hc_bidim_histo_Ge -> GetYaxis() -> Set(m_bins_bidim[Ge],m_min_bidim[Ge],m_max_bidim[Ge]);
+    m_hc_bidim_histo_Ge -> GetXaxis() -> Set(Ge_Labels.size()-1,Ge_Labels.data());
+    m_hc_bidim_histo_Ge -> GetXaxis() -> SetCanExtend(true);
+    m_hc_bidim_histo_Ge -> GetXaxis() -> SetAlphanumeric();
+    for (size_t i = 0; i<Ge_Labels.size(); i++)
+    {
+
+    }
     m_hc_bidim_histo_Ge.reset("All Clover Germanium calibrated spectra", "All Ge Clover Spectra calibrated spectra", Ge_Labels.size()-1,Ge_Labels.data(), m_bins_bidim[Ge],m_min_bidim[Ge],m_max_bidim[Ge]);
     #ifdef FATIMA
     m_hc_bidim_histo_LaBr3.reset("All FATIMA LaBr3 calibrated spectra", "All FATIMA LaBr3 calibrated spectra", LaBr3_Labels.size()-1,LaBr3_Labels.data(), m_bins_bidim[LaBr3],m_min_bidim[LaBr3],m_max_bidim[LaBr3]);
@@ -1267,18 +1267,13 @@ void NearLine::WriteData()
 
 void NearLine::m_fr_sum_counters()
 {
-  m_fr_raw_run_size.Merge();
-  m_fr_treated_run_size.Merge();
-  m_fr_raw_counter.Merge();
-  m_fr_treated_counter.Merge();
-
   std::string run_name = p_Files.getListFolders()[0];
   run_name.pop_back();
   run_name = rmPathAndExt(run_name);
   std::ofstream outfile("log.log",std::ios::app);
   print(run_name);
-  outfile << run_name << ": CompressionFactor: " << m_fr_raw_run_size/m_fr_treated_run_size << " RawCounter: " << m_fr_raw_counter
-  << " TreatedCounter: " << m_fr_treated_counter << std::endl;
+  outfile << run_name << ": CompressionFactor: " << m_fr_raw_run_size/m_fr_treated_run_size << " RawCounter: " << m_fr_raw_counter.get()
+  << " TreatedCounter: " << m_fr_treated_counter.get() << std::endl;
   outfile.close();
 }
 
@@ -2371,7 +2366,7 @@ void NearLine::setThreads(int nb_threads)
   if (fr_event.build(i_hit, rf))
   {
     Counters arg;
-    // for (unsigned char i = 0; i<fr_buffer.mult; i++)
+    // for (uchar i = 0; i<fr_buffer.mult; i++)
     // m_fr_dT_pulse[thread_nb] -> Fill(fr_buffer.times[i]/_ns);
     if (m_fr_trigger_buffer(fr_buffer, arg))
     {
@@ -2380,7 +2375,7 @@ void NearLine::setThreads(int nb_threads)
       // if ((ToF_single = (Long64_t)(fr_event.olderHit().time - fr_event.setRFTime - fr_event.getShift())) > (Long64_t)(-500000ull+fr_event.getShift()))
       // print((Long64_t)(fr_event.olderHit().time - fr_event.setRFTime - fr_event.getShift())/1000);
       // m_fr_dT_pulse[thread_nb] -> Fill(ToF_single/1000.);
-      for (unsigned char i = 0; i<fr_buffer.mult; i++)
+      for (uchar i = 0; i<fr_buffer.mult; i++)
       {
         m_counter++;
         m_fr_dT_pulse[thread_nb] -> Fill((Long64_t)(fr_buffer.times[i] - fr_event.setRFTime - m_fr_shift)/1000.);

@@ -22,7 +22,7 @@ public:
   Bool_t ReadSimple();
   Bool_t ReadGroup();
   //Faster functions
-  Bool_t switch_alias(unsigned char const & _alias, faster_data_p const & _data);
+  Bool_t switch_alias(uchar const & _alias, faster_data_p const & _data);
   void ReadDataGroup(faster_data_p const & _data);
   void ReadData(faster_data_p const & _data);
 
@@ -50,7 +50,7 @@ private:
   Buffer_ptr  m_hit_group_buffer;
   faster_file_reader_p   m_reader = NULL;
   faster_data_p          m_data;
-  unsigned char          m_alias = 0;
+  uchar          m_alias = 0;
   //For treating groups :
   Bool_t                 m_inGroup  = false;
 };
@@ -249,7 +249,7 @@ void FasterReader::ReadDataGroup(faster_data_p const & _data)
   faster_buffer_reader_close(group_reader);
 }
 
-Bool_t FasterReader::switch_alias(unsigned char const & _alias, faster_data_p const & _data)
+Bool_t FasterReader::switch_alias(uchar const & _alias, faster_data_p const & _data)
 {//Treat the specific part of data (QDC gates, spectro ADC ...)
   switch(m_alias)
   {

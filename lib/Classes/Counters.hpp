@@ -9,7 +9,7 @@ class Counters
 public:
   Counters()
   {
-    for (int i = 0; i<256; i++) list_clovers[255] = 0;
+    for (int i = 0; i<255; i++) list_clovers[i] = 0;
     for (int i = 0; i<24; i++)
     {
       Ge_Clover[i] = false;
@@ -60,7 +60,7 @@ void Counters::count_event(Event const & event)
 {
   clear();
   mult = event.mult;
-  for (unsigned char i = 0; i<event.mult; i++)
+  for (uchar i = 0; i<event.mult; i++)
   {
     auto const & label = event.labels[i];
     if(isGe[label])

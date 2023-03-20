@@ -19,6 +19,9 @@
 #include "../lib/utils.hpp"
 #include "../lib/Classes/Event.hpp"
 #include "../lib/Classes/FilesManager.hpp"
+#include "../lib/MTObjects/MTThist.hpp"
+#include "../lib/MTObjects/MTList.hpp"
+#include "../lib/MTObjects/MTCounter.hpp"
 
 Labels g_labelToName;
 
@@ -29,9 +32,14 @@ Labels g_labelToName;
 void convertRun(quick_parameters & param);
 // void run_thread(quick_parameters & param);
 
+void test(){}
+
 int main(int argc, char ** argv)
 {
   quick_parameters qp;
+
+  std::vector<std::thread> threads;
+
   if (argc == 2 && strcmp(argv[1],"-m")==0) qp.nb_threads = 1;
   else if (argc == 3 && strcmp(argv[1],"-m")==0) qp.nb_threads = atoi(argv[2]);
 
@@ -46,9 +54,8 @@ int main(int argc, char ** argv)
 
   qp.runs = listFileReader(qp.runs_list);
 
-  std::vector<std::thread> threads;
-
   checkThreadsNb(qp.nb_threads, qp.runs.size());
+  MTObject MTO(qp.nb_threads);
 
   if(qp.nb_threads == 1)
   {
@@ -57,19 +64,21 @@ int main(int argc, char ** argv)
 
   else
   {
-    for (int i = 0; i<qp.nb_threads; i++)
-    {
-      // Run in parallel this command :
-      //                              vvvvvvvvvvvv
-      threads.emplace_back([&qp](){convertRun(qp);});
-      //                              ^^^^^^^^^^^^
-      //Note : the parameter "this" in the lambda allows all instances of run_thread() to have access to the members of the main NearLine object
-    }
-    for(size_t i = 0; i < threads.size(); i++) threads.at(i).join(); //Closes threads
-    // print("NUMBER HITS : ", m_counter);
-    threads.resize(0);
-    threads.clear();
-    std::cout << "Multi-threading is over !" << std::endl;
+    MTO.parallelise_function(convertRun,qp);
+    // MTO.parallelise_function(&test);
+    // for (int i = 0; i<qp.nb_threads; i++)
+    // {
+    //   // Run in parallel this command :
+    //   //                              vvvvvvvvvvvv
+    //   threads.emplace_back([&qp](){convertRun(qp);});
+    //   //                              ^^^^^^^^^^^^
+    //   //Note : the parameter "this" in the lambda allows all instances of run_thread() to have access to the members of the main NearLine object
+    // }
+    // for(size_t i = 0; i < threads.size(); i++) threads.at(i).join(); //Closes threads
+    // // print("NUMBER HITS : ", m_counter);
+    // threads.resize(0);
+    // threads.clear();
+    // std::cout << "Multi-threading is over !" << std::endl;
   }
 
   return 1;
@@ -78,11 +87,13 @@ int main(int argc, char ** argv)
 void convertRun(quick_parameters & param)
 {
   TRandom rand(time(0));
-
   std::string run = "";
-  while(param.getNextRun(run))
+  while(param.runs.getNext(run))
   {
-    print(run);
+    Timer readTimer;
+    MTObject::shared_mutex.lock();
+    print("Converting",run);
+    MTObject::shared_mutex.unlock();
     std::string pathRun = param.dataPath+run;
     std::string rootFiles = pathRun+"/*.root";
     TChain chain ("Nuball");
@@ -104,24 +115,24 @@ void convertRun(quick_parameters & param)
 
     while(evt<nb_evts)
     {// Write in files of more or less the same size
+      Timer timer;
       std::unique_ptr<TTree> outTree (new TTree("Nuball", "New conversion"));
+      auto const & RF_VS_LaBr3 = new TH2F(("RF_VS_LaBr3"+run+std::to_string(file_nb)).c_str(),("RF_VS_LaBr3"+run+std::to_string(file_nb)).c_str(), 1000,0,5000, 500,-100,400);
+      auto const & RF_VS_Ge = new TH2F(("RF_VS_Ge"+run+std::to_string(file_nb)).c_str(),("RF_VS_Ge"+run+std::to_string(file_nb)).c_str(), 1000,0,5000, 500,-100,400);
 
-      event.writeTo(outTree.get(),"lTnN");
-      Time RFtime = 0;
-      outTree->Branch("RFtime",&RFtime);
-      Float_t RFperiod = 399998.;
-      outTree->Branch("RFperiod",&RFperiod);
+      event.writeTo(outTree.get(),"lTnNRP");
 
       while(evt<nb_evts)
       {
         if (evt%100000 == 0 && outTree->GetEntries() > param.nb_max_evts_in_file) break;
-        chain.GetEntry(evt+=10000);
+        chain.GetEntry(evt++);
         bool trig = false;
 
         for (int i = 0; i<event.mult; i++)
         {
           auto const & label = event.labels[i];
           auto const & time = event.times[i];
+
         #ifdef DSSD_TRIG
           if (isDSSD[label])
           {
@@ -133,9 +144,17 @@ void convertRun(quick_parameters & param)
           if (rf.period!=0) event.Times[i] = rf.pulse_ToF(time,param.RF_shift)/_ns;
           if (label == 251)
           {
-            RFperiod = (time+rand.Uniform(0,1)-rf.last_hit)/1000.;
-            rf.period = static_cast<Time>(RFperiod);
+            event.RFperiod = (time+rand.Uniform(0,1)-rf.last_hit)/1000.;
+            rf.period = static_cast<Time>(event.RFperiod);
             rf.last_hit = time+rand.Uniform(0,1);
+          }
+          else if (label == 252)
+          {
+            RF_VS_LaBr3->Fill(event.nrjs[i], event.Times[i]);
+          }
+          else if (isGe[label])
+          {
+            RF_VS_Ge->Fill(event.nrjs[i], event.Times[i]);
           }
         }
 
@@ -153,7 +172,7 @@ void convertRun(quick_parameters & param)
 
         if (trig)
         {
-          RFtime = rf.last_hit;
+          event.RFtime = rf.last_hit;
           outTree->Fill();
         }
       }// End events loop
@@ -168,9 +187,9 @@ void convertRun(quick_parameters & param)
       outTree -> Write();
       file    -> Write();
       file    -> Close();
-      print(outName,"written...");
-
+      print(outName,"written, ",timer()/1000," s");
     }// End files loop
+    print(run, ":", nb_evts/1000000, "Mevts converted at a rate of", nb_evts/readTimer()/1000, "Mevts/s");
     chain.Reset();
   }// End runs loop
 }

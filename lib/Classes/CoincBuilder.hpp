@@ -44,7 +44,7 @@ public:
   void printBuffer();
 
   // Public members :
-  unsigned char mult = 1;
+  uchar mult = 1;
   Int_t         n_evt = 0;
 
 private:
@@ -55,7 +55,7 @@ private:
 
 Bool_t CoincBuilder::build(Hit const & hit)
 {//return true when a coincidence is ready to be processed
-  if (m_status == 2 || mult>254) this->flush(); //because nb_evts is on unsigned char so < 255
+  if (m_status == 2 || mult>254) this->flush(); //because nb_evts is on uchar so < 255
   if (!coincON)
   {// No coincidence going on. If there is, go ...
     if (coincidence(hit))

@@ -386,7 +386,7 @@ void Analyse_W::Fill(Event const & event, UShort_t const & thread_nb)
   m_mult_BGO[thread_nb] -> Fill(arg.BGOMult);
 
   // Raw coincidence spectra :
-  for (unsigned char i = 0; i<event.size(); i++)
+  for (uchar i = 0; i<event.size(); i++)
   {//Raw Coincidence
     m_Counters[thread_nb] -> Fill(event.labels[i]);
     #ifdef N_SI_129
@@ -882,8 +882,8 @@ void Analyse_W::FillTiming(Hit const & hit, UShort_t const & thread_nb)
 void Analyse_W::treat_event(Event const & event, Sorted_Event & arg, UShort_t const & thread_nb)
 {
   arg.reset();
-  unsigned char clover_label = 0;
-  for (unsigned char i = 0; i<event.size(); i++)
+  uchar clover_label = 0;
+  for (uchar i = 0; i<event.size(); i++)
   {
     if (isGe[event.labels[i]])
     {//AddBack
@@ -897,7 +897,7 @@ void Analyse_W::treat_event(Event const & event, Sorted_Event & arg, UShort_t co
       arg.Ge[clover_label]++;
       // arg.crystals_labels.push_back(clover_label*4+labelToCloverCrystal_fast[event.labels[i]]);
       // arg.nrj_crystals[arg.crystals_labels.back()] = event.nrjs[i];
-      std::vector<unsigned char>::iterator finder = std::find(std::begin(arg.clover_hits), std::end(arg.clover_hits), clover_label);
+      std::vector<uchar>::iterator finder = std::find(std::begin(arg.clover_hits), std::end(arg.clover_hits), clover_label);
       if (finder == std::end(arg.clover_hits)) arg.clover_hits.push_back(clover_label);
       arg.RawGeMult++;
     }

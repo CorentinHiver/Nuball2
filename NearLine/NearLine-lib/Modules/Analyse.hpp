@@ -789,7 +789,7 @@ void Analyse::Fill(Event const & event, UShort_t const & thread_nb)
 
       Label   Ring2_label = event.labels[arg.DSSD_Rings[1]]-800;
       Float_t const & Ring2_nrj = event.nrjs[arg.DSSD_Rings[1]];
-      Float_t const & Ring2_time = arg.times[arg.DSSD_Rings[1]];
+      // Float_t const & Ring2_time = arg.times[arg.DSSD_Rings[1]];
 
       m_DSSD_sum_2_rings[thread_nb] -> Fill(Ring1_nrj+Ring2_nrj);
 
@@ -1073,8 +1073,8 @@ void Analyse::FillTiming(Hit const & hit, UShort_t const & thread_nb)
 void Analyse::treat_event(Event const & event, Sorted_Event & arg, UShort_t const & thread_nb)
 {
   arg.reset();
-  unsigned char clover_label = 0;
-  for (unsigned char i = 0; i<event.size(); i++)
+  uchar clover_label = 0;
+  for (uchar i = 0; i<event.size(); i++)
   {
     // Set the relative timestamp : (relative to a given t0 : pulsation if there is, otherwise the first hit of the event)
     if (event.labels[i] == 829 || event.labels[i] == 830) continue;
@@ -1102,7 +1102,7 @@ void Analyse::treat_event(Event const & event, Sorted_Event & arg, UShort_t cons
       }
 
       // To prevent double entry : (if two or more crystals of the same clover have a hit, then there is only one hit in the whole clover)
-      std::vector<unsigned char>::iterator finder = std::find(std::begin(arg.clover_hits), std::end(arg.clover_hits), clover_label);
+      std::vector<uchar>::iterator finder = std::find(std::begin(arg.clover_hits), std::end(arg.clover_hits), clover_label);
       if (finder == std::end(arg.clover_hits)) arg.clover_hits.push_back(clover_label);
       arg.RawGeMult++;
     }

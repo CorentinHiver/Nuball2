@@ -27,11 +27,16 @@ public:
   Int_t       getCursor      () { return m_filesCursor      ;}
 
   //Files reader :
-  std::string getFile    (int const & n) {return m_listFiles[n];}
+  std::string getFile    (int const & n = -1)
+  {
+    if (n<0) return m_listFiles[m_filesCursor];
+    else return m_listFiles[n];
+  }
 
   //Setters :
   void setListFiles(ListFiles const & list) {this -> flushFiles(); for (size_t i = 0; i<list.size(); i++) this -> addFiles(list[i]);}
   void setCursor(Int_t _filesCursor) {m_filesCursor = _filesCursor;}
+  void setVerbose(bool const & v) {verbose = v;}
 
   // Operator overloading :
   std::string operator[] (int const & n) {return getFile(n)        ;}
@@ -39,10 +44,10 @@ public:
 
 protected:
   size_t      m_filesCursor = 0;
-  std::string m_currentFile = "";
   ListFiles   m_listFiles;
   ListFolders m_listFolder;
   bool isReadable = false;
+  bool verbose = false;
 };
 
 Bool_t FilesManager::addFiles(std::string const & _filename)
@@ -117,11 +122,12 @@ Bool_t FilesManager::addFolder(std::string _foldername, int _nb_files)
     ListFiles cut_listfile (listfile.begin(), listfile.begin()+_nb_files);// Take the nb_files first files of the folder
     if (m_listFiles.size() == 0) m_listFiles = cut_listfile;// Set cut_listfile to be the global list of files
     else std::copy(cut_listfile.begin(), cut_listfile.end(), back_inserter(m_listFiles));// Add cut_listfile to the global list of files
-    std::cout << cut_listfile.size() << " files added, " << m_listFiles.size() << " files to process" << std::endl;
+    if (verbose) print( cut_listfile.size(), "files added,", m_listFiles.size(), "files to process");
     return true;
   }
   else
   {
+    print("NO data found !");
     return false;
   }
 }
