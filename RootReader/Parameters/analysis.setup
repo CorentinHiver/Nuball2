@@ -1,12 +1,12 @@
 [Data]
-#list_runs: Parameters/list_runs.list
-list_runs: Parameters/list_runs_good_pulse.list
+list_runs: Parameters/list_runs.list
+# list_runs: Parameters/list_runs_good_pulse.list
 folder: ../Data_129/DSSDFinal/
 end
 
 [Isomer]
 outDir: 129/Analyse/Isomer/
-outRoot: test.root
+outRoot: total.root
 writeDSSD
 gate: prompt Ge -10 20
 gate: delayed Ge 20 350

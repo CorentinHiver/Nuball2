@@ -55,7 +55,7 @@ BINNING: calibrated: Ge: 14000 0 7000
 # DATADIR: /home/corentin/faster_data/N-SI-131/alpha_27.fast/ nb: 50
 # DATADIR: /home/corentin/faster_data/N-SI-131/proton_24.fast/
 
-DATADIR: /home/corentin/faster_data/N-SI-129/run_50.fast/ 
+DATADIR: /home/corentin/faster_data/N-SI-129/run_50.fast/
 # DATADIR: /home/corentin/faster_data/N-SI-85/run_Alpha_8.fast/
 
 # OUTDIR: Calibration/run_12/
@@ -86,7 +86,7 @@ USE_RF: 50 ns
 # ANALYSE: time_ref: R1A1_FATIMA_LaBr3 outRoot: test.root
 # ANALYSE: time_ref: R1A9_FATIMA_LaBr3 outRoot: run_50.root
 
-# ANALYSE: time_ref: R1A9_FATIMA_LaBr3 outRoot: run_70.root
+ANALYSE: time_ref: R1A9_FATIMA_LaBr3 outRoot: run_50.root
 
 # ANALYSE: time_ref: R1A9_FATIMA_LaBr3 outRoot: run_2.root
 # ANALYSE: time_ref: R1A9_FATIMA_LaBr3 outRoot: run_70.root
@@ -105,6 +105,6 @@ USE_RF: 50 ns
 
 # RF_CHECK: timewindow: 350 time_ref: R1A1_FATIMA_LaBr3 RF_shift: 40
 
-HISTOGRAM: to_throw.root
+# HISTOGRAM: to_throw.root
 # HISTOGRAM: calibrated: Ge_Clover Paris DSSD outRoot: test_DSSD.root
 # HISTOGRAM: calibrated: Ge_Clover LaBr3 outRoot: Uranium23_97_calib232Th.root

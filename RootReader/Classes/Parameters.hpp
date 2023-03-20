@@ -24,7 +24,7 @@ public:
   MTList<std::string> & filesMT() {return m_list_files;}
   bool getNextFile(std::string & filename) {return m_list_files.getNext(filename);}
 
-  MTCounter<size_t> totalCounter;
+  MTCounter totalCounter;
 private:
   uchar m_nbThreads = 1;
 

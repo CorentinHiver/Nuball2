@@ -21,12 +21,12 @@
  * The advantage is much less memory taking and no merging.
  * However the mutex activation and the concurrency waiting may slow the process a lot.
  * To be tested !
- * Unlock this way with #define MEMORY (maybe find a better name)
+ * Unlock this way with #define MODE2 (maybe find a better name)
  *
  */
 #ifndef MTTHIST_H
 #define MTTHIST_H
-// #define MEMORY
+// #define MODE2
 #include "MTObject.hpp"
 
 template <class THist>
@@ -71,7 +71,9 @@ public:
     m_file = gROOT -> GetFile();// If SIGSEGV here, have you instantiated the object ? (e.g., in an array of histograms)
     m_exists = true;// If SIGSEGV here, have you instantiated the object ? (e.g., in an array of histograms)
     m_str_name = name;
-    // m_merged = new THist (name.c_str(), std::forward<ARGS>(args)...);
+    #ifdef MODE_2
+    if (!m_merged) = new THist (name.c_str(), std::forward<ARGS>(args)...);
+    #else
     m_collection.resize(MTObject::nb_threads, emptyTHist);
     if (isMasterThread())
     {
@@ -86,6 +88,7 @@ public:
       m_collection[i] = new THist ((name+std::to_string(i)).c_str(), std::forward<ARGS>(args)...);
       print(i,m_collection[i]);
     }
+    #endif //MODE_2
     local_mutex.unlock();
   };
 

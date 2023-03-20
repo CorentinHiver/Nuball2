@@ -10,11 +10,15 @@ public:
   Sorted_Event(Event * event){initialise(); reset(); setEvent(event);}
   void initialise();
   void reset();
-  void sortEvent(Event const & event);
-  void sortEvent(){sortEvent(*m_event);}
+
   void setEvent (Event * event) {m_event = event;}
   void setRF(RF_Manager *rf) {m_rf = rf;}
   void fillEvent(Event & event);
+
+  void sortEvent(Event const & event);
+  void sortEvent(){sortEvent(*m_event);}
+  bool sortGeClover(Event const & event, int const & i);
+
 
   std::array<Float_t, 2000> times;
   RF_Manager *m_rf = nullptr;
@@ -31,6 +35,7 @@ public:
   std::array < Int_t,   24 > BGO; // The number of BGO crystals that fired in a Germanium
   std::array < Float_t, 24 > maxE; // Value of the maximum energy in a Ge crystal of a Clover
   std::array < Int_t,   24 > maxE_hit; // Position in the event of the Ge crystal with the maximum energy of the Clover
+
 
   // Paris arrays :
   std::vector<uchar> paris_hits; // Position in the event of the paris hits
@@ -59,6 +64,9 @@ public:
   size_t DSSDMult=0; // Number of DSSD hits
   size_t DSSDSectorMult=0; // Number of DSSD Sectors hits
   size_t DSSDRingMult=0; // Number of DSSD Rings hits
+
+  size_t ModulePromptMult;
+  size_t ModuleDelayedMult;
 
   //Pre-analysis
 #ifdef N_SI_129
@@ -143,44 +151,52 @@ void Sorted_Event::reset()
   DSSDPrompt=false;
 }
 
+bool Sorted_Event::sortGeClover(Event const & event, int const & i)
+{
+  auto const & label = event.labels[i];
+  auto const & time = event.times[i];
+  auto const & Time = event.Times[i];
+  auto const & nrj = event.nrjs[i];
+  auto const & clover_label = labelToClover_fast[label];
+
+  if (nrj<5) return false;
+
+  push_back_unique(clover_hits, clover_label);
+
+  if (event.readtime())
+  {
+    if (m_rf) time_clover[clover_label] = m_rf->pulse_ToF(time, 50000ll)/_ns;
+    else time_clover[clover_label] = (time-event.times[0])/_ns;
+  }
+
+  // Next line overwrites the Time if Time is indeed read in the event
+  if (event.readTime()) time_clover[clover_label] = Time;
+
+  nrj_clover[clover_label] += nrj;
+  Ge[clover_label]++;
+
+  if(nrj > maxE[clover_label])
+  {// To get the crystal that got the maximum energy in a clover :
+    maxE[clover_label] = nrj;
+    maxE_hit[clover_label] = i;
+  }
+  return true;
+}
+
 void Sorted_Event::sortEvent(Event const & event)
 {
   this->reset();
   RawMult = event.size();
+
   uchar clover_label = 0;
   for (uchar i = 0; i<event.size(); i++)
   {
-    // #ifdef PULSED
     if (event.readtime()) times[i] = (m_rf) ? m_rf->pulse_ToF(event.times[i], 50000ll) : (event.times[i]-event.times[0])/_ns;
     if (event.readTime()) times[i] = event.Times[i];
 
-
     if (isGe[event.labels[i]])
     {
-      if (event.nrjs[i]<5) continue;
-      if (event.readtime())
-      {
-        if (m_rf) time_clover[clover_label] = m_rf->pulse_ToF(event.times[i], 50000ll)/_ns;
-        else time_clover[clover_label] = (event.times[i]-event.times[0])/_ns;
-      }
-      if (event.readTime()) time_clover[clover_label] = event.Times[i];
-      clover_label = labelToClover_fast[event.labels[i]];
-      nrj_clover[clover_label] += event.nrjs[i];
-      Ge[clover_label]++;
-
-      if(
-        event.nrjs[i]
-        >
-        maxE[clover_label])
-      {// To get the crystal that got the maximum energy in a clover :
-        maxE[clover_label] = event.nrjs[i];
-        maxE_hit[clover_label] = i;
-        // We want to get the timing from this crystal and not the others :
-      }
-
-      // To prevent double entry : (if two or more crystals of the same clover have a hit, then there is only one hit in the whole clover)
-      if (std::find(std::begin(clover_hits), std::end(clover_hits), clover_label) == std::end(clover_hits))
-        clover_hits.push_back(clover_label);
+      if (!sortGeClover(event, i)) continue;
       RawGeMult++;
     }
     else if (isBGO[event.labels[i]])

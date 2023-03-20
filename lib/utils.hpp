@@ -1026,6 +1026,20 @@ template <class N, class D> std::string procent(N n, D d)
   return (std::to_string(100*n/d)+"%");
 }
 
+template <typename T>
+bool push_back_unique(std::vector<T> & vector, T const & t)
+{
+  if (std::find(std::begin(vector), std::end(vector), t) == std::end(vector))
+  {
+    vector.push_back(t);
+    return true;
+  }
+  else
+  {
+    return false;
+  }
+}
+
 //--------------------//
 // NEARLINE FUNCTIONS //
 //--------------------//

@@ -81,7 +81,7 @@ int main(int argc, char** argv)
   MTObject::parallelise_function(analyse,ai,p);
   ai.Write();
   int totalCounts = p.totalCounter;
-  print("Analysis of", totalCounts,"Mevts performed in", totalTime(), "s ->", totalCounts/totalTime(), "Mevts/s");
+  print("Analysis of", totalCounts/1000000.,"Mevts performed in", totalTime()/1000, "s ->", totalCounts/totalTime()/1000, "Mevts/s");
   return 1;
 }
 
@@ -101,17 +101,15 @@ void analyse(AnalyseIsomer & ai, Parameters & p)
     std::unique_ptr<TTree> tree (file->Get<TTree>("Nuball"));
     Event event(tree.get(), "lTn");
 
-    auto size = tree->GetEntries();
+    size_t size = tree->GetEntries();
     p.totalCounter+=size;
 
-    for (auto i = 0; i<size; i++)
+    for (size_t i = 0; i<size; i++)
     {
       tree->GetEntry(i);
       event_s.sortEvent(event);
       ai.FillSorted(event_s,event);
       ai.FillRaw(event);
     } // End event loop
-    // auto const & time = timer()/1000; // en s
-    // print(rmPathAndExt(rootfile), ":", size/1000000., "Mevt treated in", time, "s -> ", size/time/1000000, "Mevts/s");
   } // End files loop
 }

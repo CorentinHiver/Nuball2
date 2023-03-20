@@ -32,6 +32,7 @@ private:
   MTTHist<TH1F> Ge_spectra_delayed;
   MTTHist<TH2F> GePrompt_VS_GePrompt;
   MTTHist<TH2F> GeDelayed_VS_GeDelayed;
+  MTTHist<TH2F> GeDelayed_VS_GePrompt;
   MTTHist<TH2F> Ge_Time_VS_Spectra;
   MTTHist<TH2F> raw_Ge_Time_VS_Spectra;
   Vector_MTTHist<TH2F> each_channel_DSSD_VS_Ge;
@@ -48,6 +49,8 @@ void AnalyseIsomer::Initialize()
   raw_Ge_Time_VS_Spectra.reset("Raw Ge spectra VS Time","Raw Ge spectra VS Time", 14000,0,7000, 1000,-100,400);
   GePrompt_VS_GePrompt.reset("Ge spectra bidim prompt","Ge spectra bidim prompt", 14000,0,7000, 3500,0,7000);
   GeDelayed_VS_GeDelayed.reset("Ge spectra bidim delayed","Ge spectra bidim delayed", 14000,0,7000, 3500,0,7000);
+  GeDelayed_VS_GePrompt.reset("Ge spectra bidim delayed VS prompt","Ge spectra bidim delayed VS prompt", 14000,0,7000, 3500,0,7000);
+  // GeDelayed_VS_GeDelayed_.reset("Ge spectra bidim delayed","Ge spectra bidim delayed", 14000,0,7000, 3500,0,7000);
   // std::string name;
   // if (writeDSSD)
   // each_channel_DSSD_VS_Ge.resize(56,nullptr);
@@ -66,12 +69,10 @@ void AnalyseIsomer::FillRaw(Event const & event)
   for (size_t i = 0; i<event.size(); i++)
   {
     auto const & label = event.labels[i];
-    // print(label);
     if (isGe[label])
     {
       auto const & nrj = event.nrjs[i];
       auto const & Time = event.Times[i];
-      // print(nrj,Time);
       raw_Ge_Time_VS_Spectra.Fill(nrj,Time);
     }
   }
@@ -84,7 +85,7 @@ void AnalyseIsomer::FillSorted(Sorted_Event const & event_s, Event const & event
     auto const & clover_i = event_s.clover_hits[loop_i];
     auto const & nrj_i = event_s.nrj_clover[clover_i];
     auto const & Time_i = event_s.time_clover[clover_i];
-    auto const delayed_i = Time_i>20 && Time_i<350;
+    auto const delayed_i = Time_i>50 && Time_i<150;
     auto const prompt_i =  Time_i>-10 && Time_i<20;
 
     if (event_s.BGO[clover_i] || nrj_i<5) continue;
@@ -100,17 +101,33 @@ void AnalyseIsomer::FillSorted(Sorted_Event const & event_s, Event const & event
       auto const & nrj_j = event_s.nrj_clover[clover_j];
       auto const & delayed_j = event_s.delayed_Ge[clover_j];
       auto const & prompt_j = event_s.delayed_Ge[clover_j];
+      auto const & Time_j = event_s.time_clover[clover_j];
 
       if (event_s.BGO[clover_j] || nrj_j<5) continue;
-      if (prompt_i && prompt_j)
+
+      if (prompt_i)
       {
-        GePrompt_VS_GePrompt . Fill(nrj_i,nrj_j);
-        GePrompt_VS_GePrompt . Fill(nrj_j,nrj_i);
+        if (prompt_j)
+        {
+          GePrompt_VS_GePrompt . Fill(nrj_i,nrj_j);
+          GePrompt_VS_GePrompt . Fill(nrj_j,nrj_i);
+        }
+        else if (delayed_j)
+        {
+          GeDelayed_VS_GePrompt.Fill(nrj_i,nrj_j);
+        }
       }
-      else if (delayed_i && delayed_j)
+      else if (delayed_i)
       {
-        GeDelayed_VS_GeDelayed . Fill(nrj_i,nrj_j);
-        GeDelayed_VS_GeDelayed . Fill(nrj_j,nrj_i);
+        if (delayed_j && abs(Time_i-Time_j)<60)
+        {
+          GeDelayed_VS_GeDelayed . Fill(nrj_i,nrj_j);
+          GeDelayed_VS_GeDelayed . Fill(nrj_j,nrj_i);
+        }
+        else if (prompt_j)
+        {
+          GeDelayed_VS_GePrompt.Fill(nrj_j,nrj_i);
+        }
       }
     }
     // if (writeDSSD)
@@ -136,6 +153,7 @@ void AnalyseIsomer::Write()
   raw_Ge_Time_VS_Spectra.Write();
   GePrompt_VS_GePrompt.Write();
   GeDelayed_VS_GeDelayed.Write();
+  GeDelayed_VS_GePrompt.Write();
   for (auto & hist : each_channel_DSSD_VS_Ge) hist . Write();
   oufile->Write();
   oufile->Close();

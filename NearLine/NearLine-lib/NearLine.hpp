@@ -753,8 +753,7 @@ Bool_t NearLine::processFile(std::string filename, int thread_nb)
   if (m_a)
   {
     // Performances :
-    auto start_ = std::chrono::high_resolution_clock::now();
-
+    Timer timer;
     // Initialization :
     ULong64_t nb_data = rootTree -> GetEntries();
     std::vector<Int_t> gindex(nb_data);
@@ -850,9 +849,7 @@ Bool_t NearLine::processFile(std::string filename, int thread_nb)
       }
     }// End hits loop
 
-    auto end_ = std::chrono::high_resolution_clock::now();
-    auto dT_ = std::chrono::duration<double, std::milli>(end_ - start_).count();
-    std::cout << "Analysis of reordered " << rmPathAndExt(filename) << " done in " << dT_/1000. << " s" << std::endl;
+    std::cout << "Analysis of reordered " << rmPathAndExt(filename) << " done in " << timer()/1000. << " s" << std::endl;
   }
 
   else if (m_aw)

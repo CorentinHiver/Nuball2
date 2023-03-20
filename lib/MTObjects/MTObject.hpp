@@ -12,7 +12,7 @@
 class MTObject
 {
 public:
-  MTObject( ) {}
+  MTObject() {}
   MTObject(int _nb_threads ) {Initialize(_nb_threads);}
 
   static void Initialize(int _nb_threads )
