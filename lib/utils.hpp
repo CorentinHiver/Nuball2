@@ -155,13 +155,13 @@ using LaBr3_Event  = std::vector < LaBr3_Hit >;
 using Paris_Event  = std::vector < Paris_Hit >;
 using BGO_Event    = std::vector < BGO_Hit   >;
 
-using Gate = std::pair<Int_t, Int_t>;
+// using Gate = std::pair<Int_t, Int_t>;
 
 using Timeshift  = std::vector < Int_t  > ;
 using Options    = std::vector < Bool_t > ;
 using Buffer     = std::vector < Hit    > ;
 using Buffer_ptr = std::vector < Hit*   > ;
-using Gates      = std::vector < Gate   > ;
+// using Gates      = std::vector < Gate   > ;
 using Labels     = std::vector < std::string > ;
 
 using TimeshiftMap = std::unordered_map < UShort_t, Int_t       > ;
@@ -328,12 +328,20 @@ template <class E, class... T> void print (std::vector<E> v, T... t2)
 
 template <class K, class V> void print (std::map<K,V> m)
 {
-  print (" { ");
+  print();
+  print("{");
+  print();
   for (auto const & pair : m)
   {
-    print(pair.first, " : ", pair.second);
+    print("key : ");
+    print(pair.first);
+    print();
+    print("value :");
+    print(pair.second);
+    print();
   }
-  print ("}\n");
+  print("}");
+  print();
 }
 
 template <class K, class V, class... T> void print (std::map<K,V> m, T... t2)
@@ -875,16 +883,19 @@ std::string rmPathAndExt    (const std::string string)
 bool file_is_empty(std::ifstream& file)                { return file.peek() == std::ifstream::traits_type::eof();}
 
 
-int size_file(std::ifstream& file)
+int size_file(std::ifstream& file, std::string const & unit = "Mo")
 {
   int init = file.tellg();
   file.seekg(0, std::ios::end);
   int ret = file.tellg();
-  file.seekg(init);// Go back to previous place
+  file.seekg(init);// Go back to inital place in the file
+       if(unit ==  "o");
+  else if(unit == "ko") ret/=1024;
+  else if(unit == "Mo") ret /= 1048576; // = 1024²
   return ret;
 }
 
-int size_file(std::string filename)
+int size_file(std::string filename, std::string const & unit = "Mo")
 {
   std::ifstream f (filename, std::ios::binary);
   return size_file(f);

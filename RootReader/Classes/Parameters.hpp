@@ -8,38 +8,58 @@ class Parameters
 public:
   Parameters(){};
   Parameters(int argc, char ** argv){setParameters(argc, argv);};
+
+  // Deals with the parameters file :
   bool readParameters(std::string const & file = "Parameters/rootReader.setup");
-
   bool setParameters(int argc, char ** argv);
+  bool setData();
+  // To retrieve the parameters :
+  std::vector<std::string> const & getParameters(std::string const & module);
 
-  std::string & get_parameters_ed() {return m_param_ed;}
-  std::string & get_parameters_ma() {return m_param_ma;}
-  std::string & get_parameters_rc() {return m_param_rc;}
-  std::string & get_parameters_ai() {return m_param_ai;}
-
-  auto const & threadsNb() const {return m_nbThreads;}
   // Get the variables
+  auto const & threadsNb() const {return m_nbThreads;}
   FilesManager & files () {return m_files;}
 
   MTList<std::string> & filesMT() {return m_list_files;}
   bool getNextFile(std::string & filename) {return m_list_files.getNext(filename);}
+  bool getNextRun(std::string & run) {return m_list_runs.getNext(run);}
 
+  std::string const & getDataPath() {return m_dataPath;}
+
+  Timer totalTime;
   MTCounter totalCounter;
+  MTCounter totalFilesSize;
+
+  void printPerformances()
+  {
+    int time = totalTime(); // if we use print, we have to get the value before so the unit() is changing accordingly
+    print("Analysis of", totalCounter()/1000000., "Mevts (", totalFilesSize(), "Mo) performed in", time, totalTime.unit(),
+    "->", totalCounter/totalTime.TimeSec()/1000000., "Mevts/s (", totalFilesSize/totalTime.TimeSec(), "Mo/s)");
+  }
+
 private:
-  uchar m_nbThreads = 1;
-
-  FilesManager m_files;
-  MTList<std::string> m_list_files;
-  MTList<std::string> m_list_runs;
-
   std::string m_parameters_file;
 
   std::string m_param_ed;
   std::string m_param_ma;
   std::string m_param_rc;
   std::string m_param_ai;
+  std::string m_param_ds;
+
+  std::map<std::string, std::vector<std::string>> m_parameters; // key : module, value : list of module's parameters
+
+  uchar m_nbThreads = 1;
+
+  std::string m_dataPath;
+  FilesManager m_files;
+  MTList<std::string> m_list_files;
+  MTList<std::string> m_list_runs;
 };
 
+std::vector<std::string> const & Parameters::getParameters(std::string const & module)
+{
+  return m_parameters[module];
+}
 
 bool Parameters::readParameters(std::string const & file)
 {
@@ -50,11 +70,10 @@ bool Parameters::readParameters(std::string const & file)
     std::stringstream parameters_file;
     parameters_file << f.rdbuf();
     f.close();
-    bool ed = false;
-    bool ma = false;
-    bool rc = false;
-    bool ai = false;
-    bool da = false;
+
+    std::string current_param;
+    bool current_param_on = false;
+
     while (parameters_file.good())
     {
       std::string parameter;
@@ -73,55 +92,47 @@ bool Parameters::readParameters(std::string const & file)
       {// Chosing the module
         temp1.pop_back();
         temp1.erase(0,1); //"pop_front"
-        if (temp1 == "EachDetector") ed = true;
-        else if (temp1 == "Matrices") ma = true;
-        else if (temp1 == "Run Check") rc = true;
-        else if (temp1 == "Isomer") ai = true;
-        else if (temp1 == "Data") da = true;
+        current_param_on = true;
+        current_param = temp1;
       }
 
       else if (temp1.front() == '#' || temp1.substr(0,2) == "//") continue;
 
-      else if (ed)
+      else if (current_param_on == true)
       {
-        if (temp1 == "end") ed = false;
-        else m_param_ed+=parameter+"\n";
-      }
-      else if (ma)
-      {
-        if (temp1 == "end") ma = false;
-        else m_param_ma+=parameter+"\n";
-      }
-      else if (rc)
-      {
-        if (temp1 == "end") rc = false;
-        else m_param_rc+=parameter+"\n";
-      }
-      else if (ai)
-      {
-        if (temp1 == "end") ai = false;
-        else m_param_ai+=parameter+"\n";
-      }
-      else if (da)
-      {
-        if (temp1 == "end") da = false;
-        else if (temp1 == "list_runs:")
-        {
-          is >> temp2;
-          m_list_runs = listFileReader(temp2);
-        }
-        else if (temp1 == "folder:")
-        {
-          if(m_list_runs.size()<1) { print("Set the list of runs before setting the folder !"); return false;}
-          is >> temp2;
-          for (auto const & run : m_list_runs) m_files.addFolder(temp2+run);
-          m_list_files = m_files.getListFiles();
-        }
-        else {print(temp1,"parameter unkown !!");return -1;}
+        if (temp1 == "end") current_param_on = false;
+        else m_parameters[current_param].push_back(parameter);
       }
     }
   }
   else {print("Can't read the parameter file !");return false;}
+  if (!this -> setData()) return false;
+  return true;
+}
+
+bool Parameters::setData()
+{
+  for (auto const param : m_parameters["Data"])
+  {
+    std::istringstream is(param);
+    std::string temp = "NULL";
+    while (is >> temp)
+    {
+      if (temp == "list_runs:")
+      {
+        is >> temp;
+        m_list_runs = listFileReader(temp);
+      }
+      else if (temp == "folder:")
+      {
+        if(m_list_runs.size()<1) { print("Set the list of runs before setting the folder !"); return false;}
+        is >> m_dataPath;
+        for (auto const & run : m_list_runs) m_files.addFolder(m_dataPath+run);
+        m_list_files = m_files.getListFiles();
+      }
+      else {print(temp,"parameter unkown for Data module!!");return false;}
+    }
+  }
   return true;
 }
 
@@ -133,7 +144,7 @@ bool Parameters::setParameters(int argc, char ** argv)
     {
       i++;
       m_nbThreads = atoi(argv[i]);
-      print("Number of threads : ", m_nbThreads);
+      print("Number of threads : ", (int)m_nbThreads);
     }
     else if (strcmp(argv[i],"-d")==0)
     {

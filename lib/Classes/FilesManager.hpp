@@ -10,13 +10,14 @@ class FilesManager
 public:
 
   FilesManager(){};
+  FilesManager(std::string const & folder, int nb_files = -1){addFolder(folder,nb_files);};
 
   Bool_t nextFileName(std::string & filename, size_t const & step = 1);
 
   Bool_t addFiles     (std::string const & _filename        );// Adds either a single file or reads a .list containing a list of files
   Bool_t addFolder    (std::string folder, int nb_files = -1);
   void   flushFiles   ();
-  void   Print   ();
+  void   Print        ();
   void   printFolders ();
 
   //Getters :

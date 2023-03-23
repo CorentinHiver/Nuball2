@@ -14,8 +14,9 @@ public:
   DataFileReader(Hit* _hit) : m_hit(_hit) {m_empty_hit = new Hit;};
   DataFileReader(std::string _filename) : m_filename(_filename) {m_kReady = Initialize();};
   DataFileReader(Hit* _hit, std::string _filename) : m_hit(_hit), m_filename(_filename) {m_empty_hit = new Hit; m_kReady = Initialize();};
-  ~DataFileReader(){
-    delete  m_ReadTree;
+  ~DataFileReader()
+  {
+    delete m_ReadTree;
     delete m_empty_hit;
     switch (m_quick_rootOrFast)
     {
@@ -36,6 +37,7 @@ public:
   Bool_t Read(Hit* hit);
   Bool_t Read();
   Bool_t ReadRoot(Int_t const & pos);
+
   #ifndef NO_FASTERAC
   Bool_t ReadFast();
   Bool_t ReadFastGroup();
@@ -44,6 +46,7 @@ public:
   void readFastGroup(faster_data_p const & _data);
   Bool_t ReadFastData(faster_data_p const & _data);
   #endif //NO_FASTERAC
+
   //Root functions
   void cd();
   //Getters :

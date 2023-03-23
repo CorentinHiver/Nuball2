@@ -23,6 +23,7 @@ public:
   auto end() {return m_collection.end();}
 
   operator std::vector<T>() & {return m_collection;}
+  
   void operator=(std::vector<T> const & collection) {this->set(collection);}
 
   void push_back(T const & t) {m_collection.push_back(t);}
@@ -36,17 +37,17 @@ private:
 template<class T>
 inline bool MTList<T>::getNext(T & t)
 {
-  local_mutex.lock();
+  m_mutex.lock();
   if (i<m_size)
   {
     t = m_collection[i];
     i++;
-    local_mutex.unlock();
+    m_mutex.unlock();
     return true;
   }
   else
   {
-    local_mutex.unlock();
+    m_mutex.unlock();
     return false;
   }
 }

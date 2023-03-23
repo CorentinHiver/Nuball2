@@ -1,31 +1,41 @@
 #ifndef ANALYSEISOMER_H
 #define ANALYSEISOMER_H
 
+#include "../../lib/utils.hpp"
+
+#include "../../lib/Analyse/HistoAnalyse.hpp"
+
 #include "../../lib/MTObjects/MTTHist.hpp"
-#include "../../lib/Classes/TimeGate.hpp"
+
+#include "../../lib/Classes/Gate.hpp"
+#include "../../lib/Classes/RWMat.hxx"
+
+#include "../Classes/Parameters.hpp"
+
+std::string param_string = "Isomer";
 
 class AnalyseIsomer
 {
 public:
   AnalyseIsomer(){}
-
-  bool setParameters(std::string const & parameters);
-  void Initialize();
+  bool launch(Parameters & p);
+  bool setParameters(std::vector<std::string> const &  param);
+  void InitializeManip();
+  static void run(Parameters & p, AnalyseIsomer & ai);
   void FillRaw(Event const & event);
   void FillSorted(Sorted_Event const & event_s, Event const & event);
   void Write();
 
 private:
   // Parameters
-  bool writeDSSD = false;
+  friend class MTObject;
   std::string outDir  = "129/Analyse/Isomer/";
   std::string outRoot = "ai.root";
-  Sorted_Event *m_s_event = nullptr;
 
-  TimeGate Ge_prompt_gate;
-  TimeGate Ge_delayed_gate;
-  TimeGate LaBr3_prompt_gate;
-  TimeGate LaBr3_delayed_gate;
+  Gate Ge_prompt_gate;
+  Gate Ge_delayed_gate;
+  Gate LaBr3_prompt_gate;
+  Gate LaBr3_delayed_gate;
 
   MTTHist<TH1F> Ge_spectra;
   MTTHist<TH1F> Ge_spectra_prompt;
@@ -33,35 +43,80 @@ private:
   MTTHist<TH2F> GePrompt_VS_GePrompt;
   MTTHist<TH2F> GeDelayed_VS_GeDelayed;
   MTTHist<TH2F> GeDelayed_VS_GePrompt;
+  MTTHist<TH2F> GeDelayed_VS_SumGeDelayed;
   MTTHist<TH2F> Ge_Time_VS_Spectra;
   MTTHist<TH2F> raw_Ge_Time_VS_Spectra;
-  Vector_MTTHist<TH2F> each_channel_DSSD_VS_Ge;
 
+  MTTHist<TH2F> Ge_VS_DSSD;
+  MTTHist<TH2F> GePrompt_VS_DSSD;
+  MTTHist<TH2F> GeDelayed_VS_DSSD;
 };
 
-void AnalyseIsomer::Initialize()
+bool AnalyseIsomer::launch(Parameters & p)
+{
+  if (!this -> setParameters(p.getParameters(param_string))) return false;
+  this -> InitializeManip();
+  print("Starting !");
+  MTObject::parallelise_function(run, p, *this);
+  this -> Write();
+  return true;
+}
+
+void AnalyseIsomer::run(Parameters & p, AnalyseIsomer & ai)
+{
+  std::string rootfile;
+  Sorted_Event event_s;
+  while(p.getNextFile(rootfile))
+  {
+    Timer timer;
+
+    std::unique_ptr<TFile> file (TFile::Open(rootfile.c_str(), "READ"));
+    if (file->IsZombie()) {print(rootfile, "is a Zombie !");continue;}
+    std::unique_ptr<TTree> tree (file->Get<TTree>("Nuball"));
+    Event event(tree.get(), "lTn");
+
+    size_t events = tree->GetEntries();
+    p.totalCounter+=events;
+
+    auto const & filesize = size_file(rootfile, "Mo");
+    p.totalFilesSize+=filesize;
+
+    for (size_t i = 0; i<events; i++)
+    {
+      tree->GetEntry(i);
+      event_s.sortEvent(event);
+      ai.FillSorted(event_s,event);
+      ai.FillRaw(event);
+    } // End event loop
+    auto const & time = timer();
+    print(removePath(rootfile), time, timer.unit(), ":", filesize/timer.TimeSec(), "Mo/sec");
+  } // End files loop
+}
+
+void AnalyseIsomer::InitializeManip()
 {
   print("Initialize histograms");
   Ge_spectra.reset("Ge spectra","Ge spectra", 14000,0,7000);
   Ge_spectra_prompt.reset("Ge spectra prompt","Ge spectra prompt", 14000,0,7000);
   Ge_spectra_delayed.reset("Ge spectra delayed","Ge spectra delayed", 14000,0,7000);
-  Ge_Time_VS_Spectra.reset("Ge spectra VS Time","Ge spectra VS Time", 14000,0,7000, 1000,-100,400);
-  raw_Ge_Time_VS_Spectra.reset("Raw Ge spectra VS Time","Raw Ge spectra VS Time", 14000,0,7000, 1000,-100,400);
-  GePrompt_VS_GePrompt.reset("Ge spectra bidim prompt","Ge spectra bidim prompt", 14000,0,7000, 3500,0,7000);
-  GeDelayed_VS_GeDelayed.reset("Ge spectra bidim delayed","Ge spectra bidim delayed", 14000,0,7000, 3500,0,7000);
-  GeDelayed_VS_GePrompt.reset("Ge spectra bidim delayed VS prompt","Ge spectra bidim delayed VS prompt", 14000,0,7000, 3500,0,7000);
-  // GeDelayed_VS_GeDelayed_.reset("Ge spectra bidim delayed","Ge spectra bidim delayed", 14000,0,7000, 3500,0,7000);
-  // std::string name;
-  // if (writeDSSD)
-  // each_channel_DSSD_VS_Ge.resize(56,nullptr);
-  // for (int i = 0; i<56; i++)
-  // {
-  //   if ( g_labelToName[800+i] != "")
-  //   {
-  //     name = g_labelToName[800+i]+"VS Ge";
-      // each_channel_DSSD_VS_Ge[i].reset(name.c_str(), name.c_str(), 1000,0,20000, 14000,0,7000);
-    // }
-  // }
+  Ge_Time_VS_Spectra.reset("Ge spectra VS Time","Ge spectra VS Time",
+      14000,0,7000, 1000,-100,400);
+  raw_Ge_Time_VS_Spectra.reset("Raw_Ge_spectra_VS_Time","Raw Ge spectra VS Time",
+      14000,0,7000, 1000,-100,400);
+  GePrompt_VS_GePrompt.reset("Ge_bidim_prompt","Ge bidim prompt",
+      4096,0,4096, 4096,0,4096);
+  GeDelayed_VS_GeDelayed.reset("Ge_bidim_delayed","Ge bidim delayed",
+      4096,0,4096, 4096,0,4096);
+  GeDelayed_VS_GePrompt.reset("Ge_delayed_VS_prompt","Ge delayed VS prompt",
+      4096,0,4096, 4096,0,4096);
+  GeDelayed_VS_SumGeDelayed.reset("Ge_delayed_VS_sum_Ge_delayed","Ge delayed VS sum Ge delayed",
+      4096,0,4096, 4096,0,4096);
+  Ge_VS_DSSD.reset("Ge VS DSSD","Ge VS DSSD",
+      2000,0,20000, 14000,0,7000);
+  GePrompt_VS_DSSD.reset("Ge Prompt VS DSSD","Ge VS DSSD",
+      2000,0,20000, 14000,0,7000);
+  GeDelayed_VS_DSSD.reset("Ge Delayed VS DSSD","Ge VS DSSD",
+      2000,0,20000, 14000,0,7000);
 }
 
 void AnalyseIsomer::FillRaw(Event const & event)
@@ -121,8 +176,10 @@ void AnalyseIsomer::FillSorted(Sorted_Event const & event_s, Event const & event
       {
         if (delayed_j && abs(Time_i-Time_j)<60)
         {
-          GeDelayed_VS_GeDelayed . Fill(nrj_i,nrj_j);
-          GeDelayed_VS_GeDelayed . Fill(nrj_j,nrj_i);
+          GeDelayed_VS_GeDelayed . Fill(nrj_i, nrj_j);
+          GeDelayed_VS_GeDelayed . Fill(nrj_j, nrj_i);
+          GeDelayed_VS_SumGeDelayed.Fill(nrj_i, nrj_i+nrj_j);
+          GeDelayed_VS_SumGeDelayed.Fill(nrj_j, nrj_i+nrj_j);
         }
         else if (prompt_j)
         {
@@ -130,14 +187,17 @@ void AnalyseIsomer::FillSorted(Sorted_Event const & event_s, Event const & event
         }
       }
     }
-    // if (writeDSSD)
-    // for (auto const & dssd : event_s.DSSD_hits)
-    // {
-    //   auto const & dssd_nrj = event.nrjs[dssd];
-    //   auto const dssd_label = event.labels[dssd] - 800;
-    //
-    //   each_channel_DSSD_VS_Ge[dssd_label] . Fill(dssd_nrj, nrj_i);
-    // }
+    for (auto const & dssd : event_s.DSSD_hits)
+    {
+      auto const & dssd_nrj = event.nrjs[dssd];
+      // auto const dssd_label = event.labels[dssd] - 800;
+      if (event_s.DSSDRingMult == event_s.DSSDSectorMult)
+      {
+        Ge_VS_DSSD.Fill(dssd_nrj,nrj_i);
+        if (prompt_i) GePrompt_VS_DSSD.Fill(dssd_nrj,nrj_i);
+        if (delayed_i)GeDelayed_VS_DSSD.Fill(dssd_nrj,nrj_i);
+      }
+    }
   }
 }
 
@@ -154,53 +214,63 @@ void AnalyseIsomer::Write()
   GePrompt_VS_GePrompt.Write();
   GeDelayed_VS_GeDelayed.Write();
   GeDelayed_VS_GePrompt.Write();
-  for (auto & hist : each_channel_DSSD_VS_Ge) hist . Write();
+  GeDelayed_VS_SumGeDelayed.Write();
+  Ge_VS_DSSD.Write();
+  GePrompt_VS_DSSD.Write();
+  GeDelayed_VS_DSSD.Write();
   oufile->Write();
   oufile->Close();
+
+  RWMat RW_prompt_prompt(GePrompt_VS_GePrompt); RW_prompt_prompt.Write();
+  RWMat RW_del_del(GeDelayed_VS_GeDelayed); RW_del_del.Write();
+
   print("Writting analysis in", outDir+outRoot);
 }
 
-bool AnalyseIsomer::setParameters(std::string const & parameters)
+bool AnalyseIsomer::setParameters(std::vector<std::string> const & parameters)
 {
-  std::istringstream pa(parameters);
-  std::string line;
-  while(getline(pa,line))
+  for (auto const & param : parameters)
   {
-    std::istringstream is(line);
+    std::istringstream is(param);
     std::string temp;
     while(is>>temp)
     {
-           if (temp == "gate:")
+      if (temp == "outDir:")  is >> outDir;
+      else if (temp == "outRoot:")  is >> outRoot;
+      else if (temp == "gate:")
       {
         is >> temp;
         if (temp == "prompt")
         {
           is >> temp;
-          print("'",temp,"'");
-          if (temp == " Ge ")
+          if (temp == "Ge")
           {
             is >> Ge_prompt_gate.start >> Ge_prompt_gate.stop;
+            print("Prompt Ge gate : ", Ge_prompt_gate.start, Ge_prompt_gate.stop);
           }
-          if (temp == "LaBr3")
+          else if (temp == "LaBr3")
           {
             is >> LaBr3_prompt_gate.start >> LaBr3_prompt_gate.stop;
+            print("Prompt LaBr3 gate : ", LaBr3_prompt_gate.start, LaBr3_prompt_gate.stop);
           }
+          else {print("Parameter ", temp, "unkown for prompt gate...");}
         }
         if (temp == "delayed")
         {
+          is >> temp;
           if (temp == "Ge")
           {
             is >> Ge_delayed_gate.start >> Ge_delayed_gate.stop;
+            print("Delayed Ge gate : ", Ge_delayed_gate.start, Ge_delayed_gate.stop);
           }
-          if (temp == "LaBr3")
+          else if (temp == "LaBr3")
           {
             is >> LaBr3_delayed_gate.start >> LaBr3_delayed_gate.stop;
+            print("Delayed LaBr3 gate : ", LaBr3_delayed_gate.start, LaBr3_delayed_gate.stop);
           }
+          else {print("Parameter ", temp, "unkown for prompt gate...");return false;}
         }
       }
-      else if (temp == "outDir:")  is >> outDir;
-      else if (temp == "outRoot:")  is >> outRoot;
-      else if (temp == "writeDSSD") writeDSSD = true;
       else
       {
         print("Parameter", temp, "for AnalyseIsomer unkown...");

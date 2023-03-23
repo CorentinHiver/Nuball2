@@ -1,19 +1,24 @@
 #ifndef RUNCHECK_HD
 #define RUNCHECK_HD
 
+#include "../Classes/Parameters.hpp"
+
 class RunCheck
 {
 public:
   RunCheck(){}
-  void Initialize();
+  void InitializeRun();
+  void SetConfig(Parameters & p);
   void FillRaw(Event const & event);
   void FillSorted(Sorted_Event const & event);
-  void Write(std::string const & outRoot);
+  void WriteRun(std::string const & outRoot);
 
   void SetRF(RF_Manager* rf) {m_rf = rf;}
 
 private:
 
+  std::string m_outDir = "129/RunsCheck/";
+  std::string m_outRoot = "run_check.root";
   // Multiplicity :
     // 1D
   TH1F* m_raw_mult;
@@ -40,7 +45,23 @@ private:
   TH2F* m_each_detector_energy;
 };
 
-void RunCheck::Initialize()
+void RunCheck::SetConfig(Parameters & p)
+{
+  std::vector<std::string> parameters = p.getParameters("rc");
+
+  // for (auto const & param : parameters)
+  // {
+  //   std::istrinstream is (param);
+  //   std::string temp;
+  //   while (is>>temp)
+  //   {
+  //          if (temp == "outDir:" ) is>>m_outDir;
+  //     else if (temp == "outRoot:") is>>m_outRoot;
+  //   }
+  // }
+}
+
+void RunCheck::InitializeRun()
 {
   m_raw_mult = new TH1F("Crystals Multiplicity", "Crystals Multiplicity", 50, 0, 50);
   m_Ge_crystals_mult = new TH1F("Ge crystals Multiplicity", "Ge crystals Multiplicity", 50, 0, 50);
@@ -113,7 +134,7 @@ void RunCheck::FillSorted(Sorted_Event const & event)
   m_Clean_Ge_VS_Modules_mult -> Fill(event.ModulesMult, event.CleanGeMult);
 }
 
-void RunCheck::Write(std::string const & outRoot)
+void RunCheck::WriteRun(std::string const & outRoot)
 {
   std::unique_ptr<TFile> outfile(TFile::Open(outRoot.c_str(),"RECREATE"));
   outfile->cd();
@@ -138,7 +159,27 @@ void RunCheck::Write(std::string const & outRoot)
   if(m_each_detector_VS_pulsation && m_each_detector_VS_pulsation->Integral()>1) m_each_detector_VS_pulsation -> Write();
   if(m_ref_LaBr3_nrj_VS_time && m_ref_LaBr3_nrj_VS_time->Integral()>1) m_ref_LaBr3_nrj_VS_time -> Write();
 
+  delete m_raw_mult;
+  delete m_Ge_crystals_mult;
+  delete m_BGO_crystals_mult;
+  delete m_LaBr3_crystals_mult;
+  delete m_Paris_crystals_mult;
+  delete m_Clover_Ge_mult;
+  delete m_Clover_BGO_mult;
+  delete m_Clover_mult;
+  delete m_Clean_Clover_Ge_mult;
+  delete m_Veto_Clover_Ge_mult;
+  delete m_module_mult;
+    // 2D
+  delete m_Clean_Ge_VS_Paris_mult;
+  delete m_Clean_Ge_VS_Modules_mult;
 
+  // Pulsation :
+  delete m_each_detector_VS_pulsation;
+  delete m_ref_LaBr3_nrj_VS_time;
+
+  // Energy
+  delete m_each_detector_energy;
 
   outfile->Write();
   outfile->Close();

@@ -20,11 +20,18 @@ public:
     nb_threads = _nb_threads;
     TThread::Initialize();
     master_thread = std::this_thread::get_id();
+    ON = true;
   }
 
   template <class Func, class... ARGS>
   static void parallelise_function(Func func, ARGS &&... args)
   {
+    if (!ON)
+    {
+      print("The multithreading has not been initialized.");
+      print("Please use MTObject::Initialize(int number_threads) for initialisation.");
+      return;
+    }
     for (ushort i = 0; i<nb_threads; i++)
     {
       m_threads.emplace_back(
@@ -60,16 +67,16 @@ public:
     return threads_ID[std::this_thread::get_id()];
   }
 protected:
-  std::mutex local_mutex;
+  std::mutex m_mutex;
 private:
   static std::vector<std::thread> m_threads;
 };
 // As it is a static variable we have to declare it outside of the class
 // Also, I think it is better to initialise it at 1, in order to avoid unitialisation issue
 unsigned short MTObject::nb_threads = 1;
+bool MTObject::ON = false;
 std::map<std::thread::id, int> MTObject::threads_ID;
 std::mutex MTObject::shared_mutex;
-bool MTObject::ON;
 std::thread::id MTObject::master_thread;
 std::vector<std::thread> MTObject::m_threads;
 #endif //MTOBJECT_H

@@ -1,5 +1,5 @@
 #! /bin/bash
-git checkout *
+git checkout -- .
 git pull
 
 

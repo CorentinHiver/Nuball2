@@ -1,7 +1,7 @@
 #ifndef EACHDETECTOR_H
 #define EACHDETECTOR_H
 
-#include "../../lib/Classes/Sorted_Event.hpp"
+#include "../../lib/Analyse/Sorted_Event.hpp"
 
 class EachDetector
 {
