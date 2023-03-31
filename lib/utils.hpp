@@ -2,6 +2,7 @@
 #define UTILS_H_CO
 
 // *********** STD includes ********* //
+#include <any>
 #include <array>
 #include <iomanip>
 #include <iostream>
@@ -103,43 +104,6 @@ struct LaBr3_Hit
   ULong64_t     time    = 0;
 };
 
-class Paris_Label
-{
-public:
-  Paris_Label(){};
-  Paris_Label(Label const & l) {setLabel(l);}
-  void setLabel(Label const & l)
-  {
-         if (l<300) { back = true;  ring = 1; label = l-200; }
-    else if (l<400) { back = true;  ring = 2; label = l-300; }
-    else if (l<500) { back = true;  ring = 3; label = l-400; }
-    else if (l<600) { back = false; ring = 1; label = l-500; }
-    else if (l<700) { back = false; ring = 2; label = l-600; }
-    else if (l<800) { back = false; ring = 3; label = l-700; }
-  }
-  Bool_t        back    = false; //0 back, 1 front
-  uchar ring    = 0;
-  uchar label   = 0;
-};
-
-class Paris_Hit
-{
-public:
-  Paris_Label   label;
-  Float_t       nrjcal  = 0;
-  Float_t       nrjcal2 = 0;
-  Int_t         crystal = 0;
-  Detector      type = null;
-  Time          time    = 0;
-  static std::vector<char> labelToSide;
-  static std::vector<uchar> labelToRing;
-  static std::vector<uchar> labelToLabel;
-};
-
-
-std::vector<char> labelToSide;
-std::vector<uchar> labelToRing;
-std::vector<uchar> labelToLabel;
 
 struct BGO_Hit
 {
@@ -152,7 +116,6 @@ struct BGO_Hit
 
 using Clover_Event = std::vector < Clover_Hit>;
 using LaBr3_Event  = std::vector < LaBr3_Hit >;
-using Paris_Event  = std::vector < Paris_Hit >;
 using BGO_Event    = std::vector < BGO_Hit   >;
 
 // using Gate = std::pair<Int_t, Int_t>;
@@ -335,7 +298,7 @@ template <class K, class V> void print (std::map<K,V> m)
   {
     print("key : ");
     print(pair.first);
-    print();
+    // print();
     print("value :");
     print(pair.second);
     print();
@@ -375,6 +338,10 @@ void print(Hit hit)
   if (hit.pileup) std::cout << " pileup";
   std::cout << std::endl;
 }
+
+
+template<typename T>
+using LabelsArray = std::array<T, 1000>;
 
 //////////////
 // IS HISTO //
@@ -618,6 +585,18 @@ void setlabelToPariscrystal (Label const & nb_labels)
   }
 }
 
+std::pair<Float_t,Float_t> sectorCoincToPos(Label const & Ring, Label const & Sector)
+{
+  Float_t r = 55-Ring;
+  r+=gRandom->Uniform(-1,1)*0.25;
+
+  int label_sector = (Sector<16) ? (Sector) : (Sector-4);
+  Float_t phi = 0.19634975*label_sector; // 0,19634975 = 2*pi/32
+  phi += 0.19634975*gRandom->Uniform(0.05,0.95);
+  r = 1.5+r*(4.1-1.5)/15;
+  return (std::make_pair(r*TMath::Cos(phi), r*TMath::Sin(phi)));
+}
+
 std::vector<Double_t> Ge_Labels =
 { 25 ,26 ,27 ,28,  31 ,32 ,33 ,34 , 37 ,38 ,39 ,40 , 43 ,44 ,45 ,46 , 49 ,50 ,51 ,52 , 55 ,56 ,57 ,58 ,
   61 ,62 ,63 ,64,  67 ,68 ,69 ,70 , 73 ,74 ,75 ,76 , 79 ,80 ,81 ,82 , 85 ,86 ,87 ,88 , 91 ,92 ,93 ,94 ,
@@ -638,86 +617,7 @@ std::vector<Double_t> LaBr3_Labels =
   210,211,212,213,214, 215,216,217,218,219
 };
 
-std::vector<Double_t> Paris_Labels =
-{
-  201, 202, 203, 204, 205, 206, 207, 208,
-  301, 302, 303, 304, 305, 306, 307, 308, 309, 310, 311, 312, 313, 314, 315, 316,
-  401, 402, 403, 404, 405, 406, 407, 408, 409, 410, 411, 412,
-  501, 502, 503, 504, 505, 506, 507, 508,
-  601, 602, 603, 604, 605, 606, 607, 608, 609, 610, 611, 612, 613, 614, 615, 616,
-  701, 702, 703, 704, 705, 706, 707, 708, 709, 710, 711, 712
-};
-
-std::vector<int> Paris_R1_x =
-{
-  -2,  0,  2,
-  2,
-  2,  0, -2,
-  -2
-};
-
-std::vector<int> Paris_R2_x =
-{
-  -4, -2,  0,  2,  4,
-  4,  4,  4,
-  4,  2,  0, -2, -4,
-  -4, -4, -4
-};
-
-std::vector<int> Paris_R3_x =
-{
-  -2,  0,  2,
-   6,  6,  6,
-   2,  0, -2,
-  -6, -6, -6,
-};
-
-std::vector<int> Paris_R1_y =
-{
-  2,  2,  2,
-  0,
-  -2, -2, -2,
-  0
-};
-
-std::vector<int> Paris_R2_y =
-{
-  4,  4,  4,  4,  4,
-  2,  0, -2,
-  -4, -4, -4, -4, -4,
-  -2,  0,  2
-};
-
-std::vector<int> Paris_R3_y =
-{
-   6,  6,  6,
-   2,  0, -2,
-  -6, -6, -6,
-  -2,  0,  2,
-};
-
-class Paris_XY
-{
-public:
-  Paris_XY(){}
-  Paris_XY(Paris_Label const & l)
-  {
-    switch (l.ring)
-    {
-      case 1: m_x = Paris_R1_x[l.label-1]; m_y = Paris_R1_y[l.label-1]; break;
-      case 2: m_x = Paris_R2_x[l.label-1]; m_y = Paris_R2_y[l.label-1]; break;
-      case 3: m_x = Paris_R3_x[l.label-1]; m_y = Paris_R3_y[l.label-1]; break;
-      default: print("problème code..."); break;
-    }
-  }
-  int const & x() {return m_x;}
-  int const & y() {return m_y;}
-
-private:
-  int m_x = 0;
-  int m_y = 0;
-};
-
+#include "Analyse/ParisLabel.hpp"
 
 void setArrays(size_t const & nb_labels)
 {
@@ -731,6 +631,7 @@ void setArrays(size_t const & nb_labels)
   setlabelToPariscrystal(nb_labels);
   setLabelToClover_fast();
   setlabelToCloverCrystal_fast();
+  ParisLabel::setArrays();
 }
 
 
@@ -924,10 +825,14 @@ bool file_exists(std::string fileName)
   return false;
 }
 
+void makePath(std::string & folderName)
+{
+  if (folderName.back() != '/') folderName.push_back('/');
+}
 
 bool folder_exists(std::string folderName)
 {
-  if (folderName.back() != '/') folderName.push_back('/');
+  makePath(folderName);
   DIR *dp = nullptr;
   dp = opendir(folderName.c_str());
   bool ret = !(dp == nullptr);
@@ -935,15 +840,17 @@ bool folder_exists(std::string folderName)
   return ret;
 }
 
-bool folder_exists(std::string folderName, Bool_t verbose)
+bool folder_exists(std::string & folderName, Bool_t const & verbose)
 {
+  makePath(folderName);
   if (folder_exists(folderName)) return true;
   if (verbose) std::cout << "Folder " << folderName << " not found..." << std::endl;
   return false;
 }
 
-void create_folder_if_none(std::string const & folderName="")
+void create_folder_if_none(std::string & folderName)
 {
+  makePath(folderName);
   if (folderName=="")
   {
     print("No folder asked for !");
@@ -955,10 +862,10 @@ void create_folder_if_none(std::string const & folderName="")
   }
 }
 
-int nb_files_in_folder(std::string folderName)
+int nb_files_in_folder(std::string & folderName)
 {
   int ret = -1;
-  if (folderName.back() != '/') folderName.push_back('/');
+  makePath(folderName);
   DIR *dp = nullptr;
   dp = opendir(folderName.c_str());
   if(dp == nullptr) ret = -1;
@@ -972,10 +879,10 @@ int nb_files_in_folder(std::string folderName)
   return ret;
 }
 
-std::string get_filename_at(std::string folderName, int pos)
+std::string get_filename_at(std::string & folderName, int pos)
 {
   std::string ret;
-  if (folderName.back() != '/') folderName.push_back('/');
+  makePath(folderName);
   struct dirent *file = nullptr;
   DIR *dp = nullptr;
   dp = opendir(folderName.c_str());
@@ -993,7 +900,7 @@ std::string get_filename_at(std::string folderName, int pos)
 int check_new_file(std::string folderName, std::string & lastFile)
 {
   int ret = -1;
-  if (folderName.back() != '/') folderName.push_back('/');
+  makePath(folderName);
   DIR *dp = nullptr;
   dp = opendir(folderName.c_str());
   struct dirent *file = nullptr;
@@ -1198,7 +1105,7 @@ Detector type_det(UShort_t const & label)
   else if (isBGO   [label]) return BGO;
   else if (isLaBr3 [label]) return LaBr3;
   else if (isParis [label]) return Paris;
-  else if (isDSSD  [label]) return DSSD;
+  else if (isDSSD  [label]) return dssd;
   else if (is_RF   (label)) return RF;
   else if (is_EDEN (label)) return EDEN;
   else                      return null;
@@ -1218,17 +1125,12 @@ Detector type_det(std::string name)
   else if ( (type == "BGO1") || (type == "BGO2") || (type == "BGO") ) return BGO;
   else if (type == "LaBr3") return LaBr3;
   else if (name.substr(0,name.find("_")) == "PARIS") return Paris;
-  else if (lastPart(name,'_') == "DSSD") return DSSD;
+  else if (lastPart(name,'_') == "DSSD") return dssd;
   else return null;
 }
 
 UShort_t checkThreads(UShort_t nOfThreads, UInt_t const &numberFiles)
 {
-  if(nOfThreads > std::thread::hardware_concurrency())
-  {
-    nOfThreads = std::thread::hardware_concurrency();
-    std::cout << "Number of threads too large (hardware) -> reset to " << nOfThreads << std::endl;
-  }
   if(nOfThreads > numberFiles)
   {
     nOfThreads = numberFiles;
@@ -1365,6 +1267,15 @@ std::pair<Float_t,Float_t> DSSD_pos_smooth(int const & sector, int const & ring)
   r = 1.5+r*(4.1-1.5)/15;
   Float_t theta = 2*3.141596/32*(sector+gRandom->Uniform(0,1));
   return std::make_pair(r*TMath::Cos(theta),r*TMath::Sin(theta));
+}
+
+template < class T >
+std::istringstream & operator >> (std::istringstream & is, std::vector<T>& v)
+{
+  T t;
+  is >> t;
+  v.push_back(t);
+  return is;
 }
 
 #ifdef PARIS

@@ -1,13 +1,15 @@
 [Data]
 # list_runs: Parameters/list_runs.list
 list_runs: Parameters/list_runs_good_pulse.list
-# folder: ../Data_129/DSSD_TRIG/
+# list_runs: Parameters/run_test.list
 folder: ../Data_129/DSSDFinal/
+# folder: ../Data_129/DSSD_TRIG/
 end
 
 [Isomer]
 outDir: 129/Analyse/Isomer/
-outRoot: good_pulse.root
+outRoot: test.root
+# outRoot: good_pulse.root
 # outRoot: total.root
 # writeDSSD
 gate: prompt Ge -10 20
@@ -15,8 +17,21 @@ gate: delayed Ge 70 150
 end
 
 [DSSD]
-outDir: 129/Analyse/DSSD/
+# outDir: 129/Analyse/DSSD/
+outDir: 129/Analyse/DSSD/gate642/
+# outRoot: all_pulsed_runs.root
 outRoot: good_pulse.root
+binning: 3000 0 30000
+end
+
+[TimewalkDSSD]
+outDir: 129/Analyse/DSSD/
+# outRoot: all_pulsed_timewalk.root
+outRoot: good_pulsed_timewalk.root
+# outRoot: test_runs_timewalk.root
+# writedata
+correct
+gate: 639 645 650 656
 end
 
 [Run Check]

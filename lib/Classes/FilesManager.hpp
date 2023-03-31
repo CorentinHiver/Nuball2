@@ -21,14 +21,21 @@ public:
   void   printFolders ();
 
   //Getters :
-  Int_t       size           () { return m_listFiles.size() ;}
-  Bool_t      isEmpty        () { return (this->size() == 0);}
-  ListFiles   getListFiles   () { return m_listFiles        ;}
-  ListFolders getListFolders () { return m_listFolder       ;}
-  Int_t       getCursor      () { return m_filesCursor      ;}
+  ListFiles   const & getListFiles     () const { return m_listFiles ;}
+  ListFolders const & getListFolders   () const { return m_listFolder;}
+
+  ListFiles const & getFilesInFolder (std::string folder)
+  {
+    if (folder.back()!='/') folder.push_back('/');
+    return m_listFilesInFolder[folder];
+  }
+
+  size_t const & getCursor () const { return m_filesCursor;}
+  size_t size () const { return m_listFiles.size();}
+  Bool_t isEmpty () { return (this->size() == 0);}
 
   //Files reader :
-  std::string getFile    (int const & n = -1)
+  virtual std::string getFile    (int const & n = -1)
   {
     if (n<0) return m_listFiles[m_filesCursor];
     else return m_listFiles[n];
@@ -47,6 +54,7 @@ protected:
   size_t      m_filesCursor = 0;
   ListFiles   m_listFiles;
   ListFolders m_listFolder;
+  std::map<std::string, ListFiles> m_listFilesInFolder;
   bool isReadable = false;
   bool verbose = false;
 };
@@ -121,6 +129,7 @@ Bool_t FilesManager::addFolder(std::string _foldername, int _nb_files)
     std::sort(listfile.begin(), listfile.end());// Sorts the entries
     if (_nb_files>(int)listfile.size() || _nb_files == -1) _nb_files = listfile.size();//Sets the correct number of files to keep
     ListFiles cut_listfile (listfile.begin(), listfile.begin()+_nb_files);// Take the nb_files first files of the folder
+    for (auto const & file : cut_listfile) m_listFilesInFolder[_foldername].emplace_back(file);
     if (m_listFiles.size() == 0) m_listFiles = cut_listfile;// Set cut_listfile to be the global list of files
     else std::copy(cut_listfile.begin(), cut_listfile.end(), back_inserter(m_listFiles));// Add cut_listfile to the global list of files
     if (verbose) print( cut_listfile.size(), "files added,", m_listFiles.size(), "files to process");

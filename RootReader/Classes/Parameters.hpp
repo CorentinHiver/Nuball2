@@ -12,6 +12,7 @@ public:
   // Deals with the parameters file :
   bool readParameters(std::string const & file = "Parameters/rootReader.setup");
   bool setParameters(int argc, char ** argv);
+  bool checkParameters();
   bool setData();
   // To retrieve the parameters :
   std::vector<std::string> const & getParameters(std::string const & module);
@@ -23,6 +24,11 @@ public:
   MTList<std::string> & filesMT() {return m_list_files;}
   bool getNextFile(std::string & filename) {return m_list_files.getNext(filename);}
   bool getNextRun(std::string & run) {return m_list_runs.getNext(run);}
+
+  ListFiles const & getRunFiles(std::string const & run)
+  {
+    return m_files.getFilesInFolder(m_dataPath+run);
+  }
 
   std::string const & getDataPath() {return m_dataPath;}
 
@@ -48,13 +54,18 @@ private:
 
   std::map<std::string, std::vector<std::string>> m_parameters; // key : module, value : list of module's parameters
 
-  uchar m_nbThreads = 1;
+  size_t m_nbThreads = 1;
 
   std::string m_dataPath;
   FilesManager m_files;
   MTList<std::string> m_list_files;
   MTList<std::string> m_list_runs;
 };
+
+bool Parameters::checkParameters()
+{
+  return true;
+}
 
 std::vector<std::string> const & Parameters::getParameters(std::string const & module)
 {
@@ -107,6 +118,13 @@ bool Parameters::readParameters(std::string const & file)
   }
   else {print("Can't read the parameter file !");return false;}
   if (!this -> setData()) return false;
+
+  if(m_nbThreads > m_files.size())
+  {
+    std::cout << "Number of threads too large (too few files to be processed) -> reset to " << m_files.size() << std::endl;
+    m_nbThreads = m_files.size();
+  }
+
   return true;
 }
 
@@ -125,14 +143,17 @@ bool Parameters::setData()
       }
       else if (temp == "folder:")
       {
-        if(m_list_runs.size()<1) { print("Set the list of runs before setting the folder !"); return false;}
         is >> m_dataPath;
-        for (auto const & run : m_list_runs) m_files.addFolder(m_dataPath+run);
-        m_list_files = m_files.getListFiles();
+        if (m_dataPath.back() != '/') m_dataPath.push_back('/');
       }
       else {print(temp,"parameter unkown for Data module!!");return false;}
     }
   }
+
+  if(m_list_runs.size()<1) { print("No runs list !"); return false;}
+  for (auto const & run : m_list_runs) m_files.addFolder(m_dataPath+run);
+  m_list_files = m_files.getListFiles();
+
   return true;
 }
 

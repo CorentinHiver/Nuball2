@@ -1,190 +1,166 @@
-#ifndef RUNCHECK_HD
-#define RUNCHECK_HD
-
+#ifndef RUNCHECK_H
+#define RUNCHECK_H
+#include "../../lib/utils.hpp"
+#include "../../lib/MTObjects/MTTHist.hpp"
 #include "../Classes/Parameters.hpp"
+
 
 class RunCheck
 {
 public:
-  RunCheck(){}
-  void InitializeRun();
-  void SetConfig(Parameters & p);
+
+  RunCheck(){};
+  bool launch(Parameters & p);
+  bool setParameters(std::vector<std::string> const & param);
+  static void run(Parameters & p, RunCheck & runcheck);
+  void Initialize();
+  void InitializeRun(std::string const & run);
+  void TreatRun(std::string const & run, Parameters & p);
   void FillRaw(Event const & event);
-  void FillSorted(Sorted_Event const & event);
-  void WriteRun(std::string const & outRoot);
-
-  void SetRF(RF_Manager* rf) {m_rf = rf;}
-
+  void FillSorted(Sorted_Event const & event_s, Event const & event);
+  void AnalyseRun();
+  void WriteRun(std::string const & _run);
+  void WriteManip();
 private:
 
-  std::string m_outDir = "129/RunsCheck/";
-  std::string m_outRoot = "run_check.root";
-  // Multiplicity :
-    // 1D
-  TH1F* m_raw_mult;
-  TH1F* m_Ge_crystals_mult;
-  TH1F* m_BGO_crystals_mult;
-  TH1F* m_LaBr3_crystals_mult;
-  TH1F* m_Paris_crystals_mult;
-  TH1F* m_Clover_Ge_mult;
-  TH1F* m_Clover_BGO_mult;
-  TH1F* m_Clover_mult;
-  TH1F* m_Clean_Clover_Ge_mult;
-  TH1F* m_Veto_Clover_Ge_mult;
-  TH1F* m_module_mult;
-    // 2D
-  TH2F* m_Clean_Ge_VS_Paris_mult;
-  TH2F* m_Clean_Ge_VS_Modules_mult;
+  // ---- Parameters ---- //
+  std::string param_string = "RunCheck";
+  size_t nbThreads = 1.;
+  friend class MTObject;
 
-  // Pulsation :
-  RF_Manager *m_rf;
-  TH2F* m_each_detector_VS_pulsation;
-  TH2F* m_ref_LaBr3_nrj_VS_time;
+  // ---- Variables ---- //
+  std::string m_outDir  = "129/RunCheck/";
+  std::string m_outRoot = "RunCheck.root";
 
-  // Energy
-  TH2F* m_each_detector_energy;
+  // ---- Histograms ---- //
+  MTTHist<TH1F> testRun;
+  MTTHist<TH1F> testManip;
 };
 
-void RunCheck::SetConfig(Parameters & p)
+bool RunCheck::launch(Parameters & p)
 {
-  std::vector<std::string> parameters = p.getParameters("rc");
-
-  // for (auto const & param : parameters)
-  // {
-  //   std::istrinstream is (param);
-  //   std::string temp;
-  //   while (is>>temp)
-  //   {
-  //          if (temp == "outDir:" ) is>>m_outDir;
-  //     else if (temp == "outRoot:") is>>m_outRoot;
-  //   }
-  // }
+  if (!this -> setParameters(p.getParameters(param_string))) return false;
+  this -> Initialize();
+  print("Starting !");
+  MTObject::parallelise_function(run, p, *this);
+  return true;
 }
 
-void RunCheck::InitializeRun()
+void RunCheck::Initialize()
 {
-  m_raw_mult = new TH1F("Crystals Multiplicity", "Crystals Multiplicity", 50, 0, 50);
-  m_Ge_crystals_mult = new TH1F("Ge crystals Multiplicity", "Ge crystals Multiplicity", 50, 0, 50);
-  m_BGO_crystals_mult = new TH1F("BGO crystals Multiplicity", "BGO crystals Multiplicity", 50, 0, 50);
-  m_LaBr3_crystals_mult = new TH1F("LaBr3 crystals Multiplicity", "LaBr3 crystals Multiplicity", 50, 0, 50);
-  m_Paris_crystals_mult = new TH1F("Paris crystals Multiplicity", "Paris crystals Multiplicity", 50, 0, 50);
-  m_Clover_Ge_mult = new TH1F("Ge Clover Multiplicity", "Ge Clover Multiplicity", 50, 0, 50);
-  m_Clover_BGO_mult = new TH1F("BGO Clover Multiplicity", "BGO Clover Multiplicity", 50, 0, 50);
-  m_Clover_mult = new TH1F("Clover Multiplicity", "Clover Multiplicity", 50, 0, 50);
-  m_Clean_Clover_Ge_mult = new TH1F("Clean Ge Clover Multiplicity", "Clean Ge Clover Multiplicity", 50, 0, 50);
-  m_Veto_Clover_Ge_mult = new TH1F("Veto Ge Clover (garbage) Multiplicity", "Veto Ge Clover (garbage) Multiplicity", 50, 0, 50);
-  m_module_mult = new TH1F("Modules Multiplicity", "Modules Multiplicity", 50, 0, 50);
-    // 2D
-  m_Clean_Ge_VS_Paris_mult = new TH2F("Ge Clover mult VS Paris mult", "Ge Clover mult VS Paris mult",
-      50,0,50, 50,0,50);
-  m_Clean_Ge_VS_Modules_mult = new TH2F("Ge Clover mult VS Modules mult", "Ge Clover mult VS Modules mult",
-      50,0,50, 50,0,50);
+  testManip.reset("test Manip", "test", 100, 0, 100);
+}
 
-  // Pulsation :
-  m_each_detector_VS_pulsation = new TH2F("Each detector pulse timing","Each detector pulse timing",
-      g_labelToName.size(),0.5,g_labelToName.size()+0.5, 500,-100, 400);
-  m_ref_LaBr3_nrj_VS_time = new TH2F("Reference LaBr3 nrj VS time","Reference LaBr3 nrj VS time",
-      5000,-100,400, 1000,0,5000);
+void RunCheck::run(Parameters & p, RunCheck & runcheck)
+{
+  std::string _run;
+  while(p.getNextRun(_run))
+  {
+    runcheck.TreatRun(_run, p);
+  } // End files loop
+}
 
-  // Energy :
-  m_each_detector_energy = new TH2F("Each detector nrj","Each detector nrj",
-      g_labelToName.size(),0.5,g_labelToName.size()+0.5, 5000,0,2500);
+void RunCheck::TreatRun(std::string const & _run, Parameters & p)
+{
+  this -> InitializeRun(_run);
+  std::vector<std::string> listFilesRun = p.getRunFiles(_run);
+  Sorted_Event event_s;
+  Timer timer;
+  int run_size = 0;
+  for (auto const & rootfile : listFilesRun)
+  {
+    std::unique_ptr<TFile> file (TFile::Open(rootfile.c_str(), "READ"));
+    if (file->IsZombie()) {print(rootfile, "is a Zombie !");continue;}
+    std::unique_ptr<TTree> tree (file->Get<TTree>("Nuball"));
+    Event event(tree.get(), "lTn");
 
+    size_t events = tree->GetEntries();
+    p.totalCounter+=events;
+
+    auto const & filesize = size_file(rootfile, "Mo");
+    p.totalFilesSize+=filesize;
+    run_size+=filesize;
+
+    for (size_t i = 0; i<events; i++)
+    {
+      tree->GetEntry(i);
+      event_s.sortEvent(event);
+      this -> FillSorted(event_s, event);
+      this -> FillRaw(event);
+    } // End event loop
+  }
+  auto const & time = timer();
+  print(_run, time, timer.unit(), ":", run_size/timer.TimeSec(), "Mo/s");
+  this -> WriteRun(_run);
+}
+
+void RunCheck::InitializeRun(std::string const & run_name)
+{
+  // auto const & threadNb = MTObject::getThreadIndex();
+  testRun.reset("test_"+run_name,"test",100,0,100);
 }
 
 void RunCheck::FillRaw(Event const & event)
 {
-  for (size_t loop = 0; loop<event.size(); loop++)
-  {
-    auto const & label = event.labels[loop];
-    auto const & time = event.times[loop];
-    auto const & nrj = event.nrjs[loop];
-
-    if (label == 251)
-    {
-      m_rf->period = nrj;
-      // m_rf->period = (time-m_rf->last_hit)/1000.;
-      m_rf->last_hit = time;
-      continue;
-    }
-    auto const time_pulse = m_rf -> pulse_ToF(time,50000ll)/_ns;
-    m_each_detector_VS_pulsation -> Fill(label, time_pulse);
-
-    if (label == 252) m_ref_LaBr3_nrj_VS_time -> Fill(time_pulse, nrj);
-  }
+  // for (size_t i = 0; i<event.size(); i++)
+  // {
+  //
+  // }
 }
 
-void RunCheck::FillSorted(Sorted_Event const & event)
+void RunCheck::FillSorted(Sorted_Event const & event_s, Event const & event)
 {
-  m_raw_mult -> Fill(event.RawMult);
-  m_Ge_crystals_mult -> Fill(event.RawGeMult);
-  // m_BGO_crystals_mult -> Fill(event.RawBGOMult);
-  m_LaBr3_crystals_mult -> Fill(event.LaBr3Mult);
-  #ifdef PARIS
-  m_Paris_crystals_mult -> Fill(event.ParisMult);
-  #endif //PARIS
-  m_Clover_Ge_mult -> Fill(event.CloverGeMult);
-  m_Clover_BGO_mult -> Fill(event.BGOMult);
-  m_Clover_mult -> Fill(event.CloverMult);
-  m_Clean_Clover_Ge_mult -> Fill(event.CleanGeMult);
-  m_Veto_Clover_Ge_mult -> Fill(event.ComptonVetoMult);
-  m_module_mult -> Fill(event.ModulesMult);
-
-  m_Clean_Ge_VS_Paris_mult -> Fill(event.ParisMult, event.CleanGeMult);
-  m_Clean_Ge_VS_Modules_mult -> Fill(event.ModulesMult, event.CleanGeMult);
+  // auto const & thread_i = MTObject::getThreadIndex();
+   for (size_t loop_i = 0; loop_i<event_s.clover_hits.size(); loop_i++)
+   {
+     auto const & clover_i = event_s.clover_hits[loop_i];
+     auto const & nrj_i = event_s.nrj_clover[clover_i];
+     testRun.Fill(nrj_i);
+     testManip.Fill(nrj_i);
+   }
 }
 
-void RunCheck::WriteRun(std::string const & outRoot)
+void RunCheck::AnalyseRun()
 {
-  std::unique_ptr<TFile> outfile(TFile::Open(outRoot.c_str(),"RECREATE"));
-  outfile->cd();
 
-  if(m_raw_mult && m_raw_mult->Integral()>1) m_raw_mult -> Write();
-  if(m_Ge_crystals_mult && m_Ge_crystals_mult->Integral()>1) m_Ge_crystals_mult -> Write();
-  // m_BGO_crystals_mult -> Fill(event.RawBGOMult);
-  if(m_LaBr3_crystals_mult && m_LaBr3_crystals_mult->Integral()>1) m_LaBr3_crystals_mult -> Write();
-  #ifdef PARIS
-  if(m_Paris_crystals_mult && m_Paris_crystals_mult->Integral()>1) m_Paris_crystals_mult -> Write();
-  #endif //PARIS
-  if(m_Clover_Ge_mult && m_Clover_Ge_mult->Integral()>1) m_Clover_Ge_mult -> Write();
-  if(m_Clover_BGO_mult && m_Clover_BGO_mult->Integral()>1) m_Clover_BGO_mult -> Write();
-  if(m_Clover_mult && m_Clover_mult->Integral()>1) m_Clover_mult -> Write();
-  if(m_Clean_Clover_Ge_mult && m_Clean_Clover_Ge_mult->Integral()>1) m_Clean_Clover_Ge_mult -> Write();
-  if(m_Veto_Clover_Ge_mult && m_Veto_Clover_Ge_mult->Integral()>1) m_Veto_Clover_Ge_mult -> Write();
-  if(m_module_mult && m_module_mult->Integral()>1) m_module_mult -> Write();
+}
 
-  if(m_Clean_Ge_VS_Paris_mult && m_Clean_Ge_VS_Paris_mult->Integral()>1) m_Clean_Ge_VS_Paris_mult -> Write();
-  if(m_Clean_Ge_VS_Modules_mult && m_Clean_Ge_VS_Modules_mult->Integral()>1) m_Clean_Ge_VS_Modules_mult -> Write();
-
-  if(m_each_detector_VS_pulsation && m_each_detector_VS_pulsation->Integral()>1) m_each_detector_VS_pulsation -> Write();
-  if(m_ref_LaBr3_nrj_VS_time && m_ref_LaBr3_nrj_VS_time->Integral()>1) m_ref_LaBr3_nrj_VS_time -> Write();
-
-  delete m_raw_mult;
-  delete m_Ge_crystals_mult;
-  delete m_BGO_crystals_mult;
-  delete m_LaBr3_crystals_mult;
-  delete m_Paris_crystals_mult;
-  delete m_Clover_Ge_mult;
-  delete m_Clover_BGO_mult;
-  delete m_Clover_mult;
-  delete m_Clean_Clover_Ge_mult;
-  delete m_Veto_Clover_Ge_mult;
-  delete m_module_mult;
-    // 2D
-  delete m_Clean_Ge_VS_Paris_mult;
-  delete m_Clean_Ge_VS_Modules_mult;
-
-  // Pulsation :
-  delete m_each_detector_VS_pulsation;
-  delete m_ref_LaBr3_nrj_VS_time;
-
-  // Energy
-  delete m_each_detector_energy;
-
+void RunCheck::WriteRun(std::string const & _run)
+{
+  auto const & threadNb = MTObject::getThreadIndex();
+  create_folder_if_none(outPath);
+  std::unique_ptr<TFile> outfile(TFile::Open((m_outDir+_run+m_outRoot).c_str(),"recreate"));
+  if (testRun[threadNb]) testRun[threadNb]->Write();
   outfile->Write();
   outfile->Close();
-  print("Run check written to ", outRoot);
+  print("Writting ", outPath+m_outRoot);
 }
 
+void WriteManip()
+{
+  print("Writting histograms ...");
+  std::unique_ptr<TFile> outfile(TFile::Open((outPath+m_outRoot).c_str(),"recreate"));
 
-#endif //RUNCHECK_HD
+}
+
+bool RunCheck::setParameters(std::vector<std::string> const & parameters)
+{
+  for (auto const & param : parameters)
+  {
+    std::istringstream is(param);
+    std::string temp;
+    while(is>>temp)
+    {
+      if (temp == "outDir:")  is >> m_outDir;
+      else if (temp == "outRoot:")  is >> m_outRoot;
+      else
+      {
+        print("Parameter", temp, "for RunCheck unkown...");
+        return false;
+      }
+    }
+  }
+  return true;
+}
+
+#endif //RUNCHECK_H

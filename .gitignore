@@ -1,5 +1,7 @@
 *.root
 *.png
+*.tw
+*.m4b
 #NearLine/NearLine-lib/Modules/Analyse_W.hpp
 RootReader/Convertor
 RootReader/Reader

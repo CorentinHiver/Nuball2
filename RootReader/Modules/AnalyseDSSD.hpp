@@ -1,40 +1,41 @@
-#ifndef DSSD_H
-#define DSSD_H
-
+#ifndef ANALYSEDSSD_H
+#define ANALYSEDSSD_H
+#include "../../lib/utils.hpp"
 #include "../../lib/MTObjects/MTTHist.hpp"
+#include "../Classes/Parameters.hpp"
+
 
 class AnalyseDSSD
 {
 public:
-  AnalyseDSSD(){}
 
-  bool setParameters(std::string const & parameters);
-  void Initialize();
-  void InitializeRun();
-  void FillRaw(Event const & event){}
+  AnalyseDSSD(){};
+  bool launch(Parameters & p);
+  bool setParameters(std::vector<std::string> const & param);
+  void InitializeManip();
+  static void run(Parameters & p, AnalyseDSSD & analysedssd);
+  void FillRaw(Event const & event);
   void FillSorted(Sorted_Event const & event_s, Event const & event);
-  void WriteRun();
-  void WriteManip();
-
-  void setBinningSpectra(int const & bins, Float_t const & min, Float_t const & max)
-  {
-    m_bins_spectra = bins;
-    m_min_spectra  = min ;
-    m_max_spectra  = max ;
-  }
-
+  void Write();
 private:
 
-  // ---- Parameters ---- //
-  std::string m_outDir = "test_ds.root";
-  std::string m_outRoot = "";
+  // Parameters
+  std::string param_string = "DSSD";
+  friend class MTObject;
+  std::string outDir  = "129/AnalyseDSSD/";
+  std::string outRoot = "AnalyseDSSD.root";
 
-  // ---- Variables ---- //
-  int m_bins_spectra = 10000;
-  Float_t m_min_spectra = 0;
-  Float_t m_max_spectra = 20000;
+  // ---- Parameters ---- //
+
+  int m_bins_spectra = 0;
+  Float_t m_min_spectra = 0.;
+  Float_t m_max_spectra = 0.;
 
   // ---- Histograms ---- //
+  MTTHist<TH1F> m_Ge_spectra_gate_on_particle_20MeV;
+  MTTHist<TH1F> m_Ge_spectra_gate_on_particle_sup_11MeV_R15; // Rings intérieurs
+  MTTHist<TH1F> m_Ring_14_spectra;
+
   MTTHist<TH2F> m_each_Sector_spectra;
   MTTHist<TH2F> m_each_Ring_spectra;
 
@@ -42,40 +43,74 @@ private:
   MTTHist<TH2F> m_each_Sector_spectra_nRnS;
   MTTHist<TH2F> m_each_Ring_spectra_nRnS;
 
+  //1 ring 1 sector
+  MTTHist<TH2F> m_R_VS_S;
+  MTTHist<TH2F> m_R_VS_S_time;
+  //2 rings 2 sectors
+  MTTHist<TH2F> m_R1_VS_R2;
+  MTTHist<TH2F> m_S1_VS_S2;
+  MTTHist<TH2F> m_R1_VS_S1;
+  MTTHist<TH2F> m_R1_VS_S2;
+  MTTHist<TH2F> m_R2_VS_S1;
+  MTTHist<TH2F> m_R2_VS_S2;
+
+  MTTHist<TH2F> m_R1_VS_R2_time;
+  MTTHist<TH2F> m_S1_VS_S2_time;
+  MTTHist<TH2F> m_R1_VS_S1_time;
+  MTTHist<TH2F> m_R1_VS_S2_time;
+  MTTHist<TH2F> m_R2_VS_S1_time;
+  MTTHist<TH2F> m_R2_VS_S2_time;
+
   Vector_MTTHist<TH2F> m_each_DSSD_VS_Time;
 };
 
-bool AnalyseDSSD::setParameters(std::string const & parameters)
+bool AnalyseDSSD::launch(Parameters & p)
 {
-  std::istringstream pa(parameters);
-  std::string line;
-  while(getline(pa,line))
-  {
-    std::istringstream is(line);
-    std::string temp;
-    while(is>>temp)
-    {
-           if (temp == "outDir:")  is >> m_outDir ;
-      else if (temp == "outRoot:") is >> m_outRoot;
-    }
-  }
+  if (!this -> setParameters(p.getParameters(param_string))) return false;
+  this -> InitializeManip();
+  print("Starting !");
+  MTObject::parallelise_function(run, p, *this);
+  this -> Write();
   return true;
 }
 
-void AnalyseDSSD::FillSorted(Sorted_Event const & event_s, Event const & event)
+void AnalyseDSSD::run(Parameters & p, AnalyseDSSD & analysedssd)
 {
-  for (size_t loop_i = 0; loop_i<event_s.DSSD_hits.size(); loop_i++)
+  std::string rootfile;
+  Sorted_Event event_s;
+  event_s.addGeGateTrig(639,645);
+  event_s.addGeGateTrig(647,653);
+  while(p.getNextFile(rootfile))
   {
-    // auto const & dssd_i = event_s.DSSD_hits[loop_i];
-    //
-    // auto const & label = event.labels[dssd_i];
-    // auto const & Time = event_s.times[dssd_i];
-    // auto const & nrj = event.nrjs[dssd_i];
-  }
+    Timer timer;
+
+    std::unique_ptr<TFile> file (TFile::Open(rootfile.c_str(), "READ"));
+    if (file->IsZombie()) {print(rootfile, "is a Zombie !");continue;}
+    std::unique_ptr<TTree> tree (file->Get<TTree>("Nuball"));
+    Event event(tree.get(), "lTn");
+
+    size_t events = tree->GetEntries();
+    p.totalCounter+=events;
+
+    auto const & filesize = size_file(rootfile, "Mo");
+    p.totalFilesSize+=filesize;
+
+    for (size_t i = 0; i<events; i++)
+    {
+      tree->GetEntry(i);
+      event_s.sortEvent(event);
+      analysedssd.FillSorted(event_s,event);
+      analysedssd.FillRaw(event);
+    } // End event loop
+    auto const & time = timer();
+    print(removePath(rootfile), time, timer.unit(), ":", filesize/timer.TimeSec(), "Mo/sec");
+  } // End files loop
 }
 
-void AnalyseDSSD::Initialize()
+void AnalyseDSSD::InitializeManip()
 {
+  print("Initialize histograms");
+  m_Ring_14_spectra.reset("Ring 15","Ring 15",10000,0,100000);
   m_each_Sector_spectra.reset("Each sector spectra","Each sector spectra",
       36,0,36, m_bins_spectra,m_min_spectra,m_max_spectra);
   m_each_Ring_spectra.reset("Each ring spectra","Each ring spectra",
@@ -84,16 +119,183 @@ void AnalyseDSSD::Initialize()
       36,0,36, m_bins_spectra,m_min_spectra,m_max_spectra);
   m_each_Ring_spectra_nRnS.reset("Each ring spectra nRnS","Each ring spectra same number of sectors and rings",
       16,0,16, m_bins_spectra,m_min_spectra,m_max_spectra);
+
+  m_R_VS_S.reset("1R1S Ring VS Sector","1R1S Ring VS Sector", m_bins_spectra,m_min_spectra,m_max_spectra, m_bins_spectra,m_min_spectra,m_max_spectra);
+  m_R_VS_S_time.reset("1R1S Ring VS Sector Time","1R1S Ring VS Sector Time", 500,-100,400, 500,-100,400);
+
+  m_R1_VS_R2.reset("2R2S Ring 1 VS Rings 2","2R2S Ring 1 VS Rings 2", m_bins_spectra,m_min_spectra,m_max_spectra, m_bins_spectra,m_min_spectra,m_max_spectra);
+  m_S1_VS_S2.reset("2R2S Sector 1 VS Sector 2","2R2S Sector 1 VS Sector 2", m_bins_spectra,m_min_spectra,m_max_spectra, m_bins_spectra,m_min_spectra,m_max_spectra);
+  m_R1_VS_S1.reset("2R2S Ring 1 VS Sector 1","2R2S Ring 1 VS Sector 1", m_bins_spectra,m_min_spectra,m_max_spectra, m_bins_spectra,m_min_spectra,m_max_spectra);
+  m_R1_VS_S2.reset("2R2S Ring 1 VS Sector 2","2R2S Ring 1 VS Sector 2", m_bins_spectra,m_min_spectra,m_max_spectra, m_bins_spectra,m_min_spectra,m_max_spectra);
+  m_R2_VS_S1.reset("2R2S Ring 2 VS Sector 1","2R2S Ring 2 VS Sector 1", m_bins_spectra,m_min_spectra,m_max_spectra, m_bins_spectra,m_min_spectra,m_max_spectra);
+  m_R2_VS_S2.reset("2R2S Ring 2 VS Sector 2","2R2S Ring 2 VS Sector 2", m_bins_spectra,m_min_spectra,m_max_spectra, m_bins_spectra,m_min_spectra,m_max_spectra);
+
+  m_R1_VS_R2_time.reset("2R2S Timing Ring 1 VS Rings 2","2R2S Timing Ring 1 VS Rings 2", 500,-100,400, 500,-100,400);
+  m_S1_VS_S2_time.reset("2R2S Timing Sector 1 VS Sector 2","2R2S Timing Sector 1 VS Sector 2", 500,-100,400, 500,-100,400);
+  m_R1_VS_S1_time.reset("2R2S Timing Ring 1 VS Sector 1","2R2S Timing Ring 1 VS Sector 1", 500,-100,400, 500,-100,400);
+  m_R1_VS_S2_time.reset("2R2S Timing Ring 1 VS Sector 2","2R2S Timing Ring 1 VS Sector 2", 500,-100,400, 500,-100,400);
+  m_R2_VS_S1_time.reset("2R2S Timing Ring 2 VS Sector 1","2R2S Timing Ring 2 VS Sector 1", 500,-100,400, 500,-100,400);
+  m_R2_VS_S2_time.reset("2R2S Timing Ring 2 VS Sector 2","2R2S Timing Ring 2 VS Sector 2", 500,-100,400, 500,-100,400);
+
+  m_Ge_spectra_gate_on_particle_20MeV.reset("Ge spectra gated on 20MeV peak","Ge spectra gated on 20MeV peak",20000,0,10000);
+  m_Ge_spectra_gate_on_particle_sup_11MeV_R15.reset("Ge gated on Ep > 11 MeV ring interieur","Ge spectra gated on E particule > 11 MeV ring interieur",20000,0,10000);
 }
 
-void AnalyseDSSD::WriteRun()
+void AnalyseDSSD::FillRaw(Event const & event){}
+
+void AnalyseDSSD::FillSorted(Sorted_Event const & event_s, Event const & event)
 {
+  auto const & gateGe = event_s.gateGe();
+  if (gateGe==0) return;
+  Float_t weight = (gateGe==1) ? 1 : -1;
+  // print(weight);
+  bool nRnS = false;
+  if (event_s.DSSDSectorMult == event_s.DSSDRingMult) nRnS = true;
+  // bool R2S2 = false;
+  if (event_s.DSSDSectorMult == 2 && event_s.DSSDRingMult == 2)
+  {
+    // R2S2 = true;
+    auto const & nrj_ring_1 = event.nrjs[event_s.DSSD_Rings[0]];
+    auto const & nrj_ring_2 = event.nrjs[event_s.DSSD_Rings[1]];
+    auto const & nrj_sector_1 = event.nrjs[event_s.DSSD_Sectors[0]];
+    auto const & nrj_sector_2 = event.nrjs[event_s.DSSD_Sectors[1]];
 
+    m_R1_VS_R2.Fill(nrj_ring_2, nrj_ring_1, weight);
+    m_S1_VS_S2.Fill(nrj_sector_2, nrj_sector_1, weight);
+    m_R1_VS_S1.Fill(nrj_sector_1, nrj_ring_1, weight);
+    m_R1_VS_S2.Fill(nrj_sector_1, nrj_ring_2, weight);
+    m_R2_VS_S1.Fill(nrj_sector_2, nrj_ring_1, weight);
+    m_R2_VS_S2.Fill(nrj_sector_2, nrj_ring_2, weight);
+
+    auto const & time_ring_1 = event.Times[event_s.DSSD_Rings[0]];
+    auto const & time_ring_2 = event.Times[event_s.DSSD_Rings[1]];
+    auto const & time_sector_1 = event.Times[event_s.DSSD_Sectors[0]];
+    auto const & time_sector_2 = event.Times[event_s.DSSD_Sectors[1]];
+
+    m_R1_VS_R2_time.Fill(time_ring_2, time_ring_1, weight);
+    m_S1_VS_S2_time.Fill(time_sector_2, time_sector_1, weight);
+    m_R1_VS_S1_time.Fill(time_sector_1, time_ring_1, weight);
+    m_R1_VS_S2_time.Fill(time_sector_2, time_ring_1, weight);
+    m_R2_VS_S1_time.Fill(time_sector_1, time_ring_2, weight);
+    m_R2_VS_S2_time.Fill(time_sector_2, time_ring_2, weight);
+  }
+
+  if (event_s.DSSDSectorMult == 1 && event_s.DSSDRingMult == 1)
+  {
+    // R2S2 = true;
+    auto const & nrj_ring = event.nrjs[event_s.DSSD_Rings[0]];
+    auto const & nrj_sector = event.nrjs[event_s.DSSD_Sectors[0]];
+
+    auto const & Time_ring = event.Times[event_s.DSSD_Rings[0]];
+    auto const & Time_sector = event.Times[event_s.DSSD_Sectors[0]];
+
+    m_R_VS_S.Fill(nrj_ring, nrj_sector, weight);
+    m_R_VS_S_time.Fill(Time_ring, Time_sector, weight);
+  }
+
+  for (size_t loop_i = 0; loop_i<event_s.DSSD_hits.size(); loop_i++)
+  {
+    auto const & dssd_i = event_s.DSSD_hits[loop_i];
+    auto const & ring_i = event_s.DSSD_is_Ring[loop_i];
+
+    auto const & raw_label_i = event.labels[dssd_i];
+    auto const & nrj_i = event.nrjs[dssd_i];
+
+
+    bool peak20MeV = false, fission_fragment = false;
+    if (nrj_i > 15000 && nrj_i < 23000) peak20MeV = true;
+    if (ring_i)
+    {
+      auto const label_i = raw_label_i-840;
+      m_each_Ring_spectra.Fill(label_i, nrj_i, weight);
+      if (nRnS)
+      {
+        m_each_Ring_spectra_nRnS.Fill(label_i, nrj_i, weight);
+        // sectorCoincToPos()
+      }
+      if (label_i==14)
+      {
+        m_Ring_14_spectra.Fill(nrj_i, weight);
+        if (nrj_i > 11000) fission_fragment = true;
+      }
+    }
+    else
+    {
+      auto const label_i = raw_label_i-800;
+      m_each_Sector_spectra.Fill(label_i, nrj_i, weight);
+      if (nRnS)
+      {
+        m_each_Sector_spectra_nRnS.Fill(label_i, nrj_i, weight);
+      }
+    }
+
+
+    for (auto const & clover : event_s.clover_hits)
+    {
+      if (event_s.BGO[clover]) continue;
+      if (peak20MeV) m_Ge_spectra_gate_on_particle_20MeV.Fill(event_s.nrj_clover[clover]);
+      if (fission_fragment) m_Ge_spectra_gate_on_particle_sup_11MeV_R15.Fill(event_s.nrj_clover[clover]);
+
+    }
+  }
 }
 
-void AnalyseDSSD::WriteManip()
+void AnalyseDSSD::Write()
 {
+  std::unique_ptr<TFile> oufile(TFile::Open((outDir+outRoot).c_str(),"recreate"));
+  print("Writting histograms ...");
 
+  m_Ge_spectra_gate_on_particle_20MeV.Write();
+  m_Ge_spectra_gate_on_particle_sup_11MeV_R15.Write();
+
+  m_Ring_14_spectra.Write();
+
+  m_each_Sector_spectra.Write();
+  m_each_Ring_spectra.Write();
+  m_each_Sector_spectra_nRnS.Write();
+  m_each_Ring_spectra_nRnS.Write();
+
+  m_R_VS_S.Write();
+  m_R_VS_S_time.Write();
+
+  m_R1_VS_R2.Write();
+  m_S1_VS_S2.Write();
+  m_R1_VS_S1.Write();
+  m_R1_VS_S2.Write();
+  m_R2_VS_S1.Write();
+  m_R2_VS_S2.Write();
+
+  m_R1_VS_R2_time.Write();
+  m_S1_VS_S2_time.Write();
+  m_R1_VS_S1_time.Write();
+  m_R1_VS_S2_time.Write();
+  m_R2_VS_S1_time.Write();
+  m_R2_VS_S2_time.Write();
+
+  oufile->Write();
+  oufile->Close();
+  print("Writting analysis in", outDir+outRoot);
+ }
+
+bool AnalyseDSSD::setParameters(std::vector<std::string> const & parameters)
+{
+  for (auto const & param : parameters)
+  {
+    std::istringstream is(param);
+    std::string temp;
+    while(is>>temp)
+    {
+      if (temp == "outDir:")  is >> outDir;
+      else if (temp == "outRoot:")  is >> outRoot;
+      else if (temp == "binning:") is >> m_bins_spectra >> m_min_spectra >> m_max_spectra;
+      else
+      {
+        print("Parameter", temp, "for AnalyseDSSD unkown...");
+        return false;
+      }
+    }
+  }
+  return true;
 }
 
-#endif //DSSD_H
+#endif //ANALYSEDSSD_H

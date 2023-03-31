@@ -14,11 +14,22 @@ public:
   void setEvent (Event * event) {m_event = event;}
   void setRF(RF_Manager *rf) {m_rf = rf;}
   void fillEvent(Event & event);
+  void addGeGateTrig(Float_t const & minE, Float_t const & maxE)
+  {
+    m_Ge_gates.push_back(std::make_pair(minE,maxE)); m_gateON = true;
+  }
+
+  void addGeGateTrig(std::pair<Float_t,Float_t> const & Egate)
+  {
+    m_Ge_gates.push_back(Egate); m_gateON = true;
+  }
 
   void sortEvent(Event const & event);
   void sortEvent(){sortEvent(*m_event);}
   bool sortGeClover(Event const & event, int const & i);
 
+  int const & gateGe() const {return m_Ge_gate;}
+  auto const & getGatedClover() const {return m_CloverTrig;}
 
   std::array<Float_t, 2000> times;
   RF_Manager *m_rf = nullptr;
@@ -42,7 +53,7 @@ public:
 
   // DSSD array :
   std::vector<uchar> DSSD_hits; // Position in the event of the DSSD hits
-  std::vector<char>          DSSD_is_Ring; // Tag if the DSSD hit is a ring
+  std::vector<char>  DSSD_is_Ring; // Tag if the DSSD hit is a ring
   std::vector<uchar> DSSD_Rings; // Position in the event of the DSSD rings hits
   std::vector<uchar> DSSD_Sectors; // Position in the event of the DSSD sectors hits
 
@@ -51,16 +62,24 @@ public:
 
   //Counters :
   size_t RawMult=0; // Number of hits
+
   size_t LaBr3Mult=0; // Number of LaBr3 hits
   size_t ParisMult=0; // Number of Paris hits
   size_t ParisLaBr3Mult=0; // Number of Paris hits if the LaBr3 fired
+
   size_t RawGeMult=0; // Number of Ge crystals hits
   size_t CloverGeMult=0; // Number of Ge Clovers hits (after add-back)
+  size_t PromptMult=0; // Number of Ge Clovers hits (after add-back)
+  size_t DelayedMult=0; // Number of Ge Clovers hits (after add-back)
+  size_t PromptGeMult=0; // Number of Ge Clovers hits (after add-back)
+  size_t DelayedGeMult=0; // Number of Ge Clovers hits (after add-back)
   size_t CloverMult=0; // Number of Clovers hits (includes the BGOs)
   size_t CleanGeMult=0; // Number of Clean Clovers hits (after add-back and compton rejection)
   size_t ComptonVetoMult=0; // Number of rejected Clovers
+
   size_t BGOMult=0; // Number of BGOs hits
   size_t ModulesMult=0; // Number of Modules hits : one module is Clover, LaBr3 or Paris
+
   size_t DSSDMult=0; // Number of DSSD hits
   size_t DSSDSectorMult=0; // Number of DSSD Sectors hits
   size_t DSSDRingMult=0; // Number of DSSD Rings hits
@@ -79,6 +98,12 @@ public:
 
 private:
   Event * m_event;
+
+  // --- Gating --- //
+  std::vector<std::pair<Float_t,Float_t>> m_Ge_gates;
+  bool m_gateON = false; // 0 : no gate, n : n-th gate
+  int m_Ge_gate = 0; // 0 : no gate, n : n-th gate
+  size_t m_CloverTrig = 0.;
 };
 
 void Sorted_Event::initialise()
@@ -142,6 +167,11 @@ void Sorted_Event::reset()
   ComptonVetoMult=0;
   ModulesMult=0;
 
+  PromptMult = 0;
+  DelayedMult = 0;
+  PromptGeMult = 0;
+  DelayedGeMult = 0;
+
 #ifdef N_SI_129
   DSSDFirstBlob=false;
   DSSDSecondBlob=false;
@@ -149,6 +179,9 @@ void Sorted_Event::reset()
   DSSDTail = false;
 #endif //N_SI_129
   DSSDPrompt=false;
+
+  m_Ge_gate = 0;
+  m_CloverTrig = 0;
 }
 
 bool Sorted_Event::sortGeClover(Event const & event, int const & i)
@@ -169,7 +202,7 @@ bool Sorted_Event::sortGeClover(Event const & event, int const & i)
     else time_clover[clover_label] = (time-event.times[0])/_ns;
   }
 
-  // Next line overwrites the Time if Time is indeed read in the event
+  // Next line overwrites the Time (relative timestamp) if Time is indeed read in the event
   if (event.readTime()) time_clover[clover_label] = Time;
 
   nrj_clover[clover_label] += nrj;
@@ -253,19 +286,31 @@ void Sorted_Event::sortEvent(Event const & event)
   }
 
   // Add-Back and Compton Cleaning of Clovers :
-  for (size_t i = 0; i<24l; i++)
+  for (size_t clover = 0; clover<24l; clover++)
   {
-    if (Ge[i])
+    if (Ge[clover])
     {
       if (time_clover[clover_label]>-10 && time_clover[clover_label]<70) prompt_Ge[clover_label] = true;
       else if (time_clover[clover_label]>70) delayed_Ge[clover_label] = true;
       CloverMult++;
       ModulesMult++;
       CloverGeMult++;
-      if (BGO[i]) ComptonVetoMult++;
-      else CleanGeMult++;
+      if (BGO[clover]) ComptonVetoMult++;
+      else
+      {
+        CleanGeMult++;
+        if (m_gateON && m_Ge_gate == 0) for (size_t gate = 0; gate<m_Ge_gates.size(); gate++)
+        {
+          if (nrj_clover[clover]>m_Ge_gates[gate].first && nrj_clover[clover]<m_Ge_gates[gate].second)
+          {
+            m_Ge_gate = gate+1;
+            m_CloverTrig = clover;
+            break;
+          }
+        }
+      }
     }
-    else if (BGO[i])
+    else if (BGO[clover])
     {
       CloverMult++;
       ModulesMult++;
@@ -273,10 +318,5 @@ void Sorted_Event::sortEvent(Event const & event)
     }
   }
 }
-
-// void Sorted_Event::sortEvent(Event const & event, RF_Manager const & rf)
-// {
-//
-// }
 
 #endif //SORTED_EVENT_H

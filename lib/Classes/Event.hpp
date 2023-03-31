@@ -109,6 +109,7 @@ inline Hit Event::operator[] (Int_t const & i)
   ret.nrj2   = nrj2s[i];
   ret.label  = labels[i];
   ret.time   = times[i];
+  if (read_T || write_T) ret.time   = Times[i];
   ret.pileup = pileups[i];
   ret.type   = types[i];
   return ret;

@@ -12,7 +12,6 @@
 
 #include "../Classes/Parameters.hpp"
 
-std::string param_string = "Isomer";
 
 class AnalyseIsomer
 {
@@ -27,6 +26,7 @@ public:
   void Write();
 
 private:
+  std::string param_string = "Isomer";
   // Parameters
   friend class MTObject;
   std::string outDir  = "129/Analyse/Isomer/";

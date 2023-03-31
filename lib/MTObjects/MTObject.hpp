@@ -15,8 +15,13 @@ public:
   MTObject() {}
   MTObject(int _nb_threads ) {Initialize(_nb_threads);}
 
-  static void Initialize(int _nb_threads )
+  static void Initialize(ushort _nb_threads )
   {
+    if(_nb_threads > std::thread::hardware_concurrency())
+    {
+      _nb_threads = std::thread::hardware_concurrency();
+      std::cout << "Number of threads too large (hardware) -> reset to " << _nb_threads << std::endl;
+    }
     nb_threads = _nb_threads;
     TThread::Initialize();
     master_thread = std::this_thread::get_id();
@@ -66,6 +71,8 @@ public:
   {
     return threads_ID[std::this_thread::get_id()];
   }
+
+  static auto const & getThreadsNb() {return nb_threads;}
 protected:
   std::mutex m_mutex;
 private:

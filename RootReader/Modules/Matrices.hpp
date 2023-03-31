@@ -1,175 +1,218 @@
 #ifndef MATRICES_H
 #define MATRICES_H
+#include "../../lib/utils.hpp"
+#include "../../lib/MTObjects/MTTHist.hpp"
+#include "../Classes/Parameters.hpp"
+
 
 class Matrices
 {
 public:
-  Matrices() {}
-  ~Matrices()
-  {
-    if (m_BGO_VS_Clover) delete m_BGO_VS_Clover;
-    if (m_LaBr3_VS_Clover) delete m_LaBr3_VS_Clover;
-    if (m_Clean_Ge_bidim) delete m_Clean_Ge_bidim;
-    for (auto histo : m_each_BGO_VS_all_Clover) if (histo) delete histo;
-    for (auto histo : m_each_LaBr3_VS_all_Clover) if (histo) delete histo;
 
-  }
-  bool setParameters(std::string const & parameters);
-  void Initialize();
+  Matrices(){};
+  bool launch(Parameters & p);
+  bool setParameters(std::vector<std::string> const & param);
+  void InitializeManip();
+  static void run(Parameters & p, Matrices & matrices);
   void FillRaw(Event const & event);
-  void FillSorted(Sorted_Event const & event);
-  void Write(std::string const & outRoot);
-
-  void setSorted_Event(Sorted_Event * evt) {m_s_event = evt;}
-
-  void SetBinsGe(int const & bins, Float_t const & min, Float_t const & max)
-  {
-    m_bins_Ge = bins; m_min_Ge = min; m_max_Ge = max;
-  }
-
-  void SetBinsBGO(int const & bins, Float_t const & min, Float_t const & max)
-  {
-    m_bins_BGO = bins; m_min_BGO = min; m_max_BGO = max;
-  }
-
-  void SetBinsLaBr3(int const & bins, Float_t const & min, Float_t const & max)
-  {
-    m_bins_LaBr3 = bins; m_min_LaBr3 = min; m_max_LaBr3 = max;
-  }
-
+  void FillSorted(Sorted_Event const & event_s, Event const & event);
+  void Write();
 private:
 
+  // ---- Parameters ---- //
+  std::string param_string = "Matrices";
+  friend class MTObject;
+
   // ---- Variables ---- //
-  int m_bins_Ge = 6000; Float_t m_min_Ge = 0; Float_t m_max_Ge = 6000;
-  int m_bins_BGO = 600; Float_t m_min_BGO = 0; Float_t m_max_BGO = 6000;
-  int m_bins_LaBr3 = 1000; Float_t m_min_LaBr3 = 0; Float_t m_max_LaBr3 = 6000;
+  std::string outDir  = "129/Matrices/";
+  std::string outRoot = "Matrices.root";
+  int m_bins_Ge = 2000; Float_t m_min_Ge = 0; Float_t m_max_Ge = 6000;
+  int m_bins_BGO = 300; Float_t m_min_BGO = 0; Float_t m_max_BGO = 6000;
+  int m_bins_LaBr3 = 600; Float_t m_min_LaBr3 = 0; Float_t m_max_LaBr3 = 6000;
 
   // ---- Histograms ---- //
-  TH2F* m_BGO_VS_Clover = nullptr;
-  TH2F* m_LaBr3_VS_Clover = nullptr;
-  std::vector<TH2F*> m_each_BGO_VS_all_Clover;
-  std::vector<TH2F*> m_each_LaBr3_VS_all_Clover;
+  MTTHist<TH2F> m_BGO_VS_Clover;
+  MTTHist<TH2F> m_LaBr3_VS_Clover;
+  std::vector<MTTHist<TH2F>> m_each_BGO_VS_all_Clover;
+  std::vector<MTTHist<TH2F>> m_each_LaBr3_VS_all_Clover;
 
-  TH2F* m_Clean_Ge_bidim = nullptr;
-
-  Sorted_Event *m_s_event = nullptr;
+  MTTHist<TH2F> m_Clean_Ge_bidim;
 };
 
-bool Matrices::setParameters(std::string const & parameters)
+bool Matrices::launch(Parameters & p)
 {
-  std::string temp;
-  std::istringstream is(parameters);
-  while(is >> temp)
-  {
-         if (temp == "BINNING:")
-    {
-      is >> temp;
-           if (temp == "Ge:")    is >> m_bins_Ge    >> m_min_Ge    >> m_max_Ge   ;
-      else if (temp == "BGO:")   is >> m_bins_BGO   >> m_min_BGO   >> m_max_BGO  ;
-      else if (temp == "LaBr3:") is >> m_bins_LaBr3 >> m_min_LaBr3 >> m_max_LaBr3;
-      else {print("Parameter BINNING:", temp, "non reconnu !"); return false;}
-    }
-  }
+  if (!this -> setParameters(p.getParameters(param_string))) return false;
+  this -> InitializeManip();
+  print("Starting !");
+  MTObject::parallelise_function(run, p, *this);
+  this -> Write();
   return true;
 }
 
-void Matrices::Initialize()
+void Matrices::run(Parameters & p, Matrices & matrices)
 {
-  m_Clean_Ge_bidim = new TH2F("Clean Ge bidim", "Clean Ge bidim",
-      m_bins_Ge,m_min_Ge,m_max_Ge, m_bins_Ge,m_min_Ge,m_max_Ge);
-  m_BGO_VS_Clover = new TH2F("BGO VS Clover", "BGO VS Clover",
-      m_bins_Ge,m_min_Ge,m_max_Ge, m_bins_BGO,m_min_BGO,m_max_BGO);
-  m_LaBr3_VS_Clover = new TH2F("Paris VS Clover", "Paris VS Clover",
-      m_bins_Ge,m_min_Ge,m_max_Ge, m_bins_LaBr3,m_min_LaBr3,m_max_LaBr3);
+  std::string rootfile;
+  Sorted_Event event_s;
+  while(p.getNextFile(rootfile))
+  {
+    Timer timer;
 
-  m_each_BGO_VS_all_Clover.resize(48, nullptr);
-  m_each_LaBr3_VS_all_Clover.resize(74, nullptr);
+    std::unique_ptr<TFile> file (TFile::Open(rootfile.c_str(), "READ"));
+    if (file->IsZombie()) {print(rootfile, "is a Zombie !");continue;}
+    std::unique_ptr<TTree> tree (file->Get<TTree>("Nuball"));
+    Event event(tree.get(), "lTnN");
+
+    size_t events = tree->GetEntries();
+    p.totalCounter+=events;
+
+    auto const & filesize = size_file(rootfile, "Mo");
+    p.totalFilesSize+=filesize;
+
+    for (size_t i = 0; i<events; i++)
+    {
+      tree->GetEntry(i);
+      event_s.sortEvent(event);
+      matrices.FillSorted(event_s,event);
+      matrices.FillRaw(event);
+    } // End event loop
+    auto const & time = timer();
+    print(removePath(rootfile), time, timer.unit(), ":", filesize/timer.TimeSec(), "Mo/sec");
+  } // End files loop
+}
+
+void Matrices::InitializeManip()
+{
+  print("Initialize histograms");
+  // m_Clean_Ge_bidim.reset("Clean Ge bidim", "Clean Ge bidim",
+  //     m_bins_Ge,m_min_Ge,m_max_Ge, m_bins_Ge,m_min_Ge,m_max_Ge);
+  // m_BGO_VS_Clover.reset("BGO VS Clover", "BGO VS Clover",
+  //     m_bins_Ge,m_min_Ge,m_max_Ge, m_bins_BGO,m_min_BGO,m_max_BGO);
+  // m_LaBr3_VS_Clover.reset("Paris VS Clover", "Paris VS Clover",
+  //     m_bins_Ge,m_min_Ge,m_max_Ge, m_bins_LaBr3,m_min_LaBr3,m_max_LaBr3);
+
+  m_each_BGO_VS_all_Clover.resize(48);
+  m_each_LaBr3_VS_all_Clover.resize(74);
 
   for (size_t label = 0; label<g_labelToName.size(); label++)
   {
     std::string name = g_labelToName[label]+" VS CLover";
     if (isBGO[label])
     {
-      m_each_BGO_VS_all_Clover[labelToBGOcrystal[label]] = new TH2F(name.c_str(), name.c_str(),
+      m_each_BGO_VS_all_Clover[labelToBGOcrystal[label]].reset(name.c_str(), name.c_str(),
           m_bins_Ge,m_min_Ge,m_max_Ge, m_bins_BGO,m_min_BGO,m_max_BGO);
     }
     else if (isParis[label])
     {
-      m_each_LaBr3_VS_all_Clover[labelToPariscrystal[label]] = new TH2F(name.c_str(), name.c_str(),
+      m_each_LaBr3_VS_all_Clover[labelToPariscrystal[label]].reset(name.c_str(), name.c_str(),
           m_bins_Ge,m_min_Ge,m_max_Ge, m_bins_LaBr3,m_min_LaBr3,m_max_LaBr3);
-    }
-  }
-}
-
-void Matrices::FillSorted(Sorted_Event const & event)
-{
-  for (size_t loop_i = 0; loop_i<event.clover_hits.size(); loop_i++)
-  {
-    if (!event.BGO[loop_i])
-    {
-      auto const & nrj_i = event.nrj_clover[loop_i];
-      for (size_t loop_j = loop_i+1; loop_j<event.clover_hits.size(); loop_j++)
-      {
-        if (!event.BGO[loop_j])
-        {
-          auto const & nrj_j = event.nrj_clover[loop_j];
-          m_Clean_Ge_bidim -> Fill(nrj_i,nrj_j);
-          m_Clean_Ge_bidim -> Fill(nrj_j,nrj_i);
-        }
-      }
     }
   }
 }
 
 void Matrices::FillRaw(Event const & event)
 {
-  if (event.size()<2) return;
+  // for (size_t i = 0; i<event.size(); i++)
+  // {
+  //
+  // }
+}
+
+void Matrices::FillSorted(Sorted_Event const & event_s, Event const & event)
+{
+  if (event_s.ModulesMult>3) return ;
   for (size_t loop_i = 0; loop_i<event.size(); loop_i++)
   {
-    auto const & label_i = event.labels[loop_i];
-    if (isGe[label_i])
+    auto const & Time = event.Times[loop_i];
+    if (Time<-10 && Time>20) continue;
+
+    auto const & label = event.labels[loop_i];
+    if (isBGO[label] || isParis[label])
     {
-      auto const & nrj_i = event.nrjs[loop_i];
-      for (size_t loop_j = loop_i+1; loop_j<event.size(); loop_j ++)
+      for (size_t loop_Ge = 0; loop_Ge<event_s.clover_hits.size(); loop_Ge++)
       {
-        auto const & label_j = event.labels[loop_j];
-        if (isBGO[label_j])
+        auto const & cloverGe = event_s.clover_hits[loop_Ge];
+        auto const & TimeGe = event_s.time_clover[cloverGe];
+        if(TimeGe<-10 || TimeGe>20) continue;
+        auto const & nrjGe = event_s.nrj_clover[cloverGe];
+
+        // Fill BGO bidim :
+        if (isBGO[label])
         {
-          auto const & nrj_j = event.nrjs[loop_j];
-          m_BGO_VS_Clover->Fill(nrj_i, nrj_j);
-          m_each_BGO_VS_all_Clover[labelToBGOcrystal[label_j]] -> Fill(nrj_i, nrj_j);
+          auto const & nrjBGO = event.nrjs[loop_i];
+          auto const & cloverBGO = labelToClover_fast[label];
+          auto const & crystalBGO = labelToBGOcrystal[label];
+          if (cloverBGO==cloverGe) continue; //Rejection Compton
+          m_each_BGO_VS_all_Clover[crystalBGO].Fill(nrjGe,nrjBGO);
         }
-        else if (isParis[label_j])
+
+        // Fill Paris LaBr3 bidim :
+        else
         {
-          Paris_Label label(label_j);
-          auto const & nrj_j = event.nrjs[loop_j];
-          auto const & nrj2_j = event.nrj2s[loop_j];
-          if (nrj2_j!=0 && (nrj2_j-nrj_j)/nrj2_j < 0.4)
-          {
-            m_LaBr3_VS_Clover->Fill(nrj_i, nrj_j);
-            m_each_LaBr3_VS_all_Clover[labelToPariscrystal[label_j]] -> Fill(nrj_i, nrj_j);
-          }
+          // auto const & nrjParis = event.nrjs[loop_i];
+          // auto const & crystalParis = labelToPariscrystal[label];
+          // Paris_Label labelParis(label);
+          // Paris_XY xyParis(labelParis);
         }
       }
     }
   }
 }
 
-void Matrices::Write(std::string const & outRoot)
+void Matrices::Write()
 {
-  std::unique_ptr<TFile> outfile(TFile::Open(outRoot.c_str(),"RECREATE"));
-  outfile->cd();
+  std::unique_ptr<TFile> oufile(TFile::Open((outDir+outRoot).c_str(),"recreate"));
+  print("Writting histograms ...");
+  for (auto & histo : m_each_BGO_VS_all_Clover)
+  {
+    histo.Merge();
+    if (histo->Integral() < 1) continue;
+    // std::unique_ptr<TH2F> histo_normalized = new TH2F((histo.Name()+"_norm").c_str(), (histo.Name()+"_norm").c_str(),
+    //     m_bins_Ge,m_min_Ge,m_max_Ge, m_bins_BGO,m_min_BGO,m_max_BGO);
 
-  if (m_Clean_Ge_bidim && m_Clean_Ge_bidim->Integral()>1) m_Clean_Ge_bidim -> Write();
-  if (m_BGO_VS_Clover && m_BGO_VS_Clover->Integral()>1) m_BGO_VS_Clover -> Write();
-  if (m_LaBr3_VS_Clover && m_LaBr3_VS_Clover->Integral()>1) m_LaBr3_VS_Clover -> Write();
+    for (int i = 6; i<m_bins_Ge-1; i++)
+    {
+      Float_t maxRow = 0.;
+      for (int j = 6; j<m_bins_BGO-1; j++)
+      {
+        if(histo->GetBinContent(i, j) > maxRow) maxRow = histo->GetBinContent(i, j);
+      }
+      for (int j = 6; j<m_bins_BGO-1; j++) histo -> SetBinContent(i, j, 10*histo->GetBinContent(i, j)/maxRow);
+    }
 
-  for (auto & hist : m_each_BGO_VS_all_Clover) if (hist && hist->Integral()>1) hist->Write();
-  for (auto & hist : m_each_LaBr3_VS_all_Clover) if (hist && hist->Integral()>1) hist->Write();
+    for (int j = 6; j<m_bins_BGO-1; j++)
+    {
+      Float_t maxRow = 0.;
+      for (int i = 6; i<m_bins_Ge-1; i++)
+      {
+        if(histo->GetBinContent(i, j) > maxRow) maxRow = histo->GetBinContent(i, j);
+      }
+      for (int i = 6; i<m_bins_Ge-1; i++) histo -> SetBinContent(i, j, 10*histo->GetBinContent(i, j)/maxRow);
+    }
+    histo.Write();
+  }
+  oufile->Write();
+  oufile->Close();
+  print("Writting analysis in", outDir+outRoot);
+ }
 
-  outfile->Write();
-  outfile->Close();
-  print("Matrices file written to", outRoot);
+bool Matrices::setParameters(std::vector<std::string> const & parameters)
+{
+  for (auto const & param : parameters)
+  {
+    std::istringstream is(param);
+    std::string temp;
+    while(is>>temp)
+    {
+      if (temp == "outDir:")  is >> outDir;
+      else if (temp == "outRoot:")  is >> outRoot;
+      else
+      {
+        print("Parameter", temp, "for Matrices unkown...");
+        return false;
+      }
+    }
+  }
+  return true;
 }
 
 #endif //MATRICES_H

@@ -56,23 +56,23 @@ public:
     auto time = Time();
     m_unit = "ms";
 
-    if (time>1000) { time/=1000; m_unit = "s";}
+    if (time>1000) { time/=1000.; m_unit = "s";}
     else { return time; }
 
-    if (time>120) { time/=60; m_unit = "min";  }
+    if (time>120) { time/=60.; m_unit = "min";  }
     else {  return time; }
 
-    if (time>120) { time/=60; m_unit = "h"; return time;}
+    if (time>120) { time/=60.; m_unit = "h"; return time;}
     else { return time; }
   }
 
   std::string unit() {return m_unit;}
   Float_t Unit()
   {
-         if (m_unit == "ms") return 1;
-    else if (m_unit ==  "s") return 1000;
-    else if (m_unit =="min") return 60000;
-    else if (m_unit ==  "h") return 3600000;
+         if (m_unit == "ms") return 1.;
+    else if (m_unit ==  "s") return 1000.;
+    else if (m_unit =="min") return 60000.;
+    else if (m_unit ==  "h") return 3600000.;
   }
 
 private:
