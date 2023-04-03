@@ -166,8 +166,6 @@ void Matrices::Write()
   {
     histo.Merge();
     if (histo->Integral() < 1) continue;
-    // std::unique_ptr<TH2F> histo_normalized = new TH2F((histo.Name()+"_norm").c_str(), (histo.Name()+"_norm").c_str(),
-    //     m_bins_Ge,m_min_Ge,m_max_Ge, m_bins_BGO,m_min_BGO,m_max_BGO);
 
     for (int i = 6; i<m_bins_Ge-1; i++)
     {

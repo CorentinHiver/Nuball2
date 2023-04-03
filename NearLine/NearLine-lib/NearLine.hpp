@@ -418,10 +418,8 @@ void NearLine::faster2root(std::string filename, int thread_nb)
   rootTree -> Branch("pileup" , &hit.pileup);
 
   int counter = 0;
-  // while(reader.Read() && counter<10000)
   while(reader.Read())
   {
-    // if(counter%1000 == 0) print(counter);
     counter++;
     time_shift(hit);
     m_calib.calibrate(hit);

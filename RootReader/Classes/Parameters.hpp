@@ -15,13 +15,14 @@ public:
   bool checkParameters();
   bool setData();
   // To retrieve the parameters :
-  std::vector<std::string> const & getParameters(std::string const & module);
+  std::vector<std::string> getParameters(std::string const & module = "all");
 
   // Get the variables
   auto const & threadsNb() const {return m_nbThreads;}
   FilesManager & files () {return m_files;}
 
   MTList<std::string> & filesMT() {return m_list_files;}
+  MTList<std::string> & getRunsList() {return m_list_runs;}
   bool getNextFile(std::string & filename) {return m_list_files.getNext(filename);}
   bool getNextRun(std::string & run) {return m_list_runs.getNext(run);}
 
@@ -67,9 +68,18 @@ bool Parameters::checkParameters()
   return true;
 }
 
-std::vector<std::string> const & Parameters::getParameters(std::string const & module)
+std::vector<std::string> Parameters::getParameters(std::string const & module)
 {
-  return m_parameters[module];
+  if(module == "all")
+  {
+    std::vector<std::string> ret;
+    for (auto const & parameter : m_parameters) for (auto const & param : parameter.second) ret.push_back(param);
+    return ret;
+  }
+  else
+  {
+    return m_parameters[module];
+  }
 }
 
 bool Parameters::readParameters(std::string const & file)
@@ -99,12 +109,13 @@ bool Parameters::readParameters(std::string const & file)
       // ****************** //
       //        LOAD        //
       // ****************** //
-      if ( temp1.front() == '[' && temp1.back()==']')
+      if ( parameter.front() == '[' && parameter.back()==']')
       {// Chosing the module
-        temp1.pop_back();
-        temp1.erase(0,1); //"pop_front"
+        parameter.pop_back();
+        parameter.erase(0,1); //"pop_front"
         current_param_on = true;
-        current_param = temp1;
+        current_param = parameter;
+        continue;
       }
 
       else if (temp1.front() == '#' || temp1.substr(0,2) == "//") continue;

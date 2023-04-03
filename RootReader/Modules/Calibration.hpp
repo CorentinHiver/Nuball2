@@ -59,7 +59,7 @@ void Calibration::run(Parameters & p, Calibration & calibration)
     {
       tree->GetEntry(i);
       event_s.sortEvent(event);
-      calibration.FillSorted(event_s,event);
+      calibration.FillSorted(event_s, event);
       calibration.FillRaw(event);
     } // End event loop
     auto const & time = timer();

@@ -50,6 +50,13 @@ int main(int argc, char** argv)
   if (!p.readParameters("Parameters/analysis.setup")) return -1;
   if (!p.checkParameters()) return -1;
 
+  if (MTObject::getThreadsNb()>p.getRunsList().size())
+  {// Set one thread per run, and not per file : 
+    MTObject::setThreadsNb(p.getRunsList().size());
+    print("Number of threads too large (too few runs to process) ->",
+    MTObject::getThreadsNb(), "threads");
+  }
+
   MTObject::Initialize(p.threadsNb());
 
   #if defined (N_SI_120)

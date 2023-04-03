@@ -17,13 +17,13 @@ public:
 
   static void Initialize(ushort _nb_threads )
   {
+    TThread::Initialize();
     if(_nb_threads > std::thread::hardware_concurrency())
     {
       _nb_threads = std::thread::hardware_concurrency();
       std::cout << "Number of threads too large (hardware) -> reset to " << _nb_threads << std::endl;
     }
     nb_threads = _nb_threads;
-    TThread::Initialize();
     master_thread = std::this_thread::get_id();
     ON = true;
   }
@@ -73,6 +73,7 @@ public:
   }
 
   static auto const & getThreadsNb() {return nb_threads;}
+  static void setThreadsNb(int const & n) {nb_threads = static_cast<ushort>(n);}
 protected:
   std::mutex m_mutex;
 private:
@@ -80,7 +81,7 @@ private:
 };
 // As it is a static variable we have to declare it outside of the class
 // Also, I think it is better to initialise it at 1, in order to avoid unitialisation issue
-unsigned short MTObject::nb_threads = 1;
+ushort MTObject::nb_threads = 1;
 bool MTObject::ON = false;
 std::map<std::thread::id, int> MTObject::threads_ID;
 std::mutex MTObject::shared_mutex;

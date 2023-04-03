@@ -5,8 +5,8 @@
 
 //Define the trigger here :
 // #define D1_TRIG
-// #define NO_TRIG
-#define M2G1_TRIG
+#define NO_TRIG
+// #define M2G1_TRIG
 
 //Include the base library
 #include "NearLine-lib/NearLine.hpp"

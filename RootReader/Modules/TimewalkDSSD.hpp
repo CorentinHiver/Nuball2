@@ -176,6 +176,7 @@ void TimewalkDSSD::FillSorted(Sorted_Event const & event_s, Event const & event)
     {
       if(nRnS) timewalk_DSSD_rings_nRnS[label-840][thread_nb] -> Fill(Time, nrj, weight);
     }
+    else if (delayed);
   }
 
   for (size_t loop_i = 0; loop_i<event_s.DSSD_Sectors.size(); loop_i++)
