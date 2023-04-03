@@ -1,6 +1,7 @@
 // Define BEFORE include NearLine.hpp
 #define FASTERAC
-#define N_SI_129
+#define N_SI_85
+// #define N_SI_129
 // #define N_SI_120
 
 //Define the trigger here :
@@ -26,6 +27,10 @@ int main()
 #elif defined (N_SI_129)
   std::string datadir = path+"N-SI-129/";
   std::string outdir  = path+"N-SI-129-root/";
+
+#elif defined (N_SI_85)
+  std::string datadir = path+"N-SI-85/";
+  std::string outdir  = path+"N-SI-85-root/";
 #endif
 
   std::string dT_folder = outdir;
@@ -64,6 +69,11 @@ int main()
       if (!app -> setConfig("ID: ID/index_129.dat")) return 0;
       if (!app -> setConfig("TIMESHIFT: time_reference: R1A9_FATIMA_LaBr3 timewindow: 1500 "
         "mult: 2 3 outRoot: "+dT_root+" outData: "+dT_file)) return 0;
+
+    #elif defined (N_SI_185)
+      if (!app -> setConfig("ID: ID/index_129.dat")) return 0;
+      if (!app -> setConfig("TIMESHIFT: time_reference: R1A9_FATIMA_LaBr3 timewindow: 1500 "
+        "mult: 2 3 outRoot: "+dT_root+" outData: "+dT_file)) return 0;
     #endif
 
       if (!app -> setConfig("OUTDIR: "+dT_folder)) return 0;
@@ -77,7 +87,7 @@ int main()
     //Faster2root :
     app = new NearLine;
     // app -> setConfig("NB_THREADS: 5");
-    app -> setConfig("NB_THREADS: 30");
+    app -> setConfig("NB_THREADS: 10");
 
   #if defined (N_SI_120)
     if (!app -> setConfig("ID: ID/index_120.dat")) return 0;
@@ -89,6 +99,10 @@ int main()
   #elif defined (N_SI_129)
     if (!app -> setConfig("ID: ID/index_129.dat")) return 0;
     app -> setConfig("USE_RF: 60");
+    if (!app -> setConfig("CALIBRATION: Calibration/calib_129.dat")) return 0;
+
+  #elif defined (N_SI_85)
+    if (!app -> setConfig("ID: ID/index_129.dat")) return 0;
     if (!app -> setConfig("CALIBRATION: Calibration/calib_129.dat")) return 0;
   #endif
 

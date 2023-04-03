@@ -4,7 +4,7 @@
 # ID: ID/index_120.dat
 ID: ID/index_129.dat
 
-TIMESHIFT_DATA: /home/corentin/faster_data/N-SI-129-root/Timeshifts/run_50.dT
+# TIMESHIFT_DATA: /home/corentin/faster_data/N-SI-129-root/Timeshifts/run_50.dT
 # TIMESHIFT_DATA: 129/Timeshifts/run_70.dat
 # TIMESHIFT_DATA: Timeshifts/Uranium238_9_deltaT.dat
 # TIMESHIFT_DATA: Timeshifts/Uranium238_97_deltaT.dat
@@ -16,7 +16,7 @@ TIMESHIFT_DATA: /home/corentin/faster_data/N-SI-129-root/Timeshifts/run_50.dT
 # TIMESHIFT_DATA: Timeshifts/run_49.dat
 # TIMESHIFT_DATA: Timeshifts/proton_Au.dat
 
-CALIBRATION: Calibration/calib_129.dat
+# CALIBRATION: Calibration/calib_129.dat
 # CALIBRATION: Calibration/calib_120.dat
 # CALIBRATION: Calibration/residues_Th232/test232Th.dat
 # CALIBRATION: Calibration/152Eu_Uranium238_after_108.dat
@@ -55,14 +55,14 @@ BINNING: calibrated: Ge: 14000 0 7000
 # DATADIR: /home/corentin/faster_data/N-SI-131/alpha_27.fast/ nb: 50
 # DATADIR: /home/corentin/faster_data/N-SI-131/proton_24.fast/
 
-DATADIR: /home/corentin/faster_data/N-SI-129/run_50.fast/
+DATADIR: /home/corentin/faster_data/N-SI-85/run_2.fast/
 # DATADIR: /home/corentin/faster_data/N-SI-85/run_Alpha_8.fast/
 
 # OUTDIR: Calibration/run_12/
 # OUTDIR: Analyse/
 # OUTDIR: Eventbuilding_tests
 # OUTDIR: DSSD_checks/
-# OUTDIR: 85/
+OUTDIR: 85/
 # OUTDIR: 129/
 # OUTDIR: 120/
 
@@ -77,7 +77,7 @@ DATADIR: /home/corentin/faster_data/N-SI-129/run_50.fast/
 # --------
 # OUTPUTS:
 # --------
-USE_RF: 50 ns
+# USE_RF: 50 ns
 
 # PARIS_BIDIM: outroot: Paris_bidim_152Eu_12.root bins: 1000
 
@@ -86,14 +86,14 @@ USE_RF: 50 ns
 # ANALYSE: time_ref: R1A1_FATIMA_LaBr3 outRoot: test.root
 # ANALYSE: time_ref: R1A9_FATIMA_LaBr3 outRoot: run_50.root
 
-ANALYSE: time_ref: R1A9_FATIMA_LaBr3 outRoot: run_50.root
+# ANALYSE: time_ref: R1A9_FATIMA_LaBr3 outRoot: run_50.root
 
 # ANALYSE: time_ref: R1A9_FATIMA_LaBr3 outRoot: run_2.root
 # ANALYSE: time_ref: R1A9_FATIMA_LaBr3 outRoot: run_70.root
 # ANALYSE: time_ref: R1A1_FATIMA_LaBr3 outRoot: tests_RF.root
 
-# TIMESHIFT: time_reference: R1A9_FATIMA_LaBr3 timewindow: 1500 mult: 2 3 -
-# outRoot: run_50.root outData: run_50.dat verbose
+TIMESHIFT: time_reference: R1A9_FATIMA_LaBr3 timewindow: 1500 mult: 2 3 -
+outRoot: run_2.root outData: run_2.dat verbose
 
 # TIMESHIFT: time_reference: PARIS_FR1D1 timewindow: 1500 mult: 2 3 -
 # TIMESHIFT: time_reference: R1A2_FATIMA_LaBr3 timewindow: 1500 mult: 2 3 -
