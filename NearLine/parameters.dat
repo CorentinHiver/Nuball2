@@ -56,13 +56,10 @@ BINNING: calibrated: Ge: 14000 0 7000
 # DATADIR: /home/corentin/faster_data/N-SI-131/proton_24.fast/
 
 DATADIR: /home/corentin/faster_data/N-SI-85/run_2.fast/
-<<<<<<< HEAD
 DATADIR: /home/corentin/faster_data/N-SI-85/run_3.fast/
 DATADIR: /home/corentin/faster_data/N-SI-85/run_4.fast/
 DATADIR: /home/corentin/faster_data/N-SI-85/run_5.fast/
 DATADIR: /home/corentin/faster_data/N-SI-85/run_6.fast/
-=======
->>>>>>> 7d5a77d0d66b9fb570dc015bd62647592848f75c
 # DATADIR: /home/corentin/faster_data/N-SI-85/run_Alpha_8.fast/
 
 # OUTDIR: Calibration/run_12/

@@ -1344,7 +1344,6 @@ void NearLine::m_ts_calculate()
 {
   Double_t pospic, amppic, dump_sigma;
   Float_t cte, Mean, sigma;
-  std::unique_ptr<TF1> gaus_pol0, fittedPic;
   std::vector<Float_t> array_labels(m_labelToName.size());
   for (size_t i = 0; i<array_labels.size(); i++) array_labels[i] = i;
   std::vector<Float_t> array_resolutions(m_labelToName.size(),0);
@@ -1356,6 +1355,7 @@ void NearLine::m_ts_calculate()
   if (m_use_RF) deltaT_RF = ( m_ts_histo_RF->GetMaximumBin() - (m_ts_histo_RF -> GetNbinsX()/2) ) * m_ts_rebin[RF];
   for (size_t it = 0; it<m_ts_histo.size(); it++)
   {
+    std::unique_ptr<TF1> gaus_pol0, fittedPic;
     type = type_det(it);
     m_ts_histo[it].Merge();
     if (!m_ts_histo[it].exists()) continue; // Eliminate empty histograms
@@ -1445,17 +1445,17 @@ void NearLine::m_ts_calculate()
   }
 
   // TO RECODE ...
-  std::ofstream f(m_outdir+m_ts_outdir+"resolutions_temporelles",std::ios::out);
-  for (size_t i = 0; i<array_resolutions.size(); i++)
-  {
-    if (array_resolutions.size()<1E-6f)
-    {
-      array_resolutions.erase(array_resolutions.begin()+i);
-      array_labels.erase(array_labels.begin()+i);
-    }
-    else { f << array_labels[i] << " " << array_resolutions[i] << std::endl; }
-  }
-  f.close();
+  // std::ofstream f(m_outdir+m_ts_outdir+"resolutions_temporelles",std::ios::out);
+  // for (size_t i = 0; i<array_resolutions.size(); i++)
+  // {
+  //   if (array_resolutions.size()<1E-6f)
+  //   {
+  //     array_resolutions.erase(array_resolutions.begin()+i);
+  //     array_labels.erase(array_labels.begin()+i);
+  //   }
+  //   else { f << array_labels[i] << " " << array_resolutions[i] << std::endl; }
+  // }
+  // f.close();
   // ... UNTIL HERE
 
   std::cout << "Timeshifts data written to " << m_outdir+m_ts_outdir+m_ts_outdata << std::endl;
