@@ -21,8 +21,13 @@
 #define PARIS
 #define USE_DSSD
 #define FATIMA
-
 #endif //N_SI_129
+
+#ifdef N_SI_85
+#define PARIS
+#define USE_DSSD
+#define FATIMA
+#endif //N_SI_85
 
 #if defined(LICORNE) || defined(PARIS)
 #define QDC2
@@ -672,7 +677,7 @@ Bool_t NearLine::processFile(std::string filename, int thread_nb)
     {
       if (m_use_RF)
       {
-        if(is_RF(hit.label)) {rf.last_hit = hit.time; rf.period = hit.nrj;}
+        if(is_RF(hit.label)) {rf.last_hit = hit.time; rf.period = hit.nrj; continue;}
         else if (hit.label == m_ts_time_ref.label) m_ts_histo_RF[thread_nb] -> Fill(rf.pulse_ToF(hit.time));
       }
       if (isDSSD[hit.label] && m_use_RF)
