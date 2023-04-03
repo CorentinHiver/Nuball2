@@ -242,7 +242,7 @@ void MTTHist<THist>::Write()
 template <class THist>
 MTTHist<THist>::~MTTHist()
 {
-  print("Destructing",m_str_name);
+  // print("Destructing",m_str_name);
   #ifdef MTTHIST_MONO
   if (!m_file && m_merged) delete m_merged;
 

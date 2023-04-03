@@ -81,7 +81,7 @@ Bool_t ParisBidim::Initialize()
   m_E_VS_ToF.resize(m_nb_histo);
 
   std::string name;
-  for (auto l : Paris_Labels)
+  for (auto l : paris_labels)
   {
     name = n->m_labelToName[l];
     if (name!="")

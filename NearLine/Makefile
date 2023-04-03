@@ -32,7 +32,7 @@ EXE       = $(SRCEXE:.cpp=)
 all : $(EXE)
 
 $(EXE): $(SRCEXE)
-	${CC} $@.cpp -o $(EXE) ${CFLAGS} ${LIBS} -O2 -Wall  #-Wextra
+	${CC} $@.cpp -o $(EXE) ${CFLAGS} ${LIBS} -g -Wall  #-Wextra
 
 rootlogon :
 	@echo "---"

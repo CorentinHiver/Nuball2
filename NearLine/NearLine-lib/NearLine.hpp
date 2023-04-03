@@ -21,8 +21,13 @@
 #define PARIS
 #define USE_DSSD
 #define FATIMA
-
 #endif //N_SI_129
+
+#ifdef N_SI_85
+#define PARIS
+#define USE_DSSD
+#define FATIMA
+#endif //N_SI_85
 
 #if defined(LICORNE) || defined(PARIS)
 #define QDC2
@@ -35,7 +40,9 @@
 #include "../../lib/Classes/CoincBuilder2.hpp"
 #include "../../lib/Classes/FasterReader.hpp"
 #include "../../lib/Classes/Calibration.hpp"
-#include "../../lib/Classes/Sorted_Event.hpp"
+
+#include "../../lib/Analyse/Sorted_Event.hpp"
+#include "../../lib/Analyse/ParisLabel.hpp"
 
 #include "../../lib/MTObjects/MTTHist.hpp"
 #include "../../lib/MTObjects/MTCounter.hpp"
@@ -46,7 +53,7 @@ class Analyse;
 class Analyse_W;
 
 //Forward declaration of the detectors :
-// class DSSD;
+// class dssd;
 
 class NearLine
 {
@@ -119,17 +126,17 @@ private:
   Bool_t m_use_threshold = false; //keV | energy threshold for calibrated spectra
 
     //Energy binning
-    MapDetector m_bins_raw   = { {null, 1}, {RF, 1}, {BGO, 1000  }, {LaBr3, 5000   }, {Ge, 20000  }, {EDEN, 10000}, {Paris, 5000  }, {DSSD, 10000 } };
-    MapDetector m_min_raw    = { {null, 0}, {RF, 0}, {BGO, 0     }, {LaBr3, 0      }, {Ge, 0      }, {EDEN, 0    }, {Paris, 0     }, {DSSD, 0    } };
-    MapDetector m_max_raw    = { {null, 1}, {RF, 1}, {BGO, 300000}, {LaBr3, 1000000}, {Ge, 200000 }, {EDEN, 10000}, {Paris, 1000000}, {DSSD, 100000} };
+    MapDetector m_bins_raw   = { {null, 1}, {RF, 1}, {BGO, 1000  }, {LaBr3, 5000   }, {Ge, 20000  }, {EDEN, 10000}, {Paris, 5000  }, {dssd, 10000 } };
+    MapDetector m_min_raw    = { {null, 0}, {RF, 0}, {BGO, 0     }, {LaBr3, 0      }, {Ge, 0      }, {EDEN, 0    }, {Paris, 0     }, {dssd, 0    } };
+    MapDetector m_max_raw    = { {null, 1}, {RF, 1}, {BGO, 300000}, {LaBr3, 1000000}, {Ge, 200000 }, {EDEN, 10000}, {Paris, 1000000}, {dssd, 100000} };
 
-    MapDetector m_bins_calib = { {null, 1}, {RF, 1}, {BGO, 1000  }, {LaBr3, 1500   }, {Ge, 6000   }, {EDEN, 10000}, {Paris, 5000}, {DSSD, 500  } };
-    MapDetector m_min_calib  = { {null, 0}, {RF, 0}, {BGO, 0     }, {LaBr3, 0      }, {Ge, 0      }, {EDEN, 0    }, {Paris, 0   }, {DSSD, 0    } };
-    MapDetector m_max_calib  = { {null, 1}, {RF, 1}, {BGO, 3000  }, {LaBr3, 3000   }, {Ge, 3000   }, {EDEN, 1    }, {Paris, 3000}, {DSSD, 20000} };
+    MapDetector m_bins_calib = { {null, 1}, {RF, 1}, {BGO, 1000  }, {LaBr3, 1500   }, {Ge, 6000   }, {EDEN, 10000}, {Paris, 5000}, {dssd, 500  } };
+    MapDetector m_min_calib  = { {null, 0}, {RF, 0}, {BGO, 0     }, {LaBr3, 0      }, {Ge, 0      }, {EDEN, 0    }, {Paris, 0   }, {dssd, 0    } };
+    MapDetector m_max_calib  = { {null, 1}, {RF, 1}, {BGO, 3000  }, {LaBr3, 3000   }, {Ge, 3000   }, {EDEN, 1    }, {Paris, 3000}, {dssd, 20000} };
 
-    MapDetector m_bins_bidim = { {null, 1}, {RF, 1}, {BGO, 250   }, {LaBr3, 1000   }, {Ge, 6000   }, {Paris, 1000}, {DSSD, 1000 } };
-    MapDetector m_min_bidim  = { {null, 0}, {RF, 0}, {BGO, 0     }, {LaBr3, 0      }, {Ge, 0      }, {Paris, 0   }, {DSSD, 0    } };
-    MapDetector m_max_bidim  = { {null, 1}, {RF, 1}, {BGO, 3000  }, {LaBr3, 3000   }, {Ge, 6000   }, {Paris, 3000}, {DSSD, 20000} };
+    MapDetector m_bins_bidim = { {null, 1}, {RF, 1}, {BGO, 250   }, {LaBr3, 1000   }, {Ge, 6000   }, {Paris, 1000}, {dssd, 1000 } };
+    MapDetector m_min_bidim  = { {null, 0}, {RF, 0}, {BGO, 0     }, {LaBr3, 0      }, {Ge, 0      }, {Paris, 0   }, {dssd, 0    } };
+    MapDetector m_max_bidim  = { {null, 1}, {RF, 1}, {BGO, 3000  }, {LaBr3, 3000   }, {Ge, 6000   }, {Paris, 3000}, {dssd, 20000} };
 
     //Detectors :
 
@@ -167,7 +174,7 @@ private:
   Bool_t      m_hc            = false;
   Bool_t      m_hc_Ge_Clover  = false;
   Bool_t      m_hc_LaBr3      = false;
-  Bool_t      m_hc_DSSD      = false;
+  Bool_t      m_hc_dssd      = false;
   Bool_t      m_hc_Paris      = false;
   std::string m_hc_outroot    = "histo_calib.root";
   void        m_hc_Initialize();
@@ -199,7 +206,7 @@ private:
   Int_t       m_ts_timeWindow_ns = 0; //ns | idem
   Timing_ref  m_ts_time_ref; // time reference used for time alignement purposes
   Timeshift   m_ts_array;
-  std::map<Detector, Float_t> m_ts_rebin = { {LaBr3,100}, {Ge,1000}, {BGO,500}, {EDEN,500}, {RF,100}, {Paris,100}, {DSSD,1000}, {EDEN,1000}};
+  std::map<Detector, Float_t> m_ts_rebin = { {LaBr3,100}, {Ge,1000}, {BGO,500}, {EDEN,500}, {RF,100}, {Paris,100}, {dssd,1000}, {EDEN,1000}};
   void        m_ts_Initialize();
   void        m_ts_Fill(Event const & ts_buffer, size_t const & refPos, UShort_t const & thread_nb);
   void        m_ts_calculate();
@@ -223,7 +230,7 @@ private:
 
   //! RF check
   bool m_rfc = false;
-  int m_rfc_nbFiles = 5;
+  size_t m_rfc_nbFiles = 5;
   Long64_t m_rfc_timeWindow = 1500000; //ps
   Long64_t m_rfc_timeWindow_ns = 1500;
   Label m_rfc_time_ref_label = 252;
@@ -239,8 +246,8 @@ private:
   ParisBidim *m_pb = nullptr;
 
   //Detectors :
-  // friend class DSSD;
-  // DSSD *dssd = nullptr;
+  // friend class dssd;
+  // dssd *dssd = nullptr;
 
   // -------------- //
   //   HISTOGRAMS   //
@@ -294,7 +301,7 @@ private:
 #include "Modules/Analyse_W.hpp"
 
 //include the detectors :
-// #include "Detectors/DSSD.hpp"
+// #include "Detectors/dssd.hpp"
 
 Bool_t NearLine::launch()
 {
@@ -525,7 +532,7 @@ void NearLine::faster2root(std::string filename, int thread_nb)
       #elif defined (M2G1_TRIG)
         trig = arg.ModulesMult>1 && arg.RawGeMult>0; // At least one Ge cystal and 2 modules
       #elif defined (D1_TRIG)
-        trig = arg.DSSDMult>0; // At least one DSSD
+        trig = arg.dssdMult>0; // At least one dssd
       #elif defined (C1L2_C2_TRIG)
         trig = (arg.CleanGeMult>0 && arg.LaBr3Mult>1) || arg.CleanGeMult>1; // At least one clean Ge and 2 LaBr3, or two clean Ge
       #elif defined (CG1L2_CG2_TRIG)
@@ -666,13 +673,12 @@ Bool_t NearLine::processFile(std::string filename, int thread_nb)
       if (m_use_RF && is_RF(hit.label)) {rf.last_hit = hit.time; rf.period = hit.nrj;}
       m_pb->Fill(hit,rf,thread_nb);
     }
-
     // TIMESHIFT //
     if (m_ts)
     {
       if (m_use_RF)
       {
-        if(is_RF(hit.label)) {rf.last_hit = hit.time; rf.period = hit.nrj;}
+        if(is_RF(hit.label)) {rf.last_hit = hit.time; rf.period = hit.nrj; continue;}
         else if (hit.label == m_ts_time_ref.label) m_ts_histo_RF[thread_nb] -> Fill(rf.pulse_ToF(hit.time));
       }
       if (isDSSD[hit.label] && m_use_RF)
@@ -956,7 +962,7 @@ void NearLine::m_hc_Initialize()
     for (auto name : m_labelToName)
     {
       type = type_det(l);
-      if( (type == Ge && m_hc_Ge_Clover) || (type == Paris && m_hc_Paris) || (type == LaBr3 && m_hc_LaBr3) || (type == DSSD && m_hc_DSSD))
+      if( (type == Ge && m_hc_Ge_Clover) || (type == Paris && m_hc_Paris) || (type == LaBr3 && m_hc_LaBr3) || (type == dssd && m_hc_dssd))
         m_hc_histo[l].reset((name+"_calib").c_str(), name.c_str(), m_bins_calib[type],m_min_calib[type],m_max_calib[type]);
       l++;
     }
@@ -974,7 +980,7 @@ void NearLine::m_hc_Initialize()
     m_hc_bidim_histo_LaBr3.reset("All FATIMA LaBr3 calibrated spectra", "All FATIMA LaBr3 calibrated spectra", LaBr3_Labels.size()-1,LaBr3_Labels.data(), m_bins_bidim[LaBr3],m_min_bidim[LaBr3],m_max_bidim[LaBr3]);
     #endif //FATIMA
     #ifdef PARIS
-    m_hc_bidim_histo_Paris.reset("All PARIS calibrated spectra", "All PARIS calibrated spectra", Paris_Labels.size()-1,Paris_Labels.data(), m_bins_bidim[Paris],m_min_bidim[Paris],m_max_bidim[Paris]);
+    m_hc_bidim_histo_Paris.reset("All PARIS calibrated spectra", "All PARIS calibrated spectra", paris_labels.size()-1,paris_labels.data(), m_bins_bidim[Paris],m_min_bidim[Paris],m_max_bidim[Paris]);
     #endif //PARIS
   }
 }
@@ -1029,7 +1035,7 @@ void NearLine::m_rfc_Initialize()
     ListFiles files;
     files.resize(m_rfc_nbFiles);
     p_Files.Print();
-    for (int i = 1; i<m_rfc_nbFiles; i++)
+    for (size_t i = 1; i<m_rfc_nbFiles; i++)
     {
       print(i, files[i]);
       files[i] = p_Files[p_Files.size()-i];
@@ -1057,7 +1063,7 @@ Bool_t NearLine::Initialize()
 
   // Detectors :
   // #ifdef USE_DSSD
-  // dssd = new DSSD();
+  // dssd = new dssd();
   // dssd-> set(this);
   // #endif //USE_DSSD
 
@@ -1107,7 +1113,7 @@ Bool_t NearLine::configOk()
   {
     if (!folder_exists(getPath(m_outdir+m_hc_outroot))) {print("ERROR, OUT FOLDER DOESN'T EXISTS ! ", getPath(m_outdir+m_hc_outroot)); return false;}
     if (m_hc_outroot=="") {std::cout << "ERROR : NO OUT FILE NAME, check " << m_parameters_filename << std::endl; return false;}
-    if (!m_hc_LaBr3 && !m_hc_Ge_Clover && !m_hc_Paris && !m_hc_DSSD) {std::cout << "ERROR : NO SPECTRA OUT, check " << m_parameters_filename << std::endl; return false;}
+    if (!m_hc_LaBr3 && !m_hc_Ge_Clover && !m_hc_Paris && !m_hc_dssd) {std::cout << "ERROR : NO SPECTRA OUT, check " << m_parameters_filename << std::endl; return false;}
     if (m_calib.size() == 0) {std::cout << "ERROR : NO CALIBRATION DATA, check " << m_parameters_filename << std::endl; return false;}
   }
   if (m_ca)
@@ -1267,7 +1273,7 @@ void NearLine::m_fr_sum_counters()
   run_name = rmPathAndExt(run_name);
   std::ofstream outfile("log.log",std::ios::app);
   print(run_name);
-  outfile << run_name << ": CompressionFactor: " << m_fr_raw_run_size/m_fr_treated_run_size << " RawCounter: " << m_fr_raw_counter.get()
+  outfile << run_name << ": CompressionFactor: " << (Float_t)m_fr_raw_run_size/(Float_t)m_fr_treated_run_size << " RawCounter: " << m_fr_raw_counter.get()
   << " TreatedCounter: " << m_fr_treated_counter.get() << std::endl;
   outfile.close();
 }
@@ -1346,7 +1352,8 @@ void NearLine::m_ts_calculate()
   std::ofstream outDeltaTfile(m_outdir+m_ts_outdir+m_ts_outdata, std::ios::out);
   // Calculate the RF timeshift first :
   m_ts_histo_RF.Merge();
-  Long64_t deltaT_RF = ( m_ts_histo_RF->GetMaximumBin() - (m_ts_histo_RF -> GetNbinsX()/2) ) * m_ts_rebin[RF];
+  Long64_t deltaT_RF = 0;
+  if (m_use_RF) deltaT_RF = ( m_ts_histo_RF->GetMaximumBin() - (m_ts_histo_RF -> GetNbinsX()/2) ) * m_ts_rebin[RF];
   for (size_t it = 0; it<m_ts_histo.size(); it++)
   {
     type = type_det(it);
@@ -1367,12 +1374,12 @@ void NearLine::m_ts_calculate()
     }
     #endif //LICORNE
     #ifdef USE_DSSD
-    if (type == DSSD)
+    if (type == dssd)
     {
       if (m_use_RF)
       {
         amppic = m_ts_histo[it] -> GetMaximum();
-        Float_t zero = ( m_ts_histo[it] -> FindFirstBinAbove(amppic/2) - (m_ts_histo[it] -> GetNbinsX()/2) ) * m_ts_rebin[DSSD] ;
+        Float_t zero = ( m_ts_histo[it] -> FindFirstBinAbove(amppic/2) - (m_ts_histo[it] -> GetNbinsX()/2) ) * m_ts_rebin[dssd] ;
         // print("amppic :", amppic, "zero :", zero, "deltaT_RF", deltaT_RF, "RF-zero = ", zero - deltaT_RF);
         outDeltaTfile << it << "\t" << (Float_t)(deltaT_RF-zero) << std::endl;
         if (m_ts_verbose) print("Edge :", zero, "with", (int) m_ts_histo[it] -> GetMaximum(), "counts in peak");
@@ -1380,7 +1387,7 @@ void NearLine::m_ts_calculate()
       else
       {
         pospic = m_ts_histo[it] -> GetMean();
-        m_ts_histo[it] -> GetXaxis() -> SetRange(pospic+100*m_ts_rebin[DSSD], pospic+100*m_ts_rebin[DSSD]);
+        m_ts_histo[it] -> GetXaxis() -> SetRange(pospic+100*m_ts_rebin[dssd], pospic+100*m_ts_rebin[dssd]);
         outDeltaTfile << it << "\t" << (Float_t)(m_ts_histo[it] -> GetMean()) << std::endl;
         if (m_ts_verbose) print( "mean : ", m_ts_histo[it] -> GetMean(), "with", (int) m_ts_histo[it] -> GetMaximum(), "counts in peak");
       }
@@ -1545,7 +1552,7 @@ void NearLine::m_ca_calculate(std::string _histoFilename, Fits & fits, TFile* ou
     Int_t window_1 = 0, window_2 = 0, window_3 = 0;//Window value in keV
     #ifdef USE_DSSD
     bool triplealpha  = isTripleAlpha(m_ca_source);
-    if (triplealpha && type!=DSSD) continue;
+    if (triplealpha && type!=dssd) continue;
     #endif //USE_DSSD
     if (type == Ge)
     {// For Clovers
@@ -1631,7 +1638,7 @@ void NearLine::m_ca_calculate(std::string _histoFilename, Fits & fits, TFile* ou
         ADC_threshold = 500;
       }
     }
-    else if (type == DSSD)
+    else if (type == dssd)
     {
       print("coucou");
       window_1 = 150, window_2 = 100, window_3 = 50;
@@ -2042,7 +2049,7 @@ Bool_t NearLine::setConfig (std::stringstream & parameters_file)
           else if (temp2 == "BGO:"  ) is >> m_bins_calib[BGO]   >> m_min_calib[BGO]   >> m_max_calib[BGO]  ;
           else if (temp2 == "LaBr3:") is >> m_bins_calib[LaBr3] >> m_min_calib[LaBr3] >> m_max_calib[LaBr3];
           else if (temp2 == "Paris:") is >> m_bins_calib[Paris] >> m_min_calib[Paris] >> m_max_calib[Paris];
-          else if (temp2 == "DSSD:")  is >> m_bins_calib[DSSD]  >> m_min_calib[DSSD]  >> m_max_calib[DSSD];
+          else if (temp2 == "dssd:")  is >> m_bins_calib[dssd]  >> m_min_calib[dssd]  >> m_max_calib[dssd];
           else std::cout << std::endl << "BINNING: calibrated: ATTENTION, parameter " << temp2 << " not recognized !" << std::endl << std::endl;
         }
       }
@@ -2054,7 +2061,7 @@ Bool_t NearLine::setConfig (std::stringstream & parameters_file)
           else if (temp2 == "BGO:"  ) is >> m_bins_bidim[BGO]   >> m_min_bidim[BGO]   >> m_max_bidim[BGO]  ;
           else if (temp2 == "LaBr3:") is >> m_bins_bidim[LaBr3] >> m_min_bidim[LaBr3] >> m_max_bidim[LaBr3];
           else if (temp2 == "Paris:") is >> m_bins_bidim[Paris] >> m_min_bidim[Paris] >> m_max_bidim[Paris];
-          else if (temp2 == "DSSD:")  is >> m_bins_bidim[DSSD] >> m_min_bidim[DSSD] >> m_max_bidim[DSSD];
+          else if (temp2 == "dssd:")  is >> m_bins_bidim[dssd] >> m_min_bidim[dssd] >> m_max_bidim[dssd];
           else std::cout << std::endl << "BINNING: bidim: ATTENTION, parameter " << temp2 << " not recognized !" << std::endl << std::endl;
         }
       }
@@ -2066,7 +2073,7 @@ Bool_t NearLine::setConfig (std::stringstream & parameters_file)
           else if (temp2 == "BGO:"  ) is >> m_bins_raw[BGO]   >> m_min_raw[BGO]   >> m_max_raw[BGO]  ;
           else if (temp2 == "LaBr3:") is >> m_bins_raw[LaBr3] >> m_min_raw[LaBr3] >> m_max_raw[LaBr3];
           else if (temp2 == "Paris:") is >> m_bins_raw[Paris] >> m_min_raw[Paris] >> m_max_raw[Paris];
-          else if (temp2 == "DSSD:")  is >> m_bins_raw[DSSD] >>  m_min_raw[DSSD] >>  m_max_raw[DSSD];
+          else if (temp2 == "dssd:")  is >> m_bins_raw[dssd] >>  m_min_raw[dssd] >>  m_max_raw[dssd];
           else std::cout << std::endl << "BINNING: uncalibrated: ATTENTION, parameter " << temp2 << " not recognized !" << std::endl << std::endl;
         }
       }
@@ -2144,7 +2151,7 @@ Bool_t NearLine::setConfig (std::stringstream & parameters_file)
           <<  "Check your parameters.dat files ..." << std::endl;return false;}
           else if (name == "Ge_Clover") {m_hc_Ge_Clover = true;}
           else if (name == "LaBr3") {m_hc_LaBr3 = true;}
-          else if (name == "DSSD") {m_hc_DSSD = true;}
+          else if (name == "dssd") {m_hc_dssd = true;}
           else if (name == "Paris") {m_hc_Paris = true;}
           else if (name == "outRoot:") is >> m_hc_outroot;
           else {std::cout << name << " calibrated spectra not taken care of. Sorry ! " << std::endl; return false;}

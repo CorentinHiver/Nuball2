@@ -84,7 +84,7 @@ private:
   Float_t     GAMMA_FLASH = 25.f; //ns
   #endif //LICORNE
   Int_t m_nb_gates = 0;
-  Gates m_gate_counter;
+  // Gates m_gate_counter;
 
   #ifdef USE_DSSD
   DSSD_Event m_last_DSSD_event;
@@ -173,7 +173,7 @@ private:
   MTTHist<TH2F> m_p_Paris_Ge_C1P1;
   MTTHist<TH2F> m_p_Paris_Paris;
 
-  //DSSD :
+  //dssd :
     // Germanium and particle in coincidence :
   MTTHist<TH1F> m_DSSD_gate_Clover;
   MTTHist<TH2F> m_DSSD_gate_Clover_bidim;
@@ -329,11 +329,11 @@ Bool_t Analyse_W::SetConfig(std::istringstream & is)
     else if (temp == "gated_counter:")
     {
       is >> m_nb_gates;
-      m_gate_counter.resize(m_nb_gates);
-      for (int i = 0; i<m_nb_gates; i++)
-      {
-        is >> m_gate_counter[i].first >> m_gate_counter[i].second;
-      }
+      // m_gate_counter.resize(m_nb_gates);
+      // for (int i = 0; i<m_nb_gates; i++)
+      // {
+      //   is >> m_gate_counter[i].first >> m_gate_counter[i].second;
+      // }
     }
     else if (temp == "time_gated:" || temp == "time_gate:")
     {
@@ -520,7 +520,7 @@ void Analyse_W::Fill(Event const & event, UShort_t const & thread_nb)
             m_particule_gated_Clover_prompt_VS_delayed[thread_nb] -> Fill(nrj_i,nrj_j);
           }
         }
-        #endif //DSSD
+        #endif //dssd
       }
     }
 
@@ -580,51 +580,51 @@ void Analyse_W::Fill(Event const & event, UShort_t const & thread_nb)
   // ----------------------- //
 
   //Paris events :
-  #ifdef PARIS
-  for (size_t loop_i = 0; loop_i<arg.paris_hits.size(); loop_i++)
-  {
-    auto const paris_i = arg.paris_hits[loop_i];
-    auto const nrj_i = event.nrjs[paris_i];
-    Paris_Label label_i (event.labels[paris_i]);
-    if (label_i.back)
-    {
-      m_Back_Spectra[thread_nb]->Fill(nrj_i);
-      switch(label_i.ring)
-      {
-        case 1:
-          m_BR1_Spectra[thread_nb]->Fill(nrj_i);
-          break;
-        case 2:
-          m_BR2_Spectra[thread_nb]->Fill(nrj_i);
-          break;
-        case 3:
-          m_BR3_Spectra[thread_nb]->Fill(nrj_i);
-          break;
-      }
-    }
-    else
-    {
-      m_Front_Spectra[thread_nb]->Fill(nrj_i);
-      switch(label_i.ring)
-      {
-        case 1:
-          m_FR1_Spectra[thread_nb]->Fill(nrj_i);
-          break;
-        case 2:
-          m_FR2_Spectra[thread_nb]->Fill(nrj_i);
-          break;
-        case 3:
-          m_FR3_Spectra[thread_nb]->Fill(nrj_i);
-          break;
-      }
-    }
-    Paris_XY xy(label_i);
-    m_Paris_xy[thread_nb] -> Fill( ((label_i.back) ? -10 : 10) + xy.x(), xy.y());
-  }
-  #endif //PARIS
+  // #ifdef PARIS
+  // for (size_t loop_i = 0; loop_i<arg.paris_hits.size(); loop_i++)
+  // {
+  //   auto const paris_i = arg.paris_hits[loop_i];
+  //   auto const nrj_i = event.nrjs[paris_i];
+  //   ParisLabel label_i (event.labels[paris_i]);
+  //   if (label_i.back)
+  //   {
+  //     m_Back_Spectra[thread_nb]->Fill(nrj_i);
+  //     switch(label_i.ring)
+  //     {
+  //       case 1:
+  //         m_BR1_Spectra[thread_nb]->Fill(nrj_i);
+  //         break;
+  //       case 2:
+  //         m_BR2_Spectra[thread_nb]->Fill(nrj_i);
+  //         break;
+  //       case 3:
+  //         m_BR3_Spectra[thread_nb]->Fill(nrj_i);
+  //         break;
+  //     }
+  //   }
+  //   else
+  //   {
+  //     m_Front_Spectra[thread_nb]->Fill(nrj_i);
+  //     switch(label_i.ring)
+  //     {
+  //       case 1:
+  //         m_FR1_Spectra[thread_nb]->Fill(nrj_i);
+  //         break;
+  //       case 2:
+  //         m_FR2_Spectra[thread_nb]->Fill(nrj_i);
+  //         break;
+  //       case 3:
+  //         m_FR3_Spectra[thread_nb]->Fill(nrj_i);
+  //         break;
+  //     }
+  //   }
+  //   Paris_XY xy(label_i);
+  //   m_Paris_xy[thread_nb] -> Fill( ((label_i.back) ? -10 : 10) + xy.x(), xy.y());
+  // }
+  // #endif //PARIS
 
     // ---------------------- //
-    //      DSSD sorting      //
+    //      dssd sorting      //
     // ---------------------- //
 
   #ifdef USE_DSSD
@@ -817,7 +817,7 @@ void Analyse_W::Fill(Event const & event, UShort_t const & thread_nb)
       }
     }
   }
-  #endif //DSSD
+  #endif //dssd
 }
 
 void Analyse_W::fillCoincRingSector(Label const & Ring, Label const & Sector, int const & thread_nb)
@@ -1095,121 +1095,121 @@ Bool_t Analyse_W::Initialize()
   m_DSSD_gate_Clover_bidim.reset("Particle gated Ge Spectra bidim","Particle gated Ge Spectra bidim",
         n->m_bins_bidim[Ge],n->m_min_bidim[Ge],n->m_max_bidim[Ge], n->m_bins_bidim[Ge],n->m_min_bidim[Ge],n->m_max_bidim[Ge]);
   m_prompt_particule_gate_Clover_spectra.reset("Particle in prompt, Ge Spectra","Particle in prompt, Ge Spectra", n->m_bins_calib[Ge],n->m_min_calib[Ge],n->m_max_calib[Ge], 601,-100,500);
-  m_clover_VS_DSSD.reset("DSSD VS Clover","DSSD VS Clover", n->m_bins_bidim[Ge],n->m_min_bidim[Ge],n->m_max_bidim[Ge],n->m_bins_bidim[DSSD],n->m_min_bidim[DSSD],n->m_max_bidim[DSSD]);
-  m_DSSD_R3_VS_Clover.reset("DSSD R3 VS Clover","DSSD R3 VS Clover", n->m_bins_bidim[Ge],n->m_min_bidim[Ge],n->m_max_bidim[Ge],n->m_bins_bidim[DSSD],n->m_min_bidim[DSSD],n->m_max_bidim[DSSD]);
-  m_DSSD_R4_VS_Clover.reset("DSSD R4 VS Clover","DSSD R4 VS Clover", n->m_bins_bidim[Ge],n->m_min_bidim[Ge],n->m_max_bidim[Ge],n->m_bins_bidim[DSSD],n->m_min_bidim[DSSD],n->m_max_bidim[DSSD]);
-  m_DSSD_R5_VS_Clover.reset("DSSD R5 VS Clover","DSSD R5 VS Clover", n->m_bins_bidim[Ge],n->m_min_bidim[Ge],n->m_max_bidim[Ge],n->m_bins_bidim[DSSD],n->m_min_bidim[DSSD],n->m_max_bidim[DSSD]);
+  m_clover_VS_DSSD.reset("dssd VS Clover","dssd VS Clover", n->m_bins_bidim[Ge],n->m_min_bidim[Ge],n->m_max_bidim[Ge],n->m_bins_bidim[dssd],n->m_min_bidim[dssd],n->m_max_bidim[dssd]);
+  m_DSSD_R3_VS_Clover.reset("dssd R3 VS Clover","dssd R3 VS Clover", n->m_bins_bidim[Ge],n->m_min_bidim[Ge],n->m_max_bidim[Ge],n->m_bins_bidim[dssd],n->m_min_bidim[dssd],n->m_max_bidim[dssd]);
+  m_DSSD_R4_VS_Clover.reset("dssd R4 VS Clover","dssd R4 VS Clover", n->m_bins_bidim[Ge],n->m_min_bidim[Ge],n->m_max_bidim[Ge],n->m_bins_bidim[dssd],n->m_min_bidim[dssd],n->m_max_bidim[dssd]);
+  m_DSSD_R5_VS_Clover.reset("dssd R5 VS Clover","dssd R5 VS Clover", n->m_bins_bidim[Ge],n->m_min_bidim[Ge],n->m_max_bidim[Ge],n->m_bins_bidim[dssd],n->m_min_bidim[dssd],n->m_max_bidim[dssd]);
   m_particule_gated_Clover_prompt_VS_delayed.reset("Particle gated, Clover Spectra prompt VS delayed","Particle gated, Clover Spectra prompt VS delayed", n->m_bins_calib[Ge],n->m_min_calib[Ge],n->m_max_calib[Ge], 601,-100,500);
   m_DSSD_gate_Clover_delayed.reset("Particle gated, delayed Ge Spectra","Particle gated, delayed Ge Spectra", n->m_bins_calib[Ge],n->m_min_calib[Ge],n->m_max_calib[Ge]);
   m_DSSD_gate_Clover_prompt.reset("Particle gated, prompt Ge Spectra","Particle gated, prompt Ge Spectra", n->m_bins_calib[Ge],n->m_min_calib[Ge],n->m_max_calib[Ge]);
-  m_DSSD_E_gate_197Au.reset("Particle spectra gate on 197Au", "Particle spectra gate on 197Au",n->m_bins_calib[DSSD],n->m_min_calib[DSSD],n->m_max_calib[DSSD]);
-  m_DSSD_E_gate_56Fe.reset("Particle spectra gate on 56Fe", "Particle spectra gate on 56Fe",n->m_bins_calib[DSSD],n->m_min_calib[DSSD],n->m_max_calib[DSSD]);
-  m_DSSD_E_gate_52Cr.reset("Particle spectra gate on 52Cr", "Particle spectra gate on 52Cr",n->m_bins_calib[DSSD],n->m_min_calib[DSSD],n->m_max_calib[DSSD]);
-  m_DSSD_E_gate_12C.reset("Particle spectra gate on 12C", "Particle spectra gate on 12C",n->m_bins_calib[DSSD],n->m_min_calib[DSSD],n->m_max_calib[DSSD]);
-  m_DSSD_E_gate_16O.reset("Particle spectra gate on 16O", "Particle spectra gate on 16O",n->m_bins_calib[DSSD],n->m_min_calib[DSSD],n->m_max_calib[DSSD]);
-  m_DSSD_E_gate_236U.reset("Particle spectra gate on 236U", "Particle spectra gate on 236U",n->m_bins_calib[DSSD],n->m_min_calib[DSSD],n->m_max_calib[DSSD]);
-  m_DSSD_E_gate_9Be.reset("Particle spectra gate on 9Be", "Particle spectra gate on 9Be",n->m_bins_calib[DSSD],n->m_min_calib[DSSD],n->m_max_calib[DSSD]);
-  m_DSSD_wide_E_gate_16O.reset("Particle spectra (wide) gate on 16O", "Particle spectra (wide) gate on 16O",n->m_bins_calib[DSSD],n->m_min_calib[DSSD],n->m_max_calib[DSSD]);
+  m_DSSD_E_gate_197Au.reset("Particle spectra gate on 197Au", "Particle spectra gate on 197Au",n->m_bins_calib[dssd],n->m_min_calib[dssd],n->m_max_calib[dssd]);
+  m_DSSD_E_gate_56Fe.reset("Particle spectra gate on 56Fe", "Particle spectra gate on 56Fe",n->m_bins_calib[dssd],n->m_min_calib[dssd],n->m_max_calib[dssd]);
+  m_DSSD_E_gate_52Cr.reset("Particle spectra gate on 52Cr", "Particle spectra gate on 52Cr",n->m_bins_calib[dssd],n->m_min_calib[dssd],n->m_max_calib[dssd]);
+  m_DSSD_E_gate_12C.reset("Particle spectra gate on 12C", "Particle spectra gate on 12C",n->m_bins_calib[dssd],n->m_min_calib[dssd],n->m_max_calib[dssd]);
+  m_DSSD_E_gate_16O.reset("Particle spectra gate on 16O", "Particle spectra gate on 16O",n->m_bins_calib[dssd],n->m_min_calib[dssd],n->m_max_calib[dssd]);
+  m_DSSD_E_gate_236U.reset("Particle spectra gate on 236U", "Particle spectra gate on 236U",n->m_bins_calib[dssd],n->m_min_calib[dssd],n->m_max_calib[dssd]);
+  m_DSSD_E_gate_9Be.reset("Particle spectra gate on 9Be", "Particle spectra gate on 9Be",n->m_bins_calib[dssd],n->m_min_calib[dssd],n->m_max_calib[dssd]);
+  m_DSSD_wide_E_gate_16O.reset("Particle spectra (wide) gate on 16O", "Particle spectra (wide) gate on 16O",n->m_bins_calib[dssd],n->m_min_calib[dssd],n->m_max_calib[dssd]);
 
-  m_DSSD_mult.reset("DSSD mult", "DSSD multiplicity", 15, 0, 15);
-  m_DSSD_mult_Ring.reset("DSSD mult rings", "DSSD multiplicity rings", 6, 0, 5);
-  m_DSSD_mult_Sector.reset("DSSD mult sectors", "DSSD multiplicity sectors", 6, 0, 5);
-  m_DSSD_mult_Sector_VS_mult_Ring.reset("DSSD mult sectors VS mult rings", "DSSD multiplicity sectors VS mult rings", 5,0,5, 5,0,5);
-  m_DSSD_mult_Sector_VS_mult_Ring_E_sup_10_4.reset("DSSD mult sectors VS mult rings pic alpha", "DSSD multiplicity sectors VS mult rings pic alpha", 5,0,5, 5,0,5);
+  m_DSSD_mult.reset("dssd mult", "dssd multiplicity", 15, 0, 15);
+  m_DSSD_mult_Ring.reset("dssd mult rings", "dssd multiplicity rings", 6, 0, 5);
+  m_DSSD_mult_Sector.reset("dssd mult sectors", "dssd multiplicity sectors", 6, 0, 5);
+  m_DSSD_mult_Sector_VS_mult_Ring.reset("dssd mult sectors VS mult rings", "dssd multiplicity sectors VS mult rings", 5,0,5, 5,0,5);
+  m_DSSD_mult_Sector_VS_mult_Ring_E_sup_10_4.reset("dssd mult sectors VS mult rings pic alpha", "dssd multiplicity sectors VS mult rings pic alpha", 5,0,5, 5,0,5);
 
-  m_DSSD_Counter.reset("DSSD Counters", "DSSD Counters", 56,0,57);
+  m_DSSD_Counter.reset("dssd Counters", "dssd Counters", 56,0,57);
 
-  m_DSSD_sum_2_rings.reset("DSSD sum 2 Rings", "DSSD sum 2 Rings", n->m_bins_calib[DSSD],n->m_min_calib[DSSD],n->m_max_calib[DSSD]);
-  m_DSSD_sum_2_sectors.reset("DSSD sum 2 Sectors", "DSSD sum 2 Sectors", n->m_bins_calib[DSSD],n->m_min_calib[DSSD],n->m_max_calib[DSSD]);
+  m_DSSD_sum_2_rings.reset("dssd sum 2 Rings", "dssd sum 2 Rings", n->m_bins_calib[dssd],n->m_min_calib[dssd],n->m_max_calib[dssd]);
+  m_DSSD_sum_2_sectors.reset("dssd sum 2 Sectors", "dssd sum 2 Sectors", n->m_bins_calib[dssd],n->m_min_calib[dssd],n->m_max_calib[dssd]);
 
-  m_DSSD_Time_bidim.reset("DSSD Time bidim", "Time bidim", 201,-50,350, 201,-50,350);
-  m_DSSD_crosstalk_Sector.reset("DSSD Cross talk Sector", "Cross talk Sector", 41,0,40, 41,0,40);
-  m_DSSD_crosstalk_Ring.reset("DSSD Cross talk Ring", "Cross talk Ring", 17,39,56, 17,39,56);
-  m_DSSD_Rings_mult_VS_spectra.reset("Ring Mult VS Spectra", "Ring Mult VS Spectra", n->m_bins_calib[DSSD],n->m_min_calib[DSSD],n->m_max_calib[DSSD], 5,0,5);
-  m_DSSD_Sectors_mult_VS_spectra.reset("Sector Mult VS Spectra", "Sector Mult VS Spectra", n->m_bins_calib[DSSD],n->m_min_calib[DSSD],n->m_max_calib[DSSD], 5,0,5);
+  m_DSSD_Time_bidim.reset("dssd Time bidim", "Time bidim", 201,-50,350, 201,-50,350);
+  m_DSSD_crosstalk_Sector.reset("dssd Cross talk Sector", "Cross talk Sector", 41,0,40, 41,0,40);
+  m_DSSD_crosstalk_Ring.reset("dssd Cross talk Ring", "Cross talk Ring", 17,39,56, 17,39,56);
+  m_DSSD_Rings_mult_VS_spectra.reset("Ring Mult VS Spectra", "Ring Mult VS Spectra", n->m_bins_calib[dssd],n->m_min_calib[dssd],n->m_max_calib[dssd], 5,0,5);
+  m_DSSD_Sectors_mult_VS_spectra.reset("Sector Mult VS Spectra", "Sector Mult VS Spectra", n->m_bins_calib[dssd],n->m_min_calib[dssd],n->m_max_calib[dssd], 5,0,5);
 
-  m_DSSD_coinc_ring_sector.reset("DSSD coinc sector ring", "DSSD coinc sector ring", 17,39,56, 41,0,40);
+  m_DSSD_coinc_ring_sector.reset("dssd coinc sector ring", "dssd coinc sector ring", 17,39,56, 41,0,40);
   m_DSSD_Sector_VS_ring_polar.reset("Polar coordinates", "Polar coordinates", 800,-20,20, 800,-20,20);
   m_DSSD_Sector_VS_ring_polar_scale.reset("Polar coordinates scaled", "Polar coordinates scaled", 800,-7,7, 800,-7,7);
   m_DSSD_Sector_VS_ring_polar_scale_smooth.reset("Polar coordinates scaled smooth", "Polar coordinates scaled smooth", 800,-7,7, 800,-7,7);
 
   m_DSSD_R_1_coinc.reset("R1 && sector", "Sector VS R1",
-        n->m_bins_bidim[DSSD],n->m_min_bidim[DSSD],n->m_max_bidim[DSSD], n->m_bins_bidim[DSSD],n->m_min_bidim[DSSD],n->m_max_bidim[DSSD]);
+        n->m_bins_bidim[dssd],n->m_min_bidim[dssd],n->m_max_bidim[dssd], n->m_bins_bidim[dssd],n->m_min_bidim[dssd],n->m_max_bidim[dssd]);
   m_DSSD_R_0_VS_Sectors_1R1S.reset("coinc R0 && sector", "R0 VS Sectors",
-        n->m_bins_bidim[DSSD],n->m_min_bidim[DSSD],n->m_max_bidim[DSSD], n->m_bins_bidim[DSSD],n->m_min_bidim[DSSD],n->m_max_bidim[DSSD]);
+        n->m_bins_bidim[dssd],n->m_min_bidim[dssd],n->m_max_bidim[dssd], n->m_bins_bidim[dssd],n->m_min_bidim[dssd],n->m_max_bidim[dssd]);
   m_DSSD_R_1_VS_Sectors_1R1S.reset("coinc R1 && sector", "R1 VS Sectors",
-        n->m_bins_bidim[DSSD],n->m_min_bidim[DSSD],n->m_max_bidim[DSSD], n->m_bins_bidim[DSSD],n->m_min_bidim[DSSD],n->m_max_bidim[DSSD]);
+        n->m_bins_bidim[dssd],n->m_min_bidim[dssd],n->m_max_bidim[dssd], n->m_bins_bidim[dssd],n->m_min_bidim[dssd],n->m_max_bidim[dssd]);
   m_DSSD_R_2_VS_Sectors_1R1S.reset("coinc R2 && sector", "R2 VS Sectors",
-        n->m_bins_bidim[DSSD],n->m_min_bidim[DSSD],n->m_max_bidim[DSSD], n->m_bins_bidim[DSSD],n->m_min_bidim[DSSD],n->m_max_bidim[DSSD]);
+        n->m_bins_bidim[dssd],n->m_min_bidim[dssd],n->m_max_bidim[dssd], n->m_bins_bidim[dssd],n->m_min_bidim[dssd],n->m_max_bidim[dssd]);
   m_DSSD_R_3_VS_Sectors_1R1S.reset("coinc R3 && sector", "R3 VS Sectors",
-        n->m_bins_bidim[DSSD],n->m_min_bidim[DSSD],n->m_max_bidim[DSSD], n->m_bins_bidim[DSSD],n->m_min_bidim[DSSD],n->m_max_bidim[DSSD]);
+        n->m_bins_bidim[dssd],n->m_min_bidim[dssd],n->m_max_bidim[dssd], n->m_bins_bidim[dssd],n->m_min_bidim[dssd],n->m_max_bidim[dssd]);
   m_DSSD_R_4_VS_Sectors_1R1S.reset("coinc R4 && sector", "R4 VS Sectors",
-        n->m_bins_bidim[DSSD],n->m_min_bidim[DSSD],n->m_max_bidim[DSSD], n->m_bins_bidim[DSSD],n->m_min_bidim[DSSD],n->m_max_bidim[DSSD]);
+        n->m_bins_bidim[dssd],n->m_min_bidim[dssd],n->m_max_bidim[dssd], n->m_bins_bidim[dssd],n->m_min_bidim[dssd],n->m_max_bidim[dssd]);
   m_DSSD_R_5_VS_Sectors_1R1S.reset("coinc R5 && sector", "R5 VS Sectors",
-        n->m_bins_bidim[DSSD],n->m_min_bidim[DSSD],n->m_max_bidim[DSSD], n->m_bins_bidim[DSSD],n->m_min_bidim[DSSD],n->m_max_bidim[DSSD]);
+        n->m_bins_bidim[dssd],n->m_min_bidim[dssd],n->m_max_bidim[dssd], n->m_bins_bidim[dssd],n->m_min_bidim[dssd],n->m_max_bidim[dssd]);
   m_DSSD_R_6_VS_Sectors_1R1S.reset("coinc R6 && sector", "R6 VS Sectors",
-        n->m_bins_bidim[DSSD],n->m_min_bidim[DSSD],n->m_max_bidim[DSSD], n->m_bins_bidim[DSSD],n->m_min_bidim[DSSD],n->m_max_bidim[DSSD]);
+        n->m_bins_bidim[dssd],n->m_min_bidim[dssd],n->m_max_bidim[dssd], n->m_bins_bidim[dssd],n->m_min_bidim[dssd],n->m_max_bidim[dssd]);
   m_DSSD_R_7_VS_Sectors_1R1S.reset("coinc R7 && sector", "R7 VS Sectors",
-        n->m_bins_bidim[DSSD],n->m_min_bidim[DSSD],n->m_max_bidim[DSSD], n->m_bins_bidim[DSSD],n->m_min_bidim[DSSD],n->m_max_bidim[DSSD]);
+        n->m_bins_bidim[dssd],n->m_min_bidim[dssd],n->m_max_bidim[dssd], n->m_bins_bidim[dssd],n->m_min_bidim[dssd],n->m_max_bidim[dssd]);
   m_DSSD_R_8_VS_Sectors_1R1S.reset("coinc R8 && sector", "R8 VS Sectors",
-        n->m_bins_bidim[DSSD],n->m_min_bidim[DSSD],n->m_max_bidim[DSSD], n->m_bins_bidim[DSSD],n->m_min_bidim[DSSD],n->m_max_bidim[DSSD]);
+        n->m_bins_bidim[dssd],n->m_min_bidim[dssd],n->m_max_bidim[dssd], n->m_bins_bidim[dssd],n->m_min_bidim[dssd],n->m_max_bidim[dssd]);
   m_DSSD_R_9_VS_Sectors_1R1S.reset("coinc R9 && sector", "R9 VS Sectors",
-        n->m_bins_bidim[DSSD],n->m_min_bidim[DSSD],n->m_max_bidim[DSSD], n->m_bins_bidim[DSSD],n->m_min_bidim[DSSD],n->m_max_bidim[DSSD]);
+        n->m_bins_bidim[dssd],n->m_min_bidim[dssd],n->m_max_bidim[dssd], n->m_bins_bidim[dssd],n->m_min_bidim[dssd],n->m_max_bidim[dssd]);
   m_DSSD_R_10_VS_Sectors_1R1S.reset("coinc R10 && sector", "R10 VS Sectors",
-        n->m_bins_bidim[DSSD],n->m_min_bidim[DSSD],n->m_max_bidim[DSSD], n->m_bins_bidim[DSSD],n->m_min_bidim[DSSD],n->m_max_bidim[DSSD]);
+        n->m_bins_bidim[dssd],n->m_min_bidim[dssd],n->m_max_bidim[dssd], n->m_bins_bidim[dssd],n->m_min_bidim[dssd],n->m_max_bidim[dssd]);
   m_DSSD_R_11_VS_Sectors_1R1S.reset("coinc R11 && sector", "R11 VS Sectors",
-        n->m_bins_bidim[DSSD],n->m_min_bidim[DSSD],n->m_max_bidim[DSSD], n->m_bins_bidim[DSSD],n->m_min_bidim[DSSD],n->m_max_bidim[DSSD]);
+        n->m_bins_bidim[dssd],n->m_min_bidim[dssd],n->m_max_bidim[dssd], n->m_bins_bidim[dssd],n->m_min_bidim[dssd],n->m_max_bidim[dssd]);
   m_DSSD_R_12_VS_Sectors_1R1S.reset("coinc R12 && sector", "R12 VS Sectors",
-        n->m_bins_bidim[DSSD],n->m_min_bidim[DSSD],n->m_max_bidim[DSSD], n->m_bins_bidim[DSSD],n->m_min_bidim[DSSD],n->m_max_bidim[DSSD]);
+        n->m_bins_bidim[dssd],n->m_min_bidim[dssd],n->m_max_bidim[dssd], n->m_bins_bidim[dssd],n->m_min_bidim[dssd],n->m_max_bidim[dssd]);
   m_DSSD_R_13_VS_Sectors_1R1S.reset("coinc R13 && sector", "R13 VS Sectors",
-        n->m_bins_bidim[DSSD],n->m_min_bidim[DSSD],n->m_max_bidim[DSSD], n->m_bins_bidim[DSSD],n->m_min_bidim[DSSD],n->m_max_bidim[DSSD]);
+        n->m_bins_bidim[dssd],n->m_min_bidim[dssd],n->m_max_bidim[dssd], n->m_bins_bidim[dssd],n->m_min_bidim[dssd],n->m_max_bidim[dssd]);
   m_DSSD_R_14_VS_Sectors_1R1S.reset("coinc R14 && sector", "R14 VS Sectors",
-        n->m_bins_bidim[DSSD],n->m_min_bidim[DSSD],n->m_max_bidim[DSSD], n->m_bins_bidim[DSSD],n->m_min_bidim[DSSD],n->m_max_bidim[DSSD]);
+        n->m_bins_bidim[dssd],n->m_min_bidim[dssd],n->m_max_bidim[dssd], n->m_bins_bidim[dssd],n->m_min_bidim[dssd],n->m_max_bidim[dssd]);
   m_DSSD_R_15_VS_Sectors_1R1S.reset("coinc R15 && sector", "R15 VS Sectors",
-        n->m_bins_bidim[DSSD],n->m_min_bidim[DSSD],n->m_max_bidim[DSSD], n->m_bins_bidim[DSSD],n->m_min_bidim[DSSD],n->m_max_bidim[DSSD]);
+        n->m_bins_bidim[dssd],n->m_min_bidim[dssd],n->m_max_bidim[dssd], n->m_bins_bidim[dssd],n->m_min_bidim[dssd],n->m_max_bidim[dssd]);
   m_DSSD_banana_R1_allsectors.reset("banana R1 VS all sectors", "E R1 VS E R1 + E any sector ",
-        n->m_bins_bidim[DSSD],n->m_min_bidim[DSSD],n->m_max_bidim[DSSD]*2, n->m_bins_bidim[DSSD],n->m_min_bidim[DSSD],n->m_max_bidim[DSSD]);
+        n->m_bins_bidim[dssd],n->m_min_bidim[dssd],n->m_max_bidim[dssd]*2, n->m_bins_bidim[dssd],n->m_min_bidim[dssd],n->m_max_bidim[dssd]);
   m_DSSD_banana_R1_allsectors_1R1S.reset("banana R1 VS all sectors coinc 1R&1S", "E R1 VS E R1 + E any sector if only 1 sector and 1 ring in coincidence",
-        n->m_bins_bidim[DSSD],n->m_min_bidim[DSSD],n->m_max_bidim[DSSD]*2, n->m_bins_bidim[DSSD],n->m_min_bidim[DSSD],n->m_max_bidim[DSSD]);
+        n->m_bins_bidim[dssd],n->m_min_bidim[dssd],n->m_max_bidim[dssd]*2, n->m_bins_bidim[dssd],n->m_min_bidim[dssd],n->m_max_bidim[dssd]);
 
-  m_DSSD_Spectra_each_channel.reset("DSSD spectra each channel ", "DSSD spectra each channel", 56,0,56,
-        n->m_bins_calib[DSSD], n->m_min_calib[DSSD], n->m_max_calib[DSSD]);
-  // m_merged_DSSD.reset("Merged DSSD spectra", "Merged DSSD spectra", 57,0,56, 2000,0,50000);
-  m_DSSD_Spectra_each_channel_1R1S.reset("DSSD spectra each channel 1 ring et 1 sector coinc","DSSD spectra each channel 1 ring et 1 sector in coincidence",
-        57,0,56, n->m_bins_calib[DSSD], n->m_min_calib[DSSD], n->m_max_calib[DSSD]);
-  m_DSSD_Spectra_each_channel_coinc2Sectors.reset("DSSD spectra each channel 2 sectors coinc", "DSSD spectra each channel 2 sectors in coincidence",
-        57,0,56, n->m_bins_calib[DSSD], n->m_min_calib[DSSD], n->m_max_calib[DSSD]);
-  m_DSSD_Spectra_each_channel_coinc2Rings.reset("DSSD spectra each channel 2 rings coinc", "DSSD spectra each channel 2 rings in coincidence",
-        57,0,56, n->m_bins_calib[DSSD], n->m_min_calib[DSSD], n->m_max_calib[DSSD]);
+  m_DSSD_Spectra_each_channel.reset("dssd spectra each channel ", "dssd spectra each channel", 56,0,56,
+        n->m_bins_calib[dssd], n->m_min_calib[dssd], n->m_max_calib[dssd]);
+  // m_merged_DSSD.reset("Merged dssd spectra", "Merged dssd spectra", 57,0,56, 2000,0,50000);
+  m_DSSD_Spectra_each_channel_1R1S.reset("dssd spectra each channel 1 ring et 1 sector coinc","dssd spectra each channel 1 ring et 1 sector in coincidence",
+        57,0,56, n->m_bins_calib[dssd], n->m_min_calib[dssd], n->m_max_calib[dssd]);
+  m_DSSD_Spectra_each_channel_coinc2Sectors.reset("dssd spectra each channel 2 sectors coinc", "dssd spectra each channel 2 sectors in coincidence",
+        57,0,56, n->m_bins_calib[dssd], n->m_min_calib[dssd], n->m_max_calib[dssd]);
+  m_DSSD_Spectra_each_channel_coinc2Rings.reset("dssd spectra each channel 2 rings coinc", "dssd spectra each channel 2 rings in coincidence",
+        57,0,56, n->m_bins_calib[dssd], n->m_min_calib[dssd], n->m_max_calib[dssd]);
 
 
-  m_DSSD_R1.reset("DSSD R1", "DSSD R1", n->m_bins_calib[DSSD], n->m_min_calib[DSSD], n->m_max_calib[DSSD]);
-  m_DSSD_single_R1.reset("DSSD single R1", "DSSD single R1", n->m_bins_calib[DSSD], n->m_min_calib[DSSD], n->m_max_calib[DSSD]);
-  m_DSSD_M2_R1.reset("DSSD MultR=2 R1", "DSSD multiplicity rings = 2 R1", n->m_bins_calib[DSSD], n->m_min_calib[DSSD], n->m_max_calib[DSSD]);
-  m_DSSD_Msup1_R1.reset("DSSD MultR>1 R1", "DSSD multiplicity rings > 1 R1", n->m_bins_calib[DSSD], n->m_min_calib[DSSD], n->m_max_calib[DSSD]);
-  m_DSSD_single_Rings.reset("DSSD single Rings", "DSSD single Rings", n->m_bins_calib[DSSD], n->m_min_calib[DSSD], n->m_max_calib[DSSD]);
-  m_DSSD_single_Sectors.reset("DSSD single Sectors", "DSSD single Sectors", n->m_bins_calib[DSSD], n->m_min_calib[DSSD], n->m_max_calib[DSSD]);
-  m_DSSD_single_Sectors_1R1S_each_sector.reset("DSSD single Sectors 1R1S coinc R1", "DSSD single Sectors 1R1S coinc R1",
-        16,0,16, n->m_bins_calib[DSSD], n->m_min_calib[DSSD], n->m_max_calib[DSSD]);
+  m_DSSD_R1.reset("dssd R1", "dssd R1", n->m_bins_calib[dssd], n->m_min_calib[dssd], n->m_max_calib[dssd]);
+  m_DSSD_single_R1.reset("dssd single R1", "dssd single R1", n->m_bins_calib[dssd], n->m_min_calib[dssd], n->m_max_calib[dssd]);
+  m_DSSD_M2_R1.reset("dssd MultR=2 R1", "dssd multiplicity rings = 2 R1", n->m_bins_calib[dssd], n->m_min_calib[dssd], n->m_max_calib[dssd]);
+  m_DSSD_Msup1_R1.reset("dssd MultR>1 R1", "dssd multiplicity rings > 1 R1", n->m_bins_calib[dssd], n->m_min_calib[dssd], n->m_max_calib[dssd]);
+  m_DSSD_single_Rings.reset("dssd single Rings", "dssd single Rings", n->m_bins_calib[dssd], n->m_min_calib[dssd], n->m_max_calib[dssd]);
+  m_DSSD_single_Sectors.reset("dssd single Sectors", "dssd single Sectors", n->m_bins_calib[dssd], n->m_min_calib[dssd], n->m_max_calib[dssd]);
+  m_DSSD_single_Sectors_1R1S_each_sector.reset("dssd single Sectors 1R1S coinc R1", "dssd single Sectors 1R1S coinc R1",
+        16,0,16, n->m_bins_calib[dssd], n->m_min_calib[dssd], n->m_max_calib[dssd]);
 
-  m_DSSD_R10_R11.reset("DSSD R10 VS R11", "DSSD R10 VS R11",
-        n->m_bins_bidim[DSSD],n->m_min_bidim[DSSD],n->m_max_bidim[DSSD], n->m_bins_bidim[DSSD],n->m_min_bidim[DSSD],n->m_max_bidim[DSSD]);
-  m_DSSD_R9_R10.reset("DSSD R9 VS R10", "DSSD R9 VS R10",
-        n->m_bins_bidim[DSSD],n->m_min_bidim[DSSD],n->m_max_bidim[DSSD], n->m_bins_bidim[DSSD],n->m_min_bidim[DSSD],n->m_max_bidim[DSSD]);
-  m_DSSD_R8_R9.reset("DSSD R8 VS R9", "DSSD R8 VS R9",
-        n->m_bins_bidim[DSSD],n->m_min_bidim[DSSD],n->m_max_bidim[DSSD], n->m_bins_bidim[DSSD],n->m_min_bidim[DSSD],n->m_max_bidim[DSSD]);
-  m_DSSD_R1_S1_1.reset("DSSD R1 VS S1_1", "DSSD R1 VS S1_1",
-        n->m_bins_bidim[DSSD],n->m_min_bidim[DSSD],n->m_max_bidim[DSSD], n->m_bins_bidim[DSSD],n->m_min_bidim[DSSD],n->m_max_bidim[DSSD]);
+  m_DSSD_R10_R11.reset("dssd R10 VS R11", "dssd R10 VS R11",
+        n->m_bins_bidim[dssd],n->m_min_bidim[dssd],n->m_max_bidim[dssd], n->m_bins_bidim[dssd],n->m_min_bidim[dssd],n->m_max_bidim[dssd]);
+  m_DSSD_R9_R10.reset("dssd R9 VS R10", "dssd R9 VS R10",
+        n->m_bins_bidim[dssd],n->m_min_bidim[dssd],n->m_max_bidim[dssd], n->m_bins_bidim[dssd],n->m_min_bidim[dssd],n->m_max_bidim[dssd]);
+  m_DSSD_R8_R9.reset("dssd R8 VS R9", "dssd R8 VS R9",
+        n->m_bins_bidim[dssd],n->m_min_bidim[dssd],n->m_max_bidim[dssd], n->m_bins_bidim[dssd],n->m_min_bidim[dssd],n->m_max_bidim[dssd]);
+  m_DSSD_R1_S1_1.reset("dssd R1 VS S1_1", "dssd R1 VS S1_1",
+        n->m_bins_bidim[dssd],n->m_min_bidim[dssd],n->m_max_bidim[dssd], n->m_bins_bidim[dssd],n->m_min_bidim[dssd],n->m_max_bidim[dssd]);
 
   //ToF
-  m_DSSD_Tof_VS_Energy.reset("DSSD ToF", "DSSD ToF", n->m_bins_calib[DSSD],n->m_min_calib[DSSD],n->m_max_calib[DSSD], 601,-100,400);
-  m_DSSD_Tof_VS_Energy_U6.reset("DSSD ToF U6", "DSSD ToF U6", n->m_bins_calib[DSSD],n->m_min_calib[DSSD],n->m_max_calib[DSSD], 601,-100,400);
-  m_DSSD_ToF_first_blob.reset("DSSD first blob", "DSSD first blob", n->m_bins_calib[Ge],n->m_min_calib[Ge],n->m_max_calib[Ge], 601,-100,400);
-  m_DSSD_ToF_second_blob.reset("DSSD second blob", "DSSD second blob", n->m_bins_calib[Ge],n->m_min_calib[Ge],n->m_max_calib[Ge], 601,-100,400);
-  m_DSSD_ToF_third_blob.reset("DSSD third blob", "DSSD third blob", n->m_bins_calib[Ge],n->m_min_calib[Ge],n->m_max_calib[Ge], 601,-100,400);
-  m_DSSD_ToF_third_blob_wider.reset("DSSD third blob wider", "DSSD third blob wider", n->m_bins_calib[Ge],n->m_min_calib[Ge],n->m_max_calib[Ge], 601,-100,400);
+  m_DSSD_Tof_VS_Energy.reset("dssd ToF", "dssd ToF", n->m_bins_calib[dssd],n->m_min_calib[dssd],n->m_max_calib[dssd], 601,-100,400);
+  m_DSSD_Tof_VS_Energy_U6.reset("dssd ToF U6", "dssd ToF U6", n->m_bins_calib[dssd],n->m_min_calib[dssd],n->m_max_calib[dssd], 601,-100,400);
+  m_DSSD_ToF_first_blob.reset("dssd first blob", "dssd first blob", n->m_bins_calib[Ge],n->m_min_calib[Ge],n->m_max_calib[Ge], 601,-100,400);
+  m_DSSD_ToF_second_blob.reset("dssd second blob", "dssd second blob", n->m_bins_calib[Ge],n->m_min_calib[Ge],n->m_max_calib[Ge], 601,-100,400);
+  m_DSSD_ToF_third_blob.reset("dssd third blob", "dssd third blob", n->m_bins_calib[Ge],n->m_min_calib[Ge],n->m_max_calib[Ge], 601,-100,400);
+  m_DSSD_ToF_third_blob_wider.reset("dssd third blob wider", "dssd third blob wider", n->m_bins_calib[Ge],n->m_min_calib[Ge],n->m_max_calib[Ge], 601,-100,400);
 
-  #endif //DSSD
+  #endif //dssd
 
   // Counters:
   m_clover_counter_matrice.reset( "clovers counter matrice","clovers counter matrice", 24,0,23, 24,0,23);
@@ -1303,7 +1303,7 @@ void Analyse_W::Write()
   m_Paris_Paris.Write();
   m_p_Paris_Ge_C1P1.Write();
 
-  //DSSD
+  //dssd
   m_DSSD_gate_Clover.Write();
   //
   // std::ofstream outfileinfo("U_over_Be.info", std::ios_base::app);
@@ -1485,35 +1485,35 @@ Bool_t Analyse_W::isInTimeGate(Hit const & hit, int const & thread_nb)
 
 
   // m_DSSD_S1_1_VS_Sectors_1R1S.reset("coinc S1_1 && ring", "S1_1 VS Rings",
-  //       n->m_bins_bidim[DSSD],n->m_min_bidim[DSSD],n->m_max_bidim[DSSD], n->m_bins_bidim[DSSD],n->m_min_bidim[DSSD],n->m_max_bidim[DSSD]);
+  //       n->m_bins_bidim[dssd],n->m_min_bidim[dssd],n->m_max_bidim[dssd], n->m_bins_bidim[dssd],n->m_min_bidim[dssd],n->m_max_bidim[dssd]);
   // m_DSSD_S1_2_VS_Sectors_1R1S.reset("coinc S1_2 && ring", "S1_2 VS Rings",
-  //       n->m_bins_bidim[DSSD],n->m_min_bidim[DSSD],n->m_max_bidim[DSSD], n->m_bins_bidim[DSSD],n->m_min_bidim[DSSD],n->m_max_bidim[DSSD]);
+  //       n->m_bins_bidim[dssd],n->m_min_bidim[dssd],n->m_max_bidim[dssd], n->m_bins_bidim[dssd],n->m_min_bidim[dssd],n->m_max_bidim[dssd]);
   // m_DSSD_S1_3_VS_Sectors_1R1S.reset("coinc S1_3 && ring", "S1_3 VS Rings",
-  //       n->m_bins_bidim[DSSD],n->m_min_bidim[DSSD],n->m_max_bidim[DSSD], n->m_bins_bidim[DSSD],n->m_min_bidim[DSSD],n->m_max_bidim[DSSD]);
+  //       n->m_bins_bidim[dssd],n->m_min_bidim[dssd],n->m_max_bidim[dssd], n->m_bins_bidim[dssd],n->m_min_bidim[dssd],n->m_max_bidim[dssd]);
   // m_DSSD_S1_4_VS_Sectors_1R1S.reset("coinc S1_4 && ring", "S1_4 VS Rings",
-  //       n->m_bins_bidim[DSSD],n->m_min_bidim[DSSD],n->m_max_bidim[DSSD], n->m_bins_bidim[DSSD],n->m_min_bidim[DSSD],n->m_max_bidim[DSSD]);
+  //       n->m_bins_bidim[dssd],n->m_min_bidim[dssd],n->m_max_bidim[dssd], n->m_bins_bidim[dssd],n->m_min_bidim[dssd],n->m_max_bidim[dssd]);
   // m_DSSD_S1_5_VS_Sectors_1R1S.reset("coinc S1_5 && ring", "S1_5 VS Rings",
-  //       n->m_bins_bidim[DSSD],n->m_min_bidim[DSSD],n->m_max_bidim[DSSD], n->m_bins_bidim[DSSD],n->m_min_bidim[DSSD],n->m_max_bidim[DSSD]);
+  //       n->m_bins_bidim[dssd],n->m_min_bidim[dssd],n->m_max_bidim[dssd], n->m_bins_bidim[dssd],n->m_min_bidim[dssd],n->m_max_bidim[dssd]);
   // m_DSSD_S1_6_VS_Sectors_1R1S.reset("coinc S1_6 && ring", "S1_6 VS Rings",
-  //       n->m_bins_bidim[DSSD],n->m_min_bidim[DSSD],n->m_max_bidim[DSSD], n->m_bins_bidim[DSSD],n->m_min_bidim[DSSD],n->m_max_bidim[DSSD]);
+  //       n->m_bins_bidim[dssd],n->m_min_bidim[dssd],n->m_max_bidim[dssd], n->m_bins_bidim[dssd],n->m_min_bidim[dssd],n->m_max_bidim[dssd]);
   // m_DSSD_S1_7_VS_Sectors_1R1S.reset("coinc S1_7 && ring", "S1_7 VS Rings",
-  //       n->m_bins_bidim[DSSD],n->m_min_bidim[DSSD],n->m_max_bidim[DSSD], n->m_bins_bidim[DSSD],n->m_min_bidim[DSSD],n->m_max_bidim[DSSD]);
+  //       n->m_bins_bidim[dssd],n->m_min_bidim[dssd],n->m_max_bidim[dssd], n->m_bins_bidim[dssd],n->m_min_bidim[dssd],n->m_max_bidim[dssd]);
   // m_DSSD_S1_8_VS_Sectors_1R1S.reset("coinc S1_8 && ring", "S1_8 VS Rings",
-  //       n->m_bins_bidim[DSSD],n->m_min_bidim[DSSD],n->m_max_bidim[DSSD], n->m_bins_bidim[DSSD],n->m_min_bidim[DSSD],n->m_max_bidim[DSSD]);
+  //       n->m_bins_bidim[dssd],n->m_min_bidim[dssd],n->m_max_bidim[dssd], n->m_bins_bidim[dssd],n->m_min_bidim[dssd],n->m_max_bidim[dssd]);
   // m_DSSD_S1_9_VS_Sectors_1R1S.reset("coinc S1_9 && ring", "S1_9 VS Rings",
-  //       n->m_bins_bidim[DSSD],n->m_min_bidim[DSSD],n->m_max_bidim[DSSD], n->m_bins_bidim[DSSD],n->m_min_bidim[DSSD],n->m_max_bidim[DSSD]);
+  //       n->m_bins_bidim[dssd],n->m_min_bidim[dssd],n->m_max_bidim[dssd], n->m_bins_bidim[dssd],n->m_min_bidim[dssd],n->m_max_bidim[dssd]);
   // m_DSSD_S1_10_VS_Sectors_1R1S.reset("coinc S1_10 && ring", "S1_10 VS Rings",
-  //       n->m_bins_bidim[DSSD],n->m_min_bidim[DSSD],n->m_max_bidim[DSSD], n->m_bins_bidim[DSSD],n->m_min_bidim[DSSD],n->m_max_bidim[DSSD]);
+  //       n->m_bins_bidim[dssd],n->m_min_bidim[dssd],n->m_max_bidim[dssd], n->m_bins_bidim[dssd],n->m_min_bidim[dssd],n->m_max_bidim[dssd]);
   // m_DSSD_S1_11_VS_Sectors_1R1S.reset("coinc S1_11 && ring", "S1_11 VS Rings",
-  //       n->m_bins_bidim[DSSD],n->m_min_bidim[DSSD],n->m_max_bidim[DSSD], n->m_bins_bidim[DSSD],n->m_min_bidim[DSSD],n->m_max_bidim[DSSD]);
+  //       n->m_bins_bidim[dssd],n->m_min_bidim[dssd],n->m_max_bidim[dssd], n->m_bins_bidim[dssd],n->m_min_bidim[dssd],n->m_max_bidim[dssd]);
   // m_DSSD_S1_12_VS_Sectors_1R1S.reset("coinc S1_12 && ring", "S1_12 VS Rings",
-  //       n->m_bins_bidim[DSSD],n->m_min_bidim[DSSD],n->m_max_bidim[DSSD], n->m_bins_bidim[DSSD],n->m_min_bidim[DSSD],n->m_max_bidim[DSSD]);
+  //       n->m_bins_bidim[dssd],n->m_min_bidim[dssd],n->m_max_bidim[dssd], n->m_bins_bidim[dssd],n->m_min_bidim[dssd],n->m_max_bidim[dssd]);
   // m_DSSD_S1_13_VS_Sectors_1R1S.reset("coinc S1_13 && ring", "S1_13 VS Rings",
-  //       n->m_bins_bidim[DSSD],n->m_min_bidim[DSSD],n->m_max_bidim[DSSD], n->m_bins_bidim[DSSD],n->m_min_bidim[DSSD],n->m_max_bidim[DSSD]);
+  //       n->m_bins_bidim[dssd],n->m_min_bidim[dssd],n->m_max_bidim[dssd], n->m_bins_bidim[dssd],n->m_min_bidim[dssd],n->m_max_bidim[dssd]);
   // m_DSSD_S1_14_VS_Sectors_1R1S.reset("coinc S1_14 && ring", "S1_14 VS Rings",
-  //       n->m_bins_bidim[DSSD],n->m_min_bidim[DSSD],n->m_max_bidim[DSSD], n->m_bins_bidim[DSSD],n->m_min_bidim[DSSD],n->m_max_bidim[DSSD]);
+  //       n->m_bins_bidim[dssd],n->m_min_bidim[dssd],n->m_max_bidim[dssd], n->m_bins_bidim[dssd],n->m_min_bidim[dssd],n->m_max_bidim[dssd]);
   // m_DSSD_S1_15_VS_Sectors_1R1S.reset("coinc S1_15 && ring", "S1_15 VS Rings",
-  //       n->m_bins_bidim[DSSD],n->m_min_bidim[DSSD],n->m_max_bidim[DSSD], n->m_bins_bidim[DSSD],n->m_min_bidim[DSSD],n->m_max_bidim[DSSD]);
+  //       n->m_bins_bidim[dssd],n->m_min_bidim[dssd],n->m_max_bidim[dssd], n->m_bins_bidim[dssd],n->m_min_bidim[dssd],n->m_max_bidim[dssd]);
 
 
 
