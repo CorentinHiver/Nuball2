@@ -40,7 +40,7 @@ int main(int argc, char ** argv)
 
   std::vector<std::thread> threads;
 
-  if (argc == 2 && strcmp(argv[1],"-m")==0) qp.nb_threads = 1;
+       if (argc == 2 && strcmp(argv[1],"-m")==0) qp.nb_threads = 1;
   else if (argc == 3 && strcmp(argv[1],"-m")==0) qp.nb_threads = atoi(argv[2]);
 
   // Parameters p;
@@ -55,7 +55,8 @@ int main(int argc, char ** argv)
   qp.runs = listFileReader(qp.runs_list);
 
   checkThreadsNb(qp.nb_threads, qp.runs.size());
-  MTObject MTO(qp.nb_threads);
+
+  MTObject::Initialize(p.threadsNb());
 
   if(qp.nb_threads == 1)
   {
@@ -64,21 +65,7 @@ int main(int argc, char ** argv)
 
   else
   {
-    MTO.parallelise_function(convertRun,qp);
-    // MTO.parallelise_function(&test);
-    // for (int i = 0; i<qp.nb_threads; i++)
-    // {
-    //   // Run in parallel this command :
-    //   //                              vvvvvvvvvvvv
-    //   threads.emplace_back([&qp](){convertRun(qp);});
-    //   //                              ^^^^^^^^^^^^
-    //   //Note : the parameter "this" in the lambda allows all instances of run_thread() to have access to the members of the main NearLine object
-    // }
-    // for(size_t i = 0; i < threads.size(); i++) threads.at(i).join(); //Closes threads
-    // // print("NUMBER HITS : ", m_counter);
-    // threads.resize(0);
-    // threads.clear();
-    // std::cout << "Multi-threading is over !" << std::endl;
+    MTObject::parallelise_function(convertRun,qp);
   }
 
   return 1;
@@ -116,11 +103,11 @@ void convertRun(quick_parameters & param)
     while(evt<nb_evts)
     {// Write in files of more or less the same size
       Timer timer;
-      std::unique_ptr<TTree> outTree (new TTree("Nuball", "New conversion"));
+      std::unique_ptr<TTree> outTree (new TTree("Nuball", "Second conversion"));
       auto const & RF_VS_LaBr3 = new TH2F(("RF_VS_LaBr3"+run+std::to_string(file_nb)).c_str(),("RF_VS_LaBr3"+run+std::to_string(file_nb)).c_str(), 1000,0,5000, 500,-100,400);
       auto const & RF_VS_Ge = new TH2F(("RF_VS_Ge"+run+std::to_string(file_nb)).c_str(),("RF_VS_Ge"+run+std::to_string(file_nb)).c_str(), 1000,0,5000, 500,-100,400);
 
-      event.writeTo(outTree.get(),"lTnNRP");
+      event.writeTo(outTree.get(),"lnNTRP");
 
       while(evt<nb_evts)
       {

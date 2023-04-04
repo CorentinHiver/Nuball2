@@ -14,7 +14,9 @@ public:
 
   Bool_t nextFileName(std::string & filename, size_t const & step = 1);
 
-  Bool_t addFiles     (std::string const & _filename        );// Adds either a single file or reads a .list containing a list of files
+  // Adds either a single file or reads a .list containing a list of files
+  Bool_t addFiles     (std::string const & _filename        );
+  // Adds a given number of files with a .root or .fast inside the given folder (by default all the files, or the nb_files first ones)
   Bool_t addFolder    (std::string folder, int nb_files = -1);
   void   flushFiles   ();
   void   Print        ();
@@ -43,7 +45,8 @@ public:
 
   //Setters :
   void setListFiles(ListFiles const & list) {this -> flushFiles(); for (size_t i = 0; i<list.size(); i++) this -> addFiles(list[i]);}
-  void setCursor(Int_t _filesCursor) {m_filesCursor = _filesCursor;}
+  void setCursor(Int_t const & _filesCursor) {m_filesCursor = static_cast<size_t> (_filesCursor);}
+  void setCursor(size_t const & _filesCursor) {m_filesCursor = _filesCursor;}
   void setVerbose(bool const & v) {verbose = v;}
 
   // Operator overloading :

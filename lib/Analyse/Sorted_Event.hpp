@@ -259,6 +259,7 @@ void Sorted_Event::sortEvent(Event const & event)
     }
     else if (isDSSD[event.labels[i]])
     {
+      print(i);
       DSSD_hits.push_back(i);
       auto const & time = times[i];
     #ifdef N_SI_129

@@ -130,6 +130,8 @@ using Labels     = std::vector < std::string > ;
 using TimeshiftMap = std::unordered_map < UShort_t, Int_t       > ;
 using LabelsMap    = std::unordered_map < UShort_t, std::string > ;
 using MapDetector  = std::unordered_map < Detector, Float_t     > ;
+template<typename T>
+using BinMap       = std::unordered_map < Int_t   , T           > ;
 
 class RF_Manager
 {
@@ -529,16 +531,19 @@ void setIsParis(Label const & nb_labels)
 
 void setIsDSSD(Label const & nb_labels)
 {
+  isDSSD.resize(nb_labels, false);
+  isDSSD_Sector.resize(nb_labels, false);
+  isDSSD_Ring.resize(nb_labels, false);
   for (Label i = 0; i<nb_labels; i++)
   {
-    isDSSD.push_back( (i>799 && i<816) || (i>819 && i<836) || (i>839 && i<856) );
-    isDSSD_Sector.push_back((i>799 && i<816) || (i>819 && i<836));
-    isDSSD_Ring.push_back((i>839 && i<856));
+    isDSSD[i] = ( (i>799 && i<816) || (i>819 && i<836) || (i>839 && i<856) );
+    isDSSD_Sector[i] = ( (i>799 && i<816) || (i>819 && i<836) );
+    isDSSD_Ring[i] = ( (i>839 && i<856) );
   }
-  isDSSD[829] = false;
-  isDSSD[830] = false;
-  isDSSD_Sector[829] = false;
-  isDSSD_Sector[830] = false;
+  // isDSSD[829] = false;
+  // isDSSD[830] = false;
+  // isDSSD_Sector[829] = false;
+  // isDSSD_Sector[830] = false;
 }
 
 
@@ -1253,15 +1258,16 @@ inline bool gate(Float_t const & E, Float_t const & E_min, Float_t const & E_max
   return (E>E_min && E<E_max);
 }
 
-std::pair<Float_t,Float_t> DSSD_pos(int const & sector, int const & ring)
+std::pair<Float_t,Float_t> calculate_DSSD_pos(int const & ring, int const & sector)
 {
+  int label_sector = (Sector<16) ? (Sector) : (Sector-4);
   Float_t r = 55.-ring+gRandom->Uniform(-1,1)*0.4;
   r = 1.5+r*(4.1-1.5)/15;
   Float_t theta = 2*3.141596/32*(sector+(gRandom->Uniform(0,1)+0.05));
   return std::make_pair(r*TMath::Cos(theta),r*TMath::Sin(theta));
 }
 
-std::pair<Float_t,Float_t> DSSD_pos_smooth(int const & sector, int const & ring)
+std::pair<Float_t,Float_t> calculate_DSSD_pos_smooth(int const & ring, int const & sector)
 {
   Float_t r = 55.-ring+gRandom->Uniform(-1,1)/2.;
   r = 1.5+r*(4.1-1.5)/15;

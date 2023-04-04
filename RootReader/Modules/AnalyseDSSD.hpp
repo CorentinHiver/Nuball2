@@ -36,6 +36,8 @@ private:
   MTTHist<TH1F> m_Ge_spectra_gate_on_particle_sup_11MeV_R15; // Rings intérieurs
   MTTHist<TH1F> m_Ring_14_spectra;
 
+  MTTHist<TH2F> m_mult_R_VS_S;
+
   MTTHist<TH2F> m_each_Sector_spectra;
   MTTHist<TH2F> m_each_Ring_spectra;
 
@@ -43,7 +45,16 @@ private:
   MTTHist<TH2F> m_each_Sector_spectra_nRnS;
   MTTHist<TH2F> m_each_Ring_spectra_nRnS;
 
+  // 1 ring only
+  MTTHist<TH2F> m_polar_1R;
+  MTTHist<TH1F> m_check_S_1R;
+  MTTHist<TH1F> m_linear_1R;
+
+  // 1 sector only
+  MTTHist<TH2F> m_polar_1S;
+
   //1 ring 1 sector
+  MTTHist<TH2F> m_polar_1R1S;
   MTTHist<TH2F> m_R_VS_S;
   MTTHist<TH2F> m_R_VS_S_time;
   //2 rings 2 sectors
@@ -99,8 +110,8 @@ void AnalyseDSSD::run(Parameters & p, AnalyseDSSD & analysedssd)
     {
       tree->GetEntry(i);
       event_s.sortEvent(event);
-      analysedssd.FillSorted(event_s,event);
       analysedssd.FillRaw(event);
+      analysedssd.FillSorted(event_s,event);
     } // End event loop
     auto const & time = timer();
     print(removePath(rootfile), time, timer.unit(), ":", filesize/timer.TimeSec(), "Mo/sec");
@@ -111,6 +122,7 @@ void AnalyseDSSD::InitializeManip()
 {
   print("Initialize histograms");
   m_Ring_14_spectra.reset("Ring 15","Ring 15",10000,0,100000);
+  m_mult_R_VS_S.reset("Mult Rings VS Sectors","Multiplicity Rings VS Sectors", 10,0,10, 15,0,15);
   m_each_Sector_spectra.reset("Each sector spectra","Each sector spectra",
       36,0,36, m_bins_spectra,m_min_spectra,m_max_spectra);
   m_each_Ring_spectra.reset("Each ring spectra","Each ring spectra",
@@ -120,6 +132,11 @@ void AnalyseDSSD::InitializeManip()
   m_each_Ring_spectra_nRnS.reset("Each ring spectra nRnS","Each ring spectra same number of sectors and rings",
       16,0,16, m_bins_spectra,m_min_spectra,m_max_spectra);
 
+  m_check_S_1R.reset("1R check sectors","1R check sectors", 33,0,33);
+  m_linear_1R.reset("1R linear","1R linear", 15,0,15);
+  m_polar_1R.reset("1R polar","1R polar", 600,-15,15, 600,-15,15);
+  m_polar_1S.reset("1S polar","1S polar", 800,-20,20, 800,-20,20);
+  m_polar_1R1S.reset("1R1S polar","1R1S polar", 800,-20,20, 800,-20,20);
   m_R_VS_S.reset("1R1S Ring VS Sector","1R1S Ring VS Sector", m_bins_spectra,m_min_spectra,m_max_spectra, m_bins_spectra,m_min_spectra,m_max_spectra);
   m_R_VS_S_time.reset("1R1S Ring VS Sector Time","1R1S Ring VS Sector Time", 500,-100,400, 500,-100,400);
 
@@ -150,9 +167,49 @@ void AnalyseDSSD::FillSorted(Sorted_Event const & event_s, Event const & event)
   Float_t weight = (gateGe==1) ? 1 : -1;
   // print(weight);
   bool nRnS = false;
+  m_mult_R_VS_S.Fill(event_s.DSSDSectorMult, event_s.DSSDRingMult);
+  if (event_s.DSSDRingMult == 1 && event_s.DSSDSectorMult == 0 )
+  {
+    auto const randSector = static_cast<int>(gRandom->Uniform(0,1)*33);
+    auto const label_ring = event.labels[event_s.DSSD_Rings[0]]-800;
+    // print("Sector : ", randSector);
+    auto pos = calculate_DSSD_pos(randSector, label_ring);
+    m_check_S_1R.Fill(randSector);
+    m_linear_1R.Fill(label_ring);
+    print(label_ring);
+    m_polar_1R.Fill(pos.first, pos.second);
+  }
+  if (event_s.DSSDRingMult == 0 && event_s.DSSDSectorMult == 1 )
+  {
+    auto const randRing = static_cast<int>(gRandom->Uniform(0,1)*15.49);
+    auto const label_sector = event.labels[event_s.DSSD_Sectors[0]]-800;
+    auto pos = calculate_DSSD_pos(label_sector, randRing);
+    m_polar_1S.Fill(pos.first, pos.second);
+  }
   if (event_s.DSSDSectorMult == event_s.DSSDRingMult) nRnS = true;
+
+  if (event_s.DSSDSectorMult == 1 && event_s.DSSDRingMult == 1)
+  {
+    // R2S2 = true;
+    auto const & ring = event_s.DSSD_Rings[0];
+    auto const & sector = event_s.DSSD_Sectors[0];
+
+    auto const label_ring = event.labels[ring]-800;
+    auto const & nrj_ring = event.nrjs[ring];
+    auto const & Time_ring = event.Times[ring];
+
+    auto const label_sector = event.labels[sector]-800;
+    auto const & nrj_sector = event.nrjs[sector];
+    auto const & Time_sector = event.Times[sector];
+
+    m_R_VS_S.Fill(nrj_ring, nrj_sector, weight);
+    m_R_VS_S_time.Fill(Time_ring, Time_sector, weight);
+
+    auto pos = calculate_DSSD_pos(label_ring, label_sector);
+    m_polar_1R1S.Fill(pos.first, pos.second);
+  }
   // bool R2S2 = false;
-  if (event_s.DSSDSectorMult == 2 && event_s.DSSDRingMult == 2)
+  else if (event_s.DSSDSectorMult == 2 && event_s.DSSDRingMult == 2)
   {
     // R2S2 = true;
     auto const & nrj_ring_1 = event.nrjs[event_s.DSSD_Rings[0]];
@@ -180,19 +237,6 @@ void AnalyseDSSD::FillSorted(Sorted_Event const & event_s, Event const & event)
     m_R2_VS_S2_time.Fill(time_sector_2, time_ring_2, weight);
   }
 
-  if (event_s.DSSDSectorMult == 1 && event_s.DSSDRingMult == 1)
-  {
-    // R2S2 = true;
-    auto const & nrj_ring = event.nrjs[event_s.DSSD_Rings[0]];
-    auto const & nrj_sector = event.nrjs[event_s.DSSD_Sectors[0]];
-
-    auto const & Time_ring = event.Times[event_s.DSSD_Rings[0]];
-    auto const & Time_sector = event.Times[event_s.DSSD_Sectors[0]];
-
-    m_R_VS_S.Fill(nrj_ring, nrj_sector, weight);
-    m_R_VS_S_time.Fill(Time_ring, Time_sector, weight);
-  }
-
   for (size_t loop_i = 0; loop_i<event_s.DSSD_hits.size(); loop_i++)
   {
     auto const & dssd_i = event_s.DSSD_hits[loop_i];
@@ -211,7 +255,6 @@ void AnalyseDSSD::FillSorted(Sorted_Event const & event_s, Event const & event)
       if (nRnS)
       {
         m_each_Ring_spectra_nRnS.Fill(label_i, nrj_i, weight);
-        // sectorCoincToPos()
       }
       if (label_i==14)
       {
@@ -249,6 +292,13 @@ void AnalyseDSSD::Write()
   m_Ge_spectra_gate_on_particle_sup_11MeV_R15.Write();
 
   m_Ring_14_spectra.Write();
+  m_mult_R_VS_S.Write();
+
+  m_check_S_1R.Write();
+  m_linear_1R.Write();
+  m_polar_1R.Write();
+  m_polar_1S.Write();
+  m_polar_1R1S.Write();
 
   m_each_Sector_spectra.Write();
   m_each_Ring_spectra.Write();

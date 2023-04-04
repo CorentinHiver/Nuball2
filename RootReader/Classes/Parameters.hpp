@@ -25,6 +25,7 @@ public:
   MTList<std::string> & getRunsList() {return m_list_runs;}
   bool getNextFile(std::string & filename) {return m_list_files.getNext(filename);}
   bool getNextRun(std::string & run) {return m_list_runs.getNext(run);}
+  bool getNextRun(std::string & run, size_t & run_index) {return m_list_runs.getNext(run, run_index);}
 
   ListFiles const & getRunFiles(std::string const & run)
   {
@@ -46,12 +47,6 @@ public:
 
 private:
   std::string m_parameters_file;
-
-  std::string m_param_ed;
-  std::string m_param_ma;
-  std::string m_param_rc;
-  std::string m_param_ai;
-  std::string m_param_ds;
 
   std::map<std::string, std::vector<std::string>> m_parameters; // key : module, value : list of module's parameters
 

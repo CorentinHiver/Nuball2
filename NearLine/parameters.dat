@@ -51,23 +51,21 @@ BINNING: calibrated: Ge: 14000 0 7000
 # DATADIR: Eventbuilding_tests/faster2root/ root_eventbuild
 # DATADIR: /home/corentin/faster_data/N-SI-122/run_12.fast/ nb: 3
 
+DATADIR: /home/corentin/faster_data/N-SI-129/run_34.fast/
+
 # DATADIR: /home/corentin/faster_data/N-SI-131/alpha_30.fast/
 # DATADIR: /home/corentin/faster_data/N-SI-131/alpha_27.fast/ nb: 50
 # DATADIR: /home/corentin/faster_data/N-SI-131/proton_24.fast/
 
-DATADIR: /home/corentin/faster_data/N-SI-85/run_2.fast/
-DATADIR: /home/corentin/faster_data/N-SI-85/run_3.fast/
-DATADIR: /home/corentin/faster_data/N-SI-85/run_4.fast/
-DATADIR: /home/corentin/faster_data/N-SI-85/run_5.fast/
-DATADIR: /home/corentin/faster_data/N-SI-85/run_6.fast/
-# DATADIR: /home/corentin/faster_data/N-SI-85/run_Alpha_8.fast/
+# DATADIR: /home/faster/nuball2/N-SI-85/run_2.fast/
+# DATADIR: /home/faster/nuball2/N-SI-85/run_Alpha_8.fast/
 
 # OUTDIR: Calibration/run_12/
 # OUTDIR: Analyse/
 # OUTDIR: Eventbuilding_tests
 # OUTDIR: DSSD_checks/
-OUTDIR: 85/
-# OUTDIR: 129/
+# OUTDIR: 85/
+OUTDIR: 129/
 # OUTDIR: 120/
 
 # EDEN_TO_LICORNE_DISTANCE= 268 (cm)
@@ -81,7 +79,7 @@ OUTDIR: 85/
 # --------
 # OUTPUTS:
 # --------
-# USE_RF: 50 ns
+USE_RF: 60 ns
 
 # PARIS_BIDIM: outroot: Paris_bidim_152Eu_12.root bins: 1000
 
@@ -96,14 +94,9 @@ OUTDIR: 85/
 # ANALYSE: time_ref: R1A9_FATIMA_LaBr3 outRoot: run_70.root
 # ANALYSE: time_ref: R1A1_FATIMA_LaBr3 outRoot: tests_RF.root
 
-<<<<<<< HEAD
 # TIMESHIFT: time_reference: R1A9_FATIMA_LaBr3 timewindow: 1500 mult: 2 3 -
-TIMESHIFT: time_reference: PARIS_BR2D1 timewindow: 1500 mult: 2 3 -
-outRoot: all_85_round1.root outData: all_85_round1.dat verbose
-=======
 TIMESHIFT: time_reference: R1A9_FATIMA_LaBr3 timewindow: 1500 mult: 2 3 -
-outRoot: run_2.root outData: run_2.dat verbose
->>>>>>> 7d5a77d0d66b9fb570dc015bd62647592848f75c
+outRoot: run_34.root outData: run_34.dat verbose
 
 # TIMESHIFT: time_reference: PARIS_FR1D1 timewindow: 1500 mult: 2 3 -
 # TIMESHIFT: time_reference: R1A2_FATIMA_LaBr3 timewindow: 1500 mult: 2 3 -

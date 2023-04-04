@@ -1342,7 +1342,7 @@ void NearLine::m_ts_Fill(Event const & ts_buffer, size_t const & refPos, UShort_
 
 void NearLine::m_ts_calculate()
 {
-  Double_t pospic, amppic, dump_sigma;
+  Float_t pospic, amppic, dump_sigma;
   Float_t cte, Mean, sigma;
   std::vector<Float_t> array_labels(m_labelToName.size());
   for (size_t i = 0; i<array_labels.size(); i++) array_labels[i] = i;
@@ -1386,9 +1386,9 @@ void NearLine::m_ts_calculate()
       }
       else
       {
-        pospic = m_ts_histo[it] -> GetMean();
-        m_ts_histo[it] -> GetXaxis() -> SetRange(pospic+100*m_ts_rebin[dssd], pospic+100*m_ts_rebin[dssd]);
-        outDeltaTfile << it << "\t" << (Float_t)(m_ts_histo[it] -> GetMean()) << std::endl;
+        amppic = m_ts_histo[it] -> GetMaximum();
+        pospic = ( m_ts_histo[it] -> FindLastBinAbove(amppic/2) - (m_ts_histo[it] -> GetNbinsX()/2) ) * m_ts_rebin[dssd] ;
+        outDeltaTfile << it << "\t" << pospic << std::endl;
         if (m_ts_verbose) print( "mean : ", m_ts_histo[it] -> GetMean(), "with", (int) m_ts_histo[it] -> GetMaximum(), "counts in peak");
       }
       continue;

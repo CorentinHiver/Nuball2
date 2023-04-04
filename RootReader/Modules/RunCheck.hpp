@@ -25,12 +25,12 @@ private:
 
   // ---- Parameters ---- //
   std::string param_string = "Run Check";
-  size_t nbThreads = 1.;
+  std::vector<std::string> m_name_run;
   friend class MTObject;
 
   // ---- Variables ---- //
   std::string m_outDir  = "129/RunCheck/";
-  std::string m_outRoot = "RunCheck.root";
+  std::string m_outRoot = "ManipCheck.root";
 
   // ---- Histograms ---- //
   // Histograms for each run :
@@ -38,7 +38,9 @@ private:
   // Histograms for the whole runs :
   MTTHist<TH2F> GeSpectraManip;
   MTTHist<TH1F> GeSpectraTotal;
-  Vector_MTTHist<TH1F> TimeEachDetector;
+  Vector_MTTHist<TH2F> TimeEachDetector;
+  Vector_MTTHist<TH2F> EnergyEachDetector;
+  Vector_MTTHist<TH2F> EnergyClover;
 };
 
 bool RunCheck::launch(Parameters & p)
@@ -54,24 +56,42 @@ bool RunCheck::launch(Parameters & p)
 
 void RunCheck::InitializeManip()
 {
+  auto const & nbThreads = MTObject::getThreadsNb();
+  m_name_run.resize(nbThreads);
   print("Initialize the manip histograms...");
-  GeSpectraManip.reset("EachCloverSpectra", "Each Clover Spectra", 24,0,24, 5000,0,5000);
-  GeSpectraTotal.reset("GeSpectraTotal", "GeSpectraTotal", 5000,0,5000);
-  TimeEachDetector.resize(1000);
+  GeSpectraManip.reset("Each_Clover_Spectra", "Each Clover Spectra", 24,0,24, 5000,0,5000);
+  GeSpectraTotal.reset("Ge_Spectra_Total", "Ge Spectra Total", 5000,0,5000);
+  TimeEachDetector.resize(g_labelToName.size());
+  EnergyEachDetector.resize(g_labelToName.size());
+  EnergyClover.resize(24);
+  for (size_t i = 0; i<EnergyClover.size(); i++)
+    EnergyClover[i].reset(("Clover_"+std::to_string(i)).c_str(), ("Clover "+std::to_string(i)+" spectra over runs").c_str(),
+        24,0,24, 14000,0,7000);
   std::string name;
-  for (int i = 0; i<1000; i++)
+  BinMap<int> nrj_bins;
+  BinMap<Float_t> nrj_bin_min;
+  BinMap<Float_t> nrj_bin_max;
+  for (size_t i = 0; i<g_labelToName.size(); i++)
   {
     name = g_labelToName[i];
     if (name.size()>1)
     {
-      name = name+" time each run";
-      TimeEachDetector.reset(name.c_str(), name.c_str(), 500, -100, 400);
+      TimeEachDetector[i].reset((name+" time each run").c_str(), (name+" time each run").c_str(), 82,20,102, 250,-100,400);
+
+           if (isGe   [i]) { nrj_bins[i] = 7000; nrj_bin_min[i] = 0; nrj_bin_max[i] =  7000; }
+      else if (isBGO  [i]) { nrj_bins[i] =   350; nrj_bin_min[i] = 0; nrj_bin_max[i] =  7000; }
+      else if (isParis[i]) { nrj_bins[i] =  3500; nrj_bin_min[i] = 0; nrj_bin_max[i] =  7000; }
+      else if (isLaBr3[i]) { nrj_bins[i] =  3500; nrj_bin_min[i] = 0; nrj_bin_max[i] =  7000; }
+      else if (isDSSD [i]) { nrj_bins[i] =   600; nrj_bin_min[i] = 0; nrj_bin_max[i] = 30000; }
+      else                 { nrj_bins[i] =     1; nrj_bin_min[i] = 0; nrj_bin_max[i] =     1; }
+      EnergyEachDetector[i].reset((name+" nrj each run").c_str(), (name+" nrj each run").c_str(),
+          82,20,102, nrj_bins[i],nrj_bin_min[i],nrj_bin_max[i]);
     }
   }
 }
 
-// Technical point : run must be static in order to be called by MTObject::parallelise_function
-// Therefore, it needs to have a RunCheck as parameter
+// Technical point : the run method must be static in order to be called by MTObject::parallelise_function
+// Therefore, it needs to have a RunCheck class as parameter
 void RunCheck::run(Parameters & p, RunCheck & runcheck)
 {
   std::string _run;
@@ -82,7 +102,6 @@ void RunCheck::run(Parameters & p, RunCheck & runcheck)
     auto const & listFilesRun = p.getRunFiles(_run);
     Sorted_Event event_s;
     int run_size = 0;
-    // runcheck.TreatRun(_run, p);
     for (auto const & rootfile : listFilesRun)
     {
       std::unique_ptr<TFile> file (TFile::Open(rootfile.c_str(), "READ"));
@@ -105,12 +124,11 @@ void RunCheck::run(Parameters & p, RunCheck & runcheck)
         runcheck.FillSorted(event_s, event);
         runcheck.FillRaw(event);
       } // End event loop
-      tree.reset(nullptr);
-      file.reset(nullptr);
     }
 
     runcheck.AnalyseRun();
     runcheck.WriteRun(_run);
+
     auto const & time = timer();
     print(_run, time, timer.unit(), ":", run_size/timer.TimeSec(), "Mo/s");
   } // End files loop
@@ -118,39 +136,54 @@ void RunCheck::run(Parameters & p, RunCheck & runcheck)
 
 void RunCheck::InitializeRun(std::string const & run_name)
 {
+  auto const & thread_i = MTObject::getThreadIndex();
+  m_name_run[thread_i] = run_name;
   TimeSpectra.reset("Times"+run_name,"Relative Timestamp", 900,0,900, 500,-100,400);
 }
 
 void RunCheck::FillRaw(Event const & event)
 {
+  auto const & thread_i = MTObject::getThreadIndex();
+  auto const & run_name = m_name_run[thread_i];
+  size_t run_nb = stoi(lastPart(run_name, '_'));
+
   for (size_t i = 0; i<event.size(); i++)
   {
     auto const & label = event.labels[i];
     auto const & time = event.Times[i];
+    auto const & nrj = event.nrjs[i];
+
+    if (nrj<20) continue;
+    if (isBGO[label] && nrj<100) continue;
 
     // Fill each run :
     TimeSpectra.Fill(label, time);
-
+    TimeEachDetector[label].Fill(run_nb, time);
+    EnergyEachDetector[label].Fill(run_nb, nrj);
     // Fill whole manip :
   }
 }
 
 void RunCheck::FillSorted(Sorted_Event const & event_s, Event const & event)
 {
-  // auto const & thread_i = MTObject::getThreadIndex();
-   for (size_t loop_i = 0; loop_i<event_s.clover_hits.size(); loop_i++)
-   {
-     auto const & clover_i = event_s.clover_hits[loop_i];
+  auto const & thread_i = MTObject::getThreadIndex();
+  auto const & run_name = m_name_run[thread_i];
+  size_t run_nb = stoi(lastPart(run_name, '_'));
 
-     auto const & nrj_i = event_s.nrj_clover[clover_i];
-     // auto const & time_i = event_s.time_clover[clover_i];
+  for (size_t loop_i = 0; loop_i<event_s.clover_hits.size(); loop_i++)
+  {
+    auto const & clover_i = event_s.clover_hits[loop_i];
 
-     // Fill each run :
+    auto const & nrj_i = event_s.nrj_clover[clover_i];
+    // auto const & time_i = event_s.time_clover[clover_i];
 
-     // Fill whole manip :
-     GeSpectraManip.Fill(clover_i, nrj_i);
-     GeSpectraTotal.Fill(nrj_i);
-   }
+    // Fill each run :
+
+    // Fill whole manip :
+    GeSpectraManip.Fill(clover_i, nrj_i);
+    GeSpectraTotal.Fill(nrj_i);
+    EnergyClover[clover_i].Fill(run_nb, nrj_i);
+  }
 }
 
 void RunCheck::AnalyseRun()
@@ -171,8 +204,20 @@ void RunCheck::WriteRun(std::string const & _run)
 
 void RunCheck::AnalyseManip()
 {
-  HistoAnalyse test_a (GeSpectraManip);
-  test_a.NormalizeY(5);
+  HistoAnalyse GeSpectraManip_a(GeSpectraManip);
+  GeSpectraManip_a.NormalizeY(5);
+
+  for (auto & histo : EnergyEachDetector)
+  {
+    HistoAnalyse analyse(histo);
+    analyse.NormalizeY(1);
+  }
+
+  for (auto & histo : TimeEachDetector)
+  {
+    HistoAnalyse analyse(histo);
+    analyse.NormalizeY(1);
+  }
 }
 
 void RunCheck::WriteManip()
@@ -181,6 +226,8 @@ void RunCheck::WriteManip()
   std::unique_ptr<TFile> outfile(TFile::Open((m_outDir+m_outRoot).c_str(),"recreate"));
   outfile->cd();
   GeSpectraManip.Write();
+  for (auto & histo : EnergyEachDetector) if (histo) histo.Write();
+  for (auto & histo : TimeEachDetector)   if (histo) histo.Write();
   outfile->Write();
   outfile->Close();
   print("Writting manip analysis in ", m_outDir);

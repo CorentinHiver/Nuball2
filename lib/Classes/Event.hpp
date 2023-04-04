@@ -236,6 +236,6 @@ inline void Event::Print()
 }
 
 // Include useful classes
-#include "Counters.hpp"
+#include "../Analyse/Counters.hpp"
 
 #endif //EVENT_H

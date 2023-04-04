@@ -2,7 +2,7 @@
 #define COUNTERS_H
 
 #include "../utils.hpp"
-#include "Event.hpp"
+#include "../Classes/Event.hpp"
 
 class Counters
 {

@@ -14,6 +14,7 @@ public:
   typename std::vector<T> & get() {return m_collection;}
 
   bool getNext(T & t);
+  bool getNext(T & t, size_t & index);
   void Reset() {i = 0;}
 
   size_t const & size() const {return m_size;}
@@ -23,7 +24,7 @@ public:
   auto end() {return m_collection.end();}
 
   operator std::vector<T>() & {return m_collection;}
-  
+
   void operator=(std::vector<T> const & collection) {this->set(collection);}
 
   void push_back(T const & t) {m_collection.push_back(t);}
@@ -42,6 +43,25 @@ inline bool MTList<T>::getNext(T & t)
   {
     t = m_collection[i];
     i++;
+    m_mutex.unlock();
+    return true;
+  }
+  else
+  {
+    m_mutex.unlock();
+    return false;
+  }
+}
+
+template<class T>
+inline bool MTList<T>::getNext(T & t, size_t & index)
+{
+  m_mutex.lock();
+  if (i<m_size)
+  {
+    t = m_collection[i];
+    i++;
+    index = i;
     m_mutex.unlock();
     return true;
   }

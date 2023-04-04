@@ -43,10 +43,10 @@ struct quick_parameters
 
     file -> Write();
     file -> Close();
-    
+
     for (auto const & histo : RF_VS_LaBr3) if (histo) delete histo;
     for (auto const & histo : RF_VS_Ge) if (histo) delete histo;
   }
 
-  #endif //N_SI_129x
+  #endif //N_SI_129
 };

@@ -20,20 +20,21 @@ end
 # outDir: 129/Analyse/DSSD/
 outDir: 129/Analyse/DSSD/gate642/
 # outRoot: all_pulsed_runs.root
-outRoot: good_pulse.root
+# outRoot: good_pulse.root
+outRoot: test.root
 binning: 3000 0 30000
 end
 
 [Run Check]
-outDir: 129/RunsCheck/test
-# outDir: 129/RunsCheck/good_pulse
+# outDir: 129/RunsCheck/test
+outDir: 129/RunsCheck/good_pulse
 # outDir: 129/RunsCheck/all_pulse
 end
 
 [TimewalkDSSD]
 outDir: 129/Analyse/DSSD/
-# outRoot: all_pulsed_timewalk.root
-outRoot: good_pulsed_timewalk.root
+outRoot: all_pulsed_timewalk.root
+# outRoot: good_pulsed_timewalk.root
 # outRoot: test_runs_timewalk.root
 # writedata
 correct

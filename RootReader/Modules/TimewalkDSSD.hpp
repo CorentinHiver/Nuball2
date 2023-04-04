@@ -62,11 +62,6 @@ bool TimewalkDSSD::launch(Parameters & p)
   if (!this -> setParameters(p.getParameters(param_string))) return false;
   this -> InitializeManip();
   print("Starting !");
-  if (m_correct)
-  {
-    m_Timewalks_DSSD.resize(56);
-    m_Timewalks_DSSD.loadFile("129/Analyse/DSSD/gate642_prompt/timewalk_data/fit.fit");
-  }
   MTObject::parallelise_function(run, p, *this);
   if (m_writedata) this -> Analyse();
   this -> Write();
@@ -110,6 +105,11 @@ void TimewalkDSSD::run(Parameters & p, TimewalkDSSD & TimewalkDSSD)
 void TimewalkDSSD::InitializeManip()
 {
   print("Initialize histograms");
+  if (m_correct)
+  {
+    m_Timewalks_DSSD.resize(56);
+    m_Timewalks_DSSD.loadFile("129/Analyse/DSSD/gate642_prompt/timewalk_data/fit.fit");
+  }
   std::string name;
   timewalk_DSSD_all_sectors.reset("All sectors", "All sectors", m_time_bins,m_time_min,m_time_max, m_njr_bins,m_nrj_min,m_nrj_max);
   timewalk_DSSD_all_sectors_nRnS.reset("All sectors nRnS", "All sectors nRnS", m_time_bins,m_time_min,m_time_max, m_njr_bins,m_nrj_min,m_nrj_max);

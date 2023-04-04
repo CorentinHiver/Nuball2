@@ -10,20 +10,33 @@ class HistoAnalyse
 {
 public:
 
-  HistoAnalyse(THist * histo) { if (histo->InheritsFrom("TH1")) m_histo = histo; else print("Object does not inherit from TH1 !!"); }
-  HistoAnalyse(MTTHist<THist> & histo)
+  HistoAnalyse(THist * histo) { reset(histo); }
+  HistoAnalyse(MTTHist<THist> & histo) { reset(histo); }
+
+  void reset() {m_exists = false;}
+
+  void reset(MTTHist<THist> & histo)
   {
-    histo.Merge();
-    m_histo = histo.get();
+    if (MTObject::isMasterThread())
+    {
+      histo.Merge();
+      m_histo = histo.get();
+    }
+    else
+    {
+      m_histo = histo[MTObject::getThreadIndex()];
+    }
+    m_exists = static_cast<bool> (m_histo);
+  }
+
+  void reset(THist * histo)
+  {
+    if (histo->InheritsFrom("TH1")) { m_histo = histo; m_exists = true;}
+    else {print("Object does not inherit from TH1 !!"); m_exists = false;}
   }
 
   ~HistoAnalyse();
 
-  template <class... ARGS>
-  void reset() {m_exists = false;}
-
-  template <class... ARGS>
-  void reset(THist * histo) {m_histo = histo;}
 
   Float_t peaksOverBackground(std::vector<Gate> gates);
 
@@ -46,16 +59,17 @@ Float_t HistoAnalyse<THist>::peaksOverBackground(std::vector<Gate> gates)
 template<class THist>
 void HistoAnalyse<THist>::NormalizeY(Float_t const & factor)
 {
+  if (!m_exists) return;
   int const & bins_x = m_histo->GetNbinsX();
-
+  if (bins_x<1) { print("Not enough binsx !!"); return; }
   if (m_histo->InheritsFrom("TH1") && !m_histo->InheritsFrom("TH2"))
   {
     // --- Normalize 1D --- //
     Float_t maxRow = 0.;
     // 1 : Get the maximum
-    for (int x = 0; x<bins_x-1; x++) if(m_histo->GetBinContent(x) > maxRow) maxRow = m_histo->GetBinContent(x);
+    for (int x = 0; x<bins_x; x++) if(m_histo->GetBinContent(x) > maxRow) maxRow = m_histo->GetBinContent(x);
     // 2 : Normalize to set maximum = factor
-    for (int x = 0; x<bins_x+1; x++) m_histo -> SetBinContent(x, factor*m_histo->GetBinContent(x)/maxRow);
+    if (maxRow>0) for (int x = 0; x<bins_x+1; x++) m_histo -> SetBinContent(x, factor*m_histo->GetBinContent(x)/maxRow);
   }
   else if (m_histo->InheritsFrom("TH2"))
   {
@@ -65,9 +79,9 @@ void HistoAnalyse<THist>::NormalizeY(Float_t const & factor)
     {
       Float_t maxRow = 0.;
       // 1 : Get the maximum
-      for (int y = 0; y<bins_y-1; y++) if(m_histo->GetBinContent(x, y) > maxRow) maxRow = m_histo->GetBinContent(x, y);
+      for (int y = 0; y<bins_y; y++) if(m_histo->GetBinContent(x, y) > maxRow) maxRow = m_histo->GetBinContent(x, y);
       // 2 : Normalize to set maximum = factor
-      for (int y = 0; y<bins_y+1; y++) m_histo -> SetBinContent(x, y, factor*m_histo->GetBinContent(x, y)/maxRow);
+      if (maxRow>0) for (int y = 0; y<bins_y+1; y++) m_histo -> SetBinContent(x, y, factor*m_histo->GetBinContent(x, y)/maxRow);
     }
   }
 }

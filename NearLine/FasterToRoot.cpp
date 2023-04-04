@@ -77,7 +77,7 @@ int main()
     #endif
 
       if (!app -> setConfig("OUTDIR: "+dT_folder)) return 0;
-      if (!app -> setConfig("DATADIR: "+datadir+runs[i]+" nb: 10")) return 0;
+      if (!app -> setConfig("DATADIR: "+datadir+runs[i]+" nb: 30")) return 0;
 
       if (!app -> launch()) {print ("CANT RUN !"); return 0;}
       delete app;

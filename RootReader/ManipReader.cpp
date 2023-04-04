@@ -51,7 +51,7 @@ int main(int argc, char** argv)
   if (!p.checkParameters()) return -1;
 
   if (MTObject::getThreadsNb()>p.getRunsList().size())
-  {// Set one thread per run, and not per file : 
+  {// Set one thread per run, and not per file :
     MTObject::setThreadsNb(p.getRunsList().size());
     print("Number of threads too large (too few runs to process) ->",
     MTObject::getThreadsNb(), "threads");
@@ -79,14 +79,14 @@ int main(int argc, char** argv)
 
   // Initialize modules
 
-  RunCheck runs;
-  runs.launch(p);
+  // RunCheck runs;
+  // runs.launch(p);
 
   // TimewalkDSSD td;
   // td.launch(p);
 
-  // AnalyseDSSD ad;
-  // ad.launch(p);
+  AnalyseDSSD ad;
+  ad.launch(p);
 
   // Matrices ma;
   // ma.launch(p);

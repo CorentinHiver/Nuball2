@@ -51,7 +51,7 @@ public:
     return d_milli.count()/1000;
   }
 
-  auto operator() ()
+  Float_t operator() ()
   {
     auto time = Time();
     m_unit = "ms";
