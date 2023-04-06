@@ -2,6 +2,7 @@
 #define SORTED_EVENT_H
 #include "../utils.hpp"
 #include "../Classes/Event.hpp"
+#include "../Classes/Timewalk.hpp"
 
 class Sorted_Event
 {

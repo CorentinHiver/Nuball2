@@ -13,7 +13,7 @@ outDir: 129/Analyse/Isomer/
 # outRoot: good_pulse.root
 outRoot: total_DSSD_prompt.root
 # writeDSSD
-gate: prompt Ge -10 20
+gate: prompt Ge -10 10
 gate: delayed Ge 70 150
 end
 

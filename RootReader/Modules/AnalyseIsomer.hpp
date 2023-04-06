@@ -148,8 +148,8 @@ void AnalyseIsomer::FillSorted(Sorted_Event const & event_s, Event const & event
     auto const & clover_i = event_s.clover_hits[loop_i];
     auto const & nrj_i = event_s.nrj_clover[clover_i];
     auto const & Time_i = event_s.time_clover[clover_i];
-    auto const delayed_i = Time_i>50 && Time_i<150;
-    auto const prompt_i =  Time_i>-10 && Time_i<10;
+    auto const delayed_i = Time_i>Ge_delayed_gate.start && Time_i<Ge_delayed_gate.stop;
+    auto const prompt_i =  Time_i>Ge_prompt_gate.start && Time_i<Ge_prompt_gate.stop;
 
     if (event_s.BGO[clover_i] || nrj_i<5) continue;
 
@@ -163,8 +163,8 @@ void AnalyseIsomer::FillSorted(Sorted_Event const & event_s, Event const & event
       auto const & clover_j = event_s.clover_hits[loop_j];
       auto const & nrj_j = event_s.nrj_clover[clover_j];
       auto const & Time_j = event_s.time_clover[clover_j];
-      auto const delayed_j = Time_j>50 && Time_j<150;
-      auto const prompt_j =  Time_j>-10 && Time_j<10;
+      auto const delayed_j = Time_j>Ge_delayed_gate.start && Time_j<Ge_delayed_gate.stop;
+      auto const prompt_j =  Time_j>Ge_prompt_gate.start && Time_j<Ge_prompt_gate.stop;
 
       if (event_s.BGO[clover_j] || nrj_j<5) continue;
 
