@@ -50,6 +50,8 @@ private:
   MTTHist<TH2F> Ge_VS_DSSD;
   MTTHist<TH2F> GePrompt_VS_DSSD;
   MTTHist<TH2F> GeDelayed_VS_DSSD;
+  MTTHist<TH2F> DSSD_TW;
+  MTTHist<TH2F> Ge_VS_DSSD_Time;
 };
 
 bool AnalyseIsomer::launch(Parameters & p)
@@ -96,6 +98,7 @@ void AnalyseIsomer::run(Parameters & p, AnalyseIsomer & ai)
 void AnalyseIsomer::InitializeManip()
 {
   print("Initialize histograms");
+
   Ge_spectra.reset("Ge spectra","Ge spectra", 14000,0,7000);
   Ge_spectra_prompt.reset("Ge spectra prompt","Ge spectra prompt", 14000,0,7000);
   Ge_spectra_delayed.reset("Ge spectra delayed","Ge spectra delayed", 14000,0,7000);
@@ -112,36 +115,41 @@ void AnalyseIsomer::InitializeManip()
   GeDelayed_VS_SumGeDelayed.reset("Ge_delayed_VS_sum_Ge_delayed","Ge delayed VS sum Ge delayed",
       4096,0,4096, 4096,0,4096);
   Ge_VS_DSSD.reset("Ge VS DSSD","Ge VS DSSD",
-      2000,0,20000, 14000,0,7000);
+      400,0,20000, 14000,0,7000);
   GePrompt_VS_DSSD.reset("Ge Prompt VS DSSD","Ge VS DSSD",
-      2000,0,20000, 14000,0,7000);
+      400,0,20000, 14000,0,7000);
   GeDelayed_VS_DSSD.reset("Ge Delayed VS DSSD","Ge VS DSSD",
-      2000,0,20000, 14000,0,7000);
+      400,0,20000, 14000,0,7000);
+  DSSD_TW.reset("DSSD Timewalk","DSSD Timewalk",
+      500,-100,400, 400,0,20000);
+  Ge_VS_DSSD_Time.reset("DSSD VS Ge Time","DSSD VS Ge Time",
+      500,-100,400, 500,-100,400);
 }
 
 void AnalyseIsomer::FillRaw(Event const & event)
 {
   for (size_t i = 0; i<event.size(); i++)
   {
-    auto const & label = event.labels[i];
-    if (isGe[label])
-    {
-      auto const & nrj = event.nrjs[i];
-      auto const & Time = event.Times[i];
-      raw_Ge_Time_VS_Spectra.Fill(nrj,Time);
-    }
+    if (isGe[event.labels[i]]) raw_Ge_Time_VS_Spectra.Fill(event.nrjs[i],event.Times[i]);
   }
 }
 
 void AnalyseIsomer::FillSorted(Sorted_Event const & event_s, Event const & event)
 {
+  if (!event_s.DSSDPrompt) return;
+  for (auto const & dssd : event_s.DSSD_hits)
+  {
+    auto const & dssd_nrj = event.nrjs[dssd];
+    auto const & dssd_Time = event_s.times[dssd];
+    DSSD_TW.Fill(dssd_Time, dssd_nrj);
+  }
   for (size_t loop_i = 0; loop_i<event_s.clover_hits.size(); loop_i++)
   {
     auto const & clover_i = event_s.clover_hits[loop_i];
     auto const & nrj_i = event_s.nrj_clover[clover_i];
     auto const & Time_i = event_s.time_clover[clover_i];
     auto const delayed_i = Time_i>50 && Time_i<150;
-    auto const prompt_i =  Time_i>-10 && Time_i<20;
+    auto const prompt_i =  Time_i>-10 && Time_i<10;
 
     if (event_s.BGO[clover_i] || nrj_i<5) continue;
 
@@ -154,9 +162,9 @@ void AnalyseIsomer::FillSorted(Sorted_Event const & event_s, Event const & event
     {
       auto const & clover_j = event_s.clover_hits[loop_j];
       auto const & nrj_j = event_s.nrj_clover[clover_j];
-      auto const & delayed_j = event_s.delayed_Ge[clover_j];
-      auto const & prompt_j = event_s.delayed_Ge[clover_j];
       auto const & Time_j = event_s.time_clover[clover_j];
+      auto const delayed_j = Time_j>50 && Time_j<150;
+      auto const prompt_j =  Time_j>-10 && Time_j<10;
 
       if (event_s.BGO[clover_j] || nrj_j<5) continue;
 
@@ -190,12 +198,13 @@ void AnalyseIsomer::FillSorted(Sorted_Event const & event_s, Event const & event
     for (auto const & dssd : event_s.DSSD_hits)
     {
       auto const & dssd_nrj = event.nrjs[dssd];
-      // auto const dssd_label = event.labels[dssd] - 800;
+      auto const & dssd_Time = event_s.times[dssd];
       if (event_s.DSSDRingMult == event_s.DSSDSectorMult)
       {
         Ge_VS_DSSD.Fill(dssd_nrj,nrj_i);
         if (prompt_i) GePrompt_VS_DSSD.Fill(dssd_nrj,nrj_i);
         if (delayed_i)GeDelayed_VS_DSSD.Fill(dssd_nrj,nrj_i);
+        Ge_VS_DSSD_Time.Fill(dssd_Time, Time_i);
       }
     }
   }
@@ -205,6 +214,8 @@ void AnalyseIsomer::Write()
 {
   std::unique_ptr<TFile> oufile(TFile::Open((outDir+outRoot).c_str(),"recreate"));
   print("Writting histograms ...");
+  RWMat RW_prompt_prompt(GePrompt_VS_GePrompt); RW_prompt_prompt.Write();
+  RWMat RW_del_del(GeDelayed_VS_GeDelayed); RW_del_del.Write();
   Ge_spectra.Write();
   Ge_spectra_delayed.Write();
   Ge_spectra_prompt.Write();
@@ -218,11 +229,11 @@ void AnalyseIsomer::Write()
   Ge_VS_DSSD.Write();
   GePrompt_VS_DSSD.Write();
   GeDelayed_VS_DSSD.Write();
+  DSSD_TW.Write();
+  Ge_VS_DSSD_Time.Write();
   oufile->Write();
   oufile->Close();
 
-  RWMat RW_prompt_prompt(GePrompt_VS_GePrompt); RW_prompt_prompt.Write();
-  RWMat RW_del_del(GeDelayed_VS_GeDelayed); RW_del_del.Write();
 
   print("Writting analysis in", outDir+outRoot);
 }

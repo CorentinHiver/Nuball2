@@ -95,7 +95,7 @@ public:
 
   #endif //MTTHIST_MONO
 
-  std::string const & Name() const {return m_str_name;}
+  std::string const & GetName() const {return m_str_name;}
 
 private:
   TFile* m_file = nullptr;

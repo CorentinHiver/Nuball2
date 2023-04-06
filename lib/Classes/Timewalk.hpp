@@ -129,8 +129,6 @@ void Timewalks::loadFile(std::string const & filename)
     }
   }
 
-  Emin+=20; // To avoid having a way too big value if function diverge at Emin
-
   // Extract the function for each channel :
   while(getline(f,line) && line != "end")
   {
@@ -143,13 +141,12 @@ void Timewalks::loadFile(std::string const & filename)
   }
   for (size_t l = 0; l<m_timewalks.size(); l++)
   {
-    auto & tw_array = m_timewalks[l];
     auto const & p = m_parameters[l];
-    tw_array.resize(Emax);
-    for (size_t e = 0; e<tw_array.size(); e++)
+    m_timewalks[l].resize(Emax);
+    for (size_t e = 0; e<m_timewalks[l].size(); e++)
     {
-      tw_array[e] = (e<Emin) ? timewalk(Emin, p) : timewalk(e, p);
-      if (tw_array[e]<Tmin) Tmin = tw_array[e];
+      m_timewalks[l][e] = (e<Emin) ? timewalk(Emin, p) : timewalk(e, p);
+      if (m_timewalks[l][e]<Tmin) Tmin = m_timewalks[l][e];
     }
   }
   // int l = 0;

@@ -1015,7 +1015,7 @@ void Analyse::fillCoincRingSector(Label const & Ring, Label const & Sector, int 
   m_DSSD_coinc_ring_sector[thread_nb] -> Fill(Ring, Sector);
 
   Float_t r = 55-Ring;
-  Float_t r_smooth = r + gRandom->Uniform(-1,1)/2;
+  Float_t r_smooth = r + gRandom->Uniform(-0.5,05);
   r+=gRandom->Uniform(-1,1)*0.4;
 
   int label_sector = (Sector<16) ? (Sector) : (Sector-4);

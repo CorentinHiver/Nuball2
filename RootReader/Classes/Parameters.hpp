@@ -2,6 +2,7 @@
 #define PARAMETERS_H
 
 #include "../../lib/MTObjects/MTList.hpp"
+#include "../../lib/Analyse/Sorted_Event.hpp"
 
 class Parameters
 {
@@ -56,6 +57,8 @@ private:
   FilesManager m_files;
   MTList<std::string> m_list_files;
   MTList<std::string> m_list_runs;
+  bool m_TW_correct = false;
+  std::string m_TW_file;
 };
 
 bool Parameters::checkParameters()
@@ -152,6 +155,11 @@ bool Parameters::setData()
         is >> m_dataPath;
         if (m_dataPath.back() != '/') m_dataPath.push_back('/');
       }
+      else if (temp == "correctTW" || temp == "timewalk")
+      {
+        m_TW_correct = true;
+        is >> m_TW_file;
+      }
       else {print(temp,"parameter unkown for Data module!!");return false;}
     }
   }
@@ -159,6 +167,8 @@ bool Parameters::setData()
   if(m_list_runs.size()<1) { print("No runs list !"); return false;}
   for (auto const & run : m_list_runs) m_files.addFolder(m_dataPath+run);
   m_list_files = m_files.getListFiles();
+
+  if (m_TW_correct) Sorted_Event::setTWcorrectionsDSSD(m_TW_file);
 
   return true;
 }

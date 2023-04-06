@@ -24,6 +24,8 @@ public:
     m_Ge_gates.push_back(Egate); m_gateON = true;
   }
 
+  static void setTWcorrectionsDSSD(std::string const & filename);
+
   void sortEvent(Event const & event);
   void sortEvent(){sortEvent(*m_event);}
   bool sortGeClover(Event const & event, int const & i);
@@ -54,6 +56,7 @@ public:
   // DSSD array :
   std::vector<uchar> DSSD_hits; // Position in the event of the DSSD hits
   std::vector<char>  DSSD_is_Ring; // Tag if the DSSD hit is a ring
+  std::vector<char>  DSSD_is_Prompt; // Tag if the DSSD hit is prompt
   std::vector<uchar> DSSD_Rings; // Position in the event of the DSSD rings hits
   std::vector<uchar> DSSD_Sectors; // Position in the event of the DSSD sectors hits
 
@@ -104,7 +107,19 @@ private:
   bool m_gateON = false; // 0 : no gate, n : n-th gate
   int m_Ge_gate = 0; // 0 : no gate, n : n-th gate
   size_t m_CloverTrig = 0.;
+  static bool m_TW_DSSD ;
+  static Timewalks m_Timewalks_DSSD;
 };
+
+bool Sorted_Event::m_TW_DSSD = false;
+Timewalks Sorted_Event::m_Timewalks_DSSD;
+
+void Sorted_Event::setTWcorrectionsDSSD(std::string const & filename)
+{
+  m_Timewalks_DSSD.resize(56);
+  m_Timewalks_DSSD.loadFile(filename);
+  m_TW_DSSD = true;
+}
 
 void Sorted_Event::initialise()
 {
@@ -146,6 +161,7 @@ void Sorted_Event::reset()
   paris_hits.resize(0);
 
   DSSD_hits.resize(0);
+  DSSD_is_Prompt.resize(0);
   DSSD_is_Ring.resize(0);
   DSSD_Rings.resize(0);
   DSSD_Sectors.resize(0);
@@ -153,24 +169,15 @@ void Sorted_Event::reset()
   LaBr3_event.resize(0);
 
   RawMult=0;
-  LaBr3Mult=0;
-  ParisMult=0;
-  ParisLaBr3Mult=0;
-  RawGeMult=0;
-  CloverMult=0;
-  CloverGeMult=0;
-  CleanGeMult=0;
-  BGOMult=0;
-  DSSDMult = 0;
-  DSSDSectorMult=0;
-  DSSDRingMult=0;
-  ComptonVetoMult=0;
+  LaBr3Mult=0; ParisMult=0; ParisLaBr3Mult=0;
+  RawGeMult=0; CloverMult=0; CloverGeMult=0; CleanGeMult=0;
+  BGOMult=0; ComptonVetoMult=0;
+  DSSDMult = 0; DSSDSectorMult=0; DSSDRingMult=0;
   ModulesMult=0;
 
-  PromptMult = 0;
-  DelayedMult = 0;
-  PromptGeMult = 0;
-  DelayedGeMult = 0;
+  PromptMult = 0; DelayedMult = 0;
+  PromptGeMult = 0; DelayedGeMult = 0;
+  DSSDPrompt=false;
 
 #ifdef N_SI_129
   DSSDFirstBlob=false;
@@ -178,7 +185,6 @@ void Sorted_Event::reset()
   DSSDThirdBlob=false;
   DSSDTail = false;
 #endif //N_SI_129
-  DSSDPrompt=false;
 
   m_Ge_gate = 0;
   m_CloverTrig = 0;
@@ -187,8 +193,6 @@ void Sorted_Event::reset()
 bool Sorted_Event::sortGeClover(Event const & event, int const & i)
 {
   auto const & label = event.labels[i];
-  auto const & time = event.times[i];
-  auto const & Time = event.Times[i];
   auto const & nrj = event.nrjs[i];
   auto const & clover_label = labelToClover_fast[label];
 
@@ -196,20 +200,12 @@ bool Sorted_Event::sortGeClover(Event const & event, int const & i)
 
   push_back_unique(clover_hits, clover_label);
 
-  if (event.readtime())
-  {
-    if (m_rf) time_clover[clover_label] = m_rf->pulse_ToF(time, 50000ll)/_ns;
-    else time_clover[clover_label] = (time-event.times[0])/_ns;
-  }
-
-  // Next line overwrites the Time (relative timestamp) if Time is indeed read in the event
-  if (event.readTime()) time_clover[clover_label] = Time;
-
   nrj_clover[clover_label] += nrj;
   Ge[clover_label]++;
 
   if(nrj > maxE[clover_label])
   {// To get the crystal that got the maximum energy in a clover :
+    if (event.readTime()) time_clover[clover_label] = times[i];
     maxE[clover_label] = nrj;
     maxE_hit[clover_label] = i;
   }
@@ -225,8 +221,8 @@ void Sorted_Event::sortEvent(Event const & event)
   for (uchar i = 0; i<event.size(); i++)
   {
     if (event.readtime()) times[i] = (m_rf) ? m_rf->pulse_ToF(event.times[i], 50000ll) : (event.times[i]-event.times[0])/_ns;
-    if (event.readTime()) times[i] = event.Times[i];
-
+    if (event.readTime()) times[i] = event.Times[i]; // Overwrites the absolute time if relative Time is read in the data (parameter 'T' in connect() Event's method)
+    if (times[i]>160) continue;
     if (isGe[event.labels[i]])
     {
       if (!sortGeClover(event, i)) continue;
@@ -259,18 +255,24 @@ void Sorted_Event::sortEvent(Event const & event)
     }
     else if (isDSSD[event.labels[i]])
     {
-      print(i);
       DSSD_hits.push_back(i);
+      auto const & nrj = event.nrjs[i];
+      auto const & label = event.labels[i];
       auto const & time = times[i];
     #ifdef N_SI_129
-      auto const & nrj = event.nrjs[i];
       if (time>-5 && time<15 && nrj>8500 && nrj<11000) DSSDFirstBlob = true;
       else if (time> 3 && time<18 && nrj>5500 && nrj<7500) DSSDSecondBlob = true;
       else if (time>10 && time<20 && nrj>3800 && nrj<5500) DSSDThirdBlob = true;
       else if (time>25 && time<70 && nrj>2000 && nrj<3500) DSSDTail = true;
     #endif //N_SI_129
-      if (time>0&&time<50)DSSDPrompt=true;
-      bool isRing = isDSSD_Ring[event.labels[i]];
+      if (m_TW_DSSD)
+      {
+        times[i] -= m_Timewalks_DSSD.get(label-800, nrj);
+        DSSD_is_Prompt.push_back((times[i]>-10 && times[i]<10));
+      }
+      else DSSD_is_Prompt.push_back((times[i]>0 && times[i]<50));
+
+      bool const & isRing = isDSSD_Ring[event.labels[i]];
       DSSD_is_Ring.push_back(isRing);
       if (isRing)
       {
@@ -317,6 +319,13 @@ void Sorted_Event::sortEvent(Event const & event)
       ModulesMult++;
       BGOMult++;
     }
+  }
+
+  //Analyse DSSD :
+  for (auto const & prompt : DSSD_is_Prompt)
+  {
+    if (prompt)  DSSDPrompt = true;
+    else {DSSDPrompt = false; break;}
   }
 }
 

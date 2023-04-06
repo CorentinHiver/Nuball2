@@ -1259,20 +1259,13 @@ inline bool gate(Float_t const & E, Float_t const & E_min, Float_t const & E_max
 }
 
 std::pair<Float_t,Float_t> calculate_DSSD_pos(int const & ring, int const & sector)
-{
-  int label_sector = (Sector<16) ? (Sector) : (Sector-4);
-  Float_t r = 55.-ring+gRandom->Uniform(-1,1)*0.4;
-  r = 1.5+r*(4.1-1.5)/15;
-  Float_t theta = 2*3.141596/32*(sector+(gRandom->Uniform(0,1)+0.05));
-  return std::make_pair(r*TMath::Cos(theta),r*TMath::Sin(theta));
-}
+{// The labels must be Label-800 to range from 0 to 55
 
-std::pair<Float_t,Float_t> calculate_DSSD_pos_smooth(int const & ring, int const & sector)
-{
-  Float_t r = 55.-ring+gRandom->Uniform(-1,1)/2.;
-  r = 1.5+r*(4.1-1.5)/15;
-  Float_t theta = 2*3.141596/32*(sector+gRandom->Uniform(0,1));
-  return std::make_pair(r*TMath::Cos(theta),r*TMath::Sin(theta));
+  Float_t r = 1.5 + (55.-ring+gRandom->Uniform(-0.4,0.4))*(4.1-1.5)/15; // r_min + (r_ring+random)*(r_max-r_min)/nb_rings
+
+  Float_t phi = 0.19634975 * ( static_cast<int>((sector<16)?(sector):(sector-4)) + gRandom->Uniform(0.05, 0.95)); // (2*pi/32) * (ith_sector + random)
+
+  return std::make_pair(r*TMath::Cos(phi),r*TMath::Sin(phi));
 }
 
 template < class T >

@@ -16,7 +16,11 @@ class RWMat
  public:
 	RWMat(std::string name="test.m4b",int nchans=4096);	//@- Default constructor
 	RWMat(TH2F* RootMat);	//@- constructor from Root 2D histogram
+  template<class T>
+	RWMat(MTTHist<T> & MTRootMat);	//@- constructor from MTThist 2D histogram
 	~RWMat(); 			//@- Normal destructor
+  template<class THist>
+  void Reset(THist* RootMat);
 	void Write(std::string name="", std::string path = "./"); //write the RWMat out
 	void Read(std::string Filename="", bool IsInteger=true); //Read matrix from file
 	double Get(unsigned short i, unsigned short j) {return fRWMat[i][j];}
@@ -39,193 +43,187 @@ class RWMat
 
 RWMat::RWMat(std::string name, int nchans) //default constructor
 {
-fNChannels=nchans;
-fName=name;
-fRWMat=new int*[fNChannels];
-for(int i=0 ; i < fNChannels ; i++) {fRWMat[i] = new int[fNChannels];}
+  fNChannels=nchans;
+  fName=name;
+  fRWMat=new int*[fNChannels];
+  for(int i=0 ; i < fNChannels ; i++) fRWMat[i] = new int[fNChannels];
 }
+
 RWMat::RWMat(TH2F* RootMat) //constructor from root object
 {
-int xchans=RootMat->GetNbinsX();
-int ychans=RootMat->GetNbinsY();
-fNChannels=4096;
-fName=RootMat->GetName();
-fName=fName+".m4b";
-fRWMat=new int*[fNChannels];
-for(int i=0 ; i < fNChannels ; i++) {fRWMat[i] = new int[fNChannels];}
-double val=0;
-for (int i=0; i < xchans ; i++)
-{
-	for (int j=0; j < ychans ; j++)
-	{
-	fRWMat[i][j]=RootMat->GetBinContent(i,j);
-	val+=fRWMat[i][j];
-	}
+  Reset(RootMat);
 }
-//std::cout << "RW Matrix Created. Total Counts = " << val << std::endl;
-//std::cout << "filename = " << fName << std::endl;
+
+template<class THist>
+void RWMat::Reset(THist* RootMat)
+{
+  if (!RootMat -> InheritsFrom("TH2")) {print(RootMat->GetName(),"is not a TH2x !!"); return;}
+  else
+  {
+    int xchans=RootMat->GetNbinsX();
+    int ychans=RootMat->GetNbinsY();
+    fNChannels=4096;
+    fName=RootMat->GetName();
+    fName=fName+".m4b";
+    fRWMat=new int*[fNChannels];
+    for(int i=0 ; i < fNChannels ; i++) fRWMat[i] = new int[fNChannels];
+    double val=0;
+    for (int i=0; i < xchans ; i++)
+    {
+      for (int j=0; j < ychans ; j++)
+      {
+        fRWMat[i][j]=RootMat->GetBinContent(i,j);
+        val+=fRWMat[i][j];
+      }
+    }
+  }
+}
+
+template<class T>
+RWMat::RWMat(MTTHist<T> & MTRootMat)
+{
+  MTRootMat.Merge();
+  if (!MTRootMat -> InheritsFrom("TH2")) print(MTRootMat.GetName(),"is not a TH2x !!");
+  else Reset(MTRootMat.get());
 }
 //________________________________________________________________________
 RWMat::~RWMat()
 {
-for (int i=0; i < fNChannels; i++)
- {
- delete [] fRWMat[i];
- }
- delete [] fRWMat;
-
-
+  for (int i=0; i < fNChannels; i++) delete [] fRWMat[i];
+  delete [] fRWMat;
 }
 //________________________________________________________________________
 void RWMat::Fill(unsigned short i, unsigned short j)
 {
-if ((i < fNChannels) && (j < fNChannels)){fRWMat[i][j]++;}
+  if ((i < fNChannels) && (j < fNChannels)){fRWMat[i][j]++;}
 }
 //________________________________________________________________________
 void RWMat::Read(std::string fname, bool IsInteger)
 {
-fName=fname;
-FILE *fprad;
+  fName=fname;
+  FILE *fprad;
 
-fprad = fopen(fname.c_str(),"r");
-if (fprad) {std::cout << "Reading RWMat : " << fname << std::endl;}
-else {std::cout << "Error Reading RWMat : " << fname << std::endl; exit(1);}
+  fprad = fopen(fname.c_str(),"r");
+  if (fprad) {std::cout << "Reading RWMat : " << fname << std::endl;}
+  else {std::cout << "Error Reading RWMat : " << fname << std::endl; exit(1);}
 
-int size=fNChannels;
+  int size=fNChannels;
 
- double* buffer=new  double[size];
- int* bufferi=new  int[size];
+  double* buffer=new  double[size];
+  int* bufferi=new  int[size];
 
-std::cout << "Number of channels = " << fNChannels <<  std::endl;
-for (int i=0; i<size; i++)
-{
-	if (IsInteger)
-	{
-    // rval=fread(bufferi, size, sizeof( int), fprad);
-		fread(bufferi, size, sizeof( int), fprad);
-		for (int j=0; j<size; j++) {fRWMat[i][j]=bufferi[j];}
-	}
-  else
-	{
-		// rval=fread(buffer, size, sizeof( double), fprad);
-		fread(buffer, size, sizeof( double), fprad);
-		for (int j=0; j<size; j++) {fRWMat[i][j]=buffer[j];}
-	}
+  std::cout << "Number of channels = " << fNChannels <<  std::endl;
+  for (int i=0; i<size; i++)
+  {
+  	if (IsInteger)
+  	{
+      // rval=fread(bufferi, size, sizeof( int), fprad);
+  		fread(bufferi, size, sizeof( int), fprad);
+  		for (int j=0; j<size; j++) fRWMat[i][j]=bufferi[j];
+  	}
+    else
+  	{
+  		// rval=fread(buffer, size, sizeof( double), fprad);
+  		fread(buffer, size, sizeof( double), fprad);
+  		for (int j=0; j<size; j++) fRWMat[i][j]=buffer[j];
+  	}
+  }
+  fclose(fprad);
+  delete [] buffer;
+  delete [] bufferi;
 }
-fclose(fprad);
-delete [] buffer;
-delete [] bufferi;
-}
-//________________________________________________________________________
+  //________________________________________________________________________
 void RWMat::Write(std::string name, std::string path)
 {
+  FILE *fprad;
+  if (name!="") {fName=name;}
+  else {name=fName;}
+  if (path.back() != '/') path.push_back('/');
+  name = path+name;
+  fprad = fopen(name.c_str(),"w");
+  if (fprad) {std::cout << "Writing RWMat : " << name << std::endl;}
+  else {std::cout << "Error Writing RWMat : " << name << std::endl; exit(1);}
 
-FILE *fprad;
-if (name!="") {fName=name;}
-else {name=fName;}
-if (path.back() != '/') path.push_back('/');
-name = path+name;
-fprad = fopen(name.c_str(),"w");
-if (fprad) {std::cout << "Writing RWMat : " << name << std::endl;}
-else {std::cout << "Error Writing RWMat : " << name << std::endl; exit(1);}
+  int size=fNChannels;
 
-int size=fNChannels;
+  int* buffer=new  int[size];
 
-int* buffer=new  int[size];
+  std::cout << "channels = " << fNChannels << " counts = " << this->Integral()<< std::endl;
 
-std::cout << "channels = " << fNChannels << " counts = " << this->Integral()<< std::endl;
-for (int i=0; i<size; i++)
-{
-	for (int j=0; j<size; j++)
-	{
-	buffer[j]=fRWMat[i][j];
-	}
-fwrite(buffer, size, sizeof( int), fprad);
-}
-fclose(fprad);
+  for (int i=0; i<size; i++)
+  	for (int j=0; j<size; j++)
+  	   buffer[j]=fRWMat[i][j];
 
-delete [] buffer;
-
+  fwrite(buffer, size, sizeof( int), fprad);
+  fclose(fprad);
+  delete [] buffer;
 }
 //________________________________________________________________________
 RWMat* RWMat::Add(RWMat* Matrix,double val)
 {
-RWMat *mat3=new RWMat();
-for (int i=0; i<fNChannels; i++)
-{
-	for (int j=0; j<fNChannels; j++)
-	{
-	mat3->Set(i,j,(fRWMat[i][j]+(Matrix->Get(i,j)*val)));
-	}
-}
-
-return mat3;
+  RWMat *mat3=new RWMat();
+  for (int i=0; i<fNChannels; i++)
+    for (int j=0; j<fNChannels; j++)
+      mat3->Set(i,j,(fRWMat[i][j]+(Matrix->Get(i,j)*val)));
+  return mat3;
 }
 //________________________________________________________________________
 double RWMat::Integral()
 {
-double val=0;
-for (int i=0; i<fNChannels; i++)
-{
-	for (int j=0; j<fNChannels; j++)
-	{
-	val+=fRWMat[i][j];
-	}
-}
-
-return val;
+  double val=0.;
+  for (int i=0; i<fNChannels; i++) for (int j=0; j<fNChannels; j++) val+=fRWMat[i][j];
+  return val;
 }
 
 //________________________________________________________________________
 void RWMat::ReSymmetrise()
 {
-for (int i=0; i<fNChannels; i++)
-{
-	for (int j=0; j<i; j++)
-	{
-	double val1=fRWMat[i][j];
-	double val2=fRWMat[j][i];
-	fRWMat[i][j]=(val1+val2)/2.0;
-	fRWMat[j][i]=(val1+val2)/2.0;
-	}
-}
+  for (int i=0; i<fNChannels; i++)
+  {
+  	for (int j=0; j<i; j++)
+  	{
+    	double val1=fRWMat[i][j];
+    	double val2=fRWMat[j][i];
+    	fRWMat[i][j]=(val1+val2)/2.0;
+    	fRWMat[j][i]=(val1+val2)/2.0;
+  	}
+  }
 }
 //________________________________________________________________________
 double RWMat::FindMinMax()
 {
-double maxval=0;
-double minval=0;
-int maxx = 0, maxy = 0, minx = 0, miny = 0;
+  double maxval=0;
+  double minval=0;
+  int maxx = 0, maxy = 0, minx = 0, miny = 0;
 
-for (int i=0; i<fNChannels; i++)
-{
-	for (int j=0; j<i; j++)
-	{
-	double val1=fRWMat[i][j];
-	if (val1 > maxval) {maxval=val1; maxx=i; maxy=j;}
-	if (val1 < minval) {minval=val1; minx=i; miny=j;}
-	}
-}
-std::cout << "Max Value = " << maxval << " at " <<maxx << " "<<maxy<<std::endl;
-std::cout << "Min Value = " << minval << " at " <<minx << " "<<miny<<std::endl;
-return minval;
+  for (int i=0; i<fNChannels; i++)
+  {
+  	for (int j=0; j<i; j++)
+  	{
+    	double val1=fRWMat[i][j];
+    	if (val1 > maxval) {maxval=val1; maxx=i; maxy=j;}
+    	if (val1 < minval) {minval=val1; minx=i; miny=j;}
+  	}
+  }
+  std::cout << "Max Value = " << maxval << " at " <<maxx << " "<<maxy<<std::endl;
+  std::cout << "Min Value = " << minval << " at " <<minx << " "<<miny<<std::endl;
+  return minval;
 }
 //________________________________________________________________________
 int RWMat::FindMinChan()
 {
-double minval=0;
-int minx = 0, miny = 0;
+  double minval=0;
+  int minx = 0, miny = 0;
 
-for (int i=0; i<fNChannels; i++)
-{
-	for (int j=0; j<i; j++)
-	{
-	double val1=fRWMat[i][j];
-	if (val1 < minval) {minval=val1; minx=i; miny=j;}
-	}
-}
-if (minx > miny) {miny=minx;}
-
-return miny;
+  for (int i=0; i<fNChannels; i++)
+  {
+  	for (int j=0; j<i; j++)
+  	{
+    	double val1=fRWMat[i][j];
+    	if (val1 < minval) {minval=val1; minx=i; miny=j;}
+  	}
+  }
+  if (minx > miny) {miny=minx;}
+  return miny;
 }
 #endif
