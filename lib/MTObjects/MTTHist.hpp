@@ -153,7 +153,7 @@ inline void MTTHist<THist>::reset(std::string name, ARGS &&... args)
 
 template <class THist>
 template <class... ARGS>
-void MTTHist<THist>::Fill(ARGS &&... args)
+inline void MTTHist<THist>::Fill(ARGS &&... args)
 {
 
   #ifdef MTTHIST_MONO

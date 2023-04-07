@@ -26,6 +26,7 @@ public:
   }
 
   static void setTWcorrectionsDSSD(std::string const & filename);
+  static void setMaxTime(Float_t const & max_time);
 
   void sortEvent(Event const & event);
   void sortEvent(){sortEvent(*m_event);}
@@ -33,6 +34,7 @@ public:
 
   int const & gateGe() const {return m_Ge_gate;}
   auto const & getGatedClover() const {return m_CloverTrig;}
+
 
   std::array<Float_t, 2000> times;
   RF_Manager *m_rf = nullptr;
@@ -110,8 +112,12 @@ private:
   size_t m_CloverTrig = 0.;
   static bool m_TW_DSSD ;
   static Timewalks m_Timewalks_DSSD;
+
+  //Parameters :
+  static Float_t m_max_time;
 };
 
+Float_t Sorted_Event::m_max_time = 9999999.; // Dumb default value 
 bool Sorted_Event::m_TW_DSSD = false;
 Timewalks Sorted_Event::m_Timewalks_DSSD;
 
@@ -191,6 +197,11 @@ void Sorted_Event::reset()
   m_CloverTrig = 0;
 }
 
+void Sorted_Event::setMaxTime(Float_t const & max_time)
+{
+  m_max_time = max_time;
+}
+
 bool Sorted_Event::sortGeClover(Event const & event, int const & i)
 {
   auto const & label = event.labels[i];
@@ -223,7 +234,7 @@ void Sorted_Event::sortEvent(Event const & event)
   {
     if (event.readtime()) times[i] = (m_rf) ? m_rf->pulse_ToF(event.times[i], 50000ll) : (event.times[i]-event.times[0])/_ns;
     if (event.readTime()) times[i] = event.Times[i]; // Overwrites the absolute time if relative Time is read in the data (parameter 'T' in connect() Event's method)
-    if (times[i]>160) continue;
+    if (times[i]>m_max_time) continue;
     if (isGe[event.labels[i]])
     {
       if (!sortGeClover(event, i)) continue;
@@ -303,6 +314,7 @@ void Sorted_Event::sortEvent(Event const & event)
       else
       {
         CleanGeMult++;
+        // Energy gates :
         if (m_gateON && m_Ge_gate == 0) for (size_t gate = 0; gate<m_Ge_gates.size(); gate++)
         {
           if (nrj_clover[clover]>m_Ge_gates[gate].first && nrj_clover[clover]<m_Ge_gates[gate].second)

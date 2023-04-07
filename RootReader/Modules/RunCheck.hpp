@@ -35,6 +35,7 @@ private:
   // ---- Histograms ---- //
   // Histograms for each run :
   MTTHist<TH2F> TimeSpectra;
+  MTTHist<TH2F> CloverTimeSpectra;
   // Histograms for the whole runs :
   MTTHist<TH2F> GeSpectraManip;
   MTTHist<TH1F> GeSpectraTotal;
@@ -139,6 +140,7 @@ void RunCheck::InitializeRun(std::string const & run_name)
   auto const & thread_i = MTObject::getThreadIndex();
   m_name_run[thread_i] = run_name;
   TimeSpectra.reset("Times"+run_name,"Relative Timestamp", 900,0,900, 500,-100,400);
+  CloverTimeSpectra.reset("Clover E VS Times"+run_name,"E VS Time Clovers", 500,-100,400, 2000,0,4000);
 }
 
 void RunCheck::FillRaw(Event const & event)
@@ -157,9 +159,9 @@ void RunCheck::FillRaw(Event const & event)
     if (isBGO[label] && nrj<100) continue;
 
     // Fill each run :
-    TimeSpectra.Fill(label, time);
-    TimeEachDetector[label].Fill(run_nb, time);
-    EnergyEachDetector[label].Fill(run_nb, nrj);
+    TimeSpectra[thread_i]->Fill(label, time);
+    TimeEachDetector[label][thread_i]->Fill(run_nb, time);
+    EnergyEachDetector[label][thread_i]->Fill(run_nb, nrj);
     // Fill whole manip :
   }
 }
@@ -175,14 +177,14 @@ void RunCheck::FillSorted(Sorted_Event const & event_s, Event const & event)
     auto const & clover_i = event_s.clover_hits[loop_i];
 
     auto const & nrj_i = event_s.nrj_clover[clover_i];
-    // auto const & time_i = event_s.time_clover[clover_i];
+    auto const & time_i = event_s.time_clover[clover_i];
 
     // Fill each run :
-
+    CloverTimeSpectra[thread_i]->Fill(time_i, nrj_i);
     // Fill whole manip :
-    GeSpectraManip.Fill(clover_i, nrj_i);
-    GeSpectraTotal.Fill(nrj_i);
-    EnergyClover[clover_i].Fill(run_nb, nrj_i);
+    GeSpectraManip[thread_i]->Fill(clover_i, nrj_i);
+    GeSpectraTotal[thread_i]->Fill(nrj_i);
+    EnergyClover[clover_i][thread_i]->Fill(run_nb, nrj_i);
   }
 }
 
@@ -198,6 +200,7 @@ void RunCheck::WriteRun(std::string const & _run)
   std::unique_ptr<TFile> outfile(TFile::Open((m_outDir+_run+".root").c_str(),"recreate"));
   outfile->cd();
   TimeSpectra.Write();
+  CloverTimeSpectra.Write();
   outfile->Write();
   outfile->Close();
 }

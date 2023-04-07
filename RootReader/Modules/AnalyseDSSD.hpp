@@ -55,7 +55,6 @@ private:
   MTTHist<TH2F> m_polar_1S;
   MTTHist<TH2F> m_TW_1S;
 
-
   //1 ring 1 sector
   MTTHist<TH2F> m_polar_1R1S;
   MTTHist<TH2F> m_R_VS_S;
@@ -99,7 +98,6 @@ private:
   MTTHist<TH2F> m_R2_VS_S2_time;
 
   Vector_MTTHist<TH2F> m_each_DSSD_VS_Time;
-
 };
 
 bool AnalyseDSSD::launch(Parameters & p)
