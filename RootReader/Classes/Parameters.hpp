@@ -59,6 +59,9 @@ private:
   MTList<std::string> m_list_runs;
   bool m_TW_correct = false;
   std::string m_TW_file;
+
+  // Parameters :
+  Float_t m_max_time = 9999999.;
 };
 
 bool Parameters::checkParameters()
@@ -159,6 +162,20 @@ bool Parameters::setData()
       {
         m_TW_correct = true;
         is >> m_TW_file;
+      }
+      else if (temp == "reject:")
+      {
+        is >> temp;
+        if (temp == "time:")
+        {
+          is >> temp;
+          if (temp == "sup:")
+          {
+            is >> m_max_time;
+            Sorted_Event::setMaxTime(m_max_time);
+            print("Rejecting events with Time >",m_max_time,"ns");
+          }
+        }
       }
       else {print(temp,"parameter unkown for Data module!!");return false;}
     }

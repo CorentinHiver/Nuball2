@@ -65,6 +65,7 @@ void RWMat::Reset(THist* RootMat)
     fNChannels=4096;
     fName=RootMat->GetName();
     fName=fName+".m4b";
+    print(fName);
     fRWMat=new int*[fNChannels];
     for(int i=0 ; i < fNChannels ; i++) fRWMat[i] = new int[fNChannels];
     double val=0;
@@ -115,18 +116,8 @@ void RWMat::Read(std::string fname, bool IsInteger)
   std::cout << "Number of channels = " << fNChannels <<  std::endl;
   for (int i=0; i<size; i++)
   {
-  	if (IsInteger)
-  	{
-      // rval=fread(bufferi, size, sizeof( int), fprad);
-  		fread(bufferi, size, sizeof( int), fprad);
-  		for (int j=0; j<size; j++) fRWMat[i][j]=bufferi[j];
-  	}
-    else
-  	{
-  		// rval=fread(buffer, size, sizeof( double), fprad);
-  		fread(buffer, size, sizeof( double), fprad);
-  		for (int j=0; j<size; j++) fRWMat[i][j]=buffer[j];
-  	}
+		fread(bufferi, size, ( (IsInteger) ? sizeof(int) : sizeof(double) ), fprad);
+		for (int j=0; j<size; j++) fRWMat[i][j]=bufferi[j];
   }
   fclose(fprad);
   delete [] buffer;
@@ -136,8 +127,8 @@ void RWMat::Read(std::string fname, bool IsInteger)
 void RWMat::Write(std::string name, std::string path)
 {
   FILE *fprad;
-  if (name!="") {fName=name;}
-  else {name=fName;}
+  if (name=="") {name=fName;}
+  else {fName=name;}
   if (path.back() != '/') path.push_back('/');
   name = path+name;
   fprad = fopen(name.c_str(),"w");
@@ -148,13 +139,17 @@ void RWMat::Write(std::string name, std::string path)
 
   int* buffer=new  int[size];
 
-  std::cout << "channels = " << fNChannels << " counts = " << this->Integral()<< std::endl;
+  std::cout << "channels = " << fNChannels << " counts = " << this->Integral() << " size = " << size*size*sizeof(int)/1048576 << "Mo" << std::endl;
 
   for (int i=0; i<size; i++)
-  	for (int j=0; j<size; j++)
-  	   buffer[j]=fRWMat[i][j];
+  {
+    for (int j=0; j<size; j++)
+    {
+      buffer[j]=fRWMat[i][j];
+    }
+    fwrite(buffer, size, sizeof(int), fprad);
+  }
 
-  fwrite(buffer, size, sizeof( int), fprad);
   fclose(fprad);
   delete [] buffer;
 }

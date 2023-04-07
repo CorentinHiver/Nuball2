@@ -377,10 +377,10 @@ Bool_t is_LaBr3(UShort_t const & _l)
     return (_l>199 && _l<220);
     #elif defined N_SI_121
     return (_l>199 && _l<210);
-    #elif defined N_SI_129
+    #elif defined (N_SI_129) || defined (N_SI_85)
     return (_l == 252);
     #else
-    return false
+    return false;
     #endif
   #else //!FATIMA
     return false;
