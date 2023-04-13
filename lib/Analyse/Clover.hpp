@@ -1,63 +1,43 @@
 #ifndef CLOVER_H
 #define CLOVER_H
 
-class Clover
+class CLOVER
 {
 public:
-  Clover(){}
+  // CLOVER() {}
+  CLOVER() : m_label(glabel) {glabel++;}
 
-  void Fill(Event const & event, int const & index);
   void Reset();
+  auto const & label() const {return m_label;}
 
-  Float_t & nrj() {return m_nrj}
+  // In the following, if nothing is specified then it refers to the Germanium
+
+  float nrj = 0.;  // Add-backed energy of Ge  Clovers
+  float nrj_BGO = 0.; // Add-backed energy of BGO Clovers
+  float nb = 0.;   // Number of Ge  crystals in each clover
+  float nb_BGO = 0.;  // Number of BGO crystals in each clover
+  float time = 0.; // Time of the crystal with most energy deposit of the clover
+  // float time_BGO = 0.;
+
+  uchar maxE_Ge_cristal = 0u; // Crystal number of the crystal with most energy deposit of the clover
 
 
 private:
-
-  Float_t m_nrj = 0.; // Add-backed energy of Clover Ge
-  Float_t m_time = 0.; // Time of the Ge crystal with the more energy of a Clover
-  Float_t nrj_BGO = 0.; // Sum energy on the BGOs
-
-  Bool_t prompt_Ge = false; // Tag if the Clover is in the prompt window
-  Bool_t delayed_Ge = false; // Tag if the Clover is in the prompt window
-
-  Int_t Ge = 0; // The number of Ge crystal that fired in a Germanium
-  Int_t BGO = 0; // The number of BGO crystals that fired in a Germanium
-  Int_t crystals = 0; // The number of Ge and BGO crystal that fired
-
-  Int_t   maxE_crystal = 0; // Crystal label of the Ge crystal with the maximum energy of the Clover
-
-  std::array<Float_t, 4> m_Ge_crystals_nrj   = {0., 0., 0., 0.}; // The energy of each individual Ge  crystal
-  std::array<Float_t, 4> m_Ge_crystals_time  = {0., 0., 0., 0.}; // The time   of each individual Ge  crystal
-  std::array<Float_t, 2> m_BGO_crystals_nrj  = {0., 0.};         // The energy of each individual BGO crystal
-  std::array<Float_t, 2> m_BGO_crystals_time = {0., 0.};         // The time   of each individual BGO crystal
+  uchar const m_label;
+  static uchar glabel;
 };
 
-void Clover::Fill(Event const & event, int const & index)
-{
-  crystals++;
-  if (isBGO[event.labels[index]])
-  {
-    BGO++;
-    nrj_BGO = event.times[index];
-  }
-  else
-  {
-    m_time = event.times[index];
-    m_nrj += event.nrjs[index];
-    Ge++;
-  }
-}
+uchar CLOVER::glabel = 0;
 
-void Clover::Reset()
+void CLOVER::Reset()
 {
-  m_nrjs = 0.;
-  m_times = 0.;
+  nrj = 0.;
   nrj_BGO = 0.;
-
-  Ge = 0;
-  BGO = 0;
-  crystals = 0;
+  nb = 0.;
+  nb_BGO = 0.;
+  time = 0.;
+  // time_BGO = 0.;
+  maxE_Ge_cristal = 0u;
 }
 
 #endif //CLOVER_H

@@ -38,6 +38,7 @@ Labels g_labelToName;
 #include "Modules/AnalyseDSSD.hpp"
 #include "Modules/AnalyseIsomer.hpp"
 #include "Modules/TimewalkDSSD.hpp"
+#include "Modules/Analyse511.hpp"
 
 #include "../lib/Analyse/HistoAnalyse.hpp"
 
@@ -57,6 +58,7 @@ int main(int argc, char** argv)
     MTObject::getThreadsNb(), "threads");
   }
 
+  Sorted_Event::Initialize();
   MTObject::Initialize(p.threadsNb());
 
   #if defined (N_SI_120)
@@ -85,11 +87,14 @@ int main(int argc, char** argv)
   // TimewalkDSSD td;
   // td.launch(p);
 
-  AnalyseDSSD ad;
-  ad.launch(p);
+  // AnalyseDSSD ad;
+  // ad.launch(p);
 
-  // Matrices ma;
-  // ma.launch(p);
+  // Analyse511 a511;
+  // a511.launch(p);
+
+  Matrices ma;
+  ma.launch(p);
 
   // AnalyseIsomer ai;
   // ai.launch(p);

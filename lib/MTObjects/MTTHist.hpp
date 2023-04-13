@@ -73,6 +73,7 @@ public:
   void Fill(ARGS &&... args);
 
   // --- COMMON METHODS --- //
+  void Print();
   void Write();
   Bool_t const & exists() {return m_exists;}
   operator bool() {return m_exists;}
@@ -237,6 +238,16 @@ void MTTHist<THist>::Write()
       m_is_deleted[thread_i] = true;
     }
   }
+}
+
+template <class THist>
+void MTTHist<THist>::Print()
+{
+  print("_________________");
+  print(m_str_name);
+  print(m_collection.size(), "histograms :");
+  for (auto const & histo : m_collection) print(histo, (histo) ? histo->Integral() : 0, "counts");
+  print();
 }
 
 template <class THist>

@@ -35,7 +35,7 @@ struct Hit
     nrj2   = 0;
     nrjcal = 0;
     time   = 0;
-    pileup = 0; 
+    pileup = 0;
     type   = 0;
   }
 

@@ -208,18 +208,18 @@ void RunCheck::WriteRun(std::string const & _run)
 void RunCheck::AnalyseManip()
 {
   HistoAnalyse GeSpectraManip_a(GeSpectraManip);
-  GeSpectraManip_a.NormalizeY(5);
+  GeSpectraManip_a.normalizeY(5);
 
   for (auto & histo : EnergyEachDetector)
   {
     HistoAnalyse analyse(histo);
-    analyse.NormalizeY(1);
+    analyse.normalizeY(1);
   }
 
   for (auto & histo : TimeEachDetector)
   {
     HistoAnalyse analyse(histo);
-    analyse.NormalizeY(1);
+    analyse.normalizeY(1);
   }
 }
 

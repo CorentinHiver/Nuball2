@@ -9,7 +9,7 @@ class Counters
 public:
   Counters()
   {
-    for (int i = 0; i<255; i++) list_clovers[i] = 0;
+    for (int i = 0; i<48; i++) list_clovers[i] = 0;
     for (int i = 0; i<24; i++)
     {
       Ge_Clover[i] = false;
@@ -22,6 +22,7 @@ public:
 
   uchar mult = 0;
   uchar RawGe=0;
+  uchar RawBGO=0;
   uchar GeCleanClovers=0;
   uchar GeClovers=0;
   uchar Clovers=0;
@@ -30,7 +31,7 @@ public:
   uchar ParisMult=0;
   uchar DSSDMult=0;
 
-  uchar list_clovers[255];
+  uchar list_clovers[48];
   std::array<Bool_t, 24> Ge_Clover;
   std::array<Bool_t, 24> BGO_Clover;
 
@@ -46,31 +47,33 @@ void Counters::clear()
   }
 
   mult = 0;
-  RawGe=0;
-  GeCleanClovers=0;
-  GeClovers=0;
-  Clovers=0;
-  Modules=0;
-  LaBr3Mult=0;
-  ParisMult=0;
-  DSSDMult=0;
+  RawGe = 0;
+  RawBGO = 0;
+  GeCleanClovers = 0;
+  GeClovers = 0;
+  Clovers = 0;
+  Modules = 0;
+  LaBr3Mult = 0;
+  ParisMult = 0;
+  DSSDMult = 0;
 }
 
 void Counters::count_event(Event const & event)
 {
   clear();
   mult = event.mult;
-  for (uchar i = 0; i<event.mult; i++)
+  for (uchar i = 0; i<mult; i++)
   {
     auto const & label = event.labels[i];
     if(isGe[label])
     {
       RawGe++;
-      Ge_Clover [labelToClover_fast[label]] = true;
+      Ge_Clover  [labelToClover_fast[label]] = true;
     }
     else if (isBGO[label])
     {
-      BGO_Clover[labelToClover_fast[label]] = true;
+      RawBGO++;
+      BGO_Clover [labelToClover_fast[label]] = true;
     }
     else if (isLaBr3[label])
     {
@@ -94,21 +97,21 @@ void Counters::count_event(Event const & event)
     }
   }
 
-  //Compton-rejection :
+  // Quick analysis of the Clovers :
   for (uchar clover = 0; clover<24; clover++)
   {
     if(BGO_Clover[clover])
     {
-       Modules++;
-       Clovers++;
-       list_clovers[Modules] = clover;
+      list_clovers[Clovers] = clover;
+      Modules++;
+      Clovers++;
     }
     if(Ge_Clover[clover])
     {
+      list_clovers[Clovers] = clover;
       Modules++;
       Clovers++;
       GeClovers++;
-      list_clovers[GeClovers] = clover;
       if(!BGO_Clover[clover])
       {
         GeCleanClovers++;

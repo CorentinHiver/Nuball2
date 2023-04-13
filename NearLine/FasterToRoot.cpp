@@ -16,8 +16,8 @@ std::vector<std::string> all_runs(std::string const & listfilename);
 
 int main()
 {
-  std::string path = "/home/corentin/faster_data/";
-  // std::string path = "/srv/data/nuball2/";
+  // std::string path = "/home/corentin/faster_data/";
+  std::string path = "/srv/data/nuball2/";
   // std::string path = "/data_nuball2/";
 
 #if defined (N_SI_120)
@@ -70,7 +70,7 @@ int main()
       if (!app -> setConfig("TIMESHIFT: time_reference: R1A9_FATIMA_LaBr3 timewindow: 1500 "
         "mult: 2 3 outRoot: "+dT_root+" outData: "+dT_file)) return 0;
 
-    #elif defined (N_SI_185)
+    #elif defined (N_SI_85)
       if (!app -> setConfig("ID: ID/index_129.dat")) return 0;
       if (!app -> setConfig("TIMESHIFT: time_reference: PARIS_BR2D1 timewindow: 1500 "
         "mult: 2 3 outRoot: "+dT_root+" outData: "+dT_file)) return 0;
@@ -84,38 +84,38 @@ int main()
       print("Timeshifts calculated, now processing the data :");
     }
 
-  //   //Faster2root :
-  //   app = new NearLine;
-  //   // app -> setConfig("NB_THREADS: 5");
-  //   app -> setConfig("NB_THREADS: 10");
-  //
-  // #if defined (N_SI_120)
-  //   if (!app -> setConfig("ID: ID/index_120.dat")) return 0;
-  //   app -> setConfig("USE_RF: 40");
-  //   if (firstPart(removePath(runs[i]), '_') == "Uranium238") {if (!app -> setConfig("CALIBRATION: Calibration/152Eu_Uranium238_after_108.dat")) return 0;}
-  //   else if (firstPart(removePath(runs[i]), '_') == "run") {if (!app -> setConfig("CALIBRATION: Calibration/run_oct2022_before.dat")) return 0;}
-  //   else {print("Can't recognize the run of "+removePath(runs[i])); continue;}
-  //
-  // #elif defined (N_SI_129)
-  //   if (!app -> setConfig("ID: ID/index_129.dat")) return 0;
-  //   app -> setConfig("USE_RF: 60");
-  //   if (!app -> setConfig("CALIBRATION: Calibration/calib_129.dat")) return 0;
-  //
-  // #elif defined (N_SI_85)
-  //   if (!app -> setConfig("ID: ID/index_129.dat")) return 0;
-  //   if (!app -> setConfig("CALIBRATION: Calibration/calib_129.dat")) return 0;
-  // #endif
-  //
-  //   if (!app -> setConfig("TIMESHIFT_DATA: "+dT_folder+"Timeshifts/"+dT_file)) return 0;
-  //   if (!app -> setConfig("DATADIR: "+datadir+runs[i])) return 0;
-  //
-  //
-  //   if (!app -> setConfig("FASTER2ROOT: outDir: "+outdir+rmPathAndExt(runs[i]))) return 0;
-  //   if (!app -> launch()) {print ("CANT RUN !"); return 0;}
-  //   delete app;
-  //
-  //
-  //   print("-------------");
+    //Faster2root :
+    app = new NearLine;
+    // app -> setConfig("NB_THREADS: 5");
+    app -> setConfig("NB_THREADS: 10");
+
+  #if defined (N_SI_120)
+    if (!app -> setConfig("ID: ID/index_120.dat")) return 0;
+    app -> setConfig("USE_RF: 40");
+    if (firstPart(removePath(runs[i]), '_') == "Uranium238") {if (!app -> setConfig("CALIBRATION: Calibration/152Eu_Uranium238_after_108.dat")) return 0;}
+    else if (firstPart(removePath(runs[i]), '_') == "run") {if (!app -> setConfig("CALIBRATION: Calibration/run_oct2022_before.dat")) return 0;}
+    else {print("Can't recognize the run of "+removePath(runs[i])); continue;}
+
+  #elif defined (N_SI_129)
+    if (!app -> setConfig("ID: ID/index_129.dat")) return 0;
+    app -> setConfig("USE_RF: 60");
+    if (!app -> setConfig("CALIBRATION: Calibration/calib_129.dat")) return 0;
+
+  #elif defined (N_SI_85)
+    if (!app -> setConfig("ID: ID/index_129.dat")) return 0;
+    if (!app -> setConfig("CALIBRATION: Calibration/calib_129.dat")) return 0;
+  #endif
+
+    if (!app -> setConfig("TIMESHIFT_DATA: "+dT_folder+"Timeshifts/"+dT_file)) return 0;
+    if (!app -> setConfig("DATADIR: "+datadir+runs[i])) return 0;
+
+
+    if (!app -> setConfig("FASTER2ROOT: outDir: "+outdir+rmPathAndExt(runs[i]))) return 0;
+    if (!app -> launch()) {print ("CANT RUN !"); return 0;}
+    delete app;
+
+
+    print("-------------");
     print();
   }
   return 1;

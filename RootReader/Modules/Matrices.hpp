@@ -2,6 +2,7 @@
 #define MATRICES_H
 #include "../../lib/utils.hpp"
 #include "../../lib/MTObjects/MTTHist.hpp"
+#include "../../lib/Analyse/HistoAnalyse.hpp"
 #include "../Classes/Parameters.hpp"
 
 
@@ -16,6 +17,7 @@ public:
   static void run(Parameters & p, Matrices & matrices);
   void FillRaw(Event const & event);
   void FillSorted(Sorted_Event const & event_s, Event const & event);
+  void Analyse();
   void Write();
 private:
 
@@ -26,13 +28,20 @@ private:
   // ---- Variables ---- //
   std::string outDir  = "129/Matrices/";
   std::string outRoot = "Matrices.root";
-  int m_bins_Ge = 2000; Float_t m_min_Ge = 0; Float_t m_max_Ge = 6000;
-  int m_bins_BGO = 300; Float_t m_min_BGO = 0; Float_t m_max_BGO = 6000;
-  int m_bins_LaBr3 = 600; Float_t m_min_LaBr3 = 0; Float_t m_max_LaBr3 = 6000;
+  int m_bins_Ge = 2000; Float_t m_min_Ge = 0; Float_t m_max_Ge = 8000;
+  int m_bins_BGO = 300; Float_t m_min_BGO = 0; Float_t m_max_BGO = 8000;
+  int m_bins_LaBr3 = 600; Float_t m_min_LaBr3 = 0; Float_t m_max_LaBr3 = 8000;
 
   // ---- Histograms ---- //
   MTTHist<TH2F> m_BGO_VS_Clover;
   MTTHist<TH2F> m_LaBr3_VS_Clover;
+
+  MTTHist<TH2F> m_R3A1_BGO_VS_all_Clover;
+  MTTHist<TH2F> m_Clean_R3A1_BGO_VS_all_Clean_Clover;
+  MTTHist<TH2F> m_Vetoed_R3A1_BGO_VS_all_Clean_Clover;
+  MTTHist<TH2F> m_Vetoed_R3A1_BGO_VS_all_other_Vetoed_Clover;
+  MTTHist<TH2F> m_Vetoed_R3A1_BGO_VS_its_Clover;
+
   std::vector<MTTHist<TH2F>> m_each_BGO_VS_all_Clover;
   std::vector<MTTHist<TH2F>> m_each_LaBr3_VS_all_Clover;
 
@@ -45,6 +54,7 @@ bool Matrices::launch(Parameters & p)
   this -> InitializeManip();
   print("Starting !");
   MTObject::parallelise_function(run, p, *this);
+  this -> Analyse();
   this -> Write();
   return true;
 }
@@ -83,6 +93,16 @@ void Matrices::run(Parameters & p, Matrices & matrices)
 void Matrices::InitializeManip()
 {
   print("Initialize histograms");
+  m_R3A1_BGO_VS_all_Clover.reset("R3A1_BGO1_VS_Clover", "R3A1 BGO1 VS Clover",
+      m_bins_Ge,m_min_Ge,m_max_Ge, m_bins_BGO,m_min_BGO,m_max_BGO);
+  m_Clean_R3A1_BGO_VS_all_Clean_Clover.reset("Clean_R3A1_BGO1_VS_Clover", "Clean R3A1 BGO1 VS Clean Clover",
+      m_bins_Ge,m_min_Ge,m_max_Ge, m_bins_BGO,m_min_BGO,m_max_BGO);
+  m_Vetoed_R3A1_BGO_VS_all_Clean_Clover.reset("Vetoed_R3A1_BGO1_VS_Clean_Clover", "Vetoed R3A1 BGO1 VS Clean Clover",
+      m_bins_Ge,m_min_Ge,m_max_Ge, m_bins_BGO,m_min_BGO,m_max_BGO);
+  m_Vetoed_R3A1_BGO_VS_all_other_Vetoed_Clover.reset("Vetoed_R3A1_BGO1_VS_other_Vetoed_Clover", "Vetoed R3A1 BGO1 VS other Vetoed Clover",
+      m_bins_Ge,m_min_Ge,m_max_Ge, m_bins_BGO,m_min_BGO,m_max_BGO);
+  m_Vetoed_R3A1_BGO_VS_its_Clover.reset("Vetoed_R3A1_BGO1_VS_its_Clover", "Vetoed R3A1 BGO1 VS its Clover",
+      m_bins_Ge,m_min_Ge,m_max_Ge, m_bins_BGO,m_min_BGO,m_max_BGO);
   // m_Clean_Ge_bidim.reset("Clean Ge bidim", "Clean Ge bidim",
   //     m_bins_Ge,m_min_Ge,m_max_Ge, m_bins_Ge,m_min_Ge,m_max_Ge);
   // m_BGO_VS_Clover.reset("BGO VS Clover", "BGO VS Clover",
@@ -125,6 +145,7 @@ void Matrices::FillSorted(Sorted_Event const & event_s, Event const & event)
     auto const & Time = event.Times[loop_i];
     if (Time<-10 && Time>20) continue;
 
+
     auto const & label = event.labels[loop_i];
     if (isBGO[label] || isParis[label])
     {
@@ -134,15 +155,30 @@ void Matrices::FillSorted(Sorted_Event const & event_s, Event const & event)
         auto const & TimeGe = event_s.time_clover[cloverGe];
         if(TimeGe<-10 || TimeGe>20) continue;
         auto const & nrjGe = event_s.nrj_clover[cloverGe];
+        bool const vetoed_Ge = static_cast<bool> (event_s.BGO[cloverGe]);
 
         // Fill BGO bidim :
         if (isBGO[label])
         {
           auto const & nrjBGO = event.nrjs[loop_i];
           auto const & cloverBGO = labelToClover_fast[label];
-          auto const & crystalBGO = labelToBGOcrystal[label];
-          if (cloverBGO==cloverGe) continue; //Rejection Compton
-          m_each_BGO_VS_all_Clover[crystalBGO].Fill(nrjGe,nrjBGO);
+          bool const vetoed_BGO = static_cast<bool> (event_s.Ge[cloverBGO]);
+          if (label == 23)
+          {
+            m_R3A1_BGO_VS_all_Clover.Fill(nrjGe,nrjBGO);
+
+            if (cloverBGO==cloverGe) m_Vetoed_R3A1_BGO_VS_its_Clover.Fill(nrjGe,nrjBGO);
+
+            else if (vetoed_Ge && vetoed_BGO) m_Vetoed_R3A1_BGO_VS_all_other_Vetoed_Clover.Fill(nrjGe,nrjBGO);
+
+            if (vetoed_BGO && !vetoed_Ge) m_Vetoed_R3A1_BGO_VS_all_Clean_Clover.Fill(nrjGe,nrjBGO);
+
+            if (!vetoed_BGO && !vetoed_Ge) m_Clean_R3A1_BGO_VS_all_Clean_Clover.Fill(nrjGe,nrjBGO);
+          }
+
+          // auto const & crystalBGO = labelToBGOcrystal[label];
+          // m_each_BGO_VS_all_Clover[crystalBGO].Fill(nrjGe,nrjBGO);
+
         }
 
         // Fill Paris LaBr3 bidim :
@@ -158,36 +194,21 @@ void Matrices::FillSorted(Sorted_Event const & event_s, Event const & event)
   }
 }
 
+void Matrices::Analyse()
+{
+  // for ( size_t i = 0; i<m_each_BGO_VS_all_Clover.size(); i++ ) { NormalizeX(m_each_BGO_VS_all_Clover[i]); }
+}
+
 void Matrices::Write()
 {
   std::unique_ptr<TFile> oufile(TFile::Open((outDir+outRoot).c_str(),"recreate"));
   print("Writting histograms ...");
-  for (auto & histo : m_each_BGO_VS_all_Clover)
-  {
-    histo.Merge();
-    if (histo->Integral() < 1) continue;
-
-    for (int i = 6; i<m_bins_Ge-1; i++)
-    {
-      Float_t maxRow = 0.;
-      for (int j = 6; j<m_bins_BGO-1; j++)
-      {
-        if(histo->GetBinContent(i, j) > maxRow) maxRow = histo->GetBinContent(i, j);
-      }
-      for (int j = 6; j<m_bins_BGO-1; j++) histo -> SetBinContent(i, j, 10*histo->GetBinContent(i, j)/maxRow);
-    }
-
-    for (int j = 6; j<m_bins_BGO-1; j++)
-    {
-      Float_t maxRow = 0.;
-      for (int i = 6; i<m_bins_Ge-1; i++)
-      {
-        if(histo->GetBinContent(i, j) > maxRow) maxRow = histo->GetBinContent(i, j);
-      }
-      for (int i = 6; i<m_bins_Ge-1; i++) histo -> SetBinContent(i, j, 10*histo->GetBinContent(i, j)/maxRow);
-    }
-    histo.Write();
-  }
+  m_R3A1_BGO_VS_all_Clover.Write();
+  m_Clean_R3A1_BGO_VS_all_Clean_Clover.Write();
+  m_Vetoed_R3A1_BGO_VS_all_Clean_Clover.Write();
+  m_Vetoed_R3A1_BGO_VS_all_other_Vetoed_Clover.Write();
+  m_Vetoed_R3A1_BGO_VS_its_Clover.Write();
+  for (auto & histo : m_each_BGO_VS_all_Clover) histo.Write();
   oufile->Write();
   oufile->Close();
   print("Writting analysis in", outDir+outRoot);

@@ -120,7 +120,7 @@ void AnalyseIsomer::InitializeManip()
       400,0,20000, 14000,0,7000);
   GeDelayed_VS_DSSD.reset("Ge Delayed VS DSSD","Ge VS DSSD",
       400,0,20000, 14000,0,7000);
-  DSSD_TW.reset("DSSD Timewalk","DSSD Timewalk",
+  DSSD_TW.reset("DSSD E VS Time","DSSD E VS Time",
       500,-100,400, 400,0,20000);
   Ge_VS_DSSD_Time.reset("DSSD VS Ge Time","DSSD VS Ge Time",
       500,-100,400, 500,-100,400);
@@ -145,10 +145,11 @@ void AnalyseIsomer::FillSorted(Sorted_Event const & event_s, Event const & event
   for (size_t loop_i = 0; loop_i<event_s.clover_hits.size(); loop_i++)
   {
     auto const & clover_i = event_s.clover_hits[loop_i];
+
     auto const & nrj_i = event_s.nrj_clover[clover_i];
     auto const & Time_i = event_s.time_clover[clover_i];
-    auto const delayed_i = Time_i>Ge_delayed_gate.start && Time_i<Ge_delayed_gate.stop;
-    auto const prompt_i =  Time_i>Ge_prompt_gate.start && Time_i<Ge_prompt_gate.stop;
+    auto const prompt_i =  Ge_prompt_gate.isIn(Time_i);
+    auto const delayed_i = Ge_delayed_gate.isIn(Time_i);
 
     if (event_s.BGO[clover_i] || nrj_i<5) continue;
 
@@ -160,10 +161,11 @@ void AnalyseIsomer::FillSorted(Sorted_Event const & event_s, Event const & event
     for (size_t loop_j = loop_i+1; loop_j<event_s.clover_hits.size(); loop_j++)
     {
       auto const & clover_j = event_s.clover_hits[loop_j];
+
       auto const & nrj_j = event_s.nrj_clover[clover_j];
       auto const & Time_j = event_s.time_clover[clover_j];
-      auto const delayed_j = Time_j>Ge_delayed_gate.start && Time_j<Ge_delayed_gate.stop;
-      auto const prompt_j =  Time_j>Ge_prompt_gate.start && Time_j<Ge_prompt_gate.stop;
+      auto const delayed_j = Ge_delayed_gate.isIn(Time_j);
+      auto const prompt_j =  Ge_prompt_gate.isIn(Time_j);
 
       if (event_s.BGO[clover_j] || nrj_j<5) continue;
 
@@ -213,8 +215,8 @@ void AnalyseIsomer::Write()
 {
   std::unique_ptr<TFile> oufile(TFile::Open((outDir+outRoot).c_str(),"recreate"));
   print("Writting histograms ...");
-  RWMat RW_prompt_prompt(GePrompt_VS_GePrompt); RW_prompt_prompt.Write();
-  RWMat RW_del_del(GeDelayed_VS_GeDelayed); RW_del_del.Write();
+  // RWMat RW_prompt_prompt(GePrompt_VS_GePrompt); RW_prompt_prompt.Write();
+  // RWMat RW_del_del(GeDelayed_VS_GeDelayed); RW_del_del.Write();
   Ge_spectra.Write();
   Ge_spectra_delayed.Write();
   Ge_spectra_prompt.Write();

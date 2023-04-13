@@ -66,7 +66,6 @@ public:
   Time     times  [255];
   Float_t  Times  [255];
   Bool_t   pileups[255];
-  Detector types  [255];
 
 private:
 
@@ -98,7 +97,6 @@ inline void Event::initialise(int i_max )
     nrj2s   [i] = 0;
     times   [i] = 0;
     pileups [i] = 0;
-    types   [i] = null;
   }
 }
 
@@ -111,7 +109,6 @@ inline Hit Event::operator[] (Int_t const & i)
   ret.time   = times[i];
   if (read_T || write_T) ret.time   = Times[i];
   ret.pileup = pileups[i];
-  ret.type   = types[i];
   return ret;
 }
 
@@ -122,7 +119,6 @@ inline void Event::operator= (Hit const & hit)
   nrj2s[0]   = hit.nrj2;
   times[0]   = hit.time;
   pileups[0] = hit.pileup;
-  types[0]   = type_det(hit.label);
   mult = 1;
 }
 
@@ -196,7 +192,6 @@ inline void Event::push_back(Hit const & hit)
   nrj2s[mult]   = hit.nrj2;
   times[mult]   = hit.time;
   pileups[mult] = hit.pileup;
-  types[mult]   = static_cast<Detector> (hit.type);
   mult++;
 }
 
@@ -209,14 +204,12 @@ inline void Event::push_front(Hit const & hit)
     nrj2s[mult+1]   = nrj2s[mult];
     times[mult+1]   = times[mult];
     pileups[mult+1] = pileups[mult];
-    types[mult+1]   = types[mult];
   }
   labels[0]  = hit.label;
   nrjs[0]    = hit.nrjcal;
   nrj2s[0]   = hit.nrjcal;
   times[0]   = hit.time;
   pileups[0] = hit.pileup;
-  types[0]   = type_det(hit.label);
   mult++;
 }
 
@@ -227,7 +220,6 @@ inline void Event::Print()
     print(
       "label :",labels[i],
       "time :" ,times[i],
-      (types[i]) ? "type : "+type_str[types[i]] : "",
       (nrjs[i]) ? "energy :"+std::to_string(nrjs[i]) : "",
       (nrj2s[i]) ? "energy2 :"+std::to_string(nrj2s[i]) : "",
       (pileups[i]) ? "pileup" : ""

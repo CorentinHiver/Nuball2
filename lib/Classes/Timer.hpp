@@ -73,6 +73,7 @@ public:
     else if (m_unit ==  "s") return 1000.;
     else if (m_unit =="min") return 60000.;
     else if (m_unit ==  "h") return 3600000.;
+    else return 0.;
   }
 
 private:

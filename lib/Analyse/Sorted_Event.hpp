@@ -3,12 +3,15 @@
 #include "../utils.hpp"
 #include "../Classes/Event.hpp"
 #include "../Classes/Timewalk.hpp"
+#include "Clovers.hpp"
+// #include "DSSD.hpp"
 
 class Sorted_Event
 {
 public:
   Sorted_Event(){initialise(); reset();}
   Sorted_Event(Event * event){initialise(); reset(); setEvent(event);}
+  static void Initialize() {Clovers::Initialize();}
   void initialise();
   void reset();
 
@@ -52,6 +55,7 @@ public:
   std::array < Float_t, 24 > maxE; // Value of the maximum energy in a Ge crystal of a Clover
   std::array < Int_t,   24 > maxE_hit; // Position in the event of the Ge crystal with the maximum energy of the Clover
 
+  Clovers clovers;
 
   // Paris arrays :
   std::vector<uchar> paris_hits; // Position in the event of the paris hits
@@ -117,7 +121,7 @@ private:
   static Float_t m_max_time;
 };
 
-Float_t Sorted_Event::m_max_time = 9999999.; // Dumb default value 
+Float_t Sorted_Event::m_max_time = 9999999.; // Dumb default value
 bool Sorted_Event::m_TW_DSSD = false;
 Timewalks Sorted_Event::m_Timewalks_DSSD;
 

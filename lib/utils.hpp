@@ -460,10 +460,16 @@ inline UShort_t labelToClover(UShort_t const & label)
 std::array<uchar,167> labelToClover_fast;
 void setLabelToClover_fast ()
 {
+  for (int i = 0; i<23; i++) labelToClover_fast[i] = -1;
   for (int i = 23; i<167; i++)
   {
     labelToClover_fast[i] = labelToClover(i);
   }
+}
+
+uchar labelToCloverCrystal(Label const & l)
+{
+  return (l-1)%6;
 }
 
 std::array<uchar,167> labelToCloverCrystal_fast;
@@ -471,7 +477,7 @@ void setlabelToCloverCrystal_fast ()
 {
   for (int i = 23; i<167; i++)
   {
-    labelToCloverCrystal_fast[i] = (i-1)%6;
+    labelToCloverCrystal_fast[i] = labelToCloverCrystal(i);
   }
 }
 
@@ -840,6 +846,7 @@ bool folder_exists(std::string folderName)
   makePath(folderName);
   DIR *dp = nullptr;
   dp = opendir(folderName.c_str());
+  print(folderName, (dp == nullptr) ? "not found !" : "exists" );
   bool ret = !(dp == nullptr);
   closedir(dp);
   return ret;
@@ -859,8 +866,9 @@ void create_folder_if_none(std::string & folderName)
   if (folderName=="")
   {
     print("No folder asked for !");
+    return;
   }
-  else if(!folder_exists(folderName))
+  if(!folder_exists(folderName))
   {
     print("Creating folder", folderName);
     gSystem -> Exec(("mkdir "+folderName).c_str());
@@ -1276,6 +1284,43 @@ std::istringstream & operator >> (std::istringstream & is, std::vector<T>& v)
   v.push_back(t);
   return is;
 }
+
+template<class T, std::size_t __size__>
+class StaticVector
+{
+public:
+  StaticVector() {m_data = new T[__size__];}
+  StaticVector(T const & value);
+  ~StaticVector(){delete[] m_data;}
+
+  void push_back(T const & e) {m_data[m_dynamic_size++] = e;}
+  void push_back_unique(T const & e);
+  void resize(std::size_t const & size = 0) {m_dynamic_size = size;}
+
+  virtual T* begin(){return m_data;}
+  virtual T* end()  {return m_data+m_dynamic_size;}
+
+  auto const & size() const {return m_dynamic_size;}
+  T & operator[] (std::size_t const & i) const {return m_data[i];}
+  T* data() {return m_data;}
+
+private:
+  T *m_data;
+  std::size_t m_static_size = __size__;
+  std::size_t m_dynamic_size = 0;
+};
+template<class T, std::size_t __size__>
+void StaticVector<T,__size__>::push_back_unique(T const & t)
+{
+  if (std::find(begin(), end(), t) == end())  push_back(t);
+}
+
+template<class T, std::size_t __size__>
+StaticVector<T,__size__>::StaticVector(T const & value)
+{
+  for (std::size_t i = 0; i<__size__; i++) m_data[i] = value;
+}
+
 
 #ifdef PARIS
 std::map<std::string,int> paris_vmaxchan =

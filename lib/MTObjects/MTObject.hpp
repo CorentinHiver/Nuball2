@@ -17,7 +17,6 @@ public:
 
   static void Initialize(ushort _nb_threads )
   {
-    TThread::Initialize();
     if(_nb_threads > std::thread::hardware_concurrency())
     {
       _nb_threads = std::thread::hardware_concurrency();
@@ -25,6 +24,7 @@ public:
     }
     nb_threads = _nb_threads;
     master_thread = std::this_thread::get_id();
+    if (_nb_threads>1) TThread::Initialize();
     ON = true;
   }
 

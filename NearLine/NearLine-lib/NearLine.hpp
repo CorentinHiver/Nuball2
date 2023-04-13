@@ -4,7 +4,6 @@
 #ifdef N_SI_120
 #define LICORNE
 #define FATIMA
-// #define C1L2_C2_TRIG
 #endif //N_SI_120
 
 #ifdef N_SI_122
@@ -396,32 +395,31 @@ void NearLine::run_thread()
 
 void NearLine::faster2root(std::string filename, int thread_nb)
 {
+  Timer timer;
   Hit hit;
   std::string outfile = m_outdir+rmPathAndExt(filename)+".root";
 
-  //Checking the file does'nt already exists :
+  // Create the foler in not already existing :
   if (!folder_exists(getPath(outfile))) gSystem -> Exec(("mkdir "+getPath(outfile)).c_str());
+  //Checking the file does'nt already exists :
   if ( file_exists(outfile) ) {print(outfile, "already exists !");return;}
 
   // Initialize :
   FasterReader reader(&hit, filename);
   if (!reader.isReady()) { print("CAN'T READ", filename); return;}
 
-  auto start = std::chrono::high_resolution_clock::now();
-
-  // std::unique_ptr<TFile> tempFile(new TFile(("analysisTempTrees/tempTree"+std::to_string(thread_nb)).c_str(), "recreate"));
-  // if (!temp_tree_on_disk) gROOT -> cd();
   std::unique_ptr<TTree> rootTree (new TTree(("tempTree"+std::to_string(thread_nb)).c_str(), ("tempTree"+std::to_string(thread_nb)).c_str()));
 
   auto file_size = size_file(filename);
   m_fr_raw_run_size+=file_size;
+
   rootTree.reset(new TTree("tempTree","tempTree"));
   rootTree -> Branch("label"  , &hit.label );
   rootTree -> Branch("time"   , &hit.time  );
   rootTree -> Branch("nrjcal" , &hit.nrjcal);
-  #ifdef QDC2
+#ifdef QDC2
   rootTree -> Branch("nrj2"   , &hit.nrj2);
-  #endif //QDC2
+#endif //QDC2
   rootTree -> Branch("pileup" , &hit.pileup);
 
   int counter = 0;
@@ -431,16 +429,16 @@ void NearLine::faster2root(std::string filename, int thread_nb)
     time_shift(hit);
     m_calib.calibrate(hit);
     rootTree -> Fill();
-    m_fr_raw_counter++;
     #ifdef QDC2
     hit.nrj2 = 0; // In order to clean the data, as nrj2 never gets cleaned if there is no QDC2 in the next hit
     #endif //QDC2
+    m_fr_raw_counter++;
   }
 
   print("Read finished, converting");
 
-  ULong64_t nb_data = 0;
-  nb_data = rootTree -> GetEntries();
+  // Align in time after the timeshift that can shuffle some hits
+  ULong64_t nb_data = rootTree -> GetEntries();
   std::vector<Int_t> gindex(nb_data,0);
   for (size_t nb = 0; nb<gindex.size(); nb++) gindex[nb] = nb;
   if (!m_fr_raw) alignator(rootTree.get(), gindex.data());
@@ -453,9 +451,9 @@ void NearLine::faster2root(std::string filename, int thread_nb)
   rootTree -> SetBranchAddress("label"  , &i_hit.label );
   rootTree -> SetBranchAddress("time"   , &i_hit.time  );
   rootTree -> SetBranchAddress("nrjcal" , &i_hit.nrjcal);
-  #ifdef QDC2
+#ifdef QDC2
   rootTree -> SetBranchAddress("nrj2"   , &i_hit.nrj2);
-  #endif //QDC2
+#endif //QDC2
   rootTree -> SetBranchAddress("pileup" , &i_hit.pileup);
   rootTree -> SetBranchStatus("*",true);
 
@@ -464,9 +462,9 @@ void NearLine::faster2root(std::string filename, int thread_nb)
   outTree -> Branch("mult",  &buffer.mult);
   outTree -> Branch("label", &buffer.labels , "label[mult]/s" );
   outTree -> Branch("nrj",   &buffer.nrjs   , "nrj[mult]/F"   );
-  #ifdef QDC2
+#ifdef QDC2
   outTree -> Branch("nrj2",  &buffer.nrj2s  , "nrj2[mult]/F"   );
-  #endif //QDC2
+#endif //QDC2
   outTree -> Branch("time",  &buffer.times  , "time[mult]/l"  );
   outTree -> Branch("pileup",&buffer.pileups, "pileup[mult]/O");
 
@@ -477,6 +475,7 @@ void NearLine::faster2root(std::string filename, int thread_nb)
   ULong64_t loop = 0;
   RF_Manager rf;
   EventBuilder event(&buffer, &rf);
+  CoincBuilder2 coinc(&buffer);
   if (m_use_RF)
   {
     event.setShift(m_RF_shift);
@@ -490,94 +489,129 @@ void NearLine::faster2root(std::string filename, int thread_nb)
     buffer = i_hit;
     outTree -> Fill();
     buffer.clear();
+
+    // Handle the first hit :
+    rootTree -> GetEntry(gindex[loop++]);
+    event.set_last_hit(i_hit);
+  }
+  else
+  {
+    rootTree -> GetEntry(gindex[loop++]);
+    coinc.set_last_hit(i_hit);
   }
 
-  // Handle the first hit :
-  rootTree -> GetEntry(gindex[loop++]);
-  event.set_last_hit(i_hit);
 
-  // Read the following hits :
-  // ULong64_t evt_start = loop;
-  // while (loop<evt_start+1000)
 #ifdef DOWNSCALE_M1
   int M1_counter = 0;
 #endif //DOWNSCALE_M1
+  // Read the following hits :
+  // ULong64_t evt_start = loop;
+  // while (loop<evt_start+1000)
+  bool trig = false;
+  bool built = false;
+  Counters Counter;
   while (loop<nb_data)
   {
+    built = false;
     rootTree -> GetEntry(gindex[loop++]);
-    if (m_fr_keep_all || m_fr_raw)
-    {// No event building
-      outTree -> Fill();
-    }
-    else if (m_use_RF)
-    {// RF based event building
-      if (is_RF(i_hit) && event.status() != 1)
-      {// To force RF writting in the data if no event is currently being constructed :
-        buffer = i_hit;
-        outTree -> Fill();
-        buffer.clear();
-        rf.setHit(i_hit);
-        continue;
+    if (m_fr_keep_all || m_fr_raw) trig = true;
+    else
+    {
+      if (m_use_RF)
+      {// RF based event buildin
+        if (is_RF(i_hit) && event.status() != 1)
+        {// To force RF writting in the data if no event is currently being constructed :
+          buffer = i_hit;
+          outTree -> Fill();
+          buffer.clear();
+          rf.setHit(i_hit);
+          continue;
+        }
+        built = event.build(i_hit);
       }
-      if (event.build(i_hit))
+      else
+      {// Time window based event building
+        built = coinc.build(i_hit);
+      }
+      if (built)
       {
-        m_fr_treated_counter+=event.size();
-        Counters arg;
-        arg.count_event(buffer);
+        m_fr_treated_counter+=buffer.size();
+        Counter.count_event(buffer);
 
-        bool trig = true;
-      #if defined (NO_TRIG)
-      #elif defined (G1_trig)
-        trig = arg.RawGeMult>0; // At least one Ge
-      #elif defined (M2G1_TRIG)
-        trig = arg.ModulesMult>1 && arg.RawGeMult>0; // At least one Ge cystal and 2 modules
-      #elif defined (D1_TRIG)
-        trig = arg.dssdMult>0; // At least one dssd
-      #elif defined (C1L2_C2_TRIG)
-        trig = (arg.CleanGeMult>0 && arg.LaBr3Mult>1) || arg.CleanGeMult>1; // At least one clean Ge and 2 LaBr3, or two clean Ge
-      #elif defined (CG1L2_CG2_TRIG)
-        trig = (arg.CloverGeMult>0 && arg.LaBr3Mult>1) || arg.CloverGeMult>1; // At least one Clover Ge and 2 LaBr3, or two Clover Ge
-      #endif //TRIGGER
+        trig = false;
 
-      #ifdef DOWNSCALE_M1
-        if(arg.ModulesMult==1) M1_counter++;
+        #ifdef NO_TRIG
+        trig = true;
+        #endif //NO_TRIG
+
+        #ifdef G1_TRIG
+        trig = (!trig) ? Counter.RawGeMult>0 : true; // At least one Ge cystal
+        #endif //G1_TRIG
+
+        #ifdef D1_TRIG
+        trig = (!trig) ? Counter.DSSDMult>0 : true; // At least one dssd
+        #endif //D1_TRIG
+
+        #ifdef M2_TRIG
+        trig = (!trig) ? Counter.ModulesMult>1 : true; // At least 2 modules
+        #endif //M2_TRIG
+
+        #ifdef L2_TRIG
+        trig = (!trig) ? Counter.LaBr3Mult>1 : true; // At least 2 modules
+        #endif //M2_TRIG
+
+        #ifdef C2_TRIG
+        trig = (!trig) ? Counter.CleanGeMult>1 : true; // At least 2 modules
+        #endif //C2_TRIG
+
+        #ifdef CG2_TRIG
+        trig = (!trig) ? Counter.CloverGeMult>1 : true; // At least two Clover Ge
+        #endif //CG2_TRIG
+
+        #ifdef C1L2_TRIG
+        trig = (!trig) ? (Counter.CleanGeMult>0 && Counter.LaBr3Mult>1) : true; // At least one clean Ge and 2 LaBr3
+        #endif //C1L2_TRIG
+
+        #ifdef CG1L2_TRIG
+        trig = (!trig) ? (Counter.CloverGeMult>0 && Counter.LaBr3Mult>1) : true; // At least one Clover Ge and 2 LaBr3
+        #endif //CG1L2_TRIG
+
+        #ifdef DOWNSCALE_M1
+        if(Counter.ModulesMult==1) M1_counter++;
         if (M1_counter>1000)
         {
           trig = true;
           M1_counter = 0;
         }
-      #endif //DOWNSCALE_M1
+        #endif //DOWNSCALE_M1
+      }
+    }
 
-        if ( trig )
+    if (trig)
+    {
+      outTree -> Fill();
+      if (m_use_RF)
+      {
+        event.reset();
+        rf.setHit(i_hit);
+      }
+      else
+      {
+        coinc.reset();
+      }
+    }
+    else if (m_use_RF && event.hasRF())
+    {// If the event didn't pass the trigger we still want to write any potential RF in the event
+      for (size_t i = 0; i<buffer.size(); i++)
+      {
+        if (buffer.labels[i]==251)
         {
-          // buffer.resize(); // if the containers in Event class are vector, need to resize to the actual event size before writting down
-          outTree -> Fill();
-          rf.setHit(i_hit);
-        }
-        else if (event.hasRF())
-        {// If the event didn't pass the trigger we still want to write any potential RF in the event
-          for (size_t i = 0; i<buffer.size(); i++)
-          {
-            if (buffer.labels[i]==251)
-            {
-              // print(buffer.nrjs[i]);
-              buffer = buffer[i];
-              outTree -> Fill();
-              rf.setHit(i_hit);
-              buffer.clear();
-              continue;
-            }
-          }
-        }
-        if (event.getLastHit().label == 251)
-        {
-          buffer = event.getLastHit();
+          buffer = buffer[i];
           outTree -> Fill();
           rf.setHit(i_hit);
           buffer.clear();
           continue;
         }
-        event.reset();
       }
     }
   }
@@ -589,11 +623,9 @@ void NearLine::faster2root(std::string filename, int thread_nb)
   outFile -> Close();
   m_fr_treated_run_size+=size_file(outfile);
 
-  auto end = std::chrono::high_resolution_clock::now();
-  auto dT = std::chrono::duration<double, std::milli>(end - start).count();
-  std::cout << std::setprecision(3) << "Conversion of " << rmPathAndExt(filename) << " done in " << dT/1000. << " s"
-  << " - " << nb_data*1000./dT << " counts/s"
-  << " (" << (int)(file_size/dT)/1000. << " MB/s)"
+  std::cout << std::setprecision(3) << "Conversion of " << rmPathAndExt(filename) << " done in " << timer.TimeSec() << " s"
+  << " - " << nb_data*1.E-6/timer.TimeSec() << " counts/s"
+  << " (" << (int)(file_size/timer.TimeSec())*1.E-6 << " MB/s)"
   << std::endl;
 }
 

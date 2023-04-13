@@ -35,15 +35,15 @@ public:
     else {print("Object does not inherit from TH1 !!"); m_exists = false;}
   }
 
-  ~HistoAnalyse();
+  THist * operator-> () {return m_histo;}
 
+  ~HistoAnalyse();
 
   Float_t peaksOverBackground(std::vector<Gate> gates);
 
-  void NormalizeX(Float_t const & factor = 1);
-  void NormalizeY(Float_t const & factor = 1);
-  void NormalizeXY(Float_t const & factor = 1, int const & min_x = 0, int const & min_y = 0);
-
+  void normalizeX(Float_t const & factor = 1);
+  void normalizeY(Float_t const & factor = 1);
+  void normalizeXY(Float_t const & factor = 1, int const & min_x = 0, int const & min_y = 0);
 
 private:
   THist * m_histo = nullptr;
@@ -57,7 +57,7 @@ Float_t HistoAnalyse<THist>::peaksOverBackground(std::vector<Gate> gates)
 }
 
 template<class THist>
-void HistoAnalyse<THist>::NormalizeY(Float_t const & factor)
+void HistoAnalyse<THist>::normalizeY(Float_t const & factor)
 {
   if (!m_exists) return;
   int const & bins_x = m_histo->GetNbinsX();
@@ -87,7 +87,7 @@ void HistoAnalyse<THist>::NormalizeY(Float_t const & factor)
 }
 
 template<class THist>
-void HistoAnalyse<THist>::NormalizeX(Float_t const & factor)
+void HistoAnalyse<THist>::normalizeX(Float_t const & factor)
 {
 
   if (m_histo->InheritsFrom("TH1") && !m_histo->InheritsFrom("TH2"))
@@ -112,53 +112,29 @@ void HistoAnalyse<THist>::NormalizeX(Float_t const & factor)
 }
 
 template<class THist>
-void HistoAnalyse<THist>::NormalizeXY(Float_t const & factor, int const & min_x, int const & min_y)
+void HistoAnalyse<THist>::normalizeXY(Float_t const & factor, int const & min_x, int const & min_y)
 {
 
 }
-//
-// template<class THist>
-// void HistoAnalyse<THist>::Normalize(Float_t const & factor, int const & bin_min)
-// {
-//   int const & bins_x = m_histo->GetNbinsX();
-//   int const & bins_y = m_histo->GetNbinsY();
-//
-//   // --- Normalize 1D --- //
-//   if (bins_y == 0)
-//   {
-//     Float_t maxRow = 0.;
-//     for (int x = bin_min; x<bins_x-1; x++) if(m_histo->GetBinContent(x) > maxRow) maxRow = m_histo->GetBinContent(x);
-//
-//   }
-//   // --- Normalize 2D --- //
-//   else
-//   {
-//     for (int x = 6; x<bins_x-1; x++)
-//     {
-//       Float_t maxRow = 0.;
-//       for (int y = 6; y<bins_y-1; y++)
-//       {
-//         if(m_histo->GetBinContent(x, y) > maxRow) maxRow = m_histo->GetBinContent(x, y);
-//       }
-//       for (int y = 6; y<bins_y-1; y++) m_histo -> SetBinContent(x, y, factor*m_histo->GetBinContent(x, y)/maxRow);
-//     }
-//
-//     for (int y = 6; y<bins_y-1; y++)
-//     {
-//       Float_t maxRow = 0.;
-//       for (int x = 6; x<bins_x-1; x++)
-//       {
-//         if(m_histo->GetBinContent(x, y) > maxRow) maxRow = m_histo->GetBinContent(x, y);
-//       }
-//       for (int x = 6; x<bins_x-1; x++) m_histo -> SetBinContent(x, y, factor*m_histo->GetBinContent(x, y)/maxRow);
-//     }
-//   }
-// }
 
 template<class THist>
 HistoAnalyse<THist>::~HistoAnalyse()
 {
   // if (m_histo) delete m_histo;
+}
+
+template<class THist>
+void NormalizeX(MTTHist<THist> & histo, Float_t const & factor = 1)
+{
+  HistoAnalyse<THist> histo_a (histo);
+  histo_a.normalizeX(factor);
+}
+
+template<class THist>
+void NormalizeY(MTTHist<THist> & histo, Float_t const & factor = 1)
+{
+  HistoAnalyse<THist> histo_a (histo);
+  histo_a.normalizeY(factor);
 }
 
 #endif //HISTOANALYSE_H

@@ -54,29 +54,28 @@ Bool_t CoincBuilder2::build(Hit const & hit)
       m_event -> clear();
       m_event -> push_back(m_last_hit);
       m_event -> push_back(hit);
-      // m_last_hit = m_empty_hit; // m_last_hit is cleared
       coincON = true; // Open the event
-      m_status = 1; // The event is to be filled with potential additionnal hits
+      m_status = 1; // Now, the event is being filled
     }
     else
-    {// No coincidence detected...
-      m_single_hit = m_last_hit;
-      m_last_hit = hit; //store the hit for next loop
-      m_status = 0;
+    {// No coincidence detected
+      m_single_hit = m_last_hit; // If last hit is not in time window of last hit, then
+      m_last_hit = hit; // Building next event based on the last hit
+      m_status = 0; // The current event is empty !
     }
   }
   else
-  {// ... there ! Coincidence already detected, check if it ends
+  {// ... there ! Coincidence already detected, check if current hit is out of currently building event
     if (coincidence(hit))
     {// Hit in coincidence with the previous hits
       m_event -> push_back(hit);
     }
     else
     {// Hit out of coincidence. Next call, go back to first condition.
-      m_last_hit = hit;
+      m_last_hit = hit; // Build next event based on the current hit, that is not in the event.
       coincON = false;
-      m_status = 2;
-      return true;
+      m_status = 2; // The current event is full
+      return true; // Now the event is complete and can be treated
     }
   }
   return false;
