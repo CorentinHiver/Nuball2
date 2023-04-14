@@ -1135,8 +1135,8 @@ void Analyse::treat_event(Event const & event, Sorted_Event & arg, UShort_t cons
     {
       arg.DSSD_hits.push_back(i);
       auto const & time = arg.times[i];
+      #ifdef N_SI_129
       auto const & nrj = event.nrjs[i];
-    #ifdef N_SI_129
       if (time>-5 && time<15 && nrj>8500 && nrj<11000) arg.DSSDFirstBlob = true;
       else if (time> 3 && time<18 && nrj>5500 && nrj<7500) arg.DSSDSecondBlob = true;
       else if (time>10 && time<20 && nrj>3800 && nrj<5500) arg.DSSDThirdBlob = true;

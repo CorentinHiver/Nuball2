@@ -41,6 +41,10 @@ private:
   MTTHist<TH2F> m_Vetoed_R3A1_BGO_VS_all_Clean_Clover;
   MTTHist<TH2F> m_Vetoed_R3A1_BGO_VS_all_other_Vetoed_Clover;
   MTTHist<TH2F> m_Vetoed_R3A1_BGO_VS_its_Clover;
+  MTTHist<TH2F> m_Vetoed_R3A1_BGO_VS_its_Clover_E_total;
+
+  MTTHist<TH2F> m_Paris_B2R1_VS_all_Clean_Clover;
+  MTTHist<TH2F> m_Paris_NaI_B2R1_VS_all_Clean_Clover;
 
   std::vector<MTTHist<TH2F>> m_each_BGO_VS_all_Clover;
   std::vector<MTTHist<TH2F>> m_each_LaBr3_VS_all_Clover;
@@ -95,7 +99,7 @@ void Matrices::InitializeManip()
   print("Initialize histograms");
   m_R3A1_BGO_VS_all_Clover.reset("R3A1_BGO1_VS_Clover", "R3A1 BGO1 VS Clover",
       m_bins_Ge,m_min_Ge,m_max_Ge, m_bins_BGO,m_min_BGO,m_max_BGO);
-  m_Clean_R3A1_BGO_VS_all_Clean_Clover.reset("Clean_R3A1_BGO1_VS_Clover", "Clean R3A1 BGO1 VS Clean Clover",
+  m_Clean_R3A1_BGO_VS_all_Clean_Clover.reset("Clean_R3A1_BGO1_VS_Clean_Clover", "Clean R3A1 BGO1 VS Clean Clover",
       m_bins_Ge,m_min_Ge,m_max_Ge, m_bins_BGO,m_min_BGO,m_max_BGO);
   m_Vetoed_R3A1_BGO_VS_all_Clean_Clover.reset("Vetoed_R3A1_BGO1_VS_Clean_Clover", "Vetoed R3A1 BGO1 VS Clean Clover",
       m_bins_Ge,m_min_Ge,m_max_Ge, m_bins_BGO,m_min_BGO,m_max_BGO);
@@ -103,12 +107,19 @@ void Matrices::InitializeManip()
       m_bins_Ge,m_min_Ge,m_max_Ge, m_bins_BGO,m_min_BGO,m_max_BGO);
   m_Vetoed_R3A1_BGO_VS_its_Clover.reset("Vetoed_R3A1_BGO1_VS_its_Clover", "Vetoed R3A1 BGO1 VS its Clover",
       m_bins_Ge,m_min_Ge,m_max_Ge, m_bins_BGO,m_min_BGO,m_max_BGO);
+  m_Vetoed_R3A1_BGO_VS_its_Clover_E_total.reset("Vetoed_R3A1_BGO1_VS_E_module", "Vetoed R3A1 BGO1 VS sum BGO && its Clover",
+      m_bins_BGO,m_min_BGO,m_max_BGO, m_bins_BGO,m_min_BGO,m_max_BGO);
   // m_Clean_Ge_bidim.reset("Clean Ge bidim", "Clean Ge bidim",
   //     m_bins_Ge,m_min_Ge,m_max_Ge, m_bins_Ge,m_min_Ge,m_max_Ge);
   // m_BGO_VS_Clover.reset("BGO VS Clover", "BGO VS Clover",
   //     m_bins_Ge,m_min_Ge,m_max_Ge, m_bins_BGO,m_min_BGO,m_max_BGO);
   // m_LaBr3_VS_Clover.reset("Paris VS Clover", "Paris VS Clover",
   //     m_bins_Ge,m_min_Ge,m_max_Ge, m_bins_LaBr3,m_min_LaBr3,m_max_LaBr3);
+
+  m_Paris_NaI_B2R1_VS_all_Clean_Clover.reset("B2R1_NaI_VS_Clover", "B2R1 NaI VS Clover",
+      m_bins_Ge,m_min_Ge,m_max_Ge, m_bins_LaBr3,m_min_LaBr3,m_max_LaBr3);
+  m_Paris_B2R1_VS_all_Clean_Clover.reset("B2R1_VS_Clover", "B2R1 VS Clover",
+      m_bins_Ge,m_min_Ge,m_max_Ge, m_bins_LaBr3,m_min_LaBr3,m_max_LaBr3);
 
   m_each_BGO_VS_all_Clover.resize(48);
   m_each_LaBr3_VS_all_Clover.resize(74);
@@ -167,7 +178,11 @@ void Matrices::FillSorted(Sorted_Event const & event_s, Event const & event)
           {
             m_R3A1_BGO_VS_all_Clover.Fill(nrjGe,nrjBGO);
 
-            if (cloverBGO==cloverGe) m_Vetoed_R3A1_BGO_VS_its_Clover.Fill(nrjGe,nrjBGO);
+            if (cloverBGO==cloverGe)
+            {
+              m_Vetoed_R3A1_BGO_VS_its_Clover.Fill(nrjGe,nrjBGO);
+              m_Vetoed_R3A1_BGO_VS_its_Clover_E_total.Fill(nrjGe+nrjBGO, nrjBGO);
+            }
 
             else if (vetoed_Ge && vetoed_BGO) m_Vetoed_R3A1_BGO_VS_all_other_Vetoed_Clover.Fill(nrjGe,nrjBGO);
 
@@ -184,10 +199,14 @@ void Matrices::FillSorted(Sorted_Event const & event_s, Event const & event)
         // Fill Paris LaBr3 bidim :
         else
         {
-          // auto const & nrjParis = event.nrjs[loop_i];
-          // auto const & crystalParis = labelToPariscrystal[label];
-          // Paris_Label labelParis(label);
-          // Paris_XY xyParis(labelParis);
+          auto const & nrjParis = event.nrjs[loop_i];
+          auto const & nrj2Paris = event.nrj2s[loop_i];
+          auto const & crystalParis = labelToPariscrystal[label];
+          if (crystalParis == 10)
+          {
+            if ((nrj2Paris-nrjParis)/nrjParis < 0.5) m_Paris_B2R1_VS_all_Clean_Clover.Fill(nrjGe, nrjParis);
+            else m_Paris_NaI_B2R1_VS_all_Clean_Clover.Fill(nrjGe, nrj2Paris);
+          }
         }
       }
     }
@@ -208,6 +227,9 @@ void Matrices::Write()
   m_Vetoed_R3A1_BGO_VS_all_Clean_Clover.Write();
   m_Vetoed_R3A1_BGO_VS_all_other_Vetoed_Clover.Write();
   m_Vetoed_R3A1_BGO_VS_its_Clover.Write();
+  m_Vetoed_R3A1_BGO_VS_its_Clover_E_total.Write();
+  m_Paris_B2R1_VS_all_Clean_Clover.Write();
+  m_Paris_NaI_B2R1_VS_all_Clean_Clover.Write();
   for (auto & histo : m_each_BGO_VS_all_Clover) histo.Write();
   oufile->Write();
   oufile->Close();

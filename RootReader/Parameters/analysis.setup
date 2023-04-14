@@ -41,6 +41,7 @@ end
 
 [Matrices]
 # outRoot: test.root
+# outRoot: good_pulse.root
 outRoot: all_pulse.root
 end
 

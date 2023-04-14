@@ -274,8 +274,8 @@ void Sorted_Event::sortEvent(Event const & event)
       DSSD_hits.push_back(i);
       auto const & nrj = event.nrjs[i];
       auto const & label = event.labels[i];
+      #ifdef N_SI_129
       auto const & time = times[i];
-    #ifdef N_SI_129
       if (time>-5 && time<15 && nrj>8500 && nrj<11000) DSSDFirstBlob = true;
       else if (time> 3 && time<18 && nrj>5500 && nrj<7500) DSSDSecondBlob = true;
       else if (time>10 && time<20 && nrj>3800 && nrj<5500) DSSDThirdBlob = true;

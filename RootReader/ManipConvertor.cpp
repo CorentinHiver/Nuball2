@@ -19,7 +19,7 @@
 #include "../lib/utils.hpp"
 #include "../lib/Classes/Event.hpp"
 #include "../lib/Classes/FilesManager.hpp"
-#include "../lib/MTObjects/MTThist.hpp"
+#include "../lib/MTObjects/MTTHist.hpp"
 #include "../lib/MTObjects/MTList.hpp"
 #include "../lib/MTObjects/MTCounter.hpp"
 
@@ -50,13 +50,12 @@ int main(int argc, char ** argv)
   g_labelToName = arrayID(qp.fileID);
   auto m_nb_labels = g_labelToName.size();
   setArrays(m_nb_labels);
-  if (qp.nb_threads>1) TThread::Initialize();
+  if (qp.nb_threads>1)
 
   qp.runs = listFileReader(qp.runs_list);
 
   checkThreadsNb(qp.nb_threads, qp.runs.size());
 
-  MTObject::Initialize(p.threadsNb());
 
   if(qp.nb_threads == 1)
   {
@@ -65,6 +64,7 @@ int main(int argc, char ** argv)
 
   else
   {
+    MTObject::Initialize(qp.nb_threads);
     MTObject::parallelise_function(convertRun,qp);
   }
 

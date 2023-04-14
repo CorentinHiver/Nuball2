@@ -846,7 +846,6 @@ bool folder_exists(std::string folderName)
   makePath(folderName);
   DIR *dp = nullptr;
   dp = opendir(folderName.c_str());
-  print(folderName, (dp == nullptr) ? "not found !" : "exists" );
   bool ret = !(dp == nullptr);
   closedir(dp);
   return ret;
