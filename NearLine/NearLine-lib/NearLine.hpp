@@ -2353,8 +2353,8 @@ Bool_t NearLine::setConfig (std::stringstream & parameters_file)
             m_fr_trigger.addCondition(condition);
           }
         }
-        else if (temp2 == "keep_all") {m_fr_keep_all = true;}
-        else if (temp2 == "raw") {m_fr_raw = true;}
+        // else if (temp2 == "keep_all") {m_fr_keep_all = true;}
+        // else if (temp2 == "raw") {m_fr_raw = true;}
         // else if (temp2 == "throwsingles") { m_fr_throw_singles = true; }
         // else if (temp2 == "eventbuild"  ) { m_fr_eventbuild    = true; }
         else if (temp2 == "outDir:") { is >> m_outdir; }
