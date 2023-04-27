@@ -6,15 +6,15 @@
 #define USE_DSSD
 #define FATIMA
 // #define M2G1_TRIG
-#define NO_TRIG
-// #define DSSD_TRIG
+// #define NO_TRIG
+#define DSSD_TRIG
 
-#ifndef NO_TRIG
+#if defined (M2G1_TRIG)
 #define COUNT_EVENT
-#endif //COUNT_EVENT CONDITION
+#endif //COUNT_EVENT
 
-#define CORENTIN
-// #define DATA2
+// #define CORENTIN
+#define DATA2
 
 #include "../lib/utils.hpp"
 #include "../lib/Classes/Event.hpp"
@@ -124,7 +124,6 @@ void convertRun(quick_parameters & param)
           if (isDSSD[label])
           {
             trig = true;
-            break;
           }
         #endif //DSSD_TRIG
 
@@ -154,7 +153,7 @@ void convertRun(quick_parameters & param)
       #endif //COUNT_EVENT
 
       #ifdef M2G1_TRIG
-        if (counter.Modules>1 && counter.GeClovers>0) trig = true;
+        if (counter.Modules>1 && counter.rawGe>0) trig = true;
       #endif //M2G1_TRIG
 
         if (trig)
@@ -171,12 +170,14 @@ void convertRun(quick_parameters & param)
 
       std::unique_ptr<TFile> file (TFile::Open(outName.c_str(),"recreate"));
       file    -> cd   ();
+      RF_VS_LaBr3 -> Write();
+      RF_VS_Ge -> Write();
       outTree -> Write();
       file    -> Write();
       file    -> Close();
       print(outName,"written, ",readTimer.TimeSec()," s");
     }// End files loop
-    print(run, ":", nb_evts*1.E-6, "Mevts converted at a rate of", nb_evts/readTimer.Time()/1000., "Mevts/s");
+    print(run, ":", nb_evts*1.E-6, "Mevts converted at a rate of", 1.E-6*nb_evts/readTimer.TimeSec(), "Mevts/s");
     chain.Reset();
   }// End runs loop
 }

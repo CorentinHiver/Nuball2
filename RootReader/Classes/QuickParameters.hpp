@@ -29,7 +29,7 @@ struct quick_parameters
   MTList<std::string> runs;
   size_t current_run = 0;
 
-  Long64_t RF_shift = 60000; //ps
+  Long64_t RF_shift = 50000; //ps
 
   std::vector<TH2F*> RF_VS_LaBr3;
   std::vector<TH2F*> RF_VS_Ge;
