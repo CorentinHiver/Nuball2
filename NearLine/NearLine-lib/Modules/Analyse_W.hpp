@@ -135,7 +135,7 @@ private:
   MTTHist<TH1F> m_R1_Spectra;
   MTTHist<TH1F> m_R4_Spectra;
   MTTHist<TH1F> m_Neutrons_Spectra;
-      // - Paris configuration :
+      // - paris configuration :
   MTTHist<TH1F> m_Front_Spectra;
   MTTHist<TH1F> m_Back_Spectra;
   MTTHist<TH1F> m_BR1_Spectra;
@@ -576,10 +576,10 @@ void Analyse_W::Fill(Event const & event, UShort_t const & thread_nb)
   #endif //FATIMA
 
   // ----------------------- //
-  //      Paris sorting      //
+  //      paris sorting      //
   // ----------------------- //
 
-  //Paris events :
+  //paris events :
   // #ifdef PARIS
   // for (size_t loop_i = 0; loop_i<arg.paris_hits.size(); loop_i++)
   // {
@@ -1009,15 +1009,15 @@ Bool_t Analyse_W::Initialize()
   #endif //FATIMA || PHASEI
 
   #if defined PARIS
-  m_Back_Spectra.reset("Sum Back Paris", "Sum Back PARIS", n->m_bins_calib[Paris],n->m_min_calib[Paris],n->m_max_calib[Paris]) ;
-  m_Front_Spectra.reset("Sum Front Paris", "Sum Front PARIS", n->m_bins_calib[Paris],n->m_min_calib[Paris],n->m_max_calib[Paris]) ;
-  m_BR1_Spectra.reset("Sum Back R1 Paris", "Sum PARIS Back R1", n->m_bins_calib[Paris],n->m_min_calib[Paris],n->m_max_calib[Paris]) ;
-  m_BR2_Spectra.reset("Sum Back R2 Paris", "Sum PARIS Back R2", n->m_bins_calib[Paris],n->m_min_calib[Paris],n->m_max_calib[Paris]) ;
-  m_BR3_Spectra.reset("Sum Back R3 Paris", "Sum PARIS Back R3", n->m_bins_calib[Paris],n->m_min_calib[Paris],n->m_max_calib[Paris]) ;
-  m_FR1_Spectra.reset("Sum Front R1 Paris", "Sum PARIS Front R1", n->m_bins_calib[Paris],n->m_min_calib[Paris],n->m_max_calib[Paris]) ;
-  m_FR2_Spectra.reset("Sum Front R2 Paris", "Sum PARIS Front R2", n->m_bins_calib[Paris],n->m_min_calib[Paris],n->m_max_calib[Paris]) ;
-  m_FR3_Spectra.reset("Sum Front R3 Paris", "Sum PARIS Front R3", n->m_bins_calib[Paris],n->m_min_calib[Paris],n->m_max_calib[Paris]) ;
-  Ge_VS_time_Paris.reset("Ge time VS Paris", "Ge time VS Paris", 500,-100,400, n->m_bins_calib[Ge],n->m_min_calib[Ge],n->m_max_calib[Ge]) ;
+  m_Back_Spectra.reset("Sum Back paris", "Sum Back PARIS", n->m_bins_calib[paris],n->m_min_calib[paris],n->m_max_calib[paris]) ;
+  m_Front_Spectra.reset("Sum Front paris", "Sum Front PARIS", n->m_bins_calib[paris],n->m_min_calib[paris],n->m_max_calib[paris]) ;
+  m_BR1_Spectra.reset("Sum Back R1 paris", "Sum PARIS Back R1", n->m_bins_calib[paris],n->m_min_calib[paris],n->m_max_calib[paris]) ;
+  m_BR2_Spectra.reset("Sum Back R2 paris", "Sum PARIS Back R2", n->m_bins_calib[paris],n->m_min_calib[paris],n->m_max_calib[paris]) ;
+  m_BR3_Spectra.reset("Sum Back R3 paris", "Sum PARIS Back R3", n->m_bins_calib[paris],n->m_min_calib[paris],n->m_max_calib[paris]) ;
+  m_FR1_Spectra.reset("Sum Front R1 paris", "Sum PARIS Front R1", n->m_bins_calib[paris],n->m_min_calib[paris],n->m_max_calib[paris]) ;
+  m_FR2_Spectra.reset("Sum Front R2 paris", "Sum PARIS Front R2", n->m_bins_calib[paris],n->m_min_calib[paris],n->m_max_calib[paris]) ;
+  m_FR3_Spectra.reset("Sum Front R3 paris", "Sum PARIS Front R3", n->m_bins_calib[paris],n->m_min_calib[paris],n->m_max_calib[paris]) ;
+  Ge_VS_time_Paris.reset("Ge time VS paris", "Ge time VS paris", 500,-100,400, n->m_bins_calib[Ge],n->m_min_calib[Ge],n->m_max_calib[Ge]) ;
   #endif //PARIS
 
   // Energy bidim :
@@ -1045,12 +1045,12 @@ Bool_t Analyse_W::Initialize()
   #endif //FATIMA
 
   #ifdef PARIS
-  m_clover_Paris.reset("Gamma-gammma Clean Clover VS Paris", "#gamma-#gamma Clean Clover VS Paris",
-  n->m_bins_bidim[Ge],n->m_min_bidim[Ge],n->m_max_bidim[Ge], n->m_bins_bidim[Paris],n->m_min_bidim[Paris],n->m_max_bidim[Paris]) ;
-  m_p_Paris_Ge_C1P1.reset("Ge VS Paris M>1", "Ge VS Paris M>1",
-    n->m_bins_bidim[Ge],n->m_min_bidim[Ge],n->m_max_bidim[Ge], n->m_bins_bidim[Paris],n->m_min_bidim[Paris],n->m_max_bidim[Paris]) ;
-  m_Spectra_all_Paris.reset("All Paris spectra", "All Paris spectra",
-    92,1,92,  n->m_bins_bidim[Paris],n->m_min_bidim[Paris],n->m_max_bidim[Paris]);
+  m_clover_Paris.reset("Gamma-gammma Clean Clover VS paris", "#gamma-#gamma Clean Clover VS paris",
+  n->m_bins_bidim[Ge],n->m_min_bidim[Ge],n->m_max_bidim[Ge], n->m_bins_bidim[paris],n->m_min_bidim[paris],n->m_max_bidim[paris]) ;
+  m_p_Paris_Ge_C1P1.reset("Ge VS paris M>1", "Ge VS paris M>1",
+    n->m_bins_bidim[Ge],n->m_min_bidim[Ge],n->m_max_bidim[Ge], n->m_bins_bidim[paris],n->m_min_bidim[paris],n->m_max_bidim[paris]) ;
+  m_Spectra_all_Paris.reset("All paris spectra", "All paris spectra",
+    92,1,92,  n->m_bins_bidim[paris],n->m_min_bidim[paris],n->m_max_bidim[paris]);
   #endif //PARIS
 
   m_Spectra_all_Ge_Clover.reset("All Clovers Ge spectra", "All Clovers Germanium spectra",
@@ -1081,13 +1081,13 @@ Bool_t Analyse_W::Initialize()
   m_mult_raw.reset("Raw multiplicity", "Raw multiplicity", 50,0,50);
   m_mult_module.reset("Module multiplicity", "Module multiplicity", 50,0,50);
   m_mult_clover.reset("Clover multiplicity", "Clover multiplicity", 50,0,50);
-  m_mult_paris.reset("Paris multiplicity", "Paris multiplicity", 50,0,50);
+  m_mult_paris.reset("paris multiplicity", "paris multiplicity", 50,0,50);
   m_mult_Clean_Ge.reset("Clean Ge multiplicity", "Clean Ge multiplicity", 50,0,50);
   m_mult_BGO.reset("BGO multiplicity", "BGO multiplicity", 50,0,50);
   #if defined FATIMA
   m_C_VS_L.reset ("C VS L","Clean Germanium Multiplicity VS LaBr3 Multiplicity", 5,0,5, 5,0,5);
   #elif defined PARIS
-  m_C_VS_L.reset ("C VS P","Clean Germanium Multiplicity VS Paris LaBr3 Multiplicity", 5,0,5, 5,0,5);
+  m_C_VS_L.reset ("C VS P","Clean Germanium Multiplicity VS paris LaBr3 Multiplicity", 5,0,5, 5,0,5);
   #endif
 
   #ifdef USE_DSSD
@@ -1214,7 +1214,7 @@ Bool_t Analyse_W::Initialize()
   // Counters:
   m_clover_counter_matrice.reset( "clovers counter matrice","clovers counter matrice", 24,0,23, 24,0,23);
   m_clover_polar.reset( "Clovers polar","Left R3 Right R2", 500,-6,6, 500,-3,3);
-  m_Paris_xy.reset("Display of Paris Counters", "Paris Counters : left back, right front", 41,-20,20, 21,-10,10);
+  m_Paris_xy.reset("Display of paris Counters", "paris Counters : left back, right front", 41,-20,20, 21,-10,10);
   // m_clover_cross_talk.reset( "Clovers polar cross talk","Clovers polar cross talk", 500,-7,7, 500,-2,2);
   m_Counters.reset ("Counter","Counter", n->m_labelToName.size(),0,n->m_labelToName.size());
   m_Clover_Counter.reset ("Counter clovers","Counter clovers", 23,0,23);

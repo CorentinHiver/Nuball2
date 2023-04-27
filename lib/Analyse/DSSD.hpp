@@ -1,29 +1,29 @@
-#ifndef DSSD_EVENT_H
-#define DSSD_EVENT_H
+#ifndef DSSD_H
+#define DSSD_H
 
 #include "../Classes/Event.hpp"
 #include "../Classes/Timewalk.hpp"
 #include "../utils.hpp"
 
-class DSSD_Event
+class DSSD
 {
 public:
-  static std::vector<uchar> m_labels;
+  // static std::vector<uchar> m_labels;
   static inline bool isRing  (Label const & l) { return ( (l>800) && (l<840) );}
   static inline bool isSector(Label const & l) { return ( (l>839) && (l<856) );}
-  DSSD_Event();
+  DSSD(){}
   void Initialize(Label const & label_nb)
   {
-    m_labels.resize(label_nb);
-    for (std::size_t l = 0; l<label_nb; l++)
-    {
-      m_labels = l-800;
-    }
+    // m_labels.resize(label_nb);
+    // for (std::size_t l = 0; l<label_nb; l++)
+    // {
+    //   m_labels = l-800;
+    // }
   }
   void Reset();
 
-  static void SetTimewalk(std::string const & fit_filename) {m_timewalk.loadFile(fit_filename);}
-  static std::array<Timewalk> m_timewalk;
+  // static void SetTimewalk(std::string const & fit_filename) {m_timewalk.loadFile(fit_filename);}
+  // static std::array<Timewalk> m_timewalk;
 
   void Fill(Event const & evt, int const & index);
 
@@ -42,9 +42,9 @@ public:
 };
 
 // Initialize static members :
-std::array<Timewalk> DSSD_Event::m_timewalk;
+// std::array<Timewalk> DSSD::m_timewalk;
 
-void DSSD_Event::Reset()
+void DSSD::Reset()
 {
   for (auto const & sector : m_Sectors)
   {
@@ -58,33 +58,33 @@ void DSSD_Event::Reset()
   }
 }
 
-void DSSD_Event::Fill(Event const & event, int const & i)
+void DSSD::Fill(Event const & event, int const & i)
 {
-  auto const & label = event.labels[i];
-
-  if (isDSSD[label])
-  {
-    auto const & nrj = event.nrjs[i];
-    auto const & time = event.times[i];
-    auto const & isring = isRing[label];
-    auto const & face_label = DSSD_Label[isring][label]
-    if (isring)
-    {
-      auto const & ring = face_label;
-      m_Rings.push_back(ring);
-      m_Rings_nrj[ring] = nrj;
-      m_Rings_time[ring] = time;
-    }
-    else
-    {
-      auto const & sector = face_label;
-      m_Sectors.push_back(sector);
-      m_Sectors_nrj[sector] = nrj;
-      m_Sectors_time[sector] = time;
-    }
-  }
+  // auto const & label = event.labels[i];
+  //
+  // if (isDSSD[label])
+  // {
+  //   auto const & nrj = event.nrjs[i];
+  //   auto const & time = event.times[i];
+  //   auto const & isring = isRing(label);
+  //   // auto const & face_label = DSSD_Label[isring][label]
+  //   if (isring)
+  //   {
+  //     auto const & ring = face_label;
+  //     m_Rings.push_back(ring);
+  //     m_Rings_nrj[ring] = nrj;
+  //     m_Rings_time[ring] = time;
+  //   }
+  //   else
+  //   {
+  //     auto const & sector = face_label;
+  //     m_Sectors.push_back(sector);
+  //     m_Sectors_nrj[sector] = nrj;
+  //     m_Sectors_time[sector] = time;
+  //   }
+  // }
 }
 
-std::vector<uchar> DSSD_Label::m_labels;
+// std::vector<uchar> DSSD_Label::m_labels;
 
-#endif //DSSD_EVENT_H
+#endif //DSSD_H

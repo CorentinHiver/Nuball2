@@ -6,16 +6,16 @@ struct quick_parameters
 #if defined (DSSD_TRIG)
   std::string const outDir = "129/DSSD_TRIG_test/";
 #elif defined (M2G1_TRIG)
-  std::string const outDir = "129/M2G1_TRIG/";
+  std::string const outDir = "129/M2G1_TRIG_2/";
 #endif //DSSD_TRIG
 
 #if defined (CORENTIN)
 
   std::string const fileID = "ID/index_129.dat";
   std::string const runs_list = "Parameters/runs_pulsed_Corentin.list";
-  std::string const dataPath = "../Data_129/DSSD_TRIG/";
+  std::string const dataPath = "../Data_129/M2G1/";
   UShort_t nb_threads = 4;
-  int const nb_max_evts_in_file = 1000000; // 1 millions evts/fichier
+  int const nb_max_evts_in_file = 5000000; // 1 millions evts/fichier
 
 #elif defined (DATA2)
   std::string const fileID = "ID/index_129.dat";

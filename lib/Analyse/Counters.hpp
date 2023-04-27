@@ -9,7 +9,7 @@ class Counters
 public:
   Counters()
   {
-    for (int i = 0; i<48; i++) list_clovers[i] = 0;
+    list_clovers.resize();
     for (int i = 0; i<24; i++)
     {
       Ge_Clover[i] = false;
@@ -31,7 +31,7 @@ public:
   uchar ParisMult=0;
   uchar DSSDMult=0;
 
-  uchar list_clovers[48];
+  StaticVector<uchar,24> list_clovers;
   std::array<Bool_t, 24> Ge_Clover;
   std::array<Bool_t, 24> BGO_Clover;
 
@@ -39,13 +39,12 @@ public:
 
 void Counters::clear()
 {
-  for (uchar i = 0; i<Clovers; i++)
+  for (auto clover : list_clovers)
   {
-    auto const & clover = list_clovers[i];
     Ge_Clover [clover] = false;
     BGO_Clover[clover] = false;
   }
-
+  list_clovers.resize();
   mult = 0;
   RawGe = 0;
   RawBGO = 0;
@@ -60,7 +59,7 @@ void Counters::clear()
 
 void Counters::count_event(Event const & event)
 {
-  clear();
+  this -> clear();
   mult = event.mult;
   for (uchar i = 0; i<mult; i++)
   {
@@ -68,12 +67,16 @@ void Counters::count_event(Event const & event)
     if(isGe[label])
     {
       RawGe++;
-      Ge_Clover  [labelToClover_fast[label]] = true;
+      auto const & clover = labelToClover_fast[label];
+      Ge_Clover  [clover] = true;
+      list_clovers.push_back_unique(clover);
     }
     else if (isBGO[label])
     {
       RawBGO++;
-      BGO_Clover [labelToClover_fast[label]] = true;
+      auto const & clover = labelToClover_fast[label];
+      BGO_Clover [clover] = true;
+      list_clovers.push_back_unique(clover);
     }
     else if (isLaBr3[label])
     {
@@ -97,20 +100,14 @@ void Counters::count_event(Event const & event)
     }
   }
 
+  Clovers  = list_clovers.size();
+  Modules += Clovers;
+
   // Quick analysis of the Clovers :
-  for (uchar clover = 0; clover<24; clover++)
+  for (auto const & clover : list_clovers)
   {
-    if(BGO_Clover[clover])
-    {
-      list_clovers[Clovers] = clover;
-      Modules++;
-      Clovers++;
-    }
     if(Ge_Clover[clover])
     {
-      list_clovers[Clovers] = clover;
-      Modules++;
-      Clovers++;
       GeClovers++;
       if(!BGO_Clover[clover])
       {

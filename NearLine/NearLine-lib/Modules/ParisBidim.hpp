@@ -88,28 +88,28 @@ Bool_t ParisBidim::Initialize()
     {
       // Ratio
       m_long_gate_vs_ratio[l].reset((name+"_long_VS_ratio").c_str(), (name+" long gate VS gates ratio").c_str(),
-          100,-0.5,1.5, n->m_bins_raw[Paris],n->m_min_raw[Paris],n->m_max_raw[Paris]);
+          100,-0.5,1.5, n->m_bins_raw[paris],n->m_min_raw[paris],n->m_max_raw[paris]);
       m_short_gate_vs_ratio[l].reset((name+"_short_VS_ratio").c_str(), (name+" short gate VS gates ratio").c_str(),
-          100,-0.5,1.5, n->m_bins_raw[Paris],n->m_min_raw[Paris],n->m_max_raw[Paris]);
+          100,-0.5,1.5, n->m_bins_raw[paris],n->m_min_raw[paris],n->m_max_raw[paris]);
       m_short_vs_tan_ratio[l].reset((name+"_short_VS_tan(ratio)").c_str(), (name+" short VS #tan(ratio)").c_str(),
-          500,-10,10, n->m_bins_raw[Paris],n->m_min_raw[Paris],n->m_max_raw[Paris]);
+          500,-10,10, n->m_bins_raw[paris],n->m_min_raw[paris],n->m_max_raw[paris]);
 
       //Long VS short
       m_long_vs_short[l].reset((name+"_long_VS_short").c_str(), (name+" long VS short").c_str(),
-          n->m_bins_raw[Paris],n->m_min_raw[Paris],n->m_max_raw[Paris], n->m_bins_raw[Paris],n->m_min_raw[Paris],n->m_max_raw[Paris]);
+          n->m_bins_raw[paris],n->m_min_raw[paris],n->m_max_raw[paris], n->m_bins_raw[paris],n->m_min_raw[paris],n->m_max_raw[paris]);
 
       // Long/short OR short/long
       m_short_vs_long_div_short[l].reset((name+"_short_VS_long/short").c_str(), (name+" short VS #frac{long}{short}").c_str(),
-          500,-10,10, n->m_bins_raw[Paris],n->m_min_raw[Paris],n->m_max_raw[Paris]);
+          500,-10,10, n->m_bins_raw[paris],n->m_min_raw[paris],n->m_max_raw[paris]);
       m_short_vs_short_div_long[l].reset((name+"_short_VS_short/long").c_str(), (name+" short VS #frac{short}{long}").c_str(),
-          500,-10,10, n->m_bins_raw[Paris],n->m_min_raw[Paris],n->m_max_raw[Paris]);
+          500,-10,10, n->m_bins_raw[paris],n->m_min_raw[paris],n->m_max_raw[paris]);
       m_short_vs_tan_long_div_short[l].reset((name+"_short_VS_tan(long/short)").c_str(), (name+" short VS tan(long/short)").c_str(),
-          500,-10,10, n->m_bins_raw[Paris],n->m_min_raw[Paris],n->m_max_raw[Paris]);
+          500,-10,10, n->m_bins_raw[paris],n->m_min_raw[paris],n->m_max_raw[paris]);
       m_short_vs_tan_short_div_long[l].reset((name+"_short_VS_tan(short/long)").c_str(), (name+" short VS tan(short/long").c_str(),
-          500,-10,10, n->m_bins_raw[Paris],n->m_min_raw[Paris],n->m_max_raw[Paris]);
+          500,-10,10, n->m_bins_raw[paris],n->m_min_raw[paris],n->m_max_raw[paris]);
       if(m_calibrated)
         m_E_VS_ToF[l].reset((name+"_E_VS_ToF").c_str(), (name+" E VS ToF each detector").c_str(),
-            500,-50-n->m_RF_shift/_ns,400-n->m_RF_shift/_ns, n->m_bins_raw[Paris],n->m_min_bidim[Paris],n->m_max_bidim[Paris]);
+            500,-50-n->m_RF_shift/_ns,400-n->m_RF_shift/_ns, n->m_bins_raw[paris],n->m_min_bidim[paris],n->m_max_bidim[paris]);
     }
     else
     {
@@ -143,7 +143,6 @@ void ParisBidim::Fill(Hit & hit, RF_Manager const & rf, int const & thread_nb)
 
     m_short_vs_tan_long_div_short[hit.label][thread_nb] -> Fill((hit.nrj!=0) ? TMath::Tan((Float_t)hit.nrj2/hit.nrj) : NAN, hit.nrj);
     m_short_vs_tan_short_div_long[hit.label][thread_nb] -> Fill((hit.nrj2!=0) ? TMath::Tan((Float_t)hit.nrj/hit.nrj2) : NAN, hit.nrj);
-
 
     if(m_calibrated) m_E_VS_ToF[hit.label][thread_nb] -> Fill(rf.pulse_ToF(hit.time,n -> m_RF_shift)/_ns, hit.nrjcal);
   }

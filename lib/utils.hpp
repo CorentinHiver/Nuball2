@@ -214,7 +214,7 @@ public:
     {
       case null:   return m_multiplicity++;
       case LaBr3:  return m_LaBr3_mult++;
-      case Paris:  return m_Paris_mult++;
+      case paris:  return m_Paris_mult++;
       case Clover: return m_Clover_mult++;
       case Ge:     return m_Ge_Clover_mult++;
       case BGO:    return m_BGO_Clover_mult++;
@@ -228,7 +228,7 @@ public:
     {
       case null:   return m_multiplicity;
       case LaBr3:  return m_LaBr3_mult;
-      case Paris:  return m_Paris_mult;
+      case paris:  return m_Paris_mult;
       case Clover: return m_Clover_mult;
       case Ge:     return m_Ge_Clover_mult;
       case BGO:    return m_BGO_Clover_mult;
@@ -257,27 +257,27 @@ private:
 //   PRINT  //
 //////////////
 // General print :
-void print()
+template <class T> void print()
 {
   std::cout << std::endl;
 }
 
-template <class T> void print(T t)
+template <class T> void print(T const & t)
 {
   std::cout << t << std::endl;
 }
 
-template <class E> void print (std::vector<E> t)
+template <class E> void print (std::vector<E> const & t)
 {
   for (auto const & e : t) print(e);
 }
 
-template <class... T> void print(T... t)
+template <class... T> void print(T const &... t)
 {
   ((print(t)),...);
 }
 
-template <class T, class... T2> void print(T t, T2... t2)
+template <class T, class... T2> void print(T const & t, T2 const &... t2)
 {
   std::cout << t << " ";
   print(t2...);
@@ -285,13 +285,13 @@ template <class T, class... T2> void print(T t, T2... t2)
 
 //Prints containers :
 
-template <class E, class... T> void print (std::vector<E> v, T... t2)
+template <class E, class... T> void print (std::vector<E> const & v, T const &... t2)
 {
   print(v);
   print(t2...);
 }
 
-template <class K, class V> void print (std::map<K,V> m)
+template <class K, class V> void print (std::map<K,V> const & m)
 {
   print();
   print("{");
@@ -309,20 +309,20 @@ template <class K, class V> void print (std::map<K,V> m)
   print();
 }
 
-template <class K, class V, class... T> void print (std::map<K,V> m, T... t2)
+template <class K, class V, class... T> void print (std::map<K,V> const & m, T const & ... t2)
 {
   print(m);
   print(t2...);
 }
 
 //Prints home made types :
-template <class... T> void print (Detector t, T... t2)
+template <class... T> void print (Detector const & t, T const & ... t2)
 {
   std::cout << type_str[t] << " ";
   print(t2...);
 }
 
-template <class... T> void print(Hit hit, T... t2)
+template <class... T> void print(Hit const & hit, T const & ... t2)
 {
   print(hit);
   print(t2...);
@@ -408,7 +408,7 @@ Bool_t is_EDEN(UShort_t const & _l)
   #ifdef LICORNE
   return (_l == 500 || _l == 501);
   #else
-  return false;
+  return static_cast<bool>(_l);
   #endif //LICORNE
 }
 
@@ -628,7 +628,7 @@ std::vector<Double_t> LaBr3_Labels =
   210,211,212,213,214, 215,216,217,218,219
 };
 
-#include "Analyse/ParisLabel.hpp"
+// #include "Analyse/ParisLabel.hpp"
 
 void setArrays(size_t const & nb_labels)
 {
@@ -642,7 +642,7 @@ void setArrays(size_t const & nb_labels)
   setlabelToPariscrystal(nb_labels);
   setLabelToClover_fast();
   setlabelToCloverCrystal_fast();
-  ParisLabel::setArrays();
+  // ParisLabel::setArrays();
 }
 
 
@@ -794,23 +794,36 @@ std::string rmPathAndExt    (const std::string string)
 //Files and folders:
 bool file_is_empty(std::ifstream& file)                { return file.peek() == std::ifstream::traits_type::eof();}
 
-
-int size_file(std::ifstream& file, std::string const & unit = "Mo")
+std::map<std::string, float> size_file_unit =
 {
-  int init = file.tellg();
-  file.seekg(0, std::ios::end);
-  int ret = file.tellg();
-  file.seekg(init);// Go back to inital place in the file
-       if(unit ==  "o");
-  else if(unit == "ko") ret/=1024;
-  else if(unit == "Mo") ret /= 1048576; // = 1024²
-  return ret;
+  {"o",  1.},
+  {"ko", 1024.},
+  {"Mo", 1048576.},
+  {"Go", 1073741824.},
+  {"B",  1.},
+  {"kB", 1024.},
+  {"MB", 1048576.},
+  {"GB", 1073741824.}
+};
+
+float size_file_conversion(float const & size, std::string const & unit_i, std::string const & unit_o)
+{
+  return size * (size_file_unit[unit_o]/size_file_unit[unit_i]);
 }
 
-int size_file(std::string filename, std::string const & unit = "Mo")
+float size_file(std::ifstream& file, std::string const & unit = "o")
+{
+  int const init = file.tellg();
+  file.seekg(0, std::ios::end);
+  int const ret = file.tellg();
+  file.seekg(init);// Go back to inital place in the file
+  return ret/size_file_unit[unit];
+}
+
+int size_file(std::string filename, std::string const & unit = "o")
 {
   std::ifstream f (filename, std::ios::binary);
-  return size_file(f);
+  return size_file(f, unit);
 }
 
 bool file_exists(std::string fileName)
@@ -1116,7 +1129,7 @@ Detector type_det(UShort_t const & label)
   if      (isGe    [label]) return Ge;
   else if (isBGO   [label]) return BGO;
   else if (isLaBr3 [label]) return LaBr3;
-  else if (isParis [label]) return Paris;
+  else if (isParis [label]) return paris;
   else if (isDSSD  [label]) return dssd;
   else if (is_RF   (label)) return RF;
   else if (is_EDEN (label)) return EDEN;
@@ -1136,7 +1149,7 @@ Detector type_det(std::string name)
   if ( (type=="blue") || (type=="red") || (type=="green") || (type=="black")) return Ge;
   else if ( (type == "BGO1") || (type == "BGO2") || (type == "BGO") ) return BGO;
   else if (type == "LaBr3") return LaBr3;
-  else if (name.substr(0,name.find("_")) == "PARIS") return Paris;
+  else if (name.substr(0,name.find("_")) == "PARIS") return paris;
   else if (lastPart(name,'_') == "DSSD") return dssd;
   else return null;
 }
@@ -1284,17 +1297,25 @@ std::istringstream & operator >> (std::istringstream & is, std::vector<T>& v)
   return is;
 }
 
-template<class T, std::size_t __size__>
+template<class T, std::size_t __size__ = 0>
 class StaticVector
 {
 public:
-  StaticVector() {m_data = new T[__size__];}
+  StaticVector() : m_static_size(__size__) {m_data = new T[m_static_size];}
   StaticVector(T const & value);
   ~StaticVector(){delete[] m_data;}
 
   void push_back(T const & e) {m_data[m_dynamic_size++] = e;}
+  void push_back_safe(T const & e) {if (m_dynamic_size++ < m_static_size) m_data[m_dynamic_size] = e;}
   void push_back_unique(T const & e);
   void resize(std::size_t const & size = 0) {m_dynamic_size = size;}
+  void static_resize(std::size_t const & size = 0)
+  {
+    delete[] m_data;
+    m_dynamic_size = 0;
+    m_static_size = size;
+    m_data = new T[m_static_size];
+   }
 
   virtual T* begin(){return m_data;}
   virtual T* end()  {return m_data+m_dynamic_size;}
@@ -1305,9 +1326,10 @@ public:
 
 private:
   T *m_data;
-  std::size_t m_static_size = __size__;
   std::size_t m_dynamic_size = 0;
+  std::size_t m_static_size = 0;
 };
+
 template<class T, std::size_t __size__>
 void StaticVector<T,__size__>::push_back_unique(T const & t)
 {
@@ -1315,9 +1337,10 @@ void StaticVector<T,__size__>::push_back_unique(T const & t)
 }
 
 template<class T, std::size_t __size__>
-StaticVector<T,__size__>::StaticVector(T const & value)
+StaticVector<T,__size__>::StaticVector(T const & value) : m_static_size(__size__)
 {
-  for (std::size_t i = 0; i<__size__; i++) m_data[i] = value;
+  m_data = new T[m_static_size];
+  for (std::size_t i = 0; i<m_static_size; i++) m_data[i] = value;
 }
 
 

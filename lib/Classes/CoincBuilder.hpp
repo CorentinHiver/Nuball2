@@ -19,7 +19,7 @@ public:
   explicit CoincBuilder(Int_t const & i)
   {
     m_buffer = new Buffer;
-    m_buffer->resize(2);
+    m_buffer->resize(i);
   }
   explicit CoincBuilder(Buffer * _event)                            : m_buffer(_event){}
   explicit CoincBuilder(Buffer * _event, Int_t const & _timeWindow) : m_buffer(_event), m_time_window(_timeWindow){}

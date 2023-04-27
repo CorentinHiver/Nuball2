@@ -55,6 +55,7 @@ private:
 
   std::string m_dataPath;
   FilesManager m_files;
+  int m_nb_files_per_run;
   MTList<std::string> m_list_files;
   MTList<std::string> m_list_runs;
   bool m_TW_correct = false;
@@ -157,6 +158,10 @@ bool Parameters::setData()
       {
         is >> m_dataPath;
         if (m_dataPath.back() != '/') m_dataPath.push_back('/');
+        while (is >> temp)
+        {
+          if (temp == "nb:") is >> m_nb_files_per_run;
+        }
       }
       else if (temp == "correctTW" || temp == "timewalk")
       {
@@ -182,7 +187,7 @@ bool Parameters::setData()
   }
 
   if(m_list_runs.size()<1) { print("No runs list !"); return false;}
-  for (auto const & run : m_list_runs) m_files.addFolder(m_dataPath+run);
+  for (auto const & run : m_list_runs) m_files.addFolder(m_dataPath+run, m_nb_files_per_run);
   m_list_files = m_files.getListFiles();
 
   if (m_TW_correct) Sorted_Event::setTWcorrectionsDSSD(m_TW_file);

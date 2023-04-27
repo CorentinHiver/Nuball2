@@ -10,11 +10,8 @@ public:
   operator int() { return m_counter; }
   operator size_t() { return m_counter; }
 
-  size_t const & get() { return m_counter; }
-  
-  template <typename T>
-  operator T() {return static_cast<T>(m_counter);}
-
+  operator float() {return static_cast<float>(m_counter);}
+  size_t const & get() const { return m_counter; }
   size_t const & operator() () const  {return m_counter;}
 
   void operator++() {m_mutex.lock(); m_counter++; m_mutex.unlock();}
@@ -36,11 +33,19 @@ public:
     m_mutex.unlock();
   }
 
-  template <typename T>
-  T operator/(T const & t) {return m_counter/static_cast<T>(t);}
+  Float_t operator/(Float_t const & v) {return static_cast<Float_t>(m_counter)/v;}
+  Float_t operator*(Float_t const & v) {return static_cast<Float_t>(m_counter)/v;}
+  double  operator*(double  const & v) {return static_cast<double >(m_counter)/v;}
+  size_t  operator*(size_t  const & v) {return static_cast<size_t >(m_counter)/v;}
 
 private:
   size_t m_counter = 0;
 };
+
+std::ostream& operator<<(std::ostream& os, MTCounter const & counter)
+{
+  os << counter.get();
+  return os;
+}
 
 #endif //MTCOUNTER_H

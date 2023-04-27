@@ -3,7 +3,7 @@
 
 #include "../utils.hpp"
 #include "../Classes/Event.hpp"
-#include "Clover.hpp"
+#include "CloverModule.hpp"
 
 class Clovers
 {
@@ -94,7 +94,7 @@ public:
   // -
 
   // Specific methods :
-  CLOVER operator[] (uchar const & i) {return m_Clovers[i];}
+  CloverModule operator[] (uchar const & i) {return m_Clovers[i];}
   void Analyse();
 
   // Containers :
@@ -103,7 +103,7 @@ public:
   StaticVector<uchar, 24> Bgo;  // List of BGO modules that fired in the event
   StaticVector<uchar, 24> Clean_Ge;  // List of clean Germaniums that fired in the event, that is "Ge only" modules
 
-  std::vector<CLOVER> m_Clovers;
+  std::vector<CloverModule> m_Clovers;
 
   // Counters :
   std::size_t Mult = 0;
@@ -136,21 +136,21 @@ float Clovers::Emin = 5.;
 
 void Clovers::Reset()
 {
-  for (auto const & clover : Hits)
+  for (auto const & index : Hits)
   {
-    m_Clovers[clover].Reset();
+    m_Clovers[index].Reset();
   }
 
-  for (auto const & cristal : cristaux)
+  for (auto const & index : cristaux)
   {
-    cristaux_nrj  [cristal] = 0.;
-    cristaux_time [cristal] = 0.;
+    cristaux_nrj  [index] = 0.;
+    cristaux_time [index] = 0.;
   }
 
-  for (auto const & cristal : cristaux_BGO)
+  for (auto const & index : cristaux_BGO)
   {
-    cristaux_nrj_BGO  [cristal] = 0.;
-    cristaux_time_BGO [cristal] = 0.;
+    cristaux_nrj_BGO  [index] = 0.;
+    cristaux_time_BGO [index] = 0.;
   }
 
   Hits.resize(0);
@@ -178,43 +178,43 @@ void Clovers::Set(Event const & event)
   for (size_t i = 0; i<event.size(); i++) this -> Fill(event, i);
 }
 
-Bool_t Clovers::Fill(Event const & event, int const & index)
+Bool_t Clovers::Fill(Event const & event, int const & hit_i)
 {
-  auto const & label = event.labels[index];
+  auto const & label = event.labels[hit_i];
   if (isClover[label])
   {
-    auto const & clover_i  =          labels[label];
+    auto const & index_clover  =  labels[label];
 
-    auto const & nrj  = event.nrjs [index];
-    auto const & time = event.Times[index];
+    auto const & nrj  = event.nrjs [hit_i];
+    auto const & time = event.Times[hit_i];
 
-    auto & clover = m_Clovers[clover_i];
+    auto & clover = m_Clovers[index_clover];
 
     // Fill the vector containing the list of all the clovers that fired :
-    Hits.push_back_unique(clover_i);
+    Hits.push_back_unique(index_clover);
 
     if (isGe[label])
     {
       CrystalMult++;
       // Ge crystal index :
-      auto const & cristal_i = cristaux_index[label];
+      auto const & index_cristal = cristaux_index[label];
       // Fill the vector containing the list of all the Ge crystals that fired :
-      cristaux.push_back(cristal_i);
+      cristaux.push_back(index_cristal);
       // Filling the germanium crystals informations :
-      cristaux_nrj[cristal_i] = nrj;
-      cristaux_time[cristal_i] = time;
+      cristaux_nrj[index_cristal] = nrj;
+      cristaux_time[index_cristal] = time;
       // Counts the number of Ge crystals that fired in the clover :
       clover.nb ++;
-      // Finds the Ge cristal that received the most energy and use its time for the clover_i :
+      // Finds the Ge cristal that received the most energy and use its time for the index_clover :
       if (nrj > cristaux_nrj[clover.maxE_Ge_cristal])
       {
-        clover.maxE_Ge_cristal = cristal_i;
+        clover.maxE_Ge_cristal = index_cristal;
         clover.time = time;
       }
       // Fill the vector containing the list of Ge clovers that fired :
-      Ge.push_back_unique(clover_i);
+      Ge.push_back_unique(index_clover);
       // Do a raw add-back : sum the energy of all the crystals in a clover
-      clover.nrj += event.nrjs[index];
+      clover.nrj += event.nrjs[hit_i];
 
       // Detailed analysis :
       if (nrj>507 && nrj<516) has511 = true;
@@ -225,17 +225,17 @@ Bool_t Clovers::Fill(Event const & event, int const & index)
       // Cristals managing :
       CrystalMult_BGO++;
       // BGO crystal index :
-      auto const & cristal_i = cristaux_index_BGO[label];
+      auto const & index_cristal = cristaux_index_BGO[label];
       // Fill the vector containing the list of all the BGO crystals that fired :
-      cristaux_BGO.push_back(cristal_i);
+      cristaux_BGO.push_back(index_cristal);
       // Counts the number of BGO crystals that fired in the clover :
       clover.nb_BGO ++;
 
       // Clovers managing :
       // Fill the vector containing the list of BGO clovers that fired :
-      Bgo.push_back_unique(clover_i);
+      Bgo.push_back_unique(index_clover);
       // Fill the cell containing the total energy deposit in the module's BGOs
-      clover.nrj_BGO += event.nrjs[index];
+      clover.nrj_BGO += event.nrjs[hit_i];
     }
     return true;
   }
@@ -244,9 +244,9 @@ Bool_t Clovers::Fill(Event const & event, int const & index)
 
 void Clovers::Analyse()
 {
-  for (auto const & hit : Hits)
+  for (auto const & index : Hits)
   {
-    auto & clover = m_Clovers[hit];
+    auto & clover = m_Clovers[index];
     Mult++;
     if (clover.nb > 0)
     {
@@ -254,7 +254,7 @@ void Clovers::Analyse()
       if (clover.nb_BGO==0)
       {
         CleanGeMult++;
-        Clean_Ge.push_back(hit);
+        Clean_Ge.push_back(index);
       }
     }
     else
@@ -275,33 +275,36 @@ uchar Clovers::label_to_cristal(Label const & l)
     switch (clover) // clover number, to take into account the rotated ones :
     { // Rotation is trigowise direction
       // pi rotation
-      case 17:
+    case 17:
       switch(clover_cristal-2)
       {
         case 0: return clover;   // Red
         case 1: return clover+1; // Green
         case 2: return clover+3; // Black
         case 3: return clover+2; // Blue
+        default : return -1;
       }
 
       // -pi rotation : R3A3, R3A4
-      case 2: case 3:
+    case 2: case 3:
       switch(clover_cristal-2)
       {
         case 0: return clover+3; // Red
         case 1: return clover+2; // Green
         case 2: return clover;   // Black
         case 3: return clover+1; // Blue
+        default : return -1;
       }
 
       // 2pi rotation
-      case 4:
+    case 4:
       switch(clover_cristal-2)
       {
         case 0: return clover+1; // Red
         case 1: return clover+3; // Green
         case 2: return clover+2; // Black
         case 3: return clover+0; // Blue
+        default : return -1;
       }
 
       default: // All the correctly turned clovers:
@@ -311,6 +314,7 @@ uchar Clovers::label_to_cristal(Label const & l)
         case 1: return clover;   // Green
         case 2: return clover+1; // Black
         case 3: return clover+3; // Blue
+        default : return -1;
       }
     }
   }

@@ -17,7 +17,7 @@ public:
 
   Bool_t Initialize();
   Bool_t Initialize(std::string const & _filename);
-  Bool_t Read(Hit* hit);
+  Hit*   ReadHit(Hit* hit);
   Bool_t Read();
   Bool_t ReadSimple();
   Bool_t ReadGroup();
@@ -132,12 +132,11 @@ Bool_t FasterReader::Read()
   #endif //FASTER_GROUP
 }
 
-Bool_t FasterReader::Read(Hit* hit)
+Hit* FasterReader::ReadHit(Hit* hit)
 {
   // This function allows one to directly link an external hit to m_hit
-  Bool_t ret = Read();
-  hit = m_hit;
-  return ret;
+  hit = (Read()) ? m_hit : nullptr;
+  return hit;
 }
 
 Bool_t FasterReader::ReadSimple()
@@ -251,7 +250,7 @@ void FasterReader::ReadDataGroup(faster_data_p const & _data)
 
 Bool_t FasterReader::switch_alias(uchar const & _alias, faster_data_p const & _data)
 {//Treat the specific part of data (QDC gates, spectro ADC ...)
-  switch(m_alias)
+  switch(_alias)
   {
     case TRAPEZ_SPECTRO_TYPE_ALIAS: // trapez_spectro
       TreatTrapez(m_hit, _data);

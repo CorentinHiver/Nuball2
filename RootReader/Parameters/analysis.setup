@@ -2,10 +2,13 @@
 list_runs: Parameters/list_runs.list
 # list_runs: Parameters/list_runs_good_pulse.list
 # list_runs: Parameters/run_test.list
-folder: ../Data_129/DSSDFinal/
+# list_runs: Parameters/runs_pulsed_Corentin.list
+# folder: 129/M2G1/ nb: 20
+folder: ../Data_129/temp/
+# folder: ../Data_129/DSSDFinal/
 # folder: ../Data_129/DSSD_TRIG/
-timewalk 129/Analyse/DSSD/gate642_prompt/timewalk_data/fit.fit
-reject: time: sup: 330
+# timewalk 129/Analyse/DSSD/gate642_prompt/timewalk_data/fit.fit
+# reject: time: sup: 330
 end
 
 [Analyse 511]
@@ -18,10 +21,12 @@ end
 outDir: 129/Analyse/Isomer/
 # outRoot: total_DSSD_prompt.root
 # outRoot: good_pulse.root
-outRoot: test.root
+# outRoot: test.root
+outRoot: total.root
 # writeDSSD
-gate: prompt Ge -10 20
-gate: delayed Ge 20 350
+gate: prompt Ge -10 10
+gate: delayed Ge 30 350
+gate: reject Ge 160
 end
 
 [DSSD]
@@ -42,7 +47,8 @@ end
 [Matrices]
 # outRoot: test.root
 # outRoot: good_pulse.root
-outRoot: all_pulse.root
+# outRoot: all_pulse.root
+outRoot: run_70_M2G1.root
 end
 
 [TimewalkDSSD]

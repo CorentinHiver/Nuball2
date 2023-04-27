@@ -55,8 +55,6 @@ public:
   std::array < Float_t, 24 > maxE; // Value of the maximum energy in a Ge crystal of a Clover
   std::array < Int_t,   24 > maxE_hit; // Position in the event of the Ge crystal with the maximum energy of the Clover
 
-  Clovers clovers;
-
   // Paris arrays :
   std::vector<uchar> paris_hits; // Position in the event of the paris hits
 

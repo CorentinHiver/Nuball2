@@ -12,7 +12,7 @@ using Pileup = Bool_t;
 using Pileup_vec = std::vector<Bool_t>;
 
 enum Detector
-{ null,              Clover,    Ge,         BGO,         LaBr3,   RF,   EDEN,   PhaseI_Ge,   PhaseI_BGO,   Paris,    Paris_LaBr3,   Paris_NaI,   dssd};
+{ null,              Clover,    Ge,         BGO,         LaBr3,   RF,   EDEN,   PhaseI_Ge,   PhaseI_BGO,   paris,    Paris_LaBr3,   Paris_NaI,   dssd};
 std::vector<std::string> type_str =
 { "Unkown detector", "Clover", "Ge_Clover","BGO_Clover", "LaBr3", "RF", "EDEN", "PhaseI_Ge", "PhaseI_BGO", "Paris", "Paris_LaBr3", "Paris_NaI", "DSSD"};
 using Detector_vec = std::vector<int>;
@@ -23,10 +23,9 @@ struct Hit
   Label   label  = 0; //Hit label
   Float_t nrj    = 0; //energy
   Float_t nrj2   = 0; //used if QDC2
-  NRJ     nrjcal = 0;
+  NRJ     nrjcal = 0; // Calibrated energy
   Time    time   = 0; //time
   bool    pileup = 0; //pile-up
-  int     type   = 0;
 
   void reset()
   {
@@ -36,7 +35,6 @@ struct Hit
     nrjcal = 0;
     time   = 0;
     pileup = 0;
-    type   = 0;
   }
 
   Float_t gate_ratio(){if (nrj2 != 0) return ((Float_t)(nrj2-nrj)/nrj2); else return 0.f;}

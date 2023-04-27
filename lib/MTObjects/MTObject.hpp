@@ -13,18 +13,25 @@ class MTObject
 {
 public:
   MTObject() {}
-  MTObject(int _nb_threads ) {Initialize(_nb_threads);}
+  MTObject(ushort & _nb_threads ) {Initialize(_nb_threads);}
 
-  static void Initialize(ushort _nb_threads )
+  static void Initialize(ushort & _nb_threads, bool force = false)
   {
-    if(_nb_threads > std::thread::hardware_concurrency())
+    // First : check the number of threads. Usually, over 75% of cores is the optimal.
+    // Set force parameter tu true if want to use all the cores
+    int maxThreads = static_cast<int>(std::thread::hardware_concurrency()*((force) ? 1 : 0.75));
+    if(_nb_threads > maxThreads)
     {
-      _nb_threads = std::thread::hardware_concurrency();
+      _nb_threads = maxThreads;
       std::cout << "Number of threads too large (hardware) -> reset to " << _nb_threads << std::endl;
     }
     nb_threads = _nb_threads;
     master_thread = std::this_thread::get_id();
-    if (_nb_threads>1) TThread::Initialize();
+    if (_nb_threads>1)
+    {
+      TThread::Initialize();
+      ROOT::EnableThreadSafety();
+    }
     ON = true;
   }
 

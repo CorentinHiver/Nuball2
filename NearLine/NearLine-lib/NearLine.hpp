@@ -69,7 +69,7 @@ public:
   Bool_t multi_run();
   void   run_thread();
   Bool_t processFile(std::string filename, int thread_number = 0);
-  void   faster2root(std::string filename, int thread_nb = 0);
+  void   faster2root(std::string const & filename, int const & thread_nb = 0);
   void   WriteData();
 
   //Configurations / Options :
@@ -125,17 +125,17 @@ private:
   Bool_t m_use_threshold = false; //keV | energy threshold for calibrated spectra
 
     //Energy binning
-    MapDetector m_bins_raw   = { {null, 1}, {RF, 1}, {BGO, 1000  }, {LaBr3, 5000   }, {Ge, 20000  }, {EDEN, 10000}, {Paris, 5000  }, {dssd, 10000 } };
-    MapDetector m_min_raw    = { {null, 0}, {RF, 0}, {BGO, 0     }, {LaBr3, 0      }, {Ge, 0      }, {EDEN, 0    }, {Paris, 0     }, {dssd, 0    } };
-    MapDetector m_max_raw    = { {null, 1}, {RF, 1}, {BGO, 300000}, {LaBr3, 1000000}, {Ge, 200000 }, {EDEN, 10000}, {Paris, 1000000}, {dssd, 100000} };
+    MapDetector m_bins_raw   = { {null, 1}, {RF, 1}, {BGO, 1000  }, {LaBr3, 5000   }, {Ge, 20000  }, {EDEN, 10000}, {paris, 5000  }, {dssd, 10000 } };
+    MapDetector m_min_raw    = { {null, 0}, {RF, 0}, {BGO, 0     }, {LaBr3, 0      }, {Ge, 0      }, {EDEN, 0    }, {paris, 0     }, {dssd, 0    } };
+    MapDetector m_max_raw    = { {null, 1}, {RF, 1}, {BGO, 300000}, {LaBr3, 1000000}, {Ge, 200000 }, {EDEN, 10000}, {paris, 1000000}, {dssd, 100000} };
 
-    MapDetector m_bins_calib = { {null, 1}, {RF, 1}, {BGO, 1000  }, {LaBr3, 1500   }, {Ge, 6000   }, {EDEN, 10000}, {Paris, 5000}, {dssd, 500  } };
-    MapDetector m_min_calib  = { {null, 0}, {RF, 0}, {BGO, 0     }, {LaBr3, 0      }, {Ge, 0      }, {EDEN, 0    }, {Paris, 0   }, {dssd, 0    } };
-    MapDetector m_max_calib  = { {null, 1}, {RF, 1}, {BGO, 3000  }, {LaBr3, 3000   }, {Ge, 3000   }, {EDEN, 1    }, {Paris, 3000}, {dssd, 20000} };
+    MapDetector m_bins_calib = { {null, 1}, {RF, 1}, {BGO, 1000  }, {LaBr3, 1500   }, {Ge, 6000   }, {EDEN, 10000}, {paris, 5000}, {dssd, 500  } };
+    MapDetector m_min_calib  = { {null, 0}, {RF, 0}, {BGO, 0     }, {LaBr3, 0      }, {Ge, 0      }, {EDEN, 0    }, {paris, 0   }, {dssd, 0    } };
+    MapDetector m_max_calib  = { {null, 1}, {RF, 1}, {BGO, 3000  }, {LaBr3, 3000   }, {Ge, 3000   }, {EDEN, 1    }, {paris, 3000}, {dssd, 20000} };
 
-    MapDetector m_bins_bidim = { {null, 1}, {RF, 1}, {BGO, 250   }, {LaBr3, 1000   }, {Ge, 6000   }, {Paris, 1000}, {dssd, 1000 } };
-    MapDetector m_min_bidim  = { {null, 0}, {RF, 0}, {BGO, 0     }, {LaBr3, 0      }, {Ge, 0      }, {Paris, 0   }, {dssd, 0    } };
-    MapDetector m_max_bidim  = { {null, 1}, {RF, 1}, {BGO, 3000  }, {LaBr3, 3000   }, {Ge, 6000   }, {Paris, 3000}, {dssd, 20000} };
+    MapDetector m_bins_bidim = { {null, 1}, {RF, 1}, {BGO, 250   }, {LaBr3, 1000   }, {Ge, 6000   }, {paris, 1000}, {dssd, 1000 } };
+    MapDetector m_min_bidim  = { {null, 0}, {RF, 0}, {BGO, 0     }, {LaBr3, 0      }, {Ge, 0      }, {paris, 0   }, {dssd, 0    } };
+    MapDetector m_max_bidim  = { {null, 1}, {RF, 1}, {BGO, 3000  }, {LaBr3, 3000   }, {Ge, 6000   }, {paris, 3000}, {dssd, 20000} };
 
     //Detectors :
 
@@ -205,7 +205,7 @@ private:
   Int_t       m_ts_timeWindow_ns = 0; //ns | idem
   Timing_ref  m_ts_time_ref; // time reference used for time alignement purposes
   Timeshift   m_ts_array;
-  std::map<Detector, Float_t> m_ts_rebin = { {LaBr3,100}, {Ge,1000}, {BGO,500}, {EDEN,500}, {RF,100}, {Paris,100}, {dssd,1000}, {EDEN,1000}};
+  std::map<Detector, Float_t> m_ts_rebin = { {LaBr3,100}, {Ge,1000}, {BGO,500}, {EDEN,500}, {RF,100}, {paris,100}, {dssd,1000}, {EDEN,1000}};
   void        m_ts_Initialize();
   void        m_ts_Fill(Event const & ts_buffer, size_t const & refPos, UShort_t const & thread_nb);
   void        m_ts_calculate();
@@ -213,8 +213,8 @@ private:
     //Faster2root
   Bool_t   m_fr               = false;
   Bool_t   m_fr_eventbuild    = false;
-  Bool_t   m_fr_raw           = false;
-  Bool_t   m_fr_keep_all      = false;
+  Bool_t   const m_fr_raw           = false;
+  Bool_t   const m_fr_keep_all      = false;
   Bool_t   m_fr_throw_singles = false;
   Long64_t m_fr_shift         = 0;
   Trigger  m_fr_trigger;
@@ -222,6 +222,7 @@ private:
   MTCounter  m_fr_treated_run_size;
   MTCounter  m_fr_raw_counter;
   MTCounter  m_fr_treated_counter;
+  Timer      m_timer;
   void     m_fr_Initialize();
   void     m_fr_Write();
   void     m_fr_sum_counters();
@@ -240,7 +241,7 @@ private:
   void m_rfc_Initialize();
   void m_rfc_Write();
 
-  //Paris bidim histo :
+  //paris bidim histo :
   friend class ParisBidim;
   ParisBidim *m_pb = nullptr;
 
@@ -393,27 +394,26 @@ void NearLine::run_thread()
   if (multithread) std::cout << "Worker " << thread_nb << " finished" << std::endl;
 }
 
-void NearLine::faster2root(std::string filename, int thread_nb)
+void NearLine::faster2root(std::string const & filename, int const & thread_nb)
 {
   Timer timer;
   Hit hit;
   std::string outfile = m_outdir+rmPathAndExt(filename)+".root";
-
   // Create the foler in not already existing :
   if (!folder_exists(getPath(outfile))) gSystem -> Exec(("mkdir "+getPath(outfile)).c_str());
-  //Checking the file does'nt already exists :
+  //Checking the file doesn't already exists :
   if ( file_exists(outfile) ) {print(outfile, "already exists !");return;}
 
   // Initialize :
   FasterReader reader(&hit, filename);
   if (!reader.isReady()) { print("CAN'T READ", filename); return;}
 
-  std::unique_ptr<TTree> rootTree (new TTree(("tempTree"+std::to_string(thread_nb)).c_str(), ("tempTree"+std::to_string(thread_nb)).c_str()));
-
   auto file_size = size_file(filename);
   m_fr_raw_run_size+=file_size;
 
-  rootTree.reset(new TTree("tempTree","tempTree"));
+  auto rootTreeName = "tempTree"+std::to_string(thread_nb);
+  std::unique_ptr<TTree> rootTree (new TTree(rootTreeName.c_str(), rootTreeName.c_str()));
+  rootTree -> SetDirectory(nullptr);
   rootTree -> Branch("label"  , &hit.label );
   rootTree -> Branch("time"   , &hit.time  );
   rootTree -> Branch("nrjcal" , &hit.nrjcal);
@@ -421,9 +421,9 @@ void NearLine::faster2root(std::string filename, int thread_nb)
   rootTree -> Branch("nrj2"   , &hit.nrj2);
 #endif //QDC2
   rootTree -> Branch("pileup" , &hit.pileup);
-
   int counter = 0;
-  while(reader.Read())
+  // while(reader.Read())
+  while(reader.Read() && counter<20000)
   {
     counter++;
     time_shift(hit);
@@ -443,22 +443,28 @@ void NearLine::faster2root(std::string filename, int thread_nb)
   for (size_t nb = 0; nb<gindex.size(); nb++) gindex[nb] = nb;
   if (!m_fr_raw) alignator(rootTree.get(), gindex.data());
 
-  Hit i_hit;
+  // Hit i_hit;
   Event buffer;
 
   // Set the temporary tree to reading mode :
-  rootTree -> ResetBranchAddresses(); // Allows one to use the tree afterwards
-  rootTree -> SetBranchAddress("label"  , &i_hit.label );
-  rootTree -> SetBranchAddress("time"   , &i_hit.time  );
-  rootTree -> SetBranchAddress("nrjcal" , &i_hit.nrjcal);
-#ifdef QDC2
-  rootTree -> SetBranchAddress("nrj2"   , &i_hit.nrj2);
-#endif //QDC2
-  rootTree -> SetBranchAddress("pileup" , &i_hit.pileup);
-  rootTree -> SetBranchStatus("*",true);
-
+//   rootTree -> SetBranchStatus("*",false);
+  // rootTree -> ResetBranchAddresses(); // Allows one to use the tree afterwards
+//   rootTree -> SetBranchAddress("label"  , &i_hit.label );
+//   rootTree -> SetBranchAddress("time"   , &i_hit.time  );
+//   rootTree -> SetBranchAddress("nrjcal" , &i_hit.nrjcal);
+// #ifdef QDC2
+//   rootTree -> SetBranchAddress("nrj2"   , &i_hit.nrj2);
+// #endif //QDC2
+//   rootTree -> SetBranchAddress("pileup" , &i_hit.pileup);
+//   rootTree -> SetBranchStatus("*",true);
+//
+  // Set the reader classes :
+  RF_Manager rf;
+  EventBuilder event(&buffer, &rf);
+  CoincBuilder2 coinc(&buffer);
   // Sets the output tree :
-  std::unique_ptr<TTree> outTree(new TTree("Nuball", "DataTreeEventBuild C1L2 C2"));
+  std::unique_ptr<TTree> outTree (new TTree("Nuball", "DataTreeEventBuild C1L2 C2"));
+  outTree -> SetDirectory(nullptr);
   outTree -> Branch("mult",  &buffer.mult);
   outTree -> Branch("label", &buffer.labels , "label[mult]/s" );
   outTree -> Branch("nrj",   &buffer.nrjs   , "nrj[mult]/F"   );
@@ -468,36 +474,36 @@ void NearLine::faster2root(std::string filename, int thread_nb)
   outTree -> Branch("time",  &buffer.times  , "time[mult]/l"  );
   outTree -> Branch("pileup",&buffer.pileups, "pileup[mult]/O");
 
-  gROOT -> cd();
-
   // Remove the hits previous to the first RF measurement :
 
   ULong64_t loop = 0;
-  RF_Manager rf;
-  EventBuilder event(&buffer, &rf);
-  CoincBuilder2 coinc(&buffer);
   if (m_use_RF)
   {
     event.setShift(m_RF_shift);
+  //   do{ rootTree -> GetEntry(loop++);}
     do{ rootTree -> GetEntry(gindex[loop++]);}
-    while(i_hit.label != RF_Manager::label && loop<nb_data);
-
+    while(hit.label != RF_Manager::label && loop<nb_data);
+  //   // while(i_hit.label != RF_Manager::label && loop<nb_data);
+  //   //
     if (loop == nb_data) {print("NO RF DATA FOUND !"); return;}
-    rf.setHit(i_hit);
-    event.setFirstRF(i_hit);
-    // Handle the first RF :
-    buffer = i_hit;
-    outTree -> Fill();
-    buffer.clear();
-
+    rf.setHit(hit);
+    event.setFirstRF(hit);
+    buffer = hit;
+    // rf.setHit(i_hit);
+    // event.setFirstRF(i_hit);
+  //   buffer = i_hit;
+    // outTree -> Fill();
+    // buffer.clear();
+  //
     // Handle the first hit :
     rootTree -> GetEntry(gindex[loop++]);
-    event.set_last_hit(i_hit);
+    event.set_last_hit(hit);
   }
   else
   {
     rootTree -> GetEntry(gindex[loop++]);
-    coinc.set_last_hit(i_hit);
+    coinc.set_last_hit(hit);
+    // coinc.set_last_hit(i_hit);
   }
 
 
@@ -505,11 +511,11 @@ void NearLine::faster2root(std::string filename, int thread_nb)
   int M1_counter = 0;
 #endif //DOWNSCALE_M1
   // Read the following hits :
-  // ULong64_t evt_start = loop;
-  // while (loop<evt_start+1000)
   bool trig = false;
   bool built = false;
   Counters Counter;
+  ULong64_t evt_start = loop;
+  while (loop<evt_start+1000)
   while (loop<nb_data)
   {
     built = false;
@@ -519,19 +525,19 @@ void NearLine::faster2root(std::string filename, int thread_nb)
     {
       if (m_use_RF)
       {// RF based event buildin
-        if (is_RF(i_hit) && event.status() != 1)
+        if (is_RF(hit) && event.status() != 1)
         {// To force RF writting in the data if no event is currently being constructed :
-          buffer = i_hit;
+          buffer = hit;
           outTree -> Fill();
           buffer.clear();
-          rf.setHit(i_hit);
+          rf.setHit(hit);
           continue;
         }
-        built = event.build(i_hit);
+        built = event.build(hit);
       }
       else
       {// Time window based event building
-        built = coinc.build(i_hit);
+        built = coinc.build(hit);
       }
       if (built)
       {
@@ -593,13 +599,14 @@ void NearLine::faster2root(std::string filename, int thread_nb)
       if (m_use_RF)
       {
         event.reset();
-        rf.setHit(i_hit);
+        rf.setHit(hit);
       }
       else
       {
         coinc.reset();
       }
     }
+
     else if (m_use_RF && event.hasRF())
     {// If the event didn't pass the trigger we still want to write any potential RF in the event
       for (size_t i = 0; i<buffer.size(); i++)
@@ -608,7 +615,7 @@ void NearLine::faster2root(std::string filename, int thread_nb)
         {
           buffer = buffer[i];
           outTree -> Fill();
-          rf.setHit(i_hit);
+          rf.setHit(hit);
           buffer.clear();
           continue;
         }
@@ -616,16 +623,24 @@ void NearLine::faster2root(std::string filename, int thread_nb)
     }
   }
 
-  std::unique_ptr<TFile> outFile (new TFile(outfile.c_str(),"create"));
-  print("Writting",outfile);
-  outFile -> cd();
+  // outFile -> cd();
+//   print("Writting",outfile);
+  TFile * outFile = new TFile(outfile.c_str(),"create");
+  outTree -> SetDirectory(nullptr);
   outTree -> Write();
+  outFile -> Write();
   outFile -> Close();
-  m_fr_treated_run_size+=size_file(outfile);
+  // m_fr_treated_run_size+=outFile->GetSize();
+  // delete outTree;
+  delete outFile;
+  // rootTree -> ResetBranchAddresses(); // Allows one to use the tree afterwards
 
-  std::cout << std::setprecision(3) << "Conversion of " << rmPathAndExt(filename) << " done in " << timer.TimeSec() << " s"
-  << " - " << nb_data*1.E-6/timer.TimeSec() << " counts/s"
-  << " (" << (int)(file_size/timer.TimeSec())*1.E-6 << " MB/s)"
+  std::cout << std::setprecision(3)
+  << "Conversion of " << rmPathAndExt(filename)
+  << " with " << nb_data*1.E-6 << " Mevts" << " (" << (file_size/1.E6) << "Mo)"
+  << " done in " << timer.TimeSec() << " s"
+  << " - " << nb_data*1.E-6/timer.TimeSec() << " Mevts/s"
+  << " (" << file_size/timer.TimeSec() << " Mo/s)"
   << std::endl;
 }
 
@@ -976,7 +991,7 @@ void NearLine::m_fr_Initialize()
   // #if defined FATIMA
   // m_fr_C_VS_L.reset("C VS L","Clean Germanium Multiplicity VS LaBr3 Multiplicity", 5,0,5, 5,0,5);
   // #elif defined PARIS
-  // m_fr_C_VS_L.reset("C VS L","Clean Germanium Multiplicity VS Paris Multiplicity", 5,0,5, 5,0,5);
+  // m_fr_C_VS_L.reset("C VS L","Clean Germanium Multiplicity VS paris Multiplicity", 5,0,5, 5,0,5);
   // #endif //PARIS
   // m_fr_ToF_all_det.reset("ToF all detectors","ToF all detectors", 5000,-200,400, m_labelToName.size()+1,0,m_labelToName.size()) ;
   // m_fr_ToF.reset("ToF", "ToF", 2500, -100, 400);
@@ -994,7 +1009,7 @@ void NearLine::m_hc_Initialize()
     for (auto name : m_labelToName)
     {
       type = type_det(l);
-      if( (type == Ge && m_hc_Ge_Clover) || (type == Paris && m_hc_Paris) || (type == LaBr3 && m_hc_LaBr3) || (type == dssd && m_hc_dssd))
+      if( (type == Ge && m_hc_Ge_Clover) || (type == paris && m_hc_Paris) || (type == LaBr3 && m_hc_LaBr3) || (type == dssd && m_hc_dssd))
         m_hc_histo[l].reset((name+"_calib").c_str(), name.c_str(), m_bins_calib[type],m_min_calib[type],m_max_calib[type]);
       l++;
     }
@@ -1012,7 +1027,7 @@ void NearLine::m_hc_Initialize()
     m_hc_bidim_histo_LaBr3.reset("All FATIMA LaBr3 calibrated spectra", "All FATIMA LaBr3 calibrated spectra", LaBr3_Labels.size()-1,LaBr3_Labels.data(), m_bins_bidim[LaBr3],m_min_bidim[LaBr3],m_max_bidim[LaBr3]);
     #endif //FATIMA
     #ifdef PARIS
-    m_hc_bidim_histo_Paris.reset("All PARIS calibrated spectra", "All PARIS calibrated spectra", paris_labels.size()-1,paris_labels.data(), m_bins_bidim[Paris],m_min_bidim[Paris],m_max_bidim[Paris]);
+    m_hc_bidim_histo_Paris.reset("All PARIS calibrated spectra", "All PARIS calibrated spectra", paris_labels.size()-1,paris_labels.data(), m_bins_bidim[paris],m_min_bidim[paris],m_max_bidim[paris]);
     #endif //PARIS
   }
 }
@@ -1069,7 +1084,6 @@ void NearLine::m_rfc_Initialize()
     p_Files.Print();
     for (size_t i = 1; i<m_rfc_nbFiles; i++)
     {
-      print(i, files[i]);
       files[i] = p_Files[p_Files.size()-i];
     }
     p_Files.setListFiles(files);
@@ -1218,7 +1232,7 @@ void NearLine::m_hc_Write()
 {
   TH1F* sum_Ge_Clover = new TH1F("sum_Ge_Clover","sum_Ge_Clover", m_bins_calib[Ge], m_min_calib[Ge], m_max_calib[Ge]);
   TH1F* sum_LaBr3 = new TH1F("sum_LaBr3","sum_LaBr3", m_bins_calib[LaBr3], m_min_calib[LaBr3], m_max_calib[LaBr3]);
-  TH1F* sum_Paris = new TH1F("Sum_Paris","Sum_Paris", m_bins_calib[Paris], m_min_calib[Paris], m_max_calib[Paris]);
+  TH1F* sum_Paris = new TH1F("Sum_Paris","Sum_Paris", m_bins_calib[paris], m_min_calib[paris], m_max_calib[paris]);
 
   TFile* outFile = TFile::Open((m_outdir+m_hc_outroot).c_str(),"recreate");
   outFile->cd();
@@ -1237,7 +1251,7 @@ void NearLine::m_hc_Write()
       m_hc_histo[l].Write();
            if (m_hc_Ge_Clover && type==Ge) sum_Ge_Clover->Add(m_hc_histo[l].Merged());
       else if (m_hc_LaBr3 && type==LaBr3)  sum_LaBr3->Add(m_hc_histo[l].Merged());
-      else if (m_hc_Paris && type==Paris)  sum_Paris->Add(m_hc_histo[l].Merged());
+      else if (m_hc_Paris && type==paris)  sum_Paris->Add(m_hc_histo[l].Merged());
     }
     l++;
   }
@@ -1285,7 +1299,6 @@ void NearLine::WriteData()
     m_ca_Write(m_hr_outroot);
     if (m_ca_residus) m_ca_residus_calculate();
   }
-  // if (m_fr) m_fr_Write();
   if(m_fr) m_fr_sum_counters();
   if (m_pb)
   {
@@ -1304,9 +1317,11 @@ void NearLine::m_fr_sum_counters()
   run_name.pop_back();
   run_name = rmPathAndExt(run_name);
   std::ofstream outfile("log.log",std::ios::app);
-  print(run_name);
-  outfile << run_name << ": CompressionFactor: " << (Float_t)m_fr_raw_run_size/(Float_t)m_fr_treated_run_size << " RawCounter: " << m_fr_raw_counter.get()
-  << " TreatedCounter: " << m_fr_treated_counter.get() << std::endl;
+  auto const rate = m_fr_raw_run_size / m_timer.TimeSec();
+  print(run_name, "treated at", rate*1.E-6, "Mo/sec");
+  print(m_fr_raw_run_size, m_fr_treated_run_size);
+  outfile << run_name << ": CompressionFactor: " << m_fr_raw_run_size/m_fr_treated_run_size << " RawCounter: " << m_fr_raw_counter
+  << " TreatedCounter: " << m_fr_treated_counter << std::endl;
   outfile.close();
 }
 
@@ -1648,8 +1663,8 @@ void NearLine::m_ca_calculate(std::string _histoFilename, Fits & fits, TFile* ou
         ADC_threshold = 100;
       }
     }
-    else if (type == Paris)
-    {// For Paris
+    else if (type == paris)
+    {// For paris
       window_1 = 70, window_2 = 50, window_3 = 25;
       if (m_ca_source == "152Eu")
       {
@@ -1739,7 +1754,7 @@ void NearLine::m_ca_calculate(std::string _histoFilename, Fits & fits, TFile* ou
       if ((val/sum) > integral_ratio_threshold) {vmaxchan=j; break;}
     }
     #ifdef PARIS
-    if (type == Paris)vmaxchan = paris_vmaxchan[m_labelToName[label]]/scalefactor;
+    if (type == paris)vmaxchan = paris_vmaxchan[m_labelToName[label]]/scalefactor;
     #endif //PARIS
     if (vmaxchan==ADC_threshold_scaled) { if (m_ca_verbose) std::cout << "Could not fit this spectrum " << std::endl; continue;}
     // We have found the first peak in the right
@@ -2080,7 +2095,7 @@ Bool_t NearLine::setConfig (std::stringstream & parameters_file)
           if      (temp2 == "Ge:"   ) is >> m_bins_calib[Ge]    >> m_min_calib[Ge]    >> m_max_calib[Ge]   ;
           else if (temp2 == "BGO:"  ) is >> m_bins_calib[BGO]   >> m_min_calib[BGO]   >> m_max_calib[BGO]  ;
           else if (temp2 == "LaBr3:") is >> m_bins_calib[LaBr3] >> m_min_calib[LaBr3] >> m_max_calib[LaBr3];
-          else if (temp2 == "Paris:") is >> m_bins_calib[Paris] >> m_min_calib[Paris] >> m_max_calib[Paris];
+          else if (temp2 == "paris:") is >> m_bins_calib[paris] >> m_min_calib[paris] >> m_max_calib[paris];
           else if (temp2 == "dssd:")  is >> m_bins_calib[dssd]  >> m_min_calib[dssd]  >> m_max_calib[dssd];
           else std::cout << std::endl << "BINNING: calibrated: ATTENTION, parameter " << temp2 << " not recognized !" << std::endl << std::endl;
         }
@@ -2092,7 +2107,7 @@ Bool_t NearLine::setConfig (std::stringstream & parameters_file)
           if      (temp2 == "Ge:"   ) is >> m_bins_bidim[Ge]    >> m_min_bidim[Ge]    >> m_max_bidim[Ge]   ;
           else if (temp2 == "BGO:"  ) is >> m_bins_bidim[BGO]   >> m_min_bidim[BGO]   >> m_max_bidim[BGO]  ;
           else if (temp2 == "LaBr3:") is >> m_bins_bidim[LaBr3] >> m_min_bidim[LaBr3] >> m_max_bidim[LaBr3];
-          else if (temp2 == "Paris:") is >> m_bins_bidim[Paris] >> m_min_bidim[Paris] >> m_max_bidim[Paris];
+          else if (temp2 == "paris:") is >> m_bins_bidim[paris] >> m_min_bidim[paris] >> m_max_bidim[paris];
           else if (temp2 == "dssd:")  is >> m_bins_bidim[dssd] >> m_min_bidim[dssd] >> m_max_bidim[dssd];
           else std::cout << std::endl << "BINNING: bidim: ATTENTION, parameter " << temp2 << " not recognized !" << std::endl << std::endl;
         }
@@ -2104,7 +2119,7 @@ Bool_t NearLine::setConfig (std::stringstream & parameters_file)
           if      (temp2 == "Ge:"   ) is >> m_bins_raw[Ge]    >> m_min_raw[Ge]    >> m_max_raw[Ge]   ;
           else if (temp2 == "BGO:"  ) is >> m_bins_raw[BGO]   >> m_min_raw[BGO]   >> m_max_raw[BGO]  ;
           else if (temp2 == "LaBr3:") is >> m_bins_raw[LaBr3] >> m_min_raw[LaBr3] >> m_max_raw[LaBr3];
-          else if (temp2 == "Paris:") is >> m_bins_raw[Paris] >> m_min_raw[Paris] >> m_max_raw[Paris];
+          else if (temp2 == "paris:") is >> m_bins_raw[paris] >> m_min_raw[paris] >> m_max_raw[paris];
           else if (temp2 == "dssd:")  is >> m_bins_raw[dssd] >>  m_min_raw[dssd] >>  m_max_raw[dssd];
           else std::cout << std::endl << "BINNING: uncalibrated: ATTENTION, parameter " << temp2 << " not recognized !" << std::endl << std::endl;
         }
@@ -2184,7 +2199,7 @@ Bool_t NearLine::setConfig (std::stringstream & parameters_file)
           else if (name == "Ge_Clover") {m_hc_Ge_Clover = true;}
           else if (name == "LaBr3") {m_hc_LaBr3 = true;}
           else if (name == "dssd") {m_hc_dssd = true;}
-          else if (name == "Paris") {m_hc_Paris = true;}
+          else if (name == "paris") {m_hc_Paris = true;}
           else if (name == "outRoot:") is >> m_hc_outroot;
           else {std::cout << name << " calibrated spectra not taken care of. Sorry ! " << std::endl; return false;}
         }

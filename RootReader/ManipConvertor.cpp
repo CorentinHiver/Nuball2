@@ -5,11 +5,11 @@
 #define QDC2
 #define USE_DSSD
 #define FATIMA
-#define M2G1_TRIG
-// #define NO_TRIG
+// #define M2G1_TRIG
+#define NO_TRIG
 // #define DSSD_TRIG
 
-#if defined(M2G1_TRIG)
+#ifndef NO_TRIG
 #define COUNT_EVENT
 #endif //COUNT_EVENT CONDITION
 
@@ -147,7 +147,7 @@ void convertRun(quick_parameters & param)
 
       #ifdef NO_TRIG
         trig = true;
-      #endif //NO_TRIG
+      #endif //NO_TRIGa
 
       #ifdef COUNT_EVENT
         counter.count_event(event);
@@ -174,9 +174,9 @@ void convertRun(quick_parameters & param)
       outTree -> Write();
       file    -> Write();
       file    -> Close();
-      print(outName,"written, ",timer()/1000," s");
+      print(outName,"written, ",readTimer.TimeSec()," s");
     }// End files loop
-    print(run, ":", nb_evts/1000000, "Mevts converted at a rate of", nb_evts/readTimer()/1000, "Mevts/s");
+    print(run, ":", nb_evts*1.E-6, "Mevts converted at a rate of", nb_evts/readTimer.Time()/1000., "Mevts/s");
     chain.Reset();
   }// End runs loop
 }

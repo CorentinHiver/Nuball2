@@ -19,7 +19,7 @@ public:
   Event* getEvent() const {return m_event;}
   UShort_t size() const {return m_event -> size();}
 
-  virtual Bool_t build(Hit const & _hit) {return false;}
+  virtual Bool_t build(Hit const & _hit) = 0;
   virtual void reset() {m_event->clear();m_status = 0;}
 
   // Setters :

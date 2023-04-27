@@ -14,10 +14,6 @@ public:
   {
     m_event = new Event;
   }
-  explicit CoincBuilder2(Int_t const & i)
-  {
-    m_event = new Event;
-  }
   explicit CoincBuilder2(Event * _event)                                                         {m_event = _event;}
   explicit CoincBuilder2(Event * _event, Int_t const & _timeWindow) : m_time_window(_timeWindow) {m_event = _event;}
 

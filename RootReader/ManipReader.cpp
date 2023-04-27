@@ -79,7 +79,12 @@ int main(int argc, char** argv)
   m_nb_labels = g_labelToName.size();
   setArrays(m_nb_labels);
 
+  // Paris paris;
+  // print("Paris instancié");
+  // paris.Initialize(2, 36);
+  // print("Paris initialisé");
   // Initialize modules
+  // EventAnalyse event_a;
 
   // RunCheck runs;
   // runs.launch(p);

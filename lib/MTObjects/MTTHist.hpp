@@ -12,21 +12,22 @@
  *
  * The default one consists in having as many sub-histograms as there are threads.
  * That is, each thread can fill its own histogram.
- * Finally, before beeing written all the histograms are merged into one.
+ * Eventually, before beeing analysed (to be done by hand) or written (automatic) all the histograms are merged into one.
  * The advatage of this method is its speed
  * Two defaults : each sub-histogram takes as many place in the memory
  *                the merging time is a function of the number of threads and the size of the histogram
+ * These two defaults makes them really heavy to be used if many bidims (TH2) are beeing used
  *
  * The other way [EXPERIMENTAL !!!] is to use a mutex that protects the histogram in writting
  * The advantage is much less memory taking and no merging.
  * However the mutex activation and the concurrency waiting may slow the process a lot.
  * To be tested !
- * Unlock this way with #define MODE2 (maybe find a better name)
+ * Unlock this way with #define MTTHIST_MONO (maybe find a better name)
  *
  */
 #ifndef MTTHIST_H
 #define MTTHIST_H
-// #define MODE2
+// #define MTTHIST_MONO
 #include "MTObject.hpp"
 
 template <class THist>
@@ -42,9 +43,9 @@ public:
   // General constructor, fully based on reset method
   template <class... ARGS>
   MTTHist(std::string name, ARGS &&... args) { this -> reset (name, args...); }
-  //Default initialiser, to create a zombie :
+  //Copy initialiser :
   template <class... ARGS>
-  void reset(MTTHist<THist> const & hist) { m_exists = false; }
+  void reset(MTTHist<THist> hist) { m_exists = false; *this = hist;}
   //Default initialiser, to create a zombie :
   template <class... ARGS>
   void reset() {m_exists = false;}
@@ -75,14 +76,29 @@ public:
   // --- COMMON METHODS --- //
   void Print();
   void Write();
-  Bool_t const & exists() {return m_exists;}
-  operator bool() {return m_exists;}
+  std::string const & name() const {return m_str_name;}
+  Bool_t const & exists() const {return m_exists;}
+  operator bool() const & {return m_exists;}
+  std::vector<THist*> const & getCollection() const {return m_collection;}
   THist * operator->() {return m_merged;}
-  void operator=(MTTHist<THist> const & histo) {}
+
+  void operator=(MTTHist<THist> histo)
+  {
+    m_file = histo.file();
+    m_exists = histo.exists();
+    m_str_name = histo.name();
+  #ifdef MTTHIST_MONO
+    m_merged = histo.get();
+  #else //not MTTHIST_MONO
+    m_collection = histo.getCollection();
+    m_is_merged = static_cast<bool>(m_merged);
+  #endif
+  }
   void operator=(std::nullptr_t) {reset(nullptr);}
 
   operator THist*() {return m_merged;}
   THist * get() {return m_merged;}
+  TFile * file() {return m_file;}
 
   #ifdef MTTHIST_MONO
   THist * Get() {return m_merged;}

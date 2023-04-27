@@ -29,45 +29,45 @@ public:
     return (m_now = m_clock.now());
   }
 
-  auto const Time()
+  float Time()
   {
     Now();
-    return(duration_milli_t(m_now - m_start).count());
+    return(static_cast<float>(duration_milli_t(m_now - m_start).count()));
   }
 
-  auto const TimeSec()
+  float TimeSec()
   {
     Now();
-    return(duration_milli_t(m_now - m_start).count()/1000);
+    return(duration_milli_t(m_now - m_start).count()/1000.);
   }
 
-  auto const TimeElapsed()
+  float TimeElapsed()
   {
     return d_milli.count();
   }
 
-  auto const TimeElapsedSec()
+  float TimeElapsedSec()
   {
-    return d_milli.count()/1000;
+    return d_milli.count()/1000.;
   }
 
-  Float_t operator() ()
+  float operator() ()
   {
-    auto time = Time();
+    float time = Time();
     m_unit = "ms";
 
-    if (time>1000) { time/=1000.; m_unit = "s";}
+    if (time>1000.) { time/=1000.; m_unit = "s";}
     else { return time; }
 
-    if (time>120) { time/=60.; m_unit = "min";  }
+    if (time>120.) { time/=60.; m_unit = "min";  }
     else {  return time; }
 
-    if (time>120) { time/=60.; m_unit = "h"; return time;}
+    if (time>120.) { time/=60.; m_unit = "h"; return time;}
     else { return time; }
   }
 
   std::string unit() {return m_unit;}
-  Float_t Unit()
+  float Unit()
   {
          if (m_unit == "ms") return 1.;
     else if (m_unit ==  "s") return 1000.;
