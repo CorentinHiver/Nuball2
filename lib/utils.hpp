@@ -1,58 +1,7 @@
 #ifndef UTILS_H_CO
 #define UTILS_H_CO
 
-// *********** STD includes ********* //
-#include <any>
-#include <array>
-#include <iomanip>
-#include <iostream>
-#include <fstream>
-#include <map>
-#include <mutex>
-#include <queue>
-#include <sstream>
-#include <stdexcept>
-#include <string>
-#include <thread>
-#include <unordered_map>
-#include <vector>
-// ********** C includes ************ //
-#include <dirent.h>
-#include <stdio.h>
-#include <stdlib.h>
-// ********** ROOT includes ********* //
-#include "TCanvas.h"
-#include "TChain.h"
-#include "TError.h"
-#include "TF1.h"
-#include "TF2.h"
-#include "TFile.h"
-#include "TFitResultPtr.h"
-#include "TFitResult.h"
-#include "TGraph.h"
-#include "TGraphErrors.h"
-#include "TH1F.h"
-#include "TH1D.h"
-#include "TH1S.h"
-#include "TH2.h"
-#include "TH2F.h"
-#include "TH3I.h"
-#include "TKey.h"
-#include "TLeaf.h"
-#include "TLegend.h"
-#include "TMath.h"
-#include "TRandom.h"
-#include "TROOT.h"
-#include "TStopwatch.h"
-#include "TString.h"
-#include "TStyle.h"
-#include "TSystem.h"
-#include "TThread.h"
-// #include "TThreadedObject.h"
-#include "TTree.h"
-#include "TTreeIndex.h"
-// #include "boost/array.hpp"
-
+#include "libCo.hpp"
 #include "Classes/Hit.h"
 #include "Classes/Timer.hpp"
 #ifdef FASTERAC
@@ -63,9 +12,6 @@
 // ------------- //
 //     UNITS     //
 // ------------- //
-
-typedef unsigned short int  ushort;
-typedef unsigned char       uchar;
 
 Float_t _ns = 1000;
 
@@ -140,28 +86,45 @@ public:
   Bool_t setHit(Hit const & hit);
   // Bool_t setHit(Event const & event, int const & index);
 
-  Long64_t pulse_ToF(Hit const & hit, Long64_t const & offset = 0) const
-  {
-    return (Long64_t)((hit.time+offset-last_hit)%period)-offset;
-  }
-
   Long64_t pulse_ToF(ULong64_t const & time, Long64_t const & offset = 0) const
   {
-    return (Long64_t)((time+offset-last_hit)%period)-offset;
+    // Shifts the time in order to be able to get hits before the hit :
+    ULong64_t const shifted_time = time+offset;
+    if (shifted_time>last_hit)
+    {// Normal case : the RF reference timestamp is lower than the shifted timestamps (should also be the case of unshifted timestamp)
+      // dT = (shifted_time-last_hit) corresponds to the time separating the current hit to the reference RF
+      // Therefore, N = dT/period corresponds to the number of periods separating the two hits
+      // In other words, it is the number of pulses between the reference RF and the current hit
+      // Then, period*N is the timestamp of the pulse relative to the current hit
+      // (Remember we are doing integer arithmetic, period*dT/period != dT)
+      // And dT%period is the rest of the integer division, hence the time between the hit and its relative pulse
+      // Finally, one need to substract the applied offset in order to get the correct result :
+      return ( static_cast<Long64_t> ((time+offset-last_hit)%period)-offset );
+    }
+    else
+    {// When the data is not correctly ordered :
+      // In order to get a correct answer, one need to get a positive difference, so to invert the difference : now last_hit-shifted_time>0
+      // But the result is inverted and we obtain really period-timestamp. We get the correct result by doing :
+      // relative_timestamp = period - (period-timestamp)
+      return ( static_cast<Long64_t> (period-(last_hit-time-offset)%period)-offset );
+    }
   }
 
-  Bool_t isPrompt(Hit const & hit, Long64_t const & borneMin, Long64_t const & borneMax);
+  Long64_t pulse_ToF(Hit const & hit, Long64_t const & offset = 0) const
+  {
+    return pulse_ToF(hit.time, offset);
+  }
+
+  Bool_t isPrompt(Hit const & hit, Long64_t const & borneMin, Long64_t const & borneMax)
+  {
+    return (pulse_ToF(hit,-borneMin) < borneMax);
+  }
 
   ULong64_t last_hit = 0;
   ULong64_t period   = 399998;
 
   static UShort_t label;
 };
-
-inline Bool_t RF_Manager::isPrompt(Hit const & hit, Long64_t const & borneMin, Long64_t const & borneMax)
-{
-  return (pulse_ToF(hit,-borneMin) < borneMax);
-}
 
 UShort_t RF_Manager::label = 251;
 
@@ -253,68 +216,6 @@ private:
 //      TEMPLATE FUNCTIONS     //
 //-----------------------------//
 
-//////////////
-//   PRINT  //
-//////////////
-// General print :
-template <class T> void print()
-{
-  std::cout << std::endl;
-}
-
-template <class T> void print(T const & t)
-{
-  std::cout << t << std::endl;
-}
-
-template <class E> void print (std::vector<E> const & t)
-{
-  for (auto const & e : t) print(e);
-}
-
-template <class... T> void print(T const &... t)
-{
-  ((print(t)),...);
-}
-
-template <class T, class... T2> void print(T const & t, T2 const &... t2)
-{
-  std::cout << t << " ";
-  print(t2...);
-}
-
-//Prints containers :
-
-template <class E, class... T> void print (std::vector<E> const & v, T const &... t2)
-{
-  print(v);
-  print(t2...);
-}
-
-template <class K, class V> void print (std::map<K,V> const & m)
-{
-  print();
-  print("{");
-  print();
-  for (auto const & pair : m)
-  {
-    print("key : ");
-    print(pair.first);
-    // print();
-    print("value :");
-    print(pair.second);
-    print();
-  }
-  print("}");
-  print();
-}
-
-template <class K, class V, class... T> void print (std::map<K,V> const & m, T const & ... t2)
-{
-  print(m);
-  print(t2...);
-}
-
 //Prints home made types :
 template <class... T> void print (Detector const & t, T const & ... t2)
 {
@@ -340,7 +241,6 @@ void print(Hit hit)
   if (hit.pileup) std::cout << " pileup";
   std::cout << std::endl;
 }
-
 
 template<typename T>
 using LabelsArray = std::array<T, 1000>;
@@ -650,33 +550,6 @@ void setArrays(size_t const & nb_labels)
 //       CLASSES      //
 //--------------------//
 
-
-class Debug
-{
-public:
-  template <class... T> Debug(T... t) { (*this)(t...); }
-
-  template <class... T> void operator () (T... t)
-  {
-    if (sizeof...(t) == 0)
-    {
-      print("coucou ", i);
-      i++;
-      return;
-    }
-    print(t...);
-    std::cout << std::endl;
-  }
-
-  void operator () (int _i)
-  {
-    std::cout << "coucou " << _i << std::endl;
-    i = _i+1;
-  }
-private:
-  int i = 0;
-};
-
 class pic_fit_result
 {
 public:
@@ -751,243 +624,15 @@ private:
   Bool_t exist = false;
   Bool_t few_counts = false;
 };
+
 using Fits   = std::vector <pic_fit_result>;
 
-
-
-
-//--------------------//
-//      FUNCTIONS     //
-//--------------------//
-
-// General string manipulations :
-std::string firstPart       (const std::string string, const char sep) { return (string.substr(0, string.find_first_of(sep) ));  }
-std::string lastPart        (const std::string string, const char sep) { return (string.substr(   string.find_last_of(sep)+1));  }
-std::string removeFirstPart (const std::string string, const char sep) { return (string.substr(   string.find_first_of(sep) ));  }
-std::string removeLastPart  (const std::string string, const char sep) { return (string.substr(0, string.find_last_of(sep)  ));  }
-std::string removeBlankSpace(std::string str)
-{ //  In a std::string, removes blank spaces
-	int pos = 0;
-	while ( (pos = (int)str.find(" ")) != -1)
-	{
-		str = str.substr(0,pos) + str.substr(pos+1,str.size()-pos-1);
-	}
-	return str;
-}
-std::string rpCommaWDots(std::string str)
-{//  In a std::string, replaces all commas with dots
-	int pos = 0;
-	while ( (pos = (int)str.find(",")) != -1)
-	{
-		str = str.substr(0,pos) + "." + str.substr(pos+1,str.size()-pos-1);
-	}
-	return str;
-}
-
-//Filenames:
-std::string removeExtension (const std::string string) { return (string.substr(0, string.find_last_of(".")  ));  }
-std::string extension       (const std::string string) { return (string.substr(   string.find_last_of(".")+1));  }
-std::string getPath         (const std::string string) { return (string.substr(0, string.find_last_of("/")+1));  }
-std::string removePath      (const std::string string) { return (string.substr(   string.find_last_of("/")+1));  }
-std::string rmPathAndExt    (const std::string string)
-                            {return (string.substr     ( string.find_last_of("/")+1, string.find_last_of(".")-string.find_last_of("/")-1)); }
-//Files and folders:
-bool file_is_empty(std::ifstream& file)                { return file.peek() == std::ifstream::traits_type::eof();}
-
-std::map<std::string, float> size_file_unit =
-{
-  {"o",  1.},
-  {"ko", 1024.},
-  {"Mo", 1048576.},
-  {"Go", 1073741824.},
-  {"B",  1.},
-  {"kB", 1024.},
-  {"MB", 1048576.},
-  {"GB", 1073741824.}
-};
-
-float size_file_conversion(float const & size, std::string const & unit_i, std::string const & unit_o)
-{
-  return size * (size_file_unit[unit_o]/size_file_unit[unit_i]);
-}
-
-float size_file(std::ifstream& file, std::string const & unit = "o")
-{
-  int const init = file.tellg();
-  file.seekg(0, std::ios::end);
-  int const ret = file.tellg();
-  file.seekg(init);// Go back to inital place in the file
-  return ret/size_file_unit[unit];
-}
-
-int size_file(std::string filename, std::string const & unit = "o")
-{
-  std::ifstream f (filename, std::ios::binary);
-  return size_file(f, unit);
-}
-
-bool file_exists(std::string fileName)
-{
-  std::string path = getPath(fileName);
-  std::string name = removePath(fileName);
-  struct dirent *file = nullptr;
-  DIR *dp = nullptr;
-  dp = opendir(path.c_str());
-  if(dp == nullptr) return false;
-  else
-  {
-    while ((file = readdir(dp)))
-    {
-      if (!strcmp(file -> d_name, name.c_str()))
-      {
-        closedir(dp);
-        return true;
-      }
-    }
-  }
-  closedir(dp);
-  return false;
-}
-
-void makePath(std::string & folderName)
-{
-  if (folderName.back() != '/') folderName.push_back('/');
-}
-
-bool folder_exists(std::string folderName)
-{
-  makePath(folderName);
-  DIR *dp = nullptr;
-  dp = opendir(folderName.c_str());
-  bool ret = !(dp == nullptr);
-  closedir(dp);
-  return ret;
-}
-
-bool folder_exists(std::string & folderName, Bool_t const & verbose)
-{
-  makePath(folderName);
-  if (folder_exists(folderName)) return true;
-  if (verbose) std::cout << "Folder " << folderName << " not found..." << std::endl;
-  return false;
-}
-
-void create_folder_if_none(std::string & folderName)
-{
-  makePath(folderName);
-  if (folderName=="")
-  {
-    print("No folder asked for !");
-    return;
-  }
-  if(!folder_exists(folderName))
-  {
-    print("Creating folder", folderName);
-    gSystem -> Exec(("mkdir "+folderName).c_str());
-  }
-}
-
-int nb_files_in_folder(std::string & folderName)
-{
-  int ret = -1;
-  makePath(folderName);
-  DIR *dp = nullptr;
-  dp = opendir(folderName.c_str());
-  if(dp == nullptr) ret = -1;
-  else
-  {
-    int i = 0;
-    while ((readdir(dp))) i++;
-    ret = i;
-  }
-  closedir(dp);
-  return ret;
-}
-
-std::string get_filename_at(std::string & folderName, int pos)
-{
-  std::string ret;
-  makePath(folderName);
-  struct dirent *file = nullptr;
-  DIR *dp = nullptr;
-  dp = opendir(folderName.c_str());
-  if(dp == nullptr) ret = "";
-  else
-  {
-    int i = 0;
-    while ((file = readdir(dp)) && i<pos) i++;
-  }
-  ret = file -> d_name;
-  closedir(dp);
-  return ret;
-}
-
-int check_new_file(std::string folderName, std::string & lastFile)
-{
-  int ret = -1;
-  makePath(folderName);
-  DIR *dp = nullptr;
-  dp = opendir(folderName.c_str());
-  struct dirent *file = nullptr;
-  if(dp == nullptr) ret = -1;
-  else
-  {
-    int i = 0;
-    while ((file = readdir(dp)))
-    {
-      lastFile = file -> d_name;
-      i++;
-    }
-    ret = i;
-  }
-  closedir(dp);
-  return ret;
-}
-
-std::vector<std::string> listFileReader(std::string const & filename)
-{
-  std::vector<std::string> list;
-
-  std::ifstream listfile(filename,std::ios::in);
-  if(!listfile.good())
-  {
-    print("List file", filename, "not found !");
-  }
-  else
-  {
-    std::string line;
-    while(getline(listfile,line))
-    {
-      list.push_back(line);
-    }
-  }
-  return list;
-}
-
-template <class N, class D> std::string procent(N n, D d)
-{
-  return (std::to_string(100*n/d)+"%");
-}
-
-template <typename T>
-bool push_back_unique(std::vector<T> & vector, T const & t)
-{
-  if (std::find(std::begin(vector), std::end(vector), t) == std::end(vector))
-  {
-    vector.push_back(t);
-    return true;
-  }
-  else
-  {
-    return false;
-  }
-}
 
 //--------------------//
 // NEARLINE FUNCTIONS //
 //--------------------//
 
-void alignator(TTree *tree, Int_t *NewIndex)
+void alignator(TTree * tree, Int_t *NewIndex)
 {
   Int_t const NHits = tree -> GetEntries();
   tree -> SetBranchStatus("*", false);// Disables all the branches readability
@@ -1296,53 +941,6 @@ std::istringstream & operator >> (std::istringstream & is, std::vector<T>& v)
   v.push_back(t);
   return is;
 }
-
-template<class T, std::size_t __size__ = 0>
-class StaticVector
-{
-public:
-  StaticVector() : m_static_size(__size__) {m_data = new T[m_static_size];}
-  StaticVector(T const & value);
-  ~StaticVector(){delete[] m_data;}
-
-  void push_back(T const & e) {m_data[m_dynamic_size++] = e;}
-  void push_back_safe(T const & e) {if (m_dynamic_size++ < m_static_size) m_data[m_dynamic_size] = e;}
-  void push_back_unique(T const & e);
-  void resize(std::size_t const & size = 0) {m_dynamic_size = size;}
-  void static_resize(std::size_t const & size = 0)
-  {
-    delete[] m_data;
-    m_dynamic_size = 0;
-    m_static_size = size;
-    m_data = new T[m_static_size];
-   }
-
-  virtual T* begin(){return m_data;}
-  virtual T* end()  {return m_data+m_dynamic_size;}
-
-  auto const & size() const {return m_dynamic_size;}
-  T & operator[] (std::size_t const & i) const {return m_data[i];}
-  T* data() {return m_data;}
-
-private:
-  T *m_data;
-  std::size_t m_dynamic_size = 0;
-  std::size_t m_static_size = 0;
-};
-
-template<class T, std::size_t __size__>
-void StaticVector<T,__size__>::push_back_unique(T const & t)
-{
-  if (std::find(begin(), end(), t) == end())  push_back(t);
-}
-
-template<class T, std::size_t __size__>
-StaticVector<T,__size__>::StaticVector(T const & value) : m_static_size(__size__)
-{
-  m_data = new T[m_static_size];
-  for (std::size_t i = 0; i<m_static_size; i++) m_data[i] = value;
-}
-
 
 #ifdef PARIS
 std::map<std::string,int> paris_vmaxchan =

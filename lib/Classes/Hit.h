@@ -18,8 +18,9 @@ std::vector<std::string> type_str =
 using Detector_vec = std::vector<int>;
 
 
-struct Hit
+class Hit
 {
+public:
   Label   label  = 0; //Hit label
   Float_t nrj    = 0; //energy
   Float_t nrj2   = 0; //used if QDC2
@@ -39,4 +40,32 @@ struct Hit
 
   Float_t gate_ratio(){if (nrj2 != 0) return ((Float_t)(nrj2-nrj)/nrj2); else return 0.f;}
 };
+
+class Hit_ptr
+{
+public:
+
+  Label   * label  = nullptr; //Hit label
+  Float_t * nrj    = nullptr; //energy
+  Float_t * nrj2   = nullptr; //used if QDC2
+  NRJ     * nrjcal = nullptr; // Calibrated energy
+  Time    * time   = nullptr; //time
+  float   * time2  = nullptr; //time
+  bool    * pileup = nullptr; //pile-up
+
+  void reset()
+  {
+    label  = nullptr;
+    nrj    = nullptr;
+    nrj2   = nullptr;
+    nrjcal = nullptr;
+    time   = nullptr;
+    time2  = nullptr;
+    pileup = nullptr;
+  }
+
+  Float_t gate_ratio(){if ((*nrj2) != 0) return ((Float_t)((*nrj2)-(*nrj))/(*nrj2)); else return 0.f;}
+
+};
+
 #endif //HIT_H

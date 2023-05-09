@@ -110,12 +110,14 @@ void ParisCluster::Analyse()
   {
     auto const & index_i = Hits[loop_i];
     auto const & module_i = modules[index_i];
+
     for (std::size_t loop_j = loop_i+1; loop_j<Hits.size(); loop_j++)
     {
       auto const & index_j = Hits[loop_j];
 
       auto const & module_j = modules[index_j];
       auto const & distance = distances[index_i][index_j];
+
       if (abs(module_j.time-module_i.time) > 50.) continue; // Timing : if they are not simultaneous then they don't belong to the same event
       if (distance<1.3)
       {// If neighbors :

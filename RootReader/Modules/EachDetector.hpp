@@ -198,7 +198,7 @@ void EachDetector::Fill(Event const & event)
 
     Float_t time = 0;
     if (event.readtime()) time = m_rf->pulse_ToF(event.times[loop],50000ull)/_ns;
-    else if (event.readTime()) time = event.Times[loop];
+    else if (event.readTime()) time = event.time2s[loop];
     auto nrj = event.nrjs[loop];
     auto nrj2 = event.nrj2s[loop];
 

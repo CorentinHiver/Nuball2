@@ -34,6 +34,7 @@ private:
 
   Gate Ge_prompt_gate;
   Gate Ge_delayed_gate;
+  Gate Ge_reject_gate;
   Gate LaBr3_prompt_gate;
   Gate LaBr3_delayed_gate;
 
@@ -42,8 +43,8 @@ private:
   MTTHist<TH1F> Ge_spectra_delayed;
   MTTHist<TH2F> GePrompt_VS_GePrompt;
   MTTHist<TH2F> GeDelayed_VS_GeDelayed;
+  MTTHist<TH2F> GeDelayed_VS_GeDelayed_time;
   MTTHist<TH2F> GeDelayed_VS_GePrompt;
-  MTTHist<TH2F> GeDelayed_VS_SumGeDelayed;
   MTTHist<TH2F> Ge_Time_VS_Spectra;
   MTTHist<TH2F> raw_Ge_Time_VS_Spectra;
 
@@ -52,6 +53,8 @@ private:
   MTTHist<TH2F> GeDelayed_VS_DSSD;
   MTTHist<TH2F> DSSD_TW;
   MTTHist<TH2F> Ge_VS_DSSD_Time;
+
+  // MTTHist<TH2F> mult_VS_Time; In order to see the evolution of Multiplicity over time. To do it, take a moving 50ns time window to group events
 };
 
 bool AnalyseIsomer::launch(Parameters & p)
@@ -110,9 +113,9 @@ void AnalyseIsomer::InitializeManip()
       4096,0,4096, 4096,0,4096);
   GeDelayed_VS_GeDelayed.reset("Ge_bidim_delayed","Ge bidim delayed",
       4096,0,4096, 4096,0,4096);
+  GeDelayed_VS_GeDelayed_time.reset("Ge_bidim_delayed_time","Ge bidim delayed time",
+      500,-100,400, 500,-100,400);
   GeDelayed_VS_GePrompt.reset("Ge_delayed_VS_prompt","Ge delayed VS prompt",
-      4096,0,4096, 4096,0,4096);
-  GeDelayed_VS_SumGeDelayed.reset("Ge_delayed_VS_sum_Ge_delayed","Ge delayed VS sum Ge delayed",
       4096,0,4096, 4096,0,4096);
   Ge_VS_DSSD.reset("Ge VS DSSD","Ge VS DSSD",
       400,0,20000, 14000,0,7000);
@@ -122,20 +125,24 @@ void AnalyseIsomer::InitializeManip()
       400,0,20000, 14000,0,7000);
   DSSD_TW.reset("DSSD E VS Time","DSSD E VS Time",
       500,-100,400, 400,0,20000);
-  Ge_VS_DSSD_Time.reset("DSSD VS Ge Time","DSSD VS Ge Time",
+  Ge_VS_DSSD_Time.reset("Ge VS DSSD Time","Ge VS DSSD Time;DSSD time [ns];Ge time [ns]",
       500,-100,400, 500,-100,400);
+
+  // Set analysis parameters :
+  Sorted_Event::setDSSDVeto(-10, 50, 12000);
 }
 
 void AnalyseIsomer::FillRaw(Event const & event)
 {
   for (size_t i = 0; i<event.size(); i++)
   {
-    if (isGe[event.labels[i]]) raw_Ge_Time_VS_Spectra.Fill(event.nrjs[i],event.Times[i]);
+    if (isGe[event.labels[i]]) raw_Ge_Time_VS_Spectra.Fill(event.nrjs[i],event.time2s[i]);
   }
 }
 
 void AnalyseIsomer::FillSorted(Sorted_Event const & event_s, Event const & event)
 {
+  if (event_s.dssd_veto) return;
   for (auto const & dssd : event_s.DSSD_hits)
   {
     auto const & dssd_nrj = event.nrjs[dssd];
@@ -146,11 +153,12 @@ void AnalyseIsomer::FillSorted(Sorted_Event const & event_s, Event const & event
   {
     auto const & clover_i = event_s.clover_hits[loop_i];
 
-    auto const & nrj_i = event_s.nrj_clover[clover_i];
+    auto const & nrj_i  = event_s.nrj_clover[clover_i];
     auto const & Time_i = event_s.time_clover[clover_i];
-    auto const prompt_i =  Ge_prompt_gate.isIn(Time_i);
+    auto const prompt_i  = Ge_prompt_gate.isIn(Time_i);
     auto const delayed_i = Ge_delayed_gate.isIn(Time_i);
 
+    // Compton suppression and energy threshold :
     if (event_s.BGO[clover_i] || nrj_i<5) continue;
 
     Ge_Time_VS_Spectra.Fill(nrj_i, Time_i);
@@ -162,13 +170,28 @@ void AnalyseIsomer::FillSorted(Sorted_Event const & event_s, Event const & event
     {
       auto const & clover_j = event_s.clover_hits[loop_j];
 
-      auto const & nrj_j = event_s.nrj_clover[clover_j];
+      auto const & nrj_j  = event_s.nrj_clover[clover_j];
       auto const & Time_j = event_s.time_clover[clover_j];
+      auto const prompt_j  = Ge_prompt_gate.isIn(Time_j);
       auto const delayed_j = Ge_delayed_gate.isIn(Time_j);
-      auto const prompt_j =  Ge_prompt_gate.isIn(Time_j);
 
+      // Compton suppression and energy threshold :
       if (event_s.BGO[clover_j] || nrj_j<5) continue;
 
+      // DSSD analysis :
+      for (auto const & dssd : event_s.DSSD_hits)
+      {
+        auto const & dssd_nrj = event.nrjs[dssd];
+        auto const & dssd_Time = event_s.times[dssd];
+        if (event_s.DSSDRingMult == event_s.DSSDSectorMult)
+        {
+          Ge_VS_DSSD.Fill(dssd_nrj,nrj_i);
+          if (prompt_i) GePrompt_VS_DSSD.Fill(dssd_nrj,nrj_i);
+          if (delayed_i)GeDelayed_VS_DSSD.Fill(dssd_nrj,nrj_i);
+          Ge_VS_DSSD_Time.Fill(dssd_Time, Time_i);
+        }
+      }
+      // Germanium analysis :
       if (prompt_i)
       {
         if (prompt_j)
@@ -183,29 +206,20 @@ void AnalyseIsomer::FillSorted(Sorted_Event const & event_s, Event const & event
       }
       else if (delayed_i)
       {
-        if (delayed_j && abs(Time_i-Time_j)<60)
+        if (delayed_j)
         {
-          GeDelayed_VS_GeDelayed . Fill(nrj_i, nrj_j);
-          GeDelayed_VS_GeDelayed . Fill(nrj_j, nrj_i);
-          GeDelayed_VS_SumGeDelayed.Fill(nrj_i, nrj_i+nrj_j);
-          GeDelayed_VS_SumGeDelayed.Fill(nrj_j, nrj_i+nrj_j);
+          if (abs(Time_i-Time_j)<50/2 && (Time_i<190 || Time_i>220) && (Time_j<190 || Time_j>220))
+          {
+            GeDelayed_VS_GeDelayed_time . Fill(Time_i, Time_j);
+            GeDelayed_VS_GeDelayed_time . Fill(Time_j, Time_i);
+            GeDelayed_VS_GeDelayed . Fill(nrj_i, nrj_j);
+            GeDelayed_VS_GeDelayed . Fill(nrj_j, nrj_i);
+          }
         }
         else if (prompt_j)
         {
           GeDelayed_VS_GePrompt.Fill(nrj_j,nrj_i);
         }
-      }
-    }
-    for (auto const & dssd : event_s.DSSD_hits)
-    {
-      auto const & dssd_nrj = event.nrjs[dssd];
-      auto const & dssd_Time = event_s.times[dssd];
-      if (event_s.DSSDRingMult == event_s.DSSDSectorMult)
-      {
-        Ge_VS_DSSD.Fill(dssd_nrj,nrj_i);
-        if (prompt_i) GePrompt_VS_DSSD.Fill(dssd_nrj,nrj_i);
-        if (delayed_i)GeDelayed_VS_DSSD.Fill(dssd_nrj,nrj_i);
-        Ge_VS_DSSD_Time.Fill(dssd_Time, Time_i);
       }
     }
   }
@@ -215,8 +229,8 @@ void AnalyseIsomer::Write()
 {
   std::unique_ptr<TFile> oufile(TFile::Open((outDir+outRoot).c_str(),"recreate"));
   print("Writting histograms ...");
-  // RWMat RW_prompt_prompt(GePrompt_VS_GePrompt); RW_prompt_prompt.Write();
-  // RWMat RW_del_del(GeDelayed_VS_GeDelayed); RW_del_del.Write();
+  RWMat RW_prompt_prompt(GePrompt_VS_GePrompt); RW_prompt_prompt.Write();
+  RWMat RW_del_del(GeDelayed_VS_GeDelayed); RW_del_del.Write();
   Ge_spectra.Write();
   Ge_spectra_delayed.Write();
   Ge_spectra_prompt.Write();
@@ -225,8 +239,8 @@ void AnalyseIsomer::Write()
   raw_Ge_Time_VS_Spectra.Write();
   GePrompt_VS_GePrompt.Write();
   GeDelayed_VS_GeDelayed.Write();
+  GeDelayed_VS_GeDelayed_time.Write();
   GeDelayed_VS_GePrompt.Write();
-  GeDelayed_VS_SumGeDelayed.Write();
   Ge_VS_DSSD.Write();
   GePrompt_VS_DSSD.Write();
   GeDelayed_VS_DSSD.Write();
@@ -267,7 +281,7 @@ bool AnalyseIsomer::setParameters(std::vector<std::string> const & parameters)
           }
           else {print("Parameter ", temp, "unkown for prompt gate...");}
         }
-        if (temp == "delayed")
+        else if (temp == "delayed")
         {
           is >> temp;
           if (temp == "Ge")
@@ -281,6 +295,16 @@ bool AnalyseIsomer::setParameters(std::vector<std::string> const & parameters)
             print("Delayed LaBr3 gate : ", LaBr3_delayed_gate.start, LaBr3_delayed_gate.stop);
           }
           else {print("Parameter ", temp, "unkown for prompt gate...");return false;}
+        }
+        else if (temp == "reject")
+        {
+          is >> temp;
+          if (temp == "Ge")
+          {
+            Ge_reject_gate.use();
+            is >> Ge_reject_gate.start >> Ge_reject_gate.stop;
+            print("Rejected Ge gate : ", Ge_reject_gate.start, Ge_reject_gate.stop);
+          }
         }
       }
       else

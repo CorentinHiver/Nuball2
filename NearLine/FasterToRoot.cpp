@@ -2,12 +2,15 @@
 #define FASTERAC
 // #define N_SI_85
 #define N_SI_129
+// #define USE_RF 50
 // #define N_SI_120
 
 //Define the trigger here :
-// #define D1_TRIG
 // #define NO_TRIG
-// #define M2G1_TRIG
+#define D1_TRIG
+#define G1M2_TRIG
+
+// #define PREPROMPT // NOT PROPERLY WORKING NOW
 
 //Include the base library
 #include "NearLine-lib/NearLine.hpp"
@@ -26,7 +29,7 @@ int main()
 
 #elif defined (N_SI_129)
   std::string datadir = path+"N-SI-129/";
-  std::string outdir  = path+"N-SI-129-root/M2G1_TRIG/";
+  std::string outdir  = path+"N-SI-129-root/M2G1_D1_TRIG/";
 
 #elif defined (N_SI_85)
   std::string datadir = path+"N-SI-85/";
@@ -65,10 +68,10 @@ int main()
         "mult: 2 3 outRoot: "+dT_root+" outData: "+dT_file)) return 0;
 
     #elif defined (N_SI_129)
-      // app -> setConfig("USE_RF: 50");
+      app -> setConfig("USE_RF: 50");
       if (!app -> setConfig("ID: ID/index_129.dat")) return 0;
       if (!app -> setConfig("TIMESHIFT: time_reference: R1A9_FATIMA_LaBr3 timewindow: 1500 "
-        "mult: 2 3 outRoot: "+dT_root+" outData: "+dT_file)) return 0;
+        "mult: 3 5 outRoot: "+dT_root+" outData: "+dT_file+" verbose")) return 0;
 
     #elif defined (N_SI_85)
       if (!app -> setConfig("ID: ID/index_129.dat")) return 0;
@@ -77,7 +80,7 @@ int main()
     #endif
 
       if (!app -> setConfig("OUTDIR: "+dT_folder)) return 0;
-      if (!app -> setConfig("DATADIR: "+datadir+runs[i])) return 0;
+      if (!app -> setConfig("DATADIR: "+datadir+runs[i]+" nb: 30")) return 0;
 
       if (!app -> launch()) {print ("CANT RUN !"); return 0;}
       delete app;
@@ -86,8 +89,8 @@ int main()
 
     //Faster2root :
     app = new NearLine;
-    // app -> setConfig("NB_THREADS: 5");
-    app -> setConfig("NB_THREADS: 4");
+    app -> setConfig("NB_THREADS: 10");
+    // app -> setConfig("NB_THREADS: 30");
 
   #if defined (N_SI_120)
     if (!app -> setConfig("ID: ID/index_120.dat")) return 0;
@@ -98,7 +101,7 @@ int main()
 
   #elif defined (N_SI_129)
     if (!app -> setConfig("ID: ID/index_129.dat")) return 0;
-    app -> setConfig("USE_RF: 60");
+    // app -> setConfig("USE_RF: 50");
     if (!app -> setConfig("CALIBRATION: Calibration/calib_129.dat")) return 0;
 
   #elif defined (N_SI_85)
@@ -107,7 +110,7 @@ int main()
   #endif
 
     if (!app -> setConfig("TIMESHIFT_DATA: "+dT_folder+"Timeshifts/"+dT_file)) return 0;
-    if (!app -> setConfig("DATADIR: "+datadir+runs[i]+" nb: 8")) return 0;
+    if (!app -> setConfig("DATADIR: "+datadir+runs[i])) return 0;
 
 
     if (!app -> setConfig("FASTER2ROOT: outDir: "+outdir+rmPathAndExt(runs[i]))) return 0;

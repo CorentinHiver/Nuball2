@@ -8,13 +8,15 @@
 // #define M2G1_TRIG
 // #define NO_TRIG
 #define DSSD_TRIG
+// #define DSSD_M2G1_TRIG
+// #define USE_RF 50
 
 #if defined (M2G1_TRIG)
 #define COUNT_EVENT
 #endif //COUNT_EVENT
 
-// #define CORENTIN
-#define DATA2
+#define CORENTIN
+// #define DATA2
 
 #include "../lib/utils.hpp"
 #include "../lib/Classes/Event.hpp"
@@ -25,9 +27,7 @@
 
 Labels g_labelToName;
 
-#include "Classes/Parameters.hpp"
 #include "Classes/QuickParameters.hpp"
-#include "Modules/EachDetector.hpp"
 
 void convertRun(quick_parameters & param);
 // void run_thread(quick_parameters & param);
@@ -38,13 +38,8 @@ int main(int argc, char ** argv)
 {
   quick_parameters qp;
 
-  std::vector<std::thread> threads;
-
        if (argc == 2 && strcmp(argv[1],"-m")==0) qp.nb_threads = 1;
   else if (argc == 3 && strcmp(argv[1],"-m")==0) qp.nb_threads = atoi(argv[2]);
-
-  // Parameters p;
-  // p.readParameters();
 
   // Initialize arrays
   g_labelToName = arrayID(qp.fileID);
@@ -56,7 +51,6 @@ int main(int argc, char ** argv)
 
   checkThreadsNb(qp.nb_threads, qp.runs.size());
 
-
   if(qp.nb_threads == 1)
   {
     convertRun(qp);
@@ -67,7 +61,7 @@ int main(int argc, char ** argv)
     MTObject::Initialize(qp.nb_threads);
     MTObject::parallelise_function(convertRun,qp);
   }
-
+  print("Conversion done");
   return 1;
 }
 
@@ -77,108 +71,178 @@ void convertRun(quick_parameters & param)
   std::string run = "";
   while(param.runs.getNext(run))
   {
-    Timer readTimer;
     MTObject::shared_mutex.lock();
     print("Converting",run);
     MTObject::shared_mutex.unlock();
     std::string pathRun = param.dataPath+run;
     std::string rootFiles = pathRun+"/*.root";
-    TChain chain ("Nuball");
-    chain.Add(rootFiles.c_str());
 
-    Event event(&chain,"mltnN");
+    print("starting");
 
-    int nb_evts = chain.GetEntries();
-    int evt = 0;
-    int file_nb = 0;
+    auto chain = new TChain("Nuball");
+    chain->Add(rootFiles.c_str());
+    Event event(chain,"mltnN");
+    // auto nb = chain->GetEntries();
 
-    #ifdef COUNT_EVENT
-    Counters counter;
-    #endif //COUNT_EVENT
+    print("Chain loaded");
 
+    Timer readTimer;
+
+    Long64_t evt = 0;
+
+  #ifdef USE_RF
     RF_Manager rf;
-    chain.GetEntry(0);
-    for (size_t i = 0; i<event.size(); i++) if (event.labels[i] == 251) rf.last_hit = event.times[i];
-
-    while(evt<nb_evts)
-    {// Write in files of more or less the same size
-      Timer timer;
-      std::unique_ptr<TTree> outTree (new TTree("Nuball", "Second conversion"));
-      auto const & RF_VS_LaBr3 = new TH2F(("RF_VS_LaBr3"+run+std::to_string(file_nb)).c_str(),("RF_VS_LaBr3"+run+std::to_string(file_nb)).c_str(), 1000,0,5000, 500,-100,400);
-      auto const & RF_VS_Ge = new TH2F(("RF_VS_Ge"+run+std::to_string(file_nb)).c_str(),("RF_VS_Ge"+run+std::to_string(file_nb)).c_str(), 1000,0,5000, 500,-100,400);
-
-      event.writeTo(outTree.get(),"lnNTRP");
-
-      while(evt<nb_evts)
+    bool stop = false;
+    while(!stop)
+    {
+      chain->GetEntry(evt++);
+      for (size_t i = 0; i<event.size(); i++)
       {
-        if (evt%100000 == 0 && outTree->GetEntries() > param.nb_max_evts_in_file) break;
-        chain.GetEntry(evt++);
-        bool trig = false;
+        if (event.labels[i] == 251)
+        {
+          rf.last_hit = event.times[i];
+          rf.period = event.nrjs[i];
+          stop = true;
+          break;
+        }
+      }
+    }
+    print("RF extracted");
+  #endif //USE_RF
 
+
+    // Loop over all the data :
+  #ifndef NO_TRIG
+    Counters counter;
+  #endif //NO_TRIG
+    evt = 1;
+    int file_nb = 0;
+    Timer totalTime;
+
+    // Counters :
+    Long64_t converted_counter = 0;
+    Long64_t DSSD_seul = 0;
+
+    while(evt<chain->GetEntriesFast())
+    {
+      Timer timer;
+
+      auto outTree  = std::make_unique<TTree>("Nuball", "Second conversion");
+
+      auto RF_VS_LaBr3 = std::make_unique<TH2F>(("RF_VS_LaBr3"+run+std::to_string(file_nb)).c_str(),("RF_VS_LaBr3"+run+std::to_string(file_nb)).c_str(), 1000,0,5000, 500,-100,400);
+      auto RF_VS_DSSD = std::make_unique<TH2F>(("RF_VS_DSSD"+run+std::to_string(file_nb)).c_str(),("RF_VS_DSSD"+run+std::to_string(file_nb)).c_str(), 1000,0,5000, 500,-100,400);
+      auto RF_VS_Ge = std::make_unique<TH2F>(("RF_VS_Ge"+run+std::to_string(file_nb)).c_str(),("RF_VS_Ge"+run+std::to_string(file_nb)).c_str(), 1000,0,5000, 500,-100,400);
+      auto clover_mult = std::make_unique<TH1F>(("clover_mult"+run+std::to_string(file_nb)).c_str(),("clover_mult"+run+std::to_string(file_nb)).c_str(), 20,0,20);
+      auto paris_mult = std::make_unique<TH1F>(("paris_mult"+run+std::to_string(file_nb)).c_str(),("paris_mult"+run+std::to_string(file_nb)).c_str(), 20,0,20);
+      auto dssd_mult = std::make_unique<TH1F>(("dssd_mult"+run+std::to_string(file_nb)).c_str(),("dssd_mult"+run+std::to_string(file_nb)).c_str(), 20,0,20);
+
+    #ifdef USE_RF
+      event.writeTo(outTree.get(),"lnNTRP");
+    #else // NO RF
+      event.writeTo(outTree.get(),"lnNT");
+    #endif //USE_RF
+
+      // Loop over the data until the output tree reaches the maximum size, or the end of data is reached :
+      while(evt<chain->GetEntriesFast())
+      {
+        // Write in files of more or less the same size :
+             if (evt%(int)(1.E+5) == 0 && outTree->GetEntries() > param.nb_max_evts_in_file) break;
+
+        // Read event :
+        chain->GetEntry(evt++);
+
+        #ifndef USE_RF
+          auto const & time_ref = event.times[0];
+        #endif //NO USE_RF
+
+        // Treat event :
         for (int i = 0; i<event.mult; i++)
         {
           auto const & label = event.labels[i];
-          auto const & time = event.times[i];
+          auto const & time  = event.times [i];
 
-        #ifdef DSSD_TRIG
-          if (isDSSD[label])
-          {
-            trig = true;
-          }
-        #endif //DSSD_TRIG
+          counter.set_hit(event, i);
 
-          if (rf.period!=0) event.Times[i] = rf.pulse_ToF(time,param.RF_shift)/_ns;
+        #ifdef USE_RF
+
+          if (rf.period!=0) event.time2s[i] = rf.pulse_ToF(time,param.RF_shift)/_ns;
           if (label == 251)
           {
             event.RFperiod = (time+rand.Uniform(0,1)-rf.last_hit)/1000.;
             rf.period = static_cast<Time>(event.RFperiod);
             rf.last_hit = time+rand.Uniform(0,1);
           }
-          else if (label == 252)
+        #else
+          event.time2s[i] = (time - time_ref)/_ns;
+        #endif //USE_RF
+
+          if (label == 252)
           {
-            RF_VS_LaBr3->Fill(event.nrjs[i], event.Times[i]);
+            RF_VS_LaBr3->Fill(event.nrjs[i], event.time2s[i]);
           }
           else if (isGe[label])
           {
-            RF_VS_Ge->Fill(event.nrjs[i], event.Times[i]);
+            RF_VS_Ge->Fill(event.nrjs[i], event.time2s[i]);
+          }
+          else if (isDSSD[label])
+          {
+            RF_VS_DSSD->Fill(event.nrjs[i], event.time2s[i]);
           }
         }
 
-      #ifdef NO_TRIG
-        trig = true;
-      #endif //NO_TRIGa
-
-      #ifdef COUNT_EVENT
-        counter.count_event(event);
-      #endif //COUNT_EVENT
-
       #ifdef M2G1_TRIG
-        if (counter.Modules>1 && counter.rawGe>0) trig = true;
+        counter.clover_analyse();
+        bool trig = (counter.Modules>1 && counter.rawGe>0);
       #endif //M2G1_TRIG
+
+      #ifdef DSSD_TRIG
+        bool trig = (counter.DSSDMult>0);
+        if (counter.DSSDMult == counter.mult) DSSD_seul++;
+      #endif //DSSD_TRIG
+
+      #ifdef DSSD_M2G1_TRIG
+        bool trig = (counter.DSSDMult>0 && counter.Modules>1 && counter.rawGe>0);
+      #endif //DSSD_TRIG
 
         if (trig)
         {
+          clover_mult->Fill(counter.list_clovers.size());
+          paris_mult ->Fill(counter.ParisMult);
+          dssd_mult  ->Fill(counter.DSSDMult);
+
+        #ifdef USE_RF
           event.RFtime = rf.last_hit;
+        #endif //USE_RF
+
           outTree->Fill();
         }
+        counter.clear();
       }// End events loop
 
       file_nb++;
       std::string outPath = param.outDir+run+"/";
       create_folder_if_none(outPath);
       std::string outName = outPath+run+"_"+std::to_string(file_nb)+".root";
+      auto const sizeOut = outTree->GetEntries();
 
       std::unique_ptr<TFile> file (TFile::Open(outName.c_str(),"recreate"));
-      file    -> cd   ();
+      file -> cd();
+
       RF_VS_LaBr3 -> Write();
+      RF_VS_DSSD -> Write();
       RF_VS_Ge -> Write();
+      clover_mult -> Write();
+      paris_mult -> Write();
+      dssd_mult -> Write();
+
       outTree -> Write();
       file    -> Write();
       file    -> Close();
-      print(outName,"written, ",readTimer.TimeSec()," s");
+      print(outName,"written, ",sizeOut*1.E-6, "Mevts in", timer.TimeSec()," s");
+      converted_counter += sizeOut;
     }// End files loop
-    print(run, ":", nb_evts*1.E-6, "Mevts converted at a rate of", 1.E-6*nb_evts/readTimer.TimeSec(), "Mevts/s");
-    chain.Reset();
+    print(run, ":", evt*1.E-6, "->", converted_counter*1.E-6, "Mevts (",100*converted_counter/evt,"%) converted at a rate of", 1.E-3*evt/readTimer.TimeSec(), "kEvts/s");
+    chain->Reset();
   }// End runs loop
 }
 
@@ -198,7 +262,7 @@ void convertRun(quick_parameters & param)
     // auto next_RF = evt;
     // while(seek)
     // {
-    //   chain.GetEntry(next_RF++);
+    //   chain->GetEntry(next_RF++);
     //   for (size_t i = 0; i<event.size(); i++)
     //   {
     //     if (event.labels[i] == 251)
@@ -210,6 +274,14 @@ void convertRun(quick_parameters & param)
     // }
 
     // rf.last_hit = time+rand.Uniform(0,1);
+// }
+
+
+// else if (evt%(int)(1.E+7) == 0)
+// {
+// auto const avancement = 100.*evt/nb_evts;
+// auto const rate = avancement/totalTime.TimeSec();
+// print(run, ":", (int)(avancement),"% -", (int)rate, "%/s");
 // }
 
 // ----------------------------------------------- //

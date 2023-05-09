@@ -30,9 +30,6 @@ public:
   // Printers :
   void printEvent();
 
-  // Public members :
-  Int_t         n_evt = 0;
-
 private:
   // Attributes :
   Time m_time_window = 500000ull; // 500 000 ps by default (ull = unsigned long long)
@@ -40,13 +37,13 @@ private:
 
 Bool_t CoincBuilder2::build(Hit const & hit)
 {//return true when a coincidence is ready to be processed
-
-  if (m_status == 2) this->reset();
-
+  if(m_event->mult>255) reset();
   if (!coincON)
-  {// No coincidence going on. If there is, go ...
+  {// If no coincidence has been detected in previous iteration :
     if (coincidence(hit))
-    {// Bingo, coincidence detected ! Next call, go ...
+    {// Case 1 :
+      // The previous and current hit are in the same event.
+      // In next call, we'll check if the next hits are in the event or not (cases 3 or 4)
       m_event -> clear();
       m_event -> push_back(m_last_hit);
       m_event -> push_back(hit);
@@ -54,7 +51,10 @@ Bool_t CoincBuilder2::build(Hit const & hit)
       m_status = 1; // Now, the event is being filled
     }
     else
-    {// No coincidence detected
+    {// Case 2 :
+      // The last and current hits aren't in the same event.
+      // This means either the last hit is filled with an empty hit if last hit closed an event,
+      // or a single hit : a lonely hit alone in the time window around its RF.
       m_single_hit = m_last_hit; // If last hit is not in time window of last hit, then
       m_last_hit = hit; // Building next event based on the last hit
       m_status = 0; // The current event is empty !

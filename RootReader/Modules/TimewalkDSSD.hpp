@@ -168,7 +168,7 @@ void TimewalkDSSD::FillSorted(Sorted_Event const & event_s, Event const & event)
 
     auto const & label = event.labels[dssd];
     auto const & nrj   = event.nrjs  [dssd];
-                 Time  = event.Times [dssd];
+                 Time  = event.time2s [dssd];
 
     if (m_correct) Time -= m_Timewalks_DSSD.get(label-800, nrj);
 
@@ -185,7 +185,7 @@ void TimewalkDSSD::FillSorted(Sorted_Event const & event_s, Event const & event)
 
     auto const & label = event.labels[dssd];
     auto const & nrj   = event.nrjs  [dssd];
-                 Time  = event.Times [dssd];
+                 Time  = event.time2s [dssd];
     if (m_correct) Time -= m_Timewalks_DSSD.get(label-800, nrj);
 
     if (prompt)

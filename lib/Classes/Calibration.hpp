@@ -7,8 +7,8 @@ public:
 
   Bool_t readFile(std::string const & calibFileName, int const & label_max);
 
-  Bool_t calibrate(Hit & hit);
-  Float_t calibrate(Float_t const & nrj, UShort_t const & order, Bool_t & good);
+  void    calibrate(Hit & hit);
+  Float_t calibrate(Float_t const & nrj, UShort_t const & order);
 
   Bool_t const & isFilled() const {return m_isFilled;}
 
@@ -64,66 +64,51 @@ void Calibration::setCalibrationTables()
 }
 //!DEV
 
-inline Float_t Calibration::calibrate(Float_t const & nrj, Label const & label, Bool_t & good)
+inline Float_t Calibration::calibrate(Float_t const & nrj, Label const & label)
 {
   auto nrj_r = nrj+gRandom->Uniform(0,1);
   switch(m_order[label])
   {
     case 0:
-      good = true;
       return nrj_r;
 
     case 1:
-      good = true;
       return m_intercept[label]
              + m_slope[label] * nrj_r;
 
     case 2:
-      good = true;
       return m_intercept[label]
              + m_slope[label] * nrj_r
              + m_binom[label] * nrj_r * nrj_r;
 
     case 3:
-      good = true;
       return m_intercept[label]
              + m_slope [label] * nrj_r
              + m_binom [label] * nrj_r * nrj_r
              + m_trinom[label] * nrj_r * nrj_r * nrj_r;
 
     default:
-      good = false;
-      return 0;
+      return nrj;
   }
 }
 
-inline Bool_t Calibration::calibrate(Hit & hit)
+inline void Calibration::calibrate(Hit & hit)
 {
-  const Label& label = hit.label; //constant alias
-  #if defined (LICORNE)
+  auto const & label = hit.label;
+  if (label > m_max_labels) return;
+
+#if defined (LICORNE)
   if (is_EDEN(label))
   {
     if (hit.nrj2==0) hit.nrj2 = 1;
-    hit.nrjcal = (Float_t) hit.nrj2/hit.nrj;
-    return true;
+    hit.nrjcal = static_cast<Float_t>(hit.nrj2)/hit.nrj;
   }
-  #elif defined (PARIS)
-  if (isParis[label])
-  {
-    Bool_t good = false;
-    hit.nrj2 = calibrate(hit.nrj2, label, good);
-  }
-  #endif
-  if (isBGO[label])
-  {
-    hit.nrjcal = hit.nrj/100;
-    return true;
-  }
-  if (label > m_max_labels) return false;
-  Bool_t good = false;
-  hit.nrjcal = calibrate(hit.nrj, label, good);
+#elif defined (PARIS)
+  if (isParis[label]) hit.nrj2 = calibrate(hit.nrj2, label);
+#endif
 
-  return good;
+  if (isBGO[label]) hit.nrjcal = (hit.nrj+gRandom->Uniform(0,1))/100;
+  else hit.nrjcal = calibrate(hit.nrj, label);
 }
 
 void Calibration::set(UShort_t _label, Float_t _intercept = 0.f, Float_t _slope = 1.f, Float_t _binom = 0.f, Float_t _trinom = 0.f)

@@ -18,6 +18,12 @@ public:
 
   Float_t start;
   Float_t stop;
+
+  void use() {m_use = true;}
+  bool const & used() const {return m_use;}
+
+private:
+  bool m_use = false;
 };
 
 #endif //GATE_H

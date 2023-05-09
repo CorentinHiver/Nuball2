@@ -10,6 +10,7 @@
 #include <sstream>
 #include <iomanip>
 #include "TH2F.h"
+#include "../libCo.hpp"
 
 class RWMat
 {
@@ -49,14 +50,27 @@ RWMat::RWMat(std::string name, int nchans) //default constructor
   for(int i=0 ; i < fNChannels ; i++) fRWMat[i] = new int[fNChannels];
 }
 
+template<class T>
+RWMat::RWMat(MTTHist<T> & MTRootMat)
+{
+  MTRootMat.Merge();
+  if (!MTRootMat -> InheritsFrom("TH2")) print(MTRootMat.GetName(),"is not a TH2x !!");
+  else Reset(MTRootMat.get());
+}
+
 RWMat::RWMat(TH2F* RootMat) //constructor from root object
 {
-  Reset(RootMat);
+   Reset(RootMat);
 }
 
 template<class THist>
 void RWMat::Reset(THist* RootMat)
 {
+  if (RootMat->Integral() < 0)
+  {
+    print(RootMat->GetName(), "empty !!");
+    return;
+  }
   if (!RootMat -> InheritsFrom("TH2")) {print(RootMat->GetName(),"is not a TH2x !!"); return;}
   else
   {
@@ -78,14 +92,6 @@ void RWMat::Reset(THist* RootMat)
       }
     }
   }
-}
-
-template<class T>
-RWMat::RWMat(MTTHist<T> & MTRootMat)
-{
-  MTRootMat.Merge();
-  if (!MTRootMat -> InheritsFrom("TH2")) print(MTRootMat.GetName(),"is not a TH2x !!");
-  else Reset(MTRootMat.get());
 }
 //________________________________________________________________________
 RWMat::~RWMat()

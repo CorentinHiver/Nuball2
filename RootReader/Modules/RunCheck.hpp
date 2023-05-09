@@ -36,6 +36,7 @@ private:
   // Histograms for each run :
   MTTHist<TH2F> TimeSpectra;
   MTTHist<TH2F> CloverTimeSpectra;
+  MTTHist<TH2F> GeRunSpectra;
   // Histograms for the whole runs :
   MTTHist<TH2F> GeSpectraManip;
   MTTHist<TH1F> GeSpectraTotal;
@@ -152,7 +153,7 @@ void RunCheck::FillRaw(Event const & event)
   for (size_t i = 0; i<event.size(); i++)
   {
     auto const & label = event.labels[i];
-    auto const & time = event.Times[i];
+    auto const & time = event.time2s[i];
     auto const & nrj = event.nrjs[i];
 
     if (nrj<20) continue;

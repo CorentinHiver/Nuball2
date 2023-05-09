@@ -5,7 +5,6 @@
 
 using hr_clock_t = std::chrono::high_resolution_clock;
 using time_point_t = std::chrono::time_point<hr_clock_t>;
-// using NOW = std::chrono::high_resolution_clock::m_now();
 using duration_milli_t = std::chrono::duration<double, std::milli>;
 
 class Timer
@@ -18,15 +17,15 @@ public:
     return (m_start = m_clock.now());
   }
 
-  time_point_t const & Stop()
-  {
-    d_milli = duration_milli_t(m_now - m_start);
-    return (m_stop = m_clock.now());
-  }
-
   time_point_t const & Now()
   {
     return (m_now = m_clock.now());
+  }
+
+  time_point_t const & Stop()
+  {
+    d_milli = duration_milli_t(Now() - m_start);
+    return (m_stop = m_clock.now());
   }
 
   float Time()

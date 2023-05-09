@@ -39,6 +39,7 @@ Labels g_labelToName;
 #include "Modules/AnalyseIsomer.hpp"
 #include "Modules/TimewalkDSSD.hpp"
 #include "Modules/Analyse511.hpp"
+#include "Modules/NoPulse.hpp"
 
 #include "../lib/Analyse/HistoAnalyse.hpp"
 
@@ -86,8 +87,11 @@ int main(int argc, char** argv)
   // Initialize modules
   // EventAnalyse event_a;
 
-  // RunCheck runs;
-  // runs.launch(p);
+  NoPulse np;
+  np.launch(p);
+
+  RunCheck runs;
+  runs.launch(p);
 
   // TimewalkDSSD td;
   // td.launch(p);
@@ -98,8 +102,8 @@ int main(int argc, char** argv)
   // Analyse511 a511;
   // a511.launch(p);
 
-  Matrices ma;
-  ma.launch(p);
+  // Matrices ma;
+  // ma.launch(p);
 
   // AnalyseIsomer ai;
   // ai.launch(p);

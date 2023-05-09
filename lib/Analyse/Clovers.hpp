@@ -186,7 +186,7 @@ Bool_t Clovers::Fill(Event const & event, int const & hit_i)
     auto const & index_clover  =  labels[label];
 
     auto const & nrj  = event.nrjs [hit_i];
-    auto const & time = event.Times[hit_i];
+    auto const & time = event.time2s[hit_i];
 
     auto & clover = m_Clovers[index_clover];
 

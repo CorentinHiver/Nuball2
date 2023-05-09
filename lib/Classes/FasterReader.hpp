@@ -27,7 +27,7 @@ public:
   void ReadData(faster_data_p const & _data);
 
   //Setters :
-  void setHit(Hit* hit) {delete m_hit; m_hit = hit;} //Never tested, but should work !
+  void setHit(Hit* hit) {m_hit = hit;} //Never tested, but should work !
 
   //Getters :
   Hit*   getHit             () const { return m_hit        ;};
@@ -207,6 +207,9 @@ Bool_t FasterReader::ReadGroup()
 void FasterReader::ReadData(faster_data_p const & _data)
 {// Treats faster data
   m_hit->label = faster_data_label(_data);
+#ifdef QDC2
+  m_hit->nrj2 = 0; // In order to clean the data, as nrj2 never gets cleaned if there was QDC2 in the previous hit
+#endif //QDC2
   m_alias = faster_data_type_alias(_data);
   if (m_alias == GROUP_TYPE_ALIAS)
   {// Creates a group reader

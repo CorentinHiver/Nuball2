@@ -32,7 +32,7 @@
 #define QDC2
 #endif //QDC2
 
-// NearLine3 v1
+// NearLine3 v2
 #include "../../lib/Classes/FilesManager.hpp"
 #include "../../lib/Classes/EventBuilder.hpp"
 #include "../../lib/Classes/CoincBuilder.hpp"
@@ -146,6 +146,7 @@ private:
 //Read informations
   Int_t m_maximum_time_read = -1; //if you want to analyse only a fraction of the data //NOT IMPLEMENTED
   Long64_t m_counter = 0;
+  float m_size_data = 0;
   // Outputs :
   Bool_t temp_tree_on_disk = false;
     //Analyse (m_a)
@@ -212,6 +213,7 @@ private:
 
     //Faster2root
   Bool_t   m_fr               = false;
+  Bool_t   m_fr_verbose       = false;
   Bool_t   m_fr_eventbuild    = false;
   Bool_t   const m_fr_raw           = false;
   Bool_t   const m_fr_keep_all      = false;
@@ -222,10 +224,14 @@ private:
   MTCounter  m_fr_treated_run_size;
   MTCounter  m_fr_raw_counter;
   MTCounter  m_fr_treated_counter;
+  MTCounter  m_reading_rate;
+  MTCounter  m_converting_rate;
+  MTCounter  m_writting_rate;
   Timer      m_timer;
   void     m_fr_Initialize();
   void     m_fr_Write();
   void     m_fr_sum_counters();
+  void     setVerbose() {m_fr_verbose = true;}
 
 
   //! RF check
@@ -313,6 +319,11 @@ Bool_t NearLine::launch()
 
   MTObject::Initialize(m_nb_threads);
 
+  for (std::size_t i = 0; i<p_Files.size(); i++)
+  {
+    m_size_data+=size_file(p_Files[i]);
+  }
+
   // Initialise all the histograms and some other variables :
   if (!this -> Initialize()) return false;
 
@@ -396,7 +407,7 @@ void NearLine::run_thread()
 
 void NearLine::faster2root(std::string const & filename, int const & thread_nb)
 {
-  Timer timer;
+  Timer time_read;
   Hit hit;
   std::string outfile = m_outdir+rmPathAndExt(filename)+".root";
   // Create the foler in not already existing :
@@ -413,7 +424,7 @@ void NearLine::faster2root(std::string const & filename, int const & thread_nb)
 
   auto rootTreeName = "tempTree"+std::to_string(thread_nb);
   std::unique_ptr<TTree> rootTree (new TTree(rootTreeName.c_str(), rootTreeName.c_str()));
-  rootTree -> SetDirectory(nullptr);
+  rootTree -> SetDirectory(nullptr); // Force it to be created in RAM rather than on disk - much faster if enough RAM
   rootTree -> Branch("label"  , &hit.label );
   rootTree -> Branch("time"   , &hit.time  );
   rootTree -> Branch("nrjcal" , &hit.nrjcal);
@@ -421,47 +432,31 @@ void NearLine::faster2root(std::string const & filename, int const & thread_nb)
   rootTree -> Branch("nrj2"   , &hit.nrj2);
 #endif //QDC2
   rootTree -> Branch("pileup" , &hit.pileup);
+
+  // Convert the raw faster data to raw root tree
   int counter = 0;
-  // while(reader.Read())
-  while(reader.Read() && counter<20000)
+  while(reader.Read())
+  // while(reader.Read() && counter<20000)
   {
     counter++;
-    time_shift(hit);
+    hit.time+=m_timeshifts[hit.label];
     m_calib.calibrate(hit);
     rootTree -> Fill();
-    #ifdef QDC2
-    hit.nrj2 = 0; // In order to clean the data, as nrj2 never gets cleaned if there is no QDC2 in the next hit
-    #endif //QDC2
-    m_fr_raw_counter++;
   }
 
-  print("Read finished, converting");
+  m_fr_raw_counter+=counter;
 
-  // Align in time after the timeshift that can shuffle some hits
+  time_read.Stop();
+
   ULong64_t nb_data = rootTree -> GetEntries();
-  std::vector<Int_t> gindex(nb_data,0);
-  for (size_t nb = 0; nb<gindex.size(); nb++) gindex[nb] = nb;
-  if (!m_fr_raw) alignator(rootTree.get(), gindex.data());
+  // Align in time after the timeshift (can shuffle some hits)
+  std::vector<int> gindex(nb_data);
+  std::iota(std::begin(gindex), std::end(gindex), 0); // Fill with 0,1,2,...,nb_data
+  alignator(rootTree.get(), gindex.data());
 
-  // Hit i_hit;
   Event buffer;
+  Timer time_conv;
 
-  // Set the temporary tree to reading mode :
-//   rootTree -> SetBranchStatus("*",false);
-  // rootTree -> ResetBranchAddresses(); // Allows one to use the tree afterwards
-//   rootTree -> SetBranchAddress("label"  , &i_hit.label );
-//   rootTree -> SetBranchAddress("time"   , &i_hit.time  );
-//   rootTree -> SetBranchAddress("nrjcal" , &i_hit.nrjcal);
-// #ifdef QDC2
-//   rootTree -> SetBranchAddress("nrj2"   , &i_hit.nrj2);
-// #endif //QDC2
-//   rootTree -> SetBranchAddress("pileup" , &i_hit.pileup);
-//   rootTree -> SetBranchStatus("*",true);
-//
-  // Set the reader classes :
-  RF_Manager rf;
-  EventBuilder event(&buffer, &rf);
-  CoincBuilder2 coinc(&buffer);
   // Sets the output tree :
   std::unique_ptr<TTree> outTree (new TTree("Nuball", "DataTreeEventBuild C1L2 C2"));
   outTree -> SetDirectory(nullptr);
@@ -474,174 +469,106 @@ void NearLine::faster2root(std::string const & filename, int const & thread_nb)
   outTree -> Branch("time",  &buffer.times  , "time[mult]/l"  );
   outTree -> Branch("pileup",&buffer.pileups, "pileup[mult]/O");
 
+  // Reset the branch address and set the temporary tree in reading mode
+  rootTree -> ResetBranchAddresses();
+  hit.reset();
+  rootTree -> SetBranchAddress("label"  , &hit.label );
+  rootTree -> SetBranchAddress("time"   , &hit.time  );
+  rootTree -> SetBranchAddress("nrjcal" , &hit.nrjcal);
+#ifdef QDC2
+  rootTree -> SetBranchAddress("nrj2"   , &hit.nrj2);
+#endif //QDC2
+  rootTree -> SetBranchAddress("pileup" , &hit.pileup);
+  rootTree -> SetBranchAddress("time"   , &hit.time  );
+
+  std::size_t loop = 0;
+
+#ifdef USE_RF
+
   // Remove the hits previous to the first RF measurement :
+  RF_Manager rf;
+  EventBuilder event(&buffer, &rf);
+  event.setShift(static_cast<Long64_t>(USE_RF));
+  do{ rootTree -> GetEntry(gindex[loop++]);}
+  while(hit.label != RF_Manager::label && loop<nb_data);
+  if (loop == nb_data) {print("NO RF DATA FOUND !"); return;}
 
-  ULong64_t loop = 0;
-  if (m_use_RF)
-  {
-    event.setShift(m_RF_shift);
-  //   do{ rootTree -> GetEntry(loop++);}
-    do{ rootTree -> GetEntry(gindex[loop++]);}
-    while(hit.label != RF_Manager::label && loop<nb_data);
-  //   // while(i_hit.label != RF_Manager::label && loop<nb_data);
-  //   //
-    if (loop == nb_data) {print("NO RF DATA FOUND !"); return;}
-    rf.setHit(hit);
-    event.setFirstRF(hit);
-    buffer = hit;
-    // rf.setHit(i_hit);
-    // event.setFirstRF(i_hit);
-  //   buffer = i_hit;
-    // outTree -> Fill();
-    // buffer.clear();
-  //
-    // Handle the first hit :
-    rootTree -> GetEntry(gindex[loop++]);
-    event.set_last_hit(hit);
-  }
-  else
-  {
-    rootTree -> GetEntry(gindex[loop++]);
-    coinc.set_last_hit(hit);
-    // coinc.set_last_hit(i_hit);
-  }
+  // Extract the first RF data and write it down:
+  rf.setHit(hit);
+  event.setFirstRF(hit);
+  buffer = hit;
+  outTree -> Fill();
+  buffer.clear();
 
+#else // NO RF
+  CoincBuilder2 event(&buffer);
 
-#ifdef DOWNSCALE_M1
-  int M1_counter = 0;
-#endif //DOWNSCALE_M1
-  // Read the following hits :
-  bool trig = false;
-  bool built = false;
+#endif //USE_RF
+
+  // Handle the first hit :
+  rootTree -> GetEntry(gindex[loop++]);
+  event.set_last_hit(hit);
+
+  // ULong64_t evt_start = loop;
+  // while (loop<evt_start+1000)
   Counters Counter;
-  ULong64_t evt_start = loop;
-  while (loop<evt_start+1000)
+  loop = 0;
   while (loop<nb_data)
   {
-    built = false;
     rootTree -> GetEntry(gindex[loop++]);
-    if (m_fr_keep_all || m_fr_raw) trig = true;
-    else
-    {
-      if (m_use_RF)
-      {// RF based event buildin
-        if (is_RF(hit) && event.status() != 1)
-        {// To force RF writting in the data if no event is currently being constructed :
-          buffer = hit;
-          outTree -> Fill();
-          buffer.clear();
-          rf.setHit(hit);
-          continue;
-        }
-        built = event.build(hit);
-      }
-      else
-      {// Time window based event building
-        built = coinc.build(hit);
-      }
-      if (built)
-      {
-        m_fr_treated_counter+=buffer.size();
-        Counter.count_event(buffer);
-
-        trig = false;
-
-        #ifdef NO_TRIG
-        trig = true;
-        #endif //NO_TRIG
-
-        #ifdef G1_TRIG
-        trig = (!trig) ? Counter.RawGeMult>0 : true; // At least one Ge cystal
-        #endif //G1_TRIG
-
-        #ifdef D1_TRIG
-        trig = (!trig) ? Counter.DSSDMult>0 : true; // At least one dssd
-        #endif //D1_TRIG
-
-        #ifdef M2_TRIG
-        trig = (!trig) ? Counter.ModulesMult>1 : true; // At least 2 modules
-        #endif //M2_TRIG
-
-        #ifdef L2_TRIG
-        trig = (!trig) ? Counter.LaBr3Mult>1 : true; // At least 2 modules
-        #endif //M2_TRIG
-
-        #ifdef C2_TRIG
-        trig = (!trig) ? Counter.CleanGeMult>1 : true; // At least 2 modules
-        #endif //C2_TRIG
-
-        #ifdef CG2_TRIG
-        trig = (!trig) ? Counter.CloverGeMult>1 : true; // At least two Clover Ge
-        #endif //CG2_TRIG
-
-        #ifdef C1L2_TRIG
-        trig = (!trig) ? (Counter.CleanGeMult>0 && Counter.LaBr3Mult>1) : true; // At least one clean Ge and 2 LaBr3
-        #endif //C1L2_TRIG
-
-        #ifdef CG1L2_TRIG
-        trig = (!trig) ? (Counter.CloverGeMult>0 && Counter.LaBr3Mult>1) : true; // At least one Clover Ge and 2 LaBr3
-        #endif //CG1L2_TRIG
-
-        #ifdef DOWNSCALE_M1
-        if(Counter.ModulesMult==1) M1_counter++;
-        if (M1_counter>1000)
-        {
-          trig = true;
-          M1_counter = 0;
-        }
-        #endif //DOWNSCALE_M1
-      }
-    }
-
-    if (trig)
-    {
+  #ifdef USE_RF
+    if (is_RF(hit))
+    {// To force RF writting in the data
+      auto temp = buffer;
+      buffer = hit;
       outTree -> Fill();
-      if (m_use_RF)
-      {
-        event.reset();
-        rf.setHit(hit);
-      }
-      else
-      {
-        coinc.reset();
-      }
+      buffer = temp;
+      rf.setHit(hit);
+      continue;
     }
+  #endif //USE_RF
 
-    else if (m_use_RF && event.hasRF())
-    {// If the event didn't pass the trigger we still want to write any potential RF in the event
-      for (size_t i = 0; i<buffer.size(); i++)
+    if (event.build(hit))
+    {
+      Counter.count_event(buffer);
+
+      if(Counter.DSSDMult > 0 || (Counter.RawGe > 0 && Counter.Modules > 1))
       {
-        if (buffer.labels[i]==251)
-        {
-          buffer = buffer[i];
-          outTree -> Fill();
-          rf.setHit(hit);
-          buffer.clear();
-          continue;
-        }
+        outTree -> Fill();
       }
     }
   }
 
-  // outFile -> cd();
-//   print("Writting",outfile);
-  TFile * outFile = new TFile(outfile.c_str(),"create");
-  outTree -> SetDirectory(nullptr);
+  time_conv.Stop();
+
+  Timer time_write;
+
+  std::unique_ptr<TFile> outFile (new TFile(outfile.c_str(),"create"));
   outTree -> Write();
   outFile -> Write();
   outFile -> Close();
-  // m_fr_treated_run_size+=outFile->GetSize();
-  // delete outTree;
-  delete outFile;
-  // rootTree -> ResetBranchAddresses(); // Allows one to use the tree afterwards
 
-  std::cout << std::setprecision(3)
-  << "Conversion of " << rmPathAndExt(filename)
-  << " with " << nb_data*1.E-6 << " Mevts" << " (" << (file_size/1.E6) << "Mo)"
-  << " done in " << timer.TimeSec() << " s"
-  << " - " << nb_data*1.E-6/timer.TimeSec() << " Mevts/s"
-  << " (" << file_size/timer.TimeSec() << " Mo/s)"
-  << std::endl;
+  time_write.Stop();
+
+  m_fr_treated_run_size+=outFile->GetSize();
+  m_fr_treated_counter += outTree -> GetEntries();
+
+  m_reading_rate+=1.E-3*file_size/time_read.TimeElapsed();
+  m_converting_rate+=1.E-3*file_size/time_conv.TimeElapsed();
+  m_writting_rate+=1.E-3*outFile->GetSize()/time_conv.TimeElapsed();
+
+  auto const totalTimeSec = time_read.TimeElapsedSec()+time_conv.TimeElapsedSec();
+  std::cout << std::setprecision(3);
+  MTObject::shared_mutex.lock();
+  if (m_fr_verbose) print
+  (
+    rmPathAndExt(filename), "->",
+    "Total :",      1.E-6*file_size, "Mo    in", totalTimeSec, "s  (", 1.E-6*file_size/totalTimeSec, "Mo/s ) |",
+    "Reading :"   , 1.E-6*nb_data,   "Mevts in", time_read.TimeElapsedSec(),  "s |",
+    "Converting :", 1.E-6*nb_data,   "Mevts to", 1.E-6*outTree->GetEntries(), "Mevts ( factor", nb_data/outTree->GetEntries(), ")"
+  );
+  else print(rmPathAndExt(filename), ":",1000*(m_fr_treated_run_size/m_size_data),"%");
+  MTObject::shared_mutex.unlock();
 }
 
 Bool_t NearLine::processFile(std::string filename, int thread_nb)
@@ -1049,6 +976,7 @@ void NearLine::m_ts_Initialize()
     for (UShort_t l = 0; l<m_labelToName.size(); l++)
     {
       std::string const & name = m_labelToName[l];
+      if (name=="") continue;
       type = Type_det[l];
       if (type == RF)
       {
@@ -1318,8 +1246,12 @@ void NearLine::m_fr_sum_counters()
   run_name = rmPathAndExt(run_name);
   std::ofstream outfile("log.log",std::ios::app);
   auto const rate = m_fr_raw_run_size / m_timer.TimeSec();
-  print(run_name, "treated at", rate*1.E-6, "Mo/sec");
-  print(m_fr_raw_run_size, m_fr_treated_run_size);
+  std::cout << std::setprecision(3);
+  print(run_name, "treated at", (int)(rate*1.E-6), "Mo/sec |",
+        "Reading :"    , MTObject::getThreadsNb() * (m_reading_rate    / (float)(p_Files.size())),"Mo/s |",
+        "Converting : ", MTObject::getThreadsNb() * (m_converting_rate / (float)(p_Files.size())),"Mo/s |",
+        "Writting : "  , MTObject::getThreadsNb() * (m_writting_rate / (float)(p_Files.size()))  ,"Mo/s"
+      );
   outfile << run_name << ": CompressionFactor: " << m_fr_raw_run_size/m_fr_treated_run_size << " RawCounter: " << m_fr_raw_counter
   << " TreatedCounter: " << m_fr_treated_counter << std::endl;
   outfile.close();
@@ -1405,14 +1337,14 @@ void NearLine::m_ts_calculate()
     std::unique_ptr<TF1> gaus_pol0, fittedPic;
     type = type_det(it);
     m_ts_histo[it].Merge();
-    if (!m_ts_histo[it].exists()) continue; // Eliminate empty histograms
-    if (m_ts_verbose) print(m_labelToName[it]);
     if (type == RF)
     {
       if (m_ts_verbose) print("RF :",deltaT_RF,"with",m_ts_histo_RF->GetMaximum(),"bins in peak");
       outDeltaTfile << it << "\t" << deltaT_RF << std::endl;
       continue;
     }
+    if (!m_ts_histo[it].exists()) continue; // Eliminate empty histograms
+    if (m_ts_verbose) print(m_labelToName[it]);
     #ifdef LICORNE
     if (type == EDEN)
     {
@@ -2003,7 +1935,8 @@ Bool_t NearLine::loadTimeshifts(std::string _inFile)
 
 inline Bool_t NearLine::calibrate_hit(Hit & hit)
 {
-  return (time_shift(hit) && m_calib.calibrate(hit));
+  m_calib.calibrate(hit);
+  return (time_shift(hit));
 }
 
 inline Bool_t NearLine::time_shift(Hit & hit)
@@ -2343,16 +2276,16 @@ Bool_t NearLine::setConfig (std::stringstream & parameters_file)
           is.clear();
           is.str(parameter);
         }
-        else if (temp2 == "trigger:")
-        {
-          int nb_conditions; is >> nb_conditions;
-          std::string condition;
-          for (int i = 0; i<nb_conditions; i++)
-          {
-            is >> condition;
-            m_fr_trigger.addCondition(condition);
-          }
-        }
+        // else if (temp2 == "trigger:")
+        // {
+        //   int nb_conditions; is >> nb_conditions;
+        //   std::string condition;
+        //   for (int i = 0; i<nb_conditions; i++)
+        //   {
+        //     is >> condition;
+        //     m_fr_trigger.addCondition(condition);
+        //   }
+        // }
         // else if (temp2 == "keep_all") {m_fr_keep_all = true;}
         // else if (temp2 == "raw") {m_fr_raw = true;}
         // else if (temp2 == "throwsingles") { m_fr_throw_singles = true; }

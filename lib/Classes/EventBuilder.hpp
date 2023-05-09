@@ -23,10 +23,8 @@ public:
   void reset();
 
   // Getters :
-  Hit const & getLastHit() const {return m_last_hit;}
   ULong64_t const & getShift() const {return m_shift;}
   Time const & get_RF_ref_time() const {return RF_ref_time;}
-  Bool_t const & hasRF() const {return m_has_rf;}
 
   // Setters :
   void setShift(Long64_t const & shift) {m_shift = shift;}
@@ -41,8 +39,6 @@ private:
   Time RF_ref_time = 0;
   RF_Manager* m_rf   = nullptr;
   Time        m_shift = 0;
-
-  Bool_t m_has_rf = false;
 };
 
 Bool_t EventBuilder::build(Hit const & hit)
@@ -50,49 +46,50 @@ Bool_t EventBuilder::build(Hit const & hit)
   if(m_event->mult>255) reset(); // 255 is the maximum number of hits allowed inside of an event
   if (!coincON)
   { // If no coincidence has been detected in previous iteration :
-
-    if ( (hit.time-RF_ref_time) < 399998ull )
+    if ( (hit.time-RF_ref_time) < static_cast<ULong64_t>(m_rf->period) )
     {// Case 1 :
       // The previous and current hit are in the same event.
       // In next call, we'll check if the next hits are in the event or not (cases 3 or 4)
       m_event -> clear();
+    #ifdef PREPROMPT
+      if ( (RF_ref_time-m_single_hit.time) < static_cast<ULong64_t>(m_rf->period))
+          m_event -> push_back(m_single_hit);
+    #endif //PREPROMPT
       m_event -> push_back(m_last_hit);
       m_event -> push_back(hit);
       m_last_hit = m_empty_hit; // m_last_hit is cleared
       coincON = true; // Open the event
       m_status = 1; // The event can be filled with potential additionnal hits
-
-      if (m_event->labels[0] == 251 || m_event->labels[1] == 251) m_has_rf = true;
     }
     else
     {// Case 2 :
       // The last and current hits aren't in the same event.
       // This means either the last hit is filled with an empty hit if last hit closed an event,
-      // or a single hit : a lonely hit alone in the time window around its RF.
+      // or a single hit : a lonely hit, alone in the time window around its RF.
       m_single_hit = m_last_hit;
       // The current hit is set to be the last hit for next call :
-      set_last_hit(hit);
+      this -> set_last_hit(hit);
       m_status = 0; // No event detected
     }
   }
 
   else
   { // If the two previous hits are in the same event, checking if the current hit is :
-    if (hit.label == 251) m_has_rf = true;
-    if ( (hit.time-RF_ref_time) < 399998ull )
+    if ( (hit.time-RF_ref_time) < static_cast<ULong64_t>(m_rf->period) )
     {// Case 3 :
+      // print(hit.time, hit.label, (hit.time-RF_ref_time)/1000., m_rf->period/1000.);
       // The current hit belongs to the event
       m_event -> push_back(hit);
-      // nb: m_status still equals 1
+      // NB: m_status still equals to 1
     }
     else
     {// Case 4 :
-      // The current hit is outside of the event : this hit closes the event
-      // Therefore, m_event is filled with all the hits of the event
-      // We store the current hit as it can be the first hit of the next event :
-      m_last_hit = hit;
+      // The current hit is outside of the event : this hit closes the event :
       coincON = false; // The coincidence is closed
+      // Therefore, m_event is full with all the hits of the event :
       m_status = 2; // The event is complete
+      // The current hit is set to be the last hit for next call :
+      m_last_hit = hit;
       return true; // The event is ready to be processed
     }
   }
@@ -122,7 +119,7 @@ void EventBuilder::reset()
   // Sets the reference RF timestamp to the last hit :
   RF_ref_time = m_last_hit.time - (m_last_hit.time-m_rf->last_hit + m_shift)%m_rf->period ;
   // Then
-  m_event -> clear(); m_status = 0; m_has_rf = false;
+  m_event -> clear(); m_status = 0;
 }
 
 #endif //EVENT_BUILDER_H

@@ -223,9 +223,9 @@ void Matrices::FillAnalysed(EventAnalyse & event_a)
   for (auto const & index : paris_back.Hits) if (index == 8)
   {
     auto const & nrj_paris = paris_back[8].nrj;
-    auto const & nrj2_paris = paris_back[8].nrj2;
+    // auto const & nrj2_paris = paris_back[8].nrj2;
     auto const & ratio = paris_back[8].ratio;
-    auto const & time = paris_back[8].time;
+    // auto const & time = paris_back[8].time;
     // auto const ratio_v1 = nrj_paris/nrj2_paris;
     // auto const ratio_v2 = nrj2_paris/nrj_paris;
     // auto const ratio_v3 = 1-nrj2_paris/nrj_paris;

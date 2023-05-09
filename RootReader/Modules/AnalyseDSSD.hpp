@@ -251,7 +251,7 @@ void AnalyseDSSD::FillSorted(Sorted_Event const & event_s, Event const & event)
 
     int const label_ring = event.labels[ring]-800;
     int const & nrj_ring = event.nrjs[ring];
-    int const & Time_ring = event.Times[ring];
+    int const & Time_ring = event.time2s[ring];
 
     auto on = static_cast<int>(gRandom->Uniform(0,1)*16);
     auto plus = static_cast<int>((gRandom->Uniform(0,1)<0.5) ? 0 : 20 );
@@ -268,7 +268,7 @@ void AnalyseDSSD::FillSorted(Sorted_Event const & event_s, Event const & event)
 
     int const label_sector = event.labels[sector]-800;
     int const & nrj_sector = event.nrjs[sector];
-    int const & Time_sector = event.Times[sector];
+    int const & Time_sector = event.time2s[sector];
 
     int const randRing = static_cast<int>(40+gRandom->Uniform(0,1)*16);
     auto pos = calculate_DSSD_pos(randRing, label_sector);
@@ -285,9 +285,9 @@ void AnalyseDSSD::FillSorted(Sorted_Event const & event_s, Event const & event)
     int nrj_sector_1 = event.nrjs[event_s.DSSD_Sectors[0]];
     int nrj_sector_2 = event.nrjs[event_s.DSSD_Sectors[1]];
 
-    int const Time_ring = event.Times[event_s.DSSD_Rings[0]];
-    int Time_sector_1 = event.Times[event_s.DSSD_Sectors[0]];
-    int Time_sector_2 = event.Times[event_s.DSSD_Sectors[1]];
+    int const Time_ring = event.time2s[event_s.DSSD_Rings[0]];
+    int Time_sector_1 = event.time2s[event_s.DSSD_Sectors[0]];
+    int Time_sector_2 = event.time2s[event_s.DSSD_Sectors[1]];
 
     auto pos = calculate_DSSD_pos(label_ring, label_sector_1);
     m_polar_1R2S_S1.Fill(pos.first, pos.second);
@@ -319,9 +319,9 @@ void AnalyseDSSD::FillSorted(Sorted_Event const & event_s, Event const & event)
     auto const & nrj_ring_1 = event.nrjs[ring_1];
     auto const & nrj_ring_2 = event.nrjs[ring_2];
 
-    auto const & Time_sector = event.Times[sector];
-    auto const & Time_ring_1 = event.Times[ring_1];
-    auto const & Time_ring_2 = event.Times[ring_2];
+    auto const & Time_sector = event.time2s[sector];
+    auto const & Time_ring_1 = event.time2s[ring_1];
+    auto const & Time_ring_2 = event.time2s[ring_2];
 
     m_2R1S_R1_VS_S.Fill(nrj_ring_1,nrj_sector);
     m_2R1S_R2_VS_S.Fill(nrj_ring_2,nrj_sector);
@@ -352,11 +352,11 @@ void AnalyseDSSD::FillSorted(Sorted_Event const & event_s, Event const & event)
 
     auto const label_ring = event.labels[ring]-800;
     auto const & nrj_ring = event.nrjs[ring];
-    auto const & Time_ring = event.Times[ring];
+    auto const & Time_ring = event.time2s[ring];
 
     auto const label_sector = event.labels[sector]-800;
     auto const & nrj_sector = event.nrjs[sector];
-    auto const & Time_sector = event.Times[sector];
+    auto const & Time_sector = event.time2s[sector];
 
     m_R_VS_S.Fill(nrj_ring, nrj_sector, weight);
     m_R_VS_S_time.Fill(Time_ring, Time_sector, weight);
@@ -383,10 +383,10 @@ void AnalyseDSSD::FillSorted(Sorted_Event const & event_s, Event const & event)
     m_R2_VS_S1.Fill(nrj_sector_2, nrj_ring_1, weight);
     m_R2_VS_S2.Fill(nrj_sector_2, nrj_ring_2, weight);
 
-    auto const & time_ring_1 = event.Times[event_s.DSSD_Rings[0]];
-    auto const & time_ring_2 = event.Times[event_s.DSSD_Rings[1]];
-    auto const & time_sector_1 = event.Times[event_s.DSSD_Sectors[0]];
-    auto const & time_sector_2 = event.Times[event_s.DSSD_Sectors[1]];
+    auto const & time_ring_1 = event.time2s[event_s.DSSD_Rings[0]];
+    auto const & time_ring_2 = event.time2s[event_s.DSSD_Rings[1]];
+    auto const & time_sector_1 = event.time2s[event_s.DSSD_Sectors[0]];
+    auto const & time_sector_2 = event.time2s[event_s.DSSD_Sectors[1]];
 
     m_R1_VS_R2_time.Fill(time_ring_2, time_ring_1, weight);
     m_S1_VS_S2_time.Fill(time_sector_2, time_sector_1, weight);

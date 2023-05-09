@@ -30,6 +30,17 @@ public:
 
   static void setTWcorrectionsDSSD(std::string const & filename);
   static void setMaxTime(Float_t const & max_time);
+  static void setDSSDVeto(Float_t const & min_time, Float_t const & max_time, Float_t const & max_E)
+  {
+    m_max_time_dssd = max_time;
+    m_min_time_dssd = min_time;
+    m_max_E_dssd = max_E;
+  }
+  static float m_max_time_dssd;
+  static float m_min_time_dssd;
+  static float m_max_E_dssd;
+  bool dssd_veto = false;
+
 
   void sortEvent(Event const & event);
   void sortEvent(){sortEvent(*m_event);}
@@ -122,6 +133,9 @@ private:
 Float_t Sorted_Event::m_max_time = 9999999.; // Dumb default value
 bool Sorted_Event::m_TW_DSSD = false;
 Timewalks Sorted_Event::m_Timewalks_DSSD;
+float Sorted_Event::m_max_time_dssd = -100;
+float Sorted_Event::m_min_time_dssd = 400;
+float Sorted_Event::m_max_E_dssd = 1.E+12;
 
 void Sorted_Event::setTWcorrectionsDSSD(std::string const & filename)
 {
@@ -174,6 +188,7 @@ void Sorted_Event::reset()
   DSSD_is_Ring.resize(0);
   DSSD_Rings.resize(0);
   DSSD_Sectors.resize(0);
+  dssd_veto = false;
 
   LaBr3_event.resize(0);
 
@@ -217,8 +232,9 @@ bool Sorted_Event::sortGeClover(Event const & event, int const & i)
   nrj_clover[clover_label] += nrj;
   Ge[clover_label]++;
 
+  // To get the crystal that got the maximum energy in a clover :
   if(nrj > maxE[clover_label])
-  {// To get the crystal that got the maximum energy in a clover :
+  {
     if (event.readTime()) time_clover[clover_label] = times[i];
     maxE[clover_label] = nrj;
     maxE_hit[clover_label] = i;
@@ -235,7 +251,7 @@ void Sorted_Event::sortEvent(Event const & event)
   for (uchar i = 0; i<event.size(); i++)
   {
     if (event.readtime()) times[i] = (m_rf) ? m_rf->pulse_ToF(event.times[i], 50000ll) : (event.times[i]-event.times[0])/_ns;
-    if (event.readTime()) times[i] = event.Times[i]; // Overwrites the absolute time if relative Time is read in the data (parameter 'T' in connect() Event's method)
+    if (event.readTime()) times[i] = event.time2s[i]; // Overwrites the absolute time if relative Time is read in the data (parameter 'T' in connect() Event's method)
     if (times[i]>m_max_time) continue;
     if (isGe[event.labels[i]])
     {
@@ -283,8 +299,10 @@ void Sorted_Event::sortEvent(Event const & event)
       {
         times[i] -= m_Timewalks_DSSD.get(label-800, nrj);
         DSSD_is_Prompt.push_back((times[i]>-10 && times[i]<10));
+        if (times[i]<m_min_time_dssd || times[i]>m_max_time_dssd || nrj>m_max_E_dssd) dssd_veto = true;
       }
       else DSSD_is_Prompt.push_back((times[i]>0 && times[i]<50));
+
 
       bool const & isRing = isDSSD_Ring[event.labels[i]];
       DSSD_is_Ring.push_back(isRing);

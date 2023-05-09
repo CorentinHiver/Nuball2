@@ -1,7 +1,8 @@
 #ifndef BUILDER_H
 #define BUILDER_H
-#include "../utils.hpp"
+#include "../libCo.hpp"
 #include "Event.hpp"
+#include "Counters.hpp"
 
 class Builder
 {
@@ -11,16 +12,20 @@ public:
 
   // Getters :
   Bool_t const & isCoincTrigged() const {return coincON;}
+
   Bool_t isSingle() const {return (this->status() == 0 && m_single_hit.label>0);}
   Hit & singleHit() {return m_single_hit;}
   Event getSingleEvent() {return Event(m_single_hit);}
+
+  Hit const & getLastHit() const {return m_last_hit;}
+
   uchar const & status() const { return m_status; }
 
   Event* getEvent() const {return m_event;}
   UShort_t size() const {return m_event -> size();}
 
-  virtual Bool_t build(Hit const & _hit) = 0;
-  virtual void reset() {m_event->clear();m_status = 0;}
+  virtual Bool_t build(Hit const & _hit) = 0; // pure virtual
+  virtual void reset() {m_event->clear(); m_status = 0;}
 
   // Setters :
   void set_last_hit(Hit const & hit)
@@ -28,8 +33,14 @@ public:
     m_last_hit = hit;
   }
 
+  virtual void setCounter(Counters * counter) {m_Counter = counter;}
+
 protected:
-  Event*      m_event  = nullptr;
+  Event*    m_event   = nullptr;
+  Counters* m_Counter = nullptr;
+  std::size_t m_raw_Ge  = 0;
+  std::size_t m_DSSD    = 0;
+  std::size_t m_modules = 0;
 
   Hit m_empty_hit ;
   Hit m_last_hit = m_empty_hit;

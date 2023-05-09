@@ -51,7 +51,7 @@ void inline ParisModule::Reset()
 
 void ParisModule::Fill(Event const & event, int const & i)
 {
-  time = event.Times[i];
+  time = event.time2s[i];
   nrj = event.nrjs[i];
   nrj2 = event.nrj2s[i];
   switch (test_gate_classic())
@@ -71,16 +71,16 @@ char inline ParisModule::test_gate_classic()
   else if (ratio <  0.7) return  1;
   else                   return -1;
 }
-
-char inline ParisModule::test_gate_classic()
-{
-  ratio = (nrj2-nrj)/nrj2;
-       if (ratio < -0.2) return -1;
-  else if (ratio <  0.2) return  0;
-  else if (ratio <  0.5) return -1;
-  else if (ratio <  0.7) return  1;
-  else                   return -1;
-}
+// 
+// char inline ParisModule::test_gate_tan()
+// {
+//   ratio = TMath::Tan((nrj2-nrj)/nrj2);
+//        if (ratio < -0.2) return -1;
+//   else if (ratio <  0.2) return  0;
+//   else if (ratio <  0.5) return -1;
+//   else if (ratio <  0.7) return  1;
+//   else                   return -1;
+// }
 
 
 #endif //PARISMODULE_H

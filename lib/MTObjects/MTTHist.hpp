@@ -77,7 +77,9 @@ public:
   void Print();
   void Write();
   std::string const & name() const {return m_str_name;}
+
   Bool_t const & exists() const {return m_exists;}
+  
   operator bool() const & {return m_exists;}
   std::vector<THist*> const & getCollection() const {return m_collection;}
   THist * operator->() {return m_merged;}

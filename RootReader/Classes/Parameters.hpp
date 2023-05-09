@@ -15,15 +15,15 @@ public:
   bool setParameters(int argc, char ** argv);
   bool checkParameters();
   bool setData();
-  // To retrieve the parameters :
+
   std::vector<std::string> getParameters(std::string const & module = "all");
 
-  // Get the variables
-  auto const & threadsNb() const {return m_nbThreads;}
+  ushort & threadsNb() {return m_nbThreads;}
   FilesManager & files () {return m_files;}
 
   MTList<std::string> & filesMT() {return m_list_files;}
   MTList<std::string> & getRunsList() {return m_list_runs;}
+
   bool getNextFile(std::string & filename) {return m_list_files.getNext(filename);}
   bool getNextRun(std::string & run) {return m_list_runs.getNext(run);}
   bool getNextRun(std::string & run, size_t & run_index) {return m_list_runs.getNext(run, run_index);}
@@ -35,10 +35,6 @@ public:
 
   std::string const & getDataPath() {return m_dataPath;}
 
-  Timer totalTime;
-  MTCounter totalCounter;
-  MTCounter totalFilesSize;
-
   void printPerformances()
   {
     int time = totalTime(); // if we use print, we have to get the value before so the unit() is changing accordingly
@@ -46,16 +42,20 @@ public:
     "->", totalCounter/totalTime.TimeSec()/1000000., "Mevts/s (", totalFilesSize/totalTime.TimeSec(), "Mo/s)");
   }
 
+  Timer totalTime;
+  MTCounter totalCounter;
+  MTCounter totalFilesSize;
+
 private:
   std::string m_parameters_file;
 
   std::map<std::string, std::vector<std::string>> m_parameters; // key : module, value : list of module's parameters
 
-  size_t m_nbThreads = 1;
+  ushort m_nbThreads = 1;
 
   std::string m_dataPath;
   FilesManager m_files;
-  int m_nb_files_per_run;
+  UInt_t m_nb_files_per_run = 9999;
   MTList<std::string> m_list_files;
   MTList<std::string> m_list_runs;
   bool m_TW_correct = false;

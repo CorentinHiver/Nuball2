@@ -2,20 +2,21 @@
 #define EVENT_H
 
 #include "Hit.h"
+#include "../libCo.hpp"
 
 /*
 
 READ/WRITE OPTIONS :
 
-l : label               UShort_t
-t : absolute timestamp  ULong64_t
-T : relative timestamp  Float_t
-n : energy              Float_t
-N : energy QDC2         Float_t
-p : pileup              Bool_t
+l : label   label               UShort_t
+t : time    absolute timestamp  ULong64_t
+T : time2   relative timestamp  Float_t
+n : nrj     energy              Float_t
+N : nrj2    energy QDC2         Float_t
+p : pileup  pilepup             Bool_t
 
-R : RFtime              ULong64_t
-P : RFperiod            Float_t
+R :         RFtime              ULong64_t
+P :         RFperiod            Float_t
 
 */
 
@@ -31,16 +32,27 @@ public:
     *this = hit;
   }
 
-  Event(TTree * tree, std::string const & options = "ltnN")
+  Event(Event const & event)
   {
     initialise();
-    connect(tree, options);
+    *this = event;
+  }
+
+  Event(TTree * tree, std::string const & options = "ltnN", std::string const & io = "r")
+  {
+    initialise();
+    if (io == "r" || io == "read" || io == "R" || io == "Read")  connect(tree, options);
+    else if (io == "w" || io == "write" || io == "W" || io == "Write")  connect(tree, options);
+    else { print("EVENT : NO KNOWN I/O PARAMETER"); exit(0);}
   }
 
   void initialise(int i_max = 255);
 
-  Hit operator[] (Int_t const & i);
+  void fillHit_ptr(Hit_ptr & hit, int const & i);
+
+  Hit_ptr const & operator[] (Int_t const & i);
   void operator= (Hit const & hit);
+  void operator= (Event const & evt);
 
   void connect(TTree * tree, std::string const & options = "ltnN");
   void writeTo(TTree * tree, std::string const & options = "ltnN");
@@ -50,11 +62,12 @@ public:
 
   void Print();
   void clear() { mult = 0; }
-  size_t size() const { return static_cast<size_t>(mult); }
+  std::size_t size() const { return static_cast<size_t>(mult); }
+  std::size_t const & maxSize() const { return m_maxSize; }
   bool isSingle() const {return (mult == 1);}
 
-  bool const & readTime() const {return read_T;}
-  bool const & readtime() const {return read_t;}
+  bool const & readTime() const {return read.T;}
+  bool const & readtime() const {return read.t;}
 
   int      mult     = 0;
   Time     RFtime   = 0;
@@ -64,32 +77,42 @@ public:
   Float_t  nrjs   [255];
   Float_t  nrj2s  [255];
   Time     times  [255];
-  Float_t  Times  [255];
+  Float_t  time2s [255];
   Bool_t   pileups[255];
+
+  struct read
+  {
+    bool l = false;
+    bool t = false;
+    bool T = false;
+    bool E = false;
+    bool E2 = false;
+    bool p = false;
+    bool RFt = false;
+    bool RFp = false;
+  } read;
+
+  struct write
+  {
+    bool l = false;
+    bool t = false;
+    bool T = false;
+    bool E = false;
+    bool E2 = false;
+    bool p = false;
+    bool RFt = false;
+    bool RFp = false;
+  } write;
 
 private:
 
-  bool read_l = false;
-  bool read_t = false;
-  bool read_T = false;
-  bool read_E = false;
-  bool read_E2 = false;
-  bool read_p = false;
-  bool read_RFt = false;
-  bool read_RFp = false;
-
-  bool write_l = false;
-  bool write_t = false;
-  bool write_T = false;
-  bool write_E = false;
-  bool write_E2 = false;
-  bool write_p = false;
-  bool write_RFt = false;
-  bool write_RFp = false;
+  std::size_t m_maxSize = 255;
+  Hit_ptr m_hit;
 };
 
 inline void Event::initialise(int i_max )
 {
+  m_maxSize = static_cast<std::size_t> (i_max);
   for (int i = 0; i<i_max; i++)
   {
     labels  [i] = 0;
@@ -100,26 +123,47 @@ inline void Event::initialise(int i_max )
   }
 }
 
-inline Hit Event::operator[] (Int_t const & i)
+inline void Event::fillHit_ptr(Hit_ptr & hit, int const & i)
 {
-  Hit ret;
-  ret.nrjcal = nrjs[i];
-  ret.nrj2   = nrj2s[i];
-  ret.label  = labels[i];
-  ret.time   = times[i];
-  if (read_T || write_T) ret.time   = Times[i];
-  ret.pileup = pileups[i];
-  return ret;
+  hit.nrjcal = &nrjs  [i];
+  hit.nrj2   = &nrj2s [i];
+  hit.label  = &labels[i];
+  hit.time   = &times [i];
+  if (read.T || write.T) hit.time2 = &time2s[i];
+  hit.pileup = &pileups[i];
+}
+
+inline Hit_ptr const & Event::operator[] (int const & i)
+{
+  fillHit_ptr(m_hit, i);
+  return m_hit;
 }
 
 inline void Event::operator= (Hit const & hit)
 {
-  labels[0]  = hit.label;
-  nrjs[0]    = hit.nrjcal;
-  nrj2s[0]   = hit.nrj2;
-  times[0]   = hit.time;
-  pileups[0] = hit.pileup;
+  labels  [0] = hit.label;
+  nrjs    [0] = hit.nrjcal;
+  nrj2s   [0] = hit.nrj2;
+  times   [0] = hit.time;
+  pileups [0] = hit.pileup;
   mult = 1;
+}
+
+inline void Event::operator= (Event const & evt)
+{
+  mult = evt.mult;
+  for (int i = 0; i<mult; i++)
+  {
+    labels [i] = evt.labels[i];
+    nrjs   [i] = evt.nrjs[i];
+    nrj2s  [i] = evt.nrj2s[i];
+    times  [i] = evt.times[i];
+    pileups[i] = evt.pileups[i];
+  }
+  RFtime   = evt.RFtime;
+  RFperiod = evt.RFperiod;
+  read = evt.read;
+  write = evt.write;
 }
 
 void Event::writeTo(TTree * tree, std::string const & options)
@@ -129,28 +173,28 @@ void Event::writeTo(TTree * tree, std::string const & options)
   {
     switch (e)
     {
-      case ('l') : write_l    =  true;  break;
-      case ('t') : write_t    =  true;  break;
-      case ('T') : write_T    =  true;  break;
-      case ('n') : write_E    =  true;  break;
-      case ('N') : write_E2   =  true;  break;
-      case ('p') : write_p    =  true;  break;
-      case ('R') : write_RFt  =  true;  break;
-      case ('P') : write_RFp  =  true;  break;
+      case ('l') : write.l    =  true;  break;
+      case ('t') : write.t    =  true;  break;
+      case ('T') : write.T    =  true;  break;
+      case ('n') : write.E    =  true;  break;
+      case ('N') : write.E2   =  true;  break;
+      case ('p') : write.p    =  true;  break;
+      case ('R') : write.RFt  =  true;  break;
+      case ('P') : write.RFp  =  true;  break;
     }
   }
 
   tree -> ResetBranchAddresses();
 
                    tree -> Branch("mult"     , &mult);
-  if (write_l   )  tree -> Branch("label"    , &labels , "label[mult]/s" );
-  if (write_t   )  tree -> Branch("time"     , &times  , "time[mult]/l"  );
-  if (write_T   )  tree -> Branch("Time"     , &Times  , "Time[mult]/F"  );
-  if (write_E   )  tree -> Branch("nrj"      , &nrjs   , "nrj[mult]/F"   );
-  if (write_E2  )  tree -> Branch("nrj2"     , &nrj2s  , "nrj2[mult]/F"  );
-  if (write_p   )  tree -> Branch("pileup"   , &pileups, "pileup[mult]/O");
-  if (write_RFt )  tree -> Branch("RFtime"   , &RFtime  );
-  if (write_RFp )  tree -> Branch("RFperiod" , &RFperiod);
+  if (write.l   )  tree -> Branch("label"    , &labels , "label[mult]/s" );
+  if (write.t   )  tree -> Branch("time"     , &times  , "time[mult]/l"  );
+  if (write.T   )  tree -> Branch("Time"     , &time2s , "Time[mult]/F");
+  if (write.E   )  tree -> Branch("nrj"      , &nrjs   , "nrj[mult]/F"   );
+  if (write.E2  )  tree -> Branch("nrj2"     , &nrj2s  , "nrj2[mult]/F"  );
+  if (write.p   )  tree -> Branch("pileup"   , &pileups, "pileup[mult]/O");
+  if (write.RFt )  tree -> Branch("RFtime"   , &RFtime  );
+  if (write.RFp )  tree -> Branch("RFperiod" , &RFperiod);
 
   tree -> SetBranchStatus("*",true);
 }
@@ -162,26 +206,27 @@ void Event::connect(TTree * tree, std::string const & options)
   {
     switch (e)
     {
-      case ('l') : read_l    =  true;  break;
-      case ('t') : read_t    =  true;  break;
-      case ('T') : read_T    =  true;  break;
-      case ('n') : read_E    =  true;  break;
-      case ('N') : read_E2   =  true;  break;
-      case ('p') : read_p    =  true;  break;
-      case ('R') : read_RFt  =  true;  break;
-      case ('P') : read_RFp  =  true;  break;
+      case ('l') : read.l    =  true;  break;
+      case ('t') : read.t    =  true;  break;
+      case ('T') : read.T    =  true;  break;
+      case ('n') : read.E    =  true;  break;
+      case ('N') : read.E2   =  true;  break;
+      case ('p') : read.p    =  true;  break;
+      case ('R') : read.RFt  =  true;  break;
+      case ('P') : read.RFp  =  true;  break;
     }
   }
   tree -> ResetBranchAddresses();
                tree -> SetBranchAddress("mult"    , &mult    );
-  if (read_l ) tree -> SetBranchAddress("label"   , &labels  );
-  if (read_t ) tree -> SetBranchAddress("time"    , &times   );
-  if (read_T ) tree -> SetBranchAddress("Time"    , &Times   );
-  if (read_E ) tree -> SetBranchAddress("nrj"     , &nrjs    );
-  if (read_E2) tree -> SetBranchAddress("nrj2"    , &nrj2s   );
-  if (read_p ) tree -> SetBranchAddress("pileup"  , &pileups );
-  if (read_p ) tree -> SetBranchAddress("RFtime"  , &RFtime  );
-  if (read_p ) tree -> SetBranchAddress("RFperiod", &RFperiod);
+  if (read.l ) tree -> SetBranchAddress("label"   , &labels  );
+  if (read.t ) tree -> SetBranchAddress("time"    , &times   );
+  if (read.T ) tree -> SetBranchAddress("Time"    , &time2s  );
+  if (read.E ) tree -> SetBranchAddress("nrj"     , &nrjs    );
+  if (read.E2) tree -> SetBranchAddress("nrj2"    , &nrj2s   );
+  if (read.p ) tree -> SetBranchAddress("pileup"  , &pileups );
+  if (read.p ) tree -> SetBranchAddress("RFtime"  , &RFtime  );
+  if (read.p ) tree -> SetBranchAddress("RFperiod", &RFperiod);
+
   tree -> SetBranchStatus("*",true);
 }
 
@@ -199,10 +244,10 @@ inline void Event::push_front(Hit const & hit)
 {
   for (uchar i = 0; i<mult; i++)
   {
-    labels[mult+1]  = labels[mult];
-    nrjs[mult+1]    = nrjs[mult];
-    nrj2s[mult+1]   = nrj2s[mult];
-    times[mult+1]   = times[mult];
+    labels [mult+1] = labels [mult];
+    nrjs   [mult+1] = nrjs   [mult];
+    nrj2s  [mult+1] = nrj2s  [mult];
+    times  [mult+1] = times  [mult];
     pileups[mult+1] = pileups[mult];
   }
   labels[0]  = hit.label;
@@ -228,6 +273,6 @@ inline void Event::Print()
 }
 
 // Include useful classes
-#include "../Analyse/Counters.hpp"
+#include "Counters.hpp"
 
 #endif //EVENT_H
