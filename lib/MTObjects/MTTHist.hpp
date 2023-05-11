@@ -79,7 +79,7 @@ public:
   std::string const & name() const {return m_str_name;}
 
   Bool_t const & exists() const {return m_exists;}
-  
+
   operator bool() const & {return m_exists;}
   std::vector<THist*> const & getCollection() const {return m_collection;}
   THist * operator->() {return m_merged;}
@@ -206,7 +206,7 @@ void MTTHist<THist>::Merge()
     {
       m_file = gROOT -> GetFile();
       if (m_file) gROOT -> cd(); //To get out of scope of any potential TFile
-      m_merged = (THist*) (m_collection[0]->Clone(m_str_name.c_str()));
+      m_merged = static_cast<THist*> (m_collection[0]->Clone(m_str_name.c_str()));
       for (size_t i = 1; i<m_collection.size(); i++) m_merged -> Add(m_collection[i]);
       if (m_file) m_file -> cd(); //To return to the scope of any potential TFile
     }

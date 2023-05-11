@@ -54,6 +54,9 @@ private:
 
   MTTHist<TH2F> timewalk_DSSD_all_sectors_1S2R;
 
+  MTTHist<TH2F> DSSD_VS_Clover;
+  MTTHist<TH1F> DSSD_spectra;
+
   Timewalks m_Timewalks_DSSD;
 };
 
@@ -110,6 +113,8 @@ void TimewalkDSSD::InitializeManip()
     m_Timewalks_DSSD.resize(56);
     m_Timewalks_DSSD.loadFile("129/Analyse/DSSD/gate642_prompt/timewalk_data/fit.fit");
   }
+  DSSD_VS_Clover.reset("DSSD_VS_Clover", "DSSD VS Clover", 2000,0,1000, 500,0,15000);
+  DSSD_spectra.reset("DSSD", "DSSD", 500,0,15000);
   std::string name;
   timewalk_DSSD_all_sectors.reset("All sectors", "All sectors", m_time_bins,m_time_min,m_time_max, m_njr_bins,m_nrj_min,m_nrj_max);
   timewalk_DSSD_all_sectors_nRnS.reset("All sectors nRnS", "All sectors nRnS", m_time_bins,m_time_min,m_time_max, m_njr_bins,m_nrj_min,m_nrj_max);
@@ -170,6 +175,9 @@ void TimewalkDSSD::FillSorted(Sorted_Event const & event_s, Event const & event)
     auto const & nrj   = event.nrjs  [dssd];
                  Time  = event.time2s [dssd];
 
+    DSSD_spectra.Fill(nrj, weight);
+
+
     if (m_correct) Time -= m_Timewalks_DSSD.get(label-800, nrj);
 
     if (prompt)
@@ -177,6 +185,9 @@ void TimewalkDSSD::FillSorted(Sorted_Event const & event_s, Event const & event)
       if(nRnS) timewalk_DSSD_rings_nRnS[label-840][thread_nb] -> Fill(Time, nrj, weight);
     }
     else if (delayed);
+
+    for (auto const clover : event_s.clover_hits) if (!event_s.BGO[clover])
+      DSSD_VS_Clover.Fill(event_s.nrj_clover[clover], nrj, weight);
   }
 
   for (size_t loop_i = 0; loop_i<event_s.DSSD_Sectors.size(); loop_i++)
@@ -187,6 +198,8 @@ void TimewalkDSSD::FillSorted(Sorted_Event const & event_s, Event const & event)
     auto const & nrj   = event.nrjs  [dssd];
                  Time  = event.time2s [dssd];
     if (m_correct) Time -= m_Timewalks_DSSD.get(label-800, nrj);
+
+    DSSD_spectra.Fill(nrj, weight);
 
     if (prompt)
     {
@@ -204,6 +217,8 @@ void TimewalkDSSD::FillSorted(Sorted_Event const & event_s, Event const & event)
        else if (R2S2) timewalk_DSSD_all_sectors_2R2S[thread_nb] -> Fill(Time, nrj, weight);
      }
     }
+    for (auto const clover : event_s.clover_hits) if (!event_s.BGO[clover])
+      DSSD_VS_Clover.Fill(event_s.nrj_clover[clover], nrj, weight);
   }
 }
 
@@ -263,6 +278,8 @@ void TimewalkDSSD::Write()
   print("Writting histograms ...");
   // for (auto & histo : timewalk_DSSD_sectors) histo.Write();
   // for (auto & histo : timewalk_DSSD_rings  ) histo.Write();
+  DSSD_VS_Clover.Write();
+  DSSD_spectra.Write();
   timewalk_DSSD_all_sectors.Write();
   timewalk_DSSD_all_sectors_nRnS_raw.Write();
   timewalk_DSSD_all_sectors_nRnS_background.Write();

@@ -1,0 +1,9 @@
+ID: ID/index_131.dat
+
+TIMESHIFT_DATA: Timeshifts/run_49.dat
+
+DATADIR: /home/corentin/faster_data/N-SI-122/run_49.fast/
+
+OUTDIR: check_rf/
+
+RF_CHECK: timewindow: 350 time_ref: PARIS_BR1D1

@@ -27,6 +27,14 @@ private:
   std::string m_outDir  = "129/NoPulse/";
   std::string m_outRoot = "NoPulse.root";
   // ---- Histograms ---- //
+  MTTHist<TH1F> pulse_DSSD;
+  MTTHist<TH1F> pulse_first_DSSD;
+  MTTHist<TH2F> Time_VS_pulse_DSSD;
+  MTTHist<TH2F> Time_VS_pulse_DSSD_ref_dssd;
+  MTTHist<TH2F> ref_dssd_VS_ref_any_DSSD;
+  MTTHist<TH2F> ref_dssd_VS_ref_any;
+  MTTHist<TH2F> Time_VS_pulse_ParisFront;
+  MTTHist<TH2F> Time_VS_pulse_ParisBack;
 };
 
 bool NoPulse::launch(Parameters & p)
@@ -73,6 +81,12 @@ void NoPulse::run(Parameters & p, NoPulse & nopulse)
 void NoPulse::InitializeManip()
 {
   print("Initialize histograms");
+  pulse_DSSD.reset("pulse_DSSD", "pulse DSSD", 3500,-200,500);
+  pulse_first_DSSD.reset("pulse_first_DSSD", "pulse first DSSD", 3500,-200,500);
+  Time_VS_pulse_DSSD.reset("Time_VS_pulse_DSSD", "Time VS pulse DSSD ref any", 3500,-200,500, 3500,-200,500);
+  Time_VS_pulse_DSSD_ref_dssd.reset("Time_VS_pulse_DSSD_ref_dssd", "DSSD : time relative to first DSSD of the event VS pulse ", 3500,-200,500, 3500,-200,500);
+  ref_dssd_VS_ref_any_DSSD.reset("ref_dssd_VS_ref_any_DSSD", "ref DSSD VS ref any - DSSD", 3500,-200,500, 3500,-200,500);
+  ref_dssd_VS_ref_any.reset("ref_dssd_VS_ref_any", "ref DSSD VS ref any", 3500,-200,500, 3500,-200,500);
 }
 
 void NoPulse::FillRaw(Event const & event)
@@ -85,9 +99,23 @@ void NoPulse::FillRaw(Event const & event)
 
 void NoPulse::FillSorted(Sorted_Event const & event_s, Event const & event)
 {
-//    for (size_t loop_i = 0; loop_i<event_s.clover_hits.size(); loop_i++)
-//    {
-//    }
+  auto const & time_ref = event_s.times[0];
+  auto const & dssd_ref = event_s.times[event_s.DSSD_hits[0]];
+  ref_dssd_VS_ref_any.Fill(dssd_ref, time_ref);
+  pulse_DSSD.Fill(time_ref);
+  pulse_first_DSSD.Fill(time_ref);
+  for (size_t loop_i = 1; loop_i<event_s.DSSD_hits.size(); loop_i++)
+  {
+    auto const & dssd_i = event_s.DSSD_hits[loop_i];
+
+    auto const & time_i = event_s.times[dssd_i];
+
+    pulse_DSSD.Fill(time_i);
+
+    Time_VS_pulse_DSSD.Fill(time_i-time_ref, time_i);
+    Time_VS_pulse_DSSD_ref_dssd.Fill(time_i-dssd_ref, time_i);
+    ref_dssd_VS_ref_any_DSSD.Fill(time_i-dssd_ref, time_i-time_ref);
+  }
 }
 
 void NoPulse::Analyse()
@@ -100,6 +128,24 @@ void NoPulse::Write()
   std::unique_ptr<TFile> outfile(TFile::Open((m_outDir+m_outRoot).c_str(),"recreate"));
   print("Writting histograms ...");
   outfile->cd();
+
+  pulse_DSSD.Write();
+  pulse_first_DSSD.Write();
+
+  Time_VS_pulse_DSSD.Merge();
+  Time_VS_pulse_DSSD_ref_dssd.Merge();
+  ref_dssd_VS_ref_any_DSSD.Merge();
+  ref_dssd_VS_ref_any.Merge();
+
+  TH2F* Time_VS_pulse_DSSD_ref_dssd__sub__Time_VS_pulse_DSSD = static_cast<TH2F*> (Time_VS_pulse_DSSD_ref_dssd->Clone("test"));
+  Time_VS_pulse_DSSD_ref_dssd__sub__Time_VS_pulse_DSSD->Add(Time_VS_pulse_DSSD.get(),-1 );
+
+  Time_VS_pulse_DSSD.Write();
+  Time_VS_pulse_DSSD_ref_dssd.Write();
+  ref_dssd_VS_ref_any_DSSD.Write();
+  Time_VS_pulse_DSSD_ref_dssd__sub__Time_VS_pulse_DSSD->Write();
+  ref_dssd_VS_ref_any->Write();
+
   outfile->Write();
   outfile->Close();
   print("Writting analysis in", m_outDir+m_outRoot);

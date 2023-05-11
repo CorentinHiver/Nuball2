@@ -87,14 +87,14 @@ int main(int argc, char** argv)
   // Initialize modules
   // EventAnalyse event_a;
 
-  NoPulse np;
-  np.launch(p);
+  // NoPulse np;
+  // np.launch(p);
 
-  RunCheck runs;
-  runs.launch(p);
+  // RunCheck runs;
+  // runs.launch(p);
 
-  // TimewalkDSSD td;
-  // td.launch(p);
+  TimewalkDSSD td;
+  td.launch(p);
 
   // AnalyseDSSD ad;
   // ad.launch(p);

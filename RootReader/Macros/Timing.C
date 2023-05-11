@@ -4,9 +4,10 @@
 void Timing()
 {
   TChain chain("Nuball");
-  chain.Add("129/run_25/*.root");
-  chain.Add("129/run_50/*.root");
-  chain.Add("129/run_62/*.root");
+  // chain.Add("129/run_25/*.root");
+  // chain.Add("129/run_50/*.root");
+  // chain.Add("129/run_62/*.root");
+  // chain.Add("129/run_70/*.root");
   chain.Add("129/run_70/*.root");
 
   Event event(&chain,"lTn");

@@ -9,7 +9,7 @@
 // #define NO_TRIG
 #define DSSD_TRIG
 // #define DSSD_M2G1_TRIG
-// #define USE_RF 50
+#define USE_RF 50
 
 #if defined (M2G1_TRIG)
 #define COUNT_EVENT
@@ -37,6 +37,8 @@ void test(){}
 int main(int argc, char ** argv)
 {
   quick_parameters qp;
+
+  create_folder_if_none(qp.outDir);
 
        if (argc == 2 && strcmp(argv[1],"-m")==0) qp.nb_threads = 1;
   else if (argc == 3 && strcmp(argv[1],"-m")==0) qp.nb_threads = atoi(argv[2]);
@@ -77,14 +79,14 @@ void convertRun(quick_parameters & param)
     std::string pathRun = param.dataPath+run;
     std::string rootFiles = pathRun+"/*.root";
 
-    print("starting");
+    // print("starting");
 
     auto chain = new TChain("Nuball");
     chain->Add(rootFiles.c_str());
     Event event(chain,"mltnN");
     // auto nb = chain->GetEntries();
 
-    print("Chain loaded");
+    // print("Chain loaded");
 
     Timer readTimer;
 
@@ -107,7 +109,7 @@ void convertRun(quick_parameters & param)
         }
       }
     }
-    print("RF extracted");
+    // print("RF extracted");
   #endif //USE_RF
 
 
