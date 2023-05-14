@@ -2,7 +2,7 @@
 #define FASTERAC
 // #define N_SI_85
 #define N_SI_129
-// #define USE_RF 50
+#define USE_RF 50
 // #define N_SI_120
 
 //Define the trigger here :
@@ -100,7 +100,7 @@ int main()
 
   #elif defined (N_SI_129)
     if (!app -> setConfig("ID: ID/index_129.dat")) return 0;
-    // app -> setConfig("USE_RF: 50");
+    app -> setConfig("USE_RF: 50");
     if (!app -> setConfig("CALIBRATION: Calibration/calib_129.dat")) return 0;
 
   #elif defined (N_SI_85)

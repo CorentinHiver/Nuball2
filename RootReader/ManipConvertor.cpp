@@ -79,23 +79,25 @@ void convertRun(quick_parameters & param)
     std::string pathRun = param.dataPath+run;
     std::string rootFiles = pathRun+"/*.root";
 
-    // print("starting");
+    print("starting");
 
     auto chain = new TChain("Nuball");
     chain->Add(rootFiles.c_str());
     Event event(chain,"mltnN");
     // auto nb = chain->GetEntries();
 
-    // print("Chain loaded");
+    print("Chain loaded");
 
     Timer readTimer;
 
     Long64_t evt = 0;
 
+
   #ifdef USE_RF
     RF_Manager rf;
     bool stop = false;
-    while(!stop)
+    Long64_t maximum_RF_location = 1.E+7;
+    while(!stop && evt < maximum_RF_location)
     {
       chain->GetEntry(evt++);
       for (size_t i = 0; i<event.size(); i++)
@@ -109,7 +111,8 @@ void convertRun(quick_parameters & param)
         }
       }
     }
-    // print("RF extracted");
+    if (evt == maximum_RF_location) {print("NO RF found !!"); delete chain; return;}
+    print("RF extracted at hit n°", evt);
   #endif //USE_RF
 
 
@@ -125,18 +128,23 @@ void convertRun(quick_parameters & param)
     Long64_t converted_counter = 0;
     Long64_t DSSD_seul = 0;
 
+    print("coucou");
+
     while(evt<chain->GetEntriesFast())
     {
       Timer timer;
+      print("coucou2");
 
       auto outTree  = std::make_unique<TTree>("Nuball", "Second conversion");
 
-      auto RF_VS_LaBr3 = std::make_unique<TH2F>(("RF_VS_LaBr3"+run+std::to_string(file_nb)).c_str(),("RF_VS_LaBr3"+run+std::to_string(file_nb)).c_str(), 1000,0,5000, 500,-100,400);
-      auto RF_VS_DSSD = std::make_unique<TH2F>(("RF_VS_DSSD"+run+std::to_string(file_nb)).c_str(),("RF_VS_DSSD"+run+std::to_string(file_nb)).c_str(), 1000,0,5000, 500,-100,400);
-      auto RF_VS_Ge = std::make_unique<TH2F>(("RF_VS_Ge"+run+std::to_string(file_nb)).c_str(),("RF_VS_Ge"+run+std::to_string(file_nb)).c_str(), 1000,0,5000, 500,-100,400);
-      auto clover_mult = std::make_unique<TH1F>(("clover_mult"+run+std::to_string(file_nb)).c_str(),("clover_mult"+run+std::to_string(file_nb)).c_str(), 20,0,20);
-      auto paris_mult = std::make_unique<TH1F>(("paris_mult"+run+std::to_string(file_nb)).c_str(),("paris_mult"+run+std::to_string(file_nb)).c_str(), 20,0,20);
-      auto dssd_mult = std::make_unique<TH1F>(("dssd_mult"+run+std::to_string(file_nb)).c_str(),("dssd_mult"+run+std::to_string(file_nb)).c_str(), 20,0,20);
+      auto RF_period_histo = std::make_unique<TH1F>(("RF_period_histo"+run+std::to_string(file_nb)).c_str(),("RF period histo"+run+std::to_string(file_nb)).c_str(), 40000, 0,4000);
+
+      auto RF_VS_LaBr3 = std::make_unique<TH2F>(("RF_VS_LaBr3_"+run+std::to_string(file_nb)).c_str(),("RF VS LaBr3 "+run+std::to_string(file_nb)).c_str(), 1000,0,5000, 500,-100,400);
+      auto RF_VS_DSSD = std::make_unique<TH2F>(("RF_VS_DSSD_"+run+std::to_string(file_nb)).c_str(),("RF VS DSSD "+run+std::to_string(file_nb)).c_str(), 1000,0,20000, 500,-100,400);
+      auto RF_VS_Ge = std::make_unique<TH2F>(("RF_VS_Ge_"+run+std::to_string(file_nb)).c_str(),("RF VS Ge "+run+std::to_string(file_nb)).c_str(), 1000,0,5000, 500,-100,400);
+      auto clover_mult = std::make_unique<TH1F>(("clover_mult_"+run+std::to_string(file_nb)).c_str(),("clover mult "+run+std::to_string(file_nb)).c_str(), 20,0,20);
+      auto paris_mult = std::make_unique<TH1F>(("paris_mult_"+run+std::to_string(file_nb)).c_str(),("paris mult "+run+std::to_string(file_nb)).c_str(), 20,0,20);
+      auto dssd_mult = std::make_unique<TH1F>(("dssd_mult_"+run+std::to_string(file_nb)).c_str(),("dssd mult "+run+std::to_string(file_nb)).c_str(), 20,0,20);
 
     #ifdef USE_RF
       event.writeTo(outTree.get(),"lnNTRP");
@@ -147,8 +155,13 @@ void convertRun(quick_parameters & param)
       // Loop over the data until the output tree reaches the maximum size, or the end of data is reached :
       while(evt<chain->GetEntriesFast())
       {
+        print("coucou3");
         // Write in files of more or less the same size :
-             if (evt%(int)(1.E+5) == 0 && outTree->GetEntries() > param.nb_max_evts_in_file) break;
+       if (evt%(int)(1.E+5) == 0 && outTree->GetEntries() > param.nb_max_evts_in_file) break;
+       if (evt%(int)(1.E+6) == 0)
+       {
+         print(evt*1.E-6, "Mevts");
+       }
 
         // Read event :
         chain->GetEntry(evt++);
@@ -171,6 +184,7 @@ void convertRun(quick_parameters & param)
           if (label == 251)
           {
             event.RFperiod = (time+rand.Uniform(0,1)-rf.last_hit)/1000.;
+            RF_period_histo->Fill(event.RFperiod);
             rf.period = static_cast<Time>(event.RFperiod);
             rf.last_hit = time+rand.Uniform(0,1);
           }
@@ -240,7 +254,7 @@ void convertRun(quick_parameters & param)
       outTree -> Write();
       file    -> Write();
       file    -> Close();
-      print(outName,"written, ",sizeOut*1.E-6, "Mevts in", timer.TimeSec()," s");
+      print(outName,"written, ",sizeOut*1.E-6, "Mevts in", timer.TimeSec()," s (",100*sizeOut/evt,"% kept)");
       converted_counter += sizeOut;
     }// End files loop
     print(run, ":", evt*1.E-6, "->", converted_counter*1.E-6, "Mevts (",100*converted_counter/evt,"%) converted at a rate of", 1.E-3*evt/readTimer.TimeSec(), "kEvts/s");
