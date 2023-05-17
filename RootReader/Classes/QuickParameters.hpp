@@ -8,9 +8,9 @@ struct quick_parameters
   std::string outDir = "129/conversion_v3/";
   std::string fileID = "ID/index_129.dat";
   std::string runs_list = "Parameters/runs_pulsed_Corentin.list";
-  std::string dataPath = "/home/corentin/faster_data/N-SI-129-root/M2G1_D1_TRIG/";
+  // std::string dataPath = "/home/corentin/faster_data/N-SI-129-root/M2G1_D1_TRIG/";
   // std::string dataPath = "../Data_129/M2G1/";
-  // std::string dataPath = "../Data_129/conversion_v2/";
+  std::string dataPath = "../Data_129/conversion_v2/";
   UShort_t nb_threads = 4;
   int nb_max_evts_in_file = 1000000; // 1 millions evts/fichier
 

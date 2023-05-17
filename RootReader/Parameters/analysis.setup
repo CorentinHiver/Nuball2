@@ -1,6 +1,6 @@
 [Data]
-# list_runs: Parameters/list_runs.list
-list_runs: Parameters/list_runs_good_pulse.list
+list_runs: Parameters/list_runs.list
+# list_runs: Parameters/list_runs_good_pulse.list
 # list_runs: Parameters/run_test.list
 # list_runs: Parameters/runs_pulsed_Corentin.list
 # folder: 129/M2G1/ nb: 20
@@ -23,7 +23,7 @@ outDir: 129/Analyse/Isomer/
 # outRoot: total_DSSD_prompt.root
 # outRoot: good_pulse.root
 # outRoot: test.root
-outRoot: all_dssd_veto.root
+outRoot: almost_all.root
 gate: prompt Ge -15 10
 gate: delayed Ge 50 350
 end

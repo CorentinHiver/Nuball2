@@ -74,19 +74,21 @@ void convertRun(quick_parameters & param)
   while(param.runs.getNext(run))
   {
     MTObject::shared_mutex.lock();
-    print("Converting",run);
+    // print("Converting",run);
     MTObject::shared_mutex.unlock();
     std::string pathRun = param.dataPath+run;
-    std::string rootFiles = pathRun+"/*.root";
+    makePath(pathRun);
+    if (!folder_exists(pathRun)) {print(pathRun, "doesn't exists !"); return;}
+    std::string rootFiles = pathRun+"*.root";
 
-    print("starting");
+    // print("starting");
 
-    auto chain = new TChain("Nuball");
-    chain->Add(rootFiles.c_str());
-    Event event(chain,"mltnN");
+    TChain chain("Nuball");
+    chain.Add(rootFiles.c_str());
+    Event event(&chain,"mltnN");
     // auto nb = chain->GetEntries();
 
-    print("Chain loaded");
+    // print("Chain loaded");
 
     Timer readTimer;
 
@@ -99,7 +101,8 @@ void convertRun(quick_parameters & param)
     Long64_t maximum_RF_location = 1.E+7;
     while(!stop && evt < maximum_RF_location)
     {
-      chain->GetEntry(evt++);
+      chain.GetEntry(evt++);
+      // event.Print();
       for (size_t i = 0; i<event.size(); i++)
       {
         if (event.labels[i] == 251)
@@ -111,8 +114,8 @@ void convertRun(quick_parameters & param)
         }
       }
     }
-    if (evt == maximum_RF_location) {print("NO RF found !!"); delete chain; return;}
-    print("RF extracted at hit n°", evt);
+    if (evt == maximum_RF_location) {print("NO RF found !!"); return;}
+    // print("RF extracted at hit n°", evt);
   #endif //USE_RF
 
 
@@ -128,12 +131,9 @@ void convertRun(quick_parameters & param)
     Long64_t converted_counter = 0;
     Long64_t DSSD_seul = 0;
 
-    print("coucou");
-
-    while(evt<chain->GetEntriesFast())
+    while(evt<chain.GetEntriesFast())
     {
       Timer timer;
-      print("coucou2");
 
       auto outTree  = std::make_unique<TTree>("Nuball", "Second conversion");
 
@@ -153,9 +153,8 @@ void convertRun(quick_parameters & param)
     #endif //USE_RF
 
       // Loop over the data until the output tree reaches the maximum size, or the end of data is reached :
-      while(evt<chain->GetEntriesFast())
+      while(evt<chain.GetEntriesFast())
       {
-        print("coucou3");
         // Write in files of more or less the same size :
        if (evt%(int)(1.E+5) == 0 && outTree->GetEntries() > param.nb_max_evts_in_file) break;
        if (evt%(int)(1.E+6) == 0)
@@ -164,7 +163,7 @@ void convertRun(quick_parameters & param)
        }
 
         // Read event :
-        chain->GetEntry(evt++);
+        chain.GetEntry(evt++);
 
         #ifndef USE_RF
           auto const & time_ref = event.times[0];
@@ -258,7 +257,7 @@ void convertRun(quick_parameters & param)
       converted_counter += sizeOut;
     }// End files loop
     print(run, ":", evt*1.E-6, "->", converted_counter*1.E-6, "Mevts (",100*converted_counter/evt,"%) converted at a rate of", 1.E-3*evt/readTimer.TimeSec(), "kEvts/s");
-    chain->Reset();
+    chain.Reset();
   }// End runs loop
 }
 

@@ -142,7 +142,7 @@ void AnalyseIsomer::FillRaw(Event const & event)
 
 void AnalyseIsomer::FillSorted(Sorted_Event const & event_s, Event const & event)
 {
-  if (event_s.dssd_veto) return;
+  // if (event_s.dssd_veto) return;
   for (auto const & dssd : event_s.DSSD_hits)
   {
     auto const & dssd_nrj = event.nrjs[dssd];

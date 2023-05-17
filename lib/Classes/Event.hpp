@@ -258,8 +258,16 @@ inline void Event::push_front(Hit const & hit)
   mult++;
 }
 
+// template <class... T> void print(Event const & evt, T const & ... t2)
+// {
+//   evt.Print();
+//   print(t2...);
+// }
+
 inline void Event::Print()
 {
+  print("---");
+  print(mult, "hits :");
   for (uchar i = 0; i<mult;i++)
   {
     print(
@@ -270,6 +278,7 @@ inline void Event::Print()
       (pileups[i]) ? "pileup" : ""
     );
   }
+  print("---");
 }
 
 // Include useful classes

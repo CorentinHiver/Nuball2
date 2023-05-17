@@ -93,8 +93,8 @@ int main(int argc, char** argv)
   // RunCheck runs;
   // runs.launch(p);
 
-  TimewalkDSSD td;
-  td.launch(p);
+  // TimewalkDSSD td;
+  // td.launch(p);
 
   // AnalyseDSSD ad;
   // ad.launch(p);
@@ -105,8 +105,8 @@ int main(int argc, char** argv)
   // Matrices ma;
   // ma.launch(p);
 
-  // AnalyseIsomer ai;
-  // ai.launch(p);
+  AnalyseIsomer ai;
+  ai.launch(p);
 
   p.printPerformances();
 

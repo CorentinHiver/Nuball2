@@ -262,7 +262,8 @@ bool folder_exists(std::string folderName)
   makePath(folderName);
   DIR *dp = nullptr;
   dp = opendir(folderName.c_str());
-  bool ret = !(dp == nullptr);
+  bool ret = (dp != nullptr);
+  std::string str = ((dp!=nullptr) ? "oui" : "non");
   closedir(dp);
   return ret;
 }
