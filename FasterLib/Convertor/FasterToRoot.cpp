@@ -5,6 +5,7 @@
 // #define USE_RF 50
 // #define N_SI_120
 // #define USE_RF 50
+#define TIMREF_DSSD
 
 //Define the trigger here :
 // #define NO_TRIG
