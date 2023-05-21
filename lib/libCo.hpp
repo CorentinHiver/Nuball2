@@ -4,6 +4,7 @@
 // *********** STD includes ********* //
 #include <any>
 #include <array>
+#include <algorithm>
 #include <iomanip>
 #include <iostream>
 #include <fstream>
@@ -18,41 +19,13 @@
 #include <unordered_map>
 #include <vector>
 // ********** C includes ************ //
+#include <cstdlib>
 #include <dirent.h>
 #include <glob.h>
 #include <stdio.h>
 #include <stdlib.h>
-// ********** ROOT includes ********* //
-#include "TCanvas.h"
-#include "TChain.h"
-#include "TError.h"
-#include "TF1.h"
-#include "TF2.h"
-#include "TFile.h"
-#include "TFitResultPtr.h"
-#include "TFitResult.h"
-#include "TGraph.h"
-#include "TGraphErrors.h"
-#include "TH1F.h"
-#include "TH1D.h"
-#include "TH1S.h"
-#include "TH2.h"
-#include "TH2F.h"
-#include "TH3I.h"
-#include "TKey.h"
-#include "TLeaf.h"
-#include "TLegend.h"
-#include "TMath.h"
-#include "TRandom.h"
-#include "TROOT.h"
-#include "TStopwatch.h"
-#include "TString.h"
-#include "TStyle.h"
-#include "TSystem.h"
-#include "TThread.h"
-// #include "TThreadedObject.h"
-#include "TTree.h"
-#include "TTreeIndex.h"
+#include <string.h>
+
 // #include "boost/array.hpp"
 
 ////////////////
@@ -268,7 +241,7 @@ bool folder_exists(std::string folderName)
   return ret;
 }
 
-bool folder_exists(std::string & folderName, Bool_t const & verbose)
+bool folder_exists(std::string & folderName, bool const & verbose)
 {
   makePath(folderName);
   if (folder_exists(folderName)) return true;
@@ -287,7 +260,7 @@ void create_folder_if_none(std::string & folderName)
   if(!folder_exists(folderName))
   {
     print("Creating folder", folderName);
-    gSystem -> Exec(("mkdir "+folderName).c_str());
+    system(("mkdir "+folderName).c_str());
   }
 }
 
@@ -499,90 +472,5 @@ public:
     return std::binary_search(this -> begin(), this -> end(), t);
   }
 };
-
-/////////////////////////
-//   CLASS THE TCHAIN  //
-/////////////////////////
-
-/*
- * 1: Add all the files
- * TheTChain chain("Nuball", "/path/to/data/files*.root");
- * chain.Add("/other_path/to/data/files*.root")
- *
- * 2: Setup the chain :
- * chain.set();
- *
- * 3: Links all the variables
- * chain.SetBranchAddress("branch", &variable);
- *
- *
- */
-
-class TheTChain
-{
-public:
-  TheTChain(std::string const & name, std::string const & expression = "", std::string const & readMode = "READ") : m_name(name), m_read_mode(readMode)
-  {
-    if (expression!="") this -> Add(expression);
-  }
-
-  // TTree wrapping :
-  void Add(std::string const & expression)
-  {
-    m_input_files_expressions.push_back(expression);
-  }
-
-  template<class... ARGS>
-  void SetBranchAddress(ARGS &&... args) {for (auto & tree : m_trees) tree -> SetBranchAddress(std::forward<ARGS>(args)...);}
-
-  // template <class Func, class... ARGS> // Attempt to create a generic wrapping method
-  // operator-> ()
-
-
-  // Class own methods :
-  void set();
-  bool read(){return true;}
-
-  TTree* operator[] (int const & i) {return m_trees[i];}
-
-  auto begin() {return m_trees.begin();}
-  auto end()   {return m_trees.end()  ;}
-
-private:
-  std::string m_name = "";
-  std::string m_read_mode = "READ";
-
-  void set(std::string const & expression);
-  void newTTree(std::string const & fileName)
-  {
-    m_files.push_back( TFile::Open(fileName.c_str()) );
-    m_trees.push_back( m_files.back() -> Get<TTree>(m_name.c_str()) );
-  }
-
-  std::vector<std::string> m_input_files_expressions;
-  std::vector<std::string> m_files_vec;
-
-  UInt_t    m_tree_cursor = 0;
-  ULong64_t m_evt_cursor = 0;
-  ULong64_t m_size = 0;
-
-  std::vector<TTree*> m_trees;
-  std::vector<TFile*> m_files;
-};
-
-void TheTChain::set()
-{
-  for (auto const & expression : m_input_files_expressions)
-  {
-    if (!folder_exists(expression)) {print("folder",getPath(expression),"empty !");return;}
-    if (expression.back() == '/')
-    {// If a folder is given then search the whole folder for .root files
-      findFilesWildcard(expression+"*.root", m_files_vec);
-    }
-    else findFilesWildcard(expression, m_files_vec);
-  }
-  print(m_files_vec);
-  for (auto const & filename : m_files_vec) newTTree(filename);
-}
 
 #endif //LIB_H_CO

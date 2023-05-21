@@ -462,14 +462,18 @@ void NearLine::faster2root(std::string const & filename, int const & thread_nb)
   // Sets the output tree :
   std::unique_ptr<TTree> outTree (new TTree("Nuball", "DataTreeEventBuild C1L2 C2"));
   outTree -> SetDirectory(nullptr);
-  outTree -> Branch("mult",  &buffer.mult);
-  outTree -> Branch("label", &buffer.labels , "label[mult]/s" );
-  outTree -> Branch("nrj",   &buffer.nrjs   , "nrj[mult]/F"   );
+  outTree -> Branch("mult",   &buffer.mult);
+  outTree -> Branch("label",  &buffer.labels , "label[mult]/s" );
+  outTree -> Branch("nrj",    &buffer.nrjs   , "nrj[mult]/F"   );
 #ifdef QDC2
-  outTree -> Branch("nrj2",  &buffer.nrj2s  , "nrj2[mult]/F"   );
+  outTree -> Branch("nrj2",   &buffer.nrj2s  , "nrj2[mult]/F"  );
 #endif //QDC2
-  outTree -> Branch("time",  &buffer.times  , "time[mult]/l"  );
-  outTree -> Branch("pileup",&buffer.pileups, "pileup[mult]/O");
+  outTree -> Branch("time",   &buffer.times  , "time[mult]/l"  );
+  outTree -> Branch("pileup", &buffer.pileups, "pileup[mult]/O");
+#ifdef TIMREF_DSSD
+  outTree -> Branch("Time",   &buffer.time2s , "Time[mult]/F"  );
+  ULong64_t dssd_timeRef = 0;
+#endif //TIMREF_DSSD
 
   // Reset the branch address and set the temporary tree in reading mode
   rootTree -> ResetBranchAddresses();
@@ -518,6 +522,7 @@ void NearLine::faster2root(std::string const & filename, int const & thread_nb)
   while (loop<nb_data)
   {
     rootTree -> GetEntry(gindex[loop++]);
+
   #ifdef USE_RF
     if (is_RF(hit))
     {// To force RF writting in the data
@@ -534,10 +539,21 @@ void NearLine::faster2root(std::string const & filename, int const & thread_nb)
     {
       Counter.count_event(buffer);
 
+    #ifdef TIMREF_DSSD
+      if (Counter.DSSDMult > 0)
+      {
+        for (int i = 0; i<buffer.size(); i++) if (isDSSD[buffer.times[i]) {dssd_timeReftime = isDSSD[buffer.times[i]; break;}
+        for (int i = 0; i<buffer.size(); i++) buffer.time2s[i] = static_cast<float>(static_cast<Long64_t>(buffer.times[i]-dssd_timeReftime));
+        outTree -> Fill();
+      }
+
+    #else //NOT TIMREF_DSSD
       if(Counter.DSSDMult > 0 || (Counter.RawGe > 0 && Counter.Modules > 1))
       {
         outTree -> Fill();
       }
+
+    #endif //TIMREF_DSSD
     }
   }
 

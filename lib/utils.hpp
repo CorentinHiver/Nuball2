@@ -2,6 +2,7 @@
 #define UTILS_H_CO
 
 #include "libCo.hpp"
+#include "libRoot.hpp"
 #include "Classes/Hit.h"
 #include "Classes/Timer.hpp"
 #ifdef FASTERAC

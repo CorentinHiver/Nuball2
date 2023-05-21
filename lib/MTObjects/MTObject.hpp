@@ -5,9 +5,12 @@
   * It's only point is to manage this nb_threads static member variable
   * That is, all classes inheriting from MTObject will share this variable
 */
-#include "TThread.h"
 #include <thread>
 #include <mutex>
+
+#if defined (__CINT__) || defined (__ROOT__)
+  #include "TThread.h"
+#endif
 
 class MTObject
 {
@@ -27,11 +30,15 @@ public:
     }
     nb_threads = _nb_threads;
     master_thread = std::this_thread::get_id();
+
+  #if defined (__CINT__) || defined (__ROOT__)
     if (_nb_threads>1)
     {
       TThread::Initialize();
       ROOT::EnableThreadSafety();
     }
+  #endif
+
     ON = true;
   }
 
