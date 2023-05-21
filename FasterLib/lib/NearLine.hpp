@@ -489,6 +489,11 @@ void NearLine::faster2root(std::string const & filename, int const & thread_nb)
 
   std::size_t loop = 0;
 
+#ifdef DEBUG
+  print("reading ready");
+#endif //DEBUG
+
+
 #ifdef USE_RF
 
   // Remove the hits previous to the first RF measurement :
@@ -542,7 +547,7 @@ void NearLine::faster2root(std::string const & filename, int const & thread_nb)
     #ifdef TIMREF_DSSD
       if (Counter.DSSDMult > 0)
       {
-        for (size_t i = 0; i<buffer.size(); i++) if (isDSSD[buffer.times[i]]) {dssd_timeRef = buffer.times[i]; break;}
+        for (size_t i = 0; i<buffer.size(); i++) if (isDSSD[buffer.labels[i]]) {dssd_timeRef = buffer.times[i]; break;}
         for (size_t i = 0; i<buffer.size(); i++) buffer.time2s[i] = static_cast<float>(static_cast<Long64_t>(buffer.times[i]-dssd_timeRef));
         outTree -> Fill();
       }
@@ -568,7 +573,7 @@ void NearLine::faster2root(std::string const & filename, int const & thread_nb)
 
   time_write.Stop();
 
-  m_fr_treated_run_size+=outFile->GetSize();
+  m_fr_treated_run_size+=size_file(outFile->GetName());
   m_fr_treated_counter += outTree -> GetEntries();
 
   m_reading_rate+=1.E-3*file_size/time_read.TimeElapsed();
@@ -1346,7 +1351,7 @@ void NearLine::m_ts_calculate()
   Detector type = null;
   std::ofstream outDeltaTfile(m_outdir+m_ts_outdir+m_ts_outdata, std::ios::out);
   // Calculate the RF timeshift first :
-  m_ts_histo_RF.Merge();
+  if (m_use_RF) m_ts_histo_RF.Merge();
   Long64_t deltaT_RF = 0;
   if (m_use_RF) deltaT_RF = ( m_ts_histo_RF->GetMaximumBin() - (m_ts_histo_RF -> GetNbinsX()/2) ) * m_ts_rebin[RF];
   for (size_t it = 0; it<m_ts_histo.size(); it++)
@@ -1356,7 +1361,7 @@ void NearLine::m_ts_calculate()
     m_ts_histo[it].Merge();
     if (type == RF)
     {
-      if (m_ts_verbose) print("RF :",deltaT_RF,"with",m_ts_histo_RF->GetMaximum(),"bins in peak");
+      if (m_ts_verbose && m_use_RF) print("RF :",deltaT_RF,"with",m_ts_histo_RF->GetMaximum(),"bins in peak");
       outDeltaTfile << it << "\t" << deltaT_RF << std::endl;
       continue;
     }
@@ -1426,7 +1431,7 @@ void NearLine::m_ts_calculate()
 
     // Save the deltaT histo for each detector :
     for (size_t i = 0; i < m_ts_histo.size(); i++) m_ts_histo[i].Write();
-    m_ts_histo_RF.Write();
+    if (m_use_RF) m_ts_histo_RF.Write();
 
     //Save the deltaT VS Energy bidim for each detector
     for (size_t i = 0; i < m_ts_histo.size(); i++)

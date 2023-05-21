@@ -98,10 +98,7 @@ Bool_t EventBuilder::build(Hit const & hit)
 
 void EventBuilder::setFirstRF(Hit const & rf_hit)
 {
-  if (rf_hit.label != 251)
-  {
-    throw std::runtime_error("First RF hit of the file is not really a RF");
-  }
+  if (rf_hit.label != 251) throw std::runtime_error("First RF hit of the file is not really a RF");
   m_rf -> setHit(rf_hit);
   RF_ref_time = rf_hit.time;
 }

@@ -21,8 +21,8 @@ std::vector<std::string> all_runs(std::string const & listfilename);
 
 int main()
 {
-  std::string path = "/home/corentin/faster_data/";
-  // std::string path = "/srv/data/nuball2/";
+  // std::string path = "/home/corentin/faster_data/";
+  std::string path = "/srv/data/nuball2/";
   // std::string path = "/data_nuball2/";
 
 #if defined (N_SI_120)
@@ -92,7 +92,7 @@ int main()
     }
 
     //Faster2root :
-  //   app = new NearLine;
+    // app = new NearLine;
   //   app -> setConfig("NB_THREADS: 10");
   //   // app -> setConfig("NB_THREADS: 30");
 
@@ -104,7 +104,7 @@ int main()
   //   else {print("Can't recognize the run of "+removePath(runs[i])); continue;}
 
   // #elif defined (N_SI_129)
-  //   if (!app -> setConfig("ID: ID/index_129.dat")) return 0;
+  //   if (!app -> setConfig("ID: ../NearLine/ID/index_129.dat")) return 0;
   //   app -> setConfig("USE_RF: 50");
   //   if (!app -> setConfig("CALIBRATION: ../NearLine/Calibration/calib_129.dat")) return 0;
 
