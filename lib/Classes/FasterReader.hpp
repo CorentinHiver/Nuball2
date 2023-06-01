@@ -1,6 +1,26 @@
 #ifndef FASTERREADER_H
 #define FASTERREADER_H
-#include "../utils.hpp"
+
+#include <Hit.h>
+// ******* fasterac includes ******* //
+#include "fasterac/adc.h"
+#include "fasterac/adc_caras.h"
+#include "fasterac/electrometer.h"
+#include "fasterac/farray.h"
+#include "fasterac/fast_data.h"
+#include "fasterac/fasterac.h"
+#include "fasterac/group.h"
+#include "fasterac/jdb_hv.h"
+#include "fasterac/online.h"
+#include "fasterac/qdc.h"
+#include "fasterac/qdc_caras.h"
+#include "fasterac/qtdc.h"
+#include "fasterac/rf.h"
+#include "fasterac/rf_caras.h"
+#include "fasterac/sampler.h"
+#include "fasterac/scaler.h"
+#include "fasterac/spectro.h"
+#include "fasterac/utils.h"
 
 class FasterReader
 {//Can read .root as well as .fast datafiles
@@ -15,14 +35,14 @@ public:
     faster_file_reader_close(m_reader);
   }
 
-  Bool_t Initialize();
-  Bool_t Initialize(std::string const & _filename);
+  bool Initialize();
+  bool Initialize(std::string const & _filename);
   Hit*   ReadHit(Hit* hit);
-  Bool_t Read();
-  Bool_t ReadSimple();
-  Bool_t ReadGroup();
+  bool Read();
+  bool ReadSimple();
+  bool ReadGroup();
   //Faster functions
-  Bool_t switch_alias(uchar const & _alias, faster_data_p const & _data);
+  bool switch_alias(uchar const & _alias, faster_data_p const & _data);
   void ReadDataGroup(faster_data_p const & _data);
   void ReadData(faster_data_p const & _data);
 
@@ -31,41 +51,47 @@ public:
 
   //Getters :
   Hit*   getHit             () const { return m_hit        ;};
-  Bool_t const & isReady    () const { return m_kReady     ;};
-  Bool_t const & isWritable () const { return m_write      ;};
+  bool const & isReady    () const { return m_kReady     ;};
+  bool const & isWritable () const { return m_write      ;};
 
 private:
   //Internal methods :
-  Bool_t InitializeReader();
+  bool InitializeReader();
 
   // Containers :
   Hit*        m_hit = nullptr;
   Hit         m_empty_hit;
-  std::string m_filename   = "";
-  Bool_t      m_kReady   = true,
+  std::string m_filename = "";
+  bool        m_kReady   = true,
               m_write    = false,
               m_QDCx[4]  = {1,0,0,0};
-  UShort_t    m_group_read_cursor  = 0,
+  ushort      m_group_read_cursor  = 0,
               m_group_write_cursor = 0;
-  Buffer_ptr  m_hit_group_buffer;
+  std::vector<Hit*>   m_hit_group_buffer;
   faster_file_reader_p   m_reader = NULL;
   faster_data_p          m_data;
   uchar          m_alias = 0;
   //For treating groups :
-  Bool_t                 m_inGroup  = false;
+  bool                 m_inGroup  = false;
+
+  void TreatTrapez(faster_data_p const & _data);
+  void TreatCRRC4 (faster_data_p const & _data);
+  void TreatQDC1  (faster_data_p const & _data);
+  void TreatQDC2  (faster_data_p const & _data);
+  void TreatRF    (faster_data_p const & _data);
 };
 
 // ================== //
 //   INITIALIZATION   //
 // ================== //
 
-Bool_t FasterReader::Initialize(std::string const & _filename)
+bool FasterReader::Initialize(std::string const & _filename)
 {
   m_filename = _filename;
   return Initialize();
 }
 
-Bool_t FasterReader::Initialize()
+bool FasterReader::Initialize()
 {
   #ifdef FASTER_GROUP
   m_hit_group_buffer.resize(5000, &m_empty_hit); //If the number of hits in one group exceeds 5000 then it will crash
@@ -106,7 +132,7 @@ Bool_t FasterReader::Initialize()
   return false;
 }
 
-Bool_t FasterReader::InitializeReader()
+bool FasterReader::InitializeReader()
 {
   if (m_reader != NULL) faster_file_reader_close(m_reader); // if the reader has already been used to read another file
   m_reader = faster_file_reader_open ( m_filename.c_str() );
@@ -122,12 +148,11 @@ Bool_t FasterReader::InitializeReader()
 //     READ     //
 // ============ //
 
-Bool_t FasterReader::Read()
+bool FasterReader::Read()
 {
-  // To get access to the hit, you need to use the method GetHit();
   #ifdef FASTER_GROUP
   return ReadGroup();
-  #else
+  #else // TRIGGERLESS DATA
   return ReadSimple();
   #endif //FASTER_GROUP
 }
@@ -139,8 +164,8 @@ Hit* FasterReader::ReadHit(Hit* hit)
   return hit;
 }
 
-Bool_t FasterReader::ReadSimple()
-{// This function is replaced by ReadGroup if the faster data contains groups, this one is simply faster
+bool FasterReader::ReadSimple()
+{ // This function is replaced by ReadGroup if the faster data contains groups, this one is simply faster
   // and serves as the "prototype" to read groupless data
   // m_write variable is used to make sure only the handled types are read (see switch_alias definition)
   m_write = false;
@@ -152,8 +177,8 @@ Bool_t FasterReader::ReadSimple()
   return m_data;
 }
 
-Bool_t FasterReader::ReadGroup()
-{// Replace the standard ReadSimple if the faster data contains groups
+bool FasterReader::ReadGroup()
+{ // Replace the standard ReadSimple if the faster data contains groups
   /*
     First of all, the m_write variable is used to make sure only the handled types are managed (see switch_alias() definition)
     First hit read : goes inside ReadData()
@@ -205,7 +230,7 @@ Bool_t FasterReader::ReadGroup()
 }
 
 void FasterReader::ReadData(faster_data_p const & _data)
-{// Treats faster data
+{ // Treats faster data
   m_hit->label = faster_data_label(_data);
 #ifdef QDC2
   m_hit->nrj2 = 0; // In order to clean the data, as nrj2 never gets cleaned if there was QDC2 in the previous hit
@@ -251,52 +276,97 @@ void FasterReader::ReadDataGroup(faster_data_p const & _data)
   faster_buffer_reader_close(group_reader);
 }
 
-Bool_t FasterReader::switch_alias(uchar const & _alias, faster_data_p const & _data)
-{//Treat the specific part of data (QDC gates, spectro ADC ...)
+bool FasterReader::switch_alias(uchar const & _alias, faster_data_p const & _data)
+{ // Treat the specific part of data (QDC gates, spectro ADC ...)
   switch(_alias)
   {
     case TRAPEZ_SPECTRO_TYPE_ALIAS: // trapez_spectro
-      TreatTrapez(m_hit, _data);
+      TreatTrapez(_data);
       return true;
 
     case QDC_TDC_X1_TYPE_ALIAS: // qdc_t_x1
-      TreatQDC1(m_hit, _data);
+      TreatQDC1(_data);
       return true;
-    #ifdef QDC2
+
+  #ifdef QDC2
     case QDC_TDC_X2_TYPE_ALIAS: // qdc_t_x2
-      TreatQDC2(m_hit, _data);
+      TreatQDC2(_data);
       return true;
-    #endif //QDC2
+  #endif //QDC2
 
     case RF_DATA_TYPE_ALIAS: // rf_data
-      TreatRF(m_hit, _data);
+      TreatRF(_data);
       return true;
       break;
-    //
-    // case QDC_TDC_X3_TYPE_ALIAS: // qdc_t_x3
-    //   TreatQDC3(m_hit, _data);
-    //   return true;
-    //
-    // case QDC_TDC_X4_TYPE_ALIAS: // qdc_t_x4
-    //   TreatQDC4(m_hit, _data);
-    //   return true;
 
-    case SYNCHRO_TYPE_ALIAS: // synchro
-      return false;
-
-    case CRRC4_SPECTRO_TYPE_ALIAS: // crrc4_spectro
-      TreatCRRC4(m_hit, _data);
+      case CRRC4_SPECTRO_TYPE_ALIAS: // crrc4_spectro
+      TreatCRRC4(_data);
       return true;
 
-    case RF_COUNTER_TYPE_ALIAS:
-      return false;
-    case QDC_COUNTER_TYPE_ALIAS: // qdc_counter
-      return false;
-    case SPECTRO_COUNTER_TYPE_ALIAS: // spectro_counter
-      return false;
-    default:
+    case SYNCHRO_TYPE_ALIAS: case RF_COUNTER_TYPE_ALIAS: case QDC_COUNTER_TYPE_ALIAS: case SPECTRO_COUNTER_TYPE_ALIAS: default:
       return false;
   }
+}
+
+void FasterReader::TreatTrapez(const faster_data_p& data)
+{  // Load Trapez data
+   trapez_spectro adc;
+   faster_data_load(data, &adc);
+
+   m_hit->nrj = adc.measure;
+ #ifdef QDC2
+   m_hit->nrj2 = 0;
+ #endif //QDC2
+   m_hit->pileup = (adc.pileup == 1 || adc.saturated == 1);
+}
+
+void FasterReader::TreatCRRC4(const faster_data_p& data)
+{  // Load ADC data
+   crrc4_spectro crrc4_adc;
+   faster_data_load(data, &crrc4_adc);
+
+   m_hit->nrj = crrc4_adc.measure;
+ #ifdef QDC2
+   m_hit->nrj2 = 0;
+ #endif //QDC2
+   m_hit->pileup = (false); //TO BE LOOKED AT
+}
+
+void FasterReader::TreatQDC1(const faster_data_p& data)
+{ // Load QDC data
+  qdc_t_x1 qdc;
+  faster_data_load(data, &qdc);
+
+  // Set up m_hit
+  m_hit->nrj = qdc.q1;
+#ifdef QDC2
+  m_hit->nrj2 = 0;
+#endif //QDC2
+
+  m_hit->pileup = (qdc.q1_saturated == 1); // No pileup for BGO - they are always piled up!
+}
+
+void FasterReader::TreatQDC2(const faster_data_p& data)
+{ // Load QDC2 data
+  qdc_t_x2 qdc;
+  faster_data_load(data, &qdc);
+  m_hit->nrj = qdc.q1;
+#ifdef QDC2
+  m_hit->nrj2 = qdc.q2;
+#endif //QDC2
+  m_hit->pileup = (qdc.q1_saturated == 1 || qdc.q2_saturated == 1);
+}
+
+void FasterReader::TreatRF(const faster_data_p& data)
+{ // Load RF data
+   rf_data rf;
+   faster_data_load(data, &rf);
+
+   m_hit->nrj = rf_period_ns(rf)*1000;
+ #ifdef QDC2
+   m_hit->nrj2 = qdc.q2;
+ #endif //QDC2
+   m_hit->pileup = false;
 }
 
 #endif //FASTERREADER_H

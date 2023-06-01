@@ -135,16 +135,16 @@ template <class THist>
 template <class... ARGS>
 inline void MTTHist<THist>::reset(std::string name, ARGS &&... args)
 {
-  m_mutex.lock();
+  shared_mutex.lock();
   m_file = gROOT -> GetFile();// If SIGSEGV here, have you instantiated the object ? (e.g., in an array of histograms)
   m_exists = true;// If SIGSEGV here, have you instantiated the object ? (e.g., in an array of histograms)
   m_str_name = name;
 
 
-  #ifdef MTTHIST_MONO
+#ifdef MTTHIST_MONO
   if (!m_merged) m_merged = new THist (name.c_str(), std::forward<ARGS>(args)...);
 
-  #else // not MTTHIST_MONO
+#else // not MTTHIST_MONO
   if (isMasterThread())
   {
     m_collection.resize(MTObject::nb_threads, nullptr);
@@ -167,8 +167,8 @@ inline void MTTHist<THist>::reset(std::string name, ARGS &&... args)
     m_is_deleted[i] = false;
   }
 
-  #endif //MTTHIST_MONO
-  m_mutex.unlock();
+#endif //MTTHIST_MONO
+  shared_mutex.unlock();
 }
 
 template <class THist>

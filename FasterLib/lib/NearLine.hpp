@@ -32,8 +32,6 @@
 #define QDC2
 #endif //QDC2
 
-// #define LIB = "../../lib/";
-
 // NearLine3 v2
 #include <FilesManager.hpp>
 #include <EventBuilder.hpp>
@@ -548,7 +546,7 @@ void NearLine::faster2root(std::string const & filename, int const & thread_nb)
       if (Counter.DSSDMult > 0)
       {
         for (size_t i = 0; i<buffer.size(); i++) if (isDSSD[buffer.labels[i]]) {dssd_timeRef = buffer.times[i]; break;}
-        for (size_t i = 0; i<buffer.size(); i++) buffer.time2s[i] = static_cast<float>(static_cast<Long64_t>(buffer.times[i]-dssd_timeRef));
+        for (size_t i = 0; i<buffer.size(); i++) buffer.time2s[i] = static_cast<float>(static_cast<Long64_t>(buffer.times[i]-dssd_timeRef))/1000.;
         outTree -> Fill();
       }
 
@@ -590,7 +588,7 @@ void NearLine::faster2root(std::string const & filename, int const & thread_nb)
     "Reading :"   , 1.E-6*nb_data,   "Mevts in", time_read.TimeElapsedSec(),  "s |",
     "Converting :", 1.E-6*nb_data,   "Mevts to", 1.E-6*outTree->GetEntries(), "Mevts ( factor", nb_data/outTree->GetEntries(), ")"
   );
-  else print(rmPathAndExt(filename), ":",1000*(m_fr_treated_run_size/m_size_data),"%");
+  else print(rmPathAndExt(filename), ":",100*(m_fr_raw_run_size/m_size_data),"%");
   MTObject::shared_mutex.unlock();
 }
 
@@ -1367,14 +1365,14 @@ void NearLine::m_ts_calculate()
     }
     if (!m_ts_histo[it].exists()) continue; // Eliminate empty histograms
     if (m_ts_verbose) print(m_labelToName[it]);
-    #ifdef LICORNE
+  #ifdef LICORNE
     if (type == EDEN)
     {
       outDeltaTfile << it << "\t" << 0;
       continue;
     }
-    #endif //LICORNE
-    #ifdef USE_DSSD
+  #endif //LICORNE
+  #ifdef USE_DSSD
     if (type == dssd)
     {
       if (m_use_RF)
@@ -1388,13 +1386,13 @@ void NearLine::m_ts_calculate()
       else
       {
         amppic = m_ts_histo[it] -> GetMaximum();
-        pospic = ( m_ts_histo[it] -> FindLastBinAbove(amppic/2) - (m_ts_histo[it] -> GetNbinsX()/2) ) * m_ts_rebin[dssd] ;
+        pospic = ( m_ts_histo[it] -> FindLastBinAbove(amppic*0.8) - (m_ts_histo[it] -> GetNbinsX()/2) ) * m_ts_rebin[dssd] ;
         outDeltaTfile << it << "\t" << pospic << std::endl;
         if (m_ts_verbose) print( "mean : ", m_ts_histo[it] -> GetMean(), "with", (int) m_ts_histo[it] -> GetMaximum(), "counts in peak");
       }
       continue;
     }
-    #endif
+  #endif
     amppic = m_ts_histo[it] -> GetMaximum();
     pospic = (Float_t) (m_ts_histo[it] -> GetMaximumBin() - (m_ts_histo[it] -> GetNbinsX()/2))*m_ts_rebin[type];
     dump_sigma = (Float_t) (m_ts_histo[it] -> FindLastBinAbove(amppic/2) - m_ts_histo[it] -> FindFirstBinAbove(amppic/2))*m_ts_rebin[type]/2;

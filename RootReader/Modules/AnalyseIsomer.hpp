@@ -129,7 +129,7 @@ void AnalyseIsomer::InitializeManip()
       500,-100,400, 500,-100,400);
 
   // Set analysis parameters :
-  Sorted_Event::setDSSDVeto(-10, 50, 12000);
+  Sorted_Event::setDSSDVeto(-10, 50, 5000);
 }
 
 void AnalyseIsomer::FillRaw(Event const & event)
@@ -142,7 +142,18 @@ void AnalyseIsomer::FillRaw(Event const & event)
 
 void AnalyseIsomer::FillSorted(Sorted_Event const & event_s, Event const & event)
 {
-  // if (event_s.dssd_veto) return;
+  if (event_s.dssd_veto) return;
+  bool trigger = false;
+  // for (auto const & clover_i : event_s.clover_hits)
+  // {
+  //   auto const & Time_i = event_s.time_clover[clover_i];
+  //   auto const & nrj_i  = event_s.nrj_clover[clover_i];
+  //   if (Ge_delayed_gate.isIn(Time_i) && nrj_i>93 && nrj_i<99)
+  //   {
+  //      trigger = true; break;
+  //   }
+  // }
+  if (!trigger) return;
   for (auto const & dssd : event_s.DSSD_hits)
   {
     auto const & dssd_nrj = event.nrjs[dssd];
@@ -208,7 +219,10 @@ void AnalyseIsomer::FillSorted(Sorted_Event const & event_s, Event const & event
       {
         if (delayed_j)
         {
-          if (abs(Time_i-Time_j)<50/2 && (Time_i<190 || Time_i>220) && (Time_j<190 || Time_j>220))
+          if (abs(Time_i-Time_j)<50/2
+          && nrj_i>900 && nrj_i<908
+          // && (Time_i<190 || Time_i>220) && (Time_j<190 || Time_j>220)
+        )
           {
             GeDelayed_VS_GeDelayed_time . Fill(Time_i, Time_j);
             GeDelayed_VS_GeDelayed_time . Fill(Time_j, Time_i);

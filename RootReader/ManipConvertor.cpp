@@ -74,21 +74,27 @@ void convertRun(quick_parameters & param)
   while(param.runs.getNext(run))
   {
     MTObject::shared_mutex.lock();
-    // print("Converting",run);
+    print("Converting",run);
     MTObject::shared_mutex.unlock();
     std::string pathRun = param.dataPath+run;
     makePath(pathRun);
     if (!folder_exists(pathRun)) {print(pathRun, "doesn't exists !"); return;}
     std::string rootFiles = pathRun+"*.root";
 
-    // print("starting");
+  #ifdef DEBUG
+    print("starting");
+  #endif //DEBUG
 
     TChain chain("Nuball");
     chain.Add(rootFiles.c_str());
-    Event event(&chain,"mltnN");
+    // Event event(&chain,"mltnN");
+    Event event;
+    event.connect(&chain,"mltnN");
     // auto nb = chain->GetEntries();
 
-    // print("Chain loaded");
+  #ifdef DEBUG
+    print("Chain loaded");
+  #endif //DEBUG
 
     Timer readTimer;
 
@@ -146,11 +152,13 @@ void convertRun(quick_parameters & param)
       auto paris_mult = std::make_unique<TH1F>(("paris_mult_"+run+std::to_string(file_nb)).c_str(),("paris mult "+run+std::to_string(file_nb)).c_str(), 20,0,20);
       auto dssd_mult = std::make_unique<TH1F>(("dssd_mult_"+run+std::to_string(file_nb)).c_str(),("dssd mult "+run+std::to_string(file_nb)).c_str(), 20,0,20);
 
-    #ifdef USE_RF
+    #if defined (USE_RF)
       event.writeTo(outTree.get(),"lnNTRP");
-    #else // NO RF
+    #elif defined (USE_DSSD_REF)
       event.writeTo(outTree.get(),"lnNT");
-    #endif //USE_RF
+    #else
+      event.writeTo(outTree.get(),"lnNt");
+    #endif
 
       // Loop over the data until the output tree reaches the maximum size, or the end of data is reached :
       while(evt<chain.GetEntriesFast())

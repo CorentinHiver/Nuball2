@@ -1,8 +1,8 @@
 #ifndef BUILDER_H
 #define BUILDER_H
 #include "../libCo.hpp"
+#include "../libRoot.hpp"
 #include "Event.hpp"
-#include "Counters.hpp"
 
 class Builder
 {
@@ -33,11 +33,9 @@ public:
     m_last_hit = hit;
   }
 
-  virtual void setCounter(Counters * counter) {m_Counter = counter;}
 
 protected:
   Event*    m_event   = nullptr;
-  Counters* m_Counter = nullptr;
   std::size_t m_raw_Ge  = 0;
   std::size_t m_DSSD    = 0;
   std::size_t m_modules = 0;

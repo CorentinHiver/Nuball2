@@ -38,7 +38,7 @@ private:
   // Attributes :
   Time RF_ref_time = 0;
   RF_Manager* m_rf   = nullptr;
-  Time        m_shift = 0;
+  Time m_shift = 0;
 };
 
 Bool_t EventBuilder::build(Hit const & hit)

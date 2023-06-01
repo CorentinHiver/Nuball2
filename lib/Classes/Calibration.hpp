@@ -1,14 +1,19 @@
-#include "../utils.hpp"
+#ifndef CALIBRATION_H
+#define CALIBRATION_H
+
+#include <Hit.h>
+
 class Calibration
 {
 public:
 
   Calibration(){};
+  Calibration(std::string const & file, int const & label_max){readFile(file, label_max);};
 
   Bool_t readFile(std::string const & calibFileName, int const & label_max);
 
   void    calibrate(Hit & hit);
-  Float_t calibrate(Float_t const & nrj, UShort_t const & order);
+  Float_t calibrate(Float_t const & nrj, Label const & label);
 
   Bool_t const & isFilled() const {return m_isFilled;}
 
@@ -140,7 +145,6 @@ void Calibration::set(UShort_t _label, Float_t _intercept = 0.f, Float_t _slope 
 Bool_t Calibration::readFile(std::string const & calibFileName, int const & label_max)
 {
   m_max_labels = label_max;
-  print(label_max);
   std::ifstream inputfile;
   inputfile.open(calibFileName);
   if (!inputfile.good()) return false;
@@ -163,3 +167,5 @@ Bool_t Calibration::readFile(std::string const & calibFileName, int const & labe
   m_isFilled = true;
   return true;
 }
+
+#endif //CALIBRATION_H

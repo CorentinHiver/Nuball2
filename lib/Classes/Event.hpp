@@ -3,6 +3,7 @@
 
 #include "Hit.h"
 #include "../libCo.hpp"
+#include "../libRoot.hpp"
 
 /*
 
@@ -186,15 +187,15 @@ void Event::writeTo(TTree * tree, std::string const & options)
 
   tree -> ResetBranchAddresses();
 
-                   tree -> Branch("mult"     , &mult);
-  if (write.l   )  tree -> Branch("label"    , &labels , "label[mult]/s" );
-  if (write.t   )  tree -> Branch("time"     , &times  , "time[mult]/l"  );
-  if (write.T   )  tree -> Branch("Time"     , &time2s , "Time[mult]/F");
-  if (write.E   )  tree -> Branch("nrj"      , &nrjs   , "nrj[mult]/F"   );
-  if (write.E2  )  tree -> Branch("nrj2"     , &nrj2s  , "nrj2[mult]/F"  );
-  if (write.p   )  tree -> Branch("pileup"   , &pileups, "pileup[mult]/O");
-  if (write.RFt )  tree -> Branch("RFtime"   , &RFtime  );
-  if (write.RFp )  tree -> Branch("RFperiod" , &RFperiod);
+                    tree -> Branch("mult"     , &mult);
+  if ( write.l   )  tree -> Branch("label"    , &labels , "label[mult]/s" );
+  if ( write.t   )  tree -> Branch("time"     , &times  , "time[mult]/l"  );
+  if ( write.T   )  tree -> Branch("Time"     , &time2s , "Time[mult]/F");
+  if ( write.E   )  tree -> Branch("nrj"      , &nrjs   , "nrj[mult]/F"   );
+  if ( write.E2  )  tree -> Branch("nrj2"     , &nrj2s  , "nrj2[mult]/F"  );
+  if ( write.p   )  tree -> Branch("pileup"   , &pileups, "pileup[mult]/O");
+  if ( write.RFt )  tree -> Branch("RFtime"   , &RFtime  );
+  if ( write.RFp )  tree -> Branch("RFperiod" , &RFperiod);
 
   tree -> SetBranchStatus("*",true);
 }
@@ -217,21 +218,22 @@ void Event::connect(TTree * tree, std::string const & options)
     }
   }
   tree -> ResetBranchAddresses();
-               tree -> SetBranchAddress("mult"    , &mult    );
-  if (read.l ) tree -> SetBranchAddress("label"   , &labels  );
-  if (read.t ) tree -> SetBranchAddress("time"    , &times   );
-  if (read.T ) tree -> SetBranchAddress("Time"    , &time2s  );
-  if (read.E ) tree -> SetBranchAddress("nrj"     , &nrjs    );
-  if (read.E2) tree -> SetBranchAddress("nrj2"    , &nrj2s   );
-  if (read.p ) tree -> SetBranchAddress("pileup"  , &pileups );
-  if (read.p ) tree -> SetBranchAddress("RFtime"  , &RFtime  );
-  if (read.p ) tree -> SetBranchAddress("RFperiod", &RFperiod);
+                tree -> SetBranchAddress("mult"    , &mult    );
+  if ( read.l ) tree -> SetBranchAddress("label"   , &labels  );
+  if ( read.t ) tree -> SetBranchAddress("time"    , &times   );
+  if ( read.T ) tree -> SetBranchAddress("Time"    , &time2s  );
+  if ( read.E ) tree -> SetBranchAddress("nrj"     , &nrjs    );
+  if ( read.E2) tree -> SetBranchAddress("nrj2"    , &nrj2s   );
+  if ( read.p ) tree -> SetBranchAddress("pileup"  , &pileups );
+  if ( read.p ) tree -> SetBranchAddress("RFtime"  , &RFtime  );
+  if ( read.p ) tree -> SetBranchAddress("RFperiod", &RFperiod);
 
   tree -> SetBranchStatus("*",true);
 }
 
 inline void Event::push_back(Hit const & hit)
 {
+  print(hit.nrj)
   labels[mult]  = hit.label;
   nrjs[mult]    = hit.nrjcal;
   nrj2s[mult]   = hit.nrj2;
@@ -280,8 +282,5 @@ inline void Event::Print()
   }
   print("---");
 }
-
-// Include useful classes
-#include "Counters.hpp"
 
 #endif //EVENT_H

@@ -8,9 +8,8 @@
 #include <thread>
 #include <mutex>
 
-#if defined (__CINT__) || defined (__ROOT__)
-  #include "TThread.h"
-#endif
+#include "TThread.h"
+#include <libRoot.hpp>
 
 class MTObject
 {
@@ -31,13 +30,13 @@ public:
     nb_threads = _nb_threads;
     master_thread = std::this_thread::get_id();
 
-  #if defined (__CINT__) || defined (__ROOT__)
+  // #if defined (__CINT__) || defined (__ROOT__)
     if (_nb_threads>1)
     {
       TThread::Initialize();
       ROOT::EnableThreadSafety();
     }
-  #endif
+  // #endif
 
     ON = true;
   }

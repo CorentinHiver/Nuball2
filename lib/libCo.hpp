@@ -33,7 +33,8 @@
 ////////////////
 
 typedef unsigned short int  ushort;
-typedef unsigned char       uchar;
+typedef unsigned char       uchar ;
+typedef unsigned int        uint  ;
 
 
 ///////////////////////
@@ -241,7 +242,7 @@ bool folder_exists(std::string folderName)
   return ret;
 }
 
-bool folder_exists(std::string & folderName, bool const & verbose)
+bool folder_exists(std::string folderName, bool const & verbose)
 {
   makePath(folderName);
   if (folder_exists(folderName)) return true;

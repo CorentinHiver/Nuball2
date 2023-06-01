@@ -1,6 +1,6 @@
 #ifndef FILEMANAGER_H
 #define FILEMANAGER_H
-#include "../utils.hpp"
+#include <libCo.hpp>
 
 using ListFiles = std::vector<std::string> ;
 using ListFolders = std::vector<std::string> ;
@@ -12,12 +12,12 @@ public:
   FilesManager(){};
   FilesManager(std::string const & folder, int nb_files = -1){addFolder(folder,nb_files);};
 
-  Bool_t nextFileName(std::string & filename, size_t const & step = 1);
+  bool nextFileName(std::string & filename, size_t const & step = 1);
 
   // Adds either a single file or reads a .list containing a list of files
-  Bool_t addFiles     (std::string const & _filename        );
+  bool addFiles     (std::string const & _filename        );
   // Adds a given number of files with a .root or .fast inside the given folder (by default all the files, or the nb_files first ones)
-  Bool_t addFolder    (std::string folder, int nb_files = -1);
+  bool addFolder    (std::string folder, int nb_files = -1);
   void   flushFiles   ();
   void   Print        ();
   void   printFolders ();
@@ -34,7 +34,7 @@ public:
 
   size_t const & getCursor () const { return m_filesCursor;}
   size_t size () const { return m_listFiles.size();}
-  Bool_t isEmpty () { return (this->size() == 0);}
+  bool isEmpty () { return (this->size() == 0);}
 
   //Files reader :
   virtual std::string getFile    (int const & n = -1)
@@ -45,7 +45,7 @@ public:
 
   //Setters :
   void setListFiles(ListFiles const & list) {this -> flushFiles(); for (size_t i = 0; i<list.size(); i++) this -> addFiles(list[i]);}
-  void setCursor(Int_t const & _filesCursor) {m_filesCursor = static_cast<size_t> (_filesCursor);}
+  void setCursor(int const & _filesCursor) {m_filesCursor = static_cast<size_t> (_filesCursor);}
   void setCursor(size_t const & _filesCursor) {m_filesCursor = _filesCursor;}
   void setVerbose(bool const & v) {verbose = v;}
 
@@ -62,9 +62,9 @@ protected:
   bool verbose = false;
 };
 
-Bool_t FilesManager::addFiles(std::string const & _filename)
+bool FilesManager::addFiles(std::string const & _filename)
 {
-  UInt_t numberFiles = 0;
+  uint numberFiles = 0;
   if (extension(_filename) == "list")
   {// using the "data" file as an input containing the path to the actual data .root or .fast files
     std::ifstream inputsFile (_filename);
@@ -96,7 +96,7 @@ Bool_t FilesManager::addFiles(std::string const & _filename)
   << "unkown..." << std::endl << "Abort..." << std::endl;return false;}
 }
 
-Bool_t FilesManager::addFolder(std::string _foldername, int _nb_files)
+bool FilesManager::addFolder(std::string _foldername, int _nb_files)
 {
   if (extension(_foldername) == "list")
   {
@@ -159,7 +159,7 @@ void FilesManager::flushFiles()
   m_filesCursor = 0;
 }
 
-Bool_t FilesManager::nextFileName(std::string & filename, size_t const & step)
+bool FilesManager::nextFileName(std::string & filename, size_t const & step)
 {
   if(m_filesCursor+step>m_listFiles.size()) return false;
   filename = m_listFiles.at(m_filesCursor);
