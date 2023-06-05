@@ -1,7 +1,8 @@
 #ifndef MTLIST_H
 #define MTLIST_H
 
-#include "MTObject.hpp"
+#include <MTObject.hpp>
+#include <libCo.hpp>
 
 template<class T>
 class MTList : public MTObject
@@ -15,7 +16,7 @@ public:
 
   bool getNext(T & t);
   bool getNext(T & t, size_t & index);
-  void Reset() {i = 0;}
+  void reset() {i = 0;}
 
   size_t const & size() const {return m_size;}
   T const & operator[] (size_t const & i) {return m_collection[i];}
@@ -28,6 +29,8 @@ public:
   void operator=(std::vector<T> const & collection) {this->set(collection);}
 
   void push_back(T const & t) {m_collection.push_back(t);}
+
+  void Print() {print(m_collection);}
 
 private:
   std::vector<T> m_collection;

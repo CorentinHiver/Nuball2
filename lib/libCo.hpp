@@ -149,6 +149,7 @@ std::string removeBlankSpace(std::string str)
 	}
 	return str;
 }
+
 std::string rpCommaWDots(std::string str)
 {//  In a std::string, replaces all commas with dots
 	int pos = 0;
@@ -159,9 +160,20 @@ std::string rpCommaWDots(std::string str)
 	return str;
 }
 
+bool isNumber(std::string const & string)
+{
+  for (auto const & c : string)
+  {
+    if (!isdigit(c)) return false;
+  }
+  return true;
+}
+
+
 //----------------------------------------------------//
 //       General files and folders manipulations      //
 //----------------------------------------------------//
+
 std::string removeExtension (const std::string string) { return (string.substr(0, string.find_last_of(".")  ));  }
 std::string extension       (const std::string string) { return (string.substr(   string.find_last_of(".")+1));  }
 std::string getPath         (const std::string string) { return (string.substr(0, string.find_last_of("/")+1));  }
@@ -226,9 +238,10 @@ bool file_exists(std::string fileName)
   return false;
 }
 
-void makePath(std::string & folderName)
+std::string & makePath(std::string & folderName)
 {
   if (folderName.back() != '/') folderName.push_back('/');
+  return folderName;
 }
 
 bool folder_exists(std::string folderName)
@@ -250,9 +263,8 @@ bool folder_exists(std::string folderName, bool const & verbose)
   return false;
 }
 
-void create_folder_if_none(std::string & folderName)
+void create_folder_if_none(std::string const & folderName)
 {
-  makePath(folderName);
   if (folderName=="")
   {
     print("No folder asked for !");
@@ -368,6 +380,49 @@ template <class N, class D> std::string procent(N const & n, D const & d)
 {
   return (std::to_string(100*static_cast<double>(n)/static_cast<double>(d))+"%");
 }
+
+
+class Path
+{
+public:
+  Path(std::string const & inputString, bool create = false) : m_path(inputString)
+  {
+    makePath(m_path);
+    m_exists = folder_exists(m_path);
+    if (!m_exists && create) create_folder_if_none(m_path);
+    if (!folder_exists(m_path))
+    {
+      print(m_path,"doesn't exist !!");
+      m_exists = false;
+    }
+  }
+
+  int nbFiles() {return nb_files_in_folder(m_path);}
+  bool exists() {return folder_exists(m_path);}
+  bool create() {create_folder_if_none(m_path); return this -> exists();}
+  
+  operator std::string() const & {return m_path;}
+
+  Path & operator=(std::string const & inputString) 
+  {
+    m_path = inputString;
+    makePath(m_path);
+    m_exists = folder_exists(m_path);
+    if (!folder_exists(m_path))
+    {
+      print(m_path,"doesn't exist !!");
+      m_exists = false;
+    }
+    return *this;
+  }
+
+private:
+  bool m_exists = false;
+  std::string m_path;
+};
+
+using Folder = Path;
+
 
 //////////////////////////////
 //   VECTORS MANIPULATIONS  //

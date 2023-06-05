@@ -55,8 +55,8 @@ public:
   void operator= (Hit const & hit);
   void operator= (Event const & evt);
 
-  void connect(TTree * tree, std::string const & options = "ltnN");
-  void writeTo(TTree * tree, std::string const & options = "ltnN");
+  void connect(TTree * tree, std::string const & options = "ltn");
+  void writeTo(TTree * tree, std::string const & options = "ltn");
 
   void push_back(Hit const & hit);
   void push_front(Hit const & hit);
@@ -233,7 +233,6 @@ void Event::connect(TTree * tree, std::string const & options)
 
 inline void Event::push_back(Hit const & hit)
 {
-  print(hit.nrj)
   labels[mult]  = hit.label;
   nrjs[mult]    = hit.nrjcal;
   nrj2s[mult]   = hit.nrj2;

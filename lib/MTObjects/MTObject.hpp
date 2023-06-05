@@ -8,7 +8,6 @@
 #include <thread>
 #include <mutex>
 
-#include "TThread.h"
 #include <libRoot.hpp>
 
 class MTObject
@@ -17,26 +16,25 @@ public:
   MTObject() {}
   MTObject(ushort & _nb_threads ) {Initialize(_nb_threads);}
 
-  static void Initialize(ushort & _nb_threads, bool force = false)
+  static void Initialize(ushort const & _nb_threads, bool force = false)
   {
-    // First : check the number of threads. Usually, over 75% of cores is the optimal.
-    // Set force parameter tu true if want to use all the cores
+    // Check the number of threads. Usually, over 75% of cores is the optimal.
+    // Set force parameter to true if you want to use all the cores
     int maxThreads = static_cast<int>(std::thread::hardware_concurrency()*((force) ? 1 : 0.75));
-    if(_nb_threads > maxThreads)
-    {
-      _nb_threads = maxThreads;
-      std::cout << "Number of threads too large (hardware) -> reset to " << _nb_threads << std::endl;
-    }
     nb_threads = _nb_threads;
+    if(nb_threads > maxThreads)
+    {
+      nb_threads = maxThreads;
+      std::cout << "Number of threads too large (hardware) -> reset to " << nb_threads << std::endl;
+    }
+    
     master_thread = std::this_thread::get_id();
 
-  // #if defined (__CINT__) || defined (__ROOT__)
-    if (_nb_threads>1)
+    if (nb_threads>1)
     {
       TThread::Initialize();
       ROOT::EnableThreadSafety();
     }
-  // #endif
 
     ON = true;
   }

@@ -1,6 +1,7 @@
 #ifndef LIBROOTCO_HPP
 #define LIBROOTCO_HPP
 
+#include <libCo.hpp>
 
 // ********** ROOT includes ********* //
 #include "TCanvas.h"

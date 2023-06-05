@@ -13,45 +13,66 @@
 #include <Event.hpp>
 #include <CoincBuilder2.hpp>
 
+/* 
+ * Author : Corentin Hiver
+ * Module part of the NearLine software
+ * Goal 1 : calculate the time shifts between detectors
+ * How : 
+ * * Use one detector as reference, preferencially with good time resolution
+ * * Create coincidences using the CoincBuilder event builder
+ * * Calculate the difference in timestamp as follow : ref_time - detector_time
+ * * Finally, output the (.dT) file containing the time shifts of all the detectors
+ * Goal 2 : read a timeshift file (.dT) previously calculated by this module
+ * Goal 3 : apply the timeshifts by calling the operator[] : time_correct = time_shifted + timeshifts[label];
+ * This module includes multithreading management using MTObject::parallelise_function(function, parameters...) method
+*/
+
 class Timeshifts
 {
 public:
-  Timeshifts(){Detectors::Initialize();}
-  Timeshifts(std::string const & filename){this -> load(filename);}
+  Timeshifts() {Detectors::Initialize();}
+  Timeshifts(std::string const & filename) : m_filename(filename) {this -> load(filename);}
+  bool setParameters(std::string const & parameter);
   void load(std::string const & filename);
-  void setListDet(std::string const & filename) {m_detList = filename;}
-  void setListDet(DetectorsList const & detList) {m_detList = detList;}
+  void setDetectorsList(DetectorsList const & detList) {m_detList = detList;}
+  void setDetectorsList(DetectorsList * detList) {m_detList = *detList;}
 
-  void InitializeParam();
+  bool InitializeParam();
   void calculate(std::string const & folder, int const & nb_files = -1);
   static void treatFilesMT(MTList<std::string> & files_MT, Timeshifts & ts);
   void treatFile(std::string const & filename);
   void analyse();
   void write();
+  void Print() {print(m_timeshifts);}
 
   Long64_t const & operator[] (int const & i) const {return m_timeshifts[i];}
 
   std::vector<Long64_t> const & get() const {return m_timeshifts;}
 
-  std::map<std::string, Float_t> m_rebin = { {"LaBr3",100}, {"Ge",1000}, {"BGO",500}, {"EDEN",500}, {"RF",100}, {"paris",100}, {"dssd",1000}, {"EDEN",1000}};
+private:
+  bool m_ok = false;
+  bool m_verbose = false;
+  std::string m_filename = "";
+
+  std::vector<Long64_t> m_timeshifts;
 
   float m_timewindow = 1500000;
+  float m_timewindow_ns = 1500000;
   uchar m_max_mult = 2;
   uchar m_min_mult = 2;
   ushort m_timeRef_label = 252;
   std::string m_timeRef_name = "R1A9_FATIMA_LaBr3";
-  std::string m_outdir = "136/";
+  std::map<std::string, Float_t> m_rebin = { {"LaBr3",100}, {"Ge",1000}, {"BGO",500}, {"EDEN",500}, {"RF",100}, {"paris",100}, {"dssd",1000}};
+
+  std::string m_outdir = "";
   std::string m_ts_outdir = "Timeshifts/";
   std::string m_outRoot = "timeshifts.root";
   std::string m_outPath;
+  std::string m_outdata = "";
+
   DetectorsList m_detList;
   FilesManager files;
-  std::string m_outdata = "timeshifts.dT";
-  bool m_verbose = false;
 
-private:
-  bool m_ok = false;
-  std::vector<Long64_t> m_timeshifts;
   Vector_MTTHist<TH1F> m_histograms;
   MTTHist<TH1F> m_histo_RF;
   MTTHist<TH1F> m_EnergyRef;
@@ -95,16 +116,56 @@ void Timeshifts::load(std::string const & filename)
   m_ok = true;
 }
 
-void Timeshifts::InitializeParam()
+bool Timeshifts::setParameters(std::string const & parameter)
 {
+  std::string temp;
+  std::istringstream is(parameter);
+  while(is >> temp)
+  {
+    if (temp == "timewindow:" || temp == "time_window:")
+    {
+      is >> m_timewindow_ns;
+      if (m_timewindow_ns == 0) {std::cout << "NO TIME WINDOW !!" << std::endl; return false; }
+      m_timewindow = m_timewindow_ns*1000;
+      std::cout << "Extracting timeshifts with a time window of " << m_timewindow_ns << " ns" << std::endl;
+    }
+    else if (temp == "time_reference:")
+    {
+      is >> m_timeRef_name;
+      if (m_timeRef_name == "") {std::cout << "NO TIME REFERENCE !!" << std::endl; return false; }
+      if (isNumber(m_timeRef_name))
+      {
+        m_timeRef_label = std::stoi(m_timeRef_name);
+        m_timeRef_name = m_detList[m_timeRef_label];
+      }
+      else 
+      {
+        m_timeRef_label = m_detList.getLabel(m_timeRef_name);
+      }
+      std::cout << "Reference detector set to be " << m_timeRef_name << " (n°" << m_timeRef_label << ")" << std::endl;
+    }
+    else if (temp == "outDir:")   {is >> m_outdir; makePath(m_outdir);}
+    else if (temp == "outRoot:")  {is >> m_outRoot;}
+    else if (temp == "outData:")  {is >> m_outdata;}
+    else if (temp == "mult:")     {is >> m_min_mult >> m_max_mult;} //by default
+    else if (temp == "verbose")   {m_verbose = true;}
+    else {std::cout << std::endl << "ATTENTION, parameter " << temp << " not recognized !" << std::endl << std::endl; return false;}
+  }
+  if (m_outdata == "") m_outdata = removeExtension(m_outRoot)+".dT";
+  return true;
+}
+
+bool Timeshifts::InitializeParam()
+{
+  if (m_ok) return true; // To prevent multiple initializations
   m_outPath = m_outdir+m_ts_outdir;
   create_folder_if_none(m_outPath);
-  if (!folder_exists(m_outPath, true)) exit(1);
+  if (!folder_exists(m_outPath, true)) return (m_ok = false);
   if (extension(m_outdata) != "dT") m_outdata = removeExtension(m_outdata);
   if (m_detList.size() == 0)
   {
     print("PLEASE LOAD THE ID FILE IN THE TIMESHIFT MODULE");
-    return;
+    return (m_ok = false);
   }
   m_EnergyRef.reset("Energy_spectra", "Energy_spectra", 1000,0,5000);
   m_histograms.resize(m_detList.size());
@@ -121,19 +182,24 @@ void Timeshifts::InitializeParam()
   
     else m_histograms[l].reset(name.c_str(), name.c_str(), m_timewindow/m_rebin[type], -m_timewindow/2, m_timewindow/2);
   }
+  return (m_ok = true);
 }
 
 void Timeshifts::calculate(std::string const & folder, int const & nb_files)
 {
-  print ("Calculating time shift");
-
-  InitializeParam();
+  if (!InitializeParam()) 
+  {
+    print("Someting went wrong in the timeshifts initialization...");
+    return;
+  }
 
   files.addFolder(folder, nb_files);
 
   if (MTObject::ON)
   {// If multithreading, treat each data file of the folder in parallel
     print("Calculating timeshifts with", MTObject::getThreadsNb(),"threads");
+    // The FileManager object isn't thread safe. 
+    // That is why one has to encapsulate the files list inside a MTList (Multi-Threaded List) :
     MTList<std::string> files_MT(files.getListFiles());
     MTObject::parallelise_function(treatFilesMT, files_MT, *this);
   }
@@ -146,6 +212,7 @@ void Timeshifts::calculate(std::string const & folder, int const & nb_files)
       treatFile(filename);
     }
   }
+  
   // Once the histograms have been filled, fit the peaks and write the values down
   analyse();
 
@@ -155,6 +222,10 @@ void Timeshifts::calculate(std::string const & folder, int const & nb_files)
 
 void Timeshifts::treatFilesMT(MTList<std::string> & files_MT, Timeshifts & ts)
 {
+  // This method is a bit odd, as it has to be static in order to be multithreaded.
+  // Thus, the only way it can be "link" to the class (i.e. having access to its public members) is to pass the class itself as an argument.
+  // This is done by passing "Timeshifts & ts" in arguments and fill this argument with "*this" in the piece of code that calls it
+  // Finally, we can use the same function as the not multithreaded piece of code.
   std::string filename;
   while (files_MT.getNext(filename))
   {
@@ -176,10 +247,13 @@ void Timeshifts::treatFile(std::string const & filename)
   {
     if ( (counter%(uint)(1.E+6)) == 0 ) print(counter);
     counter++;
-    if ( hit.label == m_timeRef_label ) print(hit);
   #ifdef USE_RF
     if(isRF[hit.label]) {rf.last_hit = hit.time; rf.period = hit.nrj; continue;}
-    else if (hit.label == m_timeRef_label) m_histo_RF.Fill(rf.pulse_ToF(hit.time));
+    else if (hit.label == m_timeRef_label)
+    {
+      hit.nrjcal = hit.nrj; // In order to 
+       m_histo_RF.Fill(rf.pulse_ToF(hit.time));
+    }
     else if (isDSSD[hit.label])
     {
       m_histograms[hit.label].Fill(rf.pulse_ToF(hit.time, USE_RF));

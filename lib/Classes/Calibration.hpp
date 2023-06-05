@@ -2,15 +2,24 @@
 #define CALIBRATION_H
 
 #include <Hit.h>
+#include <libCo.hpp>
+#include <Detectors.hpp>
+#include <DetectorsList.hpp>
+#include <FilesManager.hpp>
+// #include <
 
 class Calibration
 {
 public:
 
   Calibration(){};
-  Calibration(std::string const & file, int const & label_max){readFile(file, label_max);};
+  Calibration(std::string const & file, int const & label_max){load(file, label_max);};
 
-  Bool_t readFile(std::string const & calibFileName, int const & label_max);
+  Bool_t load(std::string const & calibFileName, int const & label_max);
+  void calculate(std::string const & dataDir, int const & nb_files);
+
+  void setDetectorsList(DetectorsList const & ID_file) {m_detList = ID_file;}
+  void setDetectorsList(DetectorsList *ID_file) {m_detList = *ID_file;}
 
   void    calibrate(Hit & hit);
   Float_t calibrate(Float_t const & nrj, Label const & label);
@@ -22,8 +31,8 @@ public:
   operator bool() {return m_isFilled;}
 
   //DEV :
-  void calibrate_fast(Hit & hit);
-  void calibrate_fast(Label label, ADC energy, NRJ energy_calibrated);
+  // void calibrate_fast(Hit & hit){}
+  // void calibrate_fast(Label label, ADC energy, NRJ energy_calibrated){}
   void setCalibrationTables();
   //!DEV
 
@@ -33,7 +42,20 @@ private:
   //Private methods :
   void set(UShort_t label, Float_t intercept, Float_t slope, Float_t binom, Float_t trinom);
 
-  //Attributs :
+
+  //Attributs for the calculations :
+
+  Bool_t      m_verbose   = false;
+  Bool_t      m_residus   = false;
+  Bool_t      m_outRoot_b = false;
+  std::string m_source    = "";
+  std::string m_outRoot   = "calibration.root";
+  std::string m_outCalib  = "";
+  std::string m_outDir    = "Calibration/";
+  // void        Write(std::string _histoFilename){}
+  // void        residus_calculate(){}
+
+  //Attributs for the tables :
   Bool_t m_isFilled = false;
   UShort_t m_nb_labels = 0;
   UShort_t m_max_labels = 0;
@@ -43,14 +65,17 @@ private:
   std::vector<Float_t>  m_binom;
   std::vector<Float_t>  m_trinom;
   std::vector<std::vector<std::vector<Float_t>>> calibration_tables;
+
+  DetectorsList m_detList;
+  FilesManager files;
 };
 
-void Calibration::Print()
+void Calibration::calculate(std::string const & dataDir, int const & nb_files = -1)
 {
-  for (UShort_t i = 0; i<m_max_labels; i++)
-  {
-    std::cout << i << " : " << m_intercept[i] << " " << m_slope[i] << " " << m_binom[i] << std::endl;
-  }
+  print ("Calculating calibrations");
+
+  files.addFolder(dataDir, nb_files);
+
 }
 
 //DEV :
@@ -142,7 +167,7 @@ void Calibration::set(UShort_t _label, Float_t _intercept = 0.f, Float_t _slope 
   }
 }
 
-Bool_t Calibration::readFile(std::string const & calibFileName, int const & label_max)
+Bool_t Calibration::load(std::string const & calibFileName, int const & label_max)
 {
   m_max_labels = label_max;
   std::ifstream inputfile;
@@ -166,6 +191,14 @@ Bool_t Calibration::readFile(std::string const & calibFileName, int const & labe
   }
   m_isFilled = true;
   return true;
+}
+
+void Calibration::Print()
+{
+  for (UShort_t i = 0; i<m_max_labels; i++)
+  {
+    std::cout << i << " : " << m_intercept[i] << " " << m_slope[i] << " " << m_binom[i] << std::endl;
+  }
 }
 
 #endif //CALIBRATION_H

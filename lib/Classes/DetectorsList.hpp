@@ -1,13 +1,12 @@
 #ifndef DETECTORSLIST_H
 #define DETECTORSLIST_H
 
-// #include <utils.hpp>
-
 class DetectorsList
 {
 public:
   DetectorsList(){}
   DetectorsList(std::string const & filename) : m_filename(filename) { this -> load(m_filename); }
+  DetectorsList(DetectorsList const & otherList) : m_ok(otherList.m_ok), m_filename(otherList.m_filename), m_list(otherList.m_list), m_reversed_list(otherList.m_reversed_list) {  }
   void load (std::string const & filename);
 
   bool good() {return  m_ok;}  bool is_good() {return  m_ok;}
@@ -19,13 +18,17 @@ public:
   auto end  () {return m_list.end  ();}
 
   auto const & labelsList() const {return m_reversed_list;}
+  auto const & reverse()    const {return m_reversed_list;}
   auto const & get()        const {return m_list         ;}
 
+  ushort const & getLabel(std::string const & name) {return m_reversed_list[name];}
+
   void operator=(std::string const & filename) {this -> load(filename);}
-  void operator=(DetectorsList otherList)
+  DetectorsList& operator=(DetectorsList otherList)
   {
     m_reversed_list = otherList.labelsList();
     m_list = otherList.get();
+    return *this;
   }
 
   std::string const & operator[] (int i) const {return m_list[i];}
