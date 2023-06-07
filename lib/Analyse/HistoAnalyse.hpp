@@ -1,9 +1,8 @@
 #ifndef HISTOANALYSE_H
 #define HISTOANALYSE_H
 
-#include "../utils.hpp"
-#include "../Classes/Gate.hpp"
-#include "../MTObjects/MTTHist.hpp"
+#include <Gate.hpp>
+#include <MTTHist.hpp>
 
 template<class THist>
 class HistoAnalyse

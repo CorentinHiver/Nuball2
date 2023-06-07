@@ -11,7 +11,6 @@ HEADER_FILES := $(shell find $(HEADER_DIR) -type f -name '*.hpp' )
 HEADER_INCLUDES := $(addprefix -I,$(shell find $(HEADER_DIR) -type d ))
 # HEADER_INCLUDES := $(foreach file,$(HEADER_FILES),-I$(dir $(file)))
 
-
 .PHONY: debug opt
 
 %.o: %.cpp ${HEADER_FILES}

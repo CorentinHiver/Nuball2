@@ -26,7 +26,11 @@
 #include <stdlib.h>
 #include <string.h>
 
-// #include "boost/array.hpp"
+//////////////
+//   UNITS  //
+//////////////
+
+float _ns = 1000.;
 
 ////////////////
 //   TYPEDEF  //
@@ -428,6 +432,15 @@ using Folder = Path;
 //   VECTORS MANIPULATIONS  //
 //////////////////////////////
 
+template < class T >
+std::istringstream & operator >> (std::istringstream & is, std::vector<T>& v)
+{
+  T t;
+  is >> t;
+  v.push_back(t);
+  return is;
+}
+
 template <typename T>
 bool push_back_unique(std::vector<T> & vector, T const & t)
 {
@@ -441,7 +454,6 @@ bool push_back_unique(std::vector<T> & vector, T const & t)
     return false;
   }
 }
-
 
 ////////////////////////////
 //   CLASS STATIC VECTOR  //

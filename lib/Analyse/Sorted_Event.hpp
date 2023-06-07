@@ -1,10 +1,11 @@
 #ifndef SORTED_EVENT_H
 #define SORTED_EVENT_H
-#include "../utils.hpp"
-#include "../Classes/Event.hpp"
-#include "../Classes/Timewalk.hpp"
-#include "Clovers.hpp"
-// #include "DSSD.hpp"
+
+#include <Event.hpp>
+#include <Timewalk.hpp>
+#include <Clovers.hpp>
+#include <DSSD.hpp>
+#include <RF_Manager.hpp>
 
 class Sorted_Event
 {

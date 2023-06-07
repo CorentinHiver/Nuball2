@@ -34,6 +34,17 @@ public:
 
   size_t const & getCursor () const { return m_filesCursor;}
   size_t size () const { return m_listFiles.size();}
+  
+  float diskSize() const 
+  {
+    float ret = 0;
+    for (std::size_t i = 0; i<size(); i++)
+    {
+      ret+=size_file(m_listFiles[i]);
+    }
+    return ret;
+  }
+
   bool isEmpty () { return (this->size() == 0);}
 
   //Files reader :

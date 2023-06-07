@@ -1,13 +1,15 @@
 //g++ ManipConvertor.cpp  $(root-config --glibs --cflags --libs) $(pkg-config  --cflags --libs libfasterac) -o ManipConvertor -O2 -Wall -pthread -std=c++17
 
-#define N_SI_129
-#define PARIS
+// #define N_SI_129
+#define N_SI_120
+// #define USE_PARIS
 #define QDC2
-#define USE_DSSD
+// #define USE_DSSD
 #define FATIMA
+#define USE_LICORNE
 // #define M2G1_TRIG
 // #define NO_TRIG
-#define DSSD_TRIG
+// #define DSSD_TRIG
 // #define DSSD_M2G1_TRIG
 #define USE_RF 50
 
@@ -18,16 +20,18 @@
 #define CORENTIN
 // #define DATA2
 
-#include "../lib/utils.hpp"
-#include "../lib/Classes/Event.hpp"
-#include "../lib/Classes/FilesManager.hpp"
-#include "../lib/MTObjects/MTTHist.hpp"
-#include "../lib/MTObjects/MTList.hpp"
-#include "../lib/MTObjects/MTCounter.hpp"
+#include <Event.hpp>
+#include <FilesManager.hpp>
+#include <MTTHist.hpp>
+#include <MTList.hpp>
+#include <MTCounter.hpp>
+#include <DetectorsList.hpp>
+#include <Counters.hpp>
+#include <Detectors.hpp>
 
-Labels g_labelToName;
+DetectorsList g_listDet;
 
-#include "Classes/QuickParameters.hpp"
+#include <QuickParameters.hpp>
 
 void convertRun(quick_parameters & param);
 // void run_thread(quick_parameters & param);
@@ -44,10 +48,9 @@ int main(int argc, char ** argv)
   else if (argc == 3 && strcmp(argv[1],"-m")==0) qp.nb_threads = atoi(argv[2]);
 
   // Initialize arrays
-  g_labelToName = arrayID(qp.fileID);
-  auto m_nb_labels = g_labelToName.size();
-  setArrays(m_nb_labels);
-  if (qp.nb_threads>1)
+  g_listDet.load(qp.fileID);
+  auto m_nb_labels = g_listDet.size();
+  Detectors::Initialize();
 
   qp.runs = listFileReader(qp.runs_list);
 

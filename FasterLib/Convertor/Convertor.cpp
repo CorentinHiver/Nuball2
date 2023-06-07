@@ -3,6 +3,7 @@
 // #define USE_LICORNE
 #define USE_PARIS
 #define USE_DSSD
+#define QDC2
 // #define DATA
 #define CORENTIN
 
@@ -37,7 +38,7 @@ int main(int argc, char** argv)
   std::string cal_file = "../NearLine/Calibration/calib_129.cal";
   std::string time_ref = "252";
   std::string timewindow = "1500";
-  int nb_files_ts = 50;
+  int nb_files_ts = 10;
 
 #elif defined (N_SI_136)
   std::string manip_name = "N-SI-136";
@@ -57,10 +58,11 @@ int main(int argc, char** argv)
 
 #endif
 
-  auto outdir=datapath+manip_name+"-root/";
+  auto outdir=datapath+manip_name+"-root-2/";
   auto datadir=datapath+manip_name+"/";
 
   Faster2Root f2r(ID_file);
+  f2r.verbose();
 
   Manip runs(datadir+"list_runs.list");
   std::string run_folder;
@@ -72,9 +74,17 @@ int main(int argc, char** argv)
     if (!f2r.ok()) { print("ERREUR DE PROTOCOLE"); return -1; }
 
     auto run_name = rmPathAndExt(run_folder);
-    auto ts_parameters = "timewindow: "+timewindow+" time_reference: "+time_ref+
-            " outData: "+run_name+".dT outRoot: "+run_name+".root outDir: "+outdir;
-    f2r.calculateTimeshifts(ts_parameters, nb_files_ts);
+    auto ts_file = outdir+"Timeshifts/"+run_name+".dT";
+    if (!file_exists(ts_file))
+    {
+      auto ts_parameters = "timewindow: "+timewindow+" time_reference: "+time_ref+
+              " outData: "+run_name+".dT outRoot: "+run_name+".root outDir: "+outdir;
+      if (!f2r.calculateTimeshifts(ts_parameters, nb_files_ts)) return -1;
+    }
+
+    if (!f2r.loadTimeshifts(ts_file)) return -1;
+    if (!f2r.loadCalibration(cal_file)) return -1;
+    f2r.convert(10);
   }
 
   return 1;

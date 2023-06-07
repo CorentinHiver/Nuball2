@@ -1,8 +1,9 @@
 #ifndef COUNTERS_H
 #define COUNTERS_H
 
-#include "../libCo.hpp"
-#include "../Classes/Event.hpp"
+#include <libCo.hpp>
+#include <Event.hpp>
+#include <Detectors.hpp>
 
 class Counters
 {
@@ -69,14 +70,14 @@ void Counters::count_event(Event const & event)
     if(isGe[label])
     {
       RawGe++;
-      auto const & clover = labelToClover_fast[label];
+      auto const & clover = labelToClover[label];
       Ge_Clover  [clover] = true;
       list_clovers.push_back_unique(clover);
     }
     else if (isBGO[label])
     {
       RawBGO++;
-      auto const & clover = labelToClover_fast[label];
+      auto const & clover = labelToClover[label];
       BGO_Clover [clover] = true;
       list_clovers.push_back_unique(clover);
     }
@@ -121,8 +122,6 @@ void Counters::count_event(Event const & event)
 
 bool Counters::hasTrigged()
 {
-  bool trig = false;
-
 #ifdef NO_TRIG
   trig = true;
 #endif //NO_TRIG
@@ -171,6 +170,7 @@ bool Counters::hasTrigged()
     M1_counter = 0;
   }
 #endif //DOWNSCALE_M1
+ return true;
 }
 
 

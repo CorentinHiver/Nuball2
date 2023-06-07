@@ -1,9 +1,10 @@
 #ifndef CLOVERS_H
 #define CLOVERS_H
 
-#include "../utils.hpp"
-#include "../Classes/Event.hpp"
-#include "CloverModule.hpp"
+#include <libCo.hpp>
+#include <libRoot.hpp>
+#include <Event.hpp>
+#include <CloverModule.hpp>
 
 class Clovers
 {

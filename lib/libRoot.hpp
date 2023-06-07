@@ -35,6 +35,64 @@
 #include "TTree.h"
 #include "TTreeIndex.h"
 
+///////////////////////////
+//   TREE MANIPULATIONS  //
+///////////////////////////
+
+void alignator(TTree * tree, Int_t *NewIndex)
+{
+  Int_t const NHits = tree -> GetEntries();
+  tree -> SetBranchStatus("*", false);// Disables all the branches readability
+  tree -> SetBranchStatus("time", true);// Read only the time
+  // tree -> SetBranchStatus("label", true);// Read only the time
+  std::vector<ULong64_t> TimeStampBuffer(NHits,0);
+  ULong64_t TimeStamp = 0; tree->SetBranchAddress("time", &TimeStamp);
+  // UShort_t label = 0; tree->SetBranchAddress("label", &label);
+  for (int i = 0; i<NHits; i++)
+  {
+    tree -> GetEntry(i);
+    // if (i<20) std::cout << label << "\t" << TimeStamp << std::endl;
+    TimeStampBuffer[i]=TimeStamp;
+  }
+  Int_t i = 0, j = 0;
+  ULong64_t a = 0;
+  NewIndex[0]=0;
+	for (j=0; j<NHits;j++)
+	{
+  	NewIndex[j]=j;
+  	a=TimeStampBuffer[j]; //Focus on this time stamp
+  	i=j;
+		// Find the place to insert it amongst the previously sorted
+  	while((i > 0) && (TimeStampBuffer[NewIndex[i-1]] > a))
+  	{
+    	NewIndex[i]=NewIndex[i-1];
+    	i--;
+  	}
+  	NewIndex[i]=j;
+	}
+  tree -> SetBranchStatus("*", true); //enables again the whole tree
+}
+
+void test_alignator(TTree *tree, Int_t* NewIndex= nullptr, bool useNewIndex = false)
+{
+  tree -> SetBranchStatus("*", false);// Disables all the branches readability
+  tree -> SetBranchStatus("time", true);// Eneables to read only the time
+  ULong64_t TimeStamp; tree->SetBranchAddress("time", &TimeStamp);
+  ULong64_t PrevTimeStamp = 0; int j = 0;
+  int maxIt = tree -> GetEntries();
+  for (int i = 0; i < maxIt; i++)
+  {
+    if (useNewIndex) j = NewIndex[i] ;
+    else j = i;
+    tree -> GetEntry(j);
+    if ((Long64_t) (TimeStamp - PrevTimeStamp) < 0)
+    std::cout << j << " -> " << (Long64_t) (TimeStamp - PrevTimeStamp) << std::endl;
+    PrevTimeStamp = TimeStamp;
+  }
+  tree -> SetBranchStatus("*", true); //enables again the whole tree
+}
+
+
 
 /////////////////////////
 //   CLASS THE TCHAIN  //

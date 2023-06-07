@@ -364,7 +364,7 @@ void FasterReader::TreatRF(const faster_data_p& data)
 
    m_hit->nrj = rf_period_ns(rf)*1000;
  #ifdef QDC2
-   m_hit->nrj2 = qdc.q2;
+   m_hit->nrj2 = 0;
  #endif //QDC2
    m_hit->pileup = false;
 }

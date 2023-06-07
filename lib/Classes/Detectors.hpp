@@ -5,16 +5,18 @@
 
 using Label = ushort;
 
-std::vector<char> isClover(1000,false);
-std::vector<char> isGe(1000,false);
-std::vector<char> isBGO(1000,false);
-std::vector<char> isLaBr3(1000,false);
-std::vector<char> isEden(1000,false);
-std::vector<char> isRF(1000,false);
-std::vector<char> isParis(1000,false);
-std::vector<char> isDSSD(1000,false);
-std::vector<char> isDSSD_Sector(1000,false);
-std::vector<char> isDSSD_Ring(1000,false);
+std::vector<bool> isClover(1000,false);
+std::vector<bool> isGe(1000,false);
+std::vector<bool> isBGO(1000,false);
+std::vector<bool> isLaBr3(1000,false);
+std::vector<bool> isEden(1000,false);
+std::vector<bool> isRF(1000,false);
+std::vector<bool> isParis(1000,false);
+std::vector<bool> isDSSD(1000,false);
+std::vector<bool> isDSSD_Sector(1000,false);
+std::vector<bool> isDSSD_Ring(1000,false);
+
+std::vector<Label> labelToClover(1000,0);
 
 
 class Detectors
@@ -39,8 +41,10 @@ void Detectors::Initialize()
   isRF[251] = true;
   for (int label = 0; label<1000; label++)
   {
-    isBGO[label] = (label>22 && label<167 && (label+1)%6 <2 );
-    isGe[label]  = (label>22 && label<167 && (label+1)%6 >1 );
+    // Label to detector type :
+    isClover[label] = label>22 && label<167;
+    isBGO[label] = (isClover[label] && (label+1)%6 <2 );
+    isGe[label]  = (isClover[label] && (label+1)%6 >1 );
 
   #if defined (USE_LICORNE)
     isLaBr3[label] = (label>199 && label<220);
@@ -65,6 +69,9 @@ void Detectors::Initialize()
     isDSSD_Sector[label] = false;
     isDSSD_Ring[label] = false;
   #endif //USE_DSSD
+
+  // Label to other labeling system :
+  labelToClover[label] = (isClover[label]) ? (label-23)%6 : -1;
   }
 }
 

@@ -33,12 +33,12 @@ public:
   Timeshifts() {Detectors::Initialize();}
   Timeshifts(std::string const & filename) : m_filename(filename) {this -> load(filename);}
   bool setParameters(std::string const & parameter);
-  void load(std::string const & filename);
+  bool load(std::string const & filename);
   void setDetectorsList(DetectorsList const & detList) {m_detList = detList;}
   void setDetectorsList(DetectorsList * detList) {m_detList = *detList;}
 
   bool InitializeParam();
-  void calculate(std::string const & folder, int const & nb_files = -1);
+  bool calculate(std::string const & folder, int const & nb_files = -1);
   static void treatFilesMT(MTList<std::string> & files_MT, Timeshifts & ts);
   void treatFile(std::string const & filename);
   void analyse();
@@ -78,20 +78,20 @@ private:
   MTTHist<TH1F> m_EnergyRef;
 };
 
-void Timeshifts::load(std::string const & filename)
+bool Timeshifts::load(std::string const & filename)
 {
   std::ifstream inputfile(filename, std::ifstream::in);
   if (!inputfile.is_open())
   {
     print("Could not open the time shifts file - '", filename, "'");
     m_ok = false;
-    return;
+    return m_ok;
   }
   else if (file_is_empty(inputfile))
   {
     print("Time shift file - '", filename, "' is empty !");
     m_ok = false;
-    return;
+    return m_ok;
   }
   // ----------------------------------------------------- //
   UShort_t size = 0; std::string line = ""; int label = 0,  deltaT = 0;
@@ -113,7 +113,9 @@ void Timeshifts::load(std::string const & filename)
     m_timeshifts[label] = deltaT;
   }
   inputfile.close();
+  print("Timeshifts extracted from", filename);
   m_ok = true;
+  return m_ok;
 }
 
 bool Timeshifts::setParameters(std::string const & parameter)
@@ -185,12 +187,12 @@ bool Timeshifts::InitializeParam()
   return (m_ok = true);
 }
 
-void Timeshifts::calculate(std::string const & folder, int const & nb_files)
+bool Timeshifts::calculate(std::string const & folder, int const & nb_files)
 {
   if (!InitializeParam()) 
   {
     print("Someting went wrong in the timeshifts initialization...");
-    return;
+    return false;
   }
 
   files.addFolder(folder, nb_files);
@@ -218,6 +220,8 @@ void Timeshifts::calculate(std::string const & folder, int const & nb_files)
 
   // Write down the out files
   write();
+
+  return true;
 }
 
 void Timeshifts::treatFilesMT(MTList<std::string> & files_MT, Timeshifts & ts)

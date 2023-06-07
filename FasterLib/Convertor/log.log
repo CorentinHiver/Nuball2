@@ -1,1 +1,3 @@
 run_120: CompressionFactor: 32.5431 RawCounter: 360094119 TreatedCounter: 2912177
+: CompressionFactor: -nan RawCounter: 0 TreatedCounter: 0
+run_70: CompressionFactor: 8.37303 RawCounter: 774880390 TreatedCounter: 35298383

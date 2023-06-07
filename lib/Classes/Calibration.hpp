@@ -15,16 +15,16 @@ public:
   Calibration(){};
   Calibration(std::string const & file, int const & label_max){load(file, label_max);};
 
-  Bool_t load(std::string const & calibFileName, int const & label_max);
+  bool load(std::string const & calibFileName, int const & label_max);
   void calculate(std::string const & dataDir, int const & nb_files);
 
   void setDetectorsList(DetectorsList const & ID_file) {m_detList = ID_file;}
   void setDetectorsList(DetectorsList *ID_file) {m_detList = *ID_file;}
 
   void    calibrate(Hit & hit);
-  Float_t calibrate(Float_t const & nrj, Label const & label);
+  float calibrate(float const & nrj, Label const & label);
 
-  Bool_t const & isFilled() const {return m_isFilled;}
+  bool const & isFilled() const {return m_isFilled;}
 
   void Print();
 
@@ -40,14 +40,14 @@ public:
 
 private:
   //Private methods :
-  void set(UShort_t label, Float_t intercept, Float_t slope, Float_t binom, Float_t trinom);
+  void set(UShort_t label, float intercept, float slope, float binom, float trinom);
 
 
   //Attributs for the calculations :
 
-  Bool_t      m_verbose   = false;
-  Bool_t      m_residus   = false;
-  Bool_t      m_outRoot_b = false;
+  bool      m_verbose   = false;
+  bool      m_residus   = false;
+  bool      m_outRoot_b = false;
   std::string m_source    = "";
   std::string m_outRoot   = "calibration.root";
   std::string m_outCalib  = "";
@@ -56,15 +56,15 @@ private:
   // void        residus_calculate(){}
 
   //Attributs for the tables :
-  Bool_t m_isFilled = false;
+  bool m_isFilled = false;
   UShort_t m_nb_labels = 0;
   UShort_t m_max_labels = 0;
   std::vector<UShort_t> m_order; //1, 2 or 3 | 0 -> no calibration
-  std::vector<Float_t>  m_intercept;
-  std::vector<Float_t>  m_slope;
-  std::vector<Float_t>  m_binom;
-  std::vector<Float_t>  m_trinom;
-  std::vector<std::vector<std::vector<Float_t>>> calibration_tables;
+  std::vector<float>  m_intercept;
+  std::vector<float>  m_slope;
+  std::vector<float>  m_binom;
+  std::vector<float>  m_trinom;
+  std::vector<std::vector<std::vector<float>>> calibration_tables;
 
   DetectorsList m_detList;
   FilesManager files;
@@ -83,18 +83,18 @@ void Calibration::setCalibrationTables()
 {
   print("creating calibration tables");
   calibration_tables.resize(m_max_labels);
-  std::vector<std::vector<Float_t>> *calib_vec;
+  std::vector<std::vector<float>> *calib_vec;
   for (UShort_t i = 0; i<m_max_labels; i++)
   {
     calib_vec = &calibration_tables[i];
-    calib_vec->resize(1000000);
+    calib_vec->resize(200000);
   }
   print("Done !");
   print();
 }
 //!DEV
 
-inline Float_t Calibration::calibrate(Float_t const & nrj, Label const & label)
+inline float Calibration::calibrate(float const & nrj, Label const & label)
 {
   auto nrj_r = nrj+gRandom->Uniform(0,1);
   switch(m_order[label])
@@ -131,7 +131,7 @@ inline void Calibration::calibrate(Hit & hit)
   if (is_EDEN(label))
   {
     if (hit.nrj2==0) hit.nrj2 = 1;
-    hit.nrjcal = static_cast<Float_t>(hit.nrj2)/hit.nrj;
+    hit.nrjcal = static_cast<float>(hit.nrj2)/hit.nrj;
   }
 #elif defined (PARIS)
   if (isParis[label]) hit.nrj2 = calibrate(hit.nrj2, label);
@@ -141,7 +141,7 @@ inline void Calibration::calibrate(Hit & hit)
   else hit.nrjcal = calibrate(hit.nrj, label);
 }
 
-void Calibration::set(UShort_t _label, Float_t _intercept = 0.f, Float_t _slope = 1.f, Float_t _binom = 0.f, Float_t _trinom = 0.f)
+void Calibration::set(UShort_t _label, float _intercept = 0.f, float _slope = 1.f, float _binom = 0.f, float _trinom = 0.f)
 {
   if (_slope == 1.f && _intercept == 0.f) {m_order[_label] = 0;}
   else if (_binom == 0.f)
@@ -167,7 +167,7 @@ void Calibration::set(UShort_t _label, Float_t _intercept = 0.f, Float_t _slope 
   }
 }
 
-Bool_t Calibration::load(std::string const & calibFileName, int const & label_max)
+bool Calibration::load(std::string const & calibFileName, int const & label_max)
 {
   m_max_labels = label_max;
   std::ifstream inputfile;
@@ -180,7 +180,7 @@ Bool_t Calibration::load(std::string const & calibFileName, int const & label_ma
   m_slope    .resize(label_max, 1.f); //Fill with 1
   m_binom    .resize(label_max);
   m_trinom   .resize(label_max);
-  Float_t intercept = 0.f, slope = 1.f, binom = 0.f, trinom = 0.f;
+  float intercept = 0.f, slope = 1.f, binom = 0.f, trinom = 0.f;
   while (getline(inputfile, line))
   {
     m_nb_labels++;
@@ -190,6 +190,7 @@ Bool_t Calibration::load(std::string const & calibFileName, int const & label_ma
     intercept = 0.f; slope = 1.f; binom = 0.f; trinom = 0.f;
   }
   m_isFilled = true;
+  print("Timeshifts extracted from", calibFileName);
   return true;
 }
 

@@ -1,9 +1,11 @@
 #ifndef DSSD_H
 #define DSSD_H
 
-#include "../Classes/Event.hpp"
-#include "../Classes/Timewalk.hpp"
-#include "../utils.hpp"
+#include <libCo.hpp>
+#include <libRoot.hpp>
+
+#include <Event.hpp>
+#include <Timewalk.hpp>
 
 class DSSD
 {

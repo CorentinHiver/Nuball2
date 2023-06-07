@@ -19,29 +19,30 @@
 #endif //N_SI_120
 
 // #define MTTHIST_MONO
-#include "../lib/utils.hpp"
 
-#include "../lib/Classes/Event.hpp"
-#include "../lib/Classes/FilesManager.hpp"
-#include "../lib/Classes/Timewalk.hpp"
+#include <Event.hpp>
+#include <FilesManager.hpp>
+#include <Timewalk.hpp>
 
-#include "../lib/MTObjects/MTList.hpp"
-#include "../lib/MTObjects/MTCounter.hpp"
+#include <MTList.hpp>
+#include <MTCounter.hpp>
+#include <HistoAnalyse.hpp>
+#include <Detectors.hpp>
 
-Labels g_labelToName;
+Detectors g_detectors;
 
-#include "Classes/Parameters.hpp"
+#include <Parameters.hpp>
 
-#include "Modules/EachDetector.hpp"
-#include "Modules/Matrices.hpp"
-#include "Modules/RunCheck.hpp"
-#include "Modules/AnalyseDSSD.hpp"
-#include "Modules/AnalyseIsomer.hpp"
-#include "Modules/TimewalkDSSD.hpp"
-#include "Modules/Analyse511.hpp"
-#include "Modules/NoPulse.hpp"
+// Include modules
+#include <EachDetector.hpp>
+#include <Matrices.hpp>
+#include <RunCheck.hpp>
+#include <AnalyseDSSD.hpp>
+#include <AnalyseIsomer.hpp>
+#include <TimewalkDSSD.hpp>
+#include <Analyse511.hpp>
+#include <NoPulse.hpp>
 
-#include "../lib/Analyse/HistoAnalyse.hpp"
 
 
 int main(int argc, char** argv)
@@ -80,13 +81,6 @@ int main(int argc, char** argv)
   m_nb_labels = g_labelToName.size();
   setArrays(m_nb_labels);
 
-  // Paris paris;
-  // print("Paris instancié");
-  // paris.Initialize(2, 36);
-  // print("Paris initialisé");
-  // Initialize modules
-  // EventAnalyse event_a;
-
   // NoPulse np;
   // np.launch(p);
 
@@ -105,8 +99,8 @@ int main(int argc, char** argv)
   // Matrices ma;
   // ma.launch(p);
 
-  AnalyseIsomer ai;
-  ai.launch(p);
+  // AnalyseIsomer ai;
+  // ai.launch(p);
 
   p.printPerformances();
 
