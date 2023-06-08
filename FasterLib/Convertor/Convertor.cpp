@@ -25,12 +25,9 @@ int main(int argc, char** argv)
   
   MTObject::Initialize(nb_threads);
 
-
-#if defined (DATA)
-  std::string datapath = "/srv/data/nuball2/";
-#elif defined (CORENTIN)
-  std::string datapath = "/home/corentin/faster_data/";
-#endif
+  Path datapath = std::string(std::getenv("HOME"));
+       if ( datapath == "/home/corentin") datapath+="/faster_data/";
+  else if ( datapath == "/home/faster") datapath="/srv/data/nuball2/";
 
 #if defined (N_SI_129)
   std::string manip_name = "N-SI-129";
