@@ -65,7 +65,8 @@ public:
     else { return time; }
   }
 
-  std::string unit() {return m_unit;}
+  std::string unit() {(*this)(); return m_unit;}
+  
   float Unit()
   {
          if (m_unit == "ms") return 1.;

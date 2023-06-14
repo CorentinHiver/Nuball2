@@ -18,12 +18,12 @@ using Pileup_vec = std::vector<bool>;
 class Hit
 {
 public:
-  Label   label  = 0; //Hit label
-  float nrj    = 0; //energy
-  float nrj2   = 0; //used if QDC2
-  NRJ     nrjcal = 0; // Calibrated energy
-  Time    time   = 0; //time
-  bool    pileup = 0; //pile-up
+  Label label  = 0;     // Label
+  float nrj    = 0.f;   // Energy
+  float nrj2   = 0.f;   // used if QDC2
+  NRJ   nrjcal = 0;     // Calibrated energy
+  Time  time   = 0;     // Time
+  bool  pileup = false; // Pile-up
 
   void reset()
   {
@@ -35,7 +35,7 @@ public:
     pileup = 0;
   }
 
-  float gate_ratio(){if (nrj2 != 0) return ((float)(nrj2-nrj)/nrj2); else return 0.f;}
+  float gate_ratio(){if (nrj2 != 0) return ( static_cast<float>((nrj2-nrj)/nrj2) ); else return 0.f;}
 };
 
 template <class... T> void print(Hit const & hit, T const & ... t2)
@@ -49,8 +49,6 @@ void print(Hit hit)
   std::cout << "l : " << hit.label;
   if (hit.nrj >0)   std::cout << " nrj :  "   << hit.nrj ;
   if (hit.nrj2>0)   std::cout << " nrj2 : "   << hit.nrj2;
-  // if (hit.nrj3>0)   std::cout << " nrj3 : "   << hit.nrj3;
-  // if (hit.nrj4>0)   std::cout << " nrj4 : "   << hit.nrj4;
   if (hit.nrjcal>0) std::cout << " nrjcal : " << hit.nrjcal;
   std::cout << " time : " << hit.time;
   if (hit.pileup) std::cout << " pileup";
@@ -58,16 +56,16 @@ void print(Hit hit)
 }
 
 class Hit_ptr
-{
+{// Deprecated for now
 public:
 
-  Label   * label  = nullptr; //Hit label
-  float * nrj    = nullptr; //energy
-  float * nrj2   = nullptr; //used if QDC2
-  NRJ     * nrjcal = nullptr; // Calibrated energy
-  Time    * time   = nullptr; //time
-  float   * time2  = nullptr; //time
-  bool    * pileup = nullptr; //pile-up
+  Label * label  = nullptr; // Label
+  float * nrj    = nullptr; // Eenergy
+  float * nrj2   = nullptr; // used if QDC2
+  NRJ   * nrjcal = nullptr; // Calibrated energy
+  Time  * time   = nullptr; // Time
+  float * time2  = nullptr; // Relative time
+  bool  * pileup = nullptr; // Pile-up
 
   void reset()
   {
@@ -80,7 +78,7 @@ public:
     pileup = nullptr;
   }
 
-  float gate_ratio(){if ((*nrj2) != 0) return ((float)((*nrj2)-(*nrj))/(*nrj2)); else return 0.f;}
+  float gate_ratio(){if ((*nrj2) != 0) return ( static_cast<float>(((*nrj2)-(*nrj))/(*nrj2)) ); else return 0.f;}
 
 };
 

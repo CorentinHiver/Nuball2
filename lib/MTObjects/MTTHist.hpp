@@ -35,20 +35,33 @@ class MTTHist : public MTObject
 {
 public:
   template <class... ARGS>
-  MTTHist(ARGS &&... args) { this -> reset(std::forward<ARGS>(args)...); }
+  MTTHist(ARGS &&... args) 
+  {
+    (sizeof...(args)==0) ? this -> reset(nullptr) : this -> reset(std::forward<ARGS>(args)...);
+  }
+
+  MTTHist(THist* hist) {m_merged = hist; m_exists = true;}
+
+  // General constructor, fu8lly based on reset method
+  // template <class... ARGS>
+  // MTTHist(std::string name, ARGS &&... args) { this -> reset (name, std::forward<ARGS>(args)...); }
+
   ~MTTHist();
 
   // ---   GENERIC INITIALIZATION --- //
 
-  // General constructor, fully based on reset method
-  template <class... ARGS>
-  MTTHist(std::string name, ARGS &&... args) { this -> reset (name, args...); }
+
   //Copy initialiser :
   template <class... ARGS>
-  void reset(MTTHist<THist> hist) { m_exists = false; *this = hist;}
+  void reset(MTTHist<THist> hist) { m_exists = false; m_merged = static_cast<THist*>(hist.get());}
+
+  template <class... ARGS>
+  void reset(THist *hist) {m_exists = true; m_merged = hist;}
+
   //Default initialiser, to create a zombie :
   template <class... ARGS>
   void reset() {m_exists = false;}
+  
   //Nullptr initialiser, to create a zombie as default initializer :
   template <class... ARGS>
   void reset(std::nullptr_t)
@@ -61,9 +74,11 @@ public:
       m_is_deleted[i] = true;
     }
   }
-  //General initialiser to construct any root histogram vector :
+
+  //General initialiser to construct any root histogram vector starting with its name:
   template <class... ARGS>
   void reset(std::string name, ARGS &&... args);
+
   // Initialize only one histogram at a time
   template <class... ARGS>
   void resetOne(std::string name, ARGS &&... args);
@@ -78,9 +93,9 @@ public:
   void Write();
   std::string const & name() const {return m_str_name;}
 
-  Bool_t const & exists() const {return m_exists;}
-
+  bool const & exists() const {return m_exists;}  
   operator bool() const & {return m_exists;}
+
   std::vector<THist*> const & getCollection() const {return m_collection;}
   THist * operator->() {return m_merged;}
 
@@ -89,11 +104,10 @@ public:
     m_file = histo.file();
     m_exists = histo.exists();
     m_str_name = histo.name();
-  #ifdef MTTHIST_MONO
-    m_merged = histo.get();
-  #else //not MTTHIST_MONO
+    m_merged = histo.m_merged;
+  #ifndef MTTHIST_MONO
     m_collection = histo.getCollection();
-    m_is_merged = static_cast<bool>(m_merged);
+    m_is_merged = histo.m_is_merged;
   #endif
   }
   void operator=(std::nullptr_t) {reset(nullptr);}
@@ -108,7 +122,7 @@ public:
   #else // not MTTHIST_MONO :
   void Merge();
   THist * Merged();
-  THist * Get(UShort_t const & thread_nb) {return m_collection[thread_nb];}
+  THist * Get(ushort const & thread_nb) {return m_collection[thread_nb];}
   THist * Get() {return m_collection[getThreadIndex()];}
   THist * operator[](int const & thread_nb) {return m_collection[thread_nb];}
 
@@ -116,15 +130,19 @@ public:
 
   std::string const & GetName() const {return m_str_name;}
 
+  void setComment(std::string const & comment) {m_comment = comment;}
+  std::string const & readComment(std::string const & comment) const {return m_comment;}
+
 private:
+  std::string m_comment;
   TFile* m_file = nullptr;
-  Bool_t m_exists = false;
+  bool m_exists = false;
   std::string m_str_name = "";
 
   THist * m_merged = nullptr;
 
   #ifndef MTTHIST_MONO
-  Bool_t m_is_merged = false;
+  bool m_is_merged = false;
   std::vector<THist*> m_collection;
   std::vector<bool> m_is_deleted;
   #endif //MTTHIST_MONO
@@ -175,19 +193,18 @@ template <class THist>
 template <class... ARGS>
 inline void MTTHist<THist>::Fill(ARGS &&... args)
 {
-
-  #ifdef MTTHIST_MONO
+#ifdef MTTHIST_MONO
   m_mutex.lock();
   m_merged -> Fill(std::forward<ARGS>(args)...);
   m_mutex.unlock();
 
-  #else // not MTTHIST_MONO :
+#else // not MTTHIST_MONO :
   m_collection[getThreadIndex()]->Fill(std::forward<ARGS>(args)...);
 
-  #endif //MTTHIST_MONO
+#endif //MTTHIST_MONO
 }
 
-#ifndef MTTHIST_MONO
+  #ifndef MTTHIST_MONO
 template<class THist>
 void MTTHist<THist>::Merge()
 {
@@ -225,16 +242,16 @@ THist* MTTHist<THist>::Merged()
   }
   else return m_merged;
 }
-#endif //not MTTHIST_MONO
+  #endif //not MTTHIST_MONO
 
 template<class THist>
 void MTTHist<THist>::Write()
 {
   if (MTObject::isMasterThread())
   {
-    #ifndef MTTHIST_MONO
+  #ifndef MTTHIST_MONO
     if (!m_is_merged) this -> Merge();
-    #endif // not MTTHIST_MONO
+  #endif // not MTTHIST_MONO
     if ( !m_exists
       || !m_merged
       || m_merged -> IsZombie()
@@ -272,11 +289,10 @@ void MTTHist<THist>::Print()
 template <class THist>
 MTTHist<THist>::~MTTHist()
 {
-  // print("Destructing",m_str_name);
-  #ifdef MTTHIST_MONO
+#ifdef MTTHIST_MONO
   if (!m_file && m_merged) delete m_merged;
 
-  # else // not MTTHIST_MONO
+# else // not MTTHIST_MONO
   for (size_t i = 0; i<m_is_deleted.size(); i++)
   {
     auto & histo = m_collection[i];
@@ -288,7 +304,7 @@ MTTHist<THist>::~MTTHist()
     // delete m_merged;
   }
 
-  #endif //MTTHIST_MONO
+#endif //MTTHIST_MONO
 }
 
 template <class THist>

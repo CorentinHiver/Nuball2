@@ -2,6 +2,7 @@
 #define FILES_HPP
 
 #include "print.hpp"
+#include "string_functions.hpp"
 
 //----------------------------------------------------//
 //       General files and folders manipulations      //
@@ -241,6 +242,7 @@ public:
   std::string const & path() const {return m_path;}
   
   operator std::string() const & {if (!m_exists) print("Carefull, you manipulate not existing folder"); return m_path;}
+  auto c_str() {return m_path.c_str();}
 
   Path & operator+(std::string const & addString)
   {
@@ -258,6 +260,13 @@ public:
       print(m_path,"doesn't exist !!");
       m_exists = false;
     }
+    return *this;
+  }
+
+  Path & operator=(Path & path) 
+  {
+    m_path = path.m_path;
+    m_exists = path.m_exists;
     return *this;
   }
 
@@ -284,7 +293,7 @@ Path operator+(std::string const & string, Path const & _path)
 
 using Folder = Path;
 
-template <> void print (Path const & p)
+template <class... T> void print (Path const & p)
 {
   std::cout << p.path();
 }
@@ -361,6 +370,8 @@ public:
     m_name = filename;
   }
 
+  auto c_str() {return m_path.c_str();}
+
   File & operator=(std::string const & file) 
   {
     m_path = Path(file);
@@ -378,7 +389,7 @@ private:
   Path m_path; // Path
 };
 
-template <> void print (File const & f)
+template <class... T> void print (File const & f)
 {
   print(f.file());
 }

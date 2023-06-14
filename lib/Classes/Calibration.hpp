@@ -1,12 +1,11 @@
 #ifndef CALIBRATION_H
 #define CALIBRATION_H
 
-#include <Hit.h>
-#include <libCo.hpp>
-#include <Detectors.hpp>
-#include <DetectorsList.hpp>
-#include <FilesManager.hpp>
-// #include <
+#include "Hit.h"
+#include "../libCo.hpp"
+#include "Detectors.hpp"
+#include "DetectorsList.hpp"
+#include "FilesManager.hpp"
 
 class Calibration
 {
@@ -21,7 +20,7 @@ public:
   void setDetectorsList(DetectorsList const & ID_file) {m_detList = ID_file;}
   void setDetectorsList(DetectorsList *ID_file) {m_detList = *ID_file;}
 
-  void    calibrate(Hit & hit);
+  void  calibrate(Hit & hit);
   float calibrate(float const & nrj, Label const & label);
 
   bool const & isFilled() const {return m_isFilled;}
@@ -42,9 +41,7 @@ private:
   //Private methods :
   void set(UShort_t label, float intercept, float slope, float binom, float trinom);
 
-
   //Attributs for the calculations :
-
   bool      m_verbose   = false;
   bool      m_residus   = false;
   bool      m_outRoot_b = false;
@@ -54,6 +51,8 @@ private:
   std::string m_outDir    = "Calibration/";
   // void        Write(std::string _histoFilename){}
   // void        residus_calculate(){}
+  DetectorsList m_detList;
+  FilesManager files;
 
   //Attributs for the tables :
   bool m_isFilled = false;
@@ -65,9 +64,6 @@ private:
   std::vector<float>  m_binom;
   std::vector<float>  m_trinom;
   std::vector<std::vector<std::vector<float>>> calibration_tables;
-
-  DetectorsList m_detList;
-  FilesManager files;
 };
 
 void Calibration::calculate(std::string const & dataDir, int const & nb_files = -1)

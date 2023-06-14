@@ -1,8 +1,9 @@
 #ifndef FASTER2ROOT_HPP
 #define FASTER2ROOT_HPP
 
-#include <Calibration.hpp>
 #include <libCo.hpp>
+#include <libRoot.hpp>
+#include <Calibration.hpp>
 #include <DetectorsList.hpp>
 #include <FilesManager.hpp>
 #include <Timeshifts.hpp>
@@ -149,7 +150,7 @@ void Faster2Root::convert(ushort const & nb_threads = 2)
   print(run_name, "treated at", (int)(rate*1.E-6), "Mo/sec |",
         "Reading :"    , MTObject::getThreadsNb() * (m_reading_rate    / (float)(m_files.size())),"Mo/s |",
         "Converting : ", MTObject::getThreadsNb() * (m_converting_rate / (float)(m_files.size())),"Mo/s |",
-        "Writting : "  , MTObject::getThreadsNb() * (m_writting_rate / (float)(m_files.size()))  ,"Mo/s"
+        "Writting : "  , MTObject::getThreadsNb() * (m_writting_rate   / (float)(m_files.size()))  ,"Mo/s"
       );
   outfile << run_name << ": CompressionFactor: " << m_fr_raw_run_size/m_fr_treated_run_size << " RawCounter: " << m_fr_raw_counter
   << " TreatedCounter: " << m_fr_treated_counter << std::endl;

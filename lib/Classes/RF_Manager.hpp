@@ -1,17 +1,19 @@
 #ifndef RF_MANAGER_H
 #define RF_MANAGER_H
 
-#include <libCo.hpp>
+#include "../libCo.hpp"
 
 class RF_Manager
 {
 public:
   RF_Manager(ushort const & label_RF = 251) {label = label_RF;}
   Bool_t setHit(Hit const & hit);
+  void static set_offset(Long64_t const & offset) {m_offset = offset;}
   // Bool_t setHit(Event const & event, int const & index);
 
   Long64_t pulse_ToF(ULong64_t const & time, Long64_t const & offset = 0) const
   {
+  #ifdef USE_RF
     // Shifts the time in order to be able to get hits before the hit :
     ULong64_t const shifted_time = time+offset;
     if (shifted_time>last_hit)
@@ -32,6 +34,9 @@ public:
       // relative_timestamp = period - (period-timestamp)
       return ( static_cast<Long64_t> (period-(last_hit-time-offset)%period)-offset );
     }
+  #else //NO USE_RF
+    print("NO RF IS USED !! Please set RF_USE [period_value]");
+  #endif //USE_RF
   }
 
   Long64_t pulse_ToF(Hit const & hit, Long64_t const & offset = 0) const
@@ -39,18 +44,29 @@ public:
     return pulse_ToF(hit.time, offset);
   }
 
+  Long64_t pulse_ToF(Hit const & hit) const
+  {
+    return pulse_ToF(hit.time, m_offset);
+  }
+
   Bool_t isPrompt(Hit const & hit, Long64_t const & borneMin, Long64_t const & borneMax)
   {
     return (pulse_ToF(hit,-borneMin) < borneMax);
   }
 
+#ifdef USE_RF
   ULong64_t last_hit = 0;
-  ULong64_t period   = 399998;
+  ULong64_t period   = USE_RF;
+#endif //USE_RF
 
   static ushort label;
+
+private:
+  Long64_t static m_offset;
 };
 
-ushort RF_Manager::label = 251;
+Long64_t RF_Manager::m_offset = 50 ;
+ushort   RF_Manager::label  = 251;
 
 Bool_t RF_Manager::setHit(Hit const & hit)
 {

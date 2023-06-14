@@ -25,10 +25,10 @@
 class FasterReader
 {//Can read .root as well as .fast datafiles
 public:
-  FasterReader(){};
-  FasterReader(Hit* _hit) : m_hit(_hit) {};
-  FasterReader(std::string _filename) : m_filename(_filename) {m_kReady = Initialize();};
-  FasterReader(Hit* _hit, std::string _filename) : m_hit(_hit), m_filename(_filename) {m_kReady = Initialize();};
+  FasterReader(){}
+  FasterReader(Hit* _hit) : m_hit(_hit) {}
+  FasterReader(std::string _filename) : m_filename(_filename) {m_kReady = Initialize();}
+  FasterReader(Hit* _hit, std::string _filename) : m_hit(_hit), m_filename(_filename) {m_kReady = Initialize();}
 
   ~FasterReader()
   {
@@ -37,7 +37,8 @@ public:
 
   bool Initialize();
   bool Initialize(std::string const & _filename);
-  Hit*   ReadHit(Hit* hit);
+  void Reset();
+  Hit* ReadHit(Hit* hit);
   bool Read();
   bool ReadSimple();
   bool ReadGroup();
@@ -50,9 +51,10 @@ public:
   void setHit(Hit* hit) {m_hit = hit;} //Never tested, but should work !
 
   //Getters :
-  Hit*   getHit             () const { return m_hit        ;};
-  bool const & isReady    () const { return m_kReady     ;};
-  bool const & isWritable () const { return m_write      ;};
+  Hit* getHit             () const { return m_hit        ;}
+  bool const & isReady    () const { return m_kReady     ;}
+  bool const & isWritable () const { return m_write      ;}
+  std::string const & filename() const {return m_filename;}
 
 private:
   //Internal methods :
@@ -66,13 +68,13 @@ private:
               m_write    = false,
               m_QDCx[4]  = {1,0,0,0};
   ushort      m_group_read_cursor  = 0,
-              m_group_write_cursor = 0;
-  std::vector<Hit*>   m_hit_group_buffer;
-  faster_file_reader_p   m_reader = NULL;
-  faster_data_p          m_data;
-  uchar          m_alias = 0;
-  //For treating groups :
-  bool                 m_inGroup  = false;
+              m_group_write_cursor = 0,
+              m_inGroup  = false;
+
+  std::vector<Hit*>     m_hit_group_buffer;
+  faster_file_reader_p  m_reader = NULL;
+  faster_data_p         m_data;
+  uchar                 m_alias = 0;
 
   void TreatTrapez(faster_data_p const & _data);
   void TreatCRRC4 (faster_data_p const & _data);
@@ -84,6 +86,11 @@ private:
 // ================== //
 //   INITIALIZATION   //
 // ================== //
+
+// bool FasterReader::Reset()
+// {
+
+// }
 
 bool FasterReader::Initialize(std::string const & _filename)
 {

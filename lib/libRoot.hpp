@@ -31,9 +31,17 @@
 #include "TStyle.h"
 #include "TSystem.h"
 #include "TThread.h"
-// #include "TThreadedObject.h"
 #include "TTree.h"
 #include "TTreeIndex.h"
+
+////////////////////////////
+//   HISTO MANIPULATIONS  //
+////////////////////////////
+
+bool THist_exists(TH1* histo)
+{
+  return (histo && !histo->IsZombie() && histo->Integral()>1);
+}
 
 ///////////////////////////
 //   TREE MANIPULATIONS  //
@@ -85,8 +93,8 @@ void test_alignator(TTree *tree, Int_t* NewIndex= nullptr, bool useNewIndex = fa
     if (useNewIndex) j = NewIndex[i] ;
     else j = i;
     tree -> GetEntry(j);
-    if ((Long64_t) (TimeStamp - PrevTimeStamp) < 0)
-    std::cout << j << " -> " << (Long64_t) (TimeStamp - PrevTimeStamp) << std::endl;
+    if (static_cast<Long64_t> (TimeStamp - PrevTimeStamp) < 0)
+    std::cout << j << " -> " << static_cast<Long64_t> (TimeStamp - PrevTimeStamp) << std::endl;
     PrevTimeStamp = TimeStamp;
   }
   tree -> SetBranchStatus("*", true); //enables again the whole tree

@@ -21,7 +21,8 @@ public:
   auto const & reverse()    const {return m_reversed_list;}
   auto const & get()        const {return m_list         ;}
 
-  ushort const & getLabel(std::string const & name) {return m_reversed_list[name];}
+  auto const & getName (ushort      const & label) {return m_list[label]        ;}
+  auto const & getLabel(std::string const & name ) {return m_reversed_list[name];}
 
   void operator=(std::string const & filename) {this -> load(filename);}
   DetectorsList& operator=(DetectorsList otherList)

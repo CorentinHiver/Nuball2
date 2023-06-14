@@ -1,5 +1,6 @@
 #ifndef FILEMANAGER_H
 #define FILEMANAGER_H
+
 #include <libCo.hpp>
 
 using ListFiles = std::vector<std::string> ;
@@ -11,16 +12,18 @@ public:
 
   FilesManager(){};
   FilesManager(std::string const & folder, int nb_files = -1){addFolder(folder,nb_files);};
+  FilesManager(Path & folder, int nb_files = -1){addFolder(folder,nb_files);};
+
 
   bool nextFileName(std::string & filename, size_t const & step = 1);
 
   // Adds either a single file or reads a .list containing a list of files
-  bool addFiles     (std::string const & _filename        );
+  virtual bool addFiles     (std::string const & _filename        );
   // Adds a given number of files with a .root or .fast inside the given folder (by default all the files, or the nb_files first ones)
-  bool addFolder    (std::string folder, int nb_files = -1);
-  void   flushFiles   ();
-  void   Print        ();
-  void   printFolders ();
+  virtual bool addFolder    (std::string folder, int nb_files = -1);
+  virtual void flushFiles   ();
+  void   Print        () { for (auto const & file : m_listFiles) print(file);}
+  void   printFolders () { for (auto const & folder : m_listFolder) print(folder);}
 
   //Getters :
   ListFiles   const & getListFiles     () const { return m_listFiles ;}
@@ -141,7 +144,7 @@ bool FilesManager::addFolder(std::string _foldername, int _nb_files)
   if (listfile.size() > 0)
   {
     std::sort(listfile.begin(), listfile.end());// Sorts the entries
-    if (_nb_files>(int)listfile.size() || _nb_files == -1) _nb_files = listfile.size();//Sets the correct number of files to keep
+    if (_nb_files> static_cast<int>(listfile.size()) || _nb_files == -1) _nb_files = listfile.size();//Sets the correct number of files to keep
     ListFiles cut_listfile (listfile.begin(), listfile.begin()+_nb_files);// Take the nb_files first files of the folder
     for (auto const & file : cut_listfile) m_listFilesInFolder[_foldername].emplace_back(file);
     if (m_listFiles.size() == 0) m_listFiles = cut_listfile;// Set cut_listfile to be the global list of files
@@ -154,13 +157,6 @@ bool FilesManager::addFolder(std::string _foldername, int _nb_files)
     print("NO data found !");
     return false;
   }
-}
-
-void FilesManager::Print()
-{
-  std::cout << "Loaded files : ";
-  for (auto const & file : m_listFiles) std::cout << file << std::endl;
-  std::cout << std::endl;
 }
 
 void FilesManager::flushFiles()
