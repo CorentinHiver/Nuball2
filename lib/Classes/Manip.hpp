@@ -34,10 +34,7 @@ public:
     }
   }
 
-  void Print()
-  {
-     if (m_MTOn) list_runs_MT.Print(); else print(list_runs);
-  }
+  void Print() { (m_MTOn) ? list_runs_MT.Print() : print(list_runs); }
 
   bool getNext(std::string & run)
   {
@@ -61,6 +58,8 @@ public:
 private:  
   uint i = 0;
   bool m_MTOn = false; // Multithreading on
+  Path m_datapath;
+  Folder m_manip;
   std::string m_runs_files;
   std::vector<std::string> list_runs;
   MTList<std::string> list_runs_MT;

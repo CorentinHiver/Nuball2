@@ -43,7 +43,7 @@ public:
   {
     initialise();
     if (io == "r" || io == "read" || io == "R" || io == "Read")  connect(tree, options);
-    else if (io == "w" || io == "write" || io == "W" || io == "Write")  connect(tree, options);
+    else if (io == "w" || io == "write" || io == "W" || io == "Write")  writeTo(tree, options);
     else { print("EVENT : NO KNOWN I/O PARAMETER"); exit(0);}
   }
 
@@ -55,8 +55,8 @@ public:
   void operator= (Hit const & hit);
   void operator= (Event const & evt);
 
-  void connect(TTree * tree, std::string const & options = "ltn");
-  void writeTo(TTree * tree, std::string const & options = "ltn");
+  void connect(TTree * tree, std::string const & options = "ltnN");
+  void writeTo(TTree * tree, std::string const & options = "ltnN");
 
   void push_back(Hit const & hit);
   void push_front(Hit const & hit);

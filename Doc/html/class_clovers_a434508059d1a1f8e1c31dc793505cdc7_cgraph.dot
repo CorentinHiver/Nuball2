@@ -1,0 +1,11 @@
+digraph "Clovers::is_clover_Ge"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [id="Node000001",label="Clovers::is_clover_Ge",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [id="edge1_Node000001_Node000002",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="Clovers::is_clover",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_clovers.html#a9c28e72706c325a4fe3b0aab61c0bfe0",tooltip=" "];
+}

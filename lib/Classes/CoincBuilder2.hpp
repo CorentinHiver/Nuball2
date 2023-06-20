@@ -10,10 +10,7 @@ class CoincBuilder2 : public Builder
 {
 public:
   // Constructors :
-  explicit CoincBuilder2()
-  {
-    m_event = new Event;
-  }
+  explicit CoincBuilder2() { }
   explicit CoincBuilder2(Event * _event)                                                         {m_event = _event;}
   explicit CoincBuilder2(Event * _event, Int_t const & _timeWindow) : m_time_window(_timeWindow) {m_event = _event;}
 

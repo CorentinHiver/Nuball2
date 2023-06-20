@@ -1,7 +1,7 @@
 #ifndef LIBROOTCO_HPP
 #define LIBROOTCO_HPP
 
-#include <libCo.hpp>
+#include "libCo.hpp"
 
 // ********** ROOT includes ********* //
 #include "TCanvas.h"
@@ -47,9 +47,9 @@ bool THist_exists(TH1* histo)
 //   TREE MANIPULATIONS  //
 ///////////////////////////
 
-void alignator(TTree * tree, Int_t *NewIndex)
+void alignator(TTree * tree, int *NewIndex)
 {
-  Int_t const NHits = tree -> GetEntries();
+  int const NHits = tree -> GetEntries();
   tree -> SetBranchStatus("*", false);// Disables all the branches readability
   tree -> SetBranchStatus("time", true);// Read only the time
   // tree -> SetBranchStatus("label", true);// Read only the time
@@ -62,7 +62,7 @@ void alignator(TTree * tree, Int_t *NewIndex)
     // if (i<20) std::cout << label << "\t" << TimeStamp << std::endl;
     TimeStampBuffer[i]=TimeStamp;
   }
-  Int_t i = 0, j = 0;
+  int i = 0, j = 0;
   ULong64_t a = 0;
   NewIndex[0]=0;
 	for (j=0; j<NHits;j++)
@@ -81,7 +81,7 @@ void alignator(TTree * tree, Int_t *NewIndex)
   tree -> SetBranchStatus("*", true); //enables again the whole tree
 }
 
-void test_alignator(TTree *tree, Int_t* NewIndex= nullptr, bool useNewIndex = false)
+void test_alignator(TTree *tree, int* NewIndex= nullptr, bool useNewIndex = false)
 {
   tree -> SetBranchStatus("*", false);// Disables all the branches readability
   tree -> SetBranchStatus("time", true);// Eneables to read only the time

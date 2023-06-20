@@ -36,6 +36,7 @@ public:
     }
   #else //NO USE_RF
     print("NO RF IS USED !! Please set RF_USE [period_value]");
+    return 0;
   #endif //USE_RF
   }
 

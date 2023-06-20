@@ -2,6 +2,7 @@
 #define FASTERREADER_H
 
 #include <Hit.h>
+
 // ******* fasterac includes ******* //
 #include "fasterac/adc.h"
 #include "fasterac/adc_caras.h"
@@ -22,45 +23,148 @@
 #include "fasterac/spectro.h"
 #include "fasterac/utils.h"
 
+/** 
+ * @class FasterReader
+ * @brief Class used to read .fast files
+ * 
+ * This class is to be used in combination with the Hit struct
+ * Here is the minimal code you can use to scan the files : 
+ * 
+ *      Hit hit;
+ *      std::string filename;
+ *      FasterReader reader(&hit, filename);
+ *      
+ *      while(reader.Read())
+ *      {
+ *        print(hit);
+ *      }
+ * 
+ * This method deals with the 5 following members of the Hit structure:
+ * 
+ *        struct Hit
+ *        {
+ *          unsigned short label;  // The label number of the detector
+ *          Float_t        nrj;    // The ADC/QDC value of the hit. For RF, contains the frequency.
+ *          Float_t        nrj2;   // The QDC2 value (usually the longer gate)
+ *          ULong64_t      time;   // High precision time in ps (time tick of 7,8125 ps)
+ *          bool           pileup; // Contains either pileup or saturated bit
+ *        }
+ * 
+ * ---------- Define section ----------
+ * 
+ * Some options can be activated at compilation time. 
+ * You have to #define them before including this library. e.g. : 
+ * 
+ *        ... other includes
+ *        #define FASTER_GROUP
+ *        #include <FasterReader.hpp>
+ *        rest of the code....
+ * 
+ * 
+ * -- QDC2
+ * 
+ * By default the nrj2 is not handled. 
+ * If at least one detector uses two gates then you'll have to declare it
+ * 
+ * 
+ * -- FASTER_GROUP
+ * 
+ * If the data is grouped using a hardware trigger then the reading is done in
+ * two steps : first extracts all the hits of the group and put it in a vector,
+ * then each call of Read() moves in the group. No group information is extracted :
+ * from outside the class everything goes as if there was no group
+ * 
+ * 
+ */
 class FasterReader
-{//Can read .root as well as .fast datafiles
+{
 public:
-  FasterReader(){}
-  FasterReader(Hit* _hit) : m_hit(_hit) {}
-  FasterReader(std::string _filename) : m_filename(_filename) {m_kReady = Initialize();}
+  /**
+   * @brief Construct a new Faster Reader object
+   */
   FasterReader(Hit* _hit, std::string _filename) : m_hit(_hit), m_filename(_filename) {m_kReady = Initialize();}
 
+  /**
+   * @brief Destroy the Faster Reader object
+   */
   ~FasterReader()
   {
     faster_file_reader_close(m_reader);
   }
-
-  bool Initialize();
-  bool Initialize(std::string const & _filename);
-  void Reset();
-  Hit* ReadHit(Hit* hit);
+  
+  /**
+   * @brief TBD, reset the cursor to the begining of the document
+   */
+  bool Reset();
+  
+  /**
+   * @brief Main method. Extract the next hit from the data file and fills the Hit *m_hit object
+   * 
+   * Hit hit;
+   * 
+   * FasterReader reader(&hit, filename);
+   * 
+   *      while(reader.Read())
+   *      {
+   *         // This hit is filled/updated at each iteration by the data read in the ReadData() private method
+   *         print(hit); 
+   *      }
+   * 
+   * 
+   * @return true if the end of the file is reached
+   * @return false if still in the middle of the file
+   */
   bool Read();
-  bool ReadSimple();
-  bool ReadGroup();
-  //Faster functions
-  bool switch_alias(uchar const & _alias, faster_data_p const & _data);
-  void ReadDataGroup(faster_data_p const & _data);
-  void ReadData(faster_data_p const & _data);
 
-  //Setters :
-  void setHit(Hit* hit) {m_hit = hit;} //Never tested, but should work !
+  // ------ Setters ------ :
+  /**
+   * @brief \test Set the Hit object
+   *  \nNever tested, but should work !
+   */
+  void setHit(Hit* hit) {m_hit = hit;}
 
-  //Getters :
+  /**
+   * @brief Set the Max Hits read
+   */
+  void setMaxHits(ulonglong maxHits) {m_maxHits = maxHits;}
+
+  // ------ Getters ------ :
+  /**
+   * @brief \deprecated Get the current Hit 
+   */
   Hit* getHit             () const { return m_hit        ;}
+
+  /**
+   * @brief If the initialization went badly then returns false
+   */
   bool const & isReady    () const { return m_kReady     ;}
-  bool const & isWritable () const { return m_write      ;}
-  std::string const & filename() const {return m_filename;}
+
+  /**
+   * @brief Get the name of the file being read
+   */
+  std::string const & getFilename() const {return m_filename;}
 
 private:
-  //Internal methods :
+  
+  /**
+   * @brief Setup the fasterac objects for reading
+   */
+  bool Initialize();
+
+
+  bool ReadSimple();
+  bool ReadGroup();
+  void ReadDataGroup(faster_data_p const & _data);
+  bool ReadData(faster_data_p const & _data);
+  bool switch_alias(uchar const & _alias, faster_data_p const & _data);
+
+
   bool InitializeReader();
 
-  // Containers :
+  ulonglong m_maxHits = -1,
+            m_cursor  =  0,
+            m_counter =  0;
+
   Hit*        m_hit = nullptr;
   Hit         m_empty_hit;
   std::string m_filename = "";
@@ -87,15 +191,10 @@ private:
 //   INITIALIZATION   //
 // ================== //
 
-// bool FasterReader::Reset()
-// {
-
-// }
-
-bool FasterReader::Initialize(std::string const & _filename)
+bool FasterReader::Reset()
 {
-  m_filename = _filename;
-  return Initialize();
+      //TBD
+  return true;
 }
 
 bool FasterReader::Initialize()
@@ -157,53 +256,58 @@ bool FasterReader::InitializeReader()
 
 bool FasterReader::Read()
 {
-  #ifdef FASTER_GROUP
+  if (m_counter++>m_maxHits) 
+  {
+    return (m_write = false);
+  }
+#ifdef FASTER_GROUP
   return ReadGroup();
-  #else // TRIGGERLESS DATA
+#else // TRIGGERLESS DATA
   return ReadSimple();
-  #endif //FASTER_GROUP
+#endif //FASTER_GROUP
 }
 
-Hit* FasterReader::ReadHit(Hit* hit)
-{
-  // This function allows one to directly link an external hit to m_hit
-  hit = (Read()) ? m_hit : nullptr;
-  return hit;
-}
-
+/**
+ * @brief Read non grouped data
+ * 
+ * This function is replaced by ReadGroup if the faster data contains groups, 
+ * this one is simply faster and serves as the "prototype" to read groupless data 
+ * 
+ */
 bool FasterReader::ReadSimple()
-{ // This function is replaced by ReadGroup if the faster data contains groups, this one is simply faster
-  // and serves as the "prototype" to read groupless data
-  // m_write variable is used to make sure only the handled types are read (see switch_alias definition)
+{ 
+  // m_write variable is used to make sure only the handled aliases are read (see switch_alias definition)
   m_write = false;
   // faster_file_reader_next returns a value > 0 (->true in boolean) if the read was successfull (fasterac library)
+  // Ergo, the loop continues until the end of the file when the return value is 0
   while(!m_write && (m_data = faster_file_reader_next(m_reader)))
   {
-    ReadData(m_data);
+    m_write = ReadData(m_data);
   }
-  return m_data;
+  return static_cast<bool>(m_data);
 }
 
+/**
+ * @brief Replace the standard ReadSimple if the faster data contains groups
+ * First of all, the m_write variable is used to make sure only the handled types are managed (see switch_alias() definition)
+ * First hit read : goes inside ReadData()
+ *   if it isn't a GROUP_TYPE_ALIAS then read it normally
+ *   else :
+ *     recursively read the data inside of the group and fill in m_hit_group_buffer
+ *     returns the first hit // TO CHECK THIS !!!
+ *     and sets m_inGroup to true
+ * The other hits :
+ *   if we still are in a group (m_inGroup is true):
+ *     reads the next hit in m_hit_group_buffer
+ *   else :
+ *     if it isn't a GROUP_TYPE_ALIAS then read it normally
+ *     else :
+ *       recursively read the data inside of the group and fill in m_hit_group_buffer
+ *       returns the first hit // TO CHECK THIS !!!
+ *       and sets m_inGroup to true
+ */
 bool FasterReader::ReadGroup()
-{ // Replace the standard ReadSimple if the faster data contains groups
-  /*
-    First of all, the m_write variable is used to make sure only the handled types are managed (see switch_alias() definition)
-    First hit read : goes inside ReadData()
-      if it isn't a GROUP_TYPE_ALIAS then read it normally
-      else :
-        recursively read the data inside of the group and fill in m_hit_group_buffer
-        returns the first hit // TO CHECK THIS !!!
-        and sets m_inGroup to true
-    The other hits :
-      if we still are in a group (m_inGroup is true):
-        reads the next hit in m_hit_group_buffer
-      else :
-        if it isn't a GROUP_TYPE_ALIAS then read it normally
-        else :
-          recursively read the data inside of the group and fill in m_hit_group_buffer
-          returns the first hit // TO CHECK THIS !!!
-          and sets m_inGroup to true
-    */
+{
   m_write = false;
   while(!m_write)
   {
@@ -236,8 +340,11 @@ bool FasterReader::ReadGroup()
   return m_data;
 }
 
-void FasterReader::ReadData(faster_data_p const & _data)
-{ // Treats faster data
+/**
+ * @brief Treats faster data
+ */
+bool FasterReader::ReadData(faster_data_p const & _data)
+{ 
   m_hit->label = faster_data_label(_data);
 #ifdef QDC2
   m_hit->nrj2 = 0; // In order to clean the data, as nrj2 never gets cleaned if there was QDC2 in the previous hit
@@ -254,7 +361,7 @@ void FasterReader::ReadData(faster_data_p const & _data)
   }
   m_hit -> time = faster_data_hr_clock_ns(_data) * 1000;// Stores the time in ps
   m_write = switch_alias(m_alias, _data);
-  #ifdef FASTER_GROUP
+#ifdef FASTER_GROUP
   if (m_inGroup && m_write)
   {// We recursively end up here using ReadDataGroup() method (because m_inGroup is set to true)
     // Here we fill in the m_hit_group_buffer with the hits extracted by the previous lines
@@ -263,11 +370,19 @@ void FasterReader::ReadData(faster_data_p const & _data)
     m_hit_group_buffer[m_group_write_cursor] = m_hit;
     m_group_write_cursor++;
   }
-  #endif //FASTER_GROUP
+#endif //FASTER_GROUP
+  return m_write;
 }
 
+/**
+ * @brief Treats the faster data groups
+ * 
+ * \internal Trigger mode only. Allows one to recursively call FasterReader::ReadData 
+ * for each hit in a faster group
+ * 
+ */
 void FasterReader::ReadDataGroup(faster_data_p const & _data)
-{ // Treats the faster data groups
+{
   // Extracts all information in the "Group Data", which is the first "Data" of a group
   unsigned short lsize = faster_data_load_size  (_data);
   void* group_buffer   = faster_data_load_p     (_data);
@@ -283,8 +398,16 @@ void FasterReader::ReadDataGroup(faster_data_p const & _data)
   faster_buffer_reader_close(group_reader);
 }
 
+/**
+ * @brief Treat the specific part of data (QDC gates, spectro ADC ...)
+ * 
+ * \private Internal method that is used to fill hit.nrj depending
+ * on the alias of the data, that correspond to a certain kind of 
+ * faster data.
+ * 
+ */
 bool FasterReader::switch_alias(uchar const & _alias, faster_data_p const & _data)
-{ // Treat the specific part of data (QDC gates, spectro ADC ...)
+{ 
   switch(_alias)
   {
     case TRAPEZ_SPECTRO_TYPE_ALIAS: // trapez_spectro
@@ -315,8 +438,14 @@ bool FasterReader::switch_alias(uchar const & _alias, faster_data_p const & _dat
   }
 }
 
+/**
+ * @brief Load Trapez data
+ * 
+ * \private Internal method used to extract ADC value from trapezoid filter
+ * 
+ */
 void FasterReader::TreatTrapez(const faster_data_p& data)
-{  // Load Trapez data
+{  
    trapez_spectro adc;
    faster_data_load(data, &adc);
 
@@ -327,8 +456,16 @@ void FasterReader::TreatTrapez(const faster_data_p& data)
    m_hit->pileup = (adc.pileup == 1 || adc.saturated == 1);
 }
 
+/**
+ * @brief Load CRRC4 data
+ * 
+ * \private Internal method used to extract ADC value from CRRC4 filter
+ * 
+ * \attention m_hit->pileup = (false); //TO BE LOOKED AT
+ * 
+ */
 void FasterReader::TreatCRRC4(const faster_data_p& data)
-{  // Load ADC data
+{  
    crrc4_spectro crrc4_adc;
    faster_data_load(data, &crrc4_adc);
 
@@ -339,22 +476,34 @@ void FasterReader::TreatCRRC4(const faster_data_p& data)
    m_hit->pileup = (false); //TO BE LOOKED AT
 }
 
+/**
+ * @brief Load QDC1 data
+ * 
+ * \private Internal method used to extract QDC values with 1 gate
+ * 
+ */
 void FasterReader::TreatQDC1(const faster_data_p& data)
-{ // Load QDC data
+{ 
   qdc_t_x1 qdc;
   faster_data_load(data, &qdc);
 
-  // Set up m_hit
   m_hit->nrj = qdc.q1;
+
 #ifdef QDC2
   m_hit->nrj2 = 0;
 #endif //QDC2
 
-  m_hit->pileup = (qdc.q1_saturated == 1); // No pileup for BGO - they are always piled up!
+  m_hit->pileup = (qdc.q1_saturated == 1);
 }
 
+/**
+ * @brief Load QDC2 data
+ * 
+ * \private Internal method used to extract QDC values with 2 gates
+ * 
+ */
 void FasterReader::TreatQDC2(const faster_data_p& data)
-{ // Load QDC2 data
+{ 
   qdc_t_x2 qdc;
   faster_data_load(data, &qdc);
   m_hit->nrj = qdc.q1;
@@ -364,8 +513,14 @@ void FasterReader::TreatQDC2(const faster_data_p& data)
   m_hit->pileup = (qdc.q1_saturated == 1 || qdc.q2_saturated == 1);
 }
 
+/**
+ * @brief Load RF data
+ * 
+ * \private Internal method used to extract RF period
+ * 
+ */
 void FasterReader::TreatRF(const faster_data_p& data)
-{ // Load RF data
+{
    rf_data rf;
    faster_data_load(data, &rf);
 

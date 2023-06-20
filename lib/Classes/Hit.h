@@ -2,7 +2,6 @@
 #define HIT_H
 
 #include <libRoot.hpp>
-#include <libCo.hpp>
 
 using Label  = ushort;
 using Label_vec = std::vector<Label>;
@@ -21,22 +20,33 @@ public:
   Label label  = 0;     // Label
   float nrj    = 0.f;   // Energy
   float nrj2   = 0.f;   // used if QDC2
-  NRJ   nrjcal = 0;     // Calibrated energy
+  NRJ   nrjcal = 0.f;   // Calibrated energy
   Time  time   = 0;     // Time
   bool  pileup = false; // Pile-up
 
   void reset()
   {
     label  = 0;
-    nrj    = 0;
-    nrj2   = 0;
-    nrjcal = 0;
+    nrj    = 0.f;
+    nrj2   = 0.f;
+    nrjcal = 0.f;
     time   = 0;
     pileup = 0;
   }
 
-  float gate_ratio(){if (nrj2 != 0) return ( static_cast<float>((nrj2-nrj)/nrj2) ); else return 0.f;}
+  float gate_ratio(){ return ( (nrj2 != 0.f) ? static_cast<float>( (nrj2-nrj)/nrj2 ) : 1000.f );}
+
+  void connect(TTree * tree);
 };
+
+void Hit::connect(TTree * tree)
+{
+  tree -> Branch("label"  , & label  );
+  tree -> Branch("nrj"    , & nrj    );
+  tree -> Branch("nrj2"   , & nrj2   );
+  tree -> Branch("time"   , & time   );
+  tree -> Branch("pileup" , & pileup );
+}
 
 template <class... T> void print(Hit const & hit, T const & ... t2)
 {

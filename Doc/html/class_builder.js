@@ -1,0 +1,25 @@
+var class_builder =
+[
+    [ "Builder", "class_builder.html#af8e018e77879c6136e6dabbd5eab0634", null ],
+    [ "~Builder", "class_builder.html#a850f1a4be35da17638a4a1ef20bf1401", null ],
+    [ "build", "class_builder.html#adbdd5039a33cca38f3d6c6219c743c0d", null ],
+    [ "getEvent", "class_builder.html#acbe1d24f5bf8a9a3cb45108acf645181", null ],
+    [ "getLastHit", "class_builder.html#ab33bcabb2ca09cb51d25504e462c8cd4", null ],
+    [ "getSingleEvent", "class_builder.html#aae797a45bbe77ad0f481dbfe92bba86f", null ],
+    [ "isCoincTrigged", "class_builder.html#acb2bdcf06ab22ef057123f615a0ea097", null ],
+    [ "isSingle", "class_builder.html#a0d028e4bc82b60fa52aaca75f8992f4c", null ],
+    [ "reset", "class_builder.html#ae2d72f1157ccaaddc45b6963c7971f30", null ],
+    [ "set_last_hit", "class_builder.html#acc042a420547dc2ee6eb85e6daf43b07", null ],
+    [ "singleHit", "class_builder.html#aa2e15eace11712cb595e7459add680a6", null ],
+    [ "size", "class_builder.html#ae8e089b23bfdb346516dc707926a2d47", null ],
+    [ "status", "class_builder.html#ae264a9c5463bf73555ae6351e27f6edd", null ],
+    [ "coincON", "class_builder.html#a8da59b56cc7d0f3c6a3f33a5c2351687", null ],
+    [ "m_DSSD", "class_builder.html#aeba9ced41dd8aceca1bdf368297715af", null ],
+    [ "m_empty_hit", "class_builder.html#a7a0a1c14a8f91efae161593c4142e023", null ],
+    [ "m_event", "class_builder.html#a76749e4cc31025fde18f9cdbeb232cbf", null ],
+    [ "m_last_hit", "class_builder.html#a5cce09bc1a95dd0bcaa4f857f1a1b3da", null ],
+    [ "m_modules", "class_builder.html#a762833e8bf9d8734f4b6f7bba52e8684", null ],
+    [ "m_raw_Ge", "class_builder.html#ae21ac2e244cf23cb7f669efa54bbad69", null ],
+    [ "m_single_hit", "class_builder.html#a1eb2364107e42c1a42d3b8e66de495f0", null ],
+    [ "m_status", "class_builder.html#a81c56e91c1951d25faecf88f390b5bcb", null ]
+];

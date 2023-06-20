@@ -86,7 +86,9 @@ public:
     i = _i+1;
   }
 private:
-  int i = 0;
+  static int i;
 };
+
+int Debug::i = 0;
 
 #endif //PRINT_HPP

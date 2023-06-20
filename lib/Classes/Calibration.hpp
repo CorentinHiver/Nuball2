@@ -13,6 +13,11 @@ public:
 
   Calibration(){};
   Calibration(std::string const & file, int const & label_max){load(file, label_max);};
+  Calibration(std::string const & file, DetectorsList const & detList)
+  {
+    m_detList = detList;
+    load(file, detList.size());
+  };
 
   bool load(std::string const & calibFileName, int const & label_max);
   void calculate(std::string const & dataDir, int const & nb_files);
@@ -20,8 +25,14 @@ public:
   void setDetectorsList(DetectorsList const & ID_file) {m_detList = ID_file;}
   void setDetectorsList(DetectorsList *ID_file) {m_detList = *ID_file;}
 
-  void  calibrate(Hit & hit);
-  float calibrate(float const & nrj, Label const & label);
+  void  calibrate(Hit & hit) const;
+  float calibrate(float const & nrj, Label const & label) const;
+
+  /**
+   * @brief Wrapper around calibrate method
+  */
+  template<class... ARGS>
+  auto operator()(ARGS &&... args) const {return calibrate(std::forward<ARGS>(args)...);}
 
   bool const & isFilled() const {return m_isFilled;}
 
@@ -51,6 +62,7 @@ private:
   std::string m_outDir    = "Calibration/";
   // void        Write(std::string _histoFilename){}
   // void        residus_calculate(){}
+
   DetectorsList m_detList;
   FilesManager files;
 
@@ -90,7 +102,7 @@ void Calibration::setCalibrationTables()
 }
 //!DEV
 
-inline float Calibration::calibrate(float const & nrj, Label const & label)
+inline float Calibration::calibrate(float const & nrj, Label const & label) const 
 {
   auto nrj_r = nrj+gRandom->Uniform(0,1);
   switch(m_order[label])
@@ -118,7 +130,7 @@ inline float Calibration::calibrate(float const & nrj, Label const & label)
   }
 }
 
-inline void Calibration::calibrate(Hit & hit)
+inline void Calibration::calibrate(Hit & hit) const
 {
   auto const & label = hit.label;
   if (label > m_max_labels) return;

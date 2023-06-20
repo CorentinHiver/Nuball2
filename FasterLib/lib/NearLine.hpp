@@ -515,7 +515,7 @@ void NearLine::faster2root(std::string const & filename, int const & thread_nb)
 #endif //USE_RF
 
   // Handle the first hit :
-  rootTree -> GetEntry(gindex[loop++]);
+  rootTree -> GetEntry(gindex[0]);
   event.set_last_hit(hit);
 
   // ULong64_t evt_start = loop;

@@ -12,7 +12,7 @@ public:
   bool good() {return  m_ok;}  bool is_good() {return  m_ok;}
   bool bad()  {return !m_ok;}  bool is_bad()  {return !m_ok;}
 
-  auto size() {return m_list.size();}
+  auto const size() const {return m_list.size();}
 
   auto begin() {return m_list.begin();}
   auto end  () {return m_list.end  ();}
@@ -33,6 +33,7 @@ public:
   }
 
   std::string const & operator[] (int i) const {return m_list[i];}
+  operator bool() const & {return m_ok;}
 
 
 private:

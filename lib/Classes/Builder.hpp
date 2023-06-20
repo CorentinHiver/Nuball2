@@ -4,27 +4,71 @@
 #include "../libRoot.hpp"
 #include "Event.hpp"
 
+/**
+ * @brief Base class of event builders (pure virtual class)
+ * 
+ * The first thing to do is to set the first hit of the file using Builder::set_first_hit(hit);
+ * Then add the following hits using Builder::build(hit);
+ * 
+ * The builder can be in four states : 
+ * 
+ * Let's start from the first hit. The next is either in or out of the time window.
+ * 
+ * Out of the time window :
+ * 
+ * Then the first hit is single. The status is therefore 0.
+ * The second hit is then used to determine if the third one is in coincidence with it or not.
+ *  
+ * In the time window :
+ *  
+ *  An event is created, extracting the values of the two first hits in the two first rows of the event.
+ *  We are in status 1.
+ * 
+ *  Then we have to handle the third hit. It either is in or out of the time window.
+ * 
+ *    If the third hit is out of the time window, then the event is made only of the two previous hits. 
+ *    We are in status 2. We can perform a trigger and write down the event.
+ * 
+ *    If the third hit is in the time window, the values of the third hit are extracted 
+ *    inside of the third row of the event. We are in status 1 still. 
+ *    We then have to handle the next hits and add them to the event until a hit falls out of the time window.
+ *
+ * Now, you'll have to create your own event builder by deriving it from this base class : 
+ * 
+ *        class MyEventBuilder : public Builder
+ *        {
+ *            ....
+ *            builder(...);
+ *        };
+ * 
+ * You will have to overload the buider method
+ * 
+*/
 class Builder
 {
 public:
   Builder(){}
+  Builder(Event * event){m_event = event;}
   ~Builder(){}
 
   // Getters :
-  Bool_t const & isCoincTrigged() const {return coincON;}
+  bool const & isCoincTrigged() const {return coincON;}
 
-  Bool_t isSingle() const {return (this->status() == 0 && m_single_hit.label>0);}
+  bool isSingle() const {return (this->status() == 0 && m_single_hit.label>0);}
+  bool hasSingle() const {return (this->status() == 0 && m_single_hit.label>0);}
   Hit & singleHit() {return m_single_hit;}
   Event getSingleEvent() {return Event(m_single_hit);}
 
   Hit const & getLastHit() const {return m_last_hit;}
 
   uchar const & status() const { return m_status; }
+  bool isBuilding() const {return (m_status==1);}
+  bool isBuilt() const {return (m_status==2);}
 
   Event* getEvent() const {return m_event;}
   UShort_t size() const {return m_event -> size();}
 
-  virtual Bool_t build(Hit const & _hit) = 0; // pure virtual
+  virtual bool build(Hit const & _hit) = 0; // pure virtual
   virtual void reset() {m_event->clear(); m_status = 0;}
 
   // Setters :
@@ -32,7 +76,10 @@ public:
   {
     m_last_hit = hit;
   }
-
+  void set_first_hit(Hit const & hit)
+  {
+    m_last_hit = hit;
+  }
 
 protected:
   Event*    m_event   = nullptr;
@@ -40,11 +87,10 @@ protected:
   std::size_t m_DSSD    = 0;
   std::size_t m_modules = 0;
 
-  Hit m_empty_hit ;
-  Hit m_last_hit = m_empty_hit;
-  Hit m_single_hit = m_empty_hit;
+  Hit m_last_hit;
+  Hit m_single_hit;
 
-  Bool_t coincON = false;
+  bool coincON = false;
   uchar m_status = 0;
 };
 

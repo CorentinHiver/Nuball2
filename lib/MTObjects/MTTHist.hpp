@@ -1,48 +1,92 @@
-/*
- * MTTHist:
- * Multithreading wrapper for all THist spectra of root library
- * Author: corentin.hiver@ijclab.in2p3.fr
- *
- * Inspiration :
- * https://root.cern.ch/doc/master/TThreadedObject_8hxx_source.html#l00167
- *
- * MANDATORY : MTObject::nb_threads must be set to the correct number of threads BEFORE initialising;
- *
- * There are two ways of using this histogram :
- *
- * The default one consists in having as many sub-histograms as there are threads.
- * That is, each thread can fill its own histogram.
- * Eventually, before beeing analysed (to be done by hand) or written (automatic) all the histograms are merged into one.
- * The advatage of this method is its speed
- * Two defaults : each sub-histogram takes as many place in the memory
- *                the merging time is a function of the number of threads and the size of the histogram
- * These two defaults makes them really heavy to be used if many bidims (TH2) are beeing used
- *
- * The other way [EXPERIMENTAL !!!] is to use a mutex that protects the histogram in writting
- * The advantage is much less memory taking and no merging.
- * However the mutex activation and the concurrency waiting may slow the process a lot.
- * To be tested !
- * Unlock this way with #define MTTHIST_MONO (maybe find a better name)
- *
- */
 #ifndef MTTHIST_H
 #define MTTHIST_H
 // #define MTTHIST_MONO
 #include "MTObject.hpp"
 
+/**
+ * @brief Multithreading wrapper for all THist spectra of root library
+ * @author corentin.hiver@ijclab.in2p3.fr
+ *
+ * Inspiration :
+ * https://root.cern.ch/doc/master/TThreadedObject_8hxx_source.html#l00167
+ *
+ * \attention As for any class deriving from MTObject, first initialize the number of threads :
+ * 
+ *      MTObject::Initialize(nb_threads)
+ * 
+ * 
+ * Instantiate this class as follow : 
+ * 
+ *      MTTHist<TH1F> some_TH1F_histo("name", "title:xaxis:yaxis", bins, min, max);
+ * 
+ * Or
+ * 
+ *      MTTHist<TH1F> some_TH1F_histo;
+ *      some_TH1F_histo.reset("name", "title:xaxis:yaxis", bins, min, max);
+ * 
+ * In default mode, nb_threads histograms are created
+ * \test In mono mode (MTTHIST_MONO), only one is created
+ * 
+ * To fill the histogram from threads : 
+ * 
+ *      some_TH1F_histo.Fill()
+ * 
+ * Once the histogram have been filled, two options : 
+ * 
+ * - Either write it down directly : 
+ * 
+ *        // Open a TFile
+ *        some_TH1F_histo.Write()
+ *        // Write and close the TFile
+ * 
+ * - Or you can merge the histograms :
+ * 
+ *       some_TH1F_histo.Merge();
+ *
+ *    You can then address the merged histogram using -> : 
+ *        
+ *        some_TH1F_histo->Integral();
+ */
 template <class THist>
 class MTTHist : public MTObject
 {
 public:
+  /**
+   * @brief Construct a new MTTHist object and send the arguments directly to the underlying THist
+   * 
+   * @tparam ARGS 
+   * @param args 
+   */
   template <class... ARGS>
   MTTHist(ARGS &&... args) 
   {
     (sizeof...(args)==0) ? this -> reset(nullptr) : this -> reset(std::forward<ARGS>(args)...);
   }
 
+  /**
+   * @brief Wrapper around an already existing histograms
+   * 
+   * @attention You'll have to manage the life of the pointer
+   */
+  template <class... ARGS>
   MTTHist(THist* hist) {m_merged = hist; m_exists = true;}
 
-  // General constructor, fu8lly based on reset method
+  /**
+   * @brief Copy constructor
+   */
+  template <class... ARGS>
+  MTTHist<THist>(MTTHist<THist> const & hist) : 
+      m_merged(hist.m_merged), 
+      m_exists(hist.m_exists), 
+      m_collection(hist.m_collection), 
+      m_is_deleted(hist.m_is_deleted), 
+      m_comment(hist.m_comment),
+      m_str_name(hist.m_str_name),
+      m_is_merged(hist.m_is_merged),
+      m_is_deleted(hist.m_is_deleted)
+      {}
+
+  // General constructor, fully based on reset method
   // template <class... ARGS>
   // MTTHist(std::string name, ARGS &&... args) { this -> reset (name, std::forward<ARGS>(args)...); }
 
@@ -51,9 +95,11 @@ public:
   // ---   GENERIC INITIALIZATION --- //
 
 
-  //Copy initialiser :
+  /**
+   * @brief Copy initializer :
+   */
   template <class... ARGS>
-  void reset(MTTHist<THist> hist) { m_exists = false; m_merged = static_cast<THist*>(hist.get());}
+  void reset(MTTHist<THist> hist) { m_exists = false; m_merged = static_cast<THist*>(hist.m_merged); m_collection = hist.m_collection;}
 
   template <class... ARGS>
   void reset(THist *hist) {m_exists = true; m_merged = hist;}
