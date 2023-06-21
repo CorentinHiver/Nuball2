@@ -36,7 +36,7 @@ public:
     }
   #else //NO USE_RF
     print("NO RF IS USED !! Please set RF_USE [period_value]");
-    return 0;
+    return static_cast<Long64_t>(time)-offset;
   #endif //USE_RF
   }
 
@@ -55,9 +55,12 @@ public:
     return (pulse_ToF(hit,-borneMin) < borneMax);
   }
 
-#ifdef USE_RF
   ULong64_t last_hit = 0;
+
+#ifdef USE_RF
   ULong64_t period   = USE_RF;
+#else //NO USE_RF
+  ULong64_t period   = 0;
 #endif //USE_RF
 
   static ushort label;

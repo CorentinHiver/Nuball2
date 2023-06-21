@@ -1,6 +1,8 @@
 #ifndef EVENT_BUILDER_136_H
 #define EVENT_BUILDER_136_H
+
 #include <Builder.hpp>
+#include <RF_Manager.hpp>
 
 class EventBuilder_136 : public Builder
 {
@@ -30,7 +32,7 @@ public:
 private:
   // Attributes :
   Time RF_ref_time = 0;
-  RF_Manager* m_rf   = nullptr;
+  RF_Manager* m_rf = nullptr;
   Time m_shift = 0;
 };
 

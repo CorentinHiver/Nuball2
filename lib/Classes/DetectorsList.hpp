@@ -89,5 +89,7 @@ void DetectorsList::load(std::string const & filename)
     }
   }
   inputfile.close();
+  m_ok = true;
+  print("Labels extracted from", filename);
 }
 #endif //DETECTORSLIST_H

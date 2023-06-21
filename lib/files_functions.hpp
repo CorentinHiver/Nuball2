@@ -228,6 +228,13 @@ public:
 
   Folder(){}
 
+  /**
+   * @brief Turns a string to a folder's name.
+   * 
+   * Basically, it is simply ensured that the name ends with a '/'
+   * 
+   * Also, it is the base class of Path class
+  */
   Folder(std::string const & folder) : m_folder (folder)
   {
     make(m_folder);
@@ -254,11 +261,13 @@ public:
 
   operator std::string() const & {return m_folder;}
   std::string const & get() const {return m_folder;}
+  std::string name() const {auto ret = m_folder; ret.pop_back(); return ret;}
 
   static void make(std::string & folder)
   {
     if (folder.back() != '/') folder.push_back('/');
   }
+  
 
 private:
   std::string m_folder;
@@ -286,7 +295,7 @@ public:
 
   Folders(std::vector<std::string> const & folders)
   {
-    for (auto const & folder : folders) m_folders.push_back(static_cast<Folder>(folder));
+    for (auto const & folder : folders) m_folders.push_back(Folder(folder));
   }
 
   operator std::vector<Folder>() const & {return m_folders;}
@@ -315,6 +324,10 @@ class Path
 public:
   Path(){}
   Path(Path const & path) : m_exists(path.m_exists), m_path(path.m_path) {}
+
+  /**
+   * @brief Turns a string to a path, creating it if create = true and it doesn't already exists
+  */
   Path(std::string const & path, bool create = false) : m_path(path)
   {
     if (m_path[0]=='/')
@@ -343,11 +356,29 @@ public:
     }
   }
 
-  Path(const char* c_str, bool create = false)
+    /**
+   * @brief Turns a C string to a path, creating it if create = true and it doesn't already exists
+  */
+  Path(const char* c_str, bool create = false) : m_path(std::string(c_str))
   {
-    m_path = c_str;
+    if (m_path[0]=='/')
+    {// Absolute path
+    }
+    else if (m_path[0]=='~')
+    {// Home path
+      m_path = std::string(std::getenv("HOME"))+m_path;
+    }
+    else
+    {// Relative path
+      print("Relative paths aren't supported, sorry !");
+      m_exists = false;
+    }
+
     makeFolder(m_path);
     m_exists = folder_exists(m_path);
+
+    // getList
+
     if (!m_exists && create) create_folder_if_none(m_path);
     if (!folder_exists(m_path))
     {

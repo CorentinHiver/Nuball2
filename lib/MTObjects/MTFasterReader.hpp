@@ -97,14 +97,14 @@ public:
   /**
  * @brief Regular constructor
  * 
- * @param folder : The path to the folder containing the .fast files to read
+ * @param path : The path to the path containing the .fast files to read
  * @param nb_files : Default -1, takes all the files
  */
-  MTFasterReader(Folder folder, int const & nb_files = -1) {addFolder(folder, nb_files);}
+  MTFasterReader(Path path, int const & nb_files = -1) {addFolder(path, nb_files);}
 
-  bool addFolder(Folder folder, int const & nb_files = -1) 
+  bool addFolder(Path path, int const & nb_files = -1) 
   {
-    auto const ret = m_files.addFolder(folder, nb_files);
+    auto const ret = m_files.addFolder(path, nb_files);
     m_MTfiles = m_files.getListFiles();
     return ret;
   }

@@ -2,7 +2,9 @@
 #define QDC2
 #define USE_RF 200 //ns
 #define KEEP_ALL
-
+#define USE_DSSD
+#define USE_LaBr3
+#define USE_PARIS
 // 2. Include library
 
 #include <libCo.hpp>
@@ -20,27 +22,25 @@
 
 #include "EventBuilder_136.hpp"
 
-// 3. Declare some global object
-
-Folder manip_name = "N-SI-136";
+// 3. Declare some global variables :
+std::string IDFile = "index_129.list";
+std::string calibFile = "136.calib";
+Folder manip = "N-SI-136";
+std::string list_runs = "list_runs.list";
 std::string time_ref = "301";
 std::string timewindow = "1500";
 int nb_files_ts = 20;
 
-DetectorsList detList("../NearLine/ID/index_129.list");
-Calibration calibration("../NearLine/Calibration/calib_136.cal", detList);
-
 // 4. Declare the function to run on each file in parallel :
-void convert(Hit & hit, FasterReader & reader)
+void convert(Hit & hit, FasterReader & reader, DetectorsList & detList, Calibration & calibration, Timeshifts & timeshifts)
 {
-  // Extracting the run name
+  // Extracting the run name :
   Filename filename = reader.getFilename();
   std::string run_path = filename.path();
   run_path.pop_back();
   std::string run = rmPathAndExt(run_path);
 
-  // Loading the lookup tables 
-  Timeshifts timeshifts("N-SI-136-root/Timeshifts/"+run+".dT");
+  // Loading the lookup tables :
   if (!detList || !timeshifts || !calibration) return;
 
   // Initialize the temporary TTree :
@@ -73,20 +73,14 @@ void convert(Hit & hit, FasterReader & reader)
   readTree -> SetBranchAddress("pileup" , &hit.pileup);
   readTree -> SetBranchAddress("time"   , &hit.time  );
 
-  // Initialize output TTree
+  // Initialize output TTree :
   std::unique_ptr<TTree> outTree(new TTree("Nuball2","Nuball2"));
-  Event event(outTree.get(),"ltnNp","w");
+  Event event(outTree.get(), "ltnNp", "w");
 
-  // Initialize event builder based on RF
+  // Initialize event builder based on RF :
   RF_Manager rf;
-  EventBuilder_136 eventBuilder(&event,&rf);
-  eventBuilder.setShift(static_cast<Long64_t>(USE_RF));
+  EventBuilder_136 eventBuilder(&event, &rf);
 
-  int a = 0;
-  int* b = &a;
-
-  b = 2;
-  
   // Initialize event analyser : simple modules and DSSD counter
   Counter136 counter;
 
@@ -102,6 +96,7 @@ void convert(Hit & hit, FasterReader & reader)
   readTree -> GetEntry(gindex[loop]);
   eventBuilder.set_last_hit(hit);
 
+  //Loop over the data :
   auto const & nb_data = readTree->GetEntries();
   while (loop<nb_data)
   {
@@ -118,6 +113,7 @@ void convert(Hit & hit, FasterReader & reader)
       continue;
     }
 
+    // Event building :
     if (eventBuilder.build(hit))
     {
       counter.count(event); 
@@ -153,28 +149,56 @@ void convert(Hit & hit, FasterReader & reader)
 // 5. Main
 int main(int argc, char** argv)
 {
-  if (!detList || calibration) return -1;
+
   // MANDATORY : initialize the multithreading !
-  MTObject::Initialize(3);
+  MTObject::Initialize(2);
 
 
-  // Setup the path acordingly to the machine :
+  // MANDATORY : initialize the detectors labels manager !
+  Detectors::Initialize();
+
+  // Setup the path accordingly to the machine :
     Path datapath = std::string(std::getenv("HOME"));
        if ( datapath == "/home/corentin/") datapath+="faster_data/";
   else if ( datapath == "/home/faster/") datapath="srv/data/nuball2/";
   else {print("Unkown HOME path -",datapath,"- please add yours on top of this line ---|---"); return -1;}
 
-  // Load the list of runs to convert :
-  Manip runs(datapath+manip_name+"list_runs.list");
+  Path manipPath = datapath+manip;
+  Path outPath (datapath+manip.name()+"-root", true);
 
-  runs.Print();
+  // Load some modules :
+  DetectorsList detList(IDFile);
+  Calibration calibration(calibFile, detList);
+  Manip runs(manipPath+list_runs);
 
-  // Loop sequentially through the runs and treat its files in parallel
+  // Checking of all the modules have been loaded correctly :
+  if (!detList || !calibration || !runs) return -1;
+
+  // Loop sequentially through the runs and treat theirs files in parallel :
   std::string run;
   while(runs.getNext(run))
   {
-    MTFasterReader readerMT(datapath+manip_name+run);
-    readerMT.execute(convert);
+    Path runpath = manipPath+run;
+    auto run_name = removeExtension(run);
+    // Timeshifts handling : 
+    print("----------------");
+    print("Treating ", run_name);
+    std::string timeshifts_file = outPath+"Timeshifts/"+run_name+".dT";
+    Timeshifts timeshifts(timeshifts_file);
+
+    if (!timeshifts) 
+    { 
+      timeshifts.setDetectorsList(detList);
+      timeshifts.setOutDir(outPath);
+      timeshifts.setOutRoot(run_name+".root");
+      timeshifts.setOutData(run_name+".dT");
+      timeshifts.setMult(2,3);
+      // timeshifts.setMaxHits(10000);
+      timeshifts.calculate(runpath, nb_files_ts);
+    }
+    // // Loop over the files in parallel :
+    MTFasterReader readerMT(runpath);
+    readerMT.execute(convert, detList, calibration, timeshifts);
   }
 
   return 1;

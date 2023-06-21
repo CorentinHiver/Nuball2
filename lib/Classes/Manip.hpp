@@ -17,11 +17,12 @@ public:
   {
     std::ifstream file;
     file.open(runs_file);
-    if (!file.good()){print(runs_file, "NOT FOUND !"); return;}
+    if (!file.good()){print(runs_file, "NOT FOUND !"); m_ok = false; return;}
     std::string line;
     while(file >> line) list_runs.push_back(line);
     file.close();
     if (m_MTOn) list_runs_MT = list_runs;
+    m_ok = true;
   }
 
   bool setMT(bool const & MTOn = true)
@@ -33,6 +34,8 @@ public:
       return false;
     }
   }
+
+  operator bool() const & {return m_ok;}
 
   void Print() { (m_MTOn) ? list_runs_MT.Print() : print(list_runs); }
 
@@ -57,6 +60,7 @@ public:
 
 private:  
   uint i = 0;
+  bool m_ok;
   bool m_MTOn = false; // Multithreading on
   Path m_datapath;
   Folder m_manip;
