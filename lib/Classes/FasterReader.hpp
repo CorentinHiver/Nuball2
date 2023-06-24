@@ -361,7 +361,6 @@ bool FasterReader::ReadData(faster_data_p const & _data)
     #endif //FASTER_GROUP
   }
   m_hit -> time = faster_data_hr_clock_ns(_data) * 1000;// Stores the time in ps
-  std::cout << std::setprecision(20) << faster_data_hr_clock_ns(_data) << std::endl;
   m_write = switch_alias(m_alias, _data);
 #ifdef FASTER_GROUP
   if (m_inGroup && m_write)

@@ -1,7 +1,7 @@
 #ifndef MT_FASTER_READER_HPP
 #define MT_FASTER_READER_HPP
 
-#include "../Classes/Hit.h"
+#include "../Classes/Hit.hpp"
 #include "../Classes/FasterReader.hpp"
 #include "../Classes/FilesManager.hpp"
 

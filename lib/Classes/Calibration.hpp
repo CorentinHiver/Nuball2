@@ -6,6 +6,7 @@
 #include "Detectors.hpp"
 #include "DetectorsList.hpp"
 #include "FilesManager.hpp"
+#include "MTFasterReader.hpp"
 
 class Calibration
 {

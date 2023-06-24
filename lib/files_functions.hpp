@@ -264,7 +264,7 @@ public:
   std::string const & get() const {return m_folder;}
   std::string name() const {auto ret = m_folder; ret.pop_back(); return ret;}
 
-  static void make(std::string & folder)
+  void make(std::string & folder)
   {
     if (folder.size() == 0) m_ok = false;
     else
