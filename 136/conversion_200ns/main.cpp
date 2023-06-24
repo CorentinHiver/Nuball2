@@ -1,26 +1,28 @@
 // 1. Parameters
-#define QDC2
+  // RF : 
 #define USE_RF 200 //ns
-#define KEEP_ALL
+  // Detectors :
 #define USE_DSSD
 #define USE_LaBr3
 #define USE_PARIS
-// 2. Include library
+  // Triggers :
+#define KEEP_ALL
 
+// 2. Include library
 #include <libCo.hpp>
 #include <FasterReader.hpp>   // This class is the base for mono  threaded code
 #include <MTFasterReader.hpp> // This class is the base for multi threaded code
-#include <MTCounter.hpp> // Use this to safely count what you want
-#include <MTTHist.hpp>   // Use this to safely fill histograms
-#include <Timeshifts.hpp>
-#include <Calibration.hpp>
-#include <Manip.hpp>
-#include <Alignator.hpp>
-#include <RF_Extractor.hpp>
-#include <RF_Manager.hpp>
-#include <Detectors.hpp>
+#include <MTCounter.hpp>      // Use this to thread safely count what you want
+#include <MTTHist.hpp>        // Use this to thread safely fill histograms
+#include <Timeshifts.hpp>     // Either loads or calculate timeshifts between detectors
+#include <Calibration.hpp>    // Either loads or calculate calibration coefficients
+#include <Detectors.hpp>      // Eases the manipulation of detector's labels
+#include <Manip.hpp>          // Eases the manipulation of files and folder of an experiments
+#include <RF_Manager.hpp>     // Eases manipulation of RF information
+#include <Alignator.hpp>      // Align a TTree if some events are shuffled in time
+#include <RF_Extractor.hpp>   // Extracts the first RF hit from a ttree
 
-#include "EventBuilder_136.hpp"
+#include "EventBuilder_136.hpp" // Event builder for this experiment
 
 // 3. Declare some global variables :
 std::string IDFile = "index_129.list";
@@ -30,18 +32,27 @@ std::string list_runs = "list_runs.list";
 std::string time_ref = "301";
 std::string timewindow = "1500";
 int nb_files_ts = 20;
+bool overwrite = true; // Overwrite already existing converted root files
 
 // 4. Declare the function to run on each file in parallel :
-void convert(Hit & hit, FasterReader & reader, DetectorsList & detList, Calibration & calibration, Timeshifts & timeshifts)
+void convert(Hit & hit, FasterReader & reader, DetectorsList const & detList, Calibration const & calibration, Timeshifts const & timeshifts, Path const & outPath)
 {
-  // Extracting the run name :
-  Filename filename = reader.getFilename();
-  std::string run_path = filename.path();
-  run_path.pop_back();
-  std::string run = rmPathAndExt(run_path);
-
-  // Loading the lookup tables :
+  // Checking the lookup tables :
   if (!detList || !timeshifts || !calibration) return;
+
+  // Extracting the run name :
+  Filename filename = reader.getFilename(); // "/path/to/manip/run_number.fast/run_number_filenumber.fast"
+  std::string run_path = filename.path();   // "/path/to/manip/run_number.fast/"
+  std::string temp = run_path;              // "/path/to/manip/run_number.fast/"
+  temp.pop_back();                          // "/path/to/manip/run_number.fast"
+  std::string run = rmPathAndExt(temp);     //                "run_number"
+
+  // Setting the name of the output file :
+  Path outFolder (outPath+run, true);                      // /path/to/manip-root/run_number.fast/
+  std::string outfile = outFolder+filename.name()+".root"; // /path/to/manip-root/run_number.fast/run_number_filenumber.root
+
+  // Important : if the output file already exists, then do not overwrite it !
+  if ( !overwrite && file_exists(outfile) ) {print(outfile, "already exists !"); return;}
 
   // Initialize the temporary TTree :
   std::unique_ptr<TTree> readTree (new TTree("temp","temp"));
@@ -49,16 +60,24 @@ void convert(Hit & hit, FasterReader & reader, DetectorsList & detList, Calibrat
   readTree -> Branch("label"  , &hit.label );
   readTree -> Branch("time"   , &hit.time  );
   readTree -> Branch("nrjcal" , &hit.nrjcal);
-  readTree -> Branch("nrj2"   , &hit.nrj2);
+  readTree -> Branch("nrj2"   , &hit.nrj2  );
   readTree -> Branch("pileup" , &hit.pileup);
 
   // Loop over the TTree :
+  int count = 0;
+  int RF_counter = 0;
   while(reader.Read())
   {
     hit.time+=timeshifts[hit.label];
     hit.nrjcal = calibration(hit.nrj, hit.label);
     readTree -> Fill();
+    count++;
+    if (hit.label == RF_Manager::label) RF_counter++;
   }
+
+#ifdef DEBUG
+  print("Read finished here");
+#endif //DEBUG
 
   // Realign switched hits after timeshifts :
   Alignator gindex(readTree.get());
@@ -84,17 +103,16 @@ void convert(Hit & hit, FasterReader & reader, DetectorsList & detList, Calibrat
   // Initialize event analyser : simple modules and DSSD counter
   Counter136 counter;
 
-  // Get the first RF downscale and write it down :
-  RF_Extractor first_rf(outTree.get(), rf, hit, gindex);
+  // Handle the first RF downscale :
+  RF_Extractor first_rf(readTree.get(), rf, hit, gindex);
+  print((bool)(first_rf));
+  if (!first_rf) return;
   eventBuilder.setFirstRF(hit);
-  event = hit;
-  outTree -> Fill();
-  event.clear();
 
   // Handle the first hit :
   int loop = 0;
-  readTree -> GetEntry(gindex[loop]);
-  eventBuilder.set_last_hit(hit);
+  readTree -> GetEntry(gindex[loop++]);
+  eventBuilder.set_first_hit(hit);
 
   //Loop over the data :
   auto const & nb_data = readTree->GetEntries();
@@ -137,13 +155,15 @@ void convert(Hit & hit, FasterReader & reader, DetectorsList & detList, Calibrat
     }
   #endif
   }
-
-  std::string outName = "coucou";
-  std::unique_ptr<TFile> outFile (TFile::Open(outName.c_str(), "RECREATE"));
+#ifdef DEBUG
+  print("Conversion finished here");
+#endif //DEBUG
+  std::unique_ptr<TFile> outFile (TFile::Open(outfile.c_str(), "RECREATE"));
   outFile -> cd();
   outTree -> Write();
   outFile -> Write();
   outFile -> Close();
+  print(outfile, "written");
 }
 
 // 5. Main
@@ -180,12 +200,13 @@ int main(int argc, char** argv)
   {
     Path runpath = manipPath+run;
     auto run_name = removeExtension(run);
-    // Timeshifts handling : 
+
+    // Timeshifts loading : 
     print("----------------");
     print("Treating ", run_name);
-    std::string timeshifts_file = outPath+"Timeshifts/"+run_name+".dT";
-    Timeshifts timeshifts(timeshifts_file);
+    Timeshifts timeshifts(outPath,run_name);
 
+    // If no timeshifts data already available, calculate it :
     if (!timeshifts) 
     { 
       timeshifts.setDetectorsList(detList);
@@ -196,9 +217,10 @@ int main(int argc, char** argv)
       // timeshifts.setMaxHits(10000);
       timeshifts.calculate(runpath, nb_files_ts);
     }
-    // // Loop over the files in parallel :
+
+    // Loop over the files in parallel :
     MTFasterReader readerMT(runpath);
-    readerMT.execute(convert, detList, calibration, timeshifts);
+    readerMT.execute(convert, detList, calibration, timeshifts, outPath);
   }
 
   return 1;

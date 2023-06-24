@@ -2,14 +2,16 @@
 #define RF_MANAGER_H
 
 #include "../libCo.hpp"
+#include "../libRoot.hpp"
+
 
 class RF_Manager
 {
 public:
-  RF_Manager(ushort const & label_RF = 251) {label = label_RF;}
-  Bool_t setHit(Hit const & hit);
+  RF_Manager(Label const & label_RF = 251) {label = label_RF;}
+  bool setHit(Hit const & hit);
   void static set_offset(Long64_t const & offset) {m_offset = offset;}
-  // Bool_t setHit(Event const & event, int const & index);
+  // bool setHit(Event const & event, int const & index);
 
   Long64_t pulse_ToF(ULong64_t const & time, Long64_t const & offset = 0) const
   {
@@ -50,7 +52,7 @@ public:
     return pulse_ToF(hit.time, m_offset);
   }
 
-  Bool_t isPrompt(Hit const & hit, Long64_t const & borneMin, Long64_t const & borneMax)
+  bool isPrompt(Hit const & hit, Long64_t const & borneMin, Long64_t const & borneMax)
   {
     return (pulse_ToF(hit,-borneMin) < borneMax);
   }
@@ -58,21 +60,21 @@ public:
   ULong64_t last_hit = 0;
 
 #ifdef USE_RF
-  ULong64_t period   = USE_RF;
+  ULong64_t period = USE_RF;
 #else //NO USE_RF
-  ULong64_t period   = 0;
+  ULong64_t period = 0;
 #endif //USE_RF
 
-  static ushort label;
+  static Label label;
 
 private:
   Long64_t static m_offset;
 };
 
 Long64_t RF_Manager::m_offset = 50 ;
-ushort   RF_Manager::label  = 251;
+Label    RF_Manager::label  = 251;
 
-Bool_t RF_Manager::setHit(Hit const & hit)
+bool RF_Manager::setHit(Hit const & hit)
 {
   if (hit.label == RF_Manager::label)
   {

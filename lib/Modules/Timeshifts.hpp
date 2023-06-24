@@ -6,7 +6,7 @@
 #include "../Classes/Detectors.hpp"
 #include "../Classes/FasterReader.hpp"
 #include "../Classes/FilesManager.hpp"
-#include "../Classes/Hit.h"
+#include "../Classes/Hit.hpp"
 #include "../Classes/RF_Manager.hpp"
 #include "../Classes/Event.hpp"
 #include "../Classes/CoincBuilder2.hpp"
@@ -47,6 +47,14 @@ public:
    * @brief Call the Timeshifts::load() method to load the timeshifts from a .dT file 
   */
   Timeshifts(std::string const & filename) : m_filename(filename) {this -> load(filename);}
+
+  /**
+   * @brief For faster to root conversion only : Timeshifts::load() loads the timeshifts from a .dT file 
+   * @param path: The path of the out root directory (/path/to/run_name)
+   * @param name: The name of the .dT file without the extension (e.g. run_10)
+   * @details Will read a file in /path/Timeshitfs/name.dT
+  */
+  Timeshifts(std::string const & path, std::string const & name) : m_filename(path+"Timeshifts/"+name+".dT") {this -> load(m_filename);}
 
   /**
    * @brief Copy constructor
@@ -665,7 +673,7 @@ void Timeshifts::setOutDir(std::string const & outDir)
 
 void Timeshifts::setOutRoot(std::string const & outroot) 
 {
-  m_outRoot = outroot; 
+  m_outRoot = outroot+"dT"; 
   if (extension(m_outRoot) != "root") 
   {
     m_outRoot = removeExtension(m_outRoot)+"root";
@@ -675,9 +683,9 @@ void Timeshifts::setOutRoot(std::string const & outroot)
 void Timeshifts::setOutData(std::string const & outdata)
 {
   m_outData = outdata;
-  if (extension(m_outRoot) != "dT") 
+  if (extension(m_outData) != "dT") 
   {
-    m_outRoot = removeExtension(m_outRoot)+"dT";
+    m_outData = removeExtension(m_outData)+".dT";
   }
 }
 

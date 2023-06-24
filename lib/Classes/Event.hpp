@@ -1,7 +1,7 @@
 #ifndef EVENT_H
 #define EVENT_H
 
-#include "Hit.h"
+#include "Hit.hpp"
 #include "../libCo.hpp"
 #include "../libRoot.hpp"
 

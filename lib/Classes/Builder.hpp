@@ -38,10 +38,10 @@
  *        class MyEventBuilder : public Builder
  *        {
  *            ....
- *            builder(...);
+ *            build(...);
  *        };
  * 
- * You will have to overload the buider method
+ * You will have to overload the buid method
  * 
 */
 class Builder
@@ -54,16 +54,16 @@ public:
   // Getters :
   bool const & isCoincTrigged() const {return coincON;}
 
-  bool isSingle() const {return (this->status() == 0 && m_single_hit.label>0);}
-  bool hasSingle() const {return (this->status() == 0 && m_single_hit.label>0);}
-  Hit & singleHit() {return m_single_hit;}
-  Event getSingleEvent() {return Event(m_single_hit);}
 
   Hit const & getLastHit() const {return m_last_hit;}
 
   uchar const & status() const { return m_status; }
   bool isBuilding() const {return (m_status==1);}
   bool isBuilt() const {return (m_status==2);}
+  bool isSingle () const {return (m_status == 0 && m_single_hit.label>0);}
+  bool hasSingle() const {return (m_status == 0 && m_single_hit.label>0);}
+  Hit const & singleHit() const {return m_single_hit;}
+  Event getSingleEvent() const {return Event(m_single_hit);}
 
   Event* getEvent() const {return m_event;}
   UShort_t size() const {return m_event -> size();}
@@ -82,7 +82,9 @@ public:
   }
 
 protected:
+
   Event*    m_event   = nullptr;
+
   std::size_t m_raw_Ge  = 0;
   std::size_t m_DSSD    = 0;
   std::size_t m_modules = 0;

@@ -66,10 +66,12 @@ digraph "lib/Classes/RWMat.hxx"
   Node27 [id="Node000027",label="print.hpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$print_8hpp.html",tooltip=" "];
   Node11 -> Node28 [id="edge34_Node000011_Node000028",color="steelblue1",style="solid",tooltip=" "];
   Node28 [id="Node000028",label="string_functions.hpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$string__functions_8hpp.html",tooltip=" "];
-  Node11 -> Node29 [id="edge35_Node000011_Node000029",color="steelblue1",style="solid",tooltip=" "];
+  Node28 -> Node3 [id="edge35_Node000028_Node000003",color="steelblue1",style="solid",tooltip=" "];
+  Node28 -> Node5 [id="edge36_Node000028_Node000005",color="steelblue1",style="solid",tooltip=" "];
+  Node11 -> Node29 [id="edge37_Node000011_Node000029",color="steelblue1",style="solid",tooltip=" "];
   Node29 [id="Node000029",label="files_functions.hpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$files__functions_8hpp.html",tooltip=" "];
-  Node29 -> Node27 [id="edge36_Node000029_Node000027",color="steelblue1",style="solid",tooltip=" "];
-  Node29 -> Node28 [id="edge37_Node000029_Node000028",color="steelblue1",style="solid",tooltip=" "];
-  Node11 -> Node30 [id="edge38_Node000011_Node000030",color="steelblue1",style="solid",tooltip=" "];
+  Node29 -> Node27 [id="edge38_Node000029_Node000027",color="steelblue1",style="solid",tooltip=" "];
+  Node29 -> Node28 [id="edge39_Node000029_Node000028",color="steelblue1",style="solid",tooltip=" "];
+  Node11 -> Node30 [id="edge40_Node000011_Node000030",color="steelblue1",style="solid",tooltip=" "];
   Node30 [id="Node000030",label="vector_functions.hpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$vector__functions_8hpp.html",tooltip=" "];
 }

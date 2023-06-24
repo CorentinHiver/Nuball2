@@ -103,5 +103,4 @@ digraph "lib/faster.hpp"
   Node58 [id="Node000058",label="TTree.h",height=0.2,width=0.4,color="grey60", fillcolor="#E0E0E0", style="filled",tooltip=" "];
   Node3 -> Node59 [id="edge49_Node000003_Node000059",color="steelblue1",style="solid",tooltip=" "];
   Node59 [id="Node000059",label="TTreeIndex.h",height=0.2,width=0.4,color="grey60", fillcolor="#E0E0E0", style="filled",tooltip=" "];
-  Node2 -> Node4 [id="edge50_Node000002_Node000004",color="steelblue1",style="solid",tooltip=" "];
 }

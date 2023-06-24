@@ -8,9 +8,19 @@ class Manip
 {
 public:
 
+  Manip(){}
+
   Manip(std::string const & runs_file) : m_runs_files(runs_file)
   {
     readFile ( runs_file );
+  }
+
+  Manip(std::string const & datapath, std::string const & manipname, std::string const & filename) 
+  {
+    setDataPath(datapath);
+    setManipName(manipname);
+    setFileName(filename);
+    readFile();
   }
 
   void readFile(std::string const & runs_file)
@@ -23,6 +33,27 @@ public:
     file.close();
     if (m_MTOn) list_runs_MT = list_runs;
     m_ok = true;
+  }
+
+  bool readFile()
+  {
+    m_runs_files = m_datapath + m_manip + m_file;
+    return readFile();
+  }
+
+  void setDataPath(std::string const & datapath)
+  {
+    m_datapath = datapath;
+  }
+
+  void setManipName(std::string const & manipname)
+  {
+    m_manip = manipname;
+  }
+
+  void setFileName(std::string const & filename)
+  {
+    m_file = filename;
   }
 
   bool setMT(bool const & MTOn = true)
@@ -62,9 +93,12 @@ private:
   uint i = 0;
   bool m_ok;
   bool m_MTOn = false; // Multithreading on
+
   Path m_datapath;
   Folder m_manip;
+  std::string m_file;
   std::string m_runs_files;
+
   std::vector<std::string> list_runs;
   MTList<std::string> list_runs_MT;
 };

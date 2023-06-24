@@ -1,7 +1,7 @@
 #ifndef CALIBRATION_H
 #define CALIBRATION_H
 
-#include "Hit.h"
+#include "Hit.hpp"
 #include "../libCo.hpp"
 #include "Detectors.hpp"
 #include "DetectorsList.hpp"
@@ -38,7 +38,7 @@ public:
 
   void Print();
 
-  operator bool() {return m_ok;}
+  operator bool() const & {return m_ok;}
 
   //DEV :
   // void calibrate_fast(Hit & hit){}

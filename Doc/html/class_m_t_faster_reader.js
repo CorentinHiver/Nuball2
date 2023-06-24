@@ -1,8 +1,8 @@
 var class_m_t_faster_reader =
 [
     [ "MTFasterReader", "class_m_t_faster_reader.html#ad7f0fc9a9cd713d59870a91c86d8ad9a", null ],
-    [ "MTFasterReader", "class_m_t_faster_reader.html#a9d7285699a807db0ed36d30699c247b0", null ],
-    [ "addFolder", "class_m_t_faster_reader.html#a2b6ef5cae182f313e8246c57ac9eb120", null ],
+    [ "MTFasterReader", "class_m_t_faster_reader.html#a98a77edc573c4b3cfa5fa384f0d1a085", null ],
+    [ "addFolder", "class_m_t_faster_reader.html#a58a2fe8f9f9ba39808d43f36f45c8288", null ],
     [ "execute", "class_m_t_faster_reader.html#ad86d3d4a152fc2fd2f367021c912818d", null ],
     [ "nextFilename", "class_m_t_faster_reader.html#a63e239df82bf04244bdab829bb73cd20", null ],
     [ "printMTFiles", "class_m_t_faster_reader.html#a01bb4c02770855a41d53b3544b3cae3a", null ],

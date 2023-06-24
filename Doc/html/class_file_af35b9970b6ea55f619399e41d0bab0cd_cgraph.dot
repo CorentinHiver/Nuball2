@@ -11,15 +11,15 @@ digraph "File::File"
   Node2 -> Node3 [id="edge2_Node000002_Node000003",color="steelblue1",style="solid",tooltip=" "];
   Node3 [id="Node000003",label="folder_exists",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$files__functions_8hpp.html#a6d7a6f0ccbecfe41730c211f472cfcb3",tooltip=" "];
   Node3 -> Node4 [id="edge3_Node000003_Node000004",color="steelblue1",style="solid",tooltip=" "];
-  Node4 [id="Node000004",label="makePath",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$files__functions_8hpp.html#a32612ffa1c93a9a835af83b74dc68aaa",tooltip=" "];
+  Node4 [id="Node000004",label="makeFolder",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$files__functions_8hpp.html#acf60b8ed2e04f85068ce2ccdc1a67c2e",tooltip=" "];
   Node1 -> Node5 [id="edge4_Node000001_Node000005",color="steelblue1",style="solid",tooltip=" "];
   Node5 [id="Node000005",label="File::file",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_file.html#a83356659f65dc879029920739e03d7ff",tooltip=" "];
   Node1 -> Node6 [id="edge5_Node000001_Node000006",color="steelblue1",style="solid",tooltip=" "];
   Node6 [id="Node000006",label="file_exists",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$files__functions_8hpp.html#a6d165da5cc41e5429a9c03c6a6c68d96",tooltip=" "];
   Node6 -> Node7 [id="edge6_Node000006_Node000007",color="steelblue1",style="solid",tooltip=" "];
-  Node7 [id="Node000007",label="getPath",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$files__functions_8hpp.html#a9ef395c27c67b087963eb4223d781c79",tooltip=" "];
+  Node7 [id="Node000007",label="getPath",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$files__functions_8hpp.html#ab1e262f27aaad28944f29cd2bbde417f",tooltip=" "];
   Node6 -> Node8 [id="edge7_Node000006_Node000008",color="steelblue1",style="solid",tooltip=" "];
-  Node8 [id="Node000008",label="removePath",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$files__functions_8hpp.html#ab28b96de197fefe2474eebed698afc67",tooltip=" "];
+  Node8 [id="Node000008",label="removePath",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$files__functions_8hpp.html#ad3a78346393c83676348f6bad34b8ce2",tooltip=" "];
   Node1 -> Node7 [id="edge8_Node000001_Node000007",color="steelblue1",style="solid",tooltip=" "];
   Node1 -> Node9 [id="edge9_Node000001_Node000009",color="steelblue1",style="solid",tooltip=" "];
   Node9 [id="Node000009",label="print",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$print_8hpp.html#aaa2383e8fc7f8fa546f4376e1dd4c9b7",tooltip=" "];

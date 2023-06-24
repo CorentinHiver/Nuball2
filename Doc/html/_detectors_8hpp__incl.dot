@@ -55,10 +55,12 @@ digraph "lib/Classes/Detectors.hpp"
   Node25 [id="Node000025",label="print.hpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$print_8hpp.html",tooltip=" "];
   Node2 -> Node26 [id="edge25_Node000002_Node000026",color="steelblue1",style="solid",tooltip=" "];
   Node26 [id="Node000026",label="string_functions.hpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$string__functions_8hpp.html",tooltip=" "];
-  Node2 -> Node27 [id="edge26_Node000002_Node000027",color="steelblue1",style="solid",tooltip=" "];
+  Node26 -> Node18 [id="edge26_Node000026_Node000018",color="steelblue1",style="solid",tooltip=" "];
+  Node26 -> Node15 [id="edge27_Node000026_Node000015",color="steelblue1",style="solid",tooltip=" "];
+  Node2 -> Node27 [id="edge28_Node000002_Node000027",color="steelblue1",style="solid",tooltip=" "];
   Node27 [id="Node000027",label="files_functions.hpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$files__functions_8hpp.html",tooltip=" "];
-  Node27 -> Node25 [id="edge27_Node000027_Node000025",color="steelblue1",style="solid",tooltip=" "];
-  Node27 -> Node26 [id="edge28_Node000027_Node000026",color="steelblue1",style="solid",tooltip=" "];
-  Node2 -> Node28 [id="edge29_Node000002_Node000028",color="steelblue1",style="solid",tooltip=" "];
+  Node27 -> Node25 [id="edge29_Node000027_Node000025",color="steelblue1",style="solid",tooltip=" "];
+  Node27 -> Node26 [id="edge30_Node000027_Node000026",color="steelblue1",style="solid",tooltip=" "];
+  Node2 -> Node28 [id="edge31_Node000002_Node000028",color="steelblue1",style="solid",tooltip=" "];
   Node28 [id="Node000028",label="vector_functions.hpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$vector__functions_8hpp.html",tooltip=" "];
 }

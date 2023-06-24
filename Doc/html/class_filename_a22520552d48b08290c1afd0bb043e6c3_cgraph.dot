@@ -11,7 +11,9 @@ digraph "Filename::operator="
   Node2 -> Node3 [id="edge2_Node000002_Node000003",color="steelblue1",style="solid",tooltip=" "];
   Node3 [id="Node000003",label="Filename::filename",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_filename.html#ac2f8390e5eda94786a6f54fb7925068d",tooltip=" "];
   Node2 -> Node4 [id="edge3_Node000002_Node000004",color="steelblue1",style="solid",tooltip=" "];
-  Node4 [id="Node000004",label="getExtension",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$files__functions_8hpp.html#a7881c739c518d072671a463956e79a95",tooltip=" "];
+  Node4 [id="Node000004",label="getExtension",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$files__functions_8hpp.html#a4000ec99a26e146333e62836d01dff5b",tooltip=" "];
   Node2 -> Node5 [id="edge4_Node000002_Node000005",color="steelblue1",style="solid",tooltip=" "];
-  Node5 [id="Node000005",label="removeExtension",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$files__functions_8hpp.html#a8c974772d7bc68e383f1436e04b2c405",tooltip=" "];
+  Node5 [id="Node000005",label="getPath",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$files__functions_8hpp.html#ab1e262f27aaad28944f29cd2bbde417f",tooltip=" "];
+  Node2 -> Node6 [id="edge5_Node000002_Node000006",color="steelblue1",style="solid",tooltip=" "];
+  Node6 [id="Node000006",label="rmPathAndExt",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$files__functions_8hpp.html#a58f50a6390692cff52eef37fdaa94e56",tooltip=" "];
 }

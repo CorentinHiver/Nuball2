@@ -13,7 +13,7 @@ var searchData=
   ['clovers_10',['Clovers',['../class_counters.html#a35eedcda3ee01def8ceb7d3045db0127',1,'Counters']]],
   ['cluster_11',['cluster',['../class_paris.html#a4598dcb03f0900aa81b9e9cc1954c7cd',1,'Paris']]],
   ['cmeasures_12',['cmeasures',['../classpic__fit__result.html#ab4419fccba4d3d04fef25f4848763787',1,'pic_fit_result']]],
-  ['coincon_13',['coincON',['../class_builder.html#a8da59b56cc7d0f3c6a3f33a5c2351687',1,'Builder::coincON'],['../class_evt__build.html#a236aef2e355fc09e2a8ef239b893c4fa',1,'Evt_build::coincON'],['../class_event_builder.html#a8aedb065d473a041620b3c3aa2262986',1,'EventBuilder::coincON']]],
+  ['coincon_13',['coincON',['../class_builder.html#a3cc8019ce7fb78857124093476b2d8bf',1,'Builder::coincON'],['../class_evt__build.html#a236aef2e355fc09e2a8ef239b893c4fa',1,'Evt_build::coincON'],['../class_event_builder.html#a8aedb065d473a041620b3c3aa2262986',1,'EventBuilder::coincON']]],
   ['comptonvetomult_14',['ComptonVetoMult',['../class_sorted___event.html#a7c3603956ae1ccc8d5e8e2c38685b0ec',1,'Sorted_Event']]],
   ['cristaux_15',['cristaux',['../class_clovers.html#a54db851123b941eba5813e63e76894c8',1,'Clovers']]],
   ['cristaux_5fbgo_16',['cristaux_BGO',['../class_clovers.html#ab03d1c6070956f8db618884b897a77fe',1,'Clovers']]],

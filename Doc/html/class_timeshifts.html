@@ -91,7 +91,8 @@ $(document).ready(function(){initNavTree('class_timeshifts.html',''); initResiza
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-static-methods">Static Private Member Functions</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="class_timeshifts-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Timeshifts Class Reference</div></div>
@@ -107,61 +108,88 @@ Collaboration diagram for Timeshifts:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a608d9443a15dd669920e10dd8baee23a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#a608d9443a15dd669920e10dd8baee23a">analyse</a> ()</td></tr>
-<tr class="separator:a608d9443a15dd669920e10dd8baee23a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3d3ab1b3498ca45832d8a8735f16e188"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#a3d3ab1b3498ca45832d8a8735f16e188">calculate</a> (std::string const &amp;folder, int const &amp;nb_files=-1)</td></tr>
 <tr class="separator:a3d3ab1b3498ca45832d8a8735f16e188"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a117c199dee354c6b58868bf1f2d4e88b"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="_timeshifts_8hpp.html#a2e5ddce05d08c1f13f282d9e1230008c">Shift_t</a> &gt; const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#a117c199dee354c6b58868bf1f2d4e88b">get</a> () const</td></tr>
 <tr class="separator:a117c199dee354c6b58868bf1f2d4e88b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a37870f354c88ced0a30047c89085d4a2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_timeshifts_8hpp.html#a2e5ddce05d08c1f13f282d9e1230008c">Shift_t</a> const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#a37870f354c88ced0a30047c89085d4a2">get</a> (int const &amp;i) const</td></tr>
 <tr class="separator:a37870f354c88ced0a30047c89085d4a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9e3dc861a2470908defb028b2710ab09"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#a9e3dc861a2470908defb028b2710ab09">InitParameters</a> ()</td></tr>
-<tr class="separator:a9e3dc861a2470908defb028b2710ab09"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a28163efe8d487669cf50d5f6e1060d71"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#a28163efe8d487669cf50d5f6e1060d71">load</a> (std::string const &amp;filename)</td></tr>
+<tr class="memdesc:a28163efe8d487669cf50d5f6e1060d71"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use this method to load timeshifts from a .dT file.  <br /></td></tr>
 <tr class="separator:a28163efe8d487669cf50d5f6e1060d71"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a60689326cebd96ae4996522530ffefab"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#a60689326cebd96ae4996522530ffefab">operator bool</a> () const &amp;</td></tr>
+<tr class="separator:a60689326cebd96ae4996522530ffefab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3b15d1221feeccfc442a903a89a4059b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_timeshifts_8hpp.html#a2e5ddce05d08c1f13f282d9e1230008c">Shift_t</a> const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#a3b15d1221feeccfc442a903a89a4059b">operator[]</a> (int const &amp;i) const</td></tr>
 <tr class="separator:a3b15d1221feeccfc442a903a89a4059b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a18838a83a688536a247b029447b0433c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#a18838a83a688536a247b029447b0433c">Print</a> ()</td></tr>
 <tr class="separator:a18838a83a688536a247b029447b0433c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a353b148e1d54731f8acda5b89bc5e3f3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#a353b148e1d54731f8acda5b89bc5e3f3">setDetectorsList</a> (<a class="el" href="class_detectors_list.html">DetectorsList</a> *detList)</td></tr>
-<tr class="separator:a353b148e1d54731f8acda5b89bc5e3f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a42dcfbb61c054b40089db1f7995f18d7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#a42dcfbb61c054b40089db1f7995f18d7">setDetectorsList</a> (<a class="el" href="class_detectors_list.html">DetectorsList</a> const &amp;detList)</td></tr>
+<tr class="memdesc:a42dcfbb61c054b40089db1f7995f18d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the detector list.  <br /></td></tr>
 <tr class="separator:a42dcfbb61c054b40089db1f7995f18d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afa21cadd8eac07728df7f51d0dbaa908"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#afa21cadd8eac07728df7f51d0dbaa908">setMaxHits</a> (<a class="el" href="lib_co_8hpp.html#a9c34ac44da309b004570530c8cec8a0e">ulong</a> const &amp;max_hits=-1)</td></tr>
+<tr class="memdesc:afa21cadd8eac07728df7f51d0dbaa908"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set maximum hits to be read in a file.  <br /></td></tr>
 <tr class="separator:afa21cadd8eac07728df7f51d0dbaa908"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7fda3705ea789426070abb66ec90f730"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#a7fda3705ea789426070abb66ec90f730">setMult</a> (<a class="el" href="lib_co_8hpp.html#a65f85814a8290f9797005d3b28e7e5fc">uchar</a> const &amp;_max_mult, <a class="el" href="lib_co_8hpp.html#a65f85814a8290f9797005d3b28e7e5fc">uchar</a> const &amp;_min_mult)</td></tr>
-<tr class="separator:a7fda3705ea789426070abb66ec90f730"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c2b997cd74b8cf57dd59c13a7accc5a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#a0c2b997cd74b8cf57dd59c13a7accc5a">setMult</a> (<a class="el" href="lib_co_8hpp.html#a65f85814a8290f9797005d3b28e7e5fc">uchar</a> const &amp;min_mult, <a class="el" href="lib_co_8hpp.html#a65f85814a8290f9797005d3b28e7e5fc">uchar</a> const &amp;max_mult)</td></tr>
+<tr class="memdesc:a0c2b997cd74b8cf57dd59c13a7accc5a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the multiplicity gate for the events used for coincidence timeshift calculation.  <br /></td></tr>
+<tr class="separator:a0c2b997cd74b8cf57dd59c13a7accc5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab877131bc1bd7394f55c3d46729ac9e6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#ab877131bc1bd7394f55c3d46729ac9e6">setOutData</a> (std::string const &amp;outdata)</td></tr>
+<tr class="memdesc:ab877131bc1bd7394f55c3d46729ac9e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set output file name of the timeshifts data.  <br /></td></tr>
 <tr class="separator:ab877131bc1bd7394f55c3d46729ac9e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a26367484f20648d7c3f5b3bbe5679ca8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#a26367484f20648d7c3f5b3bbe5679ca8">setOutDir</a> (std::string const &amp;outDir)</td></tr>
+<tr class="memdesc:a26367484f20648d7c3f5b3bbe5679ca8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the output directory (full path);.  <br /></td></tr>
 <tr class="separator:a26367484f20648d7c3f5b3bbe5679ca8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa9f0f8cc1d96a5408f233449767ef0f6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#aa9f0f8cc1d96a5408f233449767ef0f6">setOutRoot</a> (std::string const &amp;outroot)</td></tr>
+<tr class="memdesc:aa9f0f8cc1d96a5408f233449767ef0f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set output root file containing the raw and corrected time spectra.  <br /></td></tr>
 <tr class="separator:aa9f0f8cc1d96a5408f233449767ef0f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acca1130b271301c5477d4b4a23ae4e5b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#acca1130b271301c5477d4b4a23ae4e5b">setParameters</a> (std::string const &amp;parameter)</td></tr>
+<tr class="memdesc:acca1130b271301c5477d4b4a23ae4e5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use this method to setup the parameters from a string in order to calculate the timeshifts.  <br /></td></tr>
 <tr class="separator:acca1130b271301c5477d4b4a23ae4e5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7711593870ff391999dca408d4318022"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#a7711593870ff391999dca408d4318022">setRFOffset</a> (Long64_t const &amp;shift)</td></tr>
+<tr class="memdesc:a7711593870ff391999dca408d4318022"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set RF offset (synonymous to <a class="el" href="class_timeshifts.html#ae5b6ee4b787d7d0213421ac9a0fc32d9" title="Set RF shift (synonymous to Timeshifts::setRFOffset)">Timeshifts::setRFShift</a>)  <br /></td></tr>
+<tr class="separator:a7711593870ff391999dca408d4318022"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae5b6ee4b787d7d0213421ac9a0fc32d9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#ae5b6ee4b787d7d0213421ac9a0fc32d9">setRFShift</a> (Long64_t const &amp;shift)</td></tr>
+<tr class="memdesc:ae5b6ee4b787d7d0213421ac9a0fc32d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set RF shift (synonymous to <a class="el" href="class_timeshifts.html#a7711593870ff391999dca408d4318022" title="Set RF offset (synonymous to Timeshifts::setRFShift)">Timeshifts::setRFOffset</a>)  <br /></td></tr>
+<tr class="separator:ae5b6ee4b787d7d0213421ac9a0fc32d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a71eba781a7171b625085dbf7991b2c42"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#a71eba781a7171b625085dbf7991b2c42">setTimeReference</a> (int const &amp;timeRef_label)</td></tr>
+<tr class="memdesc:a71eba781a7171b625085dbf7991b2c42"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the time reference label.  <br /></td></tr>
 <tr class="separator:a71eba781a7171b625085dbf7991b2c42"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa9f8bdcbeef03f8be872602e6c717d4d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#aa9f8bdcbeef03f8be872602e6c717d4d">setTimeReference</a> (std::string const &amp;timeRef_name)</td></tr>
+<tr class="memdesc:aa9f8bdcbeef03f8be872602e6c717d4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the time reference.  <br /></td></tr>
 <tr class="separator:aa9f8bdcbeef03f8be872602e6c717d4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ade2dc39c555c5973a27dd529c7d2a7f8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#ade2dc39c555c5973a27dd529c7d2a7f8">setTimeWindow</a> (int const &amp;timewindow_ns)</td></tr>
 <tr class="separator:ade2dc39c555c5973a27dd529c7d2a7f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a60644bd06b711355465c891f54524360"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#a60644bd06b711355465c891f54524360">setTimeWindow</a> (std::string const &amp;timewindow_ns)</td></tr>
+<tr class="memdesc:a60644bd06b711355465c891f54524360"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the time window in ns.  <br /></td></tr>
 <tr class="separator:a60644bd06b711355465c891f54524360"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a89dbca371bce4601ee60122f544faf95"><td class="memItemLeft" align="right" valign="top">TH1F *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#a89dbca371bce4601ee60122f544faf95">shiftTimeSpectra</a> (TH1F *histo, <a class="el" href="_detectors_8hpp.html#ab5dd24876acad09ec52c250c1668466c">Label</a> const &amp;label, std::string const &amp;unit=&quot;ps&quot;)</td></tr>
 <tr class="separator:a89dbca371bce4601ee60122f544faf95"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad85f4cabf723d28843393cda47abc2b3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#ad85f4cabf723d28843393cda47abc2b3">Timeshifts</a> ()</td></tr>
 <tr class="separator:ad85f4cabf723d28843393cda47abc2b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae47e90a384a5dd891bdc5eed10450971"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#ae47e90a384a5dd891bdc5eed10450971">Timeshifts</a> (std::string const &amp;filename)</td></tr>
+<tr class="memdesc:ae47e90a384a5dd891bdc5eed10450971"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call the <a class="el" href="class_timeshifts.html#a28163efe8d487669cf50d5f6e1060d71" title="Use this method to load timeshifts from a .dT file.">Timeshifts::load()</a> method to load the timeshifts from a .dT file.  <br /></td></tr>
 <tr class="separator:ae47e90a384a5dd891bdc5eed10450971"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c01a876efaee62fa348581470509736"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#a4c01a876efaee62fa348581470509736">Timeshifts</a> (<a class="el" href="class_timeshifts.html">Timeshifts</a> const &amp;timeshifts)</td></tr>
+<tr class="memdesc:a4c01a876efaee62fa348581470509736"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy constructor.  <br /></td></tr>
+<tr class="separator:a4c01a876efaee62fa348581470509736"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b6e129787ae7641ecbcb990f6e86bb9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#a1b6e129787ae7641ecbcb990f6e86bb9">verbose</a> (bool const &amp;_verbose=true)</td></tr>
+<tr class="memdesc:a1b6e129787ae7641ecbcb990f6e86bb9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set verbosity level.  <br /></td></tr>
+<tr class="separator:a1b6e129787ae7641ecbcb990f6e86bb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a608d9443a15dd669920e10dd8baee23a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#a608d9443a15dd669920e10dd8baee23a">analyse</a> ()</td></tr>
+<tr class="separator:a608d9443a15dd669920e10dd8baee23a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e3dc861a2470908defb028b2710ab09"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#a9e3dc861a2470908defb028b2710ab09">InitParameters</a> ()</td></tr>
+<tr class="separator:a9e3dc861a2470908defb028b2710ab09"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaef5b6fdd23be94ed37a2b4e7fe47b48"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#aaef5b6fdd23be94ed37a2b4e7fe47b48">treatFile</a> (std::string const &amp;filename)</td></tr>
 <tr class="separator:aaef5b6fdd23be94ed37a2b4e7fe47b48"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1b6e129787ae7641ecbcb990f6e86bb9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#a1b6e129787ae7641ecbcb990f6e86bb9">verbose</a> (bool const &amp;_verbose=true)</td></tr>
-<tr class="separator:a1b6e129787ae7641ecbcb990f6e86bb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a32079af1345e308feddd58e0950998ab"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#a32079af1345e308feddd58e0950998ab">treatRootFile</a> (std::string const &amp;filename)</td></tr>
+<tr class="separator:a32079af1345e308feddd58e0950998ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2df80c5aec3379acd37c63053968d7fd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#a2df80c5aec3379acd37c63053968d7fd">write</a> ()</td></tr>
 <tr class="separator:a2df80c5aec3379acd37c63053968d7fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
-Static Public Member Functions</h2></td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-static-methods" name="pri-static-methods"></a>
+Static Private Member Functions</h2></td></tr>
 <tr class="memitem:a26f38ee7d05a04d0f8005d8467ca46da"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#a26f38ee7d05a04d0f8005d8467ca46da">treatFilesMT</a> (<a class="el" href="class_timeshifts.html">Timeshifts</a> &amp;ts, <a class="el" href="class_m_t_list.html">MTList</a>&lt; std::string &gt; &amp;files_MT)</td></tr>
 <tr class="separator:a26f38ee7d05a04d0f8005d8467ca46da"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -181,6 +209,8 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a94e99e23bc4ae662b810b6459e17da68"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a65e54dd9ca7ee5863a852644557b7f48"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::unique_ptr&lt; TH1F &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#a65e54dd9ca7ee5863a852644557b7f48">m_histograms_corrected</a></td></tr>
 <tr class="separator:a65e54dd9ca7ee5863a852644557b7f48"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad6bda9ede24fd63e7a43ad12bd861a98"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#ad6bda9ede24fd63e7a43ad12bd861a98">m_initialized</a> = false</td></tr>
+<tr class="separator:ad6bda9ede24fd63e7a43ad12bd861a98"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7363de3261a770287e981328276f21dd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="lib_co_8hpp.html#a9c34ac44da309b004570530c8cec8a0e">ulong</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#a7363de3261a770287e981328276f21dd">m_max_hits</a> = -1</td></tr>
 <tr class="separator:a7363de3261a770287e981328276f21dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afe0a2e0fcd8cf33f2d0163cee1ccf896"><td class="memItemLeft" align="right" valign="top"><a class="el" href="lib_co_8hpp.html#a65f85814a8290f9797005d3b28e7e5fc">uchar</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#afe0a2e0fcd8cf33f2d0163cee1ccf896">m_max_mult</a> = 2</td></tr>
@@ -218,7 +248,7 @@ Private Attributes</h2></td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ad85f4cabf723d28843393cda47abc2b3" name="ad85f4cabf723d28843393cda47abc2b3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad85f4cabf723d28843393cda47abc2b3">&#9670;&#160;</a></span>Timeshifts() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ad85f4cabf723d28843393cda47abc2b3">&#9670;&#160;</a></span>Timeshifts() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -248,7 +278,7 @@ Here is the call graph for this function:</div>
 </div>
 </div>
 <a id="ae47e90a384a5dd891bdc5eed10450971" name="ae47e90a384a5dd891bdc5eed10450971"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae47e90a384a5dd891bdc5eed10450971">&#9670;&#160;</a></span>Timeshifts() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ae47e90a384a5dd891bdc5eed10450971">&#9670;&#160;</a></span>Timeshifts() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -270,11 +300,41 @@ Here is the call graph for this function:</div>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Call the <a class="el" href="class_timeshifts.html#a28163efe8d487669cf50d5f6e1060d71" title="Use this method to load timeshifts from a .dT file.">Timeshifts::load()</a> method to load the timeshifts from a .dT file. </p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_timeshifts_ae47e90a384a5dd891bdc5eed10450971_cgraph.png" border="0" usemap="#aclass_timeshifts_ae47e90a384a5dd891bdc5eed10450971_cgraph" alt=""/></div>
 </div>
+
+</div>
+</div>
+<a id="a4c01a876efaee62fa348581470509736" name="a4c01a876efaee62fa348581470509736"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c01a876efaee62fa348581470509736">&#9670;&#160;</a></span>Timeshifts() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Timeshifts::Timeshifts </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_timeshifts.html">Timeshifts</a> const &amp;&#160;</td>
+          <td class="paramname"><em>timeshifts</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Copy constructor. </p>
 
 </div>
 </div>
@@ -284,6 +344,9 @@ Here is the call graph for this function:</div>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void Timeshifts::analyse </td>
@@ -292,6 +355,11 @@ Here is the call graph for this function:</div>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 <div class="dynheader">
 Here is the call graph for this function:</div>
@@ -395,6 +463,9 @@ Here is the call graph for this function:</div>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">bool Timeshifts::InitParameters </td>
@@ -403,6 +474,11 @@ Here is the call graph for this function:</div>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 <div class="dynheader">
 Here is the call graph for this function:</div>
@@ -432,6 +508,8 @@ Here is the caller graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Use this method to load timeshifts from a .dT file. </p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -442,6 +520,31 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_timeshifts_a28163efe8d487669cf50d5f6e1060d71_icgraph.png" border="0" usemap="#aclass_timeshifts_a28163efe8d487669cf50d5f6e1060d71_icgraph" alt=""/></div>
 </div>
+
+</div>
+</div>
+<a id="a60689326cebd96ae4996522530ffefab" name="a60689326cebd96ae4996522530ffefab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a60689326cebd96ae4996522530ffefab">&#9670;&#160;</a></span>operator bool()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Timeshifts::operator bool </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const &amp;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -501,34 +604,8 @@ Here is the call graph for this function:</div>
 
 </div>
 </div>
-<a id="a353b148e1d54731f8acda5b89bc5e3f3" name="a353b148e1d54731f8acda5b89bc5e3f3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a353b148e1d54731f8acda5b89bc5e3f3">&#9670;&#160;</a></span>setDetectorsList() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Timeshifts::setDetectorsList </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_detectors_list.html">DetectorsList</a> *&#160;</td>
-          <td class="paramname"><em>detList</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="a42dcfbb61c054b40089db1f7995f18d7" name="a42dcfbb61c054b40089db1f7995f18d7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a42dcfbb61c054b40089db1f7995f18d7">&#9670;&#160;</a></span>setDetectorsList() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a42dcfbb61c054b40089db1f7995f18d7">&#9670;&#160;</a></span>setDetectorsList()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -550,6 +627,9 @@ Here is the call graph for this function:</div>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Set the detector list. </p>
+<dl class="section note"><dt>Note</dt><dd>Mandatory only if calculate timeshifts </dd></dl>
 
 </div>
 </div>
@@ -577,10 +657,13 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
+<p>Set maximum hits to be read in a file. </p>
+<dl class="section note"><dt>Note</dt><dd>Use only if calculate timeshifts </dd></dl>
+
 </div>
 </div>
-<a id="a7fda3705ea789426070abb66ec90f730" name="a7fda3705ea789426070abb66ec90f730"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7fda3705ea789426070abb66ec90f730">&#9670;&#160;</a></span>setMult()</h2>
+<a id="a0c2b997cd74b8cf57dd59c13a7accc5a" name="a0c2b997cd74b8cf57dd59c13a7accc5a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0c2b997cd74b8cf57dd59c13a7accc5a">&#9670;&#160;</a></span>setMult()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -592,13 +675,13 @@ Here is the call graph for this function:</div>
           <td class="memname">void Timeshifts::setMult </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="lib_co_8hpp.html#a65f85814a8290f9797005d3b28e7e5fc">uchar</a> const &amp;&#160;</td>
-          <td class="paramname"><em>_max_mult</em>, </td>
+          <td class="paramname"><em>min_mult</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="lib_co_8hpp.html#a65f85814a8290f9797005d3b28e7e5fc">uchar</a> const &amp;&#160;</td>
-          <td class="paramname"><em>_min_mult</em>&#160;</td>
+          <td class="paramname"><em>max_mult</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -612,10 +695,23 @@ Here is the call graph for this function:</div>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Set the multiplicity gate for the events used for coincidence timeshift calculation. </p>
+<dl class="section note"><dt>Note</dt><dd>Mandatory only if calculate timeshifts</dd></dl>
+<p>min_mult and max_mult included.</p>
+<p>example : multiplicity = 2 : setMult(2, 2)</p>
+<p>example : multiplicity = {2;3;4} : setMult(2, 4)</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">min_mult</td><td>default min_mult = 2 </td></tr>
+    <tr><td class="paramname">max_mult</td><td>default max_mult = 2 </td></tr>
+  </table>
+  </dd>
+</dl>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_timeshifts_a7fda3705ea789426070abb66ec90f730_icgraph.png" border="0" usemap="#aclass_timeshifts_a7fda3705ea789426070abb66ec90f730_icgraph" alt=""/></div>
+<div class="center"><img src="class_timeshifts_a0c2b997cd74b8cf57dd59c13a7accc5a_icgraph.png" border="0" usemap="#aclass_timeshifts_a0c2b997cd74b8cf57dd59c13a7accc5a_icgraph" alt=""/></div>
 </div>
 
 </div>
@@ -635,6 +731,10 @@ Here is the caller graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Set output file name of the timeshifts data. </p>
+<dl class="section note"><dt>Note</dt><dd>Mandatory only if calculate timeshifts</dd></dl>
+<p>If not set, it is automatically named after the root file. </p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -663,6 +763,9 @@ Here is the caller graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Set the output directory (full path);. </p>
+<dl class="section note"><dt>Note</dt><dd>Mandatory only if calculate timeshifts </dd></dl>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -691,6 +794,9 @@ Here is the caller graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Set output root file containing the raw and corrected time spectra. </p>
+<dl class="section note"><dt>Note</dt><dd>Mandatory only if calculate timeshifts </dd></dl>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -719,10 +825,92 @@ Here is the caller graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Use this method to setup the parameters from a string in order to calculate the timeshifts. </p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_timeshifts_acca1130b271301c5477d4b4a23ae4e5b_cgraph.png" border="0" usemap="#aclass_timeshifts_acca1130b271301c5477d4b4a23ae4e5b_cgraph" alt=""/></div>
+</div>
+
+</div>
+</div>
+<a id="a7711593870ff391999dca408d4318022" name="a7711593870ff391999dca408d4318022"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7711593870ff391999dca408d4318022">&#9670;&#160;</a></span>setRFOffset()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Timeshifts::setRFOffset </td>
+          <td>(</td>
+          <td class="paramtype">Long64_t const &amp;&#160;</td>
+          <td class="paramname"><em>shift</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set RF offset (synonymous to <a class="el" href="class_timeshifts.html#ae5b6ee4b787d7d0213421ac9a0fc32d9" title="Set RF shift (synonymous to Timeshifts::setRFOffset)">Timeshifts::setRFShift</a>) </p>
+<dl class="section note"><dt>Note</dt><dd>Use only if calculating timeshifts with RF </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">offset</td><td>default 50 ns </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_timeshifts_a7711593870ff391999dca408d4318022_cgraph.png" border="0" usemap="#aclass_timeshifts_a7711593870ff391999dca408d4318022_cgraph" alt=""/></div>
+</div>
+
+</div>
+</div>
+<a id="ae5b6ee4b787d7d0213421ac9a0fc32d9" name="ae5b6ee4b787d7d0213421ac9a0fc32d9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae5b6ee4b787d7d0213421ac9a0fc32d9">&#9670;&#160;</a></span>setRFShift()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Timeshifts::setRFShift </td>
+          <td>(</td>
+          <td class="paramtype">Long64_t const &amp;&#160;</td>
+          <td class="paramname"><em>shift</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set RF shift (synonymous to <a class="el" href="class_timeshifts.html#a7711593870ff391999dca408d4318022" title="Set RF offset (synonymous to Timeshifts::setRFShift)">Timeshifts::setRFOffset</a>) </p>
+<dl class="section note"><dt>Note</dt><dd>Use only if calculating timeshifts with RF </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">shift</td><td>default 50 ns </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_timeshifts_ae5b6ee4b787d7d0213421ac9a0fc32d9_cgraph.png" border="0" usemap="#aclass_timeshifts_ae5b6ee4b787d7d0213421ac9a0fc32d9_cgraph" alt=""/></div>
 </div>
 
 </div>
@@ -742,11 +930,9 @@ Here is the call graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="class_timeshifts_a71eba781a7171b625085dbf7991b2c42_cgraph.png" border="0" usemap="#aclass_timeshifts_a71eba781a7171b625085dbf7991b2c42_cgraph" alt=""/></div>
-</div>
+
+<p>Set the time reference label. </p>
+<dl class="section note"><dt>Note</dt><dd>Mandatory only if calculate timeshifts </dd></dl>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -770,6 +956,10 @@ Here is the caller graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Set the time reference. </p>
+<dl class="section note"><dt>Note</dt><dd>Mandatory only if calculate timeshifts</dd></dl>
+<p>Either the full name, or the label number </p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -821,6 +1011,15 @@ Here is the caller graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Set the time window in ns. </p>
+<dl class="section note"><dt>Note</dt><dd>It is better to keep it at its default value, otherwise you can miss some detectors</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">timewindow_ns</td><td>default value 1500ns. </td></tr>
+  </table>
+  </dd>
+</dl>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -878,6 +1077,9 @@ Here is the caller graph for this function:</div>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void Timeshifts::treatFile </td>
@@ -887,6 +1089,11 @@ Here is the caller graph for this function:</div>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 <div class="dynheader">
 Here is the call graph for this function:</div>
@@ -930,7 +1137,7 @@ Here is the caller graph for this function:</div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -943,6 +1150,37 @@ Here is the call graph for this function:</div>
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_timeshifts_a26f38ee7d05a04d0f8005d8467ca46da_icgraph.png" border="0" usemap="#aclass_timeshifts_a26f38ee7d05a04d0f8005d8467ca46da_icgraph" alt=""/></div>
+</div>
+
+</div>
+</div>
+<a id="a32079af1345e308feddd58e0950998ab" name="a32079af1345e308feddd58e0950998ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a32079af1345e308feddd58e0950998ab">&#9670;&#160;</a></span>treatRootFile()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Timeshifts::treatRootFile </td>
+          <td>(</td>
+          <td class="paramtype">std::string const &amp;&#160;</td>
+          <td class="paramname"><em>filename</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_timeshifts_a32079af1345e308feddd58e0950998ab_icgraph.png" border="0" usemap="#aclass_timeshifts_a32079af1345e308feddd58e0950998ab_icgraph" alt=""/></div>
 </div>
 
 </div>
@@ -970,6 +1208,10 @@ Here is the caller graph for this function:</div>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Set verbosity level. </p>
+<dl class="section note"><dt>Note</dt><dd>Mandatory only if calculate timeshifts</dd></dl>
+<p>It will print the fit parameters in the terminal </p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -983,6 +1225,9 @@ Here is the caller graph for this function:</div>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void Timeshifts::write </td>
@@ -991,6 +1236,11 @@ Here is the caller graph for this function:</div>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 <div class="dynheader">
 Here is the call graph for this function:</div>
@@ -1149,6 +1399,28 @@ Here is the caller graph for this function:</div>
       <table class="memname">
         <tr>
           <td class="memname">std::vector&lt;std::unique_ptr&lt;TH1F&gt; &gt; Timeshifts::m_histograms_corrected</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad6bda9ede24fd63e7a43ad12bd861a98" name="ad6bda9ede24fd63e7a43ad12bd861a98"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad6bda9ede24fd63e7a43ad12bd861a98">&#9670;&#160;</a></span>m_initialized</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Timeshifts::m_initialized = false</td>
         </tr>
       </table>
   </td>
@@ -1535,7 +1807,7 @@ Here is the caller graph for this function:</div>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>lib/Classes/<a class="el" href="_timeshifts_8hpp_source.html">Timeshifts.hpp</a></li>
+<li>lib/Modules/<a class="el" href="_timeshifts_8hpp_source.html">Timeshifts.hpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

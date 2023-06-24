@@ -7,9 +7,12 @@ var class_filename =
     [ "filename", "class_filename.html#ac2f8390e5eda94786a6f54fb7925068d", null ],
     [ "fill", "class_filename.html#a4f624193292726bfe15c0c16322ccd07", null ],
     [ "name", "class_filename.html#a6f67d311b0200a645b0a8fa824794cdb", null ],
+    [ "operator std::string", "class_filename.html#acb0d63ddf4b17fc590a9617a8096bd47", null ],
     [ "operator=", "class_filename.html#a9d66df63f81b6030583e3150c9be26ee", null ],
     [ "operator=", "class_filename.html#a22520552d48b08290c1afd0bb043e6c3", null ],
+    [ "path", "class_filename.html#a57fcef1fb9b02feddc58712e2bed7d28", null ],
     [ "m_extension", "class_filename.html#a8aacdd28091a89bf0e326989383770ec", null ],
     [ "m_filename", "class_filename.html#a75a75a083a67242287311628f1a7440a", null ],
-    [ "m_name", "class_filename.html#a1f75aa64a2c9faf71d7c3a3e07205488", null ]
+    [ "m_name", "class_filename.html#a1f75aa64a2c9faf71d7c3a3e07205488", null ],
+    [ "m_path", "class_filename.html#ac4f8fa7c9c941b33e1c88a1817098cf9", null ]
 ];

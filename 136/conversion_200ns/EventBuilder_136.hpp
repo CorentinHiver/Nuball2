@@ -17,8 +17,8 @@ public:
   void reset();
 
   // Getters :
-  ULong64_t const & getShift() const {return m_shift;}
-  Time const & get_RF_ref_time() const {return RF_ref_time;}
+  auto const & getShift() const {return m_shift;}
+  auto const & get_RF_ref_time() const {return RF_ref_time;}
 
   // Setters :
   void setShift(Long64_t const & shift) {m_shift = shift;}

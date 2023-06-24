@@ -5,9 +5,9 @@ digraph "getMeanPeak"
   edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
   node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
   rankdir="LR";
-  Node1 [id="Node000001",label="getMeanPeak",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip=" "];
+  Node1 [id="Node000001",label="getMeanPeak",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Get the mean of the peak of a histogram with one nice single peak."];
   Node1 -> Node2 [id="edge1_Node000001_Node000002",color="steelblue1",style="solid",tooltip=" "];
-  Node2 [id="Node000002",label="getBin0",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$_timeshifts_8hpp.html#ab8628517ea9ef7ded29d8e22be6f628f",tooltip=" "];
+  Node2 [id="Node000002",label="getBin0",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$_timeshifts_8hpp.html#ab8628517ea9ef7ded29d8e22be6f628f",tooltip="Get which bin holds the X = 0."];
   Node1 -> Node3 [id="edge2_Node000001_Node000003",color="steelblue1",style="solid",tooltip=" "];
   Node3 [id="Node000003",label="print",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$print_8hpp.html#aaa2383e8fc7f8fa546f4376e1dd4c9b7",tooltip=" "];
 }

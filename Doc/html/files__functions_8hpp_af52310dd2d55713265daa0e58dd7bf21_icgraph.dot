@@ -9,10 +9,13 @@ digraph "create_folder_if_none"
   Node1 -> Node2 [id="edge1_Node000001_Node000002",dir="back",color="steelblue1",style="solid",tooltip=" "];
   Node2 [id="Node000002",label="Path::create",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_path.html#a93983da903a6030847cc67651c1bbb0f",tooltip=" "];
   Node2 -> Node3 [id="edge2_Node000002_Node000003",dir="back",color="steelblue1",style="solid",tooltip=" "];
-  Node3 [id="Node000003",label="Path::Path",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_path.html#af4a7f1fecdbc490e8566751463a71b38",tooltip=" "];
-  Node1 -> Node4 [id="edge3_Node000001_Node000004",dir="back",color="steelblue1",style="solid",tooltip=" "];
-  Node4 [id="Node000004",label="Timeshifts::InitParameters",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_timeshifts.html#a9e3dc861a2470908defb028b2710ab09",tooltip=" "];
-  Node4 -> Node5 [id="edge4_Node000004_Node000005",dir="back",color="steelblue1",style="solid",tooltip=" "];
-  Node5 [id="Node000005",label="Timeshifts::calculate",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_timeshifts.html#a3d3ab1b3498ca45832d8a8735f16e188",tooltip=" "];
-  Node1 -> Node3 [id="edge5_Node000001_Node000003",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node3 [id="Node000003",label="Path::Path",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_path.html#ac820bf1035d264e140cdf56566802877",tooltip="Turns a C string to a path, creating it if create = true and it doesn't already exists."];
+  Node2 -> Node4 [id="edge3_Node000002_Node000004",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node4 [id="Node000004",label="Path::Path",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_path.html#a002ecd271bf43688c583f57cc5bc5ef5",tooltip="Turns a string to a path, creating it if create = true and it doesn't already exists."];
+  Node1 -> Node5 [id="edge4_Node000001_Node000005",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node5 [id="Node000005",label="Timeshifts::InitParameters",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_timeshifts.html#a9e3dc861a2470908defb028b2710ab09",tooltip=" "];
+  Node5 -> Node6 [id="edge5_Node000005_Node000006",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node6 [id="Node000006",label="Timeshifts::calculate",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_timeshifts.html#a3d3ab1b3498ca45832d8a8735f16e188",tooltip=" "];
+  Node1 -> Node3 [id="edge6_Node000001_Node000003",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node1 -> Node4 [id="edge7_Node000001_Node000004",dir="back",color="steelblue1",style="solid",tooltip=" "];
 }

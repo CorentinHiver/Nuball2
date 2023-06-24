@@ -91,7 +91,6 @@ $(document).ready(function(){initNavTree('files__functions_8hpp.html',''); initR
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#typedef-members">Typedefs</a> &#124;
 <a href="#func-members">Functions</a> &#124;
 <a href="#var-members">Variables</a>  </div>
   <div class="headertitle"><div class="title">files_functions.hpp File Reference</div></div>
@@ -118,13 +117,15 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_filename.html">Filename</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_path.html">Path</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_folder.html">Folder</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Object used to hold a folder's name.  <a href="class_folder.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
-Typedefs</h2></td></tr>
-<tr class="memitem:a3c30d63ee2853621055d7154692f97c6"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="files__functions_8hpp.html#a3c30d63ee2853621055d7154692f97c6">Folder</a> = <a class="el" href="class_path.html">Path</a></td></tr>
-<tr class="separator:a3c30d63ee2853621055d7154692f97c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_folders.html">Folders</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Object used to hold a list of folders.  <a href="class_folders.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_path.html">Path</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Object used to hold the complete path of a giver folder.  <a href="class_path.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
@@ -132,8 +133,8 @@ Functions</h2></td></tr>
 <tr class="separator:af9990cd15a6b2f01f535dbf9b536f319"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af52310dd2d55713265daa0e58dd7bf21"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="files__functions_8hpp.html#af52310dd2d55713265daa0e58dd7bf21">create_folder_if_none</a> (std::string const &amp;folderName)</td></tr>
 <tr class="separator:af52310dd2d55713265daa0e58dd7bf21"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acd28560a444e9d41f295394b175d2200"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="files__functions_8hpp.html#acd28560a444e9d41f295394b175d2200">extension</a> (const std::string string)</td></tr>
-<tr class="separator:acd28560a444e9d41f295394b175d2200"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a321abbd0681c4da012deaf49122389c5"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="files__functions_8hpp.html#a321abbd0681c4da012deaf49122389c5">extension</a> (std::string const &amp;string)</td></tr>
+<tr class="separator:a321abbd0681c4da012deaf49122389c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6d165da5cc41e5429a9c03c6a6c68d96"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="files__functions_8hpp.html#a6d165da5cc41e5429a9c03c6a6c68d96">file_exists</a> (std::string fileName)</td></tr>
 <tr class="separator:a6d165da5cc41e5429a9c03c6a6c68d96"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afd584978228fac5fae283c12837378dd"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="files__functions_8hpp.html#afd584978228fac5fae283c12837378dd">file_is_empty</a> (std::ifstream &amp;file)</td></tr>
@@ -148,24 +149,35 @@ Functions</h2></td></tr>
 <tr class="separator:a1af9b6a86720b38a84a8b0be4e57bec7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a595eecb3abc2bf6927fee1c77ea1bfa7"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="files__functions_8hpp.html#a595eecb3abc2bf6927fee1c77ea1bfa7">get_filename_at</a> (std::string &amp;folderName, int pos)</td></tr>
 <tr class="separator:a595eecb3abc2bf6927fee1c77ea1bfa7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7881c739c518d072671a463956e79a95"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="files__functions_8hpp.html#a7881c739c518d072671a463956e79a95">getExtension</a> (const std::string string)</td></tr>
-<tr class="separator:a7881c739c518d072671a463956e79a95"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9ef395c27c67b087963eb4223d781c79"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="files__functions_8hpp.html#a9ef395c27c67b087963eb4223d781c79">getPath</a> (const std::string string)</td></tr>
-<tr class="separator:a9ef395c27c67b087963eb4223d781c79"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4000ec99a26e146333e62836d01dff5b"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="files__functions_8hpp.html#a4000ec99a26e146333e62836d01dff5b">getExtension</a> (std::string const &amp;string)</td></tr>
+<tr class="separator:a4000ec99a26e146333e62836d01dff5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab1e262f27aaad28944f29cd2bbde417f"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="files__functions_8hpp.html#ab1e262f27aaad28944f29cd2bbde417f">getPath</a> (std::string const &amp;string)</td></tr>
+<tr class="separator:ab1e262f27aaad28944f29cd2bbde417f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab7f471379930e0e70d916086ddd53a8b"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="files__functions_8hpp.html#ab7f471379930e0e70d916086ddd53a8b">listFileReader</a> (std::string const &amp;filename)</td></tr>
 <tr class="separator:ab7f471379930e0e70d916086ddd53a8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a32612ffa1c93a9a835af83b74dc68aaa"><td class="memItemLeft" align="right" valign="top">std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="files__functions_8hpp.html#a32612ffa1c93a9a835af83b74dc68aaa">makePath</a> (std::string &amp;folderName)</td></tr>
-<tr class="separator:a32612ffa1c93a9a835af83b74dc68aaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf60b8ed2e04f85068ce2ccdc1a67c2e"><td class="memItemLeft" align="right" valign="top">std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="files__functions_8hpp.html#acf60b8ed2e04f85068ce2ccdc1a67c2e">makeFolder</a> (std::string &amp;folderName)</td></tr>
+<tr class="separator:acf60b8ed2e04f85068ce2ccdc1a67c2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5e105952499e9ca713d2a2fd5db3299d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="files__functions_8hpp.html#a5e105952499e9ca713d2a2fd5db3299d">nb_files_in_folder</a> (std::string &amp;folderName)</td></tr>
 <tr class="separator:a5e105952499e9ca713d2a2fd5db3299d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7299ae8b3e06725da32d71775a29629c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_path.html">Path</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="files__functions_8hpp.html#a7299ae8b3e06725da32d71775a29629c">operator+</a> (std::string const &amp;string, <a class="el" href="class_path.html">Path</a> const &amp;_path)</td></tr>
 <tr class="separator:a7299ae8b3e06725da32d71775a29629c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab02a2f88b0c3cbbccb1072b14daf2bf1"><td class="memItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="files__functions_8hpp.html#ab02a2f88b0c3cbbccb1072b14daf2bf1">operator&lt;&lt;</a> (std::ostream &amp;os, const <a class="el" href="class_filename.html">Filename</a> &amp;filename)</td></tr>
+<tr class="separator:ab02a2f88b0c3cbbccb1072b14daf2bf1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8c7f70e7fc10e143a67b09b03f6fe5df"><td class="memTemplParams" colspan="2">template&lt;class... T&gt; </td></tr>
 <tr class="memitem:a8c7f70e7fc10e143a67b09b03f6fe5df"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="files__functions_8hpp.html#a8c7f70e7fc10e143a67b09b03f6fe5df">print</a> (<a class="el" href="class_file.html">File</a> const &amp;f)</td></tr>
 <tr class="separator:a8c7f70e7fc10e143a67b09b03f6fe5df"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5c76b26eea3cd63873b6fd78683c0cdd"><td class="memTemplParams" colspan="2">template&lt;class... T&gt; </td></tr>
 <tr class="memitem:a5c76b26eea3cd63873b6fd78683c0cdd"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="files__functions_8hpp.html#a5c76b26eea3cd63873b6fd78683c0cdd">print</a> (<a class="el" href="class_file.html">File</a> const &amp;f, T const &amp;... t2)</td></tr>
 <tr class="separator:a5c76b26eea3cd63873b6fd78683c0cdd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a543ccfce26e0669e183728b0bd6903ac"><td class="memTemplParams" colspan="2">template&lt;class... T&gt; </td></tr>
+<tr class="memitem:a543ccfce26e0669e183728b0bd6903ac"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="files__functions_8hpp.html#a543ccfce26e0669e183728b0bd6903ac">print</a> (<a class="el" href="class_folder.html">Folder</a> const &amp;f)</td></tr>
+<tr class="separator:a543ccfce26e0669e183728b0bd6903ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e1fa0ddde4c3dcbe6b382d4203135ab"><td class="memTemplParams" colspan="2">template&lt;class... T&gt; </td></tr>
+<tr class="memitem:a2e1fa0ddde4c3dcbe6b382d4203135ab"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="files__functions_8hpp.html#a2e1fa0ddde4c3dcbe6b382d4203135ab">print</a> (<a class="el" href="class_folder.html">Folder</a> const &amp;f, T const &amp;... t2)</td></tr>
+<tr class="separator:a2e1fa0ddde4c3dcbe6b382d4203135ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d96d4d0c28d54dd987f3c57f439256e"><td class="memTemplParams" colspan="2">template&lt;class... T&gt; </td></tr>
+<tr class="memitem:a9d96d4d0c28d54dd987f3c57f439256e"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="files__functions_8hpp.html#a9d96d4d0c28d54dd987f3c57f439256e">print</a> (<a class="el" href="class_folders.html">Folders</a> const &amp;f)</td></tr>
+<tr class="separator:a9d96d4d0c28d54dd987f3c57f439256e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa6d43a9a9d2d7c6a2d760c2b4428e228"><td class="memTemplParams" colspan="2">template&lt;class... T&gt; </td></tr>
 <tr class="memitem:aa6d43a9a9d2d7c6a2d760c2b4428e228"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="files__functions_8hpp.html#aa6d43a9a9d2d7c6a2d760c2b4428e228">print</a> (<a class="el" href="class_path.html">Path</a> const &amp;f, T const &amp;... t2)</td></tr>
 <tr class="separator:aa6d43a9a9d2d7c6a2d760c2b4428e228"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -175,12 +187,12 @@ Functions</h2></td></tr>
 <tr class="memitem:a0cd4400fb967ad5f460624488d8dc211"><td class="memTemplParams" colspan="2">template&lt;class N , class D &gt; </td></tr>
 <tr class="memitem:a0cd4400fb967ad5f460624488d8dc211"><td class="memTemplItemLeft" align="right" valign="top">std::string&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="files__functions_8hpp.html#a0cd4400fb967ad5f460624488d8dc211">procent</a> (N const &amp;n, D const &amp;d)</td></tr>
 <tr class="separator:a0cd4400fb967ad5f460624488d8dc211"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8c974772d7bc68e383f1436e04b2c405"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="files__functions_8hpp.html#a8c974772d7bc68e383f1436e04b2c405">removeExtension</a> (const std::string string)</td></tr>
-<tr class="separator:a8c974772d7bc68e383f1436e04b2c405"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab28b96de197fefe2474eebed698afc67"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="files__functions_8hpp.html#ab28b96de197fefe2474eebed698afc67">removePath</a> (const std::string string)</td></tr>
-<tr class="separator:ab28b96de197fefe2474eebed698afc67"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a54c363a027c5d5fd94d252c36167d503"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="files__functions_8hpp.html#a54c363a027c5d5fd94d252c36167d503">rmPathAndExt</a> (const std::string string)</td></tr>
-<tr class="separator:a54c363a027c5d5fd94d252c36167d503"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a658fd83a6ed34994ff0742273a3cc358"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="files__functions_8hpp.html#a658fd83a6ed34994ff0742273a3cc358">removeExtension</a> (std::string const &amp;string)</td></tr>
+<tr class="separator:a658fd83a6ed34994ff0742273a3cc358"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3a78346393c83676348f6bad34b8ce2"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="files__functions_8hpp.html#ad3a78346393c83676348f6bad34b8ce2">removePath</a> (std::string const &amp;string)</td></tr>
+<tr class="separator:ad3a78346393c83676348f6bad34b8ce2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a58f50a6390692cff52eef37fdaa94e56"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="files__functions_8hpp.html#a58f50a6390692cff52eef37fdaa94e56">rmPathAndExt</a> (std::string const &amp;string)</td></tr>
+<tr class="separator:a58f50a6390692cff52eef37fdaa94e56"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3a01792a9cfbdd1f2b358d878559a917"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="files__functions_8hpp.html#a3a01792a9cfbdd1f2b358d878559a917">size_file</a> (std::ifstream &amp;file, std::string const &amp;unit=&quot;o&quot;)</td></tr>
 <tr class="separator:a3a01792a9cfbdd1f2b358d878559a917"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af7b1f2a6868cc2bad6d4b9a08cdac3ca"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="files__functions_8hpp.html#af7b1f2a6868cc2bad6d4b9a08cdac3ca">size_file</a> (std::string filename, std::string const &amp;unit=&quot;o&quot;)</td></tr>
@@ -193,21 +205,6 @@ Variables</h2></td></tr>
 <tr class="memitem:aaa642aa8e56dec4354f00dd45a43832f"><td class="memItemLeft" align="right" valign="top">std::map&lt; std::string, float &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="files__functions_8hpp.html#aaa642aa8e56dec4354f00dd45a43832f">size_file_unit</a></td></tr>
 <tr class="separator:aaa642aa8e56dec4354f00dd45a43832f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Typedef Documentation</h2>
-<a id="a3c30d63ee2853621055d7154692f97c6" name="a3c30d63ee2853621055d7154692f97c6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3c30d63ee2853621055d7154692f97c6">&#9670;&#160;</a></span>Folder</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">using <a class="el" href="files__functions_8hpp.html#a3c30d63ee2853621055d7154692f97c6">Folder</a> =  <a class="el" href="class_path.html">Path</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="af9990cd15a6b2f01f535dbf9b536f319" name="af9990cd15a6b2f01f535dbf9b536f319"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af9990cd15a6b2f01f535dbf9b536f319">&#9670;&#160;</a></span>check_new_file()</h2>
@@ -270,8 +267,8 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a id="acd28560a444e9d41f295394b175d2200" name="acd28560a444e9d41f295394b175d2200"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acd28560a444e9d41f295394b175d2200">&#9670;&#160;</a></span>extension()</h2>
+<a id="a321abbd0681c4da012deaf49122389c5" name="a321abbd0681c4da012deaf49122389c5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a321abbd0681c4da012deaf49122389c5">&#9670;&#160;</a></span>extension()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -279,7 +276,7 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="memname">std::string extension </td>
           <td>(</td>
-          <td class="paramtype">const std::string&#160;</td>
+          <td class="paramtype">std::string const &amp;&#160;</td>
           <td class="paramname"><em>string</em></td><td>)</td>
           <td></td>
         </tr>
@@ -288,7 +285,7 @@ Here is the caller graph for this function:</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="files__functions_8hpp_acd28560a444e9d41f295394b175d2200_icgraph.png" border="0" usemap="#afiles__functions_8hpp_acd28560a444e9d41f295394b175d2200_icgraph" alt=""/></div>
+<div class="center"><img src="files__functions_8hpp_a321abbd0681c4da012deaf49122389c5_icgraph.png" border="0" usemap="#afiles__functions_8hpp_a321abbd0681c4da012deaf49122389c5_icgraph" alt=""/></div>
 </div>
 
 </div>
@@ -494,8 +491,8 @@ Here is the call graph for this function:</div>
 
 </div>
 </div>
-<a id="a7881c739c518d072671a463956e79a95" name="a7881c739c518d072671a463956e79a95"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7881c739c518d072671a463956e79a95">&#9670;&#160;</a></span>getExtension()</h2>
+<a id="a4000ec99a26e146333e62836d01dff5b" name="a4000ec99a26e146333e62836d01dff5b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4000ec99a26e146333e62836d01dff5b">&#9670;&#160;</a></span>getExtension()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -503,7 +500,7 @@ Here is the call graph for this function:</div>
         <tr>
           <td class="memname">std::string getExtension </td>
           <td>(</td>
-          <td class="paramtype">const std::string&#160;</td>
+          <td class="paramtype">std::string const &amp;&#160;</td>
           <td class="paramname"><em>string</em></td><td>)</td>
           <td></td>
         </tr>
@@ -512,13 +509,13 @@ Here is the call graph for this function:</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="files__functions_8hpp_a7881c739c518d072671a463956e79a95_icgraph.png" border="0" usemap="#afiles__functions_8hpp_a7881c739c518d072671a463956e79a95_icgraph" alt=""/></div>
+<div class="center"><img src="files__functions_8hpp_a4000ec99a26e146333e62836d01dff5b_icgraph.png" border="0" usemap="#afiles__functions_8hpp_a4000ec99a26e146333e62836d01dff5b_icgraph" alt=""/></div>
 </div>
 
 </div>
 </div>
-<a id="a9ef395c27c67b087963eb4223d781c79" name="a9ef395c27c67b087963eb4223d781c79"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9ef395c27c67b087963eb4223d781c79">&#9670;&#160;</a></span>getPath()</h2>
+<a id="ab1e262f27aaad28944f29cd2bbde417f" name="ab1e262f27aaad28944f29cd2bbde417f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab1e262f27aaad28944f29cd2bbde417f">&#9670;&#160;</a></span>getPath()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -526,7 +523,7 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="memname">std::string getPath </td>
           <td>(</td>
-          <td class="paramtype">const std::string&#160;</td>
+          <td class="paramtype">std::string const &amp;&#160;</td>
           <td class="paramname"><em>string</em></td><td>)</td>
           <td></td>
         </tr>
@@ -535,7 +532,7 @@ Here is the caller graph for this function:</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="files__functions_8hpp_a9ef395c27c67b087963eb4223d781c79_icgraph.png" border="0" usemap="#afiles__functions_8hpp_a9ef395c27c67b087963eb4223d781c79_icgraph" alt=""/></div>
+<div class="center"><img src="files__functions_8hpp_ab1e262f27aaad28944f29cd2bbde417f_icgraph.png" border="0" usemap="#afiles__functions_8hpp_ab1e262f27aaad28944f29cd2bbde417f_icgraph" alt=""/></div>
 </div>
 
 </div>
@@ -563,14 +560,14 @@ Here is the call graph for this function:</div>
 
 </div>
 </div>
-<a id="a32612ffa1c93a9a835af83b74dc68aaa" name="a32612ffa1c93a9a835af83b74dc68aaa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a32612ffa1c93a9a835af83b74dc68aaa">&#9670;&#160;</a></span>makePath()</h2>
+<a id="acf60b8ed2e04f85068ce2ccdc1a67c2e" name="acf60b8ed2e04f85068ce2ccdc1a67c2e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acf60b8ed2e04f85068ce2ccdc1a67c2e">&#9670;&#160;</a></span>makeFolder()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::string &amp; makePath </td>
+          <td class="memname">std::string &amp; makeFolder </td>
           <td>(</td>
           <td class="paramtype">std::string &amp;&#160;</td>
           <td class="paramname"><em>folderName</em></td><td>)</td>
@@ -581,7 +578,7 @@ Here is the call graph for this function:</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="files__functions_8hpp_a32612ffa1c93a9a835af83b74dc68aaa_icgraph.png" border="0" usemap="#afiles__functions_8hpp_a32612ffa1c93a9a835af83b74dc68aaa_icgraph" alt=""/></div>
+<div class="center"><img src="files__functions_8hpp_acf60b8ed2e04f85068ce2ccdc1a67c2e_icgraph.png" border="0" usemap="#afiles__functions_8hpp_acf60b8ed2e04f85068ce2ccdc1a67c2e_icgraph" alt=""/></div>
 </div>
 
 </div>
@@ -647,8 +644,41 @@ Here is the call graph for this function:</div>
 
 </div>
 </div>
+<a id="ab02a2f88b0c3cbbccb1072b14daf2bf1" name="ab02a2f88b0c3cbbccb1072b14daf2bf1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab02a2f88b0c3cbbccb1072b14daf2bf1">&#9670;&#160;</a></span>operator&lt;&lt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::ostream &amp; operator&lt;&lt; </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>os</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="class_filename.html">Filename</a> &amp;&#160;</td>
+          <td class="paramname"><em>filename</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="files__functions_8hpp_ab02a2f88b0c3cbbccb1072b14daf2bf1_cgraph.png" border="0" usemap="#afiles__functions_8hpp_ab02a2f88b0c3cbbccb1072b14daf2bf1_cgraph" alt=""/></div>
+</div>
+
+</div>
+</div>
 <a id="a8c7f70e7fc10e143a67b09b03f6fe5df" name="a8c7f70e7fc10e143a67b09b03f6fe5df"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8c7f70e7fc10e143a67b09b03f6fe5df">&#9670;&#160;</a></span>print() <span class="overload">[1/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c7f70e7fc10e143a67b09b03f6fe5df">&#9670;&#160;</a></span>print() <span class="overload">[1/7]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -673,7 +703,7 @@ Here is the call graph for this function:</div>
 </div>
 </div>
 <a id="a5c76b26eea3cd63873b6fd78683c0cdd" name="a5c76b26eea3cd63873b6fd78683c0cdd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5c76b26eea3cd63873b6fd78683c0cdd">&#9670;&#160;</a></span>print() <span class="overload">[2/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a5c76b26eea3cd63873b6fd78683c0cdd">&#9670;&#160;</a></span>print() <span class="overload">[2/7]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -707,8 +737,93 @@ Here is the call graph for this function:</div>
 
 </div>
 </div>
+<a id="a543ccfce26e0669e183728b0bd6903ac" name="a543ccfce26e0669e183728b0bd6903ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a543ccfce26e0669e183728b0bd6903ac">&#9670;&#160;</a></span>print() <span class="overload">[3/7]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class... T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void print </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_folder.html">Folder</a> const &amp;&#160;</td>
+          <td class="paramname"><em>f</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="files__functions_8hpp_a543ccfce26e0669e183728b0bd6903ac_cgraph.png" border="0" usemap="#afiles__functions_8hpp_a543ccfce26e0669e183728b0bd6903ac_cgraph" alt=""/></div>
+</div>
+
+</div>
+</div>
+<a id="a2e1fa0ddde4c3dcbe6b382d4203135ab" name="a2e1fa0ddde4c3dcbe6b382d4203135ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e1fa0ddde4c3dcbe6b382d4203135ab">&#9670;&#160;</a></span>print() <span class="overload">[4/7]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class... T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void print </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_folder.html">Folder</a> const &amp;&#160;</td>
+          <td class="paramname"><em>f</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">T const &amp;...&#160;</td>
+          <td class="paramname"><em>t2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="files__functions_8hpp_a2e1fa0ddde4c3dcbe6b382d4203135ab_cgraph.png" border="0" usemap="#afiles__functions_8hpp_a2e1fa0ddde4c3dcbe6b382d4203135ab_cgraph" alt=""/></div>
+</div>
+
+</div>
+</div>
+<a id="a9d96d4d0c28d54dd987f3c57f439256e" name="a9d96d4d0c28d54dd987f3c57f439256e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d96d4d0c28d54dd987f3c57f439256e">&#9670;&#160;</a></span>print() <span class="overload">[5/7]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class... T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void print </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_folders.html">Folders</a> const &amp;&#160;</td>
+          <td class="paramname"><em>f</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="files__functions_8hpp_a9d96d4d0c28d54dd987f3c57f439256e_cgraph.png" border="0" usemap="#afiles__functions_8hpp_a9d96d4d0c28d54dd987f3c57f439256e_cgraph" alt=""/></div>
+</div>
+
+</div>
+</div>
 <a id="aa6d43a9a9d2d7c6a2d760c2b4428e228" name="aa6d43a9a9d2d7c6a2d760c2b4428e228"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa6d43a9a9d2d7c6a2d760c2b4428e228">&#9670;&#160;</a></span>print() <span class="overload">[3/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aa6d43a9a9d2d7c6a2d760c2b4428e228">&#9670;&#160;</a></span>print() <span class="overload">[6/7]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -743,7 +858,7 @@ Here is the call graph for this function:</div>
 </div>
 </div>
 <a id="a0bd25d828423fbcdd2f5ef9e84b288c7" name="a0bd25d828423fbcdd2f5ef9e84b288c7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0bd25d828423fbcdd2f5ef9e84b288c7">&#9670;&#160;</a></span>print() <span class="overload">[4/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a0bd25d828423fbcdd2f5ef9e84b288c7">&#9670;&#160;</a></span>print() <span class="overload">[7/7]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -797,8 +912,8 @@ template&lt;class N , class D &gt; </div>
 
 </div>
 </div>
-<a id="a8c974772d7bc68e383f1436e04b2c405" name="a8c974772d7bc68e383f1436e04b2c405"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8c974772d7bc68e383f1436e04b2c405">&#9670;&#160;</a></span>removeExtension()</h2>
+<a id="a658fd83a6ed34994ff0742273a3cc358" name="a658fd83a6ed34994ff0742273a3cc358"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a658fd83a6ed34994ff0742273a3cc358">&#9670;&#160;</a></span>removeExtension()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -806,7 +921,7 @@ template&lt;class N , class D &gt; </div>
         <tr>
           <td class="memname">std::string removeExtension </td>
           <td>(</td>
-          <td class="paramtype">const std::string&#160;</td>
+          <td class="paramtype">std::string const &amp;&#160;</td>
           <td class="paramname"><em>string</em></td><td>)</td>
           <td></td>
         </tr>
@@ -815,13 +930,13 @@ template&lt;class N , class D &gt; </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="files__functions_8hpp_a8c974772d7bc68e383f1436e04b2c405_icgraph.png" border="0" usemap="#afiles__functions_8hpp_a8c974772d7bc68e383f1436e04b2c405_icgraph" alt=""/></div>
+<div class="center"><img src="files__functions_8hpp_a658fd83a6ed34994ff0742273a3cc358_icgraph.png" border="0" usemap="#afiles__functions_8hpp_a658fd83a6ed34994ff0742273a3cc358_icgraph" alt=""/></div>
 </div>
 
 </div>
 </div>
-<a id="ab28b96de197fefe2474eebed698afc67" name="ab28b96de197fefe2474eebed698afc67"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab28b96de197fefe2474eebed698afc67">&#9670;&#160;</a></span>removePath()</h2>
+<a id="ad3a78346393c83676348f6bad34b8ce2" name="ad3a78346393c83676348f6bad34b8ce2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad3a78346393c83676348f6bad34b8ce2">&#9670;&#160;</a></span>removePath()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -829,7 +944,7 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="memname">std::string removePath </td>
           <td>(</td>
-          <td class="paramtype">const std::string&#160;</td>
+          <td class="paramtype">std::string const &amp;&#160;</td>
           <td class="paramname"><em>string</em></td><td>)</td>
           <td></td>
         </tr>
@@ -838,13 +953,13 @@ Here is the caller graph for this function:</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="files__functions_8hpp_ab28b96de197fefe2474eebed698afc67_icgraph.png" border="0" usemap="#afiles__functions_8hpp_ab28b96de197fefe2474eebed698afc67_icgraph" alt=""/></div>
+<div class="center"><img src="files__functions_8hpp_ad3a78346393c83676348f6bad34b8ce2_icgraph.png" border="0" usemap="#afiles__functions_8hpp_ad3a78346393c83676348f6bad34b8ce2_icgraph" alt=""/></div>
 </div>
 
 </div>
 </div>
-<a id="a54c363a027c5d5fd94d252c36167d503" name="a54c363a027c5d5fd94d252c36167d503"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a54c363a027c5d5fd94d252c36167d503">&#9670;&#160;</a></span>rmPathAndExt()</h2>
+<a id="a58f50a6390692cff52eef37fdaa94e56" name="a58f50a6390692cff52eef37fdaa94e56"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a58f50a6390692cff52eef37fdaa94e56">&#9670;&#160;</a></span>rmPathAndExt()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -852,7 +967,7 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="memname">std::string rmPathAndExt </td>
           <td>(</td>
-          <td class="paramtype">const std::string&#160;</td>
+          <td class="paramtype">std::string const &amp;&#160;</td>
           <td class="paramname"><em>string</em></td><td>)</td>
           <td></td>
         </tr>
@@ -861,7 +976,7 @@ Here is the caller graph for this function:</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="files__functions_8hpp_a54c363a027c5d5fd94d252c36167d503_icgraph.png" border="0" usemap="#afiles__functions_8hpp_a54c363a027c5d5fd94d252c36167d503_icgraph" alt=""/></div>
+<div class="center"><img src="files__functions_8hpp_a58f50a6390692cff52eef37fdaa94e56_icgraph.png" border="0" usemap="#afiles__functions_8hpp_a58f50a6390692cff52eef37fdaa94e56_icgraph" alt=""/></div>
 </div>
 
 </div>

@@ -103,5 +103,4 @@ digraph "lib/Classes/Hit.h"
   Node57 [id="Node000057",label="TTree.h",height=0.2,width=0.4,color="grey60", fillcolor="#E0E0E0", style="filled",tooltip=" "];
   Node2 -> Node58 [id="edge49_Node000002_Node000058",color="steelblue1",style="solid",tooltip=" "];
   Node58 [id="Node000058",label="TTreeIndex.h",height=0.2,width=0.4,color="grey60", fillcolor="#E0E0E0", style="filled",tooltip=" "];
-  Node1 -> Node3 [id="edge50_Node000001_Node000003",color="steelblue1",style="solid",tooltip=" "];
 }

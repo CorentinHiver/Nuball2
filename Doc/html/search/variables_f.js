@@ -19,10 +19,11 @@ var searchData=
   ['parislabr3mult_16',['ParisLaBr3Mult',['../class_sorted___event.html#a0953771269326213845c7b5e322d8b9b',1,'Sorted_Event']]],
   ['parismult_17',['ParisMult',['../class_counters.html#af42a2277da8f07fa4867143d426058ec',1,'Counters::ParisMult'],['../class_sorted___event.html#ab238484c396ccd1c8e42b47d5667036e',1,'Sorted_Event::ParisMult']]],
   ['peaks_18',['peaks',['../utils_8hpp.html#a238603982542f070c5c34b44d4a8d593',1,'Source_info::peaks'],['../classpic__fit__result.html#a2a4de0af539ed17603383d5a909bfa67',1,'pic_fit_result::peaks']]],
-  ['pileup_19',['pileup',['../class_hit.html#af11540b09cb070a6c2028546b5a35037',1,'Hit::pileup'],['../class_hit__ptr.html#a746bd92650dc3faa7a185f6a1650c69c',1,'Hit_ptr::pileup']]],
-  ['pileups_20',['pileups',['../class_event.html#a5cd77bd162e67c1b93b66f0df9e4d2de',1,'Event']]],
-  ['positions_21',['positions',['../class_paris_cluster.html#a88fec7f67c70805b23d2e8b39229fd22',1,'ParisCluster']]],
-  ['prompt_5fge_22',['prompt_Ge',['../class_sorted___event.html#a89a3ad21720b8c31773799a549da8746',1,'Sorted_Event']]],
-  ['promptgemult_23',['PromptGeMult',['../class_sorted___event.html#abe7176d286a1c23d30fc75061ec2f0ad',1,'Sorted_Event']]],
-  ['promptmult_24',['PromptMult',['../class_sorted___event.html#a81716b8c8388f1851d60f9303b222d3a',1,'Sorted_Event']]]
+  ['period_19',['period',['../class_r_f___manager.html#ae00e8fedb39e54f51955fe92f82dd0af',1,'RF_Manager']]],
+  ['pileup_20',['pileup',['../class_hit.html#af11540b09cb070a6c2028546b5a35037',1,'Hit::pileup'],['../class_hit__ptr.html#a746bd92650dc3faa7a185f6a1650c69c',1,'Hit_ptr::pileup']]],
+  ['pileups_21',['pileups',['../class_event.html#a5cd77bd162e67c1b93b66f0df9e4d2de',1,'Event']]],
+  ['positions_22',['positions',['../class_paris_cluster.html#a88fec7f67c70805b23d2e8b39229fd22',1,'ParisCluster']]],
+  ['prompt_5fge_23',['prompt_Ge',['../class_sorted___event.html#a89a3ad21720b8c31773799a549da8746',1,'Sorted_Event']]],
+  ['promptgemult_24',['PromptGeMult',['../class_sorted___event.html#abe7176d286a1c23d30fc75061ec2f0ad',1,'Sorted_Event']]],
+  ['promptmult_25',['PromptMult',['../class_sorted___event.html#a81716b8c8388f1851d60f9303b222d3a',1,'Sorted_Event']]]
 ];

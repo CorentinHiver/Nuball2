@@ -1,5 +1,6 @@
 var dir_87ff476ccb6f299a9759bbe8af9ee70b =
 [
+    [ "Alignator.hpp", "_alignator_8hpp.html", "_alignator_8hpp" ],
     [ "AnalysisEvent.hpp", "_analysis_event_8hpp.html", "_analysis_event_8hpp" ],
     [ "Builder.hpp", "_builder_8hpp.html", "_builder_8hpp" ],
     [ "Calibration.hpp", "_calibration_8hpp.html", "_calibration_8hpp" ],
@@ -22,9 +23,8 @@ var dir_87ff476ccb6f299a9759bbe8af9ee70b =
     [ "OLD_EventBuilder.hpp", "_o_l_d___event_builder_8hpp.html", "_o_l_d___event_builder_8hpp" ],
     [ "Performances.hpp", "_performances_8hpp.html", "_performances_8hpp" ],
     [ "ReaderManager.hpp", "_reader_manager_8hpp.html", "_reader_manager_8hpp" ],
+    [ "RF_Extractor.hpp", "_r_f___extractor_8hpp.html", "_r_f___extractor_8hpp" ],
     [ "RF_Manager.hpp", "_r_f___manager_8hpp.html", "_r_f___manager_8hpp" ],
     [ "RWMat.hxx", "_r_w_mat_8hxx.html", "_r_w_mat_8hxx" ],
-    [ "Timer.hpp", "_timer_8hpp.html", "_timer_8hpp" ],
-    [ "Timeshifts.hpp", "_timeshifts_8hpp.html", "_timeshifts_8hpp" ],
-    [ "Timewalk.hpp", "_timewalk_8hpp.html", "_timewalk_8hpp" ]
+    [ "Timer.hpp", "_timer_8hpp.html", "_timer_8hpp" ]
 ];

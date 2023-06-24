@@ -1,7 +1,8 @@
 var class_m_t_t_hist =
 [
     [ "MTTHist", "class_m_t_t_hist.html#a649cb4ac9c9239c1bf76f3f8b508bea5", null ],
-    [ "MTTHist", "class_m_t_t_hist.html#a376fc74695b83ca214a29199119c3669", null ],
+    [ "MTTHist", "class_m_t_t_hist.html#acad2a0a6f1c5f918021dad0353013596", null ],
+    [ "MTTHist", "class_m_t_t_hist.html#ad6ba02ffcc88d2ad2084985e8e91b338", null ],
     [ "~MTTHist", "class_m_t_t_hist.html#a9fc4f9b3947ade70cad19a33c16d69d6", null ],
     [ "exists", "class_m_t_t_hist.html#ae7b199c106361d92f2bd420d78275537", null ],
     [ "file", "class_m_t_t_hist.html#a0156ec3e32dbbd6e8ebeb8bbc6f675f0", null ],

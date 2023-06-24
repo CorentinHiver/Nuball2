@@ -9,7 +9,7 @@ digraph "FasterReader::TreatCRRC4"
   Node1 -> Node2 [id="edge1_Node000001_Node000002",dir="back",color="steelblue1",style="solid",tooltip=" "];
   Node2 [id="Node000002",label="FasterReader::switch\l_alias",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_faster_reader.html#af3c8f411415fb3d9fe20cd8551bc24ed",tooltip="Treat the specific part of data (QDC gates, spectro ADC ...)"];
   Node2 -> Node3 [id="edge2_Node000002_Node000003",dir="back",color="steelblue1",style="solid",tooltip=" "];
-  Node3 [id="Node000003",label="FasterReader::ReadData",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_faster_reader.html#ab9c18cdb4ebb93cf16c5216956ca1dbd",tooltip="Treats faster data."];
+  Node3 [id="Node000003",label="FasterReader::ReadData",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_faster_reader.html#a0b2cd239d03d34e69b10418cb6292858",tooltip="Treats faster data."];
   Node3 -> Node4 [id="edge3_Node000003_Node000004",dir="back",color="steelblue1",style="solid",tooltip=" "];
   Node4 [id="Node000004",label="FasterReader::ReadDataGroup",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_faster_reader.html#a64fb4fc3d241141f5d27df99906780fc",tooltip="Treats the faster data groups."];
   Node4 -> Node3 [id="edge4_Node000004_Node000003",dir="back",color="steelblue1",style="solid",tooltip=" "];

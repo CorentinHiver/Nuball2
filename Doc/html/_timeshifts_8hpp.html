@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.7"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Nuball2: lib/Classes/Timeshifts.hpp File Reference</title>
+<title>Nuball2: lib/Modules/Timeshifts.hpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -97,22 +97,23 @@ $(document).ready(function(){initNavTree('_timeshifts_8hpp.html',''); initResiza
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &quot;<a class="el" href="lib_co_8hpp_source.html">../libCo.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="_detectors_8hpp_source.html">Detectors.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="_faster_reader_8hpp_source.html">FasterReader.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="_files_manager_8hpp_source.html">FilesManager.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="_m_t_list_8hpp_source.html">MTList.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="_m_t_t_hist_8hpp_source.html">MTTHist.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="_hit_8h_source.html">Hit.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="_r_f___manager_8hpp_source.html">RF_Manager.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="_event_8hpp_source.html">Event.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="_coinc_builder2_8hpp_source.html">CoincBuilder2.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="_timer_8hpp_source.html">Timer.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="_performances_8hpp_source.html">Performances.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_detectors_8hpp_source.html">../Classes/Detectors.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_faster_reader_8hpp_source.html">../Classes/FasterReader.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_files_manager_8hpp_source.html">../Classes/FilesManager.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_hit_8h_source.html">../Classes/Hit.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_r_f___manager_8hpp_source.html">../Classes/RF_Manager.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_event_8hpp_source.html">../Classes/Event.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_coinc_builder2_8hpp_source.html">../Classes/CoincBuilder2.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_timer_8hpp_source.html">../Classes/Timer.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_performances_8hpp_source.html">../Classes/Performances.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_detectors_list_8hpp_source.html">../Classes/DetectorsList.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_m_t_object_8hpp_source.html">../MTObjects/MTObject.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_m_t_list_8hpp_source.html">../MTObjects/MTList.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_m_t_t_hist_8hpp_source.html">../MTObjects/MTTHist.hpp</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for Timeshifts.hpp:</div>
 <div class="dyncontent">
-<div class="center"><img src="_timeshifts_8hpp__incl.png" border="0" usemap="#alib_2_classes_2_timeshifts_8hpp" alt=""/></div>
+<div class="center"><img src="_timeshifts_8hpp__incl.png" border="0" usemap="#alib_2_modules_2_timeshifts_8hpp" alt=""/></div>
 </div>
 </div>
 <p><a href="_timeshifts_8hpp_source.html">Go to the source code of this file.</a></p>
@@ -132,8 +133,10 @@ Functions</h2></td></tr>
 <tr class="memitem:a202a57630e2aa9744043c30964b64bcd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_timeshifts_8hpp.html#a202a57630e2aa9744043c30964b64bcd">get_first_RF_of_file</a> (<a class="el" href="class_faster_reader.html">FasterReader</a> &amp;reader, <a class="el" href="class_hit.html">Hit</a> &amp;hit, <a class="el" href="class_r_f___manager.html">RF_Manager</a> &amp;rf)</td></tr>
 <tr class="separator:a202a57630e2aa9744043c30964b64bcd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab8628517ea9ef7ded29d8e22be6f628f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_timeshifts_8hpp.html#ab8628517ea9ef7ded29d8e22be6f628f">getBin0</a> (TH1F *spectra)</td></tr>
+<tr class="memdesc:ab8628517ea9ef7ded29d8e22be6f628f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get which bin holds the X = 0.  <br /></td></tr>
 <tr class="separator:ab8628517ea9ef7ded29d8e22be6f628f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:accfb8dfb6ee42fa6845013a0cf121ac1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_timeshifts_8hpp.html#accfb8dfb6ee42fa6845013a0cf121ac1">getMeanPeak</a> (TH1F *spectra, double &amp;mean)</td></tr>
+<tr class="memdesc:accfb8dfb6ee42fa6845013a0cf121ac1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the mean of the peak of a histogram with one nice single peak.  <br /></td></tr>
 <tr class="separator:accfb8dfb6ee42fa6845013a0cf121ac1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Typedef Documentation</h2>
@@ -206,6 +209,8 @@ Here is the call graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Get which bin holds the X = 0. </p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -239,6 +244,8 @@ Here is the caller graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Get the mean of the peak of a histogram with one nice single peak. </p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -257,7 +264,7 @@ Here is the caller graph for this function:</div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_97aefd0d527b934f1d99a682da8fe6a9.html">lib</a></li><li class="navelem"><a class="el" href="dir_87ff476ccb6f299a9759bbe8af9ee70b.html">Classes</a></li><li class="navelem"><a class="el" href="_timeshifts_8hpp.html">Timeshifts.hpp</a></li>
+    <li class="navelem"><a class="el" href="dir_97aefd0d527b934f1d99a682da8fe6a9.html">lib</a></li><li class="navelem"><a class="el" href="dir_1676326358ffef63bd5695c4f3c09907.html">Modules</a></li><li class="navelem"><a class="el" href="_timeshifts_8hpp.html">Timeshifts.hpp</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7 </li>
   </ul>
 </div>

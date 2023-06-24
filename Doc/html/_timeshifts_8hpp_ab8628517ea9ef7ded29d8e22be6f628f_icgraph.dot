@@ -5,9 +5,9 @@ digraph "getBin0"
   edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
   node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
   rankdir="RL";
-  Node1 [id="Node000001",label="getBin0",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip=" "];
+  Node1 [id="Node000001",label="getBin0",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Get which bin holds the X = 0."];
   Node1 -> Node2 [id="edge1_Node000001_Node000002",dir="back",color="steelblue1",style="solid",tooltip=" "];
-  Node2 [id="Node000002",label="getMeanPeak",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$_timeshifts_8hpp.html#accfb8dfb6ee42fa6845013a0cf121ac1",tooltip=" "];
+  Node2 [id="Node000002",label="getMeanPeak",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$_timeshifts_8hpp.html#accfb8dfb6ee42fa6845013a0cf121ac1",tooltip="Get the mean of the peak of a histogram with one nice single peak."];
   Node2 -> Node3 [id="edge2_Node000002_Node000003",dir="back",color="steelblue1",style="solid",tooltip=" "];
   Node3 [id="Node000003",label="Timeshifts::analyse",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_timeshifts.html#a608d9443a15dd669920e10dd8baee23a",tooltip=" "];
   Node3 -> Node4 [id="edge3_Node000003_Node000004",dir="back",color="steelblue1",style="solid",tooltip=" "];

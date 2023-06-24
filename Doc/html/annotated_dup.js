@@ -1,5 +1,6 @@
 var annotated_dup =
 [
+    [ "Alignator", "class_alignator.html", "class_alignator" ],
     [ "AnalysisEvent", "class_analysis_event.html", "class_analysis_event" ],
     [ "BGO_Hit", "utils_8hpp.html#struct_b_g_o___hit", "utils_8hpp_struct_b_g_o___hit" ],
     [ "Builder", "class_builder.html", "class_builder" ],
@@ -26,6 +27,8 @@ var annotated_dup =
     [ "File", "class_file.html", "class_file" ],
     [ "Filename", "class_filename.html", "class_filename" ],
     [ "FilesManager", "class_files_manager.html", "class_files_manager" ],
+    [ "Folder", "class_folder.html", "class_folder" ],
+    [ "Folders", "class_folders.html", "class_folders" ],
     [ "fParameters", "classf_parameters.html", "classf_parameters" ],
     [ "Gate", "class_gate.html", "class_gate" ],
     [ "GHit", "utils_8hpp.html#struct_g_hit", "utils_8hpp_struct_g_hit" ],
@@ -52,6 +55,7 @@ var annotated_dup =
     [ "pic_fit_result", "classpic__fit__result.html", "classpic__fit__result" ],
     [ "PositionXY", "class_position_x_y.html", "class_position_x_y" ],
     [ "ReaderManager", "class_reader_manager.html", "class_reader_manager" ],
+    [ "RF_Extractor", "class_r_f___extractor.html", "class_r_f___extractor" ],
     [ "RF_Manager", "class_r_f___manager.html", "class_r_f___manager" ],
     [ "RWMat", "class_r_w_mat.html", "class_r_w_mat" ],
     [ "Sorted_Event", "class_sorted___event.html", "class_sorted___event" ],

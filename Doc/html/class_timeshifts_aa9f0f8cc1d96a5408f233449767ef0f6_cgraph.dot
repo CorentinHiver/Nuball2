@@ -5,9 +5,9 @@ digraph "Timeshifts::setOutRoot"
   edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
   node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
   rankdir="LR";
-  Node1 [id="Node000001",label="Timeshifts::setOutRoot",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip=" "];
+  Node1 [id="Node000001",label="Timeshifts::setOutRoot",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Set output root file containing the raw and corrected time spectra."];
   Node1 -> Node2 [id="edge1_Node000001_Node000002",color="steelblue1",style="solid",tooltip=" "];
-  Node2 [id="Node000002",label="extension",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$files__functions_8hpp.html#acd28560a444e9d41f295394b175d2200",tooltip=" "];
+  Node2 [id="Node000002",label="extension",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$files__functions_8hpp.html#a321abbd0681c4da012deaf49122389c5",tooltip=" "];
   Node1 -> Node3 [id="edge2_Node000001_Node000003",color="steelblue1",style="solid",tooltip=" "];
-  Node3 [id="Node000003",label="removeExtension",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$files__functions_8hpp.html#a8c974772d7bc68e383f1436e04b2c405",tooltip=" "];
+  Node3 [id="Node000003",label="removeExtension",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$files__functions_8hpp.html#a658fd83a6ed34994ff0742273a3cc358",tooltip=" "];
 }

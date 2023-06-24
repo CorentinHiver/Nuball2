@@ -5,5 +5,5 @@ digraph "Graphical Class Hierarchy"
   edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
   node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
   rankdir="LR";
-  Node0 [id="Node000000",label="PositionXY",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_position_x_y.html",tooltip=" "];
+  Node0 [id="Node000000",label="Path",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_path.html",tooltip="Object used to hold the complete path of a giver folder."];
 }

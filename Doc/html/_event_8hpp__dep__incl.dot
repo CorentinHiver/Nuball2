@@ -29,7 +29,7 @@ digraph "lib/Classes/Event.hpp"
   Node8 -> Node10 [id="edge14_Node000008_Node000010",dir="back",color="steelblue1",style="solid",tooltip=" "];
   Node10 [id="Node000010",label="lib/Classes/CoincBuilder2.hpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$_coinc_builder2_8hpp.html",tooltip=" "];
   Node10 -> Node11 [id="edge15_Node000010_Node000011",dir="back",color="steelblue1",style="solid",tooltip=" "];
-  Node11 [id="Node000011",label="lib/Classes/Timeshifts.hpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$_timeshifts_8hpp.html",tooltip=" "];
+  Node11 [id="Node000011",label="lib/Modules/Timeshifts.hpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$_timeshifts_8hpp.html",tooltip=" "];
   Node8 -> Node12 [id="edge16_Node000008_Node000012",dir="back",color="steelblue1",style="solid",tooltip=" "];
   Node12 [id="Node000012",label="lib/Classes/EventBuilder.hpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$_event_builder_8hpp.html",tooltip=" "];
   Node1 -> Node13 [id="edge17_Node000001_Node000013",dir="back",color="steelblue1",style="solid",tooltip=" "];

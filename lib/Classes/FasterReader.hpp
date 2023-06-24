@@ -1,7 +1,7 @@
 #ifndef FASTERREADER_H
 #define FASTERREADER_H
 
-#include <Hit.h>
+#include <Hit.hpp>
 
 // ******* fasterac includes ******* //
 #include "fasterac/adc.h"
@@ -27,6 +27,7 @@
  * @class FasterReader
  * @brief Class used to read .fast files
  * 
+ * @details
  * This class is to be used in combination with the Hit struct
  * Here is the minimal code you can use to scan the files : 
  * 
@@ -61,10 +62,10 @@
  *        rest of the code....
  * 
  * 
- * -- QDC2
+ * -- QDC1MAX
  * 
- * By default the nrj2 is not handled. 
- * If at least one detector uses two gates then you'll have to declare it
+ * By default the nrj2 is handled. 
+ * If no detector uses the QDC2 then declare it
  * 
  * 
  * -- FASTER_GROUP
@@ -346,9 +347,9 @@ bool FasterReader::ReadGroup()
 bool FasterReader::ReadData(faster_data_p const & _data)
 { 
   m_hit->label = faster_data_label(_data);
-#ifdef QDC2
+#ifndef QDC1MAX
   m_hit->nrj2 = 0; // In order to clean the data, as nrj2 never gets cleaned if there was QDC2 in the previous hit
-#endif //QDC2
+#endif //QDC1MAX
   m_alias = faster_data_type_alias(_data);
   if (m_alias == GROUP_TYPE_ALIAS)
   {// Creates a group reader
@@ -360,6 +361,7 @@ bool FasterReader::ReadData(faster_data_p const & _data)
     #endif //FASTER_GROUP
   }
   m_hit -> time = faster_data_hr_clock_ns(_data) * 1000;// Stores the time in ps
+  std::cout << std::setprecision(20) << faster_data_hr_clock_ns(_data) << std::endl;
   m_write = switch_alias(m_alias, _data);
 #ifdef FASTER_GROUP
   if (m_inGroup && m_write)
@@ -418,11 +420,11 @@ bool FasterReader::switch_alias(uchar const & _alias, faster_data_p const & _dat
       TreatQDC1(_data);
       return true;
 
-  #ifdef QDC2
+  #ifndef QDC1MAX
     case QDC_TDC_X2_TYPE_ALIAS: // qdc_t_x2
       TreatQDC2(_data);
       return true;
-  #endif //QDC2
+  #endif //QDC1MAX
 
     case RF_DATA_TYPE_ALIAS: // rf_data
       TreatRF(_data);
@@ -450,9 +452,9 @@ void FasterReader::TreatTrapez(const faster_data_p& data)
    faster_data_load(data, &adc);
 
    m_hit->nrj = adc.measure;
- #ifdef QDC2
+ #ifndef QDC1MAX
    m_hit->nrj2 = 0;
- #endif //QDC2
+ #endif //QDC1MAX
    m_hit->pileup = (adc.pileup == 1 || adc.saturated == 1);
 }
 
@@ -470,9 +472,9 @@ void FasterReader::TreatCRRC4(const faster_data_p& data)
    faster_data_load(data, &crrc4_adc);
 
    m_hit->nrj = crrc4_adc.measure;
- #ifdef QDC2
+ #ifndef QDC1MAX
    m_hit->nrj2 = 0;
- #endif //QDC2
+ #endif //QDC1MAX
    m_hit->pileup = (false); //TO BE LOOKED AT
 }
 
@@ -489,9 +491,9 @@ void FasterReader::TreatQDC1(const faster_data_p& data)
 
   m_hit->nrj = qdc.q1;
 
-#ifdef QDC2
+#ifndef QDC1MAX
   m_hit->nrj2 = 0;
-#endif //QDC2
+#endif //QDC1MAX
 
   m_hit->pileup = (qdc.q1_saturated == 1);
 }
@@ -507,9 +509,9 @@ void FasterReader::TreatQDC2(const faster_data_p& data)
   qdc_t_x2 qdc;
   faster_data_load(data, &qdc);
   m_hit->nrj = qdc.q1;
-#ifdef QDC2
+#ifndef QDC1MAX
   m_hit->nrj2 = qdc.q2;
-#endif //QDC2
+#endif //QDC1MAX
   m_hit->pileup = (qdc.q1_saturated == 1 || qdc.q2_saturated == 1);
 }
 
@@ -525,9 +527,9 @@ void FasterReader::TreatRF(const faster_data_p& data)
    faster_data_load(data, &rf);
 
    m_hit->nrj = rf_period_ns(rf)*1000;
- #ifdef QDC2
+ #ifndef QDC1MAX
    m_hit->nrj2 = 0;
- #endif //QDC2
+ #endif //QDC1MAX
    m_hit->pileup = false;
 }
 

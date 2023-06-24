@@ -10,5 +10,5 @@ digraph "lib/Classes/Detectors.hpp"
   Node1 -> Node3 [id="edge2_Node000001_Node000003",dir="back",color="steelblue1",style="solid",tooltip=" "];
   Node3 [id="Node000003",label="lib/Classes/Calibration.hpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$_calibration_8hpp.html",tooltip=" "];
   Node1 -> Node4 [id="edge3_Node000001_Node000004",dir="back",color="steelblue1",style="solid",tooltip=" "];
-  Node4 [id="Node000004",label="lib/Classes/Timeshifts.hpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$_timeshifts_8hpp.html",tooltip=" "];
+  Node4 [id="Node000004",label="lib/Modules/Timeshifts.hpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$_timeshifts_8hpp.html",tooltip=" "];
 }

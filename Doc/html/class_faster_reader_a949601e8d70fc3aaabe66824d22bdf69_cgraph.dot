@@ -6,5 +6,8 @@ digraph "FasterReader::Initialize"
   node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
   rankdir="LR";
   Node1 [id="Node000001",label="FasterReader::Initialize",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Setup the fasterac objects for reading."];
-  Node1 -> Node1 [id="edge1_Node000001_Node000001",color="steelblue1",style="solid",tooltip=" "];
+  Node1 -> Node2 [id="edge1_Node000001_Node000002",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="extension",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$files__functions_8hpp.html#a321abbd0681c4da012deaf49122389c5",tooltip=" "];
+  Node1 -> Node3 [id="edge2_Node000001_Node000003",color="steelblue1",style="solid",tooltip=" "];
+  Node3 [id="Node000003",label="FasterReader::Initialize\lReader",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_faster_reader.html#a21a9202f79d43b9fd41cd1e1c276fe2c",tooltip=" "];
 }

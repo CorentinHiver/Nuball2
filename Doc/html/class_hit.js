@@ -1,5 +1,6 @@
 var class_hit =
 [
+    [ "connect", "class_hit.html#abf883b6e7d86cde0e1f37bc174480382", null ],
     [ "gate_ratio", "class_hit.html#a26e8233d12128566aa2aaa90b4d2bd6d", null ],
     [ "reset", "class_hit.html#a11ab514bf16c8173e974b6582ca6d37e", null ],
     [ "label", "class_hit.html#a7742ff02158f94fd0ccd163fc34ee9d1", null ],

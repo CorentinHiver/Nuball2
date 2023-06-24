@@ -1,5 +1,6 @@
 var hierarchy =
 [
+    [ "Alignator", "class_alignator.html", null ],
     [ "AnalysisEvent", "class_analysis_event.html", null ],
     [ "BGO_Hit", "utils_8hpp.html#struct_b_g_o___hit", null ],
     [ "Builder", "class_builder.html", [
@@ -27,6 +28,8 @@ var hierarchy =
     [ "File", "class_file.html", null ],
     [ "Filename", "class_filename.html", null ],
     [ "FilesManager", "class_files_manager.html", null ],
+    [ "Folder", "class_folder.html", null ],
+    [ "Folders", "class_folders.html", null ],
     [ "fParameters< nb_param, T >", "classf_parameters.html", null ],
     [ "Gate", "class_gate.html", null ],
     [ "GHit", "utils_8hpp.html#struct_g_hit", null ],
@@ -58,6 +61,7 @@ var hierarchy =
     [ "PositionXY", "class_position_x_y.html", null ],
     [ "Event::read", "class_event.html#struct_event_1_1read", null ],
     [ "ReaderManager", "class_reader_manager.html", null ],
+    [ "RF_Extractor", "class_r_f___extractor.html", null ],
     [ "RF_Manager", "class_r_f___manager.html", null ],
     [ "RWMat", "class_r_w_mat.html", null ],
     [ "Sorted_Event", "class_sorted___event.html", null ],

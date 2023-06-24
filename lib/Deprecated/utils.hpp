@@ -3,7 +3,7 @@
 
 #include "libCo.hpp"
 #include "libRoot.hpp"
-#include "Classes/Hit.h"
+#include "Classes/Hit.hpp"
 #include "Classes/Timer.hpp"
 #include <RF_Manager.hpp>
 #ifdef FASTERAC

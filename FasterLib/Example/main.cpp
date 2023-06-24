@@ -12,7 +12,7 @@
 
 void countHits(Hit & hit, FasterReader & reader, MTCounter & counterMT, MTTHist<TH1F> & histo, MTTHist<TH1F> & spectra)
 {
-  // See lib/Classes/Hit.h for the structure of a Hit
+  // See lib/Classes/Hit.hpp for the structure of a Hit
   int counter = 0;// It is better to deal with a local counter, and only at the end add it to the MTCounter
   while(reader.Read())
   {
@@ -26,7 +26,7 @@ void countHits(Hit & hit, FasterReader & reader, MTCounter & counterMT, MTTHist<
 
 void convert_simple(Hit & hit, FasterReader & reader)
 {
-  // See lib/Classes/Hit.h for the structure of a Hit
+  // See lib/Classes/Hit.hpp for the structure of a Hit
   std::unique_ptr<TTree> tree (new TTree("Nuball2","Nuball2"));
   tree -> Branch("label",&hit.label);
   tree -> Branch("nrj",  &hit.nrj  );
