@@ -37,18 +37,18 @@ bool overwrite = true; // Overwrite already existing converted root files
 void convert(Hit & hit, FasterReader & reader, DetectorsList const & detList, Calibration const & calibration, Timeshifts const & timeshifts, Path const & outPath)
 {
   // Checking the lookup tables :
-  if (!detList || !timeshifts || !calibration) return;
+  if (!detList || !timeshifts || !calibration || !reader) return;
 
   // Extracting the run name :
-  File filename = reader.getFilename(); // "/path/to/manip/run_number.fast/run_number_filenumber.fast"
-  std::string run_path = filename.path();   // "/path/to/manip/run_number.fast/"
+  File raw_datafile = reader.getFilename(); // "/path/to/manip/run_number.fast/run_number_filenumber.fast"
+  std::string run_path = raw_datafile.path();   // "/path/to/manip/run_number.fast/"
   std::string temp = run_path;              // "/path/to/manip/run_number.fast/"
   temp.pop_back();                          // "/path/to/manip/run_number.fast"
   std::string run = rmPathAndExt(temp);     //                "run_number"
 
   // Setting the name of the output file :
   Path outFolder (outPath+run, true);               // /path/to/manip-root/run_number.fast/
-  Filename outFilename(filename.name()+".root");
+  Filename outFilename(raw_datafile.shortName()+".root");
   File outfile (outFolder, outFilename); // /path/to/manip-root/run_number.fast/run_number_filenumber.root
 
   // Important : if the output file already exists, then do not overwrite it !
@@ -76,8 +76,10 @@ void convert(Hit & hit, FasterReader & reader, DetectorsList const & detList, Ca
   }
 
 #ifdef DEBUG
-  print("Read finished here");
+  print("Read finished here,", count,"counts and", RF_counter, "RF counts");
 #endif //DEBUG
+
+if (count==0) return;
 
   // Realign switched hits after timeshifts :
   Alignator gindex(readTree.get());
@@ -171,23 +173,22 @@ int main(int argc, char** argv)
   // MANDATORY : initialize the multithreading !
   MTObject::Initialize(2);
 
-
   // MANDATORY : initialize the detectors labels manager !
   Detectors::Initialize();
 
   // Setup the path accordingly to the machine :
-    Path datapath = std::string(std::getenv("HOME"));
+  Path datapath = Path::home();
        if ( datapath == "/home/corentin/") datapath+="faster_data/";
   else if ( datapath == "/home/faster/") datapath="srv/data/nuball2/";
-  else {print("Unkown HOME path -",datapath,"- please add yours on top of this line ---|---"); return -1;}
+  else {print("Unkown HOME path -",datapath,"- please add yours on top of this line in the main ^^^^^^^^"); return -1;}
 
   Path manipPath = datapath+manip;
-  Path outPath (datapath+manip.name()+"-root", true);
+  Path outPath (datapath+(manip.name()+"-root"), true);
 
   // Load some modules :
   DetectorsList detList(IDFile);
   Calibration calibration(calibFile, detList);
-  Manip runs(manipPath+list_runs);
+  Manip runs(File(manipPath+list_runs));
 
   // Checking of all the modules have been loaded correctly :
   if (!detList || !calibration || !runs) return -1;

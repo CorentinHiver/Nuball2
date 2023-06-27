@@ -94,7 +94,7 @@ public:
   }
   
   /**
-   * @brief TBD, reset the cursor to the begining of the document
+   * @brief Reset the cursor to the begining of the document
    */
   bool Reset();
   
@@ -141,6 +141,11 @@ public:
   bool const & isReady    () const { return m_kReady     ;}
 
   /**
+   * @brief If the initialization went badly then returns false
+   */
+  operator bool() const & { return m_kReady;}
+
+  /**
    * @brief Get the name of the file being read
    */
   auto const & getFilename() const {return m_filename;}
@@ -167,7 +172,7 @@ private:
   Hit*   m_hit = nullptr;
   Hit    m_empty_hit;
   File   m_filename = "";
-  bool   m_kReady   = true,
+  bool   m_kReady   = false,
          m_write    = false;
 
   // Grouped data management :      
@@ -192,7 +197,14 @@ private:
 
 bool FasterReader::Reset()
 {
-      //TBD
+  faster_file_reader_close(m_reader);
+  InitializeReader();
+  m_counter = 0;
+  m_group_read_cursor = 0;
+  m_group_write_cursor = 0;
+  m_data = nullptr;
+  m_inGroup = false;
+  m_alias = 0;
   return true;
 }
 
@@ -204,7 +216,7 @@ bool FasterReader::Initialize()
   #endif //FASTER_GROUP
 
   // Check if the file can be open and read :
-  if (m_filename)
+  if (!m_filename)
   {
     std::cout << "No file " << m_filename << std::endl;
     return false;
@@ -224,7 +236,7 @@ bool FasterReader::Initialize()
   file.close();
 
   // Check the extension of the file, then initialise the reader :
-  if (extension(m_filename) == "fast")
+  if (m_filename.extension() == "fast")
   {
     std::cout << "Reader set to " << m_filename << std::endl;
     return InitializeReader();
@@ -234,12 +246,12 @@ bool FasterReader::Initialize()
     std::cout << "File not a .fast file !!" << std::endl;
     m_kReady = false; return false;
   }
-  return false;
+  return (m_kReady = true);
 }
 
 bool FasterReader::InitializeReader()
 {
-  if (m_reader != NULL) faster_file_reader_close(m_reader); // if the reader has already been used to read another file
+  if (m_reader != NULL) Reset(); // If the reader has already been used 
   m_reader = faster_file_reader_open ( m_filename.c_str() );
   if (m_reader == NULL)
   {
@@ -261,13 +273,13 @@ bool FasterReader::Read()
   }
 #ifdef FASTER_GROUP
   return ReadGroup();
-#else // TRIGGERLESS DATA
+#else // TRIGGERLESS DATA :
   return ReadSimple();
 #endif //FASTER_GROUP
 }
 
 /**
- * @brief Read non grouped data
+ * @brief Read triggerless data
  * 
  * This function is replaced by ReadGroup if the faster data contains groups, 
  * this one is simply faster and serves as the "prototype" to read groupless data 
@@ -279,7 +291,7 @@ bool FasterReader::ReadSimple()
   m_write = false;
   // faster_file_reader_next returns a value > 0 (->true in boolean) if the read was successfull (fasterac library)
   // Ergo, the loop continues until the end of the file when the return value is 0
-  while(!m_write && (m_data = faster_file_reader_next(m_reader)))
+  while(!m_write && static_cast<bool>(m_data = faster_file_reader_next(m_reader)))
   {
     m_write = ReadData(m_data);
   }

@@ -300,16 +300,14 @@ private:
   std::string m_folder;
 };
 
-Folder operator+(std::string string, Folder const & folder)
-{
-  return Folder(string + folder.string());
-}
-
 std::ostream& operator<<(std::ostream& cout, Folder const & folder)
 {
   cout << folder.string();
   return cout;
 }
+
+Folder operator+(std::string const & string, Folder const & folder) { return (string + folder.get());}
+Folder operator+(const char * string, Folder const & folder) { return (std::string(string) + folder.get());}
 
 /**
  * @brief Object used to hold a list of folders
@@ -351,6 +349,8 @@ public:
   auto const & list() const {return m_folders;}
   auto const & get()  const {return m_folders;}
 
+  void push_back(Folder const & folder) {m_folders.push_back(folder);}
+
 private:
 
   std::vector<Folder> m_folders;
@@ -358,7 +358,7 @@ private:
 
 std::ostream& operator<<(std::ostream& cout, Folders const & folders)
 {
-  for (auto const & folder : folders) cout << folder;
+  cout << folders.get();
   return cout;
 }
 
@@ -398,7 +398,6 @@ public:
     }
     else
     {// Relative path
-      print("Relative paths aren't supported, sorry !");
       m_exists = false;
     }
 
@@ -407,6 +406,7 @@ public:
 
     // To ensure it exists :
     m_exists = folder_exists(m_path);
+
 
     // Create the folder if it doesn't exist yet :
     if (!m_exists && create) this -> make();
@@ -420,12 +420,25 @@ public:
 
   Folders makeFolderList(std::string const & path)
   {
-    return Folders(getList(path,'/'));
+    auto folders = getList(path,'/');
+    return Folders(folders);
   }
 
   int  nbFiles() {return nb_files_in_folder(m_path);}
   bool exists() {return folder_exists(m_path);}
   bool make() {create_folder_if_none(m_path); return this -> exists();}
+
+  Path & addFolder(Folder const & folder)
+  {
+    if (file_exists(m_path+=folder.get()))
+    {
+      m_recursive_folders.push_back(folder.name());
+    }
+    else 
+    {
+      throw std::runtime_error(m_path + " don't exist !");
+    }
+  }
 
   std::string const & path() const {return m_path;}
   
@@ -434,11 +447,11 @@ public:
   operator std::string() const & {return (get());}
   auto c_str() {return m_path.c_str();}
 
-  Path operator+(std::string const & addString)
+  std::string operator+(std::string const & addString)
   {
     return (m_path+addString);
   }
-  Path operator+(const char* addString)
+  std::string operator+(const char* addString)
   {
     return (m_path+static_cast<std::string>(addString));
   }
@@ -486,8 +499,8 @@ public:
   }
 
   static Path home() {return Path(std::string(std::getenv("HOME")));}
-  static Path pwd() {return Path(std::string(std::getenv("pwd")));}
-  static Path current_directory() {return Path(std::string(std::getenv("pwd")));}
+  static Path pwd() {return Path(std::string(std::getenv("PWD")));}
+  static Path current_directory() {return Path(std::string(std::getenv("PWD")));}
 
 private:
   bool m_exists = false;
@@ -502,62 +515,71 @@ std::ostream& operator<<(std::ostream& cout, Path const & p)
 }
 
 /**
- * @brief Contains only the name and the extension of a file, not its path
+ * @brief Contains the short name and the extension of a given file, without any knowledge of its path
  */
 class Filename
 {
 public:
   Filename(){}
-  Filename(std::string const & _filename) : m_fullname(_filename) 
+  Filename(std::string const & _filename) : m_fullName(_filename) 
   {
     this -> fill(_filename);
   }
 
-  Filename(Filename const & _filename) : m_fullname(_filename.m_fullname), m_name(_filename.m_name), m_extension(_filename.m_extension) {}
+  Filename(Filename const & _filename) : m_fullName(_filename.m_fullName), m_shortName(_filename.m_shortName), m_extension(_filename.m_extension) {}
 
   Filename & operator=(Filename const & _filename)
   {
-    m_fullname = _filename.fullname();
-    m_name = _filename.name();
-    m_extension = _filename.extension();
+    m_fullName = _filename.m_fullName;
+    m_shortName = _filename.m_shortName;
+    m_extension = _filename.m_extension;
     return *this;
   }
 
   Filename & operator=(std::string const & _filename)
   {
-    m_fullname = _filename;
     this -> fill(_filename);
     return *this;
   }
 
-  operator std::string() const & {return m_fullname;}
-  std::string const & get() const {return m_fullname;}
+  operator std::string() const & {return m_fullName;}
+  std::string const & get() const {return m_fullName;}
 
-  std::string const & fullname() const {return m_fullname;}
-  std::string const & name() const {return m_name;}
+  std::string const & fullName() const {return m_fullName;}
+  std::string const & shortName() const {return m_shortName;}
   std::string const & extension() const {return m_extension;}
 
 private:
 
   void fill(std::string const & filename)
   {
-    if (getPath(filename).size() > 1) {print("This is not a filename...");}
-    m_name = rmPathAndExt(filename);
-    m_extension = getExtension(filename);
+    if (getPath(filename).size() > 1) {print(filename, "is not a filename...");}
+    else
+    {
+      m_shortName = rmPathAndExt(filename);
+      m_extension = getExtension(filename);
+    }
   }
-  std::string m_fullname;
-  std::string m_name;
+  std::string m_fullName;
+  std::string m_shortName;
   std::string m_extension;
 };
 
 std::ostream& operator<<(std::ostream& os, Filename const & filename)
 {
-  os << filename.fullname();
+  os << filename.fullName();
   return os;
 }
 
 std::string operator+(Path const & path, Filename const & filename) {return path.get() + filename.get();} 
 
+/**
+ * @brief Composed of a Path and a Filename
+ * @details
+ * A File object is composed of a Path and a Filename object, which are composed of :
+ *  - A list of folder that forms the Path to the file
+ *  - A short name and an extension for the Filename
+ */
 class File
 {
 public:
@@ -565,7 +587,7 @@ public:
           m_ok(file.m_ok)    ,
           m_file(file.m_file), 
           m_path(file.m_path), 
-          m_name(file.m_name) 
+          m_filename(file.m_filename) 
   { }
 
   File(std::string const & file) 
@@ -579,7 +601,7 @@ public:
     check();
   }
   
-  File(Path const & path, Filename const & filename) : m_file(path+filename), m_path(path), m_name(filename) {}
+  File(Path const & path, Filename const & filename) : m_file(path+filename), m_path(path), m_filename(filename) {}
 
   auto c_str() {return m_path.c_str();}
 
@@ -598,7 +620,7 @@ public:
     m_ok   = file.m_ok  ;
     m_file = file.m_file;
     m_path = file.m_path;
-    m_name = file.m_name;
+    m_filename = file.m_filename;
     return *this;
   }
 
@@ -606,10 +628,12 @@ public:
   std::string const & get   () const {return m_file;}
   std::string const & file  () const {return m_file;}
   operator std::string() const &     {return m_file;}
-  Filename    const & name  () const {return m_name;}
   Path        const & path  () const {return m_path;}
+  Filename    const & name  () const {return m_filename;}
+  Filename    const & filename  () const {return m_filename;}
 
-  std::string const & extension () const {return m_name.extension();}
+  std::string const & shortName() const {return m_filename.shortName();}
+  std::string const & extension() const {return m_filename.extension();}
 
   operator bool() const & {return m_ok;}
   bool const & ok()       {return m_ok;}
@@ -633,18 +657,18 @@ private:
   {
     m_file = file;
     m_path = getPath(file);
-    m_name = removePath(file);
+    m_filename = removePath(file);
   }
 
   bool m_ok = false;
-  std::string m_file; // Full path + name + extension
+  std::string m_file; // Full path + short name + extension
   Path m_path;        // Path
-  Filename m_name;    // Name + extension
+  Filename m_filename;// Name + extension
 };
 
 std::ostream& operator<<(std::ostream& cout, File const & file)
 {
-  cout << file;
+  cout << file.get();
   return cout;
 }
 

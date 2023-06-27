@@ -11,13 +11,24 @@ std::string removeLastPart  (std::string const & string, char const & sep) { ret
 
 std::vector<std::string> getList(std::string string, char const & sep)
 {
-  int pos = 0;
+  std::size_t pos = 0;
   std::vector<std::string> ret;
-  while((pos = static_cast<int>(string.find(sep)) ) != -1)
+  while((pos = string.find(sep) ) != -1ul) // ul stands for unsigned long int
   {
-    ret.push_back(string.substr(0,pos));
-    string.erase(0,pos+1);    
-    string = string.substr(pos+1);
+    if (pos==0) 
+    {// If the character is at the first character then skip it;
+      string = string.substr(1);
+      continue; 
+    }
+    else if (pos == string.size())
+    {// If the character is at the end of the string, then we have reached then terminate the loop
+      break;
+    }
+    else
+    {
+      ret.push_back(string.substr(0,pos));
+      string.erase(0,pos+1);    
+    }
   }
   return ret;
 }
@@ -35,7 +46,7 @@ std::string removeBlankSpace(std::string str)
 /**
  * @brief Removes the first character of a string
  * 
- * Careful, time complexity makes it really heavy on big string
+ * @attention Careful, time complexity makes it really heavy on big string
  * 
  */
 std::string & pop_front(std::string & string) {if (string.size() > 0) string.erase(0,1); return string;}

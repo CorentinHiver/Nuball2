@@ -25,42 +25,86 @@ template <class T, class... T2> void print(T const & t, T2 const &... t2)
   print(t2...);
 }
 
-//Prints containers :
 
-template <class E> void print (std::vector<E> const & t)
+// Useful overload of operator<< in std::cout stream :
+
+template <class E>
+std::ostream& operator<<(std::ostream& cout, std::vector<E> const & v)
 {
-  for (auto const & e : t) print(e);
+  for (auto const & e : v) cout << e << " ";
+  return cout;
 }
 
-template <class E, class... T> void print (std::vector<E> const & v, T const &... t2)
+template <class F, class S> 
+std::ostream& operator<<(std::ostream& cout, std::pair<F,S> const & p)
 {
-  print(v);
-  print(t2...);
+  cout << " {" << p.first << ", " << p.second << "}" << std::endl;
+  return cout;
 }
 
-template <class K, class V> void print (std::map<K,V> const & m)
+template <class K, class V> 
+std::ostream& operator<<(std::ostream& cout, std::map<K,V> const & m)
 {
-  print();
-  print("{");
-  print();
-  for (auto const & pair : m)
-  {
-    print("key : ");
-    print(pair.first);
-    // print();
-    print("value :");
-    print(pair.second);
-    print();
-  }
-  print("}");
-  print();
+  cout << "{";
+  for (auto const & pair : m) cout << pair;
+  cout << "}\n";
+  return cout;
 }
 
-template <class K, class V, class... T> void print (std::map<K,V> const & m, T const & ... t2)
-{
-  print(m);
-  print(t2...);
-}
+
+// Idea to print any class that has a member called getPrintable that returns an object that can be printed 
+// (i.e. a base type or a class for which operator<< have been overloaded like vector or map)
+// Raw idea from chatgpt so it needs refinement
+//
+// template <typename T, typename = void>
+// struct HasRequiredFunction : std::false_type {};
+
+// // Partial specialization for types that have the required function
+// template <typename T>
+// struct HasRequiredFunction<T, std::void_t<decltype(std::declval<T>().getPrintable())>> : std::true_type {};
+
+// template <class T>
+// std::ostream& operator<<(std::ostream& cout, T const & t)
+// {
+//   std::static_assert(HasRequiredFunction<T>::value, "must have a getPrintable() method or overloaded operator<< to be printed.");
+//   cout << t.get();
+//   return cout;
+// }
+
+// template <class E>
+//  void print (std::vector<E> const & v)
+// {
+//   for (auto const & e : v) print(e);
+// }
+// template <class E, class... T> void print (std::vector<E> const & v, T const &... t2)
+// {
+//   print(v);
+//   print(t2...);
+// }
+
+// template <class K, class V> void print (std::map<K,V> const & m)
+// {
+//   print();
+//   print("{");
+//   print();
+//   for (auto const & pair : m)
+//   {
+//     print("key : ");
+//     print(pair.first);
+//     // print();
+//     print("value :");
+//     print(pair.second);
+//     print();
+//   }
+//   print("}");
+//   print();
+// }
+
+// template <class K, class V, class... T> void print (std::map<K,V> const & m, T const & ... t2)
+// {
+//   print(m);
+//   print(t2...);
+// }
 
 // Class Debug, based on template print() :
 class Debug
