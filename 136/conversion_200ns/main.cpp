@@ -179,7 +179,7 @@ int main(int argc, char** argv)
   // Setup the path accordingly to the machine :
   Path datapath = Path::home();
        if ( datapath == "/home/corentin/") datapath+="faster_data/";
-  else if ( datapath == "/home/faster/") datapath="srv/data/nuball2/";
+  else if ( datapath == "/home/faster/") datapath="/srv/data/nuball2/";
   else {print("Unkown HOME path -",datapath,"- please add yours on top of this line in the main ^^^^^^^^"); return -1;}
 
   Path manipPath = datapath+manip;
