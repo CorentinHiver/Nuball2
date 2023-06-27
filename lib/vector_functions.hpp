@@ -49,6 +49,7 @@ public:
   }
 
   virtual bool has(T const & t);
+  virtual bool has(T & t);
 
   void push_back(T const & e) {m_data[m_dynamic_size++] = e;}
   void push_back_safe(T const & e)
@@ -93,6 +94,12 @@ bool inline StaticVector<T,__size__>::has(T const & t)
 }
 
 template<class T, std::size_t __size__>
+bool inline StaticVector<T,__size__>::has(T & t)
+{
+  return (std::find(this -> begin(), this -> end(), t) != this -> end());
+}
+
+template<class T, std::size_t __size__>
 void StaticVector<T,__size__>::push_back_unique(T const & t)
 {
 #ifdef SAFE
@@ -102,6 +109,10 @@ void StaticVector<T,__size__>::push_back_unique(T const & t)
 #endif //SAFE
 }
 
+/**
+ * @brief TBD
+ * 
+ */
 template<class T, std::size_t __size__ = 0>
 class StaticOrderVector : public StaticVector<T, __size__>
 {// Binary search works only with

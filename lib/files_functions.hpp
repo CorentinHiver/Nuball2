@@ -76,15 +76,15 @@ bool file_exists(std::string fileName)
   return false;
 }
 
-std::string & makeFolder(std::string & folderName)
+std::string & push_back_if_none(std::string & string, char const & character)
 {
-  if (folderName.back() != '/') folderName.push_back('/');
-  return folderName;
+  if (string.back() != character) string.push_back(character);
+  return string;
 }
 
 bool folder_exists(std::string folderName)
 {
-  makeFolder(folderName);
+  push_back_if_none(folderName, '/');
   DIR *dp = nullptr;
   dp = opendir(folderName.c_str());
   bool ret = (dp != nullptr);
@@ -95,7 +95,7 @@ bool folder_exists(std::string folderName)
 
 bool folder_exists(std::string folderName, bool const & verbose)
 {
-  makeFolder(folderName);
+  push_back_if_none(folderName, '/');
   if (folder_exists(folderName)) return true;
   if (verbose) std::cout << "Folder " << folderName << " not found..." << std::endl;
   return false;
@@ -118,7 +118,7 @@ void create_folder_if_none(std::string const & folderName)
 int nb_files_in_folder(std::string & folderName)
 {
   int ret = -1;
-  makeFolder(folderName);
+  push_back_if_none(folderName, '/');
   DIR *dp = nullptr;
   dp = opendir(folderName.c_str());
   if(dp == nullptr) ret = -1;
@@ -135,7 +135,7 @@ int nb_files_in_folder(std::string & folderName)
 std::string get_filename_at(std::string & folderName, int pos)
 {
   std::string ret;
-  makeFolder(folderName);
+  push_back_if_none(folderName, '/');
   struct dirent *file = nullptr;
   DIR *dp = nullptr;
   dp = opendir(folderName.c_str());
@@ -153,7 +153,7 @@ std::string get_filename_at(std::string & folderName, int pos)
 int check_new_file(std::string & folderName, std::string & lastFile)
 {
   int ret = -1;
-  makeFolder(folderName);
+  push_back_if_none(folderName, '/');
   DIR *dp = nullptr;
   dp = opendir(folderName.c_str());
   struct dirent *file = nullptr;
@@ -219,6 +219,14 @@ template <class N, class D> std::string procent(N const & n, D const & d)
   return (std::to_string(100*static_cast<double>(n)/static_cast<double>(d))+"%");
 }
 
+
+// ----------------------------------- //
+// ----------------------------------- //
+//        PATH FOLDERS AND FILES
+// ----------------------------------- //
+// ----------------------------------- //
+
+
 /**
  * @brief Object used to hold a folder's name
  */
@@ -231,50 +239,62 @@ public:
   /**
    * @brief Turns a string to a folder's name.
    * 
-   * Basically, it is simply ensured that the name ends with a '/'
+   * @details
+   * Basically, it is simply ensures that the name ends with a '/'
    * 
    * Also, it is the base class of Path class
   */
   Folder(std::string const & folder) : m_folder (folder)
   {
-    make(m_folder);
+    make();
   }
 
   Folder(const char * folder) : m_folder (std::string(folder))
   {
-    make(m_folder);
+    make();
   }
 
   Folder & operator=(std::string const & folder)
   {
     m_folder = folder;
-    make(m_folder);
+    make();
     return *this;
   }
 
   Folder & operator=(const char * folder)
   {
-    m_folder = folder;
-    make(m_folder);
+    return (*this = std::string(folder));
+  }
+
+  Folder & operator+=(std::string const & folder)
+  {
+    m_folder += std::string(folder);
+    return *this;
+  }
+
+  Folder & operator+=(const char * folder)
+  {
+    m_folder += std::string(folder);
     return *this;
   }
 
   operator std::string() const & {return m_folder;}
-  operator bool() const & {return m_ok;}
-  std::string const & get() const {return m_folder;}
+  operator bool()        const & {return m_ok    ;}
+  
+  std::string const & string() const {return m_folder;}
+  std::string const & get()    const {return m_folder;}
   std::string name() const {auto ret = m_folder; ret.pop_back(); return ret;}
 
-  void make(std::string & folder)
+  void make()
   {
-    if (folder.size() == 0) m_ok = false;
+    if (m_folder.size() == 0) m_ok = false;
     else
     {
-      if (folder.back() != '/') folder.push_back('/');
+      if (m_folder.back() != '/') m_folder.push_back('/');
       m_ok = true;
     }
   }
   
-
 private:
   bool m_ok = false;
   std::string m_folder;
@@ -282,18 +302,13 @@ private:
 
 Folder operator+(std::string string, Folder const & folder)
 {
-  return Folder(string + folder.get());
+  return Folder(string + folder.string());
 }
 
-template <class... T> void print (Folder const & f)
+std::ostream& operator<<(std::ostream& cout, Folder const & folder)
 {
-  std::cout << f.get() << std::endl;
-}
-
-template <class... T> void print (Folder const & f, T const &... t2)
-{
-  print(f);
-  print(t2...);
+  cout << folder.string();
+  return cout;
 }
 
 /**
@@ -307,28 +322,53 @@ public:
 
   Folders(std::vector<std::string> const & folders)
   {
-    for (auto const & folder : folders) m_folders.push_back(Folder(folder));
+    for (auto const & folder : folders) {m_folders.push_back(Folder(folder));}
+  }
+
+  Folders(std::vector<Folder> const & folders) {m_folders = folders;}
+
+  Folders(Folders const & folders) { m_folders = folders.m_folders; }
+
+  Folders& operator=(std::vector<std::string> const & folders)
+  {
+    for (auto const & folder : folders) {m_folders.push_back(Folder(folder));} return *this;
+  }
+  Folders& operator=(std::vector<Folder> const & folders) {m_folders = folders;return *this;}
+  Folders& operator=(Folders const & folders) { m_folders = folders.m_folders; return *this;}
+
+  operator std::string() 
+  {
+    Folder ret;
+    for (auto const & folder : m_folders) ret+=(folder);
+    return ret;
   }
 
   operator std::vector<Folder>() const &  {return m_folders;}
-  std::vector<Folder> const & get() const {return m_folders;}
+
+  auto begin() const {return m_folders.begin();}
+  auto end  () const {return m_folders.end();}
+
+  auto const & list() const {return m_folders;}
+  auto const & get()  const {return m_folders;}
 
 private:
+
   std::vector<Folder> m_folders;
 };
 
-template <class... T> void print (Folders const & f)
+std::ostream& operator<<(std::ostream& cout, Folders const & folders)
 {
-  print(f.get());
+  for (auto const & folder : folders) cout << folder;
+  return cout;
 }
-
 
 /**
  * @brief Object used to hold the complete path of a giver folder
  * 
- * Absolute path only
- * 
+ * @details
  * You can use either a full path from the root ("/.../.../") or from the home directory ("~/.../.../")
+ * 
+ * So far, relative paths are not supported (yet hopefully)
  * 
  */
 class Path
@@ -340,7 +380,14 @@ public:
   /**
    * @brief Turns a string to a path, creating it if create = true and it doesn't already exists
   */
-  Path(std::string const & path, bool create = false) : m_path(path)
+  Path(std::string const & path, bool const & create = false) : m_path(path) {load(create);}
+
+    /**
+   * @brief Turns a C string to a path, creating it if create = true and it doesn't already exists
+  */
+  Path(const char* c_str, bool const & create = false) : m_path(std::string(c_str)) {load(create);}
+
+  void load(bool const & create = false)
   {
     if (m_path[0]=='/')
     {// Absolute path
@@ -355,76 +402,46 @@ public:
       m_exists = false;
     }
 
-    makeFolder(m_path);
+    // To ensure it finishes with a '/' :
+    push_back_if_none(m_path, '/');
+
+    // To ensure it exists :
     m_exists = folder_exists(m_path);
 
-    // getList
-
-    if (!m_exists && create) create_folder_if_none(m_path);
+    // Create the folder if it doesn't exist yet :
+    if (!m_exists && create) this -> make();
     if (!folder_exists(m_path))
     {
       throw std::runtime_error(m_path+" doesn't exist !!");
       m_exists = false;
     }
+    makeFolderList(m_path);
   }
 
-    /**
-   * @brief Turns a C string to a path, creating it if create = true and it doesn't already exists
-  */
-  Path(const char* c_str, bool create = false) : m_path(std::string(c_str))
+  Folders makeFolderList(std::string const & path)
   {
-    if (m_path[0]=='/')
-    {// Absolute path
-    }
-    else if (m_path[0]=='~')
-    {// Home path
-      m_path = std::string(std::getenv("HOME"))+m_path;
-    }
-    else
-    {// Relative path
-      print("Relative paths aren't supported, sorry !");
-      m_exists = false;
-    }
-
-    makeFolder(m_path);
-    m_exists = folder_exists(m_path);
-
-    // getList
-
-    if (!m_exists && create) create_folder_if_none(m_path);
-    if (!folder_exists(m_path))
-    {
-      print(m_path,"doesn't exist !!");
-      m_exists = false;
-    }
+    return Folders(getList(path,'/'));
   }
 
-  int nbFiles() {return nb_files_in_folder(m_path);}
+  int  nbFiles() {return nb_files_in_folder(m_path);}
   bool exists() {return folder_exists(m_path);}
-  bool create() {create_folder_if_none(m_path); return this -> exists();}
-
-  static Folders extractFolders(Path & path)
-  {
-    return getList(path.m_path,'/');
-  }
-
-  static Path make(std::string const & file) {return Path(getPath(file));}
+  bool make() {create_folder_if_none(m_path); return this -> exists();}
 
   std::string const & path() const {return m_path;}
   
-  operator std::string() const & {if (!m_exists) print("Carefull, you manipulate not existing folder"); return m_path;}
+  std::string const & get() const {if (!m_exists) print("Carefull, you manipulate not existing folder"); return m_path;}
+  std::string const & string() const {return(get());}
+  operator std::string() const & {return (get());}
   auto c_str() {return m_path.c_str();}
 
-  std::string operator+(std::string const & addString)
+  Path operator+(std::string const & addString)
   {
     return (m_path+addString);
   }
-
-  std::string operator+(const char* addString)
+  Path operator+(const char* addString)
   {
     return (m_path+static_cast<std::string>(addString));
   }
-
   Path operator+(Folder const & folder)
   {
     return Path(m_path+folder);
@@ -433,7 +450,7 @@ public:
   Path & operator=(std::string const & inputString) 
   {
     m_path = inputString;
-    makeFolder(m_path);
+    push_back_if_none(m_path, '/');
     m_exists = folder_exists(m_path);
     if (!folder_exists(m_path))
     {
@@ -442,14 +459,12 @@ public:
     }
     return *this;
   }
-
   Path & operator=(Path & path) 
   {
     m_path = path.m_path;
     m_exists = path.m_exists;
     return *this;
   }
-
   Path & operator=(const char* path) 
   {
     m_path = path;
@@ -460,15 +475,19 @@ public:
   Path & operator+=(std::string const & addString)
   {
     auto str = addString;
-    makeFolder(str);
+    push_back_if_none(str, '/');
     m_path+=str;
     return *this;
   }
 
-  bool operator==(std::string const & comprString)
+  bool operator==(std::string const & cmprStr)
   {
-    return (comprString == m_path);
+    return (cmprStr == m_path);
   }
+
+  static Path home() {return Path(std::string(std::getenv("HOME")));}
+  static Path pwd() {return Path(std::string(std::getenv("pwd")));}
+  static Path current_directory() {return Path(std::string(std::getenv("pwd")));}
 
 private:
   bool m_exists = false;
@@ -476,31 +495,29 @@ private:
   Folders m_recursive_folders;
 };
 
-template <class... T> void print (Path const & p)
+std::ostream& operator<<(std::ostream& cout, Path const & p)
 {
-  std::cout << p.path() << std::endl;
+  cout << p.path();
+  return cout;
 }
 
-template <class... T> void print (Path const & f, T const &... t2)
-{
-  print(f);
-  print(t2...);
-}
-
+/**
+ * @brief Contains only the name and the extension of a file, not its path
+ */
 class Filename
 {
 public:
   Filename(){}
-  Filename(std::string const & _filename) : m_filename(_filename) 
+  Filename(std::string const & _filename) : m_fullname(_filename) 
   {
     this -> fill(_filename);
   }
 
-  Filename(Filename const & _filename) : m_filename(_filename.m_filename), m_name(_filename.m_name), m_extension(_filename.m_extension) {}
+  Filename(Filename const & _filename) : m_fullname(_filename.m_fullname), m_name(_filename.m_name), m_extension(_filename.m_extension) {}
 
   Filename & operator=(Filename const & _filename)
   {
-    m_filename = _filename.filename();
+    m_fullname = _filename.fullname();
     m_name = _filename.name();
     m_extension = _filename.extension();
     return *this;
@@ -508,92 +525,127 @@ public:
 
   Filename & operator=(std::string const & _filename)
   {
-    m_filename = _filename;
+    m_fullname = _filename;
     this -> fill(_filename);
     return *this;
   }
 
-  operator std::string() const & {return m_filename;}
+  operator std::string() const & {return m_fullname;}
+  std::string const & get() const {return m_fullname;}
 
-  std::string const & filename() const {return m_filename;}
+  std::string const & fullname() const {return m_fullname;}
   std::string const & name() const {return m_name;}
   std::string const & extension() const {return m_extension;}
-  Path const & path() const {return m_path;}
 
 private:
 
   void fill(std::string const & filename)
   {
+    if (getPath(filename).size() > 1) {print("This is not a filename...");}
     m_name = rmPathAndExt(filename);
     m_extension = getExtension(filename);
-    m_path = getPath(filename);
   }
-  std::string m_filename;
+  std::string m_fullname;
   std::string m_name;
   std::string m_extension;
-  Path m_path;
 };
 
-std::ostream& operator<<(std::ostream& os, const Filename& filename)
+std::ostream& operator<<(std::ostream& os, Filename const & filename)
 {
-  os << filename.filename();
+  os << filename.fullname();
   return os;
 }
+
+std::string operator+(Path const & path, Filename const & filename) {return path.get() + filename.get();} 
 
 class File
 {
 public:
-  File(std::string const & file) : m_file(file)
+  File(File const & file) : 
+          m_ok(file.m_ok)    ,
+          m_file(file.m_file), 
+          m_path(file.m_path), 
+          m_name(file.m_name) 
+  { }
+
+  File(std::string const & file) 
   {
-    m_path = getPath(file);
-    if (m_path.exists())
-    {
-      m_name = file;
-      if (file_exists(m_file)) m_exists = true;
-      else print("The file", file, "is unreachable in folder", m_path);
-    }
-    else
-    {
-      print("The path of the file", file, "is unreachable");
-    }
+    fill(file);
+    check();
+  }
+  File(const char * file) 
+  {
+    fill(file);
+    check();
   }
   
-  File(Path const & path, Filename const & filename)
-  {
-    m_path = path;
-    m_name = filename;
-  }
+  File(Path const & path, Filename const & filename) : m_file(path+filename), m_path(path), m_name(filename) {}
 
   auto c_str() {return m_path.c_str();}
 
   File & operator=(std::string const & file) 
   {
+    m_path = getPath(file);
+    return *this;
+  }
+  File & operator=(const char * file) 
+  {
     m_path = Path(file);
     return *this;
   }
+  File & operator=(File const & file) 
+  {
+    m_ok   = file.m_ok  ;
+    m_file = file.m_file;
+    m_path = file.m_path;
+    m_name = file.m_name;
+    return *this;
+  }
 
-  std::string const & file() const {return m_file;}
-  Filename    const & name() const {return m_name;}
-  Path        const & path() const {return m_path;}
+  std::string const & string() const {return m_file;}
+  std::string const & get   () const {return m_file;}
+  std::string const & file  () const {return m_file;}
+  operator std::string() const &     {return m_file;}
+  Filename    const & name  () const {return m_name;}
+  Path        const & path  () const {return m_path;}
+
+  std::string const & extension () const {return m_name.extension();}
+
+  operator bool() const & {return m_ok;}
+  bool const & ok()       {return m_ok;}
 
 private:
-  bool m_exists = false;
+
+  void check()
+  {
+    if (m_path.exists())
+    {
+      if (file_exists(m_file)) m_ok = true;
+      else print("The file", m_file, "is unreachable in folder", m_path);
+    }
+    else
+    {
+      print("The path of the file", m_file, "is unreachable");
+    }
+  }
+
+  void fill(std::string const & file)
+  {
+    m_file = file;
+    m_path = getPath(file);
+    m_name = removePath(file);
+  }
+
+  bool m_ok = false;
   std::string m_file; // Full path + name + extension
-  Filename m_name; // Name + extension
-  Path m_path; // Path
+  Path m_path;        // Path
+  Filename m_name;    // Name + extension
 };
 
-template <class... T> void print (File const & f)
+std::ostream& operator<<(std::ostream& cout, File const & file)
 {
-  print(f.file());
+  cout << file;
+  return cout;
 }
-
-template <class... T> void print (File const & f, T const &... t2)
-{
-  print(f);
-  print(t2...);
-}
-
-
 
 #endif //FILES_HPP

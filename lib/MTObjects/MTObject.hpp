@@ -35,8 +35,16 @@ public:
       TThread::Initialize();
       ROOT::EnableThreadSafety();
     }
-
     ON = true;
+  }
+
+  static void adjustThreadsNumber(int const & limiting_number, std::string const & print_if_limit = "") 
+  {
+    if (limiting_number<nb_threads) 
+    {
+      nb_threads = limiting_number;
+      print(print_if_limit, "thread number reduced to ", nb_threads);
+    }
   }
 
   template <class Func, class... ARGS>

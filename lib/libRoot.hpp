@@ -52,16 +52,18 @@ void alignator(TTree * tree, int *NewIndex)
   int const NHits = tree -> GetEntries();
   tree -> SetBranchStatus("*", false);// Disables all the branches readability
   tree -> SetBranchStatus("time", true);// Read only the time
-  // tree -> SetBranchStatus("label", true);// Read only the time
+
   std::vector<ULong64_t> TimeStampBuffer(NHits,0);
   ULong64_t TimeStamp = 0; tree->SetBranchAddress("time", &TimeStamp);
-  // UShort_t label = 0; tree->SetBranchAddress("label", &label);
+
+  // First creates a buffer of all the timestamps :
   for (int i = 0; i<NHits; i++)
   {
     tree -> GetEntry(i);
-    // if (i<20) std::cout << label << "\t" << TimeStamp << std::endl;
     TimeStampBuffer[i]=TimeStamp;
   }
+
+  // Then computes the correct order :
   int i = 0, j = 0;
   ULong64_t a = 0;
   NewIndex[0]=0;
@@ -70,7 +72,7 @@ void alignator(TTree * tree, int *NewIndex)
   	NewIndex[j]=j;
   	a=TimeStampBuffer[j]; //Focus on this time stamp
   	i=j;
-		// Find the place to insert it amongst the previously sorted
+		// Find the place to insert it amongst the previously sorted timestamps
   	while((i > 0) && (TimeStampBuffer[NewIndex[i-1]] > a))
   	{
     	NewIndex[i]=NewIndex[i-1];
@@ -78,13 +80,13 @@ void alignator(TTree * tree, int *NewIndex)
   	}
   	NewIndex[i]=j;
 	}
-  tree -> SetBranchStatus("*", true); //enables again the whole tree
+  tree -> SetBranchStatus("*", true); //enables again the whole tree to be read
 }
 
 void test_alignator(TTree *tree, int* NewIndex= nullptr, bool useNewIndex = false)
 {
   tree -> SetBranchStatus("*", false);// Disables all the branches readability
-  tree -> SetBranchStatus("time", true);// Eneables to read only the time
+  tree -> SetBranchStatus("time", true);// Enables to read only the time
   ULong64_t TimeStamp; tree->SetBranchAddress("time", &TimeStamp);
   ULong64_t PrevTimeStamp = 0; int j = 0;
   int maxIt = tree -> GetEntries();

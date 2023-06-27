@@ -68,14 +68,14 @@ void Counters::set_hit(Event const & event, int const & i)
   if(isGe[label])
   {
     RawGe++;
-    auto const & clover = labelToClover_fast[label];
+    auto const & clover = labelToClover[label];
     Ge_Clover[clover] = true;
     list_clovers.push_back_unique(clover);
   }
   else if (isBGO[label])
   {
     RawBGO++;
-    auto const & clover = labelToClover_fast[label];
+    auto const & clover = labelToClover[label];
     BGO_Clover[clover] = true;
     list_clovers.push_back_unique(clover);
   }

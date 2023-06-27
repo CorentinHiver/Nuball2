@@ -1,9 +1,6 @@
 // 1. Parameters
-  // RF : 
-#define USE_RF 200 //ns
   // Detectors :
-#define USE_DSSD
-#define USE_PARIS
+#define USE_LICORNE
   // Triggers :
 #define KEEP_ALL
 
@@ -24,11 +21,11 @@
 #include "EventBuilder_136.hpp" // Event builder for this experiment
 
 // 3. Declare some global variables :
-std::string IDFile = "index_129.list";
-std::string calibFile = "136.calib";
-Folder manip = "N-SI-136";
-std::string list_runs = "list_runs.list";
-std::string time_ref = "301";
+std::string IDFile = "index_120.list";
+std::string calibFile = "calib_120.dat";
+Folder manip = "N-SI-120";
+std::string list_runs = "calib_files.list";
+std::string time_ref = "201";
 std::string timewindow = "1500";
 int nb_files_ts = 20;
 bool overwrite = true; // Overwrite already existing converted root files
@@ -40,16 +37,15 @@ void convert(Hit & hit, FasterReader & reader, DetectorsList const & detList, Ca
   if (!detList || !timeshifts || !calibration) return;
 
   // Extracting the run name :
-  File filename = reader.getFilename(); // "/path/to/manip/run_number.fast/run_number_filenumber.fast"
+  Filename filename = reader.getFilename(); // "/path/to/manip/run_number.fast/run_number_filenumber.fast"
   std::string run_path = filename.path();   // "/path/to/manip/run_number.fast/"
   std::string temp = run_path;              // "/path/to/manip/run_number.fast/"
   temp.pop_back();                          // "/path/to/manip/run_number.fast"
   std::string run = rmPathAndExt(temp);     //                "run_number"
 
   // Setting the name of the output file :
-  Path outFolder (outPath+run, true);               // /path/to/manip-root/run_number.fast/
-  Filename outFilename(filename.name()+".root");
-  File outfile (outFolder, outFilename); // /path/to/manip-root/run_number.fast/run_number_filenumber.root
+  Path outFolder (outPath+run, true);                      // /path/to/manip-root/run_number.fast/
+  std::string outfile = outFolder+filename.name()+".root"; // /path/to/manip-root/run_number.fast/run_number_filenumber.root
 
   // Important : if the output file already exists, then do not overwrite it !
   if ( !overwrite && file_exists(outfile) ) {print(outfile, "already exists !"); return;}
@@ -79,9 +75,6 @@ void convert(Hit & hit, FasterReader & reader, DetectorsList const & detList, Ca
   print("Read finished here");
 #endif //DEBUG
 
-  // Realign switched hits after timeshifts :
-  Alignator gindex(readTree.get());
-
   // Switch the temporary TTree to reading mode :
   hit.reset();
   readTree -> ResetBranchAddresses();
@@ -90,6 +83,9 @@ void convert(Hit & hit, FasterReader & reader, DetectorsList const & detList, Ca
   readTree -> SetBranchAddress("nrjcal" , &hit.nrjcal);
   readTree -> SetBranchAddress("nrj2"   , &hit.nrj2);
   readTree -> SetBranchAddress("pileup" , &hit.pileup);
+
+  // Realign shuffled hits after timeshifts :
+  Alignator gindex(readTree.get());
 
   // Initialize output TTree :
   std::unique_ptr<TTree> outTree(new TTree("Nuball2","Nuball2"));

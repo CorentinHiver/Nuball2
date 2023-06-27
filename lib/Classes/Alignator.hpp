@@ -7,7 +7,10 @@ class Alignator
 {
 public:
   Alignator(TTree* tree);
-  int const & operator[](int const & i) const {return m_index[i];}
+  auto const & operator[](int const & i) const {return m_index[i];}
+
+  auto begin() {return m_index.begin();}
+  auto end() {return m_index.end();}
 
 private:
   ULong64_t m_nb_data = 0;

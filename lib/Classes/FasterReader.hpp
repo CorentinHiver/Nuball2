@@ -143,7 +143,7 @@ public:
   /**
    * @brief Get the name of the file being read
    */
-  std::string const & getFilename() const {return m_filename;}
+  auto const & getFilename() const {return m_filename;}
 
 private:
   
@@ -152,13 +152,11 @@ private:
    */
   bool Initialize();
 
-
   bool ReadSimple();
   bool ReadGroup();
   void ReadDataGroup(faster_data_p const & _data);
   bool ReadData(faster_data_p const & _data);
   bool switch_alias(uchar const & _alias, faster_data_p const & _data);
-
 
   bool InitializeReader();
 
@@ -166,16 +164,16 @@ private:
             m_cursor  =  0,
             m_counter =  0;
 
-  Hit*        m_hit = nullptr;
-  Hit         m_empty_hit;
-  std::string m_filename = "";
-  bool        m_kReady   = true,
-              m_write    = false,
-              m_QDCx[4]  = {1,0,0,0};
-  ushort      m_group_read_cursor  = 0,
-              m_group_write_cursor = 0,
-              m_inGroup  = false;
+  Hit*   m_hit = nullptr;
+  Hit    m_empty_hit;
+  File   m_filename = "";
+  bool   m_kReady   = true,
+         m_write    = false;
 
+  // Grouped data management :      
+  ushort m_group_read_cursor  = 0,
+         m_group_write_cursor = 0,
+         m_inGroup  = false;
   std::vector<Hit*>     m_hit_group_buffer;
   faster_file_reader_p  m_reader = NULL;
   faster_data_p         m_data;
@@ -206,7 +204,7 @@ bool FasterReader::Initialize()
   #endif //FASTER_GROUP
 
   // Check if the file can be open and read :
-  if (m_filename == "")
+  if (m_filename)
   {
     std::cout << "No file " << m_filename << std::endl;
     return false;

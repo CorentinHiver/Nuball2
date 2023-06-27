@@ -17,11 +17,14 @@ using Pileup_vec = std::vector<bool>;
 class Hit
 {
 public:
+  Hit(){reset();}
+
   Label label  = 0;     // Label
   float nrj    = 0.f;   // Energy
   float nrj2   = 0.f;   // used if QDC2
   NRJ   nrjcal = 0.f;   // Calibrated energy
-  Time  time   = 0;     // Time
+  NRJ   nrj2cal= 0.f;   // Calibrated QDC2
+  Time  time   = 0ull;  // Timestamp ('ull' stands for unsigned long long)
   bool  pileup = false; // Pile-up
 
   void reset()
@@ -29,12 +32,11 @@ public:
     label  = 0;
     nrj    = 0.f;
     nrj2   = 0.f;
+    nrj2cal= 0.f;
     nrjcal = 0.f;
-    time   = 0;
-    pileup = 0;
+    time   = 0ull;
+    pileup = false;
   }
-
-  float gate_ratio(){ return ( (nrj2 != 0.f) ? static_cast<float>( (nrj2-nrj)/nrj2 ) : 1000.f );}
 
   void connect(TTree * tree);
 };
@@ -48,25 +50,23 @@ void Hit::connect(TTree * tree)
   tree -> Branch("pileup" , & pileup );
 }
 
-template <class... T> void print(Hit const & hit, T const & ... t2)
+std::ostream& operator<<(std::ostream& cout, Hit const & hit)
 {
-  print(hit);
-  print(t2...);
+  cout << "l : " << hit.label;
+  if (hit.nrj >0)   cout << " nrj :  "   << hit.nrj ;
+  if (hit.nrj2>0)   cout << " nrj2 : "   << hit.nrj2;
+  if (hit.nrjcal>0) cout << " nrjcal : " << hit.nrjcal;
+  cout << " time : " << hit.time;
+  if (hit.pileup) cout << " pileup";
+  return cout;
 }
 
-void print(Hit hit)
-{
-  std::cout << "l : " << hit.label;
-  if (hit.nrj >0)   std::cout << " nrj :  "   << hit.nrj ;
-  if (hit.nrj2>0)   std::cout << " nrj2 : "   << hit.nrj2;
-  if (hit.nrjcal>0) std::cout << " nrjcal : " << hit.nrjcal;
-  std::cout << " time : " << hit.time;
-  if (hit.pileup) std::cout << " pileup";
-  std::cout << std::endl;
-}
-
+/**
+ * @brief @deprecated
+ * 
+ */
 class Hit_ptr
-{// Deprecated for now
+{
 public:
 
   Label * label  = nullptr; // Label

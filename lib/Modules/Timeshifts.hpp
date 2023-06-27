@@ -402,7 +402,7 @@ void get_first_RF_of_file(FasterReader & reader, Hit & hit, RF_Manager & rf)
   rf.setHit(hit);
 }
 
-void Timeshifts::treatRootFile(std::string const & filename)
+void Timeshifts::treatRootFile(std::string const & filename) // TBD !!
 {
   
 }
@@ -668,7 +668,7 @@ bool Timeshifts::setTimeReference(std::string const & timeRef_name)
 void Timeshifts::setOutDir(std::string const & outDir)
 {
   m_outDir = outDir;
-  makeFolder(m_outDir);
+  push_back_if_none(m_outDir, '/');
 }
 
 void Timeshifts::setOutRoot(std::string const & outroot) 
