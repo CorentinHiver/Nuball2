@@ -20,7 +20,7 @@ public:
     ULong64_t const shifted_time = time+offset;
     if (period == 0)
     {
-      throw std::runtims_error("RF period = 0 !!!");
+      throw std::runtime_error("RF period = 0 !!!");
     }
     if (shifted_time>last_hit)
     {// Normal case : the RF reference timestamp is lower than the shifted timestamps (should also be the case of unshifted timestamp)
