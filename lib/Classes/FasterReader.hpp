@@ -90,7 +90,7 @@ public:
    */
   ~FasterReader()
   {
-    faster_file_reader_close(m_reader);
+    if (m_reader!=NULL) faster_file_reader_close(m_reader);
   }
   
   /**
