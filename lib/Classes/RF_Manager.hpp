@@ -83,7 +83,8 @@ bool RF_Manager::setHit(Hit const & hit)
   if (hit.label == RF_Manager::label)
   {
     last_hit = hit.time;
-    period = hit.nrjcal;
+    period = hit.nrj;
+    if (hit.nrj == 0) period = hit.nrjcal;
     return true;
   }
   else return false;

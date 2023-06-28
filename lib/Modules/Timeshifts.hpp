@@ -402,7 +402,6 @@ void get_first_RF_of_file(FasterReader & reader, Hit & hit, RF_Manager & rf)
   // int i = 0;
   while (reader.Read() && !(hit.label == RF_Manager::label)) continue;
   rf.setHit(hit);
-  // reader.Reset(); TBD !!!
 }
 
 void Timeshifts::treatFile(std::string const & filename)
