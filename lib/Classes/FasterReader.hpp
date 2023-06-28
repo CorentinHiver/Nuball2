@@ -197,7 +197,7 @@ private:
 
 bool FasterReader::Reset()
 {
-  InitializeReader();
+  if (m_reader != NULL) faster_file_reader_close(m_reader);
   m_counter = 0;
   m_group_read_cursor = 0;
   m_group_write_cursor = 0;
@@ -250,7 +250,7 @@ bool FasterReader::Initialize()
 
 bool FasterReader::InitializeReader()
 {
-  if (m_reader != NULL) Reset(); // If the reader has already been used 
+  if (m_reader != NULL) faster_file_reader_close(m_reader);; // If the reader has already been used 
   m_reader = faster_file_reader_open ( m_filename.c_str() );
   if (m_reader == NULL)
   {
