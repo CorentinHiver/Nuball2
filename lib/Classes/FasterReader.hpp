@@ -197,7 +197,6 @@ private:
 
 bool FasterReader::Reset()
 {
-  faster_file_reader_close(m_reader);
   InitializeReader();
   m_counter = 0;
   m_group_read_cursor = 0;

@@ -169,9 +169,11 @@ if (count==0) return;
 // 5. Main
 int main(int argc, char** argv)
 {
+  int nb_threads = 2;
+  if (argc == 3 && strcmp(argv[1],"-m") == 0) nb_threads = atoi(argv[2]);
 
   // MANDATORY : initialize the multithreading !
-  MTObject::Initialize(2);
+  MTObject::Initialize(nb_threads);
 
   // MANDATORY : initialize the detectors labels manager !
   Detectors::Initialize();
