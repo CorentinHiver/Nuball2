@@ -726,7 +726,7 @@ void Timeshifts::setOutRoot(std::string const & outroot)
   m_outRoot = outroot+"dT"; 
   if (extension(m_outRoot) != "root") 
   {
-    m_outRoot = removeExtension(m_outRoot)+"root";
+    m_outRoot = removeExtension(m_outRoot)+".root";
   }
 }
 
