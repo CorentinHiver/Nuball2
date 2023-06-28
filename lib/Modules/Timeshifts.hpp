@@ -183,6 +183,8 @@ private:
   static void treatFilesMT(Timeshifts & ts, MTList<std::string> & files_MT);
   void treatFile(std::string const & filename);
   void treatRootFile(std::string const & filename);
+  void treatFasterFile(std::string const & filename);
+  void Fill(Event const & event);
   void analyse();
   void write();
 
@@ -400,21 +402,35 @@ void get_first_RF_of_file(FasterReader & reader, Hit & hit, RF_Manager & rf)
   // int i = 0;
   while (reader.Read() && !(hit.label == RF_Manager::label)) continue;
   rf.setHit(hit);
-}
-
-void Timeshifts::treatRootFile(std::string const & filename) // TBD !!
-{
-  
+  reader.Reset();
 }
 
 void Timeshifts::treatFile(std::string const & filename)
 {
-  if (extension(filename) == ".root") {treatRootFile(filename); return;}
+  if (extension(filename) == "root") { treatRootFile(filename);}
+  else if (extension(filename) == "fast") { treatFasterFile(filename);}
+}
+
+void Timeshifts::treatRootFile(std::string const & filename) // TBD !!
+{
+  std::unique_ptr<TFile> file (TFile::Open(filename.c_str(), "READ"));
+  std::unique_ptr<TTree> tree (file->Get<TTree>("Nuball"));
+  Event event(tree.get(), "lt");
+  auto const nb_events = tree -> GetEntries();
+  int event_i = 0;
+  while(event_i<nb_events)
+  {
+    tree -> GetEntry(event_i);
+    Fill(event);
+  }
+}
+
+void Timeshifts::treatFasterFile(std::string const & filename)
+{
   Hit hit;
   FasterReader reader(&hit, filename);
   Event event;
   CoincBuilder2 coincBuilder(&event, m_timewindow);
-
 
   uint counter = 0;
   
@@ -422,7 +438,7 @@ void Timeshifts::treatFile(std::string const & filename)
 
 #ifdef USE_RF
   RF_Manager rf;
-//   get_first_RF_of_file()
+  get_first_RF_of_file(reader, hit, rf);
 #endif //USE_RF
 
   while(reader.Read() && ((maxHitsToRead) ? (counter<m_max_hits) : true) )
@@ -445,21 +461,31 @@ void Timeshifts::treatFile(std::string const & filename)
 
     if (coincBuilder.build(hit))
     {
-      auto mult = event.size();
-      if (mult >= m_max_mult &&  mult <= m_min_mult) continue;
-      for (size_t i = 0; i < mult; i++)
+      Fill(event);
+    }
+  }
+}
+
+void Timeshifts::Fill(Event const & event)
+{
+  auto mult = event.size();
+  if (mult >= m_max_mult &&  mult <= m_min_mult) return;
+  for (size_t i = 0; i < mult; i++)
+  {
+    if ( event.labels[i] == m_timeRef_label ) // if the ref detector triggered
+    {
+      auto const & refPos = i;
+      Shift_t deltaT = 0;
+      m_EnergyRef.Fill(event.nrjs[refPos]);
+      for (uchar j = 0; j<mult; j++)
       {
-        if ( event.labels[i] == m_timeRef_label ) // if the ref detector triggered
-        {
-          auto const & refPos = i;
-          Shift_t deltaT = 0;
-          m_EnergyRef.Fill(event.nrjs[refPos]);
-          for (uchar j = 0; j<mult; j++)
-          {
-            if (event.labels[j] == m_timeRef_label) continue; // To reject the time spectra of the time reference
-            deltaT = event.times[refPos]-event.times[j];
-            m_histograms[event.labels[j]].Fill(deltaT); //stored in ps
-}}}}}}
+        if (event.labels[j] == m_timeRef_label) continue; // To reject the time spectra of the time reference
+        deltaT = event.times[refPos]-event.times[j];
+        m_histograms[event.labels[j]].Fill(deltaT); //stored in ps
+      }
+    }
+  }
+}
 
 /**
  * @brief Get which bin holds the X = 0

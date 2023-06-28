@@ -171,14 +171,14 @@ private:
 
   Hit*   m_hit = nullptr;
   Hit    m_empty_hit;
-  File   m_filename = "";
+  std::string   m_filename = "";
   bool   m_kReady   = false,
          m_write    = false;
 
   // Grouped data management :      
   ushort m_group_read_cursor  = 0,
-         m_group_write_cursor = 0,
-         m_inGroup  = false;
+              m_group_write_cursor = 0,
+              m_inGroup  = false;
   std::vector<Hit*>     m_hit_group_buffer;
   faster_file_reader_p  m_reader = NULL;
   faster_data_p         m_data;
@@ -216,7 +216,7 @@ bool FasterReader::Initialize()
   #endif //FASTER_GROUP
 
   // Check if the file can be open and read :
-  if (!m_filename)
+  if (m_filename == "")
   {
     std::cout << "No file " << m_filename << std::endl;
     return false;
@@ -236,7 +236,7 @@ bool FasterReader::Initialize()
   file.close();
 
   // Check the extension of the file, then initialise the reader :
-  if (m_filename.extension() == "fast")
+  if (extension(m_filename) == "fast")
   {
     std::cout << "Reader set to " << m_filename << std::endl;
     return InitializeReader();
