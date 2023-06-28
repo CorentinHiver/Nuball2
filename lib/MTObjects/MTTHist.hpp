@@ -172,6 +172,8 @@ public:
   THist * Get() {return m_collection[getThreadIndex()];}
   THist * operator[](int const & thread_nb) {return m_collection[thread_nb];}
 
+  auto const & Integral() const {return m_integral;}
+
   #endif //MTTHIST_MONO
 
   std::string const & GetName() const {return m_str_name;}
@@ -184,6 +186,7 @@ private:
   TFile* m_file = nullptr;
   bool m_exists = false;
   std::string m_str_name = "";
+  ulonglong m_integral = 0ull;
 
   THist * m_merged = nullptr;
 
@@ -239,6 +242,7 @@ template <class THist>
 template <class... ARGS>
 inline void MTTHist<THist>::Fill(ARGS &&... args)
 {
+  m_integral++;
 #ifdef MTTHIST_MONO
   m_mutex.lock();
   m_merged -> Fill(std::forward<ARGS>(args)...);

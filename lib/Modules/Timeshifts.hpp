@@ -402,7 +402,7 @@ void get_first_RF_of_file(FasterReader & reader, Hit & hit, RF_Manager & rf)
   // int i = 0;
   while (reader.Read() && !(hit.label == RF_Manager::label)) continue;
   rf.setHit(hit);
-  reader.Reset();
+  // reader.Reset(); TBD !!!
 }
 
 void Timeshifts::treatFile(std::string const & filename)
@@ -411,7 +411,7 @@ void Timeshifts::treatFile(std::string const & filename)
   else if (extension(filename) == "fast") { treatFasterFile(filename);}
 }
 
-void Timeshifts::treatRootFile(std::string const & filename) // TBD !!
+void Timeshifts::treatRootFile(std::string const & filename) 
 {
   std::unique_ptr<TFile> file (TFile::Open(filename.c_str(), "READ"));
   std::unique_ptr<TTree> tree (file->Get<TTree>("Nuball"));
@@ -551,8 +551,19 @@ void Timeshifts::analyse()
 
 #ifdef USE_RF
   // Calculate the RF timeshift first :
-  m_histo_ref_VS_RF.Merge();
-  m_timeshifts[RF_Manager::label] = static_cast<Shift_t>(( m_histo_ref_VS_RF->GetMaximumBin() - (m_histo_ref_VS_RF -> GetNbinsX()/2) ) * m_rebin["RF"]);
+  bool has_RF = (m_histo_ref_VS_RF.Integral() > 0);
+
+  if (has_RF)
+  {
+    m_histo_ref_VS_RF.Merge();
+    m_timeshifts[RF_Manager::label] = static_cast<Shift_t>( (m_histo_ref_VS_RF->GetMaximumBin() - (m_histo_ref_VS_RF -> GetNbinsX()/2)) * m_rebin["RF"] );
+  }
+  else 
+  {
+    print("ATTENTION : THIS RUN DOES NOT APPEAR TO CONTAIN ANY RF");
+    print("RF label is :", RF_Manager::label);
+    print("Timing reference is :", m_timeRef_label);
+  }
 #endif //USE_RF
 
   for (size_t label = 0; label<m_detList.size(); label++)
@@ -562,13 +573,16 @@ void Timeshifts::analyse()
     m_histograms[label].Merge();
 
   #ifdef USE_RF
-    m_histograms_VS_RF[label].Merge();
-    if (label == RF_Manager::label)
+    if (has_RF)
     {
-      if (m_verbose) print("RF :", m_timeshifts[RF_Manager::label], "with", m_histo_ref_VS_RF->GetMaximum(), "bins in peak");
-      m_histo_RF_corrected.reset(shiftTimeSpectra(m_histo_ref_VS_RF, 251));
-      outDeltaTfile << label << "\t" << m_timeshifts[RF_Manager::label] << std::endl;
-      continue;
+      m_histograms_VS_RF[label].Merge();
+      if (label == RF_Manager::label)
+      {
+        if (m_verbose) print("RF :", m_timeshifts[RF_Manager::label], "with", m_histo_ref_VS_RF->GetMaximum(), "bins in peak");
+        m_histo_RF_corrected.reset(shiftTimeSpectra(m_histo_ref_VS_RF, 251));
+        outDeltaTfile << label << "\t" << m_timeshifts[RF_Manager::label] << std::endl;
+        continue;
+      }
     }
   #endif //USE_RF
 
@@ -587,10 +601,20 @@ void Timeshifts::analyse()
     if (type == "dssd")
     {
     #ifdef USE_RF
-      auto amppic = m_histograms_VS_RF[label] -> GetMaximum();
-      float zero = ( m_histograms_VS_RF[label] -> FindFirstBinAbove(amppic/2) - (m_histograms_VS_RF[label] -> GetNbinsX()/2) ) * m_rebin["dssd"] ;
-      outDeltaTfile << label << "\t" << static_cast<float>(m_timeshifts[RF_Manager::label]-zero) << std::endl;
-      if (m_verbose) print("Edge :", zero, "with", static_cast<int>(m_histograms_VS_RF[label] -> GetMaximum()), "counts in peak");
+      if (has_RF)
+      {
+        auto amppic = m_histograms_VS_RF[label] -> GetMaximum();
+        float zero = ( m_histograms_VS_RF[label] -> FindFirstBinAbove(amppic/2) - (m_histograms_VS_RF[label] -> GetNbinsX()/2) ) * m_rebin["dssd"] ;
+        outDeltaTfile << label << "\t" << static_cast<float>(m_timeshifts[RF_Manager::label]-zero) << std::endl;
+        if (m_verbose) print("Edge :", zero, "with", static_cast<int>(m_histograms_VS_RF[label] -> GetMaximum()), "counts in peak");
+      }
+      else 
+      {
+        auto amppic = m_histograms[label] -> GetMaximum();
+        auto pospic = ( m_histograms[label] -> FindLastBinAbove(amppic*0.8) - (m_histograms[label] -> GetNbinsX()/2) ) * m_rebin["dssd"] ;
+        outDeltaTfile << label << "\t" << pospic << std::endl;
+        if (m_verbose) print( "mean : ", m_histograms[label] -> GetMean(), "with", (int) m_histograms[label] -> GetMaximum(), "counts in peak");
+      }
 
     #else //NO USE_RF
       auto amppic = m_histograms[label] -> GetMaximum();

@@ -23,9 +23,10 @@ P :         RFperiod            Float_t
 
 class Event
 {
+  
 public:
 
-  Event(){initialise();}
+  Event() {initialise();}
 
   Event (Hit const & hit)
   {
