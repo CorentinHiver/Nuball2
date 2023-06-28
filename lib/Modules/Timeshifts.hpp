@@ -415,7 +415,7 @@ void Timeshifts::treatRootFile(std::string const & filename)
 {
   std::unique_ptr<TFile> file (TFile::Open(filename.c_str(), "READ"));
   std::unique_ptr<TTree> tree (file->Get<TTree>("Nuball"));
-  Event event(tree.get(), "lt");
+  Event event(tree.get(), "ltn");
   auto const nb_events = tree -> GetEntries();
   int event_i = 0;
   while(event_i<nb_events)

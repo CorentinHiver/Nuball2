@@ -18,6 +18,10 @@ public:
   #ifdef USE_RF
     // Shifts the time in order to be able to get hits before the hit :
     ULong64_t const shifted_time = time+offset;
+    if (period == 0)
+    {
+      throw std::runtims_error("RF period = 0 !!!");
+    }
     if (shifted_time>last_hit)
     {// Normal case : the RF reference timestamp is lower than the shifted timestamps (should also be the case of unshifted timestamp)
       // dT = (shifted_time-last_hit) corresponds to the time separating the current hit to the reference RF
@@ -27,7 +31,7 @@ public:
       // (Remember we are doing integer arithmetic, period*dT/period != dT)
       // And dT%period is the rest of the integer division, hence the time between the hit and its relative pulse
       // Finally, one need to substract the applied offset in order to get the correct result :
-      return ( static_cast<Long64_t> ((time+offset-last_hit)%period)-offset );
+      return ( static_cast<Long64_t>((shifted_time-last_hit)%period) - offset );
     }
     else
     {// When the data is not correctly ordered :
