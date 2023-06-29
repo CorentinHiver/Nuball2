@@ -70,7 +70,6 @@ void convert(Hit & hit, FasterReader & reader, DetectorsList const & detList, Ca
   Timer read_timer;
   int count = 0;
   int RF_counter = 0;
-  reader.setMaxHits(1.E+5);
   while(reader.Read())
   {
     hit.time+=timeshifts[hit.label];
