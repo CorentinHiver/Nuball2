@@ -5,7 +5,8 @@
 #define USE_DSSD
 #define USE_PARIS
   // Triggers :
-#define KEEP_ALL
+#define TRIGGER
+// #define KEEP_ALL
 
 // 2. Include library
 #include <libCo.hpp>
@@ -36,20 +37,22 @@ bool overwrite = true; // Overwrite already existing converted root files
 // 4. Declare the function to run on each file in parallel :
 void convert(Hit & hit, FasterReader & reader, DetectorsList const & detList, Calibration const & calibration, Timeshifts const & timeshifts, Path const & outPath)
 {
+  Timer timer;
   // Checking the lookup tables :
   if (!detList || !timeshifts || !calibration || !reader) return;
 
   // Extracting the run name :
-  File raw_datafile = reader.getFilename(); // "/path/to/manip/run_number.fast/run_number_filenumber.fast"
-  std::string run_path = raw_datafile.path();   // "/path/to/manip/run_number.fast/"
-  std::string temp = run_path;              // "/path/to/manip/run_number.fast/"
-  temp.pop_back();                          // "/path/to/manip/run_number.fast"
-  std::string run = rmPathAndExt(temp);     //                "run_number"
+  File raw_datafile = reader.getFilename();   // "/path/to/manip/run_number.fast/run_number_filenumber.fast"
+  std::string run_path = raw_datafile.path(); // "/path/to/manip/run_number.fast/"
+  std::string temp = run_path;                // "/path/to/manip/run_number.fast/"
+  temp.pop_back();                            // "/path/to/manip/run_number.fast"
+  std::string run = rmPathAndExt(temp);       //                "run_number"
+  int run_number = std::stoi(lastPart(run,'_'));//                   number
 
   // Setting the name of the output file :
-  Path outFolder (outPath+run, true);               // /path/to/manip-root/run_number.fast/
-  Filename outFilename(raw_datafile.shortName()+".root");
-  File outfile (outFolder, outFilename); // /path/to/manip-root/run_number.fast/run_number_filenumber.root
+  Path outFolder (outPath+run, true);                     // /path/to/manip-root/run_number.fast/
+  Filename outFilename(raw_datafile.shortName()+".root"); //                                     run_number_filenumber.root
+  File outfile (outFolder, outFilename);                  // /path/to/manip-root/run_number.fast/run_number_filenumber.root
 
   // Important : if the output file already exists, then do not overwrite it !
   if ( !overwrite && file_exists(outfile) ) {print(outfile, "already exists !"); return;}
@@ -64,8 +67,10 @@ void convert(Hit & hit, FasterReader & reader, DetectorsList const & detList, Ca
   readTree -> Branch("pileup" , &hit.pileup);
 
   // Loop over the TTree :
+  Timer read_timer;
   int count = 0;
   int RF_counter = 0;
+  reader.setMaxHits(1.E+5);
   while(reader.Read())
   {
     hit.time+=timeshifts[hit.label];
@@ -74,9 +79,10 @@ void convert(Hit & hit, FasterReader & reader, DetectorsList const & detList, Ca
     count++;
     if (hit.label == RF_Manager::label) RF_counter++;
   }
+  read_timer.Stop();
 
 #ifdef DEBUG
-  print("Read finished here,", count,"counts and", RF_counter, "RF counts");
+  print("Read finished here,", count,"counts and", RF_counter, "RF counts, in", read_timer.TimeElapsedSec(),"s");
 #endif //DEBUG
 
 if (count==0) return;
@@ -94,8 +100,10 @@ if (count==0) return;
   readTree -> SetBranchAddress("pileup" , &hit.pileup);
 
   // Initialize output TTree :
-  std::unique_ptr<TTree> outTree(new TTree("Nuball2","Nuball2"));
-  Event event(outTree.get(), "ltnNp", "w");
+  std::unique_ptr<TFile> outFile (TFile::Open(outfile.c_str(), "RECREATE"));
+  outFile -> cd();
+  TTree* outTree = new TTree("Nuball2","Nuball2");
+  Event event(outTree, "ltnNp", "w");
 
   // Initialize event builder based on RF :
   RF_Manager rf;
@@ -115,55 +123,63 @@ if (count==0) return;
   eventBuilder.set_first_hit(hit);
 
   //Loop over the data :
+  Timer convert_timer;
   auto const & nb_data = readTree->GetEntries();
   while (loop<nb_data)
   {
     readTree -> GetEntry(gindex[loop++]);
 
-    // Handle the RF data :
-    if (hit.label == RF_Manager::label)
-    {
-      auto temp = event;
-      event = hit;
-      outTree -> Fill();
-      event = temp;
-      rf.setHit(hit);
-      continue;
-    }
+//     // Handle the RF data :
+//     if (hit.label == RF_Manager::label)
+//     {
+//       auto temp = event;
+//       event = hit;
+//       outTree -> Fill();
+//       event = temp;
+//       rf.setHit(hit);
+//       continue;
+//     }
 
-    // Event building :
+//     // Event building :
     if (eventBuilder.build(hit))
     {
-      counter.count(event); 
-    #ifdef M2G1_TRIG
-      if (counter.nb_modules>2 && counter.clovers.size()>1)
-      {
-        outTree->Fill();
-      }
-    #else
+//       counter.count(event); 
+//     #ifdef TRIGGER
+//       if ((counter.nb_modules>1 && counter.nb_Ge>0) || counter.nb_dssd>0)
+//       {
+//         outTree->Fill();
+//       }
+//     #else
       outTree->Fill();
-    #endif
+//     #endif
     }
-  #ifdef KEEP_ALL
-    if (eventBuilder.isSingle())
-    {
-      auto temp = event;
-      event = eventBuilder.singleHit();
-      outTree -> Fill();
-      event = temp;
-      continue;
-    }
-  #endif
+//   #ifdef KEEP_ALL
+//     if (eventBuilder.isSingle())
+//     {
+//       auto temp = event;
+//       event = eventBuilder.singleHit();
+//       outTree -> Fill();
+//       event = temp;
+//       continue;
+//     }
+//   #endif
   }
+  convert_timer.Stop();
 #ifdef DEBUG
-  print("Conversion finished here");
+  print("Conversion finished here done in", convert_timer.TimeElapsedSec() , "s");
 #endif //DEBUG
-  std::unique_ptr<TFile> outFile (TFile::Open(outfile.c_str(), "RECREATE"));
-  outFile -> cd();
+  // Timer write_timer;
   outTree -> Write();
   outFile -> Write();
   outFile -> Close();
-  print(outfile, "written");
+
+  // write_timer.Stop();
+
+  // float dataSize = raw_datafile.size("Mo");
+  // float outSize = size_file_conversion(outFile->GetSize(), "o", "Mo");
+
+  // timer();
+  // print(outfile, "written in", timer(), timer.unit()+". Input file", dataSize, "Mo and output file", outSize, "Mo : ", 100*outSize/dataSize, "% compression (", dataSize/outSize,"factor)");
 }
 
 // 5. Main

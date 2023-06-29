@@ -26,7 +26,7 @@ public:
   void setRF(RF_Manager* rf) {m_rf = rf;}
   void setFirstRF(Hit const & hit);
   void setRFTime(Time const & _RF_ref_time) {RF_ref_time = _RF_ref_time;}
-  inline void set_last_hit(Hit const & hit);
+  inline void set_last_hit (Hit const & hit);
   inline void set_first_hit(Hit const & hit){set_last_hit(hit);}
 
 private:
@@ -115,16 +115,19 @@ void EventBuilder_136::reset()
 }
 
 
-struct Counter136
+class Counter136
 {
+public:
   int nb_modules = 0;
   int nb_dssd = 0;
-  StaticVector<Label, 24> clovers;
+  int nb_Ge = 0;
+  std::vector<Label> clovers;
 
   void reset() 
   {
     nb_modules = 0; 
     nb_dssd = 0; 
+    nb_Ge = 0; 
     clovers.resize(0);
   }
   
@@ -134,9 +137,10 @@ struct Counter136
     for (size_t hit = 0; hit<event.size(); hit++)
     {
       auto const & label = event.labels[hit];
-      if (isGe[label] || isBGO[label]) clovers.push_back_unique(label);
+      if (isGe[label]) {nb_Ge++; push_back_unique(clovers, labelToClover[label]);}
+      else if(isBGO[label])      push_back_unique(clovers, labelToClover[label]);
       else if (isLaBr3[label] || isParis[label]) nb_modules++;
-      else if (isDSSD[label]) nb_dssd = 0;
+      else if (isDSSD[label])                    nb_dssd++;
     }
     nb_modules+=clovers.size();
   }

@@ -2,6 +2,7 @@
 #define LIBROOTCO_HPP
 
 #include "libCo.hpp"
+#include "files_functions.hpp"
 
 // ********** ROOT includes ********* //
 #include "TCanvas.h"
@@ -104,11 +105,13 @@ void test_alignator(TTree *tree, int* NewIndex= nullptr, bool useNewIndex = fals
 
 
 
-/////////////////////////
-//   CLASS THE TCHAIN  //
-/////////////////////////
+///////////////////////
+//  CLASS THETCHAIN  //
+///////////////////////
 
-/*
+/**
+ * @brief Not functionnal yet
+ * 
  * 1: Add all the files
  * TheTChain chain("Nuball", "/path/to/data/files*.root");
  * chain.Add("/other_path/to/data/files*.root")
@@ -118,10 +121,7 @@ void test_alignator(TTree *tree, int* NewIndex= nullptr, bool useNewIndex = fals
  *
  * 3: Links all the variables
  * chain.SetBranchAddress("branch", &variable);
- *
- *
- */
-
+*/
 class TheTChain
 {
 public:
@@ -176,17 +176,17 @@ private:
 
 void TheTChain::set()
 {
-  for (auto const & expression : m_input_files_expressions)
-  {
-    if (!folder_exists(expression)) {print("folder",getPath(expression),"empty !");return;}
-    if (expression.back() == '/')
-    {// If a folder is given then search the whole folder for .root files
-      findFilesWildcard(expression+"*.root", m_files_vec);
-    }
-    else findFilesWildcard(expression, m_files_vec);
-  }
-  print(m_files_vec);
-  for (auto const & filename : m_files_vec) newTTree(filename);
+  // for (auto const & expression : m_input_files_expressions)
+  // {
+  //   if (!folder_exists(expression)) {print("folder",getPath(expression),"empty !");return;}
+  //   if (expression.back() == '/')
+  //   {// If a folder is given then search the whole folder for .root files
+  //     findFilesWildcard(expression+"*.root", m_files_vec);
+  //   }
+  //   else findFilesWildcard(expression, m_files_vec);
+  // }
+  // print(m_files_vec);
+  // for (auto const & filename : m_files_vec) newTTree(filename);
 }
 
 #endif //LIBROOTCO_HPP

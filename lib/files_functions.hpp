@@ -3,6 +3,7 @@
 
 #include "print.hpp"
 #include "string_functions.hpp"
+#include "MTObjects/MTObject.hpp"
 
 //----------------------------------------------------//
 //       General files and folders manipulations      //
@@ -35,7 +36,7 @@ std::map<std::string, float> size_file_unit =
 
 float size_file_conversion(float const & size, std::string const & unit_i, std::string const & unit_o)
 {
-  return size * (size_file_unit[unit_o]/size_file_unit[unit_i]);
+  return size * (size_file_unit[unit_i]/size_file_unit[unit_o]);
 }
 
 float size_file(std::ifstream& file, std::string const & unit = "o")
@@ -404,17 +405,18 @@ public:
     // To ensure it finishes with a '/' :
     push_back_if_none(m_path, '/');
 
+    if (MTObject::ON) MTObject::shared_mutex.lock();
     // To ensure it exists :
     m_exists = folder_exists(m_path);
-
 
     // Create the folder if it doesn't exist yet :
     if (!m_exists && create) this -> make();
     if (!folder_exists(m_path))
     {
-      throw std::runtime_error(m_path+" doesn't exist !!");
       m_exists = false;
+      throw std::runtime_error(m_path+" doesn't exist !!");
     }
+    if (MTObject::ON) MTObject::shared_mutex.unlock();
     makeFolderList(m_path);
   }
 
@@ -426,7 +428,10 @@ public:
 
   int  nbFiles() {return nb_files_in_folder(m_path);}
   bool exists() {return folder_exists(m_path);}
-  bool make() {create_folder_if_none(m_path); return this -> exists();}
+  bool make() 
+  {
+    
+    create_folder_if_none(m_path); return this -> exists();}
 
   Path & addFolder(Folder const & folder)
   {
@@ -603,7 +608,7 @@ public:
   
   File(Path const & path, Filename const & filename) : m_file(path+filename), m_path(path), m_filename(filename) {}
 
-  auto c_str() {return m_path.c_str();}
+  auto c_str() {return m_file.c_str();}
 
   File & operator=(std::string const & file) 
   {
@@ -637,6 +642,8 @@ public:
 
   operator bool() const & {return m_ok;}
   bool const & ok()       {return m_ok;}
+
+  auto size(std::string const & unit = "o") const {return size_file(m_file, unit);}
 
 private:
 

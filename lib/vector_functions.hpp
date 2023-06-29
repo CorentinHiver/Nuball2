@@ -30,6 +30,10 @@ bool push_back_unique(std::vector<T> & vector, T const & t)
 //   CLASS STATIC VECTOR  //
 ////////////////////////////
 
+/**
+ * @brief An efficient container for dynamic arrays with a known and fixed maximum size
+ * @attention Prototype, have some memory management issues in some cases ...
+*/
 template<class T, std::size_t __size__ = 0>
 class StaticVector
 {
@@ -37,7 +41,18 @@ public:
   StaticVector() : m_static_size(__size__) {m_data = new T[m_static_size];}
   StaticVector(T const & value);
   StaticVector(StaticVector<T, __size__> const & vector);
-  ~StaticVector(){delete[] m_data;}
+  ~StaticVector()
+  {
+    if(m_deleted)
+    {
+      delete[] m_data;
+      m_deleted = true;
+    }
+    else 
+    {
+      print("W Static vector double delete, be careful (this is a just a warning message)");
+    }
+  }
 
   void resize(std::size_t const & size = 0) {m_dynamic_size = size;}
   void static_resize(std::size_t const & size = 0)
@@ -71,6 +86,7 @@ private:
   T *m_data;
   std::size_t m_dynamic_size = 0;
   std::size_t m_static_size = 0;
+  bool m_deleted = false;
 };
 
 template<class T, std::size_t __size__>

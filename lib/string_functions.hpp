@@ -21,7 +21,7 @@ std::vector<std::string> getList(std::string string, char const & sep)
       continue; 
     }
     else if (pos == string.size())
-    {// If the character is at the end of the string, then we have reached then terminate the loop
+    {// If the character is at the end of the string, then we have reached and can terminate the loop
       break;
     }
     else

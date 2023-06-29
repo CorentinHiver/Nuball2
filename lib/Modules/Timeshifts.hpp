@@ -442,7 +442,9 @@ void Timeshifts::treatFasterFile(std::string const & filename)
 
   while(reader.Read() && ((maxHitsToRead) ? (counter<m_max_hits) : true) )
   {
+  #ifdef DEBUG
     if ( (counter%static_cast<uint>(1.E+6)) == 0 ) print(counter);
+  #endif //DEBUG
     counter++;
 
   #ifdef USE_RF
