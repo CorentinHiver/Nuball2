@@ -128,57 +128,57 @@ if (count==0) return;
   {
     readTree -> GetEntry(gindex[loop++]);
 
-//     // Handle the RF data :
-//     if (hit.label == RF_Manager::label)
-//     {
-//       auto temp = event;
-//       event = hit;
-//       outTree -> Fill();
-//       event = temp;
-//       rf.setHit(hit);
-//       continue;
-//     }
+    // Handle the RF data :
+    if (hit.label == RF_Manager::label)
+    {
+      auto temp = event;
+      event = hit;
+      outTree -> Fill();
+      event = temp;
+      rf.setHit(hit);
+      continue;
+    }
 
 //     // Event building :
     if (eventBuilder.build(hit))
     {
-//       counter.count(event); 
-//     #ifdef TRIGGER
-//       if ((counter.nb_modules>1 && counter.nb_Ge>0) || counter.nb_dssd>0)
-//       {
-//         outTree->Fill();
-//       }
-//     #else
+      counter.count(event); 
+    #ifdef TRIGGER
+      if ((counter.nb_modules>1 && counter.nb_Ge>0) || counter.nb_dssd>0)
+      {
+        outTree->Fill();
+      }
+    #else
       outTree->Fill();
-//     #endif
+    #endif
     }
-//   #ifdef KEEP_ALL
-//     if (eventBuilder.isSingle())
-//     {
-//       auto temp = event;
-//       event = eventBuilder.singleHit();
-//       outTree -> Fill();
-//       event = temp;
-//       continue;
-//     }
-//   #endif
+  #ifdef KEEP_ALL
+    if (eventBuilder.isSingle())
+    {
+      auto temp = event;
+      event = eventBuilder.singleHit();
+      outTree -> Fill();
+      event = temp;
+      continue;
+    }
+  #endif
   }
   convert_timer.Stop();
 #ifdef DEBUG
   print("Conversion finished here done in", convert_timer.TimeElapsedSec() , "s");
 #endif //DEBUG
-  // Timer write_timer;
+  Timer write_timer;
   outTree -> Write();
   outFile -> Write();
   outFile -> Close();
 
-  // write_timer.Stop();
+  write_timer.Stop();
 
-  // float dataSize = raw_datafile.size("Mo");
-  // float outSize = size_file_conversion(outFile->GetSize(), "o", "Mo");
+  float dataSize = raw_datafile.size("Mo");
+  float outSize = size_file_conversion(outFile->GetSize(), "o", "Mo");
 
-  // timer();
-  // print(outfile, "written in", timer(), timer.unit()+". Input file", dataSize, "Mo and output file", outSize, "Mo : ", 100*outSize/dataSize, "% compression (", dataSize/outSize,"factor)");
+  timer();
+  print(outfile, "written in", timer(), timer.unit()+". Input file", dataSize, "Mo and output file", outSize, "Mo : ", 100*outSize/dataSize, "% compression (", dataSize/outSize,"factor)");
 }
 
 // 5. Main
