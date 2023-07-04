@@ -6,6 +6,4 @@
 *.json
 *.log
 NearLine/NearLine-lib/Modules/Analyse_W.hpp
-RootReader/Convertor
-RootReader/Reader
 FasterLib/Convertor/Faster2Root
