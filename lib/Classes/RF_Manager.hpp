@@ -3,8 +3,12 @@
 
 #include "../libCo.hpp"
 #include "../libRoot.hpp"
+#include "Hit.hpp"
 
-
+/**
+ * @brief Class used to manage the RF
+ * 
+*/
 class RF_Manager
 {
 public:
@@ -41,7 +45,7 @@ public:
       return ( static_cast<Long64_t> (period-(last_hit-time-offset)%period)-offset );
     }
   #else //NO USE_RF
-    print("NO RF IS USED !! Please set RF_USE [period_value]");
+    print("NO RF IS USED !! Please set USE_RF [period_value]");
     return static_cast<Long64_t>(time)-offset;
   #endif //USE_RF
   }
@@ -60,6 +64,8 @@ public:
   {
     return (pulse_ToF(hit,-borneMin) < borneMax);
   }
+
+  void set(ULong64_t _last_hit, ULong64_t _period) {last_hit = _last_hit; period = _period;}
 
   ULong64_t last_hit = 0;
 

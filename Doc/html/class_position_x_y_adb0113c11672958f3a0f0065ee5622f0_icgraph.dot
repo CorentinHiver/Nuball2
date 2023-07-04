@@ -1,0 +1,19 @@
+digraph "PositionXY::y"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="RL";
+  Node1 [label="PositionXY::y",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="PositionXY::distance",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_position_x_y.html#aea5a76a9f74484b7e9ebf9a0157f355a",tooltip=" "];
+  Node2 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="PositionXY::distanceTo",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_position_x_y.html#ab72e29ae813c686380dd1d14bb45c245",tooltip=" "];
+  Node2 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="ParisCluster::Initialize\lBidims",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_paris_cluster.html#a81835073d597336589fb593dff8d37e0",tooltip=" "];
+  Node1 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="PositionXY::operator=",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_position_x_y.html#a8a1e9503abf5defbf463133c7bf4f13b",tooltip=" "];
+  Node1 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="PositionXY::Set",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_position_x_y.html#ac33d5d71f3a3ea3f0020387edd207fdd",tooltip=" "];
+  Node6 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+}

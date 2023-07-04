@@ -1,8 +1,11 @@
 #ifndef PARAMETERS_H
 #define PARAMETERS_H
 
-#include "../../lib/MTObjects/MTList.hpp"
-#include "../../lib/Analyse/Sorted_Event.hpp"
+#include <FilesManager.hpp>
+#include <MTList.hpp>
+#include <Sorted_Event.hpp>
+#include <MTCounter.hpp>
+#include <Timer.hpp>
 
 class Parameters
 {
@@ -51,7 +54,7 @@ private:
 
   std::map<std::string, std::vector<std::string>> m_parameters; // key : module, value : list of module's parameters
 
-  ushort m_nbThreads = 1;
+  ushort m_nbThreads = 2;
 
   std::string m_dataPath;
   FilesManager m_files;
@@ -117,6 +120,7 @@ bool Parameters::readParameters(std::string const & file)
         parameter.erase(0,1); //"pop_front"
         current_param_on = true;
         current_param = parameter;
+        m_parameters[current_param].push_back("activated");
         continue;
       }
 
@@ -149,10 +153,16 @@ bool Parameters::setData()
     std::string temp = "NULL";
     while (is >> temp)
     {
-      if (temp == "list_runs:")
+      if (temp == "activated") continue;
+      else if (temp == "list_runs:")
       {
         is >> temp;
         m_list_runs = listFileReader(temp);
+      }
+      else if (temp == "run:")
+      {
+        is >> temp;
+        m_list_runs = temp;
       }
       else if (temp == "folder:")
       {

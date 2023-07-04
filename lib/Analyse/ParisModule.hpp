@@ -1,7 +1,7 @@
 #ifndef PARISMODULE_H
 #define PARISMODULE_H
 
-#include "../utils.hpp"
+#include "../libRoot.hpp"
 #include "ParisCrystal.hpp"
 
 class ParisModule

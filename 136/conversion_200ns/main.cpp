@@ -32,7 +32,7 @@ std::string list_runs = "list_runs.list";
 std::string time_ref = "301";
 std::string timewindow = "1500";
 int nb_files_ts = 20;
-bool overwrite = true; // Overwrite already existing converted root files
+bool overwrite = false; // Overwrite already existing converted root files
 
 // 4. Declare the function to run on each file in parallel :
 void convert(Hit & hit, FasterReader & reader, DetectorsList const & detList, Calibration const & calibration, Timeshifts const & timeshifts, Path const & outPath)
@@ -69,19 +69,19 @@ void convert(Hit & hit, FasterReader & reader, DetectorsList const & detList, Ca
   // Loop over the TTree :
   Timer read_timer;
   int count = 0;
-  int RF_counter = 0;
+  int RF_counter_raw = 0;
   while(reader.Read())
   {
     hit.time+=timeshifts[hit.label];
     hit.nrjcal = calibration(hit.nrj, hit.label);
     readTree -> Fill();
     count++;
-    if (hit.label == RF_Manager::label) RF_counter++;
+    if (hit.label == RF_Manager::label) RF_counter_raw++;
   }
   read_timer.Stop();
 
 #ifdef DEBUG
-  print("Read finished here,", count,"counts and", RF_counter, "RF counts, in", read_timer.TimeElapsedSec(),"s");
+  print("Read finished here,", count,"counts and", RF_counter_raw, "RF counts, in", read_timer.TimeElapsedSec(),"s");
 #endif //DEBUG
 
 if (count==0) return;
@@ -124,6 +124,9 @@ if (count==0) return;
   //Loop over the data :
   Timer convert_timer;
   auto const & nb_data = readTree->GetEntries();
+  ulong hits_count = 0;
+  ulong evts_count = 0;
+  ulong RF_counter_written = 0;
   while (loop<nb_data)
   {
     readTree -> GetEntry(gindex[loop++]);
@@ -136,16 +139,19 @@ if (count==0) return;
       outTree -> Fill();
       event = temp;
       rf.setHit(hit);
+      RF_counter_written++;
       continue;
     }
 
-//     // Event building :
+    // Event building :
     if (eventBuilder.build(hit))
     {
       counter.count(event); 
     #ifdef TRIGGER
       if ((counter.nb_modules>1 && counter.nb_Ge>0) || counter.nb_dssd>0)
       {
+        hits_count+=event.size();
+        evts_count++;
         outTree->Fill();
       }
     #else
@@ -178,14 +184,29 @@ if (count==0) return;
   float outSize = size_file_conversion(outFile->GetSize(), "o", "Mo");
 
   timer();
-  print(outfile, "written in", timer(), timer.unit()+". Input file", dataSize, "Mo and output file", outSize, "Mo : ", 100*outSize/dataSize, "% compression (", dataSize/outSize,"factor)");
+  print(RF_counter_raw, RF_counter_written);
+  print(outfile, "written in", timer(), timer.unit()+". Input file", dataSize, "Mo and output file", outSize, "Mo : ", 100*count/dataSize, "% compression (", dataSize/outSize,"factor)");
 }
 
 // 5. Main
 int main(int argc, char** argv)
 {
   int nb_threads = 2;
-  if (argc == 3 && strcmp(argv[1],"-m") == 0) nb_threads = atoi(argv[2]);
+  if (argc > 1)
+  {
+    for(int i = 1; i < argc; i++)
+    {
+      std::string command = argv[i];
+           if (command == "-m")
+      {// Multithreading 
+        nb_threads = atoi(argv[++i]);
+      }
+      else if (command == "-o")
+      {// Overwright already existing .root files
+        overwrite = true;
+      }
+    }
+  }
 
   // MANDATORY : initialize the multithreading !
   MTObject::Initialize(nb_threads);

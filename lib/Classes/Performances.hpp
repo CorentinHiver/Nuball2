@@ -1,7 +1,7 @@
 #ifndef PERFORMANCES_HPP
 #define PERFORMANCES_HPP
 
-#include "libCo.hpp"
+#include "../libCo.hpp"
 #include "../MTObjects/MTCounter.hpp"
 
 class Performances

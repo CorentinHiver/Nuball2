@@ -1,11 +1,21 @@
 digraph "Path::Path"
 {
  // LATEX_PDF_SIZE
-  bgcolor="transparent";
-  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
-  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
   rankdir="RL";
-  Node1 [id="Node000001",label="Path::Path",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip=" "];
-  Node1 -> Node2 [id="edge1_Node000001_Node000002",dir="back",color="steelblue1",style="solid",tooltip=" "];
-  Node2 [id="Node000002",label="Path::make",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_path.html#a539eac4199d713701c426b84825c1a67",tooltip=" "];
+  Node1 [label="Path::Path",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="Path::current_directory",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_path.html#a59e285309e46f6633885a18d3bf4a16a",tooltip=" "];
+  Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="Path::home",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_path.html#a08c199926ff5432cd3f35c2df4b07433",tooltip=" "];
+  Node3 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="Path::load",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_path.html#aa9b3a53718dcd8ba66d90d50b112ddb9",tooltip=" "];
+  Node4 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="Path::Path",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_path.html#ae9ae307831520e338154143243a24a67",tooltip="Turns a string to a path, creating it if create = true and it doesn't already exists."];
+  Node1 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="Path::operator+",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_path.html#a3d0909258a10a05b04d3c08ec42f562c",tooltip=" "];
+  Node1 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="Path::pwd",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_path.html#a0374de2afee27834da4adccf704d4190",tooltip=" "];
+  Node7 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
 }

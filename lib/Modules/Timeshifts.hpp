@@ -76,6 +76,7 @@ public:
    * @note Mandatory only if calculate timeshifts
   */
   void setDetectorsList(DetectorsList const & detList) {m_detList = detList;}
+  void setIDFile(DetectorsList const & detList) {m_detList = detList;}
 
   bool setTimeWindow(int const & timewindow_ns);
 
@@ -168,7 +169,7 @@ public:
   void setRFOffset(Long64_t const & shift) {RF_Manager::set_offset(shift);}
 
   bool calculate(std::string const & folder, int const & nb_files = -1);
-  void Print() {print(m_timeshifts);}
+  // void Print() {print(m_timeshifts);}
 
   TH1F* shiftTimeSpectra(TH1F* histo, Label const & label, std::string const & unit = "ps");
 
@@ -208,10 +209,10 @@ private:
   std::string m_timeRef_name = "R1A9_FATIMA_LaBr3";
   ulong m_max_hits = -1;
 
-  bool InitParameters();
+  bool Initialize();
 
-  // This map holds the bin width of the histograms in ps (e.g. for LaBr3 there is one bin every 100 ps)
-  std::map<std::string, float> m_rebin = { {"LaBr3", 100}, {"Ge", 1000}, {"BGO", 500}, {"EDEN", 500}, {"RF", 100}, {"paris", 100}, {"dssd", 1000}};
+  // This map holds the number of bins per ns (e.g. for LaBr3 there is one bin every 100 ps)
+  std::map<std::string, float> m_binning = { {"LaBr3", 10.}, {"Ge", 1.}, {"BGO", 2.}, {"EDEN", 2.}, {"RF", 10.}, {"paris", 10.}, {"dssd", 1.}};
 
   std::string m_outDir = "";
   std::string m_ts_outdir = "Timeshifts/";
@@ -222,6 +223,7 @@ private:
 
   Vector_MTTHist<TH1F> m_histograms;
   std::vector<std::unique_ptr<TH1F>> m_histograms_corrected;
+  std::unique_ptr<TH2F> m_histos_corrected;
 #ifdef USE_RF
   MTTHist<TH1F> m_histo_ref_VS_RF;
   Vector_MTTHist<TH1F> m_histograms_VS_RF;
@@ -300,11 +302,12 @@ bool Timeshifts::setParameters(std::string const & parameter)
   return true;
 }
 
-bool Timeshifts::InitParameters()
+bool Timeshifts::Initialize()
 {
   if (m_initialized) return true; // To prevent multiple initializations
   m_outPath = m_outDir+m_ts_outdir;
-  create_folder_if_none(m_outPath);
+  Path (m_outPath, true);
+  // create_folder_if_none(m_outPath);
   if (!folder_exists(m_outPath, true)) return (m_ok = m_initialized = false);
   if (extension(m_outData) != "dT") m_outData = removeExtension(m_outData)+".dT";
   if (m_detList.size() == 0)
@@ -312,7 +315,6 @@ bool Timeshifts::InitParameters()
     print("PLEASE LOAD THE ID FILE IN THE TIMESHIFT MODULE");
     return (m_ok = m_initialized = false);
   }
-
   m_EnergyRef.reset("Energy_spectra", "Energy_spectra", 10000, 0, 1000000);
   m_EnergyRef_bidim.reset("Energy_VS_time", "Energy VS time", 100,-1,1, 1000,0,1000000);
 
@@ -325,6 +327,9 @@ bool Timeshifts::InitParameters()
   m_histograms_corrected_RF.resize(m_detList.size());
 #endif //USE_RF
 
+    m_histos_corrected.reset(new TH2F("All corrected time spectra", "All corrected time spectra", 
+            m_detList.size(), 0, m_detList.size(), m_timewindow_ns, -m_timewindow_ns/2, m_timewindow_ns/2));
+
   for (ushort label = 0; label<m_detList.size(); label++)
   {
     auto const & name = m_detList[label];
@@ -335,11 +340,11 @@ bool Timeshifts::InitParameters()
   #ifdef USE_RF
     if (label == 251) 
     {
-      m_histo_ref_VS_RF.reset( "RF_calculated", "RF_calculated", m_timewindow/m_rebin["RF"], -m_timewindow/2, m_timewindow/2);
+      m_histo_ref_VS_RF.reset( "RF_calculated", "RF_calculated", m_timewindow_ns*m_binning["RF"], -m_timewindow/2, m_timewindow/2);
     }
-    m_histograms_VS_RF[label].reset((name+"_RF").c_str(), (name+"_RF").c_str(), m_timewindow/m_rebin[type], -m_timewindow/2, m_timewindow/2);
+    m_histograms_VS_RF[label].reset((name+"_RF").c_str(), (name+"_RF").c_str(), m_timewindow_ns*m_binning[type], -m_timewindow/2, m_timewindow/2);
   #endif //USE_RF
-    m_histograms[label].reset(name.c_str(), name.c_str(), m_timewindow/m_rebin[type], -m_timewindow/2, m_timewindow/2);
+    m_histograms[label].reset(name.c_str(), name.c_str(), m_timewindow_ns*m_binning[type], -m_timewindow/2, m_timewindow/2);
   }
   return (m_ok = m_initialized = true);
 }
@@ -347,7 +352,7 @@ bool Timeshifts::InitParameters()
 bool Timeshifts::calculate(std::string const & folder, int const & nb_files)
 {
   Timer timer;
-  if (!InitParameters()) 
+  if (!Initialize()) 
   {
     print("Someting went wrong in the timeshifts initialization...");
     return false;
@@ -557,7 +562,7 @@ void Timeshifts::analyse()
   if (has_RF)
   {
     m_histo_ref_VS_RF.Merge();
-    m_timeshifts[RF_Manager::label] = static_cast<Shift_t>( (m_histo_ref_VS_RF->GetMaximumBin() - (m_histo_ref_VS_RF -> GetNbinsX()/2)) * m_rebin["RF"] );
+    m_timeshifts[RF_Manager::label] = static_cast<Shift_t>( (m_histo_ref_VS_RF->GetMaximumBin() - (m_histo_ref_VS_RF -> GetNbinsX()/2)) / m_binning["RF"] );
   }
   else 
   {
@@ -605,21 +610,21 @@ void Timeshifts::analyse()
       if (has_RF)
       {
         auto amppic = m_histograms_VS_RF[label] -> GetMaximum();
-        float zero = ( m_histograms_VS_RF[label] -> FindFirstBinAbove(amppic/2) - (m_histograms_VS_RF[label] -> GetNbinsX()/2) ) * m_rebin["dssd"] ;
+        float zero = ( m_histograms_VS_RF[label] -> FindFirstBinAbove(amppic/2) - (m_histograms_VS_RF[label] -> GetNbinsX()/2) ) / m_binning["dssd"] ;
         outDeltaTfile << label << "\t" << static_cast<float>(m_timeshifts[RF_Manager::label]-zero) << std::endl;
         if (m_verbose) print("Edge :", zero, "with", static_cast<int>(m_histograms_VS_RF[label] -> GetMaximum()), "counts in peak");
       }
       else 
       {
         auto amppic = m_histograms[label] -> GetMaximum();
-        auto pospic = ( m_histograms[label] -> FindLastBinAbove(amppic*0.8) - (m_histograms[label] -> GetNbinsX()/2) ) * m_rebin["dssd"] ;
+        auto pospic = ( m_histograms[label] -> FindLastBinAbove(amppic*0.8) - (m_histograms[label] -> GetNbinsX()/2) ) / m_binning["dssd"] ;
         outDeltaTfile << label << "\t" << pospic << std::endl;
         if (m_verbose) print( "mean : ", m_histograms[label] -> GetMean(), "with", (int) m_histograms[label] -> GetMaximum(), "counts in peak");
       }
 
     #else //NO USE_RF
       auto amppic = m_histograms[label] -> GetMaximum();
-      auto pospic = ( m_histograms[label] -> FindLastBinAbove(amppic*0.8) - (m_histograms[label] -> GetNbinsX()/2) ) * m_rebin["dssd"] ;
+      auto pospic = ( m_histograms[label] -> FindLastBinAbove(amppic*0.8) - (m_histograms[label] -> GetNbinsX()/2) ) / m_binning["dssd"] ;
       outDeltaTfile << label << "\t" << pospic << std::endl;
       if (m_verbose) print( "mean : ", m_histograms[label] -> GetMean(), "with", (int) m_histograms[label] -> GetMaximum(), "counts in peak");
     #endif //USE_RF
@@ -645,12 +650,8 @@ void Timeshifts::analyse()
     if (histo) 
     {
       m_histograms_corrected[label].reset( shiftTimeSpectra(histo, label) );
+      AddTH1(m_histos_corrected.get(), m_histograms_corrected[label].get(), label, true);
     }
-
-  #ifdef USE_RF
-    auto & histo_RF = m_histograms_VS_RF[label];
-    if (histo_RF) m_histograms_corrected_RF[label].reset( shiftTimeSpectra(histo_RF, label) );
-  #endif //USE_RF
   }
 
   outDeltaTfile.close();
@@ -664,6 +665,7 @@ void Timeshifts::write()
   if (outFile.get() == nullptr) {print("Cannot open file ", m_outPath+m_outRoot, " !!!\nAbort !");return;}
 
   m_EnergyRef.Write();
+  m_histos_corrected->Write();
 
 #ifdef USE_RF
   m_histo_ref_VS_RF.Write();

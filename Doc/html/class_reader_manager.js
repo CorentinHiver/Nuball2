@@ -4,7 +4,7 @@ var class_reader_manager =
     [ "addFiles", "class_reader_manager.html#aad6665518797c9242861b43adcd385ef", null ],
     [ "addFolder", "class_reader_manager.html#af440d75101cf18d9c7c1515d4c383fa3", null ],
     [ "flushFiles", "class_reader_manager.html#aadfc7936950137fe1b5d0b9c74cb1012", null ],
-    [ "getHit", "class_reader_manager.html#a348eed7e7faa502f7aea28de038addf3", null ],
+    [ "getHit", "class_reader_manager.html#ae9840b193568c6cdbb9fe5848f5d5e62", null ],
     [ "nbFiles", "class_reader_manager.html#a94447555428202ac9a69f03fa7a3234a", null ],
     [ "printFiles", "class_reader_manager.html#aa81218f7a2f8326829c7ccbe3c063ed4", null ],
     [ "readNextFile", "class_reader_manager.html#a6267f9d377253e2cc551374dd932922c", null ],

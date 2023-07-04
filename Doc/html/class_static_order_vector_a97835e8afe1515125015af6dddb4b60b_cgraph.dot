@@ -1,13 +1,12 @@
 digraph "StaticOrderVector::has"
 {
  // LATEX_PDF_SIZE
-  bgcolor="transparent";
-  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
-  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
   rankdir="LR";
-  Node1 [id="Node000001",label="StaticOrderVector::has",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip=" "];
-  Node1 -> Node2 [id="edge1_Node000001_Node000002",color="steelblue1",style="solid",tooltip=" "];
-  Node2 [id="Node000002",label="StaticVector::begin",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_static_vector.html#aaa5ac38b1fe9d0800bd272a77da77a0c",tooltip=" "];
-  Node1 -> Node3 [id="edge2_Node000001_Node000003",color="steelblue1",style="solid",tooltip=" "];
-  Node3 [id="Node000003",label="StaticVector::end",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_static_vector.html#acc59c87ca2fc4e9387ce2a962cb0d759",tooltip=" "];
+  Node1 [label="StaticOrderVector::has",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="StaticVector\< T, 0\l \>::begin",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_static_vector.html#aa8b312d003ba9cf102c727d182c23756",tooltip=" "];
+  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="StaticVector\< T, 0\l \>::end",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_static_vector.html#a4a83a2214dee02cf0e9953fbb2a6ca6e",tooltip=" "];
 }

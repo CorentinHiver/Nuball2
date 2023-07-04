@@ -5,6 +5,7 @@
 #include "files_functions.hpp"
 
 // ********** ROOT includes ********* //
+#include "TAxis.h"
 #include "TCanvas.h"
 #include "TChain.h"
 #include "TError.h"
@@ -42,6 +43,25 @@
 bool THist_exists(TH1* histo)
 {
   return (histo && !histo->IsZombie() && histo->Integral()>1);
+}
+
+bool AddTH1(TH2* histo2, TH1* histo1, int index, bool x = true)
+{
+  auto axis = (x) ? histo2 -> GetXaxis() : histo2 -> GetYaxis();
+
+  if (axis->GetNbins() < index)
+  {
+    print("Binning issue to merge", histo1->GetName(), "with", histo2->GetName() ,"...");
+    return false;
+  }
+
+  for (int i = 0; i<histo1->GetNbinsX(); i++)
+  {
+    if (x) histo2->SetBinContent(index, i, histo1->GetBinContent(i));
+    else   histo2->SetBinContent(i, index, histo1->GetBinContent(i));
+  }
+
+  return true;
 }
 
 ///////////////////////////

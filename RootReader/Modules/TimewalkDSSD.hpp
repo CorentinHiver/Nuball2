@@ -1,7 +1,7 @@
 #ifndef TimewalkDSSD_H
 #define TimewalkDSSD_H
 
-#include "../../lib/utils.hpp"
+#include <libRoot.hpp>
 #include "../../lib/MTObjects/MTTHist.hpp"
 #include "../Classes/Parameters.hpp"
 

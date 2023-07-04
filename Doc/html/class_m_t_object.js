@@ -2,8 +2,9 @@ var class_m_t_object =
 [
     [ "MTObject", "class_m_t_object.html#a12856506adc231bafc0983c881c3fe36", null ],
     [ "MTObject", "class_m_t_object.html#abd4acfeab1934837e2f41be3452f838b", null ],
+    [ "adjustThreadsNumber", "class_m_t_object.html#a6b64d40ead09992458735fb862dcf33d", null ],
     [ "getThreadIndex", "class_m_t_object.html#ac58d31e459097547352bf2785dc8f40a", null ],
-    [ "getThreadsNb", "class_m_t_object.html#a0b2a35d6d2bf8797ecce9a8ea5a3aeed", null ],
+    [ "getThreadsNb", "class_m_t_object.html#ac97399bb34f766e41e7f9a1cd1b7eb7a", null ],
     [ "Initialize", "class_m_t_object.html#a0230b58b8d09067fec22fbe8a5f3db89", null ],
     [ "isMasterThread", "class_m_t_object.html#a3350577ca839e2abdcd4d6f6449a1408", null ],
     [ "operator bool", "class_m_t_object.html#a048c52b4b15fc13667559a5b07d71002", null ],

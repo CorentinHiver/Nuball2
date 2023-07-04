@@ -2,7 +2,7 @@ var class_paris_module =
 [
     [ "ParisModule", "class_paris_module.html#a71bc1a910a7f5b6a6dc60bbb320c301d", null ],
     [ "Fill", "class_paris_module.html#a0a6e541c6c918a058c956cb117ee7278", null ],
-    [ "label", "class_paris_module.html#aae18203b2fd091ea27d1534a6e8ba755", null ],
+    [ "label", "class_paris_module.html#a44e65ce4371e4c280b2853c5d7843332", null ],
     [ "newCluster", "class_paris_module.html#a1c1e8ac667354498aa9c82c9854ca557", null ],
     [ "operator bool", "class_paris_module.html#a243778af17c46b520d0823d542d31c64", null ],
     [ "Reset", "class_paris_module.html#aef3bc4fc458708eef908061ca917dbc7", null ],

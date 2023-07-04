@@ -1,0 +1,14 @@
+digraph "Timeshifts::Timeshifts"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="Timeshifts::Timeshifts",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="For faster to root conversion only : Timeshifts::load() loads the timeshifts from a ...."];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="Timeshifts::load",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_timeshifts.html#a28163efe8d487669cf50d5f6e1060d71",tooltip="Use this method to load timeshifts from a .dT file."];
+  Node2 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="file_is_empty",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$files__functions_8hpp.html#afd584978228fac5fae283c12837378dd",tooltip=" "];
+  Node2 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="print",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$utils_8hpp.html#a66ca7a7876bba06ed99b2fa6945cd2b0",tooltip=" "];
+}

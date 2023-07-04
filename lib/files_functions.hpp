@@ -3,7 +3,6 @@
 
 #include "print.hpp"
 #include "string_functions.hpp"
-#include "MTObjects/MTObject.hpp"
 
 //----------------------------------------------------//
 //       General files and folders manipulations      //
@@ -90,7 +89,7 @@ bool folder_exists(std::string folderName)
   dp = opendir(folderName.c_str());
   bool ret = (dp != nullptr);
   std::string str = ((dp!=nullptr) ? "oui" : "non");
-  closedir(dp);
+  if (dp) closedir(dp);
   return ret;
 }
 
@@ -395,17 +394,21 @@ public:
     }
     else if (m_path[0]=='~')
     {// Home path
-      m_path = std::string(std::getenv("HOME"))+m_path;
+      m_path = home()+m_path;
     }
     else
     {// Relative path
-      m_exists = false;
+      m_path = pwd()+m_path;
+      // m_exists = false;
     }
 
     // To ensure it finishes with a '/' :
     push_back_if_none(m_path, '/');
 
+  #ifdef MTOBJECT_HPP
     if (MTObject::ON) MTObject::shared_mutex.lock();
+  #endif //MTOBJECT_HPP
+  
     // To ensure it exists :
     m_exists = folder_exists(m_path);
 
@@ -416,7 +419,10 @@ public:
       m_exists = false;
       throw std::runtime_error(m_path+" doesn't exist !!");
     }
-    if (MTObject::ON) MTObject::shared_mutex.unlock();
+  #ifdef MTOBJECT_HPP
+    if (MTObject::ON) MTObject::shared_mutex.unlock();  
+  #endif //MTOBJECT_HPP
+
     makeFolderList(m_path);
   }
 
@@ -428,10 +434,8 @@ public:
 
   int  nbFiles() {return nb_files_in_folder(m_path);}
   bool exists() {return folder_exists(m_path);}
-  bool make() 
-  {
-    
-    create_folder_if_none(m_path); return this -> exists();}
+  operator bool() const {return folder_exists(m_path);}
+  bool make() { create_folder_if_none(m_path); return this -> exists();}
 
   Path & addFolder(Folder const & folder)
   {
@@ -443,6 +447,7 @@ public:
     {
       throw std::runtime_error(m_path + " don't exist !");
     }
+    return *this;
   }
 
   std::string const & path() const {return m_path;}

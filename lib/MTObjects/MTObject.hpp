@@ -1,5 +1,5 @@
-#ifndef MTOBJECT_H
-#define MTOBJECT_H
+#ifndef MTOBJECT_HPP
+#define MTOBJECT_HPP
 /*
   * This object is meant to be a base class for any other multithreaded object
   * It's only point is to manage this nb_threads static member variable
@@ -8,7 +8,7 @@
 #include <thread>
 #include <mutex>
 
-#include <libRoot.hpp>
+#include "../libRoot.hpp"
 
 class MTObject
 {
@@ -32,6 +32,7 @@ public:
 
     if (nb_threads>1)
     {
+      print("MTObject initialized with", nb_threads, "threads");
       TThread::Initialize();
       ROOT::EnableThreadSafety();
     }
@@ -106,4 +107,4 @@ std::map<std::thread::id, int> MTObject::threads_ID;
 std::mutex MTObject::shared_mutex;
 std::thread::id MTObject::master_thread;
 std::vector<std::thread> MTObject::m_threads;
-#endif //MTOBJECT_H
+#endif //MTOBJECT_HPP

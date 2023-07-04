@@ -6,6 +6,7 @@
 /**
  * @brief Multithreading wrapper for all THist spectra of root library
  * @author corentin.hiver@ijclab.in2p3.fr
+ * @details
  *
  * Inspiration :
  * https://root.cern.ch/doc/master/TThreadedObject_8hxx_source.html#l00167
@@ -24,24 +25,26 @@
  *      MTTHist<TH1F> some_TH1F_histo;
  *      some_TH1F_histo.reset("name", "title:xaxis:yaxis", bins, min, max);
  * 
+ * \attention Please do not use the copy constructors and operators, may need proper work to make it safe
+ * 
  * In default mode, nb_threads histograms are created
- * \test In mono mode (MTTHIST_MONO), only one is created
+ * \test In mono mode (MTTHIST_MONO), only one histogram is created
  * 
  * To fill the histogram from threads : 
  * 
- *      some_TH1F_histo.Fill()
+ *          some_TH1F_histo.Fill()
  * 
  * Once the histogram have been filled, two options : 
  * 
  * - Either write it down directly : 
  * 
- *        // Open a TFile
- *        some_TH1F_histo.Write()
- *        // Write and close the TFile
+  *        // Open a TFile
+  *        some_TH1F_histo.Write()
+  *        // Write and close the TFile
  * 
  * - Or you can merge the histograms :
  * 
- *       some_TH1F_histo.Merge();
+ *        some_TH1F_histo.Merge();
  *
  *    You can then address the merged histogram using -> : 
  *        
@@ -52,10 +55,7 @@ class MTTHist : public MTObject
 {
 public:
   /**
-   * @brief Construct a new MTTHist object and send the arguments directly to the underlying THist
-   * 
-   * @tparam ARGS 
-   * @param args 
+   * @brief Construct a new MTTHist object and send the arguments directly to the underlying root histogramm
    */
   template <class... ARGS>
   MTTHist(ARGS &&... args) 
@@ -82,25 +82,24 @@ public:
       m_is_deleted(hist.m_is_deleted), 
       m_comment(hist.m_comment),
       m_str_name(hist.m_str_name),
-      m_is_merged(hist.m_is_merged),
-      m_is_deleted(hist.m_is_deleted)
+      m_is_merged(hist.m_is_merged)
       {}
-
-  // General constructor, fully based on reset method
-  // template <class... ARGS>
-  // MTTHist(std::string name, ARGS &&... args) { this -> reset (name, std::forward<ARGS>(args)...); }
 
   ~MTTHist();
 
+
   // ---   GENERIC INITIALIZATION --- //
 
-
   /**
-   * @brief Copy initializer :
+   * @brief Copy initializer.
+   * @attention Please do not use, doesn't seems very safe ...
    */
   template <class... ARGS>
   void reset(MTTHist<THist> hist) { m_exists = false; m_merged = static_cast<THist*>(hist.m_merged); m_collection = hist.m_collection;}
 
+  /**
+   * @brief Unsafe
+  */
   template <class... ARGS>
   void reset(THist *hist) {m_exists = true; m_merged = hist;}
 
@@ -145,6 +144,10 @@ public:
   std::vector<THist*> const & getCollection() const {return m_collection;}
   THist * operator->() {return m_merged;}
 
+  /**
+   * @brief Copy operator
+   * @attention Please do not use, doesn't seems very safe ...
+  */
   void operator=(MTTHist<THist> histo)
   {
     m_file = histo.file();
@@ -188,7 +191,7 @@ private:
   std::string m_str_name = "";
   ulonglong m_integral = 0ull;
 
-  THist * m_merged = nullptr;
+  THist* m_merged;
 
   #ifndef MTTHIST_MONO
   bool m_is_merged = false;
@@ -202,40 +205,50 @@ template <class THist>
 template <class... ARGS>
 inline void MTTHist<THist>::reset(std::string name, ARGS &&... args)
 {
-  shared_mutex.lock();
-  m_file = gROOT -> GetFile();// If SIGSEGV here, have you instantiated the object ? (e.g., in an array of histograms)
-  m_exists = true;// If SIGSEGV here, have you instantiated the object ? (e.g., in an array of histograms)
-  m_str_name = name;
-
-
-#ifdef MTTHIST_MONO
-  if (!m_merged) m_merged = new THist (name.c_str(), std::forward<ARGS>(args)...);
-
-#else // not MTTHIST_MONO
-  if (isMasterThread())
+  if (MTObject::ON)
   {
-    m_collection.resize(MTObject::nb_threads, nullptr);
-    m_is_deleted.resize(MTObject::nb_threads, false);
-    for (size_t i = 0; i<m_collection.size(); i++)
-    {
-      m_collection[i] = new THist ((name+"_"+std::to_string(i)).c_str(), std::forward<ARGS>(args)...);
-    }
-  }
-  else
-  {
-    auto const & thread_nb = MTObject::getThreadsNb();
-    if (m_collection.size()<thread_nb)
-    {
-      m_collection.resize(thread_nb);
-      m_is_deleted.resize(thread_nb, true);
-    }
-    auto const & i = getThreadIndex();
-    m_collection[i] = new THist (name.c_str(), std::forward<ARGS>(args)...);
-    m_is_deleted[i] = false;
-  }
+    shared_mutex.lock();
+    m_file = gROOT -> GetFile();// If SIGSEGV here, have you instantiated the object ? (e.g., in an array of histograms)
+    m_exists = true;// If SIGSEGV here, have you instantiated the object ? (e.g., in an array of histograms)
+    m_str_name = name;
 
-#endif //MTTHIST_MONO
-  shared_mutex.unlock();
+
+  #ifdef MTTHIST_MONO
+
+    if (!m_merged) m_merged = new THist (name.c_str(), std::forward<ARGS>(args)...);
+
+  #else // not MTTHIST_MONO
+    // If we are in the master thread, then it means we are 
+    if (isMasterThread())
+    {
+      m_collection.resize(MTObject::nb_threads, nullptr);
+      m_is_deleted.resize(MTObject::nb_threads, false);
+      for (size_t i = 0; i<m_collection.size(); i++)
+      {
+        m_collection[i] = new THist ((name+"_"+std::to_string(i)).c_str(), std::forward<ARGS>(args)...);
+      }
+    }
+    else
+    {
+      auto const & thread_nb = MTObject::getThreadsNb();
+      if (m_collection.size()<thread_nb)
+      {
+        m_collection.resize(thread_nb);
+        m_is_deleted.resize(thread_nb, true);
+      }
+      auto const & i = getThreadIndex();
+      m_collection[i] = new THist (name.c_str(), std::forward<ARGS>(args)...);
+      m_is_deleted[i] = false;
+    }
+
+  #endif //MTTHIST_MONO
+    shared_mutex.unlock();
+  }
+  else 
+  {// If MTObject::OFF
+    if (m_merged) delete (m_merged);
+    m_merged = new THist (name.c_str(), std::forward<ARGS>(args)...);
+  }
 }
 
 template <class THist>

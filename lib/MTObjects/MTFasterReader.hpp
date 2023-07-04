@@ -108,6 +108,7 @@ public:
     m_MTfiles = m_files.getListFiles();
     return ret;
   }
+  
   bool nextFilename(std::string & filename) {return m_MTfiles.getNext(filename);}
 
   template<class Func, class... ARGS>

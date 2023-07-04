@@ -1,17 +1,32 @@
 digraph "Timeshifts::Timeshifts"
 {
  // LATEX_PDF_SIZE
-  bgcolor="transparent";
-  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
-  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
   rankdir="LR";
-  Node1 [id="Node000001",label="Timeshifts::Timeshifts",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip=" "];
-  Node1 -> Node2 [id="edge1_Node000001_Node000002",color="steelblue1",style="solid",tooltip=" "];
-  Node2 [id="Node000002",label="Detectors::Initialize",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_detectors.html#a963f106c34db73646119902b8c86f431",tooltip=" "];
-  Node2 -> Node3 [id="edge2_Node000002_Node000003",color="steelblue1",style="solid",tooltip=" "];
-  Node3 [id="Node000003",label="isEden",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$_detectors_8hpp.html#ab606d5217be03c98e4c1d791e4c456cc",tooltip=" "];
-  Node2 -> Node4 [id="edge3_Node000002_Node000004",color="steelblue1",style="solid",tooltip=" "];
-  Node4 [id="Node000004",label="isRF",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$_detectors_8hpp.html#a4081c8920cb1432f78b67207810de6a8",tooltip=" "];
-  Node2 -> Node5 [id="edge4_Node000002_Node000005",color="steelblue1",style="solid",tooltip=" "];
-  Node5 [id="Node000005",label="labelToClover",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$_detectors_8hpp.html#ad8dfa26bdcfba0e7565a7b2bf4c7ada5",tooltip=" "];
+  Node1 [label="Timeshifts::Timeshifts",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="Detectors::Initialize",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_detectors.html#a963f106c34db73646119902b8c86f431",tooltip=" "];
+  Node2 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="isBGO",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_detectors_8hpp.html#af2fc1fc612e2b7f56bc92b9503b2b4b5",tooltip=" "];
+  Node2 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="isClover",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_detectors_8hpp.html#a2d2b5e29b94673055368eab5a6958c99",tooltip=" "];
+  Node2 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="isDSSD",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_detectors_8hpp.html#a5a1717c17323811f1b7e34486fe313bb",tooltip=" "];
+  Node2 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="isDSSD_Ring",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_detectors_8hpp.html#aa865ae7135de566aed152b51d9a0ca67",tooltip=" "];
+  Node2 -> Node7 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="isDSSD_Sector",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_detectors_8hpp.html#afd0dc030b2d9703bceabf5a701373968",tooltip=" "];
+  Node2 -> Node8 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node8 [label="isEden",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_detectors_8hpp.html#ae6b7d4679c6f3cbc504af40856b586f9",tooltip=" "];
+  Node2 -> Node9 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node9 [label="isGe",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_detectors_8hpp.html#a920cf3c8fc0247055b2dfe12db2ae0a3",tooltip=" "];
+  Node2 -> Node10 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node10 [label="isLaBr3",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_detectors_8hpp.html#adbe5b6e0b7abce1068ac7ca939636f23",tooltip=" "];
+  Node2 -> Node11 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node11 [label="isParis",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_detectors_8hpp.html#aff2ff093e854b1dca018748f5097b761",tooltip=" "];
+  Node2 -> Node12 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node12 [label="isRF",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_detectors_8hpp.html#ab6f329e34b2122e3c788584b0907718c",tooltip=" "];
+  Node2 -> Node13 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node13 [label="labelToClover",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_detectors_8hpp.html#a3a1bcbd4bbbca2cbdb4f56be34610256",tooltip=" "];
 }

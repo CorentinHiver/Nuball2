@@ -1,10 +1,10 @@
 var class_timer =
 [
     [ "Timer", "class_timer.html#a5f16e8da27d2a5a5242dead46de05d97", null ],
-    [ "Now", "class_timer.html#a18b30c0b2060e6e1775b993a2f57ec04", null ],
+    [ "Now", "class_timer.html#a7b0362b0627780584a43f8168be1a904", null ],
     [ "operator()", "class_timer.html#a1f69a4057ac44cfeb153036bf292654d", null ],
-    [ "Restart", "class_timer.html#a711db01fdb4f4a234341f0aaec484ea8", null ],
-    [ "Stop", "class_timer.html#ae09cea3a71e571601b0027960023a9ff", null ],
+    [ "Restart", "class_timer.html#aa7e5e4473d85750e16f61ce7adc42b91", null ],
+    [ "Stop", "class_timer.html#a1f617c2e337f8a07fbee1b1fb9148b81", null ],
     [ "Time", "class_timer.html#af358f7fd881032ffed786399cc710d83", null ],
     [ "TimeElapsed", "class_timer.html#a7307d5d05bf307cc432f64e1df0dba28", null ],
     [ "TimeElapsedSec", "class_timer.html#a83883502ae50e45c21c33336450c9488", null ],

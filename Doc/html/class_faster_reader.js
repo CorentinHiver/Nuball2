@@ -2,11 +2,12 @@ var class_faster_reader =
 [
     [ "FasterReader", "class_faster_reader.html#af4dd68bbc6c027e1c35bfd5b52525002", null ],
     [ "~FasterReader", "class_faster_reader.html#af0c896c5302be52b2f839fd1885d1ecc", null ],
-    [ "getFilename", "class_faster_reader.html#ac300df39f881aded0ff9a2bb50b85f31", null ],
-    [ "getHit", "class_faster_reader.html#a3d32862a7f3cb6346d35c20c6f9565c4", null ],
+    [ "getFilename", "class_faster_reader.html#aab416287bd95c5dad74fff1ebb45d3c8", null ],
+    [ "getHit", "class_faster_reader.html#a152cfc9a0973c4a754e248c3e0326bea", null ],
     [ "Initialize", "class_faster_reader.html#a949601e8d70fc3aaabe66824d22bdf69", null ],
     [ "InitializeReader", "class_faster_reader.html#a21a9202f79d43b9fd41cd1e1c276fe2c", null ],
-    [ "isReady", "class_faster_reader.html#a2a611155ac60dc60161c6b77ae57baf3", null ],
+    [ "isReady", "class_faster_reader.html#a5aefeb0380dfdd42d1e63b987989a118", null ],
+    [ "operator bool", "class_faster_reader.html#a613b5de02c11764659a3b90b8e8f0b0b", null ],
     [ "Read", "class_faster_reader.html#a2d05907241b80ed637b2ae5a01503756", null ],
     [ "ReadData", "class_faster_reader.html#a0b2cd239d03d34e69b10418cb6292858", null ],
     [ "ReadDataGroup", "class_faster_reader.html#a64fb4fc3d241141f5d27df99906780fc", null ],
@@ -34,7 +35,6 @@ var class_faster_reader =
     [ "m_inGroup", "class_faster_reader.html#a49b96919779759c068b03b24f379d024", null ],
     [ "m_kReady", "class_faster_reader.html#a2d5ba6a3aa8089fcabdbc7fb88555ea3", null ],
     [ "m_maxHits", "class_faster_reader.html#a8554231dbef9df122f04313f4adb594a", null ],
-    [ "m_QDCx", "class_faster_reader.html#a1e9d311b1f3e81cc9939bbcef1059f2c", null ],
     [ "m_reader", "class_faster_reader.html#ac10e47db05e3067528e3ce53d5b3da38", null ],
     [ "m_write", "class_faster_reader.html#abd85697a856dc998d235a5edc0ebb530", null ]
 ];

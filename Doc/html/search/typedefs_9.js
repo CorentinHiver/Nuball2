@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['nrj_0',['NRJ',['../_hit_8h.html#aad3a9d2c404fb4cd7f73b16966ae2877',1,'Hit.h']]]
+  ['nrj_1955',['NRJ',['../_hit_8hpp.html#aad3a9d2c404fb4cd7f73b16966ae2877',1,'Hit.hpp']]]
 ];

@@ -1,0 +1,24 @@
+digraph "FilesManager::getListFiles"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="RL";
+  Node1 [label="FilesManager::getListFiles",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="MTFasterReader::addFolder",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_m_t_faster_reader.html#a58a2fe8f9f9ba39808d43f36f45c8288",tooltip=" "];
+  Node2 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="MTFasterReader::MTFaster\lReader",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_m_t_faster_reader.html#a98a77edc573c4b3cfa5fa384f0d1a085",tooltip="Regular constructor."];
+  Node1 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="Timeshifts::calculate",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_timeshifts.html#a3d3ab1b3498ca45832d8a8735f16e188",tooltip=" "];
+  Node4 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="Faster2Root::calculateTimeshifts",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_faster2_root.html#a0a9d05860dee9c95927224569e789fa5",tooltip=" "];
+  Node4 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="macro",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$macro_8_c.html#aaa9c9f6e52fd017602d5e43589a06c84",tooltip=" "];
+  Node4 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="main",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$test_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4",tooltip=" "];
+  Node1 -> Node8 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node8 [label="Faster2Root::convert",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_faster2_root.html#a0a1797460cf62fe88d87327602b91eda",tooltip=" "];
+  Node8 -> Node9 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node9 [label="Faster2Root::Faster2Root",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_faster2_root.html#a931cf8ef7c2acab073b363893c65bffd",tooltip=" "];
+}

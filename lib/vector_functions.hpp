@@ -1,7 +1,7 @@
 #ifndef VECTOR_FUNCTIONS_HPP
 #define VECTOR_FUNCTIONS_HPP
 
-
+#include "print.hpp"
 
 template < class T >
 std::istringstream & operator >> (std::istringstream & is, std::vector<T>& v)

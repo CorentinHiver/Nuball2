@@ -1,7 +1,7 @@
 #ifndef HIT_H
 #define HIT_H
 
-#include <libRoot.hpp>
+#include "../libRoot.hpp"
 
 using Label  = ushort;
 using Label_vec = std::vector<Label>;

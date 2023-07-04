@@ -1,6 +1,6 @@
 #ifndef RUNCHECK_H
 #define RUNCHECK_H
-#include "../../lib/utils.hpp"
+#include <libRoot.hpp>
 #include "../../lib/MTObjects/MTTHist.hpp"
 #include "../Classes/Parameters.hpp"
 #include "../../lib/Analyse/HistoAnalyse.hpp"

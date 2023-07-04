@@ -7,6 +7,14 @@
 #include <DSSD.hpp>
 #include <RF_Manager.hpp>
 
+struct LaBr3_Hit
+{
+  uchar label   = 0;
+  Float_t       nrjcal  = 0;
+  ULong64_t     time    = 0;
+};
+using LaBr3_Event  = std::vector < LaBr3_Hit >;
+
 class Sorted_Event
 {
 public:
@@ -224,11 +232,11 @@ bool Sorted_Event::sortGeClover(Event const & event, int const & i)
 {
   auto const & label = event.labels[i];
   auto const & nrj = event.nrjs[i];
-  auto const & clover_label = labelToClover_fast[label];
+  auto const & clover_label = labelToClover[label];
 
   if (nrj<5) return false;
 
-  push_back_unique(clover_hits, clover_label);
+  push_back_unique(clover_hits, static_cast<uchar>(clover_label));
 
   nrj_clover[clover_label] += nrj;
   Ge[clover_label]++;
@@ -261,7 +269,7 @@ void Sorted_Event::sortEvent(Event const & event)
     }
     else if (isBGO[event.labels[i]])
     {
-      clover_label = labelToClover_fast[event.labels[i]];
+      clover_label = labelToClover[event.labels[i]];
       if (m_rf) time_clover[clover_label] = m_rf->pulse_ToF(event.times[i], 50000ll)/_ns;
       else time_clover[clover_label] = (event.times[i]-event.times[0])/_ns;
       BGO[clover_label]++;
@@ -305,9 +313,9 @@ void Sorted_Event::sortEvent(Event const & event)
       else DSSD_is_Prompt.push_back((times[i]>0 && times[i]<50));
 
 
-      bool const & isRing = isDSSD_Ring[event.labels[i]];
-      DSSD_is_Ring.push_back(isRing);
-      if (isRing)
+      bool const & is_ring = isRing[event.labels[i]];
+      DSSD_is_Ring.push_back(is_ring);
+      if (is_ring)
       {
         DSSD_Rings.push_back(i);
         DSSDRingMult++;

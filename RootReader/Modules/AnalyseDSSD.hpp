@@ -1,6 +1,7 @@
 #ifndef ANALYSEDSSD_H
 #define ANALYSEDSSD_H
-#include "../../lib/utils.hpp"
+
+#include <libRoot.hpp>
 #include "../../lib/MTObjects/MTTHist.hpp"
 #include "../Classes/Parameters.hpp"
 

@@ -22,8 +22,8 @@ var hierarchy =
     [ "DSSD_Hit", "utils_8hpp.html#struct_d_s_s_d___hit", null ],
     [ "Event", "class_event.html", null ],
     [ "EventAnalyse", "class_event_analyse.html", null ],
-    [ "Evolutions", "class_evolutions.html", null ],
     [ "Evt_build", "class_evt__build.html", null ],
+    [ "Faster2Root", "class_faster2_root.html", null ],
     [ "FasterReader", "class_faster_reader.html", null ],
     [ "File", "class_file.html", null ],
     [ "Filename", "class_filename.html", null ],
@@ -42,8 +42,8 @@ var hierarchy =
     [ "MTFilesManager", "class_m_t_files_manager.html", null ],
     [ "MTObject", "class_m_t_object.html", [
       [ "MTList< std::string >", "class_m_t_list.html", null ],
-      [ "MTTHist< TH1F >", "class_m_t_t_hist.html", null ],
       [ "MTTHist< TH2F >", "class_m_t_t_hist.html", null ],
+      [ "MTTHist< TH1F >", "class_m_t_t_hist.html", null ],
       [ "MTCounter", "class_m_t_counter.html", null ],
       [ "MTList< T >", "class_m_t_list.html", null ],
       [ "MTTHist< THist >", "class_m_t_t_hist.html", null ]
@@ -66,13 +66,13 @@ var hierarchy =
     [ "RWMat", "class_r_w_mat.html", null ],
     [ "Sorted_Event", "class_sorted___event.html", null ],
     [ "Source_info", "utils_8hpp.html#struct_source__info", null ],
-    [ "StaticVector< T, __size__ >", "class_static_vector.html", [
-      [ "StaticOrderVector< T, __size__ >", "class_static_order_vector.html", null ]
-    ] ],
+    [ "StaticVector< T, __size__ >", "class_static_vector.html", null ],
     [ "StaticVector< float, 16 >", "class_static_vector.html", null ],
     [ "StaticVector< float, 32 >", "class_static_vector.html", null ],
     [ "StaticVector< ParisIndex >", "class_static_vector.html", null ],
-    [ "StaticVector< T, 0 >", "class_static_vector.html", null ],
+    [ "StaticVector< T, 0 >", "class_static_vector.html", [
+      [ "StaticOrderVector< T, __size__ >", "class_static_order_vector.html", null ]
+    ] ],
     [ "StaticVector< uchar, 24 >", "class_static_vector.html", null ],
     [ "StaticVector< uchar, 48 >", "class_static_vector.html", null ],
     [ "StaticVector< uchar, 96 >", "class_static_vector.html", null ],

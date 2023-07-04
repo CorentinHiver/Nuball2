@@ -9,10 +9,12 @@ template <class T> void print()
   std::cout << std::endl;
 }
 
+#ifndef __CINT__
 template <class T> void print(T const & t)
 {
   std::cout << t << std::endl;
 }
+#endif //__CINT__
 
 template <class... T> void print(T const &... t)
 {

@@ -25,8 +25,8 @@
 var NAVTREE =
 [
   [ "Nuball2", "index.html", [
-    [ "Test List", "test.html", null ],
     [ "Deprecated List", "deprecated.html", null ],
+    [ "Test List", "test.html", null ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
       [ "Class Index", "classes.html", null ],
@@ -44,7 +44,8 @@ var NAVTREE =
         [ "All", "globals.html", null ],
         [ "Functions", "globals_func.html", null ],
         [ "Variables", "globals_vars.html", null ],
-        [ "Typedefs", "globals_type.html", null ]
+        [ "Typedefs", "globals_type.html", null ],
+        [ "Macros", "globals_defs.html", null ]
       ] ]
     ] ]
   ] ]
@@ -53,12 +54,13 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_alignator_8hpp.html",
-"class_clovers.html#a60b7747d54a60759b4eae02deac50f95",
+"class_clovers.html#a57774ac4f1e81cd89fd9c1242bbe2254",
 "class_event.html#ab508f008c0566f9ddcf90208b5aa7c03",
-"class_folder.html#acc9fce9d1c448cd7811a6b22ad900239",
-"class_paris_cluster.html#a361fd029dea532794782e9ffb96425db",
-"class_static_order_vector.html#a8f7771c0283c2b2e75b02cef0ba0fce7",
-"functions_func_b.html"
+"class_filename.html#a4f624193292726bfe15c0c16322ccd07",
+"class_m_t_t_hist.html#a9c2f7d05c9f8506382211635b35bd97b",
+"class_reader_manager.html#aadfc7936950137fe1b5d0b9c74cb1012",
+"class_trigger.html#a5c49fbdde13d92a6b76687f28a1fd02c",
+"utils_8hpp.html#a7a645cf361a14868f3e8048b864bf5e2"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

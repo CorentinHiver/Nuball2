@@ -1,7 +1,7 @@
 #ifndef FASTERREADER_H
 #define FASTERREADER_H
 
-#include <Hit.hpp>
+#include "Hit.hpp"
 
 // ******* fasterac includes ******* //
 #include "fasterac/adc.h"

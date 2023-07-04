@@ -8,8 +8,8 @@ var class_position_x_y =
     [ "operator=", "class_position_x_y.html#a8a1e9503abf5defbf463133c7bf4f13b", null ],
     [ "Print", "class_position_x_y.html#a4a0681618dd5af4f1fbcef07db0da809", null ],
     [ "Set", "class_position_x_y.html#ac33d5d71f3a3ea3f0020387edd207fdd", null ],
-    [ "x", "class_position_x_y.html#acce5b19d2f42799085d2e2a33a332b47", null ],
-    [ "y", "class_position_x_y.html#a4f90c006704186993373466e7942e00e", null ],
+    [ "x", "class_position_x_y.html#abe9b0b387f47f4526b87fcff899f0d9e", null ],
+    [ "y", "class_position_x_y.html#adb0113c11672958f3a0f0065ee5622f0", null ],
     [ "m_x", "class_position_x_y.html#a583c89cff15edc779275a67bbf521954", null ],
     [ "m_y", "class_position_x_y.html#a6e54b1a15b214672d73fb52a4d83af63", null ]
 ];

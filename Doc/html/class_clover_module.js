@@ -1,7 +1,7 @@
 var class_clover_module =
 [
     [ "CloverModule", "class_clover_module.html#a41e9f4afbfb7644201a9a7d4c82a7f92", null ],
-    [ "label", "class_clover_module.html#a5f2b68d7e38d85b54d5de50589b5ead2", null ],
+    [ "label", "class_clover_module.html#a9bf510d1a745fcfb7f9bb884a4e23a52", null ],
     [ "Reset", "class_clover_module.html#adf77517ab6c0830eed708a1ad77e7530", null ],
     [ "glabel", "class_clover_module.html#a598973ca5c987a73142708f3fe35bdbf", null ],
     [ "m_label", "class_clover_module.html#a99e10348194d1eeb291550d80a8aaace", null ],
