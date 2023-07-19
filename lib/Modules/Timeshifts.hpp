@@ -472,8 +472,6 @@ bool Timeshifts::Initialize(bool const & initializeRaw, bool const & initializeC
   }
 
   if (m_initialized) return true; // To prevent multiple initializations
-  m_outPath = Path (m_outDir+m_ts_outdir, true); // /path/to/output/directory/Timeshifts/, create it if needed
-  if (!m_outPath) return (m_ok = m_initialized = false);
 
   print(m_outRoot, m_outData);
   mt_ref_time.resize(MTObject::getThreadsNumber(), 0);
@@ -485,6 +483,7 @@ bool Timeshifts::Initialize(bool const & initializeRaw, bool const & initializeC
     return (m_ok = m_initialized = false);
   }
 
+  m_timeshifts.resize(m_detectors.size(), 0);
 
   return (m_ok = m_initialized = true);
 }
@@ -884,6 +883,9 @@ void Timeshifts::write(std::string const & name)
  */
 void Timeshifts::writeData(std::string const & name)
 {
+  m_outPath = Path (m_outDir+m_ts_outdir, true); // /path/to/output/directory/Timeshifts/, create it if needed
+  if (!m_outPath) return (m_ok = m_initialized = false);
+
   auto const outData = m_outPath+name+".dT";
 
   std::ofstream outTimeshiftsFile(outData, std::ios::out);
@@ -906,6 +908,9 @@ void Timeshifts::writeData(std::string const & name)
  */
 void Timeshifts::writeRoot(std::string const & name)
 {
+  m_outPath = Path (m_outDir+m_ts_outdir, true); // /path/to/output/directory/Timeshifts/, create it if needed
+  if (!m_outPath) return (m_ok = m_initialized = false);
+
   auto const outRoot = m_outPath+name+"_dT.root";
 
   std::unique_ptr<TFile> outFile(TFile::Open((outRoot).c_str(),"RECREATE"));
