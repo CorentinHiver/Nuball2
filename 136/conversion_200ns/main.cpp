@@ -297,11 +297,11 @@ int main(int argc, char** argv)
       timeshifts.setDetectors(detectors);
       timeshifts.setMult(2,3);
       // timeshifts.setMaxHits(10000);
+      timeshifts.setOutDir(outPath);
       
       timeshifts.calculate(runpath, nb_files_ts);
       timeshifts.verify(runpath, 10);
 
-      timeshifts.setOutDir(outPath);
       timeshifts.write(run_name);
     }
 

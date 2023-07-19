@@ -74,7 +74,7 @@ public:
    * @brief Set the detector list
    * @note Mandatory only if calculate timeshifts
   */
-  void setDetectors(Detectors const & detList) {m_detectors = detList;}
+  void setDetectors(Detectors const & detList) {m_detectors = detList; this -> Initialize();}
   void setIDFile(Detectors const & detList) {m_detectors = detList;}
 
   bool setTimeWindow(int const & timewindow_ns);
