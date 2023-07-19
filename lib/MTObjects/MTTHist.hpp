@@ -277,7 +277,7 @@ inline void MTTHist<THist>::Fill(ARGS &&... args)
 template<class THist>
 void MTTHist<THist>::Merge()
 {
-  if (!m_exists || !m_collection.size() || m_collection[0] -> IsZombie() || m_collection[0] -> Integral() < 1)
+  if (!m_exists || !m_collection.size() || m_collection[0] -> IsZombie() || this -> Integral() < 1)
   {
     m_exists = false;
     delete m_merged;
