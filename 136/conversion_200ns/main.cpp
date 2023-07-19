@@ -58,7 +58,7 @@ struct Histos
   }
 };
 
-bool trigger(Counter136 const & count)
+bool trigger(Counter136 const & counter)
 {
   return ((counter.nb_modules>1 && counter.nb_Ge>0) || counter.nb_dssd>0);
 }
