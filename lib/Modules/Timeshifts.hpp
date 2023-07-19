@@ -218,7 +218,7 @@ public:
 
 private:
 
-  bool Initialize(bool const & initializeRaw = false, bool const & initializeCorrected = false;);
+  bool Initialize(bool const & initializeRaw = false, bool const & initializeCorrected = false);
   bool InitializeRaw();
   bool InitializeCorrected();
   static void treatFilesMT(Timeshifts & ts, MTList<std::string> & files_MT);
