@@ -500,13 +500,13 @@ public:
   Path & operator=(Path & path) 
   {
     m_path = path.m_path;
-    m_exists = path.m_exists;
+    load();
     return *this;
   }
   Path & operator=(const char* path) 
   {
     m_path = path;
-    m_exists = folder_exists(m_path);
+    load();
     return *this;
   }
 
