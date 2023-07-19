@@ -270,7 +270,7 @@ private:
     {dAlias::eden,   2.}, 
     {dAlias::RF,    10.}, 
     {dAlias::paris, 10.}, 
-    {dAlias::dssd,  0.1}
+    {dAlias::dssd,  0.5}
   };
 
   // This map tell if the timeshift is preferently taken as the 
@@ -473,7 +473,6 @@ bool Timeshifts::Initialize(bool const & initializeRaw, bool const & initializeC
 
   if (m_initialized) return true; // To prevent multiple initializations
 
-  print(m_outRoot, m_outData);
   mt_ref_time.resize(MTObject::getThreadsNumber(), 0);
 
   // Check the Detectors modules :
