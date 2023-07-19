@@ -122,6 +122,7 @@ public:
 private:
   FilesManager m_files;
   MTList<std::string> m_MTfiles;
+  std::mutex m_mutex;
 };
 
 template<class Func, class... ARGS>

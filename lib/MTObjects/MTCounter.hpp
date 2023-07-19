@@ -3,7 +3,7 @@
 
 #include "MTObject.hpp"
 
-class MTCounter : public MTObject
+class MTCounter 
 {
 public:
   MTCounter(){}
@@ -39,6 +39,7 @@ public:
   std::size_t operator*(std::size_t  const & v) {return static_cast<std::size_t >(m_counter)/v;}
 
 private:
+  std::mutex m_mutex;
   std::size_t m_counter = 0;
 };
 

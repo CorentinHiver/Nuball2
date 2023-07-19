@@ -28,7 +28,7 @@
 
 
 #include <libRoot.hpp>
-#include <Detectors.hpp>
+#include <Classes/Detectors.hpp>
 
 Detectors g_detectors("index_129.list");
 
@@ -75,15 +75,10 @@ int main(int argc, char** argv)
   #if defined (N_SI_120)
   std::string fileID = "ID/index_120.dat";
 
-  #elif defined (N_SI_129)
+  #elif defined (N_SI_129) || defined (N_SI_136)
   std::string fileID = "ID/index_129.dat";
 
   #endif
-
-  // Initialization :
-
-    // Initialize arrays
-  print("Initialization of arrays...");
 
   // NoPulse np;
   // np.launch(p);

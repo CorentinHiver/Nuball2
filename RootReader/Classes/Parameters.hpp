@@ -40,8 +40,8 @@ public:
 
   void printPerformances()
   {
-    int time = totalTime(); // if we use print, we have to get the value before so the unit() is changing accordingly
-    print("Analysis of", totalCounter()/1000000., "Mevts (", totalFilesSize(), "Mo) performed in", time, totalTime.unit(),
+    totalTime(); // one has to get the time in order to prepare the units
+    print("Analysis of", totalCounter()/1000000., "Mevts (", totalFilesSize(), "Mo) performed in", totalTime(), totalTime.unit(),
     "->", totalCounter/totalTime.TimeSec()/1000000., "Mevts/s (", totalFilesSize/totalTime.TimeSec(), "Mo/s)");
   }
 
@@ -199,6 +199,7 @@ bool Parameters::setData()
   if(m_list_runs.size()<1) { print("No runs list !"); return false;}
   for (auto const & run : m_list_runs) m_files.addFolder(m_dataPath+run, m_nb_files_per_run);
   m_list_files = m_files.getListFiles();
+  if (m_files.size() == 0) throw std::runtime_error(m_files.path().string());
 
   if (m_TW_correct) Sorted_Event::setTWcorrectionsDSSD(m_TW_file);
 

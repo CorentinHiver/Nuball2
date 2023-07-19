@@ -62,9 +62,9 @@ public:
       m_threads.emplace_back(
         [i, &func, &args...]()
         {
-          shared_mutex.lock();
+          mutex.lock();
           threads_ID[std::this_thread::get_id()] = i;
-          shared_mutex.unlock();
+          mutex.unlock();
           sleep(1);
           func(std::forward<ARGS>(args)...);
         });
@@ -81,7 +81,7 @@ public:
   }
 
   static ushort nb_threads;
-  static std::mutex shared_mutex;
+  static std::mutex mutex;
   static std::map<std::thread::id, int> threads_ID;
   static bool ON;
   operator bool() {return ON;}
@@ -93,9 +93,8 @@ public:
   }
 
   static auto const & getThreadsNb() {return nb_threads;}
+  static auto const & getThreadsNumber() {return nb_threads;}
   static void setThreadsNb(int const & n) {nb_threads = static_cast<ushort>(n);}
-protected:
-  std::mutex m_mutex;
 private:
   static std::vector<std::thread> m_threads;
 };
@@ -104,7 +103,7 @@ private:
 ushort MTObject::nb_threads = 1;
 bool MTObject::ON = false;
 std::map<std::thread::id, int> MTObject::threads_ID;
-std::mutex MTObject::shared_mutex;
+std::mutex MTObject::mutex;
 std::thread::id MTObject::master_thread;
 std::vector<std::thread> MTObject::m_threads;
 #endif //MTOBJECT_HPP

@@ -16,61 +16,56 @@
 #define COUNT_EVENT
 #endif //COUNT_EVENT
 
-#define CORENTIN
-// #define DATA2
-
 #include <libCo.hpp>
 #include <Event.hpp>
 #include <FilesManager.hpp>
 #include <MTTHist.hpp>
 #include <MTList.hpp>
 #include <MTCounter.hpp>
-#include <DetectorsList.hpp>
+#include <Detectors.hpp>
 #include <Classes/Counters.hpp>
 #include <Timer.hpp>
 #include <RF_Manager.hpp>
 
-DetectorsList g_listDet;
-
 #define USE_RF 200
 #define RF_SHIFT 50
-int nb_threads = 2;
-// std::string dataPath = "/home/corentin/faster_data/N-SI-129-root/M2G1_D1_TRIG/";
-// std::string dataPath = "../Data_129/M2G1/";
-std::string dataPath = "/home/corentin/faster_data/N-SI-136-root/";
-UShort_t nb_threads = 4;
+
+// std:: = "/home/corentin/faster_data/N-SI-129-root/M2G1_D1_TRIG/";
+// std:: = "../Data_129/M2G1/";
+Path dataPath = "/home/corentin/faster_data/N-SI-136-root/";
+ushort nb_threads = 2;
 int nb_max_evts_in_file = (int)(1.E+6); // 1 millions evts/fichier
 
 void run_thread();
 
+#ifdef N_SI_136
+  Path outDir (Path::pwd()+"../136/conversion/", 1);
+  File fileID ("index_129.dat");
+  File runs_list = Path::pwd()+"../Parameters/runs_pulsed_Corentin.list";
+#endif //N_SI_136
+
+MTList runs (listFileReader(runs_list));
+Detectors g_listDet(fileID);
+
+// Forward declaration
+void convertRun();
+
 int main(int argc, char ** argv)
 {
-  // quick_parameters qp;
-  Path home = Path::home();
-  Path pwd = Path::pwd();
-
-       if (argc == 2 && strcmp(argv[1],"-m")==0) nb_threads = 1;
-  else if (argc == 3 && strcmp(argv[1],"-m")==0) nb_threads = atoi(argv[2]);
-
-#ifdef N_SI_136
-  Path outDir = pwd+"../136/conversion/";
-  File fileID (,"index_129.dat";
-  File runs_list = pwd+"../Parameters/runs_pulsed_Corentin.list";
-#endif N_SI_136
-
-
-
-  // Initialize arrays
-  g_listDet.load(qp.fileID);
-  auto m_nb_labels = g_listDet.size();
-  Detectors::Initialize();
-
-  qp.runs = listFileReader(qp.runs_list);
-
-  if(nb_threads == 1)
+  if (!fileID) return -1;
+  if (argc > 1)
   {
-    convertRun(qp);
+    for(int i = 1; i < argc; i++)
+    {
+      std::string command = argv[i];
+           if (command == "-m")
+      {// Multithreading 
+        nb_threads = atoi(argv[++i]);
+      }
+    }
   }
+
+  if(nb_threads == 1) convertRun();
 
   else
   {
@@ -82,18 +77,17 @@ int main(int argc, char ** argv)
   return 1;
 }
 
-void convertRun(quick_parameters & param)
+void convertRun()
 {
   TRandom rand(time(0));
   std::string run = "";
-  while(param.runs.getNext(run))
+  while(runs.getNext(run))
   {
     MTObject::shared_mutex.lock();
     print("Converting",run);
     MTObject::shared_mutex.unlock();
-    std::string pathRun = param.dataPath+run;
-    makeFolder(pathRun);
-    if (!folder_exists(pathRun)) {print(pathRun, "doesn't exists !"); return;}
+    Path pathRun = dataPath+run;
+    if (!pathRun) {print(pathRun, "doesn't exists !"); return;}
     std::string rootFiles = pathRun+"*.root";
 
   #ifdef DEBUG
@@ -148,8 +142,8 @@ void convertRun(quick_parameters & param)
     Timer totalTime;
 
     // Counters :
-    Long64_t converted_counter = 0;
-    Long64_t DSSD_seul = 0;
+    ulonglong converted_counter = 0;
+    ulonglong DSSD_seul = 0;
 
     while(evt<chain.GetEntriesFast())
     {
@@ -178,7 +172,7 @@ void convertRun(quick_parameters & param)
       while(evt<chain.GetEntriesFast())
       {
         // Write in files of more or less the same size :
-       if (evt%(int)(1.E+5) == 0 && outTree->GetEntries() > param.nb_max_evts_in_file) break;
+       if (evt%(int)(1.E+5) == 0 && outTree->GetEntries() > nb_max_evts_in_file) break;
        if (evt%(int)(1.E+6) == 0)
        {
          print(evt*1.E-6, "Mevts");
@@ -268,9 +262,9 @@ void convertRun(quick_parameters & param)
       }// End events loop
 
       file_nb++;
-      std::string outPath = param.outDir+run+"/";
+      Path outPath = outDir+run;
       create_folder_if_none(outPath);
-      std::string outName = outPath+run+"_"+std::to_string(file_nb)+".root";
+      File outName = outPath+run+"_"+std::to_string(file_nb)+".root";
       auto const sizeOut = outTree->GetEntries();
 
       std::unique_ptr<TFile> file (TFile::Open(outName.c_str(),"recreate"));

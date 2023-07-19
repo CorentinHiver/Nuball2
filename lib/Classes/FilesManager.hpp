@@ -26,6 +26,7 @@ public:
   void   printFolders () { for (auto const & folder : m_listFolder) print(folder);}
 
   //Getters :
+  Path const & path() const {return m_path;}
   ListFiles   const & getListFiles     () const { return m_listFiles ;}
   ListFolders const & getListFolders   () const { return m_listFolder;}
 
@@ -68,6 +69,7 @@ public:
   void operator=(ListFiles const & list) {return setListFiles(list);}
 
 protected:
+  Path m_path;
   size_t      m_filesCursor = 0;
   ListFiles   m_listFiles;
   ListFolders m_listFolder;
@@ -78,6 +80,7 @@ protected:
 
 bool FilesManager::addFiles(std::string const & _filename)
 {
+  m_path = getPath(_filename);
   uint numberFiles = 0;
   if (extension(_filename) == "list")
   {// using the "data" file as an input containing the path to the actual data .root or .fast files
@@ -112,10 +115,6 @@ bool FilesManager::addFiles(std::string const & _filename)
 
 bool FilesManager::addFolder(std::string _foldername, int _nb_files)
 {
-  if (extension(_foldername) == "list")
-  {
-    //to code
-  }
   if (_foldername.back() != '/')
   {
     m_listFolder.push_back(removePath(_foldername)+"/");
@@ -154,7 +153,7 @@ bool FilesManager::addFolder(std::string _foldername, int _nb_files)
   }
   else
   {
-    print("NO data found !");
+    throw std::runtime_error("Folder '"+_foldername+"' empty !!");
     return false;
   }
 }

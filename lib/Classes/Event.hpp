@@ -9,15 +9,15 @@
 
 READ/WRITE OPTIONS :
 
-l : label   label               UShort_t
+l : label   label               ushort
 t : time    absolute timestamp  ULong64_t
-T : time2   relative timestamp  Float_t
-n : nrj     energy              Float_t
-N : nrj2    energy QDC2         Float_t
-p : pileup  pilepup             Bool_t
+T : time2   relative timestamp  float
+n : nrj     energy              float
+N : nrj2    energy QDC2         float
+p : pileup  pilepup             bool
 
 R :         RFtime              ULong64_t
-P :         RFperiod            Float_t
+P :         RFperiod            float
 
 */
 
@@ -26,29 +26,24 @@ class Event
   
 public:
 
-  Event() {initialise();}
+  Event() {}
 
   Event (Hit const & hit)
   {
-    initialise(1);
     *this = hit;
   }
 
   Event(Event const & event)
   {
-    initialise();
     *this = event;
   }
 
   Event(TTree * tree, std::string const & options = "ltnN", std::string const & io = "r")
   {
-    initialise();
     if (io == "r" || io == "read" || io == "R" || io == "Read")  connect(tree, options);
     else if (io == "w" || io == "write" || io == "W" || io == "Write")  writeTo(tree, options);
     else { print("EVENT : NO KNOWN I/O PARAMETER"); exit(0);}
   }
-
-  void initialise(int i_max = 255);
 
   void fillHit_ptr(Hit_ptr & hit, int const & i);
 
@@ -71,16 +66,23 @@ public:
   bool const & readTime() const {return read.T;}
   bool const & readtime() const {return read.t;}
 
-  int      mult     = 0;
-  Time     RFtime   = 0;
-  Float_t  RFperiod = 399998.;
+  Hit getHit(uchar const & i) const {return Hit(labels[i], 0, times[i], 0., nrjs[i], nrj2s[i], pileups[i]);}
 
-  UShort_t labels [255];
-  Float_t  nrjs   [255];
-  Float_t  nrj2s  [255];
-  Time     times  [255];
-  Float_t  time2s [255];
-  Bool_t   pileups[255];
+  // Public members :
+
+  int      mult     = 0;
+  Time     RFtime   = 0ull;
+
+#ifdef USE_RF
+  float  RFperiod = static_cast<float> (USE_RF);
+#endif //USE_RF
+
+  ushort labels [255] = {0};
+  float  nrjs   [255] = {0};
+  Time   times  [255] = {0};
+  float  nrj2s  [255] = {0};
+  float  time2s [255] = {0};
+  bool   pileups[255] = {0};
 
   struct read
   {
@@ -111,19 +113,6 @@ private:
   std::size_t m_maxSize = 255;
   Hit_ptr m_hit;
 };
-
-inline void Event::initialise(int i_max )
-{
-  m_maxSize = static_cast<std::size_t> (i_max);
-  for (int i = 0; i<i_max; i++)
-  {
-    labels  [i] = 0;
-    nrjs    [i] = 0;
-    nrj2s   [i] = 0;
-    times   [i] = 0;
-    pileups [i] = 0;
-  }
-}
 
 inline void Event::fillHit_ptr(Hit_ptr & hit, int const & i)
 {

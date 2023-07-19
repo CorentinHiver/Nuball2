@@ -6,7 +6,11 @@
 
 //WORK IN PROGRESS
 
-class MTFilesManager : public MTFilesManager
+/**
+ * @brief Work in progress
+ * 
+ */
+class MTFilesManager : public FilesManager
 {
   MTList<std::string> m_listFiles;
 }

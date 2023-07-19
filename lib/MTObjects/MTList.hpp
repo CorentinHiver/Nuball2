@@ -5,7 +5,7 @@
 #include "../libCo.hpp"
 
 template<class T>
-class MTList : public MTObject
+class MTList
 {
 public:
   MTList(){}
@@ -56,17 +56,17 @@ std::ostream& operator<<(std::ostream& cout, MTList<T> const & list)
 template<class T>
 inline bool MTList<T>::getNext(T & t)
 {
-  m_mutex.lock();
+  MTObject::mutex.lock();
   if (m_i<m_size)
   {
     t = m_collection[m_i];
     m_i++;
-    m_mutex.unlock();
+    MTObject::mutex.unlock();
     return true;
   }
   else
   {
-    m_mutex.unlock();
+    MTObject::mutex.unlock();
     return false;
   }
 }
@@ -74,18 +74,18 @@ inline bool MTList<T>::getNext(T & t)
 template<class T>
 inline bool MTList<T>::getNext(T & t, size_t & index)
 {
-  m_mutex.lock();
+  MTObject::mutex.lock();
   if (m_i<m_size)
   {
     t = m_collection[m_i];
     m_i++;
     index = m_i;
-    m_mutex.unlock();
+    MTObject::mutex.unlock();
     return true;
   }
   else
   {
-    m_mutex.unlock();
+    MTObject::mutex.unlock();
     return false;
   }
 }

@@ -1,10 +1,11 @@
 #ifndef CLOVERS_H
 #define CLOVERS_H
 
-#include <libCo.hpp>
-#include <libRoot.hpp>
-#include <Event.hpp>
-#include <CloverModule.hpp>
+#include "../libRoot.hpp"
+#include "Detectors.hpp"
+#include "../Classes/Event.hpp"
+#include "CloverModule.hpp"
+
 
 class Clovers
 {
@@ -17,34 +18,34 @@ public:
   //  - the BGO crystal index is the same for BGO - NOT USED (so far)
 
   // Is the detector a clover ? And if yes, is it a germanium or a BGO ?
-  static inline bool is_clover     (Label const & l) {return  (l>22 && l<167)                      ;}
-  static inline bool is_clover_Ge  (Label const & l) {return ((is_clover(l)) ? ((l-1)%6 < 4) : false);}
-  static inline bool is_clover_BGO (Label const & l) {return ((is_clover(l)) ? ((l-1)%6 > 3) : false);}
+  // static inline bool is_clover     (Label const & l) {return  (l>22 && l<167)                      ;}
+  // static inline bool is_clover_Ge  (Label const & l) {return ((is_clover(l)) ? ((l-1)%6 < 4) : false);}
+  // static inline bool is_clover_BGO (Label const & l) {return ((is_clover(l)) ? ((l-1)%6 > 3) : false);}
 
   // Correspondance between detector label and crystal index :
-  static inline uchar label_to_clover   (Label const & l) {return ((l-23)/6);}
+  // static inline uchar label_to_clover   (Label const & l) {return ((l-23)/6);}
   static        uchar label_to_cristal  (Label const & l);
 
-  static std::array<bool, 1000> is;       // Array used to know if a given detector is a clover
-  static std::array<bool, 1000> isGe;     // Array used to know if a given detector is a Germanium clover
-  static std::array<bool, 1000> isBGO;    // Array used to know if a given detector is a BGO clover
-  static std::array<bool, 1000> blacklist;// Array used to know if a given detector is in the blacklist
+  // static std::array<bool, 1000> is;       // Array used to know if a given detector is a clover
+  // static std::array<bool, 1000> isGe;     // Array used to know if a given detector is a Germanium clover
+  // static std::array<bool, 1000> isBGO;    // Array used to know if a given detector is a BGO clover
+  // static std::array<bool, 1000> blacklist;// Array used to know if a given detector is in the blacklist
 
   static std::array<uchar, 1000> labels;  // Array used to make correspondance between a detector label and its clover label
 
   static std::array<uchar, 1000> cristaux_index;     // Array used to make correspondance between the detector label and the Ge  index
   static std::array<uchar, 1000> cristaux_index_BGO; // Array used to make correspondance between the detector label and the BGO index
-  // static std::vector <uchar> cristaux_opposite;// Array used to make correspondance between a detector label and its cristal label
+  // static std::vector <uchar> cristaux_opposite;// Array used to make correspondance between a detector and the label of the detector opposite 
 
   static void Initialize()
   {
     for (Label l = 0; l<1000; l++)
     {
-      is[l] = is_clover(l);
-      isGe[l] = is_clover_Ge(l);
-      isBGO[l] = is_clover_BGO(l);
+      // is[l] = is_clover(l);
+      // isGe[l] = is_clover_Ge(l);
+      // isBGO[l] = is_clover_BGO(l);
 
-      labels[l] = (is[l]) ? label_to_clover(l) : -1;
+      // labels[l] = (is[l]) ? label_to_clover(l) : -1;
       cristaux_index[l] = (isGe[l]) ? label_to_cristal(l) : -1;
       cristaux_index_BGO[l] = (isBGO[l]) ? label_to_cristal(l) : -1;
     }
@@ -121,10 +122,10 @@ public:
 
 // ---- Initialize static members : ----- //
 // Lookup tables :
-std::array<bool, 1000> Clovers::is;
-std::array<bool, 1000> Clovers::isGe;
-std::array<bool, 1000> Clovers::isBGO;
-std::array<bool, 1000> Clovers::blacklist;
+// std::array<bool, 1000> Clovers::is;
+// std::array<bool, 1000> Clovers::isGe;
+// std::array<bool, 1000> Clovers::isBGO;
+// std::array<bool, 1000> Clovers::blacklist;
 std::array<uchar, 1000> Clovers::labels;
 std::array<uchar, 1000> Clovers::cristaux_index;
 std::array<uchar, 1000> Clovers::cristaux_index_BGO;
@@ -268,53 +269,61 @@ void Clovers::Analyse()
 uchar Clovers::label_to_cristal(Label const & l)
 {
   auto const cristal = l-23;
-  auto const clover_cristal = cristal%6; // 0 and 1 are BGOs, 2 to 5 are
+  auto const clover_cristal = cristal%6;
+
+  // BGO : 
   if (clover_cristal<2) return clover_cristal+cristal/6;
+  
+  // Ge :
   else
   {
-    auto const clover = cristal/6;
-    switch (clover) // clover number, to take into account the rotated ones :
+    auto const clover = cristal/6; // Clover number
+    auto const Ge_cristal = clover_cristal-2; // Cristal number in clover [0,3]
+
+    // To take into account the rotated clovers :
+    switch (clover) 
     { // Rotation is trigowise direction
-      // pi rotation
+
+      // pi/2 rotation : R2A6
     case 17:
-      switch(clover_cristal-2)
+      switch(Ge_cristal)
       {
-        case 0: return clover;   // Red
-        case 1: return clover+1; // Green
-        case 2: return clover+3; // Black
-        case 3: return clover+2; // Blue
+        case 0: return Ge_cristal+0; // Red
+        case 1: return Ge_cristal+0; // Green
+        case 2: return Ge_cristal+1; // Black
+        case 3: return Ge_cristal-1; // Blue
         default : return -1;
       }
 
-      // -pi rotation : R3A3, R3A4
+      // -pi/2 rotation : R3A3, R3A4
     case 2: case 3:
-      switch(clover_cristal-2)
+      switch(Ge_cristal)
       {
-        case 0: return clover+3; // Red
-        case 1: return clover+2; // Green
-        case 2: return clover;   // Black
-        case 3: return clover+1; // Blue
+        case 0: return Ge_cristal+3; // Red
+        case 1: return Ge_cristal+1; // Green
+        case 2: return Ge_cristal-2; // Black
+        case 3: return Ge_cristal+0; // Blue
         default : return -1;
       }
 
-      // 2pi rotation
+      // pi rotation : R3A5
     case 4:
-      switch(clover_cristal-2)
+      switch(Ge_cristal)
       {
-        case 0: return clover+1; // Red
-        case 1: return clover+3; // Green
-        case 2: return clover+2; // Black
-        case 3: return clover+0; // Blue
+        case 0: return Ge_cristal+1; // Red
+        case 1: return Ge_cristal+2; // Green
+        case 2: return Ge_cristal+0; // Black
+        case 3: return Ge_cristal-3; // Blue
         default : return -1;
       }
 
       default: // All the correctly turned clovers:
-      switch(clover_cristal-2)
+      switch(Ge_cristal)
       {
-        case 0: return clover+2; // Red
-        case 1: return clover;   // Green
-        case 2: return clover+1; // Black
-        case 3: return clover+3; // Blue
+        case 0: return Ge_cristal+2; // Red
+        case 1: return Ge_cristal-1; // Green
+        case 2: return Ge_cristal-1; // Black
+        case 3: return Ge_cristal+0; // Blue
         default : return -1;
       }
     }

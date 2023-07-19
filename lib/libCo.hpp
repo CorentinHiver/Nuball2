@@ -39,14 +39,30 @@
 
 float _ns = 1000.;
 
+
 ////////////////
-//   TYPEDEF  //
+//    USING   //
 ////////////////
 
-typedef unsigned short int  ushort;
-typedef unsigned char       uchar ;
-typedef unsigned int        uint  ;
-typedef unsigned long int   ulong ;
-typedef unsigned long long int ulonglong ;
+// Units :
+using ushort = unsigned short int  ;
+using uchar  = unsigned char       ;
+using uint   = unsigned int        ;
+using ulong  = unsigned long int   ;
+using ulonglong  = unsigned long long int ;
+
+// Containers :
+using Bools = std::vector<bool>;
+using Strings = std::vector<std::string>;
+
+/////////////////////////////
+//    STANDART FUNCTIONS   //
+/////////////////////////////
+
+// std::istringstream read_argv(int argc, char** argv)
+// {
+
+// }
+
 
 #endif //LIB_H_CO

@@ -18,8 +18,6 @@
 #include <Alignator.hpp>      // Align a TTree if some events are shuffled in time
 #include <RF_Extractor.hpp>   // Extracts the first RF hit from a ttree
 
-#include "EventBuilder_136.hpp" // Event builder for this experiment
-
 // 3. Declare some global variables :
 std::string IDFile = "index_120.list";
 std::string calibFile = "calib_120.dat";

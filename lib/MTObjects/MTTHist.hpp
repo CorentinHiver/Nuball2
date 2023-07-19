@@ -50,8 +50,9 @@
  *        
  *        some_TH1F_histo->Integral();
  */
+// class MTTHist : public MTObject
 template <class THist>
-class MTTHist : public MTObject
+class MTTHist
 {
 public:
   /**
@@ -138,7 +139,8 @@ public:
   void Write();
   std::string const & name() const {return m_str_name;}
 
-  bool const & exists() const {return m_exists;}  
+  bool const & exists() const {return m_written;}  
+  bool const & isWritten() const {return m_exists;}  
   operator bool() const & {return m_exists;}
 
   std::vector<THist*> const & getCollection() const {return m_collection;}
@@ -172,7 +174,7 @@ public:
   void Merge();
   THist * Merged();
   THist * Get(ushort const & thread_nb) {return m_collection[thread_nb];}
-  THist * Get() {return m_collection[getThreadIndex()];}
+  THist * Get() {return m_collection[MTObject::getThreadIndex()];}
   THist * operator[](int const & thread_nb) {return m_collection[thread_nb];}
 
   auto const & Integral() const {return m_integral;}
@@ -185,13 +187,16 @@ public:
   std::string const & readComment(std::string const & comment) const {return m_comment;}
 
 private:
+  std::mutex m_mutex;
+
   std::string m_comment;
+  std::string m_str_name;
   TFile* m_file = nullptr;
   bool m_exists = false;
-  std::string m_str_name = "";
+  bool m_written = false;
   ulonglong m_integral = 0ull;
 
-  THist* m_merged;
+  THist* m_merged = nullptr;
 
   #ifndef MTTHIST_MONO
   bool m_is_merged = false;
@@ -207,7 +212,7 @@ inline void MTTHist<THist>::reset(std::string name, ARGS &&... args)
 {
   if (MTObject::ON)
   {
-    shared_mutex.lock();
+    m_mutex.lock();
     m_file = gROOT -> GetFile();// If SIGSEGV here, have you instantiated the object ? (e.g., in an array of histograms)
     m_exists = true;// If SIGSEGV here, have you instantiated the object ? (e.g., in an array of histograms)
     m_str_name = name;
@@ -219,10 +224,11 @@ inline void MTTHist<THist>::reset(std::string name, ARGS &&... args)
 
   #else // not MTTHIST_MONO
     // If we are in the master thread, then it means we are 
-    if (isMasterThread())
+    if (MTObject::isMasterThread())
     {
-      m_collection.resize(MTObject::nb_threads, nullptr);
-      m_is_deleted.resize(MTObject::nb_threads, false);
+      for (uint histo = 0; histo<m_collection.size(); histo++) if (!m_is_deleted[histo]) delete m_collection[histo];
+      m_collection.resize(MTObject::getThreadsNb(), nullptr);// Memory leak here !!
+      m_is_deleted.resize(MTObject::getThreadsNb(), false);
       for (size_t i = 0; i<m_collection.size(); i++)
       {
         m_collection[i] = new THist ((name+"_"+std::to_string(i)).c_str(), std::forward<ARGS>(args)...);
@@ -236,13 +242,13 @@ inline void MTTHist<THist>::reset(std::string name, ARGS &&... args)
         m_collection.resize(thread_nb);
         m_is_deleted.resize(thread_nb, true);
       }
-      auto const & i = getThreadIndex();
+      auto const & i = MTObject::getThreadIndex();
       m_collection[i] = new THist (name.c_str(), std::forward<ARGS>(args)...);
       m_is_deleted[i] = false;
     }
 
   #endif //MTTHIST_MONO
-    shared_mutex.unlock();
+    m_mutex.unlock();
   }
   else 
   {// If MTObject::OFF
@@ -262,7 +268,7 @@ inline void MTTHist<THist>::Fill(ARGS &&... args)
   m_mutex.unlock();
 
 #else // not MTTHIST_MONO :
-  m_collection[getThreadIndex()]->Fill(std::forward<ARGS>(args)...);
+  m_collection[MTObject::getThreadIndex()]->Fill(std::forward<ARGS>(args)...);
 
 #endif //MTTHIST_MONO
 }
@@ -320,11 +326,12 @@ void MTTHist<THist>::Write()
       || m_merged -> IsZombie()
       || m_merged -> Integral() < 1) return;
       m_merged -> Write(m_str_name.c_str(), TROOT::kOverwrite);
-      reset(nullptr);
+      reset(nullptr); // Not sure this is truly safe...
+      m_written = true;
   }
   else
   {// If we are in one histo per thread mode :
-    auto const & thread_i = MTObject::getThreadIndex();
+    auto const & thread_i = MTObject::MTObject::getThreadIndex();
     if  (   !m_exists
           ||!m_collection[thread_i]
           || m_collection[thread_i] -> IsZombie()
@@ -332,6 +339,7 @@ void MTTHist<THist>::Write()
         ) return;
     else
     {
+      m_written = true;
       m_collection[thread_i] -> Write();
       delete m_collection[thread_i];
       m_is_deleted[thread_i] = true;

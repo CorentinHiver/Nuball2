@@ -2,7 +2,6 @@
 #define LIBROOTCO_HPP
 
 #include "libCo.hpp"
-#include "files_functions.hpp"
 
 // ********** ROOT includes ********* //
 #include "TAxis.h"
@@ -60,6 +59,60 @@ bool AddTH1(TH2* histo2, TH1* histo1, int index, bool x = true)
     if (x) histo2->SetBinContent(index, i, histo1->GetBinContent(i));
     else   histo2->SetBinContent(i, index, histo1->GetBinContent(i));
   }
+  return true;
+}
+
+/**
+ * @brief Get which bin holds the X = 0
+*/
+int getBin0(TH1F* spectra)
+{
+  auto const bins = spectra -> GetXaxis() -> GetNbins();
+  std::vector<double> lowEdges(bins);
+  spectra -> GetXaxis() -> GetLowEdge(lowEdges.data());
+  int bin0 = 0;
+  while(lowEdges[bin0] < 0) bin0++;
+  return bin0;
+}
+
+/**
+ * @brief Get the mean of the peak of a histogram with one nice single peak
+*/
+bool getMeanPeak(TH1F* spectra, double & mean)
+{
+  // Declaration :
+  std::unique_ptr<TF1> gaus_pol0;
+  std::unique_ptr<TF1> fittedPic;
+  float pospic, amppic, dump_sigma;
+  float cte, Mean, sigma;
+
+  // Histogram characteristics :
+  auto const bins = spectra -> GetXaxis() -> GetNbins();
+  auto const xmax = spectra -> GetXaxis() -> GetXmax();
+  auto const xmin = spectra -> GetXaxis() -> GetXmin();
+
+  auto const xPerBin = (xmax-xmin)/bins;
+  auto const bin0 = getBin0(spectra);
+  
+  // Extract dump parameters :
+  amppic = spectra -> GetMaximum();
+  pospic = static_cast<double>( (spectra->GetMaximumBin() - bin0)*xPerBin );
+  dump_sigma = static_cast<double>( (spectra->FindLastBinAbove(amppic/2) - spectra->FindFirstBinAbove(amppic/2)) * xPerBin/2 );
+
+  // Fits the peak :
+  gaus_pol0.reset(new TF1("gaus+pol0","gaus(0)+pol0(3)",pospic-20*dump_sigma,pospic+20*dump_sigma));
+  gaus_pol0 -> SetParameters(amppic, pospic, dump_sigma, 1);
+  gaus_pol0 -> SetRange(pospic-dump_sigma*20,pospic+dump_sigma*20);
+  spectra -> Fit(gaus_pol0.get(),"R+q");
+
+  // Extracts the fitted parameters :
+  fittedPic.reset (spectra -> GetFunction("gaus+pol0"));
+  if (!fittedPic) return false; // Eliminate non existing fits, when not enough statistics fit doesn't converge
+  cte = fittedPic -> GetParameter(0);
+  mean = Mean = fittedPic -> GetParameter(1);
+  sigma = fittedPic -> GetParameter(2);
+
+  if (false) print("cte", cte, "Mean", Mean, "sigma", sigma);
 
   return true;
 }

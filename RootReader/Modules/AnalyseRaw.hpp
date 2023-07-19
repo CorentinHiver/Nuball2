@@ -19,7 +19,7 @@ public:
   bool launch(Parameters & p);
   bool setParameters(std::vector<std::string> const & param);
   void InitializeManip();
-  static void treatFile(Parameters & p, AnalyseRaw & analyseraw);
+  static void treatFile(Parameters & p, AnalyseRaw & analyseRaw);
   void FillRaw(Event const & event);
   void FillSorted(Sorted_Event const & event_s, Event const & event);
   void Analyse();
@@ -32,13 +32,13 @@ private:
 
   // ---- Variables ---- //
   RF_Manager rf;
-  std::string m_outDir  = "136/AnalyseRaw/";
+  std::string m_outDir  = "AnalyseRaw/";
   std::string m_outRoot = "AnalyseRaw.root";
 
   // Energy binning between 0 and 3000 keV, number of bins per 10 keV
-  std::map<Detector::det_alias, float> m_energy_binning = { {LaBr3, 1.}, {Ge, 20.}, {BGO, 0.5}, {Eden, 2.}, {RF, 10.}, {paris, 1.}, {null, 1.} };
+  std::map<dAlias, float> m_energy_binning = { {labr, 1.}, {ge, 20.}, {bgo, 0.5}, {eden, 2.}, {RF, 10.}, {paris, 1.}, {dssd, 1.}, {null, 1.} };
   // Timing binning between -100 and 300 ns, number of bins per nanoseconds
-  std::map<Detector::det_alias, float> m_timing_binning = { {LaBr3, 10.}, {Ge, 1.}, {BGO, 2.}, {Eden, 2.}, {RF, 10.}, {paris, 10.}, {dssd, 1.}, {null, 1.} };
+  std::map<dAlias, float> m_timing_binning = { {labr, 10.}, {ge, 1.}, {bgo, 2.}, {eden, 2.}, {RF, 10.}, {paris, 10.}, {dssd, 2.}, {null, 1.} };
 
   // ---- Histograms ---- //
   Vector_MTTHist<TH1F> timing_spectra;
@@ -55,7 +55,7 @@ bool AnalyseRaw::launch(Parameters & p)
   return true;
 }
 
-void AnalyseRaw::treatFile(Parameters & p, AnalyseRaw & analyseraw)
+void AnalyseRaw::treatFile(Parameters & p, AnalyseRaw & analyseRaw)
 {
   std::string rootfile;
   Sorted_Event event_s;
@@ -66,9 +66,9 @@ void AnalyseRaw::treatFile(Parameters & p, AnalyseRaw & analyseraw)
     std::unique_ptr<TFile> file (TFile::Open(rootfile.c_str(), "READ"));
     if (!file.get()) {print("CAN'T OPEN", rootfile,"!!"); continue;}
     if (file->IsZombie()) {print(rootfile, "is a Zombie !"); continue;}
-    std::unique_ptr<TTree> tree (file->Get<TTree>("Nuball"));
-    if (!tree.get()) tree.reset(file->Get<TTree>("Nuball2"));
-    if (!tree.get()) {print("Nuball or Nuball2 tree not in file", rootfile);}
+    auto tree = static_cast<TTree*> (file->Get<TTree>("Nuball2"));
+    // if (!tree.get()) tree.reset(file->Get<TTree>("Nuball2"));
+    // if (!tree.get()) {print("Nuball or Nuball2 tree not in file", rootfile);}
 
     size_t events = tree->GetEntries();
     p.totalCounter+=events;
@@ -76,16 +76,17 @@ void AnalyseRaw::treatFile(Parameters & p, AnalyseRaw & analyseraw)
     auto const & filesize = size_file(rootfile, "Mo");
     p.totalFilesSize+=filesize;
 
-    Event event(tree.get(), "ltnN");
+    Event event(tree, "ltnN");
     for (size_t i = 0; i<events; i++)
     {
       tree->GetEntry(i);
-      analyseraw.FillRaw(event);
+      analyseRaw.FillRaw(event);
       // event_s.sortEvent(event);
-      // analyseraw.FillSorted(event_s,event);
+      // analyseRaw.FillSorted(event_s,event);
     } // End event loop
     auto const & time = timer();
     print(removePath(rootfile), time, timer.unit(), ":", filesize/timer.TimeSec(), "Mo/s");
+    file->Close();
   } // End files loop
 }
 
@@ -98,11 +99,11 @@ void AnalyseRaw::InitializeManip()
   energy2_spectra.resize(g_detectors.size());
   for (uint label = 0; label<g_detectors.size(); label++) 
   {
+    if (!g_detectors.exists[label]) continue;
     auto const & name = g_detectors[label];
-    if (name == "") continue;
     auto const & alias = Detectors::alias(label);
 
-    if (alias == Detector::det_alias::null) print(name, Detector::det_str[alias], "check Detectors object");
+    if (alias == dAlias::null) print(name, Detector::alias_str[alias], "check Detectors object");
 
     timing_spectra[label].reset((name+" time spectra").c_str(), (name+" time spectra;time [ns];# counts").c_str(), 500*m_timing_binning[alias], -100, 400);
 
@@ -110,7 +111,7 @@ void AnalyseRaw::InitializeManip()
     else  energy_spectra[label].reset((name+" energy spectra").c_str(), (name+" energy spectra;energy [keV]; # counts").c_str(), 300*m_energy_binning[alias], 0, 3000);
 
     if (isParis[label] || isEden[label]) energy2_spectra[label].reset((name+" energy2 spectra").c_str(), (name+" nrj2 VS nrj spectra;nrj [u.a.];nrj2 [u.a.]").c_str(), 
-      300*m_energy_binning[alias], 0, 3000, 300*m_energy_binning[alias], 0, 3000);
+      300*m_energy_binning[alias],0,3000, 300*m_energy_binning[alias],0,3000);
   }
 }
 
@@ -134,11 +135,12 @@ void AnalyseRaw::FillRaw(Event const & event)
       if (isParis[label])
       {
         energy2_spectra[label].Fill(nrj, nrj2);
-        if ( (nrj/nrj2) > 0.5 ) 
-        {
+        auto const ratio = (nrj2-nrj)/nrj2;
+        // if ( ratio < 0.3 && ratio > -0.8 ) 
+        // {
           energy_spectra[label].Fill(nrj);
           timing_spectra[label].Fill(rf.pulse_ToF(time)/_ns);
-        }
+        // }
       }
       else
       {
@@ -168,6 +170,8 @@ void AnalyseRaw::Analyse()
 
 void AnalyseRaw::Write()
 {
+  Path outPath(m_outDir, 1);
+  if (!outPath) {throw std::runtime_error(m_outDir+"can't be created");}
   std::unique_ptr<TFile> outfile(TFile::Open((m_outDir+m_outRoot).c_str(),"recreate"));
   outfile->cd();
   print("Writting histograms ...");

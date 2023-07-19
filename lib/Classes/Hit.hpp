@@ -18,13 +18,22 @@ class Hit
 {
 public:
   Hit(){reset();}
+  Hit(Label _label, float _nrj, Time _time, float _nrj2 = 0, NRJ _nrjcal = 0, NRJ _nrj2cal = 0, bool _pileup = false) : 
+    label(_label),
+    nrj(_nrj),
+    time(_time),
+    nrj2(_nrj2),
+    nrjcal(_nrjcal),
+    nrj2cal(_nrj2cal),
+    pileup(_pileup)
+    {}
 
   Label label  = 0;     // Label
   float nrj    = 0.f;   // Energy
+  Time  time   = 0ull;  // Timestamp ('ull' stands for unsigned long long)
   float nrj2   = 0.f;   // used if QDC2
   NRJ   nrjcal = 0.f;   // Calibrated energy
   NRJ   nrj2cal= 0.f;   // Calibrated QDC2
-  Time  time   = 0ull;  // Timestamp ('ull' stands for unsigned long long)
   bool  pileup = false; // Pile-up
 
   void reset()

@@ -18,8 +18,22 @@ public:
     MTCounter nb_total_events;
     MTCounter nb_total_raw_events;
     MTCounter nb_total_kept_events;
+
+    MTCounter total_read_size_file;
+    MTCounter total_written_size_file;
+
+
+    // void printIO();
 };
 
+// void Performances::printIO()
+// {
+//   auto const 
+//   print
+//   (
+//     ""
+//   );
+// }
 
 
 #endif //PERFORMANCES_HPP
