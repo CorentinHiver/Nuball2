@@ -31,29 +31,37 @@ Folder manip = "N-SI-136";
 std::string list_runs = "list_runs.list";
 std::string time_ref = "301";
 std::string timewindow = "1500";
-int  nb_files_ts = 20;
+int  nb_files_ts = 30;
 int nb_files = -1;
 bool overwrite = false; // Overwrite already existing converted root filesstruct histos
 
 struct Histos
 {
-  Vector_MTTHist<TH1F> rf;
+  // Vector_MTTHist<TH1F> rf;
   MTTHist<TH2F> rf_all;
+  MTTHist<TH2F> energy_all;
   void Initialize(Detectors const & detectors)
   {
     auto const & nbDet = detectors.number();
 
-    rf_all.reset("RF_timing", "RF_timing", nbDet,0,nbDet, 1000,-100,400);
+    rf_all.reset("RF_timing_all", "RF timing all", nbDet,0,nbDet, 1000,-100,400);
+    energy_all.reset("Energy_spectra_all", "Energy spectra all", nbDet,0,nbDet, 10000,0,20000);
 
-    rf.resize(nbDet);
-    for (uint label = 0; label<nbDet; label++)
-    {
-      if (!detectors.exists[label]) continue;
-      auto const & name = detectors[label];
-      rf[label].reset((name+"_RF_timing").c_str(), (name+"_RF_timing").c_str(), 1000, -100, 400);
-    }
+    // rf.resize(nbDet);
+    
+    // for (uint label = 0; label<nbDet; label++)
+    // {
+    //   if (!detectors.exists[label]) continue;
+    //   auto const & name = detectors[label];
+    //   // rf[label].reset((name+"_RF_timing").c_str(), (name+"_RF_timing").c_str(), 1000, -100, 400);
+    // }
   }
 };
+
+bool trigger(Counter136 const & count)
+{
+  return ((counter.nb_modules>1 && counter.nb_Ge>0) || counter.nb_dssd>0);
+}
 
 // 4. Declare the function to run on each file in parallel :
 void convert(Hit & hit, FasterReader & reader, 
@@ -100,7 +108,7 @@ void convert(Hit & hit, FasterReader & reader,
   {
     hit.time+=timeshifts[hit.label];
     hit.nrjcal = calibration(hit.nrj,  hit.label);
-    hit.nrj2   = calibration(hit.nrj2, hit.label);
+    if (hit.nrj2 != 0.f) hit.nrj2  = calibration(hit.nrj2, hit.label);
     readTree -> Fill();
     rawCounts++;
     if (hit.label == RF_Manager::label) RF_counter_raw++;
@@ -171,15 +179,16 @@ if (rawCounts==0) return;
     }
 
     auto const tof = rf.pulse_ToF(hit.time);
-    histos.rf[hit.label].Fill(tof/_ns);
+    // histos.rf[hit.label].Fill(tof/_ns);
     histos.rf_all.Fill(hit.label, tof/_ns);
+    histos.energy_all.Fill(hit.label, hit.nrjcal);
 
     // Event building :
     if (eventBuilder.build(hit))
     {
       counter.count(event); 
     #ifdef TRIGGER
-      if ((counter.nb_modules>1 && counter.nb_Ge>0) || counter.nb_dssd>0)
+      if (trigger(counter))
       {
         hits_count+=event.size();
         evts_count++;
@@ -215,7 +224,6 @@ if (rawCounts==0) return;
   auto outSize  = static_cast<int>(size_file_conversion(outFile->GetSize(), "o", "Mo"));
 
   timer();
-  print(RF_counter_raw, RF_counter_written);
   print(outfile, "written in", timer(), timer.unit(),"(",dataSize/timer.TimeSec(),"Mo/s). Input file", dataSize, 
         "Mo and output file", outSize, "Mo : compression factor ", dataSize/outSize,"-", 100*hits_count/rawCounts,"% hits kept");
 }
@@ -311,8 +319,9 @@ int main(int argc, char** argv)
 
     std::unique_ptr<TFile> outFile (TFile::Open((outPath+run_name+"/histo_"+run_name+".root").c_str(), "RECREATE"));
     outFile -> cd();
-    for (auto & histo : histos.rf) histo.Write();
+    // for (auto & histo : histos.rf) histo.Write();
     histos.rf_all.Write();
+    histos.energy_all.Write();
     outFile -> Write();
     outFile -> Close();
     print(outPath+run_name+"/"+run_name+"_histo.root written");
