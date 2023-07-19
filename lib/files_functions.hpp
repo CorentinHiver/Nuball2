@@ -351,6 +351,9 @@ public:
   auto erase(uint const & pos)                    {return (m_folders.erase(m_folders.begin()+pos)                            );}
   auto erase(uint const & pos, uint const & size) {return (m_folders.erase(m_folders.begin()+pos), m_folders.begin()+pos+size);}
 
+  void clear() {m_folders.resize(0);}
+  Folders & resize(int const & size) {m_folders.resize(size); return *this;}
+
   auto const size() const {return m_folders.size();}
 
   auto begin() const {return m_folders.begin();}
@@ -422,6 +425,7 @@ public:
 
   void load(bool const & create = false)
   {
+    m_recursive_folders.clear();
     if (m_path[0]=='/')
     {// Absolute path
     }
