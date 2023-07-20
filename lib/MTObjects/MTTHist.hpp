@@ -294,7 +294,11 @@ void MTTHist<THist>::Merge()
       m_file = gROOT -> GetFile();
       if (m_file) gROOT -> cd(); //To get out of scope of any potential TFile
       m_merged = static_cast<THist*> (m_collection[0]->Clone(m_str_name.c_str()));
-      for (size_t i = 1; i<m_collection.size(); i++) m_merged -> Add(m_collection[i]);
+      for (size_t i = 1; i<m_collection.size(); i++) 
+      {
+        auto & histo = m_collection[i];
+        if (histo->Integral() > 0) m_merged -> Add(histo);
+      }
       if (m_file) m_file -> cd(); //To return to the scope of any potential TFile
     }
     m_is_merged = true;

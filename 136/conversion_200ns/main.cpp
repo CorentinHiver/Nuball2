@@ -31,21 +31,23 @@ Folder manip = "N-SI-136";
 std::string list_runs = "list_runs.list";
 std::string time_ref = "301";
 std::string timewindow = "1500";
-int  nb_files_ts = 30;
+int  nb_files_ts = 50;
 int nb_files = -1;
 bool overwrite = false; // Overwrite already existing converted root filesstruct histos
 
 struct Histos
 {
   // Vector_MTTHist<TH1F> rf;
-  MTTHist<TH2F> rf_all;
-  MTTHist<TH2F> energy_all;
+  MTTHist<TH2F> rf_each;
+  MTTHist<TH2F> energy_each;
+  MTTHist<TH1F> energy_all;
   void Initialize(Detectors const & detectors)
   {
     auto const & nbDet = detectors.number();
 
-    rf_all.reset("RF_timing_all", "RF timing all", nbDet,0,nbDet, 1000,-100,400);
-    energy_all.reset("Energy_spectra_all", "Energy spectra all", nbDet,0,nbDet, 10000,0,20000);
+    rf_each.reset("RF_timing_all", "RF timing all", nbDet,0,nbDet, 1000,-100,400);
+    energy_each.reset("Energy_spectra_all", "Energy spectra all", nbDet,0,nbDet, 10000,0,20000);
+    energy_all.reset("Ge spectra", "Ge spectra", 8000,0,4000);
 
     // rf.resize(nbDet);
     
@@ -180,8 +182,9 @@ if (rawCounts==0) return;
 
     auto const tof = rf.pulse_ToF(hit.time);
     // histos.rf[hit.label].Fill(tof/_ns);
-    histos.rf_all.Fill(hit.label, tof/_ns);
-    histos.energy_all.Fill(hit.label, hit.nrjcal);
+    histos.rf_each.Fill(hit.label, tof/_ns);
+    histos.energy_each.Fill(hit.label, hit.nrjcal);
+    histos.energy_all.Fill(hit.nrjcal);
 
     // Event building :
     if (eventBuilder.build(hit))
@@ -320,8 +323,9 @@ int main(int argc, char** argv)
     std::unique_ptr<TFile> outFile (TFile::Open((outPath+run_name+"/histo_"+run_name+".root").c_str(), "RECREATE"));
     outFile -> cd();
     // for (auto & histo : histos.rf) histo.Write();
-    histos.rf_all.Write();
     histos.energy_all.Write();
+    histos.rf_each.Write();
+    histos.energy_each.Write();
     outFile -> Write();
     outFile -> Close();
     print(outPath+run_name+"/"+run_name+"_histo.root written");
