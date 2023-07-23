@@ -4,36 +4,45 @@
 #include "libCo.hpp"
 
 // ********** ROOT includes ********* //
-#include "TAxis.h"
-#include "TCanvas.h"
-#include "TChain.h"
-#include "TError.h"
-#include "TF1.h"
-#include "TF2.h"
-#include "TFile.h"
-#include "TFitResultPtr.h"
-#include "TFitResult.h"
-#include "TGraph.h"
-#include "TGraphErrors.h"
-#include "TH1F.h"
-#include "TH1D.h"
-#include "TH1S.h"
-#include "TH2.h"
-#include "TH2F.h"
-#include "TH3I.h"
-#include "TKey.h"
-#include "TLeaf.h"
-#include "TLegend.h"
-#include "TMath.h"
-#include "TRandom.h"
-#include "TROOT.h"
-#include "TStopwatch.h"
-#include "TString.h"
-#include "TStyle.h"
-#include "TSystem.h"
-#include "TThread.h"
-#include "TTree.h"
-#include "TTreeIndex.h"
+#include <TAxis.h>
+#include <TCanvas.h>
+#include <TChain.h>
+#include <TError.h>
+#include <TF1.h>
+#include <TF2.h>
+#include <TFile.h>
+#include <TFitResultPtr.h>
+#include <TFitResult.h>
+#include <TGraph.h>
+#include <TGraphErrors.h>
+#include <TH1F.h>
+#include <TH1D.h>
+#include <TH1S.h>
+#include <TH2.h>
+#include <TH2F.h>
+#include <TH3I.h>
+#include <TKey.h>
+#include <TLeaf.h>
+#include <TLegend.h>
+#include <TMath.h>
+#include <TRandom.h>
+#include <TROOT.h>
+#include <TStopwatch.h>
+#include <TString.h>
+#include <TStyle.h>
+#include <TSystem.h>
+#include <TThread.h>
+#include <TTree.h>
+#include <TTreeIndex.h>
+
+////////////////
+//   UNSINGS  //
+////////////////
+
+using unique_TH1F = std::unique_ptr<TH1F>;
+using unique_TH2F = std::unique_ptr<TH2F>;
+using unique_TFile = std::unique_ptr<TFile>;
+
 
 ////////////////////////////
 //   HISTO MANIPULATIONS  //

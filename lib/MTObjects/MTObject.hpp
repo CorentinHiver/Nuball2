@@ -98,12 +98,21 @@ public:
 private:
   static std::vector<std::thread> m_threads;
 };
-// As it is a static variable we have to declare it outside of the class
-// Also, I think it is better to initialise it at 1, in order to avoid unitialisation issue
+
+// Declaration of static variables :
 ushort MTObject::nb_threads = 1;
 bool MTObject::ON = false;
 std::map<std::thread::id, int> MTObject::threads_ID;
 std::mutex MTObject::mutex;
 std::thread::id MTObject::master_thread;
 std::vector<std::thread> MTObject::m_threads;
+
+template<class... ARGS>
+void printMT(ARGS ... args) 
+{
+  MTObject::mutex.lock();
+  print(std::forward<ARGS>(args)...);
+  MTObject::mutex.unlock();
+}
+
 #endif //MTOBJECT_HPP

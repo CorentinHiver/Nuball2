@@ -495,6 +495,11 @@ public:
   std::string operator+(const char* addString) {return (m_path+static_cast<std::string>(addString));}
   Path operator+(Folder const & folder) {return Path(m_path+folder.get());}
 
+  Folder const & operator[] (uint const & i) const {return m_recursive_folders[i];}
+  Folder const & folder() const {return m_recursive_folders.get().back();}
+  auto const size() const {return m_recursive_folders.size();}
+  Folders const & getFolders() const {return m_recursive_folders;}
+
   Path & operator=(std::string const & inputString) // Le mettre à jour !!!!!
   {
     m_path = inputString;
@@ -526,7 +531,6 @@ public:
 
   static Path home() {return Path(std::string(std::getenv("HOME")));}
   static Path pwd() {return Path(std::string(std::getenv("PWD")));}
-  static Path current_directory() {return Path(std::string(std::getenv("PWD")));}
 
 private:
   bool m_exists = false;
@@ -616,18 +620,26 @@ public:
           m_filename(file.m_filename) 
   { }
 
-  File(std::string const & file) 
+  File(std::string const & file, std::string const & mode = "") 
   {
+    checkMode(mode);
     fill(file);
     check();
   }
-  File(const char * file) 
+
+  File(const char * file, std::string const & mode = "") 
   {
+    checkMode(mode);
     fill(file);
     check();
+  }
+
+  void checkMode(std::string const & mode)
+  {
+    if (mode == "in" || mode == "read" || mode == "input") check_verif = true;
   }
   
-  File(Path const & path, Filename const & filename) : m_file(path+filename), m_path(path), m_filename(filename) {}
+  File(Path const & path, Filename const & filename, std::string const & mode = "") : m_file(path+filename), m_path(path), m_filename(filename) {checkMode(mode);check();}
 
   auto c_str() {return m_file.c_str();}
 
@@ -672,7 +684,7 @@ private:
   {
     if (m_path.exists())
     {
-      if (file_exists(m_file)) m_ok = true;
+      if (file_exists(m_file) || !check_verif) m_ok = true;
       else print("The file", m_file, "is unreachable in folder", m_path);
     }
     else
@@ -683,12 +695,21 @@ private:
 
   void fill(std::string const & file)
   {
-    m_file = file;
     m_path = getPath(file);
-    m_filename = removePath(file);
+    if (file[0] != '/') 
+    {
+      m_filename = file;
+      m_file = m_path.string()+file;
+    }
+    else 
+    {
+      m_file = file;
+      m_filename = removePath(file);
+    }
   }
 
   bool m_ok = false;
+  bool check_verif = false;
   std::string m_file; // Full path + short name + extension
   Path m_path;        // Path
   Filename m_filename;// Name + extension

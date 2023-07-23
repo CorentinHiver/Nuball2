@@ -46,7 +46,7 @@ struct Histos
     auto const & nbDet = detectors.number();
 
     rf_each.reset("RF_timing_all", "RF timing all", nbDet,0,nbDet, 1000,-100,400);
-    energy_each.reset("Energy_spectra_all", "Energy spectra all", nbDet,0,nbDet, 10000,0,20000);
+    energy_each.reset("Energy_spectra_all", "Energy spectra all", nbDet,0,nbDet, 5000,0,15000);
     energy_all.reset("Ge spectra", "Ge spectra", 8000,0,4000);
 
     // rf.resize(nbDet);
@@ -184,7 +184,7 @@ if (rawCounts==0) return;
     // histos.rf[hit.label].Fill(tof/_ns);
     histos.rf_each.Fill(hit.label, tof/_ns);
     histos.energy_each.Fill(hit.label, hit.nrjcal);
-    histos.energy_all.Fill(hit.nrjcal);
+    if (isGe[hit.label]) histos.energy_all.Fill(hit.nrjcal);
 
     // Event building :
     if (eventBuilder.build(hit))

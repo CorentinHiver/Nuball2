@@ -28,6 +28,8 @@ Labels labelToBGOcrystal(1000,0);
 Labels labelToGecrystal(1000,0);
 Strings clover_pos  (1000,"");
 
+Labels compressedLabel(1000,-1); // Used to put all the detectors one after the other
+
 #include "../Analyse/Clovers.hpp"
 
 /**
@@ -70,10 +72,14 @@ public:
   Detectors(const char* filename) : m_filename(filename) { this -> load(m_filename); }
   Detectors(Detectors const & otherList) : exists (otherList.exists), m_ok(otherList.m_ok), m_filename(otherList.m_filename), m_list(otherList.m_list), m_reversed_list(otherList.m_reversed_list) {  }
   void load (std::string const & filename);
+  void readFile(std::string const & file);
   void makeArrays();
 
-  auto const size  () const {return m_list.size();}
-  auto const number() const {return m_list.size();}
+  /// @brief Return the value of the maximum label
+  auto const size() const {return m_list.size();}
+
+  /// @brief  Return the real number of detectors
+  static auto const number() {return nb_detectors;}
 
   auto begin() {return m_list.begin();}
   auto end  () {return m_list.end  ();}
@@ -130,6 +136,7 @@ private:
   // Useful informations
   bool m_ok = false;
   bool m_loaded = false;
+  static ushort nb_detectors;
   std::string m_filename;
 
   // Containers
@@ -137,7 +144,16 @@ private:
   LabelsMap m_reversed_list;
 };
 
+/// @brief Number of detectors
+ushort Detectors::nb_detectors = 0;
+
 void Detectors::load(std::string const & filename)
+{
+  this -> readFile(filename);
+  this -> makeArrays();
+}
+
+void Detectors::readFile(std::string const & filename)
 {
   std::ifstream inputfile(filename, std::ifstream::in);
   if (!inputfile.is_open())
@@ -184,60 +200,77 @@ void Detectors::load(std::string const & filename)
   inputfile.close();
   print("Labels extracted from", filename);
   m_ok = m_loaded = true;
-  this -> makeArrays();
 }
 
 void Detectors::makeArrays()
 {
   if (!m_loaded) {throw std::runtime_error("ID file not loaded !!"); return;}
 
+    // The following is used to fill the compressedLabel array :
+    bool known = false;
+
+  // Looping around the labels
   for (auto label = 0ul; label<this->size(); label++)
   {
     std::istringstream is(replaceCharacter(m_list[label], '_', ' '));
     std::string str;
+
+    known = false;
+
+    // Looping around the subparts of the name "subpart_..._subpart"
     while(is >> str)
     {
       if (str == "red" || str == "green" || str == "black" || str == "blue" || str == "ge")
       {
         isGe    [label] = true;
+        known = true;
       }
       else if (str == "BGO1" || str == "BGO2")
       {
         isBGO   [label] = true;
+        known = true;
       }
       else if (str == "FATIMA")
       {
         isLaBr3 [label] = true;
+        known = true;
       }
       else if (str == "PARIS" )
       {
         isParis [label] = true;
+        known = true;
       }
       else if (str == "DSSD" )
       {
         isDSSD [label] = true;
+        known = true;
       }
       else if (str == "EDEN"  )
       {
         isEden  [label] = true;
+        known = true;
       }
       else if (str == "RF"    )
       {
         isRF    [label] = true;
+        known = true;
       }
       else if (str == "S1")
       {
         isSector[label] = true;
         isS1    [label] = true;
+        known = true;
       }
       else if (str == "S2")
       {
         isSector[label] = true;
         isS2    [label] = true;
+        known = true;
       }
       else if (str == "R")
       {
         isRing[label] = true;
+        known = true;
       }
 
       // Additionnal position informations 
@@ -254,12 +287,19 @@ void Detectors::makeArrays()
         isFront[label] = true;
       }
     }
+
     // Other arrays :
     isClover[label] = label>22 && label<167;
     labelToClover[label] = (isClover[label]) ? (label-23)%6 : -1;
     labelToBGOcrystal[label] = (isBGO[label]) ? (2*(label-23)/6 + (label+1)%6) : (-1);
+     
+    if (known) 
+    {
+      compressedLabel[label] = nb_detectors;
+      nb_detectors++;
+    }
+    else compressedLabel[label] = -1;
   }
-
 }
 
 #endif //DETECTORS_HPP

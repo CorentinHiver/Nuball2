@@ -18,7 +18,7 @@ public:
   }
 
   void clear();
-  void count_event(Event const & event);
+  void countEvent(Event const & event);
   void set_hit(Event const & event, int const & i);
   void clover_analyse();
   bool hasTrigged();
@@ -81,34 +81,27 @@ void Counters::set_hit(Event const & event, int const & i)
   }
   else if (isLaBr3[label])
   {
-    #ifdef FATIMA
     LaBr3Mult++;
     Modules++;
-    #endif //FATIMA
   }
   else if (isParis[label])
   {
-    #ifdef PARIS
     ParisMult++;
     Modules++;
-    #endif //PARIS
   }
   else if (isDSSD[label])
   {
-    #ifdef USE_DSSD
     DSSDMult++;
-    #endif //USE_DSSD
   }
 }
 
-void Counters::count_event(Event const & event)
+void Counters::countEvent(Event const & event)
 {
   this -> clear();
   for (uchar i = 0; i<event.mult; i++)
   {
     set_hit(event,i);
   }
-  clover_analyse();
 }
 
 void Counters::clover_analyse()

@@ -71,9 +71,9 @@ public:
   // Public members :
 
   int      mult     = 0;
-  Time     RFtime   = 0ull;
 
 #ifdef USE_RF
+  Time   RFtime   = 0ull;
   float  RFperiod = static_cast<float> (USE_RF);
 #endif //USE_RF
 
@@ -151,8 +151,10 @@ inline void Event::operator= (Event const & evt)
     times  [i] = evt.times[i];
     pileups[i] = evt.pileups[i];
   }
+#ifdef USE_RF
   RFtime   = evt.RFtime;
   RFperiod = evt.RFperiod;
+#endif //USE_RF
   read = evt.read;
   write = evt.write;
 }

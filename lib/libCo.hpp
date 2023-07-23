@@ -10,6 +10,7 @@
 #include <fstream>
 #include <numeric>
 #include <map>
+#include <memory>
 #include <mutex>
 #include <queue>
 #include <sstream>
