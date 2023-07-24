@@ -16,6 +16,7 @@ n : nrj     energy              float
 N : nrj2    energy QDC2         float
 p : pileup  pilepup             bool
 
+// ifdef USE_RF : 
 R :         RFtime              ULong64_t
 P :         RFperiod            float
 
@@ -186,8 +187,10 @@ void Event::writeTo(TTree * tree, std::string const & options)
   if ( write.E   )  tree -> Branch("nrj"      , &nrjs   , "nrj[mult]/F"   );
   if ( write.E2  )  tree -> Branch("nrj2"     , &nrj2s  , "nrj2[mult]/F"  );
   if ( write.p   )  tree -> Branch("pileup"   , &pileups, "pileup[mult]/O");
+#ifdef USE_RF
   if ( write.RFt )  tree -> Branch("RFtime"   , &RFtime  );
   if ( write.RFp )  tree -> Branch("RFperiod" , &RFperiod);
+#endif //USE_RF
 
   tree -> SetBranchStatus("*",true);
 }
@@ -217,9 +220,10 @@ void Event::connect(TTree * tree, std::string const & options)
   if ( read.E ) tree -> SetBranchAddress("nrj"     , &nrjs    );
   if ( read.E2) tree -> SetBranchAddress("nrj2"    , &nrj2s   );
   if ( read.p ) tree -> SetBranchAddress("pileup"  , &pileups );
+#ifdef USE_RF
   if ( read.p ) tree -> SetBranchAddress("RFtime"  , &RFtime  );
   if ( read.p ) tree -> SetBranchAddress("RFperiod", &RFperiod);
-
+#endif //USE_RF
   tree -> SetBranchStatus("*",true);
 }
 

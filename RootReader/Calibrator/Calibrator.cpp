@@ -2,8 +2,6 @@
 
 // #define N_SI_129
 #define N_SI_136
-// #define N_SI_120
-#define USE_RF 200
 
 #if defined (M2G1_TRIG)
 #define COUNT_EVENT
@@ -47,20 +45,15 @@ Path dataPath;
 ushort nb_threads = 2;
 int nb_max_evts_in_file = (int)(1.E+7); // 1 millions evts/fichier
 bool calib_BGO = false;
-bool histoed = false;
-bool overwrites = false;
 
 void run_thread();
 
 #ifdef N_SI_136
-  Path outDir (Path::pwd()+"../136/conversion/", 1);
+  Path outDir (Path::pwd()+"../136/matrices/", 1);
   File fileID ("index_129.dat");
-  File runs_list = Path::pwd()+"../Parameters/runs_pulsed_Corentin.list";
+  File runs_list = Path::pwd()+"faster_data/N-SI-136-root/";
 #endif //N_SI_136
 
-
-// Forward declaration
-void convertRuns(MTList<std::string> & runs);
 
 int main(int argc, char ** argv)
 {
@@ -96,14 +89,6 @@ int main(int argc, char ** argv)
       {// Relative path to output 
         outDir = Path(std::string(argv[++i]), 1);
       }
-      else if (command == "-O" || command == "--overwrites")
-      {
-        overwrites = true;
-      }
-      else if (command == "-H" || command == "--histograms")
-      {// Enables histograms
-        histoed = true;
-      }
       else if (command == "-n" || command == "--nb_hits")
       {// number of hits in one output file
         nb_max_evts_in_file = static_cast<int>(std::stod(argv[++i]));
@@ -131,17 +116,15 @@ int main(int argc, char ** argv)
       else if (command == "-h" || command == "--help")
       {
         print("List commands :");
-        print("(      --BGO_cal)                                     : Roughly, for BGO, Energy[keV] = ADC/100. Use this command if the BGO data are still in ADC");
-        print("(-d || --data_path)  [/path/to/data/]                 : Path to the data");
-        print("(-f || --folder)     [folder/]                        : Name of the folder to convert");
-        print("(-F || --folders)    [nb_folders] [[list of folders]] : List of the folders to convert");
-        print("(-h || --help)                                        : Displays this help");
-        print("(-H || --histograms)                                  : Declare histograms"); 
-        print("(-i || --ID)         [/path/to/ID.dat]                : Index file");
-        print("(-l || --list)       [/path/to/*.list]                : Read a .list file with a list of folders to convert");
-        print(" -m                  [nb_threads]                     : Number of threads to be used");
-        print("(-o || --out_path)   [/path/to/output/]               : Path to the output");
-        print("(-O || --overwrite)                                   : Overwrites the output folders");
+        print("(      --BGO_cal)                                     : roughly, for BGO, Energy[keV] = ADC/100. Use this command if the BGO data are still in ADC");
+        print("(-d || --data_path)  [/path/to/data/]                 : path to the data");
+        print("(-f || --folder)     [folder/]                        : name of the folder to convert");
+        print("(-F || --folders)    [nb_folders] [[list of folders]] : list of the folders to convert");
+        print("(-h || --help)                                        : displays this help");
+        print("(-i || --ID)         [/path/to/ID.dat]                :                     ");
+        print("(-l || --list)       [/path/to/*.list]                : read a .list file with a list of folders to convert");
+        print(" -m                  [nb_threads]                     : number of threads to be used");
+        print("(-o || --out_path)   [/path/to/output/]               : path to the output");
         print("(-t || --trigger)    [0;3]                            : 0 : no trigger, 1 : M2G1, 2: P, 3 : M2G1_P");
         return 1;
       }
@@ -157,48 +140,30 @@ int main(int argc, char ** argv)
   print(runsMT);
 #endif //DEBUG
 
-  if (runsMT.size() == 0)
+  std::string pathRun_str = "";
+  while(runs.getNext(pathRun_str))
   {
-    print("NO DATA IN", dataPath+runs_list);
-    return -1;
+    // Handles the names :
+    Path pathRun = dataPath+pathRun_str;
+    std::string run = pathRun.folder().name();
+    Path outPath(outDir+run,1);
+    if (!pathRun) {printMT(pathRun, "doesn't exists !"); return;}
+
+    // Load the chain :
+    TChain chain("Nuball2");
+    chain.Add((pathRun.string()+"run_*.root").c_str());
+
+    // Create the event reader :
+    Event event;
+    event.connect(&chain,"mltnN");
+
+    // Declare the histograms :
+    auto Bidim_Ge_BGO_R3A1 = std::make_unique<TH2F>(("Bidim_Ge_BGO_R2A1"+run).c_str(), ("Bidim Ge BGO R2A1"+run+";BGO [keV];Ge [keV]").c_str(), 500,0,10000, 10000,0,10000);
+    auto Bidim_Ge_Paris_LaBr3_BR2D1 = std::make_unique<TH2F>(("Bidim_Ge_BGO"+run).c_str(), ("Bidim_Ge_BGO"+run+";BGO [keV];Ge [keV]").c_str(), 500,0,10000, 10000,0,10000);
   }
 
-  else if(runsMT.size() == 1 || nb_threads == 1) convertRuns(runsMT);
-
-  else
-  {
-    MTObject::Initialize(nb_threads);
-    MTObject::adjustThreadsNumber(runsMT.size(), "number of runs too small");
-    MTObject::parallelise_function(convertRuns, runsMT);
-  }
   print("Conversion done");
   return 1;
-}
-
-bool find_first_RF(TTree & tree, Event & event, RF_Manager & rf, int const & maximum_RF_location = static_cast<int>(1.E+7))
-{
-    // Get first RF of file :
-    bool stop = false;
-    Long64_t evt = 0;
-    while(!stop && evt < maximum_RF_location)
-    {
-      tree.GetEntry(evt++);
-      for (size_t i = 0; i<event.size(); i++)
-      {
-        if (event.labels[i] == 251)
-        {
-          rf.last_hit = event.times[i];
-          rf.period = event.nrjs[i];
-          stop = true;
-          break;
-        }
-      }
-    }
-    if (evt == maximum_RF_location) {print("NO RF found !!"); return false;}
-#ifdef DEBUG
-    print("RF extracted at hit n°", evt);
-#endif //DEBUG
-  return true;
 }
 
 void convertRuns(MTList<std::string> & runs)
@@ -214,9 +179,6 @@ void convertRuns(MTList<std::string> & runs)
 
     Path pathRun = dataPath+pathRun_str;
     std::string run = pathRun.folder().name();
-
-    if (!overwrites && folder_exists(outDir+run)) continue;
-
     Path outPath(outDir+run,1);
 
     printMT("Converting", run);
@@ -250,26 +212,21 @@ void convertRuns(MTList<std::string> & runs)
     ulonglong DSSD_seul = 0;
     Counters counter;
 
+    Timer timer; // Measure the time to convert the whole run
     Long64_t evt = 0; // Event number
     int file_nb = 0; // File number
 
     // Declare histograms :
-    auto RF_period_histo  = (histoed) ? std::make_unique<TH1F>(("RF_period_histo_"+run).c_str(),("RF period histo "+run).c_str(), 50, 1000*USE_RF*0.98,1000*USE_RF*1.02) : 0;
+    auto RF_period_histo  = std::make_unique<TH1F>(("RF_period_histo_"+run).c_str(),("RF period histo "+run).c_str(), 50, 1000*USE_RF*0.98,1000*USE_RF*1.02);
 
-    auto ref_VS_RF        = (histoed) ? std::make_unique<TH1F>(("ref_VS_RF_"+run).c_str(),("Timing reference "+run).c_str(), 2*USE_RF, -USE_RF/2, 3*USE_RF/2) : 0;
+    auto ref_VS_RF        = std::make_unique<TH1F>(("ref_VS_RF_"+run).c_str(),("Timing reference "+run).c_str(), 2*USE_RF, -USE_RF/2, 3*USE_RF/2);
 
-    auto detectors_VS_RF  = (histoed) ? std::make_unique<TH2F>(("detectors_VS_RF_"+run).c_str(),("Timing all detectors "+run).c_str(), 
-                              Detectors::number(),0,Detectors::number(), 2*USE_RF,-USE_RF/2,3*USE_RF/2) : 0;
+    auto detectors_VS_RF  = std::make_unique<TH2F>(("detectors_VS_RF_"+run).c_str(),("Timing all detectors "+run).c_str(), 
+                              Detectors::number(),0,Detectors::number(), 2*USE_RF,-USE_RF/2,3*USE_RF/2);
 
-    auto Ge_spectra       = (histoed) ? std::make_unique<TH1F> (("Ge_spectra_"+run).c_str()   ,("Ge spectra "+run).c_str(), 1000,0,5000 ) : 0;
+    auto Ge_spectra       = std::make_unique<TH1F> (("Ge_spectra_"+run).c_str()   ,("Ge spectra "+run).c_str(), 1000,0,5000 );
 
-    Timer timer;
-
-    // Loop over the whole folder :
-    while(evt<chain.GetEntriesFast())
-    {
-      auto outTree  = std::make_unique<TTree>("Nuball2", "Second conversion");
-      Timer timerFile;
+    auto outTree  = std::make_unique<TTree>("Nuball2", "Second conversion");
 
     #if defined (USE_RF)
       event.writeTo(outTree.get(),"lnNTRP");
@@ -279,98 +236,59 @@ void convertRuns(MTList<std::string> & runs)
       event.writeTo(outTree.get(),"lnNt");
     #endif
 
-      // Loop over the folder until the output tree reaches the maximum size, or the end of data is reached :
-      ulong loop2 = 0;
-      while(evt<chain.GetEntriesFast())
+    while(evt<chain.GetEntriesFast())
+    {
+      // Write in files of more or less the same size :
+      if (evt%(int)(1.E+5) == 0 && outTree->GetEntries() > nb_max_evts_in_file) break;
+    #ifdef DEBUG
+      if (evt%(int)(1.E+6) == 0)
       {
-        // Write in files of more or less the same size :
-        if (evt%(int)(1.E+5) == 0 && outTree->GetEntries() > nb_max_evts_in_file) break;
-      #ifdef DEBUG
-        if (evt%(int)(1.E+6) == 0)
-        {
-          printMT(evt*1.E-6, "Mevts");
-        }
-      #endif //DEBUG
+        printMT(evt*1.E-6, "Mevts");
+      }
+    #endif //DEBUG
 
-        // Read event :
-        chain.GetEntry(evt++);
+      // Read event :
+      chain.GetEntry(evt++);
 
-      #ifdef USE_RF
-        // Extract the RF information and calculate the relative timestamp : 
+      if (check_trigger(counter, event, trigger_mode))
+      {
+      // Treat event :
         for (int i = 0; i<event.mult; i++)
         {
           auto const & label = event.labels[i];
-          auto const & time  = event.times [i];
 
-          if (rf.period!=0) event.time2s[i] = rf.pulse_ToF(time)/_ns;
+          if (calib_BGO && isBGO[label]) event.nrjs[i] /= 100.;
 
-          if (label == 252) 
-          {
-            if (histoed) ref_VS_RF->Fill(event.time2s[i]);
-          }
-          else if (label == RF_Manager::label)
-          {
-            event.RFperiod = event.nrjs[i];
-            // event.RFperiod = (time+rand.Uniform(0,1)-rf.last_hit)/1000.;
-            if (histoed) RF_period_histo->Fill(event.RFperiod);
-            rf.period = static_cast<Time>(event.RFperiod);
-            rf.last_hit = time+rand.Uniform(0,1);
-          } 
         }
-      #endif //USE_RF
-
-        if (check_trigger(counter, event, trigger_mode))
-        {
-          // Treat event :
-          for (int i = 0; i<event.mult; i++)
-          {
-            auto const & label = event.labels[i];
-            
-            if (calib_BGO && isBGO[label]) event.nrjs[i] /= 100.;
-            if (histoed)
-            {
-              if (isGe[label]) Ge_spectra->Fill(event.nrjs[i]);
-              detectors_VS_RF -> Fill(compressedLabel[label], event.time2s[i]);
-            }
-          }
-
-        #ifdef USE_RF
-          event.RFtime = rf.last_hit;
-          event.RFperiod = rf.period;
-        #endif //USE_RF
-
-          outTree->Fill();
-        }
-        loop2++;
-      }// End events loop
+        outTree->Fill();
+      }
+      loop2++;
 
       file_nb++;
       File outName = outPath+run+"_"+std::to_string(file_nb)+".root";
       auto const sizeOut = outTree->GetEntries();
 
-      std::unique_ptr<TFile> file (TFile::Open(outName.c_str(),"recreate"));      
-      file -> cd();
-      outTree -> Write();
-      file    -> Write();
-      file    -> Close();
-      printMT(outName,"written, ",sizeOut*1.E-6, "Mevts in", timerFile.TimeSec()," s (",100*sizeOut/loop2,"% kept)");
-      converted_counter += sizeOut;
-    }// End files loop
-
-    if (histoed)
-    {
-      File outName = outPath+"histos_"+run+".root";
       std::unique_ptr<TFile> file (TFile::Open(outName.c_str(),"recreate"));
       file -> cd();
 
-      RF_period_histo -> Write();
-      ref_VS_RF       -> Write();
-      detectors_VS_RF -> Write();
-      Ge_spectra      -> Write();
-      
-      file -> Write();
-      file -> Close();
-    }
+      outTree -> Write();
+
+      file    -> Write();
+      file    -> Close();
+      converted_counter += sizeOut;
+    }// End files loop
+
+    File outName = outPath+"histos_"+run+".root";
+    std::unique_ptr<TFile> file (TFile::Open(outName.c_str(),"recreate"));
+    file -> cd();
+
+    RF_period_histo -> Write();
+    ref_VS_RF       -> Write();
+    detectors_VS_RF -> Write();
+    Ge_spectra      -> Write();
+    
+    file->Write();
+    file -> Close();
 
     print(run, ":", evt*1.E-6, "->", converted_counter*1.E-6, "Mevts (",100*converted_counter/evt,"%) converted at a rate of", 1.E-3*evt/timer.TimeSec(), "kEvts/s");
     chain.Reset();

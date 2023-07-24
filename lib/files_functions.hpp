@@ -718,9 +718,6 @@ private:
       m_filename = file;
     }
     m_file = m_path.string()+m_filename.string();
-    print("\n");
-    print(m_file);
-    print();
   }
 
   bool m_ok = false;
