@@ -331,6 +331,7 @@ void convertRuns(MTList<std::string> & runs)
       print(outName,"written, ",sizeOut*1.E-6, "Mevts in", timer.TimeSec()," s (",100*sizeOut/evt,"% kept)");
       converted_counter += sizeOut;
     }// End files loop
+
     if (histoed)
     {
       File outName = outPath+"histos_"+run+".root";
@@ -345,6 +346,7 @@ void convertRuns(MTList<std::string> & runs)
       file->Write();
       file -> Close();
     }
+    
     print(run, ":", evt*1.E-6, "->", converted_counter*1.E-6, "Mevts (",100*converted_counter/evt,"%) converted at a rate of", 1.E-3*evt/timer.TimeSec(), "kEvts/s");
     chain.Reset();
   }// End runs loop
