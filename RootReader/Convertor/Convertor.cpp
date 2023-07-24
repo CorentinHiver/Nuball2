@@ -45,7 +45,7 @@ trigger_modes trigger_mode = P;
 
 Path dataPath;
 ushort nb_threads = 2;
-int nb_max_evts_in_file = (int)(1.E+6); // 1 millions evts/fichier
+int nb_max_evts_in_file = (int)(1.E+7); // 1 millions evts/fichier
 bool calib_BGO = false;
 bool histoed = false;
 
@@ -98,6 +98,10 @@ int main(int argc, char ** argv)
       else if (command == "-H" || command == "--histograms")
       {// Enables histograms
         histoed = true;
+      }
+      else if (command == "-n" || command == "--nb_hits")
+      {// number of hits in one output file
+        nb_max_evts_in_file = static_cast<int>(std::stod(argv[++i]));
       }
       else if (command == "-l" || command == "--list")
       { // .list file containing the list of folders to convert
