@@ -3,6 +3,7 @@
 
 #include "../libCo.hpp"
 #include "../Classes/Event.hpp"
+#include "Detectors.hpp"
 
 class Counters
 {
