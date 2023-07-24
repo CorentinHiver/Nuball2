@@ -707,7 +707,6 @@ private:
 
   void fill(std::string const & file)
   {
-    print(file, hasPath(file));
     if (hasPath(file))
     {
       m_path = getPath(file);
@@ -717,7 +716,6 @@ private:
     {
       m_path = Path::pwd();
       m_filename = file;
-      print("test", m_path, m_filename, file);
     }
     m_file = m_path.string()+m_filename.string();
     print("\n");

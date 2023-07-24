@@ -111,6 +111,10 @@ int main(int argc, char ** argv)
       {// "Gain match" BGO is not already done
         calib_BGO = true;
       }
+      else if (command == "-s" || command == "--shift_rf")
+      {
+        RF_Manager::set_offset(std::stoi(argv[++i]));
+      }
       else if (command == "-t" || command == "--trigger")
       {
         trigger_mode = static_cast<trigger_modes>(std::stoi(argv[++i]));
@@ -118,12 +122,13 @@ int main(int argc, char ** argv)
       else if (command == "-h" || command == "--help")
       {
         print("List commands :");
+        print("(      --BGO_cal)                                     : roughly, for BGO, Energy[keV] = ADC/100. Use this command if the BGO data are still in ADC");
         print("(-d || --data_path)  [/path/to/data/]                 : path to the data");
         print("(-f || --folder)     [folder/]                        : name of the folder to convert");
         print("(-F || --folders)    [nb_folders] [[list of folders]] : list of the folders to convert");
         print("(-h || --help)                                        : displays this help");
-        print("(-H || --histograms)                                  : Declare histograms");
-        print("(      --BGO_cal)                                     : roughly, for BGO, Energy[keV] = ADC/100. Use this command if the BGO data are still in ADC");
+        print("(-H || --histograms)                                  : Declare histograms"); 
+        print("(-i || --ID)         [/path/to/ID.dat]                :                     ");
         print("(-l || --list)       [/path/to/*.list]                : read a .list file with a list of folders to convert");
         print(" -m                  [nb_threads]                     : number of threads to be used");
         print("(-o || --out_path)   [/path/to/output/]               : path to the output");
@@ -261,14 +266,17 @@ void convertRuns(MTList<std::string> & runs)
     #endif
 
       // Loop over the folder until the output tree reaches the maximum size, or the end of data is reached :
+      ulong loop2 = 0;
       while(evt<chain.GetEntriesFast())
       {
         // Write in files of more or less the same size :
-       if (evt%(int)(1.E+5) == 0 && outTree->GetEntries() > nb_max_evts_in_file) break;
-       if (evt%(int)(1.E+6) == 0)
-       {
-         print(evt*1.E-6, "Mevts");
-       }
+        if (evt%(int)(1.E+5) == 0 && outTree->GetEntries() > nb_max_evts_in_file) break;
+      #ifdef DEBUG
+        if (evt%(int)(1.E+6) == 0)
+        {
+          printMT(evt*1.E-6, "Mevts");
+        }
+      #endif //DEBUG
 
         // Read event :
         chain.GetEntry(evt++);
@@ -318,6 +326,7 @@ void convertRuns(MTList<std::string> & runs)
 
           outTree->Fill();
         }
+        loop2++;
       }// End events loop
 
       file_nb++;
@@ -331,7 +340,7 @@ void convertRuns(MTList<std::string> & runs)
 
       file    -> Write();
       file    -> Close();
-      print(outName,"written, ",sizeOut*1.E-6, "Mevts in", timer.TimeSec()," s (",100*sizeOut/evt,"% kept)");
+      printMT(outName,"written, ",sizeOut*1.E-6, "Mevts in", timer.TimeSec()," s (",100*loop2/evt,"% kept)");
       converted_counter += sizeOut;
     }// End files loop
 
