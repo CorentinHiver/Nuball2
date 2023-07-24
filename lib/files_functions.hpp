@@ -53,6 +53,8 @@ int size_file(std::string filename, std::string const & unit = "o")
   return size_file(f, unit);
 }
 
+bool hasPath(std::string const & file) {return (getPath(file) != "");}
+
 bool file_exists(std::string fileName)
 {
   std::string path = getPath(fileName);
@@ -551,7 +553,7 @@ class Filename
 {
 public:
   Filename(){}
-  Filename(std::string const & _filename) : m_fullName(_filename) 
+  Filename(std::string const & _filename)
   {
     this -> fill(_filename);
   }
@@ -572,8 +574,15 @@ public:
     return *this;
   }
 
+  Filename & operator=(const char* _filename)
+  {
+    this -> fill(std::string(_filename));
+    return *this;
+  }
+
   operator std::string() const & {return m_fullName;}
   std::string const & get() const {return m_fullName;}
+  std::string const & string() const {return m_fullName;}
 
   std::string const & fullName() const {return m_fullName;}
   std::string const & shortName() const {return m_shortName;}
@@ -583,9 +592,10 @@ private:
 
   void fill(std::string const & filename)
   {
-    if (getPath(filename).size() > 1) {print(filename, "is not a filename...");}
+    if (hasPath(filename)) {print(filename, "is not a filename...");}
     else
     {
+      m_fullName = filename;
       m_shortName = rmPathAndExt(filename);
       m_extension = getExtension(filename);
     }
@@ -645,12 +655,14 @@ public:
 
   File & operator=(std::string const & file) 
   {
-    m_path = getPath(file);
+    this -> fill(file);
+    check();
     return *this;
   }
   File & operator=(const char * file) 
   {
-    m_path = Path(file);
+    this -> fill(std::string(file));
+    check();
     return *this;
   }
   File & operator=(File const & file) 
@@ -695,17 +707,22 @@ private:
 
   void fill(std::string const & file)
   {
-    m_path = getPath(file);
-    if (file[0] != '/') 
+    print(file, hasPath(file));
+    if (hasPath(file))
     {
-      m_filename = file;
-      m_file = m_path.string()+file;
+      m_path = getPath(file);
+      m_filename = removePath(file);
     }
     else 
     {
-      m_file = file;
-      m_filename = removePath(file);
+      m_path = Path::pwd();
+      m_filename = file;
+      print("test", m_path, m_filename, file);
     }
+    m_file = m_path.string()+m_filename.string();
+    print("\n");
+    print(m_file);
+    print();
   }
 
   bool m_ok = false;
