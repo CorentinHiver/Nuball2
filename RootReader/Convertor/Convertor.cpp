@@ -100,15 +100,15 @@ int main(int argc, char ** argv)
         histoed = true;
       }
       else if (command == "-l" || command == "--list")
-      {
+      { // .list file containing the list of folders to convert
         runs_list = argv[++i];
       }
       else if (command == "-i" || command == "--index")
-      {
+      {// ID file to load :
         fileID = std::string(argv[++i]);
       }
       else if (command == "--BGO_cal")
-      {
+      {// "Gain match" BGO is not already done
         calib_BGO = true;
       }
       else if (command == "-t" || command == "--trigger")
@@ -137,7 +137,10 @@ int main(int argc, char ** argv)
   if (runs.size() == 0) runs = listFileReader(runs_list);
 
   MTList runsMT(runs);
+
+#ifdef DEBUG
   print(runsMT);
+#endif //DEBUG
 
   if (runsMT.size() == 0)
   {
@@ -193,7 +196,7 @@ void convertRuns(MTList<std::string> & runs)
     // Convert a whole folder //
     // ---------------------- //
 
-    Path pathRun = pathRun_str;
+    Path pathRun = dataPath+pathRun_str;
     std::string run = pathRun.folder().name();
     Path outPath(outDir+run,1);
 
