@@ -43,7 +43,7 @@ bool check_trigger(Counters & counter, Event & event, trigger_modes trig = P)
 
 trigger_modes trigger_mode = P;
 
-Path dataPath = "/home/corentin/faster_data/N-SI-136-root/";
+Path dataPath;
 ushort nb_threads = 2;
 int nb_max_evts_in_file = (int)(1.E+6); // 1 millions evts/fichier
 bool calib_BGO = false;
@@ -346,7 +346,7 @@ void convertRuns(MTList<std::string> & runs)
       file->Write();
       file -> Close();
     }
-    
+
     print(run, ":", evt*1.E-6, "->", converted_counter*1.E-6, "Mevts (",100*converted_counter/evt,"%) converted at a rate of", 1.E-3*evt/timer.TimeSec(), "kEvts/s");
     chain.Reset();
   }// End runs loop
