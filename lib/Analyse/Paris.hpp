@@ -53,23 +53,22 @@ public:
   // _____________________________________________________________ //
   // -----------------------  Paris Class  ----------------------- //
   Paris(){}
-  void Initialize(std::size_t const & nb_clusters, std::size_t const & nb_modules); // Parameters : the number of clusters, and the number of modules in each cluster
+  void Initialize(); // Parameters : the number of clusters, and the number of modules in each cluster
   void Fill(Event const & event, size_t const & i);
   void Reset();
   void Analyse();
 
-  StaticVector<ParisIndex> Hits;
+  StaticVector<uchar> Hits;
 
-  std::vector <ParisCluster> parisClusters;
+  ParisCluster<28> clusterBack;
+  ParisCluster<36> clusterFront;
 
-  ParisCluster & operator[] (int const & i) { return parisClusters[i];}
   // ______________________________________________________________ //
 
   // _____________________________________________________________ //
   // ------------------  User defined methods -------------------- //
-  enum {BACK, FRONT};
-  ParisCluster & back  () { return parisClusters[BACK];}
-  ParisCluster & front () { return parisClusters[FRONT];}
+  ParisCluster & back  () { return clusterBack;}
+  ParisCluster & front () { return clusterFront;}
   // _____________________________________________________________ //
 };
 
@@ -79,16 +78,15 @@ std::array<uchar, 1000> Paris::index  ;// Link the label to the module's index i
 
 void Paris::Initialize(std::size_t const & nb_clusters, std::size_t const & nb_modules)
 {// Parameters : number of clusters, number of modules in each cluster
-  parisClusters.resize(nb_clusters);
-  for (auto & cluster : parisClusters)
-  {
-    cluster.Initialize(nb_modules);
-    for (std::size_t i = 0; i<nb_modules; i++)
-    {
-      cluster.positions[i] = paris_getPositionModule(i);
-    }
-    cluster.InitializeBidims();
-  }
+  // for (auto & cluster : parisClusters)
+  // {
+  //   cluster.Initialize(nb_modules);
+  //   for (std::size_t i = 0; i<nb_modules; i++)
+  //   {
+  //     cluster.positions[i] = paris_getPositionModule(i);
+  //   }
+  //   cluster.InitializeBidims();
+  // }
 }
 
 void inline Paris::Reset()

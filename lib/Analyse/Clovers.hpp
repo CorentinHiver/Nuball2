@@ -24,7 +24,7 @@ public:
 
   // Correspondance between detector label and crystal index :
   // static inline uchar label_to_clover   (Label const & l) {return ((l-23)/6);}
-  static        uchar label_to_cristal  (Label const & l);
+  static uchar label_to_cristal  (Label const & l);
 
   // static std::array<bool, 1000> is;       // Array used to know if a given detector is a clover
   // static std::array<bool, 1000> isGe;     // Array used to know if a given detector is a Germanium clover
@@ -76,14 +76,14 @@ public:
   // To get the BGO containers, _BGO is added after
 
   // Ge Crystals :
-  StaticVector<uchar, 96> cristaux;     // List of indexes of Ge crystals in the event
+  StaticVector<uchar> cristaux = StaticVector<uchar>(96);     // List of indexes of Ge crystals in the event
   std::array<float, 96>   cristaux_nrj; // Array containing the energy of each Ge  cristal
   std::array<float, 96>   cristaux_time;// Array containing the time of each Ge  cristal
 
   std::size_t CrystalMult = 0; // Ge crystals counter
 
   // BGO Crystals :
-  StaticVector<uchar, 48> cristaux_BGO;     // List of indexes of BGO crystals in the event
+  StaticVector<uchar> cristaux_BGO = StaticVector<uchar>(48);     // List of indexes of BGO crystals in the event
   std::array<float, 48>   cristaux_nrj_BGO; // Array containing the energy of each BGO cristal
   std::array<float, 48>   cristaux_time_BGO;// Array containing the time of each BGO cristal
 
@@ -97,13 +97,15 @@ public:
 
   // Specific methods :
   CloverModule operator[] (uchar const & i) {return m_Clovers[i];}
+  auto begin() const {return m_Clovers.begin();}
+  auto end()   const {return m_Clovers.end();}
   void Analyse();
 
   // Containers :
-  StaticVector<uchar, 24> Hits;  // List of clovers that fired in the event
-  StaticVector<uchar, 24> Ge;  // List of Germanium modules that fired in the event
-  StaticVector<uchar, 24> Bgo;  // List of BGO modules that fired in the event
-  StaticVector<uchar, 24> Clean_Ge;  // List of clean Germaniums that fired in the event, that is "Ge only" modules
+  StaticVector<uchar> Hits = StaticVector<uchar>(24);  // List of clovers that fired in the event
+  StaticVector<uchar> Ge = StaticVector<uchar>(24);  // List of Germanium modules that fired in the event
+  StaticVector<uchar> Bgo = StaticVector<uchar>(24);  // List of BGO modules that fired in the event
+  StaticVector<uchar> Clean_Ge = StaticVector<uchar>(24);  // List of clean Germaniums that fired in the event, that is "Ge only" modules
 
   std::vector<CloverModule> m_Clovers;
 

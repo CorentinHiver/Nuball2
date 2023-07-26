@@ -21,7 +21,6 @@ public:
 
   uchar maxE_Ge_cristal = 0u; // Crystal number of the crystal with most energy deposit of the clover
 
-
 private:
   uchar const m_label;
   static uchar glabel;

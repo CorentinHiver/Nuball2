@@ -34,16 +34,17 @@ bool push_back_unique(std::vector<T> & vector, T const & t)
  * @brief An efficient container for dynamic arrays with a known and fixed maximum size
  * @attention Prototype, have some memory management issues in some cases ...
 */
-template<class T, std::size_t __size__ = 0>
+template<class T>
 class StaticVector
 {
 public:
-  StaticVector() : m_static_size(__size__) {m_data = new T[m_static_size];}
-  StaticVector(T const & value);
-  StaticVector(StaticVector<T, __size__> const & vector);
+  StaticVector() {m_data = new T[m_static_size];}
+  StaticVector(std::size_t const & static_size) : m_static_size(static_size) {}
+  StaticVector(T const & value, std::size_t const & static_size) {for (std::size_t i = 0; i<m_static_size; i++) m_data[i] = value;}
+  StaticVector(StaticVector<T> const & vector) : m_static_size(vector.m_static_size) {*m_data = *(vector.m_data);}
   ~StaticVector()
   {
-    if(m_deleted)
+    if(!m_deleted)
     {
       delete[] m_data;
       m_deleted = true;
@@ -54,10 +55,20 @@ public:
     }
   }
 
+  StaticVector& operator=(StaticVector<T> const & vector)
+  {
+    if (m_static_size > 0) delete[] m_data;
+    m_static_size = vector.m_static_size;
+    m_dynamic_size = vector.m_dynamic_size;
+    m_data = new T[m_static_size];
+    *m_data = *(vector.m_data);
+    return *this;
+  }
+
   void resize(std::size_t const & size = 0) {m_dynamic_size = size;}
   void static_resize(std::size_t const & size = 0)
   {
-    delete[] m_data;
+    if (m_static_size) delete[] m_data;
     m_dynamic_size = 0;
     m_static_size = size;
     m_data = new T[m_static_size];
@@ -83,40 +94,26 @@ public:
   T* data() {return m_data;}
 
 private:
-  T *m_data;
+  T* m_data;
   std::size_t m_dynamic_size = 0;
   std::size_t m_static_size = 0;
   bool m_deleted = false;
 };
 
-template<class T, std::size_t __size__>
-StaticVector<T,__size__>::StaticVector(T const & value) : m_static_size(__size__)
-{
-  m_data = new T[m_static_size];
-  for (std::size_t i = 0; i<m_static_size; i++) m_data[i] = value;
-}
-
-template<class T, std::size_t __size__>
-StaticVector<T,__size__>::StaticVector(StaticVector<T, __size__> const & vector) : m_static_size(__size__)
-{
-  m_data = new T[m_static_size];
-  for (std::size_t i = 0; i<m_static_size; i++) m_data[i] = vector.at(i);
-}
-
-template<class T, std::size_t __size__>
-bool inline StaticVector<T,__size__>::has(T const & t)
+template<class T>
+bool inline StaticVector<T>::has(T const & t)
 {
   return (std::find(this -> begin(), this -> end(), t) != this -> end());
 }
 
-template<class T, std::size_t __size__>
-bool inline StaticVector<T,__size__>::has(T & t)
+template<class T>
+bool inline StaticVector<T>::has(T & t)
 {
   return (std::find(this -> begin(), this -> end(), t) != this -> end());
 }
 
-template<class T, std::size_t __size__>
-void StaticVector<T,__size__>::push_back_unique(T const & t)
+template<class T>
+void StaticVector<T>::push_back_unique(T const & t)
 {
 #ifdef SAFE
   if (!this->has(t)) this -> push_back_safe(t);
@@ -125,18 +122,18 @@ void StaticVector<T,__size__>::push_back_unique(T const & t)
 #endif //SAFE
 }
 
-/**
- * @brief TBD
- * 
- */
-template<class T, std::size_t __size__ = 0>
-class StaticOrderVector : public StaticVector<T, __size__>
-{// Binary search works only with
-public:
-  bool has(T const & t)
-  {
-    return std::binary_search(this -> begin(), this -> end(), t);
-  }
-};
+// /**
+//  * @brief TBD
+//  * 
+//  */
+// template<class T, std::size_t  = 0>
+// class StaticOrderVector : public StaticVector<T>
+// {// Binary search works only with
+// public:
+//   bool has(T const & t)
+//   {
+//     return std::binary_search(this -> begin(), this -> end(), t);
+//   }
+// };
 
 #endif //VECTOR_FUNCTIONS_HPP

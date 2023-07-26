@@ -623,12 +623,15 @@ std::string operator+(Path const & path, Filename const & filename) {return path
 class File
 {
 public:
+  File(){}
   File(File const & file) : 
           m_ok(file.m_ok)    ,
           m_file(file.m_file), 
           m_path(file.m_path), 
           m_filename(file.m_filename) 
   { }
+
+  
 
   File(std::string const & file, std::string const & mode = "") 
   {
