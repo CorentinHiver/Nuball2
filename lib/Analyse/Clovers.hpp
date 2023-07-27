@@ -41,15 +41,18 @@ public:
 
   static void Initialize()
   {
-    for (Label l = 0; l<1000; l++)
+    if (!sm_isInitialized)
     {
-      // is[l] = is_clover(l);
-      // isGe[l] = is_clover_Ge(l);
-      // isBGO[l] = is_clover_BGO(l);
+      for (Label l = 0; l<1000; l++)
+      {
+        // is[l] = is_clover(l);
+        // isGe[l] = is_clover_Ge(l);
+        // isBGO[l] = is_clover_BGO(l);
 
-      // labels[l] = (is[l]) ? label_to_clover(l) : -1;
-      cristaux_index[l] = (isGe[l]) ? label_to_cristal(l) : -1;
-      cristaux_index_BGO[l] = (isBGO[l]) ? label_to_cristal(l) : -1;
+        // labels[l] = (is[l]) ? label_to_clover(l) : -1;
+        cristaux_index[l] = (isGe[l]) ? label_to_cristal(l) : -1;
+        cristaux_index_BGO[l] = (isBGO[l]) ? label_to_cristal(l) : -1;
+      }
     }
   }
   // ----------------------  End lookup tables ---------------------- //
@@ -66,7 +69,7 @@ public:
   // _______________________________________________________________ //
   // -----------------------  Clovers Class  ----------------------- //
 
-  Clovers(){m_Clovers.resize(24); Reset();}
+  Clovers(){Initialize(); m_Clovers.resize(24); Reset();}
   void Set(Event const & event);
   Bool_t Fill(Event const & event, int const & index);
   void Reset();
@@ -117,10 +120,15 @@ public:
   std::size_t CleanGeMult = 0;
   std::size_t BGOMult = 0;
 
+private:
+  // Parameters :
+  static bool sm_isInitialized;
+
   // -----------------------  Clovers Class  ----------------------- //
   // _______________________________________________________________ //
 
   // More detailed analysis :
+public: 
   bool has511 = false;
 };
 
@@ -137,6 +145,7 @@ std::array<uchar, 1000> Clovers::cristaux_index_BGO;
 
 // Parameters :
 float Clovers::Emin = 5.;
+bool Clovers::sm_isInitialized = false;
 
 // ---- Methods : --- //
 
