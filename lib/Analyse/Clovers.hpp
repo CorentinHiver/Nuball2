@@ -2,8 +2,10 @@
 #define CLOVERS_H
 
 #include "../libRoot.hpp"
-#include "Detectors.hpp"
+
+#include "../Classes/Detectors.hpp"
 #include "../Classes/Event.hpp"
+
 #include "CloverModule.hpp"
 
 
