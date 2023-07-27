@@ -19,6 +19,7 @@
 Path dataPath;
 ushort nb_threads = 2;
 bool calib_BGO = false;
+Long64_t prompt_time_window_ns = 50;
 
 void run_thread();
 
@@ -64,6 +65,10 @@ int main(int argc, char ** argv)
       {// Relative path to output 
         outDir = Path(std::string(argv[++i]), 1);
       }
+      else if (command == "-p" || command == "--prompt")
+      {
+        prompt_time_window_ns = static_cast<Long64_t>(std::stoi(argv[++i]));
+      }
       else if (command == "-l" || command == "--list")
       { // .list file containing the list of folders to convert
         runs_list = argv[++i];
@@ -72,14 +77,14 @@ int main(int argc, char ** argv)
       {// ID file to load :
         fileID = std::string(argv[++i]);
       }
-      else if (command == "--BGO_cal")
+      else if (command == "-b" || command == "--BGO_cal")
       {// "Gain match" BGO is not already done
         calib_BGO = true;
       }
       else if (command == "-h" || command == "--help")
       {
         print("List commands :");
-        print("(      --BGO_cal)                                     : roughly, for BGO, Energy[keV] = ADC/100. Use this command if the BGO data are still in ADC");
+        print("(-b || --BGO_cal)                                     : roughly, for BGO, Energy[keV] ~ ADC/100. Use this command if the BGO data are still in ADC");
         print("(-d || --data_path)  [/path/to/data/]                 : path to the data");
         print("(-f || --folder)     [folder/]                        : name of the folder to convert");
         print("(-F || --folders)    [nb_folders] [[list of folders]] : list of the folders to convert");
@@ -88,6 +93,7 @@ int main(int argc, char ** argv)
         print("(-l || --list)       [/path/to/*.list]                : read a .list file with a list of folders to convert");
         print(" -m                  [nb_threads]                     : number of threads to be used");
         print("(-o || --out_path)   [/path/to/output/]               : path to the output");
+        print("(-p || --prompt)     [time gate in ns]                : two detectors are prompt with respect to each other if their time difference is lower than the time gate");
         return 1;
       }
     }
@@ -112,13 +118,15 @@ int main(int argc, char ** argv)
     // Load the chain :
     TChain chain("Nuball2");
     chain.Add((pathRun.string()+"run_*.root").c_str());
+    auto const nb_evts = chain.GetEntries();
 
     // Create the event reader :
     Event event;
     event.connect(&chain,"mltnN");
 
     // Declare the histograms :
-    auto Bidim_Ge_BGO_R3A1 = std::make_unique<TH2F>(("Bidim_Ge_BGO_R2A1"+run).c_str(), ("Bidim Ge BGO R2A1"+run+";BGO [keV];Ge [keV]").c_str(), 500,0,10000, 10000,0,10000);
+    auto Bidim_Ge_BGO_R3A1 = std::make_unique<TH2F>(("Bidim_Ge_BGO_R2A1"+run).c_str(), ("Bidim Ge BGO R2A1"+run+";BGO [keV];Ge [keV]").c_str(), 1000,0,10000, 10000,0,10000);
+    auto BGO_R3A1_spectra_gated_511 = std::make_unique<TH1F>(("BGO_R3A1_spectra_511"+run).c_str(), (" BGO R3A1 gated 511 keV"+run+";E [keV]").c_str(), 1000,0,10000);
     // auto Bidim_Ge_Paris_LaBr3_BR2D1 = std::make_unique<TH2F>(("Bidim_Ge_BGO"+run).c_str(),  ("Bidim_Ge_BGO"+run+";BGO [keV];Ge [keV]").c_str(), 500,0,10000, 10000,0,10000);
 
     Clovers clovers;
@@ -126,26 +134,45 @@ int main(int argc, char ** argv)
     Long64_t evt = 0;
     while(evt<chain.GetEntriesFast())
     {
+      if (evt%(int)(1.E+6) == 0) print((int)((100.*evt)/nb_evts),"%");
+
       chain.GetEntry(evt++);
-      clovers.Set(event);
+
+      clovers.SetEvent(event);
+      clovers.Analyse();
+
       for (auto const & hit_i : clovers.Clean_Ge)
       {
         auto const & clover_i = clovers[hit_i];
         auto const & nrj_Ge = clover_i.nrj;
+        auto const & time_Ge = clover_i.time;
         for (auto const & hit_j : clovers.Bgo)
         {
           auto const & clover_j = clovers[hit_j];
-          auto const & nrj_BGO = clover_j.nrj;
 
-          if (hit_j == 0) Bidim_Ge_BGO_R3A1->Fill(nrj_BGO/100, nrj_Ge);
+          auto const & time_BGO = clover_j.time_BGO;
+          auto nrj_BGO = clover_j.nrj_BGO;
+          if (calib_BGO) nrj_BGO /= 100.;
+
+
+          if (abs(static_cast<Long64_t>(time_Ge-time_BGO)) > (prompt_time_window_ns*1000)) continue;
+
+          if (hit_j == 0) 
+          {
+            Bidim_Ge_BGO_R3A1->Fill(nrj_BGO, nrj_Ge);
+            if (nrj_Ge>505 && nrj_Ge<515) BGO_R3A1_spectra_gated_511 -> Fill(nrj_BGO);
+          }
         }
       }
-      std::unique_ptr<TFile> outFile (TFile::Open("test_bidim","recreate"));
-      outFile -> cd();
-      Bidim_Ge_BGO_R3A1 -> Write();
-      outFile -> Write();
-      outFile -> Close();
     }
+    std::string const outRoot = "test_bidim.root";
+    std::unique_ptr<TFile> outFile (TFile::Open(outRoot.c_str(),"recreate"));
+    outFile -> cd();
+    Bidim_Ge_BGO_R3A1 -> Write();
+    BGO_R3A1_spectra_gated_511 -> Write();
+    outFile -> Write();
+    outFile -> Close();
+    print(outRoot);
   }
 
   return 1;
