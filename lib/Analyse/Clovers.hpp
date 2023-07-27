@@ -210,6 +210,7 @@ Bool_t Clovers::Fill(Event const & event, int const & hit_i)
 
     if (isGe[label])
     {
+      // --- Individual crystals managing : ---
       CrystalMult++;
       // Ge crystal index (ranges from 0 to 96):
       auto const & index_cristal = cristaux_index[label];
@@ -218,9 +219,11 @@ Bool_t Clovers::Fill(Event const & event, int const & hit_i)
       // Filling the germanium crystals informations :
       cristaux_nrj[index_cristal] = nrj;
       cristaux_time[index_cristal] = time;
+
+      // --- Clovers managing: ---
       // Counts the number of Ge crystals that fired in the clover :
       clover.nb++;
-      // Finds the Ge cristal that received the most energy and use its time for the index_clover :
+      // Find the Ge cristal that received the most energy and use its time for the clover :
       if (nrj > cristaux_nrj[clover.maxE_Ge_cristal])
       {
         clover.maxE_Ge_cristal = index_cristal;
@@ -236,7 +239,8 @@ Bool_t Clovers::Fill(Event const & event, int const & hit_i)
     }
 
     else
-    {// BGO cristals :
+    {// BGO :
+      // --- Individual crystals managing : ---
       CrystalMult_BGO++;
       // BGO crystal index (ranges from 0 tp 48):
       auto const & index_cristal = cristaux_index_BGO[label];
@@ -245,15 +249,15 @@ Bool_t Clovers::Fill(Event const & event, int const & hit_i)
       // Filling the germanium crystals informations :
       cristaux_nrj_BGO[index_cristal] = nrj;
       cristaux_time_BGO[index_cristal] = time;
+
+      // --- Clovers managing: ---
       // Counts the number of BGO crystals that fired in the clover :
       clover.nb_BGO ++;
-
-      // Clovers managing :
       // Fill the vector containing the list of BGO clovers that fired :
       Bgo.push_back_unique(index_clover);
       // Fill the cell containing the total energy deposit in the module's BGOs
       clover.nrj_BGO += event.nrjs[hit_i];
-      // To be improved if necessary : manage the time of the BGOs (if 2 BGOs, only the latest one is stored)
+      // Manage the time of the BGOs. To be improved if necessary : if 2 BGOs, only the latest one is stored
       clover.time_BGO = event.times[hit_i];
     }
     return true;
@@ -289,15 +293,23 @@ uchar Clovers::label_to_cristal(Label const & l)
   auto const clover_cristal = cristal%6;
 
   // BGO : 
-  if (clover_cristal<2) return clover_cristal+cristal/6;
+  if (clover_cristal<2) return clover_cristal+2*(cristal/6);
   
   // Ge :
   else
   {
     auto const clover = cristal/6; // Clover number
-    auto const Ge_cristal = clover_cristal-2; // Cristal number in clover [0,3]
+    auto const Ge_cristal = clover_cristal-2; // Cristal number inside the clover [0,3]
+    auto cristal_index = Ge_cristal+4*clover;
 
-    // To take into account the rotated clovers :
+    // For normally rotated clovers, the following disposition is taken : 
+    // With sub_index beeing ranging from 0 to 3 for Ge crystal,
+    // With beam from right to left, and the gamma rays going out of the sheet :
+    // The sub_index 0 is top right, 1 top left, 2 bottom right, 3 bottom_left
+    // That is, the angle phi increases with the sub_index
+    //          the even labels are on the right side
+    //          the odd  labels are on the left  side
+
     switch (clover) 
     { // Rotation is trigowise direction
 
@@ -305,10 +317,10 @@ uchar Clovers::label_to_cristal(Label const & l)
     case 17:
       switch(Ge_cristal)
       {
-        case 0: return Ge_cristal+0; // Red
-        case 1: return Ge_cristal+0; // Green
-        case 2: return Ge_cristal+1; // Black
-        case 3: return Ge_cristal-1; // Blue
+        case 0: return cristal_index+0; // Red
+        case 1: return cristal_index+0; // Green
+        case 2: return cristal_index+1; // Black
+        case 3: return cristal_index-1; // Blue
         default : return -1;
       }
 
@@ -316,10 +328,10 @@ uchar Clovers::label_to_cristal(Label const & l)
     case 2: case 3:
       switch(Ge_cristal)
       {
-        case 0: return Ge_cristal+3; // Red
-        case 1: return Ge_cristal+1; // Green
-        case 2: return Ge_cristal-2; // Black
-        case 3: return Ge_cristal+0; // Blue
+        case 0: return cristal_index+3; // Red
+        case 1: return cristal_index+1; // Green
+        case 2: return cristal_index-2; // Black
+        case 3: return cristal_index+0; // Blue
         default : return -1;
       }
 
@@ -327,20 +339,20 @@ uchar Clovers::label_to_cristal(Label const & l)
     case 4:
       switch(Ge_cristal)
       {
-        case 0: return Ge_cristal+1; // Red
-        case 1: return Ge_cristal+2; // Green
-        case 2: return Ge_cristal+0; // Black
-        case 3: return Ge_cristal-3; // Blue
+        case 0: return cristal_index+1; // Red
+        case 1: return cristal_index+2; // Green
+        case 2: return cristal_index+0; // Black
+        case 3: return cristal_index-3; // Blue
         default : return -1;
       }
 
       default: // All the correctly turned clovers:
       switch(Ge_cristal)
       {
-        case 0: return Ge_cristal+2; // Red
-        case 1: return Ge_cristal-1; // Green
-        case 2: return Ge_cristal-1; // Black
-        case 3: return Ge_cristal+0; // Blue
+        case 0: return cristal_index+2; // Red
+        case 1: return cristal_index-1; // Green
+        case 2: return cristal_index-1; // Black
+        case 3: return cristal_index+0; // Blue
         default : return -1;
       }
     }

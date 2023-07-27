@@ -111,6 +111,7 @@ int main(int argc, char ** argv)
     // Handles the names :
     Path pathRun = dataPath+run_str;
     std::string run = pathRun.folder().name();
+    auto run_nb_str = lastPart(run,'_');
     Path outPath(outDir+run,1);
 
     if (!pathRun) {print(pathRun, "doesn't exists !"); continue;}
@@ -124,13 +125,15 @@ int main(int argc, char ** argv)
     Event event;
     event.connect(&chain,"mltnN");
 
-    // Declare the histograms :
-    auto Bidim_Ge_BGO_R3A1 = std::make_unique<TH2F>(("Bidim_Ge_BGO_R2A1"+run).c_str(), ("Bidim Ge BGO R2A1"+run+";BGO [keV];Ge [keV]").c_str(), 1000,0,10000, 10000,0,10000);
-    auto BGO_R3A1_spectra_gated_511 = std::make_unique<TH1F>(("BGO_R3A1_spectra_511"+run).c_str(), (" BGO R3A1 gated 511 keV"+run+";E [keV]").c_str(), 1000,0,10000);
+    // Histograms :
+    auto Bidim_Ge_BGO_R3A1_BGO1 = std::make_unique<TH2F>(("Bidim_Ge_BGO1_R2A1"+run).c_str(), ("Bidim Ge BGO R3A1 BGO1 run "+run_nb_str+";BGO [keV];Ge [keV]").c_str(), 1000,0,10000, 5000,0,10000);
+    auto BGO_spectra_gated_511 = std::make_unique<TH2F>(("BGO_spectra_511"+run).c_str(), (" BGO spectra gated 511 keV run"+run_nb_str+";E [keV]").c_str(), 49,0,48, 1000,0,10000);
+    auto BGO_spectra_gated_511_prompt = std::make_unique<TH2F>(("BGO_spectra_511_prompt"+run).c_str(), ("Prompt BGO spectra gated 511 keV run"+run_nb_str+";E [keV]").c_str(), 49,0,48, 1000,0,10000);
     // auto Bidim_Ge_Paris_LaBr3_BR2D1 = std::make_unique<TH2F>(("Bidim_Ge_BGO"+run).c_str(),  ("Bidim_Ge_BGO"+run+";BGO [keV];Ge [keV]").c_str(), 500,0,10000, 10000,0,10000);
 
     Clovers clovers;
     // Paris paris;
+
     Long64_t evt = 0;
     while(evt<chain.GetEntriesFast())
     {
@@ -146,30 +149,27 @@ int main(int argc, char ** argv)
         auto const & clover_i = clovers[hit_i];
         auto const & nrj_Ge = clover_i.nrj;
         auto const & time_Ge = clover_i.time;
-        for (auto const & hit_j : clovers.Bgo)
+        for (auto const & BGO_crystal : clovers.cristaux_BGO)
         {
-          auto const & clover_j = clovers[hit_j];
-
-          auto const & time_BGO = clover_j.time_BGO;
-          auto nrj_BGO = clover_j.nrj_BGO;
+          auto const & time_BGO = clovers.cristaux_time_BGO[BGO_crystal];
+          auto nrj_BGO = clovers.cristaux_nrj_BGO[BGO_crystal];
           if (calib_BGO) nrj_BGO /= 100.;
 
+          if (nrj_Ge>505 && nrj_Ge<515) BGO_spectra_gated_511 -> Fill(BGO_crystal, nrj_BGO);
+          if (BGO_crystal == 0) Bidim_Ge_BGO_R3A1_BGO1 -> Fill(nrj_BGO, nrj_Ge);
 
-          if (abs(static_cast<Long64_t>(time_Ge-time_BGO)) > (prompt_time_window_ns*1000)) continue;
-
-          if (hit_j == 0) 
-          {
-            Bidim_Ge_BGO_R3A1->Fill(nrj_BGO, nrj_Ge);
-            if (nrj_Ge>505 && nrj_Ge<515) BGO_R3A1_spectra_gated_511 -> Fill(nrj_BGO);
-          }
+          // Prompt gate : (ne marche pas ... probablement le ULong64_t -> float est pas ouf)
+          // if (abs(static_cast<Long64_t>(time_Ge-time_BGO)) > (prompt_time_window_ns*1000)) continue;
+          // if (nrj_Ge>505 && nrj_Ge<515) BGO_spectra_gated_511 -> Fill(BGO_crystal, nrj_BGO);
         }
       }
     }
     std::string const outRoot = "test_bidim.root";
     std::unique_ptr<TFile> outFile (TFile::Open(outRoot.c_str(),"recreate"));
     outFile -> cd();
-    Bidim_Ge_BGO_R3A1 -> Write();
-    BGO_R3A1_spectra_gated_511 -> Write();
+    Bidim_Ge_BGO_R3A1_BGO1 -> Write();
+    BGO_spectra_gated_511 -> Write();
+    BGO_spectra_gated_511_prompt -> Write();
     outFile -> Write();
     outFile -> Close();
     print(outRoot);

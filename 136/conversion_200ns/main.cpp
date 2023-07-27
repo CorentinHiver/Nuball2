@@ -34,6 +34,7 @@ std::string timewindow = "1500";
 int  nb_files_ts = 50;
 int nb_files = -1;
 bool overwrite = false; // Overwrite already existing converted root filesstruct histos
+bool only_timeshifts = false;
 
 struct Histos
 {
@@ -240,7 +241,11 @@ int main(int argc, char** argv)
     for(int i = 1; i < argc; i++)
     {
       std::string command = argv[i];
-           if (command == "-m" || command == "--multithread")
+           if (command == "-f" || command == "--files-number")
+      {
+        nb_files = atoi(argv[++i]);
+      }
+      else if (command == "-m" || command == "--multithread")
       {// Multithreading : number of threads
         nb_threads = atoi(argv[++i]);
       }
@@ -248,23 +253,34 @@ int main(int argc, char** argv)
       {// Overwright already existing .root files
         overwrite = true;
       }
-      else if (command == "-f" || command == "--files-number")
+      else if (command == "-t" || command == "--timeshifts")
       {
-        nb_files = atoi(argv[++i]);
-      }
-      else if (command == "-U" || command == "--Uranium")
-      {
-        list_runs = "list_U.list";
+        only_timeshifts = true;
       }
       else if (command == "-Th" || command == "--Thorium")
       {
         list_runs = "list_Th.list";
       }
+      else if (command == "-U" || command == "--Uranium")
+      {
+        list_runs = "list_U.list";
+      }
+      else if (command == "-h" || command == "--help")
+      {
+        print("List of the commands :");
+        print("(-f  || --files_number)   [files_number]  : set the number of files");
+        print("(-h  || --help)                           : display this help");
+        print("(-m  || --multithread)    [thread_number] : set the number of threads to use. Maximum allowed : 3/4 of the total number of threads");
+        print("(-o  || --overwrite)                      : overwrites the already written folders. If a folder is incomplete, you need to delete it");
+        print("(-t  || --timeshifts)                     : Calculate only timeshifts, force it even if it already has been calculated");
+        print("(-Th || --Thorium)                        : Treats only the thorium runs (run_nb < 75)");
+        print("(-U  || --Uranium)                        : Treats only the uranium runs (run_nb >= 75)");
+      }
     }
   }
 
   // MANDATORY : initialize the multithreading !
-  MTObject::Initialize(nb_threads);
+  if (nb_threads>1) MTObject::Initialize(nb_threads);
 
   // Setup the path accordingly to the machine :
   Path datapath = Path::home();
@@ -303,11 +319,10 @@ int main(int argc, char** argv)
     Timeshifts timeshifts(outPath,run_name);
 
     // If no timeshifts data already available, calculate it :
-    if (!timeshifts) 
+    if (!timeshifts || only_timeshifts) 
     { 
       timeshifts.setDetectors(detectors);
       timeshifts.setMult(2,3);
-      // timeshifts.setMaxHits(10000);
       timeshifts.setOutDir(outPath);
       
       timeshifts.calculate(runpath, nb_files_ts);
@@ -316,19 +331,22 @@ int main(int argc, char** argv)
       timeshifts.write(run_name);
     }
 
-    // Loop over the files in parallel :
-    MTFasterReader readerMT(runpath, nb_files);
-    readerMT.execute(convert, detectors, calibration, timeshifts, outPath, histos);
+    if (!only_timeshifts)
+    {
+      Loop over the files in parallel :
+      MTFasterReader readerMT(runpath, nb_files);
+      readerMT.execute(convert, detectors, calibration, timeshifts, outPath, histos);
 
-    std::unique_ptr<TFile> outFile (TFile::Open((outPath+run_name+"/histo_"+run_name+".root").c_str(), "RECREATE"));
-    outFile -> cd();
-    // for (auto & histo : histos.rf) histo.Write();
-    histos.energy_all.Write();
-    histos.rf_each.Write();
-    histos.energy_each.Write();
-    outFile -> Write();
-    outFile -> Close();
-    print(outPath+run_name+"/"+run_name+"_histo.root written");
+      std::unique_ptr<TFile> outFile (TFile::Open((outPath+run_name+"/histo_"+run_name+".root").c_str(), "RECREATE"));
+      outFile -> cd();
+      // for (auto & histo : histos.rf) histo.Write();
+      histos.energy_all.Write();
+      histos.rf_each.Write();
+      histos.energy_each.Write();
+      outFile -> Write();
+      outFile -> Close();
+      print(outPath+run_name+"/"+run_name+"_histo.root written");
+    }
   }
 
   return 1;
