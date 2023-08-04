@@ -301,7 +301,7 @@ int main(int argc, char** argv)
   if (!detectors || !calibration || !runs) return -1;
 
   // Setup some parameters :
-  RF_Manager::set_offset(30000);
+  RF_Manager::set_offset(40000);
 
   // Loop sequentially through the runs and treat their files in parallel :
   std::string run;
