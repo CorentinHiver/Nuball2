@@ -5,9 +5,10 @@
 
 using Label = ushort;
 using Labels = std::vector<Label>;
-using LabelsMap = std::map<std::string, Label>;
+using LabelMap = std::map<std::string, Label>;
 
-Bools isClover  (1000,false); // Bit field 
+
+Bools isClover  (1000,false);
 Bools isGe      (1000,false);
 Bools isBGO     (1000,false);
 Bools isLaBr3   (1000,false);
@@ -68,20 +69,40 @@ class Detectors
 {
 public:
   Detectors(){}
-  Detectors(std::string const & filename) : m_filename(filename) { this -> load(m_filename); }
-  Detectors(const char* filename) : m_filename(filename) { this -> load(m_filename); }
-  Detectors(Detectors const & otherList) : exists (otherList.exists), m_ok(otherList.m_ok), m_filename(otherList.m_filename), m_list(otherList.m_list), m_reversed_list(otherList.m_reversed_list) {  }
+
+  /// @brief Loads the list of detectors
+  Detectors(std::string const & filename) : m_filename(filename) {this -> load(m_filename);}
+
+  /// @brief Loads the list of detectors
+  Detectors(const char* filename) : m_filename(filename) {this -> load(m_filename);}
+
+  /// @brief Copy constructor
+  Detectors(Detectors const & otherList) : 
+    exists (otherList.exists), 
+    m_ok(otherList.m_ok), 
+    m_filename(otherList.m_filename),
+    m_list(otherList.m_list), 
+    m_reversed_list(otherList.m_reversed_list) 
+  {}
+
+  /// @brief Reads the file and extracts the list of detectors, then fills the lookup tables
   void load (std::string const & filename);
+
+  /// @brief Reads the file and extracts the list of detectors
   void readFile(std::string const & file);
+
+  /// @brief Fills the lookup tables
   void makeArrays();
 
-  /// @brief Return the value of the maximum label
+  /// @brief Return the value of the maximum label, i.e. the size of the lookup tables
   auto const size() const {return m_list.size();}
 
   /// @brief  Return the real number of detectors
   static auto const number() {return nb_detectors;}
 
+  // Iterate over the existing detectors :
   auto begin() {return m_list.begin();}
+  // Iterate over the existing detectors :
   auto end  () {return m_list.end  ();}
 
   auto const & get()        const {return m_list         ;}
@@ -95,11 +116,11 @@ public:
   void operator=(std::string const & filename) {this -> load(filename);}
   Detectors& operator=(Detectors otherList)
   {
+    exists          = otherList.exists;
     m_ok            = otherList.m_ok;
     m_filename      = otherList.m_filename;
-    m_reversed_list = otherList.m_reversed_list;
     m_list          = otherList.m_list;
-    exists          = otherList.exists;
+    m_reversed_list = otherList.m_reversed_list;
     return *this;
   }
 
@@ -130,7 +151,7 @@ public:
     else                      return dAlias::null ;
   }
 
-  Bools   exists;
+  Bools exists;
 
 private:
   // Useful informations
@@ -141,7 +162,7 @@ private:
 
   // Containers
   Strings m_list;
-  LabelsMap m_reversed_list;
+  LabelMap m_reversed_list;
 };
 
 /// @brief Number of detectors
@@ -207,7 +228,6 @@ void Detectors::makeArrays()
   if (!m_loaded) {throw std::runtime_error("ID file not loaded !!"); return;}
 
     // The following is used to fill the compressedLabel array :
-    bool known = false;
 
   // Looping around the labels
   for (auto label = 0ul; label<this->size(); label++)
@@ -215,7 +235,6 @@ void Detectors::makeArrays()
     std::istringstream is(replaceCharacter(m_list[label], '_', ' '));
     std::string str;
 
-    known = false;
 
     // Looping around the subparts of the name "subpart_..._subpart"
     while(is >> str)
@@ -223,57 +242,47 @@ void Detectors::makeArrays()
       if (str == "red" || str == "green" || str == "black" || str == "blue" || str == "ge")
       {
         isGe    [label] = true;
-        known = true;
       }
       else if (str == "BGO1" || str == "BGO2")
       {
         isBGO   [label] = true;
-        known = true;
       }
       else if (str == "FATIMA")
       {
         isLaBr3 [label] = true;
-        known = true;
       }
       else if (str == "PARIS" )
       {
         isParis [label] = true;
-        known = true;
       }
       else if (str == "DSSD" )
       {
         isDSSD [label] = true;
-        known = true;
       }
       else if (str == "EDEN"  )
       {
         isEden  [label] = true;
-        known = true;
       }
       else if (str == "RF"    )
       {
         isRF    [label] = true;
-        known = true;
       }
       else if (str == "S1")
       {
         isSector[label] = true;
         isS1    [label] = true;
-        known = true;
       }
       else if (str == "S2")
       {
         isSector[label] = true;
         isS2    [label] = true;
-        known = true;
       }
       else if (str == "R")
       {
         isRing[label] = true;
-        known = true;
       }
 
-      // Additionnal position informations 
+      // Additionnal positionnal information
       if (str[0] == 'R' && str[2] == 'A')
       {
         clover_pos[label] = str;
@@ -288,12 +297,12 @@ void Detectors::makeArrays()
       }
     }
 
-    // Other arrays :
+    // Other lookup tables :
     isClover[label] = label>22 && label<167;
     labelToClover[label] = (isClover[label]) ? (label-23)%6 : -1;
-    labelToBGOcrystal[label] = (isBGO[label]) ? (2*(label-23)/6 + (label+1)%6) : (-1);
+    // labelToBGOcrystal[label] = (isBGO[label]) ? (2*(label-23)/6 + (label+1)%6) : (-1);
      
-    if (known) 
+    if (exists[label])
     {
       compressedLabel[label] = nb_detectors;
       nb_detectors++;

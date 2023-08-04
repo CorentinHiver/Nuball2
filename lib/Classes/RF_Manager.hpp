@@ -3,7 +3,7 @@
 
 #include "../libCo.hpp"
 #include "../libRoot.hpp"
-#include "Hit.hpp"
+#include "Event.hpp"
 
 /**
  * @brief Class used to manage the RF
@@ -30,18 +30,20 @@ class RF_Manager
 public:
   RF_Manager(Label const & label_RF = 251) {label = label_RF;}
   bool setHit(Hit const & hit);
+  bool setHit(Event const & event, uint const & pos = 0);
   void static set_offset(Long64_t const & offset) {m_offset = offset;}
-  // bool setHit(Event const & event, int const & index);
+  void static set_offset_ns(Long64_t const & offset_ns) {m_offset = offset_ns*1000;}
+  auto static offset() {return m_offset;}
 
   Long64_t pulse_ToF(ULong64_t const & time, Long64_t const & offset) const
   {
   #ifdef USE_RF
-    // Shifts the time in order to be able to get hits before the hit :
+
+    // Shifts the time in order to be able to get hits before the 0 :
     ULong64_t const shifted_time = time+offset;
-    if (period == 0)
-    {
-      throw std::runtime_error("RF period = 0 !!!");
-    }
+
+    if (period == 0) throw std::runtime_error("RF period = 0 !!!");
+
     if (shifted_time>last_hit)
     {// Normal case
       return ( static_cast<Long64_t>((shifted_time-last_hit)%period) - offset );
@@ -59,6 +61,9 @@ public:
   Long64_t pulse_ToF(Hit const & hit, Long64_t const & offset) const {return pulse_ToF(hit.time,   offset);}
   Long64_t pulse_ToF(Hit const & hit                         ) const {return pulse_ToF(hit.time, m_offset);}
   Long64_t pulse_ToF(ULong64_t const & time                  ) const {return pulse_ToF(    time, m_offset);}
+
+  template<class... ARGS>
+  float pulse_ToF_ns(ARGS... args) {return (static_cast<float>(pulse_ToF(std::forward<ARGS>(args)...))/1000.f);}
 
   bool isPrompt(Hit const & hit, Long64_t const & borneMin, Long64_t const & borneMax)
   {
@@ -95,5 +100,65 @@ bool RF_Manager::setHit(Hit const & hit)
   }
   else return false;
 }
+
+bool RF_Manager::setHit(Event const & event, uint const & i)
+{
+  if (event.labels[i] == RF_Manager::label)
+  {
+    last_hit = event.times[i];
+    period = event.nrjs[i];
+    return true;
+  }
+  else return false;
+}
+
+
+//--------------------//
+//--- Helper class ---//
+//--------------------//
+
+class RF_Extractor
+{
+public:
+
+#ifdef ALIGNATOR_HPP
+  RF_Extractor(TTree * tree, RF_Manager & rf, Hit & hit, Alignator const & gindex);
+#endif //ALIGNATOR_HPP
+
+#ifdef EVENT_HPP
+  RF_Extractor(TTree * tree, RF_Manager & rf, Event & event, Long64_t maxEvts = (Long64_t)(1.E+7));
+#endif //EVENT_HPP
+
+  auto const & cursor() const {return m_cursor;}
+
+  operator bool() const & {return m_ok;}
+
+private:
+  bool m_ok = false;
+  Long64_t m_cursor = 0;
+};
+
+#ifdef ALIGNATOR_HPP
+RF_Extractor::RF_Extractor(TTree * tree, RF_Manager & rf, Hit & hit, Alignator const & gindex)
+{
+  auto const & nb_data = tree->GetEntries();
+  do {tree -> GetEntry(gindex[m_cursor++]);}
+  while(hit.label != RF_Manager::label && m_cursor<nb_data);
+  if (m_cursor == nb_data) {print("NO RF DATA FOUND !"); m_ok = false; return;}
+  rf.setHit(hit);
+  m_ok = true;
+}
+#endif //ALIGNATOR_HPP
+
+#ifdef EVENT_HPP
+RF_Extractor::RF_Extractor(TTree * tree, RF_Manager & rf, Event & event, Long64_t maxEvts)
+{
+  do {tree -> GetEntry(m_cursor++);}
+  while(event.labels[0] != RF_Manager::label && m_cursor<maxEvts);
+  if (m_cursor == maxEvts) {print("NO RF DATA FOUND !"); m_ok = false; return;}
+  rf.setHit(event);
+  m_ok = true;
+}
+#endif //EVENT_HPP
 
 #endif //RF_MANAGER_H

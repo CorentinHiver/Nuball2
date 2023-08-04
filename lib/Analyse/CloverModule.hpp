@@ -16,8 +16,8 @@ public:
   float nrj_BGO = 0.; // Add-backed energy of BGO Clovers
   float nb = 0.;   // Number of Ge  crystals in each clover
   float nb_BGO = 0.;  // Number of BGO crystals in each clover
-  float time = 0.; // Time of the crystal with most energy deposit of the clover
-  float time_BGO = 0.;
+  double time = 0.; // Time of the crystal with most energy deposit of the clover
+  double time_BGO = 0.;
 
   uchar maxE_Ge_cristal = 0u; // Crystal number of the crystal with most energy deposit of the clover
 

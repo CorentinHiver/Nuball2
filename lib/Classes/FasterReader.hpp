@@ -65,37 +65,33 @@
  * -- QDC1MAX
  * 
  * By default the nrj2 is handled. 
- * If no detector uses the QDC2 then declare it
+ * If no detector uses the QDC2 then declare QDC1MAX
  * 
  * 
  * -- FASTER_GROUP
  * 
- * If the data is grouped using a hardware trigger then the reading is done in
- * two steps : first extracts all the hits of the group and put it in a vector,
- * then each call of Read() moves in the group. No group information is extracted :
- * from outside the class everything goes as if there was no group
+ * If the data is grouped using a hardware trigger. From the user point of view, 
+ * nothing changes but the execution speed. Simply #define FASTER_GROUP 
+ * and then use the class as usual. 
  * 
+ * The reading is done in two steps : first extracts all the hits of the group 
+ * and put it in a vector, then each call of Read() moves in the group. 
+ * No extra information is extracted : from outside of the class, everything goes as if there was no group.
  * 
  */
 class FasterReader
 {
 public:
-  /**
-   * @brief Construct a new Faster Reader object
-   */
+   ///@brief Construct a new Faster Reader object
   FasterReader(Hit* _hit, std::string _filename) : m_hit(_hit), m_filename(_filename) {m_kReady = Initialize();}
 
-  /**
-   * @brief Destroy the Faster Reader object
-   */
+   ///@brief Destroy the Faster Reader object
   ~FasterReader()
   {
     if (m_reader!=NULL) faster_file_reader_close(m_reader);
   }
   
-  /**
-   * @brief Reset the cursor to the begining of the document
-   */
+   ///@brief Reset the cursor to the begining of the document
   bool Reset();
   
   /**
@@ -118,43 +114,33 @@ public:
   bool Read();
 
   // ------ Setters ------ :
-  /**
-   * @brief \test Set the Hit object
-   *  \nNever tested, but should work !
-   */
+   ///@brief \test Set the Hit object
+   ///\nNever tested, but should work !
   void setHit(Hit* hit) {m_hit = hit;}
 
-  /**
-   * @brief Set the Max Hits read
-   */
+   ///@brief Set the Max Hits read
   void setMaxHits(ulonglong maxHits) {m_maxHits = maxHits;}
 
   // ------ Getters ------ :
-  /**
-   * @brief \deprecated Get the current Hit 
-   */
+
+  ///@brief \deprecated Get the current Hit 
   Hit* getHit             () const { return m_hit        ;}
 
-  /**
-   * @brief If the initialization went badly then returns false
-   */
+  /// @brief If the initialization went badly then returns false
   bool const & isReady    () const { return m_kReady     ;}
 
-  /**
-   * @brief If the initialization went badly then returns false
-   */
+  /// @brief If the initialization went badly then returns false
   operator bool() const & { return m_kReady;}
 
-  /**
-   * @brief Get the name of the file being read
-   */
+  ///@brief Get the name of the file being read
+  auto const & filename() const {return m_filename;}
+
+  ///@brief Get the name of the file being read
   auto const & getFilename() const {return m_filename;}
 
 private:
   
-  /**
-   * @brief Setup the fasterac objects for reading
-   */
+  ///@brief Setup the fasterac objects for reading
   bool Initialize();
 
   bool ReadSimple();

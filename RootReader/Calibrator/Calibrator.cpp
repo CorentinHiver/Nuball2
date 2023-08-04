@@ -2,6 +2,7 @@
 
 // #define N_SI_129
 #define N_SI_136
+#define USE_RF 200
 
 #if defined (M2G1_TRIG)
 #define COUNT_EVENT
@@ -12,6 +13,7 @@
 #include <FilesManager.hpp>
 #include <Detectors.hpp>
 #include <Timer.hpp>
+#include <RF_Manager.hpp>
 
 #include <Clovers.hpp>
 // #include <Paris.hpp>
@@ -19,7 +21,7 @@
 Path dataPath;
 ushort nb_threads = 2;
 bool calib_BGO = false;
-Long64_t prompt_time_window_ns = 50;
+double prompt_time_window_ns = 50.;
 
 void run_thread();
 
@@ -52,7 +54,7 @@ int main(int argc, char ** argv)
         runs[0] = (argv[++i]);
       }
       else if (command == "-F" || command == "--folders")
-      {// list of the folders to convert
+      {// List of the folders to convert
         int nb = atoi(argv[++i]);
         runs.resize(nb);
         for (int folder = 0; folder<nb; folder++) runs[folder] = std::string(argv[++i]);
@@ -67,7 +69,11 @@ int main(int argc, char ** argv)
       }
       else if (command == "-p" || command == "--prompt")
       {
-        prompt_time_window_ns = static_cast<Long64_t>(std::stoi(argv[++i]));
+        prompt_time_window_ns = std::stod(argv[++i]);
+      }
+      else if (command == "-r" || command == "--RF_period")
+      {
+        // USE_RF = (int)std::stoi(argv[++i]);
       }
       else if (command == "-l" || command == "--list")
       { // .list file containing the list of folders to convert
@@ -84,16 +90,17 @@ int main(int argc, char ** argv)
       else if (command == "-h" || command == "--help")
       {
         print("List commands :");
-        print("(-b || --BGO_cal)                                     : roughly, for BGO, Energy[keV] ~ ADC/100. Use this command if the BGO data are still in ADC");
-        print("(-d || --data_path)  [/path/to/data/]                 : path to the data");
-        print("(-f || --folder)     [folder/]                        : name of the folder to convert");
-        print("(-F || --folders)    [nb_folders] [[list of folders]] : list of the folders to convert");
-        print("(-h || --help)                                        : displays this help");
-        print("(-i || --ID)         [/path/to/ID.dat]                :                     ");
-        print("(-l || --list)       [/path/to/*.list]                : read a .list file with a list of folders to convert");
-        print(" -m                  [nb_threads]                     : number of threads to be used");
-        print("(-o || --out_path)   [/path/to/output/]               : path to the output");
-        print("(-p || --prompt)     [time gate in ns]                : two detectors are prompt with respect to each other if their time difference is lower than the time gate");
+        print("(-b || --BGO_cal)                                      : roughly, for BGO, Energy[keV] ~ ADC/100. Use this command if the BGO data are still in ADC");
+        print("(-d || --data_path)   [/path/to/data/]                 : path to the data");
+        print("(-f || --folder)      [folder/]                        : name of the folder to convert");
+        print("(-F || --folders)     [nb_folders] [[list of folders]] : list of the folders to convert");
+        print("(-h || --help)                                         : displays this help");
+        print("(-i || --ID)          [/path/to/ID.dat]                :                     ");
+        print("(-l || --list)        [/path/to/*.list]                : read a .list file with a list of folders to convert");
+        print("(-m || --multithread) [nb_threads]                     : number of threads to be used");
+        print("(-o || --out_path)    [/path/to/output/]               : path to the output");
+        print("(-p || --prompt)      [time gate in ns]                : two detectors are prompt with respect to each other if their time difference is lower than the time gate");
+        // print("(-r || --RF_period)   [time in ns]                     : define the time period of the RF if different to 200ns");
         return 1;
       }
     }
@@ -125,11 +132,58 @@ int main(int argc, char ** argv)
     Event event;
     event.connect(&chain,"mltnN");
 
-    // Histograms :
-    auto Bidim_Ge_BGO_R3A1_BGO1 = std::make_unique<TH2F>(("Bidim_Ge_BGO1_R2A1"+run).c_str(), ("Bidim Ge BGO R3A1 BGO1 run "+run_nb_str+";BGO [keV];Ge [keV]").c_str(), 1000,0,10000, 5000,0,10000);
-    auto BGO_spectra_gated_511 = std::make_unique<TH2F>(("BGO_spectra_511"+run).c_str(), (" BGO spectra gated 511 keV run"+run_nb_str+";E [keV]").c_str(), 49,0,48, 1000,0,10000);
-    auto BGO_spectra_gated_511_prompt = std::make_unique<TH2F>(("BGO_spectra_511_prompt"+run).c_str(), ("Prompt BGO spectra gated 511 keV run"+run_nb_str+";E [keV]").c_str(), 49,0,48, 1000,0,10000);
+    // --- Histograms : --- //
+    // RF time spectra :
+    auto Clover_time_spectra_RF = std::make_unique<TH1F>(("Clover_time_spectra_RF_"+run).c_str(), ("Ge clover time spectra run "+run_nb_str+";RF time [ns]").c_str(), 4000,-100,300);
+    auto BGO_time_specta = std::make_unique<TH1F>(("BGO_time_spectra_RF_"+run).c_str(), ("Ge clover time spectra run "+run_nb_str+";RF time [ns]").c_str(), 400,-100,300);
+    
+    // Bidims with RF
+    auto Clover_time_spectra_RF__VS__Ge_mult = std::make_unique<TH2F>(("Clover_time_spectra_RF_VS_mult_"+run).c_str(), ("Ge clover time spectra run "+run_nb_str+";RF time [ns]; mult").c_str(), 4000,-100,300, 50,0,50);
+    auto Clover_time_spectra_RF__VS__timeClover_VS_BGO= std::make_unique<TH2F>(("Clover_time_spectra_RF__VS__timeClover_VS_BGO_"+run).c_str(), 
+            ("RF VS (Ge-BGO) time spectra run "+run_nb_str+";RF time [ns]; Ge time - BGO time [ns]").c_str(), 400,-100,300, 1000,-210000,210000);
+
+    // Bidim Clover Ge / Clover Ge
+    auto Bidim_Clover_clean = std::make_unique<TH2F>(("Bidim_Clover_clean_"+run).c_str(), ("Bidim clover clean run "+run_nb_str+";Ge clover [keV];Ge crystal [keV]").c_str(), 1000,0,10000, 5000,0,10000);
+    auto Bidim_Clover_clean_prompt_prompt   = std::make_unique<TH2F>(("Bidim_Clover_clean_pp"+run).c_str(), ("Bidim clover clean prompt prompt run "+run_nb_str+";Energy [keV];Energy [keV]").c_str(), 1000,0,10000, 5000,0,10000);
+    auto Bidim_Clover_clean_delayed_delayed = std::make_unique<TH2F>(("Bidim_Clover_clean_dd"+run).c_str(), ("Bidim clover clean delayed delayed run "+run_nb_str+";Energy [keV];Energy [keV]").c_str(), 1000,0,10000, 5000,0,10000);
+
+    // Bidim Clover/Ge crystal nrj 
+    auto Bidim_Ge_BGO_R3A1_blue = std::make_unique<TH2F>(("Bidim_Ge_R3A1_blue_VS_clover_Ge_"+run).c_str(), ("Bidim Ge BGO R3A1 BGO1 run "+run_nb_str+";Ge clover [keV];Ge crystal [keV]").c_str(), 1000,0,10000, 5000,0,10000);
+
+    // Bidim Ge/BGO nrj
+    auto Bidim_Ge_BGO_R3A1_BGO1 = std::make_unique<TH2F>(("Bidim_Ge_BGO1_R3A1_"+run).c_str(), ("Bidim Ge BGO R3A1 BGO1 run "+run_nb_str+";BGO [keV];Ge [keV]").c_str(), 1000,0,10000, 5000,0,10000);
+    
+    // Bidim BGO_index/BGO_nrj :
+    auto BGO_spectra_gated_511 = std::make_unique<TH2F>(("BGO_spectra_511_"+run).c_str(), (" BGO spectra gated 511 keV run "+run_nb_str+";E [keV]").c_str(), 49,0,48, 1000,0,10000);
+    auto BGO_spectra_gated_511_prompt = std::make_unique<TH2F>(("BGO_spectra_511_prompt_"+run).c_str(), ("Prompt BGO spectra gated 511 keV run "+run_nb_str+";E [keV]").c_str(), 49,0,48, 1000,0,10000);
+    auto BGO_spectra_gated_511_not_prompt = std::make_unique<TH2F>(("BGO_spectra_511_not_prompt_"+run).c_str(), ("not prompt BGO spectra gated 511 keV run "+run_nb_str+";E [keV]").c_str(), 49,0,48, 1000,0,10000);
+    
+    // Time spectra Ge_time-BGO_time:
+    auto diff_tempo_Ge_VS_BGO = std::make_unique<TH1F>(("diff_tempo_Ge-BGO_"+run).c_str(), ("diff_tempo_Ge-BGO_"+run+";timeGe-time_BGO [ns]").c_str(), 1000,-210000,210000);
+    auto diff_tempo_Ge_VS_BGO_prompt = std::make_unique<TH1F>(("prompt_diff_tempo_Ge-BGO_"+run).c_str(), ("prompt_diff_tempo_Ge-BGO_"+run+";timeGe-time_BGO [ns]").c_str(), 1000,-210000,210000);
+    auto diff_tempo_Ge_VS_BGO_511 = std::make_unique<TH1F>(("diff_tempo_Ge-BGO_511_"+run).c_str(), ("diff_tempo_Ge-BGO_511_"+run+";timeGe-time_BGO [ns]").c_str(), 1000,-210000,210000);
+    auto diff_tempo_Ge_VS_BGO_prompt_511 = std::make_unique<TH1F>(("prompt_diff_tempo_Ge-BGO_511_"+run).c_str(), ("prompt_diff_tempo_Ge-BGO_511_"+run+";timeGe-time_BGO [ns]").c_str(), 1000,-210000,210000);
+
+    // Bidim Time spectra Ge_time-BGO_time and nrj :
+    auto diff_tempo_Ge_VS_BGO__VS_Ge_nrj = std::make_unique<TH2F>(("diff_tempo_Ge_VS_BGO__VS_Ge_nrj_"+run).c_str(), 
+                (" diff_tempo_Ge-BGO__VS_Ge_nrj "+run_nb_str+";timeGe-time_BGO [ns];E [keV]").c_str(), 200,-200000,200000, 10000,0,10000);
+    auto diff_tempo_Ge_VS_BGO__VS_BGO_nrj = std::make_unique<TH2F>(("diff_tempo_Ge_VS_BGO__VS_BGO_nrj_"+run).c_str(), 
+                (" diff_tempo_Ge-BGO__VS_BGO_nrj "+run_nb_str+";timeGe-time_BGO [ns];E [keV]").c_str(), 800,-200000,200000, 500,0,10000);
+    
+    // Same, but with additionnal energy gate on the other detector :
+    auto diff_tempo_Ge_VS_BGO__VS_Ge_nrj_511 = std::make_unique<TH2F>(("diff_tempo_Ge_VS_BGO__VS_Ge_nrj_511_"+run).c_str(), 
+                (" diff_tempo_Ge-BGO__VS_Ge_nrj gate 511 "+run_nb_str+";timeGe-time_BGO [ns];E [keV]").c_str(), 200,-200000,200000, 10000,0,10000);
+    auto diff_tempo_Ge_VS_BGO__VS_BGO_nrj_511 = std::make_unique<TH2F>(("diff_tempo_Ge_VS_BGO__VS_BGO_nrj_511_"+run).c_str(), 
+                (" diff_tempo_Ge-BGO__VS_BGO_nrj_gate 511 "+run_nb_str+";timeGe-time_BGO [ns];E [keV]").c_str(), 800,-200000,200000, 500,0,10000);
+
     // auto Bidim_Ge_Paris_LaBr3_BR2D1 = std::make_unique<TH2F>(("Bidim_Ge_BGO"+run).c_str(),  ("Bidim_Ge_BGO"+run+";BGO [keV];Ge [keV]").c_str(), 500,0,10000, 10000,0,10000);
+
+  #ifdef USE_RF
+    RF_Manager rf;
+    rf.set_offset_ns(35);
+    RF_Extractor first_rf(&chain, rf, event);
+    if (!first_rf) throw std::runtime_error(("NO RF IN FILE"+ run_str).c_str());
+  #endif //USE_RF
 
     Clovers clovers;
     // Paris paris;
@@ -138,41 +192,122 @@ int main(int argc, char ** argv)
     while(evt<chain.GetEntriesFast())
     {
       if (evt%(int)(1.E+6) == 0) print((int)((100.*evt)/nb_evts),"%");
-
+      
       chain.GetEntry(evt++);
+
+      if (event.labels[0] == RF_Manager::label)
+      {
+        rf.setHit(event[0]);
+        continue;
+      }
 
       clovers.SetEvent(event);
       clovers.Analyse();
 
-      for (auto const & hit_i : clovers.Clean_Ge)
+      for (uint loop_i = 0; loop_i<clovers.Clean_Ge.size(); loop_i++)
       {
+        auto const & hit_i = clovers.Clean_Ge[loop_i];
+
         auto const & clover_i = clovers[hit_i];
         auto const & nrj_Ge = clover_i.nrj;
         auto const & time_Ge = clover_i.time;
+
+        // RF timing :
+        auto const Time_Ge = rf.pulse_ToF_ns(clover_i.time);
+        Clover_time_spectra_RF -> Fill(Time_Ge);
+        auto const Ge_isPrompt = ((Time_Ge>-30) && (Time_Ge<30));
+        Clover_time_spectra_RF__VS__Ge_mult -> Fill(Time_Ge, clovers.Clean_Ge.size());
+
+        for (uint loop_j = loop_i; loop_j<clovers.Clean_Ge.size(); loop_j++)
+        {
+          auto const & hit_j = clovers.Clean_Ge[loop_j];
+          auto const & clover_j = clovers[hit_j];
+          auto const & nrj_Ge_j = clover_j.nrj;
+          Bidim_Clover_clean -> Fill(nrj_Ge, nrj_Ge_j);
+        }
+
+        for (auto const & Ge_crystal : clovers.cristaux)
+        {
+          auto const & nrj_crystal = clovers.cristaux_nrj[Ge_crystal];
+          // print(nrj_Ge, Ge_crystal);
+          // sleep(1);
+          if (Ge_crystal == 0 && clover_i.label() != 0) Bidim_Ge_BGO_R3A1_blue -> Fill(nrj_Ge, nrj_crystal);
+        }
+
         for (auto const & BGO_crystal : clovers.cristaux_BGO)
         {
-          auto const & time_BGO = clovers.cristaux_time_BGO[BGO_crystal];
           auto nrj_BGO = clovers.cristaux_nrj_BGO[BGO_crystal];
-          if (calib_BGO) nrj_BGO /= 100.;
+          if (calib_BGO) nrj_BGO /= 76.;
 
-          if (nrj_Ge>505 && nrj_Ge<515) BGO_spectra_gated_511 -> Fill(BGO_crystal, nrj_BGO);
+          // Bidim Ge/R3A1_BGO1 to look for coincidences
           if (BGO_crystal == 0) Bidim_Ge_BGO_R3A1_BGO1 -> Fill(nrj_BGO, nrj_Ge);
 
-          // Prompt gate : (ne marche pas ... probablement le ULong64_t -> float est pas ouf)
-          // if (abs(static_cast<Long64_t>(time_Ge-time_BGO)) > (prompt_time_window_ns*1000)) continue;
-          // if (nrj_Ge>505 && nrj_Ge<515) BGO_spectra_gated_511 -> Fill(BGO_crystal, nrj_BGO);
+          // Coincidences with 511 keV in Ge :
+          if (nrj_Ge>505 && nrj_Ge<515) BGO_spectra_gated_511 -> Fill(BGO_crystal, nrj_BGO);
+
+          // Timing between Ge and BGO :
+          auto const & time_BGO = clovers.cristaux_time_BGO[BGO_crystal];
+          auto const diff_time = time_Ge-time_BGO; 
+
+          diff_tempo_Ge_VS_BGO -> Fill(diff_time);
+          Clover_time_spectra_RF__VS__timeClover_VS_BGO -> Fill(Time_Ge, diff_time);
+          diff_tempo_Ge_VS_BGO__VS_Ge_nrj  -> Fill(diff_time, nrj_Ge );
+          diff_tempo_Ge_VS_BGO__VS_BGO_nrj -> Fill(diff_time, nrj_BGO);
+          
+          // Gate on BGO energy :
+          if (nrj_BGO>300 && nrj_BGO<600) diff_tempo_Ge_VS_BGO__VS_Ge_nrj_511 -> Fill(diff_time, nrj_Ge);
+
+          // Gate on Ge energy :
+          if (nrj_Ge>505 && nrj_Ge<515) 
+          {
+            diff_tempo_Ge_VS_BGO_511->Fill(diff_time);
+            diff_tempo_Ge_VS_BGO__VS_BGO_nrj_511 -> Fill(diff_time, nrj_BGO);
+          }
+
+          // Gating on diff_time :
+          if (abs(diff_time) < (prompt_time_window_ns*1000.))
+          {
+            diff_tempo_Ge_VS_BGO_prompt->Fill(diff_time);// Check the time gate
+            if (nrj_Ge>505 && nrj_Ge<515) 
+            {
+              BGO_spectra_gated_511_prompt -> Fill(BGO_crystal, nrj_BGO);
+              diff_tempo_Ge_VS_BGO_prompt_511->Fill(diff_time); // Check the time and energy gate
+            }
+          }
+          else BGO_spectra_gated_511_not_prompt -> Fill(BGO_crystal, nrj_BGO);
         }
       }
     }
+
     std::string const outRoot = "test_bidim.root";
     std::unique_ptr<TFile> outFile (TFile::Open(outRoot.c_str(),"recreate"));
     outFile -> cd();
-    Bidim_Ge_BGO_R3A1_BGO1 -> Write();
-    BGO_spectra_gated_511 -> Write();
-    BGO_spectra_gated_511_prompt -> Write();
-    outFile -> Write();
+
+      Clover_time_spectra_RF -> Write();
+      Clover_time_spectra_RF__VS__timeClover_VS_BGO -> Write();
+      Clover_time_spectra_RF__VS__Ge_mult -> Write();
+
+      Bidim_Ge_BGO_R3A1_blue -> Write();
+      Bidim_Ge_BGO_R3A1_BGO1 -> Write();
+
+      BGO_spectra_gated_511 -> Write();
+      BGO_spectra_gated_511_prompt -> Write();
+      BGO_spectra_gated_511_not_prompt -> Write();
+
+      diff_tempo_Ge_VS_BGO->Write();
+      diff_tempo_Ge_VS_BGO_prompt->Write();
+      diff_tempo_Ge_VS_BGO_511->Write();
+      diff_tempo_Ge_VS_BGO_prompt_511->Write();
+
+      diff_tempo_Ge_VS_BGO__VS_Ge_nrj  -> Write();
+      diff_tempo_Ge_VS_BGO__VS_BGO_nrj -> Write();
+      diff_tempo_Ge_VS_BGO__VS_Ge_nrj_511  -> Write();
+      diff_tempo_Ge_VS_BGO__VS_BGO_nrj_511 -> Write();
+
+      outFile -> Write();      
     outFile -> Close();
-    print(outRoot);
+    print(outRoot, "written");
+
   }
 
   return 1;

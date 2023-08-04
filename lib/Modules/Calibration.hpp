@@ -90,15 +90,31 @@ public:
     void setBins(std::string const & parameters);
   } histos;
 
+  Calibration() {m_ok = false;}
+
   Calibration(Detectors const & detList, std::string const & datafile = "") 
   {
     m_detectors = detList;
     if (datafile != "") load(datafile);
   }
 
+  /// @brief Copy constructor
+  Calibration (Calibration const & calibration)
+  {
+    m_detectors = calibration.m_detectors;
+  }
+
+  Calibration(std::string const & calibFileName) {load(calibFileName);}
+  Calibration& operator=(std::string const & calibFileName) {load(calibFileName); return *this;}
   bool load(std::string const & calibFileName);
 
+
+  /// @brief Calculate calibration from raw .fast files
   void calculate(std::string const & dataDir, int const & nb_files = -1, std::string const & source = "152Eu");
+
+  /// @brief Calculate calibration from .root histograms
+  void calculate(std::string const & histograms, std::string const & source = "152Eu");
+
   void Initialize() {histos.Initialize(*this);}
   static void fillRawHisto(Hit & hit, FasterReader & reader, Calibration & calib);
   void analyse();
@@ -107,12 +123,14 @@ public:
   void setDetectorsList(Detectors *ID_file) {m_detectors = *ID_file;}
   void setSource(std::string const & source) {m_source = source;}
 
+  /// @brief avoid using this one
   void  calibrate(Hit & hit) const;
+
+  /// @brief calibrate
   float calibrate(float const & nrj, Label const & label) const;
 
-  /**
-   * @brief Call for calibrate method
-  */
+  
+  /// @brief Call for calibrate method
   template<class... ARGS>
   auto operator()(ARGS &&... args) const {return calibrate(std::forward<ARGS>(args)...);}
 
@@ -142,8 +160,6 @@ private:
   std::string m_outRoot   = "calibration.root";
   std::string m_outCalib  = "";
   std::string m_outDir    = "Calibration/";
-  // void        Write(std::string _histoFilename){}
-  // void        residus_calculate(){}
 
   Detectors m_detectors;
   FilesManager files;
@@ -153,13 +169,12 @@ private:
   bool m_ok = false;
   Label m_nb_detectors = 0;
   Label m_max_labels = 0;
-  std::vector<char> m_order; //1, 2 or 3 | 0 -> no calibration
-  std::vector<float>  m_intercept;
-  std::vector<float>  m_slope;
-  std::vector<float>  m_binom;
-  std::vector<float>  m_trinom;
+  std::vector<char>  m_order; //1, 2 or 3 | 0 -> no calibration
+  std::vector<float> m_intercept;
+  std::vector<float> m_slope;
+  std::vector<float> m_binom;
+  std::vector<float> m_trinom;
   std::vector<std::vector<std::vector<float>>> calibration_tables;
-
 };
 
 void Calibration::histograms::Initialize(Calibration & calib)
@@ -205,7 +220,7 @@ void Calibration::histograms::setBins(std::string const & parameters)
 
 void Calibration::calculate(std::string const & dataDir, int const & nb_files, std::string const & source)
 {
-  print ("Calculating calibrations");
+  print ("Calculating calibrations from raw data in", dataDir);
   m_source = source;
   this -> Initialize();
 
@@ -216,6 +231,14 @@ void Calibration::calculate(std::string const & dataDir, int const & nb_files, s
 
   this -> analyse();
 
+}
+
+void Calibration::calculate(std::string const & histograms, std::string const & source)
+{
+  print ("Calculating calibrations from histogram data in", histograms);
+  m_source = source;
+
+  
 }
 
 void Calibration::fillRawHisto(Hit & hit, FasterReader & reader, Calibration & calib)

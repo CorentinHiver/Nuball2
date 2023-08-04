@@ -272,11 +272,11 @@ void convertRuns(MTList<std::string> & runs)
       Timer timerFile;
 
     #if defined (USE_RF)
-      event.writeTo(outTree.get(),"lnNTRP");
+      event.writting(outTree.get(),"lnNTRP");
     #elif defined (USE_DSSD_REF)
-      event.writeTo(outTree.get(),"lnNT");
+      event.writting(outTree.get(),"lnNT");
     #else
-      event.writeTo(outTree.get(),"lnNt");
+      event.writting(outTree.get(),"lnNt");
     #endif
 
       // Loop over the folder until the output tree reaches the maximum size, or the end of data is reached :

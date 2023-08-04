@@ -4,6 +4,7 @@
 #include <libRoot.hpp>
 #include <MTTHist.hpp>
 #include <RF_Manager.hpp>
+#include <Clovers.hpp>
 
 #include "../Classes/Parameters.hpp"
 
@@ -14,7 +15,6 @@ using namespace Detector;
 class AnalyseRaw
 {
 public:
-
   AnalyseRaw(){};
   bool launch(Parameters & p);
   bool setParameters(std::vector<std::string> const & param);
@@ -22,8 +22,11 @@ public:
   static void treatFile(Parameters & p, AnalyseRaw & analyseRaw);
   void FillRaw(Event const & event);
   void FillSorted(Sorted_Event const & event_s, Event const & event);
+  void fillClover(Clovers & clovers);
   void Analyse();
   void Write();
+
+  RF_Manager rf;
 
 private:
   // ---- Parameters ---- //
@@ -31,25 +34,30 @@ private:
   friend class MTObject;
 
   // ---- Variables ---- //
-  RF_Manager rf;
   std::string m_outDir  = "AnalyseRaw/";
   std::string m_outRoot = "AnalyseRaw.root";
 
   // Energy binning between 0 and 3000 keV, number of bins per 10 keV
   std::map<dAlias, float> m_energy_binning = { {labr, 1.}, {ge, 20.}, {bgo, 0.5}, {eden, 2.}, {RF, 10.}, {paris, 1.}, {dssd, 1.}, {null, 1.} };
   // Timing binning between -100 and 300 ns, number of bins per nanoseconds
-  std::map<dAlias, float> m_timing_binning = { {labr, 10.}, {ge, 1.}, {bgo, 2.}, {eden, 2.}, {RF, 10.}, {paris, 10.}, {dssd, 2.}, {null, 1.} };
+  std::map<dAlias, float> m_timing_binning = { {labr, 10.}, {ge, 2.}, {bgo, 4.}, {eden, 2.}, {RF, 10.}, {paris, 10.}, {dssd, 2.}, {null, 1.} };
 
   // ---- Histograms ---- //
+  // Individual spectra :
   Vector_MTTHist<TH1F> timing_spectra;
   Vector_MTTHist<TH1F> energy_spectra;
   Vector_MTTHist<TH2F> energy2_spectra;
+
+  // Collective spectra :
+  MTTHist<TH1F> timing_Ge_RF;
+  MTTHist<TH1F> timing_BGO_RF;
 };
 
 bool AnalyseRaw::launch(Parameters & p)
 {
   if (!this -> setParameters(p.getParameters(param_string))) return false;
   this -> InitializeManip();
+  rf.set_offset_ns(35);
   MTObject::parallelise_function(treatFile, p, *this);
   this -> Write();
   return true;
@@ -59,6 +67,7 @@ void AnalyseRaw::treatFile(Parameters & p, AnalyseRaw & analyseRaw)
 {
   std::string rootfile;
   Sorted_Event event_s;
+  Clovers clovers;
   while(p.getNextFile(rootfile))
   {
     Timer timer;
@@ -67,20 +76,25 @@ void AnalyseRaw::treatFile(Parameters & p, AnalyseRaw & analyseRaw)
     if (!file.get()) {print("CAN'T OPEN", rootfile,"!!"); continue;}
     if (file->IsZombie()) {print(rootfile, "is a Zombie !"); continue;}
     auto tree = static_cast<TTree*> (file->Get<TTree>("Nuball2"));
-    // if (!tree.get()) tree.reset(file->Get<TTree>("Nuball2"));
-    // if (!tree.get()) {print("Nuball or Nuball2 tree not in file", rootfile);}
+    if (!tree) tree = static_cast<TTree*>(file->Get<TTree>("Nuball"));
+    if (!tree) {print("Nuball or Nuball2 tree not in file", rootfile); return;}
 
     size_t events = tree->GetEntries();
     p.totalCounter+=events;
+    
 
     auto const & filesize = size_file(rootfile, "Mo");
     p.totalFilesSize+=filesize;
 
     Event event(tree, "ltnN");
+    RF_Extractor first_rf(tree, analyseRaw.rf, event);
+
     for (size_t i = 0; i<events; i++)
     {
       tree->GetEntry(i);
       analyseRaw.FillRaw(event);
+      clovers.SetEvent(event);
+      analyseRaw.fillClover(clovers);
       // event_s.sortEvent(event);
       // analyseRaw.FillSorted(event_s,event);
     } // End event loop
@@ -111,7 +125,7 @@ void AnalyseRaw::InitializeManip()
     else  energy_spectra[label].reset((name+" energy spectra").c_str(), (name+" energy spectra;energy [keV]; # counts").c_str(), 300*m_energy_binning[alias], 0, 3000);
 
     if (isParis[label] || isEden[label]) energy2_spectra[label].reset((name+" energy2 spectra").c_str(), (name+" nrj2 VS nrj spectra;nrj [u.a.];nrj2 [u.a.]").c_str(), 
-      300*m_energy_binning[alias],0,3000, 300*m_energy_binning[alias],0,3000);
+      500*m_energy_binning[alias],0,5000, 500*m_energy_binning[alias],0,5000);
   }
 }
 
@@ -139,7 +153,7 @@ void AnalyseRaw::FillRaw(Event const & event)
         // if ( ratio < 0.3 && ratio > -0.8 ) 
         // {
           energy_spectra[label].Fill(nrj);
-          timing_spectra[label].Fill(rf.pulse_ToF(time)/_ns);
+          timing_spectra[label].Fill(rf.pulse_ToF_ns(time));
         // }
       }
       else
@@ -161,6 +175,11 @@ void AnalyseRaw::FillSorted(Sorted_Event const & event_s, Event const & event)
 //    for (size_t loop_i = 0; loop_i<event_s.clover_hits.size(); loop_i++)
 //    {
 //    }
+}
+
+void AnalyseRaw::fillClover(Clovers & clovers)
+{
+
 }
 
 void AnalyseRaw::Analyse()

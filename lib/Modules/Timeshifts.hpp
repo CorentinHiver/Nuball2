@@ -9,7 +9,7 @@
 #include "../Classes/Hit.hpp"
 #include "../Classes/RF_Manager.hpp"
 #include "../Classes/Event.hpp"
-#include "../Classes/CoincBuilder2.hpp"
+#include "../Classes/CoincBuilder.hpp"
 #include "../Classes/Timer.hpp"
 #include "../Classes/Performances.hpp"
 
@@ -42,9 +42,7 @@ public:
 
   Timeshifts() {}
 
-  /**
-   * @brief Call the Timeshifts::load() method to load the timeshifts from a .dT file 
-  */
+  ///@brief Call the Timeshifts::load() method to load the timeshifts from a .dT file 
   Timeshifts(std::string const & filename) : m_filename(filename) {this -> load(filename);}
 
   /**
@@ -55,19 +53,19 @@ public:
   */
   Timeshifts(std::string const & path, std::string const & name) : m_filename(path+"Timeshifts/"+name+".dT") {this -> load(m_filename);}
 
-  /**
-   * @brief Copy constructor
-  */
+  /// @brief Copy constructor
   Timeshifts(Timeshifts const & timeshifts) : m_timeshifts(timeshifts.m_timeshifts) {}
+  
+  Timeshifts& operator=(Timeshifts const & timeshifts)
+  {
+    m_timeshifts = timeshifts.m_timeshifts;
+    return *this;
+  }
 
-  /**
-   * @brief Use this method to setup the parameters from a string in order to calculate the timeshifts
-  */
+  /// @brief Use this method to setup the parameters from a string in order to calculate the timeshifts
   bool setParameters(std::string const & parameter);
 
-  /**
-   * @brief Use this method to load timeshifts from a .dT file
-  */
+  /// @brief Use this method to load timeshifts from a .dT file
   bool load(std::string const & filename);
 
   /**
@@ -626,7 +624,7 @@ void Timeshifts::treatFasterFile(std::string const & filename)
   Hit hit;
   FasterReader reader(&hit, filename);
   Event event;
-  CoincBuilder2 coincBuilder(&event, m_timewindow);
+  CoincBuilder coincBuilder(&event, m_timewindow);
 
   uint counter = 0;  
   bool const maxHitsToRead = (m_max_hits>0);

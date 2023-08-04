@@ -49,8 +49,8 @@
  *        // This function is now setup to read one specific file
  *        while(reader.Read())
  *        {
- *          // Here, hit contains the 
- *          Do something with the hit like histo->Fill(hit.nrj) or tree -> Fill() if you connected the
+ *          // Here, hit contains the data of the current faster data hit beeing read in the binary .fast file
+ *          Do something with the hit like histo->Fill(hit.nrj) or tree -> Fill() if you connected a tree to the hit
  *        }
  *      }
  * 
@@ -63,7 +63,7 @@
  *         // Do something with the argument like print(some_argument) or some_argument.Write()
  *      }
  * 
- * Here are two function examples. The third parameter
+ * Here are two function examples. The third parameter has been instanciated before the MTFasterReader::execute() method call
  *      
  *        void counter(Hit & hit, FasterReader & reader, MTCounter & counterMT)
  *         {
@@ -76,7 +76,7 @@
  *         }
  *      
  * 
- *        void scalers(Hit & hit, FasterReader & reader, MTTHist & scaler)
+ *        void scalers(Hit & hit, FasterReader & reader, MTTHist<TH1> & scaler)
  *        {
  *           while(reader.Read())
  *           {
@@ -109,17 +109,37 @@ public:
     return ret;
   }
   
-  bool nextFilename(std::string & filename) {return m_MTfiles.getNext(filename);}
-
-  template<class Func, class... ARGS>
-  static void Read(MTFasterReader & MTreader, Func function, ARGS &&... args);
-
+  /** 
+   * @brief Reads many files in parallel
+   * @param func: Function used on each file in parallel. Cannot be a member function, except if declared static.
+   * The declared function MUST have its two first parameters as follow : type function(Hit & hit, FasterReader & reader, ...);
+   * You can add anything in the ..., but then you have to add them in the execute method.
+   * e.g. : 
+   * 
+   *        void my_function(Hit & hit, FasterReader & reader, MTCounter & counter){do something...}
+   * 
+   * in main
+   *  
+   *        MTFasterReader reader(/path/to/data/folder);
+   *        MTCounter counter;
+   *        reader.execute(my_function, counter);
+   * 
+   * That way, my_function will be executed in parallel on each file this class is currently reading.
+   * 
+   * 
+  */
   template<class Func, class... ARGS>
   void execute(Func func, ARGS &&... args);
 
   void printMTFiles() {for (auto const & file : m_MTfiles) print(file);}
 
+  /// @brief Internal method, do not use
+  bool nextFilename(std::string & filename) {return m_MTfiles.getNext(filename);}
+
 private:
+  template<class Func, class... ARGS>
+  static void Read(MTFasterReader & MTreader, Func function, ARGS &&... args);
+
   FilesManager m_files;
   MTList<std::string> m_MTfiles;
   std::mutex m_mutex;
@@ -139,7 +159,7 @@ void MTFasterReader::Read(MTFasterReader & MTreader, Func function, ARGS &&... a
   {
     Hit hit;
     FasterReader reader(&hit, filename);
-    function(hit, reader, std::forward<ARGS>(args)...);
+    function(hit, reader, std::forward<ARGS>(args)...); // If issues here, check that the function is like func(Hit & hit, FasterReader & reader, ....)
   }
 }
 

@@ -457,7 +457,7 @@ public:
     if (!folder_exists(m_path))
     {
       m_exists = false;
-      throw std::runtime_error(m_path+" doesn't exist !!");
+      print(m_path+" doesn't exist !!");
     }
 
   #ifdef MTOBJECT_HPP

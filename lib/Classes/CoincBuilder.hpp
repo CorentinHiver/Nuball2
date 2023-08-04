@@ -1,6 +1,5 @@
-#ifndef COINCBUILDER_H
-#define COINCBUILDER_H
-#include "../utils.hpp"
+#ifndef COINC_BUILDER2_H
+#define COINC_BUILDER2_H
 #include "Builder.hpp"
 
 /*
@@ -11,98 +10,73 @@ class CoincBuilder : public Builder
 {
 public:
   // Constructors :
-  explicit CoincBuilder()
-  {
-    m_buffer = new Buffer;
-    m_buffer->resize(2);
-  }
-  explicit CoincBuilder(Int_t const & i)
-  {
-    m_buffer = new Buffer;
-    m_buffer->resize(i);
-  }
-  explicit CoincBuilder(Buffer * _event)                            : m_buffer(_event){}
-  explicit CoincBuilder(Buffer * _event, Int_t const & _timeWindow) : m_buffer(_event), m_time_window(_timeWindow){}
+  explicit CoincBuilder() { }
+  explicit CoincBuilder(Event * _event)                                                         {m_event = _event;}
+  explicit CoincBuilder(Event * _event, Int_t const & _timeWindow) : m_time_window(_timeWindow) {m_event = _event;}
 
   // Methods :
   // Add Hits  Outputs  0: single | 1: begin of coincidence | 2: coincidence complete
   Bool_t build(Hit const & _hit);
 
-  void   flush() {m_buffer -> resize(0); m_buffer -> clear(); m_status = 0;}
+  void   reset() {m_event -> clear(); m_status = 0;}
   Bool_t coincidence(Hit const & hit) {return ((hit.time - m_last_hit.time) < m_time_window);}
-
-  // Getters :
-  Buffer* getBuffer() const {return m_buffer;}
-  Buffer  getSingleBuffer() {return Buffer(1,m_single_hit);}
-  Bool_t const & isCoincTrigged() const {return coincON;}
-  UShort_t size() const {return m_buffer -> size();}
 
   // Setters :
   void setTimeWindow(Int_t const & _timeWindow) {m_time_window = _timeWindow;}
 
   // Printers :
-  void printBuffer();
-
-  // Public members :
-  uchar mult = 1;
-  Int_t         n_evt = 0;
+  void printEvent();
 
 private:
   // Attributes :
-  Buffer* m_buffer = nullptr;
-  Time    m_time_window = 500000ull; // 500 000 ps by default (ull = unsigned long long)
+  Time m_time_window = 500000ull; // 500 000 ps by default (ull = unsigned long long)
 };
 
 Bool_t CoincBuilder::build(Hit const & hit)
 {//return true when a coincidence is ready to be processed
-  if (m_status == 2 || mult>254) this->flush(); //because nb_evts is on uchar so < 255
+  if(m_event->mult>255) reset();
   if (!coincON)
-  {// No coincidence going on. If there is, go ...
+  {// If no coincidence has been detected in previous iteration :
     if (coincidence(hit))
-    {// Bingo, coincidence detected ! Next call, go ...
-      m_buffer -> push_back( m_last_hit );
-      m_buffer -> push_back( hit );
-      mult = 2;
-      coincON = true;
-      m_status = 1;
+    {// Case 1 :
+      // The previous and current hit are in the same event.
+      // In next call, we'll check if the next hits are in the event or not (cases 3 or 4)
+      m_event -> clear();
+      m_event -> push_back(m_last_hit);
+      m_event -> push_back(hit);
+      coincON = true; // Open the event
+      m_status = 1; // Now, the event is being filled
     }
     else
-    {// No coincidence detected...
-      m_single_hit = m_last_hit;
-      m_last_hit = hit; //store the hit for next loop
-      mult = 1;
-      n_evt++;
-      m_status = 0;
+    {// Case 2 :
+      // The last and current hits aren't in the same event.
+      // This means either the last hit is filled with an empty hit if last hit closed an event,
+      // or a single hit : a lonely hit alone in the time window around its RF.
+      m_single_hit = m_last_hit; // If last hit is not in time window of last hit, then
+      m_last_hit = hit; // Building next event based on the last hit
+      m_status = 0; // The current event is empty !
     }
   }
   else
-  {// ... there ! Coincidence already detected, check if it ends
+  {// ... there ! Coincidence already detected, check if current hit is out of currently building event
     if (coincidence(hit))
     {// Hit in coincidence with the previous hits
-      mult++;
-      m_buffer -> push_back(hit);
+      m_event -> push_back(hit);
     }
     else
     {// Hit out of coincidence. Next call, go back to first condition.
-      n_evt++;
+      m_last_hit = hit; // Build next event based on the current hit, that is not in the event.
       coincON = false;
-      m_last_hit = hit;
-      m_status = 2;
-      return true;
+      m_status = 2; // The current event is full
+      return true; // Now the event is complete and can be treated
     }
   }
   return false;
 }
 
-void CoincBuilder::printBuffer()
+void CoincBuilder::printEvent()
 {
-  std::cout << " | ";
-  for (auto const & hit : *m_buffer)
-  {
-    std::cout << hit.label << " | " ;
-  }
-  std::cout << std::endl;
+  m_event -> Print();
 }
 
-
-#endif //COINCBUILDER_H
+#endif //COINC_BUILDER2_H

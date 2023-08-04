@@ -33,19 +33,65 @@ bool push_back_unique(std::vector<T> & vector, T const & t)
 /**
  * @brief An efficient container for dynamic arrays with a known and fixed maximum size
  * @attention Prototype, have some memory management issues in some cases ...
+ * @details
+ * This class is meant to handle a vector of data that needs to be resized a lot.
+ * To do so, declare it this way :
+ * 
+ *      static_vector<T> my_vec = static_vector<T>(maximum_size);
+ * 
+ * If not in an object prototype, simply :
+ *      
+ *      auto my_vec = static_vector<T>(maximum_size);
+ * 
+ * You can fill the whole vector with some value :
+ *  
+ *      auto my_vec = static_vector<T>(maximum_size, fill_value);
+ *      // or :
+ *      my_vec.fill(fill_value);
+ * 
+ * Now, you can use this vector just like a regular std::vector : 
+ * 
+ *      my_vec.push_back(t);
+ *      my_vec.push_back(t2);
+ *      my_vec.push_back(t3);
+ *      // Do some stuff
+ *      my_vec.resize(0);
+ * 
+ * @attention keep in mind you cannot exceed the capacity of the vector.
+ * 
+ * If you want not to crash you application if the capacity is reached, use push_back_safe instead.
+ * 
+ * An interesting feature is push_back_unique(t). This allows one to push_back t only if it has 
+ * not been found in the vector. It may require t to have a comparison operator (not tested yet).
+ * 
+ * Now, if for some reason you want to modify the capacity of the vector, you can use static_resize(new_size).
 */
 template<class T>
 class StaticVector
 {
 public:
   StaticVector() = default;
+
+  /// @brief Create a new Static_vector with size static_size
   StaticVector(std::size_t const & static_size) : m_static_size(static_size) {create();}
-  StaticVector(T const & value, std::size_t const & static_size) : m_static_size(static_size) {create(); for (std::size_t i = 0; i<m_static_size; i++) m_data[i] = value;}
+
+  /// @brief Create a new Static_vector with size static_size and fill it with element e
+  StaticVector(T const & e, std::size_t const & static_size) : m_static_size(static_size) {create(); static_fill(e);}
+
+  /// @brief Create a new Static_vector by copy (duplicate)
   StaticVector(StaticVector<T> const & vector) : 
     m_static_size(vector.m_static_size),
     m_dynamic_size(vector.m_dynamic_size),
     m_deleted(vector.m_deleted)
   { create(); *m_data = *(vector.m_data); }
+
+  /// @brief Move contructor
+  StaticVector(StaticVector<T>&& other)
+  {
+    *this = std::move(other);
+  }
+
+  
     
   ~StaticVector()
   {
@@ -86,41 +132,42 @@ public:
     return *this;
   }
 
-  /// @brief Only reset the cursor to 0. Do not touch the data. Used for performance.
-  void resize(std::size_t const & size = 0) {m_dynamic_size = size;}
+  /// @brief Only reset the user size to new_size (default 0). Do not touch the data. Use for performances.
+  void resize(std::size_t const & new_size = 0) {m_dynamic_size = new_size;}
 
-  /// @brief Delete memory, reset the cursor to 0 and allocate new size memory
-  void static_resize(std::size_t const & size = 0)
+  /// @brief Delete memory, reset the user size to 0 and allocate new_size memory
+  void static_resize(std::size_t const & new_size = 0)
   {
     if (m_static_size) delete[] m_data;
     m_dynamic_size = 0;
-    m_static_size = size;
+    m_static_size = new_size;
     m_data = new T[m_static_size];
   }
 
-  /// @brief Does the vector contain t ?
+  /// @brief Does the vector contain element e ?
   /// @param t: variable in read-only mode
-  virtual bool has(T const & t);
+  virtual bool has(T const & e);
 
-  /// @brief Does the vector contain t ?
+  /// @brief Does the vector contain element e ?
   /// @param t: direct access to the variable
-  virtual bool has(T & t);
+  virtual bool has(T & e);
 
-  /// @brief Add element to the back of the vector
-  void push_back(T const & e) {m_data[m_dynamic_size++] = e;}
-
-  /// @brief Add element to the back of the vector and makes sure the memory is allocated
-  void push_back_safe(T const & e)
+  /// @brief Add element to the back of the vector. Use for performances. Unsafe. define SAFE for less performance but size checking
+  void push_back(T const & e) 
   {
+  #ifdef SAFE
     if (m_dynamic_size++ < m_static_size) m_data[m_dynamic_size] = e;
     else std::cout << "Capacity of StaticVector<" << typeid(T).name() << "> with size " << m_static_size << " exceeded" << std::endl;
+  #else 
+    m_data[m_dynamic_size++] = e;
+  #endif //SAFE
   }
 
   /// @brief Add element to the back of the vector only if the vector do not contain it
-  void push_back_unique(T const & e);
+  void push_back_unique(T const & t) {if (!this->has(t)) this -> push_back(t);}
 
   /// @brief Return iterator to the beginning of the vector
-  virtual T* begin(){return m_data;}
+  virtual T* begin() {return m_data;}
 
   /// @brief Return iterator to the end of the vector
   virtual T* end()  {return m_data+m_dynamic_size;}
@@ -137,14 +184,20 @@ public:
   /// @brief Return a pointer to the underlying data
   T* data() {return m_data;}
 
+  /// @brief Fills the vector with element e within user size
+  void fill(T const & e) {for (auto & data : *this) data = e;}
+
+  /// @brief Fills the vector with element e within static size
+  void fill_static(T const & e) {for (int i = 0; i<m_static_size; i++) m_data[i] = e;}
+
 private:
   /// @brief To be used only by the constructor
-  void create() { m_data = new T[m_static_size]; }
+  void create() {m_data = new T[m_static_size];}
 
-  T* m_data;
-  std::size_t m_dynamic_size = 0;
-  std::size_t m_static_size = 0;
-  bool m_deleted = false;
+  T* m_data; // Underlying data dynamic array
+  std::size_t m_dynamic_size = 0; // User size
+  std::size_t m_static_size = 0;  // Maximum size
+  bool m_deleted = false; // Is the class deleted or not
 };
 
 template<class T>
@@ -157,16 +210,6 @@ template<class T>
 bool inline StaticVector<T>::has(T & t)
 {
   return (std::find(this -> begin(), this -> end(), t) != this -> end());
-}
-
-template<class T>
-void StaticVector<T>::push_back_unique(T const & t)
-{
-#ifdef SAFE
-  if (!this->has(t)) this -> push_back_safe(t);
-#else
-  if (!this->has(t)) this -> push_back(t);
-#endif //SAFE
 }
 
 // /**

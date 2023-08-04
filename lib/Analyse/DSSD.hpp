@@ -29,8 +29,8 @@ public:
 
   void Fill(Event const & evt, int const & index);
 
-  StaticVector<float, 32> m_Sectors;
-  StaticVector<float, 16> m_Rings;
+  StaticVector<float> m_Sectors = StaticVector<float>(32);
+  StaticVector<float> m_Rings = StaticVector<float>(16);
 
   std::array<float, 32> m_Sectors_time;
   std::array<float, 32> m_Sectors_nrj;
@@ -53,11 +53,13 @@ void DSSD::Reset()
     m_Sectors_time[sector] = 0.;
     m_Sectors_nrj[sector] = 0.;
   }
+  m_Sectors.resize();
   for (auto const & ring : m_Rings)
   {
     m_Rings_time[ring] = 0.;
     m_Rings_nrj[ring] = 0.;
   }
+  m_Rings.resize();
 }
 
 void DSSD::Fill(Event const & event, int const & i)

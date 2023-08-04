@@ -8,7 +8,31 @@
 
 #include "CloverModule.hpp"
 
-
+/**
+ * @brief Analyse the clovers in the event
+ * @details
+ * 
+ * Typical use case : 
+ * 
+ *        // Open tree...
+ *        Event event(tree, "lTn");
+ *        
+ *        auto root_histo = new THisto(...);
+ *        
+ *        auto maxEvt = tree -> GetEntries();
+ *        int eventNumber = 0;
+ *        Clovers clovers;
+ *        while (eventNumber<maxEvt)
+ *        {
+ *          tree -> GetEntry();
+ *          clovers.SetEvent(event);
+ *          for (auto const & clover : event.CleanGe)
+ *          {
+ *            root_histo->Fill(clover.nrj);
+ *          }
+ *        }
+ * 
+ */
 class Clovers
 {
 public:
@@ -16,11 +40,10 @@ public:
   // ------------------  Setting the lookup tables ------------------ //
   // There are different sets of labels and index. In the following :
   //  - the label is the raw detector label as declared in faster and index_1**.dat
-  //  - the Ge crystal index ranges from 0 to 95 and is then used for angles and visualisation purposes
-  //  - the BGO crystal index is the same for BGO - NOT USED (so far)
+  //  - the Ge  crystal index ranges from 0 to 95 and is then used for angles and visualisation purposes
+  //  - the BGO crystal index ranges from 0 to 47 and "                                                "
 
-  // Is the detector a clover ? And if yes, is it a germanium or a BGO ?
-  static inline bool is_clover     (Label const & l) {return  (l>22 && l<167)                      ;}
+  static inline bool is_clover(Label const & l) {return  (l>22 && l<167);}
   // static inline bool is_clover_Ge  (Label const & l) {return ((is_clover(l)) ? ((l-1)%6 < 4) : false);}
   // static inline bool is_clover_BGO (Label const & l) {return ((is_clover(l)) ? ((l-1)%6 > 3) : false);}
 
@@ -28,7 +51,7 @@ public:
   static inline uchar label_to_clover   (Label const & l) {return ((l-23)/6);} // Ranges from 0 to 23
   static        uchar label_to_cristal  (Label const & l);
 
-  static std::array<bool, 1000> is;       // Array used to know if a given detector is a clover
+  static std::array<bool, 1000> is;          // Array used to know if a given detector is a clover
   // static std::array<bool, 1000> isGe;     // Array used to know if a given detector is a Germanium clover
   // static std::array<bool, 1000> isBGO;    // Array used to know if a given detector is a BGO clover
   // static std::array<bool, 1000> blacklist;// Array used to know if a given detector is in the blacklist
@@ -39,6 +62,7 @@ public:
   static std::array<uchar, 1000> cristaux_index_BGO; // Array used to make correspondance between the detector label and the BGO index
   // static std::vector <uchar> cristaux_opposite;// Array used to make correspondance between a detector and the label of the detector opposite 
 
+  /// @brief Static initialize. Allows one to use the arrays event if no object has been instantiated
   static void Initialize()
   {
     if (!sm_isInitialized)
@@ -83,14 +107,14 @@ public:
   // Ge Crystals :
   StaticVector<uchar> cristaux = StaticVector<uchar>(96);     // List of indexes of Ge crystals in the event
   std::array<float, 96>   cristaux_nrj; // Array containing the energy of each Ge  cristal
-  std::array<float, 96>   cristaux_time;// Array containing the time of each Ge  cristal
+  std::array<double, 96>  cristaux_time;// Array containing the time of each Ge  cristal
 
   std::size_t CrystalMult = 0; // Ge crystals counter
 
   // BGO Crystals :
   StaticVector<uchar> cristaux_BGO = StaticVector<uchar>(48);     // List of indexes of BGO crystals in the event
   std::array<float, 48>   cristaux_nrj_BGO; // Array containing the energy of each BGO cristal
-  std::array<float, 48>   cristaux_time_BGO;// Array containing the time of each BGO cristal
+  std::array<double, 48>  cristaux_time_BGO;// Array containing the absolute time of each BGO cristal
 
   std::size_t CrystalMult_BGO = 0; // BGO crystals counter
 
@@ -103,7 +127,7 @@ public:
   // Specific methods :
   CloverModule operator[] (uchar const & i) {return m_Clovers[i];}
   auto begin() const {return m_Clovers.begin();}
-  auto end()   const {return m_Clovers.end();}
+  auto end()   const {return m_Clovers.end  ();}
   void Analyse();
 
   // Containers :
@@ -111,8 +135,11 @@ public:
   StaticVector<uchar> Ge = StaticVector<uchar>(24);  // List of Germanium modules that fired in the event
   StaticVector<uchar> Bgo = StaticVector<uchar>(24);  // List of BGO modules that fired in the event
   StaticVector<uchar> Clean_Ge = StaticVector<uchar>(24);  // List of clean Germaniums that fired in the event, that is "Ge only" modules
+  
+  StaticVector<uchar> rawGe  = StaticVector<uchar>(96); //List of the position of the raw Ge  in the event
+  StaticVector<uchar> rawBGO = StaticVector<uchar>(48); //List of the position of the raw BGO in the event
 
-  std::vector<CloverModule> m_Clovers;
+  std::vector<CloverModule> m_Clovers; // Array of the 
 
   // Counters :
   std::size_t Mult = 0;
@@ -144,7 +171,7 @@ std::array<uchar, 1000> Clovers::cristaux_index_BGO;
 // std::vector <uchar> Clovers::cristaux_opposite;
 
 // Parameters :
-float Clovers::Emin = 5.;
+float Clovers::Emin = 5.; // by default 5 keV
 bool Clovers::sm_isInitialized = false;
 
 // ---- Methods : --- //
@@ -168,13 +195,16 @@ void Clovers::Reset()
     cristaux_time_BGO [index] = 0.;
   }
 
-  Hits.resize(0);
-  Ge.resize(0);
-  Bgo.resize(0);
-  Clean_Ge.resize(0);
+  rawBGO.resize();
+  rawGe.resize();
 
-  cristaux.resize(0);
-  cristaux_BGO.resize(0);
+  Hits.resize();
+  Ge.resize();
+  Bgo.resize();
+  Clean_Ge.resize();
+
+  cristaux.resize();
+  cristaux_BGO.resize();
 
   Mult = 0;
   GeMult = 0;
@@ -193,15 +223,17 @@ void Clovers::SetEvent(Event const & event)
   for (size_t i = 0; i<event.size(); i++) this -> Fill(event, i);
 }
 
+/// @brief 
 Bool_t Clovers::Fill(Event const & event, int const & hit_i)
 {
   auto const & label = event.labels[hit_i];
+
   if (isClover[label])
   {
-    auto const & index_clover  =  labels[label];
+    auto const & index_clover = labels[label];
 
-    auto const & nrj  = event.nrjs [hit_i];
-    auto const & time = (event.read.T) ? event.time2s[hit_i] : event.times[hit_i];
+    auto const & nrj  = event.nrjs[hit_i];
+    auto const & time = (event.read.t) ? event.times [hit_i] : event.time2s[hit_i];
 
     auto & clover = m_Clovers[index_clover];
 
@@ -210,53 +242,81 @@ Bool_t Clovers::Fill(Event const & event, int const & hit_i)
 
     if (isGe[label])
     {
-      // --- Individual crystals managing : ---
+
+      // -------------------------------------- //
+      // --- Individual crystals managing : --- //
+
       CrystalMult++;
+
+      // Position of the hit in the event :
+      rawBGO.push_back(hit_i);
+
       // Ge crystal index (ranges from 0 to 96):
       auto const & index_cristal = cristaux_index[label];
+
       // Fill the vector containing the list of all the Ge crystals that fired :
       cristaux.push_back(index_cristal);
+
       // Filling the germanium crystals informations :
       cristaux_nrj[index_cristal] = nrj;
       cristaux_time[index_cristal] = time;
 
-      // --- Clovers managing: ---
+      // ------------------------- //
+      // --- Clovers managing: --- //
+
       // Counts the number of Ge crystals that fired in the clover :
       clover.nb++;
+
       // Find the Ge cristal that received the most energy and use its time for the clover :
       if (nrj > cristaux_nrj[clover.maxE_Ge_cristal])
       {
         clover.maxE_Ge_cristal = index_cristal;
         clover.time = time;
       }
+
       // Fill the vector containing the list of Ge clovers that fired :
       Ge.push_back_unique(index_clover);
+
       // Do a raw add-back : sum the energy of all the crystals in a clover
-      clover.nrj += event.nrjs[hit_i];
+      clover.nrj += nrj;
 
       // Detailed analysis :
       if (nrj>507 && nrj<516) has511 = true;
     }
 
     else
-    {// BGO :
-      // --- Individual crystals managing : ---
+    {// if isBGO[label] :
+
+      // -------------------------------------- //
+      // --- Individual crystals managing : --- //
+
       CrystalMult_BGO++;
+
+      // Position of the hit in the event :
+      rawBGO.push_back(hit_i);
+
       // BGO crystal index (ranges from 0 tp 48):
       auto const & index_cristal = cristaux_index_BGO[label];
+
       // Fill the vector containing the list of all the BGO crystals that fired :
       cristaux_BGO.push_back(index_cristal);
+
       // Filling the germanium crystals informations :
       cristaux_nrj_BGO[index_cristal] = nrj;
       cristaux_time_BGO[index_cristal] = time;
 
-      // --- Clovers managing: ---
+      // ------------------------- //
+      // --- Clovers managing: ---//
+
       // Counts the number of BGO crystals that fired in the clover :
       clover.nb_BGO ++;
+
       // Fill the vector containing the list of BGO clovers that fired :
       Bgo.push_back_unique(index_clover);
+
       // Fill the cell containing the total energy deposit in the module's BGOs
       clover.nrj_BGO += event.nrjs[hit_i];
+
       // Manage the time of the BGOs. To be improved if necessary : if 2 BGOs, only the latest one is stored
       clover.time_BGO = event.times[hit_i];
     }
@@ -305,6 +365,7 @@ uchar Clovers::label_to_cristal(Label const & l)
     // For normally rotated clovers, the following disposition is taken : 
     // With sub_index beeing ranging from 0 to 3 for Ge crystal,
     // With beam from right to left, and the gamma rays going out of the sheet :
+    // The color green is top right, black top left, red bottom right and blue bottom left for normally rotated clovers
     // The sub_index 0 is top right, 1 top left, 2 bottom right, 3 bottom_left
     // That is, the angle phi increases with the sub_index
     //          the even labels are on the right side

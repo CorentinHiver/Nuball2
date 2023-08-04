@@ -53,6 +53,8 @@ std::ostream& operator<<(std::ostream& cout, std::map<K,V> const & m)
   return cout;
 }
 
+void print_precision(int n = 6) {std::cout << std::setprecision(n);}
+
 
 // Idea to print any class that has a member called getPrintable that returns an object that can be printed 
 // (i.e. a base type or a class for which operator<< have been overloaded like vector or map)

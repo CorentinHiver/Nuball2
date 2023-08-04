@@ -11,6 +11,7 @@
 // 2. Include library
 #include <libCo.hpp>
 #include <FasterReader.hpp>   // This class is the base for mono  threaded code
+#include <Alignator.hpp>      // Align a TTree if some events are shuffled in time
 #include <MTFasterReader.hpp> // This class is the base for multi threaded code
 #include <MTCounter.hpp>      // Use this to thread safely count what you want
 #include <MTTHist.hpp>        // Use this to thread safely fill histograms
@@ -19,8 +20,7 @@
 #include <Detectors.hpp>      // Eases the manipulation of detector's labels
 #include <Manip.hpp>          // Eases the manipulation of files and folder of an experiments
 #include <RF_Manager.hpp>     // Eases manipulation of RF information
-#include <Alignator.hpp>      // Align a TTree if some events are shuffled in time
-#include <RF_Extractor.hpp>   // Extracts the first RF hit from a ttree
+
 
 #include "EventBuilder_136.hpp" // Event builder for this experiment
 
@@ -172,7 +172,7 @@ if (rawCounts==0) return;
     // Handle the RF data :
     if (hit.label == RF_Manager::label)
     {
-      auto temp = event;
+      Event temp (event);
       event = hit;
       outTree -> Fill();
       event = temp;
@@ -268,13 +268,14 @@ int main(int argc, char** argv)
       else if (command == "-h" || command == "--help")
       {
         print("List of the commands :");
-        print("(-f  || --files_number)   [files_number]  : set the number of files");
-        print("(-h  || --help)                           : display this help");
-        print("(-m  || --multithread)    [thread_number] : set the number of threads to use. Maximum allowed : 3/4 of the total number of threads");
-        print("(-o  || --overwrite)                      : overwrites the already written folders. If a folder is incomplete, you need to delete it");
-        print("(-t  || --timeshifts)                     : Calculate only timeshifts, force it even if it already has been calculated");
-        print("(-Th || --Thorium)                        : Treats only the thorium runs (run_nb < 75)");
-        print("(-U  || --Uranium)                        : Treats only the uranium runs (run_nb >= 75)");
+        print("(-f  || --files_number) [files_number]  : set the number of files");
+        print("(-h  || --help)                         : display this help");
+        print("(-m  || --multithread)  [thread_number] : set the number of threads to use. Maximum allowed : 3/4 of the total number of threads");
+        print("(-o  || --overwrite)                    : overwrites the already written folders. If a folder is incomplete, you need to delete it");
+        print("(-t  || --timeshifts)                   : Calculate only timeshifts, force it even if it already has been calculated");
+        print("(-Th || --Thorium)                      : Treats only the thorium runs (run_nb < 75)");
+        print("(-U  || --Uranium)                      : Treats only the uranium runs (run_nb >= 75)");
+        return 0;
       }
     }
   }
@@ -316,7 +317,7 @@ int main(int argc, char** argv)
     print("Treating ", run_name);
 
     // Timeshifts loading : 
-    Timeshifts timeshifts(outPath,run_name);
+    Timeshifts timeshifts(outPath, run_name);
 
     // If no timeshifts data already available, calculate it :
     if (!timeshifts || only_timeshifts) 
@@ -333,7 +334,7 @@ int main(int argc, char** argv)
 
     if (!only_timeshifts)
     {
-      Loop over the files in parallel :
+      // Loop over the files in parallel :
       MTFasterReader readerMT(runpath, nb_files);
       readerMT.execute(convert, detectors, calibration, timeshifts, outPath, histos);
 

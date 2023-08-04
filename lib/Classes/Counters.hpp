@@ -35,7 +35,7 @@ public:
   uchar ParisMult=0;
   uchar DSSDMult=0;
 
-  StaticVector<uchar,24> list_clovers;
+  StaticVector<uchar> list_clovers = StaticVector<uchar>(24);
   std::array<Bool_t, 24> Ge_Clover;
   std::array<Bool_t, 24> BGO_Clover;
 
