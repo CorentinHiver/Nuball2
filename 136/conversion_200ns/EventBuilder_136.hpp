@@ -118,9 +118,10 @@ void EventBuilder_136::reset()
 class Counter136
 {
 public:
-  int nb_modules = 0;
-  int nb_dssd = 0;
-  int nb_Ge = 0;
+  uchar nb_modules = 0;
+  uchar nb_dssd = 0;
+  uchar nb_Ge = 0;
+  uchar nb_clovers = 0;
   std::vector<Label> clovers;
 
   void reset() 
@@ -128,6 +129,7 @@ public:
     nb_modules = 0; 
     nb_dssd = 0; 
     nb_Ge = 0; 
+    nb_clovers = 0;
     clovers.resize(0);
   }
   
@@ -142,7 +144,8 @@ public:
       else if (isLaBr3[label] || isParis[label]) nb_modules++;
       else if (isDSSD[label])                    nb_dssd++;
     }
-    nb_modules+=clovers.size();
+    nb_clovers = clovers.size();
+    nb_modules+=nb_clovers;
   }
 };
 

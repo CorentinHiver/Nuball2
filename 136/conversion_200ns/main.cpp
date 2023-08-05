@@ -92,7 +92,7 @@ struct Histos
 
 bool trigger(Counter136 const & counter)
 {
-  return ((counter.nb_modules>1 && counter.nb_Ge>0) || counter.nb_dssd>0);
+  return ((counter.nb_modules>1 && counter.nb_clovers>0) || counter.nb_dssd>0);
 }
 
 // 4. Declare the function to run on each file in parallel :
@@ -196,6 +196,7 @@ if (rawCounts==0) return;
   auto const & nb_data = readTree->GetEntries();
   ulong hits_count = 0;
   ulong evts_count = 0;
+  ulong trig_count = 0;
   while (loop<nb_data)
   {
     readTree -> GetEntry(gindex[loop++]);
@@ -221,6 +222,7 @@ if (rawCounts==0) return;
     // Event building :
     if (eventBuilder.build(hit))
     {
+      evts_count++;
       for (uint trig_loop = 0; trig_loop<event.size(); trig_loop++)
       {
         auto const & label = event.labels[trig_loop];
@@ -239,7 +241,7 @@ if (rawCounts==0) return;
       if (trigger(counter))
       {
         hits_count+=event.size();
-        evts_count++;
+        trig_count++;
 
         for (uint trig_loop = 0; trig_loop<event.size(); trig_loop++)
         {
