@@ -45,6 +45,12 @@ struct Histos
   MTTHist<TH2F> energy_each;
   MTTHist<TH2F> rf_each;
 
+  MTTHist<TH1F> energy_all_event;
+  MTTHist<TH1F> rf_all_event;
+
+  MTTHist<TH2F> energy_each_event;
+  MTTHist<TH2F> rf_each_event;
+
   MTTHist<TH1F> energy_all_trig;
   MTTHist<TH1F> rf_all_trig;
 
