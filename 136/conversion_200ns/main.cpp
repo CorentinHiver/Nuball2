@@ -39,16 +39,33 @@ bool only_timeshifts = false;
 struct Histos
 {
   // Vector_MTTHist<TH1F> rf;
-  MTTHist<TH2F> rf_each;
-  MTTHist<TH2F> energy_each;
   MTTHist<TH1F> energy_all;
+  MTTHist<TH1F> rf_all;
+
+  MTTHist<TH2F> energy_each;
+  MTTHist<TH2F> rf_each;
+
+  MTTHist<TH1F> energy_all_trig;
+  MTTHist<TH1F> rf_all_trig;
+
+  MTTHist<TH2F> energy_each_trig;
+  MTTHist<TH2F> rf_each_trig;
+
   void Initialize(Detectors const & detectors)
   {
     auto const & nbDet = detectors.number();
 
-    rf_each.reset("RF_timing_all", "RF timing all", nbDet,0,nbDet, 1000,-100,400);
-    energy_each.reset("Energy_spectra_all", "Energy spectra all", nbDet,0,nbDet, 5000,0,15000);
-    energy_all.reset("Ge spectra", "Ge spectra", 8000,0,4000);
+    energy_all.reset("Ge_spectra", "Ge spectra", 8000,0,4000);
+    rf_all.reset("RF_Time_spectra", "RF Time spectra", 8000,0,4000);
+
+    energy_each.reset("Energy_spectra_each", "Energy spectra each", nbDet,0,nbDet, 5000,0,15000);
+    rf_each.reset("RF_timing_each", "RF timing each", nbDet,0,nbDet, 1000,-100,400);
+
+    energy_all_trig.reset("Ge_spectra_trig", "Ge spectra trig", 8000,0,4000);
+    rf_all_trig.reset("Time_spectra_trig", "Time spectra trig", 8000,0,4000);
+
+    energy_each_trig.reset("Energy_spectra_each", "Energy spectra each", nbDet,0,nbDet, 5000,0,15000);
+    rf_each_trig.reset("RF_timing_each", "RF timing each", nbDet,0,nbDet, 1000,-100,400);
 
     // rf.resize(nbDet);
     
@@ -109,12 +126,16 @@ void convert(Hit & hit, FasterReader & reader,
   int RF_counter_raw = 0;
   while(reader.Read())
   {
+    // Time calibration :
     hit.time+=timeshifts[hit.label];
-    hit.nrjcal = calibration(hit.nrj,  hit.label);
-    if (hit.nrj2 != 0.f) hit.nrj2  = calibration(hit.nrj2, hit.label);
+
+    // Energy calibration :
+    hit.nrjcal = calibration(hit.nrj,  hit.label); // normal calibraiton
+    if (hit.nrj2 != 0.f) hit.nrj2  = calibration(hit.nrj2, hit.label); // calibrate the nrj2 if any
+    if (isBGO[hit.label]) hit.nrjcal = hit.nrj/100.; // "Proto calibration" of BGO
+
     readTree -> Fill();
     rawCounts++;
-    if (hit.label == RF_Manager::label) RF_counter_raw++;
   }
   read_timer.Stop();
 
@@ -181,11 +202,12 @@ if (rawCounts==0) return;
       continue;
     }
 
-    auto const tof = rf.pulse_ToF(hit.time);
-    // histos.rf[hit.label].Fill(tof/_ns);
-    histos.rf_each.Fill(hit.label, tof/_ns);
-    histos.energy_each.Fill(hit.label, hit.nrjcal);
+    auto const tof = rf.pulse_ToF_ns(hit.time);
+    histos.rf_all.Fill(tof);
+    histos.rf_each.Fill(compressedLabel[hit.label], tof);
+    
     if (isGe[hit.label]) histos.energy_all.Fill(hit.nrjcal);
+    histos.energy_each.Fill(compressedLabel[hit.label], hit.nrjcal);
 
     // Event building :
     if (eventBuilder.build(hit))
@@ -196,6 +218,13 @@ if (rawCounts==0) return;
       {
         hits_count+=event.size();
         evts_count++;
+
+        histos.rf_all_trig.Fill(tof);
+        histos.rf_each_trig.Fill(compressedLabel[hit.label], tof);
+    
+        if (isGe[hit.label]) histos.energy_all_trig.Fill(hit.nrjcal);
+        histos.energy_each_trig.Fill(compressedLabel[hit.label], hit.nrjcal);
+
         outTree->Fill();
       }
     #else
@@ -228,6 +257,7 @@ if (rawCounts==0) return;
   auto outSize  = static_cast<int>(size_file_conversion(outFile->GetSize(), "o", "Mo"));
 
   timer();
+  print_precision(4);
   print(outfile, "written in", timer(), timer.unit(),"(",dataSize/timer.TimeSec(),"Mo/s). Input file", dataSize, 
         "Mo and output file", outSize, "Mo : compression factor ", dataSize/outSize,"-", 100*hits_count/rawCounts,"% hits kept");
 }
@@ -340,10 +370,14 @@ int main(int argc, char** argv)
 
       std::unique_ptr<TFile> outFile (TFile::Open((outPath+run_name+"/histo_"+run_name+".root").c_str(), "RECREATE"));
       outFile -> cd();
-      // for (auto & histo : histos.rf) histo.Write();
       histos.energy_all.Write();
-      histos.rf_each.Write();
       histos.energy_each.Write();
+      histos.rf_all.Write();
+      histos.rf_each.Write();
+      histos.energy_all_trig.Write();
+      histos.energy_each_trig.Write();
+      histos.rf_all_trig.Write();
+      histos.rf_each_trig.Write();
       outFile -> Write();
       outFile -> Close();
       print(outPath+run_name+"/"+run_name+"_histo.root written");
