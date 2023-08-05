@@ -796,6 +796,7 @@ std::vector<longlong> forced_shifts;
 
 void Timeshifts::analyse()
 {
+  forced_shifts.resize(m_detectors.size(), 0ll);
   for (uint label = 0; label<forced_shifts.size(); label++)
   {
     switch (label)
