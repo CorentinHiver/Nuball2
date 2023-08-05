@@ -17,12 +17,12 @@ public:
   void reset();
 
   // Getters :
-  auto const & getShift() const {return m_shift;}
+  // auto const & getShift() const {return m_shift;}
   auto const & get_RF_ref_time() const {return RF_ref_time;}
 
   // Setters :
-  void setShift(Long64_t const & shift) {m_shift = shift;}
-  void setShift_ns(Long64_t const & shift) {m_shift = 1000*shift;}
+  // void setShift(Long64_t const & shift) {m_shift = shift;}
+  // void setShift_ns(Long64_t const & shift) {m_shift = 1000*shift;}
   void setRF(RF_Manager* rf) {m_rf = rf;}
   void setFirstRF(Hit const & hit);
   void setRFTime(Time const & _RF_ref_time) {RF_ref_time = _RF_ref_time;}
@@ -33,7 +33,7 @@ private:
   // Attributes :
   Time RF_ref_time = 0;
   RF_Manager* m_rf = nullptr;
-  Time m_shift = 0;
+  // Time m_shift = 0;
 };
 
 bool EventBuilder_136::build(Hit const & hit)
@@ -101,7 +101,7 @@ void EventBuilder_136::setFirstRF(Hit const & rf_hit)
 void EventBuilder_136::set_last_hit(Hit const & hit)
 {
   // The closest RF to this hit is taken as reference to build the event :
-  RF_ref_time = hit.time - (hit.time - m_rf->last_hit + m_shift) % m_rf->period;
+  RF_ref_time = hit.time - (hit.time - m_rf->last_hit + m_rf->getShift()) % m_rf->period;
   // m_last_hit is filled with the current hit :
   m_last_hit = hit;
 }
@@ -109,7 +109,7 @@ void EventBuilder_136::set_last_hit(Hit const & hit)
 void EventBuilder_136::reset()
 {
   // Sets the reference RF timestamp to the last hit :
-  RF_ref_time = m_last_hit.time - (m_last_hit.time-m_rf->last_hit + m_shift)%m_rf->period ;
+  RF_ref_time = m_last_hit.time - ( (m_last_hit.time - m_rf->last_hit) + m_rf->getShift() ) % m_rf->period ;
   // Then
   m_event -> clear(); m_status = 0;
 }
