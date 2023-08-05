@@ -34,7 +34,7 @@ std::string timewindow = "1500";
 int  nb_files_ts = 50;
 int nb_files = -1;
 bool overwrite = false; // Overwrite already existing converted root filesstruct histos
-bool only_timeshifts = false;
+bool only_timeshifts = false; // No conversion : only calculate the timeshifts
 
 struct Histos
 {
@@ -56,13 +56,13 @@ struct Histos
     auto const & nbDet = detectors.number();
 
     energy_all.reset("Ge_spectra", "Ge spectra", 8000,0,4000);
-    rf_all.reset("RF_Time_spectra", "RF Time spectra", 8000,0,4000);
+    rf_all.reset("RF_Time_spectra", "RF Time spectra", 1000, -10, 400);
 
     energy_each.reset("Energy_spectra_each", "Energy spectra each", nbDet,0,nbDet, 5000,0,15000);
     rf_each.reset("RF_timing_each", "RF timing each", nbDet,0,nbDet, 1000,-100,400);
 
     energy_all_trig.reset("Ge_spectra_trig", "Ge spectra after trigger", 8000,0,4000);
-    rf_all_trig.reset("Time_spectra_trig", "Time spectra after trigger", 8000,0,4000);
+    rf_all_trig.reset("Time_spectra_trig", "Time spectra after trigger", 1000, -10, 400);
 
     energy_each_trig.reset("Energy_spectra_each_trig", "Energy spectra each after trigger", nbDet,0,nbDet, 5000,0,15000);
     rf_each_trig.reset("RF_timing_each_trig", "RF timing each after trigger", nbDet,0,nbDet, 1000,-100,400);
