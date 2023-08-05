@@ -258,7 +258,6 @@ private:
   ulong m_max_hits = -1;
   float m_Emin = 0.;
 
-
   // This map holds the number of bins per ns (e.g. for LaBr3 there is one bin every 100 ps)
   std::map<dAlias, float> m_bins_per_ns = 
   { 
@@ -412,6 +411,10 @@ bool Timeshifts::InitializeRaw()
       
   #ifdef USE_RF
     m_histograms_VS_RF[label].reset((name+"_RF").c_str(), (name+"_RF").c_str(), m_timewindow_ns*m_bins_per_ns[alias], -m_timewindow/2, m_timewindow/2);
+    if (alias == Detector::RF)
+    {
+      m_time_spectra[label].reset(name.c_str(), name.c_str(), 1000, -100, 100);
+    }
   #endif //USE_RF
   }
   return (m_initializedRaw = true);
@@ -818,7 +821,7 @@ void Timeshifts::analyse()
     {
       auto const & RF_zero = m_timeshifts[RF_Manager::label];
       m_histograms_VS_RF[label].Merge();
-      if (m_histograms_VS_RF[label].Integral() < 50 ) {print("Not a lot of hits : only", m_time_spectra[label].Integral(), "for", name); continue;}
+      if (m_histograms_VS_RF[label].Integral() < 50 ) {print("Not a lot of hits : only", m_histograms_VS_RF[label].Integral(), "for", name); continue;}
       
       if (m_edge_preferred[alias])
       { // Not taking the maximum but the raising edge of the time spectra :
