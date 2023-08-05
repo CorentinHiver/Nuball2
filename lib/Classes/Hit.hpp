@@ -57,6 +57,7 @@ struct Read
         case ('E') : E   = true;  break;
         case ('q') : q   = true;  break;
         case ('Q') : Q   = true;  break;
+        case ('p') : p   = true;  break;
         case ('R') : RFt = true;  break;
         case ('P') : RFp = true;  break;
         default : print("Unkown parameter", option, "for io event");
