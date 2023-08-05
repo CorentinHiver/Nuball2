@@ -190,9 +190,9 @@ inline void Event::push_back(Hit const & hit)
                labels  [mult] = hit.label;
   if (write.t) times   [mult] = hit.time;
   if (write.T) time2s  [mult] = hit.time2;
-  if (write.e) nrjs    [mult] = hit.nrjcal;
+  if (write.e) nrjs    [mult] = hit.nrj;
   if (write.E) nrjcals [mult] = hit.nrjcal;
-  if (write.q) nrj2s   [mult] = hit.nrj2cal;
+  if (write.q) nrj2s   [mult] = hit.nrj2;
   if (write.Q) nrj2cals[mult] = hit.nrj2cal;
   if (write.p) pileups [mult] = hit.pileup;
   mult++;
