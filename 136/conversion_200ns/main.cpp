@@ -138,7 +138,7 @@ void convert(Hit & hit, FasterReader & reader,
 
     // Energy calibration :
     hit.nrjcal = calibration(hit.nrj,  hit.label); // normal calibraiton
-    if (hit.nrj2 != 0.f) hit.nrj2cal  = calibration(hit.nrj2, hit.label); // calibrate the nrj2 if any
+    hit.nrj2cal = (hit.nrj2 == 0.f) ? 0.f : calibration(hit.nrj2, hit.label); // calibrate the nrj2 if any
     if (isBGO[hit.label]) hit.nrjcal = hit.nrj/100.; // "Proto calibration" of BGO
 
     tempTree -> Fill();
@@ -229,7 +229,7 @@ if (rawCounts==0) return;
         histos.energy_each_event.Fill(compressedLabel[label], nrjcal);
       }
       counter.count(event); 
-      
+
     #ifdef TRIGGER
       if (trigger(counter))
       {
