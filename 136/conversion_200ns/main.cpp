@@ -135,7 +135,6 @@ void convert(Hit & hit, FasterReader & reader,
   // Loop over the TTree 
   Timer read_timer;
   ulong rawCounts = 0;
-  // int RF_counter_raw = 0;
   while(reader.Read())
   {
     // Time calibration :
@@ -152,7 +151,7 @@ void convert(Hit & hit, FasterReader & reader,
   read_timer.Stop();
 
 #ifdef DEBUG
-  print("Read of",raw_datafile.shortName(),"finished here,", rawCounts,"counts and", RF_counter_raw, "RF counts, in", read_timer.TimeElapsedSec(),"s");
+  print("Read of",raw_datafile.shortName(),"finished here,", rawCounts,"counts in", read_timer.TimeElapsedSec(),"s");
 #endif //DEBUG
 
 if (rawCounts==0) return;
@@ -229,11 +228,11 @@ if (rawCounts==0) return;
         auto const & time = event.times[trig_loop];
         auto const tof_trig = rf.pulse_ToF_ns(time);
 
-        histos.energy_all_event.Fill(tof_trig);
-        histos.rf_all_event.Fill(compressedLabel[label], tof_trig);
+        histos.rf_all_event.Fill(tof_trig);
+        histos.rf_each_event.Fill(compressedLabel[label], tof_trig);
     
-        if (isGe[label]) histos.energy_each_event.Fill(nrjcal);
-        histos.rf_each_event.Fill(compressedLabel[label], nrjcal);
+        if (isGe[label]) histos.energy_all_event.Fill(nrjcal);
+        histos.energy_each_event.Fill(compressedLabel[label], nrjcal);
       }
       counter.count(event); 
     #ifdef TRIGGER
