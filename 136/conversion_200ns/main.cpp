@@ -56,13 +56,19 @@ struct Histos
     auto const & nbDet = detectors.number();
 
     energy_all.reset("Ge_spectra", "Ge spectra", 8000,0,4000);
-    rf_all.reset("RF_Time_spectra", "RF Time spectra", 1000, -10, 400);
+    rf_all.reset("RF_Time_spectra", "RF Time spectra", 1000, -100, 400);
 
     energy_each.reset("Energy_spectra_each", "Energy spectra each", nbDet,0,nbDet, 5000,0,15000);
     rf_each.reset("RF_timing_each", "RF timing each", nbDet,0,nbDet, 1000,-100,400);
 
+    energy_all_event.reset("Ge_spectra_event", "Ge spectra after event building", 8000,0,4000);
+    rf_all_event.reset("Time_spectra_event", "Time spectra after event building", 1000, -100, 400);
+
+    energy_each_event.reset("Energy_spectra_each_event", "Energy spectra each after event building", nbDet,0,nbDet, 5000,0,15000);
+    rf_each_event.reset("RF_timing_each_event", "RF timing each after event building", nbDet,0,nbDet, 1000,-100,400);
+
     energy_all_trig.reset("Ge_spectra_trig", "Ge spectra after trigger", 8000,0,4000);
-    rf_all_trig.reset("Time_spectra_trig", "Time spectra after trigger", 1000, -10, 400);
+    rf_all_trig.reset("Time_spectra_trig", "Time spectra after trigger", 1000, -100, 400);
 
     energy_each_trig.reset("Energy_spectra_each_trig", "Energy spectra each after trigger", nbDet,0,nbDet, 5000,0,15000);
     rf_each_trig.reset("RF_timing_each_trig", "RF timing each after trigger", nbDet,0,nbDet, 1000,-100,400);
@@ -185,7 +191,6 @@ if (rawCounts==0) return;
   auto const & nb_data = readTree->GetEntries();
   ulong hits_count = 0;
   ulong evts_count = 0;
-  ulong RF_counter_written = 0;
   while (loop<nb_data)
   {
     readTree -> GetEntry(gindex[loop++]);
@@ -198,7 +203,6 @@ if (rawCounts==0) return;
       outTree -> Fill();
       event = temp;
       rf.setHit(hit);
-      RF_counter_written++;
       continue;
     }
 
@@ -212,6 +216,19 @@ if (rawCounts==0) return;
     // Event building :
     if (eventBuilder.build(hit))
     {
+      for (uint trig_loop = 0; trig_loop<event.size(); trig_loop++)
+      {
+        auto const & label = event.labels[trig_loop];
+        auto const & nrjcal = event.nrjs[trig_loop];
+        auto const & time = event.times[trig_loop];
+        auto const tof_trig = rf.pulse_ToF_ns(time);
+
+        histos.energy_all_event.Fill(tof_trig);
+        histos.rf_all_event.Fill(compressedLabel[label], tof_trig);
+    
+        if (isGe[label]) histos.energy_each_event.Fill(nrjcal);
+        histos.rf_each_event.Fill(compressedLabel[label], nrjcal);
+      }
       counter.count(event); 
     #ifdef TRIGGER
       if (trigger(counter))
@@ -264,7 +281,6 @@ if (rawCounts==0) return;
   auto dataSize = static_cast<int>(raw_datafile.size("Mo"));
   auto outSize  = static_cast<int>(size_file_conversion(outFile->GetSize(), "o", "Mo"));
 
-  timer();
   print_precision(4);
   print(outfile, "written in", timer(), timer.unit(),"(",dataSize/timer.TimeSec(),"Mo/s). Input file", dataSize, 
         "Mo and output file", outSize, "Mo : compression factor ", dataSize/outSize,"-", 100*hits_count/rawCounts,"% hits kept");
@@ -382,6 +398,10 @@ int main(int argc, char** argv)
       histos.energy_each.Write();
       histos.rf_all.Write();
       histos.rf_each.Write();
+      histos.energy_all_event.Write();
+      histos.rf_all_event.Write();
+      histos.energy_each_event.Write();
+      histos.rf_each_event.Write();
       histos.energy_all_trig.Write();
       histos.energy_each_trig.Write();
       histos.rf_all_trig.Write();
