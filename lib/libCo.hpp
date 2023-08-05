@@ -51,6 +51,7 @@ using uchar  = unsigned char       ;
 using uint   = unsigned int        ;
 using ulong  = unsigned long int   ;
 using ulonglong  = unsigned long long int ;
+using longlong  = long long int ;
 
 // Containers :
 using Bools = std::vector<bool>;

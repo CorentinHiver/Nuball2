@@ -214,6 +214,10 @@ public:
    */
   void checkForPreprompt(bool const & check = true) {m_check_preprompt = check;}
 
+  std::vector<bool>  m_RF_preferred_label; // Used to force RF measurement for specific labels;
+  std::vector<uchar> m_nb_shifts_RF_peak;  // If the peak is not within [+- RF_period] then one need to shift it accordingly
+  std::vector<bool>  m_edge_preferred_label; // Used to force RF measurement for specific labels;
+
 private:
 
   bool Initialize(bool const & initializeRaw = false, bool const & initializeCorrected = false);
@@ -309,6 +313,8 @@ private:
   MTTHist<TH2F> m_time_spectra_corrected_bidim; // Time spectra from coincidence with the time reference detector, X axis label, Y axis time spectra, after timeshift
 
 #ifdef USE_RF
+  ushort m_period = USE_RF;
+
   MTTHist<TH1F> m_histo_ref_VS_RF; // RF time spectra of the time reference detector
   MTTHist<TH2F> m_histo_ref_vs_RF_VS_mult; // RF time spectra VS multiplicity of the time reference detector
   MTTHist<TH1F> m_time_spectra_reference_RF_corrected; // RF time spectra VS multiplicity of the time reference detector, after timeshift
@@ -484,6 +490,9 @@ bool Timeshifts::Initialize(bool const & initializeRaw, bool const & initializeC
   }
 
   m_timeshifts.resize(m_detectors.size(), 0);
+  m_RF_preferred_label.resize(m_detectors.size(), false);
+  m_edge_preferred_label.resize(m_detectors.size(), false);
+  m_nb_shifts_RF_peak.resize(m_detectors.size(), 0);
 
   return (m_ok = m_initialized = true);
 }
@@ -591,6 +600,7 @@ void get_first_RF_of_file(TTree * tree, Event & event, RF_Manager & rf)
       {
         rf.last_hit = event.times[hit];
         rf.period   = event.nrjs [hit];
+        break;
       }
     }
   }
@@ -782,8 +792,59 @@ float getRFGammaPrompt(TH1F * hist, bool const & check_preprompt)
   else return maxBin_ps;
 }
 
+std::vector<longlong> forced_shifts;
+
 void Timeshifts::analyse()
 {
+  for (uint label = 0; label<forced_shifts.size(); label++)
+  {
+    switch (label)
+    {
+      case (800) : forced_shifts[label] = -200000ll; break;
+      case (801) : forced_shifts[label] = -200000ll; break;
+      case (802) : forced_shifts[label] = -223700ll; break;
+      case (803) : forced_shifts[label] = -224013ll; break;
+      case (804) : forced_shifts[label] = -223337ll; break;
+      case (805) : forced_shifts[label] = -233668ll; break;
+      case (806) : forced_shifts[label] = -234377ll; break;
+      case (807) : forced_shifts[label] = -233857ll; break;
+      case (808) : forced_shifts[label] = -233677ll; break;
+      case (809) : forced_shifts[label] = -223296ll; break;
+      case (810) : forced_shifts[label] = -224911ll; break;
+      case (811) : forced_shifts[label] = -224341ll; break;
+      case (812) : forced_shifts[label] = -224824ll; break;
+      case (813) : forced_shifts[label] = -227513ll; break;
+      case (814) : forced_shifts[label] = -227109ll; break;
+      case (815) : forced_shifts[label] = -227453ll; break;
+      case (821) : forced_shifts[label] = -233209ll; break;
+      case (822) : forced_shifts[label] = -233408ll; break;
+      case (825) : forced_shifts[label] = -243012ll; break;
+      case (826) : forced_shifts[label] = -242249ll; break;
+      case (828) : forced_shifts[label] = -235076ll; break;
+      case (829) : forced_shifts[label] = -232000ll; break;
+      case (830) : forced_shifts[label] = -242684ll; break;
+      case (831) : forced_shifts[label] = -238313ll; break;
+      case (832) : forced_shifts[label] = -238868ll; break;
+      case (833) : forced_shifts[label] = -238871ll; break;
+      case (834) : forced_shifts[label] = -235886ll; break;
+      case (835) : forced_shifts[label] = -234000ll; break;
+      case (840) : forced_shifts[label] = -250407ll; break;
+      case (841) : forced_shifts[label] = -220000ll; break;
+      case (842) : forced_shifts[label] = -240967ll; break;
+      case (843) : forced_shifts[label] = -249883ll; break;
+      case (845) : forced_shifts[label] = -255466ll; break;
+      case (846) : forced_shifts[label] = -245108ll; break;
+      case (847) : forced_shifts[label] = -250381ll; break;
+      case (848) : forced_shifts[label] = -253537ll; break;
+      case (850) : forced_shifts[label] = -246108ll; break;
+      case (851) : forced_shifts[label] = -240327ll; break;
+      case (852) : forced_shifts[label] = -238842ll; break;
+      case (853) : forced_shifts[label] = -250727ll; break;
+      case (854) : forced_shifts[label] = -242609ll; break;
+      default: forced_shifts[label] = 0; break;
+    }
+  }
+
   bool has_RF = false;
 
 #ifdef USE_RF
@@ -815,15 +876,22 @@ void Timeshifts::analyse()
 
     if (alias == dAlias::eden || alias == dAlias::RF) continue;
 
+    // Need to change that afterwards !!!
+    if (forced_shifts[label] != 0)
+    {
+      m_timeshifts[label] = forced_shifts[label];
+      continue;
+    }
+
     // A. If RF, one can decide to use the RF time spectra to calculate the time shifts.
     // Attention !!! This works only if the peak lies bewteen 0 and the RF period, otherwise there will be a shift
-    if (m_RF_preferred[alias] && has_RF)
+    if ((m_RF_preferred[alias] || m_RF_preferred_label[alias]) && has_RF)
     {
       auto const & RF_zero = m_timeshifts[RF_Manager::label];
       m_histograms_VS_RF[label].Merge();
       if (m_histograms_VS_RF[label].Integral() < 50 ) {print("Not a lot of hits : only", m_histograms_VS_RF[label].Integral(), "for", name); continue;}
       
-      if (m_edge_preferred[alias])
+      if (m_edge_preferred[alias] || m_edge_preferred_label[label])
       { // Not taking the maximum but the raising edge of the time spectra :
         auto const & amppic = m_histograms_VS_RF[label] -> GetMaximum();
         auto const & peak_begin = m_histograms_VS_RF[label] -> FindFirstBinAbove(amppic*0.8);
@@ -838,6 +906,7 @@ void Timeshifts::analyse()
         if (getMeanPeak(m_histograms_VS_RF[label], mean)) m_timeshifts[label] = static_cast<Shift_t> (RF_zero-mean);
         if (m_verbose) print( "Mean :", m_timeshifts[label], "with max =", (int) m_histograms_VS_RF[label] -> GetMaximum(), "counts.");
       }
+      
     }
 
     // B. Using normal coincidence time spectra : 
