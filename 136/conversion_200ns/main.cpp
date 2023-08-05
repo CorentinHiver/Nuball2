@@ -124,13 +124,9 @@ void convert(Hit & hit, FasterReader & reader,
   if ( !overwrite && file_exists(outfile) ) {print(outfile, "already exists !"); return;}
 
   // Initialize the temporary TTree :
-  std::unique_ptr<TTree> readTree (new TTree("temp","temp"));
-  readTree -> SetDirectory(nullptr); // Force it to be created on RAM rather than on disk - much faster if enough RAM
-  readTree -> Branch("label"  , &hit.label );
-  readTree -> Branch("time"   , &hit.time  );
-  readTree -> Branch("nrjcal" , &hit.nrjcal);
-  readTree -> Branch("nrj2"   , &hit.nrj2  );
-  readTree -> Branch("pileup" , &hit.pileup);
+  std::unique_ptr<TTree> tempTree (new TTree("temp","temp"));
+  tempTree -> SetDirectory(nullptr); // Force it to be created on RAM rather than on disk - much faster if enough RAM
+  hit.writting(tempTree.get(), "ltEQp");
 
   // Loop over the TTree 
   Timer read_timer;
@@ -142,10 +138,10 @@ void convert(Hit & hit, FasterReader & reader,
 
     // Energy calibration :
     hit.nrjcal = calibration(hit.nrj,  hit.label); // normal calibraiton
-    if (hit.nrj2 != 0.f) hit.nrj2  = calibration(hit.nrj2, hit.label); // calibrate the nrj2 if any
+    if (hit.nrj2 != 0.f) hit.nrj2cal  = calibration(hit.nrj2, hit.label); // calibrate the nrj2 if any
     if (isBGO[hit.label]) hit.nrjcal = hit.nrj/100.; // "Proto calibration" of BGO
 
-    readTree -> Fill();
+    tempTree -> Fill();
     rawCounts++;
   }
   read_timer.Stop();
@@ -157,22 +153,18 @@ void convert(Hit & hit, FasterReader & reader,
 if (rawCounts==0) return;
 
   // Realign switched hits after timeshifts :
-  Alignator gindex(readTree.get());
+  Alignator gindex(tempTree.get());
 
   // Switch the temporary TTree to reading mode :
   hit.reset();
-  readTree -> ResetBranchAddresses();
-  readTree -> SetBranchAddress("label"  , &hit.label );
-  readTree -> SetBranchAddress("time"   , &hit.time  );
-  readTree -> SetBranchAddress("nrjcal" , &hit.nrjcal);
-  readTree -> SetBranchAddress("nrj2"   , &hit.nrj2);
-  readTree -> SetBranchAddress("pileup" , &hit.pileup);
+  hit.reading(tempTree.get(), "ltEQp");
 
   // Initialize output TTree :
   std::unique_ptr<TFile> outFile (TFile::Open(outfile.c_str(), "RECREATE"));
   outFile -> cd();
+
   TTree* outTree = new TTree("Nuball2","Nuball2");
-  Event event(outTree, "ltnNp", "w");
+  Event event(outTree, "ltEQp", "w");
 
   // Initialize event builder based on RF :
   RF_Manager rf;
@@ -182,24 +174,24 @@ if (rawCounts==0) return;
   Counter136 counter;
 
   // Handle the first RF downscale :
-  RF_Extractor first_rf(readTree.get(), rf, hit, gindex);
+  RF_Extractor first_rf(tempTree.get(), rf, hit, gindex);
   if (!first_rf) return;
   eventBuilder.setFirstRF(hit);
 
   // Handle the first hit :
   int loop = 0;
-  readTree -> GetEntry(gindex[loop++]);
+  tempTree -> GetEntry(gindex[loop++]);
   eventBuilder.set_first_hit(hit);
 
   //Loop over the data :
   Timer convert_timer;
-  auto const & nb_data = readTree->GetEntries();
+  auto const & nb_data = tempTree->GetEntries();
   ulong hits_count = 0;
   ulong evts_count = 0;
   ulong trig_count = 0;
   while (loop<nb_data)
   {
-    readTree -> GetEntry(gindex[loop++]);
+    tempTree -> GetEntry(gindex[loop++]);
 
     // Handle the RF data :
     if (hit.label == RF_Manager::label)

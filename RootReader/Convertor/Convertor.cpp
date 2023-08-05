@@ -35,6 +35,7 @@ bool check_trigger(Counters & counter, Event & event, trigger_modes trig = P)
       counter.countEvent(event);
       return (counter.DSSDMult>0);
     case M2G1_P : 
+      counter.countEvent(event);
       counter.clover_analyse();
       return ((counter.Modules>1 && counter.RawGe>0) || counter.DSSDMult>0);
     default: return false;
@@ -233,7 +234,7 @@ void convertRuns(MTList<std::string> & runs)
 
     // Create the event reader :
     Event event;
-    event.connect(&chain,"mltnN");
+    event.reading(&chain,"ltEQ");
 
   #ifdef DEBUG
     printMT("Chain loaded");
@@ -272,7 +273,7 @@ void convertRuns(MTList<std::string> & runs)
       Timer timerFile;
 
     #if defined (USE_RF)
-      event.writting(outTree.get(),"lnNTRP");
+      event.writting(outTree.get(),"ltEQRP");
     #elif defined (USE_DSSD_REF)
       event.writting(outTree.get(),"lnNT");
     #else

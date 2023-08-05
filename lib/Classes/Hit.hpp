@@ -21,25 +21,27 @@ using Pileup_vec = std::vector<bool>;
  * l : label   label               ushort
  * t : time    absolute timestamp  ULong64_t
  * T : time2   relative timestamp  float
- * n : nrj     energy              float
- * N : nrj2    energy QDC2         float
+ * e : nrj     energy in ADC       float
+ * E : nrjcal  energy in keV       float
+ * q : nrj2    energy QDC2 in ADC  float
+ * Q : nrj2cal energy QDC2 in keV  float
  * p : pileup  pilepup             bool
  * 
- * R :         RFtime              ULong64_t
- * P :         RFperiod            float
+ * R :         RF last timestamp   ULong64_t
+ * P :         RF period           float
  * 
  */
 struct Read
 {
   bool l   = false; // label
-  bool A   = false; // ADC
   bool t   = false; // time
   bool T   = false; // relative Time
+  bool e   = false; // ADC
   bool E   = false; // calibrated energy
   bool q   = false; // QDC2
   bool Q   = false; // calibrated QDC2
   bool p   = false; // pileup
-  bool RFt = false; // RF downscale
+  bool RFt = false; // RF downscale timestamp
   bool RFp = false; // RF period
   
   void setOptions(std::string const & options)
@@ -51,12 +53,13 @@ struct Read
         case ('l') : l   = true;  break;
         case ('t') : t   = true;  break;
         case ('T') : T   = true;  break;
-        case ('A') : A   = true;  break;
+        case ('e') : e   = true;  break;
         case ('E') : E   = true;  break;
         case ('q') : q   = true;  break;
-        case ('p') : p   = true;  break;
+        case ('Q') : Q   = true;  break;
         case ('R') : RFt = true;  break;
         case ('P') : RFp = true;  break;
+        default : print("Unkown parameter", option, "for io event");
       }    
     }
   }
@@ -69,20 +72,22 @@ struct Read
  * l : label   label               ushort
  * t : time    absolute timestamp  ULong64_t
  * T : time2   relative timestamp  float
- * n : nrj     energy              float
- * N : nrj2    energy QDC2         float
+ * e : nrj     energy in ADC       float
+ * E : nrjcal  energy in keV       float
+ * q : nrj2    energy QDC2 in ADC  float
+ * Q : nrj2cal energy QDC2 in keV  float
  * p : pileup  pilepup             bool
  * 
- * R :         RFtime              ULong64_t
- * P :         RFperiod            float
+ * R :         RF last timestamp   ULong64_t
+ * P :         RF period           float
  * 
  */
 struct Write
 {
   bool l   = false; // label
-  bool A   = false; // ADC
   bool t   = false; // time
   bool T   = false; // relative Time
+  bool e   = false; // energy in ADC
   bool E   = false; // calibrated energy
   bool q   = false; // QDC2
   bool Q   = false; // calibrated QDC2
@@ -99,13 +104,14 @@ struct Write
         case ('l') : l   = true;  break;
         case ('t') : t   = true;  break;
         case ('T') : T   = true;  break;
-        case ('A') : A   = true;  break;
+        case ('e') : e   = true;  break;
         case ('E') : E   = true;  break;
         case ('q') : q   = true;  break;
         case ('Q') : Q   = true;  break;
         case ('p') : p   = true;  break;
         case ('R') : RFt = true;  break;
         case ('P') : RFp = true;  break;
+        default : print("Unkown parameter", option, "for io event");
       }
     }
   }
@@ -152,18 +158,20 @@ class Hit
 {
 public:
   Hit(){reset();}
-  Hit(Label _label, Time _time, float _nrj, float _nrj2 = 0, NRJ _nrjcal = 0, NRJ _nrj2cal = 0, bool _pileup = false) : 
-    label(_label),
-    time(_time),
-    nrj(_nrj),
-    nrj2(_nrj2),
-    nrjcal(_nrjcal),
+  Hit(Label _label, Time _time, float _time2, float _nrj, float _nrj2 = 0, NRJ _nrjcal = 0, NRJ _nrj2cal = 0, bool _pileup = false) : 
+    label  (_label),
+    time   (_time),
+    time2  (_time2),
+    nrj    (_nrj),
+    nrj2   (_nrj2),
+    nrjcal (_nrjcal),
     nrj2cal(_nrj2cal),
-    pileup(_pileup)
+    pileup (_pileup)
     {}
 
   Label label  = 0;     // Label
   Time  time   = 0ull;  // Timestamp ('ull' stands for unsigned long long)
+  float time2  = 0.f;   // Relative time
   float nrj    = 0.f;   // Energy
   float nrj2   = 0.f;   // used if QDC2
   NRJ   nrjcal = 0.f;   // Calibrated energy
@@ -173,11 +181,11 @@ public:
   void reset()
   {
     label  = 0;
+    time   = 0ull;
     nrj    = 0.f;
     nrj2   = 0.f;
     nrjcal = 0.f;
     nrj2cal= 0.f;
-    time   = 0ull;
     pileup = false;
   }
 
@@ -196,12 +204,13 @@ void Hit::reading(TTree * tree, std::string const & options)
 
   tree -> ResetBranchAddresses();
   
-  if (read.l) tree -> SetBranchAddress("label"  , & label  );
-  if (read.A) tree -> SetBranchAddress("nrj"    , & nrj    );
+              tree -> SetBranchAddress("label"  , & label  );
+  if (read.e) tree -> SetBranchAddress("nrj"    , & nrj    );
   if (read.E) tree -> SetBranchAddress("nrjcal" , & nrjcal );
   if (read.q) tree -> SetBranchAddress("nrj2"   , & nrj2   );
   if (read.Q) tree -> SetBranchAddress("nrj2cal", & nrj2cal);
   if (read.t) tree -> SetBranchAddress("time"   , & time   );
+  if (read.T) tree -> SetBranchAddress("time2"  , & time2  );
   if (read.p) tree -> SetBranchAddress("pileup" , & pileup );
 }
 
@@ -213,12 +222,13 @@ void Hit::writting(TTree * tree, std::string const & options)
 
   tree -> ResetBranchAddresses();
 
-  if (write.l) tree -> Branch("label"  , & label  );
-  if (write.A) tree -> Branch("nrj"    , & nrj    );
+               tree -> Branch("label"  , & label  );
+  if (write.e) tree -> Branch("nrj"    , & nrj    );
   if (write.E) tree -> Branch("nrjcal" , & nrjcal );
-  if (write.E) tree -> Branch("nrj2"   , & nrj2   );
+  if (write.q) tree -> Branch("nrj2"   , & nrj2   );
   if (write.Q) tree -> Branch("nrj2cal", & nrj2cal);
   if (write.t) tree -> Branch("time"   , & time   );
+  if (write.T) tree -> Branch("time2"  , & time2  );
   if (write.p) tree -> Branch("pileup" , & pileup );
 }
 
@@ -230,6 +240,7 @@ std::ostream& operator<<(std::ostream& cout, Hit const & hit)
   if (hit.nrjcal >0) cout << " nrjcal : "  << hit.nrjcal ;
   if (hit.nrj2cal>0) cout << " nrj2cal : " << hit.nrj2cal;
   cout << " time : " << hit.time;
+  cout << " rel time : " << hit.time2;
   if (hit.pileup) cout << " pileup";
   return cout;
 }

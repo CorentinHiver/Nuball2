@@ -30,12 +30,14 @@ public:
   {
     for (int i = 0; i<mult; i++)
     {
-      labels [i] = event.labels [i];
-      times  [i] = event.times  [i];
-      nrjs   [i] = event.nrjs   [i];
-      nrj2s  [i] = event.nrj2s  [i];
-      time2s [i] = event.time2s [i];
-      pileups[i] = event.pileups[i];
+      labels  [i] = event.labels  [i];
+      times   [i] = event.times   [i];
+      nrjs    [i] = event.nrjs    [i];
+      nrj2s   [i] = event.nrj2s   [i];
+      nrjcals [i] = event.nrjcals [i];
+      nrj2cals[i] = event.nrj2cals[i];
+      time2s  [i] = event.time2s  [i];
+      pileups [i] = event.pileups [i];
     }
     
   #ifdef USE_RF
@@ -84,12 +86,14 @@ public:
   float  RFperiod = static_cast<float> (USE_RF);
 #endif //USE_RF
 
-  ushort labels [255] = {0};
-  float  nrjs   [255] = {0};
-  Time   times  [255] = {0};
-  float  nrj2s  [255] = {0};
-  double time2s [255] = {0};
-  bool   pileups[255] = {0};
+  ushort labels  [255] = {0};
+  Time   times   [255] = {0};
+  double time2s  [255] = {0};
+  float  nrjs    [255] = {0};
+  float  nrjcals [255] = {0};
+  float  nrj2s   [255] = {0};
+  float  nrj2cals[255] = {0};
+  bool   pileups [255] = {0};
 
   Read read;
   Write write;
@@ -102,8 +106,10 @@ private:
 inline void Event::operator=(Hit const & hit)
 {
   labels  [0] = hit.label;
-  nrjs    [0] = hit.nrjcal;
+  nrjs    [0] = hit.nrj;
   nrj2s   [0] = hit.nrj2;
+  nrjcals [0] = hit.nrjcal;
+  nrj2cals[0] = hit.nrj2cal;
   times   [0] = hit.time;
   pileups [0] = hit.pileup;
   mult = 1;
@@ -111,21 +117,24 @@ inline void Event::operator=(Hit const & hit)
 
 inline void Event::operator=(Event const & evt)
 {
+  read = evt.read;
+  write = evt.write;
   mult = evt.mult;
   for (int i = 0; i<mult; i++)
   {
-    labels [i] = evt.labels [i];
-    nrjs   [i] = evt.nrjs   [i];
-    nrj2s  [i] = evt.nrj2s  [i];
-    times  [i] = evt.times  [i];
-    pileups[i] = evt.pileups[i];
+                 labels  [i] = evt.labels  [i];
+    if (write.e) nrjs    [i] = evt.nrjs    [i];
+    if (write.q) nrj2s   [i] = evt.nrj2s   [i];
+    if (write.E) nrjcals [i] = evt.nrjcals [i];
+    if (write.Q) nrj2cals[i] = evt.nrj2cals[i];
+    if (write.t) times   [i] = evt.times   [i];
+    if (write.T) time2s  [i] = evt.time2s  [i];
+    if (write.p) pileups [i] = evt.pileups [i];
   }
 #ifdef USE_RF
-  RFtime   = evt.RFtime;
-  RFperiod = evt.RFperiod;
+  if (write.RFp) RFtime   = evt.RFtime;
+  if (write.RFp) RFperiod = evt.RFperiod;
 #endif //USE_RF
-  read = evt.read;
-  write = evt.write;
 }
 
 void Event::writting(TTree * tree, std::string const & options)
@@ -136,13 +145,15 @@ void Event::writting(TTree * tree, std::string const & options)
 
   tree -> ResetBranchAddresses();
 
-                  tree -> Branch("mult"  , &mult);
-  if ( write.l )  tree -> Branch("label" , &labels , "label[mult]/s" );
-  if ( write.t )  tree -> Branch("time"  , &times  , "time[mult]/l"  );
-  if ( write.T )  tree -> Branch("Time"  , &time2s , "Time[mult]/F"  );
-  if ( write.E )  tree -> Branch("nrj"   , &nrjs   , "nrj[mult]/F"   );
-  if ( write.Q )  tree -> Branch("nrj2"  , &nrj2s  , "nrj2[mult]/F"  );
-  if ( write.p )  tree -> Branch("pileup", &pileups, "pileup[mult]/O");
+                  tree -> Branch("mult"    , &mult);
+                  tree -> Branch("label"   , &labels , "label[mult]/s"  );
+  if ( write.t )  tree -> Branch("time"    , &times  , "time[mult]/l"   );
+  if ( write.T )  tree -> Branch("time2"   , &time2s , "time2[mult]/F"  );
+  if ( write.e )  tree -> Branch("nrj"     , &nrjs   , "nrj[mult]/F"    );
+  if ( write.E )  tree -> Branch("nrj"     , &nrjs   , "nrjcal[mult]/F" );
+  if ( write.q )  tree -> Branch("nrj2"    , &nrj2s  , "nrj2[mult]/F"   );
+  if ( write.Q )  tree -> Branch("nrj2cal" , &nrj2s  , "nrj2cal[mult]/F");
+  if ( write.p )  tree -> Branch("pileup"  , &pileups, "pileup[mult]/O" );
 #ifdef USE_RF
   if ( write.RFt )  tree -> Branch("RFtime"   , &RFtime  );
   if ( write.RFp )  tree -> Branch("RFperiod" , &RFperiod);
@@ -159,9 +170,11 @@ void Event::reading(TTree * tree, std::string const & options)
 
   tree -> ResetBranchAddresses();
                tree -> SetBranchAddress("mult"  , &mult   );
-  if ( read.l) tree -> SetBranchAddress("label" , &labels );
+               tree -> SetBranchAddress("label" , &labels );
   if ( read.t) tree -> SetBranchAddress("time"  , &times  );
   if ( read.T) tree -> SetBranchAddress("Time"  , &time2s );
+  if ( read.e) tree -> SetBranchAddress("nrj"   , &nrjs   );
+  if ( read.q) tree -> SetBranchAddress("nrj2"  , &nrj2s  );
   if ( read.E) tree -> SetBranchAddress("nrj"   , &nrjs   );
   if ( read.Q) tree -> SetBranchAddress("nrj2"  , &nrj2s  );
   if ( read.p) tree -> SetBranchAddress("pileup", &pileups);
@@ -174,11 +187,14 @@ void Event::reading(TTree * tree, std::string const & options)
 
 inline void Event::push_back(Hit const & hit)
 {
-  labels[mult]  = hit.label;
-  nrjs[mult]    = hit.nrjcal;
-  nrj2s[mult]   = hit.nrj2cal;
-  times[mult]   = hit.time;
-  pileups[mult] = hit.pileup;
+               labels  [mult] = hit.label;
+  if (write.e) nrjs    [mult] = hit.nrjcal;
+  if (write.q) nrj2s   [mult] = hit.nrj2cal;
+  if (write.E) nrjcals [mult] = hit.nrjcal;
+  if (write.Q) nrj2cals[mult] = hit.nrj2cal;
+  if (write.t) times   [mult] = hit.time;
+  if (write.T) time2s  [mult] = hit.time2;
+  if (write.p) pileups [mult] = hit.pileup;
   mult++;
 }
 
@@ -186,17 +202,23 @@ inline void Event::push_front(Hit const & hit)
 {
   for (uchar i = 0; i<mult; i++)
   {
-    labels [mult+1] = labels [mult];
-    nrjs   [mult+1] = nrjs   [mult];
-    nrj2s  [mult+1] = nrj2s  [mult];
-    times  [mult+1] = times  [mult];
-    pileups[mult+1] = pileups[mult];
+                 labels  [mult+1] = labels  [mult];
+    if (write.e) nrjs    [mult+1] = nrjs    [mult];
+    if (write.q) nrj2s   [mult+1] = nrj2s   [mult];
+    if (write.E) nrjcals [mult+1] = nrjcals [mult];
+    if (write.Q) nrj2cals[mult+1] = nrj2cals[mult];
+    if (write.t) times   [mult+1] = times   [mult];
+    if (write.T) time2s  [mult+1] = time2s  [mult];
+    if (write.p) pileups [mult+1] = pileups [mult];
   }
-  labels[0]  = hit.label;
-  nrjs[0]    = hit.nrjcal;
-  nrj2s[0]   = hit.nrj2cal;
-  times[0]   = hit.time;
-  pileups[0] = hit.pileup;
+               labels  [0] = hit.label;
+  if (write.e) nrjs    [0] = hit.nrj;
+  if (write.q) nrj2s   [0] = hit.nrj2;
+  if (write.E) nrjcals [0] = hit.nrjcal;
+  if (write.Q) nrj2cals[0] = hit.nrj2cal;
+  if (write.t) times   [0] = hit.time;
+  if (write.T) time2s  [0] = hit.time2;
+  if (write.p) pileups [0] = hit.pileup;
   mult++;
 }
 
@@ -217,6 +239,8 @@ inline void Event::Print()
       "time :" ,times[i],
       (nrjs[i]) ? "energy :"+std::to_string(nrjs[i]) : "",
       (nrj2s[i]) ? "energy2 :"+std::to_string(nrj2s[i]) : "",
+      (nrjcals[i]) ? "energy :"+std::to_string(nrjcals[i]) : "",
+      (nrj2cals[i]) ? "energy2 :"+std::to_string(nrj2cals[i]) : "",
       (pileups[i]) ? "pileup" : ""
     );
   }
