@@ -219,11 +219,19 @@ if (rawCounts==0) return;
         hits_count+=event.size();
         evts_count++;
 
-        histos.rf_all_trig.Fill(tof);
-        histos.rf_each_trig.Fill(compressedLabel[hit.label], tof);
-    
-        if (isGe[hit.label]) histos.energy_all_trig.Fill(hit.nrjcal);
-        histos.energy_each_trig.Fill(compressedLabel[hit.label], hit.nrjcal);
+        for (uint trig_loop = 0; trig_loop<event.size(); trig_loop++)
+        {
+          auto const & label = event.labels[trig_loop];
+          auto const & nrjcal = event.nrjs[trig_loop];
+          auto const & time = event.times[trig_loop];
+          auto const tof_trig = rf.pulse_ToF_ns(time);
+
+          histos.rf_all_trig.Fill(tof_trig);
+          histos.rf_each_trig.Fill(compressedLabel[label], tof_trig);
+      
+          if (isGe[label]) histos.energy_all_trig.Fill(nrjcal);
+          histos.energy_each_trig.Fill(compressedLabel[label], nrjcal);
+        }
 
         outTree->Fill();
       }
