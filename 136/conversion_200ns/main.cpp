@@ -229,6 +229,7 @@ if (rawCounts==0) return;
         histos.energy_each_event.Fill(compressedLabel[label], nrjcal);
       }
       counter.count(event); 
+      
     #ifdef TRIGGER
       if (trigger(counter))
       {
