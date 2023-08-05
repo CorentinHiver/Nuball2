@@ -92,7 +92,7 @@ struct Histos
 
 bool trigger(Counter136 const & counter)
 {
-  return ((counter.nb_modules>1 && counter.nb_modules<15 && counter.nb_clovers>0) || counter.nb_dssd>0);
+  return ((counter.nb_modules>1 && counter.nb_clovers>0) || counter.nb_dssd>0);
 }
 
 // 4. Declare the function to run on each file in parallel :
@@ -212,9 +212,9 @@ if (rawCounts==0) return;
       continue;
     }
 
-    auto const tof = rf.pulse_ToF_ns(hit.time);
-    histos.rf_all.Fill(tof);
-    histos.rf_each.Fill(compressedLabel[hit.label], tof);
+    auto const tof_hit = rf.pulse_ToF_ns(hit.time);
+    histos.rf_all.Fill(tof_hit);
+    histos.rf_each.Fill(compressedLabel[hit.label], tof_hit);
     
     if (isGe[hit.label]) histos.energy_all.Fill(hit.nrjcal);
     histos.energy_each.Fill(compressedLabel[hit.label], hit.nrjcal);
@@ -381,7 +381,7 @@ int main(int argc, char** argv)
     Timeshifts timeshifts(outPath, run_name);
 
     // If no timeshifts data already available, calculate it :
-    if (!timeshifts || only_timeshifts) 
+    if (!timeshifts || (only_timeshifts && overwrite)) 
     { 
       timeshifts.setDetectors(detectors);
       timeshifts.setMult(2,3);
