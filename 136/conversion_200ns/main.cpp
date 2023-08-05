@@ -92,7 +92,8 @@ struct Histos
 
 bool trigger(Counter136 const & counter)
 {
-  return ((counter.nb_modules>1 && counter.nb_clovers>0) || counter.nb_dssd>0);
+  return true;
+//  return ((counter.nb_modules>1 && counter.nb_clovers>0) || counter.nb_dssd>0);
 }
 
 // 4. Declare the function to run on each file in parallel :
