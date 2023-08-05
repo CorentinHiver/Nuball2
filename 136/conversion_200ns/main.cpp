@@ -218,7 +218,7 @@ if (rawCounts==0) return;
       for (uint trig_loop = 0; trig_loop<event.size(); trig_loop++)
       {
         auto const & label = event.labels[trig_loop];
-        auto const & nrjcal = event.nrjs[trig_loop];
+        auto const & nrjcal = event.nrjcals[trig_loop];
         auto const & time = event.times[trig_loop];
         auto const tof_trig = rf.pulse_ToF_ns(time);
 
@@ -238,7 +238,7 @@ if (rawCounts==0) return;
         for (uint trig_loop = 0; trig_loop<event.size(); trig_loop++)
         {
           auto const & label = event.labels[trig_loop];
-          auto const & nrjcal = event.nrjs[trig_loop];
+          auto const & nrjcal = event.nrjcals[trig_loop];
           auto const & time = event.times[trig_loop];
           auto const tof_trig = rf.pulse_ToF_ns(time);
 
