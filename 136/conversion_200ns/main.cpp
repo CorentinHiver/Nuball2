@@ -61,11 +61,11 @@ struct Histos
     energy_each.reset("Energy_spectra_each", "Energy spectra each", nbDet,0,nbDet, 5000,0,15000);
     rf_each.reset("RF_timing_each", "RF timing each", nbDet,0,nbDet, 1000,-100,400);
 
-    energy_all_trig.reset("Ge_spectra_trig", "Ge spectra trig", 8000,0,4000);
-    rf_all_trig.reset("Time_spectra_trig", "Time spectra trig", 8000,0,4000);
+    energy_all_trig.reset("Ge_spectra_trig", "Ge spectra after trigger", 8000,0,4000);
+    rf_all_trig.reset("Time_spectra_trig", "Time spectra after trigger", 8000,0,4000);
 
-    energy_each_trig.reset("Energy_spectra_each", "Energy spectra each", nbDet,0,nbDet, 5000,0,15000);
-    rf_each_trig.reset("RF_timing_each", "RF timing each", nbDet,0,nbDet, 1000,-100,400);
+    energy_each_trig.reset("Energy_spectra_each_trig", "Energy spectra each after trigger", nbDet,0,nbDet, 5000,0,15000);
+    rf_each_trig.reset("RF_timing_each_trig", "RF timing each after trigger", nbDet,0,nbDet, 1000,-100,400);
 
     // rf.resize(nbDet);
     
@@ -101,7 +101,7 @@ void convert(Hit & hit, FasterReader & reader,
   std::string temp = run_path;                // "/path/to/manip/run_number.fast/"
   temp.pop_back();                            // "/path/to/manip/run_number.fast"
   std::string run = rmPathAndExt(temp);       //                "run_number"
-  int run_number = std::stoi(lastPart(run,'_'));//                   number
+  // int run_number = std::stoi(lastPart(run,'_'));//                   number
 
   // Setting the name of the output file :
   Path outFolder (outPath+run, true);                     // /path/to/manip-root/run_number.fast/
@@ -123,7 +123,7 @@ void convert(Hit & hit, FasterReader & reader,
   // Loop over the TTree 
   Timer read_timer;
   ulong rawCounts = 0;
-  int RF_counter_raw = 0;
+  // int RF_counter_raw = 0;
   while(reader.Read())
   {
     // Time calibration :
