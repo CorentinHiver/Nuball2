@@ -51,9 +51,6 @@ public:
     this -> connect(tree, options, io);
   }
 
-  void operator=(Hit const & hit);
-  void operator=(Event const & evt);
-
   void connect(TTree * tree, std::string const & options = "ltEQ", std::string const & io = "r")
   {
     if (io == "r" || io == "read" || io == "R" || io == "Read")  reading(tree, options);
@@ -65,6 +62,9 @@ public:
 
   void push_back(Hit const & hit);
   void push_front(Hit const & hit);
+
+  void operator=(Hit const & hit);
+  void operator=(Event const & evt);
 
   void Print();
   void clear() { mult = 0; }
@@ -122,7 +122,7 @@ inline void Event::operator=(Event const & evt)
   mult = evt.mult;
   for (int i = 0; i<mult; i++)
   {
-                 labels  [i] = evt.labels  [i];
+    if (write.l) labels  [i] = evt.labels  [i];
     if (write.e) nrjs    [i] = evt.nrjs    [i];
     if (write.q) nrj2s   [i] = evt.nrj2s   [i];
     if (write.E) nrjcals [i] = evt.nrjcals [i];
@@ -146,7 +146,7 @@ void Event::writting(TTree * tree, std::string const & options)
   tree -> ResetBranchAddresses();
 
                   tree -> Branch("mult"    , &mult);
-                  tree -> Branch("label"   , &labels  , "label[mult]/s"  );
+  if ( write.l )  tree -> Branch("label"   , &labels  , "label[mult]/s"  );
   if ( write.t )  tree -> Branch("time"    , &times   , "time[mult]/l"   );
   if ( write.T )  tree -> Branch("time2"   , &time2s  , "time2[mult]/F"  );
   if ( write.e )  tree -> Branch("nrj"     , &nrjs    , "nrj[mult]/F"    );
@@ -170,7 +170,7 @@ void Event::reading(TTree * tree, std::string const & options)
 
   tree -> ResetBranchAddresses();
                tree -> SetBranchAddress("mult"   , &mult    );
-               tree -> SetBranchAddress("label"  , &labels  );
+  if ( read.l) tree -> SetBranchAddress("label"  , &labels  );
   if ( read.t) tree -> SetBranchAddress("time"   , &times   );
   if ( read.T) tree -> SetBranchAddress("Time"   , &time2s  );
   if ( read.e) tree -> SetBranchAddress("nrj"    , &nrjs    );
@@ -188,12 +188,12 @@ void Event::reading(TTree * tree, std::string const & options)
 inline void Event::push_back(Hit const & hit)
 {
                labels  [mult] = hit.label;
-  if (write.e) nrjs    [mult] = hit.nrjcal;
-  if (write.q) nrj2s   [mult] = hit.nrj2cal;
-  if (write.E) nrjcals [mult] = hit.nrjcal;
-  if (write.Q) nrj2cals[mult] = hit.nrj2cal;
   if (write.t) times   [mult] = hit.time;
   if (write.T) time2s  [mult] = hit.time2;
+  if (write.e) nrjs    [mult] = hit.nrjcal;
+  if (write.E) nrjcals [mult] = hit.nrjcal;
+  if (write.q) nrj2s   [mult] = hit.nrj2cal;
+  if (write.Q) nrj2cals[mult] = hit.nrj2cal;
   if (write.p) pileups [mult] = hit.pileup;
   mult++;
 }
@@ -203,21 +203,21 @@ inline void Event::push_front(Hit const & hit)
   for (uchar i = 0; i<mult; i++)
   {
                  labels  [mult+1] = labels  [mult];
-    if (write.e) nrjs    [mult+1] = nrjs    [mult];
-    if (write.q) nrj2s   [mult+1] = nrj2s   [mult];
-    if (write.E) nrjcals [mult+1] = nrjcals [mult];
-    if (write.Q) nrj2cals[mult+1] = nrj2cals[mult];
     if (write.t) times   [mult+1] = times   [mult];
     if (write.T) time2s  [mult+1] = time2s  [mult];
+    if (write.e) nrjs    [mult+1] = nrjs    [mult];
+    if (write.E) nrjcals [mult+1] = nrjcals [mult];
+    if (write.q) nrj2s   [mult+1] = nrj2s   [mult];
+    if (write.Q) nrj2cals[mult+1] = nrj2cals[mult];
     if (write.p) pileups [mult+1] = pileups [mult];
   }
                labels  [0] = hit.label;
-  if (write.e) nrjs    [0] = hit.nrj;
-  if (write.q) nrj2s   [0] = hit.nrj2;
-  if (write.E) nrjcals [0] = hit.nrjcal;
-  if (write.Q) nrj2cals[0] = hit.nrj2cal;
   if (write.t) times   [0] = hit.time;
   if (write.T) time2s  [0] = hit.time2;
+  if (write.e) nrjs    [0] = hit.nrj;
+  if (write.E) nrjcals [0] = hit.nrjcal;
+  if (write.q) nrj2s   [0] = hit.nrj2;
+  if (write.Q) nrj2cals[0] = hit.nrj2cal;
   if (write.p) pileups [0] = hit.pileup;
   mult++;
 }

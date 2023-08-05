@@ -205,7 +205,7 @@ void Hit::reading(TTree * tree, std::string const & options)
 
   tree -> ResetBranchAddresses();
   
-              tree -> SetBranchAddress("label"  , & label  );
+  if (read.l) tree -> SetBranchAddress("label"  , & label  );
   if (read.e) tree -> SetBranchAddress("nrj"    , & nrj    );
   if (read.E) tree -> SetBranchAddress("nrjcal" , & nrjcal );
   if (read.q) tree -> SetBranchAddress("nrj2"   , & nrj2   );
@@ -223,7 +223,7 @@ void Hit::writting(TTree * tree, std::string const & options)
 
   tree -> ResetBranchAddresses();
 
-               tree -> Branch("label"  , & label  );
+  if (write.l) tree -> Branch("label"  , & label  );
   if (write.e) tree -> Branch("nrj"    , & nrj    );
   if (write.E) tree -> Branch("nrjcal" , & nrjcal );
   if (write.q) tree -> Branch("nrj2"   , & nrj2   );
