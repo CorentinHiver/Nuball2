@@ -41,13 +41,13 @@ bool EventBuilder_136::build(Hit const & hit)
   if(m_event->mult>255) reset(); // 255 is the maximum number of hits allowed inside of an event
   if (!coincON)
   { // If no coincidence has been detected in previous iteration :
-    if ( static_cast<Long64_t>(hit.time-RF_ref_time) < m_rf->period )
+    if ( static_cast<Long64_t>(hit.time-RF_ref_time) < static_cast<Long64_t>(m_rf->period) )
     {// Case 1 :
       // The previous and current hit are in the same event.
       // In next call, we'll check if the next hits are in the event or not (cases 3 or 4)
       m_event -> clear();
     #ifdef PREPROMPT
-      if ( (RF_ref_time-m_single_hit.time) < static_cast<Long64_t>(m_rf->period))
+      if ( static_cast<Long64_t>(RF_ref_time-m_single_hit.time) < static_cast<Long64_t>(m_rf->period))
           m_event -> push_back(m_single_hit);
     #endif //PREPROMPT
       m_event -> push_back(m_last_hit);
@@ -70,7 +70,7 @@ bool EventBuilder_136::build(Hit const & hit)
 
   else
   { // If the two previous hits are in the same event, checking if the current hit is :
-    if ( static_cast<ULong64_t>(hit.time-RF_ref_time) < m_rf->period )
+    if ( static_cast<ULong64_t>(hit.time-RF_ref_time) < static_cast<Long64_t>(m_rf->period) )
     {// Case 3 :
       // print(hit.time, hit.label, (hit.time-RF_ref_time)/1000., m_rf->period/1000.);
       // The current hit belongs to the event
