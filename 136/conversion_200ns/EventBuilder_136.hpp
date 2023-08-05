@@ -101,7 +101,7 @@ void EventBuilder_136::setFirstRF(Hit const & rf_hit)
 void EventBuilder_136::set_last_hit(Hit const & hit)
 {
   // The closest RF to this hit is taken as reference to build the event :
-  RF_ref_time = hit.time - (hit.time - m_rf->last_hit + m_rf->getShift()) % m_rf->period;
+  RF_ref_time = hit.time - (hit.time - m_rf->last_hit + m_rf->offset()) % m_rf->period;
   // m_last_hit is filled with the current hit :
   m_last_hit = hit;
 }
@@ -109,7 +109,7 @@ void EventBuilder_136::set_last_hit(Hit const & hit)
 void EventBuilder_136::reset()
 {
   // Sets the reference RF timestamp to the last hit :
-  RF_ref_time = m_last_hit.time - ( (m_last_hit.time - m_rf->last_hit) + m_rf->getShift() ) % m_rf->period ;
+  RF_ref_time = m_last_hit.time - ( (m_last_hit.time - m_rf->last_hit) + m_rf->offset() ) % m_rf->period ;
   // Then
   m_event -> clear(); m_status = 0;
 }
