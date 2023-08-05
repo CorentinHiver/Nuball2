@@ -146,14 +146,14 @@ void Event::writting(TTree * tree, std::string const & options)
   tree -> ResetBranchAddresses();
 
                   tree -> Branch("mult"    , &mult);
-                  tree -> Branch("label"   , &labels , "label[mult]/s"  );
-  if ( write.t )  tree -> Branch("time"    , &times  , "time[mult]/l"   );
-  if ( write.T )  tree -> Branch("time2"   , &time2s , "time2[mult]/F"  );
-  if ( write.e )  tree -> Branch("nrj"     , &nrjs   , "nrj[mult]/F"    );
-  if ( write.E )  tree -> Branch("nrj"     , &nrjs   , "nrjcal[mult]/F" );
-  if ( write.q )  tree -> Branch("nrj2"    , &nrj2s  , "nrj2[mult]/F"   );
-  if ( write.Q )  tree -> Branch("nrj2cal" , &nrj2s  , "nrj2cal[mult]/F");
-  if ( write.p )  tree -> Branch("pileup"  , &pileups, "pileup[mult]/O" );
+                  tree -> Branch("label"   , &labels  , "label[mult]/s"  );
+  if ( write.t )  tree -> Branch("time"    , &times   , "time[mult]/l"   );
+  if ( write.T )  tree -> Branch("time2"   , &time2s  , "time2[mult]/F"  );
+  if ( write.e )  tree -> Branch("nrj"     , &nrjs    , "nrj[mult]/F"    );
+  if ( write.E )  tree -> Branch("nrjcal"  , &nrjcals , "nrjcal[mult]/F" );
+  if ( write.q )  tree -> Branch("nrj2"    , &nrj2s   , "nrj2[mult]/F"   );
+  if ( write.Q )  tree -> Branch("nrj2cal" , &nrj2cals, "nrj2cal[mult]/F");
+  if ( write.p )  tree -> Branch("pileup"  , &pileups , "pileup[mult]/O" );
 #ifdef USE_RF
   if ( write.RFt )  tree -> Branch("RFtime"   , &RFtime  );
   if ( write.RFp )  tree -> Branch("RFperiod" , &RFperiod);
@@ -169,15 +169,15 @@ void Event::reading(TTree * tree, std::string const & options)
   read.setOptions(options);
 
   tree -> ResetBranchAddresses();
-               tree -> SetBranchAddress("mult"  , &mult   );
-               tree -> SetBranchAddress("label" , &labels );
-  if ( read.t) tree -> SetBranchAddress("time"  , &times  );
-  if ( read.T) tree -> SetBranchAddress("Time"  , &time2s );
-  if ( read.e) tree -> SetBranchAddress("nrj"   , &nrjs   );
-  if ( read.q) tree -> SetBranchAddress("nrj2"  , &nrj2s  );
-  if ( read.E) tree -> SetBranchAddress("nrj"   , &nrjs   );
-  if ( read.Q) tree -> SetBranchAddress("nrj2"  , &nrj2s  );
-  if ( read.p) tree -> SetBranchAddress("pileup", &pileups);
+               tree -> SetBranchAddress("mult"   , &mult    );
+               tree -> SetBranchAddress("label"  , &labels  );
+  if ( read.t) tree -> SetBranchAddress("time"   , &times   );
+  if ( read.T) tree -> SetBranchAddress("Time"   , &time2s  );
+  if ( read.e) tree -> SetBranchAddress("nrj"    , &nrjs    );
+  if ( read.E) tree -> SetBranchAddress("nrjcal" , &nrjcals );
+  if ( read.q) tree -> SetBranchAddress("nrj2"   , &nrj2s   );
+  if ( read.Q) tree -> SetBranchAddress("nrj2cal", &nrj2cals);
+  if ( read.p) tree -> SetBranchAddress("pileup" , &pileups );
 #ifdef USE_RF
   if ( read.p ) tree -> SetBranchAddress("RFtime"  , &RFtime  );
   if ( read.p ) tree -> SetBranchAddress("RFperiod", &RFperiod);
