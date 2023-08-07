@@ -279,12 +279,12 @@ if (rawCounts==0) return;
 
   write_timer.Stop();
 
-  auto dataSize = static_cast<int>(raw_datafile.size("Mo"));
-  auto outSize  = static_cast<int>(size_file_conversion(outFile->GetSize(), "o", "Mo"));
+  auto dataSize = static_cast<float>(raw_datafile.size("Mo"));
+  auto outSize  = static_cast<float>(size_file_conversion(outFile->GetSize(), "o", "Mo"));
 
   print_precision(4);
   print(outfile, "written in", timer(), timer.unit(),"(",dataSize/timer.TimeSec(),"Mo/s). Input file", dataSize, 
-        "Mo and output file", outSize, "Mo : compression factor ", dataSize/outSize,"-", 100*hits_count/rawCounts,"% hits kept");
+        "Mo and output file", outSize, "Mo : compression factor ", (int)(dataSize/outSize),"-", 100*hits_count/rawCounts,"% hits kept");
 }
 
 // 5. Main
@@ -293,6 +293,7 @@ int main(int argc, char** argv)
   int nb_threads = 2;
   if (argc > 1)
   {
+    
     for(int i = 1; i < argc; i++)
     {
       std::string command = argv[i];
@@ -342,10 +343,10 @@ int main(int argc, char** argv)
   Path datapath = Path::home();
        if ( datapath == "/home/corentin/") datapath+="faster_data/";
   else if ( datapath == "/home/faster/") datapath="/srv/data/nuball2/";
-  else {print("Unkown HOME path -",datapath,"- please add yours on top of this line in the main ^^^^^^^^"); return -1;}
+  else {print("Unkown HOME path -",datapath,"- please add yours on top of this line in the main.cpp ^^^^^^^^"); return -1;}
 
   Path manipPath = datapath+manip;
-  Path outPath (datapath+(manip.name()+"-root_test"), true);
+  Path outPath (datapath+(manip.name()+"-root_P"), true);
 
   // Load some modules :
   Detectors detectors(IDFile);
