@@ -284,7 +284,7 @@ if (rawCounts==0) return;
 
   print_precision(4);
   print(outfile, "written in", timer(), timer.unit(),"(",dataSize/timer.TimeSec(),"Mo/s). Input file", dataSize, 
-        "Mo and output file", outSize, "Mo : compression factor ", dataSize/outSize),"-", 100*hits_count/rawCounts,"% hits kept");
+        "Mo and output file", outSize, "Mo : compression factor ", dataSize/outSize,"-", 100*hits_count/rawCounts,"% hits kept");
 }
 
 // 5. Main
