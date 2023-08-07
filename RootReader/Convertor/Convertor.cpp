@@ -74,7 +74,7 @@ int main(int argc, char ** argv)
     for(int i = 1; i < argc; i++)
     {
       std::string command = argv[i];
-           if (command == "-m")
+           if (command == "-m" || command == "--multithread")
       {// Multithreading 
         nb_threads = atoi(argv[++i]);
       }
@@ -132,18 +132,18 @@ int main(int argc, char ** argv)
       else if (command == "-h" || command == "--help")
       {
         print("List commands :");
-        print("(      --BGO_cal)                                     : Roughly, for BGO, Energy[keV] = ADC/100. Use this command if the BGO data are still in ADC");
-        print("(-d || --data_path)  [/path/to/data/]                 : Path to the data");
-        print("(-f || --folder)     [folder/]                        : Name of the folder to convert");
-        print("(-F || --folders)    [nb_folders] [[list of folders]] : List of the folders to convert");
-        print("(-h || --help)                                        : Displays this help");
-        print("(-H || --histograms)                                  : Declare histograms"); 
-        print("(-i || --ID)         [/path/to/ID.dat]                : Index file");
-        print("(-l || --list)       [/path/to/*.list]                : Read a .list file with a list of folders to convert");
-        print(" -m                  [nb_threads]                     : Number of threads to be used");
-        print("(-o || --out_path)   [/path/to/output/]               : Path to the output");
-        print("(-O || --overwrite)                                   : Overwrites the output folders");
-        print("(-t || --trigger)    [0;3]                            : 0 : no trigger, 1 : M2G1, 2: P, 3 : M2G1_P");
+        print("(      --BGO_cal)                                      : Roughly, for BGO, Energy[keV] = ADC/100. Use this command if the BGO data are still in ADC");
+        print("(-d || --data_path)   [/path/to/data/]                 : Path to the data");
+        print("(-f || --folder)      [folder/]                        : Name of the folder to convert");
+        print("(-F || --folders)     [nb_folders] [[list of folders]] : List of the folders to convert");
+        print("(-h || --help)                                         : Displays this help");
+        print("(-H || --histograms)                                   : Declare histograms"); 
+        print("(-i || --ID)          [/path/to/ID.dat]                : Index file");
+        print("(-l || --list)        [/path/to/*.list]                : Read a .list file with a list of folders to convert");
+        print("(-m || --multithread) [nb_threads]                     : Number of threads to be used");
+        print("(-o || --out_path)    [/path/to/output/]               : Path to the output");
+        print("(-O || --overwrite)                                    : Overwrites the output folders");
+        print("(-t || --trigger)     [0;3]                            : 0 : no trigger, 1 : M2G1, 2: P, 3 : M2G1_P");
         return 1;
       }
     }
@@ -212,13 +212,13 @@ void convertRuns(MTList<std::string> & runs)
     // ---------------------- //
     // Convert a whole folder //
     // ---------------------- //
+    Timer timer;
 
     Path pathRun = dataPath+pathRun_str;
     std::string run = pathRun.folder().name();
 
-    if (!overwrites && folder_exists(outDir+run)) continue;
-
-    Path outPath(outDir+run,1);
+    // If the output folder already exists (empty or not), then overwrites only if parameter "-O" has been chosen :
+    if (!overwrites && folder_exists(outDir+run)) {print(outDir+run,"already exist !!"); continue;}
 
     printMT("Converting", run);
 
@@ -230,7 +230,9 @@ void convertRuns(MTList<std::string> & runs)
 
     // Load the chain :
     TChain chain("Nuball2");
-    chain.Add((pathRun.string()+"run_*.root").c_str());
+    auto nb_files = chain.Add((pathRun.string()+"run_*.root").c_str());
+
+    if(nb_files == 0) {print("NO FILES IN MATCHING", pathRun.string()+"run_*.root", "READING NEXT FOLDER"); continue;}
 
     // Create the event reader :
     Event event;
@@ -243,13 +245,16 @@ void convertRuns(MTList<std::string> & runs)
 
   #ifdef USE_RF
     RF_Manager rf;
-    find_first_RF(chain, event, rf);
+    if (!find_first_RF(chain, event, rf)) {print("Next run"); continue;}
   #endif //USE_RF
 
     // Counters :
     ulonglong converted_counter = 0;
     ulonglong DSSD_seul = 0;
     Counters counter;
+
+    // Create the output folder :
+    Path outPath(outDir+run,1);
 
     Long64_t evt = 0; // Event number
     int file_nb = 0; // File number
@@ -263,8 +268,6 @@ void convertRuns(MTList<std::string> & runs)
                               Detectors::number(),0,Detectors::number(), 2*USE_RF,-USE_RF/2,3*USE_RF/2) : 0;
 
     auto Ge_spectra       = (histoed) ? std::make_unique<TH1F> (("Ge_spectra_"+run).c_str()   ,("Ge spectra "+run).c_str(), 1000,0,5000 ) : 0;
-
-    Timer timer;
 
     // Loop over the whole folder :
     while(evt<chain.GetEntriesFast())

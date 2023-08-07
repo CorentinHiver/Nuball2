@@ -13,7 +13,7 @@
 #include <FasterReader.hpp>   // This class is the base for mono  threaded code
 #include <Alignator.hpp>      // Align a TTree if some events are shuffled in time
 #include <MTFasterReader.hpp> // This class is the base for multi threaded code
-#include <MTCounter.hpp>      // Use this to thread safely count what you want
+#include <MTCounter.hpp>      // Use this to thread safely count what you want²
 #include <MTTHist.hpp>        // Use this to thread safely fill histograms
 #include <Timeshifts.hpp>     // Either loads or calculate timeshifts between detectors
 #include <Calibration.hpp>    // Either loads or calculate calibration coefficients
@@ -92,8 +92,8 @@ struct Histos
 
 bool trigger(Counter136 const & counter)
 {
-  return true;
-//  return ((counter.nb_modules>1 && counter.nb_clovers>0) || counter.nb_dssd>0);
+  return (counter.nb_dssd>0);
+  // return ((counter.nb_modules>2 && counter.nb_clovers>0) && counter.nb_dssd>0);
 }
 
 // 4. Declare the function to run on each file in parallel :
