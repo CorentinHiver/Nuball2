@@ -36,6 +36,12 @@ int nb_files = -1;
 bool overwrite = false; // Overwrite already existing converted root filesstruct histos
 bool only_timeshifts = false; // No conversion : only calculate the timeshifts
 
+bool trigger(Counter136 const & counter)
+{
+  return (counter.nb_dssd>0);
+  // return ((counter.nb_modules>2 && counter.nb_clovers>0) || counter.nb_dssd>0);
+}
+
 struct Histos
 {
   // Vector_MTTHist<TH1F> rf;
@@ -90,12 +96,6 @@ struct Histos
   }
 };
 
-bool trigger(Counter136 const & counter)
-{
-  return (counter.nb_dssd>0);
-  // return ((counter.nb_modules>2 && counter.nb_clovers>0) && counter.nb_dssd>0);
-}
-
 // 4. Declare the function to run on each file in parallel :
 void convert(Hit & hit, FasterReader & reader, 
               Detectors const & detectors, 
@@ -138,11 +138,12 @@ void convert(Hit & hit, FasterReader & reader,
     hit.time+=timeshifts[hit.label];
 
     // Energy calibration :
-    hit.nrjcal = calibration(hit.nrj,  hit.label); // normal calibraiton
-    hit.nrj2cal = (hit.nrj2 == 0.f) ? 0.f : calibration(hit.nrj2, hit.label); // calibrate the nrj2 if any
+    hit.nrjcal = calibration(hit.nrj,  hit.label); // Normal calibraiton
+    hit.nrj2cal = ((hit.nrj2 == 0.f) ? 0.f : calibration(hit.nrj2, hit.label)); // Calibrate the nrj2 if any
     if (isBGO[hit.label]) hit.nrjcal = hit.nrj/100.; // "Proto calibration" of BGO
 
     tempTree -> Fill();
+
     rawCounts++;
   }
   read_timer.Stop();
@@ -151,7 +152,7 @@ void convert(Hit & hit, FasterReader & reader,
   print("Read of",raw_datafile.shortName(),"finished here,", rawCounts,"counts in", read_timer.TimeElapsedSec(),"s");
 #endif //DEBUG
 
-if (rawCounts==0) return;
+  if (rawCounts==0) {print("NO HITS IN",run); return;}
 
   // Realign switched hits after timeshifts :
   Alignator gindex(tempTree.get());
@@ -216,19 +217,19 @@ if (rawCounts==0) return;
     if (eventBuilder.build(hit))
     {
       evts_count++;
-      for (uint trig_loop = 0; trig_loop<event.size(); trig_loop++)
-      {
-        auto const & label = event.labels[trig_loop];
-        auto const & nrjcal = event.nrjcals[trig_loop];
-        auto const & time = event.times[trig_loop];
-        auto const tof_trig = rf.pulse_ToF_ns(time);
+      // for (uint trig_loop = 0; trig_loop<event.size(); trig_loop++)
+      // {
+      //   auto const & label = event.labels[trig_loop];
+      //   auto const & nrjcal = event.nrjcals[trig_loop];
+      //   auto const & time = event.times[trig_loop];
+      //   auto const tof_trig = rf.pulse_ToF_ns(time);
 
-        histos.rf_all_event.Fill(tof_trig);
-        histos.rf_each_event.Fill(compressedLabel[label], tof_trig);
+      //   histos.rf_all_event.Fill(tof_trig);
+      //   histos.rf_each_event.Fill(compressedLabel[label], tof_trig);
     
-        if (isGe[label]) histos.energy_all_event.Fill(nrjcal);
-        histos.energy_each_event.Fill(compressedLabel[label], nrjcal);
-      }
+      //   if (isGe[label]) histos.energy_all_event.Fill(nrjcal);
+      //   histos.energy_each_event.Fill(compressedLabel[label], nrjcal);
+      // }
       counter.count(event); 
 
     #ifdef TRIGGER
