@@ -284,7 +284,7 @@ if (rawCounts==0) return;
 
   print_precision(4);
   print(outfile, "written in", timer(), timer.unit(),"(",dataSize/timer.TimeSec(),"Mo/s). Input file", dataSize, 
-        "Mo and output file", outSize, "Mo : compression factor ", (int)(dataSize/outSize),"-", 100*hits_count/rawCounts,"% hits kept");
+        "Mo and output file", outSize, "Mo : compression factor ", dataSize/outSiz),"-", 100*hits_count/rawCounts,"% hits kept");
 }
 
 // 5. Main
@@ -293,7 +293,7 @@ int main(int argc, char** argv)
   int nb_threads = 2;
   if (argc > 1)
   {
-    
+
     for(int i = 1; i < argc; i++)
     {
       std::string command = argv[i];
