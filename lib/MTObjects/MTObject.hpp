@@ -75,36 +75,32 @@ public:
     std::cout << "Multi-threading is over !" << std::endl;
   }
 
-  static bool isMasterThread()
-  {
-    return (master_thread == std::this_thread::get_id());
-  }
+  static bool isMasterThread() {return (master_thread == std::this_thread::get_id());}
 
   static ushort nb_threads;
   static std::mutex mutex;
-  static std::map<std::thread::id, int> threads_ID;
   static bool ON;
   operator bool() {return ON;}
-  static std::thread::id master_thread;
 
-  static int getThreadIndex()
-  {
-    return threads_ID[std::this_thread::get_id()];
-  }
+  static int getThreadIndex() {return threads_ID[std::this_thread::get_id()];}
 
   static auto const & getThreadsNb() {return nb_threads;}
   static auto const & getThreadsNumber() {return nb_threads;}
   static void setThreadsNb(int const & n) {nb_threads = static_cast<ushort>(n);}
+
 private:
+  static std::thread::id master_thread;
+  static std::map<std::thread::id, int> threads_ID;
   static std::vector<std::thread> m_threads;
 };
 
 // Declaration of static variables :
 ushort MTObject::nb_threads = 1;
 bool MTObject::ON = false;
-std::map<std::thread::id, int> MTObject::threads_ID;
 std::mutex MTObject::mutex;
 std::thread::id MTObject::master_thread;
+
+std::map<std::thread::id, int> MTObject::threads_ID;
 std::vector<std::thread> MTObject::m_threads;
 
 template<class... ARGS>

@@ -66,7 +66,7 @@ public:
   Event& operator=(Hit const & hit);
   Event& operator=(Event const & evt);
 
-  void Print();
+  void Print() const;
 
   void clear() { mult = 0; }
 
@@ -152,7 +152,7 @@ void Event::writting(TTree * tree, std::string const & options)
                   tree -> Branch("mult"    , &mult);
   if ( write.l )  tree -> Branch("label"   , &labels  , "label[mult]/s"  );
   if ( write.t )  tree -> Branch("time"    , &times   , "time[mult]/l"   );
-  if ( write.T )  tree -> Branch("Time"   , &time2s  , "Time[mult]/D"  );
+  if ( write.T )  tree -> Branch("time2"   , &time2s  , "time2[mult]/D"  );
   if ( write.e )  tree -> Branch("nrj"     , &nrjs    , "nrj[mult]/F"    );
   if ( write.E )  tree -> Branch("nrjcal"  , &nrjcals , "nrjcal[mult]/F" );
   if ( write.q )  tree -> Branch("nrj2"    , &nrj2s   , "nrj2[mult]/F"   );
@@ -232,7 +232,7 @@ inline void Event::push_front(Hit const & hit)
 //   print(t2...);
 // }
 
-inline void Event::Print()
+inline void Event::Print() const
 {
   print("---");
   print(mult, "hits :");
@@ -240,11 +240,12 @@ inline void Event::Print()
   {
     print(
       "label :",labels[i],
-      "time :" ,times[i],
-      (nrjs[i]) ? "energy :"+std::to_string(nrjs[i]) : "",
-      (nrj2s[i]) ? "energy2 :"+std::to_string(nrj2s[i]) : "",
+      (times[i]) ? "time :" +std::to_string(times[i]) : "",
+      (time2s[i]) ? "time :" +std::to_string(time2s[i])+" ns" : "",
+      (nrjs[i]) ? "ADC :"+std::to_string(nrjs[i]) : "",
+      (nrj2s[i]) ? "QDC2 :"+std::to_string(nrj2s[i]) : "",
       (nrjcals[i]) ? "energy :"+std::to_string(nrjcals[i]) : "",
-      (nrj2cals[i]) ? "energy2 :"+std::to_string(nrj2cals[i]) : "",
+      (nrj2cals[i]) ? "energy 2 :"+std::to_string(nrj2cals[i]) : "",
       (pileups[i]) ? "pileup" : ""
     );
   }
@@ -253,21 +254,7 @@ inline void Event::Print()
 
 std::ostream& operator<<(std::ostream& cout, Event const & event)
 {
-  print("---");
-  print(event.mult, "hits :");
-  for (uchar i = 0; i<event.mult;i++)
-  {
-    print(
-      "label :",event.labels[i],
-      "time :" ,event.times[i],
-      (event.nrjs[i]) ? "energy :"+std::to_string(event.nrjs[i]) : "",
-      (event.nrj2s[i]) ? "energy2 :"+std::to_string(event.nrj2s[i]) : "",
-      (event.nrjcals[i]) ? "energy :"+std::to_string(event.nrjcals[i]) : "",
-      (event.nrj2cals[i]) ? "energy2 :"+std::to_string(event.nrj2cals[i]) : "",
-      (event.pileups[i]) ? "pileup" : ""
-    );
-  }
-  print("---");
+  event.Print();
   return cout;
 }
 

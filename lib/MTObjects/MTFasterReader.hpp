@@ -64,6 +64,7 @@
  *      }
  * 
  * Here are two function examples. The third parameter has been instanciated before the MTFasterReader::execute() method call
+ * 
  *      
  *        void counter(Hit & hit, FasterReader & reader, MTCounter & counterMT)
  *         {
@@ -85,6 +86,11 @@
  *        }
  * 
  * (see MTTHist and MTCounter documentation)
+ * 
+ * It is recommended to use the "&" symbol (reference) before the other as well parameters so that they are shared between threads,
+ * therefore only with thread safe objects, but it is not mandatory. If you want to pass read-only objects (i.e. lookup tables), 
+ * consider adding the "const" key word like that : (..., type const & lookup_table, ...). Another work-around is simply to declare your
+ * parameter at a global scope, although it is not recommended to have too many of them.
  * 
  */ 
 class MTFasterReader
@@ -159,7 +165,7 @@ void MTFasterReader::Read(MTFasterReader & MTreader, Func function, ARGS &&... a
   {
     Hit hit;
     FasterReader reader(&hit, filename);
-    function(hit, reader, std::forward<ARGS>(args)...); // If issues here, check that the function is like func(Hit & hit, FasterReader & reader, ....)
+    function(hit, reader, std::forward<ARGS>(args)...); // If issues here, check that the parallelised function has the following form : type func(Hit & hit, FasterReader & reader, ....)
   }
 }
 

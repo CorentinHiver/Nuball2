@@ -244,7 +244,7 @@ bool Sorted_Event::sortGeClover(Event const & event, int const & i)
   // To get the crystal that got the maximum energy in a clover :
   if(nrj > maxE[clover_label])
   {
-    if (event.readTime()) time_clover[clover_label] = time2s[i];
+    if (event.read.T) time_clover[clover_label] = time2s[i];
     maxE[clover_label] = nrj;
     maxE_hit[clover_label] = i;
   }
@@ -259,8 +259,8 @@ void Sorted_Event::sortEvent(Event const & event)
   uchar clover_label = 0;
   for (uchar i = 0; i<event.size(); i++)
   {
-    if (event.readtime()) time2s[i] = (m_rf) ? m_rf->pulse_ToF(event.time2s[i], 50000ll) : (event.time2s[i]-event.time2s[0])/_ns;
-    if (event.readTime()) time2s[i] = event.time2s[i]; // Overwrites the absolute time if relative Time is read in the data (parameter 'T' in connect() Event's method)
+    if (event.read.t) time2s[i] = (m_rf) ? m_rf->pulse_ToF(event.time2s[i], 50000ll) : (event.time2s[i]-event.time2s[0])/_ns;
+    if (event.read.T) time2s[i] = event.time2s[i]; // Overwrites the absolute time if relative Time is read in the data (parameter 'T' in connect() Event's method)
     if (time2s[i]>m_max_time) continue;
     if (isGe[event.labels[i]])
     {

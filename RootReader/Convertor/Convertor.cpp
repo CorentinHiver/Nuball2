@@ -52,7 +52,7 @@ trigger_modes trigger_mode = P;
 
 Path dataPath;
 ushort nb_threads = 2;
-int nb_max_evts_in_file = (int)(1.E+7); // 1 millions evts/fichier
+int nb_max_evts_in_file = (int)(5.E+6); // 5 millions evts/fichier
 bool calib_BGO = false;
 bool histoed = false;
 bool overwrites = false;
@@ -285,6 +285,7 @@ void convertRuns(MTList<std::string> & runs)
     while(evt<chain.GetEntriesFast())
     {
       auto outTree  = std::make_unique<TTree>("Nuball2", "Second conversion");
+      outTree -> SetDirectory(nullptr);
       Timer timerFile;
 
     #if defined (USE_RF)
@@ -311,6 +312,8 @@ void convertRuns(MTList<std::string> & runs)
         // Read event :
         chain.GetEntry(evt++);
 
+        if (event.mult>100) continue;
+
       #ifdef USE_RF
         // Extract the RF information and calculate the relative timestamp : 
         for (int i = 0; i<event.mult; i++)
@@ -318,7 +321,7 @@ void convertRuns(MTList<std::string> & runs)
           auto const & label = event.labels[i];
           auto const & time  = event.times [i];
 
-          if (rf.period!=0) event.time2s[i] = rf.pulse_ToF(time)/_ns;
+          event.time2s[i] = rf.pulse_ToF_ns(time);
 
           if (label == 252) 
           {

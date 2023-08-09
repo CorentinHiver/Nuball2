@@ -288,6 +288,7 @@ void MTTHist<THist>::Merge()
     if (MTObject::nb_threads == 1)
     {
       m_merged = m_collection[0];
+      m_is_merged = true;
     }
     else
     {

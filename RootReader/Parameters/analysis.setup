@@ -7,6 +7,7 @@ run: run_75
 # list_runs: Parameters/runs_pulsed_Corentin.list
 # folder: /home/faster/nuball2/faster_data/N-SI-136-root/ nb: 20
 # folder: /home/corentin/faster_data/N-SI-136-root/
+# folder: /home/corentin/faster_data/N-SI-136-root_P/
 folder: /media/sf_OneDrive/CNRS/Nuball2/RootReader/Convertor/
 # folder: ../Data_129/temp/
 # folder: ../Data_129/DSSDFinal/

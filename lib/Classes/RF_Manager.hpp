@@ -49,7 +49,7 @@ public:
       return ( static_cast<Long64_t>((shifted_time-last_hit)%period) - offset );
     }
     else
-    {// When the RF is found after the hit (rf not in correct order)
+    {// When the RF is found after the hit
       return ( static_cast<Long64_t> (period-(last_hit-time-offset)%period)-offset );
     }
   #else //NO USE_RF

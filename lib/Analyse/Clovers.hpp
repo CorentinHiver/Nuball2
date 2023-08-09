@@ -243,7 +243,6 @@ Bool_t Clovers::Fill(Event const & event, int const & hit_index)
 
     if (isGe[label])
     {
-
       // -------------------------------------- //
       // --- Individual crystals managing : --- //
 
@@ -274,6 +273,8 @@ Bool_t Clovers::Fill(Event const & event, int const & hit_index)
         clover.maxE_Ge_cristal = index_cristal;
         clover.time = time;
       }
+
+      print(clover.time, time);
 
       // Fill the vector containing the list of Ge clovers that fired :
       Ge.push_back_unique(index_clover);
