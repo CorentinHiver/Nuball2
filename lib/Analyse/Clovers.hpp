@@ -2,6 +2,7 @@
 #define CLOVERS_H
 
 #include "../libRoot.hpp"
+#include <MTObject.hpp>
 
 #include "../Classes/Detectors.hpp"
 #include "../Classes/Event.hpp"
@@ -126,6 +127,7 @@ public:
 
   // Specific methods :
   CloverModule operator[] (uchar const & i) {return m_Clovers[i];}
+  CloverModule operator[] (uchar const & i) const {return m_Clovers[i];}
   auto begin() const {return m_Clovers.begin();}
   auto end()   const {return m_Clovers.end  ();}
   uint size() const {return Hits.size();}
@@ -196,16 +198,16 @@ void Clovers::Reset()
     cristaux_time_BGO [index] = 0.;
   }
 
-  rawBGO.resize();
-  rawGe.resize();
+  rawBGO.resize(0);
+  rawGe.resize(0);
 
-  Hits.resize();
-  Ge.resize();
-  Bgo.resize();
-  Clean_Ge.resize();
+  Hits.resize(0);
+  Ge.resize(0);
+  Bgo.resize(0);
+  Clean_Ge.resize(0);
 
-  cristaux.resize();
-  cristaux_BGO.resize();
+  cristaux.resize(0);
+  cristaux_BGO.resize(0);
 
   Mult = 0;
   GeMult = 0;
@@ -268,13 +270,15 @@ Bool_t Clovers::Fill(Event const & event, int const & hit_index)
       clover.nb++;
 
       // Find the Ge cristal that received the most energy and use its time for the clover :
-      if (nrj > cristaux_nrj[clover.maxE_Ge_cristal])
+      print_precision(3);
+      // printMT((int)index_cristal, ":", (int)nrj, time, "\t", (int)cristaux_nrj[clover.maxE_Ge_cristal], "\t", (int)clover.maxE_Ge_cristal, "\t", clover.time, "\t");
+      if (nrj >= cristaux_nrj[clover.maxE_Ge_cristal])
       {
         clover.maxE_Ge_cristal = index_cristal;
         clover.time = time;
+        // printMT((int)index_cristal, ":", (int)nrj, time, "\t", (int)cristaux_nrj[clover.maxE_Ge_cristal], "\t", (int)clover.maxE_Ge_cristal, "\t", clover.time);
       }
-
-      print(clover.time, time);
+      // if (clover.time == 0) print(time, nrj, cristaux_nrj[clover.maxE_Ge_cristal], clover.maxE_Ge_cristal);
 
       // Fill the vector containing the list of Ge clovers that fired :
       Ge.push_back_unique(index_clover);
@@ -406,7 +410,7 @@ uchar Clovers::label_to_cristal(Label const & l)
         case 1: return cristal_index+2; // Green
         case 2: return cristal_index+0; // Black
         case 3: return cristal_index-3; // Blue
-        default : return -1;
+        default : return -1;  
       }
 
       default: // All the correctly turned clovers:
@@ -421,6 +425,16 @@ uchar Clovers::label_to_cristal(Label const & l)
     }
   }
   return -1;
+}
+
+std::ostream& operator<<(std::ostream& cout, Clovers const & clovers)
+{
+  print(clovers.Hits.size(), "clover hits");
+  for (auto const & clover_index : clovers.Hits)
+  {
+    print(clovers[clover_index]);
+  }
+  return cout;
 }
 
 #endif //CLOVERS_H

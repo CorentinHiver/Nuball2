@@ -104,7 +104,7 @@ std::map<std::thread::id, int> MTObject::threads_ID;
 std::vector<std::thread> MTObject::m_threads;
 
 template<class... ARGS>
-void printMT(ARGS ... args) 
+void printMT(ARGS &&... args) 
 {
   MTObject::mutex.lock();
   print(std::forward<ARGS>(args)...);

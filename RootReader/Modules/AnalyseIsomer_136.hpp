@@ -1,11 +1,13 @@
 #ifndef ANALYSEISOMER_H
 #define ANALYSEISOMER_H
 
+#include <MTObject.hpp>
 #include <libRoot.hpp>
+
+#include "../../lib/MTObjects/MTTHist.hpp"
 
 #include "../../lib/Analyse/HistoAnalyse.hpp"
 
-#include "../../lib/MTObjects/MTTHist.hpp"
 
 #include "../../lib/Classes/Gate.hpp"
 #include "../../lib/Classes/RWMat.hxx"
@@ -59,6 +61,8 @@ private:
   MTTHist<TH2F> DSSD_TW;
   MTTHist<TH2F> Ge_VS_DSSD_Time;
 
+  MTTHist<TH2F> BGO_R3A1_1_VS_Ge;
+
   // MTTHist<TH2F> mult_VS_Time; In order to see the evolution of Multiplicity over time. To do it, take a moving 50ns time window to group events
 };
 
@@ -69,7 +73,6 @@ bool AnalyseIsomer::launch(Parameters & p)
   this -> InitializeManip();
   print("Starting !");
   MTObject::parallelise_function(run, p, *this);
-  print("coucou");
   this -> Write();
   return true;
 }
@@ -132,35 +135,81 @@ void AnalyseIsomer::run(Parameters & p, AnalyseIsomer & ai)
   } // End files loop
 }
 
+void AnalyseIsomer::InitializeManip()
+{
+  print("Initialize histograms");
+
+  Ge_spectra.reset("Ge spectra","Ge spectra", 14000,0,7000);
+  Ge_spectra_prompt.reset("Ge spectra prompt","Ge spectra prompt;Energy [keV]", 14000,0,7000);
+  Ge_spectra_delayed.reset("Ge spectra delayed","Ge spectra delayed;Energy [keV]", 14000,0,7000);
+  Ge_Time_VS_Spectra.reset("Ge spectra VS Time","Ge spectra VS Time;Energy [keV];Time [ns]",
+      14000,0,7000, 250,-50,200);
+  raw_Ge_Time_VS_Spectra.reset("Raw_Ge_spectra_VS_Time","Raw Ge spectra VS Time;Energy [keV];Time [ns]",
+      14000,0,7000, 250,-50,200);
+  Ge_VS_Ge.reset("Ge_bidim","Ge bidim;Energy [keV];Energy [keV]",
+      4096,0,4096, 4096,0,4096);
+  GePrompt_VS_GePrompt.reset("Ge_bidim_prompt","Ge bidim prompt;Energy [keV];Energy [keV]",
+      4096,0,4096, 4096,0,4096);
+  GeDelayed_VS_GeDelayed.reset("Ge_bidim_delayed","Ge bidim delayed;Energy [keV];Energy [keV]",
+      4096,0,4096, 4096,0,4096);
+  GeDelayed_VS_GeDelayed_time.reset("Ge_bidim_delayed_time","Ge bidim delayed time",
+      250,-50,200, 250,-50,200);
+  GeDelayed_VS_GePrompt.reset("Ge_delayed_VS_prompt","Ge delayed VS prompt;Energy [keV];Energy [keV]",
+      4096,0,4096, 4096,0,4096);
+  Ge_VS_DSSD.reset("Ge VS DSSD","Ge VS DSSD;Energy [keV];Energy [keV]",
+      400,0,20000, 14000,0,7000);
+  GePrompt_VS_DSSD.reset("Ge Prompt VS DSSD","Ge VS DSSD;Energy [keV];Energy [keV]",
+      400,0,20000, 14000,0,7000);
+  GeDelayed_VS_DSSD.reset("Ge Delayed VS DSSD","Ge VS DSSD;Energy [keV];Energy [keV]",
+      400,0,20000, 14000,0,7000);
+  DSSD_TW.reset("DSSD E VS Time","DSSD E VS Time",
+      250,-50,200, 400,0,20000);
+  Ge_VS_DSSD_Time.reset("Ge VS DSSD Time","Ge VS DSSD Time;DSSD time [ns];Ge time [ns]",
+      250,-50,200, 250,-50,200);
+
+      
+  BGO_R3A1_1_VS_Ge.reset("R3A1_BGO1_vs_Ge","R3A1_BGO1 VS Ge;Energy [keV];Energy [keV]",
+      4096,0,8192, 4096,0,8192);
+      
+  each_Ge_VS_Time.reset("Ge_time","Timing all Ge", 
+      24,0,24, 2*USE_RF,-USE_RF/2,3*USE_RF/2);
+
+  // Set analysis parameters :
+  Sorted_Event::setDSSDVeto(-10, 50, 5000);
+  RF_Manager::set_offset_ns(40);
+}
+
 void AnalyseIsomer::FillClover(Clovers & clovers, Event const & event)
 {
   clovers.SetEvent(event);
   clovers.Analyse();
-  sleep(5);
   for (uint loop_i = 0; loop_i<clovers.Clean_Ge.size(); loop_i++)
   {
-    auto const & clover_i = clovers.m_Clovers[loop_i];
+    auto const & clover_i = clovers.m_Clovers[clovers.Clean_Ge[loop_i]];
 
     auto const & nrj_i   = clover_i.nrj;
     auto const & time_i  = clover_i.time;
     auto const & label_i = clover_i.label();
     auto const prompt_i  = Ge_prompt_gate.isIn(time_i);
     auto const delayed_i = Ge_delayed_gate.isIn(time_i);
+
+    if (prompt_i) Ge_spectra_prompt.Fill(nrj_i);
+    if (delayed_i) Ge_spectra_delayed.Fill(nrj_i);
     
     Ge_Time_VS_Spectra.Fill(nrj_i, time_i);
     each_Ge_VS_Time.Fill(label_i, time_i);
 
-    for (uint loop_j = loop_i; loop_j<clovers.Clean_Ge.size(); loop_j++)
+    for (uint loop_j = loop_i+1; loop_j<clovers.Clean_Ge.size(); loop_j++)
     {
-      auto const & clover_j = clovers.m_Clovers[loop_j];
+      auto const & clover_j = clovers.m_Clovers[clovers.Clean_Ge[loop_j]];
 
       auto const & nrj_j  = clover_j.nrj;
       auto const & time_j = clover_j.time;
       auto const prompt_j  = Ge_prompt_gate.isIn(time_j);
       auto const delayed_j = Ge_delayed_gate.isIn(time_j);
 
-      Ge_VS_Ge.Fill(nrj_i,nrj_j);
-      Ge_VS_Ge.Fill(nrj_j,nrj_i);
+      Ge_VS_Ge.Fill(nrj_i, nrj_j);
+      Ge_VS_Ge.Fill(nrj_j, nrj_i);
 
       if (prompt_i)
       {
@@ -189,47 +238,15 @@ void AnalyseIsomer::FillClover(Clovers & clovers, Event const & event)
         }
       }
     }
+    for (auto const & bgo : clovers.cristaux_BGO)
+    {
+      auto const & nrj_bgo   = clovers.cristaux_nrj_BGO [bgo];
+      auto const & time_bgo  = clovers.cristaux_time_BGO[bgo];
+      auto const prompt_bgo  = Ge_prompt_gate.isIn(time_bgo);
+      auto const delayed_bgo = Ge_delayed_gate.isIn(time_bgo);
+      if (prompt_bgo && prompt_i) BGO_R3A1_1_VS_Ge.Fill(nrj_i, nrj_bgo);
+    }
   }
-}
-
-void AnalyseIsomer::InitializeManip()
-{
-  print("Initialize histograms");
-
-  Ge_spectra.reset("Ge spectra","Ge spectra", 14000,0,7000);
-  Ge_spectra_prompt.reset("Ge spectra prompt","Ge spectra prompt", 14000,0,7000);
-  Ge_spectra_delayed.reset("Ge spectra delayed","Ge spectra delayed", 14000,0,7000);
-  Ge_Time_VS_Spectra.reset("Ge spectra VS Time","Ge spectra VS Time",
-      14000,0,7000, 600,-50,250);
-  raw_Ge_Time_VS_Spectra.reset("Raw_Ge_spectra_VS_Time","Raw Ge spectra VS Time",
-      14000,0,7000, 1000,-100,400);
-  Ge_VS_Ge.reset("Ge_bidim","Ge bidim",
-      4096,0,4096, 4096,0,4096);
-  GePrompt_VS_GePrompt.reset("Ge_bidim_prompt","Ge bidim prompt",
-      4096,0,4096, 4096,0,4096);
-  GeDelayed_VS_GeDelayed.reset("Ge_bidim_delayed","Ge bidim delayed",
-      4096,0,4096, 4096,0,4096);
-  GeDelayed_VS_GeDelayed_time.reset("Ge_bidim_delayed_time","Ge bidim delayed time",
-      500,-100,400, 500,-100,400);
-  GeDelayed_VS_GePrompt.reset("Ge_delayed_VS_prompt","Ge delayed VS prompt",
-      4096,0,4096, 4096,0,4096);
-  Ge_VS_DSSD.reset("Ge VS DSSD","Ge VS DSSD",
-      400,0,20000, 14000,0,7000);
-  GePrompt_VS_DSSD.reset("Ge Prompt VS DSSD","Ge VS DSSD",
-      400,0,20000, 14000,0,7000);
-  GeDelayed_VS_DSSD.reset("Ge Delayed VS DSSD","Ge VS DSSD",
-      400,0,20000, 14000,0,7000);
-  DSSD_TW.reset("DSSD E VS Time","DSSD E VS Time",
-      500,-100,400, 400,0,20000);
-  Ge_VS_DSSD_Time.reset("Ge VS DSSD Time","Ge VS DSSD Time;DSSD time [ns];Ge time [ns]",
-      500,-100,400, 500,-100,400);
-      
-  each_Ge_VS_Time.reset("Ge_time","Timing all Ge", 
-      24,0,24, 2*USE_RF,-USE_RF/2,3*USE_RF/2);
-
-  // Set analysis parameters :
-  Sorted_Event::setDSSDVeto(-10, 50, 5000);
-  RF_Manager::set_offset_ns(40);
 }
 
 void AnalyseIsomer::FillRaw(Event const & event)
@@ -238,8 +255,6 @@ void AnalyseIsomer::FillRaw(Event const & event)
   {
     if (isGe[event.labels[i]]) raw_Ge_Time_VS_Spectra.Fill(event.nrjcals[i],event.time2s[i]);
   }
-
-  
 }
 
 void AnalyseIsomer::FillSorted(Sorted_Event const & event_s, Event const & event)
@@ -364,6 +379,7 @@ void AnalyseIsomer::Write()
   Ge_Time_VS_Spectra.Write();
   raw_Ge_Time_VS_Spectra.Write();
 
+  BGO_R3A1_1_VS_Ge.Write();
   Ge_VS_Ge.Write();
   GePrompt_VS_GePrompt.Write();
   GeDelayed_VS_GeDelayed.Write();

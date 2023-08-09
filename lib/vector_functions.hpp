@@ -172,6 +172,12 @@ public:
   /// @brief Return iterator to the end of the vector
   virtual T* end()  {return m_data+m_dynamic_size;}
 
+  /// @brief Return iterator to the beginning of the vector
+  virtual T* begin() const {return m_data;}
+
+  /// @brief Return iterator to the end of the vector
+  virtual T* end() const {return m_data+m_dynamic_size;}
+
   /// @brief Return the position of the write cursor
   auto const & size() const {return m_dynamic_size;}
 
