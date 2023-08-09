@@ -266,8 +266,7 @@ bool FasterReader::Read()
 /**
  * @brief Read triggerless data
  * 
- * This function is replaced by ReadGroup if the faster data contains groups, 
- * this one is simply faster and serves as the "prototype" to read groupless data 
+ * This function is replaced by ReadGroup if the faster data contains groups, this one is simply faster
  * 
  */
 bool FasterReader::ReadSimple()

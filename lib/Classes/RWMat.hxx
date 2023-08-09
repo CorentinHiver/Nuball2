@@ -42,6 +42,8 @@ class RWMat
 	int**  fRWMat;
 	double		fTotalCounts;
 	double		fMaxCounts;
+  bool m_ok = true;
+  bool deleted = false;
 };
 
 RWMat::RWMat(std::string name, int nchans) //default constructor
@@ -55,6 +57,11 @@ RWMat::RWMat(std::string name, int nchans) //default constructor
 template<class T>
 RWMat::RWMat(MTTHist<T> & MTRootMat)
 {
+  if (MTRootMat.Integral() < 1)
+  {
+    m_ok = false;
+    return;
+  }
   MTRootMat.Merge();
   if (!MTRootMat -> InheritsFrom("TH2")) print(MTRootMat.GetName(),"is not a TH2x !!");
   else Reset(MTRootMat.get());
@@ -98,8 +105,16 @@ void RWMat::Reset(THist* RootMat)
 //________________________________________________________________________
 RWMat::~RWMat()
 {
-  for (int i=0; i < fNChannels; i++) delete [] fRWMat[i];
-  delete [] fRWMat;
+  if (deleted)
+  {
+    print("RWMat", fName, "double delete, be careful !!");
+  }
+  else 
+  {
+    for (int i=0; i < fNChannels; i++) delete [] fRWMat[i];
+    delete [] fRWMat;
+    deleted = true;
+  }
 }
 //________________________________________________________________________
 void RWMat::Fill(unsigned short i, unsigned short j)
@@ -134,6 +149,7 @@ void RWMat::Read(std::string fname, bool IsInteger)
   //________________________________________________________________________
 void RWMat::Write(std::string name, std::string path)
 {
+  if (!m_ok) {print("CAN'T WRITE", name, "RADWARE MATRIX"); return;}
   FILE *fprad;
   if (name=="") {name=fName;}
   else {fName=name;}

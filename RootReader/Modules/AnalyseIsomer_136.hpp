@@ -31,7 +31,6 @@ private:
   friend class MTObject;
   std::string outDir  = "129/Analyse/Isomer/";
   std::string outRoot = "ai.root";
-  static bool nuball2_tree;
 
   Gate Ge_prompt_gate;
   Gate Ge_delayed_gate;
@@ -42,12 +41,15 @@ private:
   MTTHist<TH1F> Ge_spectra;
   MTTHist<TH1F> Ge_spectra_prompt;
   MTTHist<TH1F> Ge_spectra_delayed;
+  MTTHist<TH2F> Ge_VS_Ge;
   MTTHist<TH2F> GePrompt_VS_GePrompt;
   MTTHist<TH2F> GeDelayed_VS_GeDelayed;
   MTTHist<TH2F> GeDelayed_VS_GeDelayed_time;
   MTTHist<TH2F> GeDelayed_VS_GePrompt;
   MTTHist<TH2F> Ge_Time_VS_Spectra;
   MTTHist<TH2F> raw_Ge_Time_VS_Spectra;
+
+  MTTHist<TH2F> each_Ge_VS_Time;
 
   MTTHist<TH2F> Ge_VS_DSSD;
   MTTHist<TH2F> GePrompt_VS_DSSD;
@@ -58,7 +60,6 @@ private:
   // MTTHist<TH2F> mult_VS_Time; In order to see the evolution of Multiplicity over time. To do it, take a moving 50ns time window to group events
 };
 
-bool AnalyseIsomer::nuball2_tree = false;
 
 bool AnalyseIsomer::launch(Parameters & p)
 {
@@ -73,7 +74,7 @@ bool AnalyseIsomer::launch(Parameters & p)
 void AnalyseIsomer::run(Parameters & p, AnalyseIsomer & ai)
 {
   std::string rootfile;
-  Sorted_Event event_s;
+  // Sorted_Event event_s;
   while(p.getNextFile(rootfile))
   {
     Timer timer;
@@ -81,11 +82,7 @@ void AnalyseIsomer::run(Parameters & p, AnalyseIsomer & ai)
     std::unique_ptr<TFile> file (TFile::Open(rootfile.c_str(), "READ"));
     if (file->IsZombie()) {print(rootfile, "is a Zombie !");continue;}
     std::unique_ptr<TTree> tree (file->Get<TTree>("Nuball"));
-    if (!tree.get()) 
-    {
-      nuball2_tree = true;
-      tree.reset(file->Get<TTree>("Nuball2"));
-    }
+    if (!tree.get()) tree.reset(file->Get<TTree>("Nuball2"));
 
     if (!tree.get()) {print("Nuball or Nuball2 trees not found in",rootfile ); continue;}
     Event event(tree.get(), "lTE");
@@ -99,9 +96,12 @@ void AnalyseIsomer::run(Parameters & p, AnalyseIsomer & ai)
     for (size_t i = 0; i<events; i++)
     {
       tree->GetEntry(i);
-      event_s.sortEvent(event);
+      print(event);
       ai.FillRaw(event);
-      ai.FillSorted(event_s,event);
+      int klj;
+      std::cin >> klj;
+      // event_s.sortEvent(event);
+      // ai.FillSorted(event_s,event);
     } // End event loop
     auto const & time = timer();
     print(removePath(rootfile), time, timer.unit(), ":", filesize/timer.TimeSec(), "Mo/sec");
@@ -116,9 +116,11 @@ void AnalyseIsomer::InitializeManip()
   Ge_spectra_prompt.reset("Ge spectra prompt","Ge spectra prompt", 14000,0,7000);
   Ge_spectra_delayed.reset("Ge spectra delayed","Ge spectra delayed", 14000,0,7000);
   Ge_Time_VS_Spectra.reset("Ge spectra VS Time","Ge spectra VS Time",
-      14000,0,7000, 1000,-100,400);
+      14000,0,7000, 300,-50,250);
   raw_Ge_Time_VS_Spectra.reset("Raw_Ge_spectra_VS_Time","Raw Ge spectra VS Time",
       14000,0,7000, 1000,-100,400);
+  Ge_VS_Ge.reset("Ge_bidim","Ge bidim",
+      4096,0,4096, 4096,0,4096);
   GePrompt_VS_GePrompt.reset("Ge_bidim_prompt","Ge bidim prompt",
       4096,0,4096, 4096,0,4096);
   GeDelayed_VS_GeDelayed.reset("Ge_bidim_delayed","Ge bidim delayed",
@@ -137,9 +139,13 @@ void AnalyseIsomer::InitializeManip()
       500,-100,400, 400,0,20000);
   Ge_VS_DSSD_Time.reset("Ge VS DSSD Time","Ge VS DSSD Time;DSSD time [ns];Ge time [ns]",
       500,-100,400, 500,-100,400);
+      
+  each_Ge_VS_Time.reset("Ge_time","Timing all Ge", 
+      24,0,24, 2*USE_RF,-USE_RF/2,3*USE_RF/2);
 
   // Set analysis parameters :
   Sorted_Event::setDSSDVeto(-10, 50, 5000);
+  RF_Manager::set_offset_ns(40);
 }
 
 void AnalyseIsomer::FillRaw(Event const & event)
@@ -147,6 +153,62 @@ void AnalyseIsomer::FillRaw(Event const & event)
   for (size_t i = 0; i<event.size(); i++)
   {
     if (isGe[event.labels[i]]) raw_Ge_Time_VS_Spectra.Fill(event.nrjcals[i],event.time2s[i]);
+  }
+  Clovers clovers;
+  clovers.SetEvent(event);
+  clovers.Analyse();
+  for (uint loop_i = 0; loop_i<clovers.Clean_Ge.size(); loop_i++)
+  {
+    auto const & clover_i = clovers.m_Clovers[loop_i];
+
+    auto const & nrj_i   = clover_i.nrj;
+    auto const & time_i  = clover_i.time;
+    auto const & label_i = clover_i.label();
+    auto const prompt_i  = Ge_prompt_gate.isIn(time_i);
+    auto const delayed_i = Ge_delayed_gate.isIn(time_i);
+    
+    Ge_Time_VS_Spectra.Fill(nrj_i, time_i);
+    each_Ge_VS_Time.Fill(label_i, time_i);
+
+    for (uint loop_j = loop_i; loop_j<clovers.Clean_Ge.size(); loop_j++)
+    {
+      auto const & clover_j = clovers.m_Clovers[loop_j];
+
+      auto const & nrj_j  = clover_j.nrj;
+      auto const & time_j = clover_j.time;
+      auto const prompt_j  = Ge_prompt_gate.isIn(time_j);
+      auto const delayed_j = Ge_delayed_gate.isIn(time_j);
+
+      Ge_VS_Ge.Fill(nrj_i,nrj_j);
+      Ge_VS_Ge.Fill(nrj_j,nrj_i);
+
+      if (prompt_i)
+      {
+        if (prompt_j)
+        {
+          GePrompt_VS_GePrompt . Fill(nrj_i,nrj_j);
+          GePrompt_VS_GePrompt . Fill(nrj_j,nrj_i);
+        }
+        else if (delayed_j)
+        {
+          GeDelayed_VS_GePrompt.Fill(nrj_i,nrj_j);
+        }
+      }
+      else if (delayed_i)
+      {
+        if (delayed_j)
+        {
+          GeDelayed_VS_GeDelayed_time . Fill(time_i, time_j);
+          GeDelayed_VS_GeDelayed_time . Fill(time_j, time_i);
+          GeDelayed_VS_GeDelayed . Fill(nrj_i, nrj_j);
+          GeDelayed_VS_GeDelayed . Fill(nrj_j, nrj_i);
+        }
+        else if (prompt_j)
+        {
+          GeDelayed_VS_GePrompt.Fill(nrj_j,nrj_i);
+        }
+      }
+    }
   }
 }
 
@@ -189,7 +251,6 @@ void AnalyseIsomer::FillSorted(Sorted_Event const & event_s, Event const & event
 
     for (size_t loop_j = loop_i+1; loop_j<event_s.clover_hits.size(); loop_j++)
     {
-      print("coucou");
       auto const & clover_j = event_s.clover_hits[loop_j];
 
       auto const & nrj_j  = event_s.nrj_clover[clover_j];
@@ -216,11 +277,9 @@ void AnalyseIsomer::FillSorted(Sorted_Event const & event_s, Event const & event
       // Germanium analysis :
       if (prompt_i)
       {
-      print("coucou prompt");
 
         if (prompt_j)
         {
-      print("coucou prompt");
           GePrompt_VS_GePrompt . Fill(nrj_i,nrj_j);
           GePrompt_VS_GePrompt . Fill(nrj_j,nrj_i);
         }
@@ -256,10 +315,10 @@ void AnalyseIsomer::FillSorted(Sorted_Event const & event_s, Event const & event
 void AnalyseIsomer::Write()
 {
 
-  print("Writting Radware matrixes...");
+  // print("Writting Radware matrixes...");
 
-  RWMat RW_prompt_prompt(GePrompt_VS_GePrompt); RW_prompt_prompt.Write();
-  RWMat RW_del_del(GeDelayed_VS_GeDelayed); RW_del_del.Write();
+  // RWMat RW_prompt_prompt(GePrompt_VS_GePrompt); RW_prompt_prompt.Write();
+  // RWMat RW_del_del(GeDelayed_VS_GeDelayed); RW_del_del.Write();
 
   std::unique_ptr<TFile> outfile(TFile::Open((outDir+outRoot).c_str(),"recreate"));
   outfile -> cd();
@@ -275,14 +334,16 @@ void AnalyseIsomer::Write()
   Ge_Time_VS_Spectra.Write();
   raw_Ge_Time_VS_Spectra.Write();
 
+  Ge_VS_Ge.Write();
   GePrompt_VS_GePrompt.Write();
   GeDelayed_VS_GeDelayed.Write();
   GeDelayed_VS_GePrompt.Write();
 
-
   Ge_VS_DSSD.Write();
   GePrompt_VS_DSSD.Write();
   GeDelayed_VS_DSSD.Write();
+
+  each_Ge_VS_Time.Write();
 
   DSSD_TW.Write();
   Ge_VS_DSSD_Time.Write();
@@ -290,7 +351,6 @@ void AnalyseIsomer::Write()
 
   outfile->Write();
   outfile->Close();
-
 
   print("Writting analysis in", outDir+outRoot);
 }

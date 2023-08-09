@@ -14,40 +14,58 @@ public:
   // Methods :
   // Add Hits  Outputs  0: single | 1: begin of coincidence | 2: coincidence complete
   bool build(Hit const & _hit);
+  bool coincidence(Hit const & hit) {return (static_cast<Long64_t>(hit.time-m_RF_ref_time) < static_cast<Long64_t>(m_rf->period));}
   void reset();
 
   // Getters :
   // auto const & getShift() const {return m_shift;}
-  auto const & get_RF_ref_time() const {return RF_ref_time;}
+  auto const & get_RF_ref_time() const {return m_RF_ref_time;}
 
   // Setters :
   // void setShift(Long64_t const & shift) {m_shift = shift;}
   // void setShift_ns(Long64_t const & shift) {m_shift = 1000*shift;}
   void setRF(RF_Manager* rf) {m_rf = rf;}
   void setFirstRF(Hit const & hit);
-  void setRFTime(Time const & _RF_ref_time) {RF_ref_time = _RF_ref_time;}
+  void setRFTime(Time const & _RF_ref_time) {m_RF_ref_time = _RF_ref_time;}
   inline void set_last_hit (Hit const & hit);
   inline void set_first_hit(Hit const & hit){set_last_hit(hit);}
 
+  /// @brief Experimental : add more period after a trigger 
+  bool tryAddNextHit_simple(uchar const & nb_periods_more);
+
 private:
   // Attributes :
-  Time RF_ref_time = 0;
+  Time m_RF_ref_time = 0;
   RF_Manager* m_rf = nullptr;
   // Time m_shift = 0;
 };
+
+bool EventBuilder_136::tryAddNextHit_simple(uchar const & nb_periods_more)
+{
+  // If the next hit (for which the relative timestamp is greater than the RF period) is close enough to the event, it might be an isomer deexcitation.
+  // Therefore, we would like to have a look at it in order to increase statistics.
+  // If the next hit is in the time region of 
+  if (static_cast<Long64_t>(m_last_hit-m_RF_ref_time) < static_cast<Long64_t>(m_rf->period*nb_periods_more))
+  {
+    
+    if (static_cast<Long64_t>(m_last_hit-m_RF_ref_time) < static_cast<Long64_t>(m_rf->period*nb_periods_more))
+  }
+  return false;
+}
+
 
 bool EventBuilder_136::build(Hit const & hit)
 {
   if(m_event->mult>255) reset(); // 255 is the maximum number of hits allowed inside of an event
   if (!coincON)
   { // If no coincidence has been detected in previous iteration :
-    if ( static_cast<Long64_t>(hit.time-RF_ref_time) < static_cast<Long64_t>(m_rf->period) )
+    if ( this -> coincidence(hit) )
     {// Case 1 :
       // The previous and current hit are in the same event.
       // In next call, we'll check if the next hits are in the event or not (cases 3 or 4)
       m_event -> clear();
     #ifdef PREPROMPT
-      if ( static_cast<Long64_t>(RF_ref_time-m_single_hit.time) < static_cast<Long64_t>(m_rf->period))
+      if ( static_cast<Long64_t>(m_RF_ref_time-m_single_hit.time) < static_cast<Long64_t>(m_rf->period))
           m_event -> push_back(m_single_hit);
     #endif //PREPROMPT
       m_event -> push_back(m_last_hit);
@@ -70,9 +88,9 @@ bool EventBuilder_136::build(Hit const & hit)
 
   else
   { // If the two previous hits are in the same event, checking if the current hit is :
-    if ( static_cast<Long64_t>(hit.time-RF_ref_time) < static_cast<Long64_t>(m_rf->period) )
+    if ( this -> coincidence(hit) )
     {// Case 3 :
-      // print(hit.time, hit.label, (hit.time-RF_ref_time)/1000., m_rf->period/1000.);
+      // print(hit.time, hit.label, (hit.time-m_RF_ref_time)/1000., m_rf->period/1000.);
       // The current hit belongs to the event
       m_event -> push_back(hit);
       // NB: m_status still equals to 1
@@ -95,13 +113,13 @@ void EventBuilder_136::setFirstRF(Hit const & rf_hit)
 {
   if (rf_hit.label != 251) throw std::runtime_error("First RF hit of the file is not really a RF");
   m_rf -> setHit(rf_hit);
-  RF_ref_time = rf_hit.time;
+  m_RF_ref_time = rf_hit.time;
 }
 
 void EventBuilder_136::set_last_hit(Hit const & hit)
 {
   // The closest RF to this hit is taken as reference to build the event :
-  RF_ref_time = hit.time - (hit.time - m_rf->last_hit + m_rf->offset()) % m_rf->period;
+  m_RF_ref_time = hit.time - (hit.time - m_rf->last_hit + m_rf->offset()) % m_rf->period;
   // m_last_hit is filled with the current hit :
   m_last_hit = hit;
 }
@@ -109,7 +127,7 @@ void EventBuilder_136::set_last_hit(Hit const & hit)
 void EventBuilder_136::reset()
 {
   // Sets the reference RF timestamp to the last hit :
-  RF_ref_time = m_last_hit.time - ( (m_last_hit.time - m_rf->last_hit) + m_rf->offset() ) % m_rf->period ;
+  m_RF_ref_time = m_last_hit.time - ( (m_last_hit.time - m_rf->last_hit) + m_rf->offset() ) % m_rf->period ;
   // Then
   m_event -> clear(); m_status = 0;
 }

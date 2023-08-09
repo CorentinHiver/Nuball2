@@ -63,20 +63,22 @@ public:
   void push_back(Hit const & hit);
   void push_front(Hit const & hit);
 
-  void operator=(Hit const & hit);
-  void operator=(Event const & evt);
+  Event& operator=(Hit const & hit);
+  Event& operator=(Event const & evt);
 
   void Print();
+
   void clear() { mult = 0; }
+
   std::size_t size() const { return static_cast<std::size_t>(mult); }
+
   std::size_t const & maxSize() const { return m_maxSize; }
+
   bool isSingle() const {return (mult == 1);}
+  bool isEmpty()  const {return (mult == 0);}
 
-  bool const & readTime() const {return read.T;}
-  bool const & readtime() const {return read.t;}
-
-  Hit getHit(uchar const & i) const {return Hit(labels[i], 0, times[i], 0., nrjs[i], nrj2s[i], pileups[i]);}
-  Hit operator[](uchar const & i) const {return getHit(i);}
+  // Hit getHit(uchar const & i) const {return Hit(labels[i], 0, times[i], 0., nrjs[i], nrj2s[i], pileups[i]);}
+  // Hit operator[](uchar const & i) const {return getHit(i);}
 
   // Public members :
   int mult = 0;
@@ -99,11 +101,10 @@ public:
   Write write;
 
 private:
-
   std::size_t m_maxSize = 255;
 };
 
-inline void Event::operator=(Hit const & hit)
+inline Event& Event::operator=(Hit const & hit)
 {
   labels  [0] = hit.label;
   nrjs    [0] = hit.nrj;
@@ -111,11 +112,13 @@ inline void Event::operator=(Hit const & hit)
   nrjcals [0] = hit.nrjcal;
   nrj2cals[0] = hit.nrj2cal;
   times   [0] = hit.time;
+  time2s  [0] = hit.time2;
   pileups [0] = hit.pileup;
   mult = 1;
+  return *this;
 }
 
-inline void Event::operator=(Event const & evt)
+inline Event& Event::operator=(Event const & evt)
 {
   read = evt.read;
   write = evt.write;
@@ -135,6 +138,7 @@ inline void Event::operator=(Event const & evt)
   if (write.RFp) RFtime   = evt.RFtime;
   if (write.RFp) RFperiod = evt.RFperiod;
 #endif //USE_RF
+  return *this;
 }
 
 void Event::writting(TTree * tree, std::string const & options)
@@ -148,7 +152,7 @@ void Event::writting(TTree * tree, std::string const & options)
                   tree -> Branch("mult"    , &mult);
   if ( write.l )  tree -> Branch("label"   , &labels  , "label[mult]/s"  );
   if ( write.t )  tree -> Branch("time"    , &times   , "time[mult]/l"   );
-  if ( write.T )  tree -> Branch("time2"   , &time2s  , "time2[mult]/F"  );
+  if ( write.T )  tree -> Branch("Time"   , &time2s  , "Time[mult]/D"  );
   if ( write.e )  tree -> Branch("nrj"     , &nrjs    , "nrj[mult]/F"    );
   if ( write.E )  tree -> Branch("nrjcal"  , &nrjcals , "nrjcal[mult]/F" );
   if ( write.q )  tree -> Branch("nrj2"    , &nrj2s   , "nrj2[mult]/F"   );
@@ -172,7 +176,7 @@ void Event::reading(TTree * tree, std::string const & options)
                tree -> SetBranchAddress("mult"   , &mult    );
   if ( read.l) tree -> SetBranchAddress("label"  , &labels  );
   if ( read.t) tree -> SetBranchAddress("time"   , &times   );
-  if ( read.T) tree -> SetBranchAddress("Time"   , &time2s  );
+  if ( read.T) tree -> SetBranchAddress("time2"  , &time2s  );
   if ( read.e) tree -> SetBranchAddress("nrj"    , &nrjs    );
   if ( read.E) tree -> SetBranchAddress("nrjcal" , &nrjcals );
   if ( read.q) tree -> SetBranchAddress("nrj2"   , &nrj2s   );
@@ -245,6 +249,26 @@ inline void Event::Print()
     );
   }
   print("---");
+}
+
+std::ostream& operator<<(std::ostream& cout, Event const & event)
+{
+  print("---");
+  print(event.mult, "hits :");
+  for (uchar i = 0; i<event.mult;i++)
+  {
+    print(
+      "label :",event.labels[i],
+      "time :" ,event.times[i],
+      (event.nrjs[i]) ? "energy :"+std::to_string(event.nrjs[i]) : "",
+      (event.nrj2s[i]) ? "energy2 :"+std::to_string(event.nrj2s[i]) : "",
+      (event.nrjcals[i]) ? "energy :"+std::to_string(event.nrjcals[i]) : "",
+      (event.nrj2cals[i]) ? "energy2 :"+std::to_string(event.nrj2cals[i]) : "",
+      (event.pileups[i]) ? "pileup" : ""
+    );
+  }
+  print("---");
+  return cout;
 }
 
 #endif //EVENT_HPP

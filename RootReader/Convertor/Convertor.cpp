@@ -1,9 +1,15 @@
+
 //g++ ManipConvertor.cpp  $(root-config --glibs --cflags --libs) $(pkg-config  --cflags --libs libfasterac) -o ManipConvertor -O2 -Wall -pthread -std=c++17
 
-// #define N_SI_129
 #define N_SI_136
+// #define N_SI_129
 // #define N_SI_120
+
+#if defined(N_SI_136)
 #define USE_RF 200
+#elif defined(N_SI_129) || defined(N_SI_120)
+#define USE_RF 400
+#endif // manip
 
 #if defined (M2G1_TRIG)
 #define COUNT_EVENT
@@ -38,7 +44,7 @@ bool check_trigger(Counters & counter, Event & event, trigger_modes trig = P)
       counter.countEvent(event);
       counter.clover_analyse();
       return ((counter.Modules>1 && counter.RawGe>0) || counter.DSSDMult>0);
-    default: return false;
+    default : return false;
   }
 }
 
@@ -137,7 +143,7 @@ int main(int argc, char ** argv)
         print("(-f || --folder)      [folder/]                        : Name of the folder to convert");
         print("(-F || --folders)     [nb_folders] [[list of folders]] : List of the folders to convert");
         print("(-h || --help)                                         : Displays this help");
-        print("(-H || --histograms)                                   : Declare histograms"); 
+        print("(-H || --histograms)                                   : Fills and writes histograms"); 
         print("(-i || --ID)          [/path/to/ID.dat]                : Index file");
         print("(-l || --list)        [/path/to/*.list]                : Read a .list file with a list of folders to convert");
         print("(-m || --multithread) [nb_threads]                     : Number of threads to be used");
@@ -148,6 +154,8 @@ int main(int argc, char ** argv)
       }
     }
   }
+
+  RF_Manager::set_offset_ns(40);
 
   Detectors g_listDet(fileID);
   if (runs.size() == 0) runs = listFileReader(runs_list);
@@ -189,7 +197,7 @@ bool find_first_RF(TTree & tree, Event & event, RF_Manager & rf, int const & max
         if (event.labels[i] == 251)
         {
           rf.last_hit = event.times[i];
-          rf.period = event.nrjs[i];
+          rf.period = event.nrjcals[i];
           stop = true;
           break;
         }
@@ -260,14 +268,18 @@ void convertRuns(MTList<std::string> & runs)
     int file_nb = 0; // File number
 
     // Declare histograms :
-    auto RF_period_histo  = (histoed) ? std::make_unique<TH1F>(("RF_period_histo_"+run).c_str(),("RF period histo "+run).c_str(), 50, 1000*USE_RF*0.98,1000*USE_RF*1.02) : 0;
+    auto RF_period_histo  = (histoed) ? std::make_unique<TH1F>(("RF_period_histo_"+run).c_str(), ("RF period histo "+run).c_str(), 50, 1000*USE_RF*0.98, 1000*USE_RF*1.02) : 0;
 
-    auto ref_VS_RF        = (histoed) ? std::make_unique<TH1F>(("ref_VS_RF_"+run).c_str(),("Timing reference "+run).c_str(), 2*USE_RF, -USE_RF/2, 3*USE_RF/2) : 0;
+    auto ref_VS_RF        = (histoed) ? std::make_unique<TH1F>(("ref_VS_RF_"+run).c_str(), ("Timing reference "+run).c_str(), 2*USE_RF, -USE_RF/2, 3*USE_RF/2) : 0;
 
-    auto detectors_VS_RF  = (histoed) ? std::make_unique<TH2F>(("detectors_VS_RF_"+run).c_str(),("Timing all detectors "+run).c_str(), 
+    auto detectors_VS_RF  = (histoed) ? std::make_unique<TH2F>(("detectors_VS_RF_"+run).c_str(), ("Timing all detectors "+run).c_str(), 
                               Detectors::number(),0,Detectors::number(), 2*USE_RF,-USE_RF/2,3*USE_RF/2) : 0;
 
-    auto Ge_spectra       = (histoed) ? std::make_unique<TH1F> (("Ge_spectra_"+run).c_str()   ,("Ge spectra "+run).c_str(), 1000,0,5000 ) : 0;
+    auto Ge_spectra       = (histoed) ? std::make_unique<TH1F> (("Ge_spectra_"+run).c_str(), ("Ge spectra "+run).c_str(), 20000,0,10000 ) : 0;
+
+    auto Ge_spectra_VS_T  = (histoed) ? std::make_unique<TH2F> (("Ge_spectra_VS_time_"+run).c_str(), ("Ge spectra VS time "+run).c_str(), 20000,0,10000, 2*USE_RF,-USE_RF/2,3*USE_RF/2) : 0;
+
+    auto ref_VS_RF_after  = (histoed) ? std::make_unique<TH1F>(("ref_VS_RF_after_"+run).c_str(), ("Timing reference after"+run).c_str(), 2*USE_RF, -USE_RF/2, 3*USE_RF/2) : 0;
 
     // Loop over the whole folder :
     while(evt<chain.GetEntriesFast())
@@ -276,11 +288,11 @@ void convertRuns(MTList<std::string> & runs)
       Timer timerFile;
 
     #if defined (USE_RF)
-      event.writting(outTree.get(),"ltEQRP");
+      event.writting(outTree.get(),"lTEQ");
     #elif defined (USE_DSSD_REF)
-      event.writting(outTree.get(),"lnNT");
+      event.writting(outTree.get(),"lTEQ");
     #else
-      event.writting(outTree.get(),"lnNt");
+      event.writting(outTree.get(),"ltEQ");
     #endif
 
       // Loop over the folder until the output tree reaches the maximum size, or the end of data is reached :
@@ -314,10 +326,10 @@ void convertRuns(MTList<std::string> & runs)
           }
           else if (label == RF_Manager::label)
           {
-            event.RFperiod = event.nrjs[i];
+            // event.RFperiod = event.nrjcals[i];
             // event.RFperiod = (time+rand.Uniform(0,1)-rf.last_hit)/1000.;
-            if (histoed) RF_period_histo->Fill(event.RFperiod);
-            rf.period = static_cast<Time>(event.RFperiod);
+            if (histoed) RF_period_histo->Fill(event.nrjcals[i]);
+            rf.period = static_cast<Time>(event.nrjcals[i]);
             rf.last_hit = time+rand.Uniform(0,1);
           } 
         }
@@ -325,24 +337,29 @@ void convertRuns(MTList<std::string> & runs)
 
         if (check_trigger(counter, event, trigger_mode))
         {
+          // #ifdef USE_RF
+          //   event.RFtime = rf.last_hit;
+          //   event.RFperiod = rf.period;
+          // #endif //USE_RF
           // Treat event :
           for (int i = 0; i<event.mult; i++)
           {
-            auto const & label = event.labels[i];
-            
-            if (calib_BGO && isBGO[label]) event.nrjs[i] /= 100.;
+            auto const & label = event.labels[i];        
+
+            if (calib_BGO && isBGO[label]) event.nrjcals[i] /= 100.;
+
+            auto const & nrj = event.nrjcals[i];
+
             if (histoed)
             {
-              if (isGe[label]) Ge_spectra->Fill(event.nrjs[i]);
+              if (isGe[label]) 
+              {
+                Ge_spectra->Fill(nrj);
+                Ge_spectra_VS_T -> Fill(nrj, event.time2s[i]);
+              }
               detectors_VS_RF -> Fill(compressedLabel[label], event.time2s[i]);
             }
           }
-
-        #ifdef USE_RF
-          event.RFtime = rf.last_hit;
-          event.RFperiod = rf.period;
-        #endif //USE_RF
-
           outTree->Fill();
         }
         loop2++;
@@ -371,6 +388,7 @@ void convertRuns(MTList<std::string> & runs)
       ref_VS_RF       -> Write();
       detectors_VS_RF -> Write();
       Ge_spectra      -> Write();
+      Ge_spectra_VS_T -> Write();
       
       file -> Write();
       file -> Close();
@@ -394,15 +412,15 @@ void convertRuns(MTList<std::string> & runs)
 
           // if (label == 252)
           // {
-          //   LaBr3_spectra->Fill(event.nrjs[i], event.time2s[i]);
+          //   LaBr3_spectra->Fill(event.nrjcals[i], event.time2s[i]);
           // }
           // else if (isGe[label])
           // {
-          //   Ge_spectra->Fill(event.nrjs[i], event.time2s[i]);
+          //   Ge_spectra->Fill(event.nrjcals[i], event.time2s[i]);
           // }
           // else if (isDSSD[label])
           // {
-          //   DSSD_spectra->Fill(event.nrjs[i], event.time2s[i]);
+          //   DSSD_spectra->Fill(event.nrjcals[i], event.time2s[i]);
           // }
 
           #ifndef NO_TRIG

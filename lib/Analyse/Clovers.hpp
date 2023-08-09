@@ -128,6 +128,7 @@ public:
   CloverModule operator[] (uchar const & i) {return m_Clovers[i];}
   auto begin() const {return m_Clovers.begin();}
   auto end()   const {return m_Clovers.end  ();}
+  uint size() const {return Hits.size();}
   void Analyse();
 
   // Containers :
@@ -139,7 +140,7 @@ public:
   StaticVector<uchar> rawGe  = StaticVector<uchar>(96); //List of the position of the raw Ge  in the event
   StaticVector<uchar> rawBGO = StaticVector<uchar>(48); //List of the position of the raw BGO in the event
 
-  std::vector<CloverModule> m_Clovers; // Array of the 
+  std::vector<CloverModule> m_Clovers; // Array containing the 24 clovers
 
   // Counters :
   std::size_t Mult = 0;
@@ -224,16 +225,16 @@ void Clovers::SetEvent(Event const & event)
 }
 
 /// @brief 
-Bool_t Clovers::Fill(Event const & event, int const & hit_i)
+Bool_t Clovers::Fill(Event const & event, int const & hit_index)
 {
-  auto const & label = event.labels[hit_i];
+  auto const & label = event.labels[hit_index];
 
   if (isClover[label])
   {
     auto const & index_clover = labels[label];
 
-    auto const & nrj  = event.nrjs[hit_i];
-    auto const & time = (event.read.t) ? event.times [hit_i] : event.time2s[hit_i];
+    auto const & nrj  = event.nrjcals[hit_index];
+    auto const & time = event.time2s[hit_index];
 
     auto & clover = m_Clovers[index_clover];
 
@@ -249,7 +250,7 @@ Bool_t Clovers::Fill(Event const & event, int const & hit_i)
       CrystalMult++;
 
       // Position of the hit in the event :
-      rawBGO.push_back(hit_i);
+      rawBGO.push_back(hit_index);
 
       // Ge crystal index (ranges from 0 to 96):
       auto const & index_cristal = cristaux_index[label];
@@ -293,7 +294,7 @@ Bool_t Clovers::Fill(Event const & event, int const & hit_i)
       CrystalMult_BGO++;
 
       // Position of the hit in the event :
-      rawBGO.push_back(hit_i);
+      rawBGO.push_back(hit_index);
 
       // BGO crystal index (ranges from 0 tp 48):
       auto const & index_cristal = cristaux_index_BGO[label];
@@ -315,10 +316,10 @@ Bool_t Clovers::Fill(Event const & event, int const & hit_i)
       Bgo.push_back_unique(index_clover);
 
       // Fill the cell containing the total energy deposit in the module's BGOs
-      clover.nrj_BGO += event.nrjs[hit_i];
+      clover.nrj_BGO += nrj;
 
       // Manage the time of the BGOs. To be improved if necessary : if 2 BGOs, only the latest one is stored
-      clover.time_BGO = event.times[hit_i];
+      clover.time_BGO = time;
     }
     return true;
   }

@@ -33,7 +33,7 @@
 Detectors g_detectors("index_129.list");
 
 #include <Parameters.hpp>
-#include <AnalyseRaw.hpp>
+// #include <AnalyseRaw.hpp>
 
 // #include <Event.hpp>
 // #include <FilesManager.hpp>
@@ -48,7 +48,7 @@ Detectors g_detectors("index_129.list");
 // #include <Matrices.hpp>
 // #include <RunCheck.hpp>
 // #include <AnalyseDSSD.hpp>
-// #include <AnalyseIsomer.hpp>
+#include <AnalyseIsomer_136.hpp>
 // #include <TimewalkDSSD.hpp>
 // #include <Analyse511.hpp>
 // #include <NoPulse.hpp>
@@ -98,11 +98,11 @@ int main(int argc, char** argv)
   // Matrices ma;
   // ma.launch(p);
 
-  // AnalyseIsomer ai;
-  // ai.launch(p);
+  AnalyseIsomer ai;
+  ai.launch(p);
 
-  AnalyseRaw ar;
-  ar.launch(p);
+  // AnalyseRaw ar;
+  // ar.launch(p);
 
   p.printPerformances();
 

@@ -35,6 +35,8 @@ int  nb_files_ts = 50;
 int nb_files = -1;
 bool overwrite = false; // Overwrite already existing converted root filesstruct histos
 bool only_timeshifts = false; // No conversion : only calculate the timeshifts
+bool extend_periods = false;
+uchar nb_periods_more = 0;
 
 bool trigger(Counter136 const & counter)
 {
@@ -298,7 +300,12 @@ int main(int argc, char** argv)
     for(int i = 1; i < argc; i++)
     {
       std::string command = argv[i];
-           if (command == "-f" || command == "--files-number")
+           if (command == "-e" || command == "--extend-period")
+      {// To get more than 1 period after pulse if trigger activated 
+        extend_periods = true;
+        nb_periods_more = atoi(argv[++i]);
+      }
+      else if (command == "-f" || command == "--files-number")
       {
         nb_files = atoi(argv[++i]);
       }

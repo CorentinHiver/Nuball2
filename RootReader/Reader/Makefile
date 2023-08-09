@@ -12,7 +12,7 @@
 # Modify ONLY the two next variables :
 
 # ----------------------------------------------------
-# First set the path to the Nuball2/lib/ folder
+# First set the path to the Nuball2/lib/ folder + any other folder containing needed files
 FRAMEWORK_LIB_PATH := ../../lib ../Classes ../Modules
 
 # ----------------------------------------------------
@@ -25,7 +25,7 @@ SRCEXE := ManipReader.cpp
 # 			DONT TOUCH THE FOLLOWING !!!!
 # --------------------------------------------------
 # ==================================================
-
+	
 FASTERAC_CFLAGS := $(shell pkg-config --cflags libfasterac)
 FASTERAC_LIBS   := $(shell pkg-config --libs libfasterac)
 
@@ -60,6 +60,9 @@ opt: default
 
 debug: CFLAGS += -g -O0 -DDEBUG -Wextra -ftemplate-depth-25 #-Wold-style-cast
 debug: default
+
+debugopt: CFLAGS += -g -O2 -DDEBUG -Wextra -ftemplate-depth-25
+debugopt: default
 
 clean:
 	rm -f *.o

@@ -59,7 +59,7 @@ public:
   auto const & getGatedClover() const {return m_CloverTrig;}
 
 
-  std::array<Float_t, 2000> times;
+  std::array<Float_t, 2000> time2s;
   RF_Manager *m_rf = nullptr;
 
   //Clover arrays
@@ -231,7 +231,7 @@ void Sorted_Event::setMaxTime(Float_t const & max_time)
 bool Sorted_Event::sortGeClover(Event const & event, int const & i)
 {
   auto const & label = event.labels[i];
-  auto const & nrj = event.nrjs[i];
+  auto const & nrj = event.nrjcals[i];
   auto const & clover_label = labelToClover[label];
 
   if (nrj<5) return false;
@@ -244,7 +244,7 @@ bool Sorted_Event::sortGeClover(Event const & event, int const & i)
   // To get the crystal that got the maximum energy in a clover :
   if(nrj > maxE[clover_label])
   {
-    if (event.readTime()) time_clover[clover_label] = times[i];
+    if (event.readTime()) time_clover[clover_label] = time2s[i];
     maxE[clover_label] = nrj;
     maxE_hit[clover_label] = i;
   }
@@ -259,9 +259,9 @@ void Sorted_Event::sortEvent(Event const & event)
   uchar clover_label = 0;
   for (uchar i = 0; i<event.size(); i++)
   {
-    if (event.readtime()) times[i] = (m_rf) ? m_rf->pulse_ToF(event.times[i], 50000ll) : (event.times[i]-event.times[0])/_ns;
-    if (event.readTime()) times[i] = event.time2s[i]; // Overwrites the absolute time if relative Time is read in the data (parameter 'T' in connect() Event's method)
-    if (times[i]>m_max_time) continue;
+    if (event.readtime()) time2s[i] = (m_rf) ? m_rf->pulse_ToF(event.time2s[i], 50000ll) : (event.time2s[i]-event.time2s[0])/_ns;
+    if (event.readTime()) time2s[i] = event.time2s[i]; // Overwrites the absolute time if relative Time is read in the data (parameter 'T' in connect() Event's method)
+    if (time2s[i]>m_max_time) continue;
     if (isGe[event.labels[i]])
     {
       if (!sortGeClover(event, i)) continue;
@@ -270,17 +270,17 @@ void Sorted_Event::sortEvent(Event const & event)
     else if (isBGO[event.labels[i]])
     {
       clover_label = labelToClover[event.labels[i]];
-      if (m_rf) time_clover[clover_label] = m_rf->pulse_ToF(event.times[i], 50000ll)/_ns;
-      else time_clover[clover_label] = (event.times[i]-event.times[0])/_ns;
+      if (m_rf) time_clover[clover_label] = m_rf->pulse_ToF(event.time2s[i], 50000ll)/_ns;
+      else time_clover[clover_label] = (event.time2s[i]-event.time2s[0])/_ns;
       BGO[clover_label]++;
     }
     else if (isLaBr3[event.labels[i]])
     {
       LaBr3_Hit labr3_hit;
-      labr3_hit.nrjcal = event.nrjs[i];
+      labr3_hit.nrjcal = event.nrjcals[i];
       labr3_hit.label = event.labels[i]-199;
-      if (m_rf) labr3_hit.time = m_rf->pulse_ToF(event.times[i], 50000ll)/_ns;
-      else labr3_hit.time = (event.times[i]-event.times[0])/_ns;
+      if (m_rf) labr3_hit.time = m_rf->pulse_ToF(event.time2s[i], 50000ll)/_ns;
+      else labr3_hit.time = (event.time2s[i]-event.time2s[0])/_ns;
       LaBr3_event.push_back(labr3_hit);
       ModulesMult++;
       LaBr3Mult++;
@@ -295,10 +295,10 @@ void Sorted_Event::sortEvent(Event const & event)
     else if (isDSSD[event.labels[i]])
     {
       DSSD_hits.push_back(i);
-      auto const & nrj = event.nrjs[i];
+      auto const & nrj = event.nrjcals[i];
       auto const & label = event.labels[i];
       #ifdef N_SI_129
-      auto const & time = times[i];
+      auto const & time = time2s[i];
       if (time>-5 && time<15 && nrj>8500 && nrj<11000) DSSDFirstBlob = true;
       else if (time> 3 && time<18 && nrj>5500 && nrj<7500) DSSDSecondBlob = true;
       else if (time>10 && time<20 && nrj>3800 && nrj<5500) DSSDThirdBlob = true;
@@ -306,11 +306,11 @@ void Sorted_Event::sortEvent(Event const & event)
     #endif //N_SI_129
       if (m_TW_DSSD)
       {
-        times[i] -= m_Timewalks_DSSD.get(label-800, nrj);
-        DSSD_is_Prompt.push_back((times[i]>-10 && times[i]<10));
-        if (times[i]<m_min_time_dssd || times[i]>m_max_time_dssd || nrj>m_max_E_dssd) dssd_veto = true;
+        time2s[i] -= m_Timewalks_DSSD.get(label-800, nrj);
+        DSSD_is_Prompt.push_back((time2s[i]>-10 && time2s[i]<10));
+        if (time2s[i]<m_min_time_dssd || time2s[i]>m_max_time_dssd || nrj>m_max_E_dssd) dssd_veto = true;
       }
-      else DSSD_is_Prompt.push_back((times[i]>0 && times[i]<50));
+      else DSSD_is_Prompt.push_back((time2s[i]>0 && time2s[i]<50));
 
 
       bool const & is_ring = isRing[event.labels[i]];
