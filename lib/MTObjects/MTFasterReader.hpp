@@ -118,8 +118,9 @@ public:
   /** 
    * @brief Reads many files in parallel
    * @param func: Function used on each file in parallel. Cannot be a member function, except if declared static.
+   * @details
    * The declared function MUST have its two first parameters as follow : type function(Hit & hit, FasterReader & reader, ...);
-   * You can add anything in the ..., but then you have to add them in the execute method.
+   * You can add any other parameter in the ..., but then you have to call them in the execute method call
    * e.g. : 
    * 
    *        void my_function(Hit & hit, FasterReader & reader, MTCounter & counter){do something...}

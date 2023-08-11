@@ -157,6 +157,7 @@ private:
   // Useful informations
   bool m_ok = false;
   bool m_loaded = false;
+  bool m_initialized = false;
   static ushort nb_detectors;
   std::string m_filename;
 

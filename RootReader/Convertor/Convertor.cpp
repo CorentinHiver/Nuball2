@@ -312,7 +312,7 @@ void convertRuns(MTList<std::string> & runs)
         // Read event :
         chain.GetEntry(evt++);
 
-        if (event.mult>100) continue;
+        if (event.mult>50) continue;
 
       #ifdef USE_RF
         // Extract the RF information and calculate the relative timestamp : 
@@ -337,7 +337,6 @@ void convertRuns(MTList<std::string> & runs)
           } 
         }
       #endif //USE_RF
-
         if (check_trigger(counter, event, trigger_mode))
         {
           // #ifdef USE_RF

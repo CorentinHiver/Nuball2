@@ -164,6 +164,17 @@ bool Parameters::setData()
         is >> temp;
         m_list_runs = temp;
       }
+      else if (temp == "runs:")
+      {
+        int nb_runs = 0;
+        is >> nb_runs;
+        print("Reading", nb_runs, "runs");
+        for (int i = 0; i<nb_runs; i++)
+        {
+          is >> temp;
+          m_list_runs.push_back(temp);
+        }
+      }
       else if (temp == "folder:")
       {
         is >> m_dataPath;

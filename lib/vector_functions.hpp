@@ -156,7 +156,7 @@ public:
   void push_back(T const & e) 
   {
   #ifdef SAFE
-    if (m_dynamic_size++ < m_static_size) m_data[m_dynamic_size] = e;
+    if (m_dynamic_size < m_static_size) m_data[m_dynamic_size++] = e;
     else std::cout << "Capacity of StaticVector<" << typeid(T).name() << "> with size " << m_static_size << " exceeded" << std::endl;
   #else 
     m_data[m_dynamic_size++] = e;

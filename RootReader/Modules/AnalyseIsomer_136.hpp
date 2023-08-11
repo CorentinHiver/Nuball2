@@ -14,7 +14,7 @@
 
 #include "../Classes/Parameters.hpp"
 #include <RF_Manager.hpp>
-
+#include <DSSD.hpp>
 
 class AnalyseIsomer
 {
@@ -25,8 +25,8 @@ public:
   void InitializeManip();
   static void run(Parameters & p, AnalyseIsomer & ai);
   void FillRaw(Event const & event);
-  void FillClover(Clovers & clovers, Event const & event);
-  void FillSorted(Sorted_Event const & event_s, Event const & event);
+  void FillSorted(Event const & event, Clovers & clovers, DSSD & dssd);
+  // void FillSorted(Sorted_Event const & event_s, Event const & event);
   void Write();
 
 private:
@@ -40,30 +40,71 @@ private:
   Gate Ge_delayed_gate;
   Gate Ge_reject_gate;
   Gate LaBr3_prompt_gate;
-  Gate LaBr3_delayed_gate;
+  Gate LaBr3_delayed_gate; 
+  Gate proton_in_DSSD = {3000, 6000};
+  Gate proton_in_DSSD_severe = {3000, 5000};
+  Gate proton_prompt = {-20, 30};
 
+  // Temporary spectra :
+  MTTHist<TH2F> Ge_prompt_mult_VS_sectors_mult;
+  MTTHist<TH2F> Ge_delayed_mult_VS_sectors_mult;
+
+  // Clovers spectra :
   MTTHist<TH1F> Ge_spectra;
   MTTHist<TH1F> Ge_spectra_prompt;
   MTTHist<TH1F> Ge_spectra_delayed;
+  MTTHist<TH1F> Ge_spectra_prompt_proton_gate;
+  MTTHist<TH1F> Ge_spectra_delayed_proton_gate;
   MTTHist<TH2F> Ge_VS_Ge;
+
+  MTTHist<TH2F> Ge_Time_VS_Spectra;
+  MTTHist<TH2F> raw_Ge_Time_VS_Spectra;
+
   MTTHist<TH2F> GePrompt_VS_GePrompt;
   MTTHist<TH2F> GeDelayed_VS_GeDelayed;
   MTTHist<TH2F> GeDelayed_VS_GeDelayed_time;
   MTTHist<TH2F> GeDelayed_VS_GePrompt;
-  MTTHist<TH2F> Ge_Time_VS_Spectra;
-  MTTHist<TH2F> raw_Ge_Time_VS_Spectra;
+
+  MTTHist<TH2F> GePrompt_VS_GePrompt_proton_gate;
+  MTTHist<TH2F> GeDelayed_VS_GeDelayed_proton_gate;
+  MTTHist<TH2F> GeDelayed_VS_GeDelayed_time_proton_gate;
+  MTTHist<TH2F> GeDelayed_VS_GePrompt_proton_gate;
 
   MTTHist<TH2F> each_Ge_VS_Time;
+  MTTHist<TH2F> Ge_VS_size_event;
+  MTTHist<TH2F> Ge_VS_Mult;
 
+  // DSSD spectra
+  MTTHist<TH1F> DSSD_Spectra;
+  MTTHist<TH2F> DSSD_Spectra_VS_angle;
   MTTHist<TH2F> Ge_VS_DSSD;
   MTTHist<TH2F> GePrompt_VS_DSSD;
   MTTHist<TH2F> GeDelayed_VS_DSSD;
   MTTHist<TH2F> DSSD_TW;
   MTTHist<TH2F> Ge_VS_DSSD_Time;
 
-  MTTHist<TH2F> BGO_R3A1_1_VS_Ge;
+  MTTHist<TH2F> BGO_VS_Ge_511;
+  MTTHist<TH2F> BGO_VS_GE_prompt;
+  MTTHist<TH2F> BGO_VS_GE_delayed;
+
+// Calorimetry :
+  MTTHist<TH1F> Nuball_calo;
+  MTTHist<TH1F> Nuball_calo_prompt;
+  MTTHist<TH1F> Nuball_calo_delayed;
+  MTTHist<TH1F> Ge_calo;
+  MTTHist<TH1F> Ge_calo_prompt;
+  MTTHist<TH1F> Ge_calo_delayed;
+  MTTHist<TH1F> BGO_calo;
+  MTTHist<TH1F> BGO_calo_prompt;
+  MTTHist<TH1F> BGO_calo_delayed;
+
+  MTTHist<TH2F> Nuball_calo_delayed_VS_prompt;
+  MTTHist<TH2F> Ge_prompt_VS_Nuball_calo;
+  MTTHist<TH2F> Ge_delayed_VS_Nuball_calo;
+  MTTHist<TH2F> DSSD_VS_Nuball_calo;
 
   // MTTHist<TH2F> mult_VS_Time; In order to see the evolution of Multiplicity over time. To do it, take a moving 50ns time window to group events
+
 };
 
 
@@ -108,11 +149,14 @@ void AnalyseIsomer::run(Parameters & p, AnalyseIsomer & ai)
     rf.set_offset_ns(40);
 
     Clovers clovers;
+    DSSD dssd;
+    dssd.Initialize();
 
     for (size_t i = 0; i<events; i++)
     {
+      // if (event.mult>30) continue;
     // #ifdef DEBUG
-      // if (i%(int)(1.E+5) == ba0) print(i/1000000.,"Mevts");
+      // if (i%(int)(1.E+6) == 0) print(i/1000000.,"Mevts");
     // #endif //DEBUG
       tree->GetEntry(i);
       // if (event.labels[0] == RF_Manager::label)
@@ -122,16 +166,16 @@ void AnalyseIsomer::run(Parameters & p, AnalyseIsomer & ai)
       //   continue;
       // }
       // for (uint loop = 0; loop<event.size(); loop++) event.time2s[loop] = rf.pulse_ToF_ns(event.times[loop]);
-      // print(event);
-      ai.FillRaw(event);
-      ai.FillClover(clovers, event);
-      // int klj;
-      // std::cin >> klj;
+      // ai.FillRaw(event);
+      dssd.SetEvent(event);
+      clovers.SetEvent(event);
+      clovers.Analyse();
+      ai.FillSorted(event, clovers, dssd);  
       // event_s.sortEvent(event);
       // ai.FillSorted(event_s,event);
     } // End event loop
-    auto const & time = timer();
-    print(removePath(rootfile), time, timer.unit(), ":", filesize/timer.TimeSec(), "Mo/sec");
+    // auto const & time = timer();
+    print(removePath(rootfile), timer(), timer.unit(), ":", filesize/timer.TimeSec(), "Mo/sec");
   } // End files loop
 }
 
@@ -139,50 +183,124 @@ void AnalyseIsomer::InitializeManip()
 {
   print("Initialize histograms");
 
+  Ge_prompt_mult_VS_sectors_mult.reset("Ge_prompt_mult_VS_sectors_mult","Ge prompt mult VS sectors mult", 20,0,20, 20,0,20);
+  Ge_delayed_mult_VS_sectors_mult.reset("Ge_delayed_mult_VS_sectors_mult","Ge delayed mult VS sectors mult", 20,0,20, 20,0,20);
   Ge_spectra.reset("Ge spectra","Ge spectra", 14000,0,7000);
   Ge_spectra_prompt.reset("Ge spectra prompt","Ge spectra prompt;Energy [keV]", 14000,0,7000);
   Ge_spectra_delayed.reset("Ge spectra delayed","Ge spectra delayed;Energy [keV]", 14000,0,7000);
+
+  Ge_spectra_prompt_proton_gate.reset("Ge_spectra_prompt_proton_gate","Ge spectra prompt, proton gate;Energy [keV]", 14000,0,7000);
+  Ge_spectra_delayed_proton_gate.reset("Ge_spectra_delayed_proton_gate","Ge spectra delayed, proton gate;Energy [keV]", 14000,0,7000);
+
   Ge_Time_VS_Spectra.reset("Ge spectra VS Time","Ge spectra VS Time;Energy [keV];Time [ns]",
       14000,0,7000, 250,-50,200);
+
   raw_Ge_Time_VS_Spectra.reset("Raw_Ge_spectra_VS_Time","Raw Ge spectra VS Time;Energy [keV];Time [ns]",
       14000,0,7000, 250,-50,200);
+
   Ge_VS_Ge.reset("Ge_bidim","Ge bidim;Energy [keV];Energy [keV]",
       4096,0,4096, 4096,0,4096);
+
   GePrompt_VS_GePrompt.reset("Ge_bidim_prompt","Ge bidim prompt;Energy [keV];Energy [keV]",
       4096,0,4096, 4096,0,4096);
   GeDelayed_VS_GeDelayed.reset("Ge_bidim_delayed","Ge bidim delayed;Energy [keV];Energy [keV]",
       4096,0,4096, 4096,0,4096);
-  GeDelayed_VS_GeDelayed_time.reset("Ge_bidim_delayed_time","Ge bidim delayed time",
+  GeDelayed_VS_GeDelayed_time.reset("Ge_bidim_delayed_time","Ge bidim delayed time;time [ns];time [ns]",
       250,-50,200, 250,-50,200);
-  GeDelayed_VS_GePrompt.reset("Ge_delayed_VS_prompt","Ge delayed VS prompt;Energy [keV];Energy [keV]",
+  GeDelayed_VS_GePrompt.reset("Ge_delayed_VS_prompt","Ge delayed VS prompt;Prompt energy [keV];Delayed energy [keV]",
       4096,0,4096, 4096,0,4096);
-  Ge_VS_DSSD.reset("Ge VS DSSD","Ge VS DSSD;Energy [keV];Energy [keV]",
-      400,0,20000, 14000,0,7000);
-  GePrompt_VS_DSSD.reset("Ge Prompt VS DSSD","Ge VS DSSD;Energy [keV];Energy [keV]",
-      400,0,20000, 14000,0,7000);
-  GeDelayed_VS_DSSD.reset("Ge Delayed VS DSSD","Ge VS DSSD;Energy [keV];Energy [keV]",
-      400,0,20000, 14000,0,7000);
-  DSSD_TW.reset("DSSD E VS Time","DSSD E VS Time",
-      250,-50,200, 400,0,20000);
-  Ge_VS_DSSD_Time.reset("Ge VS DSSD Time","Ge VS DSSD Time;DSSD time [ns];Ge time [ns]",
+
+  // Gate
+  GePrompt_VS_GePrompt_proton_gate.reset("GePrompt_VS_GePrompt_proton_gate","Ge prompt VS prompt, DSSD trig;Prompt energy [keV];Prompt energy [keV]",
+      4096,0,4096, 4096,0,4096);
+  GeDelayed_VS_GeDelayed_proton_gate.reset("GeDelayed_VS_GeDelayed_proton_gate","Ge delayed VS delayed, DSSD trig;Delayed energy [keV];Delayed energy [keV]",
+      4096,0,4096, 4096,0,4096);
+  GeDelayed_VS_GePrompt_proton_gate.reset("GeDelayed_VS_GePrompt_proton_gate","Ge delayed VS prompt, DSSD trig;Prompt energy [keV];Delayed energy [keV]",
+      4096,0,4096, 4096,0,4096);
+  GeDelayed_VS_GeDelayed_time_proton_gate.reset("GeDelayed_VS_GeDelayed_time_proton_gate","Ge delayed VS delayed time, DSSD trig;time [ns];time [ns]",
       250,-50,200, 250,-50,200);
 
-      
-  BGO_R3A1_1_VS_Ge.reset("R3A1_BGO1_vs_Ge","R3A1_BGO1 VS Ge;Energy [keV];Energy [keV]",
-      4096,0,8192, 4096,0,8192);
+  DSSD_Spectra.reset("DSSD_spectra","DSSD spectra;Energy [keV];", 50000,0,(int)(1.E+7));
+  DSSD_Spectra_VS_angle.reset("DSSD_Spectra_VS_angle","DSSD spectra VS Angle;Backward Angle [#circ]; Energy [keV];", 
+      40,30,70, 500,0,20000);
+  Ge_VS_DSSD.reset("Ge_VS_DSSD","Ge VS DSSD;Energy DSSD [keV];Energy Ge [keV]",
+      400,0,20000, 14000,0,7000);
+  GePrompt_VS_DSSD.reset("GePrompt_VS_DSSD","Ge VS DSSD",
+      400,0,20000, 14000,0,7000);
+  GeDelayed_VS_DSSD.reset("GeDelayed_VS_DSSD","Ge VS DSSD",
+      400,0,20000, 14000,0,7000);
+  DSSD_TW.reset("DSSD_TW","DSSD E VS Time",
+      250,-50,200, 400,0,20000);
+  Ge_VS_DSSD_Time.reset("Ge_VS_DSSD_Time","Ge VS DSSD Time;DSSD time [ns];Ge time [ns]",
+      250,-50,200, 250,-50,200);
+
+  BGO_VS_GE_prompt.reset("BGO_VS_GE_prompt","BGO VS Ge prompt;Ge Energy [keV];BGO Energy [keV]",
+      4096,0,4096, 800,0,4096);
+  BGO_VS_GE_delayed.reset("BGO_VS_GE_delayed","BGO VS Ge delayed;Ge Energy [keV];BGO Energy [keV]",
+      4096,0,4096, 800,0,4096);
+  BGO_VS_Ge_511.reset("BGO_vs_Ge_511","BGO in coincidence with 511;BGO energy [keV];",
+      48,0,48, 4096,0,100000);
+
+  Nuball_calo.reset("Nuball_calo","Clovers calorimetry;Calorimetry [keV]", 4096,0,20000);
+  Nuball_calo_prompt.reset("Nuball_calo_prompt","Clovers prompt calorimetry;Calorimetry [keV]", 4096,0,20000);
+  Nuball_calo_delayed.reset("Nuball_calo_delayed","Clovers delayed calorimetry;Calorimetry [keV]", 4096,0,20000);
+  Ge_calo.reset("Ge_calo","Ge calorimetry;Calorimetry [keV]", 4096,0,20000);
+  Ge_calo_prompt.reset("Ge_calo_prompt","Ge prompt calorimetry;Calorimetry [keV]", 4096,0,20000);
+  Ge_calo_delayed.reset("Ge_calo_delayed","Ge delayed calorimetry;Calorimetry [keV]", 4096,0,20000);
+  BGO_calo.reset("BGO_calo","BGO calorimetry;Calorimetry [keV]", 4096,0,20000);
+  BGO_calo_prompt.reset("BGO_calo_prompt","BGO prompt calorimetry;Calorimetry [keV]", 4096,0,20000);
+  BGO_calo_delayed.reset("BGO_calo_delayed","BGO delayed calorimetry;Calorimetry [keV]", 4096,0,20000);
+  Ge_prompt_VS_Nuball_calo.reset("Ge_prompt_VS_Nuball_calo","Ge prompt spectra VS clovers calorimetry;Calorimetry [keV];Ge Energy [keV]",
+      4096,0,20000, 4096,0,4096);
+  Ge_delayed_VS_Nuball_calo.reset("Ge_delayed_VS_Nuball_calo","Ge prompt spectra VS clovers calorimetry;Calorimetry [keV];Ge Energy [keV]",
+      4096,0,20000, 4096,0,4096);
+  Nuball_calo_delayed_VS_prompt.reset("Nuball_calo_delayed_VS_prompt","Ge delayed calorimetry VS prompt calorimetry;Prompt Calorimetry [keV];Delayed Calorimetry [keV]",
+      4096,0,20000, 4096,0,4096);
+  DSSD_VS_Nuball_calo.reset("DSSD_VS_Nuball_calo","Ge prompt spectra VS clovers calorimetry;Calorimetry [keV];Particle Energy [keV]",
+      4096,0,20000, 4096,0,20000);
+  
       
   each_Ge_VS_Time.reset("Ge_time","Timing all Ge", 
       24,0,24, 2*USE_RF,-USE_RF/2,3*USE_RF/2);
+
+  Ge_VS_size_event.reset("Ge_VS_size_event","Ge VS number of detectors", 
+      50,0,50, 5000,0,5000);
+  Ge_VS_Mult.reset("Ge_VS_Mult","Ge VS Clean Ge Mult", 
+      30,0,30, 5000,0,5000);
 
   // Set analysis parameters :
   Sorted_Event::setDSSDVeto(-10, 50, 5000);
   RF_Manager::set_offset_ns(40);
 }
 
-void AnalyseIsomer::FillClover(Clovers & clovers, Event const & event)
+void AnalyseIsomer::FillSorted(Event const & event, Clovers & clovers, DSSD & dssd)
 {
-  clovers.SetEvent(event);
-  clovers.Analyse();
+  if (clovers.GeMult<2) return;
+  bool DSSD_prompt_proton_gate = (dssd.SectorMult>0 && proton_in_DSSD.isIn(dssd.energy()) && proton_prompt.isIn(dssd.time()));
+  // if (dssd.SectorMult>0) printMT(dssd.oneParticle(), dssd.energy(), proton_in_DSSD.isIn(dssd.energy()), dssd.time(), proton_prompt.isIn(dssd.time()));
+  
+  auto const calo_clovers = clovers.totGe+clovers.totBGO;
+  auto const & calo_prompt = clovers.totGe_prompt+clovers.totBGO_prompt;
+  auto const & calo_delayed = clovers.totGe_delayed+clovers.totBGO_delayed;
+
+  Ge_prompt_mult_VS_sectors_mult.Fill(dssd.SectorMult, clovers.PromptMult);
+  Ge_delayed_mult_VS_sectors_mult.Fill(dssd.SectorMult, clovers.DelayedMult);
+
+// Treat the event as a whole :
+  Nuball_calo.Fill(calo_clovers);
+  Nuball_calo_prompt.Fill(calo_prompt);
+  Nuball_calo_delayed.Fill(calo_delayed);
+  
+  Nuball_calo_delayed_VS_prompt.Fill(calo_prompt, calo_delayed);
+
+  Ge_calo.Fill(clovers.totGe);
+  Ge_calo_prompt.Fill(clovers.totGe_prompt);
+  Ge_calo_delayed.Fill(clovers.totGe_delayed);
+
+  BGO_calo.Fill(clovers.totBGO);
+  BGO_calo_prompt.Fill(clovers.totBGO_prompt);
+  BGO_calo_delayed.Fill(clovers.totBGO_delayed);
+
   for (uint loop_i = 0; loop_i<clovers.Clean_Ge.size(); loop_i++)
   {
     auto const & clover_i = clovers.m_Clovers[clovers.Clean_Ge[loop_i]];
@@ -190,26 +308,46 @@ void AnalyseIsomer::FillClover(Clovers & clovers, Event const & event)
     auto const & nrj_i   = clover_i.nrj;
     auto const & time_i  = clover_i.time;
     auto const & label_i = clover_i.label();
-    auto const prompt_i  = Ge_prompt_gate.isIn(time_i);
-    auto const delayed_i = Ge_delayed_gate.isIn(time_i);
+    auto const prompt_i  = clovers.isPrompt (clover_i);
+    // auto const delayed_i = clovers.isDelayed(clover_i);
+    // auto const prompt_i  = time_i>-20 && time_i<10;
+    auto const delayed_i = time_i>60 && time_i<145;
 
-    if (prompt_i) Ge_spectra_prompt.Fill(nrj_i);
-    if (delayed_i) Ge_spectra_delayed.Fill(nrj_i);
+    if (prompt_i) 
+    {
+      Ge_spectra_prompt.Fill(nrj_i);
+      if (DSSD_prompt_proton_gate) Ge_spectra_prompt_proton_gate.Fill(nrj_i);
+    }
+    if (delayed_i) 
+    {
+      Ge_spectra_delayed.Fill(nrj_i);
+      if (DSSD_prompt_proton_gate) Ge_spectra_delayed_proton_gate.Fill(nrj_i);
+    }
     
     Ge_Time_VS_Spectra.Fill(nrj_i, time_i);
     each_Ge_VS_Time.Fill(label_i, time_i);
+    Ge_VS_size_event.Fill(event.mult, nrj_i);
+    Ge_VS_Mult.Fill(clovers.CleanGeMult, nrj_i);
 
+    // Ge bidim : 
     for (uint loop_j = loop_i+1; loop_j<clovers.Clean_Ge.size(); loop_j++)
     {
       auto const & clover_j = clovers.m_Clovers[clovers.Clean_Ge[loop_j]];
 
-      auto const & nrj_j  = clover_j.nrj;
       auto const & time_j = clover_j.time;
-      auto const prompt_j  = Ge_prompt_gate.isIn(time_j);
-      auto const delayed_j = Ge_delayed_gate.isIn(time_j);
+      auto const & nrj_j  = clover_j.nrj;
+      // auto const prompt_j  = time_j>-20 && time_j<10;
+      auto const delayed_j = time_j>60 && time_j<145;
+      auto const prompt_j  = clovers.isPrompt (clover_j);
+    // auto const delayed_j = clovers.isDelayed(clover_j);
+
+      if (nrj_i > 509 && nrj_i<515 && nrj_j > 509 && nrj_j<515) continue;
 
       Ge_VS_Ge.Fill(nrj_i, nrj_j);
       Ge_VS_Ge.Fill(nrj_j, nrj_i);
+
+      Ge_prompt_VS_Nuball_calo .Fill(calo_clovers, nrj_i);
+      Ge_delayed_VS_Nuball_calo.Fill(calo_clovers, nrj_i);
 
       if (prompt_i)
       {
@@ -217,10 +355,16 @@ void AnalyseIsomer::FillClover(Clovers & clovers, Event const & event)
         {
           GePrompt_VS_GePrompt . Fill(nrj_i,nrj_j);
           GePrompt_VS_GePrompt . Fill(nrj_j,nrj_i);
+          if (DSSD_prompt_proton_gate)
+          {
+            GePrompt_VS_GePrompt_proton_gate . Fill(nrj_i,nrj_j);
+            GePrompt_VS_GePrompt_proton_gate . Fill(nrj_j,nrj_i);
+          }
         }
         else if (delayed_j)
         {
           GeDelayed_VS_GePrompt.Fill(nrj_i,nrj_j);
+          if (DSSD_prompt_proton_gate) GeDelayed_VS_GePrompt_proton_gate.Fill(nrj_i,nrj_j);
         }
       }
       else if (delayed_i)
@@ -231,20 +375,53 @@ void AnalyseIsomer::FillClover(Clovers & clovers, Event const & event)
           GeDelayed_VS_GeDelayed_time . Fill(time_j, time_i);
           GeDelayed_VS_GeDelayed . Fill(nrj_i, nrj_j);
           GeDelayed_VS_GeDelayed . Fill(nrj_j, nrj_i);
+          
+          if (DSSD_prompt_proton_gate)
+          {
+            GeDelayed_VS_GeDelayed_time_proton_gate . Fill(time_i, time_j);
+            GeDelayed_VS_GeDelayed_time_proton_gate . Fill(time_j, time_i);
+            GeDelayed_VS_GeDelayed_proton_gate . Fill(nrj_i, nrj_j);
+            GeDelayed_VS_GeDelayed_proton_gate . Fill(nrj_j, nrj_i);
+          }
         }
         else if (prompt_j)
         {
           GeDelayed_VS_GePrompt.Fill(nrj_j,nrj_i);
+          if (DSSD_prompt_proton_gate) GeDelayed_VS_GePrompt_proton_gate.Fill(nrj_j,nrj_i);
         }
       }
     }
+
+    // BGO bidims :
     for (auto const & bgo : clovers.cristaux_BGO)
     {
-      auto const & nrj_bgo   = clovers.cristaux_nrj_BGO [bgo];
       auto const & time_bgo  = clovers.cristaux_time_BGO[bgo];
+      auto const & nrj_bgo   = clovers.cristaux_nrj_BGO [bgo];
       auto const prompt_bgo  = Ge_prompt_gate.isIn(time_bgo);
       auto const delayed_bgo = Ge_delayed_gate.isIn(time_bgo);
-      if (prompt_bgo && prompt_i) BGO_R3A1_1_VS_Ge.Fill(nrj_i, nrj_bgo);
+      if (prompt_bgo && prompt_i)
+      {
+        BGO_VS_GE_prompt.Fill(nrj_i, nrj_bgo);
+        if (nrj_i > 509 && nrj_i<515) BGO_VS_Ge_511.Fill(bgo, nrj_bgo);
+      } 
+      else if (delayed_i && delayed_bgo) BGO_VS_GE_delayed.Fill(nrj_i, nrj_bgo);
+    }
+
+    // // dssd bidim :
+    if (dssd.oneParticle())
+    {
+      auto const & nrj_dssd = dssd.energy();
+      auto const & time_dssd = dssd.time();
+      auto const angle = dssd.angle()/3.141596*180+(ring_deg_thick*gRandom->Uniform(-0.5,0.5));
+
+      DSSD_Spectra.Fill(nrj_dssd);
+      DSSD_Spectra_VS_angle.Fill(angle, nrj_dssd);
+      Ge_VS_DSSD.Fill(nrj_dssd, nrj_i);
+      if (prompt_i) GePrompt_VS_DSSD.Fill(nrj_dssd, nrj_i);
+      if (delayed_i) GeDelayed_VS_DSSD.Fill(nrj_dssd, nrj_i);
+      DSSD_TW.Fill(time_dssd, nrj_dssd);
+      Ge_VS_DSSD_Time.Fill(time_dssd, time_i);
+      DSSD_VS_Nuball_calo.Fill(calo_clovers, nrj_dssd);
     }
   }
 }
@@ -257,142 +434,73 @@ void AnalyseIsomer::FillRaw(Event const & event)
   }
 }
 
-void AnalyseIsomer::FillSorted(Sorted_Event const & event_s, Event const & event)
-{
-  // if (event_s.dssd_veto) return;
-  // bool trigger = false;
-  // for (auto const & clover_i : event_s.clover_hits)
-  // {
-  //   auto const & Time_i = event_s.time_clover[clover_i];
-  //   auto const & nrj_i  = event_s.nrj_clover[clover_i];
-  //   if (Ge_delayed_gate.isIn(Time_i) && nrj_i>93 && nrj_i<99)
-  //   {
-  //      trigger = true; break;
-  //   }
-  // }
-  // if (!trigger) return;
-  for (auto const & dssd : event_s.DSSD_hits)
-  {
-    auto const & dssd_nrj = event.nrjcals[dssd];
-    auto const & dssd_Time = event_s.time2s[dssd];
-    DSSD_TW.Fill(dssd_Time, dssd_nrj);
-  }
-  for (size_t loop_i = 0; loop_i<event_s.clover_hits.size(); loop_i++)
-  {
-    auto const & clover_i = event_s.clover_hits[loop_i];
-
-    auto const & nrj_i  = event_s.nrj_clover[clover_i];
-    auto const & Time_i = event_s.time_clover[clover_i];
-    auto const prompt_i  = Ge_prompt_gate.isIn(Time_i);
-    auto const delayed_i = Ge_delayed_gate.isIn(Time_i);
-
-    // Compton suppression and energy threshold :
-    if (event_s.BGO[clover_i] || nrj_i<5) continue;
-
-    Ge_Time_VS_Spectra.Fill(nrj_i, Time_i);
-    Ge_spectra.Fill(nrj_i);
-    if (delayed_i) Ge_spectra_delayed.Fill(nrj_i);
-    else if (prompt_i) Ge_spectra_prompt.Fill(nrj_i);
-
-    for (size_t loop_j = loop_i+1; loop_j<event_s.clover_hits.size(); loop_j++)
-    {
-      auto const & clover_j = event_s.clover_hits[loop_j];
-
-      auto const & nrj_j  = event_s.nrj_clover[clover_j];
-      auto const & Time_j = event_s.time_clover[clover_j];
-      auto const prompt_j  = Ge_prompt_gate.isIn(Time_j);
-      auto const delayed_j = Ge_delayed_gate.isIn(Time_j);
-
-      // Compton suppression and energy threshold :
-      if (event_s.BGO[clover_j] || nrj_j<5) continue;
-
-      // DSSD analysis :
-      for (auto const & dssd : event_s.DSSD_hits)
-      {
-        auto const & dssd_nrj = event.nrjcals[dssd];
-        auto const & dssd_Time = event_s.time2s[dssd];
-        if (event_s.DSSDRingMult == event_s.DSSDSectorMult)
-        {
-          Ge_VS_DSSD.Fill(dssd_nrj,nrj_i);
-          if (prompt_i) GePrompt_VS_DSSD.Fill(dssd_nrj,nrj_i);
-          if (delayed_i)GeDelayed_VS_DSSD.Fill(dssd_nrj,nrj_i);
-          Ge_VS_DSSD_Time.Fill(dssd_Time, Time_i);
-        }
-      }
-      // Germanium analysis :
-      if (prompt_i)
-      {
-
-        if (prompt_j)
-        {
-          GePrompt_VS_GePrompt . Fill(nrj_i,nrj_j);
-          GePrompt_VS_GePrompt . Fill(nrj_j,nrj_i);
-        }
-        else if (delayed_j)
-        {
-          GeDelayed_VS_GePrompt.Fill(nrj_i,nrj_j);
-        }
-      }
-      else if (delayed_i)
-      {
-        if (delayed_j)
-        {
-          if (abs(Time_i-Time_j)<50/2
-          && nrj_i>900 && nrj_i<908
-          // && (Time_i<190 || Time_i>220) && (Time_j<190 || Time_j>220)
-        )
-          {
-            GeDelayed_VS_GeDelayed_time . Fill(Time_i, Time_j);
-            GeDelayed_VS_GeDelayed_time . Fill(Time_j, Time_i);
-            GeDelayed_VS_GeDelayed . Fill(nrj_i, nrj_j);
-            GeDelayed_VS_GeDelayed . Fill(nrj_j, nrj_i);
-          }
-        }
-        else if (prompt_j)
-        {
-          GeDelayed_VS_GePrompt.Fill(nrj_j,nrj_i);
-        }
-      }
-    }
-  }
-}
-
 void AnalyseIsomer::Write()
 {
-
-  // print("Writting Radware matrixes...");
-
+  print("Writting Radware matrixes...");
   // RWMat RW_prompt_prompt(GePrompt_VS_GePrompt); RW_prompt_prompt.Write();
   // RWMat RW_del_del(GeDelayed_VS_GeDelayed); RW_del_del.Write();
+
+  // RWMat RW_prompt_prompt_proton_gate(GePrompt_VS_GePrompt_proton_gate); RW_prompt_prompt_proton_gate.Write();
+  // RWMat RW_del_del_proton_gate(GeDelayed_VS_GeDelayed_proton_gate); RW_del_del_proton_gate.Write();
+  // RWMat RW_del_prompt_proton_gate(GeDelayed_VS_GePrompt_proton_gate); RW_del_prompt_proton_gate.Write();
 
   std::unique_ptr<TFile> outfile(TFile::Open((outDir+outRoot).c_str(),"recreate"));
   outfile -> cd();
 
   print("Writting histograms ...");
 
+  Ge_prompt_mult_VS_sectors_mult.Write();
+  Ge_delayed_mult_VS_sectors_mult.Write();
+
   Ge_spectra.Write();
   Ge_spectra_delayed.Write();
   Ge_spectra_prompt.Write();
-
-  print("Writting bidims ...");
+  Ge_spectra_prompt_proton_gate.Write();
+  Ge_spectra_prompt_proton_gate.Write();
 
   Ge_Time_VS_Spectra.Write();
   raw_Ge_Time_VS_Spectra.Write();
-
-  BGO_R3A1_1_VS_Ge.Write();
+  
   Ge_VS_Ge.Write();
   GePrompt_VS_GePrompt.Write();
   GeDelayed_VS_GeDelayed.Write();
   GeDelayed_VS_GePrompt.Write();
 
+  GePrompt_VS_GePrompt_proton_gate.Write();
+  GeDelayed_VS_GeDelayed_proton_gate.Write();
+  GeDelayed_VS_GePrompt_proton_gate.Write();
+  GeDelayed_VS_GeDelayed_time_proton_gate.Write();
+
+  BGO_VS_Ge_511.Write();
+  BGO_VS_GE_prompt.Write();
+  BGO_VS_GE_delayed.Write();
+
+  Nuball_calo.Write();
+  Nuball_calo_prompt.Write();
+  Nuball_calo_delayed.Write();
+  Ge_calo.Write();
+  Ge_calo_prompt.Write();
+  Ge_calo_delayed.Write();
+  BGO_calo.Write();
+  BGO_calo_prompt.Write();
+  BGO_calo_delayed.Write();
+  Nuball_calo_delayed_VS_prompt.Write();
+  Ge_prompt_VS_Nuball_calo.Write();
+  Ge_delayed_VS_Nuball_calo.Write();
+  DSSD_VS_Nuball_calo.Write();
+
+  DSSD_Spectra.Write();
+  DSSD_Spectra_VS_angle.Write();
   Ge_VS_DSSD.Write();
   GePrompt_VS_DSSD.Write();
   GeDelayed_VS_DSSD.Write();
-
-  each_Ge_VS_Time.Write();
-
   DSSD_TW.Write();
   Ge_VS_DSSD_Time.Write();
+
+  each_Ge_VS_Time.Write();
+  Ge_VS_size_event.Write();
+  Ge_VS_Mult.Write();
+
   GeDelayed_VS_GeDelayed_time.Write();
 
   outfile->Write();
@@ -465,5 +573,105 @@ bool AnalyseIsomer::setParameters(std::vector<std::string> const & parameters)
   }
   return true;
 }
+
+// void AnalyseIsomer::FillSorted(Sorted_Event const & event_s, Event const & event)
+// {
+//   // if (event_s.dssd_veto) return;
+//   // bool trigger = false;
+//   // for (auto const & clover_i : event_s.clover_hits)
+//   // {
+//   //   auto const & Time_i = event_s.time_clover[clover_i];
+//   //   auto const & nrj_i  = event_s.nrj_clover[clover_i];
+//   //   if (Ge_delayed_gate.isIn(Time_i) && nrj_i>93 && nrj_i<99)
+//   //   {
+//   //      trigger = true; break;
+//   //   }
+//   // }
+//   // if (!trigger) return;
+//   for (auto const & dssd : event_s.DSSD_hits)
+//   {
+//     auto const & dssd_nrj = event.nrjcals[dssd];
+//     auto const & dssd_Time = event_s.time2s[dssd];
+//     DSSD_TW.Fill(dssd_Time, dssd_nrj);
+//   }
+//   for (size_t loop_i = 0; loop_i<event_s.clover_hits.size(); loop_i++)
+//   {
+//     auto const & clover_i = event_s.clover_hits[loop_i];
+
+//     auto const & nrj_i  = event_s.nrj_clover[clover_i];
+//     auto const & Time_i = event_s.time_clover[clover_i];
+//     auto const prompt_i  = Ge_prompt_gate.isIn(Time_i);
+//     auto const delayed_i = Ge_delayed_gate.isIn(Time_i);
+
+//     // Compton suppression and energy threshold :
+//     if (event_s.BGO[clover_i] || nrj_i<5) continue;
+
+//     Ge_Time_VS_Spectra.Fill(nrj_i, Time_i);
+//     Ge_spectra.Fill(nrj_i);
+//     if (delayed_i) Ge_spectra_delayed.Fill(nrj_i);
+//     else if (prompt_i) Ge_spectra_prompt.Fill(nrj_i);
+
+//     for (size_t loop_j = loop_i+1; loop_j<event_s.clover_hits.size(); loop_j++)
+//     {
+//       auto const & clover_j = event_s.clover_hits[loop_j];
+
+//       auto const & nrj_j  = event_s.nrj_clover[clover_j];
+//       auto const & Time_j = event_s.time_clover[clover_j];
+//       auto const prompt_j  = Ge_prompt_gate.isIn(Time_j);
+//       auto const delayed_j = Ge_delayed_gate.isIn(Time_j);
+
+//       // Compton suppression and energy threshold :
+//       if (event_s.BGO[clover_j] || nrj_j<5) continue;
+
+//       // DSSD analysis :
+//       for (auto const & dssd : event_s.DSSD_hits)
+//       {
+//         auto const & dssd_nrj = event.nrjcals[dssd];
+//         auto const & dssd_Time = event_s.time2s[dssd];
+//         if (event_s.DSSDRingMult == event_s.DSSDSectorMult)
+//         {
+//           Ge_VS_DSSD.Fill(dssd_nrj,nrj_i);
+//           if (prompt_i) GePrompt_VS_DSSD.Fill(dssd_nrj,nrj_i);
+//           if (delayed_i)GeDelayed_VS_DSSD.Fill(dssd_nrj,nrj_i);
+//           Ge_VS_DSSD_Time.Fill(dssd_Time, Time_i);
+//         }
+//       }
+//       // Germanium analysis :
+//       if (prompt_i)
+//       {
+
+//         if (prompt_j)
+//         {
+//           GePrompt_VS_GePrompt . Fill(nrj_i,nrj_j);
+//           GePrompt_VS_GePrompt . Fill(nrj_j,nrj_i);
+//         }
+//         else if (delayed_j)
+//         {
+//           GeDelayed_VS_GePrompt.Fill(nrj_i,nrj_j);
+//         }
+//       }
+//       else if (delayed_i)
+//       {
+//         if (delayed_j)
+//         {
+//           if (abs(Time_i-Time_j)<50/2
+//           && nrj_i>900 && nrj_i<908
+//           // && (Time_i<190 || Time_i>220) && (Time_j<190 || Time_j>220)
+//         )
+//           {
+//             GeDelayed_VS_GeDelayed_time . Fill(Time_i, Time_j);
+//             GeDelayed_VS_GeDelayed_time . Fill(Time_j, Time_i);
+//             GeDelayed_VS_GeDelayed . Fill(nrj_i, nrj_j);
+//             GeDelayed_VS_GeDelayed . Fill(nrj_j, nrj_i);
+//           }
+//         }
+//         else if (prompt_j)
+//         {
+//           GeDelayed_VS_GePrompt.Fill(nrj_j,nrj_i);
+//         }
+//       }
+//     }
+//   }
+// }
 
 #endif //ANALYSEISOMER_H

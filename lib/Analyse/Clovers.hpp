@@ -6,8 +6,40 @@
 
 #include "../Classes/Detectors.hpp"
 #include "../Classes/Event.hpp"
+#include <Gate.hpp>
 
 #include "CloverModule.hpp"
+
+std::array<float, 48> BGO_coeff = 
+{
+1.1747, 1.2617,
+1.2617, 1.2342,
+0.1729, 0.51  ,
+1.0199, 0.9358,
+1.,     1.,
+1.1181, 1.1801,
+
+1.3342, 1.3590,
+1.3482, 1.3885,
+1.3102, 1.,
+1.1967, 1.1640,
+1.02,   1.0179,
+1.0471, 1.0690,
+
+1.4394, 1.3663,
+1.0078, 0.9845,
+1.3204, 1.0872,
+1.0849, 1.02,
+1.4811, 1.3626,
+1.2433, 1.2283,
+
+1.1132, 1.1355,
+1.1157, 1.1280,
+1.3810, 1.3002,
+1,1,
+1,1,
+1,1
+};
 
 /**
  * @brief Analyse the clovers in the event
@@ -130,25 +162,39 @@ public:
   CloverModule operator[] (uchar const & i) const {return m_Clovers[i];}
   auto begin() const {return m_Clovers.begin();}
   auto end()   const {return m_Clovers.end  ();}
-  uint size() const {return Hits.size();}
+  uint size()  const {return Hits.size()      ;}
   void Analyse();
+  bool isPrompt (CloverModule const & clover) {return promptGate(clover.time, clover.nrj) ;}
+  bool isDelayed(CloverModule const & clover) {return delayedGate(clover.time, clover.nrj);}
 
-  // Containers :
+  // Positions in the raw event :
+  StaticVector<uchar> rawGe  = StaticVector<uchar>(96); //List of the position of the raw Ge  in the event
+  StaticVector<uchar> rawBGO = StaticVector<uchar>(48); //List of the position of the raw BGO in the event
+
+  // Hits lists :
   StaticVector<uchar> Hits = StaticVector<uchar>(24);  // List of clovers that fired in the event
   StaticVector<uchar> Ge = StaticVector<uchar>(24);  // List of Germanium modules that fired in the event
   StaticVector<uchar> Bgo = StaticVector<uchar>(24);  // List of BGO modules that fired in the event
   StaticVector<uchar> Clean_Ge = StaticVector<uchar>(24);  // List of clean Germaniums that fired in the event, that is "Ge only" modules
+  StaticVector<uchar> Rejected_Ge = StaticVector<uchar>(24);  // List of rejected Germaniums that fired in the event, the "garbage"
+
+  // (In the following, only clean Ge are used)
+  StaticVector<uchar> Prompt_Ge = StaticVector<uchar>(24);  // List of clean Germaniums that fired in the event, that is "Ge only" modules
+  StaticVector<uchar> Delayed_Ge = StaticVector<uchar>(24);  // List of clean Germaniums that fired in the event, that is "Ge only" modules
   
-  StaticVector<uchar> rawGe  = StaticVector<uchar>(96); //List of the position of the raw Ge  in the event
-  StaticVector<uchar> rawBGO = StaticVector<uchar>(48); //List of the position of the raw BGO in the event
 
   std::vector<CloverModule> m_Clovers; // Array containing the 24 clovers
 
   // Counters :
   std::size_t Mult = 0;
   std::size_t GeMult = 0;
+  std::size_t RejectedMult = 0;
   std::size_t CleanGeMult = 0;
   std::size_t BGOMult = 0;
+  std::size_t BGOOnlyMult = 0;
+  // (only clean germaniums in the following :)
+  std::size_t PromptMult = 0;
+  std::size_t DelayedMult = 0;
 
 private:
   // Parameters :
@@ -160,6 +206,76 @@ private:
   // More detailed analysis :
 public: 
   bool has511 = false;
+
+  // Calorimetry :
+  double totGe = 0.d;
+  double totBGO = 0.d;
+  double totGe_prompt = -0.1d;
+  double totBGO_prompt = -0.1;
+  double totGe_delayed = -0.1;
+  double totBGO_delayed = -0.1;
+
+  // Timing : 
+  // A CHANGER, LA COMME CA CEST VRAIMENT TROP NUL....
+  class PromptGate
+  {
+  public:
+    PromptGate()
+    {// Calculate the intermediate region :
+      m_start_coeff = (m_high_E_gate.start-m_low_E_gate.start) / (m_high_E-m_low_E);
+      m_start_intercept = m_low_E_gate.start-m_low_E*m_start_coeff;
+
+      m_stop_coeff = (m_high_E_gate.stop-m_low_E_gate.stop) / (m_high_E-m_low_E);
+      m_stop_intercept = m_low_E_gate.stop-m_low_E*m_stop_coeff;
+    }
+
+    float intermediate_start(float const energy) {return (m_start_coeff*energy+m_start_intercept);}
+    float intermediate_stop(float const energy) {return (m_stop_coeff*energy+m_stop_intercept );}
+    
+    /**
+     * @brief Is the hit in the gate
+     * @details
+     * Three zones : high energy, intermediate energy and lower energy.
+     * The intermediate energies, links the high and low by a straight line
+     * whose parameters ax+b are calculated in the constructor
+     */
+    bool operator() (double const & time, float const & energy)
+    {
+           if (energy > m_high_E) return m_high_E_gate.isIn(time);
+      else if (energy > m_low_E)  return (time > intermediate_start(energy) && time < intermediate_stop(energy));
+      else                        return m_low_E_gate.isIn(time);
+    }
+
+  private:
+    float m_high_E = 200;
+    float m_low_E = 50;
+    Gate m_high_E_gate = {-15, 7};
+    Gate m_low_E_gate = {-20, 40};
+    float m_start_coeff = 0.f;
+    float m_start_intercept = 0.f;
+    float m_stop_coeff = 0.f;
+    float m_stop_intercept = 0.f;
+  } promptGate;
+
+  class DelayedGate
+  {
+  public:
+    DelayedGate(){}
+    bool operator() (double const & time, float const & energy)
+    {
+      if (energy > m_low_E) return m_high_E_gate.isIn(time);
+      else                  return m_low_E_gate.isIn(time);
+    }
+
+  private:
+    float m_high_E = 100;
+    float m_low_E = 100;
+    Gate m_high_E_gate = {40, 145};
+    Gate m_low_E_gate  = {60, 145};
+  } delayedGate;
+
+  Gate prompt_BGO_gate = {-20, 10};
+  Gate delayed_BGO_gate = {60, 145};
 };
 
 // ---- Initialize static members : ----- //
@@ -198,26 +314,39 @@ void Clovers::Reset()
     cristaux_time_BGO [index] = 0.;
   }
 
-  rawBGO.resize(0);
   rawGe.resize(0);
+  rawBGO.resize(0);
 
   Hits.resize(0);
   Ge.resize(0);
   Bgo.resize(0);
   Clean_Ge.resize(0);
+  Rejected_Ge.resize(0);
+  Prompt_Ge.resize(0);
+  Delayed_Ge.resize(0);
 
   cristaux.resize(0);
   cristaux_BGO.resize(0);
 
   Mult = 0;
   GeMult = 0;
+  RejectedMult = 0;
   CleanGeMult = 0;
   BGOMult = 0;
+  BGOOnlyMult = 0;
+  PromptMult = 0;
+  DelayedMult = 0;
 
   CrystalMult = 0;
   CrystalMult_BGO = 0;
 
   has511 = false;
+  totGe = -0.1;
+  totBGO = -0.1;
+  totGe_prompt = -0.1;
+  totBGO_prompt = -0.1;
+  totGe_delayed = -0.1;
+  totBGO_delayed = -0.1;
 }
 
 void Clovers::SetEvent(Event const & event)
@@ -251,7 +380,7 @@ Bool_t Clovers::Fill(Event const & event, int const & hit_index)
       CrystalMult++;
 
       // Position of the hit in the event :
-      rawBGO.push_back(hit_index);
+      rawGe.push_back(hit_index);
 
       // Ge crystal index (ranges from 0 to 96):
       auto const & index_cristal = cristaux_index[label];
@@ -260,7 +389,7 @@ Bool_t Clovers::Fill(Event const & event, int const & hit_index)
       cristaux.push_back(index_cristal);
 
       // Filling the germanium crystals informations :
-      cristaux_nrj[index_cristal] = nrj;
+      cristaux_nrj [index_cristal] = nrj;
       cristaux_time[index_cristal] = time;
 
       // ------------------------- //
@@ -270,15 +399,11 @@ Bool_t Clovers::Fill(Event const & event, int const & hit_index)
       clover.nb++;
 
       // Find the Ge cristal that received the most energy and use its time for the clover :
-      print_precision(3);
-      // printMT((int)index_cristal, ":", (int)nrj, time, "\t", (int)cristaux_nrj[clover.maxE_Ge_cristal], "\t", (int)clover.maxE_Ge_cristal, "\t", clover.time, "\t");
       if (nrj >= cristaux_nrj[clover.maxE_Ge_cristal])
       {
         clover.maxE_Ge_cristal = index_cristal;
         clover.time = time;
-        // printMT((int)index_cristal, ":", (int)nrj, time, "\t", (int)cristaux_nrj[clover.maxE_Ge_cristal], "\t", (int)clover.maxE_Ge_cristal, "\t", clover.time);
       }
-      // if (clover.time == 0) print(time, nrj, cristaux_nrj[clover.maxE_Ge_cristal], clover.maxE_Ge_cristal);
 
       // Fill the vector containing the list of Ge clovers that fired :
       Ge.push_back_unique(index_clover);
@@ -288,8 +413,10 @@ Bool_t Clovers::Fill(Event const & event, int const & hit_index)
 
       // Detailed analysis :
       if (nrj>507 && nrj<516) has511 = true;
+      totGe+=nrj;
+           if (prompt_BGO_gate(time) ) totGe_prompt+=nrj;
+      else if (delayed_BGO_gate(time)) totGe_delayed+=nrj;
     }
-
     else
     {// if isBGO[label] :
 
@@ -308,7 +435,7 @@ Bool_t Clovers::Fill(Event const & event, int const & hit_index)
       cristaux_BGO.push_back(index_cristal);
 
       // Filling the germanium crystals informations :
-      cristaux_nrj_BGO[index_cristal] = nrj;
+      cristaux_nrj_BGO [index_cristal] = nrj*BGO_coeff[index_cristal];
       cristaux_time_BGO[index_cristal] = time;
 
       // ------------------------- //
@@ -321,11 +448,15 @@ Bool_t Clovers::Fill(Event const & event, int const & hit_index)
       Bgo.push_back_unique(index_clover);
 
       // Fill the cell containing the total energy deposit in the module's BGOs
-      clover.nrj_BGO += nrj;
+      clover.nrj_BGO += nrj*BGO_coeff[index_cristal];
 
       // Manage the time of the BGOs. To be improved if necessary : if 2 BGOs, only the latest one is stored
       clover.time_BGO = time;
+      totBGO+=nrj*BGO_coeff[index_cristal];
+           if (prompt_BGO_gate(time) ) totBGO_prompt +=nrj*BGO_coeff[index_cristal];
+      else if (delayed_BGO_gate(time)) totBGO_delayed+=nrj*BGO_coeff[index_cristal];
     }
+   
     return true;
   }
   else return false;
@@ -344,11 +475,28 @@ void Clovers::Analyse()
       {
         CleanGeMult++;
         Clean_Ge.push_back(index);
+        if (isPrompt(clover)) 
+        {
+          PromptMult++;
+          Prompt_Ge.push_back(index);
+        }
+        else if (isDelayed(clover)) 
+        {
+          DelayedMult++;
+          Delayed_Ge.push_back(index);
+        }
+      }
+      else
+      {
+        BGOMult++;
+        RejectedMult++;
+        Rejected_Ge.push_back(index);
       }
     }
     else
     {
       BGOMult++;
+      BGOOnlyMult++;
     }
   }
 }

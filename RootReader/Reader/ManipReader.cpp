@@ -4,7 +4,7 @@
  * It analyse all the runs together
  *
 */
-
+#define SAFE
 // Declare the manip name :
 // #define N_SI_129
 // #define N_SI_120
@@ -26,8 +26,8 @@
   #define USE_RF 400
 #endif
 
-
 #include <libRoot.hpp>
+
 #include <Classes/Detectors.hpp>
 
 Detectors g_detectors("index_129.list");

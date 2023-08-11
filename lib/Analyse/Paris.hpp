@@ -70,6 +70,9 @@ public:
   ParisCluster & back  () { return clusterBack;}
   ParisCluster & front () { return clusterFront;}
   // _____________________________________________________________ //
+
+private:
+  bool m_initialised = false;
 };
 
 std::array<bool,  1000> Paris::is;    // Does the label correspond to a Paris ?
@@ -78,15 +81,19 @@ std::array<uchar, 1000> Paris::index  ;// Link the label to the module's index i
 
 void Paris::Initialize(std::size_t const & nb_clusters, std::size_t const & nb_modules)
 {// Parameters : number of clusters, number of modules in each cluster
-  // for (auto & cluster : parisClusters)
-  // {
-  //   cluster.Initialize(nb_modules);
-  //   for (std::size_t i = 0; i<nb_modules; i++)
-  //   {
-  //     cluster.positions[i] = paris_getPositionModule(i);
-  //   }
-  //   cluster.InitializeBidims();
-  // }
+  if (!m_initialised)
+  {
+    // for (auto & cluster : parisClusters)
+    // {
+    //   cluster.Initialize(nb_modules);
+    //   for (std::size_t i = 0; i<nb_modules; i++)
+    //   {
+    //     cluster.positions[i] = paris_getPositionModule(i);
+    //   }
+    //   cluster.InitializeBidims();
+    // }
+    m_initialised = true;
+  }
 }
 
 void inline Paris::Reset()

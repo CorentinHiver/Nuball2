@@ -289,6 +289,8 @@ void MTTHist<THist>::Merge()
     {
       m_merged = m_collection[0];
       m_is_merged = true;
+      delete m_collection[0];
+      m_is_deleted[0] = true;
     }
     else
     {
@@ -299,6 +301,8 @@ void MTTHist<THist>::Merge()
       {
         auto & histo = m_collection[i];
         if (histo->Integral() > 0) m_merged -> Add(histo);
+        delete histo;
+        m_is_deleted[i] = true;
       }
       if (m_file) m_file -> cd(); //To return to the scope of any potential TFile
     }
