@@ -223,7 +223,7 @@ private:
   bool Initialize(bool const & initializeRaw = false, bool const & initializeCorrected = false);
   bool InitializeRaw();
   bool InitializeCorrected();
-  static void treatFilesMT(Timeshifts & ts, MTList<std::string> & files_MT);
+  static void treatFilesMT(Timeshifts & ts, MTList & files_MT);
   void treatFolder(std::string const & folder, int const & nb_files = -1);
   void treatFile(std::string const & filename);
   void treatRootFile(std::string const & filename);
@@ -506,7 +506,7 @@ void Timeshifts::treatFolder(std::string const & folder, int const & nb_files)
   if (MTObject::ON)
   {// If multithreading, treat each data file of the folder in parallel
     print("Calculating timeshifts with", MTObject::getThreadsNb(),"threads");
-    MTList<std::string> files_MT(files.getListFiles());
+    MTList files_MT(files.getListFiles());
     // The FileManager object isn't thread safe. 
     // That is why one has to encapsulate the files list inside a MTList (Multi-Threaded List) :
     MTObject::parallelise_function(treatFilesMT, *this, files_MT);
@@ -567,7 +567,7 @@ bool Timeshifts::verify(std::string const & folder, int const & nb_files)
   return true;
 }
 
-void Timeshifts::treatFilesMT(Timeshifts & ts, MTList<std::string> & files_MT)
+void Timeshifts::treatFilesMT(Timeshifts & ts, MTList & files_MT)
 {
   // This method has to be static in order to be multithreaded.
   // Thus, the only way it can be "link" to the class (i.e. having access to its public members) is to pass the class itself as an argument.

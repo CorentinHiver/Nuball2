@@ -148,7 +148,7 @@ private:
   static void Read(MTFasterReader & MTreader, Func function, ARGS &&... args);
 
   FilesManager m_files;
-  MTList<std::string> m_MTfiles;
+  MTList m_MTfiles;
   std::mutex m_mutex;
 };
 

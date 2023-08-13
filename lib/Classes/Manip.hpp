@@ -100,7 +100,7 @@ private:
   std::string m_runs_files;
 
   std::vector<std::string> list_runs;
-  MTList<std::string> list_runs_MT;
+  MTList list_runs_MT;
 };
 
 
