@@ -48,8 +48,7 @@ class Builder
 {
 public:
   Builder(){}
-  Builder(Event * event){m_event = event;}
-  ~Builder(){}
+  Builder(Event * event) : m_event (event) {}
 
   // Getters :
   bool const & isCoincTrigged() const {return coincON;}
@@ -66,7 +65,7 @@ public:
   Event getSingleEvent() const {return Event(m_single_hit);}
 
   Event* getEvent() const {return m_event;}
-  UShort_t size() const {return m_event -> size();}
+  size_t size() const {return m_event -> size();}
 
   virtual bool build(Hit const & _hit) = 0; // pure virtual
   virtual void reset() {m_event->clear(); m_status = 0;}

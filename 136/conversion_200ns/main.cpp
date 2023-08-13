@@ -34,9 +34,11 @@ int nb_files = -1;
 bool only_timeshifts = false; // No conversion : only calculate the timeshifts
 bool overwrite = false; // Overwrite already existing converted root files. Works also with -t options (only_timeshifts)
 bool histoed = false;
+bool one_run = false;
+std::string one_run_folder = "";
 
 bool extend_periods = false; // To take more than one period after a event trigger
-uchar nb_periods_more = 0; // Number of periods to extend after an event that triggered
+uint nb_periods_more = 0; // Number of periods to extend after an event that triggered
 
 bool trigger(Counter136 const & counter)
 {
@@ -132,8 +134,8 @@ void convert(Hit & hit, FasterReader & reader,
 
     // Energy calibration :
     hit.nrjcal = calibration(hit.nrj,  hit.label); // Normal calibraiton
-    hit.nrj2cal = ((hit.nrj2 == 0.f) ? 0.f : calibration(hit.nrj2, hit.label)); // Calibrate the nrj2 if any
-    if (isBGO[hit.label]) hit.nrjcal = hit.nrj/100.; // "Proto calibration" of BGO
+    hit.nrj2cal = ((hit.nrj2 == 0) ? 0.f : calibration(hit.nrj2, hit.label)); // Calibrate the nrj2 if any
+    if (isBGO[hit.label]) hit.nrjcal = NRJ_cast(hit.nrj); // "Proto calibration" of BGO
 
     tempTree -> Fill();
 
@@ -285,11 +287,11 @@ void convert(Hit & hit, FasterReader & reader,
   write_timer.Stop();
 
   auto dataSize = static_cast<float>(raw_datafile.size("Mo"));
-  auto outSize  = static_cast<float>(size_file_conversion(outFile->GetSize(), "o", "Mo"));
+  auto outSize  = static_cast<float>(size_file_conversion(float_cast(outFile->GetSize()), "o", "Mo"));
 
   print_precision(4);
   print(outfile, "written in", timer(), timer.unit(),"(",dataSize/timer.TimeSec(),"Mo/s). Input file", dataSize, 
-        "Mo and output file", outSize, "Mo : compression factor ", dataSize/outSize,"-", (100.*hits_count)/rawCounts,"% hits kept");
+        "Mo and output file", outSize, "Mo : compression factor ", dataSize/outSize,"-", (100.*double_cast(hits_count))/double_cast(rawCounts),"% hits kept");
 }
 
 // 5. Main
@@ -310,6 +312,11 @@ int main(int argc, char** argv)
       else if (command == "-f" || command == "--files-number")
       {
         nb_files = atoi(argv[++i]);
+      }
+      else if (command == "--file")
+      {
+        one_run = true;
+        one_run_folder = argv[++i];
       }
       else if (command == "-H" || command == "--histograms")
       {

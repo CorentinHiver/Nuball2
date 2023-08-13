@@ -32,40 +32,40 @@ public:
   size_t size() const {return peaks.size();};
 
   //Getter & setter :
-  Bool_t exists(char const & _exist = -1)
+  bool exists(char const & _exist = -1)
   {
     if (_exist == -1)  return this->exist; // Getter mode
     else if (_exist<2) return (exist = static_cast<bool>(_exist));// Setter mode
     else return false;
   };
 
-  Bool_t too_few_counts(char const &  _few_counts = -1)
+  bool too_few_counts(char const &  _few_counts = -1)
   {
     if (_few_counts == -1)  return this->few_counts; //Getter mode
     else if (_few_counts<2) return (few_counts = static_cast<bool> (_few_counts)); // Setter mode
     else return false;
   };
 
-  Int_t label = 0;
+  int label = 0;
 
-  std::vector<Float_t> peaks;
-  std::vector<Float_t> cmeasures;
+  std::vector<double> peaks;
+  std::vector<double> cmeasures;
 
-  std::vector<Float_t> mean;
-  std::vector<Float_t> sigma;
+  std::vector<double> mean;
+  std::vector<double> sigma;
 
-  Int_t   nb_hits = -1;
-  Float_t chi2 = -1;
-  Float_t parameter0 = 0;
-  Float_t parameter1 = 1;
-  Float_t parameter2 = 0.f;
-  Float_t parameter3 = 0.f;
-  Float_t scalefactor = 0.f;
-  Float_t keVperADC = 0.f;
+  double integral = -1;
+  double chi2 = -1;
+  double parameter0 = 0;
+  double parameter1 = 1;
+  double parameter2 = 0;
+  double parameter3 = 0;
+  double scalefactor = 0;
+  double keVperADC = 0;
 
 private:
-  Bool_t exist = false;
-  Bool_t few_counts = false;
+  bool exist = false;
+  bool few_counts = false;
 };
 using Fits = std::vector <pic_fit_result>;
 
@@ -127,7 +127,10 @@ public:
   void  calibrate(Hit & hit) const;
 
   /// @brief calibrate
-  float calibrate(float const & nrj, Label const & label) const;
+  float calibrate(ADC const & adc, Label const & label) const {return calibrate(NRJ_cast(adc), label);}
+
+  /// @brief calibrate
+  float calibrate(NRJ const & nrj, Label const & label) const;
 
   
   /// @brief Call for calibrate method
@@ -190,7 +193,7 @@ void Calibration::histograms::Initialize(Calibration & calib)
   raw_spectra.resize(nb_det);
   calib_spectra.resize(nb_det);
 
-  for (uint label = 0; label<nb_det; label++)
+  for (Label label = 0; label<nb_det; label++)
   {
     auto const & name = calib.m_detectors[label];
     auto const & alias = Detectors::alias(label);
@@ -292,9 +295,9 @@ void Calibration::analyse()
   // -----------------------------
   // Parameterize the pics to fit :
   // -----------------------------
-  Int_t nb_pics = 0;
-  Float_t E_right_pic = 0.f;
-  for (uint label = 0; label<m_detectors.size(); label++)
+  int nb_pics = 0;
+  double E_right_pic = 0.f;
+  for (Label label = 0; label<m_detectors.size(); label++)
   {
     if (!m_detectors.exists[label]) continue;
     auto histo = histos.raw_spectra[label];
@@ -305,11 +308,11 @@ void Calibration::analyse()
 
     // Initialize algorithm parameters :
     // The threshold used to tag the peak.
-    Float_t integral_ratio_threshold = 0.f;
+    double integral_ratio_threshold = 0.f;
     // A threshold is used in order to reject any potential electrical noise above like 500 ADC
-    Int_t ADC_threshold = 0; 
+    int ADC_threshold = 0; 
     // The three windows width (in keV)
-    Int_t window_1 = 0, window_2 = 0, window_3 = 0; 
+    int window_1 = 0, window_2 = 0, window_3 = 0; 
 
     // Reject the triple alpha
     if (isTripleAlpha(m_source) && type!=dAlias::dssd) continue;
@@ -324,7 +327,7 @@ void Calibration::analyse()
         fit.peaks.resize(nb_pics);
         fit.peaks = {121.7830, 344.2760, 778.9030, 964.1310, 1408.0110};
         E_right_pic = fit.peaks.back();
-        integral_ratio_threshold = 0.011;
+        integral_ratio_threshold = 0.011f;
         ADC_threshold = 100;
       }
       else if (m_source == "232Th")
@@ -333,7 +336,7 @@ void Calibration::analyse()
         fit.peaks.resize(nb_pics);
         fit.peaks = {238, 583, 910, 2614};
         E_right_pic = fit.peaks.back();
-        integral_ratio_threshold = 0.0049;
+        integral_ratio_threshold = 0.0049f;
         ADC_threshold = 100;
       }
       else if (m_source == "60Co")
@@ -342,7 +345,7 @@ void Calibration::analyse()
         fit.peaks.resize(nb_pics);
         fit.peaks = {1172, 1333};
         E_right_pic = fit.peaks.back();
-        integral_ratio_threshold = 0.06;
+        integral_ratio_threshold = 0.06f;
         ADC_threshold = 100;
       }
     }
@@ -355,7 +358,7 @@ void Calibration::analyse()
         fit.peaks.resize(nb_pics);
         fit.peaks = {121.7830, 344.2760, 778.9030, 964.1310, 1408.0110};
         E_right_pic = fit.peaks.back();
-        integral_ratio_threshold = 0.012;
+        integral_ratio_threshold = 0.012f;
         ADC_threshold = 500;
       }
       else if (m_source == "232Th")
@@ -364,7 +367,7 @@ void Calibration::analyse()
         fit.peaks.resize(nb_pics);
         fit.peaks = {238, 583, 911, 2614};
         E_right_pic = fit.peaks.back();
-        integral_ratio_threshold = 0.0025;
+        integral_ratio_threshold = 0.0025f;
         ADC_threshold = 500;
       }
       else if (m_source == "60Co")
@@ -373,7 +376,7 @@ void Calibration::analyse()
         fit.peaks.resize(nb_pics);
         fit.peaks = {1172, 1333};
         E_right_pic = fit.peaks.back();
-        integral_ratio_threshold = 0.1;
+        integral_ratio_threshold = 0.1f;
         ADC_threshold = 100;
       }
     }
@@ -386,7 +389,7 @@ void Calibration::analyse()
         fit.peaks.resize(nb_pics);
         fit.peaks = {121.7830, 344.2760, 778.9030, 964.1310, 1408.0110};
         E_right_pic = fit.peaks.back();
-        integral_ratio_threshold = 0.012;
+        integral_ratio_threshold = 0.012f;
         ADC_threshold = 500;
       }
       else if (m_source == "232Th")
@@ -395,7 +398,7 @@ void Calibration::analyse()
         fit.peaks.resize(nb_pics);
         fit.peaks = {238, 583, 911, 2614};
         E_right_pic = fit.peaks.back();
-        integral_ratio_threshold = 0.0025;
+        integral_ratio_threshold = 0.0025f;
         ADC_threshold = 500;
       }
     }
@@ -408,7 +411,7 @@ void Calibration::analyse()
         fit.peaks.resize(nb_pics);
         fit.peaks = {5150, 5480, 5800};
         E_right_pic = fit.peaks.back();
-        integral_ratio_threshold = 0.05;
+        integral_ratio_threshold = 0.05f;
         ADC_threshold = 500;
       }
       else
@@ -420,20 +423,20 @@ void Calibration::analyse()
     fit.resize(nb_pics);// Resize the intern vectors of the detector's pic_fit_result
 
     int vmaxchan = 0;// Position of the right pic in bins (e.g. 1408 keV in Eu)
-    double scalefactor = 0.; // To adapt to the binnin of the histogram (ADC/bin)
-    double kpc = 0.; // keV per bin (=channel)
+    double scalefactor = 0.f; // To adapt to the binnin of the histogram (ADC/bin)
+    double kpc = 0.f; // keV per bin (=channel)
 
     // -----------------------
     // OPERATE ON THE SPECTRUM
     // -----------------------
-    int nbins = histo->GetXaxis()->GetNbins();// The number of bins in the spectra
+    auto nbins = histo->GetXaxis()->GetNbins();// The number of bins in the spectra
 
     // It supposes that the spectra starts at 0 !!
     fit.scalefactor = scalefactor = histo->GetXaxis()->GetXmax()/nbins;
 
-    Int_t ADC_threshold_scaled = ADC_threshold/scalefactor; 
-    double sum=histo->Integral(ADC_threshold_scaled, nbins-1); // The total integral of the spectra
-    fit.nb_hits = sum;
+    auto ADC_threshold_scaled = ADC_cast(ADC_threshold/scalefactor); 
+    auto sum=histo->Integral(ADC_threshold_scaled, nbins-1); // The total integral of the spectra
+    fit.integral = sum;
     if (sum < 50000)
     {// No calibration if not enough counts in the spectra
       if (m_verbose)
@@ -471,24 +474,24 @@ void Calibration::analyse()
       if (m_verbose) print("Pic : " , fit.peaks[j]);
       // 1st window :
       double p=fit.peaks[j]; // Energy of the peak (in keV)
-      double cguess_low  = (p-window_1)/kpc; // Low  edge of the window (in bins)
-      double cguess_high = (p+window_1)/kpc; // High edge of the window (in bins)
+      int cguess_low  = int_cast((p-window_1)/kpc); // Low  edge of the window (in bins)
+      int cguess_high = int_cast((p+window_1)/kpc); // High edge of the window (in bins)
       if (cguess_low<ADC_threshold_scaled) cguess_low = ADC_threshold_scaled; //cannot read the spectra below the ADC threshold !
       histo->GetXaxis()->SetRange(cguess_low, cguess_high); // Setup the window to the spectra
       double cmc = 0.5 + histo->GetMaximumBin();
       if (m_verbose) print("[", cguess_low*scalefactor , " , " , cguess_high*scalefactor , "] First mean = " , cmc*scalefactor);
 
       // 2nd window :
-      cguess_high = 0.5 + cmc + window_2/kpc;
-      cguess_low  = 0.5 + cmc - window_2/kpc;
+      cguess_high = int_cast(0.5 + cmc + window_2/kpc);
+      cguess_low  = int_cast(0.5 + cmc - window_2/kpc);
       histo->GetXaxis()->SetRange(cguess_low, cguess_high);
       double cm  = histo->GetMean(); //in ADC (scalefactor*bins)
       cmc = cm/scalefactor;
       if (m_verbose) print("[", cguess_low*scalefactor , " , " , cguess_high*scalefactor , "] First mean = " , cm);
 
       // 3rd window :
-      cguess_high = cmc + window_3/kpc;
-      cguess_low  = cmc - window_3/kpc;
+      cguess_high = int_cast(cmc + window_3/kpc);
+      cguess_low  = int_cast(cmc - window_3/kpc);
       histo->GetXaxis()->SetRange(cguess_low, cguess_high);
       cm  = histo->GetMean(); //in ADC
       cmc = cm/scalefactor; //in bins
@@ -561,6 +564,11 @@ void Calibration::analyse()
       fit.chi2       = binom -> GetChisquare( );
       fit.exists(true);
     }
+    else if (isBGO[label])
+    {// For BGOs, already "gain matched", a simple division by 80 roughly calibrates
+      fit.parameter0 = 0;
+      fit.parameter1 = 0.0125;
+    }
     else {
       fit.exists(false);
     }
@@ -582,7 +590,7 @@ void Calibration::setCalibrationTables()
 {
   print("creating calibration tables");
   calibration_tables.resize(m_max_labels);
-  std::vector<std::vector<float>> *calib_vec;
+  std::vector<std::vector<NRJ>> *calib_vec;
   for (Label i = 0; i<m_max_labels; i++)
   {
     calib_vec = &calibration_tables[i];
@@ -593,9 +601,9 @@ void Calibration::setCalibrationTables()
 }
 //!DEV
 
-inline float Calibration::calibrate(float const & nrj, Label const & label) const 
+inline NRJ Calibration::calibrate(NRJ const & nrj, Label const & label) const 
 {
-  auto nrj_r = nrj+gRandom->Uniform(0,1);
+  auto nrj_r = nrj + NRJ_cast(gRandom->Uniform(0,1));
   switch(m_order[label])
   {
     case 0:
@@ -635,8 +643,6 @@ inline void Calibration::calibrate(Hit & hit) const
 #elif defined (PARIS)
   if (isParis[label]) hit.nrj2 = calibrate(hit.nrj2, label);
 #endif
-
-  if (isBGO[label]) hit.nrjcal = (hit.nrj+gRandom->Uniform(0,1))/100;
   else hit.nrjcal = calibrate(hit.nrj, label);
 }
 

@@ -147,10 +147,10 @@ void EventBuilder_136::reset()
 class Counter136
 {
 public:
-  uchar nb_modules = 0;
-  uchar nb_dssd = 0;
-  uchar nb_Ge = 0;
-  uchar nb_clovers = 0;
+  size_t nb_modules = 0;
+  size_t nb_dssd = 0;
+  size_t nb_Ge = 0;
+  size_t nb_clovers = 0;
   std::vector<Label> clovers;
 
   void reset() 

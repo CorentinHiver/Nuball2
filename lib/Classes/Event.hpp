@@ -62,9 +62,9 @@ public:
 
   void clear() { mult = 0; }
 
-  std::size_t size() const { return static_cast<std::size_t>(mult); }
+  size_t size() const { return size_cast(mult); }
 
-  std::size_t const & maxSize() const { return m_maxSize; }
+  size_t const & maxSize() const { return m_maxSize; }
 
   bool isSingle() const {return (mult == 1);}
   bool isEmpty()  const {return (mult == 0);}
@@ -75,20 +75,20 @@ public:
   // Public members :
   int mult = 0;
 
-  ushort labels  [255] = {0};
-  Time   times   [255] = {0};
-  double time2s  [255] = {0};
-  float  nrjs    [255] = {0};
-  float  nrjcals [255] = {0};
-  float  nrj2s   [255] = {0};
-  float  nrj2cals[255] = {0};
-  bool   pileups [255] = {0};
+  Label   labels  [255] = {0};
+  Time    times   [255] = {0};
+  Time_ns time2s  [255] = {0};
+  ADC     nrjs    [255] = {0};
+  NRJ     nrjcals [255] = {0};
+  ADC     nrj2s   [255] = {0};
+  NRJ     nrj2cals[255] = {0};
+  Pileup  pileups [255] = {0};
 
   Read read;
   Write write;
 
 private:
-  std::size_t m_maxSize = 255;
+  size_t m_maxSize = 255;
   void* hits[8] = {labels, times, time2s, nrjs, nrjcals, nrj2s, nrj2cals, pileups};
 };
 
@@ -134,9 +134,9 @@ void Event::writting(TTree * tree, std::string const & options)
   if ( write.l )  tree -> Branch("label"   , &labels  , "label[mult]/s"  );
   if ( write.t )  tree -> Branch("time"    , &times   , "time[mult]/l"   );
   if ( write.T )  tree -> Branch("time2"   , &time2s  , "time2[mult]/D"  );
-  if ( write.e )  tree -> Branch("nrj"     , &nrjs    , "nrj[mult]/F"    );
+  if ( write.e )  tree -> Branch("nrj"     , &nrjs    , "nrj[mult]/I"    );
   if ( write.E )  tree -> Branch("nrjcal"  , &nrjcals , "nrjcal[mult]/F" );
-  if ( write.q )  tree -> Branch("nrj2"    , &nrj2s   , "nrj2[mult]/F"   );
+  if ( write.q )  tree -> Branch("nrj2"    , &nrj2s   , "nrj2[mult]/I"   );
   if ( write.Q )  tree -> Branch("nrj2cal" , &nrj2cals, "nrj2cal[mult]/F");
   if ( write.p )  tree -> Branch("pileup"  , &pileups , "pileup[mult]/O" );
 

@@ -254,7 +254,9 @@ inline void MTTHist<THist>::reset(std::string name, ARGS &&... args)
       m_is_deleted.resize(MTObject::getThreadsNb(), false);
       for (size_t i = 0; i<m_collection.size(); i++)
       {
-        m_collection[i] = new THist ((name+"_"+std::to_string(i)).c_str(), std::forward<ARGS>(args)...);
+        m_collection[i] = new THist (
+          (name+"_"+std::to_string(i)).c_str(), 
+          std::forward<ARGS>(args)...);
       }
     }
     else

@@ -3,21 +3,58 @@
 
 #include "../libRoot.hpp"
 
-using Label  = ushort;
-using Label_vec = std::vector<Label>;
-using ADC    = int;
-using ADC_vec = std::vector<ADC>;
-using NRJ = float;
-using Energy_vec = std::vector<NRJ>;
-using Time   = ULong64_t;
-using Time_vec = std::vector<Time>;
-using Pileup = bool;
-using Pileup_vec = std::vector<bool>;
+
+//////////////////
+/// Data types ///
+//////////////////
+
+using Label   = ushort;
+using ADC     = int;
+using NRJ     = float;
+using Time    = ULong64_t;
+using Time_ns = double;
+using Pileup  = bool;
 
 
-/// @brief Casts a number into unsigned int
+////////////////////
+/// Data vectors ///
+////////////////////
+
+using Label_vec   = std::vector<Label  >;
+using ADC_vec     = std::vector<ADC    >;
+using Energy_vec  = std::vector<NRJ    >;
+using Time_vec    = std::vector<Time   >;
+using Time_ns_vec = std::vector<Time_ns>;
+using Pileup_vec  = std::vector<Pileup >;
+
+
+//////////////////
+/// Data casts ///
+//////////////////
+
+/// @brief Casts a number into unsigned Label
 template<typename T,  typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
 inline Label Label_cast(T const & t) {return static_cast<Label>(t);}
+
+/// @brief Casts a number into unsigned ADC
+template<typename T,  typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
+inline ADC ADC_cast(T const & t) {return static_cast<ADC>(t);}
+
+/// @brief Casts a number into unsigned Time
+template<typename T,  typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
+inline Time Time_cast(T const & t) {return static_cast<Time>(t);}
+
+/// @brief Casts a number into unsigned NRJ
+template<typename T,  typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
+inline NRJ NRJ_cast(T const & t) {return static_cast<NRJ>(t);}
+
+/// @brief Casts a number into unsigned Time_ns
+template<typename T,  typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
+inline Time_ns Time_ns_cast(T const & t) {return static_cast<Time_ns>(t);}
+
+/////////////////////
+/// IO parameters ///
+/////////////////////
 
 /**
  * @brief Read options
@@ -25,8 +62,8 @@ inline Label Label_cast(T const & t) {return static_cast<Label>(t);}
  * 
  * l : label   label               ushort
  * t : time    absolute timestamp  ULong64_t
- * T : time2   relative timestamp  float
- * e : nrj     energy in ADC       float
+ * T : time2   relative timestamp  double
+ * e : nrj     energy in ADC       int
  * E : nrjcal  energy in keV       float
  * q : nrj2    energy QDC2 in ADC  float
  * Q : nrj2cal energy QDC2 in keV  float
@@ -123,6 +160,10 @@ struct Write
   }
 };
 
+/////////////////
+/// Hit class ///
+/////////////////
+
 /**
  * @brief This class is used to store conviniently the data from reading the faster data. You can either treat data directly or write it in root trees
  * @details
@@ -164,7 +205,7 @@ class Hit
 {
 public:
   Hit(){reset();}
-  Hit(Label _label, Time _time, float _time2, float _nrj, float _nrj2 = 0, NRJ _nrjcal = 0, NRJ _nrj2cal = 0, bool _pileup = false) : 
+  Hit(Label _label, Time _time, float _time2, ADC _nrj, ADC _nrj2 = 0, NRJ _nrjcal = 0, NRJ _nrj2cal = 0, bool _pileup = false) : 
     label  (_label),
     time   (_time),
     time2  (_time2),
@@ -175,21 +216,22 @@ public:
     pileup (_pileup)
     {}
 
-  Label label  = 0;     // Label
-  Time  time   = 0ull;  // Timestamp ('ull' stands for unsigned long long)
-  float time2  = 0.f;   // Relative time
-  float nrj    = 0.f;   // Energy
-  float nrj2   = 0.f;   // used if QDC2
-  NRJ   nrjcal = 0.f;   // Calibrated energy
-  NRJ   nrj2cal= 0.f;   // Calibrated QDC2
-  bool  pileup = false; // Pile-up
+  Label   label  = 0;     // Label
+  Time    time   = 0ull;  // Timestamp ('ull' stands for unsigned long long)
+  Time_ns time2  = 0.0;   // Relative time
+  ADC     nrj    = 0;     // Energy in ADC or QDC1
+  ADC     nrj2   = 0;     // Energy in QDC2
+  NRJ     nrjcal = 0.f;   // Calibrated energy
+  NRJ     nrj2cal= 0.f;   // Calibrated energy in QDC2
+  bool    pileup = false; // Pile-up (and saturation in QDC) tag
 
   void reset()
   {
     label  = 0;
     time   = 0ull;
-    nrj    = 0.f;
-    nrj2   = 0.f;
+    time2  = 0.f;
+    nrj    = 0;
+    nrj2   = 0;
     nrjcal = 0.f;
     nrj2cal= 0.f;
     pileup = false;

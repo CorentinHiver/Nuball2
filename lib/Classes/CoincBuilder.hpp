@@ -11,18 +11,18 @@ class CoincBuilder : public Builder
 public:
   // Constructors :
   explicit CoincBuilder() { }
-  explicit CoincBuilder(Event * _event)                                                         {m_event = _event;}
-  explicit CoincBuilder(Event * _event, Int_t const & _timeWindow) : m_time_window(_timeWindow) {m_event = _event;}
+  explicit CoincBuilder(Event * _event)                           : Builder(_event)                             {}
+  explicit CoincBuilder(Event * _event, Time const & _timeWindow) : Builder(_event), m_time_window(_timeWindow) {}
 
   // Methods :
   // Add Hits  Outputs  0: single | 1: begin of coincidence | 2: coincidence complete
-  Bool_t build(Hit const & _hit);
+  bool build(Hit const & _hit);
 
-  void   reset() {m_event -> clear(); m_status = 0;}
-  Bool_t coincidence(Hit const & hit) {return ((hit.time - m_last_hit.time) < m_time_window);}
+  void reset() {m_event -> clear(); m_status = 0;}
+  bool coincidence(Hit const & hit) {return ((hit.time - m_last_hit.time) < m_time_window);}
 
   // Setters :
-  void setTimeWindow(Int_t const & _timeWindow) {m_time_window = _timeWindow;}
+  void setTimeWindow(Time const & _timeWindow) {m_time_window = _timeWindow;}
 
   // Printers :
   void printEvent();
@@ -32,7 +32,7 @@ private:
   Time m_time_window = 500000ull; // 500 000 ps by default (ull = unsigned long long)
 };
 
-Bool_t CoincBuilder::build(Hit const & hit)
+bool CoincBuilder::build(Hit const & hit)
 {//return true when a coincidence is ready to be processed
   if(m_event->mult>255) reset();
   if (!coincON)

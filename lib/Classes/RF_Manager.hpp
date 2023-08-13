@@ -135,7 +135,7 @@ public:
 
 private:
   bool m_ok = false;
-  Long64_t m_cursor = 0;
+  int m_cursor = 0;
 };
 
 #ifdef ALIGNATOR_HPP

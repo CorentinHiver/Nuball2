@@ -354,7 +354,8 @@ bool FasterReader::ReadData(faster_data_p const & _data)
     std::cout << "COMPILE IN GROUP MODE !!!" << std::endl;
     #endif //FASTER_GROUP
   }
-  m_hit -> time = faster_data_hr_clock_ns(_data) * 1000;// Stores the time in ps
+  m_hit -> time = Time_cast(faster_data_hr_clock_ns(_data) * 1000);// Stores the time in ps
+  print(sizeof(m_hit -> time, faster_data_hr_clock_ns(_data) * 1000));
   m_write = switch_alias(m_alias, _data);
 #ifdef FASTER_GROUP
   if (m_inGroup && m_write)
@@ -519,7 +520,7 @@ void FasterReader::TreatRF(const faster_data_p& data)
    rf_data rf;
    faster_data_load(data, &rf);
 
-   m_hit->nrj = rf_period_ns(rf)*1000;
+   m_hit->nrj = ADC_cast(rf_period_ns(rf)*1000);
  #ifndef QDC1MAX
    m_hit->nrj2 = 0;
  #endif //QDC1MAX
