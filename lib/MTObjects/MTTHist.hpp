@@ -49,6 +49,29 @@
  *    You can then address the merged histogram using -> : 
  *        
  *        some_TH1F_histo->Integral();
+ * 
+ * Special case : you can also instanciate and write down one histogram per thread.
+ * 
+ * Example : 
+ *        void single_thread(MTTHist & histo)
+ *        {
+ *          histo.reset("name","title", args...);
+ *          ... Fill the histo
+ *          histo.Write();
+ *        }
+ * 
+ *        int main()
+ *        {
+ *          MTTHist<TH1> on_histo_per_thread;
+ *          std::parallelise_function(single_thread, on_histo_per_thread);
+ *          return 1;
+ *        }
+ * 
+ * In this case each histogram is kept separated, no merge occurs. Use this if you want to make the benefits of the user defined
+ * method of this class or for consistency with the rest of the code. It is equivalent to declare the histogram directly inside 
+ * the funcion
+ * 
+ * 
  */
 // class MTTHist : public MTObject
 template <class THist>
@@ -263,9 +286,8 @@ inline void MTTHist<THist>::Fill(ARGS &&... args)
 {
   m_integral++;
 #ifdef MTTHIST_MONO
-  m_mutex.lock();
+  lock_mutex lock(m_mutex);
   m_merged -> Fill(std::forward<ARGS>(args)...);
-  m_mutex.unlock();
 
 #else // not MTTHIST_MONO :
   m_collection[MTObject::getThreadIndex()]->Fill(std::forward<ARGS>(args)...);
@@ -280,7 +302,7 @@ void MTTHist<THist>::Merge()
   if (!m_exists || !m_collection.size() || m_collection[0] -> IsZombie() || this -> Integral() < 1)
   {
     m_exists = false;
-    delete m_merged;
+    // delete m_merged;
     m_is_merged = false;
   }
   else
@@ -315,7 +337,7 @@ THist* MTTHist<THist>::Merged()
 {
   if (!m_is_merged)
   {
-    print("No merged histogram yet ! Issues in the code :/");
+    print("No merged histogram yet");
     return (new THist());
   }
   else return m_merged;
@@ -338,6 +360,7 @@ void MTTHist<THist>::Write()
       reset(nullptr); // Not sure this is truly safe...
       m_written = true;
   }
+
   else
   {// If we are in one histo per thread mode :
     auto const & thread_i = MTObject::MTObject::getThreadIndex();

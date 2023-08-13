@@ -14,6 +14,11 @@ using Time_vec = std::vector<Time>;
 using Pileup = bool;
 using Pileup_vec = std::vector<bool>;
 
+
+/// @brief Casts a number into unsigned int
+template<typename T,  typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
+inline Label Label_cast(T const & t) {return static_cast<Label>(t);}
+
 /**
  * @brief Read options
  * @details

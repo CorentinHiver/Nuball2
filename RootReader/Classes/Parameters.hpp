@@ -24,8 +24,8 @@ public:
   ushort & threadsNb() {return m_nbThreads;}
   FilesManager & files () {return m_files;}
 
-  MTList<std::string> & filesMT() {return m_list_files;}
-  MTList<std::string> & getRunsList() {return m_list_runs;}
+  MTList & filesMT() {return m_list_files;}
+  MTList & getRunsList() {return m_list_runs;}
 
   bool getNextFile(std::string & filename) {return m_list_files.getNext(filename);}
   bool getNextRun(std::string & run) {return m_list_runs.getNext(run);}
@@ -41,7 +41,7 @@ public:
   void printPerformances()
   {
     totalTime(); // one has to get the time in order to prepare the units
-    print("Analysis of", totalCounter()/1000000., "Mevts (", totalFilesSize(), "Mo) performed in", totalTime(), totalTime.unit(),
+    print("Analysis of", totalCounter/1000000., "Mevts (", totalFilesSize, "Mo) performed in", totalTime(), totalTime.unit(),
     "->", totalCounter/totalTime.TimeSec()/1000000., "Mevts/s (", totalFilesSize/totalTime.TimeSec(), "Mo/s)");
   }
 
@@ -59,8 +59,8 @@ private:
   std::string m_dataPath;
   FilesManager m_files;
   UInt_t m_nb_files_per_run = 9999;
-  MTList<std::string> m_list_files;
-  MTList<std::string> m_list_runs;
+  MTList m_list_files;
+  MTList m_list_runs;
   bool m_TW_correct = false;
   std::string m_TW_file;
 

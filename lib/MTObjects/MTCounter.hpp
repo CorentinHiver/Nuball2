@@ -3,44 +3,32 @@
 
 #include "MTObject.hpp"
 
+/**
+ * @brief Atomic counter with convenient overloaded operators
+ * 
+ */
 class MTCounter 
 {
 public:
-  MTCounter(){}
+  MTCounter() = default;
 
-  operator int() { return static_cast<int>(m_counter); }
-  operator float() {return static_cast<float>(m_counter);}
-  operator std::size_t() const & { return m_counter; }
-  std::size_t const & get() const { return m_counter; }
-  std::size_t const & operator() () const {return m_counter;}
+  template<typename T>
+  MTCounter(T const & value) : m_counter(size_cast(value)) {}
 
-  void operator++() {m_mutex.lock(); m_counter++; m_mutex.unlock();}
-  std::size_t& operator++(int) {m_mutex.lock(); m_counter++; m_mutex.unlock();return m_counter;}
+  operator size_t() const { return m_counter.load(); }
+  size_t const get() const { return m_counter.load(); }
 
-  template <typename T>
-  void operator+=(T const & t)
-  {
-    m_mutex.lock();
-    m_counter+=static_cast<std::size_t>(t);
-    m_mutex.unlock();
-  }
+  void operator++() {m_counter.fetch_add(1, std::memory_order_relaxed);} // to do ++counter
+  size_t operator++(int) {return m_counter.fetch_add(1, std::memory_order_relaxed);}// to do counter++
 
   template <typename T>
-  void operator=(T const & t)
-  {
-    m_mutex.lock();
-    m_counter = static_cast<std::size_t>(t);
-    m_mutex.unlock();
-  }
+  void operator+=(T const & t) {m_counter.fetch_add(size_cast(t), std::memory_order_relaxed);}
 
-  float operator/(float const & v) {return static_cast<float>(m_counter)/v;}
-  float operator*(float const & v) {return static_cast<float>(m_counter)/v;}
-  double  operator*(double  const & v) {return static_cast<double >(m_counter)/v;}
-  std::size_t operator*(std::size_t  const & v) {return static_cast<std::size_t >(m_counter)/v;}
+  template <typename T>
+  void operator=(T const & t) {m_counter.store(size_cast(t), std::memory_order_relaxed);}
 
 private:
-  std::mutex m_mutex;
-  std::size_t m_counter = 0;
+  std::atomic<size_t> m_counter{0};
 };
 
 std::ostream& operator<<(std::ostream& os, MTCounter const & counter)

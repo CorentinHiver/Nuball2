@@ -95,7 +95,7 @@ public:
   void makeArrays();
 
   /// @brief Return the value of the maximum label, i.e. the size of the lookup tables
-  auto const size() const {return m_list.size();}
+  auto const size() const {return uchar_cast(m_list.size());}
 
   /// @brief  Return the real number of detectors
   static auto const number() {return nb_detectors;}
@@ -194,7 +194,7 @@ void Detectors::readFile(std::string const & filename)
   }
   // ----------------------------------------------------- //
   //First reading of the file : extract the maximum label to be the size of the vector
-  ushort size = 0; std::string line = "", name = ""; int label = 0;
+  ushort size = 0; std::string line = "", name = ""; ushort label = 0;
   std::string oneline;
   while (getline(inputfile, oneline))
   {
@@ -231,7 +231,7 @@ void Detectors::makeArrays()
     // The following is used to fill the compressedLabel array :
 
   // Looping around the labels
-  for (auto label = 0ul; label<this->size(); label++)
+  for (Label label = 0; label<this->size(); label++)
   {
     std::istringstream is(replaceCharacter(m_list[label], '_', ' '));
     std::string str;
@@ -299,8 +299,8 @@ void Detectors::makeArrays()
     }
 
     // Other lookup tables :
-    isClover[label] = label>22 && label<167;
-    labelToClover[label] = (isClover[label]) ? (label-23)%6 : -1;
+    isClover[label] = (label>22 && label<167);
+    labelToClover[label] = static_cast<Label>((isClover[label]) ? (label-23)%6 : -1);
     // labelToBGOcrystal[label] = (isBGO[label]) ? (2*(label-23)/6 + (label+1)%6) : (-1);
      
     if (exists[label])

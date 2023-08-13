@@ -78,6 +78,7 @@ void RWMat::Reset(THist* RootMat)
   if (RootMat->Integral() < 0)
   {
     print(RootMat->GetName(), "empty !!");
+    m_ok = false;
     return;
   }
   if (!RootMat -> InheritsFrom("TH2")) {print(RootMat->GetName(),"is not a TH2x !!"); return;}
@@ -92,13 +93,10 @@ void RWMat::Reset(THist* RootMat)
     fRWMat=new int*[fNChannels];
     for(int i=0 ; i < fNChannels ; i++) fRWMat[i] = new int[fNChannels];
     double val=0;
-    for (int i=0; i < xchans ; i++)
+    for (int i=0; i < xchans ; i++) for (int j=0; j < ychans ; j++)
     {
-      for (int j=0; j < ychans ; j++)
-      {
-        fRWMat[i][j]=RootMat->GetBinContent(i,j);
-        val+=fRWMat[i][j];
-      }
+      fRWMat[i][j]=RootMat->GetBinContent(i,j);
+      val+=fRWMat[i][j];
     }
   }
 }
@@ -109,7 +107,7 @@ RWMat::~RWMat()
   {
     print("RWMat", fName, "double delete, be careful !!");
   }
-  else 
+  else if (m_ok)
   {
     for (int i=0; i < fNChannels; i++) delete [] fRWMat[i];
     delete [] fRWMat;

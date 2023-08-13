@@ -5,25 +5,42 @@
 #include "../libCo.hpp"
 
 template<class T>
-class MTList
+class MTVector
 {
 public:
-  MTList(){}
-  MTList(std::vector<T> const & collection) : m_collection(collection) {m_size = m_collection.size();}
+  MTVector() = default;
+  MTVector(std::vector<T> const & collection) : 
+    m_collection(collection), 
+    m_size(m_collection.size()) {}
 
-  void set(std::vector<T> const & collection) {m_collection = collection; m_size = m_collection.size();}
+  void set(std::vector<T> const & collection) 
+  {
+    lock_mutex lock(m_mutex);
+    m_collection = collection; 
+    m_size = m_collection.size();
+    resetRead();
+  }
+
   typename std::vector<T> const & get() const {return m_collection;}
 
   bool getNext(T & t);
   bool getNext(T & t, size_t & index);
-  void reset() {m_i = 0;}
-  void resize(int const & i = 0) {m_i = m_size = i; m_collection.resize(i);}
-
+  void resetRead() {m_read_index = 0;}
+  void clear() {m_collection.clear();}
+  void resize(size_t const & i = 0) 
+  {
+    lock_mutex lock(m_mutex);
+    m_size = i; 
+    m_collection.resize(i);
+    resetRead();
+  }
+    
   size_t const & size() const {return m_size;}
   T const & operator[] (size_t const & i) {return m_collection[i];}
 
-  MTList& operator=(T const & t) 
+  MTVector& operator=(T const & t) 
   {
+    lock_mutex lock(m_mutex);
     resize();
     this->push_back(t);
     return *this;
@@ -36,58 +53,54 @@ public:
 
   void operator=(std::vector<T> const & collection) {this->set(collection);}
 
-  void push_back(T const & t) {;m_collection.push_back(t); m_size++;;}
+  void push_back(T const & t) {m_collection.push_back(t); m_size++;;}
 
-  void Print() {print(m_collection);}
+  void Print() 
+  {
+    lock_mutex lock(m_mutex);
+    print(m_collection);
+  }
 
 private:
+  mutable std::mutex m_mutex;
   std::vector<T> m_collection;
   size_t m_size = 0;
-  size_t m_i = 0;
+  size_t m_read_index = 0;
 };
 
+using MTList = MTVector<std::string>;
+
 template<class T>
-std::ostream& operator<<(std::ostream& cout, MTList<T> const & list)
+std::ostream& operator<<(std::ostream& cout, MTVector<T> const & list)
 {
   cout << list.get();
   return cout;
 }
 
 template<class T>
-inline bool MTList<T>::getNext(T & t)
+inline bool MTVector<T>::getNext(T & t)
 {
-  MTObject::mutex.lock();
-  if (m_i<m_size)
+  lock_mutex lock(m_mutex);
+  if (m_read_index<m_size)
   {
-    t = m_collection[m_i];
-    m_i++;
-    MTObject::mutex.unlock();
+    t = m_collection[m_read_index];
+    ++m_read_index;
     return true;
   }
-  else
-  {
-    MTObject::mutex.unlock();
-    return false;
-  }
+  return false;
 }
 
 template<class T>
-inline bool MTList<T>::getNext(T & t, size_t & index)
+inline bool MTVector<T>::getNext(T & t, size_t & index)
 {
-  MTObject::mutex.lock();
-  if (m_i<m_size)
+  lock_mutex lock(m_mutex);
+  if (m_read_index<m_size)
   {
-    t = m_collection[m_i];
-    m_i++;
-    index = m_i;
-    MTObject::mutex.unlock();
+    t = m_collection[m_read_index];
+    index = m_read_index++;
     return true;
   }
-  else
-  {
-    MTObject::mutex.unlock();
-    return false;
-  }
+  return false;
 }
 
 #endif //MTLIST_H

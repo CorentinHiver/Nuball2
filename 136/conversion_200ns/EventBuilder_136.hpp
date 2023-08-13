@@ -66,8 +66,10 @@ void push_back_136(Event * event, Hit const & hit)
 bool EventBuilder_136::build(Hit const & hit)
 {
   if(m_event->mult>255) reset(); // 255 is the maximum number of hits allowed inside of an event
+
   if (!coincON)
   { // If no coincidence has been detected in previous iteration :
+
     if (this->inTimeRange(hit))
     {// Case 1 :
       // The previous and current hit are in the same event.
@@ -75,7 +77,7 @@ bool EventBuilder_136::build(Hit const & hit)
       m_event -> clear();
     #ifdef PREPROMPT
       if ( static_cast<Long64_t>(m_RF_ref_time-m_single_hit.time) < static_cast<Long64_t>(m_rf->period))
-          m_event -> push_back(m_single_hit);
+          m_event -> push_front(m_single_hit);
     #endif //PREPROMPT
       push_back_136(m_event, m_last_hit);
       push_back_136(m_event, hit);
@@ -96,7 +98,7 @@ bool EventBuilder_136::build(Hit const & hit)
   }
 
   else
-  { // If the two previous hits are in the same event, checking if the current hit is :
+  { // If the two previous hits are in the same event, checking if the current one is :
     if (this->inTimeRange(hit))
     {// Case 3 :
       // print(hit.time, hit.label, (hit.time-m_RF_ref_time)/1000., m_rf->period/1000.);

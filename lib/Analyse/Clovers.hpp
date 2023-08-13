@@ -12,33 +12,33 @@
 
 std::array<float, 48> BGO_coeff = 
 {
-1.1747, 1.2617,
-1.2617, 1.2342,
-0.1729, 0.51  ,
-1.0199, 0.9358,
-1.,     1.,
-1.1181, 1.1801,
+1.1747f, 1.2617f,
+1.2617f, 1.2342f,
+0.1729f, 0.51f,
+1.0199f, 0.9358f,
+1.f,     1.f,
+1.1181f, 1.1801f,
 
-1.3342, 1.3590,
-1.3482, 1.3885,
-1.3102, 1.,
-1.1967, 1.1640,
-1.02,   1.0179,
-1.0471, 1.0690,
+1.3342f, 1.3590f,
+1.3482f, 1.3885f,
+1.3102f, 1.f,
+1.1967f, 1.1640f,
+1.02f,   1.0179f,
+1.0471f, 1.0690f,
 
-1.4394, 1.3663,
-1.0078, 0.9845,
-1.3204, 1.0872,
-1.0849, 1.02,
-1.4811, 1.3626,
-1.2433, 1.2283,
+1.4394f, 1.3663f,
+1.0078f, 0.9845f,
+1.3204f, 1.0872f,
+1.0849f, 1.02f,
+1.4811f, 1.3626f,
+1.2433f, 1.2283f,
 
-1.1132, 1.1355,
-1.1157, 1.1280,
-1.3810, 1.3002,
-1,1,
-1,1,
-1,1
+1.1132f, 1.1355f,
+1.1157f, 1.1280f,
+1.3810f, 1.3002f,
+1.f,1.f,
+1.f,1.f,
+1.f,1.f
 };
 
 /**
@@ -81,7 +81,7 @@ public:
   // static inline bool is_clover_BGO (Label const & l) {return ((is_clover(l)) ? ((l-1)%6 > 3) : false);}
 
   // Correspondance between detector label and crystal index :
-  static inline uchar label_to_clover   (Label const & l) {return ((l-23)/6);} // Ranges from 0 to 23
+  static inline uchar label_to_clover   (Label const & l) {return static_cast<uchar>((l-23)/6);} // Ranges from 0 to 23
   static        uchar label_to_cristal  (Label const & l);
 
   static std::array<bool, 1000> is;          // Array used to know if a given detector is a clover
@@ -128,7 +128,7 @@ public:
 
   Clovers(){Initialize(); m_Clovers.resize(24); Reset();}
   void SetEvent(Event const & event);
-  Bool_t Fill(Event const & event, int const & index);
+  bool Fill(Event const & event, uchar const & index);
   void Reset();
 
   //_______________________ //
@@ -142,14 +142,14 @@ public:
   std::array<float, 96>   cristaux_nrj; // Array containing the energy of each Ge  cristal
   std::array<double, 96>  cristaux_time;// Array containing the time of each Ge  cristal
 
-  std::size_t CrystalMult = 0; // Ge crystals counter
+  uchar CrystalMult = 0; // Ge crystals counter
 
   // BGO Crystals :
   StaticVector<uchar> cristaux_BGO = StaticVector<uchar>(48);     // List of indexes of BGO crystals in the event
   std::array<float, 48>   cristaux_nrj_BGO; // Array containing the energy of each BGO cristal
   std::array<double, 48>  cristaux_time_BGO;// Array containing the absolute time of each BGO cristal
 
-  std::size_t CrystalMult_BGO = 0; // BGO crystals counter
+  uchar CrystalMult_BGO = 0; // BGO crystals counter
 
   //_______________________ //
   // ------ Clovers ------- //
@@ -162,10 +162,10 @@ public:
   CloverModule operator[] (uchar const & i) const {return m_Clovers[i];}
   auto begin() const {return m_Clovers.begin();}
   auto end()   const {return m_Clovers.end  ();}
-  uint size()  const {return Hits.size()      ;}
+  uchar size()  const {return static_cast<uchar>(Hits.size());}
   void Analyse();
-  bool isPrompt (CloverModule const & clover) {return promptGate(clover.time, clover.nrj) ;}
-  bool isDelayed(CloverModule const & clover) {return delayedGate(clover.time, clover.nrj);}
+  bool isPrompt (CloverModule const & clover) {return promptGeGate(clover.time, clover.nrj) ;}
+  bool isDelayed(CloverModule const & clover) {return delayedGeGate(clover.time, clover.nrj);}
 
   // Positions in the raw event :
   StaticVector<uchar> rawGe  = StaticVector<uchar>(96); //List of the position of the raw Ge  in the event
@@ -186,15 +186,15 @@ public:
   std::vector<CloverModule> m_Clovers; // Array containing the 24 clovers
 
   // Counters :
-  std::size_t Mult = 0;
-  std::size_t GeMult = 0;
-  std::size_t RejectedMult = 0;
-  std::size_t CleanGeMult = 0;
-  std::size_t BGOMult = 0;
-  std::size_t BGOOnlyMult = 0;
+  uchar Mult = 0;
+  uchar GeMult = 0;
+  uchar RejectedMult = 0;
+  uchar CleanGeMult = 0;
+  uchar BGOMult = 0;
+  uchar BGOOnlyMult = 0;
   // (only clean germaniums in the following :)
-  std::size_t PromptMult = 0;
-  std::size_t DelayedMult = 0;
+  uchar PromptMult = 0;
+  uchar DelayedMult = 0;
 
 private:
   // Parameters :
@@ -241,21 +241,22 @@ public:
      */
     bool operator() (double const & time, float const & energy)
     {
-           if (energy > m_high_E) return m_high_E_gate.isIn(time);
-      else if (energy > m_low_E)  return (time > intermediate_start(energy) && time < intermediate_stop(energy));
-      else                        return m_low_E_gate.isIn(time);
+      auto const & timef = static_cast<float>(time);
+           if (energy > m_high_E) return m_high_E_gate.isIn(timef);
+      else if (energy > m_low_E)  return (timef > intermediate_start(energy) && timef < intermediate_stop(energy));
+      else                        return m_low_E_gate.isIn(timef);
     }
 
   private:
     float m_high_E = 200;
-    float m_low_E = 50;
-    Gate m_high_E_gate = {-15, 7};
-    Gate m_low_E_gate = {-20, 40};
+    float m_low_E  = 50;
+    Gate m_high_E_gate = {-15.d, 7.d };
+    Gate m_low_E_gate  = {-20.d, 40.d};
     float m_start_coeff = 0.f;
     float m_start_intercept = 0.f;
     float m_stop_coeff = 0.f;
     float m_stop_intercept = 0.f;
-  } promptGate;
+  } promptGeGate;
 
   class DelayedGate
   {
@@ -263,19 +264,20 @@ public:
     DelayedGate(){}
     bool operator() (double const & time, float const & energy)
     {
-      if (energy > m_low_E) return m_high_E_gate.isIn(time);
-      else                  return m_low_E_gate.isIn(time);
+      auto const & timef = static_cast<float>(time);
+      if (energy > m_low_E) return m_high_E_gate.isIn(timef);
+      else                  return m_low_E_gate.isIn(timef);
     }
 
   private:
     float m_high_E = 100;
     float m_low_E = 100;
-    Gate m_high_E_gate = {40, 145};
-    Gate m_low_E_gate  = {60, 145};
-  } delayedGate;
+    Gate m_high_E_gate = {40.f, 145.f};
+    Gate m_low_E_gate  = {60.f, 145.f};
+  } delayedGeGate;
 
-  Gate prompt_BGO_gate = {-20, 10};
-  Gate delayed_BGO_gate = {60, 145};
+  Gate promptBGOgate = {-20.f, 10.f };
+  Gate delayedBGOgate = {60.f, 145.f};
 };
 
 // ---- Initialize static members : ----- //
@@ -352,11 +354,11 @@ void Clovers::Reset()
 void Clovers::SetEvent(Event const & event)
 {
   Reset();
-  for (size_t i = 0; i<event.size(); i++) this -> Fill(event, i);
+  for (uchar i = 0; i<event.size(); i++) this -> Fill(event, i);
 }
 
 /// @brief 
-Bool_t Clovers::Fill(Event const & event, int const & hit_index)
+bool Clovers::Fill(Event const & event, uchar const & hit_index)
 {
   auto const & label = event.labels[hit_index];
 
@@ -364,7 +366,7 @@ Bool_t Clovers::Fill(Event const & event, int const & hit_index)
   {
     auto const & index_clover = labels[label];
 
-    auto const & nrj  = event.nrjcals[hit_index];
+    auto nrj  = event.nrjcals[hit_index] + static_cast<float>(gRandom->Uniform(0,1));
     auto const & time = event.time2s[hit_index];
 
     auto & clover = m_Clovers[index_clover];
@@ -377,13 +379,19 @@ Bool_t Clovers::Fill(Event const & event, int const & hit_index)
       // -------------------------------------- //
       // --- Individual crystals managing : --- //
 
+      // Ge crystal index (ranges from 0 to 96):
+      auto const & index_cristal = cristaux_index[label];
+      // RUSTINE A ENLEVER AVEC UNE BONNE CALIB :
+           if (index_cristal == 3) nrj = nrj*0.855f+5.6f;
+      else if (index_cristal == 27) nrj = nrj*0.03027f-0.32f;
+      else if (index_cristal == 30) nrj = nrj*0.0205f+0.138f;
+
+      if (nrj>10000) return false; // Set a maximum nrj deposition in a single crystal (can be more in the total clover of course)
+
       CrystalMult++;
 
       // Position of the hit in the event :
       rawGe.push_back(hit_index);
-
-      // Ge crystal index (ranges from 0 to 96):
-      auto const & index_cristal = cristaux_index[label];
 
       // Fill the vector containing the list of all the Ge crystals that fired :
       cristaux.push_back(index_cristal);
@@ -414,9 +422,10 @@ Bool_t Clovers::Fill(Event const & event, int const & hit_index)
       // Detailed analysis :
       if (nrj>507 && nrj<516) has511 = true;
       totGe+=nrj;
-           if (prompt_BGO_gate(time) ) totGe_prompt+=nrj;
-      else if (delayed_BGO_gate(time)) totGe_delayed+=nrj;
+           if (promptGeGate (time, nrj)) totGe_prompt+=nrj;
+      else if (delayedGeGate(time, nrj)) totGe_delayed+=nrj;
     }
+
     else
     {// if isBGO[label] :
 
@@ -453,8 +462,8 @@ Bool_t Clovers::Fill(Event const & event, int const & hit_index)
       // Manage the time of the BGOs. To be improved if necessary : if 2 BGOs, only the latest one is stored
       clover.time_BGO = time;
       totBGO+=nrj*BGO_coeff[index_cristal];
-           if (prompt_BGO_gate(time) ) totBGO_prompt +=nrj*BGO_coeff[index_cristal];
-      else if (delayed_BGO_gate(time)) totBGO_delayed+=nrj*BGO_coeff[index_cristal];
+           if (promptBGOgate(time) ) totBGO_prompt +=nrj*BGO_coeff[index_cristal];
+      else if (delayedBGOgate(time)) totBGO_delayed+=nrj*BGO_coeff[index_cristal];
     }
    
     return true;
@@ -503,11 +512,11 @@ void Clovers::Analyse()
 
 uchar Clovers::label_to_cristal(Label const & l)
 {
-  auto const cristal = l-23;
-  auto const clover_cristal = cristal%6;
+  auto const cristal = static_cast<uchar>(l-23);
+  auto const clover_cristal = static_cast<uchar>(cristal%6);
 
   // BGO : 
-  if (clover_cristal<2) return clover_cristal+2*(cristal/6);
+  if (clover_cristal<2) return static_cast<uchar>(clover_cristal+2*(cristal/6));
   
   // Ge :
   else
@@ -532,10 +541,10 @@ uchar Clovers::label_to_cristal(Label const & l)
     case 17:
       switch(Ge_cristal)
       {
-        case 0: return cristal_index+0; // Red
-        case 1: return cristal_index+0; // Green
-        case 2: return cristal_index+1; // Black
-        case 3: return cristal_index-1; // Blue
+        case 0: return static_cast<uchar>(cristal_index+0); // Red
+        case 1: return static_cast<uchar>(cristal_index+0); // Green
+        case 2: return static_cast<uchar>(cristal_index+1); // Black
+        case 3: return static_cast<uchar>(cristal_index-1); // Blue
         default : return -1;
       }
 
@@ -543,10 +552,10 @@ uchar Clovers::label_to_cristal(Label const & l)
     case 2: case 3:
       switch(Ge_cristal)
       {
-        case 0: return cristal_index+3; // Red
-        case 1: return cristal_index+1; // Green
-        case 2: return cristal_index-2; // Black
-        case 3: return cristal_index+0; // Blue
+        case 0: return static_cast<uchar>(cristal_index+3); // Red
+        case 1: return static_cast<uchar>(cristal_index+1); // Green
+        case 2: return static_cast<uchar>(cristal_index-2); // Black
+        case 3: return static_cast<uchar>(cristal_index+0); // Blue
         default : return -1;
       }
 
@@ -554,25 +563,25 @@ uchar Clovers::label_to_cristal(Label const & l)
     case 4:
       switch(Ge_cristal)
       {
-        case 0: return cristal_index+1; // Red
-        case 1: return cristal_index+2; // Green
-        case 2: return cristal_index+0; // Black
-        case 3: return cristal_index-3; // Blue
+        case 0: return static_cast<uchar>(cristal_index+1); // Red
+        case 1: return static_cast<uchar>(cristal_index+2); // Green
+        case 2: return static_cast<uchar>(cristal_index+0); // Black
+        case 3: return static_cast<uchar>(cristal_index-3); // Blue
         default : return -1;  
       }
 
       default: // All the correctly turned clovers:
       switch(Ge_cristal)
       {
-        case 0: return cristal_index+2; // Red
-        case 1: return cristal_index-1; // Green
-        case 2: return cristal_index-1; // Black
-        case 3: return cristal_index+0; // Blue
+        case 0: return static_cast<uchar>(cristal_index+2); // Red
+        case 1: return static_cast<uchar>(cristal_index-1); // Green
+        case 2: return static_cast<uchar>(cristal_index-1); // Black
+        case 3: return static_cast<uchar>(cristal_index+0); // Blue
         default : return -1;
       }
     }
   }
-  return -1;
+  return 255u;
 }
 
 std::ostream& operator<<(std::ostream& cout, Clovers const & clovers)

@@ -9,25 +9,25 @@ public:
   Timewalk(){}
   Timewalk(std::string const & filename){loadFile(filename);}
   void loadFile(std::string const & filename);
-  Float_t const & get(Float_t const & nrj);
-  void Print(){for (size_t i = 0; i<m_Timewalk.size(); i++) print(i*m_keVperBin, m_Timewalk[i]);}
-  void resize(size_t const & size, Float_t const & value = 0.) {m_Timewalk.resize(size, value);}
-  void resize() {m_Timewalk.resize(max, 0.);}
-  static void setMax(Float_t const & _max) {max = _max;}
-  static Float_t const & getMax() {return max;}
+  float const & get(float const & nrj);
+  void Print(){for (size_t i = 0; i<m_Timewalk.size(); i++) print(static_cast<float>(i)*m_keVperBin, m_Timewalk[i]);}
+  void resize(size_t const & size, float const & value = 0.) {m_Timewalk.resize(size, value);}
+  void resize() {m_Timewalk.resize(static_cast<int>(max), 0.);}
+  static void setMax(float const & _max) {max = _max;}
+  static float const & getMax() {return max;}
   auto & operator[] (int const & i) {return m_Timewalk[i];}
 
 private:
-  Float_t m_keVperBin = 1.;
-  std::vector<Float_t> m_Timewalk;
-  static Float_t max;
+  float m_keVperBin = 1.;
+  std::vector<float> m_Timewalk;
+  static float max;
   bool isON;
-  Float_t m_float_zero = 0.;
+  float m_float_zero = 0.;
 };
 
-Float_t Timewalk::max = 10000;
+float Timewalk::max = 10000.f;
 
-inline Float_t const & Timewalk::get(Float_t const & nrj)
+inline float const & Timewalk::get(float const & nrj)
 {
   return (isON) ? ((nrj>Timewalk::max) ? m_float_zero : m_Timewalk[static_cast<int>(nrj/m_keVperBin)])
                 : m_float_zero;
@@ -36,8 +36,8 @@ inline Float_t const & Timewalk::get(Float_t const & nrj)
 void Timewalk::loadFile(std::string const & filename)
 {
   // ---- Loading file ---- //
-  std::vector<Float_t> Energies;
-  std::vector<Float_t> Timewalk;
+  std::vector<float> Energies;
+  std::vector<float> Timewalk;
   std::ifstream f (filename, std::ios::in);
   if (!f.good()) {isON = false; return;}
   std::string line;
@@ -51,7 +51,7 @@ void Timewalk::loadFile(std::string const & filename)
   else isON = true;
   m_keVperBin = Energies[2]-Energies[1];
   // ---- Filling arrays ---- //
-  size_t bin = 0;
+  float bin = 0;
   // 1 : extend the first bin timewalk towards 0
   while (bin*m_keVperBin < Energies[0]) {m_Timewalk.push_back(Timewalk[0]);bin++;}
   // 2 : fill normally the vector until max is reached
@@ -59,11 +59,13 @@ void Timewalk::loadFile(std::string const & filename)
   while (bin*m_keVperBin < max) {m_Timewalk.push_back(Timewalk[j]);bin++;j++;}
   // --- Check for aberrous values --- //
   for (size_t i = 0; i<m_Timewalk.size(); i++)
-    if (i*m_keVperBin>5000 && abs(m_Timewalk[i]-m_Timewalk[i-1]) > 15)
+  {
+    if (static_cast<float>(i)*m_keVperBin>5000 && abs(m_Timewalk[i]-m_Timewalk[i-1]) > 15)
     {
-      print(rmPathAndExt(filename), i*m_keVperBin, m_Timewalk[i]);
+      print(rmPathAndExt(filename), static_cast<float>(i)*m_keVperBin, m_Timewalk[i]);
       m_Timewalk[i] = m_Timewalk[i-1];
     }
+  }
 }
 
 /**
@@ -83,36 +85,36 @@ private:
   std::vector<T> m_parameters;
 };
 
-using TWparameters = fParameters<4, Float_t>;
+using TWparameters = fParameters<4, float>;
 
 class Timewalks
 {
 public:
   Timewalks(){};
   void loadFile(std::string const & filename);
-  std::vector<Float_t> & operator[] (int const & i) {return m_timewalks[i];}
+  std::vector<float> & operator[] (int const & i) {return m_timewalks[i];}
   void resize(int const & i = 0) {m_timewalks.resize(i); m_parameters.resize(i);}
-  Float_t timewalk(Float_t Q, Float_t a, Float_t b, Float_t t0, Float_t factor) {return factor*(t0+a/TMath::Sqrt(Q+b));}
-  Float_t timewalk(Float_t Q, TWparameters const & p) {return p[3]*(p[2]+p[0]/TMath::Sqrt(Q+p[1]));}
-  Float_t const & get(int const & label, Float_t const & Q);
-  static void setMax(Float_t const & _max) {Timewalk::setMax(_max);}
+  float timewalk(float Q, float a, float b, float t0, float factor) {return factor*(t0+a/static_cast<float>(TMath::Sqrt(Q+b)));}
+  float timewalk(float Q, TWparameters const & p) {return p[3]*(p[2]+p[0]/static_cast<float>(TMath::Sqrt(Q+p[1])));}
+  float const & get(int const & label, float const & Q);
+  static void setMax(float const & _max) {Timewalk::setMax(_max);}
 
 private:
-  std::vector<std::vector<Float_t>> m_timewalks;
+  std::vector<std::vector<float>> m_timewalks;
   std::vector<TWparameters> m_parameters;
-  Float_t Emin = 0.;
-  Float_t Emax = 20000.;
-  Float_t Tmax = 100.;
-  Float_t Tmin = 0.;
+  float Emin = 0.;
+  float Emax = 20000.;
+  float Tmax = 100.;
+  float Tmin = 0.;
   bool isON = false;
 };
 
-Float_t const & Timewalks::get(int const & label, Float_t const & Q)
+float const & Timewalks::get(int const & label, float const & Q)
 {
   if (Q>Emax) return Tmin;
   else
   {
-    auto const & y = m_timewalks[label][Q];
+    auto const & y = m_timewalks[label][static_cast<size_t>(Q)];
     return (y>Tmax) ? Tmax : y;
   }
 }
@@ -143,16 +145,17 @@ void Timewalks::loadFile(std::string const & filename)
     int l = 0;
     is >> l;
     l-=800;
-    Float_t param = 0.; int i = 0;
+    float param = 0.; int i = 0;
     while(is >> param){m_parameters[l].get(i) = param; i++;}
   }
   for (size_t l = 0; l<m_timewalks.size(); l++)
   {
     auto const & p = m_parameters[l];
-    m_timewalks[l].resize(Emax);
+    m_timewalks[l].resize(static_cast<size_t>(Emax));
     for (size_t e = 0; e<m_timewalks[l].size(); e++)
     {
-      m_timewalks[l][e] = (e<Emin) ? timewalk(Emin, p) : timewalk(e, p);
+      auto const ef = static_cast<float>(e);
+      m_timewalks[l][e] = (ef<Emin) ? timewalk(Emin, p) : timewalk(ef, p);
       if (m_timewalks[l][e]<Tmin) Tmin = m_timewalks[l][e];
     }
   }

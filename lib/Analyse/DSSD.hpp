@@ -14,7 +14,7 @@ double distance = 20; // Distance of the DSSD to the target
 double innerRadius = 15;
 double outerRadius = 41; 
 int const nb_rings = 16; // Number of ring channels
-int const nb_sectors = 16; // Number of ring channels
+int const nb_sectors = 32; // Number of ring channels
 double ring_thickness = (outerRadius-innerRadius)/nb_rings; // Thickness of a 
 double ring_deg_thick = TMath::ATan(ring_thickness/distance);
 
@@ -31,7 +31,7 @@ public:
   }
 
   double time = 0.0;
-  double nrj  = 0.0;
+  float nrj  = 0.0;
 
   void setAngle(double const & angle) {m_angle = angle;}
   auto const & angle() const {return m_angle;}
@@ -61,16 +61,16 @@ public:
   {
     if (!m_initialized)
     {
-      for (Label label = 0; label<1000u; label++)
+      for (Label label = 0; label<Label_cast(1000); label++)
       {
-        isS1    [label] = ((label>799) && (label<816));
-        isS2    [label] = ((label>819) && (label<836));
-        isSector[label] = ((label>799) && (label<836));
-        isRing  [label] = ((label>839) && (label<856));
+        isS1    [label] = ((label>Label_cast(799)) && (label<Label_cast(816)));
+        isS2    [label] = ((label>Label_cast(819)) && (label<Label_cast(836)));
+        isSector[label] = ((label>Label_cast(799)) && (label<Label_cast(836)));
+        isRing  [label] = ((label>Label_cast(839)) && (label<Label_cast(856)));
 
-             if (isS1  [label]) indexes[label] = label-800;
-        else if (isS2  [label]) indexes[label] = label-804;
-        else if (isRing[label]) indexes[label] = label-840;
+             if (isS1  [label]) indexes[label] = uchar_cast(label-Label_cast(800));
+        else if (isS2  [label]) indexes[label] = uchar_cast(label-Label_cast(804));
+        else if (isRing[label]) indexes[label] = uchar_cast(label-Label_cast(840));
 
       }
       m_initialized = true;
@@ -84,9 +84,9 @@ public:
   {
     Initialize(); 
     m_Sectors.reserve(nb_sectors); 
-    for (ushort i = 0; i<32u; i++) m_Sectors.emplace_back(i, (i+0.5)*2*3.141596/nb_sectors);
+    for (ushort i = 0; i<nb_sectors; i++) m_Sectors.emplace_back(i, (i+0.5)*2*3.141596/nb_sectors);
     m_Rings.reserve(nb_rings);
-    for (ushort i = 0; i<16u; i++) m_Rings.emplace_back(i, TMath::ATan( (innerRadius+( (i+0.5) * ring_thickness )) / distance ));
+    for (ushort i = 0; i<nb_rings; i++) m_Rings.emplace_back(i, TMath::ATan( (innerRadius+( (i+0.5) * ring_thickness )) / distance ));
   }
   void Reset();
 
@@ -158,7 +158,7 @@ void DSSD::Fill(Event const & event, int const & i)
   
   if (isDSSD[label])
   {
-    auto const & nrj = event.nrjcals[i];
+    auto const nrj = event.nrjcals[i] + gRandom->Uniform(0,1);
     auto const & time = event.time2s[i];
     auto const & isring = isRing[label];
     auto const & index = indexes[label];

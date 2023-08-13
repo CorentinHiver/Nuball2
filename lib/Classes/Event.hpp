@@ -7,15 +7,15 @@
 
 /**
  * @brief Event used for reading and writting event, event building and trigger
- * @attention When used with Hits, only reads nrjcal (and nrj2cal when QDC2 used)
- * 
  */
 class Event
 {
   
 public:
 
-  Event() {}
+  Event() 
+  {
+  }
 
   Event (Hit const & hit)
   {
@@ -28,22 +28,14 @@ public:
     write  (event.write  ),
     m_maxSize(event.m_maxSize)
   {
-    for (int i = 0; i<mult; i++)
-    {
-      labels  [i] = event.labels  [i];
-      times   [i] = event.times   [i];
-      nrjs    [i] = event.nrjs    [i];
-      nrj2s   [i] = event.nrj2s   [i];
-      nrjcals [i] = event.nrjcals [i];
-      nrj2cals[i] = event.nrj2cals[i];
-      time2s  [i] = event.time2s  [i];
-      pileups [i] = event.pileups [i];
-    }
-    
-  #ifdef USE_RF
-    RFtime   = event.RFtime;
-    RFperiod = event.RFperiod;
-  #endif //USE_RF
+    std::copy_n(event.labels   , mult ,  labels   );
+    std::copy_n(event.times    , mult ,  times    );
+    std::copy_n(event.nrjs     , mult ,  nrjs     );
+    std::copy_n(event.nrj2s    , mult ,  nrj2s    );
+    std::copy_n(event.nrjcals  , mult ,  nrjcals  );
+    std::copy_n(event.nrj2cals , mult ,  nrj2cals );
+    std::copy_n(event.time2s   , mult ,  time2s   );
+    std::copy_n(event.pileups  , mult ,  pileups  );
   }
 
   Event(TTree * tree, std::string const & options = "ltEQ", std::string const & io = "r")
@@ -83,11 +75,6 @@ public:
   // Public members :
   int mult = 0;
 
-#ifdef USE_RF
-  Time   RFtime   = 0ull;
-  float  RFperiod = static_cast<float> (USE_RF);
-#endif //USE_RF
-
   ushort labels  [255] = {0};
   Time   times   [255] = {0};
   double time2s  [255] = {0};
@@ -102,6 +89,7 @@ public:
 
 private:
   std::size_t m_maxSize = 255;
+  void* hits[8] = {labels, times, time2s, nrjs, nrjcals, nrj2s, nrj2cals, pileups};
 };
 
 inline Event& Event::operator=(Hit const & hit)
@@ -118,26 +106,19 @@ inline Event& Event::operator=(Hit const & hit)
   return *this;
 }
 
-inline Event& Event::operator=(Event const & evt)
+inline Event& Event::operator=(Event const & event)
 {
-  read = evt.read;
-  write = evt.write;
-  mult = evt.mult;
-  for (int i = 0; i<mult; i++)
-  {
-    if (write.l) labels  [i] = evt.labels  [i];
-    if (write.e) nrjs    [i] = evt.nrjs    [i];
-    if (write.q) nrj2s   [i] = evt.nrj2s   [i];
-    if (write.E) nrjcals [i] = evt.nrjcals [i];
-    if (write.Q) nrj2cals[i] = evt.nrj2cals[i];
-    if (write.t) times   [i] = evt.times   [i];
-    if (write.T) time2s  [i] = evt.time2s  [i];
-    if (write.p) pileups [i] = evt.pileups [i];
-  }
-#ifdef USE_RF
-  if (write.RFp) RFtime   = evt.RFtime;
-  if (write.RFp) RFperiod = evt.RFperiod;
-#endif //USE_RF
+  read  = event.read;
+  write = event.write;
+  mult  = event.mult;
+  if (write.l) std::copy_n(event.labels   , mult ,  labels   );
+  if (write.t) std::copy_n(event.times    , mult ,  times    );
+  if (write.T) std::copy_n(event.nrjs     , mult ,  nrjs     );
+  if (write.e) std::copy_n(event.nrj2s    , mult ,  nrj2s    );
+  if (write.E) std::copy_n(event.nrjcals  , mult ,  nrjcals  );
+  if (write.q) std::copy_n(event.nrj2cals , mult ,  nrj2cals );
+  if (write.Q) std::copy_n(event.time2s   , mult ,  time2s   );
+  if (write.p) std::copy_n(event.pileups  , mult ,  pileups  );
   return *this;
 }
 
@@ -158,10 +139,6 @@ void Event::writting(TTree * tree, std::string const & options)
   if ( write.q )  tree -> Branch("nrj2"    , &nrj2s   , "nrj2[mult]/F"   );
   if ( write.Q )  tree -> Branch("nrj2cal" , &nrj2cals, "nrj2cal[mult]/F");
   if ( write.p )  tree -> Branch("pileup"  , &pileups , "pileup[mult]/O" );
-#ifdef USE_RF
-  if ( write.RFt )  tree -> Branch("RFtime"   , &RFtime  );
-  if ( write.RFp )  tree -> Branch("RFperiod" , &RFperiod);
-#endif //USE_RF
 
   tree -> SetBranchStatus("*",true);
 }
@@ -182,15 +159,14 @@ void Event::reading(TTree * tree, std::string const & options)
   if ( read.q) tree -> SetBranchAddress("nrj2"   , &nrj2s   );
   if ( read.Q) tree -> SetBranchAddress("nrj2cal", &nrj2cals);
   if ( read.p) tree -> SetBranchAddress("pileup" , &pileups );
-#ifdef USE_RF
-  if ( read.p ) tree -> SetBranchAddress("RFtime"  , &RFtime  );
-  if ( read.p ) tree -> SetBranchAddress("RFperiod", &RFperiod);
-#endif //USE_RF
   tree -> SetBranchStatus("*",true);
 }
 
 inline void Event::push_back(Hit const & hit)
 {
+#ifdef SAFE
+  if (mult>254) {print("Event mult > 255 !!"); return;}
+#endif
                labels  [mult] = hit.label;
   if (write.t) times   [mult] = hit.time;
   if (write.T) time2s  [mult] = hit.time2;
@@ -204,16 +180,19 @@ inline void Event::push_back(Hit const & hit)
 
 inline void Event::push_front(Hit const & hit)
 {
-  for (uchar i = 0; i<mult; i++)
+#ifdef SAFE
+  if (mult>254) {print("Event mult > 255 !!"); return;}
+#endif
+  for (int i = 0; i<mult; i++)
   {
-                 labels  [mult+1] = labels  [mult];
-    if (write.t) times   [mult+1] = times   [mult];
-    if (write.T) time2s  [mult+1] = time2s  [mult];
-    if (write.e) nrjs    [mult+1] = nrjs    [mult];
-    if (write.E) nrjcals [mult+1] = nrjcals [mult];
-    if (write.q) nrj2s   [mult+1] = nrj2s   [mult];
-    if (write.Q) nrj2cals[mult+1] = nrj2cals[mult];
-    if (write.p) pileups [mult+1] = pileups [mult];
+                 labels  [i+1] = labels  [i];
+    if (write.t) times   [i+1] = times   [i];
+    if (write.T) time2s  [i+1] = time2s  [i];
+    if (write.e) nrjs    [i+1] = nrjs    [i];
+    if (write.E) nrjcals [i+1] = nrjcals [i];
+    if (write.q) nrj2s   [i+1] = nrj2s   [i];
+    if (write.Q) nrj2cals[i+1] = nrj2cals[i];
+    if (write.p) pileups [i+1] = pileups [i];
   }
                labels  [0] = hit.label;
   if (write.t) times   [0] = hit.time;
@@ -226,35 +205,27 @@ inline void Event::push_front(Hit const & hit)
   mult++;
 }
 
-// template <class... T> void print(Event const & evt, T const & ... t2)
-// {
-//   evt.Print();
-//   print(t2...);
-// }
-
 inline void Event::Print() const
 {
-  print("---");
-  print(mult, "hits :");
-  for (uchar i = 0; i<mult;i++)
-  {
-    print(
-      "label :",labels[i],
-      (times[i]) ? "time :" +std::to_string(times[i]) : "",
-      (time2s[i]) ? "time :" +std::to_string(time2s[i])+" ns" : "",
-      (nrjs[i]) ? "ADC :"+std::to_string(nrjs[i]) : "",
-      (nrj2s[i]) ? "QDC2 :"+std::to_string(nrj2s[i]) : "",
-      (nrjcals[i]) ? "energy :"+std::to_string(nrjcals[i]) : "",
-      (nrj2cals[i]) ? "energy 2 :"+std::to_string(nrj2cals[i]) : "",
-      (pileups[i]) ? "pileup" : ""
-    );
-  }
-  print("---");
+  print(*this);
 }
 
 std::ostream& operator<<(std::ostream& cout, Event const & event)
 {
-  event.Print();
+  cout << std::endl << "---" << std::endl;
+  cout << event.mult << " hits : " << std::endl;
+  for (uchar i = 0; i<event.mult;i++)
+  {
+    cout << "label : " << event.labels[i];
+    if(event.times    [i]) cout << "time : "     + std::to_string(event.times    [i])      ;
+    if(event.time2s   [i]) cout << "time : "     + std::to_string(event.time2s   [i])+" ns";
+    if(event.nrjs     [i]) cout << "ADC : "      + std::to_string(event.nrjs     [i])      ;
+    if(event.nrj2s    [i]) cout << "QDC2 : "     + std::to_string(event.nrj2s    [i])      ;
+    if(event.nrjcals  [i]) cout << "energy : "   + std::to_string(event.nrjcals  [i])      ;
+    if(event.nrj2cals [i]) cout << "energy 2 : " + std::to_string(event.nrj2cals [i])      ;
+    if(event.pileups  [i]) cout << "pileup"                                                ;
+    cout << std::endl;
+  }
   return cout;
 }
 

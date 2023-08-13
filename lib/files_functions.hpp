@@ -40,14 +40,14 @@ float size_file_conversion(float const & size, std::string const & unit_i, std::
 
 float size_file(std::ifstream& file, std::string const & unit = "o")
 {
-  int const init = file.tellg();
+  auto const init = file.tellg();
   file.seekg(0, std::ios::end);
-  int const ret = file.tellg();
+  auto const ret = file.tellg();
   file.seekg(init);// Go back to inital place in the file
-  return ret/size_file_unit[unit];
+  return (static_cast<float>(ret)/size_file_unit[unit]);
 }
 
-int size_file(std::string filename, std::string const & unit = "o")
+float size_file(std::string filename, std::string const & unit = "o")
 {
   std::ifstream f (filename, std::ios::binary);
   return size_file(f, unit);
@@ -348,10 +348,10 @@ public:
 
   operator std::string() { return this -> string(); }
   operator std::vector<Folder>() const &  {return m_folders;}
-  Folder const & operator[] (uint const & i) const {return m_folders[i];}
+  Folder const & operator[] (size_t const & i) const {return m_folders[i];}
 
-  auto erase(uint const & pos)                    {return (m_folders.erase(m_folders.begin()+pos)                            );}
-  auto erase(uint const & pos, uint const & size) {return (m_folders.erase(m_folders.begin()+pos), m_folders.begin()+pos+size);}
+  auto erase(size_t const & pos)                    {return (m_folders.erase(m_folders.begin()+pos)                            );}
+  auto erase(size_t const & pos, size_t const & size) {return (m_folders.erase(m_folders.begin()+pos), m_folders.begin()+pos+size);}
 
   void clear() {m_folders.resize(0);}
   Folders & resize(int const & size) {m_folders.resize(size); return *this;}
@@ -408,7 +408,7 @@ public:
    */
   void cleanPath()
   {
-    for (ulong i = 0; i<m_recursive_folders.size(); i++)
+    for (std::size_t i = 0; i<m_recursive_folders.size(); i++)
     {
       auto const & folder = m_recursive_folders[i];
       if (folder == "../")

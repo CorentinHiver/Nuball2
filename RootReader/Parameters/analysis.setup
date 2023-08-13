@@ -1,7 +1,8 @@
 [Data]
-run: run_75
+# run: run_75
 # runs: 2 run_75 run_76
-# list_runs: list_U.list
+# list_runs: list_U_20_first.list
+list_runs: list_U.list
 # list_runs: Parameters/list_runs_good_pulse.list
 # list_runs: Parameters/run_test.list
 # list_runs: Parameters/runs_pulsed_Corentin.list
@@ -28,11 +29,13 @@ end
 end
 
 [Isomer]
+# Names : G2 stands for 2 germanium hits, GP1 idem in prompt, GD2 in delayed
 outDir: 136/Analyse/Isomer/
 # outRoot: total_DSSD_prompt.root
 # outRoot: good_pulse.root
-# outRoot: all_G2.root
-outRoot: run_75_G2.root
+# outRoot: 20runs_G2.root
+outRoot: all_GP1_GD2.root
+# outRoot: run_75_76.root
 # gate: prompt Ge -15 10
 # gate: delayed Ge 60 350
 end

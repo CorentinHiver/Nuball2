@@ -2,7 +2,6 @@
 #define LIBROOTCO_HPP
 
 #include "libCo.hpp"
-
 // ********** ROOT includes ********* //
 #include <TAxis.h>
 #include <TCanvas.h>
@@ -35,14 +34,25 @@
 #include <TTree.h>
 #include <TTreeIndex.h>
 
-////////////////
-//   UNSINGS  //
-////////////////
+///////////////
+//   Usings  //
+///////////////
 
 using unique_TH1F = std::unique_ptr<TH1F>;
 using unique_TH2F = std::unique_ptr<TH2F>;
 using unique_TFile = std::unique_ptr<TFile>;
 
+//////////////
+//   Types  //
+//////////////
+
+/// @brief Casts a number into unsigned short
+template<typename T,  typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
+inline ULong64_t ULong64_cast(T const & t) {return static_cast<ULong64_t>(t);}
+
+/// @brief Casts a number into unsigned short
+template<typename T,  typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
+inline Long64_t Long64_cast(T const & t) {return static_cast<Long64_t>(t);}
 
 ////////////////////////////
 //   HISTO MANIPULATIONS  //
@@ -92,8 +102,8 @@ bool getMeanPeak(TH1F* spectra, double & mean)
   // Declaration :
   std::unique_ptr<TF1> gaus_pol0;
   std::unique_ptr<TF1> fittedPic;
-  float pospic, amppic, dump_sigma;
-  float cte, Mean, sigma;
+  double pospic, amppic, dump_sigma;
+  double cte, Mean, sigma;
 
   // Histogram characteristics :
   auto const bins = spectra -> GetXaxis() -> GetNbins();
@@ -132,7 +142,7 @@ bool getMeanPeak(TH1F* spectra, double & mean)
 
 void alignator(TTree * tree, int *NewIndex)
 {
-  int const NHits = tree -> GetEntries();
+  auto const NHits = tree -> GetEntries();
   tree -> SetBranchStatus("*", false);// Disables all the branches readability
   tree -> SetBranchStatus("time", true);// Read only the time
 
@@ -171,9 +181,9 @@ void test_alignator(TTree *tree, int* NewIndex= nullptr, bool useNewIndex = fals
   tree -> SetBranchStatus("*", false);// Disables all the branches readability
   tree -> SetBranchStatus("time", true);// Enables to read only the time
   ULong64_t TimeStamp; tree->SetBranchAddress("time", &TimeStamp);
-  ULong64_t PrevTimeStamp = 0; int j = 0;
-  int maxIt = tree -> GetEntries();
-  for (int i = 0; i < maxIt; i++)
+  ULong64_t PrevTimeStamp = 0; Long64_t j = 0;
+  auto maxIt = tree -> GetEntries();
+  for (Long64_t i = 0; i < maxIt; i++)
   {
     if (useNewIndex) j = NewIndex[i] ;
     else j = i;

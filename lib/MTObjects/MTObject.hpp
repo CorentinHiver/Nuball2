@@ -8,19 +8,21 @@
 #include <thread>
 #include <mutex>
 
+using lock_mutex = std::lock_guard<std::mutex>;
+
 #include "../libRoot.hpp"
 
 class MTObject
 {
 public:
   MTObject() {}
-  MTObject(ushort & _nb_threads ) {Initialize(_nb_threads);}
+  MTObject(uint & _nb_threads ) {Initialize(_nb_threads);}
 
-  static void Initialize(ushort const & _nb_threads, bool force = false)
+  static void Initialize(uint const & _nb_threads, bool force = false)
   {
     // Check the number of threads. Usually, over 75% of cores is the optimal.
     // Set force parameter to true if you want to use all the cores
-    int maxThreads = static_cast<int>(std::thread::hardware_concurrency()*((force) ? 1 : 0.75));
+    uint maxThreads = static_cast<int>(std::thread::hardware_concurrency()*((force) ? 1 : 0.75));
     nb_threads = _nb_threads;
     if(nb_threads > maxThreads)
     {
@@ -39,7 +41,7 @@ public:
     ON = true;
   }
 
-  static void adjustThreadsNumber(int const & limiting_number, std::string const & print_if_limit = "") 
+  static void adjustThreadsNumber(uint const & limiting_number, std::string const & print_if_limit = "") 
   {
     if (limiting_number<nb_threads) 
     {
@@ -57,7 +59,7 @@ public:
       print("Please use MTObject::Initialize(int number_threads) for initialisation.");
       return;
     }
-    for (ushort i = 0; i<nb_threads; i++)
+    for (uint i = 0; i<nb_threads; i++)
     {
       m_threads.emplace_back(
         [i, &func, &args...]()
@@ -77,16 +79,16 @@ public:
 
   static bool isMasterThread() {return (master_thread == std::this_thread::get_id());}
 
-  static ushort nb_threads;
+  static uint nb_threads;
   static std::mutex mutex;
   static bool ON;
   operator bool() {return ON;}
 
-  static int getThreadIndex() {return threads_ID[std::this_thread::get_id()];}
+  static int const & getThreadIndex() {return threads_ID[std::this_thread::get_id()];}
 
   static auto const & getThreadsNb() {return nb_threads;}
   static auto const & getThreadsNumber() {return nb_threads;}
-  static void setThreadsNb(int const & n) {nb_threads = static_cast<ushort>(n);}
+  static void setThreadsNb(int const & n) {nb_threads = static_cast<uint>(n);}
 
 private:
   static std::thread::id master_thread;
@@ -95,7 +97,7 @@ private:
 };
 
 // Declaration of static variables :
-ushort MTObject::nb_threads = 1;
+uint MTObject::nb_threads = 1;
 bool MTObject::ON = false;
 std::mutex MTObject::mutex;
 std::thread::id MTObject::master_thread;

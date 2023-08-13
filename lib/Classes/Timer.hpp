@@ -28,31 +28,31 @@ public:
     return (m_stop = m_clock.now());
   }
 
-  float Time()
+  auto Time()
   {
     Now();
-    return(static_cast<float>(duration_milli_t(m_now - m_start).count()));
+    return(duration_milli_t(m_now - m_start).count());
   }
 
-  float TimeSec()
+  auto TimeSec()
   {
     Now();
     return(duration_milli_t(m_now - m_start).count()/1000.);
   }
 
-  float TimeElapsed()
+  auto TimeElapsed()
   {
     return d_milli.count();
   }
 
-  float TimeElapsedSec()
+  auto TimeElapsedSec()
   {
     return d_milli.count()/1000.;
   }
 
-  float operator() ()
+  auto operator() ()
   {
-    float time = Time();
+    auto time = Time();
     m_unit = "ms";
 
     if (time>1000.) { time/=1000.; m_unit = "s";}
@@ -67,7 +67,7 @@ public:
 
   std::string unit() {(*this)(); return m_unit;}
   
-  float Unit()
+  auto Unit()
   {
          if (m_unit == "ms") return 1.;
     else if (m_unit ==  "s") return 1000.;

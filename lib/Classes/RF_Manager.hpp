@@ -94,8 +94,8 @@ bool RF_Manager::setHit(Hit const & hit)
   if (hit.label == RF_Manager::label)
   {
     last_hit = hit.time;
-    period = hit.nrj;
-    if (hit.nrj == 0) period = hit.nrjcal;
+    period = ULong64_cast(hit.nrj);
+    if (hit.nrj == 0) period = ULong64_cast(hit.nrjcal);
     return true;
   }
   else return false;
@@ -106,7 +106,7 @@ bool RF_Manager::setHit(Event const & event, uint const & i)
   if (event.labels[i] == RF_Manager::label)
   {
     last_hit = event.times[i];
-    period = event.nrjs[i];
+    period = ULong64_cast(event.nrjs[i]);
     return true;
   }
   else return false;
