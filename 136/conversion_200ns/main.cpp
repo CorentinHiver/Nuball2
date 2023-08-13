@@ -311,7 +311,7 @@ int main(int argc, char** argv)
       {
         nb_files = atoi(argv[++i]);
       }
-      else if (command == "-h" || command == "--histograms")
+      else if (command == "-H" || command == "--histograms")
       {
         histoed = true;
       }
