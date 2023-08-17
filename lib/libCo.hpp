@@ -13,7 +13,6 @@
 #include <memory>
 #include <mutex>
 #include <queue>
-#include <ranges>
 #include <sstream>
 #include <stdexcept>
 #include <string>
