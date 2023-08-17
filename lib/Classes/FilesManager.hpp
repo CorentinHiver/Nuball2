@@ -49,10 +49,12 @@ public:
     return ret;
   }
 
-  bool isEmpty () { return (this->size() == 0);}
+  bool isEmpty () const { return (this->size() == 0);}
+  operator bool() const {return !isEmpty();}
+
 
   //Files reader :
-  virtual std::string getFile    (int const & n = -1)
+  virtual std::string getFile (int const & n = -1)
   {
     if (n<0) return m_listFiles[m_filesCursor];
     else return m_listFiles[n];
@@ -64,9 +66,19 @@ public:
   void setCursor(size_t const & _filesCursor) {m_filesCursor = _filesCursor;}
   void setVerbose(bool const & v) {verbose = v;}
 
-  // Operator overloading :
-  std::string operator[] (int const & n) {return getFile(n)        ;}
-  void operator=(ListFiles const & list) {return setListFiles(list);}
+  std::string operator[] (int const & n) {return getFile(n);}
+  void operator=(ListFiles const & list) {setListFiles(list);}
+  FilesManager const & operator=(FilesManager const & other) 
+  {
+    m_path = other.m_path;
+    m_filesCursor = other.m_filesCursor;
+    m_listFiles = other.m_listFiles;
+    m_listFolder = other.m_listFolder;
+    m_listFilesInFolder = other.m_listFilesInFolder;
+    isReadable = other.isReadable;
+    verbose = other.verbose;
+    return *this;
+  }
 
 protected:
   Path m_path;

@@ -8,12 +8,14 @@
 /// Data types ///
 //////////////////
 
-using Label   = ushort;
-using ADC     = int;
-using NRJ     = float;
-using Time    = ULong64_t;
-using Time_ns = double;
-using Pileup  = bool;
+using Mult      = int;
+using Label     = uint;
+using ADC       = int;
+using NRJ       = float;
+using Timestamp = ULong64_t;
+using Time      = int;
+using Time_ns   = float;
+using Pileup    = bool;
 
 
 ////////////////////
@@ -52,6 +54,10 @@ inline NRJ NRJ_cast(T const & t) {return static_cast<NRJ>(t);}
 template<typename T,  typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
 inline Time_ns Time_ns_cast(T const & t) {return static_cast<Time_ns>(t);}
 
+/// @brief Casts a number into unsigned Timestamp
+template<typename T,  typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
+inline Timestamp Timestamp_cast(T const & t) {return static_cast<Timestamp>(t);}
+
 /////////////////////
 /// IO parameters ///
 /////////////////////
@@ -61,12 +67,12 @@ inline Time_ns Time_ns_cast(T const & t) {return static_cast<Time_ns>(t);}
  * @details
  * 
  * l : label   label               ushort
- * t : time    absolute timestamp  ULong64_t
+ * t : time    absolute timestamp  ULong64_t for timestamp, and int for relative times
  * T : time2   relative timestamp  double
- * e : nrj     energy in ADC       int
- * E : nrjcal  energy in keV       float
- * q : nrj2    energy QDC2 in ADC  float
- * Q : nrj2cal energy QDC2 in keV  float
+ * e : adc     energy in ADC       int
+ * E : nrj  energy in keV       float
+ * q : qdc2    energy qdc2 in ADC  float
+ * Q : nrj2 energy qdc2 in keV  float
  * p : pileup  pilepup             bool
  * 
  * R :         RF last timestamp   ULong64_t
@@ -75,17 +81,16 @@ inline Time_ns Time_ns_cast(T const & t) {return static_cast<Time_ns>(t);}
  */
 struct Read
 {
-  bool l   = false; // label
-  bool t   = false; // time
-  bool T   = false; // relative Time
-  bool e   = false; // ADC
-  bool E   = false; // calibrated energy
-  bool q   = false; // QDC2
-  bool Q   = false; // calibrated QDC2
-  bool p   = false; // pileup
-  bool RFt = false; // RF downscale timestamp
-  bool RFp = false; // RF period
-  
+  bool l = false; // label
+  bool s = false; // Timestamp
+  bool t = false; // relative time ps
+  bool T = false; // relative time ns
+  bool e = false; // energy in ADC
+  bool E = false; // calibrated energy
+  bool q = false; // qdc2
+  bool Q = false; // calibrated qdc2
+  bool p = false; // pileup
+
   void setOptions(std::string const & options)
   {
     for (auto const & option : options)
@@ -93,6 +98,7 @@ struct Read
       switch (option)
       {
         case ('l') : l   = true;  break;
+        case ('s') : s   = true;  break;
         case ('t') : t   = true;  break;
         case ('T') : T   = true;  break;
         case ('e') : e   = true;  break;
@@ -100,10 +106,8 @@ struct Read
         case ('q') : q   = true;  break;
         case ('Q') : Q   = true;  break;
         case ('p') : p   = true;  break;
-        case ('R') : RFt = true;  break;
-        case ('P') : RFp = true;  break;
         default : print("Unkown parameter", option, "for io event");
-      }    
+      }
     }
   }
 };
@@ -113,12 +117,12 @@ struct Read
  * @details
  * 
  * l : label   label               ushort
- * t : time    absolute timestamp  ULong64_t
+ * t : time    absolute timestamp  ULong64_t for timestamp, and int for relative times
  * T : time2   relative timestamp  float
- * e : nrj     energy in ADC       float
- * E : nrjcal  energy in keV       float
- * q : nrj2    energy QDC2 in ADC  float
- * Q : nrj2cal energy QDC2 in keV  float
+ * e : adc     energy in ADC       float
+ * E : nrj  energy in keV       float
+ * q : qdc2    energy qdc2 in ADC  float
+ * Q : nrj2 energy qdc2 in keV  float
  * p : pileup  pilepup             bool
  * 
  * R :         RF last timestamp   ULong64_t
@@ -127,16 +131,15 @@ struct Read
  */
 struct Write
 {
-  bool l   = false; // label
-  bool t   = false; // time
-  bool T   = false; // relative Time
-  bool e   = false; // energy in ADC
-  bool E   = false; // calibrated energy
-  bool q   = false; // QDC2
-  bool Q   = false; // calibrated QDC2
-  bool p   = false; // pileup
-  bool RFt = false; // time last RF downscale
-  bool RFp = false; // RF period
+  bool l = false; // label
+  bool s = false; // Timestamp
+  bool t = false; // relative time ps
+  bool T = false; // relative time ns
+  bool e = false; // energy in ADC
+  bool E = false; // calibrated energy
+  bool q = false; // qdc2
+  bool Q = false; // calibrated qdc2
+  bool p = false; // pileup
 
   void setOptions(std::string const & options)
   {
@@ -145,6 +148,7 @@ struct Write
       switch (option)
       {
         case ('l') : l   = true;  break;
+        case ('s') : s   = true;  break;
         case ('t') : t   = true;  break;
         case ('T') : T   = true;  break;
         case ('e') : e   = true;  break;
@@ -152,8 +156,6 @@ struct Write
         case ('q') : q   = true;  break;
         case ('Q') : Q   = true;  break;
         case ('p') : p   = true;  break;
-        case ('R') : RFt = true;  break;
-        case ('P') : RFp = true;  break;
         default : print("Unkown parameter", option, "for io event");
       }
     }
@@ -205,35 +207,38 @@ class Hit
 {
 public:
   Hit(){reset();}
-  Hit(Label _label, Time _time, float _time2, ADC _nrj, ADC _nrj2 = 0, NRJ _nrjcal = 0, NRJ _nrj2cal = 0, bool _pileup = false) : 
-    label  (_label),
-    time   (_time),
-    time2  (_time2),
-    nrj    (_nrj),
-    nrj2   (_nrj2),
-    nrjcal (_nrjcal),
-    nrj2cal(_nrj2cal),
-    pileup (_pileup)
-    {}
+  // TODO once the format is finally final
+  // Hit(Label _label, Timestamp _stamp, ADC _nrj, float _time2,  ADC _QDC2 = 0, NRJ _nrjcal = 0, NRJ _QDC2cal = 0, bool _pileup = false) : 
+  //   label  (_label),
+  //   time   (_time),
+  //   time2  (_time2),
+  //   adc    (_nrj),
+  //   qdc2   (_QDC2),
+  //   nrj (_nrjcal),
+  //   nrj2(_QDC2cal),
+  //   pileup (_pileup)
+  //   {}
 
-  Label   label  = 0;     // Label
-  Time    time   = 0ull;  // Timestamp ('ull' stands for unsigned long long)
-  Time_ns time2  = 0.0;   // Relative time
-  ADC     nrj    = 0;     // Energy in ADC or QDC1
-  ADC     nrj2   = 0;     // Energy in QDC2
-  NRJ     nrjcal = 0.f;   // Calibrated energy
-  NRJ     nrj2cal= 0.f;   // Calibrated energy in QDC2
-  bool    pileup = false; // Pile-up (and saturation in QDC) tag
+  Label     label  = 0;     // Label
+  Timestamp stamp  = 0ull;  // Timestamp ('ull' stands for unsigned long long)
+  Time      time   = 0;     // Relative time in ps
+  Time_ns   time2  = 0.f;   // Relative time in ns
+  ADC       adc    = 0;     // Energy in ADC or QDC1
+  ADC       qdc2   = 0;     // Energy in qdc2
+  NRJ       nrj = 0.f;      // Calibrated energy in keV
+  NRJ       nrj2= 0.f;      // Calibrated energy in qdc2 in keV
+  bool      pileup = false; // Pile-up (and saturation in QDC) tag
 
   void reset()
   {
     label  = 0;
-    time   = 0ull;
+    stamp = 0ull;
+    time   = 0;
     time2  = 0.f;
-    nrj    = 0;
-    nrj2   = 0;
-    nrjcal = 0.f;
-    nrj2cal= 0.f;
+    adc    = 0;
+    qdc2   = 0;
+    nrj = 0.f;
+    nrj2= 0.f;
     pileup = false;
   }
 
@@ -248,19 +253,22 @@ void Hit::reading(TTree * tree, std::string const & options)
 {
   if (!tree) {print("Input tree at address 0x00 !"); return;}
 
+  this->reset();
+
   read.setOptions(options);
 
   tree -> ResetBranchAddresses();
   
   if (read.l) tree -> SetBranchAddress("label"  , & label  );
-  if (read.e) tree -> SetBranchAddress("nrj"    , & nrj    );
-  if (read.E) tree -> SetBranchAddress("nrjcal" , & nrjcal );
-  if (read.q) tree -> SetBranchAddress("nrj2"   , & nrj2   );
-  if (read.Q) tree -> SetBranchAddress("nrj2cal", & nrj2cal);
+  if (read.s) tree -> SetBranchAddress("stamp"  , & stamp  );
   if (read.t) tree -> SetBranchAddress("time"   , & time   );
   if (read.T) tree -> SetBranchAddress("time2"  , & time2  );
+  if (read.e) tree -> SetBranchAddress("adc"    , & adc    );
+  if (read.E) tree -> SetBranchAddress("nrj"    , & nrj    );
+  if (read.q) tree -> SetBranchAddress("qdc2"   , & qdc2   );
+  if (read.Q) tree -> SetBranchAddress("nrj2"   , & nrj2   );
   if (read.p) tree -> SetBranchAddress("pileup" , & pileup );
-}
+} 
 
 void Hit::writting(TTree * tree, std::string const & options)
 {
@@ -271,25 +279,27 @@ void Hit::writting(TTree * tree, std::string const & options)
   tree -> ResetBranchAddresses();
 
   if (write.l) tree -> Branch("label"  , & label  );
-  if (write.e) tree -> Branch("nrj"    , & nrj    );
-  if (write.E) tree -> Branch("nrjcal" , & nrjcal );
-  if (write.q) tree -> Branch("nrj2"   , & nrj2   );
-  if (write.Q) tree -> Branch("nrj2cal", & nrj2cal);
+  if (write.s) tree -> Branch("stamp"  , & stamp  );
   if (write.t) tree -> Branch("time"   , & time   );
   if (write.T) tree -> Branch("time2"  , & time2  );
+  if (write.e) tree -> Branch("adc"    , & adc    );
+  if (write.E) tree -> Branch("nrj"    , & nrj    );
+  if (write.q) tree -> Branch("qdc2"   , & qdc2   );
+  if (write.Q) tree -> Branch("nrj2"   , & nrj2   );
   if (write.p) tree -> Branch("pileup" , & pileup );
 }
 
 std::ostream& operator<<(std::ostream& cout, Hit const & hit)
 {
   cout << "l : " << hit.label;
-  if (hit.nrj    >0) cout << " nrj :  "    << hit.nrj    ;
-  if (hit.nrj2   >0) cout << " nrj2 : "    << hit.nrj2   ;
-  if (hit.nrjcal >0) cout << " nrjcal : "  << hit.nrjcal ;
-  if (hit.nrj2cal>0) cout << " nrj2cal : " << hit.nrj2cal;
-  cout << " time : " << hit.time;
-  cout << " rel time : " << hit.time2;
-  if (hit.pileup) cout << " pileup";
+  if (hit.stamp  != 0) cout << " timestamp : "    << hit.stamp;
+  if (hit.time  != 0) cout << " time : "    << hit.time;
+  if (hit.time2 != 0) cout << " rel time : "<< hit.time2;
+  if (hit.adc   != 0) cout << " adc :  "    << hit.adc    ;
+  if (hit.qdc2  != 0) cout << " qdc2 : "    << hit.qdc2   ;
+  if (hit.nrj   != 0) cout << " nrj : "     << hit.nrj ;
+  if (hit.nrj2  != 0) cout << " nrj2 : "    << hit.nrj2;
+  if (hit.pileup)     cout << " pileup";
   return cout;
 }
 

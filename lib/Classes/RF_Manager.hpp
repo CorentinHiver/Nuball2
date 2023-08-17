@@ -31,6 +31,7 @@ public:
   RF_Manager(Label const & label_RF = 251) {label = label_RF;}
   bool setHit(Hit const & hit);
   bool setHit(Event const & event, uint const & pos = 0);
+  bool setEvent(Event const & evt);
   void static set_offset(Long64_t const & offset) {m_offset = offset;}
   void static set_offset_ns(Long64_t const & offset_ns) {m_offset = offset_ns*1000;}
   auto static offset() {return m_offset;}
@@ -93,9 +94,21 @@ bool RF_Manager::setHit(Hit const & hit)
 {
   if (hit.label == RF_Manager::label)
   {
-    last_hit = hit.time;
-    period = ULong64_cast(hit.nrj);
-    if (hit.nrj == 0) period = ULong64_cast(hit.nrjcal);
+    last_hit = hit.stamp;
+    period = Timestamp_cast(hit.nrj);
+    if (hit.nrj == 0) period = Timestamp_cast(hit.nrj);
+    return true;
+  }
+  else return false;
+}
+
+bool RF_Manager::setEvent(Event const & evt)
+{
+  if (evt.labels[0] == RF_Manager::label)
+  {
+    last_hit = evt.stamp;
+    period = Timestamp_cast(evt.adcs[0]);
+    if (period == 0) period = Timestamp_cast(evt.nrjs[0]);
     return true;
   }
   else return false;
@@ -106,7 +119,7 @@ bool RF_Manager::setHit(Event const & event, uint const & i)
   if (event.labels[i] == RF_Manager::label)
   {
     last_hit = event.times[i];
-    period = ULong64_cast(event.nrjs[i]);
+    period = Timestamp_cast(event.nrjs[i]);
     return true;
   }
   else return false;
@@ -126,7 +139,7 @@ public:
 #endif //ALIGNATOR_HPP
 
 #ifdef EVENT_HPP
-  RF_Extractor(TTree * tree, RF_Manager & rf, Event & event, Long64_t maxEvts = (Long64_t)(1.E+7));
+  RF_Extractor(TTree * tree, RF_Manager & rf, Event & event, Long64_t maxEvts = Long64_cast(1.E+7));
 #endif //EVENT_HPP
 
   auto const & cursor() const {return m_cursor;}

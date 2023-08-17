@@ -38,9 +38,10 @@
 //   Usings  //
 ///////////////
 
-using unique_TH1F = std::unique_ptr<TH1F>;
-using unique_TH2F = std::unique_ptr<TH2F>;
+using unique_TH1F  = std::unique_ptr<TH1F>;
+using unique_TH2F  = std::unique_ptr<TH2F>;
 using unique_TFile = std::unique_ptr<TFile>;
+using unique_tree  = std::unique_ptr<TTree>;
 
 //////////////
 //   Types  //
@@ -65,18 +66,20 @@ bool THist_exists(TH1* histo)
 
 bool AddTH1(TH2* histo2, TH1* histo1, int index, bool x = true)
 {
+  if (!histo2) {print("TH2 do not exists"); return -1;}
+  if (!histo1) {print("TH1 do not exists"); return -1;}
   auto axis = (x) ? histo2 -> GetXaxis() : histo2 -> GetYaxis();
 
   if (axis->GetNbins() < index)
   {
-    print("Binning issue to merge", histo1->GetName(), "with", histo2->GetName() ,"...");
+    print("Too many histo like", histo1->GetName(), "to merge with", histo2->GetName() ,"...");
     return false;
   }
 
-  for (int i = 0; i<histo1->GetNbinsX(); i++)
+  for (int bin = 0; bin<histo1->GetNbinsX(); bin++)
   {
-    if (x) histo2->SetBinContent(index, i, histo1->GetBinContent(i));
-    else   histo2->SetBinContent(i, index, histo1->GetBinContent(i));
+    if (x) histo2->SetBinContent(index, bin, histo1->GetBinContent(bin));
+    else   histo2->SetBinContent(bin, index, histo1->GetBinContent(bin));
   }
   return true;
 }
@@ -160,19 +163,19 @@ void alignator(TTree * tree, int *NewIndex)
   int i = 0, j = 0;
   ULong64_t a = 0;
   NewIndex[0]=0;
-	for (j=0; j<NHits;j++)
-	{
-  	NewIndex[j]=j;
-  	a=TimeStampBuffer[j]; //Focus on this time stamp
-  	i=j;
-		// Find the place to insert it amongst the previously sorted timestamps
-  	while((i > 0) && (TimeStampBuffer[NewIndex[i-1]] > a))
-  	{
-    	NewIndex[i]=NewIndex[i-1];
-    	i--;
-  	}
-  	NewIndex[i]=j;
-	}
+  for (j=0; j<NHits;j++)
+  {
+    NewIndex[j]=j;
+    a=TimeStampBuffer[j]; //Focus on this time stamp
+    i=j;
+    // Find the place to insert it amongst the previously sorted timestamps
+    while((i > 0) && (TimeStampBuffer[NewIndex[i-1]] > a))
+    {
+      NewIndex[i]=NewIndex[i-1];
+      i--;
+    }
+    NewIndex[i]=j;
+  }
   tree -> SetBranchStatus("*", true); //enables again the whole tree to be read
 }
 

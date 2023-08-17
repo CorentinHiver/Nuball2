@@ -40,13 +40,13 @@
  *        print(hit);
  *      }
  * 
- * This method deals with the 5 following members of the Hit structure:
+ * This method deals with the 5 following members of the Hit structure:(NOT UP TO DATE !!!)
  * 
  *        struct Hit
  *        {
  *          unsigned short label;  // The label number of the detector
- *          Float_t        nrj;    // The ADC/QDC value of the hit. For RF, contains the frequency.
- *          Float_t        nrj2;   // The QDC2 value (usually the longer gate)
+ *          Float_t        adc;    // The ADC/QDC value of the hit. For RF, contains the frequency.
+ *          Float_t        qdc2;   // The qdc2 value (usually the longer gate)
  *          ULong64_t      time;   // High precision time in ps (time tick of 7,8125 ps)
  *          bool           pileup; // Contains either pileup or saturated bit
  *        }
@@ -64,8 +64,8 @@
  * 
  * -- QDC1MAX
  * 
- * By default the nrj2 is handled. 
- * If no detector uses the QDC2 then declare QDC1MAX
+ * By default the qdc2 is handled. 
+ * If no detector uses the qdc2 then declare QDC1MAX
  * 
  * 
  * -- FASTER_GROUP
@@ -342,7 +342,7 @@ bool FasterReader::ReadData(faster_data_p const & _data)
 { 
   m_hit->label = faster_data_label(_data);
 #ifndef QDC1MAX
-  m_hit->nrj2 = 0; // In order to clean the data, as nrj2 never gets cleaned if there was QDC2 in the previous hit
+  m_hit->qdc2 = 0; // In order to clean the data, as qdc2 never gets cleaned if there was qdc2 in the previous hit
 #endif //QDC1MAX
   m_alias = faster_data_type_alias(_data);
   if (m_alias == GROUP_TYPE_ALIAS)
@@ -354,8 +354,7 @@ bool FasterReader::ReadData(faster_data_p const & _data)
     std::cout << "COMPILE IN GROUP MODE !!!" << std::endl;
     #endif //FASTER_GROUP
   }
-  m_hit -> time = Time_cast(faster_data_hr_clock_ns(_data) * 1000);// Stores the time in ps
-  print(sizeof(m_hit -> time, faster_data_hr_clock_ns(_data) * 1000));
+  m_hit -> stamp = Timestamp_cast(faster_data_hr_clock_ns(_data) * 1000);// Stores the timestamp in ps
   m_write = switch_alias(m_alias, _data);
 #ifdef FASTER_GROUP
   if (m_inGroup && m_write)
@@ -397,7 +396,7 @@ void FasterReader::ReadDataGroup(faster_data_p const & _data)
 /**
  * @brief Treat the specific part of data (QDC gates, spectro ADC ...)
  * 
- * \private Internal method that is used to fill hit.nrj depending
+ * \private Internal method that is used to fill hit.adc depending
  * on the alias of the data, that correspond to a certain kind of 
  * faster data.
  * 
@@ -445,9 +444,9 @@ void FasterReader::TreatTrapez(const faster_data_p& data)
    trapez_spectro adc;
    faster_data_load(data, &adc);
 
-   m_hit->nrj = adc.measure;
+   m_hit->adc = adc.measure;
  #ifndef QDC1MAX
-   m_hit->nrj2 = 0;
+   m_hit->qdc2 = 0;
  #endif //QDC1MAX
    m_hit->pileup = (adc.pileup == 1 || adc.saturated == 1);
 }
@@ -465,9 +464,9 @@ void FasterReader::TreatCRRC4(const faster_data_p& data)
    crrc4_spectro crrc4_adc;
    faster_data_load(data, &crrc4_adc);
 
-   m_hit->nrj = crrc4_adc.measure;
+   m_hit->adc = crrc4_adc.measure;
  #ifndef QDC1MAX
-   m_hit->nrj2 = 0;
+   m_hit->qdc2 = 0;
  #endif //QDC1MAX
    m_hit->pileup = (false); //TO BE LOOKED AT
 }
@@ -483,17 +482,17 @@ void FasterReader::TreatQDC1(const faster_data_p& data)
   qdc_t_x1 qdc;
   faster_data_load(data, &qdc);
 
-  m_hit->nrj = qdc.q1;
+  m_hit->adc = qdc.q1;
 
 #ifndef QDC1MAX
-  m_hit->nrj2 = 0;
+  m_hit->qdc2 = 0;
 #endif //QDC1MAX
 
   m_hit->pileup = (qdc.q1_saturated == 1);
 }
 
 /**
- * @brief Load QDC2 data
+ * @brief Load qdc2 data
  * 
  * \private Internal method used to extract QDC values with 2 gates
  * 
@@ -502,9 +501,9 @@ void FasterReader::TreatQDC2(const faster_data_p& data)
 { 
   qdc_t_x2 qdc;
   faster_data_load(data, &qdc);
-  m_hit->nrj = qdc.q1;
+  m_hit->adc = qdc.q1;
 #ifndef QDC1MAX
-  m_hit->nrj2 = qdc.q2;
+  m_hit->qdc2 = qdc.q2;
 #endif //QDC1MAX
   m_hit->pileup = (qdc.q1_saturated == 1 || qdc.q2_saturated == 1);
 }
@@ -520,9 +519,9 @@ void FasterReader::TreatRF(const faster_data_p& data)
    rf_data rf;
    faster_data_load(data, &rf);
 
-   m_hit->nrj = ADC_cast(rf_period_ns(rf)*1000);
+   m_hit->adc = ADC_cast(rf_period_ns(rf)*1000);
  #ifndef QDC1MAX
-   m_hit->nrj2 = 0;
+   m_hit->qdc2 = 0;
  #endif //QDC1MAX
    m_hit->pileup = false;
 }

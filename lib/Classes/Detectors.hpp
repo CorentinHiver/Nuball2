@@ -2,36 +2,35 @@
 #define DETECTORS_HPP
 
 #include "../libCo.hpp"
+#include "Hit.hpp"
 
-using Label = ushort;
-using Labels = std::vector<Label>;
 using LabelMap = std::map<std::string, Label>;
 
 
-Bools isClover  (1000,false);
-Bools isGe      (1000,false);
-Bools isBGO     (1000,false);
-Bools isLaBr3   (1000,false);
-Bools isEden    (1000,false);
-Bools isRF      (1000,false);
-Bools isParis   (1000,false);
-Bools isDSSD    (1000,false);
-Bools isSector  (1000,false);
-Bools isS1      (1000,false);
-Bools isS2      (1000,false);
-Bools isRing    (1000,false);
+Bools isClover(1000);
+Bools isGe    (1000);
+Bools isBGO   (1000);
+Bools isLaBr3 (1000);
+Bools isEden  (1000);
+Bools isRF    (1000);
+Bools isParis (1000);
+Bools isDSSD  (1000);
+Bools isSector(1000);
+Bools isS1    (1000);
+Bools isS2    (1000);
+Bools isRing  (1000);
 
-Bools isBack    (1000,false);
-Bools isFront   (1000,false);
+Bools isBack  (1000);
+Bools isFront (1000);
 
-Labels labelToClover(1000,0);
-Labels labelToBGOcrystal(1000,0);
-Labels labelToGecrystal(1000,0);
+Label_vec labelToClover(1000,0);
+Label_vec labelToBGOcrystal(1000,0);
+Label_vec labelToGecrystal(1000,0);
 Strings clover_pos  (1000,"");
 
-Labels compressedLabel(1000,-1); // Used to put all the detectors one after the other
+Label_vec compressedLabel(1000,-1); // Used to put all the detectors one after the other
 
-#include "../Analyse/Clovers.hpp"
+// #include "../Analyse/Clovers.hpp"
 
 /**
  * @brief Contains the alias and name of detectors types (e.g. Germanium, labr, ...)
@@ -59,6 +58,14 @@ namespace Detector
 }
 
 using dAlias = Detector::alias;
+auto ge_a    = Detector::alias::ge;
+auto bgo_a   = Detector::alias::bgo;
+auto labr_a  = Detector::alias::labr;
+auto paris_a = Detector::alias::paris;
+auto dssd_a  = Detector::alias::dssd;
+auto eden_a  = Detector::alias::eden;
+auto RF_a    = Detector::alias::RF;
+auto null_a  = Detector::alias::null;
 // using dAlias_str = Detector::alias_str;
 
 /**
@@ -71,10 +78,10 @@ public:
   Detectors(){}
 
   /// @brief Loads the list of detectors
-  Detectors(std::string const & filename) : m_filename(filename) {this -> load(m_filename);}
+  Detectors(std::string const & filename) {this -> load(filename);}
 
   /// @brief Loads the list of detectors
-  Detectors(const char* filename) : m_filename(filename) {this -> load(m_filename);}
+  Detectors(const char* filename) {this -> load(filename);}
 
   /// @brief Copy constructor
   Detectors(Detectors const & otherList) : 
@@ -82,7 +89,8 @@ public:
     m_ok(otherList.m_ok), 
     m_filename(otherList.m_filename),
     m_list(otherList.m_list), 
-    m_reversed_list(otherList.m_reversed_list) 
+    m_reversed_list(otherList.m_reversed_list),
+    m_alias_counter(otherList.m_alias_counter)
   {}
 
   /// @brief Reads the file and extracts the list of detectors, then fills the lookup tables
@@ -95,14 +103,13 @@ public:
   void makeArrays();
 
   /// @brief Return the value of the maximum label, i.e. the size of the lookup tables
-  auto const size() const {return uchar_cast(m_list.size());}
+  auto const size() const {return Label_cast(m_list.size());}
 
   /// @brief  Return the real number of detectors
   static auto const number() {return nb_detectors;}
 
   // Iterate over the existing detectors :
   auto begin() {return m_list.begin();}
-  // Iterate over the existing detectors :
   auto end  () {return m_list.end  ();}
 
   auto const & get()        const {return m_list         ;}
@@ -121,9 +128,10 @@ public:
     m_filename      = otherList.m_filename;
     m_list          = otherList.m_list;
     m_reversed_list = otherList.m_reversed_list;
+    m_alias_counter = otherList.m_alias_counter;
     return *this;
   }
-
+  
   std::string const & operator[] (int i) const {return m_list[i];}
   operator bool() const & {return m_ok;}
 
@@ -151,6 +159,9 @@ public:
     else                      return dAlias::null ;
   }
 
+  static size_t nb_aliases() {return null_a;} // as Detector::alias::null is defined at the last position in enum, it holds the number of detectors
+  size_t const & nb_det_in_alias(dAlias const & alias) const {return m_alias_counter[alias];}
+
   Bools exists;
 
 private:
@@ -164,7 +175,11 @@ private:
   // Containers
   Strings m_list;
   LabelMap m_reversed_list;
+  std::vector<size_t> m_alias_counter = std::vector<size_t>(nb_aliases()); // To get the number of detector in each alias. 
 };
+
+  void operator>>(const char * filename, Detectors & detectors) {detectors.load(std::string(filename));}
+
 
 /// @brief Number of detectors
 ushort Detectors::nb_detectors = 0;
@@ -181,7 +196,7 @@ void Detectors::readFile(std::string const & filename)
   if (!inputfile.is_open())
   {
     m_ok = m_loaded = false;
-    m_list.resize(0);
+    m_list.clear();
     print("CANNOT OPEN", filename, "!!");
     return;
   }
@@ -189,9 +204,10 @@ void Detectors::readFile(std::string const & filename)
   {
     m_ok = m_loaded = false;
     print(filename, "is empty !!");
-    m_list.resize(0);
+    m_list.clear();
     return;
   }
+  m_filename = filename;
   // ----------------------------------------------------- //
   //First reading of the file : extract the maximum label to be the size of the vector
   ushort size = 0; std::string line = "", name = ""; ushort label = 0;
@@ -228,14 +244,11 @@ void Detectors::makeArrays()
 {
   if (!m_loaded) {throw std::runtime_error("ID file not loaded !!"); return;}
 
-    // The following is used to fill the compressedLabel array :
-
   // Looping around the labels
   for (Label label = 0; label<this->size(); label++)
   {
     std::istringstream is(replaceCharacter(m_list[label], '_', ' '));
     std::string str;
-
 
     // Looping around the subparts of the name "subpart_..._subpart"
     while(is >> str)
@@ -307,8 +320,10 @@ void Detectors::makeArrays()
     {
       compressedLabel[label] = nb_detectors;
       nb_detectors++;
+      m_alias_counter[alias(label)]++;
     }
     else compressedLabel[label] = -1;
+
   }
 }
 

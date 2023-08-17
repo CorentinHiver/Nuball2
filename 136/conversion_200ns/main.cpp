@@ -127,6 +127,7 @@ void convert(Hit & hit, FasterReader & reader,
   // Loop over the TTree 
   Timer read_timer;
   ulong rawCounts = 0;
+  print(MTObject::getThreadIndex());
   while(reader.Read())
   {
     // Time calibration :
@@ -360,6 +361,7 @@ int main(int argc, char** argv)
 
   // MANDATORY : initialize the multithreading !
   if (nb_threads>1) MTObject::Initialize(nb_threads);
+  print(MTObject::getThreadIndex());
 
   // Setup the path accordingly to the machine :
   Path datapath = Path::home();

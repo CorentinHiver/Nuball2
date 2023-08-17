@@ -13,6 +13,7 @@
 #include <memory>
 #include <mutex>
 #include <queue>
+#include <ranges>
 #include <sstream>
 #include <stdexcept>
 #include <string>
@@ -30,6 +31,7 @@
 
 // ********** Corentin Lib ************ //
 #include "print.hpp"
+#include "random.hpp"
 #include "string_functions.hpp"
 #include "files_functions.hpp"
 #include "vector_functions.hpp"
@@ -59,6 +61,10 @@ inline short short_cast(T const & t) {return static_cast<short>(t);}
 /// @brief Casts a number into an int
 template<typename T,  typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
 inline int int_cast(T const & t) {return static_cast<int>(t);}
+
+/// @brief Casts a number into an int
+template<typename T,  typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
+inline int long_cast(T const & t) {return static_cast<int>(t);}
 
 /// @brief Casts a number into a float
 template<typename T,  typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
@@ -108,11 +114,169 @@ template<typename T,  typename = typename std::enable_if<std::is_arithmetic<T>::
 inline size_t size_cast(T const & t) {return static_cast<size_t>(t);}
 
 // Containers :
-using Bools = std::vector<bool>;
+class Bools 
+{
+private:
+    bool* m_data = nullptr;
+    size_t m_size = 0;
+
+public:
+    Bools() {}
+    Bools(size_t size, bool const & value = false) : m_size(size) {
+        m_data = new bool[m_size];
+        memset(m_data, value ? 1 : 0, m_size * sizeof(bool));
+    }
+
+    // Copy constructor
+    Bools(const Bools& other) : m_size(other.m_size) {
+        m_data = new bool[m_size];
+        memcpy(m_data, other.m_data, m_size * sizeof(bool));
+    }
+
+    // Move constructor
+    Bools(Bools&& other) noexcept : m_data(other.m_data), m_size(other.m_size) {
+        other.m_data = nullptr;
+        other.m_size = 0;
+    }
+
+    // Copy assignment
+    Bools& operator=(const Bools& other) {
+        if (this != &other) {
+            delete[] m_data;
+            m_size = other.m_size;
+            m_data = new bool[m_size];
+            memcpy(m_data, other.m_data, m_size * sizeof(bool));
+        }
+        return *this;
+    }
+
+    // Move assignment
+    Bools& operator=(Bools&& other) noexcept {
+        if (this != &other) {
+            delete[] m_data;
+            m_data = other.m_data;
+            m_size = other.m_size;
+            other.m_data = nullptr;
+            other.m_size = 0;
+        }
+        return *this;
+    }
+
+    ~Bools() {
+        delete[] m_data;
+    }
+
+    bool& operator[](size_t const & index) {
+        return m_data[index];
+    }
+
+    bool const & operator[](size_t const & index) const {
+        return m_data[index];
+    }
+
+    size_t const & size() const {
+        return m_size;
+    }
+
+    size_t const & resize(size_t size, bool const & value = false) {
+      m_data = new bool[(m_size = size)];
+      memset(m_data, value ? 1 : 0, m_size * sizeof(bool));
+      return m_size;
+    }
+
+};
+
 using Strings = std::vector<std::string>;
 
 /////////////////////////////
 //    STANDART FUNCTIONS   //
 /////////////////////////////
+
+void throw_error(std::string const & message) {throw std::runtime_error(message);}
+
+std::map<std::string, std::string> error_message = 
+{
+  {"DEV", "ASK DEV or do it yourself, sry"}
+};
+
+/////////////////////////
+//    MAPS FUNCTIONS   //
+/////////////////////////
+
+template<typename K, typename V> 
+bool find_key(std::map<K,V> const & map, K const & key)
+{
+  typename std::map<K, V>::const_iterator it = map.find(key);
+  return it != map.end();
+}
+
+template<typename K, typename V> 
+bool find_value(std::map<K,V> const & map, V const & value)
+{
+  return (std::find_if(map.begin(), map.end(), [&](const auto& pair) {
+        return pair.second == value;
+    }));
+}
+
+template<typename K, typename V> 
+std::pair<K,V> get_max(std::map<K,V> const & map) 
+{
+  return *std::max_element(map.begin(), map.end(), [] (const std::pair<K,V> & p1, const std::pair<K,V> & p2) 
+  {
+        return p1.second < p2.second;
+  }); 
+}
+
+template<typename K, typename V> 
+V get_max_value(std::map<K,V> const & map) 
+{
+  return (std::max_element(map.begin(), map.end(), [] (const std::pair<K,V> & p1, const std::pair<K,V> & p2) 
+  {
+        return p1.second < p2.second;
+  })->second); 
+}
+
+template<typename K, typename V> 
+K get_max_key(std::map<K,V> const & map) 
+{
+  return (*std::max_element(map.begin(), map.end(), [] (const std::pair<K,V> & p1, const std::pair<K,V> & p2) 
+  {
+        return p1.first < p2.first;
+  })->first); 
+}
+
+template<typename K, typename V> 
+std::pair<K,V> get_min(std::map<K,V> const & map) 
+{
+  return *std::min_element(map.begin(), map.end(), [] (const std::pair<K,V> & p1, const std::pair<K,V> & p2) 
+  {
+        return p1.second > p2.second;
+  }); 
+}
+
+template<typename K, typename V> 
+V get_min_value(std::map<K,V> const & map) 
+{
+  return (std::min_element(map.begin(), map.end(), [] (const std::pair<K,V> & p1, const std::pair<K,V> & p2) 
+  {
+        return p1.second > p2.second;
+  })->second); 
+}
+
+template<typename K, typename V> 
+K get_min_key(std::map<K,V> const & map) 
+{
+  return (*std::min_element(map.begin(), map.end(), [] (const std::pair<K,V> & p1, const std::pair<K,V> & p2) 
+  {
+        return p1.first > p2.first;
+  })->first); 
+}
+
+/////////////////////////////
+//    TEMPLATE HANDELING   //
+/////////////////////////////
+
+template <typename T>
+using T_is_number = std::enable_if_t<std::is_arithmetic_v<T>>;
 
 #endif //LIB_H_CO

@@ -4,36 +4,117 @@
 #include "../libCo.hpp"
 
 #include "Detectors.hpp"
-#include "Nuball2Tree.hpp"
 #include "CoincBuilder.hpp"
+#include "Nuball2Tree.hpp"
 #include "Timer.hpp"
+#include "Alignator.hpp"
 
 #include "../MTObjects/MTFasterReader.hpp"
 
 #include "../Modules/Timeshifts.hpp"
 #include "../Modules/Calibration.hpp"
 
+/**
+ * @brief Basic class to perform faster to root data conversion
+ * 
+ * @details 
+ * 
+ * Section 1 : Options 
+ * 
+ * 
+ * Use this class to perform raw conversion. Without any option, no calibration, no time alignement and no event building are performed.
+ * If you want to do more, you have to load the ID file with the -l option. This file has the following format : 
+ * 
+ *    label_nb name
+ *    label_nb name
+ *    ...
+ *    label_nb name
+ * 
+ * You can build it from the index.pid file
+ * 
+ * You can import a calibration file using -c option. Considering the equation E_cal = a + b*ADC + c*ADC² ..., the file has the following structure : 
+ * 
+ *    label_nb a b (c) (d) 
+ * 
+ * If a detector has no calibration data, then leaving its line empty will automatically fills a = 0 and b = 1. 
+ * c and d are optional, they will be filled with 0. You can choose the number of parameter line by line, 
+ * because each detector needs a different correction order !
+ * 
+ * Now, let's attack the most difficult part : timing and event building. 
+ * So far, the data are still shuffled because of time shifts induced by faster hardware.
+ * So there are different options :
+ * 
+ *  Not doing anything. Because the output format expects event building (see Section 2), there will be a slight overhead due to the mult leaf
+ * 
+ *  (-e [time_window_ns]) : Simple event building. If no time shift, the time shift can be big, it is recommended to use at least 1500 ns
+ * 
+ *  (-t [timeshift_file]) : Load the timeshifts file.
+ *  This option will always result in more time and memory consumption because the conversion is done in 3 step : 
+ *  First the hits are time shifted (and put in a memory resident root tree). But this will result in a shuffle,
+ *  because some hits can be shifted before the previous hit. Therefore, the data have to be realigned.
+ *  And finally the conversion will take place with truly time aligned data.
+ * 
+ * 
+ *  Multithreading : use (-m [threads_number]) option to choose the number of files to treat in parallel.
+ * 
+ * 
+ * Recap : 
+ * 
+ *  -c [calibration_file] : Load the calibration
+ *  -e [time_window_ns]   : Perform event building with time_window_ns = 1500 ns by default
+ *  -l [ID_file]          : Load ID file [UNUSED]
+ *  -m [threads_number]   : Choose the number of files to treat in parallel
+ *  -n [files_number]     : Choose the total number of files to treat inside a data folder
+ *  -t [time_window_ns]   : Loads timeshift data
+ *  --throw_single         : If you are not interested in single hits
+ * 
+ * @attention The two first parameters must be /path/to/data/ and /path/to/output/
+ * For example : 
+ * 
+ *  Convertor("/path/to/data /path/to/output -c calib.calib -e 200 -m 4 -t timeshifts.dT ")
+ * 
+ * 
+ *  
+ *  Section 2 : Format 
+ * 
+ * The root tree is made of 6 leaves : 
+ *  
+ *  type              name          Description
+ *  int               mult          Multiplicity : number of hits in the event
+ *  unsigned short [] label         Labels
+ *  int/float      [] ADC/nrj    (ADC/QDC1) / Calibrated energy
+ *  int/float      [] QDC2/nrj2  QDC2       / Calibrated energy in QDC2
+ *  bool           [] pileup        Pileup/Saturation bit
+ * 
+ * The output will therefore depend on wether you calibrated the data or not
+ * 
+ * In the code, the main object handling the event data is Event. You have to have a look at its complete description
+ * if you are to read the data
+ *  
+ * 
+ */
 class Convertor
 {
 public:
 
   Convertor() {m_ok = false;}
+  Convertor(int argc, char** argv);
 
   /// @brief Raw conversion :
-  Convertor(Path const & inputFolder = "", Path const & outputFolder = "", int const & nb_files = -1) 
+  Convertor(Path const & inputFolder, Path const & outputFolder, int const & nb_files = -1, bool const & buildEvents = false) 
   {// Raw convertor : no time shift nor energy calibration
     m_ok = true;
     Timer timer;
 
-    this -> buildEvents(false);
-    this -> setOutDir(outputFolder);
+    this -> buildEvents(buildEvents);
     
-    this -> addFolder(inputFolder, nb_files);
-    this -> convert();
+    this -> setNbFiles(nb_files);
+    this -> convert(inputFolder, outputFolder);
 
     print("Data written to", outputFolder, "in", timer(), timer.unit());
   }
 
+/*
   // Convertor(Detectors&& detectors, Timeshifts&& timeshifts, Path const & inputFolder, Path const & outputFolder, int const & nb_files = -1)
   // { // Coincidence event builder : with timeshifts
   //   Timer timer;
@@ -82,83 +163,236 @@ public:
 
   //   print("Data written to", outputFolder, "in", timer(), timer.unit());
   // }
+*/
 
-
-  void addFolder(Path const & path, int const & nb_files = -1) {this -> setNbFiles(nb_files); m_MTreader.addFolder(path, m_nb_files);}
-  void setDetectors (Detectors const & detectors)   {m_detectors = detectors;}
+  // void setDetectors (Detectors const & detectors)     {m_detectors = detectors;}
   void setTimeshifts(Timeshifts const & timeshifts) {m_timeshifts = timeshifts;}
+  void loadTimeshifts(std::string const & dTfile)   {m_timeshifts.load(dTfile);}
   void setCalibration(Calibration const & calibration) {m_calibration = calibration;}
-  void setOutDir(Path const & outputFolder, bool create = true) {m_outPath = Path(outputFolder,create);}
+  void loadCalibration(std::string const & calibFile)  {m_calibration.load(calibFile);}
   void setNbFiles(int const & nb_files = -1) {m_nb_files = nb_files;}
-  void convert() {m_MTreader.execute(s_convertFile,*this);}
-  void buildEvents(bool const & eventbuilding = true) {m_eventbuilding = eventbuilding;}
+  void setNbThreads(int const & nb_threads = -1) {m_nb_threads = nb_threads;}
+  void buildEvents(int time_window_ns) 
+  {
+    print("Performing event buiding with", time_window_ns, "ns time window");
+    m_eventbuilding = true; 
+    m_time_window = time_window_ns*1000;
+  }
+  void overwrite( bool const & _overwrite) {m_overwrite = _overwrite;}
+
+  void convert(std::string const & dataFolder, std::string const & outputFolder);
 
 private:
-  static void s_convertFile(Hit & hit, FasterReader & reader, Convertor & convertor) {convertor.convertFile(hit,reader);}
-  void convertFile(Hit & hit, FasterReader & reader);
+  static void s_convertFile(Hit & hit, FasterReader & reader, 
+                            Convertor & convertor, Path const & outPath) 
+  {convertor.convertFile(hit, reader, outPath);}
 
-  MTFasterReader m_MTreader;
+  virtual void convertFile(Hit & hit, FasterReader & reader, Path const & outPath);
 
   Timeshifts m_timeshifts;
-  Detectors m_detectors;
+  // Detectors m_detectors;
   Calibration m_calibration;
 
-  Path m_dataPath;
-  Path m_outPath;
-  bool m_eventbuilding = true;
+  int m_nb_threads = 1;
+  int m_nb_files = -1;
+  Long64_t m_time_window = 1500;
+  bool m_eventbuilding = false;
   bool m_calibrate = false;
-  bool m_nb_files = -1;
+  bool m_throw_single = false;
+  bool m_overwrite = false;
   bool m_ok = false;
+
+  MTCounter m_total_hits;
+  MTCounter m_total_events;
 };
 
-void Convertor::convertFile(Hit & hit, FasterReader & reader)
+void printParameters()
 {
-  Nuball2Tree tree;
+    print("Usage of Convertor : /path/to/data /pat/to/output [[parameters]])");
+    print("");
+    print("parameters :");
+    print("");
+    print("-c [calibration_file]  : Loads the calibration file");
+    print("-e [time_window_ns]    : Perform event building with time_window_ns = 1500 ns by default");
+    print("-l [ID_file]           : Load ID file");
+    print("-m [threads_number]    : Choose the number of files to treat in parallel");
+    print("-n [files_number]      : Choose the total number of files to treat inside a data folder");
+    print("-t [time_window_ns]    : Loads timeshift data");
+    print("--throw-single         : If you are not interested in single hits");
+}
 
-  tree.writting(hit,"ltEQp");
-
-  if (m_calibration)
+Convertor::Convertor(int argc, char** argv)
+{
+  if (argc<2) 
   {
-    while(reader.Read())
-    {
-      hit.nrjcal = m_calibration(hit.nrj,hit.label);
-      hit.nrj2cal = m_calibration(hit.nrj2,hit.label);
-      if (isBGO[hit.label]) hit.nrjcal /= 100;
-      tree -> Fill();
-    }
+    print("Not enough parameters !!!");
+    printParameters();
+  }
+
+  Path m_dataPath = argv [1];
+  Path m_outPath = argv [2];
+
+  for (int i = 3; i<argc; i++)
+  {
+    std::string command = argv[i];
+         if (command == "-c") loadCalibration(argv[++i]);
+    else if (command == "-e") buildEvents(std::stoi(argv[++i]));
+    // else if (command == "-l") m_detectors.load(argv[i]);
+    else if (command == "-m") setNbThreads(std::stoi(argv[++i]));
+    else if (command == "-o") overwrite(true);
+    else if (command == "-n") setNbFiles(std::stoi(argv[++i]));
+    else if (command == "-t") loadTimeshifts(argv[++i]);
+    else if (command == "--throw-singles") m_throw_single = true;
+    else {print("Unkown command", command); throw_error("COMMAND CONVERTOR");}
+  }
+  if (m_timeshifts && !m_eventbuilding) 
+  {
+    print("This combination of time alignement without event building is not handled");
+    throw_error(error_message["DEV"]);
+  }
+  if (m_nb_threads > 1) MTObject::Initialize(m_nb_threads);
+  this -> convert(m_dataPath, m_outPath);
+}
+
+void Convertor::convert(std::string const & dataFolder, std::string const & outputFolder) 
+{
+  Path dataPath(dataFolder);
+  if (!dataPath) {print(dataFolder, "NOT FOUND"); throw std::runtime_error("DATA");}
+  Path outPath(outputFolder, 1);
+  MTFasterReader readerMT(dataPath, m_nb_files);
+  readerMT.execute(s_convertFile, *this, outputFolder);
+}
+
+
+void Convertor::convertFile(Hit & hit, FasterReader & reader, Path const & outPath)
+{
+  Timer timer;
+  //Filename manipulations :
+  File inputFile = reader.filename();
+  File outputFile = outPath+inputFile.shortName()+".root";
+
+  if (!m_overwrite && outputFile.exists()) {print(outputFile, "already exists ! Use option -o to overwrite"); return;}
+  
+  unique_tree tree(new TTree("Nuball2","Nuball2"));
+  tree -> SetDirectory(nullptr);
+  Event event; 
+  unique_tree tempTree;
+  if (m_eventbuilding)
+  {
+    tempTree.reset(new TTree("temp","temp"));
+    tempTree -> SetDirectory(nullptr);
+    hit.writting(tempTree.get(), (m_calibration) ? "lsEQp" : "lseqp");
+    event.writting(tree.get(), (m_calibration) ? "lstEQp" : "lsteqp");
   }
   else
   {
-    while(reader.Read())
-    {
-      hit.nrjcal = hit.nrj;
-      hit.nrj2cal = hit.nrj2;
-      tree -> Fill();
-    }
+    event.writting(tree.get(), (m_calibration) ? "lsEQp" : "lseqp");
   }
 
-  if (m_eventbuilding)
+// Read faster data to fill the memory resident tree :
+  while(reader.Read())
+  // while(reader.Read() && tempTree->GetEntries()<(int)(1.E+6))
   {
-    Event event; 
-    CoincBuilder builder(&event, 500);
-    tree.writting(event, "Nuball2","ltEQp");
-    while(reader.Read())
+    if (m_timeshifts) hit.time += m_timeshifts[hit.label];
+    if (m_calibration)
     {
-      event.push_back(hit);
-      if (builder.build(hit))
-      {
-        hit.nrjcal = hit.nrj;
-        hit.nrj2cal = hit.nrj2;
-      }
+      hit.nrj  = m_calibration(hit.adc,hit.label);
+      hit.nrj2 = m_calibration(hit.qdc2,hit.label);
+    }
+    if (m_eventbuilding) tempTree -> Fill();
+    else
+    {
+      event = hit;
       tree -> Fill();
     }
   }
+  auto const & nb_data = tempTree->GetEntries();
+  if (nb_data<1) {print("EMPTY TEMP TREE"); throw_error("DATA");}
+  m_total_hits+=nb_data;
+  if (m_eventbuilding)
+  {// Read the temporary tree and 
+    Alignator alignator(tempTree.get());
+    hit.reading(tempTree.get(), (m_calibration) ? "lsEQp" : "lseqp");
+    CoincBuilder builder(&event, m_time_window);
+    builder.keepSingles(!m_throw_single);
 
-  //Filename manipulations :
-  File filename = reader.filename();
-  
-  tree.Write(m_outPath.string()+filename.shortName());
-  
+    long loop = 0;
+    int evts = 0;
+    int nb_next_period = 0;
+    Timestamp last_event_timestamp = 0ull;
+    print(nb_data);
+    while (loop<nb_data)
+    {
+      tempTree -> GetEntry(alignator[loop++]);
+      if (builder.build(hit)) 
+      {
+        // print(Time_cast(event.stamp-last_event_timestamp)/1000.);
+        // std::cin.get();
+        if (Time_cast(event.stamp-last_event_timestamp) < 300000) nb_next_period++;
+        last_event_timestamp = event.stamp;
+        tree->Fill();
+        evts++;
+      }
+    }
+    m_total_events+=evts;
+  print((100.*nb_next_period)/evts, "Events adjacents");
+  }
+
+  // Write down the tree : 
+  unique_TFile file(new TFile(outputFile.c_str(), "RECREATE"));
+  file -> cd();
+  tree -> Write();
+  file -> Write();
+  file -> Close();
+  print(outputFile, "written (", nb_data/1000000, " Mhits) in", timer(), timer.unit());
+}
+
+
+
+
+
+////////////////////////////
+// USER DEFINED CONVERTOR //
+////////////////////////////
+
+// Example of user-defined convertor :
+class MySimpleConvertor : public Convertor
+{
+public:
+  // With this constructor, myConvertor becomes a simple wrapper around Convertor class
+  template <class... ARGS>
+  MySimpleConvertor(ARGS &&... args) : Convertor(std::forward<ARGS>(args)...) {}
+
+  // You can write down your own convertor :
+  void convertFile(Hit & hit, FasterReader & reader, Path const & outPath) override;
+};
+
+void MySimpleConvertor::convertFile(Hit & hit, FasterReader & reader, Path const & outPath)
+{
+  // First, declare a tree :
+  unique_tree tree(new TTree("test","test"));
+  tree -> SetDirectory(nullptr); // To make it memory resident
+  // Next, connect the hit to the tree (Hit::writting() is a shortcut for the many TTree::Branch method to be called, 
+  // see Hit class for more information). You can do it manually of course !
+  hit.writting(tree.get(), "lteQp");
+
+  // Now, we can read the faster file :
+  while(reader.Read())
+  {
+    // The hit is loaded with FasterReader::Read(), so all we have to do is fill the tree : 
+    tree -> Fill(); 
+  }
+
+  // Write down this tree : 
+  unique_TFile file(new TFile(outPath+"test.root"));
+  file -> cd();
+  tree -> Write();
+  file -> Write();
+  file -> Close();
+
+  // Notes : In case the multi-threading is activated for the convertor, this function is split between each thread
+  // If you want instead to treat many folders in parallel (instead of many files from the same folder), simply
+  // set 
 }
 
 #endif //CONVERTOR_HPP

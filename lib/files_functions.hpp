@@ -3,6 +3,13 @@
 
 #include "print.hpp"
 #include "string_functions.hpp"
+#include <fstream>
+#include <filesystem>
+#if __cplusplus >= 201703L
+  namespace fs = std::filesystem;
+#else 
+  #warning ("In version of c++ < 17, '...' fold expression not defined, and <filesystem> not loaded. Some parts of the code might not behave as expected...")
+#endif // C++ 17
 
 //----------------------------------------------------//
 //       General files and folders manipulations      //
@@ -491,7 +498,7 @@ public:
   std::string const & get() const {if (!m_exists) print("Carefull, you manipulate not existing folder"); return m_path;}
   std::string const & string() const {return(get());}
   operator std::string() const & {return (get());}
-  auto c_str() {return m_path.c_str();}
+  auto c_str() const {return m_path.c_str();}
 
   std::string operator+(std::string const & addString) {return (m_path+addString);}
   std::string operator+(const char* addString) {return (m_path+static_cast<std::string>(addString));}
@@ -588,7 +595,16 @@ public:
   std::string const & shortName() const {return m_shortName;}
   std::string const & extension() const {return m_extension;}
 
+  void setExtension(std::string const & new_extension) {m_extension = new_extension; update();}
+
+
+
 private:
+
+  void update()
+  {
+    m_fullName = m_shortName + "." + m_extension;
+  }
 
   void fill(std::string const & filename)
   {
@@ -598,6 +614,11 @@ private:
       m_fullName = filename;
       m_shortName = rmPathAndExt(filename);
       m_extension = getExtension(filename);
+      if (m_extension == "")
+      {
+        m_extension = "extension";
+        update();
+      }
     }
   }
   std::string m_fullName;
@@ -611,14 +632,13 @@ std::ostream& operator<<(std::ostream& os, Filename const & filename)
   return os;
 }
 
-std::string operator+(Path const & path, Filename const & filename) {return path.get() + filename.get();} 
-
 /**
  * @brief EXPERIMENTAL Composed of a Path and a Filename
  * @details
  * A File object is composed of a Path and a Filename object, which are composed of :
  *  - A list of folder that forms the Path to the file
  *  - A short name and an extension for the Filename
+ * @todo rethink the checkMode logic ...
  */
 class File
 {
@@ -635,15 +655,15 @@ public:
 
   File(std::string const & file, std::string const & mode = "") 
   {
-    checkMode(mode);
     fill(file);
+    checkMode(mode);
     check();
   }
 
   File(const char * file, std::string const & mode = "") 
   {
-    checkMode(mode);
     fill(file);
+    checkMode(mode);
     check();
   }
 
@@ -652,7 +672,14 @@ public:
     if (mode == "in" || mode == "read" || mode == "input") check_verif = true;
   }
   
-  File(Path const & path, Filename const & filename, std::string const & mode = "") : m_file(path+filename), m_path(path), m_filename(filename) {checkMode(mode);check();}
+  File(Path const & path, Filename const & filename, std::string const & mode = "") :
+    m_path(path), 
+    m_filename(filename) 
+  {
+    update();
+    checkMode(mode);
+    check();
+  }
 
   auto c_str() {return m_file.c_str();}
 
@@ -677,34 +704,42 @@ public:
     return *this;
   }
 
+  operator std::string() const &     {return m_file;}
   std::string const & string() const {return m_file;}
   std::string const & get   () const {return m_file;}
-  std::string const & file  () const {return m_file;}
-  operator std::string() const &     {return m_file;}
-  Path        const & path  () const {return m_path;}
-  Filename    const & name  () const {return m_filename;}
-  Filename    const & filename  () const {return m_filename;}
+
+  Path const & path  () const {return m_path;}
+
+  Filename    const & name    () const {return m_filename;}
+  Filename    const & filename() const {return m_filename;}
 
   std::string const & shortName() const {return m_filename.shortName();}
   std::string const & extension() const {return m_filename.extension();}
 
+  void setExtension(std::string const & new_extension) {m_filename.setExtension(new_extension); update();}
+  void makePath() {m_path.make();}
+
+
   operator bool() const & {return m_ok;}
   bool const & ok()       {return m_ok;}
+
+  bool exists() const {return file_exists(m_file);}
 
   auto size(std::string const & unit = "o") const {return size_file(m_file, unit);}
 
 private:
-
+  void update() {m_file = m_path.string()+m_filename.string(); check();}
   void check()
   {
     if (m_path.exists())
     {
       if (file_exists(m_file) || !check_verif) m_ok = true;
-      else print("The file", m_file, "is unreachable in folder", m_path);
+      else {print("The file", m_file, "is unreachable in folder", m_path); m_ok = false;}
     }
     else
     {
       print("The path of the file", m_file, "is unreachable");
+      m_ok = false;
     }
   }
 
@@ -720,7 +755,7 @@ private:
       m_path = Path::pwd();
       m_filename = file;
     }
-    m_file = m_path.string()+m_filename.string();
+    this -> update();
   }
 
   bool m_ok = false;
@@ -729,6 +764,7 @@ private:
   Path m_path;        // Path
   Filename m_filename;// Name + extension
 };
+std::string operator+(Path const & path, Filename const & filename) {return path.get() + filename.get();}
 
 std::ostream& operator<<(std::ostream& cout, File const & file)
 {

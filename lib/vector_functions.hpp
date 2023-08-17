@@ -73,17 +73,21 @@ public:
   StaticVector() = default;
 
   /// @brief Create a new Static_vector with size static_size
-  StaticVector(std::size_t const & static_size) : m_static_size(static_size) {create();}
+  StaticVector(std::size_t const & static_size) : m_static_size(static_size) {reserve();}
 
   /// @brief Create a new Static_vector with size static_size and fill it with element e
-  StaticVector(T const & e, std::size_t const & static_size) : m_static_size(static_size) {create(); static_fill(e);}
+  StaticVector(std::size_t const & static_size, T const & e) : m_static_size(static_size) 
+  {
+    reserve(); 
+    fill_static(e);
+  }
 
   /// @brief Create a new Static_vector by copy (duplicate)
   StaticVector(StaticVector<T> const & vector) : 
     m_static_size(vector.m_static_size),
     m_dynamic_size(vector.m_dynamic_size),
     m_deleted(vector.m_deleted)
-  { create(); *m_data = *(vector.m_data); }
+  { reserve(); *m_data = *(vector.m_data); }
 
   /// @brief Move contructor
   StaticVector(StaticVector<T>&& other)
@@ -91,8 +95,6 @@ public:
     *this = std::move(other);
   }
 
-  
-    
   ~StaticVector()
   {
     if(!m_deleted)
@@ -134,6 +136,7 @@ public:
 
   /// @brief Only reset the user size to new_size (default 0). Do not touch the data. Use for performances.
   void resize(std::size_t const & new_size = 0) {m_dynamic_size = new_size;}
+  void clear () {m_dynamic_size = 0;}
 
   /// @brief Delete memory, reset the user size to 0 and allocate new_size memory
   void static_resize(std::size_t const & new_size = 0)
@@ -141,16 +144,21 @@ public:
     if (m_static_size) delete[] m_data;
     m_dynamic_size = 0;
     m_static_size = new_size;
-    m_data = new T[m_static_size];
+    reserve();
+  }
+  void static_resize(std::size_t const & new_size, T const & t)
+  {
+    static_resize(new_size);
+    fill_static(t);
   }
 
   /// @brief Does the vector contain element e ?
   /// @param t: variable in read-only mode
-  virtual bool has(T const & e);
+  virtual bool has(T const & t) const {return (std::find(this -> begin(), this -> end(), t) != this -> end());}
 
   /// @brief Does the vector contain element e ?
   /// @param t: direct access to the variable
-  virtual bool has(T & e);
+  virtual bool has(T & t) const {return (std::find(this -> begin(), this -> end(), t) != this -> end());}
 
   /// @brief Add element to the back of the vector. Use for performances. Unsafe. define SAFE for less performance but size checking
   void push_back(T const & e) 
@@ -160,6 +168,17 @@ public:
     else std::cout << "Capacity of StaticVector<" << typeid(T).name() << "> with size " << m_static_size << " exceeded" << std::endl;
   #else 
     m_data[m_dynamic_size++] = e;
+  #endif //SAFE
+  }
+
+  /// @brief Move the element to the back of the vector. Use for performances. Unsafe. define SAFE for less performance but size checking
+  void move_back(T && e) 
+  {
+  #ifdef SAFE
+    if (m_dynamic_size < m_static_size) m_data[m_dynamic_size++] = e;
+    else std::cout << "Capacity of StaticVector<" << typeid(T).name() << "> with size " << m_static_size << " exceeded" << std::endl;
+  #else 
+    m_data[m_dynamic_size++] = std::move(e);
   #endif //SAFE
   }
 
@@ -191,15 +210,14 @@ public:
   T* data() {return m_data;}
 
   /// @brief Fills the vector with element e within user size
-  void fill(T const & e) {for (auto & data : *this) data = e;}
+  void fill(T const & e) {memset(m_data, e, m_dynamic_size * sizeof(e));}
 
   /// @brief Fills the vector with element e within static size
-  void fill_static(T const & e) {for (int i = 0; i<m_static_size; i++) m_data[i] = e;}
+  void fill_static(T const & e) {memset(m_data, e, m_static_size * sizeof(e));}
+
+  void reserve() {m_data = new T[m_static_size];}
 
 private:
-  /// @brief To be used only by the constructor
-  void create() {m_data = new T[m_static_size];}
-
   T* m_data; // Underlying data dynamic array
   std::size_t m_dynamic_size = 0; // User size
   std::size_t m_static_size = 0;  // Maximum size
@@ -207,29 +225,10 @@ private:
 };
 
 template<class T>
-bool inline StaticVector<T>::has(T const & t)
+std::ostream& operator<<(std::ostream& cout, StaticVector<T> const & vector)
 {
-  return (std::find(this -> begin(), this -> end(), t) != this -> end());
+  for (auto const & e : vector) cout << e << " ";
+  return cout;
 }
-
-template<class T>
-bool inline StaticVector<T>::has(T & t)
-{
-  return (std::find(this -> begin(), this -> end(), t) != this -> end());
-}
-
-// /**
-//  * @brief TBD
-//  * 
-//  */
-// template<class T, std::size_t  = 0>
-// class StaticOrderVector : public StaticVector<T>
-// {// Binary search works only with
-// public:
-//   bool has(T const & t)
-//   {
-//     return std::binary_search(this -> begin(), this -> end(), t);
-//   }
-// };
 
 #endif //VECTOR_FUNCTIONS_HPP

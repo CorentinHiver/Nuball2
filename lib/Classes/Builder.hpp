@@ -7,6 +7,7 @@
 /**
  * @brief Base class of event builders (pure virtual class)
  * 
+ * @details
  * The first thing to do is to set the first hit of the file using Builder::set_first_hit(hit);
  * Then add the following hits using Builder::build(hit);
  * 
@@ -41,7 +42,7 @@
  *            build(...);
  *        };
  * 
- * You will have to overload the buid method
+ * You will have to overload the build method
  * 
 */
 class Builder
@@ -80,19 +81,18 @@ public:
     m_last_hit = hit;
   }
 
+  void keepSingles(bool const & b) {keep_singles = b;}
+
 protected:
 
-  Event*    m_event   = nullptr;
-
-  std::size_t m_raw_Ge  = 0;
-  std::size_t m_DSSD    = 0;
-  std::size_t m_modules = 0;
+  Event* m_event = nullptr;
 
   Hit m_last_hit;
   Hit m_single_hit;
 
   bool coincON = false;
   uchar m_status = 0;
+  bool keep_singles = false;
 };
 
 #endif //BUILDER_H

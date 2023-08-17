@@ -2,11 +2,12 @@
 #define CLOVERS_H
 
 #include "../libRoot.hpp"
-#include <MTObject.hpp>
 
 #include "../Classes/Detectors.hpp"
 #include "../Classes/Event.hpp"
-#include <Gate.hpp>
+#include "../Classes/Gate.hpp"
+
+#include "../MTObjects/MTObject.hpp>
 
 #include "CloverModule.hpp"
 
@@ -208,8 +209,8 @@ public:
   bool has511 = false;
 
   // Calorimetry :
-  double totGe = 0.d;
-  double totBGO = 0.d;
+  double totGe = 0.0;
+  double totBGO = 0.0;
   double totGe_prompt = -0.1d;
   double totBGO_prompt = -0.1;
   double totGe_delayed = -0.1;
@@ -366,7 +367,7 @@ bool Clovers::Fill(Event const & event, uchar const & hit_index)
   {
     auto const & index_clover = labels[label];
 
-    auto nrj  = event.nrjcals[hit_index] + static_cast<float>(gRandom->Uniform(0,1));
+    auto nrj  = event.nrjs[hit_index] + static_cast<float>(gRandom->Uniform(0,1));
     auto const & time = event.time2s[hit_index];
 
     auto & clover = m_Clovers[index_clover];
@@ -462,8 +463,8 @@ bool Clovers::Fill(Event const & event, uchar const & hit_index)
       // Manage the time of the BGOs. To be improved if necessary : if 2 BGOs, only the latest one is stored
       clover.time_BGO = time;
       totBGO+=nrj*BGO_coeff[index_cristal];
-           if (promptBGOgate(time) ) totBGO_prompt +=nrj*BGO_coeff[index_cristal];
-      else if (delayedBGOgate(time)) totBGO_delayed+=nrj*BGO_coeff[index_cristal];
+           if (promptBGOgate(float_cast(time)) ) totBGO_prompt +=nrj*BGO_coeff[index_cristal];
+      else if (delayedBGOgate(float_cast(time))) totBGO_delayed+=nrj*BGO_coeff[index_cristal];
     }
    
     return true;

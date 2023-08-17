@@ -43,8 +43,8 @@ void CloverModule::Reset()
   nrj_BGO = 0.;
   nb = 0.;
   nb_BGO = 0.f;
-  time = 0.d;
-  time_BGO = 0.d;
+  time = 0.0;
+  time_BGO = 0.0;
 
   maxE_Ge_cristal = '\0';
 }

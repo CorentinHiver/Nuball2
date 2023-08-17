@@ -90,10 +90,8 @@ public:
   */
   bool setTimeWindow_ns(std::string const & timewindow_ns_str);
 
-  /**
-   * @brief Set the time reference label
-   * @note Mandatory only if calculate timeshifts
-  */
+  /// @brief Set the time reference label
+  /// @note Mandatory only if calculate timeshifts
   bool setTimeReference(Label const & timeRef_label);
 
   /**
@@ -105,10 +103,8 @@ public:
   */
   bool setTimeReference(std::string const & timeRef_name);
 
-  /**
-   * @brief Set the output directory (full path);
-   * @note Mandatory only if calculate timeshifts
-  */
+  ///@brief Set the output directory (full path);
+  ///@note Mandatory only if calculate timeshifts
   void setOutDir(std::string const & outDir);
 
   /**
@@ -266,6 +262,7 @@ private:
   std::string m_timeRef_name = "R1A9_FATIMA_LaBr3";
   ulong m_max_hits = -1;
   ADC m_Emin_ADC = 0.;
+  int m_nb_detectors = 0;
 
   // This map holds the number of bins per ns (e.g. for LaBr3 there is one bin every 100 ps)
   std::map<dAlias, Time_ns> m_bins_per_ns = 
@@ -333,34 +330,36 @@ private:
 bool Timeshifts::load(std::string const & filename)
 {
   std::ifstream inputfile(filename, std::ifstream::in);
-  if (!inputfile.is_open())
-  {
-    print("Could not open the time shifts file - '", filename, "'");
-    return (m_ok = false);
-  }
-  else if (file_is_empty(inputfile))
-  {
-    print("Time shift file - '", filename, "' is empty !");
-    return (m_ok = false);
+  if (!inputfile.good()) {print("CAN'T OPEN THE TIMESHIFT FILE " + filename); throw std::runtime_error("TIMESHIFT");}
+  else if (file_is_empty(inputfile)) {print("TIMESHIFT FILE", filename, "EMPTY !"); throw std::runtime_error("TIMESHIFT");}
+  std::string line = ""; // Reading buffer
+  Label label = 0; // Reading buffer
+  // ----------------------------------------------------- //
+  // First extract the maximum label
+  Label size = 0;
+  if (m_detectors) size = m_detectors.size();
+  else 
+  {// If no ID file loaded, infer the number of detectors from the higher label in calbration file (unsafe)
+    while (getline(inputfile, line))
+    { 
+      std::istringstream iss(line);
+      iss >> label;
+      if (size<label) size = label;
+    }
+    inputfile.clear(); 
+    inputfile.seekg(0, inputfile.beg);
   }
   // ----------------------------------------------------- //
-  Label size = 0; std::string line = ""; Label label = 0; 
-  while (getline(inputfile, line))
-  { // First extract the maximum label
-    std::istringstream iss(line);
-    iss >> label;
-    if (size<label) size = label;
-  }
-  // ----------------------------------------------------- //
-  // Second reading : fill the vector
-  m_timeshifts.resize(size+1);
-  inputfile.clear(); inputfile.seekg(0, inputfile.beg);
-  int deltaT = 0;
+  // Now fill the vector
+  m_timeshifts.resize(size+1, 0);
+  Shift_t shift = 0;
   while (getline(inputfile, line))
   { // Then fill the array
+    m_nb_detectors++;
     std::istringstream iss(line);
-    iss >> label >> deltaT;
-    m_timeshifts[label] = deltaT;
+    iss >> label >> shift;
+    m_timeshifts[label] = shift;
+    shift = 0;
   }
   inputfile.close();
   print("Timeshifts extracted from", filename);
@@ -667,10 +666,10 @@ void Timeshifts::treatFasterFile(std::string const & filename)
     if (m_corrected) hit.time += m_timeshifts[hit.label];
 
     // This is used to put the energy value of the time reference in the Event (used in the Fill method) :
-    if (hit.label == m_time_reference_label) hit.nrjcal = NRJ_cast(hit.nrj); 
+    if (hit.label == m_time_reference_label) hit.nrj = NRJ_cast(hit.adc); 
 
   #ifdef USE_RF
-    if(isRF[hit.label]) {rf.last_hit = hit.time; rf.period = hit.nrj;}
+    if(isRF[hit.label]) {rf.last_hit = hit.time; rf.period = hit.adc;}
   #endif //USE_RF
 
     if (coincBuilder.build(hit)) 
@@ -901,14 +900,14 @@ void Timeshifts::analyse()
         auto const & peak_begin = m_histograms_VS_RF[label] -> FindFirstBinAbove(amppic*0.8);
         auto const & peak_begin_ps = m_histograms_VS_RF[label]->GetBinCenter(peak_begin); // In ps
         m_timeshifts[label] = RF_zero - Shift_cast(peak_begin_ps); 
-        if (m_verbose) print( "Edge :", m_timeshifts[label], "with max =", (int) amppic, "counts.");
+        if (m_verbose) print( "Edge :", m_timeshifts[label], "with max =", int_cast(amppic), "counts.");
       }
 
       else
       {
         double mean = 0.;
         if (getMeanPeak(m_histograms_VS_RF[label], mean)) m_timeshifts[label] = RF_zero-Shift_cast(mean);
-        if (m_verbose) print( "Mean :", m_timeshifts[label], "with max =", (int) m_histograms_VS_RF[label] -> GetMaximum(), "counts.");
+        if (m_verbose) print( "Mean :", m_timeshifts[label], "with max =", int_cast(m_histograms_VS_RF[label] -> GetMaximum()), "counts.");
       }
       
     }
@@ -925,13 +924,13 @@ void Timeshifts::analyse()
         auto const & peak_begin = m_time_spectra[label] -> FindLastBinAbove(amppic*0.8);
         auto const & peak_bins = m_time_spectra[label] -> GetBinCenter(peak_begin);
         m_timeshifts[label] = Shift_cast(peak_bins); // In ps
-        if (m_verbose) print( "Edge :", m_timeshifts[label], "with max =", (int) m_time_spectra[label] -> GetMaximum(), "counts.");
+        if (m_verbose) print( "Edge :", m_timeshifts[label], "with max =", int_cast(m_time_spectra[label] -> GetMaximum()), "counts.");
       }
       else
       {// For all the other detectors :
         double mean = 0.;
         if (getMeanPeak(m_time_spectra[label], mean)) m_timeshifts[label] = Shift_cast(mean); else m_timeshifts[label] = 0;
-        if (m_verbose) print( "Mean :", m_timeshifts[label], "with max =", (int) m_time_spectra[label] -> GetMaximum(), "counts.");
+        if (m_verbose) print( "Mean :", m_timeshifts[label], "with max =", int_cast(m_time_spectra[label] -> GetMaximum()), "counts.");
       }
     }
   }

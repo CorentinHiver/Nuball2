@@ -1,7 +1,7 @@
 // #define USE_RF 200
 // #define N_SI_136
-#define USE_DSSD
-#define USE_PARIS
+// #define USE_DSSD
+// #define USE_PARIS
 #define USE_RF 200
 
 // #include "Modules/Timeshifts.hpp"
@@ -9,24 +9,73 @@
 // #include "../libCo.hpp"
 #include <Detectors.hpp>
 #include <Convertor.hpp>
+// #include <Timeshifts.hpp>
 
 int main(int argc, char ** argv)
 {
-  MTObject::Initialize(3);
-  int nb_files = -1;
-  if (argc > 1)
-  {
-    std::string command;
-    for(int i = 1; i < argc; i++)
-    {
-      command = argv[i];
-      if (command == "-n") {nb_files = std::atoi(argv[++i]);}
+  // MTObject::Initialize(3);
+  // int nb_files = -1;
+  // if (argc > 1)
+  // {
+  //   std::string command;
+  //   for(int i = 1; i < argc; i++)
+  //   {
+  //     command = argv[i];
+  //     if (command == "-n") {nb_files = std::atoi(argv[++i]);}
       
-      else {throw std::runtime_error("command " + command + " unkown");}
-    }
-  }
+  //     else {throw std::runtime_error("command " + command + " unkown");}
+  //   }
+  // }
+  
+  // std::vector<long> vec(100,0.0);
+  // Timer timeVec;
+  // for (int i = 0; i<2000000000; i++) 
+  // {
+  //   for (int i = 0; i<5; i++) vec.push_back(time(0));
+  //   vec.clear();
+  // }
+  // print(timeVec(), timeVec.unit());
 
-  Convertor convertor("test","test");
+  // StaticVector<long> svec(100,0.0);
+  // Timer timeSVec;
+  // for (int i = 0; i<2000000000; i++) 
+  // {
+  //   for (int i = 0; i<5; i++) svec.push_back(time(0));
+  //   svec.clear();
+  // }
+  // print(timeSVec(), timeSVec.unit());
+
+  // Timer timeSVec2;
+  // for (int i = 0; i<2000000000; i++) 
+  // {
+  //   for (int i = 0; i<5; i++) svec.push_back(time(0));
+  //   svec.resize();
+  // }
+  // print(timeSVec2(), timeSVec2.unit());
+
+  // StaticVector<long> svec2(2,0);
+  // long i = 61;
+  // long j = 62;
+  // svec2.move_back(std::move(i));
+  // svec2.move_back(std::move(j));
+  // i = 5;
+  // print(svec2, i, j);
+
+  // Convertor convertor(argc, argv);
+  Detectors detectors("index_129.list");
+  Calibration calibration(detectors);
+  // calibration.verbose(true);
+  // calibration.calculate(argv[1], (argc>2) ? std::stoi(argv[2]) : 1, "152Eu");
+  // calibration.verify("test");
+
+  // MTObject::Initialize(2);
+
+  calibration.load("136_final.calib");
+  calibration.calibrateData(argv[1], (argc>2) ? std::stoi(argv[2]) : 1);
+  calibration.writeCalibratedData("test_calib_data.root");
+  
+    // Timeshift ts;
+
 
   // ("/home/corentin/faster_data/N-SI-129/152Eu_N1_9.fast", "./tests/152Eu_N1_9", nb_files, false);
   // convertor.addFolder("t");
@@ -111,3 +160,37 @@ int main(int argc, char ** argv)
 
   return -1;
 }
+
+// #include <iostream>
+// #include <vector>
+// #include <chrono>
+// using namespace std;
+
+
+
+// int main()
+// {
+    
+//     std::vector<int> vec;
+//     int iterations = (int)(1.E9);
+    
+//     auto start = std::chrono::high_resolution_clock::now();
+
+//     for (int loop = 0; loop<10; loop++)
+//     {
+//       vec.reserve(iterations);
+//       for (int i = 0; i<iterations; i++)
+//       {
+//           vec[i] = i*time(0);
+//       }
+//       vec.clear();
+//     }
+
+//     auto end = std::chrono::high_resolution_clock::now();
+//     auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
+
+//     // Print the duration
+//     std::cout << "Time taken: " << duration.count() << " milliseconds\n";
+
+//     return 0;
+// }

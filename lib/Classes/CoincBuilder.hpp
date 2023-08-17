@@ -6,7 +6,19 @@
   Makes coincidence building easier
 */
 
-class CoincBuilder : public Builder
+/**
+ * @brief Coincidence builder
+ * @details
+ * Use this class when you don't have any particular time reference
+ * Add one hit after the other using CoincBuilder::build()
+ * If two consecutive hits are within a time window, add the following hits
+ * This class will return true when the current hit is out of the time window
+ * 
+ * Using Builder::keepSingles(bool) method will make CoincBuilder::build() return
+ * true for lonely hits as well
+ * 
+ */
+class CoincBuilder : public Builder 
 {
 public:
   // Constructors :
@@ -19,7 +31,10 @@ public:
   bool build(Hit const & _hit);
 
   void reset() {m_event -> clear(); m_status = 0;}
-  bool coincidence(Hit const & hit) {return ((hit.time - m_last_hit.time) < m_time_window);}
+  bool coincidence(Hit const & hit) {
+  //   print(hit.label, hit.stamp, m_last_hit.label, m_last_hit.stamp, Time_cast(hit.stamp - m_last_hit.stamp));  
+  // std::cin.get();
+    return (Time_cast(hit.stamp - m_last_hit.stamp) < m_time_window);}
 
   // Setters :
   void setTimeWindow(Time const & _timeWindow) {m_time_window = _timeWindow;}
@@ -29,7 +44,7 @@ public:
 
 private:
   // Attributes :
-  Time m_time_window = 500000ull; // 500 000 ps by default (ull = unsigned long long)
+  Time m_time_window = 500000; // 500 000 ps by default (ull = unsigned long long)
 };
 
 bool CoincBuilder::build(Hit const & hit)
@@ -41,8 +56,7 @@ bool CoincBuilder::build(Hit const & hit)
     {// Case 1 :
       // The previous and current hit are in the same event.
       // In next call, we'll check if the next hits are in the event or not (cases 3 or 4)
-      m_event -> clear();
-      m_event -> push_back(m_last_hit);
+      *m_event = m_last_hit;
       m_event -> push_back(hit);
       coincON = true; // Open the event
       m_status = 1; // Now, the event is being filled
@@ -55,6 +69,11 @@ bool CoincBuilder::build(Hit const & hit)
       m_single_hit = m_last_hit; // If last hit is not in time window of last hit, then
       m_last_hit = hit; // Building next event based on the last hit
       m_status = 0; // The current event is empty !
+      if (keep_singles && m_single_hit.label != 0)
+      {
+        *m_event = m_single_hit;
+        return true;
+      }
     }
   }
   else

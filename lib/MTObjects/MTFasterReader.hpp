@@ -108,10 +108,11 @@ public:
  */
   MTFasterReader(Path path, int const & nb_files = -1) {addFolder(path, nb_files);}
 
+  MTFasterReader(FilesManager const & files) {m_files = files;}
+
   bool addFolder(Path path, int const & nb_files = -1) 
   {
     auto const ret = m_files.addFolder(path, nb_files);
-    m_MTfiles = m_files.getListFiles();
     return ret;
   }
   
@@ -136,7 +137,7 @@ public:
    * 
   */
   template<class Func, class... ARGS>
-  void execute(Func func, ARGS &&... args);
+  void execute(Func&& func, ARGS &&... args);
 
   void printMTFiles() {for (auto const & file : m_MTfiles) print(file);}
 
@@ -153,14 +154,16 @@ private:
 };
 
 template<class Func, class... ARGS>
-void MTFasterReader::execute(Func func, ARGS &&... args)
+void MTFasterReader::execute(Func && func, ARGS &&... args)
 {
+  if (!m_files) {print("NO DATA FILE FOUND"); throw std::runtime_error("DATA");}
+  m_MTfiles = m_files.getListFiles();
   MTObject::parallelise_function(Read<Func, ARGS...>, *this, std::forward<Func>(func), std::forward<ARGS>(args)...);
 }
 
 template<class Func, class... ARGS>
 void MTFasterReader::Read(MTFasterReader & MTreader, Func function, ARGS &&... args)
-{
+{ // Here we are inside each thread :
   std::string filename;
   while(MTreader.nextFilename(filename))
   {
