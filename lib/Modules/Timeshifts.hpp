@@ -34,11 +34,11 @@
  * Example at the end
 */
 
-using Shift_t = Long64_t;
+using Time = int;
 
-/// @brief Casts a number into unsigned Shift_t
+/// @brief Casts a number into unsigned Time
 template<typename T,  typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
-inline Shift_t Shift_cast(T const & t) {return static_cast<Shift_t>(t);}
+inline Time Shift_cast(T const & t) {return static_cast<Time>(t);}
 
 class Timeshifts
 {
@@ -150,7 +150,7 @@ public:
    * @param max_mult: default max_mult = 2
    * 
   */
-  void setMult(uchar const & min_mult, uchar const & max_mult) {m_min_mult = min_mult; m_max_mult = max_mult;}
+  void setMult(Mult const & min_mult, Mult const & max_mult) {m_min_mult = min_mult; m_max_mult = max_mult;}
 
   /**
    * @brief Set maximum hits to be read in a file
@@ -163,21 +163,21 @@ public:
    * @note Use only if calculating timeshifts with RF
    * @param shift: default 50 ns
   */
-  void setRFShift(Long64_t const & shift) {RF_Manager::set_offset(shift);}
+  void setRFShift(Time const & shift) {RF_Manager::set_offset(shift);}
 
   /**
    * @brief Set RF offset (synonymous to Timeshifts::setRFShift)
    * @note Use only if calculating timeshifts with RF
    * @param offset: default 50 ns
   */
-  void setRFOffset_ns(Long64_t const & offset_ns) {RF_Manager::set_offset(offset_ns*1000);}
+  void setRFOffset_ns(Time_ns const & offset_ns) {RF_Manager::set_offset(Time_cast(offset_ns)*1000);}
 
   /**
    * @brief Set RF offset (synonymous to Timeshifts::setRFShift)
    * @note Use only if calculating timeshifts with RF
    * @param offset: default 50000 ps
   */
-  void setRFOffset(Long64_t const & offset_ps) {RF_Manager::set_offset(offset_ps);}
+  void setRFOffset(Time const & offset_ps) {RF_Manager::set_offset(offset_ps);}
 
   bool calculate(std::string const & folder, int const & nb_files = -1);
 
@@ -193,11 +193,11 @@ public:
 
   TH1F* shiftTimeSpectra(TH1F* histo, Label const & label, std::string const & unit = "ps");
 
-  Shift_t const & operator[] (int const & i) const {return m_timeshifts[i];}
+  Time const & operator[] (int const & i) const {return m_timeshifts[i];}
   operator bool() const & {return m_ok;}
 
-  std::vector<Shift_t> const & get() const {return m_timeshifts;}
-  Shift_t const & get(int const & i) const {return m_timeshifts[i];}
+  std::vector<Time> const & get() const {return m_timeshifts;}
+  Time const & get(int const & i) const {return m_timeshifts[i];}
 
   void write    (std::string const & name);
   void writeRoot(std::string const & name);
@@ -251,14 +251,14 @@ private:
 
   std::string m_filename = "";
 
-  std::vector<Shift_t> m_timeshifts;
-  std::vector<Time> mt_ref_time;
+  std::vector<Time> m_timeshifts;
+  std::vector<Timestamp> mt_ref_time;
 
   Time_ns m_timewindow_ns = Time_ns_cast(1500);
   Time m_timewindow = Time_cast(m_timewindow_ns*1000);
-  uchar m_min_mult = 2;
-  uchar m_max_mult = 2;
-  ushort m_time_reference_label = 252;
+  Mult m_min_mult = 2;
+  Mult m_max_mult = 2;
+  Label m_time_reference_label = 252;
   std::string m_timeRef_name = "R1A9_FATIMA_LaBr3";
   ulong m_max_hits = -1;
   ADC m_Emin_ADC = 0.;
@@ -315,7 +315,7 @@ private:
   MTTHist<TH2F> m_time_spectra_corrected_bidim; // Time spectra from coincidence with the time reference detector, X axis label, Y axis time spectra, after timeshift
 
 #ifdef USE_RF
-  ushort m_period = USE_RF;
+  int m_period = USE_RF;
 
   MTTHist<TH1F> m_histo_ref_VS_RF; // RF time spectra of the time reference detector
   MTTHist<TH2F> m_histo_ref_vs_RF_VS_mult; // RF time spectra VS multiplicity of the time reference detector
@@ -352,7 +352,7 @@ bool Timeshifts::load(std::string const & filename)
   // ----------------------------------------------------- //
   // Now fill the vector
   m_timeshifts.resize(size+1, 0);
-  Shift_t shift = 0;
+  Time shift = 0;
   while (getline(inputfile, line))
   { // Then fill the array
     m_nb_detectors++;
@@ -686,13 +686,13 @@ void Timeshifts::treatFasterFile(std::string const & filename)
  */
 void Timeshifts::Fill(Event const & event, RF_Manager & rf)
 {
-  auto const & mult = event.size();
+  auto const & mult = event.mult;
   
   if (mult >= m_max_mult &&  mult <= m_min_mult) return;
 
   // There are 2 loops : the first one fills the RF spectra and looks for the time reference.
   // If found, it opens another loop to fill the coincidence time spectra
-  for (size_t loop_i = 0; loop_i < mult; loop_i++)
+  for (Mult loop_i = 0; loop_i < mult; loop_i++)
   {
     bool coincFilled = false; // To only fill the coincidence once.
 
@@ -794,7 +794,7 @@ double getRFGammaPrompt(TH1F * hist, bool const & check_preprompt)
   else return maxBin_ps;
 }
 
-std::vector<longlong> forced_shifts;
+std::vector<Time> forced_shifts;
 
 void Timeshifts::analyse()
 {
@@ -803,47 +803,47 @@ void Timeshifts::analyse()
   {
     switch (label)
     {
-      case (800) : forced_shifts[label] = -200000ll; break;
-      case (801) : forced_shifts[label] = -200000ll; break;
-      case (802) : forced_shifts[label] = -223700ll; break;
-      case (803) : forced_shifts[label] = -224013ll; break;
-      case (804) : forced_shifts[label] = -223337ll; break;
-      case (805) : forced_shifts[label] = -233668ll; break;
-      case (806) : forced_shifts[label] = -234377ll; break;
-      case (807) : forced_shifts[label] = -233857ll; break;
-      case (808) : forced_shifts[label] = -233677ll; break;
-      case (809) : forced_shifts[label] = -223296ll; break;
-      case (810) : forced_shifts[label] = -224911ll; break;
-      case (811) : forced_shifts[label] = -224341ll; break;
-      case (812) : forced_shifts[label] = -224824ll; break;
-      case (813) : forced_shifts[label] = -227513ll; break;
-      case (814) : forced_shifts[label] = -227109ll; break;
-      case (815) : forced_shifts[label] = -227453ll; break;
-      case (821) : forced_shifts[label] = -233209ll; break;
-      case (822) : forced_shifts[label] = -233408ll; break;
-      case (825) : forced_shifts[label] = -243012ll; break;
-      case (826) : forced_shifts[label] = -242249ll; break;
-      case (828) : forced_shifts[label] = -235076ll; break;
-      case (829) : forced_shifts[label] = -232000ll; break;
-      case (830) : forced_shifts[label] = -242684ll; break;
-      case (831) : forced_shifts[label] = -238313ll; break;
-      case (832) : forced_shifts[label] = -238868ll; break;
-      case (833) : forced_shifts[label] = -238871ll; break;
-      case (834) : forced_shifts[label] = -235886ll; break;
-      case (835) : forced_shifts[label] = -234000ll; break;
-      case (840) : forced_shifts[label] = -250407ll; break;
-      case (841) : forced_shifts[label] = -220000ll; break;
-      case (842) : forced_shifts[label] = -240967ll; break;
-      case (843) : forced_shifts[label] = -249883ll; break;
-      case (845) : forced_shifts[label] = -255466ll; break;
-      case (846) : forced_shifts[label] = -245108ll; break;
-      case (847) : forced_shifts[label] = -250381ll; break;
-      case (848) : forced_shifts[label] = -253537ll; break;
-      case (850) : forced_shifts[label] = -246108ll; break;
-      case (851) : forced_shifts[label] = -240327ll; break;
-      case (852) : forced_shifts[label] = -238842ll; break;
-      case (853) : forced_shifts[label] = -250727ll; break;
-      case (854) : forced_shifts[label] = -242609ll; break;
+      case (800) : forced_shifts[label] = -200000; break;
+      case (801) : forced_shifts[label] = -200000; break;
+      case (802) : forced_shifts[label] = -223700; break;
+      case (803) : forced_shifts[label] = -224013; break;
+      case (804) : forced_shifts[label] = -223337; break;
+      case (805) : forced_shifts[label] = -233668; break;
+      case (806) : forced_shifts[label] = -234377; break;
+      case (807) : forced_shifts[label] = -233857; break;
+      case (808) : forced_shifts[label] = -233677; break;
+      case (809) : forced_shifts[label] = -223296; break;
+      case (810) : forced_shifts[label] = -224911; break;
+      case (811) : forced_shifts[label] = -224341; break;
+      case (812) : forced_shifts[label] = -224824; break;
+      case (813) : forced_shifts[label] = -227513; break;
+      case (814) : forced_shifts[label] = -227109; break;
+      case (815) : forced_shifts[label] = -227453; break;
+      case (821) : forced_shifts[label] = -233209; break;
+      case (822) : forced_shifts[label] = -233408; break;
+      case (825) : forced_shifts[label] = -243012; break;
+      case (826) : forced_shifts[label] = -242249; break;
+      case (828) : forced_shifts[label] = -235076; break;
+      case (829) : forced_shifts[label] = -232000; break;
+      case (830) : forced_shifts[label] = -242684; break;
+      case (831) : forced_shifts[label] = -238313; break;
+      case (832) : forced_shifts[label] = -238868; break;
+      case (833) : forced_shifts[label] = -238871; break;
+      case (834) : forced_shifts[label] = -235886; break;
+      case (835) : forced_shifts[label] = -234000; break;
+      case (840) : forced_shifts[label] = -250407; break;
+      case (841) : forced_shifts[label] = -220000; break;
+      case (842) : forced_shifts[label] = -240967; break;
+      case (843) : forced_shifts[label] = -249883; break;
+      case (845) : forced_shifts[label] = -255466; break;
+      case (846) : forced_shifts[label] = -245108; break;
+      case (847) : forced_shifts[label] = -250381; break;
+      case (848) : forced_shifts[label] = -253537; break;
+      case (850) : forced_shifts[label] = -246108; break;
+      case (851) : forced_shifts[label] = -240327; break;
+      case (852) : forced_shifts[label] = -238842; break;
+      case (853) : forced_shifts[label] = -250727; break;
+      case (854) : forced_shifts[label] = -242609; break;
       default: forced_shifts[label] = 0; break;
     }
   }
@@ -856,7 +856,7 @@ void Timeshifts::analyse()
   {
     // Calculating the RF time shift :
     m_histo_ref_VS_RF.Merge();
-    m_timeshifts[RF_Manager::label] = Shift_cast(getRFGammaPrompt(m_histo_ref_VS_RF.get(), m_check_preprompt));
+    m_timeshifts[RF_Manager::label] = Time_cast(getRFGammaPrompt(m_histo_ref_VS_RF.get(), m_check_preprompt));
   }
   else 
   {
@@ -1022,7 +1022,7 @@ bool Timeshifts::setTimeWindow_ns(Time_ns const & timewindow_ns)
 
 bool Timeshifts::setTimeWindow_ns(std::string const & timewindow_string) 
 {
-  auto const timewindow_ns = stoi(timewindow_string);
+  auto const timewindow_ns = Time_ns_cast(stod(timewindow_string));
   return setTimeWindow_ns(timewindow_ns);
 }
 
@@ -1085,7 +1085,7 @@ TH1F* Timeshifts::shiftTimeSpectra(TH1F* histo, Label const & label, std::string
   auto timeMin = axis -> GetXmin ();
 
   auto binToTime = (timeMax-timeMin)/bins;
-  Shift_t time_to_ps = 1;
+  Time time_to_ps = 1;
 
   if (unit != "ps")
   {

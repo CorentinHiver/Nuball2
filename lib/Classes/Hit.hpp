@@ -9,9 +9,9 @@
 //////////////////
 
 using Mult      = int;
-using Label     = uint;
-using ADC       = int;
-using NRJ       = float;
+using Label     = ushort;
+using ADC       = double;
+using NRJ       = double;
 using Timestamp = ULong64_t;
 using Time      = int;
 using Time_ns   = float;

@@ -36,7 +36,7 @@ public:
     std::copy_n(event.adcs     , mult ,  adcs   );
     std::copy_n(event.qdc2s    , mult ,  qdc2s  );
     std::copy_n(event.nrjs     , mult ,  nrjs   );
-    std::copy_n(event.nrj2     , mult ,  nrj2   );
+    std::copy_n(event.nrj2s    , mult ,  nrj2s  );
     std::copy_n(event.pileups  , mult ,  pileups);
   }
 
@@ -83,7 +83,7 @@ public:
   ADC     adcs    [255] = {0};
   NRJ     nrjs    [255] = {0};
   ADC     qdc2s   [255] = {0};
-  NRJ     nrj2    [255] = {0};
+  NRJ     nrj2s   [255] = {0};
   Pileup  pileups [255] = {0};
 
   Read read;
@@ -91,7 +91,7 @@ public:
 
 private:
   size_t m_maxSize = 255;
-  void* hits[8] = {labels, times, time2s, adcs, nrjs, qdc2s, nrj2, pileups};
+  void* hits[8] = {labels, times, time2s, adcs, nrjs, qdc2s, nrj2s, pileups};
 };
 
 inline Event& Event::operator=(Hit const & hit)
@@ -104,7 +104,7 @@ inline Event& Event::operator=(Hit const & hit)
   adcs    [0] = hit.adc;
   qdc2s   [0] = hit.qdc2;
   nrjs    [0] = hit.nrj;
-  nrj2    [0] = hit.nrj2;
+  nrj2s   [0] = hit.nrj2;
   pileups [0] = hit.pileup;
   return *this;
 }
@@ -121,7 +121,7 @@ inline Event& Event::operator=(Event const & event)
   if (write.e || read.e) std::copy_n(event.adcs     , mult ,  adcs   );
   if (write.q || read.q) std::copy_n(event.qdc2s    , mult ,  qdc2s  );
   if (write.E || read.E) std::copy_n(event.nrjs     , mult ,  nrjs   );
-  if (write.Q || read.Q) std::copy_n(event.nrj2     , mult ,  nrj2   );
+  if (write.Q || read.Q) std::copy_n(event.nrj2s    , mult ,  nrj2s  );
   if (write.p || read.p) std::copy_n(event.pileups  , mult ,  pileups);
   return *this;
 }
@@ -141,7 +141,7 @@ void Event::reading(TTree * tree, std::string const & options)
   if (read.e) tree -> SetBranchAddress("adc"    , &adcs   );
   if (read.E) tree -> SetBranchAddress("nrj"    , &nrjs   );
   if (read.q) tree -> SetBranchAddress("qdc2"   , &qdc2s  );
-  if (read.Q) tree -> SetBranchAddress("nrj2"   , &nrj2   );
+  if (read.Q) tree -> SetBranchAddress("nrj2"   , &nrj2s  );
   if (read.p) tree -> SetBranchAddress("pileup" , &pileups);
   tree -> SetBranchStatus("*",true);
 }
@@ -154,16 +154,27 @@ void Event::writting(TTree * tree, std::string const & options)
 
   tree -> ResetBranchAddresses();
 
-               tree -> Branch("mult"   , &mult    , "mult/I"         );
-  if (write.s) tree -> Branch("stamp"  , &stamp   , "stamp/l"        );
-  if (write.t) tree -> Branch("time"   , &times   , "time[mult]/i"   );
-  if (write.l) tree -> Branch("label"  , &labels  , "label[mult]/s"  );
-  if (write.T) tree -> Branch("time2"  , &time2s  , "time2[mult]/F"  );
-  if (write.e) tree -> Branch("adc"    , &adcs    , "adc[mult]/I"    );
-  if (write.E) tree -> Branch("nrj"    , &nrjs    , "nrj[mult]/F" );
-  if (write.q) tree -> Branch("qdc2"   , &qdc2s   , "qdc2[mult]/I"   );
-  if (write.Q) tree -> Branch("nrj2"   , &nrj2    , "nrj2[mult]/F");
-  if (write.p) tree -> Branch("pileup" , &pileups , "pileup[mult]/O" );
+               createBranch     (tree, &mult    , "mult"  );
+  if (write.s) createBranch     (tree, &stamp   , "stamp" );
+  if (write.T) createBranchArray(tree, &time2s  , "time2" , "mult");
+  if (write.E) createBranchArray(tree, &nrjs    , "nrj"   , "mult");
+  if (write.Q) createBranchArray(tree, &nrj2s   , "nrj2"  , "mult");
+  if (write.e) createBranchArray(tree, &adcs    , "adc"   , "mult");
+  if (write.q) createBranchArray(tree, &qdc2s   , "qdc2"  , "mult");
+  if (write.t) createBranchArray(tree, &times   , "time"  , "mult");
+  if (write.l) createBranchArray(tree, &labels  , "label" , "mult");
+  if (write.p) createBranchArray(tree, &pileups , "pileup", "mult");
+
+  //              tree -> Branch("mult"   , &mult    , "mult/I"        );
+  // if (write.s) tree -> Branch("stamp"  , &stamp   , "stamp/l"       );
+  // if (write.T) tree -> Branch("time2"  , &time2s  , "time2[mult]/D" );
+  // if (write.e) tree -> Branch("adc"    , &adcs    , "adc[mult]/D"   );
+  // if (write.E) tree -> Branch("nrj"    , &nrjs    , "nrj[mult]/D"   );
+  // if (write.q) tree -> Branch("qdc2"   , &qdc2s   , "qdc2[mult]/D"  );
+  // if (write.Q) tree -> Branch("nrj2"   , &nrj2s   , "nrj2[mult]/D"  );
+  // if (write.t) tree -> Branch("time"   , &times   , "time[mult]/I"  );
+  // if (write.l) tree -> Branch("label"  , &labels  , "label[mult]/s" );
+  // if (write.p) tree -> Branch("pileup" , &pileups , "pileup[mult]/O");
 
   tree -> SetBranchStatus("*",true);
 }
@@ -175,11 +186,11 @@ inline void Event::push_back(Hit const & hit)
 #endif
 
                labels  [mult] = hit.label;
-  if (write.t) times   [mult] = hit.stamp-stamp;
+  if (write.t) times   [mult] = Time_cast(hit.stamp-stamp);
   if (write.e) adcs    [mult] = hit.adc;
   if (write.E) nrjs    [mult] = hit.nrj;
   if (write.q) qdc2s   [mult] = hit.qdc2;
-  if (write.Q) nrj2    [mult] = hit.nrj2;
+  if (write.Q) nrj2s   [mult] = hit.nrj2;
   if (write.p) pileups [mult] = hit.pileup;
   mult++;
 }
@@ -205,15 +216,15 @@ inline void Event::push_front(Hit const & hit)
     if (write.e) adcs    [i+1] = adcs    [i];
     if (write.E) nrjs    [i+1] = nrjs    [i];
     if (write.q) qdc2s   [i+1] = qdc2s   [i];
-    if (write.Q) nrj2    [i+1] = nrj2    [i];
+    if (write.Q) nrj2s   [i+1] = nrj2s   [i];
     if (write.p) pileups [i+1] = pileups [i];
   }
                labels  [0] = hit.label;
-  if (write.t) times   [0] = hit.time-stamp; // Here, times[0]<0 because the stamp corresponds to the 0 of the first hit that is logically located after
+  if (write.t) times   [0] = Time_cast(hit.time-stamp); // Here, times[0]<0 because the stamp corresponds to the 0 of the first hit that is logically located after
   if (write.e) adcs    [0] = hit.adc;
   if (write.E) nrjs    [0] = hit.nrj;
   if (write.q) qdc2s   [0] = hit.qdc2;
-  if (write.Q) nrj2    [0] = hit.nrj2;
+  if (write.Q) nrj2s   [0] = hit.nrj2;
   if (write.p) pileups [0] = hit.pileup;
   mult++;
 }
@@ -233,15 +244,15 @@ std::ostream& operator<<(std::ostream& cout, Event const & event)
   {
     cout << "label : " << event.labels[i] << " ";
     if(event.times  [i] != 0) cout << "time : "     + std::to_string(event.times [i])+" ps  " ;
-    if(event.time2s [i] != 0) cout << "time : "     + std::to_string(event.time2s[i])+" ns  " ;
+    if(event.time2s [i] != 0) cout << "rel time : " + std::to_string(event.time2s[i])+" ns  " ;
     if(event.adcs   [i] != 0) cout << "adc : "      + std::to_string(event.adcs  [i])+" ";
     if(event.qdc2s  [i] != 0) cout << "qdc2 : "     + std::to_string(event.qdc2s [i])+" ";
     if(event.nrjs   [i] != 0) cout << "energy : "   + std::to_string(event.nrjs  [i])+" keV  ";
-    if(event.nrj2   [i] != 0) cout << "energy 2 : " + std::to_string(event.nrj2  [i])+" keV  ";
+    if(event.nrj2s  [i] != 0) cout << "energy 2 : " + std::to_string(event.nrj2s [i])+" keV  ";
     if(event.pileups[i] != 0) cout << "pileup"                                                 ;
     cout << std::endl;
   }
-  cout << std::endl << "--- " << std::endl;
+  cout << "--- " << std::endl;
   return cout;
 }
 

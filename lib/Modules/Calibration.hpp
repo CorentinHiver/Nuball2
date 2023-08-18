@@ -116,13 +116,13 @@ public:
   struct histograms
   {
     // Binning raw spectra
-    std::map<dAlias, float> m_bins_raw   = {{labr_a,   1000.}, {ge_a,  20000.}, {bgo_a,   5000.}, {eden_a,      500.}, {paris_a,  10000.}, {dssd_a,    500.}};
-    std::map<dAlias, float> m_min_raw    = {{labr_a,      0.}, {ge_a,      0.}, {bgo_a,      0.}, {eden_a,        0.}, {paris_a,      0.}, {dssd_a,      0.}};
-    std::map<dAlias, float> m_max_raw    = {{labr_a, 500000.}, {ge_a, 500000.}, {bgo_a,5000000.}, {eden_a,   500000.}, {paris_a, 500000.}, {dssd_a, 500000.}};
+    std::map<dAlias, NRJ> m_bins_raw   = {{labr_a,   1000.}, {ge_a,  20000.}, {bgo_a,   5000.}, {eden_a,      500.}, {paris_a,  10000.}, {dssd_a,    500.}};
+    std::map<dAlias, NRJ> m_min_raw    = {{labr_a,      0.}, {ge_a,      0.}, {bgo_a,      0.}, {eden_a,        0.}, {paris_a,      0.}, {dssd_a,      0.}};
+    std::map<dAlias, NRJ> m_max_raw    = {{labr_a, 500000.}, {ge_a, 500000.}, {bgo_a,5000000.}, {eden_a,   500000.}, {paris_a, 500000.}, {dssd_a, 500000.}};
     
-    std::map<dAlias, float> m_bins_calib = {{labr_a,   1000.}, {ge_a,   6000.}, {bgo_a,    500.}, {eden_a,      500.}, {paris_a,   5000.},  {dssd_a,   500.}};
-    std::map<dAlias, float> m_min_calib  = {{labr_a,      0.}, {ge_a,      0.}, {bgo_a,      0.}, {eden_a,       -1.}, {paris_a,      0.},  {dssd_a,     0.}};
-    std::map<dAlias, float> m_max_calib  = {{labr_a,   3000.}, {ge_a,   3000.}, {bgo_a,   3000.}, {eden_a,       1.5}, {paris_a,  10000.},  {dssd_a, 20000.}};
+    std::map<dAlias, NRJ> m_bins_calib = {{labr_a,   1000.}, {ge_a,   6000.}, {bgo_a,    500.}, {eden_a,      500.}, {paris_a,   5000.},  {dssd_a,   500.}};
+    std::map<dAlias, NRJ> m_min_calib  = {{labr_a,      0.}, {ge_a,      0.}, {bgo_a,      0.}, {eden_a,       -1.}, {paris_a,      0.},  {dssd_a,     0.}};
+    std::map<dAlias, NRJ> m_max_calib  = {{labr_a,   3000.}, {ge_a,   3000.}, {bgo_a,   3000.}, {eden_a,       1.5}, {paris_a,  10000.},  {dssd_a, 20000.}};
     
     // Raw spectra :
     Vector_MTTHist<TH1F> raw_spectra;
@@ -140,6 +140,12 @@ public:
   Calibration(Detectors const & detList) 
   {
     m_detectors = detList;
+  }
+
+  Calibration(Detectors const & detList, std::string const & loadfile) 
+  {
+    m_detectors = detList;
+    load(loadfile);
   }
 
   /// @brief Copy constructor
@@ -184,7 +190,7 @@ public:
   void calculate(std::string const & histograms, std::string const & source = "152Eu");
 
   void Initialize() {m_histos.Initialize(*this);m_fits.resize(1000);}
-  void loadData(std::string const & dataDir, int const & nb_files = -1);
+  void loadData(std::string const & dataDir, size_t const & nb_files = -1);
   static void fillHisto(Hit & hit, FasterReader & reader, Calibration & calib);
   void analyse(std::string const & source = "152Eu");
   void writePosPeaks(std::string const & outfilename);
@@ -193,7 +199,6 @@ public:
 
   void verify(std::string const & outfilename = "verify_calib.root");
   void writeCalibratedRoot(std::string const & outfilename);
-
 
   void setDetectorsList(Detectors const & ID_file) {m_detectors = ID_file;}
   void setDetectorsList(Detectors *ID_file) {m_detectors = *ID_file;}
@@ -204,13 +209,10 @@ public:
   void  calibrate(Hit & hit) const;
 
   /// @brief calibrate the ADC value using the parameters extracted from the calibration data
-  float calibrate(ADC const & adc, Label const & label) const 
-  {
-    return calibrate(NRJ_cast(adc+gRandom->Uniform(-0.5,0.5)), label);
-  }
+  // NRJ calibrate(ADC const & adc, Label const & label) const ;
 
   /// @brief calibrate the nrj value using the parameters extracted from the calibration data
-  float calibrate(NRJ const & nrj, Label const & label) const;
+  NRJ calibrate(NRJ const & nrj, Label const & label) const;
 
   void calibrateData(std::string const & folder, size_t const & nb_files = -1);
   bool const & calibrate_data() const {return m_calibrate_data;}
@@ -239,7 +241,7 @@ public:
   auto const & detectors() const {return m_detectors;}
 
   // Accessors to the calibration vectors :
-  std::vector<float> operator[](Label const & label) const 
+  std::vector<NRJ> operator[](Label const & label) const 
   {
     switch (m_order[label])
     {
@@ -253,7 +255,7 @@ public:
 
 private:
   //Private methods :
-  void set(Label label, float intercept, float slope, float binom, float trinom);
+  void set(Label label, NRJ intercept, NRJ slope, NRJ binom, NRJ trinom);
 
   //Attributs for the calculations :
   bool      m_verbose   = false;
@@ -273,11 +275,11 @@ private:
   Label m_nb_detectors = 0;
   Label m_max_labels = 0;
   std::vector<char>  m_order; //1, 2 or 3 | 0 -> no calibration
-  std::vector<float> m_intercept;
-  std::vector<float> m_slope;
-  std::vector<float> m_binom;
-  std::vector<float> m_trinom;
-  std::vector<std::vector<std::vector<float>>> calibration_tables;
+  std::vector<NRJ> m_intercept;
+  std::vector<NRJ> m_slope;
+  std::vector<NRJ> m_binom;
+  std::vector<NRJ> m_trinom;
+  std::vector<std::vector<std::vector<NRJ>>> calibration_tables;
 };
 
 void Calibration::histograms::Initialize(Calibration & calib)
@@ -301,7 +303,7 @@ void Calibration::histograms::Initialize(Calibration & calib)
     auto alias = pair.first;
     auto const & type = Detector::alias_str[alias];
     if (!(find_key(m_min_calib, alias) && find_key(m_max_calib, alias))) continue; // Reject aliases with badly set bins
-    int nb_detectors = calib.m_detectors.nb_det_in_alias(alias);
+    auto nb_detectors = calib.m_detectors.nb_det_in_alias(alias);
     if (nb_detectors<1) continue;// Reject aliases without detectors
     all_calib[alias].reset(("All_"+type+"_spectra").c_str(), ("All "+type+" spectra").c_str(), 
         nb_detectors,0,nb_detectors, m_bins_calib[alias],m_min_calib[alias],m_max_calib[alias]);
@@ -361,7 +363,7 @@ void Calibration::calculate(std::string const & histograms, std::string const & 
   this -> writeRawRoot(source+".root");
 }
 
-void Calibration::loadData(std::string const & dataDir, int const & nb_files)
+void Calibration::loadData(std::string const & dataDir, size_t const & nb_files)
 {
   print("Loading the data from", Path(dataDir).folder());
   this -> Initialize();
@@ -455,7 +457,7 @@ void Calibration::analyse(std::string const & source)
    
     double integral_ratio_threshold = 0.f;  // The threshold used to tag the peak.
     int ADC_threshold = 0; // A threshold used in order to reject any potential electrical noise below like 500 ADC
-    int window_1 = 0, window_2 = 0, window_3 = 0; // The three windows width (in keV)
+    int window_1 = 0, window_2 = 0; // The three windows width (in keV)
 
     auto & peaks = fit.peaks;
 
@@ -465,7 +467,7 @@ void Calibration::analyse(std::string const & source)
 
     if (alias == ge_a)
     {// For Clovers
-      window_1 = 10, window_2 = 10, window_3 = 5;
+      window_1 = 10, window_2 = 10;
       if (source == "152Eu")
       {
         nb_pics = 5;
@@ -496,7 +498,7 @@ void Calibration::analyse(std::string const & source)
     }
     else if (alias == labr_a)
     {// For labr
-      window_1 = 70, window_2 = 50, window_3 = 20;
+      window_1 = 70, window_2 = 50;
       if (source == "152Eu")
       {
         nb_pics = 5;
@@ -527,7 +529,7 @@ void Calibration::analyse(std::string const & source)
     }
     else if (alias == paris_a)
     {// For paris
-      window_1 = 80, window_2 = 50, window_3 = 25;
+      window_1 = 80, window_2 = 50;
       if (source == "152Eu")
       {
         if (name.find("FR1")) 
@@ -562,7 +564,7 @@ void Calibration::analyse(std::string const & source)
     {
       if (isTripleAlpha(source))
       {
-        window_1 = 150, window_2 = 100, window_3 = 50;
+        window_1 = 150, window_2 = 100;
         nb_pics = 3;
         peaks.resize(nb_pics);
         peaks = {5150, 5480, 5800};
@@ -677,8 +679,8 @@ void Calibration::analyse(std::string const & source)
       if (m_verbose) print("[", cguess_low*scalefactor , " , " , cguess_high*scalefactor , "] First mean = " , cm);
 
       // // 3rd window :
-      // cguess_high = int_cast(cmc + window_3/kpc);
-      // cguess_low  = int_cast(cmc - window_3/kpc);
+      // cguess_high = int_cast(cmc );
+      // cguess_low  = int_cast(cmc );
       // xaxis->SetRange(cguess_low, cguess_high);
       // cm  = histo->GetMean(); //in ADC
       // cmc = cm/scalefactor; //in bins
@@ -785,21 +787,21 @@ void Calibration::setCalibrationTables()
   print("Done !");
   print();
 }
-//!DEV
 
+// NRJ Calibration::calibrate(ADC const & adc, Label const & label) const 
+// {
+//   return calibrate(NRJ_cast(adc), label);
+// }
 inline NRJ Calibration::calibrate(NRJ const & nrj, Label const & label) const 
 {
-  auto nrj_r = nrj;
+  auto nrj_r = nrj+random_uniform();
+  // auto nrj_r = nrj+gRandom->Uniform(0,1);
   switch(m_order[label])
   {
     case 0: return nrj_r;
-
     case 1: return m_intercept[label] + m_slope[label]*nrj_r; 
-
     case 2: return m_intercept[label] + m_slope[label]*nrj_r + m_binom[label]*nrj_r*nrj_r;
-
     case 3: return m_intercept[label] + m_slope[label]*nrj_r + m_binom[label]*nrj_r*nrj_r + m_trinom[label]*nrj_r*nrj_r*nrj_r;
-
    default: return nrj_r;
   }
 }
@@ -820,7 +822,7 @@ inline void Calibration::calibrate(Hit & hit) const
   else hit.nrj = calibrate(hit.adc, label);
 }
 
-void Calibration::set(Label _label, float _intercept = 0.f, float _slope = 1.f, float _binom = 0.f, float _trinom = 0.f)
+void Calibration::set(Label _label, NRJ _intercept = 0.f, NRJ _slope = 1.f, NRJ _binom = 0.f, NRJ _trinom = 0.f)
 {
   if (_slope == 1.f && _intercept == 0.f) {m_order[_label] = 0;}
   else if (_binom == 0.f)
@@ -876,7 +878,7 @@ bool Calibration::load(std::string const & calibFileName)
   m_slope    .resize(size, 1.f);
   m_binom    .resize(size, 0.f);
   m_trinom   .resize(size, 0.f);
-  float slope = 1.f, binom = 0.f, trinom = 0.f, intercept = 0.f;
+  NRJ slope = 1.f, binom = 0.f, trinom = 0.f, intercept = 0.f;
   while (getline(inputfile, line))
   {
     m_nb_detectors++;
@@ -954,7 +956,7 @@ void Calibration::verify(std::string const & outfilename)
 {
   std::vector<size_t> nb_det_filled(m_detectors.nb_aliases(), 0);
   print("Verification of the calibration");
-  for (size_t label = 0; label<m_histos.raw_spectra.size(); label++) 
+  for (Label label = 0; label<m_histos.raw_spectra.size(); label++) 
   {
     auto & raw_histo = m_histos.raw_spectra[label];
     if (raw_histo.Integral()<1) continue;
@@ -975,7 +977,7 @@ void Calibration::verify(std::string const & outfilename)
       for (int hit = 0; hit<counts_in_bin; hit++)
       {
         // auto const nrj = calibrate(raw_ADC, label);
-        auto nrj = NRJ_cast(raw_ADC + bin_width*gRandom->Uniform(-1,1));
+        auto nrj = NRJ_cast(raw_ADC + bin_width*gRandom->Uniform(0,1));
         switch(fit.order)
         {
           case 1 : nrj = fit.parameter0 + nrj*fit.parameter1; break;

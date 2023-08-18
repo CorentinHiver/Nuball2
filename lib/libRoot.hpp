@@ -198,6 +198,53 @@ void test_alignator(TTree *tree, int* NewIndex= nullptr, bool useNewIndex = fals
   tree -> SetBranchStatus("*", true); //enables again the whole tree
 }
 
+class TypeRootMap
+{
+public:
+  TypeRootMap()
+  {
+    m_typeRootMap[typeid(true)          ] = "O";
+
+    m_typeRootMap[typeid(char_cast(1))  ] = "B"; m_typeRootMap[typeid(uchar_cast(1)) ] = "b";
+    m_typeRootMap[typeid(short_cast(1)) ] = "S"; m_typeRootMap[typeid(ushort_cast(1))] = "s";
+    m_typeRootMap[typeid(int_cast(1))   ] = "I"; m_typeRootMap[typeid(uint_cast(1))  ] = "i";
+    m_typeRootMap[typeid(long_cast(1))  ] = "G"; m_typeRootMap[typeid(ulong_cast(1)) ] = "g";
+    m_typeRootMap[typeid(double_cast(1))] = "D"; m_typeRootMap[typeid(float_cast(1)) ] = "F";
+
+    m_typeRootMap[typeid(Long64_cast(1))] = "L"; m_typeRootMap[typeid(ULong64_cast(1)) ] = "l";
+  }
+
+  template<class T>
+  std::string operator() (T const & t) const 
+  {
+     auto typeIndex = std::type_index(typeid(t));
+        auto it = m_typeRootMap.find(typeIndex);
+        if (it != m_typeRootMap.end()) {
+            return it->second;
+        } else {
+            return "Unknown";
+        }
+  }
+
+private:
+  std::unordered_map<std::type_index, std::string> m_typeRootMap;
+}typeRootMap;
+
+/// @brief Create a branch for a given value and name
+template<class T>
+auto createBranch(TTree* tree, T * value, std::string const & name)
+{
+  return (tree -> Branch(name.c_str(), value, (name+"/"+typeRootMap(*value)).c_str()));
+}
+
+/// @brief Create a branch for a given array and name
+/// @param name_size: The name of the leaf that holds the size of the array
+template<class T>
+auto createBranchArray(TTree* tree, T * array, std::string const & name, std::string const & name_size)
+{
+  // using **array because it is an array, so *array takes the first element of the array
+  return (tree -> Branch(name.c_str(), array, (name+"["+name_size+"]/"+typeRootMap(**array)).c_str()));
+}
 
 
 ///////////////////////

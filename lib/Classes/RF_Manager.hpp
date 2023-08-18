@@ -30,64 +30,65 @@ class RF_Manager
 public:
   RF_Manager(Label const & label_RF = 251) {label = label_RF;}
   bool setHit(Hit const & hit);
-  bool setHit(Event const & event, uint const & pos = 0);
+  bool setHit(Event const & event, Mult const & hit_i);
   bool setEvent(Event const & evt);
-  void static set_offset(Long64_t const & offset) {m_offset = offset;}
-  void static set_offset_ns(Long64_t const & offset_ns) {m_offset = offset_ns*1000;}
+  void static set_offset(Time const & offset) {m_offset = offset;}
+  void static set_offset_ns(Time const & offset_ns) {m_offset = offset_ns*1000;}
   auto static offset() {return m_offset;}
 
-  Long64_t pulse_ToF(ULong64_t const & time, Long64_t const & offset) const
+  Time pulse_ToF(Timestamp const & timestamp) const
   {
   #ifdef USE_RF
 
-    // Shifts the time in order to be able to get hits before the 0 :
-    ULong64_t const shifted_time = time+offset;
+    // Shifts the timestamp in order to be able to get hits before the 0 :
+    Timestamp const shifted_timestamp = timestamp + Timestamp_cast(m_offset);
 
     if (period == 0) throw std::runtime_error("RF period = 0 !!!");
 
-    if (shifted_time>last_hit)
+    if (shifted_timestamp>last_hit)
     {// Normal case
-      return ( static_cast<Long64_t>((shifted_time-last_hit)%period) - offset );
+      return ( Time_cast(shifted_timestamp-last_hit)%period - m_offset );
     }
     else
     {// When the RF is found after the hit
-      return ( static_cast<Long64_t> (period-(last_hit-time-offset)%period)-offset );
+      return (period-Time_cast(last_hit-timestamp-Timestamp_cast(m_offset))%period - m_offset );
     }
   #else //NO USE_RF
     print("NO RF IS USED !! Please set USE_RF [period_value]");
-    return static_cast<Long64_t>(time);
+    return Time_cast(timestamp);
   #endif //USE_RF
   }
+  Time pulse_ToF(Hit const & hit) const {return pulse_ToF(hit.time);}
 
-  Long64_t pulse_ToF(Hit const & hit, Long64_t const & offset) const {return pulse_ToF(hit.time,   offset);}
-  Long64_t pulse_ToF(Hit const & hit                         ) const {return pulse_ToF(hit.time, m_offset);}
-  Long64_t pulse_ToF(ULong64_t const & time                  ) const {return pulse_ToF(    time, m_offset);}
+  Time pulse_ToF(Hit const & hit, Time const & offset) const {return pulse_ToF(hit.time, offset);}
+  Time pulse_ToF(Timestamp const & timestamp, Time const & offset) const {return pulse_ToF(timestamp, offset);}
 
   template<class... ARGS>
   float pulse_ToF_ns(ARGS... args) {return (static_cast<float>(pulse_ToF(std::forward<ARGS>(args)...))/1000.f);}
 
-  bool isPrompt(Hit const & hit, Long64_t const & borneMin, Long64_t const & borneMax)
+  /// @brief Not sure this works...
+  bool isPrompt(Hit const & hit, Time const & borneMin, Time const & borneMax)
   {
     return (pulse_ToF(hit,-borneMin) < borneMax);
   }
 
-  void set(ULong64_t _last_hit, ULong64_t _period) {last_hit = _last_hit; period = _period;}
+  void set(Timestamp _last_hit, Time _period) {last_hit = _last_hit; period = _period;}
 
-  ULong64_t last_hit = 0;
+  Timestamp last_hit = 0;
 
 #ifdef USE_RF
-  ULong64_t period = USE_RF;
+  Time period = USE_RF;
 #else //NO USE_RF
-  ULong64_t period = 0;
+  Time period = 0;
 #endif //USE_RF
 
   static Label label;
 
 private:
-  Long64_t static m_offset;
+  Time static m_offset;
 };
 
-Long64_t RF_Manager::m_offset = 50000 ;
+Time RF_Manager::m_offset = 50000 ;
 Label    RF_Manager::label  = 251;
 
 bool RF_Manager::setHit(Hit const & hit)
@@ -95,31 +96,32 @@ bool RF_Manager::setHit(Hit const & hit)
   if (hit.label == RF_Manager::label)
   {
     last_hit = hit.stamp;
-    period = Timestamp_cast(hit.nrj);
-    if (hit.nrj == 0) period = Timestamp_cast(hit.nrj);
+    period = Time_cast(hit.adc);
+    if (period == 0) period = Time_cast(hit.nrj);
     return true;
   }
   else return false;
 }
 
-bool RF_Manager::setEvent(Event const & evt)
+bool RF_Manager::setEvent(Event const & event)
 {
-  if (evt.labels[0] == RF_Manager::label)
+  if (event.labels[0] == RF_Manager::label)
   {
-    last_hit = evt.stamp;
-    period = Timestamp_cast(evt.adcs[0]);
-    if (period == 0) period = Timestamp_cast(evt.nrjs[0]);
+    last_hit = event.stamp;
+    period = Time_cast(event.adcs[0]);
+    if (period == 0) period = Time_cast(event.nrjs[0]);
     return true;
   }
   else return false;
 }
 
-bool RF_Manager::setHit(Event const & event, uint const & i)
+bool RF_Manager::setHit(Event const & event, Mult const & hit_i)
 {
-  if (event.labels[i] == RF_Manager::label)
+  if (event.labels[hit_i] == RF_Manager::label)
   {
-    last_hit = event.times[i];
-    period = Timestamp_cast(event.nrjs[i]);
+    last_hit = event.times[hit_i];
+    period = Time_cast(event.adcs[0]);
+    if (period == 0) period = Time_cast(event.nrjs[hit_i]);
     return true;
   }
   else return false;
@@ -169,7 +171,7 @@ RF_Extractor::RF_Extractor(TTree * tree, RF_Manager & rf, Event & event, Long64_
   do {tree -> GetEntry(m_cursor++);}
   while(event.labels[0] != RF_Manager::label && m_cursor<maxEvts);
   if (m_cursor == maxEvts) {print("NO RF DATA FOUND !"); m_ok = false; return;}
-  rf.setHit(event);
+  rf.setHit(event, 0);
   m_ok = true;
 }
 #endif //EVENT_HPP

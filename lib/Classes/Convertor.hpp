@@ -11,6 +11,8 @@
 
 #include "../MTObjects/MTFasterReader.hpp"
 
+#include "../Classes/Detectors.hpp"
+
 #include "../Modules/Timeshifts.hpp"
 #include "../Modules/Calibration.hpp"
 
@@ -62,7 +64,7 @@
  * 
  *  -c [calibration_file] : Load the calibration
  *  -e [time_window_ns]   : Perform event building with time_window_ns = 1500 ns by default
- *  -l [ID_file]          : Load ID file [UNUSED]
+ *  -i [ID_file]          : Load ID file
  *  -m [threads_number]   : Choose the number of files to treat in parallel
  *  -n [files_number]     : Choose the total number of files to treat inside a data folder
  *  -t [time_window_ns]   : Loads timeshift data
@@ -114,58 +116,7 @@ public:
     print("Data written to", outputFolder, "in", timer(), timer.unit());
   }
 
-/*
-  // Convertor(Detectors&& detectors, Timeshifts&& timeshifts, Path const & inputFolder, Path const & outputFolder, int const & nb_files = -1)
-  // { // Coincidence event builder : with timeshifts
-  //   Timer timer;
-
-  //   this -> buildEvents(true);
-  //   this -> setOutDir(outputFolder);
-
-  //   this -> setDetectors(std::move(detectors));
-  //   this -> setTimeshifts(std::move(timeshifts));
-    
-  //   this -> addFolder(inputFolder, nb_files);
-  //   this -> convert();
-
-  //   print("Data written to", outputFolder, "in", timer(), timer.unit());
-  // }
-
-  // Convertor(Detectors&& detectors, Calibration&& calibration, Path const & inputFolder, Path const & outputFolder, int const & nb_files = -1) 
-  // { // Coincidence event builder : with calibration
-  //   Timer timer;
-
-  //   this -> buildEvents(true);
-  //   this -> setOutDir(outputFolder);
-
-  //   this -> setDetectors(std::move(detectors));
-  //   this -> setCalibration(std::move(calibration));
-    
-  //   this -> addFolder(inputFolder, nb_files);
-  //   this -> convert();
-
-  //   print("Data written to", outputFolder, "in", timer(), timer.unit());
-  // }
-
-  // Convertor(Detectors&& detectors, Timeshifts&& timeshifts, Calibration&& calibration, Path const & inputFolder, Path const & outputFolder, int const & nb_files = -1) 
-  // { // Coincidence event builder : with timeshits and calibration
-  //   Timer timer;
-
-  //   this -> buildEvents(true);
-  //   this -> setOutDir(outputFolder);
-
-  //   this -> setDetectors(std::move(detectors));
-  //   this -> setTimeshifts(std::move(timeshifts));
-  //   this -> setCalibration(std::move(calibration));
-    
-  //   this -> addFolder(inputFolder, nb_files);
-  //   this -> convert();
-
-  //   print("Data written to", outputFolder, "in", timer(), timer.unit());
-  // }
-*/
-
-  // void setDetectors (Detectors const & detectors)     {m_detectors = detectors;}
+  void setDetectors (Detectors const & detectors)     {m_detectors = detectors;}
   void setTimeshifts(Timeshifts const & timeshifts) {m_timeshifts = timeshifts;}
   void loadTimeshifts(std::string const & dTfile)   {m_timeshifts.load(dTfile);}
   void setCalibration(Calibration const & calibration) {m_calibration = calibration;}
@@ -182,15 +133,16 @@ public:
 
   void convert(std::string const & dataFolder, std::string const & outputFolder);
 
-private:
+protected:
   static void s_convertFile(Hit & hit, FasterReader & reader, 
                             Convertor & convertor, Path const & outPath) 
   {convertor.convertFile(hit, reader, outPath);}
+  virtual void printParameters() const;
 
   virtual void convertFile(Hit & hit, FasterReader & reader, Path const & outPath);
 
   Timeshifts m_timeshifts;
-  // Detectors m_detectors;
+  Detectors m_detectors;
   Calibration m_calibration;
 
   int m_nb_threads = 1;
@@ -206,7 +158,7 @@ private:
   MTCounter m_total_events;
 };
 
-void printParameters()
+void Convertor::printParameters() const
 {
     print("Usage of Convertor : /path/to/data /pat/to/output [[parameters]])");
     print("");
@@ -214,7 +166,7 @@ void printParameters()
     print("");
     print("-c [calibration_file]  : Loads the calibration file");
     print("-e [time_window_ns]    : Perform event building with time_window_ns = 1500 ns by default");
-    print("-l [ID_file]           : Load ID file");
+    print("-i [ID_file]           : Load ID file");
     print("-m [threads_number]    : Choose the number of files to treat in parallel");
     print("-n [files_number]      : Choose the total number of files to treat inside a data folder");
     print("-t [time_window_ns]    : Loads timeshift data");
@@ -237,13 +189,13 @@ Convertor::Convertor(int argc, char** argv)
     std::string command = argv[i];
          if (command == "-c") loadCalibration(argv[++i]);
     else if (command == "-e") buildEvents(std::stoi(argv[++i]));
-    // else if (command == "-l") m_detectors.load(argv[i]);
+    else if (command == "-i") m_detectors.load(argv[i]);
     else if (command == "-m") setNbThreads(std::stoi(argv[++i]));
     else if (command == "-o") overwrite(true);
     else if (command == "-n") setNbFiles(std::stoi(argv[++i]));
     else if (command == "-t") loadTimeshifts(argv[++i]);
     else if (command == "--throw-singles") m_throw_single = true;
-    else {print("Unkown command", command); throw_error("COMMAND CONVERTOR");}
+    else {print("Unkown command", command);}
   }
   if (m_timeshifts && !m_eventbuilding) 
   {
@@ -365,6 +317,10 @@ public:
 
   // You can write down your own convertor :
   void convertFile(Hit & hit, FasterReader & reader, Path const & outPath) override;
+
+  // Define here the classes and parameters you would like to share bewteen threads.
+  // Be careful not to write in them !!
+  // You already share all the protected members
 };
 
 void MySimpleConvertor::convertFile(Hit & hit, FasterReader & reader, Path const & outPath)

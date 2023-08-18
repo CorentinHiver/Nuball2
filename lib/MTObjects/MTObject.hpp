@@ -12,6 +12,9 @@ using lock_mutex = std::lock_guard<std::mutex>;
 
 #include "../libRoot.hpp"
 
+/**
+ * @brief 
+ */
 class MTObject
 {
 public:
@@ -20,26 +23,23 @@ public:
 
   static void Initialize(size_t const & _nb_threads, bool force = false)
   {
+    setThreadsNb(_nb_threads, force);
+    Initialize();
+  }
+
+  static void setThreadsNb(int const & n, bool force = false) {setThreadsNb(size_cast(n), force);}
+  static void setThreadsNb(size_t const & n, bool force = false) 
+  {
     // Check the number of threads. Usually, over 75% of cores is the optimal.
     // Set force parameter to true if you want to use all the cores
     size_t maxThreads = size_cast(std::thread::hardware_concurrency()*((force) ? 1 : 0.75));
 
-    if(nb_threads > maxThreads)
+    if(n > maxThreads)
     {
       nb_threads = maxThreads;
       std::cout << "Number of threads too large (hardware) -> reset to " << nb_threads << std::endl;
     }
-    else nb_threads = _nb_threads;
-    
-    master_thread_id = std::this_thread::get_id();
-
-    if (nb_threads>1)
-    {
-      print("MTObject initialized with", nb_threads, "threads");
-      TThread::Initialize();
-      ROOT::EnableThreadSafety();
-      ON = true;
-    }
+    else nb_threads = n;
   }
 
   static void adjustThreadsNumber(uint const & limiting_number, std::string const & print_if_limit_reached = "") 
@@ -49,6 +49,20 @@ public:
       nb_threads = limiting_number;
       print(print_if_limit_reached, "thread number reduced to ", nb_threads);
     }
+    if (nb_threads == 1) ON = false;
+  }
+
+  static void Initialize()
+  {
+    master_thread_id = std::this_thread::get_id();
+    if (nb_threads>1)
+    {
+      print("MTObject initialized with", nb_threads, "threads");
+      TThread::Initialize();
+      ROOT::EnableThreadSafety();
+      ON = true;
+    }
+    else ON = false;
   }
 
   template <class Func, class... ARGS>
@@ -77,6 +91,9 @@ public:
     }
   }
 
+  static auto const & getThreadsNb() {return nb_threads;}
+  static auto const & getThreadsNumber() {return nb_threads;}
+
   static bool isMasterThread() {return (master_thread_id == std::this_thread::get_id());}
 
   static size_t nb_threads;
@@ -87,11 +104,6 @@ public:
   static int const & getThreadIndex() {return m_thread_index;}
   static int const & index() {return m_thread_index;}
   // static int const & getThreadIndex() {return threads_ID[std::this_thread::get_id()];} // Old indexing system
-
-  static auto const & getThreadsNb() {return nb_threads;}
-  static auto const & getThreadsNumber() {return nb_threads;}
-  static void setThreadsNb(int const & n) {nb_threads = size_cast(n);}
-  static void setThreadsNb(size_t const & n) {nb_threads = n;}
 
 private:
   // static std::map<std::thread::id, int> threads_ID; // Old indexing system

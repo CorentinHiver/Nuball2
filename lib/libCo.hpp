@@ -17,6 +17,8 @@
 #include <stdexcept>
 #include <string>
 #include <thread>
+#include <typeindex>
+#include <typeinfo>
 #include <unordered_map>
 #include <vector>
 
@@ -61,50 +63,50 @@ inline short short_cast(T const & t) {return static_cast<short>(t);}
 template<typename T,  typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
 inline int int_cast(T const & t) {return static_cast<int>(t);}
 
-/// @brief Casts a number into an int
+/// @brief Casts a number into an long
 template<typename T,  typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
-inline int long_cast(T const & t) {return static_cast<int>(t);}
+inline long long_cast(T const & t) {return static_cast<long>(t);}
 
 /// @brief Casts a number into a float
 template<typename T,  typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
 inline float float_cast(T const & t) {return static_cast<float>(t);}
 
-/// @brief Casts a number into an int
+/// @brief Casts a number into an double
 template<typename T,  typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
 inline double double_cast(T const & t) {return static_cast<double>(t);}
 
 
-// Units :
+// Type short names :
 using uchar  = unsigned char       ;
 using ushort = unsigned short int  ;
 using uint   = unsigned int        ;
 using ulong  = unsigned long int   ;
-using ulonglong  = unsigned long long int ;
 using longlong  = long long int ;
+using ulonglong  = unsigned long long int ;
 using size_t = std::size_t;
 
 
-/// @brief Casts a number into unsigned char
+/// @brief Casts a number into unsigned char (uchar)
 template<typename T,  typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
 inline uchar uchar_cast(T const & t) {return static_cast<uchar>(t);}
 
-/// @brief Casts a number into unsigned short
+/// @brief Casts a number into unsigned short (ushort)
 template<typename T,  typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
 inline ushort ushort_cast(T const & t) {return static_cast<ushort>(t);}
 
-/// @brief Casts a number into unsigned int
+/// @brief Casts a number into unsigned int (uint)
 template<typename T,  typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
 inline uint  uint_cast(T const & t) {return static_cast<uint>(t);}
 
-/// @brief Casts a number into unsigned long
+/// @brief Casts a number into unsigned long (ulong)
 template<typename T,  typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
 inline ulong ulong_cast(T const & t) {return static_cast<ulong>(t);}
 
-/// @brief Casts a number into unsigned long long
+/// @brief Casts a number into unsigned long long (ulonglong)
 template<typename T,  typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
 inline ulonglong ulonglong_cast(T const & t) {return static_cast<ulonglong>(t);}
 
-/// @brief Casts a number into long long
+/// @brief Casts a number into long long (longlong)
 template<typename T,  typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
 inline longlong longlong_cast(T const & t) {return static_cast<longlong>(t);}
 

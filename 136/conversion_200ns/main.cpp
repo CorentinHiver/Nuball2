@@ -26,7 +26,7 @@
 
 // 3. Declare some global variables :
 std::string IDFile = "index_129.list";
-std::string calibFile = "136.calib";
+std::string calibFile = "136_final.calib";
 Folder manip = "N-SI-136";
 std::string list_runs = "list_runs.list";
 int  nb_files_ts = 50;
@@ -36,6 +36,7 @@ bool overwrite = false; // Overwrite already existing converted root files. Work
 bool histoed = false;
 bool one_run = false;
 std::string one_run_folder = "";
+ulonglong max_hits = -1;
 
 bool extend_periods = false; // To take more than one period after a event trigger
 uint nb_periods_more = 0; // Number of periods to extend after an event that triggered
@@ -71,8 +72,8 @@ struct Histos
   {
     auto const & nbDet = detectors.number();
 
-    energy_all.reset("Ge_spectra", "Ge spectra", 8000,0,4000);
-    rf_all.reset("RF_Time_spectra", "RF Time spectra", USE_RF*2, -USE_RF/4, 3*USE_RF/4);
+    energy_all.reset("Ge_spectra", "Ge spectra", 20000,0,10000);
+    rf_all.reset("RF_Time_spectra", "RF Time spectra", 1000, -100, 400);
 
     energy_each.reset("Energy_spectra_each", "Energy spectra each", nbDet,0,nbDet, 5000,0,15000);
     rf_each.reset("RF_timing_each", "RF timing each", nbDet,0,nbDet, USE_RF*2, -USE_RF/4, 3*USE_RF/4);
@@ -102,6 +103,9 @@ void convert(Hit & hit, FasterReader & reader,
   Timer timer;
   // Checking the lookup tables :
   if (!detectors || !timeshifts || !calibration || !reader) return;
+  reader.setMaxHits(max_hits);
+
+  print(histos.energy_all.size());
 
   // Extracting the run name :
   File raw_datafile = reader.getFilename();   // "/path/to/manip/run_number.fast/run_number_filenumber.fast"
@@ -122,31 +126,31 @@ void convert(Hit & hit, FasterReader & reader,
   // Initialize the temporary TTree :
   std::unique_ptr<TTree> tempTree (new TTree("temp","temp"));
   tempTree -> SetDirectory(nullptr); // Force it to be created on RAM rather than on disk - much faster if enough RAM
-  hit.writting(tempTree.get(), "ltEQp");
+  hit.writting(tempTree.get(), "lsEQp");
 
   // Loop over the TTree 
   Timer read_timer;
   ulong rawCounts = 0;
-  print(MTObject::getThreadIndex());
   while(reader.Read())
   {
     // Time calibration :
-    hit.time+=timeshifts[hit.label];
+    hit.stamp+=timeshifts[hit.label];
+    // std::cin.get();
 
     // Energy calibration :
-    hit.nrjcal = calibration(hit.nrj,  hit.label); // Normal calibraiton
-    hit.nrj2cal = ((hit.nrj2 == 0) ? 0.f : calibration(hit.nrj2, hit.label)); // Calibrate the nrj2 if any
-    if (isBGO[hit.label]) hit.nrjcal = NRJ_cast(hit.nrj); // "Proto calibration" of BGO
+    hit.nrj = calibration(hit.adc,  hit.label); // Normal calibraiton
+    hit.nrj2 = ((hit.qdc2 == 0) ? 0.f : calibration(hit.qdc2, hit.label)); // Calibrate the qdc2 if any
+  
+    if (isGe[hit.label] && hit.nrj>10000) continue;
 
     tempTree -> Fill();
 
     rawCounts++;
   }
-  read_timer.Stop();
 
-#ifdef DEBUG
-  print("Read of",raw_datafile.shortName(),"finished here,", rawCounts,"counts in", read_timer.TimeElapsedSec(),"s");
-#endif //DEBUG
+  read_timer.Stop();
+  
+  debug("Read of",raw_datafile.shortName(),"finished here,", rawCounts,"counts in", read_timer.TimeElapsedSec(),"s");
 
   if (rawCounts==0) {print("NO HITS IN",run); return;}
 
@@ -155,11 +159,11 @@ void convert(Hit & hit, FasterReader & reader,
 
   // Switch the temporary TTree to reading mode :
   hit.reset();
-  hit.reading(tempTree.get(), "ltEQp");
+  hit.reading(tempTree.get(), "lsEQp");
 
   TTree* outTree = new TTree("Nuball2","Nuball2");
   outTree -> SetDirectory(nullptr); // Force it to be created on RAM rather than on disk - much faster if enough RAM
-  Event event(outTree, "ltEQp", "w");
+  Event event(outTree, "lstEQp", "w");
 
   // Initialize event builder based on RF :
   RF_Manager rf;
@@ -191,44 +195,48 @@ void convert(Hit & hit, FasterReader & reader,
     // Handle the RF data :
     if (hit.label == RF_Manager::label)
     {
+      rf.setHit(hit);
       Event temp (event);
       event = hit;
       outTree -> Fill();
       event = temp;
-      rf.setHit(hit);
       continue;
     }
 
     if (histoed)
     {
-      auto const tof_hit = rf.pulse_ToF_ns(hit.time);
+      auto const tof_hit = rf.pulse_ToF_ns(hit.stamp);
       histos.rf_all.Fill(tof_hit);
       histos.rf_each.Fill(compressedLabel[hit.label], tof_hit);
       
-      if (isGe[hit.label]) histos.energy_all.Fill(hit.nrjcal);
-      histos.energy_each.Fill(compressedLabel[hit.label], hit.nrjcal);
+      if (isGe[hit.label]) histos.energy_all.Fill(hit.nrj);
+      histos.energy_each.Fill(compressedLabel[hit.label], hit.nrj);
     }
 
     // Event building :
     if (eventBuilder.build(hit))
     {
       evts_count++;
+      if ((evts_count%(int)(1.E+6)) == 0) debug(evts_count/(int)(1.E+6), "Mevts");
       if (histoed)
       {
-        for (uint trig_loop = 0; trig_loop<event.size(); trig_loop++)
+        auto const & timestamp = event.stamp;
+        auto const pulse_ref = rf.pulse_ToF_ns(timestamp);
+        for (size_t trig_loop = 0; trig_loop<event.size(); trig_loop++)
         {
-          auto const & label = event.labels[trig_loop];
-          auto const & nrjcal = event.nrjcals[trig_loop];
-          auto const & time = event.times[trig_loop];
-          auto const tof_trig = rf.pulse_ToF_ns(time);
+          auto const & label  = event.labels[trig_loop];
+          auto const & nrj    = event.nrjs  [trig_loop];
+          auto const & time   = event.times [trig_loop];
+          auto const tof_trig = pulse_ref+time*_ns;
 
           histos.rf_all_event.Fill(tof_trig);
           histos.rf_each_event.Fill(compressedLabel[label], tof_trig);
       
-          if (isGe[label]) histos.energy_all_event.Fill(nrjcal);
-          histos.energy_each_event.Fill(compressedLabel[label], nrjcal);
+          if (isGe[label]) histos.energy_all_event.Fill(nrj);
+          histos.energy_each_event.Fill(compressedLabel[label], nrj);
         }
       }
+
       counter.count(event); 
 
     #ifdef TRIGGER
@@ -240,22 +248,26 @@ void convert(Hit & hit, FasterReader & reader,
 
         if (histoed)
         {
+          auto const & timestamp = event.stamp;
+          auto const pulse_ref = rf.pulse_ToF_ns(timestamp);
           for (uint trig_loop = 0; trig_loop<event.size(); trig_loop++)
           {
-            auto const & label = event.labels[trig_loop];
-            auto const & nrjcal = event.nrjcals[trig_loop];
-            auto const & time = event.times[trig_loop];
-            auto const tof_trig = rf.pulse_ToF_ns(time);
+            auto const & label  = event.labels[trig_loop];
+            auto const & nrj    = event.nrjs  [trig_loop];
+            auto const & time   = event.times [trig_loop];
+            auto const tof_trig = pulse_ref+time*_ns;
 
             histos.rf_all_trig.Fill(tof_trig);
             histos.rf_each_trig.Fill(compressedLabel[label], tof_trig);
         
-            if (isGe[label]) histos.energy_all_trig.Fill(nrjcal);
-            histos.energy_each_trig.Fill(compressedLabel[label], nrjcal);
+            if (isGe[label]) histos.energy_all_trig.Fill(nrj);
+            histos.energy_each_trig.Fill(compressedLabel[label], nrj);
           }
         }
-
         outTree->Fill();
+        // print(event);
+        // // outTree -> Show(trig_count-1);
+        // std::cin.get();
       }
     #else
       outTree->Fill();
@@ -327,6 +339,10 @@ int main(int argc, char** argv)
       {// Multithreading : number of threads
         nb_threads = atoi(argv[++i]);
       }
+      else if (command == "-n" || command == "--number-hits")
+      {// Multithreading : number of threads
+        max_hits = atoi(argv[++i]);
+      }
       else if (command == "-o" || command == "--overwrite")
       {// Overwright already existing .root files
         overwrite = true;
@@ -346,10 +362,11 @@ int main(int argc, char** argv)
       else if (command == "-h" || command == "--help")
       {
         print("List of the commands :");
-        print("(-f  || --files_number) [files_number]  : set the number of files");
+        print("(-f  || --files-number) [files-number]  : set the number of files");
         print("(-h  || --help)                         : display this help");
         print("(-H  || --histograms)                   : Fills and writes raw histograms");
         print("(-m  || --multithread)  [thread_number] : set the number of threads to use. Maximum allowed : 3/4 of the total number of threads");
+        print("(-n  || --number-hits)  [thread_number] : set the number of hit to read in each file.");
         print("(-o  || --overwrite)                    : overwrites the already written folders. If a folder is incomplete, you need to delete it");
         print("(-t  || --timeshifts)                   : Calculate only timeshifts, force it even if it already has been calculated");
         print("(-Th || --Thorium)                      : Treats only the thorium runs (run_nb < 75)");
@@ -360,8 +377,9 @@ int main(int argc, char** argv)
   }
 
   // MANDATORY : initialize the multithreading !
-  if (nb_threads>1) MTObject::Initialize(nb_threads);
-  print(MTObject::getThreadIndex());
+  MTObject::setThreadsNb(nb_threads);
+  MTObject::adjustThreadsNumber(nb_files);
+  MTObject::Initialize();
 
   // Setup the path accordingly to the machine :
   Path datapath = Path::home();
@@ -381,7 +399,7 @@ int main(int argc, char** argv)
   // if (!detectors || !calibration || !runs) return -1;
 
   // Setup some parameters :
-  RF_Manager::set_offset(40000);
+  RF_Manager::set_offset_ns(40);
 
   // Loop sequentially through the runs and treat their files in parallel :
   std::string run = "run_75.fast";
@@ -394,6 +412,7 @@ int main(int argc, char** argv)
     Histos histos;
     if (histoed) histos.Initialize(detectors);
 
+  print(histos.energy_all.size());
     print("----------------");
     print("Treating ", run_name);
 
@@ -421,8 +440,10 @@ int main(int argc, char** argv)
 
       if (histoed)
       {
-        std::unique_ptr<TFile> outFile (TFile::Open((outPath+run_name+"/histo_"+run_name+".root").c_str(), "RECREATE"));
+        auto const name = outPath+run_name+"/histo_"+run_name+".root";
+        std::unique_ptr<TFile> outFile (TFile::Open(name.c_str(), "RECREATE"));
         outFile -> cd();
+
         histos.energy_all.Write();
         histos.energy_each.Write();
         histos.rf_all.Write();
@@ -435,9 +456,10 @@ int main(int argc, char** argv)
         histos.energy_each_trig.Write();
         histos.rf_all_trig.Write();
         histos.rf_each_trig.Write();
+
         outFile -> Write();
         outFile -> Close();
-        print(outPath+run_name+"/"+run_name+"_histo.root written");
+        print(name, "written");
       }
     }
   // }

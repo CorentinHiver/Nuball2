@@ -58,10 +58,10 @@ $(EXE): $(SRCEXE:.cpp=.o) ${HEADER_FILES}
 opt: CFLAGS += -O2
 opt: default
 
-debug: CFLAGS += -g -O0 -DDEBUG -Wextra -ftemplate-depth-18 -fno-default-inline #-Wold-style-cast
+debug: CFLAGS += -g -O0 -DDEBUG -Wextra -ftemplate-depth-21 #-Wold-style-cast
 debug: default
 
-harddebug: CFLAGS += -g -O0 -DDEBUG -Wextra -ftemplate-depth-25 -fno-default-inline -Wconversion -Wno-float-conversion -Wold-style-cast
+harddebug: CFLAGS += -g -O0 -DDEBUG -Wextra -ftemplate-depth-25 -Wconversion -Wno-float-conversion -Wold-style-cast
 harddebug: default
 
 clean:

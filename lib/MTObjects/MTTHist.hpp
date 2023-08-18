@@ -151,7 +151,7 @@ public:
    * @attention Please do not use, doesn't seem very safe ...
    */
   template <class... ARGS>
-  void reset(MTTHist<THist> hist) { m_exists = false; m_merged = static_cast<THist*>(hist.m_merged); m_collection = hist.m_collection;}
+  void reset(MTTHist<THist> hist) { debug("dont copy MTTHist"); m_exists = false; m_merged = static_cast<THist*>(hist.m_merged); m_collection = hist.m_collection;}
 
   /**
    * @brief Unsafe
@@ -193,11 +193,13 @@ public:
   // --- COMMON METHODS --- //
   void Print();
   void Write();
+  void Write_i(int const & thread_index);
+  
   std::string const & name() const {return m_str_name;}
 
-  bool const & exists() const {return m_written;}  
+  bool const & exists() const {return m_exists;}  
   bool const & isWritten() const {return m_exists;}  
-  operator bool() const & {return m_exists;}
+  operator bool() const & {debug("coucou");return m_exists;}
 
   std::vector<THist*> const & getCollection() const {return m_collection;}
   THist * operator->() {return m_merged;}
@@ -205,6 +207,7 @@ public:
   operator THist*() {return m_merged;}
   THist * get() {return m_merged;}
   TFile * file() {return m_file;}
+  auto size() const {return m_collection.size();}
 
   #ifdef MTTHIST_MONO
   THist * Get() {return m_merged;}
@@ -258,26 +261,29 @@ template <class THist>
 template <class... ARGS>
 inline void MTTHist<THist>::reset(std::string name, ARGS &&... args)
 {
+  // Extract some informations :
+  m_file = gROOT -> GetFile();// If SIGSEGV here, have you instantiated the object ? (e.g., in an array of histograms)
+  m_exists = true;// If SIGSEGV here, have you instantiated the object ? (e.g., in an array of histograms)
+  m_str_name = name;
+
   if (MTObject::ON)
   {
-    lock_mutex lock(m_mutex);
-    m_file = gROOT -> GetFile();// If SIGSEGV here, have you instantiated the object ? (e.g., in an array of histograms)
-    m_exists = true;// If SIGSEGV here, have you instantiated the object ? (e.g., in an array of histograms)
-    m_str_name = name;
-
-
   #ifdef MTTHIST_MONO
     if (!m_merged) m_merged = new THist (name.c_str(), std::forward<ARGS>(args)...);
   #else // not MTTHIST_MONO
    
+    lock_mutex lock(m_mutex);
     if (MTObject::isMasterThread())
     { // If we are in the master thread, then it means we will merge the histograms afterwards
-      for (uint histo = 0; histo<m_collection.size(); histo++) if (!m_is_deleted[histo]) delete m_collection[histo];
+      for (size_t histo = 0; histo<m_collection.size(); histo++) if (!m_is_deleted[histo]) delete m_collection[histo]; 
       auto const & size = MTObject::getThreadsNb();
-      m_collection.reserve(size);
-      m_is_deleted.reserve(size);
+      m_collection.resize(size);
+      m_is_deleted.resize(size);
       for (size_t i = 0; i<size; i++) 
+      {
         m_collection[i] = new THist ((name+"_"+std::to_string(i)).c_str(), std::forward<ARGS>(args)...);
+        m_is_deleted[i] = false;
+      }
     }
     else
     {
@@ -295,8 +301,7 @@ inline void MTTHist<THist>::reset(std::string name, ARGS &&... args)
   }
   else // If MTObject is OFF
   {
-    m_exists = true;// If SIGSEGV here, have you instantiated the object ? (e.g., in an array of histograms)
-    m_collection.reserve(1);
+    m_collection.resize(1);
     m_collection[0] = new THist ((name).c_str(), std::forward<ARGS>(args)...);
     m_merged = m_collection[0];
   }
@@ -321,7 +326,6 @@ inline void MTTHist<THist>::Fill(ARGS &&... args)
 template <class THist>
 inline void MTTHist<THist>::Merge_t()
 {
-  
   m_file = gROOT -> GetFile();
   if (m_file) gROOT -> cd(); //To get out of scope of any potential TFile
   m_merged = static_cast<THist*> (m_collection[0]->Clone(m_str_name.c_str()));
@@ -333,9 +337,9 @@ inline void MTTHist<THist>::Merge_t()
     m_is_deleted[i] = true;
   }
   if (m_file) m_file -> cd(); //To return to the scope of any potential TFile
-
 }
 
+// We could translate this inside MTObject after testing it really works
 template <class THist>
 inline void MTTHist<THist>::Merge_thread(MTTHist<THist> & Histos)
 {
@@ -357,7 +361,7 @@ inline void MTTHist<THist>::Merge_thread(MTTHist<THist> & Histos)
 template<class THist>
 void MTTHist<THist>::Merge()
 {
-  if (!m_exists || !m_collection.size() || m_collection[0] -> IsZombie() || this -> Integral() < 1)
+  if (!m_exists || m_collection.size()==0 || m_collection[0] -> IsZombie() || this -> Integral() < 1)
   {
     m_exists = false;
     m_is_merged = false;
@@ -366,17 +370,12 @@ void MTTHist<THist>::Merge()
   {
     if (MTObject::ON)
     {
-      // lock_mutex lock(m_mutex);
-      std::thread merger([&](){this -> Merge_thread(*this);});
-      merger.join();
-      
+      lock_mutex lock(m_mutex);
+      this -> Merge_t();
     }
     else
     {
       m_merged = m_collection[0];
-      m_is_merged = true;
-      delete m_collection[0];
-      m_is_deleted[0] = true;
     }
     m_is_merged = true;
   }
@@ -395,52 +394,41 @@ THist* MTTHist<THist>::Merged()
   #endif //not MTTHIST_MONO
 
 template<class THist>
-void MTTHist<THist>::Write()
+void MTTHist<THist>::Write_i(int const & thread_index)
 {
-  if (MTObject::ON)
-  {
-    if (MTObject::isMasterThread())
-    {
-      if (m_exists && m_merged) print(m_str_name, m_merged -> IsZombie(), m_merged -> Integral() < 1);
-    #ifndef MTTHIST_MONO
-      if (m_merged && !m_merged -> IsZombie() && m_merged -> Integral() < 1) this -> Merge();
-    #endif // not MTTHIST_MONO
-      if (  !m_exists
-          || !m_merged
-          || m_merged -> IsZombie()
-          || m_merged -> Integral() < 1) return;
-      m_merged -> Write(m_str_name.c_str(), TROOT::kOverwrite);
-      reset(nullptr); // Not sure this is truly safe...
-      m_written = true;
-    }
-
-    else
-    {// If we are in one histo per thread mode :
-      auto const & thread_i = MTObject::MTObject::getThreadIndex();
-      if  (   !m_exists
-            ||!m_collection[thread_i]
-            || m_collection[thread_i] -> IsZombie()
-            || m_collection[thread_i] -> Integral() < 1
-          ) return;
-      else
-      {
-        m_written = true;
-        m_collection[thread_i] -> Write();
-        // DO THIS SECTION BETTER !!!
-        // delete m_collection[thread_i];
-        // m_is_deleted[thread_i] = true;
-      }
-    }
-  }
+  if  (   !m_exists
+        ||!m_collection[thread_index]
+        || m_collection[thread_index] -> IsZombie()
+        || m_collection[thread_index] -> Integral() < 1
+      ) return;
   else
   {
+    if (m_is_deleted[thread_index]) return;
+    m_collection[thread_index] -> Write();
+    delete m_collection[thread_index];
+    m_collection[thread_index] = nullptr;
+    m_is_deleted[thread_index] = true;
+    m_written = true;
+  }
+}
+
+template<class THist>
+void MTTHist<THist>::Write()
+{
+  if (MTObject::isMasterThread()) 
+  {
+    if (MTObject::ON) this -> Merge();
     if (   !m_exists
         || !m_merged
         || m_merged -> IsZombie()
         || m_merged -> Integral() < 1) return;
-    m_merged -> Write(m_str_name.c_str(), TROOT::kOverwrite);
-    m_written = true;
+    else
+    {
+      m_merged -> Write(m_str_name.c_str(), TROOT::kOverwrite);
+      m_written = true;
+    }
   }
+  else this -> Write_i(MTObject::getThreadIndex());
 }
 
 template <class THist>

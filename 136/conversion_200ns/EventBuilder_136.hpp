@@ -14,7 +14,10 @@ public:
   // Methods :
   // Add Hits  Outputs  0: single | 1: begin of coincidence | 2: coincidence complete
   bool build(Hit const & _hit);
-  bool inTimeRange(Hit const & hit) {return (static_cast<Long64_t>(hit.time-m_RF_ref_time) < static_cast<Long64_t>(m_rf->period));}
+  bool inTimeRange(Hit const & hit) 
+  {
+    return (static_cast<Long64_t>(hit.stamp-m_RF_ref_time) < static_cast<Long64_t>(m_rf->period));
+  }
   void reset();
 
   // Getters :
@@ -26,7 +29,7 @@ public:
   // void setShift_ns(Long64_t const & shift) {m_shift = 1000*shift;}
   void setRF(RF_Manager* rf) {m_rf = rf;}
   void setFirstRF(Hit const & hit);
-  void setRFTime(Time const & _RF_ref_time) {m_RF_ref_time = _RF_ref_time;}
+  void setRFTime(Timestamp const & _RF_ref_time) {m_RF_ref_time = _RF_ref_time;}
   inline void set_last_hit (Hit const & hit);
   inline void set_first_hit(Hit const & hit){set_last_hit(hit);}
 
@@ -35,7 +38,7 @@ public:
 
 private:
   // Attributes :
-  Time m_RF_ref_time = 0;
+  Timestamp m_RF_ref_time = 0;
   RF_Manager* m_rf = nullptr;
   // Time m_shift = 0;
 };
@@ -52,16 +55,16 @@ bool EventBuilder_136::tryAddNextHit_simple(uchar const & nb_periods_more)
   return false;
 }
 
-void push_back_136(Event * event, Hit const & hit)
-{
-  auto & mult = event->mult;
-  mult++;
-  event->labels  [mult] = hit.label;
-  event->times   [mult] = hit.time;
-  event->nrjcals [mult] = hit.nrjcal;
-  event->nrj2cals[mult] = hit.nrj2cal;
-  event->pileups [mult] = hit.pileup;
-}
+// void push_back_136(Event * event, Hit const & hit)
+// {
+//   auto & mult = event->mult;
+//   mult++;
+//   event->labels  [mult] = hit.label;
+//   event->times   [mult] = hit.stamp;
+//   event->nrjs    [mult] = hit.nrj;
+//   event->nrj2s   [mult] = hit.nrj2;
+//   event->pileups [mult] = hit.pileup;
+// }
 
 bool EventBuilder_136::build(Hit const & hit)
 {
@@ -79,8 +82,8 @@ bool EventBuilder_136::build(Hit const & hit)
       if ( static_cast<Long64_t>(m_RF_ref_time-m_single_hit.time) < static_cast<Long64_t>(m_rf->period))
           m_event -> push_front(m_single_hit);
     #endif //PREPROMPT
-      push_back_136(m_event, m_last_hit);
-      push_back_136(m_event, hit);
+      *m_event = m_last_hit;
+      m_event->push_back(hit);
       m_last_hit.reset();
       coincON = true; // Open the event
       m_status = 1; // The event can be filled with potential additionnal hits
@@ -101,9 +104,8 @@ bool EventBuilder_136::build(Hit const & hit)
   { // If the two previous hits are in the same event, checking if the current one is :
     if (this->inTimeRange(hit))
     {// Case 3 :
-      // print(hit.time, hit.label, (hit.time-m_RF_ref_time)/1000., m_rf->period/1000.);
       // The current hit belongs to the event
-      push_back_136(m_event, hit);
+      m_event->push_back(hit);
       // NB: m_status still equals to 1
     }
     else
@@ -124,13 +126,13 @@ void EventBuilder_136::setFirstRF(Hit const & rf_hit)
 {
   if (rf_hit.label != 251) throw std::runtime_error("First RF hit of the file is not really a RF");
   m_rf -> setHit(rf_hit);
-  m_RF_ref_time = rf_hit.time;
+  m_RF_ref_time = rf_hit.stamp;
 }
 
 void EventBuilder_136::set_last_hit(Hit const & hit)
 {
   // The closest RF to this hit is taken as reference to build the event :
-  m_RF_ref_time = hit.time - m_rf->pulse_ToF(hit.time);
+  m_RF_ref_time = hit.stamp - m_rf->pulse_ToF(hit.stamp);
   // m_last_hit is filled with the current hit :
   m_last_hit = hit;
 }
@@ -138,7 +140,7 @@ void EventBuilder_136::set_last_hit(Hit const & hit)
 void EventBuilder_136::reset()
 {
   // Sets the reference RF timestamp to the last hit :
-  m_RF_ref_time = m_last_hit.time - (( m_last_hit.time - m_rf->last_hit + m_rf->offset() ) % m_rf->period) ;
+  m_RF_ref_time = m_last_hit.stamp - (( m_last_hit.stamp - m_rf->last_hit + m_rf->offset() ) % m_rf->period) ;
   // Then
   m_event -> clear(); m_status = 0;
 }

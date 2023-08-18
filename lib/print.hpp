@@ -55,6 +55,13 @@ std::ostream& operator<<(std::ostream& cout, std::map<K,V> const & m)
 
 void print_precision(int n = 6) {std::cout << std::setprecision(n);}
 
+template <class... ARGS> void debug(ARGS &&... args) 
+{
+#ifdef DEBUG
+  print(std::forward<ARGS>(args)...);
+#endif //DEBUG
+}
+
 
 // Idea to print any class that has a member called getPrintable that returns an object that can be printed 
 // (i.e. a base type or a class for which operator<< have been overloaded like vector or map)
@@ -73,17 +80,6 @@ void print_precision(int n = 6) {std::cout << std::setprecision(n);}
 //   std::static_assert(HasRequiredFunction<T>::value, "must have a getPrintable() method or overloaded operator<< to be printed.");
 //   cout << t.get();
 //   return cout;
-// }
-
-// template <class E>
-//  void print (std::vector<E> const & v)
-// {
-//   for (auto const & e : v) print(e);
-// }
-// template <class E, class... T> void print (std::vector<E> const & v, T const &... t2)
-// {
-//   print(v);
-//   print(t2...);
 // }
 
 // template <class K, class V> void print (std::map<K,V> const & m)
@@ -110,33 +106,34 @@ void print_precision(int n = 6) {std::cout << std::setprecision(n);}
 //   print(t2...);
 // }
 
-// Class Debug, based on template print() :
-class Debug
-{
-public:
-  template <class... T> Debug(T... t) { (*this)(t...); }
 
-  template <class... T> void operator () (T... t)
-  {
-    if (sizeof...(t) == 0)
-    {
-      print("coucou ", i);
-      i++;
-      return;
-    }
-    print(t...);
-    std::cout << std::endl;
-  }
+// // Class Debug, based on template print() :
+// class Debug
+// {
+// public:
+//   template <class... T> Debug(T... t) { (*this)(t...); }
 
-  void operator () (int _i)
-  {
-    std::cout << "coucou " << _i << std::endl;
-    i = _i+1;
-  }
-private:
-  static int i;
-};
+//   template <class... T> void operator () (T... t)
+//   {
+//     if (sizeof...(t) == 0)
+//     {
+//       print("coucou ", i);
+//       i++;
+//       return;
+//     }
+//     print(t...);
+//     std::cout << std::endl;
+//   }
 
-int Debug::i = 0;
+//   void operator () (int _i)
+//   {
+//     std::cout << "coucou " << _i << std::endl;
+//     i = _i+1;
+//   }
+// private:
+//   static int i;
+// };
+
+// int Debug::i = 0;
 
 #endif //PRINT_HPP
