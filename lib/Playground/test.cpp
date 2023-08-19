@@ -61,18 +61,26 @@ int main(int argc, char ** argv)
   // i = 5;
   // print(svec2, i, j);
 
-  // Convertor convertor(argc, argv);
-  Detectors detectors("index_129.list");
-  Calibration calibration(detectors);
+  Convertor convertor(argc, argv, [](const Event& event)
+  {
+    for (Mult hit = 0; hit<event.mult; hit++)
+    {
+      auto const & label = event.labels[hit];
+      if (isDSSD[label]) return true;
+    }
+    return false;
+  });
+  // Detectors detectors("index_129.list");
+  // Calibration calibration(detectors);
   // calibration.verbose(true);
-  // calibration.calculate(argv[1], (argc>2) ? std::stoi(argv[2]) : 1, "152Eu");
+  // calibration.calculate(argv[1], (argc>2) ? std::stoi(argv[2]) : 1, "3alpha");
   // calibration.verify("test");
 
   // MTObject::Initialize(2);
 
-  calibration.load("136_final.calib");
-  calibration.calibrateData(argv[1], (argc>2) ? std::stoi(argv[2]) : 1);
-  calibration.writeCalibratedData("test_calib_data.root");
+  // calibration.load("136_final.calib");
+  // calibration.calibrateData(argv[1], (argc>2) ? std::stoi(argv[2]) : 1);
+  // calibration.writeCalibratedData("test_calib_data.root");
   
     // Timeshift ts;
 

@@ -202,7 +202,11 @@ public:
   operator bool() const & {debug("coucou");return m_exists;}
 
   std::vector<THist*> const & getCollection() const {return m_collection;}
+  #ifdef SAFE
+  THist * operator->() {if (m_merged) return m_merged; else print("MTTHist not merged !!!");}
+  #else 
   THist * operator->() {return m_merged;}
+  #endif //SAFE
 
   operator THist*() {return m_merged;}
   THist * get() {return m_merged;}
@@ -415,9 +419,10 @@ void MTTHist<THist>::Write_i(int const & thread_index)
 template<class THist>
 void MTTHist<THist>::Write()
 {
-  if (MTObject::isMasterThread()) 
+  if (MTObject::ON && MTObject::isMasterThread()) this -> Merge();
+  if (MTObject::ON && !MTObject::isMasterThread()) this -> Write_i(MTObject::getThreadIndex());
+  else
   {
-    if (MTObject::ON) this -> Merge();
     if (   !m_exists
         || !m_merged
         || m_merged -> IsZombie()
@@ -428,7 +433,6 @@ void MTTHist<THist>::Write()
       m_written = true;
     }
   }
-  else this -> Write_i(MTObject::getThreadIndex());
 }
 
 template <class THist>

@@ -116,7 +116,7 @@ public:
   struct histograms
   {
     // Binning raw spectra
-    std::map<dAlias, NRJ> m_bins_raw   = {{labr_a,   1000.}, {ge_a,  20000.}, {bgo_a,   5000.}, {eden_a,      500.}, {paris_a,  10000.}, {dssd_a,    500.}};
+    std::map<dAlias, NRJ> m_bins_raw   = {{labr_a,   1000.}, {ge_a,  20000.}, {bgo_a,   5000.}, {eden_a,      500.}, {paris_a,  10000.}, {dssd_a,   5000.}};
     std::map<dAlias, NRJ> m_min_raw    = {{labr_a,      0.}, {ge_a,      0.}, {bgo_a,      0.}, {eden_a,        0.}, {paris_a,      0.}, {dssd_a,      0.}};
     std::map<dAlias, NRJ> m_max_raw    = {{labr_a, 500000.}, {ge_a, 500000.}, {bgo_a,5000000.}, {eden_a,   500000.}, {paris_a, 500000.}, {dssd_a, 500000.}};
     

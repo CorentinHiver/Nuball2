@@ -16,6 +16,8 @@
 #include "../Modules/Timeshifts.hpp"
 #include "../Modules/Calibration.hpp"
 
+using Trigger = std::function<bool(const Event&)>;
+
 /**
  * @brief Basic class to perform faster to root data conversion
  * 
@@ -99,8 +101,8 @@ class Convertor
 {
 public:
 
-  Convertor() {m_ok = false;}
-  Convertor(int argc, char** argv);
+  Convertor() {}
+  Convertor(int argc, char** argv, Trigger trigger = [](const Event&) { return true; });
 
   /// @brief Raw conversion :
   Convertor(Path const & inputFolder, Path const & outputFolder, int const & nb_files = -1, bool const & buildEvents = false) 
@@ -133,6 +135,8 @@ public:
 
   void convert(std::string const & dataFolder, std::string const & outputFolder);
 
+  void setTrigger(std::function<bool(const Event&)> other) {m_trigger = other;}
+
 protected:
   static void s_convertFile(Hit & hit, FasterReader & reader, 
                             Convertor & convertor, Path const & outPath) 
@@ -156,7 +160,10 @@ protected:
 
   MTCounter m_total_hits;
   MTCounter m_total_events;
+  Timer m_total_timer;
+  std::function<bool(const Event&)> m_trigger;
 };
+
 
 void Convertor::printParameters() const
 {
@@ -166,14 +173,16 @@ void Convertor::printParameters() const
     print("");
     print("-c [calibration_file]  : Loads the calibration file");
     print("-e [time_window_ns]    : Perform event building with time_window_ns = 1500 ns by default");
+    print("-f [files_number]      : Choose the total number of files to treat inside a data folder");
     print("-i [ID_file]           : Load ID file");
+    print("-n [hits_number]       : Choose the number of hits to read inside a file");
     print("-m [threads_number]    : Choose the number of files to treat in parallel");
-    print("-n [files_number]      : Choose the total number of files to treat inside a data folder");
     print("-t [time_window_ns]    : Loads timeshift data");
     print("--throw-single         : If you are not interested in single hits");
 }
 
-Convertor::Convertor(int argc, char** argv)
+
+Convertor::Convertor(int argc, char** argv, Trigger trigger)
 {
   if (argc<2) 
   {
@@ -189,10 +198,11 @@ Convertor::Convertor(int argc, char** argv)
     std::string command = argv[i];
          if (command == "-c") loadCalibration(argv[++i]);
     else if (command == "-e") buildEvents(std::stoi(argv[++i]));
-    else if (command == "-i") m_detectors.load(argv[i]);
+    else if (command == "-f") setNbFiles(std::stoi(argv[++i]));
+    else if (command == "-i") m_detectors.load(argv[++i]);
     else if (command == "-m") setNbThreads(std::stoi(argv[++i]));
+    else if (command == "-n") FasterReader::setMaxHits(std::stoi(argv[++i]));
     else if (command == "-o") overwrite(true);
-    else if (command == "-n") setNbFiles(std::stoi(argv[++i]));
     else if (command == "-t") loadTimeshifts(argv[++i]);
     else if (command == "--throw-singles") m_throw_single = true;
     else {print("Unkown command", command);}
@@ -203,8 +213,11 @@ Convertor::Convertor(int argc, char** argv)
     throw_error(error_message["DEV"]);
   }
   if (m_nb_threads > 1) MTObject::Initialize(m_nb_threads);
+  m_trigger = trigger;
   this -> convert(m_dataPath, m_outPath);
+  print(m_total_events/m_total_timer.TimeSec()*1.E-6, "Mevts/s");
 }
+
 
 void Convertor::convert(std::string const & dataFolder, std::string const & outputFolder) 
 {
@@ -227,7 +240,7 @@ void Convertor::convertFile(Hit & hit, FasterReader & reader, Path const & outPa
   
   unique_tree tree(new TTree("Nuball2","Nuball2"));
   tree -> SetDirectory(nullptr);
-  Event event; 
+  Event event;
   unique_tree tempTree;
   if (m_eventbuilding)
   {
@@ -243,7 +256,6 @@ void Convertor::convertFile(Hit & hit, FasterReader & reader, Path const & outPa
 
 // Read faster data to fill the memory resident tree :
   while(reader.Read())
-  // while(reader.Read() && tempTree->GetEntries()<(int)(1.E+6))
   {
     if (m_timeshifts) hit.time += m_timeshifts[hit.label];
     if (m_calibration)
@@ -270,24 +282,17 @@ void Convertor::convertFile(Hit & hit, FasterReader & reader, Path const & outPa
 
     long loop = 0;
     int evts = 0;
-    int nb_next_period = 0;
-    Timestamp last_event_timestamp = 0ull;
-    print(nb_data);
+    debug(nb_data);
     while (loop<nb_data)
     {
       tempTree -> GetEntry(alignator[loop++]);
-      if (builder.build(hit)) 
+      if (builder.build(hit) && m_trigger(event)) 
       {
-        // print(Time_cast(event.stamp-last_event_timestamp)/1000.);
-        // std::cin.get();
-        if (Time_cast(event.stamp-last_event_timestamp) < 300000) nb_next_period++;
-        last_event_timestamp = event.stamp;
         tree->Fill();
         evts++;
       }
     }
     m_total_events+=evts;
-  print((100.*nb_next_period)/evts, "Events adjacents");
   }
 
   // Write down the tree : 
@@ -298,9 +303,6 @@ void Convertor::convertFile(Hit & hit, FasterReader & reader, Path const & outPa
   file -> Close();
   print(outputFile, "written (", nb_data/1000000, " Mhits) in", timer(), timer.unit());
 }
-
-
-
 
 
 ////////////////////////////
@@ -319,28 +321,28 @@ public:
   void convertFile(Hit & hit, FasterReader & reader, Path const & outPath) override;
 
   // Define here the classes and parameters you would like to share bewteen threads.
+  // You already share all the protected members of Convertor
   // Be careful not to write in them !!
-  // You already share all the protected members
 };
 
 void MySimpleConvertor::convertFile(Hit & hit, FasterReader & reader, Path const & outPath)
 {
   // First, declare a tree :
-  unique_tree tree(new TTree("test","test"));
+  unique_tree tree(new TTree("simple","simple"));
   tree -> SetDirectory(nullptr); // To make it memory resident
   // Next, connect the hit to the tree (Hit::writting() is a shortcut for the many TTree::Branch method to be called, 
   // see Hit class for more information). You can do it manually of course !
-  hit.writting(tree.get(), "lteQp");
+  hit.writting(tree.get(), "lseqp");
 
   // Now, we can read the faster file :
   while(reader.Read())
   {
-    // The hit is loaded with FasterReader::Read(), so all we have to do is fill the tree : 
+    // The hit is loaded with FasterReader::Read(), so all we have to do is fill the tree :
     tree -> Fill(); 
   }
 
   // Write down this tree : 
-  unique_TFile file(new TFile(outPath+"test.root"));
+  unique_TFile file(new TFile(outPath+"simple.root"));
   file -> cd();
   tree -> Write();
   file -> Write();

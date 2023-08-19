@@ -51,7 +51,7 @@ public:
     }
     else
     {// When the RF is found after the hit
-      return (period-Time_cast(last_hit-timestamp-Timestamp_cast(m_offset))%period - m_offset );
+      return period - Time_cast((last_hit-timestamp-m_offset)%Timestamp_cast(period)) - m_offset ;
     }
   #else //NO USE_RF
     print("NO RF IS USED !! Please set USE_RF [period_value]");
@@ -77,7 +77,7 @@ public:
   Timestamp last_hit = 0;
 
 #ifdef USE_RF
-  Time period = USE_RF;
+  Time period = USE_RF*1000;
 #else //NO USE_RF
   Time period = 0;
 #endif //USE_RF
@@ -144,6 +144,11 @@ public:
   RF_Extractor(TTree * tree, RF_Manager & rf, Event & event, Long64_t maxEvts = Long64_cast(1.E+7));
 #endif //EVENT_HPP
 
+#ifdef FASTERREADER_HPP
+  RF_Extractor(FasterReader & reader, RF_Manager & rf, Hit & hit, Long64_t maxEvts = Long64_cast(1.E+7));
+#endif //FASTERREADER_HPP
+
+
   auto const & cursor() const {return m_cursor;}
 
   operator bool() const & {return m_ok;}
@@ -175,5 +180,17 @@ RF_Extractor::RF_Extractor(TTree * tree, RF_Manager & rf, Event & event, Long64_
   m_ok = true;
 }
 #endif //EVENT_HPP
+
+#ifdef FASTERREADER_HPP
+// RF_Extractor::RF_Extractor(FasterReader & reader, RF_Manager & rf, Hit & hit, Long64_t maxEvts);
+// {
+//   do {reader.Read();}
+//   while(hit.label != RF_Manager::label && m_cursor<maxEvts );
+//   if (m_cursor == maxEvts) {print("NO RF DATA FOUND !"); m_ok = false; return;}
+//   rf.setHit(hit);
+//   m_ok = true;
+//   reader.Reset();
+// }
+#endif //FASTERREADER_HPP
 
 #endif //RF_MANAGER_H

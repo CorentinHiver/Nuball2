@@ -27,8 +27,7 @@ public:
     mult (event.mult ),
     stamp(event.stamp),
     read (event.read ),
-    write(event.write),
-    m_maxSize(event.m_maxSize)
+    write(event.write)
   {
     std::copy_n(event.labels   , mult ,  labels );
     std::copy_n(event.times    , mult ,  times  );

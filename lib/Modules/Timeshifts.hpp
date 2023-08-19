@@ -835,12 +835,12 @@ void Timeshifts::analyse()
       case (841) : forced_shifts[label] = -220000; break;
       case (842) : forced_shifts[label] = -240967; break;
       case (843) : forced_shifts[label] = -249883; break;
-      case (845) : forced_shifts[label] = -255466; break;
+      case (845) : forced_shifts[label] = -235466; break;
       case (846) : forced_shifts[label] = -245108; break;
       case (847) : forced_shifts[label] = -250381; break;
       case (848) : forced_shifts[label] = -253537; break;
       case (850) : forced_shifts[label] = -246108; break;
-      case (851) : forced_shifts[label] = -240327; break;
+      case (851) : forced_shifts[label] = -220327; break;
       case (852) : forced_shifts[label] = -238842; break;
       case (853) : forced_shifts[label] = -250727; break;
       case (854) : forced_shifts[label] = -242609; break;

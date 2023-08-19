@@ -1,5 +1,5 @@
-#ifndef FASTERREADER_H
-#define FASTERREADER_H
+#ifndef FASTERREADER_HPP
+#define FASTERREADER_HPP
 
 #include "Hit.hpp"
 
@@ -118,8 +118,8 @@ public:
    ///\nNever tested, but should work !
   void setHit(Hit* hit) {m_hit = hit;}
 
-   ///@brief Set the Max Hits read
-  void setMaxHits(ulonglong maxHits) {m_maxHits = maxHits;}
+   ///@brief Set the number of hits to read inside each file
+  static void setMaxHits(ulonglong maxHits) {m_maxHits = maxHits;}
 
   // ------ Getters ------ :
 
@@ -151,8 +151,8 @@ private:
 
   bool InitializeReader();
 
-  ulonglong m_maxHits = -1,
-            m_cursor  =  0,
+  static ulonglong m_maxHits;
+  ulonglong m_cursor  =  0,
             m_counter =  0;
 
   Hit*   m_hit = nullptr;
@@ -177,6 +177,7 @@ private:
   void TreatRF    (faster_data_p const & _data);
 };
 
+ulonglong FasterReader::m_maxHits = -1;
 // ================== //
 //   INITIALIZATION   //
 // ================== //
@@ -190,6 +191,8 @@ bool FasterReader::Reset()
   m_data = nullptr;
   m_inGroup = false;
   m_alias = 0;
+
+  Initialize();
   return true;
 }
 
@@ -526,4 +529,4 @@ void FasterReader::TreatRF(const faster_data_p& data)
    m_hit->pileup = false;
 }
 
-#endif //FASTERREADER_H
+#endif //FASTERREADER_HPP
