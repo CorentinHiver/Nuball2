@@ -403,12 +403,12 @@ int main(int argc, char** argv)
   // Setup some parameters :
   RF_Manager::set_offset_ns(40);
 
-  MTCounter total_read_size;
 
   // Loop sequentially through the runs and treat their files in parallel :
   std::string run;
   while(runs.getNext(run))
   {
+    MTCounter total_read_size;
     Timer timer;
     Path runpath = manipPath+run;
     auto run_name = removeExtension(run);
