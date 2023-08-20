@@ -10,10 +10,10 @@
 
 using Mult      = int;
 using Label     = ushort;
-using ADC       = double;
-using NRJ       = double;
+using ADC       = int;
+using NRJ       = float;
 using Timestamp = ULong64_t;
-using Time      = int;
+using Time      = Long64_t;
 using Time_ns   = float;
 using Pileup    = bool;
 

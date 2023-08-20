@@ -183,21 +183,26 @@ public:
   bool load(std::string const & calibFileName);
 
 
-  void calculate(std::string const & dataDir, int const & nb_files = -1, std::string const & source = "152Eu");
+  void calculate(std::string const & dataDir, int const & nb_files = -1, std::string const & source = "152Eu",std::string const & type = "fast");
 
   /// @brief Calculate calibration from .root histograms
   /// @attention TODO
   void calculate(std::string const & histograms, std::string const & source = "152Eu");
 
-  void Initialize() {m_histos.Initialize(*this);m_fits.resize(1000);}
-  void loadData(std::string const & dataDir, size_t const & nb_files = -1);
+  void Initialize() {m_histos.Initialize(*this); m_fits.resize(1000);}
+
+  void loadRootData(std::string const & dataDir, int const & nb_files = -1);
+  static void loadRootDataThread(Calibration & calib, MTList & list);
+  void fillRootDataHisto(std::string const & filename);
+
+  void loadData(std::string const & dataDir, int const & nb_files = -1);
   static void fillHisto(Hit & hit, FasterReader & reader, Calibration & calib);
   void analyse(std::string const & source = "152Eu");
   void writePosPeaks(std::string const & outfilename);
   void writeData(std::string const & outfilename);
   void writeRawRoot(std::string const & outfilename);
 
-  void verify(std::string const & outfilename = "verify_calib.root");
+  void verify(std::string const & outfilename = "verify");
   void writeCalibratedRoot(std::string const & outfilename);
 
   void setDetectorsList(Detectors const & ID_file) {m_detectors = ID_file;}
@@ -214,7 +219,7 @@ public:
   /// @brief calibrate the nrj value using the parameters extracted from the calibration data
   NRJ calibrate(NRJ const & nrj, Label const & label) const;
 
-  void calibrateData(std::string const & folder, size_t const & nb_files = -1);
+  void calibrateData(std::string const & folder, int const & nb_files = -1);
   bool const & calibrate_data() const {return m_calibrate_data;}
   bool const & calibrate_data() {return m_calibrate_data;}
   void writeCalibratedData(std::string const & outfilename);
@@ -340,11 +345,13 @@ void Calibration::histograms::setBins(std::string const & parameters)
   }
 }
 
-void Calibration::calculate(std::string const & dataDir, int const & nb_files, std::string const & source)
+void Calibration::calculate(std::string const & dataDir, int const & nb_files, std::string const & source, std::string const & type)
 {
   print ("Calculating calibrations from raw data in", dataDir);
 
-  this -> loadData(dataDir, nb_files);
+  if(type == "fast") this -> loadData(dataDir, nb_files);
+  else if (type == "root") this -> loadRootData(dataDir, nb_files);
+  else {print(type, "unkown data format"); return;}
 
   this -> analyse(source);
 
@@ -363,7 +370,7 @@ void Calibration::calculate(std::string const & histograms, std::string const & 
   this -> writeRawRoot(source+".root");
 }
 
-void Calibration::loadData(std::string const & dataDir, size_t const & nb_files)
+void Calibration::loadData(std::string const & dataDir, int const & nb_files)
 {
   print("Loading the data from", Path(dataDir).folder());
   this -> Initialize();
@@ -371,6 +378,63 @@ void Calibration::loadData(std::string const & dataDir, size_t const & nb_files)
   mt_reader.addFolder(dataDir, nb_files);
   mt_reader.execute (fillHisto, *this);
   print("Data loaded");
+}
+
+void Calibration::loadRootData(std::string const & dataDir, int const & nb_files)
+{
+  print("Loading the data from", Path(dataDir).folder());
+  this -> Initialize();
+  FilesManager files;
+  files.addFolder(dataDir, nb_files);
+  MTList list(files.getListFiles());
+  MTObject::parallelise_function(loadRootDataThread, *this, list);
+  print("Data loaded");
+}
+
+void Calibration::loadRootDataThread(Calibration & calib, MTList & list)
+{
+  std::string filename = "";
+  while(list.getNext(filename))
+  {
+    calib.fillRootDataHisto(filename);
+  }
+}
+
+void Calibration::fillRootDataHisto(std::string const & filename)
+{
+  unique_TFile file(TFile::Open(filename.c_str(), "READ"));
+  std::unique_ptr<TTree> tree (file->Get<TTree>("Nuball2"));
+  if (!tree.get()) {print("NO Nuball2 found in", filename); return;}
+
+  Event event;
+  event.reading(tree.get(), "le");
+
+  print("Reading", filename);
+
+  auto const & nb_hits = tree->GetEntries();
+
+  if (m_calibrate_data) for (long evt = 0; evt<nb_hits; evt++)
+  {
+    tree->GetEntry(evt);
+    for (int hit = 0; hit<event.mult; hit++)
+    {
+      auto const & label = event.labels[hit];
+      if (label == 0) continue;
+      auto const nrjcal = calibrate(event.adcs[hit], label);
+      m_histos.calib_spectra[label].Fill(nrjcal);
+      m_histos.all_calib[detectors().alias(label)].Fill(compressedLabel[label], nrjcal);
+    }
+  }
+  else for (long evt = 0; evt<nb_hits; evt++)
+  {
+    tree->GetEntry(evt);
+    for (int hit = 0; hit<event.mult; hit++)
+    {
+      auto const & label = event.labels[hit];
+      if (label == 0) continue;
+      m_histos.raw_spectra[label].Fill(event.adcs[hit]);
+    }
+  }
 }
 
 void Calibration::fillHisto(Hit & hit, FasterReader & reader, Calibration & calib)
@@ -444,7 +508,7 @@ void Calibration::analyse(std::string const & source)
 
     if (histo.Integral()==0)
     {
-      if (m_verbose) print(name, "have no data in this run");
+      if (m_verbose) print(name, "has no data in this run");
       continue;
     }
     
@@ -460,11 +524,12 @@ void Calibration::analyse(std::string const & source)
     int window_1 = 0, window_2 = 0; // The three windows width (in keV)
 
     auto & peaks = fit.peaks;
+    int minHitsToCalibrate = 50000;
 
     // Handles the triple alpha
     if (isTripleAlpha(source) && alias!=dssd_a) continue;
-    else if (alias==dssd_a) continue;
-
+    else if (!isTripleAlpha(source) && alias==dssd_a) continue;
+    
     if (alias == ge_a)
     {// For Clovers
       window_1 = 10, window_2 = 10;
@@ -564,13 +629,14 @@ void Calibration::analyse(std::string const & source)
     {
       if (isTripleAlpha(source))
       {
-        window_1 = 150, window_2 = 100;
+        window_1 = 100, window_2 = 80;
         nb_pics = 3;
         peaks.resize(nb_pics);
         peaks = {5150, 5480, 5800};
         E_right_pic = peaks.back();
         integral_ratio_threshold = 0.05f;
         ADC_threshold = 500;
+        minHitsToCalibrate = 0;
       }
       else
       {
@@ -613,7 +679,7 @@ void Calibration::analyse(std::string const & source)
     auto ADC_threshold_scaled = ADC_cast(ADC_threshold/scalefactor); 
     auto sum=histo->Integral(ADC_threshold_scaled, nbins-1); // The total integral of the spectra
     fit.integral = sum;
-    if (sum < 50000)
+    if (sum < minHitsToCalibrate)
     {// No calibration if not enough counts in the spectra
       if (m_verbose)
       {
@@ -739,7 +805,7 @@ void Calibration::analyse(std::string const & source)
       ey[j]=0;
     }
 
-    // If faudrait aussi revoir ce fit ici !
+    // If faudrait aussi revoir ce fit ici ! Et éventuellement les erreurs
     auto c1 = TCanvas(("c_"+name).c_str());
     TGraphErrors* gr = new TGraphErrors(nb_pics,x.data(),y.data(),ex.data(),ey.data());
     gr -> SetName((name+"_gr").c_str());
@@ -958,16 +1024,18 @@ void Calibration::verify(std::string const & outfilename)
   print("Verification of the calibration");
   for (Label label = 0; label<m_histos.raw_spectra.size(); label++) 
   {
+    if (!m_detectors.exists[label]) continue;
+    auto const & name = m_detectors[label];
     auto & raw_histo = m_histos.raw_spectra[label];
-    if (raw_histo.Integral()<1) continue;
+    if (raw_histo.Integral()<1) {if (m_verbose) print(name, "has no hit"); continue;}
     auto & calib_histo = m_histos.calib_spectra[label];
     auto const & fit = m_fits[label];
-    if (!fit.exists()) {nb_det_filled[m_detectors.alias(label)]++; continue;}
+    if (!fit.exists()) {nb_det_filled[m_detectors.alias(label)]++; if (m_verbose) print(name, "has no fit"); continue;}
 
     // Extract useful information : 
     auto const & alias = m_detectors.alias(label);
 
-    auto xaxis_raw = raw_histo -> GetXaxis();
+    auto const xaxis_raw = raw_histo -> GetXaxis();
     auto const & nb_bins = xaxis_raw -> GetNbins();
     auto const bin_width = xaxis_raw -> GetXmax() / nb_bins;
     for(int bin = 0; bin<nb_bins; bin++)
@@ -984,7 +1052,7 @@ void Calibration::verify(std::string const & outfilename)
           case 2 : nrj = fit.parameter0 + nrj*fit.parameter1 + nrj*nrj*fit.parameter2; break;
         }
         calib_histo -> Fill(nrj);
-        m_histos.all_calib[alias]->Fill(nb_det_filled[alias], nrj);
+        m_histos.all_calib[alias]->Fill(double_cast(nb_det_filled[alias]), nrj);
       }
     }
     nb_det_filled[alias]++;
@@ -1001,7 +1069,7 @@ void Calibration::writeCalibratedRoot(std::string const & outfilename)
   print("Calibrated root spectra written to", outfilename);
 }
 
-void Calibration::calibrateData(std::string const & folder, size_t const & nb_files )
+void Calibration::calibrateData(std::string const & folder, int const & nb_files )
 {
   m_calibrate_data = true;
   this -> loadData(folder, nb_files);

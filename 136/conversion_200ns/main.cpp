@@ -43,7 +43,8 @@ uint nb_periods_more = 0; // Number of periods to extend after an event that tri
 
 bool trigger(Counter136 const & counter)
 {
-  return (counter.nb_dssd>0);
+  return true;
+  // return (counter.nb_dssd>0);
   // return ((counter.nb_modules>2 && counter.nb_clovers>0) || counter.nb_dssd>0);
 }
 
@@ -53,9 +54,6 @@ struct Histos
   MTTHist<TH1F> rf_all_raw;
   MTTHist<TH2F> energy_each_raw;
   MTTHist<TH2F> rf_each_raw;
-
-  MTTHist<TH1F> stamp_VS_RF_ref;
-  MTTHist<TH1F> stamp_closing_hit_VS_RF_ref;
 
   MTTHist<TH1F> energy_all_Ge;
   MTTHist<TH1F> rf_all;
@@ -81,8 +79,6 @@ struct Histos
     energy_each_raw.reset("energy_each_raw", "Energy spectra each raw", nbDet,0,nbDet, 5000,0,15000);
     rf_each_raw.reset("rf_each_raw", "RF timing each raw", nbDet,0,nbDet, 1000, -100, 400);
     
-    stamp_VS_RF_ref.reset("stamp_VS_RF_ref", "RF test", 100000, -1000000, 100000000);
-    stamp_closing_hit_VS_RF_ref.reset("stamp_closing_hit_VS_RF_ref", "RF test", 100000, -1000000, 100000000);
 
     energy_all_Ge.reset("Ge_spectra", "Ge spectra", 20000,0,10000);
     rf_all.reset("RF_Time_spectra", "RF Time spectra", 1000, -100, 400);
@@ -117,6 +113,8 @@ void convert(Hit & hit, FasterReader & reader,
 
   // Extracting the run name :
   File raw_datafile = reader.getFilename();   // "/path/to/manip/run_number.fast/run_number_filenumber.fast"
+  Filename filename = raw_datafile.filename();// "                               run_number_filenumber.fast"
+  int filenumber = std::stoi(lastPart(filename.shortName(), '_'));
   std::string run_path = raw_datafile.path(); // "/path/to/manip/run_number.fast/"
   std::string temp = run_path;                // "/path/to/manip/run_number.fast/"
   temp.pop_back();                            // "/path/to/manip/run_number.fast"
@@ -138,10 +136,6 @@ void convert(Hit & hit, FasterReader & reader,
   tempTree -> SetDirectory(nullptr); // Force it to be created on RAM rather than on disk - much faster if enough RAM
   hit.writting(tempTree.get(), "lsEQp");
 
-  // Setup rf
-  RF_Manager rf2;
-  rf2.last_hit = 3002986291625ull;
-
   // Loop over the TTree 
   Timer read_timer;
   ulong rawCounts = 0;
@@ -158,23 +152,6 @@ void convert(Hit & hit, FasterReader & reader,
 
     tempTree -> Fill();
     rawCounts++;
-
-    if (histoed)
-    {
-      if (isGe[hit.label]) histos.energy_all_Ge_raw.Fill(hit.nrj);
-      histos.energy_each_raw.Fill(compressedLabel[hit.label], hit.nrj);
-
-      if (hit.label == RF_Manager::label)
-      {
-        rf2.setHit(hit);
-      }
-      else
-      {
-        auto const tof = rf2.pulse_ToF_ns(hit.stamp);
-        histos.rf_all_raw.Fill(tof);
-        histos.rf_each_raw.Fill(compressedLabel[hit.label], tof);
-      }
-    }
   }
 
   read_timer.Stop();
@@ -203,11 +180,16 @@ void convert(Hit & hit, FasterReader & reader,
   if (!first_rf) return;
   eventBuilder.setFirstRF(hit);
 
+  debug("first RF found at hit n°", first_rf.cursor());
+
   // Initialize event analyser : simple modules and DSSD counter
   Counter136 counter;
 
   // Handle the first hit :
   int loop = 0;
+  // The first few first hundreds of thousands of hits, in the first file of each run,
+  // don't have RF downscale. So we have to skip them in order to maintain good temporal resolution :
+  if (filenumber == 1) loop = first_rf.cursor(); 
   tempTree -> GetEntry(gindex[loop++]);
   eventBuilder.set_first_hit(hit);
 
@@ -220,19 +202,15 @@ void convert(Hit & hit, FasterReader & reader,
   while (loop<nb_data)
   {
     tempTree -> GetEntry(gindex[loop++]);
-
-    if (Long64_cast(hit.stamp - eventBuilder.get_RF_ref_time())<-40000ll)
-        print(eventBuilder.get_RF_ref_time(), hit);
-    histos.stamp_VS_RF_ref.Fill(Time_cast(hit.stamp - eventBuilder.get_RF_ref_time()));
-
+    
     // Handle the RF data :
     if (hit.label == RF_Manager::label)
     {
       rf.setHit(hit);
-      Event temp (std::move(event));
+      Event temp (event);
       event = hit;
       outTree -> Fill();
-      event = std::move(temp);
+      event = temp;
       continue;
     }
 
@@ -246,28 +224,29 @@ void convert(Hit & hit, FasterReader & reader,
       histos.energy_each.Fill(compressedLabel[hit.label], hit.nrj);
     }
 
+
     // Event building :
     if (eventBuilder.build(hit))
     {
-    histos.stamp_closing_hit_VS_RF_ref.Fill(Time_cast(hit.stamp - eventBuilder.get_RF_ref_time()));
       evts_count++;
       counter.count(event); 
       if ((evts_count%(int)(1.E+6)) == 0) debug(evts_count/(int)(1.E+6), "Mevts");
       if (histoed)
       {
-        auto const & timestamp = event.stamp;
-        auto const pulse_ref = rf.pulse_ToF_ns(timestamp);
+        auto const pulse_ref = rf.pulse_ToF_ns(event.stamp);
         for (size_t trig_loop = 0; trig_loop<event.size(); trig_loop++)
         {
           auto const & label  = event.labels[trig_loop];
           auto const & nrj    = event.nrjs  [trig_loop];
           auto const & time   = event.times [trig_loop];
-          auto const tof_trig = pulse_ref+time*_ns;
+          // auto const tof_trig = pulse_ref+time/1000ll;
+          auto const tof_trig = rf.pulse_ToF_ns(event.stamp+time/1000ll);
+          if (tof_trig>160.001) print(event.mult, trig_loop, time, pulse_ref);
 
           histos.rf_all_event.Fill(tof_trig);
           histos.rf_each_event.Fill(compressedLabel[label], tof_trig);
       
-          if (isGe[label]) histos.energy_all_Ge_event.Fill(nrj);
+          if (isGe[label]) histos.energy_all_Ge_event.Fill(nrj+gRandom->Uniform(0,1));
           histos.energy_each_event.Fill(compressedLabel[label], nrj);
         }
       }
@@ -281,14 +260,13 @@ void convert(Hit & hit, FasterReader & reader,
 
         if (histoed)
         {
-          auto const & timestamp = event.stamp;
-          auto const pulse_ref = rf.pulse_ToF_ns(timestamp);
+          auto const pulse_ref = rf.pulse_ToF_ns(event.stamp);
           for (uint trig_loop = 0; trig_loop<event.size(); trig_loop++)
           {
             auto const & label  = event.labels[trig_loop];
             auto const & nrj    = event.nrjs  [trig_loop];
             auto const & time   = event.times [trig_loop];
-            auto const tof_trig = pulse_ref+time*_ns;
+            auto const tof_trig = pulse_ref+time/1000ll;
 
             histos.rf_all_trig.Fill(tof_trig);
             histos.rf_each_trig.Fill(compressedLabel[label], tof_trig);
@@ -302,6 +280,20 @@ void convert(Hit & hit, FasterReader & reader,
       outTree->Fill();
     #endif
     }
+  
+    // if (eventBuilder.isSingle()) && isDSSD[eventBuilder.singleHit().label]) 
+    if (eventBuilder.isSingle()) 
+    {
+      if (isDSSD[eventBuilder.singleHit().label]) 
+      {
+        Event temp (event);
+        event = eventBuilder.singleHit();
+        outTree -> Fill();
+        event = temp;
+        continue;
+      }
+    }
+  
   #ifdef KEEP_ALL
     if (eventBuilder.isSingle())
     {
@@ -314,9 +306,7 @@ void convert(Hit & hit, FasterReader & reader,
   #endif
   }
   convert_timer.Stop();
-#ifdef DEBUG
-  print("Conversion finished here done in", convert_timer.TimeElapsedSec() , "s");
-#endif //DEBUG
+  debug("Conversion finished here done in", convert_timer.TimeElapsedSec() , "s");
   Timer write_timer;
 
   // Initialize output TTree :
@@ -428,7 +418,7 @@ int main(int argc, char** argv)
   // if (!detectors || !calibration || !runs) return -1;
 
   // Setup some parameters :
-  RF_Manager::set_offset_ns(100);
+  RF_Manager::set_offset_ns(40);
 
   MTCounter total_read_size;
 
@@ -474,8 +464,6 @@ int main(int argc, char** argv)
         auto const name = outPath+run_name+"/histo_"+run_name+".root";
         std::unique_ptr<TFile> outFile (TFile::Open(name.c_str(), "RECREATE"));
         outFile -> cd();
-histos.stamp_VS_RF_ref.Write();
-histos.stamp_closing_hit_VS_RF_ref.Write();
         histos.energy_all_Ge_raw.Write();
         histos.rf_all_raw.Write();
         histos.energy_each_raw.Write();

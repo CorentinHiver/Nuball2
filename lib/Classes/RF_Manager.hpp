@@ -47,12 +47,15 @@ public:
 
     if (shifted_timestamp>last_hit)
     {// Normal case
-      return ( Time_cast(shifted_timestamp-last_hit)%period - m_offset );
+      return ( Time_cast((shifted_timestamp-last_hit)%period) - m_offset );
     }
     else
     {// When the RF is found after the hit
-      return period - Time_cast((last_hit-timestamp-m_offset)%Timestamp_cast(period)) - m_offset ;
+    // print(Timestamp_cast(Time_cast(last_hit-timestamp)-m_offset)%period);
+    // std::cin.get();
+      return Time_cast(period - Timestamp_cast(Long64_cast(last_hit-timestamp)-m_offset)%period) - m_offset;
     }
+
   #else //NO USE_RF
     print("NO RF IS USED !! Please set USE_RF [period_value]");
     return Time_cast(timestamp);
@@ -72,12 +75,15 @@ public:
     return (pulse_ToF(hit,-borneMin) < borneMax);
   }
 
-  void set(Timestamp _last_hit, Time _period) {last_hit = _last_hit; period = _period;}
+  void set(Timestamp _last_hit, Timestamp _period) {last_hit = _last_hit; period = _period;}
+
+
+  // Attributes :
 
   Timestamp last_hit = 0;
 
 #ifdef USE_RF
-  Time period = USE_RF*1000;
+  Timestamp period = USE_RF*1000;
 #else //NO USE_RF
   Time period = 0;
 #endif //USE_RF
@@ -96,8 +102,8 @@ bool RF_Manager::setHit(Hit const & hit)
   if (hit.label == RF_Manager::label)
   {
     last_hit = hit.stamp;
-    period = Time_cast(hit.adc);
-    if (period == 0) period = Time_cast(hit.nrj);
+    period = Timestamp_cast(hit.adc);
+    if (period == 0) period = Timestamp_cast(hit.nrj);
     return true;
   }
   else return false;
@@ -108,8 +114,8 @@ bool RF_Manager::setEvent(Event const & event)
   if (event.labels[0] == RF_Manager::label)
   {
     last_hit = event.stamp;
-    period = Time_cast(event.adcs[0]);
-    if (period == 0) period = Time_cast(event.nrjs[0]);
+    period = Timestamp_cast(event.adcs[0]);
+    if (period == 0) period = Timestamp_cast(event.nrjs[0]);
     return true;
   }
   else return false;
@@ -120,8 +126,8 @@ bool RF_Manager::setHit(Event const & event, Mult const & hit_i)
   if (event.labels[hit_i] == RF_Manager::label)
   {
     last_hit = event.times[hit_i];
-    period = Time_cast(event.adcs[0]);
-    if (period == 0) period = Time_cast(event.nrjs[hit_i]);
+    period = Timestamp_cast(event.adcs[0]);
+    if (period == 0) period = Timestamp_cast(event.nrjs[hit_i]);
     return true;
   }
   else return false;

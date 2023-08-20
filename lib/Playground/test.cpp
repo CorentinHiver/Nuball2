@@ -61,20 +61,20 @@ int main(int argc, char ** argv)
   // i = 5;
   // print(svec2, i, j);
 
-  Convertor convertor(argc, argv, [](const Event& event)
-  {
-    for (Mult hit = 0; hit<event.mult; hit++)
-    {
-      auto const & label = event.labels[hit];
-      if (isDSSD[label]) return true;
-    }
-    return false;
-  });
-  // Detectors detectors("index_129.list");
-  // Calibration calibration(detectors);
-  // calibration.verbose(true);
-  // calibration.calculate(argv[1], (argc>2) ? std::stoi(argv[2]) : 1, "3alpha");
-  // calibration.verify("test");
+  // Convertor convertor(argc, argv, [](const Event& event)
+  // {
+  //   for (Mult hit = 0; hit<event.mult; hit++)
+  //   {
+  //     auto const & label = event.labels[hit];
+  //     if (isDSSD[label]) return true;
+  //   }
+  //   return false;
+  // });
+  Detectors detectors("index_129.list");
+  Calibration calibration(detectors);
+  calibration.verbose(true);
+  calibration.calculate(argv[1], (argc>2) ? std::stoi(argv[2]) : -1, "3alpha", "root");
+  calibration.verify();
 
   // MTObject::Initialize(2);
 
