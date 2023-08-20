@@ -6,7 +6,6 @@
 #define USE_PARIS
   // Triggers :
 #define TRIGGER
-// #define KEEP_ALL
 
 // 2. Include library
 #include <libCo.hpp>
@@ -43,8 +42,7 @@ uint nb_periods_more = 0; // Number of periods to extend after an event that tri
 
 bool trigger(Counter136 const & counter)
 {
-  return true;
-  // return (counter.nb_dssd>0);
+  return (counter.nb_dssd>0);
   // return ((counter.nb_modules>2 && counter.nb_clovers>0) || counter.nb_dssd>0);
 }
 
@@ -78,7 +76,6 @@ struct Histos
     rf_all_raw.reset("rf_all_raw", "RF Time spectra raw", 1000, -100, 400);
     energy_each_raw.reset("energy_each_raw", "Energy spectra each raw", nbDet,0,nbDet, 5000,0,15000);
     rf_each_raw.reset("rf_each_raw", "RF timing each raw", nbDet,0,nbDet, 1000, -100, 400);
-    
 
     energy_all_Ge.reset("Ge_spectra", "Ge spectra", 20000,0,10000);
     rf_all.reset("RF_Time_spectra", "RF Time spectra", 1000, -100, 400);
@@ -224,7 +221,6 @@ void convert(Hit & hit, FasterReader & reader,
       histos.energy_each.Fill(compressedLabel[hit.label], hit.nrj);
     }
 
-
     // Event building :
     if (eventBuilder.build(hit))
     {
@@ -239,9 +235,7 @@ void convert(Hit & hit, FasterReader & reader,
           auto const & label  = event.labels[trig_loop];
           auto const & nrj    = event.nrjs  [trig_loop];
           auto const & time   = event.times [trig_loop];
-          // auto const tof_trig = pulse_ref+time/1000ll;
-          auto const tof_trig = rf.pulse_ToF_ns(event.stamp+time/1000ll);
-          if (tof_trig>160.001) print(event.mult, trig_loop, time, pulse_ref);
+          auto const tof_trig = pulse_ref+time/1000ll;
 
           histos.rf_all_event.Fill(tof_trig);
           histos.rf_each_event.Fill(compressedLabel[label], tof_trig);
@@ -293,17 +287,6 @@ void convert(Hit & hit, FasterReader & reader,
         continue;
       }
     }
-  
-  #ifdef KEEP_ALL
-    if (eventBuilder.isSingle())
-    {
-      Event temp (event);
-      event = eventBuilder.singleHit();
-      outTree -> Fill();
-      event = temp;
-      continue;
-    }
-  #endif
   }
   convert_timer.Stop();
   debug("Conversion finished here done in", convert_timer.TimeElapsedSec() , "s");
@@ -412,10 +395,10 @@ int main(int argc, char** argv)
   // Load some modules :
   Detectors detectors(IDFile);
   Calibration calibration(detectors, calibFile);
-  // Manip runs(File(manipPath+list_runs));
+  Manip runs(File(manipPath+list_runs));
 
   // Checking of all the modules have been loaded correctly :
-  // if (!detectors || !calibration || !runs) return -1;
+  if (!detectors || !calibration || !runs) return -1;
 
   // Setup some parameters :
   RF_Manager::set_offset_ns(40);
@@ -423,10 +406,9 @@ int main(int argc, char** argv)
   MTCounter total_read_size;
 
   // Loop sequentially through the runs and treat their files in parallel :
-  std::string run = "run_75.fast";
-  // std::string run;
-  // while(runs.getNext(run))
-  // {
+  std::string run;
+  while(runs.getNext(run))
+  {
     Timer timer;
     Path runpath = manipPath+run;
     auto run_name = removeExtension(run);
@@ -485,7 +467,8 @@ int main(int argc, char** argv)
         outFile -> Close();
         print(name, "written");
       }
-      print(run_name, "converted at a rate of", size_file_conversion(total_read_size, "o", "Mo")/timer.TimeSec());
     }
+    print(run_name, "converted at a rate of", size_file_conversion(total_read_size, "o", "Mo")/timer.TimeSec());
+  }
   return 1;
 }

@@ -16,7 +16,7 @@ public:
   bool build(Hit const & _hit);
   bool inTimeRange(Hit const & hit) 
   {
-    return (Time_cast(hit.stamp-m_RF_ref_stamp) < Time_cast(m_rf->period) - m_rf->offset());
+    return (Time_cast(hit.stamp-m_RF_ref_stamp) < Time_cast(m_rf->period));
   }
   void reset();
 
@@ -130,7 +130,7 @@ void EventBuilder_136::setFirstRF(Hit const & rf_hit)
 void EventBuilder_136::set_last_hit(Hit const & hit)
 {
   // The closest RF to this hit is taken as reference to build the event :
-  m_RF_ref_stamp = hit.stamp - m_rf->pulse_ToF(hit.stamp);
+  m_RF_ref_stamp = hit.stamp - m_rf->pulse_ToF(hit.stamp) - m_rf->offset();
   // We substract the offset because we want the hits to be in [-offset, period-offset].
   // We achieve this by shifting back the reference by -offset
   // Therefore the comparison (hit_stamp-ref)<period gives in effect (relative_time+offset)<period
