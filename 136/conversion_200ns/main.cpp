@@ -30,7 +30,7 @@ Folder manip = "N-SI-136";
 std::string list_runs = "list_runs.list";
 std::string output = "-root_P2";
 int  nb_files_ts = 50;
-int nb_files = -1;
+int  nb_files = -1;
 bool only_timeshifts = false; // No conversion : only calculate the timeshifts
 bool overwrite = false; // Overwrite already existing converted root files. Works also with -t options (only_timeshifts)
 bool histoed = false;
@@ -165,9 +165,9 @@ void convert(Hit & hit, FasterReader & reader,
   hit.reset();
   hit.reading(tempTree.get(), "lsEQp");
 
-  TTree* outTree = new TTree("Nuball2","Nuball2");
+  unique_tree outTree (new TTree("Nuball2","Nuball2"));
   outTree -> SetDirectory(nullptr); // Force it to be created on RAM rather than on disk - much faster if enough RAM
-  Event event(outTree, "lstEQp", "w");
+  Event event(outTree.get(), "lstEQp", "w");
 
   // Initialize event builder based on RF :
   RF_Manager rf;
@@ -302,8 +302,8 @@ void convert(Hit & hit, FasterReader & reader,
 
   write_timer.Stop();
 
-  auto dataSize = static_cast<float>(raw_datafile.size("Mo"));
-  auto outSize  = static_cast<float>(size_file_conversion(float_cast(outFile->GetSize()), "o", "Mo"));
+  auto dataSize = float_cast(raw_datafile.size("Mo"));
+  auto outSize  = float_cast(size_file_conversion(float_cast(outFile->GetSize()), "o", "Mo"));
 
   print_precision(4);
   print(outfile, "written in", timer(), timer.unit(),"(",dataSize/timer.TimeSec(),"Mo/s). Input file", dataSize, 

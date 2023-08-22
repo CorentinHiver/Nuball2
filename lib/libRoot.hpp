@@ -234,6 +234,7 @@ private:
 template<class T>
 auto createBranch(TTree* tree, T * value, std::string const & name)
 {
+  // print(name+"/"+typeRootMap(*value));
   return (tree -> Branch(name.c_str(), value, (name+"/"+typeRootMap(*value)).c_str()), 64000);
 }
 
@@ -243,6 +244,7 @@ template<class T>
 auto createBranchArray(TTree* tree, T * array, std::string const & name, std::string const & name_size)
 {
   // using **array because it is an array, so *array takes the first element of the array
+  // print(name+"["+name_size+"]/"+typeRootMap(**array));
   return (tree -> Branch(name.c_str(), array, (name+"["+name_size+"]/"+typeRootMap(**array)).c_str()), 64000);
 }
 

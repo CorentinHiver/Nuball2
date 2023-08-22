@@ -164,13 +164,13 @@ void Event::writting(TTree * tree, std::string const & options)
   if (write.l) createBranchArray(tree, &labels  , "label" , "mult");
   if (write.p) createBranchArray(tree, &pileups , "pileup", "mult");
 
-  //              tree -> Branch("mult"   , &mult    , "mult/I"        );
+              //  tree -> Branch("mult"   , &mult    , "mult/I"        );
   // if (write.s) tree -> Branch("stamp"  , &stamp   , "stamp/l"       );
   // if (write.T) tree -> Branch("time2"  , &time2s  , "time2[mult]/D" );
   // if (write.e) tree -> Branch("adc"    , &adcs    , "adc[mult]/D"   );
   // if (write.E) tree -> Branch("nrj"    , &nrjs    , "nrj[mult]/D"   );
-  // if (write.q) tree -> Branch("qdc2"   , &qdc2s   , "qdc2[mult]/D"  );
   // if (write.Q) tree -> Branch("nrj2"   , &nrj2s   , "nrj2[mult]/D"  );
+  // if (write.q) tree -> Branch("qdc2"   , &qdc2s   , "qdc2[mult]/D"  );
   // if (write.t) tree -> Branch("time"   , &times   , "time[mult]/I"  );
   // if (write.l) tree -> Branch("label"  , &labels  , "label[mult]/s" );
   // if (write.p) tree -> Branch("pileup" , &pileups , "pileup[mult]/O");
