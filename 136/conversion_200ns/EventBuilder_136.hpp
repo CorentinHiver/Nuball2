@@ -152,7 +152,7 @@ public:
   size_t nb_dssd = 0;
   size_t nb_Ge = 0;
   size_t nb_clovers = 0;
-  std::vector<Label> clovers;
+  std::vector<uchar> clovers;
 
   void reset() 
   {
