@@ -28,6 +28,7 @@ std::string IDFile = "index_129.list";
 std::string calibFile = "136_final.calib";
 Folder manip = "N-SI-136";
 std::string list_runs = "list_runs.list";
+std::string output = "-root_P2";
 int  nb_files_ts = 50;
 int nb_files = -1;
 bool only_timeshifts = false; // No conversion : only calculate the timeshifts
@@ -328,7 +329,7 @@ int main(int argc, char** argv)
       {
         nb_files = atoi(argv[++i]);
       }
-      else if (command == "--file")
+      else if (command == "--run")
       {
         one_run = true;
         one_run_folder = argv[++i];
@@ -342,12 +343,16 @@ int main(int argc, char** argv)
         nb_threads = atoi(argv[++i]);
       }
       else if (command == "-n" || command == "--number-hits")
-      {// Multithreading : number of threads
+      {// Number of hits per file
         max_hits = atoi(argv[++i]);
       }
       else if (command == "-o" || command == "--overwrite")
       {// Overwright already existing .root files
         overwrite = true;
+      }
+      else if (command == "-O" || command == "--output")
+      {
+        output = argv[++i];
       }
       else if (command == "-t" || command == "--timeshifts")
       {
@@ -365,10 +370,11 @@ int main(int argc, char** argv)
       {
         print("List of the commands :");
         print("(-f  || --files-number) [files-number]  : set the number of files");
+        print("(       --run)          [runname]       : set only one folder to convert");
         print("(-h  || --help)                         : display this help");
         print("(-H  || --histograms)                   : Fills and writes raw histograms");
         print("(-m  || --multithread)  [thread_number] : set the number of threads to use. Maximum allowed : 3/4 of the total number of threads");
-        print("(-n  || --number-hits)  [thread_number] : set the number of hit to read in each file.");
+        print("(-n  || --number-hits)  [hits_number]   : set the number of hit to read in each file.");
         print("(-o  || --overwrite)                    : overwrites the already written folders. If a folder is incomplete, you need to delete it");
         print("(-t  || --timeshifts)                   : Calculate only timeshifts, force it even if it already has been calculated");
         print("(-Th || --Thorium)                      : Treats only the thorium runs (run_nb < 75)");
@@ -390,19 +396,19 @@ int main(int argc, char** argv)
   else {print("Unkown HOME path -",datapath,"- please add yours on top of this line in the main.cpp ^^^^^^^^"); return -1;}
 
   Path manipPath = datapath+manip;
-  Path outPath (datapath+(manip.name()+"-root_test2"), true);
+  Path outPath (datapath+(manip.name()+output), true);
 
   // Load some modules :
   Detectors detectors(IDFile);
   Calibration calibration(detectors, calibFile);
   Manip runs(File(manipPath+list_runs));
+  if (one_run) runs.setFolder(one_run_folder);
 
   // Checking of all the modules have been loaded correctly :
   if (!detectors || !calibration || !runs) return -1;
 
   // Setup some parameters :
   RF_Manager::set_offset_ns(40);
-
 
   // Loop sequentially through the runs and treat their files in parallel :
   std::string run;

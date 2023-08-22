@@ -42,7 +42,7 @@ public:
     else nb_threads = n;
   }
 
-  static void adjustThreadsNumber(uint const & limiting_number, std::string const & print_if_limit_reached = "") 
+  static void adjustThreadsNumber(size_t const & limiting_number, std::string const & print_if_limit_reached = "") 
   {
     if (limiting_number<nb_threads) 
     {
@@ -71,7 +71,7 @@ public:
     if (ON)
     {
       m_threads.reserve(nb_threads); // Memory pre-allocation (used for performances reasons)
-      for (uint i = 0; i<nb_threads; i++) m_threads.emplace_back( [i, &func, &args...] ()
+      for (size_t i = 0; i<nb_threads; i++) m_threads.emplace_back( [i, &func, &args...] ()
       {// Inside this lambda function, we already are inside the threads, so the parallelised section starts NOW :
         // threads_ID[std::this_thread::get_id()] = i; // Old indexing system
         m_thread_index = i; // Index the thread
@@ -101,14 +101,14 @@ public:
   static bool ON; // State boolean
   operator bool() {return ON;} // Can be used only if the class has been instanciated
 
-  static int const & getThreadIndex() {return m_thread_index;}
-  static int const & index() {return m_thread_index;}
+  static auto const & getThreadIndex() {return m_thread_index;}
+  static auto const & index() {return m_thread_index;}
   // static int const & getThreadIndex() {return threads_ID[std::this_thread::get_id()];} // Old indexing system
 
 private:
   // static std::map<std::thread::id, int> threads_ID; // Old indexing system
   static std::thread::id master_thread_id; 
-  static thread_local int m_thread_index; // thread_local variable, meaning it will hold different values for each thread it is in
+  static thread_local size_t m_thread_index; // thread_local variable, meaning it will hold different values for each thread it is in
   static std::vector<std::thread> m_threads;
 };
 
@@ -119,7 +119,7 @@ std::mutex MTObject::mutex;
 
 // std::map<std::thread::id, int> MTObject::threads_ID;
 std::thread::id MTObject::master_thread_id;
-thread_local int MTObject::m_thread_index = 0;
+thread_local size_t MTObject::m_thread_index = 0;
 std::vector<std::thread> MTObject::m_threads;
 
 

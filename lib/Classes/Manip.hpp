@@ -10,10 +10,14 @@ public:
 
   Manip(){}
 
-  Manip(std::string const & runs_file) : m_runs_files(runs_file)
+  Manip(std::string const & runs_file) : m_runs_files(runs_file) {readFile ( runs_file );}
+
+  void operator=(std::string const & runs_file) 
   {
+    m_runs_files = runs_file;
     readFile ( runs_file );
   }
+  
 
   Manip(std::string const & datapath, std::string const & manipname, std::string const & filename) 
   {
@@ -33,6 +37,19 @@ public:
     file.close();
     if (m_MTOn) list_runs_MT = list_runs;
     m_ok = true;
+  }
+
+  auto const & get() const {return list_runs;}
+
+  void setFolder(std::string const & folder)
+  {
+    list_runs.clear();
+    list_runs.push_back(folder);
+  }
+
+  void addFolder(std::string const & folder)
+  {
+    list_runs.push_back(folder);
   }
 
   bool readFile()
@@ -103,5 +120,10 @@ private:
   MTList list_runs_MT;
 };
 
+std::ostream& operator<<(std::ostream& cout, Manip const & manip)
+{
+  cout << manip.get();
+  return cout;
+}
 
 #endif //MANIP_H

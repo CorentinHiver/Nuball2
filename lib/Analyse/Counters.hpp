@@ -103,7 +103,7 @@ void Counters::count_event(Event const & event)
     }
   }
 
-  Clovers  = list_clovers.size();
+  Clovers  = uchar_cast(list_clovers.size());
   Modules += Clovers;
 
   // Quick analysis of the Clovers :

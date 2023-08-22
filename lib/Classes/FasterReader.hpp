@@ -182,7 +182,7 @@ ulonglong FasterReader::m_maxHits = -1;
 //   INITIALIZATION   //
 // ================== //
 
-bool FasterReader::Reset()
+bool inline FasterReader::Reset()
 {
   if (m_reader != NULL) faster_file_reader_close(m_reader);
   m_counter = 0;
@@ -196,7 +196,7 @@ bool FasterReader::Reset()
   return true;
 }
 
-bool FasterReader::Initialize()
+bool inline FasterReader::Initialize()
 {
   #ifdef FASTER_GROUP
   m_hit_group_buffer.resize(5000, &m_empty_hit); //If the number of hits in one group exceeds 5000 then it will crash
@@ -253,7 +253,7 @@ bool FasterReader::InitializeReader()
 //     READ     //
 // ============ //
 
-bool FasterReader::Read()
+bool inline FasterReader::Read()
 {
   if (m_counter++>m_maxHits) 
   {
@@ -272,7 +272,7 @@ bool FasterReader::Read()
  * This function is replaced by ReadGroup if the faster data contains groups, this one is simply faster
  * 
  */
-bool FasterReader::ReadSimple()
+bool inline FasterReader::ReadSimple()
 { 
   // m_write variable is used to make sure only the handled aliases are read (see switch_alias definition)
   m_write = false;
@@ -341,7 +341,7 @@ bool FasterReader::ReadGroup()
 /**
  * @brief Treats faster data
  */
-bool FasterReader::ReadData(faster_data_p const & _data)
+bool inline FasterReader::ReadData(faster_data_p const & _data)
 { 
   m_hit->label = faster_data_label(_data);
 #ifndef QDC1MAX
@@ -404,7 +404,7 @@ void FasterReader::ReadDataGroup(faster_data_p const & _data)
  * faster data.
  * 
  */
-bool FasterReader::switch_alias(uchar const & _alias, faster_data_p const & _data)
+bool inline FasterReader::switch_alias(uchar const & _alias, faster_data_p const & _data)
 { 
   switch(_alias)
   {
@@ -442,7 +442,7 @@ bool FasterReader::switch_alias(uchar const & _alias, faster_data_p const & _dat
  * \private Internal method used to extract ADC value from trapezoid filter
  * 
  */
-void FasterReader::TreatTrapez(const faster_data_p& data)
+void inline FasterReader::TreatTrapez(const faster_data_p& data)
 {  
    trapez_spectro adc;
    faster_data_load(data, &adc);
@@ -462,7 +462,7 @@ void FasterReader::TreatTrapez(const faster_data_p& data)
  * \attention m_hit->pileup = (false); //TO BE LOOKED AT
  * 
  */
-void FasterReader::TreatCRRC4(const faster_data_p& data)
+void inline FasterReader::TreatCRRC4(const faster_data_p& data)
 {  
    crrc4_spectro crrc4_adc;
    faster_data_load(data, &crrc4_adc);
@@ -480,7 +480,7 @@ void FasterReader::TreatCRRC4(const faster_data_p& data)
  * \private Internal method used to extract QDC values with 1 gate
  * 
  */
-void FasterReader::TreatQDC1(const faster_data_p& data)
+void inline FasterReader::TreatQDC1(const faster_data_p& data)
 { 
   qdc_t_x1 qdc;
   faster_data_load(data, &qdc);
@@ -500,7 +500,7 @@ void FasterReader::TreatQDC1(const faster_data_p& data)
  * \private Internal method used to extract QDC values with 2 gates
  * 
  */
-void FasterReader::TreatQDC2(const faster_data_p& data)
+void inline FasterReader::TreatQDC2(const faster_data_p& data)
 { 
   qdc_t_x2 qdc;
   faster_data_load(data, &qdc);
@@ -517,7 +517,7 @@ void FasterReader::TreatQDC2(const faster_data_p& data)
  * \private Internal method used to extract RF period
  * 
  */
-void FasterReader::TreatRF(const faster_data_p& data)
+void inline FasterReader::TreatRF(const faster_data_p& data)
 {
    rf_data rf;
    faster_data_load(data, &rf);

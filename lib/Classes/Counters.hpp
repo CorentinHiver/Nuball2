@@ -107,7 +107,7 @@ void Counters::countEvent(Event const & event)
 
 void Counters::clover_analyse()
 {
-  Clovers  = list_clovers.size();
+  Clovers  = uchar_cast(list_clovers.size());
   Modules += Clovers;
 
   // Quick analysis of the Clovers :

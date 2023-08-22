@@ -23,9 +23,9 @@ Bools isRing  (1000);
 Bools isBack  (1000);
 Bools isFront (1000);
 
-Label_vec labelToClover(1000,0);
-Label_vec labelToBGOcrystal(1000,0);
-Label_vec labelToGecrystal(1000,0);
+std::vector<uchar> labelToClover(1000,0);
+std::vector<uchar> labelToBGOcrystal(1000,0);
+std::vector<uchar> labelToGecrystal(1000,0);
 Strings clover_pos  (1000,"");
 
 Label_vec compressedLabel(1000,-1); // Used to put all the detectors one after the other
@@ -313,7 +313,7 @@ void Detectors::makeArrays()
 
     // Other lookup tables :
     isClover[label] = (label>22 && label<167);
-    labelToClover[label] = static_cast<Label>((isClover[label]) ? (label-23)%6 : -1);
+    labelToClover[label] = uchar_cast((isClover[label]) ? (label-23)%6 : -1);
     // labelToBGOcrystal[label] = (isBGO[label]) ? (2*(label-23)/6 + (label+1)%6) : (-1);
      
     if (exists[label])

@@ -61,6 +61,9 @@ opt: default
 debug: CFLAGS += -g -O0 -DDEBUG -Wextra -ftemplate-depth-25 #-Wold-style-cast
 debug: default
 
+harddebug: CFLAGS += -g -O0 -DDEBUG -Wextra -ftemplate-depth-25 -Wconversion -Wno-float-conversion -Wold-style-cast
+harddebug: default
+
 clean:
 	rm -f *.o
 	rm -f *__*.*

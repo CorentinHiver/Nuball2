@@ -155,12 +155,12 @@ void Event::writting(TTree * tree, std::string const & options)
 
                createBranch     (tree, &mult    , "mult"  );
   if (write.s) createBranch     (tree, &stamp   , "stamp" );
+  if (write.t) createBranchArray(tree, &times   , "time"  , "mult");
   if (write.T) createBranchArray(tree, &time2s  , "time2" , "mult");
   if (write.E) createBranchArray(tree, &nrjs    , "nrj"   , "mult");
   if (write.Q) createBranchArray(tree, &nrj2s   , "nrj2"  , "mult");
   if (write.e) createBranchArray(tree, &adcs    , "adc"   , "mult");
   if (write.q) createBranchArray(tree, &qdc2s   , "qdc2"  , "mult");
-  if (write.t) createBranchArray(tree, &times   , "time"  , "mult");
   if (write.l) createBranchArray(tree, &labels  , "label" , "mult");
   if (write.p) createBranchArray(tree, &pileups , "pileup", "mult");
 
