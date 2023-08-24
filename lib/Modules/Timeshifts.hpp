@@ -651,7 +651,7 @@ void Timeshifts::treatFasterFile(std::string const & filename)
 
   // Handle the first hit :
   reader.Read(); 
-  mt_ref_time[MTObject::getThreadIndex()] = hit.time;
+  mt_ref_time[MTObject::getThreadIndex()] = hit.stamp;
 
 
   while(reader.Read() && ((maxHitsToRead) ? (counter<m_max_hits) : true) )
@@ -661,13 +661,13 @@ void Timeshifts::treatFasterFile(std::string const & filename)
   #endif //DEBUG
     counter++;
 
-    if (m_corrected) hit.time += m_timeshifts[hit.label];
+    if (m_corrected) hit.stamp += m_timeshifts[hit.label];
 
     // This is used to put the energy value of the time reference in the Event (used in the Fill method) :
     if (hit.label == m_time_reference_label) hit.nrj = NRJ_cast(hit.adc); 
 
   #ifdef USE_RF
-    if(isRF[hit.label]) {rf.last_hit = hit.time; rf.period = hit.adc;}
+    if(isRF[hit.label]) {rf.last_hit = hit.stamp; rf.period = hit.adc;}
   #endif //USE_RF
 
     if (coincBuilder.build(hit)) 
@@ -688,7 +688,7 @@ void Timeshifts::Fill(Event const & event, RF_Manager & rf)
   
   if (mult >= m_max_mult &&  mult <= m_min_mult) return;
 
-  // There are 2 loops : the first one fills the RF spectra and looks for the time reference.
+  // There are 2 imbricated loops : the first one fills the time spectra and looks for the time reference.
   // If found, it opens another loop to fill the coincidence time spectra
   for (Mult loop_i = 0; loop_i < mult; loop_i++)
   {
@@ -698,7 +698,7 @@ void Timeshifts::Fill(Event const & event, RF_Manager & rf)
     auto const & label = event.labels[loop_i];
     auto const & time = event.times[loop_i];
     auto const & nrj = event.nrjs[loop_i];
-    auto const ToF = rf.pulse_ToF(time);
+    auto const ToF = rf.pulse_ToF(event.stamp)+time;
 
     if (m_corrected)
     {

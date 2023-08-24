@@ -169,7 +169,7 @@ void MTFasterReader::Read(MTFasterReader & MTreader, Func function, ARGS &&... a
   {
     Hit hit;
     FasterReader reader(&hit, filename);
-    function(hit, reader, std::forward<ARGS>(args)...); // If issues here, check that the parallelised function has the following form : type func(Hit & hit, FasterReader & reader, ....)
+    function(hit, reader, std::forward<ARGS>(args)...); // If issues here, check that the parallelised function has the following form : type func(Hit & hit, FasterReader & reader, ARGS... some_args)
   }
 }
 

@@ -16,6 +16,7 @@
 #include <sstream>
 #include <stdexcept>
 #include <string>
+#include <stack>
 #include <thread>
 #include <typeindex>
 #include <typeinfo>
@@ -36,6 +37,12 @@
 #include "string_functions.hpp"
 #include "files_functions.hpp"
 #include "vector_functions.hpp"
+
+//////////////
+//   UTILS  //
+//////////////
+
+void pauseCo() {std::cout << "Programe paused, please press enter"; std::cin.get();}
 
 //////////////
 //   UNITS  //

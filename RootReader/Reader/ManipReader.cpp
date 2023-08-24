@@ -46,9 +46,10 @@ Detectors g_detectors("index_129.list");
 // Include modules
 // #include <EachDetector.hpp>
 // #include <Matrices.hpp>
-// #include <RunCheck.hpp>
+#include <RunCheck.hpp>
 // #include <AnalyseDSSD.hpp>
 #include <AnalyseIsomer_136.hpp>
+// #include <Calibrator.hpp>
 // #include <TimewalkDSSD.hpp>
 // #include <Analyse511.hpp>
 // #include <NoPulse.hpp>

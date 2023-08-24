@@ -206,7 +206,6 @@ bool Parameters::setData()
       else {print(temp,"parameter unkown for Data module!!");return false;}
     }
   }
-
   if(m_list_runs.size()<1) { print("No runs list !"); return false;}
   for (auto const & run : m_list_runs) m_files.addFolder(m_dataPath+run, m_nb_files_per_run);
   m_list_files = m_files.getListFiles();

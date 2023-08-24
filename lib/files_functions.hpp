@@ -682,6 +682,7 @@ public:
   }
 
   auto c_str() {return m_file.c_str();}
+  auto c_str() const {return m_file.c_str();}
 
   File & operator=(std::string const & file) 
   {

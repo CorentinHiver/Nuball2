@@ -78,6 +78,8 @@
  * and put it in a vector, then each call of Read() moves in the group. 
  * No extra information is extracted : from outside of the class, everything goes as if there was no group.
  * 
+ * @attention The pileup bit for CRRC4 is not handled
+ * 
  */
 class FasterReader
 {
@@ -96,7 +98,7 @@ public:
   
   /**
    * @brief Main method. Extract the next hit from the data file and fills the Hit *m_hit object
-   * 
+   * @details
    * Hit hit;
    * 
    * FasterReader reader(&hit, filename);
@@ -108,8 +110,7 @@ public:
    *      }
    * 
    * 
-   * @return true if the end of the file is reached
-   * @return false if still in the middle of the file
+   * @return true if the end of the file is reached, false otherwise
    */
   bool Read();
 
@@ -161,7 +162,7 @@ private:
   bool   m_kReady   = false,
          m_write    = false;
 
-  // Grouped data management :      
+  // Grouped data management :
   ushort m_group_read_cursor  = 0,
               m_group_write_cursor = 0,
               m_inGroup  = false;
@@ -198,10 +199,10 @@ bool inline FasterReader::Reset()
 
 bool inline FasterReader::Initialize()
 {
-  #ifdef FASTER_GROUP
+#ifdef FASTER_GROUP
   m_hit_group_buffer.resize(5000, &m_empty_hit); //If the number of hits in one group exceeds 5000 then it will crash
   m_group_write_cursor = 0; m_group_read_cursor = 0;
-  #endif //FASTER_GROUP
+#endif //FASTER_GROUP
 
   // Check if the file can be open and read :
   if (m_filename == "")
@@ -330,6 +331,7 @@ bool FasterReader::ReadGroup()
     }
     else
     { // We aren't in a group
+      // Here is the "normal" data reading :
       m_data = faster_file_reader_next(m_reader);
       if (!m_data) return false; // This tags the end of the file
       ReadData(m_data);
@@ -345,17 +347,17 @@ bool inline FasterReader::ReadData(faster_data_p const & _data)
 { 
   m_hit->label = faster_data_label(_data);
 #ifndef QDC1MAX
-  m_hit->qdc2 = 0; // In order to clean the data, as qdc2 never gets cleaned if there was qdc2 in the previous hit
+  m_hit->qdc2 = 0; // In order to clean the data, as qdc2 is empty when no qdc2 in the event
 #endif //QDC1MAX
   m_alias = faster_data_type_alias(_data);
   if (m_alias == GROUP_TYPE_ALIAS)
   {// Creates a group reader
-    #ifdef FASTER_GROUP
+  #ifdef FASTER_GROUP
     // When read a label of a group, then go to ReadDataGroup() to fill in m_hit_group_buffer recursively
     ReadDataGroup(_data);
-    #else //!FASTER_GROUP
+  #else //!FASTER_GROUP
     std::cout << "COMPILE IN GROUP MODE !!!" << std::endl;
-    #endif //FASTER_GROUP
+  #endif //FASTER_GROUP
   }
   m_hit -> stamp = Timestamp_cast(faster_data_hr_clock_ns(_data) * 1000);// Stores the timestamp in ps
   m_write = switch_alias(m_alias, _data);

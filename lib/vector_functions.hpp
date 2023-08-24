@@ -219,8 +219,8 @@ public:
 
 private:
   T* m_data; // Underlying data dynamic array
-  std::size_t m_dynamic_size = 0; // User size
-  std::size_t m_static_size = 0;  // Maximum size
+  size_t m_dynamic_size = 0; // User size
+  size_t m_static_size = 0;  // Maximum size
   bool m_deleted = false; // Is the class deleted or not
 };
 

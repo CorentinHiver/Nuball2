@@ -28,6 +28,11 @@ public:
   double time = 0.;   // Time of the crystal with most energy deposit of the clover
   double time_BGO = 0.;// Time of the latest BGO
 
+  bool isBGOPrompt = false;
+  bool isBGODelayed = false;
+  bool isGePrompt = false;
+  bool isGeDelayed = false;
+
   uchar maxE_Ge_cristal = 0u; // Crystal number of the crystal with most energy deposit of the clover
 
 private:
@@ -47,6 +52,11 @@ void CloverModule::Reset()
   time_BGO = 0.0;
 
   maxE_Ge_cristal = '\0';
+
+  isBGOPrompt = false;
+  isBGODelayed = false;
+  isGePrompt = false;
+  isGeDelayed = false;
 }
 
 std::ostream& operator<<(std::ostream& cout, CloverModule const & cloverModule)

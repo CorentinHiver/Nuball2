@@ -131,6 +131,10 @@ public:
     // Calibrated spectra :
     Vector_MTTHist<TH1F> calib_spectra;
     Vector_MTTHist<TH2F> all_calib;
+
+    // Other spectra :
+    std::map<std::string, TH1> spectra;
+
     void Initialize(Calibration & calib);
     void setBins(std::string const & parameters);
   } m_histos;
@@ -368,6 +372,40 @@ void Calibration::calculate(std::string const & histograms, std::string const & 
   this -> analyse(source);
   this -> writeData(source+".calib");
   this -> writeRawRoot(source+".root");
+}
+
+void Calibration::loadRootHisto(std::string const & histograms)
+{
+  unique_TFile.file(TFile::Open(loadRootHisto.c_str()));
+  if (!file.IsOpen()) throw_error("Can't open"+loadRootHisto);
+  
+  TIter nextKey(file.GetListOfKeys());
+  TKey* key = nullptr;
+
+  while ((key = dynamic_cast<TKey*>(nextKey()))) 
+  {
+    TObject* obj = key->ReadObj();
+    if (obj->IsA()->InheritsFrom(TH1::Class())) 
+    {
+      if (obj->IsA()->InheritsFrom(TH1F::Class())) 
+      {
+        auto hist = dynamic_cast<TH1F*>(obj);
+        auto const & name = hist -> GetName();
+        for (auto const & _name : m_detectors)
+        {
+          if (name.find(_name))
+          {
+            auto const & label = m_detectors.getLabel(_name);
+            if (name.find("_raw")) m_histos.raw_spectra[label] = hist;
+            else if (name.find("_calib")) m_histos.calib_spectra[label] = hist;
+            else m_histos.spectra[label] = hist;
+          }
+        }
+      else if ()
+      }
+    }
+  }
+
 }
 
 void Calibration::loadData(std::string const & dataDir, int const & nb_files)

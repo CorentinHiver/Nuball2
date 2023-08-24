@@ -336,7 +336,8 @@ inline void MTTHist<THist>::Merge_t()
   for (size_t i = 1; i<m_collection.size(); i++) 
   {
     auto & histo = m_collection[i];
-    if (histo->Integral() > 0) m_merged -> Add(histo);
+    if (histo->Integral() > 0) 
+    m_merged -> Add(histo);
     delete histo;
     m_is_deleted[i] = true;
   }
@@ -370,7 +371,7 @@ void MTTHist<THist>::Merge()
     m_exists = false;
     m_is_merged = false;
   }
-  else
+  else if (!m_is_merged)
   {
     if (MTObject::ON)
     {
@@ -408,6 +409,7 @@ void MTTHist<THist>::Write_i(int const & thread_index)
   else
   {
     if (m_is_deleted[thread_index]) return;
+    print("writting", m_str_name);
     m_collection[thread_index] -> Write();
     delete m_collection[thread_index];
     m_collection[thread_index] = nullptr;
@@ -419,6 +421,7 @@ void MTTHist<THist>::Write_i(int const & thread_index)
 template<class THist>
 void MTTHist<THist>::Write()
 {
+  
   if (MTObject::ON && MTObject::isMasterThread()) this -> Merge();
   if (MTObject::ON && !MTObject::isMasterThread()) this -> Write_i(MTObject::getThreadIndex());
   else
@@ -429,6 +432,7 @@ void MTTHist<THist>::Write()
         || m_merged -> Integral() < 1) return;
     else
     {
+      print("writting", m_str_name);
       m_merged -> Write(m_str_name.c_str(), TROOT::kOverwrite);
       m_written = true;
     }

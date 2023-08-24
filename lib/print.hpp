@@ -28,7 +28,7 @@ template <class T, class... T2> void print(T const & t, T2 const &... t2)
 }
 
 
-// Useful overload of operator<< in std::cout stream :
+// Useful overload of operator<< into a std::cout stream :
 
 template <class E>
 std::ostream& operator<<(std::ostream& cout, std::vector<E> const & v)
@@ -53,6 +53,13 @@ std::ostream& operator<<(std::ostream& cout, std::map<K,V> const & m)
   return cout;
 }
 
+template<class E, size_t size> 
+std::ostream& operator<<(std::ostream& cout, std::array<E,size> const & a)
+{
+  for (size_t i = 0; i<size; i++) print(a[i]);
+  return cout;
+}
+
 void print_precision(int n = 6) {std::cout << std::setprecision(n);}
 
 template <class... ARGS> void debug(ARGS &&... args) 
@@ -60,6 +67,15 @@ template <class... ARGS> void debug(ARGS &&... args)
 #ifdef DEBUG
   print(std::forward<ARGS>(args)...);
 #endif //DEBUG
+}
+
+
+// Print specialization for uchar : 
+
+std::ostream& operator<<(std::ostream& cout, unsigned char const & uc)
+{
+  std::cout << static_cast<int>(uc);
+  return cout;
 }
 
 

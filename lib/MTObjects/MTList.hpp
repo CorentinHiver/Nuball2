@@ -41,8 +41,8 @@ public:
   MTVector& operator=(T const & t) 
   {
     lock_mutex lock(m_mutex);
-    resize();
-    this->push_back(t);
+    this -> clear();
+    this -> push_back(t);
     return *this;
   }
 
@@ -97,7 +97,7 @@ inline bool MTVector<T>::getNext(T & t, size_t & index)
   if (m_read_index<m_size)
   {
     t = m_collection[m_read_index];
-    index = m_read_index++;
+    index = ++m_read_index;
     return true;
   }
   return false;

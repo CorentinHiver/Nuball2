@@ -66,17 +66,15 @@ inline Timestamp Timestamp_cast(T const & t) {return static_cast<Timestamp>(t);}
  * @brief Read options
  * @details
  * 
- * l : label   label               ushort
- * t : time    absolute timestamp  ULong64_t for timestamp, and int for relative times
- * T : time2   relative timestamp  double
- * e : adc     energy in ADC       int
- * E : nrj  energy in keV       float
- * q : qdc2    energy qdc2 in ADC  float
- * Q : nrj2 energy qdc2 in keV  float
- * p : pileup  pilepup             bool
- * 
- * R :         RF last timestamp   ULong64_t
- * P :         RF period           float
+ * l : label  label                 ushort
+ * s : stamp  absolute timestamp ps ULong64_t
+ * t : time   relative timestamp ps int
+ * T : time2  relative timestamp ns float
+ * e : adc    energy in ADC         int
+ * E : nrj    energy in keV         float
+ * q : qdc2   energy qdc2 in ADC    float
+ * Q : nrj2   energy qdc2 in keV    float
+ * p : pileup pilepup               bool
  * 
  */
 struct Read
@@ -116,17 +114,15 @@ struct Read
  * @brief Write options
  * @details
  * 
- * l : label   label               ushort
- * t : time    absolute timestamp  ULong64_t for timestamp, and int for relative times
- * T : time2   relative timestamp  float
- * e : adc     energy in ADC       float
- * E : nrj  energy in keV       float
- * q : qdc2    energy qdc2 in ADC  float
- * Q : nrj2 energy qdc2 in keV  float
- * p : pileup  pilepup             bool
- * 
- * R :         RF last timestamp   ULong64_t
- * P :         RF period           float
+ * l : label  label                 ushort
+ * s : stamp  absolute timestamp ps ULong64_t
+ * t : time   relative timestamp ps int
+ * T : time2  relative timestamp ns float
+ * e : adc    energy in ADC         int
+ * E : nrj    energy in keV         float
+ * q : qdc2   energy qdc2 in ADC    float
+ * Q : nrj2   energy qdc2 in keV    float
+ * p : pileup pilepup               bool
  * 
  */
 struct Write
@@ -207,21 +203,48 @@ class Hit
 {
 public:
   Hit(){reset();}
-  // TODO once the format is finally final
-  // Hit(Label _label, Timestamp _stamp, ADC _nrj, float _time2,  ADC _QDC2 = 0, NRJ _nrjcal = 0, NRJ _QDC2cal = 0, bool _pileup = false) : 
-  //   label  (_label),
-  //   time   (_time),
-  //   time2  (_time2),
-  //   adc    (_nrj),
-  //   qdc2   (_QDC2),
-  //   nrj (_nrjcal),
-  //   nrj2(_QDC2cal),
-  //   pileup (_pileup)
-  //   {}
+  // Hit(Label _label, Timestamp _stamp, Time _time =0, ADC _adc = 0, ADC _qdc2 = 0, float _time2 = 0, NRJ _nrj = 0, NRJ _nrj2 = 0, bool _pileup = false) : 
+  Hit(Label _label, Timestamp _stamp, ADC _adc = 0, ADC _qdc2 = 0, float _time2 = 0, NRJ _nrj = 0, NRJ _nrj2 = 0, bool _pileup = false) : 
+    label  (_label),
+    stamp  (_stamp),
+    // time   (_time),
+    time2  (_time2),
+    adc    (_adc),
+    qdc2   (_qdc2),
+    nrj    (_nrj),
+    nrj2   (_nrj2),
+    pileup (_pileup)
+    {}
+
+  Hit(Hit const & hit) :
+    label  (hit.label),
+    stamp  (hit.stamp),
+    // time   (hit.time),
+    time2  (hit.time2),
+    adc    (hit.adc),
+    qdc2   (hit.qdc2),
+    nrj    (hit.nrj),
+    nrj2   (hit.nrj2),
+    pileup (hit.pileup)
+    {}
+
+  Hit& operator=(Hit const & hit)
+  {
+    label  = hit.label;
+    stamp  = hit.stamp;
+    // time   = hit.time;
+    time2  = hit.time2;
+    adc    = hit.adc;
+    qdc2   = hit.qdc2;
+    nrj    = hit.nrj;
+    nrj2   = hit.nrj2;
+    pileup = hit.pileup;
+    return *this;
+  }
 
   Label     label  = 0;     // Label
   Timestamp stamp  = 0ull;  // Timestamp ('ull' stands for unsigned long long)
-  Time      time   = 0;     // Relative time in ps
+  // Time      time   = 0;     // Relative time in ps
   Time_ns   time2  = 0.f;   // Relative time in ns
   ADC       adc    = 0;     // Energy in ADC or QDC1
   ADC       qdc2   = 0;     // Energy in qdc2
@@ -233,7 +256,7 @@ public:
   {
     label  = 0;
     stamp = 0ull;
-    time   = 0;
+    // time   = 0;
     time2  = 0.f;
     adc    = 0;
     qdc2   = 0;
@@ -261,7 +284,7 @@ void Hit::reading(TTree * tree, std::string const & options)
   
   if (read.l) tree -> SetBranchAddress("label"  , & label  );
   if (read.s) tree -> SetBranchAddress("stamp"  , & stamp  );
-  if (read.t) tree -> SetBranchAddress("time"   , & time   );
+  // if (read.t) tree -> SetBranchAddress("time"   , & time   );
   if (read.T) tree -> SetBranchAddress("time2"  , & time2  );
   if (read.e) tree -> SetBranchAddress("adc"    , & adc    );
   if (read.E) tree -> SetBranchAddress("nrj"    , & nrj    );
@@ -280,7 +303,7 @@ void Hit::writting(TTree * tree, std::string const & options)
 
   if (write.l) tree -> Branch("label"  , & label  );
   if (write.s) tree -> Branch("stamp"  , & stamp  );
-  if (write.t) tree -> Branch("time"   , & time   );
+  // if (write.t) tree -> Branch("time"   , & time   );
   if (write.T) tree -> Branch("time2"  , & time2  );
   if (write.e) tree -> Branch("adc"    , & adc    );
   if (write.E) tree -> Branch("nrj"    , & nrj    );
@@ -293,7 +316,7 @@ std::ostream& operator<<(std::ostream& cout, Hit const & hit)
 {
   cout << "l : " << hit.label;
   if (hit.stamp  != 0) cout << " timestamp : "    << hit.stamp;
-  if (hit.time  != 0) cout << " time : "    << hit.time;
+  // if (hit.time  != 0) cout << " time : "    << hit.time;
   if (hit.time2 != 0) cout << " rel time : "<< hit.time2;
   if (hit.adc   != 0) cout << " adc :  "    << hit.adc    ;
   if (hit.qdc2  != 0) cout << " qdc2 : "    << hit.qdc2   ;

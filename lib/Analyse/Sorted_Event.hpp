@@ -231,7 +231,7 @@ void Sorted_Event::setMaxTime(Float_t const & max_time)
 bool Sorted_Event::sortGeClover(Event const & event, int const & i)
 {
   auto const & label = event.labels[i];
-  auto const & nrj = event.nrjcals[i];
+  auto const & nrj = event.nrjs[i];
   auto const & clover_label = labelToClover[label];
 
   if (nrj<5) return false;
@@ -277,7 +277,7 @@ void Sorted_Event::sortEvent(Event const & event)
     else if (isLaBr3[event.labels[i]])
     {
       LaBr3_Hit labr3_hit;
-      labr3_hit.nrjcal = event.nrjcals[i];
+      labr3_hit.nrjcal = event.nrjs[i];
       labr3_hit.label = event.labels[i]-199;
       if (m_rf) labr3_hit.time = m_rf->pulse_ToF(event.time2s[i], 50000ll)/_ns;
       else labr3_hit.time = (event.time2s[i]-event.time2s[0])/_ns;
@@ -295,7 +295,7 @@ void Sorted_Event::sortEvent(Event const & event)
     else if (isDSSD[event.labels[i]])
     {
       DSSD_hits.push_back(i);
-      auto const & nrj = event.nrjcals[i];
+      auto const & nrj = event.nrjs[i];
       auto const & label = event.labels[i];
       #ifdef N_SI_129
       auto const & time = time2s[i];

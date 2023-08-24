@@ -6,6 +6,9 @@
 #define USE_PARIS
   // Triggers :
 #define TRIGGER
+  // Event building :
+#define PREPROMPT
+// #define EXTEND 2 //periods
 
 // 2. Include library
 #include <libCo.hpp>
@@ -74,24 +77,24 @@ struct Histos
     auto const & nbDet = detectors.number();
 
     energy_all_Ge_raw.reset("energy_all_Ge_raw", "Ge spectra raw", 20000,0,10000);
-    rf_all_raw.reset("rf_all_raw", "RF Time spectra raw", 1000, -100, 400);
+    rf_all_raw.reset("rf_all_raw", "RF Time spectra raw", 2000, -1200, 800);
     energy_each_raw.reset("energy_each_raw", "Energy spectra each raw", nbDet,0,nbDet, 5000,0,15000);
-    rf_each_raw.reset("rf_each_raw", "RF timing each raw", nbDet,0,nbDet, 1000, -100, 400);
+    rf_each_raw.reset("rf_each_raw", "RF timing each raw", nbDet,0,nbDet, 2000, -1200, 800);
 
     energy_all_Ge.reset("Ge_spectra", "Ge spectra", 20000,0,10000);
-    rf_all.reset("RF_Time_spectra", "RF Time spectra", 1000, -100, 400);
+    rf_all.reset("RF_Time_spectra", "RF Time spectra", 2000, -1200, 800);
     energy_each.reset("Energy_spectra_each", "Energy spectra each", nbDet,0,nbDet, 5000,0,15000);
-    rf_each.reset("RF_timing_each", "RF timing each", nbDet,0,nbDet, 1000, -100, 400);
+    rf_each.reset("RF_timing_each", "RF timing each", nbDet,0,nbDet, 2000, -1200, 800);
 
     energy_all_Ge_event.reset("Ge_spectra_event", "Ge spectra after event building", 20000,0,10000);
-    rf_all_event.reset("Time_spectra_event", "Time spectra after event building", 1000, -100, 400);
+    rf_all_event.reset("Time_spectra_event", "Time spectra after event building", 2000, -1200, 800);
     energy_each_event.reset("Energy_spectra_each_event", "Energy spectra each after event building", nbDet,0,nbDet, 5000,0,15000);
-    rf_each_event.reset("RF_timing_each_event", "RF timing each after event building", nbDet,0,nbDet, 1000,-100,400);
+    rf_each_event.reset("RF_timing_each_event", "RF timing each after event building", nbDet,0,nbDet, 2000,-1200,800);
 
     energy_all_Ge_trig.reset("Ge_spectra_trig", "Ge spectra after trigger", 20000,0,10000);
-    rf_all_trig.reset("Time_spectra_trig", "Time spectra after trigger", 1000, -100, 400);
+    rf_all_trig.reset("Time_spectra_trig", "Time spectra after trigger", 2000, -1200, 800);
     energy_each_trig.reset("Energy_spectra_each_trig", "Energy spectra each after trigger", nbDet,0,nbDet, 5000,0,15000);
-    rf_each_trig.reset("RF_timing_each_trig", "RF timing each after trigger", nbDet,0,nbDet, 1000,-100,400);
+    rf_each_trig.reset("RF_timing_each_trig", "RF timing each after trigger", nbDet,0,nbDet, 2000,-1200,800);
   }
 };
 
@@ -128,6 +131,7 @@ void convert(Hit & hit, FasterReader & reader,
   if ( !overwrite && file_exists(outfile) ) {print(outfile, "already exists !"); return;}
 
   total_read_size+=raw_datafile.size();
+  auto dataSize = float_cast(raw_datafile.size("Mo"));
 
   // Initialize the temporary TTree :
   std::unique_ptr<TTree> tempTree (new TTree("temp","temp"));
@@ -154,7 +158,7 @@ void convert(Hit & hit, FasterReader & reader,
 
   read_timer.Stop();
   
-  debug("Read of",raw_datafile.shortName(),"finished here,", rawCounts,"counts in", read_timer.TimeElapsedSec(),"s");
+  print("Read of",raw_datafile.shortName(),"finished here,", rawCounts,"counts in", read_timer.TimeElapsedSec(),"s (", dataSize/read_timer.TimeElapsedSec(), "Mo/s)");
 
   if (rawCounts==0) {print("NO HITS IN",run); return;}
 
@@ -245,10 +249,18 @@ void convert(Hit & hit, FasterReader & reader,
           histos.energy_each_event.Fill(compressedLabel[label], nrj);
         }
       }
-
     #ifdef TRIGGER
       if (trigger(counter))
       {
+        
+    #ifdef PREPROMPT
+        eventBuilder.tryAddPreprompt_simple();
+    #endif //PREPROMPT
+
+    #ifdef EXTEND
+      eventBuilder.tryAddNextHit_simple(tempTree, loop, hit, int_cast(EXTEND));
+    #endif //EXTEND
+
         hits_count+=event.size();
         trig_count++;
         outTree->Fill();
@@ -275,8 +287,6 @@ void convert(Hit & hit, FasterReader & reader,
       outTree->Fill();
     #endif
     }
-  
-    // if (eventBuilder.isSingle()) && isDSSD[eventBuilder.singleHit().label]) 
     if (eventBuilder.isSingle()) 
     {
       if (isDSSD[eventBuilder.singleHit().label]) 
@@ -290,11 +300,11 @@ void convert(Hit & hit, FasterReader & reader,
     }
   }
   convert_timer.Stop();
-  debug("Conversion finished here done in", convert_timer.TimeElapsedSec() , "s");
+  print("Conversion finished here done in", convert_timer.TimeElapsedSec() , "s (",dataSize/convert_timer.TimeElapsedSec() ,"Mo/s)");
   Timer write_timer;
 
   // Initialize output TTree :
-  std::unique_ptr<TFile> outFile (TFile::Open(outfile.c_str(), "RECREATE"));
+  unique_TFile outFile (TFile::Open(outfile.c_str(), "RECREATE"));
   outFile -> cd();
   outTree -> Write();
   outFile -> Write();
@@ -302,7 +312,6 @@ void convert(Hit & hit, FasterReader & reader,
 
   write_timer.Stop();
 
-  auto dataSize = float_cast(raw_datafile.size("Mo"));
   auto outSize  = float_cast(size_file_conversion(float_cast(outFile->GetSize()), "o", "Mo"));
 
   print_precision(4);
@@ -408,7 +417,7 @@ int main(int argc, char** argv)
   if (!detectors || !calibration || !runs) return -1;
 
   // Setup some parameters :
-  RF_Manager::set_offset_ns(40);
+  RF_Manager::set_offset_ns(70);
 
   // Loop sequentially through the runs and treat their files in parallel :
   std::string run;

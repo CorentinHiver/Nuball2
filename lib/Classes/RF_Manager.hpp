@@ -30,11 +30,16 @@ class RF_Manager
 public:
   RF_Manager(Label const & label_RF = 251) {label = label_RF;}
   bool setHit(Hit const & hit);
+#ifdef EVENT_HPP
   bool setHit(Event const & event, Mult const & hit_i);
   bool setEvent(Event const & evt);
+  void align_RF(Event & evt) const;
+  void align_RF_ns(Event & evt) const;
+#endif //EVENT_HPP
   void static set_offset(Time const & offset) {m_offset = offset;}
   void static set_offset_ns(Time const & offset_ns) {m_offset = offset_ns*1000;}
   auto static offset() {return m_offset;}
+  Timestamp refTime(Timestamp const & timestamp) const {return timestamp - pulse_ToF(timestamp);}
 
   Time pulse_ToF(Timestamp const & timestamp) const
   {
@@ -61,15 +66,15 @@ public:
     return Time_cast(timestamp);
   #endif //USE_RF
   }
-  Time pulse_ToF(Hit const & hit) const {return pulse_ToF(hit.time);}
+  Time pulse_ToF(Hit const & hit) const {return pulse_ToF(hit.stamp);}
 
-  Time pulse_ToF(Hit const & hit, Time const & offset) const {return pulse_ToF(hit.time, offset);}
+  Time pulse_ToF(Hit const & hit, Time const & offset) const {return pulse_ToF(hit.stamp, offset);}
   Time pulse_ToF(Timestamp const & timestamp, Time const & offset) const {return pulse_ToF(timestamp, offset);}
 
   template<class... ARGS>
   float pulse_ToF_ns(ARGS... args) {return (static_cast<float>(pulse_ToF(std::forward<ARGS>(args)...))/1000.f);}
 
-  /// @brief Not sure this works...
+  /// @brief Not sure this work well...
   bool isPrompt(Hit const & hit, Time const & borneMin, Time const & borneMax)
   {
     return (pulse_ToF(hit,-borneMin) < borneMax);
@@ -109,6 +114,7 @@ bool RF_Manager::setHit(Hit const & hit)
   else return false;
 }
 
+  #ifdef EVENT_HPP
 bool RF_Manager::setEvent(Event const & event)
 {
   if (event.labels[0] == RF_Manager::label)
@@ -133,6 +139,22 @@ bool RF_Manager::setHit(Event const & event, Mult const & hit_i)
   else return false;
 }
 
+void RF_Manager::align_RF(Event & event) const
+{
+  auto const rf_Ref = pulse_ToF(event.stamp);
+  event.stamp = event.stamp-rf_Ref;
+  for (int i = 0; i<event.mult; i++) event.times[i] += rf_Ref;
+}
+
+void RF_Manager::align_RF_ns(Event & event) const
+{
+  auto const rf_Ref = pulse_ToF(event.stamp);
+  for (int i = 0; i<event.mult; i++)
+  {
+    event.time2s[i] = Time_ns_cast(rf_Ref + event.times[i]);
+  }
+}
+  #endif //EVENT_HPP
 
 //--------------------//
 //--- Helper class ---//

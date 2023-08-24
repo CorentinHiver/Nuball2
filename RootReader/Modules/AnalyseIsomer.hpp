@@ -78,9 +78,9 @@ void AnalyseIsomer::run(Parameters & p, AnalyseIsomer & ai)
   {
     Timer timer;
 
-    std::unique_ptr<TFile> file (TFile::Open(rootfile.c_str(), "READ"));
+    unique_TFile file (TFile::Open(rootfile.c_str(), "READ"));
     if (file->IsZombie()) {print(rootfile, "is a Zombie !");continue;}
-    std::unique_ptr<TTree> tree (file->Get<TTree>("Nuball"));
+    unique_tree tree (file->Get<TTree>("Nuball"));
     if (!tree.get()) 
     {
       nuball2_tree = true;

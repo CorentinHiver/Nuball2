@@ -158,7 +158,7 @@ void DSSD::Fill(Event const & event, int const & i)
   
   if (isDSSD[label])
   {
-    auto const nrj = event.nrjcals[i] + gRandom->Uniform(0,1);
+    auto const nrj = event.nrjs[i] + gRandom->Uniform(0,1);
     auto const & time = event.time2s[i];
     auto const & isring = isRing[label];
     auto const & index = indexes[label];

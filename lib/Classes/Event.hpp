@@ -208,18 +208,18 @@ inline void Event::push_front(Hit const & hit)
 #ifdef SAFE
   if (mult>254) {print("Event mult > 255 !!"); return;}
 #endif
-  for (Mult i = 0; i<mult; i++)
+  for (auto i = mult; i>0; i--)
   {
-                 labels  [i+1] = labels  [i];
-    if (write.t) times   [i+1] = times   [i];
-    if (write.e) adcs    [i+1] = adcs    [i];
-    if (write.E) nrjs    [i+1] = nrjs    [i];
-    if (write.q) qdc2s   [i+1] = qdc2s   [i];
-    if (write.Q) nrj2s   [i+1] = nrj2s   [i];
-    if (write.p) pileups [i+1] = pileups [i];
+                 labels  [i] = labels  [i-1];
+    if (write.t) times   [i] = times   [i-1];
+    if (write.e) adcs    [i] = adcs    [i-1];
+    if (write.E) nrjs    [i] = nrjs    [i-1];
+    if (write.q) qdc2s   [i] = qdc2s   [i-1];
+    if (write.Q) nrj2s   [i] = nrj2s   [i-1];
+    if (write.p) pileups [i] = pileups [i-1];
   }
                labels  [0] = hit.label;
-  if (write.t) times   [0] = Time_cast(hit.time-stamp); // Here, times[0]<0 because the stamp corresponds to the 0 of the first hit that is logically located after
+  if (write.t) times   [0] = Time_cast(hit.stamp-stamp); // Here, times[0]<0 because the stamp corresponds to the 0 of the first hit that is logically located after
   if (write.e) adcs    [0] = hit.adc;
   if (write.E) nrjs    [0] = hit.nrj;
   if (write.q) qdc2s   [0] = hit.qdc2;
