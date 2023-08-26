@@ -2,7 +2,7 @@
 // #define N_SI_136
 // #define USE_DSSD
 // #define USE_PARIS
-// #define USE_RF 200
+#define USE_RF 200
 
 // #include "Modules/Timeshifts.hpp"
 #include "Modules/Calibration.hpp"
@@ -85,20 +85,21 @@ int main(int argc, char ** argv)
     // b = 5;
     // print(c,d);
 
-  // MTObject::Initialize(2);
+  MTObject::Initialize(4);
 
   // calibration.load("136_final.calib");
   // calibration.calibrateData(argv[1], (argc>2) ? std::stoi(argv[2]) : 1);
   // calibration.writeCalibratedData("test_calib_data.root");
-  
+
     Timeshifts ts;
     ts.setDetectors(detectors);
     ts.setOutDir(".");
     ts.setMult(2,2);
     ts.verbose(true);
     ts.calculate(argv[1], (argc>2) ? std::stoi(argv[2]) : -1);
-    ts.verify(argv[1], (argc>2) ? std::stoi(argv[2]) : -1);
+    ts.verify(argv[1], (argc>3) ? std::stoi(argv[3]) : 5);
     ts.write("test"); 
+
   // ("/home/corentin/faster_data/N-SI-129/152Eu_N1_9.fast", "./tests/152Eu_N1_9", nb_files, false);
   // convertor.addFolder("t");
   // convertor.convert()

@@ -210,9 +210,8 @@ void convert(Hit & hit, FasterReader & reader,
     tempTree -> GetEntry(gindex[loop++]);
     
     // Handle the RF data :
-    if (hit.label == RF_Manager::label)
+    if (rf.setHit(hit);)
     {
-      rf.setHit(hit);
       Event temp (event);
       event = hit;
       outTree -> Fill();

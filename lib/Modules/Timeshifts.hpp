@@ -421,6 +421,7 @@ bool Timeshifts::InitializeRaw()
     m_histograms_VS_RF[label].reset((name+"_RF").c_str(), (name+"_RF").c_str(), m_timewindow_ns*m_bins_per_ns[alias], -m_timewindow/2, m_timewindow/2);
     if (alias == Detector::RF)
     {
+      m_time_spectra[label].reset(nullptr);
       m_time_spectra[label].reset(name.c_str(), name.c_str(), 1000, -100, 100);
     }
   #endif //USE_RF
@@ -593,15 +594,15 @@ void get_first_RF_of_file(FasterReader & reader, Hit & hit, RF_Manager & rf)
 void get_first_RF_of_file(TTree * tree, Event & event, RF_Manager & rf)
 {
   int event_i = 0;
-  while (event_i<tree->GetEntries())
+  bool done = false;
+  while (event_i<tree->GetEntries() && done == false)
   {
     tree -> GetEntry(event_i);
-    for (int hit = 0; hit<event.mult; hit++)
+    for (int hit_i = 0; hit_i<event.mult; hit_i++)
     {
-      if (event.labels[hit] == RF_Manager::label) 
+      if (rf.setHit(event,hit_i)) 
       {
-        rf.last_hit = event.times[hit];
-        rf.period   = event.nrjs [hit];
+        done = true;
         break;
       }
     }
@@ -618,7 +619,7 @@ void Timeshifts::treatRootFile(std::string const & filename)
 {
   std::unique_ptr<TFile> file (TFile::Open(filename.c_str(), "READ"));
   std::unique_ptr<TTree> tree (file->Get<TTree>("Nuball"));
-  Event event(tree.get(), "ltn");
+  Event event(tree.get(), "lte");
   auto const nb_events = tree -> GetEntries();
   int event_i = 0;
   RF_Manager rf;
@@ -690,7 +691,8 @@ void Timeshifts::Fill(Event const & event, RF_Manager & rf)
 
   // There are 2 imbricated loops : the first one fills the time spectra and looks for the time reference.
   // If found, it opens another loop to fill the coincidence time spectra
-  for (Mult loop_i = 0; loop_i < mult; loop_i++)
+  auto const & rf_Ref = rf.pulse_ToF(event.stamp);
+  for (int loop_i = 0; loop_i < mult; loop_i++)
   {
     bool coincFilled = false; // To only fill the coincidence once.
 
@@ -698,7 +700,7 @@ void Timeshifts::Fill(Event const & event, RF_Manager & rf)
     auto const & label = event.labels[loop_i];
     auto const & time = event.times[loop_i];
     auto const & nrj = event.nrjs[loop_i];
-    auto const ToF = rf.pulse_ToF(event.stamp)+time;
+    auto const & ToF = Time_cast(rf_Ref+time);
 
     if (m_corrected)
     {
@@ -801,35 +803,36 @@ void Timeshifts::analyse()
   {
     switch (label)
     {
+      case 56: case 58: forced_shifts[label] = -400000; break;
       case (800) : forced_shifts[label] = -200000; break;
       case (801) : forced_shifts[label] = -200000; break;
-      case (802) : forced_shifts[label] = -223700; break;
-      case (803) : forced_shifts[label] = -224013; break;
-      case (804) : forced_shifts[label] = -223337; break;
-      case (805) : forced_shifts[label] = -233668; break;
-      case (806) : forced_shifts[label] = -234377; break;
-      case (807) : forced_shifts[label] = -233857; break;
-      case (808) : forced_shifts[label] = -233677; break;
-      case (809) : forced_shifts[label] = -223296; break;
-      case (810) : forced_shifts[label] = -224911; break;
-      case (811) : forced_shifts[label] = -224341; break;
-      case (812) : forced_shifts[label] = -224824; break;
-      case (813) : forced_shifts[label] = -227513; break;
-      case (814) : forced_shifts[label] = -227109; break;
-      case (815) : forced_shifts[label] = -227453; break;
-      case (821) : forced_shifts[label] = -233209; break;
-      case (822) : forced_shifts[label] = -233408; break;
-      case (825) : forced_shifts[label] = -243012; break;
-      case (826) : forced_shifts[label] = -242249; break;
-      case (828) : forced_shifts[label] = -235076; break;
-      case (829) : forced_shifts[label] = -232000; break;
-      case (830) : forced_shifts[label] = -242684; break;
-      case (831) : forced_shifts[label] = -238313; break;
-      case (832) : forced_shifts[label] = -238868; break;
-      case (833) : forced_shifts[label] = -238871; break;
-      case (834) : forced_shifts[label] = -235886; break;
-      case (835) : forced_shifts[label] = -234000; break;
-      case (840) : forced_shifts[label] = -250407; break;
+      // case (802) : forced_shifts[label] = -223700; break;
+      // case (803) : forced_shifts[label] = -224013; break;
+      // case (804) : forced_shifts[label] = -223337; break;
+      // case (805) : forced_shifts[label] = -233668; break;
+      // case (806) : forced_shifts[label] = -234377; break;
+      // case (807) : forced_shifts[label] = -233857; break;
+      // case (808) : forced_shifts[label] = -233677; break;
+      // case (809) : forced_shifts[label] = -223296; break;
+      // case (810) : forced_shifts[label] = -224911; break;
+      // case (811) : forced_shifts[label] = -224341; break;
+      // case (812) : forced_shifts[label] = -224824; break;
+      // case (813) : forced_shifts[label] = -227513; break;
+      // case (814) : forced_shifts[label] = -227109; break;
+      // case (815) : forced_shifts[label] = -227453; break;
+      // case (821) : forced_shifts[label] = -233209; break;
+      // case (822) : forced_shifts[label] = -233408; break;
+      // case (825) : forced_shifts[label] = -243012; break;
+      // case (826) : forced_shifts[label] = -242249; break;
+      // case (828) : forced_shifts[label] = -235076; break;
+      // case (829) : forced_shifts[label] = -232000; break;
+      // case (830) : forced_shifts[label] = -242684; break;
+      // case (831) : forced_shifts[label] = -238313; break;
+      // case (832) : forced_shifts[label] = -238868; break;
+      // case (833) : forced_shifts[label] = -238871; break;
+      // case (834) : forced_shifts[label] = -235886; break;
+      // case (835) : forced_shifts[label] = -234000; break;
+      // case (840) : forced_shifts[label] = -250407; break;
       case (841) : forced_shifts[label] = -220000; break;
       case (842) : forced_shifts[label] = -240967; break;
       case (843) : forced_shifts[label] = -249883; break;
