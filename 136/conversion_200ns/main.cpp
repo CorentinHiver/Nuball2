@@ -31,13 +31,14 @@ std::string calibFile = "136_final.calib";
 Folder manip = "N-SI-136";
 std::string list_runs = "list_runs.list";
 std::string output = "-root_P";
-int  nb_files_ts = 10;
+int  nb_files_ts = 50;
 int  nb_files = -1;
 int rf_shift = 40;
 bool only_timeshifts = false; // No conversion : only calculate the timeshifts
 bool overwrite = false; // Overwrite already existing converted root files. Works also with -t options (only_timeshifts)
 bool histoed = false;
 bool one_run = false;
+bool check_preprompt = false;
 std::string one_run_folder = "";
 ulonglong max_hits = -1;
 bool treat_129 = false;
@@ -360,6 +361,7 @@ int main(int argc, char** argv)
       else if (command == "-Th" || command == "--Thorium")
       {
         list_runs = "Thorium.list";
+        check_preprompt = true;
       }
       else if (command == "-U" || command == "--Uranium")
       {
@@ -372,6 +374,7 @@ int main(int argc, char** argv)
         list_runs = "129.list";
         calibFile = "129.calib";
         manip = "N-SI-129";
+        check_preprompt = true;
       }
       else if (command == "-h" || command == "--help")
       {
@@ -442,6 +445,7 @@ int main(int argc, char** argv)
       timeshifts.setDetectors(detectors);
       timeshifts.setMult(2,3);
       timeshifts.setOutDir(outPath);
+      timeshifts.checkForPreprompt(check_preprompt);
 
       timeshifts.calculate(runpath, nb_files_ts);
       timeshifts.verify(runpath, 10);
