@@ -210,7 +210,7 @@ void convert(Hit & hit, FasterReader & reader,
     tempTree -> GetEntry(gindex[loop++]);
     
     // Handle the RF data :
-    if (rf.setHit(hit);)
+    if (rf.setHit(hit))
     {
       Event temp (event);
       event = hit;
