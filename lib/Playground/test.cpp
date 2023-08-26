@@ -2,15 +2,16 @@
 // #define N_SI_136
 // #define USE_DSSD
 // #define USE_PARIS
-#define USE_RF 200
+// #define USE_RF 200
 
 // #include "Modules/Timeshifts.hpp"
-// #include "Modules/Calibration.hpp"
-// #include "../libCo.hpp"
+#include "Modules/Calibration.hpp"
+#include "../libCo.hpp"
 #include <Detectors.hpp>
-#include <Convertor.hpp>
+// #include <Convertor.hpp>
 // #include <Timeshifts.hpp>
 
+// int main()
 int main(int argc, char ** argv)
 {
   // MTObject::Initialize(3);
@@ -72,9 +73,17 @@ int main(int argc, char ** argv)
   // });
   Detectors detectors("index_129.list");
   Calibration calibration(detectors);
-  calibration.verbose(true);
-  calibration.calculate(argv[1], (argc>2) ? std::stoi(argv[2]) : -1, "3alpha", "root");
+  // calibration.verbose(true);
+  calibration.calculate(argv[1], (argc>2) ? std::stoi(argv[2]) : -1, "232Th");
   calibration.verify();
+
+    // int a = 1;
+    // int b = 2;
+
+    // auto const & c = a+b;
+    // auto const d = a+b;
+    // b = 5;
+    // print(c,d);
 
   // MTObject::Initialize(2);
 

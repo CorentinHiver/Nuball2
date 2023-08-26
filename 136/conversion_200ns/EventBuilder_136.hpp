@@ -17,7 +17,7 @@ public:
 
   bool inTimeRange(Hit const & hit) 
   {
-    return (Time_cast(hit.stamp-m_RF_ref_stamp) < Time_cast(m_rf->period-m_rf->offset()));
+    return ( Time_cast(hit.stamp-m_RF_ref_stamp) < (Time_cast(USE_RF*1000)-m_rf->offset()) );
   }
   void reset();
 
@@ -34,7 +34,8 @@ public:
 
   /// @brief Experimental : add more period after a trigger 
   void tryAddPreprompt_simple();
-  void tryAddNextHit_simple(unique_tree & tree, int & loop, Hit & hit, int const & nb_periods_more = 1);
+  void tryAddNextHit_simple(TTree * tree, Hit & hit, int & loop, Alignator const & gindex);
+  void setNbPeriodsMore(int const & periods) {m_nb_periods_more = periods;}
 
   Timestamp single_hit_VS_RF_ref = 0;
 private:
@@ -42,27 +43,39 @@ private:
   Timestamp m_RF_ref_stamp = 0;
   RF_Manager* m_rf = nullptr;
   std::stack<Hit> m_hit_buffer;
+  int m_nb_periods_more = 0;
+  Timestamp m_period=USE_RF*1000ull;
   // Time m_shift = 0;
 };
 
-void EventBuilder_136::tryAddNextHit_simple(unique_tree & tree, int & loop, Hit & hit, int const & nb_periods_more)
+void EventBuilder_136::tryAddNextHit_simple(TTree * tree, Hit & hit, int & loop, Alignator const & gindex)
 {
-  // If the next hit (for which the relative timestamp is greater than the RF period) is close enough to the event, it might be an isomer deexcitation.
-  // Therefore, we would like to have a look at it in order to increase statistics.
-  // If the next hit is in the time region of the next pulse then one should definitely remove it.
+  // If the next hits (for which the relative timestamp is greater than the RF period) are close enough to the event, 
+  // they might come from an isomer deexcitation. Therefore, we would like to gather them in order to increase statistics.
+
+  // The current hit is the one that "closed" the event, i.e. is outside of time window, 
+  // and has been set to the last_hit to serve for next EventBuilder_136::build() call.
+  // Therefore, the current m_RF_ref_stamp is relative to this hit. 
+  // In order to check if this hit is within the extended time window,
+  // we first take back the time reference of the event :
+  Timestamp const temp_RF_ref = m_rf->refTime(m_event->stamp)+m_period;
+
+  // Note : if the next hit is in the time region of the next pulse then one should definitely remove it.
   // Here we keep it because it might still contain some information, it depends on the probability of 
   // 2 consecutive pulses to produce parasitic reaction
-  auto const temp_RF_ref = m_rf->refTime(m_event->stamp);
-  if (Time_cast(m_last_hit.stamp-temp_RF_ref) < Time_cast(m_rf->period*(nb_periods_more+1)-m_rf->offset()))
+  
+  // First, try to set the current hit :
+  // print(Time_cast(hit.stamp-temp_RF_ref), Time_cast(m_period*m_nb_periods_more-m_rf->offset()));
+  // pauseCo();
+  if (Time_cast(hit.stamp-temp_RF_ref) < Time_cast(m_period*m_nb_periods_more - m_rf->offset()))
   {
-    m_event->push_back(m_last_hit);
-    tree->GetEntry(++loop);
-    m_hit_buffer.emplace(hit);
-    while(Time_cast(hit.stamp-temp_RF_ref) < Time_cast(m_rf->period*(nb_periods_more+1)-m_rf->offset()))
+    m_event->push_back(hit);
+    tree->GetEntry(gindex[++loop]);
+    // If it worked, then let's handle the next hit :
+    while(Time_cast(hit.stamp-temp_RF_ref) < Time_cast(m_period*m_nb_periods_more - m_rf->offset()))
     {
       m_event->push_back(hit);
-      tree->GetEntry(++loop);
-      m_hit_buffer.emplace(hit);
+      tree->GetEntry(gindex[++loop]);
     }
     set_last_hit(hit);
   }
@@ -71,18 +84,17 @@ void EventBuilder_136::tryAddNextHit_simple(unique_tree & tree, int & loop, Hit 
 void EventBuilder_136::tryAddPreprompt_simple()
 {
   // First remove the hits that belongs to the event :
-  for (int i = m_event->mult; i>0 && !m_hit_buffer.empty(); i--) m_hit_buffer.pop();
+  for (int i = m_event->mult+1; i>0 && !m_hit_buffer.empty(); i--) m_hit_buffer.pop();
   if (m_hit_buffer.empty()) return;
   auto const temp_RF_ref = m_rf->refTime(m_event->stamp);
   while (!m_hit_buffer.empty())
   {
     auto const & hit = m_hit_buffer.top();
-    // print(Time_cast(temp_RF_ref-hit.stamp));
-    // pauseCo();
-    if (Time_cast(temp_RF_ref-hit.stamp) < 2*Time_cast(m_rf->period))
+    debug(Time_cast(temp_RF_ref-hit.stamp), Time_cast(m_period));
+    if (Time_cast(temp_RF_ref-hit.stamp) < Time_cast(m_period+m_rf->offset()))
     {
       m_event -> push_front(hit);
-      // print(hit, *m_event);
+      debug(hit, *m_event);
     }
     else break;
     m_hit_buffer.pop();
@@ -107,18 +119,19 @@ bool EventBuilder_136::build(Hit const & hit)
   #ifdef PREPROMPT
     m_hit_buffer.emplace(hit);
   #endif //PREPROMPT
+  // print(m_period);
   switch (m_status)
   { 
     case 0 : case 2 : // If no coincidence has been detected in previous iteration :
       if (this->inTimeRange(hit))
       {// Situation 1 :
         // The previous and current hit are in the same event.
-        // In next call, we'll check if the next hits also belong to this event (cases 3 or 4)
+        // In next call, we'll check if the next hits also belong to this event (situations 1' or 2)
         m_event -> clear();
         *m_event = m_last_hit;
         m_event->push_back(hit);
         m_last_hit.reset();
-        m_status = 1; // The event can be filled with potential additionnal hits
+        m_status = 1; // The event can be filled with other hits
       }
       else
       {// Situation 0 :
@@ -126,7 +139,7 @@ bool EventBuilder_136::build(Hit const & hit)
         // The last hit is therefore a single hit, alone in the time window around its RF.
         m_single_hit = m_last_hit;
 
-        // The current hit is set to be the last hit for next call :
+        // The current hit is set to be the reference hit for next call :
         this -> set_last_hit(hit);
         m_status = 0; // No event detected
       }
@@ -150,6 +163,7 @@ bool EventBuilder_136::build(Hit const & hit)
         return true; // The event is ready to be processed
       }
     break;
+    default: throw_error("event building issues, call DEV");
   }
   return false; // No processing of the data
 }
@@ -158,16 +172,12 @@ void EventBuilder_136::setFirstRF(Hit const & rf_hit)
 {
   if (rf_hit.label != RF_Manager::label) throw std::runtime_error("First RF hit of the file is not really a RF");
   m_rf -> setHit(rf_hit);
-  m_RF_ref_stamp = rf_hit.stamp;
 }
 
 void EventBuilder_136::set_last_hit(Hit const & hit)
 {
   // The closest RF to this hit is taken as reference to build the event :
-  m_RF_ref_stamp = hit.stamp - m_rf->pulse_ToF(hit.stamp);
-  // We substract the offset because we want the hits to be in [-offset, period-offset].
-  // We achieve this by shifting back the reference by -offset
-  // Therefore the comparison (hit_stamp-ref)<period gives in effect (relative_time+offset)<period
+  m_RF_ref_stamp = m_rf->refTime(hit.stamp);
 
   // m_last_hit is filled with the current hit :
   m_last_hit = hit;
@@ -175,9 +185,9 @@ void EventBuilder_136::set_last_hit(Hit const & hit)
 
 void EventBuilder_136::reset()
 {
-  m_event -> clear(); m_status = 0;
+  m_event -> clear(); 
+  m_status = 0;
 }
-
 
 class Counter136
 {

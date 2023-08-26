@@ -46,19 +46,24 @@ public:
   #ifdef USE_RF
 
     // Shifts the timestamp in order to be able to get hits before the 0 :
-    Timestamp const shifted_timestamp = timestamp + Timestamp_cast(m_offset);
+    Timestamp const & shifted_timestamp = timestamp + m_offset; 
 
     if (period == 0) throw std::runtime_error("RF period = 0 !!!");
+    auto const & period_fm = Timestamp_cast(period*1000);
 
     if (shifted_timestamp>last_hit)
     {// Normal case
-      return ( Time_cast((shifted_timestamp-last_hit)%period) - m_offset );
+      auto const & rf_time = (shifted_timestamp-last_hit)*1000ull;
+      auto const & relative_time = Time_cast((rf_time%period_fm)/1000ull);
+      // print(period_fm, rf_time, relative_time, relative_time - m_offset);
+      // pauseCo();
+      return relative_time - m_offset ;
     }
     else
     {// When the RF is found after the hit
-    // print(Timestamp_cast(Time_cast(last_hit-timestamp)-m_offset)%period);
-    // std::cin.get();
-      return Time_cast(period - Timestamp_cast(Long64_cast(last_hit-timestamp)-m_offset)%period) - m_offset;
+      auto const & reversed_rf_time = (last_hit-timestamp-m_offset)*1000ull;
+      auto const & relative_time =Time_cast((period_fm - (reversed_rf_time)%period_fm)/1000ull);
+      return relative_time - m_offset;
     }
 
   #else //NO USE_RF
@@ -74,13 +79,12 @@ public:
   template<class... ARGS>
   float pulse_ToF_ns(ARGS... args) {return (static_cast<float>(pulse_ToF(std::forward<ARGS>(args)...))/1000.f);}
 
-  /// @brief Not sure this work well...
-  bool isPrompt(Hit const & hit, Time const & borneMin, Time const & borneMax)
+  void set(Timestamp new_timestamp, Timestamp _period) 
   {
-    return (pulse_ToF(hit,-borneMin) < borneMax);
+    if (Time_cast(new_timestamp-last_hit) > 0) period = double_cast(new_timestamp-last_hit)/1000.;
+    else period = double_cast(_period);
+    last_hit = new_timestamp;
   }
-
-  void set(Timestamp _last_hit, Timestamp _period) {last_hit = _last_hit; period = _period;}
 
 
   // Attributes :
@@ -88,7 +92,7 @@ public:
   Timestamp last_hit = 0;
 
 #ifdef USE_RF
-  Timestamp period = USE_RF*1000;
+  double period = USE_RF*1000;
 #else //NO USE_RF
   Time period = 0;
 #endif //USE_RF
@@ -99,16 +103,14 @@ private:
   Time static m_offset;
 };
 
-Time RF_Manager::m_offset = 50000 ;
-Label    RF_Manager::label  = 251;
+Time  RF_Manager::m_offset = 50000 ;
+Label RF_Manager::label  = 251;
 
 bool RF_Manager::setHit(Hit const & hit)
 {
-  if (hit.label == RF_Manager::label)
+  if (hit.label == this -> label)
   {
-    last_hit = hit.stamp;
-    period = Timestamp_cast(hit.adc);
-    if (period == 0) period = Timestamp_cast(hit.nrj);
+    this -> set(hit.stamp, Timestamp_cast((hit.adc == 0) ? hit.nrj : hit.adc));
     return true;
   }
   else return false;
@@ -117,23 +119,22 @@ bool RF_Manager::setHit(Hit const & hit)
   #ifdef EVENT_HPP
 bool RF_Manager::setEvent(Event const & event)
 {
-  if (event.labels[0] == RF_Manager::label)
+  if (event.labels[0] == this -> label)
   {
-    last_hit = event.stamp;
-    period = Timestamp_cast(event.adcs[0]);
-    if (period == 0) period = Timestamp_cast(event.nrjs[0]);
+    this -> set(event.stamp, Timestamp_cast((event.adcs[0] == 0) ? event.nrjs[0] : event.adcs[0]));
     return true;
   }
   else return false;
 }
 
-bool RF_Manager::setHit(Event const & event, Mult const & hit_i)
+bool RF_Manager::setHit(Event const & event, int const & hit_i)
 {
   if (event.labels[hit_i] == RF_Manager::label)
   {
-    last_hit = event.times[hit_i];
-    period = Timestamp_cast(event.adcs[0]);
-    if (period == 0) period = Timestamp_cast(event.nrjs[hit_i]);
+    this -> set(
+      event.stamp + event.times[hit_i], 
+      Timestamp_cast((event.adcs[hit_i] == 0) ? event.nrjs[hit_i] : event.adcs[hit_i])
+    );
     return true;
   }
   else return false;
@@ -155,6 +156,12 @@ void RF_Manager::align_RF_ns(Event & event) const
   }
 }
   #endif //EVENT_HPP
+
+std::ostream& operator<<(std::ostream& cout, RF_Manager const & rf)
+{
+  cout << "period : " << rf.period << "ps last timestamp : " << rf.last_hit << "ps" << std::endl;
+  return cout;
+}
 
 //--------------------//
 //--- Helper class ---//

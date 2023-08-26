@@ -5,6 +5,7 @@
 
 #include "../Classes/Hit.hpp"
 #include "../Classes/Detectors.hpp"
+#include "../Classes/Event.hpp"
 #include "../Classes/FilesManager.hpp"
 
 #include "../MTObjects/MTFasterReader.hpp"
@@ -109,6 +110,10 @@ std::ofstream& operator<<(std::ofstream& fout, pic_fit_result const & fit)
 
 using Fits = std::vector <pic_fit_result>;
 
+/**
+ * @brief 
+ * @todo Calibration::verify() DO NOT SUPPORT MTObject !!
+ */
 class Calibration
 {
 public:
@@ -133,11 +138,13 @@ public:
     Vector_MTTHist<TH2F> all_calib;
 
     // Other spectra :
-    std::map<std::string, TH1> spectra;
+    std::map<int, TH1F*> spectra;
 
     void Initialize(Calibration & calib);
     void setBins(std::string const & parameters);
   } m_histos;
+
+  ~Calibration() {for (auto & histo : m_histos.spectra) delete histo.second;}
 
   Calibration() {m_ok = false;}
 
@@ -213,6 +220,8 @@ public:
   void setDetectorsList(Detectors *ID_file) {m_detectors = *ID_file;}
   void setSource(std::string const & source) {m_source = source;}
   void verbose(bool const & _verbose) {m_verbose = _verbose;}
+
+  void loadRootHisto(std::string const & histograms);
 
   /// @brief avoid using this one
   void  calibrate(Hit & hit) const;
@@ -376,10 +385,10 @@ void Calibration::calculate(std::string const & histograms, std::string const & 
 
 void Calibration::loadRootHisto(std::string const & histograms)
 {
-  unique_TFile.file(TFile::Open(loadRootHisto.c_str()));
-  if (!file.IsOpen()) throw_error("Can't open"+loadRootHisto);
+  unique_TFile file(TFile::Open(histograms.c_str()));
+  if (!file.get()->IsOpen()) throw_error("Can't open"+histograms);
   
-  TIter nextKey(file.GetListOfKeys());
+  TIter nextKey(file->GetListOfKeys());
   TKey* key = nullptr;
 
   while ((key = dynamic_cast<TKey*>(nextKey()))) 
@@ -390,18 +399,17 @@ void Calibration::loadRootHisto(std::string const & histograms)
       if (obj->IsA()->InheritsFrom(TH1F::Class())) 
       {
         auto hist = dynamic_cast<TH1F*>(obj);
-        auto const & name = hist -> GetName();
+        std::string name = hist -> GetName();
         for (auto const & _name : m_detectors)
         {
           if (name.find(_name))
           {
             auto const & label = m_detectors.getLabel(_name);
-            if (name.find("_raw")) m_histos.raw_spectra[label] = hist;
-            else if (name.find("_calib")) m_histos.calib_spectra[label] = hist;
-            else m_histos.spectra[label] = hist;
+            if (name.find("_raw")) m_histos.raw_spectra[label] = dynamic_cast<TH1F*> (hist->Clone(_name.c_str()));
+            else if (name.find("_calib")) m_histos.calib_spectra[label] = dynamic_cast<TH1F*> (hist->Clone(_name.c_str()));
+            else m_histos.spectra[label] = dynamic_cast<TH1F*> (hist->Clone(_name.c_str()));
           }
         }
-      else if ()
       }
     }
   }
@@ -445,7 +453,7 @@ void Calibration::fillRootDataHisto(std::string const & filename)
   if (!tree.get()) {print("NO Nuball2 found in", filename); return;}
 
   Event event;
-  event.reading(tree.get(), "le");
+  event.reading(tree.get(), "leq");
 
   print("Reading", filename);
 
@@ -458,6 +466,11 @@ void Calibration::fillRootDataHisto(std::string const & filename)
     {
       auto const & label = event.labels[hit];
       if (label == 0) continue;
+      if (isParis[label] && event.qdc2s[hit]!=0)
+      {
+        auto const & ratio = (event.qdc2s[hit]-event.adcs[hit])/event.qdc2s[hit];
+        if (ratio<-0.2 || ratio>0.2) continue;
+      }
       auto const nrjcal = calibrate(event.adcs[hit], label);
       m_histos.calib_spectra[label].Fill(nrjcal);
       m_histos.all_calib[detectors().alias(label)].Fill(compressedLabel[label], nrjcal);
@@ -549,6 +562,8 @@ void Calibration::analyse(std::string const & source)
       if (m_verbose) print(name, "has no data in this run");
       continue;
     }
+
+    histo.Merge();
     
     pic_fit_result & fit = m_fits[label];
     fit.setLabel(label);
@@ -641,7 +656,7 @@ void Calibration::analyse(std::string const & source)
           peaks.resize(nb_pics);
           peaks = {344.2760, 778.9030, 964.1310, 1408.0110};
           E_right_pic = peaks.back();
-          integral_ratio_threshold = 0.022f;
+          integral_ratio_threshold = 0.030f;
         }
         else
         {
@@ -1066,7 +1081,9 @@ void Calibration::verify(std::string const & outfilename)
     auto const & name = m_detectors[label];
     auto & raw_histo = m_histos.raw_spectra[label];
     if (raw_histo.Integral()<1) {if (m_verbose) print(name, "has no hit"); continue;}
+    raw_histo.Merge();
     auto & calib_histo = m_histos.calib_spectra[label];
+    calib_histo.Merge();
     auto const & fit = m_fits[label];
     if (!fit.exists()) {nb_det_filled[m_detectors.alias(label)]++; if (m_verbose) print(name, "has no fit"); continue;}
 

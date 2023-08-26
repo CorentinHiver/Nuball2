@@ -328,8 +328,8 @@ private:
 bool Timeshifts::load(std::string const & filename)
 {
   std::ifstream inputfile(filename, std::ifstream::in);
-  if (!inputfile.good()) {print("CAN'T OPEN THE TIMESHIFT FILE " + filename); throw std::runtime_error("TIMESHIFT");}
-  else if (file_is_empty(inputfile)) {print("TIMESHIFT FILE", filename, "EMPTY !"); throw std::runtime_error("TIMESHIFT");}
+  if (!inputfile.good()) {print("CAN'T OPEN THE TIMESHIFT FILE " + filename);return false;}
+  else if (file_is_empty(inputfile)) {print("TIMESHIFT FILE", filename, "EMPTY !");return false;}
   std::string line = ""; // Reading buffer
   Label label = 0; // Reading buffer
   // ----------------------------------------------------- //

@@ -8,7 +8,7 @@
 #define TRIGGER
   // Event building :
 #define PREPROMPT
-// #define EXTEND 2 //periods
+// #define UNSAFE
 
 // 2. Include library
 #include <libCo.hpp>
@@ -23,30 +23,33 @@
 #include <Manip.hpp>          // Eases the manipulation of files and folder of an experiments
 #include <RF_Manager.hpp>     // Eases manipulation of RF information
 
-
 #include "EventBuilder_136.hpp" // Event builder for this experiment
 
 // 3. Declare some global variables :
 std::string IDFile = "index_129.list";
 std::string calibFile = "136_final.calib";
-Folder manip = "N-SI-136";
+Folder manip = "N-SI-129";
 std::string list_runs = "list_runs.list";
-std::string output = "-root_P2";
+std::string output = "-root_P";
 int  nb_files_ts = 50;
 int  nb_files = -1;
+int rf_shift = 40;
 bool only_timeshifts = false; // No conversion : only calculate the timeshifts
 bool overwrite = false; // Overwrite already existing converted root files. Works also with -t options (only_timeshifts)
 bool histoed = false;
 bool one_run = false;
 std::string one_run_folder = "";
 ulonglong max_hits = -1;
+bool treat_129 = true;
 
 bool extend_periods = false; // To take more than one period after a event trigger
 uint nb_periods_more = 0; // Number of periods to extend after an event that triggered
 
 bool trigger(Counter136 const & counter)
 {
+  // return true;
   return (counter.nb_dssd>0);
+  // return ((counter.nb_modules>2 && counter.nb_clovers>0));
   // return ((counter.nb_modules>2 && counter.nb_clovers>0) || counter.nb_dssd>0);
 }
 
@@ -92,7 +95,7 @@ struct Histos
     rf_each_event.reset("RF_timing_each_event", "RF timing each after event building", nbDet,0,nbDet, 2000,-1200,800);
 
     energy_all_Ge_trig.reset("Ge_spectra_trig", "Ge spectra after trigger", 20000,0,10000);
-    rf_all_trig.reset("Time_spectra_trig", "Time spectra after trigger", 2000, -1200, 800);
+    rf_all_trig.reset("Time_spectra_trig", "Time spectra after trigger", 2400, -1200, 1200);
     energy_each_trig.reset("Energy_spectra_each_trig", "Energy spectra each after trigger", nbDet,0,nbDet, 5000,0,15000);
     rf_each_trig.reset("RF_timing_each_trig", "RF timing each after trigger", nbDet,0,nbDet, 2000,-1200,800);
   }
@@ -146,8 +149,8 @@ void convert(Hit & hit, FasterReader & reader,
     // Time calibration :
     hit.stamp+=timeshifts[hit.label];
 
-    // Energy calibration :
-    hit.nrj = calibration(hit.adc,  hit.label); // Normal calibraiton
+    // Energy calibration : 
+    hit.nrj = calibration(hit.adc,  hit.label); // Normal calibration
     hit.nrj2 = ((hit.qdc2 == 0) ? 0.f : calibration(hit.qdc2, hit.label)); // Calibrate the qdc2 if any
   
     if (isGe[hit.label] && hit.nrj>10000) continue;
@@ -176,6 +179,7 @@ void convert(Hit & hit, FasterReader & reader,
   // Initialize event builder based on RF :
   RF_Manager rf;
   EventBuilder_136 eventBuilder(&event, &rf);
+  eventBuilder.setNbPeriodsMore(nb_periods_more);
 
   // Handle the first RF downscale :
   RF_Extractor first_rf(tempTree.get(), rf, hit, gindex);
@@ -225,7 +229,7 @@ void convert(Hit & hit, FasterReader & reader,
       if (isGe[hit.label]) histos.energy_all_Ge.Fill(hit.nrj);
       histos.energy_each.Fill(compressedLabel[hit.label], hit.nrj);
     }
-
+    // print_precision(13);
     // Event building :
     if (eventBuilder.build(hit))
     {
@@ -238,9 +242,9 @@ void convert(Hit & hit, FasterReader & reader,
         for (size_t trig_loop = 0; trig_loop<event.size(); trig_loop++)
         {
           auto const & label  = event.labels[trig_loop];
-          auto const & nrj    = event.nrjs  [trig_loop];
           auto const & time   = event.times [trig_loop];
           auto const tof_trig = pulse_ref+time/1000ll;
+          auto const & nrj    = calibration(event.nrjs[trig_loop], label);
 
           histos.rf_all_event.Fill(tof_trig);
           histos.rf_each_event.Fill(compressedLabel[label], tof_trig);
@@ -257,9 +261,7 @@ void convert(Hit & hit, FasterReader & reader,
         eventBuilder.tryAddPreprompt_simple();
     #endif //PREPROMPT
 
-    #ifdef EXTEND
-      eventBuilder.tryAddNextHit_simple(tempTree, loop, hit, int_cast(EXTEND));
-    #endif //EXTEND
+        if (nb_periods_more>0) eventBuilder.tryAddNextHit_simple(tempTree.get(), hit, loop, gindex);
 
         hits_count+=event.size();
         trig_count++;
@@ -286,17 +288,6 @@ void convert(Hit & hit, FasterReader & reader,
     #else
       outTree->Fill();
     #endif
-    }
-    if (eventBuilder.isSingle()) 
-    {
-      if (isDSSD[eventBuilder.singleHit().label]) 
-      {
-        Event temp (event);
-        event = eventBuilder.singleHit();
-        outTree -> Fill();
-        event = temp;
-        continue;
-      }
     }
   }
   convert_timer.Stop();
@@ -369,11 +360,18 @@ int main(int argc, char** argv)
       }
       else if (command == "-Th" || command == "--Thorium")
       {
-        list_runs = "list_Th.list";
+        list_runs = "Thorium.list";
       }
       else if (command == "-U" || command == "--Uranium")
       {
-        list_runs = "list_U.list";
+        list_runs = "Uranium.list";
+      }
+      else if (                   command == "--129")
+      {
+        treat_129 = true;
+        list_runs = "129.list";
+        calibFile = "129.calib";
+        manip = "N-SI-129";
       }
       else if (command == "-h" || command == "--help")
       {
@@ -388,6 +386,7 @@ int main(int argc, char** argv)
         print("(-t  || --timeshifts)                   : Calculate only timeshifts, force it even if it already has been calculated");
         print("(-Th || --Thorium)                      : Treats only the thorium runs (run_nb < 75)");
         print("(-U  || --Uranium)                      : Treats only the uranium runs (run_nb >= 75)");
+        print("(       --129)                          : Treats the N-SI-129 pulsed runs");
         return 0;
       }
     }
@@ -410,14 +409,14 @@ int main(int argc, char** argv)
   // Load some modules :
   Detectors detectors(IDFile);
   Calibration calibration(detectors, calibFile);
-  Manip runs(File(manipPath+list_runs));
+  Manip runs(File(list_runs).string());
   if (one_run) runs.setFolder(one_run_folder);
 
   // Checking of all the modules have been loaded correctly :
   if (!detectors || !calibration || !runs) return -1;
 
   // Setup some parameters :
-  RF_Manager::set_offset_ns(70);
+  RF_Manager::set_offset_ns(rf_shift);
 
   // Loop sequentially through the runs and treat their files in parallel :
   std::string run;
@@ -477,6 +476,7 @@ int main(int argc, char** argv)
         histos.energy_each_trig.Write();
         histos.rf_all_trig.Write();
         histos.rf_each_trig.Write();
+
 
         outFile -> Write();
         outFile -> Close();

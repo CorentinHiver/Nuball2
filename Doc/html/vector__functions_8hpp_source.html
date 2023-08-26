@@ -199,7 +199,7 @@ $(document).ready(function(){initNavTree('vector__functions_8hpp_source.html',''
 <div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T, std::<span class="keywordtype">size_t</span> __size__&gt;</div>
 <div class="line"><a name="l00119"></a><span class="lineno"><a class="line" href="class_static_vector.html#a8f7771c0283c2b2e75b02cef0ba0fce7">  119</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_static_vector.html#a8f7771c0283c2b2e75b02cef0ba0fce7">StaticVector&lt;T,__size__&gt;::push_back_unique</a>(T <span class="keyword">const</span> &amp; t)</div>
 <div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;{</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="preprocessor">#ifdef SAFE</span></div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="preprocessor">#ifndef UNSAFE</span></div>
 <div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;  <span class="keywordflow">if</span> (!this-&gt;has(t)) <span class="keyword">this</span> -&gt; push_back_safe(t);</div>
 <div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="preprocessor">#else</span></div>
 <div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;  <span class="keywordflow">if</span> (!this-&gt;has(t)) <span class="keyword">this</span> -&gt; push_back(t);</div>

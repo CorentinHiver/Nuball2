@@ -257,7 +257,7 @@ void Convertor::convertFile(Hit & hit, FasterReader & reader, Path const & outPa
 // Read faster data to fill the memory resident tree :
   while(reader.Read())
   {
-    if (m_timeshifts) hit.time += m_timeshifts[hit.label];
+    if (m_timeshifts) hit.stamp += m_timeshifts[hit.label];
     if (m_calibration)
     {
       hit.nrj  = m_calibration(hit.adc,hit.label);

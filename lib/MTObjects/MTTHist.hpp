@@ -202,11 +202,20 @@ public:
   operator bool() const & {debug("coucou");return m_exists;}
 
   std::vector<THist*> const & getCollection() const {return m_collection;}
-  #ifdef SAFE
-  THist * operator->() {if (m_merged) return m_merged; else print("MTTHist not merged !!!");}
+  #ifndef UNSAFE
+  THist * operator->() 
+  {
+    if (m_merged) return m_merged; 
+    else 
+    {
+      debug("MTTHist not merged !!!"); 
+      this -> Merge();
+      return nullptr;
+    }
+  }
   #else 
   THist * operator->() {return m_merged;}
-  #endif //SAFE
+  #endif //UNSAFE
 
   operator THist*() {return m_merged;}
   THist * get() {return m_merged;}

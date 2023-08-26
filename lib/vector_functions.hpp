@@ -163,23 +163,23 @@ public:
   /// @brief Add element to the back of the vector. Use for performances. Unsafe. define SAFE for less performance but size checking
   void push_back(T const & e) 
   {
-  #ifdef SAFE
+  #ifndef UNSAFE
     if (m_dynamic_size < m_static_size) m_data[m_dynamic_size++] = e;
     else std::cout << "Capacity of StaticVector<" << typeid(T).name() << "> with size " << m_static_size << " exceeded" << std::endl;
   #else 
     m_data[m_dynamic_size++] = e;
-  #endif //SAFE
+  #endif //UNSAFE
   }
 
   /// @brief Move the element to the back of the vector. Use for performances. Unsafe. define SAFE for less performance but size checking
   void move_back(T && e) 
   {
-  #ifdef SAFE
+  #ifndef UNSAFE
     if (m_dynamic_size < m_static_size) m_data[m_dynamic_size++] = e;
     else std::cout << "Capacity of StaticVector<" << typeid(T).name() << "> with size " << m_static_size << " exceeded" << std::endl;
   #else 
     m_data[m_dynamic_size++] = std::move(e);
-  #endif //SAFE
+  #endif //UNSAFE
   }
 
   /// @brief Add element to the back of the vector only if the vector do not contain it

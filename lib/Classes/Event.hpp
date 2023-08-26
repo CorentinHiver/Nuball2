@@ -180,9 +180,9 @@ void Event::writting(TTree * tree, std::string const & options)
 
 inline void Event::push_back(Hit const & hit)
 {
-#ifdef SAFE
+#ifndef UNSAFE
   if (mult>254) {print("Event mult > 255 !!"); return;}
-#endif
+#endif //UNSAFE
 
                labels  [mult] = hit.label;
   if (write.t) times   [mult] = Time_cast(hit.stamp-stamp);
@@ -205,9 +205,9 @@ inline void Event::push_back(Hit const & hit)
  */
 inline void Event::push_front(Hit const & hit)
 {
-#ifdef SAFE
+#ifndef UNSAFE
   if (mult>254) {print("Event mult > 255 !!"); return;}
-#endif
+#endif //UNSAFE
   for (auto i = mult; i>0; i--)
   {
                  labels  [i] = labels  [i-1];
