@@ -9,7 +9,7 @@
 #include "../libCo.hpp"
 #include <Detectors.hpp>
 // #include <Convertor.hpp>
-// #include <Timeshifts.hpp>
+#include <Timeshifts.hpp>
 
 // int main()
 int main(int argc, char ** argv)
@@ -72,10 +72,10 @@ int main(int argc, char ** argv)
   //   return false;
   // });
   Detectors detectors("index_129.list");
-  Calibration calibration(detectors);
-  // calibration.verbose(true);
-  calibration.calculate(argv[1], (argc>2) ? std::stoi(argv[2]) : -1, "232Th");
-  calibration.verify();
+  // Calibration calibration(detectors);
+  // // calibration.verbose(true);
+  // calibration.calculate(argv[1], (argc>2) ? std::stoi(argv[2]) : -1, "232Th");
+  // calibration.verify();
 
     // int a = 1;
     // int b = 2;
@@ -91,9 +91,14 @@ int main(int argc, char ** argv)
   // calibration.calibrateData(argv[1], (argc>2) ? std::stoi(argv[2]) : 1);
   // calibration.writeCalibratedData("test_calib_data.root");
   
-    // Timeshift ts;
-
-
+    Timeshifts ts;
+    ts.setDetectors(detectors);
+    ts.setOutDir(".");
+    ts.setMult(2,2);
+    ts.verbose(true);
+    ts.calculate(argv[1], (argc>2) ? std::stoi(argv[2]) : -1);
+    ts.verify(argv[1], (argc>2) ? std::stoi(argv[2]) : -1);
+    ts.write("test"); 
   // ("/home/corentin/faster_data/N-SI-129/152Eu_N1_9.fast", "./tests/152Eu_N1_9", nb_files, false);
   // convertor.addFolder("t");
   // convertor.convert()

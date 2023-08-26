@@ -184,13 +184,13 @@ inline void Event::push_back(Hit const & hit)
   if (mult>254) {print("Event mult > 255 !!"); return;}
 #endif //UNSAFE
 
-               labels  [mult] = hit.label;
-  if (write.t) times   [mult] = Time_cast(hit.stamp-stamp);
-  if (write.e) adcs    [mult] = hit.adc;
-  if (write.E) nrjs    [mult] = hit.nrj;
-  if (write.q) qdc2s   [mult] = hit.qdc2;
-  if (write.Q) nrj2s   [mult] = hit.nrj2;
-  if (write.p) pileups [mult] = hit.pileup;
+  labels  [mult] = hit.label;
+  times   [mult] = Time_cast(hit.stamp-stamp);
+  adcs    [mult] = hit.adc;
+  nrjs    [mult] = hit.nrj;
+  qdc2s   [mult] = hit.qdc2;
+  nrj2s   [mult] = hit.nrj2;
+  pileups [mult] = hit.pileup;
   mult++;
 }
 
