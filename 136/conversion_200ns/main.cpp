@@ -28,7 +28,7 @@
 // 3. Declare some global variables :
 std::string IDFile = "index_129.list";
 std::string calibFile = "136_final.calib";
-Folder manip = "N-SI-129";
+Folder manip = "N-SI-136";
 std::string list_runs = "list_runs.list";
 std::string output = "-root_P";
 int  nb_files_ts = 50;
@@ -40,7 +40,7 @@ bool histoed = false;
 bool one_run = false;
 std::string one_run_folder = "";
 ulonglong max_hits = -1;
-bool treat_129 = true;
+bool treat_129 = false;
 
 bool extend_periods = false; // To take more than one period after a event trigger
 uint nb_periods_more = 0; // Number of periods to extend after an event that triggered
@@ -368,6 +368,7 @@ int main(int argc, char** argv)
       }
       else if (                   command == "--129")
       {
+        print("coucou");
         treat_129 = true;
         list_runs = "129.list";
         calibFile = "129.calib";
