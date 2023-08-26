@@ -801,47 +801,47 @@ void Timeshifts::analyse()
   {
     switch (label)
     {
-      case (800) : forced_shifts[label] = -200000; break;
-      case (801) : forced_shifts[label] = -200000; break;
-      case (802) : forced_shifts[label] = -223700; break;
-      case (803) : forced_shifts[label] = -224013; break;
-      case (804) : forced_shifts[label] = -223337; break;
-      case (805) : forced_shifts[label] = -233668; break;
-      case (806) : forced_shifts[label] = -234377; break;
-      case (807) : forced_shifts[label] = -233857; break;
-      case (808) : forced_shifts[label] = -233677; break;
-      case (809) : forced_shifts[label] = -223296; break;
-      case (810) : forced_shifts[label] = -224911; break;
-      case (811) : forced_shifts[label] = -224341; break;
-      case (812) : forced_shifts[label] = -224824; break;
-      case (813) : forced_shifts[label] = -227513; break;
-      case (814) : forced_shifts[label] = -227109; break;
-      case (815) : forced_shifts[label] = -227453; break;
-      case (821) : forced_shifts[label] = -233209; break;
-      case (822) : forced_shifts[label] = -233408; break;
-      case (825) : forced_shifts[label] = -243012; break;
-      case (826) : forced_shifts[label] = -242249; break;
-      case (828) : forced_shifts[label] = -235076; break;
-      case (829) : forced_shifts[label] = -232000; break;
-      case (830) : forced_shifts[label] = -242684; break;
-      case (831) : forced_shifts[label] = -238313; break;
-      case (832) : forced_shifts[label] = -238868; break;
-      case (833) : forced_shifts[label] = -238871; break;
-      case (834) : forced_shifts[label] = -235886; break;
-      case (835) : forced_shifts[label] = -234000; break;
-      case (840) : forced_shifts[label] = -250407; break;
-      case (841) : forced_shifts[label] = -220000; break;
-      case (842) : forced_shifts[label] = -240967; break;
-      case (843) : forced_shifts[label] = -249883; break;
-      case (845) : forced_shifts[label] = -255466; break;
-      case (846) : forced_shifts[label] = -245108; break;
-      case (847) : forced_shifts[label] = -250381; break;
-      case (848) : forced_shifts[label] = -253537; break;
-      case (850) : forced_shifts[label] = -246108; break;
-      case (851) : forced_shifts[label] = -240327; break;
-      case (852) : forced_shifts[label] = -238842; break;
-      case (853) : forced_shifts[label] = -250727; break;
-      case (854) : forced_shifts[label] = -242609; break;
+      // case (800) : forced_shifts[label] = -200000; break;
+      // case (801) : forced_shifts[label] = -200000; break;
+      // case (802) : forced_shifts[label] = -223700; break;
+      // case (803) : forced_shifts[label] = -224013; break;
+      // case (804) : forced_shifts[label] = -223337; break;
+      // case (805) : forced_shifts[label] = -233668; break;
+      // case (806) : forced_shifts[label] = -234377; break;
+      // case (807) : forced_shifts[label] = -233857; break;
+      // case (808) : forced_shifts[label] = -233677; break;
+      // case (809) : forced_shifts[label] = -223296; break;
+      // case (810) : forced_shifts[label] = -224911; break;
+      // case (811) : forced_shifts[label] = -224341; break;
+      // case (812) : forced_shifts[label] = -224824; break;
+      // case (813) : forced_shifts[label] = -227513; break;
+      // case (814) : forced_shifts[label] = -227109; break;
+      // case (815) : forced_shifts[label] = -227453; break;
+      // case (821) : forced_shifts[label] = -233209; break;
+      // case (822) : forced_shifts[label] = -233408; break;
+      // case (825) : forced_shifts[label] = -243012; break;
+      // case (826) : forced_shifts[label] = -242249; break;
+      // case (828) : forced_shifts[label] = -235076; break;
+      // case (829) : forced_shifts[label] = -232000; break;
+      // case (830) : forced_shifts[label] = -242684; break;
+      // case (831) : forced_shifts[label] = -238313; break;
+      // case (832) : forced_shifts[label] = -238868; break;
+      // case (833) : forced_shifts[label] = -238871; break;
+      // case (834) : forced_shifts[label] = -235886; break;
+      // case (835) : forced_shifts[label] = -234000; break;
+      // case (840) : forced_shifts[label] = -250407; break;
+      // case (841) : forced_shifts[label] = -220000; break;
+      // case (842) : forced_shifts[label] = -240967; break;
+      // case (843) : forced_shifts[label] = -249883; break;
+      // case (845) : forced_shifts[label] = -255466; break;
+      // case (846) : forced_shifts[label] = -245108; break;
+      // case (847) : forced_shifts[label] = -250381; break;
+      // case (848) : forced_shifts[label] = -253537; break;
+      // case (850) : forced_shifts[label] = -246108; break;
+      // case (851) : forced_shifts[label] = -240327; break;
+      // case (852) : forced_shifts[label] = -238842; break;
+      // case (853) : forced_shifts[label] = -250727; break;
+      // case (854) : forced_shifts[label] = -242609; break;
       default: forced_shifts[label] = 0; break;
     }
   }
@@ -888,6 +888,7 @@ void Timeshifts::analyse()
     // Attention !!! This works only if the peak lies bewteen 0 and the RF period, otherwise there will be a shift
     if ((m_RF_preferred[alias] || m_RF_preferred_label[alias]) && has_RF)
     {
+  #ifdef USE_RF
       auto const & RF_zero = m_timeshifts[RF_Manager::label];
       m_histograms_VS_RF[label].Merge();
       if (m_histograms_VS_RF[label].Integral() < 50 ) {print("Not a lot of hits : only", m_histograms_VS_RF[label].Integral(), "for", name); continue;}
@@ -907,7 +908,7 @@ void Timeshifts::analyse()
         if (getMeanPeak(m_histograms_VS_RF[label], mean)) m_timeshifts[label] = RF_zero-Shift_cast(mean);
         if (m_verbose) print( "Mean :", m_timeshifts[label], "with max =", int_cast(m_histograms_VS_RF[label] -> GetMaximum()), "counts.");
       }
-      
+  #endif //USE_RF
     }
 
     // B. Using normal coincidence time spectra : 
