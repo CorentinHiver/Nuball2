@@ -441,7 +441,6 @@ int main(int argc, char** argv)
     {
       timeshifts.dT_with_raising_edge(dssd_a);
       timeshifts.dT_with_RF(dssd_a);
-      nb_files_ts = 20;
     }
 
 
