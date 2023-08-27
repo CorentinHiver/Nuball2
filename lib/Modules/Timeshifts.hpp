@@ -204,7 +204,7 @@ public:
   void setEminADC(ADC const & EminADC) {m_Emin_ADC = EminADC;}
 
   void dT_with_RF(dAlias const & alias) {m_RF_preferred[alias] = true;}
-  void dT_with_raising_edge(dAlias const & alias) {m_RF_preferred[alias] = true;}
+  void dT_with_raising_edge(dAlias const & alias) {m_edge_preferred[alias] = true;}
 
   /**
    * @brief 

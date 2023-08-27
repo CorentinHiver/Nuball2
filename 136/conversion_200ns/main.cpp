@@ -369,7 +369,6 @@ int main(int argc, char** argv)
       }
       else if (                   command == "--129")
       {
-        print("coucou");
         treat_129 = true;
         list_runs = "129.list";
         calibFile = "129.calib";
@@ -449,7 +448,6 @@ int main(int argc, char** argv)
     if (!timeshifts || (only_timeshifts && overwrite)) 
     { 
       timeshifts.setDetectors(detectors);
-      timeshifts.verbose();
       timeshifts.setMult(2,4);
       timeshifts.setOutDir(outPath);
       timeshifts.checkForPreprompt(check_preprompt);
