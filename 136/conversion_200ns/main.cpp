@@ -449,6 +449,7 @@ int main(int argc, char** argv)
     if (!timeshifts || (only_timeshifts && overwrite)) 
     { 
       timeshifts.setDetectors(detectors);
+      timeshifts.verbose();
       timeshifts.setMult(2,4);
       timeshifts.setOutDir(outPath);
       timeshifts.checkForPreprompt(check_preprompt);
