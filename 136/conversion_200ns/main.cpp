@@ -438,7 +438,12 @@ int main(int argc, char** argv)
 
     // Timeshifts loading : 
     Timeshifts timeshifts(outPath, run_name);
-    if (treat_129) timeshifts.dT_with_raising_edge(dssd_a);
+    if (treat_129) 
+    {
+      timeshifts.dT_with_raising_edge(dssd_a);
+      timeshifts.dT_with_RF(dssd_a);
+    }
+
 
     // If no timeshifts data already available, calculate it :
     if (!timeshifts || (only_timeshifts && overwrite)) 
