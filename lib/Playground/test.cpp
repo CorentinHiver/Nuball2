@@ -71,10 +71,15 @@ int main(int argc, char ** argv)
   //   }
   //   return false;
   // });
+  MTObject::Initialize(4);
   Detectors detectors("index_129.list");
-  // Calibration calibration(detectors);
-  // // calibration.verbose(true);
-  // calibration.calculate(argv[1], (argc>2) ? std::stoi(argv[2]) : -1, "232Th");
+  Calibration calibration(detectors);
+  // calibration.loadRootHisto("232Th.root");
+  // pauseCo();
+  // calibration.verbose(true);
+  // calibration.calculate(argv[1], (argc>2) ? std::stoi(argv[2]) : -1, "152Eu");
+  calibration.loadData(argv[1], (argc>2) ? std::stoi(argv[2]) : -1);
+  calibration.writeRawRoot("test.root");
   // calibration.verify();
 
     // int a = 1;
@@ -85,20 +90,21 @@ int main(int argc, char ** argv)
     // b = 5;
     // print(c,d);
 
-  MTObject::Initialize(4);
 
-  // calibration.load("136_final.calib");
+  // calibration.load("../../136/conversion_200ns/129.calib");
   // calibration.calibrateData(argv[1], (argc>2) ? std::stoi(argv[2]) : 1);
   // calibration.writeCalibratedData("test_calib_data.root");
 
-    Timeshifts ts;
-    ts.setDetectors(detectors);
-    ts.setOutDir(".");
-    ts.setMult(2,2);
-    ts.verbose(true);
-    ts.calculate(argv[1], (argc>2) ? std::stoi(argv[2]) : -1);
-    ts.verify(argv[1], (argc>3) ? std::stoi(argv[3]) : 5);
-    ts.write("test"); 
+  // MTObject::Initialize(std::stoi(argv[1]));
+  //   Timeshifts ts;
+  //   ts.setDetectors(detectors);
+  //   ts.setOutDir(".");
+  //   ts.setMult(2,2);
+  //   ts.verbose(true);
+  //   ts.calculate("/home/corentin/faster_data/N-SI-136/run_15.fast", 50);
+    // ts.calculate(argv[1], (argc>2) ? std::stoi(argv[2]) : -1);
+    // ts.verify(argv[1], (argc>3) ? std::stoi(argv[3]) : 5);
+    // ts.write("test"); 
 
   // ("/home/corentin/faster_data/N-SI-129/152Eu_N1_9.fast", "./tests/152Eu_N1_9", nb_files, false);
   // convertor.addFolder("t");

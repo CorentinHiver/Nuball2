@@ -16,10 +16,10 @@
  * @brief Allows one to manipulate the results of peaks
 */
 
-class pic_fit_result
+class Fit
 {
 public:
-  pic_fit_result(){};
+  Fit(){};
 
   void resize(int size)
   {
@@ -29,6 +29,36 @@ public:
     sigma.resize(size);
   };
 
+  void clear()
+  {
+    peaks.clear();
+    cmeasures.clear();
+
+    mean.clear();
+    sigma.clear();
+
+    x.clear() ;
+    y.clear() ;
+    ex.clear();
+    ey.clear();
+  
+    integral = -1.0;
+    chi2 = -1.0;
+    parameter0 = 0.0;
+    parameter1 = 1;
+    parameter2 = 0.0;
+    parameter3 = 0.0;
+    scalefactor = 0.0;
+    keVperADC = 0.0;
+    order = 0;
+
+    name = "";
+
+    m_label = 0;
+    m_exist = false;
+    m_enough_counts = false;
+    m_peaks_found = false;
+  }
 
   Label const & label() const {return m_label;}
 
@@ -80,6 +110,8 @@ public:
   double keVperADC = 0.0;
   uchar order = 0;
 
+  std::string name;
+
 private:
   Label m_label = 0;
   bool m_exist = false;
@@ -87,7 +119,7 @@ private:
   bool m_peaks_found = false;
 };
 
-std::ofstream& operator<<(std::ofstream& fout, pic_fit_result const & fit)
+std::ofstream& operator<<(std::ofstream& fout, Fit const & fit)
 {
   fout << fit.label();
   fout << std::setprecision(4);
@@ -108,7 +140,7 @@ std::ofstream& operator<<(std::ofstream& fout, pic_fit_result const & fit)
   return fout;
 }
 
-using Fits = std::vector <pic_fit_result>;
+using Fits = std::vector <Fit>;
 
 /**
  * @brief 
@@ -144,7 +176,7 @@ public:
     void setBins(std::string const & parameters);
   } m_histos;
 
-  ~Calibration() {for (auto & histo : m_histos.spectra) delete histo.second;}
+  // ~Calibration() {for (auto & histo : m_histos.spectra) if (histo.second) delete histo.second;}
 
   Calibration() {m_ok = false;}
 
@@ -209,6 +241,8 @@ public:
   void loadData(std::string const & dataDir, int const & nb_files = -1);
   static void fillHisto(Hit & hit, FasterReader & reader, Calibration & calib);
   void analyse(std::string const & source = "152Eu");
+  void peakFinder(std::string const & source);
+  void fitCalibration(Fits & fits);
   void writePosPeaks(std::string const & outfilename);
   void writeData(std::string const & outfilename);
   void writeRawRoot(std::string const & outfilename);
@@ -334,7 +368,11 @@ void Calibration::histograms::Initialize(Calibration & calib)
   {
     auto const & name = calib.m_detectors[label];
     auto const & alias = Detectors::alias(label);
-    if (alias == dAlias::null || alias == dAlias::RF) continue;
+    if (alias == dAlias::null || alias == dAlias::RF)
+    {
+      calib_spectra[label].reset((std::to_string(label)+"_calib").c_str(), (std::to_string(label)+" calibrated spectra").c_str(), 1000, 0, 1000);
+      raw_spectra[label].reset((std::to_string(label)+"_raw").c_str(), (std::to_string(label)+" raw spectra").c_str(), 1000, 0, 1000);
+    }
     calib_spectra[label].reset((name+"_calib").c_str(), (name+" calibrated spectra").c_str(), m_bins_calib[alias], m_min_calib[alias], m_max_calib[alias]);
     raw_spectra[label].reset((name+"_raw").c_str(), (name+" raw spectra").c_str(), m_bins_raw[alias], m_min_raw[alias], m_max_raw[alias]);
   }
@@ -377,6 +415,7 @@ void Calibration::calculate(std::string const & dataDir, int const & nb_files, s
 void Calibration::calculate(std::string const & histograms, std::string const & source)
 {
   print ("Calculating calibrations from histogram data in", histograms);
+  this -> Initialize();
   // this -> loadRootHisto(file); TBD
   this -> analyse(source);
   this -> writeData(source+".calib");
@@ -402,12 +441,14 @@ void Calibration::loadRootHisto(std::string const & histograms)
         std::string name = hist -> GetName();
         for (auto const & _name : m_detectors)
         {
-          if (name.find(_name))
+          if (_name!="" && name.find(_name) != std::string::npos)
           {
             auto const & label = m_detectors.getLabel(_name);
-            if (name.find("_raw")) m_histos.raw_spectra[label] = dynamic_cast<TH1F*> (hist->Clone(_name.c_str()));
+            if (name.find("_raw")) m_histos.raw_spectra[label] = hist;
             else if (name.find("_calib")) m_histos.calib_spectra[label] = dynamic_cast<TH1F*> (hist->Clone(_name.c_str()));
             else m_histos.spectra[label] = dynamic_cast<TH1F*> (hist->Clone(_name.c_str()));
+            m_histos.raw_spectra[label].Print();
+            break;
           }
         }
       }
@@ -492,11 +533,12 @@ void Calibration::fillHisto(Hit & hit, FasterReader & reader, Calibration & cali
 {
   if (calib.calibrate_data()) while(reader.Read()) 
   {
+    if (calib.m_order[hit.label]<1) continue;
     auto nrj_cal = calib.calibrate(hit.adc, hit.label);
     calib.m_histos.calib_spectra[hit.label].Fill(nrj_cal);
     calib.m_histos.all_calib[calib.detectors().alias(hit.label)].Fill(compressedLabel[hit.label], nrj_cal);
   }
-  else while(reader.Read()) 
+  else while(reader.Read())
   {
     calib.m_histos.raw_spectra[hit.label].Fill(hit.adc);
   }
@@ -508,45 +550,8 @@ bool isTripleAlpha(std::string const & source_name)
           source_name == "triple-alpha" || source_name == "triplealpha");
 }
 
-
-/**
- * @brief Analyse the spectra to extract calibration coefficients
- * @details
- * The peak finding follows the following principle : 
- * We start from the bin at the very right side of the spectra.
- * Then we add the value of the bin to the integral counter.
- * Then we add the value of the next bin on the left, then the next, etc.. 
- * That is, we integrate the spectra from right to left
- * The moment the first peak is found, the higher energy one, the integral will suddenly increase
- * Then we have to determine a threshold above which we say "we have found the first peak"
- * From this we determine a really rough first linear calibration.
- * This allows us to find, for each other peak, an energy windows in which it should be.
- * Once this window established, we find its centroid.
- * Then we create a smaller window and find again the centroid.
- * A third window (which may not me important ?) event narrower is set around the peak.
- * Then the peak is fitted and the mean value of the gaussian fit added to the calibration curve.
- * Finally, the fit of the calibration curve gives the calibration coefficients.
- * 
- * The threshold is taken as the ratio between the integral and the total integral of the spectra, 
- * so that the process do not depend neither on different counting rates nor on different calibration duration.
- * Only issue : it depends on the kind of detector and to some extend to the geometry. That is, this calibration
- * is not well suited for paris detectors... Also, if a peak is absent due to for instance high energy threshold 
- * of the detector (typically 121keV of 152Eu is absent in some noisy channels) then the calibration will fail
- * 
- * @attention The most difficult part is to find the value of the threshold, wich must be different for each kind of detector. 
- * If it is different for differents detectors of the same type (e.g. paris) then the calibration requires additionnal work.
- * 
- * @attention Take care of the binning of the spectra. If there is too much or not enough bins then the peak fitting will fail, 
- * if the maximum ADC value is lower than the higher energy peak then the peak findind will fail. Also, everything supposes the
- * minimum bin corresponds to 0, otherwise it might fail.
- * 
- */
-void Calibration::analyse(std::string const & source)
+void Calibration::peakFinder(std::string const & source)
 {
-  print("Exctracting calibration parameters from spectra");
-  // -----------------------------
-  // Parameterize the pics to fit :
-  // -----------------------------
   int nb_pics = 0;
   double E_right_pic = 0.f;
   for (Label label = 0; label<m_detectors.size(); label++)
@@ -565,8 +570,9 @@ void Calibration::analyse(std::string const & source)
 
     histo.Merge();
     
-    pic_fit_result & fit = m_fits[label];
+    auto & fit = m_fits[label];
     fit.setLabel(label);
+    fit.name = name;
 
     if (m_verbose) {print(); print(name);}
 
@@ -715,7 +721,7 @@ void Calibration::analyse(std::string const & source)
       }
     }
     else {if (m_verbose) print("Detector", name, "not handled !"); continue;}
-    fit.resize(nb_pics);// Resize the intern vectors of the detector's pic_fit_result
+    fit.resize(nb_pics);// Resize the intern vectors of the detector's Fit
 
     int vmaxchan = 0;// Position of the right pic in bins (e.g. the 1408 keV in Eu)
     double & scalefactor = fit.scalefactor; // To adapt to the binnin of the histogram (ADC/bin)
@@ -838,7 +844,15 @@ void Calibration::analyse(std::string const & source)
     }
 
     xaxis -> UnZoom();
+  }
+}
 
+void Calibration::fitCalibration(Fits & fits)
+{
+  for (Label label = 0; label<m_detectors.size(); label++)
+  {
+    Fit & fit = fits[label];
+    auto const & nb_pics = fit.peaks.size();
     auto & x  = fit.x ;
     auto & y  = fit.y ;
     auto & ex = fit.ex;
@@ -849,19 +863,19 @@ void Calibration::analyse(std::string const & source)
     ex.resize(nb_pics);
     ey.resize(nb_pics);
 
-    for (int j=0; j < nb_pics; j++)
+    for (size_t j=0; j < nb_pics; j++)
     {
-      if (m_verbose) std::cout << "Energy = " << peaks[j] << " Channel = " << fit.cmeasures[j]*scalefactor << std::endl;
-      x [j]=fit.cmeasures[j]*scalefactor;
-      y [j]=peaks[j];
+      if (m_verbose) std::cout << "Energy = " << fit.peaks[j] << " Channel = " << fit.cmeasures[j]*fit.scalefactor << std::endl;
+      x [j]=fit.cmeasures[j]*fit.scalefactor;
+      y [j]=fit.peaks[j];
       ex[j]=0;
       ey[j]=0;
     }
 
     // If faudrait aussi revoir ce fit ici ! Et éventuellement les erreurs
-    auto c1 = TCanvas(("c_"+name).c_str());
+    auto c1 = TCanvas(("c_"+fit.name).c_str());
     TGraphErrors* gr = new TGraphErrors(nb_pics,x.data(),y.data(),ex.data(),ey.data());
-    gr -> SetName((name+"_gr").c_str());
+    gr -> SetName((fit.name+"_gr").c_str());
     TF1* linear(new TF1("lin","pol1")); //Range and number of fit parameters
     gr->Fit(linear,"q");
     TF1* binom (new TF1("pol", "pol2"));
@@ -890,6 +904,48 @@ void Calibration::analyse(std::string const & source)
       fit.exists(false);
     }
   }
+}
+
+/**
+ * @brief Analyse the spectra to extract calibration coefficients
+ * @details
+ * The peak finding follows the following principle : 
+ * We start from the bin at the very right side of the spectra.
+ * Then we add the value of the bin to the integral counter.
+ * Then we add the value of the next bin on the left, then the next, etc.. 
+ * That is, we integrate the spectra from right to left
+ * The moment the first peak is found, the higher energy one, the integral will suddenly increase
+ * Then we have to determine a threshold above which we say "we have found the first peak"
+ * From this we determine a really rough first linear calibration.
+ * This allows us to find, for each other peak, an energy windows in which it should be.
+ * Once this window established, we find its centroid.
+ * Then we create a smaller window and find again the centroid.
+ * A third window (which may not me important ?) event narrower is set around the peak.
+ * Then the peak is fitted and the mean value of the gaussian fit added to the calibration curve.
+ * Finally, the fit of the calibration curve gives the calibration coefficients.
+ * 
+ * The threshold is taken as the ratio between the integral and the total integral of the spectra, 
+ * so that the process do not depend neither on different counting rates nor on different calibration duration.
+ * Only issue : it depends on the kind of detector and to some extend to the geometry. That is, this calibration
+ * is not well suited for paris detectors... Also, if a peak is absent due to for instance high energy threshold 
+ * of the detector (typically 121keV of 152Eu is absent in some noisy channels) then the calibration will fail
+ * 
+ * @attention The most difficult part is to find the value of the threshold, wich must be different for each kind of detector. 
+ * If it is different for differents detectors of the same type (e.g. paris) then the calibration requires additionnal work.
+ * 
+ * @attention Take care of the binning of the spectra. If there is too much or not enough bins then the peak fitting will fail, 
+ * if the maximum ADC value is lower than the higher energy peak then the peak findind will fail. Also, everything supposes the
+ * minimum bin corresponds to 0, otherwise it might fail.
+ * 
+ */
+void Calibration::analyse(std::string const & source)
+{
+  print("Exctracting calibration parameters from spectra");
+  // -----------------------------
+  // Parameterize the pics to fit :
+  // -----------------------------
+  peakFinder(source);
+  fitCalibration(m_fits);
 }
 
 //DEV :

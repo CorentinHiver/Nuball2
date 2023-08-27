@@ -140,6 +140,21 @@ public:
   }
   void operator=(std::nullptr_t) {reset(nullptr);}
 
+  void operator=(THist * hist)
+  {
+    if (!hist || hist -> IsZombie()) 
+    {
+      m_is_merged = false;
+      m_exists = false;
+      m_integral = 0;
+    }
+    m_str_name = hist->GetName();
+    m_is_merged = true;
+    m_collection.resize(1);
+    m_merged = m_collection[0] = hist;
+    m_exists = true;
+    m_integral = hist->Integral();
+  }
 
   ~MTTHist();
 
@@ -254,6 +269,7 @@ private:
   ulonglong m_integral = 0ull;
 
   THist* m_merged = nullptr;
+  bool m_merged_deleted = false;
 
   #ifndef MTTHIST_MONO
   bool m_is_merged = false;
@@ -478,9 +494,10 @@ if (MTObject::ON)
     // delete m_merged;
   }
 }
-else 
+else if (!m_merged_deleted && m_exists)
 {
   delete m_merged;
+  m_merged_deleted = true;
 }
 
 #endif //MTTHIST_MONO
