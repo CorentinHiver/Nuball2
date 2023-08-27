@@ -31,8 +31,8 @@ std::string calibFile = "136_final.calib";
 Folder manip = "N-SI-136";
 std::string list_runs = "list_runs.list";
 std::string output = "-root_P";
-int  nb_files_ts = 50;
-int  nb_files = -1;
+int nb_files_ts = 60;
+int nb_files = -1;
 int rf_shift = 40;
 bool only_timeshifts = false; // No conversion : only calculate the timeshifts
 bool overwrite = false; // Overwrite already existing converted root files. Works also with -t options (only_timeshifts)
@@ -438,12 +438,13 @@ int main(int argc, char** argv)
 
     // Timeshifts loading : 
     Timeshifts timeshifts(outPath, run_name);
+    if (treat_129) timeshifts.dT_with_raising_edge(dssd_a);
 
     // If no timeshifts data already available, calculate it :
     if (!timeshifts || (only_timeshifts && overwrite)) 
     { 
       timeshifts.setDetectors(detectors);
-      timeshifts.setMult(2,3);
+      timeshifts.setMult(2,4);
       timeshifts.setOutDir(outPath);
       timeshifts.checkForPreprompt(check_preprompt);
 
