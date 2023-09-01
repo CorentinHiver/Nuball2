@@ -691,7 +691,9 @@ void Timeshifts::Fill(Event const & event, RF_Manager & rf)
 
   // There are 2 imbricated loops : the first one fills the time spectra and looks for the time reference.
   // If found, it opens another loop to fill the coincidence time spectra
+#ifdef USE_RF
   auto const & rf_Ref = rf.pulse_ToF(event.stamp);
+#endif //USE_RF
   for (int loop_i = 0; loop_i < mult; loop_i++)
   {
     bool coincFilled = false; // To only fill the coincidence once.
@@ -722,6 +724,7 @@ void Timeshifts::Fill(Event const & event, RF_Manager & rf)
     if (event.labels[loop_i] == m_time_reference_label && !coincFilled)
     {
       coincFilled = true;
+      // print("coucou");
       // Extract informations of the reference :
       auto const & refPos = loop_i; // Position of the reference in the event
       auto const & refE = event.nrjs[refPos]; // Energy deposited in the reference detector
@@ -732,7 +735,7 @@ void Timeshifts::Fill(Event const & event, RF_Manager & rf)
       m_EnergyRef.Fill(refE);
 
       // Loop over the other hits of the event :
-      for (uchar loop_j = 0; loop_j<mult; loop_j++)
+      for (int loop_j = 0; loop_j<mult; loop_j++)
       {
         auto const & label = event.labels[loop_j];
 

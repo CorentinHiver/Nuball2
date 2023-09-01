@@ -81,10 +81,12 @@ public:
 
   void set(Timestamp new_timestamp, Timestamp _period) 
   {
+  #ifdef USE_RF
     auto const & tperiod = Time_cast(new_timestamp-last_hit);
     if (tperiod > 0 && tperiod<1.5*USE_RF*1000000) period = double_cast(tperiod)/1000.;
     else period = double_cast(_period);
     last_hit = new_timestamp;
+  #endif //USE_RF
   }
 
 

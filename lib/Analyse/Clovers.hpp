@@ -244,7 +244,7 @@ public:
     {
       if (normal)
       {
-        return (time>-20 && time<15);
+        return (time>-20 && time<5);
       }
       else 
       {

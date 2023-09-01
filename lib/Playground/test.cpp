@@ -2,14 +2,14 @@
 // #define N_SI_136
 // #define USE_DSSD
 // #define USE_PARIS
-#define USE_RF 200
+// #define USE_RF 200
 
 // #include "Modules/Timeshifts.hpp"
 #include "Modules/Calibration.hpp"
 #include "../libCo.hpp"
 #include <Detectors.hpp>
-// #include <Convertor.hpp>
 #include <Timeshifts.hpp>
+#include <Convertor.hpp>
 
 // int main()
 int main(int argc, char ** argv)
@@ -64,22 +64,34 @@ int main(int argc, char ** argv)
 
   // Convertor convertor(argc, argv, [](const Event& event)
   // {
-  //   for (Mult hit = 0; hit<event.mult; hit++)
+  //   for (int hit = 0; hit<event.mult; hit++)
   //   {
   //     auto const & label = event.labels[hit];
   //     if (isDSSD[label]) return true;
   //   }
   //   return false;
   // });
-  MTObject::Initialize(4);
-  Detectors detectors("index_129.list");
-  Calibration calibration(detectors);
+
+    MTObject::Initialize(1);
+    Detectors detectors("index_129.list");
+    Timeshifts ts;
+    ts.setDetectors(detectors);
+    ts.setOutDir(".");
+    ts.setMult(2,2);
+    ts.verbose(true);
+    ts.calculate(argv[1], (argc>2) ? std::stoi(argv[2]) : -1);
+    ts.verify(argv[1], (argc>3) ? std::stoi(argv[3]) : 5);
+    ts.write("136_60Co"); 
+
+  // MTObject::Initialize(4);
+  // Detectors detectors("index_129.list");
+  // Calibration calibration(detectors);
   // calibration.loadRootHisto("232Th.root");
   // pauseCo();
   // calibration.verbose(true);
   // calibration.calculate(argv[1], (argc>2) ? std::stoi(argv[2]) : -1, "152Eu");
-  calibration.loadData(argv[1], (argc>2) ? std::stoi(argv[2]) : -1);
-  calibration.writeRawRoot("test.root");
+  // calibration.loadData(argv[1], (argc>2) ? std::stoi(argv[2]) : -1);
+  // calibration.writeRawRoot("test.root");
   // calibration.verify();
 
     // int a = 1;
