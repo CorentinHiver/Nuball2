@@ -1,5 +1,5 @@
-#ifndef PARIS_H
-#define PARIS_H
+#ifndef PARIS_HPP
+#define PARIS_HPP
 
 #include "../Classes/Event.hpp"
 #include "Arrays/Paris.h"
@@ -39,21 +39,29 @@ public:
   static std::array<uchar, 1000> index  ; // Link the label to the module's index in the cluster
 
   // ---- Initialization of static arrays ---- //
-  void static Initialize()
+  void static InitializeArrays()
   {
-    for (int l = 0; l<1000; l++)
+    if (!s_initialised)
     {
-      is[l]  = is_paris(l);
-      cluster[l] = static_cast<uchar> (l>500);
-      index[l] = label_to_index(l)%(paris_labels.size()/2);
+    #ifdef MTOBJECT_HPP
+      lock_mutex(MTObject::mutex);
+    #endif //MTOBJECT_HPP
+      print("Initialising Paris arrays");
+      for (int l = 0; l<1000; l++)
+      {
+        is[l]  = is_paris(l);
+        cluster[l] = static_cast<uchar> (l>500);
+        index[l] = label_to_index(l)%(paris_labels.size()/2);
+      }
+      s_initialised = true;
     }
   }
   // ______________________________________________________________ //
 
   // _____________________________________________________________ //
   // -----------------------  Paris Class  ----------------------- //
-  Paris(){}
-  void Initialize(); // Parameters : the number of clusters, and the number of modules in each cluster
+  Paris(){this -> InitializeArrays();}
+  void Initialize();
   void Fill(Event const & event, size_t const & i);
   void Reset();
   void Analyse();
@@ -67,48 +75,47 @@ public:
 
   // _____________________________________________________________ //
   // ------------------  User defined methods -------------------- //
-  ParisCluster & back  () { return clusterBack;}
-  ParisCluster & front () { return clusterFront;}
+  auto & back  () { return clusterBack;}
+  auto & front () { return clusterFront;}
   // _____________________________________________________________ //
 
 private:
+  static bool s_initialised;
   bool m_initialised = false;
 };
 
-std::array<bool,  1000> Paris::is;    // Does the label correspond to a Paris ?
+bool Paris::s_initialised = false;
+
+std::array<bool,  1000> Paris::is;     // Does the label correspond to a Paris ?
 std::array<uchar, 1000> Paris::cluster;// Link the label to its cluster (0 : back, 1 : front)
 std::array<uchar, 1000> Paris::index  ;// Link the label to the module's index in the cluster
 
-void Paris::Initialize(std::size_t const & nb_clusters, std::size_t const & nb_modules)
+void Paris::Initialize()
 {// Parameters : number of clusters, number of modules in each cluster
   if (!m_initialised)
   {
-    // for (auto & cluster : parisClusters)
-    // {
-    //   cluster.Initialize(nb_modules);
-    //   for (std::size_t i = 0; i<nb_modules; i++)
-    //   {
-    //     cluster.positions[i] = paris_getPositionModule(i);
-    //   }
-    //   cluster.InitializeBidims();
-    // }
+    clusterBack.Initialize();
+    clusterFront.Initialize();
     m_initialised = true;
   }
 }
 
 void inline Paris::Reset()
 {
-  for (auto & cluster : parisClusters) cluster.Reset();
+  clusterBack.Reset();
+  clusterFront.Reset();
 }
 
 void inline Paris::Fill(Event const & event, size_t const & i)
 {
-  parisClusters[cluster[event.labels[i]]] . Fill(event, i, index[event.labels[i]]);
+  clusterBack.Fill(event, i, index[event.labels[i]]);
+  clusterFront.Fill(event, i, index[event.labels[i]]);
 }
 
 void inline Paris::Analyse()
 {
-  for (auto & cluster : parisClusters) cluster.Analyse();
+  clusterBack.Analyse();
+  clusterFront.Analyse();
 }
 
-#endif //PARIS_H
+#endif //PARIS_HPP

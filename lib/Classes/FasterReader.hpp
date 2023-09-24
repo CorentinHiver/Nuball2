@@ -139,9 +139,12 @@ public:
   ///@brief Get the name of the file being read
   auto const & getFilename() const {return m_filename;}
 
+  ///@brief Returns the hits counter
+  auto const & getCounter() const {return m_counter;}
+
 private:
   
-  ///@brief Setup the fasterac objects for reading
+  ///@brief Setup the fasterac.h library to read the data
   bool Initialize();
 
   bool ReadSimple();
@@ -216,7 +219,6 @@ bool inline FasterReader::Initialize()
     std::cout << "File " << m_filename << " not found..." << std::endl;
     return false;
   }
-
   else if (!file.good())
   {
     std::cout << "File " << m_filename << " not good..." << std::endl;
@@ -258,6 +260,7 @@ bool inline FasterReader::Read()
 {
   if (m_counter++>m_maxHits) 
   {
+    print(m_counter, m_maxHits);
     return (m_write = false);
   }
 #ifdef FASTER_GROUP

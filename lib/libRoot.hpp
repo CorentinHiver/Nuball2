@@ -1,5 +1,5 @@
-#ifndef LIBROOTCO_HPP
-#define LIBROOTCO_HPP
+#ifndef LIBROOT_HPP
+#define LIBROOT_HPP
 
 #include "libCo.hpp"
 // ********** ROOT includes ********* //
@@ -333,4 +333,56 @@ void TheTChain::set()
   // for (auto const & filename : m_files_vec) newTTree(filename);
 }
 
-#endif //LIBROOTCO_HPP
+/////////////////////////
+//   USEFULL CLASSES   //
+/////////////////////////
+
+/**
+ * @brief Binning of a root histogram (TH1) : number of bins, min value, max value
+ * 
+ */
+struct THBinning
+{
+  THBinning() = default;
+  THBinning(std::initializer_list<std::any> initList)
+  {
+    if (initList.size() != 3) 
+    {
+      throw std::invalid_argument("Initialization of THBinning must contain only 3 elements");
+    }
+
+    auto it = initList.begin();
+    try
+    {
+      bins = std::any_cast<int   >(*it++);
+      min  = std::any_cast<double>(*it++);
+      max  = std::any_cast<double>(*it  );
+    }
+    catch(std::bad_any_cast const & e) 
+    {
+      std::cerr << "Error: " << e.what() << " in THBinning" << std::endl;
+    }
+  }
+
+  template <typename T1, typename T2, typename T3>
+  THBinning(int _bins, float _min, float _max) 
+  {
+    bins = _bins;
+    min  = _min ;
+    max  = _max ;
+  }
+
+  // The three parameters :
+  int   bins = 0  ;
+  float min  = 0.f;
+  float max  = 0.f;
+};
+
+std::ostream& operator<<(std::ostream& cout, THBinning binning)
+{
+  cout << binning.bins << " " << binning.min << " " << binning.max << " ";
+  return cout;
+}
+
+
+#endif //LIBROOT_HPP

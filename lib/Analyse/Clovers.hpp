@@ -94,23 +94,29 @@ public:
 
   static std::array<uchar, 1000> cristaux_index;     // Array used to make correspondance between the detector label and the Ge  index
   static std::array<uchar, 1000> cristaux_index_BGO; // Array used to make correspondance between the detector label and the BGO index
-  // static std::vector <uchar> cristaux_opposite;// Array used to make correspondance between a detector and the label of the detector opposite 
+  // static std::vector <uchar> cristaux_opposite;// Array used to make correspondance between a detector and the label of the detector at 180° 
 
   /// @brief Static initialize. Allows one to use the arrays event if no object has been instantiated
-  static void Initialize()
+  static void InitializeArrays()
   {
-    if (!sm_isInitialized)
+    if (!s_initialised)
     {
+    #ifdef MTOBJECT_HPP
+      lock_mutex(MTObject::mutex);
+    #endif //MTOBJECT_HPP
+
+      print("Initialising clovers arrays");
       for (Label l = 0; l<1000; l++)
       {
         is[l] = is_clover(l);
-        // isGe[l] = is_clover_Ge(l);
-        // isBGO[l] = is_clover_BGO(l);
+        // isGe[l] = is_clover_Ge(l);  // Already exists in libCo
+        // isBGO[l] = is_clover_BGO(l);// Already exists in libCo
 
         labels[l] = (is[l]) ? label_to_clover(l) : -1;
         cristaux_index[l] = (isGe[l]) ? label_to_cristal(l) : -1;
         cristaux_index_BGO[l] = (isBGO[l]) ? label_to_cristal(l) : -1;
       }
+      s_initialised = true;
     }
   }
   // ----------------------  End lookup tables ---------------------- //
@@ -127,7 +133,7 @@ public:
   // _______________________________________________________________ //
   // -----------------------  Clovers Class  ----------------------- //
 
-  Clovers(){Initialize(); m_Clovers.resize(24); Reset();}
+  Clovers(){InitializeArrays(); m_Clovers.resize(24); Reset();}
   void SetEvent(Event const & event, bool analyse = true);
   bool Fill(Event const & event, size_t const & index);
   void Reset();
@@ -140,15 +146,15 @@ public:
 
   // Ge Crystals :
   StaticVector<uchar> cristaux = StaticVector<uchar>(96);     // List of indexes of Ge crystals in the event
-  std::array<float, 96>   cristaux_nrj; // Array containing the energy of each Ge  cristal
-  std::array<double, 96>  cristaux_time;// Array containing the time of each Ge  cristal
+  std::array<float, 96>   cristaux_nrj = {0}; // Array containing the energy of each Ge  cristal
+  std::array<double, 96>  cristaux_time = {0};// Array containing the time of each Ge  cristal
 
   uchar CrystalMult = 0; // Ge crystals counter
 
   // BGO Crystals :
   StaticVector<uchar> cristaux_BGO = StaticVector<uchar>(48);     // List of indexes of BGO crystals in the event
-  std::array<float, 48>   cristaux_nrj_BGO; // Array containing the energy of each BGO cristal
-  std::array<double, 48>  cristaux_time_BGO;// Array containing the absolute time of each BGO cristal
+  std::array<float, 48>   cristaux_nrj_BGO = {0}; // Array containing the energy of each BGO cristal
+  std::array<double, 48>  cristaux_time_BGO = {0};// Array containing the absolute time of each BGO cristal
 
   uchar CrystalMult_BGO = 0; // BGO crystals counter
 
@@ -200,7 +206,7 @@ public:
   uchar DelayedCleanGe = 0;
 private:
   // Parameters :
-  static bool sm_isInitialized;
+  static bool s_initialised;
 
   // -----------------------  Clovers Class  ----------------------- //
   // _______________________________________________________________ //
@@ -294,7 +300,7 @@ public:
   Gate delayedBGOgate = {60.f, 145.f};
 };
 
-// ---- Initialize static members : ----- //
+// ---- InitializeArrays static members : ----- //
 // Lookup tables :
 std::array<bool, 1000> Clovers::is;
 // std::array<bool, 1000> Clovers::isGe;
@@ -307,7 +313,7 @@ std::array<uchar, 1000> Clovers::cristaux_index_BGO;
 
 // Parameters :
 float Clovers::Emin = 5.; // by default 5 keV
-bool Clovers::sm_isInitialized = false;
+bool Clovers::s_initialised = false;
 
 // ---- Methods : --- //
 
@@ -382,10 +388,9 @@ bool Clovers::Fill(Event const & event, size_t const & hit_index)
   if (isClover[label])
   {
     auto const & index_clover = labels[label]; // The clovers are indexed between 0 and 23
-    // if (label == 25) print(index_clover);
 
     auto const & nrj  = event.nrjs[hit_index];
-    auto const & time = event.time2s[hit_index];
+    auto const & time = (event.read.t) ? event.times[hit_index] : event.time2s[hit_index];
 
     auto & clover = m_Clovers[index_clover];
 
@@ -468,7 +473,7 @@ bool Clovers::Fill(Event const & event, size_t const & hit_index)
       // --- Clovers managing: ---//
 
       // Counts the number of BGO crystals that fired in the clover :
-      clover.nb_BGO ++;
+      clover.nb_BGO++;
 
       // Fill the vector containing the list of BGO clovers that fired :
 

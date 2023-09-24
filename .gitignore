@@ -5,5 +5,5 @@
 *.gch
 *.json
 *.log
-NearLine/NearLine-lib/Modules/Analyse_W.hpp
-FasterLib/Convertor/Faster2Root
+*.ek4
+*.spe

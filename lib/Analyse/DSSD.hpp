@@ -1,5 +1,5 @@
-#ifndef DSSD_H
-#define DSSD_H
+#ifndef DSSD_HPP
+#define DSSD_HPP
 
 #include <libCo.hpp>
 #include <libRoot.hpp>
@@ -57,10 +57,14 @@ public:
   static std::array<bool, 1000>  isRing  ;
   static std::array<uchar, 1000> indexes ;
 
-  void Initialize()
+  void static InitializeArrays()
   {
-    if (!m_initialized)
+    if (!s_initialized)
     {
+    #ifdef MTOBJECT_HPP
+      lock_mutex(MTObject::mutex);
+    #endif //MTOBJECT_HPP
+      print("Initialising DSSD arrays");
       for (Label label = 0; label<Label_cast(1000); label++)
       {
         isS1    [label] = ((label>Label_cast(799)) && (label<Label_cast(816)));
@@ -73,7 +77,7 @@ public:
         else if (isRing[label]) indexes[label] = uchar_cast(label-Label_cast(840));
 
       }
-      m_initialized = true;
+      s_initialized = true;
     }
   }
 
@@ -82,11 +86,11 @@ public:
 // _____________________________________
   DSSD()
   {
-    Initialize(); 
-    m_Sectors.reserve(nb_sectors); 
-    for (ushort i = 0; i<nb_sectors; i++) m_Sectors.emplace_back(i, (i+0.5)*2*3.141596/nb_sectors);
-    m_Rings.reserve(nb_rings);
-    for (ushort i = 0; i<nb_rings; i++) m_Rings.emplace_back(i, TMath::ATan( (innerRadius+( (i+0.5) * ring_thickness )) / distance ));
+    InitializeArrays(); 
+    Sectors.reserve(nb_sectors); 
+    for (ushort i = 0; i<nb_sectors; i++) Sectors.emplace_back(i, (i+0.5)*2*3.141596/nb_sectors);
+    Rings.reserve(nb_rings);
+    for (ushort i = 0; i<nb_rings; i++) Rings.emplace_back(i, TMath::ATan( (innerRadius+( (i+0.5) * ring_thickness )) / distance ));
   }
   void Reset();
 
@@ -96,28 +100,30 @@ public:
   void SetEvent(Event const & event);
   void Fill(Event const & evt, int const & index);
 
-  size_t const & sectors() const {return m_Sector_Hits.size();}
-  size_t const & rings() const {return m_Ring_Hits.size();}
+  auto sectors() const {return m_Sector_Hits.size();}
+  auto rings() const {return m_Ring_Hits.size();}
   bool oneParticle() const {return (sectors() == 1 && rings() == 1);}
 
-  auto const & energy() const {return m_Sectors[m_Sector_Hits[0]].nrj ;}
-  auto const & time()   const {return m_Sectors[m_Sector_Hits[0]].time;}
+  auto const & energy() const {return Sectors[m_Sector_Hits[0]].nrj ;}
+  auto const & time()   const {return Sectors[m_Sector_Hits[0]].time;}
 
   /// @brief Don't return any angle but really the label of the DSSD
-  auto const & angle() const {return m_Rings[m_Ring_Hits[0]].angle();} 
+  auto const & angle() const {return Rings[m_Ring_Hits[0]].angle();} 
 
-  StaticVector<uchar> m_Sector_Hits = StaticVector<uchar>(nb_sectors);
-  StaticVector<uchar> m_Ring_Hits = StaticVector<uchar>(nb_rings);
+  std::vector<uchar> m_Sector_Hits = std::vector<uchar>(nb_sectors);
+  std::vector<uchar> m_Ring_Hits = std::vector<uchar>(nb_rings);
 
-  std::vector<SStrip> m_Sectors;
-  std::vector<SStrip> m_Rings  ;
+  std::vector<SStrip> Sectors;
+  std::vector<SStrip> Rings  ;
 
   std::size_t SectorMult = 0u;
   std::size_t RingMult   = 0u;
 
 private:
-  bool m_initialized;
+  bool static s_initialized;
 };
+
+bool DSSD::s_initialized = false;
 
 // Initialize static members :
 std::array<bool, 1000>  DSSD::isS1     = {0};
@@ -132,15 +138,15 @@ void DSSD::Reset()
 {
   for (auto const & sector : m_Sector_Hits)
   {
-    m_Sectors[sector].Reset();
+    Sectors[sector].Reset();
   }
-  m_Sector_Hits.resize();
+  m_Sector_Hits.clear();
 
   for (auto const & ring : m_Ring_Hits)
   {
-    m_Rings[ring].Reset();
+    Rings[ring].Reset();
   }
-  m_Ring_Hits.resize();
+  m_Ring_Hits.clear();
 
   SectorMult = 0u;
   RingMult   = 0u;
@@ -166,17 +172,17 @@ void DSSD::Fill(Event const & event, int const & i)
     {
       RingMult++;
       m_Ring_Hits.push_back(index);
-      m_Rings[index].nrj = nrj;
-      m_Rings[index].time = time;
+      Rings[index].nrj = nrj;
+      Rings[index].time = time;
     }
     else
     {
       SectorMult++;
       m_Sector_Hits.push_back(index);
-      m_Sectors[index].nrj = nrj;
-      m_Sectors[index].time = time;
+      Sectors[index].nrj = nrj;
+      Sectors[index].time = time;
     }
   }
 }
 
-#endif //DSSD_H
+#endif //DSSD_HPP

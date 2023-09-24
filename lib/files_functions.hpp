@@ -486,16 +486,12 @@ public:
     {
       m_recursive_folders.push_back(folder.name());
     }
-    else 
-    {
-      throw std::runtime_error(m_path + " don't exist !");
-    }
     return *this;
   }
 
   std::string const & path() const {return m_path;}
   
-  std::string const & get() const {if (!m_exists) print("Carefull, you manipulate not existing folder"); return m_path;}
+  std::string const & get() const {return m_path;}
   std::string const & string() const {return(get());}
   operator std::string() const & {return (get());}
   auto c_str() const {return m_path.c_str();}

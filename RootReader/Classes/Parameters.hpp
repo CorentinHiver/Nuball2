@@ -3,7 +3,7 @@
 
 #include <FilesManager.hpp>
 #include <MTList.hpp>
-#include <Sorted_Event.hpp>
+// #include <Sorted_Event.hpp>
 #include <MTCounter.hpp>
 #include <Timer.hpp>
 
@@ -26,6 +26,13 @@ public:
 
   MTList & filesMT() {return m_list_files;}
   MTList & getRunsList() {return m_list_runs;}
+
+  void addRun(std::string const & run) 
+  {
+    m_files.addFolder(run);
+    m_list_files = m_files.getListFiles();
+    m_list_runs.push_back(run);
+  }
 
   bool getNextFile(std::string & filename) {return m_list_files.getNext(filename);}
   bool getNextRun(std::string & run) {return m_list_runs.getNext(run);}
@@ -50,6 +57,7 @@ public:
   MTCounter totalFilesSize;
 
 private:
+  FilesManager m_files;
   std::string m_parameters_file;
 
   std::map<std::string, std::vector<std::string>> m_parameters; // key : module, value : list of module's parameters
@@ -57,7 +65,6 @@ private:
   ushort m_nbThreads = 2;
 
   std::string m_dataPath;
-  FilesManager m_files;
   UInt_t m_nb_files_per_run = 9999;
   MTList m_list_files;
   MTList m_list_runs;
@@ -198,7 +205,7 @@ bool Parameters::setData()
           if (temp == "sup:")
           {
             is >> m_max_time;
-            Sorted_Event::setMaxTime(m_max_time);
+            // Sorted_Event::setMaxTime(m_max_time);
             print("Rejecting events with Time >",m_max_time,"ns");
           }
         }
@@ -206,12 +213,12 @@ bool Parameters::setData()
       else {print(temp,"parameter unkown for Data module!!");return false;}
     }
   }
-  if(m_list_runs.size()<1) { print("No runs list !"); return false;}
+  if(m_list_runs.size()<1) {print("No runs list !"); return false;}
   for (auto const & run : m_list_runs) m_files.addFolder(m_dataPath+run, m_nb_files_per_run);
   m_list_files = m_files.getListFiles();
   if (m_files.size() == 0) throw std::runtime_error(m_files.path().string());
 
-  if (m_TW_correct) Sorted_Event::setTWcorrectionsDSSD(m_TW_file);
+  // if (m_TW_correct) Sorted_Event::setTWcorrectionsDSSD(m_TW_file);
 
   return true;
 }

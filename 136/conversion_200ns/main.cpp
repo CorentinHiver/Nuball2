@@ -30,7 +30,7 @@ std::string IDFile = "index_129.list";
 std::string calibFile = "136_final.calib";
 Folder manip = "N-SI-136";
 std::string list_runs = "list_runs.list";
-std::string output = "-root_P";
+std::string output = "-root_";
 int nb_files_ts = 60;
 int nb_files = -1;
 int rf_shift = 40;
@@ -46,11 +46,32 @@ bool treat_129 = false;
 bool extend_periods = false; // To take more than one period after a event trigger
 uint nb_periods_more = 0; // Number of periods to extend after an event that triggered
 
+char trigger_choice = -1;
+std::map<char, std::string> trigger_name = 
+{
+  {-1, "all"},
+  {0,  "P"},
+  {1,  "M3G1"},
+  {2, "P_M3G1"},
+  {3, "PM2G1"},
+  {4, "P_M4G1"},
+  {5, "M4G1"}
+};
+
+std::string trigger_legend = "Legend : P = particle. G = Germanium. M = Module. _ = OR.";
+
 bool trigger(Counter136 const & counter)
 {
-  // return true;
-  return (counter.nb_dssd>0);
-  // return ((counter.nb_modules>2 && counter.nb_clovers>0));
+  switch (trigger_choice)
+  {
+    case 0: return counter.nb_dssd>0;
+    case 1: return counter.nb_modules>2 && counter.nb_Ge>0;
+    case 2: return (counter.nb_dssd>0 || (counter.nb_modules>2 && counter.nb_Ge>0));
+    case 3: return (counter.nb_dssd>0 && counter.nb_modules>1 && counter.nb_Ge>0);
+    case 4: return (counter.nb_dssd>0 || (counter.nb_modules>3 && counter.nb_Ge>0));
+    case 5: return (counter.nb_modules>3 && counter.nb_Ge>0);
+    default: return true;
+  }
   // return ((counter.nb_modules>2 && counter.nb_clovers>0) || counter.nb_dssd>0);
 }
 
@@ -104,7 +125,6 @@ struct Histos
 
 // 4. Declare the function to run on each file in parallel :
 void convert(Hit & hit, FasterReader & reader, 
-              Detectors const & detectors, 
               Calibration const & calibration, 
               Timeshifts const & timeshifts, 
               Path const & outPath, 
@@ -113,8 +133,7 @@ void convert(Hit & hit, FasterReader & reader,
 {
   Timer timer;
   // Checking the lookup tables :
-  if (!detectors || !timeshifts || !calibration || !reader) return;
-  reader.setMaxHits(max_hits);
+  if (!timeshifts || !calibration || !reader) return;
 
   // Extracting the run name :
   File raw_datafile = reader.getFilename();   // "/path/to/manip/run_number.fast/run_number_filenumber.fast"
@@ -175,7 +194,8 @@ void convert(Hit & hit, FasterReader & reader,
 
   unique_tree outTree (new TTree("Nuball2","Nuball2"));
   outTree -> SetDirectory(nullptr); // Force it to be created on RAM rather than on disk - much faster if enough RAM
-  Event event(outTree.get(), "lstEQp", "w");
+  Event event;
+  event.writting(outTree.get(), "lstEQp");
 
   // Initialize event builder based on RF :
   RF_Manager rf;
@@ -316,80 +336,97 @@ int main(int argc, char** argv)
   int nb_threads = 2;
   if (argc > 1)
   {
-
+    std::string list_trigger;
+    for (auto const & trig : trigger_name) 
+    {
+      list_trigger.append(std::to_string(trig.first)+std::string(" : ")+trig.second+std::string(". "));
+    }
     for(int i = 1; i < argc; i++)
     {
-      std::string command = argv[i];
-           if (command == "-e" || command == "--extend-period")
-      {// To get more than 1 period after pulse if trigger activated 
-        extend_periods = true;
-        nb_periods_more = atoi(argv[++i]);
-      }
-      else if (command == "-f" || command == "--files-number")
+      try
       {
-        nb_files = atoi(argv[++i]);
+        std::string command = argv[i];
+            if (command == "-e" || command == "--extend-period")
+        {// To get more than 1 period after pulse if trigger activated 
+          extend_periods = true;
+          nb_periods_more = atoi(argv[++i]);
+        }
+        else if (command == "-f" || command == "--files-number")
+        {
+          nb_files = atoi(argv[++i]);
+        }
+        else if (command == "--run")
+        {
+          one_run = true;
+          one_run_folder = argv[++i];
+        }
+        else if (command == "-H" || command == "--histograms")
+        {
+          histoed = true;
+        }
+        else if (command == "-m" || command == "--multithread")
+        {// Multithreading : number of threads
+          nb_threads = atoi(argv[++i]);
+        }
+        else if (command == "-n" || command == "--number-hits")
+        {// Number of hits per file
+          FasterReader::setMaxHits(std::atoi(argv[++i]));
+        }
+        else if (command == "-o" || command == "--overwrite")
+        {// Overwright already existing .root files
+          overwrite = true;
+        }
+        else if (command == "-O" || command == "--output")
+        {
+          output = argv[++i];
+        }
+        else if (command == "-t" || command == "--trigger")
+        {
+          trigger_choice = std::stoi(argv[++i]);
+        }
+        else if (                   command == "--only-timeshift")
+        {
+          only_timeshifts = true;
+        }
+        else if (command == "-Th" || command == "--Thorium")
+        {
+          list_runs = "Thorium.list";
+          check_preprompt = true;
+        }
+        else if (command == "-U" || command == "--Uranium")
+        {
+          list_runs = "Uranium.list";
+        }
+        else if (                   command == "--129")
+        {
+          treat_129 = true;
+          list_runs = "129.list";
+          calibFile = "129.calib";
+          manip = "N-SI-129";
+          check_preprompt = true;
+        }
+        else if (command == "-h" || command == "--help")
+        {
+          print("List of the commands :");
+          print("(-f  || --files-number)   [files-number]  : set the number of files");
+          print("(-e  || --extend-period)  [nb_periods]    : set the number of periods to extend the time window after trigger");
+          print("(       --run)            [runname]       : set only one folder to convert");
+          print("(-h  || --help)                           : display this help");
+          print("(-H  || --histograms)                     : Fills and writes raw histograms");
+          print("(-m  || --multithread)    [thread_number] : set the number of threads to use. Maximum allowed : 3/4 of the total number of threads");
+          print("(-n  || --number-hits)    [hits_number]   : set the number of hit to read in each file.");
+          print("(-o  || --overwrite)                      : overwrites the already written folders. If a folder is incomplete, you need to delete it");
+          print("(       --only-timeshift)                 : Calculate only timeshifts, force it even if it already has been calculated");
+          print("(-t  || --trigger)        [trigger]       : Default ",list_trigger,"|", trigger_legend);
+          print("(-Th || --Thorium)                        : Treats only the thorium runs (run_nb < 75)");
+          print("(-U  || --Uranium)                        : Treats only the uranium runs (run_nb >= 75)");
+          print("(       --129)                            : Treats the N-SI-129 pulsed runs");
+          return 0;
+        }
       }
-      else if (command == "--run")
+      catch(std::invalid_argument const & error) 
       {
-        one_run = true;
-        one_run_folder = argv[++i];
-      }
-      else if (command == "-H" || command == "--histograms")
-      {
-        histoed = true;
-      }
-      else if (command == "-m" || command == "--multithread")
-      {// Multithreading : number of threads
-        nb_threads = atoi(argv[++i]);
-      }
-      else if (command == "-n" || command == "--number-hits")
-      {// Number of hits per file
-        max_hits = atoi(argv[++i]);
-      }
-      else if (command == "-o" || command == "--overwrite")
-      {// Overwright already existing .root files
-        overwrite = true;
-      }
-      else if (command == "-O" || command == "--output")
-      {
-        output = argv[++i];
-      }
-      else if (command == "-t" || command == "--timeshifts")
-      {
-        only_timeshifts = true;
-      }
-      else if (command == "-Th" || command == "--Thorium")
-      {
-        list_runs = "Thorium.list";
-        check_preprompt = true;
-      }
-      else if (command == "-U" || command == "--Uranium")
-      {
-        list_runs = "Uranium.list";
-      }
-      else if (                   command == "--129")
-      {
-        treat_129 = true;
-        list_runs = "129.list";
-        calibFile = "129.calib";
-        manip = "N-SI-129";
-        check_preprompt = true;
-      }
-      else if (command == "-h" || command == "--help")
-      {
-        print("List of the commands :");
-        print("(-f  || --files-number) [files-number]  : set the number of files");
-        print("(       --run)          [runname]       : set only one folder to convert");
-        print("(-h  || --help)                         : display this help");
-        print("(-H  || --histograms)                   : Fills and writes raw histograms");
-        print("(-m  || --multithread)  [thread_number] : set the number of threads to use. Maximum allowed : 3/4 of the total number of threads");
-        print("(-n  || --number-hits)  [hits_number]   : set the number of hit to read in each file.");
-        print("(-o  || --overwrite)                    : overwrites the already written folders. If a folder is incomplete, you need to delete it");
-        print("(-t  || --timeshifts)                   : Calculate only timeshifts, force it even if it already has been calculated");
-        print("(-Th || --Thorium)                      : Treats only the thorium runs (run_nb < 75)");
-        print("(-U  || --Uranium)                      : Treats only the uranium runs (run_nb >= 75)");
-        print("(       --129)                          : Treats the N-SI-129 pulsed runs");
-        return 0;
+        throw_error("Can't interpret" + std::string(argv[i]) + "as an integer");
       }
     }
   }
@@ -405,32 +442,39 @@ int main(int argc, char** argv)
   else if ( datapath == "/home/faster/") datapath="/srv/data/nuball2/";
   else {print("Unkown HOME path -",datapath,"- please add yours on top of this line in the main.cpp ^^^^^^^^"); return -1;}
 
+  // Input file :
   Path manipPath = datapath+manip;
+
+  // Output file :
+  output+=trigger_name.at(trigger_choice);
+  if (extend_periods) output+=std::to_string(nb_periods_more)+"periods";
   Path outPath (datapath+(manip.name()+output), true);
 
+  print("Reading :", manipPath.string());
+  print("Writting in : ", outPath.string());
+
   // Load some modules :
-  Detectors detectors(IDFile);
-  Calibration calibration(detectors, calibFile);
+  detectors.load("index_129.list");
+  Calibration calibration(calibFile);
   Manip runs(File(list_runs).string());
   if (one_run) runs.setFolder(one_run_folder);
 
-  // Checking of all the modules have been loaded correctly :
-  if (!detectors || !calibration || !runs) return -1;
+  // Checking that all the modules have been loaded correctly :
+  if (!calibration || !runs) return -1;
 
   // Setup some parameters :
   RF_Manager::set_offset_ns(rf_shift);
-
+  
   // Loop sequentially through the runs and treat their files in parallel :
   std::string run;
   while(runs.getNext(run))
   {
     MTCounter total_read_size;
     Timer timer;
-    Path runpath = manipPath+run;
-    auto run_name = removeExtension(run);
+    auto run_name = rmPathAndExt(run.substr(0, run.size()-2));
 
     Histos histos;
-    if (histoed) histos.Initialize(detectors);
+    if (histoed && !only_timeshifts) histos.Initialize(detectors);
 
     print("----------------");
     print("Treating ", run_name);
@@ -439,21 +483,19 @@ int main(int argc, char** argv)
     Timeshifts timeshifts(outPath, run_name);
     if (treat_129) 
     {
-      timeshifts.dT_with_raising_edge(dssd_a);
-      timeshifts.dT_with_RF(dssd_a);
+      timeshifts.dT_with_raising_edge("dssd");
+      timeshifts.dT_with_RF("dssd");
     }
-
 
     // If no timeshifts data already available, calculate it :
     if (!timeshifts || (only_timeshifts && overwrite)) 
     { 
-      timeshifts.setDetectors(detectors);
       timeshifts.setMult(2,4);
       timeshifts.setOutDir(outPath);
       timeshifts.checkForPreprompt(check_preprompt);
 
-      timeshifts.calculate(runpath, nb_files_ts);
-      timeshifts.verify(runpath, 10);
+      timeshifts.calculate(run, nb_files_ts);
+      timeshifts.verify(run, 10);
 
       timeshifts.write(run_name);
     }
@@ -461,8 +503,8 @@ int main(int argc, char** argv)
     if (!only_timeshifts)
     {
       // Loop over the files in parallel :
-      MTFasterReader readerMT(runpath, nb_files);
-      readerMT.execute(convert, detectors, calibration, timeshifts, outPath, histos, total_read_size);
+      MTFasterReader readerMT(run, nb_files);
+      readerMT.execute(convert, calibration, timeshifts, outPath, histos, total_read_size);
 
       if (histoed)
       {

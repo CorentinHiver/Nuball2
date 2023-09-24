@@ -60,10 +60,7 @@ public:
   uchar const & status() const { return m_status; }
   bool isBuilding() const {return (m_status==1);}
   bool isBuilt() const {return (m_status==2);}
-  bool isSingle () const {return (m_status == 0 && m_single_hit.label>0);}
-  bool hasSingle() const {return (m_status == 0 && m_single_hit.label>0);}
-  Hit const & singleHit() const {return m_single_hit;}
-  Event getSingleEvent() const {return Event(m_single_hit);}
+  bool isSingle() const {return (m_event->isSingle());}
 
   Event* getEvent() const {return m_event;}
   size_t size() const {return m_event -> size();}

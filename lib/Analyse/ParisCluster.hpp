@@ -1,38 +1,37 @@
-#ifndef PARISCLUSTER_H
-#define PARISCLUSTER_H
+#ifndef PARIS_CLUSTER_HPP
+#define PARIS_CLUSTER_HPP
 
 #include "../libRoot.hpp"
-#include "ParisModule.hpp"
+#include "ParisPhoswitch.hpp"
 #include "PositionXY.hpp"
 
-template<std::size_t nb_modules>
+template<std::size_t nb_phoswitch>
 class ParisCluster
 {
 public:
   // ParisCluster() {}
-  ParisCluster() : m_label(glabel) {glabel++; this -> Initialize();}
+  ParisCluster() : m_label(glabel.fetch_add(1)) {glabel++; this -> Initialize();}
   void Initialize();
   void InitializeBidims();
   void Reset();
   void Fill(Event const & event, int const & i, uchar const & label);
   void Analyse();
   auto const & label() const {return m_label;}
-  auto const & size() const {return nb_modules;}
+  auto const & size() const {return nb_phoswitch;}
 
-  ParisModule & operator[] (int const & i) {return modules[i];}
+  ParisPhoswitch & operator[] (int const & i) {return phoswitches[i];}
 
-  std::vector<ParisModule>  modules;
-  // std::vector<ParisCrystal> LaBr3s;
-  // std::vector<ParisCrystal> NaIs;
+  std::vector<ParisPhoswitch>  phoswitches = std::vector<ParisPhoswitch>(nb_phoswitch);
+  // std::vector<ParisModule>  modules; // On va lui emplace_back des nouveaux modules - à voir niveau efficacité
   // std::vector<PositionXY>   positions;
   // std::vector<uchar>        nb_neighbors;
 
   // std::vector<std::vector<Float_t>> distances;
 
-  std::array<uchar, nb_modules> Hits;
-  // StaticVector<uchar> Hits;
-  // StaticVector<uchar> hits_LaBr3;
-  // StaticVector<uchar> hits_NaI;
+  // std::array<uchar, nb_phoswitch> Hits;
+  StaticVector<uchar> Hits        = StaticVector<uchar>(nb_phoswitch);
+  StaticVector<uchar> hits_LaBr3  = StaticVector<uchar>(nb_phoswitch);
+  StaticVector<uchar> hits_NaI    = StaticVector<uchar>(nb_phoswitch);
   // StaticVector<uchar> hits_no_neighbors;
   // StaticVector<uchar> hits_has_neighbors;
   // StaticVector<uchar> first_cleaned_LaBr3;
@@ -41,40 +40,38 @@ public:
   static auto const & nb_clusters() {return glabel;}
 
 private:
-  uchar m_label;
-  static uchar glabel;
+  uchar const m_label;
+  static thread_local std::atomic<uchar> glabel;
 };
 
-template<std::size_t nb_modules>
-uchar ParisCluster<nb_modules>::glabel = 0;
+template<std::size_t nb_phoswitch>
+thread_local std::atomic<uchar> ParisCluster<nb_phoswitch>::glabel = 0;
 
-template<std::size_t nb_modules>
-void ParisCluster<nb_modules>::Initialize()
+template<std::size_t nb_phoswitch>
+void ParisCluster<nb_phoswitch>::Initialize()
 {
-  // ParisModule::newCluster();
-
+  int i = 0;
+  for (auto & phoswitch : phoswitches) phoswitch.setLabel(i++);
   // Initialize the containers
-  modules.  resize(nb_modules);
-  // LaBr3s.   resize(nb_modules);
-  // NaIs.     resize(nb_modules);
-  // positions.resize(nb_modules);
-  // nb_neighbors.resize(nb_modules, 0);
+  // LaBr3s.   resize(nb_phoswitch);
+  // NaIs.     resize(nb_phoswitch);
+  // positions.resize(nb_phoswitch);
+  // nb_neighbors.resize(nb_phoswitch, 0);
 
   // Initialize the bidim containers
-  // distances.resize(nb_modules);
-  // for (auto & distance : distances) distance.resize(nb_modules, 0.);
+  // distances.resize(nb_phoswitch);
+  // for (auto & distance : distances) distance.resize(nb_phoswitch, 0.);
 
   // Initialize the readers
-  // Hits.      static_resize(nb_modules);
-  // hits_LaBr3.static_resize(nb_modules);
-  // hits_NaI.  static_resize(nb_modules);
-  // hits_no_neighbors.  static_resize(nb_modules);
-  // hits_has_neighbors.  static_resize(nb_modules);
-  // hits_neighbors_max_E.static_resize(nb_modules);
-  // first_cleaned_LaBr3.static_resize(nb_modules);
+  // Hits.      static_resize(nb_phoswitch);
+  // hits_no_neighbors.  static_resize(nb_phoswitch);
+  // hits_has_neighbors.  static_resize(nb_phoswitch);
+  // hits_neighbors_max_E.static_resize(nb_phoswitch);
+  // first_cleaned_LaBr3.static_resize(nb_phoswitch);
 }
 
-void ParisCluster::InitializeBidims()
+template<std::size_t nb_phoswitch>
+void ParisCluster<nb_phoswitch>::InitializeBidims()
 {
   // for (std::size_t i = 0; i<positions.size(); i++)
   // {
@@ -86,38 +83,44 @@ void ParisCluster::InitializeBidims()
   // }
 }
 
-void ParisCluster::Reset()
+template<std::size_t nb_phoswitch>
+void ParisCluster<nb_phoswitch>::Reset()
 {
-  // for (auto const & index : Hits) modules[index].Reset();
-  // Hits.resize();
-  // hits_LaBr3.resize();
-  // hits_NaI.resize();
+  // for (auto const & index : Hits) phoswitches[index].Reset();
+  for (auto & phoswitch : phoswitches) phoswitch.Reset();
+  Hits.clear();
+  hits_LaBr3.clear();
+  hits_NaI.clear();
   // hits_neighbors_max_E.resize();
   // hits_no_neighbors.resize();
   // for (auto const & index : hits_has_neighbors) nb_neighbors[index] = 0;
   // hits_has_neighbors.resize();
-  // hits_NaI.resize();
 }
 
-void inline ParisCluster::Fill(Event const & event, int const & i, uchar const & index)
+template<std::size_t nb_phoswitch>
+void inline ParisCluster<nb_phoswitch>::Fill(Event const & event, int const & i, uchar const & index)
 {
-  modules[index].Fill(event, i);
+  // print((int)event.labels[i], (int)index);
+  phoswitches[index].Fill(event, i);
   // Hits.push_back(index);
+  // hits_LaBr3.push_back(index);
+  // hits_NaI.push_back(index);
 }
 
-void ParisCluster::Analyse()
+template<std::size_t nb_phoswitch>
+void ParisCluster<nb_phoswitch>::Analyse()
 {
   /*
   for (std::size_t loop_i = 0; loop_i<Hits.size(); loop_i++)
   {
     auto const & index_i = Hits[loop_i];
-    auto const & module_i = modules[index_i];
+    auto const & module_i = phoswitches[index_i];
 
     for (std::size_t loop_j = loop_i+1; loop_j<Hits.size(); loop_j++)
     {
       auto const & index_j = Hits[loop_j];
 
-      auto const & module_j = modules[index_j];
+      auto const & module_j = phoswitches[index_j];
       auto const & distance = distances[index_i][index_j];
 
       if (abs(module_j.time-module_i.time) > 50.) continue; // Timing : if they are not simultaneous then they don't belong to the same event
@@ -141,4 +144,4 @@ void ParisCluster::Analyse()
   */
 }
 
-#endif //PARISCLUSTER_H
+#endif //PARIS_CLUSTER_HPP

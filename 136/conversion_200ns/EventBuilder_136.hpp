@@ -90,12 +90,7 @@ void EventBuilder_136::tryAddPreprompt_simple()
   while (!m_hit_buffer.empty())
   {
     auto const & hit = m_hit_buffer.top();
-    debug(Time_cast(temp_RF_ref-hit.stamp), Time_cast(m_period));
-    if (Time_cast(temp_RF_ref-hit.stamp) < Time_cast(m_period+m_rf->offset()))
-    {
-      m_event -> push_front(hit);
-      debug(hit, *m_event);
-    }
+    if (Time_cast(temp_RF_ref-hit.stamp) < Time_cast(m_period+m_rf->offset())) m_event -> push_front(hit);
     else break;
     m_hit_buffer.pop();
   }
@@ -123,12 +118,12 @@ bool EventBuilder_136::build(Hit const & hit)
   switch (m_status)
   { 
     case 0 : case 2 : // If no coincidence has been detected in previous iteration :
+      *m_event = m_last_hit;
       if (this->inTimeRange(hit))
       {// Situation 1 :
         // The previous and current hit are in the same event.
         // In next call, we'll check if the next hits also belong to this event (situations 1' or 2)
         m_event -> clear();
-        *m_event = m_last_hit;
         m_event->push_back(hit);
         m_last_hit.reset();
         m_status = 1; // The event can be filled with other hits
@@ -137,7 +132,7 @@ bool EventBuilder_136::build(Hit const & hit)
       {// Situation 0 :
         // The last and current hits aren't in the same event.
         // The last hit is therefore a single hit, alone in the time window around its RF.
-        m_single_hit = m_last_hit;
+        *m_event = m_last_hit;
 
         // The current hit is set to be the reference hit for next call :
         this -> set_last_hit(hit);
@@ -194,9 +189,12 @@ class Counter136
 public:
   size_t nb_modules = 0;
   size_t nb_dssd = 0;
+  size_t nb_sectors = 0;
   size_t nb_Ge = 0;
   size_t nb_clovers = 0;
   std::vector<uchar> clovers;
+  std::vector<uchar> clovers_ge;
+  std::vector<uchar> clovers_bgo;
 
   void reset() 
   {

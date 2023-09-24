@@ -1,8 +1,9 @@
 #ifndef ANALYSEISOMER_H
 #define ANALYSEISOMER_H
 
+#include <libCo.hpp>
+#include <Nuball2Tree.hpp>
 #include <MTObject.hpp>
-#include <libRoot.hpp>
 
 #include "../../lib/MTObjects/MTTHist.hpp"
 
@@ -13,8 +14,16 @@
 #include "../../lib/Classes/RWMat.hxx"
 
 #include "../Classes/Parameters.hpp"
+
 #include <RF_Manager.hpp>
+
+#include <Clovers.hpp>
 #include <DSSD.hpp>
+// #include <Paris.hpp>
+
+// #include <MTVariable.hpp>
+// MTVariable<int> variable;
+
 
 class ParisNul
 {
@@ -47,7 +56,7 @@ public:
 
   void Fill(Event const & event, int const & hit_i)
   {
-    auto const & label = event.labels[hit_i];
+    // auto const & label = event.labels[hit_i];
     auto const & time = event.time2s[hit_i];
     auto const & nrj = event.nrjs[hit_i];
     auto const & nrj2 = event.nrj2s[hit_i];
@@ -242,7 +251,6 @@ private:
 
 };
 
-
 bool AnalyseIsomer::launch(Parameters & p)
 {
   if (!this -> setParameters(p.getParameters(param_string))) return false;
@@ -261,19 +269,12 @@ void AnalyseIsomer::run(Parameters & p, AnalyseIsomer & ai)
   {
     Timer timer;
 
-    std::unique_ptr<TFile> file (TFile::Open(rootfile.c_str(), "READ"));
-    if (file->IsZombie()) {print(rootfile, "is a Zombie !");continue;}
+    Nuball2Tree tree(rootfile);
 
-    // TTree* tree = file->Get<TTree>("Nuball");
-    // if (!tree) tree = file->Get<TTree>("Nuball2");
-    // if (!tree) {print("Nuball or Nuball2 trees not found in",rootfile ); continue;}
-    // Event event(tree, "ltE");
+    if (!tree) continue;
+
+    Event event(tree);
     
-    std::unique_ptr<TTree> tree (file->Get<TTree>("Nuball"));
-    if (!tree.get()) tree.reset(file->Get<TTree>("Nuball2"));
-    if (!tree.get()) {print("Nuball or Nuball2 trees not found in",rootfile ); continue;}
-    Event event(tree.get(), "lTEQ");
-
     size_t events = tree->GetEntries();
     p.totalCounter+=events;
 
@@ -286,24 +287,23 @@ void AnalyseIsomer::run(Parameters & p, AnalyseIsomer & ai)
     Clovers clovers;
     ParisNul paris;
     DSSD dssd;
-    dssd.Initialize();
 
-    for (size_t i = 0; i<events; i++)
+    for (size_t event_i = 0; event_i<events; event_i++)
     {
       // if (event.mult>30) continue;
     // #ifdef DEBUG
-      // if (i%(int)(1.E+6) == 0) print(i/1000000.,"Mevts");
+      // if (event_i%(int)(1.E+6) == 0) print(event_i/1000000.,"Mevts");
     // #endif //DEBUG
-      tree->GetEntry(i);
+      tree->GetEntry(event_i);
       dssd.Reset();
       clovers.Reset();
       paris.Reset();
-      for (int i = 0; i<event.mult; i++)
+      for (int hit_i = 0; hit_i<event.mult; hit_i++)
       {
-        dssd.Fill(event, i);
-        clovers.Fill(event, i);
-        paris.Fill(event, i);
-        if (event.labels[i] == 252) ai.time_ref.Fill(event.nrjs[i], event.time2s[i]);
+        dssd.Fill(event, hit_i);
+        clovers.Fill(event, hit_i);
+        paris.Fill(event, hit_i);
+        if (event.labels[hit_i] == 252) ai.time_ref.Fill(event.nrjs[hit_i], event.time2s[hit_i]);
       }
       // if (event.labels[0] == RF_Manager::label)
       // {
@@ -317,6 +317,7 @@ void AnalyseIsomer::run(Parameters & p, AnalyseIsomer & ai)
       ai.FillSorted(event, clovers, dssd, paris);
       // event_s.sortEvent(event);
       // ai.FillSorted(event_s,event);
+      // file->Close();
     } // End event loop
     // auto const & time = timer();
     print(removePath(rootfile), timer(), timer.unit(), ":", filesize/timer.TimeSec(), "Mo/sec");
@@ -390,9 +391,9 @@ void AnalyseIsomer::InitializeManip()
   Ge_VS_DSSD.reset("Ge_VS_DSSD","Ge VS DSSD;Energy DSSD [keV];Energy Ge [keV]",
       400,0,20000, 1000,0,1000);
   GePrompt_VS_DSSD.reset("GePrompt_VS_DSSD","Ge VS DSSD",
-      400,0,20000, 1000,0,1000);
+      400,0,20000, 10000,0,10000);
   GeDelayed_VS_DSSD.reset("GeDelayed_VS_DSSD","Ge VS DSSD",
-      400,0,20000, 1000,0,1000);
+      400,0,20000, 10000,0,10000);
   DSSD_TW.reset("DSSD_TW","DSSD E VS Time",
       250,-50,200, 400,0,20000);
   Ge_VS_DSSD_Time.reset("Ge_VS_DSSD_Time","Ge VS DSSD Time;DSSD time [ns];Ge time [ns]",
@@ -512,7 +513,7 @@ void AnalyseIsomer::InitializeManip()
   Paris_each_spectra.reset("Paris_each_spectra", "Paris each spectra", 1000,0,10000, 500,0,500);
 
   // Set analysis parameters :
-  Sorted_Event::setDSSDVeto(-10, 50, 5000);
+  // Sorted_Event::setDSSDVeto(-10, 50, 5000);
   RF_Manager::set_offset_ns(40);
 }
 

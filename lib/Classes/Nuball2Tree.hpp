@@ -1,6 +1,7 @@
 #ifndef NUBALL2TREE_HPP
 #define NUBALL2TREE_HPP
 
+#include "../libCo.hpp"
 #include "Event.hpp"
 
 /**
@@ -10,48 +11,75 @@
 class Nuball2Tree
 {
 public:
-  Nuball2Tree(){}
+  Nuball2Tree(std::string const & filename){this -> load(filename);}
+  Nuball2Tree(std::string const & filename, Event & event)
+  {
+    this -> load(filename);
+    event.reading(*this);
+  }
 
-  void reading(Event & event, std::string const & options = "ltEQ");
-  void writting(Event & event, std::string const & name = "Nuball2", std::string const & options = "ltEQ");
+  ~Nuball2Tree() 
+  {
+    if (file_opened)
+    {
+      m_file->Close();
+      delete m_file;
+    }
+  }
 
-  void writting(Hit & hit, std::string const & options = "ltEQp");
+  bool load(std::string const & filename);
 
-  TTree* get() {return m_tree.get();}
-  TTree* operator-> () {return m_tree.get();}
+  TTree* get() {return m_tree;}
+  TTree* operator-> () {return m_tree;}
+  operator TTree*() {return m_tree;}
 
-  void Write(std::string outfilename);
+  operator bool() const & {return m_ok;}
   
 private:
-  std::unique_ptr<TTree> m_tree;
+  TFile* m_file = nullptr;
+  TTree* m_tree = nullptr;
+  bool m_ok = false;
+  bool file_opened = false;
+  std::string m_name = "Nuball2";
+  std::string m_title;
 };
 
-void Nuball2Tree::writting(Hit &hit, std::string const &options)
+bool Nuball2Tree::load(std::string const & filename)
 {
-  m_tree.reset(new TTree("raw", "raw"));
-  hit.writting(m_tree.get(), options);
-}
+  // Opens the file :
+  m_file = TFile::Open(filename.c_str(), "READ");
 
-void Nuball2Tree::reading(Event & event, std::string const & options)
-{
-  // OPEN FILE AND SO ON...
-  event.reading(m_tree.get(), options);
-}
+  if (!m_file) 
+  {
+    print("Could not find", filename, "!"); 
+    return (m_ok = file_opened = false);
+  }
+  
+  file_opened = true;
+  
+  if (m_file->IsZombie()) 
+  {
+    print(filename, "is a Zombie !"); 
+    return (m_ok = false);
+  }
 
-void Nuball2Tree::writting(Event & event, std::string const & name, std::string const & options)
-{
-  m_tree.reset(new TTree(name.c_str(), name.c_str()));
-  event.writting(m_tree.get(), options);
-}
+  // Extracts the tree :
+  m_tree = m_file->Get<TTree>("Nuball2");
 
-void Nuball2Tree::Write(std::string outfilename)
-{
-  if (extension(outfilename) != "root") outfilename = removeExtension(outfilename)+".root";
-  std::unique_ptr<TFile> outFile (TFile::Open(outfilename.c_str(), "RECREATE"));
-  outFile -> cd();
-    m_tree -> Write();
-    outFile -> Write();
-  outFile -> Close();
+  if (!m_tree) 
+  {
+    print("Nuball2 tree not found in", filename); 
+    return (m_ok = false);
+  }
+  else if (m_tree->IsZombie()) 
+  {
+    print(filename, "Nuball2 tree is a Zombie !"); 
+    return (m_ok = false);
+  }
+
+  print("Reading", filename);
+  
+  return (m_ok = true);
 }
 
 #endif //NUBALL2TREE_HPP

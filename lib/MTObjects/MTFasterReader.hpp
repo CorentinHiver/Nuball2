@@ -150,7 +150,7 @@ private:
 
   FilesManager m_files;
   MTList m_MTfiles;
-  std::mutex m_mutex;
+  // std::mutex m_mutex;
 };
 
 template<class Func, class... ARGS>

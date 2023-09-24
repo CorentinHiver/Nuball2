@@ -1,5 +1,5 @@
-#ifndef PARIS_H
-#define PARIS_H
+#ifndef PARIS_BIDIM_HPP
+#define PARIS_BIDIM_HPP
 #include "../NearLine.hpp"
 
 class ParisBidim
@@ -193,4 +193,4 @@ void ParisBidim::Write()
 }
 
 
-#endif //PARIS_H
+#endif //PARIS_BIDIM_HPP

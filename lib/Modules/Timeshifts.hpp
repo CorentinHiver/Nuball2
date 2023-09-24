@@ -74,8 +74,8 @@ public:
    * @brief Set the detector list
    * @note Mandatory only if calculate timeshifts
   */
-  void setDetectors(Detectors const & detList) {m_detectors = detList; this -> Initialize();}
-  void setIDFile(Detectors const & detList) {m_detectors = detList;}
+  // void setDetectors(Detectors const & detList) {detectors = detList; this -> Initialize();}
+  void setIDFile(Detectors const & detList) {detectors = detList;}
 
   /// @brief Setup the time window for the coincidence in ns
   bool setTimeWindow_ns(Time_ns const & timewindow_ns);
@@ -203,8 +203,8 @@ public:
 
   void setEminADC(ADC const & EminADC) {m_Emin_ADC = EminADC;}
 
-  void dT_with_RF(dAlias const & alias) {m_RF_preferred[alias] = true;}
-  void dT_with_raising_edge(dAlias const & alias) {m_edge_preferred[alias] = true;}
+  void dT_with_RF(dType const & type) {m_RF_preferred[type] = true;}
+  void dT_with_raising_edge(dType const & type) {m_edge_preferred[type] = true;}
 
   /**
    * @brief 
@@ -212,6 +212,16 @@ public:
    * @param check: default true.
    */
   void checkForPreprompt(bool const & check = true) {m_check_preprompt = check;}
+
+  bool CheckParameters()
+  {
+    if (!detectors.exists(m_time_ref_label)) 
+    {
+      print(m_time_ref_name, "do not exists with label", m_time_ref_label);
+      return false;
+    }
+    return true;
+  }
 
   std::vector<bool>  m_RF_preferred_label; // Used to force RF measurement for specific labels;
   std::vector<uchar> m_nb_shifts_RF_peak;  // If the peak is not within [+- RF_period] then one need to shift it accordingly
@@ -243,7 +253,7 @@ private:
 
   bool m_check_preprompt = false;
 
-  Detectors m_detectors;
+  Detectors detectors;
   FilesManager m_files;
   // Performances m_perf;
 
@@ -256,46 +266,46 @@ private:
   Time m_timewindow = Time_cast(m_timewindow_ns*1000);
   Mult m_min_mult = 2;
   Mult m_max_mult = 2;
-  Label m_time_reference_label = 252;
-  std::string m_timeRef_name = "R1A9_FATIMA_LaBr3";
+  Label m_time_ref_label = 252;
+  std::string m_time_ref_name = "R1A9_FATIMA_LaBr3";
   ulong m_max_hits = -1;
   ADC m_Emin_ADC = 0.;
   int m_nb_detectors = 0;
 
   // This map holds the number of bins per ns (e.g. for LaBr3 there is one bin every 100 ps)
-  std::map<dAlias, Time_ns> m_bins_per_ns = 
+  std::map<dType, Time_ns> m_bins_per_ns = 
   { 
-    {dAlias::labr,  10.}, 
-    {dAlias::ge,     1.}, 
-    {dAlias::bgo,    2.}, 
-    {dAlias::eden,   2.}, 
-    {dAlias::RF,    10.}, 
-    {dAlias::paris, 10.}, 
-    {dAlias::dssd,  0.5}
+    {"labr",  10.}, 
+    {"ge",     1.}, 
+    {"bgo",    2.}, 
+    {"eden",   2.}, 
+    {"RF",    10.}, 
+    {"paris", 10.}, 
+    {"dssd",  0.5}
   };
 
   // This map tell if the timeshift is preferently taken as the 
-  std::map<dAlias, bool> m_RF_preferred = 
+  std::map<dType, bool> m_RF_preferred = 
   { 
-    {dAlias::labr,  false}, 
-    {dAlias::ge,    false}, 
-    {dAlias::bgo,   false}, 
-    {dAlias::eden,  false}, 
-    {dAlias::RF,    false}, 
-    {dAlias::paris, false}, 
-    {dAlias::dssd,  false}
+    {"labr",  false}, 
+    {"ge",    false}, 
+    {"bgo",   false}, 
+    {"eden",  false}, 
+    {"RF",    false}, 
+    {"paris", false}, 
+    {"dssd",  false}
   };
 
   // This map tells if the timeshift is preferently taken as the mean of the peak (false) or the raising edge (true)
-  std::map<dAlias, bool> m_edge_preferred = 
+  std::map<dType, bool> m_edge_preferred = 
   { 
-    {dAlias::labr,  false}, 
-    {dAlias::ge,    false}, 
-    {dAlias::bgo,   false}, 
-    {dAlias::eden,  false}, 
-    {dAlias::RF,    false}, 
-    {dAlias::paris, false}, 
-    {dAlias::dssd,  false}
+    {"labr",  false}, 
+    {"ge",    false}, 
+    {"bgo",   false}, 
+    {"eden",  false}, 
+    {"RF",    false}, 
+    {"paris", false}, 
+    {"dssd",  false}
   };
 
   std::string m_outDir = "";
@@ -335,7 +345,7 @@ bool Timeshifts::load(std::string const & filename)
   // ----------------------------------------------------- //
   // First extract the maximum label
   Label size = 0;
-  if (m_detectors) size = m_detectors.size();
+  if (detectors) size = detectors.size();
   else 
   {// If no ID file loaded, infer the number of detectors from the higher label in calbration file (unsafe)
     while (getline(inputfile, line))
@@ -377,8 +387,8 @@ bool Timeshifts::setParameters(std::string const & parameter)
     }
     else if (temp == "time_reference:" || temp == "time_ref:")
     {
-      is >> m_timeRef_name;
-      if (!this -> setTimeReference(m_timeRef_name)) return false;
+      is >> m_time_ref_name;
+      if (!this -> setTimeReference(m_time_ref_name)) return false;
     }
     else if (temp == "outDir:")  {is >> m_outDir; setOutDir(m_outDir);}
     else if (temp == "outRoot:") {is >> m_outRoot; setOutRoot(m_outRoot);}
@@ -400,26 +410,26 @@ bool Timeshifts::InitializeRaw()
   if (m_initializedRaw) return true;// To prevent multiple initializations
 
   // Raw Timeshifts spectra :
-  m_time_spectra.resize(m_detectors.size());
+  m_time_spectra.resize(detectors.size());
 
 #ifdef USE_RF
   // Raw RF Timeshifts spectra :
-  m_histograms_VS_RF.resize(m_detectors.size());
-  m_histo_ref_VS_RF.reset( "Ref_RF_calculated", "Reference RF calculated;Time[ps];#", m_timewindow_ns*m_bins_per_ns[dAlias::RF], -m_timewindow/2, m_timewindow/2);
-  m_histo_ref_vs_RF_VS_mult.reset( "Ref_RF_VS_mult", "Reference RF VS multiplicity;Time[ps];Multiplicity", m_timewindow_ns*m_bins_per_ns[dAlias::RF],-m_timewindow/2,m_timewindow/2, 10,0,10 );
+  m_histograms_VS_RF.resize(detectors.size());
+  m_histo_ref_VS_RF.reset( "Ref_RF_calculated", "Reference RF calculated;Time[ps];#", m_timewindow_ns*m_bins_per_ns["RF"], -m_timewindow/2, m_timewindow/2);
+  m_histo_ref_vs_RF_VS_mult.reset( "Ref_RF_VS_mult", "Reference RF VS multiplicity;Time[ps];Multiplicity", m_timewindow_ns*m_bins_per_ns["RF"],-m_timewindow/2,m_timewindow/2, 10,0,10 );
 #endif //USE_RF
 
-  for (ushort label = 0; label<m_detectors.size(); label++)
+  for (ushort label = 0; label<detectors.size(); label++)
   {
-    if (!m_detectors.exists[label]) continue;
-    auto const & name = m_detectors[label];
-    auto const & alias = Detectors::alias(label);
+    if (!detectors.exists(label)) continue;
+    auto const & name = detectors[label];
+    auto const & type = detectors.type(label);
 
-    m_time_spectra[label].reset(name.c_str(), name.c_str(), m_timewindow_ns*m_bins_per_ns[alias], -m_timewindow/2, m_timewindow/2);
+    m_time_spectra[label].reset(name.c_str(), name.c_str(), m_timewindow_ns*m_bins_per_ns[type], -m_timewindow/2, m_timewindow/2);
       
   #ifdef USE_RF
-    m_histograms_VS_RF[label].reset((name+"_RF").c_str(), (name+"_RF").c_str(), m_timewindow_ns*m_bins_per_ns[alias], -m_timewindow/2, m_timewindow/2);
-    if (alias == Detector::RF)
+    m_histograms_VS_RF[label].reset((name+"_RF").c_str(), (name+"_RF").c_str(), m_timewindow_ns*m_bins_per_ns[type], -m_timewindow/2, m_timewindow/2);
+    if (type == "RF")
     {
       m_time_spectra[label].reset(nullptr);
       m_time_spectra[label].reset(name.c_str(), name.c_str(), 1000, -100, 100);
@@ -434,9 +444,9 @@ bool Timeshifts::InitializeCorrected()
   if (m_initializedCorrected) return true;// To prevent multiple initializations
 
   // Corrected timeshifts spectra :
-  m_time_spectra_corrected.resize(m_detectors.size());
+  m_time_spectra_corrected.resize(detectors.size());
   m_time_spectra_corrected_bidim.reset("All corrected time spectra", "All corrected time spectra;Channel;Time[ps];#", 
-          m_detectors.size(), 0, m_detectors.size(), 1000, -m_timewindow/2, m_timewindow/2);
+          detectors.size(), 0, detectors.size(), 1000, -m_timewindow/2, m_timewindow/2);
 
 #ifdef USE_RF
   float borne_inf = -100000.f;
@@ -445,22 +455,22 @@ bool Timeshifts::InitializeCorrected()
   float RF_time_window_ns = RF_time_window/1000.f;
 
   // Corrected RF timeshifts spectra :
-  m_time_spectra_corrected_RF.resize(m_detectors.size());// Initialize the vector
-  m_time_spectra_reference_RF_corrected.reset( "Ref_RF_corrected", "Reference RF corrected;Time[ps];#", RF_time_window_ns*m_bins_per_ns[dAlias::RF], borne_inf, borne_sup);
+  m_time_spectra_corrected_RF.resize(detectors.size());// Initialize the vector
+  m_time_spectra_reference_RF_corrected.reset( "Ref_RF_corrected", "Reference RF corrected;Time[ps];#", RF_time_window_ns*m_bins_per_ns["RF"], borne_inf, borne_sup);
   m_time_spectra_corrected_bidim_RF.reset("All_corrected_time_spectra_RF", "All corrected time spectra VS RF;Channel;Time[ps];#", 
-          m_detectors.size(), 0, m_detectors.size(), RF_time_window_ns*2, borne_inf, borne_sup);
+          detectors.size(), 0, detectors.size(), RF_time_window_ns*2, borne_inf, borne_sup);
 #endif //USE_RF
 
-for (ushort label = 0; label<m_detectors.size(); label++)
+for (ushort label = 0; label<detectors.size(); label++)
   {
-    if (!m_detectors.exists[label]) continue;
-    auto const & name = m_detectors[label];
-    auto const & alias = Detectors::alias(label);
+    if (!detectors.exists(label)) continue;
+    auto const & name = detectors[label];
+    auto const & type = detectors.type(label);
 
-    m_time_spectra_corrected[label].reset((name+"_corrected").c_str(), (name+" corrected;Time[ps];#").c_str(), m_timewindow_ns*m_bins_per_ns[alias], -m_timewindow/2, m_timewindow/2);
+    m_time_spectra_corrected[label].reset((name+"_corrected").c_str(), (name+" corrected;Time[ps];#").c_str(), m_timewindow_ns*m_bins_per_ns[type], -m_timewindow/2, m_timewindow/2);
   
   #ifdef USE_RF
-    m_time_spectra_corrected_RF[label].reset((name+"_RF_corrected").c_str(), (name+" RF corrected;Time[ps];#").c_str(), RF_time_window_ns*m_bins_per_ns[alias], borne_inf, borne_sup);
+    m_time_spectra_corrected_RF[label].reset((name+"_RF_corrected").c_str(), (name+" RF corrected;Time[ps];#").c_str(), RF_time_window_ns*m_bins_per_ns[type], borne_inf, borne_sup);
   #endif //USE_RF
   }
 
@@ -485,17 +495,18 @@ bool Timeshifts::Initialize(bool const & initializeRaw, bool const & initializeC
 
   mt_ref_time.resize(MTObject::getThreadsNumber(), 0);
 
-  // Check the Detectors modules :
-  if (m_detectors.size() == 0)
+  // Check the Detectors module :
+  auto const & label_max = detectors.size();
+  if (label_max == 0)
   {
-    print("PLEASE LOAD THE ID FILE IN THE TIMESHIFT MODULE");
+    print("PLEASE LOAD THE ID FILE");
     return (m_ok = m_initialized = false);
   }
 
-  m_timeshifts.resize(m_detectors.size(), 0);
-  m_RF_preferred_label.resize(m_detectors.size(), false);
-  m_edge_preferred_label.resize(m_detectors.size(), false);
-  m_nb_shifts_RF_peak.resize(m_detectors.size(), 0);
+  m_timeshifts.resize(label_max, 0);
+  m_RF_preferred_label.resize(label_max, false);
+  m_edge_preferred_label.resize(label_max, false);
+  m_nb_shifts_RF_peak.resize(label_max, 0);
 
   return (m_ok = m_initialized = true);
 }
@@ -533,6 +544,9 @@ bool Timeshifts::calculate(std::string const & folder, int const & nb_files)
     print("Someting went wrong in the timeshifts calculation initialization...");
     return false;
   }
+
+  if (!this -> CheckParameters()) return false;
+  
 
   // Fill the time spectra with data from data files :
   this -> treatFolder(folder, nb_files);
@@ -665,7 +679,7 @@ void Timeshifts::treatFasterFile(std::string const & filename)
     if (m_corrected) hit.stamp += m_timeshifts[hit.label];
 
     // This is used to put the energy value of the time reference in the Event (used in the Fill method) :
-    if (hit.label == m_time_reference_label) hit.nrj = NRJ_cast(hit.adc); 
+    if (hit.label == m_time_ref_label) hit.nrj = NRJ_cast(hit.adc); 
 
   #ifdef USE_RF
     if(isRF[hit.label]) {rf.last_hit = hit.stamp; rf.period = hit.adc;}
@@ -706,13 +720,13 @@ void Timeshifts::Fill(Event const & event, RF_Manager & rf)
 
     if (m_corrected)
     {
-      if (label == m_time_reference_label && nrj>m_Emin_ADC && mult>5) m_time_spectra_reference_RF_corrected.Fill(ToF);
+      if (label == m_time_ref_label && nrj>m_Emin_ADC && mult>5) m_time_spectra_reference_RF_corrected.Fill(ToF);
       m_time_spectra_corrected_RF[label].Fill(ToF);
       m_time_spectra_corrected_bidim_RF.Fill(label, ToF);
     }
     else 
     {// Raw data :
-      if (label == m_time_reference_label && nrj>m_Emin_ADC) m_histo_ref_VS_RF.Fill(ToF);
+      if (label == m_time_ref_label && nrj>m_Emin_ADC) m_histo_ref_VS_RF.Fill(ToF);
       else
       {
         m_histograms_VS_RF[label].Fill(ToF);
@@ -721,7 +735,7 @@ void Timeshifts::Fill(Event const & event, RF_Manager & rf)
   #endif //USE_RF
 
     // We require the reference detector in the event :
-    if (event.labels[loop_i] == m_time_reference_label && !coincFilled)
+    if (event.labels[loop_i] == m_time_ref_label && !coincFilled)
     {
       coincFilled = true;
       // print("coucou");
@@ -739,7 +753,7 @@ void Timeshifts::Fill(Event const & event, RF_Manager & rf)
       {
         auto const & label = event.labels[loop_j];
 
-        if (label == m_time_reference_label) continue; // To reject the time spectra of the time reference
+        if (label == m_time_ref_label) continue; // To reject the time spectra of the time reference
 
         auto deltaT = static_cast<Long64_t>( refT - event.times[loop_j] );
 
@@ -801,53 +815,12 @@ std::vector<Time> forced_shifts;
 
 void Timeshifts::analyse()
 {
-  forced_shifts.resize(m_detectors.size(), 0ll);
+  forced_shifts.resize(detectors.size(), 0ll);
   for (uint label = 0; label<forced_shifts.size(); label++)
   {
     switch (label)
     {
       // case 56: case 58: forced_shifts[label] = -400000; break;
-      // case (800) : forced_shifts[label] = -200000; break;
-      // case (801) : forced_shifts[label] = -200000; break;
-      // case (802) : forced_shifts[label] = -223700; break;
-      // case (803) : forced_shifts[label] = -224013; break;
-      // case (804) : forced_shifts[label] = -223337; break;
-      // case (805) : forced_shifts[label] = -233668; break;
-      // case (806) : forced_shifts[label] = -234377; break;
-      // case (807) : forced_shifts[label] = -233857; break;
-      // case (808) : forced_shifts[label] = -233677; break;
-      // case (809) : forced_shifts[label] = -223296; break;
-      // case (810) : forced_shifts[label] = -224911; break;
-      // case (811) : forced_shifts[label] = -224341; break;
-      // case (812) : forced_shifts[label] = -224824; break;
-      // case (813) : forced_shifts[label] = -227513; break;
-      // case (814) : forced_shifts[label] = -227109; break;
-      // case (815) : forced_shifts[label] = -227453; break;
-      // case (821) : forced_shifts[label] = -233209; break;
-      // case (822) : forced_shifts[label] = -233408; break;
-      // case (825) : forced_shifts[label] = -243012; break;
-      // case (826) : forced_shifts[label] = -242249; break;
-      // case (828) : forced_shifts[label] = -235076; break;
-      // case (829) : forced_shifts[label] = -232000; break;
-      // case (830) : forced_shifts[label] = -242684; break;
-      // case (831) : forced_shifts[label] = -238313; break;
-      // case (832) : forced_shifts[label] = -238868; break;
-      // case (833) : forced_shifts[label] = -238871; break;
-      // case (834) : forced_shifts[label] = -235886; break;
-      // case (835) : forced_shifts[label] = -234000; break;
-      // case (840) : forced_shifts[label] = -250407; break;
-      // case (841) : forced_shifts[label] = -220000; break;
-      // case (842) : forced_shifts[label] = -240967; break;
-      // case (843) : forced_shifts[label] = -249883; break;
-      // case (845) : forced_shifts[label] = -255466; break;
-      // case (846) : forced_shifts[label] = -245108; break;
-      // case (847) : forced_shifts[label] = -250381; break;
-      // case (848) : forced_shifts[label] = -253537; break;
-      // case (850) : forced_shifts[label] = -246108; break;
-      // case (851) : forced_shifts[label] = -240327; break;
-      // case (852) : forced_shifts[label] = -238842; break;
-      // case (853) : forced_shifts[label] = -250727; break;
-      // case (854) : forced_shifts[label] = -242609; break;
       default: forced_shifts[label] = 0; break;
     }
   }
@@ -866,22 +839,22 @@ void Timeshifts::analyse()
   {
     print("ATTENTION : THIS RUN DOES NOT APPEAR TO CONTAIN ANY RF");
     print("RF label is :", RF_Manager::label);
-    print("Timing reference is :", m_time_reference_label);
+    print("Timing reference is :", m_time_ref_label);
   }
 #endif //USE_RF
 
   // Loop over all the channels time spectra :
-  for (Label label = 0; label<m_detectors.size(); label++)
+  for (Label label = 0; label<detectors.size(); label++)
   {
-    if (!m_detectors.exists[label]) continue; // Reject unused detectors
-    if (label == m_time_reference_label) {m_timeshifts[label] = 0; continue;} // Force the reference detector to be at 0;
+    if (!detectors.exists(label)) continue; // Reject unused detectors
+    if (label == m_time_ref_label) {m_timeshifts[label] = 0; continue;} // Force the reference detector to be at 0;
     
-    auto const & alias = Detectors::alias(label); // Get the detector's alias (dssd, ge, ...)
-    auto const & name = m_detectors[label];// Get the name ("R3A11_blue", ...)
+    auto const & type = detectors.type(label); // Get the detector's type (dssd, ge, ...)
+    auto const & name = detectors[label];// Get the name ("R3A11_blue", ...)
 
-    if (m_verbose) print(m_detectors[label]);
+    if (m_verbose) print(detectors[label]);
 
-    if (alias == dAlias::eden || alias == dAlias::RF) continue;
+    if (type == "eden" || type == "RF") continue;
 
     // Need to change that afterwards !!!
     if (forced_shifts[label] != 0)
@@ -892,14 +865,14 @@ void Timeshifts::analyse()
 
     // A. If RF, one can decide to use the RF time spectra to calculate the time shifts.
     // Attention !!! This works only if the peak lies bewteen 0 and the RF period, otherwise there will be a shift
-    if ((m_RF_preferred[alias] || m_RF_preferred_label[alias]) && has_RF)
+    if ((m_RF_preferred[type] || m_RF_preferred_label[label]) && has_RF)
     {
   #ifdef USE_RF
       auto const & RF_zero = m_timeshifts[RF_Manager::label];
       m_histograms_VS_RF[label].Merge();
       if (m_histograms_VS_RF[label].Integral() < 50 ) {print("Not a lot of hits : only", m_histograms_VS_RF[label].Integral(), "for", name); continue;}
       
-      if (m_edge_preferred[alias] || m_edge_preferred_label[label])
+      if (m_edge_preferred[type] || m_edge_preferred_label[label])
       { // Not taking the maximum but the raising edge of the time spectra :
         auto const & amppic = m_histograms_VS_RF[label] -> GetMaximum();
         auto const & peak_begin = m_histograms_VS_RF[label] -> FindFirstBinAbove(amppic*0.8);
@@ -923,7 +896,7 @@ void Timeshifts::analyse()
       if (m_time_spectra[label].Integral() < 50 ) {print("Not a lot of hits : only", m_time_spectra[label].Integral(), "for", name); continue;}
       m_time_spectra[label].Merge();
 
-      if (m_edge_preferred[alias])
+      if (m_edge_preferred[type])
       {
         auto const & amppic = m_time_spectra[label] -> GetMaximum();
         auto const & peak_begin = m_time_spectra[label] -> FindLastBinAbove(amppic*0.8);
@@ -1033,19 +1006,19 @@ bool Timeshifts::setTimeWindow_ns(std::string const & timewindow_string)
 
 bool Timeshifts::setTimeReference(Label const & timeRef_label)
 {
-  m_time_reference_label = timeRef_label;
-  m_timeRef_name = m_detectors[m_time_reference_label];
-  std::cout << "Reference detector set to be " << m_timeRef_name << " (n°" << m_time_reference_label << ")" << std::endl;
+  m_time_ref_label = timeRef_label;
+  m_time_ref_name = detectors[m_time_ref_label];
+  std::cout << "Reference detector set to be " << m_time_ref_name << " (n°" << m_time_ref_label << ")" << std::endl;
   return true;
 }
 
 bool Timeshifts::setTimeReference(std::string const & timeRef_name)
 {
-  m_timeRef_name = timeRef_name;
+  m_time_ref_name = timeRef_name;
   if (timeRef_name == "") {std::cout << "NO TIME REFERENCE !!" << std::endl; return false; }
   // If the string contains the label number then convert the string to int (stoi)
-  // If the string contains the detector name then extract the label number from the detectors list (m_detectors)
-  return setTimeReference( Label_cast((isNumber(timeRef_name)) ? std::stoi(timeRef_name) : m_detectors.getLabel(timeRef_name)));
+  // If the string contains the detector name then extract the label number from the detectors list (detectors)
+  return setTimeReference( Label_cast((isNumber(timeRef_name)) ? std::stoi(timeRef_name) : detectors.getLabel(timeRef_name)));
 }
 
 void Timeshifts::setOutDir(std::string const & outDir)

@@ -195,6 +195,7 @@ public:
 };
 
 using Strings = std::vector<std::string>;
+using Ints = std::vector<int>;
 
 /////////////////////////////
 //    STANDART FUNCTIONS   //
@@ -227,11 +228,11 @@ bool find_value(std::map<K,V> const & map, V const & value)
 }
 
 template<typename K, typename V> 
-std::pair<K,V> get_max(std::map<K,V> const & map) 
+std::pair<K,V> get_max_element(std::map<K,V> const & map) 
 {
   return *std::max_element(map.begin(), map.end(), [] (const std::pair<K,V> & p1, const std::pair<K,V> & p2) 
   {
-        return p1.second < p2.second;
+    return p1.second < p2.second;
   }); 
 }
 
@@ -240,7 +241,7 @@ V get_max_value(std::map<K,V> const & map)
 {
   return (std::max_element(map.begin(), map.end(), [] (const std::pair<K,V> & p1, const std::pair<K,V> & p2) 
   {
-        return p1.second < p2.second;
+    return p1.second < p2.second;
   })->second); 
 }
 
@@ -286,5 +287,51 @@ K get_min_key(std::map<K,V> const & map)
 
 template <typename T>
 using T_is_number = std::enable_if_t<std::is_arithmetic_v<T>>;
+
+////////////////////////////
+//   SLOTS AND SIGNALS   //
+////////////////////////////
+
+template<class... ARGS>
+class Signal
+{
+  public:
+
+  Signal() = default;
+  // Signal(std::function<void(ARGS...)> && func) {}
+  // Signal(std::function<void(ARGS...)> & func) {m_signals.emplace_back(func);}
+
+  void operator()(ARGS &&... args){for (auto const & signal : m_signals) signal(std::forward<ARGS>(args)...);}
+
+  void connect(std::function<void(ARGS...)> func)
+  {
+    m_signals.push_back(func);
+  }
+
+  private:
+
+  std::vector<std::function<void(ARGS...)>> m_signals;
+  // std::vector<std::function<void(ARGS...)>> m_signals;
+
+};
+
+class Slots
+{
+  public:
+  Slots() = default;
+
+  template<class... ARGS>
+  static void connect(std::function<void(ARGS...)> signal, std::function<void(ARGS...)> slot)
+  {
+
+  }
+
+  private:
+
+
+  // std::vector<std::function<void(ARGS...)>> m_slots;
+
+};
+
 
 #endif //LIB_H_CO

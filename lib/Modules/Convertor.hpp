@@ -181,14 +181,14 @@ protected:
 
 void Convertor::printParameters() const
 {
-    print("Usage of Convertor : /path/to/data /pat/to/output [[parameters]])");
+    print("Usage of Convertor : /path/to/data /pat/to/output [[parameters]]");
     print("");
     print("parameters :");
     print("");
     print("-c [calibration_file]  : Loads the calibration file");
     print("-e [time_window_ns]    : Perform event building with time_window_ns = 1500 ns by default");
     print("-f [files_number]      : Choose the total number of files to treat inside a data folder");
-    print("-i [ID_file]           : Load ID file");
+    print("-i [ID_file]           : Load ID file (not necessary so far)");
     print("-n [hits_number]       : Choose the number of hits to read inside a file");
     print("-m [threads_number]    : Choose the number of files to treat in parallel");
     print("-t [time_window_ns]    : Loads timeshift data");
@@ -202,6 +202,7 @@ Convertor::Convertor(int argc, char** argv, Trigger trigger)
   {
     print("Not enough parameters !!!");
     printParameters();
+    throw_error("Parameters");
   }
 
   Path m_dataPath = argv [1];
@@ -246,6 +247,7 @@ void Convertor::convert(std::string const & dataFolder, std::string const & outp
 void Convertor::convertFile(Hit & hit, FasterReader & reader, Path const & outPath)
 {
   Timer timer;
+
   //Filename manipulations :
   File inputFile = reader.filename();
   File outputFile = outPath+inputFile.shortName()+".root";
@@ -253,11 +255,11 @@ void Convertor::convertFile(Hit & hit, FasterReader & reader, Path const & outPa
   if (!m_overwrite && outputFile.exists()) {print(outputFile, "already exists ! Use option -o to overwrite"); return;}
   
   unique_tree tree(new TTree("Nuball2","Nuball2"));
-  tree -> SetDirectory(nullptr);
+  tree -> SetDirectory(nullptr); // Set the tree RAM resident : increases memory usage but speeds the process
   Event event;
   unique_tree tempTree;
   if (m_eventbuilding)
-  {
+  {// Event building is done in two times : first filling a temporary tree, then reorder it after timeshift and finally create events
     tempTree.reset(new TTree("temp","temp"));
     tempTree -> SetDirectory(nullptr);
     hit.writting(tempTree.get(), (m_calibration) ? "lsEQp" : "lseqp");
@@ -279,7 +281,7 @@ void Convertor::convertFile(Hit & hit, FasterReader & reader, Path const & outPa
     }
     if (m_eventbuilding) tempTree -> Fill();
     else
-    {
+    {// If no event bulding, directly writes the hits
       event = hit;
       tree -> Fill();
     }
@@ -288,7 +290,7 @@ void Convertor::convertFile(Hit & hit, FasterReader & reader, Path const & outPa
   if (nb_data<1) {print("EMPTY TEMP TREE"); throw_error("DATA");}
   m_total_hits+=nb_data;
   if (m_eventbuilding)
-  {// Read the temporary tree and 
+  {// Read the temporary tree and perform event building :
     Alignator alignator(tempTree.get());
     hit.reading(tempTree.get(), (m_calibration) ? "lsEQp" : "lseqp");
     CoincBuilder builder(&event, m_time_window);

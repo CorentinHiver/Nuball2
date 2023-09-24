@@ -153,13 +153,13 @@ public:
   struct histograms
   {
     // Binning raw spectra
-    std::map<dAlias, NRJ> m_bins_raw   = {{labr_a,   1000.}, {ge_a,  20000.}, {bgo_a,   5000.}, {eden_a,      500.}, {paris_a,  10000.}, {dssd_a,   5000.}};
-    std::map<dAlias, NRJ> m_min_raw    = {{labr_a,      0.}, {ge_a,      0.}, {bgo_a,      0.}, {eden_a,        0.}, {paris_a,      0.}, {dssd_a,      0.}};
-    std::map<dAlias, NRJ> m_max_raw    = {{labr_a, 500000.}, {ge_a, 500000.}, {bgo_a,5000000.}, {eden_a,   500000.}, {paris_a, 500000.}, {dssd_a, 500000.}};
+    // std::map<dType, NRJ> m_bins_raw   = {{"labr",   1000.}, {"ge",  20000.}, {"bgo",   5000.}, {"eden",      500.}, {"paris",  10000.}, {"dssd",   5000.}};
+    // std::map<dType, NRJ> m_min_raw    = {{"labr",      0.}, {"ge",      0.}, {"bgo",      0.}, {"eden",        0.}, {"paris",      0.}, {"dssd",      0.}};
+    // std::map<dType, NRJ> m_max_raw    = {{"labr", 500000.}, {"ge", 500000.}, {"bgo",5000000.}, {"eden",   500000.}, {"paris", 500000.}, {"dssd", 500000.}};
     
-    std::map<dAlias, NRJ> m_bins_calib = {{labr_a,   1000.}, {ge_a,   6000.}, {bgo_a,    500.}, {eden_a,      500.}, {paris_a,   5000.},  {dssd_a,   500.}};
-    std::map<dAlias, NRJ> m_min_calib  = {{labr_a,      0.}, {ge_a,      0.}, {bgo_a,      0.}, {eden_a,       -1.}, {paris_a,      0.},  {dssd_a,     0.}};
-    std::map<dAlias, NRJ> m_max_calib  = {{labr_a,   3000.}, {ge_a,   3000.}, {bgo_a,   3000.}, {eden_a,       1.5}, {paris_a,  10000.},  {dssd_a, 20000.}};
+    // std::map<dType, NRJ> m_bins_calib = {{"labr",   1000.}, {"ge",   6000.}, {"bgo",    500.}, {"eden",      500.}, {"paris",   5000.},  {"dssd",   500.}};
+    // std::map<dType, NRJ> m_min_calib  = {{"labr",      0.}, {"ge",      0.}, {"bgo",      0.}, {"eden",       -1.}, {"paris",      0.},  {"dssd",     0.}};
+    // std::map<dType, NRJ> m_max_calib  = {{"labr",   3000.}, {"ge",   3000.}, {"bgo",   3000.}, {"eden",       1.5}, {"paris",  10000.},  {"dssd", 20000.}};
     
     // Raw spectra :
     Vector_MTTHist<TH1F> raw_spectra;
@@ -172,7 +172,7 @@ public:
     // Other spectra :
     std::map<int, TH1F*> spectra;
 
-    void Initialize(Calibration & calib);
+    void Initialize();
     void setBins(std::string const & parameters);
   } m_histos;
 
@@ -180,21 +180,9 @@ public:
 
   Calibration() {m_ok = false;}
 
-  Calibration(Detectors const & detList) 
-  {
-    m_detectors = detList;
-  }
-
-  Calibration(Detectors const & detList, std::string const & loadfile) 
-  {
-    m_detectors = detList;
-    load(loadfile);
-  }
-
   /// @brief Copy constructor
   Calibration (Calibration const & otherCalib)
   {
-    m_detectors     = otherCalib.m_detectors;
     m_ok            = otherCalib.m_ok;
     m_nb_detectors  = otherCalib.m_nb_detectors;
     m_max_labels    = otherCalib.m_max_labels;
@@ -208,7 +196,6 @@ public:
   /// @brief Copy operator
   Calibration const & operator=(Calibration const & otherCalib) 
   {
-    m_detectors     = otherCalib.m_detectors;
     m_ok            = otherCalib.m_ok;
     m_nb_detectors  = otherCalib.m_nb_detectors;
     m_max_labels    = otherCalib.m_max_labels;
@@ -232,7 +219,7 @@ public:
   /// @attention TODO
   void calculate(std::string const & histograms, std::string const & source = "152Eu");
 
-  void Initialize() {m_histos.Initialize(*this); m_fits.resize(1000);}
+  void Initialize() {m_histos.Initialize(); m_fits.resize(1000);}
 
   void loadRootData(std::string const & dataDir, int const & nb_files = -1);
   static void loadRootDataThread(Calibration & calib, MTList & list);
@@ -250,8 +237,6 @@ public:
   void verify(std::string const & outfilename = "verify");
   void writeCalibratedRoot(std::string const & outfilename);
 
-  void setDetectorsList(Detectors const & ID_file) {m_detectors = ID_file;}
-  void setDetectorsList(Detectors *ID_file) {m_detectors = *ID_file;}
   void setSource(std::string const & source) {m_source = source;}
   void verbose(bool const & _verbose) {m_verbose = _verbose;}
 
@@ -290,8 +275,6 @@ public:
 
   auto const & size() const {return m_nb_detectors;}
 
-  auto const & detectors() const {return m_detectors;}
-
   // Accessors to the calibration vectors :
   std::vector<NRJ> operator[](Label const & label) const 
   {
@@ -318,7 +301,6 @@ private:
   std::string m_outCalib  = "";
   std::string m_outDir    = "Calibration/";
 
-  Detectors m_detectors;
   Fits m_fits;
 
   //Attributs for the tables :
@@ -334,47 +316,54 @@ private:
   std::vector<std::vector<std::vector<NRJ>>> calibration_tables;
 };
 
-void Calibration::histograms::Initialize(Calibration & calib)
+void Calibration::histograms::Initialize()
 {
-  auto const & nb_det = calib.m_detectors.size();
+  auto const & max_label = detectors.size();
 
-  if (nb_det == 0) 
+  if (max_label == 0) 
   {
     print("Error using Detector class in Calibration module."); 
     throw std::runtime_error(error_message["DEV"]);
   }
 
-  // Bidims :
-  auto bins_bidim_raw = get_max_value(m_bins_raw);
-  auto max_bin_raw = get_max_value(m_max_raw);
-  all_raw_spectra.reset("All_detectors", std::string("All_detectors").c_str(), nb_det,0,nb_det, bins_bidim_raw,0,max_bin_raw);
+  // Load the binning informations : 
+  auto const & raw_bins = detectors.getADCBin();
+  auto const & energy_bins = detectors.getEnergyBin();
+  auto const & bidim_bins = detectors.getBidimBin();
 
-  all_calib.resize(calib.m_detectors.nb_aliases());
-  for (auto const & pair : m_bins_calib) // Loop through the bins that has been set
+  // All the detectors spectra in one plot :
+  all_raw_spectra.reset("All_detectors", "All detectors", 
+      max_label,0,max_label, raw_bins.at("default").bins,0,raw_bins.at("default").min);
+
+  // All the calibrated detectors spectra of each type in one plot :
+  all_calib.resize(detectors.nbTypes());
+  for (auto const & type : detectors.types())
   {
-    auto alias = pair.first;
-    auto const & type = Detector::alias_str[alias];
-    if (!(find_key(m_min_calib, alias) && find_key(m_max_calib, alias))) continue; // Reject aliases with badly set bins
-    auto nb_detectors = calib.m_detectors.nb_det_in_alias(alias);
-    if (nb_detectors<1) continue;// Reject aliases without detectors
-    all_calib[alias].reset(("All_"+type+"_spectra").c_str(), ("All "+type+" spectra").c_str(), 
-        nb_detectors,0,nb_detectors, m_bins_calib[alias],m_min_calib[alias],m_max_calib[alias]);
+    auto nb_detectors = detectors.nbOfType(type);
+    auto const & binning = bidim_bins.at(type);
+    all_calib[detectors.typeIndex(type)].reset(("All_"+type+"_spectra").c_str(), ("All "+type+" spectra").c_str(), 
+        nb_detectors,0,nb_detectors, binning.bins,binning.min,binning.max);
   }
 
-  calib_spectra.resize(nb_det);
-  raw_spectra.resize(nb_det);
-
-  for (Label label = 0; label<nb_det; label++)
+  // All the raw and/or calibrated spectra in a separate spectra :
+  calib_spectra.resize(max_label);
+  raw_spectra.resize(max_label);
+  for (Label label = 0; label<max_label; label++)
   {
-    auto const & name = calib.m_detectors[label];
-    auto const & alias = Detectors::alias(label);
-    if (alias == dAlias::null || alias == dAlias::RF)
+    auto const & name = detectors[label];
+    auto const & type = detectors.type(label);
+    if (type == "null" || type == "RF")
     {
       calib_spectra[label].reset((std::to_string(label)+"_calib").c_str(), (std::to_string(label)+" calibrated spectra").c_str(), 1000, 0, 1000);
       raw_spectra[label].reset((std::to_string(label)+"_raw").c_str(), (std::to_string(label)+" raw spectra").c_str(), 1000, 0, 1000);
     }
-    calib_spectra[label].reset((name+"_calib").c_str(), (name+" calibrated spectra").c_str(), m_bins_calib[alias], m_min_calib[alias], m_max_calib[alias]);
-    raw_spectra[label].reset((name+"_raw").c_str(), (name+" raw spectra").c_str(), m_bins_raw[alias], m_min_raw[alias], m_max_raw[alias]);
+    else 
+    {
+      auto const & bin_raw = energy_bins.at(type);
+      auto const & bin_calib = energy_bins.at(type);
+      raw_spectra[label].reset((name+"_raw").c_str(), (name+" raw spectra").c_str(), bin_raw.bins, bin_raw.min, bin_raw.max);
+      calib_spectra[label].reset((name+"_calib").c_str(), (name+" calibrated spectra").c_str(), bin_calib.bins, bin_calib.min, bin_calib.max);
+    }
   }
 }
 
@@ -387,11 +376,10 @@ void Calibration::histograms::setBins(std::string const & parameters)
     std::string type;
     std::string which_histo;
     is>>type;
-    auto alias = Detector::getAlias(type);
-    if (alias == dAlias::null) {throw std::runtime_error(type+"type is not recognized for binning in Calibration");continue;}
+    if (type == "null") {throw std::runtime_error(type+"type is not recognized for binning in Calibration");continue;}
     is >> which_histo;
-         if (which_histo == "raw"  ) is >> m_bins_raw  [alias] >> m_min_raw  [alias] >> m_max_raw  [alias];
-    else if (which_histo == "calib") is >> m_bins_calib[alias] >> m_min_calib[alias] >> m_max_calib[alias];
+         if (which_histo == "raw"  ) is >> detectors.ADC_bins[type].bins >> detectors.ADC_bins[type].min >> detectors.ADC_bins[type].max;
+    else if (which_histo == "calib") is >> detectors.energy_bins[type].bins >> detectors.energy_bins[type].min >> detectors.energy_bins[type].max;
     else {throw std::runtime_error(which_histo+"histo of Calibraiton module not recognized ");continue;}
   }
 }
@@ -439,11 +427,11 @@ void Calibration::loadRootHisto(std::string const & histograms)
       {
         auto hist = dynamic_cast<TH1F*>(obj);
         std::string name = hist -> GetName();
-        for (auto const & _name : m_detectors)
+        for (auto const & _name : detectors)
         {
           if (_name!="" && name.find(_name) != std::string::npos)
           {
-            auto const & label = m_detectors.getLabel(_name);
+            auto const & label = detectors.getLabel(_name);
             if (name.find("_raw")) m_histos.raw_spectra[label] = hist;
             else if (name.find("_calib")) m_histos.calib_spectra[label] = dynamic_cast<TH1F*> (hist->Clone(_name.c_str()));
             else m_histos.spectra[label] = dynamic_cast<TH1F*> (hist->Clone(_name.c_str()));
@@ -514,7 +502,7 @@ void Calibration::fillRootDataHisto(std::string const & filename)
       }
       auto const nrjcal = calibrate(event.adcs[hit], label);
       m_histos.calib_spectra[label].Fill(nrjcal);
-      m_histos.all_calib[detectors().alias(label)].Fill(compressedLabel[label], nrjcal);
+      m_histos.all_calib[detectors.typeIndex(label)].Fill(compressedLabel[label], nrjcal);
     }
   }
   else for (long evt = 0; evt<nb_hits; evt++)
@@ -536,7 +524,7 @@ void Calibration::fillHisto(Hit & hit, FasterReader & reader, Calibration & cali
     if (calib.m_order[hit.label]<1) continue;
     auto nrj_cal = calib.calibrate(hit.adc, hit.label);
     calib.m_histos.calib_spectra[hit.label].Fill(nrj_cal);
-    calib.m_histos.all_calib[calib.detectors().alias(hit.label)].Fill(compressedLabel[hit.label], nrj_cal);
+    calib.m_histos.all_calib[detectors.typeIndex(hit.label)].Fill(compressedLabel[hit.label], nrj_cal);
   }
   else while(reader.Read())
   {
@@ -554,13 +542,13 @@ void Calibration::peakFinder(std::string const & source)
 {
   int nb_pics = 0;
   double E_right_pic = 0.f;
-  for (Label label = 0; label<m_detectors.size(); label++)
+  for (Label label = 0; label<detectors.size(); label++)
   {
-    if (!m_detectors.exists[label]) continue;
+    if (!detectors.exists(label)) continue;
 
     auto & histo = m_histos.raw_spectra[label];
-    auto const & name = m_detectors[label];
-    auto const & alias = m_detectors.alias(label);
+    auto const & name = detectors[label];
+    auto const & type = detectors.type(label);
 
     if (histo.Integral()==0)
     {
@@ -586,10 +574,10 @@ void Calibration::peakFinder(std::string const & source)
     int minHitsToCalibrate = 50000;
 
     // Handles the triple alpha
-    if (isTripleAlpha(source) && alias!=dssd_a) continue;
-    else if (!isTripleAlpha(source) && alias==dssd_a) continue;
+    if (isTripleAlpha(source) && type!="dssd") continue;
+    else if (!isTripleAlpha(source) && type=="dssd") continue;
     
-    if (alias == ge_a)
+    if (type == "ge")
     {// For Clovers
       window_1 = 10, window_2 = 10;
       if (source == "152Eu")
@@ -620,7 +608,7 @@ void Calibration::peakFinder(std::string const & source)
         ADC_threshold = 100;
       }
     }
-    else if (alias == labr_a)
+    else if (type == "labr")
     {// For labr
       window_1 = 70, window_2 = 50;
       if (source == "152Eu")
@@ -651,7 +639,7 @@ void Calibration::peakFinder(std::string const & source)
         ADC_threshold = 100;
       }
     }
-    else if (alias == paris_a)
+    else if (type == "paris")
     {// For paris
       window_1 = 80, window_2 = 50;
       if (source == "152Eu")
@@ -684,7 +672,7 @@ void Calibration::peakFinder(std::string const & source)
         ADC_threshold = 500;
       }
     }
-    else if (alias == dssd_a)
+    else if (type == "dssd")
     {
       if (isTripleAlpha(source))
       {
@@ -702,7 +690,7 @@ void Calibration::peakFinder(std::string const & source)
         if (m_verbose) {print("DSSD not to be taken in this calibration file");}
       }
     }
-    else if (alias == bgo_a)
+    else if (type == "bgo")
     {
       
       if (source == "152Eu")
@@ -772,7 +760,7 @@ void Calibration::peakFinder(std::string const & source)
     kpc=E_right_pic/vmaxchan;
     if (m_verbose) print("kev per channel = ", kpc);
 
-    if (alias == bgo_a)
+    if (type == "bgo")
     {
       // For BGOs, already "gain matched", a simple affine relation roughly calibrates
       fit.exists(true);
@@ -849,7 +837,7 @@ void Calibration::peakFinder(std::string const & source)
 
 void Calibration::fitCalibration(Fits & fits)
 {
-  for (Label label = 0; label<m_detectors.size(); label++)
+  for (Label label = 0; label<detectors.size(); label++)
   {
     Fit & fit = fits[label];
     auto const & nb_pics = fit.peaks.size();
@@ -1034,7 +1022,7 @@ bool Calibration::load(std::string const & calibFileName)
   Label label = 0;
   // ----------------------------------------------------- //
   // First extract the maximum label
-  if (m_detectors) size = m_detectors.size();
+  if (detectors) size = detectors.size();
   else 
   {// If no ID file loaded, infer the number of detectors from the higher label in calbration file (unsafe)
     while (getline(inputfile, line))
@@ -1114,7 +1102,7 @@ void Calibration::writeData(std::string const & outfilename)
   outFile.makePath(); // Create the path if it doesn't already exist
 
   std::ofstream outfile(outFile);
-  for (auto const & fit : m_fits) if (m_detectors.exists[fit.label()]) outfile << fit;
+  for (auto const & fit : m_fits) if (detectors.exists(fit.label())) outfile << fit;
   print("Data written to", outfilename);
 }
 
@@ -1129,22 +1117,23 @@ void Calibration::writeRawRoot(std::string const & outfilename)
 
 void Calibration::verify(std::string const & outfilename)
 {
-  std::vector<size_t> nb_det_filled(m_detectors.nb_aliases(), 0);
+  std::vector<size_t> nb_det_filled(detectors.nbTypes(), 0);
   print("Verification of the calibration");
   for (Label label = 0; label<m_histos.raw_spectra.size(); label++) 
   {
-    if (!m_detectors.exists[label]) continue;
-    auto const & name = m_detectors[label];
+    if (!detectors.exists(label)) continue;
+    auto const & name = detectors[label];
     auto & raw_histo = m_histos.raw_spectra[label];
     if (raw_histo.Integral()<1) {if (m_verbose) print(name, "has no hit"); continue;}
     raw_histo.Merge();
     auto & calib_histo = m_histos.calib_spectra[label];
     calib_histo.Merge();
     auto const & fit = m_fits[label];
-    if (!fit.exists()) {nb_det_filled[m_detectors.alias(label)]++; if (m_verbose) print(name, "has no fit"); continue;}
 
     // Extract useful information : 
-    auto const & alias = m_detectors.alias(label);
+    auto const & type = detectors.type(label);
+    auto const & type_index = detectors.typeIndex(type);
+    if (!fit.exists()) {nb_det_filled[type_index]++; if (m_verbose) print(name, "has no fit"); continue;}
 
     auto const xaxis_raw = raw_histo -> GetXaxis();
     auto const & nb_bins = xaxis_raw -> GetNbins();
@@ -1163,10 +1152,10 @@ void Calibration::verify(std::string const & outfilename)
           case 2 : nrj = fit.parameter0 + nrj*fit.parameter1 + nrj*nrj*fit.parameter2; break;
         }
         calib_histo -> Fill(nrj);
-        m_histos.all_calib[alias]->Fill(double_cast(nb_det_filled[alias]), nrj);
+        m_histos.all_calib[type_index]->Fill(double_cast(nb_det_filled[type_index]), nrj);
       }
     }
-    nb_det_filled[alias]++;
+    nb_det_filled[type_index]++;
   }
   writeCalibratedRoot(outfilename+"_calib.root");
 }
@@ -1197,8 +1186,7 @@ void Calibration::writeCalibratedData(std::string const & outfilename)
 
 std::ostream& operator<<(std::ostream& cout, Calibration const & calib)
 {
-  auto const & det = calib.detectors();
-  for (Label label = 0; label<det.size(); label++) if (det.exists[label])
+  for (Label label = 0; label<detectors.size(); label++) if (detectors.exists(label))
   {
      cout << label << " " << calib[label] << std::endl;
   }

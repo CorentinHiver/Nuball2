@@ -26,6 +26,12 @@ bool push_back_unique(std::vector<T> & vector, T const & t)
   }
 }
 
+// template <class T>
+// T get_max_value(std::vector<T> const & vec)
+// {
+//   return 
+// }
+
 ////////////////////////////
 //   CLASS STATIC VECTOR  //
 ////////////////////////////
@@ -99,8 +105,11 @@ public:
   {
     if(!m_deleted)
     {
-      delete[] m_data;
-      m_deleted = true;
+      if (m_static_size > 0)
+      {
+        delete[] m_data;
+        m_deleted = true;
+      }
     }
     else 
     {
@@ -152,6 +161,20 @@ public:
     fill_static(t);
   }
 
+  void inline checkCapacity() const
+  {
+  #ifndef UNSAFE
+    if (m_dynamic_size > m_static_size) std::cout << "Capacity of StaticVector<" << typeid(T).name() << "> with size " << m_static_size << " exceeded" << std::endl;
+  #endif //UNSAFE
+  }
+
+  void inline checkCapacity() 
+  {
+  #ifndef UNSAFE
+    if (m_dynamic_size > m_static_size) std::cout << "Capacity of StaticVector<" << typeid(T).name() << "> with size " << m_static_size << " exceeded" << std::endl;
+  #endif //UNSAFE
+  }
+
   /// @brief Does the vector contain element e ?
   /// @param t: variable in read-only mode
   virtual bool has(T const & t) const {return (std::find(this -> begin(), this -> end(), t) != this -> end());}
@@ -163,23 +186,15 @@ public:
   /// @brief Add element to the back of the vector. Use for performances. Unsafe. define SAFE for less performance but size checking
   void push_back(T const & e) 
   {
-  #ifndef UNSAFE
-    if (m_dynamic_size < m_static_size) m_data[m_dynamic_size++] = e;
-    else std::cout << "Capacity of StaticVector<" << typeid(T).name() << "> with size " << m_static_size << " exceeded" << std::endl;
-  #else 
+    checkCapacity();
     m_data[m_dynamic_size++] = e;
-  #endif //UNSAFE
   }
 
   /// @brief Move the element to the back of the vector. Use for performances. Unsafe. define SAFE for less performance but size checking
   void move_back(T && e) 
   {
-  #ifndef UNSAFE
-    if (m_dynamic_size < m_static_size) m_data[m_dynamic_size++] = e;
-    else std::cout << "Capacity of StaticVector<" << typeid(T).name() << "> with size " << m_static_size << " exceeded" << std::endl;
-  #else 
+    checkCapacity();
     m_data[m_dynamic_size++] = std::move(e);
-  #endif //UNSAFE
   }
 
   /// @brief Add element to the back of the vector only if the vector do not contain it
@@ -201,7 +216,11 @@ public:
   auto const & size() const {return m_dynamic_size;}
 
   /// @brief Return the ith element 
-  T & operator[] (std::size_t const & i) const {return m_data[i];}
+  T & operator[] (std::size_t const & i) const 
+  {
+    checkCapacity();
+    return m_data[i];
+  }
 
   /// @brief Return the ith element and check i do not exceed the size of the vector
   T const & at(std::size_t const & i) const {if (i < m_static_size) return m_data[i]; else return m_data[0];}

@@ -62,13 +62,109 @@ inline Timestamp Timestamp_cast(T const & t) {return static_cast<Timestamp>(t);}
 /// IO parameters ///
 /////////////////////
 
+// /**
+//  * @brief ReadIO options
+//  * @details
+//  * 
+//  * l : label  label                 ushort
+//  * s : stamp  absolute timestamp ps ULong64_t
+//  * t : time   relative timestamp ps Long64_t
+//  * T : time2  relative timestamp ns float
+//  * e : adc    energy in ADC         int
+//  * E : nrj    energy in keV         float
+//  * q : qdc2   energy qdc2 in ADC    float
+//  * Q : nrj2   energy qdc2 in keV    float
+//  * p : pileup pilepup               bool
+//  * 
+//  */
+// struct ReadIO
+// {
+//   bool l = false; // label
+//   bool s = false; // Timestamp
+//   bool t = false; // relative time ps
+//   bool T = false; // relative time ns
+//   bool e = false; // energy in ADC
+//   bool E = false; // calibrated energy
+//   bool q = false; // qdc2
+//   bool Q = false; // calibrated qdc2
+//   bool p = false; // pileup
+
+//   void setOptions(std::string const & options)
+//   {
+//     for (auto const & option : options)
+//     {
+//       switch (option)
+//       {
+//         case ('l') : l   = true;  break;
+//         case ('s') : s   = true;  break;
+//         case ('t') : t   = true;  break;
+//         case ('T') : T   = true;  break;
+//         case ('e') : e   = true;  break;
+//         case ('E') : E   = true;  break;
+//         case ('q') : q   = true;  break;
+//         case ('Q') : Q   = true;  break;
+//         case ('p') : p   = true;  break;
+//         default : print("Unkown parameter", option, "for io event");
+//       }
+//     }
+//   }
+// };
+
+// /**
+//  * @brief WriteIO options
+//  * @details
+//  * 
+//  * l : label  label                 ushort
+//  * s : stamp  absolute timestamp ps ULong64_t
+//  * t : time   relative timestamp ps Long64_t
+//  * T : time2  relative timestamp ns float
+//  * e : adc    energy in ADC         int
+//  * E : nrj    energy in keV         float
+//  * q : qdc2   energy qdc2 in ADC    float
+//  * Q : nrj2   energy qdc2 in keV    float
+//  * p : pileup pilepup               bool
+//  * 
+//  */
+// struct WriteIO
+// {
+//   bool l = false; // label
+//   bool s = false; // Timestamp
+//   bool t = false; // relative time ps
+//   bool T = false; // relative time ns
+//   bool e = false; // energy in ADC
+//   bool E = false; // calibrated energy
+//   bool q = false; // qdc2
+//   bool Q = false; // calibrated qdc2
+//   bool p = false; // pileup
+
+//   void setOptions(std::string const & options)
+//   {
+//     for (auto const & option : options)
+//     {
+//       switch (option)
+//       {
+//         case ('l') : l   = true;  break;
+//         case ('s') : s   = true;  break;
+//         case ('t') : t   = true;  break;
+//         case ('T') : T   = true;  break;
+//         case ('e') : e   = true;  break;
+//         case ('E') : E   = true;  break;
+//         case ('q') : q   = true;  break;
+//         case ('Q') : Q   = true;  break;
+//         case ('p') : p   = true;  break;
+//         default : print("Unkown parameter", option, "for io event");
+//       }
+//     }
+//   }
+// };
+
 /**
- * @brief Read options
+ * @brief ReadIO options
  * @details
  * 
  * l : label  label                 ushort
  * s : stamp  absolute timestamp ps ULong64_t
- * t : time   relative timestamp ps int
+ * t : time   relative timestamp ps Long64_t
  * T : time2  relative timestamp ns float
  * e : adc    energy in ADC         int
  * E : nrj    energy in keV         float
@@ -77,18 +173,11 @@ inline Timestamp Timestamp_cast(T const & t) {return static_cast<Timestamp>(t);}
  * p : pileup pilepup               bool
  * 
  */
-struct Read
+class IOptions
 {
-  bool l = false; // label
-  bool s = false; // Timestamp
-  bool t = false; // relative time ps
-  bool T = false; // relative time ns
-  bool e = false; // energy in ADC
-  bool E = false; // calibrated energy
-  bool q = false; // qdc2
-  bool Q = false; // calibrated qdc2
-  bool p = false; // pileup
-
+public:
+  IOptions(){}
+  IOptions(std::string const & options) {setOptions(options);}
   void setOptions(std::string const & options)
   {
     for (auto const & option : options)
@@ -108,25 +197,7 @@ struct Read
       }
     }
   }
-};
 
-/**
- * @brief Write options
- * @details
- * 
- * l : label  label                 ushort
- * s : stamp  absolute timestamp ps ULong64_t
- * t : time   relative timestamp ps int
- * T : time2  relative timestamp ns float
- * e : adc    energy in ADC         int
- * E : nrj    energy in keV         float
- * q : qdc2   energy qdc2 in ADC    float
- * Q : nrj2   energy qdc2 in keV    float
- * p : pileup pilepup               bool
- * 
- */
-struct Write
-{
   bool l = false; // label
   bool s = false; // Timestamp
   bool t = false; // relative time ps
@@ -136,26 +207,6 @@ struct Write
   bool q = false; // qdc2
   bool Q = false; // calibrated qdc2
   bool p = false; // pileup
-
-  void setOptions(std::string const & options)
-  {
-    for (auto const & option : options)
-    {
-      switch (option)
-      {
-        case ('l') : l   = true;  break;
-        case ('s') : s   = true;  break;
-        case ('t') : t   = true;  break;
-        case ('T') : T   = true;  break;
-        case ('e') : e   = true;  break;
-        case ('E') : E   = true;  break;
-        case ('q') : q   = true;  break;
-        case ('Q') : Q   = true;  break;
-        case ('p') : p   = true;  break;
-        default : print("Unkown parameter", option, "for io event");
-      }
-    }
-  }
 };
 
 /////////////////
@@ -203,12 +254,9 @@ class Hit
 {
 public:
   Hit(){reset();}
-  // Hit(Label _label, Timestamp _stamp, Time _time =0, ADC _adc = 0, ADC _qdc2 = 0, float _time2 = 0, NRJ _nrj = 0, NRJ _nrj2 = 0, bool _pileup = false) : 
-  Hit(Label _label, Timestamp _stamp, ADC _adc = 0, ADC _qdc2 = 0, float _time2 = 0, NRJ _nrj = 0, NRJ _nrj2 = 0, bool _pileup = false) : 
+  Hit(Label _label, Timestamp _stamp, ADC _adc = 0, ADC _qdc2 = 0, NRJ _nrj = 0, NRJ _nrj2 = 0, bool _pileup = false) : 
     label  (_label),
     stamp  (_stamp),
-    // time   (_time),
-    time2  (_time2),
     adc    (_adc),
     qdc2   (_qdc2),
     nrj    (_nrj),
@@ -219,8 +267,6 @@ public:
   Hit(Hit const & hit) :
     label  (hit.label),
     stamp  (hit.stamp),
-    // time   (hit.time),
-    time2  (hit.time2),
     adc    (hit.adc),
     qdc2   (hit.qdc2),
     nrj    (hit.nrj),
@@ -232,8 +278,6 @@ public:
   {
     label  = hit.label;
     stamp  = hit.stamp;
-    // time   = hit.time;
-    time2  = hit.time2;
     adc    = hit.adc;
     qdc2   = hit.qdc2;
     nrj    = hit.nrj;
@@ -244,8 +288,6 @@ public:
 
   Label     label  = 0;     // Label
   Timestamp stamp  = 0ull;  // Timestamp ('ull' stands for unsigned long long)
-  // Time      time   = 0;     // Relative time in ps
-  Time_ns   time2  = 0.f;   // Relative time in ns
   ADC       adc    = 0;     // Energy in ADC or QDC1
   ADC       qdc2   = 0;     // Energy in qdc2
   NRJ       nrj = 0.f;      // Calibrated energy in keV
@@ -256,8 +298,6 @@ public:
   {
     label  = 0;
     stamp = 0ull;
-    // time   = 0;
-    time2  = 0.f;
     adc    = 0;
     qdc2   = 0;
     nrj = 0.f;
@@ -265,12 +305,38 @@ public:
     pileup = false;
   }
 
+  void reading (TTree * tree);
   void reading (TTree * tree, std::string const & options);
   void writting(TTree * tree, std::string const & options);
 
-  Read read;
-  Write write;
+  IOptions read;
+  IOptions write;
 };
+
+void Hit::reading(TTree * tree)
+{
+  if (!tree) {print("Input tree at address 0x00 !"); return;}
+
+  this->reset();
+
+  tree -> ResetBranchAddresses();
+
+  TObjArray* branches = tree->GetListOfBranches();
+  for (int i = 0; i < branches->GetEntries(); ++i) 
+  {
+    auto branch = dynamic_cast<TBranch*>(branches->At(i));
+    const char* branchName = branch->GetName();
+    std::string branchNameStr(branchName);
+  
+    if(branchNameStr == "label" ) {read.l = true; tree -> SetBranchAddress("label" , & label );}
+    if(branchNameStr == "stamp" ) {read.s = true; tree -> SetBranchAddress("stamp" , & stamp );}
+    if(branchNameStr == "adc"   ) {read.e = true; tree -> SetBranchAddress("adc"   , & adc   );}
+    if(branchNameStr == "nrj"   ) {read.E = true; tree -> SetBranchAddress("nrj"   , & nrj   );}
+    if(branchNameStr == "qdc2"  ) {read.q = true; tree -> SetBranchAddress("qdc2"  , & qdc2  );}
+    if(branchNameStr == "nrj2"  ) {read.Q = true; tree -> SetBranchAddress("nrj2"  , & nrj2  );}
+    if(branchNameStr == "pileup") {read.p = true; tree -> SetBranchAddress("pileup", & pileup);}
+  }
+} 
 
 void Hit::reading(TTree * tree, std::string const & options)
 {
@@ -284,8 +350,6 @@ void Hit::reading(TTree * tree, std::string const & options)
   
   if (read.l) tree -> SetBranchAddress("label"  , & label  );
   if (read.s) tree -> SetBranchAddress("stamp"  , & stamp  );
-  // if (read.t) tree -> SetBranchAddress("time"   , & time   );
-  if (read.T) tree -> SetBranchAddress("time2"  , & time2  );
   if (read.e) tree -> SetBranchAddress("adc"    , & adc    );
   if (read.E) tree -> SetBranchAddress("nrj"    , & nrj    );
   if (read.q) tree -> SetBranchAddress("qdc2"   , & qdc2   );
@@ -303,8 +367,6 @@ void Hit::writting(TTree * tree, std::string const & options)
 
   if (write.l) tree -> Branch("label"  , & label  );
   if (write.s) tree -> Branch("stamp"  , & stamp  );
-  // if (write.t) tree -> Branch("time"   , & time   );
-  if (write.T) tree -> Branch("time2"  , & time2  );
   if (write.e) tree -> Branch("adc"    , & adc    );
   if (write.E) tree -> Branch("nrj"    , & nrj    );
   if (write.q) tree -> Branch("qdc2"   , & qdc2   );
@@ -316,8 +378,6 @@ std::ostream& operator<<(std::ostream& cout, Hit const & hit)
 {
   cout << "l : " << hit.label;
   if (hit.stamp  != 0) cout << " timestamp : "    << hit.stamp;
-  // if (hit.time  != 0) cout << " time : "    << hit.time;
-  if (hit.time2 != 0) cout << " rel time : "<< hit.time2;
   if (hit.adc   != 0) cout << " adc :  "    << hit.adc    ;
   if (hit.qdc2  != 0) cout << " qdc2 : "    << hit.qdc2   ;
   if (hit.nrj   != 0) cout << " nrj : "     << hit.nrj ;

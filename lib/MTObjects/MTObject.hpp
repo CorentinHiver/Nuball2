@@ -28,11 +28,14 @@ public:
   }
 
   static void setThreadsNb(int const & n, bool force = false) {setThreadsNb(size_cast(n), force);}
+  /** @brief Sets the number of threads.
+   * 
+   * @details Check the number of threads. Usually, over 75% of cores is the optimal.
+   * Set force parameter to true if you want to use all the cores
+   */
   static void setThreadsNb(size_t const & n, bool force = false) 
   {
-    // Check the number of threads. Usually, over 75% of cores is the optimal.
-    // Set force parameter to true if you want to use all the cores
-    size_t maxThreads = size_cast(std::thread::hardware_concurrency()*((force) ? 1 : 0.75));
+    auto const maxThreads = size_cast(std::thread::hardware_concurrency()*((force) ? 1 : 0.75));
 
     if(n > maxThreads)
     {
@@ -40,16 +43,18 @@ public:
       std::cout << "Number of threads too large (hardware) -> reset to " << nb_threads << std::endl;
     }
     else nb_threads = n;
+
+    // nbThreadsChanged(nb_threads);// Signal
   }
 
   static void adjustThreadsNumber(size_t const & limiting_number, std::string const & print_if_limit_reached = "") 
   {
     if (limiting_number<nb_threads) 
     {
-      nb_threads = limiting_number;
+      setThreadsNb(limiting_number);
       print(print_if_limit_reached, "thread number reduced to ", nb_threads);
     }
-    if (nb_threads == 1) ON = false;
+    if (nb_threads == 1) MTObject::ON = false;
   }
 
   static void Initialize()
@@ -60,22 +65,22 @@ public:
       print("MTObject initialized with", nb_threads, "threads");
       TThread::Initialize();
       ROOT::EnableThreadSafety();
-      ON = true;
+      MTObject::ON = true;
     }
-    else ON = false;
+    else MTObject::ON = false;
   }
 
   template <class Func, class... ARGS>
   static void parallelise_function(Func && func, ARGS &&... args)
   {
-    if (ON)
+    if (MTObject::ON)
     {
       m_threads.reserve(nb_threads); // Memory pre-allocation (used for performances reasons)
       for (size_t i = 0; i<nb_threads; i++) m_threads.emplace_back( [i, &func, &args...] ()
       {// Inside this lambda function, we already are inside the threads, so the parallelised section starts NOW :
         // threads_ID[std::this_thread::get_id()] = i; // Old indexing system
         m_thread_index = i; // Index the thread
-        func(std::forward<ARGS>(args)...); // Run the function inside the thread
+        func(std::forward<ARGS>(args)...); // Run the function inside thread
       });
       for(size_t i = 0; i < m_threads.size(); i++) m_threads.at(i).join(); //Closes threads, waiting fot everyone to finish
       m_threads.clear(); // Flushes memory
@@ -99,11 +104,13 @@ public:
   static size_t nb_threads;
   static std::mutex mutex; // A global mutex for everyone to use
   static bool ON; // State boolean
-  operator bool() {return ON;} // Can be used only if the class has been instanciated
+  operator bool() {return MTObject::ON;} // Can be used only if the class has been instanciated
 
-  static auto const & getThreadIndex() {return m_thread_index;}
+  thread_local static auto const & getThreadIndex() {return m_thread_index;}
   static auto const & index() {return m_thread_index;}
   // static int const & getThreadIndex() {return threads_ID[std::this_thread::get_id()];} // Old indexing system
+
+  // static Signal<int> nbThreadsChanged;
 
 private:
   // static std::map<std::thread::id, int> threads_ID; // Old indexing system

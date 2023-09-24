@@ -120,10 +120,14 @@ bool RF_Manager::setHit(Hit const & hit)
 }
 
   #ifdef EVENT_HPP
+/**
+ * @brief Set an event containing only one hit
+ */
 bool RF_Manager::setEvent(Event const & event)
 {
   if (event.labels[0] == this -> label)
   {
+    print(event);
     this -> set(event.stamp, Timestamp_cast((event.adcs[0] == 0) ? event.nrjs[0] : event.adcs[0]));
     return true;
   }
@@ -186,7 +190,6 @@ public:
   RF_Extractor(FasterReader & reader, RF_Manager & rf, Hit & hit, Long64_t maxEvts = Long64_cast(1.E+7));
 #endif //FASTERREADER_HPP
 
-
   auto const & cursor() const {return m_cursor;}
 
   operator bool() const & {return m_ok;}
@@ -212,14 +215,13 @@ RF_Extractor::RF_Extractor(TTree * tree, RF_Manager & rf, Hit & hit, Alignator c
 RF_Extractor::RF_Extractor(TTree * tree, RF_Manager & rf, Event & event, Long64_t maxEvts)
 {
   do {tree -> GetEntry(m_cursor++);}
-  while(event.labels[0] != RF_Manager::label && m_cursor<maxEvts);
+  while(!rf.setEvent(event) && m_cursor<maxEvts);
   if (m_cursor == maxEvts) {print("NO RF DATA FOUND !"); m_ok = false; return;}
-  rf.setHit(event, 0);
   m_ok = true;
 }
 #endif //EVENT_HPP
 
-#ifdef FASTERREADER_HPP
+#ifdef FASTERREADER_HPP // TODO
 // RF_Extractor::RF_Extractor(FasterReader & reader, RF_Manager & rf, Hit & hit, Long64_t maxEvts);
 // {
 //   do {reader.Read();}

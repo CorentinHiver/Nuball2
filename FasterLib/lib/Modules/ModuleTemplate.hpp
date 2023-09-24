@@ -1,5 +1,5 @@
-#ifndef PARIS_H
-#define PARIS_H
+#ifndef MODULE_TEMPLATE_HPP
+#define MODULE_TEMPLATE_HPP
 #include "../NearLine.hpp"
 
 //Start doing the following :
@@ -95,4 +95,4 @@ void ModuleTemplate::Write()
   // How to write the stored histograms
 }
 
-#endif //PARIS_H
+#endif //MODULE_TEMPLATE_HPP
