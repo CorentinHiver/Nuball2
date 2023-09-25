@@ -115,8 +115,8 @@ struct Histos
     for (size_t paris_i = 0; paris_i<nb_paris; paris_i++)
     {
       auto const & name = detectors.name("paris", paris_i);
-      paris_bidim[paris_i].reset(name.c_str(), name.c_str(), 100,-2,2, 10000,0,1000000);
-      paris_bidim_M_inf_4[paris_i].reset((name+"_M<4").c_str(), (name+"_M<4").c_str(), 100,-2,2, 10000,0,1000000);
+      paris_bidim[paris_i].reset(name.c_str(), name.c_str(), 100,-2,2, 10000,0,100000);
+      paris_bidim_M_inf_4[paris_i].reset((name+"_M<4").c_str(), (name+"_M<4").c_str(), 100,-2,2, 10000,0,100000);
     }
 
     energy_all_Ge.reset("Ge_spectra", "Ge spectra", 20000,0,10000);
