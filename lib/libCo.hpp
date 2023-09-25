@@ -293,6 +293,7 @@ using T_is_number = std::enable_if_t<std::is_arithmetic_v<T>>;
 //   SLOTS AND SIGNALS   //
 ////////////////////////////
 
+#if (__cplusplus >= 201402L)
 template<class... ARGS>
 class Signal
 {
@@ -333,6 +334,6 @@ class Slots
   // std::vector<std::function<void(ARGS...)>> m_slots;
 
 };
-
+#endif //__cplusplus >= 201402L
 
 #endif //LIB_H_CO
