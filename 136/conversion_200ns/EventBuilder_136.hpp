@@ -53,29 +53,30 @@ void EventBuilder_136::tryAddNextHit_simple(TTree * tree, Hit & hit, int & loop,
   // If the next hits (for which the relative timestamp is greater than the RF period) are close enough to the event, 
   // they might come from an isomer deexcitation. Therefore, we would like to gather them in order to increase statistics.
 
-  // The current hit is the one that "closed" the event, i.e. is outside of time window, 
-  // and has been set to the last_hit to serve for next EventBuilder_136::build() call.
-  // Therefore, the current m_RF_ref_stamp is relative to this hit. 
-  // In order to check if this hit is within the extended time window,
-  // we first take back the time reference of the event :
-  Timestamp const temp_RF_ref = m_rf->refTime(m_event->stamp)+m_period;
+  // The current hit is the one that "closed" the event, i.e. is outside of time window,
+  // and has been set to the last_hit to serve for next EventBuilder_136::build() call
+  // as the potential first hit of next event.
+  // Therefore, the current m_RF_ref_stamp (pulse "t = zero") is relative to the current hit.
+  // In order to check if the current hit is within the extended time window of the previous event (which is the one currently stored)
+  // we need the pulse reference timestamp of the previous event :
+  Timestamp const & RF_ref_stamp = m_rf->refTime(m_event->stamp);
 
-  // Note : if the next hit is in the time region of the next pulse then one should definitely remove it.
-  // Here we keep it because it might still contain some information, it depends on the probability of 
-  // 2 consecutive pulses to produce parasitic reaction
-  
-  // First, try to set the current hit :
-  // print(Time_cast(hit.stamp-temp_RF_ref), Time_cast(m_period*m_nb_periods_more-m_rf->offset()));
-  // pauseCo();
-  if (Time_cast(hit.stamp-temp_RF_ref) < Time_cast(m_period*m_nb_periods_more - m_rf->offset()))
+  // First, try to add the current hit (the hit that closed the window) :
+  if (Time_cast(hit.stamp-RF_ref_stamp) < Time_cast((m_period+1)*m_nb_periods_more - m_rf->offset()))
   {
     m_event->push_back(hit);
-    tree->GetEntry(gindex[++loop]);
-    // If it worked, then let's handle the next hit :
-    while(Time_cast(hit.stamp-temp_RF_ref) < Time_cast(m_period*m_nb_periods_more - m_rf->offset()))
+
+    // If it worked, check if there is any hits left in the tree and load it :
+    auto const & nb_hits = tree -> GetEntries();
+    if (++loop>nb_hits-1) return;
+    tree->GetEntry(gindex[loop]);
+
+    // Then let's try to add the next hit if any :
+    while(Time_cast(hit.stamp-RF_ref_stamp) < Time_cast((m_period+1)*m_nb_periods_more - m_rf->offset()) )
     {
       m_event->push_back(hit);
-      tree->GetEntry(gindex[++loop]);
+      if (++loop<nb_hits) tree->GetEntry(gindex[loop]);
+      else return;
     }
     set_last_hit(hit);
   }
@@ -86,11 +87,11 @@ void EventBuilder_136::tryAddPreprompt_simple()
   // First remove the hits that belongs to the event :
   for (int i = m_event->mult+1; i>0 && !m_hit_buffer.empty(); i--) m_hit_buffer.pop();
   if (m_hit_buffer.empty()) return;
-  auto const temp_RF_ref = m_rf->refTime(m_event->stamp);
+  auto const RF_ref_stamp = m_rf->refTime(m_event->stamp);
   while (!m_hit_buffer.empty())
   {
     auto const & hit = m_hit_buffer.top();
-    if (Time_cast(temp_RF_ref-hit.stamp) < Time_cast(m_period+m_rf->offset())) m_event -> push_front(hit);
+    if (Time_cast(RF_ref_stamp-hit.stamp) < Time_cast(m_period+m_rf->offset())) m_event -> push_front(hit);
     else break;
     m_hit_buffer.pop();
   }

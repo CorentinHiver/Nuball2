@@ -25,7 +25,7 @@ public:
     {
       m_histo = histo[MTObject::getThreadIndex()];
     }
-    m_exists = static_cast<bool> (m_histo);
+    m_exists = bool_cast(m_histo);
   }
 
   void reset(THist * histo)
@@ -43,6 +43,8 @@ public:
   void normalizeX(Float_t const & factor = 1);
   void normalizeY(Float_t const & factor = 1);
   void normalizeXY(Float_t const & factor = 1, int const & min_x = 0, int const & min_y = 0);
+
+  void removeBackground();
 
 private:
   THist * m_histo = nullptr;
