@@ -116,7 +116,7 @@ struct Histos
     {
       auto const & name = detectors.name("paris", paris_i);
       paris_bidim[paris_i].reset(name.c_str(), name.c_str(), 100,-2,2, 10000,0,1000000);
-      paris_bidim_M_inf_4[paris_i].reset(name.c_str(), name.c_str(), 100,-2,2, 10000,0,1000000);
+      paris_bidim_M_inf_4[paris_i].reset((name+"_M<4").c_str(), (name+"_M<4").c_str(), 100,-2,2, 10000,0,1000000);
     }
 
     energy_all_Ge.reset("Ge_spectra", "Ge spectra", 20000,0,10000);
@@ -267,7 +267,7 @@ void convert(Hit & hit, FasterReader & reader,
         auto const & ratio = (hit.nrj2-hit.nrj)/hit.nrj2;
         auto const & index = detectors.index(hit.label);
         histos.paris_bidim[index].Fill(ratio, hit.nrj);
-        histos.paris_bidim_M_inf_4[index].Fill(ratio, hit.nrj);
+        if (event.mult<5) histos.paris_bidim_M_inf_4[index].Fill(ratio, hit.nrj);
       }
     }
     // print_precision(13);
