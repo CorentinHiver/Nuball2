@@ -82,6 +82,9 @@ struct Histos
   MTTHist<TH2F> energy_each_raw;
   MTTHist<TH2F> rf_each_raw;
 
+  Vector_MTTHist<TH2F> paris_bidim;
+  Vector_MTTHist<TH2F> paris_bidim_M_inf_4;
+
   MTTHist<TH1F> energy_all_Ge;
   MTTHist<TH1F> rf_all;
   MTTHist<TH2F> energy_each;
@@ -97,7 +100,7 @@ struct Histos
   MTTHist<TH2F> energy_each_trig;
   MTTHist<TH2F> rf_each_trig;
 
-  void Initialize(Detectors const & detectors)
+  void Initialize()
   {
     auto const & nbDet = detectors.number();
 
@@ -105,6 +108,16 @@ struct Histos
     rf_all_raw.reset("rf_all_raw", "RF Time spectra raw", 2000, -1200, 800);
     energy_each_raw.reset("energy_each_raw", "Energy spectra each raw", nbDet,0,nbDet, 5000,0,15000);
     rf_each_raw.reset("rf_each_raw", "RF timing each raw", nbDet,0,nbDet, 2000, -1200, 800);
+
+    auto const & nb_paris = detectors.nbOfType("paris");
+    paris_bidim.resize(nb_paris);
+    paris_bidim_M_inf_4.resize(nb_paris);
+    for (size_t paris_i = 0; paris_i<nb_paris; paris_i++)
+    {
+      auto const & name = detectors.name("paris", paris_i);
+      paris_bidim[paris_i].reset(name.c_str(), name.c_str(), 100,-2,2, 10000,0,1000000);
+      paris_bidim_M_inf_4[paris_i].reset(name.c_str(), name.c_str(), 100,-2,2, 10000,0,1000000);
+    }
 
     energy_all_Ge.reset("Ge_spectra", "Ge spectra", 20000,0,10000);
     rf_all.reset("RF_Time_spectra", "RF Time spectra", 2000, -1200, 800);
@@ -248,6 +261,14 @@ void convert(Hit & hit, FasterReader & reader,
       
       if (isGe[hit.label]) histos.energy_all_Ge.Fill(hit.nrj);
       histos.energy_each.Fill(compressedLabel[hit.label], hit.nrj);
+
+      if (isParis[hit.label])
+      {
+        auto const & ratio = (hit.nrj2-hit.nrj)/hit.nrj2;
+        auto const & index = detectors.index(hit.label);
+        histos.paris_bidim[index].Fill(ratio, hit.nrj);
+        histos.paris_bidim_M_inf_4[index].Fill(ratio, hit.nrj);
+      }
     }
     // print_precision(13);
     // Event building :
@@ -474,7 +495,7 @@ int main(int argc, char** argv)
     auto run_name = rmPathAndExt(run.substr(0, run.size()-2));
 
     Histos histos;
-    if (histoed && !only_timeshifts) histos.Initialize(detectors);
+    if (histoed && !only_timeshifts) histos.Initialize();
 
     print("----------------");
     print("Treating ", run_name);
@@ -527,6 +548,8 @@ int main(int argc, char** argv)
         histos.energy_each_trig.Write();
         histos.rf_all_trig.Write();
         histos.rf_each_trig.Write();
+        for (auto & histo : histos.paris_bidim) histo.Write();
+        for (auto & histo : histos.paris_bidim_M_inf_4) histo.Write();
 
 
         outFile -> Write();
