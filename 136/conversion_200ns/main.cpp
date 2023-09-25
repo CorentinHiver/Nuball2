@@ -468,7 +468,7 @@ int main(int argc, char** argv)
 
   // Output file :
   output+=trigger_name.at(trigger_choice);
-  if (extend_periods) output+=std::to_string(nb_periods_more)+"periods";
+  if (extend_periods) output+="_"+std::to_string(nb_periods_more)+"periods";
   Path outPath (datapath+(manip.name()+output), true);
 
   print("Reading :", manipPath.string());
