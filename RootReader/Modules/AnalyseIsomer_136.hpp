@@ -35,6 +35,7 @@ public:
     prompt.resize(255);
     delayed.resize(255);
   }
+
   void Reset()
   {
     PromptMult = 0;
@@ -42,6 +43,7 @@ public:
     PromptCalo = 0;
     DelayedCalo = 0;
     indexes.clear();
+    labr3_hits.clear();
     prompt.clear();
     delayed.clear();
     rejection = false;
@@ -122,7 +124,7 @@ private:
   std::string param_string = "Isomer";
   // Parameters
   friend class MTObject;
-  std::string outDir  = "129/Analyse/Isomer/";
+  std::string outDir  = "Analyse/Isomer/";
   std::string outRoot = "ai.root";
 
   double Qvalue = 15000;
@@ -306,7 +308,7 @@ void AnalyseIsomer::run(Parameters & p, AnalyseIsomer & ai)
     {
       // if (event.mult>30) continue;
     // #ifdef DEBUG
-      // if (event_i%(int)(1.E+6) == 0) print(event_i/1000000.,"Mevts");
+      if (event_i%(int)(1.E+3) == 0) print(event_i/1000000.,"Mevts");
     // #endif //DEBUG
       tree->GetEntry(event_i);
       dssd.Reset();
