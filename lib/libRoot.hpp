@@ -387,9 +387,32 @@ std::ostream& operator<<(std::ostream& cout, THBinning binning)
   return cout;
 }
 
+
+///////////////////
+//   COANALYSE   //
+///////////////////
+
 namespace CoAnalyse
 {
-  // Extracting background TBD
+  void projectY(TH1* matrix, TH1* proj, int const & binX)
+  {
+    for (int binY = 0; binY<matrix->GetNbinsY(); binY++) proj->SetBinContent(binY, matrix->GetBinContent(binX, binY));
+  }
+  void setX(TH1* matrix, TH1* proj, int const & binX)
+  {
+    for (int binY = 0; binY<matrix->GetNbinsY(); binY++) matrix->SetBinContent(binX, binY, proj->GetBinContent(binY));
+  }
+
+  void projectX(TH1* matrix, TH1* proj, int const & binY)
+  {
+    for (int binX = 0; binX<matrix->GetNbinsX(); binX++) proj->SetBinContent(binX, matrix->GetBinContent(binX, binY));
+  }
+  void setY(TH1* matrix, TH1* proj, int const & binY)
+  {
+    for (int binX = 0; binX<matrix->GetNbinsX(); binX++) matrix->SetBinContent(binX, binY, proj->GetBinContent(binY));
+  }
+
+
   std::vector<double> extractBackgroundArray(std::vector<double> & source, int const & nsmooth = 10)
   {
     print("depecrated (", nsmooth, ")");
@@ -401,48 +424,95 @@ namespace CoAnalyse
 
   std::vector<double> extractBackgroundArray(TH1F * histo, int const & nsmooth = 10)
   {
-    auto const & nbins = histo->GetNbinsX();
-    std::vector<double> source(nbins);
-    for (int bin=0;bin<nbins;bin++) source[bin]=histo->GetBinContent(bin+1);
-    return extractBackgroundArray(source, nsmooth);
+    print("depecrated (", histo->GetName(), nsmooth, ")");
+    // auto const & nbins = histo->GetNbinsX();
+    // std::vector<double> source(nbins);
+    // for (int bin=0;bin<nbins;bin++) source[bin]=histo->GetBinContent(bin+1);
+    // return extractBackgroundArray(source, nsmooth);
+    return std::vector<double>(0);
   }
 
-  void removeBackground(TH1D * histo, int const & niter = 10, std::string const & options = "")
+  /**
+   * @brief Remove the background in the given histo
+   * 
+   * @param histo: Can be TH1 or TH2 histogram
+   * @param niter: Choose a higher number of iterations if the peaks have high resultion (5-10 for LaBr3, 20 for Ge)
+   * @param fit_options: options from TH1::ShowBackground
+   * @param bidim_options: 
+   *    - "X" (default)  : Loop through the X bins, find the background on the Y projection
+   *    - "Y" :            Loop through the Y bins, find the background on the X projection
+   *    - "S" (symmetric): Loop through the X bins, find the background on the Y projection, then symmetrise the bidim
+   *    
+   */
+  void removeBackground(TH1 * histo, int const & niter = 10, std::string const & fit_options = "", std::string const & bidim_options = "X")
   {
-    auto const & background = histo -> ShowBackground(niter, options.c_str());
-    for (int bin=0; bin<histo->GetNbinsX(); bin++) {histo->SetBinContent(bin, histo->GetBinContent(bin) - background->GetBinContent(bin));}
-  }
-  
-  void removeBackground(TH1F * histo, int const & niter = 10, std::string const & options = "")
-  {
-    // auto const & background = extractBackgroundArray(histo, nsmooth);
-    auto const & background = histo -> ShowBackground(niter, options.c_str());
-    for (int bin=0; bin<histo->GetNbinsX(); bin++) {histo->SetBinContent(bin, histo->GetBinContent(bin) - background->GetBinContent(bin));}
-  }
-
-  void removeBackgroundSymetric(TH2F * histo, int const & nsmooth = 10)
-  {
-    auto const & nXbins = histo -> GetNbinsX();
-    auto const & nYbins = histo -> GetNbinsY();
-    if (nXbins != nYbins) print("CoAnalyse::removeBackgroundSymetric is suited only for symetric 2D spectra");
-
-    auto const & nbins = nXbins;
-
-    // 1. Substract the background of Y spectra gating on each X bins
-    for (int binX = 0; binX<nbins; binX++)
+    auto const & dim = histo->GetDimension();
+    if (dim == 1)
     {
-      std::unique_ptr<TH1F> histo1D;
-      for (int binY = 0; binY<nbins; binY++) histo1D->SetBinContent(binY, histo->GetBinContent(binX, binY));
-      removeBackground(histo1D.get(), nsmooth);
-      for (int binY = 0; binY<nbins; binY++) histo->SetBinContent(binX, binY, histo1D->GetBinContent(binY));
+      auto const & background = histo -> ShowBackground(niter, fit_options.c_str());
+      for (int bin=0; bin<histo->GetNbinsX(); bin++) {histo->SetBinContent(bin, histo->GetBinContent(bin) - background->GetBinContent(bin));}
     }
 
-    //2. Resymetrise the matrice :
-    for (int binY = 0; binY<nbins; binY++) for (int binX = 0; binX<nbins; binX++)
+    else if (dim == 2)
     {
-      histo->SetBinContent(binX, binY, histo->GetBinContent(binY, binX));
+      char choice = 0;
+      if (bidim_options.find("Y")) choice = 1;
+      if (bidim_options.find("S")) choice = 2;
+
+      auto const & nXbins = histo -> GetNbinsX();
+      auto const & nYbins = histo -> GetNbinsY();
+
+      if (choice == 2)
+      {
+        if (nXbins != nYbins) {print("CoAnalyse::removeBackground for 2D spectra is suited only for symetric spectra"); return;}
+      }
+
+      switch (choice)
+      {
+        case 0: case 2: 
+          // Substract the background of Y spectra gating on each X bins
+          for (int binX = 0; binX<nXbins; binX++)
+          {
+            std::unique_ptr<TH1F> histo1D;
+            projectY(histo, histo1D.get(), binX);
+            removeBackground(histo1D.get(), niter);
+            setX(histo, histo1D.get(), binX);
+          }
+        break;
+
+        case 1:
+          // Substract the background of X spectra gating on each Y bins
+          for (int binX = 0; binX<nYbins; binX++)
+          {
+            std::unique_ptr<TH1F> histo1D;
+            projectY(histo, histo1D.get(), binX);
+            removeBackground(histo1D.get(), niter);
+            setX(histo, histo1D.get(), binX);
+          }
+      }
+
+      if (choice == 2)
+      {
+        //2. Resymetrise the matrice : (PROTOTYPAL !)
+        for (int binY = 0; binY<nYbins; binY++) for (int binX = 0; binX<nXbins; binX++)
+        {
+          histo->SetBinContent(binX, binY, histo->GetBinContent(binY, binX));
+        }
+      }
     }
   }
+
+  // void removeBackground(TH1F * histo, int const & niter = 10, std::string const & options = "")
+  // {
+  //   // auto const & background = extractBackgroundArray(histo, nsmooth);
+  //   auto const & background = histo -> ShowBackground(niter, options.c_str());
+  //   for (int bin=0; bin<histo->GetNbinsX(); bin++) {histo->SetBinContent(bin, histo->GetBinContent(bin) - background->GetBinContent(bin));}
+  // }
+
+  // void removeBackgroundX(TH2F * histo, int const & nsmooth = 10)
+  // {
+    
+  // }
 };
 
 #endif //LIBROOT_HPP

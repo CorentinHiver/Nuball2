@@ -166,7 +166,13 @@ public:
    * @attention Please do not use, doesn't seem very safe ...
    */
   template <class... ARGS>
-  void reset(MTTHist<THist> hist) { debug("dont copy MTTHist"); m_exists = false; m_merged = static_cast<THist*>(hist.m_merged); m_collection = hist.m_collection;}
+  void reset(MTTHist<THist> hist) 
+  { 
+    debug("dont copy MTTHist !!!!!!"); 
+    m_exists = false; 
+    m_merged = static_cast<THist*>(hist.m_merged); 
+    m_collection = hist.m_collection;
+  }
 
   /**
    * @brief Unsafe
@@ -189,7 +195,6 @@ public:
       if (!m_is_deleted[i]) delete m_collection[i];
       m_is_deleted[i] = true;
     }
-    
   }
 
   //General initialiser to construct any root histogram vector starting with its name:

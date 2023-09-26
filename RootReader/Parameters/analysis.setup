@@ -39,14 +39,14 @@ end
 
 [Isomer]
 # Names : G2 stands for 2 germanium hits minimum, GP1 idem in prompt, GD2 in delayed
-outDir: 136_129/Analyse/Isomer/
+outDir: 136/Analyse/Isomer/
 # outRoot: total_DSSD_prompt.root
 # outRoot: good_pulse.root
 # outRoot: 20runs_G2.root
 # outRoot: all.root
 outRoot: all.root
 # outRoot: run_75.root
-writeRadware
+# writeRadware
 # trigger1989
 # outRoot: MPrompt_1_5_Delayed_2_5.root
 # gate: prompt Ge -15 10

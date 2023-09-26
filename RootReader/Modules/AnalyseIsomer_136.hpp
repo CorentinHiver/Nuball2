@@ -30,9 +30,10 @@ class ParisNul
 public:
   ParisNul()
   {
-    indexes.reserve(255);
-    prompt.reserve(255);
-    delayed.reserve(255);
+    indexes.resize(255);
+    labr3_hits.resize(255);
+    prompt.resize(255);
+    delayed.resize(255);
   }
   void Reset()
   {
@@ -56,20 +57,25 @@ public:
 
   void Fill(Event const & event, int const & hit_i)
   {
-    // auto const & label = event.labels[hit_i];
+    auto const & label = event.labels[hit_i];
     auto const & time = event.time2s[hit_i];
     auto const & nrj = event.nrjs[hit_i];
     auto const & nrj2 = event.nrj2s[hit_i];
     auto const & ratio = (nrj2-nrj)/nrj2;
-    auto const & isLaBr3 = ratio>-0.2 && ratio < 0.4;
+    auto const & isLaBr3 = ratio>-0.1 && ratio < 0.2;
+    // auto const & isNaI = ratio>0.55 && ratio < 0.7;
 
     if (time<-10) return;
-    indexes.emplace_back(hit_i);
+    indexes.push_back(hit_i);
     if (time<5)
     {
       prompt.emplace_back(hit_i);
       PromptMult++;
-      if (isLaBr3) PromptCalo+=nrj;
+      if (isLaBr3) 
+      {
+        labr3_hits.push_back(label);
+        PromptCalo+=nrj;
+      }
     }
     else if (time<50) 
     {
@@ -79,11 +85,16 @@ public:
     {
       delayed.emplace_back(hit_i);
       DelayedMult++;
-      if (isLaBr3) DelayedCalo+=nrj;
+      if (isLaBr3) 
+      {
+        labr3_hits.push_back(label);
+        DelayedCalo+=nrj;
+      }
     }
   }
 
   std::vector<int> indexes;
+  std::vector<int> labr3_hits;
   std::vector<int> prompt;
   std::vector<int> delayed;
   int PromptMult = 0;
@@ -104,9 +115,6 @@ public:
   void FillRaw(Event const & event);
   void FillSorted(Event const & event, Clovers & clovers, DSSD & dssd, ParisNul & paris);
   void Write();
-
-  // Temporary :
-  void fillParis(float const & nrj, double const & time, ushort const & label);
 
   MTTHist<TH2F> time_ref;
 
@@ -233,9 +241,6 @@ private:
   MTTHist<TH2F> Prompt_Calo_VS_Missing;
   MTTHist<TH2F> Missing_VS_Delayed_cal;
 
-  MTTHist<TH1F> Paris_spectra;
-  MTTHist<TH2F> Paris_time_spectra;
-  MTTHist<TH2F> Paris_each_spectra;
 
   MTTHist<TH2F> ge_spectra_VS_mult;
   MTTHist<TH2F> ge_spectra_VSpromptmult;
@@ -246,6 +251,15 @@ private:
   MTTHist<TH2F> ge_delayed_spectra_VS_mult;
   MTTHist<TH2F> ge_delayed_spectra_VSpromptmult;
   MTTHist<TH2F> ge_delayed_spectra_VSdelayedmult;
+
+  MTTHist<TH1F> Paris_spectra_back;
+  MTTHist<TH2F> Paris_time_spectra_back;
+  MTTHist<TH2F> Paris_each_spectra_back;
+  MTTHist<TH2F> Paris_ratio_VS_time_back;
+  MTTHist<TH1F> Paris_spectra_front;
+  MTTHist<TH2F> Paris_time_spectra_front;
+  MTTHist<TH2F> Paris_each_spectra_front;
+  MTTHist<TH2F> Paris_ratio_VS_time_front;
 
   // MTTHist<TH2F> mult_VS_Time; In order to see the evolution of Multiplicity over time. To do it, take a moving 50ns time window to group events
 
@@ -324,12 +338,6 @@ void AnalyseIsomer::run(Parameters & p, AnalyseIsomer & ai)
   } // End files loop
 }
 
-void AnalyseIsomer::fillParis(float const & nrj, double const & time, ushort const & label)
-{
-  Paris_spectra.Fill(nrj);
-  Paris_time_spectra.Fill(nrj, time);
-  Paris_each_spectra.Fill(nrj, compressedLabel[label]);
-}
 
 void AnalyseIsomer::InitializeManip()
 {
@@ -508,9 +516,15 @@ void AnalyseIsomer::InitializeManip()
   Ge_VS_size_event.reset("Ge_VS_size_event","Ge VS number of detectors", 
       50,0,50, 5000,0,5000);
 
-  Paris_spectra.reset("Paris_spectra", "Paris spectra", 1000,0,10000);
-  Paris_time_spectra.reset("Paris_time_spectra", "Paris time spectra", 1000,0,10000, 1000,-50,200);
-  Paris_each_spectra.reset("Paris_each_spectra", "Paris each spectra", 1000,0,10000, 500,0,500);
+  Paris_spectra_back.reset("Paris_spectra_back", "Paris spectra back", 1000,0,10000);
+  Paris_time_spectra_back.reset("Paris_time_spectra_back", "Paris time spectra back", 1000,0,10000, 1000,-50,200);
+  Paris_each_spectra_back.reset("Paris_each_spectra_back", "Paris each spectra back", 1000,0,10000, 500,0,500);
+  Paris_ratio_VS_time_back.reset("Paris_ratio_VS_time_back", "Paris ratio VS time back", 301,-100,200, 1001,-2,2);
+  Paris_spectra_front.reset("Paris_spectra_front", "Paris spectra front", 1000,0,10000);
+  Paris_time_spectra_front.reset("Paris_time_spectra_front", "Paris time spectra front", 1000,0,10000, 1000,-50,200);
+  Paris_each_spectra_front.reset("Paris_each_spectra_front", "Paris each spectra front", 1000,0,10000, 500,0,500);
+  Paris_ratio_VS_time_front.reset("Paris_ratio_VS_time_front", "Paris ratio VS time front", 301,-100,200, 1001,-2,2);
+
 
   // Set analysis parameters :
   // Sorted_Event::setDSSDVeto(-10, 50, 5000);
@@ -772,6 +786,33 @@ void AnalyseIsomer::FillSorted(Event const & event, Clovers & clovers, DSSD & ds
     else if (prompt_i) Prompt_Ge_VS_Missing.Fill(Missing_E, nrj_i);
     Prompt_Calo_VS_Missing.Fill(Missing_E, calo_prompt_total);
   }
+
+  ///////////////////
+  // --- PARIS --- //
+  ///////////////////
+  for (auto const & index : paris.labr3_hits)
+  {
+    auto const & label = event.labels[index];
+    auto const & nrj = event.nrjs[index];
+    auto const & nrj2 = event.nrj2s[index];
+    auto const & time = event.times[index];
+    auto const & ratio = (nrj2-nrj)/nrj2;
+
+    if (label>500)
+    {
+      Paris_spectra_back.Fill(nrj);
+      Paris_time_spectra_back.Fill(nrj, time);
+      Paris_each_spectra_back.Fill(nrj, compressedLabel[label]);
+      Paris_ratio_VS_time_back.Fill(time, ratio);
+    }
+    else
+    {
+      Paris_spectra_front.Fill(nrj);
+      Paris_time_spectra_front.Fill(nrj, time);
+      Paris_each_spectra_front.Fill(nrj, compressedLabel[label]);
+      Paris_ratio_VS_time_front.Fill(time, ratio);
+    }
+  }
 }
 
 void AnalyseIsomer::FillRaw(Event const & event)
@@ -908,8 +949,15 @@ void AnalyseIsomer::Write()
 
   GeDelayed_VS_GeDelayed_time.Write();
 
-  Paris_time_spectra.Write();
-  Paris_each_spectra.Write();
+  Paris_spectra_back.Write();
+  Paris_time_spectra_back.Write();
+  Paris_each_spectra_back.Write();
+  Paris_ratio_VS_time_back.Write();
+
+  Paris_spectra_front.Write();
+  Paris_time_spectra_front.Write();
+  Paris_each_spectra_front.Write();
+  Paris_ratio_VS_time_front.Write();
 
   outfile->Write();
   outfile->Close();

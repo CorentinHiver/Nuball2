@@ -106,10 +106,10 @@ int main(int argc, char** argv)
   // Matrices ma;
   // ma.launch(p);
 
-  for (int run_nb = 25; run_nb<102; run_nb++)
-  {
-    p.addRun("/home/corentin/faster_data/N-SI-129-root_P_conversion1/run_"+std::to_string(run_nb)+"/");
-  }
+  // for (int run_nb = 25; run_nb<102; run_nb++)
+  // {
+  //   p.addRun("/home/corentin/faster_data/N-SI-129-root_P_conversion1/run_"+std::to_string(run_nb)+"/");
+  // }
   AnalyseIsomer ai;
   ai.launch(p);
 
