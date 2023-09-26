@@ -308,9 +308,9 @@ void AnalyseIsomer::run(Parameters & p, AnalyseIsomer & ai)
     {
       // if (event.mult>30) continue;
     // #ifdef DEBUG
-      if (event_i%(int)(1.E+3) == 0) print(event_i/1000000.,"Mevts");
+      // if (event_i%(int)(1.E+3) == 0) print(event_i/1000000.,"Mevts");
     // #endif //DEBUG
-      tree->GetEntry(event_i);
+      tree->GetEntry(event_i);²
       dssd.Reset();
       clovers.Reset();
       paris.Reset();
