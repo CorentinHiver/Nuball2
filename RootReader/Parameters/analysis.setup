@@ -12,8 +12,8 @@ list_runs: U.list
 # folder: /home/faster/nuball2/faster_data/N-SI-136-root/ nb: 20
 # folder: /home/corentin/faster_data/N-SI-136-root/
 # folder: /home/corentin/faster_data/N-SI-136-calibrations/
-folder: /home/faster/nuball2/N-SI-136-root_P2_conversion1/
-# folder: /home/corentin/faster_data/N-SI-136-root_P2_conversion1/
+# folder: /home/faster/nuball2/N-SI-136-root_P2_conversion1/
+folder: /home/corentin/faster_data/N-SI-136-root_P2_conversion1/
 # folder: /home/corentin/faster_data/N-SI-129-root_P_conversion1/
 # folder: /home/corentin/faster_data/N-SI-136-root_Th_P_conversion1/
 # folder: /media/sf_OneDrive/CNRS/Nuball2/RootReader/Convertor/

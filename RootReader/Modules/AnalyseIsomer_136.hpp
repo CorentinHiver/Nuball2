@@ -60,6 +60,7 @@ public:
   void Fill(Event const & event, int const & hit_i)
   {
     auto const & label = event.labels[hit_i];
+    if (!isParis[label]) return;
     auto const & time = event.time2s[hit_i];
     auto const & nrj = event.nrjs[hit_i];
     auto const & nrj2 = event.nrj2s[hit_i];
@@ -792,15 +793,17 @@ void AnalyseIsomer::FillSorted(Event const & event, Clovers & clovers, DSSD & ds
   ///////////////////
   // --- PARIS --- //
   ///////////////////
-  for (auto const & index : paris.labr3_hits)
+  for (auto const & index : paris.indexes)
   {
     auto const & label = event.labels[index];
     auto const & nrj = event.nrjs[index];
     auto const & nrj2 = event.nrj2s[index];
-    auto const & time = event.times[index];
+    auto const & time = event.time2s[index];
     auto const & ratio = (nrj2-nrj)/nrj2;
 
-    if (label>500)
+    print(index, label, nrj, nrj2, time, ratio);
+
+    if (label<500)
     {
       Paris_spectra_back.Fill(nrj);
       Paris_time_spectra_back.Fill(nrj, time);
