@@ -310,7 +310,7 @@ void AnalyseIsomer::run(Parameters & p, AnalyseIsomer & ai)
     // #ifdef DEBUG
       // if (event_i%(int)(1.E+3) == 0) print(event_i/1000000.,"Mevts");
     // #endif //DEBUG
-      tree->GetEntry(event_i);²
+      tree->GetEntry(event_i);
       dssd.Reset();
       clovers.Reset();
       paris.Reset();
@@ -827,15 +827,16 @@ void AnalyseIsomer::FillRaw(Event const & event)
 
 void AnalyseIsomer::Write()
 {
-  print("Writting Radware matrixes...");
   if (m_writeRadware)
   {
+    print("Writting Radware matrixes...");
     RWMat RW_prompt_prompt(GePrompt_VS_GePrompt); RW_prompt_prompt.Write();
     RWMat RW_del_del(GeDelayed_VS_GeDelayed); RW_del_del.Write();
     RWMat RW_prompt_del(GeDelayed_VS_GePrompt); RW_prompt_del.Write();
   }
 
-
+  File outfilename(outDir+outRoot);
+  outfilename.makePath(); // Create the output folder if it doesn't exist
   unique_TFile outfile(TFile::Open((outDir+outRoot).c_str(),"recreate"));
   outfile -> cd();
 
