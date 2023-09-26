@@ -286,8 +286,10 @@ K get_min_key(std::map<K,V> const & map)
 //    TEMPLATE HANDELING   //
 /////////////////////////////
 
-template <typename T>
+#if (__cplusplus >= 201702L)
+template <class T>
 using T_is_number = std::enable_if_t<std::is_arithmetic_v<T>>;
+#endif // __cplusplus >= 201702L
 
 ////////////////////////////
 //   SLOTS AND SIGNALS   //

@@ -4,6 +4,8 @@
 #include <Gate.hpp>
 #include <MTTHist.hpp>
 
+
+
 template<class THist>
 class HistoAnalyse
 {
@@ -44,12 +46,19 @@ public:
   void normalizeY(Float_t const & factor = 1);
   void normalizeXY(Float_t const & factor = 1, int const & min_x = 0, int const & min_y = 0);
 
-  void removeBackground();
+  void removeBackground(int const & nsmooth = 10);
 
 private:
   THist * m_histo = nullptr;
   bool m_exists  = false;
 };
+
+
+template<class THist>
+void HistoAnalyse<THist>::removeBackground(int const & nsmooth)
+{
+  CoAnalyse::removeBackground(nsmooth);
+}
 
 template<class THist>
 Float_t HistoAnalyse<THist>::peaksOverBackground(std::vector<Gate> gates)

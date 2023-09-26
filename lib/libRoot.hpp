@@ -26,6 +26,7 @@
 #include <TMath.h>
 #include <TRandom.h>
 #include <TROOT.h>
+#include <TSpectrum.h>
 #include <TStopwatch.h>
 #include <TString.h>
 #include <TStyle.h>
@@ -344,6 +345,7 @@ void TheTChain::set()
 struct THBinning
 {
   THBinning() = default;
+  #if (__cplusplus >= 201702L)
   THBinning(std::initializer_list<std::any> initList)
   {
     if (initList.size() != 3) 
@@ -363,6 +365,7 @@ struct THBinning
       std::cerr << "Error: " << e.what() << " in THBinning" << std::endl;
     }
   }
+  #endif // __cplusplus >= 201702L
 
   template <typename T1, typename T2, typename T3>
   THBinning(int _bins, float _min, float _max) 
@@ -384,5 +387,62 @@ std::ostream& operator<<(std::ostream& cout, THBinning binning)
   return cout;
 }
 
+namespace CoAnalyse
+{
+  // Extracting background TBD
+  std::vector<double> extractBackgroundArray(std::vector<double> & source, int const & nsmooth = 10)
+  {
+    print("depecrated (", nsmooth, ")");
+    // auto s = new TSpectrum();
+    // s->Background(source.data(),source.size(),nsmooth,TSpectrum::kBackDecreasingWindow,TSpectrum::kBackOrder2,kTRUE,TSpectrum::kBackSmoothing3,kFALSE);
+    // s->Delete();
+    return source;
+  }
+
+  std::vector<double> extractBackgroundArray(TH1F * histo, int const & nsmooth = 10)
+  {
+    auto const & nbins = histo->GetNbinsX();
+    std::vector<double> source(nbins);
+    for (int bin=0;bin<nbins;bin++) source[bin]=histo->GetBinContent(bin+1);
+    return extractBackgroundArray(source, nsmooth);
+  }
+
+  void removeBackground(TH1D * histo, int const & niter = 10, std::string const & options = "")
+  {
+    auto const & background = histo -> ShowBackground(niter, options.c_str());
+    for (int bin=0; bin<histo->GetNbinsX(); bin++) {histo->SetBinContent(bin, histo->GetBinContent(bin) - background->GetBinContent(bin));}
+  }
+  
+  void removeBackground(TH1F * histo, int const & niter = 10, std::string const & options = "")
+  {
+    // auto const & background = extractBackgroundArray(histo, nsmooth);
+    auto const & background = histo -> ShowBackground(niter, options.c_str());
+    for (int bin=0; bin<histo->GetNbinsX(); bin++) {histo->SetBinContent(bin, histo->GetBinContent(bin) - background->GetBinContent(bin));}
+  }
+
+  void removeBackgroundSymetric(TH2F * histo, int const & nsmooth = 10)
+  {
+    auto const & nXbins = histo -> GetNbinsX();
+    auto const & nYbins = histo -> GetNbinsY();
+    if (nXbins != nYbins) print("CoAnalyse::removeBackgroundSymetric is suited only for symetric 2D spectra");
+
+    auto const & nbins = nXbins;
+
+    // 1. Substract the background of Y spectra gating on each X bins
+    for (int binX = 0; binX<nbins; binX++)
+    {
+      std::unique_ptr<TH1F> histo1D;
+      for (int binY = 0; binY<nbins; binY++) histo1D->SetBinContent(binY, histo->GetBinContent(binX, binY));
+      removeBackground(histo1D.get(), nsmooth);
+      for (int binY = 0; binY<nbins; binY++) histo->SetBinContent(binX, binY, histo1D->GetBinContent(binY));
+    }
+
+    //2. Resymetrise the matrice :
+    for (int binY = 0; binY<nbins; binY++) for (int binX = 0; binX<nbins; binX++)
+    {
+      histo->SetBinContent(binX, binY, histo->GetBinContent(binY, binX));
+    }
+  }
+};
 
 #endif //LIBROOT_HPP

@@ -1,5 +1,5 @@
 #include <sstream>
-#include "TImage.h"
+//#include "TImage.h"
 #include "TText.h"
 #include "TCanvas.h"
 #include "TArrayD.h"
