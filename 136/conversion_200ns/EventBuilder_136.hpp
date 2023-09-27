@@ -62,7 +62,7 @@ void EventBuilder_136::tryAddNextHit_simple(TTree * tree, Hit & hit, int & loop,
   Timestamp const & RF_ref_stamp = m_rf->refTime(m_event->stamp);
 
   // First, try to add the current hit (the hit that closed the window) :
-  if (Time_cast(hit.stamp-RF_ref_stamp) < Time_cast((m_period+1)*m_nb_periods_more - m_rf->offset()))
+  if (Time_cast(hit.stamp-RF_ref_stamp) < Time_cast(m_period*(m_nb_periods_more+1) - m_rf->offset()))
   {
     m_event->push_back(hit);
 
@@ -72,7 +72,7 @@ void EventBuilder_136::tryAddNextHit_simple(TTree * tree, Hit & hit, int & loop,
     tree->GetEntry(gindex[loop]);
 
     // Then let's try to add the next hit if any :
-    while(Time_cast(hit.stamp-RF_ref_stamp) < Time_cast((m_period+1)*m_nb_periods_more - m_rf->offset()) )
+    while(Time_cast(hit.stamp-RF_ref_stamp) < Time_cast(m_period*(m_nb_periods_more+1) - m_rf->offset()) )
     {
       m_event->push_back(hit);
       if (++loop<nb_hits) tree->GetEntry(gindex[loop]);

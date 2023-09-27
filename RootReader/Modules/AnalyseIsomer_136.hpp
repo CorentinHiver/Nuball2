@@ -519,14 +519,14 @@ void AnalyseIsomer::InitializeManip()
   Ge_VS_size_event.reset("Ge_VS_size_event","Ge VS number of detectors", 
       50,0,50, 5000,0,5000);
 
-  Paris_spectra_back.reset("Paris_spectra_back", "Paris spectra back", 1000,0,10000);
-  Paris_time_spectra_back.reset("Paris_time_spectra_back", "Paris time spectra back", 1000,0,10000, 1000,-50,200);
-  Paris_each_spectra_back.reset("Paris_each_spectra_back", "Paris each spectra back", 1000,0,10000, 500,0,500);
-  Paris_ratio_VS_time_back.reset("Paris_ratio_VS_time_back", "Paris ratio VS time back", 301,-100,200, 1001,-2,2);
-  Paris_spectra_front.reset("Paris_spectra_front", "Paris spectra front", 1000,0,10000);
-  Paris_time_spectra_front.reset("Paris_time_spectra_front", "Paris time spectra front", 1000,0,10000, 1000,-50,200);
-  Paris_each_spectra_front.reset("Paris_each_spectra_front", "Paris each spectra front", 1000,0,10000, 500,0,500);
-  Paris_ratio_VS_time_front.reset("Paris_ratio_VS_time_front", "Paris ratio VS time front", 301,-100,200, 1001,-2,2);
+  Paris_spectra_back.reset("Paris_spectra_back", "Paris spectra back", 750,0,1500);
+  Paris_time_spectra_back.reset("Paris_time_spectra_back", "Paris time spectra back", 750,0,1500, 500,-50,200);
+  Paris_each_spectra_back.reset("Paris_each_spectra_back", "Paris each spectra back", 750,0,1500, 500,0,500);
+  Paris_ratio_VS_time_back.reset("Paris_ratio_VS_time_back", "Paris ratio VS time back", 301,-100,200, 501,-2,2);
+  Paris_spectra_front.reset("Paris_spectra_front", "Paris spectra front", 750,0,1500);
+  Paris_time_spectra_front.reset("Paris_time_spectra_front", "Paris time spectra front", 750,0,1500, 500,-50,200);
+  Paris_each_spectra_front.reset("Paris_each_spectra_front", "Paris each spectra front", 750,0,1500, 500,0,500);
+  Paris_ratio_VS_time_front.reset("Paris_ratio_VS_time_front", "Paris ratio VS time front", 301,-100,200, 501,-2,2);
 
 
   // Set analysis parameters :
@@ -800,8 +800,6 @@ void AnalyseIsomer::FillSorted(Event const & event, Clovers & clovers, DSSD & ds
     auto const & nrj2 = event.nrj2s[index];
     auto const & time = event.time2s[index];
     auto const & ratio = (nrj2-nrj)/nrj2;
-
-    print(index, label, nrj, nrj2, time, ratio);
 
     if (label<500)
     {

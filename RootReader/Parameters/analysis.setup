@@ -1,10 +1,10 @@
 [Data]
 # run: run_25
-# run: run_75
+run: run_75
 # run: 60Co_center_after/
 # runs: 2 run_75 run_76
 # list_runs: list_U_20_first.list
-list_runs: U.list
+# list_runs: U.list
 # list_runs: Th.list
 # list_runs: Parameters/list_runs_good_pulse.list
 # list_runs: Parameters/run_test.list

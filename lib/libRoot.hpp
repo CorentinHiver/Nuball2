@@ -396,7 +396,15 @@ namespace CoAnalyse
 {
   void projectY(TH1* matrix, TH1* proj, int const & binX)
   {
-    for (int binY = 0; binY<matrix->GetNbinsY(); binY++) proj->SetBinContent(binY, matrix->GetBinContent(binX, binY));
+    if (matrix == nullptr){throw_error("Matrix histo nullptr in CoAnalyse::projectY");}
+    if (proj == nullptr) {throw_error("Projection histo nullptr in CoAnalyse::projectY");}
+    auto const & nbBins = matrix->GetNbinsY();
+    proj->SetBins(nbBins, 0, nbBins);
+    for (int binY = 0; binY<nbBins; binY++) 
+    {
+      proj->SetBinContent(binY, matrix->GetBinContent(binX, binY));
+    }
+
   }
   void setX(TH1* matrix, TH1* proj, int const & binX)
   {
@@ -473,7 +481,7 @@ namespace CoAnalyse
           // Substract the background of Y spectra gating on each X bins
           for (int binX = 0; binX<nXbins; binX++)
           {
-            std::unique_ptr<TH1F> histo1D;
+            std::unique_ptr<TH1F> histo1D(new TH1F());
             projectY(histo, histo1D.get(), binX);
             removeBackground(histo1D.get(), niter);
             setX(histo, histo1D.get(), binX);
@@ -494,6 +502,7 @@ namespace CoAnalyse
       if (choice == 2)
       {
         //2. Resymetrise the matrice : (PROTOTYPAL !)
+        print("Symetrisation : ");
         for (int binY = 0; binY<nYbins; binY++) for (int binX = 0; binX<nXbins; binX++)
         {
           histo->SetBinContent(binX, binY, histo->GetBinContent(binY, binX));
