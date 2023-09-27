@@ -75,7 +75,7 @@ void EventBuilder_136::tryAddNextHit_simple(TTree * tree, TTree * outtree, Hit &
     while(Time_cast(hit.stamp-RF_ref_stamp) < Time_cast(m_period*(m_nb_periods_more+1) - m_rf->offset()) )
     {
       if (++loop<nb_hits) 
-      {// Takeinto  account the potential presence of RF downscale in 
+      {// Take into  account the potential presence of RF downscale in 
         if(m_rf -> setHit(hit)) 
         {
           Event temp (*m_event);

@@ -477,7 +477,7 @@ int main(int argc, char** argv)
   // Load some modules :
   detectors.load("index_129.list");
   Calibration calibration(calibFile);
-  Manip runs(File(list_runs).string());
+  Manip runs(list_runs);
   if (one_run) runs.setFolder(one_run_folder);
 
   // Checking that all the modules have been loaded correctly :
@@ -492,7 +492,8 @@ int main(int argc, char** argv)
   {
     MTCounter total_read_size;
     Timer timer;
-    auto run_name = rmPathAndExt(run.substr(0, run.size()-2));
+    auto const & run_path = manipPath+run;
+    auto const & run_name = removeExtension(run);
 
     Histos histos;
     if (histoed && !only_timeshifts) histos.Initialize();
@@ -515,8 +516,8 @@ int main(int argc, char** argv)
       timeshifts.setOutDir(outPath);
       timeshifts.checkForPreprompt(check_preprompt);
 
-      timeshifts.calculate(run, nb_files_ts);
-      timeshifts.verify(run, 10);
+      timeshifts.calculate(run_path, nb_files_ts);
+      timeshifts.verify(run_path, 10);
 
       timeshifts.write(run_name);
     }
@@ -524,7 +525,7 @@ int main(int argc, char** argv)
     if (!only_timeshifts)
     {
       // Loop over the files in parallel :
-      MTFasterReader readerMT(run, nb_files);
+      MTFasterReader readerMT(run_path, nb_files);
       readerMT.execute(convert, calibration, timeshifts, outPath, histos, total_read_size);
 
       if (histoed)

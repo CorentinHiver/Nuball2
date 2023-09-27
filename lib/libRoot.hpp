@@ -499,15 +499,15 @@ namespace CoAnalyse
           }
       }
 
-      if (choice == 2)
-      {
-        //2. Resymetrise the matrice : (PROTOTYPAL !)
-        print("Symetrisation : ");
-        for (int binY = 0; binY<nYbins; binY++) for (int binX = 0; binX<nXbins; binX++)
-        {
-          histo->SetBinContent(binX, binY, histo->GetBinContent(binY, binX));
-        }
-      }
+      // if (choice == 2)
+      // {
+      //   //2. Resymetrise the matrice : (PROTOTYPAL !)
+      //   print("Symetrisation : ");
+      //   for (int binY = 0; binY<nYbins; binY++) for (int binX = 0; binX<nXbins; binX++)
+      //   {
+      //     histo->SetBinContent(binX, binY, histo->GetBinContent(binY, binX));
+      //   }
+      // }
     }
   }
 

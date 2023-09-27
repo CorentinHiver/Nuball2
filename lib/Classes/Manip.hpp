@@ -10,22 +10,22 @@ public:
 
   Manip(){}
 
-  Manip(std::string const & runs_file) : m_runs_files(runs_file) {readFile ( runs_file );}
+  Manip(std::string const & runs_file) : m_runs_files(runs_file) {readFile(m_runs_files);}
 
-  void operator=(std::string const & runs_file) 
-  {
-    m_runs_files = runs_file;
-    readFile ( runs_file );
-  }
+  // void operator=(std::string const & datapath, std::string const & runs_file) 
+  // {
+  //   m_datapath = datapath;
+  //   m_runs_files = runs_file;
+  //   readFile ( runs_file );
+  // }
   
-
-  Manip(std::string const & datapath, std::string const & manipname, std::string const & filename) 
-  {
-    setDataPath(datapath);
-    setManipName(manipname);
-    setFileName(filename);
-    readFile();
-  }
+  // Manip(std::string const & datapath, std::string const & manipname, std::string const & filename) 
+  // {
+  //   setDataPath(datapath);
+  //   setManipName(manipname);
+  //   setFileName(filename);
+  //   readFile();
+  // }
 
   void readFile(std::string const & runs_file)
   {
@@ -45,6 +45,8 @@ public:
   {
     list_runs.clear();
     list_runs.push_back(folder);
+    if (m_MTOn) list_runs_MT = list_runs;
+    m_ok = true;
   }
 
   void addFolder(std::string const & folder)
@@ -112,9 +114,9 @@ private:
   bool m_MTOn = false; // Multithreading on
 
   Path m_datapath;
+  std::string m_runs_files;
   Folder m_manip;
   std::string m_file;
-  std::string m_runs_files;
 
   std::vector<std::string> list_runs;
   MTList list_runs_MT;
