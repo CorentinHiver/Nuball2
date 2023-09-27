@@ -302,7 +302,7 @@ void convert(Hit & hit, FasterReader & reader,
         eventBuilder.tryAddPreprompt_simple();
     #endif //PREPROMPT
 
-        if (nb_periods_more>0) eventBuilder.tryAddNextHit_simple(tempTree.get(), hit, loop, gindex);
+        if (nb_periods_more>0) eventBuilder.tryAddNextHit_simple(tempTree.get(), outTree.get(), hit, loop, gindex);
 
         hits_count+=event.size();
         trig_count++;

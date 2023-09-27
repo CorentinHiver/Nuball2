@@ -34,7 +34,7 @@ public:
 
   /// @brief Experimental : add more period after a trigger 
   void tryAddPreprompt_simple();
-  void tryAddNextHit_simple(TTree * tree, Hit & hit, int & loop, Alignator const & gindex);
+  void tryAddNextHit_simple(TTree * tree, TTree * outtree, Hit & hit, int & loop, Alignator const & gindex);
   void setNbPeriodsMore(int const & periods) {m_nb_periods_more = periods;}
 
   Timestamp single_hit_VS_RF_ref = 0;
@@ -48,7 +48,7 @@ private:
   // Time m_shift = 0;
 };
 
-void EventBuilder_136::tryAddNextHit_simple(TTree * tree, Hit & hit, int & loop, Alignator const & gindex)
+void EventBuilder_136::tryAddNextHit_simple(TTree * tree, TTree * outtree, Hit & hit, int & loop, Alignator const & gindex)
 {
   // If the next hits (for which the relative timestamp is greater than the RF period) are close enough to the event, 
   // they might come from an isomer deexcitation. Therefore, we would like to gather them in order to increase statistics.
@@ -74,11 +74,23 @@ void EventBuilder_136::tryAddNextHit_simple(TTree * tree, Hit & hit, int & loop,
     // Then let's try to add the next hit if any :
     while(Time_cast(hit.stamp-RF_ref_stamp) < Time_cast(m_period*(m_nb_periods_more+1) - m_rf->offset()) )
     {
-      m_event->push_back(hit);
-      if (++loop<nb_hits) tree->GetEntry(gindex[loop]);
+      if (++loop<nb_hits) 
+      {// Takeinto  account the potential presence of RF downscale in 
+        if(m_rf -> setHit(hit)) 
+        {
+          Event temp (*m_event);
+          *m_event = hit;
+          outtree -> Fill();
+          *m_event = temp;
+        }
+        else m_event->push_back(hit);
+      }
       else return;
+      tree->GetEntry(gindex[loop]);
     }
     set_last_hit(hit);
+
+    // nb: m_rf -> setHit(hit) returns true if the hit was a RF downscale
   }
 }
 
