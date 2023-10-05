@@ -375,6 +375,10 @@ std::unordered_map<dType, THBinning> Detectors::energy_bidim_bins =
   {"dssd"   , {200 , 0., 20000.}},
   {"default", {200 , 0., 20000.}}
 };
+#else 
+std::unordered_map<dType, THBinning> Detectors::ADC_bins;
+std::unordered_map<dType, THBinning> Detectors::energy_bins;
+std::unordered_map<dType, THBinning> Detectors::energy_bidim_bins;
 #endif
 
 #endif //DETECTORS_HPP

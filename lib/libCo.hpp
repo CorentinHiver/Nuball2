@@ -286,9 +286,11 @@ K get_min_key(std::map<K,V> const & map)
 //    TEMPLATE HANDELING   //
 /////////////////////////////
 
-#if (__cplusplus >= 201702L)
 template <class T>
+#if (__cplusplus >= 201702L)
 using T_is_number = std::enable_if_t<std::is_arithmetic_v<T>>;
+#else 
+using T_is_number = void;
 #endif // __cplusplus >= 201702L
 
 ////////////////////////////

@@ -861,7 +861,7 @@ void Calibration::fitCalibration(Fits & fits)
     }
 
     // If faudrait aussi revoir ce fit ici ! Et éventuellement les erreurs
-    auto c1 = TCanvas(("c_"+fit.name).c_str());
+    auto c1 = new TCanvas(("c_"+fit.name).c_str());
     TGraphErrors* gr = new TGraphErrors(nb_pics,x.data(),y.data(),ex.data(),ey.data());
     gr -> SetName((fit.name+"_gr").c_str());
     TF1* linear(new TF1("lin","pol1")); //Range and number of fit parameters
@@ -1024,14 +1024,14 @@ bool Calibration::load(std::string const & calibFileName)
   // First extract the maximum label
   if (detectors) size = detectors.size();
   else 
-  {// If no ID file loaded, infer the number of detectors from the higher label in calbration file (unsafe)
+  {// If no ID file loaded, infer the number of detectors from the higher label in calibration file (less safe)
     while (getline(inputfile, line))
     {
       std::istringstream iss (line);
       iss >> label;
       if (label>size) size = label;
     }
-    inputfile.clear();                 // clear fail and eof bits
+    inputfile.clear();
     inputfile.seekg(0, std::ios::beg); // back to the start of the file
   }
   // ----------------------------------------------------- //

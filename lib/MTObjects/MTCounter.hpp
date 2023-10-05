@@ -14,11 +14,7 @@ class MTCounter
 public:
   MTCounter() = default;
 
-  #if __cplusplus >= 201703L
   template<typename T, typename check_T_is_number = T_is_number<T>>
-  #else //__cplusplus < 201703L
-  template<typename T>
-  #endif
   MTCounter(T const & value) : m_counter(size_cast(value)) {}
 
   operator size_t() const { return m_counter.load(); }

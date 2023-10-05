@@ -27,13 +27,13 @@ public:
     }
   }
 
-  bool load(std::string const & filename);
+  bool Open(std::string const & filename);
 
   TTree* get() {return m_tree;}
   TTree* operator-> () {return m_tree;}
   operator TTree*() {return m_tree;}
 
-  operator bool() const & {return m_ok;}
+  bool const & ok() const {return m_ok;}
   
 private:
   TFile* m_file = nullptr;
@@ -44,7 +44,7 @@ private:
   std::string m_title;
 };
 
-bool Nuball2Tree::load(std::string const & filename)
+bool Nuball2Tree::Open(std::string const & filename)
 {
   // Opens the file :
   m_file = TFile::Open(filename.c_str(), "READ");
