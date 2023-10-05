@@ -17,6 +17,8 @@ public:
   CloverModule() : m_label(glabel) {glabel++;}
 
   void Reset();
+  void clear() {this -> Reset();}
+  void clean() {this -> Reset();}
   auto const & label() const {return m_label;}
   static void resetLabel() {glabel = 0;}
   void addGe(float const & _nrj, double const & _time) {nrj = _nrj; time = _time; nb++;}

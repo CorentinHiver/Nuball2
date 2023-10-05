@@ -189,7 +189,6 @@ public:
   auto const & size() const {return Hits.size();}
   auto mult() const {return int_cast(Hits.size());}
   void Analyse();
-  void AnalyseFast();
   void Analyse_more();
   bool FillFast(Event const & event, size_t const & hit_index);
   bool isPrompt (CloverModule const & clover) {return promptGate(clover.time, clover.nrj) ;}
@@ -232,14 +231,12 @@ public:
   
   void CleanFast()
   {
-    PromptClovers.clear();
-    DelayedClovers.clear();
-    PromptCleanGeMult = 0;
-    DelayedCleanGeMult = 0;
+    for (auto const & clover_i : promptClean ) PromptClovers [clover_i].clear();
+    for (auto const & clover_i : delayedClean) DelayedClovers[clover_i].clear();
     delayedClean.clear();
     promptClean.clear();
-    PromptGe.clear();
-    DelayedGe.clear();
+    PromptCleanGeMult = 0;
+    DelayedCleanGeMult = 0;
   }
 
 private:
@@ -436,6 +433,8 @@ void Clovers::SetEvent(Event const & event, char const & analyse)
   {
     this->CleanFast();
     for (size_t i = 0; i<event.size(); i++) this -> FillFast(event, i);
+    PromptCleanGeMult  = promptClean .size();
+    DelayedCleanGeMult = delayedClean.size();
     // this -> AnalyseFast();
   }
 }
@@ -449,12 +448,20 @@ bool Clovers::FillFast(Event const & event, size_t const & hit_index)
   Hits.push_back_unique(index_clover);
 
   auto const & nrj = event.nrjs[hit_index];
-  auto const & time = event.times[hit_index];
+  auto const & time = event.time2s[hit_index];
 
   if (isGe[label])
   {
-    if (promptGate (time)) PromptClovers[index_clover].addGe(nrj, time);
-    else if (delayedGate(time)) DelayedClovers[index_clover].addGe(nrj, time);
+    if (promptGate (time)) 
+    {
+      promptClean.push_back(index_clover);
+      PromptClovers[index_clover].addGe(nrj, time);
+    }
+    else if (delayedGate(time)) 
+    {
+      delayedClean.push_back(index_clover);
+      DelayedClovers[index_clover].addGe(nrj, time);
+    }
   }
   else // if isBGO[label] :
   {
@@ -654,20 +661,6 @@ void Clovers::Analyse()
         BGOonly.push_back(index);
       }
     }
-  }
-}
-
-void Clovers::AnalyseFast()
-{
-  for (auto const & index : Hits)
-  {
-    auto const & clover = m_clovers[index];
-    if (clover.nb_BGO) continue; // Compton Clean
-
-    if (promptGate (clover.time)) promptClean .push_back(index);
-    if (delayedGate(clover.time)) delayedClean.push_back(index);
-    PromptCleanGeMult  = promptClean .size();
-    DelayedCleanGeMult = delayedClean.size();
   }
 }
 
