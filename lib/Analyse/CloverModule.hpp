@@ -18,6 +18,9 @@ public:
 
   void Reset();
   auto const & label() const {return m_label;}
+  static void resetLabel() {glabel = 0;}
+  void addGe(float const & _nrj, double const & _time) {nrj = _nrj; time = _time; nb++;}
+  void addBGO(float const & _nrj, double const & _time) {nrj_BGO = _nrj; time_BGO = _time; nb_BGO++;}
 
   // In the following, if nothing is specified then it refers to the Germanium
 
@@ -37,10 +40,10 @@ public:
 
 private:
   uchar const m_label;
-  static uchar glabel;
+  static thread_local uchar glabel;
 };
 
-uchar CloverModule::glabel = 0;
+uchar thread_local CloverModule::glabel = 0;
 
 void CloverModule::Reset()
 {
@@ -67,7 +70,8 @@ std::ostream& operator<<(std::ostream& cout, CloverModule const & cloverModule)
     "nb BGO", static_cast<int>(cloverModule.nb_BGO),
     "nrj :", cloverModule.nrj,
     "time: ", cloverModule.time, "ns",
-    "index of crystal with max E :", static_cast<int>(cloverModule.maxE_Ge_cristal));
+    "index of crystal with max E :", static_cast<int>(cloverModule.maxE_Ge_cristal)
+    );
   return cout;
 }
 

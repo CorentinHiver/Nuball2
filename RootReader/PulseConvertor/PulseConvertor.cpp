@@ -25,11 +25,13 @@
 #include <Classes/Counters.hpp>
 #include <Timer.hpp>
 #include <RF_Manager.hpp>
+#include <Clovers.hpp>
 
-enum trigger_modes{NO, M2G1, P, M2G1_P};
-bool check_trigger(Counters & counter, Event & event, trigger_modes trig = P)
+
+enum trigger_modes{NO, M2G1, P, M2G1_P, DC2};
+bool check_trigger(Counters & counter, Clovers & clovers, Event & event, trigger_modes trig = P)
 {
-  counter.clear();
+  
   switch (trig)
   {
     case NO : return true;
@@ -44,6 +46,10 @@ bool check_trigger(Counters & counter, Event & event, trigger_modes trig = P)
       counter.countEvent(event);
       counter.clover_analyse();
       return ((counter.Modules>1 && counter.RawGe>0) || counter.DSSDMult>0);
+    case DC2 :
+      clovers.SetEvent(event, 2);
+      return(clovers.DelayedCleanGeMult>1);
+      
     default : return false;
   }
 }
@@ -104,11 +110,11 @@ int main(int argc, char ** argv)
       {// Path to the data
         dataPath = argv[++i];
       }
-      else if (command == "-o" || command == "--out_path")
+      else if (command == "-O" || command == "--out_path")
       {// Relative path to output 
         outDir = Path(std::string(argv[++i]), 1);
       }
-      else if (command == "-O" || command == "--overwrites")
+      else if (command == "-o" || command == "--overwrites")
       {
         overwrites = true;
       }
@@ -168,7 +174,7 @@ int main(int argc, char ** argv)
 
   RF_Manager::set_offset_ns(40);
 
-  Detectors g_listDet(fileID);
+  detectors.load(fileID);
   if (runs.size() == 0) runs = listFileReader(runs_list);
 
   MTList runsMT(runs);
@@ -265,15 +271,16 @@ void convertRuns(MTList & runs)
     printMT("Chain loaded");
   #endif //DEBUG
 
-
     RF_Manager rf;
     RF_Extractor first_rf(&chain, rf, event);
     if (!first_rf) {print("Next run"); continue;}
-    print("First RF found at", first_rf.cursor(), "and period is", rf.period);
+    debug("First RF found at", first_rf.cursor(), "and period is", rf.period);
 
     // Counters :
     ulonglong converted_counter = 0;
     Counters counter;
+    Clovers clovers;
+
 
     // Create the output folder :
     Path outPath(outDir+run,1);
@@ -299,12 +306,22 @@ void convertRuns(MTList & runs)
 
     auto Ge_spectra_VS_T  = (histoed) ? std::make_unique<TH2F> (("Ge_spectra_VS_time_"+run).c_str(), ("Ge spectra VS time "+run).c_str(), 20000,0,10000, 2*USE_RF,-USE_RF/2,3*USE_RF/2) : 0;
 
-    auto ref_VS_RF_after  = (histoed) ? std::make_unique<TH1F>(("ref_VS_RF_after_"+run).c_str(), ("Timing reference after"+run).c_str(), 2*USE_RF, -USE_RF/2, 3*USE_RF/2) : 0;
+    auto ref_VS_RF_after  = (histoed) ? std::make_unique<TH1F>(("ref_VS_RF_after_"+run).c_str(), ("Timing reference after "+run).c_str(), 2*USE_RF, -USE_RF/2, 3*USE_RF/2) : 0;
+    
+    auto BR2D1_labr3  = (histoed) ? std::make_unique<TH1F>(("BR2D1_labr3_"+run).c_str(), ("BR2D1 labr3 "+run).c_str(), 1500, 0, 15000) : 0;
+    auto BR2D1_labr3_delayed  = (histoed) ? std::make_unique<TH1F>(("BR2D1_labr3_delayed_"+run).c_str(), ("BR2D1 labr3 "+run).c_str(), 1500, 0, 15000) : 0;
+    auto BR2D1_nai  = (histoed) ? std::make_unique<TH1F>(("BR2D1_nai_"+run).c_str(), ("BR2D1 nai "+run).c_str(), 1500, 0, 15000) : 0;
+    auto BR2D1_nai_delayed  = (histoed) ? std::make_unique<TH1F>(("BR2D1_nai_delayed_"+run).c_str(), ("BR2D1 nai "+run).c_str(), 1500, 0, 15000) : 0;
+
+    auto const & prompt_LaBr3_VS_Ge = (histoed) ? std::make_unique<TH2F>(("prompt_LaBr3_VS_Ge_"+run).c_str(), ("Prompt LaBr3 VS Clover Ge "+run).c_str(), 5000,0,10000, 750,0,15000) : 0;
+    auto const & delayed_LaBr3_VS_Ge = (histoed) ? std::make_unique<TH2F>(("delayed_LaBr3_VS_Ge_"+run).c_str(), ("Delayed LaBr3 VS Clover Ge "+run).c_str(), 5000,0,10000, 750,0,15000) : 0;
+    auto const & prompt_NaI_VS_Ge = (histoed) ? std::make_unique<TH2F>(("prompt_NaI_VS_Ge_"+run).c_str(), ("Prompt NaI VS Clover Ge "+run).c_str(), 5000,0,10000, 500,0,15000) : 0;
+    auto const & delayed_NaI_VS_Ge = (histoed) ? std::make_unique<TH2F>(("delayed_NaI_VS_Ge_"+run).c_str(), ("Delayed NaI VS Clover Ge "+run).c_str(), 5000,0,10000, 500,0,15000) : 0;
 
     // Loop over the whole folder :
     while(evt<chain.GetEntriesFast() && (nb_max_evts_read==-1) ? true : evt<nb_max_evts_read)
     {
-      auto outTree  = std::make_unique<TTree>("Nuball2", "Second conversion");
+      auto outTree  = std::make_unique<TTree>("Nuball2", "2 delayed clean Ge");
       outTree -> SetDirectory(nullptr);
       Timer timerFile;
 
@@ -334,7 +351,6 @@ void convertRuns(MTList & runs)
 
         if (event.mult>40) continue;
 
-      #ifdef USE_RF
         // Extract the RF information and calculate the relative timestamp : 
         auto const & stamp = event.stamp;
         auto const rf_stamp = rf.pulse_ToF(stamp);
@@ -342,8 +358,11 @@ void convertRuns(MTList & runs)
         {
           auto const & label = event.labels[i];
           auto const & time  = event.times [i];
+          auto const & nrj  = event.nrjs [i];
+          auto const & nrj2  = event.nrj2s [i];
 
           event.time2s[i] = Time_ns_cast(rf_stamp+time)/1000.f;
+          auto const & time2 = event.time2s[i];
 
           if (label == 252) 
           {
@@ -355,9 +374,42 @@ void convertRuns(MTList & runs)
             rf.period = Timestamp_cast(event.nrjs[i]);
             rf.last_hit = stamp;
           } 
+          else if (label == 301) 
+          {
+            auto const & ratio = (nrj2-nrj)/nrj2;
+            auto const & prompt = time2>-10 && time2 < 5;
+            auto const & delayed = (time2>40 && time2 < 180) || (time2>240 && time2<380);
+            clovers.SetEvent(event);
+            if (ratio>-0.2 && ratio<0.2) 
+            {
+              if (prompt) 
+              {
+                BR2D1_labr3->Fill(nrj);
+                for (auto const & index : clovers.promptClean) prompt_LaBr3_VS_Ge->Fill(clovers[index].nrj, nrj);
+              }
+              else if (delayed) 
+              {
+                BR2D1_labr3_delayed->Fill(nrj);
+                for (auto const & index : clovers.delayedClean) delayed_LaBr3_VS_Ge->Fill(clovers[index].nrj, nrj);
+              }
+            }
+            else if (ratio>0.5 && ratio < 0.8) 
+            {
+              if (prompt) 
+              {
+                BR2D1_nai->Fill(nrj2);
+                for (auto const & index : clovers.promptClean) prompt_NaI_VS_Ge->Fill(clovers[index].nrj, nrj);
+              }
+              else if (delayed) 
+              {
+                BR2D1_nai_delayed->Fill(nrj2);
+                for (auto const & index : clovers.promptClean) delayed_NaI_VS_Ge->Fill(clovers[index].nrj, nrj);
+              }
+            }
+          }
         }
-      #endif //USE_RF
-        if (check_trigger(counter, event, trigger_mode))
+
+        if (check_trigger(counter, clovers, event, trigger_mode))
         {
           // Treat event :
           for (int i = 0; i<event.mult; i++)
@@ -408,6 +460,16 @@ void convertRuns(MTList & runs)
       detectors_time  -> Write();
       Ge_spectra      -> Write();
       Ge_spectra_VS_T -> Write();
+
+      BR2D1_labr3 -> Write();
+      BR2D1_labr3_delayed -> Write();
+      BR2D1_nai -> Write();
+      BR2D1_nai_delayed -> Write();
+
+      prompt_LaBr3_VS_Ge -> Write();
+      delayed_LaBr3_VS_Ge -> Write();
+      prompt_NaI_VS_Ge -> Write();
+      delayed_NaI_VS_Ge -> Write();
       
       file -> Write();
       file -> Close();

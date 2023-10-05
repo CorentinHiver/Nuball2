@@ -14,7 +14,7 @@
  * 
  * The following are public members (i.e. you can call it directly with Event::[array_name])
  * 
- *        Mult mult = 0;                  Number of hits currently stored in the event.
+ *        int mult = 0;                  Number of hits currently stored in the event.
  *        Timestamp stamp = 0ull;         Absolute timestamp of the whole event
  *        Label   labels  [255] = {0};    Labels of the hits
  *        Time    times   [255] = {0};    Time in ps (Long64_t) relative to the first hit
@@ -136,7 +136,7 @@ public:
   Time_ns time_ns(int const & i) const {return (read.T) ? time2s[i] : Time_ns_cast(times[i])/1000.f;}
 
   // Public members :
-  Mult mult = 0;
+  int mult = 0;
   Timestamp stamp = 0ull;
   Label   labels  [255] = {0};
   Time    times   [255] = {0};
@@ -319,7 +319,7 @@ inline std::ostream& operator<<(std::ostream& cout, Event const & event)
   cout << event.mult << " hits : ";
   if (event.stamp != 0) cout << "Timestamp : " << event.stamp << " ps";
   std::cout << std::endl;
-  for (Mult i = 0; i<event.mult;i++)
+  for (int i = 0; i<event.mult;i++)
   {
     cout << "label : " << event.labels[i] << " ";
     if(event.times  [i] != 0) cout << "time : "     + std::to_string(event.times [i])+" ps  " ;

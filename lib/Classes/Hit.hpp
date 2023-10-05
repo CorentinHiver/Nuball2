@@ -8,7 +8,6 @@
 /// Data types ///
 //////////////////
 
-using Mult      = int;
 using Label     = ushort;
 using ADC       = int;
 using NRJ       = float;

@@ -106,7 +106,7 @@ public:
   static bool ON; // State boolean
   operator bool() {return MTObject::ON;} // Can be used only if the class has been instanciated
 
-  thread_local static auto const & getThreadIndex() {return m_thread_index;}
+  static auto const & getThreadIndex() {return m_thread_index;}
   static auto const & index() {return m_thread_index;}
   // static int const & getThreadIndex() {return threads_ID[std::this_thread::get_id()];} // Old indexing system
 

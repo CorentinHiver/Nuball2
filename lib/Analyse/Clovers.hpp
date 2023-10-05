@@ -11,6 +11,14 @@
 
 #include "CloverModule.hpp"
 
+// class Grouper
+// {
+//   public:
+
+//   private:
+//   float time_ref = 0;
+// };
+
 std::array<float, 48> BGO_coeff = 
 {
 1.1747f, 1.2617f,
@@ -133,8 +141,17 @@ public:
   // _______________________________________________________________ //
   // -----------------------  Clovers Class  ----------------------- //
 
-  Clovers(){InitializeArrays(); m_Clovers.resize(24); Reset();}
-  void SetEvent(Event const & event, bool analyse = true);
+  Clovers()
+  {
+    InitializeArrays(); 
+    m_clovers.resize(24); 
+    CloverModule::resetLabel();
+    PromptClovers.resize(24);
+    CloverModule::resetLabel();
+    DelayedClovers.resize(24);
+    Reset();
+  }
+  void SetEvent(Event const & event, char const & analyse = 0);
   bool Fill(Event const & event, size_t const & index);
   void Reset();
 
@@ -165,14 +182,16 @@ public:
   // -
 
   // Specific methods :
-  CloverModule operator[] (uchar const & i) {return m_Clovers[i];}
-  CloverModule operator[] (uchar const & i) const {return m_Clovers[i];}
-  auto begin() const {return m_Clovers.begin();}
-  auto end()   const {return m_Clovers.end  ();}
+  CloverModule operator[] (uchar const & i) {return m_clovers[i];}
+  CloverModule operator[] (uchar const & i) const {return m_clovers[i];}
+  auto begin() const {return m_clovers.begin();}
+  auto end()   const {return m_clovers.end  ();}
   auto const & size() const {return Hits.size();}
   auto mult() const {return int_cast(Hits.size());}
   void Analyse();
+  void AnalyseFast();
   void Analyse_more();
+  bool FillFast(Event const & event, size_t const & hit_index);
   bool isPrompt (CloverModule const & clover) {return promptGate(clover.time, clover.nrj) ;}
   bool isDelayed(CloverModule const & clover) {return delayedGate(clover.time, clover.nrj);}
 
@@ -196,14 +215,33 @@ public:
   StaticVector<uchar> DelayedBGO = StaticVector<uchar>(24);  // List of clean Germaniums that fired in the event, that is "Ge only" modules
   
 
-  std::vector<CloverModule> m_Clovers; // Array containing the 24 clovers
+  std::vector<CloverModule> m_clovers; // Array containing the 24 clovers
 
   // Counters :
-  uchar Mult = 0;
+  uchar TotalMult = 0;
   uchar PromptMult = 0;
   uchar DelayedMult = 0;
-  uchar PromptCleanGe = 0;
-  uchar DelayedCleanGe = 0;
+  uchar PromptCleanGeMult = 0;
+  uchar DelayedCleanGeMult = 0;
+
+  // AnalyseFast :
+  std::vector<uchar> delayedClean;
+  std::vector<uchar> promptClean;
+  std::vector<CloverModule> PromptClovers;
+  std::vector<CloverModule> DelayedClovers;
+  
+  void CleanFast()
+  {
+    PromptClovers.clear();
+    DelayedClovers.clear();
+    PromptCleanGeMult = 0;
+    DelayedCleanGeMult = 0;
+    delayedClean.clear();
+    promptClean.clear();
+    PromptGe.clear();
+    DelayedGe.clear();
+  }
+
 private:
   // Parameters :
   static bool s_initialised;
@@ -235,9 +273,6 @@ public:
       m_stop_coeff = (m_high_E_gate.stop-m_low_E_gate.stop) / (m_high_E-m_low_E);
       m_stop_intercept = m_low_E_gate.stop-m_low_E*m_stop_coeff;
     }
-
-    float intermediate_start(float const energy) {return (m_start_coeff*energy+m_start_intercept);}
-    float intermediate_stop(float const energy) {return (m_stop_coeff*energy+m_stop_intercept );}
     
     /**
      * @brief Is the hit in the gate
@@ -245,6 +280,8 @@ public:
      * Three zones : high energy, intermediate energy and lower energy.
      * The intermediate energies, links the high and low by a straight line
      * whose parameters ax+b are calculated in the constructor
+     * 
+     * if in normal mode, simple time gates
      */
     bool operator() (double const & time, float const & energy)
     {
@@ -261,7 +298,13 @@ public:
       }
     }
 
+    bool operator() (double const & time) {return (time>-20 && time<5);}
+
   private:
+
+    float intermediate_start(float const energy) {return (m_start_coeff*energy+m_start_intercept);}
+    float intermediate_stop(float const energy) {return (m_stop_coeff*energy+m_stop_intercept );}
+
     float m_high_E = 200;
     float m_low_E  = 50;
     Gate m_high_E_gate = {-15.d, 7.d };
@@ -281,11 +324,19 @@ public:
     {
       if (normal)
       {
-        return (time>20 && time<145);
+        return (*this)(time);
       }
       auto const & timef = static_cast<float>(time);
       if (energy > m_low_E) return m_high_E_gate.isIn(timef);
       else                  return m_low_E_gate.isIn(timef);
+    }
+
+    bool operator() (double const & time)
+    {
+           if (time>20  && time<145) return true;
+      else if (time>220 && time<345) return true;
+      else if (time>420 && time<545) return true;
+      else return false;
     }
 
   private:
@@ -321,7 +372,7 @@ void Clovers::Reset()
 {
   for (auto const & index : Hits)
   {
-    m_Clovers[index].Reset();
+    m_clovers[index].Reset();
   }
 
   for (auto const & index : cristaux)
@@ -355,11 +406,11 @@ void Clovers::Reset()
   cristaux.clear();
   cristaux_BGO.clear();
 
-  Mult = 0;
+  TotalMult = 0;
   PromptMult = 0;
   DelayedMult = 0;
-  PromptCleanGe = 0;
-  DelayedCleanGe = 0;
+  PromptCleanGeMult = 0;
+  DelayedCleanGeMult = 0;
 
   CrystalMult = 0;
   CrystalMult_BGO = 0;
@@ -373,11 +424,44 @@ void Clovers::Reset()
   totBGO_delayed = -1.E-12;
 }
 
-void Clovers::SetEvent(Event const & event, bool analyse)
+void Clovers::SetEvent(Event const & event, char const & analyse)
 {
-  this -> Reset();
-  for (size_t i = 0; i<event.size(); i++) this -> Fill(event, i);
-  if (analyse) this -> Analyse();
+  if (analyse == 1 || analyse == 0) 
+  {
+    this -> Reset();
+    for (size_t i = 0; i<event.size(); i++) this -> Fill(event, i);
+    if (analyse == 1) this -> Analyse();
+  }
+  else if (analyse == 2) 
+  {
+    this->CleanFast();
+    for (size_t i = 0; i<event.size(); i++) this -> FillFast(event, i);
+    // this -> AnalyseFast();
+  }
+}
+
+bool Clovers::FillFast(Event const & event, size_t const & hit_index)
+{
+  auto const & label = event.labels[hit_index];
+  if (!isClover[label]) return false;
+
+  auto const & index_clover = labels[label];
+  Hits.push_back_unique(index_clover);
+
+  auto const & nrj = event.nrjs[hit_index];
+  auto const & time = event.times[hit_index];
+
+  if (isGe[label])
+  {
+    if (promptGate (time)) PromptClovers[index_clover].addGe(nrj, time);
+    else if (delayedGate(time)) DelayedClovers[index_clover].addGe(nrj, time);
+  }
+  else // if isBGO[label] :
+  {
+    if (promptGate (time)) PromptClovers[index_clover].addBGO(nrj, time);
+    else if (delayedGate(time)) DelayedClovers[index_clover].addBGO(nrj, time);
+  }
+  return true;
 }
 
 /// @brief 
@@ -392,7 +476,7 @@ bool Clovers::Fill(Event const & event, size_t const & hit_index)
     auto const & nrj  = event.nrjs[hit_index];
     auto const & time = (event.read.t) ? event.times[hit_index] : event.time2s[hit_index];
 
-    auto & clover = m_Clovers[index_clover];
+    auto & clover = m_clovers[index_clover];
 
     // Fill the vector containing the list of all the clovers that fired in the event :
     Hits.push_back_unique(index_clover);
@@ -508,8 +592,8 @@ void Clovers::Analyse()
 {
   for (auto const & index : Hits)
   {
-    auto & clover = m_Clovers[index];
-    Mult++;
+    auto & clover = m_clovers[index];
+    TotalMult++;
 
     // Analysing Germaniums
     if (clover.nb > 0)
@@ -517,8 +601,8 @@ void Clovers::Analyse()
       Ge.push_back(index);
       totGe+=clover.nrj;
 
-      clover.isGePrompt  = promptGate (clover.time, clover.nrj);
-      clover.isGeDelayed = delayedGate(clover.time, clover.nrj);
+      clover.isGePrompt  = promptGate (clover.time);
+      clover.isGeDelayed = delayedGate(clover.time);
 
       if (clover.isGePrompt)
       {
@@ -536,8 +620,8 @@ void Clovers::Analyse()
       if (clover.nb_BGO==0)
       {
         CleanGe.push_back(index);
-             if (clover.isGePrompt ) PromptCleanGe++;
-        else if (clover.isGeDelayed) DelayedCleanGe++;
+             if (clover.isGePrompt ) PromptCleanGeMult++;
+        else if (clover.isGeDelayed) DelayedCleanGeMult++;
       }
       else RejectedGe.push_back(index);
     }
@@ -562,14 +646,28 @@ void Clovers::Analyse()
         totBGO_delayed+=clover.nrj_BGO;
       }
 
-      if (clover.nb == 0)
+      // To avoid double counting with the clovers containing both bgo and ge :
+      if (clover.nb == 0) 
       {
-        // To avoid double counting with the clovers containing both bgo and ge :
         if (clover.isBGOPrompt) PromptMult++;
         if (clover.isBGODelayed)DelayedMult++;
         BGOonly.push_back(index);
       }
     }
+  }
+}
+
+void Clovers::AnalyseFast()
+{
+  for (auto const & index : Hits)
+  {
+    auto const & clover = m_clovers[index];
+    if (clover.nb_BGO) continue; // Compton Clean
+
+    if (promptGate (clover.time)) promptClean .push_back(index);
+    if (delayedGate(clover.time)) delayedClean.push_back(index);
+    PromptCleanGeMult  = promptClean .size();
+    DelayedCleanGeMult = delayedClean.size();
   }
 }
 

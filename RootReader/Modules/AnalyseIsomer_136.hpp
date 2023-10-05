@@ -264,6 +264,8 @@ private:
   MTTHist<TH2F> Paris_each_spectra_front;
   MTTHist<TH2F> Paris_ratio_VS_time_front;
 
+  MTTHist<TH1F> Paris_back_calibrated_VS_delayed_U6;
+
   // MTTHist<TH2F> mult_VS_Time; In order to see the evolution of Multiplicity over time. To do it, take a moving 50ns time window to group events
 
 };
@@ -527,6 +529,8 @@ void AnalyseIsomer::InitializeManip()
   Paris_time_spectra_front.reset("Paris_time_spectra_front", "Paris time spectra front", 750,0,1500, 500,-50,200);
   Paris_each_spectra_front.reset("Paris_each_spectra_front", "Paris each spectra front", 750,0,1500, 500,0,500);
   Paris_ratio_VS_time_front.reset("Paris_ratio_VS_time_front", "Paris ratio VS time front", 301,-100,200, 501,-2,2);
+  
+  Paris_back_calibrated_VS_delayed_U6.reset("Paris_back_calibrated_VS_delayed_U6", "Paris VS delayed U6 (642, 903, 987)", 1000,0,20000);
 
 
   // Set analysis parameters :
@@ -539,7 +543,7 @@ void AnalyseIsomer::FillSorted(Event const & event, Clovers & clovers, DSSD & ds
 
   auto const & PromptMult = clovers.PromptMult + paris.PromptMult;
   auto const & DelayedMult = clovers.DelayedMult + paris.DelayedMult;
-  auto const & Mult = PromptMult+DelayedMult;
+  auto const & TotalMult = PromptMult+DelayedMult;
   if (m_trigger1989 && (PromptMult<1 || PromptMult>4 || paris.rejection || DelayedMult>5)) return;
   for (auto const & crystal : clovers.cristaux) each_Ge_crystal_spectra.Fill(crystal, clovers.cristaux_nrj[crystal]);
 
@@ -565,7 +569,7 @@ void AnalyseIsomer::FillSorted(Event const & event, Clovers & clovers, DSSD & ds
   Nuball_calo_delayed.Fill(calo_delayed_clovers);
   
   Nuball_calo_delayed_VS_prompt.Fill(calo_prompt_clovers, calo_delayed_clovers);
-  Clover_Mult_VS_Nuball_calo.Fill(calo_clovers, clovers.Mult);
+  Clover_Mult_VS_Nuball_calo.Fill(calo_clovers, clovers.TotalMult);
   prompt_Clover_Mult_VS_Nuball_calo.Fill(calo_prompt_clovers, clovers.PromptMult);
   delayed_Clover_Mult_VS_Nuball_calo.Fill(calo_delayed_clovers, clovers.DelayedMult);
 
@@ -592,7 +596,7 @@ void AnalyseIsomer::FillSorted(Event const & event, Clovers & clovers, DSSD & ds
   total_calo_prompt.Fill(calo_prompt_total);
   total_calo_delayed.Fill(calo_delayed_total);  
 
-  Clover_Mult_VS_Total_calo.Fill(calo_total, clovers.Mult);
+  Clover_Mult_VS_Total_calo.Fill(calo_total, clovers.TotalMult);
   prompt_Clover_Mult_VS_Total_calo.Fill(calo_prompt_total, clovers.PromptMult);
   delayed_Clover_Mult_VS_Total_calo.Fill(calo_delayed_total, clovers.DelayedMult);
   
@@ -628,7 +632,7 @@ void AnalyseIsomer::FillSorted(Event const & event, Clovers & clovers, DSSD & ds
     each_Ge_spectra.Fill(label_i, nrj_i);
 
     // Multiplicity :
-    ge_spectra_VS_mult      .Fill(Mult, nrj_i);
+    ge_spectra_VS_mult      .Fill(TotalMult, nrj_i);
     ge_spectra_VSpromptmult .Fill(PromptMult, nrj_i);
     ge_spectra_VSdelayedmult.Fill(DelayedMult, nrj_i);
 
@@ -648,7 +652,7 @@ void AnalyseIsomer::FillSorted(Event const & event, Clovers & clovers, DSSD & ds
       Ge_spectra_prompt.Fill(nrj_i);
       
       // Multiplicity :
-      ge_prompt_spectra_VS_mult      .Fill(Mult, nrj_i);
+      ge_prompt_spectra_VS_mult      .Fill(TotalMult, nrj_i);
       ge_prompt_spectra_VSpromptmult .Fill(PromptMult, nrj_i);
       ge_prompt_spectra_VSdelayedmult.Fill(DelayedMult, nrj_i);
 
@@ -672,7 +676,7 @@ void AnalyseIsomer::FillSorted(Event const & event, Clovers & clovers, DSSD & ds
       Ge_spectra_delayed.Fill(nrj_i);
 
       // Multiplicity :
-      ge_delayed_spectra_VS_mult      .Fill(Mult, nrj_i);
+      ge_delayed_spectra_VS_mult      .Fill(TotalMult, nrj_i);
       ge_delayed_spectra_VSpromptmult .Fill(PromptMult, nrj_i);
       ge_delayed_spectra_VSdelayedmult.Fill(DelayedMult, nrj_i);
 
@@ -685,6 +689,20 @@ void AnalyseIsomer::FillSorted(Event const & event, Clovers & clovers, DSSD & ds
       Ge_delayed_VS_Nuball_calo.Fill(calo_clovers, nrj_i);
       Ge_delayed_VS_Nuball_calo_prompt.Fill(calo_prompt_clovers, nrj_i);
       Ge_delayed_VS_Nuball_calo_delayed.Fill(calo_delayed_clovers, nrj_i);
+
+      // Gating for the other detectors :
+      if (nrj_i>639 && nrj_i<644) 
+      {
+        for (auto const & index : paris.indexes)
+        {
+          auto const & label = event.labels[index];
+          auto const & nrj = event.nrjs[index];
+          auto const & nrj2 = event.nrj2s[index];
+          auto const & time = event.time2s[index];
+          auto const & ratio = (nrj2-nrj)/nrj2;
+          if (ratio>-0.2 && ratio<0.2) Paris_back_calibrated_VS_delayed_U6->Fill(nrj);
+        }
+      }
     }
     
     ////////////////////////
@@ -962,6 +980,8 @@ void AnalyseIsomer::Write()
   Paris_time_spectra_front.Write();
   Paris_each_spectra_front.Write();
   Paris_ratio_VS_time_front.Write();
+
+  Paris_back_calibrated_VS_delayed_U6.Write();
 
   outfile->Write();
   outfile->Close();

@@ -221,7 +221,7 @@ public:
   void count(Event const & event)
   {
     reset();
-    for (Mult hit = 0; hit<event.mult; hit++)
+    for (int hit = 0; hit<event.mult; hit++)
     {
       auto const & label = event.labels[hit];
       if (isGe[label]) {nb_Ge++; push_back_unique(clovers, labelToClover[label]);}

@@ -342,6 +342,7 @@ void Detectors::makeArrays()
 void operator>>(const char * filename, Detectors & detectors) {detectors.load(std::string(filename));}
 // void operator>>(std::string const & filename, Detectors & detectors) {detectors.load(filename);}
 
+#if __cplusplus >= 201703L
 std::unordered_map<dType, THBinning> Detectors::ADC_bins = 
 {
   {"ge"     , {10000, 0., 100000. }},
@@ -374,6 +375,7 @@ std::unordered_map<dType, THBinning> Detectors::energy_bidim_bins =
   {"dssd"   , {200 , 0., 20000.}},
   {"default", {200 , 0., 20000.}}
 };
+#endif
 
 #endif //DETECTORS_HPP
 

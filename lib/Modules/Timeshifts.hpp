@@ -148,7 +148,7 @@ public:
    * @param max_mult: default max_mult = 2
    * 
   */
-  void setMult(Mult const & min_mult, Mult const & max_mult) {m_min_mult = min_mult; m_max_mult = max_mult;}
+  void setMult(int const & min_mult, int const & max_mult) {m_min_mult = min_mult; m_max_mult = max_mult;}
 
   /**
    * @brief Set maximum hits to be read in a file
@@ -264,8 +264,8 @@ private:
 
   Time_ns m_timewindow_ns = Time_ns_cast(1500);
   Time m_timewindow = Time_cast(m_timewindow_ns*1000);
-  Mult m_min_mult = 2;
-  Mult m_max_mult = 2;
+  int m_min_mult = 2;
+  int m_max_mult = 2;
   Label m_time_ref_label = 252;
   std::string m_time_ref_name = "R1A9_FATIMA_LaBr3";
   ulong m_max_hits = -1;

@@ -351,6 +351,23 @@ void convert(Hit & hit, FasterReader & reader,
         "Mo and output file", outSize, "Mo : compression factor ", dataSize/outSize,"-", (100.*double_cast(hits_count))/double_cast(rawCounts),"% hits kept");
 }
 
+// Attempt to bypass the MTFasterReader to see if it is slowing down the process :
+// void paralellisation(MTList & list,
+//               Calibration const & calibration, 
+//               Timeshifts const & timeshifts, 
+//               Path const & outPath, 
+//               Histos & histos,
+//               MTCounter & total_read_size)
+// {
+//   std::string filename;
+//   while(list.getNext(filename))
+//   {
+//     Hit hit;
+//     FasterReader reader(&hit, filename);
+//     convert(hit, reader, calibration, timeshifts, outPath, histos, total_read_size); 
+//   }
+// }
+
 // 5. Main
 int main(int argc, char** argv)
 {
@@ -509,7 +526,7 @@ int main(int argc, char** argv)
       timeshifts.dT_with_RF("dssd");
     }
 
-    // If no timeshifts data already available, calculate it :
+    // If no timeshifts data for the run already available, calculate it :
     if (!timeshifts || (only_timeshifts && overwrite)) 
     { 
       timeshifts.setMult(2,4);
@@ -527,6 +544,12 @@ int main(int argc, char** argv)
       // Loop over the files in parallel :
       MTFasterReader readerMT(run_path, nb_files);
       readerMT.execute(convert, calibration, timeshifts, outPath, histos, total_read_size);
+
+      // Attempt to bypass the MTFasterReader to see if it is slowing down the process :
+  // FilesManager files
+  // if (!files) {print("NO DATA FILE FOUND"); throw std::runtime_error("DATA");}
+  // MTFile MTfiles = files.getListFiles();
+  // MTObject::parallelise_function(MTfiles, paralellisation, calibration, timeshifts, outPath, histos, total_read_size);
 
       if (histoed)
       {

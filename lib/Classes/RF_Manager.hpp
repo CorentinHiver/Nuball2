@@ -31,7 +31,7 @@ public:
   RF_Manager(Label const & label_RF = 251) {label = label_RF;}
   bool setHit(Hit const & hit);
 #ifdef EVENT_HPP
-  bool setHit(Event const & event, Mult const & hit_i);
+  bool setHit(Event const & event, int const & hit_i);
   bool setEvent(Event const & evt);
   void align_RF(Event & evt) const;
   void align_RF_ns(Event & evt) const;
