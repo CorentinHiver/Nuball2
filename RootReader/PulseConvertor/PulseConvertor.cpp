@@ -176,10 +176,8 @@ int main(int argc, char ** argv)
 
   detectors.load(fileID);
   if (runs.size() == 0) runs = listFileReader(runs_list);
-  print(runs);
 
   MTList runsMT(runs);
-  print(runsMT);
 
 #ifdef DEBUG
   print(runsMT);
@@ -242,8 +240,10 @@ void convertRuns(MTList & runs)
     // ---------------------- //
     Timer timer;
 
+    print(pathRun_str);
     Path pathRun = dataPath+pathRun_str;
     std::string run = pathRun.folder().name();
+    print(pathRun_str, run);
 
     // If the output folder already exists (empty or not), then overwrites only if parameter "-O" has been chosen :
     if (!overwrites && folder_exists(outDir+run)) {print(outDir+run,"already exist !!"); continue;}
