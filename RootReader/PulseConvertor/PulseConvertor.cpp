@@ -179,9 +179,7 @@ int main(int argc, char ** argv)
 
   MTList runsMT(runs);
 
-#ifdef DEBUG
-  print(runsMT);
-#endif //DEBUG
+  debug(runsMT);
 
   if (runsMT.size() == 0)
   {
@@ -240,10 +238,8 @@ void convertRuns(MTList & runs)
     // ---------------------- //
     Timer timer;
 
-    print(pathRun_str);
     Path pathRun = dataPath+pathRun_str;
     std::string run = pathRun.folder().name();
-    print(pathRun_str, run);
 
     // If the output folder already exists (empty or not), then overwrites only if parameter "-O" has been chosen :
     if (!overwrites && folder_exists(outDir+run)) {print(outDir+run,"already exist !!"); continue;}
