@@ -156,7 +156,7 @@ int main(int argc, char ** argv)
         print("(      --BGO_cal)                                        : Roughly, for BGO, Energy[keV] = ADC/100. Use this command if the BGO data are still in ADC");
         print("(-d || --data_path)     [/path/to/data/]                 : Path to the data (=experiment path)");
         print("(-f || --folder)        [folder/]                        : Name of the folder (=run) to convert");
-        print("(-F || --folders)       [nb_folders] [[list of folders]] : List of the folders to convert");
+        print("(-F || --folders)       [nb_folders] [[list of folders]] : List of folders (=runs) to convert");
         print("(-h || --help)                                           : Displays this help");
         print("(-H || --histograms)                                     : Fills and writes histograms"); 
         print("(-i || --ID)            [/path/to/ID.dat]                : Index file");
@@ -176,8 +176,10 @@ int main(int argc, char ** argv)
 
   detectors.load(fileID);
   if (runs.size() == 0) runs = listFileReader(runs_list);
+  print(runs);
 
   MTList runsMT(runs);
+  print(runsMT);
 
 #ifdef DEBUG
   print(runsMT);
@@ -185,7 +187,7 @@ int main(int argc, char ** argv)
 
   if (runsMT.size() == 0)
   {
-    print("NO DATA IN", dataPath+runs_list);
+    print("NO DATA IN", runs_list);
     return -1;
   }
 
