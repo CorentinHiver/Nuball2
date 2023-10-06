@@ -80,6 +80,12 @@ public:
     return *this;
   }
 
+  auto begin() {return m_listFiles.begin();}
+  auto end()   {return m_listFiles.end  ();}
+
+  auto begin() const {return m_listFiles.begin();}
+  auto end()   const {return m_listFiles.end  ();}
+
 protected:
   Path m_path;
   size_t      m_filesCursor = 0;
@@ -183,5 +189,11 @@ bool FilesManager::nextFileName(std::string & filename, size_t const & step)
   filename = m_listFiles.at(m_filesCursor);
   m_filesCursor += step;
   return true;
+}
+
+std::ostream& operator<<(std::ostream& cout, FilesManager const & files)
+{
+  for (auto const & f : files) cout << f << " ";
+  return cout;
 }
 #endif

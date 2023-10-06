@@ -1186,8 +1186,9 @@ void Calibration::writeCalibratedData(std::string const & outfilename)
 
 std::ostream& operator<<(std::ostream& cout, Calibration const & calib)
 {
-  for (Label label = 0; label<detectors.size(); label++) if (detectors.exists(label))
+  for (Label label = 0; label<detectors.size(); label++) 
   {
+    if (detectors && !detectors.exists(label)) continue;
      cout << label << " " << calib[label] << std::endl;
   }
   return cout;

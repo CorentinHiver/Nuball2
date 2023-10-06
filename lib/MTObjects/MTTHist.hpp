@@ -201,10 +201,6 @@ public:
   template <class... ARGS>
   void reset(std::string name, ARGS &&... args);
 
-  // Initialize only one histogram at a time
-  template <class... ARGS>
-  void resetOne(std::string name, ARGS &&... args);
-
   // ---   GENERIC FILL --- //
 
   template <class... ARGS>

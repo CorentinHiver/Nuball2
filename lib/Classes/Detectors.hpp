@@ -365,6 +365,7 @@ std::unordered_map<dType, THBinning> Detectors::energy_bins =
   {"default", {1000 , 0., 50000.}}
 };
 
+#else 
 std::unordered_map<dType, THBinning> Detectors::energy_bidim_bins = 
 {
   {"ge"     , {5000, 0., 10000.}},
@@ -375,7 +376,6 @@ std::unordered_map<dType, THBinning> Detectors::energy_bidim_bins =
   {"dssd"   , {200 , 0., 20000.}},
   {"default", {200 , 0., 20000.}}
 };
-#else 
 std::unordered_map<dType, THBinning> Detectors::ADC_bins;
 std::unordered_map<dType, THBinning> Detectors::energy_bins;
 std::unordered_map<dType, THBinning> Detectors::energy_bidim_bins;
