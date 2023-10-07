@@ -174,6 +174,7 @@ public:
 
     void Initialize();
     void setBins(std::string const & parameters);
+    bool initialized = false;
   } m_histos;
 
   // ~Calibration() {for (auto & histo : m_histos.spectra) if (histo.second) delete histo.second;}
@@ -318,6 +319,7 @@ private:
 
 void Calibration::histograms::Initialize()
 {
+  if (initialized) return;
   auto const & max_label = detectors.size();
 
   if (max_label == 0) 
@@ -326,68 +328,75 @@ void Calibration::histograms::Initialize()
     throw std::runtime_error(error_message["DEV"]);
   }
 
-  // Load the binning informations : 
-  auto const & raw_bins = detectors.getADCBin();
-  auto const & energy_bins = detectors.getEnergyBin();
-  auto const & bidim_bins = detectors.getBidimBin();
-
   // All the detectors spectra in one plot :
   all_raw_spectra.reset("All_detectors", "All detectors", 
-      max_label,0,max_label, raw_bins.at("default").bins,0,raw_bins.at("default").min);
+      max_label,0,max_label, detectors.ADCBin("default").bins,0,detectors.ADCBin("default").min);
 
   // All the calibrated detectors spectra of each type in one plot :
   all_calib.resize(detectors.nbTypes());
-  try
+  for (auto const & type : detectors.types())
   {
-    for (auto const & type : detectors.types())
-    {
-      auto nb_detectors = detectors.nbOfType(type);
-      auto const & binning = bidim_bins.at(type);
-      all_calib[detectors.typeIndex(type)].reset(("All_"+type+"_spectra").c_str(), ("All "+type+" spectra").c_str(), 
-          nb_detectors,0,nb_detectors, binning.bins,binning.min,binning.max);
-    }
-  }
-  catch ()
-  {
-    continue;
+    print(type);
+    auto nb_detectors = detectors.nbOfType(type);
+    auto const & binning = detectors.energyBidimBin(type);
+    all_calib[detectors.typeIndex(type)].reset(("All_"+type+"_spectra").c_str(), ("All "+type+" spectra").c_str(), 
+        nb_detectors,0,nb_detectors, binning.bins,binning.min,binning.max);
   }
 
   // All the raw and/or calibrated spectra in a separate spectra :
   calib_spectra.resize(max_label);
   raw_spectra.resize(max_label);
-  for (Label label = 0; label<max_label; label++)
+  // for (Label label = 0; label<max_label; label++)
+  // {
+  //   auto const & name = detectors[label];
+  //   auto const & type = detectors.type(label);
+  //   if (type == "null" || type == "RF")
+  //   {
+  //     calib_spectra[label].reset((std::to_string(label)+"_calib").c_str(), (std::to_string(label)+" calibrated spectra").c_str(), 1000, 0, 1000);
+  //     raw_spectra[label].reset((std::to_string(label)+"_raw").c_str(), (std::to_string(label)+" raw spectra").c_str(), 1000, 0, 1000);
+  //   }
+  //   else 
+  //   {
+  //     auto const & bin_raw = detectors.energyBin(type);
+  //     auto const & bin_calib = detectors.energyBin(type);
+  //     raw_spectra[label].reset((name+"_raw").c_str(), (name+" raw spectra").c_str(), bin_raw.bins, bin_raw.min, bin_raw.max);
+  //     calib_spectra[label].reset((name+"_calib").c_str(), (name+" calibrated spectra").c_str(), bin_calib.bins, bin_calib.min, bin_calib.max);
+  //   }
+  // }
+  for (auto const & type : detectors.types())
   {
-    auto const & name = detectors[label];
-    auto const & type = detectors.type(label);
-    if (type == "null" || type == "RF")
+    if (type == "null" || type == "RF") continue;
+    for (size_t index = 0; index<detectors.nbOfType(type); index++)
     {
-      calib_spectra[label].reset((std::to_string(label)+"_calib").c_str(), (std::to_string(label)+" calibrated spectra").c_str(), 1000, 0, 1000);
-      raw_spectra[label].reset((std::to_string(label)+"_raw").c_str(), (std::to_string(label)+" raw spectra").c_str(), 1000, 0, 1000);
-    }
-    else 
-    {
-      auto const & bin_raw = energy_bins.at(type);
-      auto const & bin_calib = energy_bins.at(type);
+      auto const & name = detectors.name(type, index);
+      print(name);
+      auto const & label = detectors.label(type, index);
+      print(label);
+      auto const & bin_raw = detectors.energyBin(type);
+      auto const & bin_calib = detectors.energyBin(type);
       raw_spectra[label].reset((name+"_raw").c_str(), (name+" raw spectra").c_str(), bin_raw.bins, bin_raw.min, bin_raw.max);
       calib_spectra[label].reset((name+"_calib").c_str(), (name+" calibrated spectra").c_str(), bin_calib.bins, bin_calib.min, bin_calib.max);
     }
   }
+  initialized = true;
 }
 
 void Calibration::histograms::setBins(std::string const & parameters)
 {
   std::istringstream param(parameters);
+  auto & ADCbins = detectors.getADCBin();
+  auto & Energybins = detectors.getEnergyBin();
   for (std::string line; std::getline(param,line);)
   {
     std::istringstream is(line);
     std::string type;
     std::string which_histo;
     is>>type;
-    if (type == "null") {throw std::runtime_error(type+"type is not recognized for binning in Calibration");continue;}
+    if (type == "null") {throw_error(type+"type is not recognized for binning in Calibration");}
     is >> which_histo;
-         if (which_histo == "raw"  ) is >> detectors.ADC_bins[type].bins >> detectors.ADC_bins[type].min >> detectors.ADC_bins[type].max;
-    else if (which_histo == "calib") is >> detectors.energy_bins[type].bins >> detectors.energy_bins[type].min >> detectors.energy_bins[type].max;
-    else {throw std::runtime_error(which_histo+"histo of Calibraiton module not recognized ");continue;}
+         if (which_histo == "raw"  ) is >> ADCbins[type].bins >> ADCbins[type].min >> ADCbins[type].max;
+    else if (which_histo == "calib") is >> Energybins[type].bins >> Energybins[type].min >> Energybins[type].max;
+    else {throw_error(which_histo+" histo of Calibration module not recognized ");}
   }
 }
 
@@ -535,6 +544,8 @@ void Calibration::fillHisto(Hit & hit, FasterReader & reader, Calibration & cali
   }
   else while(reader.Read())
   {
+    auto const & type = detectors.type(hit.label);
+    if (type ==  "null" || type ==  "RF") continue;
     calib.m_histos.raw_spectra[hit.label].Fill(hit.adc);
   }
 }

@@ -72,7 +72,7 @@ public:
   /// @brief Return the value of the maximum label, i.e. the size of the lookup tables
   auto const size() const {return Label_cast(m_list.size());}
 
-  /// @brief  Return the real number of detectors
+  /// @brief  Return the number of detectors
   static auto const number() {return nb_detectors;}
 
   // Iterate over the existing detectors :
@@ -98,52 +98,68 @@ public:
 
   void operator=(std::string const & filename) {this -> load(filename);}
 
-  std::string const & operator[] (int i) const {return m_list[i];}
+  /// @brief Extracts the name of the detector given its global label
+  std::string const & operator[] (Label const & label) const {return m_list[label];}
+
+  /// @brief Returns true only of the detectors ID file has been loaded successfully
   operator bool() const & {return m_ok;}
 
   /// @brief Returns the number of types in the ID file
-  static size_t nbTypes() {return m_types_ID_array.size()-1;}
+  static size_t nbTypes() {return m_types_ID_array.size();}
 
   /// @brief Returns the number of detector of each type
   auto const & nbOfType(dType const & type) {return m_type_counter[type];}
 
+  /// @brief Get the name of a detector given its type and type index
   auto const & name(dType const & type, int const & index) {return m_names[type][index];}
+
+  /// @brief Get the global label of a detector given its type and type index
   auto const & label(dType const & type, int const & index) {return m_labels[type][index];}
+
+  /// @brief Get the type index of the detector. Each type of detector has its own indexing system.
   auto const & index(Label const & label) const {return m_index[label];}
 
-  static auto const & ADCBin(dType const & type)
+  /// @brief Get the default ADC histogram binning for each type of detectors
+  static auto const & ADCBin(dType const & type = "")
   {
     auto const & it = ADC_bins.find(type);
     if (it != ADC_bins.end()) return it->second;
     else return ADC_bins["default"];
   }
 
-  static auto const & energyBin(dType const & type)
+  /// @brief Get the default energy (keV) histogram binning for each type of detectors
+  static auto const & energyBin(dType const & type = "")
   {
     auto const & it = energy_bins.find(type);
     if (it != energy_bins.end()) return it->second;
     else return energy_bins["default"];
   }
   
-  static auto const & energyBidimBin(dType const & type)
+  /// @brief Get the default energy (keV) bidimensionnal histogram binning for each type of detectors
+  static auto const & energyBidimBin(dType const & type = "")
   {
     auto const & it = energy_bidim_bins.find(type);
     if (it != energy_bidim_bins.end()) return it->second;
     else return energy_bidim_bins["default"];
   }
 
-  static auto const & getADCBin() {return ADC_bins;}
-  static auto const & getEnergyBin() {return energy_bins;}
-  static auto const & getBidimBin() {return energy_bidim_bins;}
+  /// @brief Get the default energy (keV) bidimensionnal histogram binning for all types of detectors
+  static auto & getADCBin() {return ADC_bins;}
+  /// @brief Get the default energy (keV) bidimensionnal histogram binning for all types of detectors
+  static auto & getEnergyBin() {return energy_bins;}
+  /// @brief Get the default energy (keV) bidimensionnal histogram binning for all types of detectors
+  static auto & getBidimBin() {return energy_bidim_bins;}
 
+  /// @brief Prints out the list of labels
+  // TODO : a more clever print with also the type and index
+  void Print() {for (auto const & d : *this) if (d!="") {std::cout << d << " ";} std::cout << std::endl;}
+
+protected:
   // Binning informations :
   static std::unordered_map<dType, THBinning> energy_bins;
   static std::unordered_map<dType, THBinning> ADC_bins;
   static std::unordered_map<dType, THBinning> energy_bidim_bins;
 
-  void Print() {for (auto const & d : *this) if (d!="") {std::cout << d << " ";} std::cout << std::endl;}
-
-protected:
   // Useful informations
   bool m_ok = false;
   bool m_loaded = false;
@@ -158,11 +174,16 @@ protected:
   static std::map<std::string, int> m_types_index;
   static Bools exist_array;
   static Strings m_list;
-  std::unordered_map<dType, size_t> m_type_counter; // To get the number of detector in each alias. 
+  std::unordered_map<dType, size_t> m_type_counter; // To get the number of detectors of each type. 
   std::unordered_map<dType, Strings> m_names;
   std::unordered_map<dType, Label_vec> m_labels;
 } detectors;
 
+std::ostream& operator>>(std::ostream& cout, Detectors const & detectors)
+{
+  for (auto const & d : detectors) {cout << d << " ";}
+  return cout;
+}
 
 /// @brief List of types of detectors that this code can handle
 Strings Detectors::types_handled = {"ge", "bgo", "labr", "paris", "dssd", "eden", "RF", "null"};
@@ -333,7 +354,7 @@ void Detectors::makeArrays()
     else compressedLabel[label] = -1;
   }
 
-  for (auto const & type : m_types)
+  for (auto const & type : types_handled)
   {// To make the list of all the detector types present in the ID file :
     if (m_type_counter[type]>0) m_types_ID_array.push_back(type);
   }
@@ -344,13 +365,6 @@ void Detectors::makeArrays()
   }
 }
 
-// void operator>>(const char * filename, Detectors & detectors) {detectors.load(std::string(filename));}
-
-std::ostream& operator>>(std::ostream& cout, Detectors const & detectors)
-{
-  for (auto const & d : detectors) {cout << d << " ";}
-  return cout;
-}
 
 std::unordered_map<dType, THBinning> Detectors::ADC_bins = 
 {
