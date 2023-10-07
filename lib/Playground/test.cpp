@@ -5,8 +5,8 @@
 // #define USE_RF 200
 
 #include "../libCo.hpp"
-#include <RunMatrixator.hpp>
-// #include <Calibration.hpp>
+// #include <RunMatrixator.hpp>
+#include <Calibration.hpp>
 // #include <Detectors.hpp>
 // #include <Timeshifts.hpp>
 // #include <Convertor.hpp>
@@ -14,7 +14,9 @@
 int main(int argc, char ** argv)
 {
   detectors.load("index_129.list");
-  RunMatrixator rm("~/faster_data/N-SI-120-sources/");
+
+
+  // RunMatrixator rm("~/faster_data/N-SI-120-sources/");
   // RunMatrixator rm(argv[1]);
   // MTObject::Initialize(3);
   // int nb_files = -1;
@@ -86,15 +88,16 @@ int main(int argc, char ** argv)
     // ts.write("136_60Co"); 
 
   // MTObject::Initialize(4);
-  // Detectors detectors("index_129.list");
-  // Calibration calibration(detectors);
+  Calibration calibration;
+  calibration.load("../../136/conversion_200ns/calib_129.cal");
   // calibration.loadRootHisto("232Th.root");
   // pauseCo();
   // calibration.verbose(true);
   // calibration.calculate(argv[1], (argc>2) ? std::stoi(argv[2]) : -1, "152Eu");
+  calibration.loadData("/home/corentin/faster_data/N-SI-136/152_Eu_center_after.fast", 20);
   // calibration.loadData(argv[1], (argc>2) ? std::stoi(argv[2]) : -1);
-  // calibration.writeRawRoot("test.root");
-  // calibration.verify();
+  calibration.writeRawRoot("test.root");
+  calibration.verify();
 
     // int a = 1;
     // int b = 2;

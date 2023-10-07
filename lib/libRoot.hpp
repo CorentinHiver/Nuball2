@@ -345,8 +345,7 @@ void TheTChain::set()
 struct THBinning
 {
   THBinning() = default;
-  #if (__cplusplus >= 201702L)
-  THBinning(std::initializer_list<std::any> initList)
+  THBinning(std::initializer_list<double> initList)
   {
     if (initList.size() != 3) 
     {
@@ -354,25 +353,16 @@ struct THBinning
     }
 
     auto it = initList.begin();
-    try
-    {
-      bins = std::any_cast<int   >(*it++);
-      min  = std::any_cast<double>(*it++);
-      max  = std::any_cast<double>(*it  );
-    }
-    catch(std::bad_any_cast const & e) 
-    {
-      std::cerr << "Error: " << e.what() << " in THBinning" << std::endl;
-    }
+    bins = static_cast<int>(*it++);
+    min  = static_cast<float>(*it++);
+    max  = static_cast<float>(*it  );
   }
-  #endif // __cplusplus >= 201702L
 
-  template <typename T1, typename T2, typename T3>
-  THBinning(int _bins, float _min, float _max) 
+  THBinning(double _bins, double _min, double _max) 
   {
-    bins = _bins;
-    min  = _min ;
-    max  = _max ;
+    bins = static_cast<int>(_bins);
+    min  = static_cast<float>(_min) ;
+    max  = static_cast<float>(_max) ;
   }
 
   // The three parameters :

@@ -79,6 +79,9 @@ public:
   auto begin() {return m_list.begin();}
   auto end  () {return m_list.end  ();}
 
+  auto begin() const {return m_list.begin();}
+  auto end  () const {return m_list.end  ();}
+
   auto const & get()        const {return m_list         ;}
   auto const & getExistsArray() const {return exist_array    ;}
   auto const & getLabelsArray() const {return m_labels_array;}
@@ -137,6 +140,8 @@ public:
   static std::unordered_map<dType, THBinning> energy_bins;
   static std::unordered_map<dType, THBinning> ADC_bins;
   static std::unordered_map<dType, THBinning> energy_bidim_bins;
+
+  void Print() {for (auto const & d : *this) if (d!="") {std::cout << d << " ";} std::cout << std::endl;}
 
 protected:
   // Useful informations
@@ -339,10 +344,14 @@ void Detectors::makeArrays()
   }
 }
 
-void operator>>(const char * filename, Detectors & detectors) {detectors.load(std::string(filename));}
-// void operator>>(std::string const & filename, Detectors & detectors) {detectors.load(filename);}
+// void operator>>(const char * filename, Detectors & detectors) {detectors.load(std::string(filename));}
 
-#if __cplusplus >= 201703L
+std::ostream& operator>>(std::ostream& cout, Detectors const & detectors)
+{
+  for (auto const & d : detectors) {cout << d << " ";}
+  return cout;
+}
+
 std::unordered_map<dType, THBinning> Detectors::ADC_bins = 
 {
   {"ge"     , {10000, 0., 100000. }},
@@ -365,7 +374,6 @@ std::unordered_map<dType, THBinning> Detectors::energy_bins =
   {"default", {1000 , 0., 50000.}}
 };
 
-#else 
 std::unordered_map<dType, THBinning> Detectors::energy_bidim_bins = 
 {
   {"ge"     , {5000, 0., 10000.}},
@@ -376,10 +384,12 @@ std::unordered_map<dType, THBinning> Detectors::energy_bidim_bins =
   {"dssd"   , {200 , 0., 20000.}},
   {"default", {200 , 0., 20000.}}
 };
-std::unordered_map<dType, THBinning> Detectors::ADC_bins;
-std::unordered_map<dType, THBinning> Detectors::energy_bins;
-std::unordered_map<dType, THBinning> Detectors::energy_bidim_bins;
-#endif
+
+// #else 
+// std::unordered_map<dType, THBinning> Detectors::ADC_bins;
+// std::unordered_map<dType, THBinning> Detectors::energy_bins;
+// std::unordered_map<dType, THBinning> Detectors::energy_bidim_bins;
+// #endif
 
 #endif //DETECTORS_HPP
 

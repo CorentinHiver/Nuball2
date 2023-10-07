@@ -16,7 +16,7 @@
 class RunMatrixator
 {
 public:
-  RunMatrixator(std::string const & runpath, std::string const & gatesFile);
+  RunMatrixator(std::string const & runpath);
   void Initialize();
   void matrixate_file_with_clovers(TTree * tree, Event & event);
   void Write();

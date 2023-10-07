@@ -337,12 +337,19 @@ void Calibration::histograms::Initialize()
 
   // All the calibrated detectors spectra of each type in one plot :
   all_calib.resize(detectors.nbTypes());
-  for (auto const & type : detectors.types())
+  try
   {
-    auto nb_detectors = detectors.nbOfType(type);
-    auto const & binning = bidim_bins.at(type);
-    all_calib[detectors.typeIndex(type)].reset(("All_"+type+"_spectra").c_str(), ("All "+type+" spectra").c_str(), 
-        nb_detectors,0,nb_detectors, binning.bins,binning.min,binning.max);
+    for (auto const & type : detectors.types())
+    {
+      auto nb_detectors = detectors.nbOfType(type);
+      auto const & binning = bidim_bins.at(type);
+      all_calib[detectors.typeIndex(type)].reset(("All_"+type+"_spectra").c_str(), ("All "+type+" spectra").c_str(), 
+          nb_detectors,0,nb_detectors, binning.bins,binning.min,binning.max);
+    }
+  }
+  catch ()
+  {
+    continue;
   }
 
   // All the raw and/or calibrated spectra in a separate spectra :
@@ -862,6 +869,7 @@ void Calibration::fitCalibration(Fits & fits)
 
     // If faudrait aussi revoir ce fit ici ! Et éventuellement les erreurs
     auto c1 = new TCanvas(("c_"+fit.name).c_str());
+    c1->cd(1);
     TGraphErrors* gr = new TGraphErrors(nb_pics,x.data(),y.data(),ex.data(),ey.data());
     gr -> SetName((fit.name+"_gr").c_str());
     TF1* linear(new TF1("lin","pol1")); //Range and number of fit parameters
