@@ -127,7 +127,6 @@ bool RF_Manager::setEvent(Event const & event)
 {
   if (event.labels[0] == this -> label)
   {
-    print(event);
     this -> set(event.stamp, Timestamp_cast((event.adcs[0] == 0) ? event.nrjs[0] : event.adcs[0]));
     return true;
   }

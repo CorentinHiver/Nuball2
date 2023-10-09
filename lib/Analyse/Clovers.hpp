@@ -74,6 +74,8 @@ std::array<float, 48> BGO_coeff =
  *          }
  *        }
  * 
+ * This class is Thread Safe !
+ * 
  */
 class Clovers
 {
@@ -224,17 +226,17 @@ public:
   uchar DelayedCleanGeMult = 0;
 
   // AnalyseFast :
-  std::vector<uchar> delayedClean;
-  std::vector<uchar> promptClean;
+  std::vector<uchar> delayedClovers;
+  std::vector<uchar> promptClovers;
   std::vector<CloverModule> PromptClovers;
   std::vector<CloverModule> DelayedClovers;
   
   void CleanFast()
   {
-    for (auto const & clover_i : promptClean ) PromptClovers [clover_i].clear();
-    for (auto const & clover_i : delayedClean) DelayedClovers[clover_i].clear();
-    delayedClean.clear();
-    promptClean.clear();
+    for (auto const & clover_i : promptClovers ) PromptClovers [clover_i].clear();
+    for (auto const & clover_i : delayedClovers) DelayedClovers[clover_i].clear();
+    delayedClovers.clear();
+    promptClovers.clear();
     PromptCleanGeMult = 0;
     DelayedCleanGeMult = 0;
   }
@@ -433,8 +435,8 @@ void Clovers::SetEvent(Event const & event, char const & analyse)
   {
     this->CleanFast();
     for (size_t i = 0; i<event.size(); i++) this -> FillFast(event, i);
-    PromptCleanGeMult  = promptClean .size();
-    DelayedCleanGeMult = delayedClean.size();
+    PromptCleanGeMult  = promptClovers .size();
+    DelayedCleanGeMult = delayedClovers.size();
     // this -> AnalyseFast();
   }
 }
@@ -454,12 +456,12 @@ bool Clovers::FillFast(Event const & event, size_t const & hit_index)
   {
     if (promptGate (time)) 
     {
-      promptClean.push_back(index_clover);
+      push_back_unique(promptClovers,index_clover);
       PromptClovers[index_clover].addGe(nrj, time);
     }
     else if (delayedGate(time)) 
     {
-      delayedClean.push_back(index_clover);
+      push_back_unique(delayedClovers,index_clover);
       DelayedClovers[index_clover].addGe(nrj, time);
     }
   }

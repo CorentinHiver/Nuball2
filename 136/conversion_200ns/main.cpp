@@ -320,7 +320,7 @@ void convert(Hit & hit, FasterReader & reader,
 
             histos.rf_all_trig.Fill(tof_trig);
             histos.rf_each_trig.Fill(compressedLabel[label], tof_trig);
-        
+
             if (isGe[label]) histos.energy_all_Ge_trig.Fill(nrj);
             histos.energy_each_trig.Fill(compressedLabel[label], nrj);
           }

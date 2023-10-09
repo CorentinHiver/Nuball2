@@ -1,5 +1,5 @@
-#ifndef TIMESHIFTS_H
-#define TIMESHIFTS_H
+#ifndef TIMESHIFTS_HPP
+#define TIMESHIFTS_HPP
 
 #include "../libCo.hpp"
 
@@ -45,7 +45,10 @@ public:
   Timeshifts() {}
 
   ///@brief Call the Timeshifts::load() method to load the timeshifts from a .dT file 
-  Timeshifts(std::string const & filename) : m_filename(filename) {this -> load(filename);}
+  Timeshifts(std::string const & filename) : m_filename(filename) {this -> load(m_filename);}
+
+  ///@brief Call the Timeshifts::load() method to load the timeshifts from a .dT file 
+  Timeshifts(const char * filename) : m_filename(filename) {print(filename);this -> load(m_filename);}
 
   /**
    * @brief For faster to root conversion only : Timeshifts::load() loads the timeshifts from a .dT file 
@@ -61,6 +64,7 @@ public:
   Timeshifts& operator=(Timeshifts const & timeshifts)
   {
     m_timeshifts = timeshifts.m_timeshifts;
+    m_ok = timeshifts.m_ok;
     return *this;
   }
 
@@ -69,13 +73,6 @@ public:
 
   /// @brief Use this method to load timeshifts from a .dT file
   bool load(std::string const & filename);
-
-  /**
-   * @brief Set the detector list
-   * @note Mandatory only if calculate timeshifts
-  */
-  // void setDetectors(Detectors const & detList) {detectors = detList; this -> Initialize();}
-  void setIDFile(Detectors const & detList) {detectors = detList;}
 
   /// @brief Setup the time window for the coincidence in ns
   bool setTimeWindow_ns(Time_ns const & timewindow_ns);
@@ -253,9 +250,7 @@ private:
 
   bool m_check_preprompt = false;
 
-  Detectors detectors;
   FilesManager m_files;
-  // Performances m_perf;
 
   std::string m_filename = "";
 
@@ -1096,7 +1091,7 @@ std::ostream& operator<<(std::ostream& cout, Timeshifts const & ts)
 }
 
 
-#endif //TIMESHIFTS_H
+#endif //TIMESHIFTS_HPP
 
 /*
 // Now create the correctly shifted time spectra :

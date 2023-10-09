@@ -306,7 +306,7 @@ public:
 
   void reading (TTree * tree);
   void reading (TTree * tree, std::string const & options);
-  void writting(TTree * tree, std::string const & options);
+  void writting(TTree * tree, std::string const & options = "lseqp");
 
   IOptions read;
   IOptions write;

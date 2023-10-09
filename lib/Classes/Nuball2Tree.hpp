@@ -11,10 +11,10 @@
 class Nuball2Tree
 {
 public:
-  Nuball2Tree(std::string const & filename){this -> load(filename);}
+  Nuball2Tree(std::string const & filename){this -> Open(filename);}
   Nuball2Tree(std::string const & filename, Event & event)
   {
-    this -> load(filename);
+    this -> Open(filename);
     event.reading(*this);
   }
 

@@ -210,6 +210,7 @@ public:
 
   /// @brief Loading calibration from file name
   Calibration(std::string const & calibFileName) {load(calibFileName);}
+  Calibration(const char * calibFileName) {load(calibFileName);}
   Calibration const & operator=(std::string const & calibFileName) {load(calibFileName); return *this;}
   bool load(std::string const & calibFileName);
 

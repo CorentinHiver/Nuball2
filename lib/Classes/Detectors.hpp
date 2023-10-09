@@ -391,7 +391,7 @@ std::unordered_map<dType, THBinning> Detectors::energy_bins =
 std::unordered_map<dType, THBinning> Detectors::energy_bidim_bins = 
 {
   {"ge"     , {5000, 0., 10000.}},
-  {"bgo"    , {100 , 0., 10000.}},
+  {"bgo"    , {250 , 0., 10000.}},
   {"labr"   , {500 , 0., 10000.}},
   {"paris"  , {500 , 0., 10000.}},
   {"eden"   , {1000,-2., 2.    }},

@@ -1,12 +1,25 @@
 #ifndef RUNMATRIXATOR_HPP
 #define RUNMATRIXATOR_HPP
 
+#define USE_RF 200
+
 #include "../libCo.hpp"
+
 #include "../Analyse/Clovers.hpp"
 
+
 #include "../Classes/Detectors.hpp"
+#include "../Classes/Alignator.hpp"
+#include "../Classes/Event.hpp"
+#include "../Classes/Timer.hpp"
+
+#include "../../136/conversion_200ns/EventBuilder_136.hpp"
+
+#include "../Modules/Calibration.hpp"
+#include "../Modules/Timeshifts.hpp"
 
 #include "../MTObjects/MTRootReader.hpp"
+#include "../MTObjects/MTFasterReader.hpp"
 #include "../MTObjects/MTTHist.hpp"
 
 /**
@@ -16,105 +29,225 @@
 class RunMatrixator
 {
 public:
-  RunMatrixator(std::string const & runpath);
+  RunMatrixator() = default;
+  void run(std::string const & runpath, std::string const & data = "fast");
   void Initialize();
-  void matrixate_file_with_clovers(TTree * tree, Event & event);
+  void loadData_root(TTree * tree, Event & event);
+  void loadData_faster(Hit & hit, FasterReader & reader);
+  void fillMatrixes(Clovers const & clovers, Event const & event);
   void Write();
 
+  void setCalibration(Calibration const & calibration) {m_calibration = calibration;}
+  void setTimeshifts(Timeshifts const & timeshifts) {m_timeshifts = timeshifts;}
+
 private:
-  static void dispatch_thread(TTree * tree, Event & event, RunMatrixator & rm);
-  std::unordered_map<dType, Vector_MTTHist<std::vector<TH1F>>> matrices;
-  std::string const & m_runpath;
+  static void dispatch_root_reader(TTree * tree, Event & event, RunMatrixator & rm);
+  static void dispatch_faster_reader(Hit & hit, FasterReader & reader, RunMatrixator & rm);
+  std::unordered_map<dType, Vector_MTTHist<TH2F>> matrices;
+  std::unordered_map<dType, Vector_MTTHist<TH2F>> matrices2; // Used to matrixate nrj2 if needed (Paris, Eden...)
+  // std::unordered_map<dType, Vector_MTTHist<TH1F>> totalProj;
+  Calibration m_calibration;
+  Timeshifts m_timeshifts;
+  Path m_runpath;
 };
 
-RunMatrixator::RunMatrixator(std::string const & runpath) : m_runpath(runpath)
+void RunMatrixator::run(std::string const & runpath, std::string const & data)
 {
+  Timer timer;
+  m_runpath = runpath;
   // Initialise the matrices :
   this -> Initialize();
 
   // Fills the matrices :
-  MTRootReader mt_reader(m_runpath);
-  mt_reader.execute(dispatch_thread, *this);
+       if (data == "fast")
+  {
+    if (!m_calibration) throw_error("NO CALIBRATION");
+    if (!m_timeshifts)  throw_error("NO TIMESHIFTS" );
 
+    MTFasterReader mt_reader(m_runpath);
+    mt_reader.execute(dispatch_faster_reader, *this);
+  }
+  else if (data == "root")
+  {
+    MTRootReader mt_reader(m_runpath);
+    mt_reader.execute(dispatch_root_reader, *this);
+  }
+  else throw_error("Unkown data kind ! Only handles root and fast");
+  
   // Writes the matrices down :
   this -> Write();
+  print(timer(), timer.unit(), "to matrixate", m_runpath);
 }
 
 void RunMatrixator::Initialize()
 {
   if (!detectors) {print("Please initialize the Detectors"); throw_error("Detectors not loaded");}
   for (auto const & type : detectors.typesArray())
-  {// Loop through all the detector types (ge, labr...)
+  {// Loop through all the detectors types (ge, labr...)
     auto & type_matrices = matrices[type];
     type_matrices.resize(detectors.nbOfType(type));
     int index_in_type = 0;
     for(auto & matrice : type_matrices)
     {
       auto const & name = detectors.name(type, index_in_type);
-      auto const & binning_it = Detectors::energy_bidim_bins.find(type);
-      if (binning_it ==  Detectors::energy_bidim_bins.end()) throw_error("NO BINNING FOUND FOR "+type+" !!");
-      auto const & binning = binning_it->second;
-      print(name, binning);
-      matrice.reset(name.c_str(), name.c_str(),
-          10000,0,10000, binning.bins,binning.min,binning.max);
+      auto const & binning = detectors.energyBidimBin(type);
+      matrice.reset(name.c_str(), (name+";Clover [keV];"+type+" energy [keV]").c_str(), 10000,0,10000, binning.bins,binning.min,binning.max);
       index_in_type++;
     }
+    if (type == "paris")
+    {
+      auto & type_matrices = matrices2[type];
+      type_matrices.resize(detectors.nbOfType(type));
+      int index_in_type = 0;
+      for(auto & matrice : type_matrices)
+      {
+        auto const & name = detectors.name(type, index_in_type);
+        auto const & binning = detectors.energyBidimBin(type);
+        matrice.reset((name+"_nrj2").c_str(), (name+";Clover [keV];"+type+" QDC2 [keV]").c_str(), 10000,0,10000, binning.bins,binning.min,binning.max);
+        index_in_type++;
+      }
+    }
   }
+  
 }
 
-void RunMatrixator::dispatch_thread(TTree * tree, Event & event, RunMatrixator & rm)
+void RunMatrixator::dispatch_faster_reader(Hit & hit, FasterReader & reader, RunMatrixator & rm)
 {
-  rm.matrixate_file_with_clovers(tree, event);
+  rm.loadData_faster(hit, reader);
 }
 
-void RunMatrixator::matrixate_file_with_clovers(TTree * tree, Event & event)
+void RunMatrixator::dispatch_root_reader(TTree * tree, Event & event, RunMatrixator & rm)
+{
+  rm.loadData_root(tree, event);
+}
+
+void RunMatrixator::loadData_faster(Hit & hit, FasterReader & reader)
+{
+  unique_tree tempTree(new TTree("tempTree", "tempTree"));
+  hit.writting(tempTree.get(), "lsEQp");
+
+  while(reader.Read())
+  {
+    auto const & label = hit.label;
+    hit.stamp+=m_timeshifts[label];
+    hit.nrj = m_calibration.calibrate(hit.adc, label);
+    hit.nrj2 = (hit.qdc2) ? m_calibration.calibrate(hit.qdc2, label) : 0;
+
+    tempTree->Fill();
+  }
+
+  Alignator aligned_index(tempTree.get());
+
+  hit.reset();
+  hit.reading(tempTree.get());
+
+  Event event;
+  RF_Manager rf;
+  EventBuilder_136 builder(&event, &rf);
+
+  RF_Extractor first_rf(tempTree.get(), rf, hit, aligned_index);
+  if (!first_rf) return;
+  builder.setFirstRF(hit);
+
+  auto const & nb_hits = tempTree->GetEntries();
+  int loop = 0;
+
+  Clovers clovers;
+
+  while (loop<nb_hits)
+  {
+    tempTree->GetEntry(aligned_index[loop++]);
+
+    if (rf.setEvent(hit)) continue;
+
+    if (builder.build(hit))
+    {
+      clovers.SetEvent(event, 2);
+      this -> fillMatrixes(clovers, event);
+    }
+  } 
+}
+
+void RunMatrixator::loadData_root(TTree * tree, Event & event)
 {
   Clovers clovers;
   auto const & entries = tree -> GetEntries();
   for (longlong event_i = 0; event_i<entries; event_i++)
   {
     tree -> GetEntry(event_i);
-    clovers.SetEvent(event);
-    // Looping through the clean clovers (add-back + compton clean)
-    for (size_t hit_i = 0; hit_i<clovers.CleanGe.size(); hit_i++)
+    clovers.SetEvent(event, 2);
+    this -> fillMatrixes(clovers, event);
+  }
+}
+
+void RunMatrixator::fillMatrixes(Clovers const & clovers, Event const & event)
+{
+  // Looping through the clean clovers (add-back + compton clean)
+  for (auto const & clover_index : clovers.promptClovers)
+  {
+    auto const & clover = clovers.PromptClovers[clover_index];
+    auto const & nrj_clover = clover.nrj;
+
+    // Looping through all the crystals :
+    for(int hit_j = 0; hit_j<event.mult; hit_j++)
     {
-      auto const & clover_index_i = clovers.CleanGe[hit_i]; // The index of the clover (between 0 and 23)
-      auto const & clover = clovers[clover_index_i]; // The clover module itself
-      auto const & nrj_clover = clover.nrj;
+      auto const & label = event.labels[hit_j];
+      if (!detectors.exists(label)) continue;
+      auto const & type = detectors.type(label);
+      auto const & index_j = detectors.index(label);
 
-      // Looping through all the crystals :
-      for(int hit_j = 0; hit_j<event.mult; hit_j++)
+      auto & matrice = matrices[type][index_j];
+
+      auto const & nrj = event.nrjs[hit_j];
+
+      if (isGe[label]) 
       {
-        auto const & label = event.labels[hit_j];
-        auto const & type = detectors.type(label);
-        auto const & index_j = detectors.index(label);
-
-        auto  & matrice = matrices[type][index_j];
-
-        auto const & nrj = event.nrjs[hit_j];
-        auto const & nrj2 = event.nrj2s[hit_j];
-
-        if (isGe[label]) 
-        {
-          auto const & clover_index_j = Clovers::label_to_clover(label);
-          if (clover_index_i != clover_index_j) continue; // Reject the hit if is locate in the same clover as the clover (reject diagonal Ge)
-          if (clover.nb>1) continue; // Reject if there are more than one germanium that fired (reject add-back events in the clover holding the crystal)
-        }
-        matrice->Fill(nrj_clover, nrj);
+        auto const & clover_index_j = Clovers::label_to_clover(label);
+        // Reject the hit if is locate in the same clover as the clover (reject diagonal Ge)
+        if (clover_index == clover_index_j) continue; 
+        // Reject hit if any other crystal of the clover fired (hard compton cleaning) :
+        if (clovers.PromptClovers[clover_index_j].nbCrystals()>1) continue; 
+        matrice.Fill(nrj_clover, nrj);
       }
+      else if (isParis[label])
+      {
+        auto const & nrj2 = event.nrj2s[hit_j];
+        auto const & ratio = (nrj2-nrj)/nrj2;
+        if (ratio>-0.1 && ratio<0.2) matrice.Fill(nrj_clover, nrj); // Fill the LaBr3 part
+        else if (ratio>0.55 && ratio<0.8) matrices2[type][index_j].Fill(nrj_clover, nrj2);// Fill the NaI part
+      }
+      else matrice.Fill(nrj_clover, nrj);
     }
   }
 }
 
 void RunMatrixator::Write()
 {
-  Path runPath(m_runpath);
-  std::string const & outRoot = runPath.folder().string()+"_matrixated.root";
+  std::string outRoot = m_runpath.folder().string();
+
+  // Mandatory if reading faster files : 
+  if (outRoot.back() == '/') outRoot.pop_back();
+  outRoot = removeExtension(outRoot);
+
+  outRoot+="_matrixated.root";
+
   unique_TFile file(TFile::Open(outRoot.c_str(), "RECREATE"));
+  try
+  {
+    if (!file) throw_error("Error");
+  }
+  catch(std::runtime_error const & error)
+  {
+    print("Try another output file");
+    std::cin >> outRoot;
+    file.reset(TFile::Open(outRoot.c_str(), "RECREATE"));
+  }
   file -> cd();
-    for (auto & type_matrice : matrices) for (auto & matrice : type_matrice.second) matrice->Write();
+  for (auto & type_matrice : matrices) for (auto & matrice : type_matrice.second) matrice.Write();
+  for (auto & type_matrice : matrices2) for (auto & matrice : type_matrice.second) matrice.Write();
   file -> Write();
   file -> Close();
+  print(outRoot, "written");
 }
 
 #endif //RUNMATRIXATOR_HPP

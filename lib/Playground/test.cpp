@@ -5,20 +5,14 @@
 // #define USE_RF 200
 
 #include "../libCo.hpp"
-// #include <RunMatrixator.hpp>
-#include <Calibration.hpp>
+// #include <Calibration.hpp>
+#include <RunMatrixator.hpp>
 // #include <Detectors.hpp>
 // #include <Timeshifts.hpp>
 // #include <Convertor.hpp>
 
 int main(int argc, char ** argv)
 {
-  detectors.load("index_129.list");
-
-
-  // RunMatrixator rm("~/faster_data/N-SI-120-sources/");
-  // RunMatrixator rm(argv[1]);
-  // MTObject::Initialize(3);
   int nb_files = -1;
   int nb_threads = 1;
   if (argc > 1)
@@ -27,18 +21,37 @@ int main(int argc, char ** argv)
     for(int i = 1; i < argc; i++)
     {
       command = argv[i];
-      if (command == "-n") {nb_files = std::atoi(argv[++i]);}
-      if (command == "-m") {nb_threads = std::atoi(argv[++i]);}
+           if (command == "-f") {nb_files = std::atoi(argv[i++]);}
+      else if (command == "-n") {FasterReader::setMaxHits(std::atoi(argv[++i]));}
+      else if (command == "-m") 
+      {
+        nb_threads = std::atoi(argv[++i]);
+        MTObject::setThreadsNb(nb_threads);
+        MTObject::Initialize();
+      }
       
       else {throw std::runtime_error("command " + command + " unkown");}
     }
   }
 
-  if (nb_threads>1)
-  {
-    MTObject::setThreadsNb(nb_threads);
-    MTObject::Initialize();
-  }
+  detectors.load("small_index_129.list");
+
+  RunMatrixator rm;
+  rm.setCalibration("../../136/conversion_200ns/136_final.calib");
+  Timeshifts ts("../../../N-SI-136-root_P/Timeshifts/run_75.dT");
+  rm.setTimeshifts(ts);
+  rm.run("../../../N-SI-136/run_75.fast/");
+  // MTObject::Initialize(2);
+  // Calibration calib;
+  // calib.load(/* Calibration file */);
+  // calib.calibrateData(/* Europium run path */);
+  // calib.writeCalibratedRoot(/* Name of the output_file.root */);
+
+  // RunMatrixator rm("~/faster_data/N-SI-120-sources/");
+  // RunMatrixator rm(argv[1]);
+  // MTObject::Initialize(3);
+  
+
   
   // std::vector<long> vec(100,0.0);
   // Timer timeVec;
@@ -95,11 +108,16 @@ int main(int argc, char ** argv)
     // ts.verify(argv[1], (argc>3) ? std::stoi(argv[3]) : 5);
     // ts.write("136_60Co"); 
 
-  // MTObject::Initialize(4);
-  Calibration calib;
-  calib.load("../../136/conversion_200ns/calib_129.cal");
-  calib.calibrateData("/home/corentin/faster_data/N-SI-129/152EU_N1N2.fast/");
-  calib.writeCalibratedRoot("test_calib.root");
+
+
+  // MTObject::Initialize(2);
+  // Calibration calib;
+  // calib.load("../../136/conversion_200ns/calib_129.cal");
+  // calib.calibrateData("/home/corentin/faster_data/N-SI-129/152EU_N1N2.fast/");
+  // calib.writeCalibratedRoot("test_calib.root");
+
+
+
   // calibration.loadRootHisto("232Th.root");
   // pauseCo();
   // calibration.verbose(true);

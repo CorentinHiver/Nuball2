@@ -258,9 +258,8 @@ bool FasterReader::InitializeReader()
 
 bool inline FasterReader::Read()
 {
-  if (m_counter++>m_maxHits) 
+  if (++m_counter>m_maxHits) 
   {
-    print(m_counter, m_maxHits);
     return (m_write = false);
   }
 #ifdef FASTER_GROUP

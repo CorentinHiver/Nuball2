@@ -9,12 +9,17 @@ class Alignator
 public:
   Alignator(TTree* tree) : m_tree(tree) {loadNewIndex();}
 
+  /// @brief DEV
   Alignator(TTree* inputTree, TTree* outputTree) : 
     m_tree(inputTree), 
     m_out_tree(outputTree) 
   {align();}
 
   auto const & operator[](int const & i) const {return m_index[i];}
+
+  auto const & next() {return m_index[m_cursor++];}
+  auto const & cursor() const {return m_cursor;}
+  void reset() {m_cursor = 0;}
 
   auto begin() {return m_index.begin();}
   auto end()   {return m_index.end();}
@@ -24,6 +29,7 @@ private:
   void align();
 
   ULong64_t m_nb_data = 0;
+  ULong64_t m_cursor = 0;
   std::vector<int> m_index;
   TTree* m_tree;
   TTree* m_out_tree;

@@ -399,20 +399,13 @@ public:
   Path(){}
   Path(Path const & path) : m_exists(path.m_exists), m_path(path.m_path) {}
 
-  /**
-   * @brief Turns a string to a path, creating it if create = true and it doesn't already exists
-  */
+  /// @brief Turns a string to a path, creating it if create = true and it doesn't already exists
   Path(std::string const & path, bool const & create = false) : m_path(path) {load(create);}
 
-    /**
-   * @brief Turns a C string to a path, creating it if create = true and it doesn't already exists
-  */
+  /// @brief Turns a C string to a path, creating it if create = true and it doesn't already exists
   Path(const char* c_str, bool const & create = false) : m_path(std::string(c_str)) {load(create);}
 
-  /**
-   * @brief To remove extraneous ./ or ../
-   * 
-   */
+  /// @brief To remove extraneous ./ or ../
   void cleanPath()
   {
     for (std::size_t i = 0; i<m_recursive_folders.size(); i++)
@@ -434,6 +427,10 @@ public:
 
   void load(bool const & create = false)
   {
+  #ifdef MTOBJECT_HPP
+    if (MTObject::ON) MTObject::shared_mutex.lock();
+  #endif //MTOBJECT_HPP
+
     m_recursive_folders.clear();
     if (m_path[0]=='/')
     {// Absolute path
@@ -450,30 +447,20 @@ public:
     // To ensure it finishes with a '/' :
     push_back_if_none(m_path, '/');
 
-  #ifdef MTOBJECT_HPP
-    if (MTObject::ON) MTObject::shared_mutex.lock();
-  #endif //MTOBJECT_HPP
-  
-    // To ensure it exists :
-    m_exists = folder_exists(m_path);
-
     // Create the folder if it doesn't exist yet :
-    if (!m_exists && create) this -> make();
-    makeFolderList();
+    if (!(m_exists = folder_exists(m_path)) && create) this -> make();
+    if (!(m_exists = folder_exists(m_path))) print(m_path+" doesn't exist !!");
+
+    //Additionnal information ;
+    this -> makeFolderList();
     this -> cleanPath();
-    if (!folder_exists(m_path))
-    {
-      m_exists = false;
-      print(m_path+" doesn't exist !!");
-    }
 
   #ifdef MTOBJECT_HPP
     if (MTObject::ON) MTObject::shared_mutex.unlock();  
   #endif //MTOBJECT_HPP
-
   }
 
-  void makeFolderList() {m_recursive_folders = getList(m_path,'/');}
+  void makeFolderList() {print(m_recursive_folders); m_recursive_folders = getList(m_path,'/');}
 
   int  nbFiles() {return nb_files_in_folder(m_path);}
   bool exists() {return folder_exists(m_path);}
@@ -505,7 +492,7 @@ public:
   auto const size() const {return m_recursive_folders.size();}
   Folders const & getFolders() const {return m_recursive_folders;}
 
-  Path & operator=(std::string const & inputString) // Le mettre à jour !!!!!
+  Path & operator=(std::string const & inputString)
   {
     m_path = inputString;
     load();

@@ -24,6 +24,8 @@ public:
   void addGe(float const & _nrj, double const & _time) {nrj = _nrj; time = _time; nb++;}
   void addBGO(float const & _nrj, double const & _time) {nrj_BGO = _nrj; time_BGO = _time; nb_BGO++;}
 
+  uchar nbCrystals() const {return nb+nb_BGO;}
+
   // In the following, if nothing is specified then it refers to the Germanium
 
   uchar nb = 0;       // Number of Ge  crystals in the clover
