@@ -47,6 +47,8 @@ public:
     // nbThreadsChanged(nb_threads);// Signal
   }
 
+  static void setThreadsNumber(size_t const & n, bool force = false) {setThreadsNb(n, force);}
+
   static void adjustThreadsNumber(size_t const & limiting_number, std::string const & print_if_limit_reached = "") 
   {
     if (limiting_number<nb_threads) 

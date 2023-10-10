@@ -33,8 +33,8 @@ public:
 #ifdef EVENT_HPP
   bool setHit(Event const & event, int const & hit_i);
   bool setEvent(Event const & evt);
-  void align_RF(Event & evt) const;
-  void align_RF_ns(Event & evt) const;
+  void align_to_RF(Event & evt) const;
+  void align_to_RF_ns(Event & evt) const;
 #endif //EVENT_HPP
   void static set_offset(Time const & offset) {m_offset = offset;}
   void static set_offset_ns(Time const & offset_ns) {m_offset = offset_ns*1000;}
@@ -146,19 +146,21 @@ bool RF_Manager::setHit(Event const & event, int const & hit_i)
   else return false;
 }
 
-void RF_Manager::align_RF(Event & event) const
+void RF_Manager::align_to_RF(Event & event) const
 {
-  auto const rf_Ref = pulse_ToF(event.stamp);
-  event.stamp = event.stamp-rf_Ref;
+  auto const & rf_Ref = pulse_ToF(event.stamp);
+  event.stamp -= rf_Ref;
   for (int i = 0; i<event.mult; i++) event.times[i] += rf_Ref;
 }
 
-void RF_Manager::align_RF_ns(Event & event) const
+void RF_Manager::align_to_RF_ns(Event & event) const
 {
-  auto const rf_Ref = pulse_ToF(event.stamp);
+  auto const & rf_Ref = pulse_ToF(event.stamp);
+  event.stamp -= rf_Ref;
   for (int i = 0; i<event.mult; i++)
   {
-    event.time2s[i] = Time_ns_cast(rf_Ref + event.times[i]);
+    event.times[i] += rf_Ref;
+    event.time2s[i] = Time_ns_cast(rf_Ref + event.times[i])/1000.;
   }
 }
   #endif //EVENT_HPP

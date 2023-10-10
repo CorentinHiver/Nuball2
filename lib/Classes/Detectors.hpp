@@ -82,16 +82,15 @@ public:
   auto begin() const {return m_list.begin();}
   auto end  () const {return m_list.end  ();}
 
-  auto const & get()        const {return m_list         ;}
-  auto const & getExistsArray() const {return exist_array    ;}
-  auto const & getLabelsArray() const {return m_labels_array;}
-  auto const & getTypeIDArray() const {return m_types_ID_array;}
-  auto const & typesArray() const {return m_types_ID_array;}
+  auto const & get()            const {return m_list          ;}
+  auto const & getExistsArray() const {return exist_array     ;}
+  auto const & getLabelsArray() const {return m_labels_array  ;}
+  auto const & typesArray()     const {return m_types_ID_array;}
+  auto const & types()          const {return m_types_ID_array;}
   static auto const & type(Label const & label) {return m_types[label];}
-  auto const & types() const {return typesArray();}
   auto const & typeIndex(dType const & type) const {return m_types_index[type];}
   auto const & typeIndex(Label const & label) const {return m_types_index[this -> type(label)];}
-  auto const & getTypeID(int const & type_i) const {return m_types_ID_array[type_i];}
+  auto const & getTypeName(int const & type_i) const {return m_types_ID_array[type_i];}
 
   auto const & getName (Label       const & label) {return m_list[label]        ;}
   auto const & getLabel(std::string const & name ) {return m_labels_array[name];}
@@ -381,7 +380,7 @@ std::unordered_map<dType, THBinning> Detectors::energy_bins =
 {
   {"ge"     , {10000, 0., 10000.}},
   {"bgo"    , {1000 , 0., 10000.}},
-  {"labr"   , {1000 , 0., 10000.}},
+  {"labr"   , {2000 , 0., 10000.}},
   {"paris"  , {1000 , 0., 10000.}},
   {"eden"   , {1000 ,-2., 2.    }},
   {"dssd"   , {1000 , 0., 20000.}},
@@ -392,8 +391,8 @@ std::unordered_map<dType, THBinning> Detectors::energy_bidim_bins =
 {
   {"ge"     , {5000, 0., 10000.}},
   {"bgo"    , {250 , 0., 10000.}},
-  {"labr"   , {1000 , 0., 10000.}},
-  {"paris"  , {1000 , 0., 10000.}},
+  {"labr"   , {1000, 0., 10000.}},
+  {"paris"  , {1000, 0., 10000.}},
   {"eden"   , {1000,-2., 2.    }},
   {"dssd"   , {200 , 0., 20000.}},
   {"default", {200 , 0., 20000.}}

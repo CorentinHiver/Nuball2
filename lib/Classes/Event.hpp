@@ -187,6 +187,10 @@ inline Event& Event::operator=(Event const & event)
   return *this;
 }
 
+/**
+ * @brief Automatically set branches based on the presence or not of branches in the root tree.
+ * Reserved for "Nuball2" type of trees
+ */
 void inline Event::reading(TTree * tree)
 {
   if (!tree) {print("Input tree at address 0x00 !"); return;}
@@ -266,6 +270,7 @@ inline void Event::push_back(Hit const & hit)
 
   labels  [mult] = hit.label;
   times   [mult] = Time_cast(hit.stamp-stamp);
+  // times   [mult] = (hit.isExternalTime()) ? hit.time : Time_cast(hit.stamp-stamp);
   adcs    [mult] = hit.adc;
   nrjs    [mult] = hit.nrj;
   qdc2s   [mult] = hit.qdc2;

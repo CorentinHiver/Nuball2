@@ -29,21 +29,20 @@ int main(int argc, char ** argv)
         MTObject::setThreadsNb(nb_threads);
         MTObject::Initialize();
       }
-      
       else {throw std::runtime_error("command " + command + " unkown");}
     }
   }
 
-  detectors.load("index_129.list");
-  // detectors.load("small_index_129.list");
+  // detectors.load("index_129.list");
+  detectors.load("noGe_index_129.list");
 
   RunMatrixator rm;
-  rm.setCalibration("../../136/conversion_200ns/136_final.calib");
-  // Timeshifts ts("/home/corentin/faster_data/N-SI-136-root_P/Timeshifts/run_75.dT");
-  Timeshifts ts("../../../N-SI-136-root_P/Timeshifts/run_75.dT");
+  Timeshifts ts("/home/corentin/faster_data/N-SI-136-root_P/Timeshifts/run_75.dT");
+  // Timeshifts ts("../../../N-SI-136-root_P/Timeshifts/run_75.dT");
   rm.setTimeshifts(ts);
-  // rm.run("/home/corentin/faster_data/N-SI-136/run_75.fast/");
-  rm.run("../../../N-SI-136/run_75.fast/");
+  rm.setCalibration("../../136/conversion_200ns/136_final.calib");
+  rm.run("/home/corentin/faster_data/N-SI-136/run_75.fast/");
+  // rm.run("../../../N-SI-136/run_75.fast/");
 
   // MTObject::Initialize(2);
   // Calibration calib;

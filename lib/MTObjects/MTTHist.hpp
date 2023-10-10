@@ -96,48 +96,48 @@ public:
   template <class... ARGS>
   MTTHist(THist* hist) {m_merged = hist; m_exists = true;}
 
-  /**
-   * @brief Copy constructor
-   */
-  template <class... ARGS>
-  MTTHist<THist>(MTTHist<THist> const & hist) : 
-    m_comment  (hist.m_comment),
-    m_str_name (hist.m_str_name),
-    m_file     (hist.m_file),
-    m_exists   (hist.m_exists),
-    m_written  (hist.m_written),
-    m_integral (hist.m_integral),
-    m_merged   (hist.m_merged)
-    #ifndef MTTHIST_MONO
-    ,
-    m_is_merged  (hist.m_is_merged),
-    m_collection (hist.m_collection),
-    m_is_deleted (hist.m_is_deleted)
-    #endif // NO MTTHIST_MONO
-    {
-      throw_error("NO COPY CONSTRUCTOR WORKING YET FOR MTTHist");
-    }
+  // /**
+  //  * @brief Copy constructor
+  //  */
+  // template <class... ARGS>
+  // MTTHist<THist>(MTTHist<THist> const & hist) : 
+  //   m_comment  (hist.m_comment),
+  //   m_str_name (hist.m_str_name),
+  //   m_file     (hist.m_file),
+  //   m_exists   (hist.m_exists),
+  //   m_written  (hist.m_written),
+  //   m_integral (hist.m_integral),
+  //   m_merged   (hist.m_merged)
+  //   #ifndef MTTHIST_MONO
+  //   ,
+  //   m_is_merged  (hist.m_is_merged),
+  //   m_collection (hist.m_collection),
+  //   m_is_deleted (hist.m_is_deleted)
+  //   #endif // NO MTTHIST_MONO
+  //   {
+  //     throw_error("NO COPY CONSTRUCTOR WORKING YET FOR MTTHist");
+  //   }
     
-  /**
-   * @brief Copy assignement
-   * @attention Please do not use, doesn't seems very safe ...
-  */
-  void operator=(MTTHist<THist> hist)
-  {
-    // throw_error("NO COPY ASSIGNEMENT WORKING YET FOR MTTHist");
-    m_comment  = hist.m_comment;
-    m_str_name = hist.m_str_name;
-    m_file     = hist.m_file;
-    m_exists   = hist.m_exists;
-    m_written  = hist.m_written;
-    m_integral = hist.m_integral;
-    m_merged   = hist.m_merged;
-  #ifndef MTTHIST_MONO
-    m_is_merged  = hist.m_is_merged;
-    m_collection = hist.m_collection;
-    m_is_deleted = hist.m_is_deleted;
-  #endif // NO MTTHIST_MONO
-  }
+  // /**
+  //  * @brief Copy assignement
+  //  * @attention Please do not use, doesn't seems very safe ...
+  // */
+  // void operator=(MTTHist<THist> hist)
+  // {
+  //   // throw_error("NO COPY ASSIGNEMENT WORKING YET FOR MTTHist");
+  //   m_comment  = hist.m_comment;
+  //   m_str_name = hist.m_str_name;
+  //   m_file     = hist.m_file;
+  //   m_exists   = hist.m_exists;
+  //   m_written  = hist.m_written;
+  //   m_integral = hist.m_integral;
+  //   m_merged   = hist.m_merged;
+  // #ifndef MTTHIST_MONO
+  //   m_is_merged  = hist.m_is_merged;
+  //   m_collection = hist.m_collection;
+  //   m_is_deleted = hist.m_is_deleted;
+  // #endif // NO MTTHIST_MONO
+  // }
   void operator=(std::nullptr_t) {reset(nullptr);}
 
   void operator=(THist * hist)
@@ -174,11 +174,11 @@ public:
     m_collection = hist.m_collection;
   }
 
-  /**
-   * @brief Unsafe
-  */
-  template <class... ARGS>
-  void reset(THist *hist) {m_exists = true; m_merged = hist;}
+  // /**
+  //  * @brief Unsafe
+  // */
+  // template <class... ARGS>
+  // void reset(THist *hist) {m_exists = true; m_merged = hist;}
 
   //Default initialiser, to create a zombie :
   template <class... ARGS>

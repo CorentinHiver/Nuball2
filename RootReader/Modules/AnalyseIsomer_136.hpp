@@ -266,6 +266,9 @@ private:
 
   MTTHist<TH1F> Paris_back_calibrated_VS_delayed_U6;
 
+  Vector_MTTHist<TH1F> Paris_singles_labr;
+  Vector_MTTHist<TH1F> Paris_singles_nai;
+
   // MTTHist<TH2F> mult_VS_Time; In order to see the evolution of Multiplicity over time. To do it, take a moving 50ns time window to group events
 
 };
@@ -532,6 +535,15 @@ void AnalyseIsomer::InitializeManip()
   
   Paris_back_calibrated_VS_delayed_U6.reset("Paris_back_calibrated_VS_delayed_U6", "Paris VS delayed U6 (642, 903, 987)", 1000,0,20000);
 
+  auto const & nb_paris = detectors.nbOfType("paris");
+  Paris_singles_labr.resize(nb_paris);
+  Paris_singles_nai.resize(nb_paris);
+  for (size_t i_paris = 0; i_paris<nb_paris; i_paris++)
+  {
+    auto const & name = detectors.name("paris", i_paris);
+    Paris_singles_labr[i_paris].reset(name+"labr", (name+" LaBr3;E [keV];#").c_str(), 1000,0,10000);
+    Paris_singles_nai [i_paris].reset(name+"_nai", (name+" NaI;E [keV];#")  .c_str(), 1000,0,10000);
+  }
 
   // Set analysis parameters :
   // Sorted_Event::setDSSDVeto(-10, 50, 5000);
@@ -618,7 +630,7 @@ void AnalyseIsomer::FillSorted(Event const & event, Clovers & clovers, DSSD & ds
 
   for (uint loop_i = 0; loop_i<clovers.CleanGe.size(); loop_i++)
   {
-    auto const & clover_i = clovers.m_Clovers[clovers.CleanGe[loop_i]];
+    auto const & clover_i = clovers.m_clovers[clovers.CleanGe[loop_i]];
 
     // Extract hit_i data :
     auto const & nrj_i   = clover_i.nrj;
@@ -700,7 +712,7 @@ void AnalyseIsomer::FillSorted(Event const & event, Clovers & clovers, DSSD & ds
           auto const & nrj2 = event.nrj2s[index];
           auto const & time = event.time2s[index];
           auto const & ratio = (nrj2-nrj)/nrj2;
-          if (ratio>-0.2 && ratio<0.2) Paris_back_calibrated_VS_delayed_U6->Fill(nrj);
+          if (ratio>-0.2 && ratio<0.2) Paris_back_calibrated_VS_delayed_U6.Fill(nrj);
         }
       }
     }
@@ -710,7 +722,7 @@ void AnalyseIsomer::FillSorted(Event const & event, Clovers & clovers, DSSD & ds
     ////////////////////////
     for (uint loop_j = loop_i+1; loop_j<clovers.CleanGe.size(); loop_j++)
     {
-      auto const & clover_j = clovers.m_Clovers[clovers.CleanGe[loop_j]];
+      auto const & clover_j = clovers.m_clovers[clovers.CleanGe[loop_j]];
 
       // Extract hit_j informations :
       auto const & time_j = clover_j.time;
@@ -764,7 +776,7 @@ void AnalyseIsomer::FillSorted(Event const & event, Clovers & clovers, DSSD & ds
     //////////////////////////
     for (auto const & bgo : clovers.Bgo)
     {
-      auto const & clover_bgo = clovers.m_Clovers[bgo];
+      auto const & clover_bgo = clovers.m_clovers[bgo];
       // auto const & time_bgo  = clovers.cristaux_time_BGO[bgo];
       // auto const & nrj_bgo   = clovers.cristaux_nrj_BGO [bgo];
       auto const & nrj_bgo   = clover_bgo.nrj_BGO;
@@ -818,6 +830,9 @@ void AnalyseIsomer::FillSorted(Event const & event, Clovers & clovers, DSSD & ds
     auto const & nrj2 = event.nrj2s[index];
     auto const & time = event.time2s[index];
     auto const & ratio = (nrj2-nrj)/nrj2;
+
+    if (ratio>-0.1 && ratio<0.2) Paris_singles_labr[index].Fill(nrj);
+    if (ratio>0.55 && ratio<0.75) Paris_singles_nai[index].Fill(nrj);
 
     if (label<500)
     {
@@ -982,6 +997,9 @@ void AnalyseIsomer::Write()
   Paris_ratio_VS_time_front.Write();
 
   Paris_back_calibrated_VS_delayed_U6.Write();
+
+  for (auto & spectra : Paris_singles_labr) spectra.Write();
+  for (auto & spectra : Paris_singles_nai) spectra.Write();
 
   outfile->Write();
   outfile->Close();

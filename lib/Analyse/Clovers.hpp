@@ -284,17 +284,10 @@ public:
      */
     bool operator() (double const & time, float const & energy)
     {
-      if (normal)
-      {
-        return (time>-20 && time<5);
-      }
-      else 
-      {
-        auto const & timef = static_cast<float>(time);
-            if (energy > m_high_E) return m_high_E_gate.isIn(timef);
-        else if (energy > m_low_E)  return (timef > intermediate_start(energy) && timef < intermediate_stop(energy));
-        else                        return m_low_E_gate.isIn(timef);
-      }
+      auto const & timef = static_cast<float>(time);
+          if (energy > m_high_E) return m_high_E_gate.isIn(timef);
+      else if (energy > m_low_E)  return (timef > intermediate_start(energy) && timef < intermediate_stop(energy));
+      else                        return m_low_E_gate.isIn(timef);
     }
 
     bool operator() (double const & time) {return (time>-20 && time<5);}
@@ -312,7 +305,6 @@ public:
     float m_start_intercept = 0.f;
     float m_stop_coeff = 0.f;
     float m_stop_intercept = 0.f;
-    bool normal = true;
   } promptGate;
 
   class DelayedGate
@@ -321,10 +313,6 @@ public:
     DelayedGate(){}
     bool operator() (double const & time, float const & energy)
     {
-      if (normal)
-      {
-        return (*this)(time);
-      }
       auto const & timef = static_cast<float>(time);
       if (energy > m_low_E) return m_high_E_gate.isIn(timef);
       else                  return m_low_E_gate.isIn(timef);
@@ -332,7 +320,7 @@ public:
 
     bool operator() (double const & time)
     {
-           if (time>20  && time<145) return true;
+           if (time>60  && time<145) return true;
       else if (time>220 && time<345) return true;
       else if (time>420 && time<545) return true;
       else return false;
@@ -343,7 +331,6 @@ public:
     float m_low_E = 100;
     Gate m_high_E_gate = {40.f, 145.f};
     Gate m_low_E_gate  = {60.f, 145.f};
-    bool normal = true;
   } delayedGate;
 
   Gate promptBGOgate = {-20.f, 10.f };

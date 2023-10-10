@@ -1,6 +1,7 @@
 
 
 # WARNING: g++, ROOT (cern), pkg-config and fasterac are required to compile this
+# It is better to compile everything in c++ > 17
 
 # Compile using either one of these commands : 
 # 	either default, debug (with extra warning flags) or optimized 
@@ -8,16 +9,18 @@
 # $ make debug -B 
 # $ make opt -B 
 
+# ==================================================
 # ----------------------------------------------------
 # Modify ONLY the two next variables :
 
 # ----------------------------------------------------
-# First set the path to the Nuball2/lib/ folder
+# Path to the Nuball2/lib/ folder :
 FRAMEWORK_LIB_PATH := ../../lib
 
 # ----------------------------------------------------
-# Then write down the name of the main file 
+# Then write down the name of the main file  :
 SRCEXE := main.cpp
+# ==================================================
 
 
 # ==================================================

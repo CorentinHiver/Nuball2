@@ -54,11 +54,17 @@ public:
 private:
   static void dispatch_root_reader(TTree * tree, Event & event, RunMatrixator & rm);
   static void dispatch_faster_reader(Hit & hit, FasterReader & reader, RunMatrixator & rm);
-  std::unordered_map<dType, Vector_MTTHist<TH2F>> matrices;
-  std::unordered_map<dType, Vector_MTTHist<TH2F>> matrices2; // Used to matrixate nrj2 if needed (Paris, Eden...)
-  std::unordered_map<dType, Vector_MTTHist<TH1F>> singles;
-  std::unordered_map<dType, Vector_MTTHist<TH1F>> singlesNoRejection;
-  std::unordered_map<dType, Vector_MTTHist<TH1F>> singles2; // To histogram nrj2 if needed (Paris, Eden...)
+  std::unordered_map<dType, Vector_MTTHist<TH2F>> matricesPrompt;   // Normal prompt matrices
+  std::unordered_map<dType, Vector_MTTHist<TH2F>> matricesPrompt2;  // Used to matrixate nrj2 if needed (Paris, Eden...)
+  std::unordered_map<dType, Vector_MTTHist<TH2F>> matricesDelayed;  // Normal delayed matrices
+  std::unordered_map<dType, Vector_MTTHist<TH2F>> matricesDelayed2; // Used to matrixate nrj2 if needed (Paris, Eden...)
+  std::unordered_map<dType, Vector_MTTHist<TH1F>> singlesPrompt;    // 
+  std::unordered_map<dType, Vector_MTTHist<TH1F>> singlesPrompt2;   // To histogram nrj2 if needed (Paris, Eden...)
+  std::unordered_map<dType, Vector_MTTHist<TH1F>> singlesDelayed;
+  std::unordered_map<dType, Vector_MTTHist<TH1F>> singlesDelayed2;  // To histogram nrj2 if needed (Paris, Eden...)
+  MTTHist<TH2F> matrix_Clovers_prompt;
+  MTTHist<TH2F> matrix_Clovers_delayed;
+  MTTHist<TH2F> matrix_Clovers_delayed_vs_prompt;
   Calibration m_calibration;
   Timeshifts m_timeshifts;
   Path m_runpath;
@@ -72,7 +78,7 @@ void RunMatrixator::run(std::string const & runpath, std::string const & data)
   this -> Initialize();
 
   // Fills the matrices :
-       if (data == "fast")
+  if (data == "fast")
   {
     if (!m_calibration) throw_error("NO CALIBRATION");
     if (!m_timeshifts)  throw_error("NO TIMESHIFTS" );
@@ -94,76 +100,67 @@ void RunMatrixator::run(std::string const & runpath, std::string const & data)
 
 void RunMatrixator::Initialize()
 {
+  // Hit::setExternalTime(true); // Allows to directly calculate the rf time instead of the relative time
   if (!detectors) {print("Please initialize the Detectors"); throw_error("Detectors not loaded");}
-  for (auto const & type : detectors.typesArray())
+
+  // --- Clover bidims initialisation : --- //
+  matrix_Clovers_prompt.reset("pp","matrix_Clovers_prompt;Clover E [keV];Clover E [keV]", 10000,0,10000, 1000,0,10000);
+  matrix_Clovers_delayed.reset("dd","matrix_Clovers_delayed;Clover E [keV];Clover E [keV]", 10000,0,10000, 1000,0,10000);
+  matrix_Clovers_delayed_vs_prompt.reset("dp","Clovers delayed VS prompt;Prompt E [keV];Delayed E [keV]", 10000,0,10000, 1000,0,10000);
+
+  // --- All the matrices and single spectra initialisation : --- //
+  for (auto const & type : detectors.types())
   {// Loop through all the detectors types (ge, labr...)
-    auto & type_matrices = matrices[type]; // The normal matrices VS clovers
-    auto & type_matrices2 = matrices2[type]; // The QDC2 matrices VS clovers
-    auto & type_singles = singles[type]; // The normal singles spectra
-    auto & type_singles2 = singles2[type]; // The QDC2 singles spectra
-    // auto & type_singles_test = singlesNoRejection[type]; // Test
+    auto const & nb_det = detectors.nbOfType(type);
 
     // Matrices : 
-    type_matrices.resize(detectors.nbOfType(type));
-    int index_in_type = 0;
-    for(auto & matrice : type_matrices)
-    {
-      auto const & name = detectors.name(type, index_in_type);
-      auto const & binning = detectors.energyBidimBin(type);
-      matrice.reset(name.c_str(), (name+";Clover [keV];"+name+" energy [keV]").c_str(), 10000,0,10000, binning.bins,binning.min,binning.max);
-      index_in_type++;
-    }
+    matricesPrompt [type].resize(nb_det);
+    matricesDelayed[type].resize(nb_det);
+    
+    // Singles : 
+    singlesPrompt [type].resize(nb_det);
+    singlesDelayed[type].resize(nb_det);
 
-    // Matrices of QDC2 :
+    // QDC2 :
     if (type == "paris")
     {
-      type_matrices2.resize(detectors.nbOfType(type));
-      index_in_type = 0;
-      for(auto & matrice2 : type_matrices2)
-      {
-        auto const & name = detectors.name(type, index_in_type);
-        auto const & binning = detectors.energyBidimBin(type);
-        matrice2.reset((name+"_nrj2").c_str(), (name+" QDC2;Clover [keV];"+name+" QDC2 [keV]").c_str(), 10000,0,10000, binning.bins,binning.min,binning.max);
-        index_in_type++;
-      }
+      // Matrices : 
+      matricesPrompt2 [type].resize(nb_det);
+      matricesDelayed2[type].resize(nb_det);
+
+      // Singles : 
+      singlesPrompt2 [type].resize(nb_det);
+      singlesDelayed2[type].resize(nb_det);
     }
 
-    // Singles spectra :
-    type_singles.resize(detectors.nbOfType(type));
-    index_in_type = 0;
-    for(auto & singles : type_singles)
+    for(size_t type_i = 0; type_i<nb_det; type_i++)
     {
-      auto const & name = detectors.name(type, index_in_type);
-      auto const & binning = detectors.energyBin(type);
-      singles.reset((name+"_singles").c_str(), (name+";Clover [keV];"+name+" energy [keV]").c_str(), binning.bins,binning.min,binning.max);
-      index_in_type++;
-    }
+      auto const & name = detectors.name(type, type_i);
 
-    // type_singles_test.resize(detectors.nbOfType(type));
-    // index_in_type = 0;
-    // for(auto & single : type_singles_test)
-    // {
-    //   auto const & name = detectors.name(type, index_in_type);
-    //   auto const & binning = detectors.energyBin(type);
-    //   single.reset((name+"_singles_test").c_str(), (name+" TEST;Clover [keV];"+name+" energy [keV]").c_str(), binning.bins,binning.min,binning.max);
-    //   index_in_type++;
-    // }
+      auto const & binning_bidim = detectors.energyBidimBin(type);
+      auto const & binning_energy = detectors.energyBin(type);
 
-    // Singles spectra of QDC2 :
-    if (type == "paris")
-    {
-      type_singles2.resize(detectors.nbOfType(type));
-      index_in_type = 0;
-      for(auto & single : type_singles2)
+      // Matrices :
+      matricesPrompt [type][type_i].reset((name+"_prompt").c_str(),  (name+" Prompt;Clover [keV];" +name+" energy [keV]").c_str(), 10000,0,10000, binning_bidim.bins,binning_bidim.min,binning_bidim.max);
+      matricesDelayed[type][type_i].reset((name+"_delayed").c_str(), (name+" Delayed;Clover [keV];"+name+" energy [keV]").c_str(), 10000,0,10000, binning_bidim.bins,binning_bidim.min,binning_bidim.max);
+      
+      // Singles :
+      singlesPrompt [type][type_i].reset((name+"_prompt_singles").c_str(),  (name+" Prompt singles;Clover [keV];" +name+" energy [keV]").c_str(), binning_energy.bins,binning_energy.min,binning_energy.max);
+      singlesDelayed[type][type_i].reset((name+"_delayed_singles").c_str(), (name+" Delayed singles;Clover [keV];"+name+" energy [keV]").c_str(), binning_energy.bins,binning_energy.min,binning_energy.max);
+
+      // QDC2 :
+      if (type == "paris")
       {
-        auto const & name = detectors.name(type, index_in_type);
-        auto const & binning = detectors.energyBin(type);
-        single.reset((name+"_singles_qdc2").c_str(), (name+" QDC2;Clover [keV];"+type+" QDC2 [keV]").c_str(), binning.bins,binning.min,binning.max);
-        index_in_type++;
+        // Matrices :
+        matricesPrompt2 [type][type_i].reset((name+"_prompt_dqc2").c_str(),  (name+" Prompt QDC2;Clover [keV];" +name+" QDC2 [keV]").c_str(), 10000,0,10000, binning_bidim.bins,binning_bidim.min,binning_bidim.max);
+        matricesDelayed2[type][type_i].reset((name+"_delayed_dqc2").c_str(), (name+" Delayed QDC2;Clover [keV];"+name+" QDC2 [keV]").c_str(), 10000,0,10000, binning_bidim.bins,binning_bidim.min,binning_bidim.max);
+        
+        // Singles :
+        singlesPrompt2 [type][type_i].reset((name+"_prompt_singles_dqc2").c_str(),  (name+" Prompt singles QDC2;Clover [keV];" +name+" QDC2 [keV]").c_str(), binning_energy.bins,binning_energy.min,binning_energy.max);
+        singlesDelayed2[type][type_i].reset((name+"_delayed_singles_dqc2").c_str(), (name+" Delayed singles QDC2;Clover [keV];"+name+" QDC2 [keV]").c_str(), binning_energy.bins,binning_energy.min,binning_energy.max);
       }
     }
   }
-  
 }
 
 void RunMatrixator::dispatch_faster_reader(Hit & hit, FasterReader & reader, RunMatrixator & rm)
@@ -179,8 +176,8 @@ void RunMatrixator::dispatch_root_reader(TTree * tree, Event & event, RunMatrixa
 void RunMatrixator::loadData_faster(Hit & hit, FasterReader & reader)
 {
   unique_tree tempTree(new TTree("tempTree", "tempTree"));
-  hit.writting(tempTree.get(), "lsEQp");
-
+  hit.writting(tempTree.get(), "lstEQp");
+  
   while(reader.Read())
   {
     auto const & label = hit.label;
@@ -196,8 +193,8 @@ void RunMatrixator::loadData_faster(Hit & hit, FasterReader & reader)
   hit.reset();
   hit.reading(tempTree.get());
 
-  Event event;
   RF_Manager rf;
+  Event event;
   EventBuilder_136 builder(&event, &rf);
 
   RF_Extractor first_rf(tempTree.get(), rf, hit, aligned_index);
@@ -205,7 +202,7 @@ void RunMatrixator::loadData_faster(Hit & hit, FasterReader & reader)
   builder.setFirstRF(hit);
 
   auto const & nb_hits = tempTree->GetEntries();
-  int loop = 0;
+  int loop = first_rf.cursor();
 
   Clovers clovers;
 
@@ -217,6 +214,7 @@ void RunMatrixator::loadData_faster(Hit & hit, FasterReader & reader)
 
     if (builder.build(hit))
     {
+      rf.align_to_RF_ns(event);
       clovers.SetEvent(event, 2);
       this -> fillMatrixes(clovers, event);
     }
@@ -237,60 +235,146 @@ void RunMatrixator::loadData_root(TTree * tree, Event & event)
 
 void RunMatrixator::fillMatrixes(Clovers const & clovers, Event const & event)
 {
-  bool paris_is_labr = false;
-  bool paris_is_nai = false;
+    // For Ge and BGO : 
+    bool prompt = false;
+    bool delayed = false;
 
-  // Looping through all the crystals :
-  for(int hit_j = 0; hit_j<event.mult; hit_j++)
+    // For paris : 
+    bool paris_is_labr = false;
+    bool paris_is_nai = false;
+
+  // --- Looping through all the crystals : --- //
+  for(int hit_i = 0; hit_i<event.mult; hit_i++)
   {
-    auto const & label = event.labels[hit_j];
-    if (!detectors.exists(label)) continue;
+    auto const & label = event.labels[hit_i];
+    if (!detectors.exists(label) || event.pileups[hit_i]) continue;
+    auto const & time_i = event.time2s[hit_i];
+    auto const & nrj = event.nrjs[hit_i];
+    auto const & nrj2 = event.nrj2s[hit_i];
+
     auto const & type = detectors.type(label);
-    auto const & index_j = detectors.index(label);
+    auto const & index_i = detectors.index(label);
 
-    auto & matrice = matrices[type][index_j];
-    auto & single = singles[type][index_j];
-    // auto & singleTest = singlesNoRejection[type][index_j];
+    auto & matricePrompt = matricesPrompt[type][index_i];
+    auto & matriceDelayed = matricesDelayed[type][index_i];
+    auto & singlePrompt = singlesPrompt[type][index_i];
+    auto & singleDelayed = singlesDelayed[type][index_i];
 
-    auto const & nrj = event.nrjs[hit_j];
-    auto const & nrj2 = event.nrj2s[hit_j];
+    prompt = (time_i>-10) && (time_i<10);
+    delayed = (time_i>60) && (time_i<160);
 
-    // Reject hit if any other crystal of the clover fired (hard compton cleaning) :
-    if (isClover[label]) 
-    {
-      // if(clovers.PromptClovers[Clovers::label_to_clover(label)].nbCrystals()>1) continue;
-      single.Fill(nrj);
-    }
-    // Correctly handles Paris :
-    else if (isParis[label])
+    if (!(prompt || delayed)) continue;
+
+    // --------------------------------------------------------------------------
+    // TODO : ajouter les nouvelles matrices et nouveaux singles prompt et delayed
+    // Puis les écrire dans le write
+    // --------------------------------------------------------------------------
+
+    // Correct handling of Paris :
+    if (isParis[label])
     {
       paris_is_labr = parisIsLaBr(nrj, nrj2);
       paris_is_nai = parisIsNaI(nrj, nrj2);
-      if (paris_is_labr) single.Fill(nrj);
-      else if(paris_is_nai) singles2[type][index_j].Fill(nrj2);
-      else continue;
+      if (paris_is_labr) 
+      {
+        if (prompt) singlePrompt.Fill(nrj);
+        else if (delayed) singleDelayed.Fill(nrj);
+      }
+      else if(paris_is_nai) 
+      {
+        if (prompt) singlesPrompt2[type][index_i].Fill(nrj2);
+        else if (delayed) singlesDelayed2[type][index_i].Fill(nrj2);
+      }
+      else continue; // Reject intermediate structures 
     }
-    else single.Fill(nrj);
 
-    // Looping through the raw clovers (no add-back, no compton clean)
+    // All the other kind of detectors :
+    else
+    {
+           if (prompt ) singlePrompt .Fill(nrj);
+      else if (delayed) singleDelayed.Fill(nrj);
+    }
+
+    // Looping through the prompt clovers (add-backed, no compton clean)
     for (auto const & clover_index : clovers.promptClovers)
     {
+      // Only doing prompt-prompt matrices :
+      if (!prompt) continue; 
+
       auto const & clover = clovers.PromptClovers[clover_index];
       auto const & nrj_clover = clover.nrj;
-      if (clover.nb_BGO>0) continue; // BGO clean
+      if (clover.nb_BGO>0) continue; // Compton cleaning done here 
 
-      if (isClover[label]) 
-      {
-        // Reject the hit if is located in the same clover as the clover (reject diagonal Ge)
-        if (clover_index == Clovers::label_to_clover(label)) continue; 
-        matrice.Fill(nrj_clover, nrj);
-      }
+      // Reject the hit if is located in the same clover as the ref clover (= reject diagonal Ge)
+      if (isClover[label]) {if (clover_index == Clovers::label_to_clover(label) || !prompt) continue; }
       else if (isParis[label])
       {
-        if (paris_is_labr) matrice.Fill(nrj_clover, nrj); // Fill the LaBr3 part
-        else if (paris_is_nai) matrices2[type][index_j].Fill(nrj_clover, nrj2);// Fill the NaI part
+        if (paris_is_labr) matricePrompt.Fill(nrj_clover, nrj); // Fill the LaBr3 part
+        else if (paris_is_nai) matricesPrompt2[type][index_i].Fill(nrj_clover, nrj2);// Fill the NaI part
       }
-      else matrice.Fill(nrj_clover, nrj);
+      matricePrompt.Fill(nrj_clover, nrj);
+    }
+
+    // Looping through the delayed clovers (add-backed, no compton clean)
+    for (auto const & clover_index : clovers.delayedClovers)
+    {
+      // Only doing delayed-delayed matrices :
+      if (!delayed) continue;
+
+      auto const & clover = clovers.DelayedClovers[clover_index];
+      auto const & nrj_clover = clover.nrj;
+      if (clover.nb_BGO>0) continue; // Compton cleaning done here 
+
+      // Reject the hit if is located in the same clover as the ref clover (= reject diagonal Ge) :
+      if (isClover[label]) {if (clover_index == Clovers::label_to_clover(label)) continue; }
+      else if (isParis[label])
+      {
+        if (paris_is_labr) matriceDelayed.Fill(nrj_clover, nrj); // Fill the LaBr3 part
+        else if (paris_is_nai) matricesDelayed2[type][index_i].Fill(nrj_clover, nrj2);// Fill the NaI part
+        continue;
+      }
+      matriceDelayed.Fill(nrj_clover, nrj);
+    }
+  }
+
+  // --- Creating clover prompt matrices : --- //
+  for (size_t prompt_i = 0; prompt_i<clovers.promptClovers.size(); prompt_i++) 
+  {
+    // Extract the prompt clover :
+    auto const & clover_prompt_i = clovers.promptClovers[prompt_i];
+    auto const & clover_prompt = clovers.PromptClovers[clover_prompt_i];
+    if (clover_prompt.nb_BGO>0) continue;
+
+    // Delayed VS prompt :
+    for (auto const & clover_index_delayed : clovers.delayedClovers)
+    {
+      auto const & clover_delayed = clovers.DelayedClovers[clover_index_delayed];
+      if (clover_delayed.nb_BGO>0) continue;
+      matrix_Clovers_delayed_vs_prompt.Fill(clover_prompt.nrj, clover_delayed.nrj);
+    }
+
+    // Prompt-prompt :
+    for (size_t prompt_j = prompt_i+1; prompt_j<clovers.promptClovers.size(); prompt_j++)
+    {
+      auto const & clover_index_prompt_j = clovers.promptClovers[prompt_j];
+      auto const & clover_prompt_j = clovers.PromptClovers[clover_index_prompt_j];
+      matrix_Clovers_prompt.Fill(clover_prompt.nrj, clover_prompt_j.nrj);
+    }
+  }
+
+  // --- Creating clover prompt matrices : --- //
+  for (size_t delayed_i = 0; delayed_i<clovers.delayedClovers.size(); delayed_i++) 
+  {
+    // Extract the delayed clover :
+    auto const & clover_index_delayed = clovers.delayedClovers[delayed_i];
+    auto const & clover_delayed = clovers.DelayedClovers[clover_index_delayed];
+
+    // Delayed-delayed :
+    for (size_t delayed_j = delayed_i+1; delayed_j<clovers.delayedClovers.size(); delayed_j++)
+    {
+      auto const & clover_index_delayed_j = clovers.delayedClovers[delayed_j];
+      auto const & clover_delayed_j = clovers.DelayedClovers[clover_index_delayed_j];
+      matrix_Clovers_delayed.Fill(clover_delayed.nrj, clover_delayed_j.nrj);
     }
   }
 }
@@ -317,11 +401,19 @@ void RunMatrixator::Write()
     file.reset(TFile::Open(outRoot.c_str(), "RECREATE"));
   }
   file -> cd();
-  for (auto & type_matrice : matrices) for (auto & matrice : type_matrice.second) matrice.Write();
-  for (auto & type_matrice : matrices2) for (auto & matrice : type_matrice.second) matrice.Write();
-  for (auto & type_single : singles) for (auto & single : type_single.second) single.Write();
-  for (auto & type_single : singlesNoRejection) for (auto & single : type_single.second) single.Write();
-  for (auto & type_single : singles2) for (auto & single : type_single.second) single.Write();
+
+  // Writting the matrices :
+  for (auto & type_matrice : matricesPrompt)   for ( auto & matrice : type_matrice.second ) matrice.Write();
+  for (auto & type_matrice : matricesPrompt2)  for ( auto & matrice : type_matrice.second ) matrice.Write();
+  for (auto & type_matrice : matricesDelayed)  for ( auto & matrice : type_matrice.second ) matrice.Write();
+  for (auto & type_matrice : matricesDelayed2) for ( auto & matrice : type_matrice.second ) matrice.Write();
+
+  // Writting the singles :
+  for (auto & type_single : singlesPrompt)   for ( auto & single : type_single.second ) single.Write();
+  for (auto & type_single : singlesPrompt2)  for ( auto & single : type_single.second ) single.Write();
+  for (auto & type_single : singlesDelayed)  for ( auto & single : type_single.second ) single.Write();
+  for (auto & type_single : singlesDelayed2) for ( auto & single : type_single.second ) single.Write();
+
   file -> Write();
   file -> Close();
   print(outRoot, "written");

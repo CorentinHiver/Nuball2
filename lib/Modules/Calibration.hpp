@@ -227,7 +227,7 @@ public:
   static void loadRootDataThread(Calibration & calib, MTList & list);
   void fillRootDataHisto(std::string const & filename);
 
-  void loadData(std::string const & dataDir, int const & nb_files = -1);
+  void loadFasterData(std::string const & dataDir, int const & nb_files = -1);
   static void fillHisto(Hit & hit, FasterReader & reader, Calibration & calib);
   void analyse(std::string const & source = "152Eu");
   void peakFinder(std::string const & source);
@@ -405,7 +405,7 @@ void Calibration::calculate(std::string const & dataDir, int const & nb_files, s
 {
   print ("Calculating calibrations from raw data in", dataDir);
 
-  if(type == "fast") this -> loadData(dataDir, nb_files);
+  if(type == "fast") this -> loadFasterData(dataDir, nb_files);
   else if (type == "root") this -> loadRootData(dataDir, nb_files);
   else {print(type, "unkown data format"); return;}
 
@@ -462,7 +462,7 @@ void Calibration::loadRootHisto(std::string const & histograms)
 
 }
 
-void Calibration::loadData(std::string const & dataDir, int const & nb_files)
+void Calibration::loadFasterData(std::string const & dataDir, int const & nb_files)
 {
   print("Loading the data from", Path(dataDir).folder());
   this -> Initialize();
@@ -538,8 +538,10 @@ void Calibration::fillHisto(Hit & hit, FasterReader & reader, Calibration & cali
 {
   if (calib.calibrate_data()) while(reader.Read()) 
   {
+    auto const & type = detectors.type(hit.label);
+    if (type ==  "null" || type ==  "RF") continue;
     if (calib.m_order[hit.label]<1) continue;
-    auto nrj_cal = calib.calibrate(hit.adc, hit.label);
+    auto const & nrj_cal = calib.calibrate(hit.adc, hit.label);
     calib.m_histos.calib_spectra[hit.label].Fill(nrj_cal);
     calib.m_histos.all_calib[detectors.typeIndex(hit.label)].Fill(compressedLabel[hit.label], nrj_cal);
   }
@@ -1192,7 +1194,7 @@ void Calibration::writeCalibratedRoot(std::string const & outfilename)
 void Calibration::calibrateData(std::string const & folder, int const & nb_files )
 {
   m_calibrate_data = true;
-  this -> loadData(folder, nb_files);
+  this -> loadFasterData(folder, nb_files);
 }
 
 void Calibration::writeCalibratedData(std::string const & outfilename)
