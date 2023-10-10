@@ -26,6 +26,30 @@ bool push_back_unique(std::vector<T> & vector, T const & t)
   }
 }
 
+template <typename T>
+bool found(std::vector<T> const & vector, T const & t)
+{
+  return (std::find(std::begin(vector), std::end(vector), t) != std::end(vector));
+}
+
+template <typename T>
+bool found(std::vector<T> & vector, T const & t)
+{
+  return (std::find(std::begin(vector), std::end(vector), t) != std::end(vector));
+}
+
+template <typename T>
+bool found(std::vector<T> const & vector, T & t)
+{
+  return (std::find(std::begin(vector), std::end(vector), t) != std::end(vector));
+}
+
+template <typename T>
+bool found(std::vector<T> & vector, T & t)
+{
+  return (std::find(std::begin(vector), std::end(vector), t) != std::end(vector));
+}
+
 // template <class T>
 // T get_max_value(std::vector<T> const & vec)
 // {

@@ -5,14 +5,16 @@
 #include <any>
 #include <array>
 #include <algorithm>
-#include <iomanip>
-#include <iostream>
+#include <cstdlib>
+#include <cstring>
 #include <fstream>
 #include <functional>
-#include <numeric>
+#include <iomanip>
+#include <iostream>
 #include <map>
 #include <memory>
 #include <mutex>
+#include <numeric>
 #include <queue>
 #include <sstream>
 #include <stdexcept>
@@ -25,7 +27,6 @@
 #include <vector>
 
 // ********** C includes ************ //
-#include <cstdlib>
 #include <dirent.h>
 #include <glob.h>
 #include <stdio.h>
@@ -188,15 +189,34 @@ public:
     }
 
     size_t const & resize(size_t size, bool const & value = false) {
-      m_data = new bool[(m_size = size)];
-      memset(m_data, value ? 1 : 0, m_size * sizeof(bool));
+      if (size>m_size)
+      {
+        bool* temp = new bool[size];
+        std::memcpy(temp, m_data, m_size*sizeof(bool));
+        delete[] m_data;
+        for (;m_size<size;m_size++) temp[m_size] = value;// Fills new space with value AND set correct value to m_size
+        m_data = temp;
+      }
       return m_size;
     }
 
+    auto begin() {return m_data;}
+    auto end()   {return m_data + m_size;}
+
+    auto begin() const {return m_data;}
+    auto end()   const {return m_data + m_size;}
+
 };
+
+std::ostream& operator>>(std::ostream& cout, Bools const & bools)
+{
+  for (auto const b : bools) cout << b << " ";
+  return cout;
+}
 
 using Strings = std::vector<std::string>;
 using Ints = std::vector<int>;
+
 
 /////////////////////////////
 //    STANDART FUNCTIONS   //

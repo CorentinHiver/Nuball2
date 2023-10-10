@@ -1044,18 +1044,22 @@ bool Calibration::load(std::string const & calibFileName)
   Label label = 0;
   // ----------------------------------------------------- //
   // First extract the maximum label
-  if (detectors) size = detectors.size();
-  else 
-  {// If no ID file loaded, infer the number of detectors from the higher label in calibration file (less safe)
-    while (getline(inputfile, line))
-    {
-      std::istringstream iss (line);
-      iss >> label;
-      if (label>size) size = label;
-    }
-    inputfile.clear();
-    inputfile.seekg(0, std::ios::beg); // back to the start of the file
+  // Infer the number of detectors from the higher label in calibration file
+  while (getline(inputfile, line))
+  {
+    std::istringstream iss (line);
+    iss >> label;
+    if (label>size) size = label;
   }
+  size++; // The size of the vector must be label_max+1
+  // Ensure there is no mismatch with the detectors module :
+  if (detectors)
+  {
+    if (size<detectors.size()) size = detectors.size();
+    else detectors.resize(size);
+  }
+  inputfile.clear();
+  inputfile.seekg(0, std::ios::beg); // back to the start of the file
   // ----------------------------------------------------- //
   // Now fill the vectors
   m_order    .resize(size,-1);

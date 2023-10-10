@@ -34,9 +34,11 @@ int main(int argc, char ** argv)
   }
 
   // detectors.load("index_129.list");
-  detectors.load("noGe_index_129.list");
+  detectors.load("index_129.list");
 
   RunMatrixator rm;
+  rm.dontMatrixate("ge");
+  // rm.dontMatrixate("paris");
   // Timeshifts ts("/home/corentin/faster_data/N-SI-136-root_P/Timeshifts/run_75.dT");
   Timeshifts ts("../../../N-SI-136-root_P/Timeshifts/run_75.dT");
   rm.setTimeshifts(ts);
@@ -44,7 +46,7 @@ int main(int argc, char ** argv)
   // rm.run("/home/corentin/faster_data/N-SI-136/run_75.fast/");
   rm.run("../../../N-SI-136/run_75.fast/");
 
-  // MTObject::Initialize(2);
+  // --- Up to date example : --- //
   // Calibration calib;
   // calib.load(/* Calibration file */);
   // calib.calibrateData(/* Europium run path */);
@@ -53,8 +55,22 @@ int main(int argc, char ** argv)
   // RunMatrixator rm("~/faster_data/N-SI-120-sources/");
   // RunMatrixator rm(argv[1]);
   // MTObject::Initialize(3);
+
+  // --- Almost up to date / Not checked : --- //
+
+  
+  // detectors.load("index_129.list");
+  // Timeshifts ts;
+  // ts.setDetectors(detectors);
+  // ts.setOutDir(".");
+  // ts.setMult(2,2);
+  // ts.verbose(true);
+  // ts.calculate(argv[1], (argc>2) ? std::stoi(argv[2]) : -1);
+  // ts.verify(argv[1], (argc>3) ? std::stoi(argv[3]) : 5);
+  // ts.write("136_60Co"); 
   
 
+  // --- Other : --- //
   
   // std::vector<long> vec(100,0.0);
   // Timer timeVec;
@@ -100,16 +116,6 @@ int main(int argc, char ** argv)
   //   return false;
   // });
 
-    // MTObject::Initialize(1);
-    // Detectors detectors("index_129.list");
-    // Timeshifts ts;
-    // ts.setDetectors(detectors);
-    // ts.setOutDir(".");
-    // ts.setMult(2,2);
-    // ts.verbose(true);
-    // ts.calculate(argv[1], (argc>2) ? std::stoi(argv[2]) : -1);
-    // ts.verify(argv[1], (argc>3) ? std::stoi(argv[3]) : 5);
-    // ts.write("136_60Co"); 
 
 
 

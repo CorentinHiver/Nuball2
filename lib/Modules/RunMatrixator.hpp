@@ -5,13 +5,12 @@
 
 #include "../libCo.hpp"
 
-#include "../Analyse/Clovers.hpp"
-
-
 #include "../Classes/Detectors.hpp"
 #include "../Classes/Alignator.hpp"
 #include "../Classes/Event.hpp"
 #include "../Classes/Timer.hpp"
+
+#include "../Analyse/Clovers.hpp"
 
 #include "../../136/conversion_200ns/EventBuilder_136.hpp"
 
@@ -51,6 +50,30 @@ public:
   void setCalibration(Calibration const & calibration) {m_calibration = calibration;}
   void setTimeshifts(Timeshifts const & timeshifts) {m_timeshifts = timeshifts;}
 
+  void dontMatrixate(dType const & type)
+  {
+    // Initialise if not :
+    if (m_dontMatrixateLabel.size()<detectors.size())  m_dontMatrixateLabel.resize(detectors.size(), false);
+    if (m_dontMatrixateType.size() < detectors.nbTypes()) for (auto const & type : detectors.types()) m_dontMatrixateType.emplace(type, false);
+
+    // Check if the type exists :
+    if (!found(detectors.types(), type)) throw_error("RunMatrixator::dontMatrixate(type) : type unkown");
+
+    // Fill the map :
+    m_dontMatrixateType[type] = true;
+    auto const & typesArray = detectors.typesArray();
+    for (size_t label = 0; label<typesArray.size(); label++) if (typesArray[label] == type) m_dontMatrixateLabel[label] = true;
+  }
+
+  void dontMatrixate(Label const & label)
+  {
+    // Initialise if not :
+    if (m_dontMatrixateLabel.size()<detectors.size())  m_dontMatrixateLabel.resize(detectors.size(), false);
+    // Check entry :
+    if (label>m_dontMatrixateLabel.size()) throw_error("RunMatrixator::dontMatrixate(label) : label out of range");
+    m_dontMatrixateLabel[label] = true;
+  }
+
 private:
   static void dispatch_root_reader(TTree * tree, Event & event, RunMatrixator & rm);
   static void dispatch_faster_reader(Hit & hit, FasterReader & reader, RunMatrixator & rm);
@@ -58,9 +81,9 @@ private:
   std::unordered_map<dType, Vector_MTTHist<TH2F>> matricesPrompt2;  // Used to matrixate nrj2 if needed (Paris, Eden...)
   std::unordered_map<dType, Vector_MTTHist<TH2F>> matricesDelayed;  // Normal delayed matrices
   std::unordered_map<dType, Vector_MTTHist<TH2F>> matricesDelayed2; // Used to matrixate nrj2 if needed (Paris, Eden...)
-  std::unordered_map<dType, Vector_MTTHist<TH1F>> singlesPrompt;    // 
+  std::unordered_map<dType, Vector_MTTHist<TH1F>> singlesPrompt;    // Normal singles spectra
   std::unordered_map<dType, Vector_MTTHist<TH1F>> singlesPrompt2;   // To histogram nrj2 if needed (Paris, Eden...)
-  std::unordered_map<dType, Vector_MTTHist<TH1F>> singlesDelayed;
+  std::unordered_map<dType, Vector_MTTHist<TH1F>> singlesDelayed;   // Normal singles spectra
   std::unordered_map<dType, Vector_MTTHist<TH1F>> singlesDelayed2;  // To histogram nrj2 if needed (Paris, Eden...)
   MTTHist<TH2F> matrix_Clovers_prompt;
   MTTHist<TH2F> matrix_Clovers_delayed;
@@ -68,6 +91,10 @@ private:
   Calibration m_calibration;
   Timeshifts m_timeshifts;
   Path m_runpath;
+
+  // Parameters :
+  std::unordered_map<dType, bool> m_dontMatrixateType;
+  std::vector<Label> m_dontMatrixateLabel;
 };
 
 void RunMatrixator::run(std::string const & runpath, std::string const & data)
@@ -104,18 +131,22 @@ void RunMatrixator::Initialize()
   if (!detectors) {print("Please initialize the Detectors"); throw_error("Detectors not loaded");}
 
   // --- Clover bidims initialisation : --- //
-  matrix_Clovers_prompt.reset("pp","matrix_Clovers_prompt;Clover E [keV];Clover E [keV]", 10000,0,10000, 1000,0,10000);
-  matrix_Clovers_delayed.reset("dd","matrix_Clovers_delayed;Clover E [keV];Clover E [keV]", 10000,0,10000, 1000,0,10000);
-  matrix_Clovers_delayed_vs_prompt.reset("dp","Clovers delayed VS prompt;Prompt E [keV];Delayed E [keV]", 10000,0,10000, 1000,0,10000);
+  matrix_Clovers_prompt.reset("pp","matrix_Clovers_prompt;Clover E [keV];Clover E [keV]", 10000,0,10000, 10000,0,10000);
+  matrix_Clovers_delayed.reset("dd","matrix_Clovers_delayed;Clover E [keV];Clover E [keV]", 10000,0,10000, 10000,0,10000);
+  matrix_Clovers_delayed_vs_prompt.reset("dp","Clovers delayed VS prompt;Prompt E [keV];Delayed E [keV]", 10000,0,10000, 10000,0,10000);
 
   // --- All the matrices and single spectra initialisation : --- //
   for (auto const & type : detectors.types())
   {// Loop through all the detectors types (ge, labr...)
+    print("Initialize ",type);
     auto const & nb_det = detectors.nbOfType(type);
 
     // Matrices : 
-    matricesPrompt [type].resize(nb_det);
-    matricesDelayed[type].resize(nb_det);
+    if (!m_dontMatrixateType[type])
+    {
+      matricesPrompt [type].resize(nb_det);
+      matricesDelayed[type].resize(nb_det);
+    }
     
     // Singles : 
     singlesPrompt [type].resize(nb_det);
@@ -125,8 +156,11 @@ void RunMatrixator::Initialize()
     if (type == "paris")
     {
       // Matrices : 
-      matricesPrompt2 [type].resize(nb_det);
-      matricesDelayed2[type].resize(nb_det);
+      if (!m_dontMatrixateType[type])
+      {
+        matricesPrompt2 [type].resize(nb_det);
+        matricesDelayed2[type].resize(nb_det);
+      }
 
       // Singles : 
       singlesPrompt2 [type].resize(nb_det);
@@ -136,13 +170,19 @@ void RunMatrixator::Initialize()
     for(size_t type_i = 0; type_i<nb_det; type_i++)
     {
       auto const & name = detectors.name(type, type_i);
+      auto const & label = detectors.label(type, type_i);
+
+      
 
       auto const & binning_bidim = detectors.energyBidimBin(type);
       auto const & binning_energy = detectors.energyBin(type);
 
       // Matrices :
-      matricesPrompt [type][type_i].reset((name+"_prompt").c_str(),  (name+" Prompt;Clover [keV];" +name+" energy [keV]").c_str(), 10000,0,10000, binning_bidim.bins,binning_bidim.min,binning_bidim.max);
-      matricesDelayed[type][type_i].reset((name+"_delayed").c_str(), (name+" Delayed;Clover [keV];"+name+" energy [keV]").c_str(), 10000,0,10000, binning_bidim.bins,binning_bidim.min,binning_bidim.max);
+      if (!m_dontMatrixateLabel[label])
+      {
+        matricesPrompt [type][type_i].reset((name+"_prompt").c_str(),  (name+" Prompt;Clover [keV];" +name+" energy [keV]").c_str(), 10000,0,10000, binning_bidim.bins,binning_bidim.min,binning_bidim.max);
+        matricesDelayed[type][type_i].reset((name+"_delayed").c_str(), (name+" Delayed;Clover [keV];"+name+" energy [keV]").c_str(), 10000,0,10000, binning_bidim.bins,binning_bidim.min,binning_bidim.max);
+      }
       
       // Singles :
       singlesPrompt [type][type_i].reset((name+"_prompt_singles").c_str(),  (name+" Prompt singles;Clover [keV];" +name+" energy [keV]").c_str(), binning_energy.bins,binning_energy.min,binning_energy.max);
@@ -152,8 +192,11 @@ void RunMatrixator::Initialize()
       if (type == "paris")
       {
         // Matrices :
-        matricesPrompt2 [type][type_i].reset((name+"_prompt_dqc2").c_str(),  (name+" Prompt QDC2;Clover [keV];" +name+" QDC2 [keV]").c_str(), 10000,0,10000, binning_bidim.bins,binning_bidim.min,binning_bidim.max);
-        matricesDelayed2[type][type_i].reset((name+"_delayed_dqc2").c_str(), (name+" Delayed QDC2;Clover [keV];"+name+" QDC2 [keV]").c_str(), 10000,0,10000, binning_bidim.bins,binning_bidim.min,binning_bidim.max);
+        if (!m_dontMatrixateLabel[label])
+        {
+          matricesPrompt2 [type][type_i].reset((name+"_prompt_dqc2").c_str(),  (name+" Prompt QDC2;Clover [keV];" +name+" QDC2 [keV]").c_str(), 10000,0,10000, binning_bidim.bins,binning_bidim.min,binning_bidim.max);
+          matricesDelayed2[type][type_i].reset((name+"_delayed_dqc2").c_str(), (name+" Delayed QDC2;Clover [keV];"+name+" QDC2 [keV]").c_str(), 10000,0,10000, binning_bidim.bins,binning_bidim.min,binning_bidim.max);
+        }
         
         // Singles :
         singlesPrompt2 [type][type_i].reset((name+"_prompt_singles_dqc2").c_str(),  (name+" Prompt singles QDC2;Clover [keV];" +name+" QDC2 [keV]").c_str(), binning_energy.bins,binning_energy.min,binning_energy.max);
@@ -265,11 +308,6 @@ void RunMatrixator::fillMatrixes(Clovers const & clovers, Event const & event)
 
     if (!(prompt || delayed)) continue;
 
-    // --------------------------------------------------------------------------
-    // TODO : ajouter les nouvelles matrices et nouveaux singles prompt et delayed
-    // Puis les écrire dans le write
-    // --------------------------------------------------------------------------
-
     // Correct handling of Paris :
     if (isParis[label])
     {
@@ -294,6 +332,8 @@ void RunMatrixator::fillMatrixes(Clovers const & clovers, Event const & event)
            if (prompt ) singlePrompt .Fill(nrj);
       else if (delayed) singleDelayed.Fill(nrj);
     }
+
+    if(m_dontMatrixateLabel[label]) continue;
 
     // Looping through the prompt clovers (add-backed, no compton clean)
     for (auto const & clover_index : clovers.promptClovers)
@@ -420,3 +460,16 @@ void RunMatrixator::Write()
 }
 
 #endif //RUNMATRIXATOR_HPP
+
+
+
+
+/*
+
+  void dontMatrixate(std::string const & type) 
+  {
+    // Initialise if not :
+    
+  }
+
+*/

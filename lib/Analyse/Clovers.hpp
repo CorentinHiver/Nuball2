@@ -290,7 +290,7 @@ public:
       else                        return m_low_E_gate.isIn(timef);
     }
 
-    bool operator() (double const & time) {return (time>-20 && time<5);}
+    bool operator() (double const & time) {return (time>-20 && time<10);}
 
   private:
 
@@ -320,7 +320,7 @@ public:
 
     bool operator() (double const & time)
     {
-           if (time>60  && time<145) return true;
+           if (time>60  && time<165) return true;
       else if (time>220 && time<345) return true;
       else if (time>420 && time<545) return true;
       else return false;
@@ -420,11 +420,10 @@ void Clovers::SetEvent(Event const & event, char const & analyse)
   }
   else if (analyse == 2) 
   {
-    this->CleanFast();
+    this -> CleanFast();
     for (size_t i = 0; i<event.size(); i++) this -> FillFast(event, i);
     PromptCleanGeMult  = promptClovers .size();
     DelayedCleanGeMult = delayedClovers.size();
-    // this -> AnalyseFast();
   }
 }
 
@@ -446,7 +445,7 @@ bool Clovers::FillFast(Event const & event, size_t const & hit_index)
       push_back_unique(promptClovers,index_clover);
       PromptClovers[index_clover].addGe(nrj, time);
     }
-    else if (delayedGate(time)) 
+    else if (delayedGate(time))
     {
       push_back_unique(delayedClovers,index_clover);
       DelayedClovers[index_clover].addGe(nrj, time);

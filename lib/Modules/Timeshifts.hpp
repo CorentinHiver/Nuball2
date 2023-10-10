@@ -337,24 +337,26 @@ bool Timeshifts::load(std::string const & filename)
   else if (file_is_empty(inputfile)) {print("TIMESHIFT FILE", filename, "EMPTY !");return false;}
   std::string line = ""; // Reading buffer
   Label label = 0; // Reading buffer
+
   // ----------------------------------------------------- //
   // First extract the maximum label
   Label size = 0;
-  if (detectors) size = detectors.size();
-  else 
-  {// If no ID file loaded, infer the number of detectors from the higher label in calbration file (unsafe)
-    while (getline(inputfile, line))
-    { 
-      std::istringstream iss(line);
-      iss >> label;
-      if (size<label) size = label;
-    }
-    inputfile.clear(); 
-    inputfile.seekg(0, inputfile.beg);
+  // Infer the number of detectors from the higher label in calbration file
+  while (getline(inputfile, line))
+  { 
+    std::istringstream iss(line);
+    iss >> label;
+    if (size<label) size = label;
   }
+  size++; // The size of the vector must be label_max+1
+  // Ensure there is no mismatch with the detectors module :
+  if (detectors && size<detectors.size()) size = detectors.size();
+  inputfile.clear(); 
+  inputfile.seekg(0, inputfile.beg);
+
   // ----------------------------------------------------- //
   // Now fill the vector
-  m_timeshifts.resize(size+1, 0);
+  m_timeshifts.resize(size, 0);
   Time shift = 0;
   while (getline(inputfile, line))
   { // Then fill the array

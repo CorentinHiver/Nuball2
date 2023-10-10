@@ -54,11 +54,11 @@ public:
 
   Detectors(){}
 
-  static Strings types_handled;
+  Strings types_handled = {"ge", "bgo", "labr", "paris", "dssd", "eden", "RF", "null"};
 
   // static bool typeHandled(int const & id) const {} TODO
   // static bool typeID(int const & id) const {} TODO
-  static bool exists(Label const & label) {return exist_array[label];}
+  bool exists(Label const & label) {return m_exists[label];}
 
   /// @brief Reads the file and extracts the list of detectors, then fills the lookup tables 
   void load (std::string const & filename);
@@ -73,7 +73,7 @@ public:
   auto const size() const {return Label_cast(m_list.size());}
 
   /// @brief  Return the number of detectors
-  static auto const number() {return nb_detectors;}
+  auto const & number() {return m_nb_detectors;}
 
   // Iterate over the existing detectors :
   auto begin() {return m_list.begin();}
@@ -83,14 +83,14 @@ public:
   auto end  () const {return m_list.end  ();}
 
   auto const & get()            const {return m_list          ;}
-  auto const & getExistsArray() const {return exist_array     ;}
+  auto const & getExistsArray() const {return m_exists     ;}
   auto const & getLabelsArray() const {return m_labels_array  ;}
-  auto const & typesArray()     const {return m_types_ID_array;}
-  auto const & types()          const {return m_types_ID_array;}
-  static auto const & type(Label const & label) {return m_types[label];}
-  auto const & typeIndex(dType const & type) const {return m_types_index[type];}
-  auto const & typeIndex(Label const & label) const {return m_types_index[this -> type(label)];}
-  auto const & getTypeName(int const & type_i) const {return m_types_ID_array[type_i];}
+  auto const & types()          const {return m_types_ID;}
+  auto const & typesArray()     const {return m_types;}
+  auto const & type(Label const & label) {return m_types[label];}
+  auto const & typeIndex(dType const & type ) {return m_types_index[type];}
+  auto const & typeIndex(Label const & label) {return m_types_index[this -> type(label)];}
+  auto const & getTypeName(int const & type_i) const {return m_types_ID[type_i];}
 
   auto const & getName (Label       const & label) {return m_list[label]        ;}
   auto const & getLabel(std::string const & name ) {return m_labels_array[name];}
@@ -98,13 +98,13 @@ public:
   void operator=(std::string const & filename) {this -> load(filename);}
 
   /// @brief Extracts the name of the detector given its global label
-  std::string const & operator[] (Label const & label) const {return m_list[label];}
+  auto const & operator[] (Label const & label) const {return m_list[label];}
 
   /// @brief Returns true only of the detectors ID file has been loaded successfully
   operator bool() const & {return m_ok;}
 
   /// @brief Returns the number of types in the ID file
-  static size_t nbTypes() {return m_types_ID_array.size();}
+  auto const nbTypes() {return m_types_ID.size();}
 
   /// @brief Returns the number of detector of each type
   auto const & nbOfType(dType const & type) {return m_type_counter[type];}
@@ -153,51 +153,51 @@ public:
   // TODO : a more clever print with also the type and index
   void Print() {for (auto const & d : *this) if (d!="") {std::cout << d << " ";} std::cout << std::endl;}
 
+  void resize(ushort const & new_size);
+
+  auto const & file()       {return m_filename;}
+  auto const & file() const {return m_filename;}
+
 protected:
+
+  // Useful informations :
+  bool m_ok = false;
+  bool m_loaded = false;
+  bool m_initialized = false;
+  ushort m_nb_detectors = 0;
+  std::string m_filename;
+
+  // Arrays :
+  Strings m_types = Strings(1000);
+  Bools   m_exists;
+  Strings m_list;
+  Strings m_types_ID;
+
+  std::unordered_map<std::string, Label> m_labels_array;
+  std::unordered_map<dType, int> m_types_index;
+  std::unordered_map<dType, size_t> m_type_counter; // To get the number of detectors of each type. 
+  std::unordered_map<dType, Strings> m_names;
+  std::unordered_map<dType, Label_vec> m_labels;
+
   // Binning informations :
   static std::unordered_map<dType, THBinning> energy_bins;
   static std::unordered_map<dType, THBinning> ADC_bins;
   static std::unordered_map<dType, THBinning> energy_bidim_bins;
-
-  // Useful informations
-  bool m_ok = false;
-  bool m_loaded = false;
-  bool m_initialized = false;
-  static ushort nb_detectors;
-  std::string m_filename;
-
-  // Containers
-  static Strings m_types;
-  std::unordered_map<std::string, Label> m_labels_array;
-  static Strings m_types_ID_array;
-  static std::map<std::string, int> m_types_index;
-  static Bools exist_array;
-  static Strings m_list;
-  std::unordered_map<dType, size_t> m_type_counter; // To get the number of detectors of each type. 
-  std::unordered_map<dType, Strings> m_names;
-  std::unordered_map<dType, Label_vec> m_labels;
 } detectors;
+
+void Detectors::resize(ushort const & new_size)
+{
+  print("Detectors resized to", new_size);
+  print(m_exists.resize(new_size, false));
+  m_list.resize(new_size, "");
+  m_types.resize(new_size, "null");
+}
 
 std::ostream& operator>>(std::ostream& cout, Detectors const & detectors)
 {
   for (auto const & d : detectors) {cout << d << " ";}
   return cout;
 }
-
-/// @brief List of types of detectors that this code can handle
-Strings Detectors::types_handled = {"ge", "bgo", "labr", "paris", "dssd", "eden", "RF", "null"};
-
-/// @brief List of types of detectors found in the ID file
-Strings Detectors::m_types_ID_array;
-std::map<std::string, int> Detectors::m_types_index;
-Strings Detectors::m_types = Strings(1000);
-
-Bools Detectors::exist_array;
-Strings Detectors::m_list;
-
-
-/// @brief Number of detectors
-ushort Detectors::nb_detectors = 0;
 
 void Detectors::load(std::string const & filename)
 {
@@ -233,10 +233,11 @@ void Detectors::readFile(std::string const & filename)
     is>>label;
     if (size<label) size = label;
   }
+  size++;// The size of the vector must be label_max+1
   // ----------------------------------------------------- //
   //Second reading : fill the vector
-  m_list.resize(size+1);
-  exist_array.resize(size+1);
+  m_list.resize(size);
+  m_exists.resize(size);
   inputfile.clear();
   inputfile.seekg(0, inputfile.beg);
   while(getline(inputfile, oneline))
@@ -245,7 +246,7 @@ void Detectors::readFile(std::string const & filename)
     is>>label>>name;
     if (oneline.size()>1)
     {
-      exist_array[label] = true;
+      m_exists[label] = true;
       m_list[label] = name;
       if (name!="") m_labels_array[name] = label;
     }
@@ -270,19 +271,19 @@ void Detectors::makeArrays()
     while(is >> str)
     {
       if (str == "red" || str == "green" || str == "black" || str == "blue" || str == "ge"){
-        isGe    [label] = true;
+        isGe   [label] = true;
         m_types[label] = types_handled[0];
       }
       else if (str == "BGO1" || str == "BGO2"){
-        isBGO   [label] = true;
+        isBGO  [label] = true;
         m_types[label] = types_handled[1];
       }
       else if (str == "FATIMA"){
-        isLaBr3 [label] = true;
+        isLaBr3[label] = true;
         m_types[label] = types_handled[2];
       }
       else if (str == "PARIS" ){
-        isParis [label] = true;
+        isParis[label] = true;
         m_types[label] = types_handled[3];
       }
       else if (str == "DSSD" ){
@@ -291,11 +292,11 @@ void Detectors::makeArrays()
       }
       else if (str == "EDEN"  ){
         m_types[label] = types_handled[5];
-        isEden  [label] = true;
+        isEden [label] = true;
       }
       else if (str == "RF"    ){
         m_types[label] = types_handled[6];
-        isRF    [label] = true;
+        isRF   [label] = true;
       }
       // Add here any additionnal detector :
       
@@ -331,12 +332,12 @@ void Detectors::makeArrays()
     isClover[label] = (label>22 && label<167);
     labelToClover[label] = uchar_cast((isClover[label]) ? (label-23)%6 : -1);
      
-    if (exist_array[label])
+    if (m_exists[label])
     {
       // The compressed labels is filled with the current number of detectors :
-      compressedLabel[label] = nb_detectors;
+      compressedLabel[label] = m_nb_detectors;
       // Increment the number of detectors :
-      nb_detectors++;
+      m_nb_detectors++;
 
       // Counts the number of detectors for the current type :
       auto const & detector_index = m_type_counter[m_types[label]]++; // NB: Returns the number before increment
@@ -347,23 +348,16 @@ void Detectors::makeArrays()
       m_names[_type].push_back(det_name);
       // Lookup table between the global label from the type and detector index :
       m_labels[_type].push_back(label);
-
-
     }
     else compressedLabel[label] = -1;
   }
 
-  for (auto const & type : types_handled)
-  {// To make the list of all the detector types present in the ID file :
-    if (m_type_counter[type]>0) m_types_ID_array.push_back(type);
-  }
+  // Make the list of all the detector types present in the ID file :
+  for (auto const & type : types_handled) if (m_type_counter[type]>0) m_types_ID.push_back(type);
+  
   // Reverse lookup : 
-  for (size_t index = 0; index<m_types_ID_array.size(); index++)
-  {
-    m_types_index[m_types_ID_array[index]] = index;
-  }
+  for (size_t index = 0; index<m_types_ID.size(); index++) m_types_index[m_types_ID[index]] = index;
 }
-
 
 std::unordered_map<dType, THBinning> Detectors::ADC_bins = 
 {
@@ -381,7 +375,7 @@ std::unordered_map<dType, THBinning> Detectors::energy_bins =
   {"ge"     , {10000, 0., 10000.}},
   {"bgo"    , {1000 , 0., 10000.}},
   {"labr"   , {2000 , 0., 10000.}},
-  {"paris"  , {1000 , 0., 10000.}},
+  {"paris"  , {2000 , 0., 10000.}},
   {"eden"   , {1000 ,-2., 2.    }},
   {"dssd"   , {1000 , 0., 20000.}},
   {"default", {1000 , 0., 50000.}}
@@ -426,7 +420,7 @@ std::unordered_map<dType, THBinning> Detectors::energy_bidim_bins =
 
   // Detectors& operator=(Detectors otherList)
   // {
-  //   exist_array          = otherList.exist_array;
+  //   m_exists          = otherList.m_exists;
   //   m_ok            = otherList.m_ok;
   //   m_filename      = otherList.m_filename;
   //   m_list          = otherList.m_list;
