@@ -458,6 +458,9 @@ void RunMatrixator::Write()
   file -> cd();
 
   test_paris_vs_mult.Write();
+  matrix_Clovers_prompt.Write();
+  matrix_Clovers_delayed.Write();
+  matrix_Clovers_delayed_vs_prompt.Write();
 
   // Writting the matrices :
   for (auto & type_matrice : matricesPrompt)   for ( auto & matrice : type_matrice.second ) matrice.Write();
