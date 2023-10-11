@@ -392,6 +392,7 @@ inline void MTTHist<THist>::Merge_thread(MTTHist<THist> & Histos)
 template<class THist>
 void MTTHist<THist>::Merge()
 {
+  print("Merging", m_str_name);
   if (!m_exists || m_collection.size()==0 || m_collection[0] -> IsZombie() || this -> Integral() < 1)
   {
     m_exists = false;
@@ -447,7 +448,7 @@ void MTTHist<THist>::Write_i(int const & thread_index)
 template<class THist>
 void MTTHist<THist>::Write()
 {
-  
+  if (m_integral<1) return;
   if (MTObject::ON && MTObject::isMasterThread()) this -> Merge();
   if (MTObject::ON && !MTObject::isMasterThread()) this -> Write_i(MTObject::getThreadIndex());
   else

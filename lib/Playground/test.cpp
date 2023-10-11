@@ -15,6 +15,7 @@ int main(int argc, char ** argv)
 {
   int nb_files = -1;
   int nb_threads = 1;
+  std::string index_file = "index_129.list";
   if (argc > 1)
   {
     std::string command;
@@ -29,23 +30,29 @@ int main(int argc, char ** argv)
         MTObject::setThreadsNb(nb_threads);
         MTObject::Initialize();
       }
+      else if (command == "-i") {index_file = argv[++i];}
       else {throw std::runtime_error("command " + command + " unkown");}
     }
   }
 
-  // detectors.load("index_129.list");
-  detectors.load("index_129.list");
+  detectors.load(index_file);
+
+  std::string datapath;
+  auto const home = Path::home().string();
+  if (home == "/home/corentin/") datapath = home+"faster_data/";
+  else if (home == "/home/faster/") datapath = home+"nuball2/";
+
+  // --- RUN MATRIXATOR : --- //
 
   RunMatrixator rm;
-  rm.dontMatrixate("ge");
-  rm.keepSingles();
-  // rm.dontMatrixate("paris");
-  // Timeshifts ts("/home/corentin/faster_data/N-SI-136-root_P/Timeshifts/run_75.dT");
-  Timeshifts ts("../../../N-SI-136-root_P/Timeshifts/run_75.dT");
+  Timeshifts ts;
+  ts.load(datapath+"N-SI-136-root_P/Timeshifts/run_75.dT");
   rm.setTimeshifts(ts);
+  rm.dontMatrixate("ge");
+  // rm.dontMatrixate("paris");
+  // rm.keepSingles();
   rm.setCalibration("../../136/conversion_200ns/136_final.calib");
-  // rm.run("/home/corentin/faster_data/N-SI-136/run_75.fast/");
-  rm.run("../../../N-SI-136/run_75.fast/");
+  rm.run(datapath+"N-SI-136/run_75.fast/");
 
   // --- Up to date example : --- //
   // Calibration calib;

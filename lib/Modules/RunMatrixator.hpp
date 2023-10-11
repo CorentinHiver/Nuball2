@@ -100,7 +100,7 @@ private:
   std::unordered_map<dType, bool> m_dontMatrixateType;
   std::vector<Label> m_dontMatrixateLabel;
   bool m_keep_singles = 0;// Keep events with only one hit for the singles spectra
-  bool m_max_multiplicity = 20;
+  uchar m_max_multiplicity = 20;
 };
 
 void RunMatrixator::run(std::string const & runpath, std::string const & data)
@@ -126,6 +126,8 @@ void RunMatrixator::run(std::string const & runpath, std::string const & data)
   }
   else throw_error("Unkown data kind ! Only handles root and fast");
   
+  print("Reading done in", timer(), timer.unit());
+
   // Writes the matrices down :
   this -> Write();
   print(timer(), timer.unit(), "to matrixate", m_runpath);
@@ -312,7 +314,7 @@ void RunMatrixator::fillMatrixes(Clovers const & clovers, Event const & event)
     auto & singlePrompt = singlesPrompt[type][index_i];
     auto & singleDelayed = singlesDelayed[type][index_i];
 
-    prompt = (time_i>-10) && (time_i<10);
+    prompt = (time_i>-10) && (time_i<7);
     delayed = (time_i>60) && (time_i<160);
 
     if (!(prompt || delayed)) continue;
@@ -327,7 +329,6 @@ void RunMatrixator::fillMatrixes(Clovers const & clovers, Event const & event)
         if (prompt) 
         {
           test_paris_vs_mult.Fill(event.mult, nrj);
-          print(event.mult, nrj);
           singlePrompt.Fill(nrj);
         }
         else if (delayed) singleDelayed.Fill(nrj);
