@@ -327,6 +327,7 @@ void RunMatrixator::fillMatrixes(Clovers const & clovers, Event const & event)
         if (prompt) 
         {
           test_paris_vs_mult.Fill(event.mult, nrj);
+          print(event.mult, nrj);
           singlePrompt.Fill(nrj);
         }
         else if (delayed) singleDelayed.Fill(nrj);
