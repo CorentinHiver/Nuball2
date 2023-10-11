@@ -44,16 +44,19 @@ int main(int argc, char ** argv)
 
   // --- RUN MATRIXATOR : --- //
 
-  RunMatrixator rm;
-  Timeshifts ts;
-  ts.load(datapath+"N-SI-136-root_P/Timeshifts/run_75.dT");
-  rm.setTimeshifts(ts);
-  rm.dontMatrixate("ge");
-  rm.maxRawMult(10);
   // rm.dontMatrixate("paris");
   // rm.keepSingles();
-  rm.setCalibration("../../136/conversion_200ns/136_final.calib");
-  rm.run(datapath+"N-SI-136/run_75.fast/");
+  for (int run_i = 75; run_i<123; run_i++)
+  {
+    RunMatrixator rm;
+    rm.dontMatrixate("ge");
+    rm.maxRawMult(10);
+    rm.setCalibration("../../136/conversion_200ns/136_final.calib");
+    std::string run_str = "run_"+std::to_string(run_i); 
+    Timeshifts ts(datapath+"N-SI-136-root_P/Timeshifts/"+run_str+".dT");
+    rm.setTimeshifts(ts);
+    rm.run(datapath+"N-SI-136/"+run_str+".fast/");
+  }
 
   // --- Up to date example : --- //
   // Calibration calib;
