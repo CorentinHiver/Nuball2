@@ -88,10 +88,22 @@ private:
   std::unordered_map<dType, Vector_MTTHist<TH1F>> singlesPrompt2;   // To histogram nrj2 if needed (Paris, Eden...)
   std::unordered_map<dType, Vector_MTTHist<TH1F>> singlesDelayed;   // Normal singles spectra
   std::unordered_map<dType, Vector_MTTHist<TH1F>> singlesDelayed2;  // To histogram nrj2 if needed (Paris, Eden...)
+
+  // Multiplity 1 or 2 :
+  std::unordered_map<dType, Vector_MTTHist<TH1F>> singlesPrompt_M2;    // Normal singles spectra
+  std::unordered_map<dType, Vector_MTTHist<TH1F>> singlesPrompt2_M2;   // To histogram nrj2 if needed (Paris, Eden...)
+  std::unordered_map<dType, Vector_MTTHist<TH1F>> singlesDelayed_M2;   // Normal singles spectra
+  std::unordered_map<dType, Vector_MTTHist<TH1F>> singlesDelayed2_M2;  // To histogram nrj2 if needed (Paris, Eden...)
+  
   MTTHist<TH2F> test_paris_vs_mult;
   MTTHist<TH2F> matrix_Clovers_prompt;
   MTTHist<TH2F> matrix_Clovers_delayed;
   MTTHist<TH2F> matrix_Clovers_delayed_vs_prompt;
+
+  MTTHist<TH1F> clover_proj_prompt;
+  MTTHist<TH1F> clover_proj_M2_prompt;
+  MTTHist<TH1F> clover_proj_delayed;
+  MTTHist<TH1F> clover_proj_M2_delayed;
   Calibration m_calibration;
   Timeshifts m_timeshifts;
   Path m_runpath;
@@ -141,10 +153,15 @@ void RunMatrixator::Initialize()
 
   test_paris_vs_mult.reset("test_paris_vs_mult", "Paris vs Mult", m_max_multiplicity,0,m_max_multiplicity, 1000,0,10000);
 
-  // --- Clover bidims initialisation : --- //
-  matrix_Clovers_prompt.reset("pp","matrix_Clovers_prompt;Clover E [keV];Clover E [keV]", 10000,0,10000, 10000,0,10000);
-  matrix_Clovers_delayed.reset("dd","matrix_Clovers_delayed;Clover E [keV];Clover E [keV]", 10000,0,10000, 10000,0,10000);
-  matrix_Clovers_delayed_vs_prompt.reset("dp","Clovers delayed VS prompt;Prompt E [keV];Delayed E [keV]", 10000,0,10000, 10000,0,10000);
+  // --- Clover initialisation : --- //
+  print("Initialize clovers");
+  clover_proj_prompt.reset("clover_proj_prompt", "clover prompt total projection;Clover E [keV]", 10000,0,10000);
+  clover_proj_M2_prompt.reset("clover_proj_M2_prompt", "clover prompt total projection multiplicity<=2;Clover E [keV]", 10000,0,10000);
+  clover_proj_delayed.reset("clover_proj_delayed", "clover delayed total projection;Clover E [keV]", 10000,0,10000);
+  clover_proj_M2_delayed.reset("clover_proj_M2_delayed", "clover delayed total projection multiplicity<=2;Clover E [keV]", 10000,0,10000);
+  matrix_Clovers_prompt.reset("pp","matrix_Clovers_prompt;Clover E [keV];Clover E [keV]", 7000,0,7000, 7000,0,7000);
+  matrix_Clovers_delayed.reset("dd","matrix_Clovers_delayed;Clover E [keV];Clover E [keV]", 7000,0,7000, 7000,0,7000);
+  matrix_Clovers_delayed_vs_prompt.reset("dp","Clovers delayed VS prompt;Prompt E [keV];Delayed E [keV]", 7000,0,7000, 7000,0,7000);
 
   // --- All the matrices and single spectra initialisation : --- //
   for (auto const & type : detectors.types())
@@ -162,6 +179,8 @@ void RunMatrixator::Initialize()
     // Singles : 
     singlesPrompt [type].resize(nb_det);
     singlesDelayed[type].resize(nb_det);
+    singlesPrompt_M2 [type].resize(nb_det);
+    singlesDelayed_M2[type].resize(nb_det);
 
     // QDC2 :
     if (type == "paris")
@@ -171,6 +190,8 @@ void RunMatrixator::Initialize()
       {
         matricesPrompt2 [type].resize(nb_det);
         matricesDelayed2[type].resize(nb_det);
+        singlesPrompt2_M2 [type].resize(nb_det);
+        singlesDelayed2_M2[type].resize(nb_det);
       }
 
       // Singles : 
@@ -195,7 +216,9 @@ void RunMatrixator::Initialize()
       
       // Singles :
       singlesPrompt [type][type_i].reset((name+"_prompt_singles").c_str(),  (name+" Prompt singles;Clover [keV];" +name+" energy [keV]").c_str(), binning_energy.bins,binning_energy.min,binning_energy.max);
-      singlesDelayed[type][type_i].reset((name+"_delayed_singles").c_str(), (name+" Delayed singles;Clover [keV];"+name+" energy [keV]").c_str(), binning_energy.bins,binning_energy.min,binning_energy.max);
+      singlesDelayed[type][type_i].reset((name+"_delayed_singles").c_str(), (name+" Delayed singles;Clover [keV];"+name+" energy [keV]").c_str(), binning_energy.bins,binning_energy.min,binning_energy.max); 
+      singlesPrompt_M2 [type][type_i].reset((name+"_prompt_singles_M2").c_str(),  (name+" Prompt singles multiplicity<=2;Clover [keV];" +name+" energy [keV]").c_str(), binning_energy.bins,binning_energy.min,binning_energy.max);
+      singlesDelayed_M2[type][type_i].reset((name+"_delayed_singles_M2").c_str(), (name+" Delayed singles multiplicity<=2;Clover [keV];"+name+" energy [keV]").c_str(), binning_energy.bins,binning_energy.min,binning_energy.max); 
 
       // QDC2 :
       if (type == "paris")
@@ -210,6 +233,8 @@ void RunMatrixator::Initialize()
         // Singles :
         singlesPrompt2 [type][type_i].reset((name+"_prompt_singles_dqc2").c_str(),  (name+" Prompt singles QDC2;Clover [keV];" +name+" QDC2 [keV]").c_str(), binning_energy.bins,binning_energy.min,binning_energy.max);
         singlesDelayed2[type][type_i].reset((name+"_delayed_singles_dqc2").c_str(), (name+" Delayed singles QDC2;Clover [keV];"+name+" QDC2 [keV]").c_str(), binning_energy.bins,binning_energy.min,binning_energy.max);
+        singlesPrompt2_M2 [type][type_i].reset((name+"_prompt_singles_dqc2_M2").c_str(),  (name+" Prompt singles QDC2 multiplicity<=2;Clover [keV];" +name+" QDC2 [keV]").c_str(), binning_energy.bins,binning_energy.min,binning_energy.max);
+        singlesDelayed2_M2[type][type_i].reset((name+"_delayed_singles_dqc2_M2").c_str(), (name+" Delayed singles QDC2 multiplicity<=2;Clover [keV];"+name+" QDC2 [keV]").c_str(), binning_energy.bins,binning_energy.min,binning_energy.max);
       }
     }
   }
@@ -287,7 +312,9 @@ void RunMatrixator::loadData_root(TTree * tree, Event & event)
 
 void RunMatrixator::fillMatrixes(Clovers const & clovers, Event const & event)
 {
-  if (event.mult > m_max_multiplicity) return;
+  auto const & mult = event.mult;
+  if (mult > m_max_multiplicity) return;
+  bool mult_M2 = mult<3;
 
   // For Ge and BGO : 
   bool prompt = false;
@@ -298,7 +325,7 @@ void RunMatrixator::fillMatrixes(Clovers const & clovers, Event const & event)
   bool paris_is_nai = false;
 
   // --- Looping through all the crystals : --- //
-  for(int hit_i = 0; hit_i<event.mult; hit_i++)
+  for(int hit_i = 0; hit_i<mult; hit_i++)
   {
     auto const & label = event.labels[hit_i];
     if (!detectors.exists(label) || event.pileups[hit_i]) continue;
@@ -311,41 +338,70 @@ void RunMatrixator::fillMatrixes(Clovers const & clovers, Event const & event)
 
     auto & matricePrompt = matricesPrompt[type][index_i];
     auto & matriceDelayed = matricesDelayed[type][index_i];
+
     auto & singlePrompt = singlesPrompt[type][index_i];
     auto & singleDelayed = singlesDelayed[type][index_i];
+    auto & singlePrompt_M2 = singlesPrompt_M2[type][index_i];
+    auto & singleDelayed_M2 = singlesDelayed_M2[type][index_i];
+
+    auto & singlePrompt2 = singlesPrompt[type][index_i];
+    auto & singleDelayed2 = singlesDelayed[type][index_i];
+    auto & singlePrompt2_M2 = singlesPrompt2_M2[type][index_i];
+    auto & singleDelayed2_M2 = singlesDelayed2_M2[type][index_i];
 
     prompt = (time_i>-10) && (time_i<7);
     delayed = (time_i>60) && (time_i<160);
 
     if (!(prompt || delayed)) continue;
 
+
     // Correct handling of Paris :
     if (isParis[label])
     {
       paris_is_labr = parisIsLaBr(nrj, nrj2);
       paris_is_nai = parisIsNaI(nrj, nrj2);
-      if (paris_is_labr) 
+      if(paris_is_labr) 
       {
         if (prompt) 
         {
-          test_paris_vs_mult.Fill(event.mult, nrj);
           singlePrompt.Fill(nrj);
+          if (mult_M2) singlePrompt_M2.Fill(nrj);
         }
-        else if (delayed) singleDelayed.Fill(nrj);
+        else if (delayed) 
+        {
+          singleDelayed.Fill(nrj);
+          if (mult_M2) singleDelayed_M2.Fill(nrj);
+        }
       }
-      else if(paris_is_nai) 
+      else if (paris_is_nai)
       {
-        if (prompt) singlesPrompt2[type][index_i].Fill(nrj2);
-        else if (delayed) singlesDelayed2[type][index_i].Fill(nrj2);
+        if (prompt) 
+        {
+          singlePrompt2.Fill(nrj);
+          if (mult_M2) singlePrompt2_M2.Fill(nrj);
+        }
+        else if (delayed) 
+        {
+          singleDelayed2.Fill(nrj);
+          if (mult_M2) singleDelayed2_M2.Fill(nrj);
+        }
       }
-      else continue; // Reject intermediate structures 
+      else continue; // Reject hit which are not labr3 or nai 
     }
 
     // All the other kind of detectors :
     else
     {
-           if (prompt ) singlePrompt .Fill(nrj);
-      else if (delayed) singleDelayed.Fill(nrj);
+      if (prompt) 
+      {
+        singlePrompt.Fill(nrj);
+        if (mult_M2) singlePrompt_M2.Fill(nrj);
+      }
+      else if (delayed) 
+      {
+        singleDelayed.Fill(nrj);
+        if (mult_M2) singleDelayed_M2.Fill(nrj);
+      }
     }
 
     if(m_dontMatrixateLabel[label]) continue;
@@ -354,20 +410,19 @@ void RunMatrixator::fillMatrixes(Clovers const & clovers, Event const & event)
     for (auto const & clover_index : clovers.promptClovers)
     {
       // Only doing prompt-prompt matrices :
-      if (!prompt) continue; 
+      if (!prompt) continue; // Here the variable prompt refers to the crystal, not the clover
 
       auto const & clover = clovers.PromptClovers[clover_index];
-      auto const & nrj_clover = clover.nrj;
-      if (clover.nb_BGO>0) continue; // Compton cleaning done here 
+      if (clover.nb_BGO>0) continue; // Clover compton cleaning done here 
 
       // Reject the hit if is located in the same clover as the ref clover (= reject diagonal Ge)
       if (isClover[label]) {if (clover_index == Clovers::label_to_clover(label) || !prompt) continue; }
       else if (isParis[label])
       {
-        if (paris_is_labr) matricePrompt.Fill(nrj_clover, nrj); // Fill the LaBr3 part
-        else if (paris_is_nai) matricesPrompt2[type][index_i].Fill(nrj_clover, nrj2);// Fill the NaI part
+        if (paris_is_labr) matricePrompt.Fill(clover.nrj, nrj); // Fill the LaBr3 part
+        else if (paris_is_nai) matricesPrompt2[type][index_i].Fill(clover.nrj, nrj2);// Fill the NaI part
       }
-      matricePrompt.Fill(nrj_clover, nrj);
+      matricePrompt.Fill(clover.nrj, nrj);
     }
 
     // Looping through the delayed clovers (add-backed, no compton clean)
@@ -377,18 +432,17 @@ void RunMatrixator::fillMatrixes(Clovers const & clovers, Event const & event)
       if (!delayed) continue;
 
       auto const & clover = clovers.DelayedClovers[clover_index];
-      auto const & nrj_clover = clover.nrj;
-      if (clover.nb_BGO>0) continue; // Compton cleaning done here 
+      if (clover.nb_BGO>0) continue; // Clover compton cleaning done here 
 
       // Reject the hit if is located in the same clover as the ref clover (= reject diagonal Ge) :
       if (isClover[label]) {if (clover_index == Clovers::label_to_clover(label)) continue; }
       else if (isParis[label])
       {
-        if (paris_is_labr) matriceDelayed.Fill(nrj_clover, nrj); // Fill the LaBr3 part
-        else if (paris_is_nai) matricesDelayed2[type][index_i].Fill(nrj_clover, nrj2);// Fill the NaI part
+        if (paris_is_labr) matriceDelayed.Fill(clover.nrj, nrj); // Fill the LaBr3 part
+        else if (paris_is_nai) matricesDelayed2[type][index_i].Fill(clover.nrj, nrj2);// Fill the NaI part
         continue;
       }
-      matriceDelayed.Fill(nrj_clover, nrj);
+      matriceDelayed.Fill(clover.nrj, nrj);
     }
   }
 
@@ -398,7 +452,10 @@ void RunMatrixator::fillMatrixes(Clovers const & clovers, Event const & event)
     // Extract the prompt clover :
     auto const & clover_prompt_i = clovers.promptClovers[prompt_i];
     auto const & clover_prompt = clovers.PromptClovers[clover_prompt_i];
-    if (clover_prompt.nb_BGO>0) continue;
+    if (clover_prompt.nb_BGO>0) continue;// Compton cleaning
+
+    clover_proj_prompt.Fill(clover_prompt.nrj);
+    if (mult_M2) clover_proj_M2_prompt.Fill(clover_prompt.nrj);
 
     // Delayed VS prompt :
     for (auto const & clover_index_delayed : clovers.delayedClovers)
@@ -411,18 +468,23 @@ void RunMatrixator::fillMatrixes(Clovers const & clovers, Event const & event)
     // Prompt-prompt :
     for (size_t prompt_j = prompt_i+1; prompt_j<clovers.promptClovers.size(); prompt_j++)
     {
-      auto const & clover_index_prompt_j = clovers.promptClovers[prompt_j];
-      auto const & clover_prompt_j = clovers.PromptClovers[clover_index_prompt_j];
-      matrix_Clovers_prompt.Fill(clover_prompt.nrj, clover_prompt_j.nrj);
+      auto const & clover_prompt_j = clovers.promptClovers[prompt_j];
+      auto const & clover_prompt_bis = clovers.PromptClovers[clover_prompt_j];
+      if (clover_prompt_bis.nb_BGO>0) continue;// Compton cleaning
+      matrix_Clovers_prompt.Fill(clover_prompt.nrj, clover_prompt_bis.nrj);
     }
   }
 
-  // --- Creating clover prompt matrices : --- //
+  // --- Creating clover delayed matrices : --- //
   for (size_t delayed_i = 0; delayed_i<clovers.delayedClovers.size(); delayed_i++) 
   {
     // Extract the delayed clover :
     auto const & clover_index_delayed = clovers.delayedClovers[delayed_i];
     auto const & clover_delayed = clovers.DelayedClovers[clover_index_delayed];
+    if (clover_delayed.nb_BGO>0) continue;// Compton cleaning
+    
+    clover_proj_delayed.Fill(clover_delayed.nrj);
+    if (mult_M2) clover_proj_M2_delayed.Fill(clover_delayed.nrj);
 
     // Delayed-delayed :
     for (size_t delayed_j = delayed_i+1; delayed_j<clovers.delayedClovers.size(); delayed_j++)
@@ -462,6 +524,11 @@ void RunMatrixator::Write()
   matrix_Clovers_delayed.Write();
   matrix_Clovers_delayed_vs_prompt.Write();
 
+  clover_proj_prompt.Write();
+  clover_proj_M2_prompt.Write();
+  clover_proj_delayed.Write();
+  clover_proj_M2_delayed.Write();
+
   // Writting the matrices :
   for (auto & type_matrice : matricesPrompt)   for ( auto & matrice : type_matrice.second ) matrice.Write();
   for (auto & type_matrice : matricesPrompt2)  for ( auto & matrice : type_matrice.second ) matrice.Write();
@@ -474,22 +541,15 @@ void RunMatrixator::Write()
   for (auto & type_single : singlesDelayed)  for ( auto & single : type_single.second ) single.Write();
   for (auto & type_single : singlesDelayed2) for ( auto & single : type_single.second ) single.Write();
 
+  // Writting the singles with multiplicity <= 2:
+  for (auto & type_single : singlesPrompt_M2)   for ( auto & single : type_single.second ) single.Write();
+  for (auto & type_single : singlesPrompt2_M2)  for ( auto & single : type_single.second ) single.Write();
+  for (auto & type_single : singlesDelayed_M2)  for ( auto & single : type_single.second ) single.Write();
+  for (auto & type_single : singlesDelayed2_M2) for ( auto & single : type_single.second ) single.Write();
+
   file -> Write();
   file -> Close();
   print(outRoot, "written");
 }
 
 #endif //RUNMATRIXATOR_HPP
-
-
-
-
-/*
-
-  void dontMatrixate(std::string const & type) 
-  {
-    // Initialise if not :
-    
-  }
-
-*/

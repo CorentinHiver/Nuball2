@@ -49,6 +49,7 @@ int main(int argc, char ** argv)
   ts.load(datapath+"N-SI-136-root_P/Timeshifts/run_75.dT");
   rm.setTimeshifts(ts);
   rm.dontMatrixate("ge");
+  rm.maxRawMult(10);
   // rm.dontMatrixate("paris");
   // rm.keepSingles();
   rm.setCalibration("../../136/conversion_200ns/136_final.calib");

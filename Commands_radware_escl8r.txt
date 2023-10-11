@@ -1,0 +1,105 @@
+AB       add E2 gammas to top of band in level scheme
+AB1      add M1 gammas to top of band in level scheme
+AD       add (combine) a second .gls level scheme file
+AG       add gamma to level scheme
+AL       add level to level scheme
+AT       add general-pupose text labels
+CE       change energy labels of levels
+CG       change labels of gammas
+CL       change spin labels of levels
+DB       delete band from level scheme
+DG       delete gamma from level scheme
+DL       delete level from level scheme
+DT       delete general-pupose text labels
+EB       edit parameters of band(s) in level scheme
+EG       edit parameters of gamma(s) in level scheme
+EL       edit parameters of level(s) in level scheme
+ET       edit general-pupose text labels
+
+
+EX       expand level scheme display using cursor
+FL       fit energies of level scheme levels
+FP       modify default figure parameters
+GB       move in-band gammas of bands using cursor
+HC       generate postscript level scheme figure
+LB       move spin labels of all levels in bands using cursor
+LG       move labels of gammas
+LE       move energy labels of levels using cursor
+LL       move spin labels of individual levels
+LW       change widths of levels using cursor
+MB       move band in level scheme
+MG       move gamma in level scheme
+ML       move level between bands
+MM       move multiple bands in level scheme
+MO       move level scheme display using cursor
+MT       move general-pupose text labels
+OC       open/close gap in level scheme using cursor
+
+
+RD       redisplay level scheme
+RD1      redisplay entire level scheme
+RG       read new .gls level scheme file
+WG       write level scheme to new .gls file
+SG       swap ordering of gammas feeding/deexciting levels
+SL       save level scheme in current file
+TG       toggle tentative/normal gammas
+TL       toggle tentative/thick/normal levels
+TS       test level scheme gamma-ray energy and intensity sums
+UD       move a bunch of connected levels Up or Down in energy
+UE       undo the most recent edits/changes to the level scheme
+RE       redo the most recently undone edits to the level scheme
+XG       examine gammas in level scheme
+ST       stop and exit program
+
+
+g [w]     set gate at energy "g",      [width "w"*FWHM]
++g [w]    add gate at energy "g",      [width "w"*FWHM]
+-g [w]    subtract gate at energy "g", [width "w"*FWHM]
+.g [w]    "and" gate at energy "g",    [width "w"*FWHM]
+           (take arithmetic minimum of two spectra for each channel)
+*x        multiply current gate by factor "x"
+X g [w]   examine gate for peak at energy "g", [width "w"*FWHM]
+L         define/edit gamma-ray lists
+RL,WL     read/write gamma-ray lists from/to a disk file.
+GL l [w]  sum gates for all peaks listed in list "l", [width "w"*FWHM]
+XL l [w]  examine gate for peaks listed in list "l", [width "w"*FWHM]
+PR        get one-dimensional projection of data
+G         select gate using cursor
+ES        check for energy sums with cursor
+WS        write spectra to gf3-type disk file
+SS [file]   save spectra to a special .gat disk file
+RS [file]   read previously saved spectra from a .gat disk file
++RS [file]  add previously saved gate
+-RS [file]  subtract previously saved gate n .RS [file]  "and" previously saved gate
+
+
+NX,NY  |
+X0,Y0  | set up display axes, as for gf3
+XA,YA  |
+NY+    increase y scale / shrink spectrum vertically NY-    decrease y scale / expand spectrum vertically MY n   set Minimum value of Y autoscale (counts) to n
+EX     expand spectrum display using cursor
+MU     move display up using cursor
+MD     move display down using cursor
+NG n   display n gates on graphics screen, n = 1 to 10
+PF     set up or disable peak search for display
+DS     redisplay spectrum
+DS1    redisplay entire spectrum
+DC     toggle on/off Display of Calculated spectra
+CR     call cursor
+SHC    create HardCopy of Spectrum window
+SU     sum spectrum over channels using cursor
+
+
+CA     get new energy and efficiency calibrations
+CB     get new background spectra etc
+CF     command file (same options as gf3)
+PS     modify peak shape and width parameters
+RN     renormalise ratio of level scheme intensities to peak areas
+FB     fit both energies and intensities of transitions
+FE     fit energies of level scheme transitions
+FI     fit intensities of level scheme transitions
+FW     fit peak width parameters to current gate spectrum
+UC     undo the most recent gates/changes to the escl8r file
+RC     redo the most recently undone gates/changes to the escl8r file
+ST     stop and exit program
+
