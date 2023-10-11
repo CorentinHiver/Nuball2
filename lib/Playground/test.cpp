@@ -38,6 +38,7 @@ int main(int argc, char ** argv)
 
   RunMatrixator rm;
   rm.dontMatrixate("ge");
+  rm.keepSingles();
   // rm.dontMatrixate("paris");
   // Timeshifts ts("/home/corentin/faster_data/N-SI-136-root_P/Timeshifts/run_75.dT");
   Timeshifts ts("../../../N-SI-136-root_P/Timeshifts/run_75.dT");

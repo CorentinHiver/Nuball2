@@ -151,6 +151,7 @@ bool EventBuilder_136::build(Hit const & hit)
         // The current hit is set to be the reference hit for next call :
         this -> set_last_hit(hit);
         m_status = 0; // No event detected
+        if (m_keep_singles) return true;
       }
     break;
     case 1: // If we are building an event (i.e. the two previous hit are in coincidence):
@@ -174,7 +175,7 @@ bool EventBuilder_136::build(Hit const & hit)
     break;
     default: throw_error("event building issues, call DEV");
   }
-  return false; // No processing of the data
+  return false; // The event is not ready to be processed
 }
 
 void EventBuilder_136::setFirstRF(Hit const & rf_hit)

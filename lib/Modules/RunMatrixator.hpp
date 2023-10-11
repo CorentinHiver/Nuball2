@@ -74,6 +74,9 @@ public:
     m_dontMatrixateLabel[label] = true;
   }
 
+  void keepSingles(bool const & b = true) {m_keep_singles = b;}
+  void maxRawMult(uchar const & max_multiplicity = 20) {m_max_multiplicity = max_multiplicity;}
+
 private:
   static void dispatch_root_reader(TTree * tree, Event & event, RunMatrixator & rm);
   static void dispatch_faster_reader(Hit & hit, FasterReader & reader, RunMatrixator & rm);
@@ -85,6 +88,7 @@ private:
   std::unordered_map<dType, Vector_MTTHist<TH1F>> singlesPrompt2;   // To histogram nrj2 if needed (Paris, Eden...)
   std::unordered_map<dType, Vector_MTTHist<TH1F>> singlesDelayed;   // Normal singles spectra
   std::unordered_map<dType, Vector_MTTHist<TH1F>> singlesDelayed2;  // To histogram nrj2 if needed (Paris, Eden...)
+  MTTHist<TH2F> test_paris_vs_mult;
   MTTHist<TH2F> matrix_Clovers_prompt;
   MTTHist<TH2F> matrix_Clovers_delayed;
   MTTHist<TH2F> matrix_Clovers_delayed_vs_prompt;
@@ -95,6 +99,8 @@ private:
   // Parameters :
   std::unordered_map<dType, bool> m_dontMatrixateType;
   std::vector<Label> m_dontMatrixateLabel;
+  bool m_keep_singles = 0;// Keep events with only one hit for the singles spectra
+  bool m_max_multiplicity = 20;
 };
 
 void RunMatrixator::run(std::string const & runpath, std::string const & data)
@@ -129,6 +135,9 @@ void RunMatrixator::Initialize()
 {
   // Hit::setExternalTime(true); // Allows to directly calculate the rf time instead of the relative time
   if (!detectors) {print("Please initialize the Detectors"); throw_error("Detectors not loaded");}
+  if (m_keep_singles) Builder::keepSingles();
+
+  test_paris_vs_mult.reset("test_paris_vs_mult", "Paris vs Mult", m_max_multiplicity,0,m_max_multiplicity, 1000,0,10000);
 
   // --- Clover bidims initialisation : --- //
   matrix_Clovers_prompt.reset("pp","matrix_Clovers_prompt;Clover E [keV];Clover E [keV]", 10000,0,10000, 10000,0,10000);
@@ -171,8 +180,6 @@ void RunMatrixator::Initialize()
     {
       auto const & name = detectors.name(type, type_i);
       auto const & label = detectors.label(type, type_i);
-
-      
 
       auto const & binning_bidim = detectors.energyBidimBin(type);
       auto const & binning_energy = detectors.energyBin(type);
@@ -278,13 +285,15 @@ void RunMatrixator::loadData_root(TTree * tree, Event & event)
 
 void RunMatrixator::fillMatrixes(Clovers const & clovers, Event const & event)
 {
-    // For Ge and BGO : 
-    bool prompt = false;
-    bool delayed = false;
+  if (event.mult > m_max_multiplicity) return;
 
-    // For paris : 
-    bool paris_is_labr = false;
-    bool paris_is_nai = false;
+  // For Ge and BGO : 
+  bool prompt = false;
+  bool delayed = false;
+
+  // For paris : 
+  bool paris_is_labr = false;
+  bool paris_is_nai = false;
 
   // --- Looping through all the crystals : --- //
   for(int hit_i = 0; hit_i<event.mult; hit_i++)
@@ -315,7 +324,11 @@ void RunMatrixator::fillMatrixes(Clovers const & clovers, Event const & event)
       paris_is_nai = parisIsNaI(nrj, nrj2);
       if (paris_is_labr) 
       {
-        if (prompt) singlePrompt.Fill(nrj);
+        if (prompt) 
+        {
+          test_paris_vs_mult.Fill(event.mult, nrj);
+          singlePrompt.Fill(nrj);
+        }
         else if (delayed) singleDelayed.Fill(nrj);
       }
       else if(paris_is_nai) 
@@ -441,6 +454,8 @@ void RunMatrixator::Write()
     file.reset(TFile::Open(outRoot.c_str(), "RECREATE"));
   }
   file -> cd();
+
+  test_paris_vs_mult.Write();
 
   // Writting the matrices :
   for (auto & type_matrice : matricesPrompt)   for ( auto & matrice : type_matrice.second ) matrice.Write();

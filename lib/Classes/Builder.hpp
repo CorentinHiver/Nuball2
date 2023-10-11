@@ -78,7 +78,8 @@ public:
     m_last_hit = hit;
   }
 
-  void keepSingles(bool const & b) {keep_singles = b;}
+  // Options :
+  static void keepSingles(bool const & b = true) {m_keep_singles = b;}
 
 protected:
 
@@ -89,7 +90,9 @@ protected:
 
   bool coincON = false;
   uchar m_status = 0;
-  bool keep_singles = false;
+  static bool m_keep_singles;
 };
+
+bool Builder::m_keep_singles = false;
 
 #endif //BUILDER_H

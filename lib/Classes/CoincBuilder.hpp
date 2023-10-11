@@ -70,7 +70,7 @@ bool CoincBuilder::build(Hit const & hit)
       m_single_hit = m_last_hit; // If last hit is not in time window of last hit, then
       m_last_hit = hit; // Building next event based on the last hit
       m_status = 0; // The current event is empty !
-      if (keep_singles && m_single_hit.label != 0)
+      if (m_keep_singles && m_single_hit.label != 0)
       {
         *m_event = m_single_hit;
         return true;
