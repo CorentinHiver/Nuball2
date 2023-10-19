@@ -208,7 +208,7 @@ public:
 
   // --- COMMON METHODS --- //
   void Print();
-  void Write();
+  void Write(bool const & writeEmpty = false);
   void Write_i(int const & thread_index);
   
   std::string const & name() const {return m_str_name;}
@@ -445,7 +445,7 @@ void MTTHist<THist>::Write_i(int const & thread_index)
 }
 
 template<class THist>
-void MTTHist<THist>::Write()
+void MTTHist<THist>::Write(bool const & writeEmpty)
 {
   if (m_integral<1) return;
   if (MTObject::ON && MTObject::isMasterThread()) this -> Merge();
@@ -455,7 +455,7 @@ void MTTHist<THist>::Write()
     if (   !m_exists
         || !m_merged
         || m_merged -> IsZombie()
-        || m_merged -> Integral() < 1) return;
+        || (!writeEmpty && m_merged -> Integral() < 1)) return;
     else
     {
       print("writting", m_str_name);

@@ -222,10 +222,12 @@ public:
   void reading (TTree * tree, std::string const & options);
   void writting(TTree * tree, std::string const & options = "lseqp");
 
-  IOptions read;
-  IOptions write;
+  static IOptions read;
+  static IOptions write;
 };
 
+IOptions Hit::read;
+IOptions Hit::write;
 // bool Hit::m_extTime = false;
 
 void Hit::reading(TTree * tree)

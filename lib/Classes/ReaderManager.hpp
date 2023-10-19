@@ -120,7 +120,7 @@ Bool_t ReaderManager::addFolder(std::string _foldername, int _nb_files)
     std::sort(listfile.begin(), listfile.end());// Sorts the entries
     Listfiles cut_listfile (listfile.begin(), listfile.begin()+_nb_files);// Take the nb_files first files
     if (m_listFiles.size() == 0) m_listFiles = cut_listfile;// Set cut_listfile to be the global list of files
-    else std::copy(m_listFiles.begin(), m_listFiles.end(), back_inserter(cut_listfile));// Add cut_listfile to the global list of files
+    else std::copy(m_listFiles.begin(), m_listFiles.end(), std::back_inserter(cut_listfile));// Add cut_listfile to the global list of files
     return true;
   }
   else

@@ -735,7 +735,6 @@ void Timeshifts::Fill(Event const & event, RF_Manager & rf)
     if (event.labels[loop_i] == m_time_ref_label && !coincFilled)
     {
       coincFilled = true;
-      // print("coucou");
       // Extract informations of the reference :
       auto const & refPos = loop_i; // Position of the reference in the event
       auto const & refE = event.nrjs[refPos]; // Energy deposited in the reference detector

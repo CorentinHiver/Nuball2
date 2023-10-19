@@ -95,7 +95,9 @@ public:
     mult (event.mult ),
     stamp(event.stamp),
     read (event.read ),
-    write(event.write)
+    write(event.write),
+    isReading  (event.isReading),
+    isWritting (event.isWritting)
   {
     std::copy_n(event.labels   , mult ,  labels );
     std::copy_n(event.times    , mult ,  times  );
@@ -122,18 +124,53 @@ public:
   Event& operator=(Hit const & hit);
   Event& operator=(Event const & evt);
 
+  // Timing management :
+  void setT0(Timestamp const & timestamp)
+  {
+    auto const & shift = Time_cast(this->stamp - timestamp);
+    (read.T) ? this -> timeShift_ns(shift/1000.) : this -> timeShift(shift);
+  }
+
+  void timeShift(Time const & shift)
+  {
+    for (int hit_i = 0; hit_i<mult; hit_i++)
+    {
+      times[hit_i]+=shift;
+    }
+  }
+
+  void timeShift_ns(double const & shift)
+  {
+    for (int hit_i = 0; hit_i<mult; hit_i++)
+    {
+      time2s[hit_i]+=shift;
+    }
+  }
+
   // Usual methods :
   void Print() const;
   void clear() { mult = 0; }
   size_t size() const { return size_cast(mult); }
 
   // Specific methods :
-  bool isSingle() const {return (mult == 1);}
-  bool isEmpty()  const {return (mult == 0);}
   size_t const & maxSize() const { return m_maxSize; }
 
   // Accessors :
   Time_ns time_ns(int const & i) const {return (read.T) ? time2s[i] : Time_ns_cast(times[i])/1000.f;}
+
+  // State accessors : 
+  bool isSingle() const {return (mult == 1);}
+  bool isEmpty()  const {return (mult == 0);}
+  bool isCalibrated() const 
+  {
+         if ( isReading && !isWritting) return read .e && !read .E;
+    else if (!isReading &&  isWritting) return write.e && !write.E;
+    else 
+    {
+      print("Event not connected to any tree yet !");
+      return false;
+    }
+  }
 
   // Public members :
   int mult = 0;
@@ -153,6 +190,8 @@ public:
 
 private:
   size_t m_maxSize = 255;
+  bool isReading = false;
+  bool isWritting = false;
 };
 
 inline Event& Event::operator=(Hit const & hit)
@@ -175,6 +214,8 @@ inline Event& Event::operator=(Event const & event)
   read  = event.read;
   write = event.write;
   mult  = event.mult;
+  isReading  = event.isReading;
+  isWritting = event.isWritting;
   if (write.s || read.s) stamp = event.stamp;
   if (write.l || read.l) std::copy_n(event.labels   , mult ,  labels );
   if (write.t || read.t) std::copy_n(event.times    , mult ,  times  );
@@ -194,6 +235,9 @@ inline Event& Event::operator=(Event const & event)
 void inline Event::reading(TTree * tree)
 {
   if (!tree) {print("Input tree at address 0x00 !"); return;}
+
+  isReading  = true;
+  isWritting = false;
 
   tree -> ResetBranchAddresses();
 
@@ -222,6 +266,9 @@ void inline Event::reading(TTree * tree, std::string const & options)
 {
   if (!tree) {print("Input tree at address 0x00 !"); return;}
 
+  isReading  = true;
+  isWritting = false;
+
   read.setOptions(options);
 
   tree -> ResetBranchAddresses();
@@ -243,6 +290,9 @@ void inline Event::reading(TTree * tree, std::string const & options)
 void inline Event::writting(TTree * tree, std::string const & options)
 {
   if (!tree) {print("Output tree at address 0x00 !"); return;}
+
+  isReading  = false;
+  isWritting = true;
 
   write.setOptions(options);  
 
@@ -304,7 +354,7 @@ inline void Event::push_front(Hit const & hit)
     if (write.p) pileups [i] = pileups [i-1];
   }
                labels  [0] = hit.label;
-  if (write.t) times   [0] = Time_cast(hit.stamp-stamp); // Here, times[0]<0 because the stamp corresponds to the 0 of the first hit that is logically located after
+  if (write.t) times   [0] = Time_cast(hit.stamp-stamp); // Here, times[0]<0 because the stamp corresponds to the 0 of the first hit
   if (write.e) adcs    [0] = hit.adc;
   if (write.E) nrjs    [0] = hit.nrj;
   if (write.q) qdc2s   [0] = hit.qdc2;

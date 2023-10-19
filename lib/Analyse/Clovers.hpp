@@ -102,8 +102,8 @@ public:
 
   static std::array<uchar, 1000> labels;  // Array used to make correspondance between a detector label and its clover label
 
-  static std::array<uchar, 1000> cristaux_index;     // Array used to make correspondance between the detector label and the Ge  index
-  static std::array<uchar, 1000> cristaux_index_BGO; // Array used to make correspondance between the detector label and the BGO index
+  static std::array<uchar, 1000> cristaux_index;     // Array used to make correspondance between the detector label and the Ge or BGO index
+  // static std::array<uchar, 1000> cristaux_index_BGO; // Array used to make correspondance between the detector label and the BGO index
   // static std::vector <uchar> cristaux_opposite;// Array used to make correspondance between a detector and the label of the detector at 180° 
 
   /// @brief Static initialize. Allows one to use the arrays event if no object has been instantiated
@@ -124,7 +124,7 @@ public:
 
         labels[l] = (is[l]) ? label_to_clover(l) : -1;
         cristaux_index[l] = (isGe[l]) ? label_to_cristal(l) : -1;
-        cristaux_index_BGO[l] = (isBGO[l]) ? label_to_cristal(l) : -1;
+        // cristaux_index_BGO[l] = (isBGO[l]) ? label_to_cristal(l) : -1;
       }
       s_initialised = true;
     }
@@ -226,8 +226,8 @@ public:
   uchar DelayedCleanGeMult = 0;
 
   // AnalyseFast :
-  std::vector<uchar> delayedClovers;
   std::vector<uchar> promptClovers;
+  std::vector<uchar> delayedClovers;
   std::vector<CloverModule> PromptClovers;
   std::vector<CloverModule> DelayedClovers;
   
@@ -235,10 +235,10 @@ public:
   {
     for (auto const & clover_i : promptClovers ) PromptClovers [clover_i].clear();
     for (auto const & clover_i : delayedClovers) DelayedClovers[clover_i].clear();
-    delayedClovers.clear();
     promptClovers.clear();
-    PromptCleanGeMult = 0;
-    DelayedCleanGeMult = 0;
+    delayedClovers.clear();
+    PromptMult = 0;
+    DelayedMult = 0;
   }
 
 private:
@@ -273,7 +273,7 @@ public:
       m_stop_intercept = m_low_E_gate.stop-m_low_E*m_stop_coeff;
     }
     
-    /**
+    /** 
      * @brief Is the hit in the gate
      * @details
      * Three zones : high energy, intermediate energy and lower energy.
@@ -345,11 +345,11 @@ std::array<bool, 1000> Clovers::is;
 // std::array<bool, 1000> Clovers::blacklist;
 std::array<uchar, 1000> Clovers::labels;
 std::array<uchar, 1000> Clovers::cristaux_index;
-std::array<uchar, 1000> Clovers::cristaux_index_BGO;
+// std::array<uchar, 1000> Clovers::cristaux_index_BGO;
 // std::vector <uchar> Clovers::cristaux_opposite;
 
 // Parameters :
-float Clovers::Emin = 5.; // by default 5 keV
+float Clovers::Emin = 5.; // by default 5 keV threshold
 bool Clovers::s_initialised = false;
 
 // ---- Methods : --- //
@@ -422,8 +422,8 @@ void Clovers::SetEvent(Event const & event, char const & analyse)
   {
     this -> CleanFast();
     for (size_t i = 0; i<event.size(); i++) this -> FillFast(event, i);
-    PromptCleanGeMult  = promptClovers .size();
-    DelayedCleanGeMult = delayedClovers.size();
+    PromptMult  = promptClovers .size();
+    DelayedMult = delayedClovers.size();
   }
 }
 
@@ -438,16 +438,18 @@ bool Clovers::FillFast(Event const & event, size_t const & hit_index)
   auto const & nrj = event.nrjs[hit_index];
   auto const & time = event.time2s[hit_index];
 
+  if (nrj<Emin) return false;
+
   if (isGe[label])
   {
     if (promptGate (time)) 
     {
-      push_back_unique(promptClovers,index_clover);
+      push_back_unique(promptClovers, index_clover);
       PromptClovers[index_clover].addGe(nrj, time);
     }
     else if (delayedGate(time))
     {
-      push_back_unique(delayedClovers,index_clover);
+      push_back_unique(delayedClovers, index_clover);
       DelayedClovers[index_clover].addGe(nrj, time);
     }
   }
@@ -538,7 +540,7 @@ bool Clovers::Fill(Event const & event, size_t const & hit_index)
       rawBGO.push_back(hit_index);
 
       // BGO crystal index (ranges from 0 tp 48):
-      auto const & index_cristal = cristaux_index_BGO[label];
+      auto const & index_cristal = cristaux_index[label];
 
       // Fill the vector containing the list of all the BGO crystals that fired :
       cristaux_BGO.push_back(index_cristal);

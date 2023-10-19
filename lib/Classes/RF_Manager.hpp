@@ -28,7 +28,7 @@
 class RF_Manager
 {
 public:
-  RF_Manager(Label const & label_RF = 251) {label = label_RF;}
+  RF_Manager(Time const & period = 400, Label const & label_RF = 251) {label = label_RF;}
   bool setHit(Hit const & hit);
 #ifdef EVENT_HPP
   bool setHit(Event const & event, int const & hit_i);
@@ -43,8 +43,6 @@ public:
 
   Time pulse_ToF(Timestamp const & timestamp) const
   {
-  #ifdef USE_RF
-
     // Shifts the timestamp in order to be able to get hits before the 0 :
     Timestamp const & shifted_timestamp = timestamp + m_offset; 
 
@@ -65,11 +63,6 @@ public:
       auto const & relative_time =Time_cast((period_fm - (reversed_rf_time)%period_fm)/1000ull);
       return relative_time - m_offset;
     }
-
-  #else //NO USE_RF
-    print("NO RF IS USED !! Please set USE_RF [period_value]");
-    return Time_cast(timestamp);
-  #endif //USE_RF
   }
   Time pulse_ToF(Hit const & hit) const {return pulse_ToF(hit.stamp);}
 
@@ -81,12 +74,10 @@ public:
 
   void set(Timestamp new_timestamp, Timestamp _period) 
   {
-  #ifdef USE_RF
     auto const & tperiod = Time_cast(new_timestamp-last_hit);
-    if (tperiod > 0 && tperiod<1.5*USE_RF*1000000) period = double_cast(tperiod)/1000.;
+    if (tperiod > 0 && tperiod<1.5*period*1000000) period = double_cast(tperiod)/1000.;
     else period = double_cast(_period);
     last_hit = new_timestamp;
-  #endif //USE_RF
   }
 
 
@@ -94,11 +85,8 @@ public:
 
   Timestamp last_hit = 0;
 
-#ifdef USE_RF
-  double period = USE_RF*1000;
-#else //NO USE_RF
+  // double period = USE_RF*1000;
   Time period = 0;
-#endif //USE_RF
 
   static Label label;
 
@@ -148,9 +136,7 @@ bool RF_Manager::setHit(Event const & event, int const & hit_i)
 
 void RF_Manager::align_to_RF(Event & event) const
 {
-  auto const & rf_Ref = pulse_ToF(event.stamp);
-  event.stamp -= rf_Ref;
-  for (int i = 0; i<event.mult; i++) event.times[i] += rf_Ref;
+  event.setT0(pulse_ToF(event.stamp));
 }
 
 void RF_Manager::align_to_RF_ns(Event & event) const

@@ -51,19 +51,19 @@ uchar thread_local CloverModule::glabel = 0;
 
 void CloverModule::Reset()
 {
-  nrj = 0.;
-  nrj_BGO = 0.;
-  nb = 0.;
-  nb_BGO = 0.f;
+  nrj = 0.f;
+  nrj_BGO = 0.f;
+  nb = 0;
+  nb_BGO = 0;
   time = 0.0;
   time_BGO = 0.0;
 
   maxE_Ge_cristal = '\0';
 
-  isBGOPrompt = false;
-  isBGODelayed = false;
-  isGePrompt = false;
-  isGeDelayed = false;
+  // isBGOPrompt = false;
+  // isBGODelayed = false;
+  // isGePrompt = false;
+  // isGeDelayed = false;
 }
 
 std::ostream& operator<<(std::ostream& cout, CloverModule const & cloverModule)

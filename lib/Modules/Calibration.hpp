@@ -9,6 +9,7 @@
 #include "../Classes/FilesManager.hpp"
 
 #include "../MTObjects/MTFasterReader.hpp"
+#include "../MTObjects/MTRootReader.hpp"
 #include "../MTObjects/MTTHist.hpp"
 
 // The following are declared at the end :
@@ -237,7 +238,7 @@ public:
   void writeRawRoot(std::string const & outfilename);
 
   void verify(std::string const & outfilename = "verify");
-  void writeCalibratedRoot(std::string const & outfilename);
+  void writeCalibratedHisto(std::string const & outfilename);
 
   void setSource(std::string const & source) {m_source = source;}
   void verbose(bool const & _verbose) {m_verbose = _verbose;}
@@ -253,7 +254,8 @@ public:
   /// @brief calibrate the nrj value using the parameters extracted from the calibration data
   NRJ calibrate(NRJ const & nrj, Label const & label) const;
 
-  void calibrateData(std::string const & folder, int const & nb_files = -1);
+  void calibrateFasterData(std::string const & folder, int const & nb_files = -1);
+  void calibrateRootData(std::string const & folder, int const & nb_files = -1);
   bool const & calibrate_data() const {return m_calibrate_data;}
   bool const & calibrate_data() {return m_calibrate_data;}
   void writeCalibratedData(std::string const & outfilename);
@@ -515,7 +517,7 @@ void Calibration::fillRootDataHisto(std::string const & filename)
       if (isParis[label] && event.qdc2s[hit]!=0)
       {
         auto const & ratio = (event.qdc2s[hit]-event.adcs[hit])/event.qdc2s[hit];
-        if (ratio<-0.2 || ratio>0.2) continue;
+        if (ratio<-0.1 || ratio>0.2) continue;
       }
       auto const nrjcal = calibrate(event.adcs[hit], label);
       m_histos.calib_spectra[label].Fill(nrjcal);
@@ -1183,10 +1185,10 @@ void Calibration::verify(std::string const & outfilename)
     }
     nb_det_filled[type_index]++;
   }
-  writeCalibratedRoot(outfilename+"_calib.root");
+  writeCalibratedHisto(outfilename+"_calib.root");
 }
 
-void Calibration::writeCalibratedRoot(std::string const & outfilename)
+void Calibration::writeCalibratedHisto(std::string const & outfilename)
 {
   unique_TFile outFile(TFile::Open(outfilename.c_str(), "RECREATE"));
   outFile->cd();
@@ -1195,10 +1197,16 @@ void Calibration::writeCalibratedRoot(std::string const & outfilename)
   print("Calibrated root spectra written to", outfilename);
 }
 
-void Calibration::calibrateData(std::string const & folder, int const & nb_files )
+void Calibration::calibrateFasterData(std::string const & folder, int const & nb_files )
 {
   m_calibrate_data = true;
   this -> loadFasterData(folder, nb_files);
+}
+
+void Calibration::calibrateRootData(std::string const & folder, int const & nb_files)
+{
+  m_calibrate_data = true;
+  this -> loadRootData(folder, nb_files);
 }
 
 void Calibration::writeCalibratedData(std::string const & outfilename)

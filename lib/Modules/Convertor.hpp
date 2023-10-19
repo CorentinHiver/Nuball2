@@ -49,7 +49,7 @@ using Trigger = std::function<bool(const Event&)>;
  * 
  *  Not doing anything. Because the output format expects event building (see Section 2), there will be a slight overhead due to the mult leaf
  * 
- *  (-e [time_window_ns]) : Simple event building. If no time shift, the time shift can be big, it is recommended to use at least 1500 ns
+ *  (-e [time_window_ns]) : Simple event building. If no time realignment, the time shift can be big, it is recommended to use at least 1500 ns
  * 
  *  (-t [timeshift_file]) : Load the timeshifts file.
  *  This option will always result in more time and memory consumption because the conversion is done in 3 step : 
@@ -57,9 +57,7 @@ using Trigger = std::function<bool(const Event&)>;
  *  because some hits can be shifted before the previous hit. Therefore, the data have to be realigned.
  *  And finally the conversion will take place with truly time aligned data.
  * 
- * 
- *  Multithreading : use (-m [threads_number]) option to choose the number of files to treat in parallel.
- * 
+ * (-m [threads_number]) : Multithreading. use this option to choose the number of files to treat in parallel.
  * 
  * Recap : 
  * 
@@ -116,6 +114,7 @@ class Convertor
 public:
 
   Convertor() {}
+
   Convertor(int argc, char** argv, Trigger trigger = [](const Event&) { return true; });
 
   /// @brief Raw conversion :
@@ -132,7 +131,6 @@ public:
     print("Data written to", outputFolder, "in", timer(), timer.unit());
   }
 
-  void setDetectors (Detectors const & detectors)     {m_detectors = detectors;}
   void setTimeshifts(Timeshifts const & timeshifts) {m_timeshifts = timeshifts;}
   void loadTimeshifts(std::string const & dTfile)   {m_timeshifts.load(dTfile);}
   void setCalibration(Calibration const & calibration) {m_calibration = calibration;}
@@ -160,12 +158,11 @@ protected:
   virtual void convertFile(Hit & hit, FasterReader & reader, Path const & outPath);
 
   Timeshifts m_timeshifts;
-  Detectors m_detectors;
   Calibration m_calibration;
 
   int m_nb_threads = 1;
   int m_nb_files = -1;
-  Long64_t m_time_window = 1500;
+  Long64_t m_time_window = 1500000;
   bool m_eventbuilding = false;
   bool m_calibrate = false;
   bool m_throw_single = false;
@@ -181,18 +178,19 @@ protected:
 
 void Convertor::printParameters() const
 {
-    print("Usage of Convertor : /path/to/data /pat/to/output [[parameters]]");
-    print("");
-    print("parameters :");
-    print("");
-    print("-c [calibration_file]  : Loads the calibration file");
-    print("-e [time_window_ns]    : Perform event building with time_window_ns = 1500 ns by default");
-    print("-f [files_number]      : Choose the total number of files to treat inside a data folder");
-    print("-i [ID_file]           : Load ID file (not necessary so far)");
-    print("-n [hits_number]       : Choose the number of hits to read inside a file");
-    print("-m [threads_number]    : Choose the number of files to treat in parallel");
-    print("-t [time_window_ns]    : Loads timeshift data");
-    print("--throw-single         : If you are not interested in single hits");
+  print("");
+  print("Usage of Convertor : /path/to/data /path/to/output [[parameters]]");
+  print("");
+  print("parameters :");
+  print("");
+  print("-c [calibration_file]  : Loads the calibration file");
+  print("-e [time_window_ns]    : Perform event building with time_window_ns = 1500 ns by default");
+  print("-f [files_number]      : Choose the total number of files to treat inside a data folder");
+  print("-i [ID_file]           : Load ID file (necessary if trigger is used)");
+  print("-n [hits_number]       : Choose the number of hits to read inside a file");
+  print("-m [threads_number]    : Choose the number of files to treat in parallel");
+  print("-t [time_window_ns]    : Loads timeshift data");
+  print("--throw-single         : If you are not interested in single hits");
 }
 
 
@@ -214,10 +212,11 @@ Convertor::Convertor(int argc, char** argv, Trigger trigger)
          if (command == "-c") loadCalibration(argv[++i]);
     else if (command == "-e") buildEvents(std::stoi(argv[++i]));
     else if (command == "-f") setNbFiles(std::stoi(argv[++i]));
-    else if (command == "-i") m_detectors.load(argv[++i]);
+    else if (command == "-i") detectors.load(argv[++i]);
     else if (command == "-m") setNbThreads(std::stoi(argv[++i]));
     else if (command == "-n") FasterReader::setMaxHits(std::stoi(argv[++i]));
     else if (command == "-o") overwrite(true);
+    else if (command == "-rf") m_throw_single = true;
     else if (command == "-t") loadTimeshifts(argv[++i]);
     else if (command == "--throw-singles") m_throw_single = true;
     else {print("Unkown command", command);}

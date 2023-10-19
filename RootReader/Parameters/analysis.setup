@@ -4,8 +4,8 @@
 # run: 60Co_center_after/
 # runs: 2 run_75 run_76
 # list_runs: list_U_20_first.list
-list_runs: U.list
-# list_runs: Th.list
+# list_runs: U.list
+list_runs: Th.list
 # list_runs: Parameters/list_runs_good_pulse.list
 # list_runs: Parameters/run_test.list
 # list_runs: Parameters/runs_pulsed_Corentin.list
@@ -13,9 +13,9 @@ list_runs: U.list
 # folder: /home/corentin/faster_data/N-SI-136-root/
 # folder: /home/corentin/faster_data/N-SI-136-calibrations/
 # folder: /home/faster/nuball2/N-SI-136-root_P2_conversion1/
-folder: /home/corentin/faster_data/N-SI-136-root_P2_conversion1/
+# folder: /home/corentin/faster_data/N-SI-136-root_P2_conversion1/
 # folder: /home/corentin/faster_data/N-SI-129-root_P_conversion1/
-# folder: /home/corentin/faster_data/N-SI-136-root_Th_P_conversion1/
+folder: /home/corentin/faster_data/N-SI-136-root_Th_P_conversion1/
 # folder: /media/sf_OneDrive/CNRS/Nuball2/RootReader/Convertor/
 # folder: ../Data_129/temp/
 # folder: ../Data_129/DSSDFinal/
@@ -40,14 +40,14 @@ end
 
 [Isomer]
 # Names : G2 stands for 2 germanium hits minimum, GP1 idem in prompt, GD2 in delayed
-outDir: 136/Analyse/
+outDir: 136/Analyse_Th/
 # outRoot: total_DSSD_prompt.root
 # outRoot: good_pulse.root
 # outRoot: 20runs_G2.root
 # outRoot: all.root
-outRoot: all_paris.root
+outRoot: test.root
 # outRoot: run_75.root
-# writeRadware
+writeRadware
 # trigger1989
 # outRoot: MPrompt_1_5_Delayed_2_5.root
 # gate: prompt Ge -15 10

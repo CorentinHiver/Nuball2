@@ -204,15 +204,25 @@ class TypeRootMap
 public:
   TypeRootMap()
   {
-    m_typeRootMap[typeid(true)          ] = "O";
+    if (!initialized)
+    {
+      // Bool :
+      m_typeRootMap[typeid(true)          ] = "O";
+      
+      // Integers :
+      m_typeRootMap[typeid(  char_cast(1))] = "B"; m_typeRootMap[typeid( uchar_cast(1))] = "b";
+      m_typeRootMap[typeid( short_cast(1))] = "S"; m_typeRootMap[typeid(ushort_cast(1))] = "s";
+      m_typeRootMap[typeid(   int_cast(1))] = "I"; m_typeRootMap[typeid(  uint_cast(1))] = "i";
+      m_typeRootMap[typeid(  long_cast(1))] = "G"; m_typeRootMap[typeid( ulong_cast(1))] = "g";
 
-    m_typeRootMap[typeid(char_cast(1))  ] = "B"; m_typeRootMap[typeid(uchar_cast(1)) ] = "b";
-    m_typeRootMap[typeid(short_cast(1)) ] = "S"; m_typeRootMap[typeid(ushort_cast(1))] = "s";
-    m_typeRootMap[typeid(int_cast(1))   ] = "I"; m_typeRootMap[typeid(uint_cast(1))  ] = "i";
-    m_typeRootMap[typeid(long_cast(1))  ] = "G"; m_typeRootMap[typeid(ulong_cast(1)) ] = "g";
-    m_typeRootMap[typeid(double_cast(1))] = "D"; m_typeRootMap[typeid(float_cast(1)) ] = "F";
+      // Floating point :
+      m_typeRootMap[typeid(double_cast(1))] = "D"; m_typeRootMap[typeid( float_cast(1))] = "F";
 
-    m_typeRootMap[typeid(Long64_cast(1))] = "L"; m_typeRootMap[typeid(ULong64_cast(1)) ] = "l";
+      // ROOT types :
+      m_typeRootMap[typeid(Long64_cast(1))] = "L"; m_typeRootMap[typeid(ULong64_cast(1)) ] = "l";
+
+      initialized = true;
+    }
   }
 
   template<class T>
@@ -228,14 +238,16 @@ public:
   }
 
 private:
+  static bool initialized;
   std::unordered_map<std::type_index, std::string> m_typeRootMap;
 }typeRootMap;
+
+bool TypeRootMap::initialized = false;
 
 /// @brief Create a branch for a given value and name
 template<class T>
 auto createBranch(TTree* tree, T * value, std::string const & name)
 {
-  // print(name+"/"+typeRootMap(*value));
   return (tree -> Branch(name.c_str(), value, (name+"/"+typeRootMap(*value)).c_str()), 64000);
 }
 
@@ -245,7 +257,6 @@ template<class T>
 auto createBranchArray(TTree* tree, T * array, std::string const & name, std::string const & name_size)
 {
   // using **array because it is an array, so *array takes the first element of the array
-  // print(name+"["+name_size+"]/"+typeRootMap(**array));
   return (tree -> Branch(name.c_str(), array, (name+"["+name_size+"]/"+typeRootMap(**array)).c_str()), 64000);
 }
 
@@ -514,4 +525,162 @@ namespace CoAnalyse
   // }
 };
 
+
+////////////////////////////
+//   Manage histo files   //
+////////////////////////////
+
+void fuse_all_histo(std::string const & folder, std::string const & outRoot = "fused_histo.root")
+{
+  auto const files = list_files_in_folder(folder, {"root"});
+  bool first_file = true;
+  bool bidim = false;
+  // std::vector<TH1F*> all_TH1F;
+  std::vector<std::unique_ptr<TH1>> all_TH1F;
+  for (auto const & filename : files)
+  {
+    auto file = TFile::Open(filename.c_str(), "READ");
+    auto list = file->GetListOfKeys();
+    size_t nb_histos = 0;
+    print(filename);
+    for (auto&& keyAsObj : *list)
+    {
+      std::unique_ptr<TKey> key (static_cast<TKey*>(keyAsObj));
+      std::string className =  key->GetClassName();
+      if(className == "TH1F" || (bidim && className == "TH2F"))
+      {
+        std::unique_ptr<TObject> obj (key->ReadObj());
+        auto histo = dynamic_cast<TH1*>(obj.get());
+        std::string name = histo->GetName();
+        // print(name);
+        if (first_file) all_TH1F.emplace_back(std::unique_ptr<TH1>(dynamic_cast<TH1*>(histo->Clone((name).c_str()))));
+        else
+        {
+          if (nb_histos >= all_TH1F.size()) 
+          {
+            all_TH1F.emplace(all_TH1F.begin()+nb_histos, std::unique_ptr<TH1>(dynamic_cast<TH1*>(histo->Clone((name).c_str()))));
+            nb_histos++;
+            continue;
+          }
+          else if (name != all_TH1F[nb_histos]->GetName()) 
+          {
+            print("NOT THE SAME FILES :", nb_histos, "ème file : ", name, all_TH1F[nb_histos]->GetName());
+            
+            // Trying to find the histogram forward :
+            auto const checkpoint = nb_histos;
+            do {nb_histos++;} while (nb_histos<all_TH1F.size() && name != all_TH1F[nb_histos]->GetName());
+
+            // If not found, create it at current position :
+            if (nb_histos == all_TH1F.size()) 
+            {
+              all_TH1F.emplace(all_TH1F.begin()+checkpoint, std::unique_ptr<TH1>(dynamic_cast<TH1*>(histo->Clone((name).c_str()))));
+              nb_histos = checkpoint+1;
+              continue;
+            }
+          }
+          all_TH1F[nb_histos]->Add(histo);
+        }
+        nb_histos++;
+      }
+    }
+    first_file = false;
+  }
+
+  unique_TFile outFile(TFile::Open(outRoot.c_str(), "RECREATE"));
+  outFile->cd();
+  for (auto & histo : all_TH1F) histo -> Write();
+  outFile -> Write();
+  outFile -> Close();
+  print(outRoot, "written");
+}
+
+// void onClick(Int_t event, Int_t x, Int_t y, TObject* obj) {
+//     if (event == 11) {  // Left mouse button click
+//         TH1F* hist = dynamic_cast<TH1F*>(obj);
+//         if (hist) {
+//             Double_t xValue = hist->GetXaxis()->GetBinCenter(hist->GetXaxis()->FindBin(gPad->AbsPixeltoX(x)));
+//             printf("Clicked at x-value: %.2f\n", xValue);
+//         }
+//     }
+// }
+
+void draw_all_TH1F_with_X_window(std::string const & filename, int minX, int maxX)
+{
+  auto file = TFile::Open(filename.c_str(), "READ");
+  auto list = file->GetListOfKeys();
+  auto c1 = new TCanvas("c1");
+  for (auto&& keyAsObj : *list)
+  {
+    std::unique_ptr<TKey> key (static_cast<TKey*>(keyAsObj));
+    if(std::string(key->GetClassName()) == "TH1F")
+    {
+      std::unique_ptr<TObject> obj (key->ReadObj());
+      auto histo = dynamic_cast<TH1F*>(obj.get());
+      std::string name = histo->GetName();
+      print(name);
+      histo->GetXaxis()->SetRangeUser(minX, maxX);
+
+      // Create the TApplication :
+      // int argc = 0; 
+      // char** argv = nullptr;
+      // TApplication app("app", &argc, argv);
+      // TCanvas* c1 = new TCanvas("c1");
+      c1->cd();
+      histo->Draw();
+
+      // TObjArray* histArray = new TObjArray();
+      // histArray->Add(histo);
+      // c1->Connect("onClick", "onClick(int,int,int,TObject*", 0, 0);
+      gPad->WaitPrimitive();
+      c1->Update();
+
+      // app.Run();
+
+      // gPad->Update();
+      // gPad->WaitPrimitive();
+      // c1->WaitPrimitive();
+      // pauseCo();
+    }
+  }
+}
+
 #endif //LIBROOT_HPP
+
+
+/*
+ // unique_TFile file(TFile::Open(filename.c_str(), "READ"));
+    // file -> cd();
+    // if (!file.get()->IsOpen()) throw_error("Can't open"+filename);
+    // print("Reading", filename);
+    
+    // TIter nextKey(file->GetListOfKeys());
+    // TKey* key = nullptr;
+
+    // int histo_nb = 0;
+    // while (histo_nb<10 && (key = dynamic_cast<TKey*>(nextKey()))) 
+    // {
+    //   TObject* obj = key->ReadObj();
+    //   if (obj->IsA()->InheritsFrom(TH1::Class())) 
+    //   {
+    //     if (obj->IsA()->InheritsFrom(TH1F::Class())) 
+    //     {
+    //       auto histo = dynamic_cast<TH1F*>(obj);
+    //       std::string name = histo->GetName();
+    //       print(name, histo_nb);
+    //       if (first_file) all_TH1F.emplace_back(dynamic_cast<TH1F*>(histo->Clone((name+"_manip").c_str())));
+    //       // if (first_file) all_TH1F.emplace_back(std::unique_ptr<TH1F>(static_cast<TH1F*>(histo->Clone())));
+    //       else 
+    //       {
+    //         print(all_TH1F[histo_nb]->GetName());
+    //         if (name == all_TH1F[histo_nb]->GetName()) all_TH1F[histo_nb]->Add(histo);
+    //         else throw_error("Root files not identical !!!");
+    //       }
+    //       histo_nb++;
+    //     }
+    //     delete obj;
+    //   }
+    //   // delete obj;
+    // }
+    // delete key;
+    // file->Close();
+    // first_file = false; // Usefull only at the first iteration*/

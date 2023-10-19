@@ -100,6 +100,9 @@ private:
 
   MTTHist<TH1F> clover_singles_prompt;
   MTTHist<TH1F> clover_singles_delayed;
+  MTTHist<TH1F> clover_singles_prompt_Compton_veto;
+  MTTHist<TH1F> clover_singles_delayed_Compton_veto;
+
   Calibration m_calibration;
   Timeshifts m_timeshifts;
   Path m_runpath;
@@ -151,8 +154,11 @@ void RunMatrixator::Initialize()
 
   // --- Clover initialisation : --- //
   print("Initialize clovers");
-  clover_singles_prompt.reset("clover_singles_prompt", "clover prompt single hit;Clover E [keV]", 10000,0,10000);
-  clover_singles_delayed.reset("clover_singles_delayed", "clover delayed  single hit;Clover E [keV]", 10000,0,10000);
+  clover_singles_prompt.reset("clover_singles_prompt", "clover prompt single hit;Clover E [keV]", 20000,0,20000);
+  clover_singles_delayed.reset("clover_singles_delayed", "clover delayed  single hit;Clover E [keV]", 20000,0,20000);
+  clover_singles_prompt_Compton_veto.reset("clover_singles_prompt_Compton_veto", "clover prompt single hit Compton veto;Clover E [keV]", 20000,0,20000);
+  clover_singles_delayed_Compton_veto.reset("clover_singles_delayed_Compton_veto", "clover delayed single hit Compton veto;Clover E [keV]", 20000,0,20000);
+
   matrix_Clovers_prompt.reset("pp","matrix_Clovers_prompt;Clover E [keV];Clover E [keV]", 7000,0,7000, 7000,0,7000);
   matrix_Clovers_delayed.reset("dd","matrix_Clovers_delayed;Clover E [keV];Clover E [keV]", 7000,0,7000, 7000,0,7000);
   matrix_Clovers_delayed_vs_prompt.reset("dp","Clovers delayed VS prompt;Prompt E [keV];Delayed E [keV]", 7000,0,7000, 7000,0,7000);
@@ -431,7 +437,11 @@ void RunMatrixator::fillMatrixes(Clovers const & clovers, Event const & event)
     // Extract the prompt clover :
     auto const & clover_prompt_i = clovers.promptClovers[prompt_i];
     auto const & clover_prompt = clovers.PromptClovers[clover_prompt_i];
-    if (clover_prompt.nb_BGO>0) continue;// Compton cleaning
+    if (clover_prompt.nb_BGO>0) 
+    {
+      if (mult_M1) clover_singles_prompt_Compton_veto.Fill(clover_prompt.nrj);
+      continue;// Compton cleaning
+    }
 
     if (mult_M1) clover_singles_prompt.Fill(clover_prompt.nrj);
 
@@ -459,7 +469,12 @@ void RunMatrixator::fillMatrixes(Clovers const & clovers, Event const & event)
     // Extract the delayed clover :
     auto const & clover_index_delayed = clovers.delayedClovers[delayed_i];
     auto const & clover_delayed = clovers.DelayedClovers[clover_index_delayed];
-    if (clover_delayed.nb_BGO>0) continue;// Compton cleaning
+    
+    if (clover_delayed.nb_BGO>0)
+    {
+      if (mult_M1) clover_singles_delayed_Compton_veto.Fill(clover_delayed.nrj);
+      continue;// Compton cleaning
+    } 
     
     if (mult_M1) clover_singles_delayed.Fill(clover_delayed.nrj);
 
@@ -503,6 +518,8 @@ void RunMatrixator::Write()
 
   clover_singles_prompt.Write();
   clover_singles_delayed.Write();
+  clover_singles_prompt_Compton_veto.Write();
+  clover_singles_delayed_Compton_veto.Write();
 
   // Writting the matrices :
   for (auto & type_matrice : matricesPrompt)   for ( auto & matrice : type_matrice.second ) matrice.Write();
@@ -520,5 +537,6 @@ void RunMatrixator::Write()
   file -> Close();
   print(outRoot, "written");
 }
+
 
 #endif //RUNMATRIXATOR_HPP

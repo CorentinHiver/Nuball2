@@ -4,59 +4,65 @@
 // #define USE_PARIS
 // #define USE_RF 200
 
-#include "../libCo.hpp"
+#include "../libRoot.hpp"
+// #include <CloverEfficiency.hpp>
 // #include <Calibration.hpp>
-#include <RunMatrixator.hpp>
+// #include <RunMatrixator.hpp>
 // #include <Detectors.hpp>
 // #include <Timeshifts.hpp>
-// #include <Convertor.hpp>
+#include <Convertor.hpp>
 
 int main(int argc, char ** argv)
 {
-  int nb_files = -1;
-  int nb_threads = 1;
   std::string index_file = "index_129.list";
-  if (argc > 1)
-  {
-    std::string command;
-    for(int i = 1; i < argc; i++)
-    {
-      command = argv[i];
-           if (command == "-f") {nb_files = std::atoi(argv[i++]);}
-      else if (command == "-n") {FasterReader::setMaxHits(std::atoi(argv[++i]));}
-      else if (command == "-m") 
-      {
-        nb_threads = std::atoi(argv[++i]);
-        MTObject::setThreadsNb(nb_threads);
-        MTObject::Initialize();
-      }
-      else if (command == "-i") {index_file = argv[++i];}
-      else {throw std::runtime_error("command " + command + " unkown");}
-    }
-  }
-
   detectors.load(index_file);
 
-  std::string datapath;
-  auto const home = Path::home().string();
-  if (home == "/home/corentin/") datapath = home+"faster_data/";
-  else if (home == "/home/faster/") datapath = home+"nuball2/";
+  fuse_all_histo("histos/");
+
+  // int nb_files = -1;
+  // int nb_threads = 1;
+  // if (argc > 1)
+  // {
+  //   std::string command;
+  //   for(int i = 1; i < argc; i++)
+  //   {
+  //     command = argv[i];
+  //          if (command == "-f") {nb_files = std::atoi(argv[i++]);}
+  //     else if (command == "-n") {FasterReader::setMaxHits(std::atoi(argv[++i]));}
+  //     else if (command == "-m") 
+  //     {
+  //       nb_threads = std::atoi(argv[++i]);
+  //       MTObject::setThreadsNb(nb_threads);
+  //       MTObject::Initialize();
+  //     }
+  //     else if (command == "-i") {index_file = argv[++i];}
+  //     else {throw std::runtime_error("command " + command + " unkown");}
+  //   }
+  // }
+
+
+  // CloverEfficiency ce(argc, argv);
+
+  // std::string datapath;
+  // auto const home = Path::home().string();
+  // if (home == "/home/corentin/") datapath = home+"faster_data/";
+  // else if (home == "/home/faster/") datapath = home+"nuball2/";
 
   // --- RUN MATRIXATOR : --- //
 
-  // rm.dontMatrixate("paris");
-  // rm.keepSingles();
-  for (int run_i = 75; run_i<123; run_i++)
-  {
-    RunMatrixator rm;
-    rm.dontMatrixate("ge");
-    rm.maxRawMult(10);
-    rm.setCalibration("../../136/conversion_200ns/136_final.calib");
-    std::string run_str = "run_"+std::to_string(run_i); 
-    Timeshifts ts(datapath+"N-SI-136-root_P/Timeshifts/"+run_str+".dT");
-    rm.setTimeshifts(ts);
-    rm.run(datapath+"N-SI-136/"+run_str+".fast/");
-  }
+  // // rm.keepSingles();
+  // for (int run_i = 75; run_i<76; run_i++)
+  // {
+  //   RunMatrixator rm;
+  //   rm.dontMatrixate("ge");
+  //   rm.dontMatrixate("paris");
+  //   rm.maxRawMult(10);
+  //   rm.setCalibration("../../136/conversion_200ns/136_final.calib");
+  //   std::string run_str = "run_"+std::to_string(run_i); 
+  //   Timeshifts ts(datapath+"N-SI-136-root_P/Timeshifts/"+run_str+".dT");
+  //   rm.setTimeshifts(ts);
+  //   rm.run(datapath+"N-SI-136/"+run_str+".fast/");
+  // }
 
   // --- Up to date example : --- //
   // Calibration calib;
@@ -71,9 +77,7 @@ int main(int argc, char ** argv)
   // --- Almost up to date / Not checked : --- //
 
   
-  // detectors.load("index_129.list");
   // Timeshifts ts;
-  // ts.setDetectors(detectors);
   // ts.setOutDir(".");
   // ts.setMult(2,2);
   // ts.verbose(true);
@@ -118,7 +122,7 @@ int main(int argc, char ** argv)
   // i = 5;
   // print(svec2, i, j);
 
-  // Convertor convertor(argc, argv, [](const Event& event)
+  // Convertor convertor(argc, argv, [](Event const & event)
   // {
   //   for (int hit = 0; hit<event.mult; hit++)
   //   {
@@ -133,11 +137,10 @@ int main(int argc, char ** argv)
 
   // MTObject::Initialize(2);
   // Calibration calib;
-  // calib.load("../../136/conversion_200ns/calib_129.cal");
-  // calib.calibrateData("/home/corentin/faster_data/N-SI-129/152EU_N1N2.fast/");
-  // calib.writeCalibratedRoot("test_calib.root");
-
-
+  // calib.load("../../136/conversion_200ns/136_final.calib");
+  // // calib.calibrateFasterData("/home/corentin/faster_data/N-SI-129/152EU_N1N2.fast/");
+  // calib.calibrateRootData("/home/corentin/faster_data/N-SI-136-calibrations/152Eu_center_2/", 1);
+  // calib.writeCalibratedHisto("calib/test_calib_rootdata_152Eu.root");
 
   // calibration.loadRootHisto("232Th.root");
   // pauseCo();

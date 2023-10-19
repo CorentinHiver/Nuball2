@@ -3,6 +3,7 @@
 
 #include "print.hpp"
 #include "string_functions.hpp"
+#include "vector_functions.hpp"
 #include <fstream>
 #include <filesystem>
 #if __cplusplus >= 201703L
@@ -156,6 +157,25 @@ std::string get_filename_at(std::string & folderName, int pos)
   }
   ret = file -> d_name;
   closedir(dp);
+  return ret;
+}
+
+std::vector<std::string> list_files_in_folder(std::string const & foldername, std::vector<std::string> const & extensions = {"*"})
+{
+  std::vector<std::string> ret;
+  struct dirent *file = nullptr;
+  DIR *dp = nullptr;
+  dp = opendir(foldername.c_str());
+  if (dp == nullptr) {std::cout << "Folder " << foldername << " not found..." << std::endl; return ret;}
+  std::string name = "";
+  while ( (file = readdir(dp)))
+  {
+    name = file->d_name;
+    auto const & ext = extension(name);
+    if (extensions[0] == "*" || found(extensions, ext)) ret.push_back(foldername+name);
+  }
+  closedir(dp);
+  delete file;
   return ret;
 }
 

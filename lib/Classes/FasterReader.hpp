@@ -234,7 +234,7 @@ bool inline FasterReader::Initialize()
   }
   else
   {
-    std::cout << "File not a .fast file !!" << std::endl;
+    std::cout << "File " << m_filename << " not a .fast file !!" << std::endl;
     m_kReady = false; return false;
   }
   return (m_kReady = true);

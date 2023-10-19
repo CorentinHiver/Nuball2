@@ -22,6 +22,7 @@
 #include <Detectors.hpp>      // Eases the manipulation of detector's labels
 #include <Manip.hpp>          // Eases the manipulation of files and folder of an experiments
 #include <RF_Manager.hpp>     // Eases manipulation of RF information
+#include <Clovers.hpp>
 
 #include "EventBuilder_136.hpp" // Event builder for this experiment
 
@@ -136,6 +137,108 @@ struct Histos
   }
 };
 
+bool handleRf(RF_Manager & rf, Hit const & hit, Event & event, TTree * tree)
+{
+  if (rf.setHit(hit))
+  {
+    Event temp (event);
+    event = hit;
+    tree -> Fill();
+    event = temp;
+    return true;
+  }
+  else return false;
+}
+
+double dT_ns(Time const & stop, Time const & start) {return(double_cast(stop-start)/1000.0);}
+
+bool isPrompt(double const & time_rf) {return (time_rf>-20 && time_rf<5);}
+bool isDelayed(double const & time_rf) {return (time_rf>60 && time_rf<180);}
+
+class HitBuffer
+{
+public:
+  HitBuffer(size_t size = 100)
+  {
+    m_buffer.resize(size);
+  }
+
+  void push_back(Hit const & hit) {m_buffer[m_size++] = hit;}
+  void clear() {m_size = 0;}
+
+  auto const & operator[] (size_t const & i) const {return m_buffer[i];}
+  auto operator[] (size_t const & i) {return m_buffer[i];}
+  
+  auto at(size_t const & i) 
+  {
+    if(i>m_size)
+    {
+      print("Exceeding size of HitBuffer");
+      return m_buffer[m_size];
+    }
+    else return m_buffer[i];
+  }
+
+  auto const & size() const {return m_size;}
+  auto max_size() const {return m_buffer.size();} 
+
+  auto begin() {return m_buffer.begin();}
+  auto end() {return m_buffer.begin()+m_size;}
+
+  auto begin() const {return m_buffer.begin();}
+  auto end() const {return m_buffer.begin()+m_size;}
+
+  bool isFull() const {return m_size >= m_buffer.size();}
+
+  void setStep(size_t const & step) {m_step = step;}
+  auto const & step() const {return m_step;}
+  auto const & step() {return m_step;}
+
+  /**
+   * @brief 
+   * 
+   * @param n:
+   * if n == 0 nothing happens
+   * if n>0 shifts the buffer to the right by n indexes, expends the size if needed
+   * if n<0 moves the n last cells to the beginning, size stays the same
+   * @details
+   * Example : 
+   * Buffer buffer = {hit1, hit2, hit3, hit4};
+   * buffer.shift( 2); // buffer = {empty1, empty2, hit1, hit2, hit3, hit4}
+   * buffer.shift(-2); // buffer = {hit3, hit4, hit1, hit2}
+   * Carefull : for n>0 , need to copy twice the data, so it can be very long (I think complexity is something like O(2n))
+   */
+  void shift(int n)
+  {
+    if (n == 0) return;
+    else if (n>0)
+    {
+      std::vector<Hit> temp;
+      temp.reserve(m_size+n);
+      for (size_t i = 0; i<n; i++) temp[i] = Hit(0,0); // Fill the nth first hits with empty hits
+      for (size_t i = 0; i<m_size; i++)
+      {// Shifts the other hits
+        temp[i+n] = m_buffer[i];
+      }
+      m_buffer = temp;// Copy back to the first container
+      m_size += n;// Update size
+    }
+    else if (n>0)
+    {
+      for (int i = 0; i<n; i++)
+      {
+        m_buffer[i] = m_buffer[m_size-n+i];
+      }
+      m_size = n;
+    }
+  }
+
+private:
+  size_t m_size = 0;
+  size_t m_step = 0;
+  std::vector<Hit> m_buffer;
+};
+
 // 4. Declare the function to run on each file in parallel :
 void convert(Hit & hit, FasterReader & reader, 
               Calibration const & calibration, 
@@ -212,6 +315,8 @@ void convert(Hit & hit, FasterReader & reader,
 
   // Initialize event builder based on RF :
   RF_Manager rf;
+  auto const & back_time_window = 4*rf.period+rf.offset();
+  auto const & front_time_window = 4*rf.period-rf.offset();
   EventBuilder_136 eventBuilder(&event, &rf);
   eventBuilder.setNbPeriodsMore(nb_periods_more);
 
@@ -239,97 +344,296 @@ void convert(Hit & hit, FasterReader & reader,
   ulong hits_count = 0;
   ulong evts_count = 0;
   ulong trig_count = 0;
+  // std::vector<Hit> buffer(500);
+  HitBuffer buffer(500);
+  size_t w_buffer_it = 0;
   while (loop<nb_data)
   {
     tempTree -> GetEntry(gindex[loop++]);
     
-    // Handle the RF data :
-    if (rf.setHit(hit))
+    buffer.push_back(hit);
+    // if (w_buffer_it < buffer.size())
+    // {
+    //   buffer[w_buffer_it++] = hit;
+    // }
+    print(hit);
+    if (buffer.isFull()) 
     {
-      Event temp (event);
-      event = hit;
-      outTree -> Fill();
-      event = temp;
-      continue;
-    }
-
-    if (histoed)
-    {
-      auto const tof_hit = rf.pulse_ToF_ns(hit.stamp);
-      histos.rf_all.Fill(tof_hit);
-      histos.rf_each.Fill(compressedLabel[hit.label], tof_hit);
-      
-      if (isGe[hit.label]) histos.energy_all_Ge.Fill(hit.nrj);
-      histos.energy_each.Fill(compressedLabel[hit.label], hit.nrj);
-
-      // if (isParis[hit.label])
-      // {
-      //   auto const & ratio = (hit.nrj2-hit.nrj)/hit.nrj2;
-      //   auto const & index = detectors.index(hit.label);
-      //   histos.paris_bidim[index].Fill(ratio, hit.nrj);
-      //   if (event.mult<5) histos.paris_bidim_M_inf_4[index].Fill(ratio, hit.nrj);
-      // }
-    }
-    // print_precision(13);
-    // Event building :
-    if (eventBuilder.build(hit))
-    {
-      evts_count++;
-      counter.count(event); 
-      if ((evts_count%(int)(1.E+6)) == 0) debug(evts_count/(int)(1.E+6), "Mevts");
-      if (histoed)
+      size_t last_event_index = 0; // The index of the last hit of the last event
+      for (size_t r_buffer_it = 0; r_buffer_it<w_buffer_it; r_buffer_it ++)
       {
-        auto const pulse_ref = rf.pulse_ToF_ns(event.stamp);
-        for (size_t trig_loop = 0; trig_loop<event.size(); trig_loop++)
+        auto const & hit_r = buffer[r_buffer_it];
+        if (handleRf(rf, hit_r, event, outTree.get())) continue;
+        else // Treat the other data :
         {
-          auto const & label  = event.labels[trig_loop];
-          auto const & time   = event.times [trig_loop];
-          auto const tof_trig = pulse_ref+time/1000ll;
-          auto const & nrj    = calibration(event.nrjs[trig_loop], label);
-
-          histos.rf_all_event.Fill(tof_trig);
-          histos.rf_each_event.Fill(compressedLabel[label], tof_trig);
-      
-          if (isGe[label]) histos.energy_all_Ge_event.Fill(nrj+gRandom->Uniform(0,1));
-          histos.energy_each_event.Fill(compressedLabel[label], nrj);
-        }
-      }
-    #ifdef TRIGGER
-      if (trigger(counter))
-      {
-        
-    #ifdef PREPROMPT
-        eventBuilder.tryAddPreprompt_simple();
-    #endif //PREPROMPT
-
-        if (nb_periods_more>0) eventBuilder.tryAddNextHit_simple(tempTree.get(), outTree.get(), hit, loop, gindex);
-
-        hits_count+=event.size();
-        trig_count++;
-        outTree->Fill();
-
-        if (histoed)
-        {
-          auto const pulse_ref = rf.pulse_ToF_ns(event.stamp);
-          for (uint trig_loop = 0; trig_loop<event.size(); trig_loop++)
+          if(isGe[hit_r.label])
           {
-            auto const & label  = event.labels[trig_loop];
-            auto const & nrj    = event.nrjs  [trig_loop];
-            auto const & time   = event.times [trig_loop];
-            auto const tof_trig = pulse_ref+time/1000ll;
+            auto const & hit_first_Ge = hit_r;
+            auto const & time_first_Ge = rf.pulse_ToF_ns(hit_first_Ge);
 
-            histos.rf_all_trig.Fill(tof_trig);
-            histos.rf_each_trig.Fill(compressedLabel[label], tof_trig);
+            // ---------------------------------//
+            //1. ---  Treat only delayed Ge --- //
+            // ---------------------------------//
 
-            if (isGe[label]) histos.energy_all_Ge_trig.Fill(nrj);
-            histos.energy_each_trig.Fill(compressedLabel[label], nrj);
+            if (time_first_Ge>60 && time_first_Ge<180)
+            {
+              auto const & buffer_index_first_Ge = r_buffer_it; // Store the position of the Ge
+              auto const & index_first_clover = Clovers::labels[hit_first_Ge.label]; // Between 0 and 23
+
+              // -----------------------------//
+              //2. --- BGO clean first Ge --- //
+              // -----------------------------//
+              
+              int coinc_timewindow = 60;
+              bool rejected_first_Ge = false;
+              // --- a. Look backward to look for potential BGO within 60ns time window --- //
+              // Start already with the first hit before the germanium we want to check :
+              --r_buffer_it;
+              for(; r_buffer_it>buffer.step(); r_buffer_it--)
+              {
+                auto const & hit_j = buffer[r_buffer_it];
+                auto const & dT_j = dT_ns(hit_first_Ge.stamp, hit_j.stamp); // In ns
+                if(dT_j>coinc_timewindow/2) break;
+                auto const & time_rf = rf.pulse_ToF(hit_j);
+                if (isPrompt(time_rf)) break; // We don't look inside the prompt peak for Compton suppression
+                if (isBGO[hit_j.label] && index_first_clover==Clovers::labels[hit_j.label]) 
+                {
+                  rejected_first_Ge = true;
+                  break;
+                }
+              } 
+
+              if (rejected_first_Ge) continue;
+
+              // --- b. Look forward to look for potential BGO within the time window --- //
+              // Start with the first hit after the germanium we want to check :
+              r_buffer_it = buffer_index_first_Ge+1;
+              for (; r_buffer_it<buffer.size(); r_buffer_it++)
+              {
+                auto const & hit_j = buffer[r_buffer_it];
+                auto const & dT_j = double_cast(hit_j.stamp-hit_first_Ge.stamp)/1000.0; // In ns
+                if(dT_j>coinc_timewindow/2) break; // No coincident forward BGO
+                auto const & time_rf = rf.pulse_ToF(hit_j);
+                if (isPrompt(time_rf)) break;
+                if (isBGO[hit_j.label] && index_first_clover==Clovers::labels[hit_j.label])
+                {
+                  rejected_first_Ge = true;
+                  break;
+                }
+              }
+
+              if (rejected_first_Ge) continue;
+
+              // ------------------------//
+              //3. --- Find next Ges --- //
+              // ------------------------//
+              
+              std::vector<int> buffer_index_second_Ges;
+              while (++r_buffer_it < buffer.size())
+              {
+                auto const & hit_j = buffer[r_buffer_it];
+                auto const & dT_j = double_cast(hit_j.stamp-hit_first_Ge.stamp)/1000.0; // In ns
+                if(dT_j>30) break; // No other coincident hits
+
+                // JE LE GARDE ???? PEUT-ÊTRE QUE CA PERMET DE CHOPPER DES VRAIS DELAYED
+                auto const & time_j = rf.pulse_ToF_ns(hit_j);
+                if (time_j>180) break; // Not delayed anymore 
+
+                if (isGe[hit_j.label] && index_first_clover!=Clovers::labels[hit_j.label])
+                {
+                  buffer_index_second_Ges.push_back(r_buffer_it);
+                }
+              } 
+
+              if (buffer_index_second_Ges.size() == 0) continue;
+              
+              // -------------------------------//
+              //4. --- BGO clean second Ges --- //
+              // -------------------------------//
+
+              bool trigger_2Ge_clean = false;
+              // Loop through the other Ges in time window
+              for(auto const & buffer_index_second_Ge : buffer_index_second_Ges)
+              {
+                r_buffer_it = buffer_index_second_Ge;
+                auto const & hit_Ge2 = buffer[r_buffer_it];
+                auto const & index_second_clover = Clovers::labels[hit_Ge2.label];
+
+                bool rejected_second_Ge = false;
+                // 4.a Look backward to look for potential BGO within 60ns time window
+                do
+                {
+                  auto const & hit_j = buffer[--r_buffer_it];
+                  auto const & dT_j = dT_ns(hit_first_Ge.stamp, hit_j.stamp); // In ns
+                  if(dT_j>30) break; // No backward coincident BGO
+                  if (isBGO[hit_j.label] && index_second_clover==Clovers::labels[hit_j.label]) rejected_second_Ge = true;
+                } while(r_buffer_it>last_event_index && !rejected_second_Ge);
+
+                if (rejected_second_Ge) // TODO Also check size here
+                {
+                  r_buffer_it = buffer_index_second_Ge+1;
+                  continue;
+                }
+                else r_buffer_it = buffer_index_second_Ge+1;
+
+                // 4.b Look forward to look for potential BGO within 60ns time window
+                do
+                {
+                  auto const & hit_j = buffer[r_buffer_it];
+                  auto const & dT_j = dT_ns(hit_j.stamp, hit_first_Ge.stamp); // In ns
+                  if(dT_j>30) break; // No coincident forward BGO
+                  if (isBGO[hit_j.label] && index_second_clover==Clovers::labels[hit_j.label]) rejected_second_Ge = true;
+                } while(++r_buffer_it<buffer.size() && !rejected_second_Ge);
+
+                // If a BGO vetoed this potential Ge, move to next one
+                if (rejected_second_Ge)
+                {
+                  r_buffer_it = buffer_index_second_Ge+1;
+                  continue;
+                }
+                // If the Germanium is Clean, then 
+                else
+                {
+                  trigger_2Ge_clean = true;
+                  r_buffer_it = buffer_index_first_Ge-1;
+                  break;
+                }
+              }
+
+              if (!trigger_2Ge_clean) continue;
+
+              // --------------------------------------------------//
+              //5. --- Look for at least one prompt hit before --- //
+              // --------------------------------------------------//
+
+              bool one_prompt_before = false;
+              for (;r_buffer_it>last_event_index;r_buffer_it--)
+              {
+                auto const & hit_j = buffer[r_buffer_it];
+                if (dT_ns(hit_first_Ge.stamp, hit_j.stamp) < back_time_window) 
+                {
+                  one_prompt_before = true;
+                  break;
+                }
+              }
+
+              if (!one_prompt_before) continue;
+              
+              // ------------------------------------------------//
+              //6. --- Look for the first hit in time window --- //
+              // ------------------------------------------------//
+              while(--r_buffer_it>last_event_index)
+              {
+                auto const & hit_j = buffer[r_buffer_it];
+                if (dT_ns(hit_first_Ge.stamp, hit_j.stamp)>back_time_window) break;
+              }
+
+              // -------------------------//
+              //6. --- Fill the Event --- //
+              // -------------------------//
+
+              while (++r_buffer_it<buffer.size())
+              {
+                auto const & hit_j = buffer[r_buffer_it];
+                if (dT_ns(hit_first_Ge.stamp, hit_j.stamp)>front_time_window) break;
+                // Add this line if too much data is written :
+                // auto const & time_j = rf.pulse_ToF_ns(hit_j);
+                // if (isPrompt(time_j))  
+                // {
+                event.push_back(hit);
+                // }
+              }
+
+              // --------------------------//
+              //7. --- Write the Event --- //
+              // --------------------------//
+
+              outTree -> Fill();
+            }
           }
         }
       }
-    #else
-      outTree->Fill();
-    #endif
+      w_buffer_it = 0;
     }
+
+    // if (histoed)
+    // {
+    //   auto const tof_hit = rf.pulse_ToF_ns(hit.stamp);
+    //   histos.rf_all.Fill(tof_hit);
+    //   histos.rf_each.Fill(compressedLabel[hit.label], tof_hit);
+      
+    //   if (isGe[hit.label]) histos.energy_all_Ge.Fill(hit.nrj);
+    //   histos.energy_each.Fill(compressedLabel[hit.label], hit.nrj);
+
+    //   // if (isParis[hit.label])
+    //   // {
+    //   //   auto const & ratio = (hit.nrj2-hit.nrj)/hit.nrj2;
+    //   //   auto const & index = detectors.index(hit.label);
+    //   //   histos.paris_bidim[index].Fill(ratio, hit.nrj);
+    //   //   if (event.mult<5) histos.paris_bidim_M_inf_4[index].Fill(ratio, hit.nrj);
+    //   // }
+    // }
+
+    // print_precision(13);
+    // Event building :
+    // if (eventBuilder.build(hit))
+    // {
+    //   evts_count++;
+    //   counter.count(event); 
+    //   if ((evts_count%(int)(1.E+6)) == 0) debug(evts_count/(int)(1.E+6), "Mevts");
+    //   if (histoed)
+    //   {
+    //     auto const pulse_ref = rf.pulse_ToF_ns(event.stamp);
+    //     for (size_t trig_loop = 0; trig_loop<event.size(); trig_loop++)
+    //     {
+    //       auto const & label  = event.labels[trig_loop];
+    //       auto const & time   = event.times [trig_loop];
+    //       auto const tof_trig = pulse_ref+time/1000ll;
+    //       auto const & nrj    = calibration(event.nrjs[trig_loop], label);
+
+    //       histos.rf_all_event.Fill(tof_trig);
+    //       histos.rf_each_event.Fill(compressedLabel[label], tof_trig);
+      
+    //       if (isGe[label]) histos.energy_all_Ge_event.Fill(nrj+gRandom->Uniform(0,1));
+    //       histos.energy_each_event.Fill(compressedLabel[label], nrj);
+    //     }
+    //   }
+    // #ifdef TRIGGER
+    //   if (trigger(counter))
+    //   {
+        
+    // #ifdef PREPROMPT
+    //     eventBuilder.tryAddPreprompt_simple();
+    // #endif //PREPROMPT
+
+    //     if (nb_periods_more>0) eventBuilder.tryAddNextHit_simple(tempTree.get(), outTree.get(), hit, loop, gindex);
+
+    //     hits_count+=event.size();
+    //     trig_count++;
+    //     outTree->Fill();
+
+    //     if (histoed)
+    //     {
+    //       auto const pulse_ref = rf.pulse_ToF_ns(event.stamp);
+    //       for (uint trig_loop = 0; trig_loop<event.size(); trig_loop++)
+    //       {
+    //         auto const & label  = event.labels[trig_loop];
+    //         auto const & nrj    = event.nrjs  [trig_loop];
+    //         auto const & time   = event.times [trig_loop];
+    //         auto const tof_trig = pulse_ref+time/1000ll;
+
+    //         histos.rf_all_trig.Fill(tof_trig);
+    //         histos.rf_each_trig.Fill(compressedLabel[label], tof_trig);
+
+    //         if (isGe[label]) histos.energy_all_Ge_trig.Fill(nrj);
+    //         histos.energy_each_trig.Fill(compressedLabel[label], nrj);
+    //       }
+    //     }
+    //   }
+    // #else
+    //   outTree->Fill();
+    // #endif
+    // }
   }
   convert_timer.Stop();
   print("Conversion finished here done in", convert_timer.TimeElapsedSec() , "s (",dataSize/convert_timer.TimeElapsedSec() ,"Mo/s)");

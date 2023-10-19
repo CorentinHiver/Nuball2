@@ -20,7 +20,7 @@ public:
   // Adds either a single file or reads a .list containing a list of files
   virtual bool addFiles     (std::string const & _filename        );
   // Adds a given number of files with a .root or .fast inside the given folder (by default all the files, or the nb_files first ones)
-  virtual bool addFolder    (std::string folder, long nb_files = -1);
+  virtual bool addFolder    (std::string folder, long nb_files = -1, std::vector<std::string> const & extensions = {"root", "fast"});
   virtual void flushFiles   ();
   void   Print        () { for (auto const & file : m_listFiles) print(file);}
   void   printFolders () { for (auto const & folder : m_listFolder) print(folder);}
@@ -131,33 +131,10 @@ bool FilesManager::addFiles(std::string const & _filename)
   << "unkown..." << std::endl << "Abort..." << std::endl;return false;}
 }
 
-bool FilesManager::addFolder(std::string _foldername, long _nb_files)
+bool FilesManager::addFolder(std::string _foldername, long _nb_files, std::vector<std::string> const & extensions)
 {
-  if (_foldername.back() != '/')
-  {
-    m_listFolder.push_back(removePath(_foldername)+"/");
-    _foldername.push_back('/');
-  }
-  else
-  {
-    _foldername.pop_back();
-    m_listFolder.push_back(removePath(_foldername)+"/");
-    _foldername.push_back('/');
-  }
-  struct dirent *file = nullptr;
-  DIR *dp = nullptr;
-  dp = opendir(_foldername.c_str());
-  if (dp == nullptr) {std::cout << "Folder " << _foldername << " not found..." << std::endl; return false;}
-  std::string name = "";
-  ListFiles listfile;
-  while ( (file = readdir(dp)))
-  {
-    name = file->d_name;
-    if (extension(name) == "root" || extension(name) == "fast")
-      listfile.push_back(_foldername+name);
-  }
-  closedir(dp);
-  delete file;
+  push_back_if_none(_foldername, '/');
+  auto listfile = list_files_in_folder(_foldername, extensions); // Default .root OR .fast files only
   if (listfile.size() > 0)
   {
     std::sort(listfile.begin(), listfile.end());// Sorts the entries
@@ -165,7 +142,7 @@ bool FilesManager::addFolder(std::string _foldername, long _nb_files)
     ListFiles cut_listfile (listfile.begin(), listfile.begin()+_nb_files);// Take the nb_files first files of the folder
     for (auto const & file : cut_listfile) m_listFilesInFolder[_foldername].emplace_back(file);
     if (m_listFiles.size() == 0) m_listFiles = cut_listfile;// Set cut_listfile to be the global list of files
-    else std::copy(cut_listfile.begin(), cut_listfile.end(), back_inserter(m_listFiles));// Add cut_listfile to the global list of files
+    else std::copy(cut_listfile.begin(), cut_listfile.end(), std::back_inserter(m_listFiles));// Add cut_listfile to the global list of files
     if (verbose) print( cut_listfile.size(), "files added,", m_listFiles.size(), "files to process");
     return true;
   }
