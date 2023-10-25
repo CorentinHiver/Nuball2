@@ -30,7 +30,7 @@ private:
     Clovers clovers;
     while (reader.Read())
     {
-      clovers
+      
     }
   }
   static void runMTFasterReader(Hit & hit, FasterReader & reader, CloverEfficiency & ce)
