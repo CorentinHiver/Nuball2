@@ -809,29 +809,29 @@ void AnalyseIsomer::FillSorted(Event const & event, Clovers & clovers, DSSD & ds
     auto const & time_dssd = dssd.time();
     auto const & angle = dssd.angle()/3.141596*180 + ring_deg_thick;
 
-    for (auto const & strip : dssd) DSSD_bidims[strip.label()].Fill(strip.nrj, nrj_i);
+    for (auto const & strip : dssd) if (strip.nrj>0) DSSD_bidims[strip.label()].Fill(strip.nrj, nrj_i);
 
-    DSSD_Spectra.Fill(nrj_dssd);
-    DSSD_Spectra_VS_angle.Fill(angle, nrj_dssd);
-    Ge_VS_DSSD.Fill(nrj_dssd, nrj_i);
-    if (prompt_i) GePrompt_VS_DSSD.Fill(nrj_dssd, nrj_i);
-    if (delayed_i) GeDelayed_VS_DSSD.Fill(nrj_dssd, nrj_i);
+    // DSSD_Spectra.Fill(nrj_dssd);
+    // DSSD_Spectra_VS_angle.Fill(angle, nrj_dssd);
+    // Ge_VS_DSSD.Fill(nrj_dssd, nrj_i);
+    // if (prompt_i) GePrompt_VS_DSSD.Fill(nrj_dssd, nrj_i);
+    // if (delayed_i) GeDelayed_VS_DSSD.Fill(nrj_dssd, nrj_i);
 
-    DSSD_TW.Fill(time_dssd, nrj_dssd);
-    Ge_VS_DSSD_Time.Fill(time_dssd, time_i);
-    DSSD_VS_Nuball_calo.Fill(calo_clovers, nrj_dssd);
-    DSSD_VS_Total_calo.Fill(calo_total, nrj_dssd);
-    DSSD_VS_Total_Prompt_calo.Fill(calo_prompt_total, nrj_dssd);
-    DSSD_VS_Total_Delayed_calo.Fill(calo_delayed_total, nrj_dssd);
+    // DSSD_TW.Fill(time_dssd, nrj_dssd);
+    // Ge_VS_DSSD_Time.Fill(time_dssd, time_i);
+    // DSSD_VS_Nuball_calo.Fill(calo_clovers, nrj_dssd);
+    // DSSD_VS_Total_calo.Fill(calo_total, nrj_dssd);
+    // DSSD_VS_Total_Prompt_calo.Fill(calo_prompt_total, nrj_dssd);
+    // DSSD_VS_Total_Delayed_calo.Fill(calo_delayed_total, nrj_dssd);
 
-    //////////////////////////////
-    // --- Missing energy : --- //
-    //////////////////////////////
-    auto const & Missing_E = Qdispo-calo_prompt_total-dssd.energy();
-    Missing_VS_Delayed_cal.Fill(calo_delayed_total, Missing_E);
-    if (delayed_i) Delayed_Ge_VS_Missing.Fill(Missing_E, nrj_i);
-    else if (prompt_i) Prompt_Ge_VS_Missing.Fill(Missing_E, nrj_i);
-    Prompt_Calo_VS_Missing.Fill(Missing_E, calo_prompt_total);
+    // //////////////////////////////
+    // // --- Missing energy : --- //
+    // //////////////////////////////
+    // auto const & Missing_E = Qdispo-calo_prompt_total-dssd.energy();
+    // Missing_VS_Delayed_cal.Fill(calo_delayed_total, Missing_E);
+    // if (delayed_i) Delayed_Ge_VS_Missing.Fill(Missing_E, nrj_i);
+    // else if (prompt_i) Prompt_Ge_VS_Missing.Fill(Missing_E, nrj_i);
+    // Prompt_Calo_VS_Missing.Fill(Missing_E, calo_prompt_total);
   }
 
   ///////////////////
@@ -867,10 +867,10 @@ void AnalyseIsomer::FillSorted(Event const & event, Clovers & clovers, DSSD & ds
 
 void AnalyseIsomer::FillRaw(Event const & event)
 {
-  for (size_t i = 0; i<event.size(); i++)
-  {
-    if (isGe[event.labels[i]]) raw_Ge_Time_VS_Spectra.Fill(event.nrjs[i],event.time2s[i]);
-  }
+  // for (size_t i = 0; i<event.size(); i++)
+  // {
+  //   if (isGe[event.labels[i]]) raw_Ge_Time_VS_Spectra.Fill(event.nrjs[i],event.time2s[i]);
+  // }
 }
 
 void AnalyseIsomer::Write()
