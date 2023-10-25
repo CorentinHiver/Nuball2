@@ -415,6 +415,7 @@ std::ostream& operator<<(std::ostream& cout, THBinning binning)
 
 namespace CoAnalyse
 {
+  using ProjectionsBins = std::vector<std::pair<double,double>>;
   void normalizeY(TH2* matrix, double const & factor = 1)
   {
     int const & bins_x = matrix->GetNbinsX();
@@ -471,7 +472,7 @@ namespace CoAnalyse
     projectY(matrix, proj, matrix->GetXaxis()->FindBin(valueXmin), matrix->GetXaxis()->FindBin(valueXmax));
   }
 
-  void removeRandomY(TH2* matrix, int _stopX = -1, int _stopY = -1, bool writeIntermediate = false, std::vector<std::pair<double,double>> projections = {{508, 515}})
+  void removeRandomY(TH2* matrix, int _stopX = -1, int _stopY = -1, bool writeIntermediate = false, ProjectionsBins projections = {{}})
   {
     int const & bins_x = matrix->GetNbinsX();
     int const & bins_y = matrix->GetNbinsY();
@@ -563,7 +564,48 @@ namespace CoAnalyse
     }
   }
 
-void removeRandomBidim(TH2* matrix, int iterations = 1, bool save_intermediate = false, std::vector<std::pair<double,double>> projections = {{}})
+  void setX(TH2* matrix, TH1* proj, int const & binX)
+  {
+    if (matrix == nullptr){throw_error("Matrix histo nullptr in CoAnalyse::setX");}
+    if (proj == nullptr) {throw_error("Projection histo nullptr in CoAnalyse::setX");}
+    for (int binY = 0; binY<matrix->GetNbinsY(); binY++) matrix->SetBinContent(binX, binY, proj->GetBinContent(binY));
+  }
+
+  /// @brief Project on Y axis at a given X bin
+  void projectX(TH2* matrix, TH1* proj, int const & binY)
+  {
+    if (matrix == nullptr) {throw_error("Matrix histo nullptr in CoAnalyse::projectX");}
+    auto const & nbBins = matrix->GetNbinsX();
+    if (proj == nullptr) proj = new TH1F();
+    proj->SetBins(nbBins,minXaxis(matrix), maxXaxis(matrix));
+    for (int x = 0; x<nbBins; x++) proj->SetBinContent(x, matrix->GetBinContent(x, binY));
+  }
+
+  /// @brief Project on X axis between bin binYmin included and binYmax excluded [binYmin;binYmax[
+  void projectX(TH2* matrix, TH1* proj, int const & binYmin, int const & binYmax)
+  {
+    if (matrix == nullptr) {throw_error("Matrix histo nullptr in CoAnalyse::projectX");}
+    auto const & nbBins = matrix->GetNbinsX();
+    if (proj == nullptr) proj = new TH1F();
+    proj->SetBins(nbBins, minXaxis(matrix), maxXaxis(matrix));
+    for (int y = binYmin; y<binYmax; y++) for (int x = 0; x<nbBins; x++) 
+      proj->AddBinContent(x, matrix->GetBinContent(x, y));
+  }
+
+  /// @brief Project on Y axis between values binYmin and binYmax included [binYmin;binYmax]
+  void projectX(TH2* matrix, TH1* proj, double const & binYmin, double const & binYmax)
+  {
+    projectX(matrix, proj, matrix->GetYaxis()->FindBin(binYmin), matrix->GetYaxis()->FindBin(binYmax));
+  }
+
+  void setY(TH2* matrix, TH1* proj, int const & binY)
+  {
+    if (matrix == nullptr){throw_error("Matrix histo nullptr in CoAnalyse::setY");}
+    if (proj == nullptr) {throw_error("Projection histo nullptr in CoAnalyse::setY");}
+    for (int binX = 0; binX<matrix->GetNbinsX(); binX++) matrix->SetBinContent(binX, binY, proj->GetBinContent(binY));
+  }
+
+  void removeRandomBidim(TH2* matrix, int iterations = 1, bool save_intermediate = false, ProjectionsBins projectionsY = {{}}, ProjectionsBins projectionsX = {{}})
   {
     int const & bins_x = matrix->GetNbinsX();
     int const & bins_y = matrix->GetNbinsY();
@@ -576,7 +618,8 @@ void removeRandomBidim(TH2* matrix, int iterations = 1, bool save_intermediate =
     // auto const & iterations_pow4 = iterations*iterations*iterations*iterations;
     // auto const maximum = matrix->GetMaximum();
 
-    std::vector<std::vector<TH1*>> intermediate_proj(projections.size());
+    std::vector<std::vector<TH1*>> intermediate_projX(projectionsX.size());
+    std::vector<std::vector<TH1*>> intermediate_projY(projectionsY.size());
     std::vector<TH1D*> save_totProjX;
     std::vector<TH1D*> save_totProjY;
     // std::vector<TH2*> clones;
@@ -667,10 +710,10 @@ void removeRandomBidim(TH2* matrix, int iterations = 1, bool save_intermediate =
           auto sub = (totProjX[x] * totProjY[y])/(iterations*total);
           sub = sub *(1 - sub/(iterations*value));
 
-          // matrix -> SetBinContent(x, y, value - sub);
+          matrix -> SetBinContent(x, y, value - sub);
 
-          // totProjX_buf[x] -= sub;
-          // totProjY_buf[y] -= sub;
+          totProjX_buf[x] -= sub;
+          totProjY_buf[y] -= sub;
 
           // totProjX_buf[x] -= save_sub[it][x][y];
           // totProjY_buf[y] -= save_sub[it][x][y];
@@ -680,14 +723,27 @@ void removeRandomBidim(TH2* matrix, int iterations = 1, bool save_intermediate =
         }
       }
 
-      // Project on axis :
-      if (save_intermediate) for (size_t proj_i = 0; proj_i<projections.size(); proj_i++)
+      if (save_intermediate) 
       {
-        auto histo = new TH1F();
-        auto const & gate = projections[proj_i];
-        projectY(matrix, histo, gate.first, gate.second);
-        auto const & histo_name = matrix_name+"_"+std::to_string(gate.first)+"_"+std::to_string(gate.second)+"_"+std::to_string(it);
-        intermediate_proj[proj_i].emplace_back(dynamic_cast<TH1F*>(histo->Clone(histo_name.c_str())));
+        // Project on the axis :
+        for (size_t proj_i = 0; proj_i<projectionsY.size(); proj_i++)
+        {
+          auto histo = new TH1F();
+          auto const & gate = projectionsY[proj_i];
+          if (gate.first == gate.second) continue;
+          projectY(matrix, histo, gate.first, gate.second);
+          auto const & histo_name = matrix_name+"_projY_"+std::to_string(gate.first)+"_"+std::to_string(gate.second)+"_"+std::to_string(it);
+          intermediate_projY[proj_i].emplace_back(dynamic_cast<TH1F*>(histo->Clone(histo_name.c_str())));
+        }
+        for (size_t proj_i = 0; proj_i<projectionsX.size(); proj_i++)
+        {
+          auto histo = new TH1F();
+          auto const & gate = projectionsX[proj_i];
+          if (gate.first == gate.second) continue;
+          projectX(matrix, histo, gate.first, gate.second);
+          auto const & histo_name = matrix_name+"_projX_"+std::to_string(gate.first)+"_"+std::to_string(gate.second)+"_"+std::to_string(it);
+          intermediate_projX[proj_i].emplace_back(dynamic_cast<TH1F*>(histo->Clone(histo_name.c_str())));
+        }
       }
 
       // Update the total projections :
@@ -706,31 +762,11 @@ void removeRandomBidim(TH2* matrix, int iterations = 1, bool save_intermediate =
     for (auto & histo : save_totProjY) if (histo!=nullptr) histo -> Write();
     for (auto & histo : save_sub_projX) if (histo!=nullptr) histo -> Write();
     for (auto & histo : save_sub_projY) if (histo!=nullptr) histo -> Write();
-    for (auto & projections : intermediate_proj) for (auto & histo : projections) if (histo!=nullptr) histo -> Write();
+    for (auto & projections : intermediate_projX) for (auto & histo : projections) if (histo!=nullptr) histo -> Write();
+    for (auto & projections : intermediate_projY) for (auto & histo : projections) if (histo!=nullptr) histo -> Write();
     file->Write();
     file->Close();
     print(filename, "written");
-  }
-
-  void setX(TH2* matrix, TH1* proj, int const & binX)
-  {
-    if (matrix == nullptr){throw_error("Matrix histo nullptr in CoAnalyse::setX");}
-    if (proj == nullptr) {throw_error("Projection histo nullptr in CoAnalyse::setX");}
-    for (int binY = 0; binY<matrix->GetNbinsY(); binY++) matrix->SetBinContent(binX, binY, proj->GetBinContent(binY));
-  }
-
-  void projectX(TH2* matrix, TH1* proj, int const & binY)
-  {
-    if (matrix == nullptr){throw_error("Matrix histo nullptr in CoAnalyse::projectX");}
-    // if (proj == nullptr) proj = new TH1F("temp","temp",nXbins, bidim->GetXaxis()->GetXmax(), bidim->GetXaxis()->GetXmin());
-    for (int binX = 0; binX<matrix->GetNbinsX(); binX++) {print(binX, binY); proj->SetBinContent(binX, matrix->GetBinContent(binX, binY));}
-  }
-
-  void setY(TH2* matrix, TH1* proj, int const & binY)
-  {
-    if (matrix == nullptr){throw_error("Matrix histo nullptr in CoAnalyse::setY");}
-    if (proj == nullptr) {throw_error("Projection histo nullptr in CoAnalyse::setY");}
-    for (int binX = 0; binX<matrix->GetNbinsX(); binX++) matrix->SetBinContent(binX, binY, proj->GetBinContent(binY));
   }
 
 
