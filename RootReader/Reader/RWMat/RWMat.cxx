@@ -27,7 +27,7 @@ for (int i=0; i < xchans ; i++)
 	{
 	fRWMat[i][j]=RootMat->GetBinContent(i,j);
 	val+=fRWMat[i][j];
-	}	
+	}
 }
 //cout << "RW Matrix Created. Total Counts = " << val << endl;
 //cout << "filename = " << fName << endl;

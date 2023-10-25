@@ -125,14 +125,15 @@ backsub(by,10);
 cout << px->Integral() << " " << bx->Integral() << endl;
 
 
-// STEP 1: Classic Radware subtraction
+// STEP 1: Classic Radware substraction
 double T=mat1->Integral();
 for (int i=0; i < 4096; i++) //over x
 	{
 	for (int j=0; j < 4096; j++) //over y
 		{
-		
+		// Estimation du fond au bin ij
 		double bkval=px->GetBinContent(i)*by->GetBinContent(j)+py->GetBinContent(j)*bx->GetBinContent(i);
+		// A ij, il y aura les coincidences Pic1 Background1, P1B2, P2B1, B1B2
 		bkval-=(bx->GetBinContent(j)*by->GetBinContent(i));
 		double counts=mat1->Get(i,j);
 		bkval/=T;
@@ -142,10 +143,6 @@ for (int i=0; i < 4096; i++) //over x
 		bksub1->Set(i,j,newcounts);
 		}
 	}
-
-
-Spec *diagonal=new Spec(4096);
-Spec *diagonalb=new Spec(4096);
 
 // STEP 2: CORRECT THE OVER AND UNDERSUBTRACTED GATES
 
@@ -173,9 +170,6 @@ backsubS(diagonal,16);
 	//bksub2->Set(j,i,val3-bkg);
 	//if (lookup[i]) {bksub2->Set(j,i,val3-bkg);}
 	}
-if (i == 351) {diagonal->Write("dia1.spe"); diagonalb->Write("dia1b.spe");}
-diagonal->Clear();
-diagonalb->Clear();
 }
 //Resymmetrize, privelaging the x-axis which has the right set of y-spectra
 for (int i=0; i < 4096; i++)
@@ -188,7 +182,11 @@ for (int i=0; i < 4096; i++)
 }
 bksub2->ReSymmetrise();
 
+
 // STEP 3: SUBTRACT OFF THE DIAGONALS
+Spec *diagonal=new Spec(4096);
+Spec *diagonalb=new Spec(4096);
+
 for (int i=1; i < 4096; i++)
 {
 	for (int j=0; j <=i; j++)

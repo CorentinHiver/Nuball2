@@ -160,7 +160,12 @@ std::string get_filename_at(std::string & folderName, int pos)
   return ret;
 }
 
-std::vector<std::string> list_files_in_folder(std::string const & foldername, std::vector<std::string> const & extensions = {"*"})
+std::vector<std::string> list_files_in_folder
+(
+  std::string const & foldername, 
+  std::vector<std::string> const & extensions = {"*"},
+  bool const & reorder = true
+)
 {
   std::vector<std::string> ret;
   struct dirent *file = nullptr;
@@ -176,6 +181,7 @@ std::vector<std::string> list_files_in_folder(std::string const & foldername, st
   }
   closedir(dp);
   delete file;
+  if (reorder) std::sort(ret.begin(), ret.end());
   return ret;
 }
 
@@ -248,10 +254,32 @@ template <class N, class D> std::string procent(N const & n, D const & d)
   return (std::to_string(100*static_cast<double>(n)/static_cast<double>(d))+"%");
 }
 
+template<class Index, class T>
+class CoDataFrame
+{
+public:
+  CoDataFrame() = default;
+  CoDataFrame(std::string const & filename, std::string const & type = "csv");
+
+  auto const & filename() const {return m_filename;}
+  void load(std::string const & filename, std::string const & type);
+
+  void operator<<(std::istringstream & iss);
+
+private:
+  std::vector<Index> m_index;
+  std::vector<std::vector<T>> m_data;
+
+  size_t size = 0;
+  bool good = false;
+
+  std::string m_filename;
+};
+
 
 // ----------------------------------- //
 // ----------------------------------- //
-//        PATH FOLDERS AND FILES
+//        PATH FOLDERS AND FILES       //
 // ----------------------------------- //
 // ----------------------------------- //
 

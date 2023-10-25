@@ -5,19 +5,51 @@
 // #define USE_RF 200
 
 #include "../libRoot.hpp"
-// #include <CloverEfficiency.hpp>
+#include <CloverEfficiency.hpp>
 // #include <Calibration.hpp>
 // #include <RunMatrixator.hpp>
 // #include <Detectors.hpp>
 // #include <Timeshifts.hpp>
-#include <Convertor.hpp>
+// #include <Convertor.hpp>
+// #include <MTFasterReader.hpp>
 
 int main(int argc, char ** argv)
 {
-  std::string index_file = "index_129.list";
-  detectors.load(index_file);
+  // std::string index_file = "index_129.list";
+  // detectors.load(index_file);
 
-  fuse_all_histo("histos/");
+  // fuse_all_histo("histos/", true);
+
+  // auto file = TFile::Open("fused_histo_final.root", "READ");
+  // std::vector<std::pair<double, double>> gates = {{840, 850},{639, 644}, {725, 730}, {507, 515}};
+  // // auto histo = file->Get<TH2F>("S1_2_DSSD_prompt");
+  // // auto histo = file->Get<TH2F>("PARIS_BR2D1_prompt");
+  // // CoAnalyse::removeRandomY(histo, -1, -1, true, gates);
+
+  // auto PARIS_BR2D1_prompt = file->Get<TH2F>("PARIS_BR2D1_prompt");
+  // if (argc == 2) CoAnalyse::removeRandomBidim(PARIS_BR2D1_prompt, std::stoi(argv[1]), gates);
+  // else CoAnalyse::removeRandomBidim(PARIS_BR2D1_prompt, gates, 1);
+
+  // auto S1_2_DSSD_prompt = file->Get<TH2F>("S1_2_DSSD_prompt");
+  // if (argc == 2) CoAnalyse::removeRandomBidim(S1_2_DSSD_prompt, std::stoi(argv[1]), gates);
+  // else CoAnalyse::removeRandomBidim(S1_2_DSSD_prompt, gates, 1);
+
+  // auto pp = file->Get<TH2F>("pp");
+  // if (argc == 2) CoAnalyse::removeRandomBidim(pp, gates, std::stoi(argv[1]));
+  // else CoAnalyse::removeRandomBidim(pp, gates, 1);
+  // auto dd = file->Get<TH2F>("dd");
+  // if (argc == 2) CoAnalyse::removeRandomBidim(dd, gates, std::stoi(argv[1]));
+  // else CoAnalyse::removeRandomBidim(dd, gates, 1);
+  // auto dp = file->Get<TH2F>("dp");
+  // if (argc == 2) CoAnalyse::removeRandomBidim(dp, gates, std::stoi(argv[1]));
+  // else CoAnalyse::removeRandomBidim(dp, gates, 1);
+
+  // CoAnalyse::removeRandomY(pp, -1, -1, false, gates);
+  // auto dd = file->Get<TH2F>("dd");
+  // CoAnalyse::removeRandomY(dd, -1, -1, true, gates);
+  // auto dp = file->Get<TH2F>("dp");
+  // CoAnalyse::removeRandomY(dp, -1, -1, true, gates);
+  
 
   // int nb_files = -1;
   // int nb_threads = 1;

@@ -128,7 +128,9 @@ private:
   std::string outDir  = "Analyse/Isomer/";
   std::string outRoot = "ai.root";
 
-  double Qvalue = 15000;
+  double Qvalue = 4322;
+  double Ebeam = 11000;
+  double Qdispo = Qvalue+Ebeam;
   bool m_writeRadware = false;
   bool m_trigger1989 = false;
 
@@ -268,6 +270,8 @@ private:
 
   Vector_MTTHist<TH1F> Paris_singles_labr;
   Vector_MTTHist<TH1F> Paris_singles_nai;
+
+  Vector_MTTHist<TH2F> DSSD_bidims;
 
   // MTTHist<TH2F> mult_VS_Time; In order to see the evolution of Multiplicity over time. To do it, take a moving 50ns time window to group events
 
@@ -545,8 +549,15 @@ void AnalyseIsomer::InitializeManip()
     Paris_singles_nai [i_paris].reset(name+"_nai", (name+" NaI;E [keV];#")  .c_str(), 1000,0,10000);
   }
 
+  auto const & nb_dssd = detectors.nbOfType("dssd");
+  DSSD_bidims.resize(nb_dssd);
+  for (size_t i_dssd = 0; i_dssd<nb_dssd; i_dssd++)
+  {
+    auto const & name = detectors.name("dssd", i_dssd);
+    DSSD_bidims[i_dssd].reset(name, (name+";DSSD [keV];Clovers [keV]").c_str(), 750,0,15000, 20000,0,20000);
+  }
+
   // Set analysis parameters :
-  // Sorted_Event::setDSSDVeto(-10, 50, 5000);
   RF_Manager::set_offset_ns(40);
 }
 
@@ -707,10 +718,10 @@ void AnalyseIsomer::FillSorted(Event const & event, Clovers & clovers, DSSD & ds
       {
         for (auto const & index : paris.indexes)
         {
-          auto const & label = event.labels[index];
+          // auto const & label = event.labels[index];
           auto const & nrj = event.nrjs[index];
           auto const & nrj2 = event.nrj2s[index];
-          auto const & time = event.time2s[index];
+          // auto const & time = event.time2s[index];
           auto const & ratio = (nrj2-nrj)/nrj2;
           if (ratio>-0.2 && ratio<0.2) Paris_back_calibrated_VS_delayed_U6.Fill(nrj);
         }
@@ -796,13 +807,16 @@ void AnalyseIsomer::FillSorted(Event const & event, Clovers & clovers, DSSD & ds
     //////////////////////////////
     auto const & nrj_dssd = dssd.energy();
     auto const & time_dssd = dssd.time();
-    auto const angle = dssd.angle()/3.141596*180 + ring_deg_thick;
+    auto const & angle = dssd.angle()/3.141596*180 + ring_deg_thick;
+
+    for (auto const & strip : dssd) DSSD_bidims[strip.label()].Fill(strip.nrj, nrj_i);
 
     DSSD_Spectra.Fill(nrj_dssd);
     DSSD_Spectra_VS_angle.Fill(angle, nrj_dssd);
     Ge_VS_DSSD.Fill(nrj_dssd, nrj_i);
     if (prompt_i) GePrompt_VS_DSSD.Fill(nrj_dssd, nrj_i);
     if (delayed_i) GeDelayed_VS_DSSD.Fill(nrj_dssd, nrj_i);
+
     DSSD_TW.Fill(time_dssd, nrj_dssd);
     Ge_VS_DSSD_Time.Fill(time_dssd, time_i);
     DSSD_VS_Nuball_calo.Fill(calo_clovers, nrj_dssd);
@@ -813,7 +827,7 @@ void AnalyseIsomer::FillSorted(Event const & event, Clovers & clovers, DSSD & ds
     //////////////////////////////
     // --- Missing energy : --- //
     //////////////////////////////
-    auto const & Missing_E = Qvalue-calo_prompt_total-dssd.energy();
+    auto const & Missing_E = Qdispo-calo_prompt_total-dssd.energy();
     Missing_VS_Delayed_cal.Fill(calo_delayed_total, Missing_E);
     if (delayed_i) Delayed_Ge_VS_Missing.Fill(Missing_E, nrj_i);
     else if (prompt_i) Prompt_Ge_VS_Missing.Fill(Missing_E, nrj_i);
@@ -1000,6 +1014,8 @@ void AnalyseIsomer::Write()
 
   for (auto & spectra : Paris_singles_labr) spectra.Write();
   for (auto & spectra : Paris_singles_nai) spectra.Write();
+
+  for (auto & spectra : DSSD_bidims) spectra.Write();
 
   outfile->Write();
   outfile->Close();

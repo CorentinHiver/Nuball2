@@ -60,6 +60,26 @@ inline Long64_t Long64_cast(T const & t) {return static_cast<Long64_t>(t);}
 //   HISTO MANIPULATIONS  //
 ////////////////////////////
 
+float minXaxis(TH1* histo)
+{
+  return histo->GetXaxis()->GetBinLowEdge(1);
+}
+
+float maxXaxis(TH1* histo)
+{
+  return histo->GetXaxis()->GetBinUpEdge(histo->GetNbinsX());
+}
+
+float minYaxis(TH1* histo)
+{
+  return histo->GetYaxis()->GetBinLowEdge(1);
+}
+
+float maxYaxis(TH1* histo)
+{
+  return histo->GetYaxis()->GetBinUpEdge(histo->GetNbinsY());
+}
+
 bool THist_exists(TH1* histo)
 {
   return (histo && !histo->IsZombie() && histo->Integral()>1);
@@ -395,29 +415,321 @@ std::ostream& operator<<(std::ostream& cout, THBinning binning)
 
 namespace CoAnalyse
 {
-  void projectY(TH1* matrix, TH1* proj, int const & binX)
+  void normalizeY(TH2* matrix, double const & factor = 1)
   {
-    if (matrix == nullptr){throw_error("Matrix histo nullptr in CoAnalyse::projectY");}
-    if (proj == nullptr) {throw_error("Projection histo nullptr in CoAnalyse::projectY");}
-    auto const & nbBins = matrix->GetNbinsY();
-    proj->SetBins(nbBins, 0, nbBins);
-    for (int binY = 0; binY<nbBins; binY++) 
+    int const & bins_x = matrix->GetNbinsX();
+    int const & bins_y = matrix->GetNbinsY();
+    for (int x = 1; x<bins_x; x++)
     {
-      proj->SetBinContent(binY, matrix->GetBinContent(binX, binY));
+      Float_t maxRow = 0.;
+      // 1 : Get the maximum
+      for (int y = 1; y<bins_y; y++) if(matrix->GetBinContent(x, y) > maxRow) maxRow = matrix->GetBinContent(x, y);
+      // 2 : Normalize to set maximum = factor
+      if (maxRow>0) for (int y = 1; y<bins_y; y++) 
+      {
+        matrix -> SetBinContent(x, y, factor*matrix->GetBinContent(x, y)/maxRow);
+      }
+    }
+  }
+
+  void normalizeBidim(TH2* matrix, double const & factor = 1.0)
+  {
+    auto const & bins_x = matrix->GetNbinsX();
+    auto const & bins_y = matrix->GetNbinsY();
+    double const & max = matrix->GetMaximum();
+    if (max>0.) for (int x = 0; x<bins_x+1; x++) for (int y = 0; y<bins_y+1; y++)
+    {
+      auto const & value = matrix->GetBinContent(x, y);
+      if (value>0) matrix -> SetBinContent(x, y, factor*value/max);
+    }
+  }
+
+  /// @brief Project on Y axis at a given X bin
+  void projectY(TH2* matrix, TH1* proj, int const & binX)
+  {
+    if (matrix == nullptr) {throw_error("Matrix histo nullptr in CoAnalyse::projectY");}
+    auto const & nbBins = matrix->GetNbinsY();
+    if (proj == nullptr) proj = new TH1F();
+    proj->SetBins(nbBins,minXaxis(matrix), maxXaxis(matrix));
+    for (int binY = 0; binY<nbBins; binY++) proj->SetBinContent(binY, matrix->GetBinContent(binX, binY));
+  }
+
+  /// @brief Project on Y axis between bin binXmin included and binXmax excluded [binXmin;binXmax[
+  void projectY(TH2* matrix, TH1* proj, int const & binXmin, int const & binXmax)
+  {
+    if (matrix == nullptr) {throw_error("Matrix histo nullptr in CoAnalyse::projectY");}
+    auto const & nbBins = matrix->GetNbinsY();
+    if (proj == nullptr) proj = new TH1F();
+    proj->SetBins(nbBins, minXaxis(matrix), maxXaxis(matrix));
+    for (int x = binXmin; x<binXmax; x++) for (int y = 0; y<nbBins; y++) 
+      proj->AddBinContent(y, matrix->GetBinContent(x, y));
+  }
+
+  /// @brief Project on Y axis between values valueXmin and valueXmax included [valueXmin;valueXmax]
+  void projectY(TH2* matrix, TH1* proj, double const & valueXmin, double const & valueXmax)
+  {
+    projectY(matrix, proj, matrix->GetXaxis()->FindBin(valueXmin), matrix->GetXaxis()->FindBin(valueXmax));
+  }
+
+  void removeRandomY(TH2* matrix, int _stopX = -1, int _stopY = -1, bool writeIntermediate = false, std::vector<std::pair<double,double>> projections = {{508, 515}})
+  {
+    int const & bins_x = matrix->GetNbinsX();
+    int const & bins_y = matrix->GetNbinsY();
+    int startX = 0;
+    int stopX = (_stopX<0) ? bins_x+1 : _stopX;
+    int startY = 0;
+    int stopY = (_stopY<0) ? bins_y+1 : _stopY;;
+
+    // print("Normalizing...");
+    // normalizeY(matrix, 1);// This is in order to have floating points in the z axis
+    // normalizeBidim(matrix, 1);// This is in order to have floating points in the z axis
+
+    print("Cloning...");
+    auto clone = static_cast<TH2*>(matrix->Clone());
+    clone->SetDirectory(nullptr);
+
+    print("Projecting on both axis...");
+    std::vector<double> totProjX(bins_x+1);
+    std::vector<double> totProjY(bins_y+1);
+    for (int x = startX; x<bins_x+1; x++) for (int y = startY; y<bins_y+1; y++) 
+    {
+      auto const & value = matrix->GetBinContent(x,y);
+      totProjX[x] += value;
+      totProjY[y] += value;
     }
 
+    print("Substracting...");
+    std::vector<TH2*> intermediate;
+    std::vector<std::vector<TH1*>> intermediate_proj(projections.size());
+    auto const & total = matrix->Integral();
+    for (int x = startX; x<stopX; x++)
+    {
+      if (x%(stopX/100) == 0) 
+      {
+        auto advancement = int_cast(100*x/stopX);
+        print(advancement, "%");
+        if (writeIntermediate && advancement%10 == 0)
+        {
+          print("Saving at", advancement, "% process");
+          std::string matrix_name = matrix->GetName()+std::to_string(advancement);
+          intermediate.emplace_back(dynamic_cast<TH2*>(clone->Clone(matrix_name.c_str())));
+          for (size_t proj_i = 0; proj_i<projections.size(); proj_i++)
+          {
+            auto histo = new TH1F();
+            auto const & gate = projections[proj_i];
+            projectY(intermediate.back(), histo, gate.first, gate.second);
+            auto const & histo_name = matrix_name+"_"+std::to_string(gate.first)+"_"+std::to_string(gate.second);
+            intermediate_proj[proj_i].emplace_back(dynamic_cast<TH1F*>(histo->Clone(histo_name.c_str())));
+          }
+        }
+      }
+      // w = totProjX[x]/total; // Weight of the y spectra at bin x
+      for (int y = startY; y<stopY; y++) 
+      {
+        auto const & sub = totProjY[y] * totProjX[x];
+        // auto const & sub = totProjY[y] * w * matrix->GetBinContent(x, y);
+        // if (sub>0) for (int x2 = startX; x2<stopX; x2++) 
+        // {
+          // auto const & global_bin = matrix->GetBin(x2, y);
+          // auto const & new_value = clone->GetBinContent(global_bin)-sub;
+          // if (new_value>0) clone -> SetBinContent(global_bin, new_value);
+          auto const & new_value = clone->GetBinContent(x, y)-sub/total;
+          clone -> SetBinContent(x, y, new_value);
+          // clone -> SetBinContent(x, y, (new_value>0) ? new_value : 0);
+        // }
+      }
+    }
+
+    print("Substraction done, copying back...");
+    delete matrix;
+    matrix = static_cast<TH2*>(clone->Clone());
+
+    // print("Renormalising...");
+    // normalizeBidim(matrix, 1);
+
+    print("RemoveRandomY done.");
+    if (writeIntermediate)
+    {
+      print("Writting intermediate steps...");
+      std::string filename = std::string("Intermediate_")+matrix->GetName()+".root";
+      auto file = TFile::Open(filename.c_str(), "recreate");
+      file->cd();
+      matrix->Write();
+      // for (auto & histo : intermediate) if (histo!=nullptr) histo -> Write();
+      for (auto & projections : intermediate_proj) for (auto & histo : projections) if (histo!=nullptr) histo -> Write();
+      file->Write();
+      file->Close();
+      print(filename, "written");
+    }
   }
-  void setX(TH1* matrix, TH1* proj, int const & binX)
+
+void removeRandomBidim(TH2* matrix, int iterations = 1, bool save_intermediate = false, std::vector<std::pair<double,double>> projections = {{}})
   {
+    int const & bins_x = matrix->GetNbinsX();
+    int const & bins_y = matrix->GetNbinsY();
+    int startX = 0;
+    int stopX = bins_x+1;
+    int startY = 0;
+    int stopY = bins_y+1;
+    std::string matrix_name = matrix->GetName();
+    auto const & iterations_sqr = iterations*iterations;
+    // auto const & iterations_pow4 = iterations*iterations*iterations*iterations;
+    // auto const maximum = matrix->GetMaximum();
+
+    std::vector<std::vector<TH1*>> intermediate_proj(projections.size());
+    std::vector<TH1D*> save_totProjX;
+    std::vector<TH1D*> save_totProjY;
+    // std::vector<TH2*> clones;
+    std::vector<double> integrals(iterations_sqr*iterations,0.);
+
+    // std::vector<std::vector<std::vector<double>>> save_sub(iterations_sqr*iterations);
+    // std::vector<std::vector<double>> sub_moyX(iterations_sqr*iterations);
+    // std::vector<std::vector<double>> sub_moyY(iterations_sqr*iterations);
+    std::vector<std::vector<double>> sub_array;
+    std::vector<TH1D*> save_sub_projX;
+    std::vector<TH1D*> save_sub_projY;
+    for (int it = 0; it<iterations_sqr*iterations; it++) 
+    {
+      // save_sub[it].resize(bins_x+1);
+      // sub_moyX[it].resize(bins_x+1);
+      for (int x = 0; x<bins_x+1; x++) 
+      {
+        // sub_moyX[it][x] = 0.0;
+        
+        // save_sub[it][x].resize(bins_y+1);
+        // for (int y = 0; y<bins_y+1; y++) save_sub [it][x][y] = 0.0;
+      }
+
+      // sub_moyY[it].resize(bins_y+1);
+      // for (int y = 0; y<bins_y+1; y++) sub_moyY[it][y] = 0.0;
+    }
+
+    std::vector<double> totProjX(bins_x+1);
+    std::vector<double> totProjY(bins_y+1);
+    std::vector<double> totProjX_buf(bins_x+1);
+    std::vector<double> totProjY_buf(bins_y+1);
+    for (int x = startX; x<bins_x+1; x++) for (int y = startY; y<bins_y+1; y++) 
+    {
+      auto const & value = matrix->GetBinContent(x,y);
+      totProjX[x] += value;
+      totProjY[y] += value;
+      totProjX_buf[x] += value;
+      totProjY_buf[y] += value;
+    }
+
+    auto firstTotProjX = matrix->ProjectionX("firstTotProjX");
+    auto firstTotProjY = matrix->ProjectionY("firstTotProjY");
+
+    print("Substracting...");
+    for (int it = 0; it<iterations_sqr*iterations; it++)
+    {
+      print("Iteration", it);
+      if(save_intermediate)
+      {
+        save_totProjX.emplace_back(dynamic_cast<TH1D*>(firstTotProjX->Clone(("totProjX_"+std::to_string((int)(it))).c_str())));
+        save_totProjY.emplace_back(dynamic_cast<TH1D*>(firstTotProjY->Clone(("totProjY_"+std::to_string((int)(it))).c_str())));
+        // if (it>0) save_sub_projX.emplace_back(dynamic_cast<TH1D*>(firstTotProjX->Clone(("sub_projX_"+std::to_string((int)(it-1))).c_str())));
+        // if (it>0) save_sub_projY.emplace_back(dynamic_cast<TH1D*>(firstTotProjY->Clone(("sub_projY_"+std::to_string((int)(it-1))).c_str())));
+
+        for (int x = 0; x<bins_x+1; x++) 
+        {
+          save_totProjX[it]->SetBinContent(x, totProjX[x]);
+          // if (it>0) save_sub_projX[it-1]->SetBinContent(x, sub_moyX[it-1][x]);
+        }
+        for (int y = 0; y<bins_y+1; y++) 
+        {
+          save_totProjY[it]->SetBinContent(y, totProjY[y]);
+          // if (it>0) save_sub_projY[it-1]->SetBinContent(y, sub_moyY[it-1][y]);
+        }
+      }
+      
+      auto const total = matrix->Integral();
+      // auto const & prev_total = (it>0) ? clones[it-1]->Integral() : total;
+      // auto const & prev_total2 = (it>0) ? clones[it-1]->Integral() : total;
+
+      for (int x = startX; x<stopX; x++)
+      {
+        for (int y = startY; y<stopY; y++) 
+        {
+          auto const & value = matrix->GetBinContent(x, y);
+          if (value == 0) continue;
+
+          // V1 :
+          // auto diff = (it>0) ? clones[it-1]->GetBinContent(x,y)*total/prev_total - value : 0;
+          // auto const & sub = (totProjY[y] * totProjX[x])/(iterations*total);
+          // auto const & new_value = value - sub - sqrt(diff)/iterations;
+
+          // V2 :
+          // save_sub[it][x][y] = (totProjX[x] * totProjY[y])/(iterations*total);
+          // auto const new_value = value - save_sub[it][x][y];
+
+          // V3 :
+          auto sub = (totProjX[x] * totProjY[y])/(iterations*total);
+          sub = sub *(1 - sub/(iterations*value));
+
+          // matrix -> SetBinContent(x, y, value - sub);
+
+          // totProjX_buf[x] -= sub;
+          // totProjY_buf[y] -= sub;
+
+          // totProjX_buf[x] -= save_sub[it][x][y];
+          // totProjY_buf[y] -= save_sub[it][x][y];
+
+          // sub_moyX[it][x] += save_sub[it][x][y]/totProjX[x]/stopX;
+          // sub_moyY[it][y] += save_sub[it][x][y]/totProjY[y]/stopY;
+        }
+      }
+
+      // Project on axis :
+      if (save_intermediate) for (size_t proj_i = 0; proj_i<projections.size(); proj_i++)
+      {
+        auto histo = new TH1F();
+        auto const & gate = projections[proj_i];
+        projectY(matrix, histo, gate.first, gate.second);
+        auto const & histo_name = matrix_name+"_"+std::to_string(gate.first)+"_"+std::to_string(gate.second)+"_"+std::to_string(it);
+        intermediate_proj[proj_i].emplace_back(dynamic_cast<TH1F*>(histo->Clone(histo_name.c_str())));
+      }
+
+      // Update the total projections :
+      totProjX = totProjX_buf;
+      totProjY = totProjY_buf;
+
+      // normalizeBidim(matrix, maximum);
+    }
+
+    print("Writting intermediate steps...");
+    std::string filename = "Background_removed_"+matrix_name+".root";
+    auto file = TFile::Open(filename.c_str(), "recreate");
+    file->cd();
+    matrix->Write();
+    for (auto & histo : save_totProjX) if (histo!=nullptr) histo -> Write();
+    for (auto & histo : save_totProjY) if (histo!=nullptr) histo -> Write();
+    for (auto & histo : save_sub_projX) if (histo!=nullptr) histo -> Write();
+    for (auto & histo : save_sub_projY) if (histo!=nullptr) histo -> Write();
+    for (auto & projections : intermediate_proj) for (auto & histo : projections) if (histo!=nullptr) histo -> Write();
+    file->Write();
+    file->Close();
+    print(filename, "written");
+  }
+
+  void setX(TH2* matrix, TH1* proj, int const & binX)
+  {
+    if (matrix == nullptr){throw_error("Matrix histo nullptr in CoAnalyse::setX");}
+    if (proj == nullptr) {throw_error("Projection histo nullptr in CoAnalyse::setX");}
     for (int binY = 0; binY<matrix->GetNbinsY(); binY++) matrix->SetBinContent(binX, binY, proj->GetBinContent(binY));
   }
 
-  void projectX(TH1* matrix, TH1* proj, int const & binY)
+  void projectX(TH2* matrix, TH1* proj, int const & binY)
   {
-    for (int binX = 0; binX<matrix->GetNbinsX(); binX++) proj->SetBinContent(binX, matrix->GetBinContent(binX, binY));
+    if (matrix == nullptr){throw_error("Matrix histo nullptr in CoAnalyse::projectX");}
+    // if (proj == nullptr) proj = new TH1F("temp","temp",nXbins, bidim->GetXaxis()->GetXmax(), bidim->GetXaxis()->GetXmin());
+    for (int binX = 0; binX<matrix->GetNbinsX(); binX++) {print(binX, binY); proj->SetBinContent(binX, matrix->GetBinContent(binX, binY));}
   }
-  void setY(TH1* matrix, TH1* proj, int const & binY)
+
+  void setY(TH2* matrix, TH1* proj, int const & binY)
   {
+    if (matrix == nullptr){throw_error("Matrix histo nullptr in CoAnalyse::setY");}
+    if (proj == nullptr) {throw_error("Projection histo nullptr in CoAnalyse::setY");}
     for (int binX = 0; binX<matrix->GetNbinsX(); binX++) matrix->SetBinContent(binX, binY, proj->GetBinContent(binY));
   }
 
@@ -464,16 +776,17 @@ namespace CoAnalyse
 
     else if (dim == 2)
     {
-      char choice = 0;
+      char choice = 0; // 0 : X, 1 : Y, 2 : symmetric
       if (bidim_options.find("Y")) choice = 1;
       if (bidim_options.find("S")) choice = 2;
+      auto bidim = dynamic_cast<TH2F*>(histo);
 
-      auto const & nXbins = histo -> GetNbinsX();
-      auto const & nYbins = histo -> GetNbinsY();
+      auto const & nXbins = bidim -> GetNbinsX();
+      auto const & nYbins = bidim -> GetNbinsY();
 
       if (choice == 2)
       {
-        if (nXbins != nYbins) {print("CoAnalyse::removeBackground for 2D spectra is suited only for symetric spectra"); return;}
+        if (nXbins != nYbins) {print("CoAnalyse::removeBackground for 2D spectra is suited only for symmetric spectra"); return;}
       }
 
       switch (choice)
@@ -482,22 +795,25 @@ namespace CoAnalyse
           // Substract the background of Y spectra gating on each X bins
           for (int binX = 0; binX<nXbins; binX++)
           {
-            std::unique_ptr<TH1F> histo1D(new TH1F());
-            projectY(histo, histo1D.get(), binX);
-            removeBackground(histo1D.get(), niter);
-            setX(histo, histo1D.get(), binX);
+            TH1F* histo1D = nullptr; 
+            projectY(bidim, histo1D, binX);
+            removeBackground(histo1D, niter);
+            setX(bidim, histo1D, binX);
+            delete histo1D;
           }
         break;
 
         case 1:
           // Substract the background of X spectra gating on each Y bins
-          for (int binX = 0; binX<nYbins; binX++)
+          for (int binY = 0; binY<nYbins; binY++)
           {
-            std::unique_ptr<TH1F> histo1D;
-            projectY(histo, histo1D.get(), binX);
-            removeBackground(histo1D.get(), niter);
-            setX(histo, histo1D.get(), binX);
+            TH1F* histo1D = nullptr; new TH1F("temp","temp",nYbins, bidim->GetYaxis()->GetXmax(), bidim->GetYaxis()->GetXmin());
+            projectX(bidim, histo1D, binY);
+            removeBackground(histo1D, niter);
+            setY(bidim, histo1D, binY);
+            delete histo1D;
           }
+        break;
       }
 
       // if (choice == 2)
@@ -530,12 +846,10 @@ namespace CoAnalyse
 //   Manage histo files   //
 ////////////////////////////
 
-void fuse_all_histo(std::string const & folder, std::string const & outRoot = "fused_histo.root")
+void fuse_all_histo(std::string const & folder, std::string const & outRoot = "fused_histo.root", bool const & bidim = true)
 {
   auto const files = list_files_in_folder(folder, {"root"});
   bool first_file = true;
-  bool bidim = false;
-  // std::vector<TH1F*> all_TH1F;
   std::vector<std::unique_ptr<TH1>> all_TH1F;
   for (auto const & filename : files)
   {
@@ -604,7 +918,7 @@ void fuse_all_histo(std::string const & folder, std::string const & outRoot = "f
 //     }
 // }
 
-void draw_all_TH1F_with_X_window(std::string const & filename, int minX, int maxX)
+void draw_all_TH1F_with_X_window(std::string const & filename, int minX, int maxX, int rebin = 1)
 {
   auto file = TFile::Open(filename.c_str(), "READ");
   auto list = file->GetListOfKeys();
@@ -618,6 +932,7 @@ void draw_all_TH1F_with_X_window(std::string const & filename, int minX, int max
       auto histo = dynamic_cast<TH1F*>(obj.get());
       std::string name = histo->GetName();
       print(name);
+      histo->Rebin(rebin);
       histo->GetXaxis()->SetRangeUser(minX, maxX);
 
       // Create the TApplication :

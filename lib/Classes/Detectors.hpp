@@ -115,7 +115,8 @@ public:
   /// @brief Get the global label of a detector given its type and type index
   auto const & label(dType const & type, int const & index) {return m_labels[type][index];}
 
-  /// @brief Get the type index of the detector. Each type of detector has its own indexing system.
+  /// @brief Get the type index of the detector. Each type of detector has its own indexing system 
+  /// if you have 3 Germaniums, the Ge indexes ranges from 0 to 2)
   auto const & index(Label const & label) const {return m_index[label];}
 
   /// @brief Get the default ADC histogram binning for each type of detectors

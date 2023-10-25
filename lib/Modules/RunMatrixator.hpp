@@ -460,6 +460,7 @@ void RunMatrixator::fillMatrixes(Clovers const & clovers, Event const & event)
       auto const & clover_prompt_bis = clovers.PromptClovers[clover_prompt_j];
       if (clover_prompt_bis.nb_BGO>0) continue;// Compton cleaning
       matrix_Clovers_prompt.Fill(clover_prompt.nrj, clover_prompt_bis.nrj);
+      matrix_Clovers_prompt.Fill(clover_prompt_bis.nrj, clover_prompt.nrj);
     }
   }
 
@@ -484,6 +485,7 @@ void RunMatrixator::fillMatrixes(Clovers const & clovers, Event const & event)
       auto const & clover_index_delayed_j = clovers.delayedClovers[delayed_j];
       auto const & clover_delayed_j = clovers.DelayedClovers[clover_index_delayed_j];
       matrix_Clovers_delayed.Fill(clover_delayed.nrj, clover_delayed_j.nrj);
+      matrix_Clovers_delayed.Fill(clover_delayed_j.nrj, clover_delayed.nrj);
     }
   }
 }

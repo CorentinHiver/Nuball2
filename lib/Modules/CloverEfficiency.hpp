@@ -2,6 +2,8 @@
 #define CLOVEREFFICIENCY_HPP
 
 #include "../Analyse/Clovers.hpp"
+#include "Timeshifts.hpp"
+#include "Calibration.hpp"
 
 class CloverEfficiency
 {
@@ -18,18 +20,38 @@ public:
   void loadCalibration(std::string const & calibFile)  {m_calibration.load(calibFile);}
   void setNbFiles(int const & nb_files = -1) {m_nb_files = nb_files;}
   void setNbThreads(int const & nb_threads = -1) {m_nb_threads = nb_threads;}
-  void setTimeWindow(int const & timewindow = 1500)
+  void setTimeWindow(int const & timewindow = 1500) {m_timewindow = timewindow;}
 
-  run(Path const & m_dataPath, File const & outName);
-
+  run(Path const & m_dataPath, int nb_files = -1);
 
 private:
-Calibration m_calibration;
-int m_timewindow
-
+  void runFasterReader(Hit & hit, FasterReader & reader)
+  {
+    Clovers clovers;
+    while (reader.Read())
+    {
+      clovers
+    }
+  }
+  static void runMTFasterReader(Hit & hit, FasterReader & reader, CloverEfficiency & ce)
+  {
+    ce.runFasterReader(hit, reader);
+  }
+  Calibration m_calibration;
+  int m_timewindow = 100;
+  char dataKind = -1; // 0: faster 1: root
+  MTTHist<TH1F> histo;
 };
 
-CloverEfficiency::run(Path const & m_dataPath, File const & outName);
+CloverEfficiency::run(Path const & m_dataPath, int nb_files)
+{
+  if (std::find(m_dataPath.string(), ".fast/"))
+  {
+    dataKind = 0;
+    MTFasterReader reader(m_dataPath, nb_files);
+    reader.execute()
+  }
+}
 
 void CloverEfficiency::printParameters()
 {
@@ -74,4 +96,4 @@ void CloverEfficiency::Initialize(int argc, char** argv)
   }
 }
 
-#endif CLOVEREFFICIENCY_HPP
+#endif //CLOVEREFFICIENCY_HPP

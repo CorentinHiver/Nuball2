@@ -2,6 +2,7 @@
 #define MT_FASTER_READER_HPP
 
 #include "../Classes/Hit.hpp"
+#include "../Classes/Alignator.hpp"
 #include "../Classes/FasterReader.hpp"
 #include "../Classes/FilesManager.hpp"
 
@@ -139,18 +140,29 @@ public:
   template<class Func, class... ARGS>
   void execute(Func&& func, ARGS &&... args);
 
+  void setTimeshifts(std::vector const & timeshifts) {m_timeshifts = timeshifts;}
+
+  template<class Func, class... ARGS>
+  void readTreated(Func&& func, ARGS &&... args) 
+  {
+    if (m_timeshifts.size() == 0) print("CAREFULL, NO TIMESHIFT DATA PROVIDED !!");
+    m_treat = true; 
+    execute(Func&& func, ARGS &&... args);
+  }
+
   void printMTFiles() {for (auto const & file : m_MTfiles) print(file);}
 
-  /// @brief Internal method, do not use
-  bool nextFilename(std::string & filename) {return m_MTfiles.getNext(filename);}
+  auto const & treatData() const {return m_treat;}
 
 private:
   template<class Func, class... ARGS>
   static void Read(MTFasterReader & MTreader, Func function, ARGS &&... args);
+  bool nextFilename(std::string & filename) {return m_MTfiles.getNext(filename);}
 
   FilesManager m_files;
   MTList m_MTfiles;
-  // std::mutex m_mutex;
+  bool m_treat = false;
+  std::vector<Long64_t> m_timeshifts;
 };
 
 template<class Func, class... ARGS>
@@ -169,7 +181,17 @@ void MTFasterReader::Read(MTFasterReader & MTreader, Func function, ARGS &&... a
   {
     Hit hit;
     FasterReader reader(&hit, filename);
-    function(hit, reader, std::forward<ARGS>(args)...); // If issues here, check that the parallelised function has the following form : type func(Hit & hit, FasterReader & reader, ARGS... some_args)
+    if (!MTreader.treatData()) function(hit, reader, std::forward<ARGS>(args)...); // If issues here, check that the parallelised function has the following form : type func(Hit & hit, FasterReader & reader, ARGS... some_args)
+    else
+    {
+      unique_tree tempTree(new TTree("temp", "temp"));
+      while (reader.Read())
+      {
+        hit.time+=m_timeshifts[hit.label];
+        tempTree->Fill();
+      }
+      // Alignator
+    }
   }
 }
 

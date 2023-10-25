@@ -1,5 +1,5 @@
-#ifndef CALIBRATION_H
-#define CALIBRATION_H
+#ifndef CALIBRATION_HPP
+#define CALIBRATION_HPP
 
 #include "../libCo.hpp"
 
@@ -268,6 +268,7 @@ public:
   bool const & isFilled() const {return m_ok;}
 
   void Print();
+  auto const & file() const {return m_filename;}
 
   operator bool() const & {return m_ok;}
 
@@ -292,6 +293,12 @@ public:
     }
   }
 
+  auto const & getOrder()     const {return m_order    ;}
+  auto const & getIntercept() const {return m_intercept;}
+  auto const & getSlope()     const {return m_slope    ;}
+  auto const & getBinom()     const {return m_binom    ;}
+  auto const & getTrinom()    const {return m_trinom   ;}
+
 private:
   //Private methods :
   void set(Label label, NRJ intercept, NRJ slope, NRJ binom, NRJ trinom);
@@ -304,6 +311,7 @@ private:
   std::string m_outRoot   = "calibration.root";
   std::string m_outCalib  = "";
   std::string m_outDir    = "Calibration/";
+  std::string m_filename  = "";
 
   Fits m_fits;
 
@@ -468,9 +476,10 @@ void Calibration::loadFasterData(std::string const & dataDir, int const & nb_fil
 {
   print("Loading the data from", Path(dataDir).folder());
   this -> Initialize();
-  MTFasterReader mt_reader;
-  mt_reader.addFolder(dataDir, nb_files);
-  mt_reader.execute (fillHisto, *this);
+  MTFasterReader *mt_reader;
+  mt_reader->addFolder(dataDir, nb_files);
+  mt_reader->execute (fillHisto, *this);
+  delete mt_reader;
   print("Data loaded");
 }
 
@@ -1037,6 +1046,7 @@ void Calibration::set(Label _label, NRJ _intercept = 0.f, NRJ _slope = 1.f, NRJ 
 
 bool Calibration::load(std::string const & calibFileName)
 {
+  m_filename = calibFileName;
   std::ifstream inputfile(calibFileName, std::ifstream::in);
 
   if (!inputfile.good()) {print("CAN'T OPEN THE CALIBRATION FILE " + calibFileName); throw std::runtime_error("CALIBRATION");}
@@ -1228,4 +1238,4 @@ std::ostream& operator<<(std::ostream& cout, Calibration const & calib)
   return cout;
 }
 
-#endif //CALIBRATION_H
+#endif //CALIBRATION_HPP

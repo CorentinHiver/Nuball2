@@ -18,11 +18,15 @@ int const nb_sectors = 32; // Number of ring channels
 double ring_thickness = (outerRadius-innerRadius)/nb_rings; // Thickness of a 
 double ring_deg_thick = TMath::ATan(ring_thickness/distance);
 
-class SStrip
+/**
+ * @brief Silicon Strip. Represents a strip of the DSSD
+ * 
+ */
+class SiStrip
 {
 public:
-  SStrip(ushort const & label) {m_label = label;}
-  SStrip(ushort const & label, double const & angle) {m_label = label; m_angle = angle;}
+  SiStrip(ushort const & label) {m_label = label;}
+  SiStrip(ushort const & label, double const & angle) {m_label = label; m_angle = angle;}
 
   void Reset()
   {
@@ -107,14 +111,17 @@ public:
   auto const & energy() const {return Sectors[m_Sector_Hits[0]].nrj ;}
   auto const & time()   const {return Sectors[m_Sector_Hits[0]].time;}
 
-  /// @brief Don't return any angle but really the label of the DSSD
+  /// @brief Don't return any angle but really the label of the ring
   auto const & angle() const {return Rings[m_Ring_Hits[0]].angle();} 
+
+  auto begin() const {return Sectors.begin();}
+  auto end  () const {return Sectors.end  ();}
 
   std::vector<uchar> m_Sector_Hits = std::vector<uchar>(nb_sectors);
   std::vector<uchar> m_Ring_Hits = std::vector<uchar>(nb_rings);
 
-  std::vector<SStrip> Sectors;
-  std::vector<SStrip> Rings  ;
+  std::vector<SiStrip> Sectors;
+  std::vector<SiStrip> Rings  ;
 
   std::size_t SectorMult = 0u;
   std::size_t RingMult   = 0u;
