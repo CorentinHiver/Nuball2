@@ -28,7 +28,6 @@
 
 
 #include <Detectors.hpp>
-// #include "../../lib/Classes/Detectors.hpp"
 
 #include <libRoot.hpp>
 #include <Parameters.hpp>
@@ -111,6 +110,7 @@ int main(int argc, char** argv)
   //   p.addRun("/home/corentin/faster_data/N-SI-129-root_P_conversion1/run_"+std::to_string(run_nb)+"/");
   // }
   AnalyseIsomer ai;
+  AnalyseIsomer::choose1();
   ai.launch(p);
 
   // CalibrationReader cr;

@@ -607,6 +607,8 @@ namespace CoAnalyse
 
   void removeRandomBidim(TH2* matrix, int iterations = 1, bool save_intermediate = false, ProjectionsBins projectionsY = {{}}, ProjectionsBins projectionsX = {{}})
   {
+    TRandom *random = new TRandom(time(0));
+    matrix->Rebin2D(2);
     int const & bins_x = matrix->GetNbinsX();
     int const & bins_y = matrix->GetNbinsY();
     int startX = 0;
@@ -615,6 +617,7 @@ namespace CoAnalyse
     int stopY = bins_y+1;
     std::string matrix_name = matrix->GetName();
     auto const & iterations_sqr = iterations*iterations;
+    auto const & proportions = 2;
     // auto const & iterations_pow4 = iterations*iterations*iterations*iterations;
     // auto const maximum = matrix->GetMaximum();
 
@@ -623,15 +626,15 @@ namespace CoAnalyse
     std::vector<TH1D*> save_totProjX;
     std::vector<TH1D*> save_totProjY;
     // std::vector<TH2*> clones;
-    std::vector<double> integrals(iterations_sqr*iterations,0.);
+    std::vector<double> integrals(iterations_sqr,0.);
 
-    // std::vector<std::vector<std::vector<double>>> save_sub(iterations_sqr*iterations);
-    // std::vector<std::vector<double>> sub_moyX(iterations_sqr*iterations);
-    // std::vector<std::vector<double>> sub_moyY(iterations_sqr*iterations);
-    std::vector<std::vector<double>> sub_array;
+    // std::vector<std::vector<std::vector<double>>> save_sub(iterations_sqr);
+    // std::vector<std::vector<double>> sub_moyX(iterations_sqr);
+    // std::vector<std::vector<double>> sub_moyY(iterations_sqr);
+
     std::vector<TH1D*> save_sub_projX;
     std::vector<TH1D*> save_sub_projY;
-    for (int it = 0; it<iterations_sqr*iterations; it++) 
+    for (int it = 0; it<iterations; it++) 
     {
       // save_sub[it].resize(bins_x+1);
       // sub_moyX[it].resize(bins_x+1);
@@ -651,20 +654,38 @@ namespace CoAnalyse
     std::vector<double> totProjY(bins_y+1);
     std::vector<double> totProjX_buf(bins_x+1);
     std::vector<double> totProjY_buf(bins_y+1);
-    for (int x = startX; x<bins_x+1; x++) for (int y = startY; y<bins_y+1; y++) 
+    for (int x = startX; x<bins_x+1; x++) 
     {
-      auto const & value = matrix->GetBinContent(x,y);
-      totProjX[x] += value;
-      totProjY[y] += value;
-      totProjX_buf[x] += value;
-      totProjY_buf[y] += value;
+      for (int y = startY; y<bins_y+1; y++) 
+      {
+        auto const & value = matrix->GetBinContent(x,y);
+        totProjX[x] += value;
+        totProjY[y] += value;
+        totProjX_buf[x] += value;
+        totProjY_buf[y] += value;
+      }
     }
+
+    // Remove the extremal lines to avoid edge effects :
+    for (int x = 0; x<stopX; x++) 
+    {
+      matrix->SetBinContent(x,0,0);
+      matrix->SetBinContent(x,bins_x,0);
+    }
+    for (int y = 0; y<stopX; y++) matrix->SetBinContent(0,y,0);
 
     auto firstTotProjX = matrix->ProjectionX("firstTotProjX");
     auto firstTotProjY = matrix->ProjectionY("firstTotProjY");
 
+    std::vector<std::vector<double>> sub_array;
+    fill2D(sub_array, stopX, stopY, 0.0);
+    std::vector<std::vector<double>> speed_array;
+    fill2D(speed_array, stopX, stopY, 0.0);
+    // std::vector<std::vector<double>> real_sub_array;
+    // fill2D(real_sub_array, stopX, stopY, 0.0);
+
     print("Substracting...");
-    for (int it = 0; it<iterations_sqr*iterations; it++)
+    for (int it = 0; it<iterations; it++)
     {
       print("Iteration", it);
       if(save_intermediate)
@@ -685,7 +706,7 @@ namespace CoAnalyse
           // if (it>0) save_sub_projY[it-1]->SetBinContent(y, sub_moyY[it-1][y]);
         }
       }
-      
+
       auto const total = matrix->Integral();
       // auto const & prev_total = (it>0) ? clones[it-1]->Integral() : total;
       // auto const & prev_total2 = (it>0) ? clones[it-1]->Integral() : total;
@@ -694,7 +715,7 @@ namespace CoAnalyse
       {
         for (int y = startY; y<stopY; y++) 
         {
-          auto const & value = matrix->GetBinContent(x, y);
+          double value = matrix->GetBinContent(x, y);
           if (value == 0) continue;
 
           // V1 :
@@ -705,21 +726,41 @@ namespace CoAnalyse
           // V2 :
           // save_sub[it][x][y] = (totProjX[x] * totProjY[y])/(iterations*total);
           // auto const new_value = value - save_sub[it][x][y];
-
-          // V3 :
-          auto sub = (totProjX[x] * totProjY[y])/(iterations*total);
-          sub = sub *(1 - sub/(iterations*value));
-
-          matrix -> SetBinContent(x, y, value - sub);
-
-          totProjX_buf[x] -= sub;
-          totProjY_buf[y] -= sub;
-
           // totProjX_buf[x] -= save_sub[it][x][y];
           // totProjY_buf[y] -= save_sub[it][x][y];
 
           // sub_moyX[it][x] += save_sub[it][x][y]/totProjX[x]/stopX;
           // sub_moyY[it][y] += save_sub[it][x][y]/totProjY[y]/stopY;
+
+          // V3 :
+          // double sub = (totProjX[x] * totProjY[y])/(proportions*total);
+          // sub = sub *( 1. - (sub/(value)));
+
+          // matrix -> SetBinContent(x, y, value - sub);
+
+          // totProjX_buf[x] -= sub;
+          // totProjY_buf[y] -= sub;
+
+          // V4 :
+          sub_array[x][y] = (totProjX[x] * totProjY[y])/(proportions*total);
+          speed_array[x][y] = sub_array[x][y]/value;
+        }
+      }
+
+      // The iterations are done excluding the extremal lines to avoid edge effet :
+      for (int x = 1; x<bins_x; x++)
+      {
+        for (int y = 1; y<bins_y; y++) 
+        {
+          // Do an average of the speed around the bin :
+          auto const & mean_speed = speed_array[x][y];
+            // speed_array[x-1][y-1]*0.0313 + speed_array[x][y-1]*0.0938 + speed_array[x+1][y-1]*0.0313 + 
+            // speed_array[x-1][y]  *0.0938 + speed_array[x][y]  *0.5    + speed_array[x+1][y]  *0.0938 + 
+            // speed_array[x-1][y+1]*0.0313 + speed_array[x][y+1]*0.0938 + speed_array[x+1][y+1]*0.0313 ;
+          auto const & sub = sub_array[x][y] * ( 1 - mean_speed);
+          matrix -> SetBinContent(x, y, matrix->GetBinContent(x,y) - sub);
+          totProjX_buf[x] -= sub;
+          totProjY_buf[y] -= sub;
         }
       }
 

@@ -26,6 +26,13 @@ bool push_back_unique(std::vector<T> & vector, T const & t)
   }
 }
 
+template<class T>
+void fill2D(std::vector<std::vector<T>> & vec2, size_t const & size_x, size_t const & size_y, T const & obj)
+{
+  vec2.reserve(size_x);
+  for (size_t i = 0; i<size_x; i++) vec2.emplace_back(std::vector<T>(size_y, obj));
+}
+
 template <typename T>
 bool found(std::vector<T> const & vector, T const & t)
 {

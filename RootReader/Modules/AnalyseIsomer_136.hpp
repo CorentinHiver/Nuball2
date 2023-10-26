@@ -105,6 +105,7 @@ public:
   float PromptCalo = 0;
   float DelayedCalo = 0;
   bool rejection = false;
+
 };
 
 class AnalyseIsomer
@@ -121,12 +122,16 @@ public:
 
   MTTHist<TH2F> time_ref;
 
+  static void choose1(bool const & b = true) {m_choose1 = b;}
+
 private:
-  std::string param_string = "Isomer";
+  std::string m_param_string = "Isomer";
   // Parameters
   friend class MTObject;
-  std::string outDir  = "Analyse/Isomer/";
-  std::string outRoot = "ai.root";
+  std::string m_outDir  = "Analyse/Isomer/";
+  std::string m_outRoot = "ai.root";
+
+  static bool m_choose1;
 
   double Qvalue = 4322;
   double Ebeam = 11000;
@@ -277,9 +282,11 @@ private:
 
 };
 
+bool AnalyseIsomer::m_choose1 = false;
+
 bool AnalyseIsomer::launch(Parameters & p)
 {
-  if (!this -> setParameters(p.getParameters(param_string))) return false;
+  if (!this -> setParameters(p.getParameters(m_param_string))) return false;
   this -> InitializeManip();
   print("Starting !");
   MTObject::parallelise_function(run, p, *this);
@@ -355,198 +362,201 @@ void AnalyseIsomer::InitializeManip()
 {
   print("Initialize histograms");
 
-  time_ref.reset("time_ref", "Reference LaBR3 time spectra;Energy[keV];Time[ns]", 3000,0,3000, 1001,-100,400);
-
-  prompt_mult_VS_sectors_mult.reset("prompt_mult_VS_sectors_mult","prompt mult VS sectors mult", 
-      20,0,20, 20,0,20);
-  delayed_mult_VS_sectors_mult.reset("delayed_mult_VS_sectors_mult","delayed mult VS sectors mult", 
-      20,0,20, 20,0,20);
-  Delayed_VS_Prompt_Mult.reset("Delayed_VS_Prompt_Mult","Delayed VS Prompt multiplicity;Prompt multiplicity;Delayed Multiplicity", 
-      10,0,10, 10,0,10);
-  Delayed_VS_Prompt_Mult_G1.reset("Delayed_VS_Prompt_Mult_G1","Delayed VS Prompt multiplicity, Clover mult >= 1;Prompt multiplicity;Delayed Multiplicity", 
-      10,0,10, 10,0,10);
-  Delayed_VS_Prompt_Mult_G2.reset("Delayed_VS_Prompt_Mult_G2","Delayed VS Prompt multiplicity, Clover mult >=2;Prompt multiplicity;Delayed Multiplicity", 
-      10,0,10, 10,0,10);
-  Delayed_VS_Prompt_Mult_G3.reset("Delayed_VS_Prompt_Mult_G3","Delayed VS Prompt multiplicity, Clover mult >=3;Prompt multiplicity;Delayed Multiplicity", 
-      10,0,10, 10,0,10);
-
-  Ge_spectra.reset("Ge_spectra","Ge spectra;Energy [keV]", 30000,0,15000);
-  Ge_spectra_prompt.reset("Ge spectra prompt","Ge spectra prompt;Energy [keV]", 30000,0,15000);
-  Ge_spectra_delayed.reset("Ge spectra delayed","Ge spectra delayed;Energy [keV]", 30000,0,15000);
-
-  ge_spectra_VS_mult.reset("ge_spectra_VS_mult", "ge_spectra_VS_mult", 20,0,20, 10000,0,10000);
-  ge_spectra_VSpromptmult.reset("ge_spectra_VSpromptmult", "ge_spectra_VSpromptmult", 20,0,20, 10000,0,10000);
-  ge_spectra_VSdelayedmult.reset("ge_spectra_VSdelayedmult", "ge_spectra_VSdelayedmult", 20,0,20, 10000,0,10000);
-  ge_prompt_spectra_VS_mult.reset("ge_prompt_spectra_VS_mult", "ge_prompt_spectra_VS_mult", 20,0,20, 10000,0,10000);
-  ge_prompt_spectra_VSpromptmult.reset("ge_prompt_spectra_VSpromptmult", "ge_prompt_spectra_VSpromptmult", 20,0,20, 10000,0,10000);
-  ge_prompt_spectra_VSdelayedmult.reset("ge_prompt_spectra_VSdelayedmult", "ge_prompt_spectra_VSdelayedmult", 20,0,20, 10000,0,10000);
-  ge_delayed_spectra_VS_mult.reset("ge_delayed_spectra_VS_mult", "ge_delayed_spectra_VS_mult", 20,0,20, 10000,0,10000);
-  ge_delayed_spectra_VSpromptmult.reset("ge_delayed_spectra_VSpromptmult", "ge_delayed_spectra_VSpromptmult", 20,0,20, 10000,0,10000);
-  ge_delayed_spectra_VSdelayedmult.reset("ge_delayed_spectra_VSdelayedmult", "ge_delayed_spectra_VSdelayedmult", 20,0,20, 10000,0,10000);
-
-
-  Ge_Time_VS_Spectra.reset("Ge spectra VS Time","Ge spectra VS Time;Energy [keV];Time [ns]",
-      14000,0,7000, 250,-50,200);
-
-  raw_Ge_Time_VS_Spectra.reset("Raw_Ge_spectra_VS_Time","Raw Ge spectra VS Time;Energy [keV];Time [ns]",
-      14000,0,7000, 250,-50,200);
-
-  Ge_VS_Ge.reset("Ge_bidim","Ge bidim;Energy [keV];Energy [keV]",
-      4096,0,4096, 4096,0,4096);
-
-  GePrompt_VS_GePrompt.reset("Ge_bidim_prompt","Ge bidim prompt;Energy [keV];Energy [keV]",
-      4096,0,4096, 4096,0,4096);
-  GeDelayed_VS_GeDelayed.reset("Ge_bidim_delayed","Ge bidim delayed;Energy [keV];Energy [keV]",
-      4096,0,4096, 4096,0,4096);
-  GeDelayed_VS_GePrompt.reset("Ge_delayed_VS_prompt","Ge delayed VS prompt;Prompt energy [keV];Delayed energy [keV]",
-      4096,0,4096, 4096,0,4096);
-
-  GeDelayed_VS_GeDelayed_time.reset("Ge_bidim_delayed_time","Ge bidim delayed time;time [ns];time [ns]",
-      250,-50,200, 250,-50,200);
-
-  DSSD_Spectra.reset("DSSD_spectra","DSSD spectra;Energy [keV];", 500,0,20000);
-  DSSD_Spectra_VS_angle.reset("DSSD_Spectra_VS_angle","DSSD spectra VS Angle;Backward Angle [#circ]; Energy [keV];", 
-      40,30,70, 500,0,20000);
-  Sector_VS_Rings_mult.reset("Sector_VS_Rings_mult", "Sector VS Ring mult;Rings;Sectors", 10,0,10, 10,0,10);
-  Ge_VS_DSSD.reset("Ge_VS_DSSD","Ge VS DSSD;Energy DSSD [keV];Energy Ge [keV]",
-      400,0,20000, 1000,0,1000);
-  GePrompt_VS_DSSD.reset("GePrompt_VS_DSSD","Ge VS DSSD",
-      400,0,20000, 10000,0,10000);
-  GeDelayed_VS_DSSD.reset("GeDelayed_VS_DSSD","Ge VS DSSD",
-      400,0,20000, 10000,0,10000);
-  DSSD_TW.reset("DSSD_TW","DSSD E VS Time",
-      250,-50,200, 400,0,20000);
-  Ge_VS_DSSD_Time.reset("Ge_VS_DSSD_Time","Ge VS DSSD Time;DSSD time [ns];Ge time [ns]",
-      250,-50,200, 250,-50,200);
-
-  BGO_VS_Ge_prompt.reset("BGO_VS_Ge_prompt","BGO VS Ge prompt;Ge Energy [keV];BGO Energy [keV]",
-      4096,0,4096, 800,0,4096);
-  BGO_prompt_VS_Ge_prompt_mult.reset("BGO_prompt_VS_Ge_prompt_mult","BGO VS Ge prompt;Ge Energy [keV];BGO Energy [keV]",
-      4096,0,4096, 800,0,4096);
-  BGO_VS_Ge_delayed.reset("BGO_VS_Ge_delayed","BGO VS Ge delayed;Ge Energy [keV];BGO Energy [keV]",
-      4096,0,4096, 800,0,4096);
-  BGO_VS_Ge_511.reset("BGO_vs_Ge_511","BGO in coincidence with 511;BGO energy [keV];",
-      48,0,48, 4096,0,100000);
-
-  Nuball_calo.reset("Nuball_calo","Clovers calorimetry;Calorimetry [keV]", 1024,0,20000);
-  Nuball_calo_prompt.reset("Nuball_calo_prompt","Clovers prompt calorimetry;Calorimetry [keV]", 1024,0,20000);
-  Nuball_calo_delayed.reset("Nuball_calo_delayed","Clovers delayed calorimetry;Calorimetry [keV]", 1024,0,20000);
-  Ge_calo.reset("Ge_calo","Ge calorimetry;Calorimetry [keV]", 1024,0,20000);
-  Ge_calo_prompt.reset("Ge_calo_prompt","Ge prompt calorimetry;Calorimetry [keV]", 1024,0,20000);
-  Ge_calo_delayed.reset("Ge_calo_delayed","Ge delayed calorimetry;Calorimetry [keV]", 1024,0,20000);
-  BGO_calo.reset("BGO_calo","BGO calorimetry;Calorimetry [keV]", 1024,0,20000);
-  BGO_calo_prompt.reset("BGO_calo_prompt","BGO prompt calorimetry;Calorimetry [keV]", 1024,0,20000);
-  BGO_calo_delayed.reset("BGO_calo_delayed","BGO delayed calorimetry;Calorimetry [keV]", 1024,0,20000);
-  Paris_calo.reset("Paris_calo","Paris calorimetry;Calorimetry [keV]", 1024,0,20000);
-  Paris_calo_prompt.reset("Paris_calo_prompt","Paris prompt calorimetry;Calorimetry [keV]", 1024,0,20000);
-  Paris_calo_delayed.reset("Paris_calo_delayed","Paris delayed calorimetry;Calorimetry [keV]", 1024,0,20000);
-  total_calo.reset("total_calo","Total calorimetry;Calorimetry [keV]", 1024,0,20000);
-  total_calo_prompt.reset("total_calo_prompt","Total prompt calorimetry;Calorimetry [keV]", 1024,0,20000);
-  total_calo_delayed.reset("total_calo_delayed","Total delayed calorimetry;Calorimetry [keV]", 1024,0,20000);
-  
-  calo_prompt_total_VS_calo_total.reset("calo_prompt_total_VS_calo_total","Total prompt calorimetry VS total delayed calorimetry;Total Calorimetry [keV];Prompt Total Calorimetry [keV]", 
-      1024,0,20000, 1024,0,20000);
-  calo_delayed_total_VS_calo_total.reset("calo_delayed_total_VS_calo_total","Total delayed calorimetry;Calorimetry [keV];Delayed Total Calorimetry [keV]",
-      1024,0,20000, 1024,0,20000);
-  delayed_calo_total_VS_prompt_calo_total.reset("delayed_calo_total_VS_prompt_calo_total","Total delayed calorimetry;Prompt Total Calorimetry [keV];Delayed Total Calorimetry [keV]",
-      1024,0,20000, 1024,0,20000);
-
-  Ge_prompt_VS_Total_calo.reset("Ge_prompt_VS_Total_calo","Ge prompt spectra VS Clovers calorimetry;Calorimetry-Ge Energy [keV];Ge Energy [keV]",
-      1024,0,30000, 4096,0,4096);
-  Ge_delayed_VS_Total_calo.reset("Ge_delayed_VS_Total_calo","Ge delayed spectra VS Clovers calorimetry;Calorimetry-Ge Energy [keV];Ge Energy [keV]",
-      1024,0,30000, 4096,0,4096);
-  Ge_prompt_VS_Total_calo_prompt.reset("Ge_prompt_VS_Total_calo_prompt","Ge prompt spectra VS Clovers prompt calorimetry;Calorimetry-Ge Energy [keV];Ge Energy [keV]",
-      1024,0,30000, 4096,0,4096);
-  Ge_delayed_VS_Total_calo_prompt.reset("Ge_delayed_VS_Total_calo_prompt","Ge delayed spectra VS Clovers prompt calorimetry;Calorimetry-Ge Energy [keV];Ge Energy [keV]",
-      1024,0,30000, 4096,0,4096);
-  Ge_delayed_VS_Total_calo_delayed.reset("Ge_delayed_VS_Total_calo_delayed","Ge delayed spectra VS Clovers delayed calorimetry;Calorimetry-Ge Energy [keV];Ge Energy [keV]",
-      1024,0,30000, 4096,0,4096);
-  Ge_prompt_VS_Total_calo_delayed.reset("Ge_prompt_VS_Total_calo_delayed","Ge prompt spectra VS Clovers delayed calorimetry;Calorimetry-Ge Energy [keV];Ge Energy [keV]",
-      1024,0,30000, 4096,0,4096);
-
-  Ge_prompt_VS_Nuball_calo.reset("Ge_prompt_VS_Nuball_calo","Ge prompt spectra VS Clovers calorimetry;Calorimetry-Ge Energy [keV];Ge Energy [keV]",
-      1024,0,30000, 4096,0,4096);
-  Ge_delayed_VS_Nuball_calo.reset("Ge_delayed_VS_Nuball_calo","Ge delayed spectra VS Clovers calorimetry;Calorimetry-Ge Energy [keV];Ge Energy [keV]",
-      1024,0,30000, 4096,0,4096);
-  Ge_prompt_VS_Nuball_calo_prompt.reset("Ge_prompt_VS_Nuball_calo_prompt","Ge prompt spectra VS Clovers prompt calorimetry;Calorimetry-Ge Energy [keV];Ge Energy [keV]",
-      1024,0,30000, 4096,0,4096);
-  Ge_delayed_VS_Nuball_calo_prompt.reset("Ge_delayed_VS_Nuball_calo_prompt","Ge delayed spectra VS Clovers prompt calorimetry;Calorimetry-Ge Energy [keV];Ge Energy [keV]",
-      1024,0,30000, 4096,0,4096);
-  Ge_prompt_VS_Nuball_calo_delayed.reset("Ge_prompt_VS_Nuball_calo_delayed","Ge prompt spectra VS Clovers delayed calorimetry;Calorimetry-Ge Energy [keV];Ge Energy [keV]",
-      1024,0,30000, 4096,0,4096);
-  Ge_delayed_VS_Nuball_calo_delayed.reset("Ge_delayed_VS_Nuball_calo_delayed","Ge delayed spectra VS Clovers delayed calorimetry;Calorimetry-Ge Energy [keV];Ge Energy [keV]",
-      1024,0,30000, 4096,0,4096);
-  Nuball_calo_delayed_VS_prompt.reset("Nuball_calo_delayed_VS_prompt","Clovers delayed calorimetry VS prompt calorimetry;Prompt Calorimetry [keV];Delayed Calorimetry [keV]",
-      1024,0,30000, 4096,0,30000);
-
-  DSSD_VS_Nuball_calo.reset("DSSD_VS_Nuball_calo","DSSD spectra VS clovers calorimetry;Calorimetry [keV];Particle Energy [keV]",
-      1024,0,20000, 3000,0,30000);
-  DSSD_VS_Total_calo.reset("DSSD_VS_Total_calo","DSSD spectra VS total calorimetry;Total Calorimetry [keV];DSSD Energy [keV]",
-      1024,0,20000, 3000,0,30000);
-  DSSD_VS_Total_Prompt_calo.reset("DSSD_VS_Total_Prompt_calo","DSSD spectra VS Prompt calorimetry;Total Calorimetry [keV];DSSD Energy [keV]",
-      1024,0,20000, 3000,0,30000);
-  DSSD_VS_Total_Delayed_calo.reset("DSSD_VS_Total_Delayed_calo","DSSD spectra VS Delayed calorimetry;Total Calorimetry [keV];DSSD Energy [keV]",
-      1024,0,20000, 3000,0,30000);
-
-  Missing_VS_Delayed_cal.reset("Missing_VS_Delayed_cal","Missing energy VS delayed calorimetry;Delayed Calorimetry [keV];Missing Energy [keV]",
-      1024,0,20000, 1024,0,20000);
-  Delayed_Ge_VS_Missing.reset("Delayed_Ge_VS_Missing","Delayed_Ge_VS_Missing;Missing Energy [keV];Delayed Calorimetry [keV]",
-      300,0,20000, 10000,0,10000);
-  Prompt_Ge_VS_Missing.reset("Prompt_Ge_VS_Missing","Prompt_Ge_VS_Missing;Missing Energy [keV];Prompt Calorimetry [keV]",
-      300,0,20000, 10000,0,10000);
-  Prompt_Calo_VS_Missing.reset("Prompt_Calo_VS_Missing","Missing energy VS delayed calorimetry;Delayed Calorimetry [keV];Missing Energy [keV]",
-      500,0,20000, 1024,0,20000);
-  Clover_Mult_VS_Nuball_calo.reset("Clover_Mult_VS_Nuball_calo","Multiplicity Clover VS clovers calorimetry;Calorimetry [keV];Multiplicity",
-      1024,0,20000, 20,0,20);
-  prompt_Clover_Mult_VS_Nuball_calo.reset("prompt_Clover_Mult_VS_Nuball_calo","Prompt : Multiplicity Clover VS clovers calorimetry;Calorimetry [keV];Multiplicity",
-      1024,0,20000, 20,0,20);
-  delayed_Clover_Mult_VS_Nuball_calo.reset("delayed_Clover_Mult_VS_Nuball_calo","Delayed : Multiplicity Clover VS clovers calorimetry;Calorimetry [keV];Multiplicity",
-      1024,0,20000, 20,0,20);
-  Clover_Mult_VS_Total_calo.reset("Clover_Mult_VS_Total_calo","Multiplicity Clover VS Total calorimetry;Total Calorimetry [keV];Multiplicity",
-      1024,0,20000, 20,0,20);
-  prompt_Clover_Mult_VS_Total_calo.reset("prompt_Clover_Mult_VS_Total_calo","Prompt : Multiplicity Clover VS Total calorimetry;Total Calorimetry [keV];Multiplicity",
-      1024,0,20000, 20,0,20);
-  delayed_Clover_Mult_VS_Total_calo.reset("delayed_Clover_Mult_VS_Total_calo","Delayed : Multiplicity Clover VS Total calorimetry;Total Calorimetry [keV];Multiplicity",
-      1024,0,20000, 20,0,20);
-
-  calo_VS_promptMult.reset("calo_VS_promptMult", "calo_VS_promptMult;Calorimetry [keV];Prompt Multiplicity", 1024,0,20000, 20,0,20);
-  calo_VS_delayedMult.reset("calo_VS_delayedMult", "calo_VS_delayedMult;Calorimetry [keV];Delayed Multiplicity", 1024,0,20000, 20,0,20);
-  prompt_calo_VS_promptMult.reset("prompt_calo_VS_promptMult", "prompt_calo_VS_promptMult;Calorimetry [keV];Prompt Multiplicity", 1024,0,20000, 20,0,20);
-  prompt_calo_VS_delayedMult.reset("prompt_calo_VS_delayedMult", "prompt_calo_VS_delayedMult;Calorimetry [keV];Delayed Multiplicity", 1024,0,20000, 20,0,20);
-  delayed_calo_VS_promptMult.reset("delayed_calo_VS_promptMult", "delayed_calo_VS_promptMult;Calorimetry [keV];Prompt Multiplicity", 1024,0,20000, 20,0,20);
-  delayed_calo_VS_delayedMult.reset("delayed_calo_VS_delayedMult", "delayed_calo_VS_delayedMult;Calorimetry [keV];Delayed Multiplicity", 1024,0,20000, 20,0,20);
-      
-  each_Ge_VS_Time.reset("each_Ge_VS_Time","Timing each Ge", 
-      24,0,24, 2*USE_RF,-USE_RF/2,3*USE_RF/2);
-
-  each_Ge_spectra.reset("each_Ge_spectra","Spectra each Ge", 
-      24,0,24, 20000,0,10000);
-
-  each_Ge_crystal_spectra.reset("each_Ge_crystal_spectra","Spectra each Ge crystal", 
-      96,0,96, 30000,0,30000);
-
-  Ge_VS_size_event.reset("Ge_VS_size_event","Ge VS number of detectors", 
-      50,0,50, 5000,0,5000);
-
-  Paris_spectra_back.reset("Paris_spectra_back", "Paris spectra back", 750,0,1500);
-  Paris_time_spectra_back.reset("Paris_time_spectra_back", "Paris time spectra back", 750,0,1500, 500,-50,200);
-  Paris_each_spectra_back.reset("Paris_each_spectra_back", "Paris each spectra back", 750,0,1500, 500,0,500);
-  Paris_ratio_VS_time_back.reset("Paris_ratio_VS_time_back", "Paris ratio VS time back", 301,-100,200, 501,-2,2);
-  Paris_spectra_front.reset("Paris_spectra_front", "Paris spectra front", 750,0,1500);
-  Paris_time_spectra_front.reset("Paris_time_spectra_front", "Paris time spectra front", 750,0,1500, 500,-50,200);
-  Paris_each_spectra_front.reset("Paris_each_spectra_front", "Paris each spectra front", 750,0,1500, 500,0,500);
-  Paris_ratio_VS_time_front.reset("Paris_ratio_VS_time_front", "Paris ratio VS time front", 301,-100,200, 501,-2,2);
-  
-  Paris_back_calibrated_VS_delayed_U6.reset("Paris_back_calibrated_VS_delayed_U6", "Paris VS delayed U6 (642, 903, 987)", 1000,0,20000);
-
-  auto const & nb_paris = detectors.nbOfType("paris");
-  Paris_singles_labr.resize(nb_paris);
-  Paris_singles_nai.resize(nb_paris);
-  for (size_t i_paris = 0; i_paris<nb_paris; i_paris++)
+  if(!m_choose1)
   {
-    auto const & name = detectors.name("paris", i_paris);
-    Paris_singles_labr[i_paris].reset(name+"labr", (name+" LaBr3;E [keV];#").c_str(), 1000,0,10000);
-    Paris_singles_nai [i_paris].reset(name+"_nai", (name+" NaI;E [keV];#")  .c_str(), 1000,0,10000);
+    time_ref.reset("time_ref", "Reference LaBR3 time spectra;Energy[keV];Time[ns]", 3000,0,3000, 1001,-100,400);
+
+    prompt_mult_VS_sectors_mult.reset("prompt_mult_VS_sectors_mult","prompt mult VS sectors mult", 
+        20,0,20, 20,0,20);
+    delayed_mult_VS_sectors_mult.reset("delayed_mult_VS_sectors_mult","delayed mult VS sectors mult", 
+        20,0,20, 20,0,20);
+    Delayed_VS_Prompt_Mult.reset("Delayed_VS_Prompt_Mult","Delayed VS Prompt multiplicity;Prompt multiplicity;Delayed Multiplicity", 
+        10,0,10, 10,0,10);
+    Delayed_VS_Prompt_Mult_G1.reset("Delayed_VS_Prompt_Mult_G1","Delayed VS Prompt multiplicity, Clover mult >= 1;Prompt multiplicity;Delayed Multiplicity", 
+        10,0,10, 10,0,10);
+    Delayed_VS_Prompt_Mult_G2.reset("Delayed_VS_Prompt_Mult_G2","Delayed VS Prompt multiplicity, Clover mult >=2;Prompt multiplicity;Delayed Multiplicity", 
+        10,0,10, 10,0,10);
+    Delayed_VS_Prompt_Mult_G3.reset("Delayed_VS_Prompt_Mult_G3","Delayed VS Prompt multiplicity, Clover mult >=3;Prompt multiplicity;Delayed Multiplicity", 
+        10,0,10, 10,0,10);
+
+    Ge_spectra.reset("Ge_spectra","Ge spectra;Energy [keV]", 30000,0,15000);
+    Ge_spectra_prompt.reset("Ge spectra prompt","Ge spectra prompt;Energy [keV]", 30000,0,15000);
+    Ge_spectra_delayed.reset("Ge spectra delayed","Ge spectra delayed;Energy [keV]", 30000,0,15000);
+
+    ge_spectra_VS_mult.reset("ge_spectra_VS_mult", "ge_spectra_VS_mult", 20,0,20, 10000,0,10000);
+    ge_spectra_VSpromptmult.reset("ge_spectra_VSpromptmult", "ge_spectra_VSpromptmult", 20,0,20, 10000,0,10000);
+    ge_spectra_VSdelayedmult.reset("ge_spectra_VSdelayedmult", "ge_spectra_VSdelayedmult", 20,0,20, 10000,0,10000);
+    ge_prompt_spectra_VS_mult.reset("ge_prompt_spectra_VS_mult", "ge_prompt_spectra_VS_mult", 20,0,20, 10000,0,10000);
+    ge_prompt_spectra_VSpromptmult.reset("ge_prompt_spectra_VSpromptmult", "ge_prompt_spectra_VSpromptmult", 20,0,20, 10000,0,10000);
+    ge_prompt_spectra_VSdelayedmult.reset("ge_prompt_spectra_VSdelayedmult", "ge_prompt_spectra_VSdelayedmult", 20,0,20, 10000,0,10000);
+    ge_delayed_spectra_VS_mult.reset("ge_delayed_spectra_VS_mult", "ge_delayed_spectra_VS_mult", 20,0,20, 10000,0,10000);
+    ge_delayed_spectra_VSpromptmult.reset("ge_delayed_spectra_VSpromptmult", "ge_delayed_spectra_VSpromptmult", 20,0,20, 10000,0,10000);
+    ge_delayed_spectra_VSdelayedmult.reset("ge_delayed_spectra_VSdelayedmult", "ge_delayed_spectra_VSdelayedmult", 20,0,20, 10000,0,10000);
+
+
+    Ge_Time_VS_Spectra.reset("Ge spectra VS Time","Ge spectra VS Time;Energy [keV];Time [ns]",
+        14000,0,7000, 250,-50,200);
+
+    raw_Ge_Time_VS_Spectra.reset("Raw_Ge_spectra_VS_Time","Raw Ge spectra VS Time;Energy [keV];Time [ns]",
+        14000,0,7000, 250,-50,200);
+
+    Ge_VS_Ge.reset("Ge_bidim","Ge bidim;Energy [keV];Energy [keV]",
+        4096,0,4096, 4096,0,4096);
+
+    GePrompt_VS_GePrompt.reset("Ge_bidim_prompt","Ge bidim prompt;Energy [keV];Energy [keV]",
+        4096,0,4096, 4096,0,4096);
+    GeDelayed_VS_GeDelayed.reset("Ge_bidim_delayed","Ge bidim delayed;Energy [keV];Energy [keV]",
+        4096,0,4096, 4096,0,4096);
+    GeDelayed_VS_GePrompt.reset("Ge_delayed_VS_prompt","Ge delayed VS prompt;Prompt energy [keV];Delayed energy [keV]",
+        4096,0,4096, 4096,0,4096);
+
+    GeDelayed_VS_GeDelayed_time.reset("Ge_bidim_delayed_time","Ge bidim delayed time;time [ns];time [ns]",
+        250,-50,200, 250,-50,200);
+
+    DSSD_Spectra.reset("DSSD_spectra","DSSD spectra;Energy [keV];", 500,0,20000);
+    DSSD_Spectra_VS_angle.reset("DSSD_Spectra_VS_angle","DSSD spectra VS Angle;Backward Angle [#circ]; Energy [keV];", 
+        40,30,70, 500,0,20000);
+    Sector_VS_Rings_mult.reset("Sector_VS_Rings_mult", "Sector VS Ring mult;Rings;Sectors", 10,0,10, 10,0,10);
+    Ge_VS_DSSD.reset("Ge_VS_DSSD","Ge VS DSSD;Energy DSSD [keV];Energy Ge [keV]",
+        400,0,20000, 1000,0,1000);
+    GePrompt_VS_DSSD.reset("GePrompt_VS_DSSD","Ge VS DSSD",
+        400,0,20000, 10000,0,10000);
+    GeDelayed_VS_DSSD.reset("GeDelayed_VS_DSSD","Ge VS DSSD",
+        400,0,20000, 10000,0,10000);
+    DSSD_TW.reset("DSSD_TW","DSSD E VS Time",
+        250,-50,200, 400,0,20000);
+    Ge_VS_DSSD_Time.reset("Ge_VS_DSSD_Time","Ge VS DSSD Time;DSSD time [ns];Ge time [ns]",
+        250,-50,200, 250,-50,200);
+
+    BGO_VS_Ge_prompt.reset("BGO_VS_Ge_prompt","BGO VS Ge prompt;Ge Energy [keV];BGO Energy [keV]",
+        4096,0,4096, 800,0,4096);
+    BGO_prompt_VS_Ge_prompt_mult.reset("BGO_prompt_VS_Ge_prompt_mult","BGO VS Ge prompt;Ge Energy [keV];BGO Energy [keV]",
+        4096,0,4096, 800,0,4096);
+    BGO_VS_Ge_delayed.reset("BGO_VS_Ge_delayed","BGO VS Ge delayed;Ge Energy [keV];BGO Energy [keV]",
+        4096,0,4096, 800,0,4096);
+    BGO_VS_Ge_511.reset("BGO_vs_Ge_511","BGO in coincidence with 511;BGO energy [keV];",
+        48,0,48, 4096,0,100000);
+
+    Nuball_calo.reset("Nuball_calo","Clovers calorimetry;Calorimetry [keV]", 1024,0,20000);
+    Nuball_calo_prompt.reset("Nuball_calo_prompt","Clovers prompt calorimetry;Calorimetry [keV]", 1024,0,20000);
+    Nuball_calo_delayed.reset("Nuball_calo_delayed","Clovers delayed calorimetry;Calorimetry [keV]", 1024,0,20000);
+    Ge_calo.reset("Ge_calo","Ge calorimetry;Calorimetry [keV]", 1024,0,20000);
+    Ge_calo_prompt.reset("Ge_calo_prompt","Ge prompt calorimetry;Calorimetry [keV]", 1024,0,20000);
+    Ge_calo_delayed.reset("Ge_calo_delayed","Ge delayed calorimetry;Calorimetry [keV]", 1024,0,20000);
+    BGO_calo.reset("BGO_calo","BGO calorimetry;Calorimetry [keV]", 1024,0,20000);
+    BGO_calo_prompt.reset("BGO_calo_prompt","BGO prompt calorimetry;Calorimetry [keV]", 1024,0,20000);
+    BGO_calo_delayed.reset("BGO_calo_delayed","BGO delayed calorimetry;Calorimetry [keV]", 1024,0,20000);
+    Paris_calo.reset("Paris_calo","Paris calorimetry;Calorimetry [keV]", 1024,0,20000);
+    Paris_calo_prompt.reset("Paris_calo_prompt","Paris prompt calorimetry;Calorimetry [keV]", 1024,0,20000);
+    Paris_calo_delayed.reset("Paris_calo_delayed","Paris delayed calorimetry;Calorimetry [keV]", 1024,0,20000);
+    total_calo.reset("total_calo","Total calorimetry;Calorimetry [keV]", 1024,0,20000);
+    total_calo_prompt.reset("total_calo_prompt","Total prompt calorimetry;Calorimetry [keV]", 1024,0,20000);
+    total_calo_delayed.reset("total_calo_delayed","Total delayed calorimetry;Calorimetry [keV]", 1024,0,20000);
+    
+    calo_prompt_total_VS_calo_total.reset("calo_prompt_total_VS_calo_total","Total prompt calorimetry VS total delayed calorimetry;Total Calorimetry [keV];Prompt Total Calorimetry [keV]", 
+        1024,0,20000, 1024,0,20000);
+    calo_delayed_total_VS_calo_total.reset("calo_delayed_total_VS_calo_total","Total delayed calorimetry;Calorimetry [keV];Delayed Total Calorimetry [keV]",
+        1024,0,20000, 1024,0,20000);
+    delayed_calo_total_VS_prompt_calo_total.reset("delayed_calo_total_VS_prompt_calo_total","Total delayed calorimetry;Prompt Total Calorimetry [keV];Delayed Total Calorimetry [keV]",
+        1024,0,20000, 1024,0,20000);
+
+    Ge_prompt_VS_Total_calo.reset("Ge_prompt_VS_Total_calo","Ge prompt spectra VS Clovers calorimetry;Calorimetry-Ge Energy [keV];Ge Energy [keV]",
+        1024,0,30000, 4096,0,4096);
+    Ge_delayed_VS_Total_calo.reset("Ge_delayed_VS_Total_calo","Ge delayed spectra VS Clovers calorimetry;Calorimetry-Ge Energy [keV];Ge Energy [keV]",
+        1024,0,30000, 4096,0,4096);
+    Ge_prompt_VS_Total_calo_prompt.reset("Ge_prompt_VS_Total_calo_prompt","Ge prompt spectra VS Clovers prompt calorimetry;Calorimetry-Ge Energy [keV];Ge Energy [keV]",
+        1024,0,30000, 4096,0,4096);
+    Ge_delayed_VS_Total_calo_prompt.reset("Ge_delayed_VS_Total_calo_prompt","Ge delayed spectra VS Clovers prompt calorimetry;Calorimetry-Ge Energy [keV];Ge Energy [keV]",
+        1024,0,30000, 4096,0,4096);
+    Ge_delayed_VS_Total_calo_delayed.reset("Ge_delayed_VS_Total_calo_delayed","Ge delayed spectra VS Clovers delayed calorimetry;Calorimetry-Ge Energy [keV];Ge Energy [keV]",
+        1024,0,30000, 4096,0,4096);
+    Ge_prompt_VS_Total_calo_delayed.reset("Ge_prompt_VS_Total_calo_delayed","Ge prompt spectra VS Clovers delayed calorimetry;Calorimetry-Ge Energy [keV];Ge Energy [keV]",
+        1024,0,30000, 4096,0,4096);
+
+    Ge_prompt_VS_Nuball_calo.reset("Ge_prompt_VS_Nuball_calo","Ge prompt spectra VS Clovers calorimetry;Calorimetry-Ge Energy [keV];Ge Energy [keV]",
+        1024,0,30000, 4096,0,4096);
+    Ge_delayed_VS_Nuball_calo.reset("Ge_delayed_VS_Nuball_calo","Ge delayed spectra VS Clovers calorimetry;Calorimetry-Ge Energy [keV];Ge Energy [keV]",
+        1024,0,30000, 4096,0,4096);
+    Ge_prompt_VS_Nuball_calo_prompt.reset("Ge_prompt_VS_Nuball_calo_prompt","Ge prompt spectra VS Clovers prompt calorimetry;Calorimetry-Ge Energy [keV];Ge Energy [keV]",
+        1024,0,30000, 4096,0,4096);
+    Ge_delayed_VS_Nuball_calo_prompt.reset("Ge_delayed_VS_Nuball_calo_prompt","Ge delayed spectra VS Clovers prompt calorimetry;Calorimetry-Ge Energy [keV];Ge Energy [keV]",
+        1024,0,30000, 4096,0,4096);
+    Ge_prompt_VS_Nuball_calo_delayed.reset("Ge_prompt_VS_Nuball_calo_delayed","Ge prompt spectra VS Clovers delayed calorimetry;Calorimetry-Ge Energy [keV];Ge Energy [keV]",
+        1024,0,30000, 4096,0,4096);
+    Ge_delayed_VS_Nuball_calo_delayed.reset("Ge_delayed_VS_Nuball_calo_delayed","Ge delayed spectra VS Clovers delayed calorimetry;Calorimetry-Ge Energy [keV];Ge Energy [keV]",
+        1024,0,30000, 4096,0,4096);
+    Nuball_calo_delayed_VS_prompt.reset("Nuball_calo_delayed_VS_prompt","Clovers delayed calorimetry VS prompt calorimetry;Prompt Calorimetry [keV];Delayed Calorimetry [keV]",
+        1024,0,30000, 4096,0,30000);
+
+    DSSD_VS_Nuball_calo.reset("DSSD_VS_Nuball_calo","DSSD spectra VS clovers calorimetry;Calorimetry [keV];Particle Energy [keV]",
+        1024,0,20000, 3000,0,30000);
+    DSSD_VS_Total_calo.reset("DSSD_VS_Total_calo","DSSD spectra VS total calorimetry;Total Calorimetry [keV];DSSD Energy [keV]",
+        1024,0,20000, 3000,0,30000);
+    DSSD_VS_Total_Prompt_calo.reset("DSSD_VS_Total_Prompt_calo","DSSD spectra VS Prompt calorimetry;Total Calorimetry [keV];DSSD Energy [keV]",
+        1024,0,20000, 3000,0,30000);
+    DSSD_VS_Total_Delayed_calo.reset("DSSD_VS_Total_Delayed_calo","DSSD spectra VS Delayed calorimetry;Total Calorimetry [keV];DSSD Energy [keV]",
+        1024,0,20000, 3000,0,30000);
+
+    Missing_VS_Delayed_cal.reset("Missing_VS_Delayed_cal","Missing energy VS delayed calorimetry;Delayed Calorimetry [keV];Missing Energy [keV]",
+        1024,0,20000, 1024,0,20000);
+    Delayed_Ge_VS_Missing.reset("Delayed_Ge_VS_Missing","Delayed_Ge_VS_Missing;Missing Energy [keV];Delayed Calorimetry [keV]",
+        300,0,20000, 10000,0,10000);
+    Prompt_Ge_VS_Missing.reset("Prompt_Ge_VS_Missing","Prompt_Ge_VS_Missing;Missing Energy [keV];Prompt Calorimetry [keV]",
+        300,0,20000, 10000,0,10000);
+    Prompt_Calo_VS_Missing.reset("Prompt_Calo_VS_Missing","Missing energy VS delayed calorimetry;Delayed Calorimetry [keV];Missing Energy [keV]",
+        500,0,20000, 1024,0,20000);
+    Clover_Mult_VS_Nuball_calo.reset("Clover_Mult_VS_Nuball_calo","Multiplicity Clover VS clovers calorimetry;Calorimetry [keV];Multiplicity",
+        1024,0,20000, 20,0,20);
+    prompt_Clover_Mult_VS_Nuball_calo.reset("prompt_Clover_Mult_VS_Nuball_calo","Prompt : Multiplicity Clover VS clovers calorimetry;Calorimetry [keV];Multiplicity",
+        1024,0,20000, 20,0,20);
+    delayed_Clover_Mult_VS_Nuball_calo.reset("delayed_Clover_Mult_VS_Nuball_calo","Delayed : Multiplicity Clover VS clovers calorimetry;Calorimetry [keV];Multiplicity",
+        1024,0,20000, 20,0,20);
+    Clover_Mult_VS_Total_calo.reset("Clover_Mult_VS_Total_calo","Multiplicity Clover VS Total calorimetry;Total Calorimetry [keV];Multiplicity",
+        1024,0,20000, 20,0,20);
+    prompt_Clover_Mult_VS_Total_calo.reset("prompt_Clover_Mult_VS_Total_calo","Prompt : Multiplicity Clover VS Total calorimetry;Total Calorimetry [keV];Multiplicity",
+        1024,0,20000, 20,0,20);
+    delayed_Clover_Mult_VS_Total_calo.reset("delayed_Clover_Mult_VS_Total_calo","Delayed : Multiplicity Clover VS Total calorimetry;Total Calorimetry [keV];Multiplicity",
+        1024,0,20000, 20,0,20);
+
+    calo_VS_promptMult.reset("calo_VS_promptMult", "calo_VS_promptMult;Calorimetry [keV];Prompt Multiplicity", 1024,0,20000, 20,0,20);
+    calo_VS_delayedMult.reset("calo_VS_delayedMult", "calo_VS_delayedMult;Calorimetry [keV];Delayed Multiplicity", 1024,0,20000, 20,0,20);
+    prompt_calo_VS_promptMult.reset("prompt_calo_VS_promptMult", "prompt_calo_VS_promptMult;Calorimetry [keV];Prompt Multiplicity", 1024,0,20000, 20,0,20);
+    prompt_calo_VS_delayedMult.reset("prompt_calo_VS_delayedMult", "prompt_calo_VS_delayedMult;Calorimetry [keV];Delayed Multiplicity", 1024,0,20000, 20,0,20);
+    delayed_calo_VS_promptMult.reset("delayed_calo_VS_promptMult", "delayed_calo_VS_promptMult;Calorimetry [keV];Prompt Multiplicity", 1024,0,20000, 20,0,20);
+    delayed_calo_VS_delayedMult.reset("delayed_calo_VS_delayedMult", "delayed_calo_VS_delayedMult;Calorimetry [keV];Delayed Multiplicity", 1024,0,20000, 20,0,20);
+        
+    each_Ge_VS_Time.reset("each_Ge_VS_Time","Timing each Ge", 
+        24,0,24, 2*USE_RF,-USE_RF/2,3*USE_RF/2);
+
+    each_Ge_spectra.reset("each_Ge_spectra","Spectra each Ge", 
+        24,0,24, 20000,0,10000);
+
+    each_Ge_crystal_spectra.reset("each_Ge_crystal_spectra","Spectra each Ge crystal", 
+        96,0,96, 30000,0,30000);
+
+    Ge_VS_size_event.reset("Ge_VS_size_event","Ge VS number of detectors", 
+        50,0,50, 5000,0,5000);
+
+    Paris_spectra_back.reset("Paris_spectra_back", "Paris spectra back", 750,0,1500);
+    Paris_time_spectra_back.reset("Paris_time_spectra_back", "Paris time spectra back", 750,0,1500, 500,-50,200);
+    Paris_each_spectra_back.reset("Paris_each_spectra_back", "Paris each spectra back", 750,0,1500, 500,0,500);
+    Paris_ratio_VS_time_back.reset("Paris_ratio_VS_time_back", "Paris ratio VS time back", 301,-100,200, 501,-2,2);
+    Paris_spectra_front.reset("Paris_spectra_front", "Paris spectra front", 750,0,1500);
+    Paris_time_spectra_front.reset("Paris_time_spectra_front", "Paris time spectra front", 750,0,1500, 500,-50,200);
+    Paris_each_spectra_front.reset("Paris_each_spectra_front", "Paris each spectra front", 750,0,1500, 500,0,500);
+    Paris_ratio_VS_time_front.reset("Paris_ratio_VS_time_front", "Paris ratio VS time front", 301,-100,200, 501,-2,2);
+    
+    Paris_back_calibrated_VS_delayed_U6.reset("Paris_back_calibrated_VS_delayed_U6", "Paris VS delayed U6 (642, 903, 987)", 1000,0,20000);
+
+    auto const & nb_paris = detectors.nbOfType("paris");
+    Paris_singles_labr.resize(nb_paris);
+    Paris_singles_nai.resize(nb_paris);
+    for (size_t i_paris = 0; i_paris<nb_paris; i_paris++)
+    {
+      auto const & name = detectors.name("paris", i_paris);
+      Paris_singles_labr[i_paris].reset(name+"labr", (name+" LaBr3;E [keV];#").c_str(), 1000,0,10000);
+      Paris_singles_nai [i_paris].reset(name+"_nai", (name+" NaI;E [keV];#")  .c_str(), 1000,0,10000);
+    }
   }
 
   auto const & nb_dssd = detectors.nbOfType("dssd");
@@ -568,72 +578,78 @@ void AnalyseIsomer::FillSorted(Event const & event, Clovers & clovers, DSSD & ds
   auto const & DelayedMult = clovers.DelayedMult + paris.DelayedMult;
   auto const & TotalMult = PromptMult+DelayedMult;
   if (m_trigger1989 && (PromptMult<1 || PromptMult>4 || paris.rejection || DelayedMult>5)) return;
-  for (auto const & crystal : clovers.cristaux) each_Ge_crystal_spectra.Fill(crystal, clovers.cristaux_nrj[crystal]);
 
-  //////////////////////////
-  // --- Multiplicity --- //
-  //////////////////////////
-  Sector_VS_Rings_mult.Fill(dssd.RingMult, dssd.SectorMult);
-  Delayed_VS_Prompt_Mult.Fill(PromptMult, DelayedMult);
-  prompt_mult_VS_sectors_mult.Fill(dssd.SectorMult, PromptMult);
-  delayed_mult_VS_sectors_mult.Fill(dssd.SectorMult, DelayedMult);
-
-  // if (dssd.SectorMult>0) printMT(dssd.oneParticle(), dssd.energy(), proton_in_DSSD.isIn(dssd.energy()), dssd.time(), proton_prompt.isIn(dssd.time()));
-  
-  /////////////////////////
-  // --- Calorimetry --- //
-  /////////////////////////
   auto const calo_clovers = clovers.totGe+clovers.totBGO;
   auto const & calo_prompt_clovers = clovers.totGe_prompt+clovers.totBGO_prompt;
   auto const & calo_delayed_clovers = clovers.totGe_delayed+clovers.totBGO_delayed;
-
-  Nuball_calo.Fill(calo_clovers);
-  Nuball_calo_prompt.Fill(calo_prompt_clovers);
-  Nuball_calo_delayed.Fill(calo_delayed_clovers);
-  
-  Nuball_calo_delayed_VS_prompt.Fill(calo_prompt_clovers, calo_delayed_clovers);
-  Clover_Mult_VS_Nuball_calo.Fill(calo_clovers, clovers.TotalMult);
-  prompt_Clover_Mult_VS_Nuball_calo.Fill(calo_prompt_clovers, clovers.PromptMult);
-  delayed_Clover_Mult_VS_Nuball_calo.Fill(calo_delayed_clovers, clovers.DelayedMult);
-
-  Ge_calo.Fill(clovers.totGe);
-  Ge_calo_prompt.Fill(clovers.totGe_prompt);
-  Ge_calo_delayed.Fill(clovers.totGe_delayed);
-
-  BGO_calo.Fill(clovers.totBGO);
-  BGO_calo_prompt.Fill(clovers.totBGO_prompt);
-  BGO_calo_delayed.Fill(clovers.totBGO_delayed);
-
   // Calorimetry with Paris :
   auto const calo_total_Paris = paris.PromptCalo+paris.DelayedCalo;
-  Paris_calo.Fill(calo_total_Paris);
-  Paris_calo_prompt.Fill(paris.PromptCalo);
-  Paris_calo_delayed.Fill(paris.DelayedCalo);
-
   // Total calorimetry :
   auto const calo_total = calo_total_Paris+calo_clovers;
   auto const calo_prompt_total = paris.PromptCalo+calo_prompt_clovers;
   auto const calo_delayed_total = paris.DelayedCalo+calo_delayed_clovers;
 
-  total_calo.Fill(calo_total);
-  total_calo_prompt.Fill(calo_prompt_total);
-  total_calo_delayed.Fill(calo_delayed_total);  
+  if (!m_choose1)
+  {
+    for (auto const & crystal : clovers.cristaux) each_Ge_crystal_spectra.Fill(crystal, clovers.cristaux_nrj[crystal]);
 
-  Clover_Mult_VS_Total_calo.Fill(calo_total, clovers.TotalMult);
-  prompt_Clover_Mult_VS_Total_calo.Fill(calo_prompt_total, clovers.PromptMult);
-  delayed_Clover_Mult_VS_Total_calo.Fill(calo_delayed_total, clovers.DelayedMult);
-  
-  // Calorimetry correlations :
-  if (calo_total!=calo_prompt_total) calo_prompt_total_VS_calo_total.Fill(calo_total, calo_prompt_total);
-  if (calo_total!=calo_delayed_total) calo_delayed_total_VS_calo_total.Fill(calo_total, calo_delayed_total);
-  delayed_calo_total_VS_prompt_calo_total.Fill(calo_prompt_total, calo_delayed_total);
+    //////////////////////////
+    // --- Multiplicity --- //
+    //////////////////////////
+    Sector_VS_Rings_mult.Fill(dssd.RingMult, dssd.SectorMult);
+    Delayed_VS_Prompt_Mult.Fill(PromptMult, DelayedMult);
+    prompt_mult_VS_sectors_mult.Fill(dssd.SectorMult, PromptMult);
+    delayed_mult_VS_sectors_mult.Fill(dssd.SectorMult, DelayedMult);
 
-  calo_VS_promptMult.Fill(calo_total, PromptMult);
-  calo_VS_delayedMult.Fill(calo_total, DelayedMult);
-  prompt_calo_VS_promptMult.Fill(calo_prompt_total, PromptMult);
-  prompt_calo_VS_delayedMult.Fill(calo_prompt_total, DelayedMult);
-  delayed_calo_VS_promptMult.Fill(calo_delayed_total, PromptMult);
-  delayed_calo_VS_delayedMult.Fill(calo_delayed_total, DelayedMult);
+    // if (dssd.SectorMult>0) printMT(dssd.oneParticle(), dssd.energy(), proton_in_DSSD.isIn(dssd.energy()), dssd.time(), proton_prompt.isIn(dssd.time()));
+    
+    /////////////////////////
+    // --- Calorimetry --- //
+    /////////////////////////
+
+
+    Nuball_calo.Fill(calo_clovers);
+    Nuball_calo_prompt.Fill(calo_prompt_clovers);
+    Nuball_calo_delayed.Fill(calo_delayed_clovers);
+    
+    Nuball_calo_delayed_VS_prompt.Fill(calo_prompt_clovers, calo_delayed_clovers);
+    Clover_Mult_VS_Nuball_calo.Fill(calo_clovers, clovers.TotalMult);
+    prompt_Clover_Mult_VS_Nuball_calo.Fill(calo_prompt_clovers, clovers.PromptMult);
+    delayed_Clover_Mult_VS_Nuball_calo.Fill(calo_delayed_clovers, clovers.DelayedMult);
+
+    Ge_calo.Fill(clovers.totGe);
+    Ge_calo_prompt.Fill(clovers.totGe_prompt);
+    Ge_calo_delayed.Fill(clovers.totGe_delayed);
+
+    BGO_calo.Fill(clovers.totBGO);
+    BGO_calo_prompt.Fill(clovers.totBGO_prompt);
+    BGO_calo_delayed.Fill(clovers.totBGO_delayed);
+
+    Paris_calo.Fill(calo_total_Paris);
+    Paris_calo_prompt.Fill(paris.PromptCalo);
+    Paris_calo_delayed.Fill(paris.DelayedCalo);
+
+
+    total_calo.Fill(calo_total);
+    total_calo_prompt.Fill(calo_prompt_total);
+    total_calo_delayed.Fill(calo_delayed_total);  
+
+    Clover_Mult_VS_Total_calo.Fill(calo_total, clovers.TotalMult);
+    prompt_Clover_Mult_VS_Total_calo.Fill(calo_prompt_total, clovers.PromptMult);
+    delayed_Clover_Mult_VS_Total_calo.Fill(calo_delayed_total, clovers.DelayedMult);
+    
+    // Calorimetry correlations :
+    if (calo_total!=calo_prompt_total) calo_prompt_total_VS_calo_total.Fill(calo_total, calo_prompt_total);
+    if (calo_total!=calo_delayed_total) calo_delayed_total_VS_calo_total.Fill(calo_total, calo_delayed_total);
+    delayed_calo_total_VS_prompt_calo_total.Fill(calo_prompt_total, calo_delayed_total);
+
+    calo_VS_promptMult.Fill(calo_total, PromptMult);
+    calo_VS_delayedMult.Fill(calo_total, DelayedMult);
+    prompt_calo_VS_promptMult.Fill(calo_prompt_total, PromptMult);
+    prompt_calo_VS_delayedMult.Fill(calo_prompt_total, DelayedMult);
+    delayed_calo_VS_promptMult.Fill(calo_delayed_total, PromptMult);
+    delayed_calo_VS_delayedMult.Fill(calo_delayed_total, DelayedMult);
+  }
 
   /////////////////////////////////
   // --- Loop over Clovers : --- //
@@ -650,158 +666,161 @@ void AnalyseIsomer::FillSorted(Event const & event, Clovers & clovers, DSSD & ds
     auto const prompt_i  = clover_i.isGePrompt;
     auto const delayed_i = clover_i.isGeDelayed;
 
-    // Ge spectra :
-    Ge_spectra.Fill(nrj_i);
-    each_Ge_spectra.Fill(label_i, nrj_i);
-
-    // Multiplicity :
-    ge_spectra_VS_mult      .Fill(TotalMult, nrj_i);
-    ge_spectra_VSpromptmult .Fill(PromptMult, nrj_i);
-    ge_spectra_VSdelayedmult.Fill(DelayedMult, nrj_i);
-
-    // Time spectra :
-    Ge_Time_VS_Spectra.Fill(nrj_i, time_i);
-    each_Ge_VS_Time.Fill(label_i, time_i);
-
-    // Others :
-    Ge_VS_size_event.Fill(event.mult, nrj_i);
-
-  ////////////////////////
-  // --- Prompt Ge: --- //
-  ////////////////////////
-    if (prompt_i) 
+    if (!m_choose1)
     {
-      // Prompt spectra :
-      Ge_spectra_prompt.Fill(nrj_i);
-      
-      // Multiplicity :
-      ge_prompt_spectra_VS_mult      .Fill(TotalMult, nrj_i);
-      ge_prompt_spectra_VSpromptmult .Fill(PromptMult, nrj_i);
-      ge_prompt_spectra_VSdelayedmult.Fill(DelayedMult, nrj_i);
-
-      // Total Calorimetry :
-      Ge_prompt_VS_Total_calo.Fill(calo_total, nrj_i);
-      Ge_prompt_VS_Total_calo_prompt.Fill(calo_prompt_total, nrj_i);
-      Ge_prompt_VS_Total_calo_delayed.Fill(calo_delayed_total, nrj_i);
-      
-      // Nuball Calorimetry :
-      Ge_prompt_VS_Nuball_calo.Fill(calo_clovers, nrj_i);
-      Ge_prompt_VS_Nuball_calo_prompt.Fill(calo_prompt_clovers, nrj_i);
-      Ge_prompt_VS_Nuball_calo_delayed.Fill(calo_delayed_clovers, nrj_i);
-    }
-
-    /////////////////////////
-    // --- Delayed Ge: --- //
-    /////////////////////////
-    if (delayed_i) 
-    {
-      // Delayed spectra :
-      Ge_spectra_delayed.Fill(nrj_i);
+      // Ge spectra :
+      Ge_spectra.Fill(nrj_i);
+      each_Ge_spectra.Fill(label_i, nrj_i);
 
       // Multiplicity :
-      ge_delayed_spectra_VS_mult      .Fill(TotalMult, nrj_i);
-      ge_delayed_spectra_VSpromptmult .Fill(PromptMult, nrj_i);
-      ge_delayed_spectra_VSdelayedmult.Fill(DelayedMult, nrj_i);
+      ge_spectra_VS_mult      .Fill(TotalMult, nrj_i);
+      ge_spectra_VSpromptmult .Fill(PromptMult, nrj_i);
+      ge_spectra_VSdelayedmult.Fill(DelayedMult, nrj_i);
 
-      // Total Calorimetry :
-      Ge_delayed_VS_Total_calo.Fill(calo_total, nrj_i);
-      Ge_delayed_VS_Total_calo_prompt.Fill(calo_prompt_total, nrj_i);
-      Ge_delayed_VS_Total_calo_delayed.Fill(calo_delayed_total, nrj_i);
+      // Time spectra :
+      Ge_Time_VS_Spectra.Fill(nrj_i, time_i);
+      each_Ge_VS_Time.Fill(label_i, time_i);
 
-      // Nuball Calorimetry :
-      Ge_delayed_VS_Nuball_calo.Fill(calo_clovers, nrj_i);
-      Ge_delayed_VS_Nuball_calo_prompt.Fill(calo_prompt_clovers, nrj_i);
-      Ge_delayed_VS_Nuball_calo_delayed.Fill(calo_delayed_clovers, nrj_i);
+      // Others :
+      Ge_VS_size_event.Fill(event.mult, nrj_i);
 
-      // Gating for the other detectors :
-      if (nrj_i>639 && nrj_i<644) 
-      {
-        for (auto const & index : paris.indexes)
-        {
-          // auto const & label = event.labels[index];
-          auto const & nrj = event.nrjs[index];
-          auto const & nrj2 = event.nrj2s[index];
-          // auto const & time = event.time2s[index];
-          auto const & ratio = (nrj2-nrj)/nrj2;
-          if (ratio>-0.2 && ratio<0.2) Paris_back_calibrated_VS_delayed_U6.Fill(nrj);
-        }
-      }
-    }
-    
     ////////////////////////
-    // --- Ge bidim : --- //
+    // --- Prompt Ge: --- //
     ////////////////////////
-    for (uint loop_j = loop_i+1; loop_j<clovers.CleanGe.size(); loop_j++)
-    {
-      auto const & clover_j = clovers.m_clovers[clovers.CleanGe[loop_j]];
-
-      // Extract hit_j informations :
-      auto const & time_j = clover_j.time;
-      auto const & nrj_j  = clover_j.nrj;
-      auto const prompt_j  = clover_j.isGePrompt;
-      auto const delayed_j = clover_j.isGeDelayed;
-
-
-      if (nrj_i > 507 && nrj_i<516 && nrj_j > 507 && nrj_j<516) continue;
-
-      Ge_VS_Ge.Fill(nrj_i, nrj_j);
-      Ge_VS_Ge.Fill(nrj_j, nrj_i);
-
-      //////////////////////
-      // --- Prompt : --- //
-      //////////////////////
-      if (prompt_i)
+      if (prompt_i) 
       {
-        if (prompt_j)
+        // Prompt spectra :
+        Ge_spectra_prompt.Fill(nrj_i);
+        
+        // Multiplicity :
+        ge_prompt_spectra_VS_mult      .Fill(TotalMult, nrj_i);
+        ge_prompt_spectra_VSpromptmult .Fill(PromptMult, nrj_i);
+        ge_prompt_spectra_VSdelayedmult.Fill(DelayedMult, nrj_i);
+
+        // Total Calorimetry :
+        Ge_prompt_VS_Total_calo.Fill(calo_total, nrj_i);
+        Ge_prompt_VS_Total_calo_prompt.Fill(calo_prompt_total, nrj_i);
+        Ge_prompt_VS_Total_calo_delayed.Fill(calo_delayed_total, nrj_i);
+        
+        // Nuball Calorimetry :
+        Ge_prompt_VS_Nuball_calo.Fill(calo_clovers, nrj_i);
+        Ge_prompt_VS_Nuball_calo_prompt.Fill(calo_prompt_clovers, nrj_i);
+        Ge_prompt_VS_Nuball_calo_delayed.Fill(calo_delayed_clovers, nrj_i);
+      }
+
+      /////////////////////////
+      // --- Delayed Ge: --- //
+      /////////////////////////
+      if (delayed_i) 
+      {
+        // Delayed spectra :
+        Ge_spectra_delayed.Fill(nrj_i);
+
+        // Multiplicity :
+        ge_delayed_spectra_VS_mult      .Fill(TotalMult, nrj_i);
+        ge_delayed_spectra_VSpromptmult .Fill(PromptMult, nrj_i);
+        ge_delayed_spectra_VSdelayedmult.Fill(DelayedMult, nrj_i);
+
+        // Total Calorimetry :
+        Ge_delayed_VS_Total_calo.Fill(calo_total, nrj_i);
+        Ge_delayed_VS_Total_calo_prompt.Fill(calo_prompt_total, nrj_i);
+        Ge_delayed_VS_Total_calo_delayed.Fill(calo_delayed_total, nrj_i);
+
+        // Nuball Calorimetry :
+        Ge_delayed_VS_Nuball_calo.Fill(calo_clovers, nrj_i);
+        Ge_delayed_VS_Nuball_calo_prompt.Fill(calo_prompt_clovers, nrj_i);
+        Ge_delayed_VS_Nuball_calo_delayed.Fill(calo_delayed_clovers, nrj_i);
+
+        // Gating for the other detectors :
+        if (nrj_i>639 && nrj_i<644) 
         {
-          GePrompt_VS_GePrompt.Fill(nrj_i,nrj_j);
-          GePrompt_VS_GePrompt.Fill(nrj_j,nrj_i);
+          for (auto const & index : paris.indexes)
+          {
+            // auto const & label = event.labels[index];
+            auto const & nrj = event.nrjs[index];
+            auto const & nrj2 = event.nrj2s[index];
+            // auto const & time = event.time2s[index];
+            auto const & ratio = (nrj2-nrj)/nrj2;
+            if (ratio>-0.2 && ratio<0.2) Paris_back_calibrated_VS_delayed_U6.Fill(nrj);
+          }
         }
-        else if (delayed_j)
+      }
+      
+      ////////////////////////
+      // --- Ge bidim : --- //
+      ////////////////////////
+      for (uint loop_j = loop_i+1; loop_j<clovers.CleanGe.size(); loop_j++)
+      {
+        auto const & clover_j = clovers.m_clovers[clovers.CleanGe[loop_j]];
+
+        // Extract hit_j informations :
+        auto const & time_j = clover_j.time;
+        auto const & nrj_j  = clover_j.nrj;
+        auto const prompt_j  = clover_j.isGePrompt;
+        auto const delayed_j = clover_j.isGeDelayed;
+
+
+        if (nrj_i > 507 && nrj_i<516 && nrj_j > 507 && nrj_j<516) continue;
+
+        Ge_VS_Ge.Fill(nrj_i, nrj_j);
+        Ge_VS_Ge.Fill(nrj_j, nrj_i);
+
+        //////////////////////
+        // --- Prompt : --- //
+        //////////////////////
+        if (prompt_i)
         {
-          GeDelayed_VS_GePrompt.Fill(nrj_i,nrj_j);
+          if (prompt_j)
+          {
+            GePrompt_VS_GePrompt.Fill(nrj_i,nrj_j);
+            GePrompt_VS_GePrompt.Fill(nrj_j,nrj_i);
+          }
+          else if (delayed_j)
+          {
+            GeDelayed_VS_GePrompt.Fill(nrj_i,nrj_j);
+          }
+        }
+
+        ///////////////////////
+        // --- Delayed : --- //
+        ///////////////////////
+        else if (delayed_i)
+        {        
+          if (delayed_j)
+          {
+            GeDelayed_VS_GeDelayed_time.Fill(time_i, time_j);
+            GeDelayed_VS_GeDelayed_time.Fill(time_j, time_i);
+            GeDelayed_VS_GeDelayed.Fill(nrj_i, nrj_j);
+            GeDelayed_VS_GeDelayed.Fill(nrj_j, nrj_i);
+          }
+          else if (prompt_j)
+          {
+            GeDelayed_VS_GePrompt.Fill(nrj_j,nrj_i);
+          }
         }
       }
 
-      ///////////////////////
-      // --- Delayed : --- //
-      ///////////////////////
-      else if (delayed_i)
-      {        
-        if (delayed_j)
-        {
-          GeDelayed_VS_GeDelayed_time.Fill(time_i, time_j);
-          GeDelayed_VS_GeDelayed_time.Fill(time_j, time_i);
-          GeDelayed_VS_GeDelayed.Fill(nrj_i, nrj_j);
-          GeDelayed_VS_GeDelayed.Fill(nrj_j, nrj_i);
-        }
-        else if (prompt_j)
-        {
-          GeDelayed_VS_GePrompt.Fill(nrj_j,nrj_i);
-        }
-      }
-    }
-
-    //////////////////////////
-    // --- BGO bidims : --- //
-    //////////////////////////
-    for (auto const & bgo : clovers.Bgo)
-    {
-      auto const & clover_bgo = clovers.m_clovers[bgo];
-      // auto const & time_bgo  = clovers.cristaux_time_BGO[bgo];
-      // auto const & nrj_bgo   = clovers.cristaux_nrj_BGO [bgo];
-      auto const & nrj_bgo   = clover_bgo.nrj_BGO;
-      auto const & prompt_bgo  = clover_bgo.isBGOPrompt;
-      auto const & delayed_bgo = clover_bgo.isBGODelayed;
-      if (prompt_bgo && prompt_i)
+      //////////////////////////
+      // --- BGO bidims : --- //
+      //////////////////////////
+      for (auto const & bgo : clovers.Bgo)
       {
-        BGO_VS_Ge_prompt.Fill(nrj_i, nrj_bgo);
-        BGO_prompt_VS_Ge_prompt_mult.Fill(nrj_i, nrj_bgo);
-        if (nrj_i > 507 && nrj_i<515) BGO_VS_Ge_511.Fill(bgo, nrj_bgo);
-      } 
-      else if (delayed_i && delayed_bgo) BGO_VS_Ge_delayed.Fill(nrj_i, nrj_bgo);
-    }
+        auto const & clover_bgo = clovers.m_clovers[bgo];
+        // auto const & time_bgo  = clovers.cristaux_time_BGO[bgo];
+        // auto const & nrj_bgo   = clovers.cristaux_nrj_BGO [bgo];
+        auto const & nrj_bgo   = clover_bgo.nrj_BGO;
+        auto const & prompt_bgo  = clover_bgo.isBGOPrompt;
+        auto const & delayed_bgo = clover_bgo.isBGODelayed;
+        if (prompt_bgo && prompt_i)
+        {
+          BGO_VS_Ge_prompt.Fill(nrj_i, nrj_bgo);
+          BGO_prompt_VS_Ge_prompt_mult.Fill(nrj_i, nrj_bgo);
+          if (nrj_i > 507 && nrj_i<515) BGO_VS_Ge_511.Fill(bgo, nrj_bgo);
+        } 
+        else if (delayed_i && delayed_bgo) BGO_VS_Ge_delayed.Fill(nrj_i, nrj_bgo);
+      }
 
+    }
     ////////////////////
     // --- DSSD : --- //
     ////////////////////
@@ -813,34 +832,37 @@ void AnalyseIsomer::FillSorted(Event const & event, Clovers & clovers, DSSD & ds
 
       for (auto const & strip : dssd) if (strip.nrj>0) DSSD_bidims[strip.label()].Fill(strip.nrj, nrj_i);
 
-      DSSD_Spectra.Fill(nrj_dssd);
-      DSSD_Spectra_VS_angle.Fill(angle, nrj_dssd);
-      Ge_VS_DSSD.Fill(nrj_dssd, nrj_i);
-      if (prompt_i) GePrompt_VS_DSSD.Fill(nrj_dssd, nrj_i);
-      if (delayed_i) GeDelayed_VS_DSSD.Fill(nrj_dssd, nrj_i);
+      if (!m_choose1)
+      {
+        DSSD_Spectra.Fill(nrj_dssd);
+        DSSD_Spectra_VS_angle.Fill(angle, nrj_dssd);
+        Ge_VS_DSSD.Fill(nrj_dssd, nrj_i);
+        if (prompt_i) GePrompt_VS_DSSD.Fill(nrj_dssd, nrj_i);
+        if (delayed_i) GeDelayed_VS_DSSD.Fill(nrj_dssd, nrj_i);
 
-      DSSD_TW.Fill(time_dssd, nrj_dssd);
-      Ge_VS_DSSD_Time.Fill(time_dssd, time_i);
-      DSSD_VS_Nuball_calo.Fill(calo_clovers, nrj_dssd);
-      DSSD_VS_Total_calo.Fill(calo_total, nrj_dssd);
-      DSSD_VS_Total_Prompt_calo.Fill(calo_prompt_total, nrj_dssd);
-      DSSD_VS_Total_Delayed_calo.Fill(calo_delayed_total, nrj_dssd);
+        DSSD_TW.Fill(time_dssd, nrj_dssd);
+        Ge_VS_DSSD_Time.Fill(time_dssd, time_i);
+        DSSD_VS_Nuball_calo.Fill(calo_clovers, nrj_dssd);
+        DSSD_VS_Total_calo.Fill(calo_total, nrj_dssd);
+        DSSD_VS_Total_Prompt_calo.Fill(calo_prompt_total, nrj_dssd);
+        DSSD_VS_Total_Delayed_calo.Fill(calo_delayed_total, nrj_dssd);
 
-      //////////////////////////////
-      // --- Missing energy : --- //
-      //////////////////////////////
-      auto const & Missing_E = Qdispo-calo_prompt_total-dssd.energy();
-      Missing_VS_Delayed_cal.Fill(calo_delayed_total, Missing_E);
-      if (delayed_i) Delayed_Ge_VS_Missing.Fill(Missing_E, nrj_i);
-      else if (prompt_i) Prompt_Ge_VS_Missing.Fill(Missing_E, nrj_i);
-      Prompt_Calo_VS_Missing.Fill(Missing_E, calo_prompt_total);
+        //////////////////////////////
+        // --- Missing energy : --- //
+        //////////////////////////////
+        auto const & Missing_E = Qdispo-calo_prompt_total-dssd.energy();
+        Missing_VS_Delayed_cal.Fill(calo_delayed_total, Missing_E);
+        if (delayed_i) Delayed_Ge_VS_Missing.Fill(Missing_E, nrj_i);
+        else if (prompt_i) Prompt_Ge_VS_Missing.Fill(Missing_E, nrj_i);
+        Prompt_Calo_VS_Missing.Fill(Missing_E, calo_prompt_total);
+      }
     }
   }
 
   ///////////////////
   // --- PARIS --- //
   ///////////////////
-  for (auto const & index : paris.indexes)
+  if (!m_choose1) for (auto const & index : paris.indexes)
   {
     auto const & label = event.labels[index];
     auto const & nrj = event.nrjs[index];
@@ -870,7 +892,7 @@ void AnalyseIsomer::FillSorted(Event const & event, Clovers & clovers, DSSD & ds
 
 void AnalyseIsomer::FillRaw(Event const & event)
 {
-  for (size_t i = 0; i<event.size(); i++)
+  if (!m_choose1) for (size_t i = 0; i<event.size(); i++)
   {
     if (isGe[event.labels[i]]) raw_Ge_Time_VS_Spectra.Fill(event.nrjs[i],event.time2s[i]);
   }
@@ -886,9 +908,9 @@ void AnalyseIsomer::Write()
     RWMat RW_prompt_del(GeDelayed_VS_GePrompt); RW_prompt_del.Write();
   }
 
-  File outfilename(outDir+outRoot);
+  File outfilename(m_outDir+m_outRoot);
   outfilename.makePath(); // Create the output folder if it doesn't exist
-  unique_TFile outfile(TFile::Open((outDir+outRoot).c_str(),"recreate"));
+  unique_TFile outfile(TFile::Open((m_outDir+m_outRoot).c_str(),"recreate"));
   outfile -> cd();
 
   print("Writting histograms ...");
@@ -1023,7 +1045,7 @@ void AnalyseIsomer::Write()
   outfile->Write();
   outfile->Close();
 
-  print("Writting analysis in", outDir+outRoot);
+  print("Writting analysis in", m_outDir+m_outRoot);
 }
 
 bool AnalyseIsomer::setParameters(std::vector<std::string> const & parameters)
@@ -1035,8 +1057,8 @@ bool AnalyseIsomer::setParameters(std::vector<std::string> const & parameters)
     while(is>>temp)
     {
       if (temp == "activated") continue;
-      else if (temp == "outDir:")  is >> outDir;
-      else if (temp == "outRoot:")  is >> outRoot;
+      else if (temp == "m_outDir:")  is >> m_outDir;
+      else if (temp == "m_outRoot:")  is >> m_outRoot;
       else if (temp == "gate:")
       {
         is >> temp;
