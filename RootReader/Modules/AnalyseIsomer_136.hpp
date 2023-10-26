@@ -1057,8 +1057,8 @@ bool AnalyseIsomer::setParameters(std::vector<std::string> const & parameters)
     while(is>>temp)
     {
       if (temp == "activated") continue;
-      else if (temp == "m_outDir:")  is >> m_outDir;
-      else if (temp == "m_outRoot:")  is >> m_outRoot;
+      else if (temp == "outDir:")  is >> m_outDir;
+      else if (temp == "outRoot:")  is >> m_outRoot;
       else if (temp == "gate:")
       {
         is >> temp;
