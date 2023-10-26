@@ -336,7 +336,7 @@ void AnalyseIsomer::run(Parameters & p, AnalyseIsomer & ai)
         dssd.Fill(event, hit_i);
         clovers.Fill(event, hit_i);
         paris.Fill(event, hit_i);
-        if (event.labels[hit_i] == 252) ai.time_ref.Fill(event.nrjs[hit_i], event.time2s[hit_i]);
+        if (!m_choose1) if (event.labels[hit_i] == 252) ai.time_ref.Fill(event.nrjs[hit_i], event.time2s[hit_i]);
       }
       // if (event.labels[0] == RF_Manager::label)
       // {
