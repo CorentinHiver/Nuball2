@@ -734,7 +734,7 @@ namespace CoAnalyse
 
           // V3 :
           double sub = (totProjX[x] * totProjY[y])/(proportions*total);
-          sub = sub *( 1. - (sub/(value)));
+          sub = sub *( 1. - (sub/(proportions*value)));
 
           matrix -> SetBinContent(x, y, value - sub);
 

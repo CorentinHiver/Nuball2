@@ -277,6 +277,7 @@ private:
   Vector_MTTHist<TH1F> Paris_singles_nai;
 
   Vector_MTTHist<TH2F> DSSD_bidims;
+  Vector_MTTHist<TH2F> DSSD_proj169_VS_Rings;
 
   // MTTHist<TH2F> mult_VS_Time; In order to see the evolution of Multiplicity over time. To do it, take a moving 50ns time window to group events
 
@@ -286,11 +287,17 @@ bool AnalyseIsomer::m_choose1 = false;
 
 bool AnalyseIsomer::launch(Parameters & p)
 {
+  Timer totalTimer;
   if (!this -> setParameters(p.getParameters(m_param_string))) return false;
   this -> InitializeManip();
   print("Starting !");
+  Timer runTimer;
   MTObject::parallelise_function(run, p, *this);
+  print(runTimer(), runTimer.unit(), "to treat data");
+  Timer writeTimer;
   this -> Write();
+  print(writeTimer(), writeTimer.unit(), "to write data");
+  print(totalTimer(), totalTimer.unit(), "to analyse data");
   return true;
 }
 
@@ -561,10 +568,12 @@ void AnalyseIsomer::InitializeManip()
 
   auto const & nb_dssd = detectors.nbOfType("dssd");
   DSSD_bidims.resize(nb_dssd);
+  DSSD_proj169_VS_Rings.resize(nb_dssd);
   for (size_t i_dssd = 0; i_dssd<nb_dssd; i_dssd++)
   {
     auto const & name = detectors.name("dssd", i_dssd);
     DSSD_bidims[i_dssd].reset(name, (name+";Clovers [keV];DSSD [keV]").c_str(), 15000,0,15000, 750,0,15000);
+    DSSD_proj169_VS_Rings[i_dssd].reset(name+"_proj169", (name+";Ring n°;DSSD [keV]").c_str(), 15,0,15, 750,0,15000);
   }
 
   // Set analysis parameters :
@@ -830,7 +839,14 @@ void AnalyseIsomer::FillSorted(Event const & event, Clovers & clovers, DSSD & ds
       auto const & time_dssd = dssd.time();
       auto const & angle = dssd.angle()/3.141596*180 + ring_deg_thick;
 
-      for (auto const & strip : dssd) if (strip.nrj>0) DSSD_bidims[strip.label()].Fill(nrj_i, strip.nrj);
+      for (auto const & sector : dssd) if (sector.nrj>0) 
+      {
+        DSSD_bidims[sector.label()].Fill(nrj_i, sector.nrj);
+        if (nrj_i>167 && nrj_i<171) for (auto const & ring : dssd.Rings) if (ring.nrj!=0.f)
+        {
+          DSSD_proj169_VS_Rings[sector.label()].Fill(ring.label(), sector.nrj);
+        }
+      }
 
       if (!m_choose1)
       {
@@ -1041,6 +1057,7 @@ void AnalyseIsomer::Write()
   for (auto & spectra : Paris_singles_nai) spectra.Write();
 
   for (auto & spectra : DSSD_bidims) spectra.Write();
+  for (auto & spectra : DSSD_proj169_VS_Rings) spectra.Write();
 
   outfile->Write();
   outfile->Close();
