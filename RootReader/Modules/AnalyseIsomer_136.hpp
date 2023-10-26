@@ -278,6 +278,17 @@ private:
 
   Vector_MTTHist<TH2F> DSSD_bidims;
   Vector_MTTHist<TH2F> DSSD_proj169_VS_Rings;
+  Vector_MTTHist<TH2F> DSSD_proj510_VS_Rings;
+  Vector_MTTHist<TH2F> DSSD_proj642_VS_Rings;
+  Vector_MTTHist<TH2F> DSSD_proj687_VS_Rings;
+  Vector_MTTHist<TH2F> DSSD_proj870_VS_Rings;
+  Vector_MTTHist<TH2F> DSSD_proj880_VS_Rings;
+  Vector_MTTHist<TH2F> DSSD_proj925_VS_Rings;
+  Vector_MTTHist<TH2F> DSSD_proj1014_VS_Rings;
+  Vector_MTTHist<TH2F> DSSD_proj2210_VS_Rings;
+  Vector_MTTHist<TH2F> DSSD_proj3000_VS_Rings;
+  Vector_MTTHist<TH2F> DSSD_proj3682_VS_Rings;
+  Vector_MTTHist<TH2F> DSSD_proj3850_VS_Rings;
 
   // MTTHist<TH2F> mult_VS_Time; In order to see the evolution of Multiplicity over time. To do it, take a moving 50ns time window to group events
 
@@ -567,13 +578,35 @@ void AnalyseIsomer::InitializeManip()
   }
 
   auto const & nb_dssd = detectors.nbOfType("dssd");
-  DSSD_bidims.resize(nb_dssd);
+  // DSSD_bidims.resize(nb_dssd);
   DSSD_proj169_VS_Rings.resize(nb_dssd);
+  DSSD_proj510_VS_Rings.resize(nb_dssd);
+  DSSD_proj642_VS_Rings.resize(nb_dssd);
+  DSSD_proj687_VS_Rings.resize(nb_dssd);
+  DSSD_proj870_VS_Rings.resize(nb_dssd);
+  DSSD_proj880_VS_Rings.resize(nb_dssd);
+  DSSD_proj925_VS_Rings.resize(nb_dssd);
+  DSSD_proj1014_VS_Rings.resize(nb_dssd);
+  DSSD_proj2210_VS_Rings.resize(nb_dssd);
+  DSSD_proj3000_VS_Rings.resize(nb_dssd);
+  DSSD_proj3682_VS_Rings.resize(nb_dssd);
+  DSSD_proj3850_VS_Rings.resize(nb_dssd);
   for (size_t i_dssd = 0; i_dssd<nb_dssd; i_dssd++)
   {
     auto const & name = detectors.name("dssd", i_dssd);
-    DSSD_bidims[i_dssd].reset(name, (name+";Clovers [keV];DSSD [keV]").c_str(), 15000,0,15000, 750,0,15000);
+    // DSSD_bidims[i_dssd].reset(name, (name+";Clovers [keV];DSSD [keV]").c_str(), 15000,0,15000, 750,0,15000);
     DSSD_proj169_VS_Rings[i_dssd].reset(name+"_proj169", (name+";Ring n°;DSSD [keV]").c_str(), 15,0,15, 750,0,15000);
+    DSSD_proj510_VS_Rings[i_dssd].reset(name+"_proj510", (name+";Ring n°;DSSD [keV]").c_str(), 15,0,15, 750,0,15000);
+    DSSD_proj642_VS_Rings[i_dssd].reset(name+"_proj642", (name+";Ring n°;DSSD [keV]").c_str(), 15,0,15, 750,0,15000);
+    DSSD_proj687_VS_Rings[i_dssd].reset(name+"_proj687", (name+";Ring n°;DSSD [keV]").c_str(), 15,0,15, 750,0,15000);
+    DSSD_proj870_VS_Rings[i_dssd].reset(name+"_proj870", (name+";Ring n°;DSSD [keV]").c_str(), 15,0,15, 750,0,15000);
+    DSSD_proj880_VS_Rings[i_dssd].reset(name+"_proj880", (name+";Ring n°;DSSD [keV]").c_str(), 15,0,15, 750,0,15000);
+    DSSD_proj925_VS_Rings[i_dssd].reset(name+"_proj925", (name+";Ring n°;DSSD [keV]").c_str(), 15,0,15, 750,0,15000);
+    DSSD_proj1014_VS_Rings[i_dssd].reset(name+"_proj1014", (name+";Ring n°;DSSD [keV]").c_str(), 15,0,15, 750,0,15000);
+    DSSD_proj2210_VS_Rings[i_dssd].reset(name+"_proj2210", (name+";Ring n°;DSSD [keV]").c_str(), 15,0,15, 750,0,15000);
+    DSSD_proj3000_VS_Rings[i_dssd].reset(name+"_proj3000", (name+";Ring n°;DSSD [keV]").c_str(), 15,0,15, 750,0,15000);
+    DSSD_proj3682_VS_Rings[i_dssd].reset(name+"_proj3682", (name+";Ring n°;DSSD [keV]").c_str(), 15,0,15, 750,0,15000);
+    DSSD_proj3850_VS_Rings[i_dssd].reset(name+"_proj3850", (name+";Ring n°;DSSD [keV]").c_str(), 15,0,15, 750,0,15000);
   }
 
   // Set analysis parameters :
@@ -841,10 +874,54 @@ void AnalyseIsomer::FillSorted(Event const & event, Clovers & clovers, DSSD & ds
 
       for (auto const & sector : dssd) if (sector.nrj>0) 
       {
-        DSSD_bidims[sector.label()].Fill(nrj_i, sector.nrj);
+        // DSSD_bidims[sector.label()].Fill(nrj_i, sector.nrj);
         if (nrj_i>167 && nrj_i<171) for (auto const & ring : dssd.Rings) if (ring.nrj!=0.f)
         {
           DSSD_proj169_VS_Rings[sector.label()].Fill(ring.label(), sector.nrj);
+        }
+        else if (nrj_i>507 && nrj_i<5015) for (auto const & ring : dssd.Rings) if (ring.nrj!=0.f)
+        {
+          DSSD_proj510_VS_Rings[sector.label()].Fill(ring.label(), sector.nrj);
+        }
+        else if (nrj_i>639 && nrj_i<645) for (auto const & ring : dssd.Rings) if (ring.nrj!=0.f)
+        {
+          DSSD_proj642_VS_Rings[sector.label()].Fill(ring.label(), sector.nrj);
+        }
+        else if (nrj_i>684 && nrj_i<691) for (auto const & ring : dssd.Rings) if (ring.nrj!=0.f)
+        {
+          DSSD_proj687_VS_Rings[sector.label()].Fill(ring.label(), sector.nrj);
+        }
+        else if (nrj_i>867 && nrj_i<873) for (auto const & ring : dssd.Rings) if (ring.nrj!=0.f)
+        {
+          DSSD_proj870_VS_Rings[sector.label()].Fill(ring.label(), sector.nrj);
+        }
+        else if (nrj_i>877 && nrj_i<883) for (auto const & ring : dssd.Rings) if (ring.nrj!=0.f)
+        {
+          DSSD_proj880_VS_Rings[sector.label()].Fill(ring.label(), sector.nrj);
+        }
+        else if (nrj_i>922 && nrj_i<928) for (auto const & ring : dssd.Rings) if (ring.nrj!=0.f)
+        {
+          DSSD_proj925_VS_Rings[sector.label()].Fill(ring.label(), sector.nrj);
+        }
+        else if (nrj_i>1011 && nrj_i<1017) for (auto const & ring : dssd.Rings) if (ring.nrj!=0.f)
+        {
+          DSSD_proj1014_VS_Rings[sector.label()].Fill(ring.label(), sector.nrj);
+        }
+        else if (nrj_i>2200 && nrj_i<2230) for (auto const & ring : dssd.Rings) if (ring.nrj!=0.f)
+        {
+          DSSD_proj2210_VS_Rings[sector.label()].Fill(ring.label(), sector.nrj);
+        }
+        else if (nrj_i>2980 && nrj_i<3020) for (auto const & ring : dssd.Rings) if (ring.nrj!=0.f)
+        {
+          DSSD_proj3000_VS_Rings[sector.label()].Fill(ring.label(), sector.nrj);
+        }
+        else if (nrj_i>3675 && nrj_i<3685) for (auto const & ring : dssd.Rings) if (ring.nrj!=0.f)
+        {
+          DSSD_proj3682_VS_Rings[sector.label()].Fill(ring.label(), sector.nrj);
+        }
+        else if (nrj_i>3845 && nrj_i<3855) for (auto const & ring : dssd.Rings) if (ring.nrj!=0.f)
+        {
+          DSSD_proj3850_VS_Rings[sector.label()].Fill(ring.label(), sector.nrj);
         }
       }
 
@@ -1058,6 +1135,17 @@ void AnalyseIsomer::Write()
 
   for (auto & spectra : DSSD_bidims) spectra.Write();
   for (auto & spectra : DSSD_proj169_VS_Rings) spectra.Write();
+  for (auto & spectra : DSSD_proj510_VS_Rings) spectra.Write();
+  for (auto & spectra : DSSD_proj642_VS_Rings) spectra.Write();
+  for (auto & spectra : DSSD_proj687_VS_Rings) spectra.Write();
+  for (auto & spectra : DSSD_proj870_VS_Rings) spectra.Write();
+  for (auto & spectra : DSSD_proj880_VS_Rings) spectra.Write();
+  for (auto & spectra : DSSD_proj925_VS_Rings) spectra.Write();
+  for (auto & spectra : DSSD_proj1014_VS_Rings) spectra.Write();
+  for (auto & spectra : DSSD_proj2210_VS_Rings) spectra.Write();
+  for (auto & spectra : DSSD_proj3000_VS_Rings) spectra.Write();
+  for (auto & spectra : DSSD_proj3682_VS_Rings) spectra.Write();
+  for (auto & spectra : DSSD_proj3850_VS_Rings) spectra.Write();
 
   outfile->Write();
   outfile->Close();
