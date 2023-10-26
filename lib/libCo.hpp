@@ -191,11 +191,19 @@ public:
     size_t const & resize(size_t size, bool const & value = false) {
       if (size>m_size)
       {
-        bool* temp = new bool[size];
-        std::memcpy(temp, m_data, m_size*sizeof(bool));
-        delete[] m_data;
-        for (;m_size<size;m_size++) temp[m_size] = value;// Fills new space with value AND set correct value to m_size
-        m_data = temp;
+        if (m_size==0) 
+        {
+          m_data = new bool[size];
+          for (;m_size<size;m_size++) m_data[m_size] = value;
+        }
+        else 
+        {
+          bool* temp = new bool[size];
+          std::memcpy(temp, m_data, m_size*sizeof(bool));
+          delete[] m_data;
+          for (;m_size<size;m_size++) temp[m_size] = value;// Fills new space with value AND set correct value to m_size
+          m_data = temp;
+        }
       }
       return m_size;
     }

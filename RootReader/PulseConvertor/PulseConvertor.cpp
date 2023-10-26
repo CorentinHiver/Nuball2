@@ -292,13 +292,13 @@ void convertRuns(MTList & runs)
     auto ref_VS_RF        = (histoed) ? std::make_unique<TH1F>(("ref_VS_RF_"+run).c_str(), ("Timing reference "+run).c_str(), 8*USE_RF, -USE_RF/2, 3*USE_RF/2) : 0;
 
     auto detectors_VS_RF  = (histoed) ? std::make_unique<TH2F>(("detectors_VS_RF_"+run).c_str(), ("Timing all detectors "+run).c_str(), 
-                              Detectors::number(),0,Detectors::number(), 2*USE_RF,-USE_RF/2,3*USE_RF/2) : 0;
+                              detectors.number(),0,detectors.number(), 2*USE_RF,-USE_RF/2,3*USE_RF/2) : 0;
     
     auto detectors_time  = (histoed) ? std::make_unique<TH2F>(("detectors_time_"+run).c_str(), ("Rel timing all detectors "+run).c_str(), 
-                              Detectors::number(),0,Detectors::number(), 2*USE_RF,-USE_RF/2,3*USE_RF/2) : 0;
+                              detectors.number(),0,detectors.number(), 2*USE_RF,-USE_RF/2,3*USE_RF/2) : 0;
     
     // auto detectors_time  = (histoed) ? std::make_unique<TH2F>(("detectors_time_"+run).c_str(), ("Rel timing all detectors "+run).c_str(), 
-    //                           Detectors::number(),0,Detectors::number(), 2*USE_RF,-USE_RF/2,3*USE_RF/2) : 0;
+    //                           detectors.number(),0,detectors.number(), 2*USE_RF,-USE_RF/2,3*USE_RF/2) : 0;
 
     auto Ge_spectra       = (histoed) ? std::make_unique<TH1F> (("Ge_spectra_"+run).c_str(), ("Ge spectra "+run).c_str(), 20000,0,10000 ) : 0;
 
@@ -352,6 +352,8 @@ void convertRuns(MTList & runs)
         // Extract the RF information and calculate the relative timestamp : 
         auto const & stamp = event.stamp;
         auto const rf_stamp = rf.pulse_ToF(stamp);
+
+        // Loop through the data and hope to trigger
         for (int i = 0; i<event.mult; i++)
         {
           auto const & label = event.labels[i];

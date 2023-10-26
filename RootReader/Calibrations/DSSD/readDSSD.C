@@ -1,4 +1,5 @@
 #include "../../../lib/libRoot.hpp"
+#include "../../../lib/Classes/Detectors.hpp"
 #include "TPad.h"
 
   std::vector<std::string> names = 
@@ -45,13 +46,6 @@ void readDSSD(char choix = 0)
       matrixes.emplace_back(file->Get<TH2F>(name.c_str()));
       auto & matrix = matrixes.back();
       CoAnalyse::removeRandomBidim(matrix, 20);
-      // proj169.emplace_back(new TH1D());
-      // CoAnalyse::projectX(matrix, proj169.back(), 167., 171.);
-      // auto c = new TCanvas("canvas", name.c_str());
-      // proj169.back()->Draw();
-      // c->Update();
-      // c->WaitPrimitive();
-      break;
     }
 
     auto out = TFile::Open("DSSD_final.root", "recreate");
@@ -61,8 +55,76 @@ void readDSSD(char choix = 0)
     out->Close();  
     print("DSSD_final.root written");
   }
-  else if (choix == 1)
+
+  else if (choix == 1 || choix == 2)
   {// Reads the DSSD_final.root
-    auto file2 = TFile::Open("DSSD_bidims.root", "READ");
+    detectors.load("../index_129.dat");
+    ofstream outFile("DSSD_calib.data");
+    auto file = TFile::Open("DSSD_final.root", "READ");
+    std::vector<TH2F*> matrixes;
+    std::vector<TH1D*> proj169;
+    for (auto const & name : names)
+    {
+      auto const & label = detectors.getLabel(name);
+      matrixes.emplace_back(file->Get<TH2F>(name.c_str()));
+      if (!matrixes.back()) continue;
+      proj169.emplace_back(new TH1D());
+      auto & histo = proj169.back();
+      CoAnalyse::projectY(matrixes.back(), histo, 167., 171.);
+
+      if (histo->Integral()<500) 
+      {
+        print("CAN'T CALIBRATE", name, ": only", histo->Integral(), "counts");
+        outFile << label << " " << 5700 << " " << "N/A" << std::endl;
+        continue;
+      }
+
+      ////////////////////
+      // Fit the peak : //
+      ////////////////////
+
+      // Inititalise the parameters :
+      auto const & constante = histo->GetMaximum();
+      auto const & mean = histo->GetXaxis()->GetBinCenter(histo->GetMaximumBin());
+      auto const & sigma = (histo->GetXaxis()->GetBinCenter(histo -> FindLastBinAbove(constante/2))
+                           - histo->GetXaxis()->GetBinCenter(histo -> FindFirstBinAbove(constante/2)))/2.35;
+
+      // Simple gaussian fit :
+      TF1*  gaus(new TF1("gaus","gaus"));     
+      gaus -> SetRange(mean-10*sigma, mean+10*sigma);
+      gaus -> SetParameter(0, constante);
+      gaus -> SetParameter(1, mean);
+      gaus -> SetParameter(2, sigma);
+      histo -> Fit(gaus,"RQN+");
+
+      auto const & constante_1 = gaus -> GetParameter(0);
+      auto const & mean_1 = gaus -> GetParameter(1);
+      auto const & sigma_1 = gaus -> GetParameter(2);
+
+      // Gaussian + background :
+      TF1* gaus_pol0(new TF1("gaus(0)+pol1(3)","gaus(0)+pol1(3)"));
+      gaus_pol0 -> SetRange(mean_1-10*sigma_1, mean_1+10*sigma_1);
+      gaus_pol0 -> SetParameter(0, gaus -> GetParameter(0));
+      gaus_pol0 -> SetParameter(1, gaus -> GetParameter(1));
+      gaus_pol0 -> SetParameter(2, gaus -> GetParameter(2));
+      histo -> Fit(gaus_pol0,"RQ+");
+
+      if (choix == 2)
+      {
+        auto c = new TCanvas(("canvas_"+name).c_str(), name.c_str());
+        c->cd();
+        proj169.back()->Draw();
+        c->Update();
+        c->WaitPrimitive();
+
+        print(constante, mean, sigma);
+        print(constante_1, mean_1, sigma_1);
+        print(gaus_pol0 -> GetParameter(0), gaus_pol0 -> GetParameter(1), gaus_pol0 -> GetParameter(2));
+      }
+
+      // Write down the center value :
+      outFile << label << " " << 5700 << " " << gaus_pol0 -> GetParameter(1) << std::endl;
+    }
+    outFile.close();
   }
 }

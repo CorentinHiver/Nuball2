@@ -277,6 +277,7 @@ private:
   Vector_MTTHist<TH1F> Paris_singles_nai;
 
   Vector_MTTHist<TH2F> DSSD_bidims;
+  Vector_MTTHist<TH2F> DSSD_projTot_VS_Rings;
   Vector_MTTHist<TH2F> DSSD_proj169_VS_Rings;
   Vector_MTTHist<TH2F> DSSD_proj510_VS_Rings;
   Vector_MTTHist<TH2F> DSSD_proj642_VS_Rings;
@@ -577,8 +578,10 @@ void AnalyseIsomer::InitializeManip()
     }
   }
 
-  auto const & nb_dssd = detectors.nbOfType("dssd");
+  auto const & nb_dssd = 32;
+  // auto const & nb_dssd = detectors.nbOfType("dssd");
   // DSSD_bidims.resize(nb_dssd);
+  DSSD_projTot_VS_Rings.resize(nb_dssd);
   DSSD_proj169_VS_Rings.resize(nb_dssd);
   DSSD_proj510_VS_Rings.resize(nb_dssd);
   DSSD_proj642_VS_Rings.resize(nb_dssd);
@@ -595,6 +598,7 @@ void AnalyseIsomer::InitializeManip()
   {
     auto const & name = detectors.name("dssd", i_dssd);
     // DSSD_bidims[i_dssd].reset(name, (name+";Clovers [keV];DSSD [keV]").c_str(), 15000,0,15000, 750,0,15000);
+    DSSD_projTot_VS_Rings[i_dssd].reset(name+"_projTot", (name+";Ring n°;DSSD [keV]").c_str(), 15,0,15, 750,0,15000);
     DSSD_proj169_VS_Rings[i_dssd].reset(name+"_proj169", (name+";Ring n°;DSSD [keV]").c_str(), 15,0,15, 750,0,15000);
     DSSD_proj510_VS_Rings[i_dssd].reset(name+"_proj510", (name+";Ring n°;DSSD [keV]").c_str(), 15,0,15, 750,0,15000);
     DSSD_proj642_VS_Rings[i_dssd].reset(name+"_proj642", (name+";Ring n°;DSSD [keV]").c_str(), 15,0,15, 750,0,15000);
@@ -875,6 +879,9 @@ void AnalyseIsomer::FillSorted(Event const & event, Clovers & clovers, DSSD & ds
       for (auto const & sector : dssd) if (sector.nrj>0) 
       {
         // DSSD_bidims[sector.label()].Fill(nrj_i, sector.nrj);
+
+        for (auto const & ring : dssd.Rings) if (ring.nrj!=0.f) DSSD_projTot_VS_Rings[sector.label()].Fill(ring.label(), sector.nrj);
+
         if (nrj_i>167 && nrj_i<171) 
         {
           for (auto const & ring : dssd.Rings) if (ring.nrj!=0.f) DSSD_proj169_VS_Rings[sector.label()].Fill(ring.label(), sector.nrj);
