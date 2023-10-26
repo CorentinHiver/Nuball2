@@ -879,7 +879,7 @@ void AnalyseIsomer::FillSorted(Event const & event, Clovers & clovers, DSSD & ds
         {
           for (auto const & ring : dssd.Rings) if (ring.nrj!=0.f) DSSD_proj169_VS_Rings[sector.label()].Fill(ring.label(), sector.nrj);
         }
-        else if (nrj_i>507 && nrj_i<5015) 
+        else if (nrj_i>507 && nrj_i<515) 
         {
           for (auto const & ring : dssd.Rings) if (ring.nrj!=0.f) DSSD_proj510_VS_Rings[sector.label()].Fill(ring.label(), sector.nrj);
         }

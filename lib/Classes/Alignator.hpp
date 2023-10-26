@@ -128,4 +128,9 @@ void Alignator::align()
   // tree -> SetBranchStatus("*", true); //enables again the whole tree to be read
 }
 
+class AlignedTree : public TTree, public Alignator
+{
+
+};
+
 #endif //ALIGNATOR_HPP

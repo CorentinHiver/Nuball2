@@ -607,7 +607,7 @@ namespace CoAnalyse
 
   void removeRandomBidim(TH2* matrix, int iterations = 1, bool save_intermediate = false, ProjectionsBins projectionsY = {{}}, ProjectionsBins projectionsX = {{}})
   {
-    TRandom *random = new TRandom(time(0));
+    // TRandom *random = new TRandom(time(0));
     // matrix->Rebin2D(2);
     int const & bins_x = matrix->GetNbinsX();
     int const & bins_y = matrix->GetNbinsY();

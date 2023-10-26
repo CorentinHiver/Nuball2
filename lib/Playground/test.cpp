@@ -5,7 +5,7 @@
 // #define USE_RF 200
 
 #include "../libRoot.hpp"
-// #include <CloverEfficiency.hpp>
+#include <CloverEfficiency.hpp>
 // #include <Calibration.hpp>
 // #include <RunMatrixator.hpp>
 // #include <Detectors.hpp>
@@ -20,8 +20,8 @@ int main(int argc, char ** argv)
 
   // fuse_all_histo("histos/", true);
 
-  auto file = TFile::Open("fused_histo_final.root", "READ");
-  std::vector<std::pair<double, double>> gatesX = {{840, 850},{639, 644}, {725, 730}, {507, 515}};
+  // auto file = TFile::Open("fused_histo_final.root", "READ");
+  // std::vector<std::pair<double, double>> gatesX = {{840, 850},{639, 644}, {725, 730}, {507, 515}};
 
   // // auto histo = file->Get<TH2F>("S1_2_DSSD_prompt");
   // // auto histo = file->Get<TH2F>("PARIS_BR2D1_prompt");
@@ -35,9 +35,9 @@ int main(int argc, char ** argv)
   // if (argc == 2) CoAnalyse::removeRandomBidim(S1_2_DSSD_prompt, std::stoi(argv[1]), gates);
   // else CoAnalyse::removeRandomBidim(S1_2_DSSD_prompt, gates, 1);
 
-  auto pp = file->Get<TH2F>("pp");
-  if (argc == 2) CoAnalyse::removeRandomBidim(pp, std::stoi(argv[1]), true, gatesX);
-  else CoAnalyse::removeRandomBidim(pp, 1, true, gatesX);
+  // auto pp = file->Get<TH2F>("pp");
+  // if (argc == 2) CoAnalyse::removeRandomBidim(pp, std::stoi(argv[1]), true, gatesX);
+  // else CoAnalyse::removeRandomBidim(pp, 1, true, gatesX);
   // auto dd = file->Get<TH2F>("dd");
   // if (argc == 2) CoAnalyse::removeRandomBidim(dd, gates, std::stoi(argv[1]));
   // else CoAnalyse::removeRandomBidim(dd, gates, 1);
