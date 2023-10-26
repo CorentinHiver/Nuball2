@@ -684,7 +684,7 @@ namespace CoAnalyse
     // std::vector<std::vector<double>> real_sub_array;
     // fill2D(real_sub_array, stopX, stopY, 0.0);
 
-    print("Substracting...");
+    print("Substracting", matrix_name, "with", iterations, "iterations...");
     for (int it = 0; it<iterations; it++)
     {
       print("Iteration", it);
@@ -794,20 +794,23 @@ namespace CoAnalyse
       // normalizeBidim(matrix, maximum);
     }
 
-    print("Writting intermediate steps...");
-    std::string filename = "Background_removed_"+matrix_name+".root";
-    auto file = TFile::Open(filename.c_str(), "recreate");
-    file->cd();
-    matrix->Write();
-    for (auto & histo : save_totProjX) if (histo!=nullptr) histo -> Write();
-    for (auto & histo : save_totProjY) if (histo!=nullptr) histo -> Write();
-    for (auto & histo : save_sub_projX) if (histo!=nullptr) histo -> Write();
-    for (auto & histo : save_sub_projY) if (histo!=nullptr) histo -> Write();
-    for (auto & projections : intermediate_projX) for (auto & histo : projections) if (histo!=nullptr) histo -> Write();
-    for (auto & projections : intermediate_projY) for (auto & histo : projections) if (histo!=nullptr) histo -> Write();
-    file->Write();
-    file->Close();
-    print(filename, "written");
+    if (save_intermediate)
+    {
+      print("Writting intermediate steps...");
+      std::string filename = "Background_removed_"+matrix_name+".root";
+      auto file = TFile::Open(filename.c_str(), "recreate");
+      file->cd();
+      matrix->Write();
+      for (auto & histo : save_totProjX) if (histo!=nullptr) histo -> Write();
+      for (auto & histo : save_totProjY) if (histo!=nullptr) histo -> Write();
+      for (auto & histo : save_sub_projX) if (histo!=nullptr) histo -> Write();
+      for (auto & histo : save_sub_projY) if (histo!=nullptr) histo -> Write();
+      for (auto & projections : intermediate_projX) for (auto & histo : projections) if (histo!=nullptr) histo -> Write();
+      for (auto & projections : intermediate_projY) for (auto & histo : projections) if (histo!=nullptr) histo -> Write();
+      file->Write();
+      file->Close();
+      print(filename, "written");
+    }
   }
 
 

@@ -3,8 +3,6 @@
 
   std::vector<std::string> names = 
   {
-    "S1_0_DSSD",
-    "S1_1_DSSD",
     "S1_2_DSSD",
     "S1_3_DSSD",
     "S1_4_DSSD",
@@ -46,20 +44,22 @@ void readDSSD(char choix = 0)
     {
       matrixes.emplace_back(file->Get<TH2F>(name.c_str()));
       auto & matrix = matrixes.back();
-      CoAnalyse::removeRandomBidim(matrix, 20);
-      proj169.emplace_back(new TH1D());
-      CoAnalyse::projectX(matrix, proj169.back(), 167., 171.);
-      auto c = new TCanvas("canvas", name.c_str());
-      proj169.back()->Draw();
-      c->Update();
-      c->WaitPrimitive();
+      CoAnalyse::removeRandomBidim(matrix, 30);
+      // proj169.emplace_back(new TH1D());
+      // CoAnalyse::projectX(matrix, proj169.back(), 167., 171.);
+      // auto c = new TCanvas("canvas", name.c_str());
+      // proj169.back()->Draw();
+      // c->Update();
+      // c->WaitPrimitive();
+      break;
     }
 
     auto out = TFile::Open("DSSD_final.root", "recreate");
     out->cd();
-    for (auto & histo : proj169) if (histo && histo->Integral()>0) histo->Write();
+    for (auto & matrix : matrixes) if (matrix) matrix->Write();
     out->Write();
     out->Close();  
+    print("DSSD_final.root written");
   }
   else if (choix == 1)
   {// Reads the DSSD_final.root

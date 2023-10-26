@@ -830,7 +830,7 @@ void AnalyseIsomer::FillSorted(Event const & event, Clovers & clovers, DSSD & ds
       auto const & time_dssd = dssd.time();
       auto const & angle = dssd.angle()/3.141596*180 + ring_deg_thick;
 
-      for (auto const & strip : dssd) if (strip.nrj>0) DSSD_bidims[strip.label()].Fill(strip.nrj, nrj_i);
+      for (auto const & strip : dssd) if (strip.nrj>0) DSSD_bidims[strip.label()].Fill(nrj_i, strip.nrj);
 
       if (!m_choose1)
       {
