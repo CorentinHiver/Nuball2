@@ -564,7 +564,7 @@ void AnalyseIsomer::InitializeManip()
   for (size_t i_dssd = 0; i_dssd<nb_dssd; i_dssd++)
   {
     auto const & name = detectors.name("dssd", i_dssd);
-    DSSD_bidims[i_dssd].reset(name, (name+";Clovers [keV];DSSD [keV]").c_str(), 750,0,15000, 20000,0,20000);
+    DSSD_bidims[i_dssd].reset(name, (name+";Clovers [keV];DSSD [keV]").c_str(), 15000,0,15000, 750,0,15000);
   }
 
   // Set analysis parameters :

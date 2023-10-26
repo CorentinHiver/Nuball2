@@ -608,7 +608,7 @@ namespace CoAnalyse
   void removeRandomBidim(TH2* matrix, int iterations = 1, bool save_intermediate = false, ProjectionsBins projectionsY = {{}}, ProjectionsBins projectionsX = {{}})
   {
     TRandom *random = new TRandom(time(0));
-    matrix->Rebin2D(2);
+    // matrix->Rebin2D(2);
     int const & bins_x = matrix->GetNbinsX();
     int const & bins_y = matrix->GetNbinsY();
     int startX = 0;
@@ -733,36 +733,36 @@ namespace CoAnalyse
           // sub_moyY[it][y] += save_sub[it][x][y]/totProjY[y]/stopY;
 
           // V3 :
-          // double sub = (totProjX[x] * totProjY[y])/(proportions*total);
-          // sub = sub *( 1. - (sub/(value)));
+          double sub = (totProjX[x] * totProjY[y])/(proportions*total);
+          sub = sub *( 1. - (sub/(value)));
 
-          // matrix -> SetBinContent(x, y, value - sub);
+          matrix -> SetBinContent(x, y, value - sub);
 
-          // totProjX_buf[x] -= sub;
-          // totProjY_buf[y] -= sub;
-
-          // V4 :
-          sub_array[x][y] = (totProjX[x] * totProjY[y])/(proportions*total);
-          speed_array[x][y] = sub_array[x][y]/value;
-        }
-      }
-
-      // The iterations are done excluding the extremal lines to avoid edge effet :
-      for (int x = 1; x<bins_x; x++)
-      {
-        for (int y = 1; y<bins_y; y++) 
-        {
-          // Do an average of the speed around the bin :
-          auto const & mean_speed = speed_array[x][y];
-            // speed_array[x-1][y-1]*0.0313 + speed_array[x][y-1]*0.0938 + speed_array[x+1][y-1]*0.0313 + 
-            // speed_array[x-1][y]  *0.0938 + speed_array[x][y]  *0.5    + speed_array[x+1][y]  *0.0938 + 
-            // speed_array[x-1][y+1]*0.0313 + speed_array[x][y+1]*0.0938 + speed_array[x+1][y+1]*0.0313 ;
-          auto const & sub = sub_array[x][y] * ( 1 - mean_speed);
-          matrix -> SetBinContent(x, y, matrix->GetBinContent(x,y) - sub);
           totProjX_buf[x] -= sub;
           totProjY_buf[y] -= sub;
+
+          // V4 :
+          // sub_array[x][y] = (totProjX[x] * totProjY[y])/(proportions*total);
+          // speed_array[x][y] = sub_array[x][y]/value;
         }
       }
+
+      // V4 : (the iterations are done excluding the extremal lines to avoid edge effet :)
+      // for (int x = 1; x<bins_x; x++)
+      // {
+      //   for (int y = 1; y<bins_y; y++) 
+      //   {
+      //     // Do an average of the speed around the bin :
+      //     auto const & mean_speed = speed_array[x][y];
+      //       // speed_array[x-1][y-1]*0.0313 + speed_array[x][y-1]*0.0938 + speed_array[x+1][y-1]*0.0313 + 
+      //       // speed_array[x-1][y]  *0.0938 + speed_array[x][y]  *0.5    + speed_array[x+1][y]  *0.0938 + 
+      //       // speed_array[x-1][y+1]*0.0313 + speed_array[x][y+1]*0.0938 + speed_array[x+1][y+1]*0.0313 ;
+      //     auto const & sub = sub_array[x][y] * ( 1 - mean_speed);
+      //     matrix -> SetBinContent(x, y, matrix->GetBinContent(x,y) - sub);
+      //     totProjX_buf[x] -= sub;
+      //     totProjY_buf[y] -= sub;
+      //   }
+      // }
 
       if (save_intermediate) 
       {

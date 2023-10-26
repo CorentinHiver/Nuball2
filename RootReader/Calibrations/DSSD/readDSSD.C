@@ -46,9 +46,9 @@ void readDSSD(char choix = 0)
     {
       matrixes.emplace_back(file->Get<TH2F>(name.c_str()));
       auto & matrix = matrixes.back();
-      CoAnalyse::removeRandomBidim(matrix, 2);
+      CoAnalyse::removeRandomBidim(matrix, 20);
       proj169.emplace_back(new TH1D());
-      CoAnalyse::projectX(matrix, proj169.back(), 167, 171);
+      CoAnalyse::projectX(matrix, proj169.back(), 167., 171.);
       auto c = new TCanvas("canvas", name.c_str());
       proj169.back()->Draw();
       c->Update();
