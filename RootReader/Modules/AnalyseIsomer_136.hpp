@@ -875,53 +875,53 @@ void AnalyseIsomer::FillSorted(Event const & event, Clovers & clovers, DSSD & ds
       for (auto const & sector : dssd) if (sector.nrj>0) 
       {
         // DSSD_bidims[sector.label()].Fill(nrj_i, sector.nrj);
-        if (nrj_i>167 && nrj_i<171) for (auto const & ring : dssd.Rings) if (ring.nrj!=0.f)
+        if (nrj_i>167 && nrj_i<171) 
         {
-          DSSD_proj169_VS_Rings[sector.label()].Fill(ring.label(), sector.nrj);
+          for (auto const & ring : dssd.Rings) if (ring.nrj!=0.f) DSSD_proj169_VS_Rings[sector.label()].Fill(ring.label(), sector.nrj);
         }
-        else if (nrj_i>507 && nrj_i<5015) for (auto const & ring : dssd.Rings) if (ring.nrj!=0.f)
+        else if (nrj_i>507 && nrj_i<5015) 
         {
-          DSSD_proj510_VS_Rings[sector.label()].Fill(ring.label(), sector.nrj);
+          for (auto const & ring : dssd.Rings) if (ring.nrj!=0.f) DSSD_proj510_VS_Rings[sector.label()].Fill(ring.label(), sector.nrj);
         }
-        else if (nrj_i>639 && nrj_i<645) for (auto const & ring : dssd.Rings) if (ring.nrj!=0.f)
+        else if (nrj_i>639 && nrj_i<645) 
         {
-          DSSD_proj642_VS_Rings[sector.label()].Fill(ring.label(), sector.nrj);
+          for (auto const & ring : dssd.Rings) if (ring.nrj!=0.f) DSSD_proj642_VS_Rings[sector.label()].Fill(ring.label(), sector.nrj);
         }
-        else if (nrj_i>684 && nrj_i<691) for (auto const & ring : dssd.Rings) if (ring.nrj!=0.f)
+        else if (nrj_i>684 && nrj_i<691) 
         {
-          DSSD_proj687_VS_Rings[sector.label()].Fill(ring.label(), sector.nrj);
+          for (auto const & ring : dssd.Rings) if (ring.nrj!=0.f) DSSD_proj687_VS_Rings[sector.label()].Fill(ring.label(), sector.nrj);
         }
-        else if (nrj_i>867 && nrj_i<873) for (auto const & ring : dssd.Rings) if (ring.nrj!=0.f)
+        else if (nrj_i>867 && nrj_i<873) 
         {
-          DSSD_proj870_VS_Rings[sector.label()].Fill(ring.label(), sector.nrj);
+          for (auto const & ring : dssd.Rings) if (ring.nrj!=0.f) DSSD_proj870_VS_Rings[sector.label()].Fill(ring.label(), sector.nrj);
         }
-        else if (nrj_i>877 && nrj_i<883) for (auto const & ring : dssd.Rings) if (ring.nrj!=0.f)
+        else if (nrj_i>877 && nrj_i<883) 
         {
-          DSSD_proj880_VS_Rings[sector.label()].Fill(ring.label(), sector.nrj);
+          for (auto const & ring : dssd.Rings) if (ring.nrj!=0.f) DSSD_proj880_VS_Rings[sector.label()].Fill(ring.label(), sector.nrj);
         }
-        else if (nrj_i>922 && nrj_i<928) for (auto const & ring : dssd.Rings) if (ring.nrj!=0.f)
+        else if (nrj_i>922 && nrj_i<928) 
         {
-          DSSD_proj925_VS_Rings[sector.label()].Fill(ring.label(), sector.nrj);
+          for (auto const & ring : dssd.Rings) if (ring.nrj!=0.f) DSSD_proj925_VS_Rings[sector.label()].Fill(ring.label(), sector.nrj);
         }
-        else if (nrj_i>1011 && nrj_i<1017) for (auto const & ring : dssd.Rings) if (ring.nrj!=0.f)
+        else if (nrj_i>1011 && nrj_i<1017) 
         {
-          DSSD_proj1014_VS_Rings[sector.label()].Fill(ring.label(), sector.nrj);
+          for (auto const & ring : dssd.Rings) if (ring.nrj!=0.f) DSSD_proj1014_VS_Rings[sector.label()].Fill(ring.label(), sector.nrj);
         }
-        else if (nrj_i>2200 && nrj_i<2230) for (auto const & ring : dssd.Rings) if (ring.nrj!=0.f)
+        else if (nrj_i>2200 && nrj_i<2230) 
         {
-          DSSD_proj2210_VS_Rings[sector.label()].Fill(ring.label(), sector.nrj);
+          for (auto const & ring : dssd.Rings) if (ring.nrj!=0.f) DSSD_proj2210_VS_Rings[sector.label()].Fill(ring.label(), sector.nrj);
         }
-        else if (nrj_i>2980 && nrj_i<3020) for (auto const & ring : dssd.Rings) if (ring.nrj!=0.f)
+        else if (nrj_i>2980 && nrj_i<3020) 
         {
-          DSSD_proj3000_VS_Rings[sector.label()].Fill(ring.label(), sector.nrj);
+          for (auto const & ring : dssd.Rings) if (ring.nrj!=0.f) DSSD_proj3000_VS_Rings[sector.label()].Fill(ring.label(), sector.nrj);
         }
-        else if (nrj_i>3675 && nrj_i<3685) for (auto const & ring : dssd.Rings) if (ring.nrj!=0.f)
+        else if (nrj_i>3675 && nrj_i<3685) 
         {
-          DSSD_proj3682_VS_Rings[sector.label()].Fill(ring.label(), sector.nrj);
+          for (auto const & ring : dssd.Rings) if (ring.nrj!=0.f) DSSD_proj3682_VS_Rings[sector.label()].Fill(ring.label(), sector.nrj);
         }
-        else if (nrj_i>3845 && nrj_i<3855) for (auto const & ring : dssd.Rings) if (ring.nrj!=0.f)
+        else if (nrj_i>3845 && nrj_i<3855) 
         {
-          DSSD_proj3850_VS_Rings[sector.label()].Fill(ring.label(), sector.nrj);
+          for (auto const & ring : dssd.Rings) if (ring.nrj!=0.f) DSSD_proj3850_VS_Rings[sector.label()].Fill(ring.label(), sector.nrj);
         }
       }
 
