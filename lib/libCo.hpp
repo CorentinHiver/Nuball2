@@ -1,5 +1,5 @@
-#ifndef LIB_H_CO
-#define LIB_H_CO
+#ifndef LIB_HPP_CO
+#define LIB_HPP_CO
 
 // *********** STD includes ********* //
 #include <any>
@@ -237,19 +237,38 @@ std::map<std::string, std::string> error_message =
   {"DEV", "ASK DEV or do it yourself, sry"}
 };
 
+///////////////////////////////////
+//    UNORDERED MAPS FUNCTIONS   //
+///////////////////////////////////
+
+template<typename K, typename V> 
+inline bool find_key(std::unordered_map<K,V> const & map, K const & key)
+{
+  typename std::unordered_map<K, V>::const_iterator it = map.find(key);
+  return it != map.end();
+}
+
+template<typename K, typename V> 
+inline bool find_value(std::unordered_map<K,V> const & map, V const & value)
+{
+  return (std::find_if(map.begin(), map.end(), [&](const auto& pair) {
+        return pair.second == value;
+    }));
+}
+
 /////////////////////////
 //    MAPS FUNCTIONS   //
 /////////////////////////
 
 template<typename K, typename V> 
-bool find_key(std::map<K,V> const & map, K const & key)
+inline bool find_key(std::map<K,V> const & map, K const & key)
 {
   typename std::map<K, V>::const_iterator it = map.find(key);
   return it != map.end();
 }
 
 template<typename K, typename V> 
-bool find_value(std::map<K,V> const & map, V const & value)
+inline bool find_value(std::map<K,V> const & map, V const & value)
 {
   return (std::find_if(map.begin(), map.end(), [&](const auto& pair) {
         return pair.second == value;
@@ -257,7 +276,7 @@ bool find_value(std::map<K,V> const & map, V const & value)
 }
 
 template<typename K, typename V> 
-std::pair<K,V> get_max_element(std::map<K,V> const & map) 
+inline std::pair<K,V> get_max_element(std::map<K,V> const & map) 
 {
   return *std::max_element(map.begin(), map.end(), [] (const std::pair<K,V> & p1, const std::pair<K,V> & p2) 
   {
@@ -266,7 +285,7 @@ std::pair<K,V> get_max_element(std::map<K,V> const & map)
 }
 
 template<typename K, typename V> 
-V get_max_value(std::map<K,V> const & map) 
+inline V get_max_value(std::map<K,V> const & map) 
 {
   return (std::max_element(map.begin(), map.end(), [] (const std::pair<K,V> & p1, const std::pair<K,V> & p2) 
   {
@@ -275,7 +294,7 @@ V get_max_value(std::map<K,V> const & map)
 }
 
 template<typename K, typename V> 
-K get_max_key(std::map<K,V> const & map) 
+inline K get_max_key(std::map<K,V> const & map) 
 {
   return (*std::max_element(map.begin(), map.end(), [] (const std::pair<K,V> & p1, const std::pair<K,V> & p2) 
   {
@@ -284,7 +303,7 @@ K get_max_key(std::map<K,V> const & map)
 }
 
 template<typename K, typename V> 
-std::pair<K,V> get_min(std::map<K,V> const & map) 
+inline std::pair<K,V> get_min(std::map<K,V> const & map) 
 {
   return *std::min_element(map.begin(), map.end(), [] (const std::pair<K,V> & p1, const std::pair<K,V> & p2) 
   {
@@ -293,7 +312,7 @@ std::pair<K,V> get_min(std::map<K,V> const & map)
 }
 
 template<typename K, typename V> 
-V get_min_value(std::map<K,V> const & map) 
+inline V get_min_value(std::map<K,V> const & map) 
 {
   return (std::min_element(map.begin(), map.end(), [] (const std::pair<K,V> & p1, const std::pair<K,V> & p2) 
   {
@@ -302,7 +321,7 @@ V get_min_value(std::map<K,V> const & map)
 }
 
 template<typename K, typename V> 
-K get_min_key(std::map<K,V> const & map) 
+inline K get_min_key(std::map<K,V> const & map) 
 {
   return (*std::min_element(map.begin(), map.end(), [] (const std::pair<K,V> & p1, const std::pair<K,V> & p2) 
   {
@@ -321,9 +340,9 @@ using T_is_number = std::enable_if_t<std::is_arithmetic_v<T>>;
 using T_is_number = void;
 #endif // __cplusplus >= 201702L
 
-////////////////////////////
-//   SLOTS AND SIGNALS   //
-////////////////////////////
+///////////////////////////
+//   SLOTS AND SIGNALS   // TDB
+///////////////////////////
 
 #if (__cplusplus >= 201402L)
 template<class... ARGS>
@@ -368,4 +387,72 @@ class Slots
 };
 #endif //__cplusplus >= 201402L
 
-#endif //LIB_H_CO
+// #if (__cplusplus >= 201703L)
+
+// /**
+//  * @brief This class allows one to read one specific format of csv file (see details)
+//  * 
+//  * @details
+//  * 
+//  * The format of the data MUST be the following : 
+//  * 
+//  * [[Name of the columns]]
+//  * [[First row data]]
+//  * [[....]]
+//  * [[Last row data]]
+//  * 
+//  * Then, declare the reader in two steps : 
+//  * 
+//  * first construct the reader using the constructor.
+//  * 
+//  * 
+//  */
+// template<class... T>
+// class CSVReader
+// {
+// public:
+//   CSVReader(std::string const & filename, char const & delim = ';') {this -> open(filename, delim);}
+
+//   bool open(std::string const & filename, char const & delim = ';');
+
+//   operator bool() const & {return m_ok;}
+
+// private:
+//   std::vector<std::string> m_header;
+//   std::vector<std::tuple<T...>> m_data;
+//   bool m_ok = false;
+// };
+
+// template<class... T>
+// bool CSVReader<T...>::open(std::string const & filename, char const & delim)
+// {
+//   // Open file :
+//   std::ifstream file(filename, std::ios::in);
+//   if (!file) {print(filename, "not found"); return (m_ok = false);}
+
+//   // Read names header : 
+//   std::string reader;
+//   std::getline(file, reader);
+//   m_header = getList(reader, delim);
+//   print(m_header);
+
+//   // Read the types header :
+//   while (std::getline(file, reader))
+//   {
+//     std::vector<std::string> typeNames = getList(reader, delim);
+//      if (typeNames.size() != sizeof...(T))
+//     {
+//         // Handle the case where the number of types in the header
+//         // doesn't match the number of template arguments.
+//         print("Error: Number of types in the header doesn't match the template arguments.");
+//         return (m_ok = false);
+//     }
+//   }
+
+
+//   return true;
+// }
+
+// #endif //(__cplusplus >= 201703L)
+
+#endif //LIB_HPP_CO

@@ -9,26 +9,37 @@ std::string lastPart        (std::string const & string, char const & sep) { ret
 std::string removeFirstPart (std::string const & string, char const & sep) { return (string.substr(   string.find_first_of(sep) ));  }
 std::string removeLastPart  (std::string const & string, char const & sep) { return (string.substr(0, string.find_last_of(sep)  ));  }
 
-std::vector<std::string> getList(std::string string, char const & sep)
+/**
+ * 
+ * @brief Cuts a string into pieces separated by the given separator like ';' or ' ' or ',' ...
+ * 
+ * @details Understand the removeVoids parameter : for instance, we have string = ";1;2;3;;5"
+ * 
+ * without removeVoids this function returns {"1", "2", "3", "5"}
+ * with removeVoids this function returns {"", "1", "2", "3", "", "5"}
+ * 
+*/
+std::vector<std::string> getList(std::string string, char const & separator, bool const & removeVoids = false)
 {
-  std::size_t pos = 0;
+  size_t pos = 0;
   std::vector<std::string> ret;
-  while((pos = string.find(sep) ) != -1ul) // ul stands for unsigned long int
+  while((pos = string.find(separator) ) != -1ul)
   {
     if (pos==0) 
-    {// If the character is at front position then skip it;
+    {
+      if (!removeVoids) ret.push_back("");
       string.erase(0,1);
       continue; 
     }
     else if (pos == string.size())
-    {// If the character is at the end of the string then we have reached and can terminate the loop
+    {// If the separator is at the end of the string then we have completed the list and can terminate the loop
       ret.push_back(string.substr(0,pos));
       break;
     }
     else
-    {// If the character is at the middle of the string then remove the part before and push it in the vector
+    {// If the separator is at the middle of the string then remove the part before and push it into the vector
       ret.push_back(string.substr(0,pos));
-      string.erase(0,pos+1);    
+      string.erase(0,pos+1);
     }
   }
   // If the string does not finish with the character then we must take the last part of it
@@ -36,6 +47,7 @@ std::vector<std::string> getList(std::string string, char const & sep)
   return ret;
 }
 
+/// @brief Remove all the blank space in a string
 std::string removeBlankSpace(std::string str)
 {
 	int pos = 0;
@@ -72,13 +84,11 @@ std::string replaceCharacter(std::string const & istring, char const & ichar, ch
  * @brief Removes the first character of a string
  * 
  * @attention Careful, time complexity makes it really heavy on big string
- * 
  */
 std::string & pop_front(std::string & string) {if (string.size() > 0) string.erase(0,1); return string;}
 
-/**
- * @brief Replace all the commas of a std::string with dots
- */
+
+/// @brief Replace all the commas of a std::string with dots
 std::string rpCommaWDots(std::string str)
 {
 	int pos = 0;
@@ -89,9 +99,8 @@ std::string rpCommaWDots(std::string str)
 	return str;
 }
 
-/**
- * @brief Returns true if all its characters are digits
- */
+
+/// @brief Returns true if all its characters are digits
 bool isNumber(std::string const & string)
 {
   for (auto const & c : string)
@@ -99,6 +108,23 @@ bool isNumber(std::string const & string)
     if (!(isdigit(c) || "E")) return false;
   }
   return true;
+}
+
+bool found(std::string const & string, std::string const & substr)
+{
+  return (string.find(substr) != std::string::npos);
+}
+
+bool remove(std::string & string, std::string const & substr)
+{
+  auto pos = string.find(substr);
+  if (pos!=std::string::npos)
+  {
+    auto first_str = string.substr(0, pos);
+    string = string.substr(0, pos)+string.substr(pos+substr.size());
+    return true;
+  }
+  else return false;
 }
 
 #endif //STRING_FUNCTIONS_HPP

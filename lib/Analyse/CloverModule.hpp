@@ -60,21 +60,21 @@ void CloverModule::Reset()
 
   maxE_Ge_cristal = '\0';
 
-  // isBGOPrompt = false;
-  // isBGODelayed = false;
-  // isGePrompt = false;
-  // isGeDelayed = false;
+  isBGOPrompt = false;
+  isBGODelayed = false;
+  isGePrompt = false;
+  isGeDelayed = false;
 }
 
 std::ostream& operator<<(std::ostream& cout, CloverModule const & cloverModule)
 {
   print(
-    "Clover n°",static_cast<int>(cloverModule.label()), ":",
-    "nb Ge", static_cast<int>(cloverModule.nb),
-    "nb BGO", static_cast<int>(cloverModule.nb_BGO),
+    "Clover n°",cloverModule.label(), ":",
+    "nb Ge", cloverModule.nb,
+    "nb BGO", cloverModule.nb_BGO,
     "nrj :", cloverModule.nrj,
     "time: ", cloverModule.time, "ns",
-    "index of crystal with max E :", static_cast<int>(cloverModule.maxE_Ge_cristal)
+    "index of crystal with max E :", cloverModule.maxE_Ge_cristal
     );
   return cout;
 }

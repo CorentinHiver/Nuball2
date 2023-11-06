@@ -83,7 +83,7 @@ public:
   // ________________________________________________________________ //
   // ------------------  Setting the lookup tables ------------------ //
   // There are different sets of labels and index. In the following :
-  //  - the label is the raw detector label as declared in faster and index_1**.dat
+  //  - the label is the raw detector label as declared in faster and index_1**.0at
   //  - the Ge  crystal index ranges from 0 to 95 and is then used for angles and visualisation purposes
   //  - the BGO crystal index ranges from 0 to 47 and "                                                "
 
@@ -112,7 +112,11 @@ public:
     if (!s_initialised)
     {
     #ifdef MTOBJECT_HPP
-      lock_mutex(MTObject::mutex);
+      #if __cplusplus >= 201703L
+        lock_mutex(MTObject::mutex);
+      #else
+        MTObject::mutex.lock();
+      #endif //__cplusplus >= 201703L
     #endif //MTOBJECT_HPP
 
       print("Initialising clovers arrays");
@@ -127,6 +131,11 @@ public:
         // cristaux_index_BGO[l] = (isBGO[l]) ? label_to_cristal(l) : -1;
       }
       s_initialised = true;
+
+    #if defined (MTOBJECT_HPP) && __cplusplus < 201703L
+      MTObject::mutex.lock();
+    #endif
+
     }
   }
   // ----------------------  End lookup tables ---------------------- //
@@ -152,6 +161,7 @@ public:
     CloverModule::resetLabel();
     DelayedClovers.resize(24);
     Reset();
+    CleanFast();
   }
   void SetEvent(Event const & event, char const & analyse = 0);
   bool Fill(Event const & event, size_t const & index);
@@ -195,6 +205,8 @@ public:
   bool FillFast(Event const & event, size_t const & hit_index);
   bool isPrompt (CloverModule const & clover) {return promptGate(clover.time, clover.nrj) ;}
   bool isDelayed(CloverModule const & clover) {return delayedGate(clover.time, clover.nrj);}
+  
+  void PrintClean();
 
   // Positions in the raw event :
   StaticVector<uchar> rawGe  = StaticVector<uchar>(96); //List of the position of the raw Ge  in the event
@@ -206,16 +218,14 @@ public:
   StaticVector<uchar> Ge = StaticVector<uchar>(24);  // List of Germanium modules that fired in the event
   StaticVector<uchar> CleanGe = StaticVector<uchar>(24);  // List of clean Germaniums that fired in the event, that is "Ge only" modules
   StaticVector<uchar> RejectedGe = StaticVector<uchar>(24);  // List of rejected Germaniums that fired in the event, the "garbage"
-  StaticVector<uchar> PromptGe = StaticVector<uchar>(24);  // List of clean Germaniums that fired in the event, that is "Ge only" modules
-  StaticVector<uchar> DelayedGe = StaticVector<uchar>(24);  // List of clean Germaniums that fired in the event, that is "Ge only" modules
-
+  StaticVector<uchar> PromptGe = StaticVector<uchar>(24);
+  StaticVector<uchar> DelayedGe = StaticVector<uchar>(24);
 
   StaticVector<uchar> Bgo = StaticVector<uchar>(24);  // List of BGO modules that fired in the event
-  StaticVector<uchar> BGOonly = StaticVector<uchar>(24);  // List of rejected Germaniums that fired in the event, the "garbage"
-  StaticVector<uchar> PromptBGO = StaticVector<uchar>(24);  // List of clean Germaniums that fired in the event, that is "Ge only" modules
-  StaticVector<uchar> DelayedBGO = StaticVector<uchar>(24);  // List of clean Germaniums that fired in the event, that is "Ge only" modules
+  StaticVector<uchar> BGOonly = StaticVector<uchar>(24);
+  StaticVector<uchar> PromptBGO = StaticVector<uchar>(24);
+  StaticVector<uchar> DelayedBGO = StaticVector<uchar>(24);
   
-
   std::vector<CloverModule> m_clovers; // Array containing the 24 clovers
 
   // Counters :
@@ -241,9 +251,12 @@ public:
     DelayedMult = 0;
   }
 
+  static void timePs(bool const & time_ps) {s_time_ps = time_ps;}
+
 private:
   // Parameters :
   static bool s_initialised;
+  static bool s_time_ps;
 
   // -----------------------  Clovers Class  ----------------------- //
   // _______________________________________________________________ //
@@ -255,12 +268,18 @@ public:
   // Calorimetry :
   double totGe = 0.0;
   double totBGO = 0.0;
-  double totGe_prompt = -0.1d;
+  double totGe_prompt = -0.1;
   double totBGO_prompt = -0.1;
   double totGe_delayed = -0.1;
   double totBGO_delayed = -0.1;
 
-  // Timing : 
+  // Timing : // TO BE IMPROVED !!
+  
+  static Gate promptBGOgate;
+  static Gates delayedBGOgate;
+  static Gate promptGeGate;
+  static Gates delayedGeGate;
+
   class PromptGate
   {
   public:
@@ -290,7 +309,10 @@ public:
       else                        return m_low_E_gate.isIn(timef);
     }
 
-    bool operator() (double const & time) {return (time>-20 && time<10);}
+    bool operator() (double const & time) 
+    {
+      return promptGeGate(time);
+    }
 
   private:
 
@@ -299,8 +321,8 @@ public:
 
     float m_high_E = 200;
     float m_low_E  = 50;
-    Gate m_high_E_gate = {-15.d, 7.d };
-    Gate m_low_E_gate  = {-20.d, 40.d};
+    Gate m_high_E_gate = {-15.0, 7.0 };
+    Gate m_low_E_gate  = {-20.0, 40.0};
     float m_start_coeff = 0.f;
     float m_start_intercept = 0.f;
     float m_stop_coeff = 0.f;
@@ -332,9 +354,6 @@ public:
     Gate m_high_E_gate = {40.f, 145.f};
     Gate m_low_E_gate  = {60.f, 145.f};
   } delayedGate;
-
-  Gate promptBGOgate = {-20.f, 10.f };
-  Gate delayedBGOgate = {60.f, 145.f};
 };
 
 // ---- InitializeArrays static members : ----- //
@@ -351,32 +370,38 @@ std::array<uchar, 1000> Clovers::cristaux_index;
 // Parameters :
 float Clovers::Emin = 5.; // by default 5 keV threshold
 bool Clovers::s_initialised = false;
+bool Clovers::s_time_ps = false;
+Gate Clovers::promptBGOgate = {-20.f, 10.f };
+Gates Clovers::delayedBGOgate = {{60.f, 145.f}};
+Gate Clovers::promptGeGate = {-20.f, 10.f };
+Gates Clovers::delayedGeGate = {{60.f, 145.f}};
 
 // ---- Methods : --- //
 
-void Clovers::Reset()
+inline void Clovers::Reset()
 {
   for (auto const & index : Hits)
   {
     m_clovers[index].Reset();
   }
+  Hits.clear();
 
   for (auto const & index : cristaux)
   {
     cristaux_nrj  [index] = 0.;
     cristaux_time [index] = 0.;
   }
+  cristaux.clear();
 
   for (auto const & index : cristaux_BGO)
   {
     cristaux_nrj_BGO  [index] = 0.;
     cristaux_time_BGO [index] = 0.;
   }
+  cristaux_BGO.clear();
 
   rawGe.clear();
   rawBGO.clear();
-
-  Hits.clear();
 
   Ge.clear();
   CleanGe.clear();
@@ -388,9 +413,6 @@ void Clovers::Reset()
   BGOonly.clear();
   PromptBGO.clear();
   DelayedBGO.clear();
-
-  cristaux.clear();
-  cristaux_BGO.clear();
 
   TotalMult = 0;
   PromptMult = 0;
@@ -410,13 +432,21 @@ void Clovers::Reset()
   totBGO_delayed = -1.E-12;
 }
 
-void Clovers::SetEvent(Event const & event, char const & analyse)
+/**
+ * @brief Set the event
+ * @details
+ * Three modes : 
+ * 0 : normal mode 
+ * 1 : normal mode, skip the compton cleaning
+ * 2 : new mode
+ */
+inline void Clovers::SetEvent(Event const & event, char const & analyse)
 {
   if (analyse == 1 || analyse == 0) 
   {
     this -> Reset();
     for (size_t i = 0; i<event.size(); i++) this -> Fill(event, i);
-    if (analyse == 1) this -> Analyse();
+    if (analyse == 0) this -> Analyse();
   }
   else if (analyse == 2) 
   {
@@ -427,7 +457,7 @@ void Clovers::SetEvent(Event const & event, char const & analyse)
   }
 }
 
-bool Clovers::FillFast(Event const & event, size_t const & hit_index)
+inline bool Clovers::FillFast(Event const & event, size_t const & hit_index)
 {
   auto const & label = event.labels[hit_index];
   if (!isClover[label]) return false;
@@ -436,7 +466,7 @@ bool Clovers::FillFast(Event const & event, size_t const & hit_index)
   Hits.push_back_unique(index_clover);
 
   auto const & nrj = event.nrjs[hit_index];
-  auto const & time = event.time2s[hit_index];
+  auto const & time = (s_time_ps) ? event.times[hit_index]/1000.0 : event.time2s[hit_index];
 
   if (nrj<Emin) return false;
 
@@ -456,13 +486,14 @@ bool Clovers::FillFast(Event const & event, size_t const & hit_index)
   else // if isBGO[label] :
   {
     if (promptGate (time)) PromptClovers[index_clover].addBGO(nrj, time);
+
     else if (delayedGate(time)) DelayedClovers[index_clover].addBGO(nrj, time);
   }
   return true;
 }
 
 /// @brief 
-bool Clovers::Fill(Event const & event, size_t const & hit_index)
+inline bool Clovers::Fill(Event const & event, size_t const & hit_index)
 {
   auto const & label = event.labels[hit_index];
 
@@ -471,7 +502,10 @@ bool Clovers::Fill(Event const & event, size_t const & hit_index)
     auto const & index_clover = labels[label]; // The clovers are indexed between 0 and 23
 
     auto const & nrj  = event.nrjs[hit_index];
-    auto const & time = (event.read.t) ? event.times[hit_index] : event.time2s[hit_index];
+    
+    if(nrj<5) return false;
+
+    auto const & time = (s_time_ps) ? event.times[hit_index]/1000.0 : event.time2s[hit_index];
 
     auto & clover = m_clovers[index_clover];
 
@@ -585,7 +619,7 @@ bool Clovers::Fill(Event const & event, size_t const & hit_index)
  * et l'add-back en confinant tous les hits dans deux fenêtres en temps
  * Ou mieux : un module clover contient deux champs, l'un pour le prompt, l'autre pour le delayed
  */
-void Clovers::Analyse()
+inline void Clovers::Analyse()
 {
   for (auto const & index : Hits)
   {
@@ -733,9 +767,18 @@ uchar Clovers::label_to_cristal(Label const & l)
   return 255u;
 }
 
+inline void Clovers::PrintClean()
+{
+  print(CleanGe.size(), std::string("clean clover hit")+((CleanGe.size()>1)?"s":""));
+  for (auto const & clover_index : CleanGe)
+  {
+    print(m_clovers[clover_index]);
+  }
+}
+
 std::ostream& operator<<(std::ostream& cout, Clovers const & clovers)
 {
-  print(clovers.Hits.size(), "clover hits");
+  print(clovers.Hits.size(), std::string("clover hit")+((clovers.Hits.size()>1)?"s":""));
   for (auto const & clover_index : clovers.Hits)
   {
     print(clovers[clover_index]);

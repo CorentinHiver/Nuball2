@@ -153,15 +153,6 @@ public:
 
   struct histograms
   {
-    // Binning raw spectra
-    // std::map<dType, NRJ> m_bins_raw   = {{"labr",   1000.}, {"ge",  20000.}, {"bgo",   5000.}, {"eden",      500.}, {"paris",  10000.}, {"dssd",   5000.}};
-    // std::map<dType, NRJ> m_min_raw    = {{"labr",      0.}, {"ge",      0.}, {"bgo",      0.}, {"eden",        0.}, {"paris",      0.}, {"dssd",      0.}};
-    // std::map<dType, NRJ> m_max_raw    = {{"labr", 500000.}, {"ge", 500000.}, {"bgo",5000000.}, {"eden",   500000.}, {"paris", 500000.}, {"dssd", 500000.}};
-    
-    // std::map<dType, NRJ> m_bins_calib = {{"labr",   1000.}, {"ge",   6000.}, {"bgo",    500.}, {"eden",      500.}, {"paris",   5000.},  {"dssd",   500.}};
-    // std::map<dType, NRJ> m_min_calib  = {{"labr",      0.}, {"ge",      0.}, {"bgo",      0.}, {"eden",       -1.}, {"paris",      0.},  {"dssd",     0.}};
-    // std::map<dType, NRJ> m_max_calib  = {{"labr",   3000.}, {"ge",   3000.}, {"bgo",   3000.}, {"eden",       1.5}, {"paris",  10000.},  {"dssd", 20000.}};
-    
     // Raw spectra :
     Vector_MTTHist<TH1F> raw_spectra;
     MTTHist<TH2F> all_raw_spectra;
@@ -187,7 +178,7 @@ public:
   {
     m_ok            = otherCalib.m_ok;
     m_nb_detectors  = otherCalib.m_nb_detectors;
-    m_max_labels    = otherCalib.m_max_labels;
+    m_size    = otherCalib.m_size;
     m_order         = otherCalib.m_order;
     m_intercept     = otherCalib.m_intercept;
     m_slope         = otherCalib.m_slope;
@@ -200,7 +191,7 @@ public:
   {
     m_ok            = otherCalib.m_ok;
     m_nb_detectors  = otherCalib.m_nb_detectors;
-    m_max_labels    = otherCalib.m_max_labels;
+    m_size    = otherCalib.m_size;
     m_order         = otherCalib.m_order;
     m_intercept     = otherCalib.m_intercept;
     m_slope         = otherCalib.m_slope;
@@ -216,7 +207,7 @@ public:
   bool load(std::string const & calibFileName);
 
 
-  void calculate(std::string const & dataDir, int const & nb_files = -1, std::string const & source = "152Eu",std::string const & type = "fast");
+  void calculate(std::string const & dataDir, int nb_files = -1, std::string const & source = "152Eu", std::string const & type = "fast");
 
   /// @brief Calculate calibration from .root histograms
   /// @attention TODO
@@ -254,23 +245,22 @@ public:
   /// @brief calibrate the nrj value using the parameters extracted from the calibration data
   NRJ calibrate(NRJ const & nrj, Label const & label) const;
 
+  /// @brief Call for calibrate method
+  template<class... ARGS>
+  auto operator()(ARGS &&... args) const {return calibrate(std::forward<ARGS>(args)...);}
+
   void calibrateFasterData(std::string const & folder, int const & nb_files = -1);
   void calibrateRootData(std::string const & folder, int const & nb_files = -1);
   bool const & calibrate_data() const {return m_calibrate_data;}
   bool const & calibrate_data() {return m_calibrate_data;}
   void writeCalibratedData(std::string const & outfilename);
 
-  
-  /// @brief Call for calibrate method
-  template<class... ARGS>
-  auto operator()(ARGS &&... args) const {return calibrate(std::forward<ARGS>(args)...);}
-
   bool const & isFilled() const {return m_ok;}
 
   void Print();
   auto const & file() const {return m_filename;}
 
-  operator bool() const & {return m_ok;}
+  operator bool() const & {return (m_ok && m_size>0);}
 
   //DEV :
   // void calibrate_fast(Hit & hit){}
@@ -299,6 +289,9 @@ public:
   auto const & getBinom()     const {return m_binom    ;}
   auto const & getTrinom()    const {return m_trinom   ;}
 
+  static void treatOnlyParis(bool const & b = true) {m_treatOnlyParis = b;}
+  static void treatOnlyGe(bool const & b = true) {m_treatOnlyGe = b;}
+
 private:
   //Private methods :
   void set(Label label, NRJ intercept, NRJ slope, NRJ binom, NRJ trinom);
@@ -313,20 +306,26 @@ private:
   std::string m_outDir    = "Calibration/";
   std::string m_filename  = "";
 
+  static bool m_treatOnlyParis;
+  static bool m_treatOnlyGe;
+
   Fits m_fits;
 
   //Attributs for the tables :
   bool m_ok = false;
   bool m_calibrate_data = false;
   Label m_nb_detectors = 0;
-  Label m_max_labels = 0;
-  std::vector<char>  m_order; //1, 2 or 3 | 0 -> no calibration
+  Label m_size = 0;
+  std::vector<char> m_order; //1, 2 or 3 | 0 -> no calibration
   std::vector<NRJ> m_intercept;
   std::vector<NRJ> m_slope;
   std::vector<NRJ> m_binom;
   std::vector<NRJ> m_trinom;
   std::vector<std::vector<std::vector<NRJ>>> calibration_tables;
 };
+
+bool Calibration::m_treatOnlyParis = false;
+bool Calibration::m_treatOnlyGe = false;
 
 void Calibration::histograms::Initialize()
 {
@@ -347,7 +346,6 @@ void Calibration::histograms::Initialize()
   all_calib.resize(detectors.nbTypes());
   for (auto const & type : detectors.types())
   {
-    print(type);
     auto nb_detectors = detectors.nbOfType(type);
     auto const & binning = detectors.energyBidimBin(type);
     all_calib[detectors.typeIndex(type)].reset(("All_"+type+"_spectra").c_str(), ("All "+type+" spectra").c_str(), 
@@ -357,33 +355,14 @@ void Calibration::histograms::Initialize()
   // All the raw and/or calibrated spectra in a separate spectra :
   calib_spectra.resize(max_label);
   raw_spectra.resize(max_label);
-  // for (Label label = 0; label<max_label; label++)
-  // {
-  //   auto const & name = detectors[label];
-  //   auto const & type = detectors.type(label);
-  //   if (type == "null" || type == "RF")
-  //   {
-  //     calib_spectra[label].reset((std::to_string(label)+"_calib").c_str(), (std::to_string(label)+" calibrated spectra").c_str(), 1000, 0, 1000);
-  //     raw_spectra[label].reset((std::to_string(label)+"_raw").c_str(), (std::to_string(label)+" raw spectra").c_str(), 1000, 0, 1000);
-  //   }
-  //   else 
-  //   {
-  //     auto const & bin_raw = detectors.energyBin(type);
-  //     auto const & bin_calib = detectors.energyBin(type);
-  //     raw_spectra[label].reset((name+"_raw").c_str(), (name+" raw spectra").c_str(), bin_raw.bins, bin_raw.min, bin_raw.max);
-  //     calib_spectra[label].reset((name+"_calib").c_str(), (name+" calibrated spectra").c_str(), bin_calib.bins, bin_calib.min, bin_calib.max);
-  //   }
-  // }
   for (auto const & type : detectors.types())
   {
     if (type == "null" || type == "RF") continue;
     for (size_t index = 0; index<detectors.nbOfType(type); index++)
     {
       auto const & name = detectors.name(type, index);
-      print(name);
       auto const & label = detectors.label(type, index);
-      print(label);
-      auto const & bin_raw = detectors.energyBin(type);
+      auto const & bin_raw = detectors.ADCBin(type);
       auto const & bin_calib = detectors.energyBin(type);
       raw_spectra[label].reset((name+"_raw").c_str(), (name+" raw spectra").c_str(), bin_raw.bins, bin_raw.min, bin_raw.max);
       calib_spectra[label].reset((name+"_calib").c_str(), (name+" calibrated spectra").c_str(), bin_calib.bins, bin_calib.min, bin_calib.max);
@@ -411,12 +390,12 @@ void Calibration::histograms::setBins(std::string const & parameters)
   }
 }
 
-void Calibration::calculate(std::string const & dataDir, int const & nb_files, std::string const & source, std::string const & type)
+void Calibration::calculate(std::string const & dataDir, int nb_files, std::string const & source, std::string const & type)
 {
   print ("Calculating calibrations from raw data in", dataDir);
 
   if(type == "fast") this -> loadFasterData(dataDir, nb_files);
-  else if (type == "root") this -> loadRootData(dataDir, nb_files);
+  else if (type == "root") this -> loadRootData(dataDir, nb_files); // UNTESTED
   else {print(type, "unkown data format"); return;}
 
   this -> analyse(source);
@@ -476,9 +455,9 @@ void Calibration::loadFasterData(std::string const & dataDir, int const & nb_fil
 {
   print("Loading the data from", Path(dataDir).folder());
   this -> Initialize();
-  MTFasterReader *mt_reader;
+  MTFasterReader *mt_reader = new MTFasterReader();
   mt_reader->addFolder(dataDir, nb_files);
-  mt_reader->execute (fillHisto, *this);
+  mt_reader->readRaw(fillHisto, *this);
   delete mt_reader;
   print("Data loaded");
 }
@@ -608,6 +587,9 @@ void Calibration::peakFinder(std::string const & source)
     // Handles the triple alpha
     if (isTripleAlpha(source) && type!="dssd") continue;
     else if (!isTripleAlpha(source) && type=="dssd") continue;
+
+    if (m_treatOnlyParis && type!="paris") continue;
+    if (m_treatOnlyGe && type!="ge") continue;
     
     if (type == "ge")
     {// For Clovers
@@ -676,22 +658,22 @@ void Calibration::peakFinder(std::string const & source)
       window_1 = 80, window_2 = 50;
       if (source == "152Eu")
       {
-        if (name.find("FR1")) 
-        {
-          nb_pics = 4;
-          peaks.resize(nb_pics);
-          peaks = {344.2760, 778.9030, 964.1310, 1408.0110};
-          E_right_pic = peaks.back();
-          integral_ratio_threshold = 0.030f;
-        }
-        else
-        {
-          nb_pics = 5;
-          peaks.resize(nb_pics);
-          peaks = {121.7830, 344.2760, 778.9030, 964.1310, 1408.0110};
-          E_right_pic = peaks.back();
-          integral_ratio_threshold = 0.012f;
-        }
+        // if (name.find("FR1")) 
+        // {
+        //   nb_pics = 4;
+        //   peaks.resize(nb_pics);
+        //   peaks = {344.2760, 778.9030, 964.1310, 1408.0110};
+        //   E_right_pic = peaks.back();
+        //   integral_ratio_threshold = 0.030f;
+        // }
+        // else
+        // {
+        nb_pics = 5;
+        peaks.resize(nb_pics);
+        peaks = {121.7830, 344.2760, 778.9030, 964.1310, 1408.0110};
+        E_right_pic = peaks.back();
+        integral_ratio_threshold = 0.011f;
+        // }
         ADC_threshold = 500;
       }
       else if (source == "232Th")
@@ -901,7 +883,7 @@ void Calibration::fitCalibration(Fits & fits)
     gr->Fit(linear,"q");
     TF1* binom (new TF1("pol", "pol2"));
 
-    if(isGe[label] || isDSSD[label])
+    if(isGe[label] || isDSSD[label] || isParis[label])
     {//First order fit
       fit.order = 1;
       fit.parameter0 = linear -> GetParameter(0);
@@ -973,9 +955,9 @@ void Calibration::analyse(std::string const & source)
 void Calibration::setCalibrationTables()
 {
   print("creating calibration tables");
-  calibration_tables.resize(m_max_labels);
+  calibration_tables.resize(m_size);
   std::vector<std::vector<NRJ>> *calib_vec;
-  for (Label i = 0; i<m_max_labels; i++)
+  for (Label i = 0; i<m_size; i++)
   {
     calib_vec = &calibration_tables[i];
     calib_vec->resize(200000);
@@ -1005,16 +987,8 @@ inline NRJ Calibration::calibrate(NRJ const & nrj, Label const & label) const
 inline void Calibration::calibrate(Hit & hit) const
 {
   auto const & label = hit.label;
-  if (label > m_max_labels) return;
-
-#ifdef LICORNE
-  if (is_EDEN(label))
-  {
-    if (hit.qdc2==0) hit.qdc2 = 1;
-    hit.nrj2 = NRJ_cast(hit.qdc2)/NRJ_cast(hit.adc);
-  }
-#endif //LICORNE
-  if (isParis[label]) hit.nrj2 = calibrate(hit.qdc2, label);
+  if (label > m_size) return;
+  if (hit.qdc2!=0.0) hit.nrj2 = calibrate(hit.qdc2, label);
   else hit.nrj = calibrate(hit.adc, label);
 }
 
@@ -1072,13 +1046,14 @@ bool Calibration::load(std::string const & calibFileName)
   }
   inputfile.clear();
   inputfile.seekg(0, std::ios::beg); // back to the start of the file
+  m_size = size;
   // ----------------------------------------------------- //
   // Now fill the vectors
-  m_order    .resize(size,-1);
-  m_intercept.resize(size, 0.f);
-  m_slope    .resize(size, 1.f);
-  m_binom    .resize(size, 0.f);
-  m_trinom   .resize(size, 0.f);
+  m_order    .resize(m_size,-1);
+  m_intercept.resize(m_size, 0.f);
+  m_slope    .resize(m_size, 1.f);
+  m_binom    .resize(m_size, 0.f);
+  m_trinom   .resize(m_size, 0.f);
   NRJ slope = 1.f, binom = 0.f, trinom = 0.f, intercept = 0.f;
   while (getline(inputfile, line))
   {
@@ -1094,7 +1069,7 @@ bool Calibration::load(std::string const & calibFileName)
 
 void Calibration::Print()
 {
-  for (Label label = 0; label<m_max_labels; label++)
+  for (Label label = 0; label<m_size; label++)
   {
     if (m_order[label] < 0) continue;
     std::cout << label << " : ";
@@ -1112,6 +1087,8 @@ void Calibration::Print()
       }
     }
     std::cout << std::endl;
+
+
   }
 }
 

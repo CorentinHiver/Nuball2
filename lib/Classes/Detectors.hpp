@@ -83,8 +83,10 @@ public:
   auto end  () const {return m_list.end  ();}
 
   auto const & get()            const {return m_list          ;}
-  auto const & getExistsArray() const {return m_exists     ;}
+  auto const & list()           const {return m_list          ;}
+  auto const & getExistsArray() const {return m_exists        ;}
   auto const & getLabelsArray() const {return m_labels_array  ;}
+  auto const & labels()         const {return m_labels_array  ;}
   auto const & types()          const {return m_types_ID;}
   auto const & typesArray()     const {return m_types;}
   auto const & type(Label const & label) {return m_types[label];}
@@ -94,11 +96,15 @@ public:
 
   auto const & getName (Label       const & label) {return m_list[label]        ;}
   auto const & getLabel(std::string const & name ) {return m_labels_array[name];}
+  auto const & label(std::string const & name )    {return m_labels_array[name];}
 
   void operator=(std::string const & filename) {this -> load(filename);}
 
   /// @brief Extracts the name of the detector given its global label
   auto const & operator[] (Label const & label) const {return m_list[label];}
+
+  /// @brief Extracts the global label given the detector's name
+  auto const & operator[] (std::string const & name) {return m_labels_array[name];}
 
   /// @brief Returns true only of the detectors ID file has been loaded successfully
   operator bool() const & {return m_ok;}
@@ -107,7 +113,11 @@ public:
   auto const nbTypes() {return m_types_ID.size();}
 
   /// @brief Returns the number of detector of each type
-  auto const & nbOfType(dType const & type) {return m_type_counter[type];}
+  auto const & nbOfType(dType const & type) 
+  {
+    if (!found(m_types, type)) throw_error("Detectors" + type + "not handled");
+    return m_type_counter[type];
+  }
 
   /// @brief Get the name of a detector given its type and type index
   auto const & name(dType const & type, int const & index) {return m_names[type][index];}
@@ -362,11 +372,11 @@ void Detectors::makeArrays()
 
 std::unordered_map<dType, THBinning> Detectors::ADC_bins = 
 {
-  {"ge"     , {10000, 0., 100000. }},
-  {"bgo"    , {1000 , 0., 100000. }},
-  {"labr"   , {1000 , 0., 100000. }},
-  {"paris"  , {1000 , 0., 100000. }},
-  {"eden"   , {1000 , 0., 100000. }},
+  {"ge"     , {10000, 0., 200000. }},
+  {"bgo"    , {1000 , 0., 200000. }},
+  {"labr"   , {2000 , 0., 200000. }},
+  {"paris"  , {2000 , 0., 200000. }},
+  {"eden"   , {1000 , 0., 200000. }},
   {"dssd"   , {1000 , 0., 200000. }},
   {"default", {10000, 0., 1000000.}}
 };

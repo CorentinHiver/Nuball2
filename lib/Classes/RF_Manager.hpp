@@ -28,7 +28,7 @@
 class RF_Manager
 {
 public:
-  RF_Manager(Time const & period = 400, Label const & label_RF = 251) {label = label_RF;}
+  RF_Manager(Time const & _period = 400, Label const & label_RF = 251) {label = label_RF; period = _period;}
   bool setHit(Hit const & hit);
 #ifdef EVENT_HPP
   bool setHit(Event const & event, int const & hit_i);

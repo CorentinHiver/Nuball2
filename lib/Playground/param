@@ -1,0 +1,1 @@
+/home/corentin/faster_data/N-SI-136/152_Eu_center_after.fast -w test152Eu.root -c ../../136/conversion_200ns/136_final.calib -t 136.dT -e 15 -f 10 -m 2 -n 1000000

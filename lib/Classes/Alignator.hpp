@@ -24,9 +24,15 @@ public:
   auto begin() {return m_index.begin();}
   auto end()   {return m_index.end();}
 
+  auto GetEntry(int i) {return m_tree->GetEntry(m_index[i]);}
+
+  auto operator->() {return m_tree;}
+
+  auto getTree() {return m_tree;}
+
 private:
   void loadNewIndex();
-  void align();
+  void align(); //TBD
 
   ULong64_t m_nb_data = 0;
   ULong64_t m_cursor = 0;
@@ -127,10 +133,5 @@ void Alignator::align()
   // }
   // tree -> SetBranchStatus("*", true); //enables again the whole tree to be read
 }
-
-class AlignedTree : public TTree, public Alignator
-{
-
-};
 
 #endif //ALIGNATOR_HPP

@@ -125,6 +125,7 @@ private:
 size_t MTObject::nb_threads = 1;
 bool MTObject::ON = false;
 std::mutex MTObject::mutex;
+std::mutex MTmutex;
 
 // std::map<std::thread::id, int> MTObject::threads_ID;
 std::thread::id MTObject::master_thread_id;

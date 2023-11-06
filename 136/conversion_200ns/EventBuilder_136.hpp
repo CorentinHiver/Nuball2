@@ -16,7 +16,7 @@ public:
   // Add Hits  Outputs  0: single | 1: begin of coincidence | 2: coincidence complete
   bool build(Hit const & hit);
 
-  bool inTimeRange(Hit const & hit) 
+  bool coincidence(Hit const & hit) 
   {
     return ( Time_cast(hit.stamp-m_RF_ref_stamp) < (Time_cast(USE_RF*1000)-m_rf->offset()) );
   }
@@ -46,7 +46,6 @@ private:
   std::stack<Hit> m_hit_buffer;
   int m_nb_periods_more = 0;
   Timestamp m_period=USE_RF*1000ull;
-  // Time m_shift = 0;
 };
 
 void EventBuilder_136::tryAddNextHit_simple(TTree * tree, TTree * outtree, Hit & hit, int & loop, Alignator const & gindex)
@@ -111,33 +110,21 @@ void EventBuilder_136::tryAddPreprompt_simple()
   if (!m_hit_buffer.empty()) m_hit_buffer = std::stack<Hit>();
 }
 
-// void push_back_136(Event * event, Hit const & hit)
-// {
-//   auto & mult = event->mult;
-//   mult++;
-//   event->labels  [mult] = hit.label;
-//   event->times   [mult] = hit.stamp;
-//   event->nrjs    [mult] = hit.nrj;
-//   event->nrj2s   [mult] = hit.nrj2;
-//   event->pileups [mult] = hit.pileup;
-// }
-
 bool EventBuilder_136::build(Hit const & hit)
 {
   if(m_event->mult>255) reset(); // 255 is the maximum number of hits allowed inside of an event
   #ifdef PREPROMPT
     m_hit_buffer.emplace(hit);
   #endif //PREPROMPT
-  // print(m_period);
   switch (m_status)
   { 
     case 0 : case 2 : // If no coincidence has been detected in previous iteration :
-      *m_event = m_last_hit;
-      if (this->inTimeRange(hit))
+      if (this->coincidence(hit))
       {// Situation 1 :
         // The previous and current hit are in the same event.
         // In next call, we'll check if the next hits also belong to this event (situations 1' or 2)
         m_event -> clear();
+       *m_event = m_last_hit;
         m_event->push_back(hit);
         m_last_hit.reset();
         m_status = 1; // The event can be filled with other hits
@@ -155,7 +142,7 @@ bool EventBuilder_136::build(Hit const & hit)
       }
     break;
     case 1: // If we are building an event (i.e. the two previous hit are in coincidence):
-      if (this->inTimeRange(hit))
+      if (this->coincidence(hit))
       {
         // Situation 1' :
         // The current hit also belongs to the event

@@ -199,7 +199,6 @@ inline Event& Event::operator=(Hit const & hit)
   mult = 1;
   stamp = hit.stamp;
   times   [0] = 0;
-  time2s  [0] = 0;
   labels  [0] = hit.label;
   adcs    [0] = hit.adc;
   qdc2s   [0] = hit.qdc2;
@@ -308,7 +307,6 @@ void inline Event::writting(TTree * tree, std::string const & options)
   if (write.q) createBranchArray(tree, &qdc2s   , "qdc2"  , "mult");
   if (write.l) createBranchArray(tree, &labels  , "label" , "mult");
   if (write.p) createBranchArray(tree, &pileups , "pileup", "mult");
-
   tree -> SetBranchStatus("*",true);
 }
 
@@ -317,10 +315,8 @@ inline void Event::push_back(Hit const & hit)
 #ifndef UNSAFE
   if (mult>254) {print("Event mult > 255 !!"); return;}
 #endif //UNSAFE
-
   labels  [mult] = hit.label;
   times   [mult] = Time_cast(hit.stamp-stamp);
-  // times   [mult] = (hit.isExternalTime()) ? hit.time : Time_cast(hit.stamp-stamp);
   adcs    [mult] = hit.adc;
   nrjs    [mult] = hit.nrj;
   qdc2s   [mult] = hit.qdc2;
@@ -345,21 +341,21 @@ inline void Event::push_front(Hit const & hit)
 #endif //UNSAFE
   for (auto i = mult; i>0; i--)
   {
-                 labels  [i] = labels  [i-1];
-    if (write.t) times   [i] = times   [i-1];
-    if (write.e) adcs    [i] = adcs    [i-1];
-    if (write.E) nrjs    [i] = nrjs    [i-1];
-    if (write.q) qdc2s   [i] = qdc2s   [i-1];
-    if (write.Q) nrj2s   [i] = nrj2s   [i-1];
-    if (write.p) pileups [i] = pileups [i-1];
+    labels  [i] = labels  [i-1];
+    times   [i] = times   [i-1];
+    adcs    [i] = adcs    [i-1];
+    nrjs    [i] = nrjs    [i-1];
+    qdc2s   [i] = qdc2s   [i-1];
+    nrj2s   [i] = nrj2s   [i-1];
+    pileups [i] = pileups [i-1];
   }
-               labels  [0] = hit.label;
-  if (write.t) times   [0] = Time_cast(hit.stamp-stamp); // Here, times[0]<0 because the stamp corresponds to the 0 of the first hit
-  if (write.e) adcs    [0] = hit.adc;
-  if (write.E) nrjs    [0] = hit.nrj;
-  if (write.q) qdc2s   [0] = hit.qdc2;
-  if (write.Q) nrj2s   [0] = hit.nrj2;
-  if (write.p) pileups [0] = hit.pileup;
+  labels  [0] = hit.label;
+  times   [0] = Time_cast(hit.stamp-stamp); // Here, times[0]<0 because the stamp corresponds to the 0 of the first hit
+  adcs    [0] = hit.adc;
+  nrjs    [0] = hit.nrj;
+  qdc2s   [0] = hit.qdc2;
+  nrj2s   [0] = hit.nrj2;
+  pileups [0] = hit.pileup;
   mult++;
 }
 

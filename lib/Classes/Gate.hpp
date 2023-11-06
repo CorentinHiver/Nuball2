@@ -39,6 +39,7 @@ using Gate = Gate_t<float>;
 template<typename T>
 class Gates_t
 {
+public:
   Gates_t(){}
   Gates_t(std::initializer_list<T> bounds) : m_size(bounds.size()/2)
   {
@@ -52,16 +53,21 @@ class Gates_t
     }
   }
 
-  bool isIn(T const & e) 
+  bool isIn(T const & t) 
   {
     for (std::size_t i = 0; i<m_size; i++)
     {
-      if (e>start[i] && e<stop[i]) return true;
+      if (t>start[i] && t<stop[i]) return true;
     }
     return false;
   }
 
-  void check(std::initializer_list<T> bounds) {static_assert((bounds.size()%2 == 1),"Gates initializer must have an even number of bounds (one lower and one higher bound)");}
+  bool operator() (T const & t) const {return isIn(t);}
+
+  void check(std::initializer_list<T> bounds)
+  {
+    if (bounds.size()%2 == 1) throw_error(" Gates initializer must have an even number of bounds (one lower and one higher bound)");
+  }
   std::size_t const & size() const {return m_size;}
 
 private:

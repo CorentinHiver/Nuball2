@@ -3,6 +3,15 @@
 
 #include "print.hpp"
 
+template<class T>
+std::istream& operator>>(std::istream& input, std::vector<T> vector)
+{
+  T t;
+  input >> t;
+  vector.push_back(t);
+  return input;
+}
+
 template < class T >
 std::istringstream & operator >> (std::istringstream & is, std::vector<T>& v)
 {

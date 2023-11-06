@@ -341,6 +341,7 @@ public:
   operator bool()        const & {return m_ok    ;}
   
   std::string const & string() const {return m_folder;}
+  std::string string() {return m_folder;}
   std::string const & get   () const {return m_folder;}
   std::string name() const {auto ret = m_folder; ret.pop_back(); return ret;}
 

@@ -23,6 +23,7 @@
 #include <TKey.h>
 #include <TLeaf.h>
 #include <TLegend.h>
+#include <TMarker.h>
 #include <TMath.h>
 #include <TRandom.h>
 #include <TROOT.h>
@@ -451,7 +452,7 @@ namespace CoAnalyse
     if (matrix == nullptr) {throw_error("Matrix histo nullptr in CoAnalyse::projectY");}
     auto const & nbBins = matrix->GetNbinsY();
     if (proj == nullptr) proj = new TH1F();
-    proj->SetBins(nbBins,minXaxis(matrix), maxXaxis(matrix));
+    proj->SetBins(nbBins,minYaxis(matrix), maxYaxis(matrix));
     for (int binY = 0; binY<nbBins; binY++) proj->SetBinContent(binY, matrix->GetBinContent(binX, binY));
   }
 
@@ -461,7 +462,7 @@ namespace CoAnalyse
     if (matrix == nullptr) {throw_error("Matrix histo nullptr in CoAnalyse::projectY");}
     auto const & nbBins = matrix->GetNbinsY();
     if (proj == nullptr) proj = new TH1F();
-    proj->SetBins(nbBins, minXaxis(matrix), maxXaxis(matrix));
+    proj->SetBins(nbBins, minYaxis(matrix), maxYaxis(matrix));
     for (int x = binXmin; x<binXmax; x++) for (int y = 0; y<nbBins; y++) 
       proj->AddBinContent(y, matrix->GetBinContent(x, y));
   }
@@ -472,6 +473,7 @@ namespace CoAnalyse
     projectY(matrix, proj, matrix->GetXaxis()->FindBin(valueXmin), matrix->GetXaxis()->FindBin(valueXmax));
   }
 
+  /// @brief LEGACY
   void removeRandomY(TH2* matrix, int _stopX = -1, int _stopY = -1, bool writeIntermediate = false, ProjectionsBins projections = {{}})
   {
     int const & bins_x = matrix->GetNbinsX();
@@ -571,6 +573,16 @@ namespace CoAnalyse
     for (int binY = 0; binY<matrix->GetNbinsY(); binY++) matrix->SetBinContent(binX, binY, proj->GetBinContent(binY));
   }
 
+  /// @brief Total projection on X axis
+  void projectX(TH2* matrix, TH1* proj)
+  {
+    if (matrix == nullptr) {throw_error("Matrix histo nullptr in CoAnalyse::projectX");}
+    auto const & nbBins = matrix->GetNbinsX();
+    if (proj == nullptr) proj = new TH1F();
+    proj->SetBins(nbBins, minXaxis(matrix), maxXaxis(matrix));
+    for (int y = 0; y<nbBins; y++) for (int x = 0; x<nbBins; x++) proj->AddBinContent(x, matrix->GetBinContent(x, y));
+  }
+  
   /// @brief Project on Y axis at a given X bin
   void projectX(TH2* matrix, TH1* proj, int const & binY)
   {
@@ -729,12 +741,10 @@ namespace CoAnalyse
           // totProjX_buf[x] -= save_sub[it][x][y];
           // totProjY_buf[y] -= save_sub[it][x][y];
 
-          // sub_moyX[it][x] += save_sub[it][x][y]/totProjX[x]/stopX;
-          // sub_moyY[it][y] += save_sub[it][x][y]/totProjY[y]/stopY;
-
           // V3 :
           double sub = (totProjX[x] * totProjY[y])/(proportions*total);
-          sub = sub *( 1. - (sub/(proportions*value)));
+          if (iterations>1) sub *= ( 1. - (sub/(proportions*value)));
+          else sub *= proportions;
 
           matrix -> SetBinContent(x, y, value - sub);
 
@@ -907,18 +917,6 @@ namespace CoAnalyse
       // }
     }
   }
-
-  // void removeBackground(TH1F * histo, int const & niter = 10, std::string const & options = "")
-  // {
-  //   // auto const & background = extractBackgroundArray(histo, nsmooth);
-  //   auto const & background = histo -> ShowBackground(niter, options.c_str());
-  //   for (int bin=0; bin<histo->GetNbinsX(); bin++) {histo->SetBinContent(bin, histo->GetBinContent(bin) - background->GetBinContent(bin));}
-  // }
-
-  // void removeBackgroundX(TH2F * histo, int const & nsmooth = 10)
-  // {
-    
-  // }
 };
 
 

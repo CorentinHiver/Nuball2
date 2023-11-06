@@ -4,8 +4,9 @@
 // #define USE_PARIS
 // #define USE_RF 200
 
-#include "../libRoot.hpp"
-#include <CloverEfficiency.hpp>
+// #include "../libRoot.hpp"
+// #include "/home/corentin/Installation/DataFrame/include/DataFrame/DataFrame.h"
+// #include <SourceCloverSpectra.hpp>
 // #include <Calibration.hpp>
 // #include <RunMatrixator.hpp>
 // #include <Detectors.hpp>
@@ -13,10 +14,18 @@
 // #include <Convertor.hpp>
 // #include <MTFasterReader.hpp>
 
+// using hmdf;
+
+// using StrDataFrame = StdDataFrame<std::string>;
+
 int main(int argc, char ** argv)
 {
+  
+  // std::string filename("../RootReader/Calibrations/PARIS/CalibParis.csv");
+  // CSVReader<std::string, int, int> reader(, ';');
   // std::string index_file = "index_129.list";
   // detectors.load(index_file);
+  // SourceCloverSpectra ce(argc, argv);
 
   // fuse_all_histo("histos/", true);
 
@@ -36,6 +45,7 @@ int main(int argc, char ** argv)
   // else CoAnalyse::removeRandomBidim(S1_2_DSSD_prompt, gates, 1);
 
   // auto pp = file->Get<TH2F>("pp");
+  // pp->Rebin2D(2);
   // if (argc == 2) CoAnalyse::removeRandomBidim(pp, std::stoi(argv[1]), true, gatesX);
   // else CoAnalyse::removeRandomBidim(pp, 1, true, gatesX);
   // auto dd = file->Get<TH2F>("dd");
@@ -288,7 +298,7 @@ int main(int argc, char ** argv)
   // ts.setIDFile(DetectorsList("index_129.list"));
   // ts.calculate("/home/corentin/faster_data/N-SI-136/run_20.fast", 20);
 
-  return -1;
+  return 0;
 }
 
 // #include <iostream>

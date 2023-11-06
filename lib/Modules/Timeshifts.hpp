@@ -48,7 +48,7 @@ public:
   Timeshifts(std::string const & filename) : m_filename(filename) {this -> load(m_filename);}
 
   ///@brief Call the Timeshifts::load() method to load the timeshifts from a .dT file 
-  Timeshifts(const char * filename) : m_filename(filename) {print(filename);this -> load(m_filename);}
+  Timeshifts(const char * filename) : m_filename(filename) {this -> load(m_filename);}
 
   /**
    * @brief For faster to root conversion only : Timeshifts::load() loads the timeshifts from a .dT file 

@@ -27,9 +27,9 @@
  * 
  * To read all the files then leave the second argument empty
  * 
- * Then, use the execute(function, arguments...) method to run any user defined function.
+ * Then, use the readRaw(function, arguments...) method to run any user defined function.
  * 
- * 3. reader.execute(function, arguments...);
+ * 3. reader.readRaw(function, arguments...);
  * 
  * Carefull : this function MUST have the following arguments is this EXACT order : 
  * 
@@ -60,11 +60,11 @@
  *         MTObject::Initialize(n); // n being an appropriate number of threads.
  *         MTFasterReader reader(folder);
  *         Arg some_argument;
- *         reader.execute(function, some_argument);
+ *         reader.readRaw(function, some_argument);
  *         // Do something with the argument like print(some_argument) or some_argument.Write()
  *      }
  * 
- * Here are two function examples. The third parameter has been instanciated before the MTFasterReader::execute() method call
+ * Here are two function examples. The third parameter has been instanciated before the MTFasterReader::readRaw() method call
  * 
  *      
  *        void counter(Hit & hit, FasterReader & reader, MTCounter & counterMT)
@@ -110,63 +110,72 @@ public:
   MTFasterReader(Path path, int const & nb_files = -1) {addFolder(path, nb_files);}
 
   MTFasterReader(FilesManager const & files) {m_files = files;}
+  
+  template<class Func, class... ARGS>
+  void readRaw(Func&& func, ARGS &&... args);
 
+  template<class Func, class... ARGS>
+  void readAligned(Func&& func, ARGS &&... args);
+
+  template<class Func, class... ARGS>
+  void readAligned(std::vector<Time> timeshifts, Func&& func, ARGS &&... args) 
+  {
+    m_timeshifts = timeshifts;
+    this -> readAligned<Func, ARGS...>(func, args...);
+  }
+
+  // Files handling :
   bool addFolder(Path path, int const & nb_files = -1) 
   {
     auto const ret = m_files.addFolder(path, nb_files);
     return ret;
   }
-  
-  /** 
-   * @brief Reads many files in parallel
-   * @param func: Function used on each file in parallel. Cannot be a member function, except if declared static.
-   * @details
-   * The declared function MUST have its two first parameters as follow : type function(Hit & hit, FasterReader & reader, ...);
-   * You can add any other parameter in the ..., but then you have to call them in the execute method call
-   * e.g. : 
-   * 
-   *        void my_function(Hit & hit, FasterReader & reader, MTCounter & counter){do something...}
-   * 
-   * in main
-   *  
-   *        MTFasterReader reader(/path/to/data/folder);
-   *        MTCounter counter;
-   *        reader.execute(my_function, counter);
-   * 
-   * That way, my_function will be executed in parallel on each file this class is currently reading.
-   * 
-   * 
-  */
-  template<class Func, class... ARGS>
-  void execute(Func&& func, ARGS &&... args);
-
-  void setTimeshifts(std::vector const & timeshifts) {m_timeshifts = timeshifts;}
-
-  template<class Func, class... ARGS>
-  void readTreated(Func&& func, ARGS &&... args) 
-  {
-    if (m_timeshifts.size() == 0) print("CAREFULL, NO TIMESHIFT DATA PROVIDED !!");
-    m_treat = true; 
-    execute(Func&& func, ARGS &&... args);
-  }
-
   void printMTFiles() {for (auto const & file : m_MTfiles) print(file);}
 
-  auto const & treatData() const {return m_treat;}
+  // Other parameters :
+  void setTimeshifts(std::vector<Time> const & timeshifts) {m_timeshifts = timeshifts;}
+  auto const & timeshift(Label const & label) const {return m_timeshifts[label];}
 
 private:
+
+  // Private methods that handles the multi-threading
   template<class Func, class... ARGS>
   static void Read(MTFasterReader & MTreader, Func function, ARGS &&... args);
+
+  template<class Func, class... ARGS>
+  static void Realign(MTFasterReader & MTreader, Func function, ARGS &&... args);
+
   bool nextFilename(std::string & filename) {return m_MTfiles.getNext(filename);}
 
   FilesManager m_files;
   MTList m_MTfiles;
-  bool m_treat = false;
-  std::vector<Long64_t> m_timeshifts;
+
+  std::vector<Time> m_timeshifts;
 };
 
+//////////////////////////////
+//   Read raw faster data   //
+//////////////////////////////
+/** 
+ * @brief Reads many faster files in parallel
+ * @param func: Function used on each file in parallel. CAREFULL : must be a function or a static method
+ * @details
+ * The declared function MUST have its two first parameters as follow : type function(Hit & hit, FasterReader & reader, ...);
+ * You can add any other parameter in the ..., but then you have to call them in the readRaw method call
+ * e.g. : 
+ * 
+ *        void my_function(Hit & hit, FasterReader & reader, MTCounter & counter){do something...}
+ * 
+ * in main
+ *  
+ *        MTFasterReader reader(/path/to/data/folder/, wanted_number_of_files);
+ *        MTCounter counter;
+ *        reader.readRaw(my_function, counter);
+ * 
+ * That way, my_function will be executed in parallel on each file in /path/to/data/folder/
+*/
 template<class Func, class... ARGS>
-void MTFasterReader::execute(Func && func, ARGS &&... args)
+inline void MTFasterReader::readRaw(Func && func, ARGS &&... args)
 {
   if (!m_files) {print("NO DATA FILE FOUND"); throw std::runtime_error("DATA");}
   m_MTfiles = m_files.getListFiles();
@@ -174,25 +183,60 @@ void MTFasterReader::execute(Func && func, ARGS &&... args)
 }
 
 template<class Func, class... ARGS>
-void MTFasterReader::Read(MTFasterReader & MTreader, Func function, ARGS &&... args)
+inline void MTFasterReader::Read(MTFasterReader & MTreader, Func function, ARGS &&... args)
 { // Here we are inside each thread :
   std::string filename;
   while(MTreader.nextFilename(filename))
   {
     Hit hit;
     FasterReader reader(&hit, filename);
-    if (!MTreader.treatData()) function(hit, reader, std::forward<ARGS>(args)...); // If issues here, check that the parallelised function has the following form : type func(Hit & hit, FasterReader & reader, ARGS... some_args)
-    else
-    {
-      unique_tree tempTree(new TTree("temp", "temp"));
-      while (reader.Read())
-      {
-        hit.time+=m_timeshifts[hit.label];
-        tempTree->Fill();
-      }
-      // Alignator
-    }
+    function(hit, reader, std::forward<ARGS>(args)...); // If issues here, check that the parallelised function has the following form : type func(Hit & hit, FasterReader & reader, ARGS... some_args)
   }
 }
+
+
+///////////////////////////////////////
+//   Read time aligned faster data   //
+///////////////////////////////////////
+/**
+ * @brief Reads many faster files in parallel, providing a time-aligned 
+ * 
+ * @details
+ * Use this function in the same way as readRaw, with a function like this : 
+ *  func(Hit & hit, Alignator & alignedTree, args...)
+ * 
+ * @param func : Must be of the form func(Hit & hit, Alignator & alignedTree, args...) with args
+ */
+template<class Func, class... ARGS>
+inline void MTFasterReader::readAligned(Func&& func, ARGS &&... args)
+{
+  if (!m_files) {print("NO DATA FILE FOUND"); throw std::runtime_error("DATA");}
+  if (m_timeshifts.size() == 0) print("CAREFULL, NO TIMESHIFT DATA PROVIDED !!");
+  m_MTfiles = m_files.getListFiles();
+  MTObject::parallelise_function(Realign<Func, ARGS...>, *this, std::forward<Func>(func), std::forward<ARGS>(args)...);
+}
+
+template <class Func, class... ARGS>
+inline void MTFasterReader::Realign(MTFasterReader &MTreader, Func function, ARGS &&...args)
+{// Here we are inside each thread :
+  std::string filename;
+  while(MTreader.nextFilename(filename))
+  {
+    Hit hit;
+    FasterReader reader(&hit, filename);
+    unique_tree tempTree(new TTree("temp", "temp"));
+    hit.writting(tempTree.get());
+    while (reader.Read())
+    {
+      hit.stamp+=MTreader.timeshift(hit.label);
+      tempTree->Fill();
+    }
+    Alignator alignedTree(tempTree.get());
+    hit.reset();
+    hit.reading(tempTree.get());
+    function(hit, alignedTree, std::forward<ARGS>(args)...);
+  }
+}
+
 
 #endif //MT_FASTER_READER_HPP

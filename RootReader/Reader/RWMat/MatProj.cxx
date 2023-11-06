@@ -54,7 +54,7 @@ void backsub(TH1D* TheSpectrum, int nsmooth)
 void backsubS(Spec* TheSpec, int nsmooth)
 {
 int j = 0;
-int nbins=TheSpectrum->GetNbinsX();;
+int nbins=TheSpectrum->GetNbinsX();
 Double_t *source=new Double_t[nbins];
 TSpectrum *s = new TSpectrum();
 for (j=0;j<nbins;j++) source[j]=TheSpec->GetChan(j);
