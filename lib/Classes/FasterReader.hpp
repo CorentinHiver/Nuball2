@@ -178,7 +178,7 @@ private:
   void TreatCRRC4 (faster_data_p const & _data);
   void TreatQDC1  (faster_data_p const & _data);
   void TreatQDC2  (faster_data_p const & _data);
-  void TreatQDC3  (faster_data_p const & _data)
+  void TreatQDC3  (faster_data_p const & _data);
   void TreatRF    (faster_data_p const & _data);
 
   std::unordered_map<std::string, bool> error_message;
@@ -577,7 +577,7 @@ void inline FasterReader::TreatQDC3(const faster_data_p& data)
   m_hit->qdc3 = qdc.q3;
   #endif //QDC2MAX
 #endif //QDC1MAX
-  m_hit->pileup = (qdc.q1_saturated == 1 || qdc.q2_saturated == 1 || || qdc.q3_saturated);
+  m_hit->pileup = (qdc.q1_saturated == 1 || qdc.q2_saturated == 1 || qdc.q3_saturated);
 }
 
 /**
