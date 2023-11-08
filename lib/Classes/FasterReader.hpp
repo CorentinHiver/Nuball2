@@ -178,6 +178,7 @@ private:
   void TreatCRRC4 (faster_data_p const & _data);
   void TreatQDC1  (faster_data_p const & _data);
   void TreatQDC2  (faster_data_p const & _data);
+  void TreatQDC3  (faster_data_p const & _data)
   void TreatRF    (faster_data_p const & _data);
 
   std::unordered_map<std::string, bool> error_message;
