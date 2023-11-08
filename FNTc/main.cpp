@@ -27,12 +27,14 @@ int main(int argc, char** argv)
 {
   int nb_threads = 2;
   std::string run = "";
+  bool sinogram = false;
   if (argc > 1)
   {
     for(int i = 1; i < argc; i++)
     {
       std::string const & command = argv[i];
       if (command == "-r" || command == "--run") run = argv[++i];
+      else if (command == "-s" || command == "--sinogram") sinogram = true;
     }
   }
 

@@ -239,7 +239,7 @@ void Convertor::convert(std::string const & dataFolder, std::string const & outp
   if (!dataPath) {print(dataFolder, "NOT FOUND"); throw std::runtime_error("DATA");}
   Path outPath(outputFolder, 1);
   MTFasterReader readerMT(dataPath, m_nb_files);
-  readerMT.execute(s_convertFile, *this, outputFolder);
+  readerMT.readRaw(s_convertFile, *this, outputFolder);
 }
 
 

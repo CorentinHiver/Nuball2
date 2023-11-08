@@ -12,7 +12,7 @@
 // #include <Detectors.hpp>
 // #include <Timeshifts.hpp>
 // #include <Convertor.hpp>
-// #include <MTFasterReader.hpp>
+#include <MTFasterReader.hpp>
 
 // using hmdf;
 

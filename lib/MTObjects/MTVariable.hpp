@@ -3,6 +3,9 @@
 
 #include "MTObject.hpp"
 
+/**
+ * @brief UNUSED
+ */
 template<class T>
 class MTVariable
 {

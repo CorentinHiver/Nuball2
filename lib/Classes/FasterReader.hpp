@@ -179,6 +179,8 @@ private:
   void TreatQDC1  (faster_data_p const & _data);
   void TreatQDC2  (faster_data_p const & _data);
   void TreatRF    (faster_data_p const & _data);
+
+  std::unordered_map<std::string, bool> error_message;
 };
 
 ulonglong FasterReader::m_maxHits = -1;
@@ -426,6 +428,12 @@ bool inline FasterReader::switch_alias(uchar const & _alias, faster_data_p const
       return true;
   #endif //QDC1MAX
 
+  #ifndef QDC3
+    case QDC_TDC_X3_TYPE_ALIAS: // qdc_t_x3
+      TreatQDC3(_data);
+      return true;
+  #endif //QDC3
+
     case RF_DATA_TYPE_ALIAS: // rf_data
       TreatRF(_data);
       return true;
@@ -452,9 +460,12 @@ void inline FasterReader::TreatTrapez(const faster_data_p& data)
    faster_data_load(data, &adc);
 
    m_hit->adc = adc.measure;
- #ifndef QDC1MAX
-   m_hit->qdc2 = 0;
- #endif //QDC1MAX
+#ifndef QDC1MAX
+  m_hit->qdc2 = 0;
+  #ifndef QDC2MAX
+  m_hit->qdc3 = 0;
+  #endif //QDC2MAX
+#endif //QDC1MAX
    m_hit->pileup = (adc.pileup == 1 || adc.saturated == 1);
 }
 
@@ -473,8 +484,11 @@ void inline FasterReader::TreatCRRC4(const faster_data_p& data)
 
    m_hit->adc = crrc4_adc.measure;
  #ifndef QDC1MAX
-   m_hit->qdc2 = 0;
- #endif //QDC1MAX
+  m_hit->qdc2 = 0;
+  #ifndef QDC2MAX
+  m_hit->qdc3 = 0;
+  #endif //QDC2MAX
+#endif //QDC1MAX
    m_hit->pileup = (false); //TO BE LOOKED AT
 }
 
@@ -493,6 +507,9 @@ void inline FasterReader::TreatQDC1(const faster_data_p& data)
 
 #ifndef QDC1MAX
   m_hit->qdc2 = 0;
+  #ifndef QDC2MAX
+  m_hit->qdc3 = 0;
+  #endif //QDC2MAX
 #endif //QDC1MAX
 
   m_hit->pileup = (qdc.q1_saturated == 1);
@@ -509,10 +526,57 @@ void inline FasterReader::TreatQDC2(const faster_data_p& data)
   qdc_t_x2 qdc;
   faster_data_load(data, &qdc);
   m_hit->adc = qdc.q1;
-#ifndef QDC1MAX
+#ifdef QDC1MAX
+  if (!error_message["QDC2"])
+  {
+    std::cout << "QDC2 found despite #define QDC1MAX " << std::endl;
+    error_message["QDC2"] = true;
+  }
+#else
   m_hit->qdc2 = qdc.q2;
+  #ifdef QDC2MAX
+  if (!error_message["QDC2"])
+  {
+    std::cout << "QDC2 found despite #define QDC1MAX or #define QDC2MAX" << std::endl;
+    error_message["QDC2"] = true;
+  }
+  #else 
+  m_hit->qdc3 = 0;
+  #endif //QDC2MAX
 #endif //QDC1MAX
   m_hit->pileup = (qdc.q1_saturated == 1 || qdc.q2_saturated == 1);
+}
+
+/**
+ * @brief Load qdc3 data
+ * 
+ * \private Internal method used to extract QDC values with 2 gates
+ * 
+ */
+void inline FasterReader::TreatQDC3(const faster_data_p& data)
+{ 
+  qdc_t_x3 qdc;
+  faster_data_load(data, &qdc);
+  m_hit->adc = qdc.q1;
+#ifdef QDC1MAX
+  if (!error_message["QDC3"])
+  {
+    std::cout << "QDC3 found despite #define QDC1MAX " << std::endl;
+    error_message["QDC3"] = true;
+  }
+#else
+  m_hit->qdc2 = qdc.q2;
+  #ifdef QDC2MAX
+  if (!error_message["QDC3"])
+  {
+    std::cout << "QDC3 found despite #define QDC1MAX or #define QDC2MAX" << std::endl;
+    error_message["QDC3"] = true;
+  }
+  #else 
+  m_hit->qdc3 = qdc.q3;
+  #endif //QDC2MAX
+#endif //QDC1MAX
+  m_hit->pileup = (qdc.q1_saturated == 1 || qdc.q2_saturated == 1 || || qdc.q3_saturated);
 }
 
 /**
@@ -528,8 +592,11 @@ void inline FasterReader::TreatRF(const faster_data_p& data)
 
    m_hit->adc = ADC_cast(rf_period_ns(rf)*1000);
  #ifndef QDC1MAX
-   m_hit->qdc2 = 0;
- #endif //QDC1MAX
+  m_hit->qdc2 = 0;
+  #ifndef QDC2MAX
+  m_hit->qdc3 = 0;
+  #endif //QDC2MAX
+#endif //QDC1MAX
    m_hit->pileup = false;
 }
 
