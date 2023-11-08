@@ -427,13 +427,13 @@ bool inline FasterReader::switch_alias(uchar const & _alias, faster_data_p const
     case QDC_TDC_X2_TYPE_ALIAS: // qdc_t_x2
       TreatQDC2(_data);
       return true;
-  #endif //QDC1MAX
 
-  #ifndef QDC3
+#ifndef QDC2MAX
     case QDC_TDC_X3_TYPE_ALIAS: // qdc_t_x3
       TreatQDC3(_data);
       return true;
-  #endif //QDC3
+#endif //QDC2MAX
+  #endif //QDC1MAX
 
     case RF_DATA_TYPE_ALIAS: // rf_data
       TreatRF(_data);

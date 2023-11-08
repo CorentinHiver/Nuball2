@@ -255,10 +255,10 @@ void Hit::reading(TTree * tree)
     if(branchNameStr == "stamp" ) {read.s = true; tree -> SetBranchAddress("stamp" , & stamp );}
     if(branchNameStr == "adc"   ) {read.e = true; tree -> SetBranchAddress("adc"   , & adc   );}
     if(branchNameStr == "nrj"   ) {read.E = true; tree -> SetBranchAddress("nrj"   , & nrj   );}
-    if(branchNameStr == "qdc2"  ) {read.e = true; tree -> SetBranchAddress("adc"   , & adc   );}
-    if(branchNameStr == "nrj2"  ) {read.E = true; tree -> SetBranchAddress("nrj"   , & nrj   );}
-    if(branchNameStr == "qdc3"  ) {read.q = true; tree -> SetBranchAddress("qdc2"  , & qdc2  );}
-    if(branchNameStr == "nrj3"  ) {read.q = true; tree -> SetBranchAddress("qdc3"  , & qdc3  );}
+    if(branchNameStr == "qdc2"  ) {read.e = true; tree -> SetBranchAddress("qdc2"  , & qdc2  );}
+    if(branchNameStr == "nrj2"  ) {read.E = true; tree -> SetBranchAddress("nrj2"  , & nrj2  );}
+    if(branchNameStr == "qdc3"  ) {read.q = true; tree -> SetBranchAddress("qdc3"  , & qdc3  );}
+    if(branchNameStr == "nrj3"  ) {read.q = true; tree -> SetBranchAddress("nrj3"  , & nrj3  );}
     if(branchNameStr == "pileup") {read.p = true; tree -> SetBranchAddress("pileup", & pileup);}
   }
 } 
