@@ -50,11 +50,16 @@ public:
   void setCalibration(Calibration const & calibration) {m_calibration = calibration;}
   void setTimeshifts(Timeshifts const & timeshifts) {m_timeshifts = timeshifts;}
 
+  void initialize_dontMatrixate()
+  {
+    if (m_dontMatrixateLabel.size()<detectors.size())  m_dontMatrixateLabel.resize(detectors.size(), false);
+    if (m_dontMatrixateType.size() < detectors.nbTypes()) for (auto const & type : detectors.types()) m_dontMatrixateType.emplace(type, false);
+  }
+
   void dontMatrixate(dType const & type)
   {
     // Initialise if not :
-    if (m_dontMatrixateLabel.size()<detectors.size())  m_dontMatrixateLabel.resize(detectors.size(), false);
-    if (m_dontMatrixateType.size() < detectors.nbTypes()) for (auto const & type : detectors.types()) m_dontMatrixateType.emplace(type, false);
+    initialize_dontMatrixate();
 
     // Check if the type exists :
     if (!found(detectors.types(), type)) throw_error("RunMatrixator::dontMatrixate(type) : type unkown");
@@ -68,7 +73,7 @@ public:
   void dontMatrixate(Label const & label)
   {
     // Initialise if not :
-    if (m_dontMatrixateLabel.size()<detectors.size())  m_dontMatrixateLabel.resize(detectors.size(), false);
+    initialize_dontMatrixate();
     // Check entry :
     if (label>m_dontMatrixateLabel.size()) throw_error("RunMatrixator::dontMatrixate(label) : label out of range");
     m_dontMatrixateLabel[label] = true;
@@ -128,7 +133,7 @@ void RunMatrixator::run(std::string const & runpath, std::string const & data)
     if (!m_timeshifts)  throw_error("NO TIMESHIFTS" );
 
     MTFasterReader mt_reader(m_runpath);
-    mt_reader.execute(dispatch_faster_reader, *this);
+    mt_reader.readRaw(dispatch_faster_reader, *this);
   }
   else if (data == "root")
   {
@@ -148,6 +153,7 @@ void RunMatrixator::Initialize()
 {
   // Hit::setExternalTime(true); // Allows to directly calculate the rf time instead of the relative time
   if (!detectors) {print("Please initialize the Detectors"); throw_error("Detectors not loaded");}
+  this -> initialize_dontMatrixate();
   if (m_keep_singles) Builder::keepSingles();
 
   test_paris_vs_mult.reset("test_paris_vs_mult", "Paris vs Mult", m_max_multiplicity,0,m_max_multiplicity, 1000,0,10000);
@@ -232,11 +238,13 @@ void RunMatrixator::Initialize()
   }
 }
 
+/// @brief Multithreading of loadData_faster (you have to pass by a static method in order to multi-thread it)
 void RunMatrixator::dispatch_faster_reader(Hit & hit, FasterReader & reader, RunMatrixator & rm)
 {
   rm.loadData_faster(hit, reader);
 }
 
+/// @brief Multithreading of loadData_ (you have to pass by a static method in order to multi-thread it)
 void RunMatrixator::dispatch_root_reader(TTree * tree, Event & event, RunMatrixator & rm)
 {
   rm.loadData_root(tree, event);

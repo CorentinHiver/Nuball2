@@ -215,8 +215,8 @@ public:
     {
       std::vector<Hit> temp;
       temp.reserve(m_size+n);
-      for (size_t i = 0; i<n; i++) temp[i] = Hit(0,0); // Fill the nth first hits with empty hits
-      for (size_t i = 0; i<m_size; i++)
+      for (int i = 0; i<n; i++) temp[i] = Hit(); // Fill the nth first hits with empty hits
+      for (int i = 0; i<m_size; i++)
       {// Shifts the other hits
         temp[i+n] = m_buffer[i];
       }

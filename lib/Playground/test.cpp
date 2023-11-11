@@ -8,11 +8,11 @@
 // #include "/home/corentin/Installation/DataFrame/include/DataFrame/DataFrame.h"
 // #include <SourceCloverSpectra.hpp>
 // #include <Calibration.hpp>
-// #include <RunMatrixator.hpp>
+#include <RunMatrixator.hpp>
 // #include <Detectors.hpp>
 // #include <Timeshifts.hpp>
 // #include <Convertor.hpp>
-#include <MTFasterReader.hpp>
+// #include <MTFasterReader.hpp>
 
 // using hmdf;
 
@@ -23,7 +23,7 @@ int main(int argc, char ** argv)
   
   // std::string filename("../RootReader/Calibrations/PARIS/CalibParis.csv");
   // CSVReader<std::string, int, int> reader(, ';');
-  // std::string index_file = "index_129.list";
+  std::string index_file = "index_129.list";
   // detectors.load(index_file);
   // SourceCloverSpectra ce(argc, argv);
 
@@ -62,50 +62,54 @@ int main(int argc, char ** argv)
   // CoAnalyse::removeRandomY(dp, -1, -1, true, gates);
   
 
-  // int nb_files = -1;
-  // int nb_threads = 1;
-  // if (argc > 1)
-  // {
-  //   std::string command;
-  //   for(int i = 1; i < argc; i++)
-  //   {
-  //     command = argv[i];
-  //          if (command == "-f") {nb_files = std::atoi(argv[i++]);}
-  //     else if (command == "-n") {FasterReader::setMaxHits(std::atoi(argv[++i]));}
-  //     else if (command == "-m") 
-  //     {
-  //       nb_threads = std::atoi(argv[++i]);
-  //       MTObject::setThreadsNb(nb_threads);
-  //       MTObject::Initialize();
-  //     }
-  //     else if (command == "-i") {index_file = argv[++i];}
-  //     else {throw std::runtime_error("command " + command + " unkown");}
-  //   }
-  // }
+  int nb_files = -1;
+  int nb_threads = 1;
+  if (argc > 1)
+  {
+    std::string command;
+    for(int i = 1; i < argc; i++)
+    {
+      command = argv[i];
+           if (command == "-f") {nb_files = std::atoi(argv[i++]);}
+      else if (command == "-n") {FasterReader::setMaxHits(std::atoi(argv[++i]));}
+      else if (command == "-m") 
+      {
+        nb_threads = std::atoi(argv[++i]);
+        MTObject::setThreadsNb(nb_threads);
+        MTObject::Initialize();
+      }
+      else if (command == "-i") {index_file = argv[++i];}
+      else {throw std::runtime_error("command " + command + " unkown");}
+    }
+  }
 
+  detectors.load(index_file);
 
   // CloverEfficiency ce(argc, argv);
 
-  // std::string datapath;
-  // auto const home = Path::home().string();
-  // if (home == "/home/corentin/") datapath = home+"faster_data/";
-  // else if (home == "/home/faster/") datapath = home+"nuball2/";
+  std::string datapath;
+  auto const home = Path::home().string();
+  if (home == "/home/corentin/") datapath = home+"faster_data/";
+  else if (home == "/home/faster/") datapath = home+"nuball2/";
 
   // --- RUN MATRIXATOR : --- //
 
-  // // rm.keepSingles();
-  // for (int run_i = 75; run_i<76; run_i++)
-  // {
-  //   RunMatrixator rm;
-  //   rm.dontMatrixate("ge");
-  //   rm.dontMatrixate("paris");
-  //   rm.maxRawMult(10);
-  //   rm.setCalibration("../../136/conversion_200ns/136_final.calib");
-  //   std::string run_str = "run_"+std::to_string(run_i); 
-  //   Timeshifts ts(datapath+"N-SI-136-root_P/Timeshifts/"+run_str+".dT");
-  //   rm.setTimeshifts(ts);
-  //   rm.run(datapath+"N-SI-136/"+run_str+".fast/");
-  // }
+  // rm.keepSingles();
+  for (int run_i = 75; run_i<76; run_i++)
+  {
+    RunMatrixator rm;
+    // rm.dontMatrixate("ge");
+    // rm.dontMatrixate("paris");
+    rm.maxRawMult(10);
+
+    rm.setCalibration("../../136/conversion_200ns/136_v2.calib");
+    
+    Timeshifts ts("136.dT");
+    rm.setTimeshifts(ts);
+
+    std::string run_str = "run_"+std::to_string(run_i); 
+    rm.run(datapath+"N-SI-136/"+run_str+".fast/");
+  }
 
   // --- Up to date example : --- //
   // Calibration calib;

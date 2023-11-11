@@ -54,7 +54,7 @@ public:
 
   Detectors(){}
 
-  Strings types_handled = {"ge", "bgo", "labr", "paris", "dssd", "eden", "RF", "null"};
+  Strings types_handled = {"ge", "bgo", "labr", "paris", "dssd", "eden", "RF", "default"};
 
   // static bool typeHandled(int const & id) const {} TODO
   // static bool typeID(int const & id) const {} TODO
