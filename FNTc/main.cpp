@@ -22,6 +22,11 @@
 #include <Detectors.hpp>      // Eases the manipulation of detector's labels
 #include <RF_Manager.hpp>     // Eases manipulation of RF information
 
+class Sinogram
+{
+
+};
+
 // 5. Main
 int main(int argc, char** argv)
 {

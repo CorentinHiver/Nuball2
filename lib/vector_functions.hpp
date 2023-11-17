@@ -72,6 +72,71 @@ bool found(std::vector<T> & vector, T & t)
 //   return 
 // }
 
+template <typename T>
+T maximum(std::vector<T> const & vector)
+{
+  T value = vector[0];
+  for (auto const & e : vector) if (e>value) value = e;
+  return value;
+}
+
+template <typename T>
+T minimum(std::vector<T> const & vector)
+{
+  T value = vector[0];
+  for (auto const & e : vector) if (e<value) value = e;
+  return value;
+}
+
+template <typename T>
+T maximumIndex(std::vector<T> const & vector)
+{
+  int index = 0;
+  T value = vector[index];
+  for (int i = 0; i<vector.size(); i++) if (vector[i]>value) 
+  {
+    value = vector[i];
+    index = i;
+  }
+  return value;
+}
+
+template <typename T>
+T minimumIndex(std::vector<T> const & vector)
+{
+  int index = 0;
+  T value = vector[index];
+  for (int i = 0; i<vector.size(); i++) if (vector[i]<value) 
+  {
+    value = vector[i];
+    index = i;
+  }
+  return value;
+}
+
+template <typename T>
+std::vector<int> bubbleSort(std::vector<T> & vector)
+{
+  std::vector<int> ordered_indexes(vector.size());
+  double v = 0;
+  ordered_indexes[0] = 0;
+  size_t j = 0;
+  size_t i = 0;
+  for (;j<vector.size(); j++)
+  {
+    ordered_indexes[j] = j;
+    v = vector[j];
+    i = j;
+    while((i>0) && vector[ordered_indexes[i-1]] > v)
+    {
+      ordered_indexes[i] = ordered_indexes[i-1];
+      i--;
+    }
+    ordered_indexes[i] = j;
+  }
+  return ordered_indexes;
+}
+
 ////////////////////////////
 //   CLASS STATIC VECTOR  //
 ////////////////////////////

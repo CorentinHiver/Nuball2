@@ -61,6 +61,9 @@ opt: default
 debug: CFLAGS += -g -O0 -DDEBUG -Wextra -ftemplate-depth-25 #-Wold-style-cast
 debug: default
 
+debug_opt: CFLAGS += -g -O2 -DDEBUG -Wextra -ftemplate-depth-25 #-Wold-style-cast
+debug_opt: default
+
 clean:
 	rm -f *.o
 	rm -f *__*.*

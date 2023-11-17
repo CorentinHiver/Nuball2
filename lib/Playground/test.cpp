@@ -8,10 +8,11 @@
 // #include "/home/corentin/Installation/DataFrame/include/DataFrame/DataFrame.h"
 // #include <SourceCloverSpectra.hpp>
 // #include <Calibration.hpp>
-#include <RunMatrixator.hpp>
+// #include <RunMatrixator.hpp>
+// #include <SpectraAlignator.hpp>
 // #include <Detectors.hpp>
 // #include <Timeshifts.hpp>
-// #include <Convertor.hpp>
+#include <Convertor.hpp>
 // #include <MTFasterReader.hpp>
 
 // using hmdf;
@@ -20,7 +21,6 @@
 
 int main(int argc, char ** argv)
 {
-  
   // std::string filename("../RootReader/Calibrations/PARIS/CalibParis.csv");
   // CSVReader<std::string, int, int> reader(, ';');
   std::string index_file = "index_129.list";
@@ -29,10 +29,40 @@ int main(int argc, char ** argv)
 
   // fuse_all_histo("histos/", true);
 
-  // auto file = TFile::Open("fused_histo_final.root", "READ");
+  // auto file_ref = TFile::Open("histos/run_80_matrixated.root", "READ");
+  // auto histo_ref = file_ref->Get<TH1F>("PARIS_BR3D2_prompt_singles");
+  // histo_ref->Rebin(2);
+  // SpectraAlignator alignator(histo_ref);
+  // if (argc>1) alignator.setIterations(std::stoi(argv[1]));
+  // alignator.setBruteForce();
+  // // alignator
+  // auto file_test = TFile::Open("histos/run_101_matrixated.root", "READ");
+  // auto histo_test = file_test->Get<TH1F>("PARIS_BR3D2_prompt_singles");
+  // histo_test->Rebin(2);
+  // auto histo_test_realigned = new TH1F();
+  // auto free_degrees = 3;
+  // // print(argc);
+  // // if (argc>3) deg = std::stoi(argv[2]);
+  // alignator.alignSpectra(histo_test, histo_test_realigned, free_degrees) ;
+
+  // auto file_out = TFile::Open("test_recal.root", "RECREATE");
+  // file_out->cd();
+
+  // histo_ref->Write();
+  // histo_test->SetName((histo_test->GetName()+std::string("_before")).c_str());
+  // histo_test->Write();
+  // histo_test_realigned->Write();
+  // alignator.writeChi2Spectra(file_out);
+
+  // file_out->Write();
+  // file_out->Close();
+
+  // file_ref->Close();
+  // file_test->Close();
+  // print("test_recal.root written");
+  
   // std::vector<std::pair<double, double>> gatesX = {{840, 850},{639, 644}, {725, 730}, {507, 515}};
 
-  // // auto histo = file->Get<TH2F>("S1_2_DSSD_prompt");
   // // auto histo = file->Get<TH2F>("PARIS_BR2D1_prompt");
   // // CoAnalyse::removeRandomY(histo, -1, -1, true, gatesX);
 
@@ -61,55 +91,57 @@ int main(int argc, char ** argv)
   // auto dp = file->Get<TH2F>("dp");
   // CoAnalyse::removeRandomY(dp, -1, -1, true, gates);
   
-
-  int nb_files = -1;
-  int nb_threads = 1;
-  if (argc > 1)
+  if (true)
   {
-    std::string command;
-    for(int i = 1; i < argc; i++)
-    {
-      command = argv[i];
-           if (command == "-f") {nb_files = std::atoi(argv[i++]);}
-      else if (command == "-n") {FasterReader::setMaxHits(std::atoi(argv[++i]));}
-      else if (command == "-m") 
-      {
-        nb_threads = std::atoi(argv[++i]);
-        MTObject::setThreadsNb(nb_threads);
-        MTObject::Initialize();
-      }
-      else if (command == "-i") {index_file = argv[++i];}
-      else {throw std::runtime_error("command " + command + " unkown");}
-    }
+    // int nb_files = -1;
+    // int nb_threads = 1;
+    // if (argc > 1)
+    // {
+    //   std::string command;
+    //   for(int i = 1; i < argc; i++)
+    //   {
+    //     command = argv[i];
+    //         if (command == "-f") {nb_files = std::atoi(argv[i++]);}
+    //     else if (command == "-n") {FasterReader::setMaxHits(std::atoi(argv[++i]));}
+    //     else if (command == "-m") 
+    //     {
+    //       nb_threads = std::atoi(argv[++i]);
+    //       MTObject::setThreadsNb(nb_threads);
+    //       MTObject::Initialize();
+    //     }
+    //     else if (command == "-i") {index_file = argv[++i];}
+    //     else {throw std::runtime_error("command " + command + " unkown");}
+    //   }
+    // }
+
+    // detectors.load(index_file);
+
+    // std::string datapath;
+    // auto const home = Path::home().string();
+    // if (home == "/home/corentin/") datapath = home+"faster_data/";
+    // else if (home == "/home/faster/") datapath = home+"nuball2/";
+
+    Convertor(argc, argv);
   }
 
-  detectors.load(index_file);
+  // // --- RUN MATRIXATOR : --- //
 
-  // CloverEfficiency ce(argc, argv);
+  // // rm.keepSingles();
+  // for (int run_i = 75; run_i<76; run_i++)
+  // {
+  //   RunMatrixator rm;
+  //   // rm.dontMatrixate("ge");
+  //   // rm.dontMatrixate("paris");
+  //   rm.maxRawMult(10);
 
-  std::string datapath;
-  auto const home = Path::home().string();
-  if (home == "/home/corentin/") datapath = home+"faster_data/";
-  else if (home == "/home/faster/") datapath = home+"nuball2/";
-
-  // --- RUN MATRIXATOR : --- //
-
-  // rm.keepSingles();
-  for (int run_i = 75; run_i<76; run_i++)
-  {
-    RunMatrixator rm;
-    // rm.dontMatrixate("ge");
-    // rm.dontMatrixate("paris");
-    rm.maxRawMult(10);
-
-    rm.setCalibration("../../136/conversion_200ns/136_v2.calib");
+  //   rm.setCalibration("../../136/conversion_200ns/136_v2.calib");
     
-    Timeshifts ts("136.dT");
-    rm.setTimeshifts(ts);
+  //   Timeshifts ts("136.dT");
+  //   rm.setTimeshifts(ts);
 
-    std::string run_str = "run_"+std::to_string(run_i); 
-    rm.run(datapath+"N-SI-136/"+run_str+".fast/");
-  }
+  //   std::string run_str = "run_"+std::to_string(run_i); 
+  //   rm.run(datapath+"N-SI-136/"+run_str+".fast/");
+  // }
 
   // --- Up to date example : --- //
   // Calibration calib;
@@ -117,9 +149,6 @@ int main(int argc, char ** argv)
   // calib.calibrateData(/* Europium run path */);
   // calib.writeCalibratedRoot(/* Name of the output_file.root */);
 
-  // RunMatrixator rm("~/faster_data/N-SI-120-sources/");
-  // RunMatrixator rm(argv[1]);
-  // MTObject::Initialize(3);
 
   // --- Almost up to date / Not checked : --- //
 

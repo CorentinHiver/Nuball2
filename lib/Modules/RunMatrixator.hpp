@@ -509,6 +509,7 @@ void RunMatrixator::Write()
   outRoot+="_matrixated.root";
 
   unique_TFile file(TFile::Open(outRoot.c_str(), "RECREATE"));
+  // Never tried this try... catch...
   try
   {
     if (!file) throw_error("Error");

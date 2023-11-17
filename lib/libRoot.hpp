@@ -57,6 +57,13 @@ inline ULong64_t ULong64_cast(T const & t) {return static_cast<ULong64_t>(t);}
 template<typename T,  typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
 inline Long64_t Long64_cast(T const & t) {return static_cast<Long64_t>(t);}
 
+///////////////////////////
+// Some Initialisiations //
+///////////////////////////
+
+TRandom* gRandom = new TRandom(time(0));
+
+
 ////////////////////////////
 //   HISTO MANIPULATIONS  //
 ////////////////////////////
@@ -619,7 +626,6 @@ namespace CoAnalyse
 
   void removeRandomBidim(TH2* matrix, int iterations = 1, bool save_intermediate = false, ProjectionsBins projectionsY = {{}}, ProjectionsBins projectionsX = {{}})
   {
-    // TRandom *random = new TRandom(time(0));
     // matrix->Rebin2D(2);
     int const & bins_x = matrix->GetNbinsX();
     int const & bins_y = matrix->GetNbinsY();

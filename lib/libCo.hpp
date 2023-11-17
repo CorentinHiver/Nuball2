@@ -44,7 +44,8 @@
 //   UTILS  //
 //////////////
 
-void pauseCo() {std::cout << "Programe paused, please press enter"; std::cin.get();}
+auto pauseCo() {std::cout << "Programe paused, please press enter"; return std::cin.get();}
+auto pauseCo(std::string const & message) {std::cout << message << std::endl; return std::cin.get();}
 
 //////////////
 //   UNITS  //
