@@ -93,35 +93,57 @@ int main(int argc, char ** argv)
   
   if (true)
   {
-    // int nb_files = -1;
-    // int nb_threads = 1;
-    // if (argc > 1)
-    // {
-    //   std::string command;
-    //   for(int i = 1; i < argc; i++)
-    //   {
-    //     command = argv[i];
-    //         if (command == "-f") {nb_files = std::atoi(argv[i++]);}
-    //     else if (command == "-n") {FasterReader::setMaxHits(std::atoi(argv[++i]));}
-    //     else if (command == "-m") 
-    //     {
-    //       nb_threads = std::atoi(argv[++i]);
-    //       MTObject::setThreadsNb(nb_threads);
-    //       MTObject::Initialize();
-    //     }
-    //     else if (command == "-i") {index_file = argv[++i];}
-    //     else {throw std::runtime_error("command " + command + " unkown");}
-    //   }
-    // }
+    int nb_files = -1;
+    int nb_threads = 1;
+    Label time_ref_label = 252;
+    std::string path_to_data;
+    std::string outputName;
+    if (argc > 1)
+    {
+      std::string command;
+      path_to_data = argv[1];
+      outputName = argv[2];
+      for(int i = 3; i < argc; i++)
+      {
+        command = argv[i];
+            if (command == "-f") {nb_files = std::atoi(argv[i++]);}
+        else if (command == "-r") {time_ref_label = std::atoi(argv[++i]);}
+        else if (command == "-n") {FasterReader::setMaxHits(std::atoi(argv[++i]));}
+        else if (command == "-m") 
+        {
+          nb_threads = std::atoi(argv[++i]);
+          MTObject::setThreadsNb(nb_threads);
+          MTObject::Initialize();
+        }
+        else if (command == "-i") {index_file = argv[++i];}
+        else {throw std::runtime_error("command " + command + " unkown");}
+      }
+    }
+    else
+    {
+      print("Timeshifts module usage : ./timeshifts /path/to/data/ outputName [[parameters]]");
+      print("Parameters :");
+      print("  -i [index.ID]  : index file");
+      print("  -f [nb_files]  : number of files");
+      print("  -n [nb_hits]   : number of hits per file");
+      print("  -m [nb_threads]: number of threads");
+      print("  -r [label]     : time reference label");
+      print("The output will be written in an automatically created folder name Timeshifts/ in the current directory.");
+    }
 
-    // detectors.load(index_file);
+    detectors.load(index_file);
 
     // std::string datapath;
     // auto const home = Path::home().string();
     // if (home == "/home/corentin/") datapath = home+"faster_data/";
     // else if (home == "/home/faster/") datapath = home+"nuball2/";
 
-    Convertor(argc, argv);
+    // Convertor(argc, argv);
+    Timeshifts ts;
+    ts.setTimeReference(time_ref_label);
+    ts.calculate(path_to_data, nb_files);
+    ts.verify(path_to_data, nb_files);
+    ts.write(outputName);
   }
 
   // // --- RUN MATRIXATOR : --- //

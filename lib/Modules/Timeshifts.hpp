@@ -214,7 +214,7 @@ public:
   {
     if (!detectors.exists(m_time_ref_label)) 
     {
-      print(m_time_ref_name, "do not exists with label", m_time_ref_label);
+      print("Time reference detector", m_time_ref_name, "with label", m_time_ref_label, "do not exists in ID file ...");
       return false;
     }
     return true;
@@ -918,8 +918,8 @@ void Timeshifts::analyse()
  */
 void Timeshifts::write(std::string const & name)
 {
-  writeData(name);
   writeRoot(name);
+  writeData(name);
 }
 
 /**
