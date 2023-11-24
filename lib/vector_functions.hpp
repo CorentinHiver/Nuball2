@@ -115,25 +115,33 @@ T minimumIndex(std::vector<T> const & vector)
 }
 
 template <typename T>
-std::vector<int> bubbleSort(std::vector<T> & vector)
+std::vector<int> bubbleSort(std::vector<T> & vector, std::vector<int> & indexes)
 {
-  std::vector<int> ordered_indexes(vector.size());
+  if (vector.size() != indexes.size()) indexes.resize(vector.size());
   double v = 0;
-  ordered_indexes[0] = 0;
+  indexes[0] = 0;
   size_t j = 0;
   size_t i = 0;
   for (;j<vector.size(); j++)
   {
-    ordered_indexes[j] = j;
+    indexes[j] = j;
     v = vector[j];
     i = j;
-    while((i>0) && vector[ordered_indexes[i-1]] > v)
+    while((i>0) && vector[indexes[i-1]] > v)
     {
-      ordered_indexes[i] = ordered_indexes[i-1];
+      indexes[i] = indexes[i-1];
       i--;
     }
-    ordered_indexes[i] = j;
+    indexes[i] = j;
   }
+  return indexes;
+}
+
+template <typename T>
+std::vector<int> bubbleSort(std::vector<T> & vector)
+{
+  std::vector<int> ordered_indexes(vector.size());
+  bubbleSort(vector, ordered_indexes);
   return ordered_indexes;
 }
 

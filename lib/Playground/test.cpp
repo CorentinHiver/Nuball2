@@ -9,57 +9,139 @@
 // #include <SourceCloverSpectra.hpp>
 // #include <Calibration.hpp>
 // #include <RunMatrixator.hpp>
-// #include <SpectraAlignator.hpp>
+#include <SpectraAlignator.hpp>
 // #include <Detectors.hpp>
 // #include <Timeshifts.hpp>
-#include <Convertor.hpp>
+// #include <Convertor.hpp>
 // #include <MTFasterReader.hpp>
-
-// using hmdf;
-
-// using StrDataFrame = StdDataFrame<std::string>;
 
 int main(int argc, char ** argv)
 {
+
+// auto file_ref = TFile::Open("histos/run_80_matrixated.root", "READ");
+//   auto file_test = TFile::Open("histos/run_120_matrixated.root", "READ");
+//   // auto histo_ref = file_ref->Get<TH1F>("PARIS_BR3D2_prompt_singles");
+//   auto histo_ref = file_ref->Get<TH1F>("R3A1_black_prompt_singles");
+//   auto histo_test = file_test->Get<TH1F>("R3A1_black_prompt_singles");
+  
+//   SpectraCo spectra(histo_ref);
+//   SpectraCo spectra_test(histo_test);
+
+//   // spectra.derivate();
+//   // auto derivativeData(spectra.derivative());
+//   // SpectraCo derivativeSpectra(derivativeData);
+//   // auto derivativeTH1F = derivativeSpectra.createTH1F();
+
+//   spectra.derivate2(3);
+//   auto secondDerivativeData(spectra.derivative2());
+//   SpectraCo secondDerivativeSpectra(secondDerivativeData);
+
+//   spectra_test.derivate2(3);
+//   auto secondDerivativeData_test(spectra_test.derivative2());
+//   SpectraCo secondDerivativeSpectra_test(secondDerivativeData_test);
+//   // auto secondDerivativeTH1F = secondDerivativeSpectra.createTH1F();
+//   // for (int i = 0; i<secondDerivativeSpectra.size(); i++) print(secondDerivativeSpectra[i]);
+//   auto c = new TCanvas("test","test");
+//   c->cd();
+//   // SpectraCo(spectra.derivative()).createTH1F("smooth1")->Draw();
+
+//   // spectra.derivate(2);
+//   // SpectraCo(spectra.derivative()).createTH1F("smooth2")->Draw("same");
+
+//   // spectra.derivate2(5);
+//   // auto derivative = SpectraCo(spectra.derivative());
+//   // derivative.setMinValue(histo_ref->GetXaxis() -> GetXmin());
+//   // derivative.setMaxValue(histo_ref->GetXaxis() -> GetXmax());
+//   // derivative.createTH1F("1 derivative")->Draw();
+//   auto derivative2 = SpectraCo(spectra.derivative2());
+//   derivative2.setMinValue(histo_ref->GetXaxis() -> GetXmin());
+//   derivative2.setMaxValue(histo_ref->GetXaxis() -> GetXmax());
+//   auto derivative2Spectra = derivative2.createTH1F("2 derivative ref");
+//   // derivative2Spectra->SetLineColor(kBlack);
+//   // derivative2Spectra->SetLineStyle(2);
+//   // derivative2Spectra->Draw();
+
+//   auto derivative2_test = SpectraCo(spectra_test.derivative2());
+//   derivative2_test.setMinValue(histo_test->GetXaxis() -> GetXmin());
+//   derivative2_test.setMaxValue(histo_test->GetXaxis() -> GetXmax());
+//   auto derivative2Spectra_test = derivative2_test.createTH1F("2 derivative test");
+//   derivative2Spectra_test->SetLineColor(kGreen);
+//   // derivative2Spectra_test->SetLineStyle(2);
+//   derivative2Spectra_test->Draw("same");
+
+
+//   auto test_sum = derivative2-derivative2_test;
+//   // test_sum.Draw("same");
+
+//   Recalibration recal;
+//   recal.seta0(0.5);
+//   recal.seta1(1.5);
+//   derivative2_test.recalibrate(recal);
+
+
   // std::string filename("../RootReader/Calibrations/PARIS/CalibParis.csv");
   // CSVReader<std::string, int, int> reader(, ';');
-  std::string index_file = "index_129.list";
-  // detectors.load(index_file);
-  // SourceCloverSpectra ce(argc, argv);
+  // std::string index_file = "index_129.list";
+  // // detectors.load(index_file);
+  // // SourceCloverSpectra ce(argc, argv);
 
-  // fuse_all_histo("histos/", true);
+  // // fuse_all_histo("histos/", true);
 
-  // auto file_ref = TFile::Open("histos/run_80_matrixated.root", "READ");
+  auto file_ref = TFile::Open("histos/run_80_matrixated.root", "READ");
+  // auto histo_ref = file_ref->Get<TH1F>("R3A1_black_prompt_singles");
+  auto histo_ref = file_ref->Get<TH1F>("PARIS_BR3D2_delayed_singles");
+  // auto histo_ref = file_ref->Get<TH1F>("PARIS_BR3D2_prompt_singles");
+  // SpectraCo spectra(histo_ref);
+
   // auto histo_ref = file_ref->Get<TH1F>("PARIS_BR3D2_prompt_singles");
   // histo_ref->Rebin(2);
-  // SpectraAlignator alignator(histo_ref);
-  // if (argc>1) alignator.setIterations(std::stoi(argv[1]));
-  // alignator.setBruteForce();
-  // // alignator
-  // auto file_test = TFile::Open("histos/run_101_matrixated.root", "READ");
+  SpectraAlignator alignator(histo_ref);
+  if (argc>1) alignator.setIterations(std::stoi(argv[1]));
+  alignator.setBruteForce();
+
+  auto file_test = TFile::Open("histos/run_101_matrixated.root", "READ");
+  // auto histo_test = file_test->Get<TH1F>("R3A1_black_prompt_singles");
+  auto histo_test = file_test->Get<TH1F>("PARIS_BR3D2_delayed_singles");
   // auto histo_test = file_test->Get<TH1F>("PARIS_BR3D2_prompt_singles");
   // histo_test->Rebin(2);
-  // auto histo_test_realigned = new TH1F();
-  // auto free_degrees = 3;
+  auto histo_test_realigned = new TH1F();
+  // auto free_degrees = 4;
   // // print(argc);
   // // if (argc>3) deg = std::stoi(argv[2]);
-  // alignator.alignSpectra(histo_test, histo_test_realigned, free_degrees) ;
+  alignator.alignSpectra(histo_test, histo_test_realigned);
 
-  // auto file_out = TFile::Open("test_recal.root", "RECREATE");
-  // file_out->cd();
+  std::string name = "test_recal.root";
+  // std::string name = "test_derivatives.root";
 
-  // histo_ref->Write();
-  // histo_test->SetName((histo_test->GetName()+std::string("_before")).c_str());
-  // histo_test->Write();
-  // histo_test_realigned->Write();
-  // alignator.writeChi2Spectra(file_out);
+  auto file_out = TFile::Open(name.c_str(), "RECREATE");
+  file_out->cd();
 
-  // file_out->Write();
-  // file_out->Close();
+  histo_ref->SetLineColor(kRed);
+  histo_ref->Write();
+  histo_test->SetName((histo_test->GetName()+std::string("_before")).c_str());
+  histo_test->SetTitle((histo_test->GetName()+std::string("_before")).c_str());
+  histo_test->SetLineStyle(2);
+  histo_test->SetLineColor(kBlue);
+  auto new = (SpectraCo(histo_ref) - SpectraCo(histo_test_realigned)).createTH1F();
+  histo_test->Write();
+  histo_test_realigned->SetLineColor(kBlue);
+  histo_test_realigned->Write();
+  alignator.writeChi2Spectra(file_out);
 
-  // file_ref->Close();
-  // file_test->Close();
-  // print("test_recal.root written");
+  diff->Write();
+
+  file_out->Write();
+  file_out->Close();
+  print(name, "written");
+
+  file_ref->Close();
+  file_test->Close();
+
+
+
+
+
+
   
   // std::vector<std::pair<double, double>> gatesX = {{840, 850},{639, 644}, {725, 730}, {507, 515}};
 
@@ -91,60 +173,60 @@ int main(int argc, char ** argv)
   // auto dp = file->Get<TH2F>("dp");
   // CoAnalyse::removeRandomY(dp, -1, -1, true, gates);
   
-  if (true)
-  {
-    int nb_files = -1;
-    int nb_threads = 1;
-    Label time_ref_label = 252;
-    std::string path_to_data;
-    std::string outputName;
-    if (argc > 1)
-    {
-      std::string command;
-      path_to_data = argv[1];
-      outputName = argv[2];
-      for(int i = 3; i < argc; i++)
-      {
-        command = argv[i];
-            if (command == "-f") {nb_files = std::atoi(argv[i++]);}
-        else if (command == "-r") {time_ref_label = std::atoi(argv[++i]);}
-        else if (command == "-n") {FasterReader::setMaxHits(std::atoi(argv[++i]));}
-        else if (command == "-m") 
-        {
-          nb_threads = std::atoi(argv[++i]);
-          MTObject::setThreadsNb(nb_threads);
-          MTObject::Initialize();
-        }
-        else if (command == "-i") {index_file = argv[++i];}
-        else {throw std::runtime_error("command " + command + " unkown");}
-      }
-    }
-    else
-    {
-      print("Timeshifts module usage : ./timeshifts /path/to/data/ outputName [[parameters]]");
-      print("Parameters :");
-      print("  -i [index.ID]  : index file");
-      print("  -f [nb_files]  : number of files");
-      print("  -n [nb_hits]   : number of hits per file");
-      print("  -m [nb_threads]: number of threads");
-      print("  -r [label]     : time reference label");
-      print("The output will be written in an automatically created folder name Timeshifts/ in the current directory.");
-    }
+  // if (true)
+  // {
+  //   int nb_files = -1;
+  //   int nb_threads = 1;
+  //   Label time_ref_label = 252;
+  //   std::string path_to_data;
+  //   std::string outputName;
+  //   if (argc > 1)
+  //   {
+  //     std::string command;
+  //     path_to_data = argv[1];
+  //     outputName = argv[2];
+  //     for(int i = 3; i < argc; i++)
+  //     {
+  //       command = argv[i];
+  //           if (command == "-f") {nb_files = std::atoi(argv[i++]);}
+  //       else if (command == "-r") {time_ref_label = std::atoi(argv[++i]);}
+  //       else if (command == "-n") {FasterReader::setMaxHits(std::atoi(argv[++i]));}
+  //       else if (command == "-m") 
+  //       {
+  //         nb_threads = std::atoi(argv[++i]);
+  //         MTObject::setThreadsNb(nb_threads);
+  //         MTObject::Initialize();
+  //       }
+  //       else if (command == "-i") {index_file = argv[++i];}
+  //       else {throw std::runtime_error("command " + command + " unkown");}
+  //     }
+  //   }
+  //   else
+  //   {
+  //     print("Timeshifts module usage : ./timeshifts /path/to/data/ outputName [[parameters]]");
+  //     print("Parameters :");
+  //     print("  -i [index.ID]  : index file");
+  //     print("  -f [nb_files]  : number of files");
+  //     print("  -n [nb_hits]   : number of hits per file");
+  //     print("  -m [nb_threads]: number of threads");
+  //     print("  -r [label]     : time reference label");
+  //     print("The output will be written in an automatically created folder name Timeshifts/ in the current directory.");
+  //   }
 
-    detectors.load(index_file);
+  //   detectors.load(index_file);
 
-    // std::string datapath;
-    // auto const home = Path::home().string();
-    // if (home == "/home/corentin/") datapath = home+"faster_data/";
-    // else if (home == "/home/faster/") datapath = home+"nuball2/";
+  //   // std::string datapath;
+  //   // auto const home = Path::home().string();
+  //   // if (home == "/home/corentin/") datapath = home+"faster_data/";
+  //   // else if (home == "/home/faster/") datapath = home+"nuball2/";
 
-    // Convertor(argc, argv);
-    Timeshifts ts;
-    ts.setTimeReference(time_ref_label);
-    ts.calculate(path_to_data, nb_files);
-    ts.verify(path_to_data, nb_files);
-    ts.write(outputName);
-  }
+  //   // Convertor(argc, argv);
+  //   Timeshifts ts;
+  //   ts.setTimeReference(time_ref_label);
+  //   ts.calculate(path_to_data, nb_files);
+  //   ts.verify(path_to_data, nb_files);
+  //   ts.write(outputName);
+  // }
 
   // // --- RUN MATRIXATOR : --- //
 

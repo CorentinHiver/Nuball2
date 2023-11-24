@@ -220,9 +220,20 @@ public:
     return true;
   }
 
+  void rebin(Label const & label, int const & rebin)
+  {
+    m_rebin[label] = rebin;
+  }
+
   std::vector<bool>  m_RF_preferred_label; // Used to force RF measurement for specific labels;
   std::vector<uchar> m_nb_shifts_RF_peak;  // If the peak is not within [+- RF_period] then one need to shift it accordingly
   std::vector<bool>  m_edge_preferred_label; // Used to force RF measurement for specific labels;
+
+  void rebin(std::string const & detector, Time_ns const & bin_size_ns)
+  {
+    if (!find_key(detector)) throw_error("in Timeshifts::rebin(std::string detector, float bin_size_ns) : detector not known !!");
+    m_bins_per_ns[detector] = bin_size_ns;
+  }
 
 private:
 

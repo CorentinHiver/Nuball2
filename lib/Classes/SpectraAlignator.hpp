@@ -3,73 +3,76 @@
 
 #include "../libRoot.hpp"
 
+#define MAX_ORDER2
+
 class Recalibration
 {
 public:
-  Recalibration(double const & _a0 = 0, double const & _a1 = 1, double const & _a2 = 0, double const & _a3 = 0, double const & _aSqrt = 0):
-  a0    (_a0),
-  a1    (_a1),
-  a2    (_a2),
-  a3    (_a3),
-  aSqrt (_aSqrt)
+  Recalibration(double const & _a0 = 0, double const & _a1 = 1, double const & _a2 = 0, double const & _a3 = 0, double const & _aSqrt = 0) :
+    m_parameters ({_a0, _a1, _a2, _a3, _aSqrt})
   {
   }
 
   Recalibration(Recalibration const & other)
   {
-    a0 = other.a0;
-    a1 = other.a1;
-    a2 = other.a2;
-    a3 = other.a3;
-    aSqrt = other.aSqrt;
+    m_parameters = other.m_parameters;
   }
 
-  double operator() (float const & x)
-  {
-    return a0 + a1*x + a2*x*x + a3*x*x*x + aSqrt*sqrt(x);
-  }
+  // Getters :
+  //  const getters :
+  inline auto const & operator[] (int const & i) const {return m_parameters[i];}
+  inline auto const & getParameter (int const & i) const {return m_parameters[i];}
+  inline auto const & a0    () const {return m_parameters[0];}
+  inline auto const & a1    () const {return m_parameters[1];}
+  inline auto const & a2    () const {return m_parameters[2];}
+  inline auto const & a3    () const {return m_parameters[3];}
+  inline auto const & aSqrt () const {return m_parameters[4];}
 
-  double calculate(float const & x) const
-  {
-    return a0 + a1*x + a2*x*x + a3*x*x*x + aSqrt*sqrt(x);
-  }
+  //  not const getters :
+  inline auto & operator[] (int const & i) {return m_parameters[i];}
+  inline auto & getParameter (int const & i) {return m_parameters[i];}
+  inline auto & a0    () {return m_parameters[0];}
+  inline auto & a1    () {return m_parameters[1];}
+  inline auto & a2    () {return m_parameters[2];}
+  inline auto & a3    () {return m_parameters[3];}
+  inline auto & aSqrt () {return m_parameters[4];}
 
-  // double recalibrate
+  // Setters :
+  inline auto & setParameter (int const & i, double const & a) {return (m_parameters[i] = a);}
+  inline auto & setParameter (size_t const & i, double const & a) {return (m_parameters[i] = a);}
+  inline auto & a0     (double const & a0)    {return (m_parameters[0] = a0);}
+  inline auto & a1     (double const & a1)    {return (m_parameters[1] = a1);}
+  inline auto & a2     (double const & a2)    {return (m_parameters[2] = a2);}
+  inline auto & a3     (double const & a3)    {return (m_parameters[3] = a3);}
+  inline auto & aSqrt  (double const & aSqrt) {return (m_parameters[4] = aSqrt);}
+
   
-  void seta0(double const & _a0) {a0 = _a0;}
-  void seta1(double const & _a1) {a1 = _a1;}
-  void seta2(double const & _a2) {a2 = _a2;}
-  void seta3(double const & _a3) {a3 = _a3;}
-  void setaSqrt(double const & _aSqrt) {aSqrt = _aSqrt;}
+#ifdef MAX_ORDER2
+  inline double calculate (double const & x) const {return a0() + a1()*x + a2()*x*x ;}
+  inline double calculate (double const & x)       {return a0() + a1()*x + a2()*x*x ;}
+#else 
+  inline double calculate (double const & x) const {return a0() + a1()*x + a2()*x*x + a3()*x*x*x + aSqrt()*x;}
+  inline double calculate (double const & x)       {return a0() + a1()*x + a2()*x*x + a3()*x*x*x + aSqrt()*x;}
+#endif //MAX_ORDER2
 
-  auto const & geta0() {return a0;}
-  auto const & geta1() {return a1;}
-  auto const & geta2() {return a2;}
-  auto const & geta3() {return a3;}
-  auto const & getaSqrt() {return aSqrt;}
-
-  auto const & geta0() const {return a0;}
-  auto const & geta1() const {return a1;}
-  auto const & geta2() const {return a2;}
-  auto const & geta3() const {return a3;}
-  auto const & getaSqrt() const {return aSqrt;}
+  inline double operator() (double const & x) { return calculate(x) ;}
+  inline double operator() (double const & x) const { return calculate(x) ;}
 
 private:
 
-  double a0 = 0.0;
-  double a1 = 0.0;
-  double a2 = 0.0;
-  double a3 = 0.0;
-  double aSqrt = 0.0;
-
+  std::vector<double> m_parameters = std::vector<double>(5);
 };
 
 std::ostream& operator<<(std::ostream& out, Recalibration const & recal)
 {
-  out << recal.geta0() << " + " << recal.geta1() << "x + " << recal.geta2() 
-      << "x2 + " << recal.geta3() << "x3 + " << recal.getaSqrt() << "sqrt(x)";
+  out << recal.a0() << " + " << recal.a1() << "x + " << recal.a2() 
+      << "x2 + " << recal.a3() << "x3 + " << recal.aSqrt() << "sqrt(x)";
   return out;
 }
+
+///////////////
+// SpectraCo //
+///////////////
 
 class SpectraCo
 {
@@ -83,17 +86,37 @@ public:
   }
 
   SpectraCo(SpectraCo const & other) : 
-  m_spectra   (other.m_spectra),
-  m_name      (other.m_name),
-  m_size      (other.m_size),
-  m_integral  (other.m_integral),
-  m_min_value (other.m_min_value),
-  m_max_value (other.m_max_value)
+    m_spectra   (other.m_spectra),
+    m_name      (other.m_name),
+    m_size      (other.m_size),
+    m_integral  (other.m_integral),
+    m_min_value (other.m_min_value),
+    m_max_value (other.m_max_value)
   {
-    throw_error("SpectraCo::SpectraCo(SpectraCo const & other) : function is not working !");
+    // throw_error("SpectraCo::SpectraCo(SpectraCo const & other) : function is not working !");
   }
 
-  SpectraCo& operator= (TH1* root_spectra)
+  SpectraCo(SpectraCo const & other, Recalibration const & recal) : 
+    m_spectra   (other.m_spectra),
+    m_name      (other.m_name),
+    m_size      (other.m_size),
+    m_integral  (other.m_integral),
+    m_min_value (other.m_min_value),
+    m_max_value (other.m_max_value)
+  {
+    // throw_error("SpectraCo::SpectraCo(SpectraCo const & other) : function is not working !");
+    this -> recalibrate(recal);
+  }
+
+  SpectraCo(std::vector<double> const & data) :
+    m_spectra(data),
+    m_size(data.size()),
+    m_min_value(0),
+    m_max_value(m_size)
+  {
+  }
+
+  SpectraCo& operator=(TH1* root_spectra)
   {
     load(root_spectra);
     return *this;
@@ -107,50 +130,209 @@ public:
     }
 
     m_name = root_spectra->GetName();
-
-    m_size = root_spectra -> GetXaxis() -> GetNbins();
+    m_title = root_spectra->GetTitle();
+    
     m_integral = root_spectra->Integral();
-    m_spectra.reserve(m_size);
-    for (int bin = 0; bin<m_size; bin++) m_spectra[bin] = root_spectra->GetBinContent(bin);
+    m_size = root_spectra -> GetXaxis() -> GetNbins();
     m_min_value = root_spectra -> GetXaxis() -> GetBinLowEdge(0)+1;
     m_max_value = root_spectra -> GetXaxis() -> GetBinLowEdge(m_size)+1;
+
+    m_spectra.resize(m_size);
+    for (int bin = 0; bin<m_size; bin++) m_spectra[bin] = root_spectra->GetBinContent(bin);
   }
 
+  std::vector<double> const & derivative() {return m_derivative;}
+  std::vector<double> const & derivate(int const & smooth = 1)
+  {
+    m_derivative.resize(m_size);
+    double low_sum = 0.0;
+    double up_sum = 0.0;
+    int lower_bin = 0;
+    int upper_bin = m_size;
+    for (int bin = 0; bin<m_size; bin++)
+    {
+      // First, sum the value of all the bins on the left :
+      low_sum = 0.0;
+      for (int bin_low = ((lower_bin = bin-smooth) < 1) ? 0 : lower_bin; bin_low<bin; bin_low++)
+      {
+        low_sum+=m_spectra[bin_low];
+      }
+
+      // Second, sum the value of all the bins on the right :
+      up_sum = 0.0;
+      upper_bin = ((upper_bin = bin+smooth)<(m_size+1)) ? upper_bin : m_size;
+      for (int bin_up = bin; bin_up<upper_bin; bin_up++)
+      {
+        up_sum+=m_spectra[bin_up];
+      }
+
+      // Calculate the derivative : (sum_left - sum_right) / (x_right - x_left)
+      m_derivative[bin] = (low_sum-up_sum)/(2*smooth);
+    }
+    // if (smooth<1) throw_error("in SpectraCo::derivate(int const & smooth = 1) : smooth < 1, can't do that !!");
+    // if (smooth>3) throw_error("in SpectraCo::derivate(int const & smooth = 1) : smooth > 3, can't do that !!");
+    // if (smooth == 1)
+    // {
+    //   m_derivative[0] = m_spectra[1]-m_spectra[0];
+    //   for (int bin = 1; bin<m_size-1; bin++) m_derivative[bin] = (m_spectra[bin+1]-m_spectra[bin-1])/2;
+    //   m_derivative[m_size] = m_spectra[m_size]-m_spectra[m_size-1];
+    // }
+    // else if (smooth == 2)
+    // {
+    //   m_derivative[0] = m_spectra[1]-m_spectra[0]/2;
+    //   m_derivative[1] = m_spectra[2]-m_spectra[0]/2;
+    //   for (int bin = 2; bin<m_size-1; bin++) m_derivative[bin] = (m_spectra[bin+2]+m_spectra[bin+1]-m_spectra[bin-1]-m_spectra[bin-2])/4;
+    //   m_derivative[m_size-1] = m_spectra[m_size]-m_spectra[m_size-2]/2;
+    //   m_derivative[m_size] = m_spectra[m_size]-m_spectra[m_size-1]/2;
+    // }
+    // else if (smooth == 3)
+    // {
+    //   m_derivative[0] = m_spectra[1]-m_spectra[0]/2;
+    //   m_derivative[1] = m_spectra[2]-m_spectra[0]/2;
+    //   m_derivative[2] = m_spectra[3]-m_spectra[1]/2;
+    //   for (int bin = 3; bin<m_size-1; bin++) m_derivative[bin] = (m_spectra[bin+3]+m_spectra[bin+2]+m_spectra[bin+1] - m_spectra[bin-1]-m_spectra[bin-2]-m_spectra[bin-3])/6;
+    //   m_derivative[m_size-2] = m_spectra[m_size-1]-m_spectra[m_size-3]/2;
+    //   m_derivative[m_size-1] = m_spectra[m_size]-m_spectra[m_size-2]/2;
+    //   m_derivative[m_size] = m_spectra[m_size]-m_spectra[m_size-1]/2;
+    // }
+    return m_derivative;
+  }
+
+  std::vector<double> const & derivative2() {return m_derivative2;}
+  std::vector<double> const & derivate2(int const & smooth = 1)
+  {
+    derivate(smooth);
+    m_derivative2.resize(m_size);
+    double low_sum = 0.0;
+    double up_sum = 0.0;
+    int lower_bin = 0;
+    int upper_bin = m_size;
+    for (int bin = 0; bin<m_size; bin++)
+    {
+      // First, sum the value of all the bins on the left :
+      low_sum = 0.0;
+      for (int bin_low = ((lower_bin = bin-smooth) < 1) ? 0 : lower_bin; bin_low<bin; bin_low++)
+      {
+        low_sum+=m_derivative[bin_low];
+      }
+
+      // Second, sum the value of all the bins on the right :
+      up_sum = 0.0;
+      upper_bin = ((upper_bin = bin+smooth)<(m_size+1)) ? upper_bin : m_size;
+      for (int bin_up = bin; bin_up<upper_bin; bin_up++)
+      {
+        up_sum+=m_derivative[bin_up];
+      }
+
+      // Calculate the derivative : (sum_left - sum_right) / (x_right - x_left)
+      m_derivative2[bin] = (low_sum-up_sum)/(2*smooth);
+    }
+    // m_derivative2[0] = m_derivative[1]-m_derivative[0];
+    // for (int bin = 1; bin<m_size-1; bin++)
+    // {
+    //   m_derivative2[bin] = (m_derivative[bin+1]-m_derivative[bin-1]);
+    // }
+    // m_derivative2[m_size] = m_derivative[m_size]-m_derivative[m_size-1];
+    return m_derivative2;
+  }
+
+  void setMinValue( double const & _min_value) {m_min_value = _min_value;}
+  void setMaxValue( double const & _max_value) {m_max_value = _max_value;}
+
+  auto name(std::string const & name) {return (m_name = name);}
+  auto title(std::string const & title) {return (m_title = title);}
+
   auto const & name() const {return m_name;}
+  auto const & title() const {return m_title;}
   auto const & size() const {return m_size;}
   auto const & integral() const {return m_integral;}
   auto const & minValue() const {return m_min_value;}
   auto const & maxValue() const {return m_max_value;}
+
+  auto & get() {return m_spectra;}
+  auto const & get() const {return m_spectra;}
   auto const & lastBin()  const {return m_spectra.back();}
   auto const & back()  const {return m_spectra.back();}
 
-  auto const & operator[] (int const & bin) const {return m_spectra[bin];}
-  auto operator[] (double const & bin) const 
+  TH1D* createTH1D(std::string newName = "", std::string newTitle = "")
   {
-    auto const & bin_low = (int)(bin); //xLow
-    auto const & bin_high = bin_low+1; //xHigh
-    auto const & a = m_spectra[bin_high] - m_spectra[bin_low];// a  =  (y_i+1 - y_i)/(bin_high - bin_low)  =  y_i+1 - y_i
-    auto const & b = m_spectra[bin_low] - a*bin_low;          // b  =  y_i - a*bin_low
+    if (newName == "") newName = m_name;
+    if (newTitle == "") newTitle = m_title;
+    TH1D* out = new TH1D(m_name.c_str(), m_title.c_str(), m_size, this->minValue(), this->maxValue());
+    for (int bin = 0; bin<m_size; bin++) out->SetBinContent(bin, m_spectra[bin]);
+    return out;
+  }
+
+  TH1F* createTH1F(std::string newName = "", std::string newTitle = "")
+  {
+    if (newName == "") newName = m_name;
+    if (newTitle == "") newTitle = m_title;
+    TH1F* out = new TH1F(newName.c_str(), newTitle.c_str(), m_size, this->minValue(), this->maxValue());
+    for (int bin = 0; bin<m_size; bin++) out->SetBinContent(bin, m_spectra[bin]);
+    return out;
+  }
+
+  auto const & get(int const & bin) const {return m_spectra[bin];}
+  auto const & operator[] (int const & bin) const {return m_spectra[bin];}
+  auto & operator[] (int const & bin) {return m_spectra[bin];}
+  double operator[] (double const & bin) const
+  {
+    int i = static_cast<int>(bin); //bin_i
+    if (i<0) i = 0;
+    else if (i > (m_size-1)) i = m_size;
+    double const & a = m_spectra[i+1] - m_spectra[i];// a  =  y_i+1 - y_i
+    double const & b = m_spectra[i] - a*i;           // b  =  y_i - a*bin_i
     return a*bin+b;
+  }
+  
+  SpectraCo operator+(SpectraCo const & other)
+  {
+    if (other.m_size != m_size) throw_error("in operator+(SpectraCo const & other) : other size is different from that of this spectra");
+    SpectraCo spectra(*this);
+    for (int bin = 0; bin<m_size; bin++) spectra[bin] += other[bin];
+    spectra.name(spectra.name()+" + "+other.name());
+    spectra.title(spectra.title()+" + "+other.title());
+    return spectra;
+  }
+
+  SpectraCo operator-(SpectraCo const & other)
+  {
+    if (other.m_size != m_size) throw_error("in operator+(SpectraCo const & other) : other size is different from that of this spectra");
+    SpectraCo spectra(*this);
+    for (int bin = 0; bin<m_size; bin++) spectra[bin] -= other[bin];
+    spectra.name(spectra.name()+" - "+other.name());
+    spectra.title(spectra.title()+" - "+other.title());
+    return spectra;
   }
 
   /// @brief wrapper around operator[]
-  auto interpolate(double const & bin) const {return (*this)[bin];} 
+  double interpolate(double const & bin) const {return (*this)[bin];} 
 
   void recalibrate(Recalibration const & recal)
   {
     std::vector<double> newSpectra(m_size);
-    print(recal);
     for (int bin = 0; bin<m_size; bin++)
     {
-      newSpectra[bin] = interpolate(recal.calculate(bin));
+      auto const & new_bin = recal.calculate(bin);
+      newSpectra[bin] = interpolate(new_bin);
     }
     m_spectra = newSpectra;
   }
 
+  void Draw(const char* param = "")
+  {
+    TH1F* drawer = createTH1F();
+    drawer->Draw(param);
+    // pauseCo();
+  }
+
 private:
   std::vector<double> m_spectra;
-  std::string m_name;
+  std::vector<double> m_derivative;
+  std::vector<double> m_derivative2; // Second derivative
+
+  std::string m_name = "Unnamed";
+  std::string m_title = "Untitled";
 
   int m_size = -1;
   int m_integral = 0;
@@ -158,7 +340,9 @@ private:
   int m_max_value = 0;
 };
 
-class Simplex;
+/////////////
+// VERTICE //
+/////////////
 
 class Vertice
 {
@@ -266,7 +450,6 @@ public:
 private:
   size_t m_dim = 0;
   std::vector<double> m_coordinates;
-  friend Simplex;
 };
 
 std::ostream& operator<<(std::ostream& out, Vertice const & vertice)
@@ -284,24 +467,33 @@ Vertice operator*(double const & constant, Vertice const & vertice)
 
 using Vertices = std::vector<Vertice>;
 
+/////////////
+// SIMPLEX //
+/////////////
+
 class Simplex
 {
 public:
-  Simplex(size_t const & dim) : m_dim(dim+1)
+  Simplex(size_t const & dim) : 
+    m_dim(dim),
+    m_size(m_dim+1)
   {
-    for (size_t i = 0; i<m_dim; i++) m_vertices.push_back(Vertice(dim));
-    // print("dim :", dim, " -> m_dim:", m_dim)
+    for (int i = 0; i<m_size; i++) m_vertices.push_back(Vertice(dim));
   }
 
-  Simplex(Vertices const & vertices) : m_vertices(vertices), m_dim(vertices.size()-1)
+  Simplex(Vertices const & vertices) : 
+    m_vertices(vertices), 
+    m_dim(vertices.size()-1),
+    m_size(m_dim+1)
   {
-    for (auto const & vertex : vertices) if (vertex.m_dim != this->m_dim) 
-      throw_error("in Simplex::Simplex(std::vector<Vertice> const & vertices) : dimension conflict of at least one vertex");
+    for (auto const & vertex : vertices) if (vertex.size() != this->m_dim) 
+      throw_error("in Simplex::Simplex(std::vector<Vertice> const & vertices) : dimension conflict of at least one vertex (simplex must have dim+1 vertices)");
   }
 
   Simplex(Simplex const & other) : 
     m_vertices(other.m_vertices),
     m_dim(other.m_dim),
+    m_size(other.m_size),
     m_centroid(other.m_centroid)
   {
   }
@@ -309,6 +501,7 @@ public:
   Simplex(Simplex && other) : 
     m_vertices(std::move(other.m_vertices)),
     m_dim(std::move(other.m_dim)),
+    m_size(std::move(other.m_size)),
     m_centroid(std::move(other.m_centroid))
   {
   }
@@ -317,6 +510,7 @@ public:
   {
     m_vertices = other.m_vertices;
     m_dim = other.m_dim;
+    m_size = other.m_size;
     m_centroid = other.m_centroid;
     return *this;
   }
@@ -325,12 +519,13 @@ public:
   {
     m_vertices = std::move(other.m_vertices);
     m_dim = std::move(other.m_dim);
+    m_size = std::move(other.m_size);
     m_centroid = std::move(other.m_centroid);
     return *this;
   }
 
-  void setVertice(int const & bin, Vertice const & vertice) {m_vertices[bin] = vertice;}
-  void setVertice(int const & bin, Vertice && vertice) {m_vertices[bin] = std::move(vertice);}
+  void setVertice(int const & bin, Vertice const & vertice) {if (bin<m_size) m_vertices[bin] = vertice;}
+  void setVertice(int const & bin, Vertice && vertice) {if (bin<m_size) m_vertices[bin] = std::move(vertice);}
 
   auto & operator[] (int const & i) {return m_vertices[i];}
   auto const & operator[] (int const & i) const {return m_vertices[i];}
@@ -353,14 +548,17 @@ public:
     return m_centroid;
   }
 
-  auto const & size() const {return m_dim;}
-  auto const & size() {return m_dim;}
+  auto const & size() const {return m_size;}
+  auto const & size() {return m_size;}
+
+  auto const & dim() const {return m_dim;}
+  auto const & dim() {return m_dim;}
 
 private:
   Vertices m_vertices;
   size_t m_dim = 0;
+  int m_size = 0;
   Vertice m_centroid = Vertice(m_dim);
-  friend Vertice;
 };
 
 std::ostream& operator<<(std::ostream& out, Simplex const & simplex)
@@ -384,32 +582,61 @@ public:
   {
     // To generalise here
     m_C = vertice[0];
-    m_recal->seta0(vertice[1]);
-    m_recal->seta1(vertice[2]);
+    for (size_t param = 1; param<vertice.size(); param++) m_recal->setParameter(param, vertice[param]);
     return chi2(ref_spectra, spectra);
   }
+
   double chi2 (SpectraCo const & ref_spectra, SpectraCo const & spectra)
   {
     double sum_errors_squared = 0.0;
+    // print(spectra.size(), m_spectra_threshold);
+    int const & nb_bins_studied = spectra.size()-0;
     for (int bin = 0; bin<spectra.size(); bin++) if (spectra[bin]>0)
     {
-      // Variance of the bin :
-      auto const & weight = 1/spectra[bin];
-
       // Calculate new bin value :
-      auto const & new_bin = m_recal->calculate(bin);
+      double const & new_bin = m_recal->calculate(bin);
 
-      // If new bin is no integer, do a linear interpolation : 
-      auto const & new_value = (new_bin<spectra.size()) ? spectra.interpolate(new_bin) : spectra.lastBin();
+      // Do a linear interpolation to get the value of the new bin :
+      double const & new_value = spectra.interpolate(new_bin);
 
       // Calculate the error for this bin :
-      auto const & error = ref_spectra[bin] - m_C*new_value;
+      double const & error = ref_spectra[bin] - m_C*new_value;
 
-      // Add it to the total squared error of the spectra :
+      // Variance of the bin :
+      double const & weight = 1/spectra[bin]; // V = sigma² = 1/N
+
+      // Add the error to the total squared error of the spectra :
+      sum_errors_squared += error*error*weight;
+
+      // print(spectra[bin], weight, new_bin, new_value, error, sum_errors_squared);
+    }
+    // print(sum_errors_squared/(nb_bins_studied-m_nb_freedom_degrees));
+    // pauseCo();
+    return sum_errors_squared/(nb_bins_studied-m_nb_freedom_degrees);
+  }
+
+  double chi2_second_derivative(SpectraCo & ref_spectra, SpectraCo & test_spectra)
+  {
+    if (ref_spectra.derivative2().size()<1) ref_spectra.derivate2();
+    double sum_errors_squared = 0.0;
+    // print(test_spectra.size(), m_spectra_threshold);
+    // int const & nb_bins_studied = test_spectra.size()-m_spectra_threshold;
+    // for (int bin = m_spectra_threshold; bin<test_spectra.size(); bin++) if (test_spectra[bin]>0)
+    SpectraCo recal_spectra(test_spectra, *m_recal);
+    auto & derivative2_spectra = recal_spectra.derivate2();
+    for (int bin = 0; bin<test_spectra.size(); bin++) if (test_spectra[bin]>0)
+    {
+      // Variance of the bin :
+      double const & weight = 1/derivative2_spectra[bin];
+
+      // Calculate the error for this bin :
+      double const & error = ref_spectra[bin] - m_C*derivative2_spectra[bin];
+
+      // Add it to the total squared error of the test_spectra :
       sum_errors_squared += error*error*weight;
       
     }
-    return sum_errors_squared/(spectra.size()-m_nb_freedom_degrees);
+    return sum_errors_squared/(test_spectra.size()-m_nb_freedom_degrees);
   }
 
   void setDegreesOfFreedom(int const & degrees) {m_nb_freedom_degrees = degrees;}
@@ -426,7 +653,7 @@ public:
   void setMinaSqrt (double const & _minaSqrt) {m_minaSqrt = _minaSqrt;}
   void setMaxaSqrt (double const & _maxaSqrt) {m_maxaSqrt = _maxaSqrt;}
 
-  std::vector<double> minimise(SpectraCo const & ref_spectra, SpectraCo const & spectra, std::string const & method = "nelder-mead")
+  Vertice minimise(SpectraCo const & ref_spectra, SpectraCo const & spectra, std::string const & method = "nelder-mead")
   {
     if (method == "nelder-mead")
     {
@@ -448,20 +675,22 @@ public:
       double minimum_chi2 = 0; // First dumb chi2
       int loop_i = 0;
 
-      while(loop_i<500)
+      while(loop_i<50)
       {
         // 1.a Calculate the chi2 for each vertice of the simplex :
         std::vector<double> chi2s;
         for (auto const & vertice : simplex) chi2s.push_back(this -> chi2(ref_spectra, spectra, vertice));
 
-        // print("chi2s");
-        // print(chi2s);
+        print("");
+        print("chi2s");
+        print(chi2s);
 
         auto const & dim = chi2s.size()-1;
 
         // 1.b Sorts the chi2s
         std::vector<double> ordered_chi2s;
-        std::vector<int> ordered_indexes = bubbleSort(chi2s);
+        std::vector<int> ordered_indexes;
+        bubbleSort(chi2s, ordered_indexes);
         for (auto const & index : ordered_indexes) ordered_chi2s.push_back(chi2s[index]);
 
         // Calculate the centroid 
@@ -471,7 +700,7 @@ public:
         Vertice reflection (centroid + nmParam.alpha*(centroid - simplex[ordered_indexes.back()]));
         // 2.b Compute its chi2
         auto chi2_reflection = chi2(ref_spectra, spectra, reflection);
-        // print("chi2_reflection", chi2_reflection);
+        print("chi2_reflection", chi2_reflection);
         
         if (chi2_reflection < ordered_chi2s[0])
         { // If chi2_1>chi2_reflection
@@ -479,7 +708,7 @@ public:
           Vertice expansion(centroid + nmParam.beta*(reflection-centroid));
           // 3.b Compute its chi2
           auto chi2_expansion = chi2(ref_spectra, spectra, expansion);
-          // print("chi2_expansion", chi2_expansion);
+          print("chi2_expansion", chi2_expansion);
           if (chi2_expansion < chi2_reflection) simplex[ordered_indexes.back()] = expansion;
           else simplex[ordered_indexes.back()] = reflection;
         }
@@ -493,7 +722,7 @@ public:
           Vertice outsideContraction(centroid + nmParam.gamma*(reflection-centroid));
           // 4.b Compute its chi2
           auto chi2_outside_contraction = chi2(ref_spectra, spectra, outsideContraction);
-        // print("chi2_outside_contraction", chi2_outside_contraction);
+          print("chi2_outside_contraction", chi2_outside_contraction);
           if (chi2_outside_contraction < chi2_reflection) simplex[ordered_indexes.back()] = outsideContraction;
         }
         else if (ordered_chi2s[dim] < chi2_reflection)
@@ -502,12 +731,12 @@ public:
           Vertice insideContraction(centroid - nmParam.gamma*(reflection-centroid));
           // 5.b Compute its chi2
           auto chi2_inside_contraction = chi2(ref_spectra, spectra, insideContraction);
-        // print("chi2_inside_contraction", chi2_inside_contraction);
+        print("chi2_inside_contraction", chi2_inside_contraction);
           if (chi2_inside_contraction < chi2_reflection) simplex[ordered_indexes.back()] = insideContraction;
         }
 
         // 6 Shrinks the simplex :
-        Simplex tempSimplex(tempSimplex);
+        Simplex tempSimplex(simplex);
         tempSimplex[0] = simplex[ordered_indexes[0]]; // this is the best point
         for (size_t point_i = 1; point_i<dim+1; point_i++)
         {
@@ -515,21 +744,26 @@ public:
         }
 
         simplex = tempSimplex;
-      // print("second simplex : ");
-        // print(simplex);
+      print("second simplex : ");
+        print(simplex);
         // auto pauseCo();
 
-        double const & min_chi2 = chi2(ref_spectra, spectra, tempSimplex[0]);
-        // print(loop_i, min_chi2, minimum_chi2, abs((minimum_chi2-min_chi2)/minimum_chi2));
+        double const & min_chi2 = chi2(ref_spectra, spectra, simplex[0]);
+        print(loop_i, min_chi2, minimum_chi2, abs((minimum_chi2-min_chi2)/minimum_chi2));
         // if ( loop_i>10 && abs((minimum_chi2-min_chi2)/minimum_chi2) < 0.001) break;
         minimum_chi2 = min_chi2;
-      loop_i++;
+        loop_i++;
       }
+      print(loop_i);
       print(simplex);
+      return simplex[0];
     }
+    else return Vertice({});
   }
 
   auto operator->() {return m_recal;}
+
+  void setThreshold(int const & bin) {m_spectra_threshold = bin;}
 
 private:
   Recalibration * m_recal = nullptr;
@@ -558,17 +792,18 @@ private:
   } nmParam;
 
   int m_nb_freedom_degrees = 3; // 1 : rescaling | 2 : 1+offset | 3 : 1+affine | 4 : 1+quadratic ...
+  int m_spectra_threshold = 0;
 };
 
 class SpectraAlignator
 {
 public:
-  SpectraAlignator(TH1* ref)
+  SpectraAlignator(TH1* ref) :
+    m_ref_spectra(ref)
   {
-    m_ref_spectra = ref;
   }
 
-  Recalibration const & alignSpectra(TH1* _spectra, TH1* spectra_output, int const & degreesOfFreedom = 3)
+  Recalibration const & alignSpectra(TH1* _spectra, TH1* spectra_output, int const & degreesOfFreedom = 3, double const & energyThreshold = 0)
   {
     m_spectra.emplace_back(_spectra);
     auto & spectra = m_spectra.back();
@@ -577,27 +812,28 @@ public:
     m_minimisator.emplace_back(&recal);
     auto & minimisator = m_minimisator.back();
     minimisator.setDegreesOfFreedom(degreesOfFreedom);
+    if (energyThreshold>0 && energyThreshold<_spectra->GetXaxis()->GetXmax()) minimisator.setThreshold(_spectra->FindBin(energyThreshold));
 
     // std::vector<std::vector<std::vector<double>>> minimisation_space;
 
     double const & C_dumb = 1;
-    double const & C_min = C_dumb - 0.5;
-    double const & C_max = C_dumb + 0.5;
+    double const & C_min = C_dumb - 0.1;
+    double const & C_max = C_dumb + 0.1;
     double const & C_0 = (C_min+C_max)/2;
     double const & C_steps = (C_max-C_min)/m_nb_iterations;
     
-    double const & a0_min = -3;
-    double const & a0_max = 3;
+    double const & a0_min = -0.5;
+    double const & a0_max = 0.5;
     double const & a0_0 = (a0_min+a0_max)/2;
     double const & a0_steps = (a0_max-a0_min)/m_nb_iterations;
     
-    double const & a1_min = 0.9;
-    double const & a1_max = 1.1;
+    double const & a1_min = 0.99;
+    double const & a1_max = 1.005;
     double const & a1_0 = (a1_min+a1_max)/2;
     double const & a1_steps = (a1_max-a1_min)/m_nb_iterations;
 
-    double const & a2_min = -0.001;
-    double const & a2_max = 0.001;
+    double const & a2_min = -0.00001;
+    double const & a2_max = 0.00001;
     double const & a2_0 = (a2_min+a2_max)/2;
     double const & a2_steps = (a2_max-a2_min)/m_nb_iterations;
 
@@ -608,9 +844,9 @@ public:
     auto min_a2 = a2_0;
 
     minimisator.setC(min_C);
-    minimisator->seta0(min_a0);
-    minimisator->seta1(min_a1);
-    if (degreesOfFreedom>3) recal.seta2(min_a2);
+    minimisator->a0(min_a0);
+    minimisator->a1(min_a1);
+    if (degreesOfFreedom>3) recal.a2(min_a2);
 
     auto min_chi2 = minimisator.chi2(m_ref_spectra, spectra);
     if (degreesOfFreedom>3) print(min_chi2, min_C, min_a0, min_a1, min_a2);
@@ -631,17 +867,15 @@ public:
             if (degreesOfFreedom>3) for (int a2 = 0; a2<m_nb_iterations; a2++)
             {
               tries++;
-              auto const & C_value = C_min+C*C_steps;
-              auto const & a0_value = a0_min+a0*a0_steps;
-              auto const & a1_value = a1_min+a1*a1_steps;
-              auto const & a2_value = a2_min+a2*a2_steps;
-              minimisator.setC(C_value);
-              recal.seta0(a0_value);
-              recal.seta1(a1_value);
-              recal.seta2(a2_value);
-              
-              auto const & _chi2 = minimisator.chi2(m_ref_spectra, spectra);
+              double const & C_value = C_min+C*C_steps;
+              double const & a0_value = a0_min+a0*a0_steps;
+              double const & a1_value = a1_min+a1*a1_steps;
+              double const & a2_value = a2_min+a2*a2_steps;
 
+              minimisator.setC(C_value);
+              double const & _chi2 = minimisator.chi2(m_ref_spectra, spectra, Vertice({a0_value, a1_value, a2_value}));
+
+              m_chi2_spectra->Fill(min_a0, min_a1, min_C);
               if (_chi2 < min_chi2)
               {
                 min_C  = C_value ;
@@ -650,24 +884,27 @@ public:
                 min_a2 = a2_value;
                 min_chi2 = _chi2;
                 print(min_chi2, min_C, min_a0, min_a1, min_a2);
-                m_chi2_spectra->Fill(min_a0, min_a1, min_C);
               } 
             }
             else
             {
               tries++;
-              auto const & C_value = C_min+C*C_steps;
+              double const & C_value = C_min+C*C_steps;
               // print(C_value, C_min, C,C_steps);
-              auto const & a0_value = a0_min+a0*a0_steps;
-              auto const & a1_value = a1_min+a1*a1_steps;
+              double const & a0_value = a0_min+a0*a0_steps;
+              double const & a1_value = a1_min+a1*a1_steps;
               minimisator.setC(C_value);
-              minimisator->seta0(a0_value);
-              minimisator->seta1(a1_value);
+              minimisator->a0(a0_value);
+              minimisator->a1(a1_value);
               // print(recal);
-              auto const & _chi2 = minimisator.chi2(m_ref_spectra, spectra);
+              // double const & _chi2 = minimisator.chi2_second_derivative(m_ref_spectra, spectra);
+              double const & _chi2 = minimisator.chi2(m_ref_spectra, spectra);
               // print(a0_value, a1_value, C_value);
               // print(a0_value, a1_value, C_value, _chi2);
               m_chi2_spectra->SetBinContent(a0, a1, C, _chi2);
+//               print(_chi2, C_value
+// ,a0_value
+// ,a1_value);
 
               // if ((int)(C_value+a0_value+a1_value)%100 == 0) print(_chi2, C_value, a0_value, a1_value);
 
@@ -700,15 +937,16 @@ public:
 
       print(recal);
     }
-    // Set minimum values after minimisation :
+
+    // Set the previously found minimum values :
     if (degreesOfFreedom>3) print(min_chi2, min_C, min_a0, min_a1, min_a2);
     else print(min_chi2, min_C, min_a0, min_a1);
-    minimisator.setC(min_C);
-    recal.seta0(min_a0);
-    recal.seta1(min_a1);
+    recal.a0(min_a0);
+    recal.a1(min_a1);
+    if (degreesOfFreedom>3) recal.a2(min_a2);
 
     spectra.recalibrate(recal);
-    delete spectra_output;
+    if (spectra_output) delete spectra_output;
     spectra_output = new TH1F(
       (spectra.name()+"_recal").c_str(), 
       (spectra.name()+"_recal").c_str(), 
@@ -748,6 +986,7 @@ private:
   int m_nb_iterations = 20;
   bool m_brute_force = false;
   TH3F* m_chi2_spectra = nullptr;
+  int m_spectra_threshold = 0;
 };
 
 #endif //SPECTRAALINGATOR_HPP

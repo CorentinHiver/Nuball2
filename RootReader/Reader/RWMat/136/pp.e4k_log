@@ -12,3 +12,7 @@
        ...Total background spectrum file name =  pp_bx.spe
 30-Aug-23 17:29:48: Percentage error on background = 5.000000
 30-Aug-23 17:29:48:  2D Scaling factor = 16.115135
+17-Nov-23 16:35:07: Energy calibration file = ../nuball.aca
+17-Nov-23 16:35:14: Efficiency calibration file = ../nuball2.aef
+17-Nov-23 16:35:29: Error for energy calibration = 0.100000
+17-Nov-23 16:35:29: Percentage error on efficiency = 3.000000
