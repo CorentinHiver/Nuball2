@@ -231,9 +231,15 @@ public:
 
   void rebin(std::string const & detector, Time_ns const & bin_size_ns)
   {
-    if (!find_key(detector)) throw_error("in Timeshifts::rebin(std::string detector, float bin_size_ns) : detector not known !!");
+    if (!find_key(m_bins_per_ns, detector)) throw_error("in Timeshifts::rebin(std::string detector, float bin_size_ns) : detector not known !!");
     m_bins_per_ns[detector] = bin_size_ns;
   }
+
+  // TODO :
+  // void rebin(Label const & label, Time_ns const & bin_size_ns)
+  // {
+  //   m_bins_per_ns_labels[label] = bin_size_ns;
+  // }
 
 private:
 
@@ -289,6 +295,9 @@ private:
     {"paris", 10.}, 
     {"dssd",  0.5}
   };
+
+  // Idem, but allows to handle individual labels; TODO
+  // std::map<dType, Time_ns> m_bins_per_ns_labels;
 
   // This map tell if the timeshift is preferently taken as the 
   std::map<dType, bool> m_RF_preferred = 
@@ -434,7 +443,7 @@ bool Timeshifts::InitializeRaw()
     auto const & type = detectors.type(label);
 
     m_time_spectra[label].reset(name.c_str(), name.c_str(), m_timewindow_ns*m_bins_per_ns[type], -m_timewindow/2, m_timewindow/2);
-      
+
   #ifdef USE_RF
     m_histograms_VS_RF[label].reset((name+"_RF").c_str(), (name+"_RF").c_str(), m_timewindow_ns*m_bins_per_ns[type], -m_timewindow/2, m_timewindow/2);
     if (type == "RF")
