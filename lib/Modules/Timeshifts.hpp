@@ -220,11 +220,6 @@ public:
     return true;
   }
 
-  void rebin(Label const & label, int const & rebin)
-  {
-    m_rebin[label] = rebin;
-  }
-
   std::vector<bool>  m_RF_preferred_label; // Used to force RF measurement for specific labels;
   std::vector<uchar> m_nb_shifts_RF_peak;  // If the peak is not within [+- RF_period] then one need to shift it accordingly
   std::vector<bool>  m_edge_preferred_label; // Used to force RF measurement for specific labels;
