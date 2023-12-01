@@ -195,7 +195,7 @@ public:
   auto const & step() {return m_step;}
 
   /**
-   * @brief 
+   * @brief Shifts the buffer of hits by a certain amount
    * 
    * @param n:
    * if n == 0 nothing happens
@@ -203,10 +203,10 @@ public:
    * if n<0 moves the n last cells to the beginning, size stays the same
    * @details
    * Example : 
-   * Buffer buffer = {hit1, hit2, hit3, hit4};
+   * HitBuffer buffer = {hit1, hit2, hit3, hit4};
    * buffer.shift( 2); // buffer = {empty1, empty2, hit1, hit2, hit3, hit4}
    * buffer.shift(-2); // buffer = {hit3, hit4, hit1, hit2}
-   * Carefull : for n>0 , need to copy twice the data, so it can be very long (I think complexity is something like O(2n))
+   * Carefull : for n>0 , need to copy twice the data, so it can be very long
    */
   void shift(int n)
   {

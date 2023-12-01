@@ -918,7 +918,7 @@ void Timeshifts::analyse()
       else
       {// For all the other detectors :
         double mean = 0.;
-        if (getMeanPeak(m_time_spectra[label], mean)) m_timeshifts[label] = Shift_cast(mean); else m_timeshifts[label] = 0;
+        if (getMeanPeak(m_time_spectra[label].get(), mean)) m_timeshifts[label] = Shift_cast(mean); else m_timeshifts[label] = 0;
         if (m_verbose) print( "Mean :", m_timeshifts[label], "with max =", int_cast(m_time_spectra[label] -> GetMaximum()), "counts.");
       }
     }

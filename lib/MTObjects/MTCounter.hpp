@@ -40,7 +40,7 @@ public:
   void operator=(T const & t) {m_counter.store(size_cast(t), std::memory_order_relaxed);}
 
 private:
-  std::atomic<size_t> m_counter{0};
+  std::atomic<ulonglong> m_counter{0};
 };
 
 std::ostream& operator<<(std::ostream& os, MTCounter const & counter)

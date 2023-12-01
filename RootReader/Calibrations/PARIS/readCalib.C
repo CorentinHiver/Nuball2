@@ -1,10 +1,13 @@
 #include "../../../lib/libRoot.hpp"
 
-void readCalib(std::string const & filename = "CalibParis.csv")
+// The point is to create in the end a kind of CSVReader class with this data format
+// void readCalib(std::string const & filename = "CalibParis.csv")
+void readCalib(std::string const & filename = "datapoints.csv")
 {
   ifstream file(filename, std::ios::in);
 
-  std::vector<int> data_column_index = {2,3,4,5,6}; // The index of the wanted rows
+  std::vector<int> data_column_index = {1,2,3}; // The index of the wanted rows
+  // std::vector<int> data_column_index = {2,3,4,5,6}; // The index of the wanted rows
   int label_index = 0;                              // The index of the row label (usually = 0)
   char delim = ';';                                 // The delimiter of the csv file
 

@@ -509,7 +509,7 @@ public:
   #endif //MTOBJECT_HPP
   }
 
-  void makeFolderList() {print(m_recursive_folders); m_recursive_folders = getList(m_path,'/');}
+  void makeFolderList() {m_recursive_folders = getList(m_path,'/');}
 
   int  nbFiles() {return nb_files_in_folder(m_path);}
   bool exists() {return folder_exists(m_path);}
@@ -681,9 +681,7 @@ public:
           m_file(file.m_file), 
           m_path(file.m_path), 
           m_filename(file.m_filename) 
-  { }
-
-  
+  {}
 
   File(std::string const & file, std::string const & mode = "") 
   {
@@ -698,11 +696,6 @@ public:
     checkMode(mode);
     check();
   }
-
-  void checkMode(std::string const & mode)
-  {
-    if (mode == "in" || mode == "read" || mode == "input") check_verif = true;
-  }
   
   File(Path const & path, Filename const & filename, std::string const & mode = "") :
     m_path(path), 
@@ -711,6 +704,11 @@ public:
     update();
     checkMode(mode);
     check();
+  }
+
+  void checkMode(std::string const & mode)
+  {
+    if (mode == "in" || mode == "read" || mode == "input") check_verif = true;
   }
 
   auto c_str() {return m_file.c_str();}
@@ -742,22 +740,18 @@ public:
   std::string const & get   () const {return m_file;}
 
   Path const & path  () const {return m_path;}
-
+  Folder const & folder() const {return m_path.folder();}
   Filename    const & name    () const {return m_filename;}
   Filename    const & filename() const {return m_filename;}
-
   std::string const & shortName() const {return m_filename.shortName();}
   std::string const & extension() const {return m_filename.extension();}
 
   void setExtension(std::string const & new_extension) {m_filename.setExtension(new_extension); update();}
   void makePath() {m_path.make();}
 
-
   operator bool() const & {return m_ok;}
   bool const & ok()       {return m_ok;}
-
   bool exists() const {return file_exists(m_file);}
-
   auto size(std::string const & unit = "o") const {return size_file(m_file, unit);}
 
 private:

@@ -110,7 +110,7 @@ void readDSSD(char choix = 0)
 
   else if (choix == 1 || choix == 2)
   {// Reads the DSSD_final.root
-    detectors.load("../index_129.dat");
+    detectors.load("../index_129.list");
     ofstream outFile("DSSD_calib_169.data");
     auto file = TFile::Open("DSSD_final.root", "READ");
     std::vector<TH2F*> matrixes;
@@ -120,11 +120,12 @@ void readDSSD(char choix = 0)
       auto const & label = detectors.getLabel(name);
       matrixes.emplace_back(file->Get<TH2F>(name.c_str()));
       if (!matrixes.back()) continue;
+      matrixes.back()->RebinY(4);
       proj169.emplace_back(new TH1D());
       auto & histo = proj169.back();
       CoAnalyse::projectY(matrixes.back(), histo, 167., 171.);
 
-      if (histo->Integral()<500) 
+      if (histo->Integral()<200)
       {
         print("CAN'T CALIBRATE", name, ": only", histo->Integral(), "counts");
         outFile << label << " " << 5700 << " " << "N/A" << std::endl;
@@ -143,28 +144,27 @@ void readDSSD(char choix = 0)
     outFile.close();
   }
 
-  if (choix == 3 || choix == 4)
-  {
-    detectors.load("../index_129.dat");
-    ofstream outFile("DSSD_calib_169.data");
-    auto file = TFile::Open("DSSD_rings_proj.root", "READ");
+  else if (choix == 3 || choix == 4)
+  {// Reads the DSSD_final.root
+    detectors.load("../index_129.list");
+    ofstream outFile("DSSD_calib_546.data");
+    auto file = TFile::Open("DSSD_final.root", "READ");
     std::vector<TH2F*> matrixes;
-    std::vector<TH1D*> proj_R0;
+    std::vector<TH1D*> proj545;
     for (auto const & name : names)
     {
       auto const & label = detectors.getLabel(name);
-      std::string name_matrix = name+"_proj510";
-      matrixes.emplace_back(file->Get<TH2F>(name_matrix.c_str()));
+      matrixes.emplace_back(file->Get<TH2F>(name.c_str()));
+      matrixes.back()->RebinY(4);
       if (!matrixes.back()) continue;
-      proj_R0.emplace_back(new TH1D());
-      auto & histo = proj_R0.back();
-      CoAnalyse::projectY(matrixes.back(), histo, 0, 1);
-      histo -> GetXaxis() -> SetRangeUser(9000, 15000);
+      proj545.emplace_back(new TH1D());
+      auto & histo = proj545.back();
+      CoAnalyse::projectY(matrixes.back(), histo, 544., 547.);
 
-      if (histo->Integral()<500) 
+      if (histo->Integral()<100)
       {
-        print("CAN'T CALIBRATE", name_matrix, ": only", histo->Integral(), "counts");
-        outFile << label << " " << 5700 << " " << "N/A" << std::endl;
+        print("CAN'T CALIBRATE", name, ": only", histo->Integral(), "counts");
+        outFile << label << " " << 9000 << " " << "N/A" << std::endl;
         continue;
       }
 
@@ -174,8 +174,44 @@ void readDSSD(char choix = 0)
 
       auto mean = (choix == 4) ? calib(histo, true, true) : calib(histo);
 
-      // Write down the mean value of the peak :
-      outFile << label << " " << 5700 << " " << mean << std::endl;
+      // Write down the center value :
+      outFile << label << " " << 9000 << " " << mean << std::endl;
+    }
+    outFile.close();
+  }
+
+  else if (choix == 5 || choix == 6)
+  {// Reads the DSSD_final.root
+    detectors.load("../index_129.list");
+    ofstream outFile("DSSD_calib_3000.data");
+    auto file = TFile::Open("DSSD_final.root", "READ");
+    std::vector<TH2F*> matrixes;
+    std::vector<TH1D*> proj3000;
+    for (auto const & name : names)
+    {
+      auto const & label = detectors.getLabel(name);
+      matrixes.emplace_back(file->Get<TH2F>(name.c_str()));
+      matrixes.back()->RebinY(6);
+      if (!matrixes.back()) continue;
+      proj3000.emplace_back(new TH1D());
+      auto & histo = proj3000.back();
+      CoAnalyse::projectY(matrixes.back(), histo, 2980., 3020.);
+
+      if (histo->Integral()<50)
+      {
+        print("CAN'T CALIBRATE", name, ": only", histo->Integral(), "counts");
+        outFile << label << " " << 5250 << " " << "N/A" << std::endl;
+        continue;
+      }
+
+      ////////////////////
+      // Fit the peak : //
+      ////////////////////
+
+      auto mean = (choix == 6) ? calib(histo, true, true) : calib(histo);
+
+      // Write down the center value :
+      outFile << label << " " << 5250 << " " << mean << std::endl;
     }
     outFile.close();
   }

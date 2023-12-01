@@ -27,6 +27,8 @@ public:
 
   //Getters :
   Path const & path() const {return m_path;}
+  auto const & get() const {return m_listFiles;}
+  auto & get() {return m_listFiles;}
   ListFiles   const & getListFiles     () const { return m_listFiles ;}
   ListFolders const & getListFolders   () const { return m_listFolder;}
 

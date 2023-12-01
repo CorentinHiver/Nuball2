@@ -115,7 +115,7 @@ T minimumIndex(std::vector<T> const & vector)
 }
 
 template <typename T>
-std::vector<int> bubbleSort(std::vector<T> & vector, std::vector<int> & indexes)
+std::vector<int> bubbleSort(std::vector<T> const & vector, std::vector<int> & indexes)
 {
   if (vector.size() != indexes.size()) indexes.resize(vector.size());
   double v = 0;
@@ -138,7 +138,7 @@ std::vector<int> bubbleSort(std::vector<T> & vector, std::vector<int> & indexes)
 }
 
 template <typename T>
-std::vector<int> bubbleSort(std::vector<T> & vector)
+std::vector<int> bubbleSort(std::vector<T> const & vector)
 {
   std::vector<int> ordered_indexes(vector.size());
   bubbleSort(vector, ordered_indexes);

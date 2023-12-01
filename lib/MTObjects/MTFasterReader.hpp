@@ -127,10 +127,17 @@ public:
   // Files handling :
   bool addFolder(Path path, int const & nb_files = -1) 
   {
-    auto const ret = m_files.addFolder(path, nb_files);
-    return ret;
+    return m_files.addFolder(path, nb_files);
   }
+
+  bool addFile(File file) 
+  {
+    return m_files.addFiles(file.string());
+  }
+
   void printMTFiles() {for (auto const & file : m_MTfiles) print(file);}
+  auto const & files() const {return m_files;}
+  auto & files() {return m_files;}
 
   // Other parameters :
   void setTimeshifts(std::vector<Time> const & timeshifts) {m_timeshifts = timeshifts;}

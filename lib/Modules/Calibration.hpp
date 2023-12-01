@@ -756,7 +756,7 @@ void Calibration::peakFinder(std::string const & source)
       std::cout << "scale factor = " << scalefactor << std::endl;
     }
 
-    AddTH1(m_histos.all_raw_spectra, histo, label);
+    AddTH1(m_histos.all_raw_spectra.get(), histo.get(), label);
     
     // Initialises vmaxchan at the last bin (right of the spectra)
     vmaxchan=nbins;
