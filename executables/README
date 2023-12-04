@@ -1,3 +1,7 @@
 to know the parameters, one has to simply call the executable : 
 $ ./executable
 > Usage of executable ....
+
+manip2root uses faster2root. Therefore you can modify faster2root according to how you want to convert each run
+
+example of some parameters files like the trigger or list of runs are in the parameters/ folder

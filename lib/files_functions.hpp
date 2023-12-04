@@ -463,8 +463,11 @@ public:
       if (folder == "../")
       {
         m_recursive_folders.erase(i);   // Delete ".." folder
-        m_recursive_folders.erase(--i); // Delete previous folder that is "cancelled" by ".."
-        --i; // Go back to previous folder
+        if (i>0) 
+        {
+          m_recursive_folders.erase(--i); // Delete previous folder that is "cancelled" by ".."
+          --i; // Go back to previous folder
+        }
       }
       else if (folder == "./")
       {
@@ -496,13 +499,15 @@ public:
     // To ensure it finishes with a '/' :
     push_back_if_none(m_path, '/');
 
+    //Additionnal information ;
+    this -> makeFolderList();
+
+    // To clean the path of the ./ and ../
+    this -> cleanPath();
+
     // Create the folder if it doesn't exist yet :
     if (!(m_exists = folder_exists(m_path)) && create) this -> make();
     if (!(m_exists = folder_exists(m_path))) print(m_path+" doesn't exist !!");
-
-    //Additionnal information ;
-    this -> makeFolderList();
-    this -> cleanPath();
 
   #ifdef MTOBJECT_HPP
     if (MTObject::ON) MTObject::shared_mutex.unlock();  

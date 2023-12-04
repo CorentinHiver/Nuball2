@@ -220,7 +220,7 @@ void Faster2Root::loadTriggerFile(std::string const & filename)
 Faster2Root::Faster2Root(int argc, char** argv, Trigger trigger)
 {
   // Handle the case of not enough parameters (0 or 1) and print the parameters :
-  if (argc<2) 
+  if (argc<3) 
   {
     print("Not enough parameters !!!");
     printParameters();

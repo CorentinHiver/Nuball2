@@ -1,8 +1,8 @@
-#ifndef MANIP_H
-#define MANIP_H
+#ifndef MANIP_HPP
+#define MANIP_HPP
 
-#include <MTList.hpp>
-#include <libCo.hpp>
+#include "../MTObjects/MTList.hpp"
+#include "../libCo.hpp"
 
 class Manip
 {
@@ -106,6 +106,11 @@ public:
     }
   }
 
+  bool operator>>(std::string & string)
+  {
+    return this->getNext(string);
+  }
+
   void reset() { i = 0; }
 
 private:  
@@ -128,4 +133,4 @@ std::ostream& operator<<(std::ostream& cout, Manip const & manip)
   return cout;
 }
 
-#endif //MANIP_H
+#endif //MANIP_HPP

@@ -112,11 +112,11 @@ public:
     if (!s_initialised)
     {
     #ifdef MTOBJECT_HPP
-      #if __cplusplus >= 201703L
-        lock_mutex(MTObject::mutex);
-      #else
+      // #if __cplusplus >= 201703L
+        // lock_mutex(MTObject::mutex);
+      // #else
         MTObject::mutex.lock();
-      #endif //__cplusplus >= 201703L
+      // #endif //__cplusplus >= 201703L
     #endif //MTOBJECT_HPP
 
       print("Initialising clovers arrays");
@@ -132,8 +132,9 @@ public:
       }
       s_initialised = true;
 
-    #if defined (MTOBJECT_HPP) && __cplusplus < 201703L
-      MTObject::mutex.lock();
+    #if defined (MTOBJECT_HPP)
+    // && __cplusplus < 201703L
+      MTObject::mutex.unlock();
     #endif
 
     }
