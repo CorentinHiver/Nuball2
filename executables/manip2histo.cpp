@@ -20,8 +20,8 @@ int main(int argc, char ** argv)
     std::string run;
     while(manip >> run)
     {
-      Path input (argv[2]+run);
-      Path output(argv[3]+removeExtension(run), true);
+      Path input (Path(argv[2])+run);
+      Path output(Path(argv[3])+removeExtension(run), true);
       // std::string command = "./faster2histo"+parameters+" -F "+;
       std::string command = concatenate("./faster2histo", parameters, " -F ", input.string(), " -1 -O ", output.string());
       // print(command.c_str());
