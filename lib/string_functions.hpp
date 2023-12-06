@@ -131,9 +131,9 @@ bool remove(std::string & string, std::string const & substr)
 template<class T>
 std::string my_to_string(const T& value)
 {
-    std::ostringstream oss;
-    oss << value;
-    return oss.str();
+  std::ostringstream oss;
+  oss << value;
+  return oss.str();
 }
 
 /// @brief Concatenate a series of arguments into a big string
@@ -141,9 +141,9 @@ std::string my_to_string(const T& value)
 template<class... Args>
 std::string concatenate(Args&&... args)
 {
-    std::ostringstream oss;
-    (oss << ... << to_string_with_vector(std::forward<Args>(args)));
-    return oss.str();
+  std::ostringstream oss;
+  (oss << ... << my_to_string(std::forward<Args>(args)));
+  return oss.str();
 }
 
 #endif //STRING_FUNCTIONS_HPP
