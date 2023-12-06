@@ -61,7 +61,7 @@ inline Long64_t Long64_cast(T const & t) {return static_cast<Long64_t>(t);}
 // Some Initialisiations //
 ///////////////////////////
 
-TRandom* gRandom = new TRandom(time(0));
+// TRandom gRandom(time(0));
 
 
 ////////////////////////////

@@ -1,0 +1,143 @@
+MANUEL of NearLine2 v1.2
+
+---------------------------
+List of precompiler options
+---------------------------
+
+#define FATIMA
+#define PARIS
+#define EDEN
+#define USE_RF
+#define USE_DSSD
+#define QDC2
+
+----------------------------
+List of ./NearLine arguments
+----------------------------
+The following arguments are corrections to the parameter.dat file.
+Meaning they overwrite the corresponding parameter of the file.
+
+|multithreading:|
+-m nb_threads
+
+|input file:|
+-f filename.root||fast||list
+
+|input directory:|
+-d directory/||directory.list
+
+----------------
+List of inputs
+----------------
+
+MANDATORY THE FIRST INPUT :
+ID: ID.dat |The ID file obtained from the sample.pid|
+
+TIMESHIFT_DATA: [deltaT.dat] |Loads a pre-existing time shift file|
+
+CALIBRATION: [calib.dat] |Loads a pre-existing energy calibration (gain matching) file|
+
+DATADIR: [directory_name/||directories.list] (mandatory in first position)
+         [root_eventbuild] |if the readed files are already eventbuilt root files|
+         nb: [nb files to read in the folder]
+         step: [nb files skipped]
+         start: [start with n-th file, default n = 1]
+
+ -> Also, one can make a list of folders in a .dat file
+
+DATAFILE: [filename.(root||fast||list)] |Load the datafile .root or .fast.|
+ -> Also, one can make a list of files in a .list file
+ -> Update NearLine2 : you can add as many files as you want using the two previous commands.
+
+OUTDIR: [directory]
+
+BINNING: calibrated: Ge:    [nb_bins] [min_bin] [max_bin]
+                     BGO:   [[idem]]
+                     LaBr3: [[idem]]
+         uncalibrated: [[[idem]]]
+         bidim: [[[idem]]]
+
+THRESHOLD: [energy threshold in keV] |only for calibrated spectra|
+
+NB_THREADS: [number of threads]
+
+-----------------
+List of constants
+-----------------
+
+EDEN_TO_LICORNE_DISTANCE= [268] (cm)
+GAMMA_FLASH= [ns] (ns)
+
+----------------
+List of options
+----------------
+
+TEMP_TREE_ON_DISK  /!\ NOT FUNCTIONNAL /!\ |if set, the temporary tree used for analysis is written on disk instead of staying in RAM|
+
+FORCE_TIMESHIFT /!\ NOT FUNCTIONNAL /!\ |if set, force to apply the loaded timeshift data|
+
+FORCE_CALIBRATION /!\ NOT FUNCTIONNAL /!\ |if set, force to apply energy calibration|
+
+USE_RF: shift // in ns
+
+-----------------
+List of outputs :
+-----------------
+|Output : spectra, either raw (uncalibrated) or calibrated|
+HISTOGRAM: [not_calibrated_spectra.root] |Requirements: none|
+           calibrated: [detector] outRoot: [calibrated_spectra.root] |Requirements: calibration coefficients|
+-> detectors avalable : Ge_Clover LaBr3 DSSD Paris
+
+|Ouput : bidim spectra of paris short and long gate VS ratio of gates|
+|Requirements: none, calibration and timeshifts if calibrated is set|
+PARIS_BIDIM: outRoot: [paris_bidim.root]
+             [calibrated]
+
+|Calculation : timeshifts with respect to a reference detector, with root output for checking|
+|Requirements: none|
+TIMESHIFT: [verbose] -
+           time_reference: [detector_name] -
+           timewindow: [value in ns] -
+           outRoot: [root_histograms.root] -
+           outData: [deltaT.data] -
+					 mult: [min_mult] [max_mult] -
+
+|Calculation : calibration factor for a given gamma source, with root output for checking|
+|Requirements: none|
+CALIBRATE: source: [gamma_source] -
+           outCalib: [calib_data.dat] -
+           outRoot: [calibrate.root] -
+           [verbose] -
+           [residues] - |FATIMA CONFIGURATION ONLY FOR RESIDUES FOR NOW !|
+
+|Output : analysis spectra - compton suppression, timing informations, bidims ...|
+|Requirements : timeshifts, gain matching|
+ANALYSE: timewindow: [value in ns] - //used only without rf
+         time_ref: [name_detector] -
+         outRoot: [analyse.root] -
+         time_gated: [min gate] [max gate] - //ns
+         gated_counter: [nb_gates] [[low_edge hight_edge]] - //DEV!
+         [DSSD_each_channel] // unlock the DSSD bidim spectra of each channel
+         [particle_trigger] // particle trigger : treats only the data if there is a hit in an DSSD
+
+RF_CHECK: timewindow: [value in ns] time_ref: [name_detector] outRoot: [check_rf.root]
+
+|Output : root TTree of faster files. Can be used with or without event building, can also throw single hits|
+|Requirements: timeshifts|
+FASTER2ROOT: outDir: [directory_name/] -
+             trigger: [nb_conditions] [Conditions] ... | example C1L2 C2 | Cn : clean clover multiplicity, Ln LaBr3 multiplicity, Mn modules multiplicity
+--------
+Syntax :
+--------
+Order :
+The order of the parameters have no influence.
+
+Lines : One need to write all the arguments of a parameter in one single line, except
+
+"-" :
+For some outputs, to add a "-" at the end of a line makes the next line still in the same command line
+For instance :
+CALIBRATE: source: 60Co outCalib: test60Co.dat outRoot: test60Co.root -
+verbose
+Here the parameter verbose is included in the command line of CALIBRATE
+All the available outputs have it shown in there declaration

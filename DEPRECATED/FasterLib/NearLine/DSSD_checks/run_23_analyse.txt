@@ -1,0 +1,7 @@
+Pour le moment deux isotopes identifiés : 
+Fe56 :
+Gate sur 846 keV :
+1780
+Cr52: 
+Gate sur 1434 keV
+C12: 4440 keV
