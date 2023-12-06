@@ -33,7 +33,7 @@ public:
   void multirun(int const & nb_threads = -1);
   void treatFile(Hit & hit, FasterReader & reader);
   void fillHisto(Hit const & hit);
-  void write(std::string const & out_filename = "");
+  void write(std::string const & out_filename = "") noexcept;
 
   void setOutFilename(std::string const & out_filename) noexcept {m_outFile = out_filename;}
   void setWriteMode(const char* mode) noexcept {delete[] write_mode; write_mode = mode;}
