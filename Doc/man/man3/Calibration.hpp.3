@@ -1,0 +1,74 @@
+.TH "lib/Modules/Calibration.hpp" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+lib/Modules/Calibration.hpp
+.SH SYNOPSIS
+.br
+.PP
+\fC#include '\&.\&./libCo\&.hpp'\fP
+.br
+\fC#include '\&.\&./Classes/Hit\&.hpp'\fP
+.br
+\fC#include '\&.\&./Classes/Detectors\&.hpp'\fP
+.br
+\fC#include '\&.\&./Classes/Event\&.hpp'\fP
+.br
+\fC#include '\&.\&./Classes/FilesManager\&.hpp'\fP
+.br
+\fC#include '\&.\&./MTObjects/MTFasterReader\&.hpp'\fP
+.br
+\fC#include '\&.\&./MTObjects/MTRootReader\&.hpp'\fP
+.br
+\fC#include '\&.\&./MTObjects/MTTHist\&.hpp'\fP
+.br
+
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBCalibration\fP"
+.br
+.ti -1c
+.RI "class \fBFit\fP"
+.br
+.RI "Allows one to manipulate the results of peaks\&. "
+.ti -1c
+.RI "struct \fBCalibration::histograms\fP"
+.br
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "using \fBFits\fP = std::vector< \fBFit\fP >"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "bool \fBisTripleAlpha\fP (std::string const &source_name)"
+.br
+.ti -1c
+.RI "std::ofstream & \fBoperator<<\fP (std::ofstream &fout, \fBFit\fP const &fit)"
+.br
+.ti -1c
+.RI "std::ostream & \fBoperator<<\fP (std::ostream &cout, \fBCalibration\fP const &calib)"
+.br
+.in -1c
+.SH "Typedef Documentation"
+.PP 
+.SS "using \fBFits\fP =  std::vector <\fBFit\fP>"
+
+.SH "Function Documentation"
+.PP 
+.SS "bool isTripleAlpha (std::string const & source_name)"
+
+.SS "std::ofstream& operator<< (std::ofstream & fout, \fBFit\fP const & fit)"
+
+.SS "std::ostream& operator<< (std::ostream & cout, \fBCalibration\fP const & calib)"
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Nuball2 from the source code\&.

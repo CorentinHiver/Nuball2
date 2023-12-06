@@ -1,0 +1,349 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_class_recalibration" xml:lang="en-US">
+<title>Recalibration Class Reference</title>
+<indexterm><primary>Recalibration</primary></indexterm>
+<para>
+<computeroutput>#include &lt;SpectraAlignator.hpp&gt;</computeroutput>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>auto &amp; <link linkend="_class_recalibration_1acb2b1f60462430f242447dd7f2286c66">a0</link> ()</para>
+</listitem>
+            <listitem><para>auto const  &amp; <link linkend="_class_recalibration_1a1b6076eaf677ac06dd70846a49479ab2">a0</link> () const</para>
+</listitem>
+            <listitem><para>auto &amp; <link linkend="_class_recalibration_1a4d5a3852cdb8f5d02282eb7c37a7df6c">a0</link> (double const &amp;a0)</para>
+</listitem>
+            <listitem><para>auto &amp; <link linkend="_class_recalibration_1af0c8f7f42525ded09b34e7a51b86c916">a1</link> ()</para>
+</listitem>
+            <listitem><para>auto const  &amp; <link linkend="_class_recalibration_1ac00b395bd23d0b31ecfc17eecf3ec562">a1</link> () const</para>
+</listitem>
+            <listitem><para>auto &amp; <link linkend="_class_recalibration_1a54dbf3d380efae15883f94d5275dfbf1">a1</link> (double const &amp;a1)</para>
+</listitem>
+            <listitem><para>auto &amp; <link linkend="_class_recalibration_1acb6aa7f788871cf8289ebfad7bb5f661">a2</link> ()</para>
+</listitem>
+            <listitem><para>auto const  &amp; <link linkend="_class_recalibration_1a32775f494bdbb0ca5d4e6200a176f51b">a2</link> () const</para>
+</listitem>
+            <listitem><para>auto &amp; <link linkend="_class_recalibration_1a844c6526e701a6d88507bb761bbc30bf">a2</link> (double const &amp;a2)</para>
+</listitem>
+            <listitem><para>auto &amp; <link linkend="_class_recalibration_1a4a040444a51c8fb8d9e3f75496832ca4">a3</link> ()</para>
+</listitem>
+            <listitem><para>auto const  &amp; <link linkend="_class_recalibration_1afb0a1a290ee2913fab53a51d1080fb4f">a3</link> () const</para>
+</listitem>
+            <listitem><para>auto &amp; <link linkend="_class_recalibration_1a126c31e5ccd9cc3e4efacc7ba82be9e9">a3</link> (double const &amp;a3)</para>
+</listitem>
+            <listitem><para>auto &amp; <link linkend="_class_recalibration_1a5b39212075300ce2b67d68e4829b81fd">aSqrt</link> ()</para>
+</listitem>
+            <listitem><para>auto const  &amp; <link linkend="_class_recalibration_1a5fd3c1468ba53b676933f9c39ce8ca06">aSqrt</link> () const</para>
+</listitem>
+            <listitem><para>auto &amp; <link linkend="_class_recalibration_1a1552960d9d25edc15b0ef5a4f0cb809c">aSqrt</link> (double const &amp;aSqrt)</para>
+</listitem>
+            <listitem><para>double <link linkend="_class_recalibration_1aa9421b4e58d718e18ef17a82b4a37fcc">calculate</link> (double const &amp;x)</para>
+</listitem>
+            <listitem><para>double <link linkend="_class_recalibration_1a6ce90b10d69409fdbc385ba6f990e073">calculate</link> (double const &amp;x) const</para>
+</listitem>
+            <listitem><para>auto &amp; <link linkend="_class_recalibration_1a01a34a50202c14313dce8b13d393169e">getParameter</link> (int const &amp;i)</para>
+</listitem>
+            <listitem><para>auto const  &amp; <link linkend="_class_recalibration_1ae86101c1d4238dd16bffd4911ee8092b">getParameter</link> (int const &amp;i) const</para>
+</listitem>
+            <listitem><para>double <link linkend="_class_recalibration_1a020eb53732eef370a3938eef68c59b5f">operator()</link> (double const &amp;x)</para>
+</listitem>
+            <listitem><para>double <link linkend="_class_recalibration_1a486ef28992aca9993a14923100ad12bc">operator()</link> (double const &amp;x) const</para>
+</listitem>
+            <listitem><para>auto &amp; <link linkend="_class_recalibration_1a53d116a242af33d63a5c17abad7ad35a">operator[]</link> (int const &amp;i)</para>
+</listitem>
+            <listitem><para>auto const  &amp; <link linkend="_class_recalibration_1ad5e0d1f201966edfef75b060ca6b80ed">operator[]</link> (int const &amp;i) const</para>
+</listitem>
+            <listitem><para><link linkend="_class_recalibration_1aa9dc73a23ffe032a72c50c30efe99929">Recalibration</link> (double const &amp;_a0=0, double const &amp;_a1=1, double const &amp;_a2=0, double const &amp;_a3=0, double const &amp;_aSqrt=0)</para>
+</listitem>
+            <listitem><para><link linkend="_class_recalibration_1a9ac1a9416a818ee37a4a5fd8ad6120c2">Recalibration</link> (<link linkend="_class_recalibration">Recalibration</link> const &amp;other)</para>
+</listitem>
+            <listitem><para>auto &amp; <link linkend="_class_recalibration_1ac98afc36338de322cde52205b01971ff">setParameter</link> (int const &amp;i, double const &amp;a)</para>
+</listitem>
+            <listitem><para>auto &amp; <link linkend="_class_recalibration_1acacda60d186a17af0794f2c72e2d34c6">setParameter</link> (<link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> const &amp;i, double const &amp;a)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Private Attributes    </title>
+        <itemizedlist>
+            <listitem><para>std::vector&lt; double &gt; <link linkend="_class_recalibration_1ab2b32920bd00fc958c82740efd306fac">m_parameters</link> = std::vector&lt;double&gt;(5)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_class_recalibration_1aa9dc73a23ffe032a72c50c30efe99929"/>    <section>
+    <title>Recalibration()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>Recalibration</primary><secondary>Recalibration</secondary></indexterm>
+<indexterm><primary>Recalibration</primary><secondary>Recalibration</secondary></indexterm>
+<para><computeroutput>Recalibration::Recalibration (double const &amp; _a0 = <computeroutput>0</computeroutput>
+, double const &amp; _a1 = <computeroutput>1</computeroutput>
+, double const &amp; _a2 = <computeroutput>0</computeroutput>
+, double const &amp; _a3 = <computeroutput>0</computeroutput>
+, double const &amp; _aSqrt = <computeroutput>0</computeroutput>
+)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_recalibration_1a9ac1a9416a818ee37a4a5fd8ad6120c2"/>    <section>
+    <title>Recalibration()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>Recalibration</primary><secondary>Recalibration</secondary></indexterm>
+<indexterm><primary>Recalibration</primary><secondary>Recalibration</secondary></indexterm>
+<para><computeroutput>Recalibration::Recalibration (<link linkend="_class_recalibration">Recalibration</link> const &amp; other)<computeroutput>[inline]</computeroutput></computeroutput></para></section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_class_recalibration_1acb2b1f60462430f242447dd7f2286c66"/>    <section>
+    <title>a0()<computeroutput>[1/3]</computeroutput></title>
+<indexterm><primary>a0</primary><secondary>Recalibration</secondary></indexterm>
+<indexterm><primary>Recalibration</primary><secondary>a0</secondary></indexterm>
+<para><computeroutput>auto&amp; Recalibration::a0 ( )<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_recalibration_1a1b6076eaf677ac06dd70846a49479ab2"/>    <section>
+    <title>a0()<computeroutput>[2/3]</computeroutput></title>
+<indexterm><primary>a0</primary><secondary>Recalibration</secondary></indexterm>
+<indexterm><primary>Recalibration</primary><secondary>a0</secondary></indexterm>
+<para><computeroutput>auto const&amp; Recalibration::a0 ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_recalibration_a1b6076eaf677ac06dd70846a49479ab2_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_recalibration_1a4d5a3852cdb8f5d02282eb7c37a7df6c"/>    <section>
+    <title>a0()<computeroutput>[3/3]</computeroutput></title>
+<indexterm><primary>a0</primary><secondary>Recalibration</secondary></indexterm>
+<indexterm><primary>Recalibration</primary><secondary>a0</secondary></indexterm>
+<para><computeroutput>auto&amp; Recalibration::a0 (double const &amp; a0)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_recalibration_a4d5a3852cdb8f5d02282eb7c37a7df6c_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_recalibration_1af0c8f7f42525ded09b34e7a51b86c916"/>    <section>
+    <title>a1()<computeroutput>[1/3]</computeroutput></title>
+<indexterm><primary>a1</primary><secondary>Recalibration</secondary></indexterm>
+<indexterm><primary>Recalibration</primary><secondary>a1</secondary></indexterm>
+<para><computeroutput>auto&amp; Recalibration::a1 ( )<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_recalibration_1ac00b395bd23d0b31ecfc17eecf3ec562"/>    <section>
+    <title>a1()<computeroutput>[2/3]</computeroutput></title>
+<indexterm><primary>a1</primary><secondary>Recalibration</secondary></indexterm>
+<indexterm><primary>Recalibration</primary><secondary>a1</secondary></indexterm>
+<para><computeroutput>auto const&amp; Recalibration::a1 ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_recalibration_ac00b395bd23d0b31ecfc17eecf3ec562_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_recalibration_1a54dbf3d380efae15883f94d5275dfbf1"/>    <section>
+    <title>a1()<computeroutput>[3/3]</computeroutput></title>
+<indexterm><primary>a1</primary><secondary>Recalibration</secondary></indexterm>
+<indexterm><primary>Recalibration</primary><secondary>a1</secondary></indexterm>
+<para><computeroutput>auto&amp; Recalibration::a1 (double const &amp; a1)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_recalibration_a54dbf3d380efae15883f94d5275dfbf1_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_recalibration_1acb6aa7f788871cf8289ebfad7bb5f661"/>    <section>
+    <title>a2()<computeroutput>[1/3]</computeroutput></title>
+<indexterm><primary>a2</primary><secondary>Recalibration</secondary></indexterm>
+<indexterm><primary>Recalibration</primary><secondary>a2</secondary></indexterm>
+<para><computeroutput>auto&amp; Recalibration::a2 ( )<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_recalibration_1a32775f494bdbb0ca5d4e6200a176f51b"/>    <section>
+    <title>a2()<computeroutput>[2/3]</computeroutput></title>
+<indexterm><primary>a2</primary><secondary>Recalibration</secondary></indexterm>
+<indexterm><primary>Recalibration</primary><secondary>a2</secondary></indexterm>
+<para><computeroutput>auto const&amp; Recalibration::a2 ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_recalibration_a32775f494bdbb0ca5d4e6200a176f51b_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_recalibration_1a844c6526e701a6d88507bb761bbc30bf"/>    <section>
+    <title>a2()<computeroutput>[3/3]</computeroutput></title>
+<indexterm><primary>a2</primary><secondary>Recalibration</secondary></indexterm>
+<indexterm><primary>Recalibration</primary><secondary>a2</secondary></indexterm>
+<para><computeroutput>auto&amp; Recalibration::a2 (double const &amp; a2)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_recalibration_a844c6526e701a6d88507bb761bbc30bf_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_recalibration_1a4a040444a51c8fb8d9e3f75496832ca4"/>    <section>
+    <title>a3()<computeroutput>[1/3]</computeroutput></title>
+<indexterm><primary>a3</primary><secondary>Recalibration</secondary></indexterm>
+<indexterm><primary>Recalibration</primary><secondary>a3</secondary></indexterm>
+<para><computeroutput>auto&amp; Recalibration::a3 ( )<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_recalibration_1afb0a1a290ee2913fab53a51d1080fb4f"/>    <section>
+    <title>a3()<computeroutput>[2/3]</computeroutput></title>
+<indexterm><primary>a3</primary><secondary>Recalibration</secondary></indexterm>
+<indexterm><primary>Recalibration</primary><secondary>a3</secondary></indexterm>
+<para><computeroutput>auto const&amp; Recalibration::a3 ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_recalibration_afb0a1a290ee2913fab53a51d1080fb4f_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_recalibration_1a126c31e5ccd9cc3e4efacc7ba82be9e9"/>    <section>
+    <title>a3()<computeroutput>[3/3]</computeroutput></title>
+<indexterm><primary>a3</primary><secondary>Recalibration</secondary></indexterm>
+<indexterm><primary>Recalibration</primary><secondary>a3</secondary></indexterm>
+<para><computeroutput>auto&amp; Recalibration::a3 (double const &amp; a3)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_recalibration_a126c31e5ccd9cc3e4efacc7ba82be9e9_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_recalibration_1a5b39212075300ce2b67d68e4829b81fd"/>    <section>
+    <title>aSqrt()<computeroutput>[1/3]</computeroutput></title>
+<indexterm><primary>aSqrt</primary><secondary>Recalibration</secondary></indexterm>
+<indexterm><primary>Recalibration</primary><secondary>aSqrt</secondary></indexterm>
+<para><computeroutput>auto&amp; Recalibration::aSqrt ( )<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_recalibration_1a5fd3c1468ba53b676933f9c39ce8ca06"/>    <section>
+    <title>aSqrt()<computeroutput>[2/3]</computeroutput></title>
+<indexterm><primary>aSqrt</primary><secondary>Recalibration</secondary></indexterm>
+<indexterm><primary>Recalibration</primary><secondary>aSqrt</secondary></indexterm>
+<para><computeroutput>auto const&amp; Recalibration::aSqrt ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_recalibration_a5fd3c1468ba53b676933f9c39ce8ca06_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_recalibration_1a1552960d9d25edc15b0ef5a4f0cb809c"/>    <section>
+    <title>aSqrt()<computeroutput>[3/3]</computeroutput></title>
+<indexterm><primary>aSqrt</primary><secondary>Recalibration</secondary></indexterm>
+<indexterm><primary>Recalibration</primary><secondary>aSqrt</secondary></indexterm>
+<para><computeroutput>auto&amp; Recalibration::aSqrt (double const &amp; aSqrt)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_recalibration_a1552960d9d25edc15b0ef5a4f0cb809c_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_recalibration_1aa9421b4e58d718e18ef17a82b4a37fcc"/>    <section>
+    <title>calculate()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>calculate</primary><secondary>Recalibration</secondary></indexterm>
+<indexterm><primary>Recalibration</primary><secondary>calculate</secondary></indexterm>
+<para><computeroutput>double Recalibration::calculate (double const &amp; x)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_recalibration_aa9421b4e58d718e18ef17a82b4a37fcc_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_recalibration_1a6ce90b10d69409fdbc385ba6f990e073"/>    <section>
+    <title>calculate()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>calculate</primary><secondary>Recalibration</secondary></indexterm>
+<indexterm><primary>Recalibration</primary><secondary>calculate</secondary></indexterm>
+<para><computeroutput>double Recalibration::calculate (double const &amp; x) const<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_recalibration_a6ce90b10d69409fdbc385ba6f990e073_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_recalibration_a6ce90b10d69409fdbc385ba6f990e073_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_recalibration_1a01a34a50202c14313dce8b13d393169e"/>    <section>
+    <title>getParameter()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>getParameter</primary><secondary>Recalibration</secondary></indexterm>
+<indexterm><primary>Recalibration</primary><secondary>getParameter</secondary></indexterm>
+<para><computeroutput>auto&amp; Recalibration::getParameter (int const &amp; i)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_recalibration_1ae86101c1d4238dd16bffd4911ee8092b"/>    <section>
+    <title>getParameter()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>getParameter</primary><secondary>Recalibration</secondary></indexterm>
+<indexterm><primary>Recalibration</primary><secondary>getParameter</secondary></indexterm>
+<para><computeroutput>auto const&amp; Recalibration::getParameter (int const &amp; i) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_recalibration_1a020eb53732eef370a3938eef68c59b5f"/>    <section>
+    <title>operator()()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>operator()</primary><secondary>Recalibration</secondary></indexterm>
+<indexterm><primary>Recalibration</primary><secondary>operator()</secondary></indexterm>
+<para><computeroutput>double Recalibration::operator() (double const &amp; x)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_recalibration_a020eb53732eef370a3938eef68c59b5f_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_recalibration_1a486ef28992aca9993a14923100ad12bc"/>    <section>
+    <title>operator()()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>operator()</primary><secondary>Recalibration</secondary></indexterm>
+<indexterm><primary>Recalibration</primary><secondary>operator()</secondary></indexterm>
+<para><computeroutput>double Recalibration::operator() (double const &amp; x) const<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_recalibration_a486ef28992aca9993a14923100ad12bc_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_recalibration_1a53d116a242af33d63a5c17abad7ad35a"/>    <section>
+    <title>operator[]()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>operator[]</primary><secondary>Recalibration</secondary></indexterm>
+<indexterm><primary>Recalibration</primary><secondary>operator[]</secondary></indexterm>
+<para><computeroutput>auto&amp; Recalibration::operator[] (int const &amp; i)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_recalibration_1ad5e0d1f201966edfef75b060ca6b80ed"/>    <section>
+    <title>operator[]()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>operator[]</primary><secondary>Recalibration</secondary></indexterm>
+<indexterm><primary>Recalibration</primary><secondary>operator[]</secondary></indexterm>
+<para><computeroutput>auto const&amp; Recalibration::operator[] (int const &amp; i) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_recalibration_1ac98afc36338de322cde52205b01971ff"/>    <section>
+    <title>setParameter()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>setParameter</primary><secondary>Recalibration</secondary></indexterm>
+<indexterm><primary>Recalibration</primary><secondary>setParameter</secondary></indexterm>
+<para><computeroutput>auto&amp; Recalibration::setParameter (int const &amp; i, double const &amp; a)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_recalibration_ac98afc36338de322cde52205b01971ff_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_recalibration_1acacda60d186a17af0794f2c72e2d34c6"/>    <section>
+    <title>setParameter()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>setParameter</primary><secondary>Recalibration</secondary></indexterm>
+<indexterm><primary>Recalibration</primary><secondary>setParameter</secondary></indexterm>
+<para><computeroutput>auto&amp; Recalibration::setParameter (<link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> const &amp; i, double const &amp; a)<computeroutput>[inline]</computeroutput></computeroutput></para></section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_class_recalibration_1ab2b32920bd00fc958c82740efd306fac"/>    <section>
+    <title>m_parameters</title>
+<indexterm><primary>m_parameters</primary><secondary>Recalibration</secondary></indexterm>
+<indexterm><primary>Recalibration</primary><secondary>m_parameters</secondary></indexterm>
+<para><computeroutput>std::vector&lt;double&gt; Recalibration::m_parameters = std::vector&lt;double&gt;(5)<computeroutput>[private]</computeroutput></computeroutput></para></section>
+<para>
+The documentation for this class was generated from the following file:</para>
+lib/Classes/<link linkend="__spectra_alignator_8hpp">SpectraAlignator.hpp</link></section>
+</section>

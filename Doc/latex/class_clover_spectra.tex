@@ -1,0 +1,459 @@
+\doxysection{Clover\+Spectra Class Reference}
+\label{class_clover_spectra}\index{CloverSpectra@{CloverSpectra}}
+
+
+Make usefull calibrated spectra from data in .fast or .root format.  
+
+
+
+
+{\ttfamily \#include $<$Clover\+Spectra.\+hpp$>$}
+
+
+
+Collaboration diagram for Clover\+Spectra\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_clover_spectra__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ Clover\+Spectra} ()=default
+\item 
+\textbf{ Clover\+Spectra} (int argc, char $\ast$$\ast$argv)
+\item 
+void \textbf{ fill\+Histo} (std\+::string const \&datapath=\char`\"{}\char`\"{}, int nb\+\_\+files=-\/1)
+\item 
+void \textbf{ Initialize} ()
+\item 
+void \textbf{ Initialize} (int argc, char $\ast$$\ast$argv)
+\item 
+void \textbf{ load\+Calibration} (std\+::string const \&calib\+File)
+\item 
+void \textbf{ load\+Timeshifts} (std\+::string const \&d\+Tfile)
+\item 
+void \textbf{ print\+Parameters} ()
+\item 
+void \textbf{ set\+Calibration} (\textbf{ Calibration} const \&calibration)
+\item 
+void \textbf{ set\+Data\+Path} (std\+::string const \&datapath)
+\item 
+void \textbf{ set\+Nb\+Files} (int const \&nb\+\_\+files=-\/1)
+\item 
+void \textbf{ set\+Nb\+Threads} (int const \&nb\+\_\+threads=-\/1)
+\item 
+void \textbf{ set\+Out\+Name} (std\+::string const \&outname)
+\item 
+void \textbf{ set\+Timeshifts} (\textbf{ Timeshifts} const \&timeshifts)
+\item 
+void \textbf{ set\+Time\+Window\+\_\+ns} (int const \&timewindow=1500)
+\item 
+void \textbf{ write\+Histo} (std\+::string const \&out\+Name=\char`\"{}\char`\"{})
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \textbf{ run\+Faster\+Reader} (\textbf{ Hit} \&hit, \textbf{ Alignator} \&tree)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \textbf{ run\+MTFaster\+Reader} (\textbf{ Hit} \&hit, \textbf{ Alignator} \&tree, \textbf{ Clover\+Spectra} \&ce)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+char \textbf{ data\+Kind} = -\/1
+\item 
+\textbf{ Calibration} \textbf{ m\+\_\+calibration}
+\item 
+\textbf{ MTTHist}$<$ TH1F $>$ \textbf{ m\+\_\+clovers}
+\item 
+\textbf{ MTTHist}$<$ TH2F $>$ \textbf{ m\+\_\+clovers\+\_\+bidim}
+\item 
+\textbf{ MTTHist}$<$ TH1F $>$ \textbf{ m\+\_\+clovers\+\_\+crystal}
+\item 
+\textbf{ Path} \textbf{ m\+\_\+data\+Path}
+\item 
+int \textbf{ m\+\_\+nb\+\_\+files} = -\/1
+\item 
+int \textbf{ m\+\_\+nb\+\_\+threads} = 1
+\item 
+\textbf{ File} \textbf{ m\+\_\+out\+Name}
+\item 
+bool \textbf{ m\+\_\+throw\+\_\+single} = false
+\item 
+\textbf{ Timeshifts} \textbf{ m\+\_\+timeshifts}
+\item 
+\textbf{ Time} \textbf{ m\+\_\+timewindow} = 100000
+\item 
+bool \textbf{ m\+\_\+write\+Histo} = false
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Make usefull calibrated spectra from data in .fast or .root format. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\label{class_clover_spectra_a49112dc4bcc852575a12692c308c4643}} 
+\index{CloverSpectra@{CloverSpectra}!CloverSpectra@{CloverSpectra}}
+\index{CloverSpectra@{CloverSpectra}!CloverSpectra@{CloverSpectra}}
+\doxysubsubsection{CloverSpectra()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Clover\+Spectra\+::\+Clover\+Spectra (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+\mbox{\label{class_clover_spectra_a83b3f64fea8bb8fb6743762ec72e2c04}} 
+\index{CloverSpectra@{CloverSpectra}!CloverSpectra@{CloverSpectra}}
+\index{CloverSpectra@{CloverSpectra}!CloverSpectra@{CloverSpectra}}
+\doxysubsubsection{CloverSpectra()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Clover\+Spectra\+::\+Clover\+Spectra (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_clover_spectra_a83b3f64fea8bb8fb6743762ec72e2c04_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\label{class_clover_spectra_ae46c582451bada5b2b8957ee44b92e35}} 
+\index{CloverSpectra@{CloverSpectra}!fillHisto@{fillHisto}}
+\index{fillHisto@{fillHisto}!CloverSpectra@{CloverSpectra}}
+\doxysubsubsection{fillHisto()}
+{\footnotesize\ttfamily void Clover\+Spectra\+::fill\+Histo (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{datapath = {\ttfamily \char`\"{}\char`\"{}},  }\item[{int}]{nb\+\_\+files = {\ttfamily -\/1} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_clover_spectra_ae46c582451bada5b2b8957ee44b92e35_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_clover_spectra_ae46c582451bada5b2b8957ee44b92e35_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_clover_spectra_abf805324f6371f19ef0b3ce45705a115}} 
+\index{CloverSpectra@{CloverSpectra}!Initialize@{Initialize}}
+\index{Initialize@{Initialize}!CloverSpectra@{CloverSpectra}}
+\doxysubsubsection{Initialize()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Clover\+Spectra\+::\+Initialize (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_clover_spectra_abf805324f6371f19ef0b3ce45705a115_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_clover_spectra_abf805324f6371f19ef0b3ce45705a115_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_clover_spectra_a353ec66774413feefb33a784ce2159cf}} 
+\index{CloverSpectra@{CloverSpectra}!Initialize@{Initialize}}
+\index{Initialize@{Initialize}!CloverSpectra@{CloverSpectra}}
+\doxysubsubsection{Initialize()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Clover\+Spectra\+::\+Initialize (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_clover_spectra_a353ec66774413feefb33a784ce2159cf_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_clover_spectra_a4631e5643c2d2d12eb2fab20c381d59c}} 
+\index{CloverSpectra@{CloverSpectra}!loadCalibration@{loadCalibration}}
+\index{loadCalibration@{loadCalibration}!CloverSpectra@{CloverSpectra}}
+\doxysubsubsection{loadCalibration()}
+{\footnotesize\ttfamily void Clover\+Spectra\+::load\+Calibration (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{calib\+File }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_clover_spectra_a4631e5643c2d2d12eb2fab20c381d59c_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_clover_spectra_a4631e5643c2d2d12eb2fab20c381d59c_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_clover_spectra_abe2f37c6b8c698dcdf72731cc315f5b7}} 
+\index{CloverSpectra@{CloverSpectra}!loadTimeshifts@{loadTimeshifts}}
+\index{loadTimeshifts@{loadTimeshifts}!CloverSpectra@{CloverSpectra}}
+\doxysubsubsection{loadTimeshifts()}
+{\footnotesize\ttfamily void Clover\+Spectra\+::load\+Timeshifts (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{d\+Tfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_clover_spectra_abe2f37c6b8c698dcdf72731cc315f5b7_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_clover_spectra_abe2f37c6b8c698dcdf72731cc315f5b7_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_clover_spectra_a693dcd3c5e09e4da918a6bb095060d37}} 
+\index{CloverSpectra@{CloverSpectra}!printParameters@{printParameters}}
+\index{printParameters@{printParameters}!CloverSpectra@{CloverSpectra}}
+\doxysubsubsection{printParameters()}
+{\footnotesize\ttfamily void Clover\+Spectra\+::print\+Parameters (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=324pt]{class_clover_spectra_a693dcd3c5e09e4da918a6bb095060d37_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_clover_spectra_a693dcd3c5e09e4da918a6bb095060d37_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_clover_spectra_a614d7deabde77b0ffea91ca2a6002484}} 
+\index{CloverSpectra@{CloverSpectra}!runFasterReader@{runFasterReader}}
+\index{runFasterReader@{runFasterReader}!CloverSpectra@{CloverSpectra}}
+\doxysubsubsection{runFasterReader()}
+{\footnotesize\ttfamily void Clover\+Spectra\+::run\+Faster\+Reader (\begin{DoxyParamCaption}\item[{\textbf{ Hit} \&}]{hit,  }\item[{\textbf{ Alignator} \&}]{tree }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_clover_spectra_a614d7deabde77b0ffea91ca2a6002484_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_clover_spectra_a614d7deabde77b0ffea91ca2a6002484_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_clover_spectra_ac087194079e7879a2824f4488db96512}} 
+\index{CloverSpectra@{CloverSpectra}!runMTFasterReader@{runMTFasterReader}}
+\index{runMTFasterReader@{runMTFasterReader}!CloverSpectra@{CloverSpectra}}
+\doxysubsubsection{runMTFasterReader()}
+{\footnotesize\ttfamily static void Clover\+Spectra\+::run\+MTFaster\+Reader (\begin{DoxyParamCaption}\item[{\textbf{ Hit} \&}]{hit,  }\item[{\textbf{ Alignator} \&}]{tree,  }\item[{\textbf{ Clover\+Spectra} \&}]{ce }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [private]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_clover_spectra_ac087194079e7879a2824f4488db96512_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_clover_spectra_ac087194079e7879a2824f4488db96512_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_clover_spectra_aeb7bc1e06083ef29b1e48252e570271e}} 
+\index{CloverSpectra@{CloverSpectra}!setCalibration@{setCalibration}}
+\index{setCalibration@{setCalibration}!CloverSpectra@{CloverSpectra}}
+\doxysubsubsection{setCalibration()}
+{\footnotesize\ttfamily void Clover\+Spectra\+::set\+Calibration (\begin{DoxyParamCaption}\item[{\textbf{ Calibration} const \&}]{calibration }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_clover_spectra_ac3e3cf471d8bbdcbe54d5c5c776644e1}} 
+\index{CloverSpectra@{CloverSpectra}!setDataPath@{setDataPath}}
+\index{setDataPath@{setDataPath}!CloverSpectra@{CloverSpectra}}
+\doxysubsubsection{setDataPath()}
+{\footnotesize\ttfamily void Clover\+Spectra\+::set\+Data\+Path (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{datapath }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_clover_spectra_ac3e3cf471d8bbdcbe54d5c5c776644e1_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_clover_spectra_a4303950fe7db3328c5dfa1440c6cf911}} 
+\index{CloverSpectra@{CloverSpectra}!setNbFiles@{setNbFiles}}
+\index{setNbFiles@{setNbFiles}!CloverSpectra@{CloverSpectra}}
+\doxysubsubsection{setNbFiles()}
+{\footnotesize\ttfamily void Clover\+Spectra\+::set\+Nb\+Files (\begin{DoxyParamCaption}\item[{int const \&}]{nb\+\_\+files = {\ttfamily -\/1} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_clover_spectra_a4303950fe7db3328c5dfa1440c6cf911_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_clover_spectra_ae6ec650a1ca74083a135f0693d62c5e2}} 
+\index{CloverSpectra@{CloverSpectra}!setNbThreads@{setNbThreads}}
+\index{setNbThreads@{setNbThreads}!CloverSpectra@{CloverSpectra}}
+\doxysubsubsection{setNbThreads()}
+{\footnotesize\ttfamily void Clover\+Spectra\+::set\+Nb\+Threads (\begin{DoxyParamCaption}\item[{int const \&}]{nb\+\_\+threads = {\ttfamily -\/1} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_clover_spectra_ae6ec650a1ca74083a135f0693d62c5e2_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_clover_spectra_a3b050eb699e8f8854ce01bd946aa30c1}} 
+\index{CloverSpectra@{CloverSpectra}!setOutName@{setOutName}}
+\index{setOutName@{setOutName}!CloverSpectra@{CloverSpectra}}
+\doxysubsubsection{setOutName()}
+{\footnotesize\ttfamily void Clover\+Spectra\+::set\+Out\+Name (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{outname }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_clover_spectra_a3b050eb699e8f8854ce01bd946aa30c1_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_clover_spectra_a6c261c0939d01796ace3f0eb19898714}} 
+\index{CloverSpectra@{CloverSpectra}!setTimeshifts@{setTimeshifts}}
+\index{setTimeshifts@{setTimeshifts}!CloverSpectra@{CloverSpectra}}
+\doxysubsubsection{setTimeshifts()}
+{\footnotesize\ttfamily void Clover\+Spectra\+::set\+Timeshifts (\begin{DoxyParamCaption}\item[{\textbf{ Timeshifts} const \&}]{timeshifts }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_clover_spectra_ab90e1236854aff68a7354b7cdfb3866a}} 
+\index{CloverSpectra@{CloverSpectra}!setTimeWindow\_ns@{setTimeWindow\_ns}}
+\index{setTimeWindow\_ns@{setTimeWindow\_ns}!CloverSpectra@{CloverSpectra}}
+\doxysubsubsection{setTimeWindow\_ns()}
+{\footnotesize\ttfamily void Clover\+Spectra\+::set\+Time\+Window\+\_\+ns (\begin{DoxyParamCaption}\item[{int const \&}]{timewindow = {\ttfamily 1500} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_clover_spectra_ab90e1236854aff68a7354b7cdfb3866a_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_clover_spectra_aea0814fac7c993ad4813804415f3ffab}} 
+\index{CloverSpectra@{CloverSpectra}!writeHisto@{writeHisto}}
+\index{writeHisto@{writeHisto}!CloverSpectra@{CloverSpectra}}
+\doxysubsubsection{writeHisto()}
+{\footnotesize\ttfamily void Clover\+Spectra\+::write\+Histo (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{out\+Name = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_clover_spectra_aea0814fac7c993ad4813804415f3ffab_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_clover_spectra_aea0814fac7c993ad4813804415f3ffab_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\label{class_clover_spectra_ae9a2badc688b8eac4507af1b787d1244}} 
+\index{CloverSpectra@{CloverSpectra}!dataKind@{dataKind}}
+\index{dataKind@{dataKind}!CloverSpectra@{CloverSpectra}}
+\doxysubsubsection{dataKind}
+{\footnotesize\ttfamily char Clover\+Spectra\+::data\+Kind = -\/1\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_clover_spectra_a9b061051f7110f57ac4b0077007d95ef}} 
+\index{CloverSpectra@{CloverSpectra}!m\_calibration@{m\_calibration}}
+\index{m\_calibration@{m\_calibration}!CloverSpectra@{CloverSpectra}}
+\doxysubsubsection{m\_calibration}
+{\footnotesize\ttfamily \textbf{ Calibration} Clover\+Spectra\+::m\+\_\+calibration\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_clover_spectra_aaf0011155b817dd2ac3d9755b1eeaa9b}} 
+\index{CloverSpectra@{CloverSpectra}!m\_clovers@{m\_clovers}}
+\index{m\_clovers@{m\_clovers}!CloverSpectra@{CloverSpectra}}
+\doxysubsubsection{m\_clovers}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH1F$>$ Clover\+Spectra\+::m\+\_\+clovers\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_clover_spectra_a813d7f94e931fd6b138de085da6da223}} 
+\index{CloverSpectra@{CloverSpectra}!m\_clovers\_bidim@{m\_clovers\_bidim}}
+\index{m\_clovers\_bidim@{m\_clovers\_bidim}!CloverSpectra@{CloverSpectra}}
+\doxysubsubsection{m\_clovers\_bidim}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH2F$>$ Clover\+Spectra\+::m\+\_\+clovers\+\_\+bidim\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_clover_spectra_a5e7bcd308a1788846d6f6b56df74fb71}} 
+\index{CloverSpectra@{CloverSpectra}!m\_clovers\_crystal@{m\_clovers\_crystal}}
+\index{m\_clovers\_crystal@{m\_clovers\_crystal}!CloverSpectra@{CloverSpectra}}
+\doxysubsubsection{m\_clovers\_crystal}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH1F$>$ Clover\+Spectra\+::m\+\_\+clovers\+\_\+crystal\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_clover_spectra_af031eae589df96c7344f6672a26e6066}} 
+\index{CloverSpectra@{CloverSpectra}!m\_dataPath@{m\_dataPath}}
+\index{m\_dataPath@{m\_dataPath}!CloverSpectra@{CloverSpectra}}
+\doxysubsubsection{m\_dataPath}
+{\footnotesize\ttfamily \textbf{ Path} Clover\+Spectra\+::m\+\_\+data\+Path\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_clover_spectra_a1bf5810a8e7ea0e3af03fb5572f40b18}} 
+\index{CloverSpectra@{CloverSpectra}!m\_nb\_files@{m\_nb\_files}}
+\index{m\_nb\_files@{m\_nb\_files}!CloverSpectra@{CloverSpectra}}
+\doxysubsubsection{m\_nb\_files}
+{\footnotesize\ttfamily int Clover\+Spectra\+::m\+\_\+nb\+\_\+files = -\/1\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_clover_spectra_a3d4d672e17123820e04c45adf0e84e07}} 
+\index{CloverSpectra@{CloverSpectra}!m\_nb\_threads@{m\_nb\_threads}}
+\index{m\_nb\_threads@{m\_nb\_threads}!CloverSpectra@{CloverSpectra}}
+\doxysubsubsection{m\_nb\_threads}
+{\footnotesize\ttfamily int Clover\+Spectra\+::m\+\_\+nb\+\_\+threads = 1\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_clover_spectra_ab770b1f9d6ec24f7aae6f3759edd5066}} 
+\index{CloverSpectra@{CloverSpectra}!m\_outName@{m\_outName}}
+\index{m\_outName@{m\_outName}!CloverSpectra@{CloverSpectra}}
+\doxysubsubsection{m\_outName}
+{\footnotesize\ttfamily \textbf{ File} Clover\+Spectra\+::m\+\_\+out\+Name\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_clover_spectra_adcdc25f4bd89f0997191793b868db128}} 
+\index{CloverSpectra@{CloverSpectra}!m\_throw\_single@{m\_throw\_single}}
+\index{m\_throw\_single@{m\_throw\_single}!CloverSpectra@{CloverSpectra}}
+\doxysubsubsection{m\_throw\_single}
+{\footnotesize\ttfamily bool Clover\+Spectra\+::m\+\_\+throw\+\_\+single = false\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_clover_spectra_ab493c3191a96e697b7175312e079bebd}} 
+\index{CloverSpectra@{CloverSpectra}!m\_timeshifts@{m\_timeshifts}}
+\index{m\_timeshifts@{m\_timeshifts}!CloverSpectra@{CloverSpectra}}
+\doxysubsubsection{m\_timeshifts}
+{\footnotesize\ttfamily \textbf{ Timeshifts} Clover\+Spectra\+::m\+\_\+timeshifts\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_clover_spectra_a5afe35a3e805f81cf3b222b297fa4065}} 
+\index{CloverSpectra@{CloverSpectra}!m\_timewindow@{m\_timewindow}}
+\index{m\_timewindow@{m\_timewindow}!CloverSpectra@{CloverSpectra}}
+\doxysubsubsection{m\_timewindow}
+{\footnotesize\ttfamily \textbf{ Time} Clover\+Spectra\+::m\+\_\+timewindow = 100000\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_clover_spectra_a4f205f16d76022aa85a8e5bd721c2b2e}} 
+\index{CloverSpectra@{CloverSpectra}!m\_writeHisto@{m\_writeHisto}}
+\index{m\_writeHisto@{m\_writeHisto}!CloverSpectra@{CloverSpectra}}
+\doxysubsubsection{m\_writeHisto}
+{\footnotesize\ttfamily bool Clover\+Spectra\+::m\+\_\+write\+Histo = false\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+lib/\+Modules/\textbf{ Clover\+Spectra.\+hpp}\item 
+lib/\+Modules/\textbf{ Near\+Line.\+hpp}\end{DoxyCompactItemize}

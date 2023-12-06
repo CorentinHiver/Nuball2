@@ -8,5 +8,7 @@ var class_performances =
     [ "nb_total_events", "class_performances.html#ab98612d481594c3b39a759f480742345", null ],
     [ "nb_total_hits", "class_performances.html#ada2edd8aeddf080f2c494a8a921e662f", null ],
     [ "nb_total_kept_events", "class_performances.html#a113fa2db5fa26c78e6c272960209e254", null ],
-    [ "nb_total_raw_events", "class_performances.html#a739d118946fd27bbd250d664fdcf72a7", null ]
+    [ "nb_total_raw_events", "class_performances.html#a739d118946fd27bbd250d664fdcf72a7", null ],
+    [ "total_read_size_file", "class_performances.html#ad94ac097e2ffac203b813e9703f9cf50", null ],
+    [ "total_written_size_file", "class_performances.html#ae38c3de3b231fbb995c2585cfc148e5c", null ]
 ];

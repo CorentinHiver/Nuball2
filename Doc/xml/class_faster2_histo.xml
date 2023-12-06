@@ -1,0 +1,630 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="class_faster2_histo" kind="class" language="C++" prot="public">
+    <compoundname>Faster2Histo</compoundname>
+    <includes refid="_faster2_histo_8hpp" local="no">Faster2Histo.hpp</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_faster2_histo_1a93debc2e47619ed043f25f90aaa16c75" prot="private" static="no" mutable="no">
+        <type><ref refid="class_calibration" kindref="compound">Calibration</ref></type>
+        <definition>Calibration Faster2Histo::m_calibration</definition>
+        <argsstring></argsstring>
+        <name>m_calibration</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Modules/Faster2Histo.hpp" line="52" column="15" bodyfile="lib/Modules/Faster2Histo.hpp" bodystart="52" bodyend="-1"/>
+        <referencedby refid="class_faster2_histo_1a327a8348f79c5ecf27a58baef32b81d8" compoundref="_faster2_histo_8hpp" startline="146" endline="165">fillHisto</referencedby>
+        <referencedby refid="class_faster2_histo_1a46087c5a676f688d4862304fca62cc24" compoundref="_faster2_histo_8hpp" startline="40" endline="40">loadCalibration</referencedby>
+        <referencedby refid="class_faster2_histo_1a48d7d46929ffbd69ccc3a590c535d3b7" compoundref="_faster2_histo_8hpp" startline="132" endline="144">treatFile</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_faster2_histo_1a9564f0b9bed4fd3f2d275b4127abedc2" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="_hit_8hpp_1ab5dd24876acad09ec52c250c1668466c" kindref="member">Label</ref> &gt;</type>
+        <definition>std::vector&lt;Label&gt; Faster2Histo::m_labels</definition>
+        <argsstring></argsstring>
+        <name>m_labels</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Modules/Faster2Histo.hpp" line="49" column="15" bodyfile="lib/Modules/Faster2Histo.hpp" bodystart="49" bodyend="-1"/>
+        <referencedby refid="class_faster2_histo_1a327a8348f79c5ecf27a58baef32b81d8" compoundref="_faster2_histo_8hpp" startline="146" endline="165">fillHisto</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_faster2_histo_1a2ec4e07c1b3ee37719c9312822515466" prot="private" static="no" mutable="no">
+        <type><ref refid="class_m_t_faster_reader" kindref="compound">MTFasterReader</ref></type>
+        <definition>MTFasterReader Faster2Histo::m_MTreader</definition>
+        <argsstring></argsstring>
+        <name>m_MTreader</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Modules/Faster2Histo.hpp" line="48" column="18" bodyfile="lib/Modules/Faster2Histo.hpp" bodystart="48" bodyend="-1"/>
+        <referencedby refid="class_faster2_histo_1ac20f36c0861a3af085c9546ca1325cc6" compoundref="_faster2_histo_8hpp" startline="27" endline="31">addFile</referencedby>
+        <referencedby refid="class_faster2_histo_1a8684b0b531e6369ce35bca61f4b1007a" compoundref="_faster2_histo_8hpp" startline="21" endline="26">addFolder</referencedby>
+        <referencedby refid="class_faster2_histo_1a72f8004ae550c02db09791b810c0252d" compoundref="_faster2_histo_8hpp" startline="88" endline="121">load</referencedby>
+        <referencedby refid="class_faster2_histo_1a20fd8b47b9a9aecef8682ad5442db16d" compoundref="_faster2_histo_8hpp" startline="123" endline="130">multirun</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_faster2_histo_1a287be636deda02485fc20e28f37d44d1" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int Faster2Histo::m_nb_files</definition>
+        <argsstring></argsstring>
+        <name>m_nb_files</name>
+        <initializer>= -1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Modules/Faster2Histo.hpp" line="55" column="7" bodyfile="lib/Modules/Faster2Histo.hpp" bodystart="55" bodyend="-1"/>
+        <referencedby refid="class_faster2_histo_1aa059538fc470d3de0663e6ec44ebb46d" compoundref="_faster2_histo_8hpp" startline="41" endline="41">setNbFiles</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_faster2_histo_1a92a1969a8cc0953281ee487c40f6514c" prot="private" static="no" mutable="no">
+        <type><ref refid="class_file" kindref="compound">File</ref></type>
+        <definition>File Faster2Histo::m_outFile</definition>
+        <argsstring></argsstring>
+        <name>m_outFile</name>
+        <initializer>= &quot;spectra.root&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Modules/Faster2Histo.hpp" line="54" column="8" bodyfile="lib/Modules/Faster2Histo.hpp" bodystart="54" bodyend="-1"/>
+        <referencedby refid="class_faster2_histo_1a72f8004ae550c02db09791b810c0252d" compoundref="_faster2_histo_8hpp" startline="88" endline="121">load</referencedby>
+        <referencedby refid="class_faster2_histo_1a479d102c3637023aedeaa0b8e7608781" compoundref="_faster2_histo_8hpp" startline="38" endline="38">setOutFilename</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_faster2_histo_1abb960755db4b68484ac9c9904185093c" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int Faster2Histo::m_overwrite</definition>
+        <argsstring></argsstring>
+        <name>m_overwrite</name>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Modules/Faster2Histo.hpp" line="56" column="7" bodyfile="lib/Modules/Faster2Histo.hpp" bodystart="56" bodyend="-1"/>
+        <referencedby refid="class_faster2_histo_1a72f8004ae550c02db09791b810c0252d" compoundref="_faster2_histo_8hpp" startline="88" endline="121">load</referencedby>
+        <referencedby refid="class_faster2_histo_1afadb67cbf1469aebd3133246cf7ba922" compoundref="_faster2_histo_8hpp" startline="43" endline="43">overwrite</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_faster2_histo_1a8ae9cc6eca58047e373aa58fa50aa2f2" prot="private" static="no" mutable="no">
+        <type>std::unordered_map&lt; <ref refid="_hit_8hpp_1ab5dd24876acad09ec52c250c1668466c" kindref="member">Label</ref>, <ref refid="class_m_t_t_hist" kindref="compound">MTTHist</ref>&lt; TH1F &gt; &gt;</type>
+        <definition>std::unordered_map&lt;Label, MTTHist&lt;TH1F&gt; &gt; Faster2Histo::m_spectra</definition>
+        <argsstring></argsstring>
+        <name>m_spectra</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Modules/Faster2Histo.hpp" line="50" column="22" bodyfile="lib/Modules/Faster2Histo.hpp" bodystart="50" bodyend="-1"/>
+        <referencedby refid="class_faster2_histo_1a327a8348f79c5ecf27a58baef32b81d8" compoundref="_faster2_histo_8hpp" startline="146" endline="165">fillHisto</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_faster2_histo_1ab989a53d306f9cf1328921d011199e19" prot="private" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char* Faster2Histo::write_mode</definition>
+        <argsstring></argsstring>
+        <name>write_mode</name>
+        <initializer>= &quot;RECREATE&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Modules/Faster2Histo.hpp" line="51" column="14" bodyfile="lib/Modules/Faster2Histo.hpp" bodystart="51" bodyend="-1"/>
+        <referencedby refid="class_faster2_histo_1aea9828c3cbca9a909cb5f45e4cb659f5" compoundref="_faster2_histo_8hpp" startline="39" endline="39">setWriteMode</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_faster2_histo_1ac20f36c0861a3af085c9546ca1325cc6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Faster2Histo::addFile</definition>
+        <argsstring>(std::string const &amp;file)</argsstring>
+        <name>addFile</name>
+        <param>
+          <type>std::string const &amp;</type>
+          <declname>file</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Modules/Faster2Histo.hpp" line="27" column="8" bodyfile="lib/Modules/Faster2Histo.hpp" bodystart="27" bodyend="31"/>
+        <references refid="class_m_t_faster_reader_1a8693e1143a0aea8096a527c7d9df9a63" compoundref="_m_t_faster_reader_8hpp" startline="132" endline="135">MTFasterReader::addFile</references>
+        <references refid="class_faster2_histo_1a2ec4e07c1b3ee37719c9312822515466" compoundref="_faster2_histo_8hpp" startline="48">m_MTreader</references>
+        <references refid="files__functions_8hpp_1a58f50a6390692cff52eef37fdaa94e56" compoundref="files__functions_8hpp" startline="25" endline="28">rmPathAndExt</references>
+        <references refid="class_faster2_histo_1a479d102c3637023aedeaa0b8e7608781" compoundref="_faster2_histo_8hpp" startline="38" endline="38">setOutFilename</references>
+        <referencedby refid="class_faster2_histo_1a72f8004ae550c02db09791b810c0252d" compoundref="_faster2_histo_8hpp" startline="88" endline="121">load</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_faster2_histo_1a8684b0b531e6369ce35bca61f4b1007a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Faster2Histo::addFolder</definition>
+        <argsstring>(Path folder, int const &amp;nb_files=-1)</argsstring>
+        <name>addFolder</name>
+        <param>
+          <type><ref refid="class_path" kindref="compound">Path</ref></type>
+          <declname>folder</declname>
+        </param>
+        <param>
+          <type>int const &amp;</type>
+          <declname>nb_files</declname>
+          <defval>-1</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Modules/Faster2Histo.hpp" line="21" column="8" bodyfile="lib/Modules/Faster2Histo.hpp" bodystart="21" bodyend="26"/>
+        <references refid="class_m_t_faster_reader_1a58a2fe8f9f9ba39808d43f36f45c8288" compoundref="_m_t_faster_reader_8hpp" startline="127" endline="130">MTFasterReader::addFolder</references>
+        <references refid="class_faster2_histo_1a2ec4e07c1b3ee37719c9312822515466" compoundref="_faster2_histo_8hpp" startline="48">m_MTreader</references>
+        <references refid="files__functions_8hpp_1a58f50a6390692cff52eef37fdaa94e56" compoundref="files__functions_8hpp" startline="25" endline="28">rmPathAndExt</references>
+        <references refid="class_faster2_histo_1a479d102c3637023aedeaa0b8e7608781" compoundref="_faster2_histo_8hpp" startline="38" endline="38">setOutFilename</references>
+        <references refid="class_path_1aa2f2b14aafcc3fc3626c243fcc6574dc" compoundref="files__functions_8hpp" startline="536" endline="536">Path::string</references>
+        <referencedby refid="class_faster2_histo_1a72f8004ae550c02db09791b810c0252d" compoundref="_faster2_histo_8hpp" startline="88" endline="121">load</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_faster2_histo_1a3a7440d82f4e9d4103e097f2f202e2f4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Faster2Histo::Faster2Histo</definition>
+        <argsstring>()</argsstring>
+        <name>Faster2Histo</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Modules/Faster2Histo.hpp" line="17" column="3" bodyfile="lib/Modules/Faster2Histo.hpp" bodystart="17" bodyend="17"/>
+      </memberdef>
+      <memberdef kind="function" id="class_faster2_histo_1aed84ab0be7ff45067715733dd7be23d1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Faster2Histo::Faster2Histo</definition>
+        <argsstring>(int argc, char **argv)</argsstring>
+        <name>Faster2Histo</name>
+        <param>
+          <type>int</type>
+          <declname>argc</declname>
+        </param>
+        <param>
+          <type>char **</type>
+          <declname>argv</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Modules/Faster2Histo.hpp" line="18" column="3" bodyfile="lib/Modules/Faster2Histo.hpp" bodystart="59" bodyend="64"/>
+        <references refid="class_faster2_histo_1a72f8004ae550c02db09791b810c0252d" compoundref="_faster2_histo_8hpp" startline="88" endline="121">load</references>
+        <references refid="class_faster2_histo_1a20fd8b47b9a9aecef8682ad5442db16d" compoundref="_faster2_histo_8hpp" startline="123" endline="130">multirun</references>
+        <references refid="class_faster2_histo_1a355de92b0dc2822b28ac3f65f87b5db9" compoundref="_faster2_histo_8hpp" startline="167" endline="184">write</references>
+      </memberdef>
+      <memberdef kind="function" id="class_faster2_histo_1a327a8348f79c5ecf27a58baef32b81d8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Faster2Histo::fillHisto</definition>
+        <argsstring>(Hit const &amp;hit)</argsstring>
+        <name>fillHisto</name>
+        <param>
+          <type><ref refid="class_hit" kindref="compound">Hit</ref> const &amp;</type>
+          <declname>hit</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Modules/Faster2Histo.hpp" line="35" column="8" bodyfile="lib/Modules/Faster2Histo.hpp" bodystart="146" bodyend="165"/>
+        <references refid="class_hit_1a3d999e7bbbb470d1d3aa55ee772a98d6" compoundref="_hit_8hpp" startline="198">Hit::adc</references>
+        <references refid="_detectors_8hpp_1a06939d30171afd1f13893e05454ed813">detectors</references>
+        <references refid="string__functions_8hpp_1a03fb03d95885354ac3c329693588097b" compoundref="string__functions_8hpp" startline="113" endline="116">found</references>
+        <references refid="class_hit_1a7742ff02158f94fd0ccd163fc34ee9d1" compoundref="_hit_8hpp" startline="196">Hit::label</references>
+        <references refid="class_faster2_histo_1a93debc2e47619ed043f25f90aaa16c75" compoundref="_faster2_histo_8hpp" startline="52">m_calibration</references>
+        <references refid="class_faster2_histo_1a9564f0b9bed4fd3f2d275b4127abedc2" compoundref="_faster2_histo_8hpp" startline="49">m_labels</references>
+        <references refid="class_faster2_histo_1a8ae9cc6eca58047e373aa58fa50aa2f2" compoundref="_faster2_histo_8hpp" startline="50">m_spectra</references>
+        <references refid="class_m_t_object_1a79d86fbc8837ba0f9a4cd1405fddef1c" compoundref="_m_t_object_8hpp" startline="107">MTObject::mutex</references>
+        <referencedby refid="class_faster2_histo_1a48d7d46929ffbd69ccc3a590c535d3b7" compoundref="_faster2_histo_8hpp" startline="132" endline="144">treatFile</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_faster2_histo_1a72f8004ae550c02db09791b810c0252d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Faster2Histo::load</definition>
+        <argsstring>(int const &amp;argc, char **argv)</argsstring>
+        <name>load</name>
+        <param>
+          <type>int const &amp;</type>
+          <declname>argc</declname>
+        </param>
+        <param>
+          <type>char **</type>
+          <declname>argv</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Modules/Faster2Histo.hpp" line="19" column="8" bodyfile="lib/Modules/Faster2Histo.hpp" bodystart="88" bodyend="121"/>
+        <references refid="class_faster2_histo_1ac20f36c0861a3af085c9546ca1325cc6" compoundref="_faster2_histo_8hpp" startline="27" endline="31">addFile</references>
+        <references refid="class_faster2_histo_1a8684b0b531e6369ce35bca61f4b1007a" compoundref="_faster2_histo_8hpp" startline="21" endline="26">addFolder</references>
+        <references refid="_detectors_8hpp_1a06939d30171afd1f13893e05454ed813">detectors</references>
+        <references refid="class_m_t_faster_reader_1a5d2beaf7551d9b288eef9509daf8b3b5" compoundref="_m_t_faster_reader_8hpp" startline="138" endline="138">MTFasterReader::files</references>
+        <references refid="class_detectors_1a03f6e9974f958b86ddbbc4670d0209a2" compoundref="_detectors_8hpp" startline="214" endline="218">Detectors::load</references>
+        <references refid="class_faster2_histo_1a46087c5a676f688d4862304fca62cc24" compoundref="_faster2_histo_8hpp" startline="40" endline="40">loadCalibration</references>
+        <references refid="class_faster2_histo_1a2ec4e07c1b3ee37719c9312822515466" compoundref="_faster2_histo_8hpp" startline="48">m_MTreader</references>
+        <references refid="class_faster2_histo_1a92a1969a8cc0953281ee487c40f6514c" compoundref="_faster2_histo_8hpp" startline="54">m_outFile</references>
+        <references refid="class_faster2_histo_1abb960755db4b68484ac9c9904185093c" compoundref="_faster2_histo_8hpp" startline="56">m_overwrite</references>
+        <references refid="class_faster2_histo_1afadb67cbf1469aebd3133246cf7ba922" compoundref="_faster2_histo_8hpp" startline="43" endline="43">overwrite</references>
+        <references refid="_histogramor_8hpp_1ab48a2fa7184e6354788989602c8c8c29">print</references>
+        <references refid="class_faster2_histo_1af5be7bfaa8186926e62e736310dffc26" compoundref="_faster2_histo_8hpp" startline="66" endline="86">printParameters</references>
+        <references refid="class_faster_reader_1aa1fcb8d6721212bc982cac0ae4e597eb" compoundref="_faster_reader_8hpp" startline="120" endline="120">FasterReader::setMaxHits</references>
+        <references refid="class_faster2_histo_1aa3d364eba3c8fc7367fdabea68524854" compoundref="_faster2_histo_8hpp" startline="42" endline="42">setNbThreads</references>
+        <references refid="class_faster2_histo_1a479d102c3637023aedeaa0b8e7608781" compoundref="_faster2_histo_8hpp" startline="38" endline="38">setOutFilename</references>
+        <references refid="class_file_1a899e6a7c528ab2824c7c584c4ee63073" compoundref="files__functions_8hpp" startline="744" endline="744">File::string</references>
+        <references refid="lib_co_8hpp_1a6df2dcd4b1f61c75dc292942bc5ca74d" compoundref="lib_co_8hpp" startline="234" endline="234">throw_error</references>
+        <referencedby refid="class_faster2_histo_1aed84ab0be7ff45067715733dd7be23d1" compoundref="_faster2_histo_8hpp" startline="59" endline="64">Faster2Histo</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_faster2_histo_1a46087c5a676f688d4862304fca62cc24" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Faster2Histo::loadCalibration</definition>
+        <argsstring>(std::string const &amp;calibration_file)</argsstring>
+        <name>loadCalibration</name>
+        <param>
+          <type>std::string const &amp;</type>
+          <declname>calibration_file</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Modules/Faster2Histo.hpp" line="40" column="8" bodyfile="lib/Modules/Faster2Histo.hpp" bodystart="40" bodyend="40"/>
+        <references refid="class_calibration_1a2d2a0d6276fc2c8a4b60c3801ccc16a9" compoundref="_calibration_8hpp" startline="1016" endline="1063">Calibration::load</references>
+        <references refid="class_faster2_histo_1a93debc2e47619ed043f25f90aaa16c75" compoundref="_faster2_histo_8hpp" startline="52">m_calibration</references>
+        <referencedby refid="class_faster2_histo_1a72f8004ae550c02db09791b810c0252d" compoundref="_faster2_histo_8hpp" startline="88" endline="121">load</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_faster2_histo_1a20fd8b47b9a9aecef8682ad5442db16d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Faster2Histo::multirun</definition>
+        <argsstring>(int const &amp;nb_threads=-1)</argsstring>
+        <name>multirun</name>
+        <param>
+          <type>int const &amp;</type>
+          <declname>nb_threads</declname>
+          <defval>-1</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Modules/Faster2Histo.hpp" line="33" column="8" bodyfile="lib/Modules/Faster2Histo.hpp" bodystart="123" bodyend="130"/>
+        <references refid="class_faster2_histo_1a055dca6d53f3a55eacf7e63ae871b928" compoundref="_faster2_histo_8hpp" startline="47" endline="47">dispatch_threads</references>
+        <references refid="class_m_t_object_1aaa3623d88deae3a9311aad39bfff49dc" compoundref="_m_t_object_8hpp" startline="62" endline="73">MTObject::Initialize</references>
+        <references refid="class_faster2_histo_1a2ec4e07c1b3ee37719c9312822515466" compoundref="_faster2_histo_8hpp" startline="48">m_MTreader</references>
+        <references refid="class_m_t_faster_reader_1ae316d31ebcb18ae8689522509d1ba513" compoundref="_m_t_faster_reader_8hpp" startline="184" endline="189">MTFasterReader::readRaw</references>
+        <referencedby refid="class_faster2_histo_1aed84ab0be7ff45067715733dd7be23d1" compoundref="_faster2_histo_8hpp" startline="59" endline="64">Faster2Histo</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_faster2_histo_1afadb67cbf1469aebd3133246cf7ba922" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Faster2Histo::overwrite</definition>
+        <argsstring>(bool const &amp;_overwrite)</argsstring>
+        <name>overwrite</name>
+        <param>
+          <type>bool const &amp;</type>
+          <declname>_overwrite</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Modules/Faster2Histo.hpp" line="43" column="8" bodyfile="lib/Modules/Faster2Histo.hpp" bodystart="43" bodyend="43"/>
+        <references refid="class_faster2_histo_1abb960755db4b68484ac9c9904185093c" compoundref="_faster2_histo_8hpp" startline="56">m_overwrite</references>
+        <referencedby refid="class_faster2_histo_1a72f8004ae550c02db09791b810c0252d" compoundref="_faster2_histo_8hpp" startline="88" endline="121">load</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_faster2_histo_1aa059538fc470d3de0663e6ec44ebb46d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Faster2Histo::setNbFiles</definition>
+        <argsstring>(int const &amp;_nb_files)</argsstring>
+        <name>setNbFiles</name>
+        <param>
+          <type>int const &amp;</type>
+          <declname>_nb_files</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Modules/Faster2Histo.hpp" line="41" column="8" bodyfile="lib/Modules/Faster2Histo.hpp" bodystart="41" bodyend="41"/>
+        <references refid="class_faster2_histo_1a287be636deda02485fc20e28f37d44d1" compoundref="_faster2_histo_8hpp" startline="55">m_nb_files</references>
+      </memberdef>
+      <memberdef kind="function" id="class_faster2_histo_1aa3d364eba3c8fc7367fdabea68524854" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Faster2Histo::setNbThreads</definition>
+        <argsstring>(int const &amp;_nb_threads)</argsstring>
+        <name>setNbThreads</name>
+        <param>
+          <type>int const &amp;</type>
+          <declname>_nb_threads</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Modules/Faster2Histo.hpp" line="42" column="8" bodyfile="lib/Modules/Faster2Histo.hpp" bodystart="42" bodyend="42"/>
+        <references refid="class_m_t_object_1a872d9518e0a1936df8e70a2dae303f4f" compoundref="_m_t_object_8hpp" startline="30" endline="30">MTObject::setThreadsNb</references>
+        <referencedby refid="class_faster2_histo_1a72f8004ae550c02db09791b810c0252d" compoundref="_faster2_histo_8hpp" startline="88" endline="121">load</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_faster2_histo_1a479d102c3637023aedeaa0b8e7608781" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Faster2Histo::setOutFilename</definition>
+        <argsstring>(std::string const &amp;out_filename) noexcept</argsstring>
+        <name>setOutFilename</name>
+        <param>
+          <type>std::string const &amp;</type>
+          <declname>out_filename</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Modules/Faster2Histo.hpp" line="38" column="8" bodyfile="lib/Modules/Faster2Histo.hpp" bodystart="38" bodyend="38"/>
+        <references refid="class_faster2_histo_1a92a1969a8cc0953281ee487c40f6514c" compoundref="_faster2_histo_8hpp" startline="54">m_outFile</references>
+        <referencedby refid="class_faster2_histo_1ac20f36c0861a3af085c9546ca1325cc6" compoundref="_faster2_histo_8hpp" startline="27" endline="31">addFile</referencedby>
+        <referencedby refid="class_faster2_histo_1a8684b0b531e6369ce35bca61f4b1007a" compoundref="_faster2_histo_8hpp" startline="21" endline="26">addFolder</referencedby>
+        <referencedby refid="class_faster2_histo_1a72f8004ae550c02db09791b810c0252d" compoundref="_faster2_histo_8hpp" startline="88" endline="121">load</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_faster2_histo_1aea9828c3cbca9a909cb5f45e4cb659f5" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Faster2Histo::setWriteMode</definition>
+        <argsstring>(const char *mode) noexcept</argsstring>
+        <name>setWriteMode</name>
+        <param>
+          <type>const char *</type>
+          <declname>mode</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Modules/Faster2Histo.hpp" line="39" column="8" bodyfile="lib/Modules/Faster2Histo.hpp" bodystart="39" bodyend="39"/>
+        <references refid="class_faster2_histo_1ab989a53d306f9cf1328921d011199e19" compoundref="_faster2_histo_8hpp" startline="51">write_mode</references>
+      </memberdef>
+      <memberdef kind="function" id="class_faster2_histo_1a48d7d46929ffbd69ccc3a590c535d3b7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Faster2Histo::treatFile</definition>
+        <argsstring>(Hit &amp;hit, FasterReader &amp;reader)</argsstring>
+        <name>treatFile</name>
+        <param>
+          <type><ref refid="class_hit" kindref="compound">Hit</ref> &amp;</type>
+          <declname>hit</declname>
+        </param>
+        <param>
+          <type><ref refid="class_faster_reader" kindref="compound">FasterReader</ref> &amp;</type>
+          <declname>reader</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Modules/Faster2Histo.hpp" line="34" column="8" bodyfile="lib/Modules/Faster2Histo.hpp" bodystart="132" bodyend="144"/>
+        <references refid="class_faster2_histo_1a327a8348f79c5ecf27a58baef32b81d8" compoundref="_faster2_histo_8hpp" startline="146" endline="165">fillHisto</references>
+        <references refid="class_faster_reader_1aab416287bd95c5dad74fff1ebb45d3c8" compoundref="_faster_reader_8hpp" startline="137" endline="137">FasterReader::getFilename</references>
+        <references refid="class_faster2_histo_1a93debc2e47619ed043f25f90aaa16c75" compoundref="_faster2_histo_8hpp" startline="52">m_calibration</references>
+        <references refid="_histogramor_8hpp_1ab48a2fa7184e6354788989602c8c8c29">print</references>
+        <references refid="class_faster_reader_1a2d05907241b80ed637b2ae5a01503756" compoundref="_faster_reader_8hpp" startline="259" endline="270">FasterReader::Read</references>
+        <references refid="class_file_1a43e3d087ec47881811167f3a20a99cfa" compoundref="files__functions_8hpp" startline="760" endline="760">File::size</references>
+        <references refid="class_timer_1a4b85f2f938d7261db769607fc50fcaef" compoundref="_timer_8hpp" startline="37" endline="41">Timer::TimeSec</references>
+        <references refid="class_timer_1a3614503158effc6668bc10001d75d20c" compoundref="_timer_8hpp" startline="68" endline="68">Timer::unit</references>
+      </memberdef>
+      <memberdef kind="function" id="class_faster2_histo_1a355de92b0dc2822b28ac3f65f87b5db9" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Faster2Histo::write</definition>
+        <argsstring>(std::string const &amp;out_filename=&quot;&quot;)</argsstring>
+        <name>write</name>
+        <param>
+          <type>std::string const &amp;</type>
+          <declname>out_filename</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Modules/Faster2Histo.hpp" line="36" column="8" bodyfile="lib/Modules/Faster2Histo.hpp" bodystart="167" bodyend="184"/>
+        <references refid="vector__functions_8hpp_1a28b5494cf9f51ee725e680752955a8e1" compoundref="vector__functions_8hpp" startline="118" endline="138">bubbleSort</references>
+        <references refid="_histogramor_8hpp_1ab48a2fa7184e6354788989602c8c8c29">print</references>
+        <referencedby refid="class_faster2_histo_1aed84ab0be7ff45067715733dd7be23d1" compoundref="_faster2_histo_8hpp" startline="59" endline="64">Faster2Histo</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="class_faster2_histo_1af5be7bfaa8186926e62e736310dffc26" prot="private" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Faster2Histo::printParameters</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>printParameters</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Modules/Faster2Histo.hpp" line="46" column="8" bodyfile="lib/Modules/Faster2Histo.hpp" bodystart="66" bodyend="86"/>
+        <references refid="_histogramor_8hpp_1ab48a2fa7184e6354788989602c8c8c29">print</references>
+        <referencedby refid="class_faster2_histo_1a72f8004ae550c02db09791b810c0252d" compoundref="_faster2_histo_8hpp" startline="88" endline="121">load</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="class_faster2_histo_1a055dca6d53f3a55eacf7e63ae871b928" prot="private" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void Faster2Histo::dispatch_threads</definition>
+        <argsstring>(Hit &amp;hit, FasterReader &amp;reader, Faster2Histo &amp;f2h)</argsstring>
+        <name>dispatch_threads</name>
+        <param>
+          <type><ref refid="class_hit" kindref="compound">Hit</ref> &amp;</type>
+          <declname>hit</declname>
+        </param>
+        <param>
+          <type><ref refid="class_faster_reader" kindref="compound">FasterReader</ref> &amp;</type>
+          <declname>reader</declname>
+        </param>
+        <param>
+          <type><ref refid="class_faster2_histo" kindref="compound">Faster2Histo</ref> &amp;</type>
+          <declname>f2h</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Modules/Faster2Histo.hpp" line="47" column="15" bodyfile="lib/Modules/Faster2Histo.hpp" bodystart="47" bodyend="47"/>
+        <referencedby refid="class_faster2_histo_1a20fd8b47b9a9aecef8682ad5442db16d" compoundref="_faster2_histo_8hpp" startline="123" endline="130">multirun</referencedby>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>Faster2Histo</label>
+        <link refid="class_faster2_histo"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>m_MTreader</edgelabel>
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>m_outFile</edgelabel>
+        </childnode>
+        <childnode refid="9" relation="usage">
+          <edgelabel>m_calibration</edgelabel>
+        </childnode>
+      </node>
+      <node id="5">
+        <label>Path</label>
+        <link refid="class_path"/>
+        <childnode refid="6" relation="usage">
+          <edgelabel>m_recursive_folders</edgelabel>
+        </childnode>
+      </node>
+      <node id="11">
+        <label>MTTHist&lt; TH2F &gt;</label>
+        <link refid="class_m_t_t_hist"/>
+      </node>
+      <node id="2">
+        <label>MTFasterReader</label>
+        <link refid="class_m_t_faster_reader"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>m_MTfiles</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>m_files</edgelabel>
+        </childnode>
+      </node>
+      <node id="8">
+        <label>Filename</label>
+        <link refid="class_filename"/>
+      </node>
+      <node id="10">
+        <label>Calibration::histograms</label>
+        <link refid="struct_calibration_1_1histograms"/>
+        <childnode refid="11" relation="usage">
+          <edgelabel>all_raw_spectra</edgelabel>
+        </childnode>
+      </node>
+      <node id="6">
+        <label>Folders</label>
+        <link refid="class_folders"/>
+      </node>
+      <node id="3">
+        <label>MTVector&lt; std::string &gt;</label>
+        <link refid="class_m_t_vector"/>
+      </node>
+      <node id="9">
+        <label>Calibration</label>
+        <link refid="class_calibration"/>
+        <childnode refid="10" relation="usage">
+          <edgelabel>m_histos</edgelabel>
+        </childnode>
+      </node>
+      <node id="7">
+        <label>File</label>
+        <link refid="class_file"/>
+        <childnode refid="8" relation="usage">
+          <edgelabel>m_filename</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>m_path</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>FilesManager</label>
+        <link refid="class_files_manager"/>
+        <childnode refid="5" relation="usage">
+          <edgelabel>m_path</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="lib/Modules/Faster2Histo.hpp" line="14" column="1" bodyfile="lib/Modules/Faster2Histo.hpp" bodystart="15" bodyend="57"/>
+    <listofallmembers>
+      <member refid="class_faster2_histo_1ac20f36c0861a3af085c9546ca1325cc6" prot="public" virt="non-virtual"><scope>Faster2Histo</scope><name>addFile</name></member>
+      <member refid="class_faster2_histo_1a8684b0b531e6369ce35bca61f4b1007a" prot="public" virt="non-virtual"><scope>Faster2Histo</scope><name>addFolder</name></member>
+      <member refid="class_faster2_histo_1a055dca6d53f3a55eacf7e63ae871b928" prot="private" virt="non-virtual"><scope>Faster2Histo</scope><name>dispatch_threads</name></member>
+      <member refid="class_faster2_histo_1a3a7440d82f4e9d4103e097f2f202e2f4" prot="public" virt="non-virtual"><scope>Faster2Histo</scope><name>Faster2Histo</name></member>
+      <member refid="class_faster2_histo_1aed84ab0be7ff45067715733dd7be23d1" prot="public" virt="non-virtual"><scope>Faster2Histo</scope><name>Faster2Histo</name></member>
+      <member refid="class_faster2_histo_1a327a8348f79c5ecf27a58baef32b81d8" prot="public" virt="non-virtual"><scope>Faster2Histo</scope><name>fillHisto</name></member>
+      <member refid="class_faster2_histo_1a72f8004ae550c02db09791b810c0252d" prot="public" virt="non-virtual"><scope>Faster2Histo</scope><name>load</name></member>
+      <member refid="class_faster2_histo_1a46087c5a676f688d4862304fca62cc24" prot="public" virt="non-virtual"><scope>Faster2Histo</scope><name>loadCalibration</name></member>
+      <member refid="class_faster2_histo_1a93debc2e47619ed043f25f90aaa16c75" prot="private" virt="non-virtual"><scope>Faster2Histo</scope><name>m_calibration</name></member>
+      <member refid="class_faster2_histo_1a9564f0b9bed4fd3f2d275b4127abedc2" prot="private" virt="non-virtual"><scope>Faster2Histo</scope><name>m_labels</name></member>
+      <member refid="class_faster2_histo_1a2ec4e07c1b3ee37719c9312822515466" prot="private" virt="non-virtual"><scope>Faster2Histo</scope><name>m_MTreader</name></member>
+      <member refid="class_faster2_histo_1a287be636deda02485fc20e28f37d44d1" prot="private" virt="non-virtual"><scope>Faster2Histo</scope><name>m_nb_files</name></member>
+      <member refid="class_faster2_histo_1a92a1969a8cc0953281ee487c40f6514c" prot="private" virt="non-virtual"><scope>Faster2Histo</scope><name>m_outFile</name></member>
+      <member refid="class_faster2_histo_1abb960755db4b68484ac9c9904185093c" prot="private" virt="non-virtual"><scope>Faster2Histo</scope><name>m_overwrite</name></member>
+      <member refid="class_faster2_histo_1a8ae9cc6eca58047e373aa58fa50aa2f2" prot="private" virt="non-virtual"><scope>Faster2Histo</scope><name>m_spectra</name></member>
+      <member refid="class_faster2_histo_1a20fd8b47b9a9aecef8682ad5442db16d" prot="public" virt="non-virtual"><scope>Faster2Histo</scope><name>multirun</name></member>
+      <member refid="class_faster2_histo_1afadb67cbf1469aebd3133246cf7ba922" prot="public" virt="non-virtual"><scope>Faster2Histo</scope><name>overwrite</name></member>
+      <member refid="class_faster2_histo_1af5be7bfaa8186926e62e736310dffc26" prot="private" virt="non-virtual"><scope>Faster2Histo</scope><name>printParameters</name></member>
+      <member refid="class_faster2_histo_1aa059538fc470d3de0663e6ec44ebb46d" prot="public" virt="non-virtual"><scope>Faster2Histo</scope><name>setNbFiles</name></member>
+      <member refid="class_faster2_histo_1aa3d364eba3c8fc7367fdabea68524854" prot="public" virt="non-virtual"><scope>Faster2Histo</scope><name>setNbThreads</name></member>
+      <member refid="class_faster2_histo_1a479d102c3637023aedeaa0b8e7608781" prot="public" virt="non-virtual"><scope>Faster2Histo</scope><name>setOutFilename</name></member>
+      <member refid="class_faster2_histo_1aea9828c3cbca9a909cb5f45e4cb659f5" prot="public" virt="non-virtual"><scope>Faster2Histo</scope><name>setWriteMode</name></member>
+      <member refid="class_faster2_histo_1a48d7d46929ffbd69ccc3a590c535d3b7" prot="public" virt="non-virtual"><scope>Faster2Histo</scope><name>treatFile</name></member>
+      <member refid="class_faster2_histo_1a355de92b0dc2822b28ac3f65f87b5db9" prot="public" virt="non-virtual"><scope>Faster2Histo</scope><name>write</name></member>
+      <member refid="class_faster2_histo_1ab989a53d306f9cf1328921d011199e19" prot="private" virt="non-virtual"><scope>Faster2Histo</scope><name>write_mode</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

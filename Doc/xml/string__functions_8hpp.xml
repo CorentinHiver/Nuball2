@@ -1,0 +1,864 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="string__functions_8hpp" kind="file" language="C++">
+    <compoundname>string_functions.hpp</compoundname>
+    <includes local="no">vector</includes>
+    <includes local="no">string</includes>
+    <includedby refid="files__functions_8hpp" local="yes">lib/files_functions.hpp</includedby>
+    <includedby refid="lib_co_8hpp" local="yes">lib/libCo.hpp</includedby>
+    <incdepgraph>
+      <node id="3">
+        <label>string</label>
+      </node>
+      <node id="2">
+        <label>vector</label>
+      </node>
+      <node id="1">
+        <label>lib/string_functions.hpp</label>
+        <link refid="string__functions_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="46">
+        <label>lib/MTObjects/MTVariable.hpp</label>
+        <link refid="_m_t_variable_8hpp"/>
+      </node>
+      <node id="4">
+        <label>lib/Analyse/Counters.hpp</label>
+        <link refid="_analyse_2_counters_8hpp"/>
+      </node>
+      <node id="34">
+        <label>lib/Classes/RWMat.hxx</label>
+        <link refid="_r_w_mat_8hxx"/>
+      </node>
+      <node id="35">
+        <label>lib/libRoot.hpp</label>
+        <link refid="lib_root_8hpp"/>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="42" relation="include">
+        </childnode>
+      </node>
+      <node id="22">
+        <label>lib/Modules/Faster2Histo.hpp</label>
+        <link refid="_faster2_histo_8hpp"/>
+      </node>
+      <node id="27">
+        <label>lib/Classes/RF_Manager.hpp</label>
+        <link refid="_r_f___manager_8hpp"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="32">
+        <label>lib/Classes/Manip.hpp</label>
+        <link refid="_manip_8hpp"/>
+      </node>
+      <node id="20">
+        <label>lib/MTObjects/MTFasterReader.hpp</label>
+        <link refid="_m_t_faster_reader_8hpp"/>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="25">
+        <label>lib/Classes/Nuball2Tree.hpp</label>
+        <link refid="_nuball2_tree_8hpp"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+      </node>
+      <node id="30">
+        <label>lib/Classes/Gate.hpp</label>
+        <link refid="_gate_8hpp"/>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>lib/Analyse/DSSD.hpp</label>
+        <link refid="_d_s_s_d_8hpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="29">
+        <label>lib/MTObjects/MTFilesManager.hpp</label>
+        <link refid="_m_t_files_manager_8hpp"/>
+      </node>
+      <node id="40">
+        <label>lib/Classes/FasterReader.hpp</label>
+        <link refid="_faster_reader_8hpp"/>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>lib/Analyse/EventAnalyse.hpp</label>
+        <link refid="_event_analyse_8hpp"/>
+      </node>
+      <node id="43">
+        <label>lib/MTObjects/MTCounter.hpp</label>
+        <link refid="_m_t_counter_8hpp"/>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="44" relation="include">
+        </childnode>
+      </node>
+      <node id="39">
+        <label>lib/Classes/Hit.hpp</label>
+        <link refid="_hit_8hpp"/>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>lib/libCo.hpp</label>
+        <link refid="lib_co_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="47" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>lib/Classes/EventBuilder.hpp</label>
+        <link refid="_event_builder_8hpp"/>
+      </node>
+      <node id="17">
+        <label>lib/Analyse/Clovers.hpp</label>
+        <link refid="_clovers_8hpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="47">
+        <label>lib/Modules/Timewalk.hpp</label>
+        <link refid="_timewalk_8hpp"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>lib/Modules/CloverSpectra.hpp</label>
+        <link refid="_clover_spectra_8hpp"/>
+      </node>
+      <node id="45">
+        <label>lib/MTObjects/MTList.hpp</label>
+        <link refid="_m_t_list_8hpp"/>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+      </node>
+      <node id="44">
+        <label>lib/MTObjects/MTTHist.hpp</label>
+        <link refid="_m_t_t_hist_8hpp"/>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>lib/files_functions.hpp</label>
+        <link refid="files__functions_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="36">
+        <label>lib/Analyse/ParisCluster.hpp</label>
+        <link refid="_paris_cluster_8hpp"/>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>lib/Classes/Counters.hpp</label>
+        <link refid="_classes_2_counters_8hpp"/>
+      </node>
+      <node id="38">
+        <label>lib/Classes/Detectors.hpp</label>
+        <link refid="_detectors_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="41">
+        <label>lib/Classes/SpectraAlignator.hpp</label>
+        <link refid="_spectra_alignator_8hpp"/>
+      </node>
+      <node id="16">
+        <label>lib/Classes/Event.hpp</label>
+        <link refid="_event_8hpp"/>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>lib/Modules/Histogramor.hpp</label>
+        <link refid="_histogramor_8hpp"/>
+        <childnode refid="24" relation="include">
+        </childnode>
+      </node>
+      <node id="31">
+        <label>lib/Analyse/HistoAnalyse.hpp</label>
+        <link refid="_histo_analyse_8hpp"/>
+      </node>
+      <node id="7">
+        <label>lib/Analyse/Sorted_Event.hpp</label>
+        <link refid="_sorted___event_8hpp"/>
+      </node>
+      <node id="11">
+        <label>lib/Modules/Faster2Root.hpp</label>
+        <link refid="_faster2_root_8hpp"/>
+      </node>
+      <node id="37">
+        <label>lib/Analyse/ParisPhoswitch.hpp</label>
+        <link refid="_paris_phoswitch_8hpp"/>
+        <childnode refid="36" relation="include">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>lib/Modules/RunMatrixator.hpp</label>
+        <link refid="_run_matrixator_8hpp"/>
+      </node>
+      <node id="1">
+        <label>lib/string_functions.hpp</label>
+        <link refid="string__functions_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>lib/Classes/CoincBuilder.hpp</label>
+        <link refid="_coinc_builder_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>lib/Classes/Builder.hpp</label>
+        <link refid="_builder_8hpp"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="42">
+        <label>lib/MTObjects/MTObject.hpp</label>
+        <link refid="_m_t_object_8hpp"/>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="43" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="44" relation="include">
+        </childnode>
+        <childnode refid="46" relation="include">
+        </childnode>
+      </node>
+      <node id="24">
+        <label>lib/Modules/NearLine.hpp</label>
+        <link refid="_near_line_8hpp"/>
+      </node>
+      <node id="12">
+        <label>lib/Modules/Timeshifts.hpp</label>
+        <link refid="_timeshifts_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="18">
+        <label>lib/Analyse/Paris.hpp</label>
+        <link refid="_paris_8hpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="19">
+        <label>lib/Classes/Alignator.hpp</label>
+        <link refid="_alignator_8hpp"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+      </node>
+      <node id="28">
+        <label>lib/Classes/FilesManager.hpp</label>
+        <link refid="_files_manager_8hpp"/>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+      </node>
+      <node id="26">
+        <label>lib/MTObjects/MTRootReader.hpp</label>
+        <link refid="_m_t_root_reader_8hpp"/>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="21">
+        <label>lib/Modules/Calibration.hpp</label>
+        <link refid="_calibration_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="33">
+        <label>lib/Classes/Performances.hpp</label>
+        <link refid="_performances_8hpp"/>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="string__functions_8hpp_1ab14274457c8b46f1fe9f22745ae2186a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string firstPart</definition>
+        <argsstring>(std::string const &amp;string, char const &amp;sep)</argsstring>
+        <name>firstPart</name>
+        <param>
+          <type>std::string const &amp;</type>
+          <declname>string</declname>
+        </param>
+        <param>
+          <type>char const &amp;</type>
+          <declname>sep</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/string_functions.hpp" line="7" column="13" bodyfile="lib/string_functions.hpp" bodystart="7" bodyend="7"/>
+      </memberdef>
+      <memberdef kind="function" id="string__functions_8hpp_1a03fb03d95885354ac3c329693588097b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool found</definition>
+        <argsstring>(std::string const &amp;string, std::string const &amp;substr)</argsstring>
+        <name>found</name>
+        <param>
+          <type>std::string const &amp;</type>
+          <declname>string</declname>
+        </param>
+        <param>
+          <type>std::string const &amp;</type>
+          <declname>substr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/string_functions.hpp" line="113" column="6" bodyfile="lib/string_functions.hpp" bodystart="113" bodyend="116"/>
+        <referencedby refid="class_run_matrixator_1a1f6ba04bc894d68a6d72ccedf8367ad4" compoundref="_run_matrixator_8hpp" startline="59" endline="71">RunMatrixator::dontMatrixate</referencedby>
+        <referencedby refid="class_faster2_histo_1a327a8348f79c5ecf27a58baef32b81d8" compoundref="_faster2_histo_8hpp" startline="146" endline="165">Faster2Histo::fillHisto</referencedby>
+        <referencedby refid="class_faster2_root_1a5b8a78ef8c54117807c770d21fa4acf0" compoundref="_faster2_root_8hpp" startline="265" endline="280">Faster2Root::loadTriggerFile</referencedby>
+        <referencedby refid="class_detectors_1ae5e6ff02bf3d79da3f034f7404e0677c" compoundref="_detectors_8hpp" startline="117" endline="121">Detectors::nbOfType</referencedby>
+        <referencedby refid="class_fit_1a861a69c651863dcb3b41a788fe73f69d" compoundref="_calibration_8hpp" startline="89" endline="89">Fit::peaks_found</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="string__functions_8hpp_1a44ad60b408ba7b75bdf7ae75f8d2532f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; std::string &gt;</type>
+        <definition>std::vector&lt;std::string&gt; getList</definition>
+        <argsstring>(std::string string, char const &amp;separator, bool const &amp;removeVoids=false)</argsstring>
+        <name>getList</name>
+        <param>
+          <type>std::string</type>
+          <declname>string</declname>
+        </param>
+        <param>
+          <type>char const &amp;</type>
+          <declname>separator</declname>
+        </param>
+        <param>
+          <type>bool const &amp;</type>
+          <declname>removeVoids</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+<para>Cuts a string into pieces separated by the given separator like &apos;;&apos; or &apos; &apos; or &apos;,&apos; ... </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Understand the removeVoids parameter : for instance, we have string = &quot;;1;2;3;;5&quot;</para>
+<para>without removeVoids this function returns {&quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;5&quot;} with removeVoids this function returns {&quot;&quot;, &quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;&quot;, &quot;5&quot;} </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/string_functions.hpp" line="22" column="13" bodyfile="lib/string_functions.hpp" bodystart="22" bodyend="48"/>
+        <referencedby refid="class_path_1ac9b837b0071ab41b4b0868590786eeae" compoundref="files__functions_8hpp" startline="517" endline="517">Path::makeFolderList</referencedby>
+        <referencedby refid="string__functions_8hpp_1ab2c67e2ba68d5a42ce9a48dafdbba829" compoundref="string__functions_8hpp" startline="71" endline="81">replaceCharacter</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="string__functions_8hpp_1a4adaa91d1b90e1b97cc5fee8998e09b1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool isNumber</definition>
+        <argsstring>(std::string const &amp;string)</argsstring>
+        <name>isNumber</name>
+        <param>
+          <type>std::string const &amp;</type>
+          <declname>string</declname>
+        </param>
+        <briefdescription>
+<para>Returns true if all its characters are digits. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/string_functions.hpp" line="104" column="6" bodyfile="lib/string_functions.hpp" bodystart="104" bodyend="111"/>
+        <referencedby refid="class_timeshifts_1aa9f8bdcbeef03f8be872602e6c717d4d" compoundref="_timeshifts_8hpp" startline="1026" endline="1033">Timeshifts::setTimeReference</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="string__functions_8hpp_1a3f3e5a4df9e542b1aa927c29ddf26af3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string lastPart</definition>
+        <argsstring>(std::string const &amp;string, char const &amp;sep)</argsstring>
+        <name>lastPart</name>
+        <param>
+          <type>std::string const &amp;</type>
+          <declname>string</declname>
+        </param>
+        <param>
+          <type>char const &amp;</type>
+          <declname>sep</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/string_functions.hpp" line="8" column="13" bodyfile="lib/string_functions.hpp" bodystart="8" bodyend="8"/>
+      </memberdef>
+      <memberdef kind="function" id="string__functions_8hpp_1a93bd453ee6b6af7c8e5e970bb1000651" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string &amp;</type>
+        <definition>std::string&amp; pop_front</definition>
+        <argsstring>(std::string &amp;string)</argsstring>
+        <name>pop_front</name>
+        <param>
+          <type>std::string &amp;</type>
+          <declname>string</declname>
+        </param>
+        <briefdescription>
+<para>Removes the first character of a string. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="attention"><para>Careful, time complexity makes it really heavy on big string </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/string_functions.hpp" line="88" column="14" bodyfile="lib/string_functions.hpp" bodystart="88" bodyend="88"/>
+      </memberdef>
+      <memberdef kind="function" id="string__functions_8hpp_1a952e248eeca9d6f3be780b68df3f3264" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool remove</definition>
+        <argsstring>(std::string &amp;string, std::string const &amp;substr)</argsstring>
+        <name>remove</name>
+        <param>
+          <type>std::string &amp;</type>
+          <declname>string</declname>
+        </param>
+        <param>
+          <type>std::string const &amp;</type>
+          <declname>substr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/string_functions.hpp" line="118" column="6" bodyfile="lib/string_functions.hpp" bodystart="118" bodyend="128"/>
+      </memberdef>
+      <memberdef kind="function" id="string__functions_8hpp_1a8cf535d46125ed8622aedb6300d8de46" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string removeBlankSpace</definition>
+        <argsstring>(std::string str)</argsstring>
+        <name>removeBlankSpace</name>
+        <param>
+          <type>std::string</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+<para>Remove all the blank space in a string. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/string_functions.hpp" line="51" column="13" bodyfile="lib/string_functions.hpp" bodystart="51" bodyend="59"/>
+      </memberdef>
+      <memberdef kind="function" id="string__functions_8hpp_1abb2a169e2ba2e6a949a988e4d591699e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string removeFirstPart</definition>
+        <argsstring>(std::string const &amp;string, char const &amp;sep)</argsstring>
+        <name>removeFirstPart</name>
+        <param>
+          <type>std::string const &amp;</type>
+          <declname>string</declname>
+        </param>
+        <param>
+          <type>char const &amp;</type>
+          <declname>sep</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/string_functions.hpp" line="9" column="13" bodyfile="lib/string_functions.hpp" bodystart="9" bodyend="9"/>
+      </memberdef>
+      <memberdef kind="function" id="string__functions_8hpp_1a416863eb8599122a08605e1f2f94d617" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string removeLastPart</definition>
+        <argsstring>(std::string const &amp;string, char const &amp;sep)</argsstring>
+        <name>removeLastPart</name>
+        <param>
+          <type>std::string const &amp;</type>
+          <declname>string</declname>
+        </param>
+        <param>
+          <type>char const &amp;</type>
+          <declname>sep</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/string_functions.hpp" line="10" column="13" bodyfile="lib/string_functions.hpp" bodystart="10" bodyend="10"/>
+      </memberdef>
+      <memberdef kind="function" id="string__functions_8hpp_1ab2c67e2ba68d5a42ce9a48dafdbba829" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string replaceCharacter</definition>
+        <argsstring>(std::string const &amp;istring, char const &amp;ichar, char const &amp;ochar)</argsstring>
+        <name>replaceCharacter</name>
+        <param>
+          <type>std::string const &amp;</type>
+          <declname>istring</declname>
+        </param>
+        <param>
+          <type>char const &amp;</type>
+          <declname>ichar</declname>
+        </param>
+        <param>
+          <type>char const &amp;</type>
+          <declname>ochar</declname>
+        </param>
+        <briefdescription>
+<para>Replaces all the instances of one character with another. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>For instance : std::string istring = &quot;je_suis_ton_pere&quot;; std::string ostring = replaceCharacter(istring, &apos;_&apos;, &apos; &apos;); print(ostring); // output : &quot;je suis ton pere&quot; </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/string_functions.hpp" line="71" column="13" bodyfile="lib/string_functions.hpp" bodystart="71" bodyend="81"/>
+        <references refid="string__functions_8hpp_1a44ad60b408ba7b75bdf7ae75f8d2532f" compoundref="string__functions_8hpp" startline="22" endline="48">getList</references>
+        <referencedby refid="class_detectors_1a8d5c0f2d189ddda12ed3c36f13887cfd" compoundref="_detectors_8hpp" startline="271" endline="372">Detectors::makeArrays</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="string__functions_8hpp_1aeda11ede077505e8eb3d667a6cb02788" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string rpCommaWDots</definition>
+        <argsstring>(std::string str)</argsstring>
+        <name>rpCommaWDots</name>
+        <param>
+          <type>std::string</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+<para>Replace all the commas of a std::string with dots. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/string_functions.hpp" line="92" column="13" bodyfile="lib/string_functions.hpp" bodystart="92" bodyend="100"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>STRING_FUNCTIONS_HPP</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>STRING_FUNCTIONS_HPP</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;vector&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;string&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7" refid="string__functions_8hpp_1ab14274457c8b46f1fe9f22745ae2186a" refkind="member"><highlight class="normal">std::string<sp/><ref refid="string__functions_8hpp_1ab14274457c8b46f1fe9f22745ae2186a" kindref="member">firstPart</ref><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(std::string<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>sep)<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">string</highlight><highlight class="normal">.substr(0,<sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">.find_first_of(sep)<sp/>));<sp/><sp/>}</highlight></codeline>
+<codeline lineno="8" refid="string__functions_8hpp_1a3f3e5a4df9e542b1aa927c29ddf26af3" refkind="member"><highlight class="normal">std::string<sp/><ref refid="string__functions_8hpp_1a3f3e5a4df9e542b1aa927c29ddf26af3" kindref="member">lastPart</ref><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(std::string<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>sep)<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">string</highlight><highlight class="normal">.substr(<sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">.find_last_of(sep)+1));<sp/><sp/>}</highlight></codeline>
+<codeline lineno="9" refid="string__functions_8hpp_1abb2a169e2ba2e6a949a988e4d591699e" refkind="member"><highlight class="normal">std::string<sp/><ref refid="string__functions_8hpp_1abb2a169e2ba2e6a949a988e4d591699e" kindref="member">removeFirstPart</ref><sp/>(std::string<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>sep)<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">string</highlight><highlight class="normal">.substr(<sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">.find_first_of(sep)<sp/>));<sp/><sp/>}</highlight></codeline>
+<codeline lineno="10" refid="string__functions_8hpp_1a416863eb8599122a08605e1f2f94d617" refkind="member"><highlight class="normal">std::string<sp/><ref refid="string__functions_8hpp_1a416863eb8599122a08605e1f2f94d617" kindref="member">removeLastPart</ref><sp/><sp/>(std::string<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>sep)<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">string</highlight><highlight class="normal">.substr(0,<sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">.find_last_of(sep)<sp/><sp/>));<sp/><sp/>}</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="22" refid="string__functions_8hpp_1a44ad60b408ba7b75bdf7ae75f8d2532f" refkind="member"><highlight class="normal">std::vector&lt;std::string&gt;<sp/><ref refid="string__functions_8hpp_1a44ad60b408ba7b75bdf7ae75f8d2532f" kindref="member">getList</ref>(std::string<sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>separator,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>removeVoids<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="23"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>pos<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/>std::vector&lt;std::string&gt;<sp/>ret;</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal">((pos<sp/>=<sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">.find(separator)<sp/>)<sp/>!=<sp/>-1ul)</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(pos==0)<sp/></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!removeVoids)<sp/>ret.push_back(</highlight><highlight class="stringliteral">&quot;&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">.erase(0,1);</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">continue</highlight><highlight class="normal">;<sp/></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(pos<sp/>==<sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">.size())</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight><highlight class="comment">//<sp/>If<sp/>the<sp/>separator<sp/>is<sp/>at<sp/>the<sp/>end<sp/>of<sp/>the<sp/>string<sp/>then<sp/>we<sp/>have<sp/>completed<sp/>the<sp/>list<sp/>and<sp/>can<sp/>terminate<sp/>the<sp/>loop</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>ret.push_back(</highlight><highlight class="keywordtype">string</highlight><highlight class="normal">.substr(0,pos));</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight><highlight class="comment">//<sp/>If<sp/>the<sp/>separator<sp/>is<sp/>at<sp/>the<sp/>middle<sp/>of<sp/>the<sp/>string<sp/>then<sp/>remove<sp/>the<sp/>part<sp/>before<sp/>and<sp/>push<sp/>it<sp/>into<sp/>the<sp/>vector</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>ret.push_back(</highlight><highlight class="keywordtype">string</highlight><highlight class="normal">.substr(0,pos));</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">.erase(0,pos+1);</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>If<sp/>the<sp/>string<sp/>does<sp/>not<sp/>finish<sp/>with<sp/>the<sp/>character<sp/>then<sp/>we<sp/>must<sp/>take<sp/>the<sp/>last<sp/>part<sp/>of<sp/>it</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">string</highlight><highlight class="normal">.size()<sp/>&gt;<sp/>0)<sp/>ret.push_back(</highlight><highlight class="keywordtype">string</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>ret;</highlight></codeline>
+<codeline lineno="48"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight></codeline>
+<codeline lineno="51" refid="string__functions_8hpp_1a8cf535d46125ed8622aedb6300d8de46" refkind="member"><highlight class="normal">std::string<sp/><ref refid="string__functions_8hpp_1a8cf535d46125ed8622aedb6300d8de46" kindref="member">removeBlankSpace</ref>(std::string<sp/>str)</highlight></codeline>
+<codeline lineno="52"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>pos<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal"><sp/>(<sp/>(pos<sp/>=<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keywordtype">int</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(str.find(</highlight><highlight class="charliteral">&apos;<sp/>&apos;</highlight><highlight class="normal">))<sp/>)<sp/>!=<sp/>-1)</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/>str<sp/>=<sp/>str.substr(0,pos)<sp/>+<sp/>str.substr(pos+1,str.size()-pos-1);</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>str;</highlight></codeline>
+<codeline lineno="59"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight></codeline>
+<codeline lineno="71" refid="string__functions_8hpp_1ab2c67e2ba68d5a42ce9a48dafdbba829" refkind="member"><highlight class="normal">std::string<sp/><ref refid="string__functions_8hpp_1ab2c67e2ba68d5a42ce9a48dafdbba829" kindref="member">replaceCharacter</ref>(std::string<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>istring,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>ichar,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>ochar)</highlight></codeline>
+<codeline lineno="72"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>list<sp/>=<sp/><ref refid="string__functions_8hpp_1a44ad60b408ba7b75bdf7ae75f8d2532f" kindref="member">getList</ref>(istring,<sp/>ichar);</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/>std::string<sp/>ostring;</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/>:<sp/>list)</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/>ostring+=(</highlight><highlight class="keywordtype">string</highlight><highlight class="normal">+ochar);</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>ostring;</highlight></codeline>
+<codeline lineno="81"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"></highlight></codeline>
+<codeline lineno="88" refid="string__functions_8hpp_1a93bd453ee6b6af7c8e5e970bb1000651" refkind="member"><highlight class="normal">std::string<sp/>&amp;<sp/><ref refid="string__functions_8hpp_1a93bd453ee6b6af7c8e5e970bb1000651" kindref="member">pop_front</ref>(std::string<sp/>&amp;<sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">)<sp/>{</highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">string</highlight><highlight class="normal">.size()<sp/>&gt;<sp/>0)<sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">.erase(0,1);<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>string;}</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"></highlight></codeline>
+<codeline lineno="90"><highlight class="normal"></highlight></codeline>
+<codeline lineno="92" refid="string__functions_8hpp_1aeda11ede077505e8eb3d667a6cb02788" refkind="member"><highlight class="normal">std::string<sp/><ref refid="string__functions_8hpp_1aeda11ede077505e8eb3d667a6cb02788" kindref="member">rpCommaWDots</ref>(std::string<sp/>str)</highlight></codeline>
+<codeline lineno="93"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>pos<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal"><sp/>(<sp/>(<sp/>pos<sp/>=<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keywordtype">int</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(str.find(</highlight><highlight class="stringliteral">&quot;,&quot;</highlight><highlight class="normal">))<sp/>)<sp/>!=<sp/>-1)</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/>str<sp/>=<sp/>str.substr(0,pos)<sp/>+<sp/></highlight><highlight class="stringliteral">&quot;.&quot;</highlight><highlight class="normal"><sp/>+<sp/>str.substr(pos+1,str.size()-pos-1);</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>str;</highlight></codeline>
+<codeline lineno="100"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"></highlight></codeline>
+<codeline lineno="102"><highlight class="normal"></highlight></codeline>
+<codeline lineno="104" refid="string__functions_8hpp_1a4adaa91d1b90e1b97cc5fee8998e09b1" refkind="member"><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="string__functions_8hpp_1a4adaa91d1b90e1b97cc5fee8998e09b1" kindref="member">isNumber</ref>(std::string<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="105"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>c<sp/>:<sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!(isdigit(c)<sp/>||<sp/></highlight><highlight class="stringliteral">&quot;E&quot;</highlight><highlight class="normal">))<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="111"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"></highlight></codeline>
+<codeline lineno="113" refid="string__functions_8hpp_1a03fb03d95885354ac3c329693588097b" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="string__functions_8hpp_1a03fb03d95885354ac3c329693588097b" kindref="member">found</ref>(std::string<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">,<sp/>std::string<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>substr)</highlight></codeline>
+<codeline lineno="114"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">string</highlight><highlight class="normal">.find(substr)<sp/>!=<sp/>std::string::npos);</highlight></codeline>
+<codeline lineno="116"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"></highlight></codeline>
+<codeline lineno="118" refid="string__functions_8hpp_1a952e248eeca9d6f3be780b68df3f3264" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="string__functions_8hpp_1a952e248eeca9d6f3be780b68df3f3264" kindref="member">remove</ref>(std::string<sp/>&amp;<sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">,<sp/>std::string<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>substr)</highlight></codeline>
+<codeline lineno="119"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>pos<sp/>=<sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">.find(substr);</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(pos!=std::string::npos)</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>first_str<sp/>=<sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">.substr(0,<sp/>pos);</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/>=<sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">.substr(0,<sp/>pos)+</highlight><highlight class="keywordtype">string</highlight><highlight class="normal">.substr(pos+substr.size());</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="128"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"></highlight></codeline>
+<codeline lineno="130"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//STRING_FUNCTIONS_HPP</highlight></codeline>
+    </programlisting>
+    <location file="lib/string_functions.hpp"/>
+  </compounddef>
+</doxygen>

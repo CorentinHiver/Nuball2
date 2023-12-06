@@ -1,0 +1,503 @@
+\doxysection{Files\+Manager Class Reference}
+\label{class_files_manager}\index{FilesManager@{FilesManager}}
+
+
+{\ttfamily \#include $<$Files\+Manager.\+hpp$>$}
+
+
+
+Inheritance diagram for Files\+Manager\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=177pt]{class_files_manager__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Files\+Manager\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=224pt]{class_files_manager__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual bool \textbf{ add\+Files} (std\+::string const \&\+\_\+filename)
+\item 
+virtual bool \textbf{ add\+Folder} (std\+::string folder, long nb\+\_\+files=-\/1, std\+::vector$<$ std\+::string $>$ const \&extensions=\{\char`\"{}root\char`\"{}, \char`\"{}fast\char`\"{}\})
+\item 
+auto \textbf{ begin} ()
+\item 
+auto \textbf{ begin} () const
+\item 
+float \textbf{ disk\+Size} () const
+\item 
+auto \textbf{ end} ()
+\item 
+auto \textbf{ end} () const
+\item 
+\textbf{ Files\+Manager} ()
+\item 
+\textbf{ Files\+Manager} (\textbf{ Path} \&folder, long nb\+\_\+files=-\/1)
+\item 
+\textbf{ Files\+Manager} (std\+::string const \&folder, long nb\+\_\+files=-\/1)
+\item 
+virtual void \textbf{ flush\+Files} ()
+\item 
+auto \& \textbf{ get} ()
+\item 
+auto const  \& \textbf{ get} () const
+\item 
+\textbf{ size\+\_\+t} const  \& \textbf{ get\+Cursor} () const
+\item 
+virtual std\+::string \textbf{ get\+File} (int const \&n=-\/1)
+\item 
+\textbf{ List\+Files} const  \& \textbf{ get\+Files\+In\+Folder} (std\+::string folder)
+\item 
+\textbf{ List\+Files} const  \& \textbf{ get\+List\+Files} () const
+\item 
+\textbf{ List\+Folders} const  \& \textbf{ get\+List\+Folders} () const
+\item 
+bool \textbf{ is\+Empty} () const
+\item 
+bool \textbf{ next\+File\+Name} (std\+::string \&filename, \textbf{ size\+\_\+t} const \&step=1)
+\item 
+\textbf{ operator bool} () const
+\item 
+\textbf{ Files\+Manager} const  \& \textbf{ operator=} (\textbf{ Files\+Manager} const \&other)
+\item 
+void \textbf{ operator=} (\textbf{ List\+Files} const \&list)
+\item 
+std\+::string \textbf{ operator[$\,$]} (int const \&n)
+\item 
+\textbf{ Path} const  \& \textbf{ path} () const
+\item 
+void \textbf{ Print} ()
+\item 
+void \textbf{ print\+Folders} ()
+\item 
+void \textbf{ set\+Cursor} (int const \&\+\_\+files\+Cursor)
+\item 
+void \textbf{ set\+Cursor} (\textbf{ size\+\_\+t} const \&\+\_\+files\+Cursor)
+\item 
+void \textbf{ set\+List\+Files} (\textbf{ List\+Files} const \&list)
+\item 
+void \textbf{ set\+Verbose} (bool const \&v)
+\item 
+\textbf{ size\+\_\+t} \textbf{ size} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \textbf{ is\+Readable} = false
+\item 
+\textbf{ size\+\_\+t} \textbf{ m\+\_\+files\+Cursor} = 0
+\item 
+\textbf{ List\+Files} \textbf{ m\+\_\+list\+Files}
+\item 
+std\+::map$<$ std\+::string, \textbf{ List\+Files} $>$ \textbf{ m\+\_\+list\+Files\+In\+Folder}
+\item 
+\textbf{ List\+Folders} \textbf{ m\+\_\+list\+Folder}
+\item 
+\textbf{ Path} \textbf{ m\+\_\+path}
+\item 
+bool \textbf{ verbose} = false
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\label{class_files_manager_a23a2094a7e12272375d5c1a69a9d7a5d}} 
+\index{FilesManager@{FilesManager}!FilesManager@{FilesManager}}
+\index{FilesManager@{FilesManager}!FilesManager@{FilesManager}}
+\doxysubsubsection{FilesManager()\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily Files\+Manager\+::\+Files\+Manager (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_files_manager_ab73099416f575af7d1ea40add38b5ad0}} 
+\index{FilesManager@{FilesManager}!FilesManager@{FilesManager}}
+\index{FilesManager@{FilesManager}!FilesManager@{FilesManager}}
+\doxysubsubsection{FilesManager()\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily Files\+Manager\+::\+Files\+Manager (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{folder,  }\item[{long}]{nb\+\_\+files = {\ttfamily -\/1} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_files_manager_ab73099416f575af7d1ea40add38b5ad0_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_files_manager_a384696ab2c23a423c9627c07004ea4a6}} 
+\index{FilesManager@{FilesManager}!FilesManager@{FilesManager}}
+\index{FilesManager@{FilesManager}!FilesManager@{FilesManager}}
+\doxysubsubsection{FilesManager()\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily Files\+Manager\+::\+Files\+Manager (\begin{DoxyParamCaption}\item[{\textbf{ Path} \&}]{folder,  }\item[{long}]{nb\+\_\+files = {\ttfamily -\/1} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_files_manager_a384696ab2c23a423c9627c07004ea4a6_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\label{class_files_manager_a3aaaccb43ef036f930ffcf1ca3ea522f}} 
+\index{FilesManager@{FilesManager}!addFiles@{addFiles}}
+\index{addFiles@{addFiles}!FilesManager@{FilesManager}}
+\doxysubsubsection{addFiles()}
+{\footnotesize\ttfamily bool Files\+Manager\+::add\+Files (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{\+\_\+filename }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=309pt]{class_files_manager_a3aaaccb43ef036f930ffcf1ca3ea522f_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_files_manager_a3aaaccb43ef036f930ffcf1ca3ea522f_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_files_manager_a6d05662378bde592075237b9fa0a5168}} 
+\index{FilesManager@{FilesManager}!addFolder@{addFolder}}
+\index{addFolder@{addFolder}!FilesManager@{FilesManager}}
+\doxysubsubsection{addFolder()}
+{\footnotesize\ttfamily bool Files\+Manager\+::add\+Folder (\begin{DoxyParamCaption}\item[{std\+::string}]{folder,  }\item[{long}]{nb\+\_\+files = {\ttfamily -\/1},  }\item[{std\+::vector$<$ std\+::string $>$ const \&}]{extensions = {\ttfamily \{\char`\"{}root\char`\"{},~\char`\"{}fast\char`\"{}\}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_files_manager_a6d05662378bde592075237b9fa0a5168_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_files_manager_a6d05662378bde592075237b9fa0a5168_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_files_manager_a444c7295f3b1a3b9053db2b64a809514}} 
+\index{FilesManager@{FilesManager}!begin@{begin}}
+\index{begin@{begin}!FilesManager@{FilesManager}}
+\doxysubsubsection{begin()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily auto Files\+Manager\+::begin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_files_manager_acc6d5a780b87ea8ef55a5a43d8d806aa}} 
+\index{FilesManager@{FilesManager}!begin@{begin}}
+\index{begin@{begin}!FilesManager@{FilesManager}}
+\doxysubsubsection{begin()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily auto Files\+Manager\+::begin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_files_manager_a519d928170afd78b97573900450e8e3e}} 
+\index{FilesManager@{FilesManager}!diskSize@{diskSize}}
+\index{diskSize@{diskSize}!FilesManager@{FilesManager}}
+\doxysubsubsection{diskSize()}
+{\footnotesize\ttfamily float Files\+Manager\+::disk\+Size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_files_manager_a519d928170afd78b97573900450e8e3e_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_files_manager_ad6f8c081ffad62c336ae5b3a8a5495e6}} 
+\index{FilesManager@{FilesManager}!end@{end}}
+\index{end@{end}!FilesManager@{FilesManager}}
+\doxysubsubsection{end()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily auto Files\+Manager\+::end (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_files_manager_a00d94c31c948795299d9152b2c4e7dca}} 
+\index{FilesManager@{FilesManager}!end@{end}}
+\index{end@{end}!FilesManager@{FilesManager}}
+\doxysubsubsection{end()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily auto Files\+Manager\+::end (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_files_manager_a78f516fb7d432e25ab36b5b4763b6cab}} 
+\index{FilesManager@{FilesManager}!flushFiles@{flushFiles}}
+\index{flushFiles@{flushFiles}!FilesManager@{FilesManager}}
+\doxysubsubsection{flushFiles()}
+{\footnotesize\ttfamily void Files\+Manager\+::flush\+Files (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_files_manager_a78f516fb7d432e25ab36b5b4763b6cab_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_files_manager_a0348db71fd84552aac6cfc90990b2775}} 
+\index{FilesManager@{FilesManager}!get@{get}}
+\index{get@{get}!FilesManager@{FilesManager}}
+\doxysubsubsection{get()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily auto\& Files\+Manager\+::get (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_files_manager_a0f59f2614a79d529bc6398a137384efd}} 
+\index{FilesManager@{FilesManager}!get@{get}}
+\index{get@{get}!FilesManager@{FilesManager}}
+\doxysubsubsection{get()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily auto const\& Files\+Manager\+::get (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_files_manager_ab9d800959dd94e4003c3b379734af59a}} 
+\index{FilesManager@{FilesManager}!getCursor@{getCursor}}
+\index{getCursor@{getCursor}!FilesManager@{FilesManager}}
+\doxysubsubsection{getCursor()}
+{\footnotesize\ttfamily \textbf{ size\+\_\+t} const\& Files\+Manager\+::get\+Cursor (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_files_manager_a6de7ae3ec87e58cfe7c03dc28640a3f5}} 
+\index{FilesManager@{FilesManager}!getFile@{getFile}}
+\index{getFile@{getFile}!FilesManager@{FilesManager}}
+\doxysubsubsection{getFile()}
+{\footnotesize\ttfamily virtual std\+::string Files\+Manager\+::get\+File (\begin{DoxyParamCaption}\item[{int const \&}]{n = {\ttfamily -\/1} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_files_manager_a6de7ae3ec87e58cfe7c03dc28640a3f5_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_files_manager_a3098544727ca05a49370d362f88c7d5d}} 
+\index{FilesManager@{FilesManager}!getFilesInFolder@{getFilesInFolder}}
+\index{getFilesInFolder@{getFilesInFolder}!FilesManager@{FilesManager}}
+\doxysubsubsection{getFilesInFolder()}
+{\footnotesize\ttfamily \textbf{ List\+Files} const\& Files\+Manager\+::get\+Files\+In\+Folder (\begin{DoxyParamCaption}\item[{std\+::string}]{folder }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_files_manager_a2b619786ba65a7ac1e701fc61e2409ae}} 
+\index{FilesManager@{FilesManager}!getListFiles@{getListFiles}}
+\index{getListFiles@{getListFiles}!FilesManager@{FilesManager}}
+\doxysubsubsection{getListFiles()}
+{\footnotesize\ttfamily \textbf{ List\+Files} const\& Files\+Manager\+::get\+List\+Files (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_files_manager_a2b619786ba65a7ac1e701fc61e2409ae_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_files_manager_a608cb616f47ffaec54d0a2c033c82ab7}} 
+\index{FilesManager@{FilesManager}!getListFolders@{getListFolders}}
+\index{getListFolders@{getListFolders}!FilesManager@{FilesManager}}
+\doxysubsubsection{getListFolders()}
+{\footnotesize\ttfamily \textbf{ List\+Folders} const\& Files\+Manager\+::get\+List\+Folders (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_files_manager_a031ec08f37366ff77828b8106f20cf66}} 
+\index{FilesManager@{FilesManager}!isEmpty@{isEmpty}}
+\index{isEmpty@{isEmpty}!FilesManager@{FilesManager}}
+\doxysubsubsection{isEmpty()}
+{\footnotesize\ttfamily bool Files\+Manager\+::is\+Empty (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_files_manager_a031ec08f37366ff77828b8106f20cf66_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_files_manager_a031ec08f37366ff77828b8106f20cf66_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_files_manager_ac4d90f9590ed90fcbbe23557ae88c892}} 
+\index{FilesManager@{FilesManager}!nextFileName@{nextFileName}}
+\index{nextFileName@{nextFileName}!FilesManager@{FilesManager}}
+\doxysubsubsection{nextFileName()}
+{\footnotesize\ttfamily bool Files\+Manager\+::next\+File\+Name (\begin{DoxyParamCaption}\item[{std\+::string \&}]{filename,  }\item[{\textbf{ size\+\_\+t} const \&}]{step = {\ttfamily 1} }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_files_manager_ac4d90f9590ed90fcbbe23557ae88c892_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_files_manager_a3405dcb99deb03c4fdea55fff9f3ffdf}} 
+\index{FilesManager@{FilesManager}!operator bool@{operator bool}}
+\index{operator bool@{operator bool}!FilesManager@{FilesManager}}
+\doxysubsubsection{operator bool()}
+{\footnotesize\ttfamily Files\+Manager\+::operator bool (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_files_manager_a3405dcb99deb03c4fdea55fff9f3ffdf_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_files_manager_a192c60593f1a0469cc4c6bd5727c9905}} 
+\index{FilesManager@{FilesManager}!operator=@{operator=}}
+\index{operator=@{operator=}!FilesManager@{FilesManager}}
+\doxysubsubsection{operator=()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \textbf{ Files\+Manager} const\& Files\+Manager\+::operator= (\begin{DoxyParamCaption}\item[{\textbf{ Files\+Manager} const \&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_files_manager_ae7f5500280a409300732527ddd9f5884}} 
+\index{FilesManager@{FilesManager}!operator=@{operator=}}
+\index{operator=@{operator=}!FilesManager@{FilesManager}}
+\doxysubsubsection{operator=()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Files\+Manager\+::operator= (\begin{DoxyParamCaption}\item[{\textbf{ List\+Files} const \&}]{list }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_files_manager_ae7f5500280a409300732527ddd9f5884_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_files_manager_a78934b0656b357c7eb3807aa4bea7f26}} 
+\index{FilesManager@{FilesManager}!operator[]@{operator[]}}
+\index{operator[]@{operator[]}!FilesManager@{FilesManager}}
+\doxysubsubsection{operator[]()}
+{\footnotesize\ttfamily std\+::string Files\+Manager\+::operator[$\,$] (\begin{DoxyParamCaption}\item[{int const \&}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_files_manager_a78934b0656b357c7eb3807aa4bea7f26_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_files_manager_a9e94015b1a269aba763b4791b8eaa957}} 
+\index{FilesManager@{FilesManager}!path@{path}}
+\index{path@{path}!FilesManager@{FilesManager}}
+\doxysubsubsection{path()}
+{\footnotesize\ttfamily \textbf{ Path} const\& Files\+Manager\+::path (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_files_manager_a8d40403481fa064867f12ff55dcbf0ba}} 
+\index{FilesManager@{FilesManager}!Print@{Print}}
+\index{Print@{Print}!FilesManager@{FilesManager}}
+\doxysubsubsection{Print()}
+{\footnotesize\ttfamily void Files\+Manager\+::\+Print (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=265pt]{class_files_manager_a8d40403481fa064867f12ff55dcbf0ba_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_files_manager_ae8f32735de82faefc4284fcb2623f206}} 
+\index{FilesManager@{FilesManager}!printFolders@{printFolders}}
+\index{printFolders@{printFolders}!FilesManager@{FilesManager}}
+\doxysubsubsection{printFolders()}
+{\footnotesize\ttfamily void Files\+Manager\+::print\+Folders (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=301pt]{class_files_manager_ae8f32735de82faefc4284fcb2623f206_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_files_manager_aa72af0ac3e9923df087384a2bade2c7e}} 
+\index{FilesManager@{FilesManager}!setCursor@{setCursor}}
+\index{setCursor@{setCursor}!FilesManager@{FilesManager}}
+\doxysubsubsection{setCursor()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Files\+Manager\+::set\+Cursor (\begin{DoxyParamCaption}\item[{int const \&}]{\+\_\+files\+Cursor }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_files_manager_aa3e8631822c6f1e152890a496ea40d63}} 
+\index{FilesManager@{FilesManager}!setCursor@{setCursor}}
+\index{setCursor@{setCursor}!FilesManager@{FilesManager}}
+\doxysubsubsection{setCursor()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Files\+Manager\+::set\+Cursor (\begin{DoxyParamCaption}\item[{\textbf{ size\+\_\+t} const \&}]{\+\_\+files\+Cursor }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_files_manager_a548490c251183fff04e9db3a1d605875}} 
+\index{FilesManager@{FilesManager}!setListFiles@{setListFiles}}
+\index{setListFiles@{setListFiles}!FilesManager@{FilesManager}}
+\doxysubsubsection{setListFiles()}
+{\footnotesize\ttfamily void Files\+Manager\+::set\+List\+Files (\begin{DoxyParamCaption}\item[{\textbf{ List\+Files} const \&}]{list }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_files_manager_a548490c251183fff04e9db3a1d605875_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_files_manager_a548490c251183fff04e9db3a1d605875_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_files_manager_a59f028130e0b38bac855ebd8ee938202}} 
+\index{FilesManager@{FilesManager}!setVerbose@{setVerbose}}
+\index{setVerbose@{setVerbose}!FilesManager@{FilesManager}}
+\doxysubsubsection{setVerbose()}
+{\footnotesize\ttfamily void Files\+Manager\+::set\+Verbose (\begin{DoxyParamCaption}\item[{bool const \&}]{v }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_files_manager_ac64c81b01eeebd3ea9cde0f7f6da995e}} 
+\index{FilesManager@{FilesManager}!size@{size}}
+\index{size@{size}!FilesManager@{FilesManager}}
+\doxysubsubsection{size()}
+{\footnotesize\ttfamily \textbf{ size\+\_\+t} Files\+Manager\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_files_manager_ac64c81b01eeebd3ea9cde0f7f6da995e_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\label{class_files_manager_a4721c3a635a648a4724d268b2b842064}} 
+\index{FilesManager@{FilesManager}!isReadable@{isReadable}}
+\index{isReadable@{isReadable}!FilesManager@{FilesManager}}
+\doxysubsubsection{isReadable}
+{\footnotesize\ttfamily bool Files\+Manager\+::is\+Readable = false\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\label{class_files_manager_a0a7f3e4727cc95b945c22a7df9e9c0e9}} 
+\index{FilesManager@{FilesManager}!m\_filesCursor@{m\_filesCursor}}
+\index{m\_filesCursor@{m\_filesCursor}!FilesManager@{FilesManager}}
+\doxysubsubsection{m\_filesCursor}
+{\footnotesize\ttfamily \textbf{ size\+\_\+t} Files\+Manager\+::m\+\_\+files\+Cursor = 0\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\label{class_files_manager_ad847c8c06f9ad4c1459d76c8fd034fc2}} 
+\index{FilesManager@{FilesManager}!m\_listFiles@{m\_listFiles}}
+\index{m\_listFiles@{m\_listFiles}!FilesManager@{FilesManager}}
+\doxysubsubsection{m\_listFiles}
+{\footnotesize\ttfamily \textbf{ List\+Files} Files\+Manager\+::m\+\_\+list\+Files\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\label{class_files_manager_aac344c1b50c5e98ff64f6007b726be43}} 
+\index{FilesManager@{FilesManager}!m\_listFilesInFolder@{m\_listFilesInFolder}}
+\index{m\_listFilesInFolder@{m\_listFilesInFolder}!FilesManager@{FilesManager}}
+\doxysubsubsection{m\_listFilesInFolder}
+{\footnotesize\ttfamily std\+::map$<$std\+::string, \textbf{ List\+Files}$>$ Files\+Manager\+::m\+\_\+list\+Files\+In\+Folder\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\label{class_files_manager_adffde8338a5fd34b53b84e74320b2eb1}} 
+\index{FilesManager@{FilesManager}!m\_listFolder@{m\_listFolder}}
+\index{m\_listFolder@{m\_listFolder}!FilesManager@{FilesManager}}
+\doxysubsubsection{m\_listFolder}
+{\footnotesize\ttfamily \textbf{ List\+Folders} Files\+Manager\+::m\+\_\+list\+Folder\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\label{class_files_manager_a1fee4928b5f2901a8871cd3b9551788c}} 
+\index{FilesManager@{FilesManager}!m\_path@{m\_path}}
+\index{m\_path@{m\_path}!FilesManager@{FilesManager}}
+\doxysubsubsection{m\_path}
+{\footnotesize\ttfamily \textbf{ Path} Files\+Manager\+::m\+\_\+path\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\label{class_files_manager_a7b9423dd2d7f87e518b0cbb80454c24b}} 
+\index{FilesManager@{FilesManager}!verbose@{verbose}}
+\index{verbose@{verbose}!FilesManager@{FilesManager}}
+\doxysubsubsection{verbose}
+{\footnotesize\ttfamily bool Files\+Manager\+::verbose = false\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+lib/\+Classes/\textbf{ Files\+Manager.\+hpp}\end{DoxyCompactItemize}

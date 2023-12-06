@@ -1,0 +1,153 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="class_clovers_1_1_delayed_gate" kind="class" language="C++" prot="public">
+    <compoundname>Clovers::DelayedGate</compoundname>
+    <includes refid="_clovers_8hpp" local="no">Clovers.hpp</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_clovers_1_1_delayed_gate_1a730d8ada73e8b3337efcbf68c66b4a42" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float Clovers::DelayedGate::m_high_E</definition>
+        <argsstring></argsstring>
+        <name>m_high_E</name>
+        <initializer>= 100</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/Clovers.hpp" line="350" column="11" bodyfile="lib/Analyse/Clovers.hpp" bodystart="350" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_clovers_1_1_delayed_gate_1a7d7104c6298961f558dbe86e45c8e9dc" prot="private" static="no" mutable="no">
+        <type><ref refid="_gate_8hpp_1aec153c0c98a059999caa4cfb803777c8" kindref="member">Gate</ref></type>
+        <definition>Gate Clovers::DelayedGate::m_high_E_gate</definition>
+        <argsstring></argsstring>
+        <name>m_high_E_gate</name>
+        <initializer>= {40.f, 145.f}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/Clovers.hpp" line="352" column="10" bodyfile="lib/Analyse/Clovers.hpp" bodystart="352" bodyend="-1"/>
+        <referencedby refid="class_clovers_1_1_delayed_gate_1a99b6bd95a46640581a2e8ed4db91336e" compoundref="_clovers_8hpp" startline="334" endline="339">operator()</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_clovers_1_1_delayed_gate_1abae41589bbf517cc6de956bf774f3cdb" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float Clovers::DelayedGate::m_low_E</definition>
+        <argsstring></argsstring>
+        <name>m_low_E</name>
+        <initializer>= 100</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/Clovers.hpp" line="351" column="11" bodyfile="lib/Analyse/Clovers.hpp" bodystart="351" bodyend="-1"/>
+        <referencedby refid="class_clovers_1_1_delayed_gate_1a99b6bd95a46640581a2e8ed4db91336e" compoundref="_clovers_8hpp" startline="334" endline="339">operator()</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_clovers_1_1_delayed_gate_1a2b8ade0055f592263dc7ce0c146a94c1" prot="private" static="no" mutable="no">
+        <type><ref refid="_gate_8hpp_1aec153c0c98a059999caa4cfb803777c8" kindref="member">Gate</ref></type>
+        <definition>Gate Clovers::DelayedGate::m_low_E_gate</definition>
+        <argsstring></argsstring>
+        <name>m_low_E_gate</name>
+        <initializer>= {60.f, 145.f}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/Clovers.hpp" line="353" column="10" bodyfile="lib/Analyse/Clovers.hpp" bodystart="353" bodyend="-1"/>
+        <referencedby refid="class_clovers_1_1_delayed_gate_1a99b6bd95a46640581a2e8ed4db91336e" compoundref="_clovers_8hpp" startline="334" endline="339">operator()</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_clovers_1_1_delayed_gate_1ad56e49d7480258ae67105b58e0624bac" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Clovers::DelayedGate::DelayedGate</definition>
+        <argsstring>()</argsstring>
+        <name>DelayedGate</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/Clovers.hpp" line="333" column="5" bodyfile="lib/Analyse/Clovers.hpp" bodystart="333" bodyend="333"/>
+      </memberdef>
+      <memberdef kind="function" id="class_clovers_1_1_delayed_gate_1a91c5e552a14d95e0801b8ac51944f6e1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Clovers::DelayedGate::operator()</definition>
+        <argsstring>(double const &amp;time)</argsstring>
+        <name>operator()</name>
+        <param>
+          <type>double const &amp;</type>
+          <declname>time</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/Clovers.hpp" line="341" column="10" bodyfile="lib/Analyse/Clovers.hpp" bodystart="341" bodyend="347"/>
+      </memberdef>
+      <memberdef kind="function" id="class_clovers_1_1_delayed_gate_1a99b6bd95a46640581a2e8ed4db91336e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Clovers::DelayedGate::operator()</definition>
+        <argsstring>(double const &amp;time, float const &amp;energy)</argsstring>
+        <name>operator()</name>
+        <param>
+          <type>double const &amp;</type>
+          <declname>time</declname>
+        </param>
+        <param>
+          <type>float const &amp;</type>
+          <declname>energy</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/Clovers.hpp" line="334" column="10" bodyfile="lib/Analyse/Clovers.hpp" bodystart="334" bodyend="339"/>
+        <references refid="class_gate__t_1a6ece805d91b1c54d4b84cc36e652bc0f" compoundref="_gate_8hpp" startline="25" endline="25">Gate_t&lt; T &gt;::isIn</references>
+        <references refid="class_clovers_1_1_delayed_gate_1a7d7104c6298961f558dbe86e45c8e9dc" compoundref="_clovers_8hpp" startline="352">m_high_E_gate</references>
+        <references refid="class_clovers_1_1_delayed_gate_1abae41589bbf517cc6de956bf774f3cdb" compoundref="_clovers_8hpp" startline="351">m_low_E</references>
+        <references refid="class_clovers_1_1_delayed_gate_1a2b8ade0055f592263dc7ce0c146a94c1" compoundref="_clovers_8hpp" startline="353">m_low_E_gate</references>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="2">
+        <label>Gate_t&lt; float &gt;</label>
+        <link refid="class_gate__t"/>
+      </node>
+      <node id="1">
+        <label>Clovers::DelayedGate</label>
+        <link refid="class_clovers_1_1_delayed_gate"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>m_high_E_gate</edgelabel>
+          <edgelabel>m_low_E_gate</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="lib/Analyse/Clovers.hpp" line="330" column="3" bodyfile="lib/Analyse/Clovers.hpp" bodystart="331" bodyend="354"/>
+    <listofallmembers>
+      <member refid="class_clovers_1_1_delayed_gate_1ad56e49d7480258ae67105b58e0624bac" prot="public" virt="non-virtual"><scope>Clovers::DelayedGate</scope><name>DelayedGate</name></member>
+      <member refid="class_clovers_1_1_delayed_gate_1a730d8ada73e8b3337efcbf68c66b4a42" prot="private" virt="non-virtual"><scope>Clovers::DelayedGate</scope><name>m_high_E</name></member>
+      <member refid="class_clovers_1_1_delayed_gate_1a7d7104c6298961f558dbe86e45c8e9dc" prot="private" virt="non-virtual"><scope>Clovers::DelayedGate</scope><name>m_high_E_gate</name></member>
+      <member refid="class_clovers_1_1_delayed_gate_1abae41589bbf517cc6de956bf774f3cdb" prot="private" virt="non-virtual"><scope>Clovers::DelayedGate</scope><name>m_low_E</name></member>
+      <member refid="class_clovers_1_1_delayed_gate_1a2b8ade0055f592263dc7ce0c146a94c1" prot="private" virt="non-virtual"><scope>Clovers::DelayedGate</scope><name>m_low_E_gate</name></member>
+      <member refid="class_clovers_1_1_delayed_gate_1a99b6bd95a46640581a2e8ed4db91336e" prot="public" virt="non-virtual"><scope>Clovers::DelayedGate</scope><name>operator()</name></member>
+      <member refid="class_clovers_1_1_delayed_gate_1a91c5e552a14d95e0801b8ac51944f6e1" prot="public" virt="non-virtual"><scope>Clovers::DelayedGate</scope><name>operator()</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

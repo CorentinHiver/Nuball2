@@ -1,0 +1,200 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_string__functions_8hpp" xml:lang="en-US">
+<title>lib/string_functions.hpp File Reference</title>
+<indexterm><primary>lib/string_functions.hpp</primary></indexterm>
+<programlisting>#include &lt;vector&gt;
+#include &lt;string&gt;
+</programlisting>Include dependency graph for string_functions.hpp:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="string__functions_8hpp__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+This graph shows which files directly or indirectly include this file:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="string__functions_8hpp__dep__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>std::string <link linkend="_string__functions_8hpp_1ab14274457c8b46f1fe9f22745ae2186a">firstPart</link> (std::string const &amp;string, char const &amp;sep)</para>
+</listitem>
+            <listitem><para>bool <link linkend="_string__functions_8hpp_1a03fb03d95885354ac3c329693588097b">found</link> (std::string const &amp;string, std::string const &amp;substr)</para>
+</listitem>
+            <listitem><para>std::vector&lt; std::string &gt; <link linkend="_string__functions_8hpp_1a44ad60b408ba7b75bdf7ae75f8d2532f">getList</link> (std::string string, char const &amp;separator, bool const &amp;removeVoids=false)</para>
+
+<para>Cuts a string into pieces separated by the given separator like &apos;;&apos; or &apos; &apos; or &apos;,&apos; ... </para>
+</listitem>
+            <listitem><para>bool <link linkend="_string__functions_8hpp_1a4adaa91d1b90e1b97cc5fee8998e09b1">isNumber</link> (std::string const &amp;string)</para>
+
+<para>Returns true if all its characters are digits. </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_string__functions_8hpp_1a3f3e5a4df9e542b1aa927c29ddf26af3">lastPart</link> (std::string const &amp;string, char const &amp;sep)</para>
+</listitem>
+            <listitem><para>std::string &amp; <link linkend="_string__functions_8hpp_1a93bd453ee6b6af7c8e5e970bb1000651">pop_front</link> (std::string &amp;string)</para>
+
+<para>Removes the first character of a string. </para>
+</listitem>
+            <listitem><para>bool <link linkend="_string__functions_8hpp_1a952e248eeca9d6f3be780b68df3f3264">remove</link> (std::string &amp;string, std::string const &amp;substr)</para>
+</listitem>
+            <listitem><para>std::string <link linkend="_string__functions_8hpp_1a8cf535d46125ed8622aedb6300d8de46">removeBlankSpace</link> (std::string str)</para>
+
+<para>Remove all the blank space in a string. </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_string__functions_8hpp_1abb2a169e2ba2e6a949a988e4d591699e">removeFirstPart</link> (std::string const &amp;string, char const &amp;sep)</para>
+</listitem>
+            <listitem><para>std::string <link linkend="_string__functions_8hpp_1a416863eb8599122a08605e1f2f94d617">removeLastPart</link> (std::string const &amp;string, char const &amp;sep)</para>
+</listitem>
+            <listitem><para>std::string <link linkend="_string__functions_8hpp_1ab2c67e2ba68d5a42ce9a48dafdbba829">replaceCharacter</link> (std::string const &amp;istring, char const &amp;ichar, char const &amp;ochar)</para>
+
+<para>Replaces all the instances of one character with another. </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_string__functions_8hpp_1aeda11ede077505e8eb3d667a6cb02788">rpCommaWDots</link> (std::string str)</para>
+
+<para>Replace all the commas of a std::string with dots. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_string__functions_8hpp_1ab14274457c8b46f1fe9f22745ae2186a"/>    <section>
+    <title>firstPart()</title>
+<indexterm><primary>firstPart</primary><secondary>string_functions.hpp</secondary></indexterm>
+<indexterm><primary>string_functions.hpp</primary><secondary>firstPart</secondary></indexterm>
+<para><computeroutput>std::string firstPart (std::string const &amp; string, char const &amp; sep)</computeroutput></para>    </section><anchor xml:id="_string__functions_8hpp_1a03fb03d95885354ac3c329693588097b"/>    <section>
+    <title>found()</title>
+<indexterm><primary>found</primary><secondary>string_functions.hpp</secondary></indexterm>
+<indexterm><primary>string_functions.hpp</primary><secondary>found</secondary></indexterm>
+<para><computeroutput>bool found (std::string const &amp; string, std::string const &amp; substr)</computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="string__functions_8hpp_a03fb03d95885354ac3c329693588097b_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_string__functions_8hpp_1a44ad60b408ba7b75bdf7ae75f8d2532f"/>    <section>
+    <title>getList()</title>
+<indexterm><primary>getList</primary><secondary>string_functions.hpp</secondary></indexterm>
+<indexterm><primary>string_functions.hpp</primary><secondary>getList</secondary></indexterm>
+<para><computeroutput>std::vector&lt;std::string&gt; getList (std::string string, char const &amp; separator, bool const &amp; removeVoids = <computeroutput>false</computeroutput>
+)</computeroutput></para><para>
+
+<para>Cuts a string into pieces separated by the given separator like &apos;;&apos; or &apos; &apos; or &apos;,&apos; ... </para>
+</para>
+
+<para>Understand the removeVoids parameter : for instance, we have string = &quot;;1;2;3;;5&quot;</para>
+
+<para>without removeVoids this function returns {&quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;5&quot;} with removeVoids this function returns {&quot;&quot;, &quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;&quot;, &quot;5&quot;} </para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="string__functions_8hpp_a44ad60b408ba7b75bdf7ae75f8d2532f_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_string__functions_8hpp_1a4adaa91d1b90e1b97cc5fee8998e09b1"/>    <section>
+    <title>isNumber()</title>
+<indexterm><primary>isNumber</primary><secondary>string_functions.hpp</secondary></indexterm>
+<indexterm><primary>string_functions.hpp</primary><secondary>isNumber</secondary></indexterm>
+<para><computeroutput>bool isNumber (std::string const &amp; string)</computeroutput></para><para>
+
+<para>Returns true if all its characters are digits. </para>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="string__functions_8hpp_a4adaa91d1b90e1b97cc5fee8998e09b1_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_string__functions_8hpp_1a3f3e5a4df9e542b1aa927c29ddf26af3"/>    <section>
+    <title>lastPart()</title>
+<indexterm><primary>lastPart</primary><secondary>string_functions.hpp</secondary></indexterm>
+<indexterm><primary>string_functions.hpp</primary><secondary>lastPart</secondary></indexterm>
+<para><computeroutput>std::string lastPart (std::string const &amp; string, char const &amp; sep)</computeroutput></para>    </section><anchor xml:id="_string__functions_8hpp_1a93bd453ee6b6af7c8e5e970bb1000651"/>    <section>
+    <title>pop_front()</title>
+<indexterm><primary>pop_front</primary><secondary>string_functions.hpp</secondary></indexterm>
+<indexterm><primary>string_functions.hpp</primary><secondary>pop_front</secondary></indexterm>
+<para><computeroutput>std::string&amp; pop_front (std::string &amp; string)</computeroutput></para><para>
+
+<para>Removes the first character of a string. </para>
+</para>
+
+<para><caution><title>Attention</title>
+
+<para>Careful, time complexity makes it really heavy on big string </para>
+</caution>
+</para>
+    </section><anchor xml:id="_string__functions_8hpp_1a952e248eeca9d6f3be780b68df3f3264"/>    <section>
+    <title>remove()</title>
+<indexterm><primary>remove</primary><secondary>string_functions.hpp</secondary></indexterm>
+<indexterm><primary>string_functions.hpp</primary><secondary>remove</secondary></indexterm>
+<para><computeroutput>bool remove (std::string &amp; string, std::string const &amp; substr)</computeroutput></para>    </section><anchor xml:id="_string__functions_8hpp_1a8cf535d46125ed8622aedb6300d8de46"/>    <section>
+    <title>removeBlankSpace()</title>
+<indexterm><primary>removeBlankSpace</primary><secondary>string_functions.hpp</secondary></indexterm>
+<indexterm><primary>string_functions.hpp</primary><secondary>removeBlankSpace</secondary></indexterm>
+<para><computeroutput>std::string removeBlankSpace (std::string str)</computeroutput></para><para>
+
+<para>Remove all the blank space in a string. </para>
+</para>
+    </section><anchor xml:id="_string__functions_8hpp_1abb2a169e2ba2e6a949a988e4d591699e"/>    <section>
+    <title>removeFirstPart()</title>
+<indexterm><primary>removeFirstPart</primary><secondary>string_functions.hpp</secondary></indexterm>
+<indexterm><primary>string_functions.hpp</primary><secondary>removeFirstPart</secondary></indexterm>
+<para><computeroutput>std::string removeFirstPart (std::string const &amp; string, char const &amp; sep)</computeroutput></para>    </section><anchor xml:id="_string__functions_8hpp_1a416863eb8599122a08605e1f2f94d617"/>    <section>
+    <title>removeLastPart()</title>
+<indexterm><primary>removeLastPart</primary><secondary>string_functions.hpp</secondary></indexterm>
+<indexterm><primary>string_functions.hpp</primary><secondary>removeLastPart</secondary></indexterm>
+<para><computeroutput>std::string removeLastPart (std::string const &amp; string, char const &amp; sep)</computeroutput></para>    </section><anchor xml:id="_string__functions_8hpp_1ab2c67e2ba68d5a42ce9a48dafdbba829"/>    <section>
+    <title>replaceCharacter()</title>
+<indexterm><primary>replaceCharacter</primary><secondary>string_functions.hpp</secondary></indexterm>
+<indexterm><primary>string_functions.hpp</primary><secondary>replaceCharacter</secondary></indexterm>
+<para><computeroutput>std::string replaceCharacter (std::string const &amp; istring, char const &amp; ichar, char const &amp; ochar)</computeroutput></para><para>
+
+<para>Replaces all the instances of one character with another. </para>
+</para>
+
+<para>For instance : std::string istring = &quot;je_suis_ton_pere&quot;; std::string ostring = replaceCharacter(istring, &apos;_&apos;, &apos; &apos;); print(ostring); // output : &quot;je suis ton pere&quot; </para>
+Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="string__functions_8hpp_ab2c67e2ba68d5a42ce9a48dafdbba829_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="string__functions_8hpp_ab2c67e2ba68d5a42ce9a48dafdbba829_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_string__functions_8hpp_1aeda11ede077505e8eb3d667a6cb02788"/>    <section>
+    <title>rpCommaWDots()</title>
+<indexterm><primary>rpCommaWDots</primary><secondary>string_functions.hpp</secondary></indexterm>
+<indexterm><primary>string_functions.hpp</primary><secondary>rpCommaWDots</secondary></indexterm>
+<para><computeroutput>std::string rpCommaWDots (std::string str)</computeroutput></para><para>
+
+<para>Replace all the commas of a std::string with dots. </para>
+</para>
+</section>
+</section>
+</section>

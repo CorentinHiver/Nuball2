@@ -1,0 +1,519 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_class_file" xml:lang="en-US">
+<title>File Class Reference</title>
+<indexterm><primary>File</primary></indexterm>
+<para>
+
+<para>EXPERIMENTAL Composed of a <link linkend="_class_path">Path</link> and a <link linkend="_class_filename">Filename</link>. </para>
+ 
+</para>
+<para>
+<computeroutput>#include &lt;files_functions.hpp&gt;</computeroutput>
+</para>
+Collaboration diagram for File:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_file__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>auto <link linkend="_class_file_1adcc058679f1c4e1b9561aa7043720ade">c_str</link> ()</para>
+</listitem>
+            <listitem><para>auto <link linkend="_class_file_1aed1b1495883032cf6ad4f57e83564057">c_str</link> () const</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_file_1a51dd588f64b9d77346a7865de4f2c055">checkMode</link> (std::string const &amp;mode)</para>
+</listitem>
+            <listitem><para>bool <link linkend="_class_file_1a53118ce36851cb1c6845a82f915fd8ba">exists</link> () const</para>
+</listitem>
+            <listitem><para>std::string const  &amp; <link linkend="_class_file_1ac76f2f11d5ae2a206735e4c9172677e2">extension</link> () const</para>
+</listitem>
+            <listitem><para><link linkend="_class_file_1ae039af5807fc385f41b60644725d15d0">File</link> ()</para>
+</listitem>
+            <listitem><para><link linkend="_class_file_1a5304e25b296fbc6a26a56fc9f4bdbfdd">File</link> (const char *file, std::string const &amp;mode=&quot;&quot;)</para>
+</listitem>
+            <listitem><para><link linkend="_class_file_1a12a42d9d804defcc8550af0b38a1cf54">File</link> (<link linkend="_class_file">File</link> const &amp;file)</para>
+</listitem>
+            <listitem><para><link linkend="_class_file_1a84e9ad3641a6cff0d371dddb2ea0f73e">File</link> (<link linkend="_class_path">Path</link> const &amp;<link linkend="_class_file_1ad1ad54af9ff70a91691eed58bdf7e76f">path</link>, <link linkend="_class_filename">Filename</link> const &amp;<link linkend="_class_file_1a0860c6b771d42f74d5c3fdc3fc820332">filename</link>, std::string const &amp;mode=&quot;&quot;)</para>
+</listitem>
+            <listitem><para><link linkend="_class_file_1a5237343fec40bceaa8cf7fc7c4026426">File</link> (std::string const &amp;file, std::string const &amp;mode=&quot;&quot;)</para>
+</listitem>
+            <listitem><para><link linkend="_class_filename">Filename</link> const  &amp; <link linkend="_class_file_1a0860c6b771d42f74d5c3fdc3fc820332">filename</link> () const</para>
+</listitem>
+            <listitem><para><link linkend="_class_folder">Folder</link> const  &amp; <link linkend="_class_file_1ae66434e6a61f2a76b09c3480bcff4fba">folder</link> () const</para>
+</listitem>
+            <listitem><para>std::string const  &amp; <link linkend="_class_file_1a256122f7b2c78754d7c5588872428f41">get</link> () const</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_file_1aec78af028103207cb2ce88c0120dd4f6">makePath</link> ()</para>
+</listitem>
+            <listitem><para><link linkend="_class_filename">Filename</link> const  &amp; <link linkend="_class_file_1ab08b6536403bbea4df3adf514fa92768">name</link> () const</para>
+</listitem>
+            <listitem><para>bool const  &amp; <link linkend="_class_file_1a620683073a1fa00cb389e5afec3d0469">ok</link> ()</para>
+</listitem>
+            <listitem><para><link linkend="_class_file_1ad621a4180e78d12a5d464d93b603d4a2">operator bool</link> () const &amp;</para>
+</listitem>
+            <listitem><para><link linkend="_class_file_1a481cb3fd778f11cd216ca1e68308a2a9">operator std::string</link> () const &amp;</para>
+</listitem>
+            <listitem><para><link linkend="_class_file">File</link> &amp; <link linkend="_class_file_1a731756d54a6a41c2fde1630f1b97cb78">operator=</link> (const char *file)</para>
+</listitem>
+            <listitem><para><link linkend="_class_file">File</link> &amp; <link linkend="_class_file_1a9bab12c1d1eb8eb255f33d01d86d225c">operator=</link> (<link linkend="_class_file">File</link> const &amp;file)</para>
+</listitem>
+            <listitem><para><link linkend="_class_file">File</link> &amp; <link linkend="_class_file_1a900ed41b6c4fbcec93e4306e2d8b0c35">operator=</link> (std::string const &amp;file)</para>
+</listitem>
+            <listitem><para><link linkend="_class_path">Path</link> const  &amp; <link linkend="_class_file_1ad1ad54af9ff70a91691eed58bdf7e76f">path</link> () const</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_file_1af4dee1c79bf496d505633211177c6ce3">setExtension</link> (std::string const &amp;new_extension)</para>
+</listitem>
+            <listitem><para>std::string const  &amp; <link linkend="_class_file_1a4162125761930208891770416c498828">shortName</link> () const</para>
+</listitem>
+            <listitem><para>auto <link linkend="_class_file_1a43e3d087ec47881811167f3a20a99cfa">size</link> (std::string const &amp;unit=&quot;o&quot;) const</para>
+</listitem>
+            <listitem><para>std::string const  &amp; <link linkend="_class_file_1a899e6a7c528ab2824c7c584c4ee63073">string</link> () const</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Private Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_class_file_1a6b15fde4d8bb49099cdf7f27c4f36fae">check</link> ()</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_file_1ac3774fc193239a9a83f6974e9a79f9c4">fill</link> (std::string const &amp;file)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_file_1a8f6a2ccec2d48112847c89541d13bc10">update</link> ()</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Private Attributes    </title>
+        <itemizedlist>
+            <listitem><para>bool <link linkend="_class_file_1a29cc003db307b52a1f392e1e5bf0fb07">check_verif</link> = false</para>
+</listitem>
+            <listitem><para>std::string <link linkend="_class_file_1a36d935fccef5b644b0de60bdbc6e67b2">m_file</link></para>
+</listitem>
+            <listitem><para><link linkend="_class_filename">Filename</link> <link linkend="_class_file_1ab8b4c4873ffdc891898f877ba31b1b49">m_filename</link></para>
+</listitem>
+            <listitem><para>bool <link linkend="_class_file_1ac3482b203711cc5895748f7e941f96a0">m_ok</link> = false</para>
+</listitem>
+            <listitem><para><link linkend="_class_path">Path</link> <link linkend="_class_file_1a972c4ffa95d0c37406a5e1189f420064">m_path</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Detailed Description</title>
+
+<para>EXPERIMENTAL Composed of a <link linkend="_class_path">Path</link> and a <link linkend="_class_filename">Filename</link>. </para>
+
+
+
+<para>A <link linkend="_class_file">File</link> object is composed of a <link linkend="_class_path">Path</link> and a <link linkend="_class_filename">Filename</link> object, which are composed of :<itemizedlist>
+<listitem>
+<para>A list of folder that forms the <link linkend="_class_path">Path</link> to the file</para>
+</listitem><listitem>
+<para>A short name and an extension for the <link linkend="_class_filename">Filename</link> <para><link linkend="_todo_1_todo000001">Todo</link> 
+<para>rethink the checkMode logic ... </para>
+</para></para>
+</listitem></itemizedlist>
+</para>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_class_file_1ae039af5807fc385f41b60644725d15d0"/>    <section>
+    <title>File()<computeroutput>[1/5]</computeroutput></title>
+<indexterm><primary>File</primary><secondary>File</secondary></indexterm>
+<indexterm><primary>File</primary><secondary>File</secondary></indexterm>
+<para><computeroutput>File::File ( )<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_file_1a12a42d9d804defcc8550af0b38a1cf54"/>    <section>
+    <title>File()<computeroutput>[2/5]</computeroutput></title>
+<indexterm><primary>File</primary><secondary>File</secondary></indexterm>
+<indexterm><primary>File</primary><secondary>File</secondary></indexterm>
+<para><computeroutput>File::File (<link linkend="_class_file">File</link> const &amp; file)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_file_1a5237343fec40bceaa8cf7fc7c4026426"/>    <section>
+    <title>File()<computeroutput>[3/5]</computeroutput></title>
+<indexterm><primary>File</primary><secondary>File</secondary></indexterm>
+<indexterm><primary>File</primary><secondary>File</secondary></indexterm>
+<para><computeroutput>File::File (std::string const &amp; file, std::string const &amp; mode = <computeroutput>&quot;&quot;</computeroutput>
+)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_file_a5237343fec40bceaa8cf7fc7c4026426_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_file_1a5304e25b296fbc6a26a56fc9f4bdbfdd"/>    <section>
+    <title>File()<computeroutput>[4/5]</computeroutput></title>
+<indexterm><primary>File</primary><secondary>File</secondary></indexterm>
+<indexterm><primary>File</primary><secondary>File</secondary></indexterm>
+<para><computeroutput>File::File (const char * file, std::string const &amp; mode = <computeroutput>&quot;&quot;</computeroutput>
+)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_file_a5304e25b296fbc6a26a56fc9f4bdbfdd_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_file_1a84e9ad3641a6cff0d371dddb2ea0f73e"/>    <section>
+    <title>File()<computeroutput>[5/5]</computeroutput></title>
+<indexterm><primary>File</primary><secondary>File</secondary></indexterm>
+<indexterm><primary>File</primary><secondary>File</secondary></indexterm>
+<para><computeroutput>File::File (<link linkend="_class_path">Path</link> const &amp; path, <link linkend="_class_filename">Filename</link> const &amp; filename, std::string const &amp; mode = <computeroutput>&quot;&quot;</computeroutput>
+)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_file_a84e9ad3641a6cff0d371dddb2ea0f73e_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_class_file_1adcc058679f1c4e1b9561aa7043720ade"/>    <section>
+    <title>c_str()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>c_str</primary><secondary>File</secondary></indexterm>
+<indexterm><primary>File</primary><secondary>c_str</secondary></indexterm>
+<para><computeroutput>auto File::c_str ( )<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_file_adcc058679f1c4e1b9561aa7043720ade_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_file_1aed1b1495883032cf6ad4f57e83564057"/>    <section>
+    <title>c_str()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>c_str</primary><secondary>File</secondary></indexterm>
+<indexterm><primary>File</primary><secondary>c_str</secondary></indexterm>
+<para><computeroutput>auto File::c_str ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_file_1a6b15fde4d8bb49099cdf7f27c4f36fae"/>    <section>
+    <title>check()</title>
+<indexterm><primary>check</primary><secondary>File</secondary></indexterm>
+<indexterm><primary>File</primary><secondary>check</secondary></indexterm>
+<para><computeroutput>void File::check ( )<computeroutput>[inline]</computeroutput>, <computeroutput>[private]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_file_a6b15fde4d8bb49099cdf7f27c4f36fae_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_file_a6b15fde4d8bb49099cdf7f27c4f36fae_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_file_1a51dd588f64b9d77346a7865de4f2c055"/>    <section>
+    <title>checkMode()</title>
+<indexterm><primary>checkMode</primary><secondary>File</secondary></indexterm>
+<indexterm><primary>File</primary><secondary>checkMode</secondary></indexterm>
+<para><computeroutput>void File::checkMode (std::string const &amp; mode)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_file_a51dd588f64b9d77346a7865de4f2c055_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_file_1a53118ce36851cb1c6845a82f915fd8ba"/>    <section>
+    <title>exists()</title>
+<indexterm><primary>exists</primary><secondary>File</secondary></indexterm>
+<indexterm><primary>File</primary><secondary>exists</secondary></indexterm>
+<para><computeroutput>bool File::exists ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_file_a53118ce36851cb1c6845a82f915fd8ba_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_file_a53118ce36851cb1c6845a82f915fd8ba_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_file_1ac76f2f11d5ae2a206735e4c9172677e2"/>    <section>
+    <title>extension()</title>
+<indexterm><primary>extension</primary><secondary>File</secondary></indexterm>
+<indexterm><primary>File</primary><secondary>extension</secondary></indexterm>
+<para><computeroutput>std::string const&amp; File::extension ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_file_ac76f2f11d5ae2a206735e4c9172677e2_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_file_1a0860c6b771d42f74d5c3fdc3fc820332"/>    <section>
+    <title>filename()</title>
+<indexterm><primary>filename</primary><secondary>File</secondary></indexterm>
+<indexterm><primary>File</primary><secondary>filename</secondary></indexterm>
+<para><computeroutput><link linkend="_class_filename">Filename</link> const&amp; File::filename ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_file_1ac3774fc193239a9a83f6974e9a79f9c4"/>    <section>
+    <title>fill()</title>
+<indexterm><primary>fill</primary><secondary>File</secondary></indexterm>
+<indexterm><primary>File</primary><secondary>fill</secondary></indexterm>
+<para><computeroutput>void File::fill (std::string const &amp; file)<computeroutput>[inline]</computeroutput>, <computeroutput>[private]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_file_ac3774fc193239a9a83f6974e9a79f9c4_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_file_ac3774fc193239a9a83f6974e9a79f9c4_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_file_1ae66434e6a61f2a76b09c3480bcff4fba"/>    <section>
+    <title>folder()</title>
+<indexterm><primary>folder</primary><secondary>File</secondary></indexterm>
+<indexterm><primary>File</primary><secondary>folder</secondary></indexterm>
+<para><computeroutput><link linkend="_class_folder">Folder</link> const&amp; File::folder ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_file_ae66434e6a61f2a76b09c3480bcff4fba_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_file_1a256122f7b2c78754d7c5588872428f41"/>    <section>
+    <title>get()</title>
+<indexterm><primary>get</primary><secondary>File</secondary></indexterm>
+<indexterm><primary>File</primary><secondary>get</secondary></indexterm>
+<para><computeroutput>std::string const&amp; File::get ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_file_a256122f7b2c78754d7c5588872428f41_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_file_1aec78af028103207cb2ce88c0120dd4f6"/>    <section>
+    <title>makePath()</title>
+<indexterm><primary>makePath</primary><secondary>File</secondary></indexterm>
+<indexterm><primary>File</primary><secondary>makePath</secondary></indexterm>
+<para><computeroutput>void File::makePath ( )<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_file_aec78af028103207cb2ce88c0120dd4f6_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_file_aec78af028103207cb2ce88c0120dd4f6_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_file_1ab08b6536403bbea4df3adf514fa92768"/>    <section>
+    <title>name()</title>
+<indexterm><primary>name</primary><secondary>File</secondary></indexterm>
+<indexterm><primary>File</primary><secondary>name</secondary></indexterm>
+<para><computeroutput><link linkend="_class_filename">Filename</link> const&amp; File::name ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_file_1a620683073a1fa00cb389e5afec3d0469"/>    <section>
+    <title>ok()</title>
+<indexterm><primary>ok</primary><secondary>File</secondary></indexterm>
+<indexterm><primary>File</primary><secondary>ok</secondary></indexterm>
+<para><computeroutput>bool const&amp; File::ok ( )<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_file_1ad621a4180e78d12a5d464d93b603d4a2"/>    <section>
+    <title>operator bool()</title>
+<indexterm><primary>operator bool</primary><secondary>File</secondary></indexterm>
+<indexterm><primary>File</primary><secondary>operator bool</secondary></indexterm>
+<para><computeroutput>File::operator bool ( ) const &amp;<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_file_1a481cb3fd778f11cd216ca1e68308a2a9"/>    <section>
+    <title>operator std::string()</title>
+<indexterm><primary>operator std::string</primary><secondary>File</secondary></indexterm>
+<indexterm><primary>File</primary><secondary>operator std::string</secondary></indexterm>
+<para><computeroutput>File::operator std::string ( ) const &amp;<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_file_1a731756d54a6a41c2fde1630f1b97cb78"/>    <section>
+    <title>operator=()<computeroutput>[1/3]</computeroutput></title>
+<indexterm><primary>operator=</primary><secondary>File</secondary></indexterm>
+<indexterm><primary>File</primary><secondary>operator=</secondary></indexterm>
+<para><computeroutput><link linkend="_class_file">File</link>&amp; File::operator= (const char * file)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_file_a731756d54a6a41c2fde1630f1b97cb78_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_file_1a9bab12c1d1eb8eb255f33d01d86d225c"/>    <section>
+    <title>operator=()<computeroutput>[2/3]</computeroutput></title>
+<indexterm><primary>operator=</primary><secondary>File</secondary></indexterm>
+<indexterm><primary>File</primary><secondary>operator=</secondary></indexterm>
+<para><computeroutput><link linkend="_class_file">File</link>&amp; File::operator= (<link linkend="_class_file">File</link> const &amp; file)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_file_1a900ed41b6c4fbcec93e4306e2d8b0c35"/>    <section>
+    <title>operator=()<computeroutput>[3/3]</computeroutput></title>
+<indexterm><primary>operator=</primary><secondary>File</secondary></indexterm>
+<indexterm><primary>File</primary><secondary>operator=</secondary></indexterm>
+<para><computeroutput><link linkend="_class_file">File</link>&amp; File::operator= (std::string const &amp; file)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_file_a900ed41b6c4fbcec93e4306e2d8b0c35_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_file_1ad1ad54af9ff70a91691eed58bdf7e76f"/>    <section>
+    <title>path()</title>
+<indexterm><primary>path</primary><secondary>File</secondary></indexterm>
+<indexterm><primary>File</primary><secondary>path</secondary></indexterm>
+<para><computeroutput><link linkend="_class_path">Path</link> const&amp; File::path ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_file_1af4dee1c79bf496d505633211177c6ce3"/>    <section>
+    <title>setExtension()</title>
+<indexterm><primary>setExtension</primary><secondary>File</secondary></indexterm>
+<indexterm><primary>File</primary><secondary>setExtension</secondary></indexterm>
+<para><computeroutput>void File::setExtension (std::string const &amp; new_extension)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_file_af4dee1c79bf496d505633211177c6ce3_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_file_af4dee1c79bf496d505633211177c6ce3_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_file_1a4162125761930208891770416c498828"/>    <section>
+    <title>shortName()</title>
+<indexterm><primary>shortName</primary><secondary>File</secondary></indexterm>
+<indexterm><primary>File</primary><secondary>shortName</secondary></indexterm>
+<para><computeroutput>std::string const&amp; File::shortName ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_file_a4162125761930208891770416c498828_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_file_a4162125761930208891770416c498828_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_file_1a43e3d087ec47881811167f3a20a99cfa"/>    <section>
+    <title>size()</title>
+<indexterm><primary>size</primary><secondary>File</secondary></indexterm>
+<indexterm><primary>File</primary><secondary>size</secondary></indexterm>
+<para><computeroutput>auto File::size (std::string const &amp; unit = <computeroutput>&quot;o&quot;</computeroutput>
+) const<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_file_a43e3d087ec47881811167f3a20a99cfa_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_file_a43e3d087ec47881811167f3a20a99cfa_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_file_1a899e6a7c528ab2824c7c584c4ee63073"/>    <section>
+    <title>string()</title>
+<indexterm><primary>string</primary><secondary>File</secondary></indexterm>
+<indexterm><primary>File</primary><secondary>string</secondary></indexterm>
+<para><computeroutput>std::string const&amp; File::string ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_file_a899e6a7c528ab2824c7c584c4ee63073_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_file_1a8f6a2ccec2d48112847c89541d13bc10"/>    <section>
+    <title>update()</title>
+<indexterm><primary>update</primary><secondary>File</secondary></indexterm>
+<indexterm><primary>File</primary><secondary>update</secondary></indexterm>
+<para><computeroutput>void File::update ( )<computeroutput>[inline]</computeroutput>, <computeroutput>[private]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_file_a8f6a2ccec2d48112847c89541d13bc10_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_file_a8f6a2ccec2d48112847c89541d13bc10_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_class_file_1a29cc003db307b52a1f392e1e5bf0fb07"/>    <section>
+    <title>check_verif</title>
+<indexterm><primary>check_verif</primary><secondary>File</secondary></indexterm>
+<indexterm><primary>File</primary><secondary>check_verif</secondary></indexterm>
+<para><computeroutput>bool File::check_verif = false<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_file_1a36d935fccef5b644b0de60bdbc6e67b2"/>    <section>
+    <title>m_file</title>
+<indexterm><primary>m_file</primary><secondary>File</secondary></indexterm>
+<indexterm><primary>File</primary><secondary>m_file</secondary></indexterm>
+<para><computeroutput>std::string File::m_file<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_file_1ab8b4c4873ffdc891898f877ba31b1b49"/>    <section>
+    <title>m_filename</title>
+<indexterm><primary>m_filename</primary><secondary>File</secondary></indexterm>
+<indexterm><primary>File</primary><secondary>m_filename</secondary></indexterm>
+<para><computeroutput><link linkend="_class_filename">Filename</link> File::m_filename<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_file_1ac3482b203711cc5895748f7e941f96a0"/>    <section>
+    <title>m_ok</title>
+<indexterm><primary>m_ok</primary><secondary>File</secondary></indexterm>
+<indexterm><primary>File</primary><secondary>m_ok</secondary></indexterm>
+<para><computeroutput>bool File::m_ok = false<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_file_1a972c4ffa95d0c37406a5e1189f420064"/>    <section>
+    <title>m_path</title>
+<indexterm><primary>m_path</primary><secondary>File</secondary></indexterm>
+<indexterm><primary>File</primary><secondary>m_path</secondary></indexterm>
+<para><computeroutput><link linkend="_class_path">Path</link> File::m_path<computeroutput>[private]</computeroutput></computeroutput></para></section>
+<para>
+The documentation for this class was generated from the following file:</para>
+lib/<link linkend="_files__functions_8hpp">files_functions.hpp</link></section>
+</section>

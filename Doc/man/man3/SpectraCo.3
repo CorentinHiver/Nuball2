@@ -1,0 +1,256 @@
+.TH "SpectraCo" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+SpectraCo
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <SpectraAlignator\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "auto const  & \fBback\fP () const"
+.br
+.ti -1c
+.RI "TH1D * \fBcreateTH1D\fP (std::string newName='', std::string newTitle='')"
+.br
+.ti -1c
+.RI "TH1F * \fBcreateTH1F\fP (std::string newName='', std::string newTitle='')"
+.br
+.ti -1c
+.RI "std::vector< double > const  & \fBderivate\fP (int const &smooth=1)"
+.br
+.ti -1c
+.RI "std::vector< double > const  & \fBderivate2\fP (int const &smooth=1)"
+.br
+.ti -1c
+.RI "std::vector< double > const  & \fBderivative\fP ()"
+.br
+.ti -1c
+.RI "std::vector< double > const  & \fBderivative2\fP ()"
+.br
+.ti -1c
+.RI "void \fBDraw\fP (const char *param='')"
+.br
+.ti -1c
+.RI "auto & \fBget\fP ()"
+.br
+.ti -1c
+.RI "auto const  & \fBget\fP () const"
+.br
+.ti -1c
+.RI "auto const  & \fBget\fP (int const &bin) const"
+.br
+.ti -1c
+.RI "auto const  & \fBintegral\fP () const"
+.br
+.ti -1c
+.RI "double \fBinterpolate\fP (double const &bin) const"
+.br
+.RI "wrapper around operator[] "
+.ti -1c
+.RI "auto const  & \fBlastBin\fP () const"
+.br
+.ti -1c
+.RI "void \fBload\fP (TH1 *root_spectra)"
+.br
+.ti -1c
+.RI "auto const  & \fBmaxValue\fP () const"
+.br
+.ti -1c
+.RI "auto const  & \fBminValue\fP () const"
+.br
+.ti -1c
+.RI "auto const  & \fBname\fP () const"
+.br
+.ti -1c
+.RI "auto \fBname\fP (std::string const &name)"
+.br
+.ti -1c
+.RI "\fBSpectraCo\fP \fBoperator+\fP (\fBSpectraCo\fP const &other)"
+.br
+.ti -1c
+.RI "\fBSpectraCo\fP \fBoperator\-\fP (\fBSpectraCo\fP const &other)"
+.br
+.ti -1c
+.RI "\fBSpectraCo\fP & \fBoperator=\fP (TH1 *root_spectra)"
+.br
+.ti -1c
+.RI "double \fBoperator[]\fP (double const &bin) const"
+.br
+.ti -1c
+.RI "auto & \fBoperator[]\fP (int const &bin)"
+.br
+.ti -1c
+.RI "auto const  & \fBoperator[]\fP (int const &bin) const"
+.br
+.ti -1c
+.RI "void \fBrecalibrate\fP (\fBRecalibration\fP const &recal)"
+.br
+.ti -1c
+.RI "void \fBsetMaxValue\fP (double const &_max_value)"
+.br
+.ti -1c
+.RI "void \fBsetMinValue\fP (double const &_min_value)"
+.br
+.ti -1c
+.RI "auto const  & \fBsize\fP () const"
+.br
+.ti -1c
+.RI "\fBSpectraCo\fP ()=default"
+.br
+.ti -1c
+.RI "\fBSpectraCo\fP (\fBSpectraCo\fP const &other)"
+.br
+.ti -1c
+.RI "\fBSpectraCo\fP (\fBSpectraCo\fP const &other, \fBRecalibration\fP const &recal)"
+.br
+.ti -1c
+.RI "\fBSpectraCo\fP (std::vector< double > const &data)"
+.br
+.ti -1c
+.RI "\fBSpectraCo\fP (TH1 *root_spectra)"
+.br
+.ti -1c
+.RI "auto const  & \fBtitle\fP () const"
+.br
+.ti -1c
+.RI "auto \fBtitle\fP (std::string const &title)"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "std::vector< double > \fBm_derivative\fP"
+.br
+.ti -1c
+.RI "std::vector< double > \fBm_derivative2\fP"
+.br
+.ti -1c
+.RI "int \fBm_integral\fP = 0"
+.br
+.ti -1c
+.RI "int \fBm_max_value\fP = 0"
+.br
+.ti -1c
+.RI "int \fBm_min_value\fP = 0"
+.br
+.ti -1c
+.RI "std::string \fBm_name\fP = 'Unnamed'"
+.br
+.ti -1c
+.RI "int \fBm_size\fP = \-1"
+.br
+.ti -1c
+.RI "std::vector< double > \fBm_spectra\fP"
+.br
+.ti -1c
+.RI "std::string \fBm_title\fP = 'Untitled'"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "SpectraCo::SpectraCo ()\fC [default]\fP"
+
+.SS "SpectraCo::SpectraCo (TH1 * root_spectra)\fC [inline]\fP"
+
+.SS "SpectraCo::SpectraCo (\fBSpectraCo\fP const & other)\fC [inline]\fP"
+
+.SS "SpectraCo::SpectraCo (\fBSpectraCo\fP const & other, \fBRecalibration\fP const & recal)\fC [inline]\fP"
+
+.SS "SpectraCo::SpectraCo (std::vector< double > const & data)\fC [inline]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "auto const& SpectraCo::back () const\fC [inline]\fP"
+
+.SS "TH1D* SpectraCo::createTH1D (std::string newName = \fC''\fP, std::string newTitle = \fC''\fP)\fC [inline]\fP"
+
+.SS "TH1F* SpectraCo::createTH1F (std::string newName = \fC''\fP, std::string newTitle = \fC''\fP)\fC [inline]\fP"
+
+.SS "std::vector<double> const& SpectraCo::derivate (int const & smooth = \fC1\fP)\fC [inline]\fP"
+
+.SS "std::vector<double> const& SpectraCo::derivate2 (int const & smooth = \fC1\fP)\fC [inline]\fP"
+
+.SS "std::vector<double> const& SpectraCo::derivative ()\fC [inline]\fP"
+
+.SS "std::vector<double> const& SpectraCo::derivative2 ()\fC [inline]\fP"
+
+.SS "void SpectraCo::Draw (const char * param = \fC''\fP)\fC [inline]\fP"
+
+.SS "auto& SpectraCo::get ()\fC [inline]\fP"
+
+.SS "auto const& SpectraCo::get () const\fC [inline]\fP"
+
+.SS "auto const& SpectraCo::get (int const & bin) const\fC [inline]\fP"
+
+.SS "auto const& SpectraCo::integral () const\fC [inline]\fP"
+
+.SS "double SpectraCo::interpolate (double const & bin) const\fC [inline]\fP"
+
+.PP
+wrapper around operator[] 
+.SS "auto const& SpectraCo::lastBin () const\fC [inline]\fP"
+
+.SS "void SpectraCo::load (TH1 * root_spectra)\fC [inline]\fP"
+
+.SS "auto const& SpectraCo::maxValue () const\fC [inline]\fP"
+
+.SS "auto const& SpectraCo::minValue () const\fC [inline]\fP"
+
+.SS "auto const& SpectraCo::name () const\fC [inline]\fP"
+
+.SS "auto SpectraCo::name (std::string const & name)\fC [inline]\fP"
+
+.SS "\fBSpectraCo\fP SpectraCo::operator+ (\fBSpectraCo\fP const & other)\fC [inline]\fP"
+
+.SS "\fBSpectraCo\fP SpectraCo::operator\- (\fBSpectraCo\fP const & other)\fC [inline]\fP"
+
+.SS "\fBSpectraCo\fP& SpectraCo::operator= (TH1 * root_spectra)\fC [inline]\fP"
+
+.SS "double SpectraCo::operator[] (double const & bin) const\fC [inline]\fP"
+
+.SS "auto& SpectraCo::operator[] (int const & bin)\fC [inline]\fP"
+
+.SS "auto const& SpectraCo::operator[] (int const & bin) const\fC [inline]\fP"
+
+.SS "void SpectraCo::recalibrate (\fBRecalibration\fP const & recal)\fC [inline]\fP"
+
+.SS "void SpectraCo::setMaxValue (double const & _max_value)\fC [inline]\fP"
+
+.SS "void SpectraCo::setMinValue (double const & _min_value)\fC [inline]\fP"
+
+.SS "auto const& SpectraCo::size () const\fC [inline]\fP"
+
+.SS "auto const& SpectraCo::title () const\fC [inline]\fP"
+
+.SS "auto SpectraCo::title (std::string const & title)\fC [inline]\fP"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "std::vector<double> SpectraCo::m_derivative\fC [private]\fP"
+
+.SS "std::vector<double> SpectraCo::m_derivative2\fC [private]\fP"
+
+.SS "int SpectraCo::m_integral = 0\fC [private]\fP"
+
+.SS "int SpectraCo::m_max_value = 0\fC [private]\fP"
+
+.SS "int SpectraCo::m_min_value = 0\fC [private]\fP"
+
+.SS "std::string SpectraCo::m_name = 'Unnamed'\fC [private]\fP"
+
+.SS "int SpectraCo::m_size = \-1\fC [private]\fP"
+
+.SS "std::vector<double> SpectraCo::m_spectra\fC [private]\fP"
+
+.SS "std::string SpectraCo::m_title = 'Untitled'\fC [private]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Nuball2 from the source code\&.

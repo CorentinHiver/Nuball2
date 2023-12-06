@@ -3,21 +3,13 @@
 
 #include "../libRoot.hpp"
 
-#include "../Classes/Detectors.hpp"
+// #include "../Classes/Detectors.hpp"
 #include "../Classes/Event.hpp"
 #include "../Classes/Gate.hpp"
 
 #include "../MTObjects/MTObject.hpp"
 
 #include "CloverModule.hpp"
-
-// class Grouper
-// {
-//   public:
-
-//   private:
-//   float time_ref = 0;
-// };
 
 std::array<float, 48> BGO_coeff = 
 {
@@ -88,22 +80,22 @@ public:
   //  - the BGO crystal index ranges from 0 to 47 and "                                                "
 
   static inline bool is_clover(Label const & l) {return  (l>22 && l<167);}
-  // static inline bool is_clover_Ge  (Label const & l) {return ((is_clover(l)) ? ((l-1)%6 < 4) : false);}
-  // static inline bool is_clover_BGO (Label const & l) {return ((is_clover(l)) ? ((l-1)%6 > 3) : false);}
+  static inline bool is_clover_Ge  (Label const & l) {return ((is_clover(l)) ? ((l-23)%6 > 2) : false);}
+  static inline bool is_clover_BGO (Label const & l) {return ((is_clover(l)) ? ((l-23)%6 < 3) : false);}
 
   // Correspondance between detector label and crystal index :
   static inline uchar label_to_clover   (Label const & l) {return static_cast<uchar>((l-23)/6);} // Ranges from 0 to 23
   static        uchar label_to_cristal  (Label const & l);
 
-  static std::array<bool, 1000> is;          // Array used to know if a given detector is a clover
-  // static std::array<bool, 1000> isGe;     // Array used to know if a given detector is a Germanium clover
-  // static std::array<bool, 1000> isBGO;    // Array used to know if a given detector is a BGO clover
+  static std::array<bool, 1000> isClover; // Array used to know if a given detector is a clover
+  static std::array<bool, 1000> isGe;     // Array used to know if a given detector is a Germanium clover
+  static std::array<bool, 1000> isBGO;    // Array used to know if a given detector is a BGO clover
   // static std::array<bool, 1000> blacklist;// Array used to know if a given detector is in the blacklist
 
   static std::array<uchar, 1000> labels;  // Array used to make correspondance between a detector label and its clover label
 
   static std::array<uchar, 1000> cristaux_index;     // Array used to make correspondance between the detector label and the Ge or BGO index
-  // static std::array<uchar, 1000> cristaux_index_BGO; // Array used to make correspondance between the detector label and the BGO index
+  static std::array<uchar, 1000> cristaux_index_BGO; // Array used to make correspondance between the detector label and the BGO index
   // static std::vector <uchar> cristaux_opposite;// Array used to make correspondance between a detector and the label of the detector at 180° 
 
   /// @brief Static initialize. Allows one to use the arrays event if no object has been instantiated
@@ -112,28 +104,27 @@ public:
     if (!s_initialised)
     {
     #ifdef MTOBJECT_HPP
-      // #if __cplusplus >= 201703L
-        // lock_mutex(MTObject::mutex);
-      // #else
+      #if __cplusplus >= 201703L
+        lock_mutex lock(MTObject::mutex);
+      #else
         MTObject::mutex.lock();
-      // #endif //__cplusplus >= 201703L
+      #endif //__cplusplus >= 201703L
     #endif //MTOBJECT_HPP
 
       print("Initialising clovers arrays");
       for (Label l = 0; l<1000; l++)
       {
-        is[l] = is_clover(l);
-        // isGe[l] = is_clover_Ge(l);  // Already exists in libCo
-        // isBGO[l] = is_clover_BGO(l);// Already exists in libCo
+        isClover[l] = is_clover(l);
+        isGe[l] = is_clover_Ge(l);  // Already exist in libCo
+        isBGO[l] = is_clover_BGO(l);// Already exist in libCo
 
-        labels[l] = (is[l]) ? label_to_clover(l) : -1;
+        labels[l] = (isClover[l]) ? label_to_clover(l) : -1;
         cristaux_index[l] = (isGe[l]) ? label_to_cristal(l) : -1;
-        // cristaux_index_BGO[l] = (isBGO[l]) ? label_to_cristal(l) : -1;
+        cristaux_index_BGO[l] = (isBGO[l]) ? label_to_cristal(l) : -1;
       }
       s_initialised = true;
 
-    #if defined (MTOBJECT_HPP)
-    // && __cplusplus < 201703L
+    #if defined (MTOBJECT_HPP) && __cplusplus < 201703L
       MTObject::mutex.unlock();
     #endif
 
@@ -157,14 +148,15 @@ public:
   {
     InitializeArrays(); 
     m_clovers.resize(24); 
-    CloverModule::resetLabel();
+    CloverModule::resetGlobalLabel();
     PromptClovers.resize(24);
-    CloverModule::resetLabel();
+    CloverModule::resetGlobalLabel();
     DelayedClovers.resize(24);
     Reset();
     CleanFast();
   }
-  void SetEvent(Event const & event, char const & analyse = 0);
+  void SetEvent(Event const & event);
+  void SetEvent(Event const & event, char const & analyse_mode);
   bool Fill(Event const & event, size_t const & index);
   void Reset();
 
@@ -209,11 +201,15 @@ public:
   
   void PrintClean();
 
-  // Positions in the raw event :
-  StaticVector<uchar> rawGe  = StaticVector<uchar>(96); //List of the position of the raw Ge  in the event
-  StaticVector<uchar> rawBGO = StaticVector<uchar>(48); //List of the position of the raw BGO in the event
+  // Positions in the raw event (the Event object) :
+  // Example : event.labels[rawGe[1]] gives the label of the second germanium hit of the event
+  StaticVector<uchar> rawGe  = StaticVector<uchar>(96); //List of the position of the raw Ge  inside the Event object
+  StaticVector<uchar> rawBGO = StaticVector<uchar>(48); //List of the position of the raw BGO inside the Event object
 
   // Hits lists :
+  // Example : auto const & clover = clovers[clovers.Hits[1]] gives you a direct access to the second CloverModule to fire in the event
+  // print(clover.time, clover.nrj);
+  // See documentation of CloverModule
   StaticVector<uchar> Hits = StaticVector<uchar>(24);  // List of clovers that fired in the event
 
   StaticVector<uchar> Ge = StaticVector<uchar>(24);  // List of Germanium modules that fired in the event
@@ -227,7 +223,8 @@ public:
   StaticVector<uchar> PromptBGO = StaticVector<uchar>(24);
   StaticVector<uchar> DelayedBGO = StaticVector<uchar>(24);
   
-  std::vector<CloverModule> m_clovers; // Array containing the 24 clovers
+  // Array containing the 24 CloverModules :
+  std::vector<CloverModule> m_clovers; 
 
   // Counters :
   uchar TotalMult = 0;
@@ -359,13 +356,13 @@ public:
 
 // ---- InitializeArrays static members : ----- //
 // Lookup tables :
-std::array<bool, 1000> Clovers::is;
-// std::array<bool, 1000> Clovers::isGe;
-// std::array<bool, 1000> Clovers::isBGO;
-// std::array<bool, 1000> Clovers::blacklist;
+std::array<bool, 1000> Clovers::isClover;
+std::array<bool, 1000> Clovers::isGe;
+std::array<bool, 1000> Clovers::isBGO;
 std::array<uchar, 1000> Clovers::labels;
 std::array<uchar, 1000> Clovers::cristaux_index;
-// std::array<uchar, 1000> Clovers::cristaux_index_BGO;
+std::array<uchar, 1000> Clovers::cristaux_index_BGO;
+// std::array<bool, 1000> Clovers::blacklist;
 // std::vector <uchar> Clovers::cristaux_opposite;
 
 // Parameters :
@@ -407,49 +404,61 @@ inline void Clovers::Reset()
   Ge.clear();
   CleanGe.clear();
   RejectedGe.clear();
-  PromptGe.clear();
-  DelayedGe.clear();
+  // PromptGe.clear();
+  // DelayedGe.clear();
 
   Bgo.clear();
   BGOonly.clear();
-  PromptBGO.clear();
-  DelayedBGO.clear();
+  // PromptBGO.clear();
+  // DelayedBGO.clear();
 
-  TotalMult = 0;
-  PromptMult = 0;
-  DelayedMult = 0;
-  PromptCleanGeMult = 0;
-  DelayedCleanGeMult = 0;
+  // TotalMult = 0;
+  // PromptMult = 0; // NOT USED in normal mode
+  // DelayedMult = 0;// NOT USED in normal mode
+  // PromptCleanGeMult = 0;// NOT USED in normal mode
+  // DelayedCleanGeMult = 0;// NOT USED in normal mode
 
   CrystalMult = 0;
   CrystalMult_BGO = 0;
 
-  has511 = false;
+  // has511 = false;
   totGe = -1.E-12;
   totBGO = -1.E-12;
-  totGe_prompt = -1.E-12;
-  totBGO_prompt = -1.E-12;
-  totGe_delayed = -1.E-12;
-  totBGO_delayed = -1.E-12;
+  // totGe_prompt = -1.E-12;
+  // totBGO_prompt = -1.E-12;
+  // totGe_delayed = -1.E-12;
+  // totBGO_delayed = -1.E-12;
 }
 
 /**
- * @brief Set the event
+ * @brief Fills the CloverModules for a whole event
  * @details
- * Three modes : 
- * 0 : normal mode 
+ * Two modes : 
  * 1 : normal mode, skip the compton cleaning
  * 2 : new mode
  */
-inline void Clovers::SetEvent(Event const & event, char const & analyse)
+inline void Clovers::SetEvent(Event const & event)
 {
-  if (analyse == 1 || analyse == 0) 
+  this -> Reset();
+  for (size_t i = 0; i<event.size(); i++) this -> Fill(event, i);
+  this -> Analyse();
+}
+
+/**
+ * @brief Fills the CloverModules for a whole event
+ * @details
+ * Two modes : 
+ * 1 : normal mode, skip the compton cleaning
+ * 2 : new mode
+ */
+inline void Clovers::SetEvent(Event const & event, char const & analyse_mode)
+{
+  if (analyse_mode == 1) 
   {
     this -> Reset();
     for (size_t i = 0; i<event.size(); i++) this -> Fill(event, i);
-    if (analyse == 0) this -> Analyse();
   }
-  else if (analyse == 2) 
+  else if (analyse_mode == 2) 
   {
     this -> CleanFast();
     for (size_t i = 0; i<event.size(); i++) this -> FillFast(event, i);
@@ -493,7 +502,6 @@ inline bool Clovers::FillFast(Event const & event, size_t const & hit_index)
   return true;
 }
 
-/// @brief 
 inline bool Clovers::Fill(Event const & event, size_t const & hit_index)
 {
   auto const & label = event.labels[hit_index];
@@ -521,11 +529,6 @@ inline bool Clovers::Fill(Event const & event, size_t const & hit_index)
       // Ge crystal index (ranges from 0 to 96):
       auto const & index_cristal = cristaux_index[label];
 
-      // RUSTINE A ENLEVER AVEC UNE BONNE CALIB :
-      //      if (index_cristal == 3) nrj = nrj*0.855f+5.6f;
-      // else if (index_cristal == 27) nrj = nrj*0.03027f-0.32f;
-      // else if (index_cristal == 30) nrj = nrj*0.0205f+0.138f;
-
       // if (nrj>10000) return false; // Set a maximum nrj deposition in a single crystal (can be more in the total clover of course)
 
       CrystalMult++;
@@ -537,7 +540,7 @@ inline bool Clovers::Fill(Event const & event, size_t const & hit_index)
       // if (label == 26) print(index_cristal);
       cristaux.push_back(index_cristal);
 
-      // Filling the germanium crystals informations :
+      // Filling the germanium crystals :
       cristaux_nrj [index_cristal] = nrj;
       cristaux_time[index_cristal] = time;
 
@@ -547,20 +550,15 @@ inline bool Clovers::Fill(Event const & event, size_t const & hit_index)
       // Counts the number of Ge crystals that fired in the clover :
       clover.nb++;
 
+      // Do a raw add-back : sum the energy of all the crystals in a clover
+      clover.nrj += nrj;
+
       // Find the Ge cristal that received the most energy and use its time for the clover :
       if (nrj >= cristaux_nrj[clover.maxE_Ge_cristal])
       {
         clover.maxE_Ge_cristal = index_cristal;
         clover.time = time;
       }
-
-      // Fill the vector containing the list of Ge clovers that fired :
-
-      // Do a raw add-back : sum the energy of all the crystals in a clover
-      clover.nrj += nrj;
-
-      // Detailed analysis :
-      if (nrj>507 && nrj<516) has511 = true;
     }
 
     else
@@ -600,61 +598,24 @@ inline bool Clovers::Fill(Event const & event, size_t const & hit_index)
       // Manage the time of the BGOs. To be improved if necessary : if 2 BGOs, only the latest is stored
       clover.time_BGO = time;
     }
-   
     return true;
   }
   else return false;
 }
 
-/**
- * @brief 
- * @details
- * 
- * About the timing : A module hit is defined as either:
- *  a clean Ge, 
- *  a rejected Ge,
- *  a single BGO
- * 
- * Idée d'amélioration : faire deux conteneurs de clovers, le premier contenant les hits 
- * prompts, et le second les hits delayed. Comme ça on peut faire la réjection Compton 
- * et l'add-back en confinant tous les hits dans deux fenêtres en temps
- * Ou mieux : un module clover contient deux champs, l'un pour le prompt, l'autre pour le delayed
- */
 inline void Clovers::Analyse()
 {
   for (auto const & index : Hits)
   {
     auto & clover = m_clovers[index];
-    TotalMult++;
 
     // Analysing Germaniums
     if (clover.nb > 0)
     {
+      // Fill the vector containing the list of Ge clovers that fired :
       Ge.push_back(index);
       totGe+=clover.nrj;
-
-      clover.isGePrompt  = promptGate (clover.time);
-      clover.isGeDelayed = delayedGate(clover.time);
-
-      if (clover.isGePrompt)
-      {
-        PromptMult++;
-        PromptGe.push_back(index);
-        totGe_prompt+=clover.nrj;
-      }
-      else if (clover.isGeDelayed)
-      {
-        DelayedMult++;
-        DelayedGe.push_back(index);
-        totGe_delayed+=clover.nrj;
-      }
-
-      if (clover.nb_BGO==0)
-      {
-        CleanGe.push_back(index);
-             if (clover.isGePrompt ) PromptCleanGeMult++;
-        else if (clover.isGeDelayed) DelayedCleanGeMult++;
-      }
+      if (clover.nb_BGO==0) CleanGe.push_back(index);
       else RejectedGe.push_back(index);
     }
 
@@ -663,28 +624,7 @@ inline void Clovers::Analyse()
     {
       Bgo.push_back(index);
       totBGO+=clover.nrj_BGO;
-
-      clover.isBGOPrompt  = promptGate (clover.time_BGO, clover.nrj_BGO);
-      clover.isBGODelayed = delayedGate(clover.time_BGO, clover.nrj_BGO);
-
-      if (clover.isBGOPrompt)
-      {
-        PromptBGO.push_back(index);
-        totBGO_prompt+=clover.nrj_BGO;
-      }
-      else if (clover.isBGODelayed) 
-      {
-        DelayedBGO.push_back(index);
-        totBGO_delayed+=clover.nrj_BGO;
-      }
-
-      // To avoid double counting with the clovers containing both bgo and ge :
-      if (clover.nb == 0) 
-      {
-        if (clover.isBGOPrompt) PromptMult++;
-        if (clover.isBGODelayed)DelayedMult++;
-        BGOonly.push_back(index);
-      }
+      if (clover.nb == 0) BGOonly.push_back(index);
     }
   }
 }
@@ -788,3 +728,73 @@ std::ostream& operator<<(std::ostream& cout, Clovers const & clovers)
 }
 
 #endif //CLOVERS_H
+
+// inline void Clovers::Analyse()
+// {
+//   for (auto const & index : Hits)
+//   {
+//     auto & clover = m_clovers[index];
+//     TotalMult++;
+
+//     // Analysing Germaniums
+//     if (clover.nb > 0)
+//     {
+//       // Fill the vector containing the list of Ge clovers that fired :
+//       Ge.push_back(index);
+//       totGe+=clover.nrj;
+
+//       // clover.isGePrompt  = promptGate (clover.time);
+//       // clover.isGeDelayed = delayedGate(clover.time);
+
+//       // if (clover.isGePrompt)
+//       // {
+//       //   PromptMult++;
+//       //   PromptGe.push_back(index);
+//       //   totGe_prompt+=clover.nrj;
+//       // }
+//       // else if (clover.isGeDelayed)
+//       // {
+//       //   DelayedMult++;
+//       //   DelayedGe.push_back(index);
+//       //   totGe_delayed+=clover.nrj;
+//       // }
+
+//       if (clover.nb_BGO==0)
+//       {
+//         CleanGe.push_back(index);
+//         //      if (clover.isGePrompt ) PromptCleanGeMult++;
+//         // else if (clover.isGeDelayed) DelayedCleanGeMult++;
+//       }
+//       else RejectedGe.push_back(index);
+//     }
+
+//     // Analysing BGOs
+//     if (clover.nb_BGO > 0)
+//     {
+//       Bgo.push_back(index);
+//       totBGO+=clover.nrj_BGO;
+
+//       // clover.isBGOPrompt  = promptGate (clover.time_BGO, clover.nrj_BGO);
+//       // clover.isBGODelayed = delayedGate(clover.time_BGO, clover.nrj_BGO);
+
+//       // if (clover.isBGOPrompt)
+//       // {
+//       //   PromptBGO.push_back(index);
+//       //   totBGO_prompt+=clover.nrj_BGO;
+//       // }
+//       // else if (clover.isBGODelayed) 
+//       // {
+//       //   DelayedBGO.push_back(index);
+//       //   totBGO_delayed+=clover.nrj_BGO;
+//       // }
+
+//       // To avoid double counting with the clovers containing both bgo and ge :
+//       if (clover.nb == 0) 
+//       {
+//         // if (clover.isBGOPrompt) PromptMult++;
+//         // if (clover.isBGODelayed)DelayedMult++;
+//         BGOonly.push_back(index);
+//       }
+//     }
+//   }
+// }

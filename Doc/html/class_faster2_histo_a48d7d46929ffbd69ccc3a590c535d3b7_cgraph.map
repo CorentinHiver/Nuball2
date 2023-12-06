@@ -1,0 +1,26 @@
+<map id="Faster2Histo::treatFile" name="Faster2Histo::treatFile">
+<area shape="rect" id="node1" title=" " alt="" coords="5,157,171,184"/>
+<area shape="rect" id="node2" href="$class_faster2_histo.html#a327a8348f79c5ecf27a58baef32b81d8" title=" " alt="" coords="236,5,397,32"/>
+<area shape="rect" id="node4" href="$class_faster_reader.html#aab416287bd95c5dad74fff1ebb45d3c8" title="Get the name of the file being read." alt="" coords="219,56,415,83"/>
+<area shape="rect" id="node5" href="$_histogramor_8hpp.html#ab48a2fa7184e6354788989602c8c8c29" title=" " alt="" coords="291,107,343,133"/>
+<area shape="rect" id="node6" href="$class_faster_reader.html#a2d05907241b80ed637b2ae5a01503756" title="Main method. Extract the next hit from the data file and fills the Hit *m_hit object." alt="" coords="243,157,391,184"/>
+<area shape="rect" id="node20" href="$class_file.html#a43e3d087ec47881811167f3a20a99cfa" title=" " alt="" coords="277,208,356,235"/>
+<area shape="rect" id="node22" href="$class_timer.html#a4b85f2f938d7261db769607fc50fcaef" title=" " alt="" coords="255,259,379,285"/>
+<area shape="rect" id="node24" href="$class_timer.html#a3614503158effc6668bc10001d75d20c" title=" " alt="" coords="270,309,363,336"/>
+<area shape="rect" id="node3" href="$string__functions_8hpp.html#a03fb03d95885354ac3c329693588097b" title=" " alt="" coords="530,5,589,32"/>
+<area shape="rect" id="node7" href="$class_faster_reader.html#aef9fb9be5f288b88bdb17616aab801bd" title="Replace the standard ReadSimple if the faster data contains groups First of all, the m_write variable..." alt="" coords="466,107,653,133"/>
+<area shape="rect" id="node19" href="$class_faster_reader.html#a60f1f638732c48c1b78cfe4dcd23d39b" title="Read triggerless data." alt="" coords="463,157,656,184"/>
+<area shape="rect" id="node8" href="$class_faster_reader.html#a0b2cd239d03d34e69b10418cb6292858" title="Treats faster data." alt="" coords="704,132,883,159"/>
+<area shape="rect" id="node9" href="$class_faster_reader.html#a64fb4fc3d241141f5d27df99906780fc" title="Treats the faster data groups." alt="" coords="931,103,1149,129"/>
+<area shape="rect" id="node10" href="$class_faster_reader.html#af3c8f411415fb3d9fe20cd8551bc24ed" title="Treat the specific part of data (QDC gates, spectro ADC ...)" alt="" coords="961,154,1119,195"/>
+<area shape="rect" id="node18" href="$_hit_8hpp.html#a3bbfcd7f9bbec3174213c2b5eedc2edd" title="Casts a number into unsigned Timestamp." alt="" coords="975,220,1105,247"/>
+<area shape="rect" id="node11" href="$class_faster_reader.html#aa0d1eaa1b39778def2b7cd25581accef" title="Load CRRC4 data." alt="" coords="1197,35,1388,61"/>
+<area shape="rect" id="node12" href="$class_faster_reader.html#aa5890b8ac1fdbcd4e2c544c1eeca537b" title="Load QDC1 data." alt="" coords="1201,85,1385,112"/>
+<area shape="rect" id="node13" href="$class_faster_reader.html#a94fd509a6352735984a20c03fb046254" title="Load qdc2 data." alt="" coords="1201,136,1385,163"/>
+<area shape="rect" id="node14" href="$class_faster_reader.html#afa7cbf1733ff68804ef4f7706bf58416" title="Load qdc3 data." alt="" coords="1201,187,1385,213"/>
+<area shape="rect" id="node15" href="$class_faster_reader.html#ad2d7d3acd1a874f09f44f2adfa69d42c" title="Load RF data." alt="" coords="1211,237,1375,264"/>
+<area shape="rect" id="node17" href="$class_faster_reader.html#a3ee31b1e6a4c60d72f8d989d2e08bcdf" title="Load Trapez data." alt="" coords="1198,288,1387,315"/>
+<area shape="rect" id="node16" href="$_hit_8hpp.html#a42de29176eeb225c09486aa0dcac5362" title="Casts a number into unsigned ADC." alt="" coords="1436,237,1520,264"/>
+<area shape="rect" id="node21" href="$files__functions_8hpp.html#a3a01792a9cfbdd1f2b358d878559a917" title=" " alt="" coords="522,208,597,235"/>
+<area shape="rect" id="node23" href="$class_timer.html#a7b0362b0627780584a43f8168be1a904" title=" " alt="" coords="511,259,608,285"/>
+</map>

@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__event_8hpp" xml:lang="en-US">
+<title>lib/Classes/Event.hpp File Reference</title>
+<indexterm><primary>lib/Classes/Event.hpp</primary></indexterm>
+<programlisting>#include &quot;Hit.hpp&quot;
+#include &quot;../libCo.hpp&quot;
+#include &quot;../libRoot.hpp&quot;
+</programlisting>Include dependency graph for Event.hpp:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="_event_8hpp__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+This graph shows which files directly or indirectly include this file:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="_event_8hpp__dep__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>class <link linkend="_class_event">Event</link></para>
+
+<para><link linkend="_class_event">Event</link> used for reading and writting event, event building and trigger. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>std::ostream &amp; <link linkend="__event_8hpp_1a0486f85c1b0f1aed67847c1e1935fd7b">operator&lt;&lt;</link> (std::ostream &amp;cout, <link linkend="_class_event">Event</link> const &amp;event)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="__event_8hpp_1a0486f85c1b0f1aed67847c1e1935fd7b"/>    <section>
+    <title>operator&lt;&lt;()</title>
+<indexterm><primary>operator&lt;&lt;</primary><secondary>Event.hpp</secondary></indexterm>
+<indexterm><primary>Event.hpp</primary><secondary>operator&lt;&lt;</secondary></indexterm>
+<para><computeroutput>std::ostream&amp; operator&lt;&lt; (std::ostream &amp; cout, <link linkend="_class_event">Event</link> const &amp; event)<computeroutput>[inline]</computeroutput></computeroutput></para></section>
+</section>
+</section>

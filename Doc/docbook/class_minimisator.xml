@@ -1,0 +1,310 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_class_minimisator" xml:lang="en-US">
+<title>Minimisator Class Reference</title>
+<indexterm><primary>Minimisator</primary></indexterm>
+<para>
+<computeroutput>#include &lt;SpectraAlignator.hpp&gt;</computeroutput>
+</para>
+Collaboration diagram for Minimisator:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_minimisator__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>struct <link linkend="_class_minimisator_1struct_minimisator_1_1_nelder_mead_parameters">NelderMeadParameters</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>double <link linkend="_class_minimisator_1a92ceedc5d8e612ed8515faf6657c99a3">chi2</link> (<link linkend="_class_spectra_co">SpectraCo</link> const &amp;ref_spectra, <link linkend="_class_spectra_co">SpectraCo</link> const &amp;spectra)</para>
+</listitem>
+            <listitem><para>double <link linkend="_class_minimisator_1a969310853a267ef440163b92c6a7873a">chi2</link> (<link linkend="_class_spectra_co">SpectraCo</link> const &amp;ref_spectra, <link linkend="_class_spectra_co">SpectraCo</link> const &amp;spectra, <link linkend="_class_vertice">Vertice</link> const &amp;vertice)</para>
+</listitem>
+            <listitem><para>double <link linkend="_class_minimisator_1a9111d4088cf501a73b3472dc4565b4e3">chi2_second_derivative</link> (<link linkend="_class_spectra_co">SpectraCo</link> &amp;ref_spectra, <link linkend="_class_spectra_co">SpectraCo</link> &amp;test_spectra)</para>
+</listitem>
+            <listitem><para>auto const  &amp; <link linkend="_class_minimisator_1ae15be466b22ef08ccaf89b759f709e95">getDegreesOfFreedom</link> () const</para>
+</listitem>
+            <listitem><para><link linkend="_class_minimisator_1a5840066c8bf50d8e04ee596238324696">Minimisator</link> (<link linkend="_class_recalibration">Recalibration</link> *recal)</para>
+</listitem>
+            <listitem><para><link linkend="_class_vertice">Vertice</link> <link linkend="_class_minimisator_1a4146b62ab538a9c36f9a93855bee198a">minimise</link> (<link linkend="_class_spectra_co">SpectraCo</link> const &amp;ref_spectra, <link linkend="_class_spectra_co">SpectraCo</link> const &amp;spectra, std::string const &amp;method=&quot;nelder-mead&quot;)</para>
+</listitem>
+            <listitem><para>auto <link linkend="_class_minimisator_1a35127a6cdbfe1d07eebfdbda30db6a8a">operator-&gt;</link> ()</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_minimisator_1af6fb398efd3c8110bb72ffc0b37a218f">setC</link> (double const &amp;_C)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_minimisator_1adb05314210b8a9c6d4bf149e68f733a1">setDegreesOfFreedom</link> (int const &amp;degrees)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_minimisator_1ac1669f9a012ed6f484ca0dca26a2c048">setMaxa0</link> (double const &amp;_maxa0)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_minimisator_1a3bd6b90aa328de9f06fd18d3a183434e">setMaxa1</link> (double const &amp;_maxa1)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_minimisator_1af67f036d5fd92c1e732fe470cd0c020d">setMaxa2</link> (double const &amp;_maxa2)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_minimisator_1a715c87056ad76bec775d48bf2cf9792e">setMaxaSqrt</link> (double const &amp;_maxaSqrt)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_minimisator_1a9973149b31ccf9cb07f3aec54ca87d78">setMaxC</link> (double const &amp;_maxC)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_minimisator_1ae8936e9ea9e3e63711b382b9b09cbf25">setMina0</link> (double const &amp;_mina0)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_minimisator_1a9d82383998a467e338a8ddf05e35f36d">setMina1</link> (double const &amp;_mina1)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_minimisator_1a19ae44dcc355d36aad823903f9b09204">setMina2</link> (double const &amp;_mina2)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_minimisator_1a15cded5194b589f25d5b7ab20fa669d6">setMinaSqrt</link> (double const &amp;_minaSqrt)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_minimisator_1ac99fb8afd8ea36a67ddd746b0584ab43">setMinC</link> (double const &amp;_minC)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_minimisator_1ac5caeefc9cb02424158a41d7ef05ecef">setThreshold</link> (int const &amp;bin)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Private Attributes    </title>
+        <itemizedlist>
+            <listitem><para>double <link linkend="_class_minimisator_1a5475528b2ac14c2c221dcd38444c3e8e">m_C</link> = 0.0</para>
+</listitem>
+            <listitem><para>double <link linkend="_class_minimisator_1a8233a1a7c73656b4669653f5a8e80fef">m_maxa0</link> = 0.0</para>
+</listitem>
+            <listitem><para>double <link linkend="_class_minimisator_1ad463ba1d2e6345046ed6b53491089320">m_maxa1</link> = 0.0</para>
+</listitem>
+            <listitem><para>double <link linkend="_class_minimisator_1aaf1050a37767d056a0d6e0db975365b3">m_maxa2</link> = 0.0</para>
+</listitem>
+            <listitem><para>double <link linkend="_class_minimisator_1a9db2d34ee919d9a5bef93cf9c5fc5385">m_maxaSqrt</link> = 0.0</para>
+</listitem>
+            <listitem><para>double <link linkend="_class_minimisator_1a3f0b1cc97a71c7079281ac4eb2ae7a4a">m_maxC</link> = 0.0</para>
+</listitem>
+            <listitem><para>double <link linkend="_class_minimisator_1afdcd01102bcdfc6db928eb09ddfbdc71">m_mina0</link> = 0.0</para>
+</listitem>
+            <listitem><para>double <link linkend="_class_minimisator_1a404b364da43dda9ad1d1d87b1fa8ccd5">m_mina1</link> = 0.0</para>
+</listitem>
+            <listitem><para>double <link linkend="_class_minimisator_1a1a009f968f138cce07f787fb263ca6f5">m_mina2</link> = 0.0</para>
+</listitem>
+            <listitem><para>double <link linkend="_class_minimisator_1a9958f8a8d135714afbc348c8e58fb1ae">m_minaSqrt</link> = 0.0</para>
+</listitem>
+            <listitem><para>double <link linkend="_class_minimisator_1a7b33b6783d0dab674fe88fd6a5b93c04">m_minC</link> = 0.0</para>
+</listitem>
+            <listitem><para>int <link linkend="_class_minimisator_1a93d39e35dee7cd5df8bb71498b122f86">m_nb_freedom_degrees</link> = 3</para>
+</listitem>
+            <listitem><para><link linkend="_class_recalibration">Recalibration</link> * <link linkend="_class_minimisator_1a70194383b57ea57478e7c4a3e883e684">m_recal</link> = nullptr</para>
+</listitem>
+            <listitem><para>int <link linkend="_class_minimisator_1aaa7dc46c5e2406bb8a4d389996ef3e44">m_spectra_threshold</link> = 0</para>
+</listitem>
+            <listitem><para>struct <link linkend="_class_minimisator_1struct_minimisator_1_1_nelder_mead_parameters">Minimisator::NelderMeadParameters</link> <link linkend="_class_minimisator_1a60fa32272bc0c844926f7910bcb83e50">nmParam</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Class Documentation</title>
+<indexterm><primary>Minimisator::NelderMeadParameters</primary></indexterm>
+<section>
+<title>struct Minimisator::NelderMeadParameters</title>
+<anchor xml:id="_class_minimisator_1ad572ad763d40de2c3ef34e50bf71177d"/>doublealpha    </section><anchor xml:id="_class_minimisator_1aeec9715878231abdfbea7a5a6801bf1e"/>doublebeta    </section><anchor xml:id="_class_minimisator_1ae4f64377f468e22558d8bd6fee8bad24"/>doubledelta    </section><anchor xml:id="_class_minimisator_1a605647638f96b3aaaec933e3b741c392"/>doublegamma</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_class_minimisator_1a5840066c8bf50d8e04ee596238324696"/>    <section>
+    <title>Minimisator()</title>
+<indexterm><primary>Minimisator</primary><secondary>Minimisator</secondary></indexterm>
+<indexterm><primary>Minimisator</primary><secondary>Minimisator</secondary></indexterm>
+<para><computeroutput>Minimisator::Minimisator (<link linkend="_class_recalibration">Recalibration</link> * recal)<computeroutput>[inline]</computeroutput></computeroutput></para></section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_class_minimisator_1a92ceedc5d8e612ed8515faf6657c99a3"/>    <section>
+    <title>chi2()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>chi2</primary><secondary>Minimisator</secondary></indexterm>
+<indexterm><primary>Minimisator</primary><secondary>chi2</secondary></indexterm>
+<para><computeroutput>double Minimisator::chi2 (<link linkend="_class_spectra_co">SpectraCo</link> const &amp; ref_spectra, <link linkend="_class_spectra_co">SpectraCo</link> const &amp; spectra)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_minimisator_a92ceedc5d8e612ed8515faf6657c99a3_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_minimisator_1a969310853a267ef440163b92c6a7873a"/>    <section>
+    <title>chi2()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>chi2</primary><secondary>Minimisator</secondary></indexterm>
+<indexterm><primary>Minimisator</primary><secondary>chi2</secondary></indexterm>
+<para><computeroutput>double Minimisator::chi2 (<link linkend="_class_spectra_co">SpectraCo</link> const &amp; ref_spectra, <link linkend="_class_spectra_co">SpectraCo</link> const &amp; spectra, <link linkend="_class_vertice">Vertice</link> const &amp; vertice)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_minimisator_a969310853a267ef440163b92c6a7873a_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_minimisator_a969310853a267ef440163b92c6a7873a_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_minimisator_1a9111d4088cf501a73b3472dc4565b4e3"/>    <section>
+    <title>chi2_second_derivative()</title>
+<indexterm><primary>chi2_second_derivative</primary><secondary>Minimisator</secondary></indexterm>
+<indexterm><primary>Minimisator</primary><secondary>chi2_second_derivative</secondary></indexterm>
+<para><computeroutput>double Minimisator::chi2_second_derivative (<link linkend="_class_spectra_co">SpectraCo</link> &amp; ref_spectra, <link linkend="_class_spectra_co">SpectraCo</link> &amp; test_spectra)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_minimisator_a9111d4088cf501a73b3472dc4565b4e3_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_minimisator_1ae15be466b22ef08ccaf89b759f709e95"/>    <section>
+    <title>getDegreesOfFreedom()</title>
+<indexterm><primary>getDegreesOfFreedom</primary><secondary>Minimisator</secondary></indexterm>
+<indexterm><primary>Minimisator</primary><secondary>getDegreesOfFreedom</secondary></indexterm>
+<para><computeroutput>auto const&amp; Minimisator::getDegreesOfFreedom ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_minimisator_1a4146b62ab538a9c36f9a93855bee198a"/>    <section>
+    <title>minimise()</title>
+<indexterm><primary>minimise</primary><secondary>Minimisator</secondary></indexterm>
+<indexterm><primary>Minimisator</primary><secondary>minimise</secondary></indexterm>
+<para><computeroutput><link linkend="_class_vertice">Vertice</link> Minimisator::minimise (<link linkend="_class_spectra_co">SpectraCo</link> const &amp; ref_spectra, <link linkend="_class_spectra_co">SpectraCo</link> const &amp; spectra, std::string const &amp; method = <computeroutput>&quot;nelder-mead&quot;</computeroutput>
+)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_minimisator_a4146b62ab538a9c36f9a93855bee198a_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_minimisator_1a35127a6cdbfe1d07eebfdbda30db6a8a"/>    <section>
+    <title>operator-&gt;()</title>
+<indexterm><primary>operator-&gt;</primary><secondary>Minimisator</secondary></indexterm>
+<indexterm><primary>Minimisator</primary><secondary>operator-&gt;</secondary></indexterm>
+<para><computeroutput>auto Minimisator::operator-&gt; ( )<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_minimisator_1af6fb398efd3c8110bb72ffc0b37a218f"/>    <section>
+    <title>setC()</title>
+<indexterm><primary>setC</primary><secondary>Minimisator</secondary></indexterm>
+<indexterm><primary>Minimisator</primary><secondary>setC</secondary></indexterm>
+<para><computeroutput>void Minimisator::setC (double const &amp; _C)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_minimisator_1adb05314210b8a9c6d4bf149e68f733a1"/>    <section>
+    <title>setDegreesOfFreedom()</title>
+<indexterm><primary>setDegreesOfFreedom</primary><secondary>Minimisator</secondary></indexterm>
+<indexterm><primary>Minimisator</primary><secondary>setDegreesOfFreedom</secondary></indexterm>
+<para><computeroutput>void Minimisator::setDegreesOfFreedom (int const &amp; degrees)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_minimisator_1ac1669f9a012ed6f484ca0dca26a2c048"/>    <section>
+    <title>setMaxa0()</title>
+<indexterm><primary>setMaxa0</primary><secondary>Minimisator</secondary></indexterm>
+<indexterm><primary>Minimisator</primary><secondary>setMaxa0</secondary></indexterm>
+<para><computeroutput>void Minimisator::setMaxa0 (double const &amp; _maxa0)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_minimisator_1a3bd6b90aa328de9f06fd18d3a183434e"/>    <section>
+    <title>setMaxa1()</title>
+<indexterm><primary>setMaxa1</primary><secondary>Minimisator</secondary></indexterm>
+<indexterm><primary>Minimisator</primary><secondary>setMaxa1</secondary></indexterm>
+<para><computeroutput>void Minimisator::setMaxa1 (double const &amp; _maxa1)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_minimisator_1af67f036d5fd92c1e732fe470cd0c020d"/>    <section>
+    <title>setMaxa2()</title>
+<indexterm><primary>setMaxa2</primary><secondary>Minimisator</secondary></indexterm>
+<indexterm><primary>Minimisator</primary><secondary>setMaxa2</secondary></indexterm>
+<para><computeroutput>void Minimisator::setMaxa2 (double const &amp; _maxa2)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_minimisator_1a715c87056ad76bec775d48bf2cf9792e"/>    <section>
+    <title>setMaxaSqrt()</title>
+<indexterm><primary>setMaxaSqrt</primary><secondary>Minimisator</secondary></indexterm>
+<indexterm><primary>Minimisator</primary><secondary>setMaxaSqrt</secondary></indexterm>
+<para><computeroutput>void Minimisator::setMaxaSqrt (double const &amp; _maxaSqrt)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_minimisator_1a9973149b31ccf9cb07f3aec54ca87d78"/>    <section>
+    <title>setMaxC()</title>
+<indexterm><primary>setMaxC</primary><secondary>Minimisator</secondary></indexterm>
+<indexterm><primary>Minimisator</primary><secondary>setMaxC</secondary></indexterm>
+<para><computeroutput>void Minimisator::setMaxC (double const &amp; _maxC)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_minimisator_1ae8936e9ea9e3e63711b382b9b09cbf25"/>    <section>
+    <title>setMina0()</title>
+<indexterm><primary>setMina0</primary><secondary>Minimisator</secondary></indexterm>
+<indexterm><primary>Minimisator</primary><secondary>setMina0</secondary></indexterm>
+<para><computeroutput>void Minimisator::setMina0 (double const &amp; _mina0)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_minimisator_1a9d82383998a467e338a8ddf05e35f36d"/>    <section>
+    <title>setMina1()</title>
+<indexterm><primary>setMina1</primary><secondary>Minimisator</secondary></indexterm>
+<indexterm><primary>Minimisator</primary><secondary>setMina1</secondary></indexterm>
+<para><computeroutput>void Minimisator::setMina1 (double const &amp; _mina1)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_minimisator_1a19ae44dcc355d36aad823903f9b09204"/>    <section>
+    <title>setMina2()</title>
+<indexterm><primary>setMina2</primary><secondary>Minimisator</secondary></indexterm>
+<indexterm><primary>Minimisator</primary><secondary>setMina2</secondary></indexterm>
+<para><computeroutput>void Minimisator::setMina2 (double const &amp; _mina2)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_minimisator_1a15cded5194b589f25d5b7ab20fa669d6"/>    <section>
+    <title>setMinaSqrt()</title>
+<indexterm><primary>setMinaSqrt</primary><secondary>Minimisator</secondary></indexterm>
+<indexterm><primary>Minimisator</primary><secondary>setMinaSqrt</secondary></indexterm>
+<para><computeroutput>void Minimisator::setMinaSqrt (double const &amp; _minaSqrt)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_minimisator_1ac99fb8afd8ea36a67ddd746b0584ab43"/>    <section>
+    <title>setMinC()</title>
+<indexterm><primary>setMinC</primary><secondary>Minimisator</secondary></indexterm>
+<indexterm><primary>Minimisator</primary><secondary>setMinC</secondary></indexterm>
+<para><computeroutput>void Minimisator::setMinC (double const &amp; _minC)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_minimisator_1ac5caeefc9cb02424158a41d7ef05ecef"/>    <section>
+    <title>setThreshold()</title>
+<indexterm><primary>setThreshold</primary><secondary>Minimisator</secondary></indexterm>
+<indexterm><primary>Minimisator</primary><secondary>setThreshold</secondary></indexterm>
+<para><computeroutput>void Minimisator::setThreshold (int const &amp; bin)<computeroutput>[inline]</computeroutput></computeroutput></para></section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_class_minimisator_1a5475528b2ac14c2c221dcd38444c3e8e"/>    <section>
+    <title>m_C</title>
+<indexterm><primary>m_C</primary><secondary>Minimisator</secondary></indexterm>
+<indexterm><primary>Minimisator</primary><secondary>m_C</secondary></indexterm>
+<para><computeroutput>double Minimisator::m_C = 0.0<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_minimisator_1a8233a1a7c73656b4669653f5a8e80fef"/>    <section>
+    <title>m_maxa0</title>
+<indexterm><primary>m_maxa0</primary><secondary>Minimisator</secondary></indexterm>
+<indexterm><primary>Minimisator</primary><secondary>m_maxa0</secondary></indexterm>
+<para><computeroutput>double Minimisator::m_maxa0 = 0.0<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_minimisator_1ad463ba1d2e6345046ed6b53491089320"/>    <section>
+    <title>m_maxa1</title>
+<indexterm><primary>m_maxa1</primary><secondary>Minimisator</secondary></indexterm>
+<indexterm><primary>Minimisator</primary><secondary>m_maxa1</secondary></indexterm>
+<para><computeroutput>double Minimisator::m_maxa1 = 0.0<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_minimisator_1aaf1050a37767d056a0d6e0db975365b3"/>    <section>
+    <title>m_maxa2</title>
+<indexterm><primary>m_maxa2</primary><secondary>Minimisator</secondary></indexterm>
+<indexterm><primary>Minimisator</primary><secondary>m_maxa2</secondary></indexterm>
+<para><computeroutput>double Minimisator::m_maxa2 = 0.0<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_minimisator_1a9db2d34ee919d9a5bef93cf9c5fc5385"/>    <section>
+    <title>m_maxaSqrt</title>
+<indexterm><primary>m_maxaSqrt</primary><secondary>Minimisator</secondary></indexterm>
+<indexterm><primary>Minimisator</primary><secondary>m_maxaSqrt</secondary></indexterm>
+<para><computeroutput>double Minimisator::m_maxaSqrt = 0.0<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_minimisator_1a3f0b1cc97a71c7079281ac4eb2ae7a4a"/>    <section>
+    <title>m_maxC</title>
+<indexterm><primary>m_maxC</primary><secondary>Minimisator</secondary></indexterm>
+<indexterm><primary>Minimisator</primary><secondary>m_maxC</secondary></indexterm>
+<para><computeroutput>double Minimisator::m_maxC = 0.0<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_minimisator_1afdcd01102bcdfc6db928eb09ddfbdc71"/>    <section>
+    <title>m_mina0</title>
+<indexterm><primary>m_mina0</primary><secondary>Minimisator</secondary></indexterm>
+<indexterm><primary>Minimisator</primary><secondary>m_mina0</secondary></indexterm>
+<para><computeroutput>double Minimisator::m_mina0 = 0.0<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_minimisator_1a404b364da43dda9ad1d1d87b1fa8ccd5"/>    <section>
+    <title>m_mina1</title>
+<indexterm><primary>m_mina1</primary><secondary>Minimisator</secondary></indexterm>
+<indexterm><primary>Minimisator</primary><secondary>m_mina1</secondary></indexterm>
+<para><computeroutput>double Minimisator::m_mina1 = 0.0<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_minimisator_1a1a009f968f138cce07f787fb263ca6f5"/>    <section>
+    <title>m_mina2</title>
+<indexterm><primary>m_mina2</primary><secondary>Minimisator</secondary></indexterm>
+<indexterm><primary>Minimisator</primary><secondary>m_mina2</secondary></indexterm>
+<para><computeroutput>double Minimisator::m_mina2 = 0.0<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_minimisator_1a9958f8a8d135714afbc348c8e58fb1ae"/>    <section>
+    <title>m_minaSqrt</title>
+<indexterm><primary>m_minaSqrt</primary><secondary>Minimisator</secondary></indexterm>
+<indexterm><primary>Minimisator</primary><secondary>m_minaSqrt</secondary></indexterm>
+<para><computeroutput>double Minimisator::m_minaSqrt = 0.0<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_minimisator_1a7b33b6783d0dab674fe88fd6a5b93c04"/>    <section>
+    <title>m_minC</title>
+<indexterm><primary>m_minC</primary><secondary>Minimisator</secondary></indexterm>
+<indexterm><primary>Minimisator</primary><secondary>m_minC</secondary></indexterm>
+<para><computeroutput>double Minimisator::m_minC = 0.0<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_minimisator_1a93d39e35dee7cd5df8bb71498b122f86"/>    <section>
+    <title>m_nb_freedom_degrees</title>
+<indexterm><primary>m_nb_freedom_degrees</primary><secondary>Minimisator</secondary></indexterm>
+<indexterm><primary>Minimisator</primary><secondary>m_nb_freedom_degrees</secondary></indexterm>
+<para><computeroutput>int Minimisator::m_nb_freedom_degrees = 3<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_minimisator_1a70194383b57ea57478e7c4a3e883e684"/>    <section>
+    <title>m_recal</title>
+<indexterm><primary>m_recal</primary><secondary>Minimisator</secondary></indexterm>
+<indexterm><primary>Minimisator</primary><secondary>m_recal</secondary></indexterm>
+<para><computeroutput><link linkend="_class_recalibration">Recalibration</link>* Minimisator::m_recal = nullptr<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_minimisator_1aaa7dc46c5e2406bb8a4d389996ef3e44"/>    <section>
+    <title>m_spectra_threshold</title>
+<indexterm><primary>m_spectra_threshold</primary><secondary>Minimisator</secondary></indexterm>
+<indexterm><primary>Minimisator</primary><secondary>m_spectra_threshold</secondary></indexterm>
+<para><computeroutput>int Minimisator::m_spectra_threshold = 0<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_minimisator_1a60fa32272bc0c844926f7910bcb83e50"/>    <section>
+    <title>nmParam</title>
+<indexterm><primary>nmParam</primary><secondary>Minimisator</secondary></indexterm>
+<indexterm><primary>Minimisator</primary><secondary>nmParam</secondary></indexterm>
+<para><computeroutput>struct <link linkend="_class_minimisator_1struct_minimisator_1_1_nelder_mead_parameters">Minimisator::NelderMeadParameters</link> Minimisator::nmParam<computeroutput>[private]</computeroutput></computeroutput></para></section>
+<para>
+The documentation for this class was generated from the following file:</para>
+lib/Classes/<link linkend="__spectra_alignator_8hpp">SpectraAlignator.hpp</link></section>
+</section>

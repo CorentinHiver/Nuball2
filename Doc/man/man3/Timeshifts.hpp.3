@@ -1,0 +1,90 @@
+.TH "lib/Modules/Timeshifts.hpp" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+lib/Modules/Timeshifts.hpp
+.SH SYNOPSIS
+.br
+.PP
+\fC#include '\&.\&./libCo\&.hpp'\fP
+.br
+\fC#include '\&.\&./Classes/Detectors\&.hpp'\fP
+.br
+\fC#include '\&.\&./Classes/FasterReader\&.hpp'\fP
+.br
+\fC#include '\&.\&./Classes/FilesManager\&.hpp'\fP
+.br
+\fC#include '\&.\&./Classes/Hit\&.hpp'\fP
+.br
+\fC#include '\&.\&./Classes/RF_Manager\&.hpp'\fP
+.br
+\fC#include '\&.\&./Classes/Event\&.hpp'\fP
+.br
+\fC#include '\&.\&./Classes/CoincBuilder\&.hpp'\fP
+.br
+\fC#include '\&.\&./Classes/Timer\&.hpp'\fP
+.br
+\fC#include '\&.\&./Classes/Performances\&.hpp'\fP
+.br
+\fC#include '\&.\&./MTObjects/MTObject\&.hpp'\fP
+.br
+\fC#include '\&.\&./MTObjects/MTList\&.hpp'\fP
+.br
+\fC#include '\&.\&./MTObjects/MTTHist\&.hpp'\fP
+.br
+
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBTimeshifts\fP"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBget_first_RF_of_file\fP (\fBFasterReader\fP &reader, \fBHit\fP &hit, \fBRF_Manager\fP &rf)"
+.br
+.ti -1c
+.RI "void \fBget_first_RF_of_file\fP (TTree *tree, \fBEvent\fP &event, \fBRF_Manager\fP &rf)"
+.br
+.ti -1c
+.RI "double \fBgetRFGammaPrompt\fP (TH1F *hist, bool const &check_preprompt)"
+.br
+.ti -1c
+.RI "std::ostream & \fBoperator<<\fP (std::ostream &cout, \fBTimeshifts\fP const &ts)"
+.br
+.ti -1c
+.RI "template<typename T , typename  = typename std::enable_if<std::is_arithmetic<T>::value>::type> \fBTime\fP \fBShift_cast\fP (T const &t)"
+.br
+.RI "Casts a number into unsigned Time\&. "
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "std::vector< \fBTime\fP > \fBforced_shifts\fP"
+.br
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "void get_first_RF_of_file (\fBFasterReader\fP & reader, \fBHit\fP & hit, \fBRF_Manager\fP & rf)"
+
+.SS "void get_first_RF_of_file (TTree * tree, \fBEvent\fP & event, \fBRF_Manager\fP & rf)"
+
+.SS "double getRFGammaPrompt (TH1F * hist, bool const & check_preprompt)"
+
+.SS "std::ostream& operator<< (std::ostream & cout, \fBTimeshifts\fP const & ts)"
+
+.SS "template<typename T , typename  = typename std::enable_if<std::is_arithmetic<T>::value>::type> \fBTime\fP Shift_cast (T const & t)\fC [inline]\fP"
+
+.PP
+Casts a number into unsigned Time\&. 
+.SH "Variable Documentation"
+.PP 
+.SS "std::vector<\fBTime\fP> forced_shifts"
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Nuball2 from the source code\&.

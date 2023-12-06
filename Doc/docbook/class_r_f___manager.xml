@@ -1,0 +1,314 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_class_r_f___manager" xml:lang="en-US">
+<title>RF_Manager Class Reference</title>
+<indexterm><primary>RF_Manager</primary></indexterm>
+<para>
+
+<para>Class used to manage the RF. </para>
+ 
+</para>
+<para>
+<computeroutput>#include &lt;RF_Manager.hpp&gt;</computeroutput>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="__hit_8hpp_1a808363c27c30b41f6ed40b62ebde3ee7">Time</link> <link linkend="_class_r_f___manager_1a829a6911ee952dc5f3fbcf5cf93b7048">pulse_ToF</link> (<link linkend="_class_hit">Hit</link> const &amp;hit) const</para>
+</listitem>
+            <listitem><para><link linkend="__hit_8hpp_1a808363c27c30b41f6ed40b62ebde3ee7">Time</link> <link linkend="_class_r_f___manager_1a56eade01a7891c421108256629d92028">pulse_ToF</link> (<link linkend="_class_hit">Hit</link> const &amp;hit, <link linkend="__hit_8hpp_1a808363c27c30b41f6ed40b62ebde3ee7">Time</link> const &amp;<link linkend="_class_r_f___manager_1afd7204c9141bc2556b195a93e757508e">offset</link>) const</para>
+</listitem>
+            <listitem><para><link linkend="__hit_8hpp_1a808363c27c30b41f6ed40b62ebde3ee7">Time</link> <link linkend="_class_r_f___manager_1a15356af241ce65874d01c9479ab48aa4">pulse_ToF</link> (<link linkend="__hit_8hpp_1a36a1e53eff51015f34900948053c0d69">Timestamp</link> const &amp;timestamp) const</para>
+</listitem>
+            <listitem><para><link linkend="__hit_8hpp_1a808363c27c30b41f6ed40b62ebde3ee7">Time</link> <link linkend="_class_r_f___manager_1ad5d5d6c27fa4e059bc125c5d14a26c3f">pulse_ToF</link> (<link linkend="__hit_8hpp_1a36a1e53eff51015f34900948053c0d69">Timestamp</link> const &amp;timestamp, <link linkend="__hit_8hpp_1a808363c27c30b41f6ed40b62ebde3ee7">Time</link> const &amp;<link linkend="_class_r_f___manager_1afd7204c9141bc2556b195a93e757508e">offset</link>) const</para>
+</listitem>
+            <listitem><para>template&lt;class... ARGS&gt; </para><para>float <link linkend="_class_r_f___manager_1a1d406ab06d5c992faae4932e59166941">pulse_ToF_ns</link> (ARGS... args)</para>
+</listitem>
+            <listitem><para><link linkend="__hit_8hpp_1a36a1e53eff51015f34900948053c0d69">Timestamp</link> <link linkend="_class_r_f___manager_1a052e59a3c7b80f193a0bbfa8e6995ed9">refTime</link> (<link linkend="__hit_8hpp_1a36a1e53eff51015f34900948053c0d69">Timestamp</link> const &amp;timestamp) const</para>
+</listitem>
+            <listitem><para><link linkend="_class_r_f___manager_1a84a0f90afbd329b182c07f7485d29bc3">RF_Manager</link> (<link linkend="__hit_8hpp_1a808363c27c30b41f6ed40b62ebde3ee7">Time</link> const &amp;_period=400, <link linkend="__hit_8hpp_1ab5dd24876acad09ec52c250c1668466c">Label</link> const &amp;label_RF=251)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_r_f___manager_1ae63b656a158cd94800fbe542da54a389">set</link> (<link linkend="__hit_8hpp_1a36a1e53eff51015f34900948053c0d69">Timestamp</link> new_timestamp, <link linkend="__hit_8hpp_1a36a1e53eff51015f34900948053c0d69">Timestamp</link> _period)</para>
+</listitem>
+            <listitem><para>bool <link linkend="_class_r_f___manager_1a0261f2b02176a3e5562603c25f31d9a6">setHit</link> (<link linkend="_class_hit">Hit</link> const &amp;hit)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Static Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>static auto <link linkend="_class_r_f___manager_1afd7204c9141bc2556b195a93e757508e">offset</link> ()</para>
+</listitem>
+            <listitem><para>static void <link linkend="_class_r_f___manager_1ac56cba54c3c01c70e45b40093e3d1a89">set_offset</link> (<link linkend="__hit_8hpp_1a808363c27c30b41f6ed40b62ebde3ee7">Time</link> const &amp;<link linkend="_class_r_f___manager_1afd7204c9141bc2556b195a93e757508e">offset</link>)</para>
+</listitem>
+            <listitem><para>static void <link linkend="_class_r_f___manager_1a7c25dd168ae776c4229195e025ab4365">set_offset_ns</link> (<link linkend="__hit_8hpp_1a808363c27c30b41f6ed40b62ebde3ee7">Time</link> const &amp;offset_ns)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Public Attributes    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="__hit_8hpp_1a36a1e53eff51015f34900948053c0d69">Timestamp</link> <link linkend="_class_r_f___manager_1a7738dda837846c1dee405dea4d544630">last_hit</link> = 0</para>
+</listitem>
+            <listitem><para><link linkend="__hit_8hpp_1a808363c27c30b41f6ed40b62ebde3ee7">Time</link> <link linkend="_class_r_f___manager_1aaafb0a06fe27f4d3121dd41faa6787cd">period</link> = 0</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Static Public Attributes    </title>
+        <itemizedlist>
+            <listitem><para>static <link linkend="__hit_8hpp_1ab5dd24876acad09ec52c250c1668466c">Label</link> <link linkend="_class_r_f___manager_1af38019b6bb4e45be94b17c5d193f5e45">label</link> = 251</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Static Private Attributes    </title>
+        <itemizedlist>
+            <listitem><para>static <link linkend="__hit_8hpp_1a808363c27c30b41f6ed40b62ebde3ee7">Time</link> <link linkend="_class_r_f___manager_1a26bbe9a4c07e1019539c2acb0a57e7b5">m_offset</link> = 50000</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Detailed Description</title>
+
+<para>Class used to manage the RF. </para>
+
+
+
+<para>Normal case : the RF reference timestamp is lower than the shifted timestamps (should also be the case of unshifted timestamp) dT = (shifted_time-last_hit) corresponds to the time separating the current hit to the reference RF Therefore, N = dT/period corresponds to the number of periods separating the two hits In other words, it is the number of pulses between the reference RF and the current hit Then, period*N is the timestamp of the pulse relative to the current hit (Remember we are doing integer arithmetic, period*dT/period != dT) And dTperiod is the rest of the integer division, hence the time between the hit and its relative pulse Finally, one need to substract the applied offset in order to get the correct result :</para>
+
+<para>When the data is not correctly ordered : In order to get a correct answer, one need to get a positive difference, so to invert the difference : now last_hit-shifted_time&gt;0 But the result is inverted and we obtain really period-timestamp. We get the correct result by doing : relative_timestamp = period - (period-timestamp) </para>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_class_r_f___manager_1a84a0f90afbd329b182c07f7485d29bc3"/>    <section>
+    <title>RF_Manager()</title>
+<indexterm><primary>RF_Manager</primary><secondary>RF_Manager</secondary></indexterm>
+<indexterm><primary>RF_Manager</primary><secondary>RF_Manager</secondary></indexterm>
+<para><computeroutput>RF_Manager::RF_Manager (<link linkend="__hit_8hpp_1a808363c27c30b41f6ed40b62ebde3ee7">Time</link> const &amp; _period = <computeroutput>400</computeroutput>
+, <link linkend="__hit_8hpp_1ab5dd24876acad09ec52c250c1668466c">Label</link> const &amp; label_RF = <computeroutput>251</computeroutput>
+)<computeroutput>[inline]</computeroutput></computeroutput></para></section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_class_r_f___manager_1afd7204c9141bc2556b195a93e757508e"/>    <section>
+    <title>offset()</title>
+<indexterm><primary>offset</primary><secondary>RF_Manager</secondary></indexterm>
+<indexterm><primary>RF_Manager</primary><secondary>offset</secondary></indexterm>
+<para><computeroutput>static auto RF_Manager::offset ( )<computeroutput>[inline]</computeroutput>, <computeroutput>[static]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_r_f___manager_afd7204c9141bc2556b195a93e757508e_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_r_f___manager_1a829a6911ee952dc5f3fbcf5cf93b7048"/>    <section>
+    <title>pulse_ToF()<computeroutput>[1/4]</computeroutput></title>
+<indexterm><primary>pulse_ToF</primary><secondary>RF_Manager</secondary></indexterm>
+<indexterm><primary>RF_Manager</primary><secondary>pulse_ToF</secondary></indexterm>
+<para><computeroutput><link linkend="__hit_8hpp_1a808363c27c30b41f6ed40b62ebde3ee7">Time</link> RF_Manager::pulse_ToF (<link linkend="_class_hit">Hit</link> const &amp; hit) const<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_r_f___manager_a829a6911ee952dc5f3fbcf5cf93b7048_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_r_f___manager_a829a6911ee952dc5f3fbcf5cf93b7048_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_r_f___manager_1a56eade01a7891c421108256629d92028"/>    <section>
+    <title>pulse_ToF()<computeroutput>[2/4]</computeroutput></title>
+<indexterm><primary>pulse_ToF</primary><secondary>RF_Manager</secondary></indexterm>
+<indexterm><primary>RF_Manager</primary><secondary>pulse_ToF</secondary></indexterm>
+<para><computeroutput><link linkend="__hit_8hpp_1a808363c27c30b41f6ed40b62ebde3ee7">Time</link> RF_Manager::pulse_ToF (<link linkend="_class_hit">Hit</link> const &amp; hit, <link linkend="__hit_8hpp_1a808363c27c30b41f6ed40b62ebde3ee7">Time</link> const &amp; offset) const<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_r_f___manager_a56eade01a7891c421108256629d92028_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_r_f___manager_a56eade01a7891c421108256629d92028_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_r_f___manager_1a15356af241ce65874d01c9479ab48aa4"/>    <section>
+    <title>pulse_ToF()<computeroutput>[3/4]</computeroutput></title>
+<indexterm><primary>pulse_ToF</primary><secondary>RF_Manager</secondary></indexterm>
+<indexterm><primary>RF_Manager</primary><secondary>pulse_ToF</secondary></indexterm>
+<para><computeroutput><link linkend="__hit_8hpp_1a808363c27c30b41f6ed40b62ebde3ee7">Time</link> RF_Manager::pulse_ToF (<link linkend="__hit_8hpp_1a36a1e53eff51015f34900948053c0d69">Timestamp</link> const &amp; timestamp) const<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_r_f___manager_a15356af241ce65874d01c9479ab48aa4_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_r_f___manager_a15356af241ce65874d01c9479ab48aa4_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_r_f___manager_1ad5d5d6c27fa4e059bc125c5d14a26c3f"/>    <section>
+    <title>pulse_ToF()<computeroutput>[4/4]</computeroutput></title>
+<indexterm><primary>pulse_ToF</primary><secondary>RF_Manager</secondary></indexterm>
+<indexterm><primary>RF_Manager</primary><secondary>pulse_ToF</secondary></indexterm>
+<para><computeroutput><link linkend="__hit_8hpp_1a808363c27c30b41f6ed40b62ebde3ee7">Time</link> RF_Manager::pulse_ToF (<link linkend="__hit_8hpp_1a36a1e53eff51015f34900948053c0d69">Timestamp</link> const &amp; timestamp, <link linkend="__hit_8hpp_1a808363c27c30b41f6ed40b62ebde3ee7">Time</link> const &amp; offset) const<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_r_f___manager_ad5d5d6c27fa4e059bc125c5d14a26c3f_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_r_f___manager_ad5d5d6c27fa4e059bc125c5d14a26c3f_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_r_f___manager_1a1d406ab06d5c992faae4932e59166941"/>    <section>
+    <title>pulse_ToF_ns()</title>
+<indexterm><primary>pulse_ToF_ns</primary><secondary>RF_Manager</secondary></indexterm>
+<indexterm><primary>RF_Manager</primary><secondary>pulse_ToF_ns</secondary></indexterm>
+<computeroutput>template&lt;class... ARGS&gt; </computeroutput><para><computeroutput>float RF_Manager::pulse_ToF_ns (ARGS... args)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_r_f___manager_a1d406ab06d5c992faae4932e59166941_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_r_f___manager_1a052e59a3c7b80f193a0bbfa8e6995ed9"/>    <section>
+    <title>refTime()</title>
+<indexterm><primary>refTime</primary><secondary>RF_Manager</secondary></indexterm>
+<indexterm><primary>RF_Manager</primary><secondary>refTime</secondary></indexterm>
+<para><computeroutput><link linkend="__hit_8hpp_1a36a1e53eff51015f34900948053c0d69">Timestamp</link> RF_Manager::refTime (<link linkend="__hit_8hpp_1a36a1e53eff51015f34900948053c0d69">Timestamp</link> const &amp; timestamp) const<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_r_f___manager_a052e59a3c7b80f193a0bbfa8e6995ed9_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_r_f___manager_1ae63b656a158cd94800fbe542da54a389"/>    <section>
+    <title>set()</title>
+<indexterm><primary>set</primary><secondary>RF_Manager</secondary></indexterm>
+<indexterm><primary>RF_Manager</primary><secondary>set</secondary></indexterm>
+<para><computeroutput>void RF_Manager::set (<link linkend="__hit_8hpp_1a36a1e53eff51015f34900948053c0d69">Timestamp</link> new_timestamp, <link linkend="__hit_8hpp_1a36a1e53eff51015f34900948053c0d69">Timestamp</link> _period)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_r_f___manager_ae63b656a158cd94800fbe542da54a389_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_r_f___manager_ae63b656a158cd94800fbe542da54a389_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_r_f___manager_1ac56cba54c3c01c70e45b40093e3d1a89"/>    <section>
+    <title>set_offset()</title>
+<indexterm><primary>set_offset</primary><secondary>RF_Manager</secondary></indexterm>
+<indexterm><primary>RF_Manager</primary><secondary>set_offset</secondary></indexterm>
+<para><computeroutput>static void RF_Manager::set_offset (<link linkend="__hit_8hpp_1a808363c27c30b41f6ed40b62ebde3ee7">Time</link> const &amp; offset)<computeroutput>[inline]</computeroutput>, <computeroutput>[static]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_r_f___manager_ac56cba54c3c01c70e45b40093e3d1a89_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_r_f___manager_ac56cba54c3c01c70e45b40093e3d1a89_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_r_f___manager_1a7c25dd168ae776c4229195e025ab4365"/>    <section>
+    <title>set_offset_ns()</title>
+<indexterm><primary>set_offset_ns</primary><secondary>RF_Manager</secondary></indexterm>
+<indexterm><primary>RF_Manager</primary><secondary>set_offset_ns</secondary></indexterm>
+<para><computeroutput>static void RF_Manager::set_offset_ns (<link linkend="__hit_8hpp_1a808363c27c30b41f6ed40b62ebde3ee7">Time</link> const &amp; offset_ns)<computeroutput>[inline]</computeroutput>, <computeroutput>[static]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_r_f___manager_1a0261f2b02176a3e5562603c25f31d9a6"/>    <section>
+    <title>setHit()</title>
+<indexterm><primary>setHit</primary><secondary>RF_Manager</secondary></indexterm>
+<indexterm><primary>RF_Manager</primary><secondary>setHit</secondary></indexterm>
+<para><computeroutput>bool RF_Manager::setHit (<link linkend="_class_hit">Hit</link> const &amp; hit)</computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_r_f___manager_a0261f2b02176a3e5562603c25f31d9a6_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_r_f___manager_a0261f2b02176a3e5562603c25f31d9a6_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_class_r_f___manager_1af38019b6bb4e45be94b17c5d193f5e45"/>    <section>
+    <title>label</title>
+<indexterm><primary>label</primary><secondary>RF_Manager</secondary></indexterm>
+<indexterm><primary>RF_Manager</primary><secondary>label</secondary></indexterm>
+<para><computeroutput><link linkend="__hit_8hpp_1ab5dd24876acad09ec52c250c1668466c">Label</link> RF_Manager::label = 251<computeroutput>[static]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_r_f___manager_1a7738dda837846c1dee405dea4d544630"/>    <section>
+    <title>last_hit</title>
+<indexterm><primary>last_hit</primary><secondary>RF_Manager</secondary></indexterm>
+<indexterm><primary>RF_Manager</primary><secondary>last_hit</secondary></indexterm>
+<para><computeroutput><link linkend="__hit_8hpp_1a36a1e53eff51015f34900948053c0d69">Timestamp</link> RF_Manager::last_hit = 0</computeroutput></para>    </section><anchor xml:id="_class_r_f___manager_1a26bbe9a4c07e1019539c2acb0a57e7b5"/>    <section>
+    <title>m_offset</title>
+<indexterm><primary>m_offset</primary><secondary>RF_Manager</secondary></indexterm>
+<indexterm><primary>RF_Manager</primary><secondary>m_offset</secondary></indexterm>
+<para><computeroutput><link linkend="__hit_8hpp_1a808363c27c30b41f6ed40b62ebde3ee7">Time</link> RF_Manager::m_offset = 50000<computeroutput>[static]</computeroutput>, <computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_r_f___manager_1aaafb0a06fe27f4d3121dd41faa6787cd"/>    <section>
+    <title>period</title>
+<indexterm><primary>period</primary><secondary>RF_Manager</secondary></indexterm>
+<indexterm><primary>RF_Manager</primary><secondary>period</secondary></indexterm>
+<para><computeroutput><link linkend="__hit_8hpp_1a808363c27c30b41f6ed40b62ebde3ee7">Time</link> RF_Manager::period = 0</computeroutput></para></section>
+<para>
+The documentation for this class was generated from the following file:</para>
+lib/Classes/<link linkend="__r_f___manager_8hpp">RF_Manager.hpp</link></section>
+</section>

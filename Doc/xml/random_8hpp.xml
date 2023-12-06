@@ -1,0 +1,560 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="random_8hpp" kind="file" language="C++">
+    <compoundname>random.hpp</compoundname>
+    <includes local="no">random</includes>
+    <includedby refid="lib_co_8hpp" local="yes">lib/libCo.hpp</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>lib/random.hpp</label>
+        <link refid="random_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>random</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="45">
+        <label>lib/MTObjects/MTVariable.hpp</label>
+        <link refid="_m_t_variable_8hpp"/>
+      </node>
+      <node id="3">
+        <label>lib/Analyse/Counters.hpp</label>
+        <link refid="_analyse_2_counters_8hpp"/>
+      </node>
+      <node id="1">
+        <label>lib/random.hpp</label>
+        <link refid="random_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="33">
+        <label>lib/Classes/RWMat.hxx</label>
+        <link refid="_r_w_mat_8hxx"/>
+      </node>
+      <node id="34">
+        <label>lib/libRoot.hpp</label>
+        <link refid="lib_root_8hpp"/>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+      </node>
+      <node id="21">
+        <label>lib/Modules/Faster2Histo.hpp</label>
+        <link refid="_faster2_histo_8hpp"/>
+      </node>
+      <node id="26">
+        <label>lib/Classes/RF_Manager.hpp</label>
+        <link refid="_r_f___manager_8hpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="31">
+        <label>lib/Classes/Manip.hpp</label>
+        <link refid="_manip_8hpp"/>
+      </node>
+      <node id="19">
+        <label>lib/MTObjects/MTFasterReader.hpp</label>
+        <link refid="_m_t_faster_reader_8hpp"/>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="24">
+        <label>lib/Classes/Nuball2Tree.hpp</label>
+        <link refid="_nuball2_tree_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+      </node>
+      <node id="29">
+        <label>lib/Classes/Gate.hpp</label>
+        <link refid="_gate_8hpp"/>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>lib/Analyse/DSSD.hpp</label>
+        <link refid="_d_s_s_d_8hpp"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="28">
+        <label>lib/MTObjects/MTFilesManager.hpp</label>
+        <link refid="_m_t_files_manager_8hpp"/>
+      </node>
+      <node id="39">
+        <label>lib/Classes/FasterReader.hpp</label>
+        <link refid="_faster_reader_8hpp"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>lib/Analyse/EventAnalyse.hpp</label>
+        <link refid="_event_analyse_8hpp"/>
+      </node>
+      <node id="42">
+        <label>lib/MTObjects/MTCounter.hpp</label>
+        <link refid="_m_t_counter_8hpp"/>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="43" relation="include">
+        </childnode>
+      </node>
+      <node id="38">
+        <label>lib/Classes/Hit.hpp</label>
+        <link refid="_hit_8hpp"/>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>lib/libCo.hpp</label>
+        <link refid="lib_co_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="46" relation="include">
+        </childnode>
+        <childnode refid="44" relation="include">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>lib/Classes/EventBuilder.hpp</label>
+        <link refid="_event_builder_8hpp"/>
+      </node>
+      <node id="16">
+        <label>lib/Analyse/Clovers.hpp</label>
+        <link refid="_clovers_8hpp"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="46">
+        <label>lib/Modules/Timewalk.hpp</label>
+        <link refid="_timewalk_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>lib/Modules/CloverSpectra.hpp</label>
+        <link refid="_clover_spectra_8hpp"/>
+      </node>
+      <node id="44">
+        <label>lib/MTObjects/MTList.hpp</label>
+        <link refid="_m_t_list_8hpp"/>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+      </node>
+      <node id="43">
+        <label>lib/MTObjects/MTTHist.hpp</label>
+        <link refid="_m_t_t_hist_8hpp"/>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="35">
+        <label>lib/Analyse/ParisCluster.hpp</label>
+        <link refid="_paris_cluster_8hpp"/>
+        <childnode refid="17" relation="include">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>lib/Classes/Counters.hpp</label>
+        <link refid="_classes_2_counters_8hpp"/>
+      </node>
+      <node id="37">
+        <label>lib/Classes/Detectors.hpp</label>
+        <link refid="_detectors_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="40">
+        <label>lib/Classes/SpectraAlignator.hpp</label>
+        <link refid="_spectra_alignator_8hpp"/>
+      </node>
+      <node id="15">
+        <label>lib/Classes/Event.hpp</label>
+        <link refid="_event_8hpp"/>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="22">
+        <label>lib/Modules/Histogramor.hpp</label>
+        <link refid="_histogramor_8hpp"/>
+        <childnode refid="23" relation="include">
+        </childnode>
+      </node>
+      <node id="30">
+        <label>lib/Analyse/HistoAnalyse.hpp</label>
+        <link refid="_histo_analyse_8hpp"/>
+      </node>
+      <node id="6">
+        <label>lib/Analyse/Sorted_Event.hpp</label>
+        <link refid="_sorted___event_8hpp"/>
+      </node>
+      <node id="10">
+        <label>lib/Modules/Faster2Root.hpp</label>
+        <link refid="_faster2_root_8hpp"/>
+      </node>
+      <node id="36">
+        <label>lib/Analyse/ParisPhoswitch.hpp</label>
+        <link refid="_paris_phoswitch_8hpp"/>
+        <childnode refid="35" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>lib/Modules/RunMatrixator.hpp</label>
+        <link refid="_run_matrixator_8hpp"/>
+      </node>
+      <node id="8">
+        <label>lib/Classes/CoincBuilder.hpp</label>
+        <link refid="_coinc_builder_8hpp"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>lib/Classes/Builder.hpp</label>
+        <link refid="_builder_8hpp"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="41">
+        <label>lib/MTObjects/MTObject.hpp</label>
+        <link refid="_m_t_object_8hpp"/>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="42" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="44" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="43" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>lib/Modules/NearLine.hpp</label>
+        <link refid="_near_line_8hpp"/>
+      </node>
+      <node id="11">
+        <label>lib/Modules/Timeshifts.hpp</label>
+        <link refid="_timeshifts_8hpp"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>lib/Analyse/Paris.hpp</label>
+        <link refid="_paris_8hpp"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="18">
+        <label>lib/Classes/Alignator.hpp</label>
+        <link refid="_alignator_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>lib/Classes/FilesManager.hpp</label>
+        <link refid="_files_manager_8hpp"/>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+      </node>
+      <node id="25">
+        <label>lib/MTObjects/MTRootReader.hpp</label>
+        <link refid="_m_t_root_reader_8hpp"/>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="20">
+        <label>lib/Modules/Calibration.hpp</label>
+        <link refid="_calibration_8hpp"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="32">
+        <label>lib/Classes/Performances.hpp</label>
+        <link refid="_performances_8hpp"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="random_8hpp_1a7071b0092ad8c5b57d6cc40c5f803df5" prot="public" static="no" mutable="no">
+        <type>std::random_device</type>
+        <definition>std::random_device rd</definition>
+        <argsstring></argsstring>
+        <name>rd</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/random.hpp" line="6" column="20" bodyfile="lib/random.hpp" bodystart="6" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="random_8hpp_1a374a9a7de3fd00dceacc5de8a654c087" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::mt19937</type>
+        <definition>std::mt19937 gen</definition>
+        <argsstring>(rd())</argsstring>
+        <name>gen</name>
+        <param>
+          <type><ref refid="random_8hpp_1a7071b0092ad8c5b57d6cc40c5f803df5" kindref="member">rd</ref>()</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/random.hpp" line="7" column="14" declfile="lib/random.hpp" declline="7" declcolumn="14"/>
+        <referencedby refid="random_8hpp_1a61ebdcf7bf06323f12806134068541a7" compoundref="random_8hpp" startline="10" endline="10">random_uniform</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="random_8hpp_1a61ebdcf7bf06323f12806134068541a7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double random_uniform</definition>
+        <argsstring>()</argsstring>
+        <name>random_uniform</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/random.hpp" line="10" column="8" bodyfile="lib/random.hpp" bodystart="10" bodyend="10"/>
+        <references refid="random_8hpp_1a374a9a7de3fd00dceacc5de8a654c087">gen</references>
+        <references refid="random_8hpp_1a4b55f3e7bc2bb11053ada6696cd821f6">uniform_random_generator_double</references>
+        <referencedby refid="class_calibration_1aa09b700f10eaaa69a97a0cc6da973a06" compoundref="_calibration_8hpp" startline="969" endline="980">Calibration::calibrate</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="random_8hpp_1a4b55f3e7bc2bb11053ada6696cd821f6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::uniform_real_distribution&lt; double &gt;</type>
+        <definition>std::uniform_real_distribution&lt;double&gt; uniform_random_generator_double</definition>
+        <argsstring>(0, 1)</argsstring>
+        <name>uniform_random_generator_double</name>
+        <param>
+          <type>0</type>
+        </param>
+        <param>
+          <type>1</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/random.hpp" line="8" column="32" declfile="lib/random.hpp" declline="8" declcolumn="32"/>
+        <referencedby refid="random_8hpp_1a61ebdcf7bf06323f12806134068541a7" compoundref="random_8hpp" startline="10" endline="10">random_uniform</referencedby>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>RANDOM_HPP</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>RANDOM_HPP</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;random&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6" refid="random_8hpp_1a7071b0092ad8c5b57d6cc40c5f803df5" refkind="member"><highlight class="normal">std::random_device<sp/><ref refid="random_8hpp_1a7071b0092ad8c5b57d6cc40c5f803df5" kindref="member">rd</ref>;</highlight></codeline>
+<codeline lineno="7" refid="random_8hpp_1a374a9a7de3fd00dceacc5de8a654c087" refkind="member"><highlight class="normal">std::mt19937<sp/><ref refid="random_8hpp_1a374a9a7de3fd00dceacc5de8a654c087" kindref="member">gen</ref>(<ref refid="random_8hpp_1a7071b0092ad8c5b57d6cc40c5f803df5" kindref="member">rd</ref>());</highlight></codeline>
+<codeline lineno="8" refid="random_8hpp_1a4b55f3e7bc2bb11053ada6696cd821f6" refkind="member"><highlight class="normal">std::uniform_real_distribution&lt;double&gt;<sp/><ref refid="random_8hpp_1a4b55f3e7bc2bb11053ada6696cd821f6" kindref="member">uniform_random_generator_double</ref>(0,<sp/>1);</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10" refid="random_8hpp_1a61ebdcf7bf06323f12806134068541a7" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="random_8hpp_1a61ebdcf7bf06323f12806134068541a7" kindref="member">random_uniform</ref>()<sp/>{</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="random_8hpp_1a4b55f3e7bc2bb11053ada6696cd821f6" kindref="member">uniform_random_generator_double</ref>(<ref refid="random_8hpp_1a374a9a7de3fd00dceacc5de8a654c087" kindref="member">gen</ref>);}</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//RANDOM_HPP</highlight></codeline>
+    </programlisting>
+    <location file="lib/random.hpp"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,134 @@
+.TH "Paris" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Paris
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <Paris\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBAnalyse\fP ()"
+.br
+.ti -1c
+.RI "auto & \fBback\fP ()"
+.br
+.ti -1c
+.RI "void \fBFill\fP (\fBEvent\fP const &event, \fBsize_t\fP const &i)"
+.br
+.ti -1c
+.RI "auto & \fBfront\fP ()"
+.br
+.ti -1c
+.RI "void \fBInitialize\fP ()"
+.br
+.ti -1c
+.RI "\fBParis\fP ()"
+.br
+.ti -1c
+.RI "void \fBReset\fP ()"
+.br
+.in -1c
+.SS "Static Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "static void \fBInitializeArrays\fP ()"
+.br
+.ti -1c
+.RI "static bool \fBis_paris\fP (\fBLabel\fP const &l)"
+.br
+.ti -1c
+.RI "static \fBuchar\fP \fBlabel_to_index\fP (\fBLabel\fP const &l)"
+.br
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBParisCluster\fP< 28 > \fBclusterBack\fP"
+.br
+.ti -1c
+.RI "\fBParisCluster\fP< 36 > \fBclusterFront\fP"
+.br
+.ti -1c
+.RI "\fBStaticVector\fP< \fBuchar\fP > \fBHits\fP"
+.br
+.in -1c
+.SS "Static Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "static std::array< \fBuchar\fP, 1000 > \fBcluster\fP"
+.br
+.ti -1c
+.RI "static std::array< \fBuchar\fP, 1000 > \fBindex\fP"
+.br
+.ti -1c
+.RI "static std::array< bool, 1000 > \fBis\fP"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "bool \fBm_initialised\fP = false"
+.br
+.in -1c
+.SS "Static Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "static bool \fBs_initialised\fP = false"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "Paris::Paris ()\fC [inline]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "void Paris::Analyse ()\fC [inline]\fP"
+
+.SS "auto& Paris::back ()\fC [inline]\fP"
+
+.SS "void Paris::Fill (\fBEvent\fP const & event, \fBsize_t\fP const & i)\fC [inline]\fP"
+
+.SS "auto& Paris::front ()\fC [inline]\fP"
+
+.SS "void Paris::Initialize ()"
+
+.SS "static void Paris::InitializeArrays ()\fC [inline]\fP, \fC [static]\fP"
+
+.SS "static bool Paris::is_paris (\fBLabel\fP const & l)\fC [inline]\fP, \fC [static]\fP"
+
+.SS "static \fBuchar\fP Paris::label_to_index (\fBLabel\fP const & l)\fC [inline]\fP, \fC [static]\fP"
+
+.SS "void Paris::Reset ()\fC [inline]\fP"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "std::array< \fBuchar\fP, 1000 > Paris::cluster\fC [static]\fP"
+
+.SS "\fBParisCluster\fP<28> Paris::clusterBack"
+
+.SS "\fBParisCluster\fP<36> Paris::clusterFront"
+
+.SS "\fBStaticVector\fP<\fBuchar\fP> Paris::Hits"
+
+.SS "std::array< \fBuchar\fP, 1000 > Paris::index\fC [static]\fP"
+
+.SS "std::array< bool, 1000 > Paris::is\fC [static]\fP"
+
+.SS "bool Paris::m_initialised = false\fC [private]\fP"
+
+.SS "bool Paris::s_initialised = false\fC [static]\fP, \fC [private]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Nuball2 from the source code\&.

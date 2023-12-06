@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__paris_8hpp" xml:lang="en-US">
+<title>lib/Analyse/Paris.hpp File Reference</title>
+<indexterm><primary>lib/Analyse/Paris.hpp</primary></indexterm>
+<programlisting>#include &quot;../Classes/Event.hpp&quot;
+#include &quot;Arrays/Paris.h&quot;
+#include &quot;ParisCluster.hpp&quot;
+</programlisting>Include dependency graph for Paris.hpp:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="_paris_8hpp__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+This graph shows which files directly or indirectly include this file:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="_paris_8hpp__dep__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>class <link linkend="_class_paris">Paris</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_class_position_x_y">PositionXY</link> <link linkend="__paris_8hpp_1a3c82e9291cdf8abbc848c7cb6879c35f">paris_getPositionModule</link> (<link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">std::size_t</link> const &amp;module_label)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="__paris_8hpp_1a3c82e9291cdf8abbc848c7cb6879c35f"/>    <section>
+    <title>paris_getPositionModule()</title>
+<indexterm><primary>paris_getPositionModule</primary><secondary>Paris.hpp</secondary></indexterm>
+<indexterm><primary>Paris.hpp</primary><secondary>paris_getPositionModule</secondary></indexterm>
+<para><computeroutput><link linkend="_class_position_x_y">PositionXY</link> paris_getPositionModule (<link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">std::size_t</link> const &amp; module_label)</computeroutput></para></section>
+</section>
+</section>

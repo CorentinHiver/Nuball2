@@ -1,0 +1,538 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="class_counters" kind="class" language="C++" prot="public">
+    <compoundname>Counters</compoundname>
+    <includes refid="_analyse_2_counters_8hpp" local="no">Counters.hpp</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="class_counters_1ad6278342b5968437e8a02869ad914244" prot="public" static="no" mutable="no">
+        <type>std::array&lt; Bool_t, 24 &gt;</type>
+        <definition>std::array&lt; Bool_t, 24 &gt; Counters::BGO_Clover</definition>
+        <argsstring></argsstring>
+        <name>BGO_Clover</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/Counters.hpp" line="38" column="14" bodyfile="lib/Analyse/Counters.hpp" bodystart="38" bodyend="-1"/>
+        <referencedby refid="class_counters_1ada46b45bb45210aad28a4ebbd23f98f8" compoundref="_analyse_2_counters_8hpp" startline="43" endline="61">clear</referencedby>
+        <referencedby refid="class_counters_1a1f2723ecaf63399d985ce2efd87aab6f" compoundref="_classes_2_counters_8hpp" startline="108" endline="125">clover_analyse</referencedby>
+        <referencedby refid="class_counters_1a438d855f700f802261df045b1f52723e" compoundref="_analyse_2_counters_8hpp" startline="63" endline="121">count_event</referencedby>
+        <referencedby refid="class_counters_1a6d83023bf5dece2147c82ad2b1906abd" compoundref="_analyse_2_counters_8hpp" startline="11" endline="19">Counters</referencedby>
+        <referencedby refid="class_counters_1a64f2e9cf1e132725e4b5a6b0fcdb9ea5" compoundref="_classes_2_counters_8hpp" startline="65" endline="97">set_hit</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_counters_1a35eedcda3ee01def8ceb7d3045db0127" prot="public" static="no" mutable="no">
+        <type><ref refid="lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21" kindref="member">uchar</ref></type>
+        <definition>uchar Counters::Clovers</definition>
+        <argsstring></argsstring>
+        <name>Clovers</name>
+        <initializer>=0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/Counters.hpp" line="30" column="9" bodyfile="lib/Analyse/Counters.hpp" bodystart="30" bodyend="-1"/>
+        <referencedby refid="class_counters_1a1f2723ecaf63399d985ce2efd87aab6f" compoundref="_classes_2_counters_8hpp" startline="108" endline="125">clover_analyse</referencedby>
+        <referencedby refid="class_counters_1a438d855f700f802261df045b1f52723e" compoundref="_analyse_2_counters_8hpp" startline="63" endline="121">count_event</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_counters_1a37f7a3d680241f851dcbeb46a2ad79ae" prot="public" static="no" mutable="no">
+        <type><ref refid="lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21" kindref="member">uchar</ref></type>
+        <definition>uchar Counters::DSSDMult</definition>
+        <argsstring></argsstring>
+        <name>DSSDMult</name>
+        <initializer>=0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/Counters.hpp" line="34" column="9" bodyfile="lib/Analyse/Counters.hpp" bodystart="34" bodyend="-1"/>
+        <referencedby refid="class_counters_1ada46b45bb45210aad28a4ebbd23f98f8" compoundref="_analyse_2_counters_8hpp" startline="43" endline="61">clear</referencedby>
+        <referencedby refid="class_counters_1a438d855f700f802261df045b1f52723e" compoundref="_analyse_2_counters_8hpp" startline="63" endline="121">count_event</referencedby>
+        <referencedby refid="class_counters_1a64f2e9cf1e132725e4b5a6b0fcdb9ea5" compoundref="_classes_2_counters_8hpp" startline="65" endline="97">set_hit</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_counters_1aaf1d093d97e4d98ce7a84d46b027c9d3" prot="public" static="no" mutable="no">
+        <type>std::array&lt; Bool_t, 24 &gt;</type>
+        <definition>std::array&lt; Bool_t, 24 &gt; Counters::Ge_Clover</definition>
+        <argsstring></argsstring>
+        <name>Ge_Clover</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/Counters.hpp" line="37" column="14" bodyfile="lib/Analyse/Counters.hpp" bodystart="37" bodyend="-1"/>
+        <referencedby refid="class_counters_1ada46b45bb45210aad28a4ebbd23f98f8" compoundref="_analyse_2_counters_8hpp" startline="43" endline="61">clear</referencedby>
+        <referencedby refid="class_counters_1a1f2723ecaf63399d985ce2efd87aab6f" compoundref="_classes_2_counters_8hpp" startline="108" endline="125">clover_analyse</referencedby>
+        <referencedby refid="class_counters_1a438d855f700f802261df045b1f52723e" compoundref="_analyse_2_counters_8hpp" startline="63" endline="121">count_event</referencedby>
+        <referencedby refid="class_counters_1a6d83023bf5dece2147c82ad2b1906abd" compoundref="_analyse_2_counters_8hpp" startline="11" endline="19">Counters</referencedby>
+        <referencedby refid="class_counters_1a64f2e9cf1e132725e4b5a6b0fcdb9ea5" compoundref="_classes_2_counters_8hpp" startline="65" endline="97">set_hit</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_counters_1a9e8e7788cc926be6bc7479709ac8dce3" prot="public" static="no" mutable="no">
+        <type><ref refid="lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21" kindref="member">uchar</ref></type>
+        <definition>uchar Counters::GeCleanClovers</definition>
+        <argsstring></argsstring>
+        <name>GeCleanClovers</name>
+        <initializer>=0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/Counters.hpp" line="28" column="9" bodyfile="lib/Analyse/Counters.hpp" bodystart="28" bodyend="-1"/>
+        <referencedby refid="class_counters_1ada46b45bb45210aad28a4ebbd23f98f8" compoundref="_analyse_2_counters_8hpp" startline="43" endline="61">clear</referencedby>
+        <referencedby refid="class_counters_1a1f2723ecaf63399d985ce2efd87aab6f" compoundref="_classes_2_counters_8hpp" startline="108" endline="125">clover_analyse</referencedby>
+        <referencedby refid="class_counters_1a438d855f700f802261df045b1f52723e" compoundref="_analyse_2_counters_8hpp" startline="63" endline="121">count_event</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_counters_1a62564fb849d524995a2358f0ae8bec39" prot="public" static="no" mutable="no">
+        <type><ref refid="lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21" kindref="member">uchar</ref></type>
+        <definition>uchar Counters::GeClovers</definition>
+        <argsstring></argsstring>
+        <name>GeClovers</name>
+        <initializer>=0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/Counters.hpp" line="29" column="9" bodyfile="lib/Analyse/Counters.hpp" bodystart="29" bodyend="-1"/>
+        <referencedby refid="class_counters_1ada46b45bb45210aad28a4ebbd23f98f8" compoundref="_analyse_2_counters_8hpp" startline="43" endline="61">clear</referencedby>
+        <referencedby refid="class_counters_1a1f2723ecaf63399d985ce2efd87aab6f" compoundref="_classes_2_counters_8hpp" startline="108" endline="125">clover_analyse</referencedby>
+        <referencedby refid="class_counters_1a438d855f700f802261df045b1f52723e" compoundref="_analyse_2_counters_8hpp" startline="63" endline="121">count_event</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_counters_1a062b3e5ff74d5830c9df0d30deb8780f" prot="public" static="no" mutable="no">
+        <type><ref refid="lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21" kindref="member">uchar</ref></type>
+        <definition>uchar Counters::LaBr3Mult</definition>
+        <argsstring></argsstring>
+        <name>LaBr3Mult</name>
+        <initializer>=0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/Counters.hpp" line="32" column="9" bodyfile="lib/Analyse/Counters.hpp" bodystart="32" bodyend="-1"/>
+        <referencedby refid="class_counters_1ada46b45bb45210aad28a4ebbd23f98f8" compoundref="_analyse_2_counters_8hpp" startline="43" endline="61">clear</referencedby>
+        <referencedby refid="class_counters_1a438d855f700f802261df045b1f52723e" compoundref="_analyse_2_counters_8hpp" startline="63" endline="121">count_event</referencedby>
+        <referencedby refid="class_counters_1a64f2e9cf1e132725e4b5a6b0fcdb9ea5" compoundref="_classes_2_counters_8hpp" startline="65" endline="97">set_hit</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_counters_1a9338b4e640e1f3996fedb317d9c40923" prot="public" static="no" mutable="no">
+        <type><ref refid="class_static_vector" kindref="compound">StaticVector</ref>&lt; <ref refid="lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21" kindref="member">uchar</ref>, 24 &gt;</type>
+        <definition>StaticVector&lt;uchar,24&gt; Counters::list_clovers</definition>
+        <argsstring></argsstring>
+        <name>list_clovers</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/Counters.hpp" line="36" column="16" bodyfile="lib/Analyse/Counters.hpp" bodystart="36" bodyend="-1"/>
+        <referencedby refid="class_counters_1ada46b45bb45210aad28a4ebbd23f98f8" compoundref="_analyse_2_counters_8hpp" startline="43" endline="61">clear</referencedby>
+        <referencedby refid="class_counters_1a1f2723ecaf63399d985ce2efd87aab6f" compoundref="_classes_2_counters_8hpp" startline="108" endline="125">clover_analyse</referencedby>
+        <referencedby refid="class_counters_1a438d855f700f802261df045b1f52723e" compoundref="_analyse_2_counters_8hpp" startline="63" endline="121">count_event</referencedby>
+        <referencedby refid="class_counters_1a6d83023bf5dece2147c82ad2b1906abd" compoundref="_analyse_2_counters_8hpp" startline="11" endline="19">Counters</referencedby>
+        <referencedby refid="class_counters_1a64f2e9cf1e132725e4b5a6b0fcdb9ea5" compoundref="_classes_2_counters_8hpp" startline="65" endline="97">set_hit</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_counters_1af4d16a79b9fa7e57b20ef2866f0e38e4" prot="public" static="no" mutable="no">
+        <type><ref refid="class_static_vector" kindref="compound">StaticVector</ref>&lt; <ref refid="lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21" kindref="member">uchar</ref> &gt;</type>
+        <definition>StaticVector&lt;uchar&gt; Counters::list_clovers</definition>
+        <argsstring></argsstring>
+        <name>list_clovers</name>
+        <initializer>= <ref refid="class_static_vector" kindref="compound">StaticVector</ref>&lt;<ref refid="lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21" kindref="member">uchar</ref>&gt;(24)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Counters.hpp" line="38" column="16" bodyfile="lib/Classes/Counters.hpp" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_counters_1aa10e5f5e024f297949057a82c50a14a2" prot="public" static="no" mutable="no">
+        <type><ref refid="lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21" kindref="member">uchar</ref></type>
+        <definition>uchar Counters::Modules</definition>
+        <argsstring></argsstring>
+        <name>Modules</name>
+        <initializer>=0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/Counters.hpp" line="31" column="9" bodyfile="lib/Analyse/Counters.hpp" bodystart="31" bodyend="-1"/>
+        <referencedby refid="class_counters_1ada46b45bb45210aad28a4ebbd23f98f8" compoundref="_analyse_2_counters_8hpp" startline="43" endline="61">clear</referencedby>
+        <referencedby refid="class_counters_1a1f2723ecaf63399d985ce2efd87aab6f" compoundref="_classes_2_counters_8hpp" startline="108" endline="125">clover_analyse</referencedby>
+        <referencedby refid="class_counters_1a438d855f700f802261df045b1f52723e" compoundref="_analyse_2_counters_8hpp" startline="63" endline="121">count_event</referencedby>
+        <referencedby refid="class_counters_1a64f2e9cf1e132725e4b5a6b0fcdb9ea5" compoundref="_classes_2_counters_8hpp" startline="65" endline="97">set_hit</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_counters_1a0d4d6f79204a5462c92c5215b7f51e58" prot="public" static="no" mutable="no">
+        <type><ref refid="lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21" kindref="member">uchar</ref></type>
+        <definition>uchar Counters::mult</definition>
+        <argsstring></argsstring>
+        <name>mult</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/Counters.hpp" line="25" column="9" bodyfile="lib/Analyse/Counters.hpp" bodystart="25" bodyend="-1"/>
+        <referencedby refid="class_counters_1ada46b45bb45210aad28a4ebbd23f98f8" compoundref="_analyse_2_counters_8hpp" startline="43" endline="61">clear</referencedby>
+        <referencedby refid="class_counters_1a438d855f700f802261df045b1f52723e" compoundref="_analyse_2_counters_8hpp" startline="63" endline="121">count_event</referencedby>
+        <referencedby refid="class_counters_1a64f2e9cf1e132725e4b5a6b0fcdb9ea5" compoundref="_classes_2_counters_8hpp" startline="65" endline="97">set_hit</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_counters_1af42a2277da8f07fa4867143d426058ec" prot="public" static="no" mutable="no">
+        <type><ref refid="lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21" kindref="member">uchar</ref></type>
+        <definition>uchar Counters::ParisMult</definition>
+        <argsstring></argsstring>
+        <name>ParisMult</name>
+        <initializer>=0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/Counters.hpp" line="33" column="9" bodyfile="lib/Analyse/Counters.hpp" bodystart="33" bodyend="-1"/>
+        <referencedby refid="class_counters_1ada46b45bb45210aad28a4ebbd23f98f8" compoundref="_analyse_2_counters_8hpp" startline="43" endline="61">clear</referencedby>
+        <referencedby refid="class_counters_1a438d855f700f802261df045b1f52723e" compoundref="_analyse_2_counters_8hpp" startline="63" endline="121">count_event</referencedby>
+        <referencedby refid="class_counters_1a64f2e9cf1e132725e4b5a6b0fcdb9ea5" compoundref="_classes_2_counters_8hpp" startline="65" endline="97">set_hit</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_counters_1afba8f7fd1f07fe6afd5f2ffd46ddf8bf" prot="public" static="no" mutable="no">
+        <type><ref refid="lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21" kindref="member">uchar</ref></type>
+        <definition>uchar Counters::RawBGO</definition>
+        <argsstring></argsstring>
+        <name>RawBGO</name>
+        <initializer>=0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/Counters.hpp" line="27" column="9" bodyfile="lib/Analyse/Counters.hpp" bodystart="27" bodyend="-1"/>
+        <referencedby refid="class_counters_1ada46b45bb45210aad28a4ebbd23f98f8" compoundref="_analyse_2_counters_8hpp" startline="43" endline="61">clear</referencedby>
+        <referencedby refid="class_counters_1a438d855f700f802261df045b1f52723e" compoundref="_analyse_2_counters_8hpp" startline="63" endline="121">count_event</referencedby>
+        <referencedby refid="class_counters_1a64f2e9cf1e132725e4b5a6b0fcdb9ea5" compoundref="_classes_2_counters_8hpp" startline="65" endline="97">set_hit</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_counters_1a788284c58e92d46682d73e2679cdaa48" prot="public" static="no" mutable="no">
+        <type><ref refid="lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21" kindref="member">uchar</ref></type>
+        <definition>uchar Counters::RawGe</definition>
+        <argsstring></argsstring>
+        <name>RawGe</name>
+        <initializer>=0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/Counters.hpp" line="26" column="9" bodyfile="lib/Analyse/Counters.hpp" bodystart="26" bodyend="-1"/>
+        <referencedby refid="class_counters_1ada46b45bb45210aad28a4ebbd23f98f8" compoundref="_analyse_2_counters_8hpp" startline="43" endline="61">clear</referencedby>
+        <referencedby refid="class_counters_1a438d855f700f802261df045b1f52723e" compoundref="_analyse_2_counters_8hpp" startline="63" endline="121">count_event</referencedby>
+        <referencedby refid="class_counters_1a64f2e9cf1e132725e4b5a6b0fcdb9ea5" compoundref="_classes_2_counters_8hpp" startline="65" endline="97">set_hit</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_counters_1a0466980b7848964cbcb51ec0a89b93eb" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool Counters::trig</definition>
+        <argsstring></argsstring>
+        <name>trig</name>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/Counters.hpp" line="40" column="8" bodyfile="lib/Analyse/Counters.hpp" bodystart="40" bodyend="-1"/>
+        <referencedby refid="class_counters_1a9ca7de2128df4f75273e59d72e8dea5e" compoundref="_analyse_2_counters_8hpp" startline="123" endline="174">hasTrigged</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_counters_1ada46b45bb45210aad28a4ebbd23f98f8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Counters::clear</definition>
+        <argsstring>()</argsstring>
+        <name>clear</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/Counters.hpp" line="21" column="8" bodyfile="lib/Analyse/Counters.hpp" bodystart="43" bodyend="61"/>
+        <references refid="class_counters_1ad6278342b5968437e8a02869ad914244" compoundref="_analyse_2_counters_8hpp" startline="38">BGO_Clover</references>
+        <references refid="class_counters_1a37f7a3d680241f851dcbeb46a2ad79ae" compoundref="_analyse_2_counters_8hpp" startline="34">DSSDMult</references>
+        <references refid="class_counters_1aaf1d093d97e4d98ce7a84d46b027c9d3" compoundref="_analyse_2_counters_8hpp" startline="37">Ge_Clover</references>
+        <references refid="class_counters_1a9e8e7788cc926be6bc7479709ac8dce3" compoundref="_analyse_2_counters_8hpp" startline="28">GeCleanClovers</references>
+        <references refid="class_counters_1a62564fb849d524995a2358f0ae8bec39" compoundref="_analyse_2_counters_8hpp" startline="29">GeClovers</references>
+        <references refid="class_counters_1a062b3e5ff74d5830c9df0d30deb8780f" compoundref="_analyse_2_counters_8hpp" startline="32">LaBr3Mult</references>
+        <references refid="class_counters_1a9338b4e640e1f3996fedb317d9c40923" compoundref="_analyse_2_counters_8hpp" startline="36">list_clovers</references>
+        <references refid="class_counters_1aa10e5f5e024f297949057a82c50a14a2" compoundref="_analyse_2_counters_8hpp" startline="31">Modules</references>
+        <references refid="class_counters_1a0d4d6f79204a5462c92c5215b7f51e58" compoundref="_analyse_2_counters_8hpp" startline="25">mult</references>
+        <references refid="class_counters_1af42a2277da8f07fa4867143d426058ec" compoundref="_analyse_2_counters_8hpp" startline="33">ParisMult</references>
+        <references refid="class_counters_1afba8f7fd1f07fe6afd5f2ffd46ddf8bf" compoundref="_analyse_2_counters_8hpp" startline="27">RawBGO</references>
+        <references refid="class_counters_1a788284c58e92d46682d73e2679cdaa48" compoundref="_analyse_2_counters_8hpp" startline="26">RawGe</references>
+        <references refid="class_static_vector_1ae292e425773c82dc9eb20db025963e29" compoundref="vector__functions_8hpp" startline="260" endline="260">StaticVector&lt; T &gt;::resize</references>
+        <referencedby refid="class_counters_1a438d855f700f802261df045b1f52723e" compoundref="_analyse_2_counters_8hpp" startline="63" endline="121">count_event</referencedby>
+        <referencedby refid="class_counters_1acebc5e99a89d9fe257917c46b3101999" compoundref="_classes_2_counters_8hpp" startline="99" endline="106">countEvent</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_counters_1ada46b45bb45210aad28a4ebbd23f98f8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Counters::clear</definition>
+        <argsstring>()</argsstring>
+        <name>clear</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Counters.hpp" line="21" column="8"/>
+      </memberdef>
+      <memberdef kind="function" id="class_counters_1a1f2723ecaf63399d985ce2efd87aab6f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Counters::clover_analyse</definition>
+        <argsstring>()</argsstring>
+        <name>clover_analyse</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Counters.hpp" line="24" column="8" bodyfile="lib/Classes/Counters.hpp" bodystart="108" bodyend="125"/>
+        <references refid="class_counters_1ad6278342b5968437e8a02869ad914244" compoundref="_analyse_2_counters_8hpp" startline="38">BGO_Clover</references>
+        <references refid="class_counters_1a35eedcda3ee01def8ceb7d3045db0127" compoundref="_analyse_2_counters_8hpp" startline="30">Clovers</references>
+        <references refid="class_counters_1aaf1d093d97e4d98ce7a84d46b027c9d3" compoundref="_analyse_2_counters_8hpp" startline="37">Ge_Clover</references>
+        <references refid="class_counters_1a9e8e7788cc926be6bc7479709ac8dce3" compoundref="_analyse_2_counters_8hpp" startline="28">GeCleanClovers</references>
+        <references refid="class_counters_1a62564fb849d524995a2358f0ae8bec39" compoundref="_analyse_2_counters_8hpp" startline="29">GeClovers</references>
+        <references refid="class_counters_1a9338b4e640e1f3996fedb317d9c40923" compoundref="_analyse_2_counters_8hpp" startline="36">list_clovers</references>
+        <references refid="class_counters_1aa10e5f5e024f297949057a82c50a14a2" compoundref="_analyse_2_counters_8hpp" startline="31">Modules</references>
+        <references refid="class_static_vector_1a44b964207cfd132dda347e246a3640c8" compoundref="vector__functions_8hpp" startline="329" endline="329">StaticVector&lt; T &gt;::size</references>
+        <references refid="lib_co_8hpp_1ade77d1f37b1311b3f80ce429a33fd226" compoundref="lib_co_8hpp" startline="101" endline="101">uchar_cast</references>
+      </memberdef>
+      <memberdef kind="function" id="class_counters_1a438d855f700f802261df045b1f52723e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Counters::count_event</definition>
+        <argsstring>(Event const &amp;event)</argsstring>
+        <name>count_event</name>
+        <param>
+          <type><ref refid="class_event" kindref="compound">Event</ref> const &amp;</type>
+          <declname>event</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/Counters.hpp" line="22" column="8" bodyfile="lib/Analyse/Counters.hpp" bodystart="63" bodyend="121"/>
+        <references refid="class_counters_1ad6278342b5968437e8a02869ad914244" compoundref="_analyse_2_counters_8hpp" startline="38">BGO_Clover</references>
+        <references refid="class_counters_1ada46b45bb45210aad28a4ebbd23f98f8" compoundref="_analyse_2_counters_8hpp" startline="43" endline="61">clear</references>
+        <references refid="class_counters_1a35eedcda3ee01def8ceb7d3045db0127" compoundref="_analyse_2_counters_8hpp" startline="30">Clovers</references>
+        <references refid="class_counters_1a37f7a3d680241f851dcbeb46a2ad79ae" compoundref="_analyse_2_counters_8hpp" startline="34">DSSDMult</references>
+        <references refid="class_counters_1aaf1d093d97e4d98ce7a84d46b027c9d3" compoundref="_analyse_2_counters_8hpp" startline="37">Ge_Clover</references>
+        <references refid="class_counters_1a9e8e7788cc926be6bc7479709ac8dce3" compoundref="_analyse_2_counters_8hpp" startline="28">GeCleanClovers</references>
+        <references refid="class_counters_1a62564fb849d524995a2358f0ae8bec39" compoundref="_analyse_2_counters_8hpp" startline="29">GeClovers</references>
+        <references refid="_detectors_8hpp_1acad86c343cb1a6d3f382c2468415cc8a">isBGO</references>
+        <references refid="_detectors_8hpp_1a3148345147f51e96aaa73e5d9f8e9d93">isDSSD</references>
+        <references refid="_detectors_8hpp_1a5da74af4e038f2a435565e2e93a6831e">isGe</references>
+        <references refid="_detectors_8hpp_1ac1f4e8d98df1dbbcb0c6ccf4a7b9a538">isLaBr3</references>
+        <references refid="_detectors_8hpp_1a82c5910e3b4f178c276c8b888c5ac162">isParis</references>
+        <references refid="_detectors_8hpp_1adccbc8332a89f48a35baea4a37255e2c">labelToClover</references>
+        <references refid="class_counters_1a062b3e5ff74d5830c9df0d30deb8780f" compoundref="_analyse_2_counters_8hpp" startline="32">LaBr3Mult</references>
+        <references refid="class_counters_1a9338b4e640e1f3996fedb317d9c40923" compoundref="_analyse_2_counters_8hpp" startline="36">list_clovers</references>
+        <references refid="class_counters_1aa10e5f5e024f297949057a82c50a14a2" compoundref="_analyse_2_counters_8hpp" startline="31">Modules</references>
+        <references refid="class_counters_1a0d4d6f79204a5462c92c5215b7f51e58" compoundref="_analyse_2_counters_8hpp" startline="25">mult</references>
+        <references refid="class_counters_1af42a2277da8f07fa4867143d426058ec" compoundref="_analyse_2_counters_8hpp" startline="33">ParisMult</references>
+        <references refid="class_static_vector_1ac0b86d749f8e35274fbac0506c050465" compoundref="vector__functions_8hpp" startline="314" endline="314">StaticVector&lt; T &gt;::push_back_unique</references>
+        <references refid="class_counters_1afba8f7fd1f07fe6afd5f2ffd46ddf8bf" compoundref="_analyse_2_counters_8hpp" startline="27">RawBGO</references>
+        <references refid="class_counters_1a788284c58e92d46682d73e2679cdaa48" compoundref="_analyse_2_counters_8hpp" startline="26">RawGe</references>
+        <references refid="class_static_vector_1a44b964207cfd132dda347e246a3640c8" compoundref="vector__functions_8hpp" startline="329" endline="329">StaticVector&lt; T &gt;::size</references>
+        <references refid="lib_co_8hpp_1ade77d1f37b1311b3f80ce429a33fd226" compoundref="lib_co_8hpp" startline="101" endline="101">uchar_cast</references>
+      </memberdef>
+      <memberdef kind="function" id="class_counters_1a6d83023bf5dece2147c82ad2b1906abd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Counters::Counters</definition>
+        <argsstring>()</argsstring>
+        <name>Counters</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/Counters.hpp" line="11" column="3" bodyfile="lib/Analyse/Counters.hpp" bodystart="11" bodyend="19"/>
+        <references refid="class_counters_1ad6278342b5968437e8a02869ad914244" compoundref="_analyse_2_counters_8hpp" startline="38">BGO_Clover</references>
+        <references refid="class_counters_1aaf1d093d97e4d98ce7a84d46b027c9d3" compoundref="_analyse_2_counters_8hpp" startline="37">Ge_Clover</references>
+        <references refid="class_counters_1a9338b4e640e1f3996fedb317d9c40923" compoundref="_analyse_2_counters_8hpp" startline="36">list_clovers</references>
+        <references refid="class_static_vector_1ae292e425773c82dc9eb20db025963e29" compoundref="vector__functions_8hpp" startline="260" endline="260">StaticVector&lt; T &gt;::resize</references>
+      </memberdef>
+      <memberdef kind="function" id="class_counters_1a6d83023bf5dece2147c82ad2b1906abd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Counters::Counters</definition>
+        <argsstring>()</argsstring>
+        <name>Counters</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Counters.hpp" line="11" column="3" bodyfile="lib/Classes/Counters.hpp" bodystart="11" bodyend="19"/>
+        <references refid="class_counters_1ad6278342b5968437e8a02869ad914244" compoundref="_analyse_2_counters_8hpp" startline="38">BGO_Clover</references>
+        <references refid="class_counters_1aaf1d093d97e4d98ce7a84d46b027c9d3" compoundref="_analyse_2_counters_8hpp" startline="37">Ge_Clover</references>
+        <references refid="class_counters_1a9338b4e640e1f3996fedb317d9c40923" compoundref="_analyse_2_counters_8hpp" startline="36">list_clovers</references>
+        <references refid="class_static_vector_1ae292e425773c82dc9eb20db025963e29" compoundref="vector__functions_8hpp" startline="260" endline="260">StaticVector&lt; T &gt;::resize</references>
+      </memberdef>
+      <memberdef kind="function" id="class_counters_1acebc5e99a89d9fe257917c46b3101999" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Counters::countEvent</definition>
+        <argsstring>(Event const &amp;event)</argsstring>
+        <name>countEvent</name>
+        <param>
+          <type><ref refid="class_event" kindref="compound">Event</ref> const &amp;</type>
+          <declname>event</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Counters.hpp" line="22" column="8" bodyfile="lib/Classes/Counters.hpp" bodystart="99" bodyend="106"/>
+        <references refid="class_counters_1ada46b45bb45210aad28a4ebbd23f98f8" compoundref="_analyse_2_counters_8hpp" startline="43" endline="61">clear</references>
+        <references refid="class_counters_1a64f2e9cf1e132725e4b5a6b0fcdb9ea5" compoundref="_classes_2_counters_8hpp" startline="65" endline="97">set_hit</references>
+      </memberdef>
+      <memberdef kind="function" id="class_counters_1a9ca7de2128df4f75273e59d72e8dea5e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Counters::hasTrigged</definition>
+        <argsstring>()</argsstring>
+        <name>hasTrigged</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/Counters.hpp" line="23" column="8" bodyfile="lib/Analyse/Counters.hpp" bodystart="123" bodyend="174"/>
+        <references refid="class_counters_1a0466980b7848964cbcb51ec0a89b93eb" compoundref="_analyse_2_counters_8hpp" startline="40">trig</references>
+      </memberdef>
+      <memberdef kind="function" id="class_counters_1a9ca7de2128df4f75273e59d72e8dea5e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Counters::hasTrigged</definition>
+        <argsstring>()</argsstring>
+        <name>hasTrigged</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Counters.hpp" line="25" column="8"/>
+      </memberdef>
+      <memberdef kind="function" id="class_counters_1a64f2e9cf1e132725e4b5a6b0fcdb9ea5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Counters::set_hit</definition>
+        <argsstring>(Event const &amp;event, int const &amp;i)</argsstring>
+        <name>set_hit</name>
+        <param>
+          <type><ref refid="class_event" kindref="compound">Event</ref> const &amp;</type>
+          <declname>event</declname>
+        </param>
+        <param>
+          <type>int const &amp;</type>
+          <declname>i</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Counters.hpp" line="23" column="8" bodyfile="lib/Classes/Counters.hpp" bodystart="65" bodyend="97"/>
+        <references refid="class_counters_1ad6278342b5968437e8a02869ad914244" compoundref="_analyse_2_counters_8hpp" startline="38">BGO_Clover</references>
+        <references refid="class_counters_1a37f7a3d680241f851dcbeb46a2ad79ae" compoundref="_analyse_2_counters_8hpp" startline="34">DSSDMult</references>
+        <references refid="class_counters_1aaf1d093d97e4d98ce7a84d46b027c9d3" compoundref="_analyse_2_counters_8hpp" startline="37">Ge_Clover</references>
+        <references refid="_detectors_8hpp_1acad86c343cb1a6d3f382c2468415cc8a">isBGO</references>
+        <references refid="_detectors_8hpp_1a3148345147f51e96aaa73e5d9f8e9d93">isDSSD</references>
+        <references refid="_detectors_8hpp_1a5da74af4e038f2a435565e2e93a6831e">isGe</references>
+        <references refid="_detectors_8hpp_1ac1f4e8d98df1dbbcb0c6ccf4a7b9a538">isLaBr3</references>
+        <references refid="_detectors_8hpp_1a82c5910e3b4f178c276c8b888c5ac162">isParis</references>
+        <references refid="_detectors_8hpp_1adccbc8332a89f48a35baea4a37255e2c">labelToClover</references>
+        <references refid="class_counters_1a062b3e5ff74d5830c9df0d30deb8780f" compoundref="_analyse_2_counters_8hpp" startline="32">LaBr3Mult</references>
+        <references refid="class_counters_1a9338b4e640e1f3996fedb317d9c40923" compoundref="_analyse_2_counters_8hpp" startline="36">list_clovers</references>
+        <references refid="class_counters_1aa10e5f5e024f297949057a82c50a14a2" compoundref="_analyse_2_counters_8hpp" startline="31">Modules</references>
+        <references refid="class_counters_1a0d4d6f79204a5462c92c5215b7f51e58" compoundref="_analyse_2_counters_8hpp" startline="25">mult</references>
+        <references refid="class_counters_1af42a2277da8f07fa4867143d426058ec" compoundref="_analyse_2_counters_8hpp" startline="33">ParisMult</references>
+        <references refid="class_static_vector_1ac0b86d749f8e35274fbac0506c050465" compoundref="vector__functions_8hpp" startline="314" endline="314">StaticVector&lt; T &gt;::push_back_unique</references>
+        <references refid="class_counters_1afba8f7fd1f07fe6afd5f2ffd46ddf8bf" compoundref="_analyse_2_counters_8hpp" startline="27">RawBGO</references>
+        <references refid="class_counters_1a788284c58e92d46682d73e2679cdaa48" compoundref="_analyse_2_counters_8hpp" startline="26">RawGe</references>
+        <referencedby refid="class_counters_1acebc5e99a89d9fe257917c46b3101999" compoundref="_classes_2_counters_8hpp" startline="99" endline="106">countEvent</referencedby>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="3">
+        <label>StaticVector&lt; uchar, 24 &gt;</label>
+        <link refid="class_static_vector"/>
+      </node>
+      <node id="1">
+        <label>Counters</label>
+        <link refid="class_counters"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>list_clovers</edgelabel>
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>list_clovers</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>StaticVector&lt; uchar &gt;</label>
+        <link refid="class_static_vector"/>
+      </node>
+    </collaborationgraph>
+    <location file="lib/Analyse/Counters.hpp" line="8" column="1" bodyfile="lib/Analyse/Counters.hpp" bodystart="9" bodyend="41"/>
+    <listofallmembers>
+      <member refid="class_counters_1ad6278342b5968437e8a02869ad914244" prot="public" virt="non-virtual"><scope>Counters</scope><name>BGO_Clover</name></member>
+      <member refid="class_counters_1ada46b45bb45210aad28a4ebbd23f98f8" prot="public" virt="non-virtual"><scope>Counters</scope><name>clear</name></member>
+      <member refid="class_counters_1ada46b45bb45210aad28a4ebbd23f98f8" prot="public" virt="non-virtual"><scope>Counters</scope><name>clear</name></member>
+      <member refid="class_counters_1a1f2723ecaf63399d985ce2efd87aab6f" prot="public" virt="non-virtual"><scope>Counters</scope><name>clover_analyse</name></member>
+      <member refid="class_counters_1a35eedcda3ee01def8ceb7d3045db0127" prot="public" virt="non-virtual"><scope>Counters</scope><name>Clovers</name></member>
+      <member refid="class_counters_1a438d855f700f802261df045b1f52723e" prot="public" virt="non-virtual"><scope>Counters</scope><name>count_event</name></member>
+      <member refid="class_counters_1a6d83023bf5dece2147c82ad2b1906abd" prot="public" virt="non-virtual"><scope>Counters</scope><name>Counters</name></member>
+      <member refid="class_counters_1a6d83023bf5dece2147c82ad2b1906abd" prot="public" virt="non-virtual"><scope>Counters</scope><name>Counters</name></member>
+      <member refid="class_counters_1acebc5e99a89d9fe257917c46b3101999" prot="public" virt="non-virtual"><scope>Counters</scope><name>countEvent</name></member>
+      <member refid="class_counters_1a37f7a3d680241f851dcbeb46a2ad79ae" prot="public" virt="non-virtual"><scope>Counters</scope><name>DSSDMult</name></member>
+      <member refid="class_counters_1aaf1d093d97e4d98ce7a84d46b027c9d3" prot="public" virt="non-virtual"><scope>Counters</scope><name>Ge_Clover</name></member>
+      <member refid="class_counters_1a9e8e7788cc926be6bc7479709ac8dce3" prot="public" virt="non-virtual"><scope>Counters</scope><name>GeCleanClovers</name></member>
+      <member refid="class_counters_1a62564fb849d524995a2358f0ae8bec39" prot="public" virt="non-virtual"><scope>Counters</scope><name>GeClovers</name></member>
+      <member refid="class_counters_1a9ca7de2128df4f75273e59d72e8dea5e" prot="public" virt="non-virtual"><scope>Counters</scope><name>hasTrigged</name></member>
+      <member refid="class_counters_1a9ca7de2128df4f75273e59d72e8dea5e" prot="public" virt="non-virtual"><scope>Counters</scope><name>hasTrigged</name></member>
+      <member refid="class_counters_1a062b3e5ff74d5830c9df0d30deb8780f" prot="public" virt="non-virtual"><scope>Counters</scope><name>LaBr3Mult</name></member>
+      <member refid="class_counters_1a9338b4e640e1f3996fedb317d9c40923" prot="public" virt="non-virtual"><scope>Counters</scope><name>list_clovers</name></member>
+      <member refid="class_counters_1af4d16a79b9fa7e57b20ef2866f0e38e4" prot="public" virt="non-virtual"><scope>Counters</scope><name>list_clovers</name></member>
+      <member refid="class_counters_1aa10e5f5e024f297949057a82c50a14a2" prot="public" virt="non-virtual"><scope>Counters</scope><name>Modules</name></member>
+      <member refid="class_counters_1a0d4d6f79204a5462c92c5215b7f51e58" prot="public" virt="non-virtual"><scope>Counters</scope><name>mult</name></member>
+      <member refid="class_counters_1af42a2277da8f07fa4867143d426058ec" prot="public" virt="non-virtual"><scope>Counters</scope><name>ParisMult</name></member>
+      <member refid="class_counters_1afba8f7fd1f07fe6afd5f2ffd46ddf8bf" prot="public" virt="non-virtual"><scope>Counters</scope><name>RawBGO</name></member>
+      <member refid="class_counters_1a788284c58e92d46682d73e2679cdaa48" prot="public" virt="non-virtual"><scope>Counters</scope><name>RawGe</name></member>
+      <member refid="class_counters_1a64f2e9cf1e132725e4b5a6b0fcdb9ea5" prot="public" virt="non-virtual"><scope>Counters</scope><name>set_hit</name></member>
+      <member refid="class_counters_1a0466980b7848964cbcb51ec0a89b93eb" prot="public" virt="non-virtual"><scope>Counters</scope><name>trig</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

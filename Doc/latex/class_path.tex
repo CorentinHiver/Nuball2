@@ -1,0 +1,565 @@
+\doxysection{Path Class Reference}
+\label{class_path}\index{Path@{Path}}
+
+
+EXPERIMENTAL Object used to hold the complete path of a giver folder.  
+
+
+
+
+{\ttfamily \#include $<$files\+\_\+functions.\+hpp$>$}
+
+
+
+Collaboration diagram for Path\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=209pt]{class_path__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ Path} \& \textbf{ add\+Folder} (\textbf{ Folder} const \&\textbf{ folder})
+\item 
+auto \textbf{ c\+\_\+str} () const
+\item 
+void \textbf{ clean\+Path} ()
+\begin{DoxyCompactList}\small\item\em To remove extraneous ./ or ../. \end{DoxyCompactList}\item 
+bool \textbf{ exists} ()
+\item 
+\textbf{ Folder} const  \& \textbf{ folder} () const
+\item 
+std\+::string const  \& \textbf{ get} () const
+\item 
+\textbf{ Folders} const  \& \textbf{ get\+Folders} () const
+\item 
+void \textbf{ load} (bool const \&create=false)
+\item 
+bool \textbf{ make} ()
+\item 
+void \textbf{ make\+Folder\+List} ()
+\item 
+int \textbf{ nb\+Files} ()
+\item 
+\textbf{ operator bool} () const
+\item 
+\textbf{ operator std\+::string} () const \&
+\item 
+std\+::string \textbf{ operator+} (const char $\ast$add\+String)
+\item 
+\textbf{ Path} \textbf{ operator+} (\textbf{ Folder} const \&\textbf{ folder})
+\item 
+std\+::string \textbf{ operator+} (std\+::string const \&add\+String)
+\item 
+\textbf{ Path} \& \textbf{ operator+=} (std\+::string const \&add\+String)
+\item 
+\textbf{ Path} \& \textbf{ operator=} (const char $\ast$\textbf{ path})
+\item 
+\textbf{ Path} \& \textbf{ operator=} (\textbf{ Path} \&\textbf{ path})
+\item 
+\textbf{ Path} \& \textbf{ operator=} (std\+::string const \&input\+String)
+\item 
+bool \textbf{ operator==} (std\+::string const \&cmpr\+Str)
+\item 
+\textbf{ Folder} const  \& \textbf{ operator[$\,$]} (\textbf{ uint} const \&i) const
+\item 
+\textbf{ Path} ()
+\item 
+std\+::string const  \& \textbf{ path} () const
+\item 
+\textbf{ Path} (const char $\ast$\textbf{ c\+\_\+str}, bool const \&create=false)
+\begin{DoxyCompactList}\small\item\em Turns a C string to a path, creating it if create = true and it doesn\textquotesingle{}t already exists. \end{DoxyCompactList}\item 
+\textbf{ Path} (\textbf{ Path} const \&\textbf{ path})
+\item 
+\textbf{ Path} (std\+::string const \&\textbf{ path}, bool const \&create=false)
+\begin{DoxyCompactList}\small\item\em Turns a string to a path, creating it if create = true and it doesn\textquotesingle{}t already exists. \end{DoxyCompactList}\item 
+auto const \textbf{ size} () const
+\item 
+std\+::string const  \& \textbf{ string} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \textbf{ Path} \textbf{ home} ()
+\item 
+static \textbf{ Path} \textbf{ pwd} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \textbf{ m\+\_\+exists} = false
+\item 
+std\+::string \textbf{ m\+\_\+path}
+\item 
+\textbf{ Folders} \textbf{ m\+\_\+recursive\+\_\+folders}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+EXPERIMENTAL Object used to hold the complete path of a giver folder. 
+
+You can use either a full path from the root (\char`\"{}/.../.../\char`\"{}) or from the home directory (\char`\"{}$\sim$/.../.../\char`\"{})
+
+So far, relative paths are not supported (yet hopefully) 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\label{class_path_af26cfab021ddf49af73da3b2beca85ac}} 
+\index{Path@{Path}!Path@{Path}}
+\index{Path@{Path}!Path@{Path}}
+\doxysubsubsection{Path()\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily Path\+::\+Path (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_path_af26cfab021ddf49af73da3b2beca85ac_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_path_ac26c0c210a4c30bade6daca9c0853fc1}} 
+\index{Path@{Path}!Path@{Path}}
+\index{Path@{Path}!Path@{Path}}
+\doxysubsubsection{Path()\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily Path\+::\+Path (\begin{DoxyParamCaption}\item[{\textbf{ Path} const \&}]{path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_path_ae9ae307831520e338154143243a24a67}} 
+\index{Path@{Path}!Path@{Path}}
+\index{Path@{Path}!Path@{Path}}
+\doxysubsubsection{Path()\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily Path\+::\+Path (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{path,  }\item[{bool const \&}]{create = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Turns a string to a path, creating it if create = true and it doesn\textquotesingle{}t already exists. 
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_path_ae9ae307831520e338154143243a24a67_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_path_ac5e21de774118e980dea1c985155f110}} 
+\index{Path@{Path}!Path@{Path}}
+\index{Path@{Path}!Path@{Path}}
+\doxysubsubsection{Path()\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily Path\+::\+Path (\begin{DoxyParamCaption}\item[{const char $\ast$}]{c\+\_\+str,  }\item[{bool const \&}]{create = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Turns a C string to a path, creating it if create = true and it doesn\textquotesingle{}t already exists. 
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_path_ac5e21de774118e980dea1c985155f110_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\label{class_path_a99656cd73eb5c5fa461d7570b86eb66d}} 
+\index{Path@{Path}!addFolder@{addFolder}}
+\index{addFolder@{addFolder}!Path@{Path}}
+\doxysubsubsection{addFolder()}
+{\footnotesize\ttfamily \textbf{ Path}\& Path\+::add\+Folder (\begin{DoxyParamCaption}\item[{\textbf{ Folder} const \&}]{folder }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_path_a99656cd73eb5c5fa461d7570b86eb66d_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_path_a7c25cd5ebf26bf022d3477d9a42f387f}} 
+\index{Path@{Path}!c\_str@{c\_str}}
+\index{c\_str@{c\_str}!Path@{Path}}
+\doxysubsubsection{c\_str()}
+{\footnotesize\ttfamily auto Path\+::c\+\_\+str (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_path_ac40c8c627d0412be849f1e6cd4cdc556}} 
+\index{Path@{Path}!cleanPath@{cleanPath}}
+\index{cleanPath@{cleanPath}!Path@{Path}}
+\doxysubsubsection{cleanPath()}
+{\footnotesize\ttfamily void Path\+::clean\+Path (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+To remove extraneous ./ or ../. 
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_path_ac40c8c627d0412be849f1e6cd4cdc556_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_path_ac40c8c627d0412be849f1e6cd4cdc556_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_path_aecd02f464b364bc26631bcb65e44843b}} 
+\index{Path@{Path}!exists@{exists}}
+\index{exists@{exists}!Path@{Path}}
+\doxysubsubsection{exists()}
+{\footnotesize\ttfamily bool Path\+::exists (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_path_aecd02f464b364bc26631bcb65e44843b_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_path_aecd02f464b364bc26631bcb65e44843b_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_path_a859f02f9224a864b541b15e8db325409}} 
+\index{Path@{Path}!folder@{folder}}
+\index{folder@{folder}!Path@{Path}}
+\doxysubsubsection{folder()}
+{\footnotesize\ttfamily \textbf{ Folder} const\& Path\+::folder (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=262pt]{class_path_a859f02f9224a864b541b15e8db325409_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_path_a859f02f9224a864b541b15e8db325409_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_path_a4e4d7d7670941e8ddc58261a4fac0916}} 
+\index{Path@{Path}!get@{get}}
+\index{get@{get}!Path@{Path}}
+\doxysubsubsection{get()}
+{\footnotesize\ttfamily std\+::string const\& Path\+::get (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_path_a4e4d7d7670941e8ddc58261a4fac0916_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_path_a6aca68097e64629ee5d1e2c02f1b85ee}} 
+\index{Path@{Path}!getFolders@{getFolders}}
+\index{getFolders@{getFolders}!Path@{Path}}
+\doxysubsubsection{getFolders()}
+{\footnotesize\ttfamily \textbf{ Folders} const\& Path\+::get\+Folders (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_path_a08c199926ff5432cd3f35c2df4b07433}} 
+\index{Path@{Path}!home@{home}}
+\index{home@{home}!Path@{Path}}
+\doxysubsubsection{home()}
+{\footnotesize\ttfamily static \textbf{ Path} Path\+::home (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=252pt]{class_path_a08c199926ff5432cd3f35c2df4b07433_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_path_a08c199926ff5432cd3f35c2df4b07433_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_path_aa9b3a53718dcd8ba66d90d50b112ddb9}} 
+\index{Path@{Path}!load@{load}}
+\index{load@{load}!Path@{Path}}
+\doxysubsubsection{load()}
+{\footnotesize\ttfamily void Path\+::load (\begin{DoxyParamCaption}\item[{bool const \&}]{create = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_path_aa9b3a53718dcd8ba66d90d50b112ddb9_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=274pt]{class_path_aa9b3a53718dcd8ba66d90d50b112ddb9_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_path_a1f94b3b7d475723ead35e54c87078ed7}} 
+\index{Path@{Path}!make@{make}}
+\index{make@{make}!Path@{Path}}
+\doxysubsubsection{make()}
+{\footnotesize\ttfamily bool Path\+::make (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_path_a1f94b3b7d475723ead35e54c87078ed7_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_path_a1f94b3b7d475723ead35e54c87078ed7_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_path_ac9b837b0071ab41b4b0868590786eeae}} 
+\index{Path@{Path}!makeFolderList@{makeFolderList}}
+\index{makeFolderList@{makeFolderList}!Path@{Path}}
+\doxysubsubsection{makeFolderList()}
+{\footnotesize\ttfamily void Path\+::make\+Folder\+List (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=284pt]{class_path_ac9b837b0071ab41b4b0868590786eeae_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_path_ac9b837b0071ab41b4b0868590786eeae_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_path_a67161dbd774db3274fadc0c438b0cdf2}} 
+\index{Path@{Path}!nbFiles@{nbFiles}}
+\index{nbFiles@{nbFiles}!Path@{Path}}
+\doxysubsubsection{nbFiles()}
+{\footnotesize\ttfamily int Path\+::nb\+Files (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_path_a67161dbd774db3274fadc0c438b0cdf2_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_path_a0db652f355256181825b11d0199ed0ae}} 
+\index{Path@{Path}!operator bool@{operator bool}}
+\index{operator bool@{operator bool}!Path@{Path}}
+\doxysubsubsection{operator bool()}
+{\footnotesize\ttfamily Path\+::operator bool (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_path_a0db652f355256181825b11d0199ed0ae_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_path_a6b32e82eaa18b7d2d12bc4eac45b8a4b}} 
+\index{Path@{Path}!operator std::string@{operator std::string}}
+\index{operator std::string@{operator std::string}!Path@{Path}}
+\doxysubsubsection{operator std::string()}
+{\footnotesize\ttfamily Path\+::operator std\+::string (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const \&\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=246pt]{class_path_a6b32e82eaa18b7d2d12bc4eac45b8a4b_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_path_acb9812e5cc077adf9cecd471b5397a83}} 
+\index{Path@{Path}!operator+@{operator+}}
+\index{operator+@{operator+}!Path@{Path}}
+\doxysubsubsection{operator+()\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily std\+::string Path\+::operator+ (\begin{DoxyParamCaption}\item[{const char $\ast$}]{add\+String }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_path_a3d0909258a10a05b04d3c08ec42f562c}} 
+\index{Path@{Path}!operator+@{operator+}}
+\index{operator+@{operator+}!Path@{Path}}
+\doxysubsubsection{operator+()\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \textbf{ Path} Path\+::operator+ (\begin{DoxyParamCaption}\item[{\textbf{ Folder} const \&}]{folder }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_path_a3d0909258a10a05b04d3c08ec42f562c_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_path_a6dafc9642cd2096f67ce9dc80a7a11bf}} 
+\index{Path@{Path}!operator+@{operator+}}
+\index{operator+@{operator+}!Path@{Path}}
+\doxysubsubsection{operator+()\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily std\+::string Path\+::operator+ (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{add\+String }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_path_aea2baf3449b7fc955e7320f851ec29e5}} 
+\index{Path@{Path}!operator+=@{operator+=}}
+\index{operator+=@{operator+=}!Path@{Path}}
+\doxysubsubsection{operator+=()}
+{\footnotesize\ttfamily \textbf{ Path}\& Path\+::operator+= (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{add\+String }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=327pt]{class_path_aea2baf3449b7fc955e7320f851ec29e5_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_path_a71da17bb5e324fd092daeca8f56f81ed}} 
+\index{Path@{Path}!operator=@{operator=}}
+\index{operator=@{operator=}!Path@{Path}}
+\doxysubsubsection{operator=()\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \textbf{ Path}\& Path\+::operator= (\begin{DoxyParamCaption}\item[{const char $\ast$}]{path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_path_a71da17bb5e324fd092daeca8f56f81ed_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_path_a5bb409bfa25a8efe99b9d07e0ea2cf7a}} 
+\index{Path@{Path}!operator=@{operator=}}
+\index{operator=@{operator=}!Path@{Path}}
+\doxysubsubsection{operator=()\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \textbf{ Path}\& Path\+::operator= (\begin{DoxyParamCaption}\item[{\textbf{ Path} \&}]{path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_path_a5bb409bfa25a8efe99b9d07e0ea2cf7a_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_path_a42f3cfe8b84c3e11afc5d54b47522ab3}} 
+\index{Path@{Path}!operator=@{operator=}}
+\index{operator=@{operator=}!Path@{Path}}
+\doxysubsubsection{operator=()\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \textbf{ Path}\& Path\+::operator= (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{input\+String }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_path_a42f3cfe8b84c3e11afc5d54b47522ab3_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_path_a104457a3f7fbf2dcdb86d8c5a168f344}} 
+\index{Path@{Path}!operator==@{operator==}}
+\index{operator==@{operator==}!Path@{Path}}
+\doxysubsubsection{operator==()}
+{\footnotesize\ttfamily bool Path\+::operator== (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{cmpr\+Str }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_path_a145897ef8010831f6823ef7173ac4a0c}} 
+\index{Path@{Path}!operator[]@{operator[]}}
+\index{operator[]@{operator[]}!Path@{Path}}
+\doxysubsubsection{operator[]()}
+{\footnotesize\ttfamily \textbf{ Folder} const\& Path\+::operator[$\,$] (\begin{DoxyParamCaption}\item[{\textbf{ uint} const \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_path_a7797092ad2d61166d4adcecff31e34bb}} 
+\index{Path@{Path}!path@{path}}
+\index{path@{path}!Path@{Path}}
+\doxysubsubsection{path()}
+{\footnotesize\ttfamily std\+::string const\& Path\+::path (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=274pt]{class_path_a7797092ad2d61166d4adcecff31e34bb_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_path_a0374de2afee27834da4adccf704d4190}} 
+\index{Path@{Path}!pwd@{pwd}}
+\index{pwd@{pwd}!Path@{Path}}
+\doxysubsubsection{pwd()}
+{\footnotesize\ttfamily static \textbf{ Path} Path\+::pwd (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=245pt]{class_path_a0374de2afee27834da4adccf704d4190_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_path_a0374de2afee27834da4adccf704d4190_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_path_a34073c3753fbd7873238808f7f5a655b}} 
+\index{Path@{Path}!size@{size}}
+\index{size@{size}!Path@{Path}}
+\doxysubsubsection{size()}
+{\footnotesize\ttfamily auto const Path\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=256pt]{class_path_a34073c3753fbd7873238808f7f5a655b_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_path_aa2f2b14aafcc3fc3626c243fcc6574dc}} 
+\index{Path@{Path}!string@{string}}
+\index{string@{string}!Path@{Path}}
+\doxysubsubsection{string()}
+{\footnotesize\ttfamily std\+::string const\& Path\+::string (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=246pt]{class_path_aa2f2b14aafcc3fc3626c243fcc6574dc_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_path_aa2f2b14aafcc3fc3626c243fcc6574dc_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\label{class_path_aed6b8b1831e37ad107b290f828777dc2}} 
+\index{Path@{Path}!m\_exists@{m\_exists}}
+\index{m\_exists@{m\_exists}!Path@{Path}}
+\doxysubsubsection{m\_exists}
+{\footnotesize\ttfamily bool Path\+::m\+\_\+exists = false\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_path_ad65d90486dbdf36c2759a7285f4e3a80}} 
+\index{Path@{Path}!m\_path@{m\_path}}
+\index{m\_path@{m\_path}!Path@{Path}}
+\doxysubsubsection{m\_path}
+{\footnotesize\ttfamily std\+::string Path\+::m\+\_\+path\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_path_a3f8c60121763c0e1cca52efc144f74e1}} 
+\index{Path@{Path}!m\_recursive\_folders@{m\_recursive\_folders}}
+\index{m\_recursive\_folders@{m\_recursive\_folders}!Path@{Path}}
+\doxysubsubsection{m\_recursive\_folders}
+{\footnotesize\ttfamily \textbf{ Folders} Path\+::m\+\_\+recursive\+\_\+folders\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+lib/\textbf{ files\+\_\+functions.\+hpp}\end{DoxyCompactItemize}

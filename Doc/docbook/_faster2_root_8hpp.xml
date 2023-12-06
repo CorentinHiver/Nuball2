@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__faster2_root_8hpp" xml:lang="en-US">
+<title>lib/Modules/Faster2Root.hpp File Reference</title>
+<indexterm><primary>lib/Modules/Faster2Root.hpp</primary></indexterm>
+<programlisting>#include &quot;../libCo.hpp&quot;
+#include &quot;../Classes/Detectors.hpp&quot;
+#include &quot;../Classes/CoincBuilder.hpp&quot;
+#include &quot;../Classes/Nuball2Tree.hpp&quot;
+#include &quot;../Classes/Timer.hpp&quot;
+#include &quot;../Classes/Alignator.hpp&quot;
+#include &quot;../MTObjects/MTFasterReader.hpp&quot;
+#include &quot;Timeshifts.hpp&quot;
+#include &quot;Calibration.hpp&quot;
+</programlisting>Include dependency graph for Faster2Root.hpp:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="_faster2_root_8hpp__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>class <link linkend="_class_faster2_root">Faster2Root</link></para>
+
+<para>Basic class to perform faster to root tree data conversion. </para>
+</listitem>
+            <listitem><para>class <link linkend="_class_my_simple_convertor">MySimpleConvertor</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Typedefs    </title>
+        <itemizedlist>
+            <listitem><para>using <link linkend="__faster2_root_8hpp_1a75162947cdf43694952e4c0a53735199">Trigger</link> = std::function&lt; bool(const <link linkend="_class_event">Event</link> &amp;)&gt;</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Typedef Documentation</title>
+<anchor xml:id="__faster2_root_8hpp_1a75162947cdf43694952e4c0a53735199"/>    <section>
+    <title>Trigger</title>
+<indexterm><primary>Trigger</primary><secondary>Faster2Root.hpp</secondary></indexterm>
+<indexterm><primary>Faster2Root.hpp</primary><secondary>Trigger</secondary></indexterm>
+<para><computeroutput>using <link linkend="__faster2_root_8hpp_1a75162947cdf43694952e4c0a53735199">Trigger</link> =  std::function&lt;bool(const <link linkend="_class_event">Event</link>&amp;)&gt;</computeroutput></para></section>
+</section>
+</section>

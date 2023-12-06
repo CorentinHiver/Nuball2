@@ -1,0 +1,141 @@
+\doxysection{lib/\+Modules/\+Timeshifts.hpp File Reference}
+\label{_timeshifts_8hpp}\index{lib/Modules/Timeshifts.hpp@{lib/Modules/Timeshifts.hpp}}
+{\ttfamily \#include \char`\"{}../lib\+Co.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../\+Classes/\+Detectors.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../\+Classes/\+Faster\+Reader.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../\+Classes/\+Files\+Manager.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../\+Classes/\+Hit.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../\+Classes/\+RF\+\_\+\+Manager.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../\+Classes/\+Event.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../\+Classes/\+Coinc\+Builder.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../\+Classes/\+Timer.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../\+Classes/\+Performances.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../\+MTObjects/\+MTObject.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../\+MTObjects/\+MTList.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../\+MTObjects/\+MTTHist.\+hpp\char`\"{}}\newline
+Include dependency graph for Timeshifts.\+hpp\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_timeshifts_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_timeshifts_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \textbf{ Timeshifts}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \textbf{ get\+\_\+first\+\_\+\+RF\+\_\+of\+\_\+file} (\textbf{ Faster\+Reader} \&reader, \textbf{ Hit} \&hit, \textbf{ RF\+\_\+\+Manager} \&rf)
+\item 
+void \textbf{ get\+\_\+first\+\_\+\+RF\+\_\+of\+\_\+file} (TTree $\ast$tree, \textbf{ Event} \&event, \textbf{ RF\+\_\+\+Manager} \&rf)
+\item 
+double \textbf{ get\+RFGamma\+Prompt} (TH1F $\ast$hist, bool const \&check\+\_\+preprompt)
+\item 
+std\+::ostream \& \textbf{ operator$<$$<$} (std\+::ostream \&cout, \textbf{ Timeshifts} const \&ts)
+\item 
+{\footnotesize template$<$typename T , typename  = typename std\+::enable\+\_\+if$<$std\+::is\+\_\+arithmetic$<$\+T$>$\+::value$>$\+::type$>$ }\\\textbf{ Time} \textbf{ Shift\+\_\+cast} (T const \&t)
+\begin{DoxyCompactList}\small\item\em Casts a number into unsigned Time. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ \textbf{ Time} $>$ \textbf{ forced\+\_\+shifts}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\label{_timeshifts_8hpp_a202a57630e2aa9744043c30964b64bcd}} 
+\index{Timeshifts.hpp@{Timeshifts.hpp}!get\_first\_RF\_of\_file@{get\_first\_RF\_of\_file}}
+\index{get\_first\_RF\_of\_file@{get\_first\_RF\_of\_file}!Timeshifts.hpp@{Timeshifts.hpp}}
+\doxysubsubsection{get\_first\_RF\_of\_file()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void get\+\_\+first\+\_\+\+RF\+\_\+of\+\_\+file (\begin{DoxyParamCaption}\item[{\textbf{ Faster\+Reader} \&}]{reader,  }\item[{\textbf{ Hit} \&}]{hit,  }\item[{\textbf{ RF\+\_\+\+Manager} \&}]{rf }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_timeshifts_8hpp_a202a57630e2aa9744043c30964b64bcd_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_timeshifts_8hpp_a202a57630e2aa9744043c30964b64bcd_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{_timeshifts_8hpp_a89eb1093b3fdce57af662ed7b004b0f7}} 
+\index{Timeshifts.hpp@{Timeshifts.hpp}!get\_first\_RF\_of\_file@{get\_first\_RF\_of\_file}}
+\index{get\_first\_RF\_of\_file@{get\_first\_RF\_of\_file}!Timeshifts.hpp@{Timeshifts.hpp}}
+\doxysubsubsection{get\_first\_RF\_of\_file()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void get\+\_\+first\+\_\+\+RF\+\_\+of\+\_\+file (\begin{DoxyParamCaption}\item[{TTree $\ast$}]{tree,  }\item[{\textbf{ Event} \&}]{event,  }\item[{\textbf{ RF\+\_\+\+Manager} \&}]{rf }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_timeshifts_8hpp_a89eb1093b3fdce57af662ed7b004b0f7_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{_timeshifts_8hpp_a1efb60019dbe926cccb8410a806d73a9}} 
+\index{Timeshifts.hpp@{Timeshifts.hpp}!getRFGammaPrompt@{getRFGammaPrompt}}
+\index{getRFGammaPrompt@{getRFGammaPrompt}!Timeshifts.hpp@{Timeshifts.hpp}}
+\doxysubsubsection{getRFGammaPrompt()}
+{\footnotesize\ttfamily double get\+RFGamma\+Prompt (\begin{DoxyParamCaption}\item[{TH1F $\ast$}]{hist,  }\item[{bool const \&}]{check\+\_\+preprompt }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_timeshifts_8hpp_a1efb60019dbe926cccb8410a806d73a9_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{_timeshifts_8hpp_aecdab429e75a8d9f7a38f3938d9a7173}} 
+\index{Timeshifts.hpp@{Timeshifts.hpp}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!Timeshifts.hpp@{Timeshifts.hpp}}
+\doxysubsubsection{operator$<$$<$()}
+{\footnotesize\ttfamily std\+::ostream\& operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{cout,  }\item[{\textbf{ Timeshifts} const \&}]{ts }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=279pt]{_timeshifts_8hpp_aecdab429e75a8d9f7a38f3938d9a7173_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{_timeshifts_8hpp_a0363984bdeb96360bcf8a0a13163f47a}} 
+\index{Timeshifts.hpp@{Timeshifts.hpp}!Shift\_cast@{Shift\_cast}}
+\index{Shift\_cast@{Shift\_cast}!Timeshifts.hpp@{Timeshifts.hpp}}
+\doxysubsubsection{Shift\_cast()}
+{\footnotesize\ttfamily template$<$typename T , typename  = typename std\+::enable\+\_\+if$<$std\+::is\+\_\+arithmetic$<$\+T$>$\+::value$>$\+::type$>$ \\
+\textbf{ Time} Shift\+\_\+cast (\begin{DoxyParamCaption}\item[{T const \&}]{t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Casts a number into unsigned Time. 
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_timeshifts_8hpp_a0363984bdeb96360bcf8a0a13163f47a_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\label{_timeshifts_8hpp_a0f507d9b001b222817bfc9d8ba01e40e}} 
+\index{Timeshifts.hpp@{Timeshifts.hpp}!forced\_shifts@{forced\_shifts}}
+\index{forced\_shifts@{forced\_shifts}!Timeshifts.hpp@{Timeshifts.hpp}}
+\doxysubsubsection{forced\_shifts}
+{\footnotesize\ttfamily std\+::vector$<$\textbf{ Time}$>$ forced\+\_\+shifts}
+

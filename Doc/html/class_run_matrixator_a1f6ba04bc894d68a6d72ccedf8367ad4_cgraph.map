@@ -1,0 +1,11 @@
+<map id="RunMatrixator::dontMatrixate" name="RunMatrixator::dontMatrixate">
+<area shape="rect" id="node1" title=" " alt="" coords="5,123,220,149"/>
+<area shape="rect" id="node2" href="$string__functions_8hpp.html#a03fb03d95885354ac3c329693588097b" title=" " alt="" coords="328,5,387,32"/>
+<area shape="rect" id="node3" href="$class_run_matrixator.html#ae9e13b02718812681204cad70679385d" title=" " alt="" coords="268,57,447,98"/>
+<area shape="rect" id="node7" href="$class_detectors.html#a6c368aa8fe9d985fd742371179718d71" title=" " alt="" coords="503,119,633,145"/>
+<area shape="rect" id="node8" href="$lib_co_8hpp.html#a6df2dcd4b1f61c75dc292942bc5ca74d" title=" " alt="" coords="309,173,406,200"/>
+<area shape="rect" id="node9" href="$class_detectors.html#ae462c1e1acd5b2dc7757715fd68c362d" title=" " alt="" coords="275,224,439,251"/>
+<area shape="rect" id="node4" href="$class_detectors.html#a24d220832c2f0a03a0d886e11f2c284c" title="Returns the number of types in the ID file." alt="" coords="495,16,641,43"/>
+<area shape="rect" id="node5" href="$class_detectors.html#a1177661fb15c9825755925faf00c8398" title="Return the value of the maximum label, i.e. the size of the lookup tables." alt="" coords="509,67,627,93"/>
+<area shape="rect" id="node6" href="$_hit_8hpp.html#af181231d97866aa957e8fe8bd67f7f64" title="Data casts ///." alt="" coords="689,67,780,93"/>
+</map>

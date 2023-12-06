@@ -1,0 +1,73 @@
+.TH "Gates_t< T >" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Gates_t< T >
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <Gate\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBcheck\fP (std::initializer_list< T > bounds)"
+.br
+.ti -1c
+.RI "\fBGates_t\fP ()"
+.br
+.ti -1c
+.RI "\fBGates_t\fP (std::initializer_list< T > bounds)"
+.br
+.ti -1c
+.RI "bool \fBisIn\fP (T const &t)"
+.br
+.ti -1c
+.RI "bool \fBoperator()\fP (T const &t) const"
+.br
+.ti -1c
+.RI "\fBstd::size_t\fP const  & \fBsize\fP () const"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBstd::size_t\fP \fBm_size\fP = 0"
+.br
+.ti -1c
+.RI "std::vector< T > \fBstart\fP"
+.br
+.ti -1c
+.RI "std::vector< T > \fBstop\fP"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "template<typename T > \fBGates_t\fP< T >::\fBGates_t\fP ()\fC [inline]\fP"
+
+.SS "template<typename T > \fBGates_t\fP< T >::\fBGates_t\fP (std::initializer_list< T > bounds)\fC [inline]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "template<typename T > void \fBGates_t\fP< T >::check (std::initializer_list< T > bounds)\fC [inline]\fP"
+
+.SS "template<typename T > bool \fBGates_t\fP< T >::isIn (T const & t)\fC [inline]\fP"
+
+.SS "template<typename T > bool \fBGates_t\fP< T >::operator() (T const & t) const\fC [inline]\fP"
+
+.SS "template<typename T > \fBstd::size_t\fP const& \fBGates_t\fP< T >::size () const\fC [inline]\fP"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "template<typename T > \fBstd::size_t\fP \fBGates_t\fP< T >::m_size = 0\fC [private]\fP"
+
+.SS "template<typename T > std::vector<T> \fBGates_t\fP< T >::start\fC [private]\fP"
+
+.SS "template<typename T > std::vector<T> \fBGates_t\fP< T >::stop\fC [private]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Nuball2 from the source code\&.

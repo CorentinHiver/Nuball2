@@ -91,7 +91,7 @@ $(document).ready(function(){initNavTree('class_path.html',''); initResizable();
 </div><!--header-->
 <div class="contents">
 
-<p>Object used to hold the complete path of a giver folder.  
+<p>EXPERIMENTAL Object used to hold the complete path of a giver folder.  
  <a href="class_path.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="files__functions_8hpp_source.html">files_functions.hpp</a>&gt;</code></p>
@@ -99,24 +99,35 @@ $(document).ready(function(){initNavTree('class_path.html',''); initResizable();
 Collaboration diagram for Path:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_path__coll__graph.png" border="0" usemap="#a_path_coll__map" alt="Collaboration graph"/></div>
+<map name="a_path_coll__map" id="a_path_coll__map">
+<area shape="rect" title="EXPERIMENTAL Object used to hold the complete path of a giver folder." alt="" coords="15,95,65,121"/>
+<area shape="rect" href="class_folders.html" title="EXPERIMENTAL Object used to hold a list of folders." alt="" coords="5,5,75,32"/>
+</map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a99656cd73eb5c5fa461d7570b86eb66d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_path.html">Path</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_path.html#a99656cd73eb5c5fa461d7570b86eb66d">addFolder</a> (<a class="el" href="class_folder.html">Folder</a> const &amp;folder)</td></tr>
+<tr class="memitem:a99656cd73eb5c5fa461d7570b86eb66d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_path.html">Path</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_path.html#a99656cd73eb5c5fa461d7570b86eb66d">addFolder</a> (<a class="el" href="class_folder.html">Folder</a> const &amp;<a class="el" href="class_path.html#a859f02f9224a864b541b15e8db325409">folder</a>)</td></tr>
 <tr class="separator:a99656cd73eb5c5fa461d7570b86eb66d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a41729d4a0f1bba6b33666fbced1b3a85"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_path.html#a41729d4a0f1bba6b33666fbced1b3a85">c_str</a> ()</td></tr>
-<tr class="separator:a41729d4a0f1bba6b33666fbced1b3a85"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c25cd5ebf26bf022d3477d9a42f387f"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_path.html#a7c25cd5ebf26bf022d3477d9a42f387f">c_str</a> () const</td></tr>
+<tr class="separator:a7c25cd5ebf26bf022d3477d9a42f387f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac40c8c627d0412be849f1e6cd4cdc556"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_path.html#ac40c8c627d0412be849f1e6cd4cdc556">cleanPath</a> ()</td></tr>
+<tr class="memdesc:ac40c8c627d0412be849f1e6cd4cdc556"><td class="mdescLeft">&#160;</td><td class="mdescRight">To remove extraneous ./ or ../.  <a href="class_path.html#ac40c8c627d0412be849f1e6cd4cdc556">More...</a><br /></td></tr>
+<tr class="separator:ac40c8c627d0412be849f1e6cd4cdc556"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aecd02f464b364bc26631bcb65e44843b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_path.html#aecd02f464b364bc26631bcb65e44843b">exists</a> ()</td></tr>
 <tr class="separator:aecd02f464b364bc26631bcb65e44843b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a859f02f9224a864b541b15e8db325409"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_folder.html">Folder</a> const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_path.html#a859f02f9224a864b541b15e8db325409">folder</a> () const</td></tr>
+<tr class="separator:a859f02f9224a864b541b15e8db325409"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4e4d7d7670941e8ddc58261a4fac0916"><td class="memItemLeft" align="right" valign="top">std::string const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_path.html#a4e4d7d7670941e8ddc58261a4fac0916">get</a> () const</td></tr>
 <tr class="separator:a4e4d7d7670941e8ddc58261a4fac0916"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6aca68097e64629ee5d1e2c02f1b85ee"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_folders.html">Folders</a> const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_path.html#a6aca68097e64629ee5d1e2c02f1b85ee">getFolders</a> () const</td></tr>
+<tr class="separator:a6aca68097e64629ee5d1e2c02f1b85ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa9b3a53718dcd8ba66d90d50b112ddb9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_path.html#aa9b3a53718dcd8ba66d90d50b112ddb9">load</a> (bool const &amp;create=false)</td></tr>
 <tr class="separator:aa9b3a53718dcd8ba66d90d50b112ddb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1f94b3b7d475723ead35e54c87078ed7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_path.html#a1f94b3b7d475723ead35e54c87078ed7">make</a> ()</td></tr>
 <tr class="separator:a1f94b3b7d475723ead35e54c87078ed7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2ff2e026b692cef6a732fe7e79a3734c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_folders.html">Folders</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_path.html#a2ff2e026b692cef6a732fe7e79a3734c">makeFolderList</a> (std::string const &amp;<a class="el" href="class_path.html#a7797092ad2d61166d4adcecff31e34bb">path</a>)</td></tr>
-<tr class="separator:a2ff2e026b692cef6a732fe7e79a3734c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac9b837b0071ab41b4b0868590786eeae"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_path.html#ac9b837b0071ab41b4b0868590786eeae">makeFolderList</a> ()</td></tr>
+<tr class="separator:ac9b837b0071ab41b4b0868590786eeae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a67161dbd774db3274fadc0c438b0cdf2"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_path.html#a67161dbd774db3274fadc0c438b0cdf2">nbFiles</a> ()</td></tr>
 <tr class="separator:a67161dbd774db3274fadc0c438b0cdf2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0db652f355256181825b11d0199ed0ae"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_path.html#a0db652f355256181825b11d0199ed0ae">operator bool</a> () const</td></tr>
@@ -125,7 +136,7 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a6b32e82eaa18b7d2d12bc4eac45b8a4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acb9812e5cc077adf9cecd471b5397a83"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_path.html#acb9812e5cc077adf9cecd471b5397a83">operator+</a> (const char *addString)</td></tr>
 <tr class="separator:acb9812e5cc077adf9cecd471b5397a83"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3d0909258a10a05b04d3c08ec42f562c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_path.html">Path</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_path.html#a3d0909258a10a05b04d3c08ec42f562c">operator+</a> (<a class="el" href="class_folder.html">Folder</a> const &amp;folder)</td></tr>
+<tr class="memitem:a3d0909258a10a05b04d3c08ec42f562c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_path.html">Path</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_path.html#a3d0909258a10a05b04d3c08ec42f562c">operator+</a> (<a class="el" href="class_folder.html">Folder</a> const &amp;<a class="el" href="class_path.html#a859f02f9224a864b541b15e8db325409">folder</a>)</td></tr>
 <tr class="separator:a3d0909258a10a05b04d3c08ec42f562c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6dafc9642cd2096f67ce9dc80a7a11bf"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_path.html#a6dafc9642cd2096f67ce9dc80a7a11bf">operator+</a> (std::string const &amp;addString)</td></tr>
 <tr class="separator:a6dafc9642cd2096f67ce9dc80a7a11bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -139,11 +150,13 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a42f3cfe8b84c3e11afc5d54b47522ab3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a104457a3f7fbf2dcdb86d8c5a168f344"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_path.html#a104457a3f7fbf2dcdb86d8c5a168f344">operator==</a> (std::string const &amp;cmprStr)</td></tr>
 <tr class="separator:a104457a3f7fbf2dcdb86d8c5a168f344"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a145897ef8010831f6823ef7173ac4a0c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_folder.html">Folder</a> const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_path.html#a145897ef8010831f6823ef7173ac4a0c">operator[]</a> (<a class="el" href="lib_co_8hpp.html#a69aa29b598b851b0640aa225a9e5d61d">uint</a> const &amp;i) const</td></tr>
+<tr class="separator:a145897ef8010831f6823ef7173ac4a0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af26cfab021ddf49af73da3b2beca85ac"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_path.html#af26cfab021ddf49af73da3b2beca85ac">Path</a> ()</td></tr>
 <tr class="separator:af26cfab021ddf49af73da3b2beca85ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7797092ad2d61166d4adcecff31e34bb"><td class="memItemLeft" align="right" valign="top">std::string const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_path.html#a7797092ad2d61166d4adcecff31e34bb">path</a> () const</td></tr>
 <tr class="separator:a7797092ad2d61166d4adcecff31e34bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac5e21de774118e980dea1c985155f110"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_path.html#ac5e21de774118e980dea1c985155f110">Path</a> (const char *<a class="el" href="class_path.html#a41729d4a0f1bba6b33666fbced1b3a85">c_str</a>, bool const &amp;create=false)</td></tr>
+<tr class="memitem:ac5e21de774118e980dea1c985155f110"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_path.html#ac5e21de774118e980dea1c985155f110">Path</a> (const char *<a class="el" href="class_path.html#a7c25cd5ebf26bf022d3477d9a42f387f">c_str</a>, bool const &amp;create=false)</td></tr>
 <tr class="memdesc:ac5e21de774118e980dea1c985155f110"><td class="mdescLeft">&#160;</td><td class="mdescRight">Turns a C string to a path, creating it if create = true and it doesn't already exists.  <a href="class_path.html#ac5e21de774118e980dea1c985155f110">More...</a><br /></td></tr>
 <tr class="separator:ac5e21de774118e980dea1c985155f110"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac26c0c210a4c30bade6daca9c0853fc1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_path.html#ac26c0c210a4c30bade6daca9c0853fc1">Path</a> (<a class="el" href="class_path.html">Path</a> const &amp;<a class="el" href="class_path.html#a7797092ad2d61166d4adcecff31e34bb">path</a>)</td></tr>
@@ -151,13 +164,13 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ae9ae307831520e338154143243a24a67"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_path.html#ae9ae307831520e338154143243a24a67">Path</a> (std::string const &amp;<a class="el" href="class_path.html#a7797092ad2d61166d4adcecff31e34bb">path</a>, bool const &amp;create=false)</td></tr>
 <tr class="memdesc:ae9ae307831520e338154143243a24a67"><td class="mdescLeft">&#160;</td><td class="mdescRight">Turns a string to a path, creating it if create = true and it doesn't already exists.  <a href="class_path.html#ae9ae307831520e338154143243a24a67">More...</a><br /></td></tr>
 <tr class="separator:ae9ae307831520e338154143243a24a67"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34073c3753fbd7873238808f7f5a655b"><td class="memItemLeft" align="right" valign="top">auto const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_path.html#a34073c3753fbd7873238808f7f5a655b">size</a> () const</td></tr>
+<tr class="separator:a34073c3753fbd7873238808f7f5a655b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa2f2b14aafcc3fc3626c243fcc6574dc"><td class="memItemLeft" align="right" valign="top">std::string const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_path.html#aa2f2b14aafcc3fc3626c243fcc6574dc">string</a> () const</td></tr>
 <tr class="separator:aa2f2b14aafcc3fc3626c243fcc6574dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a59e285309e46f6633885a18d3bf4a16a"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_path.html">Path</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_path.html#a59e285309e46f6633885a18d3bf4a16a">current_directory</a> ()</td></tr>
-<tr class="separator:a59e285309e46f6633885a18d3bf4a16a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a08c199926ff5432cd3f35c2df4b07433"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_path.html">Path</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_path.html#a08c199926ff5432cd3f35c2df4b07433">home</a> ()</td></tr>
 <tr class="separator:a08c199926ff5432cd3f35c2df4b07433"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0374de2afee27834da4adccf704d4190"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_path.html">Path</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_path.html#a0374de2afee27834da4adccf704d4190">pwd</a> ()</td></tr>
@@ -173,7 +186,7 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a3f8c60121763c0e1cca52efc144f74e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Object used to hold the complete path of a giver folder. </p>
+<div class="textblock"><p>EXPERIMENTAL Object used to hold the complete path of a giver folder. </p>
 <p>You can use either a full path from the root ("/.../.../") or from the home directory ("~/.../.../")</p>
 <p>So far, relative paths are not supported (yet hopefully) </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
@@ -203,6 +216,18 @@ Private Attributes</h2></td></tr>
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_path_af26cfab021ddf49af73da3b2beca85ac_icgraph.png" border="0" usemap="#aclass_path_af26cfab021ddf49af73da3b2beca85ac_icgraph" alt=""/></div>
+<map name="aclass_path_af26cfab021ddf49af73da3b2beca85ac_icgraph" id="aclass_path_af26cfab021ddf49af73da3b2beca85ac_icgraph">
+<area shape="rect" title=" " alt="" coords="484,69,571,96"/>
+<area shape="rect" href="class_path.html#a08c199926ff5432cd3f35c2df4b07433" title=" " alt="" coords="327,19,421,45"/>
+<area shape="rect" href="class_path.html#a3d0909258a10a05b04d3c08ec42f562c" title=" " alt="" coords="312,69,436,96"/>
+<area shape="rect" href="class_path.html#a0374de2afee27834da4adccf704d4190" title=" " alt="" coords="331,120,417,147"/>
+<area shape="rect" href="class_path.html#aa9b3a53718dcd8ba66d90d50b112ddb9" title=" " alt="" coords="177,44,264,71"/>
+<area shape="rect" href="class_path.html#a42f3cfe8b84c3e11afc5d54b47522ab3" title=" " alt="" coords="5,5,129,32"/>
+<area shape="rect" href="class_path.html#ae9ae307831520e338154143243a24a67" title="Turns a string to a path, creating it if create = true and it doesn&#39;t already exists." alt="" coords="24,56,111,83"/>
+<area shape="rect" href="class_file.html#ac3774fc193239a9a83f6974e9a79f9c4" title=" " alt="" coords="186,120,255,147"/>
+<area shape="rect" href="class_file.html#a5237343fec40bceaa8cf7fc7c4026426" title=" " alt="" coords="29,113,105,140"/>
+<area shape="rect" href="class_file.html#a900ed41b6c4fbcec93e4306e2d8b0c35" title=" " alt="" coords="8,164,127,191"/>
+</map>
 </div>
 
 </div>
@@ -272,6 +297,28 @@ Here is the caller graph for this function:</div>
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_path_ae9ae307831520e338154143243a24a67_cgraph.png" border="0" usemap="#aclass_path_ae9ae307831520e338154143243a24a67_cgraph" alt=""/></div>
+<map name="aclass_path_ae9ae307831520e338154143243a24a67_cgraph" id="aclass_path_ae9ae307831520e338154143243a24a67_cgraph">
+<area shape="rect" title="Turns a string to a path, creating it if create = true and it doesn&#39;t already exists." alt="" coords="5,309,92,336"/>
+<area shape="rect" href="class_path.html#aa9b3a53718dcd8ba66d90d50b112ddb9" title=" " alt="" coords="140,309,227,336"/>
+<area shape="rect" href="class_path.html#ac40c8c627d0412be849f1e6cd4cdc556" title="To remove extraneous ./ or ../." alt="" coords="293,107,414,133"/>
+<area shape="rect" href="class_folders.html#aaa63ca280c10fc90c09cc29e38c80a02" title=" " alt="" coords="299,157,408,184"/>
+<area shape="rect" href="files__functions_8hpp.html#a6d7a6f0ccbecfe41730c211f472cfcb3" title=" " alt="" coords="691,309,797,336"/>
+<area shape="rect" href="files__functions_8hpp.html#a4a072faccd444b8907dffd96e6211461" title=" " alt="" coords="845,259,992,285"/>
+<area shape="rect" href="class_path.html#a08c199926ff5432cd3f35c2df4b07433" title=" " alt="" coords="306,360,401,387"/>
+<area shape="rect" href="class_path.html#a1f94b3b7d475723ead35e54c87078ed7" title=" " alt="" coords="306,411,401,437"/>
+<area shape="rect" href="_histogramor_8hpp.html#ab48a2fa7184e6354788989602c8c8c29" title=" " alt="" coords="718,436,770,463"/>
+<area shape="rect" href="class_path.html#ac9b837b0071ab41b4b0868590786eeae" title=" " alt="" coords="275,512,432,539"/>
+<area shape="rect" href="class_path.html#a0374de2afee27834da4adccf704d4190" title=" " alt="" coords="311,309,396,336"/>
+<area shape="rect" href="class_folders.html#aa6c7cccbbb9de930b9a41dc42dcbb840" title=" " alt="" coords="505,157,618,184"/>
+<area shape="rect" href="class_path.html#a859f02f9224a864b541b15e8db325409" title=" " alt="" coords="513,5,609,32"/>
+<area shape="rect" href="class_folders.html#a6b8b818a0a08a010b9849573883bf189" title=" " alt="" coords="510,56,613,83"/>
+<area shape="rect" href="class_folders.html#a21778cd16e2d1dfa91886bba394a506f" title=" " alt="" coords="504,107,619,133"/>
+<area shape="rect" href="class_folders.html#aab07a96e82a348fe89b817c6d7b60394" title=" " alt="" coords="695,5,793,32"/>
+<area shape="rect" href="class_path.html#af26cfab021ddf49af73da3b2beca85ac" title=" " alt="" coords="518,309,605,336"/>
+<area shape="rect" href="files__functions_8hpp.html#af52310dd2d55713265daa0e58dd7bf21" title=" " alt="" coords="480,411,643,437"/>
+<area shape="rect" href="class_path.html#aecd02f464b364bc26631bcb65e44843b" title=" " alt="" coords="513,360,610,387"/>
+<area shape="rect" href="string__functions_8hpp.html#a44ad60b408ba7b75bdf7ae75f8d2532f" title="Cuts a string into pieces separated by the given separator like &#39;;&#39; or &#39; &#39; or &#39;,&#39; ...." alt="" coords="528,512,595,539"/>
+</map>
 </div>
 
 </div>
@@ -315,6 +362,28 @@ Here is the call graph for this function:</div>
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_path_ac5e21de774118e980dea1c985155f110_cgraph.png" border="0" usemap="#aclass_path_ac5e21de774118e980dea1c985155f110_cgraph" alt=""/></div>
+<map name="aclass_path_ac5e21de774118e980dea1c985155f110_cgraph" id="aclass_path_ac5e21de774118e980dea1c985155f110_cgraph">
+<area shape="rect" title="Turns a C string to a path, creating it if create = true and it doesn&#39;t already exists." alt="" coords="5,309,92,336"/>
+<area shape="rect" href="class_path.html#aa9b3a53718dcd8ba66d90d50b112ddb9" title=" " alt="" coords="140,309,227,336"/>
+<area shape="rect" href="class_path.html#ac40c8c627d0412be849f1e6cd4cdc556" title="To remove extraneous ./ or ../." alt="" coords="293,107,414,133"/>
+<area shape="rect" href="class_folders.html#aaa63ca280c10fc90c09cc29e38c80a02" title=" " alt="" coords="299,157,408,184"/>
+<area shape="rect" href="files__functions_8hpp.html#a6d7a6f0ccbecfe41730c211f472cfcb3" title=" " alt="" coords="691,309,797,336"/>
+<area shape="rect" href="files__functions_8hpp.html#a4a072faccd444b8907dffd96e6211461" title=" " alt="" coords="845,259,992,285"/>
+<area shape="rect" href="class_path.html#a08c199926ff5432cd3f35c2df4b07433" title=" " alt="" coords="306,360,401,387"/>
+<area shape="rect" href="class_path.html#a1f94b3b7d475723ead35e54c87078ed7" title=" " alt="" coords="306,411,401,437"/>
+<area shape="rect" href="_histogramor_8hpp.html#ab48a2fa7184e6354788989602c8c8c29" title=" " alt="" coords="718,436,770,463"/>
+<area shape="rect" href="class_path.html#ac9b837b0071ab41b4b0868590786eeae" title=" " alt="" coords="275,512,432,539"/>
+<area shape="rect" href="class_path.html#a0374de2afee27834da4adccf704d4190" title=" " alt="" coords="311,309,396,336"/>
+<area shape="rect" href="class_folders.html#aa6c7cccbbb9de930b9a41dc42dcbb840" title=" " alt="" coords="505,157,618,184"/>
+<area shape="rect" href="class_path.html#a859f02f9224a864b541b15e8db325409" title=" " alt="" coords="513,5,609,32"/>
+<area shape="rect" href="class_folders.html#a6b8b818a0a08a010b9849573883bf189" title=" " alt="" coords="510,56,613,83"/>
+<area shape="rect" href="class_folders.html#a21778cd16e2d1dfa91886bba394a506f" title=" " alt="" coords="504,107,619,133"/>
+<area shape="rect" href="class_folders.html#aab07a96e82a348fe89b817c6d7b60394" title=" " alt="" coords="695,5,793,32"/>
+<area shape="rect" href="class_path.html#af26cfab021ddf49af73da3b2beca85ac" title=" " alt="" coords="518,309,605,336"/>
+<area shape="rect" href="files__functions_8hpp.html#af52310dd2d55713265daa0e58dd7bf21" title=" " alt="" coords="480,411,643,437"/>
+<area shape="rect" href="class_path.html#aecd02f464b364bc26631bcb65e44843b" title=" " alt="" coords="513,360,610,387"/>
+<area shape="rect" href="string__functions_8hpp.html#a44ad60b408ba7b75bdf7ae75f8d2532f" title="Cuts a string into pieces separated by the given separator like &#39;;&#39; or &#39; &#39; or &#39;,&#39; ...." alt="" coords="528,512,595,539"/>
+</map>
 </div>
 
 </div>
@@ -347,12 +416,23 @@ Here is the call graph for this function:</div>
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_path_a99656cd73eb5c5fa461d7570b86eb66d_cgraph.png" border="0" usemap="#aclass_path_a99656cd73eb5c5fa461d7570b86eb66d_cgraph" alt=""/></div>
+<map name="aclass_path_a99656cd73eb5c5fa461d7570b86eb66d_cgraph" id="aclass_path_a99656cd73eb5c5fa461d7570b86eb66d_cgraph">
+<area shape="rect" title=" " alt="" coords="5,157,128,184"/>
+<area shape="rect" href="files__functions_8hpp.html#a6d165da5cc41e5429a9c03c6a6c68d96" title=" " alt="" coords="205,56,293,83"/>
+<area shape="rect" href="class_path.html#a859f02f9224a864b541b15e8db325409" title=" " alt="" coords="201,107,297,133"/>
+<area shape="rect" href="class_folder.html#a71aba0f5181775b9ed38163de1c89c0b" title=" " alt="" coords="204,157,295,184"/>
+<area shape="rect" href="class_folder.html#a6aa1e1ebddb2cf4198b76f17f3aa022f" title=" " alt="" coords="196,208,303,235"/>
+<area shape="rect" href="class_folders.html#ab7471e5d0263ec69f2c87f184c004395" title=" " alt="" coords="176,259,323,285"/>
+<area shape="rect" href="files__functions_8hpp.html#ab1e262f27aaad28944f29cd2bbde417f" title=" " alt="" coords="385,5,456,32"/>
+<area shape="rect" href="files__functions_8hpp.html#ad3a78346393c83676348f6bad34b8ce2" title=" " alt="" coords="371,56,471,83"/>
+<area shape="rect" href="class_folders.html#aab07a96e82a348fe89b817c6d7b60394" title=" " alt="" coords="371,107,470,133"/>
+</map>
 </div>
 
 </div>
 </div>
-<a id="a41729d4a0f1bba6b33666fbced1b3a85"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a41729d4a0f1bba6b33666fbced1b3a85">&#9670;&nbsp;</a></span>c_str()</h2>
+<a id="a7c25cd5ebf26bf022d3477d9a42f387f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c25cd5ebf26bf022d3477d9a42f387f">&#9670;&nbsp;</a></span>c_str()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -362,6 +442,31 @@ Here is the call graph for this function:</div>
       <table class="memname">
         <tr>
           <td class="memname">auto Path::c_str </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac40c8c627d0412be849f1e6cd4cdc556"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac40c8c627d0412be849f1e6cd4cdc556">&#9670;&nbsp;</a></span>cleanPath()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Path::cleanPath </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -374,34 +479,30 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-</div>
-</div>
-<a id="a59e285309e46f6633885a18d3bf4a16a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a59e285309e46f6633885a18d3bf4a16a">&#9670;&nbsp;</a></span>current_directory()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">static <a class="el" href="class_path.html">Path</a> Path::current_directory </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
+<p>To remove extraneous ./ or ../. </p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_path_a59e285309e46f6633885a18d3bf4a16a_cgraph.png" border="0" usemap="#aclass_path_a59e285309e46f6633885a18d3bf4a16a_cgraph" alt=""/></div>
+<div class="center"><img src="class_path_ac40c8c627d0412be849f1e6cd4cdc556_cgraph.png" border="0" usemap="#aclass_path_ac40c8c627d0412be849f1e6cd4cdc556_cgraph" alt=""/></div>
+<map name="aclass_path_ac40c8c627d0412be849f1e6cd4cdc556_cgraph" id="aclass_path_ac40c8c627d0412be849f1e6cd4cdc556_cgraph">
+<area shape="rect" title="To remove extraneous ./ or ../." alt="" coords="5,81,127,108"/>
+<area shape="rect" href="class_folders.html#aa6c7cccbbb9de930b9a41dc42dcbb840" title=" " alt="" coords="175,5,289,32"/>
+<area shape="rect" href="class_path.html#a859f02f9224a864b541b15e8db325409" title=" " alt="" coords="184,56,280,83"/>
+<area shape="rect" href="class_folders.html#a6b8b818a0a08a010b9849573883bf189" title=" " alt="" coords="181,107,283,133"/>
+<area shape="rect" href="class_folders.html#a21778cd16e2d1dfa91886bba394a506f" title=" " alt="" coords="175,157,289,184"/>
+<area shape="rect" href="class_folders.html#aab07a96e82a348fe89b817c6d7b60394" title=" " alt="" coords="337,56,436,83"/>
+</map>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_path_ac40c8c627d0412be849f1e6cd4cdc556_icgraph.png" border="0" usemap="#aclass_path_ac40c8c627d0412be849f1e6cd4cdc556_icgraph" alt=""/></div>
+<map name="aclass_path_ac40c8c627d0412be849f1e6cd4cdc556_icgraph" id="aclass_path_ac40c8c627d0412be849f1e6cd4cdc556_icgraph">
+<area shape="rect" title="To remove extraneous ./ or ../." alt="" coords="312,31,433,57"/>
+<area shape="rect" href="class_path.html#aa9b3a53718dcd8ba66d90d50b112ddb9" title=" " alt="" coords="177,31,264,57"/>
+<area shape="rect" href="class_path.html#a42f3cfe8b84c3e11afc5d54b47522ab3" title=" " alt="" coords="5,5,129,32"/>
+<area shape="rect" href="class_path.html#ae9ae307831520e338154143243a24a67" title="Turns a string to a path, creating it if create = true and it doesn&#39;t already exists." alt="" coords="24,56,111,83"/>
+</map>
 </div>
 
 </div>
@@ -432,11 +533,85 @@ Here is the call graph for this function:</div>
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_path_aecd02f464b364bc26631bcb65e44843b_cgraph.png" border="0" usemap="#aclass_path_aecd02f464b364bc26631bcb65e44843b_cgraph" alt=""/></div>
+<map name="aclass_path_aecd02f464b364bc26631bcb65e44843b_cgraph" id="aclass_path_aecd02f464b364bc26631bcb65e44843b_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,103,32"/>
+<area shape="rect" href="files__functions_8hpp.html#a6d7a6f0ccbecfe41730c211f472cfcb3" title=" " alt="" coords="151,5,257,32"/>
+<area shape="rect" href="files__functions_8hpp.html#a4a072faccd444b8907dffd96e6211461" title=" " alt="" coords="305,5,452,32"/>
+</map>
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_path_aecd02f464b364bc26631bcb65e44843b_icgraph.png" border="0" usemap="#aclass_path_aecd02f464b364bc26631bcb65e44843b_icgraph" alt=""/></div>
+<map name="aclass_path_aecd02f464b364bc26631bcb65e44843b_icgraph" id="aclass_path_aecd02f464b364bc26631bcb65e44843b_icgraph">
+<area shape="rect" title=" " alt="" coords="928,157,1025,184"/>
+<area shape="rect" href="class_file.html#a6b15fde4d8bb49099cdf7f27c4f36fae" title=" " alt="" coords="789,107,880,133"/>
+<area shape="rect" href="class_path.html#a1f94b3b7d475723ead35e54c87078ed7" title=" " alt="" coords="645,233,739,260"/>
+<area shape="rect" href="class_file.html#a5237343fec40bceaa8cf7fc7c4026426" title=" " alt="" coords="273,95,349,121"/>
+<area shape="rect" href="class_file.html#a900ed41b6c4fbcec93e4306e2d8b0c35" title=" " alt="" coords="252,5,371,32"/>
+<area shape="rect" href="class_file.html#a8f6a2ccec2d48112847c89541d13bc10" title=" " alt="" coords="643,81,741,108"/>
+<area shape="rect" href="class_file.html#a84e9ad3641a6cff0d371dddb2ea0f73e" title=" " alt="" coords="488,81,564,108"/>
+<area shape="rect" href="class_file.html#ac3774fc193239a9a83f6974e9a79f9c4" title=" " alt="" coords="491,31,561,57"/>
+<area shape="rect" href="class_file.html#af4dee1c79bf496d505633211177c6ce3" title=" " alt="" coords="457,183,595,209"/>
+<area shape="rect" href="class_calibration.html#a7e89a0c788e7ad97c2a9cea5e02ef3f2" title=" " alt="" coords="229,233,394,260"/>
+<area shape="rect" href="class_calibration.html#a53565d0fe7d92fd6d5d94eee5a97f1b8" title=" " alt="" coords="213,183,409,209"/>
+<area shape="rect" href="class_calibration.html#aa7e921cbc724d97d1a3ef30a4f988e63" title=" " alt="" coords="5,233,165,260"/>
+<area shape="rect" href="class_path.html#aa9b3a53718dcd8ba66d90d50b112ddb9" title=" " alt="" coords="483,284,569,311"/>
+<area shape="rect" href="class_file.html#aec78af028103207cb2ce88c0120dd4f6" title=" " alt="" coords="467,233,585,260"/>
+<area shape="rect" href="class_path.html#a42f3cfe8b84c3e11afc5d54b47522ab3" title=" " alt="" coords="249,284,373,311"/>
+<area shape="rect" href="class_path.html#ae9ae307831520e338154143243a24a67" title="Turns a string to a path, creating it if create = true and it doesn&#39;t already exists." alt="" coords="268,335,355,361"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a859f02f9224a864b541b15e8db325409"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a859f02f9224a864b541b15e8db325409">&#9670;&nbsp;</a></span>folder()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_folder.html">Folder</a> const&amp; Path::folder </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_path_a859f02f9224a864b541b15e8db325409_cgraph.png" border="0" usemap="#aclass_path_a859f02f9224a864b541b15e8db325409_cgraph" alt=""/></div>
+<map name="aclass_path_a859f02f9224a864b541b15e8db325409_cgraph" id="aclass_path_a859f02f9224a864b541b15e8db325409_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,101,32"/>
+<area shape="rect" href="class_folders.html#aab07a96e82a348fe89b817c6d7b60394" title=" " alt="" coords="149,5,248,32"/>
+</map>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_path_a859f02f9224a864b541b15e8db325409_icgraph.png" border="0" usemap="#aclass_path_a859f02f9224a864b541b15e8db325409_icgraph" alt=""/></div>
+<map name="aclass_path_a859f02f9224a864b541b15e8db325409_icgraph" id="aclass_path_a859f02f9224a864b541b15e8db325409_icgraph">
+<area shape="rect" title=" " alt="" coords="576,107,672,133"/>
+<area shape="rect" href="class_path.html#a99656cd73eb5c5fa461d7570b86eb66d" title=" " alt="" coords="387,5,510,32"/>
+<area shape="rect" href="class_path.html#ac40c8c627d0412be849f1e6cd4cdc556" title="To remove extraneous ./ or ../." alt="" coords="388,56,509,83"/>
+<area shape="rect" href="class_file.html#ae66434e6a61f2a76b09c3480bcff4fba" title=" " alt="" coords="403,107,494,133"/>
+<area shape="rect" href="class_path.html#a3d0909258a10a05b04d3c08ec42f562c" title=" " alt="" coords="387,157,511,184"/>
+<area shape="rect" href="class_run_matrixator.html#aeb9889ba763858dfb65e05c3a7bb142e" title=" " alt="" coords="369,208,528,235"/>
+<area shape="rect" href="class_path.html#aa9b3a53718dcd8ba66d90d50b112ddb9" title=" " alt="" coords="206,56,293,83"/>
+<area shape="rect" href="class_path.html#a42f3cfe8b84c3e11afc5d54b47522ab3" title=" " alt="" coords="5,31,129,57"/>
+<area shape="rect" href="class_path.html#ae9ae307831520e338154143243a24a67" title="Turns a string to a path, creating it if create = true and it doesn&#39;t already exists." alt="" coords="24,81,111,108"/>
+<area shape="rect" href="class_run_matrixator.html#aa6d13b08060fef07b50d7ab6b35be0d6" title=" " alt="" coords="177,208,321,235"/>
+</map>
 </div>
 
 </div>
@@ -464,15 +639,55 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 <div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="class_path_a4e4d7d7670941e8ddc58261a4fac0916_cgraph.png" border="0" usemap="#aclass_path_a4e4d7d7670941e8ddc58261a4fac0916_cgraph" alt=""/></div>
-</div>
-<div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_path_a4e4d7d7670941e8ddc58261a4fac0916_icgraph.png" border="0" usemap="#aclass_path_a4e4d7d7670941e8ddc58261a4fac0916_icgraph" alt=""/></div>
+<map name="aclass_path_a4e4d7d7670941e8ddc58261a4fac0916_icgraph" id="aclass_path_a4e4d7d7670941e8ddc58261a4fac0916_icgraph">
+<area shape="rect" title=" " alt="" coords="1048,56,1127,83"/>
+<area shape="rect" href="class_path.html#a6b32e82eaa18b7d2d12bc4eac45b8a4b" title=" " alt="" coords="905,5,1000,32"/>
+<area shape="rect" href="files__functions_8hpp.html#a5326a7606384341a1bd2a01f15ca9b06" title=" " alt="" coords="909,56,997,83"/>
+<area shape="rect" href="class_path.html#aa2f2b14aafcc3fc3626c243fcc6574dc" title=" " alt="" coords="905,107,1000,133"/>
+<area shape="rect" href="class_faster2_histo.html#a8684b0b531e6369ce35bca61f4b1007a" title=" " alt="" coords="683,56,857,83"/>
+<area shape="rect" href="class_clover_spectra.html#ae46c582451bada5b2b8957ee44b92e35" title=" " alt="" coords="685,107,855,133"/>
+<area shape="rect" href="class_file.html#a8f6a2ccec2d48112847c89541d13bc10" title=" " alt="" coords="721,183,819,209"/>
+<area shape="rect" href="class_faster2_histo.html#a72f8004ae550c02db09791b810c0252d" title=" " alt="" coords="477,56,615,83"/>
+<area shape="rect" href="class_faster2_histo.html#aed84ab0be7ff45067715733dd7be23d1" title=" " alt="" coords="215,56,407,83"/>
+<area shape="rect" href="class_clover_spectra.html#a353ec66774413feefb33a784ce2159cf" title=" " alt="" coords="457,107,635,133"/>
+<area shape="rect" href="class_file.html#a84e9ad3641a6cff0d371dddb2ea0f73e" title=" " alt="" coords="508,157,584,184"/>
+<area shape="rect" href="class_file.html#ac3774fc193239a9a83f6974e9a79f9c4" title=" " alt="" coords="511,208,581,235"/>
+<area shape="rect" href="class_file.html#af4dee1c79bf496d505633211177c6ce3" title=" " alt="" coords="477,259,615,285"/>
+<area shape="rect" href="class_file.html#a5237343fec40bceaa8cf7fc7c4026426" title=" " alt="" coords="273,157,349,184"/>
+<area shape="rect" href="class_file.html#a900ed41b6c4fbcec93e4306e2d8b0c35" title=" " alt="" coords="252,208,371,235"/>
+<area shape="rect" href="class_calibration.html#a7e89a0c788e7ad97c2a9cea5e02ef3f2" title=" " alt="" coords="229,259,394,285"/>
+<area shape="rect" href="class_calibration.html#a53565d0fe7d92fd6d5d94eee5a97f1b8" title=" " alt="" coords="213,309,409,336"/>
+<area shape="rect" href="class_calibration.html#aa7e921cbc724d97d1a3ef30a4f988e63" title=" " alt="" coords="5,259,165,285"/>
+</map>
 </div>
+
+</div>
+</div>
+<a id="a6aca68097e64629ee5d1e2c02f1b85ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6aca68097e64629ee5d1e2c02f1b85ee">&#9670;&nbsp;</a></span>getFolders()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_folders.html">Folders</a> const&amp; Path::getFolders </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -502,11 +717,21 @@ Here is the caller graph for this function:</div>
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_path_a08c199926ff5432cd3f35c2df4b07433_cgraph.png" border="0" usemap="#aclass_path_a08c199926ff5432cd3f35c2df4b07433_cgraph" alt=""/></div>
+<map name="aclass_path_a08c199926ff5432cd3f35c2df4b07433_cgraph" id="aclass_path_a08c199926ff5432cd3f35c2df4b07433_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,100,32"/>
+<area shape="rect" href="class_path.html#af26cfab021ddf49af73da3b2beca85ac" title=" " alt="" coords="148,5,235,32"/>
+</map>
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_path_a08c199926ff5432cd3f35c2df4b07433_icgraph.png" border="0" usemap="#aclass_path_a08c199926ff5432cd3f35c2df4b07433_icgraph" alt=""/></div>
+<map name="aclass_path_a08c199926ff5432cd3f35c2df4b07433_icgraph" id="aclass_path_a08c199926ff5432cd3f35c2df4b07433_icgraph">
+<area shape="rect" title=" " alt="" coords="312,31,407,57"/>
+<area shape="rect" href="class_path.html#aa9b3a53718dcd8ba66d90d50b112ddb9" title=" " alt="" coords="177,31,264,57"/>
+<area shape="rect" href="class_path.html#a42f3cfe8b84c3e11afc5d54b47522ab3" title=" " alt="" coords="5,5,129,32"/>
+<area shape="rect" href="class_path.html#ae9ae307831520e338154143243a24a67" title="Turns a string to a path, creating it if create = true and it doesn&#39;t already exists." alt="" coords="24,56,111,83"/>
+</map>
 </div>
 
 </div>
@@ -538,11 +763,37 @@ Here is the caller graph for this function:</div>
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_path_aa9b3a53718dcd8ba66d90d50b112ddb9_cgraph.png" border="0" usemap="#aclass_path_aa9b3a53718dcd8ba66d90d50b112ddb9_cgraph" alt=""/></div>
+<map name="aclass_path_aa9b3a53718dcd8ba66d90d50b112ddb9_cgraph" id="aclass_path_aa9b3a53718dcd8ba66d90d50b112ddb9_cgraph">
+<area shape="rect" title=" " alt="" coords="5,309,92,336"/>
+<area shape="rect" href="class_path.html#ac40c8c627d0412be849f1e6cd4cdc556" title="To remove extraneous ./ or ../." alt="" coords="158,107,279,133"/>
+<area shape="rect" href="class_folders.html#aaa63ca280c10fc90c09cc29e38c80a02" title=" " alt="" coords="164,157,273,184"/>
+<area shape="rect" href="files__functions_8hpp.html#a6d7a6f0ccbecfe41730c211f472cfcb3" title=" " alt="" coords="556,309,663,336"/>
+<area shape="rect" href="files__functions_8hpp.html#a4a072faccd444b8907dffd96e6211461" title=" " alt="" coords="711,259,857,285"/>
+<area shape="rect" href="class_path.html#a08c199926ff5432cd3f35c2df4b07433" title=" " alt="" coords="171,360,266,387"/>
+<area shape="rect" href="class_path.html#a1f94b3b7d475723ead35e54c87078ed7" title=" " alt="" coords="171,411,266,437"/>
+<area shape="rect" href="_histogramor_8hpp.html#ab48a2fa7184e6354788989602c8c8c29" title=" " alt="" coords="583,436,635,463"/>
+<area shape="rect" href="class_path.html#ac9b837b0071ab41b4b0868590786eeae" title=" " alt="" coords="140,512,297,539"/>
+<area shape="rect" href="class_path.html#a0374de2afee27834da4adccf704d4190" title=" " alt="" coords="176,309,261,336"/>
+<area shape="rect" href="class_folders.html#aa6c7cccbbb9de930b9a41dc42dcbb840" title=" " alt="" coords="370,157,483,184"/>
+<area shape="rect" href="class_path.html#a859f02f9224a864b541b15e8db325409" title=" " alt="" coords="379,5,475,32"/>
+<area shape="rect" href="class_folders.html#a6b8b818a0a08a010b9849573883bf189" title=" " alt="" coords="375,56,478,83"/>
+<area shape="rect" href="class_folders.html#a21778cd16e2d1dfa91886bba394a506f" title=" " alt="" coords="369,107,484,133"/>
+<area shape="rect" href="class_folders.html#aab07a96e82a348fe89b817c6d7b60394" title=" " alt="" coords="560,5,659,32"/>
+<area shape="rect" href="class_path.html#af26cfab021ddf49af73da3b2beca85ac" title=" " alt="" coords="383,309,470,336"/>
+<area shape="rect" href="files__functions_8hpp.html#af52310dd2d55713265daa0e58dd7bf21" title=" " alt="" coords="345,411,508,437"/>
+<area shape="rect" href="class_path.html#aecd02f464b364bc26631bcb65e44843b" title=" " alt="" coords="378,360,475,387"/>
+<area shape="rect" href="string__functions_8hpp.html#a44ad60b408ba7b75bdf7ae75f8d2532f" title="Cuts a string into pieces separated by the given separator like &#39;;&#39; or &#39; &#39; or &#39;,&#39; ...." alt="" coords="393,512,460,539"/>
+</map>
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_path_aa9b3a53718dcd8ba66d90d50b112ddb9_icgraph.png" border="0" usemap="#aclass_path_aa9b3a53718dcd8ba66d90d50b112ddb9_icgraph" alt=""/></div>
+<map name="aclass_path_aa9b3a53718dcd8ba66d90d50b112ddb9_icgraph" id="aclass_path_aa9b3a53718dcd8ba66d90d50b112ddb9_icgraph">
+<area shape="rect" title=" " alt="" coords="177,31,264,57"/>
+<area shape="rect" href="class_path.html#a42f3cfe8b84c3e11afc5d54b47522ab3" title=" " alt="" coords="5,5,129,32"/>
+<area shape="rect" href="class_path.html#ae9ae307831520e338154143243a24a67" title="Turns a string to a path, creating it if create = true and it doesn&#39;t already exists." alt="" coords="24,56,111,83"/>
+</map>
 </div>
 
 </div>
@@ -573,17 +824,35 @@ Here is the caller graph for this function:</div>
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_path_a1f94b3b7d475723ead35e54c87078ed7_cgraph.png" border="0" usemap="#aclass_path_a1f94b3b7d475723ead35e54c87078ed7_cgraph" alt=""/></div>
+<map name="aclass_path_a1f94b3b7d475723ead35e54c87078ed7_cgraph" id="aclass_path_a1f94b3b7d475723ead35e54c87078ed7_cgraph">
+<area shape="rect" title=" " alt="" coords="5,31,100,57"/>
+<area shape="rect" href="files__functions_8hpp.html#af52310dd2d55713265daa0e58dd7bf21" title=" " alt="" coords="148,56,311,83"/>
+<area shape="rect" href="class_path.html#aecd02f464b364bc26631bcb65e44843b" title=" " alt="" coords="181,5,278,32"/>
+<area shape="rect" href="files__functions_8hpp.html#a6d7a6f0ccbecfe41730c211f472cfcb3" title=" " alt="" coords="359,5,465,32"/>
+<area shape="rect" href="_histogramor_8hpp.html#ab48a2fa7184e6354788989602c8c8c29" title=" " alt="" coords="386,56,438,83"/>
+<area shape="rect" href="files__functions_8hpp.html#a4a072faccd444b8907dffd96e6211461" title=" " alt="" coords="513,5,660,32"/>
+</map>
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_path_a1f94b3b7d475723ead35e54c87078ed7_icgraph.png" border="0" usemap="#aclass_path_a1f94b3b7d475723ead35e54c87078ed7_icgraph" alt=""/></div>
+<map name="aclass_path_a1f94b3b7d475723ead35e54c87078ed7_icgraph" id="aclass_path_a1f94b3b7d475723ead35e54c87078ed7_icgraph">
+<area shape="rect" title=" " alt="" coords="623,81,717,108"/>
+<area shape="rect" href="class_path.html#aa9b3a53718dcd8ba66d90d50b112ddb9" title=" " alt="" coords="473,56,559,83"/>
+<area shape="rect" href="class_file.html#aec78af028103207cb2ce88c0120dd4f6" title=" " alt="" coords="457,107,575,133"/>
+<area shape="rect" href="class_path.html#a42f3cfe8b84c3e11afc5d54b47522ab3" title=" " alt="" coords="249,5,373,32"/>
+<area shape="rect" href="class_path.html#ae9ae307831520e338154143243a24a67" title="Turns a string to a path, creating it if create = true and it doesn&#39;t already exists." alt="" coords="268,56,355,83"/>
+<area shape="rect" href="class_calibration.html#a7e89a0c788e7ad97c2a9cea5e02ef3f2" title=" " alt="" coords="229,107,394,133"/>
+<area shape="rect" href="class_calibration.html#a53565d0fe7d92fd6d5d94eee5a97f1b8" title=" " alt="" coords="213,157,409,184"/>
+<area shape="rect" href="class_calibration.html#aa7e921cbc724d97d1a3ef30a4f988e63" title=" " alt="" coords="5,107,165,133"/>
+</map>
 </div>
 
 </div>
 </div>
-<a id="a2ff2e026b692cef6a732fe7e79a3734c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2ff2e026b692cef6a732fe7e79a3734c">&#9670;&nbsp;</a></span>makeFolderList()</h2>
+<a id="ac9b837b0071ab41b4b0868590786eeae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac9b837b0071ab41b4b0868590786eeae">&#9670;&nbsp;</a></span>makeFolderList()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -592,10 +861,9 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_folders.html">Folders</a> Path::makeFolderList </td>
+          <td class="memname">void Path::makeFolderList </td>
           <td>(</td>
-          <td class="paramtype">std::string const &amp;&#160;</td>
-          <td class="paramname"><em>path</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -608,12 +876,22 @@ Here is the caller graph for this function:</div>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_path_a2ff2e026b692cef6a732fe7e79a3734c_cgraph.png" border="0" usemap="#aclass_path_a2ff2e026b692cef6a732fe7e79a3734c_cgraph" alt=""/></div>
+<div class="center"><img src="class_path_ac9b837b0071ab41b4b0868590786eeae_cgraph.png" border="0" usemap="#aclass_path_ac9b837b0071ab41b4b0868590786eeae_cgraph" alt=""/></div>
+<map name="aclass_path_ac9b837b0071ab41b4b0868590786eeae_cgraph" id="aclass_path_ac9b837b0071ab41b4b0868590786eeae_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,163,32"/>
+<area shape="rect" href="string__functions_8hpp.html#a44ad60b408ba7b75bdf7ae75f8d2532f" title="Cuts a string into pieces separated by the given separator like &#39;;&#39; or &#39; &#39; or &#39;,&#39; ...." alt="" coords="211,5,277,32"/>
+</map>
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_path_a2ff2e026b692cef6a732fe7e79a3734c_icgraph.png" border="0" usemap="#aclass_path_a2ff2e026b692cef6a732fe7e79a3734c_icgraph" alt=""/></div>
+<div class="center"><img src="class_path_ac9b837b0071ab41b4b0868590786eeae_icgraph.png" border="0" usemap="#aclass_path_ac9b837b0071ab41b4b0868590786eeae_icgraph" alt=""/></div>
+<map name="aclass_path_ac9b837b0071ab41b4b0868590786eeae_icgraph" id="aclass_path_ac9b837b0071ab41b4b0868590786eeae_icgraph">
+<area shape="rect" title=" " alt="" coords="312,31,469,57"/>
+<area shape="rect" href="class_path.html#aa9b3a53718dcd8ba66d90d50b112ddb9" title=" " alt="" coords="177,31,264,57"/>
+<area shape="rect" href="class_path.html#a42f3cfe8b84c3e11afc5d54b47522ab3" title=" " alt="" coords="5,5,129,32"/>
+<area shape="rect" href="class_path.html#ae9ae307831520e338154143243a24a67" title="Turns a string to a path, creating it if create = true and it doesn&#39;t already exists." alt="" coords="24,56,111,83"/>
+</map>
 </div>
 
 </div>
@@ -644,6 +922,11 @@ Here is the caller graph for this function:</div>
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_path_a67161dbd774db3274fadc0c438b0cdf2_cgraph.png" border="0" usemap="#aclass_path_a67161dbd774db3274fadc0c438b0cdf2_cgraph" alt=""/></div>
+<map name="aclass_path_a67161dbd774db3274fadc0c438b0cdf2_cgraph" id="aclass_path_a67161dbd774db3274fadc0c438b0cdf2_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,109,32"/>
+<area shape="rect" href="files__functions_8hpp.html#a5e105952499e9ca713d2a2fd5db3299d" title=" " alt="" coords="157,5,293,32"/>
+<area shape="rect" href="files__functions_8hpp.html#a4a072faccd444b8907dffd96e6211461" title=" " alt="" coords="341,5,488,32"/>
+</map>
 </div>
 
 </div>
@@ -674,6 +957,11 @@ Here is the call graph for this function:</div>
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_path_a0db652f355256181825b11d0199ed0ae_cgraph.png" border="0" usemap="#aclass_path_a0db652f355256181825b11d0199ed0ae_cgraph" alt=""/></div>
+<map name="aclass_path_a0db652f355256181825b11d0199ed0ae_cgraph" id="aclass_path_a0db652f355256181825b11d0199ed0ae_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,151,32"/>
+<area shape="rect" href="files__functions_8hpp.html#a6d7a6f0ccbecfe41730c211f472cfcb3" title=" " alt="" coords="199,5,305,32"/>
+<area shape="rect" href="files__functions_8hpp.html#a4a072faccd444b8907dffd96e6211461" title=" " alt="" coords="353,5,500,32"/>
+</map>
 </div>
 
 </div>
@@ -704,6 +992,10 @@ Here is the call graph for this function:</div>
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_path_a6b32e82eaa18b7d2d12bc4eac45b8a4b_cgraph.png" border="0" usemap="#aclass_path_a6b32e82eaa18b7d2d12bc4eac45b8a4b_cgraph" alt=""/></div>
+<map name="aclass_path_a6b32e82eaa18b7d2d12bc4eac45b8a4b_cgraph" id="aclass_path_a6b32e82eaa18b7d2d12bc4eac45b8a4b_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,100,32"/>
+<area shape="rect" href="class_path.html#a4e4d7d7670941e8ddc58261a4fac0916" title=" " alt="" coords="148,5,227,32"/>
+</map>
 </div>
 
 </div>
@@ -761,6 +1053,13 @@ Here is the call graph for this function:</div>
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_path_a3d0909258a10a05b04d3c08ec42f562c_cgraph.png" border="0" usemap="#aclass_path_a3d0909258a10a05b04d3c08ec42f562c_cgraph" alt=""/></div>
+<map name="aclass_path_a3d0909258a10a05b04d3c08ec42f562c_cgraph" id="aclass_path_a3d0909258a10a05b04d3c08ec42f562c_cgraph">
+<area shape="rect" title=" " alt="" coords="5,56,129,83"/>
+<area shape="rect" href="class_path.html#a859f02f9224a864b541b15e8db325409" title=" " alt="" coords="177,5,273,32"/>
+<area shape="rect" href="class_folder.html#a71aba0f5181775b9ed38163de1c89c0b" title=" " alt="" coords="180,56,271,83"/>
+<area shape="rect" href="class_path.html#af26cfab021ddf49af73da3b2beca85ac" title=" " alt="" coords="182,107,269,133"/>
+<area shape="rect" href="class_folders.html#aab07a96e82a348fe89b817c6d7b60394" title=" " alt="" coords="321,5,420,32"/>
+</map>
 </div>
 
 </div>
@@ -818,6 +1117,10 @@ Here is the call graph for this function:</div>
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_path_aea2baf3449b7fc955e7320f851ec29e5_cgraph.png" border="0" usemap="#aclass_path_aea2baf3449b7fc955e7320f851ec29e5_cgraph" alt=""/></div>
+<map name="aclass_path_aea2baf3449b7fc955e7320f851ec29e5_cgraph" id="aclass_path_aea2baf3449b7fc955e7320f851ec29e5_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,140,32"/>
+<area shape="rect" href="files__functions_8hpp.html#a4a072faccd444b8907dffd96e6211461" title=" " alt="" coords="188,5,335,32"/>
+</map>
 </div>
 
 </div>
@@ -849,6 +1152,29 @@ Here is the call graph for this function:</div>
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_path_a71da17bb5e324fd092daeca8f56f81ed_cgraph.png" border="0" usemap="#aclass_path_a71da17bb5e324fd092daeca8f56f81ed_cgraph" alt=""/></div>
+<map name="aclass_path_a71da17bb5e324fd092daeca8f56f81ed_cgraph" id="aclass_path_a71da17bb5e324fd092daeca8f56f81ed_cgraph">
+<area shape="rect" title=" " alt="" coords="5,335,129,361"/>
+<area shape="rect" href="class_path.html#aa9b3a53718dcd8ba66d90d50b112ddb9" title=" " alt="" coords="177,309,264,336"/>
+<area shape="rect" href="class_path.html#a7797092ad2d61166d4adcecff31e34bb" title=" " alt="" coords="177,360,264,387"/>
+<area shape="rect" href="class_path.html#ac40c8c627d0412be849f1e6cd4cdc556" title="To remove extraneous ./ or ../." alt="" coords="330,107,451,133"/>
+<area shape="rect" href="class_folders.html#aaa63ca280c10fc90c09cc29e38c80a02" title=" " alt="" coords="336,157,445,184"/>
+<area shape="rect" href="files__functions_8hpp.html#a6d7a6f0ccbecfe41730c211f472cfcb3" title=" " alt="" coords="728,309,835,336"/>
+<area shape="rect" href="files__functions_8hpp.html#a4a072faccd444b8907dffd96e6211461" title=" " alt="" coords="883,259,1029,285"/>
+<area shape="rect" href="class_path.html#a08c199926ff5432cd3f35c2df4b07433" title=" " alt="" coords="343,360,438,387"/>
+<area shape="rect" href="class_path.html#a1f94b3b7d475723ead35e54c87078ed7" title=" " alt="" coords="343,411,438,437"/>
+<area shape="rect" href="_histogramor_8hpp.html#ab48a2fa7184e6354788989602c8c8c29" title=" " alt="" coords="755,436,807,463"/>
+<area shape="rect" href="class_path.html#ac9b837b0071ab41b4b0868590786eeae" title=" " alt="" coords="312,512,469,539"/>
+<area shape="rect" href="class_path.html#a0374de2afee27834da4adccf704d4190" title=" " alt="" coords="348,309,433,336"/>
+<area shape="rect" href="class_folders.html#aa6c7cccbbb9de930b9a41dc42dcbb840" title=" " alt="" coords="542,157,655,184"/>
+<area shape="rect" href="class_path.html#a859f02f9224a864b541b15e8db325409" title=" " alt="" coords="551,5,647,32"/>
+<area shape="rect" href="class_folders.html#a6b8b818a0a08a010b9849573883bf189" title=" " alt="" coords="547,56,650,83"/>
+<area shape="rect" href="class_folders.html#a21778cd16e2d1dfa91886bba394a506f" title=" " alt="" coords="541,107,656,133"/>
+<area shape="rect" href="class_folders.html#aab07a96e82a348fe89b817c6d7b60394" title=" " alt="" coords="732,5,831,32"/>
+<area shape="rect" href="class_path.html#af26cfab021ddf49af73da3b2beca85ac" title=" " alt="" coords="555,309,642,336"/>
+<area shape="rect" href="files__functions_8hpp.html#af52310dd2d55713265daa0e58dd7bf21" title=" " alt="" coords="517,411,680,437"/>
+<area shape="rect" href="class_path.html#aecd02f464b364bc26631bcb65e44843b" title=" " alt="" coords="550,360,647,387"/>
+<area shape="rect" href="string__functions_8hpp.html#a44ad60b408ba7b75bdf7ae75f8d2532f" title="Cuts a string into pieces separated by the given separator like &#39;;&#39; or &#39; &#39; or &#39;,&#39; ...." alt="" coords="565,512,632,539"/>
+</map>
 </div>
 
 </div>
@@ -880,6 +1206,29 @@ Here is the call graph for this function:</div>
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_path_a5bb409bfa25a8efe99b9d07e0ea2cf7a_cgraph.png" border="0" usemap="#aclass_path_a5bb409bfa25a8efe99b9d07e0ea2cf7a_cgraph" alt=""/></div>
+<map name="aclass_path_a5bb409bfa25a8efe99b9d07e0ea2cf7a_cgraph" id="aclass_path_a5bb409bfa25a8efe99b9d07e0ea2cf7a_cgraph">
+<area shape="rect" title=" " alt="" coords="5,335,129,361"/>
+<area shape="rect" href="class_path.html#aa9b3a53718dcd8ba66d90d50b112ddb9" title=" " alt="" coords="177,309,264,336"/>
+<area shape="rect" href="class_path.html#a7797092ad2d61166d4adcecff31e34bb" title=" " alt="" coords="177,360,264,387"/>
+<area shape="rect" href="class_path.html#ac40c8c627d0412be849f1e6cd4cdc556" title="To remove extraneous ./ or ../." alt="" coords="330,107,451,133"/>
+<area shape="rect" href="class_folders.html#aaa63ca280c10fc90c09cc29e38c80a02" title=" " alt="" coords="336,157,445,184"/>
+<area shape="rect" href="files__functions_8hpp.html#a6d7a6f0ccbecfe41730c211f472cfcb3" title=" " alt="" coords="728,309,835,336"/>
+<area shape="rect" href="files__functions_8hpp.html#a4a072faccd444b8907dffd96e6211461" title=" " alt="" coords="883,259,1029,285"/>
+<area shape="rect" href="class_path.html#a08c199926ff5432cd3f35c2df4b07433" title=" " alt="" coords="343,360,438,387"/>
+<area shape="rect" href="class_path.html#a1f94b3b7d475723ead35e54c87078ed7" title=" " alt="" coords="343,411,438,437"/>
+<area shape="rect" href="_histogramor_8hpp.html#ab48a2fa7184e6354788989602c8c8c29" title=" " alt="" coords="755,436,807,463"/>
+<area shape="rect" href="class_path.html#ac9b837b0071ab41b4b0868590786eeae" title=" " alt="" coords="312,512,469,539"/>
+<area shape="rect" href="class_path.html#a0374de2afee27834da4adccf704d4190" title=" " alt="" coords="348,309,433,336"/>
+<area shape="rect" href="class_folders.html#aa6c7cccbbb9de930b9a41dc42dcbb840" title=" " alt="" coords="542,157,655,184"/>
+<area shape="rect" href="class_path.html#a859f02f9224a864b541b15e8db325409" title=" " alt="" coords="551,5,647,32"/>
+<area shape="rect" href="class_folders.html#a6b8b818a0a08a010b9849573883bf189" title=" " alt="" coords="547,56,650,83"/>
+<area shape="rect" href="class_folders.html#a21778cd16e2d1dfa91886bba394a506f" title=" " alt="" coords="541,107,656,133"/>
+<area shape="rect" href="class_folders.html#aab07a96e82a348fe89b817c6d7b60394" title=" " alt="" coords="732,5,831,32"/>
+<area shape="rect" href="class_path.html#af26cfab021ddf49af73da3b2beca85ac" title=" " alt="" coords="555,309,642,336"/>
+<area shape="rect" href="files__functions_8hpp.html#af52310dd2d55713265daa0e58dd7bf21" title=" " alt="" coords="517,411,680,437"/>
+<area shape="rect" href="class_path.html#aecd02f464b364bc26631bcb65e44843b" title=" " alt="" coords="550,360,647,387"/>
+<area shape="rect" href="string__functions_8hpp.html#a44ad60b408ba7b75bdf7ae75f8d2532f" title="Cuts a string into pieces separated by the given separator like &#39;;&#39; or &#39; &#39; or &#39;,&#39; ...." alt="" coords="565,512,632,539"/>
+</map>
 </div>
 
 </div>
@@ -911,6 +1260,28 @@ Here is the call graph for this function:</div>
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_path_a42f3cfe8b84c3e11afc5d54b47522ab3_cgraph.png" border="0" usemap="#aclass_path_a42f3cfe8b84c3e11afc5d54b47522ab3_cgraph" alt=""/></div>
+<map name="aclass_path_a42f3cfe8b84c3e11afc5d54b47522ab3_cgraph" id="aclass_path_a42f3cfe8b84c3e11afc5d54b47522ab3_cgraph">
+<area shape="rect" title=" " alt="" coords="5,309,129,336"/>
+<area shape="rect" href="class_path.html#aa9b3a53718dcd8ba66d90d50b112ddb9" title=" " alt="" coords="177,309,264,336"/>
+<area shape="rect" href="class_path.html#ac40c8c627d0412be849f1e6cd4cdc556" title="To remove extraneous ./ or ../." alt="" coords="330,107,451,133"/>
+<area shape="rect" href="class_folders.html#aaa63ca280c10fc90c09cc29e38c80a02" title=" " alt="" coords="336,157,445,184"/>
+<area shape="rect" href="files__functions_8hpp.html#a6d7a6f0ccbecfe41730c211f472cfcb3" title=" " alt="" coords="728,309,835,336"/>
+<area shape="rect" href="files__functions_8hpp.html#a4a072faccd444b8907dffd96e6211461" title=" " alt="" coords="883,259,1029,285"/>
+<area shape="rect" href="class_path.html#a08c199926ff5432cd3f35c2df4b07433" title=" " alt="" coords="343,360,438,387"/>
+<area shape="rect" href="class_path.html#a1f94b3b7d475723ead35e54c87078ed7" title=" " alt="" coords="343,411,438,437"/>
+<area shape="rect" href="_histogramor_8hpp.html#ab48a2fa7184e6354788989602c8c8c29" title=" " alt="" coords="755,436,807,463"/>
+<area shape="rect" href="class_path.html#ac9b837b0071ab41b4b0868590786eeae" title=" " alt="" coords="312,512,469,539"/>
+<area shape="rect" href="class_path.html#a0374de2afee27834da4adccf704d4190" title=" " alt="" coords="348,309,433,336"/>
+<area shape="rect" href="class_folders.html#aa6c7cccbbb9de930b9a41dc42dcbb840" title=" " alt="" coords="542,157,655,184"/>
+<area shape="rect" href="class_path.html#a859f02f9224a864b541b15e8db325409" title=" " alt="" coords="551,5,647,32"/>
+<area shape="rect" href="class_folders.html#a6b8b818a0a08a010b9849573883bf189" title=" " alt="" coords="547,56,650,83"/>
+<area shape="rect" href="class_folders.html#a21778cd16e2d1dfa91886bba394a506f" title=" " alt="" coords="541,107,656,133"/>
+<area shape="rect" href="class_folders.html#aab07a96e82a348fe89b817c6d7b60394" title=" " alt="" coords="732,5,831,32"/>
+<area shape="rect" href="class_path.html#af26cfab021ddf49af73da3b2beca85ac" title=" " alt="" coords="555,309,642,336"/>
+<area shape="rect" href="files__functions_8hpp.html#af52310dd2d55713265daa0e58dd7bf21" title=" " alt="" coords="517,411,680,437"/>
+<area shape="rect" href="class_path.html#aecd02f464b364bc26631bcb65e44843b" title=" " alt="" coords="550,360,647,387"/>
+<area shape="rect" href="string__functions_8hpp.html#a44ad60b408ba7b75bdf7ae75f8d2532f" title="Cuts a string into pieces separated by the given separator like &#39;;&#39; or &#39; &#39; or &#39;,&#39; ...." alt="" coords="565,512,632,539"/>
+</map>
 </div>
 
 </div>
@@ -930,6 +1301,32 @@ Here is the call graph for this function:</div>
           <td class="paramtype">std::string const &amp;&#160;</td>
           <td class="paramname"><em>cmprStr</em></td><td>)</td>
           <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a145897ef8010831f6823ef7173ac4a0c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a145897ef8010831f6823ef7173ac4a0c">&#9670;&nbsp;</a></span>operator[]()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_folder.html">Folder</a> const&amp; Path::operator[] </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="lib_co_8hpp.html#a69aa29b598b851b0640aa225a9e5d61d">uint</a> const &amp;&#160;</td>
+          <td class="paramname"><em>i</em></td><td>)</td>
+          <td> const</td>
         </tr>
       </table>
   </td>
@@ -967,6 +1364,11 @@ Here is the call graph for this function:</div>
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_path_a7797092ad2d61166d4adcecff31e34bb_icgraph.png" border="0" usemap="#aclass_path_a7797092ad2d61166d4adcecff31e34bb_icgraph" alt=""/></div>
+<map name="aclass_path_a7797092ad2d61166d4adcecff31e34bb_icgraph" id="aclass_path_a7797092ad2d61166d4adcecff31e34bb_icgraph">
+<area shape="rect" title=" " alt="" coords="177,31,264,57"/>
+<area shape="rect" href="files__functions_8hpp.html#a039532c19ad3ebbe61e164a4e4f28bcd" title=" " alt="" coords="18,5,117,32"/>
+<area shape="rect" href="class_path.html#a5bb409bfa25a8efe99b9d07e0ea2cf7a" title=" " alt="" coords="5,56,129,83"/>
+</map>
 </div>
 
 </div>
@@ -997,11 +1399,58 @@ Here is the caller graph for this function:</div>
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_path_a0374de2afee27834da4adccf704d4190_cgraph.png" border="0" usemap="#aclass_path_a0374de2afee27834da4adccf704d4190_cgraph" alt=""/></div>
+<map name="aclass_path_a0374de2afee27834da4adccf704d4190_cgraph" id="aclass_path_a0374de2afee27834da4adccf704d4190_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,91,32"/>
+<area shape="rect" href="class_path.html#af26cfab021ddf49af73da3b2beca85ac" title=" " alt="" coords="139,5,225,32"/>
+</map>
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_path_a0374de2afee27834da4adccf704d4190_icgraph.png" border="0" usemap="#aclass_path_a0374de2afee27834da4adccf704d4190_icgraph" alt=""/></div>
+<map name="aclass_path_a0374de2afee27834da4adccf704d4190_icgraph" id="aclass_path_a0374de2afee27834da4adccf704d4190_icgraph">
+<area shape="rect" title=" " alt="" coords="312,81,397,108"/>
+<area shape="rect" href="class_file.html#ac3774fc193239a9a83f6974e9a79f9c4" title=" " alt="" coords="186,56,255,83"/>
+<area shape="rect" href="class_path.html#aa9b3a53718dcd8ba66d90d50b112ddb9" title=" " alt="" coords="177,107,264,133"/>
+<area shape="rect" href="class_file.html#a5237343fec40bceaa8cf7fc7c4026426" title=" " alt="" coords="29,5,105,32"/>
+<area shape="rect" href="class_file.html#a900ed41b6c4fbcec93e4306e2d8b0c35" title=" " alt="" coords="8,56,127,83"/>
+<area shape="rect" href="class_path.html#a42f3cfe8b84c3e11afc5d54b47522ab3" title=" " alt="" coords="5,107,129,133"/>
+<area shape="rect" href="class_path.html#ae9ae307831520e338154143243a24a67" title="Turns a string to a path, creating it if create = true and it doesn&#39;t already exists." alt="" coords="24,157,111,184"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a34073c3753fbd7873238808f7f5a655b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a34073c3753fbd7873238808f7f5a655b">&#9670;&nbsp;</a></span>size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto const Path::size </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_path_a34073c3753fbd7873238808f7f5a655b_cgraph.png" border="0" usemap="#aclass_path_a34073c3753fbd7873238808f7f5a655b_cgraph" alt=""/></div>
+<map name="aclass_path_a34073c3753fbd7873238808f7f5a655b_cgraph" id="aclass_path_a34073c3753fbd7873238808f7f5a655b_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,89,32"/>
+<area shape="rect" href="class_folders.html#a6b8b818a0a08a010b9849573883bf189" title=" " alt="" coords="137,5,240,32"/>
+</map>
 </div>
 
 </div>
@@ -1032,6 +1481,32 @@ Here is the caller graph for this function:</div>
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_path_aa2f2b14aafcc3fc3626c243fcc6574dc_cgraph.png" border="0" usemap="#aclass_path_aa2f2b14aafcc3fc3626c243fcc6574dc_cgraph" alt=""/></div>
+<map name="aclass_path_aa2f2b14aafcc3fc3626c243fcc6574dc_cgraph" id="aclass_path_aa2f2b14aafcc3fc3626c243fcc6574dc_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,100,32"/>
+<area shape="rect" href="class_path.html#a4e4d7d7670941e8ddc58261a4fac0916" title=" " alt="" coords="148,5,227,32"/>
+</map>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_path_aa2f2b14aafcc3fc3626c243fcc6574dc_icgraph.png" border="0" usemap="#aclass_path_aa2f2b14aafcc3fc3626c243fcc6574dc_icgraph" alt=""/></div>
+<map name="aclass_path_aa2f2b14aafcc3fc3626c243fcc6574dc_icgraph" id="aclass_path_aa2f2b14aafcc3fc3626c243fcc6574dc_icgraph">
+<area shape="rect" title=" " alt="" coords="905,56,1000,83"/>
+<area shape="rect" href="class_faster2_histo.html#a8684b0b531e6369ce35bca61f4b1007a" title=" " alt="" coords="683,5,857,32"/>
+<area shape="rect" href="class_clover_spectra.html#ae46c582451bada5b2b8957ee44b92e35" title=" " alt="" coords="685,56,855,83"/>
+<area shape="rect" href="class_file.html#a8f6a2ccec2d48112847c89541d13bc10" title=" " alt="" coords="721,132,819,159"/>
+<area shape="rect" href="class_faster2_histo.html#a72f8004ae550c02db09791b810c0252d" title=" " alt="" coords="477,5,615,32"/>
+<area shape="rect" href="class_faster2_histo.html#aed84ab0be7ff45067715733dd7be23d1" title=" " alt="" coords="215,5,407,32"/>
+<area shape="rect" href="class_clover_spectra.html#a353ec66774413feefb33a784ce2159cf" title=" " alt="" coords="457,56,635,83"/>
+<area shape="rect" href="class_file.html#a84e9ad3641a6cff0d371dddb2ea0f73e" title=" " alt="" coords="508,107,584,133"/>
+<area shape="rect" href="class_file.html#ac3774fc193239a9a83f6974e9a79f9c4" title=" " alt="" coords="511,157,581,184"/>
+<area shape="rect" href="class_file.html#af4dee1c79bf496d505633211177c6ce3" title=" " alt="" coords="477,208,615,235"/>
+<area shape="rect" href="class_file.html#a5237343fec40bceaa8cf7fc7c4026426" title=" " alt="" coords="273,107,349,133"/>
+<area shape="rect" href="class_file.html#a900ed41b6c4fbcec93e4306e2d8b0c35" title=" " alt="" coords="252,157,371,184"/>
+<area shape="rect" href="class_calibration.html#a7e89a0c788e7ad97c2a9cea5e02ef3f2" title=" " alt="" coords="229,208,394,235"/>
+<area shape="rect" href="class_calibration.html#a53565d0fe7d92fd6d5d94eee5a97f1b8" title=" " alt="" coords="213,259,409,285"/>
+<area shape="rect" href="class_calibration.html#aa7e921cbc724d97d1a3ef30a4f988e63" title=" " alt="" coords="5,208,165,235"/>
+</map>
 </div>
 
 </div>

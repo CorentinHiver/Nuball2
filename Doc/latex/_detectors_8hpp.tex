@@ -1,0 +1,267 @@
+\doxysection{lib/\+Classes/\+Detectors.hpp File Reference}
+\label{_detectors_8hpp}\index{lib/Classes/Detectors.hpp@{lib/Classes/Detectors.hpp}}
+{\ttfamily \#include \char`\"{}../lib\+Root.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Hit.\+hpp\char`\"{}}\newline
+Include dependency graph for Detectors.\+hpp\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_detectors_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_detectors_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \textbf{ Detectors}
+\begin{DoxyCompactList}\small\item\em Loads the ID file and fills lookup tables. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ SIZE\+\_\+\+LOOKUP}~1000
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using \textbf{ d\+Type} = std\+::string
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ Strings} \textbf{ clover\+\_\+pos} (\textbf{ SIZE\+\_\+\+LOOKUP},\char`\"{}\char`\"{})
+\item 
+\textbf{ Label\+\_\+vec} \textbf{ compressed\+Label} (\textbf{ SIZE\+\_\+\+LOOKUP},-\/1)
+\item 
+std\+::vector$<$ \textbf{ uchar} $>$ \textbf{ label\+To\+BGOcrystal} (\textbf{ SIZE\+\_\+\+LOOKUP}, 0)
+\item 
+std\+::vector$<$ \textbf{ uchar} $>$ \textbf{ label\+To\+Clover} (\textbf{ SIZE\+\_\+\+LOOKUP}, 0)
+\item 
+std\+::vector$<$ \textbf{ uchar} $>$ \textbf{ label\+To\+Gecrystal} (\textbf{ SIZE\+\_\+\+LOOKUP}, 0)
+\item 
+\textbf{ Ints} \textbf{ m\+\_\+index} (\textbf{ SIZE\+\_\+\+LOOKUP},-\/1)
+\item 
+std\+::ostream \& \textbf{ operator$>$$>$} (std\+::ostream \&cout, \textbf{ Detectors} const \&\textbf{ detectors})
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+class \textbf{ Detectors} \textbf{ detectors}
+\item 
+\textbf{ Bools} \textbf{ is\+Back} (\textbf{ SIZE\+\_\+\+LOOKUP})
+\item 
+\textbf{ Bools} \textbf{ is\+BGO} (\textbf{ SIZE\+\_\+\+LOOKUP})
+\item 
+\textbf{ Bools} \textbf{ is\+Clover} (\textbf{ SIZE\+\_\+\+LOOKUP})
+\item 
+\textbf{ Bools} \textbf{ is\+DSSD} (\textbf{ SIZE\+\_\+\+LOOKUP})
+\item 
+\textbf{ Bools} \textbf{ is\+Eden} (\textbf{ SIZE\+\_\+\+LOOKUP})
+\item 
+\textbf{ Bools} \textbf{ is\+Front} (\textbf{ SIZE\+\_\+\+LOOKUP})
+\item 
+\textbf{ Bools} \textbf{ is\+Ge} (\textbf{ SIZE\+\_\+\+LOOKUP})
+\item 
+\textbf{ Bools} \textbf{ is\+La\+Br3} (\textbf{ SIZE\+\_\+\+LOOKUP})
+\item 
+\textbf{ Bools} \textbf{ is\+Paris} (\textbf{ SIZE\+\_\+\+LOOKUP})
+\item 
+\textbf{ Bools} \textbf{ is\+RF} (\textbf{ SIZE\+\_\+\+LOOKUP})
+\item 
+\textbf{ Bools} \textbf{ is\+Ring} (\textbf{ SIZE\+\_\+\+LOOKUP})
+\item 
+\textbf{ Bools} \textbf{ is\+S1} (\textbf{ SIZE\+\_\+\+LOOKUP})
+\item 
+\textbf{ Bools} \textbf{ is\+S2} (\textbf{ SIZE\+\_\+\+LOOKUP})
+\item 
+\textbf{ Bools} \textbf{ is\+Sector} (\textbf{ SIZE\+\_\+\+LOOKUP})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\label{_detectors_8hpp_a66ffad8e00f3e94ca2040082469213c6}} 
+\index{Detectors.hpp@{Detectors.hpp}!SIZE\_LOOKUP@{SIZE\_LOOKUP}}
+\index{SIZE\_LOOKUP@{SIZE\_LOOKUP}!Detectors.hpp@{Detectors.hpp}}
+\doxysubsubsection{SIZE\_LOOKUP}
+{\footnotesize\ttfamily \#define SIZE\+\_\+\+LOOKUP~1000}
+
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\label{_detectors_8hpp_a7ea6a1daded60b9200989100a41bbc3a}} 
+\index{Detectors.hpp@{Detectors.hpp}!dType@{dType}}
+\index{dType@{dType}!Detectors.hpp@{Detectors.hpp}}
+\doxysubsubsection{dType}
+{\footnotesize\ttfamily using \textbf{ d\+Type} =  std\+::string}
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\label{_detectors_8hpp_aa4d7f26a632b3df166ad7a08cad05af1}} 
+\index{Detectors.hpp@{Detectors.hpp}!clover\_pos@{clover\_pos}}
+\index{clover\_pos@{clover\_pos}!Detectors.hpp@{Detectors.hpp}}
+\doxysubsubsection{clover\_pos()}
+{\footnotesize\ttfamily \textbf{ Strings} clover\+\_\+pos (\begin{DoxyParamCaption}\item[{\textbf{ SIZE\+\_\+\+LOOKUP}}]{,  }\item[{\char`\"{}\char`\"{}}]{ }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_detectors_8hpp_aa4d7f26a632b3df166ad7a08cad05af1_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{_detectors_8hpp_adc256156b68f8dd6b9f2c2da57808bd3}} 
+\index{Detectors.hpp@{Detectors.hpp}!compressedLabel@{compressedLabel}}
+\index{compressedLabel@{compressedLabel}!Detectors.hpp@{Detectors.hpp}}
+\doxysubsubsection{compressedLabel()}
+{\footnotesize\ttfamily \textbf{ Label\+\_\+vec} compressed\+Label (\begin{DoxyParamCaption}\item[{\textbf{ SIZE\+\_\+\+LOOKUP}}]{,  }\item[{-\/}]{1 }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_detectors_8hpp_adc256156b68f8dd6b9f2c2da57808bd3_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{_detectors_8hpp_a2f5a496d7673272c5c21b29a2d41bde2}} 
+\index{Detectors.hpp@{Detectors.hpp}!labelToBGOcrystal@{labelToBGOcrystal}}
+\index{labelToBGOcrystal@{labelToBGOcrystal}!Detectors.hpp@{Detectors.hpp}}
+\doxysubsubsection{labelToBGOcrystal()}
+{\footnotesize\ttfamily std\+::vector$<$\textbf{ uchar}$>$ label\+To\+BGOcrystal (\begin{DoxyParamCaption}\item[{\textbf{ SIZE\+\_\+\+LOOKUP}}]{,  }\item[{0}]{ }\end{DoxyParamCaption})}
+
+\mbox{\label{_detectors_8hpp_adccbc8332a89f48a35baea4a37255e2c}} 
+\index{Detectors.hpp@{Detectors.hpp}!labelToClover@{labelToClover}}
+\index{labelToClover@{labelToClover}!Detectors.hpp@{Detectors.hpp}}
+\doxysubsubsection{labelToClover()}
+{\footnotesize\ttfamily std\+::vector$<$\textbf{ uchar}$>$ label\+To\+Clover (\begin{DoxyParamCaption}\item[{\textbf{ SIZE\+\_\+\+LOOKUP}}]{,  }\item[{0}]{ }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_detectors_8hpp_adccbc8332a89f48a35baea4a37255e2c_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{_detectors_8hpp_a13f8fc40b8957fe11c059d8d17523704}} 
+\index{Detectors.hpp@{Detectors.hpp}!labelToGecrystal@{labelToGecrystal}}
+\index{labelToGecrystal@{labelToGecrystal}!Detectors.hpp@{Detectors.hpp}}
+\doxysubsubsection{labelToGecrystal()}
+{\footnotesize\ttfamily std\+::vector$<$\textbf{ uchar}$>$ label\+To\+Gecrystal (\begin{DoxyParamCaption}\item[{\textbf{ SIZE\+\_\+\+LOOKUP}}]{,  }\item[{0}]{ }\end{DoxyParamCaption})}
+
+\mbox{\label{_detectors_8hpp_af8a018699aa5d8544bc4877f40463a5a}} 
+\index{Detectors.hpp@{Detectors.hpp}!m\_index@{m\_index}}
+\index{m\_index@{m\_index}!Detectors.hpp@{Detectors.hpp}}
+\doxysubsubsection{m\_index()}
+{\footnotesize\ttfamily \textbf{ Ints} m\+\_\+index (\begin{DoxyParamCaption}\item[{\textbf{ SIZE\+\_\+\+LOOKUP}}]{,  }\item[{-\/}]{1 }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_detectors_8hpp_af8a018699aa5d8544bc4877f40463a5a_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{_detectors_8hpp_ad6e008a36a12682ccf6a850ecc307187}} 
+\index{Detectors.hpp@{Detectors.hpp}!operator$>$$>$@{operator$>$$>$}}
+\index{operator$>$$>$@{operator$>$$>$}!Detectors.hpp@{Detectors.hpp}}
+\doxysubsubsection{operator$>$$>$()}
+{\footnotesize\ttfamily std\+::ostream\& operator$>$$>$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{cout,  }\item[{\textbf{ Detectors} const \&}]{detectors }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\label{_detectors_8hpp_a06939d30171afd1f13893e05454ed813}} 
+\index{Detectors.hpp@{Detectors.hpp}!detectors@{detectors}}
+\index{detectors@{detectors}!Detectors.hpp@{Detectors.hpp}}
+\doxysubsubsection{detectors}
+{\footnotesize\ttfamily class \textbf{ Detectors} detectors}
+
+\mbox{\label{_detectors_8hpp_a4e969925c521d2b624de9829460bf419}} 
+\index{Detectors.hpp@{Detectors.hpp}!isBack@{isBack}}
+\index{isBack@{isBack}!Detectors.hpp@{Detectors.hpp}}
+\doxysubsubsection{isBack}
+{\footnotesize\ttfamily \textbf{ Bools} is\+Back(\textbf{ SIZE\+\_\+\+LOOKUP}) (\begin{DoxyParamCaption}\item[{\textbf{ SIZE\+\_\+\+LOOKUP}}]{ }\end{DoxyParamCaption})}
+
+\mbox{\label{_detectors_8hpp_acad86c343cb1a6d3f382c2468415cc8a}} 
+\index{Detectors.hpp@{Detectors.hpp}!isBGO@{isBGO}}
+\index{isBGO@{isBGO}!Detectors.hpp@{Detectors.hpp}}
+\doxysubsubsection{isBGO}
+{\footnotesize\ttfamily \textbf{ Bools} is\+BGO(\textbf{ SIZE\+\_\+\+LOOKUP}) (\begin{DoxyParamCaption}\item[{\textbf{ SIZE\+\_\+\+LOOKUP}}]{ }\end{DoxyParamCaption})}
+
+\mbox{\label{_detectors_8hpp_a7f34eb1e6f5368d8eda70a8558cc971e}} 
+\index{Detectors.hpp@{Detectors.hpp}!isClover@{isClover}}
+\index{isClover@{isClover}!Detectors.hpp@{Detectors.hpp}}
+\doxysubsubsection{isClover}
+{\footnotesize\ttfamily \textbf{ Bools} is\+Clover(\textbf{ SIZE\+\_\+\+LOOKUP}) (\begin{DoxyParamCaption}\item[{\textbf{ SIZE\+\_\+\+LOOKUP}}]{ }\end{DoxyParamCaption})}
+
+\mbox{\label{_detectors_8hpp_a3148345147f51e96aaa73e5d9f8e9d93}} 
+\index{Detectors.hpp@{Detectors.hpp}!isDSSD@{isDSSD}}
+\index{isDSSD@{isDSSD}!Detectors.hpp@{Detectors.hpp}}
+\doxysubsubsection{isDSSD}
+{\footnotesize\ttfamily \textbf{ Bools} is\+DSSD(\textbf{ SIZE\+\_\+\+LOOKUP}) (\begin{DoxyParamCaption}\item[{\textbf{ SIZE\+\_\+\+LOOKUP}}]{ }\end{DoxyParamCaption})}
+
+\mbox{\label{_detectors_8hpp_acb7c68db854de8244a7d8149cba30a11}} 
+\index{Detectors.hpp@{Detectors.hpp}!isEden@{isEden}}
+\index{isEden@{isEden}!Detectors.hpp@{Detectors.hpp}}
+\doxysubsubsection{isEden}
+{\footnotesize\ttfamily \textbf{ Bools} is\+Eden(\textbf{ SIZE\+\_\+\+LOOKUP}) (\begin{DoxyParamCaption}\item[{\textbf{ SIZE\+\_\+\+LOOKUP}}]{ }\end{DoxyParamCaption})}
+
+\mbox{\label{_detectors_8hpp_aa4101394fbd7e5aeb24813175aeb4056}} 
+\index{Detectors.hpp@{Detectors.hpp}!isFront@{isFront}}
+\index{isFront@{isFront}!Detectors.hpp@{Detectors.hpp}}
+\doxysubsubsection{isFront}
+{\footnotesize\ttfamily \textbf{ Bools} is\+Front(\textbf{ SIZE\+\_\+\+LOOKUP}) (\begin{DoxyParamCaption}\item[{\textbf{ SIZE\+\_\+\+LOOKUP}}]{ }\end{DoxyParamCaption})}
+
+\mbox{\label{_detectors_8hpp_a5da74af4e038f2a435565e2e93a6831e}} 
+\index{Detectors.hpp@{Detectors.hpp}!isGe@{isGe}}
+\index{isGe@{isGe}!Detectors.hpp@{Detectors.hpp}}
+\doxysubsubsection{isGe}
+{\footnotesize\ttfamily \textbf{ Bools} is\+Ge(\textbf{ SIZE\+\_\+\+LOOKUP}) (\begin{DoxyParamCaption}\item[{\textbf{ SIZE\+\_\+\+LOOKUP}}]{ }\end{DoxyParamCaption})}
+
+\mbox{\label{_detectors_8hpp_ac1f4e8d98df1dbbcb0c6ccf4a7b9a538}} 
+\index{Detectors.hpp@{Detectors.hpp}!isLaBr3@{isLaBr3}}
+\index{isLaBr3@{isLaBr3}!Detectors.hpp@{Detectors.hpp}}
+\doxysubsubsection{isLaBr3}
+{\footnotesize\ttfamily \textbf{ Bools} is\+La\+Br3(\textbf{ SIZE\+\_\+\+LOOKUP}) (\begin{DoxyParamCaption}\item[{\textbf{ SIZE\+\_\+\+LOOKUP}}]{ }\end{DoxyParamCaption})}
+
+\mbox{\label{_detectors_8hpp_a82c5910e3b4f178c276c8b888c5ac162}} 
+\index{Detectors.hpp@{Detectors.hpp}!isParis@{isParis}}
+\index{isParis@{isParis}!Detectors.hpp@{Detectors.hpp}}
+\doxysubsubsection{isParis}
+{\footnotesize\ttfamily \textbf{ Bools} is\+Paris(\textbf{ SIZE\+\_\+\+LOOKUP}) (\begin{DoxyParamCaption}\item[{\textbf{ SIZE\+\_\+\+LOOKUP}}]{ }\end{DoxyParamCaption})}
+
+\mbox{\label{_detectors_8hpp_ae7667a7434fc704d9dcaf6d5e6bd8e39}} 
+\index{Detectors.hpp@{Detectors.hpp}!isRF@{isRF}}
+\index{isRF@{isRF}!Detectors.hpp@{Detectors.hpp}}
+\doxysubsubsection{isRF}
+{\footnotesize\ttfamily \textbf{ Bools} is\+RF(\textbf{ SIZE\+\_\+\+LOOKUP}) (\begin{DoxyParamCaption}\item[{\textbf{ SIZE\+\_\+\+LOOKUP}}]{ }\end{DoxyParamCaption})}
+
+\mbox{\label{_detectors_8hpp_a256ea354de5d7f81049eaf74528626b7}} 
+\index{Detectors.hpp@{Detectors.hpp}!isRing@{isRing}}
+\index{isRing@{isRing}!Detectors.hpp@{Detectors.hpp}}
+\doxysubsubsection{isRing}
+{\footnotesize\ttfamily \textbf{ Bools} is\+Ring(\textbf{ SIZE\+\_\+\+LOOKUP}) (\begin{DoxyParamCaption}\item[{\textbf{ SIZE\+\_\+\+LOOKUP}}]{ }\end{DoxyParamCaption})}
+
+\mbox{\label{_detectors_8hpp_a401c5e7f43ae309c8fcd39c977104f3e}} 
+\index{Detectors.hpp@{Detectors.hpp}!isS1@{isS1}}
+\index{isS1@{isS1}!Detectors.hpp@{Detectors.hpp}}
+\doxysubsubsection{isS1}
+{\footnotesize\ttfamily \textbf{ Bools} is\+S1(\textbf{ SIZE\+\_\+\+LOOKUP}) (\begin{DoxyParamCaption}\item[{\textbf{ SIZE\+\_\+\+LOOKUP}}]{ }\end{DoxyParamCaption})}
+
+\mbox{\label{_detectors_8hpp_a2d41f8a0901b30f33b83df128512fc4f}} 
+\index{Detectors.hpp@{Detectors.hpp}!isS2@{isS2}}
+\index{isS2@{isS2}!Detectors.hpp@{Detectors.hpp}}
+\doxysubsubsection{isS2}
+{\footnotesize\ttfamily \textbf{ Bools} is\+S2(\textbf{ SIZE\+\_\+\+LOOKUP}) (\begin{DoxyParamCaption}\item[{\textbf{ SIZE\+\_\+\+LOOKUP}}]{ }\end{DoxyParamCaption})}
+
+\mbox{\label{_detectors_8hpp_adee12970e5a76c075d5b98b5c098b22a}} 
+\index{Detectors.hpp@{Detectors.hpp}!isSector@{isSector}}
+\index{isSector@{isSector}!Detectors.hpp@{Detectors.hpp}}
+\doxysubsubsection{isSector}
+{\footnotesize\ttfamily \textbf{ Bools} is\+Sector(\textbf{ SIZE\+\_\+\+LOOKUP}) (\begin{DoxyParamCaption}\item[{\textbf{ SIZE\+\_\+\+LOOKUP}}]{ }\end{DoxyParamCaption})}
+

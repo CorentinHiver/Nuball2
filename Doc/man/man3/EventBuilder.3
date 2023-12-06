@@ -1,0 +1,205 @@
+.TH "EventBuilder" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+EventBuilder \- NOT UP TO DATE !! LATEST STABLE IS EventBuilder_136\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <EventBuilder\&.hpp>\fP
+.PP
+Inherits \fBBuilder\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "Bool_t \fBbuild\fP (\fBHit\fP const &_hit)"
+.br
+.RI "Add Hits to the event\&. Return true when an event is complete, i\&.e\&. current hit is outside of time window\&. "
+.ti -1c
+.RI "virtual bool \fBcoincidence\fP (\fBHit\fP const &hit)=0"
+.br
+.ti -1c
+.RI "\fBEventBuilder\fP ()"
+.br
+.ti -1c
+.RI "\fBEventBuilder\fP (\fBEvent\fP *_event)"
+.br
+.ti -1c
+.RI "\fBEventBuilder\fP (\fBEvent\fP *_event, \fBRF_Manager\fP *_rf)"
+.br
+.ti -1c
+.RI "\fBTime\fP const  & \fBget_RF_ref_time\fP () const"
+.br
+.ti -1c
+.RI "\fBEvent\fP * \fBgetEvent\fP () const"
+.br
+.ti -1c
+.RI "\fBHit\fP const  & \fBgetLastHit\fP () const"
+.br
+.ti -1c
+.RI "ULong64_t const  & \fBgetShift\fP () const"
+.br
+.ti -1c
+.RI "bool \fBisBuilding\fP () const"
+.br
+.ti -1c
+.RI "bool \fBisBuilt\fP () const"
+.br
+.ti -1c
+.RI "bool \fBisSingle\fP () const"
+.br
+.ti -1c
+.RI "void \fBreset\fP ()"
+.br
+.ti -1c
+.RI "void \fBset_first_hit\fP (\fBHit\fP const &hit)"
+.br
+.ti -1c
+.RI "void \fBset_last_hit\fP (\fBHit\fP const &hit)"
+.br
+.ti -1c
+.RI "void \fBsetFirstRF\fP (\fBHit\fP const &hit)"
+.br
+.ti -1c
+.RI "void \fBsetRF\fP (\fBRF_Manager\fP *rf)"
+.br
+.ti -1c
+.RI "void \fBsetRFTime\fP (\fBTime\fP const &_RF_ref_time)"
+.br
+.ti -1c
+.RI "void \fBsetShift\fP (Long64_t const &shift)"
+.br
+.ti -1c
+.RI "void \fBsetShift_ns\fP (Long64_t const &shift)"
+.br
+.ti -1c
+.RI "\fBsize_t\fP \fBsize\fP () const"
+.br
+.ti -1c
+.RI "\fBuchar\fP const  & \fBstatus\fP () const"
+.br
+.in -1c
+.SS "Static Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "static void \fBkeepSingles\fP (bool const &b=true)"
+.br
+.in -1c
+.SS "Protected Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBEvent\fP * \fBm_event\fP = nullptr"
+.br
+.ti -1c
+.RI "\fBHit\fP \fBm_last_hit\fP"
+.br
+.ti -1c
+.RI "\fBuchar\fP \fBm_status\fP = 0"
+.br
+.in -1c
+.SS "Static Protected Attributes"
+
+.in +1c
+.ti -1c
+.RI "static bool \fBm_keep_singles\fP = false"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBRF_Manager\fP * \fBm_rf\fP = nullptr"
+.br
+.ti -1c
+.RI "\fBTime\fP \fBm_shift\fP = 0"
+.br
+.ti -1c
+.RI "\fBTime\fP \fBRF_ref_time\fP = 0"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+NOT UP TO DATE !! LATEST STABLE IS EventBuilder_136\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "EventBuilder::EventBuilder ()\fC [inline]\fP, \fC [explicit]\fP"
+
+.SS "EventBuilder::EventBuilder (\fBEvent\fP * _event)\fC [inline]\fP, \fC [explicit]\fP"
+
+.SS "EventBuilder::EventBuilder (\fBEvent\fP * _event, \fBRF_Manager\fP * _rf)\fC [inline]\fP, \fC [explicit]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "Bool_t EventBuilder::build (\fBHit\fP const & _hit)\fC [virtual]\fP"
+
+.PP
+Add Hits to the event\&. Return true when an event is complete, i\&.e\&. current hit is outside of time window\&. 3 status : 0: single | 1: begin of coincidence | 2: coincidence complete 
+.PP
+Implements \fBBuilder\fP\&.
+.SS "virtual bool Builder::coincidence (\fBHit\fP const & hit)\fC [pure virtual]\fP, \fC [inherited]\fP"
+
+.PP
+Implemented in \fBCoincBuilder\fP\&.
+.SS "\fBTime\fP const& EventBuilder::get_RF_ref_time () const\fC [inline]\fP"
+
+.SS "\fBEvent\fP* Builder::getEvent () const\fC [inline]\fP, \fC [inherited]\fP"
+
+.SS "\fBHit\fP const& Builder::getLastHit () const\fC [inline]\fP, \fC [inherited]\fP"
+
+.SS "ULong64_t const& EventBuilder::getShift () const\fC [inline]\fP"
+
+.SS "bool Builder::isBuilding () const\fC [inline]\fP, \fC [inherited]\fP"
+
+.SS "bool Builder::isBuilt () const\fC [inline]\fP, \fC [inherited]\fP"
+
+.SS "bool Builder::isSingle () const\fC [inline]\fP, \fC [inherited]\fP"
+
+.SS "static void Builder::keepSingles (bool const & b = \fCtrue\fP)\fC [inline]\fP, \fC [static]\fP, \fC [inherited]\fP"
+
+.SS "void EventBuilder::reset ()\fC [virtual]\fP"
+
+.PP
+Reimplemented from \fBBuilder\fP\&.
+.SS "void Builder::set_first_hit (\fBHit\fP const & hit)\fC [inline]\fP, \fC [inherited]\fP"
+
+.SS "void EventBuilder::set_last_hit (\fBHit\fP const & hit)\fC [inline]\fP"
+
+.SS "void EventBuilder::setFirstRF (\fBHit\fP const & hit)"
+
+.SS "void EventBuilder::setRF (\fBRF_Manager\fP * rf)\fC [inline]\fP"
+
+.SS "void EventBuilder::setRFTime (\fBTime\fP const & _RF_ref_time)\fC [inline]\fP"
+
+.SS "void EventBuilder::setShift (Long64_t const & shift)\fC [inline]\fP"
+
+.SS "void EventBuilder::setShift_ns (Long64_t const & shift)\fC [inline]\fP"
+
+.SS "\fBsize_t\fP Builder::size () const\fC [inline]\fP, \fC [inherited]\fP"
+
+.SS "\fBuchar\fP const& Builder::status () const\fC [inline]\fP, \fC [inherited]\fP"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "\fBEvent\fP* Builder::m_event = nullptr\fC [protected]\fP, \fC [inherited]\fP"
+
+.SS "bool Builder::m_keep_singles = false\fC [static]\fP, \fC [protected]\fP, \fC [inherited]\fP"
+
+.SS "\fBHit\fP Builder::m_last_hit\fC [protected]\fP, \fC [inherited]\fP"
+
+.SS "\fBRF_Manager\fP* EventBuilder::m_rf = nullptr\fC [private]\fP"
+
+.SS "\fBTime\fP EventBuilder::m_shift = 0\fC [private]\fP"
+
+.SS "\fBuchar\fP Builder::m_status = 0\fC [protected]\fP, \fC [inherited]\fP"
+
+.SS "\fBTime\fP EventBuilder::RF_ref_time = 0\fC [private]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Nuball2 from the source code\&.

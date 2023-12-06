@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__r_f___manager_8hpp" xml:lang="en-US">
+<title>lib/Classes/RF_Manager.hpp File Reference</title>
+<indexterm><primary>lib/Classes/RF_Manager.hpp</primary></indexterm>
+<programlisting>#include &quot;../libCo.hpp&quot;
+#include &quot;../libRoot.hpp&quot;
+#include &quot;Event.hpp&quot;
+</programlisting>Include dependency graph for RF_Manager.hpp:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="_r_f___manager_8hpp__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+This graph shows which files directly or indirectly include this file:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="_r_f___manager_8hpp__dep__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>class <link linkend="_class_r_f___extractor">RF_Extractor</link></para>
+</listitem>
+            <listitem><para>class <link linkend="_class_r_f___manager">RF_Manager</link></para>
+
+<para>Class used to manage the RF. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>std::ostream &amp; <link linkend="__r_f___manager_8hpp_1afedbf86a972cc2acc6e415596a2cb496">operator&lt;&lt;</link> (std::ostream &amp;cout, <link linkend="_class_r_f___manager">RF_Manager</link> const &amp;rf)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="__r_f___manager_8hpp_1afedbf86a972cc2acc6e415596a2cb496"/>    <section>
+    <title>operator&lt;&lt;()</title>
+<indexterm><primary>operator&lt;&lt;</primary><secondary>RF_Manager.hpp</secondary></indexterm>
+<indexterm><primary>RF_Manager.hpp</primary><secondary>operator&lt;&lt;</secondary></indexterm>
+<para><computeroutput>std::ostream&amp; operator&lt;&lt; (std::ostream &amp; cout, <link linkend="_class_r_f___manager">RF_Manager</link> const &amp; rf)</computeroutput></para></section>
+</section>
+</section>

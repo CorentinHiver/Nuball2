@@ -1,0 +1,1364 @@
+\doxysection{Timeshifts Class Reference}
+\label{class_timeshifts}\index{Timeshifts@{Timeshifts}}
+
+
+{\ttfamily \#include $<$Timeshifts.\+hpp$>$}
+
+
+
+Collaboration diagram for Timeshifts\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_timeshifts__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \textbf{ calculate} (std\+::string const \&folder, int const \&nb\+\_\+files=-\/1)
+\item 
+void \textbf{ check\+For\+Preprompt} (bool const \&check=true)
+\item 
+bool \textbf{ Check\+Parameters} ()
+\item 
+void \textbf{ d\+T\+\_\+with\+\_\+raising\+\_\+edge} (\textbf{ d\+Type} const \&type)
+\item 
+void \textbf{ d\+T\+\_\+with\+\_\+\+RF} (\textbf{ d\+Type} const \&type)
+\item 
+std\+::vector$<$ \textbf{ Time} $>$ const  \& \textbf{ get} () const
+\item 
+\textbf{ Time} const  \& \textbf{ get} (int const \&i) const
+\item 
+bool \textbf{ load} (std\+::string const \&filename)
+\begin{DoxyCompactList}\small\item\em Use this method to load timeshifts from a .dT file. \end{DoxyCompactList}\item 
+\textbf{ operator bool} () const \&
+\item 
+\textbf{ Timeshifts} \& \textbf{ operator=} (\textbf{ Timeshifts} const \&timeshifts)
+\item 
+\textbf{ Time} const  \& \textbf{ operator[$\,$]} (int const \&i) const
+\item 
+void \textbf{ rebin} (std\+::string const \&detector, \textbf{ Time\+\_\+ns} const \&bin\+\_\+size\+\_\+ns)
+\item 
+void \textbf{ set\+Emin\+ADC} (\textbf{ ADC} const \&Emin\+ADC)
+\item 
+void \textbf{ set\+Max\+Hits} (\textbf{ ulong} const \&max\+\_\+hits=-\/1)
+\begin{DoxyCompactList}\small\item\em Set maximum hits to be read in a file. \end{DoxyCompactList}\item 
+void \textbf{ set\+Mult} (int const \&min\+\_\+mult, int const \&max\+\_\+mult)
+\begin{DoxyCompactList}\small\item\em Set the multiplicity gate for the events used for coincidence timeshift calculation. \end{DoxyCompactList}\item 
+void \textbf{ set\+Out\+Data} (std\+::string const \&outdata)
+\begin{DoxyCompactList}\small\item\em Use set\+Name instead. Set output file name of the timeshifts data. \end{DoxyCompactList}\item 
+void \textbf{ set\+Out\+Dir} (std\+::string const \&out\+Dir)
+\begin{DoxyCompactList}\small\item\em Set the output directory (full path);. \end{DoxyCompactList}\item 
+void \textbf{ set\+Out\+Name} (std\+::string const \&outdata)
+\begin{DoxyCompactList}\small\item\em Set output file name of the timeshifts data and root file. \end{DoxyCompactList}\item 
+void \textbf{ set\+Out\+Root} (std\+::string const \&outroot)
+\begin{DoxyCompactList}\small\item\em Use set\+Name instead. Set output root file containing the raw and corrected time spectra. \end{DoxyCompactList}\item 
+bool \textbf{ set\+Parameters} (std\+::string const \&parameter)
+\begin{DoxyCompactList}\small\item\em Use this method to setup the parameters from a string in order to calculate the timeshifts. \end{DoxyCompactList}\item 
+void \textbf{ set\+RFOffset} (\textbf{ Time} const \&offset\+\_\+ps)
+\begin{DoxyCompactList}\small\item\em Set RF offset (synonymous to \doxyref{Timeshifts\+::set\+RFShift}{p.}{class_timeshifts_af6cb9cffa9322eabb7fe712c6e6ae798}) \end{DoxyCompactList}\item 
+void \textbf{ set\+RFOffset\+\_\+ns} (\textbf{ Time\+\_\+ns} const \&offset\+\_\+ns)
+\begin{DoxyCompactList}\small\item\em Set RF offset (synonymous to \doxyref{Timeshifts\+::set\+RFShift}{p.}{class_timeshifts_af6cb9cffa9322eabb7fe712c6e6ae798}) \end{DoxyCompactList}\item 
+void \textbf{ set\+RFShift} (\textbf{ Time} const \&shift)
+\begin{DoxyCompactList}\small\item\em Set RF shift (synonymous to \doxyref{Timeshifts\+::set\+RFOffset}{p.}{class_timeshifts_ac2c3e8e47598e28d49932a3720a6fd58}) \end{DoxyCompactList}\item 
+bool \textbf{ set\+Time\+Reference} (\textbf{ Label} const \&time\+Ref\+\_\+label)
+\begin{DoxyCompactList}\small\item\em Set the time reference label. \end{DoxyCompactList}\item 
+bool \textbf{ set\+Time\+Reference} (std\+::string const \&time\+Ref\+\_\+name)
+\begin{DoxyCompactList}\small\item\em Set the time reference. \end{DoxyCompactList}\item 
+bool \textbf{ set\+Time\+Window\+\_\+ns} (std\+::string const \&timewindow\+\_\+ns\+\_\+str)
+\begin{DoxyCompactList}\small\item\em Set the time window in ns. \end{DoxyCompactList}\item 
+bool \textbf{ set\+Time\+Window\+\_\+ns} (\textbf{ Time\+\_\+ns} const \&timewindow\+\_\+ns)
+\begin{DoxyCompactList}\small\item\em Setup the time window for the coincidence in ns. \end{DoxyCompactList}\item 
+TH1F $\ast$ \textbf{ shift\+Time\+Spectra} (TH1F $\ast$histo, \textbf{ Label} const \&label, std\+::string const \&unit=\char`\"{}ps\char`\"{})
+\item 
+\textbf{ Timeshifts} ()
+\item 
+\textbf{ Timeshifts} (const char $\ast$filename)
+\begin{DoxyCompactList}\small\item\em Call the \doxyref{Timeshifts\+::load()}{p.}{class_timeshifts_a28163efe8d487669cf50d5f6e1060d71} method to load the timeshifts from a .dT file. \end{DoxyCompactList}\item 
+\textbf{ Timeshifts} (std\+::string const \&filename)
+\begin{DoxyCompactList}\small\item\em Call the \doxyref{Timeshifts\+::load()}{p.}{class_timeshifts_a28163efe8d487669cf50d5f6e1060d71} method to load the timeshifts from a .dT file. \end{DoxyCompactList}\item 
+\textbf{ Timeshifts} (std\+::string const \&path, std\+::string const \&name)
+\begin{DoxyCompactList}\small\item\em For faster to root conversion only \+: \doxyref{Timeshifts\+::load()}{p.}{class_timeshifts_a28163efe8d487669cf50d5f6e1060d71} loads the timeshifts from a .dT file. \end{DoxyCompactList}\item 
+\textbf{ Timeshifts} (\textbf{ Timeshifts} const \&timeshifts)
+\begin{DoxyCompactList}\small\item\em Copy constructor. \end{DoxyCompactList}\item 
+void \textbf{ verbose} (bool const \&\+\_\+verbose=true)
+\begin{DoxyCompactList}\small\item\em Set verbosity level. \end{DoxyCompactList}\item 
+bool const  \& \textbf{ verification} (bool const \&verif=true)
+\begin{DoxyCompactList}\small\item\em Used to create. \end{DoxyCompactList}\item 
+bool \textbf{ verify} (std\+::string const \&folder, int const \&nb\+\_\+files=-\/1)
+\begin{DoxyCompactList}\small\item\em To verify an already calculated timeshift .dT data file. \end{DoxyCompactList}\item 
+void \textbf{ write} (std\+::string const \&name)
+\begin{DoxyCompactList}\small\item\em To write down the histograms and the data. \end{DoxyCompactList}\item 
+void \textbf{ write\+Data} (std\+::string const \&name)
+\begin{DoxyCompactList}\small\item\em To write down the data. \end{DoxyCompactList}\item 
+void \textbf{ write\+Root} (std\+::string const \&name)
+\begin{DoxyCompactList}\small\item\em To write down the histograms. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ bool $>$ \textbf{ m\+\_\+edge\+\_\+preferred\+\_\+label}
+\item 
+std\+::vector$<$ \textbf{ uchar} $>$ \textbf{ m\+\_\+nb\+\_\+shifts\+\_\+\+RF\+\_\+peak}
+\item 
+std\+::vector$<$ bool $>$ \textbf{ m\+\_\+\+RF\+\_\+preferred\+\_\+label}
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \textbf{ analyse} ()
+\item 
+void \textbf{ Fill} (\textbf{ Event} const \&event, \textbf{ RF\+\_\+\+Manager} \&rf)
+\item 
+bool \textbf{ Initialize} (bool const \&initialize\+Raw=false, bool const \&initialize\+Corrected=false)
+\item 
+bool \textbf{ Initialize\+Corrected} ()
+\item 
+bool \textbf{ Initialize\+Raw} ()
+\item 
+void \textbf{ treat\+Faster\+File} (std\+::string const \&filename)
+\item 
+void \textbf{ treat\+File} (std\+::string const \&filename)
+\item 
+void \textbf{ treat\+Folder} (std\+::string const \&folder, int const \&nb\+\_\+files=-\/1)
+\item 
+void \textbf{ treat\+Root\+File} (std\+::string const \&filename)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \textbf{ treat\+Files\+MT} (\textbf{ Timeshifts} \&ts, \textbf{ MTList} \&files\+\_\+\+MT)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::map$<$ \textbf{ d\+Type}, \textbf{ Time\+\_\+ns} $>$ \textbf{ m\+\_\+bins\+\_\+per\+\_\+ns}
+\item 
+bool \textbf{ m\+\_\+check\+\_\+preprompt} = false
+\item 
+bool \textbf{ m\+\_\+corrected} = false
+\item 
+std\+::map$<$ \textbf{ d\+Type}, bool $>$ \textbf{ m\+\_\+edge\+\_\+preferred}
+\item 
+\textbf{ ADC} \textbf{ m\+\_\+\+Emin\+\_\+\+ADC} = 0.
+\item 
+\textbf{ MTTHist}$<$ TH1F $>$ \textbf{ m\+\_\+\+Energy\+Ref}
+\item 
+\textbf{ MTTHist}$<$ TH2F $>$ \textbf{ m\+\_\+\+Energy\+Ref\+\_\+bidim}
+\item 
+bool \textbf{ m\+\_\+energy\+Spectra\+Initialized} = false
+\item 
+std\+::string \textbf{ m\+\_\+filename} = \char`\"{}\char`\"{}
+\item 
+\textbf{ Files\+Manager} \textbf{ m\+\_\+files}
+\item 
+bool \textbf{ m\+\_\+initialized} = false
+\item 
+bool \textbf{ m\+\_\+initialized\+Corrected} = false
+\item 
+bool \textbf{ m\+\_\+initialized\+Raw} = false
+\item 
+\textbf{ ulong} \textbf{ m\+\_\+max\+\_\+hits} = -\/1
+\item 
+int \textbf{ m\+\_\+max\+\_\+mult} = 2
+\item 
+int \textbf{ m\+\_\+min\+\_\+mult} = 2
+\item 
+int \textbf{ m\+\_\+nb\+\_\+detectors} = 0
+\item 
+bool \textbf{ m\+\_\+ok} = false
+\item 
+std\+::string \textbf{ m\+\_\+out\+Data} = \char`\"{}\char`\"{}
+\item 
+std\+::string \textbf{ m\+\_\+out\+Dir} = \char`\"{}\char`\"{}
+\item 
+\textbf{ Path} \textbf{ m\+\_\+out\+Path}
+\item 
+std\+::string \textbf{ m\+\_\+out\+Root} = \char`\"{}timeshifts.\+root\char`\"{}
+\item 
+std\+::map$<$ \textbf{ d\+Type}, bool $>$ \textbf{ m\+\_\+\+RF\+\_\+preferred}
+\item 
+\textbf{ Label} \textbf{ m\+\_\+time\+\_\+ref\+\_\+label} = 252
+\item 
+std\+::string \textbf{ m\+\_\+time\+\_\+ref\+\_\+name} = \char`\"{}R1\+A9\+\_\+\+FATIMA\+\_\+\+La\+Br3\char`\"{}
+\item 
+\textbf{ Vector\+\_\+\+MTTHist}$<$ TH1F $>$ \textbf{ m\+\_\+time\+\_\+spectra}
+\item 
+\textbf{ Vector\+\_\+\+MTTHist}$<$ TH1F $>$ \textbf{ m\+\_\+time\+\_\+spectra\+\_\+corrected}
+\item 
+\textbf{ MTTHist}$<$ TH2F $>$ \textbf{ m\+\_\+time\+\_\+spectra\+\_\+corrected\+\_\+bidim}
+\item 
+std\+::vector$<$ \textbf{ Time} $>$ \textbf{ m\+\_\+timeshifts}
+\item 
+\textbf{ Time} \textbf{ m\+\_\+timewindow} = \textbf{ Time\+\_\+cast}(\textbf{ m\+\_\+timewindow\+\_\+ns}$\ast$1000)
+\item 
+\textbf{ Time\+\_\+ns} \textbf{ m\+\_\+timewindow\+\_\+ns} = \textbf{ Time\+\_\+ns\+\_\+cast}(1500)
+\item 
+std\+::string \textbf{ m\+\_\+ts\+\_\+outdir} = \char`\"{}Timeshifts/\char`\"{}
+\item 
+bool \textbf{ m\+\_\+verbose} = false
+\item 
+bool \textbf{ m\+\_\+verification} = true
+\item 
+std\+::vector$<$ \textbf{ Timestamp} $>$ \textbf{ mt\+\_\+ref\+\_\+time}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\label{class_timeshifts_ad85f4cabf723d28843393cda47abc2b3}} 
+\index{Timeshifts@{Timeshifts}!Timeshifts@{Timeshifts}}
+\index{Timeshifts@{Timeshifts}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{Timeshifts()\hspace{0.1cm}{\footnotesize\ttfamily [1/5]}}
+{\footnotesize\ttfamily Timeshifts\+::\+Timeshifts (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_timeshifts_ae47e90a384a5dd891bdc5eed10450971}} 
+\index{Timeshifts@{Timeshifts}!Timeshifts@{Timeshifts}}
+\index{Timeshifts@{Timeshifts}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{Timeshifts()\hspace{0.1cm}{\footnotesize\ttfamily [2/5]}}
+{\footnotesize\ttfamily Timeshifts\+::\+Timeshifts (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{filename }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Call the \doxyref{Timeshifts\+::load()}{p.}{class_timeshifts_a28163efe8d487669cf50d5f6e1060d71} method to load the timeshifts from a .dT file. 
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_timeshifts_ae47e90a384a5dd891bdc5eed10450971_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_timeshifts_a1b9c3b0d8ef43a69bd6e7ce1bd4de5b4}} 
+\index{Timeshifts@{Timeshifts}!Timeshifts@{Timeshifts}}
+\index{Timeshifts@{Timeshifts}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{Timeshifts()\hspace{0.1cm}{\footnotesize\ttfamily [3/5]}}
+{\footnotesize\ttfamily Timeshifts\+::\+Timeshifts (\begin{DoxyParamCaption}\item[{const char $\ast$}]{filename }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Call the \doxyref{Timeshifts\+::load()}{p.}{class_timeshifts_a28163efe8d487669cf50d5f6e1060d71} method to load the timeshifts from a .dT file. 
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_timeshifts_a1b9c3b0d8ef43a69bd6e7ce1bd4de5b4_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_timeshifts_a8b7481d4a5405315c9988812a01428ef}} 
+\index{Timeshifts@{Timeshifts}!Timeshifts@{Timeshifts}}
+\index{Timeshifts@{Timeshifts}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{Timeshifts()\hspace{0.1cm}{\footnotesize\ttfamily [4/5]}}
+{\footnotesize\ttfamily Timeshifts\+::\+Timeshifts (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{path,  }\item[{std\+::string const \&}]{name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+For faster to root conversion only \+: \doxyref{Timeshifts\+::load()}{p.}{class_timeshifts_a28163efe8d487669cf50d5f6e1060d71} loads the timeshifts from a .dT file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & The path of the out root directory (/path/to/run\+\_\+name) \\
+\hline
+{\em name} & The name of the .dT file without the extension (e.\+g. run\+\_\+10)\\
+\hline
+\end{DoxyParams}
+Will read a file in /path/\+Timeshitfs/name.dT Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_timeshifts_a8b7481d4a5405315c9988812a01428ef_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_timeshifts_a4c01a876efaee62fa348581470509736}} 
+\index{Timeshifts@{Timeshifts}!Timeshifts@{Timeshifts}}
+\index{Timeshifts@{Timeshifts}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{Timeshifts()\hspace{0.1cm}{\footnotesize\ttfamily [5/5]}}
+{\footnotesize\ttfamily Timeshifts\+::\+Timeshifts (\begin{DoxyParamCaption}\item[{\textbf{ Timeshifts} const \&}]{timeshifts }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Copy constructor. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\label{class_timeshifts_a608d9443a15dd669920e10dd8baee23a}} 
+\index{Timeshifts@{Timeshifts}!analyse@{analyse}}
+\index{analyse@{analyse}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{analyse()}
+{\footnotesize\ttfamily void Timeshifts\+::analyse (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_timeshifts_a608d9443a15dd669920e10dd8baee23a_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=346pt]{class_timeshifts_a608d9443a15dd669920e10dd8baee23a_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_timeshifts_a3d3ab1b3498ca45832d8a8735f16e188}} 
+\index{Timeshifts@{Timeshifts}!calculate@{calculate}}
+\index{calculate@{calculate}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{calculate()}
+{\footnotesize\ttfamily bool Timeshifts\+::calculate (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{folder,  }\item[{int const \&}]{nb\+\_\+files = {\ttfamily -\/1} }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_timeshifts_a3d3ab1b3498ca45832d8a8735f16e188_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_timeshifts_a648f30a01a30b44ef675666ddae79f80}} 
+\index{Timeshifts@{Timeshifts}!checkForPreprompt@{checkForPreprompt}}
+\index{checkForPreprompt@{checkForPreprompt}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{checkForPreprompt()}
+{\footnotesize\ttfamily void Timeshifts\+::check\+For\+Preprompt (\begin{DoxyParamCaption}\item[{bool const \&}]{check = {\ttfamily true} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em check} & default true. \\
+\hline
+\end{DoxyParams}
+\mbox{\label{class_timeshifts_a715283a5be42b86ca70b4e468ccb2931}} 
+\index{Timeshifts@{Timeshifts}!CheckParameters@{CheckParameters}}
+\index{CheckParameters@{CheckParameters}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{CheckParameters()}
+{\footnotesize\ttfamily bool Timeshifts\+::\+Check\+Parameters (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_timeshifts_a715283a5be42b86ca70b4e468ccb2931_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_timeshifts_a715283a5be42b86ca70b4e468ccb2931_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_timeshifts_aea8a9a1e849fca3bf3712385bd2155c3}} 
+\index{Timeshifts@{Timeshifts}!dT\_with\_raising\_edge@{dT\_with\_raising\_edge}}
+\index{dT\_with\_raising\_edge@{dT\_with\_raising\_edge}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{dT\_with\_raising\_edge()}
+{\footnotesize\ttfamily void Timeshifts\+::d\+T\+\_\+with\+\_\+raising\+\_\+edge (\begin{DoxyParamCaption}\item[{\textbf{ d\+Type} const \&}]{type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_timeshifts_a2b3ce3e274b28b65f01e336efe99670e}} 
+\index{Timeshifts@{Timeshifts}!dT\_with\_RF@{dT\_with\_RF}}
+\index{dT\_with\_RF@{dT\_with\_RF}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{dT\_with\_RF()}
+{\footnotesize\ttfamily void Timeshifts\+::d\+T\+\_\+with\+\_\+\+RF (\begin{DoxyParamCaption}\item[{\textbf{ d\+Type} const \&}]{type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_timeshifts_a5c037c5bb4b409c3040982c451c6733d}} 
+\index{Timeshifts@{Timeshifts}!Fill@{Fill}}
+\index{Fill@{Fill}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{Fill()}
+{\footnotesize\ttfamily void Timeshifts\+::\+Fill (\begin{DoxyParamCaption}\item[{\textbf{ Event} const \&}]{event,  }\item[{\textbf{ RF\+\_\+\+Manager} \&}]{rf }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em event} & \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_timeshifts_a5c037c5bb4b409c3040982c451c6733d_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_timeshifts_a5c037c5bb4b409c3040982c451c6733d_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_timeshifts_a5161a4c343623e92b4e26522ad7ee16a}} 
+\index{Timeshifts@{Timeshifts}!get@{get}}
+\index{get@{get}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{get()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily std\+::vector$<$\textbf{ Time}$>$ const\& Timeshifts\+::get (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_timeshifts_a5161a4c343623e92b4e26522ad7ee16a_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_timeshifts_a2b9a1cbb93f280215432c4d323d1114d}} 
+\index{Timeshifts@{Timeshifts}!get@{get}}
+\index{get@{get}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{get()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \textbf{ Time} const\& Timeshifts\+::get (\begin{DoxyParamCaption}\item[{int const \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_timeshifts_a0753528955e94c43043cd7d68193f960}} 
+\index{Timeshifts@{Timeshifts}!Initialize@{Initialize}}
+\index{Initialize@{Initialize}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{Initialize()}
+{\footnotesize\ttfamily bool Timeshifts\+::\+Initialize (\begin{DoxyParamCaption}\item[{bool const \&}]{initialize\+Raw = {\ttfamily false},  }\item[{bool const \&}]{initialize\+Corrected = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_timeshifts_a0753528955e94c43043cd7d68193f960_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_timeshifts_a0753528955e94c43043cd7d68193f960_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_timeshifts_a05ac31a6c49360d94eeff184dc896c6b}} 
+\index{Timeshifts@{Timeshifts}!InitializeCorrected@{InitializeCorrected}}
+\index{InitializeCorrected@{InitializeCorrected}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{InitializeCorrected()}
+{\footnotesize\ttfamily bool Timeshifts\+::\+Initialize\+Corrected (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_timeshifts_a05ac31a6c49360d94eeff184dc896c6b_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_timeshifts_a05ac31a6c49360d94eeff184dc896c6b_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_timeshifts_a40254b2aa53028b1b5c941ee1cb3833d}} 
+\index{Timeshifts@{Timeshifts}!InitializeRaw@{InitializeRaw}}
+\index{InitializeRaw@{InitializeRaw}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{InitializeRaw()}
+{\footnotesize\ttfamily bool Timeshifts\+::\+Initialize\+Raw (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_timeshifts_a40254b2aa53028b1b5c941ee1cb3833d_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_timeshifts_a40254b2aa53028b1b5c941ee1cb3833d_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_timeshifts_a28163efe8d487669cf50d5f6e1060d71}} 
+\index{Timeshifts@{Timeshifts}!load@{load}}
+\index{load@{load}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{load()}
+{\footnotesize\ttfamily bool Timeshifts\+::load (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{filename }\end{DoxyParamCaption})}
+
+
+
+Use this method to load timeshifts from a .dT file. 
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_timeshifts_a28163efe8d487669cf50d5f6e1060d71_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_timeshifts_a28163efe8d487669cf50d5f6e1060d71_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_timeshifts_a60689326cebd96ae4996522530ffefab}} 
+\index{Timeshifts@{Timeshifts}!operator bool@{operator bool}}
+\index{operator bool@{operator bool}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{operator bool()}
+{\footnotesize\ttfamily Timeshifts\+::operator bool (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const \&\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_timeshifts_a38aac2aef62c8999bb5da97e397ea64c}} 
+\index{Timeshifts@{Timeshifts}!operator=@{operator=}}
+\index{operator=@{operator=}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{operator=()}
+{\footnotesize\ttfamily \textbf{ Timeshifts}\& Timeshifts\+::operator= (\begin{DoxyParamCaption}\item[{\textbf{ Timeshifts} const \&}]{timeshifts }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_timeshifts_a942984c1af943a864baf8744babb2d15}} 
+\index{Timeshifts@{Timeshifts}!operator[]@{operator[]}}
+\index{operator[]@{operator[]}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{operator[]()}
+{\footnotesize\ttfamily \textbf{ Time} const\& Timeshifts\+::operator[$\,$] (\begin{DoxyParamCaption}\item[{int const \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_timeshifts_a0ab2718e733f94acda46780191295e3b}} 
+\index{Timeshifts@{Timeshifts}!rebin@{rebin}}
+\index{rebin@{rebin}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{rebin()}
+{\footnotesize\ttfamily void Timeshifts\+::rebin (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{detector,  }\item[{\textbf{ Time\+\_\+ns} const \&}]{bin\+\_\+size\+\_\+ns }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=287pt]{class_timeshifts_a0ab2718e733f94acda46780191295e3b_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_timeshifts_a82ddafa1c3f1d2c21c33749e70fab876}} 
+\index{Timeshifts@{Timeshifts}!setEminADC@{setEminADC}}
+\index{setEminADC@{setEminADC}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{setEminADC()}
+{\footnotesize\ttfamily void Timeshifts\+::set\+Emin\+ADC (\begin{DoxyParamCaption}\item[{\textbf{ ADC} const \&}]{Emin\+ADC }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_timeshifts_afa21cadd8eac07728df7f51d0dbaa908}} 
+\index{Timeshifts@{Timeshifts}!setMaxHits@{setMaxHits}}
+\index{setMaxHits@{setMaxHits}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{setMaxHits()}
+{\footnotesize\ttfamily void Timeshifts\+::set\+Max\+Hits (\begin{DoxyParamCaption}\item[{\textbf{ ulong} const \&}]{max\+\_\+hits = {\ttfamily -\/1} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set maximum hits to be read in a file. 
+
+\begin{DoxyNote}{Note}
+Use only if calculate timeshifts 
+\end{DoxyNote}
+\mbox{\label{class_timeshifts_a6206d2b698c88e80bc42bdf4b51fce14}} 
+\index{Timeshifts@{Timeshifts}!setMult@{setMult}}
+\index{setMult@{setMult}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{setMult()}
+{\footnotesize\ttfamily void Timeshifts\+::set\+Mult (\begin{DoxyParamCaption}\item[{int const \&}]{min\+\_\+mult,  }\item[{int const \&}]{max\+\_\+mult }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set the multiplicity gate for the events used for coincidence timeshift calculation. 
+
+\begin{DoxyNote}{Note}
+Mandatory only if calculate timeshifts
+\end{DoxyNote}
+min\+\_\+mult and max\+\_\+mult included.
+
+example \+: multiplicity = 2 \+: set\+Mult(2, 2)
+
+example \+: multiplicity = \{2;3;4\} \+: set\+Mult(2, 4)
+
+
+\begin{DoxyParams}{Parameters}
+{\em min\+\_\+mult} & default min\+\_\+mult = 2 \\
+\hline
+{\em max\+\_\+mult} & default max\+\_\+mult = 2 \\
+\hline
+\end{DoxyParams}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_timeshifts_a6206d2b698c88e80bc42bdf4b51fce14_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_timeshifts_ab877131bc1bd7394f55c3d46729ac9e6}} 
+\index{Timeshifts@{Timeshifts}!setOutData@{setOutData}}
+\index{setOutData@{setOutData}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{setOutData()}
+{\footnotesize\ttfamily void Timeshifts\+::set\+Out\+Data (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{outdata }\end{DoxyParamCaption})}
+
+
+
+Use set\+Name instead. Set output file name of the timeshifts data. 
+
+\begin{DoxyNote}{Note}
+Mandatory only if calculate timeshifts
+\end{DoxyNote}
+If not set, it is automatically named after the root file. Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=347pt]{class_timeshifts_ab877131bc1bd7394f55c3d46729ac9e6_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_timeshifts_ab877131bc1bd7394f55c3d46729ac9e6_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_timeshifts_a26367484f20648d7c3f5b3bbe5679ca8}} 
+\index{Timeshifts@{Timeshifts}!setOutDir@{setOutDir}}
+\index{setOutDir@{setOutDir}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{setOutDir()}
+{\footnotesize\ttfamily void Timeshifts\+::set\+Out\+Dir (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{out\+Dir }\end{DoxyParamCaption})}
+
+
+
+Set the output directory (full path);. 
+
+\begin{DoxyNote}{Note}
+Mandatory only if calculate timeshifts 
+\end{DoxyNote}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=346pt]{class_timeshifts_a26367484f20648d7c3f5b3bbe5679ca8_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_timeshifts_a26367484f20648d7c3f5b3bbe5679ca8_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_timeshifts_a082a54cde1bb45feca487f15ab4a14c7}} 
+\index{Timeshifts@{Timeshifts}!setOutName@{setOutName}}
+\index{setOutName@{setOutName}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{setOutName()}
+{\footnotesize\ttfamily void Timeshifts\+::set\+Out\+Name (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{outdata }\end{DoxyParamCaption})}
+
+
+
+Set output file name of the timeshifts data and root file. 
+
+\begin{DoxyNote}{Note}
+Mandatory only if calculate timeshifts 
+\end{DoxyNote}
+\mbox{\label{class_timeshifts_aa9f0f8cc1d96a5408f233449767ef0f6}} 
+\index{Timeshifts@{Timeshifts}!setOutRoot@{setOutRoot}}
+\index{setOutRoot@{setOutRoot}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{setOutRoot()}
+{\footnotesize\ttfamily void Timeshifts\+::set\+Out\+Root (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{outroot }\end{DoxyParamCaption})}
+
+
+
+Use set\+Name instead. Set output root file containing the raw and corrected time spectra. 
+
+\begin{DoxyNote}{Note}
+Mandatory only if calculate timeshifts 
+\end{DoxyNote}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=346pt]{class_timeshifts_aa9f0f8cc1d96a5408f233449767ef0f6_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_timeshifts_aa9f0f8cc1d96a5408f233449767ef0f6_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_timeshifts_acca1130b271301c5477d4b4a23ae4e5b}} 
+\index{Timeshifts@{Timeshifts}!setParameters@{setParameters}}
+\index{setParameters@{setParameters}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{setParameters()}
+{\footnotesize\ttfamily bool Timeshifts\+::set\+Parameters (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{parameter }\end{DoxyParamCaption})}
+
+
+
+Use this method to setup the parameters from a string in order to calculate the timeshifts. 
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_timeshifts_acca1130b271301c5477d4b4a23ae4e5b_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_timeshifts_ac2c3e8e47598e28d49932a3720a6fd58}} 
+\index{Timeshifts@{Timeshifts}!setRFOffset@{setRFOffset}}
+\index{setRFOffset@{setRFOffset}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{setRFOffset()}
+{\footnotesize\ttfamily void Timeshifts\+::set\+RFOffset (\begin{DoxyParamCaption}\item[{\textbf{ Time} const \&}]{offset\+\_\+ps }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set RF offset (synonymous to \doxyref{Timeshifts\+::set\+RFShift}{p.}{class_timeshifts_af6cb9cffa9322eabb7fe712c6e6ae798}) 
+
+\begin{DoxyNote}{Note}
+Use only if calculating timeshifts with RF 
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em offset} & default 50000 ps \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_timeshifts_ac2c3e8e47598e28d49932a3720a6fd58_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_timeshifts_a0faeccde5623d6808435414d020d1385}} 
+\index{Timeshifts@{Timeshifts}!setRFOffset\_ns@{setRFOffset\_ns}}
+\index{setRFOffset\_ns@{setRFOffset\_ns}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{setRFOffset\_ns()}
+{\footnotesize\ttfamily void Timeshifts\+::set\+RFOffset\+\_\+ns (\begin{DoxyParamCaption}\item[{\textbf{ Time\+\_\+ns} const \&}]{offset\+\_\+ns }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set RF offset (synonymous to \doxyref{Timeshifts\+::set\+RFShift}{p.}{class_timeshifts_af6cb9cffa9322eabb7fe712c6e6ae798}) 
+
+\begin{DoxyNote}{Note}
+Use only if calculating timeshifts with RF 
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em offset} & default 50 ns \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_timeshifts_a0faeccde5623d6808435414d020d1385_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_timeshifts_af6cb9cffa9322eabb7fe712c6e6ae798}} 
+\index{Timeshifts@{Timeshifts}!setRFShift@{setRFShift}}
+\index{setRFShift@{setRFShift}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{setRFShift()}
+{\footnotesize\ttfamily void Timeshifts\+::set\+RFShift (\begin{DoxyParamCaption}\item[{\textbf{ Time} const \&}]{shift }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set RF shift (synonymous to \doxyref{Timeshifts\+::set\+RFOffset}{p.}{class_timeshifts_ac2c3e8e47598e28d49932a3720a6fd58}) 
+
+\begin{DoxyNote}{Note}
+Use only if calculating timeshifts with RF 
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em shift} & default 50 ns \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_timeshifts_af6cb9cffa9322eabb7fe712c6e6ae798_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_timeshifts_aa7cb3acf23e80927fa85be636f55a99d}} 
+\index{Timeshifts@{Timeshifts}!setTimeReference@{setTimeReference}}
+\index{setTimeReference@{setTimeReference}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{setTimeReference()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily bool Timeshifts\+::set\+Time\+Reference (\begin{DoxyParamCaption}\item[{\textbf{ Label} const \&}]{time\+Ref\+\_\+label }\end{DoxyParamCaption})}
+
+
+
+Set the time reference label. 
+
+\begin{DoxyNote}{Note}
+Mandatory only if calculate timeshifts 
+\end{DoxyNote}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_timeshifts_aa7cb3acf23e80927fa85be636f55a99d_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_timeshifts_aa9f8bdcbeef03f8be872602e6c717d4d}} 
+\index{Timeshifts@{Timeshifts}!setTimeReference@{setTimeReference}}
+\index{setTimeReference@{setTimeReference}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{setTimeReference()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily bool Timeshifts\+::set\+Time\+Reference (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{time\+Ref\+\_\+name }\end{DoxyParamCaption})}
+
+
+
+Set the time reference. 
+
+\begin{DoxyNote}{Note}
+Mandatory only if calculate timeshifts
+\end{DoxyNote}
+Either the full name, or the label number Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_timeshifts_aa9f8bdcbeef03f8be872602e6c717d4d_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_timeshifts_af9da5337ea83092b9a6bb56cdb83f4cb}} 
+\index{Timeshifts@{Timeshifts}!setTimeWindow\_ns@{setTimeWindow\_ns}}
+\index{setTimeWindow\_ns@{setTimeWindow\_ns}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{setTimeWindow\_ns()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily bool Timeshifts\+::set\+Time\+Window\+\_\+ns (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{timewindow\+\_\+ns\+\_\+str }\end{DoxyParamCaption})}
+
+
+
+Set the time window in ns. 
+
+\begin{DoxyNote}{Note}
+It is better to keep it at its default value, otherwise you can miss some detectors
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em timewindow\+\_\+ns} & default value 1500.\+f ns \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_timeshifts_af9da5337ea83092b9a6bb56cdb83f4cb_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_timeshifts_a304c1076d703a78153cfe72d61b28425}} 
+\index{Timeshifts@{Timeshifts}!setTimeWindow\_ns@{setTimeWindow\_ns}}
+\index{setTimeWindow\_ns@{setTimeWindow\_ns}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{setTimeWindow\_ns()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily bool Timeshifts\+::set\+Time\+Window\+\_\+ns (\begin{DoxyParamCaption}\item[{\textbf{ Time\+\_\+ns} const \&}]{timewindow\+\_\+ns }\end{DoxyParamCaption})}
+
+
+
+Setup the time window for the coincidence in ns. 
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_timeshifts_a304c1076d703a78153cfe72d61b28425_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_timeshifts_a304c1076d703a78153cfe72d61b28425_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_timeshifts_a89dbca371bce4601ee60122f544faf95}} 
+\index{Timeshifts@{Timeshifts}!shiftTimeSpectra@{shiftTimeSpectra}}
+\index{shiftTimeSpectra@{shiftTimeSpectra}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{shiftTimeSpectra()}
+{\footnotesize\ttfamily TH1F $\ast$ Timeshifts\+::shift\+Time\+Spectra (\begin{DoxyParamCaption}\item[{TH1F $\ast$}]{histo,  }\item[{\textbf{ Label} const \&}]{label,  }\item[{std\+::string const \&}]{unit = {\ttfamily \char`\"{}ps\char`\"{}} }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=347pt]{class_timeshifts_a89dbca371bce4601ee60122f544faf95_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_timeshifts_abef7234fe827ae3c7758788cf22b6921}} 
+\index{Timeshifts@{Timeshifts}!treatFasterFile@{treatFasterFile}}
+\index{treatFasterFile@{treatFasterFile}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{treatFasterFile()}
+{\footnotesize\ttfamily void Timeshifts\+::treat\+Faster\+File (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{filename }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_timeshifts_abef7234fe827ae3c7758788cf22b6921_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_timeshifts_abef7234fe827ae3c7758788cf22b6921_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_timeshifts_aaef5b6fdd23be94ed37a2b4e7fe47b48}} 
+\index{Timeshifts@{Timeshifts}!treatFile@{treatFile}}
+\index{treatFile@{treatFile}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{treatFile()}
+{\footnotesize\ttfamily void Timeshifts\+::treat\+File (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{filename }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_timeshifts_aaef5b6fdd23be94ed37a2b4e7fe47b48_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_timeshifts_aaef5b6fdd23be94ed37a2b4e7fe47b48_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_timeshifts_a79fe955b7d1bbc12fd4c659691727df3}} 
+\index{Timeshifts@{Timeshifts}!treatFilesMT@{treatFilesMT}}
+\index{treatFilesMT@{treatFilesMT}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{treatFilesMT()}
+{\footnotesize\ttfamily void Timeshifts\+::treat\+Files\+MT (\begin{DoxyParamCaption}\item[{\textbf{ Timeshifts} \&}]{ts,  }\item[{\textbf{ MTList} \&}]{files\+\_\+\+MT }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_timeshifts_a79fe955b7d1bbc12fd4c659691727df3_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_timeshifts_a79fe955b7d1bbc12fd4c659691727df3_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_timeshifts_a21dc1e7bf232c6b0637b16aa04e43701}} 
+\index{Timeshifts@{Timeshifts}!treatFolder@{treatFolder}}
+\index{treatFolder@{treatFolder}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{treatFolder()}
+{\footnotesize\ttfamily void Timeshifts\+::treat\+Folder (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{folder,  }\item[{int const \&}]{nb\+\_\+files = {\ttfamily -\/1} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_timeshifts_a21dc1e7bf232c6b0637b16aa04e43701_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_timeshifts_a21dc1e7bf232c6b0637b16aa04e43701_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_timeshifts_a32079af1345e308feddd58e0950998ab}} 
+\index{Timeshifts@{Timeshifts}!treatRootFile@{treatRootFile}}
+\index{treatRootFile@{treatRootFile}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{treatRootFile()}
+{\footnotesize\ttfamily void Timeshifts\+::treat\+Root\+File (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{filename }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_timeshifts_a32079af1345e308feddd58e0950998ab_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_timeshifts_a32079af1345e308feddd58e0950998ab_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_timeshifts_a1b6e129787ae7641ecbcb990f6e86bb9}} 
+\index{Timeshifts@{Timeshifts}!verbose@{verbose}}
+\index{verbose@{verbose}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{verbose()}
+{\footnotesize\ttfamily void Timeshifts\+::verbose (\begin{DoxyParamCaption}\item[{bool const \&}]{\+\_\+verbose = {\ttfamily true} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set verbosity level. 
+
+\begin{DoxyNote}{Note}
+Mandatory only if calculate timeshifts
+\end{DoxyNote}
+It will print the fit parameters in the terminal Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_timeshifts_a1b6e129787ae7641ecbcb990f6e86bb9_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_timeshifts_abc70d7dc0c400a76d84f2c5cc30edf77}} 
+\index{Timeshifts@{Timeshifts}!verification@{verification}}
+\index{verification@{verification}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{verification()}
+{\footnotesize\ttfamily bool const\& Timeshifts\+::verification (\begin{DoxyParamCaption}\item[{bool const \&}]{verif = {\ttfamily true} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Used to create. 
+
+\mbox{\label{class_timeshifts_a6520eab7a8824f41a2be8517d83fc835}} 
+\index{Timeshifts@{Timeshifts}!verify@{verify}}
+\index{verify@{verify}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{verify()}
+{\footnotesize\ttfamily bool Timeshifts\+::verify (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{folder,  }\item[{int const \&}]{nb\+\_\+files = {\ttfamily -\/1} }\end{DoxyParamCaption})}
+
+
+
+To verify an already calculated timeshift .dT data file. 
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_timeshifts_a6520eab7a8824f41a2be8517d83fc835_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_timeshifts_a79f5376cf7071865b264989ef46d886f}} 
+\index{Timeshifts@{Timeshifts}!write@{write}}
+\index{write@{write}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{write()}
+{\footnotesize\ttfamily void Timeshifts\+::write (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{name }\end{DoxyParamCaption})}
+
+
+
+To write down the histograms and the data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Will automatically create the following name as output \+: (name+\char`\"{}.\+d\+T\char`\"{}) and (name+\char`\"{}\+\_\+d\+T.\+root\char`\"{}) \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_timeshifts_a79f5376cf7071865b264989ef46d886f_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_timeshifts_ad19fdc64b6f8dd54e94665a7170a49a7}} 
+\index{Timeshifts@{Timeshifts}!writeData@{writeData}}
+\index{writeData@{writeData}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{writeData()}
+{\footnotesize\ttfamily void Timeshifts\+::write\+Data (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{name }\end{DoxyParamCaption})}
+
+
+
+To write down the data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Name of the output data file \+: (name+\char`\"{}.\+d\+T\char`\"{}) \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=277pt]{class_timeshifts_ad19fdc64b6f8dd54e94665a7170a49a7_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=336pt]{class_timeshifts_ad19fdc64b6f8dd54e94665a7170a49a7_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_timeshifts_a579c8583bd37c3988ffb5cb6df7849f7}} 
+\index{Timeshifts@{Timeshifts}!writeRoot@{writeRoot}}
+\index{writeRoot@{writeRoot}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{writeRoot()}
+{\footnotesize\ttfamily void Timeshifts\+::write\+Root (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{name }\end{DoxyParamCaption})}
+
+
+
+To write down the histograms. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Name of the output data file \+: (name+\char`\"{}\+\_\+d\+T.\+root\char`\"{}) \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_timeshifts_a579c8583bd37c3988ffb5cb6df7849f7_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=335pt]{class_timeshifts_a579c8583bd37c3988ffb5cb6df7849f7_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\label{class_timeshifts_a4dd5b35444834dca94e9432619e24c47}} 
+\index{Timeshifts@{Timeshifts}!m\_bins\_per\_ns@{m\_bins\_per\_ns}}
+\index{m\_bins\_per\_ns@{m\_bins\_per\_ns}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{m\_bins\_per\_ns}
+{\footnotesize\ttfamily std\+::map$<$\textbf{ d\+Type}, \textbf{ Time\+\_\+ns}$>$ Timeshifts\+::m\+\_\+bins\+\_\+per\+\_\+ns\hspace{0.3cm}{\ttfamily [private]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= }
+\DoxyCodeLine{  \{ }
+\DoxyCodeLine{    \{\textcolor{stringliteral}{"{}labr"{}},  10.\}, }
+\DoxyCodeLine{    \{\textcolor{stringliteral}{"{}ge"{}},     1.\}, }
+\DoxyCodeLine{    \{\textcolor{stringliteral}{"{}bgo"{}},    2.\}, }
+\DoxyCodeLine{    \{\textcolor{stringliteral}{"{}eden"{}},   2.\}, }
+\DoxyCodeLine{    \{\textcolor{stringliteral}{"{}RF"{}},    10.\}, }
+\DoxyCodeLine{    \{\textcolor{stringliteral}{"{}paris"{}}, 10.\}, }
+\DoxyCodeLine{    \{\textcolor{stringliteral}{"{}dssd"{}},  0.5\}}
+\DoxyCodeLine{  \}}
+
+\end{DoxyCode}
+\mbox{\label{class_timeshifts_afdd59f1f2d548c6bd8ef89d998e8ed1e}} 
+\index{Timeshifts@{Timeshifts}!m\_check\_preprompt@{m\_check\_preprompt}}
+\index{m\_check\_preprompt@{m\_check\_preprompt}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{m\_check\_preprompt}
+{\footnotesize\ttfamily bool Timeshifts\+::m\+\_\+check\+\_\+preprompt = false\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_timeshifts_af8a8bb48626abf6a9a634b3c826b0e44}} 
+\index{Timeshifts@{Timeshifts}!m\_corrected@{m\_corrected}}
+\index{m\_corrected@{m\_corrected}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{m\_corrected}
+{\footnotesize\ttfamily bool Timeshifts\+::m\+\_\+corrected = false\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_timeshifts_a0c81995b961c33e22c49d3d180b3cec5}} 
+\index{Timeshifts@{Timeshifts}!m\_edge\_preferred@{m\_edge\_preferred}}
+\index{m\_edge\_preferred@{m\_edge\_preferred}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{m\_edge\_preferred}
+{\footnotesize\ttfamily std\+::map$<$\textbf{ d\+Type}, bool$>$ Timeshifts\+::m\+\_\+edge\+\_\+preferred\hspace{0.3cm}{\ttfamily [private]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= }
+\DoxyCodeLine{  \{ }
+\DoxyCodeLine{    \{\textcolor{stringliteral}{"{}labr"{}},  \textcolor{keyword}{false}\}, }
+\DoxyCodeLine{    \{\textcolor{stringliteral}{"{}ge"{}},    \textcolor{keyword}{false}\}, }
+\DoxyCodeLine{    \{\textcolor{stringliteral}{"{}bgo"{}},   \textcolor{keyword}{false}\}, }
+\DoxyCodeLine{    \{\textcolor{stringliteral}{"{}eden"{}},  \textcolor{keyword}{false}\}, }
+\DoxyCodeLine{    \{\textcolor{stringliteral}{"{}RF"{}},    \textcolor{keyword}{false}\}, }
+\DoxyCodeLine{    \{\textcolor{stringliteral}{"{}paris"{}}, \textcolor{keyword}{false}\}, }
+\DoxyCodeLine{    \{\textcolor{stringliteral}{"{}dssd"{}},  \textcolor{keyword}{false}\}}
+\DoxyCodeLine{  \}}
+
+\end{DoxyCode}
+\mbox{\label{class_timeshifts_ab098d455164964ba60b9f5c555de74e4}} 
+\index{Timeshifts@{Timeshifts}!m\_edge\_preferred\_label@{m\_edge\_preferred\_label}}
+\index{m\_edge\_preferred\_label@{m\_edge\_preferred\_label}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{m\_edge\_preferred\_label}
+{\footnotesize\ttfamily std\+::vector$<$bool$>$ Timeshifts\+::m\+\_\+edge\+\_\+preferred\+\_\+label}
+
+\mbox{\label{class_timeshifts_abc19fb99a4d950501fb53430497e34c2}} 
+\index{Timeshifts@{Timeshifts}!m\_Emin\_ADC@{m\_Emin\_ADC}}
+\index{m\_Emin\_ADC@{m\_Emin\_ADC}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{m\_Emin\_ADC}
+{\footnotesize\ttfamily \textbf{ ADC} Timeshifts\+::m\+\_\+\+Emin\+\_\+\+ADC = 0.\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_timeshifts_a1a70cc43f750599c993c689e62cfb29f}} 
+\index{Timeshifts@{Timeshifts}!m\_EnergyRef@{m\_EnergyRef}}
+\index{m\_EnergyRef@{m\_EnergyRef}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{m\_EnergyRef}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH1F$>$ Timeshifts\+::m\+\_\+\+Energy\+Ref\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_timeshifts_a18d1ff66fe0d6be096467ff874c139dc}} 
+\index{Timeshifts@{Timeshifts}!m\_EnergyRef\_bidim@{m\_EnergyRef\_bidim}}
+\index{m\_EnergyRef\_bidim@{m\_EnergyRef\_bidim}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{m\_EnergyRef\_bidim}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH2F$>$ Timeshifts\+::m\+\_\+\+Energy\+Ref\+\_\+bidim\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_timeshifts_a025f10899ed33302dee33f2e98d40b3a}} 
+\index{Timeshifts@{Timeshifts}!m\_energySpectraInitialized@{m\_energySpectraInitialized}}
+\index{m\_energySpectraInitialized@{m\_energySpectraInitialized}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{m\_energySpectraInitialized}
+{\footnotesize\ttfamily bool Timeshifts\+::m\+\_\+energy\+Spectra\+Initialized = false\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_timeshifts_a1a77bd589fc081641e19c5da8b4e19b6}} 
+\index{Timeshifts@{Timeshifts}!m\_filename@{m\_filename}}
+\index{m\_filename@{m\_filename}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{m\_filename}
+{\footnotesize\ttfamily std\+::string Timeshifts\+::m\+\_\+filename = \char`\"{}\char`\"{}\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_timeshifts_a4f155373f7d1a70f3f1d06233ebf10c1}} 
+\index{Timeshifts@{Timeshifts}!m\_files@{m\_files}}
+\index{m\_files@{m\_files}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{m\_files}
+{\footnotesize\ttfamily \textbf{ Files\+Manager} Timeshifts\+::m\+\_\+files\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_timeshifts_ad6bda9ede24fd63e7a43ad12bd861a98}} 
+\index{Timeshifts@{Timeshifts}!m\_initialized@{m\_initialized}}
+\index{m\_initialized@{m\_initialized}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{m\_initialized}
+{\footnotesize\ttfamily bool Timeshifts\+::m\+\_\+initialized = false\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_timeshifts_ae3b75fce1fde95be5ca45b20cfbb8350}} 
+\index{Timeshifts@{Timeshifts}!m\_initializedCorrected@{m\_initializedCorrected}}
+\index{m\_initializedCorrected@{m\_initializedCorrected}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{m\_initializedCorrected}
+{\footnotesize\ttfamily bool Timeshifts\+::m\+\_\+initialized\+Corrected = false\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_timeshifts_a8c7b6bfda5c2dacef69d0b7657d89fce}} 
+\index{Timeshifts@{Timeshifts}!m\_initializedRaw@{m\_initializedRaw}}
+\index{m\_initializedRaw@{m\_initializedRaw}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{m\_initializedRaw}
+{\footnotesize\ttfamily bool Timeshifts\+::m\+\_\+initialized\+Raw = false\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_timeshifts_a7363de3261a770287e981328276f21dd}} 
+\index{Timeshifts@{Timeshifts}!m\_max\_hits@{m\_max\_hits}}
+\index{m\_max\_hits@{m\_max\_hits}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{m\_max\_hits}
+{\footnotesize\ttfamily \textbf{ ulong} Timeshifts\+::m\+\_\+max\+\_\+hits = -\/1\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_timeshifts_a46a97751e517cc9f21d54d04bb16c5f5}} 
+\index{Timeshifts@{Timeshifts}!m\_max\_mult@{m\_max\_mult}}
+\index{m\_max\_mult@{m\_max\_mult}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{m\_max\_mult}
+{\footnotesize\ttfamily int Timeshifts\+::m\+\_\+max\+\_\+mult = 2\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_timeshifts_ad2182e6c34ecf5b760f67d58167df53e}} 
+\index{Timeshifts@{Timeshifts}!m\_min\_mult@{m\_min\_mult}}
+\index{m\_min\_mult@{m\_min\_mult}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{m\_min\_mult}
+{\footnotesize\ttfamily int Timeshifts\+::m\+\_\+min\+\_\+mult = 2\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_timeshifts_a9858ca34e3981520e2c1d5982bb185fd}} 
+\index{Timeshifts@{Timeshifts}!m\_nb\_detectors@{m\_nb\_detectors}}
+\index{m\_nb\_detectors@{m\_nb\_detectors}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{m\_nb\_detectors}
+{\footnotesize\ttfamily int Timeshifts\+::m\+\_\+nb\+\_\+detectors = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_timeshifts_a53bfccafc7cfbd834754b752a9a4c313}} 
+\index{Timeshifts@{Timeshifts}!m\_nb\_shifts\_RF\_peak@{m\_nb\_shifts\_RF\_peak}}
+\index{m\_nb\_shifts\_RF\_peak@{m\_nb\_shifts\_RF\_peak}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{m\_nb\_shifts\_RF\_peak}
+{\footnotesize\ttfamily std\+::vector$<$\textbf{ uchar}$>$ Timeshifts\+::m\+\_\+nb\+\_\+shifts\+\_\+\+RF\+\_\+peak}
+
+\mbox{\label{class_timeshifts_a0bf7feef945319722118991949b033d4}} 
+\index{Timeshifts@{Timeshifts}!m\_ok@{m\_ok}}
+\index{m\_ok@{m\_ok}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{m\_ok}
+{\footnotesize\ttfamily bool Timeshifts\+::m\+\_\+ok = false\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_timeshifts_a04a95b4e6269c5a02010909206b24730}} 
+\index{Timeshifts@{Timeshifts}!m\_outData@{m\_outData}}
+\index{m\_outData@{m\_outData}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{m\_outData}
+{\footnotesize\ttfamily std\+::string Timeshifts\+::m\+\_\+out\+Data = \char`\"{}\char`\"{}\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_timeshifts_a8165d76fc5a92d7d49498624ae2b32b5}} 
+\index{Timeshifts@{Timeshifts}!m\_outDir@{m\_outDir}}
+\index{m\_outDir@{m\_outDir}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{m\_outDir}
+{\footnotesize\ttfamily std\+::string Timeshifts\+::m\+\_\+out\+Dir = \char`\"{}\char`\"{}\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_timeshifts_a7a9d72db7cd915c282014f63c6020d8e}} 
+\index{Timeshifts@{Timeshifts}!m\_outPath@{m\_outPath}}
+\index{m\_outPath@{m\_outPath}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{m\_outPath}
+{\footnotesize\ttfamily \textbf{ Path} Timeshifts\+::m\+\_\+out\+Path\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_timeshifts_ae3640104ddce3ee9548d83186f4032e6}} 
+\index{Timeshifts@{Timeshifts}!m\_outRoot@{m\_outRoot}}
+\index{m\_outRoot@{m\_outRoot}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{m\_outRoot}
+{\footnotesize\ttfamily std\+::string Timeshifts\+::m\+\_\+out\+Root = \char`\"{}timeshifts.\+root\char`\"{}\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_timeshifts_af643b4246a7e7efb0857cec8f705eeb1}} 
+\index{Timeshifts@{Timeshifts}!m\_RF\_preferred@{m\_RF\_preferred}}
+\index{m\_RF\_preferred@{m\_RF\_preferred}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{m\_RF\_preferred}
+{\footnotesize\ttfamily std\+::map$<$\textbf{ d\+Type}, bool$>$ Timeshifts\+::m\+\_\+\+RF\+\_\+preferred\hspace{0.3cm}{\ttfamily [private]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= }
+\DoxyCodeLine{  \{ }
+\DoxyCodeLine{    \{\textcolor{stringliteral}{"{}labr"{}},  \textcolor{keyword}{false}\}, }
+\DoxyCodeLine{    \{\textcolor{stringliteral}{"{}ge"{}},    \textcolor{keyword}{false}\}, }
+\DoxyCodeLine{    \{\textcolor{stringliteral}{"{}bgo"{}},   \textcolor{keyword}{false}\}, }
+\DoxyCodeLine{    \{\textcolor{stringliteral}{"{}eden"{}},  \textcolor{keyword}{false}\}, }
+\DoxyCodeLine{    \{\textcolor{stringliteral}{"{}RF"{}},    \textcolor{keyword}{false}\}, }
+\DoxyCodeLine{    \{\textcolor{stringliteral}{"{}paris"{}}, \textcolor{keyword}{false}\}, }
+\DoxyCodeLine{    \{\textcolor{stringliteral}{"{}dssd"{}},  \textcolor{keyword}{false}\}}
+\DoxyCodeLine{  \}}
+
+\end{DoxyCode}
+\mbox{\label{class_timeshifts_a4338a0a481ffac2a8f8dffbafca76e7d}} 
+\index{Timeshifts@{Timeshifts}!m\_RF\_preferred\_label@{m\_RF\_preferred\_label}}
+\index{m\_RF\_preferred\_label@{m\_RF\_preferred\_label}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{m\_RF\_preferred\_label}
+{\footnotesize\ttfamily std\+::vector$<$bool$>$ Timeshifts\+::m\+\_\+\+RF\+\_\+preferred\+\_\+label}
+
+\mbox{\label{class_timeshifts_a149e0f0885280b888df3f2b35ac29af8}} 
+\index{Timeshifts@{Timeshifts}!m\_time\_ref\_label@{m\_time\_ref\_label}}
+\index{m\_time\_ref\_label@{m\_time\_ref\_label}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{m\_time\_ref\_label}
+{\footnotesize\ttfamily \textbf{ Label} Timeshifts\+::m\+\_\+time\+\_\+ref\+\_\+label = 252\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_timeshifts_a057b1fc1611ed270db718db0b72b801d}} 
+\index{Timeshifts@{Timeshifts}!m\_time\_ref\_name@{m\_time\_ref\_name}}
+\index{m\_time\_ref\_name@{m\_time\_ref\_name}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{m\_time\_ref\_name}
+{\footnotesize\ttfamily std\+::string Timeshifts\+::m\+\_\+time\+\_\+ref\+\_\+name = \char`\"{}R1\+A9\+\_\+\+FATIMA\+\_\+\+La\+Br3\char`\"{}\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_timeshifts_aa45cc86b7201c47bb97f0422dff23725}} 
+\index{Timeshifts@{Timeshifts}!m\_time\_spectra@{m\_time\_spectra}}
+\index{m\_time\_spectra@{m\_time\_spectra}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{m\_time\_spectra}
+{\footnotesize\ttfamily \textbf{ Vector\+\_\+\+MTTHist}$<$TH1F$>$ Timeshifts\+::m\+\_\+time\+\_\+spectra\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_timeshifts_ae8fe2221ac14c7c9920ba2dee69ec719}} 
+\index{Timeshifts@{Timeshifts}!m\_time\_spectra\_corrected@{m\_time\_spectra\_corrected}}
+\index{m\_time\_spectra\_corrected@{m\_time\_spectra\_corrected}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{m\_time\_spectra\_corrected}
+{\footnotesize\ttfamily \textbf{ Vector\+\_\+\+MTTHist}$<$TH1F$>$ Timeshifts\+::m\+\_\+time\+\_\+spectra\+\_\+corrected\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_timeshifts_ab9b0b763dbe5e2be797d89e9bcb05c1e}} 
+\index{Timeshifts@{Timeshifts}!m\_time\_spectra\_corrected\_bidim@{m\_time\_spectra\_corrected\_bidim}}
+\index{m\_time\_spectra\_corrected\_bidim@{m\_time\_spectra\_corrected\_bidim}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{m\_time\_spectra\_corrected\_bidim}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH2F$>$ Timeshifts\+::m\+\_\+time\+\_\+spectra\+\_\+corrected\+\_\+bidim\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_timeshifts_ad10b3d7e16a2d51d3e73d7f2e7b1e0fa}} 
+\index{Timeshifts@{Timeshifts}!m\_timeshifts@{m\_timeshifts}}
+\index{m\_timeshifts@{m\_timeshifts}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{m\_timeshifts}
+{\footnotesize\ttfamily std\+::vector$<$\textbf{ Time}$>$ Timeshifts\+::m\+\_\+timeshifts\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_timeshifts_a73dda60d3425a0de61719829231e6d55}} 
+\index{Timeshifts@{Timeshifts}!m\_timewindow@{m\_timewindow}}
+\index{m\_timewindow@{m\_timewindow}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{m\_timewindow}
+{\footnotesize\ttfamily \textbf{ Time} Timeshifts\+::m\+\_\+timewindow = \textbf{ Time\+\_\+cast}(\textbf{ m\+\_\+timewindow\+\_\+ns}$\ast$1000)\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_timeshifts_a221c8bebd939cf4a9442f5c9dddfeefb}} 
+\index{Timeshifts@{Timeshifts}!m\_timewindow\_ns@{m\_timewindow\_ns}}
+\index{m\_timewindow\_ns@{m\_timewindow\_ns}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{m\_timewindow\_ns}
+{\footnotesize\ttfamily \textbf{ Time\+\_\+ns} Timeshifts\+::m\+\_\+timewindow\+\_\+ns = \textbf{ Time\+\_\+ns\+\_\+cast}(1500)\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_timeshifts_af567d75bbe3263cece04cf3e6eff5256}} 
+\index{Timeshifts@{Timeshifts}!m\_ts\_outdir@{m\_ts\_outdir}}
+\index{m\_ts\_outdir@{m\_ts\_outdir}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{m\_ts\_outdir}
+{\footnotesize\ttfamily std\+::string Timeshifts\+::m\+\_\+ts\+\_\+outdir = \char`\"{}Timeshifts/\char`\"{}\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_timeshifts_a985a81e5fa8d1a8866988c6af1b2ff1c}} 
+\index{Timeshifts@{Timeshifts}!m\_verbose@{m\_verbose}}
+\index{m\_verbose@{m\_verbose}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{m\_verbose}
+{\footnotesize\ttfamily bool Timeshifts\+::m\+\_\+verbose = false\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_timeshifts_ab4329368cc98918cfd4489788dc4a4f8}} 
+\index{Timeshifts@{Timeshifts}!m\_verification@{m\_verification}}
+\index{m\_verification@{m\_verification}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{m\_verification}
+{\footnotesize\ttfamily bool Timeshifts\+::m\+\_\+verification = true\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_timeshifts_a64966ebd9e0538d9e3160bbfaf4a74de}} 
+\index{Timeshifts@{Timeshifts}!mt\_ref\_time@{mt\_ref\_time}}
+\index{mt\_ref\_time@{mt\_ref\_time}!Timeshifts@{Timeshifts}}
+\doxysubsubsection{mt\_ref\_time}
+{\footnotesize\ttfamily std\+::vector$<$\textbf{ Timestamp}$>$ Timeshifts\+::mt\+\_\+ref\+\_\+time\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+lib/\+Modules/\textbf{ Timeshifts.\+hpp}\end{DoxyCompactItemize}

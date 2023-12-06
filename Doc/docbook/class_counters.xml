@@ -1,0 +1,272 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_class_counters" xml:lang="en-US">
+<title>Counters Class Reference</title>
+<indexterm><primary>Counters</primary></indexterm>
+<para>
+<computeroutput>#include &lt;Counters.hpp&gt;</computeroutput>
+</para>
+Collaboration diagram for Counters:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_counters__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_class_counters_1ada46b45bb45210aad28a4ebbd23f98f8">clear</link> ()</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_counters_1ada46b45bb45210aad28a4ebbd23f98f8">clear</link> ()</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_counters_1a1f2723ecaf63399d985ce2efd87aab6f">clover_analyse</link> ()</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_counters_1a438d855f700f802261df045b1f52723e">count_event</link> (<link linkend="_class_event">Event</link> const &amp;event)</para>
+</listitem>
+            <listitem><para><link linkend="_class_counters_1a6d83023bf5dece2147c82ad2b1906abd">Counters</link> ()</para>
+</listitem>
+            <listitem><para><link linkend="_class_counters_1a6d83023bf5dece2147c82ad2b1906abd">Counters</link> ()</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_counters_1acebc5e99a89d9fe257917c46b3101999">countEvent</link> (<link linkend="_class_event">Event</link> const &amp;event)</para>
+</listitem>
+            <listitem><para>bool <link linkend="_class_counters_1a9ca7de2128df4f75273e59d72e8dea5e">hasTrigged</link> ()</para>
+</listitem>
+            <listitem><para>bool <link linkend="_class_counters_1a9ca7de2128df4f75273e59d72e8dea5e">hasTrigged</link> ()</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_counters_1a64f2e9cf1e132725e4b5a6b0fcdb9ea5">set_hit</link> (<link linkend="_class_event">Event</link> const &amp;event, int const &amp;i)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Public Attributes    </title>
+        <itemizedlist>
+            <listitem><para>std::array&lt; Bool_t, 24 &gt; <link linkend="_class_counters_1ad6278342b5968437e8a02869ad914244">BGO_Clover</link></para>
+</listitem>
+            <listitem><para><link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> <link linkend="_class_counters_1a35eedcda3ee01def8ceb7d3045db0127">Clovers</link> =0</para>
+</listitem>
+            <listitem><para><link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> <link linkend="_class_counters_1a37f7a3d680241f851dcbeb46a2ad79ae">DSSDMult</link> =0</para>
+</listitem>
+            <listitem><para>std::array&lt; Bool_t, 24 &gt; <link linkend="_class_counters_1aaf1d093d97e4d98ce7a84d46b027c9d3">Ge_Clover</link></para>
+</listitem>
+            <listitem><para><link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> <link linkend="_class_counters_1a9e8e7788cc926be6bc7479709ac8dce3">GeCleanClovers</link> =0</para>
+</listitem>
+            <listitem><para><link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> <link linkend="_class_counters_1a62564fb849d524995a2358f0ae8bec39">GeClovers</link> =0</para>
+</listitem>
+            <listitem><para><link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> <link linkend="_class_counters_1a062b3e5ff74d5830c9df0d30deb8780f">LaBr3Mult</link> =0</para>
+</listitem>
+            <listitem><para><link linkend="_class_static_vector">StaticVector</link>&lt; <link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>, 24 &gt; <link linkend="_class_counters_1a9338b4e640e1f3996fedb317d9c40923">list_clovers</link></para>
+</listitem>
+            <listitem><para><link linkend="_class_static_vector">StaticVector</link>&lt; <link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> &gt; <link linkend="_class_counters_1af4d16a79b9fa7e57b20ef2866f0e38e4">list_clovers</link> = <link linkend="_class_static_vector">StaticVector</link>&lt;<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>&gt;(24)</para>
+</listitem>
+            <listitem><para><link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> <link linkend="_class_counters_1aa10e5f5e024f297949057a82c50a14a2">Modules</link> =0</para>
+</listitem>
+            <listitem><para><link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> <link linkend="_class_counters_1a0d4d6f79204a5462c92c5215b7f51e58">mult</link> = 0</para>
+</listitem>
+            <listitem><para><link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> <link linkend="_class_counters_1af42a2277da8f07fa4867143d426058ec">ParisMult</link> =0</para>
+</listitem>
+            <listitem><para><link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> <link linkend="_class_counters_1afba8f7fd1f07fe6afd5f2ffd46ddf8bf">RawBGO</link> =0</para>
+</listitem>
+            <listitem><para><link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> <link linkend="_class_counters_1a788284c58e92d46682d73e2679cdaa48">RawGe</link> =0</para>
+</listitem>
+            <listitem><para>bool <link linkend="_class_counters_1a0466980b7848964cbcb51ec0a89b93eb">trig</link> = false</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_class_counters_1a6d83023bf5dece2147c82ad2b1906abd"/>    <section>
+    <title>Counters()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>Counters</primary><secondary>Counters</secondary></indexterm>
+<indexterm><primary>Counters</primary><secondary>Counters</secondary></indexterm>
+<para><computeroutput>Counters::Counters ( )<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_counters_a6d83023bf5dece2147c82ad2b1906abd_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_counters_1a6d83023bf5dece2147c82ad2b1906abd"/>    <section>
+    <title>Counters()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>Counters</primary><secondary>Counters</secondary></indexterm>
+<indexterm><primary>Counters</primary><secondary>Counters</secondary></indexterm>
+<para><computeroutput>Counters::Counters ( )<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_counters_a6d83023bf5dece2147c82ad2b1906abd_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_class_counters_1ada46b45bb45210aad28a4ebbd23f98f8"/>    <section>
+    <title>clear()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>clear</primary><secondary>Counters</secondary></indexterm>
+<indexterm><primary>Counters</primary><secondary>clear</secondary></indexterm>
+<para><computeroutput>void Counters::clear ( )</computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_counters_ada46b45bb45210aad28a4ebbd23f98f8_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_counters_ada46b45bb45210aad28a4ebbd23f98f8_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_counters_1ada46b45bb45210aad28a4ebbd23f98f8"/>    <section>
+    <title>clear()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>clear</primary><secondary>Counters</secondary></indexterm>
+<indexterm><primary>Counters</primary><secondary>clear</secondary></indexterm>
+<para><computeroutput>void Counters::clear ( )</computeroutput></para>    </section><anchor xml:id="_class_counters_1a1f2723ecaf63399d985ce2efd87aab6f"/>    <section>
+    <title>clover_analyse()</title>
+<indexterm><primary>clover_analyse</primary><secondary>Counters</secondary></indexterm>
+<indexterm><primary>Counters</primary><secondary>clover_analyse</secondary></indexterm>
+<para><computeroutput>void Counters::clover_analyse ( )</computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_counters_a1f2723ecaf63399d985ce2efd87aab6f_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_counters_1a438d855f700f802261df045b1f52723e"/>    <section>
+    <title>count_event()</title>
+<indexterm><primary>count_event</primary><secondary>Counters</secondary></indexterm>
+<indexterm><primary>Counters</primary><secondary>count_event</secondary></indexterm>
+<para><computeroutput>void Counters::count_event (<link linkend="_class_event">Event</link> const &amp; event)</computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_counters_a438d855f700f802261df045b1f52723e_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_counters_1acebc5e99a89d9fe257917c46b3101999"/>    <section>
+    <title>countEvent()</title>
+<indexterm><primary>countEvent</primary><secondary>Counters</secondary></indexterm>
+<indexterm><primary>Counters</primary><secondary>countEvent</secondary></indexterm>
+<para><computeroutput>void Counters::countEvent (<link linkend="_class_event">Event</link> const &amp; event)</computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_counters_acebc5e99a89d9fe257917c46b3101999_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_counters_1a9ca7de2128df4f75273e59d72e8dea5e"/>    <section>
+    <title>hasTrigged()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>hasTrigged</primary><secondary>Counters</secondary></indexterm>
+<indexterm><primary>Counters</primary><secondary>hasTrigged</secondary></indexterm>
+<para><computeroutput>bool Counters::hasTrigged ( )</computeroutput></para>    </section><anchor xml:id="_class_counters_1a9ca7de2128df4f75273e59d72e8dea5e"/>    <section>
+    <title>hasTrigged()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>hasTrigged</primary><secondary>Counters</secondary></indexterm>
+<indexterm><primary>Counters</primary><secondary>hasTrigged</secondary></indexterm>
+<para><computeroutput>bool Counters::hasTrigged ( )</computeroutput></para>    </section><anchor xml:id="_class_counters_1a64f2e9cf1e132725e4b5a6b0fcdb9ea5"/>    <section>
+    <title>set_hit()</title>
+<indexterm><primary>set_hit</primary><secondary>Counters</secondary></indexterm>
+<indexterm><primary>Counters</primary><secondary>set_hit</secondary></indexterm>
+<para><computeroutput>void Counters::set_hit (<link linkend="_class_event">Event</link> const &amp; event, int const &amp; i)</computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_counters_a64f2e9cf1e132725e4b5a6b0fcdb9ea5_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_counters_a64f2e9cf1e132725e4b5a6b0fcdb9ea5_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_class_counters_1ad6278342b5968437e8a02869ad914244"/>    <section>
+    <title>BGO_Clover</title>
+<indexterm><primary>BGO_Clover</primary><secondary>Counters</secondary></indexterm>
+<indexterm><primary>Counters</primary><secondary>BGO_Clover</secondary></indexterm>
+<para><computeroutput>std::array&lt; Bool_t, 24 &gt; Counters::BGO_Clover</computeroutput></para>    </section><anchor xml:id="_class_counters_1a35eedcda3ee01def8ceb7d3045db0127"/>    <section>
+    <title>Clovers</title>
+<indexterm><primary>Clovers</primary><secondary>Counters</secondary></indexterm>
+<indexterm><primary>Counters</primary><secondary>Clovers</secondary></indexterm>
+<para><computeroutput><link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> Counters::Clovers =0</computeroutput></para>    </section><anchor xml:id="_class_counters_1a37f7a3d680241f851dcbeb46a2ad79ae"/>    <section>
+    <title>DSSDMult</title>
+<indexterm><primary>DSSDMult</primary><secondary>Counters</secondary></indexterm>
+<indexterm><primary>Counters</primary><secondary>DSSDMult</secondary></indexterm>
+<para><computeroutput><link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> Counters::DSSDMult =0</computeroutput></para>    </section><anchor xml:id="_class_counters_1aaf1d093d97e4d98ce7a84d46b027c9d3"/>    <section>
+    <title>Ge_Clover</title>
+<indexterm><primary>Ge_Clover</primary><secondary>Counters</secondary></indexterm>
+<indexterm><primary>Counters</primary><secondary>Ge_Clover</secondary></indexterm>
+<para><computeroutput>std::array&lt; Bool_t, 24 &gt; Counters::Ge_Clover</computeroutput></para>    </section><anchor xml:id="_class_counters_1a9e8e7788cc926be6bc7479709ac8dce3"/>    <section>
+    <title>GeCleanClovers</title>
+<indexterm><primary>GeCleanClovers</primary><secondary>Counters</secondary></indexterm>
+<indexterm><primary>Counters</primary><secondary>GeCleanClovers</secondary></indexterm>
+<para><computeroutput><link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> Counters::GeCleanClovers =0</computeroutput></para>    </section><anchor xml:id="_class_counters_1a62564fb849d524995a2358f0ae8bec39"/>    <section>
+    <title>GeClovers</title>
+<indexterm><primary>GeClovers</primary><secondary>Counters</secondary></indexterm>
+<indexterm><primary>Counters</primary><secondary>GeClovers</secondary></indexterm>
+<para><computeroutput><link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> Counters::GeClovers =0</computeroutput></para>    </section><anchor xml:id="_class_counters_1a062b3e5ff74d5830c9df0d30deb8780f"/>    <section>
+    <title>LaBr3Mult</title>
+<indexterm><primary>LaBr3Mult</primary><secondary>Counters</secondary></indexterm>
+<indexterm><primary>Counters</primary><secondary>LaBr3Mult</secondary></indexterm>
+<para><computeroutput><link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> Counters::LaBr3Mult =0</computeroutput></para>    </section><anchor xml:id="_class_counters_1a9338b4e640e1f3996fedb317d9c40923"/>    <section>
+    <title>list_clovers<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>list_clovers</primary><secondary>Counters</secondary></indexterm>
+<indexterm><primary>Counters</primary><secondary>list_clovers</secondary></indexterm>
+<para><computeroutput><link linkend="_class_static_vector">StaticVector</link>&lt;<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>,24&gt; Counters::list_clovers</computeroutput></para>    </section><anchor xml:id="_class_counters_1af4d16a79b9fa7e57b20ef2866f0e38e4"/>    <section>
+    <title>list_clovers<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>list_clovers</primary><secondary>Counters</secondary></indexterm>
+<indexterm><primary>Counters</primary><secondary>list_clovers</secondary></indexterm>
+<para><computeroutput><link linkend="_class_static_vector">StaticVector</link>&lt;<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>&gt; Counters::list_clovers = <link linkend="_class_static_vector">StaticVector</link>&lt;<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>&gt;(24)</computeroutput></para>    </section><anchor xml:id="_class_counters_1aa10e5f5e024f297949057a82c50a14a2"/>    <section>
+    <title>Modules</title>
+<indexterm><primary>Modules</primary><secondary>Counters</secondary></indexterm>
+<indexterm><primary>Counters</primary><secondary>Modules</secondary></indexterm>
+<para><computeroutput><link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> Counters::Modules =0</computeroutput></para>    </section><anchor xml:id="_class_counters_1a0d4d6f79204a5462c92c5215b7f51e58"/>    <section>
+    <title>mult</title>
+<indexterm><primary>mult</primary><secondary>Counters</secondary></indexterm>
+<indexterm><primary>Counters</primary><secondary>mult</secondary></indexterm>
+<para><computeroutput><link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> Counters::mult = 0</computeroutput></para>    </section><anchor xml:id="_class_counters_1af42a2277da8f07fa4867143d426058ec"/>    <section>
+    <title>ParisMult</title>
+<indexterm><primary>ParisMult</primary><secondary>Counters</secondary></indexterm>
+<indexterm><primary>Counters</primary><secondary>ParisMult</secondary></indexterm>
+<para><computeroutput><link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> Counters::ParisMult =0</computeroutput></para>    </section><anchor xml:id="_class_counters_1afba8f7fd1f07fe6afd5f2ffd46ddf8bf"/>    <section>
+    <title>RawBGO</title>
+<indexterm><primary>RawBGO</primary><secondary>Counters</secondary></indexterm>
+<indexterm><primary>Counters</primary><secondary>RawBGO</secondary></indexterm>
+<para><computeroutput><link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> Counters::RawBGO =0</computeroutput></para>    </section><anchor xml:id="_class_counters_1a788284c58e92d46682d73e2679cdaa48"/>    <section>
+    <title>RawGe</title>
+<indexterm><primary>RawGe</primary><secondary>Counters</secondary></indexterm>
+<indexterm><primary>Counters</primary><secondary>RawGe</secondary></indexterm>
+<para><computeroutput><link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> Counters::RawGe =0</computeroutput></para>    </section><anchor xml:id="_class_counters_1a0466980b7848964cbcb51ec0a89b93eb"/>    <section>
+    <title>trig</title>
+<indexterm><primary>trig</primary><secondary>Counters</secondary></indexterm>
+<indexterm><primary>Counters</primary><secondary>trig</secondary></indexterm>
+<para><computeroutput>bool Counters::trig = false</computeroutput></para></section>
+<para>
+The documentation for this class was generated from the following file:</para>
+lib/Analyse/<link linkend="__analyse_2_counters_8hpp">Counters.hpp</link></section>
+</section>

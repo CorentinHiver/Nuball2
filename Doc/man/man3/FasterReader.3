@@ -1,0 +1,413 @@
+.TH "FasterReader" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+FasterReader \- Class used to read \&.fast files\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <FasterReader\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBFasterReader\fP (\fBHit\fP *_hit, std::string _filename)"
+.br
+.RI "Construct a new Faster Reader object\&. "
+.ti -1c
+.RI "auto const  & \fBfilename\fP () const"
+.br
+.RI "Get the name of the file being read\&. "
+.ti -1c
+.RI "auto const  & \fBgetCounter\fP () const"
+.br
+.RI "Returns the hits counter\&. "
+.ti -1c
+.RI "auto const  & \fBgetFilename\fP () const"
+.br
+.RI "Get the name of the file being read\&. "
+.ti -1c
+.RI "\fBHit\fP * \fBgetHit\fP () const"
+.br
+.ti -1c
+.RI "bool const  & \fBisReady\fP () const"
+.br
+.RI "If the initialization went badly then returns false\&. "
+.ti -1c
+.RI "\fBoperator bool\fP () const &"
+.br
+.RI "If the initialization went badly then returns false\&. "
+.ti -1c
+.RI "bool \fBRead\fP ()"
+.br
+.RI "Main method\&. Extract the next hit from the data file and fills the \fBHit\fP *m_hit object\&. "
+.ti -1c
+.RI "bool \fBReset\fP ()"
+.br
+.RI "Reset the cursor to the begining of the document\&. "
+.ti -1c
+.RI "void \fBsetHit\fP (\fBHit\fP *hit)"
+.br
+.ti -1c
+.RI "\fB~FasterReader\fP ()"
+.br
+.RI "Destroy the Faster Reader object\&. "
+.in -1c
+.SS "Static Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "static void \fBsetMaxHits\fP (\fBulonglong\fP maxHits)"
+.br
+.RI "Set the number of hits to read inside each file\&. "
+.in -1c
+.SS "Private Member Functions"
+
+.in +1c
+.ti -1c
+.RI "bool \fBInitialize\fP ()"
+.br
+.RI "Setup the fasterac\&.h library to read the data\&. "
+.ti -1c
+.RI "bool \fBInitializeReader\fP ()"
+.br
+.ti -1c
+.RI "bool \fBReadData\fP (faster_data_p const &_data)"
+.br
+.RI "Treats faster data\&. "
+.ti -1c
+.RI "void \fBReadDataGroup\fP (faster_data_p const &_data)"
+.br
+.RI "Treats the faster data groups\&. "
+.ti -1c
+.RI "bool \fBReadGroup\fP ()"
+.br
+.RI "Replace the standard ReadSimple if the faster data contains groups First of all, the m_write variable is used to make sure only the handled types are managed (see \fBswitch_alias()\fP definition) First hit read : goes inside \fBReadData()\fP if it isn't a GROUP_TYPE_ALIAS then read it normally else : recursively read the data inside of the group and fill in m_hit_group_buffer returns the first hit // TO CHECK THIS !!! and sets m_inGroup to true The other hits : if we still are in a group (m_inGroup is true): reads the next hit in m_hit_group_buffer else : if it isn't a GROUP_TYPE_ALIAS then read it normally else : recursively read the data inside of the group and fill in m_hit_group_buffer returns the first hit // TO CHECK THIS !!! and sets m_inGroup to true\&. "
+.ti -1c
+.RI "bool \fBReadSimple\fP ()"
+.br
+.RI "Read triggerless data\&. "
+.ti -1c
+.RI "bool \fBswitch_alias\fP (\fBuchar\fP const &_alias, faster_data_p const &_data)"
+.br
+.RI "Treat the specific part of data (QDC gates, spectro ADC \&.\&.\&.) "
+.ti -1c
+.RI "void \fBTreatCRRC4\fP (faster_data_p const &_data)"
+.br
+.RI "Load CRRC4 data\&. "
+.ti -1c
+.RI "void \fBTreatQDC1\fP (faster_data_p const &_data)"
+.br
+.RI "Load QDC1 data\&. "
+.ti -1c
+.RI "void \fBTreatQDC2\fP (faster_data_p const &_data)"
+.br
+.RI "Load qdc2 data\&. "
+.ti -1c
+.RI "void \fBTreatQDC3\fP (faster_data_p const &_data)"
+.br
+.RI "Load qdc3 data\&. "
+.ti -1c
+.RI "void \fBTreatRF\fP (faster_data_p const &_data)"
+.br
+.RI "Load RF data\&. "
+.ti -1c
+.RI "void \fBTreatTrapez\fP (faster_data_p const &_data)"
+.br
+.RI "Load Trapez data\&. "
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "std::unordered_map< std::string, bool > \fBerror_message\fP"
+.br
+.ti -1c
+.RI "\fBuchar\fP \fBm_alias\fP = 0"
+.br
+.ti -1c
+.RI "\fBulonglong\fP \fBm_counter\fP = 0"
+.br
+.ti -1c
+.RI "\fBulonglong\fP \fBm_cursor\fP = 0"
+.br
+.ti -1c
+.RI "faster_data_p \fBm_data\fP"
+.br
+.ti -1c
+.RI "\fBHit\fP \fBm_empty_hit\fP"
+.br
+.ti -1c
+.RI "std::string \fBm_filename\fP = ''"
+.br
+.ti -1c
+.RI "\fBushort\fP \fBm_group_read_cursor\fP = 0"
+.br
+.ti -1c
+.RI "\fBushort\fP \fBm_group_write_cursor\fP = 0"
+.br
+.ti -1c
+.RI "\fBHit\fP * \fBm_hit\fP = nullptr"
+.br
+.ti -1c
+.RI "std::vector< \fBHit\fP * > \fBm_hit_group_buffer\fP"
+.br
+.ti -1c
+.RI "\fBushort\fP \fBm_inGroup\fP = false"
+.br
+.ti -1c
+.RI "bool \fBm_kReady\fP = false"
+.br
+.ti -1c
+.RI "faster_file_reader_p \fBm_reader\fP = NULL"
+.br
+.ti -1c
+.RI "bool \fBm_write\fP = false"
+.br
+.in -1c
+.SS "Static Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "static \fBulonglong\fP \fBm_maxHits\fP = \-1"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Class used to read \&.fast files\&. 
+
+This class is to be used in combination with the \fBHit\fP struct Here is the minimal code you can use to scan the files : 
+.PP
+.nf
+ Hit hit;
+ std::string filename;
+ FasterReader reader(&hit, filename);
+
+ while(reader.Read())
+ {
+   print(hit);
+ }
+
+.fi
+.PP
+ This method deals with the 5 following members of the \fBHit\fP structure:(NOT UP TO DATE !!!) 
+.PP
+.nf
+   struct Hit
+   {
+     unsigned short label;  // The label number of the detector
+     Float_t        adc;    // The ADC/QDC value of the hit. For RF, contains the frequency.
+     Float_t        qdc2;   // The qdc2 value (usually the longer gate)
+     ULong64_t      time;   // High precision time in ps (time tick of 7,8125 ps)
+     bool           pileup; // Contains either pileup or saturated bit
+   }
+
+.fi
+.PP
+ ---------- Define section ----------
+.PP
+Some options can be activated at compilation time\&. You have to #define them before including this library\&. e\&.g\&. : 
+.PP
+.nf
+   ... other includes
+   #define FASTER_GROUP
+   #include <FasterReader.hpp>
+   rest of the code....
+
+.fi
+.PP
+.PP
+-- QDC1MAX
+.PP
+By default the qdc2 is handled\&. If no detector uses the qdc2 then declare QDC1MAX
+.PP
+-- FASTER_GROUP
+.PP
+If the data is grouped using a hardware trigger\&. From the user point of view, nothing changes but the execution speed\&. Simply #define FASTER_GROUP and then use the class as usual\&.
+.PP
+The reading is done in two steps : first extracts all the hits of the group and put it in a vector, then each call of \fBRead()\fP moves in the group\&. No extra information is extracted : from outside of the class, everything goes as if there was no group\&.
+.PP
+\fBAttention\fP
+.RS 4
+The pileup bit for CRRC4 is not handled 
+.RE
+.PP
+
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "FasterReader::FasterReader (\fBHit\fP * _hit, std::string _filename)\fC [inline]\fP"
+
+.PP
+Construct a new Faster Reader object\&. 
+.SS "FasterReader::~FasterReader ()\fC [inline]\fP"
+
+.PP
+Destroy the Faster Reader object\&. 
+.SH "Member Function Documentation"
+.PP 
+.SS "auto const& FasterReader::filename () const\fC [inline]\fP"
+
+.PP
+Get the name of the file being read\&. 
+.SS "auto const& FasterReader::getCounter () const\fC [inline]\fP"
+
+.PP
+Returns the hits counter\&. 
+.SS "auto const& FasterReader::getFilename () const\fC [inline]\fP"
+
+.PP
+Get the name of the file being read\&. 
+.SS "\fBHit\fP* FasterReader::getHit () const\fC [inline]\fP"
+
+.PP
+\fBDeprecated\fP
+.RS 4
+Get the current \fBHit\fP 
+.RE
+.PP
+
+.SS "bool FasterReader::Initialize ()\fC [inline]\fP, \fC [private]\fP"
+
+.PP
+Setup the fasterac\&.h library to read the data\&. 
+.SS "bool FasterReader::InitializeReader ()\fC [private]\fP"
+
+.SS "bool const& FasterReader::isReady () const\fC [inline]\fP"
+
+.PP
+If the initialization went badly then returns false\&. 
+.SS "FasterReader::operator bool () const &\fC [inline]\fP"
+
+.PP
+If the initialization went badly then returns false\&. 
+.SS "bool FasterReader::Read ()\fC [inline]\fP"
+
+.PP
+Main method\&. Extract the next hit from the data file and fills the \fBHit\fP *m_hit object\&. \fBHit\fP hit;
+.PP
+\fBFasterReader\fP reader(&hit, filename); 
+.PP
+.nf
+ while(reader.Read())
+ {
+    // This hit is filled/updated at each iteration by the data read in the ReadData() private method
+    print(hit); 
+ }
+
+.fi
+.PP
+.PP
+\fBReturns\fP
+.RS 4
+true if the end of the file is reached, false otherwise 
+.RE
+.PP
+
+.SS "bool FasterReader::ReadData (faster_data_p const & _data)\fC [inline]\fP, \fC [private]\fP"
+
+.PP
+Treats faster data\&. FASTER_GROUP
+.SS "void FasterReader::ReadDataGroup (faster_data_p const & _data)\fC [private]\fP"
+
+.PP
+Treats the faster data groups\&. 
+.SS "bool FasterReader::ReadGroup ()\fC [private]\fP"
+
+.PP
+Replace the standard ReadSimple if the faster data contains groups First of all, the m_write variable is used to make sure only the handled types are managed (see \fBswitch_alias()\fP definition) First hit read : goes inside \fBReadData()\fP if it isn't a GROUP_TYPE_ALIAS then read it normally else : recursively read the data inside of the group and fill in m_hit_group_buffer returns the first hit // TO CHECK THIS !!! and sets m_inGroup to true The other hits : if we still are in a group (m_inGroup is true): reads the next hit in m_hit_group_buffer else : if it isn't a GROUP_TYPE_ALIAS then read it normally else : recursively read the data inside of the group and fill in m_hit_group_buffer returns the first hit // TO CHECK THIS !!! and sets m_inGroup to true\&. 
+.SS "bool FasterReader::ReadSimple ()\fC [inline]\fP, \fC [private]\fP"
+
+.PP
+Read triggerless data\&. This function is replaced by ReadGroup if the faster data contains groups, this one is simply faster 
+.SS "bool FasterReader::Reset ()\fC [inline]\fP"
+
+.PP
+Reset the cursor to the begining of the document\&. 
+.SS "void FasterReader::setHit (\fBHit\fP * hit)\fC [inline]\fP"
+
+.PP
+\fBTest\fP
+.RS 4
+Set the \fBHit\fP object \\nNever tested, but should work ! 
+.RE
+.PP
+
+.SS "static void FasterReader::setMaxHits (\fBulonglong\fP maxHits)\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Set the number of hits to read inside each file\&. 
+.SS "bool FasterReader::switch_alias (\fBuchar\fP const & _alias, faster_data_p const & _data)\fC [inline]\fP, \fC [private]\fP"
+
+.PP
+Treat the specific part of data (QDC gates, spectro ADC \&.\&.\&.) Internal method that is used to fill hit\&.adc depending on the alias of the data, that correspond to a certain kind of faster data\&. 
+.SS "void FasterReader::TreatCRRC4 (faster_data_p const & _data)\fC [inline]\fP, \fC [private]\fP"
+
+.PP
+Load CRRC4 data\&. Internal method used to extract ADC value from CRRC4 filter
+.PP
+\fBAttention\fP
+.RS 4
+m_hit->pileup = (false); //TO BE LOOKED AT 
+.RE
+.PP
+
+.SS "void FasterReader::TreatQDC1 (faster_data_p const & _data)\fC [inline]\fP, \fC [private]\fP"
+
+.PP
+Load QDC1 data\&. Internal method used to extract QDC values with 1 gate 
+.SS "void FasterReader::TreatQDC2 (faster_data_p const & _data)\fC [inline]\fP, \fC [private]\fP"
+
+.PP
+Load qdc2 data\&. Internal method used to extract QDC values with 2 gates 
+.SS "void FasterReader::TreatQDC3 (faster_data_p const & _data)\fC [inline]\fP, \fC [private]\fP"
+
+.PP
+Load qdc3 data\&. Internal method used to extract QDC values with 2 gates 
+.SS "void FasterReader::TreatRF (faster_data_p const & _data)\fC [inline]\fP, \fC [private]\fP"
+
+.PP
+Load RF data\&. Internal method used to extract RF period 
+.SS "void FasterReader::TreatTrapez (faster_data_p const & _data)\fC [inline]\fP, \fC [private]\fP"
+
+.PP
+Load Trapez data\&. Internal method used to extract ADC value from trapezoid filter 
+.SH "Member Data Documentation"
+.PP 
+.SS "std::unordered_map<std::string, bool> FasterReader::error_message\fC [private]\fP"
+
+.SS "\fBuchar\fP FasterReader::m_alias = 0\fC [private]\fP"
+
+.SS "\fBulonglong\fP FasterReader::m_counter = 0\fC [private]\fP"
+
+.SS "\fBulonglong\fP FasterReader::m_cursor = 0\fC [private]\fP"
+
+.SS "faster_data_p FasterReader::m_data\fC [private]\fP"
+
+.SS "\fBHit\fP FasterReader::m_empty_hit\fC [private]\fP"
+
+.SS "std::string FasterReader::m_filename = ''\fC [private]\fP"
+
+.SS "\fBushort\fP FasterReader::m_group_read_cursor = 0\fC [private]\fP"
+
+.SS "\fBushort\fP FasterReader::m_group_write_cursor = 0\fC [private]\fP"
+
+.SS "\fBHit\fP* FasterReader::m_hit = nullptr\fC [private]\fP"
+
+.SS "std::vector<\fBHit\fP*> FasterReader::m_hit_group_buffer\fC [private]\fP"
+
+.SS "\fBushort\fP FasterReader::m_inGroup = false\fC [private]\fP"
+
+.SS "bool FasterReader::m_kReady = false\fC [private]\fP"
+
+.SS "\fBulonglong\fP FasterReader::m_maxHits = \-1\fC [static]\fP, \fC [private]\fP"
+
+.SS "faster_file_reader_p FasterReader::m_reader = NULL\fC [private]\fP"
+
+.SS "bool FasterReader::m_write = false\fC [private]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Nuball2 from the source code\&.

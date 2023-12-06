@@ -1,0 +1,161 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_class_clovers_1_1_prompt_gate" xml:lang="en-US">
+<title>Clovers::PromptGate Class Reference</title>
+<indexterm><primary>Clovers::PromptGate</primary></indexterm>
+<para>
+<computeroutput>#include &lt;Clovers.hpp&gt;</computeroutput>
+</para>
+Collaboration diagram for Clovers::PromptGate:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_clovers_1_1_prompt_gate__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>bool <link linkend="_class_clovers_1_1_prompt_gate_1a7b9c6cb52b002391751b6f1de03062fe">operator()</link> (double const &amp;time)</para>
+</listitem>
+            <listitem><para>bool <link linkend="_class_clovers_1_1_prompt_gate_1a0361a1e0c672d0302e126e14c5dc59a3">operator()</link> (double const &amp;time, float const &amp;energy)</para>
+
+<para>Is the hit in the gate. </para>
+</listitem>
+            <listitem><para><link linkend="_class_clovers_1_1_prompt_gate_1a35cb13d9f04935c2d43cc24a9773a406">PromptGate</link> ()</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Private Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>float <link linkend="_class_clovers_1_1_prompt_gate_1a781245b0785affec4dc3acb3c40ed303">intermediate_start</link> (float const energy)</para>
+</listitem>
+            <listitem><para>float <link linkend="_class_clovers_1_1_prompt_gate_1a98e79d17cebda167160ad84138900110">intermediate_stop</link> (float const energy)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Private Attributes    </title>
+        <itemizedlist>
+            <listitem><para>float <link linkend="_class_clovers_1_1_prompt_gate_1ac3c7946fdddfaea3d944d3a53f77788c">m_high_E</link> = 200</para>
+</listitem>
+            <listitem><para><link linkend="__gate_8hpp_1aec153c0c98a059999caa4cfb803777c8">Gate</link> <link linkend="_class_clovers_1_1_prompt_gate_1a8d445ecd07d7ceb91fca8f8e98f98ec6">m_high_E_gate</link> = {-15.0, 7.0 }</para>
+</listitem>
+            <listitem><para>float <link linkend="_class_clovers_1_1_prompt_gate_1ab8d61188e744b02341381601a2b5fd5f">m_low_E</link> = 50</para>
+</listitem>
+            <listitem><para><link linkend="__gate_8hpp_1aec153c0c98a059999caa4cfb803777c8">Gate</link> <link linkend="_class_clovers_1_1_prompt_gate_1aa725929dbc349e34b8d696a2f0575540">m_low_E_gate</link> = {-20.0, 40.0}</para>
+</listitem>
+            <listitem><para>float <link linkend="_class_clovers_1_1_prompt_gate_1a8b8f752b98956440347786da814db71b">m_start_coeff</link> = 0.f</para>
+</listitem>
+            <listitem><para>float <link linkend="_class_clovers_1_1_prompt_gate_1a5f72ef2730a18d95cbb44797802bdc0b">m_start_intercept</link> = 0.f</para>
+</listitem>
+            <listitem><para>float <link linkend="_class_clovers_1_1_prompt_gate_1a2e853072f112b7a5d630b0672e19958d">m_stop_coeff</link> = 0.f</para>
+</listitem>
+            <listitem><para>float <link linkend="_class_clovers_1_1_prompt_gate_1a9e5b930b3774e9f611444bf7a3c6714c">m_stop_intercept</link> = 0.f</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_class_clovers_1_1_prompt_gate_1a35cb13d9f04935c2d43cc24a9773a406"/>    <section>
+    <title>PromptGate()</title>
+<indexterm><primary>PromptGate</primary><secondary>Clovers::PromptGate</secondary></indexterm>
+<indexterm><primary>Clovers::PromptGate</primary><secondary>PromptGate</secondary></indexterm>
+<para><computeroutput>Clovers::PromptGate::PromptGate ( )<computeroutput>[inline]</computeroutput></computeroutput></para></section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_class_clovers_1_1_prompt_gate_1a781245b0785affec4dc3acb3c40ed303"/>    <section>
+    <title>intermediate_start()</title>
+<indexterm><primary>intermediate_start</primary><secondary>Clovers::PromptGate</secondary></indexterm>
+<indexterm><primary>Clovers::PromptGate</primary><secondary>intermediate_start</secondary></indexterm>
+<para><computeroutput>float Clovers::PromptGate::intermediate_start (float const energy)<computeroutput>[inline]</computeroutput>, <computeroutput>[private]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_clovers_1_1_prompt_gate_a781245b0785affec4dc3acb3c40ed303_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_clovers_1_1_prompt_gate_1a98e79d17cebda167160ad84138900110"/>    <section>
+    <title>intermediate_stop()</title>
+<indexterm><primary>intermediate_stop</primary><secondary>Clovers::PromptGate</secondary></indexterm>
+<indexterm><primary>Clovers::PromptGate</primary><secondary>intermediate_stop</secondary></indexterm>
+<para><computeroutput>float Clovers::PromptGate::intermediate_stop (float const energy)<computeroutput>[inline]</computeroutput>, <computeroutput>[private]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_clovers_1_1_prompt_gate_a98e79d17cebda167160ad84138900110_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_clovers_1_1_prompt_gate_1a7b9c6cb52b002391751b6f1de03062fe"/>    <section>
+    <title>operator()()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>operator()</primary><secondary>Clovers::PromptGate</secondary></indexterm>
+<indexterm><primary>Clovers::PromptGate</primary><secondary>operator()</secondary></indexterm>
+<para><computeroutput>bool Clovers::PromptGate::operator() (double const &amp; time)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_clovers_1_1_prompt_gate_1a0361a1e0c672d0302e126e14c5dc59a3"/>    <section>
+    <title>operator()()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>operator()</primary><secondary>Clovers::PromptGate</secondary></indexterm>
+<indexterm><primary>Clovers::PromptGate</primary><secondary>operator()</secondary></indexterm>
+<para><computeroutput>bool Clovers::PromptGate::operator() (double const &amp; time, float const &amp; energy)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>Is the hit in the gate. </para>
+</para>
+
+<para>Three zones : high energy, intermediate energy and lower energy. The intermediate energies, links the high and low by a straight line whose parameters ax+b are calculated in the constructor</para>
+
+<para>if in normal mode, simple time gates </para>
+Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_clovers_1_1_prompt_gate_a0361a1e0c672d0302e126e14c5dc59a3_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_class_clovers_1_1_prompt_gate_1ac3c7946fdddfaea3d944d3a53f77788c"/>    <section>
+    <title>m_high_E</title>
+<indexterm><primary>m_high_E</primary><secondary>Clovers::PromptGate</secondary></indexterm>
+<indexterm><primary>Clovers::PromptGate</primary><secondary>m_high_E</secondary></indexterm>
+<para><computeroutput>float Clovers::PromptGate::m_high_E = 200<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_clovers_1_1_prompt_gate_1a8d445ecd07d7ceb91fca8f8e98f98ec6"/>    <section>
+    <title>m_high_E_gate</title>
+<indexterm><primary>m_high_E_gate</primary><secondary>Clovers::PromptGate</secondary></indexterm>
+<indexterm><primary>Clovers::PromptGate</primary><secondary>m_high_E_gate</secondary></indexterm>
+<para><computeroutput><link linkend="__gate_8hpp_1aec153c0c98a059999caa4cfb803777c8">Gate</link> Clovers::PromptGate::m_high_E_gate = {-15.0, 7.0 }<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_clovers_1_1_prompt_gate_1ab8d61188e744b02341381601a2b5fd5f"/>    <section>
+    <title>m_low_E</title>
+<indexterm><primary>m_low_E</primary><secondary>Clovers::PromptGate</secondary></indexterm>
+<indexterm><primary>Clovers::PromptGate</primary><secondary>m_low_E</secondary></indexterm>
+<para><computeroutput>float Clovers::PromptGate::m_low_E = 50<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_clovers_1_1_prompt_gate_1aa725929dbc349e34b8d696a2f0575540"/>    <section>
+    <title>m_low_E_gate</title>
+<indexterm><primary>m_low_E_gate</primary><secondary>Clovers::PromptGate</secondary></indexterm>
+<indexterm><primary>Clovers::PromptGate</primary><secondary>m_low_E_gate</secondary></indexterm>
+<para><computeroutput><link linkend="__gate_8hpp_1aec153c0c98a059999caa4cfb803777c8">Gate</link> Clovers::PromptGate::m_low_E_gate = {-20.0, 40.0}<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_clovers_1_1_prompt_gate_1a8b8f752b98956440347786da814db71b"/>    <section>
+    <title>m_start_coeff</title>
+<indexterm><primary>m_start_coeff</primary><secondary>Clovers::PromptGate</secondary></indexterm>
+<indexterm><primary>Clovers::PromptGate</primary><secondary>m_start_coeff</secondary></indexterm>
+<para><computeroutput>float Clovers::PromptGate::m_start_coeff = 0.f<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_clovers_1_1_prompt_gate_1a5f72ef2730a18d95cbb44797802bdc0b"/>    <section>
+    <title>m_start_intercept</title>
+<indexterm><primary>m_start_intercept</primary><secondary>Clovers::PromptGate</secondary></indexterm>
+<indexterm><primary>Clovers::PromptGate</primary><secondary>m_start_intercept</secondary></indexterm>
+<para><computeroutput>float Clovers::PromptGate::m_start_intercept = 0.f<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_clovers_1_1_prompt_gate_1a2e853072f112b7a5d630b0672e19958d"/>    <section>
+    <title>m_stop_coeff</title>
+<indexterm><primary>m_stop_coeff</primary><secondary>Clovers::PromptGate</secondary></indexterm>
+<indexterm><primary>Clovers::PromptGate</primary><secondary>m_stop_coeff</secondary></indexterm>
+<para><computeroutput>float Clovers::PromptGate::m_stop_coeff = 0.f<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_clovers_1_1_prompt_gate_1a9e5b930b3774e9f611444bf7a3c6714c"/>    <section>
+    <title>m_stop_intercept</title>
+<indexterm><primary>m_stop_intercept</primary><secondary>Clovers::PromptGate</secondary></indexterm>
+<indexterm><primary>Clovers::PromptGate</primary><secondary>m_stop_intercept</secondary></indexterm>
+<para><computeroutput>float Clovers::PromptGate::m_stop_intercept = 0.f<computeroutput>[private]</computeroutput></computeroutput></para></section>
+<para>
+The documentation for this class was generated from the following file:</para>
+lib/Analyse/<link linkend="__clovers_8hpp">Clovers.hpp</link></section>
+</section>

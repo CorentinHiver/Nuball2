@@ -96,71 +96,109 @@ $(document).ready(function(){initNavTree('string__functions_8hpp_source.html',''
 <div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="string__functions_8hpp.html#abb2a169e2ba2e6a949a988e4d591699e">    9</a></span>&#160;std::string <a class="code" href="string__functions_8hpp.html#abb2a169e2ba2e6a949a988e4d591699e">removeFirstPart</a> (std::string <span class="keyword">const</span> &amp; <span class="keywordtype">string</span>, <span class="keywordtype">char</span> <span class="keyword">const</span> &amp; sep) { <span class="keywordflow">return</span> (<span class="keywordtype">string</span>.substr(   <span class="keywordtype">string</span>.find_first_of(sep) ));  }</div>
 <div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="string__functions_8hpp.html#a416863eb8599122a08605e1f2f94d617">   10</a></span>&#160;std::string <a class="code" href="string__functions_8hpp.html#a416863eb8599122a08605e1f2f94d617">removeLastPart</a>  (std::string <span class="keyword">const</span> &amp; <span class="keywordtype">string</span>, <span class="keywordtype">char</span> <span class="keyword">const</span> &amp; sep) { <span class="keywordflow">return</span> (<span class="keywordtype">string</span>.substr(0, <span class="keywordtype">string</span>.find_last_of(sep)  ));  }</div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
-<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="string__functions_8hpp.html#a268dcfc5d9e3c7011d2fda3e746affc5">   12</a></span>&#160;std::vector&lt;std::string&gt; <a class="code" href="string__functions_8hpp.html#a268dcfc5d9e3c7011d2fda3e746affc5">getList</a>(std::string <span class="keywordtype">string</span>, <span class="keywordtype">char</span> <span class="keyword">const</span> &amp; sep)</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;{</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;  std::size_t pos = 0;</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;  std::vector&lt;std::string&gt; ret;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;  <span class="keywordflow">while</span>((pos = <span class="keywordtype">string</span>.find(sep) ) != -1ul) <span class="comment">// ul stands for unsigned long int</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;  {</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keywordflow">if</span> (pos==0) </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    {<span class="comment">// If the character is at the first character then skip it;</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;      <span class="keywordtype">string</span> = <span class="keywordtype">string</span>.substr(1);</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;      <span class="keywordflow">continue</span>; </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    }</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (pos == <span class="keywordtype">string</span>.size())</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    {<span class="comment">// If the character is at the end of the string, then we have reached and can terminate the loop</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;      <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    }</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    {</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;      ret.push_back(<span class="keywordtype">string</span>.substr(0,pos));</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;      <span class="keywordtype">string</span>.erase(0,pos+1);    </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    }</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  }</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;  <span class="keywordflow">return</span> ret;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;}</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
-<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="string__functions_8hpp.html#a8cf535d46125ed8622aedb6300d8de46">   36</a></span>&#160;std::string <a class="code" href="string__functions_8hpp.html#a8cf535d46125ed8622aedb6300d8de46">removeBlankSpace</a>(std::string str)</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;{</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  <span class="keywordtype">int</span> pos = 0;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  <span class="keywordflow">while</span> ( (pos = <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(str.find(<span class="charliteral">&#39; &#39;</span>)) ) != -1)</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  {</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    str = str.substr(0,pos) + str.substr(pos+1,str.size()-pos-1);</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  }</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  <span class="keywordflow">return</span> str;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;}</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="string__functions_8hpp.html#a93bd453ee6b6af7c8e5e970bb1000651">   52</a></span>&#160;std::string &amp; <a class="code" href="string__functions_8hpp.html#a93bd453ee6b6af7c8e5e970bb1000651">pop_front</a>(std::string &amp; <span class="keywordtype">string</span>) {<span class="keywordflow">if</span> (<span class="keywordtype">string</span>.size() &gt; 0) <span class="keywordtype">string</span>.erase(0,1); <span class="keywordflow">return</span> string;}</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="string__functions_8hpp.html#aeda11ede077505e8eb3d667a6cb02788">   57</a></span>&#160;std::string <a class="code" href="string__functions_8hpp.html#aeda11ede077505e8eb3d667a6cb02788">rpCommaWDots</a>(std::string str)</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;{</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  <span class="keywordtype">int</span> pos = 0;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  <span class="keywordflow">while</span> ( ( pos = <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(str.find(<span class="stringliteral">&quot;,&quot;</span>)) ) != -1)</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  {</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    str = str.substr(0,pos) + <span class="stringliteral">&quot;.&quot;</span> + str.substr(pos+1,str.size()-pos-1);</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;  }</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  <span class="keywordflow">return</span> str;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;}</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
-<div class="line"><a name="l00070"></a><span class="lineno"><a class="line" href="string__functions_8hpp.html#a4adaa91d1b90e1b97cc5fee8998e09b1">   70</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="string__functions_8hpp.html#a4adaa91d1b90e1b97cc5fee8998e09b1">isNumber</a>(std::string <span class="keyword">const</span> &amp; <span class="keywordtype">string</span>)</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;{</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;  <span class="keywordflow">for</span> (<span class="keyword">auto</span> <span class="keyword">const</span> &amp; c : <span class="keywordtype">string</span>)</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;  {</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keywordflow">if</span> (!(isdigit(c) || <span class="stringliteral">&quot;E&quot;</span>)) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  }</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;}</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="preprocessor">#endif </span><span class="comment">//STRING_FUNCTIONS_HPP</span></div>
-<div class="ttc" id="astring__functions_8hpp_html_a268dcfc5d9e3c7011d2fda3e746affc5"><div class="ttname"><a href="string__functions_8hpp.html#a268dcfc5d9e3c7011d2fda3e746affc5">getList</a></div><div class="ttdeci">std::vector&lt; std::string &gt; getList(std::string string, char const &amp;sep)</div><div class="ttdef"><b>Definition:</b> string_functions.hpp:12</div></div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="string__functions_8hpp.html#a44ad60b408ba7b75bdf7ae75f8d2532f">   22</a></span>&#160;std::vector&lt;std::string&gt; <a class="code" href="string__functions_8hpp.html#a44ad60b408ba7b75bdf7ae75f8d2532f">getList</a>(std::string <span class="keywordtype">string</span>, <span class="keywordtype">char</span> <span class="keyword">const</span> &amp; separator, <span class="keywordtype">bool</span> <span class="keyword">const</span> &amp; removeVoids = <span class="keyword">false</span>)</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;{</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;  <span class="keywordtype">size_t</span> pos = 0;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;  std::vector&lt;std::string&gt; ret;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;  <span class="keywordflow">while</span>((pos = <span class="keywordtype">string</span>.find(separator) ) != -1ul)</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  {</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordflow">if</span> (pos==0) </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    {</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;      <span class="keywordflow">if</span> (!removeVoids) ret.push_back(<span class="stringliteral">&quot;&quot;</span>);</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;      <span class="keywordtype">string</span>.erase(0,1);</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;      <span class="keywordflow">continue</span>; </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    }</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (pos == <span class="keywordtype">string</span>.size())</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    {<span class="comment">// If the separator is at the end of the string then we have completed the list and can terminate the loop</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;      ret.push_back(<span class="keywordtype">string</span>.substr(0,pos));</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;      <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    }</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    {<span class="comment">// If the separator is at the middle of the string then remove the part before and push it into the vector</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;      ret.push_back(<span class="keywordtype">string</span>.substr(0,pos));</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;      <span class="keywordtype">string</span>.erase(0,pos+1);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    }</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  }</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  <span class="comment">// If the string does not finish with the character then we must take the last part of it</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  <span class="keywordflow">if</span> (<span class="keywordtype">string</span>.size() &gt; 0) ret.push_back(<span class="keywordtype">string</span>);</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  <span class="keywordflow">return</span> ret;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;}</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
+<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="string__functions_8hpp.html#a8cf535d46125ed8622aedb6300d8de46">   51</a></span>&#160;std::string <a class="code" href="string__functions_8hpp.html#a8cf535d46125ed8622aedb6300d8de46">removeBlankSpace</a>(std::string str)</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;{</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  <span class="keywordtype">int</span> pos = 0;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  <span class="keywordflow">while</span> ( (pos = <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(str.find(<span class="charliteral">&#39; &#39;</span>)) ) != -1)</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  {</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    str = str.substr(0,pos) + str.substr(pos+1,str.size()-pos-1);</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  }</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  <span class="keywordflow">return</span> str;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;}</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
+<div class="line"><a name="l00071"></a><span class="lineno"><a class="line" href="string__functions_8hpp.html#ab2c67e2ba68d5a42ce9a48dafdbba829">   71</a></span>&#160;std::string <a class="code" href="string__functions_8hpp.html#ab2c67e2ba68d5a42ce9a48dafdbba829">replaceCharacter</a>(std::string <span class="keyword">const</span> &amp; istring, <span class="keywordtype">char</span> <span class="keyword">const</span> &amp; ichar, <span class="keywordtype">char</span> <span class="keyword">const</span> &amp; ochar)</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;{</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;  <span class="keyword">auto</span> list = <a class="code" href="string__functions_8hpp.html#a44ad60b408ba7b75bdf7ae75f8d2532f">getList</a>(istring, ichar);</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;  std::string ostring;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;  <span class="keywordflow">for</span> (<span class="keyword">auto</span> <span class="keyword">const</span> &amp; <span class="keywordtype">string</span> : list)</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;  {</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    ostring+=(<span class="keywordtype">string</span>+ochar);</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;  }</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;  <span class="keywordflow">return</span> ostring;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;}</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
+<div class="line"><a name="l00088"></a><span class="lineno"><a class="line" href="string__functions_8hpp.html#a93bd453ee6b6af7c8e5e970bb1000651">   88</a></span>&#160;std::string &amp; <a class="code" href="string__functions_8hpp.html#a93bd453ee6b6af7c8e5e970bb1000651">pop_front</a>(std::string &amp; <span class="keywordtype">string</span>) {<span class="keywordflow">if</span> (<span class="keywordtype">string</span>.size() &gt; 0) <span class="keywordtype">string</span>.erase(0,1); <span class="keywordflow">return</span> string;}</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
+<div class="line"><a name="l00092"></a><span class="lineno"><a class="line" href="string__functions_8hpp.html#aeda11ede077505e8eb3d667a6cb02788">   92</a></span>&#160;std::string <a class="code" href="string__functions_8hpp.html#aeda11ede077505e8eb3d667a6cb02788">rpCommaWDots</a>(std::string str)</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;{</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;  <span class="keywordtype">int</span> pos = 0;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;  <span class="keywordflow">while</span> ( ( pos = <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(str.find(<span class="stringliteral">&quot;,&quot;</span>)) ) != -1)</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;  {</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    str = str.substr(0,pos) + <span class="stringliteral">&quot;.&quot;</span> + str.substr(pos+1,str.size()-pos-1);</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;  }</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;  <span class="keywordflow">return</span> str;</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;}</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
+<div class="line"><a name="l00104"></a><span class="lineno"><a class="line" href="string__functions_8hpp.html#a4adaa91d1b90e1b97cc5fee8998e09b1">  104</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="string__functions_8hpp.html#a4adaa91d1b90e1b97cc5fee8998e09b1">isNumber</a>(std::string <span class="keyword">const</span> &amp; <span class="keywordtype">string</span>)</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;{</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;  <span class="keywordflow">for</span> (<span class="keyword">auto</span> <span class="keyword">const</span> &amp; c : <span class="keywordtype">string</span>)</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;  {</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    <span class="keywordflow">if</span> (!(isdigit(c) || <span class="stringliteral">&quot;E&quot;</span>)) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;  }</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;}</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160; </div>
+<div class="line"><a name="l00113"></a><span class="lineno"><a class="line" href="string__functions_8hpp.html#a03fb03d95885354ac3c329693588097b">  113</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="string__functions_8hpp.html#a03fb03d95885354ac3c329693588097b">found</a>(std::string <span class="keyword">const</span> &amp; <span class="keywordtype">string</span>, std::string <span class="keyword">const</span> &amp; substr)</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;{</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;  <span class="keywordflow">return</span> (<span class="keywordtype">string</span>.find(substr) != std::string::npos);</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;}</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160; </div>
+<div class="line"><a name="l00118"></a><span class="lineno"><a class="line" href="string__functions_8hpp.html#a952e248eeca9d6f3be780b68df3f3264">  118</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="string__functions_8hpp.html#a952e248eeca9d6f3be780b68df3f3264">remove</a>(std::string &amp; <span class="keywordtype">string</span>, std::string <span class="keyword">const</span> &amp; substr)</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;{</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;  <span class="keyword">auto</span> pos = <span class="keywordtype">string</span>.find(substr);</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;  <span class="keywordflow">if</span> (pos!=std::string::npos)</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;  {</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    <span class="keyword">auto</span> first_str = <span class="keywordtype">string</span>.substr(0, pos);</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    <span class="keywordtype">string</span> = <span class="keywordtype">string</span>.substr(0, pos)+<span class="keywordtype">string</span>.substr(pos+substr.size());</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;  }</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;  <span class="keywordflow">else</span> <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;}</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160; </div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="preprocessor">#endif </span><span class="comment">//STRING_FUNCTIONS_HPP</span></div>
+<div class="ttc" id="astring__functions_8hpp_html_a03fb03d95885354ac3c329693588097b"><div class="ttname"><a href="string__functions_8hpp.html#a03fb03d95885354ac3c329693588097b">found</a></div><div class="ttdeci">bool found(std::string const &amp;string, std::string const &amp;substr)</div><div class="ttdef"><b>Definition:</b> string_functions.hpp:113</div></div>
 <div class="ttc" id="astring__functions_8hpp_html_a3f3e5a4df9e542b1aa927c29ddf26af3"><div class="ttname"><a href="string__functions_8hpp.html#a3f3e5a4df9e542b1aa927c29ddf26af3">lastPart</a></div><div class="ttdeci">std::string lastPart(std::string const &amp;string, char const &amp;sep)</div><div class="ttdef"><b>Definition:</b> string_functions.hpp:8</div></div>
 <div class="ttc" id="astring__functions_8hpp_html_a416863eb8599122a08605e1f2f94d617"><div class="ttname"><a href="string__functions_8hpp.html#a416863eb8599122a08605e1f2f94d617">removeLastPart</a></div><div class="ttdeci">std::string removeLastPart(std::string const &amp;string, char const &amp;sep)</div><div class="ttdef"><b>Definition:</b> string_functions.hpp:10</div></div>
-<div class="ttc" id="astring__functions_8hpp_html_a4adaa91d1b90e1b97cc5fee8998e09b1"><div class="ttname"><a href="string__functions_8hpp.html#a4adaa91d1b90e1b97cc5fee8998e09b1">isNumber</a></div><div class="ttdeci">bool isNumber(std::string const &amp;string)</div><div class="ttdoc">Returns true if all its characters are digits.</div><div class="ttdef"><b>Definition:</b> string_functions.hpp:70</div></div>
-<div class="ttc" id="astring__functions_8hpp_html_a8cf535d46125ed8622aedb6300d8de46"><div class="ttname"><a href="string__functions_8hpp.html#a8cf535d46125ed8622aedb6300d8de46">removeBlankSpace</a></div><div class="ttdeci">std::string removeBlankSpace(std::string str)</div><div class="ttdef"><b>Definition:</b> string_functions.hpp:36</div></div>
-<div class="ttc" id="astring__functions_8hpp_html_a93bd453ee6b6af7c8e5e970bb1000651"><div class="ttname"><a href="string__functions_8hpp.html#a93bd453ee6b6af7c8e5e970bb1000651">pop_front</a></div><div class="ttdeci">std::string &amp; pop_front(std::string &amp;string)</div><div class="ttdoc">Removes the first character of a string.</div><div class="ttdef"><b>Definition:</b> string_functions.hpp:52</div></div>
+<div class="ttc" id="astring__functions_8hpp_html_a44ad60b408ba7b75bdf7ae75f8d2532f"><div class="ttname"><a href="string__functions_8hpp.html#a44ad60b408ba7b75bdf7ae75f8d2532f">getList</a></div><div class="ttdeci">std::vector&lt; std::string &gt; getList(std::string string, char const &amp;separator, bool const &amp;removeVoids=false)</div><div class="ttdoc">Cuts a string into pieces separated by the given separator like ';' or ' ' or ',' ....</div><div class="ttdef"><b>Definition:</b> string_functions.hpp:22</div></div>
+<div class="ttc" id="astring__functions_8hpp_html_a4adaa91d1b90e1b97cc5fee8998e09b1"><div class="ttname"><a href="string__functions_8hpp.html#a4adaa91d1b90e1b97cc5fee8998e09b1">isNumber</a></div><div class="ttdeci">bool isNumber(std::string const &amp;string)</div><div class="ttdoc">Returns true if all its characters are digits.</div><div class="ttdef"><b>Definition:</b> string_functions.hpp:104</div></div>
+<div class="ttc" id="astring__functions_8hpp_html_a8cf535d46125ed8622aedb6300d8de46"><div class="ttname"><a href="string__functions_8hpp.html#a8cf535d46125ed8622aedb6300d8de46">removeBlankSpace</a></div><div class="ttdeci">std::string removeBlankSpace(std::string str)</div><div class="ttdoc">Remove all the blank space in a string.</div><div class="ttdef"><b>Definition:</b> string_functions.hpp:51</div></div>
+<div class="ttc" id="astring__functions_8hpp_html_a93bd453ee6b6af7c8e5e970bb1000651"><div class="ttname"><a href="string__functions_8hpp.html#a93bd453ee6b6af7c8e5e970bb1000651">pop_front</a></div><div class="ttdeci">std::string &amp; pop_front(std::string &amp;string)</div><div class="ttdoc">Removes the first character of a string.</div><div class="ttdef"><b>Definition:</b> string_functions.hpp:88</div></div>
+<div class="ttc" id="astring__functions_8hpp_html_a952e248eeca9d6f3be780b68df3f3264"><div class="ttname"><a href="string__functions_8hpp.html#a952e248eeca9d6f3be780b68df3f3264">remove</a></div><div class="ttdeci">bool remove(std::string &amp;string, std::string const &amp;substr)</div><div class="ttdef"><b>Definition:</b> string_functions.hpp:118</div></div>
 <div class="ttc" id="astring__functions_8hpp_html_ab14274457c8b46f1fe9f22745ae2186a"><div class="ttname"><a href="string__functions_8hpp.html#ab14274457c8b46f1fe9f22745ae2186a">firstPart</a></div><div class="ttdeci">std::string firstPart(std::string const &amp;string, char const &amp;sep)</div><div class="ttdef"><b>Definition:</b> string_functions.hpp:7</div></div>
+<div class="ttc" id="astring__functions_8hpp_html_ab2c67e2ba68d5a42ce9a48dafdbba829"><div class="ttname"><a href="string__functions_8hpp.html#ab2c67e2ba68d5a42ce9a48dafdbba829">replaceCharacter</a></div><div class="ttdeci">std::string replaceCharacter(std::string const &amp;istring, char const &amp;ichar, char const &amp;ochar)</div><div class="ttdoc">Replaces all the instances of one character with another.</div><div class="ttdef"><b>Definition:</b> string_functions.hpp:71</div></div>
 <div class="ttc" id="astring__functions_8hpp_html_abb2a169e2ba2e6a949a988e4d591699e"><div class="ttname"><a href="string__functions_8hpp.html#abb2a169e2ba2e6a949a988e4d591699e">removeFirstPart</a></div><div class="ttdeci">std::string removeFirstPart(std::string const &amp;string, char const &amp;sep)</div><div class="ttdef"><b>Definition:</b> string_functions.hpp:9</div></div>
-<div class="ttc" id="astring__functions_8hpp_html_aeda11ede077505e8eb3d667a6cb02788"><div class="ttname"><a href="string__functions_8hpp.html#aeda11ede077505e8eb3d667a6cb02788">rpCommaWDots</a></div><div class="ttdeci">std::string rpCommaWDots(std::string str)</div><div class="ttdoc">Replace all the commas of a std::string with dots.</div><div class="ttdef"><b>Definition:</b> string_functions.hpp:57</div></div>
+<div class="ttc" id="astring__functions_8hpp_html_aeda11ede077505e8eb3d667a6cb02788"><div class="ttname"><a href="string__functions_8hpp.html#aeda11ede077505e8eb3d667a6cb02788">rpCommaWDots</a></div><div class="ttdeci">std::string rpCommaWDots(std::string str)</div><div class="ttdoc">Replace all the commas of a std::string with dots.</div><div class="ttdef"><b>Definition:</b> string_functions.hpp:92</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

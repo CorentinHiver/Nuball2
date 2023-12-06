@@ -1,0 +1,112 @@
+.TH "ReaderManager" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+ReaderManager
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <ReaderManager\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "Bool_t \fBaddFiles\fP (std::string const &_filename)"
+.br
+.ti -1c
+.RI "Bool_t \fBaddFolder\fP (std::string folder, int nb_files=\-1)"
+.br
+.ti -1c
+.RI "void \fBflushFiles\fP ()"
+.br
+.ti -1c
+.RI "\fBHit\fP const  & \fBgetHit\fP () const"
+.br
+.ti -1c
+.RI "Int_t \fBnbFiles\fP ()"
+.br
+.ti -1c
+.RI "void \fBprintFiles\fP ()"
+.br
+.ti -1c
+.RI "\fBReaderManager\fP ()"
+.br
+.ti -1c
+.RI "Bool_t \fBreadNextFile\fP ()"
+.br
+.ti -1c
+.RI "Bool_t \fBreadNextHit\fP ()"
+.br
+.ti -1c
+.RI "Bool_t \fBreadNextHit\fP (\fBHit\fP &_hit)"
+.br
+.in -1c
+.SS "Private Member Functions"
+
+.in +1c
+.ti -1c
+.RI "Bool_t \fBsetReader\fP (Int_t const &_filecursor)"
+.br
+.ti -1c
+.RI "Bool_t \fBsetReader\fP (std::string const &_filename)"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "std::string \fBm_currentFile\fP = ''"
+.br
+.ti -1c
+.RI "Int_t \fBm_filesCursor\fP = 0"
+.br
+.ti -1c
+.RI "\fBListfiles\fP \fBm_listFiles\fP"
+.br
+.ti -1c
+.RI "DataMultiReader \fBm_Reader\fP"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "ReaderManager::ReaderManager ()"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "Bool_t ReaderManager::addFiles (std::string const & _filename)"
+
+.SS "Bool_t ReaderManager::addFolder (std::string folder, int nb_files = \fC\-1\fP)"
+
+.SS "void ReaderManager::flushFiles ()"
+
+.SS "\fBHit\fP const& ReaderManager::getHit () const\fC [inline]\fP"
+
+.SS "Int_t ReaderManager::nbFiles ()\fC [inline]\fP"
+
+.SS "void ReaderManager::printFiles ()\fC [inline]\fP"
+
+.SS "Bool_t ReaderManager::readNextFile ()"
+
+.SS "Bool_t ReaderManager::readNextHit ()\fC [inline]\fP"
+
+.SS "Bool_t ReaderManager::readNextHit (\fBHit\fP & _hit)\fC [inline]\fP"
+
+.SS "Bool_t ReaderManager::setReader (Int_t const & _filecursor)\fC [private]\fP"
+
+.SS "Bool_t ReaderManager::setReader (std::string const & _filename)\fC [private]\fP"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "std::string ReaderManager::m_currentFile = ''\fC [private]\fP"
+
+.SS "Int_t ReaderManager::m_filesCursor = 0\fC [private]\fP"
+
+.SS "\fBListfiles\fP ReaderManager::m_listFiles\fC [private]\fP"
+
+.SS "DataMultiReader ReaderManager::m_Reader\fC [private]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Nuball2 from the source code\&.

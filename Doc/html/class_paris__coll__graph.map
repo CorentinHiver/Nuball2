@@ -1,0 +1,6 @@
+<map id="Paris" name="Paris">
+<area shape="rect" id="node1" title=" " alt="" coords="221,95,274,121"/>
+<area shape="rect" id="node2" href="$class_paris_cluster.html" title=" " alt="" coords="5,5,151,32"/>
+<area shape="rect" id="node3" href="$class_paris_cluster.html" title=" " alt="" coords="175,5,320,32"/>
+<area shape="rect" id="node4" href="$class_static_vector.html" title=" " alt="" coords="344,5,511,32"/>
+</map>

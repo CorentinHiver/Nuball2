@@ -1,0 +1,107 @@
+.TH "lib/Classes/SpectraAlignator.hpp" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+lib/Classes/SpectraAlignator.hpp
+.SH SYNOPSIS
+.br
+.PP
+\fC#include '\&.\&./libRoot\&.hpp'\fP
+.br
+
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBMinimisator\fP"
+.br
+.ti -1c
+.RI "struct \fBMinimisator::NelderMeadParameters\fP"
+.br
+.ti -1c
+.RI "class \fBRecalibration\fP"
+.br
+.ti -1c
+.RI "class \fBSimplex\fP"
+.br
+.ti -1c
+.RI "class \fBSpectraAlignator\fP"
+.br
+.ti -1c
+.RI "class \fBSpectraCo\fP"
+.br
+.ti -1c
+.RI "class \fBVertice\fP"
+.br
+.in -1c
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBMAX_ORDER2\fP"
+.br
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "using \fBVertices\fP = std::vector< \fBVertice\fP >"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBVertice\fP \fBoperator*\fP (double const &constant, \fBVertice\fP const &vertice)"
+.br
+.ti -1c
+.RI "std::ostream & \fBoperator<<\fP (std::ostream &out, \fBRecalibration\fP const &recal)"
+.br
+.ti -1c
+.RI "std::ostream & \fBoperator<<\fP (std::ostream &out, \fBSimplex\fP const &simplex)"
+.br
+.ti -1c
+.RI "std::ostream & \fBoperator<<\fP (std::ostream &out, \fBVertice\fP const &vertice)"
+.br
+.in -1c
+.SH "Class Documentation"
+.PP 
+.SH "struct Minimisator::NelderMeadParameters"
+.PP 
+\fBClass Members:\fP
+.RS 4
+double \fIalpha\fP 
+.br
+.PP
+double \fIbeta\fP 
+.br
+.PP
+double \fIdelta\fP 
+.br
+.PP
+double \fIgamma\fP 
+.br
+.PP
+.RE
+.PP
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define MAX_ORDER2"
+
+.SH "Typedef Documentation"
+.PP 
+.SS "using \fBVertices\fP =  std::vector<\fBVertice\fP>"
+
+.SH "Function Documentation"
+.PP 
+.SS "\fBVertice\fP operator* (double const & constant, \fBVertice\fP const & vertice)"
+
+.SS "std::ostream& operator<< (std::ostream & out, \fBRecalibration\fP const & recal)"
+
+.SS "std::ostream& operator<< (std::ostream & out, \fBSimplex\fP const & simplex)"
+
+.SS "std::ostream& operator<< (std::ostream & out, \fBVertice\fP const & vertice)"
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Nuball2 from the source code\&.

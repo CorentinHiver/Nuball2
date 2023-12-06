@@ -1,0 +1,8 @@
+<map id="removeExtension" name="removeExtension">
+<area shape="rect" id="node1" title=" " alt="" coords="465,81,601,108"/>
+<area shape="rect" id="node2" href="$class_timeshifts.html#ab877131bc1bd7394f55c3d46729ac9e6" title="Use setName instead. Set output file name of the timeshifts data." alt="" coords="245,5,417,32"/>
+<area shape="rect" id="node3" href="$class_timeshifts.html#acca1130b271301c5477d4b4a23ae4e5b" title="Use this method to setup the parameters from a string in order to calculate the timeshifts." alt="" coords="5,56,197,83"/>
+<area shape="rect" id="node4" href="$class_timeshifts.html#aa9f0f8cc1d96a5408f233449767ef0f6" title="Use setName instead. Set output root file containing the raw and corrected time spectra." alt="" coords="246,107,417,133"/>
+<area shape="rect" id="node5" href="$class_run_matrixator.html#aeb9889ba763858dfb65e05c3a7bb142e" title=" " alt="" coords="252,157,411,184"/>
+<area shape="rect" id="node6" href="$class_run_matrixator.html#aa6d13b08060fef07b50d7ab6b35be0d6" title=" " alt="" coords="29,157,173,184"/>
+</map>

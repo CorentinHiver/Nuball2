@@ -1,0 +1,143 @@
+.TH "Simplex" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Simplex
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <SpectraAlignator\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "auto \fBbegin\fP ()"
+.br
+.ti -1c
+.RI "auto \fBbegin\fP () const"
+.br
+.ti -1c
+.RI "auto \fBcentroid\fP (std::vector< int > const &sorted_vertices_indexes)"
+.br
+.ti -1c
+.RI "auto const  & \fBdim\fP ()"
+.br
+.ti -1c
+.RI "auto const  & \fBdim\fP () const"
+.br
+.ti -1c
+.RI "auto \fBend\fP ()"
+.br
+.ti -1c
+.RI "auto \fBend\fP () const"
+.br
+.ti -1c
+.RI "\fBSimplex\fP & \fBoperator=\fP (\fBSimplex\fP &&other)"
+.br
+.ti -1c
+.RI "\fBSimplex\fP & \fBoperator=\fP (\fBSimplex\fP const &other)"
+.br
+.ti -1c
+.RI "auto & \fBoperator[]\fP (int const &i)"
+.br
+.ti -1c
+.RI "auto const  & \fBoperator[]\fP (int const &i) const"
+.br
+.ti -1c
+.RI "void \fBsetVertice\fP (int const &bin, \fBVertice\fP &&vertice)"
+.br
+.ti -1c
+.RI "void \fBsetVertice\fP (int const &bin, \fBVertice\fP const &vertice)"
+.br
+.ti -1c
+.RI "\fBSimplex\fP (\fBSimplex\fP &&other)"
+.br
+.ti -1c
+.RI "\fBSimplex\fP (\fBSimplex\fP const &other)"
+.br
+.ti -1c
+.RI "\fBSimplex\fP (\fBsize_t\fP const &\fBdim\fP)"
+.br
+.ti -1c
+.RI "\fBSimplex\fP (\fBVertices\fP const &vertices)"
+.br
+.ti -1c
+.RI "auto const  & \fBsize\fP ()"
+.br
+.ti -1c
+.RI "auto const  & \fBsize\fP () const"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBVertice\fP \fBm_centroid\fP = \fBVertice\fP(\fBm_dim\fP)"
+.br
+.ti -1c
+.RI "\fBsize_t\fP \fBm_dim\fP = 0"
+.br
+.ti -1c
+.RI "int \fBm_size\fP = 0"
+.br
+.ti -1c
+.RI "\fBVertices\fP \fBm_vertices\fP"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "Simplex::Simplex (\fBsize_t\fP const & dim)\fC [inline]\fP"
+
+.SS "Simplex::Simplex (\fBVertices\fP const & vertices)\fC [inline]\fP"
+
+.SS "Simplex::Simplex (\fBSimplex\fP const & other)\fC [inline]\fP"
+
+.SS "Simplex::Simplex (\fBSimplex\fP && other)\fC [inline]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "auto Simplex::begin ()\fC [inline]\fP"
+
+.SS "auto Simplex::begin () const\fC [inline]\fP"
+
+.SS "auto Simplex::centroid (std::vector< int > const & sorted_vertices_indexes)\fC [inline]\fP"
+
+.SS "auto const& Simplex::dim ()\fC [inline]\fP"
+
+.SS "auto const& Simplex::dim () const\fC [inline]\fP"
+
+.SS "auto Simplex::end ()\fC [inline]\fP"
+
+.SS "auto Simplex::end () const\fC [inline]\fP"
+
+.SS "\fBSimplex\fP& Simplex::operator= (\fBSimplex\fP && other)\fC [inline]\fP"
+
+.SS "\fBSimplex\fP& Simplex::operator= (\fBSimplex\fP const & other)\fC [inline]\fP"
+
+.SS "auto& Simplex::operator[] (int const & i)\fC [inline]\fP"
+
+.SS "auto const& Simplex::operator[] (int const & i) const\fC [inline]\fP"
+
+.SS "void Simplex::setVertice (int const & bin, \fBVertice\fP && vertice)\fC [inline]\fP"
+
+.SS "void Simplex::setVertice (int const & bin, \fBVertice\fP const & vertice)\fC [inline]\fP"
+
+.SS "auto const& Simplex::size ()\fC [inline]\fP"
+
+.SS "auto const& Simplex::size () const\fC [inline]\fP"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "\fBVertice\fP Simplex::m_centroid = \fBVertice\fP(\fBm_dim\fP)\fC [private]\fP"
+
+.SS "\fBsize_t\fP Simplex::m_dim = 0\fC [private]\fP"
+
+.SS "int Simplex::m_size = 0\fC [private]\fP"
+
+.SS "\fBVertices\fP Simplex::m_vertices\fC [private]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Nuball2 from the source code\&.

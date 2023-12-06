@@ -90,7 +90,7 @@ $(document).ready(function(){initNavTree('class_r_f___extractor.html',''); initR
 </div><!--header-->
 <div class="contents">
 
-<p><code>#include &lt;<a class="el" href="_r_f___extractor_8hpp_source.html">RF_Extractor.hpp</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="_r_f___manager_8hpp_source.html">RF_Manager.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -98,62 +98,14 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a28abc418539d232fa46548605a5d442e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac155411b6cb3d33502500a890b51be35"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_f___extractor.html#ac155411b6cb3d33502500a890b51be35">operator bool</a> () const &amp;</td></tr>
 <tr class="separator:ac155411b6cb3d33502500a890b51be35"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a51c0871cad95fbabe8fa5918e445a0aa"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_f___extractor.html#a51c0871cad95fbabe8fa5918e445a0aa">RF_Extractor</a> (TTree *tree, <a class="el" href="class_r_f___manager.html">RF_Manager</a> &amp;rf, <a class="el" href="class_hit.html">Hit</a> &amp;hit, <a class="el" href="class_alignator.html">Alignator</a> const &amp;gindex)</td></tr>
-<tr class="separator:a51c0871cad95fbabe8fa5918e445a0aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
-<tr class="memitem:a304fa6816eaff5f88a6d20e7dd787889"><td class="memItemLeft" align="right" valign="top">Long64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_f___extractor.html#a304fa6816eaff5f88a6d20e7dd787889">m_cursor</a> = 0</td></tr>
-<tr class="separator:a304fa6816eaff5f88a6d20e7dd787889"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8295bcc2577ee5e14243a5383ecc56ca"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_f___extractor.html#a8295bcc2577ee5e14243a5383ecc56ca">m_cursor</a> = 0</td></tr>
+<tr class="separator:a8295bcc2577ee5e14243a5383ecc56ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a77ed334559bde3b717acf07794d4a5e3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_f___extractor.html#a77ed334559bde3b717acf07794d4a5e3">m_ok</a> = false</td></tr>
 <tr class="separator:a77ed334559bde3b717acf07794d4a5e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a51c0871cad95fbabe8fa5918e445a0aa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a51c0871cad95fbabe8fa5918e445a0aa">&#9670;&nbsp;</a></span>RF_Extractor()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">RF_Extractor::RF_Extractor </td>
-          <td>(</td>
-          <td class="paramtype">TTree *&#160;</td>
-          <td class="paramname"><em>tree</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="class_r_f___manager.html">RF_Manager</a> &amp;&#160;</td>
-          <td class="paramname"><em>rf</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="class_hit.html">Hit</a> &amp;&#160;</td>
-          <td class="paramname"><em>hit</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="class_alignator.html">Alignator</a> const &amp;&#160;</td>
-          <td class="paramname"><em>gindex</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="class_r_f___extractor_a51c0871cad95fbabe8fa5918e445a0aa_cgraph.png" border="0" usemap="#aclass_r_f___extractor_a51c0871cad95fbabe8fa5918e445a0aa_cgraph" alt=""/></div>
-</div>
-
-</div>
-</div>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a id="a28abc418539d232fa46548605a5d442e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a28abc418539d232fa46548605a5d442e">&#9670;&nbsp;</a></span>cursor()</h2>
@@ -177,6 +129,17 @@ Here is the call graph for this function:</div>
   </tr>
 </table>
 </div><div class="memdoc">
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_r_f___extractor_a28abc418539d232fa46548605a5d442e_icgraph.png" border="0" usemap="#aclass_r_f___extractor_a28abc418539d232fa46548605a5d442e_icgraph" alt=""/></div>
+<map name="aclass_r_f___extractor_a28abc418539d232fa46548605a5d442e_icgraph" id="aclass_r_f___extractor_a28abc418539d232fa46548605a5d442e_icgraph">
+<area shape="rect" title=" " alt="" coords="655,13,808,39"/>
+<area shape="rect" href="class_run_matrixator.html#a8d8f01fad64864d032395e18b10c2a7e" title=" " alt="" coords="424,5,607,47"/>
+<area shape="rect" href="class_run_matrixator.html#a47322f73c6a9f220f49f9fd85993fcd5" title="Multithreading of loadData_faster (you have to pass by a static method in order to multi&#45;thread it)" alt="" coords="197,5,376,47"/>
+<area shape="rect" href="class_run_matrixator.html#aa6d13b08060fef07b50d7ab6b35be0d6" title=" " alt="" coords="5,13,149,39"/>
+</map>
+</div>
 
 </div>
 </div>
@@ -206,8 +169,8 @@ Here is the call graph for this function:</div>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="a304fa6816eaff5f88a6d20e7dd787889"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a304fa6816eaff5f88a6d20e7dd787889">&#9670;&nbsp;</a></span>m_cursor</h2>
+<a id="a8295bcc2577ee5e14243a5383ecc56ca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8295bcc2577ee5e14243a5383ecc56ca">&#9670;&nbsp;</a></span>m_cursor</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -216,7 +179,7 @@ Here is the call graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">Long64_t RF_Extractor::m_cursor = 0</td>
+          <td class="memname">int RF_Extractor::m_cursor = 0</td>
         </tr>
       </table>
   </td>
@@ -251,7 +214,7 @@ Here is the call graph for this function:</div>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>lib/Classes/<a class="el" href="_r_f___extractor_8hpp_source.html">RF_Extractor.hpp</a></li>
+<li>lib/Classes/<a class="el" href="_r_f___manager_8hpp_source.html">RF_Manager.hpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

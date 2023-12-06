@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['kevperadc_1642',['keVperADC',['../classpic__fit__result.html#acc983cadd0828894afab54cb83f19d00',1,'pic_fit_result']]]
+  ['kevperadc_2307',['keVperADC',['../class_fit.html#a8f850d65b0e25b4f54f321308370b938',1,'Fit']]]
 ];

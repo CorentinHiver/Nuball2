@@ -1,0 +1,276 @@
+\doxysection{lib/\+Classes/\+Hit.hpp File Reference}
+\label{_hit_8hpp}\index{lib/Classes/Hit.hpp@{lib/Classes/Hit.hpp}}
+{\ttfamily \#include \char`\"{}../lib\+Root.\+hpp\char`\"{}}\newline
+Include dependency graph for Hit.\+hpp\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_hit_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_hit_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \textbf{ Hit}
+\begin{DoxyCompactList}\small\item\em \doxyref{Hit}{p.}{class_hit} class ///. \end{DoxyCompactList}\item 
+class \textbf{ IOptions}
+\begin{DoxyCompactList}\small\item\em IO parameters ///. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using \textbf{ ADC} = int
+\item 
+using \textbf{ ADC\+\_\+vec} = std\+::vector$<$ \textbf{ ADC} $>$
+\item 
+using \textbf{ Energy\+\_\+vec} = std\+::vector$<$ \textbf{ NRJ} $>$
+\item 
+using \textbf{ Label} = \textbf{ ushort}
+\begin{DoxyCompactList}\small\item\em Data types ///. \end{DoxyCompactList}\item 
+using \textbf{ Label\+\_\+vec} = std\+::vector$<$ \textbf{ Label} $>$
+\begin{DoxyCompactList}\small\item\em Data vectors ///. \end{DoxyCompactList}\item 
+using \textbf{ NRJ} = float
+\item 
+using \textbf{ Pileup} = bool
+\item 
+using \textbf{ Pileup\+\_\+vec} = std\+::vector$<$ \textbf{ Pileup} $>$
+\item 
+using \textbf{ Time} = Long64\+\_\+t
+\item 
+using \textbf{ Time\+\_\+ns} = float
+\item 
+using \textbf{ Time\+\_\+ns\+\_\+vec} = std\+::vector$<$ \textbf{ Time\+\_\+ns} $>$
+\item 
+using \textbf{ Time\+\_\+vec} = std\+::vector$<$ \textbf{ Time} $>$
+\item 
+using \textbf{ Timestamp} = ULong64\+\_\+t
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T , typename  = typename std\+::enable\+\_\+if$<$std\+::is\+\_\+arithmetic$<$\+T$>$\+::value$>$\+::type$>$ }\\\textbf{ ADC} \textbf{ ADC\+\_\+cast} (T const \&t)
+\begin{DoxyCompactList}\small\item\em Casts a number into unsigned ADC. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T , typename  = typename std\+::enable\+\_\+if$<$std\+::is\+\_\+arithmetic$<$\+T$>$\+::value$>$\+::type$>$ }\\\textbf{ Label} \textbf{ Label\+\_\+cast} (T const \&t)
+\begin{DoxyCompactList}\small\item\em Data casts ///. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T , typename  = typename std\+::enable\+\_\+if$<$std\+::is\+\_\+arithmetic$<$\+T$>$\+::value$>$\+::type$>$ }\\\textbf{ NRJ} \textbf{ NRJ\+\_\+cast} (T const \&t)
+\begin{DoxyCompactList}\small\item\em Casts a number into unsigned NRJ. \end{DoxyCompactList}\item 
+std\+::ostream \& \textbf{ operator$<$$<$} (std\+::ostream \&cout, \textbf{ Hit} const \&hit)
+\item 
+{\footnotesize template$<$typename T , typename  = typename std\+::enable\+\_\+if$<$std\+::is\+\_\+arithmetic$<$\+T$>$\+::value$>$\+::type$>$ }\\\textbf{ Time} \textbf{ Time\+\_\+cast} (T const \&t)
+\begin{DoxyCompactList}\small\item\em Casts a number into unsigned Time. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T , typename  = typename std\+::enable\+\_\+if$<$std\+::is\+\_\+arithmetic$<$\+T$>$\+::value$>$\+::type$>$ }\\\textbf{ Time\+\_\+ns} \textbf{ Time\+\_\+ns\+\_\+cast} (T const \&t)
+\begin{DoxyCompactList}\small\item\em Casts a number into unsigned Time\+\_\+ns. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T , typename  = typename std\+::enable\+\_\+if$<$std\+::is\+\_\+arithmetic$<$\+T$>$\+::value$>$\+::type$>$ }\\\textbf{ Timestamp} \textbf{ Timestamp\+\_\+cast} (T const \&t)
+\begin{DoxyCompactList}\small\item\em Casts a number into unsigned Timestamp. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\label{_hit_8hpp_a04b75a9e083a1c44419fdb7c3f87c361}} 
+\index{Hit.hpp@{Hit.hpp}!ADC@{ADC}}
+\index{ADC@{ADC}!Hit.hpp@{Hit.hpp}}
+\doxysubsubsection{ADC}
+{\footnotesize\ttfamily using \textbf{ ADC} =  int}
+
+\mbox{\label{_hit_8hpp_aef44026b31a934229a954352bb500202}} 
+\index{Hit.hpp@{Hit.hpp}!ADC\_vec@{ADC\_vec}}
+\index{ADC\_vec@{ADC\_vec}!Hit.hpp@{Hit.hpp}}
+\doxysubsubsection{ADC\_vec}
+{\footnotesize\ttfamily using \textbf{ ADC\+\_\+vec} =  std\+::vector$<$\textbf{ ADC} $>$}
+
+\mbox{\label{_hit_8hpp_a60a11aa033ddd007d68353349ab6d90f}} 
+\index{Hit.hpp@{Hit.hpp}!Energy\_vec@{Energy\_vec}}
+\index{Energy\_vec@{Energy\_vec}!Hit.hpp@{Hit.hpp}}
+\doxysubsubsection{Energy\_vec}
+{\footnotesize\ttfamily using \textbf{ Energy\+\_\+vec} =  std\+::vector$<$\textbf{ NRJ} $>$}
+
+\mbox{\label{_hit_8hpp_ab5dd24876acad09ec52c250c1668466c}} 
+\index{Hit.hpp@{Hit.hpp}!Label@{Label}}
+\index{Label@{Label}!Hit.hpp@{Hit.hpp}}
+\doxysubsubsection{Label}
+{\footnotesize\ttfamily using \textbf{ Label} =  \textbf{ ushort}}
+
+
+
+Data types ///. 
+
+\mbox{\label{_hit_8hpp_a25e4b8c1ad7e877a2fd808d3c661b22d}} 
+\index{Hit.hpp@{Hit.hpp}!Label\_vec@{Label\_vec}}
+\index{Label\_vec@{Label\_vec}!Hit.hpp@{Hit.hpp}}
+\doxysubsubsection{Label\_vec}
+{\footnotesize\ttfamily using \textbf{ Label\+\_\+vec} =  std\+::vector$<$\textbf{ Label} $>$}
+
+
+
+Data vectors ///. 
+
+\mbox{\label{_hit_8hpp_aad3a9d2c404fb4cd7f73b16966ae2877}} 
+\index{Hit.hpp@{Hit.hpp}!NRJ@{NRJ}}
+\index{NRJ@{NRJ}!Hit.hpp@{Hit.hpp}}
+\doxysubsubsection{NRJ}
+{\footnotesize\ttfamily using \textbf{ NRJ} =  float}
+
+\mbox{\label{_hit_8hpp_a32b9c8e0ce5bedbf84e93eff0b198eea}} 
+\index{Hit.hpp@{Hit.hpp}!Pileup@{Pileup}}
+\index{Pileup@{Pileup}!Hit.hpp@{Hit.hpp}}
+\doxysubsubsection{Pileup}
+{\footnotesize\ttfamily using \textbf{ Pileup} =  bool}
+
+\mbox{\label{_hit_8hpp_ab7c579eea4eff5ec05b4d28e26e4c231}} 
+\index{Hit.hpp@{Hit.hpp}!Pileup\_vec@{Pileup\_vec}}
+\index{Pileup\_vec@{Pileup\_vec}!Hit.hpp@{Hit.hpp}}
+\doxysubsubsection{Pileup\_vec}
+{\footnotesize\ttfamily using \textbf{ Pileup\+\_\+vec} =  std\+::vector$<$\textbf{ Pileup} $>$}
+
+\mbox{\label{_hit_8hpp_a808363c27c30b41f6ed40b62ebde3ee7}} 
+\index{Hit.hpp@{Hit.hpp}!Time@{Time}}
+\index{Time@{Time}!Hit.hpp@{Hit.hpp}}
+\doxysubsubsection{Time}
+{\footnotesize\ttfamily using \textbf{ Time} =  Long64\+\_\+t}
+
+\mbox{\label{_hit_8hpp_ad7cd28c849adeb8fec74d20155b0113d}} 
+\index{Hit.hpp@{Hit.hpp}!Time\_ns@{Time\_ns}}
+\index{Time\_ns@{Time\_ns}!Hit.hpp@{Hit.hpp}}
+\doxysubsubsection{Time\_ns}
+{\footnotesize\ttfamily using \textbf{ Time\+\_\+ns} =  float}
+
+\mbox{\label{_hit_8hpp_a72badb0bc1d4963ea7e36056916cd6c6}} 
+\index{Hit.hpp@{Hit.hpp}!Time\_ns\_vec@{Time\_ns\_vec}}
+\index{Time\_ns\_vec@{Time\_ns\_vec}!Hit.hpp@{Hit.hpp}}
+\doxysubsubsection{Time\_ns\_vec}
+{\footnotesize\ttfamily using \textbf{ Time\+\_\+ns\+\_\+vec} =  std\+::vector$<$\textbf{ Time\+\_\+ns}$>$}
+
+\mbox{\label{_hit_8hpp_a613beddb43860b3568c452fa6620510b}} 
+\index{Hit.hpp@{Hit.hpp}!Time\_vec@{Time\_vec}}
+\index{Time\_vec@{Time\_vec}!Hit.hpp@{Hit.hpp}}
+\doxysubsubsection{Time\_vec}
+{\footnotesize\ttfamily using \textbf{ Time\+\_\+vec} =  std\+::vector$<$\textbf{ Time} $>$}
+
+\mbox{\label{_hit_8hpp_a36a1e53eff51015f34900948053c0d69}} 
+\index{Hit.hpp@{Hit.hpp}!Timestamp@{Timestamp}}
+\index{Timestamp@{Timestamp}!Hit.hpp@{Hit.hpp}}
+\doxysubsubsection{Timestamp}
+{\footnotesize\ttfamily using \textbf{ Timestamp} =  ULong64\+\_\+t}
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\label{_hit_8hpp_a42de29176eeb225c09486aa0dcac5362}} 
+\index{Hit.hpp@{Hit.hpp}!ADC\_cast@{ADC\_cast}}
+\index{ADC\_cast@{ADC\_cast}!Hit.hpp@{Hit.hpp}}
+\doxysubsubsection{ADC\_cast()}
+{\footnotesize\ttfamily template$<$typename T , typename  = typename std\+::enable\+\_\+if$<$std\+::is\+\_\+arithmetic$<$\+T$>$\+::value$>$\+::type$>$ \\
+\textbf{ ADC} ADC\+\_\+cast (\begin{DoxyParamCaption}\item[{T const \&}]{t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Casts a number into unsigned ADC. 
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_hit_8hpp_a42de29176eeb225c09486aa0dcac5362_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{_hit_8hpp_af181231d97866aa957e8fe8bd67f7f64}} 
+\index{Hit.hpp@{Hit.hpp}!Label\_cast@{Label\_cast}}
+\index{Label\_cast@{Label\_cast}!Hit.hpp@{Hit.hpp}}
+\doxysubsubsection{Label\_cast()}
+{\footnotesize\ttfamily template$<$typename T , typename  = typename std\+::enable\+\_\+if$<$std\+::is\+\_\+arithmetic$<$\+T$>$\+::value$>$\+::type$>$ \\
+\textbf{ Label} Label\+\_\+cast (\begin{DoxyParamCaption}\item[{T const \&}]{t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Data casts ///. 
+
+Casts a number into unsigned Label Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_hit_8hpp_af181231d97866aa957e8fe8bd67f7f64_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{_hit_8hpp_a394977782e3af344e009b96c7d5bec92}} 
+\index{Hit.hpp@{Hit.hpp}!NRJ\_cast@{NRJ\_cast}}
+\index{NRJ\_cast@{NRJ\_cast}!Hit.hpp@{Hit.hpp}}
+\doxysubsubsection{NRJ\_cast()}
+{\footnotesize\ttfamily template$<$typename T , typename  = typename std\+::enable\+\_\+if$<$std\+::is\+\_\+arithmetic$<$\+T$>$\+::value$>$\+::type$>$ \\
+\textbf{ NRJ} NRJ\+\_\+cast (\begin{DoxyParamCaption}\item[{T const \&}]{t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Casts a number into unsigned NRJ. 
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_hit_8hpp_a394977782e3af344e009b96c7d5bec92_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{_hit_8hpp_a6a8489ad364359132484d320150555a7}} 
+\index{Hit.hpp@{Hit.hpp}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!Hit.hpp@{Hit.hpp}}
+\doxysubsubsection{operator$<$$<$()}
+{\footnotesize\ttfamily std\+::ostream\& operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{cout,  }\item[{\textbf{ Hit} const \&}]{hit }\end{DoxyParamCaption})}
+
+\mbox{\label{_hit_8hpp_a4ea1ea3a29989c67afc2c4db41e36b15}} 
+\index{Hit.hpp@{Hit.hpp}!Time\_cast@{Time\_cast}}
+\index{Time\_cast@{Time\_cast}!Hit.hpp@{Hit.hpp}}
+\doxysubsubsection{Time\_cast()}
+{\footnotesize\ttfamily template$<$typename T , typename  = typename std\+::enable\+\_\+if$<$std\+::is\+\_\+arithmetic$<$\+T$>$\+::value$>$\+::type$>$ \\
+\textbf{ Time} Time\+\_\+cast (\begin{DoxyParamCaption}\item[{T const \&}]{t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Casts a number into unsigned Time. 
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_hit_8hpp_a4ea1ea3a29989c67afc2c4db41e36b15_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{_hit_8hpp_a04b1f65fe07e6d731225feecab2b66f6}} 
+\index{Hit.hpp@{Hit.hpp}!Time\_ns\_cast@{Time\_ns\_cast}}
+\index{Time\_ns\_cast@{Time\_ns\_cast}!Hit.hpp@{Hit.hpp}}
+\doxysubsubsection{Time\_ns\_cast()}
+{\footnotesize\ttfamily template$<$typename T , typename  = typename std\+::enable\+\_\+if$<$std\+::is\+\_\+arithmetic$<$\+T$>$\+::value$>$\+::type$>$ \\
+\textbf{ Time\+\_\+ns} Time\+\_\+ns\+\_\+cast (\begin{DoxyParamCaption}\item[{T const \&}]{t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Casts a number into unsigned Time\+\_\+ns. 
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_hit_8hpp_a04b1f65fe07e6d731225feecab2b66f6_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{_hit_8hpp_a3bbfcd7f9bbec3174213c2b5eedc2edd}} 
+\index{Hit.hpp@{Hit.hpp}!Timestamp\_cast@{Timestamp\_cast}}
+\index{Timestamp\_cast@{Timestamp\_cast}!Hit.hpp@{Hit.hpp}}
+\doxysubsubsection{Timestamp\_cast()}
+{\footnotesize\ttfamily template$<$typename T , typename  = typename std\+::enable\+\_\+if$<$std\+::is\+\_\+arithmetic$<$\+T$>$\+::value$>$\+::type$>$ \\
+\textbf{ Timestamp} Timestamp\+\_\+cast (\begin{DoxyParamCaption}\item[{T const \&}]{t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Casts a number into unsigned Timestamp. 
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_hit_8hpp_a3bbfcd7f9bbec3174213c2b5eedc2edd_icgraph}
+\end{center}
+\end{figure}

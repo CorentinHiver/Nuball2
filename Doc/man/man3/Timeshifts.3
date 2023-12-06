@@ -1,0 +1,757 @@
+.TH "Timeshifts" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Timeshifts
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <Timeshifts\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "bool \fBcalculate\fP (std::string const &folder, int const &nb_files=\-1)"
+.br
+.ti -1c
+.RI "void \fBcheckForPreprompt\fP (bool const &check=true)"
+.br
+.ti -1c
+.RI "bool \fBCheckParameters\fP ()"
+.br
+.ti -1c
+.RI "void \fBdT_with_raising_edge\fP (\fBdType\fP const &type)"
+.br
+.ti -1c
+.RI "void \fBdT_with_RF\fP (\fBdType\fP const &type)"
+.br
+.ti -1c
+.RI "std::vector< \fBTime\fP > const  & \fBget\fP () const"
+.br
+.ti -1c
+.RI "\fBTime\fP const  & \fBget\fP (int const &i) const"
+.br
+.ti -1c
+.RI "bool \fBload\fP (std::string const &filename)"
+.br
+.RI "Use this method to load timeshifts from a \&.dT file\&. "
+.ti -1c
+.RI "\fBoperator bool\fP () const &"
+.br
+.ti -1c
+.RI "\fBTimeshifts\fP & \fBoperator=\fP (\fBTimeshifts\fP const &timeshifts)"
+.br
+.ti -1c
+.RI "\fBTime\fP const  & \fBoperator[]\fP (int const &i) const"
+.br
+.ti -1c
+.RI "void \fBrebin\fP (std::string const &detector, \fBTime_ns\fP const &bin_size_ns)"
+.br
+.ti -1c
+.RI "void \fBsetEminADC\fP (\fBADC\fP const &EminADC)"
+.br
+.ti -1c
+.RI "void \fBsetMaxHits\fP (\fBulong\fP const &max_hits=\-1)"
+.br
+.RI "Set maximum hits to be read in a file\&. "
+.ti -1c
+.RI "void \fBsetMult\fP (int const &min_mult, int const &max_mult)"
+.br
+.RI "Set the multiplicity gate for the events used for coincidence timeshift calculation\&. "
+.ti -1c
+.RI "void \fBsetOutData\fP (std::string const &outdata)"
+.br
+.RI "Use setName instead\&. Set output file name of the timeshifts data\&. "
+.ti -1c
+.RI "void \fBsetOutDir\fP (std::string const &outDir)"
+.br
+.RI "Set the output directory (full path);\&. "
+.ti -1c
+.RI "void \fBsetOutName\fP (std::string const &outdata)"
+.br
+.RI "Set output file name of the timeshifts data and root file\&. "
+.ti -1c
+.RI "void \fBsetOutRoot\fP (std::string const &outroot)"
+.br
+.RI "Use setName instead\&. Set output root file containing the raw and corrected time spectra\&. "
+.ti -1c
+.RI "bool \fBsetParameters\fP (std::string const &parameter)"
+.br
+.RI "Use this method to setup the parameters from a string in order to calculate the timeshifts\&. "
+.ti -1c
+.RI "void \fBsetRFOffset\fP (\fBTime\fP const &offset_ps)"
+.br
+.RI "Set RF offset (synonymous to \fBTimeshifts::setRFShift\fP) "
+.ti -1c
+.RI "void \fBsetRFOffset_ns\fP (\fBTime_ns\fP const &offset_ns)"
+.br
+.RI "Set RF offset (synonymous to \fBTimeshifts::setRFShift\fP) "
+.ti -1c
+.RI "void \fBsetRFShift\fP (\fBTime\fP const &shift)"
+.br
+.RI "Set RF shift (synonymous to \fBTimeshifts::setRFOffset\fP) "
+.ti -1c
+.RI "bool \fBsetTimeReference\fP (\fBLabel\fP const &timeRef_label)"
+.br
+.RI "Set the time reference label\&. "
+.ti -1c
+.RI "bool \fBsetTimeReference\fP (std::string const &timeRef_name)"
+.br
+.RI "Set the time reference\&. "
+.ti -1c
+.RI "bool \fBsetTimeWindow_ns\fP (std::string const &timewindow_ns_str)"
+.br
+.RI "Set the time window in ns\&. "
+.ti -1c
+.RI "bool \fBsetTimeWindow_ns\fP (\fBTime_ns\fP const &timewindow_ns)"
+.br
+.RI "Setup the time window for the coincidence in ns\&. "
+.ti -1c
+.RI "TH1F * \fBshiftTimeSpectra\fP (TH1F *histo, \fBLabel\fP const &label, std::string const &unit='ps')"
+.br
+.ti -1c
+.RI "\fBTimeshifts\fP ()"
+.br
+.ti -1c
+.RI "\fBTimeshifts\fP (const char *filename)"
+.br
+.RI "Call the \fBTimeshifts::load()\fP method to load the timeshifts from a \&.dT file\&. "
+.ti -1c
+.RI "\fBTimeshifts\fP (std::string const &filename)"
+.br
+.RI "Call the \fBTimeshifts::load()\fP method to load the timeshifts from a \&.dT file\&. "
+.ti -1c
+.RI "\fBTimeshifts\fP (std::string const &path, std::string const &name)"
+.br
+.RI "For faster to root conversion only : \fBTimeshifts::load()\fP loads the timeshifts from a \&.dT file\&. "
+.ti -1c
+.RI "\fBTimeshifts\fP (\fBTimeshifts\fP const &timeshifts)"
+.br
+.RI "Copy constructor\&. "
+.ti -1c
+.RI "void \fBverbose\fP (bool const &_verbose=true)"
+.br
+.RI "Set verbosity level\&. "
+.ti -1c
+.RI "bool const  & \fBverification\fP (bool const &verif=true)"
+.br
+.RI "Used to create\&. "
+.ti -1c
+.RI "bool \fBverify\fP (std::string const &folder, int const &nb_files=\-1)"
+.br
+.RI "To verify an already calculated timeshift \&.dT data file\&. "
+.ti -1c
+.RI "void \fBwrite\fP (std::string const &name)"
+.br
+.RI "To write down the histograms and the data\&. "
+.ti -1c
+.RI "void \fBwriteData\fP (std::string const &name)"
+.br
+.RI "To write down the data\&. "
+.ti -1c
+.RI "void \fBwriteRoot\fP (std::string const &name)"
+.br
+.RI "To write down the histograms\&. "
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "std::vector< bool > \fBm_edge_preferred_label\fP"
+.br
+.ti -1c
+.RI "std::vector< \fBuchar\fP > \fBm_nb_shifts_RF_peak\fP"
+.br
+.ti -1c
+.RI "std::vector< bool > \fBm_RF_preferred_label\fP"
+.br
+.in -1c
+.SS "Private Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBanalyse\fP ()"
+.br
+.ti -1c
+.RI "void \fBFill\fP (\fBEvent\fP const &event, \fBRF_Manager\fP &rf)"
+.br
+.ti -1c
+.RI "bool \fBInitialize\fP (bool const &initializeRaw=false, bool const &initializeCorrected=false)"
+.br
+.ti -1c
+.RI "bool \fBInitializeCorrected\fP ()"
+.br
+.ti -1c
+.RI "bool \fBInitializeRaw\fP ()"
+.br
+.ti -1c
+.RI "void \fBtreatFasterFile\fP (std::string const &filename)"
+.br
+.ti -1c
+.RI "void \fBtreatFile\fP (std::string const &filename)"
+.br
+.ti -1c
+.RI "void \fBtreatFolder\fP (std::string const &folder, int const &nb_files=\-1)"
+.br
+.ti -1c
+.RI "void \fBtreatRootFile\fP (std::string const &filename)"
+.br
+.in -1c
+.SS "Static Private Member Functions"
+
+.in +1c
+.ti -1c
+.RI "static void \fBtreatFilesMT\fP (\fBTimeshifts\fP &ts, \fBMTList\fP &files_MT)"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "std::map< \fBdType\fP, \fBTime_ns\fP > \fBm_bins_per_ns\fP"
+.br
+.ti -1c
+.RI "bool \fBm_check_preprompt\fP = false"
+.br
+.ti -1c
+.RI "bool \fBm_corrected\fP = false"
+.br
+.ti -1c
+.RI "std::map< \fBdType\fP, bool > \fBm_edge_preferred\fP"
+.br
+.ti -1c
+.RI "\fBADC\fP \fBm_Emin_ADC\fP = 0\&."
+.br
+.ti -1c
+.RI "\fBMTTHist\fP< TH1F > \fBm_EnergyRef\fP"
+.br
+.ti -1c
+.RI "\fBMTTHist\fP< TH2F > \fBm_EnergyRef_bidim\fP"
+.br
+.ti -1c
+.RI "bool \fBm_energySpectraInitialized\fP = false"
+.br
+.ti -1c
+.RI "std::string \fBm_filename\fP = ''"
+.br
+.ti -1c
+.RI "\fBFilesManager\fP \fBm_files\fP"
+.br
+.ti -1c
+.RI "bool \fBm_initialized\fP = false"
+.br
+.ti -1c
+.RI "bool \fBm_initializedCorrected\fP = false"
+.br
+.ti -1c
+.RI "bool \fBm_initializedRaw\fP = false"
+.br
+.ti -1c
+.RI "\fBulong\fP \fBm_max_hits\fP = \-1"
+.br
+.ti -1c
+.RI "int \fBm_max_mult\fP = 2"
+.br
+.ti -1c
+.RI "int \fBm_min_mult\fP = 2"
+.br
+.ti -1c
+.RI "int \fBm_nb_detectors\fP = 0"
+.br
+.ti -1c
+.RI "bool \fBm_ok\fP = false"
+.br
+.ti -1c
+.RI "std::string \fBm_outData\fP = ''"
+.br
+.ti -1c
+.RI "std::string \fBm_outDir\fP = ''"
+.br
+.ti -1c
+.RI "\fBPath\fP \fBm_outPath\fP"
+.br
+.ti -1c
+.RI "std::string \fBm_outRoot\fP = 'timeshifts\&.root'"
+.br
+.ti -1c
+.RI "std::map< \fBdType\fP, bool > \fBm_RF_preferred\fP"
+.br
+.ti -1c
+.RI "\fBLabel\fP \fBm_time_ref_label\fP = 252"
+.br
+.ti -1c
+.RI "std::string \fBm_time_ref_name\fP = 'R1A9_FATIMA_LaBr3'"
+.br
+.ti -1c
+.RI "\fBVector_MTTHist\fP< TH1F > \fBm_time_spectra\fP"
+.br
+.ti -1c
+.RI "\fBVector_MTTHist\fP< TH1F > \fBm_time_spectra_corrected\fP"
+.br
+.ti -1c
+.RI "\fBMTTHist\fP< TH2F > \fBm_time_spectra_corrected_bidim\fP"
+.br
+.ti -1c
+.RI "std::vector< \fBTime\fP > \fBm_timeshifts\fP"
+.br
+.ti -1c
+.RI "\fBTime\fP \fBm_timewindow\fP = \fBTime_cast\fP(\fBm_timewindow_ns\fP*1000)"
+.br
+.ti -1c
+.RI "\fBTime_ns\fP \fBm_timewindow_ns\fP = \fBTime_ns_cast\fP(1500)"
+.br
+.ti -1c
+.RI "std::string \fBm_ts_outdir\fP = 'Timeshifts/'"
+.br
+.ti -1c
+.RI "bool \fBm_verbose\fP = false"
+.br
+.ti -1c
+.RI "bool \fBm_verification\fP = true"
+.br
+.ti -1c
+.RI "std::vector< \fBTimestamp\fP > \fBmt_ref_time\fP"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "Timeshifts::Timeshifts ()\fC [inline]\fP"
+
+.SS "Timeshifts::Timeshifts (std::string const & filename)\fC [inline]\fP"
+
+.PP
+Call the \fBTimeshifts::load()\fP method to load the timeshifts from a \&.dT file\&. 
+.SS "Timeshifts::Timeshifts (const char * filename)\fC [inline]\fP"
+
+.PP
+Call the \fBTimeshifts::load()\fP method to load the timeshifts from a \&.dT file\&. 
+.SS "Timeshifts::Timeshifts (std::string const & path, std::string const & name)\fC [inline]\fP"
+
+.PP
+For faster to root conversion only : \fBTimeshifts::load()\fP loads the timeshifts from a \&.dT file\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIpath\fP The path of the out root directory (/path/to/run_name) 
+.br
+\fIname\fP The name of the \&.dT file without the extension (e\&.g\&. run_10)
+.RE
+.PP
+Will read a file in /path/Timeshitfs/name\&.dT 
+.SS "Timeshifts::Timeshifts (\fBTimeshifts\fP const & timeshifts)\fC [inline]\fP"
+
+.PP
+Copy constructor\&. 
+.SH "Member Function Documentation"
+.PP 
+.SS "void Timeshifts::analyse ()\fC [private]\fP"
+
+.SS "bool Timeshifts::calculate (std::string const & folder, int const & nb_files = \fC\-1\fP)"
+
+.SS "void Timeshifts::checkForPreprompt (bool const & check = \fCtrue\fP)\fC [inline]\fP"
+
+.PP
+\fBParameters\fP
+.RS 4
+\fIcheck\fP default true\&. 
+.RE
+.PP
+
+.SS "bool Timeshifts::CheckParameters ()\fC [inline]\fP"
+
+.SS "void Timeshifts::dT_with_raising_edge (\fBdType\fP const & type)\fC [inline]\fP"
+
+.SS "void Timeshifts::dT_with_RF (\fBdType\fP const & type)\fC [inline]\fP"
+
+.SS "void Timeshifts::Fill (\fBEvent\fP const & event, \fBRF_Manager\fP & rf)\fC [private]\fP"
+
+.PP
+\fBParameters\fP
+.RS 4
+\fIevent\fP 
+.RE
+.PP
+
+.SS "std::vector<\fBTime\fP> const& Timeshifts::get () const\fC [inline]\fP"
+
+.SS "\fBTime\fP const& Timeshifts::get (int const & i) const\fC [inline]\fP"
+
+.SS "bool Timeshifts::Initialize (bool const & initializeRaw = \fCfalse\fP, bool const & initializeCorrected = \fCfalse\fP)\fC [private]\fP"
+
+.SS "bool Timeshifts::InitializeCorrected ()\fC [private]\fP"
+
+.SS "bool Timeshifts::InitializeRaw ()\fC [private]\fP"
+
+.SS "bool Timeshifts::load (std::string const & filename)"
+
+.PP
+Use this method to load timeshifts from a \&.dT file\&. 
+.SS "Timeshifts::operator bool () const &\fC [inline]\fP"
+
+.SS "\fBTimeshifts\fP& Timeshifts::operator= (\fBTimeshifts\fP const & timeshifts)\fC [inline]\fP"
+
+.SS "\fBTime\fP const& Timeshifts::operator[] (int const & i) const\fC [inline]\fP"
+
+.SS "void Timeshifts::rebin (std::string const & detector, \fBTime_ns\fP const & bin_size_ns)\fC [inline]\fP"
+
+.SS "void Timeshifts::setEminADC (\fBADC\fP const & EminADC)\fC [inline]\fP"
+
+.SS "void Timeshifts::setMaxHits (\fBulong\fP const & max_hits = \fC\-1\fP)\fC [inline]\fP"
+
+.PP
+Set maximum hits to be read in a file\&. 
+.PP
+\fBNote\fP
+.RS 4
+Use only if calculate timeshifts 
+.RE
+.PP
+
+.SS "void Timeshifts::setMult (int const & min_mult, int const & max_mult)\fC [inline]\fP"
+
+.PP
+Set the multiplicity gate for the events used for coincidence timeshift calculation\&. 
+.PP
+\fBNote\fP
+.RS 4
+Mandatory only if calculate timeshifts
+.RE
+.PP
+min_mult and max_mult included\&.
+.PP
+example : multiplicity = 2 : setMult(2, 2)
+.PP
+example : multiplicity = {2;3;4} : setMult(2, 4)
+.PP
+\fBParameters\fP
+.RS 4
+\fImin_mult\fP default min_mult = 2 
+.br
+\fImax_mult\fP default max_mult = 2 
+.RE
+.PP
+
+.SS "void Timeshifts::setOutData (std::string const & outdata)"
+
+.PP
+Use setName instead\&. Set output file name of the timeshifts data\&. 
+.PP
+\fBNote\fP
+.RS 4
+Mandatory only if calculate timeshifts
+.RE
+.PP
+If not set, it is automatically named after the root file\&. 
+.SS "void Timeshifts::setOutDir (std::string const & outDir)"
+
+.PP
+Set the output directory (full path);\&. 
+.PP
+\fBNote\fP
+.RS 4
+Mandatory only if calculate timeshifts 
+.RE
+.PP
+
+.SS "void Timeshifts::setOutName (std::string const & outdata)"
+
+.PP
+Set output file name of the timeshifts data and root file\&. 
+.PP
+\fBNote\fP
+.RS 4
+Mandatory only if calculate timeshifts 
+.RE
+.PP
+
+.SS "void Timeshifts::setOutRoot (std::string const & outroot)"
+
+.PP
+Use setName instead\&. Set output root file containing the raw and corrected time spectra\&. 
+.PP
+\fBNote\fP
+.RS 4
+Mandatory only if calculate timeshifts 
+.RE
+.PP
+
+.SS "bool Timeshifts::setParameters (std::string const & parameter)"
+
+.PP
+Use this method to setup the parameters from a string in order to calculate the timeshifts\&. 
+.SS "void Timeshifts::setRFOffset (\fBTime\fP const & offset_ps)\fC [inline]\fP"
+
+.PP
+Set RF offset (synonymous to \fBTimeshifts::setRFShift\fP) 
+.PP
+\fBNote\fP
+.RS 4
+Use only if calculating timeshifts with RF 
+.RE
+.PP
+\fBParameters\fP
+.RS 4
+\fIoffset\fP default 50000 ps 
+.RE
+.PP
+
+.SS "void Timeshifts::setRFOffset_ns (\fBTime_ns\fP const & offset_ns)\fC [inline]\fP"
+
+.PP
+Set RF offset (synonymous to \fBTimeshifts::setRFShift\fP) 
+.PP
+\fBNote\fP
+.RS 4
+Use only if calculating timeshifts with RF 
+.RE
+.PP
+\fBParameters\fP
+.RS 4
+\fIoffset\fP default 50 ns 
+.RE
+.PP
+
+.SS "void Timeshifts::setRFShift (\fBTime\fP const & shift)\fC [inline]\fP"
+
+.PP
+Set RF shift (synonymous to \fBTimeshifts::setRFOffset\fP) 
+.PP
+\fBNote\fP
+.RS 4
+Use only if calculating timeshifts with RF 
+.RE
+.PP
+\fBParameters\fP
+.RS 4
+\fIshift\fP default 50 ns 
+.RE
+.PP
+
+.SS "bool Timeshifts::setTimeReference (\fBLabel\fP const & timeRef_label)"
+
+.PP
+Set the time reference label\&. 
+.PP
+\fBNote\fP
+.RS 4
+Mandatory only if calculate timeshifts 
+.RE
+.PP
+
+.SS "bool Timeshifts::setTimeReference (std::string const & timeRef_name)"
+
+.PP
+Set the time reference\&. 
+.PP
+\fBNote\fP
+.RS 4
+Mandatory only if calculate timeshifts
+.RE
+.PP
+Either the full name, or the label number 
+.SS "bool Timeshifts::setTimeWindow_ns (std::string const & timewindow_ns_str)"
+
+.PP
+Set the time window in ns\&. 
+.PP
+\fBNote\fP
+.RS 4
+It is better to keep it at its default value, otherwise you can miss some detectors
+.RE
+.PP
+\fBParameters\fP
+.RS 4
+\fItimewindow_ns\fP default value 1500\&.f ns 
+.RE
+.PP
+
+.SS "bool Timeshifts::setTimeWindow_ns (\fBTime_ns\fP const & timewindow_ns)"
+
+.PP
+Setup the time window for the coincidence in ns\&. 
+.SS "TH1F * Timeshifts::shiftTimeSpectra (TH1F * histo, \fBLabel\fP const & label, std::string const & unit = \fC'ps'\fP)"
+
+.SS "void Timeshifts::treatFasterFile (std::string const & filename)\fC [private]\fP"
+
+.SS "void Timeshifts::treatFile (std::string const & filename)\fC [private]\fP"
+
+.SS "void Timeshifts::treatFilesMT (\fBTimeshifts\fP & ts, \fBMTList\fP & files_MT)\fC [static]\fP, \fC [private]\fP"
+
+.SS "void Timeshifts::treatFolder (std::string const & folder, int const & nb_files = \fC\-1\fP)\fC [private]\fP"
+
+.SS "void Timeshifts::treatRootFile (std::string const & filename)\fC [private]\fP"
+
+.SS "void Timeshifts::verbose (bool const & _verbose = \fCtrue\fP)\fC [inline]\fP"
+
+.PP
+Set verbosity level\&. 
+.PP
+\fBNote\fP
+.RS 4
+Mandatory only if calculate timeshifts
+.RE
+.PP
+It will print the fit parameters in the terminal 
+.SS "bool const& Timeshifts::verification (bool const & verif = \fCtrue\fP)\fC [inline]\fP"
+
+.PP
+Used to create\&. 
+.SS "bool Timeshifts::verify (std::string const & folder, int const & nb_files = \fC\-1\fP)"
+
+.PP
+To verify an already calculated timeshift \&.dT data file\&. 
+.SS "void Timeshifts::write (std::string const & name)"
+
+.PP
+To write down the histograms and the data\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIname\fP Will automatically create the following name as output : (name+'\&.dT') and (name+'_dT\&.root') 
+.RE
+.PP
+
+.SS "void Timeshifts::writeData (std::string const & name)"
+
+.PP
+To write down the data\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIname\fP Name of the output data file : (name+'\&.dT') 
+.RE
+.PP
+
+.SS "void Timeshifts::writeRoot (std::string const & name)"
+
+.PP
+To write down the histograms\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIname\fP Name of the output data file : (name+'_dT\&.root') 
+.RE
+.PP
+
+.SH "Member Data Documentation"
+.PP 
+.SS "std::map<\fBdType\fP, \fBTime_ns\fP> Timeshifts::m_bins_per_ns\fC [private]\fP"
+\fBInitial value:\fP
+.PP
+.nf
+= 
+  { 
+    {"labr",  10\&.}, 
+    {"ge",     1\&.}, 
+    {"bgo",    2\&.}, 
+    {"eden",   2\&.}, 
+    {"RF",    10\&.}, 
+    {"paris", 10\&.}, 
+    {"dssd",  0\&.5}
+  }
+.fi
+.SS "bool Timeshifts::m_check_preprompt = false\fC [private]\fP"
+
+.SS "bool Timeshifts::m_corrected = false\fC [private]\fP"
+
+.SS "std::map<\fBdType\fP, bool> Timeshifts::m_edge_preferred\fC [private]\fP"
+\fBInitial value:\fP
+.PP
+.nf
+= 
+  { 
+    {"labr",  false}, 
+    {"ge",    false}, 
+    {"bgo",   false}, 
+    {"eden",  false}, 
+    {"RF",    false}, 
+    {"paris", false}, 
+    {"dssd",  false}
+  }
+.fi
+.SS "std::vector<bool> Timeshifts::m_edge_preferred_label"
+
+.SS "\fBADC\fP Timeshifts::m_Emin_ADC = 0\&.\fC [private]\fP"
+
+.SS "\fBMTTHist\fP<TH1F> Timeshifts::m_EnergyRef\fC [private]\fP"
+
+.SS "\fBMTTHist\fP<TH2F> Timeshifts::m_EnergyRef_bidim\fC [private]\fP"
+
+.SS "bool Timeshifts::m_energySpectraInitialized = false\fC [private]\fP"
+
+.SS "std::string Timeshifts::m_filename = ''\fC [private]\fP"
+
+.SS "\fBFilesManager\fP Timeshifts::m_files\fC [private]\fP"
+
+.SS "bool Timeshifts::m_initialized = false\fC [private]\fP"
+
+.SS "bool Timeshifts::m_initializedCorrected = false\fC [private]\fP"
+
+.SS "bool Timeshifts::m_initializedRaw = false\fC [private]\fP"
+
+.SS "\fBulong\fP Timeshifts::m_max_hits = \-1\fC [private]\fP"
+
+.SS "int Timeshifts::m_max_mult = 2\fC [private]\fP"
+
+.SS "int Timeshifts::m_min_mult = 2\fC [private]\fP"
+
+.SS "int Timeshifts::m_nb_detectors = 0\fC [private]\fP"
+
+.SS "std::vector<\fBuchar\fP> Timeshifts::m_nb_shifts_RF_peak"
+
+.SS "bool Timeshifts::m_ok = false\fC [private]\fP"
+
+.SS "std::string Timeshifts::m_outData = ''\fC [private]\fP"
+
+.SS "std::string Timeshifts::m_outDir = ''\fC [private]\fP"
+
+.SS "\fBPath\fP Timeshifts::m_outPath\fC [private]\fP"
+
+.SS "std::string Timeshifts::m_outRoot = 'timeshifts\&.root'\fC [private]\fP"
+
+.SS "std::map<\fBdType\fP, bool> Timeshifts::m_RF_preferred\fC [private]\fP"
+\fBInitial value:\fP
+.PP
+.nf
+= 
+  { 
+    {"labr",  false}, 
+    {"ge",    false}, 
+    {"bgo",   false}, 
+    {"eden",  false}, 
+    {"RF",    false}, 
+    {"paris", false}, 
+    {"dssd",  false}
+  }
+.fi
+.SS "std::vector<bool> Timeshifts::m_RF_preferred_label"
+
+.SS "\fBLabel\fP Timeshifts::m_time_ref_label = 252\fC [private]\fP"
+
+.SS "std::string Timeshifts::m_time_ref_name = 'R1A9_FATIMA_LaBr3'\fC [private]\fP"
+
+.SS "\fBVector_MTTHist\fP<TH1F> Timeshifts::m_time_spectra\fC [private]\fP"
+
+.SS "\fBVector_MTTHist\fP<TH1F> Timeshifts::m_time_spectra_corrected\fC [private]\fP"
+
+.SS "\fBMTTHist\fP<TH2F> Timeshifts::m_time_spectra_corrected_bidim\fC [private]\fP"
+
+.SS "std::vector<\fBTime\fP> Timeshifts::m_timeshifts\fC [private]\fP"
+
+.SS "\fBTime\fP Timeshifts::m_timewindow = \fBTime_cast\fP(\fBm_timewindow_ns\fP*1000)\fC [private]\fP"
+
+.SS "\fBTime_ns\fP Timeshifts::m_timewindow_ns = \fBTime_ns_cast\fP(1500)\fC [private]\fP"
+
+.SS "std::string Timeshifts::m_ts_outdir = 'Timeshifts/'\fC [private]\fP"
+
+.SS "bool Timeshifts::m_verbose = false\fC [private]\fP"
+
+.SS "bool Timeshifts::m_verification = true\fC [private]\fP"
+
+.SS "std::vector<\fBTimestamp\fP> Timeshifts::mt_ref_time\fC [private]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Nuball2 from the source code\&.

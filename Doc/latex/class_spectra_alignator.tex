@@ -1,0 +1,162 @@
+\doxysection{Spectra\+Alignator Class Reference}
+\label{class_spectra_alignator}\index{SpectraAlignator@{SpectraAlignator}}
+
+
+{\ttfamily \#include $<$Spectra\+Alignator.\+hpp$>$}
+
+
+
+Collaboration diagram for Spectra\+Alignator\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=202pt]{class_spectra_alignator__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ Recalibration} const  \& \textbf{ align\+Spectra} (TH1 $\ast$\+\_\+spectra, TH1 $\ast$spectra\+\_\+output, int const \&degrees\+Of\+Freedom=3, double const \&energy\+Threshold=0)
+\item 
+void \textbf{ set\+Brute\+Force} (bool const \&brute\+\_\+force=true)
+\item 
+void \textbf{ set\+Iterations} (int const \&iterations)
+\item 
+\textbf{ Spectra\+Alignator} (TH1 $\ast$ref)
+\item 
+void \textbf{ write\+Chi2\+Spectra} (TFile $\ast$file)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \textbf{ m\+\_\+brute\+\_\+force} = false
+\item 
+TH3F $\ast$ \textbf{ m\+\_\+chi2\+\_\+spectra} = nullptr
+\item 
+std\+::vector$<$ double $>$ \textbf{ m\+\_\+chi2s}
+\item 
+std\+::vector$<$ \textbf{ Minimisator} $>$ \textbf{ m\+\_\+minimisator}
+\item 
+int \textbf{ m\+\_\+nb\+\_\+iterations} = 20
+\item 
+std\+::vector$<$ \textbf{ Recalibration} $>$ \textbf{ m\+\_\+recals}
+\item 
+\textbf{ Spectra\+Co} \textbf{ m\+\_\+ref\+\_\+spectra}
+\item 
+std\+::vector$<$ \textbf{ Spectra\+Co} $>$ \textbf{ m\+\_\+spectra}
+\item 
+int \textbf{ m\+\_\+spectra\+\_\+threshold} = 0
+\item 
+TH2F $\ast$ \textbf{ surface\+\_\+chi2} = nullptr
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\label{class_spectra_alignator_a1f75d38f8f9dd676b72689f8adbe3be5}} 
+\index{SpectraAlignator@{SpectraAlignator}!SpectraAlignator@{SpectraAlignator}}
+\index{SpectraAlignator@{SpectraAlignator}!SpectraAlignator@{SpectraAlignator}}
+\doxysubsubsection{SpectraAlignator()}
+{\footnotesize\ttfamily Spectra\+Alignator\+::\+Spectra\+Alignator (\begin{DoxyParamCaption}\item[{TH1 $\ast$}]{ref }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\label{class_spectra_alignator_a1844e2814df35c43677ed678f79fc00d}} 
+\index{SpectraAlignator@{SpectraAlignator}!alignSpectra@{alignSpectra}}
+\index{alignSpectra@{alignSpectra}!SpectraAlignator@{SpectraAlignator}}
+\doxysubsubsection{alignSpectra()}
+{\footnotesize\ttfamily \textbf{ Recalibration} const\& Spectra\+Alignator\+::align\+Spectra (\begin{DoxyParamCaption}\item[{TH1 $\ast$}]{\+\_\+spectra,  }\item[{TH1 $\ast$}]{spectra\+\_\+output,  }\item[{int const \&}]{degrees\+Of\+Freedom = {\ttfamily 3},  }\item[{double const \&}]{energy\+Threshold = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=319pt]{class_spectra_alignator_a1844e2814df35c43677ed678f79fc00d_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_spectra_alignator_a06e5ad929499d18d557fd5a37daf8897}} 
+\index{SpectraAlignator@{SpectraAlignator}!setBruteForce@{setBruteForce}}
+\index{setBruteForce@{setBruteForce}!SpectraAlignator@{SpectraAlignator}}
+\doxysubsubsection{setBruteForce()}
+{\footnotesize\ttfamily void Spectra\+Alignator\+::set\+Brute\+Force (\begin{DoxyParamCaption}\item[{bool const \&}]{brute\+\_\+force = {\ttfamily true} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_spectra_alignator_a2aad91050c99f92c1e217d4c886db883}} 
+\index{SpectraAlignator@{SpectraAlignator}!setIterations@{setIterations}}
+\index{setIterations@{setIterations}!SpectraAlignator@{SpectraAlignator}}
+\doxysubsubsection{setIterations()}
+{\footnotesize\ttfamily void Spectra\+Alignator\+::set\+Iterations (\begin{DoxyParamCaption}\item[{int const \&}]{iterations }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_spectra_alignator_a6bac228fc1bc0ef5ad041966722642cd}} 
+\index{SpectraAlignator@{SpectraAlignator}!writeChi2Spectra@{writeChi2Spectra}}
+\index{writeChi2Spectra@{writeChi2Spectra}!SpectraAlignator@{SpectraAlignator}}
+\doxysubsubsection{writeChi2Spectra()}
+{\footnotesize\ttfamily void Spectra\+Alignator\+::write\+Chi2\+Spectra (\begin{DoxyParamCaption}\item[{TFile $\ast$}]{file }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\label{class_spectra_alignator_a3ae8fddfa8d549fff41f095efb6a9ca4}} 
+\index{SpectraAlignator@{SpectraAlignator}!m\_brute\_force@{m\_brute\_force}}
+\index{m\_brute\_force@{m\_brute\_force}!SpectraAlignator@{SpectraAlignator}}
+\doxysubsubsection{m\_brute\_force}
+{\footnotesize\ttfamily bool Spectra\+Alignator\+::m\+\_\+brute\+\_\+force = false\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_spectra_alignator_ad36473470290fcb740440c8952e4b30e}} 
+\index{SpectraAlignator@{SpectraAlignator}!m\_chi2\_spectra@{m\_chi2\_spectra}}
+\index{m\_chi2\_spectra@{m\_chi2\_spectra}!SpectraAlignator@{SpectraAlignator}}
+\doxysubsubsection{m\_chi2\_spectra}
+{\footnotesize\ttfamily TH3F$\ast$ Spectra\+Alignator\+::m\+\_\+chi2\+\_\+spectra = nullptr\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_spectra_alignator_a49faa58fd7b8c2bc3a16e0dbc11c9bbe}} 
+\index{SpectraAlignator@{SpectraAlignator}!m\_chi2s@{m\_chi2s}}
+\index{m\_chi2s@{m\_chi2s}!SpectraAlignator@{SpectraAlignator}}
+\doxysubsubsection{m\_chi2s}
+{\footnotesize\ttfamily std\+::vector$<$double$>$ Spectra\+Alignator\+::m\+\_\+chi2s\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_spectra_alignator_abcc20c4ad4370552aa2730ade1f2b74e}} 
+\index{SpectraAlignator@{SpectraAlignator}!m\_minimisator@{m\_minimisator}}
+\index{m\_minimisator@{m\_minimisator}!SpectraAlignator@{SpectraAlignator}}
+\doxysubsubsection{m\_minimisator}
+{\footnotesize\ttfamily std\+::vector$<$\textbf{ Minimisator}$>$ Spectra\+Alignator\+::m\+\_\+minimisator\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_spectra_alignator_a5d2a1ca21ba9deeb943965dbdb51496a}} 
+\index{SpectraAlignator@{SpectraAlignator}!m\_nb\_iterations@{m\_nb\_iterations}}
+\index{m\_nb\_iterations@{m\_nb\_iterations}!SpectraAlignator@{SpectraAlignator}}
+\doxysubsubsection{m\_nb\_iterations}
+{\footnotesize\ttfamily int Spectra\+Alignator\+::m\+\_\+nb\+\_\+iterations = 20\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_spectra_alignator_a616ff75748e686a5a9bde689b9ec6a1e}} 
+\index{SpectraAlignator@{SpectraAlignator}!m\_recals@{m\_recals}}
+\index{m\_recals@{m\_recals}!SpectraAlignator@{SpectraAlignator}}
+\doxysubsubsection{m\_recals}
+{\footnotesize\ttfamily std\+::vector$<$\textbf{ Recalibration}$>$ Spectra\+Alignator\+::m\+\_\+recals\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_spectra_alignator_a3ad1731be89ec8af6fc61a8cbe89ba80}} 
+\index{SpectraAlignator@{SpectraAlignator}!m\_ref\_spectra@{m\_ref\_spectra}}
+\index{m\_ref\_spectra@{m\_ref\_spectra}!SpectraAlignator@{SpectraAlignator}}
+\doxysubsubsection{m\_ref\_spectra}
+{\footnotesize\ttfamily \textbf{ Spectra\+Co} Spectra\+Alignator\+::m\+\_\+ref\+\_\+spectra\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_spectra_alignator_a3ab517682bf990b44620a3db9020064e}} 
+\index{SpectraAlignator@{SpectraAlignator}!m\_spectra@{m\_spectra}}
+\index{m\_spectra@{m\_spectra}!SpectraAlignator@{SpectraAlignator}}
+\doxysubsubsection{m\_spectra}
+{\footnotesize\ttfamily std\+::vector$<$\textbf{ Spectra\+Co}$>$ Spectra\+Alignator\+::m\+\_\+spectra\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_spectra_alignator_ad0175cbe3edb3c577a91a728625c5cf6}} 
+\index{SpectraAlignator@{SpectraAlignator}!m\_spectra\_threshold@{m\_spectra\_threshold}}
+\index{m\_spectra\_threshold@{m\_spectra\_threshold}!SpectraAlignator@{SpectraAlignator}}
+\doxysubsubsection{m\_spectra\_threshold}
+{\footnotesize\ttfamily int Spectra\+Alignator\+::m\+\_\+spectra\+\_\+threshold = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_spectra_alignator_a5098303e559bd1051c6758b2bf6bcf1a}} 
+\index{SpectraAlignator@{SpectraAlignator}!surface\_chi2@{surface\_chi2}}
+\index{surface\_chi2@{surface\_chi2}!SpectraAlignator@{SpectraAlignator}}
+\doxysubsubsection{surface\_chi2}
+{\footnotesize\ttfamily TH2F$\ast$ Spectra\+Alignator\+::surface\+\_\+chi2 = nullptr\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+lib/\+Classes/\textbf{ Spectra\+Alignator.\+hpp}\end{DoxyCompactItemize}

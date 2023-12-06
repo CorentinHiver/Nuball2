@@ -1,0 +1,171 @@
+\doxysection{Reader\+Manager Class Reference}
+\label{class_reader_manager}\index{ReaderManager@{ReaderManager}}
+
+
+{\ttfamily \#include $<$Reader\+Manager.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+Bool\+\_\+t \textbf{ add\+Files} (std\+::string const \&\+\_\+filename)
+\item 
+Bool\+\_\+t \textbf{ add\+Folder} (std\+::string folder, int nb\+\_\+files=-\/1)
+\item 
+void \textbf{ flush\+Files} ()
+\item 
+\textbf{ Hit} const  \& \textbf{ get\+Hit} () const
+\item 
+Int\+\_\+t \textbf{ nb\+Files} ()
+\item 
+void \textbf{ print\+Files} ()
+\item 
+\textbf{ Reader\+Manager} ()
+\item 
+Bool\+\_\+t \textbf{ read\+Next\+File} ()
+\item 
+Bool\+\_\+t \textbf{ read\+Next\+Hit} ()
+\item 
+Bool\+\_\+t \textbf{ read\+Next\+Hit} (\textbf{ Hit} \&\+\_\+hit)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+Bool\+\_\+t \textbf{ set\+Reader} (Int\+\_\+t const \&\+\_\+filecursor)
+\item 
+Bool\+\_\+t \textbf{ set\+Reader} (std\+::string const \&\+\_\+filename)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \textbf{ m\+\_\+current\+File} = \char`\"{}\char`\"{}
+\item 
+Int\+\_\+t \textbf{ m\+\_\+files\+Cursor} = 0
+\item 
+\textbf{ Listfiles} \textbf{ m\+\_\+list\+Files}
+\item 
+Data\+Multi\+Reader \textbf{ m\+\_\+\+Reader}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\label{class_reader_manager_ae71e730251d5df9b7961528ccea89063}} 
+\index{ReaderManager@{ReaderManager}!ReaderManager@{ReaderManager}}
+\index{ReaderManager@{ReaderManager}!ReaderManager@{ReaderManager}}
+\doxysubsubsection{ReaderManager()}
+{\footnotesize\ttfamily Reader\+Manager\+::\+Reader\+Manager (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\label{class_reader_manager_aad6665518797c9242861b43adcd385ef}} 
+\index{ReaderManager@{ReaderManager}!addFiles@{addFiles}}
+\index{addFiles@{addFiles}!ReaderManager@{ReaderManager}}
+\doxysubsubsection{addFiles()}
+{\footnotesize\ttfamily Bool\+\_\+t Reader\+Manager\+::add\+Files (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{\+\_\+filename }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=321pt]{class_reader_manager_aad6665518797c9242861b43adcd385ef_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_reader_manager_af440d75101cf18d9c7c1515d4c383fa3}} 
+\index{ReaderManager@{ReaderManager}!addFolder@{addFolder}}
+\index{addFolder@{addFolder}!ReaderManager@{ReaderManager}}
+\doxysubsubsection{addFolder()}
+{\footnotesize\ttfamily Bool\+\_\+t Reader\+Manager\+::add\+Folder (\begin{DoxyParamCaption}\item[{std\+::string}]{folder,  }\item[{int}]{nb\+\_\+files = {\ttfamily -\/1} }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=329pt]{class_reader_manager_af440d75101cf18d9c7c1515d4c383fa3_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_reader_manager_aadfc7936950137fe1b5d0b9c74cb1012}} 
+\index{ReaderManager@{ReaderManager}!flushFiles@{flushFiles}}
+\index{flushFiles@{flushFiles}!ReaderManager@{ReaderManager}}
+\doxysubsubsection{flushFiles()}
+{\footnotesize\ttfamily void Reader\+Manager\+::flush\+Files (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\label{class_reader_manager_ae9840b193568c6cdbb9fe5848f5d5e62}} 
+\index{ReaderManager@{ReaderManager}!getHit@{getHit}}
+\index{getHit@{getHit}!ReaderManager@{ReaderManager}}
+\doxysubsubsection{getHit()}
+{\footnotesize\ttfamily \textbf{ Hit} const\& Reader\+Manager\+::get\+Hit (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_reader_manager_a94447555428202ac9a69f03fa7a3234a}} 
+\index{ReaderManager@{ReaderManager}!nbFiles@{nbFiles}}
+\index{nbFiles@{nbFiles}!ReaderManager@{ReaderManager}}
+\doxysubsubsection{nbFiles()}
+{\footnotesize\ttfamily Int\+\_\+t Reader\+Manager\+::nb\+Files (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_reader_manager_aa81218f7a2f8326829c7ccbe3c063ed4}} 
+\index{ReaderManager@{ReaderManager}!printFiles@{printFiles}}
+\index{printFiles@{printFiles}!ReaderManager@{ReaderManager}}
+\doxysubsubsection{printFiles()}
+{\footnotesize\ttfamily void Reader\+Manager\+::print\+Files (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_reader_manager_a6267f9d377253e2cc551374dd932922c}} 
+\index{ReaderManager@{ReaderManager}!readNextFile@{readNextFile}}
+\index{readNextFile@{readNextFile}!ReaderManager@{ReaderManager}}
+\doxysubsubsection{readNextFile()}
+{\footnotesize\ttfamily Bool\+\_\+t Reader\+Manager\+::read\+Next\+File (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\label{class_reader_manager_a34cb214c8d458a6b587d74bdd09ebd23}} 
+\index{ReaderManager@{ReaderManager}!readNextHit@{readNextHit}}
+\index{readNextHit@{readNextHit}!ReaderManager@{ReaderManager}}
+\doxysubsubsection{readNextHit()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Bool\+\_\+t Reader\+Manager\+::read\+Next\+Hit (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_reader_manager_a060b24131c566c6b12e59e1f6adabd0b}} 
+\index{ReaderManager@{ReaderManager}!readNextHit@{readNextHit}}
+\index{readNextHit@{readNextHit}!ReaderManager@{ReaderManager}}
+\doxysubsubsection{readNextHit()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Bool\+\_\+t Reader\+Manager\+::read\+Next\+Hit (\begin{DoxyParamCaption}\item[{\textbf{ Hit} \&}]{\+\_\+hit }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_reader_manager_ae516880cb56ca96465b57e7893deab86}} 
+\index{ReaderManager@{ReaderManager}!setReader@{setReader}}
+\index{setReader@{setReader}!ReaderManager@{ReaderManager}}
+\doxysubsubsection{setReader()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Bool\+\_\+t Reader\+Manager\+::set\+Reader (\begin{DoxyParamCaption}\item[{Int\+\_\+t const \&}]{\+\_\+filecursor }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_reader_manager_af4d1e8412d5bcc1c7284be452ffb38ba}} 
+\index{ReaderManager@{ReaderManager}!setReader@{setReader}}
+\index{setReader@{setReader}!ReaderManager@{ReaderManager}}
+\doxysubsubsection{setReader()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Bool\+\_\+t Reader\+Manager\+::set\+Reader (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{\+\_\+filename }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\label{class_reader_manager_a67976d958e239b90ed8263811975d29e}} 
+\index{ReaderManager@{ReaderManager}!m\_currentFile@{m\_currentFile}}
+\index{m\_currentFile@{m\_currentFile}!ReaderManager@{ReaderManager}}
+\doxysubsubsection{m\_currentFile}
+{\footnotesize\ttfamily std\+::string Reader\+Manager\+::m\+\_\+current\+File = \char`\"{}\char`\"{}\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_reader_manager_ac78e1c638eb6a7f87db35aa431a70ac5}} 
+\index{ReaderManager@{ReaderManager}!m\_filesCursor@{m\_filesCursor}}
+\index{m\_filesCursor@{m\_filesCursor}!ReaderManager@{ReaderManager}}
+\doxysubsubsection{m\_filesCursor}
+{\footnotesize\ttfamily Int\+\_\+t Reader\+Manager\+::m\+\_\+files\+Cursor = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_reader_manager_a3f547eb400eed21e8c9c38b6a46676a7}} 
+\index{ReaderManager@{ReaderManager}!m\_listFiles@{m\_listFiles}}
+\index{m\_listFiles@{m\_listFiles}!ReaderManager@{ReaderManager}}
+\doxysubsubsection{m\_listFiles}
+{\footnotesize\ttfamily \textbf{ Listfiles} Reader\+Manager\+::m\+\_\+list\+Files\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_reader_manager_a7beaa51448bccfc99b6a69e3bb22620f}} 
+\index{ReaderManager@{ReaderManager}!m\_Reader@{m\_Reader}}
+\index{m\_Reader@{m\_Reader}!ReaderManager@{ReaderManager}}
+\doxysubsubsection{m\_Reader}
+{\footnotesize\ttfamily Data\+Multi\+Reader Reader\+Manager\+::m\+\_\+\+Reader\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+lib/\+Classes/\textbf{ Reader\+Manager.\+hpp}\end{DoxyCompactItemize}

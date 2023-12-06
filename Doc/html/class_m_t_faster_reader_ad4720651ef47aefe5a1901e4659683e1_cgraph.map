@@ -1,0 +1,25 @@
+<map id="MTFasterReader::Realign" name="MTFasterReader::Realign">
+<area shape="rect" id="node1" title=" " alt="" coords="5,204,189,231"/>
+<area shape="rect" id="node2" href="$class_m_t_faster_reader.html#a63e239df82bf04244bdab829bb73cd20" title=" " alt="" coords="237,52,461,79"/>
+<area shape="rect" id="node4" href="$class_faster_reader.html#a2d05907241b80ed637b2ae5a01503756" title="Main method. Extract the next hit from the data file and fills the Hit *m_hit object." alt="" coords="275,128,423,155"/>
+<area shape="rect" id="node18" href="$class_hit.html#ad809be4a75a5c588504fa77d442e393d" title=" " alt="" coords="300,179,399,205"/>
+<area shape="rect" id="node20" href="$class_hit.html#a11ab514bf16c8173e974b6582ca6d37e" title=" " alt="" coords="565,229,647,256"/>
+<area shape="rect" id="node21" href="$class_m_t_faster_reader.html#a2adcc31120c30ac26b0c35a67c0e8822" title=" " alt="" coords="253,280,446,307"/>
+<area shape="rect" id="node22" href="$class_hit.html#ab60637cf6f374e4394139c3594e4464e" title=" " alt="" coords="300,331,399,357"/>
+<area shape="rect" id="node3" href="$class_m_t_vector.html#a824a9ff009dde921eec4759c69f74ca7" title=" " alt="" coords="535,27,677,53"/>
+<area shape="rect" id="node5" href="$class_faster_reader.html#aef9fb9be5f288b88bdb17616aab801bd" title="Replace the standard ReadSimple if the faster data contains groups First of all, the m_write variable..." alt="" coords="513,77,699,104"/>
+<area shape="rect" id="node17" href="$class_faster_reader.html#a60f1f638732c48c1b78cfe4dcd23d39b" title="Read triggerless data." alt="" coords="509,128,703,155"/>
+<area shape="rect" id="node6" href="$class_faster_reader.html#a0b2cd239d03d34e69b10418cb6292858" title="Treats faster data." alt="" coords="751,103,929,129"/>
+<area shape="rect" id="node7" href="$class_faster_reader.html#a64fb4fc3d241141f5d27df99906780fc" title="Treats the faster data groups." alt="" coords="977,73,1196,100"/>
+<area shape="rect" id="node8" href="$class_faster_reader.html#af3c8f411415fb3d9fe20cd8551bc24ed" title="Treat the specific part of data (QDC gates, spectro ADC ...)" alt="" coords="1008,125,1165,166"/>
+<area shape="rect" id="node16" href="$_hit_8hpp.html#a3bbfcd7f9bbec3174213c2b5eedc2edd" title="Casts a number into unsigned Timestamp." alt="" coords="1021,191,1152,217"/>
+<area shape="rect" id="node9" href="$class_faster_reader.html#aa0d1eaa1b39778def2b7cd25581accef" title="Load CRRC4 data." alt="" coords="1244,5,1435,32"/>
+<area shape="rect" id="node10" href="$class_faster_reader.html#aa5890b8ac1fdbcd4e2c544c1eeca537b" title="Load QDC1 data." alt="" coords="1247,56,1431,83"/>
+<area shape="rect" id="node11" href="$class_faster_reader.html#a94fd509a6352735984a20c03fb046254" title="Load qdc2 data." alt="" coords="1247,107,1431,133"/>
+<area shape="rect" id="node12" href="$class_faster_reader.html#afa7cbf1733ff68804ef4f7706bf58416" title="Load qdc3 data." alt="" coords="1247,157,1431,184"/>
+<area shape="rect" id="node13" href="$class_faster_reader.html#ad2d7d3acd1a874f09f44f2adfa69d42c" title="Load RF data." alt="" coords="1257,208,1421,235"/>
+<area shape="rect" id="node15" href="$class_faster_reader.html#a3ee31b1e6a4c60d72f8d989d2e08bcdf" title="Load Trapez data." alt="" coords="1245,259,1434,285"/>
+<area shape="rect" id="node14" href="$_hit_8hpp.html#a42de29176eeb225c09486aa0dcac5362" title="Casts a number into unsigned ADC." alt="" coords="1483,208,1567,235"/>
+<area shape="rect" id="node19" href="$_histogramor_8hpp.html#ab48a2fa7184e6354788989602c8c8c29" title=" " alt="" coords="814,280,866,307"/>
+<area shape="rect" id="node23" href="$class_i_options.html#aab7ee24774fddd6ccb14bb6801fafdb0" title=" " alt="" coords="529,331,683,357"/>
+</map>

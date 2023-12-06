@@ -1,0 +1,984 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_class_detectors" xml:lang="en-US">
+<title>Detectors Class Reference</title>
+<indexterm><primary>Detectors</primary></indexterm>
+<para>
+
+<para>Loads the ID file and fills lookup tables. </para>
+ 
+</para>
+<para>
+<computeroutput>#include &lt;Detectors.hpp&gt;</computeroutput>
+</para>
+Collaboration diagram for Detectors:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_detectors__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>auto <link linkend="_class_detectors_1a2990dd023e93c1e50343aa47b94453a0">begin</link> ()</para>
+</listitem>
+            <listitem><para>auto <link linkend="_class_detectors_1a9b89d5cf2dbdf1e56b6703cfcbc49547">begin</link> () const</para>
+</listitem>
+            <listitem><para><link linkend="_class_detectors_1a4f3fbf890600aec5e75cdd943ec274d4">Detectors</link> ()</para>
+</listitem>
+            <listitem><para>auto <link linkend="_class_detectors_1aa93345c742983ca53dfde026c8285893">end</link> ()</para>
+</listitem>
+            <listitem><para>auto <link linkend="_class_detectors_1abca6e29645c33e041e8273845f6c6dd9">end</link> () const</para>
+</listitem>
+            <listitem><para>bool <link linkend="_class_detectors_1a47ae394beae7efa2fb8fa1a3c7f8427d">exists</link> (<link linkend="__hit_8hpp_1ab5dd24876acad09ec52c250c1668466c">Label</link> const &amp;<link linkend="_class_detectors_1a349500ec816bd7761de87c54b95000bc">label</link>)</para>
+</listitem>
+            <listitem><para>auto const  &amp; <link linkend="_class_detectors_1abb9cb0d9f8cc7e136ee0ed7f357ee42b">file</link> ()</para>
+</listitem>
+            <listitem><para>auto const  &amp; <link linkend="_class_detectors_1a215f3df7a89de48d67b832a3240bbfa6">file</link> () const</para>
+</listitem>
+            <listitem><para>auto const  &amp; <link linkend="_class_detectors_1ae0bd442e4f8fa32b23f890a3f25e595b">get</link> () const</para>
+</listitem>
+            <listitem><para>auto const  &amp; <link linkend="_class_detectors_1a67986c6e80a0ac1fc78539eff3d52e9e">getExistsArray</link> () const</para>
+</listitem>
+            <listitem><para>auto const  &amp; <link linkend="_class_detectors_1a538487678aa928ab2956e6fb40c90472">getLabel</link> (std::string const &amp;<link linkend="_class_detectors_1afd00ee8a76386f7356a12858b1dd7c6b">name</link>)</para>
+</listitem>
+            <listitem><para>auto const  &amp; <link linkend="_class_detectors_1aeadb2b9222dd4544d5035960befb2902">getLabelsArray</link> () const</para>
+</listitem>
+            <listitem><para>auto const  &amp; <link linkend="_class_detectors_1a9f0298ea9621d3680607633908b1daff">getName</link> (<link linkend="__hit_8hpp_1ab5dd24876acad09ec52c250c1668466c">Label</link> const &amp;<link linkend="_class_detectors_1a349500ec816bd7761de87c54b95000bc">label</link>)</para>
+</listitem>
+            <listitem><para>auto const  &amp; <link linkend="_class_detectors_1a52d1ae2692c70d702883e5c1a637ce51">getTypeName</link> (int const &amp;type_i) const</para>
+</listitem>
+            <listitem><para>auto const  &amp; <link linkend="_class_detectors_1a3c4f247022eb113c0371899060ea0199">index</link> (<link linkend="__hit_8hpp_1ab5dd24876acad09ec52c250c1668466c">Label</link> const &amp;<link linkend="_class_detectors_1a349500ec816bd7761de87c54b95000bc">label</link>) const</para>
+
+<para>Get the type index of the detector. Each type of detector has its own indexing system if you have 3 Germaniums, the Ge indexes ranges from 0 to 2) </para>
+</listitem>
+            <listitem><para>auto const  &amp; <link linkend="_class_detectors_1afc638e3f514370a477c6445efc11dfcb">label</link> (<link linkend="__detectors_8hpp_1a7ea6a1daded60b9200989100a41bbc3a">dType</link> const &amp;<link linkend="_class_detectors_1a0be56517035f1272af33392665b9ff1f">type</link>, int const &amp;<link linkend="_class_detectors_1a3c4f247022eb113c0371899060ea0199">index</link>)</para>
+
+<para>Get the global label of a detector given its type and type index. </para>
+</listitem>
+            <listitem><para>auto const  &amp; <link linkend="_class_detectors_1a349500ec816bd7761de87c54b95000bc">label</link> (std::string const &amp;<link linkend="_class_detectors_1afd00ee8a76386f7356a12858b1dd7c6b">name</link>)</para>
+</listitem>
+            <listitem><para>auto const  &amp; <link linkend="_class_detectors_1abdba5d8991ded8844de7900d8e64d788">labels</link> () const</para>
+</listitem>
+            <listitem><para>auto const  &amp; <link linkend="_class_detectors_1aae4bbbd3eb0f515868e4160a7091beef">list</link> () const</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_detectors_1a03f6e9974f958b86ddbbc4670d0209a2">load</link> (std::string const &amp;filename)</para>
+
+<para>Reads the file and extracts the list of detectors, then fills the lookup tables. </para>
+</listitem>
+            <listitem><para>void <link linkend="_class_detectors_1a8d5c0f2d189ddda12ed3c36f13887cfd">makeArrays</link> ()</para>
+
+<para>Fills the lookup tables. </para>
+</listitem>
+            <listitem><para>auto const  &amp; <link linkend="_class_detectors_1afd00ee8a76386f7356a12858b1dd7c6b">name</link> (<link linkend="__detectors_8hpp_1a7ea6a1daded60b9200989100a41bbc3a">dType</link> const &amp;<link linkend="_class_detectors_1a0be56517035f1272af33392665b9ff1f">type</link>, int const &amp;<link linkend="_class_detectors_1a3c4f247022eb113c0371899060ea0199">index</link>)</para>
+
+<para>Get the name of a detector given its type and type index. </para>
+</listitem>
+            <listitem><para>auto const  &amp; <link linkend="_class_detectors_1ae5e6ff02bf3d79da3f034f7404e0677c">nbOfType</link> (<link linkend="__detectors_8hpp_1a7ea6a1daded60b9200989100a41bbc3a">dType</link> const &amp;<link linkend="_class_detectors_1a0be56517035f1272af33392665b9ff1f">type</link>)</para>
+
+<para>Returns the number of detector of each type. </para>
+</listitem>
+            <listitem><para>auto const <link linkend="_class_detectors_1a24d220832c2f0a03a0d886e11f2c284c">nbTypes</link> ()</para>
+
+<para>Returns the number of types in the ID file. </para>
+</listitem>
+            <listitem><para>auto const  &amp; <link linkend="_class_detectors_1a4d20a642176613274e1b8a42f7a0bf01">number</link> ()</para>
+
+<para>Return the number of detectors. </para>
+</listitem>
+            <listitem><para><link linkend="_class_detectors_1ab18d3d10214de7727199f9090fdde164">operator bool</link> () const &amp;</para>
+
+<para>Returns true only of the detectors ID file has been loaded successfully. </para>
+</listitem>
+            <listitem><para>void <link linkend="_class_detectors_1a0aa2791c5f5b7133fd5816d2f4dc0b56">operator=</link> (std::string const &amp;filename)</para>
+</listitem>
+            <listitem><para>auto const  &amp; <link linkend="_class_detectors_1a93874c5bc3918096ad880329b89cd632">operator[]</link> (<link linkend="__hit_8hpp_1ab5dd24876acad09ec52c250c1668466c">Label</link> const &amp;<link linkend="_class_detectors_1a349500ec816bd7761de87c54b95000bc">label</link>) const</para>
+
+<para>Extracts the name of the detector given its global label. </para>
+</listitem>
+            <listitem><para>auto const  &amp; <link linkend="_class_detectors_1a9feeeb0d176405478ffc53b1eda6c9a8">operator[]</link> (std::string const &amp;<link linkend="_class_detectors_1afd00ee8a76386f7356a12858b1dd7c6b">name</link>)</para>
+
+<para>Extracts the global label given the detector&apos;s name. </para>
+</listitem>
+            <listitem><para>void <link linkend="_class_detectors_1a66378b2d41c18a11de52e9590380028f">Print</link> ()</para>
+
+<para>Prints out the list of labels. </para>
+</listitem>
+            <listitem><para>void <link linkend="_class_detectors_1a3d5631f8fd2770b6b3a2a178130519ad">readFile</link> (std::string const &amp;<link linkend="_class_detectors_1abb9cb0d9f8cc7e136ee0ed7f357ee42b">file</link>)</para>
+
+<para>Reads the file and extracts the list of detectors. </para>
+</listitem>
+            <listitem><para>void <link linkend="_class_detectors_1af2bb20ee60f504df326b87e9ebbaef30">resize</link> (<link linkend="_lib_co_8hpp_1ad29aff8b0f7fde4ef0291331012e596a">ushort</link> const &amp;new_size)</para>
+</listitem>
+            <listitem><para>auto const <link linkend="_class_detectors_1a1177661fb15c9825755925faf00c8398">size</link> () const</para>
+
+<para>Return the value of the maximum label, i.e. the size of the lookup tables. </para>
+</listitem>
+            <listitem><para>auto const  &amp; <link linkend="_class_detectors_1a0be56517035f1272af33392665b9ff1f">type</link> (<link linkend="__hit_8hpp_1ab5dd24876acad09ec52c250c1668466c">Label</link> const &amp;<link linkend="_class_detectors_1a349500ec816bd7761de87c54b95000bc">label</link>)</para>
+</listitem>
+            <listitem><para>auto const  &amp; <link linkend="_class_detectors_1ab4d5e6cc24173a65a35788ba7c680264">typeIndex</link> (<link linkend="__detectors_8hpp_1a7ea6a1daded60b9200989100a41bbc3a">dType</link> const &amp;<link linkend="_class_detectors_1a0be56517035f1272af33392665b9ff1f">type</link>)</para>
+</listitem>
+            <listitem><para>auto const  &amp; <link linkend="_class_detectors_1a8bde22f3796788ad458127147fd3a5d2">typeIndex</link> (<link linkend="__hit_8hpp_1ab5dd24876acad09ec52c250c1668466c">Label</link> const &amp;<link linkend="_class_detectors_1a349500ec816bd7761de87c54b95000bc">label</link>)</para>
+</listitem>
+            <listitem><para>auto const  &amp; <link linkend="_class_detectors_1a6c368aa8fe9d985fd742371179718d71">types</link> () const</para>
+</listitem>
+            <listitem><para>auto const  &amp; <link linkend="_class_detectors_1ae462c1e1acd5b2dc7757715fd68c362d">typesArray</link> () const</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Static Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>static auto const  &amp; <link linkend="_class_detectors_1af54374260cdfa1cd60b6364f07f882b4">ADCBin</link> (<link linkend="__detectors_8hpp_1a7ea6a1daded60b9200989100a41bbc3a">dType</link> const &amp;<link linkend="_class_detectors_1a0be56517035f1272af33392665b9ff1f">type</link>=&quot;&quot;)</para>
+
+<para>Get the default ADC histogram binning for each type of detectors. </para>
+</listitem>
+            <listitem><para>static auto const  &amp; <link linkend="_class_detectors_1a4cc1eacca959595eb53a16b75f2d65d8">energyBidimBin</link> (<link linkend="__detectors_8hpp_1a7ea6a1daded60b9200989100a41bbc3a">dType</link> const &amp;<link linkend="_class_detectors_1a0be56517035f1272af33392665b9ff1f">type</link>=&quot;&quot;)</para>
+
+<para>Get the default energy (keV) bidimensionnal histogram binning for each type of detectors. </para>
+</listitem>
+            <listitem><para>static auto const  &amp; <link linkend="_class_detectors_1aaadeec0d94fd7daea1b8e4c9d861fbde">energyBin</link> (<link linkend="__detectors_8hpp_1a7ea6a1daded60b9200989100a41bbc3a">dType</link> const &amp;<link linkend="_class_detectors_1a0be56517035f1272af33392665b9ff1f">type</link>=&quot;&quot;)</para>
+
+<para>Get the default energy (keV) histogram binning for each type of detectors. </para>
+</listitem>
+            <listitem><para>static auto &amp; <link linkend="_class_detectors_1aba567529b262d88913de6ccb05a71a99">getADCBin</link> ()</para>
+
+<para>Get the default energy (keV) bidimensionnal histogram binning for all types of detectors. </para>
+</listitem>
+            <listitem><para>static auto &amp; <link linkend="_class_detectors_1abb012a70535ce52a84340d656a75252f">getBidimBin</link> ()</para>
+
+<para>Get the default energy (keV) bidimensionnal histogram binning for all types of detectors. </para>
+</listitem>
+            <listitem><para>static auto &amp; <link linkend="_class_detectors_1ae1ead00f89e7fcb96cefa082f9b4e290">getEnergyBin</link> ()</para>
+
+<para>Get the default energy (keV) bidimensionnal histogram binning for all types of detectors. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Public Attributes    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_lib_co_8hpp_1a632090884b4aa0585e747446a2683963">Strings</link> <link linkend="_class_detectors_1a930c2b917e87154c1337ecf8551a3ab4">types_handled</link> = {&quot;ge&quot;, &quot;bgo&quot;, &quot;labr&quot;, &quot;paris&quot;, &quot;dssd&quot;, &quot;eden&quot;, &quot;RF&quot;, &quot;default&quot;}</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Protected Attributes    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_class_bools">Bools</link> <link linkend="_class_detectors_1a29d73ee6f748035ace066db47a923735">m_exists</link></para>
+</listitem>
+            <listitem><para>std::string <link linkend="_class_detectors_1a28bdd4905a9dd8f89bd74e992c2d5fbd">m_filename</link></para>
+</listitem>
+            <listitem><para>bool <link linkend="_class_detectors_1ab570ead47cf9719ae6f4c1e8c9285b81">m_initialized</link> = false</para>
+</listitem>
+            <listitem><para>std::unordered_map&lt; <link linkend="__detectors_8hpp_1a7ea6a1daded60b9200989100a41bbc3a">dType</link>, <link linkend="__hit_8hpp_1a25e4b8c1ad7e877a2fd808d3c661b22d">Label_vec</link> &gt; <link linkend="_class_detectors_1a5a5289db11cb3ad98c96c69f58f6a6d5">m_labels</link></para>
+</listitem>
+            <listitem><para>std::unordered_map&lt; std::string, <link linkend="__hit_8hpp_1ab5dd24876acad09ec52c250c1668466c">Label</link> &gt; <link linkend="_class_detectors_1a8b8f4313aeec18389d1213accb50b52d">m_labels_array</link></para>
+</listitem>
+            <listitem><para><link linkend="_lib_co_8hpp_1a632090884b4aa0585e747446a2683963">Strings</link> <link linkend="_class_detectors_1a6994304445c6fc6137346690683b56ec">m_list</link></para>
+</listitem>
+            <listitem><para>bool <link linkend="_class_detectors_1a76926048c17f155fc444aab17233e0f8">m_loaded</link> = false</para>
+</listitem>
+            <listitem><para>std::unordered_map&lt; <link linkend="__detectors_8hpp_1a7ea6a1daded60b9200989100a41bbc3a">dType</link>, <link linkend="_lib_co_8hpp_1a632090884b4aa0585e747446a2683963">Strings</link> &gt; <link linkend="_class_detectors_1a5063cdef991cb6ddbb36be3f55d50e40">m_names</link></para>
+</listitem>
+            <listitem><para><link linkend="_lib_co_8hpp_1ad29aff8b0f7fde4ef0291331012e596a">ushort</link> <link linkend="_class_detectors_1aa765faf4ef9745156ccb29d616ff3860">m_nb_detectors</link> = 0</para>
+</listitem>
+            <listitem><para>bool <link linkend="_class_detectors_1a601c91cb6246165a623dd99eb6c4bdc3">m_ok</link> = false</para>
+</listitem>
+            <listitem><para>std::unordered_map&lt; <link linkend="__detectors_8hpp_1a7ea6a1daded60b9200989100a41bbc3a">dType</link>, <link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> &gt; <link linkend="_class_detectors_1a661090e1c43cb00b366d7a5d642de879">m_type_counter</link></para>
+</listitem>
+            <listitem><para><link linkend="_lib_co_8hpp_1a632090884b4aa0585e747446a2683963">Strings</link> <link linkend="_class_detectors_1a5677eaffae4eea104f04c3f85e2c5fbe">m_types</link> = <link linkend="_lib_co_8hpp_1a632090884b4aa0585e747446a2683963">Strings</link>(<link linkend="__detectors_8hpp_1a66ffad8e00f3e94ca2040082469213c6">SIZE_LOOKUP</link>)</para>
+</listitem>
+            <listitem><para><link linkend="_lib_co_8hpp_1a632090884b4aa0585e747446a2683963">Strings</link> <link linkend="_class_detectors_1a0e9964892db1d2dfdb3a8cbdd6c87aeb">m_types_ID</link></para>
+</listitem>
+            <listitem><para>std::unordered_map&lt; <link linkend="__detectors_8hpp_1a7ea6a1daded60b9200989100a41bbc3a">dType</link>, int &gt; <link linkend="_class_detectors_1acb3bb5bfbb60a5861b87ddc17c7466d8">m_types_index</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Static Protected Attributes    </title>
+        <itemizedlist>
+            <listitem><para>static std::unordered_map&lt; <link linkend="__detectors_8hpp_1a7ea6a1daded60b9200989100a41bbc3a">dType</link>, <link linkend="_struct_t_h_binning">THBinning</link> &gt; <link linkend="_class_detectors_1a244a6b586bda7fd0054a8217ed005019">ADC_bins</link></para>
+</listitem>
+            <listitem><para>static std::unordered_map&lt; <link linkend="__detectors_8hpp_1a7ea6a1daded60b9200989100a41bbc3a">dType</link>, <link linkend="_struct_t_h_binning">THBinning</link> &gt; <link linkend="_class_detectors_1a13bd00fc428ecb36ba850e09cc5e147c">energy_bidim_bins</link></para>
+</listitem>
+            <listitem><para>static std::unordered_map&lt; <link linkend="__detectors_8hpp_1a7ea6a1daded60b9200989100a41bbc3a">dType</link>, <link linkend="_struct_t_h_binning">THBinning</link> &gt; <link linkend="_class_detectors_1af47d4b9af7b3f9e698b3e0b63a8b77eb">energy_bins</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Detailed Description</title>
+
+<para>Loads the ID file and fills lookup tables. </para>
+
+
+
+<para>Many lookup tables are created : ... Detectors::index(Label label) : Returns the detector&apos;s index in its type. For instance, if there are 10 germaniums, and their labels ranges contiguously from 10 to 19, Detectors::index(12) = 2;</para>
+
+<para>Detectors::type(Label label) : Returns the detector&apos;s type knowing its label. Taking previous example, Detectors::type(25) = &quot;null&quot; if there are no detector above label = 19, and Detectors::type(13) = &quot;ge&quot;; </para>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_class_detectors_1a4f3fbf890600aec5e75cdd943ec274d4"/>    <section>
+    <title>Detectors()</title>
+<indexterm><primary>Detectors</primary><secondary>Detectors</secondary></indexterm>
+<indexterm><primary>Detectors</primary><secondary>Detectors</secondary></indexterm>
+<para><computeroutput>Detectors::Detectors ( )<computeroutput>[inline]</computeroutput></computeroutput></para></section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_class_detectors_1af54374260cdfa1cd60b6364f07f882b4"/>    <section>
+    <title>ADCBin()</title>
+<indexterm><primary>ADCBin</primary><secondary>Detectors</secondary></indexterm>
+<indexterm><primary>Detectors</primary><secondary>ADCBin</secondary></indexterm>
+<para><computeroutput>static auto const&amp; Detectors::ADCBin (<link linkend="__detectors_8hpp_1a7ea6a1daded60b9200989100a41bbc3a">dType</link> const &amp; type = <computeroutput>&quot;&quot;</computeroutput>
+)<computeroutput>[inline]</computeroutput>, <computeroutput>[static]</computeroutput></computeroutput></para><para>
+
+<para>Get the default ADC histogram binning for each type of detectors. </para>
+</para>
+Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_detectors_af54374260cdfa1cd60b6364f07f882b4_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_detectors_af54374260cdfa1cd60b6364f07f882b4_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_detectors_1a2990dd023e93c1e50343aa47b94453a0"/>    <section>
+    <title>begin()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>begin</primary><secondary>Detectors</secondary></indexterm>
+<indexterm><primary>Detectors</primary><secondary>begin</secondary></indexterm>
+<para><computeroutput>auto Detectors::begin ( )<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_detectors_1a9b89d5cf2dbdf1e56b6703cfcbc49547"/>    <section>
+    <title>begin()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>begin</primary><secondary>Detectors</secondary></indexterm>
+<indexterm><primary>Detectors</primary><secondary>begin</secondary></indexterm>
+<para><computeroutput>auto Detectors::begin ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_detectors_1aa93345c742983ca53dfde026c8285893"/>    <section>
+    <title>end()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>end</primary><secondary>Detectors</secondary></indexterm>
+<indexterm><primary>Detectors</primary><secondary>end</secondary></indexterm>
+<para><computeroutput>auto Detectors::end ( )<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_detectors_1abca6e29645c33e041e8273845f6c6dd9"/>    <section>
+    <title>end()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>end</primary><secondary>Detectors</secondary></indexterm>
+<indexterm><primary>Detectors</primary><secondary>end</secondary></indexterm>
+<para><computeroutput>auto Detectors::end ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_detectors_1a4cc1eacca959595eb53a16b75f2d65d8"/>    <section>
+    <title>energyBidimBin()</title>
+<indexterm><primary>energyBidimBin</primary><secondary>Detectors</secondary></indexterm>
+<indexterm><primary>Detectors</primary><secondary>energyBidimBin</secondary></indexterm>
+<para><computeroutput>static auto const&amp; Detectors::energyBidimBin (<link linkend="__detectors_8hpp_1a7ea6a1daded60b9200989100a41bbc3a">dType</link> const &amp; type = <computeroutput>&quot;&quot;</computeroutput>
+)<computeroutput>[inline]</computeroutput>, <computeroutput>[static]</computeroutput></computeroutput></para><para>
+
+<para>Get the default energy (keV) bidimensionnal histogram binning for each type of detectors. </para>
+</para>
+Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_detectors_a4cc1eacca959595eb53a16b75f2d65d8_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_detectors_a4cc1eacca959595eb53a16b75f2d65d8_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_detectors_1aaadeec0d94fd7daea1b8e4c9d861fbde"/>    <section>
+    <title>energyBin()</title>
+<indexterm><primary>energyBin</primary><secondary>Detectors</secondary></indexterm>
+<indexterm><primary>Detectors</primary><secondary>energyBin</secondary></indexterm>
+<para><computeroutput>static auto const&amp; Detectors::energyBin (<link linkend="__detectors_8hpp_1a7ea6a1daded60b9200989100a41bbc3a">dType</link> const &amp; type = <computeroutput>&quot;&quot;</computeroutput>
+)<computeroutput>[inline]</computeroutput>, <computeroutput>[static]</computeroutput></computeroutput></para><para>
+
+<para>Get the default energy (keV) histogram binning for each type of detectors. </para>
+</para>
+Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_detectors_aaadeec0d94fd7daea1b8e4c9d861fbde_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_detectors_aaadeec0d94fd7daea1b8e4c9d861fbde_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_detectors_1a47ae394beae7efa2fb8fa1a3c7f8427d"/>    <section>
+    <title>exists()</title>
+<indexterm><primary>exists</primary><secondary>Detectors</secondary></indexterm>
+<indexterm><primary>Detectors</primary><secondary>exists</secondary></indexterm>
+<para><computeroutput>bool Detectors::exists (<link linkend="__hit_8hpp_1ab5dd24876acad09ec52c250c1668466c">Label</link> const &amp; label)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_detectors_a47ae394beae7efa2fb8fa1a3c7f8427d_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_detectors_a47ae394beae7efa2fb8fa1a3c7f8427d_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_detectors_1abb9cb0d9f8cc7e136ee0ed7f357ee42b"/>    <section>
+    <title>file()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>file</primary><secondary>Detectors</secondary></indexterm>
+<indexterm><primary>Detectors</primary><secondary>file</secondary></indexterm>
+<para><computeroutput>auto const&amp; Detectors::file ( )<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_detectors_1a215f3df7a89de48d67b832a3240bbfa6"/>    <section>
+    <title>file()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>file</primary><secondary>Detectors</secondary></indexterm>
+<indexterm><primary>Detectors</primary><secondary>file</secondary></indexterm>
+<para><computeroutput>auto const&amp; Detectors::file ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_detectors_1ae0bd442e4f8fa32b23f890a3f25e595b"/>    <section>
+    <title>get()</title>
+<indexterm><primary>get</primary><secondary>Detectors</secondary></indexterm>
+<indexterm><primary>Detectors</primary><secondary>get</secondary></indexterm>
+<para><computeroutput>auto const&amp; Detectors::get ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_detectors_1aba567529b262d88913de6ccb05a71a99"/>    <section>
+    <title>getADCBin()</title>
+<indexterm><primary>getADCBin</primary><secondary>Detectors</secondary></indexterm>
+<indexterm><primary>Detectors</primary><secondary>getADCBin</secondary></indexterm>
+<para><computeroutput>static auto&amp; Detectors::getADCBin ( )<computeroutput>[inline]</computeroutput>, <computeroutput>[static]</computeroutput></computeroutput></para><para>
+
+<para>Get the default energy (keV) bidimensionnal histogram binning for all types of detectors. </para>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_detectors_aba567529b262d88913de6ccb05a71a99_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_detectors_1abb012a70535ce52a84340d656a75252f"/>    <section>
+    <title>getBidimBin()</title>
+<indexterm><primary>getBidimBin</primary><secondary>Detectors</secondary></indexterm>
+<indexterm><primary>Detectors</primary><secondary>getBidimBin</secondary></indexterm>
+<para><computeroutput>static auto&amp; Detectors::getBidimBin ( )<computeroutput>[inline]</computeroutput>, <computeroutput>[static]</computeroutput></computeroutput></para><para>
+
+<para>Get the default energy (keV) bidimensionnal histogram binning for all types of detectors. </para>
+</para>
+    </section><anchor xml:id="_class_detectors_1ae1ead00f89e7fcb96cefa082f9b4e290"/>    <section>
+    <title>getEnergyBin()</title>
+<indexterm><primary>getEnergyBin</primary><secondary>Detectors</secondary></indexterm>
+<indexterm><primary>Detectors</primary><secondary>getEnergyBin</secondary></indexterm>
+<para><computeroutput>static auto&amp; Detectors::getEnergyBin ( )<computeroutput>[inline]</computeroutput>, <computeroutput>[static]</computeroutput></computeroutput></para><para>
+
+<para>Get the default energy (keV) bidimensionnal histogram binning for all types of detectors. </para>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_detectors_ae1ead00f89e7fcb96cefa082f9b4e290_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_detectors_1a67986c6e80a0ac1fc78539eff3d52e9e"/>    <section>
+    <title>getExistsArray()</title>
+<indexterm><primary>getExistsArray</primary><secondary>Detectors</secondary></indexterm>
+<indexterm><primary>Detectors</primary><secondary>getExistsArray</secondary></indexterm>
+<para><computeroutput>auto const&amp; Detectors::getExistsArray ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_detectors_1a538487678aa928ab2956e6fb40c90472"/>    <section>
+    <title>getLabel()</title>
+<indexterm><primary>getLabel</primary><secondary>Detectors</secondary></indexterm>
+<indexterm><primary>Detectors</primary><secondary>getLabel</secondary></indexterm>
+<para><computeroutput>auto const&amp; Detectors::getLabel (std::string const &amp; name)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_detectors_a538487678aa928ab2956e6fb40c90472_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_detectors_a538487678aa928ab2956e6fb40c90472_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_detectors_1aeadb2b9222dd4544d5035960befb2902"/>    <section>
+    <title>getLabelsArray()</title>
+<indexterm><primary>getLabelsArray</primary><secondary>Detectors</secondary></indexterm>
+<indexterm><primary>Detectors</primary><secondary>getLabelsArray</secondary></indexterm>
+<para><computeroutput>auto const&amp; Detectors::getLabelsArray ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_detectors_1a9f0298ea9621d3680607633908b1daff"/>    <section>
+    <title>getName()</title>
+<indexterm><primary>getName</primary><secondary>Detectors</secondary></indexterm>
+<indexterm><primary>Detectors</primary><secondary>getName</secondary></indexterm>
+<para><computeroutput>auto const&amp; Detectors::getName (<link linkend="__hit_8hpp_1ab5dd24876acad09ec52c250c1668466c">Label</link> const &amp; label)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_detectors_a9f0298ea9621d3680607633908b1daff_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_detectors_1a52d1ae2692c70d702883e5c1a637ce51"/>    <section>
+    <title>getTypeName()</title>
+<indexterm><primary>getTypeName</primary><secondary>Detectors</secondary></indexterm>
+<indexterm><primary>Detectors</primary><secondary>getTypeName</secondary></indexterm>
+<para><computeroutput>auto const&amp; Detectors::getTypeName (int const &amp; type_i) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_detectors_1a3c4f247022eb113c0371899060ea0199"/>    <section>
+    <title>index()</title>
+<indexterm><primary>index</primary><secondary>Detectors</secondary></indexterm>
+<indexterm><primary>Detectors</primary><secondary>index</secondary></indexterm>
+<para><computeroutput>auto const&amp; Detectors::index (<link linkend="__hit_8hpp_1ab5dd24876acad09ec52c250c1668466c">Label</link> const &amp; label) const<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>Get the type index of the detector. Each type of detector has its own indexing system if you have 3 Germaniums, the Ge indexes ranges from 0 to 2) </para>
+</para>
+Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_detectors_a3c4f247022eb113c0371899060ea0199_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_detectors_a3c4f247022eb113c0371899060ea0199_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_detectors_1afc638e3f514370a477c6445efc11dfcb"/>    <section>
+    <title>label()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>label</primary><secondary>Detectors</secondary></indexterm>
+<indexterm><primary>Detectors</primary><secondary>label</secondary></indexterm>
+<para><computeroutput>auto const&amp; Detectors::label (<link linkend="__detectors_8hpp_1a7ea6a1daded60b9200989100a41bbc3a">dType</link> const &amp; type, int const &amp; index)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>Get the global label of a detector given its type and type index. </para>
+</para>
+Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_detectors_afc638e3f514370a477c6445efc11dfcb_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_detectors_1a349500ec816bd7761de87c54b95000bc"/>    <section>
+    <title>label()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>label</primary><secondary>Detectors</secondary></indexterm>
+<indexterm><primary>Detectors</primary><secondary>label</secondary></indexterm>
+<para><computeroutput>auto const&amp; Detectors::label (std::string const &amp; name)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_detectors_a349500ec816bd7761de87c54b95000bc_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_detectors_a349500ec816bd7761de87c54b95000bc_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_detectors_1abdba5d8991ded8844de7900d8e64d788"/>    <section>
+    <title>labels()</title>
+<indexterm><primary>labels</primary><secondary>Detectors</secondary></indexterm>
+<indexterm><primary>Detectors</primary><secondary>labels</secondary></indexterm>
+<para><computeroutput>auto const&amp; Detectors::labels ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_detectors_1aae4bbbd3eb0f515868e4160a7091beef"/>    <section>
+    <title>list()</title>
+<indexterm><primary>list</primary><secondary>Detectors</secondary></indexterm>
+<indexterm><primary>Detectors</primary><secondary>list</secondary></indexterm>
+<para><computeroutput>auto const&amp; Detectors::list ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_detectors_1a03f6e9974f958b86ddbbc4670d0209a2"/>    <section>
+    <title>load()</title>
+<indexterm><primary>load</primary><secondary>Detectors</secondary></indexterm>
+<indexterm><primary>Detectors</primary><secondary>load</secondary></indexterm>
+<para><computeroutput>void Detectors::load (std::string const &amp; filename)</computeroutput></para><para>
+
+<para>Reads the file and extracts the list of detectors, then fills the lookup tables. </para>
+</para>
+Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_detectors_a03f6e9974f958b86ddbbc4670d0209a2_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_detectors_a03f6e9974f958b86ddbbc4670d0209a2_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_detectors_1a8d5c0f2d189ddda12ed3c36f13887cfd"/>    <section>
+    <title>makeArrays()</title>
+<indexterm><primary>makeArrays</primary><secondary>Detectors</secondary></indexterm>
+<indexterm><primary>Detectors</primary><secondary>makeArrays</secondary></indexterm>
+<para><computeroutput>void Detectors::makeArrays ( )</computeroutput></para><para>
+
+<para>Fills the lookup tables. </para>
+</para>
+Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_detectors_a8d5c0f2d189ddda12ed3c36f13887cfd_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_detectors_a8d5c0f2d189ddda12ed3c36f13887cfd_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_detectors_1afd00ee8a76386f7356a12858b1dd7c6b"/>    <section>
+    <title>name()</title>
+<indexterm><primary>name</primary><secondary>Detectors</secondary></indexterm>
+<indexterm><primary>Detectors</primary><secondary>name</secondary></indexterm>
+<para><computeroutput>auto const&amp; Detectors::name (<link linkend="__detectors_8hpp_1a7ea6a1daded60b9200989100a41bbc3a">dType</link> const &amp; type, int const &amp; index)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>Get the name of a detector given its type and type index. </para>
+</para>
+Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_detectors_afd00ee8a76386f7356a12858b1dd7c6b_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_detectors_afd00ee8a76386f7356a12858b1dd7c6b_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_detectors_1ae5e6ff02bf3d79da3f034f7404e0677c"/>    <section>
+    <title>nbOfType()</title>
+<indexterm><primary>nbOfType</primary><secondary>Detectors</secondary></indexterm>
+<indexterm><primary>Detectors</primary><secondary>nbOfType</secondary></indexterm>
+<para><computeroutput>auto const&amp; Detectors::nbOfType (<link linkend="__detectors_8hpp_1a7ea6a1daded60b9200989100a41bbc3a">dType</link> const &amp; type)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>Returns the number of detector of each type. </para>
+</para>
+Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_detectors_ae5e6ff02bf3d79da3f034f7404e0677c_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_detectors_ae5e6ff02bf3d79da3f034f7404e0677c_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_detectors_1a24d220832c2f0a03a0d886e11f2c284c"/>    <section>
+    <title>nbTypes()</title>
+<indexterm><primary>nbTypes</primary><secondary>Detectors</secondary></indexterm>
+<indexterm><primary>Detectors</primary><secondary>nbTypes</secondary></indexterm>
+<para><computeroutput>auto const Detectors::nbTypes ( )<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>Returns the number of types in the ID file. </para>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_detectors_a24d220832c2f0a03a0d886e11f2c284c_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_detectors_1a4d20a642176613274e1b8a42f7a0bf01"/>    <section>
+    <title>number()</title>
+<indexterm><primary>number</primary><secondary>Detectors</secondary></indexterm>
+<indexterm><primary>Detectors</primary><secondary>number</secondary></indexterm>
+<para><computeroutput>auto const&amp; Detectors::number ( )<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>Return the number of detectors. </para>
+</para>
+    </section><anchor xml:id="_class_detectors_1ab18d3d10214de7727199f9090fdde164"/>    <section>
+    <title>operator bool()</title>
+<indexterm><primary>operator bool</primary><secondary>Detectors</secondary></indexterm>
+<indexterm><primary>Detectors</primary><secondary>operator bool</secondary></indexterm>
+<para><computeroutput>Detectors::operator bool ( ) const &amp;<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>Returns true only of the detectors ID file has been loaded successfully. </para>
+</para>
+    </section><anchor xml:id="_class_detectors_1a0aa2791c5f5b7133fd5816d2f4dc0b56"/>    <section>
+    <title>operator=()</title>
+<indexterm><primary>operator=</primary><secondary>Detectors</secondary></indexterm>
+<indexterm><primary>Detectors</primary><secondary>operator=</secondary></indexterm>
+<para><computeroutput>void Detectors::operator= (std::string const &amp; filename)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_detectors_a0aa2791c5f5b7133fd5816d2f4dc0b56_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_detectors_1a93874c5bc3918096ad880329b89cd632"/>    <section>
+    <title>operator[]()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>operator[]</primary><secondary>Detectors</secondary></indexterm>
+<indexterm><primary>Detectors</primary><secondary>operator[]</secondary></indexterm>
+<para><computeroutput>auto const&amp; Detectors::operator[] (<link linkend="__hit_8hpp_1ab5dd24876acad09ec52c250c1668466c">Label</link> const &amp; label) const<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>Extracts the name of the detector given its global label. </para>
+</para>
+Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_detectors_a93874c5bc3918096ad880329b89cd632_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_detectors_1a9feeeb0d176405478ffc53b1eda6c9a8"/>    <section>
+    <title>operator[]()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>operator[]</primary><secondary>Detectors</secondary></indexterm>
+<indexterm><primary>Detectors</primary><secondary>operator[]</secondary></indexterm>
+<para><computeroutput>auto const&amp; Detectors::operator[] (std::string const &amp; name)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>Extracts the global label given the detector&apos;s name. </para>
+</para>
+Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_detectors_a9feeeb0d176405478ffc53b1eda6c9a8_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_detectors_1a66378b2d41c18a11de52e9590380028f"/>    <section>
+    <title>Print()</title>
+<indexterm><primary>Print</primary><secondary>Detectors</secondary></indexterm>
+<indexterm><primary>Detectors</primary><secondary>Print</secondary></indexterm>
+<para><computeroutput>void Detectors::Print ( )<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>Prints out the list of labels. </para>
+</para>
+    </section><anchor xml:id="_class_detectors_1a3d5631f8fd2770b6b3a2a178130519ad"/>    <section>
+    <title>readFile()</title>
+<indexterm><primary>readFile</primary><secondary>Detectors</secondary></indexterm>
+<indexterm><primary>Detectors</primary><secondary>readFile</secondary></indexterm>
+<para><computeroutput>void Detectors::readFile (std::string const &amp; file)</computeroutput></para><para>
+
+<para>Reads the file and extracts the list of detectors. </para>
+</para>
+Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_detectors_a3d5631f8fd2770b6b3a2a178130519ad_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_detectors_a3d5631f8fd2770b6b3a2a178130519ad_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_detectors_1af2bb20ee60f504df326b87e9ebbaef30"/>    <section>
+    <title>resize()</title>
+<indexterm><primary>resize</primary><secondary>Detectors</secondary></indexterm>
+<indexterm><primary>Detectors</primary><secondary>resize</secondary></indexterm>
+<para><computeroutput>void Detectors::resize (<link linkend="_lib_co_8hpp_1ad29aff8b0f7fde4ef0291331012e596a">ushort</link> const &amp; new_size)</computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_detectors_af2bb20ee60f504df326b87e9ebbaef30_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_detectors_af2bb20ee60f504df326b87e9ebbaef30_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_detectors_1a1177661fb15c9825755925faf00c8398"/>    <section>
+    <title>size()</title>
+<indexterm><primary>size</primary><secondary>Detectors</secondary></indexterm>
+<indexterm><primary>Detectors</primary><secondary>size</secondary></indexterm>
+<para><computeroutput>auto const Detectors::size ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>Return the value of the maximum label, i.e. the size of the lookup tables. </para>
+</para>
+Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_detectors_a1177661fb15c9825755925faf00c8398_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_detectors_a1177661fb15c9825755925faf00c8398_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_detectors_1a0be56517035f1272af33392665b9ff1f"/>    <section>
+    <title>type()</title>
+<indexterm><primary>type</primary><secondary>Detectors</secondary></indexterm>
+<indexterm><primary>Detectors</primary><secondary>type</secondary></indexterm>
+<para><computeroutput>auto const&amp; Detectors::type (<link linkend="__hit_8hpp_1ab5dd24876acad09ec52c250c1668466c">Label</link> const &amp; label)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_detectors_a0be56517035f1272af33392665b9ff1f_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_detectors_a0be56517035f1272af33392665b9ff1f_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_detectors_1ab4d5e6cc24173a65a35788ba7c680264"/>    <section>
+    <title>typeIndex()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>typeIndex</primary><secondary>Detectors</secondary></indexterm>
+<indexterm><primary>Detectors</primary><secondary>typeIndex</secondary></indexterm>
+<para><computeroutput>auto const&amp; Detectors::typeIndex (<link linkend="__detectors_8hpp_1a7ea6a1daded60b9200989100a41bbc3a">dType</link> const &amp; type)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_detectors_ab4d5e6cc24173a65a35788ba7c680264_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_detectors_ab4d5e6cc24173a65a35788ba7c680264_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_detectors_1a8bde22f3796788ad458127147fd3a5d2"/>    <section>
+    <title>typeIndex()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>typeIndex</primary><secondary>Detectors</secondary></indexterm>
+<indexterm><primary>Detectors</primary><secondary>typeIndex</secondary></indexterm>
+<para><computeroutput>auto const&amp; Detectors::typeIndex (<link linkend="__hit_8hpp_1ab5dd24876acad09ec52c250c1668466c">Label</link> const &amp; label)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_detectors_a8bde22f3796788ad458127147fd3a5d2_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_detectors_1a6c368aa8fe9d985fd742371179718d71"/>    <section>
+    <title>types()</title>
+<indexterm><primary>types</primary><secondary>Detectors</secondary></indexterm>
+<indexterm><primary>Detectors</primary><secondary>types</secondary></indexterm>
+<para><computeroutput>auto const&amp; Detectors::types ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_detectors_a6c368aa8fe9d985fd742371179718d71_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_detectors_1ae462c1e1acd5b2dc7757715fd68c362d"/>    <section>
+    <title>typesArray()</title>
+<indexterm><primary>typesArray</primary><secondary>Detectors</secondary></indexterm>
+<indexterm><primary>Detectors</primary><secondary>typesArray</secondary></indexterm>
+<para><computeroutput>auto const&amp; Detectors::typesArray ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_detectors_ae462c1e1acd5b2dc7757715fd68c362d_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_class_detectors_1a244a6b586bda7fd0054a8217ed005019"/>    <section>
+    <title>ADC_bins</title>
+<indexterm><primary>ADC_bins</primary><secondary>Detectors</secondary></indexterm>
+<indexterm><primary>Detectors</primary><secondary>ADC_bins</secondary></indexterm>
+<para><computeroutput>std::unordered_map&lt; <link linkend="__detectors_8hpp_1a7ea6a1daded60b9200989100a41bbc3a">dType</link>, <link linkend="_struct_t_h_binning">THBinning</link> &gt; Detectors::ADC_bins<computeroutput>[static]</computeroutput>, <computeroutput>[protected]</computeroutput></computeroutput></para><emphasis role="strong">Initial value:</emphasis><programlisting>=&#32;
+{
+&#32;&#32;{<emphasis role="stringliteral">&quot;ge&quot;</emphasis>&#32;&#32;&#32;&#32;&#32;,&#32;{10000,&#32;0.,&#32;200000.&#32;}},
+&#32;&#32;{<emphasis role="stringliteral">&quot;bgo&quot;</emphasis>&#32;&#32;&#32;&#32;,&#32;{1000&#32;,&#32;0.,&#32;200000.&#32;}},
+&#32;&#32;{<emphasis role="stringliteral">&quot;labr&quot;</emphasis>&#32;&#32;&#32;,&#32;{2000&#32;,&#32;0.,&#32;200000.&#32;}},
+&#32;&#32;{<emphasis role="stringliteral">&quot;paris&quot;</emphasis>&#32;&#32;,&#32;{2000&#32;,&#32;0.,&#32;200000.&#32;}},
+&#32;&#32;{<emphasis role="stringliteral">&quot;eden&quot;</emphasis>&#32;&#32;&#32;,&#32;{1000&#32;,&#32;0.,&#32;200000.&#32;}},
+&#32;&#32;{<emphasis role="stringliteral">&quot;dssd&quot;</emphasis>&#32;&#32;&#32;,&#32;{1000&#32;,&#32;0.,&#32;200000.&#32;}},
+&#32;&#32;{<emphasis role="stringliteral">&quot;default&quot;</emphasis>,&#32;{10000,&#32;0.,&#32;1000000.}}
+}
+</programlisting>    </section><anchor xml:id="_class_detectors_1a13bd00fc428ecb36ba850e09cc5e147c"/>    <section>
+    <title>energy_bidim_bins</title>
+<indexterm><primary>energy_bidim_bins</primary><secondary>Detectors</secondary></indexterm>
+<indexterm><primary>Detectors</primary><secondary>energy_bidim_bins</secondary></indexterm>
+<para><computeroutput>std::unordered_map&lt; <link linkend="__detectors_8hpp_1a7ea6a1daded60b9200989100a41bbc3a">dType</link>, <link linkend="_struct_t_h_binning">THBinning</link> &gt; Detectors::energy_bidim_bins<computeroutput>[static]</computeroutput>, <computeroutput>[protected]</computeroutput></computeroutput></para><emphasis role="strong">Initial value:</emphasis><programlisting>=&#32;
+{
+&#32;&#32;{<emphasis role="stringliteral">&quot;ge&quot;</emphasis>&#32;&#32;&#32;&#32;&#32;,&#32;{5000,&#32;0.,&#32;10000.}},
+&#32;&#32;{<emphasis role="stringliteral">&quot;bgo&quot;</emphasis>&#32;&#32;&#32;&#32;,&#32;{250&#32;,&#32;0.,&#32;10000.}},
+&#32;&#32;{<emphasis role="stringliteral">&quot;labr&quot;</emphasis>&#32;&#32;&#32;,&#32;{1000,&#32;0.,&#32;10000.}},
+&#32;&#32;{<emphasis role="stringliteral">&quot;paris&quot;</emphasis>&#32;&#32;,&#32;{1000,&#32;0.,&#32;10000.}},
+&#32;&#32;{<emphasis role="stringliteral">&quot;eden&quot;</emphasis>&#32;&#32;&#32;,&#32;{1000,-2.,&#32;2.&#32;&#32;&#32;&#32;}},
+&#32;&#32;{<emphasis role="stringliteral">&quot;dssd&quot;</emphasis>&#32;&#32;&#32;,&#32;{200&#32;,&#32;0.,&#32;20000.}},
+&#32;&#32;{<emphasis role="stringliteral">&quot;default&quot;</emphasis>,&#32;{200&#32;,&#32;0.,&#32;20000.}}
+}
+</programlisting>    </section><anchor xml:id="_class_detectors_1af47d4b9af7b3f9e698b3e0b63a8b77eb"/>    <section>
+    <title>energy_bins</title>
+<indexterm><primary>energy_bins</primary><secondary>Detectors</secondary></indexterm>
+<indexterm><primary>Detectors</primary><secondary>energy_bins</secondary></indexterm>
+<para><computeroutput>std::unordered_map&lt; <link linkend="__detectors_8hpp_1a7ea6a1daded60b9200989100a41bbc3a">dType</link>, <link linkend="_struct_t_h_binning">THBinning</link> &gt; Detectors::energy_bins<computeroutput>[static]</computeroutput>, <computeroutput>[protected]</computeroutput></computeroutput></para><emphasis role="strong">Initial value:</emphasis><programlisting>=&#32;
+{
+&#32;&#32;{<emphasis role="stringliteral">&quot;ge&quot;</emphasis>&#32;&#32;&#32;&#32;&#32;,&#32;{10000,&#32;0.,&#32;10000.}},
+&#32;&#32;{<emphasis role="stringliteral">&quot;bgo&quot;</emphasis>&#32;&#32;&#32;&#32;,&#32;{1000&#32;,&#32;0.,&#32;10000.}},
+&#32;&#32;{<emphasis role="stringliteral">&quot;labr&quot;</emphasis>&#32;&#32;&#32;,&#32;{2000&#32;,&#32;0.,&#32;10000.}},
+&#32;&#32;{<emphasis role="stringliteral">&quot;paris&quot;</emphasis>&#32;&#32;,&#32;{2000&#32;,&#32;0.,&#32;10000.}},
+&#32;&#32;{<emphasis role="stringliteral">&quot;eden&quot;</emphasis>&#32;&#32;&#32;,&#32;{1000&#32;,-2.,&#32;2.&#32;&#32;&#32;&#32;}},
+&#32;&#32;{<emphasis role="stringliteral">&quot;dssd&quot;</emphasis>&#32;&#32;&#32;,&#32;{1000&#32;,&#32;0.,&#32;20000.}},
+&#32;&#32;{<emphasis role="stringliteral">&quot;default&quot;</emphasis>,&#32;{1000&#32;,&#32;0.,&#32;50000.}}
+}
+</programlisting>    </section><anchor xml:id="_class_detectors_1a29d73ee6f748035ace066db47a923735"/>    <section>
+    <title>m_exists</title>
+<indexterm><primary>m_exists</primary><secondary>Detectors</secondary></indexterm>
+<indexterm><primary>Detectors</primary><secondary>m_exists</secondary></indexterm>
+<para><computeroutput><link linkend="_class_bools">Bools</link> Detectors::m_exists<computeroutput>[protected]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_detectors_1a28bdd4905a9dd8f89bd74e992c2d5fbd"/>    <section>
+    <title>m_filename</title>
+<indexterm><primary>m_filename</primary><secondary>Detectors</secondary></indexterm>
+<indexterm><primary>Detectors</primary><secondary>m_filename</secondary></indexterm>
+<para><computeroutput>std::string Detectors::m_filename<computeroutput>[protected]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_detectors_1ab570ead47cf9719ae6f4c1e8c9285b81"/>    <section>
+    <title>m_initialized</title>
+<indexterm><primary>m_initialized</primary><secondary>Detectors</secondary></indexterm>
+<indexterm><primary>Detectors</primary><secondary>m_initialized</secondary></indexterm>
+<para><computeroutput>bool Detectors::m_initialized = false<computeroutput>[protected]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_detectors_1a5a5289db11cb3ad98c96c69f58f6a6d5"/>    <section>
+    <title>m_labels</title>
+<indexterm><primary>m_labels</primary><secondary>Detectors</secondary></indexterm>
+<indexterm><primary>Detectors</primary><secondary>m_labels</secondary></indexterm>
+<para><computeroutput>std::unordered_map&lt;<link linkend="__detectors_8hpp_1a7ea6a1daded60b9200989100a41bbc3a">dType</link>, <link linkend="__hit_8hpp_1a25e4b8c1ad7e877a2fd808d3c661b22d">Label_vec</link>&gt; Detectors::m_labels<computeroutput>[protected]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_detectors_1a8b8f4313aeec18389d1213accb50b52d"/>    <section>
+    <title>m_labels_array</title>
+<indexterm><primary>m_labels_array</primary><secondary>Detectors</secondary></indexterm>
+<indexterm><primary>Detectors</primary><secondary>m_labels_array</secondary></indexterm>
+<para><computeroutput>std::unordered_map&lt;std::string, <link linkend="__hit_8hpp_1ab5dd24876acad09ec52c250c1668466c">Label</link>&gt; Detectors::m_labels_array<computeroutput>[protected]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_detectors_1a6994304445c6fc6137346690683b56ec"/>    <section>
+    <title>m_list</title>
+<indexterm><primary>m_list</primary><secondary>Detectors</secondary></indexterm>
+<indexterm><primary>Detectors</primary><secondary>m_list</secondary></indexterm>
+<para><computeroutput><link linkend="_lib_co_8hpp_1a632090884b4aa0585e747446a2683963">Strings</link> Detectors::m_list<computeroutput>[protected]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_detectors_1a76926048c17f155fc444aab17233e0f8"/>    <section>
+    <title>m_loaded</title>
+<indexterm><primary>m_loaded</primary><secondary>Detectors</secondary></indexterm>
+<indexterm><primary>Detectors</primary><secondary>m_loaded</secondary></indexterm>
+<para><computeroutput>bool Detectors::m_loaded = false<computeroutput>[protected]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_detectors_1a5063cdef991cb6ddbb36be3f55d50e40"/>    <section>
+    <title>m_names</title>
+<indexterm><primary>m_names</primary><secondary>Detectors</secondary></indexterm>
+<indexterm><primary>Detectors</primary><secondary>m_names</secondary></indexterm>
+<para><computeroutput>std::unordered_map&lt;<link linkend="__detectors_8hpp_1a7ea6a1daded60b9200989100a41bbc3a">dType</link>, <link linkend="_lib_co_8hpp_1a632090884b4aa0585e747446a2683963">Strings</link>&gt; Detectors::m_names<computeroutput>[protected]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_detectors_1aa765faf4ef9745156ccb29d616ff3860"/>    <section>
+    <title>m_nb_detectors</title>
+<indexterm><primary>m_nb_detectors</primary><secondary>Detectors</secondary></indexterm>
+<indexterm><primary>Detectors</primary><secondary>m_nb_detectors</secondary></indexterm>
+<para><computeroutput><link linkend="_lib_co_8hpp_1ad29aff8b0f7fde4ef0291331012e596a">ushort</link> Detectors::m_nb_detectors = 0<computeroutput>[protected]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_detectors_1a601c91cb6246165a623dd99eb6c4bdc3"/>    <section>
+    <title>m_ok</title>
+<indexterm><primary>m_ok</primary><secondary>Detectors</secondary></indexterm>
+<indexterm><primary>Detectors</primary><secondary>m_ok</secondary></indexterm>
+<para><computeroutput>bool Detectors::m_ok = false<computeroutput>[protected]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_detectors_1a661090e1c43cb00b366d7a5d642de879"/>    <section>
+    <title>m_type_counter</title>
+<indexterm><primary>m_type_counter</primary><secondary>Detectors</secondary></indexterm>
+<indexterm><primary>Detectors</primary><secondary>m_type_counter</secondary></indexterm>
+<para><computeroutput>std::unordered_map&lt;<link linkend="__detectors_8hpp_1a7ea6a1daded60b9200989100a41bbc3a">dType</link>, <link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link>&gt; Detectors::m_type_counter<computeroutput>[protected]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_detectors_1a5677eaffae4eea104f04c3f85e2c5fbe"/>    <section>
+    <title>m_types</title>
+<indexterm><primary>m_types</primary><secondary>Detectors</secondary></indexterm>
+<indexterm><primary>Detectors</primary><secondary>m_types</secondary></indexterm>
+<para><computeroutput><link linkend="_lib_co_8hpp_1a632090884b4aa0585e747446a2683963">Strings</link> Detectors::m_types = <link linkend="_lib_co_8hpp_1a632090884b4aa0585e747446a2683963">Strings</link>(<link linkend="__detectors_8hpp_1a66ffad8e00f3e94ca2040082469213c6">SIZE_LOOKUP</link>)<computeroutput>[protected]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_detectors_1a0e9964892db1d2dfdb3a8cbdd6c87aeb"/>    <section>
+    <title>m_types_ID</title>
+<indexterm><primary>m_types_ID</primary><secondary>Detectors</secondary></indexterm>
+<indexterm><primary>Detectors</primary><secondary>m_types_ID</secondary></indexterm>
+<para><computeroutput><link linkend="_lib_co_8hpp_1a632090884b4aa0585e747446a2683963">Strings</link> Detectors::m_types_ID<computeroutput>[protected]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_detectors_1acb3bb5bfbb60a5861b87ddc17c7466d8"/>    <section>
+    <title>m_types_index</title>
+<indexterm><primary>m_types_index</primary><secondary>Detectors</secondary></indexterm>
+<indexterm><primary>Detectors</primary><secondary>m_types_index</secondary></indexterm>
+<para><computeroutput>std::unordered_map&lt;<link linkend="__detectors_8hpp_1a7ea6a1daded60b9200989100a41bbc3a">dType</link>, int&gt; Detectors::m_types_index<computeroutput>[protected]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_detectors_1a930c2b917e87154c1337ecf8551a3ab4"/>    <section>
+    <title>types_handled</title>
+<indexterm><primary>types_handled</primary><secondary>Detectors</secondary></indexterm>
+<indexterm><primary>Detectors</primary><secondary>types_handled</secondary></indexterm>
+<para><computeroutput><link linkend="_lib_co_8hpp_1a632090884b4aa0585e747446a2683963">Strings</link> Detectors::types_handled = {&quot;ge&quot;, &quot;bgo&quot;, &quot;labr&quot;, &quot;paris&quot;, &quot;dssd&quot;, &quot;eden&quot;, &quot;RF&quot;, &quot;default&quot;}</computeroutput></para></section>
+<para>
+The documentation for this class was generated from the following file:</para>
+lib/Classes/<link linkend="__detectors_8hpp">Detectors.hpp</link></section>
+</section>

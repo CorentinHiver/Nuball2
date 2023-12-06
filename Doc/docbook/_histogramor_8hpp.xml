@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__histogramor_8hpp" xml:lang="en-US">
+<title>lib/Modules/Histogramor.hpp File Reference</title>
+<indexterm><primary>lib/Modules/Histogramor.hpp</primary></indexterm>
+<programlisting>#include &quot;../libRoot.hpp&quot;
+#include &quot;../MTObjects/MTFasterReader.hpp&quot;
+#include &quot;../MTObjects/MTTHist.hpp&quot;
+</programlisting>Include dependency graph for Histogramor.hpp:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="_histogramor_8hpp__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+This graph shows which files directly or indirectly include this file:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="_histogramor_8hpp__dep__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>class <link linkend="_class_histogramor">Histogramor</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="__histogramor_8hpp_1a95dae438bd57de886ce7bc13dad70e47">Histogramor</link> (int argc, char **argv)</para>
+</listitem>
+            <listitem><para>bool <link linkend="__histogramor_8hpp_1a26f7bc6a7067ab8e2c837ffd426cc1e7">load_binning</link> (std::string const &amp;filename)</para>
+</listitem>
+            <listitem><para><link linkend="__histogramor_8hpp_1a46b4df6e2b3de3ff9fc226da034505a7">print</link> (&quot;&quot;)</para>
+</listitem>
+            <listitem><para><link linkend="__histogramor_8hpp_1a1b286695fcee079b11f8ff065743e8e9">print</link> (&quot;-b [binning_file] : Load .binning file&quot;)</para>
+</listitem>
+            <listitem><para><link linkend="__histogramor_8hpp_1ab48a2fa7184e6354788989602c8c8c29">print</link> (&quot;-i [ID_file]      : Load ID file&quot;)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="__histogramor_8hpp_1a95dae438bd57de886ce7bc13dad70e47"/>    <section>
+    <title>Histogramor()</title>
+<indexterm><primary>Histogramor</primary><secondary>Histogramor.hpp</secondary></indexterm>
+<indexterm><primary>Histogramor.hpp</primary><secondary>Histogramor</secondary></indexterm>
+<para><computeroutput><link linkend="_class_histogramor">Histogramor</link> (int argc, char ** argv)</computeroutput></para>    </section><anchor xml:id="__histogramor_8hpp_1a26f7bc6a7067ab8e2c837ffd426cc1e7"/>    <section>
+    <title>load_binning()</title>
+<indexterm><primary>load_binning</primary><secondary>Histogramor.hpp</secondary></indexterm>
+<indexterm><primary>Histogramor.hpp</primary><secondary>load_binning</secondary></indexterm>
+<para><computeroutput>bool load_binning (std::string const &amp; filename)</computeroutput></para>    </section><anchor xml:id="__histogramor_8hpp_1a46b4df6e2b3de3ff9fc226da034505a7"/>    <section>
+    <title>print()<computeroutput>[1/3]</computeroutput></title>
+<indexterm><primary>print</primary><secondary>Histogramor.hpp</secondary></indexterm>
+<indexterm><primary>Histogramor.hpp</primary><secondary>print</secondary></indexterm>
+<para><computeroutput>print (&quot;&quot; )</computeroutput></para>    </section><anchor xml:id="__histogramor_8hpp_1a1b286695fcee079b11f8ff065743e8e9"/>    <section>
+    <title>print()<computeroutput>[2/3]</computeroutput></title>
+<indexterm><primary>print</primary><secondary>Histogramor.hpp</secondary></indexterm>
+<indexterm><primary>Histogramor.hpp</primary><secondary>print</secondary></indexterm>
+<para><computeroutput>print (&quot;-b  : Load .binning file&quot; [binning_file])</computeroutput></para>    </section><anchor xml:id="__histogramor_8hpp_1ab48a2fa7184e6354788989602c8c8c29"/>    <section>
+    <title>print()<computeroutput>[3/3]</computeroutput></title>
+<indexterm><primary>print</primary><secondary>Histogramor.hpp</secondary></indexterm>
+<indexterm><primary>Histogramor.hpp</primary><secondary>print</secondary></indexterm>
+<para><computeroutput>print (&quot;-i  : Load ID file&quot; [ID_file])</computeroutput></para></section>
+</section>
+</section>

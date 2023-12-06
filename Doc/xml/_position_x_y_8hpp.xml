@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="_position_x_y_8hpp" kind="file" language="C++">
+    <compoundname>PositionXY.hpp</compoundname>
+    <includedby refid="_paris_cluster_8hpp" local="yes">lib/Analyse/ParisCluster.hpp</includedby>
+    <invincdepgraph>
+      <node id="4">
+        <label>lib/Analyse/EventAnalyse.hpp</label>
+        <link refid="_event_analyse_8hpp"/>
+      </node>
+      <node id="1">
+        <label>lib/Analyse/PositionXY.hpp</label>
+        <link refid="_position_x_y_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>lib/Analyse/ParisCluster.hpp</label>
+        <link refid="_paris_cluster_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>lib/Analyse/Paris.hpp</label>
+        <link refid="_paris_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="class_position_x_y" prot="public">PositionXY</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>POSITIONXY_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>POSITIONXY_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4" refid="class_position_x_y" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_position_x_y" kindref="compound">PositionXY</ref></highlight></codeline>
+<codeline lineno="5"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="7" refid="class_position_x_y_1a72c2bce8c3524d13a446e5f7bd00176b" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="class_position_x_y_1a72c2bce8c3524d13a446e5f7bd00176b" kindref="member">PositionXY</ref>(){}</highlight></codeline>
+<codeline lineno="8" refid="class_position_x_y_1a0ec7d926dde43f06cc03cfa1df7684bc" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="class_position_x_y_1a0ec7d926dde43f06cc03cfa1df7684bc" kindref="member">PositionXY</ref>(Float_t<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/><ref refid="class_position_x_y_1abe9b0b387f47f4526b87fcff899f0d9e" kindref="member">x</ref>,<sp/>Float_t<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/><ref refid="class_position_x_y_1adb0113c11672958f3a0f0065ee5622f0" kindref="member">y</ref>)<sp/>:<sp/><ref refid="class_position_x_y_1a583c89cff15edc779275a67bbf521954" kindref="member">m_x</ref>(<ref refid="class_position_x_y_1abe9b0b387f47f4526b87fcff899f0d9e" kindref="member">x</ref>),<sp/><ref refid="class_position_x_y_1a6e54b1a15b214672d73fb52a4d83af63" kindref="member">m_y</ref>(<ref refid="class_position_x_y_1adb0113c11672958f3a0f0065ee5622f0" kindref="member">y</ref>)<sp/>{}</highlight></codeline>
+<codeline lineno="9" refid="class_position_x_y_1a6996027a8e62487e45945a195a24ee45" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="class_position_x_y_1a6996027a8e62487e45945a195a24ee45" kindref="member">PositionXY</ref>(<ref refid="class_position_x_y" kindref="compound">PositionXY</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>pos)<sp/>{*</highlight><highlight class="keyword">this</highlight><highlight class="normal"><sp/>=<sp/>pos;}</highlight></codeline>
+<codeline lineno="10" refid="class_position_x_y_1a8a1e9503abf5defbf463133c7bf4f13b" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_position_x_y_1a8a1e9503abf5defbf463133c7bf4f13b" kindref="member">operator= </ref>(<ref refid="class_position_x_y" kindref="compound">PositionXY</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>pos)<sp/>{<ref refid="class_position_x_y_1ac33d5d71f3a3ea3f0020387edd207fdd" kindref="member">Set</ref>(pos.<ref refid="class_position_x_y_1abe9b0b387f47f4526b87fcff899f0d9e" kindref="member">x</ref>(),<sp/>pos.<ref refid="class_position_x_y_1adb0113c11672958f3a0f0065ee5622f0" kindref="member">y</ref>());}</highlight></codeline>
+<codeline lineno="11" refid="class_position_x_y_1ac33d5d71f3a3ea3f0020387edd207fdd" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/><ref refid="class_position_x_y_1ac33d5d71f3a3ea3f0020387edd207fdd" kindref="member">Set</ref>(Float_t<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/><ref refid="class_position_x_y_1abe9b0b387f47f4526b87fcff899f0d9e" kindref="member">x</ref>,<sp/>Float_t<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/><ref refid="class_position_x_y_1adb0113c11672958f3a0f0065ee5622f0" kindref="member">y</ref>)<sp/>{<ref refid="class_position_x_y_1a583c89cff15edc779275a67bbf521954" kindref="member">m_x</ref><sp/>=<sp/><ref refid="class_position_x_y_1abe9b0b387f47f4526b87fcff899f0d9e" kindref="member">x</ref>;<sp/><ref refid="class_position_x_y_1a6e54b1a15b214672d73fb52a4d83af63" kindref="member">m_y</ref><sp/>=<sp/><ref refid="class_position_x_y_1adb0113c11672958f3a0f0065ee5622f0" kindref="member">y</ref>;}</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight></codeline>
+<codeline lineno="13" refid="class_position_x_y_1abe9b0b387f47f4526b87fcff899f0d9e" refkind="member"><highlight class="normal"><sp/><sp/>Float_t<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/><ref refid="class_position_x_y_1abe9b0b387f47f4526b87fcff899f0d9e" kindref="member">x</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_position_x_y_1a583c89cff15edc779275a67bbf521954" kindref="member">m_x</ref>;}</highlight></codeline>
+<codeline lineno="14" refid="class_position_x_y_1adb0113c11672958f3a0f0065ee5622f0" refkind="member"><highlight class="normal"><sp/><sp/>Float_t<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/><ref refid="class_position_x_y_1adb0113c11672958f3a0f0065ee5622f0" kindref="member">y</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_position_x_y_1a6e54b1a15b214672d73fb52a4d83af63" kindref="member">m_y</ref>;}</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight></codeline>
+<codeline lineno="16" refid="class_position_x_y_1aea5a76a9f74484b7e9ebf9a0157f355a" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/>Float_t<sp/><ref refid="class_position_x_y_1aea5a76a9f74484b7e9ebf9a0157f355a" kindref="member">distance</ref>(<ref refid="class_position_x_y" kindref="compound">PositionXY</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>coord_1,<sp/><ref refid="class_position_x_y" kindref="compound">PositionXY</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>coord_2)</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>dx<sp/>=<sp/>coord_2.<ref refid="class_position_x_y_1abe9b0b387f47f4526b87fcff899f0d9e" kindref="member">x</ref>()-coord_1.<ref refid="class_position_x_y_1abe9b0b387f47f4526b87fcff899f0d9e" kindref="member">x</ref>();</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>dy<sp/>=<sp/>coord_2.<ref refid="class_position_x_y_1adb0113c11672958f3a0f0065ee5622f0" kindref="member">y</ref>()-coord_1.<ref refid="class_position_x_y_1adb0113c11672958f3a0f0065ee5622f0" kindref="member">y</ref>();</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>(TMath::Sqrt(dx*dx+dy*dy));</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight></codeline>
+<codeline lineno="23" refid="class_position_x_y_1ab72e29ae813c686380dd1d14bb45c245" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/>Float_t<sp/><ref refid="class_position_x_y_1ab72e29ae813c686380dd1d14bb45c245" kindref="member">distanceTo</ref>(<ref refid="class_position_x_y" kindref="compound">PositionXY</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>coord_2)</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_position_x_y_1aea5a76a9f74484b7e9ebf9a0157f355a" kindref="member">distance</ref>(*</highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>coord_2);</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight></codeline>
+<codeline lineno="28" refid="class_position_x_y_1a4a0681618dd5af4f1fbcef07db0da809" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_position_x_y_1a4a0681618dd5af4f1fbcef07db0da809" kindref="member">Print</ref>()<sp/>{<ref refid="_histogramor_8hpp_1ab48a2fa7184e6354788989602c8c8c29" kindref="member">print</ref>(</highlight><highlight class="stringliteral">&quot;x<sp/>:&quot;</highlight><highlight class="normal">,<sp/><ref refid="class_position_x_y_1a583c89cff15edc779275a67bbf521954" kindref="member">m_x</ref>,<sp/></highlight><highlight class="stringliteral">&quot;y<sp/>:<sp/>&quot;</highlight><highlight class="normal">,<sp/><ref refid="class_position_x_y_1a6e54b1a15b214672d73fb52a4d83af63" kindref="member">m_y</ref>);}</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="31" refid="class_position_x_y_1a583c89cff15edc779275a67bbf521954" refkind="member"><highlight class="normal"><sp/><sp/>Float_t<sp/><ref refid="class_position_x_y_1a583c89cff15edc779275a67bbf521954" kindref="member">m_x</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="32" refid="class_position_x_y_1a6e54b1a15b214672d73fb52a4d83af63" refkind="member"><highlight class="normal"><sp/><sp/>Float_t<sp/><ref refid="class_position_x_y_1a6e54b1a15b214672d73fb52a4d83af63" kindref="member">m_y</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="33"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//POSITIONXY_H</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="lib/Analyse/PositionXY.hpp"/>
+  </compounddef>
+</doxygen>

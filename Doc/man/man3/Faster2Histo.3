@@ -1,0 +1,161 @@
+.TH "Faster2Histo" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Faster2Histo
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <Faster2Histo\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBaddFile\fP (std::string const &file)"
+.br
+.ti -1c
+.RI "void \fBaddFolder\fP (\fBPath\fP folder, int const &nb_files=\-1)"
+.br
+.ti -1c
+.RI "\fBFaster2Histo\fP ()"
+.br
+.ti -1c
+.RI "\fBFaster2Histo\fP (int argc, char **argv)"
+.br
+.ti -1c
+.RI "void \fBfillHisto\fP (\fBHit\fP const &hit)"
+.br
+.ti -1c
+.RI "void \fBload\fP (int const &argc, char **argv)"
+.br
+.ti -1c
+.RI "void \fBloadCalibration\fP (std::string const &calibration_file)"
+.br
+.ti -1c
+.RI "void \fBmultirun\fP (int const &nb_threads=\-1)"
+.br
+.ti -1c
+.RI "void \fBoverwrite\fP (bool const &_overwrite)"
+.br
+.ti -1c
+.RI "void \fBsetNbFiles\fP (int const &_nb_files)"
+.br
+.ti -1c
+.RI "void \fBsetNbThreads\fP (int const &_nb_threads)"
+.br
+.ti -1c
+.RI "void \fBsetOutFilename\fP (std::string const &out_filename) noexcept"
+.br
+.ti -1c
+.RI "void \fBsetWriteMode\fP (const char *mode) noexcept"
+.br
+.ti -1c
+.RI "void \fBtreatFile\fP (\fBHit\fP &hit, \fBFasterReader\fP &reader)"
+.br
+.ti -1c
+.RI "void \fBwrite\fP (std::string const &out_filename='')"
+.br
+.in -1c
+.SS "Private Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBprintParameters\fP () const noexcept"
+.br
+.in -1c
+.SS "Static Private Member Functions"
+
+.in +1c
+.ti -1c
+.RI "static void \fBdispatch_threads\fP (\fBHit\fP &hit, \fBFasterReader\fP &reader, \fBFaster2Histo\fP &f2h)"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBCalibration\fP \fBm_calibration\fP"
+.br
+.ti -1c
+.RI "std::vector< \fBLabel\fP > \fBm_labels\fP"
+.br
+.ti -1c
+.RI "\fBMTFasterReader\fP \fBm_MTreader\fP"
+.br
+.ti -1c
+.RI "int \fBm_nb_files\fP = \-1"
+.br
+.ti -1c
+.RI "\fBFile\fP \fBm_outFile\fP = 'spectra\&.root'"
+.br
+.ti -1c
+.RI "int \fBm_overwrite\fP = false"
+.br
+.ti -1c
+.RI "std::unordered_map< \fBLabel\fP, \fBMTTHist\fP< TH1F > > \fBm_spectra\fP"
+.br
+.ti -1c
+.RI "const char * \fBwrite_mode\fP = 'RECREATE'"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "Faster2Histo::Faster2Histo ()\fC [inline]\fP"
+
+.SS "Faster2Histo::Faster2Histo (int argc, char ** argv)"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "void Faster2Histo::addFile (std::string const & file)\fC [inline]\fP"
+
+.SS "void Faster2Histo::addFolder (\fBPath\fP folder, int const & nb_files = \fC\-1\fP)\fC [inline]\fP"
+
+.SS "static void Faster2Histo::dispatch_threads (\fBHit\fP & hit, \fBFasterReader\fP & reader, \fBFaster2Histo\fP & f2h)\fC [inline]\fP, \fC [static]\fP, \fC [private]\fP"
+
+.SS "void Faster2Histo::fillHisto (\fBHit\fP const & hit)\fC [inline]\fP"
+
+.SS "void Faster2Histo::load (int const & argc, char ** argv)"
+
+.SS "void Faster2Histo::loadCalibration (std::string const & calibration_file)\fC [inline]\fP"
+
+.SS "void Faster2Histo::multirun (int const & nb_threads = \fC\-1\fP)\fC [inline]\fP"
+
+.SS "void Faster2Histo::overwrite (bool const & _overwrite)\fC [inline]\fP"
+
+.SS "void Faster2Histo::printParameters () const\fC [private]\fP, \fC [noexcept]\fP"
+
+.SS "void Faster2Histo::setNbFiles (int const & _nb_files)\fC [inline]\fP"
+
+.SS "void Faster2Histo::setNbThreads (int const & _nb_threads)\fC [inline]\fP"
+
+.SS "void Faster2Histo::setOutFilename (std::string const & out_filename)\fC [inline]\fP, \fC [noexcept]\fP"
+
+.SS "void Faster2Histo::setWriteMode (const char * mode)\fC [inline]\fP, \fC [noexcept]\fP"
+
+.SS "void Faster2Histo::treatFile (\fBHit\fP & hit, \fBFasterReader\fP & reader)"
+
+.SS "void Faster2Histo::write (std::string const & out_filename = \fC''\fP)\fC [noexcept]\fP"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "\fBCalibration\fP Faster2Histo::m_calibration\fC [private]\fP"
+
+.SS "std::vector<\fBLabel\fP> Faster2Histo::m_labels\fC [private]\fP"
+
+.SS "\fBMTFasterReader\fP Faster2Histo::m_MTreader\fC [private]\fP"
+
+.SS "int Faster2Histo::m_nb_files = \-1\fC [private]\fP"
+
+.SS "\fBFile\fP Faster2Histo::m_outFile = 'spectra\&.root'\fC [private]\fP"
+
+.SS "int Faster2Histo::m_overwrite = false\fC [private]\fP"
+
+.SS "std::unordered_map<\fBLabel\fP, \fBMTTHist\fP<TH1F> > Faster2Histo::m_spectra\fC [private]\fP"
+
+.SS "const char* Faster2Histo::write_mode = 'RECREATE'\fC [private]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Nuball2 from the source code\&.

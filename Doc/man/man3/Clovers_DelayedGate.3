@@ -1,0 +1,63 @@
+.TH "Clovers::DelayedGate" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Clovers::DelayedGate
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <Clovers\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBDelayedGate\fP ()"
+.br
+.ti -1c
+.RI "bool \fBoperator()\fP (double const &time)"
+.br
+.ti -1c
+.RI "bool \fBoperator()\fP (double const &time, float const &energy)"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "float \fBm_high_E\fP = 100"
+.br
+.ti -1c
+.RI "\fBGate\fP \fBm_high_E_gate\fP = {40\&.f, 145\&.f}"
+.br
+.ti -1c
+.RI "float \fBm_low_E\fP = 100"
+.br
+.ti -1c
+.RI "\fBGate\fP \fBm_low_E_gate\fP = {60\&.f, 145\&.f}"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "Clovers::DelayedGate::DelayedGate ()\fC [inline]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "bool Clovers::DelayedGate::operator() (double const & time)\fC [inline]\fP"
+
+.SS "bool Clovers::DelayedGate::operator() (double const & time, float const & energy)\fC [inline]\fP"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "float Clovers::DelayedGate::m_high_E = 100\fC [private]\fP"
+
+.SS "\fBGate\fP Clovers::DelayedGate::m_high_E_gate = {40\&.f, 145\&.f}\fC [private]\fP"
+
+.SS "float Clovers::DelayedGate::m_low_E = 100\fC [private]\fP"
+
+.SS "\fBGate\fP Clovers::DelayedGate::m_low_E_gate = {60\&.f, 145\&.f}\fC [private]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Nuball2 from the source code\&.

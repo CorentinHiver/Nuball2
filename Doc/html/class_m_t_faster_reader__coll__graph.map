@@ -1,0 +1,7 @@
+<map id="MTFasterReader" name="MTFasterReader">
+<area shape="rect" id="node1" title="Class used to read in parallel .fast files of the same run." alt="" coords="98,273,225,300"/>
+<area shape="rect" id="node2" href="$class_m_t_vector.html" title=" " alt="" coords="5,184,184,211"/>
+<area shape="rect" id="node3" href="$class_files_manager.html" title=" " alt="" coords="208,184,317,211"/>
+<area shape="rect" id="node4" href="$class_path.html" title="EXPERIMENTAL Object used to hold the complete path of a giver folder." alt="" coords="237,95,288,121"/>
+<area shape="rect" id="node5" href="$class_folders.html" title="EXPERIMENTAL Object used to hold a list of folders." alt="" coords="228,5,297,32"/>
+</map>

@@ -1,0 +1,897 @@
+\doxysection{Clovers Class Reference}
+\label{class_clovers}\index{Clovers@{Clovers}}
+
+
+Analyse the clovers in the event.  
+
+
+
+
+{\ttfamily \#include $<$Clovers.\+hpp$>$}
+
+
+
+Collaboration diagram for Clovers\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_clovers__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \textbf{ Delayed\+Gate}
+\item 
+class \textbf{ Prompt\+Gate}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \textbf{ Analyse} ()
+\item 
+void \textbf{ Analyse\+\_\+more} ()
+\item 
+auto \textbf{ begin} () const
+\item 
+void \textbf{ Clean\+Fast} ()
+\item 
+\textbf{ Clovers} ()
+\item 
+auto \textbf{ end} () const
+\item 
+bool \textbf{ Fill} (\textbf{ Event} const \&event, \textbf{ size\+\_\+t} const \&index)
+\item 
+bool \textbf{ Fill\+Fast} (\textbf{ Event} const \&event, \textbf{ size\+\_\+t} const \&hit\+\_\+index)
+\item 
+bool \textbf{ is\+Delayed} (\textbf{ Clover\+Module} const \&clover)
+\item 
+bool \textbf{ is\+Prompt} (\textbf{ Clover\+Module} const \&clover)
+\item 
+auto \textbf{ mult} () const
+\item 
+\textbf{ Clover\+Module} \textbf{ operator[$\,$]} (\textbf{ uchar} const \&i)
+\item 
+\textbf{ Clover\+Module} \textbf{ operator[$\,$]} (\textbf{ uchar} const \&i) const
+\item 
+void \textbf{ Print\+Clean} ()
+\item 
+void \textbf{ Reset} ()
+\item 
+void \textbf{ Set\+Event} (\textbf{ Event} const \&event)
+\begin{DoxyCompactList}\small\item\em Fills the Clover\+Modules for a whole event. \end{DoxyCompactList}\item 
+void \textbf{ Set\+Event} (\textbf{ Event} const \&event, char const \&analyse\+\_\+mode)
+\begin{DoxyCompactList}\small\item\em Fills the Clover\+Modules for a whole event. \end{DoxyCompactList}\item 
+auto const  \& \textbf{ size} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \textbf{ Initialize\+Arrays} ()
+\begin{DoxyCompactList}\small\item\em Static initialize. Allows one to use the arrays event if no object has been instantiated. \end{DoxyCompactList}\item 
+static bool \textbf{ is\+\_\+clover} (\textbf{ Label} const \&l)
+\item 
+static bool \textbf{ is\+\_\+clover\+\_\+\+BGO} (\textbf{ Label} const \&l)
+\item 
+static bool \textbf{ is\+\_\+clover\+\_\+\+Ge} (\textbf{ Label} const \&l)
+\item 
+static \textbf{ uchar} \textbf{ label\+\_\+to\+\_\+clover} (\textbf{ Label} const \&l)
+\item 
+static \textbf{ uchar} \textbf{ label\+\_\+to\+\_\+cristal} (\textbf{ Label} const \&l)
+\item 
+static void \textbf{ set\+Energy\+Threshold} (float const \&emin)
+\item 
+static void \textbf{ time\+Ps} (bool const \&time\+\_\+ps)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ Static\+Vector}$<$ \textbf{ uchar} $>$ \textbf{ Bgo} = \textbf{ Static\+Vector}$<$\textbf{ uchar}$>$(24)
+\item 
+\textbf{ Static\+Vector}$<$ \textbf{ uchar} $>$ \textbf{ BGOonly} = \textbf{ Static\+Vector}$<$\textbf{ uchar}$>$(24)
+\item 
+\textbf{ Static\+Vector}$<$ \textbf{ uchar} $>$ \textbf{ Clean\+Ge} = \textbf{ Static\+Vector}$<$\textbf{ uchar}$>$(24)
+\item 
+\textbf{ Static\+Vector}$<$ \textbf{ uchar} $>$ \textbf{ cristaux} = \textbf{ Static\+Vector}$<$\textbf{ uchar}$>$(96)
+\item 
+\textbf{ Static\+Vector}$<$ \textbf{ uchar} $>$ \textbf{ cristaux\+\_\+\+BGO} = \textbf{ Static\+Vector}$<$\textbf{ uchar}$>$(48)
+\item 
+std\+::array$<$ float, 96 $>$ \textbf{ cristaux\+\_\+nrj} = \{0\}
+\item 
+std\+::array$<$ float, 48 $>$ \textbf{ cristaux\+\_\+nrj\+\_\+\+BGO} = \{0\}
+\item 
+std\+::array$<$ double, 96 $>$ \textbf{ cristaux\+\_\+time} = \{0\}
+\item 
+std\+::array$<$ double, 48 $>$ \textbf{ cristaux\+\_\+time\+\_\+\+BGO} = \{0\}
+\item 
+\textbf{ uchar} \textbf{ Crystal\+Mult} = 0
+\item 
+\textbf{ uchar} \textbf{ Crystal\+Mult\+\_\+\+BGO} = 0
+\item 
+\textbf{ Static\+Vector}$<$ \textbf{ uchar} $>$ \textbf{ Delayed\+BGO} = \textbf{ Static\+Vector}$<$\textbf{ uchar}$>$(24)
+\item 
+\textbf{ uchar} \textbf{ Delayed\+Clean\+Ge\+Mult} = 0
+\item 
+std\+::vector$<$ \textbf{ uchar} $>$ \textbf{ delayed\+Clovers}
+\item 
+std\+::vector$<$ \textbf{ Clover\+Module} $>$ \textbf{ Delayed\+Clovers}
+\item 
+class \textbf{ Clovers\+::\+Delayed\+Gate} \textbf{ delayed\+Gate}
+\item 
+\textbf{ Static\+Vector}$<$ \textbf{ uchar} $>$ \textbf{ Delayed\+Ge} = \textbf{ Static\+Vector}$<$\textbf{ uchar}$>$(24)
+\item 
+\textbf{ uchar} \textbf{ Delayed\+Mult} = 0
+\item 
+\textbf{ Static\+Vector}$<$ \textbf{ uchar} $>$ \textbf{ Ge} = \textbf{ Static\+Vector}$<$\textbf{ uchar}$>$(24)
+\item 
+bool \textbf{ has511} = false
+\item 
+\textbf{ Static\+Vector}$<$ \textbf{ uchar} $>$ \textbf{ Hits} = \textbf{ Static\+Vector}$<$\textbf{ uchar}$>$(24)
+\item 
+std\+::vector$<$ \textbf{ Clover\+Module} $>$ \textbf{ m\+\_\+clovers}
+\item 
+\textbf{ Static\+Vector}$<$ \textbf{ uchar} $>$ \textbf{ Prompt\+BGO} = \textbf{ Static\+Vector}$<$\textbf{ uchar}$>$(24)
+\item 
+\textbf{ uchar} \textbf{ Prompt\+Clean\+Ge\+Mult} = 0
+\item 
+std\+::vector$<$ \textbf{ uchar} $>$ \textbf{ prompt\+Clovers}
+\item 
+std\+::vector$<$ \textbf{ Clover\+Module} $>$ \textbf{ Prompt\+Clovers}
+\item 
+class \textbf{ Clovers\+::\+Prompt\+Gate} \textbf{ prompt\+Gate}
+\item 
+\textbf{ Static\+Vector}$<$ \textbf{ uchar} $>$ \textbf{ Prompt\+Ge} = \textbf{ Static\+Vector}$<$\textbf{ uchar}$>$(24)
+\item 
+\textbf{ uchar} \textbf{ Prompt\+Mult} = 0
+\item 
+\textbf{ Static\+Vector}$<$ \textbf{ uchar} $>$ \textbf{ raw\+BGO} = \textbf{ Static\+Vector}$<$\textbf{ uchar}$>$(48)
+\item 
+\textbf{ Static\+Vector}$<$ \textbf{ uchar} $>$ \textbf{ raw\+Ge} = \textbf{ Static\+Vector}$<$\textbf{ uchar}$>$(96)
+\item 
+\textbf{ Static\+Vector}$<$ \textbf{ uchar} $>$ \textbf{ Rejected\+Ge} = \textbf{ Static\+Vector}$<$\textbf{ uchar}$>$(24)
+\item 
+\textbf{ uchar} \textbf{ Total\+Mult} = 0
+\item 
+double \textbf{ tot\+BGO} = 0.\+0
+\item 
+double \textbf{ tot\+BGO\+\_\+delayed} = -\/0.\+1
+\item 
+double \textbf{ tot\+BGO\+\_\+prompt} = -\/0.\+1
+\item 
+double \textbf{ tot\+Ge} = 0.\+0
+\item 
+double \textbf{ tot\+Ge\+\_\+delayed} = -\/0.\+1
+\item 
+double \textbf{ tot\+Ge\+\_\+prompt} = -\/0.\+1
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::array$<$ \textbf{ uchar}, 1000 $>$ \textbf{ cristaux\+\_\+index}
+\item 
+static std\+::array$<$ \textbf{ uchar}, 1000 $>$ \textbf{ cristaux\+\_\+index\+\_\+\+BGO}
+\item 
+static \textbf{ Gates} \textbf{ delayed\+BGOgate} = \{\{60.f, 145.f\}\}
+\item 
+static \textbf{ Gates} \textbf{ delayed\+Ge\+Gate} = \{\{60.f, 145.f\}\}
+\item 
+static float \textbf{ Emin} = 5.
+\item 
+static std\+::array$<$ bool, 1000 $>$ \textbf{ is\+BGO}
+\item 
+static std\+::array$<$ bool, 1000 $>$ \textbf{ is\+Clover}
+\item 
+static std\+::array$<$ bool, 1000 $>$ \textbf{ is\+Ge}
+\item 
+static std\+::array$<$ \textbf{ uchar}, 1000 $>$ \textbf{ labels}
+\item 
+static \textbf{ Gate} \textbf{ prompt\+BGOgate} = \{-\/20.f, 10.f \}
+\item 
+static \textbf{ Gate} \textbf{ prompt\+Ge\+Gate} = \{-\/20.f, 10.f \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static bool \textbf{ s\+\_\+initialised} = false
+\item 
+static bool \textbf{ s\+\_\+time\+\_\+ps} = false
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Analyse the clovers in the event. 
+
+Typical use case \+: \begin{DoxyVerb}   // Open tree...
+   Event event(tree, "lTn");
+
+   auto root_histo = new THisto(...);
+
+   auto maxEvt = tree -> GetEntries();
+   int eventNumber = 0;
+   Clovers clovers;
+   while (eventNumber<maxEvt)
+   {
+     tree -> GetEntry();
+     clovers.SetEvent(event);
+     for (auto const & clover : event.CleanGe)
+     {
+       root_histo->Fill(clover.nrj);
+     }
+   }
+\end{DoxyVerb}
+ This class is Thread Safe ! 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\label{class_clovers_addcd7785b41aec6be8988166a5b04fa0}} 
+\index{Clovers@{Clovers}!Clovers@{Clovers}}
+\index{Clovers@{Clovers}!Clovers@{Clovers}}
+\doxysubsubsection{Clovers()}
+{\footnotesize\ttfamily Clovers\+::\+Clovers (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_clovers_addcd7785b41aec6be8988166a5b04fa0_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\label{class_clovers_a523aad5d019f23144292c0e23067a43b}} 
+\index{Clovers@{Clovers}!Analyse@{Analyse}}
+\index{Analyse@{Analyse}!Clovers@{Clovers}}
+\doxysubsubsection{Analyse()}
+{\footnotesize\ttfamily void Clovers\+::\+Analyse (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_clovers_a523aad5d019f23144292c0e23067a43b_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_clovers_a523aad5d019f23144292c0e23067a43b_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_clovers_adaa12173cad2d804f6583001f174fd12}} 
+\index{Clovers@{Clovers}!Analyse\_more@{Analyse\_more}}
+\index{Analyse\_more@{Analyse\_more}!Clovers@{Clovers}}
+\doxysubsubsection{Analyse\_more()}
+{\footnotesize\ttfamily void Clovers\+::\+Analyse\+\_\+more (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\label{class_clovers_ae236f2adb9b2c374babe63b3cef9c970}} 
+\index{Clovers@{Clovers}!begin@{begin}}
+\index{begin@{begin}!Clovers@{Clovers}}
+\doxysubsubsection{begin()}
+{\footnotesize\ttfamily auto Clovers\+::begin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_clovers_a10afb56c3c4311007df55386dacba543}} 
+\index{Clovers@{Clovers}!CleanFast@{CleanFast}}
+\index{CleanFast@{CleanFast}!Clovers@{Clovers}}
+\doxysubsubsection{CleanFast()}
+{\footnotesize\ttfamily void Clovers\+::\+Clean\+Fast (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=326pt]{class_clovers_a10afb56c3c4311007df55386dacba543_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_clovers_a5886faa3a7bce241b628e2c7859e7dfd}} 
+\index{Clovers@{Clovers}!end@{end}}
+\index{end@{end}!Clovers@{Clovers}}
+\doxysubsubsection{end()}
+{\footnotesize\ttfamily auto Clovers\+::end (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_clovers_ab1394e718791a5016aa3e0a19828465c}} 
+\index{Clovers@{Clovers}!Fill@{Fill}}
+\index{Fill@{Fill}!Clovers@{Clovers}}
+\doxysubsubsection{Fill()}
+{\footnotesize\ttfamily bool Clovers\+::\+Fill (\begin{DoxyParamCaption}\item[{\textbf{ Event} const \&}]{event,  }\item[{\textbf{ size\+\_\+t} const \&}]{index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_clovers_ab1394e718791a5016aa3e0a19828465c_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_clovers_ab1394e718791a5016aa3e0a19828465c_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_clovers_a5f280f8b6d043a949b726c7ff2b1e019}} 
+\index{Clovers@{Clovers}!FillFast@{FillFast}}
+\index{FillFast@{FillFast}!Clovers@{Clovers}}
+\doxysubsubsection{FillFast()}
+{\footnotesize\ttfamily bool Clovers\+::\+Fill\+Fast (\begin{DoxyParamCaption}\item[{\textbf{ Event} const \&}]{event,  }\item[{\textbf{ size\+\_\+t} const \&}]{hit\+\_\+index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_clovers_a5f280f8b6d043a949b726c7ff2b1e019_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=312pt]{class_clovers_a5f280f8b6d043a949b726c7ff2b1e019_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_clovers_ab97fc40c1f6b24a092f8f92562c2fd9a}} 
+\index{Clovers@{Clovers}!InitializeArrays@{InitializeArrays}}
+\index{InitializeArrays@{InitializeArrays}!Clovers@{Clovers}}
+\doxysubsubsection{InitializeArrays()}
+{\footnotesize\ttfamily static void Clovers\+::\+Initialize\+Arrays (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Static initialize. Allows one to use the arrays event if no object has been instantiated. 
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_clovers_ab97fc40c1f6b24a092f8f92562c2fd9a_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=345pt]{class_clovers_ab97fc40c1f6b24a092f8f92562c2fd9a_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_clovers_a9c28e72706c325a4fe3b0aab61c0bfe0}} 
+\index{Clovers@{Clovers}!is\_clover@{is\_clover}}
+\index{is\_clover@{is\_clover}!Clovers@{Clovers}}
+\doxysubsubsection{is\_clover()}
+{\footnotesize\ttfamily static bool Clovers\+::is\+\_\+clover (\begin{DoxyParamCaption}\item[{\textbf{ Label} const \&}]{l }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_clovers_a9c28e72706c325a4fe3b0aab61c0bfe0_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_clovers_a4940a14c796f0825697af29156644e9c}} 
+\index{Clovers@{Clovers}!is\_clover\_BGO@{is\_clover\_BGO}}
+\index{is\_clover\_BGO@{is\_clover\_BGO}!Clovers@{Clovers}}
+\doxysubsubsection{is\_clover\_BGO()}
+{\footnotesize\ttfamily static bool Clovers\+::is\+\_\+clover\+\_\+\+BGO (\begin{DoxyParamCaption}\item[{\textbf{ Label} const \&}]{l }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=349pt]{class_clovers_a4940a14c796f0825697af29156644e9c_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_clovers_a4940a14c796f0825697af29156644e9c_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_clovers_a434508059d1a1f8e1c31dc793505cdc7}} 
+\index{Clovers@{Clovers}!is\_clover\_Ge@{is\_clover\_Ge}}
+\index{is\_clover\_Ge@{is\_clover\_Ge}!Clovers@{Clovers}}
+\doxysubsubsection{is\_clover\_Ge()}
+{\footnotesize\ttfamily static bool Clovers\+::is\+\_\+clover\+\_\+\+Ge (\begin{DoxyParamCaption}\item[{\textbf{ Label} const \&}]{l }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=341pt]{class_clovers_a434508059d1a1f8e1c31dc793505cdc7_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_clovers_a434508059d1a1f8e1c31dc793505cdc7_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_clovers_a42f43989153734778e0ba6ad1cb2b983}} 
+\index{Clovers@{Clovers}!isDelayed@{isDelayed}}
+\index{isDelayed@{isDelayed}!Clovers@{Clovers}}
+\doxysubsubsection{isDelayed()}
+{\footnotesize\ttfamily bool Clovers\+::is\+Delayed (\begin{DoxyParamCaption}\item[{\textbf{ Clover\+Module} const \&}]{clover }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_clovers_acf7eee4006e708ff0b2f4a56433d5e38}} 
+\index{Clovers@{Clovers}!isPrompt@{isPrompt}}
+\index{isPrompt@{isPrompt}!Clovers@{Clovers}}
+\doxysubsubsection{isPrompt()}
+{\footnotesize\ttfamily bool Clovers\+::is\+Prompt (\begin{DoxyParamCaption}\item[{\textbf{ Clover\+Module} const \&}]{clover }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_clovers_a9b2bcd83b6884936745b06346b121b73}} 
+\index{Clovers@{Clovers}!label\_to\_clover@{label\_to\_clover}}
+\index{label\_to\_clover@{label\_to\_clover}!Clovers@{Clovers}}
+\doxysubsubsection{label\_to\_clover()}
+{\footnotesize\ttfamily static \textbf{ uchar} Clovers\+::label\+\_\+to\+\_\+clover (\begin{DoxyParamCaption}\item[{\textbf{ Label} const \&}]{l }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_clovers_a9b2bcd83b6884936745b06346b121b73_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_clovers_ad047177f1403bb65359a6ad07ba4473a}} 
+\index{Clovers@{Clovers}!label\_to\_cristal@{label\_to\_cristal}}
+\index{label\_to\_cristal@{label\_to\_cristal}!Clovers@{Clovers}}
+\doxysubsubsection{label\_to\_cristal()}
+{\footnotesize\ttfamily \textbf{ uchar} Clovers\+::label\+\_\+to\+\_\+cristal (\begin{DoxyParamCaption}\item[{\textbf{ Label} const \&}]{l }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_clovers_ad047177f1403bb65359a6ad07ba4473a_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_clovers_a378e1b7fea24003b4b56eb855c8ae163}} 
+\index{Clovers@{Clovers}!mult@{mult}}
+\index{mult@{mult}!Clovers@{Clovers}}
+\doxysubsubsection{mult()}
+{\footnotesize\ttfamily auto Clovers\+::mult (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=299pt]{class_clovers_a378e1b7fea24003b4b56eb855c8ae163_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_clovers_ae6002b2880afe9e523ef87a8aa78b368}} 
+\index{Clovers@{Clovers}!operator[]@{operator[]}}
+\index{operator[]@{operator[]}!Clovers@{Clovers}}
+\doxysubsubsection{operator[]()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \textbf{ Clover\+Module} Clovers\+::operator[$\,$] (\begin{DoxyParamCaption}\item[{\textbf{ uchar} const \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_clovers_a6ba57807510fa592b8c57963c0d3c788}} 
+\index{Clovers@{Clovers}!operator[]@{operator[]}}
+\index{operator[]@{operator[]}!Clovers@{Clovers}}
+\doxysubsubsection{operator[]()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \textbf{ Clover\+Module} Clovers\+::operator[$\,$] (\begin{DoxyParamCaption}\item[{\textbf{ uchar} const \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_clovers_a0d853153f63a1b04ca62756615dfd741}} 
+\index{Clovers@{Clovers}!PrintClean@{PrintClean}}
+\index{PrintClean@{PrintClean}!Clovers@{Clovers}}
+\doxysubsubsection{PrintClean()}
+{\footnotesize\ttfamily void Clovers\+::\+Print\+Clean (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=327pt]{class_clovers_a0d853153f63a1b04ca62756615dfd741_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_clovers_a60b7747d54a60759b4eae02deac50f95}} 
+\index{Clovers@{Clovers}!Reset@{Reset}}
+\index{Reset@{Reset}!Clovers@{Clovers}}
+\doxysubsubsection{Reset()}
+{\footnotesize\ttfamily void Clovers\+::\+Reset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=308pt]{class_clovers_a60b7747d54a60759b4eae02deac50f95_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_clovers_a60b7747d54a60759b4eae02deac50f95_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_clovers_abe608be3faec9a16f7735dfcaabfe775}} 
+\index{Clovers@{Clovers}!setEnergyThreshold@{setEnergyThreshold}}
+\index{setEnergyThreshold@{setEnergyThreshold}!Clovers@{Clovers}}
+\doxysubsubsection{setEnergyThreshold()}
+{\footnotesize\ttfamily static void Clovers\+::set\+Energy\+Threshold (\begin{DoxyParamCaption}\item[{float const \&}]{emin }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\mbox{\label{class_clovers_a264432ef7231d65b77e744858374b8e1}} 
+\index{Clovers@{Clovers}!SetEvent@{SetEvent}}
+\index{SetEvent@{SetEvent}!Clovers@{Clovers}}
+\doxysubsubsection{SetEvent()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Clovers\+::\+Set\+Event (\begin{DoxyParamCaption}\item[{\textbf{ Event} const \&}]{event }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Fills the Clover\+Modules for a whole event. 
+
+Two modes \+: 1 \+: normal mode, skip the compton cleaning 2 \+: new mode Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_clovers_a264432ef7231d65b77e744858374b8e1_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_clovers_a264432ef7231d65b77e744858374b8e1_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_clovers_a947342842702e2f91a86d0847b15ba3a}} 
+\index{Clovers@{Clovers}!SetEvent@{SetEvent}}
+\index{SetEvent@{SetEvent}!Clovers@{Clovers}}
+\doxysubsubsection{SetEvent()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Clovers\+::\+Set\+Event (\begin{DoxyParamCaption}\item[{\textbf{ Event} const \&}]{event,  }\item[{char const \&}]{analyse\+\_\+mode }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Fills the Clover\+Modules for a whole event. 
+
+Two modes \+: 1 \+: normal mode, skip the compton cleaning 2 \+: new mode Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_clovers_a947342842702e2f91a86d0847b15ba3a_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_clovers_a6f9f1d7a131c9972ded9cf1b4291455d}} 
+\index{Clovers@{Clovers}!size@{size}}
+\index{size@{size}!Clovers@{Clovers}}
+\doxysubsubsection{size()}
+{\footnotesize\ttfamily auto const\& Clovers\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=296pt]{class_clovers_a6f9f1d7a131c9972ded9cf1b4291455d_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_clovers_aa641968a47fb9db9363e89be9c29be4c}} 
+\index{Clovers@{Clovers}!timePs@{timePs}}
+\index{timePs@{timePs}!Clovers@{Clovers}}
+\doxysubsubsection{timePs()}
+{\footnotesize\ttfamily static void Clovers\+::time\+Ps (\begin{DoxyParamCaption}\item[{bool const \&}]{time\+\_\+ps }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_clovers_aa641968a47fb9db9363e89be9c29be4c_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\label{class_clovers_a204d1d6808b2e2832dd16fbf5f6c45d9}} 
+\index{Clovers@{Clovers}!Bgo@{Bgo}}
+\index{Bgo@{Bgo}!Clovers@{Clovers}}
+\doxysubsubsection{Bgo}
+{\footnotesize\ttfamily \textbf{ Static\+Vector}$<$\textbf{ uchar}$>$ Clovers\+::\+Bgo = \textbf{ Static\+Vector}$<$\textbf{ uchar}$>$(24)}
+
+\mbox{\label{class_clovers_a94e58fcdccd9a9165933a4f494c93dcf}} 
+\index{Clovers@{Clovers}!BGOonly@{BGOonly}}
+\index{BGOonly@{BGOonly}!Clovers@{Clovers}}
+\doxysubsubsection{BGOonly}
+{\footnotesize\ttfamily \textbf{ Static\+Vector}$<$\textbf{ uchar}$>$ Clovers\+::\+BGOonly = \textbf{ Static\+Vector}$<$\textbf{ uchar}$>$(24)}
+
+\mbox{\label{class_clovers_a3b6fa093b84451b7ebe304838530997b}} 
+\index{Clovers@{Clovers}!CleanGe@{CleanGe}}
+\index{CleanGe@{CleanGe}!Clovers@{Clovers}}
+\doxysubsubsection{CleanGe}
+{\footnotesize\ttfamily \textbf{ Static\+Vector}$<$\textbf{ uchar}$>$ Clovers\+::\+Clean\+Ge = \textbf{ Static\+Vector}$<$\textbf{ uchar}$>$(24)}
+
+\mbox{\label{class_clovers_a2cd5ef2adb5347f86d677a6ee78b0cf2}} 
+\index{Clovers@{Clovers}!cristaux@{cristaux}}
+\index{cristaux@{cristaux}!Clovers@{Clovers}}
+\doxysubsubsection{cristaux}
+{\footnotesize\ttfamily \textbf{ Static\+Vector}$<$\textbf{ uchar}$>$ Clovers\+::cristaux = \textbf{ Static\+Vector}$<$\textbf{ uchar}$>$(96)}
+
+\mbox{\label{class_clovers_abf3ac879188806ad38a0ebe7c0946ce9}} 
+\index{Clovers@{Clovers}!cristaux\_BGO@{cristaux\_BGO}}
+\index{cristaux\_BGO@{cristaux\_BGO}!Clovers@{Clovers}}
+\doxysubsubsection{cristaux\_BGO}
+{\footnotesize\ttfamily \textbf{ Static\+Vector}$<$\textbf{ uchar}$>$ Clovers\+::cristaux\+\_\+\+BGO = \textbf{ Static\+Vector}$<$\textbf{ uchar}$>$(48)}
+
+\mbox{\label{class_clovers_a899c8b03a2cf2772aa085100292b738e}} 
+\index{Clovers@{Clovers}!cristaux\_index@{cristaux\_index}}
+\index{cristaux\_index@{cristaux\_index}!Clovers@{Clovers}}
+\doxysubsubsection{cristaux\_index}
+{\footnotesize\ttfamily std\+::array$<$ \textbf{ uchar}, 1000 $>$ Clovers\+::cristaux\+\_\+index\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\label{class_clovers_a8c76fc2f276e19d4b7a8cc70c9f9cebc}} 
+\index{Clovers@{Clovers}!cristaux\_index\_BGO@{cristaux\_index\_BGO}}
+\index{cristaux\_index\_BGO@{cristaux\_index\_BGO}!Clovers@{Clovers}}
+\doxysubsubsection{cristaux\_index\_BGO}
+{\footnotesize\ttfamily std\+::array$<$ \textbf{ uchar}, 1000 $>$ Clovers\+::cristaux\+\_\+index\+\_\+\+BGO\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\label{class_clovers_a75da7859463f1478187c7f3f13d5f5d7}} 
+\index{Clovers@{Clovers}!cristaux\_nrj@{cristaux\_nrj}}
+\index{cristaux\_nrj@{cristaux\_nrj}!Clovers@{Clovers}}
+\doxysubsubsection{cristaux\_nrj}
+{\footnotesize\ttfamily std\+::array$<$float, 96$>$ Clovers\+::cristaux\+\_\+nrj = \{0\}}
+
+\mbox{\label{class_clovers_a3dff2c188e41b5a0efe78e52f4f94949}} 
+\index{Clovers@{Clovers}!cristaux\_nrj\_BGO@{cristaux\_nrj\_BGO}}
+\index{cristaux\_nrj\_BGO@{cristaux\_nrj\_BGO}!Clovers@{Clovers}}
+\doxysubsubsection{cristaux\_nrj\_BGO}
+{\footnotesize\ttfamily std\+::array$<$float, 48$>$ Clovers\+::cristaux\+\_\+nrj\+\_\+\+BGO = \{0\}}
+
+\mbox{\label{class_clovers_a9b7473b93b1fd7b6330070f1611a42e1}} 
+\index{Clovers@{Clovers}!cristaux\_time@{cristaux\_time}}
+\index{cristaux\_time@{cristaux\_time}!Clovers@{Clovers}}
+\doxysubsubsection{cristaux\_time}
+{\footnotesize\ttfamily std\+::array$<$double, 96$>$ Clovers\+::cristaux\+\_\+time = \{0\}}
+
+\mbox{\label{class_clovers_afc0133ff088329bad822a129568edac3}} 
+\index{Clovers@{Clovers}!cristaux\_time\_BGO@{cristaux\_time\_BGO}}
+\index{cristaux\_time\_BGO@{cristaux\_time\_BGO}!Clovers@{Clovers}}
+\doxysubsubsection{cristaux\_time\_BGO}
+{\footnotesize\ttfamily std\+::array$<$double, 48$>$ Clovers\+::cristaux\+\_\+time\+\_\+\+BGO = \{0\}}
+
+\mbox{\label{class_clovers_a079d8274f7810d7ee0da013ccdfc759c}} 
+\index{Clovers@{Clovers}!CrystalMult@{CrystalMult}}
+\index{CrystalMult@{CrystalMult}!Clovers@{Clovers}}
+\doxysubsubsection{CrystalMult}
+{\footnotesize\ttfamily \textbf{ uchar} Clovers\+::\+Crystal\+Mult = 0}
+
+\mbox{\label{class_clovers_ad586816c3e23df6dac4d648939f23579}} 
+\index{Clovers@{Clovers}!CrystalMult\_BGO@{CrystalMult\_BGO}}
+\index{CrystalMult\_BGO@{CrystalMult\_BGO}!Clovers@{Clovers}}
+\doxysubsubsection{CrystalMult\_BGO}
+{\footnotesize\ttfamily \textbf{ uchar} Clovers\+::\+Crystal\+Mult\+\_\+\+BGO = 0}
+
+\mbox{\label{class_clovers_a49e8eabe53190954b8c7973b0ed39f85}} 
+\index{Clovers@{Clovers}!DelayedBGO@{DelayedBGO}}
+\index{DelayedBGO@{DelayedBGO}!Clovers@{Clovers}}
+\doxysubsubsection{DelayedBGO}
+{\footnotesize\ttfamily \textbf{ Static\+Vector}$<$\textbf{ uchar}$>$ Clovers\+::\+Delayed\+BGO = \textbf{ Static\+Vector}$<$\textbf{ uchar}$>$(24)}
+
+\mbox{\label{class_clovers_a3f5e44c3955123ec5535c585c7c295a2}} 
+\index{Clovers@{Clovers}!delayedBGOgate@{delayedBGOgate}}
+\index{delayedBGOgate@{delayedBGOgate}!Clovers@{Clovers}}
+\doxysubsubsection{delayedBGOgate}
+{\footnotesize\ttfamily \textbf{ Gates} Clovers\+::delayed\+BGOgate = \{\{60.f, 145.f\}\}\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\label{class_clovers_af73ecf57ed32c4670ffe484a5c4c0114}} 
+\index{Clovers@{Clovers}!DelayedCleanGeMult@{DelayedCleanGeMult}}
+\index{DelayedCleanGeMult@{DelayedCleanGeMult}!Clovers@{Clovers}}
+\doxysubsubsection{DelayedCleanGeMult}
+{\footnotesize\ttfamily \textbf{ uchar} Clovers\+::\+Delayed\+Clean\+Ge\+Mult = 0}
+
+\mbox{\label{class_clovers_a2d5bacc7c99a739838cf999e9a70f7ca}} 
+\index{Clovers@{Clovers}!delayedClovers@{delayedClovers}}
+\index{delayedClovers@{delayedClovers}!Clovers@{Clovers}}
+\doxysubsubsection{delayedClovers}
+{\footnotesize\ttfamily std\+::vector$<$\textbf{ uchar}$>$ Clovers\+::delayed\+Clovers}
+
+\mbox{\label{class_clovers_accd03b8ba441c066df69dfda4419d29e}} 
+\index{Clovers@{Clovers}!DelayedClovers@{DelayedClovers}}
+\index{DelayedClovers@{DelayedClovers}!Clovers@{Clovers}}
+\doxysubsubsection{DelayedClovers}
+{\footnotesize\ttfamily std\+::vector$<$\textbf{ Clover\+Module}$>$ Clovers\+::\+Delayed\+Clovers}
+
+\mbox{\label{class_clovers_a61ba76ac7711422e8e3b19d02b1854e4}} 
+\index{Clovers@{Clovers}!delayedGate@{delayedGate}}
+\index{delayedGate@{delayedGate}!Clovers@{Clovers}}
+\doxysubsubsection{delayedGate}
+{\footnotesize\ttfamily class \textbf{ Clovers\+::\+Delayed\+Gate} Clovers\+::delayed\+Gate}
+
+\mbox{\label{class_clovers_a8b095b47153a05f4ea048dfd1f27cc8a}} 
+\index{Clovers@{Clovers}!DelayedGe@{DelayedGe}}
+\index{DelayedGe@{DelayedGe}!Clovers@{Clovers}}
+\doxysubsubsection{DelayedGe}
+{\footnotesize\ttfamily \textbf{ Static\+Vector}$<$\textbf{ uchar}$>$ Clovers\+::\+Delayed\+Ge = \textbf{ Static\+Vector}$<$\textbf{ uchar}$>$(24)}
+
+\mbox{\label{class_clovers_af1d3b98f82e408cf31671e72b9884169}} 
+\index{Clovers@{Clovers}!delayedGeGate@{delayedGeGate}}
+\index{delayedGeGate@{delayedGeGate}!Clovers@{Clovers}}
+\doxysubsubsection{delayedGeGate}
+{\footnotesize\ttfamily \textbf{ Gates} Clovers\+::delayed\+Ge\+Gate = \{\{60.f, 145.f\}\}\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\label{class_clovers_a6f9fa8831c5a512223a979eb7d6e0ff4}} 
+\index{Clovers@{Clovers}!DelayedMult@{DelayedMult}}
+\index{DelayedMult@{DelayedMult}!Clovers@{Clovers}}
+\doxysubsubsection{DelayedMult}
+{\footnotesize\ttfamily \textbf{ uchar} Clovers\+::\+Delayed\+Mult = 0}
+
+\mbox{\label{class_clovers_a2fd19fb7d2b6a38d651a179deda4c3c5}} 
+\index{Clovers@{Clovers}!Emin@{Emin}}
+\index{Emin@{Emin}!Clovers@{Clovers}}
+\doxysubsubsection{Emin}
+{\footnotesize\ttfamily float Clovers\+::\+Emin = 5.\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\label{class_clovers_a716473abe5555285f62eaabc6466c847}} 
+\index{Clovers@{Clovers}!Ge@{Ge}}
+\index{Ge@{Ge}!Clovers@{Clovers}}
+\doxysubsubsection{Ge}
+{\footnotesize\ttfamily \textbf{ Static\+Vector}$<$\textbf{ uchar}$>$ Clovers\+::\+Ge = \textbf{ Static\+Vector}$<$\textbf{ uchar}$>$(24)}
+
+\mbox{\label{class_clovers_a0ad93f05644e9c600d6b3252ccfa019f}} 
+\index{Clovers@{Clovers}!has511@{has511}}
+\index{has511@{has511}!Clovers@{Clovers}}
+\doxysubsubsection{has511}
+{\footnotesize\ttfamily bool Clovers\+::has511 = false}
+
+\mbox{\label{class_clovers_a4c02a37642baad4cff767619dd48b76b}} 
+\index{Clovers@{Clovers}!Hits@{Hits}}
+\index{Hits@{Hits}!Clovers@{Clovers}}
+\doxysubsubsection{Hits}
+{\footnotesize\ttfamily \textbf{ Static\+Vector}$<$\textbf{ uchar}$>$ Clovers\+::\+Hits = \textbf{ Static\+Vector}$<$\textbf{ uchar}$>$(24)}
+
+\mbox{\label{class_clovers_aabda84c85d5315fe8d1f37ba5f4e02c3}} 
+\index{Clovers@{Clovers}!isBGO@{isBGO}}
+\index{isBGO@{isBGO}!Clovers@{Clovers}}
+\doxysubsubsection{isBGO}
+{\footnotesize\ttfamily std\+::array$<$ bool, 1000 $>$ Clovers\+::is\+BGO\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\label{class_clovers_a2f696c2c36f8f152505dedee19be2ca0}} 
+\index{Clovers@{Clovers}!isClover@{isClover}}
+\index{isClover@{isClover}!Clovers@{Clovers}}
+\doxysubsubsection{isClover}
+{\footnotesize\ttfamily std\+::array$<$ bool, 1000 $>$ Clovers\+::is\+Clover\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\label{class_clovers_a8fd25933d58fec7ea47ed1a7ba610ed3}} 
+\index{Clovers@{Clovers}!isGe@{isGe}}
+\index{isGe@{isGe}!Clovers@{Clovers}}
+\doxysubsubsection{isGe}
+{\footnotesize\ttfamily std\+::array$<$ bool, 1000 $>$ Clovers\+::is\+Ge\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\label{class_clovers_ae7bc9c33c4a997ef7cf615af95059a0c}} 
+\index{Clovers@{Clovers}!labels@{labels}}
+\index{labels@{labels}!Clovers@{Clovers}}
+\doxysubsubsection{labels}
+{\footnotesize\ttfamily std\+::array$<$ \textbf{ uchar}, 1000 $>$ Clovers\+::labels\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\label{class_clovers_ad07746b708cc9bea3ef6ed4370d928b9}} 
+\index{Clovers@{Clovers}!m\_clovers@{m\_clovers}}
+\index{m\_clovers@{m\_clovers}!Clovers@{Clovers}}
+\doxysubsubsection{m\_clovers}
+{\footnotesize\ttfamily std\+::vector$<$\textbf{ Clover\+Module}$>$ Clovers\+::m\+\_\+clovers}
+
+\mbox{\label{class_clovers_aebe6be652c1225409f400b3961ea9582}} 
+\index{Clovers@{Clovers}!PromptBGO@{PromptBGO}}
+\index{PromptBGO@{PromptBGO}!Clovers@{Clovers}}
+\doxysubsubsection{PromptBGO}
+{\footnotesize\ttfamily \textbf{ Static\+Vector}$<$\textbf{ uchar}$>$ Clovers\+::\+Prompt\+BGO = \textbf{ Static\+Vector}$<$\textbf{ uchar}$>$(24)}
+
+\mbox{\label{class_clovers_a413ff8f90d6bcc0321e500633fd96bd5}} 
+\index{Clovers@{Clovers}!promptBGOgate@{promptBGOgate}}
+\index{promptBGOgate@{promptBGOgate}!Clovers@{Clovers}}
+\doxysubsubsection{promptBGOgate}
+{\footnotesize\ttfamily \textbf{ Gate} Clovers\+::prompt\+BGOgate = \{-\/20.f, 10.f \}\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\label{class_clovers_aa52c6ad2a19f1ccf562194a76b47de0c}} 
+\index{Clovers@{Clovers}!PromptCleanGeMult@{PromptCleanGeMult}}
+\index{PromptCleanGeMult@{PromptCleanGeMult}!Clovers@{Clovers}}
+\doxysubsubsection{PromptCleanGeMult}
+{\footnotesize\ttfamily \textbf{ uchar} Clovers\+::\+Prompt\+Clean\+Ge\+Mult = 0}
+
+\mbox{\label{class_clovers_a7d84f69dd5d1504df9eb5761bea0b6fe}} 
+\index{Clovers@{Clovers}!promptClovers@{promptClovers}}
+\index{promptClovers@{promptClovers}!Clovers@{Clovers}}
+\doxysubsubsection{promptClovers}
+{\footnotesize\ttfamily std\+::vector$<$\textbf{ uchar}$>$ Clovers\+::prompt\+Clovers}
+
+\mbox{\label{class_clovers_ac0eb8a13e2f9f4da36b976a6aa78a8ab}} 
+\index{Clovers@{Clovers}!PromptClovers@{PromptClovers}}
+\index{PromptClovers@{PromptClovers}!Clovers@{Clovers}}
+\doxysubsubsection{PromptClovers}
+{\footnotesize\ttfamily std\+::vector$<$\textbf{ Clover\+Module}$>$ Clovers\+::\+Prompt\+Clovers}
+
+\mbox{\label{class_clovers_a82f555f87d8ed08c3266843e01073213}} 
+\index{Clovers@{Clovers}!promptGate@{promptGate}}
+\index{promptGate@{promptGate}!Clovers@{Clovers}}
+\doxysubsubsection{promptGate}
+{\footnotesize\ttfamily class \textbf{ Clovers\+::\+Prompt\+Gate} Clovers\+::prompt\+Gate}
+
+\mbox{\label{class_clovers_ad4c54b6baf892e12b7865dad6d109691}} 
+\index{Clovers@{Clovers}!PromptGe@{PromptGe}}
+\index{PromptGe@{PromptGe}!Clovers@{Clovers}}
+\doxysubsubsection{PromptGe}
+{\footnotesize\ttfamily \textbf{ Static\+Vector}$<$\textbf{ uchar}$>$ Clovers\+::\+Prompt\+Ge = \textbf{ Static\+Vector}$<$\textbf{ uchar}$>$(24)}
+
+\mbox{\label{class_clovers_a3189bfc58392c24d6a3dee2ce1a4c663}} 
+\index{Clovers@{Clovers}!promptGeGate@{promptGeGate}}
+\index{promptGeGate@{promptGeGate}!Clovers@{Clovers}}
+\doxysubsubsection{promptGeGate}
+{\footnotesize\ttfamily \textbf{ Gate} Clovers\+::prompt\+Ge\+Gate = \{-\/20.f, 10.f \}\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\label{class_clovers_ad305f49ba37a534ff2d55cfdadd21965}} 
+\index{Clovers@{Clovers}!PromptMult@{PromptMult}}
+\index{PromptMult@{PromptMult}!Clovers@{Clovers}}
+\doxysubsubsection{PromptMult}
+{\footnotesize\ttfamily \textbf{ uchar} Clovers\+::\+Prompt\+Mult = 0}
+
+\mbox{\label{class_clovers_a1a2205eb2396ce5fd48b0f12a73f0196}} 
+\index{Clovers@{Clovers}!rawBGO@{rawBGO}}
+\index{rawBGO@{rawBGO}!Clovers@{Clovers}}
+\doxysubsubsection{rawBGO}
+{\footnotesize\ttfamily \textbf{ Static\+Vector}$<$\textbf{ uchar}$>$ Clovers\+::raw\+BGO = \textbf{ Static\+Vector}$<$\textbf{ uchar}$>$(48)}
+
+\mbox{\label{class_clovers_af84dd10eb878f4385ecd092e23a77e1c}} 
+\index{Clovers@{Clovers}!rawGe@{rawGe}}
+\index{rawGe@{rawGe}!Clovers@{Clovers}}
+\doxysubsubsection{rawGe}
+{\footnotesize\ttfamily \textbf{ Static\+Vector}$<$\textbf{ uchar}$>$ Clovers\+::raw\+Ge = \textbf{ Static\+Vector}$<$\textbf{ uchar}$>$(96)}
+
+\mbox{\label{class_clovers_ae853cd7142ff578d6876c38070ef482e}} 
+\index{Clovers@{Clovers}!RejectedGe@{RejectedGe}}
+\index{RejectedGe@{RejectedGe}!Clovers@{Clovers}}
+\doxysubsubsection{RejectedGe}
+{\footnotesize\ttfamily \textbf{ Static\+Vector}$<$\textbf{ uchar}$>$ Clovers\+::\+Rejected\+Ge = \textbf{ Static\+Vector}$<$\textbf{ uchar}$>$(24)}
+
+\mbox{\label{class_clovers_a90e876d664b89f0b8b46f4ed07ecd6fe}} 
+\index{Clovers@{Clovers}!s\_initialised@{s\_initialised}}
+\index{s\_initialised@{s\_initialised}!Clovers@{Clovers}}
+\doxysubsubsection{s\_initialised}
+{\footnotesize\ttfamily bool Clovers\+::s\+\_\+initialised = false\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\mbox{\label{class_clovers_a52066e9d7cf040173f1790470bf9afff}} 
+\index{Clovers@{Clovers}!s\_time\_ps@{s\_time\_ps}}
+\index{s\_time\_ps@{s\_time\_ps}!Clovers@{Clovers}}
+\doxysubsubsection{s\_time\_ps}
+{\footnotesize\ttfamily bool Clovers\+::s\+\_\+time\+\_\+ps = false\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\mbox{\label{class_clovers_a4366bd57c8e4716d5fd63639c5ed2967}} 
+\index{Clovers@{Clovers}!TotalMult@{TotalMult}}
+\index{TotalMult@{TotalMult}!Clovers@{Clovers}}
+\doxysubsubsection{TotalMult}
+{\footnotesize\ttfamily \textbf{ uchar} Clovers\+::\+Total\+Mult = 0}
+
+\mbox{\label{class_clovers_a3a258a7a457632666c0190b4fa04939b}} 
+\index{Clovers@{Clovers}!totBGO@{totBGO}}
+\index{totBGO@{totBGO}!Clovers@{Clovers}}
+\doxysubsubsection{totBGO}
+{\footnotesize\ttfamily double Clovers\+::tot\+BGO = 0.\+0}
+
+\mbox{\label{class_clovers_a6e3b85032ab5190b5c2a360e6f0d2e4e}} 
+\index{Clovers@{Clovers}!totBGO\_delayed@{totBGO\_delayed}}
+\index{totBGO\_delayed@{totBGO\_delayed}!Clovers@{Clovers}}
+\doxysubsubsection{totBGO\_delayed}
+{\footnotesize\ttfamily double Clovers\+::tot\+BGO\+\_\+delayed = -\/0.\+1}
+
+\mbox{\label{class_clovers_a05a4d8b02a5d996da6a1205eb8bd6ca4}} 
+\index{Clovers@{Clovers}!totBGO\_prompt@{totBGO\_prompt}}
+\index{totBGO\_prompt@{totBGO\_prompt}!Clovers@{Clovers}}
+\doxysubsubsection{totBGO\_prompt}
+{\footnotesize\ttfamily double Clovers\+::tot\+BGO\+\_\+prompt = -\/0.\+1}
+
+\mbox{\label{class_clovers_a1bad91b9700a464895aacf89166961c5}} 
+\index{Clovers@{Clovers}!totGe@{totGe}}
+\index{totGe@{totGe}!Clovers@{Clovers}}
+\doxysubsubsection{totGe}
+{\footnotesize\ttfamily double Clovers\+::tot\+Ge = 0.\+0}
+
+\mbox{\label{class_clovers_abcd4354801aaef249f6a6332dca6c043}} 
+\index{Clovers@{Clovers}!totGe\_delayed@{totGe\_delayed}}
+\index{totGe\_delayed@{totGe\_delayed}!Clovers@{Clovers}}
+\doxysubsubsection{totGe\_delayed}
+{\footnotesize\ttfamily double Clovers\+::tot\+Ge\+\_\+delayed = -\/0.\+1}
+
+\mbox{\label{class_clovers_a94b65546b96444b31ff35570c2d45792}} 
+\index{Clovers@{Clovers}!totGe\_prompt@{totGe\_prompt}}
+\index{totGe\_prompt@{totGe\_prompt}!Clovers@{Clovers}}
+\doxysubsubsection{totGe\_prompt}
+{\footnotesize\ttfamily double Clovers\+::tot\+Ge\+\_\+prompt = -\/0.\+1}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+lib/\+Analyse/\textbf{ Clovers.\+hpp}\end{DoxyCompactItemize}

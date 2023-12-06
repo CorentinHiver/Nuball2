@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="_paris_label_8hpp" kind="file" language="C++">
+    <compoundname>ParisLabel.hpp</compoundname>
+    <includedby refid="_paris_x_y_8hpp" local="yes">lib/Analyse/ParisXY.hpp</includedby>
+    <invincdepgraph>
+      <node id="1">
+        <label>lib/Analyse/ParisLabel.hpp</label>
+        <link refid="_paris_label_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>lib/Analyse/ParisXY.hpp</label>
+        <link refid="_paris_x_y_8hpp"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="class_paris_label" prot="public">ParisLabel</innerclass>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="_paris_label_8hpp_1ac738c136081b82bdf3807bf87ea8bd4a" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; Double_t &gt;</type>
+        <definition>std::vector&lt;Double_t&gt; paris_labels</definition>
+        <argsstring></argsstring>
+        <name>paris_labels</name>
+        <initializer>=
+{
+  201, 202, 203, 204, 205, 206, 207, 208,
+  301, 302, 303, 304, 305, 306, 307, 308, 309, 310, 311, 312, 313, 314, 315, 316,
+  401, 402, 403, 404, 405, 406, 407, 408, 409, 410, 411, 412,
+  501, 502, 503, 504, 505, 506, 507, 508,
+  601, 602, 603, 604, 605, 606, 607, 608, 609, 610, 611, 612, 613, 614, 615, 616,
+  701, 702, 703, 704, 705, 706, 707, 708, 709, 710, 711, 712
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/ParisLabel.hpp" line="48" column="13" bodyfile="lib/Analyse/ParisLabel.hpp" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>PARISLABEL_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>PARISLABEL_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4" refid="class_paris_label" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_paris_label" kindref="compound">ParisLabel</ref></highlight></codeline>
+<codeline lineno="5"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="7" refid="class_paris_label_1ae438df4d5aa4e04d10e850efd33f39e0" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="class_paris_label_1ae438df4d5aa4e04d10e850efd33f39e0" kindref="member">ParisLabel</ref>(){};</highlight></codeline>
+<codeline lineno="8" refid="class_paris_label_1ad96cc663d29c501fdb7a76e0250d4405" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="class_paris_label_1ad96cc663d29c501fdb7a76e0250d4405" kindref="member">ParisLabel</ref>(<ref refid="_hit_8hpp_1ab5dd24876acad09ec52c250c1668466c" kindref="member">Label</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>l)<sp/>{<ref refid="class_paris_label_1ad6c412d1c581cb24fbb308172d5466e3" kindref="member">setLabel</ref>(l);}</highlight></codeline>
+<codeline lineno="9" refid="class_paris_label_1ad6c412d1c581cb24fbb308172d5466e3" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_paris_label_1ad6c412d1c581cb24fbb308172d5466e3" kindref="member">setLabel</ref>(<ref refid="_hit_8hpp_1ab5dd24876acad09ec52c250c1668466c" kindref="member">Label</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>l)</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_paris_label_1a1013b0876a0c129570e6e8d56259403b" kindref="member">back</ref><sp/>=<sp/><ref refid="class_paris_label_1adccc09a3b43e885208ab5a887ac9ba2f" kindref="member">back_array</ref>[l];</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_paris_label_1a43fed71ff7f0c3efcf3b2938fd60715d" kindref="member">ring</ref><sp/>=<sp/><ref refid="class_paris_label_1a12026f89649ca3d3ef2a5fda9b6395e7" kindref="member">ring_array</ref>[l];</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_paris_label_1a46e76f0cabf8ed30776d3bbd95bdb0bb" kindref="member">label</ref><sp/>=<sp/><ref refid="class_paris_label_1a1c553eb956a4a62c89d72ffe542376b6" kindref="member">label_array</ref>[l];</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_paris_label_1a4a674202005523f582e0c452d9741729" kindref="member">setArrays</ref>();</highlight></codeline>
+<codeline lineno="17" refid="class_paris_label_1a1013b0876a0c129570e6e8d56259403b" refkind="member"><highlight class="normal"><sp/><sp/>Bool_t<sp/><ref refid="class_paris_label_1a1013b0876a0c129570e6e8d56259403b" kindref="member">back</ref><sp/><sp/><sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;<sp/></highlight><highlight class="comment">//true<sp/>:<sp/>back<sp/>;<sp/>false<sp/>front</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="18" refid="class_paris_label_1a43fed71ff7f0c3efcf3b2938fd60715d" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21" kindref="member">uchar</ref><sp/><sp/><ref refid="class_paris_label_1a43fed71ff7f0c3efcf3b2938fd60715d" kindref="member">ring</ref><sp/><sp/><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="19" refid="class_paris_label_1a46e76f0cabf8ed30776d3bbd95bdb0bb" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21" kindref="member">uchar</ref><sp/><sp/><ref refid="class_paris_label_1a46e76f0cabf8ed30776d3bbd95bdb0bb" kindref="member">label</ref><sp/><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="22" refid="class_paris_label_1a8c3e3b49e81cdcadf3ffbac638971497" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>std::vector&lt;Double_t&gt;<sp/><ref refid="class_paris_label_1a8c3e3b49e81cdcadf3ffbac638971497" kindref="member">paris_labels</ref>;</highlight></codeline>
+<codeline lineno="23" refid="class_paris_label_1adccc09a3b43e885208ab5a887ac9ba2f" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>LabelsArray&lt;bool&gt;<sp/><ref refid="class_paris_label_1adccc09a3b43e885208ab5a887ac9ba2f" kindref="member">back_array</ref>;</highlight></codeline>
+<codeline lineno="24" refid="class_paris_label_1a12026f89649ca3d3ef2a5fda9b6395e7" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>LabelsArray&lt;uchar&gt;<sp/><ref refid="class_paris_label_1a12026f89649ca3d3ef2a5fda9b6395e7" kindref="member">ring_array</ref>;</highlight></codeline>
+<codeline lineno="25" refid="class_paris_label_1a1c553eb956a4a62c89d72ffe542376b6" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>LabelsArray&lt;uchar&gt;<sp/><ref refid="class_paris_label_1a1c553eb956a4a62c89d72ffe542376b6" kindref="member">label_array</ref>;</highlight></codeline>
+<codeline lineno="26" refid="class_paris_label_1a17ef0fbe8cabfb5de60f9853fc8dc49d" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="class_paris_label_1a17ef0fbe8cabfb5de60f9853fc8dc49d" kindref="member">arrays_set</ref>;</highlight></codeline>
+<codeline lineno="27"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal">LabelsArray&lt;bool&gt;<sp/><ref refid="class_paris_label_1adccc09a3b43e885208ab5a887ac9ba2f" kindref="member">ParisLabel::back_array</ref>;</highlight></codeline>
+<codeline lineno="30"><highlight class="normal">LabelsArray&lt;uchar&gt;<sp/><ref refid="class_paris_label_1a12026f89649ca3d3ef2a5fda9b6395e7" kindref="member">ParisLabel::ring_array</ref>;</highlight></codeline>
+<codeline lineno="31"><highlight class="normal">LabelsArray&lt;uchar&gt;<sp/><ref refid="class_paris_label_1a1c553eb956a4a62c89d72ffe542376b6" kindref="member">ParisLabel::label_array</ref>;</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight></codeline>
+<codeline lineno="33" refid="class_paris_label_1a4a674202005523f582e0c452d9741729" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_paris_label_1a4a674202005523f582e0c452d9741729" kindref="member">ParisLabel::setArrays</ref>()</highlight></codeline>
+<codeline lineno="34"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>l<sp/>=<sp/>0;<sp/>l&lt;1000;<sp/>l++)</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(l&lt;300)<sp/>{<sp/><ref refid="class_paris_label_1adccc09a3b43e885208ab5a887ac9ba2f" kindref="member">back_array</ref>[l]<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;<sp/><sp/><ref refid="class_paris_label_1a12026f89649ca3d3ef2a5fda9b6395e7" kindref="member">ring_array</ref>[l]<sp/>=<sp/>1;<sp/><ref refid="class_paris_label_1a1c553eb956a4a62c89d72ffe542376b6" kindref="member">label_array</ref>[l]<sp/>=<sp/>l-200;<sp/>}</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(l&lt;400)<sp/>{<sp/><ref refid="class_paris_label_1adccc09a3b43e885208ab5a887ac9ba2f" kindref="member">back_array</ref>[l]<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;<sp/><sp/><ref refid="class_paris_label_1a12026f89649ca3d3ef2a5fda9b6395e7" kindref="member">ring_array</ref>[l]<sp/>=<sp/>2;<sp/><ref refid="class_paris_label_1a1c553eb956a4a62c89d72ffe542376b6" kindref="member">label_array</ref>[l]<sp/>=<sp/>l-300;<sp/>}</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(l&lt;500)<sp/>{<sp/><ref refid="class_paris_label_1adccc09a3b43e885208ab5a887ac9ba2f" kindref="member">back_array</ref>[l]<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;<sp/><sp/><ref refid="class_paris_label_1a12026f89649ca3d3ef2a5fda9b6395e7" kindref="member">ring_array</ref>[l]<sp/>=<sp/>3;<sp/><ref refid="class_paris_label_1a1c553eb956a4a62c89d72ffe542376b6" kindref="member">label_array</ref>[l]<sp/>=<sp/>l-400;<sp/>}</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(l&lt;600)<sp/>{<sp/><ref refid="class_paris_label_1adccc09a3b43e885208ab5a887ac9ba2f" kindref="member">back_array</ref>[l]<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;<sp/><ref refid="class_paris_label_1a12026f89649ca3d3ef2a5fda9b6395e7" kindref="member">ring_array</ref>[l]<sp/>=<sp/>1;<sp/><ref refid="class_paris_label_1a1c553eb956a4a62c89d72ffe542376b6" kindref="member">label_array</ref>[l]<sp/>=<sp/>l-500;<sp/>}</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(l&lt;700)<sp/>{<sp/><ref refid="class_paris_label_1adccc09a3b43e885208ab5a887ac9ba2f" kindref="member">back_array</ref>[l]<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;<sp/><ref refid="class_paris_label_1a12026f89649ca3d3ef2a5fda9b6395e7" kindref="member">ring_array</ref>[l]<sp/>=<sp/>2;<sp/><ref refid="class_paris_label_1a1c553eb956a4a62c89d72ffe542376b6" kindref="member">label_array</ref>[l]<sp/>=<sp/>l-600;<sp/>}</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(l&lt;800)<sp/>{<sp/><ref refid="class_paris_label_1adccc09a3b43e885208ab5a887ac9ba2f" kindref="member">back_array</ref>[l]<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;<sp/><ref refid="class_paris_label_1a12026f89649ca3d3ef2a5fda9b6395e7" kindref="member">ring_array</ref>[l]<sp/>=<sp/>3;<sp/><ref refid="class_paris_label_1a1c553eb956a4a62c89d72ffe542376b6" kindref="member">label_array</ref>[l]<sp/>=<sp/>l-700;<sp/>}</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="44"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="class_paris_label_1a17ef0fbe8cabfb5de60f9853fc8dc49d" kindref="member">ParisLabel::arrays_set</ref><sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight></codeline>
+<codeline lineno="48" refid="_paris_label_8hpp_1ac738c136081b82bdf3807bf87ea8bd4a" refkind="member"><highlight class="normal">std::vector&lt;Double_t&gt;<sp/><ref refid="_paris_label_8hpp_1ac738c136081b82bdf3807bf87ea8bd4a" kindref="member">paris_labels</ref><sp/>=</highlight></codeline>
+<codeline lineno="49"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/>201,<sp/>202,<sp/>203,<sp/>204,<sp/>205,<sp/>206,<sp/>207,<sp/>208,</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/>301,<sp/>302,<sp/>303,<sp/>304,<sp/>305,<sp/>306,<sp/>307,<sp/>308,<sp/>309,<sp/>310,<sp/>311,<sp/>312,<sp/>313,<sp/>314,<sp/>315,<sp/>316,</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/>401,<sp/>402,<sp/>403,<sp/>404,<sp/>405,<sp/>406,<sp/>407,<sp/>408,<sp/>409,<sp/>410,<sp/>411,<sp/>412,</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/>501,<sp/>502,<sp/>503,<sp/>504,<sp/>505,<sp/>506,<sp/>507,<sp/>508,</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/>601,<sp/>602,<sp/>603,<sp/>604,<sp/>605,<sp/>606,<sp/>607,<sp/>608,<sp/>609,<sp/>610,<sp/>611,<sp/>612,<sp/>613,<sp/>614,<sp/>615,<sp/>616,</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/>701,<sp/>702,<sp/>703,<sp/>704,<sp/>705,<sp/>706,<sp/>707,<sp/>708,<sp/>709,<sp/>710,<sp/>711,<sp/>712</highlight></codeline>
+<codeline lineno="56"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//PARISLABEL_H</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="lib/Analyse/ParisLabel.hpp"/>
+  </compounddef>
+</doxygen>

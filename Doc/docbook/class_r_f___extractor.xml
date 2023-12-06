@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_class_r_f___extractor" xml:lang="en-US">
+<title>RF_Extractor Class Reference</title>
+<indexterm><primary>RF_Extractor</primary></indexterm>
+<para>
+<computeroutput>#include &lt;RF_Manager.hpp&gt;</computeroutput>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>auto const  &amp; <link linkend="_class_r_f___extractor_1a28abc418539d232fa46548605a5d442e">cursor</link> () const</para>
+</listitem>
+            <listitem><para><link linkend="_class_r_f___extractor_1ac155411b6cb3d33502500a890b51be35">operator bool</link> () const &amp;</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Private Attributes    </title>
+        <itemizedlist>
+            <listitem><para>int <link linkend="_class_r_f___extractor_1a8295bcc2577ee5e14243a5383ecc56ca">m_cursor</link> = 0</para>
+</listitem>
+            <listitem><para>bool <link linkend="_class_r_f___extractor_1a77ed334559bde3b717acf07794d4a5e3">m_ok</link> = false</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_class_r_f___extractor_1a28abc418539d232fa46548605a5d442e"/>    <section>
+    <title>cursor()</title>
+<indexterm><primary>cursor</primary><secondary>RF_Extractor</secondary></indexterm>
+<indexterm><primary>RF_Extractor</primary><secondary>cursor</secondary></indexterm>
+<para><computeroutput>auto const&amp; RF_Extractor::cursor ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_r_f___extractor_a28abc418539d232fa46548605a5d442e_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_r_f___extractor_1ac155411b6cb3d33502500a890b51be35"/>    <section>
+    <title>operator bool()</title>
+<indexterm><primary>operator bool</primary><secondary>RF_Extractor</secondary></indexterm>
+<indexterm><primary>RF_Extractor</primary><secondary>operator bool</secondary></indexterm>
+<para><computeroutput>RF_Extractor::operator bool ( ) const &amp;<computeroutput>[inline]</computeroutput></computeroutput></para></section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_class_r_f___extractor_1a8295bcc2577ee5e14243a5383ecc56ca"/>    <section>
+    <title>m_cursor</title>
+<indexterm><primary>m_cursor</primary><secondary>RF_Extractor</secondary></indexterm>
+<indexterm><primary>RF_Extractor</primary><secondary>m_cursor</secondary></indexterm>
+<para><computeroutput>int RF_Extractor::m_cursor = 0<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_r_f___extractor_1a77ed334559bde3b717acf07794d4a5e3"/>    <section>
+    <title>m_ok</title>
+<indexterm><primary>m_ok</primary><secondary>RF_Extractor</secondary></indexterm>
+<indexterm><primary>RF_Extractor</primary><secondary>m_ok</secondary></indexterm>
+<para><computeroutput>bool RF_Extractor::m_ok = false<computeroutput>[private]</computeroutput></computeroutput></para></section>
+<para>
+The documentation for this class was generated from the following file:</para>
+lib/Classes/<link linkend="__r_f___manager_8hpp">RF_Manager.hpp</link></section>
+</section>

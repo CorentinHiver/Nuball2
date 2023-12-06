@@ -1,0 +1,269 @@
+.TH "MTFasterReader" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+MTFasterReader \- Class used to read in parallel \&.fast files of the same run\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <MTFasterReader\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "bool \fBaddFile\fP (\fBFile\fP file)"
+.br
+.ti -1c
+.RI "bool \fBaddFolder\fP (\fBPath\fP path, int const &nb_files=\-1)"
+.br
+.ti -1c
+.RI "auto & \fBfiles\fP ()"
+.br
+.ti -1c
+.RI "auto const  & \fBfiles\fP () const"
+.br
+.ti -1c
+.RI "\fBMTFasterReader\fP ()"
+.br
+.RI "Default constructor\&. "
+.ti -1c
+.RI "\fBMTFasterReader\fP (\fBFilesManager\fP const &\fBfiles\fP)"
+.br
+.ti -1c
+.RI "\fBMTFasterReader\fP (\fBPath\fP path, int const &nb_files=\-1)"
+.br
+.RI "Regular constructor\&. "
+.ti -1c
+.RI "void \fBprintMTFiles\fP ()"
+.br
+.ti -1c
+.RI "template<class Func , class\&.\&.\&. ARGS> void \fBreadAligned\fP (Func &&func, ARGS &&\&.\&.\&. args)"
+.br
+.RI "Reads many faster files in parallel, providing a time-aligned\&. "
+.ti -1c
+.RI "template<class Func , class\&.\&.\&. ARGS> void \fBreadAligned\fP (std::vector< \fBTime\fP > timeshifts, Func &&func, ARGS &&\&.\&.\&. args)"
+.br
+.ti -1c
+.RI "template<class Func , class\&.\&.\&. ARGS> void \fBreadRaw\fP (Func &&func, ARGS &&\&.\&.\&. args)"
+.br
+.RI "Reads many faster files in parallel\&. "
+.ti -1c
+.RI "void \fBsetTimeshifts\fP (std::vector< \fBTime\fP > const &timeshifts)"
+.br
+.ti -1c
+.RI "auto const  & \fBtimeshift\fP (\fBLabel\fP const &label) const"
+.br
+.in -1c
+.SS "Private Member Functions"
+
+.in +1c
+.ti -1c
+.RI "bool \fBnextFilename\fP (std::string &filename)"
+.br
+.in -1c
+.SS "Static Private Member Functions"
+
+.in +1c
+.ti -1c
+.RI "template<class Func , class\&.\&.\&. ARGS> static void \fBRead\fP (\fBMTFasterReader\fP &MTreader, Func function, ARGS &&\&.\&.\&. args)"
+.br
+.ti -1c
+.RI "template<class Func , class\&.\&.\&. ARGS> static void \fBRealign\fP (\fBMTFasterReader\fP &MTreader, Func function, ARGS &&\&.\&.\&. args)"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBFilesManager\fP \fBm_files\fP"
+.br
+.ti -1c
+.RI "\fBMTList\fP \fBm_MTfiles\fP"
+.br
+.ti -1c
+.RI "std::vector< \fBTime\fP > \fBm_timeshifts\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Class used to read in parallel \&.fast files of the same run\&. 
+
+\fBLook at the \fBFasterReader\fP class for the various options\fP
+.SH "How to use this class"
+.PP
+First, you'll need to activate the multithreading :
+.PP
+MTObject::Initialize(nb_threads)
+.PP
+Then instanciate this class :
+.PP
+.IP "2." 4
+\fBMTFasterReader\fP reader(folder_name, first_n_files);
+.PP
+.PP
+To read all the files then leave the second argument empty
+.PP
+Then, use the readRaw(function, arguments\&.\&.\&.) method to run any user defined function\&.
+.PP
+.IP "3." 4
+reader\&.readRaw(function, arguments\&.\&.\&.);
+.PP
+.PP
+Carefull : this function MUST have the following arguments is this EXACT order :
+.PP
+return_type function(Hit & hit, FasterReader & reader, arguments\&.\&.\&.)
+.PP
+This function can also be a static method of an object, but CANNOT be a member
+.PP
+The trick to use the object anyway is to pass it as an argument :
+.PP
+static return_type myClass::function(Hit & hit, FasterReader & reader, myClass & class, arguments\&.\&.\&.);
+.PP
+Here is a minimal code snippet : 
+.PP
+.nf
+ void function(Hit & hit, FasterReader & reader, Arg & some_argument) 
+ {
+   // This function is now setup to read one specific file
+   while(reader.Read())
+   {
+     // Here, hit contains the data of the current faster data hit beeing read in the binary .fast file
+     Do something with the hit like histo->Fill(hit.nrj) or tree -> Fill() if you connected a tree to the hit
+   }
+ }
+
+ int main()
+ {
+    MTObject::Initialize(n); // n being an appropriate number of threads.
+    MTFasterReader reader(folder);
+    Arg some_argument;
+    reader.readRaw(function, some_argument);
+    // Do something with the argument like print(some_argument) or some_argument.Write()
+ }
+
+.fi
+.PP
+ Here are two function examples\&. The third parameter has been instanciated before the \fBMTFasterReader::readRaw()\fP method call
+.PP
+.PP
+.nf
+   void counter(Hit & hit, FasterReader & reader, MTCounter & counterMT)
+    {
+       int counter = 0;
+       while(reader.Read())
+       {
+          counter++;
+       }
+       counterMT += counter;
+    }
+
+
+   void scalers(Hit & hit, FasterReader & reader, MTTHist<TH1> & scaler)
+   {
+      while(reader.Read())
+      {
+         scaler.Fill(hit.label);
+      }
+   }
+.fi
+.PP
+ (see \fBMTTHist\fP and \fBMTCounter\fP documentation)
+.PP
+It is recommended to use the '&' symbol (reference) before the other as well parameters so that they are shared between threads, therefore only with thread safe objects, but it is not mandatory\&. If you want to pass read-only objects (i\&.e\&. lookup tables), consider adding the 'const' key word like that : (\&.\&.\&., type const & lookup_table, \&.\&.\&.)\&. Another work-around is simply to declare your parameter at a global scope, although it is not recommended to have too many of them\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "MTFasterReader::MTFasterReader ()\fC [inline]\fP"
+
+.PP
+Default constructor\&. 
+.SS "MTFasterReader::MTFasterReader (\fBPath\fP path, int const & nb_files = \fC\-1\fP)\fC [inline]\fP"
+
+.PP
+Regular constructor\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIpath\fP : The path to the path containing the \&.fast files to read 
+.br
+\fInb_files\fP : Default -1, takes all the files 
+.RE
+.PP
+
+.SS "MTFasterReader::MTFasterReader (\fBFilesManager\fP const & files)\fC [inline]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "bool MTFasterReader::addFile (\fBFile\fP file)\fC [inline]\fP"
+
+.SS "bool MTFasterReader::addFolder (\fBPath\fP path, int const & nb_files = \fC\-1\fP)\fC [inline]\fP"
+
+.SS "auto& MTFasterReader::files ()\fC [inline]\fP"
+
+.SS "auto const& MTFasterReader::files () const\fC [inline]\fP"
+
+.SS "bool MTFasterReader::nextFilename (std::string & filename)\fC [inline]\fP, \fC [private]\fP"
+
+.SS "void MTFasterReader::printMTFiles ()\fC [inline]\fP"
+
+.SS "template<class Func , class\&.\&.\&. ARGS> void MTFasterReader::Read (\fBMTFasterReader\fP & MTreader, Func function, ARGS &&\&.\&.\&. args)\fC [inline]\fP, \fC [static]\fP, \fC [private]\fP"
+
+.SS "template<class Func , class\&.\&.\&. ARGS> void MTFasterReader::readAligned (Func && func, ARGS &&\&.\&.\&. args)\fC [inline]\fP"
+
+.PP
+Reads many faster files in parallel, providing a time-aligned\&. Use this function in the same way as readRaw, with a function like this : func(Hit & hit, Alignator & alignedTree, args\&.\&.\&.)
+.PP
+\fBParameters\fP
+.RS 4
+\fIfunc\fP : Must be of the form func(Hit & hit, Alignator & alignedTree, args\&.\&.\&.) with args 
+.RE
+.PP
+
+.SS "template<class Func , class\&.\&.\&. ARGS> void MTFasterReader::readAligned (std::vector< \fBTime\fP > timeshifts, Func && func, ARGS &&\&.\&.\&. args)\fC [inline]\fP"
+
+.SS "template<class Func , class\&.\&.\&. ARGS> void MTFasterReader::readRaw (Func && func, ARGS &&\&.\&.\&. args)\fC [inline]\fP"
+
+.PP
+Reads many faster files in parallel\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIfunc\fP Function used on each file in parallel\&. CAREFULL : must be a function or a static method
+.RE
+.PP
+The declared function MUST have its two first parameters as follow : type function(Hit & hit, FasterReader & reader, \&.\&.\&.); You can add any other parameter in the \&.\&.\&., but then you have to call them in the readRaw method call e\&.g\&. : 
+.PP
+.nf
+   void my_function(Hit & hit, FasterReader & reader, MTCounter & counter){do something...}
+
+.fi
+.PP
+ in main 
+.PP
+.nf
+   MTFasterReader reader(/path/to/data/folder/, wanted_number_of_files);
+   MTCounter counter;
+   reader.readRaw(my_function, counter);
+
+.fi
+.PP
+ That way, my_function will be executed in parallel on each file in /path/to/data/folder/ 
+.SS "template<class Func , class\&.\&.\&. ARGS> void MTFasterReader::Realign (\fBMTFasterReader\fP & MTreader, Func function, ARGS &&\&.\&.\&. args)\fC [inline]\fP, \fC [static]\fP, \fC [private]\fP"
+
+.SS "void MTFasterReader::setTimeshifts (std::vector< \fBTime\fP > const & timeshifts)\fC [inline]\fP"
+
+.SS "auto const& MTFasterReader::timeshift (\fBLabel\fP const & label) const\fC [inline]\fP"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "\fBFilesManager\fP MTFasterReader::m_files\fC [private]\fP"
+
+.SS "\fBMTList\fP MTFasterReader::m_MTfiles\fC [private]\fP"
+
+.SS "std::vector<\fBTime\fP> MTFasterReader::m_timeshifts\fC [private]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Nuball2 from the source code\&.

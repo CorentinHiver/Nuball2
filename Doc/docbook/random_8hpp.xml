@@ -1,0 +1,102 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_random_8hpp" xml:lang="en-US">
+<title>lib/random.hpp File Reference</title>
+<indexterm><primary>lib/random.hpp</primary></indexterm>
+<programlisting>#include &lt;random&gt;
+</programlisting>Include dependency graph for random.hpp:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="random_8hpp__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+This graph shows which files directly or indirectly include this file:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="random_8hpp__dep__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>std::mt19937 <link linkend="_random_8hpp_1a374a9a7de3fd00dceacc5de8a654c087">gen</link> (<link linkend="_random_8hpp_1a7071b0092ad8c5b57d6cc40c5f803df5">rd</link>())</para>
+</listitem>
+            <listitem><para>double <link linkend="_random_8hpp_1a61ebdcf7bf06323f12806134068541a7">random_uniform</link> ()</para>
+</listitem>
+            <listitem><para>std::uniform_real_distribution&lt; double &gt; <link linkend="_random_8hpp_1a4b55f3e7bc2bb11053ada6696cd821f6">uniform_random_generator_double</link> (0, 1)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Variables    </title>
+        <itemizedlist>
+            <listitem><para>std::random_device <link linkend="_random_8hpp_1a7071b0092ad8c5b57d6cc40c5f803df5">rd</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_random_8hpp_1a374a9a7de3fd00dceacc5de8a654c087"/>    <section>
+    <title>gen()</title>
+<indexterm><primary>gen</primary><secondary>random.hpp</secondary></indexterm>
+<indexterm><primary>random.hpp</primary><secondary>gen</secondary></indexterm>
+<para><computeroutput>std::mt19937 gen (<link linkend="_random_8hpp_1a7071b0092ad8c5b57d6cc40c5f803df5">rd</link>() )</computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="random_8hpp_a374a9a7de3fd00dceacc5de8a654c087_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_random_8hpp_1a61ebdcf7bf06323f12806134068541a7"/>    <section>
+    <title>random_uniform()</title>
+<indexterm><primary>random_uniform</primary><secondary>random.hpp</secondary></indexterm>
+<indexterm><primary>random.hpp</primary><secondary>random_uniform</secondary></indexterm>
+<para><computeroutput>double random_uniform ( )</computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="random_8hpp_a61ebdcf7bf06323f12806134068541a7_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="random_8hpp_a61ebdcf7bf06323f12806134068541a7_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_random_8hpp_1a4b55f3e7bc2bb11053ada6696cd821f6"/>    <section>
+    <title>uniform_random_generator_double()</title>
+<indexterm><primary>uniform_random_generator_double</primary><secondary>random.hpp</secondary></indexterm>
+<indexterm><primary>random.hpp</primary><secondary>uniform_random_generator_double</secondary></indexterm>
+<para><computeroutput>std::uniform_real_distribution&lt;double&gt; uniform_random_generator_double (0 , 1 )</computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="random_8hpp_a4b55f3e7bc2bb11053ada6696cd821f6_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+</section>
+<section>
+<title>Variable Documentation</title>
+<anchor xml:id="_random_8hpp_1a7071b0092ad8c5b57d6cc40c5f803df5"/>    <section>
+    <title>rd</title>
+<indexterm><primary>rd</primary><secondary>random.hpp</secondary></indexterm>
+<indexterm><primary>random.hpp</primary><secondary>rd</secondary></indexterm>
+<para><computeroutput>std::random_device rd</computeroutput></para></section>
+</section>
+</section>

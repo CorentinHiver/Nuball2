@@ -1,0 +1,558 @@
+\doxysection{Run\+Matrixator Class Reference}
+\label{class_run_matrixator}\index{RunMatrixator@{RunMatrixator}}
+
+
+Matrixator is used to create a bunch of matrixes \+: each crystal of the setup versus the (add-\/backed \& compton cleaned) clovers.  
+
+
+
+
+{\ttfamily \#include $<$Run\+Matrixator.\+hpp$>$}
+
+
+
+Collaboration diagram for Run\+Matrixator\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_run_matrixator__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \textbf{ dont\+Matrixate} (\textbf{ d\+Type} const \&type)
+\item 
+void \textbf{ dont\+Matrixate} (\textbf{ Label} const \&label)
+\item 
+void \textbf{ fill\+Matrixes} (\textbf{ Clovers} const \&clovers, \textbf{ Event} const \&event)
+\item 
+void \textbf{ Initialize} ()
+\item 
+void \textbf{ initialize\+\_\+dont\+Matrixate} ()
+\item 
+void \textbf{ keep\+Singles} (bool const \&b=true)
+\item 
+void \textbf{ load\+Data\+\_\+faster} (\textbf{ Hit} \&hit, \textbf{ Faster\+Reader} \&reader)
+\item 
+void \textbf{ load\+Data\+\_\+root} (TTree $\ast$tree, \textbf{ Event} \&event)
+\item 
+void \textbf{ max\+Raw\+Mult} (\textbf{ uchar} const \&max\+\_\+multiplicity=20)
+\item 
+bool \textbf{ paris\+Is\+La\+Br} (\textbf{ NRJ} const \&nrj, \textbf{ NRJ} const \&nrj2)
+\item 
+bool \textbf{ paris\+Is\+NaI} (\textbf{ NRJ} const \&nrj, \textbf{ NRJ} const \&nrj2)
+\item 
+auto \textbf{ paris\+Ratio} (\textbf{ NRJ} const \&nrj, \textbf{ NRJ} const \&nrj2)
+\item 
+void \textbf{ run} (std\+::string const \&runpath, std\+::string const \&data=\char`\"{}fast\char`\"{})
+\item 
+\textbf{ Run\+Matrixator} ()=default
+\item 
+void \textbf{ set\+Calibration} (\textbf{ Calibration} const \&calibration)
+\item 
+void \textbf{ set\+Timeshifts} (\textbf{ Timeshifts} const \&timeshifts)
+\item 
+void \textbf{ Write} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \textbf{ dispatch\+\_\+faster\+\_\+reader} (\textbf{ Hit} \&hit, \textbf{ Faster\+Reader} \&reader, \textbf{ Run\+Matrixator} \&rm)
+\begin{DoxyCompactList}\small\item\em Multithreading of load\+Data\+\_\+faster (you have to pass by a static method in order to multi-\/thread it) \end{DoxyCompactList}\item 
+static void \textbf{ dispatch\+\_\+root\+\_\+reader} (TTree $\ast$tree, \textbf{ Event} \&event, \textbf{ Run\+Matrixator} \&rm)
+\begin{DoxyCompactList}\small\item\em Multithreading of load\+Data\+\_\+ (you have to pass by a static method in order to multi-\/thread it) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ MTTHist}$<$ TH1F $>$ \textbf{ clover\+\_\+singles\+\_\+delayed}
+\item 
+\textbf{ MTTHist}$<$ TH1F $>$ \textbf{ clover\+\_\+singles\+\_\+delayed\+\_\+\+Compton\+\_\+veto}
+\item 
+\textbf{ MTTHist}$<$ TH1F $>$ \textbf{ clover\+\_\+singles\+\_\+prompt}
+\item 
+\textbf{ MTTHist}$<$ TH1F $>$ \textbf{ clover\+\_\+singles\+\_\+prompt\+\_\+\+Compton\+\_\+veto}
+\item 
+\textbf{ Calibration} \textbf{ m\+\_\+calibration}
+\item 
+std\+::vector$<$ \textbf{ Label} $>$ \textbf{ m\+\_\+dont\+Matrixate\+Label}
+\item 
+std\+::unordered\+\_\+map$<$ \textbf{ d\+Type}, bool $>$ \textbf{ m\+\_\+dont\+Matrixate\+Type}
+\item 
+bool \textbf{ m\+\_\+keep\+\_\+singles} = 0
+\item 
+\textbf{ uchar} \textbf{ m\+\_\+max\+\_\+multiplicity} = 20
+\item 
+\textbf{ Path} \textbf{ m\+\_\+runpath}
+\item 
+\textbf{ Timeshifts} \textbf{ m\+\_\+timeshifts}
+\item 
+std\+::unordered\+\_\+map$<$ \textbf{ d\+Type}, \textbf{ Vector\+\_\+\+MTTHist}$<$ TH2F $>$ $>$ \textbf{ matrices\+Delayed}
+\item 
+std\+::unordered\+\_\+map$<$ \textbf{ d\+Type}, \textbf{ Vector\+\_\+\+MTTHist}$<$ TH2F $>$ $>$ \textbf{ matrices\+Delayed2}
+\item 
+std\+::unordered\+\_\+map$<$ \textbf{ d\+Type}, \textbf{ Vector\+\_\+\+MTTHist}$<$ TH2F $>$ $>$ \textbf{ matrices\+Prompt}
+\item 
+std\+::unordered\+\_\+map$<$ \textbf{ d\+Type}, \textbf{ Vector\+\_\+\+MTTHist}$<$ TH2F $>$ $>$ \textbf{ matrices\+Prompt2}
+\item 
+\textbf{ MTTHist}$<$ TH2F $>$ \textbf{ matrix\+\_\+\+Clovers\+\_\+delayed}
+\item 
+\textbf{ MTTHist}$<$ TH2F $>$ \textbf{ matrix\+\_\+\+Clovers\+\_\+delayed\+\_\+vs\+\_\+prompt}
+\item 
+\textbf{ MTTHist}$<$ TH2F $>$ \textbf{ matrix\+\_\+\+Clovers\+\_\+prompt}
+\item 
+std\+::unordered\+\_\+map$<$ \textbf{ d\+Type}, \textbf{ Vector\+\_\+\+MTTHist}$<$ TH1F $>$ $>$ \textbf{ singles\+Delayed}
+\item 
+std\+::unordered\+\_\+map$<$ \textbf{ d\+Type}, \textbf{ Vector\+\_\+\+MTTHist}$<$ TH1F $>$ $>$ \textbf{ singles\+Delayed2}
+\item 
+std\+::unordered\+\_\+map$<$ \textbf{ d\+Type}, \textbf{ Vector\+\_\+\+MTTHist}$<$ TH1F $>$ $>$ \textbf{ singles\+Prompt}
+\item 
+std\+::unordered\+\_\+map$<$ \textbf{ d\+Type}, \textbf{ Vector\+\_\+\+MTTHist}$<$ TH1F $>$ $>$ \textbf{ singles\+Prompt2}
+\item 
+\textbf{ MTTHist}$<$ TH2F $>$ \textbf{ test\+\_\+paris\+\_\+vs\+\_\+mult}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Matrixator is used to create a bunch of matrixes \+: each crystal of the setup versus the (add-\/backed \& compton cleaned) clovers. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\label{class_run_matrixator_addf156b30f248773029c6be07c243d7a}} 
+\index{RunMatrixator@{RunMatrixator}!RunMatrixator@{RunMatrixator}}
+\index{RunMatrixator@{RunMatrixator}!RunMatrixator@{RunMatrixator}}
+\doxysubsubsection{RunMatrixator()}
+{\footnotesize\ttfamily Run\+Matrixator\+::\+Run\+Matrixator (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\label{class_run_matrixator_a47322f73c6a9f220f49f9fd85993fcd5}} 
+\index{RunMatrixator@{RunMatrixator}!dispatch\_faster\_reader@{dispatch\_faster\_reader}}
+\index{dispatch\_faster\_reader@{dispatch\_faster\_reader}!RunMatrixator@{RunMatrixator}}
+\doxysubsubsection{dispatch\_faster\_reader()}
+{\footnotesize\ttfamily void Run\+Matrixator\+::dispatch\+\_\+faster\+\_\+reader (\begin{DoxyParamCaption}\item[{\textbf{ Hit} \&}]{hit,  }\item[{\textbf{ Faster\+Reader} \&}]{reader,  }\item[{\textbf{ Run\+Matrixator} \&}]{rm }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Multithreading of load\+Data\+\_\+faster (you have to pass by a static method in order to multi-\/thread it) 
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_run_matrixator_a47322f73c6a9f220f49f9fd85993fcd5_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_run_matrixator_a47322f73c6a9f220f49f9fd85993fcd5_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_run_matrixator_a2d5326c4e5b0684552e5d72c88e64ef8}} 
+\index{RunMatrixator@{RunMatrixator}!dispatch\_root\_reader@{dispatch\_root\_reader}}
+\index{dispatch\_root\_reader@{dispatch\_root\_reader}!RunMatrixator@{RunMatrixator}}
+\doxysubsubsection{dispatch\_root\_reader()}
+{\footnotesize\ttfamily void Run\+Matrixator\+::dispatch\+\_\+root\+\_\+reader (\begin{DoxyParamCaption}\item[{TTree $\ast$}]{tree,  }\item[{\textbf{ Event} \&}]{event,  }\item[{\textbf{ Run\+Matrixator} \&}]{rm }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Multithreading of load\+Data\+\_\+ (you have to pass by a static method in order to multi-\/thread it) 
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_run_matrixator_a2d5326c4e5b0684552e5d72c88e64ef8_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_run_matrixator_a2d5326c4e5b0684552e5d72c88e64ef8_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_run_matrixator_a1f6ba04bc894d68a6d72ccedf8367ad4}} 
+\index{RunMatrixator@{RunMatrixator}!dontMatrixate@{dontMatrixate}}
+\index{dontMatrixate@{dontMatrixate}!RunMatrixator@{RunMatrixator}}
+\doxysubsubsection{dontMatrixate()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Run\+Matrixator\+::dont\+Matrixate (\begin{DoxyParamCaption}\item[{\textbf{ d\+Type} const \&}]{type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_run_matrixator_a1f6ba04bc894d68a6d72ccedf8367ad4_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_run_matrixator_a142f119b63706f044dc99025ee46f4ca}} 
+\index{RunMatrixator@{RunMatrixator}!dontMatrixate@{dontMatrixate}}
+\index{dontMatrixate@{dontMatrixate}!RunMatrixator@{RunMatrixator}}
+\doxysubsubsection{dontMatrixate()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Run\+Matrixator\+::dont\+Matrixate (\begin{DoxyParamCaption}\item[{\textbf{ Label} const \&}]{label }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_run_matrixator_a142f119b63706f044dc99025ee46f4ca_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_run_matrixator_af360ec9f7686353b663ce0bdcfa3e2df}} 
+\index{RunMatrixator@{RunMatrixator}!fillMatrixes@{fillMatrixes}}
+\index{fillMatrixes@{fillMatrixes}!RunMatrixator@{RunMatrixator}}
+\doxysubsubsection{fillMatrixes()}
+{\footnotesize\ttfamily void Run\+Matrixator\+::fill\+Matrixes (\begin{DoxyParamCaption}\item[{\textbf{ Clovers} const \&}]{clovers,  }\item[{\textbf{ Event} const \&}]{event }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_run_matrixator_af360ec9f7686353b663ce0bdcfa3e2df_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_run_matrixator_af360ec9f7686353b663ce0bdcfa3e2df_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_run_matrixator_ad32109c5c279f520ce19602340aa2293}} 
+\index{RunMatrixator@{RunMatrixator}!Initialize@{Initialize}}
+\index{Initialize@{Initialize}!RunMatrixator@{RunMatrixator}}
+\doxysubsubsection{Initialize()}
+{\footnotesize\ttfamily void Run\+Matrixator\+::\+Initialize (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_run_matrixator_ad32109c5c279f520ce19602340aa2293_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_run_matrixator_ad32109c5c279f520ce19602340aa2293_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_run_matrixator_ae9e13b02718812681204cad70679385d}} 
+\index{RunMatrixator@{RunMatrixator}!initialize\_dontMatrixate@{initialize\_dontMatrixate}}
+\index{initialize\_dontMatrixate@{initialize\_dontMatrixate}!RunMatrixator@{RunMatrixator}}
+\doxysubsubsection{initialize\_dontMatrixate()}
+{\footnotesize\ttfamily void Run\+Matrixator\+::initialize\+\_\+dont\+Matrixate (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_run_matrixator_ae9e13b02718812681204cad70679385d_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_run_matrixator_ae9e13b02718812681204cad70679385d_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_run_matrixator_ab294e0aa6a89ca1f191f335cae223d57}} 
+\index{RunMatrixator@{RunMatrixator}!keepSingles@{keepSingles}}
+\index{keepSingles@{keepSingles}!RunMatrixator@{RunMatrixator}}
+\doxysubsubsection{keepSingles()}
+{\footnotesize\ttfamily void Run\+Matrixator\+::keep\+Singles (\begin{DoxyParamCaption}\item[{bool const \&}]{b = {\ttfamily true} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_run_matrixator_a8d8f01fad64864d032395e18b10c2a7e}} 
+\index{RunMatrixator@{RunMatrixator}!loadData\_faster@{loadData\_faster}}
+\index{loadData\_faster@{loadData\_faster}!RunMatrixator@{RunMatrixator}}
+\doxysubsubsection{loadData\_faster()}
+{\footnotesize\ttfamily void Run\+Matrixator\+::load\+Data\+\_\+faster (\begin{DoxyParamCaption}\item[{\textbf{ Hit} \&}]{hit,  }\item[{\textbf{ Faster\+Reader} \&}]{reader }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_run_matrixator_a8d8f01fad64864d032395e18b10c2a7e_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_run_matrixator_a8d8f01fad64864d032395e18b10c2a7e_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_run_matrixator_a526469f6440d19b85fd142c797056c65}} 
+\index{RunMatrixator@{RunMatrixator}!loadData\_root@{loadData\_root}}
+\index{loadData\_root@{loadData\_root}!RunMatrixator@{RunMatrixator}}
+\doxysubsubsection{loadData\_root()}
+{\footnotesize\ttfamily void Run\+Matrixator\+::load\+Data\+\_\+root (\begin{DoxyParamCaption}\item[{TTree $\ast$}]{tree,  }\item[{\textbf{ Event} \&}]{event }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_run_matrixator_a526469f6440d19b85fd142c797056c65_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_run_matrixator_a526469f6440d19b85fd142c797056c65_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_run_matrixator_a42f119527e4771575dfe0e1e85e65e5f}} 
+\index{RunMatrixator@{RunMatrixator}!maxRawMult@{maxRawMult}}
+\index{maxRawMult@{maxRawMult}!RunMatrixator@{RunMatrixator}}
+\doxysubsubsection{maxRawMult()}
+{\footnotesize\ttfamily void Run\+Matrixator\+::max\+Raw\+Mult (\begin{DoxyParamCaption}\item[{\textbf{ uchar} const \&}]{max\+\_\+multiplicity = {\ttfamily 20} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_run_matrixator_a22999b8469b20e24241753429d46ce14}} 
+\index{RunMatrixator@{RunMatrixator}!parisIsLaBr@{parisIsLaBr}}
+\index{parisIsLaBr@{parisIsLaBr}!RunMatrixator@{RunMatrixator}}
+\doxysubsubsection{parisIsLaBr()}
+{\footnotesize\ttfamily bool Run\+Matrixator\+::paris\+Is\+La\+Br (\begin{DoxyParamCaption}\item[{\textbf{ NRJ} const \&}]{nrj,  }\item[{\textbf{ NRJ} const \&}]{nrj2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_run_matrixator_a22999b8469b20e24241753429d46ce14_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_run_matrixator_a22999b8469b20e24241753429d46ce14_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_run_matrixator_a2564b1a0b5b4669fa0bb136fd6e4486f}} 
+\index{RunMatrixator@{RunMatrixator}!parisIsNaI@{parisIsNaI}}
+\index{parisIsNaI@{parisIsNaI}!RunMatrixator@{RunMatrixator}}
+\doxysubsubsection{parisIsNaI()}
+{\footnotesize\ttfamily bool Run\+Matrixator\+::paris\+Is\+NaI (\begin{DoxyParamCaption}\item[{\textbf{ NRJ} const \&}]{nrj,  }\item[{\textbf{ NRJ} const \&}]{nrj2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_run_matrixator_a2564b1a0b5b4669fa0bb136fd6e4486f_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_run_matrixator_a2564b1a0b5b4669fa0bb136fd6e4486f_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_run_matrixator_abed75885e59d6790ba34fccdb48997a3}} 
+\index{RunMatrixator@{RunMatrixator}!parisRatio@{parisRatio}}
+\index{parisRatio@{parisRatio}!RunMatrixator@{RunMatrixator}}
+\doxysubsubsection{parisRatio()}
+{\footnotesize\ttfamily auto Run\+Matrixator\+::paris\+Ratio (\begin{DoxyParamCaption}\item[{\textbf{ NRJ} const \&}]{nrj,  }\item[{\textbf{ NRJ} const \&}]{nrj2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_run_matrixator_abed75885e59d6790ba34fccdb48997a3_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_run_matrixator_aa6d13b08060fef07b50d7ab6b35be0d6}} 
+\index{RunMatrixator@{RunMatrixator}!run@{run}}
+\index{run@{run}!RunMatrixator@{RunMatrixator}}
+\doxysubsubsection{run()}
+{\footnotesize\ttfamily void Run\+Matrixator\+::run (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{runpath,  }\item[{std\+::string const \&}]{data = {\ttfamily \char`\"{}fast\char`\"{}} }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_run_matrixator_aa6d13b08060fef07b50d7ab6b35be0d6_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_run_matrixator_a68ec3f959732a3fa5e65583bc9ad7045}} 
+\index{RunMatrixator@{RunMatrixator}!setCalibration@{setCalibration}}
+\index{setCalibration@{setCalibration}!RunMatrixator@{RunMatrixator}}
+\doxysubsubsection{setCalibration()}
+{\footnotesize\ttfamily void Run\+Matrixator\+::set\+Calibration (\begin{DoxyParamCaption}\item[{\textbf{ Calibration} const \&}]{calibration }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_run_matrixator_ab0f22d301e134b991dbb19ca083c0780}} 
+\index{RunMatrixator@{RunMatrixator}!setTimeshifts@{setTimeshifts}}
+\index{setTimeshifts@{setTimeshifts}!RunMatrixator@{RunMatrixator}}
+\doxysubsubsection{setTimeshifts()}
+{\footnotesize\ttfamily void Run\+Matrixator\+::set\+Timeshifts (\begin{DoxyParamCaption}\item[{\textbf{ Timeshifts} const \&}]{timeshifts }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_run_matrixator_aeb9889ba763858dfb65e05c3a7bb142e}} 
+\index{RunMatrixator@{RunMatrixator}!Write@{Write}}
+\index{Write@{Write}!RunMatrixator@{RunMatrixator}}
+\doxysubsubsection{Write()}
+{\footnotesize\ttfamily void Run\+Matrixator\+::\+Write (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_run_matrixator_aeb9889ba763858dfb65e05c3a7bb142e_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=343pt]{class_run_matrixator_aeb9889ba763858dfb65e05c3a7bb142e_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\label{class_run_matrixator_a7b1b1f5b80cef42ae89cade92589eb84}} 
+\index{RunMatrixator@{RunMatrixator}!clover\_singles\_delayed@{clover\_singles\_delayed}}
+\index{clover\_singles\_delayed@{clover\_singles\_delayed}!RunMatrixator@{RunMatrixator}}
+\doxysubsubsection{clover\_singles\_delayed}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH1F$>$ Run\+Matrixator\+::clover\+\_\+singles\+\_\+delayed\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_run_matrixator_aba625d564958262437e498d7f1ea8ea3}} 
+\index{RunMatrixator@{RunMatrixator}!clover\_singles\_delayed\_Compton\_veto@{clover\_singles\_delayed\_Compton\_veto}}
+\index{clover\_singles\_delayed\_Compton\_veto@{clover\_singles\_delayed\_Compton\_veto}!RunMatrixator@{RunMatrixator}}
+\doxysubsubsection{clover\_singles\_delayed\_Compton\_veto}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH1F$>$ Run\+Matrixator\+::clover\+\_\+singles\+\_\+delayed\+\_\+\+Compton\+\_\+veto\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_run_matrixator_aaeb5707153689242e99adeea90e2d223}} 
+\index{RunMatrixator@{RunMatrixator}!clover\_singles\_prompt@{clover\_singles\_prompt}}
+\index{clover\_singles\_prompt@{clover\_singles\_prompt}!RunMatrixator@{RunMatrixator}}
+\doxysubsubsection{clover\_singles\_prompt}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH1F$>$ Run\+Matrixator\+::clover\+\_\+singles\+\_\+prompt\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_run_matrixator_a0c8f270cf84d7aeca1eb87e80d51495b}} 
+\index{RunMatrixator@{RunMatrixator}!clover\_singles\_prompt\_Compton\_veto@{clover\_singles\_prompt\_Compton\_veto}}
+\index{clover\_singles\_prompt\_Compton\_veto@{clover\_singles\_prompt\_Compton\_veto}!RunMatrixator@{RunMatrixator}}
+\doxysubsubsection{clover\_singles\_prompt\_Compton\_veto}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH1F$>$ Run\+Matrixator\+::clover\+\_\+singles\+\_\+prompt\+\_\+\+Compton\+\_\+veto\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_run_matrixator_a96930629dddc11947153e3a5042d426c}} 
+\index{RunMatrixator@{RunMatrixator}!m\_calibration@{m\_calibration}}
+\index{m\_calibration@{m\_calibration}!RunMatrixator@{RunMatrixator}}
+\doxysubsubsection{m\_calibration}
+{\footnotesize\ttfamily \textbf{ Calibration} Run\+Matrixator\+::m\+\_\+calibration\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_run_matrixator_af2f5b38bcb1ff671164d3a1b82fdf5cc}} 
+\index{RunMatrixator@{RunMatrixator}!m\_dontMatrixateLabel@{m\_dontMatrixateLabel}}
+\index{m\_dontMatrixateLabel@{m\_dontMatrixateLabel}!RunMatrixator@{RunMatrixator}}
+\doxysubsubsection{m\_dontMatrixateLabel}
+{\footnotesize\ttfamily std\+::vector$<$\textbf{ Label}$>$ Run\+Matrixator\+::m\+\_\+dont\+Matrixate\+Label\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_run_matrixator_a9f29fa4e4ebfad487466d3272fd5a920}} 
+\index{RunMatrixator@{RunMatrixator}!m\_dontMatrixateType@{m\_dontMatrixateType}}
+\index{m\_dontMatrixateType@{m\_dontMatrixateType}!RunMatrixator@{RunMatrixator}}
+\doxysubsubsection{m\_dontMatrixateType}
+{\footnotesize\ttfamily std\+::unordered\+\_\+map$<$\textbf{ d\+Type}, bool$>$ Run\+Matrixator\+::m\+\_\+dont\+Matrixate\+Type\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_run_matrixator_a2b7e0097b9fdf211f291649020f0ad23}} 
+\index{RunMatrixator@{RunMatrixator}!m\_keep\_singles@{m\_keep\_singles}}
+\index{m\_keep\_singles@{m\_keep\_singles}!RunMatrixator@{RunMatrixator}}
+\doxysubsubsection{m\_keep\_singles}
+{\footnotesize\ttfamily bool Run\+Matrixator\+::m\+\_\+keep\+\_\+singles = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_run_matrixator_a36384c50ee570508e06725b7fdd5bb63}} 
+\index{RunMatrixator@{RunMatrixator}!m\_max\_multiplicity@{m\_max\_multiplicity}}
+\index{m\_max\_multiplicity@{m\_max\_multiplicity}!RunMatrixator@{RunMatrixator}}
+\doxysubsubsection{m\_max\_multiplicity}
+{\footnotesize\ttfamily \textbf{ uchar} Run\+Matrixator\+::m\+\_\+max\+\_\+multiplicity = 20\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_run_matrixator_af1c63e22db1391971bdeb8cebcb31ff0}} 
+\index{RunMatrixator@{RunMatrixator}!m\_runpath@{m\_runpath}}
+\index{m\_runpath@{m\_runpath}!RunMatrixator@{RunMatrixator}}
+\doxysubsubsection{m\_runpath}
+{\footnotesize\ttfamily \textbf{ Path} Run\+Matrixator\+::m\+\_\+runpath\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_run_matrixator_a92dbd9cb82e86444d93b745a16466cd3}} 
+\index{RunMatrixator@{RunMatrixator}!m\_timeshifts@{m\_timeshifts}}
+\index{m\_timeshifts@{m\_timeshifts}!RunMatrixator@{RunMatrixator}}
+\doxysubsubsection{m\_timeshifts}
+{\footnotesize\ttfamily \textbf{ Timeshifts} Run\+Matrixator\+::m\+\_\+timeshifts\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_run_matrixator_a42f31349719f9320cceb39eb8ecb6c4b}} 
+\index{RunMatrixator@{RunMatrixator}!matricesDelayed@{matricesDelayed}}
+\index{matricesDelayed@{matricesDelayed}!RunMatrixator@{RunMatrixator}}
+\doxysubsubsection{matricesDelayed}
+{\footnotesize\ttfamily std\+::unordered\+\_\+map$<$\textbf{ d\+Type}, \textbf{ Vector\+\_\+\+MTTHist}$<$TH2F$>$ $>$ Run\+Matrixator\+::matrices\+Delayed\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_run_matrixator_a9e194612d5bcd61c913257f683a971a3}} 
+\index{RunMatrixator@{RunMatrixator}!matricesDelayed2@{matricesDelayed2}}
+\index{matricesDelayed2@{matricesDelayed2}!RunMatrixator@{RunMatrixator}}
+\doxysubsubsection{matricesDelayed2}
+{\footnotesize\ttfamily std\+::unordered\+\_\+map$<$\textbf{ d\+Type}, \textbf{ Vector\+\_\+\+MTTHist}$<$TH2F$>$ $>$ Run\+Matrixator\+::matrices\+Delayed2\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_run_matrixator_afa913d44012b7ed12db67e5d2900e4a6}} 
+\index{RunMatrixator@{RunMatrixator}!matricesPrompt@{matricesPrompt}}
+\index{matricesPrompt@{matricesPrompt}!RunMatrixator@{RunMatrixator}}
+\doxysubsubsection{matricesPrompt}
+{\footnotesize\ttfamily std\+::unordered\+\_\+map$<$\textbf{ d\+Type}, \textbf{ Vector\+\_\+\+MTTHist}$<$TH2F$>$ $>$ Run\+Matrixator\+::matrices\+Prompt\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_run_matrixator_a8b7863ec8e2e5be38d01196905fd2009}} 
+\index{RunMatrixator@{RunMatrixator}!matricesPrompt2@{matricesPrompt2}}
+\index{matricesPrompt2@{matricesPrompt2}!RunMatrixator@{RunMatrixator}}
+\doxysubsubsection{matricesPrompt2}
+{\footnotesize\ttfamily std\+::unordered\+\_\+map$<$\textbf{ d\+Type}, \textbf{ Vector\+\_\+\+MTTHist}$<$TH2F$>$ $>$ Run\+Matrixator\+::matrices\+Prompt2\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_run_matrixator_a22fdc3576bfff16a1ffc1e17e7076e5e}} 
+\index{RunMatrixator@{RunMatrixator}!matrix\_Clovers\_delayed@{matrix\_Clovers\_delayed}}
+\index{matrix\_Clovers\_delayed@{matrix\_Clovers\_delayed}!RunMatrixator@{RunMatrixator}}
+\doxysubsubsection{matrix\_Clovers\_delayed}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH2F$>$ Run\+Matrixator\+::matrix\+\_\+\+Clovers\+\_\+delayed\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_run_matrixator_a045df0760364e0b5ffc3241461d423ee}} 
+\index{RunMatrixator@{RunMatrixator}!matrix\_Clovers\_delayed\_vs\_prompt@{matrix\_Clovers\_delayed\_vs\_prompt}}
+\index{matrix\_Clovers\_delayed\_vs\_prompt@{matrix\_Clovers\_delayed\_vs\_prompt}!RunMatrixator@{RunMatrixator}}
+\doxysubsubsection{matrix\_Clovers\_delayed\_vs\_prompt}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH2F$>$ Run\+Matrixator\+::matrix\+\_\+\+Clovers\+\_\+delayed\+\_\+vs\+\_\+prompt\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_run_matrixator_a51381da7ca12e24fd0069f9d03842217}} 
+\index{RunMatrixator@{RunMatrixator}!matrix\_Clovers\_prompt@{matrix\_Clovers\_prompt}}
+\index{matrix\_Clovers\_prompt@{matrix\_Clovers\_prompt}!RunMatrixator@{RunMatrixator}}
+\doxysubsubsection{matrix\_Clovers\_prompt}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH2F$>$ Run\+Matrixator\+::matrix\+\_\+\+Clovers\+\_\+prompt\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_run_matrixator_ac595f1896e83716b3531c53e66cf7995}} 
+\index{RunMatrixator@{RunMatrixator}!singlesDelayed@{singlesDelayed}}
+\index{singlesDelayed@{singlesDelayed}!RunMatrixator@{RunMatrixator}}
+\doxysubsubsection{singlesDelayed}
+{\footnotesize\ttfamily std\+::unordered\+\_\+map$<$\textbf{ d\+Type}, \textbf{ Vector\+\_\+\+MTTHist}$<$TH1F$>$ $>$ Run\+Matrixator\+::singles\+Delayed\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_run_matrixator_a3992675c0d4796654b248614a95ca9da}} 
+\index{RunMatrixator@{RunMatrixator}!singlesDelayed2@{singlesDelayed2}}
+\index{singlesDelayed2@{singlesDelayed2}!RunMatrixator@{RunMatrixator}}
+\doxysubsubsection{singlesDelayed2}
+{\footnotesize\ttfamily std\+::unordered\+\_\+map$<$\textbf{ d\+Type}, \textbf{ Vector\+\_\+\+MTTHist}$<$TH1F$>$ $>$ Run\+Matrixator\+::singles\+Delayed2\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_run_matrixator_a64b9bcb6a98c97a879dd36192a0782b3}} 
+\index{RunMatrixator@{RunMatrixator}!singlesPrompt@{singlesPrompt}}
+\index{singlesPrompt@{singlesPrompt}!RunMatrixator@{RunMatrixator}}
+\doxysubsubsection{singlesPrompt}
+{\footnotesize\ttfamily std\+::unordered\+\_\+map$<$\textbf{ d\+Type}, \textbf{ Vector\+\_\+\+MTTHist}$<$TH1F$>$ $>$ Run\+Matrixator\+::singles\+Prompt\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_run_matrixator_a779004b05d613741a85da5cbefa23696}} 
+\index{RunMatrixator@{RunMatrixator}!singlesPrompt2@{singlesPrompt2}}
+\index{singlesPrompt2@{singlesPrompt2}!RunMatrixator@{RunMatrixator}}
+\doxysubsubsection{singlesPrompt2}
+{\footnotesize\ttfamily std\+::unordered\+\_\+map$<$\textbf{ d\+Type}, \textbf{ Vector\+\_\+\+MTTHist}$<$TH1F$>$ $>$ Run\+Matrixator\+::singles\+Prompt2\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_run_matrixator_a3e8757458107f0f0ec8de5a25c6518fe}} 
+\index{RunMatrixator@{RunMatrixator}!test\_paris\_vs\_mult@{test\_paris\_vs\_mult}}
+\index{test\_paris\_vs\_mult@{test\_paris\_vs\_mult}!RunMatrixator@{RunMatrixator}}
+\doxysubsubsection{test\_paris\_vs\_mult}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH2F$>$ Run\+Matrixator\+::test\+\_\+paris\+\_\+vs\+\_\+mult\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+lib/\+Modules/\textbf{ Run\+Matrixator.\+hpp}\end{DoxyCompactItemize}

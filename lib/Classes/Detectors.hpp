@@ -6,35 +6,36 @@
 
 using dType = std::string;
 
-int uiop = 0;
+#define SIZE_LOOKUP 1000
 
 // All detectors lookup tables :
-Bools isGe    (1000);
-Bools isBGO   (1000);
-Bools isLaBr3 (1000);
-Bools isEden  (1000);
-Bools isRF    (1000);
-Bools isParis (1000);
-Bools isDSSD  (1000);
+Bools isGe    (SIZE_LOOKUP);
+Bools isBGO   (SIZE_LOOKUP);
+Bools isLaBr3 (SIZE_LOOKUP);
+Bools isEden  (SIZE_LOOKUP);
+Bools isRF    (SIZE_LOOKUP);
+Bools isParis (SIZE_LOOKUP);
+Bools isDSSD  (SIZE_LOOKUP);
 
-// Clover specific lookup tables :
-Bools isClover(1000);
-std::vector<uchar> labelToClover(1000,0);
-std::vector<uchar> labelToBGOcrystal(1000,0);
-std::vector<uchar> labelToGecrystal(1000,0);
-Strings clover_pos (1000,"");
+// -- Clover specific lookup tables -- //
+
+Bools isClover(SIZE_LOOKUP);// is the 
+std::vector<uchar> labelToClover(SIZE_LOOKUP,0);
+std::vector<uchar> labelToBGOcrystal(SIZE_LOOKUP,0);
+std::vector<uchar> labelToGecrystal(SIZE_LOOKUP,0);
+Strings clover_pos (SIZE_LOOKUP,"");
 
 // DSSD specific lookup tables :
-Bools isSector(1000);
-Bools isS1    (1000);
-Bools isS2    (1000);
-Bools isRing  (1000);
-Bools isBack  (1000);
-Bools isFront (1000);
+Bools isSector(SIZE_LOOKUP);
+Bools isS1    (SIZE_LOOKUP);
+Bools isS2    (SIZE_LOOKUP);
+Bools isRing  (SIZE_LOOKUP);
+Bools isBack  (SIZE_LOOKUP);
+Bools isFront (SIZE_LOOKUP);
 
 // Other lookup tables :
-Label_vec compressedLabel(1000,-1); // Used to put all the detectors one after the other
-Ints m_index(1000,-1);
+Label_vec compressedLabel(SIZE_LOOKUP,-1); // Used to put all the detectors one after the other
+Ints m_index(SIZE_LOOKUP,-1);
 
 
 /**
@@ -179,7 +180,7 @@ protected:
   std::string m_filename;
 
   // Arrays :
-  Strings m_types = Strings(1000);
+  Strings m_types = Strings(SIZE_LOOKUP);
   Bools   m_exists;
   Strings m_list;
   Strings m_types_ID;

@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_test" xml:lang="en-US">
+
+<para><variablelist>
+<varlistentry><term>Member <link linkend="_class_faster_reader_1ad88f1dfb85bb64d8526770ffbeca5607">FasterReader::setHit</link>  (<link linkend="_class_hit">Hit</link> *hit)</term>
+<listitem>
+<para><anchor xml:id="_test_1_test000001"/>Set the <link linkend="_class_hit">Hit</link> object \nNever tested, but should work !  </para>
+</listitem></varlistentry>
+<varlistentry><term>Class <link linkend="_class_m_t_t_hist">MTTHist&lt; THist &gt;</link>  </term>
+<listitem>
+<para><anchor xml:id="_test_1_test000002"/>In mono mode (MTTHIST_MONO), only one histogram is created UNDER DEVELOPPEMENT</para>
+</listitem></varlistentry>
+</variablelist>
+</para>
+</section>

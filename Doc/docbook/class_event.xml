@@ -1,0 +1,496 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_class_event" xml:lang="en-US">
+<title>Event Class Reference</title>
+<indexterm><primary>Event</primary></indexterm>
+<para>
+
+<para><link linkend="_class_event">Event</link> used for reading and writting event, event building and trigger. </para>
+ 
+</para>
+<para>
+<computeroutput>#include &lt;Event.hpp&gt;</computeroutput>
+</para>
+Collaboration diagram for Event:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_event__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_class_event_1a0862af1471604bf30a4f50a5e028637a">clear</link> ()</para>
+</listitem>
+            <listitem><para><link linkend="_class_event_1a5a40dd4708297f7031e29b39e039ae10">Event</link> ()</para>
+</listitem>
+            <listitem><para><link linkend="_class_event_1a0e69972fc87ba81fe7ea2b35b53048fa">Event</link> (<link linkend="_class_event">Event</link> const &amp;event)</para>
+</listitem>
+            <listitem><para><link linkend="_class_event_1a0d67aa7db7d129a551208beb934afe7f">Event</link> (<link linkend="_class_hit">Hit</link> const &amp;hit)</para>
+</listitem>
+            <listitem><para><link linkend="_class_event_1a754f98b2802e8ce25f3d6d35dc24e7b2">Event</link> (TTree *tree)</para>
+</listitem>
+            <listitem><para><link linkend="_class_event_1a2c3c93926c72b2138bad6194b3083de4">Event</link> (TTree *tree, std::string const &amp;options)</para>
+</listitem>
+            <listitem><para>bool <link linkend="_class_event_1a93d81b8139c839326e56f33ef63097e8">isCalibrated</link> () const</para>
+</listitem>
+            <listitem><para>bool <link linkend="_class_event_1ae0da185c1abc7223f0bd0184e0937c24">isEmpty</link> () const</para>
+</listitem>
+            <listitem><para>bool <link linkend="_class_event_1ac0a49a4178b701a0921ade6bfb1ad143">isSingle</link> () const</para>
+</listitem>
+            <listitem><para><link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> const  &amp; <link linkend="_class_event_1ae94819278665e54966a12c494fb65dbc">maxSize</link> () const</para>
+</listitem>
+            <listitem><para><link linkend="_class_event">Event</link> &amp; <link linkend="_class_event_1ae393238c864abbf268c5172572241778">operator=</link> (<link linkend="_class_event">Event</link> const &amp;evt)</para>
+</listitem>
+            <listitem><para><link linkend="_class_event">Event</link> &amp; <link linkend="_class_event_1a2bb3a8e63ac8be551f02fb0963cf0041">operator=</link> (<link linkend="_class_hit">Hit</link> const &amp;hit)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_event_1a090d2a02b5c85844e1287e7e693af3a7">Print</link> () const</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_event_1a65f680e6b4c74419f4aa92e6e772efb0">push_back</link> (<link linkend="_class_hit">Hit</link> const &amp;hit)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_event_1a78b1cb630e7720f205a9c00e2c111102">push_front</link> (<link linkend="_class_hit">Hit</link> const &amp;hit)</para>
+
+<para>Sometimes, we want to select pre-prompt events. In such case, we have to put in in front of the others. </para>
+</listitem>
+            <listitem><para>void <link linkend="_class_event_1a243e29bac8d969902d32a4d444fc5174">reading</link> (TTree *tree)</para>
+
+<para>Automatically set branches based on the presence or not of branches in the root tree. Reserved for &quot;Nuball2&quot; type of trees. </para>
+</listitem>
+            <listitem><para>void <link linkend="_class_event_1af08b47f89112db7279491ab1201ce82d">reading</link> (TTree *tree, std::string const &amp;options)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_event_1afd2351e3fb971a5f061e5b1b84f78326">setT0</link> (<link linkend="__hit_8hpp_1a36a1e53eff51015f34900948053c0d69">Timestamp</link> const &amp;timestamp)</para>
+</listitem>
+            <listitem><para><link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> <link linkend="_class_event_1aadb0c0dcbb31718e69358e9c99a5b633">size</link> () const</para>
+</listitem>
+            <listitem><para><link linkend="__hit_8hpp_1ad7cd28c849adeb8fec74d20155b0113d">Time_ns</link> <link linkend="_class_event_1a15a45e59b3ce25ab2b72e68578e99c51">time_ns</link> (int const &amp;i) const</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_event_1ad2b15ab9c635d2350f7f03075081ff99">timeShift</link> (<link linkend="__hit_8hpp_1a808363c27c30b41f6ed40b62ebde3ee7">Time</link> const &amp;shift)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_event_1aa69256b1b2f550541a1bc6104cec62d9">timeShift_ns</link> (double const &amp;shift)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_event_1a0b93fcd8063a3c02edede96bb53b136d">writting</link> (TTree *tree, std::string const &amp;options=&quot;lstTeEqQ&quot;)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Public Attributes    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="__hit_8hpp_1a04b75a9e083a1c44419fdb7c3f87c361">ADC</link> <link linkend="_class_event_1a3e0953c870297eee51ce555908923bb3">adcs</link> [255] = {0}</para>
+</listitem>
+            <listitem><para><link linkend="__hit_8hpp_1ab5dd24876acad09ec52c250c1668466c">Label</link> <link linkend="_class_event_1ad016b65deeaef393a94793ef140e1bb8">labels</link> [255] = {0}</para>
+</listitem>
+            <listitem><para>int <link linkend="_class_event_1a455861b2470596b9ee0101ccb61faa26">mult</link> = 0</para>
+</listitem>
+            <listitem><para><link linkend="__hit_8hpp_1aad3a9d2c404fb4cd7f73b16966ae2877">NRJ</link> <link linkend="_class_event_1acf99e771da7327b904866b80d6cfc45b">nrj2s</link> [255] = {0}</para>
+</listitem>
+            <listitem><para><link linkend="__hit_8hpp_1aad3a9d2c404fb4cd7f73b16966ae2877">NRJ</link> <link linkend="_class_event_1abdf231115162bb24604c238caceb1b05">nrjs</link> [255] = {0}</para>
+</listitem>
+            <listitem><para><link linkend="__hit_8hpp_1a32b9c8e0ce5bedbf84e93eff0b198eea">Pileup</link> <link linkend="_class_event_1a4d88ce4712ef6353c5767a8270a8528f">pileups</link> [255] = {0}</para>
+</listitem>
+            <listitem><para><link linkend="__hit_8hpp_1a04b75a9e083a1c44419fdb7c3f87c361">ADC</link> <link linkend="_class_event_1a7bc76ee166649431e9010875202ca6c1">qdc2s</link> [255] = {0}</para>
+</listitem>
+            <listitem><para><link linkend="_class_i_options">IOptions</link> <link linkend="_class_event_1a9c01144b3f06d4cc5234ae3736fec9d2">read</link></para>
+</listitem>
+            <listitem><para><link linkend="__hit_8hpp_1a36a1e53eff51015f34900948053c0d69">Timestamp</link> <link linkend="_class_event_1a448758bc35a7e830f6385c8c1f17461e">stamp</link> = 0ull</para>
+</listitem>
+            <listitem><para><link linkend="__hit_8hpp_1ad7cd28c849adeb8fec74d20155b0113d">Time_ns</link> <link linkend="_class_event_1a24cba1790b71f725050f229c129e91d4">time2s</link> [255] = {0}</para>
+</listitem>
+            <listitem><para><link linkend="__hit_8hpp_1a808363c27c30b41f6ed40b62ebde3ee7">Time</link> <link linkend="_class_event_1a433bcb1da05d7a6f477d4d1b9ee0f7b0">times</link> [255] = {0}</para>
+</listitem>
+            <listitem><para><link linkend="_class_i_options">IOptions</link> <link linkend="_class_event_1a4db4697dc48d987a650c89b92404f51d">write</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Private Attributes    </title>
+        <itemizedlist>
+            <listitem><para>bool <link linkend="_class_event_1adefa26c27b8fe8f5d13ba007107103d2">isReading</link> = false</para>
+</listitem>
+            <listitem><para>bool <link linkend="_class_event_1a9ff9ae9c7506bc68fda3edf8658e16fd">isWritting</link> = false</para>
+</listitem>
+            <listitem><para><link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> <link linkend="_class_event_1afe4f697f53c8ce64e9e7de176ebf27be">m_maxSize</link> = 255</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Detailed Description</title>
+
+<para><link linkend="_class_event">Event</link> used for reading and writting event, event building and trigger. </para>
+
+
+
+<para>An <link linkend="_class_event">Event</link> is in principle a collection of Hits. However, in order to be an efficient interface with ROOT TTree, in practice it consist of a collections of arrays that stores values of a specific branch.</para>
+
+<para>The following are public members (i.e. you can call it directly with <link linkend="_class_event">Event</link>::[array_name]) <literallayout><computeroutput>   int mult = 0;                  Number of hits currently stored in the event.
+   Timestamp stamp = 0ull;         Absolute timestamp of the whole event
+   Label   labels  [255] = {0};    Labels of the hits
+   Time    times   [255] = {0};    Time in ps (Long64_t) relative to the first hit
+   Time_ns time2s  [255] = {0};    Time in ns (float) relative either to the first hit or to the pulse
+   ADC     adcs    [255] = {0};    Uncalibrated ADC value of the energy
+   NRJ     nrjs    [255] = {0};    Calibrated (or simply gain matched) energy value in keV
+   ADC     qdc2s   [255] = {0};    Uncalibrated QDC value of the energy measured in the second time gate for QDC2 channels
+   NRJ     nrj2s   [255] = {0};    Calibrated (or simply gain matched) energy value in keV. By default, the energy calibration is the same as the nrj so that the ratio remains the same
+   Pileup  pileups [255] = {0};    Pileup or saturation bit
+</computeroutput></literallayout> Format of a branch inside the root tree : <literallayout><computeroutput>   &quot;array[mult]/type&quot;
+</computeroutput></literallayout> Only the two first members are not arrays because they are true for the entire event.</para>
+
+<para>To read any Nuball2-like TTree : <literallayout><computeroutput>   // Loads the TTree or TChain ...
+   Event event;
+   event.reading(ttree);
+</computeroutput></literallayout> If you are only interested in a few branches, you can choose them by adding an option : <literallayout><computeroutput>   event.reading(ttree, &quot;lst&quot;); // Reads only the multiplicity, label, timestamp and relatative time.
+</computeroutput></literallayout> Note the multiplicity will always be activated, because it is mandatory to read the root file.</para>
+
+<para>A list of all the options available so far : <literallayout><computeroutput>   l : label  label                 ushort
+   s : stamp  absolute timestamp ps ULong64_t
+   t : time   relative timestamp ps Long64_t
+   T : time2  relative timestamp ns float
+   e : adc    energy in ADC         int
+   E : nrj    energy in keV         float
+   q : qdc2   energy qdc2 in ADC    float
+   Q : nrj2   energy qdc2 in keV    float
+   p : pileup pilepup               bool
+</computeroutput></literallayout> You can access the readed branches via the <link linkend="_class_event_1a9c01144b3f06d4cc5234ae3736fec9d2">Event::read</link> member (see the ReadIO struct definition)</para>
+
+<para>You can use this class to write in another root tree. To do so, use the <link linkend="_class_event_1a0b93fcd8063a3c02edede96bb53b136d">Event::writting</link> method : <literallayout><computeroutput>   event.writting(outTree, &quot;lstEQ&quot;); Will write the multiplicity, timestamp, relative time and calibrated energy and QDC2
+</computeroutput></literallayout> You can as well access the written branches via the <link linkend="_class_event_1a4db4697dc48d987a650c89b92404f51d">Event::write</link> member (see the WriteIO struct definition)</para>
+
+<para>Interface with <link linkend="_class_hit">Hit</link> class :</para>
+
+<para>You can add Hits to an event using the <link linkend="_class_event_1a65f680e6b4c74419f4aa92e6e772efb0">Event::push_back</link> or <link linkend="_class_event_1a78b1cb630e7720f205a9c00e2c111102">Event::push_front</link> methods : <literallayout><computeroutput>   event.push_back(hit);
+
+   event.push_front(hit);
+</computeroutput></literallayout> When the event is complete (e.g. in an event builder), you can for instance write it down or analyse it, then call <link linkend="_class_event_1a0862af1471604bf30a4f50a5e028637a">Event::clear()</link> to empty it. </para>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_class_event_1a5a40dd4708297f7031e29b39e039ae10"/>    <section>
+    <title>Event()<computeroutput>[1/5]</computeroutput></title>
+<indexterm><primary>Event</primary><secondary>Event</secondary></indexterm>
+<indexterm><primary>Event</primary><secondary>Event</secondary></indexterm>
+<para><computeroutput>Event::Event ( )<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_event_1a0d67aa7db7d129a551208beb934afe7f"/>    <section>
+    <title>Event()<computeroutput>[2/5]</computeroutput></title>
+<indexterm><primary>Event</primary><secondary>Event</secondary></indexterm>
+<indexterm><primary>Event</primary><secondary>Event</secondary></indexterm>
+<para><computeroutput>Event::Event (<link linkend="_class_hit">Hit</link> const &amp; hit)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_event_1a0e69972fc87ba81fe7ea2b35b53048fa"/>    <section>
+    <title>Event()<computeroutput>[3/5]</computeroutput></title>
+<indexterm><primary>Event</primary><secondary>Event</secondary></indexterm>
+<indexterm><primary>Event</primary><secondary>Event</secondary></indexterm>
+<para><computeroutput>Event::Event (<link linkend="_class_event">Event</link> const &amp; event)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_event_1a754f98b2802e8ce25f3d6d35dc24e7b2"/>    <section>
+    <title>Event()<computeroutput>[4/5]</computeroutput></title>
+<indexterm><primary>Event</primary><secondary>Event</secondary></indexterm>
+<indexterm><primary>Event</primary><secondary>Event</secondary></indexterm>
+<para><computeroutput>Event::Event (TTree * tree)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_event_a754f98b2802e8ce25f3d6d35dc24e7b2_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_event_1a2c3c93926c72b2138bad6194b3083de4"/>    <section>
+    <title>Event()<computeroutput>[5/5]</computeroutput></title>
+<indexterm><primary>Event</primary><secondary>Event</secondary></indexterm>
+<indexterm><primary>Event</primary><secondary>Event</secondary></indexterm>
+<para><computeroutput>Event::Event (TTree * tree, std::string const &amp; options)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_event_a2c3c93926c72b2138bad6194b3083de4_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_class_event_1a0862af1471604bf30a4f50a5e028637a"/>    <section>
+    <title>clear()</title>
+<indexterm><primary>clear</primary><secondary>Event</secondary></indexterm>
+<indexterm><primary>Event</primary><secondary>clear</secondary></indexterm>
+<para><computeroutput>void Event::clear ( )<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_event_a0862af1471604bf30a4f50a5e028637a_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_event_1a93d81b8139c839326e56f33ef63097e8"/>    <section>
+    <title>isCalibrated()</title>
+<indexterm><primary>isCalibrated</primary><secondary>Event</secondary></indexterm>
+<indexterm><primary>Event</primary><secondary>isCalibrated</secondary></indexterm>
+<para><computeroutput>bool Event::isCalibrated ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_event_a93d81b8139c839326e56f33ef63097e8_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_event_1ae0da185c1abc7223f0bd0184e0937c24"/>    <section>
+    <title>isEmpty()</title>
+<indexterm><primary>isEmpty</primary><secondary>Event</secondary></indexterm>
+<indexterm><primary>Event</primary><secondary>isEmpty</secondary></indexterm>
+<para><computeroutput>bool Event::isEmpty ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_event_1ac0a49a4178b701a0921ade6bfb1ad143"/>    <section>
+    <title>isSingle()</title>
+<indexterm><primary>isSingle</primary><secondary>Event</secondary></indexterm>
+<indexterm><primary>Event</primary><secondary>isSingle</secondary></indexterm>
+<para><computeroutput>bool Event::isSingle ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_event_ac0a49a4178b701a0921ade6bfb1ad143_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_event_1ae94819278665e54966a12c494fb65dbc"/>    <section>
+    <title>maxSize()</title>
+<indexterm><primary>maxSize</primary><secondary>Event</secondary></indexterm>
+<indexterm><primary>Event</primary><secondary>maxSize</secondary></indexterm>
+<para><computeroutput><link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> const&amp; Event::maxSize ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_event_1ae393238c864abbf268c5172572241778"/>    <section>
+    <title>operator=()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>operator=</primary><secondary>Event</secondary></indexterm>
+<indexterm><primary>Event</primary><secondary>operator=</secondary></indexterm>
+<para><computeroutput><link linkend="_class_event">Event</link> &amp; Event::operator= (<link linkend="_class_event">Event</link> const &amp; evt)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_event_1a2bb3a8e63ac8be551f02fb0963cf0041"/>    <section>
+    <title>operator=()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>operator=</primary><secondary>Event</secondary></indexterm>
+<indexterm><primary>Event</primary><secondary>operator=</secondary></indexterm>
+<para><computeroutput><link linkend="_class_event">Event</link> &amp; Event::operator= (<link linkend="_class_hit">Hit</link> const &amp; hit)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_event_1a090d2a02b5c85844e1287e7e693af3a7"/>    <section>
+    <title>Print()</title>
+<indexterm><primary>Print</primary><secondary>Event</secondary></indexterm>
+<indexterm><primary>Event</primary><secondary>Print</secondary></indexterm>
+<para><computeroutput>void Event::Print ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_event_a090d2a02b5c85844e1287e7e693af3a7_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_event_1a65f680e6b4c74419f4aa92e6e772efb0"/>    <section>
+    <title>push_back()</title>
+<indexterm><primary>push_back</primary><secondary>Event</secondary></indexterm>
+<indexterm><primary>Event</primary><secondary>push_back</secondary></indexterm>
+<para><computeroutput>void Event::push_back (<link linkend="_class_hit">Hit</link> const &amp; hit)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_event_a65f680e6b4c74419f4aa92e6e772efb0_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_event_1a78b1cb630e7720f205a9c00e2c111102"/>    <section>
+    <title>push_front()</title>
+<indexterm><primary>push_front</primary><secondary>Event</secondary></indexterm>
+<indexterm><primary>Event</primary><secondary>push_front</secondary></indexterm>
+<para><computeroutput>void Event::push_front (<link linkend="_class_hit">Hit</link> const &amp; hit)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>Sometimes, we want to select pre-prompt events. In such case, we have to put in in front of the others. </para>
+</para>
+
+<para>About the timestamp of the event, we keep the same as this additionnal event is located before the first hit that really represents the &quot;0&quot; of the event </para>
+Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_event_a78b1cb630e7720f205a9c00e2c111102_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_event_1a243e29bac8d969902d32a4d444fc5174"/>    <section>
+    <title>reading()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>reading</primary><secondary>Event</secondary></indexterm>
+<indexterm><primary>Event</primary><secondary>reading</secondary></indexterm>
+<para><computeroutput>void Event::reading (TTree * tree)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>Automatically set branches based on the presence or not of branches in the root tree. Reserved for &quot;Nuball2&quot; type of trees. </para>
+</para>
+Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_event_a243e29bac8d969902d32a4d444fc5174_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_event_a243e29bac8d969902d32a4d444fc5174_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_event_1af08b47f89112db7279491ab1201ce82d"/>    <section>
+    <title>reading()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>reading</primary><secondary>Event</secondary></indexterm>
+<indexterm><primary>Event</primary><secondary>reading</secondary></indexterm>
+<para><computeroutput>void Event::reading (TTree * tree, std::string const &amp; options)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_event_af08b47f89112db7279491ab1201ce82d_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_event_1afd2351e3fb971a5f061e5b1b84f78326"/>    <section>
+    <title>setT0()</title>
+<indexterm><primary>setT0</primary><secondary>Event</secondary></indexterm>
+<indexterm><primary>Event</primary><secondary>setT0</secondary></indexterm>
+<para><computeroutput>void Event::setT0 (<link linkend="__hit_8hpp_1a36a1e53eff51015f34900948053c0d69">Timestamp</link> const &amp; timestamp)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_event_afd2351e3fb971a5f061e5b1b84f78326_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_event_1aadb0c0dcbb31718e69358e9c99a5b633"/>    <section>
+    <title>size()</title>
+<indexterm><primary>size</primary><secondary>Event</secondary></indexterm>
+<indexterm><primary>Event</primary><secondary>size</secondary></indexterm>
+<para><computeroutput><link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> Event::size ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_event_aadb0c0dcbb31718e69358e9c99a5b633_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_event_1a15a45e59b3ce25ab2b72e68578e99c51"/>    <section>
+    <title>time_ns()</title>
+<indexterm><primary>time_ns</primary><secondary>Event</secondary></indexterm>
+<indexterm><primary>Event</primary><secondary>time_ns</secondary></indexterm>
+<para><computeroutput><link linkend="__hit_8hpp_1ad7cd28c849adeb8fec74d20155b0113d">Time_ns</link> Event::time_ns (int const &amp; i) const<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_event_a15a45e59b3ce25ab2b72e68578e99c51_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_event_1ad2b15ab9c635d2350f7f03075081ff99"/>    <section>
+    <title>timeShift()</title>
+<indexterm><primary>timeShift</primary><secondary>Event</secondary></indexterm>
+<indexterm><primary>Event</primary><secondary>timeShift</secondary></indexterm>
+<para><computeroutput>void Event::timeShift (<link linkend="__hit_8hpp_1a808363c27c30b41f6ed40b62ebde3ee7">Time</link> const &amp; shift)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_event_ad2b15ab9c635d2350f7f03075081ff99_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_event_1aa69256b1b2f550541a1bc6104cec62d9"/>    <section>
+    <title>timeShift_ns()</title>
+<indexterm><primary>timeShift_ns</primary><secondary>Event</secondary></indexterm>
+<indexterm><primary>Event</primary><secondary>timeShift_ns</secondary></indexterm>
+<para><computeroutput>void Event::timeShift_ns (double const &amp; shift)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_event_aa69256b1b2f550541a1bc6104cec62d9_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_event_1a0b93fcd8063a3c02edede96bb53b136d"/>    <section>
+    <title>writting()</title>
+<indexterm><primary>writting</primary><secondary>Event</secondary></indexterm>
+<indexterm><primary>Event</primary><secondary>writting</secondary></indexterm>
+<para><computeroutput>void Event::writting (TTree * tree, std::string const &amp; options = <computeroutput>&quot;lstTeEqQ&quot;</computeroutput>
+)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_event_a0b93fcd8063a3c02edede96bb53b136d_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_class_event_1a3e0953c870297eee51ce555908923bb3"/>    <section>
+    <title>adcs</title>
+<indexterm><primary>adcs</primary><secondary>Event</secondary></indexterm>
+<indexterm><primary>Event</primary><secondary>adcs</secondary></indexterm>
+<para><computeroutput><link linkend="__hit_8hpp_1a04b75a9e083a1c44419fdb7c3f87c361">ADC</link> Event::adcs[255] = {0}</computeroutput></para>    </section><anchor xml:id="_class_event_1adefa26c27b8fe8f5d13ba007107103d2"/>    <section>
+    <title>isReading</title>
+<indexterm><primary>isReading</primary><secondary>Event</secondary></indexterm>
+<indexterm><primary>Event</primary><secondary>isReading</secondary></indexterm>
+<para><computeroutput>bool Event::isReading = false<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_event_1a9ff9ae9c7506bc68fda3edf8658e16fd"/>    <section>
+    <title>isWritting</title>
+<indexterm><primary>isWritting</primary><secondary>Event</secondary></indexterm>
+<indexterm><primary>Event</primary><secondary>isWritting</secondary></indexterm>
+<para><computeroutput>bool Event::isWritting = false<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_event_1ad016b65deeaef393a94793ef140e1bb8"/>    <section>
+    <title>labels</title>
+<indexterm><primary>labels</primary><secondary>Event</secondary></indexterm>
+<indexterm><primary>Event</primary><secondary>labels</secondary></indexterm>
+<para><computeroutput><link linkend="__hit_8hpp_1ab5dd24876acad09ec52c250c1668466c">Label</link> Event::labels[255] = {0}</computeroutput></para>    </section><anchor xml:id="_class_event_1afe4f697f53c8ce64e9e7de176ebf27be"/>    <section>
+    <title>m_maxSize</title>
+<indexterm><primary>m_maxSize</primary><secondary>Event</secondary></indexterm>
+<indexterm><primary>Event</primary><secondary>m_maxSize</secondary></indexterm>
+<para><computeroutput><link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> Event::m_maxSize = 255<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_event_1a455861b2470596b9ee0101ccb61faa26"/>    <section>
+    <title>mult</title>
+<indexterm><primary>mult</primary><secondary>Event</secondary></indexterm>
+<indexterm><primary>Event</primary><secondary>mult</secondary></indexterm>
+<para><computeroutput>int Event::mult = 0</computeroutput></para>    </section><anchor xml:id="_class_event_1acf99e771da7327b904866b80d6cfc45b"/>    <section>
+    <title>nrj2s</title>
+<indexterm><primary>nrj2s</primary><secondary>Event</secondary></indexterm>
+<indexterm><primary>Event</primary><secondary>nrj2s</secondary></indexterm>
+<para><computeroutput><link linkend="__hit_8hpp_1aad3a9d2c404fb4cd7f73b16966ae2877">NRJ</link> Event::nrj2s[255] = {0}</computeroutput></para>    </section><anchor xml:id="_class_event_1abdf231115162bb24604c238caceb1b05"/>    <section>
+    <title>nrjs</title>
+<indexterm><primary>nrjs</primary><secondary>Event</secondary></indexterm>
+<indexterm><primary>Event</primary><secondary>nrjs</secondary></indexterm>
+<para><computeroutput><link linkend="__hit_8hpp_1aad3a9d2c404fb4cd7f73b16966ae2877">NRJ</link> Event::nrjs[255] = {0}</computeroutput></para>    </section><anchor xml:id="_class_event_1a4d88ce4712ef6353c5767a8270a8528f"/>    <section>
+    <title>pileups</title>
+<indexterm><primary>pileups</primary><secondary>Event</secondary></indexterm>
+<indexterm><primary>Event</primary><secondary>pileups</secondary></indexterm>
+<para><computeroutput><link linkend="__hit_8hpp_1a32b9c8e0ce5bedbf84e93eff0b198eea">Pileup</link> Event::pileups[255] = {0}</computeroutput></para>    </section><anchor xml:id="_class_event_1a7bc76ee166649431e9010875202ca6c1"/>    <section>
+    <title>qdc2s</title>
+<indexterm><primary>qdc2s</primary><secondary>Event</secondary></indexterm>
+<indexterm><primary>Event</primary><secondary>qdc2s</secondary></indexterm>
+<para><computeroutput><link linkend="__hit_8hpp_1a04b75a9e083a1c44419fdb7c3f87c361">ADC</link> Event::qdc2s[255] = {0}</computeroutput></para>    </section><anchor xml:id="_class_event_1a9c01144b3f06d4cc5234ae3736fec9d2"/>    <section>
+    <title>read</title>
+<indexterm><primary>read</primary><secondary>Event</secondary></indexterm>
+<indexterm><primary>Event</primary><secondary>read</secondary></indexterm>
+<para><computeroutput><link linkend="_class_i_options">IOptions</link> Event::read</computeroutput></para>    </section><anchor xml:id="_class_event_1a448758bc35a7e830f6385c8c1f17461e"/>    <section>
+    <title>stamp</title>
+<indexterm><primary>stamp</primary><secondary>Event</secondary></indexterm>
+<indexterm><primary>Event</primary><secondary>stamp</secondary></indexterm>
+<para><computeroutput><link linkend="__hit_8hpp_1a36a1e53eff51015f34900948053c0d69">Timestamp</link> Event::stamp = 0ull</computeroutput></para>    </section><anchor xml:id="_class_event_1a24cba1790b71f725050f229c129e91d4"/>    <section>
+    <title>time2s</title>
+<indexterm><primary>time2s</primary><secondary>Event</secondary></indexterm>
+<indexterm><primary>Event</primary><secondary>time2s</secondary></indexterm>
+<para><computeroutput><link linkend="__hit_8hpp_1ad7cd28c849adeb8fec74d20155b0113d">Time_ns</link> Event::time2s[255] = {0}</computeroutput></para>    </section><anchor xml:id="_class_event_1a433bcb1da05d7a6f477d4d1b9ee0f7b0"/>    <section>
+    <title>times</title>
+<indexterm><primary>times</primary><secondary>Event</secondary></indexterm>
+<indexterm><primary>Event</primary><secondary>times</secondary></indexterm>
+<para><computeroutput><link linkend="__hit_8hpp_1a808363c27c30b41f6ed40b62ebde3ee7">Time</link> Event::times[255] = {0}</computeroutput></para>    </section><anchor xml:id="_class_event_1a4db4697dc48d987a650c89b92404f51d"/>    <section>
+    <title>write</title>
+<indexterm><primary>write</primary><secondary>Event</secondary></indexterm>
+<indexterm><primary>Event</primary><secondary>write</secondary></indexterm>
+<para><computeroutput><link linkend="_class_i_options">IOptions</link> Event::write</computeroutput></para></section>
+<para>
+The documentation for this class was generated from the following file:</para>
+lib/Classes/<link linkend="__event_8hpp">Event.hpp</link></section>
+</section>

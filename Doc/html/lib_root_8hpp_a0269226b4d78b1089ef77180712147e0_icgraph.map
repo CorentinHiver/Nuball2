@@ -1,0 +1,7 @@
+<map id="maxXaxis" name="maxXaxis">
+<area shape="rect" id="node1" title=" " alt="" coords="772,31,859,57"/>
+<area shape="rect" id="node2" href="$namespace_co_analyse.html#a53744e2ddfba6a4a188ada9ed1bc6272" title="Total projection on X axis." alt="" coords="571,31,724,57"/>
+<area shape="rect" id="node3" href="$namespace_co_analyse.html#a2d7393e48336effee246cbbc33822847" title="Project on Y axis between values binYmin and binYmax included [binYmin;binYmax]." alt="" coords="333,5,486,32"/>
+<area shape="rect" id="node4" href="$namespace_co_analyse.html#aeb2cc17685bbda3b8531803c4d8cc5c8" title="Remove the background in the given histo." alt="" coords="296,56,523,83"/>
+<area shape="rect" id="node5" href="$class_histo_analyse.html#a32a4ee17c51884e01eb924cec2c42112" title=" " alt="" coords="5,56,248,83"/>
+</map>

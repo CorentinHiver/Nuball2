@@ -1,0 +1,7 @@
+<map id="MTFilesManager" name="MTFilesManager">
+<area shape="rect" id="node1" title="Work in progress." alt="" coords="115,288,245,315"/>
+<area shape="rect" id="node2" href="$class_files_manager.html" title=" " alt="" coords="5,191,115,218"/>
+<area shape="rect" id="node3" href="$class_path.html" title="EXPERIMENTAL Object used to hold the complete path of a giver folder." alt="" coords="35,95,85,121"/>
+<area shape="rect" id="node4" href="$class_folders.html" title="EXPERIMENTAL Object used to hold a list of folders." alt="" coords="25,5,95,32"/>
+<area shape="rect" id="node5" href="$class_m_t_vector.html" title=" " alt="" coords="139,184,301,225"/>
+</map>

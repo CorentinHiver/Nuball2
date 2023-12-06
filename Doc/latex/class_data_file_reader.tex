@@ -1,0 +1,516 @@
+\doxysection{Data\+File\+Reader Class Reference}
+\label{class_data_file_reader}\index{DataFileReader@{DataFileReader}}
+
+
+{\ttfamily \#include $<$Data\+File\+Reader.\+hpp$>$}
+
+
+
+Collaboration diagram for Data\+File\+Reader\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=194pt]{class_data_file_reader__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \textbf{ cd} ()
+\item 
+\textbf{ Data\+File\+Reader} ()
+\item 
+\textbf{ Data\+File\+Reader} (\textbf{ Hit} $\ast$\+\_\+hit)
+\item 
+\textbf{ Data\+File\+Reader} (\textbf{ Hit} $\ast$\+\_\+hit, std\+::string \+\_\+filename)
+\item 
+\textbf{ Data\+File\+Reader} (std\+::string \+\_\+filename)
+\item 
+\textbf{ Hit} $\ast$ \textbf{ get\+Hit} () const
+\item 
+Bool\+\_\+t \textbf{ Initialize} ()
+\item 
+Bool\+\_\+t \textbf{ Initialize} (std\+::string const \&\+\_\+filename)
+\item 
+Bool\+\_\+t const  \& \textbf{ is\+Ready} () const
+\item 
+std\+::string const  \& \textbf{ is\+Root\+Or\+Fast} () const
+\item 
+Bool\+\_\+t const  \& \textbf{ is\+Writable} () const
+\item 
+Bool\+\_\+t \textbf{ Read} ()
+\item 
+Bool\+\_\+t \textbf{ Read} (\textbf{ Hit} $\ast$hit)
+\item 
+Bool\+\_\+t \textbf{ Read\+Fast} ()
+\item 
+Bool\+\_\+t \textbf{ Read\+Fast\+Data} (faster\+\_\+data\+\_\+p const \&\+\_\+data)
+\item 
+Bool\+\_\+t \textbf{ Read\+Fast\+Group} ()
+\item 
+void \textbf{ read\+Fast\+Group} (faster\+\_\+data\+\_\+p const \&\+\_\+data)
+\item 
+Bool\+\_\+t \textbf{ Read\+Root} (Int\+\_\+t const \&pos)
+\item 
+void \textbf{ switch\+\_\+alias} (\textbf{ uchar} const \&\+\_\+alias, faster\+\_\+data\+\_\+p const \&\+\_\+data, Bool\+\_\+t \&\+\_\+write)
+\item 
+\textbf{ $\sim$\+Data\+File\+Reader} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+Bool\+\_\+t \textbf{ Initialize\+Faster\+Read} ()
+\item 
+Bool\+\_\+t \textbf{ Initialize\+Root\+Read} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ uchar} \textbf{ m\+\_\+alias} = 0
+\item 
+ULong64\+\_\+t \textbf{ m\+\_\+cursor} = 0
+\item 
+faster\+\_\+data\+\_\+p \textbf{ m\+\_\+data}
+\item 
+\textbf{ Hit} $\ast$ \textbf{ m\+\_\+empty\+\_\+hit} = nullptr
+\item 
+std\+::string \textbf{ m\+\_\+filename} = \char`\"{}\char`\"{}
+\item 
+Buffer\+\_\+ptr \textbf{ m\+\_\+group\+\_\+buffer}
+\item 
+UShort\+\_\+t \textbf{ m\+\_\+group\+\_\+read\+\_\+cursor} = 0
+\item 
+UShort\+\_\+t \textbf{ m\+\_\+group\+\_\+write\+\_\+cursor} = 0
+\item 
+\textbf{ Hit} $\ast$ \textbf{ m\+\_\+hit} = nullptr
+\item 
+Bool\+\_\+t \textbf{ m\+\_\+is\+Group} = false
+\item 
+Bool\+\_\+t \textbf{ m\+\_\+k\+Ready} = true
+\item 
+Bool\+\_\+t \textbf{ m\+\_\+\+QDCx} [4] = \{1,0,0,0\}
+\item 
+char \textbf{ m\+\_\+quick\+\_\+root\+Or\+Fast} = 0
+\item 
+faster\+\_\+file\+\_\+reader\+\_\+p \textbf{ m\+\_\+reader} = NULL
+\item 
+TTree $\ast$ \textbf{ m\+\_\+\+Read\+Tree} = nullptr
+\item 
+std\+::string \textbf{ m\+\_\+root\+ORfast} = \char`\"{}\char`\"{}
+\item 
+std\+::unique\+\_\+ptr$<$ TFile $>$ \textbf{ m\+\_\+\+TFile}
+\item 
+bool \textbf{ m\+\_\+verbose} = false
+\item 
+Bool\+\_\+t \textbf{ m\+\_\+write} = false
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\label{class_data_file_reader_ac8f415a62f194b3b8b5a277e15cf55ab}} 
+\index{DataFileReader@{DataFileReader}!DataFileReader@{DataFileReader}}
+\index{DataFileReader@{DataFileReader}!DataFileReader@{DataFileReader}}
+\doxysubsubsection{DataFileReader()\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily Data\+File\+Reader\+::\+Data\+File\+Reader (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_data_file_reader_aa21e5d3dda6177ceed073fa0a3e6e6e9}} 
+\index{DataFileReader@{DataFileReader}!DataFileReader@{DataFileReader}}
+\index{DataFileReader@{DataFileReader}!DataFileReader@{DataFileReader}}
+\doxysubsubsection{DataFileReader()\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily Data\+File\+Reader\+::\+Data\+File\+Reader (\begin{DoxyParamCaption}\item[{\textbf{ Hit} $\ast$}]{\+\_\+hit }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_data_file_reader_a14657e37d9465aec5cf5c3a774f5d39b}} 
+\index{DataFileReader@{DataFileReader}!DataFileReader@{DataFileReader}}
+\index{DataFileReader@{DataFileReader}!DataFileReader@{DataFileReader}}
+\doxysubsubsection{DataFileReader()\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily Data\+File\+Reader\+::\+Data\+File\+Reader (\begin{DoxyParamCaption}\item[{std\+::string}]{\+\_\+filename }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_data_file_reader_a14657e37d9465aec5cf5c3a774f5d39b_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_data_file_reader_a1f3ba36be0b3abeef18d4d365659f94c}} 
+\index{DataFileReader@{DataFileReader}!DataFileReader@{DataFileReader}}
+\index{DataFileReader@{DataFileReader}!DataFileReader@{DataFileReader}}
+\doxysubsubsection{DataFileReader()\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily Data\+File\+Reader\+::\+Data\+File\+Reader (\begin{DoxyParamCaption}\item[{\textbf{ Hit} $\ast$}]{\+\_\+hit,  }\item[{std\+::string}]{\+\_\+filename }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_data_file_reader_a1f3ba36be0b3abeef18d4d365659f94c_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_data_file_reader_a8b64d1899bd625401126228fd28132e2}} 
+\index{DataFileReader@{DataFileReader}!````~DataFileReader@{$\sim$DataFileReader}}
+\index{````~DataFileReader@{$\sim$DataFileReader}!DataFileReader@{DataFileReader}}
+\doxysubsubsection{$\sim$DataFileReader()}
+{\footnotesize\ttfamily Data\+File\+Reader\+::$\sim$\+Data\+File\+Reader (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\label{class_data_file_reader_a08df6771ae6227935847e535aed2e8c2}} 
+\index{DataFileReader@{DataFileReader}!cd@{cd}}
+\index{cd@{cd}!DataFileReader@{DataFileReader}}
+\doxysubsubsection{cd()}
+{\footnotesize\ttfamily void Data\+File\+Reader\+::cd (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\label{class_data_file_reader_a034e540bca091a553d32bd6ea3df83a0}} 
+\index{DataFileReader@{DataFileReader}!getHit@{getHit}}
+\index{getHit@{getHit}!DataFileReader@{DataFileReader}}
+\doxysubsubsection{getHit()}
+{\footnotesize\ttfamily \textbf{ Hit}$\ast$ Data\+File\+Reader\+::get\+Hit (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_data_file_reader_ad7d87b772fa148a1ed228f1b7df10fa8}} 
+\index{DataFileReader@{DataFileReader}!Initialize@{Initialize}}
+\index{Initialize@{Initialize}!DataFileReader@{DataFileReader}}
+\doxysubsubsection{Initialize()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Bool\+\_\+t Data\+File\+Reader\+::\+Initialize (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_data_file_reader_ad7d87b772fa148a1ed228f1b7df10fa8_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_data_file_reader_ad7d87b772fa148a1ed228f1b7df10fa8_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_data_file_reader_adf4b2ffd95a42bdd5b03cb4cdded83d1}} 
+\index{DataFileReader@{DataFileReader}!Initialize@{Initialize}}
+\index{Initialize@{Initialize}!DataFileReader@{DataFileReader}}
+\doxysubsubsection{Initialize()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Bool\+\_\+t Data\+File\+Reader\+::\+Initialize (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{\+\_\+filename }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_data_file_reader_adf4b2ffd95a42bdd5b03cb4cdded83d1_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_data_file_reader_a30933fc0789de10355edc6ccbc3c4f45}} 
+\index{DataFileReader@{DataFileReader}!InitializeFasterRead@{InitializeFasterRead}}
+\index{InitializeFasterRead@{InitializeFasterRead}!DataFileReader@{DataFileReader}}
+\doxysubsubsection{InitializeFasterRead()}
+{\footnotesize\ttfamily Bool\+\_\+t Data\+File\+Reader\+::\+Initialize\+Faster\+Read (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_data_file_reader_a30933fc0789de10355edc6ccbc3c4f45_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_data_file_reader_a95d6838cd3d9660578db7f6b5f4d6f9b}} 
+\index{DataFileReader@{DataFileReader}!InitializeRootRead@{InitializeRootRead}}
+\index{InitializeRootRead@{InitializeRootRead}!DataFileReader@{DataFileReader}}
+\doxysubsubsection{InitializeRootRead()}
+{\footnotesize\ttfamily Bool\+\_\+t Data\+File\+Reader\+::\+Initialize\+Root\+Read (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_data_file_reader_a95d6838cd3d9660578db7f6b5f4d6f9b_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_data_file_reader_a3eb026afa7eb48f76d6032b13c24361a}} 
+\index{DataFileReader@{DataFileReader}!isReady@{isReady}}
+\index{isReady@{isReady}!DataFileReader@{DataFileReader}}
+\doxysubsubsection{isReady()}
+{\footnotesize\ttfamily Bool\+\_\+t const\& Data\+File\+Reader\+::is\+Ready (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_data_file_reader_adb0f6c01a14efb8428b217a450116b14}} 
+\index{DataFileReader@{DataFileReader}!isRootOrFast@{isRootOrFast}}
+\index{isRootOrFast@{isRootOrFast}!DataFileReader@{DataFileReader}}
+\doxysubsubsection{isRootOrFast()}
+{\footnotesize\ttfamily std\+::string const\& Data\+File\+Reader\+::is\+Root\+Or\+Fast (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_data_file_reader_af03b5dd8b9cf07680fc6fae7a423cbb8}} 
+\index{DataFileReader@{DataFileReader}!isWritable@{isWritable}}
+\index{isWritable@{isWritable}!DataFileReader@{DataFileReader}}
+\doxysubsubsection{isWritable()}
+{\footnotesize\ttfamily Bool\+\_\+t const\& Data\+File\+Reader\+::is\+Writable (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_data_file_reader_ab19c49a704799dcddadaf88b2d4347ff}} 
+\index{DataFileReader@{DataFileReader}!Read@{Read}}
+\index{Read@{Read}!DataFileReader@{DataFileReader}}
+\doxysubsubsection{Read()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Bool\+\_\+t Data\+File\+Reader\+::\+Read (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_data_file_reader_ab19c49a704799dcddadaf88b2d4347ff_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_data_file_reader_ab19c49a704799dcddadaf88b2d4347ff_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_data_file_reader_afc27049955bbe7e252abc18707b6f4ce}} 
+\index{DataFileReader@{DataFileReader}!Read@{Read}}
+\index{Read@{Read}!DataFileReader@{DataFileReader}}
+\doxysubsubsection{Read()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Bool\+\_\+t Data\+File\+Reader\+::\+Read (\begin{DoxyParamCaption}\item[{\textbf{ Hit} $\ast$}]{hit }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_data_file_reader_afc27049955bbe7e252abc18707b6f4ce_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_data_file_reader_a95d01d90b9d4887da8684b8ffad3c964}} 
+\index{DataFileReader@{DataFileReader}!ReadFast@{ReadFast}}
+\index{ReadFast@{ReadFast}!DataFileReader@{DataFileReader}}
+\doxysubsubsection{ReadFast()}
+{\footnotesize\ttfamily Bool\+\_\+t Data\+File\+Reader\+::\+Read\+Fast (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_data_file_reader_a95d01d90b9d4887da8684b8ffad3c964_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_data_file_reader_a95d01d90b9d4887da8684b8ffad3c964_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_data_file_reader_a36d62f5aa4f75cbdd2bc011edbcf38bc}} 
+\index{DataFileReader@{DataFileReader}!ReadFastData@{ReadFastData}}
+\index{ReadFastData@{ReadFastData}!DataFileReader@{DataFileReader}}
+\doxysubsubsection{ReadFastData()}
+{\footnotesize\ttfamily Bool\+\_\+t Data\+File\+Reader\+::\+Read\+Fast\+Data (\begin{DoxyParamCaption}\item[{faster\+\_\+data\+\_\+p const \&}]{\+\_\+data }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_data_file_reader_a36d62f5aa4f75cbdd2bc011edbcf38bc_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_data_file_reader_a36d62f5aa4f75cbdd2bc011edbcf38bc_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_data_file_reader_a1abd3ec4b3d81ec14e71bc969dea1035}} 
+\index{DataFileReader@{DataFileReader}!ReadFastGroup@{ReadFastGroup}}
+\index{ReadFastGroup@{ReadFastGroup}!DataFileReader@{DataFileReader}}
+\doxysubsubsection{ReadFastGroup()}
+{\footnotesize\ttfamily Bool\+\_\+t Data\+File\+Reader\+::\+Read\+Fast\+Group (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_data_file_reader_a1abd3ec4b3d81ec14e71bc969dea1035_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_data_file_reader_a1abd3ec4b3d81ec14e71bc969dea1035_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_data_file_reader_afe2267bba9c1cd6f63740f232b00e4bf}} 
+\index{DataFileReader@{DataFileReader}!readFastGroup@{readFastGroup}}
+\index{readFastGroup@{readFastGroup}!DataFileReader@{DataFileReader}}
+\doxysubsubsection{readFastGroup()}
+{\footnotesize\ttfamily void Data\+File\+Reader\+::read\+Fast\+Group (\begin{DoxyParamCaption}\item[{faster\+\_\+data\+\_\+p const \&}]{\+\_\+data }\end{DoxyParamCaption})}
+
+= NULL)Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_data_file_reader_afe2267bba9c1cd6f63740f232b00e4bf_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_data_file_reader_afe2267bba9c1cd6f63740f232b00e4bf_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_data_file_reader_aaf456b672dccdf6bc67513301cf09dae}} 
+\index{DataFileReader@{DataFileReader}!ReadRoot@{ReadRoot}}
+\index{ReadRoot@{ReadRoot}!DataFileReader@{DataFileReader}}
+\doxysubsubsection{ReadRoot()}
+{\footnotesize\ttfamily Bool\+\_\+t Data\+File\+Reader\+::\+Read\+Root (\begin{DoxyParamCaption}\item[{Int\+\_\+t const \&}]{pos }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_data_file_reader_aaf456b672dccdf6bc67513301cf09dae_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_data_file_reader_af7fc75a8dd63587c9ad7d45546194a0d}} 
+\index{DataFileReader@{DataFileReader}!switch\_alias@{switch\_alias}}
+\index{switch\_alias@{switch\_alias}!DataFileReader@{DataFileReader}}
+\doxysubsubsection{switch\_alias()}
+{\footnotesize\ttfamily void Data\+File\+Reader\+::switch\+\_\+alias (\begin{DoxyParamCaption}\item[{\textbf{ uchar} const \&}]{\+\_\+alias,  }\item[{faster\+\_\+data\+\_\+p const \&}]{\+\_\+data,  }\item[{Bool\+\_\+t \&}]{\+\_\+write }\end{DoxyParamCaption})}
+
+!
+
+!
+
+!
+
+!
+
+!
+
+!Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_data_file_reader_af7fc75a8dd63587c9ad7d45546194a0d_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\label{class_data_file_reader_a2b0b98917593041f4022a83c5279b8f2}} 
+\index{DataFileReader@{DataFileReader}!m\_alias@{m\_alias}}
+\index{m\_alias@{m\_alias}!DataFileReader@{DataFileReader}}
+\doxysubsubsection{m\_alias}
+{\footnotesize\ttfamily \textbf{ uchar} Data\+File\+Reader\+::m\+\_\+alias = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_data_file_reader_a975fafa8ec2657c646c94a07b23f9bf8}} 
+\index{DataFileReader@{DataFileReader}!m\_cursor@{m\_cursor}}
+\index{m\_cursor@{m\_cursor}!DataFileReader@{DataFileReader}}
+\doxysubsubsection{m\_cursor}
+{\footnotesize\ttfamily ULong64\+\_\+t Data\+File\+Reader\+::m\+\_\+cursor = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_data_file_reader_a50c89bacf82c414adcd1212c9ffb59ac}} 
+\index{DataFileReader@{DataFileReader}!m\_data@{m\_data}}
+\index{m\_data@{m\_data}!DataFileReader@{DataFileReader}}
+\doxysubsubsection{m\_data}
+{\footnotesize\ttfamily faster\+\_\+data\+\_\+p Data\+File\+Reader\+::m\+\_\+data\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_data_file_reader_a0d36da7f6c524e14d40cd5f21acae0b3}} 
+\index{DataFileReader@{DataFileReader}!m\_empty\_hit@{m\_empty\_hit}}
+\index{m\_empty\_hit@{m\_empty\_hit}!DataFileReader@{DataFileReader}}
+\doxysubsubsection{m\_empty\_hit}
+{\footnotesize\ttfamily \textbf{ Hit}$\ast$ Data\+File\+Reader\+::m\+\_\+empty\+\_\+hit = nullptr\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_data_file_reader_a1f047e7f6e84b9eef04cbe6f7e4346a5}} 
+\index{DataFileReader@{DataFileReader}!m\_filename@{m\_filename}}
+\index{m\_filename@{m\_filename}!DataFileReader@{DataFileReader}}
+\doxysubsubsection{m\_filename}
+{\footnotesize\ttfamily std\+::string Data\+File\+Reader\+::m\+\_\+filename = \char`\"{}\char`\"{}\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_data_file_reader_aad9a3ad5bb201ee4674dae4fe61c022e}} 
+\index{DataFileReader@{DataFileReader}!m\_group\_buffer@{m\_group\_buffer}}
+\index{m\_group\_buffer@{m\_group\_buffer}!DataFileReader@{DataFileReader}}
+\doxysubsubsection{m\_group\_buffer}
+{\footnotesize\ttfamily Buffer\+\_\+ptr Data\+File\+Reader\+::m\+\_\+group\+\_\+buffer\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_data_file_reader_a0e749764afb71c720369cdd688e7037b}} 
+\index{DataFileReader@{DataFileReader}!m\_group\_read\_cursor@{m\_group\_read\_cursor}}
+\index{m\_group\_read\_cursor@{m\_group\_read\_cursor}!DataFileReader@{DataFileReader}}
+\doxysubsubsection{m\_group\_read\_cursor}
+{\footnotesize\ttfamily UShort\+\_\+t Data\+File\+Reader\+::m\+\_\+group\+\_\+read\+\_\+cursor = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_data_file_reader_a15a548778f321fabad72af766a07b4a4}} 
+\index{DataFileReader@{DataFileReader}!m\_group\_write\_cursor@{m\_group\_write\_cursor}}
+\index{m\_group\_write\_cursor@{m\_group\_write\_cursor}!DataFileReader@{DataFileReader}}
+\doxysubsubsection{m\_group\_write\_cursor}
+{\footnotesize\ttfamily UShort\+\_\+t Data\+File\+Reader\+::m\+\_\+group\+\_\+write\+\_\+cursor = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_data_file_reader_ac802191b4a2a0a8e69c8091b56c8e289}} 
+\index{DataFileReader@{DataFileReader}!m\_hit@{m\_hit}}
+\index{m\_hit@{m\_hit}!DataFileReader@{DataFileReader}}
+\doxysubsubsection{m\_hit}
+{\footnotesize\ttfamily \textbf{ Hit}$\ast$ Data\+File\+Reader\+::m\+\_\+hit = nullptr\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_data_file_reader_ad3c4ed0d0a334015d7455d26586526b8}} 
+\index{DataFileReader@{DataFileReader}!m\_isGroup@{m\_isGroup}}
+\index{m\_isGroup@{m\_isGroup}!DataFileReader@{DataFileReader}}
+\doxysubsubsection{m\_isGroup}
+{\footnotesize\ttfamily Bool\+\_\+t Data\+File\+Reader\+::m\+\_\+is\+Group = false\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_data_file_reader_a8621174b131344b5a3da1c07200645da}} 
+\index{DataFileReader@{DataFileReader}!m\_kReady@{m\_kReady}}
+\index{m\_kReady@{m\_kReady}!DataFileReader@{DataFileReader}}
+\doxysubsubsection{m\_kReady}
+{\footnotesize\ttfamily Bool\+\_\+t Data\+File\+Reader\+::m\+\_\+k\+Ready = true\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_data_file_reader_a32654eedfeb644461da15069403fbb8e}} 
+\index{DataFileReader@{DataFileReader}!m\_QDCx@{m\_QDCx}}
+\index{m\_QDCx@{m\_QDCx}!DataFileReader@{DataFileReader}}
+\doxysubsubsection{m\_QDCx}
+{\footnotesize\ttfamily Bool\+\_\+t Data\+File\+Reader\+::m\+\_\+\+QDCx[4] = \{1,0,0,0\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_data_file_reader_af5a63e66c1ff0c7dbfee66163538dd39}} 
+\index{DataFileReader@{DataFileReader}!m\_quick\_rootOrFast@{m\_quick\_rootOrFast}}
+\index{m\_quick\_rootOrFast@{m\_quick\_rootOrFast}!DataFileReader@{DataFileReader}}
+\doxysubsubsection{m\_quick\_rootOrFast}
+{\footnotesize\ttfamily char Data\+File\+Reader\+::m\+\_\+quick\+\_\+root\+Or\+Fast = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_data_file_reader_a4061e1aec6b6ccaaa1b1b9d728d397fe}} 
+\index{DataFileReader@{DataFileReader}!m\_reader@{m\_reader}}
+\index{m\_reader@{m\_reader}!DataFileReader@{DataFileReader}}
+\doxysubsubsection{m\_reader}
+{\footnotesize\ttfamily faster\+\_\+file\+\_\+reader\+\_\+p Data\+File\+Reader\+::m\+\_\+reader = NULL\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_data_file_reader_ad8538455a818353a98cbec7ecbf47314}} 
+\index{DataFileReader@{DataFileReader}!m\_ReadTree@{m\_ReadTree}}
+\index{m\_ReadTree@{m\_ReadTree}!DataFileReader@{DataFileReader}}
+\doxysubsubsection{m\_ReadTree}
+{\footnotesize\ttfamily TTree$\ast$ Data\+File\+Reader\+::m\+\_\+\+Read\+Tree = nullptr\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_data_file_reader_a785bd9f5a7afeb82122f3fc2b0b1d26f}} 
+\index{DataFileReader@{DataFileReader}!m\_rootORfast@{m\_rootORfast}}
+\index{m\_rootORfast@{m\_rootORfast}!DataFileReader@{DataFileReader}}
+\doxysubsubsection{m\_rootORfast}
+{\footnotesize\ttfamily std\+::string Data\+File\+Reader\+::m\+\_\+root\+ORfast = \char`\"{}\char`\"{}\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_data_file_reader_a69ed2a0858a61a41141cd3f9777b7d5b}} 
+\index{DataFileReader@{DataFileReader}!m\_TFile@{m\_TFile}}
+\index{m\_TFile@{m\_TFile}!DataFileReader@{DataFileReader}}
+\doxysubsubsection{m\_TFile}
+{\footnotesize\ttfamily std\+::unique\+\_\+ptr$<$TFile$>$ Data\+File\+Reader\+::m\+\_\+\+TFile\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_data_file_reader_a2c197a79e35044710369c221d5a33e90}} 
+\index{DataFileReader@{DataFileReader}!m\_verbose@{m\_verbose}}
+\index{m\_verbose@{m\_verbose}!DataFileReader@{DataFileReader}}
+\doxysubsubsection{m\_verbose}
+{\footnotesize\ttfamily bool Data\+File\+Reader\+::m\+\_\+verbose = false\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_data_file_reader_a7e62ef3c9376ce6455229ef1a3a01c5a}} 
+\index{DataFileReader@{DataFileReader}!m\_write@{m\_write}}
+\index{m\_write@{m\_write}!DataFileReader@{DataFileReader}}
+\doxysubsubsection{m\_write}
+{\footnotesize\ttfamily Bool\+\_\+t Data\+File\+Reader\+::m\+\_\+write = false\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+lib/\+Classes/\textbf{ Data\+File\+Reader.\+hpp}\end{DoxyCompactItemize}

@@ -20,7 +20,7 @@ public:
   void clear() {this -> Reset();}
   void clean() {this -> Reset();}
   auto const & label() const {return m_label;}
-  static void resetLabel() {glabel = 0;}
+  static void resetGlobalLabel() {glabel = 0;}
   void addGe(float const & _nrj, double const & _time) {nrj = _nrj; time = _time; nb++;}
   void addBGO(float const & _nrj, double const & _time) {nrj_BGO = _nrj; time_BGO = _time; nb_BGO++;}
 
@@ -40,7 +40,7 @@ public:
   bool isGePrompt = false;
   bool isGeDelayed = false;
 
-  uchar maxE_Ge_cristal = 0u; // Crystal number of the crystal with most energy deposit of the clover
+  uchar maxE_Ge_cristal = 0u; // Index of the Ge crystal with the most energy deposit in the clover
 
 private:
   uchar const m_label;
@@ -69,12 +69,12 @@ void CloverModule::Reset()
 std::ostream& operator<<(std::ostream& cout, CloverModule const & cloverModule)
 {
   print(
-    "Clover n°",cloverModule.label(), ":",
-    "nb Ge", cloverModule.nb,
-    "nb BGO", cloverModule.nb_BGO,
+    "Clover n°",int_cast(cloverModule.label()), ":",
+    "nb Ge", int_cast(cloverModule.nb),
+    "nb BGO", int_cast(cloverModule.nb_BGO),
     "nrj :", cloverModule.nrj,
     "time: ", cloverModule.time, "ns",
-    "index of crystal with max E :", cloverModule.maxE_Ge_cristal
+    "index of crystal with max E :", int_cast(cloverModule.maxE_Ge_cristal)
     );
   return cout;
 }

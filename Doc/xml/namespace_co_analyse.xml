@@ -1,0 +1,540 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="namespace_co_analyse" kind="namespace" language="C++">
+    <compoundname>CoAnalyse</compoundname>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="namespace_co_analyse_1a0c12c2535bb054631b3b0304a1dc9a34" prot="public" static="no">
+        <type>std::vector&lt; std::pair&lt; double, double &gt; &gt;</type>
+        <definition>using CoAnalyse::ProjectionsBins = typedef std::vector&lt;std::pair&lt;double,double&gt; &gt;</definition>
+        <argsstring></argsstring>
+        <name>ProjectionsBins</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/libRoot.hpp" line="426" column="3" bodyfile="lib/libRoot.hpp" bodystart="426" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="namespace_co_analyse_1acb07ede224cab3e9289d25c72c099b24" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; double &gt;</type>
+        <definition>std::vector&lt;double&gt; CoAnalyse::extractBackgroundArray</definition>
+        <argsstring>(std::vector&lt; double &gt; &amp;source, int const &amp;nsmooth=10)</argsstring>
+        <name>extractBackgroundArray</name>
+        <param>
+          <type>std::vector&lt; double &gt; &amp;</type>
+          <declname>source</declname>
+        </param>
+        <param>
+          <type>int const &amp;</type>
+          <declname>nsmooth</declname>
+          <defval>10</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/libRoot.hpp" line="833" column="15" bodyfile="lib/libRoot.hpp" bodystart="833" bodyend="840"/>
+        <references refid="_histogramor_8hpp_1ab48a2fa7184e6354788989602c8c8c29">print</references>
+      </memberdef>
+      <memberdef kind="function" id="namespace_co_analyse_1accb0147ca7573fc7dade0af93673a4e3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; double &gt;</type>
+        <definition>std::vector&lt;double&gt; CoAnalyse::extractBackgroundArray</definition>
+        <argsstring>(TH1F *histo, int const &amp;nsmooth=10)</argsstring>
+        <name>extractBackgroundArray</name>
+        <param>
+          <type>TH1F *</type>
+          <declname>histo</declname>
+        </param>
+        <param>
+          <type>int const &amp;</type>
+          <declname>nsmooth</declname>
+          <defval>10</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/libRoot.hpp" line="842" column="15" bodyfile="lib/libRoot.hpp" bodystart="842" bodyend="850"/>
+        <references refid="_histogramor_8hpp_1ab48a2fa7184e6354788989602c8c8c29">print</references>
+      </memberdef>
+      <memberdef kind="function" id="namespace_co_analyse_1a9585a7922e83dcea10f06211868846bc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void CoAnalyse::normalizeBidim</definition>
+        <argsstring>(TH2 *matrix, double const &amp;factor=1.0)</argsstring>
+        <name>normalizeBidim</name>
+        <param>
+          <type>TH2 *</type>
+          <declname>matrix</declname>
+        </param>
+        <param>
+          <type>double const &amp;</type>
+          <declname>factor</declname>
+          <defval>1.0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/libRoot.hpp" line="444" column="8" bodyfile="lib/libRoot.hpp" bodystart="444" bodyend="454"/>
+      </memberdef>
+      <memberdef kind="function" id="namespace_co_analyse_1ab71a4903cf3d3c32f35262dab10a82e3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void CoAnalyse::normalizeY</definition>
+        <argsstring>(TH2 *matrix, double const &amp;factor=1)</argsstring>
+        <name>normalizeY</name>
+        <param>
+          <type>TH2 *</type>
+          <declname>matrix</declname>
+        </param>
+        <param>
+          <type>double const &amp;</type>
+          <declname>factor</declname>
+          <defval>1</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/libRoot.hpp" line="427" column="8" bodyfile="lib/libRoot.hpp" bodystart="427" bodyend="442"/>
+      </memberdef>
+      <memberdef kind="function" id="namespace_co_analyse_1a53744e2ddfba6a4a188ada9ed1bc6272" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void CoAnalyse::projectX</definition>
+        <argsstring>(TH2 *matrix, TH1 *proj)</argsstring>
+        <name>projectX</name>
+        <param>
+          <type>TH2 *</type>
+          <declname>matrix</declname>
+        </param>
+        <param>
+          <type>TH1 *</type>
+          <declname>proj</declname>
+        </param>
+        <briefdescription>
+<para>Total projection on X axis. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/libRoot.hpp" line="584" column="8" bodyfile="lib/libRoot.hpp" bodystart="584" bodyend="591"/>
+        <references refid="lib_root_8hpp_1a0269226b4d78b1089ef77180712147e0" compoundref="lib_root_8hpp" startline="76" endline="79">maxXaxis</references>
+        <references refid="lib_root_8hpp_1ab23c9fed2f973bde045e7d90c8e1f2fe" compoundref="lib_root_8hpp" startline="71" endline="74">minXaxis</references>
+        <references refid="lib_co_8hpp_1a6df2dcd4b1f61c75dc292942bc5ca74d" compoundref="lib_co_8hpp" startline="234" endline="234">throw_error</references>
+        <referencedby refid="namespace_co_analyse_1a2d7393e48336effee246cbbc33822847" compoundref="lib_root_8hpp" startline="615" endline="618">projectX</referencedby>
+        <referencedby refid="namespace_co_analyse_1aeb2cc17685bbda3b8531803c4d8cc5c8" compoundref="lib_root_8hpp" startline="864" endline="925">removeBackground</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="namespace_co_analyse_1a2d7393e48336effee246cbbc33822847" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void CoAnalyse::projectX</definition>
+        <argsstring>(TH2 *matrix, TH1 *proj, double const &amp;binYmin, double const &amp;binYmax)</argsstring>
+        <name>projectX</name>
+        <param>
+          <type>TH2 *</type>
+          <declname>matrix</declname>
+        </param>
+        <param>
+          <type>TH1 *</type>
+          <declname>proj</declname>
+        </param>
+        <param>
+          <type>double const &amp;</type>
+          <declname>binYmin</declname>
+        </param>
+        <param>
+          <type>double const &amp;</type>
+          <declname>binYmax</declname>
+        </param>
+        <briefdescription>
+<para>Project on Y axis between values binYmin and binYmax included [binYmin;binYmax]. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/libRoot.hpp" line="615" column="8" bodyfile="lib/libRoot.hpp" bodystart="615" bodyend="618"/>
+        <references refid="namespace_co_analyse_1a53744e2ddfba6a4a188ada9ed1bc6272" compoundref="lib_root_8hpp" startline="584" endline="591">projectX</references>
+      </memberdef>
+      <memberdef kind="function" id="namespace_co_analyse_1a0158170fa443490d844333c1acd9a89a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void CoAnalyse::projectX</definition>
+        <argsstring>(TH2 *matrix, TH1 *proj, int const &amp;binY)</argsstring>
+        <name>projectX</name>
+        <param>
+          <type>TH2 *</type>
+          <declname>matrix</declname>
+        </param>
+        <param>
+          <type>TH1 *</type>
+          <declname>proj</declname>
+        </param>
+        <param>
+          <type>int const &amp;</type>
+          <declname>binY</declname>
+        </param>
+        <briefdescription>
+<para>Project on Y axis at a given X bin. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/libRoot.hpp" line="594" column="8" bodyfile="lib/libRoot.hpp" bodystart="594" bodyend="601"/>
+        <references refid="lib_root_8hpp_1a0269226b4d78b1089ef77180712147e0" compoundref="lib_root_8hpp" startline="76" endline="79">maxXaxis</references>
+        <references refid="lib_root_8hpp_1ab23c9fed2f973bde045e7d90c8e1f2fe" compoundref="lib_root_8hpp" startline="71" endline="74">minXaxis</references>
+        <references refid="lib_co_8hpp_1a6df2dcd4b1f61c75dc292942bc5ca74d" compoundref="lib_co_8hpp" startline="234" endline="234">throw_error</references>
+      </memberdef>
+      <memberdef kind="function" id="namespace_co_analyse_1aa27f433db27fe9babd4c55421121556d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void CoAnalyse::projectX</definition>
+        <argsstring>(TH2 *matrix, TH1 *proj, int const &amp;binYmin, int const &amp;binYmax)</argsstring>
+        <name>projectX</name>
+        <param>
+          <type>TH2 *</type>
+          <declname>matrix</declname>
+        </param>
+        <param>
+          <type>TH1 *</type>
+          <declname>proj</declname>
+        </param>
+        <param>
+          <type>int const &amp;</type>
+          <declname>binYmin</declname>
+        </param>
+        <param>
+          <type>int const &amp;</type>
+          <declname>binYmax</declname>
+        </param>
+        <briefdescription>
+<para>Project on X axis between bin binYmin included and binYmax excluded [binYmin;binYmax[. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/libRoot.hpp" line="604" column="8" bodyfile="lib/libRoot.hpp" bodystart="604" bodyend="612"/>
+        <references refid="lib_root_8hpp_1a0269226b4d78b1089ef77180712147e0" compoundref="lib_root_8hpp" startline="76" endline="79">maxXaxis</references>
+        <references refid="lib_root_8hpp_1ab23c9fed2f973bde045e7d90c8e1f2fe" compoundref="lib_root_8hpp" startline="71" endline="74">minXaxis</references>
+        <references refid="lib_co_8hpp_1a6df2dcd4b1f61c75dc292942bc5ca74d" compoundref="lib_co_8hpp" startline="234" endline="234">throw_error</references>
+      </memberdef>
+      <memberdef kind="function" id="namespace_co_analyse_1ab64c2bb160dbdc01836274235d0bbd3b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void CoAnalyse::projectY</definition>
+        <argsstring>(TH2 *matrix, TH1 *proj, double const &amp;valueXmin, double const &amp;valueXmax)</argsstring>
+        <name>projectY</name>
+        <param>
+          <type>TH2 *</type>
+          <declname>matrix</declname>
+        </param>
+        <param>
+          <type>TH1 *</type>
+          <declname>proj</declname>
+        </param>
+        <param>
+          <type>double const &amp;</type>
+          <declname>valueXmin</declname>
+        </param>
+        <param>
+          <type>double const &amp;</type>
+          <declname>valueXmax</declname>
+        </param>
+        <briefdescription>
+<para>Project on Y axis between values valueXmin and valueXmax included [valueXmin;valueXmax]. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/libRoot.hpp" line="478" column="8" bodyfile="lib/libRoot.hpp" bodystart="478" bodyend="481"/>
+        <references refid="namespace_co_analyse_1abecf48371e430ad0cc8dfb063e6d951d" compoundref="lib_root_8hpp" startline="457" endline="464">projectY</references>
+      </memberdef>
+      <memberdef kind="function" id="namespace_co_analyse_1abecf48371e430ad0cc8dfb063e6d951d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void CoAnalyse::projectY</definition>
+        <argsstring>(TH2 *matrix, TH1 *proj, int const &amp;binX)</argsstring>
+        <name>projectY</name>
+        <param>
+          <type>TH2 *</type>
+          <declname>matrix</declname>
+        </param>
+        <param>
+          <type>TH1 *</type>
+          <declname>proj</declname>
+        </param>
+        <param>
+          <type>int const &amp;</type>
+          <declname>binX</declname>
+        </param>
+        <briefdescription>
+<para>Project on Y axis at a given X bin. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/libRoot.hpp" line="457" column="8" bodyfile="lib/libRoot.hpp" bodystart="457" bodyend="464"/>
+        <references refid="lib_root_8hpp_1ada9d5d265d78076b2e7fb980a09c71b0" compoundref="lib_root_8hpp" startline="86" endline="89">maxYaxis</references>
+        <references refid="lib_root_8hpp_1a6ce1f9927b8e99f76cbda975fb51adcf" compoundref="lib_root_8hpp" startline="81" endline="84">minYaxis</references>
+        <references refid="lib_co_8hpp_1a6df2dcd4b1f61c75dc292942bc5ca74d" compoundref="lib_co_8hpp" startline="234" endline="234">throw_error</references>
+        <referencedby refid="namespace_co_analyse_1ab64c2bb160dbdc01836274235d0bbd3b" compoundref="lib_root_8hpp" startline="478" endline="481">projectY</referencedby>
+        <referencedby refid="namespace_co_analyse_1aeb2cc17685bbda3b8531803c4d8cc5c8" compoundref="lib_root_8hpp" startline="864" endline="925">removeBackground</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="namespace_co_analyse_1aa19f9a517f5a4ce70e61ebed3cfeecf9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void CoAnalyse::projectY</definition>
+        <argsstring>(TH2 *matrix, TH1 *proj, int const &amp;binXmin, int const &amp;binXmax)</argsstring>
+        <name>projectY</name>
+        <param>
+          <type>TH2 *</type>
+          <declname>matrix</declname>
+        </param>
+        <param>
+          <type>TH1 *</type>
+          <declname>proj</declname>
+        </param>
+        <param>
+          <type>int const &amp;</type>
+          <declname>binXmin</declname>
+        </param>
+        <param>
+          <type>int const &amp;</type>
+          <declname>binXmax</declname>
+        </param>
+        <briefdescription>
+<para>Project on Y axis between bin binXmin included and binXmax excluded [binXmin;binXmax[. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/libRoot.hpp" line="467" column="8" bodyfile="lib/libRoot.hpp" bodystart="467" bodyend="475"/>
+        <references refid="lib_root_8hpp_1ada9d5d265d78076b2e7fb980a09c71b0" compoundref="lib_root_8hpp" startline="86" endline="89">maxYaxis</references>
+        <references refid="lib_root_8hpp_1a6ce1f9927b8e99f76cbda975fb51adcf" compoundref="lib_root_8hpp" startline="81" endline="84">minYaxis</references>
+        <references refid="lib_co_8hpp_1a6df2dcd4b1f61c75dc292942bc5ca74d" compoundref="lib_co_8hpp" startline="234" endline="234">throw_error</references>
+      </memberdef>
+      <memberdef kind="function" id="namespace_co_analyse_1aeb2cc17685bbda3b8531803c4d8cc5c8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void CoAnalyse::removeBackground</definition>
+        <argsstring>(TH1 *histo, int const &amp;niter=10, std::string const &amp;fit_options=&quot;&quot;, std::string const &amp;bidim_options=&quot;X&quot;)</argsstring>
+        <name>removeBackground</name>
+        <param>
+          <type>TH1 *</type>
+          <declname>histo</declname>
+        </param>
+        <param>
+          <type>int const &amp;</type>
+          <declname>niter</declname>
+          <defval>10</defval>
+        </param>
+        <param>
+          <type>std::string const &amp;</type>
+          <declname>fit_options</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <param>
+          <type>std::string const &amp;</type>
+          <declname>bidim_options</declname>
+          <defval>&quot;X&quot;</defval>
+        </param>
+        <briefdescription>
+<para>Remove the background in the given histo. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>histo</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Can be TH1 or TH2 histogram </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>niter</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Choose a higher number of iterations if the peaks have high resultion (5-10 for LaBr3, 20 for Ge) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>fit_options</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>options from TH1::ShowBackground </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>bidim_options</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><itemizedlist>
+<listitem><para>&quot;X&quot; (default) : Loop through the X bins, find the background on the Y projection</para>
+</listitem><listitem><para>&quot;Y&quot; : Loop through the Y bins, find the background on the X projection</para>
+</listitem><listitem><para>&quot;S&quot; (symmetric): Loop through the X bins, find the background on the Y projection, then symmetrise the bidim </para>
+</listitem></itemizedlist>
+</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/libRoot.hpp" line="864" column="8" bodyfile="lib/libRoot.hpp" bodystart="864" bodyend="925"/>
+        <references refid="_histogramor_8hpp_1ab48a2fa7184e6354788989602c8c8c29">print</references>
+        <references refid="namespace_co_analyse_1a53744e2ddfba6a4a188ada9ed1bc6272" compoundref="lib_root_8hpp" startline="584" endline="591">projectX</references>
+        <references refid="namespace_co_analyse_1abecf48371e430ad0cc8dfb063e6d951d" compoundref="lib_root_8hpp" startline="457" endline="464">projectY</references>
+        <references refid="namespace_co_analyse_1ad13b7eeaa3d7d9a30cdf04a8b0d17088" compoundref="lib_root_8hpp" startline="576" endline="581">setX</references>
+        <references refid="namespace_co_analyse_1ac1aa3fcfcc46318e4f0d6f42510471a0" compoundref="lib_root_8hpp" startline="620" endline="625">setY</references>
+        <referencedby refid="class_histo_analyse_1a32a4ee17c51884e01eb924cec2c42112" compoundref="_histo_analyse_8hpp" startline="58" endline="61">HistoAnalyse&lt; THist &gt;::removeBackground</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="namespace_co_analyse_1a2a89fce5d95da5f0448d4a9fba93a108" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void CoAnalyse::removeRandomBidim</definition>
+        <argsstring>(TH2 *matrix, int iterations=1, bool save_intermediate=false, ProjectionsBins projectionsY={{}}, ProjectionsBins projectionsX={{}})</argsstring>
+        <name>removeRandomBidim</name>
+        <param>
+          <type>TH2 *</type>
+          <declname>matrix</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>iterations</declname>
+          <defval>1</defval>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>save_intermediate</declname>
+          <defval>false</defval>
+        </param>
+        <param>
+          <type><ref refid="namespace_co_analyse_1a0c12c2535bb054631b3b0304a1dc9a34" kindref="member">ProjectionsBins</ref></type>
+          <declname>projectionsY</declname>
+          <defval>{{}}</defval>
+        </param>
+        <param>
+          <type><ref refid="namespace_co_analyse_1a0c12c2535bb054631b3b0304a1dc9a34" kindref="member">ProjectionsBins</ref></type>
+          <declname>projectionsX</declname>
+          <defval>{{}}</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/libRoot.hpp" line="627" column="8" bodyfile="lib/libRoot.hpp" bodystart="627" bodyend="830"/>
+      </memberdef>
+      <memberdef kind="function" id="namespace_co_analyse_1ab8af94a11fa0979cbaf83228dfc1675e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void CoAnalyse::removeRandomY</definition>
+        <argsstring>(TH2 *matrix, int _stopX=-1, int _stopY=-1, bool writeIntermediate=false, ProjectionsBins projections={{}})</argsstring>
+        <name>removeRandomY</name>
+        <param>
+          <type>TH2 *</type>
+          <declname>matrix</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>_stopX</declname>
+          <defval>-1</defval>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>_stopY</declname>
+          <defval>-1</defval>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>writeIntermediate</declname>
+          <defval>false</defval>
+        </param>
+        <param>
+          <type><ref refid="namespace_co_analyse_1a0c12c2535bb054631b3b0304a1dc9a34" kindref="member">ProjectionsBins</ref></type>
+          <declname>projections</declname>
+          <defval>{{}}</defval>
+        </param>
+        <briefdescription>
+<para>LEGACY. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/libRoot.hpp" line="484" column="8" bodyfile="lib/libRoot.hpp" bodystart="484" bodyend="574"/>
+      </memberdef>
+      <memberdef kind="function" id="namespace_co_analyse_1ad13b7eeaa3d7d9a30cdf04a8b0d17088" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void CoAnalyse::setX</definition>
+        <argsstring>(TH2 *matrix, TH1 *proj, int const &amp;binX)</argsstring>
+        <name>setX</name>
+        <param>
+          <type>TH2 *</type>
+          <declname>matrix</declname>
+        </param>
+        <param>
+          <type>TH1 *</type>
+          <declname>proj</declname>
+        </param>
+        <param>
+          <type>int const &amp;</type>
+          <declname>binX</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/libRoot.hpp" line="576" column="8" bodyfile="lib/libRoot.hpp" bodystart="576" bodyend="581"/>
+        <references refid="lib_co_8hpp_1a6df2dcd4b1f61c75dc292942bc5ca74d" compoundref="lib_co_8hpp" startline="234" endline="234">throw_error</references>
+        <referencedby refid="namespace_co_analyse_1aeb2cc17685bbda3b8531803c4d8cc5c8" compoundref="lib_root_8hpp" startline="864" endline="925">removeBackground</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="namespace_co_analyse_1ac1aa3fcfcc46318e4f0d6f42510471a0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void CoAnalyse::setY</definition>
+        <argsstring>(TH2 *matrix, TH1 *proj, int const &amp;binY)</argsstring>
+        <name>setY</name>
+        <param>
+          <type>TH2 *</type>
+          <declname>matrix</declname>
+        </param>
+        <param>
+          <type>TH1 *</type>
+          <declname>proj</declname>
+        </param>
+        <param>
+          <type>int const &amp;</type>
+          <declname>binY</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/libRoot.hpp" line="620" column="8" bodyfile="lib/libRoot.hpp" bodystart="620" bodyend="625"/>
+        <references refid="lib_co_8hpp_1a6df2dcd4b1f61c75dc292942bc5ca74d" compoundref="lib_co_8hpp" startline="234" endline="234">throw_error</references>
+        <referencedby refid="namespace_co_analyse_1aeb2cc17685bbda3b8531803c4d8cc5c8" compoundref="lib_root_8hpp" startline="864" endline="925">removeBackground</referencedby>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="lib/libRoot.hpp" line="424" column="1"/>
+  </compounddef>
+</doxygen>

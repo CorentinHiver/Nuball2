@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__r_w_mat_8hxx" xml:lang="en-US">
+<title>lib/Classes/RWMat.hxx File Reference</title>
+<indexterm><primary>lib/Classes/RWMat.hxx</primary></indexterm>
+<programlisting>#include &lt;math.h&gt;
+#include &lt;vector&gt;
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;cstdlib&gt;
+#include &lt;fstream&gt;
+#include &lt;sstream&gt;
+#include &lt;iomanip&gt;
+#include &quot;TH2F.h&quot;
+#include &quot;../libCo.hpp&quot;
+</programlisting>Include dependency graph for RWMat.hxx:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="_r_w_mat_8hxx__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>class <link linkend="_class_r_w_mat">RWMat</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>

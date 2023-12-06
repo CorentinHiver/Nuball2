@@ -67,6 +67,6 @@ var class_sorted___event =
     [ "PromptMult", "class_sorted___event.html#a81716b8c8388f1851d60f9303b222d3a", null ],
     [ "RawGeMult", "class_sorted___event.html#a87e18e85b327bc463a15d2d1f8ae2c5c", null ],
     [ "RawMult", "class_sorted___event.html#a305216fefa6fd71376e828702590fb82", null ],
-    [ "time_clover", "class_sorted___event.html#ac44a4857dde092f1b32fdcdf9c8679e1", null ],
-    [ "times", "class_sorted___event.html#a4f11a5b37427640f215d6d279b5def52", null ]
+    [ "time2s", "class_sorted___event.html#a92097f7b335c6b79b7ef068f555dcddc", null ],
+    [ "time_clover", "class_sorted___event.html#ac44a4857dde092f1b32fdcdf9c8679e1", null ]
 ];

@@ -115,16 +115,20 @@ public:
 
   Faster2Root() {}
 
-  Faster2Root(int argc, char** argv, Trigger trigger = [](const Event&) { return true; });
+  Faster2Root(int argc, char** argv) {load(argc, argv);}
+  Faster2Root(int argc, char** argv, Trigger trigger )
+  {
+    setTrigger(trigger);
+    load(argc, argv);
+  }
 
   /// @brief Raw conversion :
+  /// @deprecated
   Faster2Root(Path const & inputFolder, Path const & outputFolder, int const & nb_files = -1, bool const & buildEvents = false) 
   {// Raw convertor : no time shift nor energy calibration
     m_ok = true;
     Timer timer;
-
     this -> buildEvents(buildEvents);
-    
     this -> setNbFiles(nb_files);
     this -> convert(inputFolder, outputFolder);
 
@@ -147,10 +151,12 @@ public:
 
   void convert(std::string const & dataFolder, std::string const & outputFolder, int const & nb_files = -1);
 
-  void setTrigger(std::function<bool(const Event&)> other) {m_trigger = other;}
+  void setTrigger(std::function<bool(const Event&)> other) {m_trigger = other; m_use_trigger = true;}
   void loadTriggerFile(std::string const & file);
+  void throwSingles(bool const & _throw_single = true) {m_throw_single = _throw_single;}
 
 protected:
+  void load(int argc, char** argv);
   static void s_convertFile(Hit & hit, FasterReader & reader, 
                             Faster2Root & convertor, Path const & outPath) 
   {convertor.convertFile(hit, reader, outPath);}
@@ -170,6 +176,7 @@ protected:
   bool m_overwrite = false;
   bool m_ok = false;
   bool m_use_RF = false;
+  bool m_use_trigger = false;
   std::string m_trigger_file;
   bool m_loaded_trigger = false;
 
@@ -177,7 +184,7 @@ protected:
   MTCounter m_total_events;
   MTCounter m_trigg_events;
   Timer m_total_timer;
-  std::function<bool(const Event&)> m_trigger;
+  std::function<bool(const Event&)> m_trigger = [](const Event&) { return true; };
   std::vector<Label> m_triggering_labels;
 };
 
@@ -195,29 +202,12 @@ void Faster2Root::printParameters() const
   print("-n [hits_number]       : Choose the number of hits to read inside a file");
   print("-m [threads_number]    : Choose the number of files to treat in parallel");
   print("-t [time_window_ns]    : Loads timeshift data");
-  print("--throw-single         : If you are not interested in single hits");
+  print("--throw-singles        : If you are not interested in single hits");
   print("--trigger [filename]   : Load a trigger file (look at documentation)");
   exit(1);
 }
 
-void Faster2Root::loadTriggerFile(std::string const & filename)
-{
-  std::ifstream file((m_trigger_file = filename), std::ios::in);
-  std::string line;
-  while(getline(file, line)) m_triggering_labels.push_back(std::stoi(line));
-  m_trigger = [this](Event const & event)
-  {
-    // print("coucou", m_triggering_labels);
-    for (int hit_i = 0; hit_i<event.mult; hit_i++)
-    {
-      if (found(m_triggering_labels, event.labels[hit_i])) return true;
-    }
-    return false;
-  };
-  m_loaded_trigger = true;
-}
-
-Faster2Root::Faster2Root(int argc, char** argv, Trigger trigger)
+void Faster2Root::load(int argc, char** argv)
 {
   // Handle the case of not enough parameters (0 or 1) and print the parameters :
   if (argc<3) 
@@ -225,9 +215,6 @@ Faster2Root::Faster2Root(int argc, char** argv, Trigger trigger)
     print("Not enough parameters !!!");
     printParameters();
   }
-
-  // Loads the trigger :
-  m_trigger = trigger;
 
   // Path of the input data :
   Path dataPath = argv [1];
@@ -259,9 +246,9 @@ Faster2Root::Faster2Root(int argc, char** argv, Trigger trigger)
     print("This combination of time alignement without event building is not handled");
     throw_error(error_message["DEV"]);
   }
-  if (m_loaded_trigger && !m_eventbuilding)
+  if (m_use_trigger && !m_eventbuilding)
   {
-    throw_error("Can't use a trigger without event building !");
+    throw_error("Can't use a trigger without event building ! Use parameter -e [time_window_ns] or method Faster2Root::buildEvents(time_window_ns).");
   }
 
   // Perform initialisations :
@@ -276,6 +263,22 @@ Faster2Root::Faster2Root(int argc, char** argv, Trigger trigger)
   if (m_eventbuilding) print(m_total_events/m_total_timer.TimeSec()*1.E-6, "Mevts/s");
 }
 
+void Faster2Root::loadTriggerFile(std::string const & filename)
+{
+  std::ifstream file((m_trigger_file = filename), std::ios::in);
+  std::string line;
+  while(getline(file, line)) m_triggering_labels.push_back(std::stoi(line));
+  setTrigger([this](Event const & event)
+  {
+    // print("coucou", m_triggering_labels);
+    for (int hit_i = 0; hit_i<event.mult; hit_i++)
+    {
+      if (found(m_triggering_labels, event.labels[hit_i])) return true;
+    }
+    return false;
+  });
+  m_loaded_trigger = true;
+}
 
 void Faster2Root::convert(std::string const & dataFolder, std::string const & outputFolder, int const & nb_files)
 {
@@ -323,6 +326,7 @@ void Faster2Root::convertFile(Hit & hit, FasterReader & reader, Path const & out
   if (m_calibration) tree -> SetTitle((tree->GetTitle()+std::string(" with calibration")).c_str());
   if (m_timeshifts)  tree -> SetTitle((tree->GetTitle()+std::string(" with timeshifts" )).c_str());
   if (m_loaded_trigger)  tree -> SetTitle((tree->GetTitle()+std::string(" with trigger loaded from ") + m_trigger_file).c_str());
+  else if (m_use_trigger) tree -> SetTitle((tree->GetTitle()+std::string(" with user defined trigger")).c_str());
 
 // Read faster data to fill the memory resident tree :
   while(reader.Read())
@@ -330,8 +334,8 @@ void Faster2Root::convertFile(Hit & hit, FasterReader & reader, Path const & out
     if (m_timeshifts) hit.stamp += m_timeshifts[hit.label];
     if (m_calibration)
     {
-      hit.nrj  = m_calibration(hit.adc,hit.label);
-      hit.nrj2 = m_calibration(hit.qdc2,hit.label);
+      hit.nrj  = m_calibration(hit.adc, hit.label);
+      hit.nrj2 = (hit.qdc2==0) ? m_calibration(hit.qdc2, hit.label) : 0.0;
     }
     if (m_eventbuilding) tempTree -> Fill();
     else
@@ -361,6 +365,8 @@ void Faster2Root::convertFile(Hit & hit, FasterReader & reader, Path const & out
       if (builder.build(hit)) 
       {
         ++evts;
+        print(event);
+        pauseCo();
         if(m_trigger(event)) 
         {
           ++evts_trigg;

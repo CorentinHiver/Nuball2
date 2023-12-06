@@ -1,0 +1,316 @@
+\doxysection{DSSD Class Reference}
+\label{class_d_s_s_d}\index{DSSD@{DSSD}}
+
+
+{\ttfamily \#include $<$DSSD.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+auto const  \& \textbf{ angle} () const
+\begin{DoxyCompactList}\small\item\em Don\textquotesingle{}t return any angle but really the label of the ring. \end{DoxyCompactList}\item 
+auto \textbf{ begin} () const
+\item 
+\textbf{ DSSD} ()
+\item 
+auto \textbf{ end} () const
+\item 
+auto const  \& \textbf{ energy} () const
+\item 
+void \textbf{ Fill} (\textbf{ Event} const \&evt, int const \&index)
+\item 
+bool \textbf{ one\+Particle} () const
+\item 
+void \textbf{ Reset} ()
+\item 
+auto \textbf{ rings} () const
+\item 
+auto \textbf{ sectors} () const
+\item 
+void \textbf{ Set\+Event} (\textbf{ Event} const \&event)
+\item 
+auto const  \& \textbf{ time} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \textbf{ Initialize\+Arrays} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ \textbf{ uchar} $>$ \textbf{ m\+\_\+\+Ring\+\_\+\+Hits} = std\+::vector$<$\textbf{ uchar}$>$(\textbf{ nb\+\_\+rings})
+\item 
+std\+::vector$<$ \textbf{ uchar} $>$ \textbf{ m\+\_\+\+Sector\+\_\+\+Hits} = std\+::vector$<$\textbf{ uchar}$>$(\textbf{ nb\+\_\+sectors})
+\item 
+\textbf{ std\+::size\+\_\+t} \textbf{ Ring\+Mult} = 0u
+\item 
+std\+::vector$<$ \textbf{ Si\+Strip} $>$ \textbf{ Rings}
+\item 
+\textbf{ std\+::size\+\_\+t} \textbf{ Sector\+Mult} = 0u
+\item 
+std\+::vector$<$ \textbf{ Si\+Strip} $>$ \textbf{ Sectors}
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::array$<$ \textbf{ uchar}, 1000 $>$ \textbf{ indexes} = \{255\}
+\item 
+static std\+::array$<$ bool, 1000 $>$ \textbf{ is\+Ring} = \{0\}
+\item 
+static std\+::array$<$ bool, 1000 $>$ \textbf{ is\+S1} = \{0\}
+\item 
+static std\+::array$<$ bool, 1000 $>$ \textbf{ is\+S2} = \{0\}
+\item 
+static std\+::array$<$ bool, 1000 $>$ \textbf{ is\+Sector} = \{0\}
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static bool \textbf{ s\+\_\+initialized} = false
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\label{class_d_s_s_d_ad4a5a45596071c4625903146f32737ff}} 
+\index{DSSD@{DSSD}!DSSD@{DSSD}}
+\index{DSSD@{DSSD}!DSSD@{DSSD}}
+\doxysubsubsection{DSSD()}
+{\footnotesize\ttfamily DSSD\+::\+DSSD (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_d_s_s_d_ad4a5a45596071c4625903146f32737ff_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\label{class_d_s_s_d_a37ab599b24b18a5555f79f73ee241277}} 
+\index{DSSD@{DSSD}!angle@{angle}}
+\index{angle@{angle}!DSSD@{DSSD}}
+\doxysubsubsection{angle()}
+{\footnotesize\ttfamily auto const\& DSSD\+::angle (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Don\textquotesingle{}t return any angle but really the label of the ring. 
+
+\mbox{\label{class_d_s_s_d_a075c89fd3226bf59dab1af979c97eb72}} 
+\index{DSSD@{DSSD}!begin@{begin}}
+\index{begin@{begin}!DSSD@{DSSD}}
+\doxysubsubsection{begin()}
+{\footnotesize\ttfamily auto DSSD\+::begin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_d_s_s_d_a7c150f5f5df303fee55e0d61510bf2dc}} 
+\index{DSSD@{DSSD}!end@{end}}
+\index{end@{end}!DSSD@{DSSD}}
+\doxysubsubsection{end()}
+{\footnotesize\ttfamily auto DSSD\+::end (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_d_s_s_d_ad5b43b9d37891e7df30532ca29b3d19e}} 
+\index{DSSD@{DSSD}!energy@{energy}}
+\index{energy@{energy}!DSSD@{DSSD}}
+\doxysubsubsection{energy()}
+{\footnotesize\ttfamily auto const\& DSSD\+::energy (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_d_s_s_d_aeb787f13de411a3e801360d85c6ed00b}} 
+\index{DSSD@{DSSD}!Fill@{Fill}}
+\index{Fill@{Fill}!DSSD@{DSSD}}
+\doxysubsubsection{Fill()}
+{\footnotesize\ttfamily void DSSD\+::\+Fill (\begin{DoxyParamCaption}\item[{\textbf{ Event} const \&}]{evt,  }\item[{int const \&}]{index }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=252pt]{class_d_s_s_d_aeb787f13de411a3e801360d85c6ed00b_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=273pt]{class_d_s_s_d_aeb787f13de411a3e801360d85c6ed00b_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_d_s_s_d_a800770306a115e1096108cef2463a103}} 
+\index{DSSD@{DSSD}!InitializeArrays@{InitializeArrays}}
+\index{InitializeArrays@{InitializeArrays}!DSSD@{DSSD}}
+\doxysubsubsection{InitializeArrays()}
+{\footnotesize\ttfamily static void DSSD\+::\+Initialize\+Arrays (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=308pt]{class_d_s_s_d_a800770306a115e1096108cef2463a103_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=316pt]{class_d_s_s_d_a800770306a115e1096108cef2463a103_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_d_s_s_d_a46c68fcb7d0d1da868173aa028fdb4f3}} 
+\index{DSSD@{DSSD}!oneParticle@{oneParticle}}
+\index{oneParticle@{oneParticle}!DSSD@{DSSD}}
+\doxysubsubsection{oneParticle()}
+{\footnotesize\ttfamily bool DSSD\+::one\+Particle (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=305pt]{class_d_s_s_d_a46c68fcb7d0d1da868173aa028fdb4f3_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_d_s_s_d_a020959f351a871517e9eb50f08ca7be3}} 
+\index{DSSD@{DSSD}!Reset@{Reset}}
+\index{Reset@{Reset}!DSSD@{DSSD}}
+\doxysubsubsection{Reset()}
+{\footnotesize\ttfamily void DSSD\+::\+Reset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=286pt]{class_d_s_s_d_a020959f351a871517e9eb50f08ca7be3_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_d_s_s_d_ac2bda0d8a0742f3bd791c6b6cc1cf497}} 
+\index{DSSD@{DSSD}!rings@{rings}}
+\index{rings@{rings}!DSSD@{DSSD}}
+\doxysubsubsection{rings()}
+{\footnotesize\ttfamily auto DSSD\+::rings (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=294pt]{class_d_s_s_d_ac2bda0d8a0742f3bd791c6b6cc1cf497_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_d_s_s_d_a26c1a50b850b574ffaf0563f27416509}} 
+\index{DSSD@{DSSD}!sectors@{sectors}}
+\index{sectors@{sectors}!DSSD@{DSSD}}
+\doxysubsubsection{sectors()}
+{\footnotesize\ttfamily auto DSSD\+::sectors (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=305pt]{class_d_s_s_d_a26c1a50b850b574ffaf0563f27416509_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_d_s_s_d_adbafd9e43e099f49d3c47b8e597a8926}} 
+\index{DSSD@{DSSD}!SetEvent@{SetEvent}}
+\index{SetEvent@{SetEvent}!DSSD@{DSSD}}
+\doxysubsubsection{SetEvent()}
+{\footnotesize\ttfamily void DSSD\+::\+Set\+Event (\begin{DoxyParamCaption}\item[{\textbf{ Event} const \&}]{event }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_d_s_s_d_adbafd9e43e099f49d3c47b8e597a8926_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_d_s_s_d_af76c53f9a2c3a980ea9d3f598e8afde7}} 
+\index{DSSD@{DSSD}!time@{time}}
+\index{time@{time}!DSSD@{DSSD}}
+\doxysubsubsection{time()}
+{\footnotesize\ttfamily auto const\& DSSD\+::time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_d_s_s_d_af76c53f9a2c3a980ea9d3f598e8afde7_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\label{class_d_s_s_d_adb11dca39569b2d7ef71f731354ae73c}} 
+\index{DSSD@{DSSD}!indexes@{indexes}}
+\index{indexes@{indexes}!DSSD@{DSSD}}
+\doxysubsubsection{indexes}
+{\footnotesize\ttfamily std\+::array$<$ \textbf{ uchar}, 1000 $>$ DSSD\+::indexes = \{255\}\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\label{class_d_s_s_d_afeab248c862447291a003301c354feea}} 
+\index{DSSD@{DSSD}!isRing@{isRing}}
+\index{isRing@{isRing}!DSSD@{DSSD}}
+\doxysubsubsection{isRing}
+{\footnotesize\ttfamily std\+::array$<$ bool, 1000 $>$ DSSD\+::is\+Ring = \{0\}\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\label{class_d_s_s_d_aafcc60be25bd96add1fc81b67103d3a7}} 
+\index{DSSD@{DSSD}!isS1@{isS1}}
+\index{isS1@{isS1}!DSSD@{DSSD}}
+\doxysubsubsection{isS1}
+{\footnotesize\ttfamily std\+::array$<$ bool, 1000 $>$ DSSD\+::is\+S1 = \{0\}\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\label{class_d_s_s_d_a3a039862cf41c328d2d45b4e1770f943}} 
+\index{DSSD@{DSSD}!isS2@{isS2}}
+\index{isS2@{isS2}!DSSD@{DSSD}}
+\doxysubsubsection{isS2}
+{\footnotesize\ttfamily std\+::array$<$ bool, 1000 $>$ DSSD\+::is\+S2 = \{0\}\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\label{class_d_s_s_d_aaa3430553b90ea691874fe56fcb5b3db}} 
+\index{DSSD@{DSSD}!isSector@{isSector}}
+\index{isSector@{isSector}!DSSD@{DSSD}}
+\doxysubsubsection{isSector}
+{\footnotesize\ttfamily std\+::array$<$ bool, 1000 $>$ DSSD\+::is\+Sector = \{0\}\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\label{class_d_s_s_d_a22ef7a1a4978c25fb7f5f8f8b0ae6b57}} 
+\index{DSSD@{DSSD}!m\_Ring\_Hits@{m\_Ring\_Hits}}
+\index{m\_Ring\_Hits@{m\_Ring\_Hits}!DSSD@{DSSD}}
+\doxysubsubsection{m\_Ring\_Hits}
+{\footnotesize\ttfamily std\+::vector$<$\textbf{ uchar}$>$ DSSD\+::m\+\_\+\+Ring\+\_\+\+Hits = std\+::vector$<$\textbf{ uchar}$>$(\textbf{ nb\+\_\+rings})}
+
+\mbox{\label{class_d_s_s_d_aa4c767b3f8a9088cc2ff6323ab6e0d80}} 
+\index{DSSD@{DSSD}!m\_Sector\_Hits@{m\_Sector\_Hits}}
+\index{m\_Sector\_Hits@{m\_Sector\_Hits}!DSSD@{DSSD}}
+\doxysubsubsection{m\_Sector\_Hits}
+{\footnotesize\ttfamily std\+::vector$<$\textbf{ uchar}$>$ DSSD\+::m\+\_\+\+Sector\+\_\+\+Hits = std\+::vector$<$\textbf{ uchar}$>$(\textbf{ nb\+\_\+sectors})}
+
+\mbox{\label{class_d_s_s_d_a28d8b2597e7458b29c399e701f048f17}} 
+\index{DSSD@{DSSD}!RingMult@{RingMult}}
+\index{RingMult@{RingMult}!DSSD@{DSSD}}
+\doxysubsubsection{RingMult}
+{\footnotesize\ttfamily \textbf{ std\+::size\+\_\+t} DSSD\+::\+Ring\+Mult = 0u}
+
+\mbox{\label{class_d_s_s_d_ac2048ed45b15c5d0c9b7eb749ea40cba}} 
+\index{DSSD@{DSSD}!Rings@{Rings}}
+\index{Rings@{Rings}!DSSD@{DSSD}}
+\doxysubsubsection{Rings}
+{\footnotesize\ttfamily std\+::vector$<$\textbf{ Si\+Strip}$>$ DSSD\+::\+Rings}
+
+\mbox{\label{class_d_s_s_d_a46729c39d700e850893f997a70bad813}} 
+\index{DSSD@{DSSD}!s\_initialized@{s\_initialized}}
+\index{s\_initialized@{s\_initialized}!DSSD@{DSSD}}
+\doxysubsubsection{s\_initialized}
+{\footnotesize\ttfamily bool DSSD\+::s\+\_\+initialized = false\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\mbox{\label{class_d_s_s_d_abfc71d4e8b153e59ffb4da0e60f91bd9}} 
+\index{DSSD@{DSSD}!SectorMult@{SectorMult}}
+\index{SectorMult@{SectorMult}!DSSD@{DSSD}}
+\doxysubsubsection{SectorMult}
+{\footnotesize\ttfamily \textbf{ std\+::size\+\_\+t} DSSD\+::\+Sector\+Mult = 0u}
+
+\mbox{\label{class_d_s_s_d_a0b3ccd3ac15793e4ac3037758a8c01da}} 
+\index{DSSD@{DSSD}!Sectors@{Sectors}}
+\index{Sectors@{Sectors}!DSSD@{DSSD}}
+\doxysubsubsection{Sectors}
+{\footnotesize\ttfamily std\+::vector$<$\textbf{ Si\+Strip}$>$ DSSD\+::\+Sectors}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+lib/\+Analyse/\textbf{ DSSD.\+hpp}\end{DoxyCompactItemize}

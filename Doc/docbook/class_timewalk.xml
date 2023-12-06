@@ -1,0 +1,187 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_class_timewalk" xml:lang="en-US">
+<title>Timewalk Class Reference</title>
+<indexterm><primary>Timewalk</primary></indexterm>
+<para>
+<computeroutput>#include &lt;Timewalk.hpp&gt;</computeroutput>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>float const  &amp; <link linkend="_class_timewalk_1aea302190deccd4d6e51c306db01e7341">get</link> (float const &amp;nrj)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_timewalk_1abe911d2d25eefb7886fe35c41f1d61db">loadFile</link> (std::string const &amp;filename)</para>
+</listitem>
+            <listitem><para>auto &amp; <link linkend="_class_timewalk_1acf3359a58961b4c14ea29bb542bb1a3c">operator[]</link> (int const &amp;i)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_timewalk_1a6f804cbc759f0980dce1aaee6cf5cd5a">Print</link> ()</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_timewalk_1a5a9bf52d569022f6260d820a8b070606">resize</link> ()</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_timewalk_1a760b5d3b33b49d022b4ba352f76de157">resize</link> (<link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> const &amp;size, float const &amp;value=0.)</para>
+</listitem>
+            <listitem><para><link linkend="_class_timewalk_1a7c5110fd80b5bdd2aa245f14451b9a41">Timewalk</link> ()</para>
+</listitem>
+            <listitem><para><link linkend="_class_timewalk_1ac6d66ef44ed399a2d12c24d083d71b3f">Timewalk</link> (std::string const &amp;filename)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Static Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>static float const  &amp; <link linkend="_class_timewalk_1abbe59aeb889198a2849c329ebcf15e0a">getMax</link> ()</para>
+</listitem>
+            <listitem><para>static void <link linkend="_class_timewalk_1a5fcb34cdafa277bc367708edfad4508d">setMax</link> (float const &amp;_max)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Private Attributes    </title>
+        <itemizedlist>
+            <listitem><para>bool <link linkend="_class_timewalk_1a4757707dc2702478007fd1aed630b5a7">isON</link></para>
+</listitem>
+            <listitem><para>float <link linkend="_class_timewalk_1a3f011c6087272a223f93ec9298ddc905">m_float_zero</link> = 0.</para>
+</listitem>
+            <listitem><para>float <link linkend="_class_timewalk_1a048a7979d8424c55ca0d545b3ec589d3">m_keVperBin</link> = 1.</para>
+</listitem>
+            <listitem><para>std::vector&lt; float &gt; <link linkend="_class_timewalk_1a38ee691b54eb47a48c43146d803a3e74">m_Timewalk</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Static Private Attributes    </title>
+        <itemizedlist>
+            <listitem><para>static float <link linkend="_class_timewalk_1a63ec5a22a054be2b6bd511e27cf46ef5">max</link> = 10000.f</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_class_timewalk_1a7c5110fd80b5bdd2aa245f14451b9a41"/>    <section>
+    <title>Timewalk()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>Timewalk</primary><secondary>Timewalk</secondary></indexterm>
+<indexterm><primary>Timewalk</primary><secondary>Timewalk</secondary></indexterm>
+<para><computeroutput>Timewalk::Timewalk ( )<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_timewalk_a7c5110fd80b5bdd2aa245f14451b9a41_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_timewalk_1ac6d66ef44ed399a2d12c24d083d71b3f"/>    <section>
+    <title>Timewalk()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>Timewalk</primary><secondary>Timewalk</secondary></indexterm>
+<indexterm><primary>Timewalk</primary><secondary>Timewalk</secondary></indexterm>
+<para><computeroutput>Timewalk::Timewalk (std::string const &amp; filename)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_timewalk_ac6d66ef44ed399a2d12c24d083d71b3f_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_class_timewalk_1aea302190deccd4d6e51c306db01e7341"/>    <section>
+    <title>get()</title>
+<indexterm><primary>get</primary><secondary>Timewalk</secondary></indexterm>
+<indexterm><primary>Timewalk</primary><secondary>get</secondary></indexterm>
+<para><computeroutput>float const  &amp; Timewalk::get (float const &amp; nrj)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_timewalk_1abbe59aeb889198a2849c329ebcf15e0a"/>    <section>
+    <title>getMax()</title>
+<indexterm><primary>getMax</primary><secondary>Timewalk</secondary></indexterm>
+<indexterm><primary>Timewalk</primary><secondary>getMax</secondary></indexterm>
+<para><computeroutput>static float const&amp; Timewalk::getMax ( )<computeroutput>[inline]</computeroutput>, <computeroutput>[static]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_timewalk_1abe911d2d25eefb7886fe35c41f1d61db"/>    <section>
+    <title>loadFile()</title>
+<indexterm><primary>loadFile</primary><secondary>Timewalk</secondary></indexterm>
+<indexterm><primary>Timewalk</primary><secondary>loadFile</secondary></indexterm>
+<para><computeroutput>void Timewalk::loadFile (std::string const &amp; filename)</computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_timewalk_abe911d2d25eefb7886fe35c41f1d61db_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_timewalk_abe911d2d25eefb7886fe35c41f1d61db_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_timewalk_1acf3359a58961b4c14ea29bb542bb1a3c"/>    <section>
+    <title>operator[]()</title>
+<indexterm><primary>operator[]</primary><secondary>Timewalk</secondary></indexterm>
+<indexterm><primary>Timewalk</primary><secondary>operator[]</secondary></indexterm>
+<para><computeroutput>auto&amp; Timewalk::operator[] (int const &amp; i)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_timewalk_1a6f804cbc759f0980dce1aaee6cf5cd5a"/>    <section>
+    <title>Print()</title>
+<indexterm><primary>Print</primary><secondary>Timewalk</secondary></indexterm>
+<indexterm><primary>Timewalk</primary><secondary>Print</secondary></indexterm>
+<para><computeroutput>void Timewalk::Print ( )<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_timewalk_a6f804cbc759f0980dce1aaee6cf5cd5a_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_timewalk_1a5a9bf52d569022f6260d820a8b070606"/>    <section>
+    <title>resize()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>resize</primary><secondary>Timewalk</secondary></indexterm>
+<indexterm><primary>Timewalk</primary><secondary>resize</secondary></indexterm>
+<para><computeroutput>void Timewalk::resize ( )<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_timewalk_1a760b5d3b33b49d022b4ba352f76de157"/>    <section>
+    <title>resize()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>resize</primary><secondary>Timewalk</secondary></indexterm>
+<indexterm><primary>Timewalk</primary><secondary>resize</secondary></indexterm>
+<para><computeroutput>void Timewalk::resize (<link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> const &amp; size, float const &amp; value = <computeroutput>0.</computeroutput>
+)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_timewalk_1a5fcb34cdafa277bc367708edfad4508d"/>    <section>
+    <title>setMax()</title>
+<indexterm><primary>setMax</primary><secondary>Timewalk</secondary></indexterm>
+<indexterm><primary>Timewalk</primary><secondary>setMax</secondary></indexterm>
+<para><computeroutput>static void Timewalk::setMax (float const &amp; _max)<computeroutput>[inline]</computeroutput>, <computeroutput>[static]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_timewalk_a5fcb34cdafa277bc367708edfad4508d_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_class_timewalk_1a4757707dc2702478007fd1aed630b5a7"/>    <section>
+    <title>isON</title>
+<indexterm><primary>isON</primary><secondary>Timewalk</secondary></indexterm>
+<indexterm><primary>Timewalk</primary><secondary>isON</secondary></indexterm>
+<para><computeroutput>bool Timewalk::isON<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_timewalk_1a3f011c6087272a223f93ec9298ddc905"/>    <section>
+    <title>m_float_zero</title>
+<indexterm><primary>m_float_zero</primary><secondary>Timewalk</secondary></indexterm>
+<indexterm><primary>Timewalk</primary><secondary>m_float_zero</secondary></indexterm>
+<para><computeroutput>float Timewalk::m_float_zero = 0.<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_timewalk_1a048a7979d8424c55ca0d545b3ec589d3"/>    <section>
+    <title>m_keVperBin</title>
+<indexterm><primary>m_keVperBin</primary><secondary>Timewalk</secondary></indexterm>
+<indexterm><primary>Timewalk</primary><secondary>m_keVperBin</secondary></indexterm>
+<para><computeroutput>float Timewalk::m_keVperBin = 1.<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_timewalk_1a38ee691b54eb47a48c43146d803a3e74"/>    <section>
+    <title>m_Timewalk</title>
+<indexterm><primary>m_Timewalk</primary><secondary>Timewalk</secondary></indexterm>
+<indexterm><primary>Timewalk</primary><secondary>m_Timewalk</secondary></indexterm>
+<para><computeroutput>std::vector&lt;float&gt; Timewalk::m_Timewalk<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_timewalk_1a63ec5a22a054be2b6bd511e27cf46ef5"/>    <section>
+    <title>max</title>
+<indexterm><primary>max</primary><secondary>Timewalk</secondary></indexterm>
+<indexterm><primary>Timewalk</primary><secondary>max</secondary></indexterm>
+<para><computeroutput>float Timewalk::max = 10000.f<computeroutput>[static]</computeroutput>, <computeroutput>[private]</computeroutput></computeroutput></para></section>
+<para>
+The documentation for this class was generated from the following file:</para>
+lib/Modules/<link linkend="__timewalk_8hpp">Timewalk.hpp</link></section>
+</section>

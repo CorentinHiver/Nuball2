@@ -1,0 +1,164 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_class_si_strip" xml:lang="en-US">
+<title>SiStrip Class Reference</title>
+<indexterm><primary>SiStrip</primary></indexterm>
+<para>
+
+<para>Silicon Strip. Represents a strip of the <link linkend="_class_d_s_s_d">DSSD</link>. </para>
+ 
+</para>
+<para>
+<computeroutput>#include &lt;DSSD.hpp&gt;</computeroutput>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>auto const  &amp; <link linkend="_class_si_strip_1a575bbe33a1f8b0a9c1cb430e89eb4aab">angle</link> ()</para>
+</listitem>
+            <listitem><para>auto const  &amp; <link linkend="_class_si_strip_1a97b1b3b50a24025ed4727fdbc49f5515">angle</link> () const</para>
+</listitem>
+            <listitem><para>auto const  &amp; <link linkend="_class_si_strip_1a4cf1f76b435c5630222acb879f6a2a52">label</link> ()</para>
+</listitem>
+            <listitem><para>auto const  &amp; <link linkend="_class_si_strip_1aced614e29b94a32b364f95e81a6fd3be">label</link> () const</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_si_strip_1a44091ee38c5541317054694889a14367">Reset</link> ()</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_si_strip_1a31602712730cf2f4705f41698b260bcc">setAngle</link> (double const &amp;<link linkend="_class_si_strip_1a97b1b3b50a24025ed4727fdbc49f5515">angle</link>)</para>
+</listitem>
+            <listitem><para><link linkend="_class_si_strip_1a9bdf293d7c52f269703817028be1e8b2">SiStrip</link> (<link linkend="_lib_co_8hpp_1ad29aff8b0f7fde4ef0291331012e596a">ushort</link> const &amp;<link linkend="_class_si_strip_1aced614e29b94a32b364f95e81a6fd3be">label</link>)</para>
+</listitem>
+            <listitem><para><link linkend="_class_si_strip_1a9ba090607cea58e05a2eac755b441efe">SiStrip</link> (<link linkend="_lib_co_8hpp_1ad29aff8b0f7fde4ef0291331012e596a">ushort</link> const &amp;<link linkend="_class_si_strip_1aced614e29b94a32b364f95e81a6fd3be">label</link>, double const &amp;<link linkend="_class_si_strip_1a97b1b3b50a24025ed4727fdbc49f5515">angle</link>)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Public Attributes    </title>
+        <itemizedlist>
+            <listitem><para>float <link linkend="_class_si_strip_1ade646df154437b96b61a59c8569d7595">nrj</link> = 0.0</para>
+</listitem>
+            <listitem><para>double <link linkend="_class_si_strip_1a96cac34742884a45a3d950d55448e55f">time</link> = 0.0</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Protected Attributes    </title>
+        <itemizedlist>
+            <listitem><para>double <link linkend="_class_si_strip_1aebb9a23cef98caa25dd5db2d5928777b">m_angle</link> = 0</para>
+</listitem>
+            <listitem><para><link linkend="_lib_co_8hpp_1ad29aff8b0f7fde4ef0291331012e596a">ushort</link> <link linkend="_class_si_strip_1a89bebb3d12becbc1bcecc1c20e6ec4dd">m_label</link> = 0u</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Detailed Description</title>
+
+<para>Silicon Strip. Represents a strip of the <link linkend="_class_d_s_s_d">DSSD</link>. </para>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_class_si_strip_1a9bdf293d7c52f269703817028be1e8b2"/>    <section>
+    <title>SiStrip()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>SiStrip</primary><secondary>SiStrip</secondary></indexterm>
+<indexterm><primary>SiStrip</primary><secondary>SiStrip</secondary></indexterm>
+<para><computeroutput>SiStrip::SiStrip (<link linkend="_lib_co_8hpp_1ad29aff8b0f7fde4ef0291331012e596a">ushort</link> const &amp; label)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_si_strip_a9bdf293d7c52f269703817028be1e8b2_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_si_strip_1a9ba090607cea58e05a2eac755b441efe"/>    <section>
+    <title>SiStrip()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>SiStrip</primary><secondary>SiStrip</secondary></indexterm>
+<indexterm><primary>SiStrip</primary><secondary>SiStrip</secondary></indexterm>
+<para><computeroutput>SiStrip::SiStrip (<link linkend="_lib_co_8hpp_1ad29aff8b0f7fde4ef0291331012e596a">ushort</link> const &amp; label, double const &amp; angle)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_si_strip_a9ba090607cea58e05a2eac755b441efe_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_class_si_strip_1a575bbe33a1f8b0a9c1cb430e89eb4aab"/>    <section>
+    <title>angle()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>angle</primary><secondary>SiStrip</secondary></indexterm>
+<indexterm><primary>SiStrip</primary><secondary>angle</secondary></indexterm>
+<para><computeroutput>auto const&amp; SiStrip::angle ( )<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_si_strip_1a97b1b3b50a24025ed4727fdbc49f5515"/>    <section>
+    <title>angle()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>angle</primary><secondary>SiStrip</secondary></indexterm>
+<indexterm><primary>SiStrip</primary><secondary>angle</secondary></indexterm>
+<para><computeroutput>auto const&amp; SiStrip::angle ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_si_strip_a97b1b3b50a24025ed4727fdbc49f5515_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_si_strip_1a4cf1f76b435c5630222acb879f6a2a52"/>    <section>
+    <title>label()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>label</primary><secondary>SiStrip</secondary></indexterm>
+<indexterm><primary>SiStrip</primary><secondary>label</secondary></indexterm>
+<para><computeroutput>auto const&amp; SiStrip::label ( )<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_si_strip_1aced614e29b94a32b364f95e81a6fd3be"/>    <section>
+    <title>label()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>label</primary><secondary>SiStrip</secondary></indexterm>
+<indexterm><primary>SiStrip</primary><secondary>label</secondary></indexterm>
+<para><computeroutput>auto const&amp; SiStrip::label ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_si_strip_aced614e29b94a32b364f95e81a6fd3be_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_si_strip_1a44091ee38c5541317054694889a14367"/>    <section>
+    <title>Reset()</title>
+<indexterm><primary>Reset</primary><secondary>SiStrip</secondary></indexterm>
+<indexterm><primary>SiStrip</primary><secondary>Reset</secondary></indexterm>
+<para><computeroutput>void SiStrip::Reset ( )<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_si_strip_1a31602712730cf2f4705f41698b260bcc"/>    <section>
+    <title>setAngle()</title>
+<indexterm><primary>setAngle</primary><secondary>SiStrip</secondary></indexterm>
+<indexterm><primary>SiStrip</primary><secondary>setAngle</secondary></indexterm>
+<para><computeroutput>void SiStrip::setAngle (double const &amp; angle)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_si_strip_a31602712730cf2f4705f41698b260bcc_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_class_si_strip_1aebb9a23cef98caa25dd5db2d5928777b"/>    <section>
+    <title>m_angle</title>
+<indexterm><primary>m_angle</primary><secondary>SiStrip</secondary></indexterm>
+<indexterm><primary>SiStrip</primary><secondary>m_angle</secondary></indexterm>
+<para><computeroutput>double SiStrip::m_angle = 0<computeroutput>[protected]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_si_strip_1a89bebb3d12becbc1bcecc1c20e6ec4dd"/>    <section>
+    <title>m_label</title>
+<indexterm><primary>m_label</primary><secondary>SiStrip</secondary></indexterm>
+<indexterm><primary>SiStrip</primary><secondary>m_label</secondary></indexterm>
+<para><computeroutput><link linkend="_lib_co_8hpp_1ad29aff8b0f7fde4ef0291331012e596a">ushort</link> SiStrip::m_label = 0u<computeroutput>[protected]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_si_strip_1ade646df154437b96b61a59c8569d7595"/>    <section>
+    <title>nrj</title>
+<indexterm><primary>nrj</primary><secondary>SiStrip</secondary></indexterm>
+<indexterm><primary>SiStrip</primary><secondary>nrj</secondary></indexterm>
+<para><computeroutput>float SiStrip::nrj = 0.0</computeroutput></para>    </section><anchor xml:id="_class_si_strip_1a96cac34742884a45a3d950d55448e55f"/>    <section>
+    <title>time</title>
+<indexterm><primary>time</primary><secondary>SiStrip</secondary></indexterm>
+<indexterm><primary>SiStrip</primary><secondary>time</secondary></indexterm>
+<para><computeroutput>double SiStrip::time = 0.0</computeroutput></para></section>
+<para>
+The documentation for this class was generated from the following file:</para>
+lib/Analyse/<link linkend="__d_s_s_d_8hpp">DSSD.hpp</link></section>
+</section>

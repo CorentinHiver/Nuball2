@@ -4,6 +4,18 @@
 #include "print.hpp"
 
 template<class T>
+std::vector<T> push_back(std::vector<T> const & target, T const & value)
+{
+  target.push_back(value);
+}
+
+template<class T>
+std::vector<T> push_back(std::vector<T> const & target, std::vector<T> const & source)
+{
+  for (auto const & value : source) target.push_back(value);
+}
+
+template<class T>
 std::istream& operator>>(std::istream& input, std::vector<T> vector)
 {
   T t;

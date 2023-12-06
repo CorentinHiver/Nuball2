@@ -8,6 +8,7 @@ var class_histo_analyse =
     [ "normalizeY", "class_histo_analyse.html#aeaf2e3e1d7f2a439a8665de1af548981", null ],
     [ "operator->", "class_histo_analyse.html#ac602edbd4d950bf4169d4da1f882f9d2", null ],
     [ "peaksOverBackground", "class_histo_analyse.html#ad824faf68003f64c8fa56c72bd04b009", null ],
+    [ "removeBackground", "class_histo_analyse.html#a32a4ee17c51884e01eb924cec2c42112", null ],
     [ "reset", "class_histo_analyse.html#a47ce3e061ec4c3a8a5d84234771ab850", null ],
     [ "reset", "class_histo_analyse.html#a3ebd877de62f44cfde794b8a7dad2a78", null ],
     [ "reset", "class_histo_analyse.html#a191ab4e008cfed24b07dc17cea735c9d", null ],

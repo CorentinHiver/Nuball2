@@ -1,0 +1,113 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__calibration_8hpp" xml:lang="en-US">
+<title>lib/Modules/Calibration.hpp File Reference</title>
+<indexterm><primary>lib/Modules/Calibration.hpp</primary></indexterm>
+<programlisting>#include &quot;../libCo.hpp&quot;
+#include &quot;../Classes/Hit.hpp&quot;
+#include &quot;../Classes/Detectors.hpp&quot;
+#include &quot;../Classes/Event.hpp&quot;
+#include &quot;../Classes/FilesManager.hpp&quot;
+#include &quot;../MTObjects/MTFasterReader.hpp&quot;
+#include &quot;../MTObjects/MTRootReader.hpp&quot;
+#include &quot;../MTObjects/MTTHist.hpp&quot;
+</programlisting>Include dependency graph for Calibration.hpp:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="_calibration_8hpp__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+This graph shows which files directly or indirectly include this file:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="_calibration_8hpp__dep__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>class <link linkend="_class_calibration">Calibration</link></para>
+</listitem>
+            <listitem><para>class <link linkend="_class_fit">Fit</link></para>
+
+<para>Allows one to manipulate the results of peaks. </para>
+</listitem>
+            <listitem><para>struct <link linkend="_struct_calibration_1_1histograms">Calibration::histograms</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Typedefs    </title>
+        <itemizedlist>
+            <listitem><para>using <link linkend="__calibration_8hpp_1a3e47c22fe90cb9e403d05dc134b6a047">Fits</link> = std::vector&lt; <link linkend="_class_fit">Fit</link> &gt;</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>bool <link linkend="__calibration_8hpp_1a53eebde5a64b66ea934c2c8a5015b9bb">isTripleAlpha</link> (std::string const &amp;source_name)</para>
+</listitem>
+            <listitem><para>std::ofstream &amp; <link linkend="__calibration_8hpp_1a4f68d2fe488cf1a3044c1573a16bc394">operator&lt;&lt;</link> (std::ofstream &amp;fout, <link linkend="_class_fit">Fit</link> const &amp;fit)</para>
+</listitem>
+            <listitem><para>std::ostream &amp; <link linkend="__calibration_8hpp_1abacd32722d973dc5cde6c73482b0e615">operator&lt;&lt;</link> (std::ostream &amp;cout, <link linkend="_class_calibration">Calibration</link> const &amp;calib)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Typedef Documentation</title>
+<anchor xml:id="__calibration_8hpp_1a3e47c22fe90cb9e403d05dc134b6a047"/>    <section>
+    <title>Fits</title>
+<indexterm><primary>Fits</primary><secondary>Calibration.hpp</secondary></indexterm>
+<indexterm><primary>Calibration.hpp</primary><secondary>Fits</secondary></indexterm>
+<para><computeroutput>using <link linkend="__calibration_8hpp_1a3e47c22fe90cb9e403d05dc134b6a047">Fits</link> =  std::vector &lt;<link linkend="_class_fit">Fit</link>&gt;</computeroutput></para></section>
+</section>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="__calibration_8hpp_1a53eebde5a64b66ea934c2c8a5015b9bb"/>    <section>
+    <title>isTripleAlpha()</title>
+<indexterm><primary>isTripleAlpha</primary><secondary>Calibration.hpp</secondary></indexterm>
+<indexterm><primary>Calibration.hpp</primary><secondary>isTripleAlpha</secondary></indexterm>
+<para><computeroutput>bool isTripleAlpha (std::string const &amp; source_name)</computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="_calibration_8hpp_a53eebde5a64b66ea934c2c8a5015b9bb_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="__calibration_8hpp_1a4f68d2fe488cf1a3044c1573a16bc394"/>    <section>
+    <title>operator&lt;&lt;()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>operator&lt;&lt;</primary><secondary>Calibration.hpp</secondary></indexterm>
+<indexterm><primary>Calibration.hpp</primary><secondary>operator&lt;&lt;</secondary></indexterm>
+<para><computeroutput>std::ofstream&amp; operator&lt;&lt; (std::ofstream &amp; fout, <link linkend="_class_fit">Fit</link> const &amp; fit)</computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="_calibration_8hpp_a4f68d2fe488cf1a3044c1573a16bc394_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="__calibration_8hpp_1abacd32722d973dc5cde6c73482b0e615"/>    <section>
+    <title>operator&lt;&lt;()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>operator&lt;&lt;</primary><secondary>Calibration.hpp</secondary></indexterm>
+<indexterm><primary>Calibration.hpp</primary><secondary>operator&lt;&lt;</secondary></indexterm>
+<para><computeroutput>std::ostream&amp; operator&lt;&lt; (std::ostream &amp; cout, <link linkend="_class_calibration">Calibration</link> const &amp; calib)</computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="_calibration_8hpp_abacd32722d973dc5cde6c73482b0e615_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+</section>
+</section>

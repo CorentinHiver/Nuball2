@@ -1,0 +1,158 @@
+.TH "CloverModule" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+CloverModule \- Describes a Clover module\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <CloverModule\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBaddBGO\fP (float const &_nrj, double const &_time)"
+.br
+.ti -1c
+.RI "void \fBaddGe\fP (float const &_nrj, double const &_time)"
+.br
+.ti -1c
+.RI "void \fBclean\fP ()"
+.br
+.ti -1c
+.RI "void \fBclear\fP ()"
+.br
+.ti -1c
+.RI "\fBCloverModule\fP ()"
+.br
+.ti -1c
+.RI "auto const  & \fBlabel\fP () const"
+.br
+.ti -1c
+.RI "\fBuchar\fP \fBnbCrystals\fP () const"
+.br
+.ti -1c
+.RI "void \fBReset\fP ()"
+.br
+.in -1c
+.SS "Static Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "static void \fBresetGlobalLabel\fP ()"
+.br
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "bool \fBisBGODelayed\fP = false"
+.br
+.ti -1c
+.RI "bool \fBisBGOPrompt\fP = false"
+.br
+.ti -1c
+.RI "bool \fBisGeDelayed\fP = false"
+.br
+.ti -1c
+.RI "bool \fBisGePrompt\fP = false"
+.br
+.ti -1c
+.RI "\fBuchar\fP \fBmaxE_Ge_cristal\fP = 0u"
+.br
+.ti -1c
+.RI "\fBuchar\fP \fBnb\fP = 0"
+.br
+.ti -1c
+.RI "\fBuchar\fP \fBnb_BGO\fP = 0"
+.br
+.ti -1c
+.RI "float \fBnrj\fP = 0\&."
+.br
+.ti -1c
+.RI "float \fBnrj_BGO\fP = 0\&."
+.br
+.ti -1c
+.RI "double \fBtime\fP = 0\&."
+.br
+.ti -1c
+.RI "double \fBtime_BGO\fP = 0\&."
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBuchar\fP const \fBm_label\fP"
+.br
+.in -1c
+.SS "Static Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "static thread_local \fBuchar\fP \fBglabel\fP = 0"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Describes a Clover module\&. 
+
+Each Clover has its own label, between 0 and (nb_labels-1) In Nuball2, they range from 0 to 23
+.PP
+This simple class manages the number of Ge crystals and BGO crystals that fired in the event, 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "CloverModule::CloverModule ()\fC [inline]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "void CloverModule::addBGO (float const & _nrj, double const & _time)\fC [inline]\fP"
+
+.SS "void CloverModule::addGe (float const & _nrj, double const & _time)\fC [inline]\fP"
+
+.SS "void CloverModule::clean ()\fC [inline]\fP"
+
+.SS "void CloverModule::clear ()\fC [inline]\fP"
+
+.SS "auto const& CloverModule::label () const\fC [inline]\fP"
+
+.SS "\fBuchar\fP CloverModule::nbCrystals () const\fC [inline]\fP"
+
+.SS "void CloverModule::Reset ()"
+
+.SS "static void CloverModule::resetGlobalLabel ()\fC [inline]\fP, \fC [static]\fP"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "\fBuchar\fP thread_local CloverModule::glabel = 0\fC [static]\fP, \fC [private]\fP"
+
+.SS "bool CloverModule::isBGODelayed = false"
+
+.SS "bool CloverModule::isBGOPrompt = false"
+
+.SS "bool CloverModule::isGeDelayed = false"
+
+.SS "bool CloverModule::isGePrompt = false"
+
+.SS "\fBuchar\fP const CloverModule::m_label\fC [private]\fP"
+
+.SS "\fBuchar\fP CloverModule::maxE_Ge_cristal = 0u"
+
+.SS "\fBuchar\fP CloverModule::nb = 0"
+
+.SS "\fBuchar\fP CloverModule::nb_BGO = 0"
+
+.SS "float CloverModule::nrj = 0\&."
+
+.SS "float CloverModule::nrj_BGO = 0\&."
+
+.SS "double CloverModule::time = 0\&."
+
+.SS "double CloverModule::time_BGO = 0\&."
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Nuball2 from the source code\&.

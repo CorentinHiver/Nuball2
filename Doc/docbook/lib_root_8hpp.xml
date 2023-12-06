@@ -1,0 +1,504 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_lib_root_8hpp" xml:lang="en-US">
+<title>lib/libRoot.hpp File Reference</title>
+<indexterm><primary>lib/libRoot.hpp</primary></indexterm>
+<programlisting>#include &quot;libCo.hpp&quot;
+#include &lt;TAxis.h&gt;
+#include &lt;TCanvas.h&gt;
+#include &lt;TChain.h&gt;
+#include &lt;TError.h&gt;
+#include &lt;TF1.h&gt;
+#include &lt;TF2.h&gt;
+#include &lt;TFile.h&gt;
+#include &lt;TFitResultPtr.h&gt;
+#include &lt;TFitResult.h&gt;
+#include &lt;TGraph.h&gt;
+#include &lt;TGraphErrors.h&gt;
+#include &lt;TH1F.h&gt;
+#include &lt;TH1D.h&gt;
+#include &lt;TH1S.h&gt;
+#include &lt;TH2.h&gt;
+#include &lt;TH2F.h&gt;
+#include &lt;TH3I.h&gt;
+#include &lt;TKey.h&gt;
+#include &lt;TLeaf.h&gt;
+#include &lt;TLegend.h&gt;
+#include &lt;TMarker.h&gt;
+#include &lt;TMath.h&gt;
+#include &lt;TRandom.h&gt;
+#include &lt;TROOT.h&gt;
+#include &lt;TSpectrum.h&gt;
+#include &lt;TStopwatch.h&gt;
+#include &lt;TString.h&gt;
+#include &lt;TStyle.h&gt;
+#include &lt;TSystem.h&gt;
+#include &lt;TThread.h&gt;
+#include &lt;TTree.h&gt;
+#include &lt;TTreeIndex.h&gt;
+</programlisting>Include dependency graph for libRoot.hpp:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="lib_root_8hpp__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+This graph shows which files directly or indirectly include this file:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="lib_root_8hpp__dep__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>struct <link linkend="_struct_t_h_binning">THBinning</link></para>
+
+<para>Binning of a root histogram (TH1) : number of bins, min value, max value. </para>
+</listitem>
+            <listitem><para>class <link linkend="_class_the_t_chain">TheTChain</link></para>
+
+<para>Not functionnal yet. </para>
+</listitem>
+            <listitem><para>class <link linkend="_class_type_root_map">TypeRootMap</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Namespaces    </title>
+        <itemizedlist>
+            <listitem><para> <link linkend="_namespace_co_analyse">CoAnalyse</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Typedefs    </title>
+        <itemizedlist>
+            <listitem><para>using <link linkend="_namespace_co_analyse_1a0c12c2535bb054631b3b0304a1dc9a34">CoAnalyse::ProjectionsBins</link> = std::vector&lt; std::pair&lt; double, double &gt; &gt;</para>
+</listitem>
+            <listitem><para>using <link linkend="_lib_root_8hpp_1a3b73f11bc69f125e12c1d48c9ed79a6e">unique_TFile</link> = std::unique_ptr&lt; TFile &gt;</para>
+</listitem>
+            <listitem><para>using <link linkend="_lib_root_8hpp_1a32bc45ae9358ae128c6a7d49cb343e2e">unique_TH1F</link> = std::unique_ptr&lt; TH1F &gt;</para>
+</listitem>
+            <listitem><para>using <link linkend="_lib_root_8hpp_1ae3db658040c9c85a57d0d6a29dc94c18">unique_TH2F</link> = std::unique_ptr&lt; TH2F &gt;</para>
+</listitem>
+            <listitem><para>using <link linkend="_lib_root_8hpp_1a50631b7ee8274cbc1161d2a668fdbdf3">unique_tree</link> = std::unique_ptr&lt; TTree &gt;</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>bool <link linkend="_lib_root_8hpp_1a6f95a95b189be45d91548ce3bfb70a55">AddTH1</link> (TH2 *histo2, TH1 *histo1, int index, bool x=true)</para>
+</listitem>
+            <listitem><para>void <link linkend="_lib_root_8hpp_1ad91e4154d55b03aec78fc49348f35db1">alignator</link> (TTree *tree, int *NewIndex)</para>
+</listitem>
+            <listitem><para>template&lt;class T &gt; </para><para>auto <link linkend="_lib_root_8hpp_1a03e7d6c734bc80bcdea8985f46a45f41">createBranch</link> (TTree *tree, T *value, std::string const &amp;name)</para>
+
+<para>Create a branch for a given value and name. </para>
+</listitem>
+            <listitem><para>template&lt;class T &gt; </para><para>auto <link linkend="_lib_root_8hpp_1a458b3c1dc8d1ee210a87a2cd07d4f8b2">createBranchArray</link> (TTree *tree, T *array, std::string const &amp;name, std::string const &amp;name_size)</para>
+
+<para>Create a branch for a given array and name. </para>
+</listitem>
+            <listitem><para>void <link linkend="_lib_root_8hpp_1ab2d13b94bd25078076812f58fc7c457c">draw_all_TH1F_with_X_window</link> (std::string const &amp;filename, int minX, int maxX, int rebin=1)</para>
+</listitem>
+            <listitem><para>std::vector&lt; double &gt; <link linkend="_namespace_co_analyse_1acb07ede224cab3e9289d25c72c099b24">CoAnalyse::extractBackgroundArray</link> (std::vector&lt; double &gt; &amp;source, int const &amp;nsmooth=10)</para>
+</listitem>
+            <listitem><para>std::vector&lt; double &gt; <link linkend="_namespace_co_analyse_1accb0147ca7573fc7dade0af93673a4e3">CoAnalyse::extractBackgroundArray</link> (TH1F *histo, int const &amp;nsmooth=10)</para>
+</listitem>
+            <listitem><para>void <link linkend="_lib_root_8hpp_1ab7f08b4e478a833328fa0fb5cebf88d2">fuse_all_histo</link> (std::string const &amp;folder, std::string const &amp;outRoot=&quot;fused_histo.root&quot;, bool const &amp;bidim=true)</para>
+</listitem>
+            <listitem><para>int <link linkend="_lib_root_8hpp_1ab8628517ea9ef7ded29d8e22be6f628f">getBin0</link> (TH1F *spectra)</para>
+
+<para>Get which bin holds the X = 0. </para>
+</listitem>
+            <listitem><para>bool <link linkend="_lib_root_8hpp_1accfb8dfb6ee42fa6845013a0cf121ac1">getMeanPeak</link> (TH1F *spectra, double &amp;mean)</para>
+
+<para>Get the mean of the peak of a histogram with one nice single peak. </para>
+</listitem>
+            <listitem><para>template&lt;typename T , typename  = typename std::enable_if&lt;std::is_arithmetic&lt;T&gt;::value&gt;::type&gt; </para><para>Long64_t <link linkend="_lib_root_8hpp_1a269d058dec61fdc486050ca3e57da0bb">Long64_cast</link> (T const &amp;t)</para>
+
+<para>Casts a number into unsigned short. </para>
+</listitem>
+            <listitem><para>float <link linkend="_lib_root_8hpp_1a0269226b4d78b1089ef77180712147e0">maxXaxis</link> (TH1 *histo)</para>
+</listitem>
+            <listitem><para>float <link linkend="_lib_root_8hpp_1ada9d5d265d78076b2e7fb980a09c71b0">maxYaxis</link> (TH1 *histo)</para>
+</listitem>
+            <listitem><para>float <link linkend="_lib_root_8hpp_1ab23c9fed2f973bde045e7d90c8e1f2fe">minXaxis</link> (TH1 *histo)</para>
+</listitem>
+            <listitem><para>float <link linkend="_lib_root_8hpp_1a6ce1f9927b8e99f76cbda975fb51adcf">minYaxis</link> (TH1 *histo)</para>
+</listitem>
+            <listitem><para>void <link linkend="_namespace_co_analyse_1a9585a7922e83dcea10f06211868846bc">CoAnalyse::normalizeBidim</link> (TH2 *matrix, double const &amp;factor=1.0)</para>
+</listitem>
+            <listitem><para>void <link linkend="_namespace_co_analyse_1ab71a4903cf3d3c32f35262dab10a82e3">CoAnalyse::normalizeY</link> (TH2 *matrix, double const &amp;factor=1)</para>
+</listitem>
+            <listitem><para>std::ostream &amp; <link linkend="_lib_root_8hpp_1a1bf070584d2988460758158e556cefe4">operator&lt;&lt;</link> (std::ostream &amp;cout, <link linkend="_struct_t_h_binning">THBinning</link> binning)</para>
+</listitem>
+            <listitem><para>void <link linkend="_namespace_co_analyse_1a53744e2ddfba6a4a188ada9ed1bc6272">CoAnalyse::projectX</link> (TH2 *matrix, TH1 *proj)</para>
+
+<para>Total projection on X axis. </para>
+</listitem>
+            <listitem><para>void <link linkend="_namespace_co_analyse_1a2d7393e48336effee246cbbc33822847">CoAnalyse::projectX</link> (TH2 *matrix, TH1 *proj, double const &amp;binYmin, double const &amp;binYmax)</para>
+
+<para>Project on Y axis between values binYmin and binYmax included [binYmin;binYmax]. </para>
+</listitem>
+            <listitem><para>void <link linkend="_namespace_co_analyse_1a0158170fa443490d844333c1acd9a89a">CoAnalyse::projectX</link> (TH2 *matrix, TH1 *proj, int const &amp;binY)</para>
+
+<para>Project on Y axis at a given X bin. </para>
+</listitem>
+            <listitem><para>void <link linkend="_namespace_co_analyse_1aa27f433db27fe9babd4c55421121556d">CoAnalyse::projectX</link> (TH2 *matrix, TH1 *proj, int const &amp;binYmin, int const &amp;binYmax)</para>
+
+<para>Project on X axis between bin binYmin included and binYmax excluded [binYmin;binYmax[. </para>
+</listitem>
+            <listitem><para>void <link linkend="_namespace_co_analyse_1ab64c2bb160dbdc01836274235d0bbd3b">CoAnalyse::projectY</link> (TH2 *matrix, TH1 *proj, double const &amp;valueXmin, double const &amp;valueXmax)</para>
+
+<para>Project on Y axis between values valueXmin and valueXmax included [valueXmin;valueXmax]. </para>
+</listitem>
+            <listitem><para>void <link linkend="_namespace_co_analyse_1abecf48371e430ad0cc8dfb063e6d951d">CoAnalyse::projectY</link> (TH2 *matrix, TH1 *proj, int const &amp;binX)</para>
+
+<para>Project on Y axis at a given X bin. </para>
+</listitem>
+            <listitem><para>void <link linkend="_namespace_co_analyse_1aa19f9a517f5a4ce70e61ebed3cfeecf9">CoAnalyse::projectY</link> (TH2 *matrix, TH1 *proj, int const &amp;binXmin, int const &amp;binXmax)</para>
+
+<para>Project on Y axis between bin binXmin included and binXmax excluded [binXmin;binXmax[. </para>
+</listitem>
+            <listitem><para>void <link linkend="_namespace_co_analyse_1aeb2cc17685bbda3b8531803c4d8cc5c8">CoAnalyse::removeBackground</link> (TH1 *histo, int const &amp;niter=10, std::string const &amp;fit_options=&quot;&quot;, std::string const &amp;bidim_options=&quot;X&quot;)</para>
+
+<para>Remove the background in the given histo. </para>
+</listitem>
+            <listitem><para>void <link linkend="_namespace_co_analyse_1a2a89fce5d95da5f0448d4a9fba93a108">CoAnalyse::removeRandomBidim</link> (TH2 *matrix, int iterations=1, bool save_intermediate=false, ProjectionsBins projectionsY={{}}, ProjectionsBins projectionsX={{}})</para>
+</listitem>
+            <listitem><para>void <link linkend="_namespace_co_analyse_1ab8af94a11fa0979cbaf83228dfc1675e">CoAnalyse::removeRandomY</link> (TH2 *matrix, int _stopX=-1, int _stopY=-1, bool writeIntermediate=false, ProjectionsBins projections={{}})</para>
+
+<para>LEGACY. </para>
+</listitem>
+            <listitem><para>void <link linkend="_namespace_co_analyse_1ad13b7eeaa3d7d9a30cdf04a8b0d17088">CoAnalyse::setX</link> (TH2 *matrix, TH1 *proj, int const &amp;binX)</para>
+</listitem>
+            <listitem><para>void <link linkend="_namespace_co_analyse_1ac1aa3fcfcc46318e4f0d6f42510471a0">CoAnalyse::setY</link> (TH2 *matrix, TH1 *proj, int const &amp;binY)</para>
+</listitem>
+            <listitem><para>void <link linkend="_lib_root_8hpp_1a0b2306f59088babb4975e636d04c4f53">test_alignator</link> (TTree *tree, int *NewIndex=nullptr, bool useNewIndex=false)</para>
+</listitem>
+            <listitem><para>bool <link linkend="_lib_root_8hpp_1a03d21b830e335ed5e98eaf83038ee8d2">THist_exists</link> (TH1 *histo)</para>
+</listitem>
+            <listitem><para>template&lt;typename T , typename  = typename std::enable_if&lt;std::is_arithmetic&lt;T&gt;::value&gt;::type&gt; </para><para>ULong64_t <link linkend="_lib_root_8hpp_1a40d3e36a2118509ec94a14fc794895a0">ULong64_cast</link> (T const &amp;t)</para>
+
+<para>Casts a number into unsigned short. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Variables    </title>
+        <itemizedlist>
+            <listitem><para>TRandom * <link linkend="_lib_root_8hpp_1ae1911f5a7f54d08592ee0879f4d848f3">gRandom</link> = new TRandom(time(0))</para>
+</listitem>
+            <listitem><para>class <link linkend="_class_type_root_map">TypeRootMap</link> <link linkend="_lib_root_8hpp_1ad29ed215015eb770854e597fbdabb984">typeRootMap</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Typedef Documentation</title>
+<anchor xml:id="_lib_root_8hpp_1a3b73f11bc69f125e12c1d48c9ed79a6e"/>    <section>
+    <title>unique_TFile</title>
+<indexterm><primary>unique_TFile</primary><secondary>libRoot.hpp</secondary></indexterm>
+<indexterm><primary>libRoot.hpp</primary><secondary>unique_TFile</secondary></indexterm>
+<para><computeroutput>using <link linkend="_lib_root_8hpp_1a3b73f11bc69f125e12c1d48c9ed79a6e">unique_TFile</link> =  std::unique_ptr&lt;TFile&gt;</computeroutput></para>    </section><anchor xml:id="_lib_root_8hpp_1a32bc45ae9358ae128c6a7d49cb343e2e"/>    <section>
+    <title>unique_TH1F</title>
+<indexterm><primary>unique_TH1F</primary><secondary>libRoot.hpp</secondary></indexterm>
+<indexterm><primary>libRoot.hpp</primary><secondary>unique_TH1F</secondary></indexterm>
+<para><computeroutput>using <link linkend="_lib_root_8hpp_1a32bc45ae9358ae128c6a7d49cb343e2e">unique_TH1F</link> =  std::unique_ptr&lt;TH1F&gt;</computeroutput></para>    </section><anchor xml:id="_lib_root_8hpp_1ae3db658040c9c85a57d0d6a29dc94c18"/>    <section>
+    <title>unique_TH2F</title>
+<indexterm><primary>unique_TH2F</primary><secondary>libRoot.hpp</secondary></indexterm>
+<indexterm><primary>libRoot.hpp</primary><secondary>unique_TH2F</secondary></indexterm>
+<para><computeroutput>using <link linkend="_lib_root_8hpp_1ae3db658040c9c85a57d0d6a29dc94c18">unique_TH2F</link> =  std::unique_ptr&lt;TH2F&gt;</computeroutput></para>    </section><anchor xml:id="_lib_root_8hpp_1a50631b7ee8274cbc1161d2a668fdbdf3"/>    <section>
+    <title>unique_tree</title>
+<indexterm><primary>unique_tree</primary><secondary>libRoot.hpp</secondary></indexterm>
+<indexterm><primary>libRoot.hpp</primary><secondary>unique_tree</secondary></indexterm>
+<para><computeroutput>using <link linkend="_lib_root_8hpp_1a50631b7ee8274cbc1161d2a668fdbdf3">unique_tree</link> =  std::unique_ptr&lt;TTree&gt;</computeroutput></para></section>
+</section>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_lib_root_8hpp_1a6f95a95b189be45d91548ce3bfb70a55"/>    <section>
+    <title>AddTH1()</title>
+<indexterm><primary>AddTH1</primary><secondary>libRoot.hpp</secondary></indexterm>
+<indexterm><primary>libRoot.hpp</primary><secondary>AddTH1</secondary></indexterm>
+<para><computeroutput>bool AddTH1 (TH2 * histo2, TH1 * histo1, int index, bool x = <computeroutput>true</computeroutput>
+)</computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="lib_root_8hpp_a6f95a95b189be45d91548ce3bfb70a55_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="lib_root_8hpp_a6f95a95b189be45d91548ce3bfb70a55_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_lib_root_8hpp_1ad91e4154d55b03aec78fc49348f35db1"/>    <section>
+    <title>alignator()</title>
+<indexterm><primary>alignator</primary><secondary>libRoot.hpp</secondary></indexterm>
+<indexterm><primary>libRoot.hpp</primary><secondary>alignator</secondary></indexterm>
+<para><computeroutput>void alignator (TTree * tree, int * NewIndex)</computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="lib_root_8hpp_ad91e4154d55b03aec78fc49348f35db1_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_lib_root_8hpp_1a03e7d6c734bc80bcdea8985f46a45f41"/>    <section>
+    <title>createBranch()</title>
+<indexterm><primary>createBranch</primary><secondary>libRoot.hpp</secondary></indexterm>
+<indexterm><primary>libRoot.hpp</primary><secondary>createBranch</secondary></indexterm>
+<computeroutput>template&lt;class T &gt; </computeroutput><para><computeroutput>auto createBranch (TTree * tree, T * value, std::string const &amp; name)</computeroutput></para><para>
+
+<para>Create a branch for a given value and name. </para>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="lib_root_8hpp_a03e7d6c734bc80bcdea8985f46a45f41_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_lib_root_8hpp_1a458b3c1dc8d1ee210a87a2cd07d4f8b2"/>    <section>
+    <title>createBranchArray()</title>
+<indexterm><primary>createBranchArray</primary><secondary>libRoot.hpp</secondary></indexterm>
+<indexterm><primary>libRoot.hpp</primary><secondary>createBranchArray</secondary></indexterm>
+<computeroutput>template&lt;class T &gt; </computeroutput><para><computeroutput>auto createBranchArray (TTree * tree, T * array, std::string const &amp; name, std::string const &amp; name_size)</computeroutput></para><para>
+
+<para>Create a branch for a given array and name. </para>
+</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters                    </title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+                                <entry>name_size</entry>
+                                <entry>
+<para>The name of the leaf that holds the size of the array </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="lib_root_8hpp_a458b3c1dc8d1ee210a87a2cd07d4f8b2_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_lib_root_8hpp_1ab2d13b94bd25078076812f58fc7c457c"/>    <section>
+    <title>draw_all_TH1F_with_X_window()</title>
+<indexterm><primary>draw_all_TH1F_with_X_window</primary><secondary>libRoot.hpp</secondary></indexterm>
+<indexterm><primary>libRoot.hpp</primary><secondary>draw_all_TH1F_with_X_window</secondary></indexterm>
+<para><computeroutput>void draw_all_TH1F_with_X_window (std::string const &amp; filename, int minX, int maxX, int rebin = <computeroutput>1</computeroutput>
+)</computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="lib_root_8hpp_ab2d13b94bd25078076812f58fc7c457c_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_lib_root_8hpp_1ab7f08b4e478a833328fa0fb5cebf88d2"/>    <section>
+    <title>fuse_all_histo()</title>
+<indexterm><primary>fuse_all_histo</primary><secondary>libRoot.hpp</secondary></indexterm>
+<indexterm><primary>libRoot.hpp</primary><secondary>fuse_all_histo</secondary></indexterm>
+<para><computeroutput>void fuse_all_histo (std::string const &amp; folder, std::string const &amp; outRoot = <computeroutput>&quot;fused_histo.root&quot;</computeroutput>
+, bool const &amp; bidim = <computeroutput>true</computeroutput>
+)</computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="lib_root_8hpp_ab7f08b4e478a833328fa0fb5cebf88d2_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_lib_root_8hpp_1ab8628517ea9ef7ded29d8e22be6f628f"/>    <section>
+    <title>getBin0()</title>
+<indexterm><primary>getBin0</primary><secondary>libRoot.hpp</secondary></indexterm>
+<indexterm><primary>libRoot.hpp</primary><secondary>getBin0</secondary></indexterm>
+<para><computeroutput>int getBin0 (TH1F * spectra)</computeroutput></para><para>
+
+<para>Get which bin holds the X = 0. </para>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="lib_root_8hpp_ab8628517ea9ef7ded29d8e22be6f628f_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_lib_root_8hpp_1accfb8dfb6ee42fa6845013a0cf121ac1"/>    <section>
+    <title>getMeanPeak()</title>
+<indexterm><primary>getMeanPeak</primary><secondary>libRoot.hpp</secondary></indexterm>
+<indexterm><primary>libRoot.hpp</primary><secondary>getMeanPeak</secondary></indexterm>
+<para><computeroutput>bool getMeanPeak (TH1F * spectra, double &amp; mean)</computeroutput></para><para>
+
+<para>Get the mean of the peak of a histogram with one nice single peak. </para>
+</para>
+Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="lib_root_8hpp_accfb8dfb6ee42fa6845013a0cf121ac1_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="lib_root_8hpp_accfb8dfb6ee42fa6845013a0cf121ac1_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_lib_root_8hpp_1a269d058dec61fdc486050ca3e57da0bb"/>    <section>
+    <title>Long64_cast()</title>
+<indexterm><primary>Long64_cast</primary><secondary>libRoot.hpp</secondary></indexterm>
+<indexterm><primary>libRoot.hpp</primary><secondary>Long64_cast</secondary></indexterm>
+<computeroutput>template&lt;typename T , typename  = typename std::enable_if&lt;std::is_arithmetic&lt;T&gt;::value&gt;::type&gt; </computeroutput><para><computeroutput>Long64_t Long64_cast (T const &amp; t)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>Casts a number into unsigned short. </para>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="lib_root_8hpp_a269d058dec61fdc486050ca3e57da0bb_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_lib_root_8hpp_1a0269226b4d78b1089ef77180712147e0"/>    <section>
+    <title>maxXaxis()</title>
+<indexterm><primary>maxXaxis</primary><secondary>libRoot.hpp</secondary></indexterm>
+<indexterm><primary>libRoot.hpp</primary><secondary>maxXaxis</secondary></indexterm>
+<para><computeroutput>float maxXaxis (TH1 * histo)</computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="lib_root_8hpp_a0269226b4d78b1089ef77180712147e0_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_lib_root_8hpp_1ada9d5d265d78076b2e7fb980a09c71b0"/>    <section>
+    <title>maxYaxis()</title>
+<indexterm><primary>maxYaxis</primary><secondary>libRoot.hpp</secondary></indexterm>
+<indexterm><primary>libRoot.hpp</primary><secondary>maxYaxis</secondary></indexterm>
+<para><computeroutput>float maxYaxis (TH1 * histo)</computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="lib_root_8hpp_ada9d5d265d78076b2e7fb980a09c71b0_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_lib_root_8hpp_1ab23c9fed2f973bde045e7d90c8e1f2fe"/>    <section>
+    <title>minXaxis()</title>
+<indexterm><primary>minXaxis</primary><secondary>libRoot.hpp</secondary></indexterm>
+<indexterm><primary>libRoot.hpp</primary><secondary>minXaxis</secondary></indexterm>
+<para><computeroutput>float minXaxis (TH1 * histo)</computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="lib_root_8hpp_ab23c9fed2f973bde045e7d90c8e1f2fe_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_lib_root_8hpp_1a6ce1f9927b8e99f76cbda975fb51adcf"/>    <section>
+    <title>minYaxis()</title>
+<indexterm><primary>minYaxis</primary><secondary>libRoot.hpp</secondary></indexterm>
+<indexterm><primary>libRoot.hpp</primary><secondary>minYaxis</secondary></indexterm>
+<para><computeroutput>float minYaxis (TH1 * histo)</computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="lib_root_8hpp_a6ce1f9927b8e99f76cbda975fb51adcf_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_lib_root_8hpp_1a1bf070584d2988460758158e556cefe4"/>    <section>
+    <title>operator&lt;&lt;()</title>
+<indexterm><primary>operator&lt;&lt;</primary><secondary>libRoot.hpp</secondary></indexterm>
+<indexterm><primary>libRoot.hpp</primary><secondary>operator&lt;&lt;</secondary></indexterm>
+<para><computeroutput>std::ostream&amp; operator&lt;&lt; (std::ostream &amp; cout, <link linkend="_struct_t_h_binning">THBinning</link> binning)</computeroutput></para>    </section><anchor xml:id="_lib_root_8hpp_1a0b2306f59088babb4975e636d04c4f53"/>    <section>
+    <title>test_alignator()</title>
+<indexterm><primary>test_alignator</primary><secondary>libRoot.hpp</secondary></indexterm>
+<indexterm><primary>libRoot.hpp</primary><secondary>test_alignator</secondary></indexterm>
+<para><computeroutput>void test_alignator (TTree * tree, int * NewIndex = <computeroutput>nullptr</computeroutput>
+, bool useNewIndex = <computeroutput>false</computeroutput>
+)</computeroutput></para>    </section><anchor xml:id="_lib_root_8hpp_1a03d21b830e335ed5e98eaf83038ee8d2"/>    <section>
+    <title>THist_exists()</title>
+<indexterm><primary>THist_exists</primary><secondary>libRoot.hpp</secondary></indexterm>
+<indexterm><primary>libRoot.hpp</primary><secondary>THist_exists</secondary></indexterm>
+<para><computeroutput>bool THist_exists (TH1 * histo)</computeroutput></para>    </section><anchor xml:id="_lib_root_8hpp_1a40d3e36a2118509ec94a14fc794895a0"/>    <section>
+    <title>ULong64_cast()</title>
+<indexterm><primary>ULong64_cast</primary><secondary>libRoot.hpp</secondary></indexterm>
+<indexterm><primary>libRoot.hpp</primary><secondary>ULong64_cast</secondary></indexterm>
+<computeroutput>template&lt;typename T , typename  = typename std::enable_if&lt;std::is_arithmetic&lt;T&gt;::value&gt;::type&gt; </computeroutput><para><computeroutput>ULong64_t ULong64_cast (T const &amp; t)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>Casts a number into unsigned short. </para>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="lib_root_8hpp_a40d3e36a2118509ec94a14fc794895a0_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+</section>
+<section>
+<title>Variable Documentation</title>
+<anchor xml:id="_lib_root_8hpp_1ae1911f5a7f54d08592ee0879f4d848f3"/>    <section>
+    <title>gRandom</title>
+<indexterm><primary>gRandom</primary><secondary>libRoot.hpp</secondary></indexterm>
+<indexterm><primary>libRoot.hpp</primary><secondary>gRandom</secondary></indexterm>
+<para><computeroutput>TRandom* gRandom = new TRandom(time(0))</computeroutput></para>    </section><anchor xml:id="_lib_root_8hpp_1ad29ed215015eb770854e597fbdabb984"/>    <section>
+    <title>typeRootMap</title>
+<indexterm><primary>typeRootMap</primary><secondary>libRoot.hpp</secondary></indexterm>
+<indexterm><primary>libRoot.hpp</primary><secondary>typeRootMap</secondary></indexterm>
+<para><computeroutput>class <link linkend="_class_type_root_map">TypeRootMap</link> typeRootMap</computeroutput></para></section>
+</section>
+</section>

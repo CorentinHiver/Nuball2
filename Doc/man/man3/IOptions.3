@@ -1,0 +1,96 @@
+.TH "IOptions" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+IOptions \- IO parameters ///\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <Hit\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBIOptions\fP ()"
+.br
+.ti -1c
+.RI "\fBIOptions\fP (std::string const &options)"
+.br
+.ti -1c
+.RI "void \fBsetOptions\fP (std::string const &options)"
+.br
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "bool \fBe\fP = false"
+.br
+.ti -1c
+.RI "bool \fBE\fP = false"
+.br
+.ti -1c
+.RI "bool \fBl\fP = false"
+.br
+.ti -1c
+.RI "bool \fBp\fP = false"
+.br
+.ti -1c
+.RI "bool \fBq\fP = false"
+.br
+.ti -1c
+.RI "bool \fBQ\fP = false"
+.br
+.ti -1c
+.RI "bool \fBs\fP = false"
+.br
+.ti -1c
+.RI "bool \fBt\fP = false"
+.br
+.ti -1c
+.RI "bool \fBT\fP = false"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+IO parameters ///\&. 
+
+ReadIO options
+.PP
+l : label label ushort s : stamp absolute timestamp ps ULong64_t t : time relative timestamp ps Long64_t T : time2 relative timestamp ns float e : adc energy in ADC int E : nrj energy in keV float q : qdc2 energy qdc2 in ADC float Q : nrj2 energy qdc2 in keV float p : pileup pilepup bool 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "IOptions::IOptions ()\fC [inline]\fP"
+
+.SS "IOptions::IOptions (std::string const & options)\fC [inline]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "void IOptions::setOptions (std::string const & options)\fC [inline]\fP"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "bool IOptions::e = false"
+
+.SS "bool IOptions::E = false"
+
+.SS "bool IOptions::l = false"
+
+.SS "bool IOptions::p = false"
+
+.SS "bool IOptions::q = false"
+
+.SS "bool IOptions::Q = false"
+
+.SS "bool IOptions::s = false"
+
+.SS "bool IOptions::t = false"
+
+.SS "bool IOptions::T = false"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Nuball2 from the source code\&.

@@ -85,62 +85,493 @@ $(document).ready(function(){initNavTree('lib_co_8hpp_source.html',''); initResi
 <div class="title">libCo.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="lib_co_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef LIB_H_CO</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define LIB_H_CO</span></div>
+<a href="lib_co_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef LIB_HPP_CO</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define LIB_HPP_CO</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">// *********** STD includes ********* //</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;any&gt;</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;array&gt;</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;algorithm&gt;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;iomanip&gt;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;cstdlib&gt;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;cstring&gt;</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;fstream&gt;</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;numeric&gt;</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;map&gt;</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;mutex&gt;</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;queue&gt;</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;sstream&gt;</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;stdexcept&gt;</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;thread&gt;</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &lt;unordered_map&gt;</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">// ********** C includes ************ //</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &lt;cstdlib&gt;</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &lt;dirent.h&gt;</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &lt;glob.h&gt;</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &lt;stdlib.h&gt;</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#include &lt;string.h&gt;</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">// ********** Corentin Lib ************ //</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="print_8hpp.html">print.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="string__functions_8hpp.html">string_functions.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="files__functions_8hpp.html">files_functions.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="vector__functions_8hpp.html">vector_functions.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;functional&gt;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;iomanip&gt;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;map&gt;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;memory&gt;</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;mutex&gt;</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;numeric&gt;</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;queue&gt;</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &lt;sstream&gt;</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &lt;stdexcept&gt;</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &lt;stack&gt;</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &lt;thread&gt;</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &lt;typeindex&gt;</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &lt;typeinfo&gt;</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &lt;unordered_map&gt;</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">// ********** C includes ************ //</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#include &lt;dirent.h&gt;</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#include &lt;glob.h&gt;</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#include &lt;stdlib.h&gt;</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#include &lt;string.h&gt;</span></div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">//   UNITS  //</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="lib_co_8hpp.html#ad1be7b5ed61940e94b315160cd5c0702">   40</a></span>&#160;<span class="keywordtype">float</span> <a class="code" href="lib_co_8hpp.html#ad1be7b5ed61940e94b315160cd5c0702">_ns</a> = 1000.;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">//   TYPEDEF  //</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="lib_co_8hpp.html#a3fa7784c89589b49764048e9909d0e07">   46</a></span>&#160;<span class="keyword">typedef</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">short</span> <span class="keywordtype">int</span>  <a class="code" href="lib_co_8hpp.html#a3fa7784c89589b49764048e9909d0e07">ushort</a>;</div>
-<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="lib_co_8hpp.html#a65f85814a8290f9797005d3b28e7e5fc">   47</a></span>&#160;<span class="keyword">typedef</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>       <a class="code" href="lib_co_8hpp.html#a65f85814a8290f9797005d3b28e7e5fc">uchar</a> ;</div>
-<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="lib_co_8hpp.html#a91ad9478d81a7aaf2593e8d9c3d06a14">   48</a></span>&#160;<span class="keyword">typedef</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>        <a class="code" href="lib_co_8hpp.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a>  ;</div>
-<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="lib_co_8hpp.html#a9c34ac44da309b004570530c8cec8a0e">   49</a></span>&#160;<span class="keyword">typedef</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <span class="keywordtype">int</span>   <a class="code" href="lib_co_8hpp.html#a9c34ac44da309b004570530c8cec8a0e">ulong</a> ;</div>
-<div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="lib_co_8hpp.html#a22152088aba12c47e916b7f0ffee0f51">   50</a></span>&#160;<span class="keyword">typedef</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <span class="keywordtype">long</span> <span class="keywordtype">int</span> <a class="code" href="lib_co_8hpp.html#a22152088aba12c47e916b7f0ffee0f51">ulonglong</a> ;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="preprocessor">#endif </span><span class="comment">//LIB_H_CO</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">// ********** Corentin Lib ************ //</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="print_8hpp.html">print.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="random_8hpp.html">random.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="string__functions_8hpp.html">string_functions.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="files__functions_8hpp.html">files_functions.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="vector__functions_8hpp.html">vector_functions.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">//   UTILS  //</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="lib_co_8hpp.html#a6cca31a5d1658456b486e6fa135c690b">   47</a></span>&#160;<span class="keyword">auto</span> <a class="code" href="lib_co_8hpp.html#a6cca31a5d1658456b486e6fa135c690b">pauseCo</a>() {std::cout &lt;&lt; <span class="stringliteral">&quot;Programe paused, please press enter&quot;</span>; <span class="keywordflow">return</span> std::cin.get();}</div>
+<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="lib_co_8hpp.html#ab102b1ac90e2714661a2e757b7f6692e">   48</a></span>&#160;<span class="keyword">auto</span> <a class="code" href="lib_co_8hpp.html#a6cca31a5d1658456b486e6fa135c690b">pauseCo</a>(std::string <span class="keyword">const</span> &amp; message) {std::cout &lt;&lt; message &lt;&lt; std::endl; <span class="keywordflow">return</span> std::cin.get();}</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">//   UNITS  //</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="lib_co_8hpp.html#a99f92dd785ee1e11e00427fdc8a4f772">   54</a></span>&#160;<span class="keywordtype">double</span> <a class="code" href="lib_co_8hpp.html#a99f92dd785ee1e11e00427fdc8a4f772">_ns</a> = 1000.;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment">//    Types   //</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;template&lt;typename T,  typename = typename std::enable_if&lt;std::is_arithmetic&lt;T&gt;::value&gt;::type&gt;</div>
+<div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="lib_co_8hpp.html#a79092fe2f0694bdbb860894b0f983e32">   62</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="lib_co_8hpp.html#a79092fe2f0694bdbb860894b0f983e32">bool_cast</a>(T <span class="keyword">const</span> &amp; t) {<span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keywordtype">bool</span><span class="keyword">&gt;</span>(t);}</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;template&lt;typename T,  typename = typename std::enable_if&lt;std::is_arithmetic&lt;T&gt;::value&gt;::type&gt;</div>
+<div class="line"><a name="l00066"></a><span class="lineno"><a class="line" href="lib_co_8hpp.html#afe72de0c3fabeb8944bfd72ccdbe0d73">   66</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">char</span> <a class="code" href="lib_co_8hpp.html#afe72de0c3fabeb8944bfd72ccdbe0d73">char_cast</a>(T <span class="keyword">const</span> &amp; t) {<span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keywordtype">char</span><span class="keyword">&gt;</span>(t);}</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;template&lt;typename T,  typename = typename std::enable_if&lt;std::is_arithmetic&lt;T&gt;::value&gt;::type&gt;</div>
+<div class="line"><a name="l00070"></a><span class="lineno"><a class="line" href="lib_co_8hpp.html#af4d9dac78db5e48b5e2c5253754aaa8c">   70</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">short</span> <a class="code" href="lib_co_8hpp.html#af4d9dac78db5e48b5e2c5253754aaa8c">short_cast</a>(T <span class="keyword">const</span> &amp; t) {<span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keywordtype">short</span><span class="keyword">&gt;</span>(t);}</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;template&lt;typename T,  typename = typename std::enable_if&lt;std::is_arithmetic&lt;T&gt;::value&gt;::type&gt;</div>
+<div class="line"><a name="l00074"></a><span class="lineno"><a class="line" href="lib_co_8hpp.html#a48e80fbfd11f9fb219b92ba1c29c1b2a">   74</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">int</span> <a class="code" href="lib_co_8hpp.html#a48e80fbfd11f9fb219b92ba1c29c1b2a">int_cast</a>(T <span class="keyword">const</span> &amp; t) {<span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(t);}</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;template&lt;typename T,  typename = typename std::enable_if&lt;std::is_arithmetic&lt;T&gt;::value&gt;::type&gt;</div>
+<div class="line"><a name="l00078"></a><span class="lineno"><a class="line" href="lib_co_8hpp.html#a695ead22582e1da41880ee67c2c61d07">   78</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">long</span> <a class="code" href="lib_co_8hpp.html#a695ead22582e1da41880ee67c2c61d07">long_cast</a>(T <span class="keyword">const</span> &amp; t) {<span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keywordtype">long</span><span class="keyword">&gt;</span>(t);}</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;template&lt;typename T,  typename = typename std::enable_if&lt;std::is_arithmetic&lt;T&gt;::value&gt;::type&gt;</div>
+<div class="line"><a name="l00082"></a><span class="lineno"><a class="line" href="lib_co_8hpp.html#a075a3c229a21ca4d0e91f72e99a6bf6d">   82</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">float</span> <a class="code" href="lib_co_8hpp.html#a075a3c229a21ca4d0e91f72e99a6bf6d">float_cast</a>(T <span class="keyword">const</span> &amp; t) {<span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(t);}</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;template&lt;typename T,  typename = typename std::enable_if&lt;std::is_arithmetic&lt;T&gt;::value&gt;::type&gt;</div>
+<div class="line"><a name="l00086"></a><span class="lineno"><a class="line" href="lib_co_8hpp.html#a2052317e56aa118e7ffcdb2e398f551c">   86</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">double</span> <a class="code" href="lib_co_8hpp.html#a2052317e56aa118e7ffcdb2e398f551c">double_cast</a>(T <span class="keyword">const</span> &amp; t) {<span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(t);}</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="comment">// Type short names :</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno"><a class="line" href="lib_co_8hpp.html#ae48ac2456c5ad6c956fef86e7bef3a21">   90</a></span>&#160;<span class="keyword">using</span> <a class="code" href="lib_co_8hpp.html#ae48ac2456c5ad6c956fef86e7bef3a21">uchar</a>  = <span class="keywordtype">unsigned</span> char       ;</div>
+<div class="line"><a name="l00091"></a><span class="lineno"><a class="line" href="lib_co_8hpp.html#ad29aff8b0f7fde4ef0291331012e596a">   91</a></span>&#160;<span class="keyword">using</span> <a class="code" href="lib_co_8hpp.html#ad29aff8b0f7fde4ef0291331012e596a">ushort</a> = <span class="keywordtype">unsigned</span> <span class="keywordtype">short</span> int  ;</div>
+<div class="line"><a name="l00092"></a><span class="lineno"><a class="line" href="lib_co_8hpp.html#a69aa29b598b851b0640aa225a9e5d61d">   92</a></span>&#160;<span class="keyword">using</span> <a class="code" href="lib_co_8hpp.html#a69aa29b598b851b0640aa225a9e5d61d">uint</a>   = <span class="keywordtype">unsigned</span> int        ;</div>
+<div class="line"><a name="l00093"></a><span class="lineno"><a class="line" href="lib_co_8hpp.html#a92c2ca60527219506deb3325507baee0">   93</a></span>&#160;<span class="keyword">using</span> <a class="code" href="lib_co_8hpp.html#a92c2ca60527219506deb3325507baee0">ulong</a>  = <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> int   ;</div>
+<div class="line"><a name="l00094"></a><span class="lineno"><a class="line" href="lib_co_8hpp.html#a38d84fea74b6f31e86b2e282bb232729">   94</a></span>&#160;<span class="keyword">using</span> <a class="code" href="lib_co_8hpp.html#a38d84fea74b6f31e86b2e282bb232729">longlong</a>  = <span class="keywordtype">long</span> <span class="keywordtype">long</span> int ;</div>
+<div class="line"><a name="l00095"></a><span class="lineno"><a class="line" href="lib_co_8hpp.html#a36061a3a05c4802ea9393df730a50d52">   95</a></span>&#160;<span class="keyword">using</span> <a class="code" href="lib_co_8hpp.html#a36061a3a05c4802ea9393df730a50d52">ulonglong</a>  = <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <span class="keywordtype">long</span> int ;</div>
+<div class="line"><a name="l00096"></a><span class="lineno"><a class="line" href="lib_co_8hpp.html#a801d6a451a01953ef8cbae6feb6a3638">   96</a></span>&#160;<span class="keyword">using</span> <span class="keywordtype">size_t</span> = <a class="code" href="lib_co_8hpp.html#a801d6a451a01953ef8cbae6feb6a3638">std::size_t</a>;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;template&lt;typename T,  typename = typename std::enable_if&lt;std::is_arithmetic&lt;T&gt;::value&gt;::type&gt;</div>
+<div class="line"><a name="l00101"></a><span class="lineno"><a class="line" href="lib_co_8hpp.html#ade77d1f37b1311b3f80ce429a33fd226">  101</a></span>&#160;<span class="keyword">inline</span> <a class="code" href="lib_co_8hpp.html#ae48ac2456c5ad6c956fef86e7bef3a21">uchar</a> <a class="code" href="lib_co_8hpp.html#ade77d1f37b1311b3f80ce429a33fd226">uchar_cast</a>(T <span class="keyword">const</span> &amp; t) {<span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><a class="code" href="lib_co_8hpp.html#ae48ac2456c5ad6c956fef86e7bef3a21">uchar</a><span class="keyword">&gt;</span>(t);}</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;template&lt;typename T,  typename = typename std::enable_if&lt;std::is_arithmetic&lt;T&gt;::value&gt;::type&gt;</div>
+<div class="line"><a name="l00105"></a><span class="lineno"><a class="line" href="lib_co_8hpp.html#ab2f8f9033c2742c4f5ac6d3cce6caf9a">  105</a></span>&#160;<span class="keyword">inline</span> <a class="code" href="lib_co_8hpp.html#ad29aff8b0f7fde4ef0291331012e596a">ushort</a> <a class="code" href="lib_co_8hpp.html#ab2f8f9033c2742c4f5ac6d3cce6caf9a">ushort_cast</a>(T <span class="keyword">const</span> &amp; t) {<span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><a class="code" href="lib_co_8hpp.html#ad29aff8b0f7fde4ef0291331012e596a">ushort</a><span class="keyword">&gt;</span>(t);}</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160; </div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;template&lt;typename T,  typename = typename std::enable_if&lt;std::is_arithmetic&lt;T&gt;::value&gt;::type&gt;</div>
+<div class="line"><a name="l00109"></a><span class="lineno"><a class="line" href="lib_co_8hpp.html#ad4f41fb682fba59b9adc6142282db5a2">  109</a></span>&#160;<span class="keyword">inline</span> <a class="code" href="lib_co_8hpp.html#a69aa29b598b851b0640aa225a9e5d61d">uint</a>  <a class="code" href="lib_co_8hpp.html#ad4f41fb682fba59b9adc6142282db5a2">uint_cast</a>(T <span class="keyword">const</span> &amp; t) {<span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><a class="code" href="lib_co_8hpp.html#a69aa29b598b851b0640aa225a9e5d61d">uint</a><span class="keyword">&gt;</span>(t);}</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; </div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;template&lt;typename T,  typename = typename std::enable_if&lt;std::is_arithmetic&lt;T&gt;::value&gt;::type&gt;</div>
+<div class="line"><a name="l00113"></a><span class="lineno"><a class="line" href="lib_co_8hpp.html#ac939b8397e82173edff13b3d00dc9d09">  113</a></span>&#160;<span class="keyword">inline</span> <a class="code" href="lib_co_8hpp.html#a92c2ca60527219506deb3325507baee0">ulong</a> <a class="code" href="lib_co_8hpp.html#ac939b8397e82173edff13b3d00dc9d09">ulong_cast</a>(T <span class="keyword">const</span> &amp; t) {<span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><a class="code" href="lib_co_8hpp.html#a92c2ca60527219506deb3325507baee0">ulong</a><span class="keyword">&gt;</span>(t);}</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160; </div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;template&lt;typename T,  typename = typename std::enable_if&lt;std::is_arithmetic&lt;T&gt;::value&gt;::type&gt;</div>
+<div class="line"><a name="l00117"></a><span class="lineno"><a class="line" href="lib_co_8hpp.html#a6064e403b0588c46cce0f1cb82471acf">  117</a></span>&#160;<span class="keyword">inline</span> <a class="code" href="lib_co_8hpp.html#a36061a3a05c4802ea9393df730a50d52">ulonglong</a> <a class="code" href="lib_co_8hpp.html#a6064e403b0588c46cce0f1cb82471acf">ulonglong_cast</a>(T <span class="keyword">const</span> &amp; t) {<span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><a class="code" href="lib_co_8hpp.html#a36061a3a05c4802ea9393df730a50d52">ulonglong</a><span class="keyword">&gt;</span>(t);}</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160; </div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;template&lt;typename T,  typename = typename std::enable_if&lt;std::is_arithmetic&lt;T&gt;::value&gt;::type&gt;</div>
+<div class="line"><a name="l00121"></a><span class="lineno"><a class="line" href="lib_co_8hpp.html#a86b2b990fa7ee3c102db83cdecc9d129">  121</a></span>&#160;<span class="keyword">inline</span> <a class="code" href="lib_co_8hpp.html#a38d84fea74b6f31e86b2e282bb232729">longlong</a> <a class="code" href="lib_co_8hpp.html#a86b2b990fa7ee3c102db83cdecc9d129">longlong_cast</a>(T <span class="keyword">const</span> &amp; t) {<span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><a class="code" href="lib_co_8hpp.html#a38d84fea74b6f31e86b2e282bb232729">longlong</a><span class="keyword">&gt;</span>(t);}</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160; </div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;template&lt;typename T,  typename = typename std::enable_if&lt;std::is_arithmetic&lt;T&gt;::value&gt;::type&gt;</div>
+<div class="line"><a name="l00125"></a><span class="lineno"><a class="line" href="lib_co_8hpp.html#a237f678c718382f74a68364c0fc1779a">  125</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">size_t</span> <a class="code" href="lib_co_8hpp.html#a237f678c718382f74a68364c0fc1779a">size_cast</a>(T <span class="keyword">const</span> &amp; t) {<span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keywordtype">size_t</span><span class="keyword">&gt;</span>(t);}</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160; </div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="comment">// Containers :</span></div>
+<div class="line"><a name="l00128"></a><span class="lineno"><a class="line" href="class_bools.html">  128</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_bools.html">Bools</a> </div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;{</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00131"></a><span class="lineno"><a class="line" href="class_bools.html#a2ac7144e4d610dde76f076eb34dc73f9">  131</a></span>&#160;    <span class="keywordtype">bool</span>* <a class="code" href="class_bools.html#a2ac7144e4d610dde76f076eb34dc73f9">m_data</a> = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00132"></a><span class="lineno"><a class="line" href="class_bools.html#a445a24b6837a4387946571ea76d95886">  132</a></span>&#160;    <span class="keywordtype">size_t</span> <a class="code" href="class_bools.html#a445a24b6837a4387946571ea76d95886">m_size</a> = 0;</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160; </div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00135"></a><span class="lineno"><a class="line" href="class_bools.html#addb0b52571d27932fa8143fcb422fe9b">  135</a></span>&#160;    <a class="code" href="class_bools.html#addb0b52571d27932fa8143fcb422fe9b">Bools</a>() {}</div>
+<div class="line"><a name="l00136"></a><span class="lineno"><a class="line" href="class_bools.html#a88601b65a1ae703d7bbc80e4c8586530">  136</a></span>&#160;    <a class="code" href="class_bools.html#a88601b65a1ae703d7bbc80e4c8586530">Bools</a>(<span class="keywordtype">size_t</span> <a class="code" href="class_bools.html#ad4d74f6e2266b271a8bd060ce6d0e448">size</a>, <span class="keywordtype">bool</span> <span class="keyword">const</span> &amp; value = <span class="keyword">false</span>) : <a class="code" href="class_bools.html#a445a24b6837a4387946571ea76d95886">m_size</a>(<a class="code" href="class_bools.html#ad4d74f6e2266b271a8bd060ce6d0e448">size</a>) {</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;        <a class="code" href="class_bools.html#a2ac7144e4d610dde76f076eb34dc73f9">m_data</a> = <span class="keyword">new</span> <span class="keywordtype">bool</span>[<a class="code" href="class_bools.html#a445a24b6837a4387946571ea76d95886">m_size</a>];</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;        memset(<a class="code" href="class_bools.html#a2ac7144e4d610dde76f076eb34dc73f9">m_data</a>, value ? 1 : 0, <a class="code" href="class_bools.html#a445a24b6837a4387946571ea76d95886">m_size</a> * <span class="keyword">sizeof</span>(<span class="keywordtype">bool</span>));</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;    }</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160; </div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;    <span class="comment">// Copy constructor</span></div>
+<div class="line"><a name="l00142"></a><span class="lineno"><a class="line" href="class_bools.html#a83a4cfda502a9e83cccb5a0cefd65067">  142</a></span>&#160;    <a class="code" href="class_bools.html#a83a4cfda502a9e83cccb5a0cefd65067">Bools</a>(<span class="keyword">const</span> <a class="code" href="class_bools.html">Bools</a>&amp; other) : <a class="code" href="class_bools.html#a445a24b6837a4387946571ea76d95886">m_size</a>(other.<a class="code" href="class_bools.html#a445a24b6837a4387946571ea76d95886">m_size</a>) {</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;        <a class="code" href="class_bools.html#a2ac7144e4d610dde76f076eb34dc73f9">m_data</a> = <span class="keyword">new</span> <span class="keywordtype">bool</span>[<a class="code" href="class_bools.html#a445a24b6837a4387946571ea76d95886">m_size</a>];</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;        memcpy(<a class="code" href="class_bools.html#a2ac7144e4d610dde76f076eb34dc73f9">m_data</a>, other.<a class="code" href="class_bools.html#a2ac7144e4d610dde76f076eb34dc73f9">m_data</a>, <a class="code" href="class_bools.html#a445a24b6837a4387946571ea76d95886">m_size</a> * <span class="keyword">sizeof</span>(<span class="keywordtype">bool</span>));</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;    }</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160; </div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    <span class="comment">// Move constructor</span></div>
+<div class="line"><a name="l00148"></a><span class="lineno"><a class="line" href="class_bools.html#a320db9791cebe780ebd6486236f820fd">  148</a></span>&#160;    <a class="code" href="class_bools.html#a320db9791cebe780ebd6486236f820fd">Bools</a>(<a class="code" href="class_bools.html">Bools</a>&amp;&amp; other) noexcept : <a class="code" href="class_bools.html#a2ac7144e4d610dde76f076eb34dc73f9">m_data</a>(other.m_data), <a class="code" href="class_bools.html#a445a24b6837a4387946571ea76d95886">m_size</a>(other.m_size) {</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;        other.m_data = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;        other.m_size = 0;</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;    }</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160; </div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;    <span class="comment">// Copy assignment</span></div>
+<div class="line"><a name="l00154"></a><span class="lineno"><a class="line" href="class_bools.html#ab3902a403239bd602aafd094319f3f8f">  154</a></span>&#160;    <a class="code" href="class_bools.html">Bools</a>&amp; <a class="code" href="class_bools.html#ab3902a403239bd602aafd094319f3f8f">operator=</a>(<span class="keyword">const</span> <a class="code" href="class_bools.html">Bools</a>&amp; other) {</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;        <span class="keywordflow">if</span> (<span class="keyword">this</span> != &amp;other) {</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;            <span class="keyword">delete</span>[] <a class="code" href="class_bools.html#a2ac7144e4d610dde76f076eb34dc73f9">m_data</a>;</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;            <a class="code" href="class_bools.html#a445a24b6837a4387946571ea76d95886">m_size</a> = other.<a class="code" href="class_bools.html#a445a24b6837a4387946571ea76d95886">m_size</a>;</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;            <a class="code" href="class_bools.html#a2ac7144e4d610dde76f076eb34dc73f9">m_data</a> = <span class="keyword">new</span> <span class="keywordtype">bool</span>[<a class="code" href="class_bools.html#a445a24b6837a4387946571ea76d95886">m_size</a>];</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;            memcpy(<a class="code" href="class_bools.html#a2ac7144e4d610dde76f076eb34dc73f9">m_data</a>, other.<a class="code" href="class_bools.html#a2ac7144e4d610dde76f076eb34dc73f9">m_data</a>, <a class="code" href="class_bools.html#a445a24b6837a4387946571ea76d95886">m_size</a> * <span class="keyword">sizeof</span>(<span class="keywordtype">bool</span>));</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;        }</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;    }</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160; </div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;    <span class="comment">// Move assignment</span></div>
+<div class="line"><a name="l00165"></a><span class="lineno"><a class="line" href="class_bools.html#a28a402a253cb7cef0e58445c126554ce">  165</a></span>&#160;    <a class="code" href="class_bools.html">Bools</a>&amp; <a class="code" href="class_bools.html#a28a402a253cb7cef0e58445c126554ce">operator=</a>(<a class="code" href="class_bools.html">Bools</a>&amp;&amp; other) noexcept {</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;        <span class="keywordflow">if</span> (<span class="keyword">this</span> != &amp;other) {</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;            <span class="keyword">delete</span>[] <a class="code" href="class_bools.html#a2ac7144e4d610dde76f076eb34dc73f9">m_data</a>;</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;            <a class="code" href="class_bools.html#a2ac7144e4d610dde76f076eb34dc73f9">m_data</a> = other.m_data;</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;            <a class="code" href="class_bools.html#a445a24b6837a4387946571ea76d95886">m_size</a> = other.m_size;</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;            other.m_data = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;            other.m_size = 0;</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;        }</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;    }</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160; </div>
+<div class="line"><a name="l00176"></a><span class="lineno"><a class="line" href="class_bools.html#a0908affb9f95fbbcd517316c7c81bf53">  176</a></span>&#160;    <a class="code" href="class_bools.html#a0908affb9f95fbbcd517316c7c81bf53">~Bools</a>() {</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;        <span class="keyword">delete</span>[] <a class="code" href="class_bools.html#a2ac7144e4d610dde76f076eb34dc73f9">m_data</a>;</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;    }</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160; </div>
+<div class="line"><a name="l00180"></a><span class="lineno"><a class="line" href="class_bools.html#afbd25d68b6e6fb096b95f56b665cf1b7">  180</a></span>&#160;    <span class="keywordtype">bool</span>&amp; <a class="code" href="class_bools.html#afbd25d68b6e6fb096b95f56b665cf1b7">operator[]</a>(<span class="keywordtype">size_t</span> <span class="keyword">const</span> &amp; index) {</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="class_bools.html#a2ac7144e4d610dde76f076eb34dc73f9">m_data</a>[index];</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;    }</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160; </div>
+<div class="line"><a name="l00184"></a><span class="lineno"><a class="line" href="class_bools.html#a0d18d7e936b556355a0ecc844a0daad3">  184</a></span>&#160;    <span class="keywordtype">bool</span> <span class="keyword">const</span> &amp; <a class="code" href="class_bools.html#a0d18d7e936b556355a0ecc844a0daad3">operator[]</a>(<span class="keywordtype">size_t</span> <span class="keyword">const</span> &amp; index)<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="class_bools.html#a2ac7144e4d610dde76f076eb34dc73f9">m_data</a>[index];</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;    }</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160; </div>
+<div class="line"><a name="l00188"></a><span class="lineno"><a class="line" href="class_bools.html#ad4d74f6e2266b271a8bd060ce6d0e448">  188</a></span>&#160;    <span class="keywordtype">size_t</span> <span class="keyword">const</span> &amp; <a class="code" href="class_bools.html#ad4d74f6e2266b271a8bd060ce6d0e448">size</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="class_bools.html#a445a24b6837a4387946571ea76d95886">m_size</a>;</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;    }</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160; </div>
+<div class="line"><a name="l00192"></a><span class="lineno"><a class="line" href="class_bools.html#ab34b97e65a4a23ae25a8b6f746c37a9d">  192</a></span>&#160;    <span class="keywordtype">size_t</span> <span class="keyword">const</span> &amp; <a class="code" href="class_bools.html#ab34b97e65a4a23ae25a8b6f746c37a9d">resize</a>(<span class="keywordtype">size_t</span> <a class="code" href="class_bools.html#ad4d74f6e2266b271a8bd060ce6d0e448">size</a>, <span class="keywordtype">bool</span> <span class="keyword">const</span> &amp; value = <span class="keyword">false</span>) {</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;      <span class="keywordflow">if</span> (<a class="code" href="class_bools.html#ad4d74f6e2266b271a8bd060ce6d0e448">size</a>&gt;<a class="code" href="class_bools.html#a445a24b6837a4387946571ea76d95886">m_size</a>)</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;      {</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;        <span class="keywordflow">if</span> (<a class="code" href="class_bools.html#a445a24b6837a4387946571ea76d95886">m_size</a>==0) </div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;        {</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;          <a class="code" href="class_bools.html#a2ac7144e4d610dde76f076eb34dc73f9">m_data</a> = <span class="keyword">new</span> <span class="keywordtype">bool</span>[<a class="code" href="class_bools.html#ad4d74f6e2266b271a8bd060ce6d0e448">size</a>];</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;          <span class="keywordflow">for</span> (;<a class="code" href="class_bools.html#a445a24b6837a4387946571ea76d95886">m_size</a>&lt;<a class="code" href="class_bools.html#ad4d74f6e2266b271a8bd060ce6d0e448">size</a>;<a class="code" href="class_bools.html#a445a24b6837a4387946571ea76d95886">m_size</a>++) <a class="code" href="class_bools.html#a2ac7144e4d610dde76f076eb34dc73f9">m_data</a>[<a class="code" href="class_bools.html#a445a24b6837a4387946571ea76d95886">m_size</a>] = value;</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;        }</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;        <span class="keywordflow">else</span> </div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;        {</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;          <span class="keywordtype">bool</span>* temp = <span class="keyword">new</span> <span class="keywordtype">bool</span>[<a class="code" href="class_bools.html#ad4d74f6e2266b271a8bd060ce6d0e448">size</a>];</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;          std::memcpy(temp, <a class="code" href="class_bools.html#a2ac7144e4d610dde76f076eb34dc73f9">m_data</a>, <a class="code" href="class_bools.html#a445a24b6837a4387946571ea76d95886">m_size</a>*<span class="keyword">sizeof</span>(<span class="keywordtype">bool</span>));</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;          <span class="keyword">delete</span>[] <a class="code" href="class_bools.html#a2ac7144e4d610dde76f076eb34dc73f9">m_data</a>;</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;          <span class="keywordflow">for</span> (;<a class="code" href="class_bools.html#a445a24b6837a4387946571ea76d95886">m_size</a>&lt;<a class="code" href="class_bools.html#ad4d74f6e2266b271a8bd060ce6d0e448">size</a>;<a class="code" href="class_bools.html#a445a24b6837a4387946571ea76d95886">m_size</a>++) temp[<a class="code" href="class_bools.html#a445a24b6837a4387946571ea76d95886">m_size</a>] = value;<span class="comment">// Fills new space with value AND set correct value to m_size</span></div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;          <a class="code" href="class_bools.html#a2ac7144e4d610dde76f076eb34dc73f9">m_data</a> = temp;</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;        }</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;      }</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;      <span class="keywordflow">return</span> <a class="code" href="class_bools.html#a445a24b6837a4387946571ea76d95886">m_size</a>;</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;    }</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160; </div>
+<div class="line"><a name="l00212"></a><span class="lineno"><a class="line" href="class_bools.html#a241564235788ec089ae157118d17e401">  212</a></span>&#160;    <span class="keyword">auto</span> <a class="code" href="class_bools.html#a241564235788ec089ae157118d17e401">begin</a>() {<span class="keywordflow">return</span> <a class="code" href="class_bools.html#a2ac7144e4d610dde76f076eb34dc73f9">m_data</a>;}</div>
+<div class="line"><a name="l00213"></a><span class="lineno"><a class="line" href="class_bools.html#a940a216bf52d8c93e688e2810cd767e8">  213</a></span>&#160;    <span class="keyword">auto</span> <a class="code" href="class_bools.html#a940a216bf52d8c93e688e2810cd767e8">end</a>()   {<span class="keywordflow">return</span> <a class="code" href="class_bools.html#a2ac7144e4d610dde76f076eb34dc73f9">m_data</a> + <a class="code" href="class_bools.html#a445a24b6837a4387946571ea76d95886">m_size</a>;}</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160; </div>
+<div class="line"><a name="l00215"></a><span class="lineno"><a class="line" href="class_bools.html#adaae46464e92c6073e068b66737da266">  215</a></span>&#160;    <span class="keyword">auto</span> <a class="code" href="class_bools.html#adaae46464e92c6073e068b66737da266">begin</a>()<span class="keyword"> const </span>{<span class="keywordflow">return</span> <a class="code" href="class_bools.html#a2ac7144e4d610dde76f076eb34dc73f9">m_data</a>;}</div>
+<div class="line"><a name="l00216"></a><span class="lineno"><a class="line" href="class_bools.html#ae285a4de44d0625f680555e524b8fb27">  216</a></span>&#160;    <span class="keyword">auto</span> <a class="code" href="class_bools.html#ae285a4de44d0625f680555e524b8fb27">end</a>()<span class="keyword">   const </span>{<span class="keywordflow">return</span> <a class="code" href="class_bools.html#a2ac7144e4d610dde76f076eb34dc73f9">m_data</a> + <a class="code" href="class_bools.html#a445a24b6837a4387946571ea76d95886">m_size</a>;}</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160; </div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;};</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160; </div>
+<div class="line"><a name="l00220"></a><span class="lineno"><a class="line" href="lib_co_8hpp.html#a4944be9c9377ea1853bd55f996b7cb13">  220</a></span>&#160;std::ostream&amp; <a class="code" href="lib_co_8hpp.html#a4944be9c9377ea1853bd55f996b7cb13">operator&gt;&gt;</a>(std::ostream&amp; cout, <a class="code" href="class_bools.html">Bools</a> <span class="keyword">const</span> &amp; bools)</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;{</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;  <span class="keywordflow">for</span> (<span class="keyword">auto</span> <span class="keyword">const</span> b : bools) cout &lt;&lt; b &lt;&lt; <span class="stringliteral">&quot; &quot;</span>;</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;  <span class="keywordflow">return</span> cout;</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;}</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160; </div>
+<div class="line"><a name="l00226"></a><span class="lineno"><a class="line" href="lib_co_8hpp.html#a632090884b4aa0585e747446a2683963">  226</a></span>&#160;<span class="keyword">using</span> <a class="code" href="lib_co_8hpp.html#a632090884b4aa0585e747446a2683963">Strings</a> = std::vector&lt;std::string&gt;;</div>
+<div class="line"><a name="l00227"></a><span class="lineno"><a class="line" href="lib_co_8hpp.html#a54161053f7c12fa7dd7bddf119708644">  227</a></span>&#160;<span class="keyword">using</span> <a class="code" href="lib_co_8hpp.html#a54161053f7c12fa7dd7bddf119708644">Ints</a> = std::vector&lt;int&gt;;</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160; </div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160; </div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;<span class="comment">//    STANDART FUNCTIONS   //</span></div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00234"></a><span class="lineno"><a class="line" href="lib_co_8hpp.html#a6df2dcd4b1f61c75dc292942bc5ca74d">  234</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="lib_co_8hpp.html#a6df2dcd4b1f61c75dc292942bc5ca74d">throw_error</a>(std::string <span class="keyword">const</span> &amp; message) {<span class="keywordflow">throw</span> std::runtime_error(message);}</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160; </div>
+<div class="line"><a name="l00236"></a><span class="lineno"><a class="line" href="lib_co_8hpp.html#af522b6efd63a7f871a8307755b1297bf">  236</a></span>&#160;std::map&lt;std::string, std::string&gt; <a class="code" href="lib_co_8hpp.html#af522b6efd63a7f871a8307755b1297bf">error_message</a> = </div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;{</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;  {<span class="stringliteral">&quot;DEV&quot;</span>, <span class="stringliteral">&quot;ASK DEV or do it yourself, sry&quot;</span>}</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;};</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160; </div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;<span class="comment">//    UNORDERED MAPS FUNCTIONS   //</span></div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> K, <span class="keyword">typename</span> V&gt; </div>
+<div class="line"><a name="l00246"></a><span class="lineno"><a class="line" href="lib_co_8hpp.html#a3b8ddb099e22657a31515fbcd8d1bf67">  246</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="lib_co_8hpp.html#a3b8ddb099e22657a31515fbcd8d1bf67">find_key</a>(std::unordered_map&lt;K,V&gt; <span class="keyword">const</span> &amp; map, K <span class="keyword">const</span> &amp; key)</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;{</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;  <span class="keyword">typename</span> std::unordered_map&lt;K, V&gt;::const_iterator it = map.find(key);</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;  <span class="keywordflow">return</span> it != map.end();</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;}</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160; </div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> K, <span class="keyword">typename</span> V&gt; </div>
+<div class="line"><a name="l00253"></a><span class="lineno"><a class="line" href="lib_co_8hpp.html#aaff2134bba0ee7c0b4a509699674251a">  253</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="lib_co_8hpp.html#aaff2134bba0ee7c0b4a509699674251a">find_value</a>(std::unordered_map&lt;K,V&gt; <span class="keyword">const</span> &amp; map, V <span class="keyword">const</span> &amp; value)</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;{</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;  <span class="keywordflow">return</span> (std::find_if(map.begin(), map.end(), [&amp;](<span class="keyword">const</span> <span class="keyword">auto</span>&amp; pair) {</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;        return pair.second == value;</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;    }));</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;}</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160; </div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;<span class="comment">//    MAPS FUNCTIONS   //</span></div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> K, <span class="keyword">typename</span> V&gt; </div>
+<div class="line"><a name="l00265"></a><span class="lineno"><a class="line" href="lib_co_8hpp.html#a664347fcb6b16fdc63cd601ebcfc2c8e">  265</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="lib_co_8hpp.html#a3b8ddb099e22657a31515fbcd8d1bf67">find_key</a>(std::map&lt;K,V&gt; <span class="keyword">const</span> &amp; map, K <span class="keyword">const</span> &amp; key)</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;{</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;  <span class="keyword">typename</span> std::map&lt;K, V&gt;::const_iterator it = map.find(key);</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;  <span class="keywordflow">return</span> it != map.end();</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;}</div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160; </div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> K, <span class="keyword">typename</span> V&gt; </div>
+<div class="line"><a name="l00272"></a><span class="lineno"><a class="line" href="lib_co_8hpp.html#a1a6d9eab2874e1bf6506aeb84d21506d">  272</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="lib_co_8hpp.html#aaff2134bba0ee7c0b4a509699674251a">find_value</a>(std::map&lt;K,V&gt; <span class="keyword">const</span> &amp; map, V <span class="keyword">const</span> &amp; value)</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;{</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;  <span class="keywordflow">return</span> (std::find_if(map.begin(), map.end(), [&amp;](<span class="keyword">const</span> <span class="keyword">auto</span>&amp; pair) {</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;        return pair.second == value;</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;    }));</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;}</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160; </div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> K, <span class="keyword">typename</span> V&gt; </div>
+<div class="line"><a name="l00280"></a><span class="lineno"><a class="line" href="lib_co_8hpp.html#ad15d46f1c6897c587cd64a3efba23585">  280</a></span>&#160;<span class="keyword">inline</span> std::pair&lt;K,V&gt; <a class="code" href="lib_co_8hpp.html#ad15d46f1c6897c587cd64a3efba23585">get_max_element</a>(std::map&lt;K,V&gt; <span class="keyword">const</span> &amp; map) </div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;{</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;  <span class="keywordflow">return</span> *std::max_element(map.begin(), map.end(), [] (<span class="keyword">const</span> std::pair&lt;K,V&gt; &amp; p1, <span class="keyword">const</span> std::pair&lt;K,V&gt; &amp; p2) </div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;  {</div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;    return p1.second &lt; p2.second;</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;  }); </div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;}</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160; </div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> K, <span class="keyword">typename</span> V&gt; </div>
+<div class="line"><a name="l00289"></a><span class="lineno"><a class="line" href="lib_co_8hpp.html#ad4ab9f9247e670a4d9db36ca683e6270">  289</a></span>&#160;<span class="keyword">inline</span> V <a class="code" href="lib_co_8hpp.html#ad4ab9f9247e670a4d9db36ca683e6270">get_max_value</a>(std::map&lt;K,V&gt; <span class="keyword">const</span> &amp; map) </div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;{</div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;  <span class="keywordflow">return</span> (std::max_element(map.begin(), map.end(), [] (<span class="keyword">const</span> std::pair&lt;K,V&gt; &amp; p1, <span class="keyword">const</span> std::pair&lt;K,V&gt; &amp; p2) </div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;  {</div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;    return p1.second &lt; p2.second;</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;  })-&gt;second); </div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;}</div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160; </div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> K, <span class="keyword">typename</span> V&gt; </div>
+<div class="line"><a name="l00298"></a><span class="lineno"><a class="line" href="lib_co_8hpp.html#aecb45c04cc3a1a2386b973014e4fef50">  298</a></span>&#160;<span class="keyword">inline</span> K <a class="code" href="lib_co_8hpp.html#aecb45c04cc3a1a2386b973014e4fef50">get_max_key</a>(std::map&lt;K,V&gt; <span class="keyword">const</span> &amp; map) </div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;{</div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;  <span class="keywordflow">return</span> (*std::max_element(map.begin(), map.end(), [] (<span class="keyword">const</span> std::pair&lt;K,V&gt; &amp; p1, <span class="keyword">const</span> std::pair&lt;K,V&gt; &amp; p2) </div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;  {</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;        return p1.first &lt; p2.first;</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;  })-&gt;first); </div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;}</div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160; </div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> K, <span class="keyword">typename</span> V&gt; </div>
+<div class="line"><a name="l00307"></a><span class="lineno"><a class="line" href="lib_co_8hpp.html#a6f43d67b9c0e4bb6bf5a58906ae0d812">  307</a></span>&#160;<span class="keyword">inline</span> std::pair&lt;K,V&gt; <a class="code" href="lib_co_8hpp.html#a6f43d67b9c0e4bb6bf5a58906ae0d812">get_min</a>(std::map&lt;K,V&gt; <span class="keyword">const</span> &amp; map) </div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;{</div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;  <span class="keywordflow">return</span> *std::min_element(map.begin(), map.end(), [] (<span class="keyword">const</span> std::pair&lt;K,V&gt; &amp; p1, <span class="keyword">const</span> std::pair&lt;K,V&gt; &amp; p2) </div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;  {</div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;        return p1.second &gt; p2.second;</div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;  }); </div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;}</div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160; </div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> K, <span class="keyword">typename</span> V&gt; </div>
+<div class="line"><a name="l00316"></a><span class="lineno"><a class="line" href="lib_co_8hpp.html#ad1d07d5a6e5c5182a7dc644148cd6fcd">  316</a></span>&#160;<span class="keyword">inline</span> V <a class="code" href="lib_co_8hpp.html#ad1d07d5a6e5c5182a7dc644148cd6fcd">get_min_value</a>(std::map&lt;K,V&gt; <span class="keyword">const</span> &amp; map) </div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;{</div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;  <span class="keywordflow">return</span> (std::min_element(map.begin(), map.end(), [] (<span class="keyword">const</span> std::pair&lt;K,V&gt; &amp; p1, <span class="keyword">const</span> std::pair&lt;K,V&gt; &amp; p2) </div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;  {</div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;        return p1.second &gt; p2.second;</div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;  })-&gt;second); </div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;}</div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160; </div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> K, <span class="keyword">typename</span> V&gt; </div>
+<div class="line"><a name="l00325"></a><span class="lineno"><a class="line" href="lib_co_8hpp.html#aeec208b7dcadd19e1317814c1de441d9">  325</a></span>&#160;<span class="keyword">inline</span> K <a class="code" href="lib_co_8hpp.html#aeec208b7dcadd19e1317814c1de441d9">get_min_key</a>(std::map&lt;K,V&gt; <span class="keyword">const</span> &amp; map) </div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;{</div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;  <span class="keywordflow">return</span> (*std::min_element(map.begin(), map.end(), [] (<span class="keyword">const</span> std::pair&lt;K,V&gt; &amp; p1, <span class="keyword">const</span> std::pair&lt;K,V&gt; &amp; p2) </div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;  {</div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;        return p1.first &gt; p2.first;</div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;  })-&gt;first); </div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;}</div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160; </div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;<span class="comment">//    TEMPLATE HANDELING   //</span></div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;<span class="preprocessor">#if (__cplusplus &gt;= 201702L)</span></div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;<span class="keyword">using</span> <a class="code" href="lib_co_8hpp.html#acbcaeec4b92056a813c1a11e65d5df7d">T_is_number</a> = std::enable_if_t&lt;std::is_arithmetic_v&lt;T&gt;&gt;;</div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;<span class="preprocessor">#else </span></div>
+<div class="line"><a name="l00341"></a><span class="lineno"><a class="line" href="lib_co_8hpp.html#acbcaeec4b92056a813c1a11e65d5df7d">  341</a></span>&#160;<span class="keyword">using</span> <a class="code" href="lib_co_8hpp.html#acbcaeec4b92056a813c1a11e65d5df7d">T_is_number</a> = void;</div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// __cplusplus &gt;= 201702L</span></div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160; </div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;<span class="comment">//   SLOTS AND SIGNALS   // TDB</span></div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;<span class="preprocessor">#if (__cplusplus &gt;= 201402L)</span></div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span>... ARGS&gt;</div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;<span class="keyword">class </span>Signal</div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;{</div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;  <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160; </div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;  Signal() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;  <span class="comment">// Signal(std::function&lt;void(ARGS...)&gt; &amp;&amp; func) {}</span></div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;  <span class="comment">// Signal(std::function&lt;void(ARGS...)&gt; &amp; func) {m_signals.emplace_back(func);}</span></div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160; </div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;  <span class="keywordtype">void</span> operator()(ARGS &amp;&amp;... args){<span class="keywordflow">for</span> (<span class="keyword">auto</span> <span class="keyword">const</span> &amp; signal : m_signals) signal(std::forward&lt;ARGS&gt;(args)...);}</div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160; </div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;  <span class="keywordtype">void</span> connect(std::function&lt;<span class="keywordtype">void</span>(ARGS...)&gt; func)</div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;  {</div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;    m_signals.push_back(func);</div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;  }</div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160; </div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;  <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160; </div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;  std::vector&lt;std::function&lt;void(ARGS...)&gt;&gt; m_signals;</div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;  <span class="comment">// std::vector&lt;std::function&lt;void(ARGS...)&gt;&gt; m_signals;</span></div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160; </div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;};</div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160; </div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;<span class="keyword">class </span>Slots</div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;{</div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;  <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;  Slots() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160; </div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;  <span class="keyword">template</span>&lt;<span class="keyword">class</span>... ARGS&gt;</div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;  <span class="keyword">static</span> <span class="keywordtype">void</span> connect(std::function&lt;<span class="keywordtype">void</span>(ARGS...)&gt; signal, std::function&lt;<span class="keywordtype">void</span>(ARGS...)&gt; slot)</div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;  {</div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160; </div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;  }</div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160; </div>
+<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;  <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160; </div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160; </div>
+<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;  <span class="comment">// std::vector&lt;std::function&lt;void(ARGS...)&gt;&gt; m_slots;</span></div>
+<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160; </div>
+<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;};</div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;<span class="preprocessor">#endif </span><span class="comment">//__cplusplus &gt;= 201402L</span></div>
+<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160; </div>
+<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;<span class="comment">// #if (__cplusplus &gt;= 201703L)</span></div>
+<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160; </div>
+<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;<span class="comment">// /**</span></div>
+<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;<span class="comment">//  * @brief This class allows one to read one specific format of csv file (see details)</span></div>
+<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;<span class="comment">//  * </span></div>
+<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;<span class="comment">//  * @details</span></div>
+<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;<span class="comment">//  * </span></div>
+<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;<span class="comment">//  * The format of the data MUST be the following : </span></div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;<span class="comment">//  * </span></div>
+<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;<span class="comment">//  * [[Name of the columns]]</span></div>
+<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;<span class="comment">//  * [[First row data]]</span></div>
+<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;<span class="comment">//  * [[....]]</span></div>
+<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;<span class="comment">//  * [[Last row data]]</span></div>
+<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;<span class="comment">//  * </span></div>
+<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;<span class="comment">//  * Then, declare the reader in two steps : </span></div>
+<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;<span class="comment">//  * </span></div>
+<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;<span class="comment">//  * first construct the reader using the constructor.</span></div>
+<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;<span class="comment">//  * </span></div>
+<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;<span class="comment">//  * </span></div>
+<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;<span class="comment">//  */</span></div>
+<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;<span class="comment">// template&lt;class... T&gt;</span></div>
+<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;<span class="comment">// class CSVReader</span></div>
+<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;<span class="comment">// {</span></div>
+<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;<span class="comment">// public:</span></div>
+<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;<span class="comment">//   CSVReader(std::string const &amp; filename, char const &amp; delim = &#39;;&#39;) {this -&gt; open(filename, delim);}</span></div>
+<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160; </div>
+<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;<span class="comment">//   bool open(std::string const &amp; filename, char const &amp; delim = &#39;;&#39;);</span></div>
+<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160; </div>
+<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;<span class="comment">//   operator bool() const &amp; {return m_ok;}</span></div>
+<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160; </div>
+<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;<span class="comment">// private:</span></div>
+<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;<span class="comment">//   std::vector&lt;std::string&gt; m_header;</span></div>
+<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;<span class="comment">//   std::vector&lt;std::tuple&lt;T...&gt;&gt; m_data;</span></div>
+<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;<span class="comment">//   bool m_ok = false;</span></div>
+<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;<span class="comment">// };</span></div>
+<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160; </div>
+<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;<span class="comment">// template&lt;class... T&gt;</span></div>
+<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;<span class="comment">// bool CSVReader&lt;T...&gt;::open(std::string const &amp; filename, char const &amp; delim)</span></div>
+<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;<span class="comment">// {</span></div>
+<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;<span class="comment">//   // Open file :</span></div>
+<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;<span class="comment">//   std::ifstream file(filename, std::ios::in);</span></div>
+<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;<span class="comment">//   if (!file) {print(filename, &quot;not found&quot;); return (m_ok = false);}</span></div>
+<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160; </div>
+<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;<span class="comment">//   // Read names header : </span></div>
+<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;<span class="comment">//   std::string reader;</span></div>
+<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;<span class="comment">//   std::getline(file, reader);</span></div>
+<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160;<span class="comment">//   m_header = getList(reader, delim);</span></div>
+<div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;<span class="comment">//   print(m_header);</span></div>
+<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160; </div>
+<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;<span class="comment">//   // Read the types header :</span></div>
+<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;<span class="comment">//   while (std::getline(file, reader))</span></div>
+<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;<span class="comment">//   {</span></div>
+<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;<span class="comment">//     std::vector&lt;std::string&gt; typeNames = getList(reader, delim);</span></div>
+<div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160;<span class="comment">//      if (typeNames.size() != sizeof...(T))</span></div>
+<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;<span class="comment">//     {</span></div>
+<div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;<span class="comment">//         // Handle the case where the number of types in the header</span></div>
+<div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160;<span class="comment">//         // doesn&#39;t match the number of template arguments.</span></div>
+<div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160;<span class="comment">//         print(&quot;Error: Number of types in the header doesn&#39;t match the template arguments.&quot;);</span></div>
+<div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160;<span class="comment">//         return (m_ok = false);</span></div>
+<div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160;<span class="comment">//     }</span></div>
+<div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160;<span class="comment">//   }</span></div>
+<div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160; </div>
+<div class="line"><a name="l00453"></a><span class="lineno">  453</span>&#160; </div>
+<div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160;<span class="comment">//   return true;</span></div>
+<div class="line"><a name="l00455"></a><span class="lineno">  455</span>&#160;<span class="comment">// }</span></div>
+<div class="line"><a name="l00456"></a><span class="lineno">  456</span>&#160; </div>
+<div class="line"><a name="l00457"></a><span class="lineno">  457</span>&#160;<span class="comment">// #endif //(__cplusplus &gt;= 201703L)</span></div>
+<div class="line"><a name="l00458"></a><span class="lineno">  458</span>&#160; </div>
+<div class="line"><a name="l00459"></a><span class="lineno">  459</span>&#160;<span class="preprocessor">#endif </span><span class="comment">//LIB_HPP_CO</span></div>
+<div class="ttc" id="aclass_bools_html"><div class="ttname"><a href="class_bools.html">Bools</a></div><div class="ttdef"><b>Definition:</b> libCo.hpp:129</div></div>
+<div class="ttc" id="aclass_bools_html_a0908affb9f95fbbcd517316c7c81bf53"><div class="ttname"><a href="class_bools.html#a0908affb9f95fbbcd517316c7c81bf53">Bools::~Bools</a></div><div class="ttdeci">~Bools()</div><div class="ttdef"><b>Definition:</b> libCo.hpp:176</div></div>
+<div class="ttc" id="aclass_bools_html_a0d18d7e936b556355a0ecc844a0daad3"><div class="ttname"><a href="class_bools.html#a0d18d7e936b556355a0ecc844a0daad3">Bools::operator[]</a></div><div class="ttdeci">bool const  &amp; operator[](size_t const &amp;index) const</div><div class="ttdef"><b>Definition:</b> libCo.hpp:184</div></div>
+<div class="ttc" id="aclass_bools_html_a241564235788ec089ae157118d17e401"><div class="ttname"><a href="class_bools.html#a241564235788ec089ae157118d17e401">Bools::begin</a></div><div class="ttdeci">auto begin()</div><div class="ttdef"><b>Definition:</b> libCo.hpp:212</div></div>
+<div class="ttc" id="aclass_bools_html_a28a402a253cb7cef0e58445c126554ce"><div class="ttname"><a href="class_bools.html#a28a402a253cb7cef0e58445c126554ce">Bools::operator=</a></div><div class="ttdeci">Bools &amp; operator=(Bools &amp;&amp;other) noexcept</div><div class="ttdef"><b>Definition:</b> libCo.hpp:165</div></div>
+<div class="ttc" id="aclass_bools_html_a2ac7144e4d610dde76f076eb34dc73f9"><div class="ttname"><a href="class_bools.html#a2ac7144e4d610dde76f076eb34dc73f9">Bools::m_data</a></div><div class="ttdeci">bool * m_data</div><div class="ttdef"><b>Definition:</b> libCo.hpp:131</div></div>
+<div class="ttc" id="aclass_bools_html_a320db9791cebe780ebd6486236f820fd"><div class="ttname"><a href="class_bools.html#a320db9791cebe780ebd6486236f820fd">Bools::Bools</a></div><div class="ttdeci">Bools(Bools &amp;&amp;other) noexcept</div><div class="ttdef"><b>Definition:</b> libCo.hpp:148</div></div>
+<div class="ttc" id="aclass_bools_html_a445a24b6837a4387946571ea76d95886"><div class="ttname"><a href="class_bools.html#a445a24b6837a4387946571ea76d95886">Bools::m_size</a></div><div class="ttdeci">size_t m_size</div><div class="ttdef"><b>Definition:</b> libCo.hpp:132</div></div>
+<div class="ttc" id="aclass_bools_html_a83a4cfda502a9e83cccb5a0cefd65067"><div class="ttname"><a href="class_bools.html#a83a4cfda502a9e83cccb5a0cefd65067">Bools::Bools</a></div><div class="ttdeci">Bools(const Bools &amp;other)</div><div class="ttdef"><b>Definition:</b> libCo.hpp:142</div></div>
+<div class="ttc" id="aclass_bools_html_a88601b65a1ae703d7bbc80e4c8586530"><div class="ttname"><a href="class_bools.html#a88601b65a1ae703d7bbc80e4c8586530">Bools::Bools</a></div><div class="ttdeci">Bools(size_t size, bool const &amp;value=false)</div><div class="ttdef"><b>Definition:</b> libCo.hpp:136</div></div>
+<div class="ttc" id="aclass_bools_html_a940a216bf52d8c93e688e2810cd767e8"><div class="ttname"><a href="class_bools.html#a940a216bf52d8c93e688e2810cd767e8">Bools::end</a></div><div class="ttdeci">auto end()</div><div class="ttdef"><b>Definition:</b> libCo.hpp:213</div></div>
+<div class="ttc" id="aclass_bools_html_ab34b97e65a4a23ae25a8b6f746c37a9d"><div class="ttname"><a href="class_bools.html#ab34b97e65a4a23ae25a8b6f746c37a9d">Bools::resize</a></div><div class="ttdeci">size_t const  &amp; resize(size_t size, bool const &amp;value=false)</div><div class="ttdef"><b>Definition:</b> libCo.hpp:192</div></div>
+<div class="ttc" id="aclass_bools_html_ab3902a403239bd602aafd094319f3f8f"><div class="ttname"><a href="class_bools.html#ab3902a403239bd602aafd094319f3f8f">Bools::operator=</a></div><div class="ttdeci">Bools &amp; operator=(const Bools &amp;other)</div><div class="ttdef"><b>Definition:</b> libCo.hpp:154</div></div>
+<div class="ttc" id="aclass_bools_html_ad4d74f6e2266b271a8bd060ce6d0e448"><div class="ttname"><a href="class_bools.html#ad4d74f6e2266b271a8bd060ce6d0e448">Bools::size</a></div><div class="ttdeci">size_t const  &amp; size() const</div><div class="ttdef"><b>Definition:</b> libCo.hpp:188</div></div>
+<div class="ttc" id="aclass_bools_html_adaae46464e92c6073e068b66737da266"><div class="ttname"><a href="class_bools.html#adaae46464e92c6073e068b66737da266">Bools::begin</a></div><div class="ttdeci">auto begin() const</div><div class="ttdef"><b>Definition:</b> libCo.hpp:215</div></div>
+<div class="ttc" id="aclass_bools_html_addb0b52571d27932fa8143fcb422fe9b"><div class="ttname"><a href="class_bools.html#addb0b52571d27932fa8143fcb422fe9b">Bools::Bools</a></div><div class="ttdeci">Bools()</div><div class="ttdef"><b>Definition:</b> libCo.hpp:135</div></div>
+<div class="ttc" id="aclass_bools_html_ae285a4de44d0625f680555e524b8fb27"><div class="ttname"><a href="class_bools.html#ae285a4de44d0625f680555e524b8fb27">Bools::end</a></div><div class="ttdeci">auto end() const</div><div class="ttdef"><b>Definition:</b> libCo.hpp:216</div></div>
+<div class="ttc" id="aclass_bools_html_afbd25d68b6e6fb096b95f56b665cf1b7"><div class="ttname"><a href="class_bools.html#afbd25d68b6e6fb096b95f56b665cf1b7">Bools::operator[]</a></div><div class="ttdeci">bool &amp; operator[](size_t const &amp;index)</div><div class="ttdef"><b>Definition:</b> libCo.hpp:180</div></div>
 <div class="ttc" id="afiles__functions_8hpp_html"><div class="ttname"><a href="files__functions_8hpp.html">files_functions.hpp</a></div></div>
-<div class="ttc" id="alib_co_8hpp_html_a22152088aba12c47e916b7f0ffee0f51"><div class="ttname"><a href="lib_co_8hpp.html#a22152088aba12c47e916b7f0ffee0f51">ulonglong</a></div><div class="ttdeci">unsigned long long int ulonglong</div><div class="ttdef"><b>Definition:</b> libCo.hpp:50</div></div>
-<div class="ttc" id="alib_co_8hpp_html_a3fa7784c89589b49764048e9909d0e07"><div class="ttname"><a href="lib_co_8hpp.html#a3fa7784c89589b49764048e9909d0e07">ushort</a></div><div class="ttdeci">unsigned short int ushort</div><div class="ttdef"><b>Definition:</b> libCo.hpp:46</div></div>
-<div class="ttc" id="alib_co_8hpp_html_a65f85814a8290f9797005d3b28e7e5fc"><div class="ttname"><a href="lib_co_8hpp.html#a65f85814a8290f9797005d3b28e7e5fc">uchar</a></div><div class="ttdeci">unsigned char uchar</div><div class="ttdef"><b>Definition:</b> libCo.hpp:47</div></div>
-<div class="ttc" id="alib_co_8hpp_html_a91ad9478d81a7aaf2593e8d9c3d06a14"><div class="ttname"><a href="lib_co_8hpp.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a></div><div class="ttdeci">unsigned int uint</div><div class="ttdef"><b>Definition:</b> libCo.hpp:48</div></div>
-<div class="ttc" id="alib_co_8hpp_html_a9c34ac44da309b004570530c8cec8a0e"><div class="ttname"><a href="lib_co_8hpp.html#a9c34ac44da309b004570530c8cec8a0e">ulong</a></div><div class="ttdeci">unsigned long int ulong</div><div class="ttdef"><b>Definition:</b> libCo.hpp:49</div></div>
-<div class="ttc" id="alib_co_8hpp_html_ad1be7b5ed61940e94b315160cd5c0702"><div class="ttname"><a href="lib_co_8hpp.html#ad1be7b5ed61940e94b315160cd5c0702">_ns</a></div><div class="ttdeci">float _ns</div><div class="ttdef"><b>Definition:</b> libCo.hpp:40</div></div>
+<div class="ttc" id="alib_co_8hpp_html_a075a3c229a21ca4d0e91f72e99a6bf6d"><div class="ttname"><a href="lib_co_8hpp.html#a075a3c229a21ca4d0e91f72e99a6bf6d">float_cast</a></div><div class="ttdeci">float float_cast(T const &amp;t)</div><div class="ttdoc">Casts a number into a float.</div><div class="ttdef"><b>Definition:</b> libCo.hpp:82</div></div>
+<div class="ttc" id="alib_co_8hpp_html_a2052317e56aa118e7ffcdb2e398f551c"><div class="ttname"><a href="lib_co_8hpp.html#a2052317e56aa118e7ffcdb2e398f551c">double_cast</a></div><div class="ttdeci">double double_cast(T const &amp;t)</div><div class="ttdoc">Casts a number into an double.</div><div class="ttdef"><b>Definition:</b> libCo.hpp:86</div></div>
+<div class="ttc" id="alib_co_8hpp_html_a237f678c718382f74a68364c0fc1779a"><div class="ttname"><a href="lib_co_8hpp.html#a237f678c718382f74a68364c0fc1779a">size_cast</a></div><div class="ttdeci">size_t size_cast(T const &amp;t)</div><div class="ttdoc">Casts a number into std::size_t.</div><div class="ttdef"><b>Definition:</b> libCo.hpp:125</div></div>
+<div class="ttc" id="alib_co_8hpp_html_a36061a3a05c4802ea9393df730a50d52"><div class="ttname"><a href="lib_co_8hpp.html#a36061a3a05c4802ea9393df730a50d52">ulonglong</a></div><div class="ttdeci">unsigned long long int ulonglong</div><div class="ttdef"><b>Definition:</b> libCo.hpp:95</div></div>
+<div class="ttc" id="alib_co_8hpp_html_a38d84fea74b6f31e86b2e282bb232729"><div class="ttname"><a href="lib_co_8hpp.html#a38d84fea74b6f31e86b2e282bb232729">longlong</a></div><div class="ttdeci">long long int longlong</div><div class="ttdef"><b>Definition:</b> libCo.hpp:94</div></div>
+<div class="ttc" id="alib_co_8hpp_html_a3b8ddb099e22657a31515fbcd8d1bf67"><div class="ttname"><a href="lib_co_8hpp.html#a3b8ddb099e22657a31515fbcd8d1bf67">find_key</a></div><div class="ttdeci">bool find_key(std::unordered_map&lt; K, V &gt; const &amp;map, K const &amp;key)</div><div class="ttdef"><b>Definition:</b> libCo.hpp:246</div></div>
+<div class="ttc" id="alib_co_8hpp_html_a48e80fbfd11f9fb219b92ba1c29c1b2a"><div class="ttname"><a href="lib_co_8hpp.html#a48e80fbfd11f9fb219b92ba1c29c1b2a">int_cast</a></div><div class="ttdeci">int int_cast(T const &amp;t)</div><div class="ttdoc">Casts a number into an int.</div><div class="ttdef"><b>Definition:</b> libCo.hpp:74</div></div>
+<div class="ttc" id="alib_co_8hpp_html_a4944be9c9377ea1853bd55f996b7cb13"><div class="ttname"><a href="lib_co_8hpp.html#a4944be9c9377ea1853bd55f996b7cb13">operator&gt;&gt;</a></div><div class="ttdeci">std::ostream &amp; operator&gt;&gt;(std::ostream &amp;cout, Bools const &amp;bools)</div><div class="ttdef"><b>Definition:</b> libCo.hpp:220</div></div>
+<div class="ttc" id="alib_co_8hpp_html_a54161053f7c12fa7dd7bddf119708644"><div class="ttname"><a href="lib_co_8hpp.html#a54161053f7c12fa7dd7bddf119708644">Ints</a></div><div class="ttdeci">std::vector&lt; int &gt; Ints</div><div class="ttdef"><b>Definition:</b> libCo.hpp:227</div></div>
+<div class="ttc" id="alib_co_8hpp_html_a6064e403b0588c46cce0f1cb82471acf"><div class="ttname"><a href="lib_co_8hpp.html#a6064e403b0588c46cce0f1cb82471acf">ulonglong_cast</a></div><div class="ttdeci">ulonglong ulonglong_cast(T const &amp;t)</div><div class="ttdoc">Casts a number into unsigned long long (ulonglong)</div><div class="ttdef"><b>Definition:</b> libCo.hpp:117</div></div>
+<div class="ttc" id="alib_co_8hpp_html_a632090884b4aa0585e747446a2683963"><div class="ttname"><a href="lib_co_8hpp.html#a632090884b4aa0585e747446a2683963">Strings</a></div><div class="ttdeci">std::vector&lt; std::string &gt; Strings</div><div class="ttdef"><b>Definition:</b> libCo.hpp:226</div></div>
+<div class="ttc" id="alib_co_8hpp_html_a695ead22582e1da41880ee67c2c61d07"><div class="ttname"><a href="lib_co_8hpp.html#a695ead22582e1da41880ee67c2c61d07">long_cast</a></div><div class="ttdeci">long long_cast(T const &amp;t)</div><div class="ttdoc">Casts a number into an long.</div><div class="ttdef"><b>Definition:</b> libCo.hpp:78</div></div>
+<div class="ttc" id="alib_co_8hpp_html_a69aa29b598b851b0640aa225a9e5d61d"><div class="ttname"><a href="lib_co_8hpp.html#a69aa29b598b851b0640aa225a9e5d61d">uint</a></div><div class="ttdeci">unsigned int uint</div><div class="ttdef"><b>Definition:</b> libCo.hpp:92</div></div>
+<div class="ttc" id="alib_co_8hpp_html_a6cca31a5d1658456b486e6fa135c690b"><div class="ttname"><a href="lib_co_8hpp.html#a6cca31a5d1658456b486e6fa135c690b">pauseCo</a></div><div class="ttdeci">auto pauseCo()</div><div class="ttdef"><b>Definition:</b> libCo.hpp:47</div></div>
+<div class="ttc" id="alib_co_8hpp_html_a6df2dcd4b1f61c75dc292942bc5ca74d"><div class="ttname"><a href="lib_co_8hpp.html#a6df2dcd4b1f61c75dc292942bc5ca74d">throw_error</a></div><div class="ttdeci">void throw_error(std::string const &amp;message)</div><div class="ttdef"><b>Definition:</b> libCo.hpp:234</div></div>
+<div class="ttc" id="alib_co_8hpp_html_a6f43d67b9c0e4bb6bf5a58906ae0d812"><div class="ttname"><a href="lib_co_8hpp.html#a6f43d67b9c0e4bb6bf5a58906ae0d812">get_min</a></div><div class="ttdeci">std::pair&lt; K, V &gt; get_min(std::map&lt; K, V &gt; const &amp;map)</div><div class="ttdef"><b>Definition:</b> libCo.hpp:307</div></div>
+<div class="ttc" id="alib_co_8hpp_html_a79092fe2f0694bdbb860894b0f983e32"><div class="ttname"><a href="lib_co_8hpp.html#a79092fe2f0694bdbb860894b0f983e32">bool_cast</a></div><div class="ttdeci">bool bool_cast(T const &amp;t)</div><div class="ttdoc">Casts a number into an bool.</div><div class="ttdef"><b>Definition:</b> libCo.hpp:62</div></div>
+<div class="ttc" id="alib_co_8hpp_html_a801d6a451a01953ef8cbae6feb6a3638"><div class="ttname"><a href="lib_co_8hpp.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a></div><div class="ttdeci">std::size_t size_t</div><div class="ttdef"><b>Definition:</b> libCo.hpp:96</div></div>
+<div class="ttc" id="alib_co_8hpp_html_a86b2b990fa7ee3c102db83cdecc9d129"><div class="ttname"><a href="lib_co_8hpp.html#a86b2b990fa7ee3c102db83cdecc9d129">longlong_cast</a></div><div class="ttdeci">longlong longlong_cast(T const &amp;t)</div><div class="ttdoc">Casts a number into long long (longlong)</div><div class="ttdef"><b>Definition:</b> libCo.hpp:121</div></div>
+<div class="ttc" id="alib_co_8hpp_html_a92c2ca60527219506deb3325507baee0"><div class="ttname"><a href="lib_co_8hpp.html#a92c2ca60527219506deb3325507baee0">ulong</a></div><div class="ttdeci">unsigned long int ulong</div><div class="ttdef"><b>Definition:</b> libCo.hpp:93</div></div>
+<div class="ttc" id="alib_co_8hpp_html_a99f92dd785ee1e11e00427fdc8a4f772"><div class="ttname"><a href="lib_co_8hpp.html#a99f92dd785ee1e11e00427fdc8a4f772">_ns</a></div><div class="ttdeci">double _ns</div><div class="ttdef"><b>Definition:</b> libCo.hpp:54</div></div>
+<div class="ttc" id="alib_co_8hpp_html_aaff2134bba0ee7c0b4a509699674251a"><div class="ttname"><a href="lib_co_8hpp.html#aaff2134bba0ee7c0b4a509699674251a">find_value</a></div><div class="ttdeci">bool find_value(std::unordered_map&lt; K, V &gt; const &amp;map, V const &amp;value)</div><div class="ttdef"><b>Definition:</b> libCo.hpp:253</div></div>
+<div class="ttc" id="alib_co_8hpp_html_ab2f8f9033c2742c4f5ac6d3cce6caf9a"><div class="ttname"><a href="lib_co_8hpp.html#ab2f8f9033c2742c4f5ac6d3cce6caf9a">ushort_cast</a></div><div class="ttdeci">ushort ushort_cast(T const &amp;t)</div><div class="ttdoc">Casts a number into unsigned short (ushort)</div><div class="ttdef"><b>Definition:</b> libCo.hpp:105</div></div>
+<div class="ttc" id="alib_co_8hpp_html_ac939b8397e82173edff13b3d00dc9d09"><div class="ttname"><a href="lib_co_8hpp.html#ac939b8397e82173edff13b3d00dc9d09">ulong_cast</a></div><div class="ttdeci">ulong ulong_cast(T const &amp;t)</div><div class="ttdoc">Casts a number into unsigned long (ulong)</div><div class="ttdef"><b>Definition:</b> libCo.hpp:113</div></div>
+<div class="ttc" id="alib_co_8hpp_html_acbcaeec4b92056a813c1a11e65d5df7d"><div class="ttname"><a href="lib_co_8hpp.html#acbcaeec4b92056a813c1a11e65d5df7d">T_is_number</a></div><div class="ttdeci">void T_is_number</div><div class="ttdef"><b>Definition:</b> libCo.hpp:341</div></div>
+<div class="ttc" id="alib_co_8hpp_html_ad15d46f1c6897c587cd64a3efba23585"><div class="ttname"><a href="lib_co_8hpp.html#ad15d46f1c6897c587cd64a3efba23585">get_max_element</a></div><div class="ttdeci">std::pair&lt; K, V &gt; get_max_element(std::map&lt; K, V &gt; const &amp;map)</div><div class="ttdef"><b>Definition:</b> libCo.hpp:280</div></div>
+<div class="ttc" id="alib_co_8hpp_html_ad1d07d5a6e5c5182a7dc644148cd6fcd"><div class="ttname"><a href="lib_co_8hpp.html#ad1d07d5a6e5c5182a7dc644148cd6fcd">get_min_value</a></div><div class="ttdeci">V get_min_value(std::map&lt; K, V &gt; const &amp;map)</div><div class="ttdef"><b>Definition:</b> libCo.hpp:316</div></div>
+<div class="ttc" id="alib_co_8hpp_html_ad29aff8b0f7fde4ef0291331012e596a"><div class="ttname"><a href="lib_co_8hpp.html#ad29aff8b0f7fde4ef0291331012e596a">ushort</a></div><div class="ttdeci">unsigned short int ushort</div><div class="ttdef"><b>Definition:</b> libCo.hpp:91</div></div>
+<div class="ttc" id="alib_co_8hpp_html_ad4ab9f9247e670a4d9db36ca683e6270"><div class="ttname"><a href="lib_co_8hpp.html#ad4ab9f9247e670a4d9db36ca683e6270">get_max_value</a></div><div class="ttdeci">V get_max_value(std::map&lt; K, V &gt; const &amp;map)</div><div class="ttdef"><b>Definition:</b> libCo.hpp:289</div></div>
+<div class="ttc" id="alib_co_8hpp_html_ad4f41fb682fba59b9adc6142282db5a2"><div class="ttname"><a href="lib_co_8hpp.html#ad4f41fb682fba59b9adc6142282db5a2">uint_cast</a></div><div class="ttdeci">uint uint_cast(T const &amp;t)</div><div class="ttdoc">Casts a number into unsigned int (uint)</div><div class="ttdef"><b>Definition:</b> libCo.hpp:109</div></div>
+<div class="ttc" id="alib_co_8hpp_html_ade77d1f37b1311b3f80ce429a33fd226"><div class="ttname"><a href="lib_co_8hpp.html#ade77d1f37b1311b3f80ce429a33fd226">uchar_cast</a></div><div class="ttdeci">uchar uchar_cast(T const &amp;t)</div><div class="ttdoc">Casts a number into unsigned char (uchar)</div><div class="ttdef"><b>Definition:</b> libCo.hpp:101</div></div>
+<div class="ttc" id="alib_co_8hpp_html_ae48ac2456c5ad6c956fef86e7bef3a21"><div class="ttname"><a href="lib_co_8hpp.html#ae48ac2456c5ad6c956fef86e7bef3a21">uchar</a></div><div class="ttdeci">unsigned char uchar</div><div class="ttdef"><b>Definition:</b> libCo.hpp:90</div></div>
+<div class="ttc" id="alib_co_8hpp_html_aecb45c04cc3a1a2386b973014e4fef50"><div class="ttname"><a href="lib_co_8hpp.html#aecb45c04cc3a1a2386b973014e4fef50">get_max_key</a></div><div class="ttdeci">K get_max_key(std::map&lt; K, V &gt; const &amp;map)</div><div class="ttdef"><b>Definition:</b> libCo.hpp:298</div></div>
+<div class="ttc" id="alib_co_8hpp_html_aeec208b7dcadd19e1317814c1de441d9"><div class="ttname"><a href="lib_co_8hpp.html#aeec208b7dcadd19e1317814c1de441d9">get_min_key</a></div><div class="ttdeci">K get_min_key(std::map&lt; K, V &gt; const &amp;map)</div><div class="ttdef"><b>Definition:</b> libCo.hpp:325</div></div>
+<div class="ttc" id="alib_co_8hpp_html_af4d9dac78db5e48b5e2c5253754aaa8c"><div class="ttname"><a href="lib_co_8hpp.html#af4d9dac78db5e48b5e2c5253754aaa8c">short_cast</a></div><div class="ttdeci">short short_cast(T const &amp;t)</div><div class="ttdoc">Casts a number into an short.</div><div class="ttdef"><b>Definition:</b> libCo.hpp:70</div></div>
+<div class="ttc" id="alib_co_8hpp_html_af522b6efd63a7f871a8307755b1297bf"><div class="ttname"><a href="lib_co_8hpp.html#af522b6efd63a7f871a8307755b1297bf">error_message</a></div><div class="ttdeci">std::map&lt; std::string, std::string &gt; error_message</div><div class="ttdef"><b>Definition:</b> libCo.hpp:236</div></div>
+<div class="ttc" id="alib_co_8hpp_html_afe72de0c3fabeb8944bfd72ccdbe0d73"><div class="ttname"><a href="lib_co_8hpp.html#afe72de0c3fabeb8944bfd72ccdbe0d73">char_cast</a></div><div class="ttdeci">char char_cast(T const &amp;t)</div><div class="ttdoc">Casts a number into an char.</div><div class="ttdef"><b>Definition:</b> libCo.hpp:66</div></div>
 <div class="ttc" id="aprint_8hpp_html"><div class="ttname"><a href="print_8hpp.html">print.hpp</a></div></div>
+<div class="ttc" id="arandom_8hpp_html"><div class="ttname"><a href="random_8hpp.html">random.hpp</a></div></div>
 <div class="ttc" id="astring__functions_8hpp_html"><div class="ttname"><a href="string__functions_8hpp.html">string_functions.hpp</a></div></div>
 <div class="ttc" id="avector__functions_8hpp_html"><div class="ttname"><a href="vector__functions_8hpp.html">vector_functions.hpp</a></div></div>
 </div><!-- fragment --></div><!-- contents -->

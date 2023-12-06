@@ -82,7 +82,9 @@ $(document).ready(function(){initNavTree('lib_co_8hpp.html',''); initResizable()
 
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
+<a href="#func-members">Functions</a> &#124;
 <a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <div class="title">libCo.hpp File Reference</div>  </div>
@@ -91,26 +93,33 @@ $(document).ready(function(){initNavTree('lib_co_8hpp.html',''); initResizable()
 <div class="textblock"><code>#include &lt;any&gt;</code><br />
 <code>#include &lt;array&gt;</code><br />
 <code>#include &lt;algorithm&gt;</code><br />
+<code>#include &lt;cstdlib&gt;</code><br />
+<code>#include &lt;cstring&gt;</code><br />
+<code>#include &lt;fstream&gt;</code><br />
+<code>#include &lt;functional&gt;</code><br />
 <code>#include &lt;iomanip&gt;</code><br />
 <code>#include &lt;iostream&gt;</code><br />
-<code>#include &lt;fstream&gt;</code><br />
-<code>#include &lt;numeric&gt;</code><br />
 <code>#include &lt;map&gt;</code><br />
+<code>#include &lt;memory&gt;</code><br />
 <code>#include &lt;mutex&gt;</code><br />
+<code>#include &lt;numeric&gt;</code><br />
 <code>#include &lt;queue&gt;</code><br />
 <code>#include &lt;sstream&gt;</code><br />
 <code>#include &lt;stdexcept&gt;</code><br />
 <code>#include &lt;string&gt;</code><br />
+<code>#include &lt;stack&gt;</code><br />
 <code>#include &lt;thread&gt;</code><br />
+<code>#include &lt;typeindex&gt;</code><br />
+<code>#include &lt;typeinfo&gt;</code><br />
 <code>#include &lt;unordered_map&gt;</code><br />
 <code>#include &lt;vector&gt;</code><br />
-<code>#include &lt;cstdlib&gt;</code><br />
 <code>#include &lt;dirent.h&gt;</code><br />
 <code>#include &lt;glob.h&gt;</code><br />
 <code>#include &lt;stdio.h&gt;</code><br />
 <code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="print_8hpp_source.html">print.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="random_8hpp_source.html">random.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="string__functions_8hpp_source.html">string_functions.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="files__functions_8hpp_source.html">files_functions.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="vector__functions_8hpp_source.html">vector_functions.hpp</a>&quot;</code><br />
@@ -118,117 +127,1464 @@ $(document).ready(function(){initNavTree('lib_co_8hpp.html',''); initResizable()
 Include dependency graph for libCo.hpp:</div>
 <div class="dyncontent">
 <div class="center"><img src="lib_co_8hpp__incl.png" border="0" usemap="#alib_2lib_co_8hpp" alt=""/></div>
+<map name="alib_2lib_co_8hpp" id="alib_2lib_co_8hpp">
+<area shape="rect" title=" " alt="" coords="1296,5,1399,32"/>
+<area shape="rect" title=" " alt="" coords="5,80,52,107"/>
+<area shape="rect" title=" " alt="" coords="77,80,133,107"/>
+<area shape="rect" title=" " alt="" coords="157,80,242,107"/>
+<area shape="rect" title=" " alt="" coords="267,80,332,107"/>
+<area shape="rect" title=" " alt="" coords="357,80,423,107"/>
+<area shape="rect" title=" " alt="" coords="320,155,393,181"/>
+<area shape="rect" title=" " alt="" coords="920,80,1007,107"/>
+<area shape="rect" title=" " alt="" coords="1031,80,1106,107"/>
+<area shape="rect" title=" " alt="" coords="1130,80,1210,107"/>
+<area shape="rect" title=" " alt="" coords="1234,80,1285,107"/>
+<area shape="rect" title=" " alt="" coords="1309,80,1386,107"/>
+<area shape="rect" title=" " alt="" coords="1410,80,1474,107"/>
+<area shape="rect" title=" " alt="" coords="1498,80,1573,107"/>
+<area shape="rect" title=" " alt="" coords="1597,80,1660,107"/>
+<area shape="rect" title=" " alt="" coords="1685,80,1759,107"/>
+<area shape="rect" title=" " alt="" coords="1784,80,1871,107"/>
+<area shape="rect" title=" " alt="" coords="766,229,825,256"/>
+<area shape="rect" title=" " alt="" coords="1895,80,1952,107"/>
+<area shape="rect" title=" " alt="" coords="1977,80,2041,107"/>
+<area shape="rect" title=" " alt="" coords="2065,80,2152,107"/>
+<area shape="rect" title=" " alt="" coords="2176,80,2252,107"/>
+<area shape="rect" title=" " alt="" coords="2276,80,2400,107"/>
+<area shape="rect" title=" " alt="" coords="921,229,984,256"/>
+<area shape="rect" title=" " alt="" coords="2425,80,2497,107"/>
+<area shape="rect" title=" " alt="" coords="2521,80,2584,107"/>
+<area shape="rect" title=" " alt="" coords="2609,80,2675,107"/>
+<area shape="rect" title=" " alt="" coords="2700,80,2771,107"/>
+<area shape="rect" title=" " alt="" coords="2795,80,2865,107"/>
+<area shape="rect" href="print_8hpp.html" title=" " alt="" coords="506,229,586,256"/>
+<area shape="rect" href="random_8hpp.html" title=" " alt="" coords="2889,80,2989,107"/>
+<area shape="rect" href="string__functions_8hpp.html" title=" " alt="" coords="818,155,973,181"/>
+<area shape="rect" href="files__functions_8hpp.html" title=" " alt="" coords="549,80,693,107"/>
+<area shape="rect" href="vector__functions_8hpp.html" title=" " alt="" coords="584,155,743,181"/>
+<area shape="rect" title=" " alt="" coords="2903,155,2975,181"/>
+<area shape="rect" title=" " alt="" coords="418,155,509,181"/>
+</map>
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="lib_co_8hpp__dep__incl.png" border="0" usemap="#alib_2lib_co_8hppdep" alt=""/></div>
+<map name="alib_2lib_co_8hppdep" id="alib_2lib_co_8hppdep">
+<area shape="rect" title=" " alt="" coords="1568,5,1671,32"/>
+<area shape="rect" href="_analyse_2_counters_8hpp.html" title=" " alt="" coords="1851,304,2035,331"/>
+<area shape="rect" href="_d_s_s_d_8hpp.html" title=" " alt="" coords="649,304,811,331"/>
+<area shape="rect" href="_builder_8hpp.html" title=" " alt="" coords="1399,304,1568,331"/>
+<area shape="rect" href="_faster2_root_8hpp.html" title=" " alt="" coords="3059,543,3265,569"/>
+<area shape="rect" href="_timeshifts_8hpp.html" title=" " alt="" coords="2025,468,2222,495"/>
+<area shape="rect" href="_run_matrixator_8hpp.html" title=" " alt="" coords="2411,543,2633,569"/>
+<area shape="rect" href="_classes_2_counters_8hpp.html" title=" " alt="" coords="1644,304,1827,331"/>
+<area shape="rect" href="_event_8hpp.html" title=" " alt="" coords="1301,229,1463,256"/>
+<area shape="rect" href="_calibration_8hpp.html" title=" " alt="" coords="2693,468,2893,495"/>
+<area shape="rect" href="_nuball2_tree_8hpp.html" title=" " alt="" coords="3767,304,3968,331"/>
+<area shape="rect" href="_r_f___manager_8hpp.html" title=" " alt="" coords="1068,304,1272,331"/>
+<area shape="rect" href="_files_manager_8hpp.html" title=" " alt="" coords="3481,304,3691,331"/>
+<area shape="rect" href="_gate_8hpp.html" title=" " alt="" coords="109,229,263,256"/>
+<area shape="rect" href="_manip_8hpp.html" title=" " alt="" coords="4039,386,4203,413"/>
+<area shape="rect" href="_performances_8hpp.html" title=" " alt="" coords="1871,386,2085,413"/>
+<area shape="rect" href="_r_w_mat_8hxx.html" title=" " alt="" coords="4406,80,4577,107"/>
+<area shape="rect" href="lib_root_8hpp.html" title=" " alt="" coords="1207,80,1323,107"/>
+<area shape="rect" href="_m_t_list_8hpp.html" title=" " alt="" coords="3993,304,4179,331"/>
+<area shape="rect" href="_timewalk_8hpp.html" title=" " alt="" coords="449,229,643,256"/>
+<area shape="rect" href="_event_analyse_8hpp.html" title=" " alt="" coords="807,386,1021,413"/>
+<area shape="rect" href="_sorted___event_8hpp.html" title=" " alt="" coords="1045,379,1185,420"/>
+<area shape="rect" href="_coinc_builder_8hpp.html" title=" " alt="" coords="1590,386,1795,413"/>
+<area shape="rect" href="_event_builder_8hpp.html" title=" " alt="" coords="1359,386,1565,413"/>
+<area shape="rect" href="_clover_spectra_8hpp.html" title=" " alt="" coords="1311,543,1531,569"/>
+<area shape="rect" href="_clovers_8hpp.html" title=" " alt="" coords="399,304,573,331"/>
+<area shape="rect" href="_paris_8hpp.html" title=" " alt="" coords="835,304,993,331"/>
+<area shape="rect" href="_alignator_8hpp.html" title=" " alt="" coords="3273,304,3456,331"/>
+<area shape="rect" href="_m_t_faster_reader_8hpp.html" title=" " alt="" coords="2837,386,3084,413"/>
+<area shape="rect" href="_faster2_histo_8hpp.html" title=" " alt="" coords="3305,543,3515,569"/>
+<area shape="rect" href="_histogramor_8hpp.html" title=" " alt="" coords="2247,468,2456,495"/>
+<area shape="rect" href="_near_line_8hpp.html" title=" " alt="" coords="213,543,399,569"/>
+<area shape="rect" href="_m_t_root_reader_8hpp.html" title=" " alt="" coords="3108,386,3347,413"/>
+<area shape="rect" href="_m_t_files_manager_8hpp.html" title=" " alt="" coords="3472,386,3721,413"/>
+<area shape="rect" href="_histo_analyse_8hpp.html" title=" " alt="" coords="57,468,269,495"/>
+<area shape="rect" href="_paris_cluster_8hpp.html" title=" " alt="" coords="718,229,921,256"/>
+<area shape="rect" href="_paris_phoswitch_8hpp.html" title=" " alt="" coords="699,155,921,181"/>
+<area shape="rect" href="_detectors_8hpp.html" title=" " alt="" coords="1849,229,2035,256"/>
+<area shape="rect" href="_hit_8hpp.html" title=" " alt="" coords="1936,155,2079,181"/>
+<area shape="rect" href="_spectra_alignator_8hpp.html" title=" " alt="" coords="996,155,1227,181"/>
+<area shape="rect" href="_m_t_object_8hpp.html" title=" " alt="" coords="2741,229,2946,256"/>
+<area shape="rect" href="_faster_reader_8hpp.html" title=" " alt="" coords="2547,304,2755,331"/>
+<area shape="rect" href="_m_t_counter_8hpp.html" title=" " alt="" coords="2160,304,2372,331"/>
+<area shape="rect" href="_m_t_t_hist_8hpp.html" title=" " alt="" coords="2313,386,2510,413"/>
+<area shape="rect" href="_m_t_variable_8hpp.html" title=" " alt="" coords="2982,304,3198,331"/>
+</map>
 </div>
 </div>
 <p><a href="lib_co_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bools.html">Bools</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:a65f85814a8290f9797005d3b28e7e5fc"><td class="memItemLeft" align="right" valign="top">typedef unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lib_co_8hpp.html#a65f85814a8290f9797005d3b28e7e5fc">uchar</a></td></tr>
-<tr class="separator:a65f85814a8290f9797005d3b28e7e5fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a91ad9478d81a7aaf2593e8d9c3d06a14"><td class="memItemLeft" align="right" valign="top">typedef unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lib_co_8hpp.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a></td></tr>
-<tr class="separator:a91ad9478d81a7aaf2593e8d9c3d06a14"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9c34ac44da309b004570530c8cec8a0e"><td class="memItemLeft" align="right" valign="top">typedef unsigned long int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lib_co_8hpp.html#a9c34ac44da309b004570530c8cec8a0e">ulong</a></td></tr>
-<tr class="separator:a9c34ac44da309b004570530c8cec8a0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a22152088aba12c47e916b7f0ffee0f51"><td class="memItemLeft" align="right" valign="top">typedef unsigned long long int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lib_co_8hpp.html#a22152088aba12c47e916b7f0ffee0f51">ulonglong</a></td></tr>
-<tr class="separator:a22152088aba12c47e916b7f0ffee0f51"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3fa7784c89589b49764048e9909d0e07"><td class="memItemLeft" align="right" valign="top">typedef unsigned short int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lib_co_8hpp.html#a3fa7784c89589b49764048e9909d0e07">ushort</a></td></tr>
-<tr class="separator:a3fa7784c89589b49764048e9909d0e07"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54161053f7c12fa7dd7bddf119708644"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lib_co_8hpp.html#a54161053f7c12fa7dd7bddf119708644">Ints</a> = std::vector&lt; int &gt;</td></tr>
+<tr class="separator:a54161053f7c12fa7dd7bddf119708644"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a38d84fea74b6f31e86b2e282bb232729"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lib_co_8hpp.html#a38d84fea74b6f31e86b2e282bb232729">longlong</a> = long long int</td></tr>
+<tr class="separator:a38d84fea74b6f31e86b2e282bb232729"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a801d6a451a01953ef8cbae6feb6a3638"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lib_co_8hpp.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a> = std::size_t</td></tr>
+<tr class="separator:a801d6a451a01953ef8cbae6feb6a3638"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a632090884b4aa0585e747446a2683963"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lib_co_8hpp.html#a632090884b4aa0585e747446a2683963">Strings</a> = std::vector&lt; std::string &gt;</td></tr>
+<tr class="separator:a632090884b4aa0585e747446a2683963"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acbcaeec4b92056a813c1a11e65d5df7d"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:acbcaeec4b92056a813c1a11e65d5df7d"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="lib_co_8hpp.html#acbcaeec4b92056a813c1a11e65d5df7d">T_is_number</a> = void</td></tr>
+<tr class="separator:acbcaeec4b92056a813c1a11e65d5df7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae48ac2456c5ad6c956fef86e7bef3a21"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lib_co_8hpp.html#ae48ac2456c5ad6c956fef86e7bef3a21">uchar</a> = unsigned char</td></tr>
+<tr class="separator:ae48ac2456c5ad6c956fef86e7bef3a21"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a69aa29b598b851b0640aa225a9e5d61d"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lib_co_8hpp.html#a69aa29b598b851b0640aa225a9e5d61d">uint</a> = unsigned int</td></tr>
+<tr class="separator:a69aa29b598b851b0640aa225a9e5d61d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92c2ca60527219506deb3325507baee0"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lib_co_8hpp.html#a92c2ca60527219506deb3325507baee0">ulong</a> = unsigned long int</td></tr>
+<tr class="separator:a92c2ca60527219506deb3325507baee0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36061a3a05c4802ea9393df730a50d52"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lib_co_8hpp.html#a36061a3a05c4802ea9393df730a50d52">ulonglong</a> = unsigned long long int</td></tr>
+<tr class="separator:a36061a3a05c4802ea9393df730a50d52"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad29aff8b0f7fde4ef0291331012e596a"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lib_co_8hpp.html#ad29aff8b0f7fde4ef0291331012e596a">ushort</a> = unsigned short int</td></tr>
+<tr class="separator:ad29aff8b0f7fde4ef0291331012e596a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a79092fe2f0694bdbb860894b0f983e32"><td class="memTemplParams" colspan="2">template&lt;typename T , typename  = typename std::enable_if&lt;std::is_arithmetic&lt;T&gt;::value&gt;::type&gt; </td></tr>
+<tr class="memitem:a79092fe2f0694bdbb860894b0f983e32"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="lib_co_8hpp.html#a79092fe2f0694bdbb860894b0f983e32">bool_cast</a> (T const &amp;t)</td></tr>
+<tr class="memdesc:a79092fe2f0694bdbb860894b0f983e32"><td class="mdescLeft">&#160;</td><td class="mdescRight">Casts a number into an bool.  <a href="lib_co_8hpp.html#a79092fe2f0694bdbb860894b0f983e32">More...</a><br /></td></tr>
+<tr class="separator:a79092fe2f0694bdbb860894b0f983e32"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe72de0c3fabeb8944bfd72ccdbe0d73"><td class="memTemplParams" colspan="2">template&lt;typename T , typename  = typename std::enable_if&lt;std::is_arithmetic&lt;T&gt;::value&gt;::type&gt; </td></tr>
+<tr class="memitem:afe72de0c3fabeb8944bfd72ccdbe0d73"><td class="memTemplItemLeft" align="right" valign="top">char&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="lib_co_8hpp.html#afe72de0c3fabeb8944bfd72ccdbe0d73">char_cast</a> (T const &amp;t)</td></tr>
+<tr class="memdesc:afe72de0c3fabeb8944bfd72ccdbe0d73"><td class="mdescLeft">&#160;</td><td class="mdescRight">Casts a number into an char.  <a href="lib_co_8hpp.html#afe72de0c3fabeb8944bfd72ccdbe0d73">More...</a><br /></td></tr>
+<tr class="separator:afe72de0c3fabeb8944bfd72ccdbe0d73"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2052317e56aa118e7ffcdb2e398f551c"><td class="memTemplParams" colspan="2">template&lt;typename T , typename  = typename std::enable_if&lt;std::is_arithmetic&lt;T&gt;::value&gt;::type&gt; </td></tr>
+<tr class="memitem:a2052317e56aa118e7ffcdb2e398f551c"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="lib_co_8hpp.html#a2052317e56aa118e7ffcdb2e398f551c">double_cast</a> (T const &amp;t)</td></tr>
+<tr class="memdesc:a2052317e56aa118e7ffcdb2e398f551c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Casts a number into an double.  <a href="lib_co_8hpp.html#a2052317e56aa118e7ffcdb2e398f551c">More...</a><br /></td></tr>
+<tr class="separator:a2052317e56aa118e7ffcdb2e398f551c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a664347fcb6b16fdc63cd601ebcfc2c8e"><td class="memTemplParams" colspan="2">template&lt;typename K , typename V &gt; </td></tr>
+<tr class="memitem:a664347fcb6b16fdc63cd601ebcfc2c8e"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="lib_co_8hpp.html#a664347fcb6b16fdc63cd601ebcfc2c8e">find_key</a> (std::map&lt; K, V &gt; const &amp;map, K const &amp;key)</td></tr>
+<tr class="separator:a664347fcb6b16fdc63cd601ebcfc2c8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b8ddb099e22657a31515fbcd8d1bf67"><td class="memTemplParams" colspan="2">template&lt;typename K , typename V &gt; </td></tr>
+<tr class="memitem:a3b8ddb099e22657a31515fbcd8d1bf67"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="lib_co_8hpp.html#a3b8ddb099e22657a31515fbcd8d1bf67">find_key</a> (std::unordered_map&lt; K, V &gt; const &amp;map, K const &amp;key)</td></tr>
+<tr class="separator:a3b8ddb099e22657a31515fbcd8d1bf67"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a6d9eab2874e1bf6506aeb84d21506d"><td class="memTemplParams" colspan="2">template&lt;typename K , typename V &gt; </td></tr>
+<tr class="memitem:a1a6d9eab2874e1bf6506aeb84d21506d"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="lib_co_8hpp.html#a1a6d9eab2874e1bf6506aeb84d21506d">find_value</a> (std::map&lt; K, V &gt; const &amp;map, V const &amp;value)</td></tr>
+<tr class="separator:a1a6d9eab2874e1bf6506aeb84d21506d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaff2134bba0ee7c0b4a509699674251a"><td class="memTemplParams" colspan="2">template&lt;typename K , typename V &gt; </td></tr>
+<tr class="memitem:aaff2134bba0ee7c0b4a509699674251a"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="lib_co_8hpp.html#aaff2134bba0ee7c0b4a509699674251a">find_value</a> (std::unordered_map&lt; K, V &gt; const &amp;map, V const &amp;value)</td></tr>
+<tr class="separator:aaff2134bba0ee7c0b4a509699674251a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a075a3c229a21ca4d0e91f72e99a6bf6d"><td class="memTemplParams" colspan="2">template&lt;typename T , typename  = typename std::enable_if&lt;std::is_arithmetic&lt;T&gt;::value&gt;::type&gt; </td></tr>
+<tr class="memitem:a075a3c229a21ca4d0e91f72e99a6bf6d"><td class="memTemplItemLeft" align="right" valign="top">float&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="lib_co_8hpp.html#a075a3c229a21ca4d0e91f72e99a6bf6d">float_cast</a> (T const &amp;t)</td></tr>
+<tr class="memdesc:a075a3c229a21ca4d0e91f72e99a6bf6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Casts a number into a float.  <a href="lib_co_8hpp.html#a075a3c229a21ca4d0e91f72e99a6bf6d">More...</a><br /></td></tr>
+<tr class="separator:a075a3c229a21ca4d0e91f72e99a6bf6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad15d46f1c6897c587cd64a3efba23585"><td class="memTemplParams" colspan="2">template&lt;typename K , typename V &gt; </td></tr>
+<tr class="memitem:ad15d46f1c6897c587cd64a3efba23585"><td class="memTemplItemLeft" align="right" valign="top">std::pair&lt; K, V &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="lib_co_8hpp.html#ad15d46f1c6897c587cd64a3efba23585">get_max_element</a> (std::map&lt; K, V &gt; const &amp;map)</td></tr>
+<tr class="separator:ad15d46f1c6897c587cd64a3efba23585"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aecb45c04cc3a1a2386b973014e4fef50"><td class="memTemplParams" colspan="2">template&lt;typename K , typename V &gt; </td></tr>
+<tr class="memitem:aecb45c04cc3a1a2386b973014e4fef50"><td class="memTemplItemLeft" align="right" valign="top">K&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="lib_co_8hpp.html#aecb45c04cc3a1a2386b973014e4fef50">get_max_key</a> (std::map&lt; K, V &gt; const &amp;map)</td></tr>
+<tr class="separator:aecb45c04cc3a1a2386b973014e4fef50"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4ab9f9247e670a4d9db36ca683e6270"><td class="memTemplParams" colspan="2">template&lt;typename K , typename V &gt; </td></tr>
+<tr class="memitem:ad4ab9f9247e670a4d9db36ca683e6270"><td class="memTemplItemLeft" align="right" valign="top">V&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="lib_co_8hpp.html#ad4ab9f9247e670a4d9db36ca683e6270">get_max_value</a> (std::map&lt; K, V &gt; const &amp;map)</td></tr>
+<tr class="separator:ad4ab9f9247e670a4d9db36ca683e6270"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f43d67b9c0e4bb6bf5a58906ae0d812"><td class="memTemplParams" colspan="2">template&lt;typename K , typename V &gt; </td></tr>
+<tr class="memitem:a6f43d67b9c0e4bb6bf5a58906ae0d812"><td class="memTemplItemLeft" align="right" valign="top">std::pair&lt; K, V &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="lib_co_8hpp.html#a6f43d67b9c0e4bb6bf5a58906ae0d812">get_min</a> (std::map&lt; K, V &gt; const &amp;map)</td></tr>
+<tr class="separator:a6f43d67b9c0e4bb6bf5a58906ae0d812"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeec208b7dcadd19e1317814c1de441d9"><td class="memTemplParams" colspan="2">template&lt;typename K , typename V &gt; </td></tr>
+<tr class="memitem:aeec208b7dcadd19e1317814c1de441d9"><td class="memTemplItemLeft" align="right" valign="top">K&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="lib_co_8hpp.html#aeec208b7dcadd19e1317814c1de441d9">get_min_key</a> (std::map&lt; K, V &gt; const &amp;map)</td></tr>
+<tr class="separator:aeec208b7dcadd19e1317814c1de441d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad1d07d5a6e5c5182a7dc644148cd6fcd"><td class="memTemplParams" colspan="2">template&lt;typename K , typename V &gt; </td></tr>
+<tr class="memitem:ad1d07d5a6e5c5182a7dc644148cd6fcd"><td class="memTemplItemLeft" align="right" valign="top">V&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="lib_co_8hpp.html#ad1d07d5a6e5c5182a7dc644148cd6fcd">get_min_value</a> (std::map&lt; K, V &gt; const &amp;map)</td></tr>
+<tr class="separator:ad1d07d5a6e5c5182a7dc644148cd6fcd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48e80fbfd11f9fb219b92ba1c29c1b2a"><td class="memTemplParams" colspan="2">template&lt;typename T , typename  = typename std::enable_if&lt;std::is_arithmetic&lt;T&gt;::value&gt;::type&gt; </td></tr>
+<tr class="memitem:a48e80fbfd11f9fb219b92ba1c29c1b2a"><td class="memTemplItemLeft" align="right" valign="top">int&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="lib_co_8hpp.html#a48e80fbfd11f9fb219b92ba1c29c1b2a">int_cast</a> (T const &amp;t)</td></tr>
+<tr class="memdesc:a48e80fbfd11f9fb219b92ba1c29c1b2a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Casts a number into an int.  <a href="lib_co_8hpp.html#a48e80fbfd11f9fb219b92ba1c29c1b2a">More...</a><br /></td></tr>
+<tr class="separator:a48e80fbfd11f9fb219b92ba1c29c1b2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a695ead22582e1da41880ee67c2c61d07"><td class="memTemplParams" colspan="2">template&lt;typename T , typename  = typename std::enable_if&lt;std::is_arithmetic&lt;T&gt;::value&gt;::type&gt; </td></tr>
+<tr class="memitem:a695ead22582e1da41880ee67c2c61d07"><td class="memTemplItemLeft" align="right" valign="top">long&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="lib_co_8hpp.html#a695ead22582e1da41880ee67c2c61d07">long_cast</a> (T const &amp;t)</td></tr>
+<tr class="memdesc:a695ead22582e1da41880ee67c2c61d07"><td class="mdescLeft">&#160;</td><td class="mdescRight">Casts a number into an long.  <a href="lib_co_8hpp.html#a695ead22582e1da41880ee67c2c61d07">More...</a><br /></td></tr>
+<tr class="separator:a695ead22582e1da41880ee67c2c61d07"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a86b2b990fa7ee3c102db83cdecc9d129"><td class="memTemplParams" colspan="2">template&lt;typename T , typename  = typename std::enable_if&lt;std::is_arithmetic&lt;T&gt;::value&gt;::type&gt; </td></tr>
+<tr class="memitem:a86b2b990fa7ee3c102db83cdecc9d129"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="lib_co_8hpp.html#a38d84fea74b6f31e86b2e282bb232729">longlong</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="lib_co_8hpp.html#a86b2b990fa7ee3c102db83cdecc9d129">longlong_cast</a> (T const &amp;t)</td></tr>
+<tr class="memdesc:a86b2b990fa7ee3c102db83cdecc9d129"><td class="mdescLeft">&#160;</td><td class="mdescRight">Casts a number into long long (longlong)  <a href="lib_co_8hpp.html#a86b2b990fa7ee3c102db83cdecc9d129">More...</a><br /></td></tr>
+<tr class="separator:a86b2b990fa7ee3c102db83cdecc9d129"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4944be9c9377ea1853bd55f996b7cb13"><td class="memItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lib_co_8hpp.html#a4944be9c9377ea1853bd55f996b7cb13">operator&gt;&gt;</a> (std::ostream &amp;cout, <a class="el" href="class_bools.html">Bools</a> const &amp;bools)</td></tr>
+<tr class="separator:a4944be9c9377ea1853bd55f996b7cb13"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6cca31a5d1658456b486e6fa135c690b"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lib_co_8hpp.html#a6cca31a5d1658456b486e6fa135c690b">pauseCo</a> ()</td></tr>
+<tr class="separator:a6cca31a5d1658456b486e6fa135c690b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab102b1ac90e2714661a2e757b7f6692e"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lib_co_8hpp.html#ab102b1ac90e2714661a2e757b7f6692e">pauseCo</a> (std::string const &amp;message)</td></tr>
+<tr class="separator:ab102b1ac90e2714661a2e757b7f6692e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4d9dac78db5e48b5e2c5253754aaa8c"><td class="memTemplParams" colspan="2">template&lt;typename T , typename  = typename std::enable_if&lt;std::is_arithmetic&lt;T&gt;::value&gt;::type&gt; </td></tr>
+<tr class="memitem:af4d9dac78db5e48b5e2c5253754aaa8c"><td class="memTemplItemLeft" align="right" valign="top">short&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="lib_co_8hpp.html#af4d9dac78db5e48b5e2c5253754aaa8c">short_cast</a> (T const &amp;t)</td></tr>
+<tr class="memdesc:af4d9dac78db5e48b5e2c5253754aaa8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Casts a number into an short.  <a href="lib_co_8hpp.html#af4d9dac78db5e48b5e2c5253754aaa8c">More...</a><br /></td></tr>
+<tr class="separator:af4d9dac78db5e48b5e2c5253754aaa8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a237f678c718382f74a68364c0fc1779a"><td class="memTemplParams" colspan="2">template&lt;typename T , typename  = typename std::enable_if&lt;std::is_arithmetic&lt;T&gt;::value&gt;::type&gt; </td></tr>
+<tr class="memitem:a237f678c718382f74a68364c0fc1779a"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="lib_co_8hpp.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="lib_co_8hpp.html#a237f678c718382f74a68364c0fc1779a">size_cast</a> (T const &amp;t)</td></tr>
+<tr class="memdesc:a237f678c718382f74a68364c0fc1779a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Casts a number into std::size_t.  <a href="lib_co_8hpp.html#a237f678c718382f74a68364c0fc1779a">More...</a><br /></td></tr>
+<tr class="separator:a237f678c718382f74a68364c0fc1779a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6df2dcd4b1f61c75dc292942bc5ca74d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lib_co_8hpp.html#a6df2dcd4b1f61c75dc292942bc5ca74d">throw_error</a> (std::string const &amp;message)</td></tr>
+<tr class="separator:a6df2dcd4b1f61c75dc292942bc5ca74d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade77d1f37b1311b3f80ce429a33fd226"><td class="memTemplParams" colspan="2">template&lt;typename T , typename  = typename std::enable_if&lt;std::is_arithmetic&lt;T&gt;::value&gt;::type&gt; </td></tr>
+<tr class="memitem:ade77d1f37b1311b3f80ce429a33fd226"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="lib_co_8hpp.html#ae48ac2456c5ad6c956fef86e7bef3a21">uchar</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="lib_co_8hpp.html#ade77d1f37b1311b3f80ce429a33fd226">uchar_cast</a> (T const &amp;t)</td></tr>
+<tr class="memdesc:ade77d1f37b1311b3f80ce429a33fd226"><td class="mdescLeft">&#160;</td><td class="mdescRight">Casts a number into unsigned char (uchar)  <a href="lib_co_8hpp.html#ade77d1f37b1311b3f80ce429a33fd226">More...</a><br /></td></tr>
+<tr class="separator:ade77d1f37b1311b3f80ce429a33fd226"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4f41fb682fba59b9adc6142282db5a2"><td class="memTemplParams" colspan="2">template&lt;typename T , typename  = typename std::enable_if&lt;std::is_arithmetic&lt;T&gt;::value&gt;::type&gt; </td></tr>
+<tr class="memitem:ad4f41fb682fba59b9adc6142282db5a2"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="lib_co_8hpp.html#a69aa29b598b851b0640aa225a9e5d61d">uint</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="lib_co_8hpp.html#ad4f41fb682fba59b9adc6142282db5a2">uint_cast</a> (T const &amp;t)</td></tr>
+<tr class="memdesc:ad4f41fb682fba59b9adc6142282db5a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Casts a number into unsigned int (uint)  <a href="lib_co_8hpp.html#ad4f41fb682fba59b9adc6142282db5a2">More...</a><br /></td></tr>
+<tr class="separator:ad4f41fb682fba59b9adc6142282db5a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac939b8397e82173edff13b3d00dc9d09"><td class="memTemplParams" colspan="2">template&lt;typename T , typename  = typename std::enable_if&lt;std::is_arithmetic&lt;T&gt;::value&gt;::type&gt; </td></tr>
+<tr class="memitem:ac939b8397e82173edff13b3d00dc9d09"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="lib_co_8hpp.html#a92c2ca60527219506deb3325507baee0">ulong</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="lib_co_8hpp.html#ac939b8397e82173edff13b3d00dc9d09">ulong_cast</a> (T const &amp;t)</td></tr>
+<tr class="memdesc:ac939b8397e82173edff13b3d00dc9d09"><td class="mdescLeft">&#160;</td><td class="mdescRight">Casts a number into unsigned long (ulong)  <a href="lib_co_8hpp.html#ac939b8397e82173edff13b3d00dc9d09">More...</a><br /></td></tr>
+<tr class="separator:ac939b8397e82173edff13b3d00dc9d09"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6064e403b0588c46cce0f1cb82471acf"><td class="memTemplParams" colspan="2">template&lt;typename T , typename  = typename std::enable_if&lt;std::is_arithmetic&lt;T&gt;::value&gt;::type&gt; </td></tr>
+<tr class="memitem:a6064e403b0588c46cce0f1cb82471acf"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="lib_co_8hpp.html#a36061a3a05c4802ea9393df730a50d52">ulonglong</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="lib_co_8hpp.html#a6064e403b0588c46cce0f1cb82471acf">ulonglong_cast</a> (T const &amp;t)</td></tr>
+<tr class="memdesc:a6064e403b0588c46cce0f1cb82471acf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Casts a number into unsigned long long (ulonglong)  <a href="lib_co_8hpp.html#a6064e403b0588c46cce0f1cb82471acf">More...</a><br /></td></tr>
+<tr class="separator:a6064e403b0588c46cce0f1cb82471acf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab2f8f9033c2742c4f5ac6d3cce6caf9a"><td class="memTemplParams" colspan="2">template&lt;typename T , typename  = typename std::enable_if&lt;std::is_arithmetic&lt;T&gt;::value&gt;::type&gt; </td></tr>
+<tr class="memitem:ab2f8f9033c2742c4f5ac6d3cce6caf9a"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="lib_co_8hpp.html#ad29aff8b0f7fde4ef0291331012e596a">ushort</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="lib_co_8hpp.html#ab2f8f9033c2742c4f5ac6d3cce6caf9a">ushort_cast</a> (T const &amp;t)</td></tr>
+<tr class="memdesc:ab2f8f9033c2742c4f5ac6d3cce6caf9a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Casts a number into unsigned short (ushort)  <a href="lib_co_8hpp.html#ab2f8f9033c2742c4f5ac6d3cce6caf9a">More...</a><br /></td></tr>
+<tr class="separator:ab2f8f9033c2742c4f5ac6d3cce6caf9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:ad1be7b5ed61940e94b315160cd5c0702"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lib_co_8hpp.html#ad1be7b5ed61940e94b315160cd5c0702">_ns</a> = 1000.</td></tr>
-<tr class="separator:ad1be7b5ed61940e94b315160cd5c0702"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99f92dd785ee1e11e00427fdc8a4f772"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lib_co_8hpp.html#a99f92dd785ee1e11e00427fdc8a4f772">_ns</a> = 1000.</td></tr>
+<tr class="separator:a99f92dd785ee1e11e00427fdc8a4f772"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af522b6efd63a7f871a8307755b1297bf"><td class="memItemLeft" align="right" valign="top">std::map&lt; std::string, std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lib_co_8hpp.html#af522b6efd63a7f871a8307755b1297bf">error_message</a></td></tr>
+<tr class="separator:af522b6efd63a7f871a8307755b1297bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Typedef Documentation</h2>
-<a id="a65f85814a8290f9797005d3b28e7e5fc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a65f85814a8290f9797005d3b28e7e5fc">&#9670;&nbsp;</a></span>uchar</h2>
+<a id="a54161053f7c12fa7dd7bddf119708644"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a54161053f7c12fa7dd7bddf119708644">&#9670;&nbsp;</a></span>Ints</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef unsigned char <a class="el" href="lib_co_8hpp.html#a65f85814a8290f9797005d3b28e7e5fc">uchar</a></td>
+          <td class="memname">using <a class="el" href="lib_co_8hpp.html#a54161053f7c12fa7dd7bddf119708644">Ints</a> =  std::vector&lt;int&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a91ad9478d81a7aaf2593e8d9c3d06a14"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a91ad9478d81a7aaf2593e8d9c3d06a14">&#9670;&nbsp;</a></span>uint</h2>
+<a id="a38d84fea74b6f31e86b2e282bb232729"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a38d84fea74b6f31e86b2e282bb232729">&#9670;&nbsp;</a></span>longlong</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef unsigned int <a class="el" href="lib_co_8hpp.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a></td>
+          <td class="memname">using <a class="el" href="lib_co_8hpp.html#a38d84fea74b6f31e86b2e282bb232729">longlong</a> =  long long int</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a9c34ac44da309b004570530c8cec8a0e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9c34ac44da309b004570530c8cec8a0e">&#9670;&nbsp;</a></span>ulong</h2>
+<a id="a801d6a451a01953ef8cbae6feb6a3638"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a801d6a451a01953ef8cbae6feb6a3638">&#9670;&nbsp;</a></span>size_t</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef unsigned long int <a class="el" href="lib_co_8hpp.html#a9c34ac44da309b004570530c8cec8a0e">ulong</a></td>
+          <td class="memname">using <a class="el" href="lib_co_8hpp.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a> =  std::size_t</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a22152088aba12c47e916b7f0ffee0f51"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a22152088aba12c47e916b7f0ffee0f51">&#9670;&nbsp;</a></span>ulonglong</h2>
+<a id="a632090884b4aa0585e747446a2683963"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a632090884b4aa0585e747446a2683963">&#9670;&nbsp;</a></span>Strings</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef unsigned long long int <a class="el" href="lib_co_8hpp.html#a22152088aba12c47e916b7f0ffee0f51">ulonglong</a></td>
+          <td class="memname">using <a class="el" href="lib_co_8hpp.html#a632090884b4aa0585e747446a2683963">Strings</a> =  std::vector&lt;std::string&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a3fa7784c89589b49764048e9909d0e07"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3fa7784c89589b49764048e9909d0e07">&#9670;&nbsp;</a></span>ushort</h2>
+<a id="acbcaeec4b92056a813c1a11e65d5df7d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acbcaeec4b92056a813c1a11e65d5df7d">&#9670;&nbsp;</a></span>T_is_number</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="lib_co_8hpp.html#acbcaeec4b92056a813c1a11e65d5df7d">T_is_number</a> =  void</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae48ac2456c5ad6c956fef86e7bef3a21"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae48ac2456c5ad6c956fef86e7bef3a21">&#9670;&nbsp;</a></span>uchar</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef unsigned short int <a class="el" href="lib_co_8hpp.html#a3fa7784c89589b49764048e9909d0e07">ushort</a></td>
+          <td class="memname">using <a class="el" href="lib_co_8hpp.html#ae48ac2456c5ad6c956fef86e7bef3a21">uchar</a> =  unsigned char</td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="a69aa29b598b851b0640aa225a9e5d61d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a69aa29b598b851b0640aa225a9e5d61d">&#9670;&nbsp;</a></span>uint</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="lib_co_8hpp.html#a69aa29b598b851b0640aa225a9e5d61d">uint</a> =  unsigned int</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a92c2ca60527219506deb3325507baee0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a92c2ca60527219506deb3325507baee0">&#9670;&nbsp;</a></span>ulong</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="lib_co_8hpp.html#a92c2ca60527219506deb3325507baee0">ulong</a> =  unsigned long int</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a36061a3a05c4802ea9393df730a50d52"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a36061a3a05c4802ea9393df730a50d52">&#9670;&nbsp;</a></span>ulonglong</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="lib_co_8hpp.html#a36061a3a05c4802ea9393df730a50d52">ulonglong</a> =  unsigned long long int</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad29aff8b0f7fde4ef0291331012e596a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad29aff8b0f7fde4ef0291331012e596a">&#9670;&nbsp;</a></span>ushort</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="lib_co_8hpp.html#ad29aff8b0f7fde4ef0291331012e596a">ushort</a> =  unsigned short int</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a79092fe2f0694bdbb860894b0f983e32"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a79092fe2f0694bdbb860894b0f983e32">&#9670;&nbsp;</a></span>bool_cast()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename  = typename std::enable_if&lt;std::is_arithmetic&lt;T&gt;::value&gt;::type&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool bool_cast </td>
+          <td>(</td>
+          <td class="paramtype">T const &amp;&#160;</td>
+          <td class="paramname"><em>t</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Casts a number into an bool. </p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="lib_co_8hpp_a79092fe2f0694bdbb860894b0f983e32_icgraph.png" border="0" usemap="#alib_co_8hpp_a79092fe2f0694bdbb860894b0f983e32_icgraph" alt=""/></div>
+<map name="alib_co_8hpp_a79092fe2f0694bdbb860894b0f983e32_icgraph" id="alib_co_8hpp_a79092fe2f0694bdbb860894b0f983e32_icgraph">
+<area shape="rect" title="Casts a number into an bool." alt="" coords="203,81,287,108"/>
+<area shape="rect" href="class_fit.html#aace9236c432ee27bd3c208911b7a396d" title="Set if the fit succeeded :" alt="" coords="37,5,123,32"/>
+<area shape="rect" href="class_fit.html#a861a69c651863dcb3b41a788fe73f69d" title="Set if there was not enough counts :" alt="" coords="15,56,145,83"/>
+<area shape="rect" href="class_histo_analyse.html#a3ebd877de62f44cfde794b8a7dad2a78" title=" " alt="" coords="5,107,155,133"/>
+<area shape="rect" href="class_fit.html#ad12c75a87a239da0768c9c6b869da431" title="Set if there was not enough counts :" alt="" coords="6,157,154,184"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="afe72de0c3fabeb8944bfd72ccdbe0d73"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afe72de0c3fabeb8944bfd72ccdbe0d73">&#9670;&nbsp;</a></span>char_cast()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename  = typename std::enable_if&lt;std::is_arithmetic&lt;T&gt;::value&gt;::type&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">char char_cast </td>
+          <td>(</td>
+          <td class="paramtype">T const &amp;&#160;</td>
+          <td class="paramname"><em>t</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Casts a number into an char. </p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="lib_co_8hpp_afe72de0c3fabeb8944bfd72ccdbe0d73_icgraph.png" border="0" usemap="#alib_co_8hpp_afe72de0c3fabeb8944bfd72ccdbe0d73_icgraph" alt=""/></div>
+<map name="alib_co_8hpp_afe72de0c3fabeb8944bfd72ccdbe0d73_icgraph" id="alib_co_8hpp_afe72de0c3fabeb8944bfd72ccdbe0d73_icgraph">
+<area shape="rect" title="Casts a number into an char." alt="" coords="260,5,344,32"/>
+<area shape="rect" href="class_type_root_map.html#acc24a4f33058532b330071a6738f02f4" title=" " alt="" coords="5,5,212,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a2052317e56aa118e7ffcdb2e398f551c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2052317e56aa118e7ffcdb2e398f551c">&#9670;&nbsp;</a></span>double_cast()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename  = typename std::enable_if&lt;std::is_arithmetic&lt;T&gt;::value&gt;::type&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double double_cast </td>
+          <td>(</td>
+          <td class="paramtype">T const &amp;&#160;</td>
+          <td class="paramname"><em>t</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Casts a number into an double. </p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="lib_co_8hpp_a2052317e56aa118e7ffcdb2e398f551c_icgraph.png" border="0" usemap="#alib_co_8hpp_a2052317e56aa118e7ffcdb2e398f551c_icgraph" alt=""/></div>
+<map name="alib_co_8hpp_a2052317e56aa118e7ffcdb2e398f551c_icgraph" id="alib_co_8hpp_a2052317e56aa118e7ffcdb2e398f551c_icgraph">
+<area shape="rect" title="Casts a number into an double." alt="" coords="1743,107,1843,133"/>
+<area shape="rect" href="class_r_f___manager.html#ae63b656a158cd94800fbe542da54a389" title=" " alt="" coords="1525,31,1656,57"/>
+<area shape="rect" href="class_timeshifts.html#a89dbca371bce4601ee60122f544faf95" title=" " alt="" coords="1487,81,1695,108"/>
+<area shape="rect" href="class_type_root_map.html#acc24a4f33058532b330071a6738f02f4" title=" " alt="" coords="1487,132,1694,159"/>
+<area shape="rect" href="class_calibration.html#a344dc3d6feab3580e859cc693c2fdd4a" title=" " alt="" coords="1521,183,1660,209"/>
+<area shape="rect" href="class_r_f___manager.html#a0261f2b02176a3e5562603c25f31d9a6" title=" " alt="" coords="1288,31,1439,57"/>
+<area shape="rect" href="_timeshifts_8hpp.html#a202a57630e2aa9744043c30964b64bcd" title=" " alt="" coords="1093,31,1240,57"/>
+<area shape="rect" href="class_timeshifts.html#abef7234fe827ae3c7758788cf22b6921" title=" " alt="" coords="855,5,1045,32"/>
+<area shape="rect" href="class_timeshifts.html#a32079af1345e308feddd58e0950998ab" title=" " alt="" coords="859,56,1041,83"/>
+<area shape="rect" href="class_timeshifts.html#aaef5b6fdd23be94ed37a2b4e7fe47b48" title=" " alt="" coords="655,31,807,57"/>
+<area shape="rect" href="class_timeshifts.html#a79fe955b7d1bbc12fd4c659691727df3" title=" " alt="" coords="428,5,607,32"/>
+<area shape="rect" href="class_timeshifts.html#a21dc1e7bf232c6b0637b16aa04e43701" title=" " alt="" coords="211,31,380,57"/>
+<area shape="rect" href="class_timeshifts.html#a3d3ab1b3498ca45832d8a8735f16e188" title=" " alt="" coords="5,5,163,32"/>
+<area shape="rect" href="class_timeshifts.html#a6520eab7a8824f41a2be8517d83fc835" title="To verify an already calculated timeshift .dT data file." alt="" coords="17,56,151,83"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a664347fcb6b16fdc63cd601ebcfc2c8e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a664347fcb6b16fdc63cd601ebcfc2c8e">&#9670;&nbsp;</a></span>find_key() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename K , typename V &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool find_key </td>
+          <td>(</td>
+          <td class="paramtype">std::map&lt; K, V &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>map</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">K const &amp;&#160;</td>
+          <td class="paramname"><em>key</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3b8ddb099e22657a31515fbcd8d1bf67"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b8ddb099e22657a31515fbcd8d1bf67">&#9670;&nbsp;</a></span>find_key() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename K , typename V &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool find_key </td>
+          <td>(</td>
+          <td class="paramtype">std::unordered_map&lt; K, V &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>map</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">K const &amp;&#160;</td>
+          <td class="paramname"><em>key</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="lib_co_8hpp_a3b8ddb099e22657a31515fbcd8d1bf67_icgraph.png" border="0" usemap="#alib_co_8hpp_a3b8ddb099e22657a31515fbcd8d1bf67_icgraph" alt=""/></div>
+<map name="alib_co_8hpp_a3b8ddb099e22657a31515fbcd8d1bf67_icgraph" id="alib_co_8hpp_a3b8ddb099e22657a31515fbcd8d1bf67_icgraph">
+<area shape="rect" title=" " alt="" coords="184,5,260,32"/>
+<area shape="rect" href="class_timeshifts.html#a0ab2718e733f94acda46780191295e3b" title=" " alt="" coords="5,5,136,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a1a6d9eab2874e1bf6506aeb84d21506d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a6d9eab2874e1bf6506aeb84d21506d">&#9670;&nbsp;</a></span>find_value() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename K , typename V &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool find_value </td>
+          <td>(</td>
+          <td class="paramtype">std::map&lt; K, V &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>map</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">V const &amp;&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aaff2134bba0ee7c0b4a509699674251a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaff2134bba0ee7c0b4a509699674251a">&#9670;&nbsp;</a></span>find_value() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename K , typename V &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool find_value </td>
+          <td>(</td>
+          <td class="paramtype">std::unordered_map&lt; K, V &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>map</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">V const &amp;&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a075a3c229a21ca4d0e91f72e99a6bf6d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a075a3c229a21ca4d0e91f72e99a6bf6d">&#9670;&nbsp;</a></span>float_cast()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename  = typename std::enable_if&lt;std::is_arithmetic&lt;T&gt;::value&gt;::type&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float float_cast </td>
+          <td>(</td>
+          <td class="paramtype">T const &amp;&#160;</td>
+          <td class="paramname"><em>t</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Casts a number into a float. </p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="lib_co_8hpp_a075a3c229a21ca4d0e91f72e99a6bf6d_icgraph.png" border="0" usemap="#alib_co_8hpp_a075a3c229a21ca4d0e91f72e99a6bf6d_icgraph" alt=""/></div>
+<map name="alib_co_8hpp_a075a3c229a21ca4d0e91f72e99a6bf6d_icgraph" id="alib_co_8hpp_a075a3c229a21ca4d0e91f72e99a6bf6d_icgraph">
+<area shape="rect" title="Casts a number into a float." alt="" coords="260,5,345,32"/>
+<area shape="rect" href="class_type_root_map.html#acc24a4f33058532b330071a6738f02f4" title=" " alt="" coords="5,5,212,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ad15d46f1c6897c587cd64a3efba23585"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad15d46f1c6897c587cd64a3efba23585">&#9670;&nbsp;</a></span>get_max_element()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename K , typename V &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::pair&lt;K,V&gt; get_max_element </td>
+          <td>(</td>
+          <td class="paramtype">std::map&lt; K, V &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>map</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aecb45c04cc3a1a2386b973014e4fef50"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aecb45c04cc3a1a2386b973014e4fef50">&#9670;&nbsp;</a></span>get_max_key()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename K , typename V &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">K get_max_key </td>
+          <td>(</td>
+          <td class="paramtype">std::map&lt; K, V &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>map</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad4ab9f9247e670a4d9db36ca683e6270"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad4ab9f9247e670a4d9db36ca683e6270">&#9670;&nbsp;</a></span>get_max_value()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename K , typename V &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">V get_max_value </td>
+          <td>(</td>
+          <td class="paramtype">std::map&lt; K, V &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>map</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6f43d67b9c0e4bb6bf5a58906ae0d812"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f43d67b9c0e4bb6bf5a58906ae0d812">&#9670;&nbsp;</a></span>get_min()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename K , typename V &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::pair&lt;K,V&gt; get_min </td>
+          <td>(</td>
+          <td class="paramtype">std::map&lt; K, V &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>map</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aeec208b7dcadd19e1317814c1de441d9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeec208b7dcadd19e1317814c1de441d9">&#9670;&nbsp;</a></span>get_min_key()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename K , typename V &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">K get_min_key </td>
+          <td>(</td>
+          <td class="paramtype">std::map&lt; K, V &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>map</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad1d07d5a6e5c5182a7dc644148cd6fcd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad1d07d5a6e5c5182a7dc644148cd6fcd">&#9670;&nbsp;</a></span>get_min_value()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename K , typename V &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">V get_min_value </td>
+          <td>(</td>
+          <td class="paramtype">std::map&lt; K, V &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>map</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a48e80fbfd11f9fb219b92ba1c29c1b2a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a48e80fbfd11f9fb219b92ba1c29c1b2a">&#9670;&nbsp;</a></span>int_cast()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename  = typename std::enable_if&lt;std::is_arithmetic&lt;T&gt;::value&gt;::type&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int int_cast </td>
+          <td>(</td>
+          <td class="paramtype">T const &amp;&#160;</td>
+          <td class="paramname"><em>t</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Casts a number into an int. </p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="lib_co_8hpp_a48e80fbfd11f9fb219b92ba1c29c1b2a_icgraph.png" border="0" usemap="#alib_co_8hpp_a48e80fbfd11f9fb219b92ba1c29c1b2a_icgraph" alt=""/></div>
+<map name="alib_co_8hpp_a48e80fbfd11f9fb219b92ba1c29c1b2a_icgraph" id="alib_co_8hpp_a48e80fbfd11f9fb219b92ba1c29c1b2a_icgraph">
+<area shape="rect" title="Casts a number into an int." alt="" coords="675,132,748,159"/>
+<area shape="rect" href="class_timeshifts.html#a608d9443a15dd669920e10dd8baee23a" title=" " alt="" coords="448,5,597,32"/>
+<area shape="rect" href="class_clovers.html#a378e1b7fea24003b4b56eb855c8ae163" title=" " alt="" coords="468,56,577,83"/>
+<area shape="rect" href="_clover_module_8hpp.html#aae60fbf6c352f4c0682ec1c2a3f04181" title=" " alt="" coords="473,107,572,133"/>
+<area shape="rect" href="class_calibration.html#ad6db2742477c8ac64787c6fe8a687aff" title=" " alt="" coords="436,157,609,184"/>
+<area shape="rect" href="class_timeshifts.html#a89dbca371bce4601ee60122f544faf95" title=" " alt="" coords="419,208,627,235"/>
+<area shape="rect" href="class_type_root_map.html#acc24a4f33058532b330071a6738f02f4" title=" " alt="" coords="419,259,626,285"/>
+<area shape="rect" href="class_timeshifts.html#a3d3ab1b3498ca45832d8a8735f16e188" title=" " alt="" coords="213,5,371,32"/>
+<area shape="rect" href="class_calibration.html#ae6bbaf8b283a345c9936a907fcba1849" title="Analyse the spectra to extract calibration coefficients." alt="" coords="216,157,368,184"/>
+<area shape="rect" href="class_calibration.html#aa7e921cbc724d97d1a3ef30a4f988e63" title=" " alt="" coords="5,157,165,184"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a695ead22582e1da41880ee67c2c61d07"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a695ead22582e1da41880ee67c2c61d07">&#9670;&nbsp;</a></span>long_cast()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename  = typename std::enable_if&lt;std::is_arithmetic&lt;T&gt;::value&gt;::type&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">long long_cast </td>
+          <td>(</td>
+          <td class="paramtype">T const &amp;&#160;</td>
+          <td class="paramname"><em>t</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Casts a number into an long. </p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="lib_co_8hpp_a695ead22582e1da41880ee67c2c61d07_icgraph.png" border="0" usemap="#alib_co_8hpp_a695ead22582e1da41880ee67c2c61d07_icgraph" alt=""/></div>
+<map name="alib_co_8hpp_a695ead22582e1da41880ee67c2c61d07_icgraph" id="alib_co_8hpp_a695ead22582e1da41880ee67c2c61d07_icgraph">
+<area shape="rect" title="Casts a number into an long." alt="" coords="260,5,344,32"/>
+<area shape="rect" href="class_type_root_map.html#acc24a4f33058532b330071a6738f02f4" title=" " alt="" coords="5,5,212,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a86b2b990fa7ee3c102db83cdecc9d129"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a86b2b990fa7ee3c102db83cdecc9d129">&#9670;&nbsp;</a></span>longlong_cast()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename  = typename std::enable_if&lt;std::is_arithmetic&lt;T&gt;::value&gt;::type&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="lib_co_8hpp.html#a38d84fea74b6f31e86b2e282bb232729">longlong</a> longlong_cast </td>
+          <td>(</td>
+          <td class="paramtype">T const &amp;&#160;</td>
+          <td class="paramname"><em>t</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Casts a number into long long (longlong) </p>
+
+</div>
+</div>
+<a id="a4944be9c9377ea1853bd55f996b7cb13"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4944be9c9377ea1853bd55f996b7cb13">&#9670;&nbsp;</a></span>operator&gt;&gt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::ostream&amp; operator&gt;&gt; </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>cout</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_bools.html">Bools</a> const &amp;&#160;</td>
+          <td class="paramname"><em>bools</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6cca31a5d1658456b486e6fa135c690b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6cca31a5d1658456b486e6fa135c690b">&#9670;&nbsp;</a></span>pauseCo() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto pauseCo </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="lib_co_8hpp_a6cca31a5d1658456b486e6fa135c690b_icgraph.png" border="0" usemap="#alib_co_8hpp_a6cca31a5d1658456b486e6fa135c690b_icgraph" alt=""/></div>
+<map name="alib_co_8hpp_a6cca31a5d1658456b486e6fa135c690b_icgraph" id="alib_co_8hpp_a6cca31a5d1658456b486e6fa135c690b_icgraph">
+<area shape="rect" title=" " alt="" coords="1141,31,1220,57"/>
+<area shape="rect" href="class_faster2_root.html#a2ba93a4814723b6103dc25a701f3dc89" title=" " alt="" coords="915,31,1093,57"/>
+<area shape="rect" href="class_faster2_root.html#a50fd46a075ae0a1a1f52b5bb6405047b" title=" " alt="" coords="673,31,867,57"/>
+<area shape="rect" href="class_faster2_root.html#a7d6d5249c6ced2548a58406eca085cdb" title=" " alt="" coords="469,31,625,57"/>
+<area shape="rect" href="class_faster2_root.html#ad07b97d280479aabc26e04d920726ddb" title="Raw conversion :" alt="" coords="237,5,421,32"/>
+<area shape="rect" href="class_faster2_root.html#ad30ccf937150bbd3504ec3a354b76c8f" title=" " alt="" coords="262,56,397,83"/>
+<area shape="rect" href="class_faster2_root.html#aacd4d3fa480eba9bc86b49f4b2040c60" title=" " alt="" coords="5,56,189,83"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ab102b1ac90e2714661a2e757b7f6692e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab102b1ac90e2714661a2e757b7f6692e">&#9670;&nbsp;</a></span>pauseCo() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto pauseCo </td>
+          <td>(</td>
+          <td class="paramtype">std::string const &amp;&#160;</td>
+          <td class="paramname"><em>message</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af4d9dac78db5e48b5e2c5253754aaa8c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af4d9dac78db5e48b5e2c5253754aaa8c">&#9670;&nbsp;</a></span>short_cast()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename  = typename std::enable_if&lt;std::is_arithmetic&lt;T&gt;::value&gt;::type&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">short short_cast </td>
+          <td>(</td>
+          <td class="paramtype">T const &amp;&#160;</td>
+          <td class="paramname"><em>t</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Casts a number into an short. </p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="lib_co_8hpp_af4d9dac78db5e48b5e2c5253754aaa8c_icgraph.png" border="0" usemap="#alib_co_8hpp_af4d9dac78db5e48b5e2c5253754aaa8c_icgraph" alt=""/></div>
+<map name="alib_co_8hpp_af4d9dac78db5e48b5e2c5253754aaa8c_icgraph" id="alib_co_8hpp_af4d9dac78db5e48b5e2c5253754aaa8c_icgraph">
+<area shape="rect" title="Casts a number into an short." alt="" coords="260,5,349,32"/>
+<area shape="rect" href="class_type_root_map.html#acc24a4f33058532b330071a6738f02f4" title=" " alt="" coords="5,5,212,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a237f678c718382f74a68364c0fc1779a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a237f678c718382f74a68364c0fc1779a">&#9670;&nbsp;</a></span>size_cast()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename  = typename std::enable_if&lt;std::is_arithmetic&lt;T&gt;::value&gt;::type&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="lib_co_8hpp.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a> size_cast </td>
+          <td>(</td>
+          <td class="paramtype">T const &amp;&#160;</td>
+          <td class="paramname"><em>t</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Casts a number into std::size_t. </p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="lib_co_8hpp_a237f678c718382f74a68364c0fc1779a_icgraph.png" border="0" usemap="#alib_co_8hpp_a237f678c718382f74a68364c0fc1779a_icgraph" alt=""/></div>
+<map name="alib_co_8hpp_a237f678c718382f74a68364c0fc1779a_icgraph" id="alib_co_8hpp_a237f678c718382f74a68364c0fc1779a_icgraph">
+<area shape="rect" title="Casts a number into std::size_t." alt="" coords="947,107,1029,133"/>
+<area shape="rect" href="class_m_t_counter.html#a62d12e221986dda2cb740d9e8da4ee55" title=" " alt="" coords="745,5,869,32"/>
+<area shape="rect" href="class_m_t_counter.html#ad0851e43d22e6ffe02b1ecc66e4b793d" title=" " alt="" coords="719,56,896,83"/>
+<area shape="rect" href="class_m_t_counter.html#a833a2a1bedd059ba424d8150a418c351" title=" " alt="" coords="724,107,891,133"/>
+<area shape="rect" href="class_m_t_object.html#a872d9518e0a1936df8e70a2dae303f4f" title=" " alt="" coords="716,181,899,208"/>
+<area shape="rect" href="class_event.html#aadb0c0dcbb31718e69358e9c99a5b633" title=" " alt="" coords="761,232,854,259"/>
+<area shape="rect" href="class_m_t_object.html#ac76ab61815b5c3a471e6c210b7ba1913" title=" " alt="" coords="432,105,668,132"/>
+<area shape="rect" href="class_m_t_object.html#aaa5354a0915c26979a49d54f36019df1" title=" " alt="" coords="476,156,624,183"/>
+<area shape="rect" href="class_faster2_histo.html#aa3d364eba3c8fc7367fdabea68524854" title=" " alt="" coords="449,207,651,233"/>
+<area shape="rect" href="class_m_t_object.html#a8b70d4506ed556d5ca4c23703a80ddb6" title=" " alt="" coords="442,257,658,284"/>
+<area shape="rect" href="class_faster2_histo.html#a72f8004ae550c02db09791b810c0252d" title=" " alt="" coords="245,207,384,233"/>
+<area shape="rect" href="class_faster2_histo.html#aed84ab0be7ff45067715733dd7be23d1" title=" " alt="" coords="5,207,197,233"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a6df2dcd4b1f61c75dc292942bc5ca74d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6df2dcd4b1f61c75dc292942bc5ca74d">&#9670;&nbsp;</a></span>throw_error()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void throw_error </td>
+          <td>(</td>
+          <td class="paramtype">std::string const &amp;&#160;</td>
+          <td class="paramname"><em>message</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="lib_co_8hpp_a6df2dcd4b1f61c75dc292942bc5ca74d_icgraph.png" border="0" usemap="#alib_co_8hpp_a6df2dcd4b1f61c75dc292942bc5ca74d_icgraph" alt=""/></div>
+<map name="alib_co_8hpp_a6df2dcd4b1f61c75dc292942bc5ca74d_icgraph" id="alib_co_8hpp_a6df2dcd4b1f61c75dc292942bc5ca74d_icgraph">
+<area shape="rect" title=" " alt="" coords="1356,689,1453,716"/>
+<area shape="rect" href="class_gates__t.html#a07f860c7dcd7110ee0da5d523591b12f" title=" " alt="" coords="1141,5,1260,32"/>
+<area shape="rect" href="class_faster2_root.html#a2ba93a4814723b6103dc25a701f3dc89" title=" " alt="" coords="1111,56,1290,83"/>
+<area shape="rect" href="class_faster2_root.html#ad30ccf937150bbd3504ec3a354b76c8f" title=" " alt="" coords="313,107,448,133"/>
+<area shape="rect" href="class_run_matrixator.html#a1f6ba04bc894d68a6d72ccedf8367ad4" title=" " alt="" coords="1093,157,1308,184"/>
+<area shape="rect" href="class_clover_spectra.html#ae46c582451bada5b2b8957ee44b92e35" title=" " alt="" coords="1115,259,1286,285"/>
+<area shape="rect" href="class_clover_spectra.html#a353ec66774413feefb33a784ce2159cf" title=" " alt="" coords="843,259,1021,285"/>
+<area shape="rect" href="class_run_matrixator.html#ad32109c5c279f520ce19602340aa2293" title=" " alt="" coords="843,461,1021,488"/>
+<area shape="rect" href="class_run_matrixator.html#aa6d13b08060fef07b50d7ab6b35be0d6" title=" " alt="" coords="577,411,721,437"/>
+<area shape="rect" href="class_faster2_histo.html#a72f8004ae550c02db09791b810c0252d" title=" " alt="" coords="1131,563,1270,589"/>
+<area shape="rect" href="class_spectra_co.html#ad357dfc02fbb9ad6fc308ecf07f07fea" title=" " alt="" coords="1139,613,1263,640"/>
+<area shape="rect" href="class_calibration.html#a7835b1d9192d2c9fa8dcd8efbceb8db3" title=" " alt="" coords="1104,664,1297,691"/>
+<area shape="rect" href="class_detectors.html#ae5e6ff02bf3d79da3f034f7404e0677c" title="Returns the number of detector of each type." alt="" coords="1123,512,1278,539"/>
+<area shape="rect" href="class_near_line.html#adf3bc13e36dd295fc5668f08e81eaf32" title=" " alt="" coords="1127,715,1274,741"/>
+<area shape="rect" href="class_vertice.html#a2e858710d6eb5fe7dc4029b6cc280272" title=" " alt="" coords="1132,765,1269,792"/>
+<area shape="rect" href="class_spectra_co.html#ad2f1bf0e5e8ac584e0aac00e753e8395" title=" " alt="" coords="1119,816,1282,843"/>
+<area shape="rect" href="class_vertice.html#a1897df7eb0121341d7dac0a285af7db8" title=" " alt="" coords="1130,867,1271,893"/>
+<area shape="rect" href="class_spectra_co.html#af251452bf4de93adc2ddc7b7ae594415" title=" " alt="" coords="1123,917,1279,944"/>
+<area shape="rect" href="class_vertice.html#a35359e51cb43abf68e459cbfedaeabb6" title=" " alt="" coords="1133,968,1268,995"/>
+<area shape="rect" href="namespace_co_analyse.html#a53744e2ddfba6a4a188ada9ed1bc6272" title="Total projection on X axis." alt="" coords="1124,1019,1277,1045"/>
+<area shape="rect" href="namespace_co_analyse.html#abecf48371e430ad0cc8dfb063e6d951d" title="Project on Y axis at a given X bin." alt="" coords="1125,1171,1277,1197"/>
+<area shape="rect" href="class_timeshifts.html#a0ab2718e733f94acda46780191295e3b" title=" " alt="" coords="1135,1221,1266,1248"/>
+<area shape="rect" href="class_vertice.html#a58c2af14cebf91fc79298f4128a54856" title=" " alt="" coords="1153,1272,1248,1299"/>
+<area shape="rect" href="struct_calibration_1_1histograms.html#a8cf05daf9b9f1ee4ec9d1763acc2c307" title=" " alt="" coords="1113,1323,1288,1365"/>
+<area shape="rect" href="namespace_co_analyse.html#ad13b7eeaa3d7d9a30cdf04a8b0d17088" title=" " alt="" coords="1137,1069,1265,1096"/>
+<area shape="rect" href="namespace_co_analyse.html#ac1aa3fcfcc46318e4f0d6f42510471a0" title=" " alt="" coords="1137,1120,1264,1147"/>
+<area shape="rect" href="class_simplex.html#abd6e34ab7ace7cf33b13fa0dab907a2a" title=" " alt="" coords="1133,1389,1269,1416"/>
+<area shape="rect" href="class_run_matrixator.html#aeb9889ba763858dfb65e05c3a7bb142e" title=" " alt="" coords="853,411,1011,437"/>
+<area shape="rect" href="class_clover_spectra.html#aea0814fac7c993ad4813804415f3ffab" title=" " alt="" coords="1107,309,1295,336"/>
+<area shape="rect" href="class_gates__t.html#a31ce88cdf09b7b5f9c74d13a22537815" title=" " alt="" coords="867,5,997,32"/>
+<area shape="rect" href="class_faster2_root.html#a50fd46a075ae0a1a1f52b5bb6405047b" title=" " alt="" coords="835,56,1029,83"/>
+<area shape="rect" href="class_faster2_root.html#a7d6d5249c6ced2548a58406eca085cdb" title=" " alt="" coords="571,56,727,83"/>
+<area shape="rect" href="class_faster2_root.html#ad07b97d280479aabc26e04d920726ddb" title="Raw conversion :" alt="" coords="289,56,473,83"/>
+<area shape="rect" href="class_faster2_root.html#aacd4d3fa480eba9bc86b49f4b2040c60" title=" " alt="" coords="27,107,211,133"/>
+<area shape="rect" href="class_faster2_histo.html#aed84ab0be7ff45067715733dd7be23d1" title=" " alt="" coords="836,579,1028,605"/>
+<area shape="rect" href="class_spectra_co.html#ad094b13ab3d8e445b04edc68a5c12ec0" title=" " alt="" coords="851,680,1013,707"/>
+<area shape="rect" href="class_spectra_co.html#a5b36618b661bac6d8d8c6cfb809eeb74" title=" " alt="" coords="851,629,1013,656"/>
+<area shape="rect" href="struct_calibration_1_1histograms.html#a911cfd2064bd94694cd0731aa6afccfa" title=" " alt="" coords="845,513,1019,554"/>
+<area shape="rect" href="class_calibration.html#a2f91a6803bf8008bd7b748d4a1688338" title=" " alt="" coords="571,520,728,547"/>
+<area shape="rect" href="class_calibration.html#a178a349d575d8f0e8b090f828def78b6" title="Calculate calibration from .root histograms." alt="" coords="301,469,461,496"/>
+<area shape="rect" href="class_calibration.html#a6514307ca111ecc5d6f02694373dc5ec" title=" " alt="" coords="281,571,480,597"/>
+<area shape="rect" href="class_calibration.html#a6d6d354f65db38acf12addf1efb7c815" title=" " alt="" coords="285,520,476,547"/>
+<area shape="rect" href="class_calibration.html#aa7e921cbc724d97d1a3ef30a4f988e63" title=" " alt="" coords="39,545,199,572"/>
+<area shape="rect" href="class_calibration.html#a5931047806db77858db6886d041db100" title=" " alt="" coords="5,596,233,623"/>
+<area shape="rect" href="class_calibration.html#ac7678b0524f8407659a9594b3862e5c3" title=" " alt="" coords="10,495,229,521"/>
+<area shape="rect" href="namespace_co_analyse.html#a2d7393e48336effee246cbbc33822847" title="Project on Y axis between values binYmin and binYmax included [binYmin;binYmax]." alt="" coords="855,1019,1009,1045"/>
+<area shape="rect" href="namespace_co_analyse.html#aeb2cc17685bbda3b8531803c4d8cc5c8" title="Remove the background in the given histo." alt="" coords="819,1095,1045,1121"/>
+<area shape="rect" href="class_histo_analyse.html#a32a4ee17c51884e01eb924cec2c42112" title=" " alt="" coords="528,1095,771,1121"/>
+<area shape="rect" href="namespace_co_analyse.html#ab64c2bb160dbdc01836274235d0bbd3b" title="Project on Y axis between values valueXmin and valueXmax included [valueXmin;valueXmax]." alt="" coords="856,1171,1008,1197"/>
+<area shape="rect" href="class_vertice.html#a651eb7cb39f966a5ff2d6d24c3e1e785" title=" " alt="" coords="861,1272,1003,1299"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ade77d1f37b1311b3f80ce429a33fd226"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade77d1f37b1311b3f80ce429a33fd226">&#9670;&nbsp;</a></span>uchar_cast()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename  = typename std::enable_if&lt;std::is_arithmetic&lt;T&gt;::value&gt;::type&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="lib_co_8hpp.html#ae48ac2456c5ad6c956fef86e7bef3a21">uchar</a> uchar_cast </td>
+          <td>(</td>
+          <td class="paramtype">T const &amp;&#160;</td>
+          <td class="paramname"><em>t</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Casts a number into unsigned char (uchar) </p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="lib_co_8hpp_ade77d1f37b1311b3f80ce429a33fd226_icgraph.png" border="0" usemap="#alib_co_8hpp_ade77d1f37b1311b3f80ce429a33fd226_icgraph" alt=""/></div>
+<map name="alib_co_8hpp_ade77d1f37b1311b3f80ce429a33fd226_icgraph" id="alib_co_8hpp_ade77d1f37b1311b3f80ce429a33fd226_icgraph">
+<area shape="rect" title="Casts a number into unsigned char (uchar)" alt="" coords="895,107,987,133"/>
+<area shape="rect" href="class_counters.html#a1f2723ecaf63399d985ce2efd87aab6f" title=" " alt="" coords="650,5,837,32"/>
+<area shape="rect" href="class_counters.html#a438d855f700f802261df045b1f52723e" title=" " alt="" coords="659,56,827,83"/>
+<area shape="rect" href="class_d_s_s_d.html#a800770306a115e1096108cef2463a103" title=" " alt="" coords="661,107,825,133"/>
+<area shape="rect" href="class_detectors.html#a8d5c0f2d189ddda12ed3c36f13887cfd" title="Fills the lookup tables." alt="" coords="658,157,829,184"/>
+<area shape="rect" href="class_type_root_map.html#acc24a4f33058532b330071a6738f02f4" title=" " alt="" coords="640,208,847,235"/>
+<area shape="rect" href="class_d_s_s_d.html#ad4a5a45596071c4625903146f32737ff" title=" " alt="" coords="480,107,583,133"/>
+<area shape="rect" href="class_detectors.html#a03f6e9974f958b86ddbbc4670d0209a2" title="Reads the file and extracts the list of detectors, then fills the lookup tables." alt="" coords="471,157,592,184"/>
+<area shape="rect" href="class_clover_spectra.html#a353ec66774413feefb33a784ce2159cf" title=" " alt="" coords="245,56,423,83"/>
+<area shape="rect" href="class_faster2_root.html#ad30ccf937150bbd3504ec3a354b76c8f" title=" " alt="" coords="267,107,401,133"/>
+<area shape="rect" href="class_faster2_histo.html#a72f8004ae550c02db09791b810c0252d" title=" " alt="" coords="265,157,403,184"/>
+<area shape="rect" href="class_detectors.html#a0aa2791c5f5b7133fd5816d2f4dc0b56" title=" " alt="" coords="255,208,413,235"/>
+<area shape="rect" href="class_near_line.html#a3280d6187c79a0aaf4f23b97fe3089ee" title=" " alt="" coords="255,259,413,285"/>
+<area shape="rect" href="class_faster2_root.html#aacd4d3fa480eba9bc86b49f4b2040c60" title=" " alt="" coords="9,107,193,133"/>
+<area shape="rect" href="class_faster2_histo.html#aed84ab0be7ff45067715733dd7be23d1" title=" " alt="" coords="5,157,197,184"/>
+<area shape="rect" href="class_near_line.html#adf3bc13e36dd295fc5668f08e81eaf32" title=" " alt="" coords="28,259,175,285"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ad4f41fb682fba59b9adc6142282db5a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad4f41fb682fba59b9adc6142282db5a2">&#9670;&nbsp;</a></span>uint_cast()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename  = typename std::enable_if&lt;std::is_arithmetic&lt;T&gt;::value&gt;::type&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="lib_co_8hpp.html#a69aa29b598b851b0640aa225a9e5d61d">uint</a> uint_cast </td>
+          <td>(</td>
+          <td class="paramtype">T const &amp;&#160;</td>
+          <td class="paramname"><em>t</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Casts a number into unsigned int (uint) </p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="lib_co_8hpp_ad4f41fb682fba59b9adc6142282db5a2_icgraph.png" border="0" usemap="#alib_co_8hpp_ad4f41fb682fba59b9adc6142282db5a2_icgraph" alt=""/></div>
+<map name="alib_co_8hpp_ad4f41fb682fba59b9adc6142282db5a2_icgraph" id="alib_co_8hpp_ad4f41fb682fba59b9adc6142282db5a2_icgraph">
+<area shape="rect" title="Casts a number into unsigned int (uint)" alt="" coords="260,5,341,32"/>
+<area shape="rect" href="class_type_root_map.html#acc24a4f33058532b330071a6738f02f4" title=" " alt="" coords="5,5,212,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ac939b8397e82173edff13b3d00dc9d09"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac939b8397e82173edff13b3d00dc9d09">&#9670;&nbsp;</a></span>ulong_cast()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename  = typename std::enable_if&lt;std::is_arithmetic&lt;T&gt;::value&gt;::type&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="lib_co_8hpp.html#a92c2ca60527219506deb3325507baee0">ulong</a> ulong_cast </td>
+          <td>(</td>
+          <td class="paramtype">T const &amp;&#160;</td>
+          <td class="paramname"><em>t</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Casts a number into unsigned long (ulong) </p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="lib_co_8hpp_ac939b8397e82173edff13b3d00dc9d09_icgraph.png" border="0" usemap="#alib_co_8hpp_ac939b8397e82173edff13b3d00dc9d09_icgraph" alt=""/></div>
+<map name="alib_co_8hpp_ac939b8397e82173edff13b3d00dc9d09_icgraph" id="alib_co_8hpp_ac939b8397e82173edff13b3d00dc9d09_icgraph">
+<area shape="rect" title="Casts a number into unsigned long (ulong)" alt="" coords="260,5,352,32"/>
+<area shape="rect" href="class_type_root_map.html#acc24a4f33058532b330071a6738f02f4" title=" " alt="" coords="5,5,212,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a6064e403b0588c46cce0f1cb82471acf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6064e403b0588c46cce0f1cb82471acf">&#9670;&nbsp;</a></span>ulonglong_cast()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename  = typename std::enable_if&lt;std::is_arithmetic&lt;T&gt;::value&gt;::type&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="lib_co_8hpp.html#a36061a3a05c4802ea9393df730a50d52">ulonglong</a> ulonglong_cast </td>
+          <td>(</td>
+          <td class="paramtype">T const &amp;&#160;</td>
+          <td class="paramname"><em>t</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Casts a number into unsigned long long (ulonglong) </p>
+
+</div>
+</div>
+<a id="ab2f8f9033c2742c4f5ac6d3cce6caf9a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab2f8f9033c2742c4f5ac6d3cce6caf9a">&#9670;&nbsp;</a></span>ushort_cast()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename  = typename std::enable_if&lt;std::is_arithmetic&lt;T&gt;::value&gt;::type&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="lib_co_8hpp.html#ad29aff8b0f7fde4ef0291331012e596a">ushort</a> ushort_cast </td>
+          <td>(</td>
+          <td class="paramtype">T const &amp;&#160;</td>
+          <td class="paramname"><em>t</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Casts a number into unsigned short (ushort) </p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="lib_co_8hpp_ab2f8f9033c2742c4f5ac6d3cce6caf9a_icgraph.png" border="0" usemap="#alib_co_8hpp_ab2f8f9033c2742c4f5ac6d3cce6caf9a_icgraph" alt=""/></div>
+<map name="alib_co_8hpp_ab2f8f9033c2742c4f5ac6d3cce6caf9a_icgraph" id="alib_co_8hpp_ab2f8f9033c2742c4f5ac6d3cce6caf9a_icgraph">
+<area shape="rect" title="Casts a number into unsigned short (ushort)" alt="" coords="260,5,357,32"/>
+<area shape="rect" href="class_type_root_map.html#acc24a4f33058532b330071a6738f02f4" title=" " alt="" coords="5,5,212,32"/>
+</map>
+</div>
 
 </div>
 </div>
 <h2 class="groupheader">Variable Documentation</h2>
-<a id="ad1be7b5ed61940e94b315160cd5c0702"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad1be7b5ed61940e94b315160cd5c0702">&#9670;&nbsp;</a></span>_ns</h2>
+<a id="a99f92dd785ee1e11e00427fdc8a4f772"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a99f92dd785ee1e11e00427fdc8a4f772">&#9670;&nbsp;</a></span>_ns</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">float _ns = 1000.</td>
+          <td class="memname">double _ns = 1000.</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
+</div>
+</div>
+<a id="af522b6efd63a7f871a8307755b1297bf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af522b6efd63a7f871a8307755b1297bf">&#9670;&nbsp;</a></span>error_message</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::map&lt;std::string, std::string&gt; error_message</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= </div>
+<div class="line">{</div>
+<div class="line">  {<span class="stringliteral">&quot;DEV&quot;</span>, <span class="stringliteral">&quot;ASK DEV or do it yourself, sry&quot;</span>}</div>
+<div class="line">}</div>
+</div><!-- fragment -->
 </div>
 </div>
 </div><!-- contents -->

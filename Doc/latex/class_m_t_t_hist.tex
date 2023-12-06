@@ -1,0 +1,802 @@
+\doxysection{MTTHist$<$ THist $>$ Class Template Reference}
+\label{class_m_t_t_hist}\index{MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}}
+
+
+Multithreading wrapper for all THist spectra of root library.  
+
+
+
+
+{\ttfamily \#include $<$MTTHist.\+hpp$>$}
+
+
+
+Collaboration diagram for MTTHist$<$ THist $>$\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=302pt]{class_m_t_t_hist__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \textbf{ clean} ()
+\item 
+bool const  \& \textbf{ exists} () const
+\item 
+TFile $\ast$ \textbf{ file} ()
+\item 
+{\footnotesize template$<$class... ARGS$>$ }\\void \textbf{ Fill} (ARGS \&\&... args) noexcept
+\item 
+THist $\ast$ \textbf{ get} ()
+\item 
+THist $\ast$ \textbf{ Get} ()
+\item 
+THist $\ast$ \textbf{ Get} (\textbf{ ushort} const \&thread\+\_\+nb)
+\item 
+std\+::vector$<$ THist $\ast$ $>$ const  \& \textbf{ get\+Collection} () const
+\item 
+std\+::string const  \& \textbf{ Get\+Name} () const
+\item 
+auto const  \& \textbf{ Integral} () const
+\item 
+bool const  \& \textbf{ is\+Written} () const
+\item 
+void \textbf{ Merge} ()
+\item 
+void \textbf{ Merge\+\_\+t} ()
+\item 
+THist $\ast$ \textbf{ Merged} ()
+\item 
+{\footnotesize template$<$class... ARGS$>$ }\\\textbf{ MTTHist} ()
+\item 
+{\footnotesize template$<$class... ARGS$>$ }\\\textbf{ MTTHist} (ARGS \&\&... args)
+\begin{DoxyCompactList}\small\item\em Construct a new \doxyref{MTTHist}{p.}{class_m_t_t_hist} object and send the arguments directly to the underlying root histogramm. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class... ARGS$>$ }\\\textbf{ MTTHist} (\textbf{ MTTHist}$<$ THist $>$ \&\&hist)
+\begin{DoxyCompactList}\small\item\em Move constructor. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class... ARGS$>$ }\\\textbf{ MTTHist} (\textbf{ MTTHist}$<$ THist $>$ const \&hist)
+\begin{DoxyCompactList}\small\item\em Copy constructor. \end{DoxyCompactList}\item 
+std\+::string \& \textbf{ name} ()
+\item 
+std\+::string const  \& \textbf{ name} () const
+\item 
+\textbf{ operator bool} () const \&
+\item 
+THist $\ast$ \textbf{ operator-\/$>$} ()
+\item 
+\textbf{ MTTHist}$<$ THist $>$ \& \textbf{ operator=} (\textbf{ MTTHist}$<$ THist $>$ const \&hist)
+\item 
+THist $\ast$ \textbf{ operator[$\,$]} (int const \&thread\+\_\+nb)
+\item 
+void \textbf{ Print} ()
+\item 
+std\+::string const  \& \textbf{ read\+Comment} (std\+::string const \&comment) const
+\item 
+auto \textbf{ reset} (\textbf{ MTTHist}$<$ THist $>$ const \&hist)
+\begin{DoxyCompactList}\small\item\em Copy initializer. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class... ARGS$>$ }\\void \textbf{ reset} (std\+::nullptr\+\_\+t)
+\item 
+{\footnotesize template$<$class... ARGS$>$ }\\void \textbf{ reset} (std\+::string \textbf{ name}, ARGS \&\&... args)
+\item 
+void \textbf{ set\+Comment} (std\+::string const \&comment)
+\item 
+std\+::string const  \& \textbf{ set\+Name} (std\+::string const \&\+\_\+name)
+\item 
+std\+::string const  \& \textbf{ set\+Title} (std\+::string const \&\+\_\+title)
+\item 
+auto \textbf{ size} () const
+\item 
+std\+::string \& \textbf{ title} ()
+\item 
+std\+::string const  \& \textbf{ title} () const
+\item 
+void \textbf{ Write} (bool const \&write\+Empty=false)
+\item 
+void \textbf{ Write\+\_\+i} (int const \&thread\+\_\+index)
+\item 
+\textbf{ $\sim$\+MTTHist} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \textbf{ Merge\+\_\+thread} (\textbf{ MTTHist}$<$ THist $>$ \&histo)
+\item 
+static bool const  \& \textbf{ verbose} (bool const \&\+\_\+verbose=true)
+\item 
+static bool \& \textbf{ verbosity} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::mutex \textbf{ m\+\_\+mutex}
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ THist $\ast$ $>$ \textbf{ m\+\_\+collection}
+\item 
+std\+::string \textbf{ m\+\_\+comment}
+\item 
+bool \textbf{ m\+\_\+exists} = false
+\item 
+TFile $\ast$ \textbf{ m\+\_\+file} = nullptr
+\item 
+\textbf{ ulonglong} \textbf{ m\+\_\+integral} = 0ull
+\item 
+\textbf{ Bools} \textbf{ m\+\_\+is\+\_\+deleted}
+\item 
+bool \textbf{ m\+\_\+is\+\_\+merged} = false
+\item 
+THist $\ast$ \textbf{ m\+\_\+merged} = nullptr
+\item 
+bool \textbf{ m\+\_\+merged\+\_\+deleted} = false
+\item 
+std\+::string \textbf{ m\+\_\+name}
+\item 
+std\+::string \textbf{ m\+\_\+title}
+\item 
+bool \textbf{ m\+\_\+written} = false
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::condition\+\_\+variable \textbf{ m\+\_\+condition}
+\item 
+static \textbf{ MTCounter} \textbf{ m\+\_\+nb\+\_\+thread\+\_\+running} \{0\}
+\item 
+static bool \textbf{ m\+\_\+verbose} = true
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class THist$>$\newline
+class MTTHist$<$ THist $>$}
+
+Multithreading wrapper for all THist spectra of root library. 
+
+\begin{DoxyAuthor}{Author}
+{\texttt{ corentin.\+hiver@ijclab.\+in2p3.\+fr}}
+\end{DoxyAuthor}
+Inspiration \+: {\texttt{ https\+://root.\+cern.\+ch/doc/master/\+TThreaded\+Object\+\_\+8hxx\+\_\+source.\+html\#l00167}}
+
+\begin{DoxyAttention}{Attention}
+As for any class deriving from \doxyref{MTObject}{p.}{class_m_t_object}, first initialize the number of threads \+: \begin{DoxyVerb} MTObject::Initialize(nb_threads)
+\end{DoxyVerb}
+
+\end{DoxyAttention}
+Instantiate this class as follow \+: \begin{DoxyVerb} MTTHist<TH1F> some_TH1F_histo("name", "title:xaxis:yaxis", bins, min, max);
+\end{DoxyVerb}
+ Or \begin{DoxyVerb} MTTHist<TH1F> some_TH1F_histo;
+ some_TH1F_histo.reset("name", "title:xaxis:yaxis", bins, min, max);
+\end{DoxyVerb}
+ \begin{DoxyAttention}{Attention}
+Please do not use the copy constructors and operators, may need proper work to make it safe
+\end{DoxyAttention}
+In default mode, nb\+\_\+threads histograms are created \begin{DoxyRefDesc}{Test}
+\item[\textbf{ Test}]In mono mode (MTTHIST\+\_\+\+MONO), only one histogram is created UNDER DEVELOPPEMENT\end{DoxyRefDesc}
+
+
+To fill the histogram from threads \+: \begin{DoxyVerb}     some_TH1F_histo.Fill()
+\end{DoxyVerb}
+ Once the histogram have been filled, two options \+:
+
+
+\begin{DoxyItemize}
+\item Either write it down directly \+: \begin{DoxyVerb}  // Open a TFile
+  some_TH1F_histo.Write()
+  // Write and close the TFile
+\end{DoxyVerb}
+
+\item Or you can merge the histograms \+: \begin{DoxyVerb} some_TH1F_histo.Merge();
+\end{DoxyVerb}
+ You can then address the merged histogram using -\/$>$ \+: \begin{DoxyVerb}some_TH1F_histo->Integral();
+\end{DoxyVerb}
+ Special case \+: you can also instanciate and write down one histogram per thread.
+\end{DoxyItemize}
+
+Example \+: void single\+\_\+thread(\+MTTHist \& histo) \{ histo.\+reset(\char`\"{}name\char`\"{},\char`\"{}title\char`\"{}, args...); ... Fill the histo histo.\+Write(); \}
+
+int main() \{ MTTHist$<$\+TH1$>$ on\+\_\+histo\+\_\+per\+\_\+thread; std\+::parallelise\+\_\+function(single\+\_\+thread, on\+\_\+histo\+\_\+per\+\_\+thread); return 1; \}
+
+In this case each histogram is kept separated, no merge occurs. Use this if you want to make the benefits of the user defined method of this class or for consistency with the rest of the code. It is equivalent to declare the histogram directly inside the funcion
+
+\begin{DoxyRefDesc}{Todo}
+\item[\textbf{ Todo}]better memory management \end{DoxyRefDesc}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\label{class_m_t_t_hist_a649cb4ac9c9239c1bf76f3f8b508bea5}} 
+\index{MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}!MTTHist@{MTTHist}}
+\index{MTTHist@{MTTHist}!MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}}
+\doxysubsubsection{MTTHist()\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily template$<$class THist $>$ \\
+template$<$class... ARGS$>$ \\
+\textbf{ MTTHist}$<$ THist $>$\+::\textbf{ MTTHist} (\begin{DoxyParamCaption}\item[{ARGS \&\&...}]{args }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Construct a new \doxyref{MTTHist}{p.}{class_m_t_t_hist} object and send the arguments directly to the underlying root histogramm. 
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=308pt]{class_m_t_t_hist_a649cb4ac9c9239c1bf76f3f8b508bea5_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_m_t_t_hist_ac51ad7ced1fdf79f4b17c9dee8231e6d}} 
+\index{MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}!MTTHist@{MTTHist}}
+\index{MTTHist@{MTTHist}!MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}}
+\doxysubsubsection{MTTHist()\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily template$<$class THist $>$ \\
+template$<$class... ARGS$>$ \\
+\textbf{ MTTHist}$<$ THist $>$\+::\textbf{ MTTHist} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=308pt]{class_m_t_t_hist_ac51ad7ced1fdf79f4b17c9dee8231e6d_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_m_t_t_hist_a9fc4f9b3947ade70cad19a33c16d69d6}} 
+\index{MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}!````~MTTHist@{$\sim$MTTHist}}
+\index{````~MTTHist@{$\sim$MTTHist}!MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}}
+\doxysubsubsection{$\sim$MTTHist()}
+{\footnotesize\ttfamily template$<$class THist $>$ \\
+\textbf{ MTTHist}$<$ THist $>$\+::$\sim$\textbf{ MTTHist}}
+
+\mbox{\label{class_m_t_t_hist_ad6ba02ffcc88d2ad2084985e8e91b338}} 
+\index{MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}!MTTHist@{MTTHist}}
+\index{MTTHist@{MTTHist}!MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}}
+\doxysubsubsection{MTTHist()\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily template$<$class THist $>$ \\
+template$<$class... ARGS$>$ \\
+\textbf{ MTTHist}$<$ THist $>$\+::\textbf{ MTTHist} (\begin{DoxyParamCaption}\item[{\textbf{ MTTHist}$<$ THist $>$ const \&}]{hist }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Copy constructor. 
+
+\mbox{\label{class_m_t_t_hist_a08dcc0e1d5db8d111f0459ff47f736e9}} 
+\index{MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}!MTTHist@{MTTHist}}
+\index{MTTHist@{MTTHist}!MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}}
+\doxysubsubsection{MTTHist()\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template$<$class THist $>$ \\
+template$<$class... ARGS$>$ \\
+\textbf{ MTTHist}$<$ THist $>$\+::\textbf{ MTTHist} (\begin{DoxyParamCaption}\item[{\textbf{ MTTHist}$<$ THist $>$ \&\&}]{hist }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Move constructor. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\label{class_m_t_t_hist_a01a47983a37248e57310d3105dedb95f}} 
+\index{MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}!clean@{clean}}
+\index{clean@{clean}!MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}}
+\doxysubsubsection{clean()}
+{\footnotesize\ttfamily template$<$class THist $>$ \\
+void \textbf{ MTTHist}$<$ THist $>$\+::clean (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=288pt]{class_m_t_t_hist_a01a47983a37248e57310d3105dedb95f_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_m_t_t_hist_a46a58bcb4b91d7a05bee3ec0f4fe4eab}} 
+\index{MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}!exists@{exists}}
+\index{exists@{exists}!MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}}
+\doxysubsubsection{exists()}
+{\footnotesize\ttfamily template$<$class THist $>$ \\
+bool const\& \textbf{ MTTHist}$<$ THist $>$\+::exists (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_m_t_t_hist_a0b1fb45a588e20b42e65275f14685dd5}} 
+\index{MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}!file@{file}}
+\index{file@{file}!MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}}
+\doxysubsubsection{file()}
+{\footnotesize\ttfamily template$<$class THist $>$ \\
+TFile$\ast$ \textbf{ MTTHist}$<$ THist $>$\+::file (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_m_t_t_hist_a3413cee45758fa0ec41020ae067e3e71}} 
+\index{MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}!Fill@{Fill}}
+\index{Fill@{Fill}!MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}}
+\doxysubsubsection{Fill()}
+{\footnotesize\ttfamily template$<$class THist $>$ \\
+template$<$class... ARGS$>$ \\
+void \textbf{ MTTHist}$<$ THist $>$\+::Fill (\begin{DoxyParamCaption}\item[{ARGS \&\&...}]{args }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=339pt]{class_m_t_t_hist_a3413cee45758fa0ec41020ae067e3e71_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_m_t_t_hist_a3413cee45758fa0ec41020ae067e3e71_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_m_t_t_hist_a9c2f7d05c9f8506382211635b35bd97b}} 
+\index{MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}!get@{get}}
+\index{get@{get}!MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}}
+\doxysubsubsection{get()}
+{\footnotesize\ttfamily template$<$class THist $>$ \\
+THist$\ast$ \textbf{ MTTHist}$<$ THist $>$\+::get (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_m_t_t_hist_a9c2f7d05c9f8506382211635b35bd97b_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_m_t_t_hist_a02c41970872fdf5dba693eaa7ef368b6}} 
+\index{MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}!Get@{Get}}
+\index{Get@{Get}!MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}}
+\doxysubsubsection{Get()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class THist $>$ \\
+THist$\ast$ \textbf{ MTTHist}$<$ THist $>$\+::Get (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=342pt]{class_m_t_t_hist_a02c41970872fdf5dba693eaa7ef368b6_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_m_t_t_hist_a7caec71178e8d79ad73ee5ff6c34b21d}} 
+\index{MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}!Get@{Get}}
+\index{Get@{Get}!MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}}
+\doxysubsubsection{Get()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class THist $>$ \\
+THist$\ast$ \textbf{ MTTHist}$<$ THist $>$\+::Get (\begin{DoxyParamCaption}\item[{\textbf{ ushort} const \&}]{thread\+\_\+nb }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_m_t_t_hist_a9437a1854c47ccda87812b6d2a8271b5}} 
+\index{MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}!getCollection@{getCollection}}
+\index{getCollection@{getCollection}!MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}}
+\doxysubsubsection{getCollection()}
+{\footnotesize\ttfamily template$<$class THist $>$ \\
+std\+::vector$<$THist$\ast$$>$ const\& \textbf{ MTTHist}$<$ THist $>$\+::get\+Collection (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_m_t_t_hist_a317a4a786844491e45a270e87acd1e89}} 
+\index{MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}!GetName@{GetName}}
+\index{GetName@{GetName}!MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}}
+\doxysubsubsection{GetName()}
+{\footnotesize\ttfamily template$<$class THist $>$ \\
+std\+::string const\& \textbf{ MTTHist}$<$ THist $>$\+::Get\+Name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=319pt]{class_m_t_t_hist_a317a4a786844491e45a270e87acd1e89_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_m_t_t_hist_a5c8a398dfdd3fad0a4529453caf93bd2}} 
+\index{MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}!Integral@{Integral}}
+\index{Integral@{Integral}!MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}}
+\doxysubsubsection{Integral()}
+{\footnotesize\ttfamily template$<$class THist $>$ \\
+auto const\& \textbf{ MTTHist}$<$ THist $>$\+::Integral (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=310pt]{class_m_t_t_hist_a5c8a398dfdd3fad0a4529453caf93bd2_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_m_t_t_hist_affbda260e218244cd5ed9870d6ed77cf}} 
+\index{MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}!isWritten@{isWritten}}
+\index{isWritten@{isWritten}!MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}}
+\doxysubsubsection{isWritten()}
+{\footnotesize\ttfamily template$<$class THist $>$ \\
+bool const\& \textbf{ MTTHist}$<$ THist $>$\+::is\+Written (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_m_t_t_hist_a7c92589542fe14a28350712bab17c7ff}} 
+\index{MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}!Merge@{Merge}}
+\index{Merge@{Merge}!MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}}
+\doxysubsubsection{Merge()}
+{\footnotesize\ttfamily template$<$class THist $>$ \\
+void \textbf{ MTTHist}$<$ THist $>$\+::Merge}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=326pt]{class_m_t_t_hist_a7c92589542fe14a28350712bab17c7ff_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_m_t_t_hist_ac66509969968b395494517fabe09976c}} 
+\index{MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}!Merge\_t@{Merge\_t}}
+\index{Merge\_t@{Merge\_t}!MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}}
+\doxysubsubsection{Merge\_t()}
+{\footnotesize\ttfamily template$<$class THist $>$ \\
+void \textbf{ MTTHist}$<$ THist $>$\+::Merge\+\_\+t\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_m_t_t_hist_ac66509969968b395494517fabe09976c_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_m_t_t_hist_a7fea4cd494636bb8c4b103d3cf0d0786}} 
+\index{MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}!Merge\_thread@{Merge\_thread}}
+\index{Merge\_thread@{Merge\_thread}!MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}}
+\doxysubsubsection{Merge\_thread()}
+{\footnotesize\ttfamily template$<$class THist $>$ \\
+void \textbf{ MTTHist}$<$ THist $>$\+::Merge\+\_\+thread (\begin{DoxyParamCaption}\item[{\textbf{ MTTHist}$<$ THist $>$ \&}]{histo }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_m_t_t_hist_a7fea4cd494636bb8c4b103d3cf0d0786_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_m_t_t_hist_a72615441a18ffcfab6ca4b848f63eee3}} 
+\index{MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}!Merged@{Merged}}
+\index{Merged@{Merged}!MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}}
+\doxysubsubsection{Merged()}
+{\footnotesize\ttfamily template$<$class THist $>$ \\
+THist $\ast$ \textbf{ MTTHist}$<$ THist $>$\+::Merged}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=255pt]{class_m_t_t_hist_a72615441a18ffcfab6ca4b848f63eee3_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_m_t_t_hist_aee6a88890f7831e809400db4d68e43e1}} 
+\index{MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}!name@{name}}
+\index{name@{name}!MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}}
+\doxysubsubsection{name()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class THist $>$ \\
+std\+::string\& \textbf{ MTTHist}$<$ THist $>$\+::name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_m_t_t_hist_a7f6ebd619dc5ffb63c9abf591e743e54}} 
+\index{MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}!name@{name}}
+\index{name@{name}!MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}}
+\doxysubsubsection{name()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class THist $>$ \\
+std\+::string const\& \textbf{ MTTHist}$<$ THist $>$\+::name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_m_t_t_hist_ab13711dce2e1451ab94833ff7e928802}} 
+\index{MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}!operator bool@{operator bool}}
+\index{operator bool@{operator bool}!MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}}
+\doxysubsubsection{operator bool()}
+{\footnotesize\ttfamily template$<$class THist $>$ \\
+\textbf{ MTTHist}$<$ THist $>$\+::operator bool (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const \&\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_m_t_t_hist_a3fbc1867068d50b62b712f2458d35ff0}} 
+\index{MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}!operator-\/$>$@{operator-\/$>$}}
+\index{operator-\/$>$@{operator-\/$>$}!MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}}
+\doxysubsubsection{operator-\/$>$()}
+{\footnotesize\ttfamily template$<$class THist $>$ \\
+THist$\ast$ \textbf{ MTTHist}$<$ THist $>$\+::operator-\/$>$ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_m_t_t_hist_a3fbc1867068d50b62b712f2458d35ff0_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_m_t_t_hist_a6d6f72f095b93283ff97e9785781e3f8}} 
+\index{MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}}
+\doxysubsubsection{operator=()}
+{\footnotesize\ttfamily template$<$class THist $>$ \\
+\textbf{ MTTHist}$<$THist$>$\& \textbf{ MTTHist}$<$ THist $>$\+::operator= (\begin{DoxyParamCaption}\item[{\textbf{ MTTHist}$<$ THist $>$ const \&}]{hist }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=317pt]{class_m_t_t_hist_a6d6f72f095b93283ff97e9785781e3f8_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_m_t_t_hist_a8d9bba241299b542c654905edc517f63}} 
+\index{MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}!operator[]@{operator[]}}
+\index{operator[]@{operator[]}!MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}}
+\doxysubsubsection{operator[]()}
+{\footnotesize\ttfamily template$<$class THist $>$ \\
+THist$\ast$ \textbf{ MTTHist}$<$ THist $>$\+::operator[$\,$] (\begin{DoxyParamCaption}\item[{int const \&}]{thread\+\_\+nb }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_m_t_t_hist_ab5e2653e7d709487a194b192baccfe32}} 
+\index{MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}!Print@{Print}}
+\index{Print@{Print}!MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}}
+\doxysubsubsection{Print()}
+{\footnotesize\ttfamily template$<$class THist $>$ \\
+void \textbf{ MTTHist}$<$ THist $>$\+::Print}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=241pt]{class_m_t_t_hist_ab5e2653e7d709487a194b192baccfe32_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_m_t_t_hist_a6dbe08dfe0c62f9c9b75064cb262bdc0}} 
+\index{MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}!readComment@{readComment}}
+\index{readComment@{readComment}!MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}}
+\doxysubsubsection{readComment()}
+{\footnotesize\ttfamily template$<$class THist $>$ \\
+std\+::string const\& \textbf{ MTTHist}$<$ THist $>$\+::read\+Comment (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{comment }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_m_t_t_hist_ab31bc7c988df03ecae485b391850e2c0}} 
+\index{MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}!reset@{reset}}
+\index{reset@{reset}!MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}}
+\doxysubsubsection{reset()\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$class THist $>$ \\
+auto \textbf{ MTTHist}$<$ THist $>$\+::reset (\begin{DoxyParamCaption}\item[{\textbf{ MTTHist}$<$ THist $>$ const \&}]{hist }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Copy initializer. 
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_m_t_t_hist_ab31bc7c988df03ecae485b391850e2c0_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_m_t_t_hist_a18ddf8bef1fdb6dfc3a95ffc76e20efb}} 
+\index{MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}!reset@{reset}}
+\index{reset@{reset}!MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}}
+\doxysubsubsection{reset()\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$class THist $>$ \\
+template$<$class... ARGS$>$ \\
+void \textbf{ MTTHist}$<$ THist $>$\+::reset (\begin{DoxyParamCaption}\item[{std\+::nullptr\+\_\+t}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=273pt]{class_m_t_t_hist_a18ddf8bef1fdb6dfc3a95ffc76e20efb_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_m_t_t_hist_a6524d02003fa4d77ae22b33e14b977d9}} 
+\index{MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}!reset@{reset}}
+\index{reset@{reset}!MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}}
+\doxysubsubsection{reset()\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$class THist $>$ \\
+template$<$class... ARGS$>$ \\
+void \textbf{ MTTHist}$<$ THist $>$\+::reset (\begin{DoxyParamCaption}\item[{std\+::string}]{name,  }\item[{ARGS \&\&...}]{args }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=341pt]{class_m_t_t_hist_a6524d02003fa4d77ae22b33e14b977d9_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_m_t_t_hist_aa69b6607da79271f1454987d06b4d78e}} 
+\index{MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}!setComment@{setComment}}
+\index{setComment@{setComment}!MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}}
+\doxysubsubsection{setComment()}
+{\footnotesize\ttfamily template$<$class THist $>$ \\
+void \textbf{ MTTHist}$<$ THist $>$\+::set\+Comment (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{comment }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_m_t_t_hist_a0536abca6658e43dc7a949f7907850ed}} 
+\index{MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}!setName@{setName}}
+\index{setName@{setName}!MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}}
+\doxysubsubsection{setName()}
+{\footnotesize\ttfamily template$<$class THist $>$ \\
+std\+::string const\& \textbf{ MTTHist}$<$ THist $>$\+::set\+Name (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{\+\_\+name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_m_t_t_hist_aacf25219627db315dae995e7282c2ed2}} 
+\index{MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}!setTitle@{setTitle}}
+\index{setTitle@{setTitle}!MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}}
+\doxysubsubsection{setTitle()}
+{\footnotesize\ttfamily template$<$class THist $>$ \\
+std\+::string const\& \textbf{ MTTHist}$<$ THist $>$\+::set\+Title (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{\+\_\+title }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_m_t_t_hist_a1c8fd75c77e227a9f4cdca690d321a71}} 
+\index{MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}!size@{size}}
+\index{size@{size}!MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}}
+\doxysubsubsection{size()}
+{\footnotesize\ttfamily template$<$class THist $>$ \\
+auto \textbf{ MTTHist}$<$ THist $>$\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=288pt]{class_m_t_t_hist_a1c8fd75c77e227a9f4cdca690d321a71_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_m_t_t_hist_a34ab3c9b0d9d1add54bcdf21e61c1451}} 
+\index{MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}!title@{title}}
+\index{title@{title}!MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}}
+\doxysubsubsection{title()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class THist $>$ \\
+std\+::string\& \textbf{ MTTHist}$<$ THist $>$\+::title (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_m_t_t_hist_ad8011791f2722ca40959cc2ec297944d}} 
+\index{MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}!title@{title}}
+\index{title@{title}!MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}}
+\doxysubsubsection{title()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class THist $>$ \\
+std\+::string const\& \textbf{ MTTHist}$<$ THist $>$\+::title (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_m_t_t_hist_aba83034c1d597fe7f384498ceaf0ba3b}} 
+\index{MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}!verbose@{verbose}}
+\index{verbose@{verbose}!MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}}
+\doxysubsubsection{verbose()}
+{\footnotesize\ttfamily template$<$class THist $>$ \\
+static bool const\& \textbf{ MTTHist}$<$ THist $>$\+::verbose (\begin{DoxyParamCaption}\item[{bool const \&}]{\+\_\+verbose = {\ttfamily true} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\mbox{\label{class_m_t_t_hist_a58028d6dbd7cf61775c44c10af03c562}} 
+\index{MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}!verbosity@{verbosity}}
+\index{verbosity@{verbosity}!MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}}
+\doxysubsubsection{verbosity()}
+{\footnotesize\ttfamily template$<$class THist $>$ \\
+static bool\& \textbf{ MTTHist}$<$ THist $>$\+::verbosity (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\mbox{\label{class_m_t_t_hist_ae9163b5b4afca69cfdebdf2cf60064cd}} 
+\index{MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}!Write@{Write}}
+\index{Write@{Write}!MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}}
+\doxysubsubsection{Write()}
+{\footnotesize\ttfamily template$<$class THist $>$ \\
+void \textbf{ MTTHist}$<$ THist $>$\+::Write (\begin{DoxyParamCaption}\item[{bool const \&}]{write\+Empty = {\ttfamily false} }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_m_t_t_hist_ae9163b5b4afca69cfdebdf2cf60064cd_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_m_t_t_hist_ae9163b5b4afca69cfdebdf2cf60064cd_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_m_t_t_hist_ad6af9a0476250acac958446a91f450fd}} 
+\index{MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}!Write\_i@{Write\_i}}
+\index{Write\_i@{Write\_i}!MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}}
+\doxysubsubsection{Write\_i()}
+{\footnotesize\ttfamily template$<$class THist $>$ \\
+void \textbf{ MTTHist}$<$ THist $>$\+::Write\+\_\+i (\begin{DoxyParamCaption}\item[{int const \&}]{thread\+\_\+index }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=253pt]{class_m_t_t_hist_ad6af9a0476250acac958446a91f450fd_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\label{class_m_t_t_hist_aeedab112b16e9d632c2a73f0fd246022}} 
+\index{MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}!m\_collection@{m\_collection}}
+\index{m\_collection@{m\_collection}!MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}}
+\doxysubsubsection{m\_collection}
+{\footnotesize\ttfamily template$<$class THist $>$ \\
+std\+::vector$<$THist$\ast$$>$ \textbf{ MTTHist}$<$ THist $>$\+::m\+\_\+collection\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_m_t_t_hist_a1ad6c922d10ee3d2cc860085a4166af5}} 
+\index{MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}!m\_comment@{m\_comment}}
+\index{m\_comment@{m\_comment}!MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}}
+\doxysubsubsection{m\_comment}
+{\footnotesize\ttfamily template$<$class THist $>$ \\
+std\+::string \textbf{ MTTHist}$<$ THist $>$\+::m\+\_\+comment\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_m_t_t_hist_acd8494777ed82d06fd269ce3c73edb9d}} 
+\index{MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}!m\_condition@{m\_condition}}
+\index{m\_condition@{m\_condition}!MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}}
+\doxysubsubsection{m\_condition}
+{\footnotesize\ttfamily template$<$class THist $>$ \\
+std\+::condition\+\_\+variable \textbf{ MTTHist}$<$ THist $>$\+::m\+\_\+condition\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\mbox{\label{class_m_t_t_hist_aae83f1e36e6b7dd93656efa65df26ff8}} 
+\index{MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}!m\_exists@{m\_exists}}
+\index{m\_exists@{m\_exists}!MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}}
+\doxysubsubsection{m\_exists}
+{\footnotesize\ttfamily template$<$class THist $>$ \\
+bool \textbf{ MTTHist}$<$ THist $>$\+::m\+\_\+exists = false\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_m_t_t_hist_a0b22e8677009e6458288f97867176c77}} 
+\index{MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}!m\_file@{m\_file}}
+\index{m\_file@{m\_file}!MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}}
+\doxysubsubsection{m\_file}
+{\footnotesize\ttfamily template$<$class THist $>$ \\
+TFile$\ast$ \textbf{ MTTHist}$<$ THist $>$\+::m\+\_\+file = nullptr\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_m_t_t_hist_a493dcc68ddf16801283fda4ceca928b3}} 
+\index{MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}!m\_integral@{m\_integral}}
+\index{m\_integral@{m\_integral}!MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}}
+\doxysubsubsection{m\_integral}
+{\footnotesize\ttfamily template$<$class THist $>$ \\
+\textbf{ ulonglong} \textbf{ MTTHist}$<$ THist $>$\+::m\+\_\+integral = 0ull\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_m_t_t_hist_a7400ac26c3f0273fae7d9a47751a67a2}} 
+\index{MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}!m\_is\_deleted@{m\_is\_deleted}}
+\index{m\_is\_deleted@{m\_is\_deleted}!MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}}
+\doxysubsubsection{m\_is\_deleted}
+{\footnotesize\ttfamily template$<$class THist $>$ \\
+\textbf{ Bools} \textbf{ MTTHist}$<$ THist $>$\+::m\+\_\+is\+\_\+deleted\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_m_t_t_hist_add9a68781eee34a0c0fa53f7109926d0}} 
+\index{MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}!m\_is\_merged@{m\_is\_merged}}
+\index{m\_is\_merged@{m\_is\_merged}!MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}}
+\doxysubsubsection{m\_is\_merged}
+{\footnotesize\ttfamily template$<$class THist $>$ \\
+bool \textbf{ MTTHist}$<$ THist $>$\+::m\+\_\+is\+\_\+merged = false\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_m_t_t_hist_a745e2db95c003d270e953402042236e7}} 
+\index{MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}!m\_merged@{m\_merged}}
+\index{m\_merged@{m\_merged}!MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}}
+\doxysubsubsection{m\_merged}
+{\footnotesize\ttfamily template$<$class THist $>$ \\
+THist$\ast$ \textbf{ MTTHist}$<$ THist $>$\+::m\+\_\+merged = nullptr\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_m_t_t_hist_a267e78003ec791a6a795b30f1a718d66}} 
+\index{MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}!m\_merged\_deleted@{m\_merged\_deleted}}
+\index{m\_merged\_deleted@{m\_merged\_deleted}!MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}}
+\doxysubsubsection{m\_merged\_deleted}
+{\footnotesize\ttfamily template$<$class THist $>$ \\
+bool \textbf{ MTTHist}$<$ THist $>$\+::m\+\_\+merged\+\_\+deleted = false\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_m_t_t_hist_aca0db36a40f564546ca75e94e9139145}} 
+\index{MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}!m\_mutex@{m\_mutex}}
+\index{m\_mutex@{m\_mutex}!MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}}
+\doxysubsubsection{m\_mutex}
+{\footnotesize\ttfamily template$<$class THist $>$ \\
+std\+::mutex \textbf{ MTTHist}$<$ THist $>$\+::m\+\_\+mutex}
+
+\mbox{\label{class_m_t_t_hist_a303b73968562ece743ccdf7eafe9824d}} 
+\index{MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}!m\_name@{m\_name}}
+\index{m\_name@{m\_name}!MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}}
+\doxysubsubsection{m\_name}
+{\footnotesize\ttfamily template$<$class THist $>$ \\
+std\+::string \textbf{ MTTHist}$<$ THist $>$\+::m\+\_\+name\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_m_t_t_hist_aa8018dbd5155bd525933ddbed3e6e602}} 
+\index{MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}!m\_nb\_thread\_running@{m\_nb\_thread\_running}}
+\index{m\_nb\_thread\_running@{m\_nb\_thread\_running}!MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}}
+\doxysubsubsection{m\_nb\_thread\_running}
+{\footnotesize\ttfamily template$<$class THist $>$ \\
+\textbf{ MTCounter} \textbf{ MTTHist}$<$ THist $>$\+::m\+\_\+nb\+\_\+thread\+\_\+running \{0\}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\mbox{\label{class_m_t_t_hist_a7443af95ac2aa447bf8a3c4590f31ce3}} 
+\index{MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}!m\_title@{m\_title}}
+\index{m\_title@{m\_title}!MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}}
+\doxysubsubsection{m\_title}
+{\footnotesize\ttfamily template$<$class THist $>$ \\
+std\+::string \textbf{ MTTHist}$<$ THist $>$\+::m\+\_\+title\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_m_t_t_hist_ab6b53be8a250f79cbd952c1133701d25}} 
+\index{MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}!m\_verbose@{m\_verbose}}
+\index{m\_verbose@{m\_verbose}!MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}}
+\doxysubsubsection{m\_verbose}
+{\footnotesize\ttfamily template$<$class THist $>$ \\
+bool \textbf{ MTTHist}$<$ THist $>$\+::m\+\_\+verbose = true\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\mbox{\label{class_m_t_t_hist_a910933fd0e3e4015090efb2bbb4dc9c6}} 
+\index{MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}!m\_written@{m\_written}}
+\index{m\_written@{m\_written}!MTTHist$<$ THist $>$@{MTTHist$<$ THist $>$}}
+\doxysubsubsection{m\_written}
+{\footnotesize\ttfamily template$<$class THist $>$ \\
+bool \textbf{ MTTHist}$<$ THist $>$\+::m\+\_\+written = false\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+lib/\+MTObjects/\textbf{ MTTHist.\+hpp}\end{DoxyCompactItemize}

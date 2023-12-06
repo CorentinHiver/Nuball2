@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__timer_8hpp" xml:lang="en-US">
+<title>lib/Classes/Timer.hpp File Reference</title>
+<indexterm><primary>lib/Classes/Timer.hpp</primary></indexterm>
+<programlisting>#include &lt;chrono&gt;
+</programlisting>Include dependency graph for Timer.hpp:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="_timer_8hpp__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+This graph shows which files directly or indirectly include this file:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="_timer_8hpp__dep__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>class <link linkend="_class_timer">Timer</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Typedefs    </title>
+        <itemizedlist>
+            <listitem><para>using <link linkend="__timer_8hpp_1aa9d2a4957c5127a34317da8c2bfb5b63">duration_milli_t</link> = std::chrono::duration&lt; double, std::milli &gt;</para>
+</listitem>
+            <listitem><para>using <link linkend="__timer_8hpp_1a07f3627b9b4dc1205bb4cdbfcf2c9f17">hr_clock_t</link> = std::chrono::high_resolution_clock</para>
+</listitem>
+            <listitem><para>using <link linkend="__timer_8hpp_1a300388ee1344972cad8e8dfb87beef08">time_point_t</link> = std::chrono::time_point&lt; <link linkend="__timer_8hpp_1a07f3627b9b4dc1205bb4cdbfcf2c9f17">hr_clock_t</link> &gt;</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Typedef Documentation</title>
+<anchor xml:id="__timer_8hpp_1aa9d2a4957c5127a34317da8c2bfb5b63"/>    <section>
+    <title>duration_milli_t</title>
+<indexterm><primary>duration_milli_t</primary><secondary>Timer.hpp</secondary></indexterm>
+<indexterm><primary>Timer.hpp</primary><secondary>duration_milli_t</secondary></indexterm>
+<para><computeroutput>using <link linkend="__timer_8hpp_1aa9d2a4957c5127a34317da8c2bfb5b63">duration_milli_t</link> =  std::chrono::duration&lt;double, std::milli&gt;</computeroutput></para>    </section><anchor xml:id="__timer_8hpp_1a07f3627b9b4dc1205bb4cdbfcf2c9f17"/>    <section>
+    <title>hr_clock_t</title>
+<indexterm><primary>hr_clock_t</primary><secondary>Timer.hpp</secondary></indexterm>
+<indexterm><primary>Timer.hpp</primary><secondary>hr_clock_t</secondary></indexterm>
+<para><computeroutput>using <link linkend="__timer_8hpp_1a07f3627b9b4dc1205bb4cdbfcf2c9f17">hr_clock_t</link> =  std::chrono::high_resolution_clock</computeroutput></para>    </section><anchor xml:id="__timer_8hpp_1a300388ee1344972cad8e8dfb87beef08"/>    <section>
+    <title>time_point_t</title>
+<indexterm><primary>time_point_t</primary><secondary>Timer.hpp</secondary></indexterm>
+<indexterm><primary>Timer.hpp</primary><secondary>time_point_t</secondary></indexterm>
+<para><computeroutput>using <link linkend="__timer_8hpp_1a300388ee1344972cad8e8dfb87beef08">time_point_t</link> =  std::chrono::time_point&lt;<link linkend="__timer_8hpp_1a07f3627b9b4dc1205bb4cdbfcf2c9f17">hr_clock_t</link>&gt;</computeroutput></para></section>
+</section>
+</section>

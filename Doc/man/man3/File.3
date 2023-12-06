@@ -1,0 +1,221 @@
+.TH "File" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+File \- EXPERIMENTAL Composed of a \fBPath\fP and a \fBFilename\fP\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <files_functions\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "auto \fBc_str\fP ()"
+.br
+.ti -1c
+.RI "auto \fBc_str\fP () const"
+.br
+.ti -1c
+.RI "void \fBcheckMode\fP (std::string const &mode)"
+.br
+.ti -1c
+.RI "bool \fBexists\fP () const"
+.br
+.ti -1c
+.RI "std::string const  & \fBextension\fP () const"
+.br
+.ti -1c
+.RI "\fBFile\fP ()"
+.br
+.ti -1c
+.RI "\fBFile\fP (const char *file, std::string const &mode='')"
+.br
+.ti -1c
+.RI "\fBFile\fP (\fBFile\fP const &file)"
+.br
+.ti -1c
+.RI "\fBFile\fP (\fBPath\fP const &\fBpath\fP, \fBFilename\fP const &\fBfilename\fP, std::string const &mode='')"
+.br
+.ti -1c
+.RI "\fBFile\fP (std::string const &file, std::string const &mode='')"
+.br
+.ti -1c
+.RI "\fBFilename\fP const  & \fBfilename\fP () const"
+.br
+.ti -1c
+.RI "\fBFolder\fP const  & \fBfolder\fP () const"
+.br
+.ti -1c
+.RI "std::string const  & \fBget\fP () const"
+.br
+.ti -1c
+.RI "void \fBmakePath\fP ()"
+.br
+.ti -1c
+.RI "\fBFilename\fP const  & \fBname\fP () const"
+.br
+.ti -1c
+.RI "bool const  & \fBok\fP ()"
+.br
+.ti -1c
+.RI "\fBoperator bool\fP () const &"
+.br
+.ti -1c
+.RI "\fBoperator std::string\fP () const &"
+.br
+.ti -1c
+.RI "\fBFile\fP & \fBoperator=\fP (const char *file)"
+.br
+.ti -1c
+.RI "\fBFile\fP & \fBoperator=\fP (\fBFile\fP const &file)"
+.br
+.ti -1c
+.RI "\fBFile\fP & \fBoperator=\fP (std::string const &file)"
+.br
+.ti -1c
+.RI "\fBPath\fP const  & \fBpath\fP () const"
+.br
+.ti -1c
+.RI "void \fBsetExtension\fP (std::string const &new_extension)"
+.br
+.ti -1c
+.RI "std::string const  & \fBshortName\fP () const"
+.br
+.ti -1c
+.RI "auto \fBsize\fP (std::string const &unit='o') const"
+.br
+.ti -1c
+.RI "std::string const  & \fBstring\fP () const"
+.br
+.in -1c
+.SS "Private Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBcheck\fP ()"
+.br
+.ti -1c
+.RI "void \fBfill\fP (std::string const &file)"
+.br
+.ti -1c
+.RI "void \fBupdate\fP ()"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "bool \fBcheck_verif\fP = false"
+.br
+.ti -1c
+.RI "std::string \fBm_file\fP"
+.br
+.ti -1c
+.RI "\fBFilename\fP \fBm_filename\fP"
+.br
+.ti -1c
+.RI "bool \fBm_ok\fP = false"
+.br
+.ti -1c
+.RI "\fBPath\fP \fBm_path\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+EXPERIMENTAL Composed of a \fBPath\fP and a \fBFilename\fP\&. 
+
+A \fBFile\fP object is composed of a \fBPath\fP and a \fBFilename\fP object, which are composed of :
+.IP "\(bu" 2
+A list of folder that forms the \fBPath\fP to the file
+.IP "\(bu" 2
+A short name and an extension for the \fBFilename\fP 
+.PP
+\fBTodo\fP
+.RS 4
+rethink the checkMode logic \&.\&.\&. 
+.RE
+.PP
+
+.PP
+
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "File::File ()\fC [inline]\fP"
+
+.SS "File::File (\fBFile\fP const & file)\fC [inline]\fP"
+
+.SS "File::File (std::string const & file, std::string const & mode = \fC''\fP)\fC [inline]\fP"
+
+.SS "File::File (const char * file, std::string const & mode = \fC''\fP)\fC [inline]\fP"
+
+.SS "File::File (\fBPath\fP const & path, \fBFilename\fP const & filename, std::string const & mode = \fC''\fP)\fC [inline]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "auto File::c_str ()\fC [inline]\fP"
+
+.SS "auto File::c_str () const\fC [inline]\fP"
+
+.SS "void File::check ()\fC [inline]\fP, \fC [private]\fP"
+
+.SS "void File::checkMode (std::string const & mode)\fC [inline]\fP"
+
+.SS "bool File::exists () const\fC [inline]\fP"
+
+.SS "std::string const& File::extension () const\fC [inline]\fP"
+
+.SS "\fBFilename\fP const& File::filename () const\fC [inline]\fP"
+
+.SS "void File::fill (std::string const & file)\fC [inline]\fP, \fC [private]\fP"
+
+.SS "\fBFolder\fP const& File::folder () const\fC [inline]\fP"
+
+.SS "std::string const& File::get () const\fC [inline]\fP"
+
+.SS "void File::makePath ()\fC [inline]\fP"
+
+.SS "\fBFilename\fP const& File::name () const\fC [inline]\fP"
+
+.SS "bool const& File::ok ()\fC [inline]\fP"
+
+.SS "File::operator bool () const &\fC [inline]\fP"
+
+.SS "File::operator std::string () const &\fC [inline]\fP"
+
+.SS "\fBFile\fP& File::operator= (const char * file)\fC [inline]\fP"
+
+.SS "\fBFile\fP& File::operator= (\fBFile\fP const & file)\fC [inline]\fP"
+
+.SS "\fBFile\fP& File::operator= (std::string const & file)\fC [inline]\fP"
+
+.SS "\fBPath\fP const& File::path () const\fC [inline]\fP"
+
+.SS "void File::setExtension (std::string const & new_extension)\fC [inline]\fP"
+
+.SS "std::string const& File::shortName () const\fC [inline]\fP"
+
+.SS "auto File::size (std::string const & unit = \fC'o'\fP) const\fC [inline]\fP"
+
+.SS "std::string const& File::string () const\fC [inline]\fP"
+
+.SS "void File::update ()\fC [inline]\fP, \fC [private]\fP"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "bool File::check_verif = false\fC [private]\fP"
+
+.SS "std::string File::m_file\fC [private]\fP"
+
+.SS "\fBFilename\fP File::m_filename\fC [private]\fP"
+
+.SS "bool File::m_ok = false\fC [private]\fP"
+
+.SS "\fBPath\fP File::m_path\fC [private]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Nuball2 from the source code\&.

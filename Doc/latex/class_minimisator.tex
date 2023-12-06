@@ -1,0 +1,386 @@
+\doxysection{Minimisator Class Reference}
+\label{class_minimisator}\index{Minimisator@{Minimisator}}
+
+
+{\ttfamily \#include $<$Spectra\+Alignator.\+hpp$>$}
+
+
+
+Collaboration diagram for Minimisator\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_minimisator__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \textbf{ Nelder\+Mead\+Parameters}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+double \textbf{ chi2} (\textbf{ Spectra\+Co} const \&ref\+\_\+spectra, \textbf{ Spectra\+Co} const \&spectra)
+\item 
+double \textbf{ chi2} (\textbf{ Spectra\+Co} const \&ref\+\_\+spectra, \textbf{ Spectra\+Co} const \&spectra, \textbf{ Vertice} const \&vertice)
+\item 
+double \textbf{ chi2\+\_\+second\+\_\+derivative} (\textbf{ Spectra\+Co} \&ref\+\_\+spectra, \textbf{ Spectra\+Co} \&test\+\_\+spectra)
+\item 
+auto const  \& \textbf{ get\+Degrees\+Of\+Freedom} () const
+\item 
+\textbf{ Minimisator} (\textbf{ Recalibration} $\ast$recal)
+\item 
+\textbf{ Vertice} \textbf{ minimise} (\textbf{ Spectra\+Co} const \&ref\+\_\+spectra, \textbf{ Spectra\+Co} const \&spectra, std\+::string const \&method=\char`\"{}nelder-\/mead\char`\"{})
+\item 
+auto \textbf{ operator-\/$>$} ()
+\item 
+void \textbf{ setC} (double const \&\+\_\+C)
+\item 
+void \textbf{ set\+Degrees\+Of\+Freedom} (int const \&degrees)
+\item 
+void \textbf{ set\+Maxa0} (double const \&\+\_\+maxa0)
+\item 
+void \textbf{ set\+Maxa1} (double const \&\+\_\+maxa1)
+\item 
+void \textbf{ set\+Maxa2} (double const \&\+\_\+maxa2)
+\item 
+void \textbf{ set\+Maxa\+Sqrt} (double const \&\+\_\+maxa\+Sqrt)
+\item 
+void \textbf{ set\+MaxC} (double const \&\+\_\+maxC)
+\item 
+void \textbf{ set\+Mina0} (double const \&\+\_\+mina0)
+\item 
+void \textbf{ set\+Mina1} (double const \&\+\_\+mina1)
+\item 
+void \textbf{ set\+Mina2} (double const \&\+\_\+mina2)
+\item 
+void \textbf{ set\+Mina\+Sqrt} (double const \&\+\_\+mina\+Sqrt)
+\item 
+void \textbf{ set\+MinC} (double const \&\+\_\+minC)
+\item 
+void \textbf{ set\+Threshold} (int const \&bin)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \textbf{ m\+\_\+C} = 0.\+0
+\item 
+double \textbf{ m\+\_\+maxa0} = 0.\+0
+\item 
+double \textbf{ m\+\_\+maxa1} = 0.\+0
+\item 
+double \textbf{ m\+\_\+maxa2} = 0.\+0
+\item 
+double \textbf{ m\+\_\+maxa\+Sqrt} = 0.\+0
+\item 
+double \textbf{ m\+\_\+maxC} = 0.\+0
+\item 
+double \textbf{ m\+\_\+mina0} = 0.\+0
+\item 
+double \textbf{ m\+\_\+mina1} = 0.\+0
+\item 
+double \textbf{ m\+\_\+mina2} = 0.\+0
+\item 
+double \textbf{ m\+\_\+mina\+Sqrt} = 0.\+0
+\item 
+double \textbf{ m\+\_\+minC} = 0.\+0
+\item 
+int \textbf{ m\+\_\+nb\+\_\+freedom\+\_\+degrees} = 3
+\item 
+\textbf{ Recalibration} $\ast$ \textbf{ m\+\_\+recal} = nullptr
+\item 
+int \textbf{ m\+\_\+spectra\+\_\+threshold} = 0
+\item 
+struct \textbf{ Minimisator\+::\+Nelder\+Mead\+Parameters} \textbf{ nm\+Param}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Class Documentation}
+\index{Minimisator::NelderMeadParameters@{Minimisator::NelderMeadParameters}}\label{struct_minimisator_1_1_nelder_mead_parameters}
+\doxysubsubsection{struct Minimisator\+::Nelder\+Mead\+Parameters}
+\begin{DoxyFields}{Class Members}
+\mbox{\label{class_minimisator_ad572ad763d40de2c3ef34e50bf71177d}} 
+double&
+alpha&
+\\
+\hline
+
+\mbox{\label{class_minimisator_aeec9715878231abdfbea7a5a6801bf1e}} 
+double&
+beta&
+\\
+\hline
+
+\mbox{\label{class_minimisator_ae4f64377f468e22558d8bd6fee8bad24}} 
+double&
+delta&
+\\
+\hline
+
+\mbox{\label{class_minimisator_a605647638f96b3aaaec933e3b741c392}} 
+double&
+gamma&
+\\
+\hline
+
+\end{DoxyFields}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\label{class_minimisator_a5840066c8bf50d8e04ee596238324696}} 
+\index{Minimisator@{Minimisator}!Minimisator@{Minimisator}}
+\index{Minimisator@{Minimisator}!Minimisator@{Minimisator}}
+\doxysubsubsection{Minimisator()}
+{\footnotesize\ttfamily Minimisator\+::\+Minimisator (\begin{DoxyParamCaption}\item[{\textbf{ Recalibration} $\ast$}]{recal }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\label{class_minimisator_a92ceedc5d8e612ed8515faf6657c99a3}} 
+\index{Minimisator@{Minimisator}!chi2@{chi2}}
+\index{chi2@{chi2}!Minimisator@{Minimisator}}
+\doxysubsubsection{chi2()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily double Minimisator\+::chi2 (\begin{DoxyParamCaption}\item[{\textbf{ Spectra\+Co} const \&}]{ref\+\_\+spectra,  }\item[{\textbf{ Spectra\+Co} const \&}]{spectra }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_minimisator_a92ceedc5d8e612ed8515faf6657c99a3_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_minimisator_a969310853a267ef440163b92c6a7873a}} 
+\index{Minimisator@{Minimisator}!chi2@{chi2}}
+\index{chi2@{chi2}!Minimisator@{Minimisator}}
+\doxysubsubsection{chi2()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily double Minimisator\+::chi2 (\begin{DoxyParamCaption}\item[{\textbf{ Spectra\+Co} const \&}]{ref\+\_\+spectra,  }\item[{\textbf{ Spectra\+Co} const \&}]{spectra,  }\item[{\textbf{ Vertice} const \&}]{vertice }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_minimisator_a969310853a267ef440163b92c6a7873a_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=344pt]{class_minimisator_a969310853a267ef440163b92c6a7873a_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_minimisator_a9111d4088cf501a73b3472dc4565b4e3}} 
+\index{Minimisator@{Minimisator}!chi2\_second\_derivative@{chi2\_second\_derivative}}
+\index{chi2\_second\_derivative@{chi2\_second\_derivative}!Minimisator@{Minimisator}}
+\doxysubsubsection{chi2\_second\_derivative()}
+{\footnotesize\ttfamily double Minimisator\+::chi2\+\_\+second\+\_\+derivative (\begin{DoxyParamCaption}\item[{\textbf{ Spectra\+Co} \&}]{ref\+\_\+spectra,  }\item[{\textbf{ Spectra\+Co} \&}]{test\+\_\+spectra }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_minimisator_a9111d4088cf501a73b3472dc4565b4e3_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_minimisator_ae15be466b22ef08ccaf89b759f709e95}} 
+\index{Minimisator@{Minimisator}!getDegreesOfFreedom@{getDegreesOfFreedom}}
+\index{getDegreesOfFreedom@{getDegreesOfFreedom}!Minimisator@{Minimisator}}
+\doxysubsubsection{getDegreesOfFreedom()}
+{\footnotesize\ttfamily auto const\& Minimisator\+::get\+Degrees\+Of\+Freedom (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_minimisator_a4146b62ab538a9c36f9a93855bee198a}} 
+\index{Minimisator@{Minimisator}!minimise@{minimise}}
+\index{minimise@{minimise}!Minimisator@{Minimisator}}
+\doxysubsubsection{minimise()}
+{\footnotesize\ttfamily \textbf{ Vertice} Minimisator\+::minimise (\begin{DoxyParamCaption}\item[{\textbf{ Spectra\+Co} const \&}]{ref\+\_\+spectra,  }\item[{\textbf{ Spectra\+Co} const \&}]{spectra,  }\item[{std\+::string const \&}]{method = {\ttfamily \char`\"{}nelder-\/mead\char`\"{}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_minimisator_a4146b62ab538a9c36f9a93855bee198a_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_minimisator_a35127a6cdbfe1d07eebfdbda30db6a8a}} 
+\index{Minimisator@{Minimisator}!operator-\/$>$@{operator-\/$>$}}
+\index{operator-\/$>$@{operator-\/$>$}!Minimisator@{Minimisator}}
+\doxysubsubsection{operator-\/$>$()}
+{\footnotesize\ttfamily auto Minimisator\+::operator-\/$>$ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_minimisator_af6fb398efd3c8110bb72ffc0b37a218f}} 
+\index{Minimisator@{Minimisator}!setC@{setC}}
+\index{setC@{setC}!Minimisator@{Minimisator}}
+\doxysubsubsection{setC()}
+{\footnotesize\ttfamily void Minimisator\+::setC (\begin{DoxyParamCaption}\item[{double const \&}]{\+\_\+C }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_minimisator_adb05314210b8a9c6d4bf149e68f733a1}} 
+\index{Minimisator@{Minimisator}!setDegreesOfFreedom@{setDegreesOfFreedom}}
+\index{setDegreesOfFreedom@{setDegreesOfFreedom}!Minimisator@{Minimisator}}
+\doxysubsubsection{setDegreesOfFreedom()}
+{\footnotesize\ttfamily void Minimisator\+::set\+Degrees\+Of\+Freedom (\begin{DoxyParamCaption}\item[{int const \&}]{degrees }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_minimisator_ac1669f9a012ed6f484ca0dca26a2c048}} 
+\index{Minimisator@{Minimisator}!setMaxa0@{setMaxa0}}
+\index{setMaxa0@{setMaxa0}!Minimisator@{Minimisator}}
+\doxysubsubsection{setMaxa0()}
+{\footnotesize\ttfamily void Minimisator\+::set\+Maxa0 (\begin{DoxyParamCaption}\item[{double const \&}]{\+\_\+maxa0 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_minimisator_a3bd6b90aa328de9f06fd18d3a183434e}} 
+\index{Minimisator@{Minimisator}!setMaxa1@{setMaxa1}}
+\index{setMaxa1@{setMaxa1}!Minimisator@{Minimisator}}
+\doxysubsubsection{setMaxa1()}
+{\footnotesize\ttfamily void Minimisator\+::set\+Maxa1 (\begin{DoxyParamCaption}\item[{double const \&}]{\+\_\+maxa1 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_minimisator_af67f036d5fd92c1e732fe470cd0c020d}} 
+\index{Minimisator@{Minimisator}!setMaxa2@{setMaxa2}}
+\index{setMaxa2@{setMaxa2}!Minimisator@{Minimisator}}
+\doxysubsubsection{setMaxa2()}
+{\footnotesize\ttfamily void Minimisator\+::set\+Maxa2 (\begin{DoxyParamCaption}\item[{double const \&}]{\+\_\+maxa2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_minimisator_a715c87056ad76bec775d48bf2cf9792e}} 
+\index{Minimisator@{Minimisator}!setMaxaSqrt@{setMaxaSqrt}}
+\index{setMaxaSqrt@{setMaxaSqrt}!Minimisator@{Minimisator}}
+\doxysubsubsection{setMaxaSqrt()}
+{\footnotesize\ttfamily void Minimisator\+::set\+Maxa\+Sqrt (\begin{DoxyParamCaption}\item[{double const \&}]{\+\_\+maxa\+Sqrt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_minimisator_a9973149b31ccf9cb07f3aec54ca87d78}} 
+\index{Minimisator@{Minimisator}!setMaxC@{setMaxC}}
+\index{setMaxC@{setMaxC}!Minimisator@{Minimisator}}
+\doxysubsubsection{setMaxC()}
+{\footnotesize\ttfamily void Minimisator\+::set\+MaxC (\begin{DoxyParamCaption}\item[{double const \&}]{\+\_\+maxC }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_minimisator_ae8936e9ea9e3e63711b382b9b09cbf25}} 
+\index{Minimisator@{Minimisator}!setMina0@{setMina0}}
+\index{setMina0@{setMina0}!Minimisator@{Minimisator}}
+\doxysubsubsection{setMina0()}
+{\footnotesize\ttfamily void Minimisator\+::set\+Mina0 (\begin{DoxyParamCaption}\item[{double const \&}]{\+\_\+mina0 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_minimisator_a9d82383998a467e338a8ddf05e35f36d}} 
+\index{Minimisator@{Minimisator}!setMina1@{setMina1}}
+\index{setMina1@{setMina1}!Minimisator@{Minimisator}}
+\doxysubsubsection{setMina1()}
+{\footnotesize\ttfamily void Minimisator\+::set\+Mina1 (\begin{DoxyParamCaption}\item[{double const \&}]{\+\_\+mina1 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_minimisator_a19ae44dcc355d36aad823903f9b09204}} 
+\index{Minimisator@{Minimisator}!setMina2@{setMina2}}
+\index{setMina2@{setMina2}!Minimisator@{Minimisator}}
+\doxysubsubsection{setMina2()}
+{\footnotesize\ttfamily void Minimisator\+::set\+Mina2 (\begin{DoxyParamCaption}\item[{double const \&}]{\+\_\+mina2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_minimisator_a15cded5194b589f25d5b7ab20fa669d6}} 
+\index{Minimisator@{Minimisator}!setMinaSqrt@{setMinaSqrt}}
+\index{setMinaSqrt@{setMinaSqrt}!Minimisator@{Minimisator}}
+\doxysubsubsection{setMinaSqrt()}
+{\footnotesize\ttfamily void Minimisator\+::set\+Mina\+Sqrt (\begin{DoxyParamCaption}\item[{double const \&}]{\+\_\+mina\+Sqrt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_minimisator_ac99fb8afd8ea36a67ddd746b0584ab43}} 
+\index{Minimisator@{Minimisator}!setMinC@{setMinC}}
+\index{setMinC@{setMinC}!Minimisator@{Minimisator}}
+\doxysubsubsection{setMinC()}
+{\footnotesize\ttfamily void Minimisator\+::set\+MinC (\begin{DoxyParamCaption}\item[{double const \&}]{\+\_\+minC }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_minimisator_ac5caeefc9cb02424158a41d7ef05ecef}} 
+\index{Minimisator@{Minimisator}!setThreshold@{setThreshold}}
+\index{setThreshold@{setThreshold}!Minimisator@{Minimisator}}
+\doxysubsubsection{setThreshold()}
+{\footnotesize\ttfamily void Minimisator\+::set\+Threshold (\begin{DoxyParamCaption}\item[{int const \&}]{bin }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\label{class_minimisator_a5475528b2ac14c2c221dcd38444c3e8e}} 
+\index{Minimisator@{Minimisator}!m\_C@{m\_C}}
+\index{m\_C@{m\_C}!Minimisator@{Minimisator}}
+\doxysubsubsection{m\_C}
+{\footnotesize\ttfamily double Minimisator\+::m\+\_\+C = 0.\+0\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_minimisator_a8233a1a7c73656b4669653f5a8e80fef}} 
+\index{Minimisator@{Minimisator}!m\_maxa0@{m\_maxa0}}
+\index{m\_maxa0@{m\_maxa0}!Minimisator@{Minimisator}}
+\doxysubsubsection{m\_maxa0}
+{\footnotesize\ttfamily double Minimisator\+::m\+\_\+maxa0 = 0.\+0\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_minimisator_ad463ba1d2e6345046ed6b53491089320}} 
+\index{Minimisator@{Minimisator}!m\_maxa1@{m\_maxa1}}
+\index{m\_maxa1@{m\_maxa1}!Minimisator@{Minimisator}}
+\doxysubsubsection{m\_maxa1}
+{\footnotesize\ttfamily double Minimisator\+::m\+\_\+maxa1 = 0.\+0\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_minimisator_aaf1050a37767d056a0d6e0db975365b3}} 
+\index{Minimisator@{Minimisator}!m\_maxa2@{m\_maxa2}}
+\index{m\_maxa2@{m\_maxa2}!Minimisator@{Minimisator}}
+\doxysubsubsection{m\_maxa2}
+{\footnotesize\ttfamily double Minimisator\+::m\+\_\+maxa2 = 0.\+0\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_minimisator_a9db2d34ee919d9a5bef93cf9c5fc5385}} 
+\index{Minimisator@{Minimisator}!m\_maxaSqrt@{m\_maxaSqrt}}
+\index{m\_maxaSqrt@{m\_maxaSqrt}!Minimisator@{Minimisator}}
+\doxysubsubsection{m\_maxaSqrt}
+{\footnotesize\ttfamily double Minimisator\+::m\+\_\+maxa\+Sqrt = 0.\+0\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_minimisator_a3f0b1cc97a71c7079281ac4eb2ae7a4a}} 
+\index{Minimisator@{Minimisator}!m\_maxC@{m\_maxC}}
+\index{m\_maxC@{m\_maxC}!Minimisator@{Minimisator}}
+\doxysubsubsection{m\_maxC}
+{\footnotesize\ttfamily double Minimisator\+::m\+\_\+maxC = 0.\+0\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_minimisator_afdcd01102bcdfc6db928eb09ddfbdc71}} 
+\index{Minimisator@{Minimisator}!m\_mina0@{m\_mina0}}
+\index{m\_mina0@{m\_mina0}!Minimisator@{Minimisator}}
+\doxysubsubsection{m\_mina0}
+{\footnotesize\ttfamily double Minimisator\+::m\+\_\+mina0 = 0.\+0\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_minimisator_a404b364da43dda9ad1d1d87b1fa8ccd5}} 
+\index{Minimisator@{Minimisator}!m\_mina1@{m\_mina1}}
+\index{m\_mina1@{m\_mina1}!Minimisator@{Minimisator}}
+\doxysubsubsection{m\_mina1}
+{\footnotesize\ttfamily double Minimisator\+::m\+\_\+mina1 = 0.\+0\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_minimisator_a1a009f968f138cce07f787fb263ca6f5}} 
+\index{Minimisator@{Minimisator}!m\_mina2@{m\_mina2}}
+\index{m\_mina2@{m\_mina2}!Minimisator@{Minimisator}}
+\doxysubsubsection{m\_mina2}
+{\footnotesize\ttfamily double Minimisator\+::m\+\_\+mina2 = 0.\+0\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_minimisator_a9958f8a8d135714afbc348c8e58fb1ae}} 
+\index{Minimisator@{Minimisator}!m\_minaSqrt@{m\_minaSqrt}}
+\index{m\_minaSqrt@{m\_minaSqrt}!Minimisator@{Minimisator}}
+\doxysubsubsection{m\_minaSqrt}
+{\footnotesize\ttfamily double Minimisator\+::m\+\_\+mina\+Sqrt = 0.\+0\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_minimisator_a7b33b6783d0dab674fe88fd6a5b93c04}} 
+\index{Minimisator@{Minimisator}!m\_minC@{m\_minC}}
+\index{m\_minC@{m\_minC}!Minimisator@{Minimisator}}
+\doxysubsubsection{m\_minC}
+{\footnotesize\ttfamily double Minimisator\+::m\+\_\+minC = 0.\+0\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_minimisator_a93d39e35dee7cd5df8bb71498b122f86}} 
+\index{Minimisator@{Minimisator}!m\_nb\_freedom\_degrees@{m\_nb\_freedom\_degrees}}
+\index{m\_nb\_freedom\_degrees@{m\_nb\_freedom\_degrees}!Minimisator@{Minimisator}}
+\doxysubsubsection{m\_nb\_freedom\_degrees}
+{\footnotesize\ttfamily int Minimisator\+::m\+\_\+nb\+\_\+freedom\+\_\+degrees = 3\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_minimisator_a70194383b57ea57478e7c4a3e883e684}} 
+\index{Minimisator@{Minimisator}!m\_recal@{m\_recal}}
+\index{m\_recal@{m\_recal}!Minimisator@{Minimisator}}
+\doxysubsubsection{m\_recal}
+{\footnotesize\ttfamily \textbf{ Recalibration}$\ast$ Minimisator\+::m\+\_\+recal = nullptr\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_minimisator_aaa7dc46c5e2406bb8a4d389996ef3e44}} 
+\index{Minimisator@{Minimisator}!m\_spectra\_threshold@{m\_spectra\_threshold}}
+\index{m\_spectra\_threshold@{m\_spectra\_threshold}!Minimisator@{Minimisator}}
+\doxysubsubsection{m\_spectra\_threshold}
+{\footnotesize\ttfamily int Minimisator\+::m\+\_\+spectra\+\_\+threshold = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_minimisator_a60fa32272bc0c844926f7910bcb83e50}} 
+\index{Minimisator@{Minimisator}!nmParam@{nmParam}}
+\index{nmParam@{nmParam}!Minimisator@{Minimisator}}
+\doxysubsubsection{nmParam}
+{\footnotesize\ttfamily struct \textbf{ Minimisator\+::\+Nelder\+Mead\+Parameters} Minimisator\+::nm\+Param\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+lib/\+Classes/\textbf{ Spectra\+Alignator.\+hpp}\end{DoxyCompactItemize}

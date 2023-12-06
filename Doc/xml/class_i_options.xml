@@ -1,0 +1,279 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="class_i_options" kind="class" language="C++" prot="public">
+    <compoundname>IOptions</compoundname>
+    <includes refid="_hit_8hpp" local="no">Hit.hpp</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="class_i_options_1a7d3b074e2027dd608b60f69ede73761e" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool IOptions::e</definition>
+        <argsstring></argsstring>
+        <name>e</name>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Hit.hpp" line="108" column="8" bodyfile="lib/Classes/Hit.hpp" bodystart="108" bodyend="-1"/>
+        <referencedby refid="class_event_1a93d81b8139c839326e56f33ef63097e8" compoundref="_event_8hpp" startline="164" endline="173">Event::isCalibrated</referencedby>
+        <referencedby refid="class_event_1ae393238c864abbf268c5172572241778" compoundref="_event_8hpp" startline="211" endline="228">Event::operator=</referencedby>
+        <referencedby refid="class_event_1a243e29bac8d969902d32a4d444fc5174" compoundref="_event_8hpp" startline="234" endline="262">Event::reading</referencedby>
+        <referencedby refid="class_hit_1ad809be4a75a5c588504fa77d442e393d" compoundref="_hit_8hpp" startline="239" endline="264">Hit::reading</referencedby>
+        <referencedby refid="class_i_options_1aab7ee24774fddd6ccb14bb6801fafdb0" compoundref="_hit_8hpp" startline="84" endline="102">setOptions</referencedby>
+        <referencedby refid="class_hit_1ab60637cf6f374e4394139c3594e4464e" compoundref="_hit_8hpp" startline="287" endline="304">Hit::writting</referencedby>
+        <referencedby refid="class_event_1a0b93fcd8063a3c02edede96bb53b136d" compoundref="_event_8hpp" startline="289" endline="311">Event::writting</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_i_options_1a1a2ef66e7ce7e5af14029dca3b2f7778" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool IOptions::E</definition>
+        <argsstring></argsstring>
+        <name>E</name>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Hit.hpp" line="109" column="8" bodyfile="lib/Classes/Hit.hpp" bodystart="109" bodyend="-1"/>
+        <referencedby refid="class_event_1a93d81b8139c839326e56f33ef63097e8" compoundref="_event_8hpp" startline="164" endline="173">Event::isCalibrated</referencedby>
+        <referencedby refid="class_event_1ae393238c864abbf268c5172572241778" compoundref="_event_8hpp" startline="211" endline="228">Event::operator=</referencedby>
+        <referencedby refid="class_event_1a243e29bac8d969902d32a4d444fc5174" compoundref="_event_8hpp" startline="234" endline="262">Event::reading</referencedby>
+        <referencedby refid="class_hit_1ad809be4a75a5c588504fa77d442e393d" compoundref="_hit_8hpp" startline="239" endline="264">Hit::reading</referencedby>
+        <referencedby refid="class_i_options_1aab7ee24774fddd6ccb14bb6801fafdb0" compoundref="_hit_8hpp" startline="84" endline="102">setOptions</referencedby>
+        <referencedby refid="class_hit_1ab60637cf6f374e4394139c3594e4464e" compoundref="_hit_8hpp" startline="287" endline="304">Hit::writting</referencedby>
+        <referencedby refid="class_event_1a0b93fcd8063a3c02edede96bb53b136d" compoundref="_event_8hpp" startline="289" endline="311">Event::writting</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_i_options_1a08938bd98b6894ff1ce8a4a082f5bd7d" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool IOptions::l</definition>
+        <argsstring></argsstring>
+        <name>l</name>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Hit.hpp" line="104" column="8" bodyfile="lib/Classes/Hit.hpp" bodystart="104" bodyend="-1"/>
+        <referencedby refid="class_event_1ae393238c864abbf268c5172572241778" compoundref="_event_8hpp" startline="211" endline="228">Event::operator=</referencedby>
+        <referencedby refid="class_event_1a243e29bac8d969902d32a4d444fc5174" compoundref="_event_8hpp" startline="234" endline="262">Event::reading</referencedby>
+        <referencedby refid="class_hit_1ad809be4a75a5c588504fa77d442e393d" compoundref="_hit_8hpp" startline="239" endline="264">Hit::reading</referencedby>
+        <referencedby refid="class_i_options_1aab7ee24774fddd6ccb14bb6801fafdb0" compoundref="_hit_8hpp" startline="84" endline="102">setOptions</referencedby>
+        <referencedby refid="class_hit_1ab60637cf6f374e4394139c3594e4464e" compoundref="_hit_8hpp" startline="287" endline="304">Hit::writting</referencedby>
+        <referencedby refid="class_event_1a0b93fcd8063a3c02edede96bb53b136d" compoundref="_event_8hpp" startline="289" endline="311">Event::writting</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_i_options_1a73a8079d9aabef8cd70b9a8713be9ce3" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool IOptions::p</definition>
+        <argsstring></argsstring>
+        <name>p</name>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Hit.hpp" line="112" column="8" bodyfile="lib/Classes/Hit.hpp" bodystart="112" bodyend="-1"/>
+        <referencedby refid="class_event_1ae393238c864abbf268c5172572241778" compoundref="_event_8hpp" startline="211" endline="228">Event::operator=</referencedby>
+        <referencedby refid="class_event_1a243e29bac8d969902d32a4d444fc5174" compoundref="_event_8hpp" startline="234" endline="262">Event::reading</referencedby>
+        <referencedby refid="class_hit_1ad809be4a75a5c588504fa77d442e393d" compoundref="_hit_8hpp" startline="239" endline="264">Hit::reading</referencedby>
+        <referencedby refid="class_i_options_1aab7ee24774fddd6ccb14bb6801fafdb0" compoundref="_hit_8hpp" startline="84" endline="102">setOptions</referencedby>
+        <referencedby refid="class_hit_1ab60637cf6f374e4394139c3594e4464e" compoundref="_hit_8hpp" startline="287" endline="304">Hit::writting</referencedby>
+        <referencedby refid="class_event_1a0b93fcd8063a3c02edede96bb53b136d" compoundref="_event_8hpp" startline="289" endline="311">Event::writting</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_i_options_1adb4538164fb33f5375f1f72601f4aefb" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool IOptions::q</definition>
+        <argsstring></argsstring>
+        <name>q</name>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Hit.hpp" line="110" column="8" bodyfile="lib/Classes/Hit.hpp" bodystart="110" bodyend="-1"/>
+        <referencedby refid="class_event_1ae393238c864abbf268c5172572241778" compoundref="_event_8hpp" startline="211" endline="228">Event::operator=</referencedby>
+        <referencedby refid="class_event_1a243e29bac8d969902d32a4d444fc5174" compoundref="_event_8hpp" startline="234" endline="262">Event::reading</referencedby>
+        <referencedby refid="class_hit_1ad809be4a75a5c588504fa77d442e393d" compoundref="_hit_8hpp" startline="239" endline="264">Hit::reading</referencedby>
+        <referencedby refid="class_i_options_1aab7ee24774fddd6ccb14bb6801fafdb0" compoundref="_hit_8hpp" startline="84" endline="102">setOptions</referencedby>
+        <referencedby refid="class_hit_1ab60637cf6f374e4394139c3594e4464e" compoundref="_hit_8hpp" startline="287" endline="304">Hit::writting</referencedby>
+        <referencedby refid="class_event_1a0b93fcd8063a3c02edede96bb53b136d" compoundref="_event_8hpp" startline="289" endline="311">Event::writting</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_i_options_1a3b860786dd7c7cef82d6f00b2e64a05e" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool IOptions::Q</definition>
+        <argsstring></argsstring>
+        <name>Q</name>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Hit.hpp" line="111" column="8" bodyfile="lib/Classes/Hit.hpp" bodystart="111" bodyend="-1"/>
+        <referencedby refid="class_event_1ae393238c864abbf268c5172572241778" compoundref="_event_8hpp" startline="211" endline="228">Event::operator=</referencedby>
+        <referencedby refid="class_event_1a243e29bac8d969902d32a4d444fc5174" compoundref="_event_8hpp" startline="234" endline="262">Event::reading</referencedby>
+        <referencedby refid="class_hit_1aedefb5565ccfc732c322416ef54d015d" compoundref="_hit_8hpp" startline="266" endline="285">Hit::reading</referencedby>
+        <referencedby refid="class_i_options_1aab7ee24774fddd6ccb14bb6801fafdb0" compoundref="_hit_8hpp" startline="84" endline="102">setOptions</referencedby>
+        <referencedby refid="class_hit_1ab60637cf6f374e4394139c3594e4464e" compoundref="_hit_8hpp" startline="287" endline="304">Hit::writting</referencedby>
+        <referencedby refid="class_event_1a0b93fcd8063a3c02edede96bb53b136d" compoundref="_event_8hpp" startline="289" endline="311">Event::writting</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_i_options_1aa727e950a396e908cf8ebd137dc4f539" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool IOptions::s</definition>
+        <argsstring></argsstring>
+        <name>s</name>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Hit.hpp" line="105" column="8" bodyfile="lib/Classes/Hit.hpp" bodystart="105" bodyend="-1"/>
+        <referencedby refid="class_event_1ae393238c864abbf268c5172572241778" compoundref="_event_8hpp" startline="211" endline="228">Event::operator=</referencedby>
+        <referencedby refid="class_event_1a243e29bac8d969902d32a4d444fc5174" compoundref="_event_8hpp" startline="234" endline="262">Event::reading</referencedby>
+        <referencedby refid="class_hit_1ad809be4a75a5c588504fa77d442e393d" compoundref="_hit_8hpp" startline="239" endline="264">Hit::reading</referencedby>
+        <referencedby refid="class_i_options_1aab7ee24774fddd6ccb14bb6801fafdb0" compoundref="_hit_8hpp" startline="84" endline="102">setOptions</referencedby>
+        <referencedby refid="class_hit_1ab60637cf6f374e4394139c3594e4464e" compoundref="_hit_8hpp" startline="287" endline="304">Hit::writting</referencedby>
+        <referencedby refid="class_event_1a0b93fcd8063a3c02edede96bb53b136d" compoundref="_event_8hpp" startline="289" endline="311">Event::writting</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_i_options_1af82eb678f8bb2f7984016b278cc24875" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool IOptions::t</definition>
+        <argsstring></argsstring>
+        <name>t</name>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Hit.hpp" line="106" column="8" bodyfile="lib/Classes/Hit.hpp" bodystart="106" bodyend="-1"/>
+        <referencedby refid="class_event_1ae393238c864abbf268c5172572241778" compoundref="_event_8hpp" startline="211" endline="228">Event::operator=</referencedby>
+        <referencedby refid="class_event_1a243e29bac8d969902d32a4d444fc5174" compoundref="_event_8hpp" startline="234" endline="262">Event::reading</referencedby>
+        <referencedby refid="class_i_options_1aab7ee24774fddd6ccb14bb6801fafdb0" compoundref="_hit_8hpp" startline="84" endline="102">setOptions</referencedby>
+        <referencedby refid="class_sorted___event_1a526eefb6a423a59ff6096766c04c98e2" compoundref="_sorted___event_8hpp" startline="254" endline="372">Sorted_Event::sortEvent</referencedby>
+        <referencedby refid="class_event_1a0b93fcd8063a3c02edede96bb53b136d" compoundref="_event_8hpp" startline="289" endline="311">Event::writting</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_i_options_1a48254b9cb7fdeeacf1f42444333a377a" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool IOptions::T</definition>
+        <argsstring></argsstring>
+        <name>T</name>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Hit.hpp" line="107" column="8" bodyfile="lib/Classes/Hit.hpp" bodystart="107" bodyend="-1"/>
+        <referencedby refid="class_event_1ae393238c864abbf268c5172572241778" compoundref="_event_8hpp" startline="211" endline="228">Event::operator=</referencedby>
+        <referencedby refid="class_event_1a243e29bac8d969902d32a4d444fc5174" compoundref="_event_8hpp" startline="234" endline="262">Event::reading</referencedby>
+        <referencedby refid="class_i_options_1aab7ee24774fddd6ccb14bb6801fafdb0" compoundref="_hit_8hpp" startline="84" endline="102">setOptions</referencedby>
+        <referencedby refid="class_event_1afd2351e3fb971a5f061e5b1b84f78326" compoundref="_event_8hpp" startline="128" endline="132">Event::setT0</referencedby>
+        <referencedby refid="class_sorted___event_1a526eefb6a423a59ff6096766c04c98e2" compoundref="_sorted___event_8hpp" startline="254" endline="372">Sorted_Event::sortEvent</referencedby>
+        <referencedby refid="class_sorted___event_1a868a20701f8be649bbaf0a0366c378d0" compoundref="_sorted___event_8hpp" startline="231" endline="252">Sorted_Event::sortGeClover</referencedby>
+        <referencedby refid="class_event_1a15a45e59b3ce25ab2b72e68578e99c51" compoundref="_event_8hpp" startline="159" endline="159">Event::time_ns</referencedby>
+        <referencedby refid="class_event_1a0b93fcd8063a3c02edede96bb53b136d" compoundref="_event_8hpp" startline="289" endline="311">Event::writting</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_i_options_1ae86e8ce0463d9b516d2f626b7a40d1b5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>IOptions::IOptions</definition>
+        <argsstring>()</argsstring>
+        <name>IOptions</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Hit.hpp" line="82" column="3" bodyfile="lib/Classes/Hit.hpp" bodystart="82" bodyend="82"/>
+      </memberdef>
+      <memberdef kind="function" id="class_i_options_1a1ca60f3604bb480a32f39eae672a777e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>IOptions::IOptions</definition>
+        <argsstring>(std::string const &amp;options)</argsstring>
+        <name>IOptions</name>
+        <param>
+          <type>std::string const &amp;</type>
+          <declname>options</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Hit.hpp" line="83" column="3" bodyfile="lib/Classes/Hit.hpp" bodystart="83" bodyend="83"/>
+        <references refid="class_i_options_1aab7ee24774fddd6ccb14bb6801fafdb0" compoundref="_hit_8hpp" startline="84" endline="102">setOptions</references>
+      </memberdef>
+      <memberdef kind="function" id="class_i_options_1aab7ee24774fddd6ccb14bb6801fafdb0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void IOptions::setOptions</definition>
+        <argsstring>(std::string const &amp;options)</argsstring>
+        <name>setOptions</name>
+        <param>
+          <type>std::string const &amp;</type>
+          <declname>options</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Hit.hpp" line="84" column="8" bodyfile="lib/Classes/Hit.hpp" bodystart="84" bodyend="102"/>
+        <references refid="class_i_options_1a7d3b074e2027dd608b60f69ede73761e" compoundref="_hit_8hpp" startline="108">e</references>
+        <references refid="class_i_options_1a1a2ef66e7ce7e5af14029dca3b2f7778" compoundref="_hit_8hpp" startline="109">E</references>
+        <references refid="class_i_options_1a08938bd98b6894ff1ce8a4a082f5bd7d" compoundref="_hit_8hpp" startline="104">l</references>
+        <references refid="class_i_options_1a73a8079d9aabef8cd70b9a8713be9ce3" compoundref="_hit_8hpp" startline="112">p</references>
+        <references refid="_histogramor_8hpp_1ab48a2fa7184e6354788989602c8c8c29">print</references>
+        <references refid="class_i_options_1adb4538164fb33f5375f1f72601f4aefb" compoundref="_hit_8hpp" startline="110">q</references>
+        <references refid="class_i_options_1a3b860786dd7c7cef82d6f00b2e64a05e" compoundref="_hit_8hpp" startline="111">Q</references>
+        <references refid="class_i_options_1aa727e950a396e908cf8ebd137dc4f539" compoundref="_hit_8hpp" startline="105">s</references>
+        <references refid="class_i_options_1af82eb678f8bb2f7984016b278cc24875" compoundref="_hit_8hpp" startline="106">t</references>
+        <references refid="class_i_options_1a48254b9cb7fdeeacf1f42444333a377a" compoundref="_hit_8hpp" startline="107">T</references>
+        <referencedby refid="class_i_options_1a1ca60f3604bb480a32f39eae672a777e" compoundref="_hit_8hpp" startline="83" endline="83">IOptions</referencedby>
+        <referencedby refid="class_event_1af08b47f89112db7279491ab1201ce82d" compoundref="_event_8hpp" startline="264" endline="287">Event::reading</referencedby>
+        <referencedby refid="class_hit_1aedefb5565ccfc732c322416ef54d015d" compoundref="_hit_8hpp" startline="266" endline="285">Hit::reading</referencedby>
+        <referencedby refid="class_hit_1ab60637cf6f374e4394139c3594e4464e" compoundref="_hit_8hpp" startline="287" endline="304">Hit::writting</referencedby>
+        <referencedby refid="class_event_1a0b93fcd8063a3c02edede96bb53b136d" compoundref="_event_8hpp" startline="289" endline="311">Event::writting</referencedby>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>IO parameters ///. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>ReadIO options</para>
+<para>l : label label ushort s : stamp absolute timestamp ps ULong64_t t : time relative timestamp ps Long64_t T : time2 relative timestamp ns float e : adc energy in ADC int E : nrj energy in keV float q : qdc2 energy qdc2 in ADC float Q : nrj2 energy qdc2 in keV float p : pileup pilepup bool </para>
+    </detaileddescription>
+    <location file="lib/Classes/Hit.hpp" line="79" column="1" bodyfile="lib/Classes/Hit.hpp" bodystart="80" bodyend="113"/>
+    <listofallmembers>
+      <member refid="class_i_options_1a7d3b074e2027dd608b60f69ede73761e" prot="public" virt="non-virtual"><scope>IOptions</scope><name>e</name></member>
+      <member refid="class_i_options_1a1a2ef66e7ce7e5af14029dca3b2f7778" prot="public" virt="non-virtual"><scope>IOptions</scope><name>E</name></member>
+      <member refid="class_i_options_1ae86e8ce0463d9b516d2f626b7a40d1b5" prot="public" virt="non-virtual"><scope>IOptions</scope><name>IOptions</name></member>
+      <member refid="class_i_options_1a1ca60f3604bb480a32f39eae672a777e" prot="public" virt="non-virtual"><scope>IOptions</scope><name>IOptions</name></member>
+      <member refid="class_i_options_1a08938bd98b6894ff1ce8a4a082f5bd7d" prot="public" virt="non-virtual"><scope>IOptions</scope><name>l</name></member>
+      <member refid="class_i_options_1a73a8079d9aabef8cd70b9a8713be9ce3" prot="public" virt="non-virtual"><scope>IOptions</scope><name>p</name></member>
+      <member refid="class_i_options_1adb4538164fb33f5375f1f72601f4aefb" prot="public" virt="non-virtual"><scope>IOptions</scope><name>q</name></member>
+      <member refid="class_i_options_1a3b860786dd7c7cef82d6f00b2e64a05e" prot="public" virt="non-virtual"><scope>IOptions</scope><name>Q</name></member>
+      <member refid="class_i_options_1aa727e950a396e908cf8ebd137dc4f539" prot="public" virt="non-virtual"><scope>IOptions</scope><name>s</name></member>
+      <member refid="class_i_options_1aab7ee24774fddd6ccb14bb6801fafdb0" prot="public" virt="non-virtual"><scope>IOptions</scope><name>setOptions</name></member>
+      <member refid="class_i_options_1af82eb678f8bb2f7984016b278cc24875" prot="public" virt="non-virtual"><scope>IOptions</scope><name>t</name></member>
+      <member refid="class_i_options_1a48254b9cb7fdeeacf1f42444333a377a" prot="public" virt="non-virtual"><scope>IOptions</scope><name>T</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

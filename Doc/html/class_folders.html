@@ -90,7 +90,7 @@ $(document).ready(function(){initNavTree('class_folders.html',''); initResizable
 </div><!--header-->
 <div class="contents">
 
-<p>Object used to hold a list of folders.  
+<p>EXPERIMENTAL Object used to hold a list of folders.  
  <a href="class_folders.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="files__functions_8hpp_source.html">files_functions.hpp</a>&gt;</code></p>
@@ -99,8 +99,14 @@ $(document).ready(function(){initNavTree('class_folders.html',''); initResizable
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a08d92a79fdced661ca94fb0547dfcbf2"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_folders.html#a08d92a79fdced661ca94fb0547dfcbf2">begin</a> () const</td></tr>
 <tr class="separator:a08d92a79fdced661ca94fb0547dfcbf2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa63ca280c10fc90c09cc29e38c80a02"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_folders.html#aaa63ca280c10fc90c09cc29e38c80a02">clear</a> ()</td></tr>
+<tr class="separator:aaa63ca280c10fc90c09cc29e38c80a02"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a11de303e1a1926a03212fa4b085285ca"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_folders.html#a11de303e1a1926a03212fa4b085285ca">end</a> () const</td></tr>
 <tr class="separator:a11de303e1a1926a03212fa4b085285ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa6c7cccbbb9de930b9a41dc42dcbb840"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_folders.html#aa6c7cccbbb9de930b9a41dc42dcbb840">erase</a> (<a class="el" href="lib_co_8hpp.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a> const &amp;pos)</td></tr>
+<tr class="separator:aa6c7cccbbb9de930b9a41dc42dcbb840"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a035d2b31430c66fc7a8941a9d938b658"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_folders.html#a035d2b31430c66fc7a8941a9d938b658">erase</a> (<a class="el" href="lib_co_8hpp.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a> const &amp;pos, <a class="el" href="lib_co_8hpp.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a> const &amp;<a class="el" href="class_folders.html#a6b8b818a0a08a010b9849573883bf189">size</a>)</td></tr>
+<tr class="separator:a035d2b31430c66fc7a8941a9d938b658"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abb5ba77dd0b151ddc2479831740e514b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_folders.html#abb5ba77dd0b151ddc2479831740e514b">Folders</a> ()</td></tr>
 <tr class="separator:abb5ba77dd0b151ddc2479831740e514b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa84623a40e39787329ca5ef8dbfa9d6c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_folders.html#aa84623a40e39787329ca5ef8dbfa9d6c">Folders</a> (<a class="el" href="class_folders.html">Folders</a> const &amp;folders)</td></tr>
@@ -119,12 +125,18 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a616485734815d9827798b56a265cdc9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4a7246912adc54275ac8ded201c7ad3a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_folders.html">Folders</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_folders.html#a4a7246912adc54275ac8ded201c7ad3a">operator=</a> (<a class="el" href="class_folders.html">Folders</a> const &amp;folders)</td></tr>
 <tr class="separator:a4a7246912adc54275ac8ded201c7ad3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3ba6f2328eef6c1db5d0d78998a11290"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_folders.html">Folders</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_folders.html#a3ba6f2328eef6c1db5d0d78998a11290">operator=</a> (std::vector&lt; <a class="el" href="class_folder.html">Folder</a> &gt; const &amp;folders)</td></tr>
-<tr class="separator:a3ba6f2328eef6c1db5d0d78998a11290"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6757711b57054c387a2309302c216eb7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_folders.html">Folders</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_folders.html#a6757711b57054c387a2309302c216eb7">operator=</a> (std::vector&lt; std::string &gt; const &amp;folders)</td></tr>
 <tr class="separator:a6757711b57054c387a2309302c216eb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae627977a3c889589d2077f57554301b4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_folder.html">Folder</a> const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_folders.html#ae627977a3c889589d2077f57554301b4">operator[]</a> (<a class="el" href="lib_co_8hpp.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a> const &amp;i) const</td></tr>
+<tr class="separator:ae627977a3c889589d2077f57554301b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab7471e5d0263ec69f2c87f184c004395"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_folders.html#ab7471e5d0263ec69f2c87f184c004395">push_back</a> (<a class="el" href="class_folder.html">Folder</a> const &amp;folder)</td></tr>
 <tr class="separator:ab7471e5d0263ec69f2c87f184c004395"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b9a8af61bcaec214ec25ec217b84ef7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_folders.html">Folders</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_folders.html#a9b9a8af61bcaec214ec25ec217b84ef7">resize</a> (int const &amp;<a class="el" href="class_folders.html#a6b8b818a0a08a010b9849573883bf189">size</a>)</td></tr>
+<tr class="separator:a9b9a8af61bcaec214ec25ec217b84ef7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b8b818a0a08a010b9849573883bf189"><td class="memItemLeft" align="right" valign="top">auto const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_folders.html#a6b8b818a0a08a010b9849573883bf189">size</a> () const</td></tr>
+<tr class="separator:a6b8b818a0a08a010b9849573883bf189"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21778cd16e2d1dfa91886bba394a506f"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_folders.html#a21778cd16e2d1dfa91886bba394a506f">string</a> () const</td></tr>
+<tr class="separator:a21778cd16e2d1dfa91886bba394a506f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -132,7 +144,7 @@ Private Attributes</h2></td></tr>
 <tr class="separator:aeb55402a14a1b9d847838882c43dbd14"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Object used to hold a list of folders. </p>
+<div class="textblock"><p>EXPERIMENTAL Object used to hold a list of folders. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="abb5ba77dd0b151ddc2479831740e514b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#abb5ba77dd0b151ddc2479831740e514b">&#9670;&nbsp;</a></span>Folders() <span class="overload">[1/4]</span></h2>
@@ -263,6 +275,42 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="aaa63ca280c10fc90c09cc29e38c80a02"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa63ca280c10fc90c09cc29e38c80a02">&#9670;&nbsp;</a></span>clear()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Folders::clear </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_folders_aaa63ca280c10fc90c09cc29e38c80a02_icgraph.png" border="0" usemap="#aclass_folders_aaa63ca280c10fc90c09cc29e38c80a02_icgraph" alt=""/></div>
+<map name="aclass_folders_aaa63ca280c10fc90c09cc29e38c80a02_icgraph" id="aclass_folders_aaa63ca280c10fc90c09cc29e38c80a02_icgraph">
+<area shape="rect" title=" " alt="" coords="312,31,421,57"/>
+<area shape="rect" href="class_path.html#aa9b3a53718dcd8ba66d90d50b112ddb9" title=" " alt="" coords="177,31,264,57"/>
+<area shape="rect" href="class_path.html#a42f3cfe8b84c3e11afc5d54b47522ab3" title=" " alt="" coords="5,5,129,32"/>
+<area shape="rect" href="class_path.html#ae9ae307831520e338154143243a24a67" title="Turns a string to a path, creating it if create = true and it doesn&#39;t already exists." alt="" coords="24,56,111,83"/>
+</map>
+</div>
+
+</div>
+</div>
 <a id="a11de303e1a1926a03212fa4b085285ca"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a11de303e1a1926a03212fa4b085285ca">&#9670;&nbsp;</a></span>end()</h2>
 
@@ -285,6 +333,89 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa6c7cccbbb9de930b9a41dc42dcbb840"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa6c7cccbbb9de930b9a41dc42dcbb840">&#9670;&nbsp;</a></span>erase() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto Folders::erase </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="lib_co_8hpp.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a> const &amp;&#160;</td>
+          <td class="paramname"><em>pos</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_folders_aa6c7cccbbb9de930b9a41dc42dcbb840_icgraph.png" border="0" usemap="#aclass_folders_aa6c7cccbbb9de930b9a41dc42dcbb840_icgraph" alt=""/></div>
+<map name="aclass_folders_aa6c7cccbbb9de930b9a41dc42dcbb840_icgraph" id="aclass_folders_aa6c7cccbbb9de930b9a41dc42dcbb840_icgraph">
+<area shape="rect" title=" " alt="" coords="481,31,595,57"/>
+<area shape="rect" href="class_path.html#ac40c8c627d0412be849f1e6cd4cdc556" title="To remove extraneous ./ or ../." alt="" coords="312,31,433,57"/>
+<area shape="rect" href="class_path.html#aa9b3a53718dcd8ba66d90d50b112ddb9" title=" " alt="" coords="177,31,264,57"/>
+<area shape="rect" href="class_path.html#a42f3cfe8b84c3e11afc5d54b47522ab3" title=" " alt="" coords="5,5,129,32"/>
+<area shape="rect" href="class_path.html#ae9ae307831520e338154143243a24a67" title="Turns a string to a path, creating it if create = true and it doesn&#39;t already exists." alt="" coords="24,56,111,83"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a035d2b31430c66fc7a8941a9d938b658"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a035d2b31430c66fc7a8941a9d938b658">&#9670;&nbsp;</a></span>erase() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto Folders::erase </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="lib_co_8hpp.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a> const &amp;&#160;</td>
+          <td class="paramname"><em>pos</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="lib_co_8hpp.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a> const &amp;&#160;</td>
+          <td class="paramname"><em>size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_folders_a035d2b31430c66fc7a8941a9d938b658_cgraph.png" border="0" usemap="#aclass_folders_a035d2b31430c66fc7a8941a9d938b658_cgraph" alt=""/></div>
+<map name="aclass_folders_a035d2b31430c66fc7a8941a9d938b658_cgraph" id="aclass_folders_a035d2b31430c66fc7a8941a9d938b658_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,119,32"/>
+<area shape="rect" href="class_folders.html#a6b8b818a0a08a010b9849573883bf189" title=" " alt="" coords="167,5,269,32"/>
+</map>
+</div>
 
 </div>
 </div>
@@ -314,6 +445,20 @@ Private Attributes</h2></td></tr>
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_folders_aab07a96e82a348fe89b817c6d7b60394_icgraph.png" border="0" usemap="#aclass_folders_aab07a96e82a348fe89b817c6d7b60394_icgraph" alt=""/></div>
+<map name="aclass_folders_aab07a96e82a348fe89b817c6d7b60394_icgraph" id="aclass_folders_aab07a96e82a348fe89b817c6d7b60394_icgraph">
+<area shape="rect" title=" " alt="" coords="723,132,821,159"/>
+<area shape="rect" href="class_path.html#a859f02f9224a864b541b15e8db325409" title=" " alt="" coords="577,107,673,133"/>
+<area shape="rect" href="files__functions_8hpp.html#aa889cd33a4965fd9590feac2fb26b0f2" title=" " alt="" coords="576,157,675,184"/>
+<area shape="rect" href="class_path.html#a99656cd73eb5c5fa461d7570b86eb66d" title=" " alt="" coords="387,5,510,32"/>
+<area shape="rect" href="class_path.html#ac40c8c627d0412be849f1e6cd4cdc556" title="To remove extraneous ./ or ../." alt="" coords="388,56,509,83"/>
+<area shape="rect" href="class_file.html#ae66434e6a61f2a76b09c3480bcff4fba" title=" " alt="" coords="403,107,494,133"/>
+<area shape="rect" href="class_path.html#a3d0909258a10a05b04d3c08ec42f562c" title=" " alt="" coords="387,157,511,184"/>
+<area shape="rect" href="class_run_matrixator.html#aeb9889ba763858dfb65e05c3a7bb142e" title=" " alt="" coords="369,208,528,235"/>
+<area shape="rect" href="class_path.html#aa9b3a53718dcd8ba66d90d50b112ddb9" title=" " alt="" coords="206,56,293,83"/>
+<area shape="rect" href="class_path.html#a42f3cfe8b84c3e11afc5d54b47522ab3" title=" " alt="" coords="5,31,129,57"/>
+<area shape="rect" href="class_path.html#ae9ae307831520e338154143243a24a67" title="Turns a string to a path, creating it if create = true and it doesn&#39;t already exists." alt="" coords="24,81,111,108"/>
+<area shape="rect" href="class_run_matrixator.html#aa6d13b08060fef07b50d7ab6b35be0d6" title=" " alt="" coords="177,208,321,235"/>
+</map>
 </div>
 
 </div>
@@ -365,6 +510,22 @@ Here is the caller graph for this function:</div>
   </tr>
 </table>
 </div><div class="memdoc">
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_folders_a8e586d397638ccf72386fadd5d4a6df6_cgraph.png" border="0" usemap="#aclass_folders_a8e586d397638ccf72386fadd5d4a6df6_cgraph" alt=""/></div>
+<map name="aclass_folders_a8e586d397638ccf72386fadd5d4a6df6_cgraph" id="aclass_folders_a8e586d397638ccf72386fadd5d4a6df6_cgraph">
+<area shape="rect" title=" " alt="" coords="5,29,120,56"/>
+</map>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_folders_a8e586d397638ccf72386fadd5d4a6df6_icgraph.png" border="0" usemap="#aclass_folders_a8e586d397638ccf72386fadd5d4a6df6_icgraph" alt=""/></div>
+<map name="aclass_folders_a8e586d397638ccf72386fadd5d4a6df6_icgraph" id="aclass_folders_a8e586d397638ccf72386fadd5d4a6df6_icgraph">
+<area shape="rect" title=" " alt="" coords="5,29,120,56"/>
+</map>
+</div>
 
 </div>
 </div>
@@ -394,7 +555,7 @@ Here is the caller graph for this function:</div>
 </div>
 </div>
 <a id="a4a7246912adc54275ac8ded201c7ad3a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4a7246912adc54275ac8ded201c7ad3a">&#9670;&nbsp;</a></span>operator=() <span class="overload">[1/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a7246912adc54275ac8ded201c7ad3a">&#9670;&nbsp;</a></span>operator=() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -419,34 +580,8 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a id="a3ba6f2328eef6c1db5d0d78998a11290"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3ba6f2328eef6c1db5d0d78998a11290">&#9670;&nbsp;</a></span>operator=() <span class="overload">[2/3]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_folders.html">Folders</a>&amp; Folders::operator= </td>
-          <td>(</td>
-          <td class="paramtype">std::vector&lt; <a class="el" href="class_folder.html">Folder</a> &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>folders</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="a6757711b57054c387a2309302c216eb7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6757711b57054c387a2309302c216eb7">&#9670;&nbsp;</a></span>operator=() <span class="overload">[3/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a6757711b57054c387a2309302c216eb7">&#9670;&nbsp;</a></span>operator=() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -460,6 +595,32 @@ Here is the caller graph for this function:</div>
           <td class="paramtype">std::vector&lt; std::string &gt; const &amp;&#160;</td>
           <td class="paramname"><em>folders</em></td><td>)</td>
           <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae627977a3c889589d2077f57554301b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae627977a3c889589d2077f57554301b4">&#9670;&nbsp;</a></span>operator[]()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_folder.html">Folder</a> const&amp; Folders::operator[] </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="lib_co_8hpp.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a> const &amp;&#160;</td>
+          <td class="paramname"><em>i</em></td><td>)</td>
+          <td> const</td>
         </tr>
       </table>
   </td>
@@ -498,6 +659,122 @@ Here is the caller graph for this function:</div>
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_folders_ab7471e5d0263ec69f2c87f184c004395_icgraph.png" border="0" usemap="#aclass_folders_ab7471e5d0263ec69f2c87f184c004395_icgraph" alt=""/></div>
+<map name="aclass_folders_ab7471e5d0263ec69f2c87f184c004395_icgraph" id="aclass_folders_ab7471e5d0263ec69f2c87f184c004395_icgraph">
+<area shape="rect" title=" " alt="" coords="176,5,323,32"/>
+<area shape="rect" href="class_path.html#a99656cd73eb5c5fa461d7570b86eb66d" title=" " alt="" coords="5,5,128,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a9b9a8af61bcaec214ec25ec217b84ef7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b9a8af61bcaec214ec25ec217b84ef7">&#9670;&nbsp;</a></span>resize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_folders.html">Folders</a>&amp; Folders::resize </td>
+          <td>(</td>
+          <td class="paramtype">int const &amp;&#160;</td>
+          <td class="paramname"><em>size</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_folders_a9b9a8af61bcaec214ec25ec217b84ef7_cgraph.png" border="0" usemap="#aclass_folders_a9b9a8af61bcaec214ec25ec217b84ef7_cgraph" alt=""/></div>
+<map name="aclass_folders_a9b9a8af61bcaec214ec25ec217b84ef7_cgraph" id="aclass_folders_a9b9a8af61bcaec214ec25ec217b84ef7_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,121,32"/>
+<area shape="rect" href="class_folders.html#a6b8b818a0a08a010b9849573883bf189" title=" " alt="" coords="169,5,272,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a6b8b818a0a08a010b9849573883bf189"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b8b818a0a08a010b9849573883bf189">&#9670;&nbsp;</a></span>size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto const Folders::size </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_folders_a6b8b818a0a08a010b9849573883bf189_icgraph.png" border="0" usemap="#aclass_folders_a6b8b818a0a08a010b9849573883bf189_icgraph" alt=""/></div>
+<map name="aclass_folders_a6b8b818a0a08a010b9849573883bf189_icgraph" id="aclass_folders_a6b8b818a0a08a010b9849573883bf189_icgraph">
+<area shape="rect" title=" " alt="" coords="481,107,584,133"/>
+<area shape="rect" href="class_path.html#ac40c8c627d0412be849f1e6cd4cdc556" title="To remove extraneous ./ or ../." alt="" coords="312,31,433,57"/>
+<area shape="rect" href="class_folders.html#a035d2b31430c66fc7a8941a9d938b658" title=" " alt="" coords="316,81,429,108"/>
+<area shape="rect" href="class_folders.html#a9b9a8af61bcaec214ec25ec217b84ef7" title=" " alt="" coords="315,132,431,159"/>
+<area shape="rect" href="class_path.html#a34073c3753fbd7873238808f7f5a655b" title=" " alt="" coords="331,183,415,209"/>
+<area shape="rect" href="class_path.html#aa9b3a53718dcd8ba66d90d50b112ddb9" title=" " alt="" coords="177,31,264,57"/>
+<area shape="rect" href="class_path.html#a42f3cfe8b84c3e11afc5d54b47522ab3" title=" " alt="" coords="5,5,129,32"/>
+<area shape="rect" href="class_path.html#ae9ae307831520e338154143243a24a67" title="Turns a string to a path, creating it if create = true and it doesn&#39;t already exists." alt="" coords="24,56,111,83"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a21778cd16e2d1dfa91886bba394a506f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a21778cd16e2d1dfa91886bba394a506f">&#9670;&nbsp;</a></span>string()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string Folders::string </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_folders_a21778cd16e2d1dfa91886bba394a506f_icgraph.png" border="0" usemap="#aclass_folders_a21778cd16e2d1dfa91886bba394a506f_icgraph" alt=""/></div>
+<map name="aclass_folders_a21778cd16e2d1dfa91886bba394a506f_icgraph" id="aclass_folders_a21778cd16e2d1dfa91886bba394a506f_icgraph">
+<area shape="rect" title=" " alt="" coords="481,31,596,57"/>
+<area shape="rect" href="class_path.html#ac40c8c627d0412be849f1e6cd4cdc556" title="To remove extraneous ./ or ../." alt="" coords="312,31,433,57"/>
+<area shape="rect" href="class_path.html#aa9b3a53718dcd8ba66d90d50b112ddb9" title=" " alt="" coords="177,31,264,57"/>
+<area shape="rect" href="class_path.html#a42f3cfe8b84c3e11afc5d54b47522ab3" title=" " alt="" coords="5,5,129,32"/>
+<area shape="rect" href="class_path.html#ae9ae307831520e338154143243a24a67" title="Turns a string to a path, creating it if create = true and it doesn&#39;t already exists." alt="" coords="24,56,111,83"/>
+</map>
 </div>
 
 </div>

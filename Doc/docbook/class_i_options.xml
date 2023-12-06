@@ -1,0 +1,147 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_class_i_options" xml:lang="en-US">
+<title>IOptions Class Reference</title>
+<indexterm><primary>IOptions</primary></indexterm>
+<para>
+
+<para>IO parameters ///. </para>
+ 
+</para>
+<para>
+<computeroutput>#include &lt;Hit.hpp&gt;</computeroutput>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_class_i_options_1ae86e8ce0463d9b516d2f626b7a40d1b5">IOptions</link> ()</para>
+</listitem>
+            <listitem><para><link linkend="_class_i_options_1a1ca60f3604bb480a32f39eae672a777e">IOptions</link> (std::string const &amp;options)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_i_options_1aab7ee24774fddd6ccb14bb6801fafdb0">setOptions</link> (std::string const &amp;options)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Public Attributes    </title>
+        <itemizedlist>
+            <listitem><para>bool <link linkend="_class_i_options_1a7d3b074e2027dd608b60f69ede73761e">e</link> = false</para>
+</listitem>
+            <listitem><para>bool <link linkend="_class_i_options_1a1a2ef66e7ce7e5af14029dca3b2f7778">E</link> = false</para>
+</listitem>
+            <listitem><para>bool <link linkend="_class_i_options_1a08938bd98b6894ff1ce8a4a082f5bd7d">l</link> = false</para>
+</listitem>
+            <listitem><para>bool <link linkend="_class_i_options_1a73a8079d9aabef8cd70b9a8713be9ce3">p</link> = false</para>
+</listitem>
+            <listitem><para>bool <link linkend="_class_i_options_1adb4538164fb33f5375f1f72601f4aefb">q</link> = false</para>
+</listitem>
+            <listitem><para>bool <link linkend="_class_i_options_1a3b860786dd7c7cef82d6f00b2e64a05e">Q</link> = false</para>
+</listitem>
+            <listitem><para>bool <link linkend="_class_i_options_1aa727e950a396e908cf8ebd137dc4f539">s</link> = false</para>
+</listitem>
+            <listitem><para>bool <link linkend="_class_i_options_1af82eb678f8bb2f7984016b278cc24875">t</link> = false</para>
+</listitem>
+            <listitem><para>bool <link linkend="_class_i_options_1a48254b9cb7fdeeacf1f42444333a377a">T</link> = false</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Detailed Description</title>
+
+<para>IO parameters ///. </para>
+
+
+
+<para>ReadIO options</para>
+
+<para>l : label label ushort s : stamp absolute timestamp ps ULong64_t t : time relative timestamp ps Long64_t T : time2 relative timestamp ns float e : adc energy in ADC int E : nrj energy in keV float q : qdc2 energy qdc2 in ADC float Q : nrj2 energy qdc2 in keV float p : pileup pilepup bool </para>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_class_i_options_1ae86e8ce0463d9b516d2f626b7a40d1b5"/>    <section>
+    <title>IOptions()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>IOptions</primary><secondary>IOptions</secondary></indexterm>
+<indexterm><primary>IOptions</primary><secondary>IOptions</secondary></indexterm>
+<para><computeroutput>IOptions::IOptions ( )<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_i_options_1a1ca60f3604bb480a32f39eae672a777e"/>    <section>
+    <title>IOptions()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>IOptions</primary><secondary>IOptions</secondary></indexterm>
+<indexterm><primary>IOptions</primary><secondary>IOptions</secondary></indexterm>
+<para><computeroutput>IOptions::IOptions (std::string const &amp; options)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_i_options_a1ca60f3604bb480a32f39eae672a777e_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_class_i_options_1aab7ee24774fddd6ccb14bb6801fafdb0"/>    <section>
+    <title>setOptions()</title>
+<indexterm><primary>setOptions</primary><secondary>IOptions</secondary></indexterm>
+<indexterm><primary>IOptions</primary><secondary>setOptions</secondary></indexterm>
+<para><computeroutput>void IOptions::setOptions (std::string const &amp; options)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_i_options_aab7ee24774fddd6ccb14bb6801fafdb0_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_i_options_aab7ee24774fddd6ccb14bb6801fafdb0_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_class_i_options_1a7d3b074e2027dd608b60f69ede73761e"/>    <section>
+    <title>e</title>
+<indexterm><primary>e</primary><secondary>IOptions</secondary></indexterm>
+<indexterm><primary>IOptions</primary><secondary>e</secondary></indexterm>
+<para><computeroutput>bool IOptions::e = false</computeroutput></para>    </section><anchor xml:id="_class_i_options_1a1a2ef66e7ce7e5af14029dca3b2f7778"/>    <section>
+    <title>E</title>
+<indexterm><primary>E</primary><secondary>IOptions</secondary></indexterm>
+<indexterm><primary>IOptions</primary><secondary>E</secondary></indexterm>
+<para><computeroutput>bool IOptions::E = false</computeroutput></para>    </section><anchor xml:id="_class_i_options_1a08938bd98b6894ff1ce8a4a082f5bd7d"/>    <section>
+    <title>l</title>
+<indexterm><primary>l</primary><secondary>IOptions</secondary></indexterm>
+<indexterm><primary>IOptions</primary><secondary>l</secondary></indexterm>
+<para><computeroutput>bool IOptions::l = false</computeroutput></para>    </section><anchor xml:id="_class_i_options_1a73a8079d9aabef8cd70b9a8713be9ce3"/>    <section>
+    <title>p</title>
+<indexterm><primary>p</primary><secondary>IOptions</secondary></indexterm>
+<indexterm><primary>IOptions</primary><secondary>p</secondary></indexterm>
+<para><computeroutput>bool IOptions::p = false</computeroutput></para>    </section><anchor xml:id="_class_i_options_1adb4538164fb33f5375f1f72601f4aefb"/>    <section>
+    <title>q</title>
+<indexterm><primary>q</primary><secondary>IOptions</secondary></indexterm>
+<indexterm><primary>IOptions</primary><secondary>q</secondary></indexterm>
+<para><computeroutput>bool IOptions::q = false</computeroutput></para>    </section><anchor xml:id="_class_i_options_1a3b860786dd7c7cef82d6f00b2e64a05e"/>    <section>
+    <title>Q</title>
+<indexterm><primary>Q</primary><secondary>IOptions</secondary></indexterm>
+<indexterm><primary>IOptions</primary><secondary>Q</secondary></indexterm>
+<para><computeroutput>bool IOptions::Q = false</computeroutput></para>    </section><anchor xml:id="_class_i_options_1aa727e950a396e908cf8ebd137dc4f539"/>    <section>
+    <title>s</title>
+<indexterm><primary>s</primary><secondary>IOptions</secondary></indexterm>
+<indexterm><primary>IOptions</primary><secondary>s</secondary></indexterm>
+<para><computeroutput>bool IOptions::s = false</computeroutput></para>    </section><anchor xml:id="_class_i_options_1af82eb678f8bb2f7984016b278cc24875"/>    <section>
+    <title>t</title>
+<indexterm><primary>t</primary><secondary>IOptions</secondary></indexterm>
+<indexterm><primary>IOptions</primary><secondary>t</secondary></indexterm>
+<para><computeroutput>bool IOptions::t = false</computeroutput></para>    </section><anchor xml:id="_class_i_options_1a48254b9cb7fdeeacf1f42444333a377a"/>    <section>
+    <title>T</title>
+<indexterm><primary>T</primary><secondary>IOptions</secondary></indexterm>
+<indexterm><primary>IOptions</primary><secondary>T</secondary></indexterm>
+<para><computeroutput>bool IOptions::T = false</computeroutput></para></section>
+<para>
+The documentation for this class was generated from the following file:</para>
+lib/Classes/<link linkend="__hit_8hpp">Hit.hpp</link></section>
+</section>

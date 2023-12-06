@@ -105,12 +105,26 @@ $(document).ready(function(){initNavTree('_performances_8hpp_source.html',''); i
 <div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="class_performances.html#ab98612d481594c3b39a759f480742345">   18</a></span>&#160;    <a class="code" href="class_m_t_counter.html">MTCounter</a> <a class="code" href="class_performances.html#ab98612d481594c3b39a759f480742345">nb_total_events</a>;</div>
 <div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="class_performances.html#a739d118946fd27bbd250d664fdcf72a7">   19</a></span>&#160;    <a class="code" href="class_m_t_counter.html">MTCounter</a> <a class="code" href="class_performances.html#a739d118946fd27bbd250d664fdcf72a7">nb_total_raw_events</a>;</div>
 <div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="class_performances.html#a113fa2db5fa26c78e6c272960209e254">   20</a></span>&#160;    <a class="code" href="class_m_t_counter.html">MTCounter</a> <a class="code" href="class_performances.html#a113fa2db5fa26c78e6c272960209e254">nb_total_kept_events</a>;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;};</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="class_performances.html#ad94ac097e2ffac203b813e9703f9cf50">   22</a></span>&#160;    <a class="code" href="class_m_t_counter.html">MTCounter</a> <a class="code" href="class_performances.html#ad94ac097e2ffac203b813e9703f9cf50">total_read_size_file</a>;</div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="class_performances.html#ae38c3de3b231fbb995c2585cfc148e5c">   23</a></span>&#160;    <a class="code" href="class_m_t_counter.html">MTCounter</a> <a class="code" href="class_performances.html#ae38c3de3b231fbb995c2585cfc148e5c">total_written_size_file</a>;</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#endif </span><span class="comment">//PERFORMANCES_HPP</span></div>
-<div class="ttc" id="aclass_m_t_counter_html"><div class="ttname"><a href="class_m_t_counter.html">MTCounter</a></div><div class="ttdef"><b>Definition:</b> MTCounter.hpp:7</div></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="comment">// void printIO();</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;};</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">// void Performances::printIO()</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">// {</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">//   auto const </span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">//   print</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">//   (</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">//     &quot;&quot;</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">//   );</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">// }</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">#endif </span><span class="comment">//PERFORMANCES_HPP</span></div>
+<div class="ttc" id="aclass_m_t_counter_html"><div class="ttname"><a href="class_m_t_counter.html">MTCounter</a></div><div class="ttdoc">Atomic counter with convenient overloaded operators.</div><div class="ttdef"><b>Definition:</b> MTCounter.hpp:13</div></div>
 <div class="ttc" id="aclass_performances_html"><div class="ttname"><a href="class_performances.html">Performances</a></div><div class="ttdef"><b>Definition:</b> Performances.hpp:8</div></div>
 <div class="ttc" id="aclass_performances_html_a0a0ed2b8332c39dce0bc3761174f881a"><div class="ttname"><a href="class_performances.html#a0a0ed2b8332c39dce0bc3761174f881a">Performances::nb_hits</a></div><div class="ttdeci">MTCounter nb_hits</div><div class="ttdef"><b>Definition:</b> Performances.hpp:12</div></div>
 <div class="ttc" id="aclass_performances_html_a113fa2db5fa26c78e6c272960209e254"><div class="ttname"><a href="class_performances.html#a113fa2db5fa26c78e6c272960209e254">Performances::nb_total_kept_events</a></div><div class="ttdeci">MTCounter nb_total_kept_events</div><div class="ttdef"><b>Definition:</b> Performances.hpp:20</div></div>
@@ -120,7 +134,9 @@ $(document).ready(function(){initNavTree('_performances_8hpp_source.html',''); i
 <div class="ttc" id="aclass_performances_html_a8e8fcff6992c781cab447c29da39f801"><div class="ttname"><a href="class_performances.html#a8e8fcff6992c781cab447c29da39f801">Performances::nb_events</a></div><div class="ttdeci">MTCounter nb_events</div><div class="ttdef"><b>Definition:</b> Performances.hpp:13</div></div>
 <div class="ttc" id="aclass_performances_html_ab98612d481594c3b39a759f480742345"><div class="ttname"><a href="class_performances.html#ab98612d481594c3b39a759f480742345">Performances::nb_total_events</a></div><div class="ttdeci">MTCounter nb_total_events</div><div class="ttdef"><b>Definition:</b> Performances.hpp:18</div></div>
 <div class="ttc" id="aclass_performances_html_abd7b3a4619fb8916ef41650315e3970d"><div class="ttname"><a href="class_performances.html#abd7b3a4619fb8916ef41650315e3970d">Performances::Performances</a></div><div class="ttdeci">Performances()</div><div class="ttdef"><b>Definition:</b> Performances.hpp:10</div></div>
+<div class="ttc" id="aclass_performances_html_ad94ac097e2ffac203b813e9703f9cf50"><div class="ttname"><a href="class_performances.html#ad94ac097e2ffac203b813e9703f9cf50">Performances::total_read_size_file</a></div><div class="ttdeci">MTCounter total_read_size_file</div><div class="ttdef"><b>Definition:</b> Performances.hpp:22</div></div>
 <div class="ttc" id="aclass_performances_html_ada2edd8aeddf080f2c494a8a921e662f"><div class="ttname"><a href="class_performances.html#ada2edd8aeddf080f2c494a8a921e662f">Performances::nb_total_hits</a></div><div class="ttdeci">MTCounter nb_total_hits</div><div class="ttdef"><b>Definition:</b> Performances.hpp:17</div></div>
+<div class="ttc" id="aclass_performances_html_ae38c3de3b231fbb995c2585cfc148e5c"><div class="ttname"><a href="class_performances.html#ae38c3de3b231fbb995c2585cfc148e5c">Performances::total_written_size_file</a></div><div class="ttdeci">MTCounter total_written_size_file</div><div class="ttdef"><b>Definition:</b> Performances.hpp:23</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

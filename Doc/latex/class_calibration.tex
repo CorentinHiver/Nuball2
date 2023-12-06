@@ -1,0 +1,989 @@
+\doxysection{Calibration Class Reference}
+\label{class_calibration}\index{Calibration@{Calibration}}
+
+
+{\ttfamily \#include $<$Calibration.\+hpp$>$}
+
+
+
+Collaboration diagram for Calibration\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=226pt]{class_calibration__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \textbf{ histograms}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \textbf{ analyse} (std\+::string const \&source=\char`\"{}152Eu\char`\"{})
+\begin{DoxyCompactList}\small\item\em Analyse the spectra to extract calibration coefficients. \end{DoxyCompactList}\item 
+void \textbf{ calculate} (std\+::string const \&data\+Dir, int nb\+\_\+files=-\/1, std\+::string const \&source=\char`\"{}152Eu\char`\"{}, std\+::string const \&type=\char`\"{}fast\char`\"{})
+\item 
+void \textbf{ calculate} (std\+::string const \&\textbf{ histograms}, std\+::string const \&source=\char`\"{}152Eu\char`\"{})
+\begin{DoxyCompactList}\small\item\em Calculate calibration from .root histograms. \end{DoxyCompactList}\item 
+void \textbf{ calibrate} (\textbf{ Hit} \&hit) const
+\begin{DoxyCompactList}\small\item\em avoid using this one \end{DoxyCompactList}\item 
+\textbf{ NRJ} \textbf{ calibrate} (\textbf{ NRJ} const \&nrj, \textbf{ Label} const \&label) const
+\begin{DoxyCompactList}\small\item\em calibrate the ADC value using the parameters extracted from the calibration data \end{DoxyCompactList}\item 
+bool const  \& \textbf{ calibrate\+\_\+data} ()
+\item 
+bool const  \& \textbf{ calibrate\+\_\+data} () const
+\item 
+void \textbf{ calibrate\+Faster\+Data} (std\+::string const \&folder, int const \&nb\+\_\+files=-\/1)
+\item 
+void \textbf{ calibrate\+Root\+Data} (std\+::string const \&folder, int const \&nb\+\_\+files=-\/1)
+\item 
+\textbf{ Calibration} ()
+\item 
+\textbf{ Calibration} (\textbf{ Calibration} const \&other\+Calib)
+\begin{DoxyCompactList}\small\item\em Copy constructor. \end{DoxyCompactList}\item 
+\textbf{ Calibration} (const char $\ast$calib\+File\+Name)
+\item 
+\textbf{ Calibration} (std\+::string const \&calib\+File\+Name)
+\begin{DoxyCompactList}\small\item\em Loading calibration from file name. \end{DoxyCompactList}\item 
+auto const  \& \textbf{ file} () const
+\item 
+void \textbf{ fill\+Root\+Data\+Histo} (std\+::string const \&filename)
+\item 
+void \textbf{ fit\+Calibration} (\textbf{ Fits} \&fits)
+\item 
+auto const  \& \textbf{ get\+Binom} () const
+\item 
+auto const  \& \textbf{ get\+Intercept} () const
+\item 
+auto const  \& \textbf{ get\+Order} () const
+\item 
+auto const  \& \textbf{ get\+Slope} () const
+\item 
+auto const  \& \textbf{ get\+Trinom} () const
+\item 
+void \textbf{ Initialize} ()
+\item 
+bool const  \& \textbf{ is\+Filled} () const
+\item 
+bool \textbf{ load} (std\+::string const \&calib\+File\+Name)
+\item 
+void \textbf{ load\+Faster\+Data} (std\+::string const \&data\+Dir, int const \&nb\+\_\+files=-\/1)
+\item 
+void \textbf{ load\+Root\+Data} (std\+::string const \&data\+Dir, int const \&nb\+\_\+files=-\/1)
+\item 
+void \textbf{ load\+Root\+Histo} (std\+::string const \&\textbf{ histograms})
+\item 
+\textbf{ operator bool} () const \&
+\item 
+{\footnotesize template$<$class... ARGS$>$ }\\auto \textbf{ operator()} (ARGS \&\&... args) const
+\begin{DoxyCompactList}\small\item\em Call for calibrate method. \end{DoxyCompactList}\item 
+\textbf{ Calibration} const  \& \textbf{ operator=} (\textbf{ Calibration} const \&other\+Calib)
+\begin{DoxyCompactList}\small\item\em Copy operator. \end{DoxyCompactList}\item 
+\textbf{ Calibration} const  \& \textbf{ operator=} (std\+::string const \&calib\+File\+Name)
+\item 
+std\+::vector$<$ \textbf{ NRJ} $>$ \textbf{ operator[$\,$]} (\textbf{ Label} const \&label) const
+\item 
+void \textbf{ peak\+Finder} (std\+::string const \&source)
+\item 
+void \textbf{ Print} ()
+\item 
+void \textbf{ set\+Calibration\+Tables} ()
+\item 
+void \textbf{ set\+Source} (std\+::string const \&source)
+\item 
+auto const  \& \textbf{ size} () const
+\begin{DoxyCompactList}\small\item\em DEV. \end{DoxyCompactList}\item 
+void \textbf{ verbose} (bool const \&\+\_\+verbose)
+\item 
+void \textbf{ verify} (std\+::string const \&outfilename=\char`\"{}verify\char`\"{})
+\item 
+void \textbf{ write\+Calibrated\+Data} (std\+::string const \&outfilename)
+\item 
+void \textbf{ write\+Calibrated\+Histo} (std\+::string const \&outfilename)
+\item 
+void \textbf{ write\+Data} (std\+::string const \&outfilename)
+\item 
+void \textbf{ write\+Pos\+Peaks} (std\+::string const \&outfilename)
+\item 
+void \textbf{ write\+Raw\+Root} (std\+::string const \&outfilename)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \textbf{ fill\+Histo} (\textbf{ Hit} \&hit, \textbf{ Faster\+Reader} \&reader, \textbf{ Calibration} \&calib)
+\item 
+static void \textbf{ load\+Root\+Data\+Thread} (\textbf{ Calibration} \&calib, \textbf{ MTList} \&list)
+\item 
+static void \textbf{ treat\+Only\+Ge} (bool const \&b=true)
+\item 
+static void \textbf{ treat\+Only\+Paris} (bool const \&b=true)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+struct \textbf{ Calibration\+::histograms} \textbf{ m\+\_\+histos}
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \textbf{ set} (\textbf{ Label} label, \textbf{ NRJ} intercept, \textbf{ NRJ} slope, \textbf{ NRJ} binom, \textbf{ NRJ} trinom)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ std\+::vector$<$ std\+::vector$<$ \textbf{ NRJ} $>$ $>$ $>$ \textbf{ calibration\+\_\+tables}
+\item 
+std\+::vector$<$ \textbf{ NRJ} $>$ \textbf{ m\+\_\+binom}
+\item 
+bool \textbf{ m\+\_\+calibrate\+\_\+data} = false
+\item 
+std\+::string \textbf{ m\+\_\+filename} = \char`\"{}\char`\"{}
+\item 
+\textbf{ Fits} \textbf{ m\+\_\+fits}
+\item 
+std\+::vector$<$ \textbf{ NRJ} $>$ \textbf{ m\+\_\+intercept}
+\item 
+\textbf{ Label} \textbf{ m\+\_\+nb\+\_\+detectors} = 0
+\item 
+bool \textbf{ m\+\_\+ok} = false
+\item 
+std\+::vector$<$ char $>$ \textbf{ m\+\_\+order}
+\item 
+std\+::string \textbf{ m\+\_\+out\+Calib} = \char`\"{}\char`\"{}
+\item 
+std\+::string \textbf{ m\+\_\+out\+Dir} = \char`\"{}Calibration/\char`\"{}
+\item 
+std\+::string \textbf{ m\+\_\+out\+Root} = \char`\"{}calibration.\+root\char`\"{}
+\item 
+bool \textbf{ m\+\_\+out\+Root\+\_\+b} = false
+\item 
+bool \textbf{ m\+\_\+residus} = false
+\item 
+\textbf{ Label} \textbf{ m\+\_\+size} = 0
+\item 
+std\+::vector$<$ \textbf{ NRJ} $>$ \textbf{ m\+\_\+slope}
+\item 
+std\+::string \textbf{ m\+\_\+source} = \char`\"{}\char`\"{}
+\item 
+std\+::vector$<$ \textbf{ NRJ} $>$ \textbf{ m\+\_\+trinom}
+\item 
+bool \textbf{ m\+\_\+verbose} = false
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static bool \textbf{ m\+\_\+treat\+Only\+Ge} = false
+\item 
+static bool \textbf{ m\+\_\+treat\+Only\+Paris} = false
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyRefDesc}{Todo}
+\item[\textbf{ Todo}]\doxyref{Calibration\+::verify()}{p.}{class_calibration_a344dc3d6feab3580e859cc693c2fdd4a} DO NOT SUPPORT \doxyref{MTObject}{p.}{class_m_t_object} !! \end{DoxyRefDesc}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\label{class_calibration_a80f51a5ff7ec0f44d5388c9a61d1f20b}} 
+\index{Calibration@{Calibration}!Calibration@{Calibration}}
+\index{Calibration@{Calibration}!Calibration@{Calibration}}
+\doxysubsubsection{Calibration()\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily Calibration\+::\+Calibration (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_calibration_a8e35cee6894b7e32cb4e6dcbbe26a0c4}} 
+\index{Calibration@{Calibration}!Calibration@{Calibration}}
+\index{Calibration@{Calibration}!Calibration@{Calibration}}
+\doxysubsubsection{Calibration()\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily Calibration\+::\+Calibration (\begin{DoxyParamCaption}\item[{\textbf{ Calibration} const \&}]{other\+Calib }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Copy constructor. 
+
+\mbox{\label{class_calibration_a7f6c78bdfc53cf5adc6ec67c2f182f16}} 
+\index{Calibration@{Calibration}!Calibration@{Calibration}}
+\index{Calibration@{Calibration}!Calibration@{Calibration}}
+\doxysubsubsection{Calibration()\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily Calibration\+::\+Calibration (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{calib\+File\+Name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Loading calibration from file name. 
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_calibration_a7f6c78bdfc53cf5adc6ec67c2f182f16_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_calibration_a336bd1a54676bff92a192e8df26232ac}} 
+\index{Calibration@{Calibration}!Calibration@{Calibration}}
+\index{Calibration@{Calibration}!Calibration@{Calibration}}
+\doxysubsubsection{Calibration()\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily Calibration\+::\+Calibration (\begin{DoxyParamCaption}\item[{const char $\ast$}]{calib\+File\+Name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_calibration_a336bd1a54676bff92a192e8df26232ac_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\label{class_calibration_ae6bbaf8b283a345c9936a907fcba1849}} 
+\index{Calibration@{Calibration}!analyse@{analyse}}
+\index{analyse@{analyse}!Calibration@{Calibration}}
+\doxysubsubsection{analyse()}
+{\footnotesize\ttfamily void Calibration\+::analyse (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{source = {\ttfamily \char`\"{}152Eu\char`\"{}} }\end{DoxyParamCaption})}
+
+
+
+Analyse the spectra to extract calibration coefficients. 
+
+The peak finding follows the following principle \+: We start from the bin at the very right side of the spectra. Then we add the value of the bin to the integral counter. Then we add the value of the next bin on the left, then the next, etc.. That is, we integrate the spectra from right to left The moment the first peak is found, the higher energy one, the integral will suddenly increase Then we have to determine a threshold above which we say \char`\"{}we have found the first peak\char`\"{} From this we determine a really rough first linear calibration. This allows us to find, for each other peak, an energy windows in which it should be. Once this window established, we find its centroid. Then we create a smaller window and find again the centroid. A third window (which may not me important ?) event narrower is set around the peak. Then the peak is fitted and the mean value of the gaussian fit added to the calibration curve. Finally, the fit of the calibration curve gives the calibration coefficients.
+
+The threshold is taken as the ratio between the integral and the total integral of the spectra, so that the process do not depend neither on different counting rates nor on different calibration duration. Only issue \+: it depends on the kind of detector and to some extend to the geometry. That is, this calibration is not well suited for paris detectors... Also, if a peak is absent due to for instance high energy threshold of the detector (typically 121keV of 152Eu is absent in some noisy channels) then the calibration will fail
+
+\begin{DoxyAttention}{Attention}
+The most difficult part is to find the value of the threshold, wich must be different for each kind of detector. If it is different for differents detectors of the same type (e.\+g. paris) then the calibration requires additionnal work.
+
+Take care of the binning of the spectra. If there is too much or not enough bins then the peak fitting will fail, if the maximum ADC value is lower than the higher energy peak then the peak findind will fail. Also, everything supposes the minimum bin corresponds to 0, otherwise it might fail. 
+\end{DoxyAttention}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_calibration_ae6bbaf8b283a345c9936a907fcba1849_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_calibration_ae6bbaf8b283a345c9936a907fcba1849_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_calibration_aa7e921cbc724d97d1a3ef30a4f988e63}} 
+\index{Calibration@{Calibration}!calculate@{calculate}}
+\index{calculate@{calculate}!Calibration@{Calibration}}
+\doxysubsubsection{calculate()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Calibration\+::calculate (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{data\+Dir,  }\item[{int}]{nb\+\_\+files = {\ttfamily -\/1},  }\item[{std\+::string const \&}]{source = {\ttfamily \char`\"{}152Eu\char`\"{}},  }\item[{std\+::string const \&}]{type = {\ttfamily \char`\"{}fast\char`\"{}} }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_calibration_aa7e921cbc724d97d1a3ef30a4f988e63_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_calibration_a178a349d575d8f0e8b090f828def78b6}} 
+\index{Calibration@{Calibration}!calculate@{calculate}}
+\index{calculate@{calculate}!Calibration@{Calibration}}
+\doxysubsubsection{calculate()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Calibration\+::calculate (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{histograms,  }\item[{std\+::string const \&}]{source = {\ttfamily \char`\"{}152Eu\char`\"{}} }\end{DoxyParamCaption})}
+
+
+
+Calculate calibration from .root histograms. 
+
+\begin{DoxyAttention}{Attention}
+TODO 
+\end{DoxyAttention}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_calibration_a178a349d575d8f0e8b090f828def78b6_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_calibration_a1732880c01e21df259b4ff45dba24c59}} 
+\index{Calibration@{Calibration}!calibrate@{calibrate}}
+\index{calibrate@{calibrate}!Calibration@{Calibration}}
+\doxysubsubsection{calibrate()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Calibration\+::calibrate (\begin{DoxyParamCaption}\item[{\textbf{ Hit} \&}]{hit }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+avoid using this one 
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_calibration_a1732880c01e21df259b4ff45dba24c59_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_calibration_aa09b700f10eaaa69a97a0cc6da973a06}} 
+\index{Calibration@{Calibration}!calibrate@{calibrate}}
+\index{calibrate@{calibrate}!Calibration@{Calibration}}
+\doxysubsubsection{calibrate()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \textbf{ NRJ} Calibration\+::calibrate (\begin{DoxyParamCaption}\item[{\textbf{ NRJ} const \&}]{nrj,  }\item[{\textbf{ Label} const \&}]{label }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+calibrate the ADC value using the parameters extracted from the calibration data 
+
+calibrate the nrj value using the parameters extracted from the calibration data Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_calibration_aa09b700f10eaaa69a97a0cc6da973a06_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_calibration_a1fd883ea005baf150b37cdf8ccf68014}} 
+\index{Calibration@{Calibration}!calibrate\_data@{calibrate\_data}}
+\index{calibrate\_data@{calibrate\_data}!Calibration@{Calibration}}
+\doxysubsubsection{calibrate\_data()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily bool const\& Calibration\+::calibrate\+\_\+data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_calibration_a0b91d7d6484d4c4b8af93a0709b94291}} 
+\index{Calibration@{Calibration}!calibrate\_data@{calibrate\_data}}
+\index{calibrate\_data@{calibrate\_data}!Calibration@{Calibration}}
+\doxysubsubsection{calibrate\_data()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily bool const\& Calibration\+::calibrate\+\_\+data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_calibration_a0b91d7d6484d4c4b8af93a0709b94291_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_calibration_a5931047806db77858db6886d041db100}} 
+\index{Calibration@{Calibration}!calibrateFasterData@{calibrateFasterData}}
+\index{calibrateFasterData@{calibrateFasterData}!Calibration@{Calibration}}
+\doxysubsubsection{calibrateFasterData()}
+{\footnotesize\ttfamily void Calibration\+::calibrate\+Faster\+Data (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{folder,  }\item[{int const \&}]{nb\+\_\+files = {\ttfamily -\/1} }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_calibration_a5931047806db77858db6886d041db100_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_calibration_ac7678b0524f8407659a9594b3862e5c3}} 
+\index{Calibration@{Calibration}!calibrateRootData@{calibrateRootData}}
+\index{calibrateRootData@{calibrateRootData}!Calibration@{Calibration}}
+\doxysubsubsection{calibrateRootData()}
+{\footnotesize\ttfamily void Calibration\+::calibrate\+Root\+Data (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{folder,  }\item[{int const \&}]{nb\+\_\+files = {\ttfamily -\/1} }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_calibration_ac7678b0524f8407659a9594b3862e5c3_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_calibration_acfdcf94af247e6907aa09d086c1e4186}} 
+\index{Calibration@{Calibration}!file@{file}}
+\index{file@{file}!Calibration@{Calibration}}
+\doxysubsubsection{file()}
+{\footnotesize\ttfamily auto const\& Calibration\+::file (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_calibration_acfdcf94af247e6907aa09d086c1e4186_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_calibration_ae62aaba8d0f0f77aecf89a5ad1e7605a}} 
+\index{Calibration@{Calibration}!fillHisto@{fillHisto}}
+\index{fillHisto@{fillHisto}!Calibration@{Calibration}}
+\doxysubsubsection{fillHisto()}
+{\footnotesize\ttfamily void Calibration\+::fill\+Histo (\begin{DoxyParamCaption}\item[{\textbf{ Hit} \&}]{hit,  }\item[{\textbf{ Faster\+Reader} \&}]{reader,  }\item[{\textbf{ Calibration} \&}]{calib }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_calibration_ae62aaba8d0f0f77aecf89a5ad1e7605a_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_calibration_ae62aaba8d0f0f77aecf89a5ad1e7605a_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_calibration_afd14ef8f1b6cee6cf7abc10783ee318e}} 
+\index{Calibration@{Calibration}!fillRootDataHisto@{fillRootDataHisto}}
+\index{fillRootDataHisto@{fillRootDataHisto}!Calibration@{Calibration}}
+\doxysubsubsection{fillRootDataHisto()}
+{\footnotesize\ttfamily void Calibration\+::fill\+Root\+Data\+Histo (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{filename }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_calibration_afd14ef8f1b6cee6cf7abc10783ee318e_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_calibration_afd14ef8f1b6cee6cf7abc10783ee318e_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_calibration_aea14328cc8a0ab1cf559cd07f8c6a065}} 
+\index{Calibration@{Calibration}!fitCalibration@{fitCalibration}}
+\index{fitCalibration@{fitCalibration}!Calibration@{Calibration}}
+\doxysubsubsection{fitCalibration()}
+{\footnotesize\ttfamily void Calibration\+::fit\+Calibration (\begin{DoxyParamCaption}\item[{\textbf{ Fits} \&}]{fits }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_calibration_aea14328cc8a0ab1cf559cd07f8c6a065_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_calibration_aea14328cc8a0ab1cf559cd07f8c6a065_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_calibration_a723ff9aee7af762a1b7302472008f97b}} 
+\index{Calibration@{Calibration}!getBinom@{getBinom}}
+\index{getBinom@{getBinom}!Calibration@{Calibration}}
+\doxysubsubsection{getBinom()}
+{\footnotesize\ttfamily auto const\& Calibration\+::get\+Binom (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_calibration_aedbbf3043605ea4bce5044113484b5dd}} 
+\index{Calibration@{Calibration}!getIntercept@{getIntercept}}
+\index{getIntercept@{getIntercept}!Calibration@{Calibration}}
+\doxysubsubsection{getIntercept()}
+{\footnotesize\ttfamily auto const\& Calibration\+::get\+Intercept (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_calibration_a24ea2b9275978de50b573394840c1f37}} 
+\index{Calibration@{Calibration}!getOrder@{getOrder}}
+\index{getOrder@{getOrder}!Calibration@{Calibration}}
+\doxysubsubsection{getOrder()}
+{\footnotesize\ttfamily auto const\& Calibration\+::get\+Order (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_calibration_abb43af389c40ed02d3bf982ceeb3a8a1}} 
+\index{Calibration@{Calibration}!getSlope@{getSlope}}
+\index{getSlope@{getSlope}!Calibration@{Calibration}}
+\doxysubsubsection{getSlope()}
+{\footnotesize\ttfamily auto const\& Calibration\+::get\+Slope (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_calibration_a5cb5385a26267978aa3b9c2846c76ebd}} 
+\index{Calibration@{Calibration}!getTrinom@{getTrinom}}
+\index{getTrinom@{getTrinom}!Calibration@{Calibration}}
+\doxysubsubsection{getTrinom()}
+{\footnotesize\ttfamily auto const\& Calibration\+::get\+Trinom (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_calibration_a2f91a6803bf8008bd7b748d4a1688338}} 
+\index{Calibration@{Calibration}!Initialize@{Initialize}}
+\index{Initialize@{Initialize}!Calibration@{Calibration}}
+\doxysubsubsection{Initialize()}
+{\footnotesize\ttfamily void Calibration\+::\+Initialize (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_calibration_a2f91a6803bf8008bd7b748d4a1688338_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_calibration_a2f91a6803bf8008bd7b748d4a1688338_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_calibration_abbc453abf77e6b7a2a10cebd21021578}} 
+\index{Calibration@{Calibration}!isFilled@{isFilled}}
+\index{isFilled@{isFilled}!Calibration@{Calibration}}
+\doxysubsubsection{isFilled()}
+{\footnotesize\ttfamily bool const\& Calibration\+::is\+Filled (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_calibration_a2d2a0d6276fc2c8a4b60c3801ccc16a9}} 
+\index{Calibration@{Calibration}!load@{load}}
+\index{load@{load}!Calibration@{Calibration}}
+\doxysubsubsection{load()}
+{\footnotesize\ttfamily bool Calibration\+::load (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{calib\+File\+Name }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_calibration_a2d2a0d6276fc2c8a4b60c3801ccc16a9_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_calibration_a2d2a0d6276fc2c8a4b60c3801ccc16a9_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_calibration_a6514307ca111ecc5d6f02694373dc5ec}} 
+\index{Calibration@{Calibration}!loadFasterData@{loadFasterData}}
+\index{loadFasterData@{loadFasterData}!Calibration@{Calibration}}
+\doxysubsubsection{loadFasterData()}
+{\footnotesize\ttfamily void Calibration\+::load\+Faster\+Data (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{data\+Dir,  }\item[{int const \&}]{nb\+\_\+files = {\ttfamily -\/1} }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_calibration_a6514307ca111ecc5d6f02694373dc5ec_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_calibration_a6514307ca111ecc5d6f02694373dc5ec_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_calibration_a6d6d354f65db38acf12addf1efb7c815}} 
+\index{Calibration@{Calibration}!loadRootData@{loadRootData}}
+\index{loadRootData@{loadRootData}!Calibration@{Calibration}}
+\doxysubsubsection{loadRootData()}
+{\footnotesize\ttfamily void Calibration\+::load\+Root\+Data (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{data\+Dir,  }\item[{int const \&}]{nb\+\_\+files = {\ttfamily -\/1} }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_calibration_a6d6d354f65db38acf12addf1efb7c815_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_calibration_a6d6d354f65db38acf12addf1efb7c815_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_calibration_a58f794ed6862bc71c09b440e63ea94f1}} 
+\index{Calibration@{Calibration}!loadRootDataThread@{loadRootDataThread}}
+\index{loadRootDataThread@{loadRootDataThread}!Calibration@{Calibration}}
+\doxysubsubsection{loadRootDataThread()}
+{\footnotesize\ttfamily void Calibration\+::load\+Root\+Data\+Thread (\begin{DoxyParamCaption}\item[{\textbf{ Calibration} \&}]{calib,  }\item[{\textbf{ MTList} \&}]{list }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_calibration_a58f794ed6862bc71c09b440e63ea94f1_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_calibration_a58f794ed6862bc71c09b440e63ea94f1_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_calibration_a7835b1d9192d2c9fa8dcd8efbceb8db3}} 
+\index{Calibration@{Calibration}!loadRootHisto@{loadRootHisto}}
+\index{loadRootHisto@{loadRootHisto}!Calibration@{Calibration}}
+\doxysubsubsection{loadRootHisto()}
+{\footnotesize\ttfamily void Calibration\+::load\+Root\+Histo (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{histograms }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_calibration_a7835b1d9192d2c9fa8dcd8efbceb8db3_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_calibration_a5c7e1af9dbc7e67aee28e8da897fb29e}} 
+\index{Calibration@{Calibration}!operator bool@{operator bool}}
+\index{operator bool@{operator bool}!Calibration@{Calibration}}
+\doxysubsubsection{operator bool()}
+{\footnotesize\ttfamily Calibration\+::operator bool (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const \&\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_calibration_a7765db4a6f5a278f82d1462bde812c32}} 
+\index{Calibration@{Calibration}!operator()@{operator()}}
+\index{operator()@{operator()}!Calibration@{Calibration}}
+\doxysubsubsection{operator()()}
+{\footnotesize\ttfamily template$<$class... ARGS$>$ \\
+auto Calibration\+::operator() (\begin{DoxyParamCaption}\item[{ARGS \&\&...}]{args }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Call for calibrate method. 
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_calibration_a7765db4a6f5a278f82d1462bde812c32_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_calibration_a8dccc9ef965732a47d4d47df551baa39}} 
+\index{Calibration@{Calibration}!operator=@{operator=}}
+\index{operator=@{operator=}!Calibration@{Calibration}}
+\doxysubsubsection{operator=()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \textbf{ Calibration} const\& Calibration\+::operator= (\begin{DoxyParamCaption}\item[{\textbf{ Calibration} const \&}]{other\+Calib }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Copy operator. 
+
+\mbox{\label{class_calibration_ab070c5678eee652bbb3186e6cbd37b9e}} 
+\index{Calibration@{Calibration}!operator=@{operator=}}
+\index{operator=@{operator=}!Calibration@{Calibration}}
+\doxysubsubsection{operator=()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \textbf{ Calibration} const\& Calibration\+::operator= (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{calib\+File\+Name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_calibration_ab070c5678eee652bbb3186e6cbd37b9e_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_calibration_aa05242b317e800e0c3661e03f219fd19}} 
+\index{Calibration@{Calibration}!operator[]@{operator[]}}
+\index{operator[]@{operator[]}!Calibration@{Calibration}}
+\doxysubsubsection{operator[]()}
+{\footnotesize\ttfamily std\+::vector$<$\textbf{ NRJ}$>$ Calibration\+::operator[$\,$] (\begin{DoxyParamCaption}\item[{\textbf{ Label} const \&}]{label }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_calibration_ad6db2742477c8ac64787c6fe8a687aff}} 
+\index{Calibration@{Calibration}!peakFinder@{peakFinder}}
+\index{peakFinder@{peakFinder}!Calibration@{Calibration}}
+\doxysubsubsection{peakFinder()}
+{\footnotesize\ttfamily void Calibration\+::peak\+Finder (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{source }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_calibration_ad6db2742477c8ac64787c6fe8a687aff_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_calibration_ad6db2742477c8ac64787c6fe8a687aff_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_calibration_aaba010db225b8b01931d013eefda800b}} 
+\index{Calibration@{Calibration}!Print@{Print}}
+\index{Print@{Print}!Calibration@{Calibration}}
+\doxysubsubsection{Print()}
+{\footnotesize\ttfamily void Calibration\+::\+Print (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\label{class_calibration_ab1502564e126e769e782d221d42608c7}} 
+\index{Calibration@{Calibration}!set@{set}}
+\index{set@{set}!Calibration@{Calibration}}
+\doxysubsubsection{set()}
+{\footnotesize\ttfamily void Calibration\+::set (\begin{DoxyParamCaption}\item[{\textbf{ Label}}]{label,  }\item[{\textbf{ NRJ}}]{intercept = {\ttfamily 0.f},  }\item[{\textbf{ NRJ}}]{slope = {\ttfamily 1.f},  }\item[{\textbf{ NRJ}}]{binom = {\ttfamily 0.f},  }\item[{\textbf{ NRJ}}]{trinom = {\ttfamily 0.f} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_calibration_ab1502564e126e769e782d221d42608c7_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_calibration_a72f3838ece8f07239511fac7c09b1e8c}} 
+\index{Calibration@{Calibration}!setCalibrationTables@{setCalibrationTables}}
+\index{setCalibrationTables@{setCalibrationTables}!Calibration@{Calibration}}
+\doxysubsubsection{setCalibrationTables()}
+{\footnotesize\ttfamily void Calibration\+::set\+Calibration\+Tables (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=299pt]{class_calibration_a72f3838ece8f07239511fac7c09b1e8c_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_calibration_a1309d57acace816189615a841b38e45e}} 
+\index{Calibration@{Calibration}!setSource@{setSource}}
+\index{setSource@{setSource}!Calibration@{Calibration}}
+\doxysubsubsection{setSource()}
+{\footnotesize\ttfamily void Calibration\+::set\+Source (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{source }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_calibration_ac4b8f57b3d896cda20a6aa3ba04a78e7}} 
+\index{Calibration@{Calibration}!size@{size}}
+\index{size@{size}!Calibration@{Calibration}}
+\doxysubsubsection{size()}
+{\footnotesize\ttfamily auto const\& Calibration\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+DEV. 
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_calibration_ac4b8f57b3d896cda20a6aa3ba04a78e7_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_calibration_ae0589067deaac25425e5db02d8c06551}} 
+\index{Calibration@{Calibration}!treatOnlyGe@{treatOnlyGe}}
+\index{treatOnlyGe@{treatOnlyGe}!Calibration@{Calibration}}
+\doxysubsubsection{treatOnlyGe()}
+{\footnotesize\ttfamily static void Calibration\+::treat\+Only\+Ge (\begin{DoxyParamCaption}\item[{bool const \&}]{b = {\ttfamily true} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\mbox{\label{class_calibration_ac6510b729a9d8f0803760c2939527df5}} 
+\index{Calibration@{Calibration}!treatOnlyParis@{treatOnlyParis}}
+\index{treatOnlyParis@{treatOnlyParis}!Calibration@{Calibration}}
+\doxysubsubsection{treatOnlyParis()}
+{\footnotesize\ttfamily static void Calibration\+::treat\+Only\+Paris (\begin{DoxyParamCaption}\item[{bool const \&}]{b = {\ttfamily true} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\mbox{\label{class_calibration_ad7edc19a4eb1ea5d4af680152ce14521}} 
+\index{Calibration@{Calibration}!verbose@{verbose}}
+\index{verbose@{verbose}!Calibration@{Calibration}}
+\doxysubsubsection{verbose()}
+{\footnotesize\ttfamily void Calibration\+::verbose (\begin{DoxyParamCaption}\item[{bool const \&}]{\+\_\+verbose }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_calibration_a344dc3d6feab3580e859cc693c2fdd4a}} 
+\index{Calibration@{Calibration}!verify@{verify}}
+\index{verify@{verify}!Calibration@{Calibration}}
+\doxysubsubsection{verify()}
+{\footnotesize\ttfamily void Calibration\+::verify (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{outfilename = {\ttfamily \char`\"{}verify\char`\"{}} }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_calibration_a344dc3d6feab3580e859cc693c2fdd4a_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_calibration_a6ad79450d0bb55baa744f6436f84dbbe}} 
+\index{Calibration@{Calibration}!writeCalibratedData@{writeCalibratedData}}
+\index{writeCalibratedData@{writeCalibratedData}!Calibration@{Calibration}}
+\doxysubsubsection{writeCalibratedData()}
+{\footnotesize\ttfamily void Calibration\+::write\+Calibrated\+Data (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{outfilename }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=329pt]{class_calibration_a6ad79450d0bb55baa744f6436f84dbbe_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_calibration_a8ff8375eee244f2b22b86914a1d559bc}} 
+\index{Calibration@{Calibration}!writeCalibratedHisto@{writeCalibratedHisto}}
+\index{writeCalibratedHisto@{writeCalibratedHisto}!Calibration@{Calibration}}
+\doxysubsubsection{writeCalibratedHisto()}
+{\footnotesize\ttfamily void Calibration\+::write\+Calibrated\+Histo (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{outfilename }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=306pt]{class_calibration_a8ff8375eee244f2b22b86914a1d559bc_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_calibration_a8ff8375eee244f2b22b86914a1d559bc_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_calibration_a7e89a0c788e7ad97c2a9cea5e02ef3f2}} 
+\index{Calibration@{Calibration}!writeData@{writeData}}
+\index{writeData@{writeData}!Calibration@{Calibration}}
+\doxysubsubsection{writeData()}
+{\footnotesize\ttfamily void Calibration\+::write\+Data (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{outfilename }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_calibration_a7e89a0c788e7ad97c2a9cea5e02ef3f2_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_calibration_a7e89a0c788e7ad97c2a9cea5e02ef3f2_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_calibration_a53565d0fe7d92fd6d5d94eee5a97f1b8}} 
+\index{Calibration@{Calibration}!writePosPeaks@{writePosPeaks}}
+\index{writePosPeaks@{writePosPeaks}!Calibration@{Calibration}}
+\doxysubsubsection{writePosPeaks()}
+{\footnotesize\ttfamily void Calibration\+::write\+Pos\+Peaks (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{outfilename }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_calibration_a53565d0fe7d92fd6d5d94eee5a97f1b8_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_calibration_a062cb134d4b82246ba9c89c567a32963}} 
+\index{Calibration@{Calibration}!writeRawRoot@{writeRawRoot}}
+\index{writeRawRoot@{writeRawRoot}!Calibration@{Calibration}}
+\doxysubsubsection{writeRawRoot()}
+{\footnotesize\ttfamily void Calibration\+::write\+Raw\+Root (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{outfilename }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_calibration_a062cb134d4b82246ba9c89c567a32963_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_calibration_a062cb134d4b82246ba9c89c567a32963_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\label{class_calibration_a6872e57ee372f02373cc14bae2254554}} 
+\index{Calibration@{Calibration}!calibration\_tables@{calibration\_tables}}
+\index{calibration\_tables@{calibration\_tables}!Calibration@{Calibration}}
+\doxysubsubsection{calibration\_tables}
+{\footnotesize\ttfamily std\+::vector$<$std\+::vector$<$std\+::vector$<$\textbf{ NRJ}$>$ $>$ $>$ Calibration\+::calibration\+\_\+tables\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_calibration_a1095b50522f8d002fc52e0c048c65bc6}} 
+\index{Calibration@{Calibration}!m\_binom@{m\_binom}}
+\index{m\_binom@{m\_binom}!Calibration@{Calibration}}
+\doxysubsubsection{m\_binom}
+{\footnotesize\ttfamily std\+::vector$<$\textbf{ NRJ}$>$ Calibration\+::m\+\_\+binom\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_calibration_afa4ecd691e71e5b13504bfe7d71950ac}} 
+\index{Calibration@{Calibration}!m\_calibrate\_data@{m\_calibrate\_data}}
+\index{m\_calibrate\_data@{m\_calibrate\_data}!Calibration@{Calibration}}
+\doxysubsubsection{m\_calibrate\_data}
+{\footnotesize\ttfamily bool Calibration\+::m\+\_\+calibrate\+\_\+data = false\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_calibration_ada2b7de482524ffd3e0a9b6038e3d6de}} 
+\index{Calibration@{Calibration}!m\_filename@{m\_filename}}
+\index{m\_filename@{m\_filename}!Calibration@{Calibration}}
+\doxysubsubsection{m\_filename}
+{\footnotesize\ttfamily std\+::string Calibration\+::m\+\_\+filename = \char`\"{}\char`\"{}\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_calibration_ad17169e9dbae0e5ec2e63f60f1eebdf3}} 
+\index{Calibration@{Calibration}!m\_fits@{m\_fits}}
+\index{m\_fits@{m\_fits}!Calibration@{Calibration}}
+\doxysubsubsection{m\_fits}
+{\footnotesize\ttfamily \textbf{ Fits} Calibration\+::m\+\_\+fits\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_calibration_ac431b30e91e0ccab87e5488af8fcce2a}} 
+\index{Calibration@{Calibration}!m\_histos@{m\_histos}}
+\index{m\_histos@{m\_histos}!Calibration@{Calibration}}
+\doxysubsubsection{m\_histos}
+{\footnotesize\ttfamily struct \textbf{ Calibration\+::histograms} Calibration\+::m\+\_\+histos}
+
+\mbox{\label{class_calibration_a49f4d0c50b9f7d705fe9b0ddd787722f}} 
+\index{Calibration@{Calibration}!m\_intercept@{m\_intercept}}
+\index{m\_intercept@{m\_intercept}!Calibration@{Calibration}}
+\doxysubsubsection{m\_intercept}
+{\footnotesize\ttfamily std\+::vector$<$\textbf{ NRJ}$>$ Calibration\+::m\+\_\+intercept\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_calibration_a2988b922363b5d090771be9961254cbc}} 
+\index{Calibration@{Calibration}!m\_nb\_detectors@{m\_nb\_detectors}}
+\index{m\_nb\_detectors@{m\_nb\_detectors}!Calibration@{Calibration}}
+\doxysubsubsection{m\_nb\_detectors}
+{\footnotesize\ttfamily \textbf{ Label} Calibration\+::m\+\_\+nb\+\_\+detectors = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_calibration_aea5e9bf6d006f5e26702953552e97dec}} 
+\index{Calibration@{Calibration}!m\_ok@{m\_ok}}
+\index{m\_ok@{m\_ok}!Calibration@{Calibration}}
+\doxysubsubsection{m\_ok}
+{\footnotesize\ttfamily bool Calibration\+::m\+\_\+ok = false\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_calibration_aebce8e9b03e8a2c8b51c0204e81bcd76}} 
+\index{Calibration@{Calibration}!m\_order@{m\_order}}
+\index{m\_order@{m\_order}!Calibration@{Calibration}}
+\doxysubsubsection{m\_order}
+{\footnotesize\ttfamily std\+::vector$<$char$>$ Calibration\+::m\+\_\+order\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_calibration_aac1e6d5d59bbe89c95efa142544bf754}} 
+\index{Calibration@{Calibration}!m\_outCalib@{m\_outCalib}}
+\index{m\_outCalib@{m\_outCalib}!Calibration@{Calibration}}
+\doxysubsubsection{m\_outCalib}
+{\footnotesize\ttfamily std\+::string Calibration\+::m\+\_\+out\+Calib = \char`\"{}\char`\"{}\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_calibration_aeb59e25057913962bc8ee43d9567e024}} 
+\index{Calibration@{Calibration}!m\_outDir@{m\_outDir}}
+\index{m\_outDir@{m\_outDir}!Calibration@{Calibration}}
+\doxysubsubsection{m\_outDir}
+{\footnotesize\ttfamily std\+::string Calibration\+::m\+\_\+out\+Dir = \char`\"{}Calibration/\char`\"{}\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_calibration_a29b20b0d12f1b9226e1e8c9355e54e09}} 
+\index{Calibration@{Calibration}!m\_outRoot@{m\_outRoot}}
+\index{m\_outRoot@{m\_outRoot}!Calibration@{Calibration}}
+\doxysubsubsection{m\_outRoot}
+{\footnotesize\ttfamily std\+::string Calibration\+::m\+\_\+out\+Root = \char`\"{}calibration.\+root\char`\"{}\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_calibration_a70510eaabac228f419cf7c253055292d}} 
+\index{Calibration@{Calibration}!m\_outRoot\_b@{m\_outRoot\_b}}
+\index{m\_outRoot\_b@{m\_outRoot\_b}!Calibration@{Calibration}}
+\doxysubsubsection{m\_outRoot\_b}
+{\footnotesize\ttfamily bool Calibration\+::m\+\_\+out\+Root\+\_\+b = false\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_calibration_af45a5eab10d1d3eb0b15a34baf1908c7}} 
+\index{Calibration@{Calibration}!m\_residus@{m\_residus}}
+\index{m\_residus@{m\_residus}!Calibration@{Calibration}}
+\doxysubsubsection{m\_residus}
+{\footnotesize\ttfamily bool Calibration\+::m\+\_\+residus = false\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_calibration_a8b66733b050e8743b1887fbed7284269}} 
+\index{Calibration@{Calibration}!m\_size@{m\_size}}
+\index{m\_size@{m\_size}!Calibration@{Calibration}}
+\doxysubsubsection{m\_size}
+{\footnotesize\ttfamily \textbf{ Label} Calibration\+::m\+\_\+size = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_calibration_a0a42451d9596c8378387169d08c6000b}} 
+\index{Calibration@{Calibration}!m\_slope@{m\_slope}}
+\index{m\_slope@{m\_slope}!Calibration@{Calibration}}
+\doxysubsubsection{m\_slope}
+{\footnotesize\ttfamily std\+::vector$<$\textbf{ NRJ}$>$ Calibration\+::m\+\_\+slope\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_calibration_a9057002e470a0cb2f7b6353ebf8ceb1f}} 
+\index{Calibration@{Calibration}!m\_source@{m\_source}}
+\index{m\_source@{m\_source}!Calibration@{Calibration}}
+\doxysubsubsection{m\_source}
+{\footnotesize\ttfamily std\+::string Calibration\+::m\+\_\+source = \char`\"{}\char`\"{}\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_calibration_a75bc8afd8de82f44b5e698aab02ebedc}} 
+\index{Calibration@{Calibration}!m\_treatOnlyGe@{m\_treatOnlyGe}}
+\index{m\_treatOnlyGe@{m\_treatOnlyGe}!Calibration@{Calibration}}
+\doxysubsubsection{m\_treatOnlyGe}
+{\footnotesize\ttfamily bool Calibration\+::m\+\_\+treat\+Only\+Ge = false\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\mbox{\label{class_calibration_a5198af653597c26d18433c6f28bdc171}} 
+\index{Calibration@{Calibration}!m\_treatOnlyParis@{m\_treatOnlyParis}}
+\index{m\_treatOnlyParis@{m\_treatOnlyParis}!Calibration@{Calibration}}
+\doxysubsubsection{m\_treatOnlyParis}
+{\footnotesize\ttfamily bool Calibration\+::m\+\_\+treat\+Only\+Paris = false\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\mbox{\label{class_calibration_a33557fc219e93f9afe9ae38e12e649b7}} 
+\index{Calibration@{Calibration}!m\_trinom@{m\_trinom}}
+\index{m\_trinom@{m\_trinom}!Calibration@{Calibration}}
+\doxysubsubsection{m\_trinom}
+{\footnotesize\ttfamily std\+::vector$<$\textbf{ NRJ}$>$ Calibration\+::m\+\_\+trinom\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_calibration_a8e0d431465c589e805f74aacfabeb1d7}} 
+\index{Calibration@{Calibration}!m\_verbose@{m\_verbose}}
+\index{m\_verbose@{m\_verbose}!Calibration@{Calibration}}
+\doxysubsubsection{m\_verbose}
+{\footnotesize\ttfamily bool Calibration\+::m\+\_\+verbose = false\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+lib/\+Modules/\textbf{ Calibration.\+hpp}\end{DoxyCompactItemize}

@@ -1,0 +1,103 @@
+.TH "lib/vector_functions.hpp" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+lib/vector_functions.hpp
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'print\&.hpp'\fP
+.br
+
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBStaticVector< T >\fP"
+.br
+.RI "An efficient container for dynamic arrays with a known and fixed maximum size\&. "
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "template<typename T > std::vector< int > \fBbubbleSort\fP (std::vector< T > const &vector)"
+.br
+.ti -1c
+.RI "template<typename T > std::vector< int > \fBbubbleSort\fP (std::vector< T > const &vector, std::vector< int > &indexes)"
+.br
+.ti -1c
+.RI "template<class T > void \fBfill2D\fP (std::vector< std::vector< T >> &vec2, \fBsize_t\fP const &size_x, \fBsize_t\fP const &size_y, T const &obj)"
+.br
+.ti -1c
+.RI "template<typename T > bool \fBfound\fP (std::vector< T > &vector, T &t)"
+.br
+.ti -1c
+.RI "template<typename T > bool \fBfound\fP (std::vector< T > &vector, T const &t)"
+.br
+.ti -1c
+.RI "template<typename T > bool \fBfound\fP (std::vector< T > const &vector, T &t)"
+.br
+.ti -1c
+.RI "template<typename T > bool \fBfound\fP (std::vector< T > const &vector, T const &t)"
+.br
+.ti -1c
+.RI "template<typename T > T \fBmaximum\fP (std::vector< T > const &vector)"
+.br
+.ti -1c
+.RI "template<typename T > T \fBmaximumIndex\fP (std::vector< T > const &vector)"
+.br
+.ti -1c
+.RI "template<typename T > T \fBminimum\fP (std::vector< T > const &vector)"
+.br
+.ti -1c
+.RI "template<typename T > T \fBminimumIndex\fP (std::vector< T > const &vector)"
+.br
+.ti -1c
+.RI "template<class T > std::ostream & \fBoperator<<\fP (std::ostream &cout, \fBStaticVector\fP< T > const &vector)"
+.br
+.ti -1c
+.RI "template<class T > std::istream & \fBoperator>>\fP (std::istream &input, std::vector< T > vector)"
+.br
+.ti -1c
+.RI "template<class T > std::istringstream & \fBoperator>>\fP (std::istringstream &is, std::vector< T > &v)"
+.br
+.ti -1c
+.RI "template<typename T > bool \fBpush_back_unique\fP (std::vector< T > &vector, T const &t)"
+.br
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "template<typename T > std::vector<int> bubbleSort (std::vector< T > const & vector)"
+
+.SS "template<typename T > std::vector<int> bubbleSort (std::vector< T > const & vector, std::vector< int > & indexes)"
+
+.SS "template<class T > void fill2D (std::vector< std::vector< T >> & vec2, \fBsize_t\fP const & size_x, \fBsize_t\fP const & size_y, T const & obj)"
+
+.SS "template<typename T > bool found (std::vector< T > & vector, T & t)"
+
+.SS "template<typename T > bool found (std::vector< T > & vector, T const & t)"
+
+.SS "template<typename T > bool found (std::vector< T > const & vector, T & t)"
+
+.SS "template<typename T > bool found (std::vector< T > const & vector, T const & t)"
+
+.SS "template<typename T > T maximum (std::vector< T > const & vector)"
+
+.SS "template<typename T > T maximumIndex (std::vector< T > const & vector)"
+
+.SS "template<typename T > T minimum (std::vector< T > const & vector)"
+
+.SS "template<typename T > T minimumIndex (std::vector< T > const & vector)"
+
+.SS "template<class T > std::ostream& operator<< (std::ostream & cout, \fBStaticVector\fP< T > const & vector)"
+
+.SS "template<class T > std::istream& operator>> (std::istream & input, std::vector< T > vector)"
+
+.SS "template<class T > std::istringstream& operator>> (std::istringstream & is, std::vector< T > & v)"
+
+.SS "template<typename T > bool push_back_unique (std::vector< T > & vector, T const & t)"
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Nuball2 from the source code\&.

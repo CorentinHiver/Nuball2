@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__histo_analyse_8hpp" xml:lang="en-US">
+<title>lib/Analyse/HistoAnalyse.hpp File Reference</title>
+<indexterm><primary>lib/Analyse/HistoAnalyse.hpp</primary></indexterm>
+<programlisting>#include &lt;Gate.hpp&gt;
+#include &lt;MTTHist.hpp&gt;
+</programlisting>Include dependency graph for HistoAnalyse.hpp:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="_histo_analyse_8hpp__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>class <link linkend="_class_histo_analyse">HistoAnalyse&lt; THist &gt;</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>template&lt;class THist &gt; </para><para>void <link linkend="__histo_analyse_8hpp_1adb8d9d98ca484e0e196980bb9180460c">NormalizeX</link> (<link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt; &amp;histo, Float_t const &amp;factor=1)</para>
+</listitem>
+            <listitem><para>template&lt;class THist &gt; </para><para>void <link linkend="__histo_analyse_8hpp_1ad43a379914e8dca6872fe495dbfc7127">NormalizeY</link> (<link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt; &amp;histo, Float_t const &amp;factor=1)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="__histo_analyse_8hpp_1adb8d9d98ca484e0e196980bb9180460c"/>    <section>
+    <title>NormalizeX()</title>
+<indexterm><primary>NormalizeX</primary><secondary>HistoAnalyse.hpp</secondary></indexterm>
+<indexterm><primary>HistoAnalyse.hpp</primary><secondary>NormalizeX</secondary></indexterm>
+<computeroutput>template&lt;class THist &gt; </computeroutput><para><computeroutput>void NormalizeX (<link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt; &amp; histo, Float_t const &amp; factor = <computeroutput>1</computeroutput>
+)</computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="_histo_analyse_8hpp_adb8d9d98ca484e0e196980bb9180460c_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="__histo_analyse_8hpp_1ad43a379914e8dca6872fe495dbfc7127"/>    <section>
+    <title>NormalizeY()</title>
+<indexterm><primary>NormalizeY</primary><secondary>HistoAnalyse.hpp</secondary></indexterm>
+<indexterm><primary>HistoAnalyse.hpp</primary><secondary>NormalizeY</secondary></indexterm>
+<computeroutput>template&lt;class THist &gt; </computeroutput><para><computeroutput>void NormalizeY (<link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt; &amp; histo, Float_t const &amp; factor = <computeroutput>1</computeroutput>
+)</computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="_histo_analyse_8hpp_ad43a379914e8dca6872fe495dbfc7127_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+</section>
+</section>

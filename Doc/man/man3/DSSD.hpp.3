@@ -1,0 +1,74 @@
+.TH "lib/Analyse/DSSD.hpp" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+lib/Analyse/DSSD.hpp
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <libCo\&.hpp>\fP
+.br
+\fC#include <libRoot\&.hpp>\fP
+.br
+\fC#include <Event\&.hpp>\fP
+.br
+\fC#include <Timewalk\&.hpp>\fP
+.br
+\fC#include <Detectors\&.hpp>\fP
+.br
+
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBDSSD\fP"
+.br
+.ti -1c
+.RI "class \fBSiStrip\fP"
+.br
+.RI "Silicon Strip\&. Represents a strip of the \fBDSSD\fP\&. "
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "double \fBdistance\fP = 20"
+.br
+.ti -1c
+.RI "double \fBinnerRadius\fP = 15"
+.br
+.ti -1c
+.RI "int const \fBnb_rings\fP = 16"
+.br
+.ti -1c
+.RI "int const \fBnb_sectors\fP = 32"
+.br
+.ti -1c
+.RI "double \fBouterRadius\fP = 41"
+.br
+.ti -1c
+.RI "double \fBring_deg_thick\fP = TMath::ATan(\fBring_thickness\fP/\fBdistance\fP)"
+.br
+.ti -1c
+.RI "double \fBring_thickness\fP = (\fBouterRadius\fP\-\fBinnerRadius\fP)/\fBnb_rings\fP"
+.br
+.in -1c
+.SH "Variable Documentation"
+.PP 
+.SS "double distance = 20"
+
+.SS "double innerRadius = 15"
+
+.SS "int const nb_rings = 16"
+
+.SS "int const nb_sectors = 32"
+
+.SS "double outerRadius = 41"
+
+.SS "double ring_deg_thick = TMath::ATan(\fBring_thickness\fP/\fBdistance\fP)"
+
+.SS "double ring_thickness = (\fBouterRadius\fP\-\fBinnerRadius\fP)/\fBnb_rings\fP"
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Nuball2 from the source code\&.

@@ -1,0 +1,504 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="class_vertice" kind="class" language="C++" prot="public">
+    <compoundname>Vertice</compoundname>
+    <includes refid="_spectra_alignator_8hpp" local="no">SpectraAlignator.hpp</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_vertice_1aee303f307e0d0dccc8a9a1c1eaeaa11e" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; double &gt;</type>
+        <definition>std::vector&lt;double&gt; Vertice::m_coordinates</definition>
+        <argsstring></argsstring>
+        <name>m_coordinates</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="452" column="15" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="452" bodyend="-1"/>
+        <referencedby refid="class_vertice_1a0b6f58d8c0efedbb726e408c4e6527de" compoundref="_spectra_alignator_8hpp" startline="407" endline="407">begin</referencedby>
+        <referencedby refid="class_vertice_1a1215380e747b2cf93f861407a5bf9c3d" compoundref="_spectra_alignator_8hpp" startline="408" endline="408">end</referencedby>
+        <referencedby refid="class_vertice_1a11e12aac4668a10a6b1706db7e5ebbcd" compoundref="_spectra_alignator_8hpp" startline="401" endline="401">get</referencedby>
+        <referencedby refid="class_vertice_1a0bb7c9c5bc6bceef7479d6761a9020fb" compoundref="_spectra_alignator_8hpp" startline="444" endline="448">operator*</referencedby>
+        <referencedby refid="class_vertice_1a1897df7eb0121341d7dac0a285af7db8" compoundref="_spectra_alignator_8hpp" startline="414" endline="420">operator+</referencedby>
+        <referencedby refid="class_vertice_1a35359e51cb43abf68e459cbfedaeabb6" compoundref="_spectra_alignator_8hpp" startline="422" endline="431">operator-</referencedby>
+        <referencedby refid="class_vertice_1a20a711ace767a031ec41eb3a0dd75ed1" compoundref="_spectra_alignator_8hpp" startline="374" endline="374">operator[]</referencedby>
+        <referencedby refid="class_vertice_1a58c2af14cebf91fc79298f4128a54856" compoundref="_spectra_alignator_8hpp" startline="383" endline="387">set</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_vertice_1a0a14824e1d0e1aefdfe45e6878fd1550" prot="private" static="no" mutable="no">
+        <type><ref refid="lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638" kindref="member">size_t</ref></type>
+        <definition>size_t Vertice::m_dim</definition>
+        <argsstring></argsstring>
+        <name>m_dim</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="451" column="10" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="451" bodyend="-1"/>
+        <referencedby refid="class_vertice_1a1897df7eb0121341d7dac0a285af7db8" compoundref="_spectra_alignator_8hpp" startline="414" endline="420">operator+</referencedby>
+        <referencedby refid="class_vertice_1a35359e51cb43abf68e459cbfedaeabb6" compoundref="_spectra_alignator_8hpp" startline="422" endline="431">operator-</referencedby>
+        <referencedby refid="class_vertice_1a58c2af14cebf91fc79298f4128a54856" compoundref="_spectra_alignator_8hpp" startline="383" endline="387">set</referencedby>
+        <referencedby refid="class_vertice_1a93b6febeec367c7c2211eb1e34dcfce4" compoundref="_spectra_alignator_8hpp" startline="404" endline="404">size</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_vertice_1a0b6f58d8c0efedbb726e408c4e6527de" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto Vertice::begin</definition>
+        <argsstring>()</argsstring>
+        <name>begin</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="407" column="8" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="407" bodyend="407"/>
+        <references refid="class_vertice_1aee303f307e0d0dccc8a9a1c1eaeaa11e" compoundref="_spectra_alignator_8hpp" startline="452">m_coordinates</references>
+      </memberdef>
+      <memberdef kind="function" id="class_vertice_1aad7a051c244a4565277290b7c4cb3382" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto Vertice::begin</definition>
+        <argsstring>() const</argsstring>
+        <name>begin</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="410" column="8" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="410" bodyend="410"/>
+        <references refid="class_vertice_1aee303f307e0d0dccc8a9a1c1eaeaa11e" compoundref="_spectra_alignator_8hpp" startline="452">m_coordinates</references>
+      </memberdef>
+      <memberdef kind="function" id="class_vertice_1a1215380e747b2cf93f861407a5bf9c3d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto Vertice::end</definition>
+        <argsstring>()</argsstring>
+        <name>end</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="408" column="8" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="408" bodyend="408"/>
+        <references refid="class_vertice_1aee303f307e0d0dccc8a9a1c1eaeaa11e" compoundref="_spectra_alignator_8hpp" startline="452">m_coordinates</references>
+      </memberdef>
+      <memberdef kind="function" id="class_vertice_1a5f64695b3dcd9bca4f2fb6e0ed83348c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto Vertice::end</definition>
+        <argsstring>() const</argsstring>
+        <name>end</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="411" column="8" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="411" bodyend="411"/>
+        <references refid="class_vertice_1aee303f307e0d0dccc8a9a1c1eaeaa11e" compoundref="_spectra_alignator_8hpp" startline="452">m_coordinates</references>
+      </memberdef>
+      <memberdef kind="function" id="class_vertice_1a7ae35dd4e65c993d7faa019d8b966086" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto &amp;</type>
+        <definition>auto&amp; Vertice::get</definition>
+        <argsstring>()</argsstring>
+        <name>get</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="402" column="9" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="402" bodyend="402"/>
+        <references refid="class_vertice_1aee303f307e0d0dccc8a9a1c1eaeaa11e" compoundref="_spectra_alignator_8hpp" startline="452">m_coordinates</references>
+      </memberdef>
+      <memberdef kind="function" id="class_vertice_1a11e12aac4668a10a6b1706db7e5ebbcd" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto const  &amp;</type>
+        <definition>auto const&amp; Vertice::get</definition>
+        <argsstring>() const</argsstring>
+        <name>get</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="401" column="15" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="401" bodyend="401"/>
+        <references refid="class_vertice_1aee303f307e0d0dccc8a9a1c1eaeaa11e" compoundref="_spectra_alignator_8hpp" startline="452">m_coordinates</references>
+        <referencedby refid="_spectra_alignator_8hpp_1a658a331239a2db3139f2a2163a4c182f" compoundref="_spectra_alignator_8hpp" startline="461" endline="466">operator*</referencedby>
+        <referencedby refid="class_vertice_1a2e858710d6eb5fe7dc4029b6cc280272" compoundref="_spectra_alignator_8hpp" startline="434" endline="442">operator*</referencedby>
+        <referencedby refid="_spectra_alignator_8hpp_1a00041d0900b9f4e90f24fc9f5f61208f" compoundref="_spectra_alignator_8hpp" startline="455" endline="459">operator&lt;&lt;</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_vertice_1a0bb7c9c5bc6bceef7479d6761a9020fb" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_vertice" kindref="compound">Vertice</ref> &amp;</type>
+        <definition>Vertice&amp; Vertice::operator*</definition>
+        <argsstring>(double const &amp;constant)</argsstring>
+        <name>operator*</name>
+        <param>
+          <type>double const &amp;</type>
+          <declname>constant</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="444" column="11" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="444" bodyend="448"/>
+        <references refid="class_vertice_1aee303f307e0d0dccc8a9a1c1eaeaa11e" compoundref="_spectra_alignator_8hpp" startline="452">m_coordinates</references>
+      </memberdef>
+      <memberdef kind="function" id="class_vertice_1a2e858710d6eb5fe7dc4029b6cc280272" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_vertice" kindref="compound">Vertice</ref></type>
+        <definition>Vertice Vertice::operator*</definition>
+        <argsstring>(Vertice const &amp;other)</argsstring>
+        <name>operator*</name>
+        <param>
+          <type><ref refid="class_vertice" kindref="compound">Vertice</ref> const &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="434" column="11" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="434" bodyend="442"/>
+        <references refid="class_vertice_1a11e12aac4668a10a6b1706db7e5ebbcd" compoundref="_spectra_alignator_8hpp" startline="401" endline="401">get</references>
+        <references refid="lib_co_8hpp_1a6df2dcd4b1f61c75dc292942bc5ca74d" compoundref="lib_co_8hpp" startline="234" endline="234">throw_error</references>
+      </memberdef>
+      <memberdef kind="function" id="class_vertice_1a1897df7eb0121341d7dac0a285af7db8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_vertice" kindref="compound">Vertice</ref></type>
+        <definition>Vertice Vertice::operator+</definition>
+        <argsstring>(Vertice const &amp;other)</argsstring>
+        <name>operator+</name>
+        <param>
+          <type><ref refid="class_vertice" kindref="compound">Vertice</ref> const &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="414" column="11" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="414" bodyend="420"/>
+        <references refid="class_vertice_1aee303f307e0d0dccc8a9a1c1eaeaa11e" compoundref="_spectra_alignator_8hpp" startline="452">m_coordinates</references>
+        <references refid="class_vertice_1a0a14824e1d0e1aefdfe45e6878fd1550" compoundref="_spectra_alignator_8hpp" startline="451">m_dim</references>
+        <references refid="class_vertice_1a93b6febeec367c7c2211eb1e34dcfce4" compoundref="_spectra_alignator_8hpp" startline="404" endline="404">size</references>
+        <references refid="lib_co_8hpp_1a6df2dcd4b1f61c75dc292942bc5ca74d" compoundref="lib_co_8hpp" startline="234" endline="234">throw_error</references>
+        <references refid="class_vertice_1a6e2e24eb4beb27f1b42163fda1777c40" compoundref="_spectra_alignator_8hpp" startline="350" endline="354">Vertice</references>
+      </memberdef>
+      <memberdef kind="function" id="class_vertice_1a35359e51cb43abf68e459cbfedaeabb6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_vertice" kindref="compound">Vertice</ref></type>
+        <definition>Vertice Vertice::operator-</definition>
+        <argsstring>(Vertice const &amp;other)</argsstring>
+        <name>operator-</name>
+        <param>
+          <type><ref refid="class_vertice" kindref="compound">Vertice</ref> const &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="422" column="11" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="422" bodyend="431"/>
+        <references refid="class_vertice_1aee303f307e0d0dccc8a9a1c1eaeaa11e" compoundref="_spectra_alignator_8hpp" startline="452">m_coordinates</references>
+        <references refid="class_vertice_1a0a14824e1d0e1aefdfe45e6878fd1550" compoundref="_spectra_alignator_8hpp" startline="451">m_dim</references>
+        <references refid="class_vertice_1a93b6febeec367c7c2211eb1e34dcfce4" compoundref="_spectra_alignator_8hpp" startline="404" endline="404">size</references>
+        <references refid="lib_co_8hpp_1a6df2dcd4b1f61c75dc292942bc5ca74d" compoundref="lib_co_8hpp" startline="234" endline="234">throw_error</references>
+        <references refid="class_vertice_1a6e2e24eb4beb27f1b42163fda1777c40" compoundref="_spectra_alignator_8hpp" startline="350" endline="354">Vertice</references>
+      </memberdef>
+      <memberdef kind="function" id="class_vertice_1a651eb7cb39f966a5ff2d6d24c3e1e785" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_vertice" kindref="compound">Vertice</ref> &amp;</type>
+        <definition>Vertice&amp; Vertice::operator=</definition>
+        <argsstring>(std::vector&lt; double &gt; const &amp;point)</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>std::vector&lt; double &gt; const &amp;</type>
+          <declname>point</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="377" column="11" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="377" bodyend="377"/>
+        <references refid="class_vertice_1a58c2af14cebf91fc79298f4128a54856" compoundref="_spectra_alignator_8hpp" startline="383" endline="387">set</references>
+      </memberdef>
+      <memberdef kind="function" id="class_vertice_1a45871718e86053a0a03565bbe672f7a3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_vertice" kindref="compound">Vertice</ref> &amp;</type>
+        <definition>Vertice&amp; Vertice::operator=</definition>
+        <argsstring>(Vertice &amp;&amp;vertice)</argsstring>
+        <name>operator=</name>
+        <param>
+          <type><ref refid="class_vertice" kindref="compound">Vertice</ref> &amp;&amp;</type>
+          <declname>vertice</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="381" column="11" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="381" bodyend="381"/>
+        <references refid="class_vertice_1a58c2af14cebf91fc79298f4128a54856" compoundref="_spectra_alignator_8hpp" startline="383" endline="387">set</references>
+      </memberdef>
+      <memberdef kind="function" id="class_vertice_1ab16b5e8facd201c70bdab71384adc6df" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_vertice" kindref="compound">Vertice</ref> &amp;</type>
+        <definition>Vertice&amp; Vertice::operator=</definition>
+        <argsstring>(Vertice const &amp;vertice)</argsstring>
+        <name>operator=</name>
+        <param>
+          <type><ref refid="class_vertice" kindref="compound">Vertice</ref> const &amp;</type>
+          <declname>vertice</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="379" column="11" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="379" bodyend="379"/>
+        <references refid="class_vertice_1a58c2af14cebf91fc79298f4128a54856" compoundref="_spectra_alignator_8hpp" startline="383" endline="387">set</references>
+      </memberdef>
+      <memberdef kind="function" id="class_vertice_1a20a711ace767a031ec41eb3a0dd75ed1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto &amp;</type>
+        <definition>auto&amp; Vertice::operator[]</definition>
+        <argsstring>(int const &amp;i)</argsstring>
+        <name>operator[]</name>
+        <param>
+          <type>int const &amp;</type>
+          <declname>i</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="374" column="9" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="374" bodyend="374"/>
+        <references refid="class_vertice_1aee303f307e0d0dccc8a9a1c1eaeaa11e" compoundref="_spectra_alignator_8hpp" startline="452">m_coordinates</references>
+      </memberdef>
+      <memberdef kind="function" id="class_vertice_1ad7e931f0342f3c2a87d0d8e46936416d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto const  &amp;</type>
+        <definition>auto const&amp; Vertice::operator[]</definition>
+        <argsstring>(int const &amp;i) const</argsstring>
+        <name>operator[]</name>
+        <param>
+          <type>int const &amp;</type>
+          <declname>i</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="375" column="15" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="375" bodyend="375"/>
+        <references refid="class_vertice_1aee303f307e0d0dccc8a9a1c1eaeaa11e" compoundref="_spectra_alignator_8hpp" startline="452">m_coordinates</references>
+      </memberdef>
+      <memberdef kind="function" id="class_vertice_1ab5519307ad24edb7b482ce63f41d3b63" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Vertice::set</definition>
+        <argsstring>(std::vector&lt; double &gt; const &amp;point)</argsstring>
+        <name>set</name>
+        <param>
+          <type>std::vector&lt; double &gt; const &amp;</type>
+          <declname>point</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="395" column="8" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="395" bodyend="399"/>
+        <references refid="class_vertice_1aee303f307e0d0dccc8a9a1c1eaeaa11e" compoundref="_spectra_alignator_8hpp" startline="452">m_coordinates</references>
+        <references refid="class_vertice_1a0a14824e1d0e1aefdfe45e6878fd1550" compoundref="_spectra_alignator_8hpp" startline="451">m_dim</references>
+        <references refid="lib_co_8hpp_1a6df2dcd4b1f61c75dc292942bc5ca74d" compoundref="lib_co_8hpp" startline="234" endline="234">throw_error</references>
+      </memberdef>
+      <memberdef kind="function" id="class_vertice_1a7a18bb3bfb36d8630641d7b33c1461cc" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Vertice::set</definition>
+        <argsstring>(Vertice &amp;&amp;_vertice)</argsstring>
+        <name>set</name>
+        <param>
+          <type><ref refid="class_vertice" kindref="compound">Vertice</ref> &amp;&amp;</type>
+          <declname>_vertice</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="389" column="8" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="389" bodyend="393"/>
+        <references refid="class_vertice_1aee303f307e0d0dccc8a9a1c1eaeaa11e" compoundref="_spectra_alignator_8hpp" startline="452">m_coordinates</references>
+        <references refid="class_vertice_1a0a14824e1d0e1aefdfe45e6878fd1550" compoundref="_spectra_alignator_8hpp" startline="451">m_dim</references>
+        <references refid="lib_co_8hpp_1a6df2dcd4b1f61c75dc292942bc5ca74d" compoundref="lib_co_8hpp" startline="234" endline="234">throw_error</references>
+      </memberdef>
+      <memberdef kind="function" id="class_vertice_1a58c2af14cebf91fc79298f4128a54856" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Vertice::set</definition>
+        <argsstring>(Vertice const &amp;_vertice)</argsstring>
+        <name>set</name>
+        <param>
+          <type><ref refid="class_vertice" kindref="compound">Vertice</ref> const &amp;</type>
+          <declname>_vertice</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="383" column="8" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="383" bodyend="387"/>
+        <references refid="class_vertice_1aee303f307e0d0dccc8a9a1c1eaeaa11e" compoundref="_spectra_alignator_8hpp" startline="452">m_coordinates</references>
+        <references refid="class_vertice_1a0a14824e1d0e1aefdfe45e6878fd1550" compoundref="_spectra_alignator_8hpp" startline="451">m_dim</references>
+        <references refid="lib_co_8hpp_1a6df2dcd4b1f61c75dc292942bc5ca74d" compoundref="lib_co_8hpp" startline="234" endline="234">throw_error</references>
+        <referencedby refid="class_vertice_1a651eb7cb39f966a5ff2d6d24c3e1e785" compoundref="_spectra_alignator_8hpp" startline="377" endline="377">operator=</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_vertice_1a93b6febeec367c7c2211eb1e34dcfce4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto &amp;</type>
+        <definition>auto&amp; Vertice::size</definition>
+        <argsstring>()</argsstring>
+        <name>size</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="404" column="9" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="404" bodyend="404"/>
+        <references refid="class_vertice_1a0a14824e1d0e1aefdfe45e6878fd1550" compoundref="_spectra_alignator_8hpp" startline="451">m_dim</references>
+        <referencedby refid="class_simplex_1a033d49e8ac767b72b4c1dd6d38573988" compoundref="_spectra_alignator_8hpp" startline="539" endline="549">Simplex::centroid</referencedby>
+        <referencedby refid="class_minimisator_1a969310853a267ef440163b92c6a7873a" compoundref="_spectra_alignator_8hpp" startline="581" endline="587">Minimisator::chi2</referencedby>
+        <referencedby refid="class_vertice_1a1897df7eb0121341d7dac0a285af7db8" compoundref="_spectra_alignator_8hpp" startline="414" endline="420">operator+</referencedby>
+        <referencedby refid="class_vertice_1a35359e51cb43abf68e459cbfedaeabb6" compoundref="_spectra_alignator_8hpp" startline="422" endline="431">operator-</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_vertice_1ae6a2eb34867f3c9ac333b267e3f20a17" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto const  &amp;</type>
+        <definition>auto const&amp; Vertice::size</definition>
+        <argsstring>() const</argsstring>
+        <name>size</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="405" column="15" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="405" bodyend="405"/>
+        <references refid="class_vertice_1a0a14824e1d0e1aefdfe45e6878fd1550" compoundref="_spectra_alignator_8hpp" startline="451">m_dim</references>
+      </memberdef>
+      <memberdef kind="function" id="class_vertice_1a25640d2ace19cf2993c1854edd452ef0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Vertice::Vertice</definition>
+        <argsstring>(size_t size)</argsstring>
+        <name>Vertice</name>
+        <param>
+          <type><ref refid="lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638" kindref="member">size_t</ref></type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="368" column="3" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="368" bodyend="372"/>
+      </memberdef>
+      <memberdef kind="function" id="class_vertice_1a6e2e24eb4beb27f1b42163fda1777c40" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Vertice::Vertice</definition>
+        <argsstring>(std::vector&lt; double &gt; const &amp;coords)</argsstring>
+        <name>Vertice</name>
+        <param>
+          <type>std::vector&lt; double &gt; const &amp;</type>
+          <declname>coords</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="350" column="3" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="350" bodyend="354"/>
+        <referencedby refid="class_vertice_1a1897df7eb0121341d7dac0a285af7db8" compoundref="_spectra_alignator_8hpp" startline="414" endline="420">operator+</referencedby>
+        <referencedby refid="class_vertice_1a35359e51cb43abf68e459cbfedaeabb6" compoundref="_spectra_alignator_8hpp" startline="422" endline="431">operator-</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_vertice_1afddab470753508f96eeb0735e1400cbb" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Vertice::Vertice</definition>
+        <argsstring>(Vertice &amp;&amp;_vertice)</argsstring>
+        <name>Vertice</name>
+        <param>
+          <type><ref refid="class_vertice" kindref="compound">Vertice</ref> &amp;&amp;</type>
+          <declname>_vertice</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="362" column="3" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="362" bodyend="366"/>
+      </memberdef>
+      <memberdef kind="function" id="class_vertice_1aa498494b022d938d1b641cc6d8aac2f3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Vertice::Vertice</definition>
+        <argsstring>(Vertice const &amp;_vertice)</argsstring>
+        <name>Vertice</name>
+        <param>
+          <type><ref refid="class_vertice" kindref="compound">Vertice</ref> const &amp;</type>
+          <declname>_vertice</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="356" column="3" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="356" bodyend="360"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="lib/Classes/SpectraAlignator.hpp" line="347" column="1" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="348" bodyend="453"/>
+    <listofallmembers>
+      <member refid="class_vertice_1a0b6f58d8c0efedbb726e408c4e6527de" prot="public" virt="non-virtual"><scope>Vertice</scope><name>begin</name></member>
+      <member refid="class_vertice_1aad7a051c244a4565277290b7c4cb3382" prot="public" virt="non-virtual"><scope>Vertice</scope><name>begin</name></member>
+      <member refid="class_vertice_1a1215380e747b2cf93f861407a5bf9c3d" prot="public" virt="non-virtual"><scope>Vertice</scope><name>end</name></member>
+      <member refid="class_vertice_1a5f64695b3dcd9bca4f2fb6e0ed83348c" prot="public" virt="non-virtual"><scope>Vertice</scope><name>end</name></member>
+      <member refid="class_vertice_1a11e12aac4668a10a6b1706db7e5ebbcd" prot="public" virt="non-virtual"><scope>Vertice</scope><name>get</name></member>
+      <member refid="class_vertice_1a7ae35dd4e65c993d7faa019d8b966086" prot="public" virt="non-virtual"><scope>Vertice</scope><name>get</name></member>
+      <member refid="class_vertice_1aee303f307e0d0dccc8a9a1c1eaeaa11e" prot="private" virt="non-virtual"><scope>Vertice</scope><name>m_coordinates</name></member>
+      <member refid="class_vertice_1a0a14824e1d0e1aefdfe45e6878fd1550" prot="private" virt="non-virtual"><scope>Vertice</scope><name>m_dim</name></member>
+      <member refid="class_vertice_1a2e858710d6eb5fe7dc4029b6cc280272" prot="public" virt="non-virtual"><scope>Vertice</scope><name>operator*</name></member>
+      <member refid="class_vertice_1a0bb7c9c5bc6bceef7479d6761a9020fb" prot="public" virt="non-virtual"><scope>Vertice</scope><name>operator*</name></member>
+      <member refid="class_vertice_1a1897df7eb0121341d7dac0a285af7db8" prot="public" virt="non-virtual"><scope>Vertice</scope><name>operator+</name></member>
+      <member refid="class_vertice_1a35359e51cb43abf68e459cbfedaeabb6" prot="public" virt="non-virtual"><scope>Vertice</scope><name>operator-</name></member>
+      <member refid="class_vertice_1a651eb7cb39f966a5ff2d6d24c3e1e785" prot="public" virt="non-virtual"><scope>Vertice</scope><name>operator=</name></member>
+      <member refid="class_vertice_1ab16b5e8facd201c70bdab71384adc6df" prot="public" virt="non-virtual"><scope>Vertice</scope><name>operator=</name></member>
+      <member refid="class_vertice_1a45871718e86053a0a03565bbe672f7a3" prot="public" virt="non-virtual"><scope>Vertice</scope><name>operator=</name></member>
+      <member refid="class_vertice_1a20a711ace767a031ec41eb3a0dd75ed1" prot="public" virt="non-virtual"><scope>Vertice</scope><name>operator[]</name></member>
+      <member refid="class_vertice_1ad7e931f0342f3c2a87d0d8e46936416d" prot="public" virt="non-virtual"><scope>Vertice</scope><name>operator[]</name></member>
+      <member refid="class_vertice_1a58c2af14cebf91fc79298f4128a54856" prot="public" virt="non-virtual"><scope>Vertice</scope><name>set</name></member>
+      <member refid="class_vertice_1a7a18bb3bfb36d8630641d7b33c1461cc" prot="public" virt="non-virtual"><scope>Vertice</scope><name>set</name></member>
+      <member refid="class_vertice_1ab5519307ad24edb7b482ce63f41d3b63" prot="public" virt="non-virtual"><scope>Vertice</scope><name>set</name></member>
+      <member refid="class_vertice_1a93b6febeec367c7c2211eb1e34dcfce4" prot="public" virt="non-virtual"><scope>Vertice</scope><name>size</name></member>
+      <member refid="class_vertice_1ae6a2eb34867f3c9ac333b267e3f20a17" prot="public" virt="non-virtual"><scope>Vertice</scope><name>size</name></member>
+      <member refid="class_vertice_1a6e2e24eb4beb27f1b42163fda1777c40" prot="public" virt="non-virtual"><scope>Vertice</scope><name>Vertice</name></member>
+      <member refid="class_vertice_1aa498494b022d938d1b641cc6d8aac2f3" prot="public" virt="non-virtual"><scope>Vertice</scope><name>Vertice</name></member>
+      <member refid="class_vertice_1afddab470753508f96eeb0735e1400cbb" prot="public" virt="non-virtual"><scope>Vertice</scope><name>Vertice</name></member>
+      <member refid="class_vertice_1a25640d2ace19cf2993c1854edd452ef0" prot="public" virt="non-virtual"><scope>Vertice</scope><name>Vertice</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

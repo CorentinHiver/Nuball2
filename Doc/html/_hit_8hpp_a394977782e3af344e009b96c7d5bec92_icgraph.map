@@ -1,0 +1,11 @@
+<map id="NRJ_cast" name="NRJ_cast">
+<area shape="rect" id="node1" title="Casts a number into unsigned NRJ." alt="" coords="1093,56,1172,83"/>
+<area shape="rect" id="node2" href="$class_paris_phoswitch.html#ae42c75c5e5c5a82ebc8e417b7746976e" title=" " alt="" coords="877,5,1023,32"/>
+<area shape="rect" id="node3" href="$class_timeshifts.html#abef7234fe827ae3c7758788cf22b6921" title=" " alt="" coords="855,56,1045,83"/>
+<area shape="rect" id="node9" href="$class_calibration.html#a344dc3d6feab3580e859cc693c2fdd4a" title=" " alt="" coords="881,107,1019,133"/>
+<area shape="rect" id="node4" href="$class_timeshifts.html#aaef5b6fdd23be94ed37a2b4e7fe47b48" title=" " alt="" coords="655,56,807,83"/>
+<area shape="rect" id="node5" href="$class_timeshifts.html#a79fe955b7d1bbc12fd4c659691727df3" title=" " alt="" coords="428,31,607,57"/>
+<area shape="rect" id="node6" href="$class_timeshifts.html#a21dc1e7bf232c6b0637b16aa04e43701" title=" " alt="" coords="211,56,380,83"/>
+<area shape="rect" id="node7" href="$class_timeshifts.html#a3d3ab1b3498ca45832d8a8735f16e188" title=" " alt="" coords="5,31,163,57"/>
+<area shape="rect" id="node8" href="$class_timeshifts.html#a6520eab7a8824f41a2be8517d83fc835" title="To verify an already calculated timeshift .dT data file." alt="" coords="17,81,151,108"/>
+</map>

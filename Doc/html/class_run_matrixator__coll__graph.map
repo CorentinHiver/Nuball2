@@ -1,0 +1,11 @@
+<map id="RunMatrixator" name="RunMatrixator">
+<area shape="rect" id="node1" title="Matrixator is used to create a bunch of matrixes : each crystal of the setup versus the (add&#45;backed &amp;..." alt="" coords="450,500,565,527"/>
+<area shape="rect" id="node2" href="$class_timeshifts.html" title=" " alt="" coords="281,380,371,407"/>
+<area shape="rect" id="node3" href="$class_path.html" title="EXPERIMENTAL Object used to hold the complete path of a giver folder." alt="" coords="77,95,127,121"/>
+<area shape="rect" id="node5" href="$class_files_manager.html" title=" " alt="" coords="47,193,157,219"/>
+<area shape="rect" id="node4" href="$class_folders.html" title="EXPERIMENTAL Object used to hold a list of folders." alt="" coords="67,5,137,32"/>
+<area shape="rect" id="node6" href="$class_m_t_t_hist.html" title=" " alt="" coords="524,193,664,219"/>
+<area shape="rect" id="node7" href="$class_m_t_t_hist.html" title=" " alt="" coords="632,95,772,121"/>
+<area shape="rect" id="node9" href="$struct_calibration_1_1histograms.html" title=" " alt="" coords="775,193,949,219"/>
+<area shape="rect" id="node8" href="$class_calibration.html" title=" " alt="" coords="794,380,887,407"/>
+</map>

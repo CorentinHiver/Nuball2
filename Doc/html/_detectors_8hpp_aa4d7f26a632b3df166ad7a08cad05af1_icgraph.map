@@ -1,0 +1,13 @@
+<map id="clover_pos" name="clover_pos">
+<area shape="rect" id="node1" title=" " alt="" coords="859,107,951,133"/>
+<area shape="rect" id="node2" href="$class_detectors.html#a8d5c0f2d189ddda12ed3c36f13887cfd" title="Fills the lookup tables." alt="" coords="640,107,811,133"/>
+<area shape="rect" id="node3" href="$class_detectors.html#a03f6e9974f958b86ddbbc4670d0209a2" title="Reads the file and extracts the list of detectors, then fills the lookup tables." alt="" coords="471,107,592,133"/>
+<area shape="rect" id="node4" href="$class_clover_spectra.html#a353ec66774413feefb33a784ce2159cf" title=" " alt="" coords="245,5,423,32"/>
+<area shape="rect" id="node5" href="$class_faster2_root.html#ad30ccf937150bbd3504ec3a354b76c8f" title=" " alt="" coords="267,56,401,83"/>
+<area shape="rect" id="node7" href="$class_faster2_histo.html#a72f8004ae550c02db09791b810c0252d" title=" " alt="" coords="265,107,403,133"/>
+<area shape="rect" id="node9" href="$class_detectors.html#a0aa2791c5f5b7133fd5816d2f4dc0b56" title=" " alt="" coords="255,157,413,184"/>
+<area shape="rect" id="node10" href="$class_near_line.html#a3280d6187c79a0aaf4f23b97fe3089ee" title=" " alt="" coords="255,208,413,235"/>
+<area shape="rect" id="node6" href="$class_faster2_root.html#aacd4d3fa480eba9bc86b49f4b2040c60" title=" " alt="" coords="9,56,193,83"/>
+<area shape="rect" id="node8" href="$class_faster2_histo.html#aed84ab0be7ff45067715733dd7be23d1" title=" " alt="" coords="5,107,197,133"/>
+<area shape="rect" id="node11" href="$class_near_line.html#adf3bc13e36dd295fc5668f08e81eaf32" title=" " alt="" coords="28,208,175,235"/>
+</map>

@@ -1,0 +1,318 @@
+.TH "lib/libRoot.hpp" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+lib/libRoot.hpp
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'libCo\&.hpp'\fP
+.br
+\fC#include <TAxis\&.h>\fP
+.br
+\fC#include <TCanvas\&.h>\fP
+.br
+\fC#include <TChain\&.h>\fP
+.br
+\fC#include <TError\&.h>\fP
+.br
+\fC#include <TF1\&.h>\fP
+.br
+\fC#include <TF2\&.h>\fP
+.br
+\fC#include <TFile\&.h>\fP
+.br
+\fC#include <TFitResultPtr\&.h>\fP
+.br
+\fC#include <TFitResult\&.h>\fP
+.br
+\fC#include <TGraph\&.h>\fP
+.br
+\fC#include <TGraphErrors\&.h>\fP
+.br
+\fC#include <TH1F\&.h>\fP
+.br
+\fC#include <TH1D\&.h>\fP
+.br
+\fC#include <TH1S\&.h>\fP
+.br
+\fC#include <TH2\&.h>\fP
+.br
+\fC#include <TH2F\&.h>\fP
+.br
+\fC#include <TH3I\&.h>\fP
+.br
+\fC#include <TKey\&.h>\fP
+.br
+\fC#include <TLeaf\&.h>\fP
+.br
+\fC#include <TLegend\&.h>\fP
+.br
+\fC#include <TMarker\&.h>\fP
+.br
+\fC#include <TMath\&.h>\fP
+.br
+\fC#include <TRandom\&.h>\fP
+.br
+\fC#include <TROOT\&.h>\fP
+.br
+\fC#include <TSpectrum\&.h>\fP
+.br
+\fC#include <TStopwatch\&.h>\fP
+.br
+\fC#include <TString\&.h>\fP
+.br
+\fC#include <TStyle\&.h>\fP
+.br
+\fC#include <TSystem\&.h>\fP
+.br
+\fC#include <TThread\&.h>\fP
+.br
+\fC#include <TTree\&.h>\fP
+.br
+\fC#include <TTreeIndex\&.h>\fP
+.br
+
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "struct \fBTHBinning\fP"
+.br
+.RI "Binning of a root histogram (TH1) : number of bins, min value, max value\&. "
+.ti -1c
+.RI "class \fBTheTChain\fP"
+.br
+.RI "Not functionnal yet\&. "
+.ti -1c
+.RI "class \fBTypeRootMap\fP"
+.br
+.in -1c
+.SS "Namespaces"
+
+.in +1c
+.ti -1c
+.RI " \fBCoAnalyse\fP"
+.br
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "using \fBCoAnalyse::ProjectionsBins\fP = std::vector< std::pair< double, double > >"
+.br
+.ti -1c
+.RI "using \fBunique_TFile\fP = std::unique_ptr< TFile >"
+.br
+.ti -1c
+.RI "using \fBunique_TH1F\fP = std::unique_ptr< TH1F >"
+.br
+.ti -1c
+.RI "using \fBunique_TH2F\fP = std::unique_ptr< TH2F >"
+.br
+.ti -1c
+.RI "using \fBunique_tree\fP = std::unique_ptr< TTree >"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "bool \fBAddTH1\fP (TH2 *histo2, TH1 *histo1, int index, bool x=true)"
+.br
+.ti -1c
+.RI "void \fBalignator\fP (TTree *tree, int *NewIndex)"
+.br
+.ti -1c
+.RI "template<class T > auto \fBcreateBranch\fP (TTree *tree, T *value, std::string const &name)"
+.br
+.RI "Create a branch for a given value and name\&. "
+.ti -1c
+.RI "template<class T > auto \fBcreateBranchArray\fP (TTree *tree, T *array, std::string const &name, std::string const &name_size)"
+.br
+.RI "Create a branch for a given array and name\&. "
+.ti -1c
+.RI "void \fBdraw_all_TH1F_with_X_window\fP (std::string const &filename, int minX, int maxX, int rebin=1)"
+.br
+.ti -1c
+.RI "std::vector< double > \fBCoAnalyse::extractBackgroundArray\fP (std::vector< double > &source, int const &nsmooth=10)"
+.br
+.ti -1c
+.RI "std::vector< double > \fBCoAnalyse::extractBackgroundArray\fP (TH1F *histo, int const &nsmooth=10)"
+.br
+.ti -1c
+.RI "void \fBfuse_all_histo\fP (std::string const &folder, std::string const &outRoot='fused_histo\&.root', bool const &bidim=true)"
+.br
+.ti -1c
+.RI "int \fBgetBin0\fP (TH1F *spectra)"
+.br
+.RI "Get which bin holds the X = 0\&. "
+.ti -1c
+.RI "bool \fBgetMeanPeak\fP (TH1F *spectra, double &mean)"
+.br
+.RI "Get the mean of the peak of a histogram with one nice single peak\&. "
+.ti -1c
+.RI "template<typename T , typename  = typename std::enable_if<std::is_arithmetic<T>::value>::type> Long64_t \fBLong64_cast\fP (T const &t)"
+.br
+.RI "Casts a number into unsigned short\&. "
+.ti -1c
+.RI "float \fBmaxXaxis\fP (TH1 *histo)"
+.br
+.ti -1c
+.RI "float \fBmaxYaxis\fP (TH1 *histo)"
+.br
+.ti -1c
+.RI "float \fBminXaxis\fP (TH1 *histo)"
+.br
+.ti -1c
+.RI "float \fBminYaxis\fP (TH1 *histo)"
+.br
+.ti -1c
+.RI "void \fBCoAnalyse::normalizeBidim\fP (TH2 *matrix, double const &factor=1\&.0)"
+.br
+.ti -1c
+.RI "void \fBCoAnalyse::normalizeY\fP (TH2 *matrix, double const &factor=1)"
+.br
+.ti -1c
+.RI "std::ostream & \fBoperator<<\fP (std::ostream &cout, \fBTHBinning\fP binning)"
+.br
+.ti -1c
+.RI "void \fBCoAnalyse::projectX\fP (TH2 *matrix, TH1 *proj)"
+.br
+.RI "Total projection on X axis\&. "
+.ti -1c
+.RI "void \fBCoAnalyse::projectX\fP (TH2 *matrix, TH1 *proj, double const &binYmin, double const &binYmax)"
+.br
+.RI "Project on Y axis between values binYmin and binYmax included [binYmin;binYmax]\&. "
+.ti -1c
+.RI "void \fBCoAnalyse::projectX\fP (TH2 *matrix, TH1 *proj, int const &binY)"
+.br
+.RI "Project on Y axis at a given X bin\&. "
+.ti -1c
+.RI "void \fBCoAnalyse::projectX\fP (TH2 *matrix, TH1 *proj, int const &binYmin, int const &binYmax)"
+.br
+.RI "Project on X axis between bin binYmin included and binYmax excluded [binYmin;binYmax[\&. "
+.ti -1c
+.RI "void \fBCoAnalyse::projectY\fP (TH2 *matrix, TH1 *proj, double const &valueXmin, double const &valueXmax)"
+.br
+.RI "Project on Y axis between values valueXmin and valueXmax included [valueXmin;valueXmax]\&. "
+.ti -1c
+.RI "void \fBCoAnalyse::projectY\fP (TH2 *matrix, TH1 *proj, int const &binX)"
+.br
+.RI "Project on Y axis at a given X bin\&. "
+.ti -1c
+.RI "void \fBCoAnalyse::projectY\fP (TH2 *matrix, TH1 *proj, int const &binXmin, int const &binXmax)"
+.br
+.RI "Project on Y axis between bin binXmin included and binXmax excluded [binXmin;binXmax[\&. "
+.ti -1c
+.RI "void \fBCoAnalyse::removeBackground\fP (TH1 *histo, int const &niter=10, std::string const &fit_options='', std::string const &bidim_options='X')"
+.br
+.RI "Remove the background in the given histo\&. "
+.ti -1c
+.RI "void \fBCoAnalyse::removeRandomBidim\fP (TH2 *matrix, int iterations=1, bool save_intermediate=false, ProjectionsBins projectionsY={{}}, ProjectionsBins projectionsX={{}})"
+.br
+.ti -1c
+.RI "void \fBCoAnalyse::removeRandomY\fP (TH2 *matrix, int _stopX=\-1, int _stopY=\-1, bool writeIntermediate=false, ProjectionsBins projections={{}})"
+.br
+.RI "LEGACY\&. "
+.ti -1c
+.RI "void \fBCoAnalyse::setX\fP (TH2 *matrix, TH1 *proj, int const &binX)"
+.br
+.ti -1c
+.RI "void \fBCoAnalyse::setY\fP (TH2 *matrix, TH1 *proj, int const &binY)"
+.br
+.ti -1c
+.RI "void \fBtest_alignator\fP (TTree *tree, int *NewIndex=nullptr, bool useNewIndex=false)"
+.br
+.ti -1c
+.RI "bool \fBTHist_exists\fP (TH1 *histo)"
+.br
+.ti -1c
+.RI "template<typename T , typename  = typename std::enable_if<std::is_arithmetic<T>::value>::type> ULong64_t \fBULong64_cast\fP (T const &t)"
+.br
+.RI "Casts a number into unsigned short\&. "
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "TRandom * \fBgRandom\fP = new TRandom(time(0))"
+.br
+.ti -1c
+.RI "class \fBTypeRootMap\fP \fBtypeRootMap\fP"
+.br
+.in -1c
+.SH "Typedef Documentation"
+.PP 
+.SS "using \fBunique_TFile\fP =  std::unique_ptr<TFile>"
+
+.SS "using \fBunique_TH1F\fP =  std::unique_ptr<TH1F>"
+
+.SS "using \fBunique_TH2F\fP =  std::unique_ptr<TH2F>"
+
+.SS "using \fBunique_tree\fP =  std::unique_ptr<TTree>"
+
+.SH "Function Documentation"
+.PP 
+.SS "bool AddTH1 (TH2 * histo2, TH1 * histo1, int index, bool x = \fCtrue\fP)"
+
+.SS "void alignator (TTree * tree, int * NewIndex)"
+
+.SS "template<class T > auto createBranch (TTree * tree, T * value, std::string const & name)"
+
+.PP
+Create a branch for a given value and name\&. 
+.SS "template<class T > auto createBranchArray (TTree * tree, T * array, std::string const & name, std::string const & name_size)"
+
+.PP
+Create a branch for a given array and name\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIname_size\fP The name of the leaf that holds the size of the array 
+.RE
+.PP
+
+.SS "void draw_all_TH1F_with_X_window (std::string const & filename, int minX, int maxX, int rebin = \fC1\fP)"
+
+.SS "void fuse_all_histo (std::string const & folder, std::string const & outRoot = \fC'fused_histo\&.root'\fP, bool const & bidim = \fCtrue\fP)"
+
+.SS "int getBin0 (TH1F * spectra)"
+
+.PP
+Get which bin holds the X = 0\&. 
+.SS "bool getMeanPeak (TH1F * spectra, double & mean)"
+
+.PP
+Get the mean of the peak of a histogram with one nice single peak\&. 
+.SS "template<typename T , typename  = typename std::enable_if<std::is_arithmetic<T>::value>::type> Long64_t Long64_cast (T const & t)\fC [inline]\fP"
+
+.PP
+Casts a number into unsigned short\&. 
+.SS "float maxXaxis (TH1 * histo)"
+
+.SS "float maxYaxis (TH1 * histo)"
+
+.SS "float minXaxis (TH1 * histo)"
+
+.SS "float minYaxis (TH1 * histo)"
+
+.SS "std::ostream& operator<< (std::ostream & cout, \fBTHBinning\fP binning)"
+
+.SS "void test_alignator (TTree * tree, int * NewIndex = \fCnullptr\fP, bool useNewIndex = \fCfalse\fP)"
+
+.SS "bool THist_exists (TH1 * histo)"
+
+.SS "template<typename T , typename  = typename std::enable_if<std::is_arithmetic<T>::value>::type> ULong64_t ULong64_cast (T const & t)\fC [inline]\fP"
+
+.PP
+Casts a number into unsigned short\&. 
+.SH "Variable Documentation"
+.PP 
+.SS "TRandom* gRandom = new TRandom(time(0))"
+
+.SS "class \fBTypeRootMap\fP typeRootMap"
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Nuball2 from the source code\&.

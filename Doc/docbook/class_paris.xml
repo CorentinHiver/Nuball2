@@ -1,0 +1,277 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_class_paris" xml:lang="en-US">
+<title>Paris Class Reference</title>
+<indexterm><primary>Paris</primary></indexterm>
+<para>
+<computeroutput>#include &lt;Paris.hpp&gt;</computeroutput>
+</para>
+Collaboration diagram for Paris:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_paris__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_class_paris_1ac6fb6d9310b0dd298ebf10862497954a">Analyse</link> ()</para>
+</listitem>
+            <listitem><para>auto &amp; <link linkend="_class_paris_1a4fb89c70f74288ffba9041dad5c0b341">back</link> ()</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_paris_1acfde42a5101236f9f4063c22661563f0">Fill</link> (<link linkend="_class_event">Event</link> const &amp;event, <link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> const &amp;i)</para>
+</listitem>
+            <listitem><para>auto &amp; <link linkend="_class_paris_1adf36cdac7f24cbc27ace07ec0afeb6a6">front</link> ()</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_paris_1ac0479d995c00e0ee8170092cdf1b5f51">Initialize</link> ()</para>
+</listitem>
+            <listitem><para><link linkend="_class_paris_1a1f05e7dfce90ff9808cf79ebbbb23008">Paris</link> ()</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_paris_1ad9b942023bbc514963ee8742aeccd23c">Reset</link> ()</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Static Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>static void <link linkend="_class_paris_1a5218753a8ecec0c9a05c6d3e3ca2db07">InitializeArrays</link> ()</para>
+</listitem>
+            <listitem><para>static bool <link linkend="_class_paris_1a5e84a66240e195c7743f8c8dae84f800">is_paris</link> (<link linkend="__hit_8hpp_1ab5dd24876acad09ec52c250c1668466c">Label</link> const &amp;l)</para>
+</listitem>
+            <listitem><para>static <link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> <link linkend="_class_paris_1a060a9d4c6345e7b73ac62ad5aee1bd23">label_to_index</link> (<link linkend="__hit_8hpp_1ab5dd24876acad09ec52c250c1668466c">Label</link> const &amp;l)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Public Attributes    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_class_paris_cluster">ParisCluster</link>&lt; 28 &gt; <link linkend="_class_paris_1ab8b82c446fd5c617a70be80207894368">clusterBack</link></para>
+</listitem>
+            <listitem><para><link linkend="_class_paris_cluster">ParisCluster</link>&lt; 36 &gt; <link linkend="_class_paris_1afd25e98773ccf32549495e4c4035db4a">clusterFront</link></para>
+</listitem>
+            <listitem><para><link linkend="_class_static_vector">StaticVector</link>&lt; <link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> &gt; <link linkend="_class_paris_1a35fdae4555744730c04ef90228b50865">Hits</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Static Public Attributes    </title>
+        <itemizedlist>
+            <listitem><para>static std::array&lt; <link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>, 1000 &gt; <link linkend="_class_paris_1a4598dcb03f0900aa81b9e9cc1954c7cd">cluster</link></para>
+</listitem>
+            <listitem><para>static std::array&lt; <link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>, 1000 &gt; <link linkend="_class_paris_1ad870c58010fc1f7608be62b2b8c02b15">index</link></para>
+</listitem>
+            <listitem><para>static std::array&lt; bool, 1000 &gt; <link linkend="_class_paris_1a03d3050af7163dfc8c5cc1fb0598885c">is</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Private Attributes    </title>
+        <itemizedlist>
+            <listitem><para>bool <link linkend="_class_paris_1a9efcee0bca9b694ae7993a2c773d6dc3">m_initialised</link> = false</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Static Private Attributes    </title>
+        <itemizedlist>
+            <listitem><para>static bool <link linkend="_class_paris_1a992926f1f1315dbc0949d84fcca9896e">s_initialised</link> = false</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_class_paris_1a1f05e7dfce90ff9808cf79ebbbb23008"/>    <section>
+    <title>Paris()</title>
+<indexterm><primary>Paris</primary><secondary>Paris</secondary></indexterm>
+<indexterm><primary>Paris</primary><secondary>Paris</secondary></indexterm>
+<para><computeroutput>Paris::Paris ( )<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_paris_a1f05e7dfce90ff9808cf79ebbbb23008_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_class_paris_1ac6fb6d9310b0dd298ebf10862497954a"/>    <section>
+    <title>Analyse()</title>
+<indexterm><primary>Analyse</primary><secondary>Paris</secondary></indexterm>
+<indexterm><primary>Paris</primary><secondary>Analyse</secondary></indexterm>
+<para><computeroutput>void Paris::Analyse ( )<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_paris_ac6fb6d9310b0dd298ebf10862497954a_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_paris_ac6fb6d9310b0dd298ebf10862497954a_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_paris_1a4fb89c70f74288ffba9041dad5c0b341"/>    <section>
+    <title>back()</title>
+<indexterm><primary>back</primary><secondary>Paris</secondary></indexterm>
+<indexterm><primary>Paris</primary><secondary>back</secondary></indexterm>
+<para><computeroutput>auto&amp; Paris::back ( )<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_paris_1acfde42a5101236f9f4063c22661563f0"/>    <section>
+    <title>Fill()</title>
+<indexterm><primary>Fill</primary><secondary>Paris</secondary></indexterm>
+<indexterm><primary>Paris</primary><secondary>Fill</secondary></indexterm>
+<para><computeroutput>void Paris::Fill (<link linkend="_class_event">Event</link> const &amp; event, <link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> const &amp; i)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_paris_acfde42a5101236f9f4063c22661563f0_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_paris_1adf36cdac7f24cbc27ace07ec0afeb6a6"/>    <section>
+    <title>front()</title>
+<indexterm><primary>front</primary><secondary>Paris</secondary></indexterm>
+<indexterm><primary>Paris</primary><secondary>front</secondary></indexterm>
+<para><computeroutput>auto&amp; Paris::front ( )<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_paris_1ac0479d995c00e0ee8170092cdf1b5f51"/>    <section>
+    <title>Initialize()</title>
+<indexterm><primary>Initialize</primary><secondary>Paris</secondary></indexterm>
+<indexterm><primary>Paris</primary><secondary>Initialize</secondary></indexterm>
+<para><computeroutput>void Paris::Initialize ( )</computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_paris_ac0479d995c00e0ee8170092cdf1b5f51_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_paris_ac0479d995c00e0ee8170092cdf1b5f51_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_paris_1a5218753a8ecec0c9a05c6d3e3ca2db07"/>    <section>
+    <title>InitializeArrays()</title>
+<indexterm><primary>InitializeArrays</primary><secondary>Paris</secondary></indexterm>
+<indexterm><primary>Paris</primary><secondary>InitializeArrays</secondary></indexterm>
+<para><computeroutput>static void Paris::InitializeArrays ( )<computeroutput>[inline]</computeroutput>, <computeroutput>[static]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_paris_a5218753a8ecec0c9a05c6d3e3ca2db07_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_paris_a5218753a8ecec0c9a05c6d3e3ca2db07_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_paris_1a5e84a66240e195c7743f8c8dae84f800"/>    <section>
+    <title>is_paris()</title>
+<indexterm><primary>is_paris</primary><secondary>Paris</secondary></indexterm>
+<indexterm><primary>Paris</primary><secondary>is_paris</secondary></indexterm>
+<para><computeroutput>static bool Paris::is_paris (<link linkend="__hit_8hpp_1ab5dd24876acad09ec52c250c1668466c">Label</link> const &amp; l)<computeroutput>[inline]</computeroutput>, <computeroutput>[static]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_paris_a5e84a66240e195c7743f8c8dae84f800_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_paris_1a060a9d4c6345e7b73ac62ad5aee1bd23"/>    <section>
+    <title>label_to_index()</title>
+<indexterm><primary>label_to_index</primary><secondary>Paris</secondary></indexterm>
+<indexterm><primary>Paris</primary><secondary>label_to_index</secondary></indexterm>
+<para><computeroutput>static <link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> Paris::label_to_index (<link linkend="__hit_8hpp_1ab5dd24876acad09ec52c250c1668466c">Label</link> const &amp; l)<computeroutput>[inline]</computeroutput>, <computeroutput>[static]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_paris_a060a9d4c6345e7b73ac62ad5aee1bd23_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_paris_a060a9d4c6345e7b73ac62ad5aee1bd23_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_paris_1ad9b942023bbc514963ee8742aeccd23c"/>    <section>
+    <title>Reset()</title>
+<indexterm><primary>Reset</primary><secondary>Paris</secondary></indexterm>
+<indexterm><primary>Paris</primary><secondary>Reset</secondary></indexterm>
+<para><computeroutput>void Paris::Reset ( )<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_paris_ad9b942023bbc514963ee8742aeccd23c_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_class_paris_1a4598dcb03f0900aa81b9e9cc1954c7cd"/>    <section>
+    <title>cluster</title>
+<indexterm><primary>cluster</primary><secondary>Paris</secondary></indexterm>
+<indexterm><primary>Paris</primary><secondary>cluster</secondary></indexterm>
+<para><computeroutput>std::array&lt; <link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>, 1000 &gt; Paris::cluster<computeroutput>[static]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_paris_1ab8b82c446fd5c617a70be80207894368"/>    <section>
+    <title>clusterBack</title>
+<indexterm><primary>clusterBack</primary><secondary>Paris</secondary></indexterm>
+<indexterm><primary>Paris</primary><secondary>clusterBack</secondary></indexterm>
+<para><computeroutput><link linkend="_class_paris_cluster">ParisCluster</link>&lt;28&gt; Paris::clusterBack</computeroutput></para>    </section><anchor xml:id="_class_paris_1afd25e98773ccf32549495e4c4035db4a"/>    <section>
+    <title>clusterFront</title>
+<indexterm><primary>clusterFront</primary><secondary>Paris</secondary></indexterm>
+<indexterm><primary>Paris</primary><secondary>clusterFront</secondary></indexterm>
+<para><computeroutput><link linkend="_class_paris_cluster">ParisCluster</link>&lt;36&gt; Paris::clusterFront</computeroutput></para>    </section><anchor xml:id="_class_paris_1a35fdae4555744730c04ef90228b50865"/>    <section>
+    <title>Hits</title>
+<indexterm><primary>Hits</primary><secondary>Paris</secondary></indexterm>
+<indexterm><primary>Paris</primary><secondary>Hits</secondary></indexterm>
+<para><computeroutput><link linkend="_class_static_vector">StaticVector</link>&lt;<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>&gt; Paris::Hits</computeroutput></para>    </section><anchor xml:id="_class_paris_1ad870c58010fc1f7608be62b2b8c02b15"/>    <section>
+    <title>index</title>
+<indexterm><primary>index</primary><secondary>Paris</secondary></indexterm>
+<indexterm><primary>Paris</primary><secondary>index</secondary></indexterm>
+<para><computeroutput>std::array&lt; <link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>, 1000 &gt; Paris::index<computeroutput>[static]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_paris_1a03d3050af7163dfc8c5cc1fb0598885c"/>    <section>
+    <title>is</title>
+<indexterm><primary>is</primary><secondary>Paris</secondary></indexterm>
+<indexterm><primary>Paris</primary><secondary>is</secondary></indexterm>
+<para><computeroutput>std::array&lt; bool, 1000 &gt; Paris::is<computeroutput>[static]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_paris_1a9efcee0bca9b694ae7993a2c773d6dc3"/>    <section>
+    <title>m_initialised</title>
+<indexterm><primary>m_initialised</primary><secondary>Paris</secondary></indexterm>
+<indexterm><primary>Paris</primary><secondary>m_initialised</secondary></indexterm>
+<para><computeroutput>bool Paris::m_initialised = false<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_paris_1a992926f1f1315dbc0949d84fcca9896e"/>    <section>
+    <title>s_initialised</title>
+<indexterm><primary>s_initialised</primary><secondary>Paris</secondary></indexterm>
+<indexterm><primary>Paris</primary><secondary>s_initialised</secondary></indexterm>
+<para><computeroutput>bool Paris::s_initialised = false<computeroutput>[static]</computeroutput>, <computeroutput>[private]</computeroutput></computeroutput></para></section>
+<para>
+The documentation for this class was generated from the following file:</para>
+lib/Analyse/<link linkend="__paris_8hpp">Paris.hpp</link></section>
+</section>

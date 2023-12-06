@@ -1,0 +1,448 @@
+\doxysection{MTFaster\+Reader Class Reference}
+\label{class_m_t_faster_reader}\index{MTFasterReader@{MTFasterReader}}
+
+
+Class used to read in parallel .fast files of the same run.  
+
+
+
+
+{\ttfamily \#include $<$MTFaster\+Reader.\+hpp$>$}
+
+
+
+Collaboration diagram for MTFaster\+Reader\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_m_t_faster_reader__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \textbf{ add\+File} (\textbf{ File} file)
+\item 
+bool \textbf{ add\+Folder} (\textbf{ Path} path, int const \&nb\+\_\+files=-\/1)
+\item 
+auto \& \textbf{ files} ()
+\item 
+auto const  \& \textbf{ files} () const
+\item 
+\textbf{ MTFaster\+Reader} ()
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+\textbf{ MTFaster\+Reader} (\textbf{ Files\+Manager} const \&\textbf{ files})
+\item 
+\textbf{ MTFaster\+Reader} (\textbf{ Path} path, int const \&nb\+\_\+files=-\/1)
+\begin{DoxyCompactList}\small\item\em Regular constructor. \end{DoxyCompactList}\item 
+void \textbf{ print\+MTFiles} ()
+\item 
+{\footnotesize template$<$class Func , class... ARGS$>$ }\\void \textbf{ read\+Aligned} (Func \&\&func, ARGS \&\&... args)
+\begin{DoxyCompactList}\small\item\em Reads many faster files in parallel, providing a time-\/aligned. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Func , class... ARGS$>$ }\\void \textbf{ read\+Aligned} (std\+::vector$<$ \textbf{ Time} $>$ timeshifts, Func \&\&func, ARGS \&\&... args)
+\item 
+{\footnotesize template$<$class Func , class... ARGS$>$ }\\void \textbf{ read\+Raw} (Func \&\&func, ARGS \&\&... args)
+\begin{DoxyCompactList}\small\item\em Reads many faster files in parallel. \end{DoxyCompactList}\item 
+void \textbf{ set\+Timeshifts} (std\+::vector$<$ \textbf{ Time} $>$ const \&timeshifts)
+\item 
+auto const  \& \textbf{ timeshift} (\textbf{ Label} const \&label) const
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \textbf{ next\+Filename} (std\+::string \&filename)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class Func , class... ARGS$>$ }\\static void \textbf{ Read} (\textbf{ MTFaster\+Reader} \&MTreader, Func function, ARGS \&\&... args)
+\item 
+{\footnotesize template$<$class Func , class... ARGS$>$ }\\static void \textbf{ Realign} (\textbf{ MTFaster\+Reader} \&MTreader, Func function, ARGS \&\&... args)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ Files\+Manager} \textbf{ m\+\_\+files}
+\item 
+\textbf{ MTList} \textbf{ m\+\_\+\+MTfiles}
+\item 
+std\+::vector$<$ \textbf{ Time} $>$ \textbf{ m\+\_\+timeshifts}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class used to read in parallel .fast files of the same run. 
+
+{\bfseries{Look at the \doxyref{Faster\+Reader}{p.}{class_faster_reader} class for the various options}}\doxysubsection{How to use this class}\label{class_m_t_faster_reader_autotoc_md0}
+First, you\textquotesingle{}ll need to activate the multithreading \+:
+
+MTObject\+::\+Initialize(nb\+\_\+threads)
+
+Then instanciate this class \+:
+
+
+\begin{DoxyEnumerate}
+\item \doxyref{MTFaster\+Reader}{p.}{class_m_t_faster_reader} reader(folder\+\_\+name, first\+\_\+n\+\_\+files);
+\end{DoxyEnumerate}
+
+To read all the files then leave the second argument empty
+
+Then, use the read\+Raw(function, arguments...) method to run any user defined function.
+
+
+\begin{DoxyEnumerate}
+\item reader.\+read\+Raw(function, arguments...);
+\end{DoxyEnumerate}
+
+Carefull \+: this function MUST have the following arguments is this EXACT order \+:
+
+return\+\_\+type function(\+Hit \& hit, Faster\+Reader \& reader, arguments...)
+
+This function can also be a static method of an object, but CANNOT be a member
+
+The trick to use the object anyway is to pass it as an argument \+:
+
+static return\+\_\+type my\+Class\+::function(\+Hit \& hit, Faster\+Reader \& reader, my\+Class \& class, arguments...);
+
+Here is a minimal code snippet \+: \begin{DoxyVerb} void function(Hit & hit, FasterReader & reader, Arg & some_argument) 
+ {
+   // This function is now setup to read one specific file
+   while(reader.Read())
+   {
+     // Here, hit contains the data of the current faster data hit beeing read in the binary .fast file
+     Do something with the hit like histo->Fill(hit.nrj) or tree -> Fill() if you connected a tree to the hit
+   }
+ }
+
+ int main()
+ {
+    MTObject::Initialize(n); // n being an appropriate number of threads.
+    MTFasterReader reader(folder);
+    Arg some_argument;
+    reader.readRaw(function, some_argument);
+    // Do something with the argument like print(some_argument) or some_argument.Write()
+ }
+\end{DoxyVerb}
+ Here are two function examples. The third parameter has been instanciated before the \doxyref{MTFaster\+Reader\+::read\+Raw()}{p.}{class_m_t_faster_reader_ae316d31ebcb18ae8689522509d1ba513} method call
+
+\begin{DoxyVerb}   void counter(Hit & hit, FasterReader & reader, MTCounter & counterMT)
+    {
+       int counter = 0;
+       while(reader.Read())
+       {
+          counter++;
+       }
+       counterMT += counter;
+    }
+
+
+   void scalers(Hit & hit, FasterReader & reader, MTTHist<TH1> & scaler)
+   {
+      while(reader.Read())
+      {
+         scaler.Fill(hit.label);
+      }
+   }
+\end{DoxyVerb}
+ (see \doxyref{MTTHist}{p.}{class_m_t_t_hist} and \doxyref{MTCounter}{p.}{class_m_t_counter} documentation)
+
+It is recommended to use the \char`\"{}\&\char`\"{} symbol (reference) before the other as well parameters so that they are shared between threads, therefore only with thread safe objects, but it is not mandatory. If you want to pass read-\/only objects (i.\+e. lookup tables), consider adding the \char`\"{}const\char`\"{} key word like that \+: (..., type const \& lookup\+\_\+table, ...). Another work-\/around is simply to declare your parameter at a global scope, although it is not recommended to have too many of them. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\label{class_m_t_faster_reader_ad7f0fc9a9cd713d59870a91c86d8ad9a}} 
+\index{MTFasterReader@{MTFasterReader}!MTFasterReader@{MTFasterReader}}
+\index{MTFasterReader@{MTFasterReader}!MTFasterReader@{MTFasterReader}}
+\doxysubsubsection{MTFasterReader()\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily MTFaster\+Reader\+::\+MTFaster\+Reader (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Default constructor. 
+
+\mbox{\label{class_m_t_faster_reader_a98a77edc573c4b3cfa5fa384f0d1a085}} 
+\index{MTFasterReader@{MTFasterReader}!MTFasterReader@{MTFasterReader}}
+\index{MTFasterReader@{MTFasterReader}!MTFasterReader@{MTFasterReader}}
+\doxysubsubsection{MTFasterReader()\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily MTFaster\+Reader\+::\+MTFaster\+Reader (\begin{DoxyParamCaption}\item[{\textbf{ Path}}]{path,  }\item[{int const \&}]{nb\+\_\+files = {\ttfamily -\/1} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Regular constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & \+: The path to the path containing the .fast files to read \\
+\hline
+{\em nb\+\_\+files} & \+: Default -\/1, takes all the files \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_m_t_faster_reader_a98a77edc573c4b3cfa5fa384f0d1a085_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_m_t_faster_reader_a7b012332b8f9bc617cd666e0ae768fda}} 
+\index{MTFasterReader@{MTFasterReader}!MTFasterReader@{MTFasterReader}}
+\index{MTFasterReader@{MTFasterReader}!MTFasterReader@{MTFasterReader}}
+\doxysubsubsection{MTFasterReader()\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily MTFaster\+Reader\+::\+MTFaster\+Reader (\begin{DoxyParamCaption}\item[{\textbf{ Files\+Manager} const \&}]{files }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_m_t_faster_reader_a7b012332b8f9bc617cd666e0ae768fda_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\label{class_m_t_faster_reader_a8693e1143a0aea8096a527c7d9df9a63}} 
+\index{MTFasterReader@{MTFasterReader}!addFile@{addFile}}
+\index{addFile@{addFile}!MTFasterReader@{MTFasterReader}}
+\doxysubsubsection{addFile()}
+{\footnotesize\ttfamily bool MTFaster\+Reader\+::add\+File (\begin{DoxyParamCaption}\item[{\textbf{ File}}]{file }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_m_t_faster_reader_a8693e1143a0aea8096a527c7d9df9a63_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_m_t_faster_reader_a8693e1143a0aea8096a527c7d9df9a63_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_m_t_faster_reader_a58a2fe8f9f9ba39808d43f36f45c8288}} 
+\index{MTFasterReader@{MTFasterReader}!addFolder@{addFolder}}
+\index{addFolder@{addFolder}!MTFasterReader@{MTFasterReader}}
+\doxysubsubsection{addFolder()}
+{\footnotesize\ttfamily bool MTFaster\+Reader\+::add\+Folder (\begin{DoxyParamCaption}\item[{\textbf{ Path}}]{path,  }\item[{int const \&}]{nb\+\_\+files = {\ttfamily -\/1} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_m_t_faster_reader_a58a2fe8f9f9ba39808d43f36f45c8288_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_m_t_faster_reader_a58a2fe8f9f9ba39808d43f36f45c8288_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_m_t_faster_reader_aa8421439b6ac40fc7513fc85ad5a112b}} 
+\index{MTFasterReader@{MTFasterReader}!files@{files}}
+\index{files@{files}!MTFasterReader@{MTFasterReader}}
+\doxysubsubsection{files()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily auto\& MTFaster\+Reader\+::files (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_m_t_faster_reader_a5d2beaf7551d9b288eef9509daf8b3b5}} 
+\index{MTFasterReader@{MTFasterReader}!files@{files}}
+\index{files@{files}!MTFasterReader@{MTFasterReader}}
+\doxysubsubsection{files()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily auto const\& MTFaster\+Reader\+::files (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_m_t_faster_reader_a5d2beaf7551d9b288eef9509daf8b3b5_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_m_t_faster_reader_a63e239df82bf04244bdab829bb73cd20}} 
+\index{MTFasterReader@{MTFasterReader}!nextFilename@{nextFilename}}
+\index{nextFilename@{nextFilename}!MTFasterReader@{MTFasterReader}}
+\doxysubsubsection{nextFilename()}
+{\footnotesize\ttfamily bool MTFaster\+Reader\+::next\+Filename (\begin{DoxyParamCaption}\item[{std\+::string \&}]{filename }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_m_t_faster_reader_a63e239df82bf04244bdab829bb73cd20_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_m_t_faster_reader_a63e239df82bf04244bdab829bb73cd20_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_m_t_faster_reader_a01bb4c02770855a41d53b3544b3cae3a}} 
+\index{MTFasterReader@{MTFasterReader}!printMTFiles@{printMTFiles}}
+\index{printMTFiles@{printMTFiles}!MTFasterReader@{MTFasterReader}}
+\doxysubsubsection{printMTFiles()}
+{\footnotesize\ttfamily void MTFaster\+Reader\+::print\+MTFiles (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=316pt]{class_m_t_faster_reader_a01bb4c02770855a41d53b3544b3cae3a_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_m_t_faster_reader_a7e26b2201486cd489b66ab12b83427e0}} 
+\index{MTFasterReader@{MTFasterReader}!Read@{Read}}
+\index{Read@{Read}!MTFasterReader@{MTFasterReader}}
+\doxysubsubsection{Read()}
+{\footnotesize\ttfamily template$<$class Func , class... ARGS$>$ \\
+void MTFaster\+Reader\+::\+Read (\begin{DoxyParamCaption}\item[{\textbf{ MTFaster\+Reader} \&}]{MTreader,  }\item[{Func}]{function,  }\item[{ARGS \&\&...}]{args }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [private]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_m_t_faster_reader_a7e26b2201486cd489b66ab12b83427e0_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_m_t_faster_reader_af1ec563da5602cc23d7b0cd98b63bee0}} 
+\index{MTFasterReader@{MTFasterReader}!readAligned@{readAligned}}
+\index{readAligned@{readAligned}!MTFasterReader@{MTFasterReader}}
+\doxysubsubsection{readAligned()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class Func , class... ARGS$>$ \\
+void MTFaster\+Reader\+::read\+Aligned (\begin{DoxyParamCaption}\item[{Func \&\&}]{func,  }\item[{ARGS \&\&...}]{args }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Reads many faster files in parallel, providing a time-\/aligned. 
+
+Use this function in the same way as read\+Raw, with a function like this \+: func(\+Hit \& hit, Alignator \& aligned\+Tree, args...)
+
+
+\begin{DoxyParams}{Parameters}
+{\em func} & \+: Must be of the form func(\+Hit \& hit, Alignator \& aligned\+Tree, args...) with args \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_m_t_faster_reader_af1ec563da5602cc23d7b0cd98b63bee0_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_m_t_faster_reader_af1ec563da5602cc23d7b0cd98b63bee0_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_m_t_faster_reader_a870da58b71c34fbcaf76733f0bc2ba71}} 
+\index{MTFasterReader@{MTFasterReader}!readAligned@{readAligned}}
+\index{readAligned@{readAligned}!MTFasterReader@{MTFasterReader}}
+\doxysubsubsection{readAligned()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class Func , class... ARGS$>$ \\
+void MTFaster\+Reader\+::read\+Aligned (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \textbf{ Time} $>$}]{timeshifts,  }\item[{Func \&\&}]{func,  }\item[{ARGS \&\&...}]{args }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_m_t_faster_reader_a870da58b71c34fbcaf76733f0bc2ba71_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_m_t_faster_reader_ae316d31ebcb18ae8689522509d1ba513}} 
+\index{MTFasterReader@{MTFasterReader}!readRaw@{readRaw}}
+\index{readRaw@{readRaw}!MTFasterReader@{MTFasterReader}}
+\doxysubsubsection{readRaw()}
+{\footnotesize\ttfamily template$<$class Func , class... ARGS$>$ \\
+void MTFaster\+Reader\+::read\+Raw (\begin{DoxyParamCaption}\item[{Func \&\&}]{func,  }\item[{ARGS \&\&...}]{args }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Reads many faster files in parallel. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em func} & Function used on each file in parallel. CAREFULL \+: must be a function or a static method\\
+\hline
+\end{DoxyParams}
+The declared function MUST have its two first parameters as follow \+: type function(\+Hit \& hit, Faster\+Reader \& reader, ...); You can add any other parameter in the ..., but then you have to call them in the read\+Raw method call e.\+g. \+: \begin{DoxyVerb}   void my_function(Hit & hit, FasterReader & reader, MTCounter & counter){do something...}
+\end{DoxyVerb}
+ in main \begin{DoxyVerb}   MTFasterReader reader(/path/to/data/folder/, wanted_number_of_files);
+   MTCounter counter;
+   reader.readRaw(my_function, counter);
+\end{DoxyVerb}
+ That way, my\+\_\+function will be executed in parallel on each file in /path/to/data/folder/ Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_m_t_faster_reader_ae316d31ebcb18ae8689522509d1ba513_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_m_t_faster_reader_ae316d31ebcb18ae8689522509d1ba513_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_m_t_faster_reader_ad4720651ef47aefe5a1901e4659683e1}} 
+\index{MTFasterReader@{MTFasterReader}!Realign@{Realign}}
+\index{Realign@{Realign}!MTFasterReader@{MTFasterReader}}
+\doxysubsubsection{Realign()}
+{\footnotesize\ttfamily template$<$class Func , class... ARGS$>$ \\
+void MTFaster\+Reader\+::\+Realign (\begin{DoxyParamCaption}\item[{\textbf{ MTFaster\+Reader} \&}]{MTreader,  }\item[{Func}]{function,  }\item[{ARGS \&\&...}]{args }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [private]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_m_t_faster_reader_ad4720651ef47aefe5a1901e4659683e1_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_m_t_faster_reader_a39cce770cb5f6dc49e2ae2558d709af6}} 
+\index{MTFasterReader@{MTFasterReader}!setTimeshifts@{setTimeshifts}}
+\index{setTimeshifts@{setTimeshifts}!MTFasterReader@{MTFasterReader}}
+\doxysubsubsection{setTimeshifts()}
+{\footnotesize\ttfamily void MTFaster\+Reader\+::set\+Timeshifts (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \textbf{ Time} $>$ const \&}]{timeshifts }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_m_t_faster_reader_a2adcc31120c30ac26b0c35a67c0e8822}} 
+\index{MTFasterReader@{MTFasterReader}!timeshift@{timeshift}}
+\index{timeshift@{timeshift}!MTFasterReader@{MTFasterReader}}
+\doxysubsubsection{timeshift()}
+{\footnotesize\ttfamily auto const\& MTFaster\+Reader\+::timeshift (\begin{DoxyParamCaption}\item[{\textbf{ Label} const \&}]{label }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_m_t_faster_reader_a2adcc31120c30ac26b0c35a67c0e8822_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\label{class_m_t_faster_reader_ab64bd8c46413ce8e280acc80a33df936}} 
+\index{MTFasterReader@{MTFasterReader}!m\_files@{m\_files}}
+\index{m\_files@{m\_files}!MTFasterReader@{MTFasterReader}}
+\doxysubsubsection{m\_files}
+{\footnotesize\ttfamily \textbf{ Files\+Manager} MTFaster\+Reader\+::m\+\_\+files\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_m_t_faster_reader_a2ba1ed98c0363d91f5c0c38d6f7f231c}} 
+\index{MTFasterReader@{MTFasterReader}!m\_MTfiles@{m\_MTfiles}}
+\index{m\_MTfiles@{m\_MTfiles}!MTFasterReader@{MTFasterReader}}
+\doxysubsubsection{m\_MTfiles}
+{\footnotesize\ttfamily \textbf{ MTList} MTFaster\+Reader\+::m\+\_\+\+MTfiles\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_m_t_faster_reader_a2bea00b692984363df66161e172036e1}} 
+\index{MTFasterReader@{MTFasterReader}!m\_timeshifts@{m\_timeshifts}}
+\index{m\_timeshifts@{m\_timeshifts}!MTFasterReader@{MTFasterReader}}
+\doxysubsubsection{m\_timeshifts}
+{\footnotesize\ttfamily std\+::vector$<$\textbf{ Time}$>$ MTFaster\+Reader\+::m\+\_\+timeshifts\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+lib/\+MTObjects/\textbf{ MTFaster\+Reader.\+hpp}\end{DoxyCompactItemize}

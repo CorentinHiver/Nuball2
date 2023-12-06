@@ -1,0 +1,13 @@
+<map id="CloverSpectra" name="CloverSpectra">
+<area shape="rect" id="node1" title="Make usefull calibrated spectra from data in .fast or .root format." alt="" coords="647,383,761,409"/>
+<area shape="rect" id="node2" href="$class_timeshifts.html" title=" " alt="" coords="503,292,593,319"/>
+<area shape="rect" id="node3" href="$class_path.html" title="EXPERIMENTAL Object used to hold the complete path of a giver folder." alt="" coords="237,95,288,121"/>
+<area shape="rect" id="node5" href="$class_files_manager.html" title=" " alt="" coords="391,193,500,219"/>
+<area shape="rect" id="node8" href="$class_file.html" title="EXPERIMENTAL Composed of a Path and a Filename." alt="" coords="87,193,132,219"/>
+<area shape="rect" id="node4" href="$class_folders.html" title="EXPERIMENTAL Object used to hold a list of folders." alt="" coords="228,5,297,32"/>
+<area shape="rect" id="node6" href="$class_m_t_t_hist.html" title=" " alt="" coords="746,193,886,219"/>
+<area shape="rect" id="node7" href="$class_m_t_t_hist.html" title=" " alt="" coords="854,95,994,121"/>
+<area shape="rect" id="node11" href="$struct_calibration_1_1histograms.html" title=" " alt="" coords="973,193,1147,219"/>
+<area shape="rect" id="node9" href="$class_filename.html" title="EXPERIMENTAL Contains the short name and the extension of a given file, without any knowledge of its ..." alt="" coords="5,95,88,121"/>
+<area shape="rect" id="node10" href="$class_calibration.html" title=" " alt="" coords="992,292,1085,319"/>
+</map>

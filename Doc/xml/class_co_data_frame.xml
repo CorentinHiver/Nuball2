@@ -1,0 +1,191 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="class_co_data_frame" kind="class" language="C++" prot="public">
+    <compoundname>CoDataFrame</compoundname>
+    <includes refid="files__functions_8hpp" local="no">files_functions.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class Index</type>
+      </param>
+      <param>
+        <type>class T</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_co_data_frame_1a06bba67b6dee06535e14218320751c2c" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool CoDataFrame&lt; Index, T &gt;::good</definition>
+        <argsstring></argsstring>
+        <name>good</name>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/files_functions.hpp" line="274" column="8" bodyfile="lib/files_functions.hpp" bodystart="274" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_co_data_frame_1af2798a5ea665091240b51eb2373f3c35" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; std::vector&lt; T &gt; &gt;</type>
+        <definition>std::vector&lt;std::vector&lt;T&gt; &gt; CoDataFrame&lt; Index, T &gt;::m_data</definition>
+        <argsstring></argsstring>
+        <name>m_data</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/files_functions.hpp" line="271" column="15" bodyfile="lib/files_functions.hpp" bodystart="271" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_co_data_frame_1aab49f63af655fd9bea2efb8952dfcac4" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string CoDataFrame&lt; Index, T &gt;::m_filename</definition>
+        <argsstring></argsstring>
+        <name>m_filename</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/files_functions.hpp" line="276" column="15" bodyfile="lib/files_functions.hpp" bodystart="276" bodyend="-1"/>
+        <referencedby refid="class_co_data_frame_1a1aff8a5a81105e495961fe2610c60c35" compoundref="files__functions_8hpp" startline="264" endline="264">CoDataFrame&lt; Index, T &gt;::filename</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_co_data_frame_1a00eee215324aa22e4001d8f1e09dc2b0" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; Index &gt;</type>
+        <definition>std::vector&lt;Index&gt; CoDataFrame&lt; Index, T &gt;::m_index</definition>
+        <argsstring></argsstring>
+        <name>m_index</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/files_functions.hpp" line="270" column="15" bodyfile="lib/files_functions.hpp" bodystart="270" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_co_data_frame_1a73c25cc0f8b810b051f3e0c5c3dedfcc" prot="private" static="no" mutable="no">
+        <type><ref refid="lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638" kindref="member">size_t</ref></type>
+        <definition>size_t CoDataFrame&lt; Index, T &gt;::size</definition>
+        <argsstring></argsstring>
+        <name>size</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/files_functions.hpp" line="273" column="10" bodyfile="lib/files_functions.hpp" bodystart="273" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_co_data_frame_1a8b4711944af95ac655a64d7c6ae642ad" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>CoDataFrame&lt; Index, T &gt;::CoDataFrame</definition>
+        <argsstring>()=default</argsstring>
+        <name>CoDataFrame</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/files_functions.hpp" line="261" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="class_co_data_frame_1acefddf32b3e68daa5e8616c50adf670a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>CoDataFrame&lt; Index, T &gt;::CoDataFrame</definition>
+        <argsstring>(std::string const &amp;filename, std::string const &amp;type=&quot;csv&quot;)</argsstring>
+        <name>CoDataFrame</name>
+        <param>
+          <type>std::string const &amp;</type>
+          <declname>filename</declname>
+        </param>
+        <param>
+          <type>std::string const &amp;</type>
+          <declname>type</declname>
+          <defval>&quot;csv&quot;</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/files_functions.hpp" line="262" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="class_co_data_frame_1a1aff8a5a81105e495961fe2610c60c35" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto const  &amp;</type>
+        <definition>auto const&amp; CoDataFrame&lt; Index, T &gt;::filename</definition>
+        <argsstring>() const</argsstring>
+        <name>filename</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/files_functions.hpp" line="264" column="15" bodyfile="lib/files_functions.hpp" bodystart="264" bodyend="264"/>
+        <references refid="class_co_data_frame_1aab49f63af655fd9bea2efb8952dfcac4" compoundref="files__functions_8hpp" startline="276">CoDataFrame&lt; Index, T &gt;::m_filename</references>
+      </memberdef>
+      <memberdef kind="function" id="class_co_data_frame_1a0bcdc865bd25f1835e17f471349e2d6f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void CoDataFrame&lt; Index, T &gt;::load</definition>
+        <argsstring>(std::string const &amp;filename, std::string const &amp;type)</argsstring>
+        <name>load</name>
+        <param>
+          <type>std::string const &amp;</type>
+          <declname>filename</declname>
+        </param>
+        <param>
+          <type>std::string const &amp;</type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/files_functions.hpp" line="265" column="8"/>
+      </memberdef>
+      <memberdef kind="function" id="class_co_data_frame_1a62ae554984ec74b6217dc716bff3bf06" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void CoDataFrame&lt; Index, T &gt;::operator&lt;&lt;</definition>
+        <argsstring>(std::istringstream &amp;iss)</argsstring>
+        <name>operator&lt;&lt;</name>
+        <param>
+          <type>std::istringstream &amp;</type>
+          <declname>iss</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/files_functions.hpp" line="267" column="3"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="lib/files_functions.hpp" line="258" column="1" bodyfile="lib/files_functions.hpp" bodystart="259" bodyend="277"/>
+    <listofallmembers>
+      <member refid="class_co_data_frame_1a8b4711944af95ac655a64d7c6ae642ad" prot="public" virt="non-virtual"><scope>CoDataFrame</scope><name>CoDataFrame</name></member>
+      <member refid="class_co_data_frame_1acefddf32b3e68daa5e8616c50adf670a" prot="public" virt="non-virtual"><scope>CoDataFrame</scope><name>CoDataFrame</name></member>
+      <member refid="class_co_data_frame_1a1aff8a5a81105e495961fe2610c60c35" prot="public" virt="non-virtual"><scope>CoDataFrame</scope><name>filename</name></member>
+      <member refid="class_co_data_frame_1a06bba67b6dee06535e14218320751c2c" prot="private" virt="non-virtual"><scope>CoDataFrame</scope><name>good</name></member>
+      <member refid="class_co_data_frame_1a0bcdc865bd25f1835e17f471349e2d6f" prot="public" virt="non-virtual"><scope>CoDataFrame</scope><name>load</name></member>
+      <member refid="class_co_data_frame_1af2798a5ea665091240b51eb2373f3c35" prot="private" virt="non-virtual"><scope>CoDataFrame</scope><name>m_data</name></member>
+      <member refid="class_co_data_frame_1aab49f63af655fd9bea2efb8952dfcac4" prot="private" virt="non-virtual"><scope>CoDataFrame</scope><name>m_filename</name></member>
+      <member refid="class_co_data_frame_1a00eee215324aa22e4001d8f1e09dc2b0" prot="private" virt="non-virtual"><scope>CoDataFrame</scope><name>m_index</name></member>
+      <member refid="class_co_data_frame_1a62ae554984ec74b6217dc716bff3bf06" prot="public" virt="non-virtual"><scope>CoDataFrame</scope><name>operator&lt;&lt;</name></member>
+      <member refid="class_co_data_frame_1a73c25cc0f8b810b051f3e0c5c3dedfcc" prot="private" virt="non-virtual"><scope>CoDataFrame</scope><name>size</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

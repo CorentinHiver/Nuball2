@@ -1,0 +1,159 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_vector__functions_8hpp" xml:lang="en-US">
+<title>lib/vector_functions.hpp File Reference</title>
+<indexterm><primary>lib/vector_functions.hpp</primary></indexterm>
+<programlisting>#include &quot;print.hpp&quot;
+</programlisting>Include dependency graph for vector_functions.hpp:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="vector__functions_8hpp__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+This graph shows which files directly or indirectly include this file:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="vector__functions_8hpp__dep__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>class <link linkend="_class_static_vector">StaticVector&lt; T &gt;</link></para>
+
+<para>An efficient container for dynamic arrays with a known and fixed maximum size. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>template&lt;typename T &gt; </para><para>std::vector&lt; int &gt; <link linkend="_vector__functions_8hpp_1a473cc8f4e0f7089c2a1757a435f7ae04">bubbleSort</link> (std::vector&lt; T &gt; const &amp;vector)</para>
+</listitem>
+            <listitem><para>template&lt;typename T &gt; </para><para>std::vector&lt; int &gt; <link linkend="_vector__functions_8hpp_1a28b5494cf9f51ee725e680752955a8e1">bubbleSort</link> (std::vector&lt; T &gt; const &amp;vector, std::vector&lt; int &gt; &amp;indexes)</para>
+</listitem>
+            <listitem><para>template&lt;class T &gt; </para><para>void <link linkend="_vector__functions_8hpp_1a9261ebb5fd81046aa8620dddb2b3ea75">fill2D</link> (std::vector&lt; std::vector&lt; T &gt;&gt; &amp;vec2, <link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> const &amp;size_x, <link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> const &amp;size_y, T const &amp;obj)</para>
+</listitem>
+            <listitem><para>template&lt;typename T &gt; </para><para>bool <link linkend="_vector__functions_8hpp_1a14962b41d2983daea3bcdc089a8257ef">found</link> (std::vector&lt; T &gt; &amp;vector, T &amp;t)</para>
+</listitem>
+            <listitem><para>template&lt;typename T &gt; </para><para>bool <link linkend="_vector__functions_8hpp_1afc7684c3345171a9a9655f11757aa0fe">found</link> (std::vector&lt; T &gt; &amp;vector, T const &amp;t)</para>
+</listitem>
+            <listitem><para>template&lt;typename T &gt; </para><para>bool <link linkend="_vector__functions_8hpp_1adaad9cc33dbf016cd85fd4e57823d667">found</link> (std::vector&lt; T &gt; const &amp;vector, T &amp;t)</para>
+</listitem>
+            <listitem><para>template&lt;typename T &gt; </para><para>bool <link linkend="_vector__functions_8hpp_1afbed7719916e5ec83a4dbfc0d3b45460">found</link> (std::vector&lt; T &gt; const &amp;vector, T const &amp;t)</para>
+</listitem>
+            <listitem><para>template&lt;typename T &gt; </para><para>T <link linkend="_vector__functions_8hpp_1a4baf3e978c4b72d0b3c52b064fa3c03e">maximum</link> (std::vector&lt; T &gt; const &amp;vector)</para>
+</listitem>
+            <listitem><para>template&lt;typename T &gt; </para><para>T <link linkend="_vector__functions_8hpp_1a66a5408a65e33e909fef9fecfc9837a1">maximumIndex</link> (std::vector&lt; T &gt; const &amp;vector)</para>
+</listitem>
+            <listitem><para>template&lt;typename T &gt; </para><para>T <link linkend="_vector__functions_8hpp_1a233e14aaf671f05f29c0fe50e646f171">minimum</link> (std::vector&lt; T &gt; const &amp;vector)</para>
+</listitem>
+            <listitem><para>template&lt;typename T &gt; </para><para>T <link linkend="_vector__functions_8hpp_1a660ee419eb6d35b4ac555e5bb5ab66cd">minimumIndex</link> (std::vector&lt; T &gt; const &amp;vector)</para>
+</listitem>
+            <listitem><para>template&lt;class T &gt; </para><para>std::ostream &amp; <link linkend="_vector__functions_8hpp_1a8852828b5aaff87e96c53054a243209d">operator&lt;&lt;</link> (std::ostream &amp;cout, <link linkend="_class_static_vector">StaticVector</link>&lt; T &gt; const &amp;vector)</para>
+</listitem>
+            <listitem><para>template&lt;class T &gt; </para><para>std::istream &amp; <link linkend="_vector__functions_8hpp_1af8f06ed14ec8b1697169763a8d895105">operator&gt;&gt;</link> (std::istream &amp;input, std::vector&lt; T &gt; vector)</para>
+</listitem>
+            <listitem><para>template&lt;class T &gt; </para><para>std::istringstream &amp; <link linkend="_vector__functions_8hpp_1a197f281dbd89780c3e0c6e50192cf637">operator&gt;&gt;</link> (std::istringstream &amp;is, std::vector&lt; T &gt; &amp;v)</para>
+</listitem>
+            <listitem><para>template&lt;typename T &gt; </para><para>bool <link linkend="_vector__functions_8hpp_1a0714a23fb316299fdee1e44d9f46343b">push_back_unique</link> (std::vector&lt; T &gt; &amp;vector, T const &amp;t)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_vector__functions_8hpp_1a473cc8f4e0f7089c2a1757a435f7ae04"/>    <section>
+    <title>bubbleSort()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>bubbleSort</primary><secondary>vector_functions.hpp</secondary></indexterm>
+<indexterm><primary>vector_functions.hpp</primary><secondary>bubbleSort</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput>std::vector&lt;int&gt; bubbleSort (std::vector&lt; T &gt; const &amp; vector)</computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="vector__functions_8hpp_a473cc8f4e0f7089c2a1757a435f7ae04_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_vector__functions_8hpp_1a28b5494cf9f51ee725e680752955a8e1"/>    <section>
+    <title>bubbleSort()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>bubbleSort</primary><secondary>vector_functions.hpp</secondary></indexterm>
+<indexterm><primary>vector_functions.hpp</primary><secondary>bubbleSort</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput>std::vector&lt;int&gt; bubbleSort (std::vector&lt; T &gt; const &amp; vector, std::vector&lt; int &gt; &amp; indexes)</computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="vector__functions_8hpp_a28b5494cf9f51ee725e680752955a8e1_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_vector__functions_8hpp_1a9261ebb5fd81046aa8620dddb2b3ea75"/>    <section>
+    <title>fill2D()</title>
+<indexterm><primary>fill2D</primary><secondary>vector_functions.hpp</secondary></indexterm>
+<indexterm><primary>vector_functions.hpp</primary><secondary>fill2D</secondary></indexterm>
+<computeroutput>template&lt;class T &gt; </computeroutput><para><computeroutput>void fill2D (std::vector&lt; std::vector&lt; T &gt;&gt; &amp; vec2, <link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> const &amp; size_x, <link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> const &amp; size_y, T const &amp; obj)</computeroutput></para>    </section><anchor xml:id="_vector__functions_8hpp_1a14962b41d2983daea3bcdc089a8257ef"/>    <section>
+    <title>found()<computeroutput>[1/4]</computeroutput></title>
+<indexterm><primary>found</primary><secondary>vector_functions.hpp</secondary></indexterm>
+<indexterm><primary>vector_functions.hpp</primary><secondary>found</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput>bool found (std::vector&lt; T &gt; &amp; vector, T &amp; t)</computeroutput></para>    </section><anchor xml:id="_vector__functions_8hpp_1afc7684c3345171a9a9655f11757aa0fe"/>    <section>
+    <title>found()<computeroutput>[2/4]</computeroutput></title>
+<indexterm><primary>found</primary><secondary>vector_functions.hpp</secondary></indexterm>
+<indexterm><primary>vector_functions.hpp</primary><secondary>found</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput>bool found (std::vector&lt; T &gt; &amp; vector, T const &amp; t)</computeroutput></para>    </section><anchor xml:id="_vector__functions_8hpp_1adaad9cc33dbf016cd85fd4e57823d667"/>    <section>
+    <title>found()<computeroutput>[3/4]</computeroutput></title>
+<indexterm><primary>found</primary><secondary>vector_functions.hpp</secondary></indexterm>
+<indexterm><primary>vector_functions.hpp</primary><secondary>found</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput>bool found (std::vector&lt; T &gt; const &amp; vector, T &amp; t)</computeroutput></para>    </section><anchor xml:id="_vector__functions_8hpp_1afbed7719916e5ec83a4dbfc0d3b45460"/>    <section>
+    <title>found()<computeroutput>[4/4]</computeroutput></title>
+<indexterm><primary>found</primary><secondary>vector_functions.hpp</secondary></indexterm>
+<indexterm><primary>vector_functions.hpp</primary><secondary>found</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput>bool found (std::vector&lt; T &gt; const &amp; vector, T const &amp; t)</computeroutput></para>    </section><anchor xml:id="_vector__functions_8hpp_1a4baf3e978c4b72d0b3c52b064fa3c03e"/>    <section>
+    <title>maximum()</title>
+<indexterm><primary>maximum</primary><secondary>vector_functions.hpp</secondary></indexterm>
+<indexterm><primary>vector_functions.hpp</primary><secondary>maximum</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput>T maximum (std::vector&lt; T &gt; const &amp; vector)</computeroutput></para>    </section><anchor xml:id="_vector__functions_8hpp_1a66a5408a65e33e909fef9fecfc9837a1"/>    <section>
+    <title>maximumIndex()</title>
+<indexterm><primary>maximumIndex</primary><secondary>vector_functions.hpp</secondary></indexterm>
+<indexterm><primary>vector_functions.hpp</primary><secondary>maximumIndex</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput>T maximumIndex (std::vector&lt; T &gt; const &amp; vector)</computeroutput></para>    </section><anchor xml:id="_vector__functions_8hpp_1a233e14aaf671f05f29c0fe50e646f171"/>    <section>
+    <title>minimum()</title>
+<indexterm><primary>minimum</primary><secondary>vector_functions.hpp</secondary></indexterm>
+<indexterm><primary>vector_functions.hpp</primary><secondary>minimum</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput>T minimum (std::vector&lt; T &gt; const &amp; vector)</computeroutput></para>    </section><anchor xml:id="_vector__functions_8hpp_1a660ee419eb6d35b4ac555e5bb5ab66cd"/>    <section>
+    <title>minimumIndex()</title>
+<indexterm><primary>minimumIndex</primary><secondary>vector_functions.hpp</secondary></indexterm>
+<indexterm><primary>vector_functions.hpp</primary><secondary>minimumIndex</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput>T minimumIndex (std::vector&lt; T &gt; const &amp; vector)</computeroutput></para>    </section><anchor xml:id="_vector__functions_8hpp_1a8852828b5aaff87e96c53054a243209d"/>    <section>
+    <title>operator&lt;&lt;()</title>
+<indexterm><primary>operator&lt;&lt;</primary><secondary>vector_functions.hpp</secondary></indexterm>
+<indexterm><primary>vector_functions.hpp</primary><secondary>operator&lt;&lt;</secondary></indexterm>
+<computeroutput>template&lt;class T &gt; </computeroutput><para><computeroutput>std::ostream&amp; operator&lt;&lt; (std::ostream &amp; cout, <link linkend="_class_static_vector">StaticVector</link>&lt; T &gt; const &amp; vector)</computeroutput></para>    </section><anchor xml:id="_vector__functions_8hpp_1af8f06ed14ec8b1697169763a8d895105"/>    <section>
+    <title>operator&gt;&gt;()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>operator&gt;&gt;</primary><secondary>vector_functions.hpp</secondary></indexterm>
+<indexterm><primary>vector_functions.hpp</primary><secondary>operator&gt;&gt;</secondary></indexterm>
+<computeroutput>template&lt;class T &gt; </computeroutput><para><computeroutput>std::istream&amp; operator&gt;&gt; (std::istream &amp; input, std::vector&lt; T &gt; vector)</computeroutput></para>    </section><anchor xml:id="_vector__functions_8hpp_1a197f281dbd89780c3e0c6e50192cf637"/>    <section>
+    <title>operator&gt;&gt;()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>operator&gt;&gt;</primary><secondary>vector_functions.hpp</secondary></indexterm>
+<indexterm><primary>vector_functions.hpp</primary><secondary>operator&gt;&gt;</secondary></indexterm>
+<computeroutput>template&lt;class T &gt; </computeroutput><para><computeroutput>std::istringstream&amp; operator&gt;&gt; (std::istringstream &amp; is, std::vector&lt; T &gt; &amp; v)</computeroutput></para>    </section><anchor xml:id="_vector__functions_8hpp_1a0714a23fb316299fdee1e44d9f46343b"/>    <section>
+    <title>push_back_unique()</title>
+<indexterm><primary>push_back_unique</primary><secondary>vector_functions.hpp</secondary></indexterm>
+<indexterm><primary>vector_functions.hpp</primary><secondary>push_back_unique</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput>bool push_back_unique (std::vector&lt; T &gt; &amp; vector, T const &amp; t)</computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="vector__functions_8hpp_a0714a23fb316299fdee1e44d9f46343b_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+</section>
+</section>

@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__m_t_t_hist_8hpp" xml:lang="en-US">
+<title>lib/MTObjects/MTTHist.hpp File Reference</title>
+<indexterm><primary>lib/MTObjects/MTTHist.hpp</primary></indexterm>
+<programlisting>#include &quot;MTObject.hpp&quot;
+#include &quot;MTCounter.hpp&quot;
+</programlisting>Include dependency graph for MTTHist.hpp:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="_m_t_t_hist_8hpp__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+This graph shows which files directly or indirectly include this file:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="_m_t_t_hist_8hpp__dep__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>class <link linkend="_class_m_t_t_hist">MTTHist&lt; THist &gt;</link></para>
+
+<para>Multithreading wrapper for all THist spectra of root library. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Typedefs    </title>
+        <itemizedlist>
+            <listitem><para>template&lt;class THist &gt; </para><para>using <link linkend="__m_t_t_hist_8hpp_1ab7cfdf0e608b8024114dc2729684173e">Vector_MTTHist</link> = std::vector&lt; <link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt; &gt;</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Typedef Documentation</title>
+<anchor xml:id="__m_t_t_hist_8hpp_1ab7cfdf0e608b8024114dc2729684173e"/>    <section>
+    <title>Vector_MTTHist</title>
+<indexterm><primary>Vector_MTTHist</primary><secondary>MTTHist.hpp</secondary></indexterm>
+<indexterm><primary>MTTHist.hpp</primary><secondary>Vector_MTTHist</secondary></indexterm>
+<computeroutput>template&lt;class THist &gt; </computeroutput><para><computeroutput>using <link linkend="__m_t_t_hist_8hpp_1ab7cfdf0e608b8024114dc2729684173e">Vector_MTTHist</link> =  std::vector&lt;<link linkend="_class_m_t_t_hist">MTTHist</link>&lt;THist&gt; &gt;</computeroutput></para></section>
+</section>
+</section>

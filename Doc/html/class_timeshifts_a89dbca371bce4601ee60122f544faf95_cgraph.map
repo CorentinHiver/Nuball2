@@ -1,0 +1,7 @@
+<map id="Timeshifts::shiftTimeSpectra" name="Timeshifts::shiftTimeSpectra">
+<area shape="rect" id="node1" title=" " alt="" coords="5,81,213,108"/>
+<area shape="rect" id="node2" href="$lib_co_8hpp.html#a2052317e56aa118e7ffcdb2e398f551c" title="Casts a number into an double." alt="" coords="261,5,361,32"/>
+<area shape="rect" id="node3" href="$lib_co_8hpp.html#a48e80fbfd11f9fb219b92ba1c29c1b2a" title="Casts a number into an int." alt="" coords="275,56,348,83"/>
+<area shape="rect" id="node4" href="$_histogramor_8hpp.html#ab48a2fa7184e6354788989602c8c8c29" title=" " alt="" coords="285,107,337,133"/>
+<area shape="rect" id="node5" href="$_timeshifts_8hpp.html#a0363984bdeb96360bcf8a0a13163f47a" title="Casts a number into unsigned Time." alt="" coords="269,157,354,184"/>
+</map>

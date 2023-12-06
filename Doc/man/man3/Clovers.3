@@ -1,0 +1,478 @@
+.TH "Clovers" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Clovers \- Analyse the clovers in the event\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <Clovers\&.hpp>\fP
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBDelayedGate\fP"
+.br
+.ti -1c
+.RI "class \fBPromptGate\fP"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBAnalyse\fP ()"
+.br
+.ti -1c
+.RI "void \fBAnalyse_more\fP ()"
+.br
+.ti -1c
+.RI "auto \fBbegin\fP () const"
+.br
+.ti -1c
+.RI "void \fBCleanFast\fP ()"
+.br
+.ti -1c
+.RI "\fBClovers\fP ()"
+.br
+.ti -1c
+.RI "auto \fBend\fP () const"
+.br
+.ti -1c
+.RI "bool \fBFill\fP (\fBEvent\fP const &event, \fBsize_t\fP const &index)"
+.br
+.ti -1c
+.RI "bool \fBFillFast\fP (\fBEvent\fP const &event, \fBsize_t\fP const &hit_index)"
+.br
+.ti -1c
+.RI "bool \fBisDelayed\fP (\fBCloverModule\fP const &clover)"
+.br
+.ti -1c
+.RI "bool \fBisPrompt\fP (\fBCloverModule\fP const &clover)"
+.br
+.ti -1c
+.RI "auto \fBmult\fP () const"
+.br
+.ti -1c
+.RI "\fBCloverModule\fP \fBoperator[]\fP (\fBuchar\fP const &i)"
+.br
+.ti -1c
+.RI "\fBCloverModule\fP \fBoperator[]\fP (\fBuchar\fP const &i) const"
+.br
+.ti -1c
+.RI "void \fBPrintClean\fP ()"
+.br
+.ti -1c
+.RI "void \fBReset\fP ()"
+.br
+.ti -1c
+.RI "void \fBSetEvent\fP (\fBEvent\fP const &event)"
+.br
+.RI "Fills the CloverModules for a whole event\&. "
+.ti -1c
+.RI "void \fBSetEvent\fP (\fBEvent\fP const &event, char const &analyse_mode)"
+.br
+.RI "Fills the CloverModules for a whole event\&. "
+.ti -1c
+.RI "auto const  & \fBsize\fP () const"
+.br
+.in -1c
+.SS "Static Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "static void \fBInitializeArrays\fP ()"
+.br
+.RI "Static initialize\&. Allows one to use the arrays event if no object has been instantiated\&. "
+.ti -1c
+.RI "static bool \fBis_clover\fP (\fBLabel\fP const &l)"
+.br
+.ti -1c
+.RI "static bool \fBis_clover_BGO\fP (\fBLabel\fP const &l)"
+.br
+.ti -1c
+.RI "static bool \fBis_clover_Ge\fP (\fBLabel\fP const &l)"
+.br
+.ti -1c
+.RI "static \fBuchar\fP \fBlabel_to_clover\fP (\fBLabel\fP const &l)"
+.br
+.ti -1c
+.RI "static \fBuchar\fP \fBlabel_to_cristal\fP (\fBLabel\fP const &l)"
+.br
+.ti -1c
+.RI "static void \fBsetEnergyThreshold\fP (float const &emin)"
+.br
+.ti -1c
+.RI "static void \fBtimePs\fP (bool const &time_ps)"
+.br
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBStaticVector\fP< \fBuchar\fP > \fBBgo\fP = \fBStaticVector\fP<\fBuchar\fP>(24)"
+.br
+.ti -1c
+.RI "\fBStaticVector\fP< \fBuchar\fP > \fBBGOonly\fP = \fBStaticVector\fP<\fBuchar\fP>(24)"
+.br
+.ti -1c
+.RI "\fBStaticVector\fP< \fBuchar\fP > \fBCleanGe\fP = \fBStaticVector\fP<\fBuchar\fP>(24)"
+.br
+.ti -1c
+.RI "\fBStaticVector\fP< \fBuchar\fP > \fBcristaux\fP = \fBStaticVector\fP<\fBuchar\fP>(96)"
+.br
+.ti -1c
+.RI "\fBStaticVector\fP< \fBuchar\fP > \fBcristaux_BGO\fP = \fBStaticVector\fP<\fBuchar\fP>(48)"
+.br
+.ti -1c
+.RI "std::array< float, 96 > \fBcristaux_nrj\fP = {0}"
+.br
+.ti -1c
+.RI "std::array< float, 48 > \fBcristaux_nrj_BGO\fP = {0}"
+.br
+.ti -1c
+.RI "std::array< double, 96 > \fBcristaux_time\fP = {0}"
+.br
+.ti -1c
+.RI "std::array< double, 48 > \fBcristaux_time_BGO\fP = {0}"
+.br
+.ti -1c
+.RI "\fBuchar\fP \fBCrystalMult\fP = 0"
+.br
+.ti -1c
+.RI "\fBuchar\fP \fBCrystalMult_BGO\fP = 0"
+.br
+.ti -1c
+.RI "\fBStaticVector\fP< \fBuchar\fP > \fBDelayedBGO\fP = \fBStaticVector\fP<\fBuchar\fP>(24)"
+.br
+.ti -1c
+.RI "\fBuchar\fP \fBDelayedCleanGeMult\fP = 0"
+.br
+.ti -1c
+.RI "std::vector< \fBuchar\fP > \fBdelayedClovers\fP"
+.br
+.ti -1c
+.RI "std::vector< \fBCloverModule\fP > \fBDelayedClovers\fP"
+.br
+.ti -1c
+.RI "class \fBClovers::DelayedGate\fP \fBdelayedGate\fP"
+.br
+.ti -1c
+.RI "\fBStaticVector\fP< \fBuchar\fP > \fBDelayedGe\fP = \fBStaticVector\fP<\fBuchar\fP>(24)"
+.br
+.ti -1c
+.RI "\fBuchar\fP \fBDelayedMult\fP = 0"
+.br
+.ti -1c
+.RI "\fBStaticVector\fP< \fBuchar\fP > \fBGe\fP = \fBStaticVector\fP<\fBuchar\fP>(24)"
+.br
+.ti -1c
+.RI "bool \fBhas511\fP = false"
+.br
+.ti -1c
+.RI "\fBStaticVector\fP< \fBuchar\fP > \fBHits\fP = \fBStaticVector\fP<\fBuchar\fP>(24)"
+.br
+.ti -1c
+.RI "std::vector< \fBCloverModule\fP > \fBm_clovers\fP"
+.br
+.ti -1c
+.RI "\fBStaticVector\fP< \fBuchar\fP > \fBPromptBGO\fP = \fBStaticVector\fP<\fBuchar\fP>(24)"
+.br
+.ti -1c
+.RI "\fBuchar\fP \fBPromptCleanGeMult\fP = 0"
+.br
+.ti -1c
+.RI "std::vector< \fBuchar\fP > \fBpromptClovers\fP"
+.br
+.ti -1c
+.RI "std::vector< \fBCloverModule\fP > \fBPromptClovers\fP"
+.br
+.ti -1c
+.RI "class \fBClovers::PromptGate\fP \fBpromptGate\fP"
+.br
+.ti -1c
+.RI "\fBStaticVector\fP< \fBuchar\fP > \fBPromptGe\fP = \fBStaticVector\fP<\fBuchar\fP>(24)"
+.br
+.ti -1c
+.RI "\fBuchar\fP \fBPromptMult\fP = 0"
+.br
+.ti -1c
+.RI "\fBStaticVector\fP< \fBuchar\fP > \fBrawBGO\fP = \fBStaticVector\fP<\fBuchar\fP>(48)"
+.br
+.ti -1c
+.RI "\fBStaticVector\fP< \fBuchar\fP > \fBrawGe\fP = \fBStaticVector\fP<\fBuchar\fP>(96)"
+.br
+.ti -1c
+.RI "\fBStaticVector\fP< \fBuchar\fP > \fBRejectedGe\fP = \fBStaticVector\fP<\fBuchar\fP>(24)"
+.br
+.ti -1c
+.RI "\fBuchar\fP \fBTotalMult\fP = 0"
+.br
+.ti -1c
+.RI "double \fBtotBGO\fP = 0\&.0"
+.br
+.ti -1c
+.RI "double \fBtotBGO_delayed\fP = \-0\&.1"
+.br
+.ti -1c
+.RI "double \fBtotBGO_prompt\fP = \-0\&.1"
+.br
+.ti -1c
+.RI "double \fBtotGe\fP = 0\&.0"
+.br
+.ti -1c
+.RI "double \fBtotGe_delayed\fP = \-0\&.1"
+.br
+.ti -1c
+.RI "double \fBtotGe_prompt\fP = \-0\&.1"
+.br
+.in -1c
+.SS "Static Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "static std::array< \fBuchar\fP, 1000 > \fBcristaux_index\fP"
+.br
+.ti -1c
+.RI "static std::array< \fBuchar\fP, 1000 > \fBcristaux_index_BGO\fP"
+.br
+.ti -1c
+.RI "static \fBGates\fP \fBdelayedBGOgate\fP = {{60\&.f, 145\&.f}}"
+.br
+.ti -1c
+.RI "static \fBGates\fP \fBdelayedGeGate\fP = {{60\&.f, 145\&.f}}"
+.br
+.ti -1c
+.RI "static float \fBEmin\fP = 5\&."
+.br
+.ti -1c
+.RI "static std::array< bool, 1000 > \fBisBGO\fP"
+.br
+.ti -1c
+.RI "static std::array< bool, 1000 > \fBisClover\fP"
+.br
+.ti -1c
+.RI "static std::array< bool, 1000 > \fBisGe\fP"
+.br
+.ti -1c
+.RI "static std::array< \fBuchar\fP, 1000 > \fBlabels\fP"
+.br
+.ti -1c
+.RI "static \fBGate\fP \fBpromptBGOgate\fP = {\-20\&.f, 10\&.f }"
+.br
+.ti -1c
+.RI "static \fBGate\fP \fBpromptGeGate\fP = {\-20\&.f, 10\&.f }"
+.br
+.in -1c
+.SS "Static Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "static bool \fBs_initialised\fP = false"
+.br
+.ti -1c
+.RI "static bool \fBs_time_ps\fP = false"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Analyse the clovers in the event\&. 
+
+Typical use case : 
+.PP
+.nf
+   // Open tree...
+   Event event(tree, "lTn");
+
+   auto root_histo = new THisto(...);
+
+   auto maxEvt = tree -> GetEntries();
+   int eventNumber = 0;
+   Clovers clovers;
+   while (eventNumber<maxEvt)
+   {
+     tree -> GetEntry();
+     clovers.SetEvent(event);
+     for (auto const & clover : event.CleanGe)
+     {
+       root_histo->Fill(clover.nrj);
+     }
+   }
+
+.fi
+.PP
+ This class is Thread Safe ! 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "Clovers::Clovers ()\fC [inline]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "void Clovers::Analyse ()\fC [inline]\fP"
+
+.SS "void Clovers::Analyse_more ()"
+
+.SS "auto Clovers::begin () const\fC [inline]\fP"
+
+.SS "void Clovers::CleanFast ()\fC [inline]\fP"
+
+.SS "auto Clovers::end () const\fC [inline]\fP"
+
+.SS "bool Clovers::Fill (\fBEvent\fP const & event, \fBsize_t\fP const & index)\fC [inline]\fP"
+
+.SS "bool Clovers::FillFast (\fBEvent\fP const & event, \fBsize_t\fP const & hit_index)\fC [inline]\fP"
+
+.SS "static void Clovers::InitializeArrays ()\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Static initialize\&. Allows one to use the arrays event if no object has been instantiated\&. 
+.SS "static bool Clovers::is_clover (\fBLabel\fP const & l)\fC [inline]\fP, \fC [static]\fP"
+
+.SS "static bool Clovers::is_clover_BGO (\fBLabel\fP const & l)\fC [inline]\fP, \fC [static]\fP"
+
+.SS "static bool Clovers::is_clover_Ge (\fBLabel\fP const & l)\fC [inline]\fP, \fC [static]\fP"
+
+.SS "bool Clovers::isDelayed (\fBCloverModule\fP const & clover)\fC [inline]\fP"
+
+.SS "bool Clovers::isPrompt (\fBCloverModule\fP const & clover)\fC [inline]\fP"
+
+.SS "static \fBuchar\fP Clovers::label_to_clover (\fBLabel\fP const & l)\fC [inline]\fP, \fC [static]\fP"
+
+.SS "\fBuchar\fP Clovers::label_to_cristal (\fBLabel\fP const & l)\fC [static]\fP"
+
+.SS "auto Clovers::mult () const\fC [inline]\fP"
+
+.SS "\fBCloverModule\fP Clovers::operator[] (\fBuchar\fP const & i)\fC [inline]\fP"
+
+.SS "\fBCloverModule\fP Clovers::operator[] (\fBuchar\fP const & i) const\fC [inline]\fP"
+
+.SS "void Clovers::PrintClean ()\fC [inline]\fP"
+
+.SS "void Clovers::Reset ()\fC [inline]\fP"
+
+.SS "static void Clovers::setEnergyThreshold (float const & emin)\fC [inline]\fP, \fC [static]\fP"
+
+.SS "void Clovers::SetEvent (\fBEvent\fP const & event)\fC [inline]\fP"
+
+.PP
+Fills the CloverModules for a whole event\&. Two modes : 1 : normal mode, skip the compton cleaning 2 : new mode 
+.SS "void Clovers::SetEvent (\fBEvent\fP const & event, char const & analyse_mode)\fC [inline]\fP"
+
+.PP
+Fills the CloverModules for a whole event\&. Two modes : 1 : normal mode, skip the compton cleaning 2 : new mode 
+.SS "auto const& Clovers::size () const\fC [inline]\fP"
+
+.SS "static void Clovers::timePs (bool const & time_ps)\fC [inline]\fP, \fC [static]\fP"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "\fBStaticVector\fP<\fBuchar\fP> Clovers::Bgo = \fBStaticVector\fP<\fBuchar\fP>(24)"
+
+.SS "\fBStaticVector\fP<\fBuchar\fP> Clovers::BGOonly = \fBStaticVector\fP<\fBuchar\fP>(24)"
+
+.SS "\fBStaticVector\fP<\fBuchar\fP> Clovers::CleanGe = \fBStaticVector\fP<\fBuchar\fP>(24)"
+
+.SS "\fBStaticVector\fP<\fBuchar\fP> Clovers::cristaux = \fBStaticVector\fP<\fBuchar\fP>(96)"
+
+.SS "\fBStaticVector\fP<\fBuchar\fP> Clovers::cristaux_BGO = \fBStaticVector\fP<\fBuchar\fP>(48)"
+
+.SS "std::array< \fBuchar\fP, 1000 > Clovers::cristaux_index\fC [static]\fP"
+
+.SS "std::array< \fBuchar\fP, 1000 > Clovers::cristaux_index_BGO\fC [static]\fP"
+
+.SS "std::array<float, 96> Clovers::cristaux_nrj = {0}"
+
+.SS "std::array<float, 48> Clovers::cristaux_nrj_BGO = {0}"
+
+.SS "std::array<double, 96> Clovers::cristaux_time = {0}"
+
+.SS "std::array<double, 48> Clovers::cristaux_time_BGO = {0}"
+
+.SS "\fBuchar\fP Clovers::CrystalMult = 0"
+
+.SS "\fBuchar\fP Clovers::CrystalMult_BGO = 0"
+
+.SS "\fBStaticVector\fP<\fBuchar\fP> Clovers::DelayedBGO = \fBStaticVector\fP<\fBuchar\fP>(24)"
+
+.SS "\fBGates\fP Clovers::delayedBGOgate = {{60\&.f, 145\&.f}}\fC [static]\fP"
+
+.SS "\fBuchar\fP Clovers::DelayedCleanGeMult = 0"
+
+.SS "std::vector<\fBuchar\fP> Clovers::delayedClovers"
+
+.SS "std::vector<\fBCloverModule\fP> Clovers::DelayedClovers"
+
+.SS "class \fBClovers::DelayedGate\fP Clovers::delayedGate"
+
+.SS "\fBStaticVector\fP<\fBuchar\fP> Clovers::DelayedGe = \fBStaticVector\fP<\fBuchar\fP>(24)"
+
+.SS "\fBGates\fP Clovers::delayedGeGate = {{60\&.f, 145\&.f}}\fC [static]\fP"
+
+.SS "\fBuchar\fP Clovers::DelayedMult = 0"
+
+.SS "float Clovers::Emin = 5\&.\fC [static]\fP"
+
+.SS "\fBStaticVector\fP<\fBuchar\fP> Clovers::Ge = \fBStaticVector\fP<\fBuchar\fP>(24)"
+
+.SS "bool Clovers::has511 = false"
+
+.SS "\fBStaticVector\fP<\fBuchar\fP> Clovers::Hits = \fBStaticVector\fP<\fBuchar\fP>(24)"
+
+.SS "std::array< bool, 1000 > Clovers::isBGO\fC [static]\fP"
+
+.SS "std::array< bool, 1000 > Clovers::isClover\fC [static]\fP"
+
+.SS "std::array< bool, 1000 > Clovers::isGe\fC [static]\fP"
+
+.SS "std::array< \fBuchar\fP, 1000 > Clovers::labels\fC [static]\fP"
+
+.SS "std::vector<\fBCloverModule\fP> Clovers::m_clovers"
+
+.SS "\fBStaticVector\fP<\fBuchar\fP> Clovers::PromptBGO = \fBStaticVector\fP<\fBuchar\fP>(24)"
+
+.SS "\fBGate\fP Clovers::promptBGOgate = {\-20\&.f, 10\&.f }\fC [static]\fP"
+
+.SS "\fBuchar\fP Clovers::PromptCleanGeMult = 0"
+
+.SS "std::vector<\fBuchar\fP> Clovers::promptClovers"
+
+.SS "std::vector<\fBCloverModule\fP> Clovers::PromptClovers"
+
+.SS "class \fBClovers::PromptGate\fP Clovers::promptGate"
+
+.SS "\fBStaticVector\fP<\fBuchar\fP> Clovers::PromptGe = \fBStaticVector\fP<\fBuchar\fP>(24)"
+
+.SS "\fBGate\fP Clovers::promptGeGate = {\-20\&.f, 10\&.f }\fC [static]\fP"
+
+.SS "\fBuchar\fP Clovers::PromptMult = 0"
+
+.SS "\fBStaticVector\fP<\fBuchar\fP> Clovers::rawBGO = \fBStaticVector\fP<\fBuchar\fP>(48)"
+
+.SS "\fBStaticVector\fP<\fBuchar\fP> Clovers::rawGe = \fBStaticVector\fP<\fBuchar\fP>(96)"
+
+.SS "\fBStaticVector\fP<\fBuchar\fP> Clovers::RejectedGe = \fBStaticVector\fP<\fBuchar\fP>(24)"
+
+.SS "bool Clovers::s_initialised = false\fC [static]\fP, \fC [private]\fP"
+
+.SS "bool Clovers::s_time_ps = false\fC [static]\fP, \fC [private]\fP"
+
+.SS "\fBuchar\fP Clovers::TotalMult = 0"
+
+.SS "double Clovers::totBGO = 0\&.0"
+
+.SS "double Clovers::totBGO_delayed = \-0\&.1"
+
+.SS "double Clovers::totBGO_prompt = \-0\&.1"
+
+.SS "double Clovers::totGe = 0\&.0"
+
+.SS "double Clovers::totGe_delayed = \-0\&.1"
+
+.SS "double Clovers::totGe_prompt = \-0\&.1"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Nuball2 from the source code\&.

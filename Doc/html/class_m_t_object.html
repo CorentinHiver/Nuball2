@@ -85,7 +85,6 @@ $(document).ready(function(){initNavTree('class_m_t_object.html',''); initResiza
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#pub-static-attribs">Static Public Attributes</a> &#124;
-<a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="#pri-static-attribs">Static Private Attributes</a> &#124;
 <a href="class_m_t_object-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -94,66 +93,62 @@ $(document).ready(function(){initNavTree('class_m_t_object.html',''); initResiza
 <div class="contents">
 
 <p><code>#include &lt;<a class="el" href="_m_t_object_8hpp_source.html">MTObject.hpp</a>&gt;</code></p>
-<div class="dynheader">
-Inheritance diagram for MTObject:</div>
-<div class="dyncontent">
-<div class="center"><img src="class_m_t_object__inherit__graph.png" border="0" usemap="#a_m_t_object_inherit__map" alt="Inheritance graph"/></div>
-<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
-<div class="dynheader">
-Collaboration diagram for MTObject:</div>
-<div class="dyncontent">
-<div class="center"><img src="class_m_t_object__coll__graph.png" border="0" usemap="#a_m_t_object_coll__map" alt="Collaboration graph"/></div>
-<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a12856506adc231bafc0983c881c3fe36"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_t_object.html#a12856506adc231bafc0983c881c3fe36">MTObject</a> ()</td></tr>
 <tr class="separator:a12856506adc231bafc0983c881c3fe36"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abd4acfeab1934837e2f41be3452f838b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_t_object.html#abd4acfeab1934837e2f41be3452f838b">MTObject</a> (<a class="el" href="lib_co_8hpp.html#a3fa7784c89589b49764048e9909d0e07">ushort</a> &amp;_nb_threads)</td></tr>
-<tr class="separator:abd4acfeab1934837e2f41be3452f838b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a813cbf27a03a3b334ebc9faec99a5158"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_t_object.html#a813cbf27a03a3b334ebc9faec99a5158">MTObject</a> (<a class="el" href="lib_co_8hpp.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a> &amp;_nb_threads)</td></tr>
+<tr class="separator:a813cbf27a03a3b334ebc9faec99a5158"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a048c52b4b15fc13667559a5b07d71002"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_t_object.html#a048c52b4b15fc13667559a5b07d71002">operator bool</a> ()</td></tr>
 <tr class="separator:a048c52b4b15fc13667559a5b07d71002"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a6b64d40ead09992458735fb862dcf33d"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_t_object.html#a6b64d40ead09992458735fb862dcf33d">adjustThreadsNumber</a> (int const &amp;limiting_number, std::string const &amp;print_if_limit=&quot;&quot;)</td></tr>
-<tr class="separator:a6b64d40ead09992458735fb862dcf33d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac58d31e459097547352bf2785dc8f40a"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_t_object.html#ac58d31e459097547352bf2785dc8f40a">getThreadIndex</a> ()</td></tr>
-<tr class="separator:ac58d31e459097547352bf2785dc8f40a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac76ab61815b5c3a471e6c210b7ba1913"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_t_object.html#ac76ab61815b5c3a471e6c210b7ba1913">adjustThreadsNumber</a> (<a class="el" href="lib_co_8hpp.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a> const &amp;limiting_number, std::string const &amp;print_if_limit_reached=&quot;&quot;)</td></tr>
+<tr class="separator:ac76ab61815b5c3a471e6c210b7ba1913"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c9a57a49a12e1d408a5354e8520b3fe"><td class="memItemLeft" align="right" valign="top">static auto const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_t_object.html#a9c9a57a49a12e1d408a5354e8520b3fe">getThreadIndex</a> ()</td></tr>
+<tr class="separator:a9c9a57a49a12e1d408a5354e8520b3fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac97399bb34f766e41e7f9a1cd1b7eb7a"><td class="memItemLeft" align="right" valign="top">static auto const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_t_object.html#ac97399bb34f766e41e7f9a1cd1b7eb7a">getThreadsNb</a> ()</td></tr>
 <tr class="separator:ac97399bb34f766e41e7f9a1cd1b7eb7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0230b58b8d09067fec22fbe8a5f3db89"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_t_object.html#a0230b58b8d09067fec22fbe8a5f3db89">Initialize</a> (<a class="el" href="lib_co_8hpp.html#a3fa7784c89589b49764048e9909d0e07">ushort</a> const &amp;_nb_threads, bool force=false)</td></tr>
-<tr class="separator:a0230b58b8d09067fec22fbe8a5f3db89"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad156f9b1c68f0e2713abb16890b1fa15"><td class="memItemLeft" align="right" valign="top">static auto const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_t_object.html#ad156f9b1c68f0e2713abb16890b1fa15">getThreadsNumber</a> ()</td></tr>
+<tr class="separator:ad156f9b1c68f0e2713abb16890b1fa15"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af752e86ec494c50d1af7e6442c09733b"><td class="memItemLeft" align="right" valign="top">static auto const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_t_object.html#af752e86ec494c50d1af7e6442c09733b">index</a> ()</td></tr>
+<tr class="separator:af752e86ec494c50d1af7e6442c09733b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa3623d88deae3a9311aad39bfff49dc"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_t_object.html#aaa3623d88deae3a9311aad39bfff49dc">Initialize</a> ()</td></tr>
+<tr class="separator:aaa3623d88deae3a9311aad39bfff49dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa5354a0915c26979a49d54f36019df1"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_t_object.html#aaa5354a0915c26979a49d54f36019df1">Initialize</a> (<a class="el" href="lib_co_8hpp.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a> const &amp;_nb_threads, bool force=false)</td></tr>
+<tr class="separator:aaa5354a0915c26979a49d54f36019df1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3350577ca839e2abdcd4d6f6449a1408"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_t_object.html#a3350577ca839e2abdcd4d6f6449a1408">isMasterThread</a> ()</td></tr>
 <tr class="separator:a3350577ca839e2abdcd4d6f6449a1408"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2ab537a6eb39f3bbc70535c053333fcc"><td class="memTemplParams" colspan="2">template&lt;class Func , class... ARGS&gt; </td></tr>
-<tr class="memitem:a2ab537a6eb39f3bbc70535c053333fcc"><td class="memTemplItemLeft" align="right" valign="top">static void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_m_t_object.html#a2ab537a6eb39f3bbc70535c053333fcc">parallelise_function</a> (Func func, ARGS &amp;&amp;... args)</td></tr>
-<tr class="separator:a2ab537a6eb39f3bbc70535c053333fcc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a31bd82ba444b64dadf85e8aa272795f6"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_t_object.html#a31bd82ba444b64dadf85e8aa272795f6">setThreadsNb</a> (int const &amp;n)</td></tr>
-<tr class="separator:a31bd82ba444b64dadf85e8aa272795f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a35c02650eb403bd54e867f93bb26fc47"><td class="memTemplParams" colspan="2">template&lt;class Func , class... ARGS&gt; </td></tr>
+<tr class="memitem:a35c02650eb403bd54e867f93bb26fc47"><td class="memTemplItemLeft" align="right" valign="top">static void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_m_t_object.html#a35c02650eb403bd54e867f93bb26fc47">parallelise_function</a> (Func &amp;&amp;func, ARGS &amp;&amp;... args)</td></tr>
+<tr class="separator:a35c02650eb403bd54e867f93bb26fc47"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a872d9518e0a1936df8e70a2dae303f4f"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_t_object.html#a872d9518e0a1936df8e70a2dae303f4f">setThreadsNb</a> (int const &amp;n, bool force=false)</td></tr>
+<tr class="separator:a872d9518e0a1936df8e70a2dae303f4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f91c9269a027d1770d7bae3b6d599a5"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_t_object.html#a8f91c9269a027d1770d7bae3b6d599a5">setThreadsNb</a> (<a class="el" href="lib_co_8hpp.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a> const &amp;n, bool force=false)</td></tr>
+<tr class="memdesc:a8f91c9269a027d1770d7bae3b6d599a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the number of threads.  <a href="class_m_t_object.html#a8f91c9269a027d1770d7bae3b6d599a5">More...</a><br /></td></tr>
+<tr class="separator:a8f91c9269a027d1770d7bae3b6d599a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b70d4506ed556d5ca4c23703a80ddb6"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_t_object.html#a8b70d4506ed556d5ca4c23703a80ddb6">setThreadsNumber</a> (<a class="el" href="lib_co_8hpp.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a> const &amp;n, bool force=false)</td></tr>
+<tr class="separator:a8b70d4506ed556d5ca4c23703a80ddb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
-<tr class="memitem:ab5232435baae5d2c8992f64a4e23a2c4"><td class="memItemLeft" align="right" valign="top">static std::thread::id&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_t_object.html#ab5232435baae5d2c8992f64a4e23a2c4">master_thread</a></td></tr>
-<tr class="separator:ab5232435baae5d2c8992f64a4e23a2c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9454424fac1eea42557ba2cb0cf1d342"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="lib_co_8hpp.html#a3fa7784c89589b49764048e9909d0e07">ushort</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_t_object.html#a9454424fac1eea42557ba2cb0cf1d342">nb_threads</a> = 1</td></tr>
-<tr class="separator:a9454424fac1eea42557ba2cb0cf1d342"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a79d86fbc8837ba0f9a4cd1405fddef1c"><td class="memItemLeft" align="right" valign="top">static std::mutex&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_t_object.html#a79d86fbc8837ba0f9a4cd1405fddef1c">mutex</a></td></tr>
+<tr class="separator:a79d86fbc8837ba0f9a4cd1405fddef1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c2b3cb0cdccca46c8ebba009503ac88"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="lib_co_8hpp.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_t_object.html#a1c2b3cb0cdccca46c8ebba009503ac88">nb_threads</a> = 1</td></tr>
+<tr class="separator:a1c2b3cb0cdccca46c8ebba009503ac88"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6fe86ce1ea64ede7e695490bceb264a3"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_t_object.html#a6fe86ce1ea64ede7e695490bceb264a3">ON</a> = false</td></tr>
 <tr class="separator:a6fe86ce1ea64ede7e695490bceb264a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a28da61d46eb600e14da757d0c851ecbd"><td class="memItemLeft" align="right" valign="top">static std::mutex&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_t_object.html#a28da61d46eb600e14da757d0c851ecbd">shared_mutex</a></td></tr>
-<tr class="separator:a28da61d46eb600e14da757d0c851ecbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a262d9c5d22a1c81352412c1b151bfd63"><td class="memItemLeft" align="right" valign="top">static std::map&lt; std::thread::id, int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_t_object.html#a262d9c5d22a1c81352412c1b151bfd63">threads_ID</a></td></tr>
-<tr class="separator:a262d9c5d22a1c81352412c1b151bfd63"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
-Protected Attributes</h2></td></tr>
-<tr class="memitem:ade5c937ab06c712799a7b889a426020b"><td class="memItemLeft" align="right" valign="top">std::mutex&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_t_object.html#ade5c937ab06c712799a7b889a426020b">m_mutex</a></td></tr>
-<tr class="separator:ade5c937ab06c712799a7b889a426020b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-static-attribs"></a>
 Static Private Attributes</h2></td></tr>
+<tr class="memitem:ac9efab6b9d255529611a250e91779a48"><td class="memItemLeft" align="right" valign="top">static thread_local <a class="el" href="lib_co_8hpp.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_t_object.html#ac9efab6b9d255529611a250e91779a48">m_thread_index</a> = 0</td></tr>
+<tr class="separator:ac9efab6b9d255529611a250e91779a48"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abf0f47fe00f785c060ba2ec35df9819d"><td class="memItemLeft" align="right" valign="top">static std::vector&lt; std::thread &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_t_object.html#abf0f47fe00f785c060ba2ec35df9819d">m_threads</a></td></tr>
 <tr class="separator:abf0f47fe00f785c060ba2ec35df9819d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16983b3e7be4853da5f32145342fc6b0"><td class="memItemLeft" align="right" valign="top">static std::thread::id&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_t_object.html#a16983b3e7be4853da5f32145342fc6b0">master_thread_id</a></td></tr>
+<tr class="separator:a16983b3e7be4853da5f32145342fc6b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a12856506adc231bafc0983c881c3fe36"></a>
@@ -181,8 +176,8 @@ Static Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="abd4acfeab1934837e2f41be3452f838b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abd4acfeab1934837e2f41be3452f838b">&#9670;&nbsp;</a></span>MTObject() <span class="overload">[2/2]</span></h2>
+<a id="a813cbf27a03a3b334ebc9faec99a5158"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a813cbf27a03a3b334ebc9faec99a5158">&#9670;&nbsp;</a></span>MTObject() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -193,7 +188,7 @@ Static Private Attributes</h2></td></tr>
         <tr>
           <td class="memname">MTObject::MTObject </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="lib_co_8hpp.html#a3fa7784c89589b49764048e9909d0e07">ushort</a> &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="lib_co_8hpp.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a> &amp;&#160;</td>
           <td class="paramname"><em>_nb_threads</em></td><td>)</td>
           <td></td>
         </tr>
@@ -207,14 +202,19 @@ Static Private Attributes</h2></td></tr>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_m_t_object_abd4acfeab1934837e2f41be3452f838b_cgraph.png" border="0" usemap="#aclass_m_t_object_abd4acfeab1934837e2f41be3452f838b_cgraph" alt=""/></div>
+<div class="center"><img src="class_m_t_object_a813cbf27a03a3b334ebc9faec99a5158_cgraph.png" border="0" usemap="#aclass_m_t_object_a813cbf27a03a3b334ebc9faec99a5158_cgraph" alt=""/></div>
+<map name="aclass_m_t_object_a813cbf27a03a3b334ebc9faec99a5158_cgraph" id="aclass_m_t_object_a813cbf27a03a3b334ebc9faec99a5158_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,160,32"/>
+<area shape="rect" href="class_m_t_object.html#aaa3623d88deae3a9311aad39bfff49dc" title=" " alt="" coords="208,5,356,32"/>
+<area shape="rect" href="_histogramor_8hpp.html#ab48a2fa7184e6354788989602c8c8c29" title=" " alt="" coords="404,5,456,32"/>
+</map>
 </div>
 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a6b64d40ead09992458735fb862dcf33d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6b64d40ead09992458735fb862dcf33d">&#9670;&nbsp;</a></span>adjustThreadsNumber()</h2>
+<a id="ac76ab61815b5c3a471e6c210b7ba1913"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac76ab61815b5c3a471e6c210b7ba1913">&#9670;&nbsp;</a></span>adjustThreadsNumber()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -225,14 +225,14 @@ Here is the call graph for this function:</div>
         <tr>
           <td class="memname">static void MTObject::adjustThreadsNumber </td>
           <td>(</td>
-          <td class="paramtype">int const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="lib_co_8hpp.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a> const &amp;&#160;</td>
           <td class="paramname"><em>limiting_number</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">std::string const &amp;&#160;</td>
-          <td class="paramname"><em>print_if_limit</em> = <code>&quot;&quot;</code>&#160;</td>
+          <td class="paramname"><em>print_if_limit_reached</em> = <code>&quot;&quot;</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -249,13 +249,19 @@ Here is the call graph for this function:</div>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_m_t_object_a6b64d40ead09992458735fb862dcf33d_cgraph.png" border="0" usemap="#aclass_m_t_object_a6b64d40ead09992458735fb862dcf33d_cgraph" alt=""/></div>
+<div class="center"><img src="class_m_t_object_ac76ab61815b5c3a471e6c210b7ba1913_cgraph.png" border="0" usemap="#aclass_m_t_object_ac76ab61815b5c3a471e6c210b7ba1913_cgraph" alt=""/></div>
+<map name="aclass_m_t_object_ac76ab61815b5c3a471e6c210b7ba1913_cgraph" id="aclass_m_t_object_ac76ab61815b5c3a471e6c210b7ba1913_cgraph">
+<area shape="rect" title=" " alt="" coords="5,43,241,69"/>
+<area shape="rect" href="_histogramor_8hpp.html#ab48a2fa7184e6354788989602c8c8c29" title=" " alt="" coords="355,5,407,32"/>
+<area shape="rect" href="class_m_t_object.html#a872d9518e0a1936df8e70a2dae303f4f" title=" " alt="" coords="289,80,472,107"/>
+<area shape="rect" href="lib_co_8hpp.html#a237f678c718382f74a68364c0fc1779a" title="Casts a number into std::size_t." alt="" coords="520,80,603,107"/>
+</map>
 </div>
 
 </div>
 </div>
-<a id="ac58d31e459097547352bf2785dc8f40a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac58d31e459097547352bf2785dc8f40a">&#9670;&nbsp;</a></span>getThreadIndex()</h2>
+<a id="a9c9a57a49a12e1d408a5354e8520b3fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9c9a57a49a12e1d408a5354e8520b3fe">&#9670;&nbsp;</a></span>getThreadIndex()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -264,7 +270,7 @@ Here is the call graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static int MTObject::getThreadIndex </td>
+          <td class="memname">static auto const&amp; MTObject::getThreadIndex </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -279,7 +285,38 @@ Here is the call graph for this function:</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_m_t_object_ac58d31e459097547352bf2785dc8f40a_icgraph.png" border="0" usemap="#aclass_m_t_object_ac58d31e459097547352bf2785dc8f40a_icgraph" alt=""/></div>
+<div class="center"><img src="class_m_t_object_a9c9a57a49a12e1d408a5354e8520b3fe_icgraph.png" border="0" usemap="#aclass_m_t_object_a9c9a57a49a12e1d408a5354e8520b3fe_icgraph" alt=""/></div>
+<map name="aclass_m_t_object_a9c9a57a49a12e1d408a5354e8520b3fe_icgraph" id="aclass_m_t_object_a9c9a57a49a12e1d408a5354e8520b3fe_icgraph">
+<area shape="rect" title=" " alt="" coords="1597,264,1792,291"/>
+<area shape="rect" href="class_m_t_t_hist.html#a3413cee45758fa0ec41020ae067e3e71" title=" " alt="" coords="1423,176,1526,203"/>
+<area shape="rect" href="class_timeshifts.html#abef7234fe827ae3c7758788cf22b6921" title=" " alt="" coords="907,8,1097,35"/>
+<area shape="rect" href="class_m_t_t_hist.html#a02c41970872fdf5dba693eaa7ef368b6" title=" " alt="" coords="1421,315,1528,341"/>
+<area shape="rect" href="class_histo_analyse.html#a3ebd877de62f44cfde794b8a7dad2a78" title=" " alt="" coords="1400,365,1549,392"/>
+<area shape="rect" href="class_m_t_t_hist.html#ae9163b5b4afca69cfdebdf2cf60064cd" title=" " alt="" coords="943,336,1061,363"/>
+<area shape="rect" href="class_timeshifts.html#a5c037c5bb4b409c3040982c451c6733d" title=" " alt="" coords="1196,59,1313,85"/>
+<area shape="rect" href="class_run_matrixator.html#af360ec9f7686353b663ce0bdcfa3e2df" title=" " alt="" coords="1157,147,1352,173"/>
+<area shape="rect" href="class_clover_spectra.html#a614d7deabde77b0ffea91ca2a6002484" title=" " alt="" coords="1164,198,1345,239"/>
+<area shape="rect" href="class_timeshifts.html#a32079af1345e308feddd58e0950998ab" title=" " alt="" coords="911,59,1093,85"/>
+<area shape="rect" href="class_timeshifts.html#aaef5b6fdd23be94ed37a2b4e7fe47b48" title=" " alt="" coords="675,31,827,57"/>
+<area shape="rect" href="class_timeshifts.html#a79fe955b7d1bbc12fd4c659691727df3" title=" " alt="" coords="428,5,607,32"/>
+<area shape="rect" href="class_timeshifts.html#a21dc1e7bf232c6b0637b16aa04e43701" title=" " alt="" coords="211,31,380,57"/>
+<area shape="rect" href="class_timeshifts.html#a3d3ab1b3498ca45832d8a8735f16e188" title=" " alt="" coords="5,5,163,32"/>
+<area shape="rect" href="class_timeshifts.html#a6520eab7a8824f41a2be8517d83fc835" title="To verify an already calculated timeshift .dT data file." alt="" coords="17,56,151,83"/>
+<area shape="rect" href="class_run_matrixator.html#a8d8f01fad64864d032395e18b10c2a7e" title=" " alt="" coords="911,110,1093,151"/>
+<area shape="rect" href="class_run_matrixator.html#a526469f6440d19b85fd142c797056c65" title=" " alt="" coords="895,176,1109,203"/>
+<area shape="rect" href="class_run_matrixator.html#a47322f73c6a9f220f49f9fd85993fcd5" title="Multithreading of loadData_faster (you have to pass by a static method in order to multi&#45;thread it)" alt="" coords="661,103,840,145"/>
+<area shape="rect" href="class_run_matrixator.html#aa6d13b08060fef07b50d7ab6b35be0d6" title=" " alt="" coords="445,176,589,203"/>
+<area shape="rect" href="class_run_matrixator.html#a2d5326c4e5b0684552e5d72c88e64ef8" title="Multithreading of loadData_ (you have to pass by a static method in order to multi&#45;thread it)" alt="" coords="661,169,840,210"/>
+<area shape="rect" href="class_clover_spectra.html#ac087194079e7879a2824f4488db96512" title=" " alt="" coords="901,227,1103,269"/>
+<area shape="rect" href="class_clover_spectra.html#ae46c582451bada5b2b8957ee44b92e35" title=" " alt="" coords="665,235,836,261"/>
+<area shape="rect" href="class_clover_spectra.html#a353ec66774413feefb33a784ce2159cf" title=" " alt="" coords="429,285,606,312"/>
+<area shape="rect" href="class_run_matrixator.html#aeb9889ba763858dfb65e05c3a7bb142e" title=" " alt="" coords="671,285,830,312"/>
+<area shape="rect" href="class_clover_spectra.html#aea0814fac7c993ad4813804415f3ffab" title=" " alt="" coords="657,336,845,363"/>
+<area shape="rect" href="class_calibration.html#a062cb134d4b82246ba9c89c567a32963" title=" " alt="" coords="655,387,847,413"/>
+<area shape="rect" href="class_timeshifts.html#a579c8583bd37c3988ffb5cb6df7849f7" title="To write down the histograms." alt="" coords="670,437,831,464"/>
+<area shape="rect" href="class_calibration.html#aa7e921cbc724d97d1a3ef30a4f988e63" title=" " alt="" coords="437,387,597,413"/>
+<area shape="rect" href="class_timeshifts.html#a79f5376cf7071865b264989ef46d886f" title="To write down the histograms and the data." alt="" coords="452,437,583,464"/>
+</map>
 </div>
 
 </div>
@@ -310,12 +347,82 @@ Here is the caller graph for this function:</div>
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_m_t_object_ac97399bb34f766e41e7f9a1cd1b7eb7a_icgraph.png" border="0" usemap="#aclass_m_t_object_ac97399bb34f766e41e7f9a1cd1b7eb7a_icgraph" alt=""/></div>
+<map name="aclass_m_t_object_ac97399bb34f766e41e7f9a1cd1b7eb7a_icgraph" id="aclass_m_t_object_ac97399bb34f766e41e7f9a1cd1b7eb7a_icgraph">
+<area shape="rect" title=" " alt="" coords="435,81,617,108"/>
+<area shape="rect" href="class_m_t_t_hist.html#a7fea4cd494636bb8c4b103d3cf0d0786" title=" " alt="" coords="211,5,386,32"/>
+<area shape="rect" href="class_m_t_variable.html#afeaf590e18d11bba1ca0e82be8d1cb26" title=" " alt="" coords="211,56,387,83"/>
+<area shape="rect" href="class_m_t_t_hist.html#a6524d02003fa4d77ae22b33e14b977d9" title=" " alt="" coords="240,107,357,133"/>
+<area shape="rect" href="class_timeshifts.html#a21dc1e7bf232c6b0637b16aa04e43701" title=" " alt="" coords="214,157,383,184"/>
+<area shape="rect" href="class_timeshifts.html#a3d3ab1b3498ca45832d8a8735f16e188" title=" " alt="" coords="5,132,163,159"/>
+<area shape="rect" href="class_timeshifts.html#a6520eab7a8824f41a2be8517d83fc835" title="To verify an already calculated timeshift .dT data file." alt="" coords="17,183,151,209"/>
+</map>
 </div>
 
 </div>
 </div>
-<a id="a0230b58b8d09067fec22fbe8a5f3db89"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0230b58b8d09067fec22fbe8a5f3db89">&#9670;&nbsp;</a></span>Initialize()</h2>
+<a id="ad156f9b1c68f0e2713abb16890b1fa15"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad156f9b1c68f0e2713abb16890b1fa15">&#9670;&nbsp;</a></span>getThreadsNumber()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static auto const&amp; MTObject::getThreadsNumber </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_m_t_object_ad156f9b1c68f0e2713abb16890b1fa15_icgraph.png" border="0" usemap="#aclass_m_t_object_ad156f9b1c68f0e2713abb16890b1fa15_icgraph" alt=""/></div>
+<map name="aclass_m_t_object_ad156f9b1c68f0e2713abb16890b1fa15_icgraph" id="aclass_m_t_object_ad156f9b1c68f0e2713abb16890b1fa15_icgraph">
+<area shape="rect" title=" " alt="" coords="413,31,631,57"/>
+<area shape="rect" href="class_timeshifts.html#a0753528955e94c43043cd7d68193f960" title=" " alt="" coords="211,31,365,57"/>
+<area shape="rect" href="class_timeshifts.html#a3d3ab1b3498ca45832d8a8735f16e188" title=" " alt="" coords="5,5,163,32"/>
+<area shape="rect" href="class_timeshifts.html#a6520eab7a8824f41a2be8517d83fc835" title="To verify an already calculated timeshift .dT data file." alt="" coords="17,56,151,83"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="af752e86ec494c50d1af7e6442c09733b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af752e86ec494c50d1af7e6442c09733b">&#9670;&nbsp;</a></span>index()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static auto const&amp; MTObject::index </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aaa3623d88deae3a9311aad39bfff49dc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa3623d88deae3a9311aad39bfff49dc">&#9670;&nbsp;</a></span>Initialize() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -326,7 +433,58 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="memname">static void MTObject::Initialize </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="lib_co_8hpp.html#a3fa7784c89589b49764048e9909d0e07">ushort</a> const &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_m_t_object_aaa3623d88deae3a9311aad39bfff49dc_cgraph.png" border="0" usemap="#aclass_m_t_object_aaa3623d88deae3a9311aad39bfff49dc_cgraph" alt=""/></div>
+<map name="aclass_m_t_object_aaa3623d88deae3a9311aad39bfff49dc_cgraph" id="aclass_m_t_object_aaa3623d88deae3a9311aad39bfff49dc_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,153,32"/>
+<area shape="rect" href="_histogramor_8hpp.html#ab48a2fa7184e6354788989602c8c8c29" title=" " alt="" coords="201,5,253,32"/>
+</map>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_m_t_object_aaa3623d88deae3a9311aad39bfff49dc_icgraph.png" border="0" usemap="#aclass_m_t_object_aaa3623d88deae3a9311aad39bfff49dc_icgraph" alt=""/></div>
+<map name="aclass_m_t_object_aaa3623d88deae3a9311aad39bfff49dc_icgraph" id="aclass_m_t_object_aaa3623d88deae3a9311aad39bfff49dc_icgraph">
+<area shape="rect" title=" " alt="" coords="491,132,639,159"/>
+<area shape="rect" href="class_clover_spectra.html#abf805324f6371f19ef0b3ce45705a115" title=" " alt="" coords="265,31,443,57"/>
+<area shape="rect" href="class_m_t_object.html#aaa5354a0915c26979a49d54f36019df1" title=" " alt="" coords="280,81,428,108"/>
+<area shape="rect" href="class_faster2_root.html#ad30ccf937150bbd3504ec3a354b76c8f" title=" " alt="" coords="287,132,421,159"/>
+<area shape="rect" href="class_m_t_object.html#a813cbf27a03a3b334ebc9faec99a5158" title=" " alt="" coords="277,183,431,209"/>
+<area shape="rect" href="class_faster2_histo.html#a20fd8b47b9a9aecef8682ad5442db16d" title=" " alt="" coords="271,233,437,260"/>
+<area shape="rect" href="class_clover_spectra.html#a83b3f64fea8bb8fb6743762ec72e2c04" title=" " alt="" coords="5,5,217,32"/>
+<area shape="rect" href="class_clover_spectra.html#a353ec66774413feefb33a784ce2159cf" title=" " alt="" coords="23,56,200,83"/>
+<area shape="rect" href="class_faster2_root.html#aacd4d3fa480eba9bc86b49f4b2040c60" title=" " alt="" coords="19,132,203,159"/>
+<area shape="rect" href="class_faster2_histo.html#aed84ab0be7ff45067715733dd7be23d1" title=" " alt="" coords="15,233,207,260"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="aaa5354a0915c26979a49d54f36019df1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa5354a0915c26979a49d54f36019df1">&#9670;&nbsp;</a></span>Initialize() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void MTObject::Initialize </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="lib_co_8hpp.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a> const &amp;&#160;</td>
           <td class="paramname"><em>_nb_threads</em>, </td>
         </tr>
         <tr>
@@ -348,9 +506,16 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 <div class="dynheader">
-Here is the caller graph for this function:</div>
+Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_m_t_object_a0230b58b8d09067fec22fbe8a5f3db89_icgraph.png" border="0" usemap="#aclass_m_t_object_a0230b58b8d09067fec22fbe8a5f3db89_icgraph" alt=""/></div>
+<div class="center"><img src="class_m_t_object_aaa5354a0915c26979a49d54f36019df1_cgraph.png" border="0" usemap="#aclass_m_t_object_aaa5354a0915c26979a49d54f36019df1_cgraph" alt=""/></div>
+<map name="aclass_m_t_object_aaa5354a0915c26979a49d54f36019df1_cgraph" id="aclass_m_t_object_aaa5354a0915c26979a49d54f36019df1_cgraph">
+<area shape="rect" title=" " alt="" coords="5,43,153,69"/>
+<area shape="rect" href="class_m_t_object.html#aaa3623d88deae3a9311aad39bfff49dc" title=" " alt="" coords="219,5,367,32"/>
+<area shape="rect" href="class_m_t_object.html#a872d9518e0a1936df8e70a2dae303f4f" title=" " alt="" coords="201,80,384,107"/>
+<area shape="rect" href="_histogramor_8hpp.html#ab48a2fa7184e6354788989602c8c8c29" title=" " alt="" coords="447,5,499,32"/>
+<area shape="rect" href="lib_co_8hpp.html#a237f678c718382f74a68364c0fc1779a" title="Casts a number into std::size_t." alt="" coords="432,80,515,107"/>
+</map>
 </div>
 
 </div>
@@ -381,6 +546,19 @@ Here is the caller graph for this function:</div>
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_m_t_object_a3350577ca839e2abdcd4d6f6449a1408_icgraph.png" border="0" usemap="#aclass_m_t_object_a3350577ca839e2abdcd4d6f6449a1408_icgraph" alt=""/></div>
+<map name="aclass_m_t_object_a3350577ca839e2abdcd4d6f6449a1408_icgraph" id="aclass_m_t_object_a3350577ca839e2abdcd4d6f6449a1408_icgraph">
+<area shape="rect" title=" " alt="" coords="668,56,861,83"/>
+<area shape="rect" href="class_histo_analyse.html#a3ebd877de62f44cfde794b8a7dad2a78" title=" " alt="" coords="471,31,620,57"/>
+<area shape="rect" href="class_m_t_t_hist.html#ae9163b5b4afca69cfdebdf2cf60064cd" title=" " alt="" coords="486,81,605,108"/>
+<area shape="rect" href="class_run_matrixator.html#aeb9889ba763858dfb65e05c3a7bb142e" title=" " alt="" coords="247,5,406,32"/>
+<area shape="rect" href="class_clover_spectra.html#aea0814fac7c993ad4813804415f3ffab" title=" " alt="" coords="233,56,421,83"/>
+<area shape="rect" href="class_calibration.html#a062cb134d4b82246ba9c89c567a32963" title=" " alt="" coords="231,107,423,133"/>
+<area shape="rect" href="class_timeshifts.html#a579c8583bd37c3988ffb5cb6df7849f7" title="To write down the histograms." alt="" coords="246,157,407,184"/>
+<area shape="rect" href="class_run_matrixator.html#aa6d13b08060fef07b50d7ab6b35be0d6" title=" " alt="" coords="22,5,166,32"/>
+<area shape="rect" href="class_clover_spectra.html#a353ec66774413feefb33a784ce2159cf" title=" " alt="" coords="5,56,183,83"/>
+<area shape="rect" href="class_calibration.html#aa7e921cbc724d97d1a3ef30a4f988e63" title=" " alt="" coords="14,107,174,133"/>
+<area shape="rect" href="class_timeshifts.html#a79f5376cf7071865b264989ef46d886f" title="To write down the histograms and the data." alt="" coords="29,157,159,184"/>
+</map>
 </div>
 
 </div>
@@ -410,8 +588,8 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a id="a2ab537a6eb39f3bbc70535c053333fcc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2ab537a6eb39f3bbc70535c053333fcc">&#9670;&nbsp;</a></span>parallelise_function()</h2>
+<a id="a35c02650eb403bd54e867f93bb26fc47"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a35c02650eb403bd54e867f93bb26fc47">&#9670;&nbsp;</a></span>parallelise_function()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -424,7 +602,7 @@ template&lt;class Func , class... ARGS&gt; </div>
         <tr>
           <td class="memname">static void MTObject::parallelise_function </td>
           <td>(</td>
-          <td class="paramtype">Func&#160;</td>
+          <td class="paramtype">Func &amp;&amp;&#160;</td>
           <td class="paramname"><em>func</em>, </td>
         </tr>
         <tr>
@@ -448,18 +626,46 @@ template&lt;class Func , class... ARGS&gt; </div>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_m_t_object_a2ab537a6eb39f3bbc70535c053333fcc_cgraph.png" border="0" usemap="#aclass_m_t_object_a2ab537a6eb39f3bbc70535c053333fcc_cgraph" alt=""/></div>
+<div class="center"><img src="class_m_t_object_a35c02650eb403bd54e867f93bb26fc47_cgraph.png" border="0" usemap="#aclass_m_t_object_a35c02650eb403bd54e867f93bb26fc47_cgraph" alt=""/></div>
+<map name="aclass_m_t_object_a35c02650eb403bd54e867f93bb26fc47_cgraph" id="aclass_m_t_object_a35c02650eb403bd54e867f93bb26fc47_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,165,47"/>
+<area shape="rect" href="_histogramor_8hpp.html#ab48a2fa7184e6354788989602c8c8c29" title=" " alt="" coords="213,13,265,39"/>
+</map>
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_m_t_object_a2ab537a6eb39f3bbc70535c053333fcc_icgraph.png" border="0" usemap="#aclass_m_t_object_a2ab537a6eb39f3bbc70535c053333fcc_icgraph" alt=""/></div>
+<div class="center"><img src="class_m_t_object_a35c02650eb403bd54e867f93bb26fc47_icgraph.png" border="0" usemap="#aclass_m_t_object_a35c02650eb403bd54e867f93bb26fc47_icgraph" alt=""/></div>
+<map name="aclass_m_t_object_a35c02650eb403bd54e867f93bb26fc47_icgraph" id="aclass_m_t_object_a35c02650eb403bd54e867f93bb26fc47_icgraph">
+<area shape="rect" title=" " alt="" coords="1041,201,1201,242"/>
+<area shape="rect" href="class_m_t_root_reader.html#a506f517a4772f5ec3b8bbf5c835a3490" title=" " alt="" coords="798,208,975,235"/>
+<area shape="rect" href="class_calibration.html#a6d6d354f65db38acf12addf1efb7c815" title=" " alt="" coords="791,157,982,184"/>
+<area shape="rect" href="class_m_t_faster_reader.html#af1ec563da5602cc23d7b0cd98b63bee0" title="Reads many faster files in parallel, providing a time&#45;aligned." alt="" coords="780,56,993,83"/>
+<area shape="rect" href="class_m_t_faster_reader.html#ae316d31ebcb18ae8689522509d1ba513" title="Reads many faster files in parallel." alt="" coords="791,259,983,285"/>
+<area shape="rect" href="class_timeshifts.html#a21dc1e7bf232c6b0637b16aa04e43701" title=" " alt="" coords="802,411,971,437"/>
+<area shape="rect" href="class_run_matrixator.html#aa6d13b08060fef07b50d7ab6b35be0d6" title=" " alt="" coords="551,208,695,235"/>
+<area shape="rect" href="class_calibration.html#aa7e921cbc724d97d1a3ef30a4f988e63" title=" " alt="" coords="271,183,431,209"/>
+<area shape="rect" href="class_calibration.html#ac7678b0524f8407659a9594b3862e5c3" title=" " alt="" coords="513,107,732,133"/>
+<area shape="rect" href="class_clover_spectra.html#ae46c582451bada5b2b8957ee44b92e35" title=" " alt="" coords="537,5,708,32"/>
+<area shape="rect" href="class_m_t_faster_reader.html#a870da58b71c34fbcaf76733f0bc2ba71" title=" " alt="" coords="516,56,729,83"/>
+<area shape="rect" href="class_clover_spectra.html#a353ec66774413feefb33a784ce2159cf" title=" " alt="" coords="263,5,440,32"/>
+<area shape="rect" href="class_faster2_root.html#a7d6d5249c6ced2548a58406eca085cdb" title=" " alt="" coords="545,360,701,387"/>
+<area shape="rect" href="class_calibration.html#a6514307ca111ecc5d6f02694373dc5ec" title=" " alt="" coords="523,259,722,285"/>
+<area shape="rect" href="class_faster2_histo.html#a20fd8b47b9a9aecef8682ad5442db16d" title=" " alt="" coords="539,309,706,336"/>
+<area shape="rect" href="class_faster2_root.html#ad07b97d280479aabc26e04d920726ddb" title="Raw conversion :" alt="" coords="259,411,443,437"/>
+<area shape="rect" href="class_faster2_root.html#ad30ccf937150bbd3504ec3a354b76c8f" title=" " alt="" coords="284,360,419,387"/>
+<area shape="rect" href="class_faster2_root.html#aacd4d3fa480eba9bc86b49f4b2040c60" title=" " alt="" coords="5,360,189,387"/>
+<area shape="rect" href="class_calibration.html#a5931047806db77858db6886d041db100" title=" " alt="" coords="237,259,465,285"/>
+<area shape="rect" href="class_faster2_histo.html#aed84ab0be7ff45067715733dd7be23d1" title=" " alt="" coords="255,309,447,336"/>
+<area shape="rect" href="class_timeshifts.html#a3d3ab1b3498ca45832d8a8735f16e188" title=" " alt="" coords="544,411,701,437"/>
+<area shape="rect" href="class_timeshifts.html#a6520eab7a8824f41a2be8517d83fc835" title="To verify an already calculated timeshift .dT data file." alt="" coords="555,461,690,488"/>
+</map>
 </div>
 
 </div>
 </div>
-<a id="a31bd82ba444b64dadf85e8aa272795f6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a31bd82ba444b64dadf85e8aa272795f6">&#9670;&nbsp;</a></span>setThreadsNb()</h2>
+<a id="a872d9518e0a1936df8e70a2dae303f4f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a872d9518e0a1936df8e70a2dae303f4f">&#9670;&nbsp;</a></span>setThreadsNb() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -471,8 +677,77 @@ Here is the caller graph for this function:</div>
           <td class="memname">static void MTObject::setThreadsNb </td>
           <td>(</td>
           <td class="paramtype">int const &amp;&#160;</td>
-          <td class="paramname"><em>n</em></td><td>)</td>
+          <td class="paramname"><em>n</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>force</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_m_t_object_a872d9518e0a1936df8e70a2dae303f4f_cgraph.png" border="0" usemap="#aclass_m_t_object_a872d9518e0a1936df8e70a2dae303f4f_cgraph" alt=""/></div>
+<map name="aclass_m_t_object_a872d9518e0a1936df8e70a2dae303f4f_cgraph" id="aclass_m_t_object_a872d9518e0a1936df8e70a2dae303f4f_cgraph">
+<area shape="rect" title=" " alt="" coords="5,29,188,56"/>
+<area shape="rect" href="lib_co_8hpp.html#a237f678c718382f74a68364c0fc1779a" title="Casts a number into std::size_t." alt="" coords="236,29,319,56"/>
+</map>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_m_t_object_a872d9518e0a1936df8e70a2dae303f4f_icgraph.png" border="0" usemap="#aclass_m_t_object_a872d9518e0a1936df8e70a2dae303f4f_icgraph" alt=""/></div>
+<map name="aclass_m_t_object_a872d9518e0a1936df8e70a2dae303f4f_icgraph" id="aclass_m_t_object_a872d9518e0a1936df8e70a2dae303f4f_icgraph">
+<area shape="rect" title=" " alt="" coords="716,81,899,108"/>
+<area shape="rect" href="class_m_t_object.html#ac76ab61815b5c3a471e6c210b7ba1913" title=" " alt="" coords="432,5,668,32"/>
+<area shape="rect" href="class_m_t_object.html#aaa5354a0915c26979a49d54f36019df1" title=" " alt="" coords="476,56,624,83"/>
+<area shape="rect" href="class_faster2_histo.html#aa3d364eba3c8fc7367fdabea68524854" title=" " alt="" coords="449,107,651,133"/>
+<area shape="rect" href="class_m_t_object.html#a8b70d4506ed556d5ca4c23703a80ddb6" title=" " alt="" coords="442,157,658,184"/>
+<area shape="rect" href="class_faster2_histo.html#a72f8004ae550c02db09791b810c0252d" title=" " alt="" coords="245,107,384,133"/>
+<area shape="rect" href="class_faster2_histo.html#aed84ab0be7ff45067715733dd7be23d1" title=" " alt="" coords="5,107,197,133"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a8f91c9269a027d1770d7bae3b6d599a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f91c9269a027d1770d7bae3b6d599a5">&#9670;&nbsp;</a></span>setThreadsNb() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void MTObject::setThreadsNb </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="lib_co_8hpp.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a> const &amp;&#160;</td>
+          <td class="paramname"><em>n</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>force</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -482,11 +757,22 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
+<p>Sets the number of threads. </p>
+<p>Check the number of threads. Usually, over 75% of cores is the optimal. Set force parameter to true if you want to use all the cores </p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_m_t_object_a8f91c9269a027d1770d7bae3b6d599a5_cgraph.png" border="0" usemap="#aclass_m_t_object_a8f91c9269a027d1770d7bae3b6d599a5_cgraph" alt=""/></div>
+<map name="aclass_m_t_object_a8f91c9269a027d1770d7bae3b6d599a5_cgraph" id="aclass_m_t_object_a8f91c9269a027d1770d7bae3b6d599a5_cgraph">
+<area shape="rect" title="Sets the number of threads." alt="" coords="5,5,188,32"/>
+<area shape="rect" href="lib_co_8hpp.html#a237f678c718382f74a68364c0fc1779a" title="Casts a number into std::size_t." alt="" coords="236,5,319,32"/>
+</map>
+</div>
+
 </div>
 </div>
-<h2 class="groupheader">Member Data Documentation</h2>
-<a id="ade5c937ab06c712799a7b889a426020b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ade5c937ab06c712799a7b889a426020b">&#9670;&nbsp;</a></span>m_mutex</h2>
+<a id="a8b70d4506ed556d5ca4c23703a80ddb6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8b70d4506ed556d5ca4c23703a80ddb6">&#9670;&nbsp;</a></span>setThreadsNumber()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -495,12 +781,59 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::mutex MTObject::m_mutex</td>
+          <td class="memname">static void MTObject::setThreadsNumber </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="lib_co_8hpp.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a> const &amp;&#160;</td>
+          <td class="paramname"><em>n</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>force</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_m_t_object_a8b70d4506ed556d5ca4c23703a80ddb6_cgraph.png" border="0" usemap="#aclass_m_t_object_a8b70d4506ed556d5ca4c23703a80ddb6_cgraph" alt=""/></div>
+<map name="aclass_m_t_object_a8b70d4506ed556d5ca4c23703a80ddb6_cgraph" id="aclass_m_t_object_a8b70d4506ed556d5ca4c23703a80ddb6_cgraph">
+<area shape="rect" title=" " alt="" coords="5,29,221,56"/>
+<area shape="rect" href="class_m_t_object.html#a872d9518e0a1936df8e70a2dae303f4f" title=" " alt="" coords="269,29,452,56"/>
+<area shape="rect" href="lib_co_8hpp.html#a237f678c718382f74a68364c0fc1779a" title="Casts a number into std::size_t." alt="" coords="500,29,583,56"/>
+</map>
+</div>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="ac9efab6b9d255529611a250e91779a48"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac9efab6b9d255529611a250e91779a48">&#9670;&nbsp;</a></span>m_thread_index</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">thread_local <a class="el" href="lib_co_8hpp.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a> MTObject::m_thread_index = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -529,8 +862,8 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a id="ab5232435baae5d2c8992f64a4e23a2c4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab5232435baae5d2c8992f64a4e23a2c4">&#9670;&nbsp;</a></span>master_thread</h2>
+<a id="a16983b3e7be4853da5f32145342fc6b0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a16983b3e7be4853da5f32145342fc6b0">&#9670;&nbsp;</a></span>master_thread_id</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -539,7 +872,29 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::thread::id MTObject::master_thread</td>
+          <td class="memname">std::thread::id MTObject::master_thread_id</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a79d86fbc8837ba0f9a4cd1405fddef1c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a79d86fbc8837ba0f9a4cd1405fddef1c">&#9670;&nbsp;</a></span>mutex</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::mutex MTObject::mutex</td>
         </tr>
       </table>
   </td>
@@ -551,8 +906,8 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a id="a9454424fac1eea42557ba2cb0cf1d342"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9454424fac1eea42557ba2cb0cf1d342">&#9670;&nbsp;</a></span>nb_threads</h2>
+<a id="a1c2b3cb0cdccca46c8ebba009503ac88"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1c2b3cb0cdccca46c8ebba009503ac88">&#9670;&nbsp;</a></span>nb_threads</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -561,7 +916,7 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="lib_co_8hpp.html#a3fa7784c89589b49764048e9909d0e07">ushort</a> MTObject::nb_threads = 1</td>
+          <td class="memname"><a class="el" href="lib_co_8hpp.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a> MTObject::nb_threads = 1</td>
         </tr>
       </table>
   </td>
@@ -584,50 +939,6 @@ Here is the caller graph for this function:</div>
       <table class="memname">
         <tr>
           <td class="memname">bool MTObject::ON = false</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a28da61d46eb600e14da757d0c851ecbd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a28da61d46eb600e14da757d0c851ecbd">&#9670;&nbsp;</a></span>shared_mutex</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::mutex MTObject::shared_mutex</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a262d9c5d22a1c81352412c1b151bfd63"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a262d9c5d22a1c81352412c1b151bfd63">&#9670;&nbsp;</a></span>threads_ID</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::map&lt; std::thread::id, int &gt; MTObject::threads_ID</td>
         </tr>
       </table>
   </td>

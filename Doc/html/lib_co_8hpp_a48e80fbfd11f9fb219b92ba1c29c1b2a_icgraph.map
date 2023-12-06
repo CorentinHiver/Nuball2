@@ -1,0 +1,12 @@
+<map id="int_cast" name="int_cast">
+<area shape="rect" id="node1" title="Casts a number into an int." alt="" coords="675,132,748,159"/>
+<area shape="rect" id="node2" href="$class_timeshifts.html#a608d9443a15dd669920e10dd8baee23a" title=" " alt="" coords="448,5,597,32"/>
+<area shape="rect" id="node4" href="$class_clovers.html#a378e1b7fea24003b4b56eb855c8ae163" title=" " alt="" coords="468,56,577,83"/>
+<area shape="rect" id="node5" href="$_clover_module_8hpp.html#aae60fbf6c352f4c0682ec1c2a3f04181" title=" " alt="" coords="473,107,572,133"/>
+<area shape="rect" id="node6" href="$class_calibration.html#ad6db2742477c8ac64787c6fe8a687aff" title=" " alt="" coords="436,157,609,184"/>
+<area shape="rect" id="node9" href="$class_timeshifts.html#a89dbca371bce4601ee60122f544faf95" title=" " alt="" coords="419,208,627,235"/>
+<area shape="rect" id="node10" href="$class_type_root_map.html#acc24a4f33058532b330071a6738f02f4" title=" " alt="" coords="419,259,626,285"/>
+<area shape="rect" id="node3" href="$class_timeshifts.html#a3d3ab1b3498ca45832d8a8735f16e188" title=" " alt="" coords="213,5,371,32"/>
+<area shape="rect" id="node7" href="$class_calibration.html#ae6bbaf8b283a345c9936a907fcba1849" title="Analyse the spectra to extract calibration coefficients." alt="" coords="216,157,368,184"/>
+<area shape="rect" id="node8" href="$class_calibration.html#aa7e921cbc724d97d1a3ef30a4f988e63" title=" " alt="" coords="5,157,165,184"/>
+</map>

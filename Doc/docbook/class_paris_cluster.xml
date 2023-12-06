@@ -1,0 +1,197 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_class_paris_cluster" xml:lang="en-US">
+<title>ParisCluster&lt; nb_phoswitch &gt; Class Template Reference</title>
+<indexterm><primary>ParisCluster&lt; nb_phoswitch &gt;</primary></indexterm>
+<para>
+<computeroutput>#include &lt;ParisCluster.hpp&gt;</computeroutput>
+</para>
+Collaboration diagram for ParisCluster&lt; nb_phoswitch &gt;:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_paris_cluster__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_class_paris_cluster_1a6b62c6df3f369da38428d7afa96e2316">Analyse</link> ()</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_paris_cluster_1a00f32121b8702aae3b51826a8aa36f7b">Fill</link> (<link linkend="_class_event">Event</link> const &amp;event, int const &amp;i, <link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> const &amp;<link linkend="_class_paris_cluster_1aca48d1fac203059e7c75dfb0656c9f06">label</link>)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_paris_cluster_1a19e0ba991b1b9326f4df3ceef619823e">Initialize</link> ()</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_paris_cluster_1a913d10bdb2c4e202dfbf83ab61fa416e">InitializeBidims</link> ()</para>
+</listitem>
+            <listitem><para>auto const  &amp; <link linkend="_class_paris_cluster_1aca48d1fac203059e7c75dfb0656c9f06">label</link> () const</para>
+</listitem>
+            <listitem><para><link linkend="_class_paris_phoswitch">ParisPhoswitch</link> &amp; <link linkend="_class_paris_cluster_1aa19f67c578925ee22516288be580067d">operator[]</link> (int const &amp;i)</para>
+</listitem>
+            <listitem><para><link linkend="_class_paris_cluster_1a39bb4df5c209b3b17d7afcfc4d7ef231">ParisCluster</link> ()</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_paris_cluster_1aed843cd658540524bb00eaccc16d5c47">Reset</link> ()</para>
+</listitem>
+            <listitem><para>auto const  &amp; <link linkend="_class_paris_cluster_1a2783d51c5d19b988acf6f81464f8f363">size</link> () const</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Static Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>static auto const  &amp; <link linkend="_class_paris_cluster_1a66671da3ec66c208b99648a741fceddd">nb_clusters</link> ()</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Public Attributes    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_class_static_vector">StaticVector</link>&lt; <link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> &gt; <link linkend="_class_paris_cluster_1a7f38412e4ead36147fd574a514f51957">Hits</link> = <link linkend="_class_static_vector">StaticVector</link>&lt;<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>&gt;(nb_phoswitch)</para>
+</listitem>
+            <listitem><para><link linkend="_class_static_vector">StaticVector</link>&lt; <link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> &gt; <link linkend="_class_paris_cluster_1a11994303c05bdb81058107585ee8c0d7">hits_LaBr3</link> = <link linkend="_class_static_vector">StaticVector</link>&lt;<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>&gt;(nb_phoswitch)</para>
+</listitem>
+            <listitem><para><link linkend="_class_static_vector">StaticVector</link>&lt; <link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> &gt; <link linkend="_class_paris_cluster_1ab619477d09fc37bb82cd44f834f9ff7f">hits_NaI</link> = <link linkend="_class_static_vector">StaticVector</link>&lt;<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>&gt;(nb_phoswitch)</para>
+</listitem>
+            <listitem><para>std::vector&lt; <link linkend="_class_paris_phoswitch">ParisPhoswitch</link> &gt; <link linkend="_class_paris_cluster_1abbfd5136b0904b4f7e1d88bfe26c0b77">phoswitches</link> = std::vector&lt;<link linkend="_class_paris_phoswitch">ParisPhoswitch</link>&gt;(nb_phoswitch)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Private Attributes    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> const <link linkend="_class_paris_cluster_1a509903e20d90bb4113ad1eae32cb7a85">m_label</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Static Private Attributes    </title>
+        <itemizedlist>
+            <listitem><para>static thread_local std::atomic&lt; <link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> &gt; <link linkend="_class_paris_cluster_1a525929a3a29e2d70a21ee0cd9810f0fd">glabel</link> = 0</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_class_paris_cluster_1a39bb4df5c209b3b17d7afcfc4d7ef231"/>    <section>
+    <title>ParisCluster()</title>
+<indexterm><primary>ParisCluster</primary><secondary>ParisCluster&lt; nb_phoswitch &gt;</secondary></indexterm>
+<indexterm><primary>ParisCluster&lt; nb_phoswitch &gt;</primary><secondary>ParisCluster</secondary></indexterm>
+<computeroutput>template&lt;std::size_t nb_phoswitch&gt; </computeroutput><para><computeroutput><link linkend="_class_paris_cluster">ParisCluster</link>&lt; nb_phoswitch &gt;::<link linkend="_class_paris_cluster">ParisCluster</link> ( )<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_paris_cluster_a39bb4df5c209b3b17d7afcfc4d7ef231_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_class_paris_cluster_1a6b62c6df3f369da38428d7afa96e2316"/>    <section>
+    <title>Analyse()</title>
+<indexterm><primary>Analyse</primary><secondary>ParisCluster&lt; nb_phoswitch &gt;</secondary></indexterm>
+<indexterm><primary>ParisCluster&lt; nb_phoswitch &gt;</primary><secondary>Analyse</secondary></indexterm>
+<computeroutput>template&lt;std::size_t nb_phoswitch&gt; </computeroutput><para><computeroutput>void <link linkend="_class_paris_cluster">ParisCluster</link>&lt; nb_phoswitch &gt;::Analyse</computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_paris_cluster_a6b62c6df3f369da38428d7afa96e2316_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_paris_cluster_1a00f32121b8702aae3b51826a8aa36f7b"/>    <section>
+    <title>Fill()</title>
+<indexterm><primary>Fill</primary><secondary>ParisCluster&lt; nb_phoswitch &gt;</secondary></indexterm>
+<indexterm><primary>ParisCluster&lt; nb_phoswitch &gt;</primary><secondary>Fill</secondary></indexterm>
+<computeroutput>template&lt;std::size_t nb_phoswitch&gt; </computeroutput><para><computeroutput>void <link linkend="_class_paris_cluster">ParisCluster</link>&lt; nb_phoswitch &gt;::Fill (<link linkend="_class_event">Event</link> const &amp; event, int const &amp; i, <link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> const &amp; label)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_paris_cluster_a00f32121b8702aae3b51826a8aa36f7b_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_paris_cluster_1a19e0ba991b1b9326f4df3ceef619823e"/>    <section>
+    <title>Initialize()</title>
+<indexterm><primary>Initialize</primary><secondary>ParisCluster&lt; nb_phoswitch &gt;</secondary></indexterm>
+<indexterm><primary>ParisCluster&lt; nb_phoswitch &gt;</primary><secondary>Initialize</secondary></indexterm>
+<computeroutput>template&lt;std::size_t nb_phoswitch&gt; </computeroutput><para><computeroutput>void <link linkend="_class_paris_cluster">ParisCluster</link>&lt; nb_phoswitch &gt;::Initialize</computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_paris_cluster_a19e0ba991b1b9326f4df3ceef619823e_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_paris_cluster_1a913d10bdb2c4e202dfbf83ab61fa416e"/>    <section>
+    <title>InitializeBidims()</title>
+<indexterm><primary>InitializeBidims</primary><secondary>ParisCluster&lt; nb_phoswitch &gt;</secondary></indexterm>
+<indexterm><primary>ParisCluster&lt; nb_phoswitch &gt;</primary><secondary>InitializeBidims</secondary></indexterm>
+<computeroutput>template&lt;std::size_t nb_phoswitch&gt; </computeroutput><para><computeroutput>void <link linkend="_class_paris_cluster">ParisCluster</link>&lt; nb_phoswitch &gt;::InitializeBidims</computeroutput></para>    </section><anchor xml:id="_class_paris_cluster_1aca48d1fac203059e7c75dfb0656c9f06"/>    <section>
+    <title>label()</title>
+<indexterm><primary>label</primary><secondary>ParisCluster&lt; nb_phoswitch &gt;</secondary></indexterm>
+<indexterm><primary>ParisCluster&lt; nb_phoswitch &gt;</primary><secondary>label</secondary></indexterm>
+<computeroutput>template&lt;std::size_t nb_phoswitch&gt; </computeroutput><para><computeroutput>auto const&amp; <link linkend="_class_paris_cluster">ParisCluster</link>&lt; nb_phoswitch &gt;::label ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_paris_cluster_1a66671da3ec66c208b99648a741fceddd"/>    <section>
+    <title>nb_clusters()</title>
+<indexterm><primary>nb_clusters</primary><secondary>ParisCluster&lt; nb_phoswitch &gt;</secondary></indexterm>
+<indexterm><primary>ParisCluster&lt; nb_phoswitch &gt;</primary><secondary>nb_clusters</secondary></indexterm>
+<computeroutput>template&lt;std::size_t nb_phoswitch&gt; </computeroutput><para><computeroutput>static auto const&amp; <link linkend="_class_paris_cluster">ParisCluster</link>&lt; nb_phoswitch &gt;::nb_clusters ( )<computeroutput>[inline]</computeroutput>, <computeroutput>[static]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_paris_cluster_1aa19f67c578925ee22516288be580067d"/>    <section>
+    <title>operator[]()</title>
+<indexterm><primary>operator[]</primary><secondary>ParisCluster&lt; nb_phoswitch &gt;</secondary></indexterm>
+<indexterm><primary>ParisCluster&lt; nb_phoswitch &gt;</primary><secondary>operator[]</secondary></indexterm>
+<computeroutput>template&lt;std::size_t nb_phoswitch&gt; </computeroutput><para><computeroutput><link linkend="_class_paris_phoswitch">ParisPhoswitch</link>&amp; <link linkend="_class_paris_cluster">ParisCluster</link>&lt; nb_phoswitch &gt;::operator[] (int const &amp; i)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_paris_cluster_1aed843cd658540524bb00eaccc16d5c47"/>    <section>
+    <title>Reset()</title>
+<indexterm><primary>Reset</primary><secondary>ParisCluster&lt; nb_phoswitch &gt;</secondary></indexterm>
+<indexterm><primary>ParisCluster&lt; nb_phoswitch &gt;</primary><secondary>Reset</secondary></indexterm>
+<computeroutput>template&lt;std::size_t nb_phoswitch&gt; </computeroutput><para><computeroutput>void <link linkend="_class_paris_cluster">ParisCluster</link>&lt; nb_phoswitch &gt;::Reset</computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_paris_cluster_aed843cd658540524bb00eaccc16d5c47_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_paris_cluster_1a2783d51c5d19b988acf6f81464f8f363"/>    <section>
+    <title>size()</title>
+<indexterm><primary>size</primary><secondary>ParisCluster&lt; nb_phoswitch &gt;</secondary></indexterm>
+<indexterm><primary>ParisCluster&lt; nb_phoswitch &gt;</primary><secondary>size</secondary></indexterm>
+<computeroutput>template&lt;std::size_t nb_phoswitch&gt; </computeroutput><para><computeroutput>auto const&amp; <link linkend="_class_paris_cluster">ParisCluster</link>&lt; nb_phoswitch &gt;::size ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para></section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_class_paris_cluster_1a525929a3a29e2d70a21ee0cd9810f0fd"/>    <section>
+    <title>glabel</title>
+<indexterm><primary>glabel</primary><secondary>ParisCluster&lt; nb_phoswitch &gt;</secondary></indexterm>
+<indexterm><primary>ParisCluster&lt; nb_phoswitch &gt;</primary><secondary>glabel</secondary></indexterm>
+<computeroutput>template&lt;std::size_t nb_phoswitch&gt; </computeroutput><para><computeroutput>thread_local std::atomic&lt; <link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> &gt; <link linkend="_class_paris_cluster">ParisCluster</link>&lt; nb_phoswitch &gt;::glabel = 0<computeroutput>[static]</computeroutput>, <computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_paris_cluster_1a7f38412e4ead36147fd574a514f51957"/>    <section>
+    <title>Hits</title>
+<indexterm><primary>Hits</primary><secondary>ParisCluster&lt; nb_phoswitch &gt;</secondary></indexterm>
+<indexterm><primary>ParisCluster&lt; nb_phoswitch &gt;</primary><secondary>Hits</secondary></indexterm>
+<computeroutput>template&lt;std::size_t nb_phoswitch&gt; </computeroutput><para><computeroutput><link linkend="_class_static_vector">StaticVector</link>&lt;<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>&gt; <link linkend="_class_paris_cluster">ParisCluster</link>&lt; nb_phoswitch &gt;::Hits = <link linkend="_class_static_vector">StaticVector</link>&lt;<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>&gt;(nb_phoswitch)</computeroutput></para>    </section><anchor xml:id="_class_paris_cluster_1a11994303c05bdb81058107585ee8c0d7"/>    <section>
+    <title>hits_LaBr3</title>
+<indexterm><primary>hits_LaBr3</primary><secondary>ParisCluster&lt; nb_phoswitch &gt;</secondary></indexterm>
+<indexterm><primary>ParisCluster&lt; nb_phoswitch &gt;</primary><secondary>hits_LaBr3</secondary></indexterm>
+<computeroutput>template&lt;std::size_t nb_phoswitch&gt; </computeroutput><para><computeroutput><link linkend="_class_static_vector">StaticVector</link>&lt;<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>&gt; <link linkend="_class_paris_cluster">ParisCluster</link>&lt; nb_phoswitch &gt;::hits_LaBr3 = <link linkend="_class_static_vector">StaticVector</link>&lt;<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>&gt;(nb_phoswitch)</computeroutput></para>    </section><anchor xml:id="_class_paris_cluster_1ab619477d09fc37bb82cd44f834f9ff7f"/>    <section>
+    <title>hits_NaI</title>
+<indexterm><primary>hits_NaI</primary><secondary>ParisCluster&lt; nb_phoswitch &gt;</secondary></indexterm>
+<indexterm><primary>ParisCluster&lt; nb_phoswitch &gt;</primary><secondary>hits_NaI</secondary></indexterm>
+<computeroutput>template&lt;std::size_t nb_phoswitch&gt; </computeroutput><para><computeroutput><link linkend="_class_static_vector">StaticVector</link>&lt;<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>&gt; <link linkend="_class_paris_cluster">ParisCluster</link>&lt; nb_phoswitch &gt;::hits_NaI = <link linkend="_class_static_vector">StaticVector</link>&lt;<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>&gt;(nb_phoswitch)</computeroutput></para>    </section><anchor xml:id="_class_paris_cluster_1a509903e20d90bb4113ad1eae32cb7a85"/>    <section>
+    <title>m_label</title>
+<indexterm><primary>m_label</primary><secondary>ParisCluster&lt; nb_phoswitch &gt;</secondary></indexterm>
+<indexterm><primary>ParisCluster&lt; nb_phoswitch &gt;</primary><secondary>m_label</secondary></indexterm>
+<computeroutput>template&lt;std::size_t nb_phoswitch&gt; </computeroutput><para><computeroutput><link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> const <link linkend="_class_paris_cluster">ParisCluster</link>&lt; nb_phoswitch &gt;::m_label<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_paris_cluster_1abbfd5136b0904b4f7e1d88bfe26c0b77"/>    <section>
+    <title>phoswitches</title>
+<indexterm><primary>phoswitches</primary><secondary>ParisCluster&lt; nb_phoswitch &gt;</secondary></indexterm>
+<indexterm><primary>ParisCluster&lt; nb_phoswitch &gt;</primary><secondary>phoswitches</secondary></indexterm>
+<computeroutput>template&lt;std::size_t nb_phoswitch&gt; </computeroutput><para><computeroutput>std::vector&lt;<link linkend="_class_paris_phoswitch">ParisPhoswitch</link>&gt; <link linkend="_class_paris_cluster">ParisCluster</link>&lt; nb_phoswitch &gt;::phoswitches = std::vector&lt;<link linkend="_class_paris_phoswitch">ParisPhoswitch</link>&gt;(nb_phoswitch)</computeroutput></para></section>
+<para>
+The documentation for this class was generated from the following file:</para>
+lib/Analyse/<link linkend="__paris_cluster_8hpp">ParisCluster.hpp</link></section>
+</section>

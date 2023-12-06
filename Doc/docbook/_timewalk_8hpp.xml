@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__timewalk_8hpp" xml:lang="en-US">
+<title>lib/Modules/Timewalk.hpp File Reference</title>
+<indexterm><primary>lib/Modules/Timewalk.hpp</primary></indexterm>
+<programlisting>#include &quot;../libCo.hpp&quot;
+</programlisting>Include dependency graph for Timewalk.hpp:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="_timewalk_8hpp__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+This graph shows which files directly or indirectly include this file:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="_timewalk_8hpp__dep__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>class <link linkend="_classf_parameters">fParameters&lt; nb_param, T &gt;</link></para>
+
+<para>Functions parameter. </para>
+</listitem>
+            <listitem><para>class <link linkend="_class_timewalk">Timewalk</link></para>
+</listitem>
+            <listitem><para>class <link linkend="_class_timewalks">Timewalks</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Typedefs    </title>
+        <itemizedlist>
+            <listitem><para>using <link linkend="__timewalk_8hpp_1ae5188088e56a7674fae0e9648f41ab6e">TWparameters</link> = <link linkend="_classf_parameters">fParameters</link>&lt; 4, float &gt;</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Typedef Documentation</title>
+<anchor xml:id="__timewalk_8hpp_1ae5188088e56a7674fae0e9648f41ab6e"/>    <section>
+    <title>TWparameters</title>
+<indexterm><primary>TWparameters</primary><secondary>Timewalk.hpp</secondary></indexterm>
+<indexterm><primary>Timewalk.hpp</primary><secondary>TWparameters</secondary></indexterm>
+<para><computeroutput>using <link linkend="__timewalk_8hpp_1ae5188088e56a7674fae0e9648f41ab6e">TWparameters</link> =  <link linkend="_classf_parameters">fParameters</link>&lt;4, float&gt;</computeroutput></para></section>
+</section>
+</section>

@@ -1,0 +1,704 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="class_path" kind="class" language="C++" prot="public">
+    <compoundname>Path</compoundname>
+    <includes refid="files__functions_8hpp" local="no">files_functions.hpp</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_path_1aed6b8b1831e37ad107b290f828777dc2" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool Path::m_exists</definition>
+        <argsstring></argsstring>
+        <name>m_exists</name>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/files_functions.hpp" line="582" column="8" bodyfile="lib/files_functions.hpp" bodystart="582" bodyend="-1"/>
+        <referencedby refid="class_path_1aa9b3a53718dcd8ba66d90d50b112ddb9" compoundref="files__functions_8hpp" startline="480" endline="515">load</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_path_1ad65d90486dbdf36c2759a7285f4e3a80" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string Path::m_path</definition>
+        <argsstring></argsstring>
+        <name>m_path</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/files_functions.hpp" line="583" column="15" bodyfile="lib/files_functions.hpp" bodystart="583" bodyend="-1"/>
+        <referencedby refid="class_path_1a99656cd73eb5c5fa461d7570b86eb66d" compoundref="files__functions_8hpp" startline="524" endline="531">addFolder</referencedby>
+        <referencedby refid="class_path_1a7c25cd5ebf26bf022d3477d9a42f387f" compoundref="files__functions_8hpp" startline="538" endline="538">c_str</referencedby>
+        <referencedby refid="class_path_1ac40c8c627d0412be849f1e6cd4cdc556" compoundref="files__functions_8hpp" startline="458" endline="478">cleanPath</referencedby>
+        <referencedby refid="class_path_1aecd02f464b364bc26631bcb65e44843b" compoundref="files__functions_8hpp" startline="520" endline="520">exists</referencedby>
+        <referencedby refid="class_path_1a4e4d7d7670941e8ddc58261a4fac0916" compoundref="files__functions_8hpp" startline="535" endline="535">get</referencedby>
+        <referencedby refid="class_path_1aa9b3a53718dcd8ba66d90d50b112ddb9" compoundref="files__functions_8hpp" startline="480" endline="515">load</referencedby>
+        <referencedby refid="class_path_1a1f94b3b7d475723ead35e54c87078ed7" compoundref="files__functions_8hpp" startline="522" endline="522">make</referencedby>
+        <referencedby refid="class_path_1ac9b837b0071ab41b4b0868590786eeae" compoundref="files__functions_8hpp" startline="517" endline="517">makeFolderList</referencedby>
+        <referencedby refid="class_path_1a67161dbd774db3274fadc0c438b0cdf2" compoundref="files__functions_8hpp" startline="519" endline="519">nbFiles</referencedby>
+        <referencedby refid="class_path_1a0db652f355256181825b11d0199ed0ae" compoundref="files__functions_8hpp" startline="521" endline="521">operator bool</referencedby>
+        <referencedby refid="class_path_1a6dafc9642cd2096f67ce9dc80a7a11bf" compoundref="files__functions_8hpp" startline="540" endline="540">operator+</referencedby>
+        <referencedby refid="class_path_1aea2baf3449b7fc955e7320f851ec29e5" compoundref="files__functions_8hpp" startline="568" endline="574">operator+=</referencedby>
+        <referencedby refid="class_path_1a42f3cfe8b84c3e11afc5d54b47522ab3" compoundref="files__functions_8hpp" startline="549" endline="554">operator=</referencedby>
+        <referencedby refid="class_path_1a104457a3f7fbf2dcdb86d8c5a168f344" compoundref="files__functions_8hpp" startline="576" endline="576">operator==</referencedby>
+        <referencedby refid="class_path_1a7797092ad2d61166d4adcecff31e34bb" compoundref="files__functions_8hpp" startline="533" endline="533">path</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_path_1a3f8c60121763c0e1cca52efc144f74e1" prot="private" static="no" mutable="no">
+        <type><ref refid="class_folders" kindref="compound">Folders</ref></type>
+        <definition>Folders Path::m_recursive_folders</definition>
+        <argsstring></argsstring>
+        <name>m_recursive_folders</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/files_functions.hpp" line="584" column="11" bodyfile="lib/files_functions.hpp" bodystart="584" bodyend="-1"/>
+        <referencedby refid="class_path_1a99656cd73eb5c5fa461d7570b86eb66d" compoundref="files__functions_8hpp" startline="524" endline="531">addFolder</referencedby>
+        <referencedby refid="class_path_1ac40c8c627d0412be849f1e6cd4cdc556" compoundref="files__functions_8hpp" startline="458" endline="478">cleanPath</referencedby>
+        <referencedby refid="class_path_1a859f02f9224a864b541b15e8db325409" compoundref="files__functions_8hpp" startline="545" endline="545">folder</referencedby>
+        <referencedby refid="class_path_1a6aca68097e64629ee5d1e2c02f1b85ee" compoundref="files__functions_8hpp" startline="547" endline="547">getFolders</referencedby>
+        <referencedby refid="class_path_1aa9b3a53718dcd8ba66d90d50b112ddb9" compoundref="files__functions_8hpp" startline="480" endline="515">load</referencedby>
+        <referencedby refid="class_path_1ac9b837b0071ab41b4b0868590786eeae" compoundref="files__functions_8hpp" startline="517" endline="517">makeFolderList</referencedby>
+        <referencedby refid="class_path_1a145897ef8010831f6823ef7173ac4a0c" compoundref="files__functions_8hpp" startline="544" endline="544">operator[]</referencedby>
+        <referencedby refid="class_path_1a34073c3753fbd7873238808f7f5a655b" compoundref="files__functions_8hpp" startline="546" endline="546">size</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_path_1a99656cd73eb5c5fa461d7570b86eb66d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_path" kindref="compound">Path</ref> &amp;</type>
+        <definition>Path&amp; Path::addFolder</definition>
+        <argsstring>(Folder const &amp;folder)</argsstring>
+        <name>addFolder</name>
+        <param>
+          <type><ref refid="class_folder" kindref="compound">Folder</ref> const &amp;</type>
+          <declname>folder</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/files_functions.hpp" line="524" column="9" bodyfile="lib/files_functions.hpp" bodystart="524" bodyend="531"/>
+        <references refid="files__functions_8hpp_1a6d165da5cc41e5429a9c03c6a6c68d96" compoundref="files__functions_8hpp" startline="66" endline="87">file_exists</references>
+        <references refid="class_path_1a859f02f9224a864b541b15e8db325409" compoundref="files__functions_8hpp" startline="545" endline="545">folder</references>
+        <references refid="class_folder_1a71aba0f5181775b9ed38163de1c89c0b" compoundref="files__functions_8hpp" startline="345" endline="345">Folder::get</references>
+        <references refid="class_path_1ad65d90486dbdf36c2759a7285f4e3a80" compoundref="files__functions_8hpp" startline="583">m_path</references>
+        <references refid="class_path_1a3f8c60121763c0e1cca52efc144f74e1" compoundref="files__functions_8hpp" startline="584">m_recursive_folders</references>
+        <references refid="class_folder_1a6aa1e1ebddb2cf4198b76f17f3aa022f" compoundref="files__functions_8hpp" startline="346" endline="346">Folder::name</references>
+        <references refid="class_folders_1ab7471e5d0263ec69f2c87f184c004395" compoundref="files__functions_8hpp" startline="423" endline="423">Folders::push_back</references>
+      </memberdef>
+      <memberdef kind="function" id="class_path_1a7c25cd5ebf26bf022d3477d9a42f387f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto Path::c_str</definition>
+        <argsstring>() const</argsstring>
+        <name>c_str</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/files_functions.hpp" line="538" column="8" bodyfile="lib/files_functions.hpp" bodystart="538" bodyend="538"/>
+        <references refid="class_path_1ad65d90486dbdf36c2759a7285f4e3a80" compoundref="files__functions_8hpp" startline="583">m_path</references>
+      </memberdef>
+      <memberdef kind="function" id="class_path_1ac40c8c627d0412be849f1e6cd4cdc556" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Path::cleanPath</definition>
+        <argsstring>()</argsstring>
+        <name>cleanPath</name>
+        <briefdescription>
+<para>To remove extraneous ./ or ../. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/files_functions.hpp" line="458" column="8" bodyfile="lib/files_functions.hpp" bodystart="458" bodyend="478"/>
+        <references refid="class_folders_1aa6c7cccbbb9de930b9a41dc42dcbb840" compoundref="files__functions_8hpp" startline="409" endline="409">Folders::erase</references>
+        <references refid="class_path_1a859f02f9224a864b541b15e8db325409" compoundref="files__functions_8hpp" startline="545" endline="545">folder</references>
+        <references refid="class_path_1ad65d90486dbdf36c2759a7285f4e3a80" compoundref="files__functions_8hpp" startline="583">m_path</references>
+        <references refid="class_path_1a3f8c60121763c0e1cca52efc144f74e1" compoundref="files__functions_8hpp" startline="584">m_recursive_folders</references>
+        <references refid="class_folders_1a6b8b818a0a08a010b9849573883bf189" compoundref="files__functions_8hpp" startline="415" endline="415">Folders::size</references>
+        <references refid="class_folders_1a21778cd16e2d1dfa91886bba394a506f" compoundref="files__functions_8hpp" startline="398" endline="403">Folders::string</references>
+        <referencedby refid="class_path_1aa9b3a53718dcd8ba66d90d50b112ddb9" compoundref="files__functions_8hpp" startline="480" endline="515">load</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_path_1aecd02f464b364bc26631bcb65e44843b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Path::exists</definition>
+        <argsstring>()</argsstring>
+        <name>exists</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/files_functions.hpp" line="520" column="8" bodyfile="lib/files_functions.hpp" bodystart="520" bodyend="520"/>
+        <references refid="files__functions_8hpp_1a6d7a6f0ccbecfe41730c211f472cfcb3" compoundref="files__functions_8hpp" startline="95" endline="104">folder_exists</references>
+        <references refid="class_path_1ad65d90486dbdf36c2759a7285f4e3a80" compoundref="files__functions_8hpp" startline="583">m_path</references>
+        <referencedby refid="class_file_1a6b15fde4d8bb49099cdf7f27c4f36fae" compoundref="files__functions_8hpp" startline="764" endline="776">File::check</referencedby>
+        <referencedby refid="class_path_1a1f94b3b7d475723ead35e54c87078ed7" compoundref="files__functions_8hpp" startline="522" endline="522">make</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_path_1a859f02f9224a864b541b15e8db325409" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_folder" kindref="compound">Folder</ref> const  &amp;</type>
+        <definition>Folder const&amp; Path::folder</definition>
+        <argsstring>() const</argsstring>
+        <name>folder</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/files_functions.hpp" line="545" column="17" bodyfile="lib/files_functions.hpp" bodystart="545" bodyend="545"/>
+        <references refid="class_folders_1aab07a96e82a348fe89b817c6d7b60394" compoundref="files__functions_8hpp" startline="421" endline="421">Folders::get</references>
+        <references refid="class_path_1a3f8c60121763c0e1cca52efc144f74e1" compoundref="files__functions_8hpp" startline="584">m_recursive_folders</references>
+        <referencedby refid="class_path_1a99656cd73eb5c5fa461d7570b86eb66d" compoundref="files__functions_8hpp" startline="524" endline="531">addFolder</referencedby>
+        <referencedby refid="class_path_1ac40c8c627d0412be849f1e6cd4cdc556" compoundref="files__functions_8hpp" startline="458" endline="478">cleanPath</referencedby>
+        <referencedby refid="class_file_1ae66434e6a61f2a76b09c3480bcff4fba" compoundref="files__functions_8hpp" startline="748" endline="748">File::folder</referencedby>
+        <referencedby refid="class_path_1a3d0909258a10a05b04d3c08ec42f562c" compoundref="files__functions_8hpp" startline="542" endline="542">operator+</referencedby>
+        <referencedby refid="class_run_matrixator_1aeb9889ba763858dfb65e05c3a7bb142e" compoundref="_run_matrixator_8hpp" startline="501" endline="550">RunMatrixator::Write</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_path_1a4e4d7d7670941e8ddc58261a4fac0916" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string const  &amp;</type>
+        <definition>std::string const&amp; Path::get</definition>
+        <argsstring>() const</argsstring>
+        <name>get</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/files_functions.hpp" line="535" column="22" bodyfile="lib/files_functions.hpp" bodystart="535" bodyend="535"/>
+        <references refid="class_path_1ad65d90486dbdf36c2759a7285f4e3a80" compoundref="files__functions_8hpp" startline="583">m_path</references>
+        <referencedby refid="class_path_1a6b32e82eaa18b7d2d12bc4eac45b8a4b" compoundref="files__functions_8hpp" startline="537" endline="537">operator std::string</referencedby>
+        <referencedby refid="files__functions_8hpp_1a5326a7606384341a1bd2a01f15ca9b06" compoundref="files__functions_8hpp" startline="799" endline="799">operator+</referencedby>
+        <referencedby refid="class_path_1aa2f2b14aafcc3fc3626c243fcc6574dc" compoundref="files__functions_8hpp" startline="536" endline="536">string</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_path_1a6aca68097e64629ee5d1e2c02f1b85ee" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_folders" kindref="compound">Folders</ref> const  &amp;</type>
+        <definition>Folders const&amp; Path::getFolders</definition>
+        <argsstring>() const</argsstring>
+        <name>getFolders</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/files_functions.hpp" line="547" column="18" bodyfile="lib/files_functions.hpp" bodystart="547" bodyend="547"/>
+        <references refid="class_path_1a3f8c60121763c0e1cca52efc144f74e1" compoundref="files__functions_8hpp" startline="584">m_recursive_folders</references>
+      </memberdef>
+      <memberdef kind="function" id="class_path_1aa9b3a53718dcd8ba66d90d50b112ddb9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Path::load</definition>
+        <argsstring>(bool const &amp;create=false)</argsstring>
+        <name>load</name>
+        <param>
+          <type>bool const &amp;</type>
+          <declname>create</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/files_functions.hpp" line="480" column="8" bodyfile="lib/files_functions.hpp" bodystart="480" bodyend="515"/>
+        <references refid="class_path_1ac40c8c627d0412be849f1e6cd4cdc556" compoundref="files__functions_8hpp" startline="458" endline="478">cleanPath</references>
+        <references refid="class_folders_1aaa63ca280c10fc90c09cc29e38c80a02" compoundref="files__functions_8hpp" startline="412" endline="412">Folders::clear</references>
+        <references refid="files__functions_8hpp_1a6d7a6f0ccbecfe41730c211f472cfcb3" compoundref="files__functions_8hpp" startline="95" endline="104">folder_exists</references>
+        <references refid="class_path_1a08c199926ff5432cd3f35c2df4b07433" compoundref="files__functions_8hpp" startline="578" endline="578">home</references>
+        <references refid="class_path_1aed6b8b1831e37ad107b290f828777dc2" compoundref="files__functions_8hpp" startline="582">m_exists</references>
+        <references refid="class_path_1ad65d90486dbdf36c2759a7285f4e3a80" compoundref="files__functions_8hpp" startline="583">m_path</references>
+        <references refid="class_path_1a3f8c60121763c0e1cca52efc144f74e1" compoundref="files__functions_8hpp" startline="584">m_recursive_folders</references>
+        <references refid="class_path_1a1f94b3b7d475723ead35e54c87078ed7" compoundref="files__functions_8hpp" startline="522" endline="522">make</references>
+        <references refid="class_path_1ac9b837b0071ab41b4b0868590786eeae" compoundref="files__functions_8hpp" startline="517" endline="517">makeFolderList</references>
+        <references refid="class_m_t_object_1a6fe86ce1ea64ede7e695490bceb264a3" compoundref="_m_t_object_8hpp" startline="108">MTObject::ON</references>
+        <references refid="_histogramor_8hpp_1ab48a2fa7184e6354788989602c8c8c29">print</references>
+        <references refid="files__functions_8hpp_1a4a072faccd444b8907dffd96e6211461" compoundref="files__functions_8hpp" startline="89" endline="93">push_back_if_none</references>
+        <references refid="class_path_1a0374de2afee27834da4adccf704d4190" compoundref="files__functions_8hpp" startline="579" endline="579">pwd</references>
+        <referencedby refid="class_path_1a42f3cfe8b84c3e11afc5d54b47522ab3" compoundref="files__functions_8hpp" startline="549" endline="554">operator=</referencedby>
+        <referencedby refid="class_path_1ae9ae307831520e338154143243a24a67" compoundref="files__functions_8hpp" startline="452" endline="452">Path</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_path_1a1f94b3b7d475723ead35e54c87078ed7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Path::make</definition>
+        <argsstring>()</argsstring>
+        <name>make</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/files_functions.hpp" line="522" column="8" bodyfile="lib/files_functions.hpp" bodystart="522" bodyend="522"/>
+        <references refid="files__functions_8hpp_1af52310dd2d55713265daa0e58dd7bf21" compoundref="files__functions_8hpp" startline="114" endline="126">create_folder_if_none</references>
+        <references refid="class_path_1aecd02f464b364bc26631bcb65e44843b" compoundref="files__functions_8hpp" startline="520" endline="520">exists</references>
+        <references refid="class_path_1ad65d90486dbdf36c2759a7285f4e3a80" compoundref="files__functions_8hpp" startline="583">m_path</references>
+        <referencedby refid="class_path_1aa9b3a53718dcd8ba66d90d50b112ddb9" compoundref="files__functions_8hpp" startline="480" endline="515">load</referencedby>
+        <referencedby refid="class_file_1aec78af028103207cb2ce88c0120dd4f6" compoundref="files__functions_8hpp" startline="755" endline="755">File::makePath</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_path_1ac9b837b0071ab41b4b0868590786eeae" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Path::makeFolderList</definition>
+        <argsstring>()</argsstring>
+        <name>makeFolderList</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/files_functions.hpp" line="517" column="8" bodyfile="lib/files_functions.hpp" bodystart="517" bodyend="517"/>
+        <references refid="string__functions_8hpp_1a44ad60b408ba7b75bdf7ae75f8d2532f" compoundref="string__functions_8hpp" startline="22" endline="48">getList</references>
+        <references refid="class_path_1ad65d90486dbdf36c2759a7285f4e3a80" compoundref="files__functions_8hpp" startline="583">m_path</references>
+        <references refid="class_path_1a3f8c60121763c0e1cca52efc144f74e1" compoundref="files__functions_8hpp" startline="584">m_recursive_folders</references>
+        <referencedby refid="class_path_1aa9b3a53718dcd8ba66d90d50b112ddb9" compoundref="files__functions_8hpp" startline="480" endline="515">load</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_path_1a67161dbd774db3274fadc0c438b0cdf2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int Path::nbFiles</definition>
+        <argsstring>()</argsstring>
+        <name>nbFiles</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/files_functions.hpp" line="519" column="8" bodyfile="lib/files_functions.hpp" bodystart="519" bodyend="519"/>
+        <references refid="class_path_1ad65d90486dbdf36c2759a7285f4e3a80" compoundref="files__functions_8hpp" startline="583">m_path</references>
+        <references refid="files__functions_8hpp_1a5e105952499e9ca713d2a2fd5db3299d" compoundref="files__functions_8hpp" startline="128" endline="143">nb_files_in_folder</references>
+      </memberdef>
+      <memberdef kind="function" id="class_path_1a0db652f355256181825b11d0199ed0ae" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Path::operator bool</definition>
+        <argsstring>() const</argsstring>
+        <name>operator bool</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/files_functions.hpp" line="521" column="3" bodyfile="lib/files_functions.hpp" bodystart="521" bodyend="521"/>
+        <references refid="files__functions_8hpp_1a6d7a6f0ccbecfe41730c211f472cfcb3" compoundref="files__functions_8hpp" startline="95" endline="104">folder_exists</references>
+        <references refid="class_path_1ad65d90486dbdf36c2759a7285f4e3a80" compoundref="files__functions_8hpp" startline="583">m_path</references>
+      </memberdef>
+      <memberdef kind="function" id="class_path_1a6b32e82eaa18b7d2d12bc4eac45b8a4b" prot="public" static="no" const="yes" explicit="no" inline="yes" refqual="lvalue" virt="non-virtual">
+        <type></type>
+        <definition>Path::operator std::string</definition>
+        <argsstring>() const &amp;</argsstring>
+        <name>operator std::string</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/files_functions.hpp" line="537" column="3" bodyfile="lib/files_functions.hpp" bodystart="537" bodyend="537"/>
+        <references refid="class_path_1a4e4d7d7670941e8ddc58261a4fac0916" compoundref="files__functions_8hpp" startline="535" endline="535">get</references>
+      </memberdef>
+      <memberdef kind="function" id="class_path_1acb9812e5cc077adf9cecd471b5397a83" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string Path::operator+</definition>
+        <argsstring>(const char *addString)</argsstring>
+        <name>operator+</name>
+        <param>
+          <type>const char *</type>
+          <declname>addString</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/files_functions.hpp" line="541" column="15" bodyfile="lib/files_functions.hpp" bodystart="541" bodyend="541"/>
+        <references refid="class_path_1ad65d90486dbdf36c2759a7285f4e3a80" compoundref="files__functions_8hpp" startline="583">m_path</references>
+      </memberdef>
+      <memberdef kind="function" id="class_path_1a3d0909258a10a05b04d3c08ec42f562c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_path" kindref="compound">Path</ref></type>
+        <definition>Path Path::operator+</definition>
+        <argsstring>(Folder const &amp;folder)</argsstring>
+        <name>operator+</name>
+        <param>
+          <type><ref refid="class_folder" kindref="compound">Folder</ref> const &amp;</type>
+          <declname>folder</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/files_functions.hpp" line="542" column="8" bodyfile="lib/files_functions.hpp" bodystart="542" bodyend="542"/>
+        <references refid="class_path_1a859f02f9224a864b541b15e8db325409" compoundref="files__functions_8hpp" startline="545" endline="545">folder</references>
+        <references refid="class_folder_1a71aba0f5181775b9ed38163de1c89c0b" compoundref="files__functions_8hpp" startline="345" endline="345">Folder::get</references>
+        <references refid="class_path_1ad65d90486dbdf36c2759a7285f4e3a80" compoundref="files__functions_8hpp" startline="583">m_path</references>
+        <references refid="class_path_1af26cfab021ddf49af73da3b2beca85ac" compoundref="files__functions_8hpp" startline="448" endline="448">Path</references>
+      </memberdef>
+      <memberdef kind="function" id="class_path_1a6dafc9642cd2096f67ce9dc80a7a11bf" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string Path::operator+</definition>
+        <argsstring>(std::string const &amp;addString)</argsstring>
+        <name>operator+</name>
+        <param>
+          <type>std::string const &amp;</type>
+          <declname>addString</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/files_functions.hpp" line="540" column="15" bodyfile="lib/files_functions.hpp" bodystart="540" bodyend="540"/>
+        <references refid="class_path_1ad65d90486dbdf36c2759a7285f4e3a80" compoundref="files__functions_8hpp" startline="583">m_path</references>
+      </memberdef>
+      <memberdef kind="function" id="class_path_1aea2baf3449b7fc955e7320f851ec29e5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_path" kindref="compound">Path</ref> &amp;</type>
+        <definition>Path&amp; Path::operator+=</definition>
+        <argsstring>(std::string const &amp;addString)</argsstring>
+        <name>operator+=</name>
+        <param>
+          <type>std::string const &amp;</type>
+          <declname>addString</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/files_functions.hpp" line="568" column="9" bodyfile="lib/files_functions.hpp" bodystart="568" bodyend="574"/>
+        <references refid="class_path_1ad65d90486dbdf36c2759a7285f4e3a80" compoundref="files__functions_8hpp" startline="583">m_path</references>
+        <references refid="files__functions_8hpp_1a4a072faccd444b8907dffd96e6211461" compoundref="files__functions_8hpp" startline="89" endline="93">push_back_if_none</references>
+      </memberdef>
+      <memberdef kind="function" id="class_path_1a71da17bb5e324fd092daeca8f56f81ed" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_path" kindref="compound">Path</ref> &amp;</type>
+        <definition>Path&amp; Path::operator=</definition>
+        <argsstring>(const char *path)</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const char *</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/files_functions.hpp" line="561" column="9" bodyfile="lib/files_functions.hpp" bodystart="561" bodyend="566"/>
+        <references refid="class_path_1aa9b3a53718dcd8ba66d90d50b112ddb9" compoundref="files__functions_8hpp" startline="480" endline="515">load</references>
+        <references refid="class_path_1ad65d90486dbdf36c2759a7285f4e3a80" compoundref="files__functions_8hpp" startline="583">m_path</references>
+        <references refid="class_path_1a7797092ad2d61166d4adcecff31e34bb" compoundref="files__functions_8hpp" startline="533" endline="533">path</references>
+      </memberdef>
+      <memberdef kind="function" id="class_path_1a5bb409bfa25a8efe99b9d07e0ea2cf7a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_path" kindref="compound">Path</ref> &amp;</type>
+        <definition>Path&amp; Path::operator=</definition>
+        <argsstring>(Path &amp;path)</argsstring>
+        <name>operator=</name>
+        <param>
+          <type><ref refid="class_path" kindref="compound">Path</ref> &amp;</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/files_functions.hpp" line="555" column="9" bodyfile="lib/files_functions.hpp" bodystart="555" bodyend="560"/>
+        <references refid="class_path_1aa9b3a53718dcd8ba66d90d50b112ddb9" compoundref="files__functions_8hpp" startline="480" endline="515">load</references>
+        <references refid="class_path_1ad65d90486dbdf36c2759a7285f4e3a80" compoundref="files__functions_8hpp" startline="583">m_path</references>
+        <references refid="class_path_1a7797092ad2d61166d4adcecff31e34bb" compoundref="files__functions_8hpp" startline="533" endline="533">path</references>
+      </memberdef>
+      <memberdef kind="function" id="class_path_1a42f3cfe8b84c3e11afc5d54b47522ab3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_path" kindref="compound">Path</ref> &amp;</type>
+        <definition>Path&amp; Path::operator=</definition>
+        <argsstring>(std::string const &amp;inputString)</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>std::string const &amp;</type>
+          <declname>inputString</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/files_functions.hpp" line="549" column="9" bodyfile="lib/files_functions.hpp" bodystart="549" bodyend="554"/>
+        <references refid="class_path_1aa9b3a53718dcd8ba66d90d50b112ddb9" compoundref="files__functions_8hpp" startline="480" endline="515">load</references>
+        <references refid="class_path_1ad65d90486dbdf36c2759a7285f4e3a80" compoundref="files__functions_8hpp" startline="583">m_path</references>
+      </memberdef>
+      <memberdef kind="function" id="class_path_1a104457a3f7fbf2dcdb86d8c5a168f344" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Path::operator==</definition>
+        <argsstring>(std::string const &amp;cmprStr)</argsstring>
+        <name>operator==</name>
+        <param>
+          <type>std::string const &amp;</type>
+          <declname>cmprStr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/files_functions.hpp" line="576" column="8" bodyfile="lib/files_functions.hpp" bodystart="576" bodyend="576"/>
+        <references refid="class_path_1ad65d90486dbdf36c2759a7285f4e3a80" compoundref="files__functions_8hpp" startline="583">m_path</references>
+      </memberdef>
+      <memberdef kind="function" id="class_path_1a145897ef8010831f6823ef7173ac4a0c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_folder" kindref="compound">Folder</ref> const  &amp;</type>
+        <definition>Folder const&amp; Path::operator[]</definition>
+        <argsstring>(uint const &amp;i) const</argsstring>
+        <name>operator[]</name>
+        <param>
+          <type><ref refid="lib_co_8hpp_1a69aa29b598b851b0640aa225a9e5d61d" kindref="member">uint</ref> const &amp;</type>
+          <declname>i</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/files_functions.hpp" line="544" column="17" bodyfile="lib/files_functions.hpp" bodystart="544" bodyend="544"/>
+        <references refid="class_path_1a3f8c60121763c0e1cca52efc144f74e1" compoundref="files__functions_8hpp" startline="584">m_recursive_folders</references>
+      </memberdef>
+      <memberdef kind="function" id="class_path_1af26cfab021ddf49af73da3b2beca85ac" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Path::Path</definition>
+        <argsstring>()</argsstring>
+        <name>Path</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/files_functions.hpp" line="448" column="3" bodyfile="lib/files_functions.hpp" bodystart="448" bodyend="448"/>
+        <referencedby refid="class_path_1a08c199926ff5432cd3f35c2df4b07433" compoundref="files__functions_8hpp" startline="578" endline="578">home</referencedby>
+        <referencedby refid="class_path_1a3d0909258a10a05b04d3c08ec42f562c" compoundref="files__functions_8hpp" startline="542" endline="542">operator+</referencedby>
+        <referencedby refid="class_path_1a0374de2afee27834da4adccf704d4190" compoundref="files__functions_8hpp" startline="579" endline="579">pwd</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_path_1a7797092ad2d61166d4adcecff31e34bb" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string const  &amp;</type>
+        <definition>std::string const&amp; Path::path</definition>
+        <argsstring>() const</argsstring>
+        <name>path</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/files_functions.hpp" line="533" column="22" bodyfile="lib/files_functions.hpp" bodystart="533" bodyend="533"/>
+        <references refid="class_path_1ad65d90486dbdf36c2759a7285f4e3a80" compoundref="files__functions_8hpp" startline="583">m_path</references>
+        <referencedby refid="files__functions_8hpp_1a039532c19ad3ebbe61e164a4e4f28bcd" compoundref="files__functions_8hpp" startline="587" endline="591">operator&lt;&lt;</referencedby>
+        <referencedby refid="class_path_1a5bb409bfa25a8efe99b9d07e0ea2cf7a" compoundref="files__functions_8hpp" startline="555" endline="560">operator=</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_path_1ac5e21de774118e980dea1c985155f110" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Path::Path</definition>
+        <argsstring>(const char *c_str, bool const &amp;create=false)</argsstring>
+        <name>Path</name>
+        <param>
+          <type>const char *</type>
+          <declname>c_str</declname>
+        </param>
+        <param>
+          <type>bool const &amp;</type>
+          <declname>create</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+<para>Turns a C string to a path, creating it if create = true and it doesn&apos;t already exists. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/files_functions.hpp" line="455" column="3" bodyfile="lib/files_functions.hpp" bodystart="455" bodyend="455"/>
+        <references refid="class_path_1aa9b3a53718dcd8ba66d90d50b112ddb9" compoundref="files__functions_8hpp" startline="480" endline="515">load</references>
+      </memberdef>
+      <memberdef kind="function" id="class_path_1ac26c0c210a4c30bade6daca9c0853fc1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Path::Path</definition>
+        <argsstring>(Path const &amp;path)</argsstring>
+        <name>Path</name>
+        <param>
+          <type><ref refid="class_path" kindref="compound">Path</ref> const &amp;</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/files_functions.hpp" line="449" column="3" bodyfile="lib/files_functions.hpp" bodystart="449" bodyend="449"/>
+      </memberdef>
+      <memberdef kind="function" id="class_path_1ae9ae307831520e338154143243a24a67" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Path::Path</definition>
+        <argsstring>(std::string const &amp;path, bool const &amp;create=false)</argsstring>
+        <name>Path</name>
+        <param>
+          <type>std::string const &amp;</type>
+          <declname>path</declname>
+        </param>
+        <param>
+          <type>bool const &amp;</type>
+          <declname>create</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+<para>Turns a string to a path, creating it if create = true and it doesn&apos;t already exists. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/files_functions.hpp" line="452" column="3" bodyfile="lib/files_functions.hpp" bodystart="452" bodyend="452"/>
+        <references refid="class_path_1aa9b3a53718dcd8ba66d90d50b112ddb9" compoundref="files__functions_8hpp" startline="480" endline="515">load</references>
+      </memberdef>
+      <memberdef kind="function" id="class_path_1a34073c3753fbd7873238808f7f5a655b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto const</type>
+        <definition>auto const Path::size</definition>
+        <argsstring>() const</argsstring>
+        <name>size</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/files_functions.hpp" line="546" column="14" bodyfile="lib/files_functions.hpp" bodystart="546" bodyend="546"/>
+        <references refid="class_path_1a3f8c60121763c0e1cca52efc144f74e1" compoundref="files__functions_8hpp" startline="584">m_recursive_folders</references>
+        <references refid="class_folders_1a6b8b818a0a08a010b9849573883bf189" compoundref="files__functions_8hpp" startline="415" endline="415">Folders::size</references>
+      </memberdef>
+      <memberdef kind="function" id="class_path_1aa2f2b14aafcc3fc3626c243fcc6574dc" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string const  &amp;</type>
+        <definition>std::string const&amp; Path::string</definition>
+        <argsstring>() const</argsstring>
+        <name>string</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/files_functions.hpp" line="536" column="22" bodyfile="lib/files_functions.hpp" bodystart="536" bodyend="536"/>
+        <references refid="class_path_1a4e4d7d7670941e8ddc58261a4fac0916" compoundref="files__functions_8hpp" startline="535" endline="535">get</references>
+        <referencedby refid="class_faster2_histo_1a8684b0b531e6369ce35bca61f4b1007a" compoundref="_faster2_histo_8hpp" startline="21" endline="26">Faster2Histo::addFolder</referencedby>
+        <referencedby refid="class_clover_spectra_1ae46c582451bada5b2b8957ee44b92e35" compoundref="_clover_spectra_8hpp" startline="65" endline="77">CloverSpectra::fillHisto</referencedby>
+        <referencedby refid="class_file_1a8f6a2ccec2d48112847c89541d13bc10" compoundref="files__functions_8hpp" startline="763" endline="763">File::update</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="class_path_1a08c199926ff5432cd3f35c2df4b07433" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_path" kindref="compound">Path</ref></type>
+        <definition>static Path Path::home</definition>
+        <argsstring>()</argsstring>
+        <name>home</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/files_functions.hpp" line="578" column="15" bodyfile="lib/files_functions.hpp" bodystart="578" bodyend="578"/>
+        <references refid="class_path_1af26cfab021ddf49af73da3b2beca85ac" compoundref="files__functions_8hpp" startline="448" endline="448">Path</references>
+        <referencedby refid="class_path_1aa9b3a53718dcd8ba66d90d50b112ddb9" compoundref="files__functions_8hpp" startline="480" endline="515">load</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_path_1a0374de2afee27834da4adccf704d4190" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_path" kindref="compound">Path</ref></type>
+        <definition>static Path Path::pwd</definition>
+        <argsstring>()</argsstring>
+        <name>pwd</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/files_functions.hpp" line="579" column="15" bodyfile="lib/files_functions.hpp" bodystart="579" bodyend="579"/>
+        <references refid="class_path_1af26cfab021ddf49af73da3b2beca85ac" compoundref="files__functions_8hpp" startline="448" endline="448">Path</references>
+        <referencedby refid="class_file_1ac3774fc193239a9a83f6974e9a79f9c4" compoundref="files__functions_8hpp" startline="778" endline="791">File::fill</referencedby>
+        <referencedby refid="class_path_1aa9b3a53718dcd8ba66d90d50b112ddb9" compoundref="files__functions_8hpp" startline="480" endline="515">load</referencedby>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>EXPERIMENTAL Object used to hold the complete path of a giver folder. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>You can use either a full path from the root (&quot;/.../.../&quot;) or from the home directory (&quot;~/.../.../&quot;)</para>
+<para>So far, relative paths are not supported (yet hopefully) </para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>Path</label>
+        <link refid="class_path"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>m_recursive_folders</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Folders</label>
+        <link refid="class_folders"/>
+      </node>
+    </collaborationgraph>
+    <location file="lib/files_functions.hpp" line="445" column="1" bodyfile="lib/files_functions.hpp" bodystart="446" bodyend="585"/>
+    <listofallmembers>
+      <member refid="class_path_1a99656cd73eb5c5fa461d7570b86eb66d" prot="public" virt="non-virtual"><scope>Path</scope><name>addFolder</name></member>
+      <member refid="class_path_1a7c25cd5ebf26bf022d3477d9a42f387f" prot="public" virt="non-virtual"><scope>Path</scope><name>c_str</name></member>
+      <member refid="class_path_1ac40c8c627d0412be849f1e6cd4cdc556" prot="public" virt="non-virtual"><scope>Path</scope><name>cleanPath</name></member>
+      <member refid="class_path_1aecd02f464b364bc26631bcb65e44843b" prot="public" virt="non-virtual"><scope>Path</scope><name>exists</name></member>
+      <member refid="class_path_1a859f02f9224a864b541b15e8db325409" prot="public" virt="non-virtual"><scope>Path</scope><name>folder</name></member>
+      <member refid="class_path_1a4e4d7d7670941e8ddc58261a4fac0916" prot="public" virt="non-virtual"><scope>Path</scope><name>get</name></member>
+      <member refid="class_path_1a6aca68097e64629ee5d1e2c02f1b85ee" prot="public" virt="non-virtual"><scope>Path</scope><name>getFolders</name></member>
+      <member refid="class_path_1a08c199926ff5432cd3f35c2df4b07433" prot="public" virt="non-virtual"><scope>Path</scope><name>home</name></member>
+      <member refid="class_path_1aa9b3a53718dcd8ba66d90d50b112ddb9" prot="public" virt="non-virtual"><scope>Path</scope><name>load</name></member>
+      <member refid="class_path_1aed6b8b1831e37ad107b290f828777dc2" prot="private" virt="non-virtual"><scope>Path</scope><name>m_exists</name></member>
+      <member refid="class_path_1ad65d90486dbdf36c2759a7285f4e3a80" prot="private" virt="non-virtual"><scope>Path</scope><name>m_path</name></member>
+      <member refid="class_path_1a3f8c60121763c0e1cca52efc144f74e1" prot="private" virt="non-virtual"><scope>Path</scope><name>m_recursive_folders</name></member>
+      <member refid="class_path_1a1f94b3b7d475723ead35e54c87078ed7" prot="public" virt="non-virtual"><scope>Path</scope><name>make</name></member>
+      <member refid="class_path_1ac9b837b0071ab41b4b0868590786eeae" prot="public" virt="non-virtual"><scope>Path</scope><name>makeFolderList</name></member>
+      <member refid="class_path_1a67161dbd774db3274fadc0c438b0cdf2" prot="public" virt="non-virtual"><scope>Path</scope><name>nbFiles</name></member>
+      <member refid="class_path_1a0db652f355256181825b11d0199ed0ae" prot="public" virt="non-virtual"><scope>Path</scope><name>operator bool</name></member>
+      <member refid="class_path_1a6b32e82eaa18b7d2d12bc4eac45b8a4b" prot="public" virt="non-virtual"><scope>Path</scope><name>operator std::string</name></member>
+      <member refid="class_path_1a6dafc9642cd2096f67ce9dc80a7a11bf" prot="public" virt="non-virtual"><scope>Path</scope><name>operator+</name></member>
+      <member refid="class_path_1acb9812e5cc077adf9cecd471b5397a83" prot="public" virt="non-virtual"><scope>Path</scope><name>operator+</name></member>
+      <member refid="class_path_1a3d0909258a10a05b04d3c08ec42f562c" prot="public" virt="non-virtual"><scope>Path</scope><name>operator+</name></member>
+      <member refid="class_path_1aea2baf3449b7fc955e7320f851ec29e5" prot="public" virt="non-virtual"><scope>Path</scope><name>operator+=</name></member>
+      <member refid="class_path_1a42f3cfe8b84c3e11afc5d54b47522ab3" prot="public" virt="non-virtual"><scope>Path</scope><name>operator=</name></member>
+      <member refid="class_path_1a5bb409bfa25a8efe99b9d07e0ea2cf7a" prot="public" virt="non-virtual"><scope>Path</scope><name>operator=</name></member>
+      <member refid="class_path_1a71da17bb5e324fd092daeca8f56f81ed" prot="public" virt="non-virtual"><scope>Path</scope><name>operator=</name></member>
+      <member refid="class_path_1a104457a3f7fbf2dcdb86d8c5a168f344" prot="public" virt="non-virtual"><scope>Path</scope><name>operator==</name></member>
+      <member refid="class_path_1a145897ef8010831f6823ef7173ac4a0c" prot="public" virt="non-virtual"><scope>Path</scope><name>operator[]</name></member>
+      <member refid="class_path_1a7797092ad2d61166d4adcecff31e34bb" prot="public" virt="non-virtual"><scope>Path</scope><name>path</name></member>
+      <member refid="class_path_1af26cfab021ddf49af73da3b2beca85ac" prot="public" virt="non-virtual"><scope>Path</scope><name>Path</name></member>
+      <member refid="class_path_1ac26c0c210a4c30bade6daca9c0853fc1" prot="public" virt="non-virtual"><scope>Path</scope><name>Path</name></member>
+      <member refid="class_path_1ae9ae307831520e338154143243a24a67" prot="public" virt="non-virtual"><scope>Path</scope><name>Path</name></member>
+      <member refid="class_path_1ac5e21de774118e980dea1c985155f110" prot="public" virt="non-virtual"><scope>Path</scope><name>Path</name></member>
+      <member refid="class_path_1a0374de2afee27834da4adccf704d4190" prot="public" virt="non-virtual"><scope>Path</scope><name>pwd</name></member>
+      <member refid="class_path_1a34073c3753fbd7873238808f7f5a655b" prot="public" virt="non-virtual"><scope>Path</scope><name>size</name></member>
+      <member refid="class_path_1aa2f2b14aafcc3fc3626c243fcc6574dc" prot="public" virt="non-virtual"><scope>Path</scope><name>string</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,439 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="class_builder" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>Builder</compoundname>
+    <derivedcompoundref refid="class_coinc_builder" prot="public" virt="non-virtual">CoincBuilder</derivedcompoundref>
+    <derivedcompoundref refid="class_event_builder" prot="public" virt="non-virtual">EventBuilder</derivedcompoundref>
+    <includes refid="_builder_8hpp" local="no">Builder.hpp</includes>
+      <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="class_builder_1a76749e4cc31025fde18f9cdbeb232cbf" prot="protected" static="no" mutable="no">
+        <type><ref refid="class_event" kindref="compound">Event</ref> *</type>
+        <definition>Event* Builder::m_event</definition>
+        <argsstring></argsstring>
+        <name>m_event</name>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Builder.hpp" line="90" column="9" bodyfile="lib/Classes/Builder.hpp" bodystart="90" bodyend="-1"/>
+        <referencedby refid="class_coinc_builder_1a6fbd7caa8ab6ac6bbf4d14eb094b6417" compoundref="_coinc_builder_8hpp" startline="49" endline="90">CoincBuilder::build</referencedby>
+        <referencedby refid="class_event_builder_1a721b4b60a459c5a5c00ed3e1b513d636" compoundref="_event_builder_8hpp" startline="49" endline="102">EventBuilder::build</referencedby>
+        <referencedby refid="class_event_builder_1ac0b0fb04d24202c381a11e277f28ec4d" compoundref="_event_builder_8hpp" startline="18" endline="21">EventBuilder::EventBuilder</referencedby>
+        <referencedby refid="class_builder_1a8fd6226096d712de58f78e9ef123c45d" compoundref="_builder_8hpp" startline="65" endline="65">getEvent</referencedby>
+        <referencedby refid="class_builder_1aa476b7d1fd2fe31882a3380769eb60a9" compoundref="_builder_8hpp" startline="63" endline="63">isSingle</referencedby>
+        <referencedby refid="class_coinc_builder_1aea3e2ad2ee31f1a77abea9e9921cdd6f" compoundref="_coinc_builder_8hpp" startline="92" endline="95">CoincBuilder::printEvent</referencedby>
+        <referencedby refid="class_builder_1ae2d72f1157ccaaddc45b6963c7971f30" compoundref="_builder_8hpp" startline="73" endline="73">reset</referencedby>
+        <referencedby refid="class_coinc_builder_1ad777d92b1242cafdb594e3fb315ae3a9" compoundref="_coinc_builder_8hpp" startline="31" endline="31">CoincBuilder::reset</referencedby>
+        <referencedby refid="class_event_builder_1a96d24bbdba6a9cc0770bc1ec81c7c9e0" compoundref="_event_builder_8hpp" startline="119" endline="125">EventBuilder::reset</referencedby>
+        <referencedby refid="class_builder_1a3097a8df520a8ab39c953cb8b659b2ee" compoundref="_builder_8hpp" startline="66" endline="66">size</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_builder_1a5cce09bc1a95dd0bcaa4f857f1a1b3da" prot="protected" static="no" mutable="no">
+        <type><ref refid="class_hit" kindref="compound">Hit</ref></type>
+        <definition>Hit Builder::m_last_hit</definition>
+        <argsstring></argsstring>
+        <name>m_last_hit</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Builder.hpp" line="92" column="7" bodyfile="lib/Classes/Builder.hpp" bodystart="92" bodyend="-1"/>
+        <referencedby refid="class_coinc_builder_1a6fbd7caa8ab6ac6bbf4d14eb094b6417" compoundref="_coinc_builder_8hpp" startline="49" endline="90">CoincBuilder::build</referencedby>
+        <referencedby refid="class_event_builder_1a721b4b60a459c5a5c00ed3e1b513d636" compoundref="_event_builder_8hpp" startline="49" endline="102">EventBuilder::build</referencedby>
+        <referencedby refid="class_coinc_builder_1a7bb003c28d9b4b43bbd10a09771226ae" compoundref="_coinc_builder_8hpp" startline="32" endline="35">CoincBuilder::coincidence</referencedby>
+        <referencedby refid="class_builder_1abeb8339305e7a10fb2c67cc0fed9237b" compoundref="_builder_8hpp" startline="58" endline="58">getLastHit</referencedby>
+        <referencedby refid="class_event_builder_1a96d24bbdba6a9cc0770bc1ec81c7c9e0" compoundref="_event_builder_8hpp" startline="119" endline="125">EventBuilder::reset</referencedby>
+        <referencedby refid="class_builder_1aebad9a247ffe8dfa74d2738ee7cad755" compoundref="_builder_8hpp" startline="80" endline="83">set_first_hit</referencedby>
+        <referencedby refid="class_builder_1acc042a420547dc2ee6eb85e6daf43b07" compoundref="_builder_8hpp" startline="76" endline="79">set_last_hit</referencedby>
+        <referencedby refid="class_event_builder_1a4f56ddbeef9ac86eca830a3742fb30c7" compoundref="_event_builder_8hpp" startline="111" endline="117">EventBuilder::set_last_hit</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_builder_1a81c56e91c1951d25faecf88f390b5bcb" prot="protected" static="no" mutable="no">
+        <type><ref refid="lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21" kindref="member">uchar</ref></type>
+        <definition>uchar Builder::m_status</definition>
+        <argsstring></argsstring>
+        <name>m_status</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Builder.hpp" line="96" column="9" bodyfile="lib/Classes/Builder.hpp" bodystart="96" bodyend="-1"/>
+        <referencedby refid="class_coinc_builder_1a6fbd7caa8ab6ac6bbf4d14eb094b6417" compoundref="_coinc_builder_8hpp" startline="49" endline="90">CoincBuilder::build</referencedby>
+        <referencedby refid="class_event_builder_1a721b4b60a459c5a5c00ed3e1b513d636" compoundref="_event_builder_8hpp" startline="49" endline="102">EventBuilder::build</referencedby>
+        <referencedby refid="class_builder_1a414690f7964ed158937df8a65b1d4760" compoundref="_builder_8hpp" startline="61" endline="61">isBuilding</referencedby>
+        <referencedby refid="class_builder_1af7ce79872abc82e734c72e03380a1f34" compoundref="_builder_8hpp" startline="62" endline="62">isBuilt</referencedby>
+        <referencedby refid="class_builder_1ae2d72f1157ccaaddc45b6963c7971f30" compoundref="_builder_8hpp" startline="73" endline="73">reset</referencedby>
+        <referencedby refid="class_coinc_builder_1ad777d92b1242cafdb594e3fb315ae3a9" compoundref="_coinc_builder_8hpp" startline="31" endline="31">CoincBuilder::reset</referencedby>
+        <referencedby refid="class_event_builder_1a96d24bbdba6a9cc0770bc1ec81c7c9e0" compoundref="_event_builder_8hpp" startline="119" endline="125">EventBuilder::reset</referencedby>
+        <referencedby refid="class_builder_1af86b7b9639bb301f191e6263dd871bf7" compoundref="_builder_8hpp" startline="60" endline="60">status</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-static-attrib">
+      <memberdef kind="variable" id="class_builder_1a7b1399ae5a1a58620dd564754d691348" prot="protected" static="yes" mutable="no">
+        <type>bool</type>
+        <definition>bool Builder::m_keep_singles</definition>
+        <argsstring></argsstring>
+        <name>m_keep_singles</name>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Builder.hpp" line="97" column="15" bodyfile="lib/Classes/Builder.hpp" bodystart="97" bodyend="-1"/>
+        <referencedby refid="class_coinc_builder_1a6fbd7caa8ab6ac6bbf4d14eb094b6417" compoundref="_coinc_builder_8hpp" startline="49" endline="90">CoincBuilder::build</referencedby>
+        <referencedby refid="class_builder_1a4d557d96189a42cbc0a4a0d32db45d6c" compoundref="_builder_8hpp" startline="86" endline="86">keepSingles</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_builder_1a6174fb0019ff2eafed26644d05e374a5" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool Builder::build</definition>
+        <argsstring>(Hit const &amp;_hit)=0</argsstring>
+        <name>build</name>
+        <reimplementedby refid="class_coinc_builder_1a6fbd7caa8ab6ac6bbf4d14eb094b6417">build</reimplementedby>
+        <reimplementedby refid="class_event_builder_1a721b4b60a459c5a5c00ed3e1b513d636">build</reimplementedby>
+        <param>
+          <type><ref refid="class_hit" kindref="compound">Hit</ref> const &amp;</type>
+          <declname>_hit</declname>
+        </param>
+        <briefdescription>
+<para>Add Hits to the event. Return true when an event is complete, i.e. current hit is outside of time window. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>3 status : 0: single | 1: begin of coincidence | 2: coincidence complete </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Builder.hpp" line="71" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="class_builder_1af8e018e77879c6136e6dabbd5eab0634" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Builder::Builder</definition>
+        <argsstring>()</argsstring>
+        <name>Builder</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Builder.hpp" line="51" column="3" bodyfile="lib/Classes/Builder.hpp" bodystart="51" bodyend="51"/>
+      </memberdef>
+      <memberdef kind="function" id="class_builder_1a9cda698e8695141734f5e695a7f24975" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Builder::Builder</definition>
+        <argsstring>(Event *event)</argsstring>
+        <name>Builder</name>
+        <param>
+          <type><ref refid="class_event" kindref="compound">Event</ref> *</type>
+          <declname>event</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Builder.hpp" line="52" column="3" bodyfile="lib/Classes/Builder.hpp" bodystart="52" bodyend="52"/>
+      </memberdef>
+      <memberdef kind="function" id="class_builder_1aacd0df1ffcecbfb4bbc009e6efd0b541" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool Builder::coincidence</definition>
+        <argsstring>(Hit const &amp;hit)=0</argsstring>
+        <name>coincidence</name>
+        <reimplementedby refid="class_coinc_builder_1a7bb003c28d9b4b43bbd10a09771226ae">coincidence</reimplementedby>
+        <param>
+          <type><ref refid="class_hit" kindref="compound">Hit</ref> const &amp;</type>
+          <declname>hit</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Builder.hpp" line="72" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="class_builder_1a8fd6226096d712de58f78e9ef123c45d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_event" kindref="compound">Event</ref> *</type>
+        <definition>Event* Builder::getEvent</definition>
+        <argsstring>() const</argsstring>
+        <name>getEvent</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Builder.hpp" line="65" column="9" bodyfile="lib/Classes/Builder.hpp" bodystart="65" bodyend="65"/>
+        <references refid="class_builder_1a76749e4cc31025fde18f9cdbeb232cbf" compoundref="_builder_8hpp" startline="90">m_event</references>
+      </memberdef>
+      <memberdef kind="function" id="class_builder_1abeb8339305e7a10fb2c67cc0fed9237b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_hit" kindref="compound">Hit</ref> const  &amp;</type>
+        <definition>Hit const&amp; Builder::getLastHit</definition>
+        <argsstring>() const</argsstring>
+        <name>getLastHit</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Builder.hpp" line="58" column="14" bodyfile="lib/Classes/Builder.hpp" bodystart="58" bodyend="58"/>
+        <references refid="class_builder_1a5cce09bc1a95dd0bcaa4f857f1a1b3da" compoundref="_builder_8hpp" startline="92">m_last_hit</references>
+      </memberdef>
+      <memberdef kind="function" id="class_builder_1a414690f7964ed158937df8a65b1d4760" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Builder::isBuilding</definition>
+        <argsstring>() const</argsstring>
+        <name>isBuilding</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Builder.hpp" line="61" column="8" bodyfile="lib/Classes/Builder.hpp" bodystart="61" bodyend="61"/>
+        <references refid="class_builder_1a81c56e91c1951d25faecf88f390b5bcb" compoundref="_builder_8hpp" startline="96">m_status</references>
+      </memberdef>
+      <memberdef kind="function" id="class_builder_1af7ce79872abc82e734c72e03380a1f34" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Builder::isBuilt</definition>
+        <argsstring>() const</argsstring>
+        <name>isBuilt</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Builder.hpp" line="62" column="8" bodyfile="lib/Classes/Builder.hpp" bodystart="62" bodyend="62"/>
+        <references refid="class_builder_1a81c56e91c1951d25faecf88f390b5bcb" compoundref="_builder_8hpp" startline="96">m_status</references>
+      </memberdef>
+      <memberdef kind="function" id="class_builder_1aa476b7d1fd2fe31882a3380769eb60a9" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Builder::isSingle</definition>
+        <argsstring>() const</argsstring>
+        <name>isSingle</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Builder.hpp" line="63" column="8" bodyfile="lib/Classes/Builder.hpp" bodystart="63" bodyend="63"/>
+        <references refid="class_event_1ac0a49a4178b701a0921ade6bfb1ad143" compoundref="_event_8hpp" startline="162" endline="162">Event::isSingle</references>
+        <references refid="class_builder_1a76749e4cc31025fde18f9cdbeb232cbf" compoundref="_builder_8hpp" startline="90">m_event</references>
+      </memberdef>
+      <memberdef kind="function" id="class_builder_1ae2d72f1157ccaaddc45b6963c7971f30" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void Builder::reset</definition>
+        <argsstring>()</argsstring>
+        <name>reset</name>
+        <reimplementedby refid="class_coinc_builder_1ad777d92b1242cafdb594e3fb315ae3a9">reset</reimplementedby>
+        <reimplementedby refid="class_event_builder_1a96d24bbdba6a9cc0770bc1ec81c7c9e0">reset</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Builder.hpp" line="73" column="16" bodyfile="lib/Classes/Builder.hpp" bodystart="73" bodyend="73"/>
+        <references refid="class_event_1a0862af1471604bf30a4f50a5e028637a" compoundref="_event_8hpp" startline="152" endline="152">Event::clear</references>
+        <references refid="class_builder_1a76749e4cc31025fde18f9cdbeb232cbf" compoundref="_builder_8hpp" startline="90">m_event</references>
+        <references refid="class_builder_1a81c56e91c1951d25faecf88f390b5bcb" compoundref="_builder_8hpp" startline="96">m_status</references>
+      </memberdef>
+      <memberdef kind="function" id="class_builder_1aebad9a247ffe8dfa74d2738ee7cad755" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Builder::set_first_hit</definition>
+        <argsstring>(Hit const &amp;hit)</argsstring>
+        <name>set_first_hit</name>
+        <param>
+          <type><ref refid="class_hit" kindref="compound">Hit</ref> const &amp;</type>
+          <declname>hit</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Builder.hpp" line="80" column="8" bodyfile="lib/Classes/Builder.hpp" bodystart="80" bodyend="83"/>
+        <references refid="class_builder_1a5cce09bc1a95dd0bcaa4f857f1a1b3da" compoundref="_builder_8hpp" startline="92">m_last_hit</references>
+      </memberdef>
+      <memberdef kind="function" id="class_builder_1acc042a420547dc2ee6eb85e6daf43b07" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Builder::set_last_hit</definition>
+        <argsstring>(Hit const &amp;hit)</argsstring>
+        <name>set_last_hit</name>
+        <param>
+          <type><ref refid="class_hit" kindref="compound">Hit</ref> const &amp;</type>
+          <declname>hit</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Builder.hpp" line="76" column="8" bodyfile="lib/Classes/Builder.hpp" bodystart="76" bodyend="79"/>
+        <references refid="class_builder_1a5cce09bc1a95dd0bcaa4f857f1a1b3da" compoundref="_builder_8hpp" startline="92">m_last_hit</references>
+      </memberdef>
+      <memberdef kind="function" id="class_builder_1a3097a8df520a8ab39c953cb8b659b2ee" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638" kindref="member">size_t</ref></type>
+        <definition>size_t Builder::size</definition>
+        <argsstring>() const</argsstring>
+        <name>size</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Builder.hpp" line="66" column="10" bodyfile="lib/Classes/Builder.hpp" bodystart="66" bodyend="66"/>
+        <references refid="class_builder_1a76749e4cc31025fde18f9cdbeb232cbf" compoundref="_builder_8hpp" startline="90">m_event</references>
+        <references refid="class_builder_1a3097a8df520a8ab39c953cb8b659b2ee" compoundref="_builder_8hpp" startline="66" endline="66">size</references>
+        <referencedby refid="class_builder_1a3097a8df520a8ab39c953cb8b659b2ee" compoundref="_builder_8hpp" startline="66" endline="66">size</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_builder_1af86b7b9639bb301f191e6263dd871bf7" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21" kindref="member">uchar</ref> const  &amp;</type>
+        <definition>uchar const&amp; Builder::status</definition>
+        <argsstring>() const</argsstring>
+        <name>status</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Builder.hpp" line="60" column="16" bodyfile="lib/Classes/Builder.hpp" bodystart="60" bodyend="60"/>
+        <references refid="class_builder_1a81c56e91c1951d25faecf88f390b5bcb" compoundref="_builder_8hpp" startline="96">m_status</references>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="class_builder_1a4d557d96189a42cbc0a4a0d32db45d6c" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void Builder::keepSingles</definition>
+        <argsstring>(bool const &amp;b=true)</argsstring>
+        <name>keepSingles</name>
+        <param>
+          <type>bool const &amp;</type>
+          <declname>b</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Builder.hpp" line="86" column="15" bodyfile="lib/Classes/Builder.hpp" bodystart="86" bodyend="86"/>
+        <references refid="class_builder_1a7b1399ae5a1a58620dd564754d691348" compoundref="_builder_8hpp" startline="97">m_keep_singles</references>
+        <referencedby refid="class_faster2_root_1a2ba93a4814723b6103dc25a701f3dc89" compoundref="_faster2_root_8hpp" startline="298" endline="393">Faster2Root::convertFile</referencedby>
+        <referencedby refid="class_clover_spectra_1abf805324f6371f19ef0b3ce45705a115" compoundref="_clover_spectra_8hpp" startline="147" endline="159">CloverSpectra::Initialize</referencedby>
+        <referencedby refid="class_run_matrixator_1ad32109c5c279f520ce19602340aa2293" compoundref="_run_matrixator_8hpp" startline="152" endline="239">RunMatrixator::Initialize</referencedby>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Base class of event builders (pure virtual class) </para>
+    </briefdescription>
+    <detaileddescription>
+<para>The first thing to do is to set the first hit of the file using Builder::set_first_hit(hit); Then add the following hits using Builder::build(hit);</para>
+<para>The builder can be in four states :</para>
+<para>Let&apos;s start from the first hit. The next is either in or out of the time window.</para>
+<para>Out of the time window :</para>
+<para>Then the first hit is single. The status is therefore 0. The second hit is then used to determine if the third one is in coincidence with it or not.</para>
+<para>In the time window :</para>
+<para>An event is created, extracting the values of the two first hits in the two first rows of the event. We are in status 1.</para>
+<para>Then we have to handle the third hit. It either is in or out of the time window.</para>
+<para>If the third hit is out of the time window, then the event is made only of the two previous hits. We are in status 2. We can perform a trigger and write down the event.</para>
+<para>If the third hit is in the time window, the values of the third hit are extracted inside of the third row of the event. We are in status 1 still. We then have to handle the next hits and add them to the event until a hit falls out of the time window.</para>
+<para>Now, you&apos;ll have to create your own event builder by deriving it from this base class : <verbatim>   class MyEventBuilder : public Builder
+   {
+       ....
+       build(...);
+   };
+</verbatim> You will have to overload the build method </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3">
+        <label>EventBuilder</label>
+        <link refid="class_event_builder"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>Builder</label>
+        <link refid="class_builder"/>
+      </node>
+      <node id="2">
+        <label>CoincBuilder</label>
+        <link refid="class_coinc_builder"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="4">
+        <label>Hit</label>
+        <link refid="class_hit"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>read</edgelabel>
+          <edgelabel>write</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>IOptions</label>
+        <link refid="class_i_options"/>
+      </node>
+      <node id="2">
+        <label>Event</label>
+        <link refid="class_event"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>read</edgelabel>
+          <edgelabel>write</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>Builder</label>
+        <link refid="class_builder"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>m_event</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>m_last_hit</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="lib/Classes/Builder.hpp" line="48" column="1" bodyfile="lib/Classes/Builder.hpp" bodystart="49" bodyend="98"/>
+    <listofallmembers>
+      <member refid="class_builder_1a6174fb0019ff2eafed26644d05e374a5" prot="public" virt="pure-virtual"><scope>Builder</scope><name>build</name></member>
+      <member refid="class_builder_1af8e018e77879c6136e6dabbd5eab0634" prot="public" virt="non-virtual"><scope>Builder</scope><name>Builder</name></member>
+      <member refid="class_builder_1a9cda698e8695141734f5e695a7f24975" prot="public" virt="non-virtual"><scope>Builder</scope><name>Builder</name></member>
+      <member refid="class_builder_1aacd0df1ffcecbfb4bbc009e6efd0b541" prot="public" virt="pure-virtual"><scope>Builder</scope><name>coincidence</name></member>
+      <member refid="class_builder_1a8fd6226096d712de58f78e9ef123c45d" prot="public" virt="non-virtual"><scope>Builder</scope><name>getEvent</name></member>
+      <member refid="class_builder_1abeb8339305e7a10fb2c67cc0fed9237b" prot="public" virt="non-virtual"><scope>Builder</scope><name>getLastHit</name></member>
+      <member refid="class_builder_1a414690f7964ed158937df8a65b1d4760" prot="public" virt="non-virtual"><scope>Builder</scope><name>isBuilding</name></member>
+      <member refid="class_builder_1af7ce79872abc82e734c72e03380a1f34" prot="public" virt="non-virtual"><scope>Builder</scope><name>isBuilt</name></member>
+      <member refid="class_builder_1aa476b7d1fd2fe31882a3380769eb60a9" prot="public" virt="non-virtual"><scope>Builder</scope><name>isSingle</name></member>
+      <member refid="class_builder_1a4d557d96189a42cbc0a4a0d32db45d6c" prot="public" virt="non-virtual"><scope>Builder</scope><name>keepSingles</name></member>
+      <member refid="class_builder_1a76749e4cc31025fde18f9cdbeb232cbf" prot="protected" virt="non-virtual"><scope>Builder</scope><name>m_event</name></member>
+      <member refid="class_builder_1a7b1399ae5a1a58620dd564754d691348" prot="protected" virt="non-virtual"><scope>Builder</scope><name>m_keep_singles</name></member>
+      <member refid="class_builder_1a5cce09bc1a95dd0bcaa4f857f1a1b3da" prot="protected" virt="non-virtual"><scope>Builder</scope><name>m_last_hit</name></member>
+      <member refid="class_builder_1a81c56e91c1951d25faecf88f390b5bcb" prot="protected" virt="non-virtual"><scope>Builder</scope><name>m_status</name></member>
+      <member refid="class_builder_1ae2d72f1157ccaaddc45b6963c7971f30" prot="public" virt="virtual"><scope>Builder</scope><name>reset</name></member>
+      <member refid="class_builder_1aebad9a247ffe8dfa74d2738ee7cad755" prot="public" virt="non-virtual"><scope>Builder</scope><name>set_first_hit</name></member>
+      <member refid="class_builder_1acc042a420547dc2ee6eb85e6daf43b07" prot="public" virt="non-virtual"><scope>Builder</scope><name>set_last_hit</name></member>
+      <member refid="class_builder_1a3097a8df520a8ab39c953cb8b659b2ee" prot="public" virt="non-virtual"><scope>Builder</scope><name>size</name></member>
+      <member refid="class_builder_1af86b7b9639bb301f191e6263dd871bf7" prot="public" virt="non-virtual"><scope>Builder</scope><name>status</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

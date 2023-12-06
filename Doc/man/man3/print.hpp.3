@@ -1,0 +1,72 @@
+.TH "lib/print.hpp" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+lib/print.hpp
+.SH SYNOPSIS
+.br
+.PP
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "template<class\&.\&.\&. ARGS> void \fBdebug\fP (ARGS &&\&.\&.\&. args)"
+.br
+.ti -1c
+.RI "template<class E , size_t size> std::ostream & \fBoperator<<\fP (std::ostream &cout, std::array< E, size > const &a)"
+.br
+.ti -1c
+.RI "template<class K , class V > std::ostream & \fBoperator<<\fP (std::ostream &cout, std::map< K, V > const &m)"
+.br
+.ti -1c
+.RI "template<class F , class S > std::ostream & \fBoperator<<\fP (std::ostream &cout, std::pair< F, S > const &p)"
+.br
+.ti -1c
+.RI "template<class E > std::ostream & \fBoperator<<\fP (std::ostream &cout, std::vector< E > const &v)"
+.br
+.ti -1c
+.RI "std::ostream & \fBoperator<<\fP (std::ostream &cout, unsigned char const &uc)"
+.br
+.ti -1c
+.RI "template<class T > void \fBprint\fP ()"
+.br
+.ti -1c
+.RI "template<class\&.\&.\&. T> void \fBprint\fP (T const &\&.\&.\&. t)"
+.br
+.ti -1c
+.RI "template<class T > void \fBprint\fP (T const &t)"
+.br
+.ti -1c
+.RI "template<class T , class\&.\&.\&. T2> void \fBprint\fP (T const &t, T2 const &\&.\&.\&. t2)"
+.br
+.ti -1c
+.RI "void \fBprint_precision\fP (int n=6)"
+.br
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "template<class\&.\&.\&. ARGS> void debug (ARGS &&\&.\&.\&. args)"
+
+.SS "template<class E , size_t size> std::ostream& operator<< (std::ostream & cout, std::array< E, size > const & a)"
+
+.SS "template<class K , class V > std::ostream& operator<< (std::ostream & cout, std::map< K, V > const & m)"
+
+.SS "template<class F , class S > std::ostream& operator<< (std::ostream & cout, std::pair< F, S > const & p)"
+
+.SS "template<class E > std::ostream& operator<< (std::ostream & cout, std::vector< E > const & v)"
+
+.SS "std::ostream& operator<< (std::ostream & cout, unsigned char const & uc)"
+
+.SS "template<class T > void print ()"
+
+.SS "template<class\&.\&.\&. T> void print (T const &\&.\&.\&. t)"
+
+.SS "template<class T > void print (T const & t)"
+
+.SS "template<class T , class\&.\&.\&. T2> void print (T const & t, T2 const &\&.\&.\&. t2)"
+
+.SS "void print_precision (int n = \fC6\fP)"
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Nuball2 from the source code\&.

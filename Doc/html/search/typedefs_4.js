@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['energy_5fvec_1942',['Energy_vec',['../_hit_8hpp.html#a86335fdfd2f45e86acb1af23b8dc4860',1,'Hit.hpp']]]
+  ['fits_2722',['Fits',['../_calibration_8hpp.html#a3e47c22fe90cb9e403d05dc134b6a047',1,'Calibration.hpp']]]
 ];

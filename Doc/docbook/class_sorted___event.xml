@@ -1,0 +1,574 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_class_sorted___event" xml:lang="en-US">
+<title>Sorted_Event Class Reference</title>
+<indexterm><primary>Sorted_Event</primary></indexterm>
+<para>
+<computeroutput>#include &lt;Sorted_Event.hpp&gt;</computeroutput>
+</para>
+Collaboration diagram for Sorted_Event:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_sorted___event__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_class_sorted___event_1a834fa3f83720006416bd67eb4e21c1e8">addGeGateTrig</link> (Float_t const &amp;minE, Float_t const &amp;<link linkend="_class_sorted___event_1a5cc067d81bda02f44385c8cd892604d6">maxE</link>)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_sorted___event_1af98dd0f04dfffaf0e40a641326653631">addGeGateTrig</link> (std::pair&lt; Float_t, Float_t &gt; const &amp;Egate)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_sorted___event_1a2f319d8e3d1ba4752d583732ea5ebac5">fillEvent</link> (<link linkend="_class_event">Event</link> &amp;event)</para>
+</listitem>
+            <listitem><para>int const  &amp; <link linkend="_class_sorted___event_1a04b441aec044fff6eaa00e3a9bdfd79d">gateGe</link> () const</para>
+</listitem>
+            <listitem><para>auto const  &amp; <link linkend="_class_sorted___event_1ad835d42335be97eff221b73194950afd">getGatedClover</link> () const</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_sorted___event_1afc0b469d164d06c59dd19b580202ac2b">initialise</link> ()</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_sorted___event_1a9d502b0a90b38c3a02d1d12e19818231">reset</link> ()</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_sorted___event_1a41583bc5f5ebbc8a5ba5d879ae7717a6">setEvent</link> (<link linkend="_class_event">Event</link> *event)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_sorted___event_1a99b1e8a33fadb6117c9868bd824322b8">setRF</link> (<link linkend="_class_r_f___manager">RF_Manager</link> *rf)</para>
+</listitem>
+            <listitem><para><link linkend="_class_sorted___event_1a56053521c62b98b011cc22ef5064fba0">Sorted_Event</link> ()</para>
+</listitem>
+            <listitem><para><link linkend="_class_sorted___event_1ac1284dab08a8b2d8cfa31dfa78db96cd">Sorted_Event</link> (<link linkend="_class_event">Event</link> *event)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_sorted___event_1ad502809ad5cbea67fd40cb42ab2c4b71">sortEvent</link> ()</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_sorted___event_1a526eefb6a423a59ff6096766c04c98e2">sortEvent</link> (<link linkend="_class_event">Event</link> const &amp;event)</para>
+</listitem>
+            <listitem><para>bool <link linkend="_class_sorted___event_1a868a20701f8be649bbaf0a0366c378d0">sortGeClover</link> (<link linkend="_class_event">Event</link> const &amp;event, int const &amp;i)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Static Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>static void <link linkend="_class_sorted___event_1a0c2d3980ba5e8ffb7398c53b846d7592">Initialize</link> ()</para>
+</listitem>
+            <listitem><para>static void <link linkend="_class_sorted___event_1a3fb09052ae07199b3b8912218ca045aa">setDSSDVeto</link> (Float_t const &amp;min_time, Float_t const &amp;max_time, Float_t const &amp;max_E)</para>
+</listitem>
+            <listitem><para>static void <link linkend="_class_sorted___event_1ae41291f8d1975f8ed7b52ad65dfeeac9">setMaxTime</link> (Float_t const &amp;max_time)</para>
+</listitem>
+            <listitem><para>static void <link linkend="_class_sorted___event_1ae37ee47028e933026de2f3a2906f8564">setTWcorrectionsDSSD</link> (std::string const &amp;filename)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Public Attributes    </title>
+        <itemizedlist>
+            <listitem><para>std::array&lt; Int_t, 24 &gt; <link linkend="_class_sorted___event_1acc6df50642355743d54630834ff98c4f">BGO</link></para>
+</listitem>
+            <listitem><para><link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> <link linkend="_class_sorted___event_1a07235caacabfe9b670119ca3ecdc43c4">BGOMult</link> =0</para>
+</listitem>
+            <listitem><para><link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> <link linkend="_class_sorted___event_1a8d737abb70590129a32cc2b3aeaa78bb">CleanGeMult</link> =0</para>
+</listitem>
+            <listitem><para>std::vector&lt; <link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> &gt; <link linkend="_class_sorted___event_1ad051aa059b852a3332a2fa339d51b439">clover_hits</link></para>
+</listitem>
+            <listitem><para><link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> <link linkend="_class_sorted___event_1a21f62bdd71090a120484f3422e83bf98">CloverGeMult</link> =0</para>
+</listitem>
+            <listitem><para><link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> <link linkend="_class_sorted___event_1a9eb9e7402daa10c3b44f22c6f69bff39">CloverMult</link> =0</para>
+</listitem>
+            <listitem><para><link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> <link linkend="_class_sorted___event_1a7c3603956ae1ccc8d5e8e2c38685b0ec">ComptonVetoMult</link> =0</para>
+</listitem>
+            <listitem><para>std::array&lt; Bool_t, 24 &gt; <link linkend="_class_sorted___event_1a217d7d6f84825fd80c09047168759078">delayed_Ge</link></para>
+</listitem>
+            <listitem><para><link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> <link linkend="_class_sorted___event_1ad59e5cf64f9c59e52bd8f67d5650225c">DelayedGeMult</link> =0</para>
+</listitem>
+            <listitem><para><link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> <link linkend="_class_sorted___event_1aff1bffd972d757e223bb585f82497e0c">DelayedMult</link> =0</para>
+</listitem>
+            <listitem><para>std::vector&lt; <link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> &gt; <link linkend="_class_sorted___event_1acce53888877edd4b48d39fb839568686">DSSD_hits</link></para>
+</listitem>
+            <listitem><para>std::vector&lt; char &gt; <link linkend="_class_sorted___event_1a0b8804fbc01dcca5672ac643f31e5f34">DSSD_is_Prompt</link></para>
+</listitem>
+            <listitem><para>std::vector&lt; char &gt; <link linkend="_class_sorted___event_1adda847aa307f15404d9583a91bc899dd">DSSD_is_Ring</link></para>
+</listitem>
+            <listitem><para>std::vector&lt; <link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> &gt; <link linkend="_class_sorted___event_1a292fd4bcf2f78c6686b3670151a0148b">DSSD_Rings</link></para>
+</listitem>
+            <listitem><para>std::vector&lt; <link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> &gt; <link linkend="_class_sorted___event_1a38040359f67b3cb549ae25efd11010ca">DSSD_Sectors</link></para>
+</listitem>
+            <listitem><para>bool <link linkend="_class_sorted___event_1a7c0d86edaf267d454bd0c9a9d1a7ddad">dssd_veto</link> = false</para>
+</listitem>
+            <listitem><para><link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> <link linkend="_class_sorted___event_1a65a8b6ce485585984024eced77e49b82">DSSDMult</link> =0</para>
+</listitem>
+            <listitem><para>Bool_t <link linkend="_class_sorted___event_1aa2f0ced4d05acb2fb3e6e6a7c22d69f7">DSSDPrompt</link> =false</para>
+</listitem>
+            <listitem><para><link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> <link linkend="_class_sorted___event_1aaf85a6d33b35b28d1cb08be625434797">DSSDRingMult</link> =0</para>
+</listitem>
+            <listitem><para><link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> <link linkend="_class_sorted___event_1adbdf0fec160de9a231540cf86957f591">DSSDSectorMult</link> =0</para>
+</listitem>
+            <listitem><para>std::array&lt; Int_t, 24 &gt; <link linkend="_class_sorted___event_1afe0f8fb89d3ee3065b672d919122c377">Ge</link></para>
+</listitem>
+            <listitem><para><link linkend="__sorted___event_8hpp_1a95e9ae63401952ba6dd1b9632670c200">LaBr3_Event</link> <link linkend="_class_sorted___event_1a98cd91158d1cff362fcdd0ba59285578">LaBr3_event</link></para>
+</listitem>
+            <listitem><para><link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> <link linkend="_class_sorted___event_1af17ec35e8657df6df0117f86522971e7">LaBr3Mult</link> =0</para>
+</listitem>
+            <listitem><para><link linkend="_class_r_f___manager">RF_Manager</link> * <link linkend="_class_sorted___event_1a5ca1220e7a8817fb46e550a2e1ff6b2a">m_rf</link> = nullptr</para>
+</listitem>
+            <listitem><para>std::array&lt; Float_t, 24 &gt; <link linkend="_class_sorted___event_1a5cc067d81bda02f44385c8cd892604d6">maxE</link></para>
+</listitem>
+            <listitem><para>std::array&lt; Int_t, 24 &gt; <link linkend="_class_sorted___event_1ab9fc30633428e8bdf601ce500a7c740d">maxE_hit</link></para>
+</listitem>
+            <listitem><para><link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> <link linkend="_class_sorted___event_1a121ce38b049de3271b804002dfbd81b3">ModuleDelayedMult</link></para>
+</listitem>
+            <listitem><para><link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> <link linkend="_class_sorted___event_1ad27e1c38974aa9d0c33bbc151444f316">ModulePromptMult</link></para>
+</listitem>
+            <listitem><para><link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> <link linkend="_class_sorted___event_1ab4365b400a2db27cecf6fc004cd84994">ModulesMult</link> =0</para>
+</listitem>
+            <listitem><para>std::array&lt; Float_t, 24 &gt; <link linkend="_class_sorted___event_1a790240303b1df1a9f60359bcaf667ae6">nrj_clover</link></para>
+</listitem>
+            <listitem><para>std::vector&lt; <link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> &gt; <link linkend="_class_sorted___event_1a5a0554eb6b4103e2708c075d90d5102f">paris_hits</link></para>
+</listitem>
+            <listitem><para><link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> <link linkend="_class_sorted___event_1a0953771269326213845c7b5e322d8b9b">ParisLaBr3Mult</link> =0</para>
+</listitem>
+            <listitem><para><link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> <link linkend="_class_sorted___event_1ab238484c396ccd1c8e42b47d5667036e">ParisMult</link> =0</para>
+</listitem>
+            <listitem><para>std::array&lt; Bool_t, 24 &gt; <link linkend="_class_sorted___event_1a89a3ad21720b8c31773799a549da8746">prompt_Ge</link></para>
+</listitem>
+            <listitem><para><link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> <link linkend="_class_sorted___event_1abe7176d286a1c23d30fc75061ec2f0ad">PromptGeMult</link> =0</para>
+</listitem>
+            <listitem><para><link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> <link linkend="_class_sorted___event_1a81716b8c8388f1851d60f9303b222d3a">PromptMult</link> =0</para>
+</listitem>
+            <listitem><para><link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> <link linkend="_class_sorted___event_1a87e18e85b327bc463a15d2d1f8ae2c5c">RawGeMult</link> =0</para>
+</listitem>
+            <listitem><para><link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> <link linkend="_class_sorted___event_1a305216fefa6fd71376e828702590fb82">RawMult</link> =0</para>
+</listitem>
+            <listitem><para>std::array&lt; Float_t, 2000 &gt; <link linkend="_class_sorted___event_1a92097f7b335c6b79b7ef068f555dcddc">time2s</link></para>
+</listitem>
+            <listitem><para>std::array&lt; Float_t, 24 &gt; <link linkend="_class_sorted___event_1ac44a4857dde092f1b32fdcdf9c8679e1">time_clover</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Static Public Attributes    </title>
+        <itemizedlist>
+            <listitem><para>static float <link linkend="_class_sorted___event_1a92e44ec90d57492227be6e120e6e20d9">m_max_E_dssd</link> = 1.E+12</para>
+</listitem>
+            <listitem><para>static float <link linkend="_class_sorted___event_1af4fbf9443170583d1a658543226f870e">m_max_time_dssd</link> = -100</para>
+</listitem>
+            <listitem><para>static float <link linkend="_class_sorted___event_1aba89239da62f60c549457352c6a78812">m_min_time_dssd</link> = 400</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Private Attributes    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> <link linkend="_class_sorted___event_1ac7e90f4a218ef319773a5ddc6a995c8a">m_CloverTrig</link> = 0.</para>
+</listitem>
+            <listitem><para><link linkend="_class_event">Event</link> * <link linkend="_class_sorted___event_1a4a79418bf4b7a89cb1a4d47931f4e92d">m_event</link></para>
+</listitem>
+            <listitem><para>bool <link linkend="_class_sorted___event_1a23d2f4f016d333ccec73efeefe3b6bc2">m_gateON</link> = false</para>
+</listitem>
+            <listitem><para>int <link linkend="_class_sorted___event_1a9f12a37b230451161dd9bf178f8b3b58">m_Ge_gate</link> = 0</para>
+</listitem>
+            <listitem><para>std::vector&lt; std::pair&lt; Float_t, Float_t &gt; &gt; <link linkend="_class_sorted___event_1abf33c022e34dc4b6bdad6d8fdea7fc4e">m_Ge_gates</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Static Private Attributes    </title>
+        <itemizedlist>
+            <listitem><para>static Float_t <link linkend="_class_sorted___event_1a7bd2e904870df77e81e1e28605ddbab8">m_max_time</link> = 9999999.</para>
+</listitem>
+            <listitem><para>static <link linkend="_class_timewalks">Timewalks</link> <link linkend="_class_sorted___event_1a3d46dc8c37e87cef27a095383c1d7049">m_Timewalks_DSSD</link></para>
+</listitem>
+            <listitem><para>static bool <link linkend="_class_sorted___event_1af83ca11fecbdf62aa69c1a097e830fb0">m_TW_DSSD</link> = false</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_class_sorted___event_1a56053521c62b98b011cc22ef5064fba0"/>    <section>
+    <title>Sorted_Event()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>Sorted_Event</primary><secondary>Sorted_Event</secondary></indexterm>
+<indexterm><primary>Sorted_Event</primary><secondary>Sorted_Event</secondary></indexterm>
+<para><computeroutput>Sorted_Event::Sorted_Event ( )<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_sorted___event_a56053521c62b98b011cc22ef5064fba0_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_sorted___event_1ac1284dab08a8b2d8cfa31dfa78db96cd"/>    <section>
+    <title>Sorted_Event()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>Sorted_Event</primary><secondary>Sorted_Event</secondary></indexterm>
+<indexterm><primary>Sorted_Event</primary><secondary>Sorted_Event</secondary></indexterm>
+<para><computeroutput>Sorted_Event::Sorted_Event (<link linkend="_class_event">Event</link> * event)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_sorted___event_ac1284dab08a8b2d8cfa31dfa78db96cd_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_class_sorted___event_1a834fa3f83720006416bd67eb4e21c1e8"/>    <section>
+    <title>addGeGateTrig()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>addGeGateTrig</primary><secondary>Sorted_Event</secondary></indexterm>
+<indexterm><primary>Sorted_Event</primary><secondary>addGeGateTrig</secondary></indexterm>
+<para><computeroutput>void Sorted_Event::addGeGateTrig (Float_t const &amp; minE, Float_t const &amp; maxE)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_sorted___event_1af98dd0f04dfffaf0e40a641326653631"/>    <section>
+    <title>addGeGateTrig()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>addGeGateTrig</primary><secondary>Sorted_Event</secondary></indexterm>
+<indexterm><primary>Sorted_Event</primary><secondary>addGeGateTrig</secondary></indexterm>
+<para><computeroutput>void Sorted_Event::addGeGateTrig (std::pair&lt; Float_t, Float_t &gt; const &amp; Egate)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_sorted___event_1a2f319d8e3d1ba4752d583732ea5ebac5"/>    <section>
+    <title>fillEvent()</title>
+<indexterm><primary>fillEvent</primary><secondary>Sorted_Event</secondary></indexterm>
+<indexterm><primary>Sorted_Event</primary><secondary>fillEvent</secondary></indexterm>
+<para><computeroutput>void Sorted_Event::fillEvent (<link linkend="_class_event">Event</link> &amp; event)</computeroutput></para>    </section><anchor xml:id="_class_sorted___event_1a04b441aec044fff6eaa00e3a9bdfd79d"/>    <section>
+    <title>gateGe()</title>
+<indexterm><primary>gateGe</primary><secondary>Sorted_Event</secondary></indexterm>
+<indexterm><primary>Sorted_Event</primary><secondary>gateGe</secondary></indexterm>
+<para><computeroutput>int const&amp; Sorted_Event::gateGe ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_sorted___event_1ad835d42335be97eff221b73194950afd"/>    <section>
+    <title>getGatedClover()</title>
+<indexterm><primary>getGatedClover</primary><secondary>Sorted_Event</secondary></indexterm>
+<indexterm><primary>Sorted_Event</primary><secondary>getGatedClover</secondary></indexterm>
+<para><computeroutput>auto const&amp; Sorted_Event::getGatedClover ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_sorted___event_1afc0b469d164d06c59dd19b580202ac2b"/>    <section>
+    <title>initialise()</title>
+<indexterm><primary>initialise</primary><secondary>Sorted_Event</secondary></indexterm>
+<indexterm><primary>Sorted_Event</primary><secondary>initialise</secondary></indexterm>
+<para><computeroutput>void Sorted_Event::initialise ( )</computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_sorted___event_afc0b469d164d06c59dd19b580202ac2b_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_sorted___event_1a0c2d3980ba5e8ffb7398c53b846d7592"/>    <section>
+    <title>Initialize()</title>
+<indexterm><primary>Initialize</primary><secondary>Sorted_Event</secondary></indexterm>
+<indexterm><primary>Sorted_Event</primary><secondary>Initialize</secondary></indexterm>
+<para><computeroutput>static void Sorted_Event::Initialize ( )<computeroutput>[inline]</computeroutput>, <computeroutput>[static]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_sorted___event_1a9d502b0a90b38c3a02d1d12e19818231"/>    <section>
+    <title>reset()</title>
+<indexterm><primary>reset</primary><secondary>Sorted_Event</secondary></indexterm>
+<indexterm><primary>Sorted_Event</primary><secondary>reset</secondary></indexterm>
+<para><computeroutput>void Sorted_Event::reset ( )</computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_sorted___event_a9d502b0a90b38c3a02d1d12e19818231_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_sorted___event_1a3fb09052ae07199b3b8912218ca045aa"/>    <section>
+    <title>setDSSDVeto()</title>
+<indexterm><primary>setDSSDVeto</primary><secondary>Sorted_Event</secondary></indexterm>
+<indexterm><primary>Sorted_Event</primary><secondary>setDSSDVeto</secondary></indexterm>
+<para><computeroutput>static void Sorted_Event::setDSSDVeto (Float_t const &amp; min_time, Float_t const &amp; max_time, Float_t const &amp; max_E)<computeroutput>[inline]</computeroutput>, <computeroutput>[static]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_sorted___event_1a41583bc5f5ebbc8a5ba5d879ae7717a6"/>    <section>
+    <title>setEvent()</title>
+<indexterm><primary>setEvent</primary><secondary>Sorted_Event</secondary></indexterm>
+<indexterm><primary>Sorted_Event</primary><secondary>setEvent</secondary></indexterm>
+<para><computeroutput>void Sorted_Event::setEvent (<link linkend="_class_event">Event</link> * event)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_sorted___event_a41583bc5f5ebbc8a5ba5d879ae7717a6_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_sorted___event_1ae41291f8d1975f8ed7b52ad65dfeeac9"/>    <section>
+    <title>setMaxTime()</title>
+<indexterm><primary>setMaxTime</primary><secondary>Sorted_Event</secondary></indexterm>
+<indexterm><primary>Sorted_Event</primary><secondary>setMaxTime</secondary></indexterm>
+<para><computeroutput>void Sorted_Event::setMaxTime (Float_t const &amp; max_time)<computeroutput>[static]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_sorted___event_1a99b1e8a33fadb6117c9868bd824322b8"/>    <section>
+    <title>setRF()</title>
+<indexterm><primary>setRF</primary><secondary>Sorted_Event</secondary></indexterm>
+<indexterm><primary>Sorted_Event</primary><secondary>setRF</secondary></indexterm>
+<para><computeroutput>void Sorted_Event::setRF (<link linkend="_class_r_f___manager">RF_Manager</link> * rf)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_sorted___event_1ae37ee47028e933026de2f3a2906f8564"/>    <section>
+    <title>setTWcorrectionsDSSD()</title>
+<indexterm><primary>setTWcorrectionsDSSD</primary><secondary>Sorted_Event</secondary></indexterm>
+<indexterm><primary>Sorted_Event</primary><secondary>setTWcorrectionsDSSD</secondary></indexterm>
+<para><computeroutput>void Sorted_Event::setTWcorrectionsDSSD (std::string const &amp; filename)<computeroutput>[static]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_sorted___event_ae37ee47028e933026de2f3a2906f8564_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_sorted___event_1ad502809ad5cbea67fd40cb42ab2c4b71"/>    <section>
+    <title>sortEvent()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>sortEvent</primary><secondary>Sorted_Event</secondary></indexterm>
+<indexterm><primary>Sorted_Event</primary><secondary>sortEvent</secondary></indexterm>
+<para><computeroutput>void Sorted_Event::sortEvent ( )<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_sorted___event_ad502809ad5cbea67fd40cb42ab2c4b71_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_sorted___event_ad502809ad5cbea67fd40cb42ab2c4b71_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_sorted___event_1a526eefb6a423a59ff6096766c04c98e2"/>    <section>
+    <title>sortEvent()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>sortEvent</primary><secondary>Sorted_Event</secondary></indexterm>
+<indexterm><primary>Sorted_Event</primary><secondary>sortEvent</secondary></indexterm>
+<para><computeroutput>void Sorted_Event::sortEvent (<link linkend="_class_event">Event</link> const &amp; event)</computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_sorted___event_a526eefb6a423a59ff6096766c04c98e2_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_sorted___event_1a868a20701f8be649bbaf0a0366c378d0"/>    <section>
+    <title>sortGeClover()</title>
+<indexterm><primary>sortGeClover</primary><secondary>Sorted_Event</secondary></indexterm>
+<indexterm><primary>Sorted_Event</primary><secondary>sortGeClover</secondary></indexterm>
+<para><computeroutput>bool Sorted_Event::sortGeClover (<link linkend="_class_event">Event</link> const &amp; event, int const &amp; i)</computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_sorted___event_a868a20701f8be649bbaf0a0366c378d0_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_sorted___event_a868a20701f8be649bbaf0a0366c378d0_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_class_sorted___event_1acc6df50642355743d54630834ff98c4f"/>    <section>
+    <title>BGO</title>
+<indexterm><primary>BGO</primary><secondary>Sorted_Event</secondary></indexterm>
+<indexterm><primary>Sorted_Event</primary><secondary>BGO</secondary></indexterm>
+<para><computeroutput>std::array&lt; Int_t, 24 &gt; Sorted_Event::BGO</computeroutput></para>    </section><anchor xml:id="_class_sorted___event_1a07235caacabfe9b670119ca3ecdc43c4"/>    <section>
+    <title>BGOMult</title>
+<indexterm><primary>BGOMult</primary><secondary>Sorted_Event</secondary></indexterm>
+<indexterm><primary>Sorted_Event</primary><secondary>BGOMult</secondary></indexterm>
+<para><computeroutput><link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> Sorted_Event::BGOMult =0</computeroutput></para>    </section><anchor xml:id="_class_sorted___event_1a8d737abb70590129a32cc2b3aeaa78bb"/>    <section>
+    <title>CleanGeMult</title>
+<indexterm><primary>CleanGeMult</primary><secondary>Sorted_Event</secondary></indexterm>
+<indexterm><primary>Sorted_Event</primary><secondary>CleanGeMult</secondary></indexterm>
+<para><computeroutput><link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> Sorted_Event::CleanGeMult =0</computeroutput></para>    </section><anchor xml:id="_class_sorted___event_1ad051aa059b852a3332a2fa339d51b439"/>    <section>
+    <title>clover_hits</title>
+<indexterm><primary>clover_hits</primary><secondary>Sorted_Event</secondary></indexterm>
+<indexterm><primary>Sorted_Event</primary><secondary>clover_hits</secondary></indexterm>
+<para><computeroutput>std::vector&lt;<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>&gt; Sorted_Event::clover_hits</computeroutput></para>    </section><anchor xml:id="_class_sorted___event_1a21f62bdd71090a120484f3422e83bf98"/>    <section>
+    <title>CloverGeMult</title>
+<indexterm><primary>CloverGeMult</primary><secondary>Sorted_Event</secondary></indexterm>
+<indexterm><primary>Sorted_Event</primary><secondary>CloverGeMult</secondary></indexterm>
+<para><computeroutput><link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> Sorted_Event::CloverGeMult =0</computeroutput></para>    </section><anchor xml:id="_class_sorted___event_1a9eb9e7402daa10c3b44f22c6f69bff39"/>    <section>
+    <title>CloverMult</title>
+<indexterm><primary>CloverMult</primary><secondary>Sorted_Event</secondary></indexterm>
+<indexterm><primary>Sorted_Event</primary><secondary>CloverMult</secondary></indexterm>
+<para><computeroutput><link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> Sorted_Event::CloverMult =0</computeroutput></para>    </section><anchor xml:id="_class_sorted___event_1a7c3603956ae1ccc8d5e8e2c38685b0ec"/>    <section>
+    <title>ComptonVetoMult</title>
+<indexterm><primary>ComptonVetoMult</primary><secondary>Sorted_Event</secondary></indexterm>
+<indexterm><primary>Sorted_Event</primary><secondary>ComptonVetoMult</secondary></indexterm>
+<para><computeroutput><link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> Sorted_Event::ComptonVetoMult =0</computeroutput></para>    </section><anchor xml:id="_class_sorted___event_1a217d7d6f84825fd80c09047168759078"/>    <section>
+    <title>delayed_Ge</title>
+<indexterm><primary>delayed_Ge</primary><secondary>Sorted_Event</secondary></indexterm>
+<indexterm><primary>Sorted_Event</primary><secondary>delayed_Ge</secondary></indexterm>
+<para><computeroutput>std::array&lt; Bool_t, 24 &gt; Sorted_Event::delayed_Ge</computeroutput></para>    </section><anchor xml:id="_class_sorted___event_1ad59e5cf64f9c59e52bd8f67d5650225c"/>    <section>
+    <title>DelayedGeMult</title>
+<indexterm><primary>DelayedGeMult</primary><secondary>Sorted_Event</secondary></indexterm>
+<indexterm><primary>Sorted_Event</primary><secondary>DelayedGeMult</secondary></indexterm>
+<para><computeroutput><link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> Sorted_Event::DelayedGeMult =0</computeroutput></para>    </section><anchor xml:id="_class_sorted___event_1aff1bffd972d757e223bb585f82497e0c"/>    <section>
+    <title>DelayedMult</title>
+<indexterm><primary>DelayedMult</primary><secondary>Sorted_Event</secondary></indexterm>
+<indexterm><primary>Sorted_Event</primary><secondary>DelayedMult</secondary></indexterm>
+<para><computeroutput><link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> Sorted_Event::DelayedMult =0</computeroutput></para>    </section><anchor xml:id="_class_sorted___event_1acce53888877edd4b48d39fb839568686"/>    <section>
+    <title>DSSD_hits</title>
+<indexterm><primary>DSSD_hits</primary><secondary>Sorted_Event</secondary></indexterm>
+<indexterm><primary>Sorted_Event</primary><secondary>DSSD_hits</secondary></indexterm>
+<para><computeroutput>std::vector&lt;<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>&gt; Sorted_Event::DSSD_hits</computeroutput></para>    </section><anchor xml:id="_class_sorted___event_1a0b8804fbc01dcca5672ac643f31e5f34"/>    <section>
+    <title>DSSD_is_Prompt</title>
+<indexterm><primary>DSSD_is_Prompt</primary><secondary>Sorted_Event</secondary></indexterm>
+<indexterm><primary>Sorted_Event</primary><secondary>DSSD_is_Prompt</secondary></indexterm>
+<para><computeroutput>std::vector&lt;char&gt; Sorted_Event::DSSD_is_Prompt</computeroutput></para>    </section><anchor xml:id="_class_sorted___event_1adda847aa307f15404d9583a91bc899dd"/>    <section>
+    <title>DSSD_is_Ring</title>
+<indexterm><primary>DSSD_is_Ring</primary><secondary>Sorted_Event</secondary></indexterm>
+<indexterm><primary>Sorted_Event</primary><secondary>DSSD_is_Ring</secondary></indexterm>
+<para><computeroutput>std::vector&lt;char&gt; Sorted_Event::DSSD_is_Ring</computeroutput></para>    </section><anchor xml:id="_class_sorted___event_1a292fd4bcf2f78c6686b3670151a0148b"/>    <section>
+    <title>DSSD_Rings</title>
+<indexterm><primary>DSSD_Rings</primary><secondary>Sorted_Event</secondary></indexterm>
+<indexterm><primary>Sorted_Event</primary><secondary>DSSD_Rings</secondary></indexterm>
+<para><computeroutput>std::vector&lt;<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>&gt; Sorted_Event::DSSD_Rings</computeroutput></para>    </section><anchor xml:id="_class_sorted___event_1a38040359f67b3cb549ae25efd11010ca"/>    <section>
+    <title>DSSD_Sectors</title>
+<indexterm><primary>DSSD_Sectors</primary><secondary>Sorted_Event</secondary></indexterm>
+<indexterm><primary>Sorted_Event</primary><secondary>DSSD_Sectors</secondary></indexterm>
+<para><computeroutput>std::vector&lt;<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>&gt; Sorted_Event::DSSD_Sectors</computeroutput></para>    </section><anchor xml:id="_class_sorted___event_1a7c0d86edaf267d454bd0c9a9d1a7ddad"/>    <section>
+    <title>dssd_veto</title>
+<indexterm><primary>dssd_veto</primary><secondary>Sorted_Event</secondary></indexterm>
+<indexterm><primary>Sorted_Event</primary><secondary>dssd_veto</secondary></indexterm>
+<para><computeroutput>bool Sorted_Event::dssd_veto = false</computeroutput></para>    </section><anchor xml:id="_class_sorted___event_1a65a8b6ce485585984024eced77e49b82"/>    <section>
+    <title>DSSDMult</title>
+<indexterm><primary>DSSDMult</primary><secondary>Sorted_Event</secondary></indexterm>
+<indexterm><primary>Sorted_Event</primary><secondary>DSSDMult</secondary></indexterm>
+<para><computeroutput><link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> Sorted_Event::DSSDMult =0</computeroutput></para>    </section><anchor xml:id="_class_sorted___event_1aa2f0ced4d05acb2fb3e6e6a7c22d69f7"/>    <section>
+    <title>DSSDPrompt</title>
+<indexterm><primary>DSSDPrompt</primary><secondary>Sorted_Event</secondary></indexterm>
+<indexterm><primary>Sorted_Event</primary><secondary>DSSDPrompt</secondary></indexterm>
+<para><computeroutput>Bool_t Sorted_Event::DSSDPrompt =false</computeroutput></para>    </section><anchor xml:id="_class_sorted___event_1aaf85a6d33b35b28d1cb08be625434797"/>    <section>
+    <title>DSSDRingMult</title>
+<indexterm><primary>DSSDRingMult</primary><secondary>Sorted_Event</secondary></indexterm>
+<indexterm><primary>Sorted_Event</primary><secondary>DSSDRingMult</secondary></indexterm>
+<para><computeroutput><link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> Sorted_Event::DSSDRingMult =0</computeroutput></para>    </section><anchor xml:id="_class_sorted___event_1adbdf0fec160de9a231540cf86957f591"/>    <section>
+    <title>DSSDSectorMult</title>
+<indexterm><primary>DSSDSectorMult</primary><secondary>Sorted_Event</secondary></indexterm>
+<indexterm><primary>Sorted_Event</primary><secondary>DSSDSectorMult</secondary></indexterm>
+<para><computeroutput><link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> Sorted_Event::DSSDSectorMult =0</computeroutput></para>    </section><anchor xml:id="_class_sorted___event_1afe0f8fb89d3ee3065b672d919122c377"/>    <section>
+    <title>Ge</title>
+<indexterm><primary>Ge</primary><secondary>Sorted_Event</secondary></indexterm>
+<indexterm><primary>Sorted_Event</primary><secondary>Ge</secondary></indexterm>
+<para><computeroutput>std::array&lt; Int_t, 24 &gt; Sorted_Event::Ge</computeroutput></para>    </section><anchor xml:id="_class_sorted___event_1a98cd91158d1cff362fcdd0ba59285578"/>    <section>
+    <title>LaBr3_event</title>
+<indexterm><primary>LaBr3_event</primary><secondary>Sorted_Event</secondary></indexterm>
+<indexterm><primary>Sorted_Event</primary><secondary>LaBr3_event</secondary></indexterm>
+<para><computeroutput><link linkend="__sorted___event_8hpp_1a95e9ae63401952ba6dd1b9632670c200">LaBr3_Event</link> Sorted_Event::LaBr3_event</computeroutput></para>    </section><anchor xml:id="_class_sorted___event_1af17ec35e8657df6df0117f86522971e7"/>    <section>
+    <title>LaBr3Mult</title>
+<indexterm><primary>LaBr3Mult</primary><secondary>Sorted_Event</secondary></indexterm>
+<indexterm><primary>Sorted_Event</primary><secondary>LaBr3Mult</secondary></indexterm>
+<para><computeroutput><link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> Sorted_Event::LaBr3Mult =0</computeroutput></para>    </section><anchor xml:id="_class_sorted___event_1ac7e90f4a218ef319773a5ddc6a995c8a"/>    <section>
+    <title>m_CloverTrig</title>
+<indexterm><primary>m_CloverTrig</primary><secondary>Sorted_Event</secondary></indexterm>
+<indexterm><primary>Sorted_Event</primary><secondary>m_CloverTrig</secondary></indexterm>
+<para><computeroutput><link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> Sorted_Event::m_CloverTrig = 0.<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_sorted___event_1a4a79418bf4b7a89cb1a4d47931f4e92d"/>    <section>
+    <title>m_event</title>
+<indexterm><primary>m_event</primary><secondary>Sorted_Event</secondary></indexterm>
+<indexterm><primary>Sorted_Event</primary><secondary>m_event</secondary></indexterm>
+<para><computeroutput><link linkend="_class_event">Event</link>* Sorted_Event::m_event<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_sorted___event_1a23d2f4f016d333ccec73efeefe3b6bc2"/>    <section>
+    <title>m_gateON</title>
+<indexterm><primary>m_gateON</primary><secondary>Sorted_Event</secondary></indexterm>
+<indexterm><primary>Sorted_Event</primary><secondary>m_gateON</secondary></indexterm>
+<para><computeroutput>bool Sorted_Event::m_gateON = false<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_sorted___event_1a9f12a37b230451161dd9bf178f8b3b58"/>    <section>
+    <title>m_Ge_gate</title>
+<indexterm><primary>m_Ge_gate</primary><secondary>Sorted_Event</secondary></indexterm>
+<indexterm><primary>Sorted_Event</primary><secondary>m_Ge_gate</secondary></indexterm>
+<para><computeroutput>int Sorted_Event::m_Ge_gate = 0<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_sorted___event_1abf33c022e34dc4b6bdad6d8fdea7fc4e"/>    <section>
+    <title>m_Ge_gates</title>
+<indexterm><primary>m_Ge_gates</primary><secondary>Sorted_Event</secondary></indexterm>
+<indexterm><primary>Sorted_Event</primary><secondary>m_Ge_gates</secondary></indexterm>
+<para><computeroutput>std::vector&lt;std::pair&lt;Float_t,Float_t&gt; &gt; Sorted_Event::m_Ge_gates<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_sorted___event_1a92e44ec90d57492227be6e120e6e20d9"/>    <section>
+    <title>m_max_E_dssd</title>
+<indexterm><primary>m_max_E_dssd</primary><secondary>Sorted_Event</secondary></indexterm>
+<indexterm><primary>Sorted_Event</primary><secondary>m_max_E_dssd</secondary></indexterm>
+<para><computeroutput>float Sorted_Event::m_max_E_dssd = 1.E+12<computeroutput>[static]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_sorted___event_1a7bd2e904870df77e81e1e28605ddbab8"/>    <section>
+    <title>m_max_time</title>
+<indexterm><primary>m_max_time</primary><secondary>Sorted_Event</secondary></indexterm>
+<indexterm><primary>Sorted_Event</primary><secondary>m_max_time</secondary></indexterm>
+<para><computeroutput>Float_t Sorted_Event::m_max_time = 9999999.<computeroutput>[static]</computeroutput>, <computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_sorted___event_1af4fbf9443170583d1a658543226f870e"/>    <section>
+    <title>m_max_time_dssd</title>
+<indexterm><primary>m_max_time_dssd</primary><secondary>Sorted_Event</secondary></indexterm>
+<indexterm><primary>Sorted_Event</primary><secondary>m_max_time_dssd</secondary></indexterm>
+<para><computeroutput>float Sorted_Event::m_max_time_dssd = -100<computeroutput>[static]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_sorted___event_1aba89239da62f60c549457352c6a78812"/>    <section>
+    <title>m_min_time_dssd</title>
+<indexterm><primary>m_min_time_dssd</primary><secondary>Sorted_Event</secondary></indexterm>
+<indexterm><primary>Sorted_Event</primary><secondary>m_min_time_dssd</secondary></indexterm>
+<para><computeroutput>float Sorted_Event::m_min_time_dssd = 400<computeroutput>[static]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_sorted___event_1a5ca1220e7a8817fb46e550a2e1ff6b2a"/>    <section>
+    <title>m_rf</title>
+<indexterm><primary>m_rf</primary><secondary>Sorted_Event</secondary></indexterm>
+<indexterm><primary>Sorted_Event</primary><secondary>m_rf</secondary></indexterm>
+<para><computeroutput><link linkend="_class_r_f___manager">RF_Manager</link>* Sorted_Event::m_rf = nullptr</computeroutput></para>    </section><anchor xml:id="_class_sorted___event_1a3d46dc8c37e87cef27a095383c1d7049"/>    <section>
+    <title>m_Timewalks_DSSD</title>
+<indexterm><primary>m_Timewalks_DSSD</primary><secondary>Sorted_Event</secondary></indexterm>
+<indexterm><primary>Sorted_Event</primary><secondary>m_Timewalks_DSSD</secondary></indexterm>
+<para><computeroutput><link linkend="_class_timewalks">Timewalks</link> Sorted_Event::m_Timewalks_DSSD<computeroutput>[static]</computeroutput>, <computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_sorted___event_1af83ca11fecbdf62aa69c1a097e830fb0"/>    <section>
+    <title>m_TW_DSSD</title>
+<indexterm><primary>m_TW_DSSD</primary><secondary>Sorted_Event</secondary></indexterm>
+<indexterm><primary>Sorted_Event</primary><secondary>m_TW_DSSD</secondary></indexterm>
+<para><computeroutput>bool Sorted_Event::m_TW_DSSD = false<computeroutput>[static]</computeroutput>, <computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_sorted___event_1a5cc067d81bda02f44385c8cd892604d6"/>    <section>
+    <title>maxE</title>
+<indexterm><primary>maxE</primary><secondary>Sorted_Event</secondary></indexterm>
+<indexterm><primary>Sorted_Event</primary><secondary>maxE</secondary></indexterm>
+<para><computeroutput>std::array&lt; Float_t, 24 &gt; Sorted_Event::maxE</computeroutput></para>    </section><anchor xml:id="_class_sorted___event_1ab9fc30633428e8bdf601ce500a7c740d"/>    <section>
+    <title>maxE_hit</title>
+<indexterm><primary>maxE_hit</primary><secondary>Sorted_Event</secondary></indexterm>
+<indexterm><primary>Sorted_Event</primary><secondary>maxE_hit</secondary></indexterm>
+<para><computeroutput>std::array&lt; Int_t, 24 &gt; Sorted_Event::maxE_hit</computeroutput></para>    </section><anchor xml:id="_class_sorted___event_1a121ce38b049de3271b804002dfbd81b3"/>    <section>
+    <title>ModuleDelayedMult</title>
+<indexterm><primary>ModuleDelayedMult</primary><secondary>Sorted_Event</secondary></indexterm>
+<indexterm><primary>Sorted_Event</primary><secondary>ModuleDelayedMult</secondary></indexterm>
+<para><computeroutput><link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> Sorted_Event::ModuleDelayedMult</computeroutput></para>    </section><anchor xml:id="_class_sorted___event_1ad27e1c38974aa9d0c33bbc151444f316"/>    <section>
+    <title>ModulePromptMult</title>
+<indexterm><primary>ModulePromptMult</primary><secondary>Sorted_Event</secondary></indexterm>
+<indexterm><primary>Sorted_Event</primary><secondary>ModulePromptMult</secondary></indexterm>
+<para><computeroutput><link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> Sorted_Event::ModulePromptMult</computeroutput></para>    </section><anchor xml:id="_class_sorted___event_1ab4365b400a2db27cecf6fc004cd84994"/>    <section>
+    <title>ModulesMult</title>
+<indexterm><primary>ModulesMult</primary><secondary>Sorted_Event</secondary></indexterm>
+<indexterm><primary>Sorted_Event</primary><secondary>ModulesMult</secondary></indexterm>
+<para><computeroutput><link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> Sorted_Event::ModulesMult =0</computeroutput></para>    </section><anchor xml:id="_class_sorted___event_1a790240303b1df1a9f60359bcaf667ae6"/>    <section>
+    <title>nrj_clover</title>
+<indexterm><primary>nrj_clover</primary><secondary>Sorted_Event</secondary></indexterm>
+<indexterm><primary>Sorted_Event</primary><secondary>nrj_clover</secondary></indexterm>
+<para><computeroutput>std::array&lt; Float_t, 24 &gt; Sorted_Event::nrj_clover</computeroutput></para>    </section><anchor xml:id="_class_sorted___event_1a5a0554eb6b4103e2708c075d90d5102f"/>    <section>
+    <title>paris_hits</title>
+<indexterm><primary>paris_hits</primary><secondary>Sorted_Event</secondary></indexterm>
+<indexterm><primary>Sorted_Event</primary><secondary>paris_hits</secondary></indexterm>
+<para><computeroutput>std::vector&lt;<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>&gt; Sorted_Event::paris_hits</computeroutput></para>    </section><anchor xml:id="_class_sorted___event_1a0953771269326213845c7b5e322d8b9b"/>    <section>
+    <title>ParisLaBr3Mult</title>
+<indexterm><primary>ParisLaBr3Mult</primary><secondary>Sorted_Event</secondary></indexterm>
+<indexterm><primary>Sorted_Event</primary><secondary>ParisLaBr3Mult</secondary></indexterm>
+<para><computeroutput><link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> Sorted_Event::ParisLaBr3Mult =0</computeroutput></para>    </section><anchor xml:id="_class_sorted___event_1ab238484c396ccd1c8e42b47d5667036e"/>    <section>
+    <title>ParisMult</title>
+<indexterm><primary>ParisMult</primary><secondary>Sorted_Event</secondary></indexterm>
+<indexterm><primary>Sorted_Event</primary><secondary>ParisMult</secondary></indexterm>
+<para><computeroutput><link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> Sorted_Event::ParisMult =0</computeroutput></para>    </section><anchor xml:id="_class_sorted___event_1a89a3ad21720b8c31773799a549da8746"/>    <section>
+    <title>prompt_Ge</title>
+<indexterm><primary>prompt_Ge</primary><secondary>Sorted_Event</secondary></indexterm>
+<indexterm><primary>Sorted_Event</primary><secondary>prompt_Ge</secondary></indexterm>
+<para><computeroutput>std::array&lt; Bool_t, 24 &gt; Sorted_Event::prompt_Ge</computeroutput></para>    </section><anchor xml:id="_class_sorted___event_1abe7176d286a1c23d30fc75061ec2f0ad"/>    <section>
+    <title>PromptGeMult</title>
+<indexterm><primary>PromptGeMult</primary><secondary>Sorted_Event</secondary></indexterm>
+<indexterm><primary>Sorted_Event</primary><secondary>PromptGeMult</secondary></indexterm>
+<para><computeroutput><link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> Sorted_Event::PromptGeMult =0</computeroutput></para>    </section><anchor xml:id="_class_sorted___event_1a81716b8c8388f1851d60f9303b222d3a"/>    <section>
+    <title>PromptMult</title>
+<indexterm><primary>PromptMult</primary><secondary>Sorted_Event</secondary></indexterm>
+<indexterm><primary>Sorted_Event</primary><secondary>PromptMult</secondary></indexterm>
+<para><computeroutput><link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> Sorted_Event::PromptMult =0</computeroutput></para>    </section><anchor xml:id="_class_sorted___event_1a87e18e85b327bc463a15d2d1f8ae2c5c"/>    <section>
+    <title>RawGeMult</title>
+<indexterm><primary>RawGeMult</primary><secondary>Sorted_Event</secondary></indexterm>
+<indexterm><primary>Sorted_Event</primary><secondary>RawGeMult</secondary></indexterm>
+<para><computeroutput><link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> Sorted_Event::RawGeMult =0</computeroutput></para>    </section><anchor xml:id="_class_sorted___event_1a305216fefa6fd71376e828702590fb82"/>    <section>
+    <title>RawMult</title>
+<indexterm><primary>RawMult</primary><secondary>Sorted_Event</secondary></indexterm>
+<indexterm><primary>Sorted_Event</primary><secondary>RawMult</secondary></indexterm>
+<para><computeroutput><link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> Sorted_Event::RawMult =0</computeroutput></para>    </section><anchor xml:id="_class_sorted___event_1a92097f7b335c6b79b7ef068f555dcddc"/>    <section>
+    <title>time2s</title>
+<indexterm><primary>time2s</primary><secondary>Sorted_Event</secondary></indexterm>
+<indexterm><primary>Sorted_Event</primary><secondary>time2s</secondary></indexterm>
+<para><computeroutput>std::array&lt;Float_t, 2000&gt; Sorted_Event::time2s</computeroutput></para>    </section><anchor xml:id="_class_sorted___event_1ac44a4857dde092f1b32fdcdf9c8679e1"/>    <section>
+    <title>time_clover</title>
+<indexterm><primary>time_clover</primary><secondary>Sorted_Event</secondary></indexterm>
+<indexterm><primary>Sorted_Event</primary><secondary>time_clover</secondary></indexterm>
+<para><computeroutput>std::array&lt; Float_t, 24 &gt; Sorted_Event::time_clover</computeroutput></para></section>
+<para>
+The documentation for this class was generated from the following file:</para>
+lib/Analyse/<link linkend="__sorted___event_8hpp">Sorted_Event.hpp</link></section>
+</section>

@@ -423,7 +423,10 @@ std::ostream& operator<<(std::ostream& cout, THBinning binning)
 
 namespace CoAnalyse
 {
+  /// @brief Vector of pairs of min and max bins 
   using ProjectionsBins = std::vector<std::pair<double,double>>;
+
+  /// @brief For each X bin, normalise the Y histogram
   void normalizeY(TH2* matrix, double const & factor = 1)
   {
     int const & bins_x = matrix->GetNbinsX();
@@ -441,6 +444,7 @@ namespace CoAnalyse
     }
   }
 
+  /// @brief Normalise the whole bidim
   void normalizeBidim(TH2* matrix, double const & factor = 1.0)
   {
     auto const & bins_x = matrix->GetNbinsX();
@@ -453,7 +457,7 @@ namespace CoAnalyse
     }
   }
 
-  /// @brief Project on Y axis at a given X bin
+  /// @brief Project matrix on Y axis at a given X bin. This fills proj.
   void projectY(TH2* matrix, TH1* proj, int const & binX)
   {
     if (matrix == nullptr) {throw_error("Matrix histo nullptr in CoAnalyse::projectY");}
@@ -463,7 +467,7 @@ namespace CoAnalyse
     for (int binY = 0; binY<nbBins; binY++) proj->SetBinContent(binY, matrix->GetBinContent(binX, binY));
   }
 
-  /// @brief Project on Y axis between bin binXmin included and binXmax excluded [binXmin;binXmax[
+  /// @brief Project matrix on Y axis between bin binXmin included and binXmax excluded [binXmin;binXmax[. This fills proj.
   void projectY(TH2* matrix, TH1* proj, int const & binXmin, int const & binXmax)
   {
     if (matrix == nullptr) {throw_error("Matrix histo nullptr in CoAnalyse::projectY");}
@@ -474,7 +478,7 @@ namespace CoAnalyse
       proj->AddBinContent(y, matrix->GetBinContent(x, y));
   }
 
-  /// @brief Project on Y axis between values valueXmin and valueXmax included [valueXmin;valueXmax]
+  /// @brief Project matrix on Y axis between values valueXmin and valueXmax included [valueXmin;valueXmax]. This fills proj.
   void projectY(TH2* matrix, TH1* proj, double const & valueXmin, double const & valueXmax)
   {
     projectY(matrix, proj, matrix->GetXaxis()->FindBin(valueXmin), matrix->GetXaxis()->FindBin(valueXmax));
@@ -573,6 +577,7 @@ namespace CoAnalyse
     }
   }
 
+  /// @brief Set Y histogram proj in matrix at binX.
   void setX(TH2* matrix, TH1* proj, int const & binX)
   {
     if (matrix == nullptr){throw_error("Matrix histo nullptr in CoAnalyse::setX");}
@@ -580,7 +585,7 @@ namespace CoAnalyse
     for (int binY = 0; binY<matrix->GetNbinsY(); binY++) matrix->SetBinContent(binX, binY, proj->GetBinContent(binY));
   }
 
-  /// @brief Total projection on X axis
+  /// @brief Project the whole matrix on the X axis. This fills proj.
   void projectX(TH2* matrix, TH1* proj)
   {
     if (matrix == nullptr) {throw_error("Matrix histo nullptr in CoAnalyse::projectX");}
@@ -590,7 +595,7 @@ namespace CoAnalyse
     for (int y = 0; y<nbBins; y++) for (int x = 0; x<nbBins; x++) proj->AddBinContent(x, matrix->GetBinContent(x, y));
   }
   
-  /// @brief Project on Y axis at a given X bin
+  /// @brief Project on X axis at a given Y bin. This fills proj.
   void projectX(TH2* matrix, TH1* proj, int const & binY)
   {
     if (matrix == nullptr) {throw_error("Matrix histo nullptr in CoAnalyse::projectX");}
@@ -600,7 +605,7 @@ namespace CoAnalyse
     for (int x = 0; x<nbBins; x++) proj->SetBinContent(x, matrix->GetBinContent(x, binY));
   }
 
-  /// @brief Project on X axis between bin binYmin included and binYmax excluded [binYmin;binYmax[
+  /// @brief Project on X axis between bin binYmin included and binYmax excluded [binYmin;binYmax[. This fills proj.
   void projectX(TH2* matrix, TH1* proj, int const & binYmin, int const & binYmax)
   {
     if (matrix == nullptr) {throw_error("Matrix histo nullptr in CoAnalyse::projectX");}
@@ -611,12 +616,13 @@ namespace CoAnalyse
       proj->AddBinContent(x, matrix->GetBinContent(x, y));
   }
 
-  /// @brief Project on Y axis between values binYmin and binYmax included [binYmin;binYmax]
+  /// @brief Project on Y axis between values binYmin and binYmax included [binYmin;binYmax]. This fills proj.
   void projectX(TH2* matrix, TH1* proj, double const & binYmin, double const & binYmax)
   {
     projectX(matrix, proj, matrix->GetYaxis()->FindBin(binYmin), matrix->GetYaxis()->FindBin(binYmax));
   }
 
+  /// @brief Set X histogram proj in matrix at binY.
   void setY(TH2* matrix, TH1* proj, int const & binY)
   {
     if (matrix == nullptr){throw_error("Matrix histo nullptr in CoAnalyse::setY");}
@@ -624,6 +630,7 @@ namespace CoAnalyse
     for (int binX = 0; binX<matrix->GetNbinsX(); binX++) matrix->SetBinContent(binX, binY, proj->GetBinContent(binY));
   }
 
+  /// @deprecated
   void removeRandomBidim(TH2* matrix, int iterations = 1, bool save_intermediate = false, ProjectionsBins projectionsY = {{}}, ProjectionsBins projectionsX = {{}})
   {
     // matrix->Rebin2D(2);
@@ -829,7 +836,7 @@ namespace CoAnalyse
     }
   }
 
-
+  /// @deprecated
   std::vector<double> extractBackgroundArray(std::vector<double> & source, int const & nsmooth = 10)
   {
     print("depecrated (", nsmooth, ")");
@@ -839,6 +846,7 @@ namespace CoAnalyse
     return source;
   }
 
+  /// @deprecated
   std::vector<double> extractBackgroundArray(TH1F * histo, int const & nsmooth = 10)
   {
     print("depecrated (", histo->GetName(), nsmooth, ")");
@@ -930,6 +938,7 @@ namespace CoAnalyse
 //   Manage histo files   //
 ////////////////////////////
 
+/// @brief allows one to fuse all the histograms with the same name from different repositories
 void fuse_all_histo(std::string const & folder, std::string const & outRoot = "fused_histo.root", bool const & bidim = true)
 {
   auto const files = list_files_in_folder(folder, {"root"});

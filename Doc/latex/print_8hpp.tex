@@ -1,0 +1,154 @@
+\doxysection{lib/print.hpp File Reference}
+\label{print_8hpp}\index{lib/print.hpp@{lib/print.hpp}}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{print_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class... ARGS$>$ }\\void \textbf{ debug} (ARGS \&\&... args)
+\item 
+{\footnotesize template$<$class E , size\+\_\+t size$>$ }\\std\+::ostream \& \textbf{ operator$<$$<$} (std\+::ostream \&cout, std\+::array$<$ E, size $>$ const \&a)
+\item 
+{\footnotesize template$<$class K , class V $>$ }\\std\+::ostream \& \textbf{ operator$<$$<$} (std\+::ostream \&cout, std\+::map$<$ K, V $>$ const \&m)
+\item 
+{\footnotesize template$<$class F , class S $>$ }\\std\+::ostream \& \textbf{ operator$<$$<$} (std\+::ostream \&cout, std\+::pair$<$ F, S $>$ const \&p)
+\item 
+{\footnotesize template$<$class E $>$ }\\std\+::ostream \& \textbf{ operator$<$$<$} (std\+::ostream \&cout, std\+::vector$<$ E $>$ const \&v)
+\item 
+std\+::ostream \& \textbf{ operator$<$$<$} (std\+::ostream \&cout, unsigned char const \&uc)
+\item 
+{\footnotesize template$<$class T $>$ }\\void \textbf{ print} ()
+\item 
+{\footnotesize template$<$class... T$>$ }\\void \textbf{ print} (T const \&... t)
+\item 
+{\footnotesize template$<$class T $>$ }\\void \textbf{ print} (T const \&t)
+\item 
+{\footnotesize template$<$class T , class... T2$>$ }\\void \textbf{ print} (T const \&t, T2 const \&... t2)
+\item 
+void \textbf{ print\+\_\+precision} (int n=6)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\label{print_8hpp_a7c50c0690489629965f74c4921570ce5}} 
+\index{print.hpp@{print.hpp}!debug@{debug}}
+\index{debug@{debug}!print.hpp@{print.hpp}}
+\doxysubsubsection{debug()}
+{\footnotesize\ttfamily template$<$class... ARGS$>$ \\
+void debug (\begin{DoxyParamCaption}\item[{ARGS \&\&...}]{args }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=202pt]{print_8hpp_a7c50c0690489629965f74c4921570ce5_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=279pt]{print_8hpp_a7c50c0690489629965f74c4921570ce5_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{print_8hpp_a021f6cc0c03903546e6a63851944f2e8}} 
+\index{print.hpp@{print.hpp}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!print.hpp@{print.hpp}}
+\doxysubsubsection{operator$<$$<$()\hspace{0.1cm}{\footnotesize\ttfamily [1/5]}}
+{\footnotesize\ttfamily template$<$class E , size\+\_\+t size$>$ \\
+std\+::ostream\& operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{cout,  }\item[{std\+::array$<$ E, size $>$ const \&}]{a }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=229pt]{print_8hpp_a021f6cc0c03903546e6a63851944f2e8_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{print_8hpp_a1fc2e1be374c41706525b8d606242646}} 
+\index{print.hpp@{print.hpp}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!print.hpp@{print.hpp}}
+\doxysubsubsection{operator$<$$<$()\hspace{0.1cm}{\footnotesize\ttfamily [2/5]}}
+{\footnotesize\ttfamily template$<$class K , class V $>$ \\
+std\+::ostream\& operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{cout,  }\item[{std\+::map$<$ K, V $>$ const \&}]{m }\end{DoxyParamCaption})}
+
+\mbox{\label{print_8hpp_a305d037b6a2823d9d8d935b1cd5dd2c0}} 
+\index{print.hpp@{print.hpp}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!print.hpp@{print.hpp}}
+\doxysubsubsection{operator$<$$<$()\hspace{0.1cm}{\footnotesize\ttfamily [3/5]}}
+{\footnotesize\ttfamily template$<$class F , class S $>$ \\
+std\+::ostream\& operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{cout,  }\item[{std\+::pair$<$ F, S $>$ const \&}]{p }\end{DoxyParamCaption})}
+
+\mbox{\label{print_8hpp_a03b9abfe3f12543c365e9a25848ba566}} 
+\index{print.hpp@{print.hpp}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!print.hpp@{print.hpp}}
+\doxysubsubsection{operator$<$$<$()\hspace{0.1cm}{\footnotesize\ttfamily [4/5]}}
+{\footnotesize\ttfamily template$<$class E $>$ \\
+std\+::ostream\& operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{cout,  }\item[{std\+::vector$<$ E $>$ const \&}]{v }\end{DoxyParamCaption})}
+
+\mbox{\label{print_8hpp_ad68695d41301547d77d546b80b1bc278}} 
+\index{print.hpp@{print.hpp}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!print.hpp@{print.hpp}}
+\doxysubsubsection{operator$<$$<$()\hspace{0.1cm}{\footnotesize\ttfamily [5/5]}}
+{\footnotesize\ttfamily std\+::ostream\& operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{cout,  }\item[{unsigned char const \&}]{uc }\end{DoxyParamCaption})}
+
+\mbox{\label{print_8hpp_aaa2383e8fc7f8fa546f4376e1dd4c9b7}} 
+\index{print.hpp@{print.hpp}!print@{print}}
+\index{print@{print}!print.hpp@{print.hpp}}
+\doxysubsubsection{print()\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void print (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{print_8hpp_aaa2383e8fc7f8fa546f4376e1dd4c9b7_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{print_8hpp_a527acf8dce9e07a4901d65a23979424b}} 
+\index{print.hpp@{print.hpp}!print@{print}}
+\index{print@{print}!print.hpp@{print.hpp}}
+\doxysubsubsection{print()\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily template$<$class... T$>$ \\
+void print (\begin{DoxyParamCaption}\item[{T const \&...}]{t }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=194pt]{print_8hpp_a527acf8dce9e07a4901d65a23979424b_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{print_8hpp_a02e3acd6b90f83126d840187ee8023d6}} 
+\index{print.hpp@{print.hpp}!print@{print}}
+\index{print@{print}!print.hpp@{print.hpp}}
+\doxysubsubsection{print()\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void print (\begin{DoxyParamCaption}\item[{T const \&}]{t }\end{DoxyParamCaption})}
+
+\mbox{\label{print_8hpp_a942a3ac725f791da05ff038fd549a721}} 
+\index{print.hpp@{print.hpp}!print@{print}}
+\index{print@{print}!print.hpp@{print.hpp}}
+\doxysubsubsection{print()\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template$<$class T , class... T2$>$ \\
+void print (\begin{DoxyParamCaption}\item[{T const \&}]{t,  }\item[{T2 const \&...}]{t2 }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=194pt]{print_8hpp_a942a3ac725f791da05ff038fd549a721_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{print_8hpp_ab97d5aa53eda1f20404d0555d7ffd5de}} 
+\index{print.hpp@{print.hpp}!print\_precision@{print\_precision}}
+\index{print\_precision@{print\_precision}!print.hpp@{print.hpp}}
+\doxysubsubsection{print\_precision()}
+{\footnotesize\ttfamily void print\+\_\+precision (\begin{DoxyParamCaption}\item[{int}]{n = {\ttfamily 6} }\end{DoxyParamCaption})}
+

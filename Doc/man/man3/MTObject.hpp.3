@@ -1,0 +1,58 @@
+.TH "lib/MTObjects/MTObject.hpp" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+lib/MTObjects/MTObject.hpp
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <thread>\fP
+.br
+\fC#include <mutex>\fP
+.br
+\fC#include '\&.\&./libRoot\&.hpp'\fP
+.br
+
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBMTObject\fP"
+.br
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "using \fBlock_mutex\fP = const std::lock_guard< std::mutex >"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "template<class\&.\&.\&. ARGS> void \fBprintMT\fP (ARGS &&\&.\&.\&. args)"
+.br
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "std::mutex \fBMTmutex\fP"
+.br
+.in -1c
+.SH "Typedef Documentation"
+.PP 
+.SS "using \fBlock_mutex\fP =  const std::lock_guard<std::mutex>"
+
+.SH "Function Documentation"
+.PP 
+.SS "template<class\&.\&.\&. ARGS> void printMT (ARGS &&\&.\&.\&. args)"
+
+.SH "Variable Documentation"
+.PP 
+.SS "std::mutex MTmutex"
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Nuball2 from the source code\&.

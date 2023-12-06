@@ -1,0 +1,309 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="class_folder" kind="class" language="C++" prot="public">
+    <compoundname>Folder</compoundname>
+    <includes refid="files__functions_8hpp" local="no">files_functions.hpp</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_folder_1a244869fac986f183dce6b8725cdc64de" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string Folder::m_folder</definition>
+        <argsstring></argsstring>
+        <name>m_folder</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/files_functions.hpp" line="360" column="15" bodyfile="lib/files_functions.hpp" bodystart="360" bodyend="-1"/>
+        <referencedby refid="class_folder_1a71aba0f5181775b9ed38163de1c89c0b" compoundref="files__functions_8hpp" startline="345" endline="345">get</referencedby>
+        <referencedby refid="class_folder_1a312a16f583b00232be14746555c765bf" compoundref="files__functions_8hpp" startline="348" endline="356">make</referencedby>
+        <referencedby refid="class_folder_1a6aa1e1ebddb2cf4198b76f17f3aa022f" compoundref="files__functions_8hpp" startline="346" endline="346">name</referencedby>
+        <referencedby refid="class_folder_1aab31dd7afa19f0dd45abf13e61ddfdf7" compoundref="files__functions_8hpp" startline="325" endline="329">operator+=</referencedby>
+        <referencedby refid="class_folder_1a92aac747b89056c8dedb623529e8edec" compoundref="files__functions_8hpp" startline="307" endline="312">operator=</referencedby>
+        <referencedby refid="class_folder_1ae5e74edda681a2f533aca24d7d193ac8" compoundref="files__functions_8hpp" startline="337" endline="337">operator==</referencedby>
+        <referencedby refid="class_folder_1a9d0e844868f8debec7d50659ef7d3507" compoundref="files__functions_8hpp" startline="343" endline="343">string</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_folder_1aec34aa6cce9b8074a9892c3f7e2eb3c0" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool Folder::m_ok</definition>
+        <argsstring></argsstring>
+        <name>m_ok</name>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/files_functions.hpp" line="359" column="8" bodyfile="lib/files_functions.hpp" bodystart="359" bodyend="-1"/>
+        <referencedby refid="class_folder_1a312a16f583b00232be14746555c765bf" compoundref="files__functions_8hpp" startline="348" endline="356">make</referencedby>
+        <referencedby refid="class_folder_1a095c43e75ffe4bb1586f03ec95dc5340" compoundref="files__functions_8hpp" startline="341" endline="341">operator bool</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_folder_1a8af69fd19ba86816c60b4c2291311eb1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Folder::Folder</definition>
+        <argsstring>()</argsstring>
+        <name>Folder</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/files_functions.hpp" line="294" column="3" bodyfile="lib/files_functions.hpp" bodystart="294" bodyend="294"/>
+      </memberdef>
+      <memberdef kind="function" id="class_folder_1add09c34d4f536e44f1e7b20eecaa8707" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Folder::Folder</definition>
+        <argsstring>(const char *folder)</argsstring>
+        <name>Folder</name>
+        <param>
+          <type>const char *</type>
+          <declname>folder</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/files_functions.hpp" line="305" column="3" bodyfile="lib/files_functions.hpp" bodystart="305" bodyend="305"/>
+        <references refid="class_folder_1a312a16f583b00232be14746555c765bf" compoundref="files__functions_8hpp" startline="348" endline="356">make</references>
+      </memberdef>
+      <memberdef kind="function" id="class_folder_1acc9fce9d1c448cd7811a6b22ad900239" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Folder::Folder</definition>
+        <argsstring>(std::string const &amp;folder)</argsstring>
+        <name>Folder</name>
+        <param>
+          <type>std::string const &amp;</type>
+          <declname>folder</declname>
+        </param>
+        <briefdescription>
+<para>Turns a string to a folder&apos;s name. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Basically, it is simply ensures that the name ends with a &apos;/&apos;</para>
+<para>Also, it is the base class of <ref refid="class_path" kindref="compound">Path</ref> class </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/files_functions.hpp" line="304" column="3" bodyfile="lib/files_functions.hpp" bodystart="304" bodyend="304"/>
+        <references refid="class_folder_1a312a16f583b00232be14746555c765bf" compoundref="files__functions_8hpp" startline="348" endline="356">make</references>
+      </memberdef>
+      <memberdef kind="function" id="class_folder_1a71aba0f5181775b9ed38163de1c89c0b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string const  &amp;</type>
+        <definition>std::string const&amp; Folder::get</definition>
+        <argsstring>() const</argsstring>
+        <name>get</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/files_functions.hpp" line="345" column="22" bodyfile="lib/files_functions.hpp" bodystart="345" bodyend="345"/>
+        <references refid="class_folder_1a244869fac986f183dce6b8725cdc64de" compoundref="files__functions_8hpp" startline="360">m_folder</references>
+        <referencedby refid="class_path_1a99656cd73eb5c5fa461d7570b86eb66d" compoundref="files__functions_8hpp" startline="524" endline="531">Path::addFolder</referencedby>
+        <referencedby refid="class_path_1a3d0909258a10a05b04d3c08ec42f562c" compoundref="files__functions_8hpp" startline="542" endline="542">Path::operator+</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_folder_1a312a16f583b00232be14746555c765bf" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Folder::make</definition>
+        <argsstring>()</argsstring>
+        <name>make</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/files_functions.hpp" line="348" column="8" bodyfile="lib/files_functions.hpp" bodystart="348" bodyend="356"/>
+        <references refid="class_folder_1a244869fac986f183dce6b8725cdc64de" compoundref="files__functions_8hpp" startline="360">m_folder</references>
+        <references refid="class_folder_1aec34aa6cce9b8074a9892c3f7e2eb3c0" compoundref="files__functions_8hpp" startline="359">m_ok</references>
+        <referencedby refid="class_folder_1acc9fce9d1c448cd7811a6b22ad900239" compoundref="files__functions_8hpp" startline="304" endline="304">Folder</referencedby>
+        <referencedby refid="class_folder_1a92aac747b89056c8dedb623529e8edec" compoundref="files__functions_8hpp" startline="307" endline="312">operator=</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_folder_1a6aa1e1ebddb2cf4198b76f17f3aa022f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string Folder::name</definition>
+        <argsstring>() const</argsstring>
+        <name>name</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/files_functions.hpp" line="346" column="15" bodyfile="lib/files_functions.hpp" bodystart="346" bodyend="346"/>
+        <references refid="class_folder_1a244869fac986f183dce6b8725cdc64de" compoundref="files__functions_8hpp" startline="360">m_folder</references>
+        <referencedby refid="class_path_1a99656cd73eb5c5fa461d7570b86eb66d" compoundref="files__functions_8hpp" startline="524" endline="531">Path::addFolder</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_folder_1a095c43e75ffe4bb1586f03ec95dc5340" prot="public" static="no" const="yes" explicit="no" inline="yes" refqual="lvalue" virt="non-virtual">
+        <type></type>
+        <definition>Folder::operator bool</definition>
+        <argsstring>() const &amp;</argsstring>
+        <name>operator bool</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/files_functions.hpp" line="341" column="3" bodyfile="lib/files_functions.hpp" bodystart="341" bodyend="341"/>
+        <references refid="class_folder_1aec34aa6cce9b8074a9892c3f7e2eb3c0" compoundref="files__functions_8hpp" startline="359">m_ok</references>
+      </memberdef>
+      <memberdef kind="function" id="class_folder_1aab31dd7afa19f0dd45abf13e61ddfdf7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_folder" kindref="compound">Folder</ref> &amp;</type>
+        <definition>Folder&amp; Folder::operator+=</definition>
+        <argsstring>(Folder const &amp;folder)</argsstring>
+        <name>operator+=</name>
+        <param>
+          <type><ref refid="class_folder" kindref="compound">Folder</ref> const &amp;</type>
+          <declname>folder</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/files_functions.hpp" line="325" column="11" bodyfile="lib/files_functions.hpp" bodystart="325" bodyend="329"/>
+        <references refid="class_folder_1a244869fac986f183dce6b8725cdc64de" compoundref="files__functions_8hpp" startline="360">m_folder</references>
+      </memberdef>
+      <memberdef kind="function" id="class_folder_1aad6e0351add7357e1e9ebcd1f436f317" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_folder" kindref="compound">Folder</ref> &amp;</type>
+        <definition>Folder&amp; Folder::operator=</definition>
+        <argsstring>(const char *folder)</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const char *</type>
+          <declname>folder</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/files_functions.hpp" line="314" column="11" bodyfile="lib/files_functions.hpp" bodystart="314" bodyend="317"/>
+      </memberdef>
+      <memberdef kind="function" id="class_folder_1a92aac747b89056c8dedb623529e8edec" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_folder" kindref="compound">Folder</ref> &amp;</type>
+        <definition>Folder&amp; Folder::operator=</definition>
+        <argsstring>(std::string const &amp;folder)</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>std::string const &amp;</type>
+          <declname>folder</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/files_functions.hpp" line="307" column="11" bodyfile="lib/files_functions.hpp" bodystart="307" bodyend="312"/>
+        <references refid="class_folder_1a244869fac986f183dce6b8725cdc64de" compoundref="files__functions_8hpp" startline="360">m_folder</references>
+        <references refid="class_folder_1a312a16f583b00232be14746555c765bf" compoundref="files__functions_8hpp" startline="348" endline="356">make</references>
+      </memberdef>
+      <memberdef kind="function" id="class_folder_1ae5e74edda681a2f533aca24d7d193ac8" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Folder::operator==</definition>
+        <argsstring>(const char *string) const</argsstring>
+        <name>operator==</name>
+        <param>
+          <type>const char *</type>
+          <declname>string</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/files_functions.hpp" line="337" column="8" bodyfile="lib/files_functions.hpp" bodystart="337" bodyend="337"/>
+        <references refid="class_folder_1a244869fac986f183dce6b8725cdc64de" compoundref="files__functions_8hpp" startline="360">m_folder</references>
+      </memberdef>
+      <memberdef kind="function" id="class_folder_1a5a62f5e45280e944983bd162878cfe85" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Folder::operator==</definition>
+        <argsstring>(std::string const &amp;string) const</argsstring>
+        <name>operator==</name>
+        <param>
+          <type>std::string const &amp;</type>
+          <declname>string</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/files_functions.hpp" line="338" column="8" bodyfile="lib/files_functions.hpp" bodystart="338" bodyend="338"/>
+        <references refid="class_folder_1a244869fac986f183dce6b8725cdc64de" compoundref="files__functions_8hpp" startline="360">m_folder</references>
+        <references refid="class_folder_1a9d0e844868f8debec7d50659ef7d3507" compoundref="files__functions_8hpp" startline="343" endline="343">string</references>
+      </memberdef>
+      <memberdef kind="function" id="class_folder_1a2f8343d495b891134dca56a9767127cc" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string Folder::string</definition>
+        <argsstring>()</argsstring>
+        <name>string</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/files_functions.hpp" line="344" column="15" bodyfile="lib/files_functions.hpp" bodystart="344" bodyend="344"/>
+        <references refid="class_folder_1a244869fac986f183dce6b8725cdc64de" compoundref="files__functions_8hpp" startline="360">m_folder</references>
+      </memberdef>
+      <memberdef kind="function" id="class_folder_1a9d0e844868f8debec7d50659ef7d3507" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string const  &amp;</type>
+        <definition>std::string const&amp; Folder::string</definition>
+        <argsstring>() const</argsstring>
+        <name>string</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/files_functions.hpp" line="343" column="22" bodyfile="lib/files_functions.hpp" bodystart="343" bodyend="343"/>
+        <references refid="class_folder_1a244869fac986f183dce6b8725cdc64de" compoundref="files__functions_8hpp" startline="360">m_folder</references>
+        <referencedby refid="files__functions_8hpp_1ad580345a13bcb93c84b981f67f25b899" compoundref="files__functions_8hpp" startline="369" endline="369">operator+</referencedby>
+        <referencedby refid="files__functions_8hpp_1a151e488cdb2e927bd293d0e574948f43" compoundref="files__functions_8hpp" startline="372" endline="372">operator+=</referencedby>
+        <referencedby refid="files__functions_8hpp_1a40dcd00c07b1ec706cecc30653522e4f" compoundref="files__functions_8hpp" startline="363" endline="367">operator&lt;&lt;</referencedby>
+        <referencedby refid="class_folder_1a5a62f5e45280e944983bd162878cfe85" compoundref="files__functions_8hpp" startline="338" endline="338">operator==</referencedby>
+        <referencedby refid="class_run_matrixator_1aeb9889ba763858dfb65e05c3a7bb142e" compoundref="_run_matrixator_8hpp" startline="501" endline="550">RunMatrixator::Write</referencedby>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>EXPERIMENTAL Object used to hold a folder&apos;s name. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="lib/files_functions.hpp" line="290" column="1" bodyfile="lib/files_functions.hpp" bodystart="291" bodyend="361"/>
+    <listofallmembers>
+      <member refid="class_folder_1a8af69fd19ba86816c60b4c2291311eb1" prot="public" virt="non-virtual"><scope>Folder</scope><name>Folder</name></member>
+      <member refid="class_folder_1acc9fce9d1c448cd7811a6b22ad900239" prot="public" virt="non-virtual"><scope>Folder</scope><name>Folder</name></member>
+      <member refid="class_folder_1add09c34d4f536e44f1e7b20eecaa8707" prot="public" virt="non-virtual"><scope>Folder</scope><name>Folder</name></member>
+      <member refid="class_folder_1a71aba0f5181775b9ed38163de1c89c0b" prot="public" virt="non-virtual"><scope>Folder</scope><name>get</name></member>
+      <member refid="class_folder_1a244869fac986f183dce6b8725cdc64de" prot="private" virt="non-virtual"><scope>Folder</scope><name>m_folder</name></member>
+      <member refid="class_folder_1aec34aa6cce9b8074a9892c3f7e2eb3c0" prot="private" virt="non-virtual"><scope>Folder</scope><name>m_ok</name></member>
+      <member refid="class_folder_1a312a16f583b00232be14746555c765bf" prot="public" virt="non-virtual"><scope>Folder</scope><name>make</name></member>
+      <member refid="class_folder_1a6aa1e1ebddb2cf4198b76f17f3aa022f" prot="public" virt="non-virtual"><scope>Folder</scope><name>name</name></member>
+      <member refid="class_folder_1a095c43e75ffe4bb1586f03ec95dc5340" prot="public" virt="non-virtual"><scope>Folder</scope><name>operator bool</name></member>
+      <member refid="class_folder_1aab31dd7afa19f0dd45abf13e61ddfdf7" prot="public" virt="non-virtual"><scope>Folder</scope><name>operator+=</name></member>
+      <member refid="class_folder_1a92aac747b89056c8dedb623529e8edec" prot="public" virt="non-virtual"><scope>Folder</scope><name>operator=</name></member>
+      <member refid="class_folder_1aad6e0351add7357e1e9ebcd1f436f317" prot="public" virt="non-virtual"><scope>Folder</scope><name>operator=</name></member>
+      <member refid="class_folder_1ae5e74edda681a2f533aca24d7d193ac8" prot="public" virt="non-virtual"><scope>Folder</scope><name>operator==</name></member>
+      <member refid="class_folder_1a5a62f5e45280e944983bd162878cfe85" prot="public" virt="non-virtual"><scope>Folder</scope><name>operator==</name></member>
+      <member refid="class_folder_1a9d0e844868f8debec7d50659ef7d3507" prot="public" virt="non-virtual"><scope>Folder</scope><name>string</name></member>
+      <member refid="class_folder_1a2f8343d495b891134dca56a9767127cc" prot="public" virt="non-virtual"><scope>Folder</scope><name>string</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

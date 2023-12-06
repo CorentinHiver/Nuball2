@@ -1,16 +1,25 @@
 var _hit_8hpp =
 [
     [ "Hit", "class_hit.html", "class_hit" ],
-    [ "Hit_ptr", "class_hit__ptr.html", "class_hit__ptr" ],
+    [ "IOptions", "class_i_options.html", "class_i_options" ],
     [ "ADC", "_hit_8hpp.html#a04b75a9e083a1c44419fdb7c3f87c361", null ],
-    [ "ADC_vec", "_hit_8hpp.html#a4009dbd968fe0a4f5e898daf5e779860", null ],
-    [ "Energy_vec", "_hit_8hpp.html#a86335fdfd2f45e86acb1af23b8dc4860", null ],
+    [ "ADC_vec", "_hit_8hpp.html#aef44026b31a934229a954352bb500202", null ],
+    [ "Energy_vec", "_hit_8hpp.html#a60a11aa033ddd007d68353349ab6d90f", null ],
     [ "Label", "_hit_8hpp.html#ab5dd24876acad09ec52c250c1668466c", null ],
-    [ "Label_vec", "_hit_8hpp.html#aa891d0114ec53e09efd4ff718b7a21a8", null ],
+    [ "Label_vec", "_hit_8hpp.html#a25e4b8c1ad7e877a2fd808d3c661b22d", null ],
     [ "NRJ", "_hit_8hpp.html#aad3a9d2c404fb4cd7f73b16966ae2877", null ],
     [ "Pileup", "_hit_8hpp.html#a32b9c8e0ce5bedbf84e93eff0b198eea", null ],
-    [ "Pileup_vec", "_hit_8hpp.html#ab1b0fc75f63389ebaf4efa40bdc8df37", null ],
-    [ "Time", "_hit_8hpp.html#a6a9ea016c2f21b59da51a03d702a5c44", null ],
-    [ "Time_vec", "_hit_8hpp.html#a4737a50448693a49dbeafe4082f97eca", null ],
-    [ "operator<<", "_hit_8hpp.html#a6a8489ad364359132484d320150555a7", null ]
+    [ "Pileup_vec", "_hit_8hpp.html#ab7c579eea4eff5ec05b4d28e26e4c231", null ],
+    [ "Time", "_hit_8hpp.html#a808363c27c30b41f6ed40b62ebde3ee7", null ],
+    [ "Time_ns", "_hit_8hpp.html#ad7cd28c849adeb8fec74d20155b0113d", null ],
+    [ "Time_ns_vec", "_hit_8hpp.html#a72badb0bc1d4963ea7e36056916cd6c6", null ],
+    [ "Time_vec", "_hit_8hpp.html#a613beddb43860b3568c452fa6620510b", null ],
+    [ "Timestamp", "_hit_8hpp.html#a36a1e53eff51015f34900948053c0d69", null ],
+    [ "ADC_cast", "_hit_8hpp.html#a42de29176eeb225c09486aa0dcac5362", null ],
+    [ "Label_cast", "_hit_8hpp.html#af181231d97866aa957e8fe8bd67f7f64", null ],
+    [ "NRJ_cast", "_hit_8hpp.html#a394977782e3af344e009b96c7d5bec92", null ],
+    [ "operator<<", "_hit_8hpp.html#a6a8489ad364359132484d320150555a7", null ],
+    [ "Time_cast", "_hit_8hpp.html#a4ea1ea3a29989c67afc2c4db41e36b15", null ],
+    [ "Time_ns_cast", "_hit_8hpp.html#a04b1f65fe07e6d731225feecab2b66f6", null ],
+    [ "Timestamp_cast", "_hit_8hpp.html#a3bbfcd7f9bbec3174213c2b5eedc2edd", null ]
 ];

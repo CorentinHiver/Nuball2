@@ -1,0 +1,104 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="class_type_root_map" kind="class" language="C++" prot="public">
+    <compoundname>TypeRootMap</compoundname>
+    <includes refid="lib_root_8hpp" local="no">libRoot.hpp</includes>
+      <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="class_type_root_map_1a5e084d8316e53d9b9138d29129efa302" prot="private" static="yes" mutable="no">
+        <type>bool</type>
+        <definition>bool TypeRootMap::initialized</definition>
+        <argsstring></argsstring>
+        <name>initialized</name>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/libRoot.hpp" line="269" column="15" bodyfile="lib/libRoot.hpp" bodystart="269" bodyend="-1"/>
+        <referencedby refid="class_type_root_map_1acc24a4f33058532b330071a6738f02f4" compoundref="lib_root_8hpp" startline="233" endline="254">TypeRootMap</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_type_root_map_1ad92c898d3d47a36b01b8f3ef5b178407" prot="private" static="no" mutable="no">
+        <type>std::unordered_map&lt; std::type_index, std::string &gt;</type>
+        <definition>std::unordered_map&lt;std::type_index, std::string&gt; TypeRootMap::m_typeRootMap</definition>
+        <argsstring></argsstring>
+        <name>m_typeRootMap</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/libRoot.hpp" line="270" column="22" bodyfile="lib/libRoot.hpp" bodystart="270" bodyend="-1"/>
+        <referencedby refid="class_type_root_map_1ade1cd7178ea5d224c8140e6339cc3f16" compoundref="lib_root_8hpp" startline="257" endline="266">operator()</referencedby>
+        <referencedby refid="class_type_root_map_1acc24a4f33058532b330071a6738f02f4" compoundref="lib_root_8hpp" startline="233" endline="254">TypeRootMap</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_type_root_map_1ade1cd7178ea5d224c8140e6339cc3f16" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class T</type>
+          </param>
+        </templateparamlist>
+        <type>std::string</type>
+        <definition>std::string TypeRootMap::operator()</definition>
+        <argsstring>(T const &amp;t) const</argsstring>
+        <name>operator()</name>
+        <param>
+          <type>T const &amp;</type>
+          <declname>t</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/libRoot.hpp" line="257" column="15" bodyfile="lib/libRoot.hpp" bodystart="257" bodyend="266"/>
+        <references refid="class_type_root_map_1ad92c898d3d47a36b01b8f3ef5b178407" compoundref="lib_root_8hpp" startline="270">m_typeRootMap</references>
+      </memberdef>
+      <memberdef kind="function" id="class_type_root_map_1acc24a4f33058532b330071a6738f02f4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>TypeRootMap::TypeRootMap</definition>
+        <argsstring>()</argsstring>
+        <name>TypeRootMap</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/libRoot.hpp" line="233" column="3" bodyfile="lib/libRoot.hpp" bodystart="233" bodyend="254"/>
+        <references refid="lib_co_8hpp_1afe72de0c3fabeb8944bfd72ccdbe0d73" compoundref="lib_co_8hpp" startline="66" endline="66">char_cast</references>
+        <references refid="lib_co_8hpp_1a2052317e56aa118e7ffcdb2e398f551c" compoundref="lib_co_8hpp" startline="86" endline="86">double_cast</references>
+        <references refid="lib_co_8hpp_1a075a3c229a21ca4d0e91f72e99a6bf6d" compoundref="lib_co_8hpp" startline="82" endline="82">float_cast</references>
+        <references refid="class_type_root_map_1a5e084d8316e53d9b9138d29129efa302" compoundref="lib_root_8hpp" startline="269">initialized</references>
+        <references refid="lib_co_8hpp_1a48e80fbfd11f9fb219b92ba1c29c1b2a" compoundref="lib_co_8hpp" startline="74" endline="74">int_cast</references>
+        <references refid="lib_root_8hpp_1a269d058dec61fdc486050ca3e57da0bb" compoundref="lib_root_8hpp" startline="58" endline="58">Long64_cast</references>
+        <references refid="lib_co_8hpp_1a695ead22582e1da41880ee67c2c61d07" compoundref="lib_co_8hpp" startline="78" endline="78">long_cast</references>
+        <references refid="class_type_root_map_1ad92c898d3d47a36b01b8f3ef5b178407" compoundref="lib_root_8hpp" startline="270">m_typeRootMap</references>
+        <references refid="lib_co_8hpp_1af4d9dac78db5e48b5e2c5253754aaa8c" compoundref="lib_co_8hpp" startline="70" endline="70">short_cast</references>
+        <references refid="lib_co_8hpp_1ade77d1f37b1311b3f80ce429a33fd226" compoundref="lib_co_8hpp" startline="101" endline="101">uchar_cast</references>
+        <references refid="lib_co_8hpp_1ad4f41fb682fba59b9adc6142282db5a2" compoundref="lib_co_8hpp" startline="109" endline="109">uint_cast</references>
+        <references refid="lib_root_8hpp_1a40d3e36a2118509ec94a14fc794895a0" compoundref="lib_root_8hpp" startline="54" endline="54">ULong64_cast</references>
+        <references refid="lib_co_8hpp_1ac939b8397e82173edff13b3d00dc9d09" compoundref="lib_co_8hpp" startline="113" endline="113">ulong_cast</references>
+        <references refid="lib_co_8hpp_1ab2f8f9033c2742c4f5ac6d3cce6caf9a" compoundref="lib_co_8hpp" startline="105" endline="105">ushort_cast</references>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="lib/libRoot.hpp" line="230" column="1" bodyfile="lib/libRoot.hpp" bodystart="231" bodyend="271"/>
+    <listofallmembers>
+      <member refid="class_type_root_map_1a5e084d8316e53d9b9138d29129efa302" prot="private" virt="non-virtual"><scope>TypeRootMap</scope><name>initialized</name></member>
+      <member refid="class_type_root_map_1ad92c898d3d47a36b01b8f3ef5b178407" prot="private" virt="non-virtual"><scope>TypeRootMap</scope><name>m_typeRootMap</name></member>
+      <member refid="class_type_root_map_1ade1cd7178ea5d224c8140e6339cc3f16" prot="public" virt="non-virtual"><scope>TypeRootMap</scope><name>operator()</name></member>
+      <member refid="class_type_root_map_1acc24a4f33058532b330071a6738f02f4" prot="public" virt="non-virtual"><scope>TypeRootMap</scope><name>TypeRootMap</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

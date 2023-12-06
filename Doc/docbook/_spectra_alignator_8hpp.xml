@@ -1,0 +1,139 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__spectra_alignator_8hpp" xml:lang="en-US">
+<title>lib/Classes/SpectraAlignator.hpp File Reference</title>
+<indexterm><primary>lib/Classes/SpectraAlignator.hpp</primary></indexterm>
+<programlisting>#include &quot;../libRoot.hpp&quot;
+</programlisting>Include dependency graph for SpectraAlignator.hpp:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="_spectra_alignator_8hpp__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>class <link linkend="_class_minimisator">Minimisator</link></para>
+</listitem>
+            <listitem><para>struct <link linkend="_class_minimisator_1struct_minimisator_1_1_nelder_mead_parameters">Minimisator::NelderMeadParameters</link></para>
+</listitem>
+            <listitem><para>class <link linkend="_class_recalibration">Recalibration</link></para>
+</listitem>
+            <listitem><para>class <link linkend="_class_simplex">Simplex</link></para>
+</listitem>
+            <listitem><para>class <link linkend="_class_spectra_alignator">SpectraAlignator</link></para>
+</listitem>
+            <listitem><para>class <link linkend="_class_spectra_co">SpectraCo</link></para>
+</listitem>
+            <listitem><para>class <link linkend="_class_vertice">Vertice</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Macros    </title>
+        <itemizedlist>
+            <listitem><para>#define <link linkend="__spectra_alignator_8hpp_1aa5842b2bdb6a161db3b676a1381e73c0">MAX_ORDER2</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Typedefs    </title>
+        <itemizedlist>
+            <listitem><para>using <link linkend="__spectra_alignator_8hpp_1afafb4a66ac57eb9c69b1fe6488851c4e">Vertices</link> = std::vector&lt; <link linkend="_class_vertice">Vertice</link> &gt;</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_class_vertice">Vertice</link> <link linkend="__spectra_alignator_8hpp_1a658a331239a2db3139f2a2163a4c182f">operator*</link> (double const &amp;constant, <link linkend="_class_vertice">Vertice</link> const &amp;vertice)</para>
+</listitem>
+            <listitem><para>std::ostream &amp; <link linkend="__spectra_alignator_8hpp_1a1c2f6d6b9b8d19b513889e59666d3967">operator&lt;&lt;</link> (std::ostream &amp;out, <link linkend="_class_recalibration">Recalibration</link> const &amp;recal)</para>
+</listitem>
+            <listitem><para>std::ostream &amp; <link linkend="__spectra_alignator_8hpp_1a2b92434fd8aaf67b841513f9b83eaaa8">operator&lt;&lt;</link> (std::ostream &amp;out, <link linkend="_class_simplex">Simplex</link> const &amp;simplex)</para>
+</listitem>
+            <listitem><para>std::ostream &amp; <link linkend="__spectra_alignator_8hpp_1a00041d0900b9f4e90f24fc9f5f61208f">operator&lt;&lt;</link> (std::ostream &amp;out, <link linkend="_class_vertice">Vertice</link> const &amp;vertice)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Class Documentation</title>
+<indexterm><primary>Minimisator::NelderMeadParameters</primary></indexterm>
+<section>
+<title>struct Minimisator::NelderMeadParameters</title>
+<anchor xml:id="_class_minimisator_1ad572ad763d40de2c3ef34e50bf71177d"/>doublealpha    </section><anchor xml:id="_class_minimisator_1aeec9715878231abdfbea7a5a6801bf1e"/>doublebeta    </section><anchor xml:id="_class_minimisator_1ae4f64377f468e22558d8bd6fee8bad24"/>doubledelta    </section><anchor xml:id="_class_minimisator_1a605647638f96b3aaaec933e3b741c392"/>doublegamma</section>
+<section>
+<title>Macro Definition Documentation</title>
+<anchor xml:id="__spectra_alignator_8hpp_1aa5842b2bdb6a161db3b676a1381e73c0"/>    <section>
+    <title>MAX_ORDER2</title>
+<indexterm><primary>MAX_ORDER2</primary><secondary>SpectraAlignator.hpp</secondary></indexterm>
+<indexterm><primary>SpectraAlignator.hpp</primary><secondary>MAX_ORDER2</secondary></indexterm>
+<para><computeroutput>#define MAX_ORDER2</computeroutput></para></section>
+</section>
+<section>
+<title>Typedef Documentation</title>
+<anchor xml:id="__spectra_alignator_8hpp_1afafb4a66ac57eb9c69b1fe6488851c4e"/>    <section>
+    <title>Vertices</title>
+<indexterm><primary>Vertices</primary><secondary>SpectraAlignator.hpp</secondary></indexterm>
+<indexterm><primary>SpectraAlignator.hpp</primary><secondary>Vertices</secondary></indexterm>
+<para><computeroutput>using <link linkend="__spectra_alignator_8hpp_1afafb4a66ac57eb9c69b1fe6488851c4e">Vertices</link> =  std::vector&lt;<link linkend="_class_vertice">Vertice</link>&gt;</computeroutput></para></section>
+</section>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="__spectra_alignator_8hpp_1a658a331239a2db3139f2a2163a4c182f"/>    <section>
+    <title>operator*()</title>
+<indexterm><primary>operator*</primary><secondary>SpectraAlignator.hpp</secondary></indexterm>
+<indexterm><primary>SpectraAlignator.hpp</primary><secondary>operator*</secondary></indexterm>
+<para><computeroutput><link linkend="_class_vertice">Vertice</link> operator* (double const &amp; constant, <link linkend="_class_vertice">Vertice</link> const &amp; vertice)</computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="_spectra_alignator_8hpp_a658a331239a2db3139f2a2163a4c182f_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="__spectra_alignator_8hpp_1a1c2f6d6b9b8d19b513889e59666d3967"/>    <section>
+    <title>operator&lt;&lt;()<computeroutput>[1/3]</computeroutput></title>
+<indexterm><primary>operator&lt;&lt;</primary><secondary>SpectraAlignator.hpp</secondary></indexterm>
+<indexterm><primary>SpectraAlignator.hpp</primary><secondary>operator&lt;&lt;</secondary></indexterm>
+<para><computeroutput>std::ostream&amp; operator&lt;&lt; (std::ostream &amp; out, <link linkend="_class_recalibration">Recalibration</link> const &amp; recal)</computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="_spectra_alignator_8hpp_a1c2f6d6b9b8d19b513889e59666d3967_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="__spectra_alignator_8hpp_1a2b92434fd8aaf67b841513f9b83eaaa8"/>    <section>
+    <title>operator&lt;&lt;()<computeroutput>[2/3]</computeroutput></title>
+<indexterm><primary>operator&lt;&lt;</primary><secondary>SpectraAlignator.hpp</secondary></indexterm>
+<indexterm><primary>SpectraAlignator.hpp</primary><secondary>operator&lt;&lt;</secondary></indexterm>
+<para><computeroutput>std::ostream&amp; operator&lt;&lt; (std::ostream &amp; out, <link linkend="_class_simplex">Simplex</link> const &amp; simplex)</computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="_spectra_alignator_8hpp_a2b92434fd8aaf67b841513f9b83eaaa8_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="__spectra_alignator_8hpp_1a00041d0900b9f4e90f24fc9f5f61208f"/>    <section>
+    <title>operator&lt;&lt;()<computeroutput>[3/3]</computeroutput></title>
+<indexterm><primary>operator&lt;&lt;</primary><secondary>SpectraAlignator.hpp</secondary></indexterm>
+<indexterm><primary>SpectraAlignator.hpp</primary><secondary>operator&lt;&lt;</secondary></indexterm>
+<para><computeroutput>std::ostream&amp; operator&lt;&lt; (std::ostream &amp; out, <link linkend="_class_vertice">Vertice</link> const &amp; vertice)</computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="_spectra_alignator_8hpp_a00041d0900b9f4e90f24fc9f5f61208f_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+</section>
+</section>

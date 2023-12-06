@@ -8,7 +8,7 @@
 #include <thread>
 #include <mutex>
 
-using lock_mutex = std::lock_guard<std::mutex>;
+using lock_mutex = const std::lock_guard<std::mutex>;
 
 #include "../libRoot.hpp"
 

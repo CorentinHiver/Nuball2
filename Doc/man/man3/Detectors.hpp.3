@@ -1,0 +1,168 @@
+.TH "lib/Classes/Detectors.hpp" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+lib/Classes/Detectors.hpp
+.SH SYNOPSIS
+.br
+.PP
+\fC#include '\&.\&./libRoot\&.hpp'\fP
+.br
+\fC#include 'Hit\&.hpp'\fP
+.br
+
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBDetectors\fP"
+.br
+.RI "Loads the ID file and fills lookup tables\&. "
+.in -1c
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBSIZE_LOOKUP\fP   1000"
+.br
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "using \fBdType\fP = std::string"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBStrings\fP \fBclover_pos\fP (\fBSIZE_LOOKUP\fP,'')"
+.br
+.ti -1c
+.RI "\fBLabel_vec\fP \fBcompressedLabel\fP (\fBSIZE_LOOKUP\fP,\-1)"
+.br
+.ti -1c
+.RI "std::vector< \fBuchar\fP > \fBlabelToBGOcrystal\fP (\fBSIZE_LOOKUP\fP, 0)"
+.br
+.ti -1c
+.RI "std::vector< \fBuchar\fP > \fBlabelToClover\fP (\fBSIZE_LOOKUP\fP, 0)"
+.br
+.ti -1c
+.RI "std::vector< \fBuchar\fP > \fBlabelToGecrystal\fP (\fBSIZE_LOOKUP\fP, 0)"
+.br
+.ti -1c
+.RI "\fBInts\fP \fBm_index\fP (\fBSIZE_LOOKUP\fP,\-1)"
+.br
+.ti -1c
+.RI "std::ostream & \fBoperator>>\fP (std::ostream &cout, \fBDetectors\fP const &\fBdetectors\fP)"
+.br
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "class \fBDetectors\fP \fBdetectors\fP"
+.br
+.ti -1c
+.RI "\fBBools\fP \fBisBack\fP (\fBSIZE_LOOKUP\fP)"
+.br
+.ti -1c
+.RI "\fBBools\fP \fBisBGO\fP (\fBSIZE_LOOKUP\fP)"
+.br
+.ti -1c
+.RI "\fBBools\fP \fBisClover\fP (\fBSIZE_LOOKUP\fP)"
+.br
+.ti -1c
+.RI "\fBBools\fP \fBisDSSD\fP (\fBSIZE_LOOKUP\fP)"
+.br
+.ti -1c
+.RI "\fBBools\fP \fBisEden\fP (\fBSIZE_LOOKUP\fP)"
+.br
+.ti -1c
+.RI "\fBBools\fP \fBisFront\fP (\fBSIZE_LOOKUP\fP)"
+.br
+.ti -1c
+.RI "\fBBools\fP \fBisGe\fP (\fBSIZE_LOOKUP\fP)"
+.br
+.ti -1c
+.RI "\fBBools\fP \fBisLaBr3\fP (\fBSIZE_LOOKUP\fP)"
+.br
+.ti -1c
+.RI "\fBBools\fP \fBisParis\fP (\fBSIZE_LOOKUP\fP)"
+.br
+.ti -1c
+.RI "\fBBools\fP \fBisRF\fP (\fBSIZE_LOOKUP\fP)"
+.br
+.ti -1c
+.RI "\fBBools\fP \fBisRing\fP (\fBSIZE_LOOKUP\fP)"
+.br
+.ti -1c
+.RI "\fBBools\fP \fBisS1\fP (\fBSIZE_LOOKUP\fP)"
+.br
+.ti -1c
+.RI "\fBBools\fP \fBisS2\fP (\fBSIZE_LOOKUP\fP)"
+.br
+.ti -1c
+.RI "\fBBools\fP \fBisSector\fP (\fBSIZE_LOOKUP\fP)"
+.br
+.in -1c
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define SIZE_LOOKUP   1000"
+
+.SH "Typedef Documentation"
+.PP 
+.SS "using \fBdType\fP =  std::string"
+
+.SH "Function Documentation"
+.PP 
+.SS "\fBStrings\fP clover_pos (\fBSIZE_LOOKUP\fP, '')"
+
+.SS "\fBLabel_vec\fP compressedLabel (\fBSIZE_LOOKUP\fP, \- 1)"
+
+.SS "std::vector<\fBuchar\fP> labelToBGOcrystal (\fBSIZE_LOOKUP\fP, 0)"
+
+.SS "std::vector<\fBuchar\fP> labelToClover (\fBSIZE_LOOKUP\fP, 0)"
+
+.SS "std::vector<\fBuchar\fP> labelToGecrystal (\fBSIZE_LOOKUP\fP, 0)"
+
+.SS "\fBInts\fP m_index (\fBSIZE_LOOKUP\fP, \- 1)"
+
+.SS "std::ostream& operator>> (std::ostream & cout, \fBDetectors\fP const & detectors)"
+
+.SH "Variable Documentation"
+.PP 
+.SS "class \fBDetectors\fP detectors"
+
+.SS "\fBBools\fP isBack(\fBSIZE_LOOKUP\fP) (\fBSIZE_LOOKUP\fP)"
+
+.SS "\fBBools\fP isBGO(\fBSIZE_LOOKUP\fP) (\fBSIZE_LOOKUP\fP)"
+
+.SS "\fBBools\fP isClover(\fBSIZE_LOOKUP\fP) (\fBSIZE_LOOKUP\fP)"
+
+.SS "\fBBools\fP isDSSD(\fBSIZE_LOOKUP\fP) (\fBSIZE_LOOKUP\fP)"
+
+.SS "\fBBools\fP isEden(\fBSIZE_LOOKUP\fP) (\fBSIZE_LOOKUP\fP)"
+
+.SS "\fBBools\fP isFront(\fBSIZE_LOOKUP\fP) (\fBSIZE_LOOKUP\fP)"
+
+.SS "\fBBools\fP isGe(\fBSIZE_LOOKUP\fP) (\fBSIZE_LOOKUP\fP)"
+
+.SS "\fBBools\fP isLaBr3(\fBSIZE_LOOKUP\fP) (\fBSIZE_LOOKUP\fP)"
+
+.SS "\fBBools\fP isParis(\fBSIZE_LOOKUP\fP) (\fBSIZE_LOOKUP\fP)"
+
+.SS "\fBBools\fP isRF(\fBSIZE_LOOKUP\fP) (\fBSIZE_LOOKUP\fP)"
+
+.SS "\fBBools\fP isRing(\fBSIZE_LOOKUP\fP) (\fBSIZE_LOOKUP\fP)"
+
+.SS "\fBBools\fP isS1(\fBSIZE_LOOKUP\fP) (\fBSIZE_LOOKUP\fP)"
+
+.SS "\fBBools\fP isS2(\fBSIZE_LOOKUP\fP) (\fBSIZE_LOOKUP\fP)"
+
+.SS "\fBBools\fP isSector(\fBSIZE_LOOKUP\fP) (\fBSIZE_LOOKUP\fP)"
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Nuball2 from the source code\&.

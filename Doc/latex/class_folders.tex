@@ -1,0 +1,272 @@
+\doxysection{Folders Class Reference}
+\label{class_folders}\index{Folders@{Folders}}
+
+
+EXPERIMENTAL Object used to hold a list of folders.  
+
+
+
+
+{\ttfamily \#include $<$files\+\_\+functions.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+auto \textbf{ begin} () const
+\item 
+void \textbf{ clear} ()
+\item 
+auto \textbf{ end} () const
+\item 
+auto \textbf{ erase} (\textbf{ size\+\_\+t} const \&pos)
+\item 
+auto \textbf{ erase} (\textbf{ size\+\_\+t} const \&pos, \textbf{ size\+\_\+t} const \&\textbf{ size})
+\item 
+\textbf{ Folders} ()
+\item 
+\textbf{ Folders} (\textbf{ Folders} const \&folders)
+\item 
+\textbf{ Folders} (std\+::vector$<$ \textbf{ Folder} $>$ const \&folders)
+\item 
+\textbf{ Folders} (std\+::vector$<$ std\+::string $>$ const \&folders)
+\item 
+auto const  \& \textbf{ get} () const
+\item 
+auto const  \& \textbf{ list} () const
+\item 
+\textbf{ operator std\+::string} ()
+\item 
+\textbf{ operator std\+::vector$<$ Folder $>$} () const \&
+\item 
+\textbf{ Folders} \& \textbf{ operator=} (\textbf{ Folders} const \&folders)
+\item 
+\textbf{ Folders} \& \textbf{ operator=} (std\+::vector$<$ std\+::string $>$ const \&folders)
+\item 
+\textbf{ Folder} const  \& \textbf{ operator[$\,$]} (\textbf{ size\+\_\+t} const \&i) const
+\item 
+void \textbf{ push\+\_\+back} (\textbf{ Folder} const \&folder)
+\item 
+\textbf{ Folders} \& \textbf{ resize} (int const \&\textbf{ size})
+\item 
+auto const \textbf{ size} () const
+\item 
+std\+::string \textbf{ string} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ \textbf{ Folder} $>$ \textbf{ m\+\_\+folders}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+EXPERIMENTAL Object used to hold a list of folders. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\label{class_folders_abb5ba77dd0b151ddc2479831740e514b}} 
+\index{Folders@{Folders}!Folders@{Folders}}
+\index{Folders@{Folders}!Folders@{Folders}}
+\doxysubsubsection{Folders()\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily Folders\+::\+Folders (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_folders_a8be43dfb713e9320014ff37a2e5ca5cb}} 
+\index{Folders@{Folders}!Folders@{Folders}}
+\index{Folders@{Folders}!Folders@{Folders}}
+\doxysubsubsection{Folders()\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily Folders\+::\+Folders (\begin{DoxyParamCaption}\item[{std\+::vector$<$ std\+::string $>$ const \&}]{folders }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_folders_ae28297a4e83670ce6894c115e6be2592}} 
+\index{Folders@{Folders}!Folders@{Folders}}
+\index{Folders@{Folders}!Folders@{Folders}}
+\doxysubsubsection{Folders()\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily Folders\+::\+Folders (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \textbf{ Folder} $>$ const \&}]{folders }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_folders_aa84623a40e39787329ca5ef8dbfa9d6c}} 
+\index{Folders@{Folders}!Folders@{Folders}}
+\index{Folders@{Folders}!Folders@{Folders}}
+\doxysubsubsection{Folders()\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily Folders\+::\+Folders (\begin{DoxyParamCaption}\item[{\textbf{ Folders} const \&}]{folders }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\label{class_folders_a08d92a79fdced661ca94fb0547dfcbf2}} 
+\index{Folders@{Folders}!begin@{begin}}
+\index{begin@{begin}!Folders@{Folders}}
+\doxysubsubsection{begin()}
+{\footnotesize\ttfamily auto Folders\+::begin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_folders_aaa63ca280c10fc90c09cc29e38c80a02}} 
+\index{Folders@{Folders}!clear@{clear}}
+\index{clear@{clear}!Folders@{Folders}}
+\doxysubsubsection{clear()}
+{\footnotesize\ttfamily void Folders\+::clear (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_folders_aaa63ca280c10fc90c09cc29e38c80a02_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_folders_a11de303e1a1926a03212fa4b085285ca}} 
+\index{Folders@{Folders}!end@{end}}
+\index{end@{end}!Folders@{Folders}}
+\doxysubsubsection{end()}
+{\footnotesize\ttfamily auto Folders\+::end (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_folders_aa6c7cccbbb9de930b9a41dc42dcbb840}} 
+\index{Folders@{Folders}!erase@{erase}}
+\index{erase@{erase}!Folders@{Folders}}
+\doxysubsubsection{erase()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily auto Folders\+::erase (\begin{DoxyParamCaption}\item[{\textbf{ size\+\_\+t} const \&}]{pos }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_folders_aa6c7cccbbb9de930b9a41dc42dcbb840_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_folders_a035d2b31430c66fc7a8941a9d938b658}} 
+\index{Folders@{Folders}!erase@{erase}}
+\index{erase@{erase}!Folders@{Folders}}
+\doxysubsubsection{erase()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily auto Folders\+::erase (\begin{DoxyParamCaption}\item[{\textbf{ size\+\_\+t} const \&}]{pos,  }\item[{\textbf{ size\+\_\+t} const \&}]{size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=278pt]{class_folders_a035d2b31430c66fc7a8941a9d938b658_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_folders_aab07a96e82a348fe89b817c6d7b60394}} 
+\index{Folders@{Folders}!get@{get}}
+\index{get@{get}!Folders@{Folders}}
+\doxysubsubsection{get()}
+{\footnotesize\ttfamily auto const\& Folders\+::get (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_folders_aab07a96e82a348fe89b817c6d7b60394_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_folders_ac590b52776691483bd9647c18d22bd10}} 
+\index{Folders@{Folders}!list@{list}}
+\index{list@{list}!Folders@{Folders}}
+\doxysubsubsection{list()}
+{\footnotesize\ttfamily auto const\& Folders\+::list (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_folders_a8e586d397638ccf72386fadd5d4a6df6}} 
+\index{Folders@{Folders}!operator std::string@{operator std::string}}
+\index{operator std::string@{operator std::string}!Folders@{Folders}}
+\doxysubsubsection{operator std::string()}
+{\footnotesize\ttfamily Folders\+::operator std\+::string (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=166pt]{class_folders_a8e586d397638ccf72386fadd5d4a6df6_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=166pt]{class_folders_a8e586d397638ccf72386fadd5d4a6df6_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_folders_a616485734815d9827798b56a265cdc9e}} 
+\index{Folders@{Folders}!operator std::vector$<$ Folder $>$@{operator std::vector$<$ Folder $>$}}
+\index{operator std::vector$<$ Folder $>$@{operator std::vector$<$ Folder $>$}!Folders@{Folders}}
+\doxysubsubsection{operator std::vector$<$ Folder $>$()}
+{\footnotesize\ttfamily Folders\+::operator std\+::vector$<$ \textbf{ Folder} $>$ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const \&\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_folders_a4a7246912adc54275ac8ded201c7ad3a}} 
+\index{Folders@{Folders}!operator=@{operator=}}
+\index{operator=@{operator=}!Folders@{Folders}}
+\doxysubsubsection{operator=()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \textbf{ Folders}\& Folders\+::operator= (\begin{DoxyParamCaption}\item[{\textbf{ Folders} const \&}]{folders }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_folders_a6757711b57054c387a2309302c216eb7}} 
+\index{Folders@{Folders}!operator=@{operator=}}
+\index{operator=@{operator=}!Folders@{Folders}}
+\doxysubsubsection{operator=()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \textbf{ Folders}\& Folders\+::operator= (\begin{DoxyParamCaption}\item[{std\+::vector$<$ std\+::string $>$ const \&}]{folders }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_folders_ae627977a3c889589d2077f57554301b4}} 
+\index{Folders@{Folders}!operator[]@{operator[]}}
+\index{operator[]@{operator[]}!Folders@{Folders}}
+\doxysubsubsection{operator[]()}
+{\footnotesize\ttfamily \textbf{ Folder} const\& Folders\+::operator[$\,$] (\begin{DoxyParamCaption}\item[{\textbf{ size\+\_\+t} const \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_folders_ab7471e5d0263ec69f2c87f184c004395}} 
+\index{Folders@{Folders}!push\_back@{push\_back}}
+\index{push\_back@{push\_back}!Folders@{Folders}}
+\doxysubsubsection{push\_back()}
+{\footnotesize\ttfamily void Folders\+::push\+\_\+back (\begin{DoxyParamCaption}\item[{\textbf{ Folder} const \&}]{folder }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=318pt]{class_folders_ab7471e5d0263ec69f2c87f184c004395_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_folders_a9b9a8af61bcaec214ec25ec217b84ef7}} 
+\index{Folders@{Folders}!resize@{resize}}
+\index{resize@{resize}!Folders@{Folders}}
+\doxysubsubsection{resize()}
+{\footnotesize\ttfamily \textbf{ Folders}\& Folders\+::resize (\begin{DoxyParamCaption}\item[{int const \&}]{size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=280pt]{class_folders_a9b9a8af61bcaec214ec25ec217b84ef7_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_folders_a6b8b818a0a08a010b9849573883bf189}} 
+\index{Folders@{Folders}!size@{size}}
+\index{size@{size}!Folders@{Folders}}
+\doxysubsubsection{size()}
+{\footnotesize\ttfamily auto const Folders\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_folders_a6b8b818a0a08a010b9849573883bf189_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_folders_a21778cd16e2d1dfa91886bba394a506f}} 
+\index{Folders@{Folders}!string@{string}}
+\index{string@{string}!Folders@{Folders}}
+\doxysubsubsection{string()}
+{\footnotesize\ttfamily std\+::string Folders\+::string (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_folders_a21778cd16e2d1dfa91886bba394a506f_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\label{class_folders_aeb55402a14a1b9d847838882c43dbd14}} 
+\index{Folders@{Folders}!m\_folders@{m\_folders}}
+\index{m\_folders@{m\_folders}!Folders@{Folders}}
+\doxysubsubsection{m\_folders}
+{\footnotesize\ttfamily std\+::vector$<$\textbf{ Folder}$>$ Folders\+::m\+\_\+folders\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+lib/\textbf{ files\+\_\+functions.\+hpp}\end{DoxyCompactItemize}

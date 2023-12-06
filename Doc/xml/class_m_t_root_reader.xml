@@ -1,0 +1,246 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="class_m_t_root_reader" kind="class" language="C++" prot="public">
+    <compoundname>MTRootReader</compoundname>
+    <includes refid="_m_t_root_reader_8hpp" local="no">MTRootReader.hpp</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_m_t_root_reader_1a46d681c951b18ad571dcbc5283ba8bba" prot="private" static="no" mutable="no">
+        <type><ref refid="class_files_manager" kindref="compound">FilesManager</ref></type>
+        <definition>FilesManager MTRootReader::m_files</definition>
+        <argsstring></argsstring>
+        <name>m_files</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/MTObjects/MTRootReader.hpp" line="29" column="16" bodyfile="lib/MTObjects/MTRootReader.hpp" bodystart="29" bodyend="-1"/>
+        <referencedby refid="class_m_t_root_reader_1ad8f964e63c97f35e44fc3b11fca88e59" compoundref="_m_t_root_reader_8hpp" startline="15" endline="19">addFolder</referencedby>
+        <referencedby refid="class_m_t_root_reader_1a506f517a4772f5ec3b8bbf5c835a3490" compoundref="_m_t_root_reader_8hpp" startline="34" endline="39">execute</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_m_t_root_reader_1a502ca89edf653e2e55e697a2135b7eef" prot="private" static="no" mutable="no">
+        <type><ref refid="_m_t_list_8hpp_1a5645cb48b623bfc2e6e274c70952a8e2" kindref="member">MTList</ref></type>
+        <definition>MTList MTRootReader::m_MTfiles</definition>
+        <argsstring></argsstring>
+        <name>m_MTfiles</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/MTObjects/MTRootReader.hpp" line="30" column="10" bodyfile="lib/MTObjects/MTRootReader.hpp" bodystart="30" bodyend="-1"/>
+        <referencedby refid="class_m_t_root_reader_1a506f517a4772f5ec3b8bbf5c835a3490" compoundref="_m_t_root_reader_8hpp" startline="34" endline="39">execute</referencedby>
+        <referencedby refid="class_m_t_root_reader_1a198a2f34b1b61cb0c449ba82478a4f22" compoundref="_m_t_root_reader_8hpp" startline="23" endline="23">nextFilename</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_m_t_root_reader_1ad8f964e63c97f35e44fc3b11fca88e59" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool MTRootReader::addFolder</definition>
+        <argsstring>(Path path, int const &amp;nb_files=-1)</argsstring>
+        <name>addFolder</name>
+        <param>
+          <type><ref refid="class_path" kindref="compound">Path</ref></type>
+          <declname>path</declname>
+        </param>
+        <param>
+          <type>int const &amp;</type>
+          <declname>nb_files</declname>
+          <defval>-1</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/MTObjects/MTRootReader.hpp" line="15" column="8" bodyfile="lib/MTObjects/MTRootReader.hpp" bodystart="15" bodyend="19"/>
+        <references refid="class_files_manager_1a6d05662378bde592075237b9fa0a5168" compoundref="_files_manager_8hpp" startline="136" endline="156">FilesManager::addFolder</references>
+        <references refid="class_m_t_root_reader_1a46d681c951b18ad571dcbc5283ba8bba" compoundref="_m_t_root_reader_8hpp" startline="29">m_files</references>
+        <referencedby refid="class_m_t_root_reader_1a6df2599a2adf92ce971105fbfac69221" compoundref="_m_t_root_reader_8hpp" startline="14" endline="14">MTRootReader</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_m_t_root_reader_1a506f517a4772f5ec3b8bbf5c835a3490" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Func</type>
+          </param>
+          <param>
+            <type>class...</type>
+            <declname>ARGS</declname>
+            <defname>ARGS</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void MTRootReader::execute</definition>
+        <argsstring>(Func &amp;&amp;func, ARGS &amp;&amp;... args)</argsstring>
+        <name>execute</name>
+        <param>
+          <type>Func &amp;&amp;</type>
+          <declname>func</declname>
+        </param>
+        <param>
+          <type>ARGS &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/MTObjects/MTRootReader.hpp" line="21" column="8" bodyfile="lib/MTObjects/MTRootReader.hpp" bodystart="34" bodyend="39"/>
+        <references refid="class_files_manager_1a2b619786ba65a7ac1e701fc61e2409ae" compoundref="_files_manager_8hpp" startline="32" endline="32">FilesManager::getListFiles</references>
+        <references refid="class_m_t_root_reader_1a46d681c951b18ad571dcbc5283ba8bba" compoundref="_m_t_root_reader_8hpp" startline="29">m_files</references>
+        <references refid="class_m_t_root_reader_1a502ca89edf653e2e55e697a2135b7eef" compoundref="_m_t_root_reader_8hpp" startline="30">m_MTfiles</references>
+        <references refid="class_m_t_object_1a35c02650eb403bd54e867f93bb26fc47" compoundref="_m_t_object_8hpp" startline="76" endline="99">MTObject::parallelise_function</references>
+        <references refid="_histogramor_8hpp_1ab48a2fa7184e6354788989602c8c8c29">print</references>
+        <referencedby refid="class_run_matrixator_1aa6d13b08060fef07b50d7ab6b35be0d6" compoundref="_run_matrixator_8hpp" startline="122" endline="150">RunMatrixator::run</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_m_t_root_reader_1ac0cd727a88e8f1f2abd1e05d2197fa95" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>MTRootReader::MTRootReader</definition>
+        <argsstring>()</argsstring>
+        <name>MTRootReader</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/MTObjects/MTRootReader.hpp" line="13" column="3" bodyfile="lib/MTObjects/MTRootReader.hpp" bodystart="13" bodyend="13"/>
+      </memberdef>
+      <memberdef kind="function" id="class_m_t_root_reader_1a6df2599a2adf92ce971105fbfac69221" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>MTRootReader::MTRootReader</definition>
+        <argsstring>(Path foldername, int const &amp;nb_files=-1)</argsstring>
+        <name>MTRootReader</name>
+        <param>
+          <type><ref refid="class_path" kindref="compound">Path</ref></type>
+          <declname>foldername</declname>
+        </param>
+        <param>
+          <type>int const &amp;</type>
+          <declname>nb_files</declname>
+          <defval>-1</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/MTObjects/MTRootReader.hpp" line="14" column="3" bodyfile="lib/MTObjects/MTRootReader.hpp" bodystart="14" bodyend="14"/>
+        <references refid="class_m_t_root_reader_1ad8f964e63c97f35e44fc3b11fca88e59" compoundref="_m_t_root_reader_8hpp" startline="15" endline="19">addFolder</references>
+      </memberdef>
+      <memberdef kind="function" id="class_m_t_root_reader_1a198a2f34b1b61cb0c449ba82478a4f22" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool MTRootReader::nextFilename</definition>
+        <argsstring>(std::string &amp;filename)</argsstring>
+        <name>nextFilename</name>
+        <param>
+          <type>std::string &amp;</type>
+          <declname>filename</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/MTObjects/MTRootReader.hpp" line="23" column="8" bodyfile="lib/MTObjects/MTRootReader.hpp" bodystart="23" bodyend="23"/>
+        <references refid="class_m_t_vector_1a824a9ff009dde921eec4759c69f74ca7" compoundref="_m_t_list_8hpp" startline="81" endline="91">MTVector&lt; T &gt;::getNext</references>
+        <references refid="class_m_t_root_reader_1a502ca89edf653e2e55e697a2135b7eef" compoundref="_m_t_root_reader_8hpp" startline="30">m_MTfiles</references>
+        <referencedby refid="class_m_t_root_reader_1ad46b9bf07eeab40b80fa9a504d5aaf52" compoundref="_m_t_root_reader_8hpp" startline="42" endline="51">Read</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="class_m_t_root_reader_1ad46b9bf07eeab40b80fa9a504d5aaf52" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Func</type>
+          </param>
+          <param>
+            <type>class...</type>
+            <declname>ARGS</declname>
+            <defname>ARGS</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void MTRootReader::Read</definition>
+        <argsstring>(MTRootReader &amp;MTreader, Func function, ARGS &amp;&amp;... args)</argsstring>
+        <name>Read</name>
+        <param>
+          <type><ref refid="class_m_t_root_reader" kindref="compound">MTRootReader</ref> &amp;</type>
+          <declname>MTreader</declname>
+        </param>
+        <param>
+          <type>Func</type>
+          <declname>function</declname>
+        </param>
+        <param>
+          <type>ARGS &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/MTObjects/MTRootReader.hpp" line="27" column="15" bodyfile="lib/MTObjects/MTRootReader.hpp" bodystart="42" bodyend="51"/>
+        <references refid="class_m_t_root_reader_1a198a2f34b1b61cb0c449ba82478a4f22" compoundref="_m_t_root_reader_8hpp" startline="23" endline="23">nextFilename</references>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="4">
+        <label>Path</label>
+        <link refid="class_path"/>
+        <childnode refid="5" relation="usage">
+          <edgelabel>m_recursive_folders</edgelabel>
+        </childnode>
+      </node>
+      <node id="5">
+        <label>Folders</label>
+        <link refid="class_folders"/>
+      </node>
+      <node id="2">
+        <label>MTVector&lt; std::string &gt;</label>
+        <link refid="class_m_t_vector"/>
+      </node>
+      <node id="3">
+        <label>FilesManager</label>
+        <link refid="class_files_manager"/>
+        <childnode refid="4" relation="usage">
+          <edgelabel>m_path</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>MTRootReader</label>
+        <link refid="class_m_t_root_reader"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>m_MTfiles</edgelabel>
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>m_files</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="lib/MTObjects/MTRootReader.hpp" line="10" column="1" bodyfile="lib/MTObjects/MTRootReader.hpp" bodystart="11" bodyend="31"/>
+    <listofallmembers>
+      <member refid="class_m_t_root_reader_1ad8f964e63c97f35e44fc3b11fca88e59" prot="public" virt="non-virtual"><scope>MTRootReader</scope><name>addFolder</name></member>
+      <member refid="class_m_t_root_reader_1a506f517a4772f5ec3b8bbf5c835a3490" prot="public" virt="non-virtual"><scope>MTRootReader</scope><name>execute</name></member>
+      <member refid="class_m_t_root_reader_1a46d681c951b18ad571dcbc5283ba8bba" prot="private" virt="non-virtual"><scope>MTRootReader</scope><name>m_files</name></member>
+      <member refid="class_m_t_root_reader_1a502ca89edf653e2e55e697a2135b7eef" prot="private" virt="non-virtual"><scope>MTRootReader</scope><name>m_MTfiles</name></member>
+      <member refid="class_m_t_root_reader_1ac0cd727a88e8f1f2abd1e05d2197fa95" prot="public" virt="non-virtual"><scope>MTRootReader</scope><name>MTRootReader</name></member>
+      <member refid="class_m_t_root_reader_1a6df2599a2adf92ce971105fbfac69221" prot="public" virt="non-virtual"><scope>MTRootReader</scope><name>MTRootReader</name></member>
+      <member refid="class_m_t_root_reader_1a198a2f34b1b61cb0c449ba82478a4f22" prot="public" virt="non-virtual"><scope>MTRootReader</scope><name>nextFilename</name></member>
+      <member refid="class_m_t_root_reader_1ad46b9bf07eeab40b80fa9a504d5aaf52" prot="private" virt="non-virtual"><scope>MTRootReader</scope><name>Read</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="test" kind="page">
+    <compoundname>test</compoundname>
+    <title>Test List</title>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><variablelist>
+<varlistentry><term>Member <ref refid="class_faster_reader_1ad88f1dfb85bb64d8526770ffbeca5607" kindref="member">FasterReader::setHit</ref>  (<ref refid="class_hit" kindref="compound">Hit</ref> *hit)</term></varlistentry>
+<listitem><para><anchor id="test_1_test000001"/>Set the <ref refid="class_hit" kindref="compound">Hit</ref> object \nNever tested, but should work !  </para>
+</listitem>
+<varlistentry><term>Class <ref refid="class_m_t_t_hist" kindref="compound">MTTHist&lt; THist &gt;</ref>  </term></varlistentry>
+<listitem><para><anchor id="test_1_test000002"/>In mono mode (MTTHIST_MONO), only one histogram is created UNDER DEVELOPPEMENT</para>
+</listitem>
+</variablelist>
+</para>
+    </detaileddescription>
+    <location file="test"/>
+  </compounddef>
+</doxygen>

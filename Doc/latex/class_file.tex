@@ -1,0 +1,516 @@
+\doxysection{File Class Reference}
+\label{class_file}\index{File@{File}}
+
+
+EXPERIMENTAL Composed of a \doxyref{Path}{p.}{class_path} and a \doxyref{Filename}{p.}{class_filename}.  
+
+
+
+
+{\ttfamily \#include $<$files\+\_\+functions.\+hpp$>$}
+
+
+
+Collaboration diagram for File\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=298pt]{class_file__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+auto \textbf{ c\+\_\+str} ()
+\item 
+auto \textbf{ c\+\_\+str} () const
+\item 
+void \textbf{ check\+Mode} (std\+::string const \&mode)
+\item 
+bool \textbf{ exists} () const
+\item 
+std\+::string const  \& \textbf{ extension} () const
+\item 
+\textbf{ File} ()
+\item 
+\textbf{ File} (const char $\ast$file, std\+::string const \&mode=\char`\"{}\char`\"{})
+\item 
+\textbf{ File} (\textbf{ File} const \&file)
+\item 
+\textbf{ File} (\textbf{ Path} const \&\textbf{ path}, \textbf{ Filename} const \&\textbf{ filename}, std\+::string const \&mode=\char`\"{}\char`\"{})
+\item 
+\textbf{ File} (std\+::string const \&file, std\+::string const \&mode=\char`\"{}\char`\"{})
+\item 
+\textbf{ Filename} const  \& \textbf{ filename} () const
+\item 
+\textbf{ Folder} const  \& \textbf{ folder} () const
+\item 
+std\+::string const  \& \textbf{ get} () const
+\item 
+void \textbf{ make\+Path} ()
+\item 
+\textbf{ Filename} const  \& \textbf{ name} () const
+\item 
+bool const  \& \textbf{ ok} ()
+\item 
+\textbf{ operator bool} () const \&
+\item 
+\textbf{ operator std\+::string} () const \&
+\item 
+\textbf{ File} \& \textbf{ operator=} (const char $\ast$file)
+\item 
+\textbf{ File} \& \textbf{ operator=} (\textbf{ File} const \&file)
+\item 
+\textbf{ File} \& \textbf{ operator=} (std\+::string const \&file)
+\item 
+\textbf{ Path} const  \& \textbf{ path} () const
+\item 
+void \textbf{ set\+Extension} (std\+::string const \&new\+\_\+extension)
+\item 
+std\+::string const  \& \textbf{ short\+Name} () const
+\item 
+auto \textbf{ size} (std\+::string const \&unit=\char`\"{}o\char`\"{}) const
+\item 
+std\+::string const  \& \textbf{ string} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \textbf{ check} ()
+\item 
+void \textbf{ fill} (std\+::string const \&file)
+\item 
+void \textbf{ update} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \textbf{ check\+\_\+verif} = false
+\item 
+std\+::string \textbf{ m\+\_\+file}
+\item 
+\textbf{ Filename} \textbf{ m\+\_\+filename}
+\item 
+bool \textbf{ m\+\_\+ok} = false
+\item 
+\textbf{ Path} \textbf{ m\+\_\+path}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+EXPERIMENTAL Composed of a \doxyref{Path}{p.}{class_path} and a \doxyref{Filename}{p.}{class_filename}. 
+
+A \doxyref{File}{p.}{class_file} object is composed of a \doxyref{Path}{p.}{class_path} and a \doxyref{Filename}{p.}{class_filename} object, which are composed of \+:
+\begin{DoxyItemize}
+\item A list of folder that forms the \doxyref{Path}{p.}{class_path} to the file
+\item A short name and an extension for the \doxyref{Filename}{p.}{class_filename} \begin{DoxyRefDesc}{Todo}
+\item[\textbf{ Todo}]rethink the check\+Mode logic ... \end{DoxyRefDesc}
+
+\end{DoxyItemize}
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\label{class_file_ae039af5807fc385f41b60644725d15d0}} 
+\index{File@{File}!File@{File}}
+\index{File@{File}!File@{File}}
+\doxysubsubsection{File()\hspace{0.1cm}{\footnotesize\ttfamily [1/5]}}
+{\footnotesize\ttfamily File\+::\+File (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_file_a12a42d9d804defcc8550af0b38a1cf54}} 
+\index{File@{File}!File@{File}}
+\index{File@{File}!File@{File}}
+\doxysubsubsection{File()\hspace{0.1cm}{\footnotesize\ttfamily [2/5]}}
+{\footnotesize\ttfamily File\+::\+File (\begin{DoxyParamCaption}\item[{\textbf{ File} const \&}]{file }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_file_a5237343fec40bceaa8cf7fc7c4026426}} 
+\index{File@{File}!File@{File}}
+\index{File@{File}!File@{File}}
+\doxysubsubsection{File()\hspace{0.1cm}{\footnotesize\ttfamily [3/5]}}
+{\footnotesize\ttfamily File\+::\+File (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{file,  }\item[{std\+::string const \&}]{mode = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_file_a5237343fec40bceaa8cf7fc7c4026426_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_file_a5304e25b296fbc6a26a56fc9f4bdbfdd}} 
+\index{File@{File}!File@{File}}
+\index{File@{File}!File@{File}}
+\doxysubsubsection{File()\hspace{0.1cm}{\footnotesize\ttfamily [4/5]}}
+{\footnotesize\ttfamily File\+::\+File (\begin{DoxyParamCaption}\item[{const char $\ast$}]{file,  }\item[{std\+::string const \&}]{mode = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_file_a5304e25b296fbc6a26a56fc9f4bdbfdd_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_file_a84e9ad3641a6cff0d371dddb2ea0f73e}} 
+\index{File@{File}!File@{File}}
+\index{File@{File}!File@{File}}
+\doxysubsubsection{File()\hspace{0.1cm}{\footnotesize\ttfamily [5/5]}}
+{\footnotesize\ttfamily File\+::\+File (\begin{DoxyParamCaption}\item[{\textbf{ Path} const \&}]{path,  }\item[{\textbf{ Filename} const \&}]{filename,  }\item[{std\+::string const \&}]{mode = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_file_a84e9ad3641a6cff0d371dddb2ea0f73e_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\label{class_file_adcc058679f1c4e1b9561aa7043720ade}} 
+\index{File@{File}!c\_str@{c\_str}}
+\index{c\_str@{c\_str}!File@{File}}
+\doxysubsubsection{c\_str()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily auto File\+::c\+\_\+str (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_file_adcc058679f1c4e1b9561aa7043720ade_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_file_aed1b1495883032cf6ad4f57e83564057}} 
+\index{File@{File}!c\_str@{c\_str}}
+\index{c\_str@{c\_str}!File@{File}}
+\doxysubsubsection{c\_str()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily auto File\+::c\+\_\+str (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_file_a6b15fde4d8bb49099cdf7f27c4f36fae}} 
+\index{File@{File}!check@{check}}
+\index{check@{check}!File@{File}}
+\doxysubsubsection{check()}
+{\footnotesize\ttfamily void File\+::check (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_file_a6b15fde4d8bb49099cdf7f27c4f36fae_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_file_a6b15fde4d8bb49099cdf7f27c4f36fae_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_file_a51dd588f64b9d77346a7865de4f2c055}} 
+\index{File@{File}!checkMode@{checkMode}}
+\index{checkMode@{checkMode}!File@{File}}
+\doxysubsubsection{checkMode()}
+{\footnotesize\ttfamily void File\+::check\+Mode (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{mode }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=268pt]{class_file_a51dd588f64b9d77346a7865de4f2c055_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_file_a53118ce36851cb1c6845a82f915fd8ba}} 
+\index{File@{File}!exists@{exists}}
+\index{exists@{exists}!File@{File}}
+\doxysubsubsection{exists()}
+{\footnotesize\ttfamily bool File\+::exists (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_file_a53118ce36851cb1c6845a82f915fd8ba_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_file_a53118ce36851cb1c6845a82f915fd8ba_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_file_ac76f2f11d5ae2a206735e4c9172677e2}} 
+\index{File@{File}!extension@{extension}}
+\index{extension@{extension}!File@{File}}
+\doxysubsubsection{extension()}
+{\footnotesize\ttfamily std\+::string const\& File\+::extension (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=320pt]{class_file_ac76f2f11d5ae2a206735e4c9172677e2_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_file_a0860c6b771d42f74d5c3fdc3fc820332}} 
+\index{File@{File}!filename@{filename}}
+\index{filename@{filename}!File@{File}}
+\doxysubsubsection{filename()}
+{\footnotesize\ttfamily \textbf{ Filename} const\& File\+::filename (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_file_ac3774fc193239a9a83f6974e9a79f9c4}} 
+\index{File@{File}!fill@{fill}}
+\index{fill@{fill}!File@{File}}
+\doxysubsubsection{fill()}
+{\footnotesize\ttfamily void File\+::fill (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{file }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_file_ac3774fc193239a9a83f6974e9a79f9c4_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=257pt]{class_file_ac3774fc193239a9a83f6974e9a79f9c4_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_file_ae66434e6a61f2a76b09c3480bcff4fba}} 
+\index{File@{File}!folder@{folder}}
+\index{folder@{folder}!File@{File}}
+\doxysubsubsection{folder()}
+{\footnotesize\ttfamily \textbf{ Folder} const\& File\+::folder (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_file_ae66434e6a61f2a76b09c3480bcff4fba_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_file_a256122f7b2c78754d7c5588872428f41}} 
+\index{File@{File}!get@{get}}
+\index{get@{get}!File@{File}}
+\doxysubsubsection{get()}
+{\footnotesize\ttfamily std\+::string const\& File\+::get (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=246pt]{class_file_a256122f7b2c78754d7c5588872428f41_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_file_aec78af028103207cb2ce88c0120dd4f6}} 
+\index{File@{File}!makePath@{makePath}}
+\index{makePath@{makePath}!File@{File}}
+\doxysubsubsection{makePath()}
+{\footnotesize\ttfamily void File\+::make\+Path (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_file_aec78af028103207cb2ce88c0120dd4f6_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_file_aec78af028103207cb2ce88c0120dd4f6_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_file_ab08b6536403bbea4df3adf514fa92768}} 
+\index{File@{File}!name@{name}}
+\index{name@{name}!File@{File}}
+\doxysubsubsection{name()}
+{\footnotesize\ttfamily \textbf{ Filename} const\& File\+::name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_file_a620683073a1fa00cb389e5afec3d0469}} 
+\index{File@{File}!ok@{ok}}
+\index{ok@{ok}!File@{File}}
+\doxysubsubsection{ok()}
+{\footnotesize\ttfamily bool const\& File\+::ok (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_file_ad621a4180e78d12a5d464d93b603d4a2}} 
+\index{File@{File}!operator bool@{operator bool}}
+\index{operator bool@{operator bool}!File@{File}}
+\doxysubsubsection{operator bool()}
+{\footnotesize\ttfamily File\+::operator bool (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const \&\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_file_a481cb3fd778f11cd216ca1e68308a2a9}} 
+\index{File@{File}!operator std::string@{operator std::string}}
+\index{operator std::string@{operator std::string}!File@{File}}
+\doxysubsubsection{operator std::string()}
+{\footnotesize\ttfamily File\+::operator std\+::string (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const \&\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_file_a731756d54a6a41c2fde1630f1b97cb78}} 
+\index{File@{File}!operator=@{operator=}}
+\index{operator=@{operator=}!File@{File}}
+\doxysubsubsection{operator=()\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \textbf{ File}\& File\+::operator= (\begin{DoxyParamCaption}\item[{const char $\ast$}]{file }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_file_a731756d54a6a41c2fde1630f1b97cb78_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_file_a9bab12c1d1eb8eb255f33d01d86d225c}} 
+\index{File@{File}!operator=@{operator=}}
+\index{operator=@{operator=}!File@{File}}
+\doxysubsubsection{operator=()\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \textbf{ File}\& File\+::operator= (\begin{DoxyParamCaption}\item[{\textbf{ File} const \&}]{file }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_file_a900ed41b6c4fbcec93e4306e2d8b0c35}} 
+\index{File@{File}!operator=@{operator=}}
+\index{operator=@{operator=}!File@{File}}
+\doxysubsubsection{operator=()\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \textbf{ File}\& File\+::operator= (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{file }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_file_a900ed41b6c4fbcec93e4306e2d8b0c35_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_file_ad1ad54af9ff70a91691eed58bdf7e76f}} 
+\index{File@{File}!path@{path}}
+\index{path@{path}!File@{File}}
+\doxysubsubsection{path()}
+{\footnotesize\ttfamily \textbf{ Path} const\& File\+::path (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_file_af4dee1c79bf496d505633211177c6ce3}} 
+\index{File@{File}!setExtension@{setExtension}}
+\index{setExtension@{setExtension}!File@{File}}
+\doxysubsubsection{setExtension()}
+{\footnotesize\ttfamily void File\+::set\+Extension (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{new\+\_\+extension }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_file_af4dee1c79bf496d505633211177c6ce3_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_file_af4dee1c79bf496d505633211177c6ce3_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_file_a4162125761930208891770416c498828}} 
+\index{File@{File}!shortName@{shortName}}
+\index{shortName@{shortName}!File@{File}}
+\doxysubsubsection{shortName()}
+{\footnotesize\ttfamily std\+::string const\& File\+::short\+Name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=332pt]{class_file_a4162125761930208891770416c498828_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_file_a4162125761930208891770416c498828_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_file_a43e3d087ec47881811167f3a20a99cfa}} 
+\index{File@{File}!size@{size}}
+\index{size@{size}!File@{File}}
+\doxysubsubsection{size()}
+{\footnotesize\ttfamily auto File\+::size (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{unit = {\ttfamily \char`\"{}o\char`\"{}} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=231pt]{class_file_a43e3d087ec47881811167f3a20a99cfa_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=299pt]{class_file_a43e3d087ec47881811167f3a20a99cfa_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_file_a899e6a7c528ab2824c7c584c4ee63073}} 
+\index{File@{File}!string@{string}}
+\index{string@{string}!File@{File}}
+\doxysubsubsection{string()}
+{\footnotesize\ttfamily std\+::string const\& File\+::string (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_file_a899e6a7c528ab2824c7c584c4ee63073_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_file_a8f6a2ccec2d48112847c89541d13bc10}} 
+\index{File@{File}!update@{update}}
+\index{update@{update}!File@{File}}
+\doxysubsubsection{update()}
+{\footnotesize\ttfamily void File\+::update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_file_a8f6a2ccec2d48112847c89541d13bc10_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_file_a8f6a2ccec2d48112847c89541d13bc10_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\label{class_file_a29cc003db307b52a1f392e1e5bf0fb07}} 
+\index{File@{File}!check\_verif@{check\_verif}}
+\index{check\_verif@{check\_verif}!File@{File}}
+\doxysubsubsection{check\_verif}
+{\footnotesize\ttfamily bool File\+::check\+\_\+verif = false\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_file_a36d935fccef5b644b0de60bdbc6e67b2}} 
+\index{File@{File}!m\_file@{m\_file}}
+\index{m\_file@{m\_file}!File@{File}}
+\doxysubsubsection{m\_file}
+{\footnotesize\ttfamily std\+::string File\+::m\+\_\+file\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_file_ab8b4c4873ffdc891898f877ba31b1b49}} 
+\index{File@{File}!m\_filename@{m\_filename}}
+\index{m\_filename@{m\_filename}!File@{File}}
+\doxysubsubsection{m\_filename}
+{\footnotesize\ttfamily \textbf{ Filename} File\+::m\+\_\+filename\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_file_ac3482b203711cc5895748f7e941f96a0}} 
+\index{File@{File}!m\_ok@{m\_ok}}
+\index{m\_ok@{m\_ok}!File@{File}}
+\doxysubsubsection{m\_ok}
+{\footnotesize\ttfamily bool File\+::m\+\_\+ok = false\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_file_a972c4ffa95d0c37406a5e1189f420064}} 
+\index{File@{File}!m\_path@{m\_path}}
+\index{m\_path@{m\_path}!File@{File}}
+\doxysubsubsection{m\_path}
+{\footnotesize\ttfamily \textbf{ Path} File\+::m\+\_\+path\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+lib/\textbf{ files\+\_\+functions.\+hpp}\end{DoxyCompactItemize}

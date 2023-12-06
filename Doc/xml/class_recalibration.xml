@@ -1,0 +1,569 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="class_recalibration" kind="class" language="C++" prot="public">
+    <compoundname>Recalibration</compoundname>
+    <includes refid="_spectra_alignator_8hpp" local="no">SpectraAlignator.hpp</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_recalibration_1ab2b32920bd00fc958c82740efd306fac" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; double &gt;</type>
+        <definition>std::vector&lt;double&gt; Recalibration::m_parameters</definition>
+        <argsstring></argsstring>
+        <name>m_parameters</name>
+        <initializer>= std::vector&lt;double&gt;(5)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="63" column="15" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="63" bodyend="-1"/>
+        <referencedby refid="class_recalibration_1a1b6076eaf677ac06dd70846a49479ab2" compoundref="_spectra_alignator_8hpp" startline="25" endline="25">a0</referencedby>
+        <referencedby refid="class_recalibration_1ac00b395bd23d0b31ecfc17eecf3ec562" compoundref="_spectra_alignator_8hpp" startline="26" endline="26">a1</referencedby>
+        <referencedby refid="class_recalibration_1a32775f494bdbb0ca5d4e6200a176f51b" compoundref="_spectra_alignator_8hpp" startline="27" endline="27">a2</referencedby>
+        <referencedby refid="class_recalibration_1afb0a1a290ee2913fab53a51d1080fb4f" compoundref="_spectra_alignator_8hpp" startline="28" endline="28">a3</referencedby>
+        <referencedby refid="class_recalibration_1a5fd3c1468ba53b676933f9c39ce8ca06" compoundref="_spectra_alignator_8hpp" startline="29" endline="29">aSqrt</referencedby>
+        <referencedby refid="class_recalibration_1ae86101c1d4238dd16bffd4911ee8092b" compoundref="_spectra_alignator_8hpp" startline="24" endline="24">getParameter</referencedby>
+        <referencedby refid="class_recalibration_1ad5e0d1f201966edfef75b060ca6b80ed" compoundref="_spectra_alignator_8hpp" startline="23" endline="23">operator[]</referencedby>
+        <referencedby refid="class_recalibration_1a9ac1a9416a818ee37a4a5fd8ad6120c2" compoundref="_spectra_alignator_8hpp" startline="16" endline="19">Recalibration</referencedby>
+        <referencedby refid="class_recalibration_1ac98afc36338de322cde52205b01971ff" compoundref="_spectra_alignator_8hpp" startline="41" endline="41">setParameter</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_recalibration_1acb2b1f60462430f242447dd7f2286c66" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto &amp;</type>
+        <definition>auto&amp; Recalibration::a0</definition>
+        <argsstring>()</argsstring>
+        <name>a0</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="34" column="16" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="34" bodyend="34"/>
+        <references refid="class_recalibration_1ab2b32920bd00fc958c82740efd306fac" compoundref="_spectra_alignator_8hpp" startline="63">m_parameters</references>
+      </memberdef>
+      <memberdef kind="function" id="class_recalibration_1a1b6076eaf677ac06dd70846a49479ab2" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto const  &amp;</type>
+        <definition>auto const&amp; Recalibration::a0</definition>
+        <argsstring>() const</argsstring>
+        <name>a0</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="25" column="22" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="25" bodyend="25"/>
+        <references refid="class_recalibration_1ab2b32920bd00fc958c82740efd306fac" compoundref="_spectra_alignator_8hpp" startline="63">m_parameters</references>
+        <referencedby refid="class_recalibration_1a4d5a3852cdb8f5d02282eb7c37a7df6c" compoundref="_spectra_alignator_8hpp" startline="43" endline="43">a0</referencedby>
+        <referencedby refid="class_recalibration_1a6ce90b10d69409fdbc385ba6f990e073" compoundref="_spectra_alignator_8hpp" startline="51" endline="51">calculate</referencedby>
+        <referencedby refid="_spectra_alignator_8hpp_1a1c2f6d6b9b8d19b513889e59666d3967" compoundref="_spectra_alignator_8hpp" startline="66" endline="71">operator&lt;&lt;</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_recalibration_1a4d5a3852cdb8f5d02282eb7c37a7df6c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto &amp;</type>
+        <definition>auto&amp; Recalibration::a0</definition>
+        <argsstring>(double const &amp;a0)</argsstring>
+        <name>a0</name>
+        <param>
+          <type>double const &amp;</type>
+          <declname>a0</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="43" column="16" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="43" bodyend="43"/>
+        <references refid="class_recalibration_1a1b6076eaf677ac06dd70846a49479ab2" compoundref="_spectra_alignator_8hpp" startline="25" endline="25">a0</references>
+        <references refid="class_recalibration_1ab2b32920bd00fc958c82740efd306fac" compoundref="_spectra_alignator_8hpp" startline="63">m_parameters</references>
+      </memberdef>
+      <memberdef kind="function" id="class_recalibration_1af0c8f7f42525ded09b34e7a51b86c916" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto &amp;</type>
+        <definition>auto&amp; Recalibration::a1</definition>
+        <argsstring>()</argsstring>
+        <name>a1</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="35" column="16" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="35" bodyend="35"/>
+        <references refid="class_recalibration_1ab2b32920bd00fc958c82740efd306fac" compoundref="_spectra_alignator_8hpp" startline="63">m_parameters</references>
+      </memberdef>
+      <memberdef kind="function" id="class_recalibration_1ac00b395bd23d0b31ecfc17eecf3ec562" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto const  &amp;</type>
+        <definition>auto const&amp; Recalibration::a1</definition>
+        <argsstring>() const</argsstring>
+        <name>a1</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="26" column="22" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="26" bodyend="26"/>
+        <references refid="class_recalibration_1ab2b32920bd00fc958c82740efd306fac" compoundref="_spectra_alignator_8hpp" startline="63">m_parameters</references>
+        <referencedby refid="class_recalibration_1a54dbf3d380efae15883f94d5275dfbf1" compoundref="_spectra_alignator_8hpp" startline="44" endline="44">a1</referencedby>
+        <referencedby refid="class_recalibration_1a6ce90b10d69409fdbc385ba6f990e073" compoundref="_spectra_alignator_8hpp" startline="51" endline="51">calculate</referencedby>
+        <referencedby refid="_spectra_alignator_8hpp_1a1c2f6d6b9b8d19b513889e59666d3967" compoundref="_spectra_alignator_8hpp" startline="66" endline="71">operator&lt;&lt;</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_recalibration_1a54dbf3d380efae15883f94d5275dfbf1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto &amp;</type>
+        <definition>auto&amp; Recalibration::a1</definition>
+        <argsstring>(double const &amp;a1)</argsstring>
+        <name>a1</name>
+        <param>
+          <type>double const &amp;</type>
+          <declname>a1</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="44" column="16" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="44" bodyend="44"/>
+        <references refid="class_recalibration_1ac00b395bd23d0b31ecfc17eecf3ec562" compoundref="_spectra_alignator_8hpp" startline="26" endline="26">a1</references>
+        <references refid="class_recalibration_1ab2b32920bd00fc958c82740efd306fac" compoundref="_spectra_alignator_8hpp" startline="63">m_parameters</references>
+      </memberdef>
+      <memberdef kind="function" id="class_recalibration_1acb6aa7f788871cf8289ebfad7bb5f661" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto &amp;</type>
+        <definition>auto&amp; Recalibration::a2</definition>
+        <argsstring>()</argsstring>
+        <name>a2</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="36" column="16" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="36" bodyend="36"/>
+        <references refid="class_recalibration_1ab2b32920bd00fc958c82740efd306fac" compoundref="_spectra_alignator_8hpp" startline="63">m_parameters</references>
+      </memberdef>
+      <memberdef kind="function" id="class_recalibration_1a32775f494bdbb0ca5d4e6200a176f51b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto const  &amp;</type>
+        <definition>auto const&amp; Recalibration::a2</definition>
+        <argsstring>() const</argsstring>
+        <name>a2</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="27" column="22" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="27" bodyend="27"/>
+        <references refid="class_recalibration_1ab2b32920bd00fc958c82740efd306fac" compoundref="_spectra_alignator_8hpp" startline="63">m_parameters</references>
+        <referencedby refid="class_recalibration_1a844c6526e701a6d88507bb761bbc30bf" compoundref="_spectra_alignator_8hpp" startline="45" endline="45">a2</referencedby>
+        <referencedby refid="class_recalibration_1a6ce90b10d69409fdbc385ba6f990e073" compoundref="_spectra_alignator_8hpp" startline="51" endline="51">calculate</referencedby>
+        <referencedby refid="_spectra_alignator_8hpp_1a1c2f6d6b9b8d19b513889e59666d3967" compoundref="_spectra_alignator_8hpp" startline="66" endline="71">operator&lt;&lt;</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_recalibration_1a844c6526e701a6d88507bb761bbc30bf" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto &amp;</type>
+        <definition>auto&amp; Recalibration::a2</definition>
+        <argsstring>(double const &amp;a2)</argsstring>
+        <name>a2</name>
+        <param>
+          <type>double const &amp;</type>
+          <declname>a2</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="45" column="16" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="45" bodyend="45"/>
+        <references refid="class_recalibration_1a32775f494bdbb0ca5d4e6200a176f51b" compoundref="_spectra_alignator_8hpp" startline="27" endline="27">a2</references>
+        <references refid="class_recalibration_1ab2b32920bd00fc958c82740efd306fac" compoundref="_spectra_alignator_8hpp" startline="63">m_parameters</references>
+      </memberdef>
+      <memberdef kind="function" id="class_recalibration_1a4a040444a51c8fb8d9e3f75496832ca4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto &amp;</type>
+        <definition>auto&amp; Recalibration::a3</definition>
+        <argsstring>()</argsstring>
+        <name>a3</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="37" column="16" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="37" bodyend="37"/>
+        <references refid="class_recalibration_1ab2b32920bd00fc958c82740efd306fac" compoundref="_spectra_alignator_8hpp" startline="63">m_parameters</references>
+      </memberdef>
+      <memberdef kind="function" id="class_recalibration_1afb0a1a290ee2913fab53a51d1080fb4f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto const  &amp;</type>
+        <definition>auto const&amp; Recalibration::a3</definition>
+        <argsstring>() const</argsstring>
+        <name>a3</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="28" column="22" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="28" bodyend="28"/>
+        <references refid="class_recalibration_1ab2b32920bd00fc958c82740efd306fac" compoundref="_spectra_alignator_8hpp" startline="63">m_parameters</references>
+        <referencedby refid="class_recalibration_1a126c31e5ccd9cc3e4efacc7ba82be9e9" compoundref="_spectra_alignator_8hpp" startline="46" endline="46">a3</referencedby>
+        <referencedby refid="_spectra_alignator_8hpp_1a1c2f6d6b9b8d19b513889e59666d3967" compoundref="_spectra_alignator_8hpp" startline="66" endline="71">operator&lt;&lt;</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_recalibration_1a126c31e5ccd9cc3e4efacc7ba82be9e9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto &amp;</type>
+        <definition>auto&amp; Recalibration::a3</definition>
+        <argsstring>(double const &amp;a3)</argsstring>
+        <name>a3</name>
+        <param>
+          <type>double const &amp;</type>
+          <declname>a3</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="46" column="16" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="46" bodyend="46"/>
+        <references refid="class_recalibration_1afb0a1a290ee2913fab53a51d1080fb4f" compoundref="_spectra_alignator_8hpp" startline="28" endline="28">a3</references>
+        <references refid="class_recalibration_1ab2b32920bd00fc958c82740efd306fac" compoundref="_spectra_alignator_8hpp" startline="63">m_parameters</references>
+      </memberdef>
+      <memberdef kind="function" id="class_recalibration_1a5b39212075300ce2b67d68e4829b81fd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto &amp;</type>
+        <definition>auto&amp; Recalibration::aSqrt</definition>
+        <argsstring>()</argsstring>
+        <name>aSqrt</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="38" column="16" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="38" bodyend="38"/>
+        <references refid="class_recalibration_1ab2b32920bd00fc958c82740efd306fac" compoundref="_spectra_alignator_8hpp" startline="63">m_parameters</references>
+      </memberdef>
+      <memberdef kind="function" id="class_recalibration_1a5fd3c1468ba53b676933f9c39ce8ca06" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto const  &amp;</type>
+        <definition>auto const&amp; Recalibration::aSqrt</definition>
+        <argsstring>() const</argsstring>
+        <name>aSqrt</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="29" column="22" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="29" bodyend="29"/>
+        <references refid="class_recalibration_1ab2b32920bd00fc958c82740efd306fac" compoundref="_spectra_alignator_8hpp" startline="63">m_parameters</references>
+        <referencedby refid="class_recalibration_1a1552960d9d25edc15b0ef5a4f0cb809c" compoundref="_spectra_alignator_8hpp" startline="47" endline="47">aSqrt</referencedby>
+        <referencedby refid="_spectra_alignator_8hpp_1a1c2f6d6b9b8d19b513889e59666d3967" compoundref="_spectra_alignator_8hpp" startline="66" endline="71">operator&lt;&lt;</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_recalibration_1a1552960d9d25edc15b0ef5a4f0cb809c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto &amp;</type>
+        <definition>auto&amp; Recalibration::aSqrt</definition>
+        <argsstring>(double const &amp;aSqrt)</argsstring>
+        <name>aSqrt</name>
+        <param>
+          <type>double const &amp;</type>
+          <declname>aSqrt</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="47" column="16" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="47" bodyend="47"/>
+        <references refid="class_recalibration_1a5fd3c1468ba53b676933f9c39ce8ca06" compoundref="_spectra_alignator_8hpp" startline="29" endline="29">aSqrt</references>
+        <references refid="class_recalibration_1ab2b32920bd00fc958c82740efd306fac" compoundref="_spectra_alignator_8hpp" startline="63">m_parameters</references>
+      </memberdef>
+      <memberdef kind="function" id="class_recalibration_1aa9421b4e58d718e18ef17a82b4a37fcc" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double Recalibration::calculate</definition>
+        <argsstring>(double const &amp;x)</argsstring>
+        <name>calculate</name>
+        <param>
+          <type>double const &amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="52" column="17" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="52" bodyend="52"/>
+        <references refid="class_recalibration_1a1b6076eaf677ac06dd70846a49479ab2" compoundref="_spectra_alignator_8hpp" startline="25" endline="25">a0</references>
+        <references refid="class_recalibration_1ac00b395bd23d0b31ecfc17eecf3ec562" compoundref="_spectra_alignator_8hpp" startline="26" endline="26">a1</references>
+        <references refid="class_recalibration_1a32775f494bdbb0ca5d4e6200a176f51b" compoundref="_spectra_alignator_8hpp" startline="27" endline="27">a2</references>
+      </memberdef>
+      <memberdef kind="function" id="class_recalibration_1a6ce90b10d69409fdbc385ba6f990e073" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double Recalibration::calculate</definition>
+        <argsstring>(double const &amp;x) const</argsstring>
+        <name>calculate</name>
+        <param>
+          <type>double const &amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="51" column="17" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="51" bodyend="51"/>
+        <references refid="class_recalibration_1a1b6076eaf677ac06dd70846a49479ab2" compoundref="_spectra_alignator_8hpp" startline="25" endline="25">a0</references>
+        <references refid="class_recalibration_1ac00b395bd23d0b31ecfc17eecf3ec562" compoundref="_spectra_alignator_8hpp" startline="26" endline="26">a1</references>
+        <references refid="class_recalibration_1a32775f494bdbb0ca5d4e6200a176f51b" compoundref="_spectra_alignator_8hpp" startline="27" endline="27">a2</references>
+        <referencedby refid="class_minimisator_1a92ceedc5d8e612ed8515faf6657c99a3" compoundref="_spectra_alignator_8hpp" startline="589" endline="616">Minimisator::chi2</referencedby>
+        <referencedby refid="class_recalibration_1a020eb53732eef370a3938eef68c59b5f" compoundref="_spectra_alignator_8hpp" startline="58" endline="58">operator()</referencedby>
+        <referencedby refid="class_spectra_co_1a085a0452438dbffc3452aed6733a9103" compoundref="_spectra_alignator_8hpp" startline="311" endline="320">SpectraCo::recalibrate</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_recalibration_1a01a34a50202c14313dce8b13d393169e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto &amp;</type>
+        <definition>auto&amp; Recalibration::getParameter</definition>
+        <argsstring>(int const &amp;i)</argsstring>
+        <name>getParameter</name>
+        <param>
+          <type>int const &amp;</type>
+          <declname>i</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="33" column="16" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="33" bodyend="33"/>
+        <references refid="class_recalibration_1ab2b32920bd00fc958c82740efd306fac" compoundref="_spectra_alignator_8hpp" startline="63">m_parameters</references>
+      </memberdef>
+      <memberdef kind="function" id="class_recalibration_1ae86101c1d4238dd16bffd4911ee8092b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto const  &amp;</type>
+        <definition>auto const&amp; Recalibration::getParameter</definition>
+        <argsstring>(int const &amp;i) const</argsstring>
+        <name>getParameter</name>
+        <param>
+          <type>int const &amp;</type>
+          <declname>i</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="24" column="22" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="24" bodyend="24"/>
+        <references refid="class_recalibration_1ab2b32920bd00fc958c82740efd306fac" compoundref="_spectra_alignator_8hpp" startline="63">m_parameters</references>
+      </memberdef>
+      <memberdef kind="function" id="class_recalibration_1a020eb53732eef370a3938eef68c59b5f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double Recalibration::operator()</definition>
+        <argsstring>(double const &amp;x)</argsstring>
+        <name>operator()</name>
+        <param>
+          <type>double const &amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="58" column="17" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="58" bodyend="58"/>
+        <references refid="class_recalibration_1a6ce90b10d69409fdbc385ba6f990e073" compoundref="_spectra_alignator_8hpp" startline="51" endline="51">calculate</references>
+      </memberdef>
+      <memberdef kind="function" id="class_recalibration_1a486ef28992aca9993a14923100ad12bc" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double Recalibration::operator()</definition>
+        <argsstring>(double const &amp;x) const</argsstring>
+        <name>operator()</name>
+        <param>
+          <type>double const &amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="59" column="17" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="59" bodyend="59"/>
+        <references refid="class_recalibration_1a6ce90b10d69409fdbc385ba6f990e073" compoundref="_spectra_alignator_8hpp" startline="51" endline="51">calculate</references>
+      </memberdef>
+      <memberdef kind="function" id="class_recalibration_1a53d116a242af33d63a5c17abad7ad35a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto &amp;</type>
+        <definition>auto&amp; Recalibration::operator[]</definition>
+        <argsstring>(int const &amp;i)</argsstring>
+        <name>operator[]</name>
+        <param>
+          <type>int const &amp;</type>
+          <declname>i</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="32" column="16" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="32" bodyend="32"/>
+        <references refid="class_recalibration_1ab2b32920bd00fc958c82740efd306fac" compoundref="_spectra_alignator_8hpp" startline="63">m_parameters</references>
+      </memberdef>
+      <memberdef kind="function" id="class_recalibration_1ad5e0d1f201966edfef75b060ca6b80ed" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto const  &amp;</type>
+        <definition>auto const&amp; Recalibration::operator[]</definition>
+        <argsstring>(int const &amp;i) const</argsstring>
+        <name>operator[]</name>
+        <param>
+          <type>int const &amp;</type>
+          <declname>i</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="23" column="22" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="23" bodyend="23"/>
+        <references refid="class_recalibration_1ab2b32920bd00fc958c82740efd306fac" compoundref="_spectra_alignator_8hpp" startline="63">m_parameters</references>
+      </memberdef>
+      <memberdef kind="function" id="class_recalibration_1aa9dc73a23ffe032a72c50c30efe99929" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Recalibration::Recalibration</definition>
+        <argsstring>(double const &amp;_a0=0, double const &amp;_a1=1, double const &amp;_a2=0, double const &amp;_a3=0, double const &amp;_aSqrt=0)</argsstring>
+        <name>Recalibration</name>
+        <param>
+          <type>double const &amp;</type>
+          <declname>_a0</declname>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type>double const &amp;</type>
+          <declname>_a1</declname>
+          <defval>1</defval>
+        </param>
+        <param>
+          <type>double const &amp;</type>
+          <declname>_a2</declname>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type>double const &amp;</type>
+          <declname>_a3</declname>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type>double const &amp;</type>
+          <declname>_aSqrt</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="11" column="3" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="11" bodyend="14"/>
+      </memberdef>
+      <memberdef kind="function" id="class_recalibration_1a9ac1a9416a818ee37a4a5fd8ad6120c2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Recalibration::Recalibration</definition>
+        <argsstring>(Recalibration const &amp;other)</argsstring>
+        <name>Recalibration</name>
+        <param>
+          <type><ref refid="class_recalibration" kindref="compound">Recalibration</ref> const &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="16" column="3" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="16" bodyend="19"/>
+        <references refid="class_recalibration_1ab2b32920bd00fc958c82740efd306fac" compoundref="_spectra_alignator_8hpp" startline="63">m_parameters</references>
+      </memberdef>
+      <memberdef kind="function" id="class_recalibration_1ac98afc36338de322cde52205b01971ff" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto &amp;</type>
+        <definition>auto&amp; Recalibration::setParameter</definition>
+        <argsstring>(int const &amp;i, double const &amp;a)</argsstring>
+        <name>setParameter</name>
+        <param>
+          <type>int const &amp;</type>
+          <declname>i</declname>
+        </param>
+        <param>
+          <type>double const &amp;</type>
+          <declname>a</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="41" column="16" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="41" bodyend="41"/>
+        <references refid="class_recalibration_1ab2b32920bd00fc958c82740efd306fac" compoundref="_spectra_alignator_8hpp" startline="63">m_parameters</references>
+        <referencedby refid="class_minimisator_1a969310853a267ef440163b92c6a7873a" compoundref="_spectra_alignator_8hpp" startline="581" endline="587">Minimisator::chi2</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_recalibration_1acacda60d186a17af0794f2c72e2d34c6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto &amp;</type>
+        <definition>auto&amp; Recalibration::setParameter</definition>
+        <argsstring>(size_t const &amp;i, double const &amp;a)</argsstring>
+        <name>setParameter</name>
+        <param>
+          <type><ref refid="lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638" kindref="member">size_t</ref> const &amp;</type>
+          <declname>i</declname>
+        </param>
+        <param>
+          <type>double const &amp;</type>
+          <declname>a</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="42" column="16" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="42" bodyend="42"/>
+        <references refid="class_recalibration_1ab2b32920bd00fc958c82740efd306fac" compoundref="_spectra_alignator_8hpp" startline="63">m_parameters</references>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="lib/Classes/SpectraAlignator.hpp" line="8" column="1" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="9" bodyend="64"/>
+    <listofallmembers>
+      <member refid="class_recalibration_1a1b6076eaf677ac06dd70846a49479ab2" prot="public" virt="non-virtual"><scope>Recalibration</scope><name>a0</name></member>
+      <member refid="class_recalibration_1acb2b1f60462430f242447dd7f2286c66" prot="public" virt="non-virtual"><scope>Recalibration</scope><name>a0</name></member>
+      <member refid="class_recalibration_1a4d5a3852cdb8f5d02282eb7c37a7df6c" prot="public" virt="non-virtual"><scope>Recalibration</scope><name>a0</name></member>
+      <member refid="class_recalibration_1ac00b395bd23d0b31ecfc17eecf3ec562" prot="public" virt="non-virtual"><scope>Recalibration</scope><name>a1</name></member>
+      <member refid="class_recalibration_1af0c8f7f42525ded09b34e7a51b86c916" prot="public" virt="non-virtual"><scope>Recalibration</scope><name>a1</name></member>
+      <member refid="class_recalibration_1a54dbf3d380efae15883f94d5275dfbf1" prot="public" virt="non-virtual"><scope>Recalibration</scope><name>a1</name></member>
+      <member refid="class_recalibration_1a32775f494bdbb0ca5d4e6200a176f51b" prot="public" virt="non-virtual"><scope>Recalibration</scope><name>a2</name></member>
+      <member refid="class_recalibration_1acb6aa7f788871cf8289ebfad7bb5f661" prot="public" virt="non-virtual"><scope>Recalibration</scope><name>a2</name></member>
+      <member refid="class_recalibration_1a844c6526e701a6d88507bb761bbc30bf" prot="public" virt="non-virtual"><scope>Recalibration</scope><name>a2</name></member>
+      <member refid="class_recalibration_1afb0a1a290ee2913fab53a51d1080fb4f" prot="public" virt="non-virtual"><scope>Recalibration</scope><name>a3</name></member>
+      <member refid="class_recalibration_1a4a040444a51c8fb8d9e3f75496832ca4" prot="public" virt="non-virtual"><scope>Recalibration</scope><name>a3</name></member>
+      <member refid="class_recalibration_1a126c31e5ccd9cc3e4efacc7ba82be9e9" prot="public" virt="non-virtual"><scope>Recalibration</scope><name>a3</name></member>
+      <member refid="class_recalibration_1a5fd3c1468ba53b676933f9c39ce8ca06" prot="public" virt="non-virtual"><scope>Recalibration</scope><name>aSqrt</name></member>
+      <member refid="class_recalibration_1a5b39212075300ce2b67d68e4829b81fd" prot="public" virt="non-virtual"><scope>Recalibration</scope><name>aSqrt</name></member>
+      <member refid="class_recalibration_1a1552960d9d25edc15b0ef5a4f0cb809c" prot="public" virt="non-virtual"><scope>Recalibration</scope><name>aSqrt</name></member>
+      <member refid="class_recalibration_1a6ce90b10d69409fdbc385ba6f990e073" prot="public" virt="non-virtual"><scope>Recalibration</scope><name>calculate</name></member>
+      <member refid="class_recalibration_1aa9421b4e58d718e18ef17a82b4a37fcc" prot="public" virt="non-virtual"><scope>Recalibration</scope><name>calculate</name></member>
+      <member refid="class_recalibration_1ae86101c1d4238dd16bffd4911ee8092b" prot="public" virt="non-virtual"><scope>Recalibration</scope><name>getParameter</name></member>
+      <member refid="class_recalibration_1a01a34a50202c14313dce8b13d393169e" prot="public" virt="non-virtual"><scope>Recalibration</scope><name>getParameter</name></member>
+      <member refid="class_recalibration_1ab2b32920bd00fc958c82740efd306fac" prot="private" virt="non-virtual"><scope>Recalibration</scope><name>m_parameters</name></member>
+      <member refid="class_recalibration_1a020eb53732eef370a3938eef68c59b5f" prot="public" virt="non-virtual"><scope>Recalibration</scope><name>operator()</name></member>
+      <member refid="class_recalibration_1a486ef28992aca9993a14923100ad12bc" prot="public" virt="non-virtual"><scope>Recalibration</scope><name>operator()</name></member>
+      <member refid="class_recalibration_1ad5e0d1f201966edfef75b060ca6b80ed" prot="public" virt="non-virtual"><scope>Recalibration</scope><name>operator[]</name></member>
+      <member refid="class_recalibration_1a53d116a242af33d63a5c17abad7ad35a" prot="public" virt="non-virtual"><scope>Recalibration</scope><name>operator[]</name></member>
+      <member refid="class_recalibration_1aa9dc73a23ffe032a72c50c30efe99929" prot="public" virt="non-virtual"><scope>Recalibration</scope><name>Recalibration</name></member>
+      <member refid="class_recalibration_1a9ac1a9416a818ee37a4a5fd8ad6120c2" prot="public" virt="non-virtual"><scope>Recalibration</scope><name>Recalibration</name></member>
+      <member refid="class_recalibration_1ac98afc36338de322cde52205b01971ff" prot="public" virt="non-virtual"><scope>Recalibration</scope><name>setParameter</name></member>
+      <member refid="class_recalibration_1acacda60d186a17af0794f2c72e2d34c6" prot="public" virt="non-virtual"><scope>Recalibration</scope><name>setParameter</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

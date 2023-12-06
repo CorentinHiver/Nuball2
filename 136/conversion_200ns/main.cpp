@@ -188,7 +188,7 @@ public:
   auto begin() const {return m_buffer.begin();}
   auto end() const {return m_buffer.begin()+m_size;}
 
-  bool isFull() const {return m_size >= m_buffer.size();}
+  bool isFull() const {return m_size+1 >= m_buffer.size();}
 
   void setStep(size_t const & step) {m_step = step;}
   auto const & step() const {return m_step;}
@@ -344,7 +344,6 @@ void convert(Hit & hit, FasterReader & reader,
   ulong hits_count = 0;
   ulong evts_count = 0;
   ulong trig_count = 0;
-  // std::vector<Hit> buffer(500);
   HitBuffer buffer(500);
   size_t w_buffer_it = 0;
   while (loop<nb_data)
@@ -352,11 +351,6 @@ void convert(Hit & hit, FasterReader & reader,
     tempTree -> GetEntry(gindex[loop++]);
     
     buffer.push_back(hit);
-    // if (w_buffer_it < buffer.size())
-    // {
-    //   buffer[w_buffer_it++] = hit;
-    // }
-    print(hit);
     if (buffer.isFull()) 
     {
       size_t last_event_index = 0; // The index of the last hit of the last event
@@ -555,6 +549,7 @@ void convert(Hit & hit, FasterReader & reader,
       }
       w_buffer_it = 0;
     }
+    buffer.clear();
 
     // if (histoed)
     // {
@@ -847,7 +842,7 @@ int main(int argc, char** argv)
     {
       // Loop over the files in parallel :
       MTFasterReader readerMT(run_path, nb_files);
-      readerMT.execute(convert, calibration, timeshifts, outPath, histos, total_read_size);
+      readerMT.readRaw(convert, calibration, timeshifts, outPath, histos, total_read_size);
 
       // Attempt to bypass the MTFasterReader to see if it is slowing down the process :
   // FilesManager files

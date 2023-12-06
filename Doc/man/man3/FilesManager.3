@@ -1,0 +1,225 @@
+.TH "FilesManager" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+FilesManager
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <FilesManager\&.hpp>\fP
+.PP
+Inherited by \fBMTFilesManager\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "virtual bool \fBaddFiles\fP (std::string const &_filename)"
+.br
+.ti -1c
+.RI "virtual bool \fBaddFolder\fP (std::string folder, long nb_files=\-1, std::vector< std::string > const &extensions={'root', 'fast'})"
+.br
+.ti -1c
+.RI "auto \fBbegin\fP ()"
+.br
+.ti -1c
+.RI "auto \fBbegin\fP () const"
+.br
+.ti -1c
+.RI "float \fBdiskSize\fP () const"
+.br
+.ti -1c
+.RI "auto \fBend\fP ()"
+.br
+.ti -1c
+.RI "auto \fBend\fP () const"
+.br
+.ti -1c
+.RI "\fBFilesManager\fP ()"
+.br
+.ti -1c
+.RI "\fBFilesManager\fP (\fBPath\fP &folder, long nb_files=\-1)"
+.br
+.ti -1c
+.RI "\fBFilesManager\fP (std::string const &folder, long nb_files=\-1)"
+.br
+.ti -1c
+.RI "virtual void \fBflushFiles\fP ()"
+.br
+.ti -1c
+.RI "auto & \fBget\fP ()"
+.br
+.ti -1c
+.RI "auto const  & \fBget\fP () const"
+.br
+.ti -1c
+.RI "\fBsize_t\fP const  & \fBgetCursor\fP () const"
+.br
+.ti -1c
+.RI "virtual std::string \fBgetFile\fP (int const &n=\-1)"
+.br
+.ti -1c
+.RI "\fBListFiles\fP const  & \fBgetFilesInFolder\fP (std::string folder)"
+.br
+.ti -1c
+.RI "\fBListFiles\fP const  & \fBgetListFiles\fP () const"
+.br
+.ti -1c
+.RI "\fBListFolders\fP const  & \fBgetListFolders\fP () const"
+.br
+.ti -1c
+.RI "bool \fBisEmpty\fP () const"
+.br
+.ti -1c
+.RI "bool \fBnextFileName\fP (std::string &filename, \fBsize_t\fP const &step=1)"
+.br
+.ti -1c
+.RI "\fBoperator bool\fP () const"
+.br
+.ti -1c
+.RI "\fBFilesManager\fP const  & \fBoperator=\fP (\fBFilesManager\fP const &other)"
+.br
+.ti -1c
+.RI "void \fBoperator=\fP (\fBListFiles\fP const &list)"
+.br
+.ti -1c
+.RI "std::string \fBoperator[]\fP (int const &n)"
+.br
+.ti -1c
+.RI "\fBPath\fP const  & \fBpath\fP () const"
+.br
+.ti -1c
+.RI "void \fBPrint\fP ()"
+.br
+.ti -1c
+.RI "void \fBprintFolders\fP ()"
+.br
+.ti -1c
+.RI "void \fBsetCursor\fP (int const &_filesCursor)"
+.br
+.ti -1c
+.RI "void \fBsetCursor\fP (\fBsize_t\fP const &_filesCursor)"
+.br
+.ti -1c
+.RI "void \fBsetListFiles\fP (\fBListFiles\fP const &list)"
+.br
+.ti -1c
+.RI "void \fBsetVerbose\fP (bool const &v)"
+.br
+.ti -1c
+.RI "\fBsize_t\fP \fBsize\fP () const"
+.br
+.in -1c
+.SS "Protected Attributes"
+
+.in +1c
+.ti -1c
+.RI "bool \fBisReadable\fP = false"
+.br
+.ti -1c
+.RI "\fBsize_t\fP \fBm_filesCursor\fP = 0"
+.br
+.ti -1c
+.RI "\fBListFiles\fP \fBm_listFiles\fP"
+.br
+.ti -1c
+.RI "std::map< std::string, \fBListFiles\fP > \fBm_listFilesInFolder\fP"
+.br
+.ti -1c
+.RI "\fBListFolders\fP \fBm_listFolder\fP"
+.br
+.ti -1c
+.RI "\fBPath\fP \fBm_path\fP"
+.br
+.ti -1c
+.RI "bool \fBverbose\fP = false"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "FilesManager::FilesManager ()\fC [inline]\fP"
+
+.SS "FilesManager::FilesManager (std::string const & folder, long nb_files = \fC\-1\fP)\fC [inline]\fP"
+
+.SS "FilesManager::FilesManager (\fBPath\fP & folder, long nb_files = \fC\-1\fP)\fC [inline]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "bool FilesManager::addFiles (std::string const & _filename)\fC [virtual]\fP"
+
+.SS "bool FilesManager::addFolder (std::string folder, long nb_files = \fC\-1\fP, std::vector< std::string > const & extensions = \fC{'root', 'fast'}\fP)\fC [virtual]\fP"
+
+.SS "auto FilesManager::begin ()\fC [inline]\fP"
+
+.SS "auto FilesManager::begin () const\fC [inline]\fP"
+
+.SS "float FilesManager::diskSize () const\fC [inline]\fP"
+
+.SS "auto FilesManager::end ()\fC [inline]\fP"
+
+.SS "auto FilesManager::end () const\fC [inline]\fP"
+
+.SS "void FilesManager::flushFiles ()\fC [virtual]\fP"
+
+.SS "auto& FilesManager::get ()\fC [inline]\fP"
+
+.SS "auto const& FilesManager::get () const\fC [inline]\fP"
+
+.SS "\fBsize_t\fP const& FilesManager::getCursor () const\fC [inline]\fP"
+
+.SS "virtual std::string FilesManager::getFile (int const & n = \fC\-1\fP)\fC [inline]\fP, \fC [virtual]\fP"
+
+.SS "\fBListFiles\fP const& FilesManager::getFilesInFolder (std::string folder)\fC [inline]\fP"
+
+.SS "\fBListFiles\fP const& FilesManager::getListFiles () const\fC [inline]\fP"
+
+.SS "\fBListFolders\fP const& FilesManager::getListFolders () const\fC [inline]\fP"
+
+.SS "bool FilesManager::isEmpty () const\fC [inline]\fP"
+
+.SS "bool FilesManager::nextFileName (std::string & filename, \fBsize_t\fP const & step = \fC1\fP)"
+
+.SS "FilesManager::operator bool () const\fC [inline]\fP"
+
+.SS "\fBFilesManager\fP const& FilesManager::operator= (\fBFilesManager\fP const & other)\fC [inline]\fP"
+
+.SS "void FilesManager::operator= (\fBListFiles\fP const & list)\fC [inline]\fP"
+
+.SS "std::string FilesManager::operator[] (int const & n)\fC [inline]\fP"
+
+.SS "\fBPath\fP const& FilesManager::path () const\fC [inline]\fP"
+
+.SS "void FilesManager::Print ()\fC [inline]\fP"
+
+.SS "void FilesManager::printFolders ()\fC [inline]\fP"
+
+.SS "void FilesManager::setCursor (int const & _filesCursor)\fC [inline]\fP"
+
+.SS "void FilesManager::setCursor (\fBsize_t\fP const & _filesCursor)\fC [inline]\fP"
+
+.SS "void FilesManager::setListFiles (\fBListFiles\fP const & list)\fC [inline]\fP"
+
+.SS "void FilesManager::setVerbose (bool const & v)\fC [inline]\fP"
+
+.SS "\fBsize_t\fP FilesManager::size () const\fC [inline]\fP"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "bool FilesManager::isReadable = false\fC [protected]\fP"
+
+.SS "\fBsize_t\fP FilesManager::m_filesCursor = 0\fC [protected]\fP"
+
+.SS "\fBListFiles\fP FilesManager::m_listFiles\fC [protected]\fP"
+
+.SS "std::map<std::string, \fBListFiles\fP> FilesManager::m_listFilesInFolder\fC [protected]\fP"
+
+.SS "\fBListFolders\fP FilesManager::m_listFolder\fC [protected]\fP"
+
+.SS "\fBPath\fP FilesManager::m_path\fC [protected]\fP"
+
+.SS "bool FilesManager::verbose = false\fC [protected]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Nuball2 from the source code\&.

@@ -1,0 +1,5 @@
+<map id="Builder" name="Builder">
+<area shape="rect" id="node1" title="Base class of event builders (pure virtual class)" alt="" coords="87,5,155,32"/>
+<area shape="rect" id="node2" href="$class_coinc_builder.html" title="Coincidence builder." alt="" coords="5,80,109,107"/>
+<area shape="rect" id="node3" href="$class_event_builder.html" title="NOT UP TO DATE !! LATEST STABLE IS EventBuilder_136." alt="" coords="134,80,239,107"/>
+</map>

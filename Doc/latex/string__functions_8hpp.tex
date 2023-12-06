@@ -1,0 +1,184 @@
+\doxysection{lib/string\+\_\+functions.hpp File Reference}
+\label{string__functions_8hpp}\index{lib/string\_functions.hpp@{lib/string\_functions.hpp}}
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+Include dependency graph for string\+\_\+functions.\+hpp\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=211pt]{string__functions_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{string__functions_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \textbf{ first\+Part} (std\+::string const \&string, char const \&sep)
+\item 
+bool \textbf{ found} (std\+::string const \&string, std\+::string const \&substr)
+\item 
+std\+::vector$<$ std\+::string $>$ \textbf{ get\+List} (std\+::string string, char const \&separator, bool const \&remove\+Voids=false)
+\begin{DoxyCompactList}\small\item\em Cuts a string into pieces separated by the given separator like \textquotesingle{};\textquotesingle{} or \textquotesingle{} \textquotesingle{} or \textquotesingle{},\textquotesingle{} ... \end{DoxyCompactList}\item 
+bool \textbf{ is\+Number} (std\+::string const \&string)
+\begin{DoxyCompactList}\small\item\em Returns true if all its characters are digits. \end{DoxyCompactList}\item 
+std\+::string \textbf{ last\+Part} (std\+::string const \&string, char const \&sep)
+\item 
+std\+::string \& \textbf{ pop\+\_\+front} (std\+::string \&string)
+\begin{DoxyCompactList}\small\item\em Removes the first character of a string. \end{DoxyCompactList}\item 
+bool \textbf{ remove} (std\+::string \&string, std\+::string const \&substr)
+\item 
+std\+::string \textbf{ remove\+Blank\+Space} (std\+::string str)
+\begin{DoxyCompactList}\small\item\em Remove all the blank space in a string. \end{DoxyCompactList}\item 
+std\+::string \textbf{ remove\+First\+Part} (std\+::string const \&string, char const \&sep)
+\item 
+std\+::string \textbf{ remove\+Last\+Part} (std\+::string const \&string, char const \&sep)
+\item 
+std\+::string \textbf{ replace\+Character} (std\+::string const \&istring, char const \&ichar, char const \&ochar)
+\begin{DoxyCompactList}\small\item\em Replaces all the instances of one character with another. \end{DoxyCompactList}\item 
+std\+::string \textbf{ rp\+Comma\+WDots} (std\+::string str)
+\begin{DoxyCompactList}\small\item\em Replace all the commas of a std\+::string with dots. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\label{string__functions_8hpp_ab14274457c8b46f1fe9f22745ae2186a}} 
+\index{string\_functions.hpp@{string\_functions.hpp}!firstPart@{firstPart}}
+\index{firstPart@{firstPart}!string\_functions.hpp@{string\_functions.hpp}}
+\doxysubsubsection{firstPart()}
+{\footnotesize\ttfamily std\+::string first\+Part (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{string,  }\item[{char const \&}]{sep }\end{DoxyParamCaption})}
+
+\mbox{\label{string__functions_8hpp_a03fb03d95885354ac3c329693588097b}} 
+\index{string\_functions.hpp@{string\_functions.hpp}!found@{found}}
+\index{found@{found}!string\_functions.hpp@{string\_functions.hpp}}
+\doxysubsubsection{found()}
+{\footnotesize\ttfamily bool found (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{string,  }\item[{std\+::string const \&}]{substr }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{string__functions_8hpp_a03fb03d95885354ac3c329693588097b_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{string__functions_8hpp_a44ad60b408ba7b75bdf7ae75f8d2532f}} 
+\index{string\_functions.hpp@{string\_functions.hpp}!getList@{getList}}
+\index{getList@{getList}!string\_functions.hpp@{string\_functions.hpp}}
+\doxysubsubsection{getList()}
+{\footnotesize\ttfamily std\+::vector$<$std\+::string$>$ get\+List (\begin{DoxyParamCaption}\item[{std\+::string}]{string,  }\item[{char const \&}]{separator,  }\item[{bool const \&}]{remove\+Voids = {\ttfamily false} }\end{DoxyParamCaption})}
+
+
+
+Cuts a string into pieces separated by the given separator like \textquotesingle{};\textquotesingle{} or \textquotesingle{} \textquotesingle{} or \textquotesingle{},\textquotesingle{} ... 
+
+Understand the remove\+Voids parameter \+: for instance, we have string = \char`\"{};1;2;3;;5\char`\"{}
+
+without remove\+Voids this function returns \{\char`\"{}1\char`\"{}, \char`\"{}2\char`\"{}, \char`\"{}3\char`\"{}, \char`\"{}5\char`\"{}\} with remove\+Voids this function returns \{\char`\"{}\char`\"{}, \char`\"{}1\char`\"{}, \char`\"{}2\char`\"{}, \char`\"{}3\char`\"{}, \char`\"{}\char`\"{}, \char`\"{}5\char`\"{}\} Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{string__functions_8hpp_a44ad60b408ba7b75bdf7ae75f8d2532f_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{string__functions_8hpp_a4adaa91d1b90e1b97cc5fee8998e09b1}} 
+\index{string\_functions.hpp@{string\_functions.hpp}!isNumber@{isNumber}}
+\index{isNumber@{isNumber}!string\_functions.hpp@{string\_functions.hpp}}
+\doxysubsubsection{isNumber()}
+{\footnotesize\ttfamily bool is\+Number (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{string }\end{DoxyParamCaption})}
+
+
+
+Returns true if all its characters are digits. 
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=343pt]{string__functions_8hpp_a4adaa91d1b90e1b97cc5fee8998e09b1_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{string__functions_8hpp_a3f3e5a4df9e542b1aa927c29ddf26af3}} 
+\index{string\_functions.hpp@{string\_functions.hpp}!lastPart@{lastPart}}
+\index{lastPart@{lastPart}!string\_functions.hpp@{string\_functions.hpp}}
+\doxysubsubsection{lastPart()}
+{\footnotesize\ttfamily std\+::string last\+Part (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{string,  }\item[{char const \&}]{sep }\end{DoxyParamCaption})}
+
+\mbox{\label{string__functions_8hpp_a93bd453ee6b6af7c8e5e970bb1000651}} 
+\index{string\_functions.hpp@{string\_functions.hpp}!pop\_front@{pop\_front}}
+\index{pop\_front@{pop\_front}!string\_functions.hpp@{string\_functions.hpp}}
+\doxysubsubsection{pop\_front()}
+{\footnotesize\ttfamily std\+::string\& pop\+\_\+front (\begin{DoxyParamCaption}\item[{std\+::string \&}]{string }\end{DoxyParamCaption})}
+
+
+
+Removes the first character of a string. 
+
+\begin{DoxyAttention}{Attention}
+Careful, time complexity makes it really heavy on big string 
+\end{DoxyAttention}
+\mbox{\label{string__functions_8hpp_a952e248eeca9d6f3be780b68df3f3264}} 
+\index{string\_functions.hpp@{string\_functions.hpp}!remove@{remove}}
+\index{remove@{remove}!string\_functions.hpp@{string\_functions.hpp}}
+\doxysubsubsection{remove()}
+{\footnotesize\ttfamily bool remove (\begin{DoxyParamCaption}\item[{std\+::string \&}]{string,  }\item[{std\+::string const \&}]{substr }\end{DoxyParamCaption})}
+
+\mbox{\label{string__functions_8hpp_a8cf535d46125ed8622aedb6300d8de46}} 
+\index{string\_functions.hpp@{string\_functions.hpp}!removeBlankSpace@{removeBlankSpace}}
+\index{removeBlankSpace@{removeBlankSpace}!string\_functions.hpp@{string\_functions.hpp}}
+\doxysubsubsection{removeBlankSpace()}
+{\footnotesize\ttfamily std\+::string remove\+Blank\+Space (\begin{DoxyParamCaption}\item[{std\+::string}]{str }\end{DoxyParamCaption})}
+
+
+
+Remove all the blank space in a string. 
+
+\mbox{\label{string__functions_8hpp_abb2a169e2ba2e6a949a988e4d591699e}} 
+\index{string\_functions.hpp@{string\_functions.hpp}!removeFirstPart@{removeFirstPart}}
+\index{removeFirstPart@{removeFirstPart}!string\_functions.hpp@{string\_functions.hpp}}
+\doxysubsubsection{removeFirstPart()}
+{\footnotesize\ttfamily std\+::string remove\+First\+Part (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{string,  }\item[{char const \&}]{sep }\end{DoxyParamCaption})}
+
+\mbox{\label{string__functions_8hpp_a416863eb8599122a08605e1f2f94d617}} 
+\index{string\_functions.hpp@{string\_functions.hpp}!removeLastPart@{removeLastPart}}
+\index{removeLastPart@{removeLastPart}!string\_functions.hpp@{string\_functions.hpp}}
+\doxysubsubsection{removeLastPart()}
+{\footnotesize\ttfamily std\+::string remove\+Last\+Part (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{string,  }\item[{char const \&}]{sep }\end{DoxyParamCaption})}
+
+\mbox{\label{string__functions_8hpp_ab2c67e2ba68d5a42ce9a48dafdbba829}} 
+\index{string\_functions.hpp@{string\_functions.hpp}!replaceCharacter@{replaceCharacter}}
+\index{replaceCharacter@{replaceCharacter}!string\_functions.hpp@{string\_functions.hpp}}
+\doxysubsubsection{replaceCharacter()}
+{\footnotesize\ttfamily std\+::string replace\+Character (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{istring,  }\item[{char const \&}]{ichar,  }\item[{char const \&}]{ochar }\end{DoxyParamCaption})}
+
+
+
+Replaces all the instances of one character with another. 
+
+For instance \+: std\+::string istring = \char`\"{}je\+\_\+suis\+\_\+ton\+\_\+pere\char`\"{}; std\+::string ostring = replace\+Character(istring, \textquotesingle{}\+\_\+\textquotesingle{}, \textquotesingle{} \textquotesingle{}); print(ostring); // output \+: \char`\"{}je suis ton pere\char`\"{} Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=266pt]{string__functions_8hpp_ab2c67e2ba68d5a42ce9a48dafdbba829_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{string__functions_8hpp_ab2c67e2ba68d5a42ce9a48dafdbba829_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{string__functions_8hpp_aeda11ede077505e8eb3d667a6cb02788}} 
+\index{string\_functions.hpp@{string\_functions.hpp}!rpCommaWDots@{rpCommaWDots}}
+\index{rpCommaWDots@{rpCommaWDots}!string\_functions.hpp@{string\_functions.hpp}}
+\doxysubsubsection{rpCommaWDots()}
+{\footnotesize\ttfamily std\+::string rp\+Comma\+WDots (\begin{DoxyParamCaption}\item[{std\+::string}]{str }\end{DoxyParamCaption})}
+
+
+
+Replace all the commas of a std\+::string with dots. 
+

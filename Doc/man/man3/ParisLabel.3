@@ -1,0 +1,96 @@
+.TH "ParisLabel" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+ParisLabel
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <ParisLabel\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBParisLabel\fP ()"
+.br
+.ti -1c
+.RI "\fBParisLabel\fP (\fBLabel\fP const &l)"
+.br
+.ti -1c
+.RI "void \fBsetLabel\fP (\fBLabel\fP const &l)"
+.br
+.in -1c
+.SS "Static Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "static void \fBsetArrays\fP ()"
+.br
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "Bool_t \fBback\fP = false"
+.br
+.ti -1c
+.RI "\fBuchar\fP \fBlabel\fP = 0"
+.br
+.ti -1c
+.RI "\fBuchar\fP \fBring\fP = 0"
+.br
+.in -1c
+.SS "Static Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "static bool \fBarrays_set\fP = false"
+.br
+.ti -1c
+.RI "static LabelsArray< bool > \fBback_array\fP"
+.br
+.ti -1c
+.RI "static LabelsArray< \fBuchar\fP > \fBlabel_array\fP"
+.br
+.ti -1c
+.RI "static std::vector< Double_t > \fBparis_labels\fP"
+.br
+.ti -1c
+.RI "static LabelsArray< \fBuchar\fP > \fBring_array\fP"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "ParisLabel::ParisLabel ()\fC [inline]\fP"
+
+.SS "ParisLabel::ParisLabel (\fBLabel\fP const & l)\fC [inline]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "void ParisLabel::setArrays ()\fC [static]\fP"
+
+.SS "void ParisLabel::setLabel (\fBLabel\fP const & l)\fC [inline]\fP"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "bool ParisLabel::arrays_set = false\fC [static]\fP, \fC [private]\fP"
+
+.SS "Bool_t ParisLabel::back = false"
+
+.SS "LabelsArray< bool > ParisLabel::back_array\fC [static]\fP, \fC [private]\fP"
+
+.SS "\fBuchar\fP ParisLabel::label = 0"
+
+.SS "LabelsArray< \fBuchar\fP > ParisLabel::label_array\fC [static]\fP, \fC [private]\fP"
+
+.SS "std::vector<Double_t> ParisLabel::paris_labels\fC [static]\fP, \fC [private]\fP"
+
+.SS "\fBuchar\fP ParisLabel::ring = 0"
+
+.SS "LabelsArray< \fBuchar\fP > ParisLabel::ring_array\fC [static]\fP, \fC [private]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Nuball2 from the source code\&.

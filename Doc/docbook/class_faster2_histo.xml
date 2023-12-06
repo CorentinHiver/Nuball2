@@ -1,0 +1,411 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_class_faster2_histo" xml:lang="en-US">
+<title>Faster2Histo Class Reference</title>
+<indexterm><primary>Faster2Histo</primary></indexterm>
+<para>
+<computeroutput>#include &lt;Faster2Histo.hpp&gt;</computeroutput>
+</para>
+Collaboration diagram for Faster2Histo:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_faster2_histo__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_class_faster2_histo_1ac20f36c0861a3af085c9546ca1325cc6">addFile</link> (std::string const &amp;file)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_faster2_histo_1a8684b0b531e6369ce35bca61f4b1007a">addFolder</link> (<link linkend="_class_path">Path</link> folder, int const &amp;nb_files=-1)</para>
+</listitem>
+            <listitem><para><link linkend="_class_faster2_histo_1a3a7440d82f4e9d4103e097f2f202e2f4">Faster2Histo</link> ()</para>
+</listitem>
+            <listitem><para><link linkend="_class_faster2_histo_1aed84ab0be7ff45067715733dd7be23d1">Faster2Histo</link> (int argc, char **argv)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_faster2_histo_1a327a8348f79c5ecf27a58baef32b81d8">fillHisto</link> (<link linkend="_class_hit">Hit</link> const &amp;hit)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_faster2_histo_1a72f8004ae550c02db09791b810c0252d">load</link> (int const &amp;argc, char **argv)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_faster2_histo_1a46087c5a676f688d4862304fca62cc24">loadCalibration</link> (std::string const &amp;calibration_file)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_faster2_histo_1a20fd8b47b9a9aecef8682ad5442db16d">multirun</link> (int const &amp;nb_threads=-1)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_faster2_histo_1afadb67cbf1469aebd3133246cf7ba922">overwrite</link> (bool const &amp;_overwrite)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_faster2_histo_1aa059538fc470d3de0663e6ec44ebb46d">setNbFiles</link> (int const &amp;_nb_files)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_faster2_histo_1aa3d364eba3c8fc7367fdabea68524854">setNbThreads</link> (int const &amp;_nb_threads)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_faster2_histo_1a479d102c3637023aedeaa0b8e7608781">setOutFilename</link> (std::string const &amp;out_filename) noexcept</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_faster2_histo_1aea9828c3cbca9a909cb5f45e4cb659f5">setWriteMode</link> (const char *mode) noexcept</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_faster2_histo_1a48d7d46929ffbd69ccc3a590c535d3b7">treatFile</link> (<link linkend="_class_hit">Hit</link> &amp;hit, <link linkend="_class_faster_reader">FasterReader</link> &amp;reader)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_faster2_histo_1a355de92b0dc2822b28ac3f65f87b5db9">write</link> (std::string const &amp;out_filename=&quot;&quot;)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Private Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_class_faster2_histo_1af5be7bfaa8186926e62e736310dffc26">printParameters</link> () const noexcept</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Static Private Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>static void <link linkend="_class_faster2_histo_1a055dca6d53f3a55eacf7e63ae871b928">dispatch_threads</link> (<link linkend="_class_hit">Hit</link> &amp;hit, <link linkend="_class_faster_reader">FasterReader</link> &amp;reader, <link linkend="_class_faster2_histo">Faster2Histo</link> &amp;f2h)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Private Attributes    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_class_calibration">Calibration</link> <link linkend="_class_faster2_histo_1a93debc2e47619ed043f25f90aaa16c75">m_calibration</link></para>
+</listitem>
+            <listitem><para>std::vector&lt; <link linkend="__hit_8hpp_1ab5dd24876acad09ec52c250c1668466c">Label</link> &gt; <link linkend="_class_faster2_histo_1a9564f0b9bed4fd3f2d275b4127abedc2">m_labels</link></para>
+</listitem>
+            <listitem><para><link linkend="_class_m_t_faster_reader">MTFasterReader</link> <link linkend="_class_faster2_histo_1a2ec4e07c1b3ee37719c9312822515466">m_MTreader</link></para>
+</listitem>
+            <listitem><para>int <link linkend="_class_faster2_histo_1a287be636deda02485fc20e28f37d44d1">m_nb_files</link> = -1</para>
+</listitem>
+            <listitem><para><link linkend="_class_file">File</link> <link linkend="_class_faster2_histo_1a92a1969a8cc0953281ee487c40f6514c">m_outFile</link> = &quot;spectra.root&quot;</para>
+</listitem>
+            <listitem><para>int <link linkend="_class_faster2_histo_1abb960755db4b68484ac9c9904185093c">m_overwrite</link> = false</para>
+</listitem>
+            <listitem><para>std::unordered_map&lt; <link linkend="__hit_8hpp_1ab5dd24876acad09ec52c250c1668466c">Label</link>, <link linkend="_class_m_t_t_hist">MTTHist</link>&lt; TH1F &gt; &gt; <link linkend="_class_faster2_histo_1a8ae9cc6eca58047e373aa58fa50aa2f2">m_spectra</link></para>
+</listitem>
+            <listitem><para>const char * <link linkend="_class_faster2_histo_1ab989a53d306f9cf1328921d011199e19">write_mode</link> = &quot;RECREATE&quot;</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_class_faster2_histo_1a3a7440d82f4e9d4103e097f2f202e2f4"/>    <section>
+    <title>Faster2Histo()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>Faster2Histo</primary><secondary>Faster2Histo</secondary></indexterm>
+<indexterm><primary>Faster2Histo</primary><secondary>Faster2Histo</secondary></indexterm>
+<para><computeroutput>Faster2Histo::Faster2Histo ( )<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_faster2_histo_1aed84ab0be7ff45067715733dd7be23d1"/>    <section>
+    <title>Faster2Histo()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>Faster2Histo</primary><secondary>Faster2Histo</secondary></indexterm>
+<indexterm><primary>Faster2Histo</primary><secondary>Faster2Histo</secondary></indexterm>
+<para><computeroutput>Faster2Histo::Faster2Histo (int argc, char ** argv)</computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_faster2_histo_aed84ab0be7ff45067715733dd7be23d1_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_class_faster2_histo_1ac20f36c0861a3af085c9546ca1325cc6"/>    <section>
+    <title>addFile()</title>
+<indexterm><primary>addFile</primary><secondary>Faster2Histo</secondary></indexterm>
+<indexterm><primary>Faster2Histo</primary><secondary>addFile</secondary></indexterm>
+<para><computeroutput>void Faster2Histo::addFile (std::string const &amp; file)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_faster2_histo_ac20f36c0861a3af085c9546ca1325cc6_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_faster2_histo_ac20f36c0861a3af085c9546ca1325cc6_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_faster2_histo_1a8684b0b531e6369ce35bca61f4b1007a"/>    <section>
+    <title>addFolder()</title>
+<indexterm><primary>addFolder</primary><secondary>Faster2Histo</secondary></indexterm>
+<indexterm><primary>Faster2Histo</primary><secondary>addFolder</secondary></indexterm>
+<para><computeroutput>void Faster2Histo::addFolder (<link linkend="_class_path">Path</link> folder, int const &amp; nb_files = <computeroutput>-1</computeroutput>
+)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_faster2_histo_a8684b0b531e6369ce35bca61f4b1007a_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_faster2_histo_a8684b0b531e6369ce35bca61f4b1007a_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_faster2_histo_1a055dca6d53f3a55eacf7e63ae871b928"/>    <section>
+    <title>dispatch_threads()</title>
+<indexterm><primary>dispatch_threads</primary><secondary>Faster2Histo</secondary></indexterm>
+<indexterm><primary>Faster2Histo</primary><secondary>dispatch_threads</secondary></indexterm>
+<para><computeroutput>static void Faster2Histo::dispatch_threads (<link linkend="_class_hit">Hit</link> &amp; hit, <link linkend="_class_faster_reader">FasterReader</link> &amp; reader, <link linkend="_class_faster2_histo">Faster2Histo</link> &amp; f2h)<computeroutput>[inline]</computeroutput>, <computeroutput>[static]</computeroutput>, <computeroutput>[private]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_faster2_histo_a055dca6d53f3a55eacf7e63ae871b928_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_faster2_histo_1a327a8348f79c5ecf27a58baef32b81d8"/>    <section>
+    <title>fillHisto()</title>
+<indexterm><primary>fillHisto</primary><secondary>Faster2Histo</secondary></indexterm>
+<indexterm><primary>Faster2Histo</primary><secondary>fillHisto</secondary></indexterm>
+<para><computeroutput>void Faster2Histo::fillHisto (<link linkend="_class_hit">Hit</link> const &amp; hit)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_faster2_histo_a327a8348f79c5ecf27a58baef32b81d8_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_faster2_histo_a327a8348f79c5ecf27a58baef32b81d8_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_faster2_histo_1a72f8004ae550c02db09791b810c0252d"/>    <section>
+    <title>load()</title>
+<indexterm><primary>load</primary><secondary>Faster2Histo</secondary></indexterm>
+<indexterm><primary>Faster2Histo</primary><secondary>load</secondary></indexterm>
+<para><computeroutput>void Faster2Histo::load (int const &amp; argc, char ** argv)</computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_faster2_histo_a72f8004ae550c02db09791b810c0252d_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_faster2_histo_a72f8004ae550c02db09791b810c0252d_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_faster2_histo_1a46087c5a676f688d4862304fca62cc24"/>    <section>
+    <title>loadCalibration()</title>
+<indexterm><primary>loadCalibration</primary><secondary>Faster2Histo</secondary></indexterm>
+<indexterm><primary>Faster2Histo</primary><secondary>loadCalibration</secondary></indexterm>
+<para><computeroutput>void Faster2Histo::loadCalibration (std::string const &amp; calibration_file)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_faster2_histo_a46087c5a676f688d4862304fca62cc24_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_faster2_histo_a46087c5a676f688d4862304fca62cc24_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_faster2_histo_1a20fd8b47b9a9aecef8682ad5442db16d"/>    <section>
+    <title>multirun()</title>
+<indexterm><primary>multirun</primary><secondary>Faster2Histo</secondary></indexterm>
+<indexterm><primary>Faster2Histo</primary><secondary>multirun</secondary></indexterm>
+<para><computeroutput>void Faster2Histo::multirun (int const &amp; nb_threads = <computeroutput>-1</computeroutput>
+)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_faster2_histo_a20fd8b47b9a9aecef8682ad5442db16d_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_faster2_histo_a20fd8b47b9a9aecef8682ad5442db16d_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_faster2_histo_1afadb67cbf1469aebd3133246cf7ba922"/>    <section>
+    <title>overwrite()</title>
+<indexterm><primary>overwrite</primary><secondary>Faster2Histo</secondary></indexterm>
+<indexterm><primary>Faster2Histo</primary><secondary>overwrite</secondary></indexterm>
+<para><computeroutput>void Faster2Histo::overwrite (bool const &amp; _overwrite)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_faster2_histo_afadb67cbf1469aebd3133246cf7ba922_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_faster2_histo_1af5be7bfaa8186926e62e736310dffc26"/>    <section>
+    <title>printParameters()</title>
+<indexterm><primary>printParameters</primary><secondary>Faster2Histo</secondary></indexterm>
+<indexterm><primary>Faster2Histo</primary><secondary>printParameters</secondary></indexterm>
+<para><computeroutput>void Faster2Histo::printParameters ( ) const<computeroutput>[private]</computeroutput>, <computeroutput>[noexcept]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_faster2_histo_af5be7bfaa8186926e62e736310dffc26_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_faster2_histo_af5be7bfaa8186926e62e736310dffc26_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_faster2_histo_1aa059538fc470d3de0663e6ec44ebb46d"/>    <section>
+    <title>setNbFiles()</title>
+<indexterm><primary>setNbFiles</primary><secondary>Faster2Histo</secondary></indexterm>
+<indexterm><primary>Faster2Histo</primary><secondary>setNbFiles</secondary></indexterm>
+<para><computeroutput>void Faster2Histo::setNbFiles (int const &amp; _nb_files)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_faster2_histo_1aa3d364eba3c8fc7367fdabea68524854"/>    <section>
+    <title>setNbThreads()</title>
+<indexterm><primary>setNbThreads</primary><secondary>Faster2Histo</secondary></indexterm>
+<indexterm><primary>Faster2Histo</primary><secondary>setNbThreads</secondary></indexterm>
+<para><computeroutput>void Faster2Histo::setNbThreads (int const &amp; _nb_threads)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_faster2_histo_aa3d364eba3c8fc7367fdabea68524854_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_faster2_histo_aa3d364eba3c8fc7367fdabea68524854_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_faster2_histo_1a479d102c3637023aedeaa0b8e7608781"/>    <section>
+    <title>setOutFilename()</title>
+<indexterm><primary>setOutFilename</primary><secondary>Faster2Histo</secondary></indexterm>
+<indexterm><primary>Faster2Histo</primary><secondary>setOutFilename</secondary></indexterm>
+<para><computeroutput>void Faster2Histo::setOutFilename (std::string const &amp; out_filename)<computeroutput>[inline]</computeroutput>, <computeroutput>[noexcept]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_faster2_histo_a479d102c3637023aedeaa0b8e7608781_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_faster2_histo_1aea9828c3cbca9a909cb5f45e4cb659f5"/>    <section>
+    <title>setWriteMode()</title>
+<indexterm><primary>setWriteMode</primary><secondary>Faster2Histo</secondary></indexterm>
+<indexterm><primary>Faster2Histo</primary><secondary>setWriteMode</secondary></indexterm>
+<para><computeroutput>void Faster2Histo::setWriteMode (const char * mode)<computeroutput>[inline]</computeroutput>, <computeroutput>[noexcept]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_faster2_histo_1a48d7d46929ffbd69ccc3a590c535d3b7"/>    <section>
+    <title>treatFile()</title>
+<indexterm><primary>treatFile</primary><secondary>Faster2Histo</secondary></indexterm>
+<indexterm><primary>Faster2Histo</primary><secondary>treatFile</secondary></indexterm>
+<para><computeroutput>void Faster2Histo::treatFile (<link linkend="_class_hit">Hit</link> &amp; hit, <link linkend="_class_faster_reader">FasterReader</link> &amp; reader)</computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_faster2_histo_a48d7d46929ffbd69ccc3a590c535d3b7_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_faster2_histo_1a355de92b0dc2822b28ac3f65f87b5db9"/>    <section>
+    <title>write()</title>
+<indexterm><primary>write</primary><secondary>Faster2Histo</secondary></indexterm>
+<indexterm><primary>Faster2Histo</primary><secondary>write</secondary></indexterm>
+<para><computeroutput>void Faster2Histo::write (std::string const &amp; out_filename = <computeroutput>&quot;&quot;</computeroutput>
+)<computeroutput>[noexcept]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_faster2_histo_a355de92b0dc2822b28ac3f65f87b5db9_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_faster2_histo_a355de92b0dc2822b28ac3f65f87b5db9_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_class_faster2_histo_1a93debc2e47619ed043f25f90aaa16c75"/>    <section>
+    <title>m_calibration</title>
+<indexterm><primary>m_calibration</primary><secondary>Faster2Histo</secondary></indexterm>
+<indexterm><primary>Faster2Histo</primary><secondary>m_calibration</secondary></indexterm>
+<para><computeroutput><link linkend="_class_calibration">Calibration</link> Faster2Histo::m_calibration<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_faster2_histo_1a9564f0b9bed4fd3f2d275b4127abedc2"/>    <section>
+    <title>m_labels</title>
+<indexterm><primary>m_labels</primary><secondary>Faster2Histo</secondary></indexterm>
+<indexterm><primary>Faster2Histo</primary><secondary>m_labels</secondary></indexterm>
+<para><computeroutput>std::vector&lt;<link linkend="__hit_8hpp_1ab5dd24876acad09ec52c250c1668466c">Label</link>&gt; Faster2Histo::m_labels<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_faster2_histo_1a2ec4e07c1b3ee37719c9312822515466"/>    <section>
+    <title>m_MTreader</title>
+<indexterm><primary>m_MTreader</primary><secondary>Faster2Histo</secondary></indexterm>
+<indexterm><primary>Faster2Histo</primary><secondary>m_MTreader</secondary></indexterm>
+<para><computeroutput><link linkend="_class_m_t_faster_reader">MTFasterReader</link> Faster2Histo::m_MTreader<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_faster2_histo_1a287be636deda02485fc20e28f37d44d1"/>    <section>
+    <title>m_nb_files</title>
+<indexterm><primary>m_nb_files</primary><secondary>Faster2Histo</secondary></indexterm>
+<indexterm><primary>Faster2Histo</primary><secondary>m_nb_files</secondary></indexterm>
+<para><computeroutput>int Faster2Histo::m_nb_files = -1<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_faster2_histo_1a92a1969a8cc0953281ee487c40f6514c"/>    <section>
+    <title>m_outFile</title>
+<indexterm><primary>m_outFile</primary><secondary>Faster2Histo</secondary></indexterm>
+<indexterm><primary>Faster2Histo</primary><secondary>m_outFile</secondary></indexterm>
+<para><computeroutput><link linkend="_class_file">File</link> Faster2Histo::m_outFile = &quot;spectra.root&quot;<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_faster2_histo_1abb960755db4b68484ac9c9904185093c"/>    <section>
+    <title>m_overwrite</title>
+<indexterm><primary>m_overwrite</primary><secondary>Faster2Histo</secondary></indexterm>
+<indexterm><primary>Faster2Histo</primary><secondary>m_overwrite</secondary></indexterm>
+<para><computeroutput>int Faster2Histo::m_overwrite = false<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_faster2_histo_1a8ae9cc6eca58047e373aa58fa50aa2f2"/>    <section>
+    <title>m_spectra</title>
+<indexterm><primary>m_spectra</primary><secondary>Faster2Histo</secondary></indexterm>
+<indexterm><primary>Faster2Histo</primary><secondary>m_spectra</secondary></indexterm>
+<para><computeroutput>std::unordered_map&lt;<link linkend="__hit_8hpp_1ab5dd24876acad09ec52c250c1668466c">Label</link>, <link linkend="_class_m_t_t_hist">MTTHist</link>&lt;TH1F&gt; &gt; Faster2Histo::m_spectra<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_faster2_histo_1ab989a53d306f9cf1328921d011199e19"/>    <section>
+    <title>write_mode</title>
+<indexterm><primary>write_mode</primary><secondary>Faster2Histo</secondary></indexterm>
+<indexterm><primary>Faster2Histo</primary><secondary>write_mode</secondary></indexterm>
+<para><computeroutput>const char* Faster2Histo::write_mode = &quot;RECREATE&quot;<computeroutput>[private]</computeroutput></computeroutput></para></section>
+<para>
+The documentation for this class was generated from the following file:</para>
+lib/Modules/<link linkend="__faster2_histo_8hpp">Faster2Histo.hpp</link></section>
+</section>

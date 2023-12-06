@@ -1,0 +1,74 @@
+\doxysection{lib/\+MTObjects/\+MTObject.hpp File Reference}
+\label{_m_t_object_8hpp}\index{lib/MTObjects/MTObject.hpp@{lib/MTObjects/MTObject.hpp}}
+{\ttfamily \#include $<$thread$>$}\newline
+{\ttfamily \#include $<$mutex$>$}\newline
+{\ttfamily \#include \char`\"{}../lib\+Root.\+hpp\char`\"{}}\newline
+Include dependency graph for MTObject.\+hpp\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_m_t_object_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_m_t_object_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \textbf{ MTObject}
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using \textbf{ lock\+\_\+mutex} = const std\+::lock\+\_\+guard$<$ std\+::mutex $>$
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class... ARGS$>$ }\\void \textbf{ print\+MT} (ARGS \&\&... args)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+std\+::mutex \textbf{ MTmutex}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\label{_m_t_object_8hpp_a225f8aadf270f4a69ad323e64b7eaa33}} 
+\index{MTObject.hpp@{MTObject.hpp}!lock\_mutex@{lock\_mutex}}
+\index{lock\_mutex@{lock\_mutex}!MTObject.hpp@{MTObject.hpp}}
+\doxysubsubsection{lock\_mutex}
+{\footnotesize\ttfamily using \textbf{ lock\+\_\+mutex} =  const std\+::lock\+\_\+guard$<$std\+::mutex$>$}
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\label{_m_t_object_8hpp_acceec6d26d3021217ae83ccd7b029351}} 
+\index{MTObject.hpp@{MTObject.hpp}!printMT@{printMT}}
+\index{printMT@{printMT}!MTObject.hpp@{MTObject.hpp}}
+\doxysubsubsection{printMT()}
+{\footnotesize\ttfamily template$<$class... ARGS$>$ \\
+void print\+MT (\begin{DoxyParamCaption}\item[{ARGS \&\&...}]{args }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=209pt]{_m_t_object_8hpp_acceec6d26d3021217ae83ccd7b029351_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\label{_m_t_object_8hpp_ab8cd4d7b579e254e645ccde48aadd2f4}} 
+\index{MTObject.hpp@{MTObject.hpp}!MTmutex@{MTmutex}}
+\index{MTmutex@{MTmutex}!MTObject.hpp@{MTObject.hpp}}
+\doxysubsubsection{MTmutex}
+{\footnotesize\ttfamily std\+::mutex MTmutex}
+

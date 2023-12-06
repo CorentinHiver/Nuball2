@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__data_reader_8hpp" xml:lang="en-US">
+<title>lib/Classes/DataReader.hpp File Reference</title>
+<indexterm><primary>lib/Classes/DataReader.hpp</primary></indexterm>
+<simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>class <link linkend="__data_reader_8hpp_1class_data_reader">DataReader</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Class Documentation</title>
+<indexterm><primary>DataReader</primary></indexterm>
+<section>
+<title>class DataReader</title>
+</section>
+</section>
+</section>
+</section>

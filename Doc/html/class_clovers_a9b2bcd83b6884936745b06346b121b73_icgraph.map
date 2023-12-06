@@ -1,0 +1,11 @@
+<map id="Clovers::label_to_clover" name="Clovers::label_to_clover">
+<area shape="rect" id="node1" title=" " alt="" coords="929,101,1108,127"/>
+<area shape="rect" id="node2" href="$class_run_matrixator.html#af360ec9f7686353b663ce0bdcfa3e2df" title=" " alt="" coords="687,75,881,102"/>
+<area shape="rect" id="node8" href="$class_clovers.html#ab97fc40c1f6b24a092f8f92562c2fd9a" title="Static initialize. Allows one to use the arrays event if no object has been instantiated." alt="" coords="695,126,873,153"/>
+<area shape="rect" id="node3" href="$class_run_matrixator.html#a8d8f01fad64864d032395e18b10c2a7e" title=" " alt="" coords="440,7,623,48"/>
+<area shape="rect" id="node6" href="$class_run_matrixator.html#a526469f6440d19b85fd142c797056c65" title=" " alt="" coords="424,75,639,102"/>
+<area shape="rect" id="node4" href="$class_run_matrixator.html#a47322f73c6a9f220f49f9fd85993fcd5" title="Multithreading of loadData_faster (you have to pass by a static method in order to multi&#45;thread it)" alt="" coords="197,5,376,47"/>
+<area shape="rect" id="node5" href="$class_run_matrixator.html#aa6d13b08060fef07b50d7ab6b35be0d6" title=" " alt="" coords="5,46,149,73"/>
+<area shape="rect" id="node7" href="$class_run_matrixator.html#a2d5326c4e5b0684552e5d72c88e64ef8" title="Multithreading of loadData_ (you have to pass by a static method in order to multi&#45;thread it)" alt="" coords="197,71,376,112"/>
+<area shape="rect" id="node9" href="$class_clovers.html#addcd7785b41aec6be8988166a5b04fa0" title=" " alt="" coords="467,126,595,153"/>
+</map>

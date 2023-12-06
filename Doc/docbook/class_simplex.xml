@@ -1,0 +1,224 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_class_simplex" xml:lang="en-US">
+<title>Simplex Class Reference</title>
+<indexterm><primary>Simplex</primary></indexterm>
+<para>
+<computeroutput>#include &lt;SpectraAlignator.hpp&gt;</computeroutput>
+</para>
+Collaboration diagram for Simplex:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_simplex__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>auto <link linkend="_class_simplex_1af9f387b740699fc83d561b06a5e8305a">begin</link> ()</para>
+</listitem>
+            <listitem><para>auto <link linkend="_class_simplex_1ad5161ef4f875383b9880f2401cefe71a">begin</link> () const</para>
+</listitem>
+            <listitem><para>auto <link linkend="_class_simplex_1a033d49e8ac767b72b4c1dd6d38573988">centroid</link> (std::vector&lt; int &gt; const &amp;sorted_vertices_indexes)</para>
+</listitem>
+            <listitem><para>auto const  &amp; <link linkend="_class_simplex_1a67925da27ed5cdd6b9ea6b002102d02b">dim</link> ()</para>
+</listitem>
+            <listitem><para>auto const  &amp; <link linkend="_class_simplex_1aed93fc950fa50599b289d5ac9e3356c7">dim</link> () const</para>
+</listitem>
+            <listitem><para>auto <link linkend="_class_simplex_1a43aa87c378225a78bf764a3c049ed381">end</link> ()</para>
+</listitem>
+            <listitem><para>auto <link linkend="_class_simplex_1ae3a1f652ec439b823610f75846ae8067">end</link> () const</para>
+</listitem>
+            <listitem><para><link linkend="_class_simplex">Simplex</link> &amp; <link linkend="_class_simplex_1a18363c969c478336afe053dc246495ce">operator=</link> (<link linkend="_class_simplex">Simplex</link> &amp;&amp;other)</para>
+</listitem>
+            <listitem><para><link linkend="_class_simplex">Simplex</link> &amp; <link linkend="_class_simplex_1a622f6bed00b73eb0b931cf65ee77d055">operator=</link> (<link linkend="_class_simplex">Simplex</link> const &amp;other)</para>
+</listitem>
+            <listitem><para>auto &amp; <link linkend="_class_simplex_1a0bbdd7fe5cc1296b7c1da9232d78d182">operator[]</link> (int const &amp;i)</para>
+</listitem>
+            <listitem><para>auto const  &amp; <link linkend="_class_simplex_1a08239a3a6b994da2a445a7ea44c7b893">operator[]</link> (int const &amp;i) const</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_simplex_1aa4f7721e6989b27489d84cca5de99c07">setVertice</link> (int const &amp;bin, <link linkend="_class_vertice">Vertice</link> &amp;&amp;vertice)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_simplex_1ade818ac404caab90542e80143cbc63c0">setVertice</link> (int const &amp;bin, <link linkend="_class_vertice">Vertice</link> const &amp;vertice)</para>
+</listitem>
+            <listitem><para><link linkend="_class_simplex_1a169c2796d3adf036611cdcf6772e46d1">Simplex</link> (<link linkend="_class_simplex">Simplex</link> &amp;&amp;other)</para>
+</listitem>
+            <listitem><para><link linkend="_class_simplex_1a2ff37bbc43bc7c86703f204c3510baa8">Simplex</link> (<link linkend="_class_simplex">Simplex</link> const &amp;other)</para>
+</listitem>
+            <listitem><para><link linkend="_class_simplex_1ad893ac9de899c841e0e6ada82ea611b9">Simplex</link> (<link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> const &amp;<link linkend="_class_simplex_1aed93fc950fa50599b289d5ac9e3356c7">dim</link>)</para>
+</listitem>
+            <listitem><para><link linkend="_class_simplex_1abd6e34ab7ace7cf33b13fa0dab907a2a">Simplex</link> (<link linkend="__spectra_alignator_8hpp_1afafb4a66ac57eb9c69b1fe6488851c4e">Vertices</link> const &amp;vertices)</para>
+</listitem>
+            <listitem><para>auto const  &amp; <link linkend="_class_simplex_1a321c481eed3e0f60defabaa88f4cba69">size</link> ()</para>
+</listitem>
+            <listitem><para>auto const  &amp; <link linkend="_class_simplex_1ae39ce6d0a47986ceabb9a76146a8225b">size</link> () const</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Private Attributes    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_class_vertice">Vertice</link> <link linkend="_class_simplex_1a0d352c2bc1248646ccaff4236538a194">m_centroid</link> = <link linkend="_class_vertice">Vertice</link>(<link linkend="_class_simplex_1aed12d66219db915526fc70cc33c83505">m_dim</link>)</para>
+</listitem>
+            <listitem><para><link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> <link linkend="_class_simplex_1aed12d66219db915526fc70cc33c83505">m_dim</link> = 0</para>
+</listitem>
+            <listitem><para>int <link linkend="_class_simplex_1a3e8657a83fb94712f3d5c61a88801e89">m_size</link> = 0</para>
+</listitem>
+            <listitem><para><link linkend="__spectra_alignator_8hpp_1afafb4a66ac57eb9c69b1fe6488851c4e">Vertices</link> <link linkend="_class_simplex_1a8e0cd4b76bda7c66a299e4f7c8ea1bc3">m_vertices</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_class_simplex_1ad893ac9de899c841e0e6ada82ea611b9"/>    <section>
+    <title>Simplex()<computeroutput>[1/4]</computeroutput></title>
+<indexterm><primary>Simplex</primary><secondary>Simplex</secondary></indexterm>
+<indexterm><primary>Simplex</primary><secondary>Simplex</secondary></indexterm>
+<para><computeroutput>Simplex::Simplex (<link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> const &amp; dim)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_simplex_ad893ac9de899c841e0e6ada82ea611b9_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_simplex_1abd6e34ab7ace7cf33b13fa0dab907a2a"/>    <section>
+    <title>Simplex()<computeroutput>[2/4]</computeroutput></title>
+<indexterm><primary>Simplex</primary><secondary>Simplex</secondary></indexterm>
+<indexterm><primary>Simplex</primary><secondary>Simplex</secondary></indexterm>
+<para><computeroutput>Simplex::Simplex (<link linkend="__spectra_alignator_8hpp_1afafb4a66ac57eb9c69b1fe6488851c4e">Vertices</link> const &amp; vertices)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_simplex_abd6e34ab7ace7cf33b13fa0dab907a2a_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_simplex_1a2ff37bbc43bc7c86703f204c3510baa8"/>    <section>
+    <title>Simplex()<computeroutput>[3/4]</computeroutput></title>
+<indexterm><primary>Simplex</primary><secondary>Simplex</secondary></indexterm>
+<indexterm><primary>Simplex</primary><secondary>Simplex</secondary></indexterm>
+<para><computeroutput>Simplex::Simplex (<link linkend="_class_simplex">Simplex</link> const &amp; other)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_simplex_1a169c2796d3adf036611cdcf6772e46d1"/>    <section>
+    <title>Simplex()<computeroutput>[4/4]</computeroutput></title>
+<indexterm><primary>Simplex</primary><secondary>Simplex</secondary></indexterm>
+<indexterm><primary>Simplex</primary><secondary>Simplex</secondary></indexterm>
+<para><computeroutput>Simplex::Simplex (<link linkend="_class_simplex">Simplex</link> &amp;&amp; other)<computeroutput>[inline]</computeroutput></computeroutput></para></section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_class_simplex_1af9f387b740699fc83d561b06a5e8305a"/>    <section>
+    <title>begin()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>begin</primary><secondary>Simplex</secondary></indexterm>
+<indexterm><primary>Simplex</primary><secondary>begin</secondary></indexterm>
+<para><computeroutput>auto Simplex::begin ( )<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_simplex_1ad5161ef4f875383b9880f2401cefe71a"/>    <section>
+    <title>begin()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>begin</primary><secondary>Simplex</secondary></indexterm>
+<indexterm><primary>Simplex</primary><secondary>begin</secondary></indexterm>
+<para><computeroutput>auto Simplex::begin ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_simplex_1a033d49e8ac767b72b4c1dd6d38573988"/>    <section>
+    <title>centroid()</title>
+<indexterm><primary>centroid</primary><secondary>Simplex</secondary></indexterm>
+<indexterm><primary>Simplex</primary><secondary>centroid</secondary></indexterm>
+<para><computeroutput>auto Simplex::centroid (std::vector&lt; int &gt; const &amp; sorted_vertices_indexes)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_simplex_a033d49e8ac767b72b4c1dd6d38573988_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_simplex_1a67925da27ed5cdd6b9ea6b002102d02b"/>    <section>
+    <title>dim()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>dim</primary><secondary>Simplex</secondary></indexterm>
+<indexterm><primary>Simplex</primary><secondary>dim</secondary></indexterm>
+<para><computeroutput>auto const&amp; Simplex::dim ( )<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_simplex_1aed93fc950fa50599b289d5ac9e3356c7"/>    <section>
+    <title>dim()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>dim</primary><secondary>Simplex</secondary></indexterm>
+<indexterm><primary>Simplex</primary><secondary>dim</secondary></indexterm>
+<para><computeroutput>auto const&amp; Simplex::dim ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_simplex_aed93fc950fa50599b289d5ac9e3356c7_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_simplex_1a43aa87c378225a78bf764a3c049ed381"/>    <section>
+    <title>end()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>end</primary><secondary>Simplex</secondary></indexterm>
+<indexterm><primary>Simplex</primary><secondary>end</secondary></indexterm>
+<para><computeroutput>auto Simplex::end ( )<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_simplex_1ae3a1f652ec439b823610f75846ae8067"/>    <section>
+    <title>end()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>end</primary><secondary>Simplex</secondary></indexterm>
+<indexterm><primary>Simplex</primary><secondary>end</secondary></indexterm>
+<para><computeroutput>auto Simplex::end ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_simplex_1a18363c969c478336afe053dc246495ce"/>    <section>
+    <title>operator=()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>operator=</primary><secondary>Simplex</secondary></indexterm>
+<indexterm><primary>Simplex</primary><secondary>operator=</secondary></indexterm>
+<para><computeroutput><link linkend="_class_simplex">Simplex</link>&amp; Simplex::operator= (<link linkend="_class_simplex">Simplex</link> &amp;&amp; other)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_simplex_1a622f6bed00b73eb0b931cf65ee77d055"/>    <section>
+    <title>operator=()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>operator=</primary><secondary>Simplex</secondary></indexterm>
+<indexterm><primary>Simplex</primary><secondary>operator=</secondary></indexterm>
+<para><computeroutput><link linkend="_class_simplex">Simplex</link>&amp; Simplex::operator= (<link linkend="_class_simplex">Simplex</link> const &amp; other)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_simplex_1a0bbdd7fe5cc1296b7c1da9232d78d182"/>    <section>
+    <title>operator[]()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>operator[]</primary><secondary>Simplex</secondary></indexterm>
+<indexterm><primary>Simplex</primary><secondary>operator[]</secondary></indexterm>
+<para><computeroutput>auto&amp; Simplex::operator[] (int const &amp; i)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_simplex_1a08239a3a6b994da2a445a7ea44c7b893"/>    <section>
+    <title>operator[]()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>operator[]</primary><secondary>Simplex</secondary></indexterm>
+<indexterm><primary>Simplex</primary><secondary>operator[]</secondary></indexterm>
+<para><computeroutput>auto const&amp; Simplex::operator[] (int const &amp; i) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_simplex_1aa4f7721e6989b27489d84cca5de99c07"/>    <section>
+    <title>setVertice()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>setVertice</primary><secondary>Simplex</secondary></indexterm>
+<indexterm><primary>Simplex</primary><secondary>setVertice</secondary></indexterm>
+<para><computeroutput>void Simplex::setVertice (int const &amp; bin, <link linkend="_class_vertice">Vertice</link> &amp;&amp; vertice)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_simplex_1ade818ac404caab90542e80143cbc63c0"/>    <section>
+    <title>setVertice()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>setVertice</primary><secondary>Simplex</secondary></indexterm>
+<indexterm><primary>Simplex</primary><secondary>setVertice</secondary></indexterm>
+<para><computeroutput>void Simplex::setVertice (int const &amp; bin, <link linkend="_class_vertice">Vertice</link> const &amp; vertice)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_simplex_1a321c481eed3e0f60defabaa88f4cba69"/>    <section>
+    <title>size()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>size</primary><secondary>Simplex</secondary></indexterm>
+<indexterm><primary>Simplex</primary><secondary>size</secondary></indexterm>
+<para><computeroutput>auto const&amp; Simplex::size ( )<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_simplex_1ae39ce6d0a47986ceabb9a76146a8225b"/>    <section>
+    <title>size()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>size</primary><secondary>Simplex</secondary></indexterm>
+<indexterm><primary>Simplex</primary><secondary>size</secondary></indexterm>
+<para><computeroutput>auto const&amp; Simplex::size ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_simplex_ae39ce6d0a47986ceabb9a76146a8225b_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_class_simplex_1a0d352c2bc1248646ccaff4236538a194"/>    <section>
+    <title>m_centroid</title>
+<indexterm><primary>m_centroid</primary><secondary>Simplex</secondary></indexterm>
+<indexterm><primary>Simplex</primary><secondary>m_centroid</secondary></indexterm>
+<para><computeroutput><link linkend="_class_vertice">Vertice</link> Simplex::m_centroid = <link linkend="_class_vertice">Vertice</link>(<link linkend="_class_simplex_1aed12d66219db915526fc70cc33c83505">m_dim</link>)<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_simplex_1aed12d66219db915526fc70cc33c83505"/>    <section>
+    <title>m_dim</title>
+<indexterm><primary>m_dim</primary><secondary>Simplex</secondary></indexterm>
+<indexterm><primary>Simplex</primary><secondary>m_dim</secondary></indexterm>
+<para><computeroutput><link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> Simplex::m_dim = 0<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_simplex_1a3e8657a83fb94712f3d5c61a88801e89"/>    <section>
+    <title>m_size</title>
+<indexterm><primary>m_size</primary><secondary>Simplex</secondary></indexterm>
+<indexterm><primary>Simplex</primary><secondary>m_size</secondary></indexterm>
+<para><computeroutput>int Simplex::m_size = 0<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_simplex_1a8e0cd4b76bda7c66a299e4f7c8ea1bc3"/>    <section>
+    <title>m_vertices</title>
+<indexterm><primary>m_vertices</primary><secondary>Simplex</secondary></indexterm>
+<indexterm><primary>Simplex</primary><secondary>m_vertices</secondary></indexterm>
+<para><computeroutput><link linkend="__spectra_alignator_8hpp_1afafb4a66ac57eb9c69b1fe6488851c4e">Vertices</link> Simplex::m_vertices<computeroutput>[private]</computeroutput></computeroutput></para></section>
+<para>
+The documentation for this class was generated from the following file:</para>
+lib/Classes/<link linkend="__spectra_alignator_8hpp">SpectraAlignator.hpp</link></section>
+</section>

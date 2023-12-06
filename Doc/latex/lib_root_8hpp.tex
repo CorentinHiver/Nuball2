@@ -1,0 +1,444 @@
+\doxysection{lib/lib\+Root.hpp File Reference}
+\label{lib_root_8hpp}\index{lib/libRoot.hpp@{lib/libRoot.hpp}}
+{\ttfamily \#include \char`\"{}lib\+Co.\+hpp\char`\"{}}\newline
+{\ttfamily \#include $<$TAxis.\+h$>$}\newline
+{\ttfamily \#include $<$TCanvas.\+h$>$}\newline
+{\ttfamily \#include $<$TChain.\+h$>$}\newline
+{\ttfamily \#include $<$TError.\+h$>$}\newline
+{\ttfamily \#include $<$TF1.\+h$>$}\newline
+{\ttfamily \#include $<$TF2.\+h$>$}\newline
+{\ttfamily \#include $<$TFile.\+h$>$}\newline
+{\ttfamily \#include $<$TFit\+Result\+Ptr.\+h$>$}\newline
+{\ttfamily \#include $<$TFit\+Result.\+h$>$}\newline
+{\ttfamily \#include $<$TGraph.\+h$>$}\newline
+{\ttfamily \#include $<$TGraph\+Errors.\+h$>$}\newline
+{\ttfamily \#include $<$TH1\+F.\+h$>$}\newline
+{\ttfamily \#include $<$TH1\+D.\+h$>$}\newline
+{\ttfamily \#include $<$TH1\+S.\+h$>$}\newline
+{\ttfamily \#include $<$TH2.\+h$>$}\newline
+{\ttfamily \#include $<$TH2\+F.\+h$>$}\newline
+{\ttfamily \#include $<$TH3\+I.\+h$>$}\newline
+{\ttfamily \#include $<$TKey.\+h$>$}\newline
+{\ttfamily \#include $<$TLeaf.\+h$>$}\newline
+{\ttfamily \#include $<$TLegend.\+h$>$}\newline
+{\ttfamily \#include $<$TMarker.\+h$>$}\newline
+{\ttfamily \#include $<$TMath.\+h$>$}\newline
+{\ttfamily \#include $<$TRandom.\+h$>$}\newline
+{\ttfamily \#include $<$TROOT.\+h$>$}\newline
+{\ttfamily \#include $<$TSpectrum.\+h$>$}\newline
+{\ttfamily \#include $<$TStopwatch.\+h$>$}\newline
+{\ttfamily \#include $<$TString.\+h$>$}\newline
+{\ttfamily \#include $<$TStyle.\+h$>$}\newline
+{\ttfamily \#include $<$TSystem.\+h$>$}\newline
+{\ttfamily \#include $<$TThread.\+h$>$}\newline
+{\ttfamily \#include $<$TTree.\+h$>$}\newline
+{\ttfamily \#include $<$TTree\+Index.\+h$>$}\newline
+Include dependency graph for lib\+Root.\+hpp\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{lib_root_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{lib_root_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \textbf{ THBinning}
+\begin{DoxyCompactList}\small\item\em Binning of a root histogram (TH1) \+: number of bins, min value, max value. \end{DoxyCompactList}\item 
+class \textbf{ The\+TChain}
+\begin{DoxyCompactList}\small\item\em Not functionnal yet. \end{DoxyCompactList}\item 
+class \textbf{ Type\+Root\+Map}
+\end{DoxyCompactItemize}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \textbf{ Co\+Analyse}
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using \textbf{ Co\+Analyse\+::\+Projections\+Bins} = std\+::vector$<$ std\+::pair$<$ double, double $>$ $>$
+\item 
+using \textbf{ unique\+\_\+\+TFile} = std\+::unique\+\_\+ptr$<$ TFile $>$
+\item 
+using \textbf{ unique\+\_\+\+TH1F} = std\+::unique\+\_\+ptr$<$ TH1F $>$
+\item 
+using \textbf{ unique\+\_\+\+TH2F} = std\+::unique\+\_\+ptr$<$ TH2F $>$
+\item 
+using \textbf{ unique\+\_\+tree} = std\+::unique\+\_\+ptr$<$ TTree $>$
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \textbf{ Add\+TH1} (TH2 $\ast$histo2, TH1 $\ast$histo1, int index, bool x=true)
+\item 
+void \textbf{ alignator} (TTree $\ast$tree, int $\ast$New\+Index)
+\item 
+{\footnotesize template$<$class T $>$ }\\auto \textbf{ create\+Branch} (TTree $\ast$tree, T $\ast$value, std\+::string const \&name)
+\begin{DoxyCompactList}\small\item\em Create a branch for a given value and name. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class T $>$ }\\auto \textbf{ create\+Branch\+Array} (TTree $\ast$tree, T $\ast$array, std\+::string const \&name, std\+::string const \&name\+\_\+size)
+\begin{DoxyCompactList}\small\item\em Create a branch for a given array and name. \end{DoxyCompactList}\item 
+void \textbf{ draw\+\_\+all\+\_\+\+TH1\+F\+\_\+with\+\_\+\+X\+\_\+window} (std\+::string const \&filename, int minX, int maxX, int rebin=1)
+\item 
+std\+::vector$<$ double $>$ \textbf{ Co\+Analyse\+::extract\+Background\+Array} (std\+::vector$<$ double $>$ \&source, int const \&nsmooth=10)
+\item 
+std\+::vector$<$ double $>$ \textbf{ Co\+Analyse\+::extract\+Background\+Array} (TH1F $\ast$histo, int const \&nsmooth=10)
+\item 
+void \textbf{ fuse\+\_\+all\+\_\+histo} (std\+::string const \&folder, std\+::string const \&out\+Root=\char`\"{}fused\+\_\+histo.\+root\char`\"{}, bool const \&bidim=true)
+\item 
+int \textbf{ get\+Bin0} (TH1F $\ast$spectra)
+\begin{DoxyCompactList}\small\item\em Get which bin holds the X = 0. \end{DoxyCompactList}\item 
+bool \textbf{ get\+Mean\+Peak} (TH1F $\ast$spectra, double \&mean)
+\begin{DoxyCompactList}\small\item\em Get the mean of the peak of a histogram with one nice single peak. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T , typename  = typename std\+::enable\+\_\+if$<$std\+::is\+\_\+arithmetic$<$\+T$>$\+::value$>$\+::type$>$ }\\Long64\+\_\+t \textbf{ Long64\+\_\+cast} (T const \&t)
+\begin{DoxyCompactList}\small\item\em Casts a number into unsigned short. \end{DoxyCompactList}\item 
+float \textbf{ max\+Xaxis} (TH1 $\ast$histo)
+\item 
+float \textbf{ max\+Yaxis} (TH1 $\ast$histo)
+\item 
+float \textbf{ min\+Xaxis} (TH1 $\ast$histo)
+\item 
+float \textbf{ min\+Yaxis} (TH1 $\ast$histo)
+\item 
+void \textbf{ Co\+Analyse\+::normalize\+Bidim} (TH2 $\ast$matrix, double const \&factor=1.\+0)
+\item 
+void \textbf{ Co\+Analyse\+::normalizeY} (TH2 $\ast$matrix, double const \&factor=1)
+\item 
+std\+::ostream \& \textbf{ operator$<$$<$} (std\+::ostream \&cout, \textbf{ THBinning} binning)
+\item 
+void \textbf{ Co\+Analyse\+::projectX} (TH2 $\ast$matrix, TH1 $\ast$proj)
+\begin{DoxyCompactList}\small\item\em Total projection on X axis. \end{DoxyCompactList}\item 
+void \textbf{ Co\+Analyse\+::projectX} (TH2 $\ast$matrix, TH1 $\ast$proj, double const \&bin\+Ymin, double const \&bin\+Ymax)
+\begin{DoxyCompactList}\small\item\em Project on Y axis between values bin\+Ymin and bin\+Ymax included [bin\+Ymin;bin\+Ymax]. \end{DoxyCompactList}\item 
+void \textbf{ Co\+Analyse\+::projectX} (TH2 $\ast$matrix, TH1 $\ast$proj, int const \&binY)
+\begin{DoxyCompactList}\small\item\em Project on Y axis at a given X bin. \end{DoxyCompactList}\item 
+void \textbf{ Co\+Analyse\+::projectX} (TH2 $\ast$matrix, TH1 $\ast$proj, int const \&bin\+Ymin, int const \&bin\+Ymax)
+\begin{DoxyCompactList}\small\item\em Project on X axis between bin bin\+Ymin included and bin\+Ymax excluded [bin\+Ymin;bin\+Ymax[. \end{DoxyCompactList}\item 
+void \textbf{ Co\+Analyse\+::projectY} (TH2 $\ast$matrix, TH1 $\ast$proj, double const \&value\+Xmin, double const \&value\+Xmax)
+\begin{DoxyCompactList}\small\item\em Project on Y axis between values value\+Xmin and value\+Xmax included [value\+Xmin;value\+Xmax]. \end{DoxyCompactList}\item 
+void \textbf{ Co\+Analyse\+::projectY} (TH2 $\ast$matrix, TH1 $\ast$proj, int const \&binX)
+\begin{DoxyCompactList}\small\item\em Project on Y axis at a given X bin. \end{DoxyCompactList}\item 
+void \textbf{ Co\+Analyse\+::projectY} (TH2 $\ast$matrix, TH1 $\ast$proj, int const \&bin\+Xmin, int const \&bin\+Xmax)
+\begin{DoxyCompactList}\small\item\em Project on Y axis between bin bin\+Xmin included and bin\+Xmax excluded [bin\+Xmin;bin\+Xmax[. \end{DoxyCompactList}\item 
+void \textbf{ Co\+Analyse\+::remove\+Background} (TH1 $\ast$histo, int const \&niter=10, std\+::string const \&fit\+\_\+options=\char`\"{}\char`\"{}, std\+::string const \&bidim\+\_\+options=\char`\"{}X\char`\"{})
+\begin{DoxyCompactList}\small\item\em Remove the background in the given histo. \end{DoxyCompactList}\item 
+void \textbf{ Co\+Analyse\+::remove\+Random\+Bidim} (TH2 $\ast$matrix, int iterations=1, bool save\+\_\+intermediate=false, Projections\+Bins projectionsY=\{\{\}\}, Projections\+Bins projectionsX=\{\{\}\})
+\item 
+void \textbf{ Co\+Analyse\+::remove\+RandomY} (TH2 $\ast$matrix, int \+\_\+stopX=-\/1, int \+\_\+stopY=-\/1, bool write\+Intermediate=false, Projections\+Bins projections=\{\{\}\})
+\begin{DoxyCompactList}\small\item\em LEGACY. \end{DoxyCompactList}\item 
+void \textbf{ Co\+Analyse\+::setX} (TH2 $\ast$matrix, TH1 $\ast$proj, int const \&binX)
+\item 
+void \textbf{ Co\+Analyse\+::setY} (TH2 $\ast$matrix, TH1 $\ast$proj, int const \&binY)
+\item 
+void \textbf{ test\+\_\+alignator} (TTree $\ast$tree, int $\ast$New\+Index=nullptr, bool use\+New\+Index=false)
+\item 
+bool \textbf{ THist\+\_\+exists} (TH1 $\ast$histo)
+\item 
+{\footnotesize template$<$typename T , typename  = typename std\+::enable\+\_\+if$<$std\+::is\+\_\+arithmetic$<$\+T$>$\+::value$>$\+::type$>$ }\\ULong64\+\_\+t \textbf{ ULong64\+\_\+cast} (T const \&t)
+\begin{DoxyCompactList}\small\item\em Casts a number into unsigned short. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+TRandom $\ast$ \textbf{ g\+Random} = new TRandom(time(0))
+\item 
+class \textbf{ Type\+Root\+Map} \textbf{ type\+Root\+Map}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\label{lib_root_8hpp_a3b73f11bc69f125e12c1d48c9ed79a6e}} 
+\index{libRoot.hpp@{libRoot.hpp}!unique\_TFile@{unique\_TFile}}
+\index{unique\_TFile@{unique\_TFile}!libRoot.hpp@{libRoot.hpp}}
+\doxysubsubsection{unique\_TFile}
+{\footnotesize\ttfamily using \textbf{ unique\+\_\+\+TFile} =  std\+::unique\+\_\+ptr$<$TFile$>$}
+
+\mbox{\label{lib_root_8hpp_a32bc45ae9358ae128c6a7d49cb343e2e}} 
+\index{libRoot.hpp@{libRoot.hpp}!unique\_TH1F@{unique\_TH1F}}
+\index{unique\_TH1F@{unique\_TH1F}!libRoot.hpp@{libRoot.hpp}}
+\doxysubsubsection{unique\_TH1F}
+{\footnotesize\ttfamily using \textbf{ unique\+\_\+\+TH1F} =  std\+::unique\+\_\+ptr$<$TH1F$>$}
+
+\mbox{\label{lib_root_8hpp_ae3db658040c9c85a57d0d6a29dc94c18}} 
+\index{libRoot.hpp@{libRoot.hpp}!unique\_TH2F@{unique\_TH2F}}
+\index{unique\_TH2F@{unique\_TH2F}!libRoot.hpp@{libRoot.hpp}}
+\doxysubsubsection{unique\_TH2F}
+{\footnotesize\ttfamily using \textbf{ unique\+\_\+\+TH2F} =  std\+::unique\+\_\+ptr$<$TH2F$>$}
+
+\mbox{\label{lib_root_8hpp_a50631b7ee8274cbc1161d2a668fdbdf3}} 
+\index{libRoot.hpp@{libRoot.hpp}!unique\_tree@{unique\_tree}}
+\index{unique\_tree@{unique\_tree}!libRoot.hpp@{libRoot.hpp}}
+\doxysubsubsection{unique\_tree}
+{\footnotesize\ttfamily using \textbf{ unique\+\_\+tree} =  std\+::unique\+\_\+ptr$<$TTree$>$}
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\label{lib_root_8hpp_a6f95a95b189be45d91548ce3bfb70a55}} 
+\index{libRoot.hpp@{libRoot.hpp}!AddTH1@{AddTH1}}
+\index{AddTH1@{AddTH1}!libRoot.hpp@{libRoot.hpp}}
+\doxysubsubsection{AddTH1()}
+{\footnotesize\ttfamily bool Add\+TH1 (\begin{DoxyParamCaption}\item[{TH2 $\ast$}]{histo2,  }\item[{TH1 $\ast$}]{histo1,  }\item[{int}]{index,  }\item[{bool}]{x = {\ttfamily true} }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=210pt]{lib_root_8hpp_a6f95a95b189be45d91548ce3bfb70a55_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{lib_root_8hpp_a6f95a95b189be45d91548ce3bfb70a55_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{lib_root_8hpp_ad91e4154d55b03aec78fc49348f35db1}} 
+\index{libRoot.hpp@{libRoot.hpp}!alignator@{alignator}}
+\index{alignator@{alignator}!libRoot.hpp@{libRoot.hpp}}
+\doxysubsubsection{alignator()}
+{\footnotesize\ttfamily void alignator (\begin{DoxyParamCaption}\item[{TTree $\ast$}]{tree,  }\item[{int $\ast$}]{New\+Index }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{lib_root_8hpp_ad91e4154d55b03aec78fc49348f35db1_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{lib_root_8hpp_a03e7d6c734bc80bcdea8985f46a45f41}} 
+\index{libRoot.hpp@{libRoot.hpp}!createBranch@{createBranch}}
+\index{createBranch@{createBranch}!libRoot.hpp@{libRoot.hpp}}
+\doxysubsubsection{createBranch()}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+auto create\+Branch (\begin{DoxyParamCaption}\item[{TTree $\ast$}]{tree,  }\item[{T $\ast$}]{value,  }\item[{std\+::string const \&}]{name }\end{DoxyParamCaption})}
+
+
+
+Create a branch for a given value and name. 
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=285pt]{lib_root_8hpp_a03e7d6c734bc80bcdea8985f46a45f41_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{lib_root_8hpp_a458b3c1dc8d1ee210a87a2cd07d4f8b2}} 
+\index{libRoot.hpp@{libRoot.hpp}!createBranchArray@{createBranchArray}}
+\index{createBranchArray@{createBranchArray}!libRoot.hpp@{libRoot.hpp}}
+\doxysubsubsection{createBranchArray()}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+auto create\+Branch\+Array (\begin{DoxyParamCaption}\item[{TTree $\ast$}]{tree,  }\item[{T $\ast$}]{array,  }\item[{std\+::string const \&}]{name,  }\item[{std\+::string const \&}]{name\+\_\+size }\end{DoxyParamCaption})}
+
+
+
+Create a branch for a given array and name. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name\+\_\+size} & The name of the leaf that holds the size of the array \\
+\hline
+\end{DoxyParams}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=311pt]{lib_root_8hpp_a458b3c1dc8d1ee210a87a2cd07d4f8b2_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{lib_root_8hpp_ab2d13b94bd25078076812f58fc7c457c}} 
+\index{libRoot.hpp@{libRoot.hpp}!draw\_all\_TH1F\_with\_X\_window@{draw\_all\_TH1F\_with\_X\_window}}
+\index{draw\_all\_TH1F\_with\_X\_window@{draw\_all\_TH1F\_with\_X\_window}!libRoot.hpp@{libRoot.hpp}}
+\doxysubsubsection{draw\_all\_TH1F\_with\_X\_window()}
+{\footnotesize\ttfamily void draw\+\_\+all\+\_\+\+TH1\+F\+\_\+with\+\_\+\+X\+\_\+window (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{filename,  }\item[{int}]{minX,  }\item[{int}]{maxX,  }\item[{int}]{rebin = {\ttfamily 1} }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=270pt]{lib_root_8hpp_ab2d13b94bd25078076812f58fc7c457c_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{lib_root_8hpp_ab7f08b4e478a833328fa0fb5cebf88d2}} 
+\index{libRoot.hpp@{libRoot.hpp}!fuse\_all\_histo@{fuse\_all\_histo}}
+\index{fuse\_all\_histo@{fuse\_all\_histo}!libRoot.hpp@{libRoot.hpp}}
+\doxysubsubsection{fuse\_all\_histo()}
+{\footnotesize\ttfamily void fuse\+\_\+all\+\_\+histo (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{folder,  }\item[{std\+::string const \&}]{out\+Root = {\ttfamily \char`\"{}fused\+\_\+histo.root\char`\"{}},  }\item[{bool const \&}]{bidim = {\ttfamily true} }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=305pt]{lib_root_8hpp_ab7f08b4e478a833328fa0fb5cebf88d2_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{lib_root_8hpp_ab8628517ea9ef7ded29d8e22be6f628f}} 
+\index{libRoot.hpp@{libRoot.hpp}!getBin0@{getBin0}}
+\index{getBin0@{getBin0}!libRoot.hpp@{libRoot.hpp}}
+\doxysubsubsection{getBin0()}
+{\footnotesize\ttfamily int get\+Bin0 (\begin{DoxyParamCaption}\item[{TH1F $\ast$}]{spectra }\end{DoxyParamCaption})}
+
+
+
+Get which bin holds the X = 0. 
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{lib_root_8hpp_ab8628517ea9ef7ded29d8e22be6f628f_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{lib_root_8hpp_accfb8dfb6ee42fa6845013a0cf121ac1}} 
+\index{libRoot.hpp@{libRoot.hpp}!getMeanPeak@{getMeanPeak}}
+\index{getMeanPeak@{getMeanPeak}!libRoot.hpp@{libRoot.hpp}}
+\doxysubsubsection{getMeanPeak()}
+{\footnotesize\ttfamily bool get\+Mean\+Peak (\begin{DoxyParamCaption}\item[{TH1F $\ast$}]{spectra,  }\item[{double \&}]{mean }\end{DoxyParamCaption})}
+
+
+
+Get the mean of the peak of a histogram with one nice single peak. 
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=253pt]{lib_root_8hpp_accfb8dfb6ee42fa6845013a0cf121ac1_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{lib_root_8hpp_accfb8dfb6ee42fa6845013a0cf121ac1_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{lib_root_8hpp_a269d058dec61fdc486050ca3e57da0bb}} 
+\index{libRoot.hpp@{libRoot.hpp}!Long64\_cast@{Long64\_cast}}
+\index{Long64\_cast@{Long64\_cast}!libRoot.hpp@{libRoot.hpp}}
+\doxysubsubsection{Long64\_cast()}
+{\footnotesize\ttfamily template$<$typename T , typename  = typename std\+::enable\+\_\+if$<$std\+::is\+\_\+arithmetic$<$\+T$>$\+::value$>$\+::type$>$ \\
+Long64\+\_\+t Long64\+\_\+cast (\begin{DoxyParamCaption}\item[{T const \&}]{t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Casts a number into unsigned short. 
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=348pt]{lib_root_8hpp_a269d058dec61fdc486050ca3e57da0bb_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{lib_root_8hpp_a0269226b4d78b1089ef77180712147e0}} 
+\index{libRoot.hpp@{libRoot.hpp}!maxXaxis@{maxXaxis}}
+\index{maxXaxis@{maxXaxis}!libRoot.hpp@{libRoot.hpp}}
+\doxysubsubsection{maxXaxis()}
+{\footnotesize\ttfamily float max\+Xaxis (\begin{DoxyParamCaption}\item[{TH1 $\ast$}]{histo }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{lib_root_8hpp_a0269226b4d78b1089ef77180712147e0_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{lib_root_8hpp_ada9d5d265d78076b2e7fb980a09c71b0}} 
+\index{libRoot.hpp@{libRoot.hpp}!maxYaxis@{maxYaxis}}
+\index{maxYaxis@{maxYaxis}!libRoot.hpp@{libRoot.hpp}}
+\doxysubsubsection{maxYaxis()}
+{\footnotesize\ttfamily float max\+Yaxis (\begin{DoxyParamCaption}\item[{TH1 $\ast$}]{histo }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{lib_root_8hpp_ada9d5d265d78076b2e7fb980a09c71b0_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{lib_root_8hpp_ab23c9fed2f973bde045e7d90c8e1f2fe}} 
+\index{libRoot.hpp@{libRoot.hpp}!minXaxis@{minXaxis}}
+\index{minXaxis@{minXaxis}!libRoot.hpp@{libRoot.hpp}}
+\doxysubsubsection{minXaxis()}
+{\footnotesize\ttfamily float min\+Xaxis (\begin{DoxyParamCaption}\item[{TH1 $\ast$}]{histo }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{lib_root_8hpp_ab23c9fed2f973bde045e7d90c8e1f2fe_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{lib_root_8hpp_a6ce1f9927b8e99f76cbda975fb51adcf}} 
+\index{libRoot.hpp@{libRoot.hpp}!minYaxis@{minYaxis}}
+\index{minYaxis@{minYaxis}!libRoot.hpp@{libRoot.hpp}}
+\doxysubsubsection{minYaxis()}
+{\footnotesize\ttfamily float min\+Yaxis (\begin{DoxyParamCaption}\item[{TH1 $\ast$}]{histo }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{lib_root_8hpp_a6ce1f9927b8e99f76cbda975fb51adcf_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{lib_root_8hpp_a1bf070584d2988460758158e556cefe4}} 
+\index{libRoot.hpp@{libRoot.hpp}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!libRoot.hpp@{libRoot.hpp}}
+\doxysubsubsection{operator$<$$<$()}
+{\footnotesize\ttfamily std\+::ostream\& operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{cout,  }\item[{\textbf{ THBinning}}]{binning }\end{DoxyParamCaption})}
+
+\mbox{\label{lib_root_8hpp_a0b2306f59088babb4975e636d04c4f53}} 
+\index{libRoot.hpp@{libRoot.hpp}!test\_alignator@{test\_alignator}}
+\index{test\_alignator@{test\_alignator}!libRoot.hpp@{libRoot.hpp}}
+\doxysubsubsection{test\_alignator()}
+{\footnotesize\ttfamily void test\+\_\+alignator (\begin{DoxyParamCaption}\item[{TTree $\ast$}]{tree,  }\item[{int $\ast$}]{New\+Index = {\ttfamily nullptr},  }\item[{bool}]{use\+New\+Index = {\ttfamily false} }\end{DoxyParamCaption})}
+
+\mbox{\label{lib_root_8hpp_a03d21b830e335ed5e98eaf83038ee8d2}} 
+\index{libRoot.hpp@{libRoot.hpp}!THist\_exists@{THist\_exists}}
+\index{THist\_exists@{THist\_exists}!libRoot.hpp@{libRoot.hpp}}
+\doxysubsubsection{THist\_exists()}
+{\footnotesize\ttfamily bool THist\+\_\+exists (\begin{DoxyParamCaption}\item[{TH1 $\ast$}]{histo }\end{DoxyParamCaption})}
+
+\mbox{\label{lib_root_8hpp_a40d3e36a2118509ec94a14fc794895a0}} 
+\index{libRoot.hpp@{libRoot.hpp}!ULong64\_cast@{ULong64\_cast}}
+\index{ULong64\_cast@{ULong64\_cast}!libRoot.hpp@{libRoot.hpp}}
+\doxysubsubsection{ULong64\_cast()}
+{\footnotesize\ttfamily template$<$typename T , typename  = typename std\+::enable\+\_\+if$<$std\+::is\+\_\+arithmetic$<$\+T$>$\+::value$>$\+::type$>$ \\
+ULong64\+\_\+t ULong64\+\_\+cast (\begin{DoxyParamCaption}\item[{T const \&}]{t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Casts a number into unsigned short. 
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{lib_root_8hpp_a40d3e36a2118509ec94a14fc794895a0_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\label{lib_root_8hpp_ae1911f5a7f54d08592ee0879f4d848f3}} 
+\index{libRoot.hpp@{libRoot.hpp}!gRandom@{gRandom}}
+\index{gRandom@{gRandom}!libRoot.hpp@{libRoot.hpp}}
+\doxysubsubsection{gRandom}
+{\footnotesize\ttfamily TRandom$\ast$ g\+Random = new TRandom(time(0))}
+
+\mbox{\label{lib_root_8hpp_ad29ed215015eb770854e597fbdabb984}} 
+\index{libRoot.hpp@{libRoot.hpp}!typeRootMap@{typeRootMap}}
+\index{typeRootMap@{typeRootMap}!libRoot.hpp@{libRoot.hpp}}
+\doxysubsubsection{typeRootMap}
+{\footnotesize\ttfamily class \textbf{ Type\+Root\+Map} type\+Root\+Map}
+

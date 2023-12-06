@@ -1,9 +1,21 @@
 var searchData=
 [
-  ['scalefactor_1909',['scalefactor',['../classpic__fit__result.html#a6378d7c61708ec152191c9e23df7cb84',1,'pic_fit_result']]],
-  ['shared_5fmutex_1910',['shared_mutex',['../class_m_t_object.html#a28da61d46eb600e14da757d0c851ecbd',1,'MTObject']]],
-  ['sigma_1911',['sigma',['../classpic__fit__result.html#acd19174eb21fad2e4f54bd0ac0b81f0f',1,'pic_fit_result']]],
-  ['size_5ffile_5funit_1912',['size_file_unit',['../files__functions_8hpp.html#aaa642aa8e56dec4354f00dd45a43832f',1,'files_functions.hpp']]],
-  ['start_1913',['start',['../class_gate.html#a15a6da17733172e1789860f881d2365c',1,'Gate']]],
-  ['stop_1914',['stop',['../class_gate.html#a2954979ab28929da74317e01d80491cf',1,'Gate']]]
+  ['ratio_2652',['ratio',['../class_paris_phoswitch.html#ac84fb1e5c68263ffd8e2ab4b017841ce',1,'ParisPhoswitch']]],
+  ['raw_5fspectra_2653',['raw_spectra',['../struct_calibration_1_1histograms.html#a4665ea6699e47b50df6103317d87d36b',1,'Calibration::histograms']]],
+  ['rawbgo_2654',['RawBGO',['../class_counters.html#afba8f7fd1f07fe6afd5f2ffd46ddf8bf',1,'Counters']]],
+  ['rawbgo_2655',['rawBGO',['../class_clovers.html#a1a2205eb2396ce5fd48b0f12a73f0196',1,'Clovers']]],
+  ['rawge_2656',['RawGe',['../class_counters.html#a788284c58e92d46682d73e2679cdaa48',1,'Counters']]],
+  ['rawge_2657',['rawGe',['../class_clovers.html#af84dd10eb878f4385ecd092e23a77e1c',1,'Clovers']]],
+  ['rawgemult_2658',['RawGeMult',['../class_sorted___event.html#a87e18e85b327bc463a15d2d1f8ae2c5c',1,'Sorted_Event']]],
+  ['rawmult_2659',['RawMult',['../class_sorted___event.html#a305216fefa6fd71376e828702590fb82',1,'Sorted_Event']]],
+  ['rd_2660',['rd',['../random_8hpp.html#a7071b0092ad8c5b57d6cc40c5f803df5',1,'random.hpp']]],
+  ['read_2661',['read',['../class_hit.html#a4748672c2bd6987972336e488f67bda7',1,'Hit::read()'],['../class_event.html#a9c01144b3f06d4cc5234ae3736fec9d2',1,'Event::read()']]],
+  ['rejectedge_2662',['RejectedGe',['../class_clovers.html#ae853cd7142ff578d6876c38070ef482e',1,'Clovers']]],
+  ['rf_5fref_5ftime_2663',['RF_ref_time',['../class_event_builder.html#aae65b5dd56d65114847b98becd24634c',1,'EventBuilder']]],
+  ['ring_2664',['ring',['../class_paris_label.html#a43fed71ff7f0c3efcf3b2938fd60715d',1,'ParisLabel']]],
+  ['ring_5farray_2665',['ring_array',['../class_paris_label.html#a12026f89649ca3d3ef2a5fda9b6395e7',1,'ParisLabel']]],
+  ['ring_5fdeg_5fthick_2666',['ring_deg_thick',['../_d_s_s_d_8hpp.html#a171e565222e5ede0a6978e8dc588f2b0',1,'DSSD.hpp']]],
+  ['ring_5fthickness_2667',['ring_thickness',['../_d_s_s_d_8hpp.html#a130dbffe4a5a42623871be39c19d4a68',1,'DSSD.hpp']]],
+  ['ringmult_2668',['RingMult',['../class_d_s_s_d.html#a28d8b2597e7458b29c399e701f048f17',1,'DSSD']]],
+  ['rings_2669',['Rings',['../class_d_s_s_d.html#ac2048ed45b15c5d0c9b7eb749ea40cba',1,'DSSD']]]
 ];

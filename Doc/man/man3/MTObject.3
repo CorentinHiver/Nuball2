@@ -1,0 +1,144 @@
+.TH "MTObject" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+MTObject
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <MTObject\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBMTObject\fP ()"
+.br
+.ti -1c
+.RI "\fBMTObject\fP (\fBsize_t\fP &_nb_threads)"
+.br
+.ti -1c
+.RI "\fBoperator bool\fP ()"
+.br
+.in -1c
+.SS "Static Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "static void \fBadjustThreadsNumber\fP (\fBsize_t\fP const &limiting_number, std::string const &print_if_limit_reached='')"
+.br
+.ti -1c
+.RI "static auto const  & \fBgetThreadIndex\fP ()"
+.br
+.ti -1c
+.RI "static auto const  & \fBgetThreadsNb\fP ()"
+.br
+.ti -1c
+.RI "static auto const  & \fBgetThreadsNumber\fP ()"
+.br
+.ti -1c
+.RI "static auto const  & \fBindex\fP ()"
+.br
+.ti -1c
+.RI "static void \fBInitialize\fP ()"
+.br
+.ti -1c
+.RI "static void \fBInitialize\fP (\fBsize_t\fP const &_nb_threads, bool force=false)"
+.br
+.ti -1c
+.RI "static bool \fBisMasterThread\fP ()"
+.br
+.ti -1c
+.RI "template<class Func , class\&.\&.\&. ARGS> static void \fBparallelise_function\fP (Func &&func, ARGS &&\&.\&.\&. args)"
+.br
+.ti -1c
+.RI "static void \fBsetThreadsNb\fP (int const &n, bool force=false)"
+.br
+.ti -1c
+.RI "static void \fBsetThreadsNb\fP (\fBsize_t\fP const &n, bool force=false)"
+.br
+.RI "Sets the number of threads\&. "
+.ti -1c
+.RI "static void \fBsetThreadsNumber\fP (\fBsize_t\fP const &n, bool force=false)"
+.br
+.in -1c
+.SS "Static Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "static std::mutex \fBmutex\fP"
+.br
+.ti -1c
+.RI "static \fBsize_t\fP \fBnb_threads\fP = 1"
+.br
+.ti -1c
+.RI "static bool \fBON\fP = false"
+.br
+.in -1c
+.SS "Static Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "static thread_local \fBsize_t\fP \fBm_thread_index\fP = 0"
+.br
+.ti -1c
+.RI "static std::vector< std::thread > \fBm_threads\fP"
+.br
+.ti -1c
+.RI "static std::thread::id \fBmaster_thread_id\fP"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "MTObject::MTObject ()\fC [inline]\fP"
+
+.SS "MTObject::MTObject (\fBsize_t\fP & _nb_threads)\fC [inline]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "static void MTObject::adjustThreadsNumber (\fBsize_t\fP const & limiting_number, std::string const & print_if_limit_reached = \fC''\fP)\fC [inline]\fP, \fC [static]\fP"
+
+.SS "static auto const& MTObject::getThreadIndex ()\fC [inline]\fP, \fC [static]\fP"
+
+.SS "static auto const& MTObject::getThreadsNb ()\fC [inline]\fP, \fC [static]\fP"
+
+.SS "static auto const& MTObject::getThreadsNumber ()\fC [inline]\fP, \fC [static]\fP"
+
+.SS "static auto const& MTObject::index ()\fC [inline]\fP, \fC [static]\fP"
+
+.SS "static void MTObject::Initialize ()\fC [inline]\fP, \fC [static]\fP"
+
+.SS "static void MTObject::Initialize (\fBsize_t\fP const & _nb_threads, bool force = \fCfalse\fP)\fC [inline]\fP, \fC [static]\fP"
+
+.SS "static bool MTObject::isMasterThread ()\fC [inline]\fP, \fC [static]\fP"
+
+.SS "MTObject::operator bool ()\fC [inline]\fP"
+
+.SS "template<class Func , class\&.\&.\&. ARGS> static void MTObject::parallelise_function (Func && func, ARGS &&\&.\&.\&. args)\fC [inline]\fP, \fC [static]\fP"
+
+.SS "static void MTObject::setThreadsNb (int const & n, bool force = \fCfalse\fP)\fC [inline]\fP, \fC [static]\fP"
+
+.SS "static void MTObject::setThreadsNb (\fBsize_t\fP const & n, bool force = \fCfalse\fP)\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Sets the number of threads\&. Check the number of threads\&. Usually, over 75% of cores is the optimal\&. Set force parameter to true if you want to use all the cores 
+.SS "static void MTObject::setThreadsNumber (\fBsize_t\fP const & n, bool force = \fCfalse\fP)\fC [inline]\fP, \fC [static]\fP"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "thread_local \fBsize_t\fP MTObject::m_thread_index = 0\fC [static]\fP, \fC [private]\fP"
+
+.SS "std::vector< std::thread > MTObject::m_threads\fC [static]\fP, \fC [private]\fP"
+
+.SS "std::thread::id MTObject::master_thread_id\fC [static]\fP, \fC [private]\fP"
+
+.SS "std::mutex MTObject::mutex\fC [static]\fP"
+
+.SS "\fBsize_t\fP MTObject::nb_threads = 1\fC [static]\fP"
+
+.SS "bool MTObject::ON = false\fC [static]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Nuball2 from the source code\&.

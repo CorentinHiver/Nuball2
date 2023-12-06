@@ -1,0 +1,6 @@
+<map id="Time_ns_cast" name="Time_ns_cast">
+<area shape="rect" id="node1" title="Casts a number into unsigned Time_ns." alt="" coords="279,56,389,83"/>
+<area shape="rect" id="node2" href="$class_paris_phoswitch.html#ae42c75c5e5c5a82ebc8e417b7746976e" title=" " alt="" coords="45,5,191,32"/>
+<area shape="rect" id="node3" href="$class_timeshifts.html#af9da5337ea83092b9a6bb56cdb83f4cb" title="Set the time window in ns." alt="" coords="5,56,231,83"/>
+<area shape="rect" id="node4" href="$class_event.html#a15a45e59b3ce25ab2b72e68578e99c51" title=" " alt="" coords="59,107,177,133"/>
+</map>

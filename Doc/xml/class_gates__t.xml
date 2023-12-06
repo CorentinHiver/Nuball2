@@ -1,0 +1,183 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="class_gates__t" kind="class" language="C++" prot="public">
+    <compoundname>Gates_t</compoundname>
+    <includes refid="_gate_8hpp" local="no">Gate.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_gates__t_1a78ab2e282a6644a651512e2d3d284204" prot="private" static="no" mutable="no">
+        <type><ref refid="lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638" kindref="member">std::size_t</ref></type>
+        <definition>std::size_t Gates_t&lt; T &gt;::m_size</definition>
+        <argsstring></argsstring>
+        <name>m_size</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Gate.hpp" line="76" column="15" bodyfile="lib/Classes/Gate.hpp" bodystart="76" bodyend="-1"/>
+        <referencedby refid="class_gates__t_1a0bd9311137fd07879a470fdc692e6503" compoundref="_gate_8hpp" startline="56" endline="63">Gates_t&lt; T &gt;::isIn</referencedby>
+        <referencedby refid="class_gates__t_1a09ccdefe86716e251d36ac2d5dcea922" compoundref="_gate_8hpp" startline="71" endline="71">Gates_t&lt; T &gt;::size</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_gates__t_1a8b864dce704ad3a17d47097e4e68b4c3" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; T &gt;</type>
+        <definition>std::vector&lt;T&gt; Gates_t&lt; T &gt;::start</definition>
+        <argsstring></argsstring>
+        <name>start</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Gate.hpp" line="74" column="15" bodyfile="lib/Classes/Gate.hpp" bodystart="74" bodyend="-1"/>
+        <referencedby refid="class_gates__t_1a31ce88cdf09b7b5f9c74d13a22537815" compoundref="_gate_8hpp" startline="44" endline="54">Gates_t&lt; T &gt;::Gates_t</referencedby>
+        <referencedby refid="class_gates__t_1a0bd9311137fd07879a470fdc692e6503" compoundref="_gate_8hpp" startline="56" endline="63">Gates_t&lt; T &gt;::isIn</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_gates__t_1aeb06a1056da00c242a9b8c8854121c3a" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; T &gt;</type>
+        <definition>std::vector&lt;T&gt; Gates_t&lt; T &gt;::stop</definition>
+        <argsstring></argsstring>
+        <name>stop</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Gate.hpp" line="75" column="15" bodyfile="lib/Classes/Gate.hpp" bodystart="75" bodyend="-1"/>
+        <referencedby refid="class_gates__t_1a31ce88cdf09b7b5f9c74d13a22537815" compoundref="_gate_8hpp" startline="44" endline="54">Gates_t&lt; T &gt;::Gates_t</referencedby>
+        <referencedby refid="class_gates__t_1a0bd9311137fd07879a470fdc692e6503" compoundref="_gate_8hpp" startline="56" endline="63">Gates_t&lt; T &gt;::isIn</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_gates__t_1a07f860c7dcd7110ee0da5d523591b12f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Gates_t&lt; T &gt;::check</definition>
+        <argsstring>(std::initializer_list&lt; T &gt; bounds)</argsstring>
+        <name>check</name>
+        <param>
+          <type>std::initializer_list&lt; T &gt;</type>
+          <declname>bounds</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Gate.hpp" line="67" column="8" bodyfile="lib/Classes/Gate.hpp" bodystart="67" bodyend="70"/>
+        <references refid="lib_co_8hpp_1a6df2dcd4b1f61c75dc292942bc5ca74d" compoundref="lib_co_8hpp" startline="234" endline="234">throw_error</references>
+        <referencedby refid="class_gates__t_1a31ce88cdf09b7b5f9c74d13a22537815" compoundref="_gate_8hpp" startline="44" endline="54">Gates_t&lt; T &gt;::Gates_t</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_gates__t_1a296ccceb76e5c87c661a6814b2301e80" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Gates_t&lt; T &gt;::Gates_t</definition>
+        <argsstring>()</argsstring>
+        <name>Gates_t</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Gate.hpp" line="43" column="3" bodyfile="lib/Classes/Gate.hpp" bodystart="43" bodyend="43"/>
+      </memberdef>
+      <memberdef kind="function" id="class_gates__t_1a31ce88cdf09b7b5f9c74d13a22537815" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Gates_t&lt; T &gt;::Gates_t</definition>
+        <argsstring>(std::initializer_list&lt; T &gt; bounds)</argsstring>
+        <name>Gates_t</name>
+        <param>
+          <type>std::initializer_list&lt; T &gt;</type>
+          <declname>bounds</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Gate.hpp" line="44" column="3" bodyfile="lib/Classes/Gate.hpp" bodystart="44" bodyend="54"/>
+        <references refid="class_gates__t_1a07f860c7dcd7110ee0da5d523591b12f" compoundref="_gate_8hpp" startline="67" endline="70">Gates_t&lt; T &gt;::check</references>
+        <references refid="class_gates__t_1a8b864dce704ad3a17d47097e4e68b4c3" compoundref="_gate_8hpp" startline="74">Gates_t&lt; T &gt;::start</references>
+        <references refid="class_gates__t_1aeb06a1056da00c242a9b8c8854121c3a" compoundref="_gate_8hpp" startline="75">Gates_t&lt; T &gt;::stop</references>
+      </memberdef>
+      <memberdef kind="function" id="class_gates__t_1a0bd9311137fd07879a470fdc692e6503" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Gates_t&lt; T &gt;::isIn</definition>
+        <argsstring>(T const &amp;t)</argsstring>
+        <name>isIn</name>
+        <param>
+          <type>T const &amp;</type>
+          <declname>t</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Gate.hpp" line="56" column="8" bodyfile="lib/Classes/Gate.hpp" bodystart="56" bodyend="63"/>
+        <references refid="class_gates__t_1a78ab2e282a6644a651512e2d3d284204" compoundref="_gate_8hpp" startline="76">Gates_t&lt; T &gt;::m_size</references>
+        <references refid="class_gates__t_1a8b864dce704ad3a17d47097e4e68b4c3" compoundref="_gate_8hpp" startline="74">Gates_t&lt; T &gt;::start</references>
+        <references refid="class_gates__t_1aeb06a1056da00c242a9b8c8854121c3a" compoundref="_gate_8hpp" startline="75">Gates_t&lt; T &gt;::stop</references>
+        <referencedby refid="class_gates__t_1a26ce612cac177fd38e869095069452bf" compoundref="_gate_8hpp" startline="65" endline="65">Gates_t&lt; T &gt;::operator()</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_gates__t_1a26ce612cac177fd38e869095069452bf" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Gates_t&lt; T &gt;::operator()</definition>
+        <argsstring>(T const &amp;t) const</argsstring>
+        <name>operator()</name>
+        <param>
+          <type>T const &amp;</type>
+          <declname>t</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Gate.hpp" line="65" column="8" bodyfile="lib/Classes/Gate.hpp" bodystart="65" bodyend="65"/>
+        <references refid="class_gates__t_1a0bd9311137fd07879a470fdc692e6503" compoundref="_gate_8hpp" startline="56" endline="63">Gates_t&lt; T &gt;::isIn</references>
+      </memberdef>
+      <memberdef kind="function" id="class_gates__t_1a09ccdefe86716e251d36ac2d5dcea922" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638" kindref="member">std::size_t</ref> const  &amp;</type>
+        <definition>std::size_t const&amp; Gates_t&lt; T &gt;::size</definition>
+        <argsstring>() const</argsstring>
+        <name>size</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Gate.hpp" line="71" column="22" bodyfile="lib/Classes/Gate.hpp" bodystart="71" bodyend="71"/>
+        <references refid="class_gates__t_1a78ab2e282a6644a651512e2d3d284204" compoundref="_gate_8hpp" startline="76">Gates_t&lt; T &gt;::m_size</references>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="lib/Classes/Gate.hpp" line="40" column="1" bodyfile="lib/Classes/Gate.hpp" bodystart="41" bodyend="77"/>
+    <listofallmembers>
+      <member refid="class_gates__t_1a07f860c7dcd7110ee0da5d523591b12f" prot="public" virt="non-virtual"><scope>Gates_t</scope><name>check</name></member>
+      <member refid="class_gates__t_1a296ccceb76e5c87c661a6814b2301e80" prot="public" virt="non-virtual"><scope>Gates_t</scope><name>Gates_t</name></member>
+      <member refid="class_gates__t_1a31ce88cdf09b7b5f9c74d13a22537815" prot="public" virt="non-virtual"><scope>Gates_t</scope><name>Gates_t</name></member>
+      <member refid="class_gates__t_1a0bd9311137fd07879a470fdc692e6503" prot="public" virt="non-virtual"><scope>Gates_t</scope><name>isIn</name></member>
+      <member refid="class_gates__t_1a78ab2e282a6644a651512e2d3d284204" prot="private" virt="non-virtual"><scope>Gates_t</scope><name>m_size</name></member>
+      <member refid="class_gates__t_1a26ce612cac177fd38e869095069452bf" prot="public" virt="non-virtual"><scope>Gates_t</scope><name>operator()</name></member>
+      <member refid="class_gates__t_1a09ccdefe86716e251d36ac2d5dcea922" prot="public" virt="non-virtual"><scope>Gates_t</scope><name>size</name></member>
+      <member refid="class_gates__t_1a8b864dce704ad3a17d47097e4e68b4c3" prot="private" virt="non-virtual"><scope>Gates_t</scope><name>start</name></member>
+      <member refid="class_gates__t_1aeb06a1056da00c242a9b8c8854121c3a" prot="private" virt="non-virtual"><scope>Gates_t</scope><name>stop</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,7 +1,17 @@
-to know the parameters, one has to simply call the executable : 
+This quick README allows you to use the executables in this folder.
+You a have set of executables with their source code, a Makefile and some additionnal folders.
+
+If you want to modify any executable : 
+    modify the source code
+    uncomment the correct 'SRCEXE := *' line
+    make the executable using either : 
+        make
+        make debug
+        make opt
+
+If you want to know the parameters of an executable, one has to simply call the executable : 
 $ ./executable
 > Usage of executable ....
 
-manip2root uses faster2root. Therefore you can modify faster2root according to how you want to convert each run
-
-example of some parameters files like the trigger or list of runs are in the parameters/ folder
+any specificity in the use of each executable should be written both in the documentation (Nuball2/Doc/)
+and in the source code. If not contact me corentin.hiver@ijclab.in2p3.fr

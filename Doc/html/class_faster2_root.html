@@ -83,159 +83,177 @@ $(document).ready(function(){initNavTree('class_faster2_root.html',''); initResi
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
-<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pro-static-methods">Static Protected Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="class_faster2_root-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">Faster2Root Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
+<p>Basic class to perform faster to root tree data conversion.  
+ <a href="class_faster2_root.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="_faster2_root_8hpp_source.html">Faster2Root.hpp</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for Faster2Root:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_faster2_root__inherit__graph.png" border="0" usemap="#a_faster2_root_inherit__map" alt="Inheritance graph"/></div>
+<map name="a_faster2_root_inherit__map" id="a_faster2_root_inherit__map">
+<area shape="rect" title="Basic class to perform faster to root tree data conversion." alt="" coords="31,5,130,32"/>
+<area shape="rect" href="class_my_simple_convertor.html" title=" " alt="" coords="5,80,156,107"/>
+</map>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
 Collaboration diagram for Faster2Root:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_faster2_root__coll__graph.png" border="0" usemap="#a_faster2_root_coll__map" alt="Collaboration graph"/></div>
+<map name="a_faster2_root_coll__map" id="a_faster2_root_coll__map">
+<area shape="rect" title="Basic class to perform faster to root tree data conversion." alt="" coords="528,409,627,436"/>
+<area shape="rect" href="class_timeshifts.html" title=" " alt="" coords="259,291,350,317"/>
+<area shape="rect" href="class_path.html" title="EXPERIMENTAL Object used to hold the complete path of a giver folder." alt="" coords="27,95,78,121"/>
+<area shape="rect" href="class_files_manager.html" title=" " alt="" coords="100,193,210,219"/>
+<area shape="rect" href="class_folders.html" title="EXPERIMENTAL Object used to hold a list of folders." alt="" coords="18,5,87,32"/>
+<area shape="rect" href="class_m_t_t_hist.html" title=" " alt="" coords="234,193,374,219"/>
+<area shape="rect" href="class_m_t_t_hist.html" title=" " alt="" coords="374,95,514,121"/>
+<area shape="rect" href="struct_calibration_1_1histograms.html" title=" " alt="" coords="621,193,796,219"/>
+<area shape="rect" href="class_m_t_counter.html" title="Atomic counter with convenient overloaded operators." alt="" coords="594,291,686,317"/>
+<area shape="rect" href="class_calibration.html" title=" " alt="" coords="472,291,566,317"/>
+<area shape="rect" href="class_timer.html" title=" " alt="" coords="746,291,806,317"/>
+</map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a0a9d05860dee9c95927224569e789fa5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_faster2_root.html#a0a9d05860dee9c95927224569e789fa5">calculateTimeshifts</a> (std::string const &amp;parameters, int const &amp;nb_files=-1)</td></tr>
-<tr class="separator:a0a9d05860dee9c95927224569e789fa5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0a1797460cf62fe88d87327602b91eda"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_faster2_root.html#a0a1797460cf62fe88d87327602b91eda">convert</a> (<a class="el" href="lib_co_8hpp.html#a3fa7784c89589b49764048e9909d0e07">ushort</a> const &amp;nb_threads)</td></tr>
-<tr class="separator:a0a1797460cf62fe88d87327602b91eda"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a931cf8ef7c2acab073b363893c65bffd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_faster2_root.html#a931cf8ef7c2acab073b363893c65bffd">Faster2Root</a> (<a class="el" href="class_detectors_list.html">DetectorsList</a> const &amp;detectorList, std::string const &amp;timeshifts_file=&quot;&quot;, std::string const &amp;calib_file=&quot;&quot;, std::string const &amp;folder=&quot;&quot;, std::string const &amp;outfolder=&quot;&quot;, <a class="el" href="lib_co_8hpp.html#a3fa7784c89589b49764048e9909d0e07">ushort</a> const &amp;nb_threads=2)</td></tr>
-<tr class="separator:a931cf8ef7c2acab073b363893c65bffd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab164afcb047412f8ba87c7ba7064d80a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_faster2_root.html#ab164afcb047412f8ba87c7ba7064d80a">loadCalibration</a> (std::string const &amp;calib_filename)</td></tr>
-<tr class="separator:ab164afcb047412f8ba87c7ba7064d80a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acef0689ae63f98e97e34b231b52ecc24"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_faster2_root.html#acef0689ae63f98e97e34b231b52ecc24">loadTimeshifts</a> (std::string const &amp;ts_filename)</td></tr>
-<tr class="separator:acef0689ae63f98e97e34b231b52ecc24"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6a5f842fa5f27d7936c132e12fa60505"><td class="memItemLeft" align="right" valign="top">bool const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_faster2_root.html#a6a5f842fa5f27d7936c132e12fa60505">ok</a> () const</td></tr>
-<tr class="separator:a6a5f842fa5f27d7936c132e12fa60505"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adce71c7f29df1c847578b957c85c67ee"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_calibration.html">Calibration</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_faster2_root.html#adce71c7f29df1c847578b957c85c67ee">p_calib</a> ()</td></tr>
-<tr class="separator:adce71c7f29df1c847578b957c85c67ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3b8d9436125012bb870d196ef58bbecc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_detectors_list.html">DetectorsList</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_faster2_root.html#a3b8d9436125012bb870d196ef58bbecc">p_detList</a> ()</td></tr>
-<tr class="separator:a3b8d9436125012bb870d196ef58bbecc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa874d23260f610a7a32376bcb6f64bf1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_files_manager.html">FilesManager</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_faster2_root.html#aa874d23260f610a7a32376bcb6f64bf1">p_files</a> ()</td></tr>
-<tr class="separator:aa874d23260f610a7a32376bcb6f64bf1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a12a3de9d0d12f8617ae3b6f5f3e6889b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_timeshifts.html">Timeshifts</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_faster2_root.html#a12a3de9d0d12f8617ae3b6f5f3e6889b">p_ts</a> ()</td></tr>
-<tr class="separator:a12a3de9d0d12f8617ae3b6f5f3e6889b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a30a547858aa9e7100eade67029d4ce1c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_faster2_root.html#a30a547858aa9e7100eade67029d4ce1c">setListDet</a> (<a class="el" href="class_detectors_list.html">DetectorsList</a> const &amp;detectorList)</td></tr>
-<tr class="separator:a30a547858aa9e7100eade67029d4ce1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a69700110c53e6d512bf265ab96b8ef0c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_faster2_root.html#a69700110c53e6d512bf265ab96b8ef0c">setListDet</a> (std::string const &amp;filename)</td></tr>
-<tr class="separator:a69700110c53e6d512bf265ab96b8ef0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a100fbf3a514156f13137582ebe7b63c4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_faster2_root.html#a100fbf3a514156f13137582ebe7b63c4">setOutDir</a> (std::string const &amp;outfolder)</td></tr>
-<tr class="separator:a100fbf3a514156f13137582ebe7b63c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af2a1897c51aeb3fd269aeebb20aaad6d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_faster2_root.html#af2a1897c51aeb3fd269aeebb20aaad6d">setRunPath</a> (std::string const &amp;datapath)</td></tr>
-<tr class="separator:af2a1897c51aeb3fd269aeebb20aaad6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2409f727d81b148d694f2da17a1989f4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_faster2_root.html#a2409f727d81b148d694f2da17a1989f4">treatFile</a> (std::string const &amp;filename)</td></tr>
-<tr class="separator:a2409f727d81b148d694f2da17a1989f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad6de8c1c54e9fef526a54e56de4c9361"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_faster2_root.html#ad6de8c1c54e9fef526a54e56de4c9361">verbose</a> (bool const &amp;_verbose=true)</td></tr>
-<tr class="separator:ad6de8c1c54e9fef526a54e56de4c9361"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5eadd66ea26d632b75a92aa9c2878bf3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_faster2_root.html#a5eadd66ea26d632b75a92aa9c2878bf3">buildEvents</a> (int time_window_ns)</td></tr>
+<tr class="separator:a5eadd66ea26d632b75a92aa9c2878bf3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d6d5249c6ced2548a58406eca085cdb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_faster2_root.html#a7d6d5249c6ced2548a58406eca085cdb">convert</a> (std::string const &amp;dataFolder, std::string const &amp;outputFolder, int const &amp;nb_files=-1)</td></tr>
+<tr class="separator:a7d6d5249c6ced2548a58406eca085cdb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8306673fb7007ca6c7c586ba2df764b9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_faster2_root.html#a8306673fb7007ca6c7c586ba2df764b9">Faster2Root</a> ()</td></tr>
+<tr class="separator:a8306673fb7007ca6c7c586ba2df764b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aacd4d3fa480eba9bc86b49f4b2040c60"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_faster2_root.html#aacd4d3fa480eba9bc86b49f4b2040c60">Faster2Root</a> (int argc, char **argv)</td></tr>
+<tr class="separator:aacd4d3fa480eba9bc86b49f4b2040c60"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61a5cc14735e615b6a6389a1ece4f694"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_faster2_root.html#a61a5cc14735e615b6a6389a1ece4f694">Faster2Root</a> (int argc, char **argv, <a class="el" href="_faster2_root_8hpp.html#a75162947cdf43694952e4c0a53735199">Trigger</a> trigger)</td></tr>
+<tr class="separator:a61a5cc14735e615b6a6389a1ece4f694"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad07b97d280479aabc26e04d920726ddb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_faster2_root.html#ad07b97d280479aabc26e04d920726ddb">Faster2Root</a> (<a class="el" href="class_path.html">Path</a> const &amp;inputFolder, <a class="el" href="class_path.html">Path</a> const &amp;outputFolder, int const &amp;nb_files=-1, bool const &amp;<a class="el" href="class_faster2_root.html#a5eadd66ea26d632b75a92aa9c2878bf3">buildEvents</a>=false)</td></tr>
+<tr class="memdesc:ad07b97d280479aabc26e04d920726ddb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Raw conversion :  <a href="class_faster2_root.html#ad07b97d280479aabc26e04d920726ddb">More...</a><br /></td></tr>
+<tr class="separator:ad07b97d280479aabc26e04d920726ddb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afaec1876151390b71c475885157670a3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_faster2_root.html#afaec1876151390b71c475885157670a3">loadCalibration</a> (std::string const &amp;calibFile)</td></tr>
+<tr class="separator:afaec1876151390b71c475885157670a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3953ee6d843802ca12997e146fd7046d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_faster2_root.html#a3953ee6d843802ca12997e146fd7046d">loadTimeshifts</a> (std::string const &amp;dTfile)</td></tr>
+<tr class="separator:a3953ee6d843802ca12997e146fd7046d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b8a78ef8c54117807c770d21fa4acf0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_faster2_root.html#a5b8a78ef8c54117807c770d21fa4acf0">loadTriggerFile</a> (std::string const &amp;file)</td></tr>
+<tr class="separator:a5b8a78ef8c54117807c770d21fa4acf0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a19537e5417a0537a0327b91b78982ca2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_faster2_root.html#a19537e5417a0537a0327b91b78982ca2">overwrite</a> (bool const &amp;_overwrite)</td></tr>
+<tr class="separator:a19537e5417a0537a0327b91b78982ca2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a957a45ae197b565da07521a27ee73f53"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_faster2_root.html#a957a45ae197b565da07521a27ee73f53">setCalibration</a> (<a class="el" href="class_calibration.html">Calibration</a> const &amp;calibration)</td></tr>
+<tr class="separator:a957a45ae197b565da07521a27ee73f53"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a943441baaa37c600a49913339a63e89d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_faster2_root.html#a943441baaa37c600a49913339a63e89d">setNbFiles</a> (int const &amp;nb_files=-1)</td></tr>
+<tr class="separator:a943441baaa37c600a49913339a63e89d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0717c962ce832333110607b30f8370fc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_faster2_root.html#a0717c962ce832333110607b30f8370fc">setNbThreads</a> (int const &amp;nb_threads=-1)</td></tr>
+<tr class="separator:a0717c962ce832333110607b30f8370fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace1cc6bfc486195e5808e946770d5954"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_faster2_root.html#ace1cc6bfc486195e5808e946770d5954">setTimeshifts</a> (<a class="el" href="class_timeshifts.html">Timeshifts</a> const &amp;timeshifts)</td></tr>
+<tr class="separator:ace1cc6bfc486195e5808e946770d5954"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa5d89a939efb05b6408e65b5f0117c2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_faster2_root.html#aaa5d89a939efb05b6408e65b5f0117c2">setTrigger</a> (std::function&lt; bool(const <a class="el" href="class_event.html">Event</a> &amp;)&gt; other)</td></tr>
+<tr class="separator:aaa5d89a939efb05b6408e65b5f0117c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01cccc30e85ee668bbff3827c838173e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_faster2_root.html#a01cccc30e85ee668bbff3827c838173e">throwSingles</a> (bool const &amp;_throw_single=true)</td></tr>
+<tr class="separator:a01cccc30e85ee668bbff3827c838173e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
-Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a17399e2c3d35d2bc98f895548f256826"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_faster2_root.html#a17399e2c3d35d2bc98f895548f256826">treatFilesMT</a> (<a class="el" href="class_m_t_list.html">MTList</a>&lt; std::string &gt; &amp;files_list, <a class="el" href="class_faster2_root.html">Faster2Root</a> *f2r)</td></tr>
-<tr class="separator:a17399e2c3d35d2bc98f895548f256826"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a2ba93a4814723b6103dc25a701f3dc89"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_faster2_root.html#a2ba93a4814723b6103dc25a701f3dc89">convertFile</a> (<a class="el" href="class_hit.html">Hit</a> &amp;hit, <a class="el" href="class_faster_reader.html">FasterReader</a> &amp;reader, <a class="el" href="class_path.html">Path</a> const &amp;outPath)</td></tr>
+<tr class="separator:a2ba93a4814723b6103dc25a701f3dc89"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad30ccf937150bbd3504ec3a354b76c8f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_faster2_root.html#ad30ccf937150bbd3504ec3a354b76c8f">load</a> (int argc, char **argv)</td></tr>
+<tr class="separator:ad30ccf937150bbd3504ec3a354b76c8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6cc6f4731958e8c74ad0e07f4d97f4a0"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_faster2_root.html#a6cc6f4731958e8c74ad0e07f4d97f4a0">printParameters</a> () const</td></tr>
+<tr class="separator:a6cc6f4731958e8c74ad0e07f4d97f4a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
-Private Attributes</h2></td></tr>
-<tr class="memitem:a1f58e3467c5cc7d5f5180fa500ccabbf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_calibration.html">Calibration</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_faster2_root.html#a1f58e3467c5cc7d5f5180fa500ccabbf">m_calib</a></td></tr>
-<tr class="separator:a1f58e3467c5cc7d5f5180fa500ccabbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4c3ea322c7446596e00943a074ba4fe3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_m_t_counter.html">MTCounter</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_faster2_root.html#a4c3ea322c7446596e00943a074ba4fe3">m_converting_rate</a></td></tr>
-<tr class="separator:a4c3ea322c7446596e00943a074ba4fe3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac3852ce32ee11c8b946d8ccf31b18ec8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_detectors_list.html">DetectorsList</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_faster2_root.html#ac3852ce32ee11c8b946d8ccf31b18ec8">m_detList</a></td></tr>
-<tr class="separator:ac3852ce32ee11c8b946d8ccf31b18ec8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afaf394aeb31e5be8dec7068a01e2ed17"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_files_manager.html">FilesManager</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_faster2_root.html#afaf394aeb31e5be8dec7068a01e2ed17">m_files</a></td></tr>
-<tr class="separator:afaf394aeb31e5be8dec7068a01e2ed17"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5be4811856384d4bd56a7ef0920db7a4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_m_t_counter.html">MTCounter</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_faster2_root.html#a5be4811856384d4bd56a7ef0920db7a4">m_fr_raw_counter</a></td></tr>
-<tr class="separator:a5be4811856384d4bd56a7ef0920db7a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a633f1e69e34ca431c621712bee87e538"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_m_t_counter.html">MTCounter</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_faster2_root.html#a633f1e69e34ca431c621712bee87e538">m_fr_raw_run_size</a></td></tr>
-<tr class="separator:a633f1e69e34ca431c621712bee87e538"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5892e931df9f080ef96794a94f6d93c7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_m_t_counter.html">MTCounter</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_faster2_root.html#a5892e931df9f080ef96794a94f6d93c7">m_fr_treated_counter</a></td></tr>
-<tr class="separator:a5892e931df9f080ef96794a94f6d93c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a98da08fb565ca87379fef879bd8e7443"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_m_t_counter.html">MTCounter</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_faster2_root.html#a98da08fb565ca87379fef879bd8e7443">m_fr_treated_run_size</a></td></tr>
-<tr class="separator:a98da08fb565ca87379fef879bd8e7443"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a88e6c196d62d573ba95bf4f62d8cb15d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_faster2_root.html#a88e6c196d62d573ba95bf4f62d8cb15d">m_ok</a> = true</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-static-methods"></a>
+Static Protected Member Functions</h2></td></tr>
+<tr class="memitem:a50fd46a075ae0a1a1f52b5bb6405047b"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_faster2_root.html#a50fd46a075ae0a1a1f52b5bb6405047b">s_convertFile</a> (<a class="el" href="class_hit.html">Hit</a> &amp;hit, <a class="el" href="class_faster_reader.html">FasterReader</a> &amp;reader, <a class="el" href="class_faster2_root.html">Faster2Root</a> &amp;convertor, <a class="el" href="class_path.html">Path</a> const &amp;outPath)</td></tr>
+<tr class="separator:a50fd46a075ae0a1a1f52b5bb6405047b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:a3c9782dbe54c5b10f21487d2189f4c16"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_faster2_root.html#a3c9782dbe54c5b10f21487d2189f4c16">m_calibrate</a> = false</td></tr>
+<tr class="separator:a3c9782dbe54c5b10f21487d2189f4c16"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a58af91c50f99bd37c48380988292af03"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_calibration.html">Calibration</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_faster2_root.html#a58af91c50f99bd37c48380988292af03">m_calibration</a></td></tr>
+<tr class="separator:a58af91c50f99bd37c48380988292af03"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50b697e84534b9326fcf678b28b5609a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_faster2_root.html#a50b697e84534b9326fcf678b28b5609a">m_eventbuilding</a> = false</td></tr>
+<tr class="separator:a50b697e84534b9326fcf678b28b5609a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b7e63609b4123f6f798f70c2de1128b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_faster2_root.html#a9b7e63609b4123f6f798f70c2de1128b">m_loaded_trigger</a> = false</td></tr>
+<tr class="separator:a9b7e63609b4123f6f798f70c2de1128b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0eb51359b6d1390a15d2113950bb4bf2"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_faster2_root.html#a0eb51359b6d1390a15d2113950bb4bf2">m_nb_files</a> = -1</td></tr>
+<tr class="separator:a0eb51359b6d1390a15d2113950bb4bf2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aacad03770af4357e587c8138da57a203"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_faster2_root.html#aacad03770af4357e587c8138da57a203">m_nb_threads</a> = 1</td></tr>
+<tr class="separator:aacad03770af4357e587c8138da57a203"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88e6c196d62d573ba95bf4f62d8cb15d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_faster2_root.html#a88e6c196d62d573ba95bf4f62d8cb15d">m_ok</a> = false</td></tr>
 <tr class="separator:a88e6c196d62d573ba95bf4f62d8cb15d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1b3e29e68d44ac85f9c0e3410c6acc87"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_faster2_root.html#a1b3e29e68d44ac85f9c0e3410c6acc87">m_outDir</a> = &quot;&quot;</td></tr>
-<tr class="separator:a1b3e29e68d44ac85f9c0e3410c6acc87"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae0e7b92b865ec9a7a44866cf4c0207d6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_m_t_counter.html">MTCounter</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_faster2_root.html#ae0e7b92b865ec9a7a44866cf4c0207d6">m_reading_rate</a></td></tr>
-<tr class="separator:ae0e7b92b865ec9a7a44866cf4c0207d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abde40dbb9943597a7d210126fc290538"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_faster2_root.html#abde40dbb9943597a7d210126fc290538">m_runpath</a> = &quot;&quot;</td></tr>
-<tr class="separator:abde40dbb9943597a7d210126fc290538"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a27df88efe6d46d5c6fccd03e64268898"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_faster2_root.html#a27df88efe6d46d5c6fccd03e64268898">m_size_data</a> = 0</td></tr>
-<tr class="separator:a27df88efe6d46d5c6fccd03e64268898"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab006471ebc1b9cdf141d6ad9dbd89196"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_timer.html">Timer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_faster2_root.html#ab006471ebc1b9cdf141d6ad9dbd89196">m_timer</a></td></tr>
-<tr class="separator:ab006471ebc1b9cdf141d6ad9dbd89196"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a987fb5d9ee8469817296265b1232bb63"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_faster2_root.html#a987fb5d9ee8469817296265b1232bb63">m_overwrite</a> = false</td></tr>
+<tr class="separator:a987fb5d9ee8469817296265b1232bb63"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76455ed5fcb82744bb34e0de2f524a0c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_faster2_root.html#a76455ed5fcb82744bb34e0de2f524a0c">m_throw_single</a> = false</td></tr>
+<tr class="separator:a76455ed5fcb82744bb34e0de2f524a0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b32ed9d91512912420c58bab5d4897a"><td class="memItemLeft" align="right" valign="top">Long64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_faster2_root.html#a4b32ed9d91512912420c58bab5d4897a">m_time_window</a> = 1500000</td></tr>
+<tr class="separator:a4b32ed9d91512912420c58bab5d4897a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1d145e66d56ef7a8f11cd58185b5666c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_timeshifts.html">Timeshifts</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_faster2_root.html#a1d145e66d56ef7a8f11cd58185b5666c">m_timeshifts</a></td></tr>
 <tr class="separator:a1d145e66d56ef7a8f11cd58185b5666c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af18a2a8d98e3a6907de73ca0e1494a66"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_faster2_root.html#af18a2a8d98e3a6907de73ca0e1494a66">m_verbose</a> = false</td></tr>
-<tr class="separator:af18a2a8d98e3a6907de73ca0e1494a66"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad99d87e9028534179d3c85820b154ff8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_m_t_counter.html">MTCounter</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_faster2_root.html#ad99d87e9028534179d3c85820b154ff8">m_writting_rate</a></td></tr>
-<tr class="separator:ad99d87e9028534179d3c85820b154ff8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aecbddf92ed9e6e9f518627e024e43e3e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_m_t_counter.html">MTCounter</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_faster2_root.html#aecbddf92ed9e6e9f518627e024e43e3e">m_total_events</a></td></tr>
+<tr class="separator:aecbddf92ed9e6e9f518627e024e43e3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb999cc71caadb30a61f64659ba88a2c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_m_t_counter.html">MTCounter</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_faster2_root.html#adb999cc71caadb30a61f64659ba88a2c">m_total_hits</a></td></tr>
+<tr class="separator:adb999cc71caadb30a61f64659ba88a2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae62d8cbcbd702ac3691ebdc54677be47"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_timer.html">Timer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_faster2_root.html#ae62d8cbcbd702ac3691ebdc54677be47">m_total_timer</a></td></tr>
+<tr class="separator:ae62d8cbcbd702ac3691ebdc54677be47"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1589ca0222d305ef05b8d622e79fbb8b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_m_t_counter.html">MTCounter</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_faster2_root.html#a1589ca0222d305ef05b8d622e79fbb8b">m_trigg_events</a></td></tr>
+<tr class="separator:a1589ca0222d305ef05b8d622e79fbb8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5807435c6403ac0a7fba6da6b43fefce"><td class="memItemLeft" align="right" valign="top">std::function&lt; bool(const <a class="el" href="class_event.html">Event</a> &amp;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_faster2_root.html#a5807435c6403ac0a7fba6da6b43fefce">m_trigger</a> = [](const <a class="el" href="class_event.html">Event</a>&amp;) { return true; }</td></tr>
+<tr class="separator:a5807435c6403ac0a7fba6da6b43fefce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae3fce7a9419f8ed5044f8a8cc7302a6b"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_faster2_root.html#ae3fce7a9419f8ed5044f8a8cc7302a6b">m_trigger_file</a></td></tr>
+<tr class="separator:ae3fce7a9419f8ed5044f8a8cc7302a6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf62aae9afb7e5e49508c4a018039fc3"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="_hit_8hpp.html#ab5dd24876acad09ec52c250c1668466c">Label</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_faster2_root.html#acf62aae9afb7e5e49508c4a018039fc3">m_triggering_labels</a></td></tr>
+<tr class="separator:acf62aae9afb7e5e49508c4a018039fc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a07ce8dd1383dcf7b466ab99604516cd1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_faster2_root.html#a07ce8dd1383dcf7b466ab99604516cd1">m_use_RF</a> = false</td></tr>
+<tr class="separator:a07ce8dd1383dcf7b466ab99604516cd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29bd04235f0c5c32d1f96695135daba5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_faster2_root.html#a29bd04235f0c5c32d1f96695135daba5">m_use_trigger</a> = false</td></tr>
+<tr class="separator:a29bd04235f0c5c32d1f96695135daba5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a931cf8ef7c2acab073b363893c65bffd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a931cf8ef7c2acab073b363893c65bffd">&#9670;&nbsp;</a></span>Faster2Root()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">Faster2Root::Faster2Root </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_detectors_list.html">DetectorsList</a> const &amp;&#160;</td>
-          <td class="paramname"><em>detectorList</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::string const &amp;&#160;</td>
-          <td class="paramname"><em>timeshifts_file</em> = <code>&quot;&quot;</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::string const &amp;&#160;</td>
-          <td class="paramname"><em>calib_file</em> = <code>&quot;&quot;</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::string const &amp;&#160;</td>
-          <td class="paramname"><em>folder</em> = <code>&quot;&quot;</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::string const &amp;&#160;</td>
-          <td class="paramname"><em>outfolder</em> = <code>&quot;&quot;</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="lib_co_8hpp.html#a3fa7784c89589b49764048e9909d0e07">ushort</a> const &amp;&#160;</td>
-          <td class="paramname"><em>nb_threads</em> = <code>2</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="class_faster2_root_a931cf8ef7c2acab073b363893c65bffd_cgraph.png" border="0" usemap="#aclass_faster2_root_a931cf8ef7c2acab073b363893c65bffd_cgraph" alt=""/></div>
-</div>
-
-</div>
-</div>
-<h2 class="groupheader">Member Function Documentation</h2>
-<a id="a0a9d05860dee9c95927224569e789fa5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0a9d05860dee9c95927224569e789fa5">&#9670;&nbsp;</a></span>calculateTimeshifts()</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Basic class to perform faster to root tree data conversion. </p>
+<p>Section 1 : Options</p>
+<p>Use this class to perform raw conversion. Without any option, no calibration, no time alignement and no event building are performed. If you want to do more, you have to load the ID file with the -l option. This file has the following format :</p>
+<p>label_nb name label_nb name ... label_nb name</p>
+<p>You can build it from the index.pid file</p>
+<p>You can import a calibration file using -c option. Considering the equation E_cal = a + b*ADC + c*ADC² ..., the file has the following structure :</p>
+<p>label_nb a b (c) (d)</p>
+<p>If a detector has no calibration data, then leaving its line empty will automatically fills a = 0 and b = 1. c and d are optional, they will be filled with 0. You can choose the number of parameter line by line, because each detector needs a different correction order !</p>
+<p>Now, let's attack the most difficult part : timing and event building. So far, the data are still shuffled because of time shifts induced by faster hardware. So there are different options :</p>
+<p>-e [time_window_ns] : Simple event building. If no time realignment, the time shift can be big, it is recommended to use at least 1500 ns This option will always result in more time and memory consumption because the conversion is done in 3 step : First the hits are time shifted (and put in a memory resident root tree). But this will result in a shuffle, because some hits can be shifted before the previous hit. Therefore, the data have to be realigned. And finally the conversion will take place with truly time aligned data.</p>
+<p>-m [threads_number] : Multithreading. use this option to choose the number of files to treat in parallel.</p>
+<p>-t [timeshift_file] : Load the timeshifts file.</p>
+<p>Recap &amp; ancillary parameters :</p>
+<p>-c [calibration_file] : Load the calibration -e [time_window_ns] : Perform event building with time_window_ns = 1500 ns by default -i [ID_file] : Load ID file. For Nuball2 data, allows for nice lookup tables to know the type of detector like isDSSD[label] or isGe[label] -m [threads_number] : Choose the number of files to treat in parallel -n [files_number] : Choose the total number of files to treat inside a data folder -t [time_window_ns] : Loads timeshift data &ndash;throw_single : If you are not interested in single hits (hits not alone in their time range)</p>
+<dl class="section attention"><dt>Attention</dt><dd>The two first parameters must be /path/to/data/ and /path/to/output/ Example 1 : <pre class="fragment"> Faster2Root("/path/to/data /path/to/output -i index_129.id -c calib.calib -e 200 -m 4 -t timeshifts.dT ")
+</pre> Example 2 :</dd></dl>
+<p>We want to create a <a class="el" href="class_d_s_s_d.html">DSSD</a> trigger : </p><pre class="fragment">int main(int argc, argv** argv)
+{
+  Faster2Root convertor(argc, argv, [](const Event&amp; event)
+  {
+    for (int hit = 0; hit&lt;event.mult; hit++)
+    {
+      if (isDSSD[event.labels[hit]]) return true;
+    }
+    return false;
+  });
+}
+</pre><p> Then compile the code and call : ./executable /path/to/data /path/to/output -i index_129.id -c calib.calib -e 200 -m 4 -t timeshifts.dT</p>
+<p>Section 2 : Format</p>
+<p>The root tree is made of 6 leaves :</p>
+<p>type name Description int mult Multiplicity : number of hits in the event unsigned short [] label Labels int/float [] ADC/nrj (ADC/QDC1) / Calibrated energy int/float [] QDC2/nrj2 QDC2 / Calibrated energy in QDC2 bool [] pileup Pileup/Saturation bit</p>
+<p>The output will therefore depend on wether you calibrated the data or not</p>
+<p>In the code, the main object handling the event data is <a class="el" href="class_event.html" title="Event used for reading and writting event, event building and trigger.">Event</a>. You have to have a look at its complete description if you are to read the data </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a8306673fb7007ca6c7c586ba2df764b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8306673fb7007ca6c7c586ba2df764b9">&#9670;&nbsp;</a></span>Faster2Root() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -244,10 +262,381 @@ Here is the call graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool Faster2Root::calculateTimeshifts </td>
+          <td class="memname">Faster2Root::Faster2Root </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aacd4d3fa480eba9bc86b49f4b2040c60"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aacd4d3fa480eba9bc86b49f4b2040c60">&#9670;&nbsp;</a></span>Faster2Root() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Faster2Root::Faster2Root </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>argc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char **&#160;</td>
+          <td class="paramname"><em>argv</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_faster2_root_aacd4d3fa480eba9bc86b49f4b2040c60_cgraph.png" border="0" usemap="#aclass_faster2_root_aacd4d3fa480eba9bc86b49f4b2040c60_cgraph" alt=""/></div>
+<map name="aclass_faster2_root_aacd4d3fa480eba9bc86b49f4b2040c60_cgraph" id="aclass_faster2_root_aacd4d3fa480eba9bc86b49f4b2040c60_cgraph">
+<area shape="rect" title=" " alt="" coords="5,892,189,918"/>
+<area shape="rect" href="class_faster2_root.html#ad30ccf937150bbd3504ec3a354b76c8f" title=" " alt="" coords="237,892,372,918"/>
+<area shape="rect" href="class_faster2_root.html#a5eadd66ea26d632b75a92aa9c2878bf3" title=" " alt="" coords="684,486,867,513"/>
+<area shape="rect" href="_histogramor_8hpp.html#ab48a2fa7184e6354788989602c8c8c29" title=" " alt="" coords="1219,461,1271,488"/>
+<area shape="rect" href="class_faster2_root.html#a7d6d5249c6ced2548a58406eca085cdb" title=" " alt="" coords="447,217,603,244"/>
+<area shape="rect" href="lib_co_8hpp.html#a6df2dcd4b1f61c75dc292942bc5ca74d" title=" " alt="" coords="1196,14,1293,41"/>
+<area shape="rect" href="class_m_t_object.html#aaa3623d88deae3a9311aad39bfff49dc" title=" " alt="" coords="701,436,849,462"/>
+<area shape="rect" href="class_detectors.html#a03f6e9974f958b86ddbbc4670d0209a2" title="Reads the file and extracts the list of detectors, then fills the lookup tables." alt="" coords="465,841,586,868"/>
+<area shape="rect" href="class_faster2_root.html#afaec1876151390b71c475885157670a3" title=" " alt="" coords="422,1044,629,1070"/>
+<area shape="rect" href="class_faster2_root.html#a3953ee6d843802ca12997e146fd7046d" title=" " alt="" coords="424,892,627,918"/>
+<area shape="rect" href="class_faster2_root.html#a5b8a78ef8c54117807c770d21fa4acf0" title=" " alt="" coords="424,942,627,969"/>
+<area shape="rect" href="class_faster2_root.html#a19537e5417a0537a0327b91b78982ca2" title=" " alt="" coords="441,993,610,1020"/>
+<area shape="rect" href="class_faster2_root.html#a6cc6f4731958e8c74ad0e07f4d97f4a0" title=" " alt="" coords="420,385,631,412"/>
+<area shape="rect" href="class_faster_reader.html#aa1fcb8d6721212bc982cac0ae4e597eb" title="Set the number of hits to read inside each file." alt="" coords="431,1094,620,1121"/>
+<area shape="rect" href="class_faster2_root.html#a943441baaa37c600a49913339a63e89d" title=" " alt="" coords="438,1145,613,1172"/>
+<area shape="rect" href="class_faster2_root.html#a0717c962ce832333110607b30f8370fc" title=" " alt="" coords="427,1196,624,1222"/>
+<area shape="rect" href="class_timer.html#a4b85f2f938d7261db769607fc50fcaef" title=" " alt="" coords="463,1348,587,1374"/>
+<area shape="rect" href="class_m_t_faster_reader.html#ae316d31ebcb18ae8689522509d1ba513" title="Reads many faster files in parallel." alt="" coords="679,242,871,269"/>
+<area shape="rect" href="class_faster2_root.html#a50fd46a075ae0a1a1f52b5bb6405047b" title=" " alt="" coords="679,116,872,142"/>
+<area shape="rect" href="class_files_manager.html#a2b619786ba65a7ac1e701fc61e2409ae" title=" " alt="" coords="920,268,1111,294"/>
+<area shape="rect" href="class_m_t_object.html#a35c02650eb403bd54e867f93bb26fc47" title=" " alt="" coords="935,319,1095,360"/>
+<area shape="rect" href="class_faster2_root.html#a2ba93a4814723b6103dc25a701f3dc89" title=" " alt="" coords="926,116,1105,142"/>
+<area shape="rect" href="lib_root_8hpp.html#ad91e4154d55b03aec78fc49348f35db1" title=" " alt="" coords="1205,268,1285,294"/>
+<area shape="rect" href="class_coinc_builder.html#a6fbd7caa8ab6ac6bbf4d14eb094b6417" title="Add Hits to the event. Return true when an event is complete, i.e. current hit is outside of time win..." alt="" coords="1173,65,1317,92"/>
+<area shape="rect" href="class_file.html#adcc058679f1c4e1b9561aa7043720ade" title=" " alt="" coords="1203,116,1287,142"/>
+<area shape="rect" href="class_file.html#a53118ce36851cb1c6845a82f915fd8ba" title=" " alt="" coords="1199,166,1291,193"/>
+<area shape="rect" href="class_faster_reader.html#add1cd47aee08955e9a1fb11782129714" title="Get the name of the file being read." alt="" coords="1159,217,1331,244"/>
+<area shape="rect" href="class_detectors.html#a8d5c0f2d189ddda12ed3c36f13887cfd" title="Fills the lookup tables." alt="" coords="690,841,861,868"/>
+<area shape="rect" href="class_detectors.html#a3d5631f8fd2770b6b3a2a178130519ad" title="Reads the file and extracts the list of detectors." alt="" coords="703,1196,848,1222"/>
+<area shape="rect" href="_detectors_8hpp.html#aa4d7f26a632b3df166ad7a08cad05af1" title=" " alt="" coords="969,689,1061,716"/>
+<area shape="rect" href="_detectors_8hpp.html#adc256156b68f8dd6b9f2c2da57808bd3" title=" " alt="" coords="947,740,1083,766"/>
+<area shape="rect" href="class_detectors.html#a3c4f247022eb113c0371899060ea0199" title="Get the type index of the detector. Each type of detector has its own indexing system if you have 3 G..." alt="" coords="951,1044,1080,1070"/>
+<area shape="rect" href="class_detectors.html#a349500ec816bd7761de87c54b95000bc" title=" " alt="" coords="1182,1094,1307,1121"/>
+<area shape="rect" href="class_detectors.html#a0be56517035f1272af33392665b9ff1f" title=" " alt="" coords="1557,1145,1680,1172"/>
+<area shape="rect" href="_detectors_8hpp.html#af8a018699aa5d8544bc4877f40463a5a" title=" " alt="" coords="1205,942,1284,969"/>
+<area shape="rect" href="_detectors_8hpp.html#adccbc8332a89f48a35baea4a37255e2c" title=" " alt="" coords="960,790,1071,817"/>
+<area shape="rect" href="string__functions_8hpp.html#ab2c67e2ba68d5a42ce9a48dafdbba829" title="Replaces all the instances of one character with another." alt="" coords="949,588,1082,614"/>
+<area shape="rect" href="class_detectors.html#a1177661fb15c9825755925faf00c8398" title="Return the value of the maximum label, i.e. the size of the lookup tables." alt="" coords="956,1196,1075,1222"/>
+<area shape="rect" href="lib_co_8hpp.html#ade77d1f37b1311b3f80ce429a33fd226" title="Casts a number into unsigned char (uchar)" alt="" coords="969,638,1061,665"/>
+<area shape="rect" href="class_detectors.html#afd00ee8a76386f7356a12858b1dd7c6b" title="Get the name of a detector given its type and type index." alt="" coords="1379,1145,1509,1172"/>
+<area shape="rect" href="files__functions_8hpp.html#afd584978228fac5fae283c12837378dd" title=" " alt="" coords="961,1348,1070,1374"/>
+<area shape="rect" href="class_bools.html#ab34b97e65a4a23ae25a8b6f746c37a9d" title=" " alt="" coords="1192,1424,1297,1450"/>
+<area shape="rect" href="class_calibration.html#a2d2a0d6276fc2c8a4b60c3801ccc16a9" title=" " alt="" coords="711,1348,840,1374"/>
+<area shape="rect" href="class_detectors.html#af2bb20ee60f504df326b87e9ebbaef30" title=" " alt="" coords="949,1398,1081,1425"/>
+<area shape="rect" href="class_calibration.html#ab1502564e126e769e782d221d42608c7" title=" " alt="" coords="955,1500,1076,1526"/>
+<area shape="rect" href="class_calibration.html#ac4b8f57b3d896cda20a6aa3ba04a78e7" title="DEV." alt="" coords="952,1550,1079,1577"/>
+<area shape="rect" href="class_timeshifts.html#a28163efe8d487669cf50d5f6e1060d71" title="Use this method to load timeshifts from a .dT file." alt="" coords="712,993,839,1020"/>
+<area shape="rect" href="string__functions_8hpp.html#a03fb03d95885354ac3c329693588097b" title=" " alt="" coords="746,1297,805,1324"/>
+<area shape="rect" href="class_faster2_root.html#aaa5d89a939efb05b6408e65b5f0117c2" title=" " alt="" coords="690,1246,861,1273"/>
+<area shape="rect" href="class_timer.html#a7b0362b0627780584a43f8168be1a904" title=" " alt="" coords="727,1398,824,1425"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a61a5cc14735e615b6a6389a1ece4f694"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a61a5cc14735e615b6a6389a1ece4f694">&#9670;&nbsp;</a></span>Faster2Root() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Faster2Root::Faster2Root </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>argc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char **&#160;</td>
+          <td class="paramname"><em>argv</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="_faster2_root_8hpp.html#a75162947cdf43694952e4c0a53735199">Trigger</a>&#160;</td>
+          <td class="paramname"><em>trigger</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_faster2_root_a61a5cc14735e615b6a6389a1ece4f694_cgraph.png" border="0" usemap="#aclass_faster2_root_a61a5cc14735e615b6a6389a1ece4f694_cgraph" alt=""/></div>
+<map name="aclass_faster2_root_a61a5cc14735e615b6a6389a1ece4f694_cgraph" id="aclass_faster2_root_a61a5cc14735e615b6a6389a1ece4f694_cgraph">
+<area shape="rect" title=" " alt="" coords="5,1096,189,1123"/>
+<area shape="rect" href="class_faster2_root.html#ad30ccf937150bbd3504ec3a354b76c8f" title=" " alt="" coords="237,589,372,616"/>
+<area shape="rect" href="class_faster2_root.html#aaa5d89a939efb05b6408e65b5f0117c2" title=" " alt="" coords="690,1375,861,1401"/>
+<area shape="rect" href="class_faster2_root.html#a5eadd66ea26d632b75a92aa9c2878bf3" title=" " alt="" coords="684,564,867,591"/>
+<area shape="rect" href="_histogramor_8hpp.html#ab48a2fa7184e6354788989602c8c8c29" title=" " alt="" coords="1219,539,1271,565"/>
+<area shape="rect" href="class_faster2_root.html#a7d6d5249c6ced2548a58406eca085cdb" title=" " alt="" coords="447,369,603,396"/>
+<area shape="rect" href="lib_co_8hpp.html#a6df2dcd4b1f61c75dc292942bc5ca74d" title=" " alt="" coords="1196,92,1293,119"/>
+<area shape="rect" href="class_m_t_object.html#aaa3623d88deae3a9311aad39bfff49dc" title=" " alt="" coords="701,513,849,540"/>
+<area shape="rect" href="class_detectors.html#a03f6e9974f958b86ddbbc4670d0209a2" title="Reads the file and extracts the list of detectors, then fills the lookup tables." alt="" coords="465,767,586,793"/>
+<area shape="rect" href="class_faster2_root.html#afaec1876151390b71c475885157670a3" title=" " alt="" coords="422,969,629,996"/>
+<area shape="rect" href="class_faster2_root.html#a3953ee6d843802ca12997e146fd7046d" title=" " alt="" coords="424,817,627,844"/>
+<area shape="rect" href="class_faster2_root.html#a5b8a78ef8c54117807c770d21fa4acf0" title=" " alt="" coords="424,868,627,895"/>
+<area shape="rect" href="class_faster2_root.html#a19537e5417a0537a0327b91b78982ca2" title=" " alt="" coords="441,919,610,945"/>
+<area shape="rect" href="class_faster2_root.html#a6cc6f4731958e8c74ad0e07f4d97f4a0" title=" " alt="" coords="420,463,631,489"/>
+<area shape="rect" href="class_faster_reader.html#aa1fcb8d6721212bc982cac0ae4e597eb" title="Set the number of hits to read inside each file." alt="" coords="431,1020,620,1047"/>
+<area shape="rect" href="class_faster2_root.html#a943441baaa37c600a49913339a63e89d" title=" " alt="" coords="438,5,613,32"/>
+<area shape="rect" href="class_faster2_root.html#a0717c962ce832333110607b30f8370fc" title=" " alt="" coords="427,56,624,83"/>
+<area shape="rect" href="class_timer.html#a4b85f2f938d7261db769607fc50fcaef" title=" " alt="" coords="463,107,587,133"/>
+<area shape="rect" href="class_m_t_faster_reader.html#ae316d31ebcb18ae8689522509d1ba513" title="Reads many faster files in parallel." alt="" coords="679,340,871,367"/>
+<area shape="rect" href="class_faster2_root.html#a50fd46a075ae0a1a1f52b5bb6405047b" title=" " alt="" coords="679,235,872,261"/>
+<area shape="rect" href="class_files_manager.html#a2b619786ba65a7ac1e701fc61e2409ae" title=" " alt="" coords="920,295,1111,321"/>
+<area shape="rect" href="class_m_t_object.html#a35c02650eb403bd54e867f93bb26fc47" title=" " alt="" coords="935,346,1095,387"/>
+<area shape="rect" href="class_faster2_root.html#a2ba93a4814723b6103dc25a701f3dc89" title=" " alt="" coords="926,193,1105,220"/>
+<area shape="rect" href="lib_root_8hpp.html#ad91e4154d55b03aec78fc49348f35db1" title=" " alt="" coords="1205,345,1285,372"/>
+<area shape="rect" href="class_coinc_builder.html#a6fbd7caa8ab6ac6bbf4d14eb094b6417" title="Add Hits to the event. Return true when an event is complete, i.e. current hit is outside of time win..." alt="" coords="1173,143,1317,169"/>
+<area shape="rect" href="class_file.html#adcc058679f1c4e1b9561aa7043720ade" title=" " alt="" coords="1203,193,1287,220"/>
+<area shape="rect" href="class_file.html#a53118ce36851cb1c6845a82f915fd8ba" title=" " alt="" coords="1199,244,1291,271"/>
+<area shape="rect" href="class_faster_reader.html#add1cd47aee08955e9a1fb11782129714" title="Get the name of the file being read." alt="" coords="1159,295,1331,321"/>
+<area shape="rect" href="class_detectors.html#a8d5c0f2d189ddda12ed3c36f13887cfd" title="Fills the lookup tables." alt="" coords="690,868,861,895"/>
+<area shape="rect" href="class_detectors.html#a3d5631f8fd2770b6b3a2a178130519ad" title="Reads the file and extracts the list of detectors." alt="" coords="703,1223,848,1249"/>
+<area shape="rect" href="_detectors_8hpp.html#aa4d7f26a632b3df166ad7a08cad05af1" title=" " alt="" coords="969,767,1061,793"/>
+<area shape="rect" href="_detectors_8hpp.html#adc256156b68f8dd6b9f2c2da57808bd3" title=" " alt="" coords="947,817,1083,844"/>
+<area shape="rect" href="class_detectors.html#a3c4f247022eb113c0371899060ea0199" title="Get the type index of the detector. Each type of detector has its own indexing system if you have 3 G..." alt="" coords="951,1020,1080,1047"/>
+<area shape="rect" href="class_detectors.html#a349500ec816bd7761de87c54b95000bc" title=" " alt="" coords="1182,1071,1307,1097"/>
+<area shape="rect" href="class_detectors.html#a0be56517035f1272af33392665b9ff1f" title=" " alt="" coords="1557,1121,1680,1148"/>
+<area shape="rect" href="_detectors_8hpp.html#af8a018699aa5d8544bc4877f40463a5a" title=" " alt="" coords="1205,944,1284,971"/>
+<area shape="rect" href="_detectors_8hpp.html#adccbc8332a89f48a35baea4a37255e2c" title=" " alt="" coords="960,868,1071,895"/>
+<area shape="rect" href="string__functions_8hpp.html#ab2c67e2ba68d5a42ce9a48dafdbba829" title="Replaces all the instances of one character with another." alt="" coords="949,665,1082,692"/>
+<area shape="rect" href="class_detectors.html#a1177661fb15c9825755925faf00c8398" title="Return the value of the maximum label, i.e. the size of the lookup tables." alt="" coords="956,1172,1075,1199"/>
+<area shape="rect" href="lib_co_8hpp.html#ade77d1f37b1311b3f80ce429a33fd226" title="Casts a number into unsigned char (uchar)" alt="" coords="969,716,1061,743"/>
+<area shape="rect" href="class_detectors.html#afd00ee8a76386f7356a12858b1dd7c6b" title="Get the name of a detector given its type and type index." alt="" coords="1379,1121,1509,1148"/>
+<area shape="rect" href="files__functions_8hpp.html#afd584978228fac5fae283c12837378dd" title=" " alt="" coords="961,1223,1070,1249"/>
+<area shape="rect" href="class_bools.html#ab34b97e65a4a23ae25a8b6f746c37a9d" title=" " alt="" coords="1192,1476,1297,1503"/>
+<area shape="rect" href="class_calibration.html#a2d2a0d6276fc2c8a4b60c3801ccc16a9" title=" " alt="" coords="711,1324,840,1351"/>
+<area shape="rect" href="class_detectors.html#af2bb20ee60f504df326b87e9ebbaef30" title=" " alt="" coords="949,1527,1081,1553"/>
+<area shape="rect" href="class_calibration.html#ab1502564e126e769e782d221d42608c7" title=" " alt="" coords="955,1577,1076,1604"/>
+<area shape="rect" href="class_calibration.html#ac4b8f57b3d896cda20a6aa3ba04a78e7" title="DEV." alt="" coords="952,1628,1079,1655"/>
+<area shape="rect" href="class_timeshifts.html#a28163efe8d487669cf50d5f6e1060d71" title="Use this method to load timeshifts from a .dT file." alt="" coords="712,1071,839,1097"/>
+<area shape="rect" href="string__functions_8hpp.html#a03fb03d95885354ac3c329693588097b" title=" " alt="" coords="746,1273,805,1300"/>
+<area shape="rect" href="class_timer.html#a7b0362b0627780584a43f8168be1a904" title=" " alt="" coords="727,107,824,133"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ad07b97d280479aabc26e04d920726ddb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad07b97d280479aabc26e04d920726ddb">&#9670;&nbsp;</a></span>Faster2Root() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Faster2Root::Faster2Root </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_path.html">Path</a> const &amp;&#160;</td>
+          <td class="paramname"><em>inputFolder</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_path.html">Path</a> const &amp;&#160;</td>
+          <td class="paramname"><em>outputFolder</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int const &amp;&#160;</td>
+          <td class="paramname"><em>nb_files</em> = <code>-1</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool const &amp;&#160;</td>
+          <td class="paramname"><em>buildEvents</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Raw conversion : </p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_faster2_root_ad07b97d280479aabc26e04d920726ddb_cgraph.png" border="0" usemap="#aclass_faster2_root_ad07b97d280479aabc26e04d920726ddb_cgraph" alt=""/></div>
+<map name="aclass_faster2_root_ad07b97d280479aabc26e04d920726ddb_cgraph" id="aclass_faster2_root_ad07b97d280479aabc26e04d920726ddb_cgraph">
+<area shape="rect" title="Raw conversion :" alt="" coords="5,208,189,234"/>
+<area shape="rect" href="class_faster2_root.html#a5eadd66ea26d632b75a92aa9c2878bf3" title=" " alt="" coords="465,48,648,74"/>
+<area shape="rect" href="_histogramor_8hpp.html#ab48a2fa7184e6354788989602c8c8c29" title=" " alt="" coords="1477,208,1529,234"/>
+<area shape="rect" href="class_faster2_root.html#a7d6d5249c6ced2548a58406eca085cdb" title=" " alt="" coords="247,208,403,234"/>
+<area shape="rect" href="class_timer.html#a3614503158effc6668bc10001d75d20c" title=" " alt="" coords="979,1128,1073,1154"/>
+<area shape="rect" href="class_faster2_root.html#a943441baaa37c600a49913339a63e89d" title=" " alt="" coords="237,798,412,825"/>
+<area shape="rect" href="class_m_t_faster_reader.html#ae316d31ebcb18ae8689522509d1ba513" title="Reads many faster files in parallel." alt="" coords="930,208,1122,234"/>
+<area shape="rect" href="class_faster2_root.html#a50fd46a075ae0a1a1f52b5bb6405047b" title=" " alt="" coords="460,465,653,492"/>
+<area shape="rect" href="class_files_manager.html#a2b619786ba65a7ac1e701fc61e2409ae" title=" " alt="" coords="1173,266,1364,293"/>
+<area shape="rect" href="class_m_t_object.html#a35c02650eb403bd54e867f93bb26fc47" title=" " alt="" coords="1189,200,1349,242"/>
+<area shape="rect" href="class_faster2_root.html#a2ba93a4814723b6103dc25a701f3dc89" title=" " alt="" coords="701,697,880,724"/>
+<area shape="rect" href="lib_root_8hpp.html#ad91e4154d55b03aec78fc49348f35db1" title=" " alt="" coords="986,520,1066,546"/>
+<area shape="rect" href="class_coinc_builder.html#a6fbd7caa8ab6ac6bbf4d14eb094b6417" title="Add Hits to the event. Return true when an event is complete, i.e. current hit is outside of time win..." alt="" coords="954,570,1098,597"/>
+<area shape="rect" href="class_file.html#adcc058679f1c4e1b9561aa7043720ade" title=" " alt="" coords="984,621,1068,648"/>
+<area shape="rect" href="class_file.html#a53118ce36851cb1c6845a82f915fd8ba" title=" " alt="" coords="980,672,1072,698"/>
+<area shape="rect" href="class_faster_reader.html#add1cd47aee08955e9a1fb11782129714" title="Get the name of the file being read." alt="" coords="940,722,1112,749"/>
+<area shape="rect" href="class_faster_reader.html#a0e799cf6b890a3ca281819efeb2df29e" title="Returns the hits counter." alt="" coords="933,773,1119,800"/>
+<area shape="rect" href="class_faster_reader.html#aab416287bd95c5dad74fff1ebb45d3c8" title="Get the name of the file being read." alt="" coords="928,824,1124,850"/>
+<area shape="rect" href="class_builder.html#a4d557d96189a42cbc0a4a0d32db45d6c" title=" " alt="" coords="949,874,1103,901"/>
+<area shape="rect" href="lib_co_8hpp.html#a6cca31a5d1658456b486e6fa135c690b" title=" " alt="" coords="987,925,1065,952"/>
+<area shape="rect" href="class_faster_reader.html#a2d05907241b80ed637b2ae5a01503756" title="Main method. Extract the next hit from the data file and fills the Hit *m_hit object." alt="" coords="952,976,1100,1002"/>
+<area shape="rect" href="class_hit.html#ad809be4a75a5c588504fa77d442e393d" title=" " alt="" coords="977,418,1075,445"/>
+<area shape="rect" href="class_file.html#a4162125761930208891770416c498828" title=" " alt="" coords="963,1026,1089,1053"/>
+<area shape="rect" href="lib_co_8hpp.html#a6df2dcd4b1f61c75dc292942bc5ca74d" title=" " alt="" coords="977,1077,1075,1104"/>
+<area shape="rect" href="class_hit.html#ab60637cf6f374e4394139c3594e4464e" title=" " alt="" coords="977,469,1075,496"/>
+<area shape="rect" href="class_coinc_builder.html#a7bb003c28d9b4b43bbd10a09771226ae" title=" " alt="" coords="1174,570,1363,597"/>
+<area shape="rect" href="class_coinc_builder.html#ad777d92b1242cafdb594e3fb315ae3a9" title=" " alt="" coords="1196,621,1341,648"/>
+<area shape="rect" href="_hit_8hpp.html#a4ea1ea3a29989c67afc2c4db41e36b15" title="Casts a number into unsigned Time." alt="" coords="1458,570,1547,597"/>
+<area shape="rect" href="files__functions_8hpp.html#a6d165da5cc41e5429a9c03c6a6c68d96" title=" " alt="" coords="1225,672,1313,698"/>
+<area shape="rect" href="files__functions_8hpp.html#ab1e262f27aaad28944f29cd2bbde417f" title=" " alt="" coords="1467,646,1538,673"/>
+<area shape="rect" href="files__functions_8hpp.html#ad3a78346393c83676348f6bad34b8ce2" title=" " alt="" coords="1453,697,1553,724"/>
+<area shape="rect" href="class_faster_reader.html#aef9fb9be5f288b88bdb17616aab801bd" title="Replace the standard ReadSimple if the faster data contains groups First of all, the m_write variable..." alt="" coords="1175,925,1362,952"/>
+<area shape="rect" href="class_faster_reader.html#a60f1f638732c48c1b78cfe4dcd23d39b" title="Read triggerless data." alt="" coords="1172,976,1365,1002"/>
+<area shape="rect" href="class_faster_reader.html#a0b2cd239d03d34e69b10418cb6292858" title="Treats faster data." alt="" coords="1413,950,1592,977"/>
+<area shape="rect" href="class_faster_reader.html#a64fb4fc3d241141f5d27df99906780fc" title="Treats the faster data groups." alt="" coords="1640,921,1859,948"/>
+<area shape="rect" href="class_faster_reader.html#af3c8f411415fb3d9fe20cd8551bc24ed" title="Treat the specific part of data (QDC gates, spectro ADC ...)" alt="" coords="1671,972,1828,1014"/>
+<area shape="rect" href="_hit_8hpp.html#a3bbfcd7f9bbec3174213c2b5eedc2edd" title="Casts a number into unsigned Timestamp." alt="" coords="1684,1038,1815,1065"/>
+<area shape="rect" href="class_faster_reader.html#aa0d1eaa1b39778def2b7cd25581accef" title="Load CRRC4 data." alt="" coords="1907,853,2097,880"/>
+<area shape="rect" href="class_faster_reader.html#aa5890b8ac1fdbcd4e2c544c1eeca537b" title="Load QDC1 data." alt="" coords="1910,904,2094,930"/>
+<area shape="rect" href="class_faster_reader.html#a94fd509a6352735984a20c03fb046254" title="Load qdc2 data." alt="" coords="1910,954,2094,981"/>
+<area shape="rect" href="class_faster_reader.html#afa7cbf1733ff68804ef4f7706bf58416" title="Load qdc3 data." alt="" coords="1910,1005,2094,1032"/>
+<area shape="rect" href="class_faster_reader.html#ad2d7d3acd1a874f09f44f2adfa69d42c" title="Load RF data." alt="" coords="1920,1056,2084,1082"/>
+<area shape="rect" href="class_faster_reader.html#a3ee31b1e6a4c60d72f8d989d2e08bcdf" title="Load Trapez data." alt="" coords="1907,1106,2097,1133"/>
+<area shape="rect" href="_hit_8hpp.html#a42de29176eeb225c09486aa0dcac5362" title="Casts a number into unsigned ADC." alt="" coords="2145,1056,2229,1082"/>
+<area shape="rect" href="class_hit.html#a11ab514bf16c8173e974b6582ca6d37e" title=" " alt="" coords="1227,418,1310,445"/>
+<area shape="rect" href="class_filename.html#a16a859ce80a8efeabbf8b28add13c55f" title=" " alt="" coords="1187,1026,1350,1053"/>
+<area shape="rect" href="class_i_options.html#aab7ee24774fddd6ccb14bb6801fafdb0" title=" " alt="" coords="1191,520,1346,546"/>
+</map>
+</div>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a5eadd66ea26d632b75a92aa9c2878bf3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5eadd66ea26d632b75a92aa9c2878bf3">&#9670;&nbsp;</a></span>buildEvents()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Faster2Root::buildEvents </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>time_window_ns</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_faster2_root_a5eadd66ea26d632b75a92aa9c2878bf3_cgraph.png" border="0" usemap="#aclass_faster2_root_a5eadd66ea26d632b75a92aa9c2878bf3_cgraph" alt=""/></div>
+<map name="aclass_faster2_root_a5eadd66ea26d632b75a92aa9c2878bf3_cgraph" id="aclass_faster2_root_a5eadd66ea26d632b75a92aa9c2878bf3_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,188,32"/>
+<area shape="rect" href="_histogramor_8hpp.html#ab48a2fa7184e6354788989602c8c8c29" title=" " alt="" coords="236,5,288,32"/>
+</map>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_faster2_root_a5eadd66ea26d632b75a92aa9c2878bf3_icgraph.png" border="0" usemap="#aclass_faster2_root_a5eadd66ea26d632b75a92aa9c2878bf3_icgraph" alt=""/></div>
+<map name="aclass_faster2_root_a5eadd66ea26d632b75a92aa9c2878bf3_icgraph" id="aclass_faster2_root_a5eadd66ea26d632b75a92aa9c2878bf3_icgraph">
+<area shape="rect" title=" " alt="" coords="469,31,652,57"/>
+<area shape="rect" href="class_faster2_root.html#ad07b97d280479aabc26e04d920726ddb" title="Raw conversion :" alt="" coords="237,5,421,32"/>
+<area shape="rect" href="class_faster2_root.html#ad30ccf937150bbd3504ec3a354b76c8f" title=" " alt="" coords="262,56,397,83"/>
+<area shape="rect" href="class_faster2_root.html#aacd4d3fa480eba9bc86b49f4b2040c60" title=" " alt="" coords="5,56,189,83"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a7d6d5249c6ced2548a58406eca085cdb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d6d5249c6ced2548a58406eca085cdb">&#9670;&nbsp;</a></span>convert()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Faster2Root::convert </td>
           <td>(</td>
           <td class="paramtype">std::string const &amp;&#160;</td>
-          <td class="paramname"><em>parameters</em>, </td>
+          <td class="paramname"><em>dataFolder</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string const &amp;&#160;</td>
+          <td class="paramname"><em>outputFolder</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -261,81 +650,74 @@ Here is the call graph for this function:</div>
           <td></td><td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_faster2_root_a0a9d05860dee9c95927224569e789fa5_cgraph.png" border="0" usemap="#aclass_faster2_root_a0a9d05860dee9c95927224569e789fa5_cgraph" alt=""/></div>
-</div>
-
-</div>
-</div>
-<a id="a0a1797460cf62fe88d87327602b91eda"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0a1797460cf62fe88d87327602b91eda">&#9670;&nbsp;</a></span>convert()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Faster2Root::convert </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="lib_co_8hpp.html#a3fa7784c89589b49764048e9909d0e07">ushort</a> const &amp;&#160;</td>
-          <td class="paramname"><em>nb_threads</em> = <code>2</code></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="class_faster2_root_a0a1797460cf62fe88d87327602b91eda_cgraph.png" border="0" usemap="#aclass_faster2_root_a0a1797460cf62fe88d87327602b91eda_cgraph" alt=""/></div>
+<div class="center"><img src="class_faster2_root_a7d6d5249c6ced2548a58406eca085cdb_cgraph.png" border="0" usemap="#aclass_faster2_root_a7d6d5249c6ced2548a58406eca085cdb_cgraph" alt=""/></div>
+<map name="aclass_faster2_root_a7d6d5249c6ced2548a58406eca085cdb_cgraph" id="aclass_faster2_root_a7d6d5249c6ced2548a58406eca085cdb_cgraph">
+<area shape="rect" title=" " alt="" coords="5,107,161,134"/>
+<area shape="rect" href="_histogramor_8hpp.html#ab48a2fa7184e6354788989602c8c8c29" title=" " alt="" coords="1226,216,1278,243"/>
+<area shape="rect" href="class_m_t_faster_reader.html#ae316d31ebcb18ae8689522509d1ba513" title="Reads many faster files in parallel." alt="" coords="679,107,871,134"/>
+<area shape="rect" href="class_faster2_root.html#a50fd46a075ae0a1a1f52b5bb6405047b" title=" " alt="" coords="209,390,403,416"/>
+<area shape="rect" href="class_files_manager.html#a2b619786ba65a7ac1e701fc61e2409ae" title=" " alt="" coords="923,166,1113,192"/>
+<area shape="rect" href="class_m_t_object.html#a35c02650eb403bd54e867f93bb26fc47" title=" " alt="" coords="938,100,1098,141"/>
+<area shape="rect" href="class_faster2_root.html#a2ba93a4814723b6103dc25a701f3dc89" title=" " alt="" coords="451,622,629,648"/>
+<area shape="rect" href="lib_root_8hpp.html#ad91e4154d55b03aec78fc49348f35db1" title=" " alt="" coords="735,419,815,446"/>
+<area shape="rect" href="class_coinc_builder.html#a6fbd7caa8ab6ac6bbf4d14eb094b6417" title="Add Hits to the event. Return true when an event is complete, i.e. current hit is outside of time win..." alt="" coords="703,470,847,496"/>
+<area shape="rect" href="class_file.html#adcc058679f1c4e1b9561aa7043720ade" title=" " alt="" coords="733,520,817,547"/>
+<area shape="rect" href="class_file.html#a53118ce36851cb1c6845a82f915fd8ba" title=" " alt="" coords="729,571,821,598"/>
+<area shape="rect" href="class_faster_reader.html#add1cd47aee08955e9a1fb11782129714" title="Get the name of the file being read." alt="" coords="689,622,861,648"/>
+<area shape="rect" href="class_faster_reader.html#a0e799cf6b890a3ca281819efeb2df29e" title="Returns the hits counter." alt="" coords="682,672,869,699"/>
+<area shape="rect" href="class_faster_reader.html#aab416287bd95c5dad74fff1ebb45d3c8" title="Get the name of the file being read." alt="" coords="677,723,873,750"/>
+<area shape="rect" href="class_builder.html#a4d557d96189a42cbc0a4a0d32db45d6c" title=" " alt="" coords="698,774,853,800"/>
+<area shape="rect" href="lib_co_8hpp.html#a6cca31a5d1658456b486e6fa135c690b" title=" " alt="" coords="736,824,815,851"/>
+<area shape="rect" href="class_faster_reader.html#a2d05907241b80ed637b2ae5a01503756" title="Main method. Extract the next hit from the data file and fills the Hit *m_hit object." alt="" coords="701,875,849,902"/>
+<area shape="rect" href="class_hit.html#ad809be4a75a5c588504fa77d442e393d" title=" " alt="" coords="726,318,825,344"/>
+<area shape="rect" href="class_file.html#a4162125761930208891770416c498828" title=" " alt="" coords="713,926,838,952"/>
+<area shape="rect" href="lib_co_8hpp.html#a6df2dcd4b1f61c75dc292942bc5ca74d" title=" " alt="" coords="727,976,824,1003"/>
+<area shape="rect" href="class_timer.html#a3614503158effc6668bc10001d75d20c" title=" " alt="" coords="729,1027,822,1054"/>
+<area shape="rect" href="class_hit.html#ab60637cf6f374e4394139c3594e4464e" title=" " alt="" coords="726,368,825,395"/>
+<area shape="rect" href="class_coinc_builder.html#a7bb003c28d9b4b43bbd10a09771226ae" title=" " alt="" coords="923,470,1113,496"/>
+<area shape="rect" href="class_coinc_builder.html#ad777d92b1242cafdb594e3fb315ae3a9" title=" " alt="" coords="945,520,1091,547"/>
+<area shape="rect" href="_hit_8hpp.html#a4ea1ea3a29989c67afc2c4db41e36b15" title="Casts a number into unsigned Time." alt="" coords="1207,470,1297,496"/>
+<area shape="rect" href="files__functions_8hpp.html#a6d165da5cc41e5429a9c03c6a6c68d96" title=" " alt="" coords="974,571,1062,598"/>
+<area shape="rect" href="files__functions_8hpp.html#ab1e262f27aaad28944f29cd2bbde417f" title=" " alt="" coords="1217,546,1287,572"/>
+<area shape="rect" href="files__functions_8hpp.html#ad3a78346393c83676348f6bad34b8ce2" title=" " alt="" coords="1202,596,1302,623"/>
+<area shape="rect" href="class_faster_reader.html#aef9fb9be5f288b88bdb17616aab801bd" title="Replace the standard ReadSimple if the faster data contains groups First of all, the m_write variable..." alt="" coords="925,824,1111,851"/>
+<area shape="rect" href="class_faster_reader.html#a60f1f638732c48c1b78cfe4dcd23d39b" title="Read triggerless data." alt="" coords="921,875,1115,902"/>
+<area shape="rect" href="class_faster_reader.html#a0b2cd239d03d34e69b10418cb6292858" title="Treats faster data." alt="" coords="1163,850,1341,876"/>
+<area shape="rect" href="class_faster_reader.html#a64fb4fc3d241141f5d27df99906780fc" title="Treats the faster data groups." alt="" coords="1389,820,1608,847"/>
+<area shape="rect" href="class_faster_reader.html#af3c8f411415fb3d9fe20cd8551bc24ed" title="Treat the specific part of data (QDC gates, spectro ADC ...)" alt="" coords="1420,872,1577,913"/>
+<area shape="rect" href="_hit_8hpp.html#a3bbfcd7f9bbec3174213c2b5eedc2edd" title="Casts a number into unsigned Timestamp." alt="" coords="1433,938,1564,964"/>
+<area shape="rect" href="class_faster_reader.html#aa0d1eaa1b39778def2b7cd25581accef" title="Load CRRC4 data." alt="" coords="1656,752,1847,779"/>
+<area shape="rect" href="class_faster_reader.html#aa5890b8ac1fdbcd4e2c544c1eeca537b" title="Load QDC1 data." alt="" coords="1659,803,1843,830"/>
+<area shape="rect" href="class_faster_reader.html#a94fd509a6352735984a20c03fb046254" title="Load qdc2 data." alt="" coords="1659,854,1843,880"/>
+<area shape="rect" href="class_faster_reader.html#afa7cbf1733ff68804ef4f7706bf58416" title="Load qdc3 data." alt="" coords="1659,904,1843,931"/>
+<area shape="rect" href="class_faster_reader.html#ad2d7d3acd1a874f09f44f2adfa69d42c" title="Load RF data." alt="" coords="1669,955,1833,982"/>
+<area shape="rect" href="class_faster_reader.html#a3ee31b1e6a4c60d72f8d989d2e08bcdf" title="Load Trapez data." alt="" coords="1657,1006,1846,1032"/>
+<area shape="rect" href="_hit_8hpp.html#a42de29176eeb225c09486aa0dcac5362" title="Casts a number into unsigned ADC." alt="" coords="1895,955,1979,982"/>
+<area shape="rect" href="class_hit.html#a11ab514bf16c8173e974b6582ca6d37e" title=" " alt="" coords="977,318,1059,344"/>
+<area shape="rect" href="class_filename.html#a16a859ce80a8efeabbf8b28add13c55f" title=" " alt="" coords="937,926,1099,952"/>
+<area shape="rect" href="class_i_options.html#aab7ee24774fddd6ccb14bb6801fafdb0" title=" " alt="" coords="941,419,1095,446"/>
+</map>
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_faster2_root_a0a1797460cf62fe88d87327602b91eda_icgraph.png" border="0" usemap="#aclass_faster2_root_a0a1797460cf62fe88d87327602b91eda_icgraph" alt=""/></div>
+<div class="center"><img src="class_faster2_root_a7d6d5249c6ced2548a58406eca085cdb_icgraph.png" border="0" usemap="#aclass_faster2_root_a7d6d5249c6ced2548a58406eca085cdb_icgraph" alt=""/></div>
+<map name="aclass_faster2_root_a7d6d5249c6ced2548a58406eca085cdb_icgraph" id="aclass_faster2_root_a7d6d5249c6ced2548a58406eca085cdb_icgraph">
+<area shape="rect" title=" " alt="" coords="469,31,625,57"/>
+<area shape="rect" href="class_faster2_root.html#ad07b97d280479aabc26e04d920726ddb" title="Raw conversion :" alt="" coords="237,5,421,32"/>
+<area shape="rect" href="class_faster2_root.html#ad30ccf937150bbd3504ec3a354b76c8f" title=" " alt="" coords="262,56,397,83"/>
+<area shape="rect" href="class_faster2_root.html#aacd4d3fa480eba9bc86b49f4b2040c60" title=" " alt="" coords="5,56,189,83"/>
+</map>
 </div>
 
 </div>
 </div>
-<a id="ab164afcb047412f8ba87c7ba7064d80a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab164afcb047412f8ba87c7ba7064d80a">&#9670;&nbsp;</a></span>loadCalibration()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool Faster2Root::loadCalibration </td>
-          <td>(</td>
-          <td class="paramtype">std::string const &amp;&#160;</td>
-          <td class="paramname"><em>calib_filename</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="class_faster2_root_ab164afcb047412f8ba87c7ba7064d80a_cgraph.png" border="0" usemap="#aclass_faster2_root_ab164afcb047412f8ba87c7ba7064d80a_cgraph" alt=""/></div>
-</div>
-
-</div>
-</div>
-<a id="acef0689ae63f98e97e34b231b52ecc24"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acef0689ae63f98e97e34b231b52ecc24">&#9670;&nbsp;</a></span>loadTimeshifts()</h2>
+<a id="a2ba93a4814723b6103dc25a701f3dc89"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2ba93a4814723b6103dc25a701f3dc89">&#9670;&nbsp;</a></span>convertFile()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -344,308 +726,22 @@ Here is the call graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool Faster2Root::loadTimeshifts </td>
+          <td class="memname">void Faster2Root::convertFile </td>
           <td>(</td>
-          <td class="paramtype">std::string const &amp;&#160;</td>
-          <td class="paramname"><em>ts_filename</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="class_faster2_root_acef0689ae63f98e97e34b231b52ecc24_cgraph.png" border="0" usemap="#aclass_faster2_root_acef0689ae63f98e97e34b231b52ecc24_cgraph" alt=""/></div>
-</div>
-
-</div>
-</div>
-<a id="a6a5f842fa5f27d7936c132e12fa60505"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6a5f842fa5f27d7936c132e12fa60505">&#9670;&nbsp;</a></span>ok()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool const&amp; Faster2Root::ok </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="adce71c7f29df1c847578b957c85c67ee"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adce71c7f29df1c847578b957c85c67ee">&#9670;&nbsp;</a></span>p_calib()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_calibration.html">Calibration</a>* Faster2Root::p_calib </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a3b8d9436125012bb870d196ef58bbecc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3b8d9436125012bb870d196ef58bbecc">&#9670;&nbsp;</a></span>p_detList()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_detectors_list.html">DetectorsList</a>* Faster2Root::p_detList </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="aa874d23260f610a7a32376bcb6f64bf1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa874d23260f610a7a32376bcb6f64bf1">&#9670;&nbsp;</a></span>p_files()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_files_manager.html">FilesManager</a>* Faster2Root::p_files </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a12a3de9d0d12f8617ae3b6f5f3e6889b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a12a3de9d0d12f8617ae3b6f5f3e6889b">&#9670;&nbsp;</a></span>p_ts()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_timeshifts.html">Timeshifts</a>* Faster2Root::p_ts </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a30a547858aa9e7100eade67029d4ce1c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a30a547858aa9e7100eade67029d4ce1c">&#9670;&nbsp;</a></span>setListDet() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Faster2Root::setListDet </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_detectors_list.html">DetectorsList</a> const &amp;&#160;</td>
-          <td class="paramname"><em>detectorList</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a69700110c53e6d512bf265ab96b8ef0c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a69700110c53e6d512bf265ab96b8ef0c">&#9670;&nbsp;</a></span>setListDet() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Faster2Root::setListDet </td>
-          <td>(</td>
-          <td class="paramtype">std::string const &amp;&#160;</td>
-          <td class="paramname"><em>filename</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a100fbf3a514156f13137582ebe7b63c4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a100fbf3a514156f13137582ebe7b63c4">&#9670;&nbsp;</a></span>setOutDir()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Faster2Root::setOutDir </td>
-          <td>(</td>
-          <td class="paramtype">std::string const &amp;&#160;</td>
-          <td class="paramname"><em>outfolder</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="class_faster2_root_a100fbf3a514156f13137582ebe7b63c4_cgraph.png" border="0" usemap="#aclass_faster2_root_a100fbf3a514156f13137582ebe7b63c4_cgraph" alt=""/></div>
-</div>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="class_faster2_root_a100fbf3a514156f13137582ebe7b63c4_icgraph.png" border="0" usemap="#aclass_faster2_root_a100fbf3a514156f13137582ebe7b63c4_icgraph" alt=""/></div>
-</div>
-
-</div>
-</div>
-<a id="af2a1897c51aeb3fd269aeebb20aaad6d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af2a1897c51aeb3fd269aeebb20aaad6d">&#9670;&nbsp;</a></span>setRunPath()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Faster2Root::setRunPath </td>
-          <td>(</td>
-          <td class="paramtype">std::string const &amp;&#160;</td>
-          <td class="paramname"><em>datapath</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="class_faster2_root_af2a1897c51aeb3fd269aeebb20aaad6d_cgraph.png" border="0" usemap="#aclass_faster2_root_af2a1897c51aeb3fd269aeebb20aaad6d_cgraph" alt=""/></div>
-</div>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="class_faster2_root_af2a1897c51aeb3fd269aeebb20aaad6d_icgraph.png" border="0" usemap="#aclass_faster2_root_af2a1897c51aeb3fd269aeebb20aaad6d_icgraph" alt=""/></div>
-</div>
-
-</div>
-</div>
-<a id="a2409f727d81b148d694f2da17a1989f4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2409f727d81b148d694f2da17a1989f4">&#9670;&nbsp;</a></span>treatFile()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Faster2Root::treatFile </td>
-          <td>(</td>
-          <td class="paramtype">std::string const &amp;&#160;</td>
-          <td class="paramname"><em>filename</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="class_faster2_root_a2409f727d81b148d694f2da17a1989f4_cgraph.png" border="0" usemap="#aclass_faster2_root_a2409f727d81b148d694f2da17a1989f4_cgraph" alt=""/></div>
-</div>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="class_faster2_root_a2409f727d81b148d694f2da17a1989f4_icgraph.png" border="0" usemap="#aclass_faster2_root_a2409f727d81b148d694f2da17a1989f4_icgraph" alt=""/></div>
-</div>
-
-</div>
-</div>
-<a id="a17399e2c3d35d2bc98f895548f256826"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a17399e2c3d35d2bc98f895548f256826">&#9670;&nbsp;</a></span>treatFilesMT()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Faster2Root::treatFilesMT </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_m_t_list.html">MTList</a>&lt; std::string &gt; &amp;&#160;</td>
-          <td class="paramname"><em>files_list</em>, </td>
+          <td class="paramtype"><a class="el" href="class_hit.html">Hit</a> &amp;&#160;</td>
+          <td class="paramname"><em>hit</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="class_faster2_root.html">Faster2Root</a> *&#160;</td>
-          <td class="paramname"><em>f2r</em>&#160;</td>
+          <td class="paramtype"><a class="el" href="class_faster_reader.html">FasterReader</a> &amp;&#160;</td>
+          <td class="paramname"><em>reader</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_path.html">Path</a> const &amp;&#160;</td>
+          <td class="paramname"><em>outPath</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -655,25 +751,84 @@ Here is the caller graph for this function:</div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">hit</td><td></td></tr>
+    <tr><td class="paramname">reader</td><td></td></tr>
+    <tr><td class="paramname">outPath</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Reimplemented in <a class="el" href="class_my_simple_convertor.html#a81d6aadfcbadae6e83dbacc86735a0c5">MySimpleConvertor</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_faster2_root_a17399e2c3d35d2bc98f895548f256826_cgraph.png" border="0" usemap="#aclass_faster2_root_a17399e2c3d35d2bc98f895548f256826_cgraph" alt=""/></div>
+<div class="center"><img src="class_faster2_root_a2ba93a4814723b6103dc25a701f3dc89_cgraph.png" border="0" usemap="#aclass_faster2_root_a2ba93a4814723b6103dc25a701f3dc89_cgraph" alt=""/></div>
+<map name="aclass_faster2_root_a2ba93a4814723b6103dc25a701f3dc89_cgraph" id="aclass_faster2_root_a2ba93a4814723b6103dc25a701f3dc89_cgraph">
+<area shape="rect" title=" " alt="" coords="5,385,184,412"/>
+<area shape="rect" href="lib_root_8hpp.html#ad91e4154d55b03aec78fc49348f35db1" title=" " alt="" coords="290,5,370,32"/>
+<area shape="rect" href="class_coinc_builder.html#a6fbd7caa8ab6ac6bbf4d14eb094b6417" title="Add Hits to the event. Return true when an event is complete, i.e. current hit is outside of time win..." alt="" coords="258,56,402,83"/>
+<area shape="rect" href="class_file.html#adcc058679f1c4e1b9561aa7043720ade" title=" " alt="" coords="288,107,372,133"/>
+<area shape="rect" href="class_file.html#a53118ce36851cb1c6845a82f915fd8ba" title=" " alt="" coords="284,157,376,184"/>
+<area shape="rect" href="class_faster_reader.html#add1cd47aee08955e9a1fb11782129714" title="Get the name of the file being read." alt="" coords="244,208,416,235"/>
+<area shape="rect" href="class_faster_reader.html#a0e799cf6b890a3ca281819efeb2df29e" title="Returns the hits counter." alt="" coords="237,259,423,285"/>
+<area shape="rect" href="class_faster_reader.html#aab416287bd95c5dad74fff1ebb45d3c8" title="Get the name of the file being read." alt="" coords="232,309,428,336"/>
+<area shape="rect" href="class_builder.html#a4d557d96189a42cbc0a4a0d32db45d6c" title=" " alt="" coords="253,360,407,387"/>
+<area shape="rect" href="lib_co_8hpp.html#a6cca31a5d1658456b486e6fa135c690b" title=" " alt="" coords="291,411,369,437"/>
+<area shape="rect" href="_histogramor_8hpp.html#ab48a2fa7184e6354788989602c8c8c29" title=" " alt="" coords="781,613,833,640"/>
+<area shape="rect" href="class_faster_reader.html#a2d05907241b80ed637b2ae5a01503756" title="Main method. Extract the next hit from the data file and fills the Hit *m_hit object." alt="" coords="256,461,404,488"/>
+<area shape="rect" href="class_hit.html#ad809be4a75a5c588504fa77d442e393d" title=" " alt="" coords="281,512,379,539"/>
+<area shape="rect" href="class_file.html#a4162125761930208891770416c498828" title=" " alt="" coords="267,613,393,640"/>
+<area shape="rect" href="lib_co_8hpp.html#a6df2dcd4b1f61c75dc292942bc5ca74d" title=" " alt="" coords="281,664,379,691"/>
+<area shape="rect" href="class_timer.html#a3614503158effc6668bc10001d75d20c" title=" " alt="" coords="283,715,377,741"/>
+<area shape="rect" href="class_hit.html#ab60637cf6f374e4394139c3594e4464e" title=" " alt="" coords="281,765,379,792"/>
+<area shape="rect" href="class_coinc_builder.html#a7bb003c28d9b4b43bbd10a09771226ae" title=" " alt="" coords="478,81,667,108"/>
+<area shape="rect" href="class_coinc_builder.html#ad777d92b1242cafdb594e3fb315ae3a9" title=" " alt="" coords="500,31,645,57"/>
+<area shape="rect" href="_hit_8hpp.html#a4ea1ea3a29989c67afc2c4db41e36b15" title="Casts a number into unsigned Time." alt="" coords="762,81,851,108"/>
+<area shape="rect" href="files__functions_8hpp.html#a6d165da5cc41e5429a9c03c6a6c68d96" title=" " alt="" coords="529,157,617,184"/>
+<area shape="rect" href="files__functions_8hpp.html#ab1e262f27aaad28944f29cd2bbde417f" title=" " alt="" coords="771,196,842,223"/>
+<area shape="rect" href="files__functions_8hpp.html#ad3a78346393c83676348f6bad34b8ce2" title=" " alt="" coords="757,145,857,172"/>
+<area shape="rect" href="class_faster_reader.html#aef9fb9be5f288b88bdb17616aab801bd" title="Replace the standard ReadSimple if the faster data contains groups First of all, the m_write variable..." alt="" coords="479,360,666,387"/>
+<area shape="rect" href="class_faster_reader.html#a60f1f638732c48c1b78cfe4dcd23d39b" title="Read triggerless data." alt="" coords="476,411,669,437"/>
+<area shape="rect" href="class_faster_reader.html#a0b2cd239d03d34e69b10418cb6292858" title="Treats faster data." alt="" coords="717,385,896,412"/>
+<area shape="rect" href="class_faster_reader.html#a64fb4fc3d241141f5d27df99906780fc" title="Treats the faster data groups." alt="" coords="944,356,1163,383"/>
+<area shape="rect" href="class_faster_reader.html#af3c8f411415fb3d9fe20cd8551bc24ed" title="Treat the specific part of data (QDC gates, spectro ADC ...)" alt="" coords="975,407,1132,449"/>
+<area shape="rect" href="_hit_8hpp.html#a3bbfcd7f9bbec3174213c2b5eedc2edd" title="Casts a number into unsigned Timestamp." alt="" coords="988,473,1119,500"/>
+<area shape="rect" href="class_faster_reader.html#aa0d1eaa1b39778def2b7cd25581accef" title="Load CRRC4 data." alt="" coords="1211,288,1401,315"/>
+<area shape="rect" href="class_faster_reader.html#aa5890b8ac1fdbcd4e2c544c1eeca537b" title="Load QDC1 data." alt="" coords="1214,339,1398,365"/>
+<area shape="rect" href="class_faster_reader.html#a94fd509a6352735984a20c03fb046254" title="Load qdc2 data." alt="" coords="1214,389,1398,416"/>
+<area shape="rect" href="class_faster_reader.html#afa7cbf1733ff68804ef4f7706bf58416" title="Load qdc3 data." alt="" coords="1214,440,1398,467"/>
+<area shape="rect" href="class_faster_reader.html#ad2d7d3acd1a874f09f44f2adfa69d42c" title="Load RF data." alt="" coords="1224,491,1388,517"/>
+<area shape="rect" href="class_faster_reader.html#a3ee31b1e6a4c60d72f8d989d2e08bcdf" title="Load Trapez data." alt="" coords="1211,541,1401,568"/>
+<area shape="rect" href="_hit_8hpp.html#a42de29176eeb225c09486aa0dcac5362" title="Casts a number into unsigned ADC." alt="" coords="1449,491,1533,517"/>
+<area shape="rect" href="class_hit.html#a11ab514bf16c8173e974b6582ca6d37e" title=" " alt="" coords="531,512,614,539"/>
+<area shape="rect" href="class_filename.html#a16a859ce80a8efeabbf8b28add13c55f" title=" " alt="" coords="491,613,654,640"/>
+<area shape="rect" href="class_i_options.html#aab7ee24774fddd6ccb14bb6801fafdb0" title=" " alt="" coords="495,676,650,703"/>
+</map>
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_faster2_root_a17399e2c3d35d2bc98f895548f256826_icgraph.png" border="0" usemap="#aclass_faster2_root_a17399e2c3d35d2bc98f895548f256826_icgraph" alt=""/></div>
+<div class="center"><img src="class_faster2_root_a2ba93a4814723b6103dc25a701f3dc89_icgraph.png" border="0" usemap="#aclass_faster2_root_a2ba93a4814723b6103dc25a701f3dc89_icgraph" alt=""/></div>
+<map name="aclass_faster2_root_a2ba93a4814723b6103dc25a701f3dc89_icgraph" id="aclass_faster2_root_a2ba93a4814723b6103dc25a701f3dc89_icgraph">
+<area shape="rect" title=" " alt="" coords="915,31,1093,57"/>
+<area shape="rect" href="class_faster2_root.html#a50fd46a075ae0a1a1f52b5bb6405047b" title=" " alt="" coords="673,31,867,57"/>
+<area shape="rect" href="class_faster2_root.html#a7d6d5249c6ced2548a58406eca085cdb" title=" " alt="" coords="469,31,625,57"/>
+<area shape="rect" href="class_faster2_root.html#ad07b97d280479aabc26e04d920726ddb" title="Raw conversion :" alt="" coords="237,5,421,32"/>
+<area shape="rect" href="class_faster2_root.html#ad30ccf937150bbd3504ec3a354b76c8f" title=" " alt="" coords="262,56,397,83"/>
+<area shape="rect" href="class_faster2_root.html#aacd4d3fa480eba9bc86b49f4b2040c60" title=" " alt="" coords="5,56,189,83"/>
+</map>
 </div>
 
 </div>
 </div>
-<a id="ad6de8c1c54e9fef526a54e56de4c9361"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad6de8c1c54e9fef526a54e56de4c9361">&#9670;&nbsp;</a></span>verbose()</h2>
+<a id="ad30ccf937150bbd3504ec3a354b76c8f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad30ccf937150bbd3504ec3a354b76c8f">&#9670;&nbsp;</a></span>load()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -682,10 +837,603 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void Faster2Root::verbose </td>
+          <td class="memname">void Faster2Root::load </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>argc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char **&#160;</td>
+          <td class="paramname"><em>argv</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_faster2_root_ad30ccf937150bbd3504ec3a354b76c8f_cgraph.png" border="0" usemap="#aclass_faster2_root_ad30ccf937150bbd3504ec3a354b76c8f_cgraph" alt=""/></div>
+<map name="aclass_faster2_root_ad30ccf937150bbd3504ec3a354b76c8f_cgraph" id="aclass_faster2_root_ad30ccf937150bbd3504ec3a354b76c8f_cgraph">
+<area shape="rect" title=" " alt="" coords="5,883,140,910"/>
+<area shape="rect" href="class_faster2_root.html#a5eadd66ea26d632b75a92aa9c2878bf3" title=" " alt="" coords="452,503,635,530"/>
+<area shape="rect" href="_histogramor_8hpp.html#ab48a2fa7184e6354788989602c8c8c29" title=" " alt="" coords="994,478,1046,505"/>
+<area shape="rect" href="class_faster2_root.html#a7d6d5249c6ced2548a58406eca085cdb" title=" " alt="" coords="215,234,371,261"/>
+<area shape="rect" href="lib_co_8hpp.html#a6df2dcd4b1f61c75dc292942bc5ca74d" title=" " alt="" coords="971,6,1069,33"/>
+<area shape="rect" href="class_m_t_object.html#aaa3623d88deae3a9311aad39bfff49dc" title=" " alt="" coords="469,453,617,479"/>
+<area shape="rect" href="class_detectors.html#a03f6e9974f958b86ddbbc4670d0209a2" title="Reads the file and extracts the list of detectors, then fills the lookup tables." alt="" coords="233,833,354,859"/>
+<area shape="rect" href="class_faster2_root.html#afaec1876151390b71c475885157670a3" title=" " alt="" coords="190,934,397,961"/>
+<area shape="rect" href="class_faster2_root.html#a3953ee6d843802ca12997e146fd7046d" title=" " alt="" coords="192,883,395,910"/>
+<area shape="rect" href="class_faster2_root.html#a5b8a78ef8c54117807c770d21fa4acf0" title=" " alt="" coords="192,1035,395,1062"/>
+<area shape="rect" href="class_faster2_root.html#a19537e5417a0537a0327b91b78982ca2" title=" " alt="" coords="209,985,378,1011"/>
+<area shape="rect" href="class_faster2_root.html#a6cc6f4731958e8c74ad0e07f4d97f4a0" title=" " alt="" coords="188,402,399,429"/>
+<area shape="rect" href="class_faster_reader.html#aa1fcb8d6721212bc982cac0ae4e597eb" title="Set the number of hits to read inside each file." alt="" coords="199,1086,388,1113"/>
+<area shape="rect" href="class_faster2_root.html#a943441baaa37c600a49913339a63e89d" title=" " alt="" coords="206,1137,381,1163"/>
+<area shape="rect" href="class_faster2_root.html#a0717c962ce832333110607b30f8370fc" title=" " alt="" coords="195,1187,392,1214"/>
+<area shape="rect" href="class_timer.html#a4b85f2f938d7261db769607fc50fcaef" title=" " alt="" coords="231,1339,355,1366"/>
+<area shape="rect" href="class_m_t_faster_reader.html#ae316d31ebcb18ae8689522509d1ba513" title="Reads many faster files in parallel." alt="" coords="447,259,639,286"/>
+<area shape="rect" href="class_faster2_root.html#a50fd46a075ae0a1a1f52b5bb6405047b" title=" " alt="" coords="447,133,640,159"/>
+<area shape="rect" href="class_files_manager.html#a2b619786ba65a7ac1e701fc61e2409ae" title=" " alt="" coords="688,285,879,311"/>
+<area shape="rect" href="class_m_t_object.html#a35c02650eb403bd54e867f93bb26fc47" title=" " alt="" coords="703,336,863,377"/>
+<area shape="rect" href="class_faster2_root.html#a2ba93a4814723b6103dc25a701f3dc89" title=" " alt="" coords="694,133,873,159"/>
+<area shape="rect" href="lib_root_8hpp.html#ad91e4154d55b03aec78fc49348f35db1" title=" " alt="" coords="980,158,1060,185"/>
+<area shape="rect" href="class_coinc_builder.html#a6fbd7caa8ab6ac6bbf4d14eb094b6417" title="Add Hits to the event. Return true when an event is complete, i.e. current hit is outside of time win..." alt="" coords="948,209,1092,235"/>
+<area shape="rect" href="class_file.html#adcc058679f1c4e1b9561aa7043720ade" title=" " alt="" coords="978,259,1062,286"/>
+<area shape="rect" href="class_file.html#a53118ce36851cb1c6845a82f915fd8ba" title=" " alt="" coords="974,310,1066,337"/>
+<area shape="rect" href="class_faster_reader.html#add1cd47aee08955e9a1fb11782129714" title="Get the name of the file being read." alt="" coords="934,57,1106,83"/>
+<area shape="rect" href="class_faster_reader.html#a0e799cf6b890a3ca281819efeb2df29e" title="Returns the hits counter." alt="" coords="927,107,1113,134"/>
+<area shape="rect" href="class_detectors.html#a8d5c0f2d189ddda12ed3c36f13887cfd" title="Fills the lookup tables." alt="" coords="458,833,629,859"/>
+<area shape="rect" href="class_detectors.html#a3d5631f8fd2770b6b3a2a178130519ad" title="Reads the file and extracts the list of detectors." alt="" coords="471,1162,616,1189"/>
+<area shape="rect" href="_detectors_8hpp.html#aa4d7f26a632b3df166ad7a08cad05af1" title=" " alt="" coords="737,757,829,783"/>
+<area shape="rect" href="_detectors_8hpp.html#adc256156b68f8dd6b9f2c2da57808bd3" title=" " alt="" coords="715,807,851,834"/>
+<area shape="rect" href="class_detectors.html#a3c4f247022eb113c0371899060ea0199" title="Get the type index of the detector. Each type of detector has its own indexing system if you have 3 G..." alt="" coords="719,1061,848,1087"/>
+<area shape="rect" href="class_detectors.html#a349500ec816bd7761de87c54b95000bc" title=" " alt="" coords="957,1010,1083,1037"/>
+<area shape="rect" href="class_detectors.html#a0be56517035f1272af33392665b9ff1f" title=" " alt="" coords="1340,1010,1463,1037"/>
+<area shape="rect" href="_detectors_8hpp.html#af8a018699aa5d8544bc4877f40463a5a" title=" " alt="" coords="981,1111,1059,1138"/>
+<area shape="rect" href="_detectors_8hpp.html#adccbc8332a89f48a35baea4a37255e2c" title=" " alt="" coords="728,909,839,935"/>
+<area shape="rect" href="string__functions_8hpp.html#ab2c67e2ba68d5a42ce9a48dafdbba829" title="Replaces all the instances of one character with another." alt="" coords="717,655,850,682"/>
+<area shape="rect" href="class_detectors.html#a1177661fb15c9825755925faf00c8398" title="Return the value of the maximum label, i.e. the size of the lookup tables." alt="" coords="724,1263,843,1290"/>
+<area shape="rect" href="lib_co_8hpp.html#ade77d1f37b1311b3f80ce429a33fd226" title="Casts a number into unsigned char (uchar)" alt="" coords="737,706,829,733"/>
+<area shape="rect" href="class_detectors.html#afd00ee8a76386f7356a12858b1dd7c6b" title="Get the name of a detector given its type and type index." alt="" coords="1161,1061,1292,1087"/>
+<area shape="rect" href="files__functions_8hpp.html#afd584978228fac5fae283c12837378dd" title=" " alt="" coords="729,1314,838,1341"/>
+<area shape="rect" href="class_bools.html#ab34b97e65a4a23ae25a8b6f746c37a9d" title=" " alt="" coords="967,1339,1073,1366"/>
+<area shape="rect" href="class_calibration.html#a2d2a0d6276fc2c8a4b60c3801ccc16a9" title=" " alt="" coords="479,1314,608,1341"/>
+<area shape="rect" href="class_detectors.html#af2bb20ee60f504df326b87e9ebbaef30" title=" " alt="" coords="717,1466,849,1493"/>
+<area shape="rect" href="class_calibration.html#ab1502564e126e769e782d221d42608c7" title=" " alt="" coords="723,1567,844,1594"/>
+<area shape="rect" href="class_calibration.html#ac4b8f57b3d896cda20a6aa3ba04a78e7" title="DEV." alt="" coords="720,1517,847,1543"/>
+<area shape="rect" href="class_timeshifts.html#a28163efe8d487669cf50d5f6e1060d71" title="Use this method to load timeshifts from a .dT file." alt="" coords="480,1263,607,1290"/>
+<area shape="rect" href="string__functions_8hpp.html#a03fb03d95885354ac3c329693588097b" title=" " alt="" coords="514,1365,573,1391"/>
+<area shape="rect" href="class_faster2_root.html#aaa5d89a939efb05b6408e65b5f0117c2" title=" " alt="" coords="458,1415,629,1442"/>
+<area shape="rect" href="class_timer.html#a7b0362b0627780584a43f8168be1a904" title=" " alt="" coords="495,1466,592,1493"/>
+</map>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_faster2_root_ad30ccf937150bbd3504ec3a354b76c8f_icgraph.png" border="0" usemap="#aclass_faster2_root_ad30ccf937150bbd3504ec3a354b76c8f_icgraph" alt=""/></div>
+<map name="aclass_faster2_root_ad30ccf937150bbd3504ec3a354b76c8f_icgraph" id="aclass_faster2_root_ad30ccf937150bbd3504ec3a354b76c8f_icgraph">
+<area shape="rect" title=" " alt="" coords="237,5,372,32"/>
+<area shape="rect" href="class_faster2_root.html#aacd4d3fa480eba9bc86b49f4b2040c60" title=" " alt="" coords="5,5,189,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="afaec1876151390b71c475885157670a3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afaec1876151390b71c475885157670a3">&#9670;&nbsp;</a></span>loadCalibration()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Faster2Root::loadCalibration </td>
+          <td>(</td>
+          <td class="paramtype">std::string const &amp;&#160;</td>
+          <td class="paramname"><em>calibFile</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_faster2_root_afaec1876151390b71c475885157670a3_cgraph.png" border="0" usemap="#aclass_faster2_root_afaec1876151390b71c475885157670a3_cgraph" alt=""/></div>
+<map name="aclass_faster2_root_afaec1876151390b71c475885157670a3_cgraph" id="aclass_faster2_root_afaec1876151390b71c475885157670a3_cgraph">
+<area shape="rect" title=" " alt="" coords="5,132,212,159"/>
+<area shape="rect" href="class_calibration.html#a2d2a0d6276fc2c8a4b60c3801ccc16a9" title=" " alt="" coords="260,132,389,159"/>
+<area shape="rect" href="files__functions_8hpp.html#afd584978228fac5fae283c12837378dd" title=" " alt="" coords="449,5,558,32"/>
+<area shape="rect" href="_histogramor_8hpp.html#ab48a2fa7184e6354788989602c8c8c29" title=" " alt="" coords="644,56,696,83"/>
+<area shape="rect" href="class_detectors.html#af2bb20ee60f504df326b87e9ebbaef30" title=" " alt="" coords="437,107,569,133"/>
+<area shape="rect" href="class_calibration.html#ab1502564e126e769e782d221d42608c7" title=" " alt="" coords="443,157,564,184"/>
+<area shape="rect" href="class_detectors.html#a1177661fb15c9825755925faf00c8398" title="Return the value of the maximum label, i.e. the size of the lookup tables." alt="" coords="444,208,563,235"/>
+<area shape="rect" href="class_calibration.html#ac4b8f57b3d896cda20a6aa3ba04a78e7" title="DEV." alt="" coords="440,259,567,285"/>
+<area shape="rect" href="class_bools.html#ab34b97e65a4a23ae25a8b6f746c37a9d" title=" " alt="" coords="617,107,723,133"/>
+<area shape="rect" href="class_bools.html#ad4d74f6e2266b271a8bd060ce6d0e448" title=" " alt="" coords="771,107,863,133"/>
+<area shape="rect" href="_hit_8hpp.html#af181231d97866aa957e8fe8bd67f7f64" title="Data casts ///." alt="" coords="625,208,715,235"/>
+</map>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_faster2_root_afaec1876151390b71c475885157670a3_icgraph.png" border="0" usemap="#aclass_faster2_root_afaec1876151390b71c475885157670a3_icgraph" alt=""/></div>
+<map name="aclass_faster2_root_afaec1876151390b71c475885157670a3_icgraph" id="aclass_faster2_root_afaec1876151390b71c475885157670a3_icgraph">
+<area shape="rect" title=" " alt="" coords="420,5,627,32"/>
+<area shape="rect" href="class_faster2_root.html#ad30ccf937150bbd3504ec3a354b76c8f" title=" " alt="" coords="237,5,372,32"/>
+<area shape="rect" href="class_faster2_root.html#aacd4d3fa480eba9bc86b49f4b2040c60" title=" " alt="" coords="5,5,189,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a3953ee6d843802ca12997e146fd7046d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3953ee6d843802ca12997e146fd7046d">&#9670;&nbsp;</a></span>loadTimeshifts()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Faster2Root::loadTimeshifts </td>
+          <td>(</td>
+          <td class="paramtype">std::string const &amp;&#160;</td>
+          <td class="paramname"><em>dTfile</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_faster2_root_a3953ee6d843802ca12997e146fd7046d_cgraph.png" border="0" usemap="#aclass_faster2_root_a3953ee6d843802ca12997e146fd7046d_cgraph" alt=""/></div>
+<map name="aclass_faster2_root_a3953ee6d843802ca12997e146fd7046d_cgraph" id="aclass_faster2_root_a3953ee6d843802ca12997e146fd7046d_cgraph">
+<area shape="rect" title=" " alt="" coords="5,56,208,83"/>
+<area shape="rect" href="class_timeshifts.html#a28163efe8d487669cf50d5f6e1060d71" title="Use this method to load timeshifts from a .dT file." alt="" coords="256,56,383,83"/>
+<area shape="rect" href="files__functions_8hpp.html#afd584978228fac5fae283c12837378dd" title=" " alt="" coords="435,5,545,32"/>
+<area shape="rect" href="_histogramor_8hpp.html#ab48a2fa7184e6354788989602c8c8c29" title=" " alt="" coords="464,56,516,83"/>
+<area shape="rect" href="class_detectors.html#a1177661fb15c9825755925faf00c8398" title="Return the value of the maximum label, i.e. the size of the lookup tables." alt="" coords="431,107,549,133"/>
+<area shape="rect" href="_hit_8hpp.html#af181231d97866aa957e8fe8bd67f7f64" title="Data casts ///." alt="" coords="597,107,688,133"/>
+</map>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_faster2_root_a3953ee6d843802ca12997e146fd7046d_icgraph.png" border="0" usemap="#aclass_faster2_root_a3953ee6d843802ca12997e146fd7046d_icgraph" alt=""/></div>
+<map name="aclass_faster2_root_a3953ee6d843802ca12997e146fd7046d_icgraph" id="aclass_faster2_root_a3953ee6d843802ca12997e146fd7046d_icgraph">
+<area shape="rect" title=" " alt="" coords="420,5,623,32"/>
+<area shape="rect" href="class_faster2_root.html#ad30ccf937150bbd3504ec3a354b76c8f" title=" " alt="" coords="237,5,372,32"/>
+<area shape="rect" href="class_faster2_root.html#aacd4d3fa480eba9bc86b49f4b2040c60" title=" " alt="" coords="5,5,189,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a5b8a78ef8c54117807c770d21fa4acf0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b8a78ef8c54117807c770d21fa4acf0">&#9670;&nbsp;</a></span>loadTriggerFile()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Faster2Root::loadTriggerFile </td>
+          <td>(</td>
+          <td class="paramtype">std::string const &amp;&#160;</td>
+          <td class="paramname"><em>file</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_faster2_root_a5b8a78ef8c54117807c770d21fa4acf0_cgraph.png" border="0" usemap="#aclass_faster2_root_a5b8a78ef8c54117807c770d21fa4acf0_cgraph" alt=""/></div>
+<map name="aclass_faster2_root_a5b8a78ef8c54117807c770d21fa4acf0_cgraph" id="aclass_faster2_root_a5b8a78ef8c54117807c770d21fa4acf0_cgraph">
+<area shape="rect" title=" " alt="" coords="5,31,208,57"/>
+<area shape="rect" href="string__functions_8hpp.html#a03fb03d95885354ac3c329693588097b" title=" " alt="" coords="312,5,371,32"/>
+<area shape="rect" href="class_faster2_root.html#aaa5d89a939efb05b6408e65b5f0117c2" title=" " alt="" coords="256,56,427,83"/>
+</map>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_faster2_root_a5b8a78ef8c54117807c770d21fa4acf0_icgraph.png" border="0" usemap="#aclass_faster2_root_a5b8a78ef8c54117807c770d21fa4acf0_icgraph" alt=""/></div>
+<map name="aclass_faster2_root_a5b8a78ef8c54117807c770d21fa4acf0_icgraph" id="aclass_faster2_root_a5b8a78ef8c54117807c770d21fa4acf0_icgraph">
+<area shape="rect" title=" " alt="" coords="420,5,623,32"/>
+<area shape="rect" href="class_faster2_root.html#ad30ccf937150bbd3504ec3a354b76c8f" title=" " alt="" coords="237,5,372,32"/>
+<area shape="rect" href="class_faster2_root.html#aacd4d3fa480eba9bc86b49f4b2040c60" title=" " alt="" coords="5,5,189,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a19537e5417a0537a0327b91b78982ca2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a19537e5417a0537a0327b91b78982ca2">&#9670;&nbsp;</a></span>overwrite()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Faster2Root::overwrite </td>
           <td>(</td>
           <td class="paramtype">bool const &amp;&#160;</td>
-          <td class="paramname"><em>_verbose</em> = <code>true</code></td><td>)</td>
+          <td class="paramname"><em>_overwrite</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_faster2_root_a19537e5417a0537a0327b91b78982ca2_icgraph.png" border="0" usemap="#aclass_faster2_root_a19537e5417a0537a0327b91b78982ca2_icgraph" alt=""/></div>
+<map name="aclass_faster2_root_a19537e5417a0537a0327b91b78982ca2_icgraph" id="aclass_faster2_root_a19537e5417a0537a0327b91b78982ca2_icgraph">
+<area shape="rect" title=" " alt="" coords="420,5,589,32"/>
+<area shape="rect" href="class_faster2_root.html#ad30ccf937150bbd3504ec3a354b76c8f" title=" " alt="" coords="237,5,372,32"/>
+<area shape="rect" href="class_faster2_root.html#aacd4d3fa480eba9bc86b49f4b2040c60" title=" " alt="" coords="5,5,189,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a6cc6f4731958e8c74ad0e07f4d97f4a0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6cc6f4731958e8c74ad0e07f4d97f4a0">&#9670;&nbsp;</a></span>printParameters()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Faster2Root::printParameters </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_faster2_root_a6cc6f4731958e8c74ad0e07f4d97f4a0_cgraph.png" border="0" usemap="#aclass_faster2_root_a6cc6f4731958e8c74ad0e07f4d97f4a0_cgraph" alt=""/></div>
+<map name="aclass_faster2_root_a6cc6f4731958e8c74ad0e07f4d97f4a0_cgraph" id="aclass_faster2_root_a6cc6f4731958e8c74ad0e07f4d97f4a0_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,216,32"/>
+<area shape="rect" href="_histogramor_8hpp.html#ab48a2fa7184e6354788989602c8c8c29" title=" " alt="" coords="264,5,316,32"/>
+</map>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_faster2_root_a6cc6f4731958e8c74ad0e07f4d97f4a0_icgraph.png" border="0" usemap="#aclass_faster2_root_a6cc6f4731958e8c74ad0e07f4d97f4a0_icgraph" alt=""/></div>
+<map name="aclass_faster2_root_a6cc6f4731958e8c74ad0e07f4d97f4a0_icgraph" id="aclass_faster2_root_a6cc6f4731958e8c74ad0e07f4d97f4a0_icgraph">
+<area shape="rect" title=" " alt="" coords="420,5,631,32"/>
+<area shape="rect" href="class_faster2_root.html#ad30ccf937150bbd3504ec3a354b76c8f" title=" " alt="" coords="237,5,372,32"/>
+<area shape="rect" href="class_faster2_root.html#aacd4d3fa480eba9bc86b49f4b2040c60" title=" " alt="" coords="5,5,189,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a50fd46a075ae0a1a1f52b5bb6405047b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a50fd46a075ae0a1a1f52b5bb6405047b">&#9670;&nbsp;</a></span>s_convertFile()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void Faster2Root::s_convertFile </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_hit.html">Hit</a> &amp;&#160;</td>
+          <td class="paramname"><em>hit</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_faster_reader.html">FasterReader</a> &amp;&#160;</td>
+          <td class="paramname"><em>reader</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_faster2_root.html">Faster2Root</a> &amp;&#160;</td>
+          <td class="paramname"><em>convertor</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_path.html">Path</a> const &amp;&#160;</td>
+          <td class="paramname"><em>outPath</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_faster2_root_a50fd46a075ae0a1a1f52b5bb6405047b_cgraph.png" border="0" usemap="#aclass_faster2_root_a50fd46a075ae0a1a1f52b5bb6405047b_cgraph" alt=""/></div>
+<map name="aclass_faster2_root_a50fd46a075ae0a1a1f52b5bb6405047b_cgraph" id="aclass_faster2_root_a50fd46a075ae0a1a1f52b5bb6405047b_cgraph">
+<area shape="rect" title=" " alt="" coords="5,385,199,412"/>
+<area shape="rect" href="class_faster2_root.html#a2ba93a4814723b6103dc25a701f3dc89" title=" " alt="" coords="247,385,425,412"/>
+<area shape="rect" href="lib_root_8hpp.html#ad91e4154d55b03aec78fc49348f35db1" title=" " alt="" coords="531,5,611,32"/>
+<area shape="rect" href="class_coinc_builder.html#a6fbd7caa8ab6ac6bbf4d14eb094b6417" title="Add Hits to the event. Return true when an event is complete, i.e. current hit is outside of time win..." alt="" coords="499,56,643,83"/>
+<area shape="rect" href="class_file.html#adcc058679f1c4e1b9561aa7043720ade" title=" " alt="" coords="529,107,613,133"/>
+<area shape="rect" href="class_file.html#a53118ce36851cb1c6845a82f915fd8ba" title=" " alt="" coords="525,157,617,184"/>
+<area shape="rect" href="class_faster_reader.html#add1cd47aee08955e9a1fb11782129714" title="Get the name of the file being read." alt="" coords="485,208,657,235"/>
+<area shape="rect" href="class_faster_reader.html#a0e799cf6b890a3ca281819efeb2df29e" title="Returns the hits counter." alt="" coords="478,259,665,285"/>
+<area shape="rect" href="class_faster_reader.html#aab416287bd95c5dad74fff1ebb45d3c8" title="Get the name of the file being read." alt="" coords="473,309,669,336"/>
+<area shape="rect" href="class_builder.html#a4d557d96189a42cbc0a4a0d32db45d6c" title=" " alt="" coords="494,360,649,387"/>
+<area shape="rect" href="lib_co_8hpp.html#a6cca31a5d1658456b486e6fa135c690b" title=" " alt="" coords="532,411,611,437"/>
+<area shape="rect" href="_histogramor_8hpp.html#ab48a2fa7184e6354788989602c8c8c29" title=" " alt="" coords="1022,613,1074,640"/>
+<area shape="rect" href="class_faster_reader.html#a2d05907241b80ed637b2ae5a01503756" title="Main method. Extract the next hit from the data file and fills the Hit *m_hit object." alt="" coords="497,461,645,488"/>
+<area shape="rect" href="class_hit.html#ad809be4a75a5c588504fa77d442e393d" title=" " alt="" coords="522,512,621,539"/>
+<area shape="rect" href="class_file.html#a4162125761930208891770416c498828" title=" " alt="" coords="509,613,634,640"/>
+<area shape="rect" href="lib_co_8hpp.html#a6df2dcd4b1f61c75dc292942bc5ca74d" title=" " alt="" coords="523,664,620,691"/>
+<area shape="rect" href="class_timer.html#a3614503158effc6668bc10001d75d20c" title=" " alt="" coords="525,715,618,741"/>
+<area shape="rect" href="class_hit.html#ab60637cf6f374e4394139c3594e4464e" title=" " alt="" coords="522,765,621,792"/>
+<area shape="rect" href="class_coinc_builder.html#a7bb003c28d9b4b43bbd10a09771226ae" title=" " alt="" coords="719,81,909,108"/>
+<area shape="rect" href="class_coinc_builder.html#ad777d92b1242cafdb594e3fb315ae3a9" title=" " alt="" coords="741,31,887,57"/>
+<area shape="rect" href="_hit_8hpp.html#a4ea1ea3a29989c67afc2c4db41e36b15" title="Casts a number into unsigned Time." alt="" coords="1003,81,1093,108"/>
+<area shape="rect" href="files__functions_8hpp.html#a6d165da5cc41e5429a9c03c6a6c68d96" title=" " alt="" coords="770,157,858,184"/>
+<area shape="rect" href="files__functions_8hpp.html#ab1e262f27aaad28944f29cd2bbde417f" title=" " alt="" coords="1013,196,1083,223"/>
+<area shape="rect" href="files__functions_8hpp.html#ad3a78346393c83676348f6bad34b8ce2" title=" " alt="" coords="998,145,1098,172"/>
+<area shape="rect" href="class_faster_reader.html#aef9fb9be5f288b88bdb17616aab801bd" title="Replace the standard ReadSimple if the faster data contains groups First of all, the m_write variable..." alt="" coords="721,360,907,387"/>
+<area shape="rect" href="class_faster_reader.html#a60f1f638732c48c1b78cfe4dcd23d39b" title="Read triggerless data." alt="" coords="717,411,911,437"/>
+<area shape="rect" href="class_faster_reader.html#a0b2cd239d03d34e69b10418cb6292858" title="Treats faster data." alt="" coords="959,385,1137,412"/>
+<area shape="rect" href="class_faster_reader.html#a64fb4fc3d241141f5d27df99906780fc" title="Treats the faster data groups." alt="" coords="1185,356,1404,383"/>
+<area shape="rect" href="class_faster_reader.html#af3c8f411415fb3d9fe20cd8551bc24ed" title="Treat the specific part of data (QDC gates, spectro ADC ...)" alt="" coords="1216,407,1373,449"/>
+<area shape="rect" href="_hit_8hpp.html#a3bbfcd7f9bbec3174213c2b5eedc2edd" title="Casts a number into unsigned Timestamp." alt="" coords="1229,473,1360,500"/>
+<area shape="rect" href="class_faster_reader.html#aa0d1eaa1b39778def2b7cd25581accef" title="Load CRRC4 data." alt="" coords="1452,288,1643,315"/>
+<area shape="rect" href="class_faster_reader.html#aa5890b8ac1fdbcd4e2c544c1eeca537b" title="Load QDC1 data." alt="" coords="1455,339,1639,365"/>
+<area shape="rect" href="class_faster_reader.html#a94fd509a6352735984a20c03fb046254" title="Load qdc2 data." alt="" coords="1455,389,1639,416"/>
+<area shape="rect" href="class_faster_reader.html#afa7cbf1733ff68804ef4f7706bf58416" title="Load qdc3 data." alt="" coords="1455,440,1639,467"/>
+<area shape="rect" href="class_faster_reader.html#ad2d7d3acd1a874f09f44f2adfa69d42c" title="Load RF data." alt="" coords="1465,491,1629,517"/>
+<area shape="rect" href="class_faster_reader.html#a3ee31b1e6a4c60d72f8d989d2e08bcdf" title="Load Trapez data." alt="" coords="1453,541,1642,568"/>
+<area shape="rect" href="_hit_8hpp.html#a42de29176eeb225c09486aa0dcac5362" title="Casts a number into unsigned ADC." alt="" coords="1691,491,1775,517"/>
+<area shape="rect" href="class_hit.html#a11ab514bf16c8173e974b6582ca6d37e" title=" " alt="" coords="773,512,855,539"/>
+<area shape="rect" href="class_filename.html#a16a859ce80a8efeabbf8b28add13c55f" title=" " alt="" coords="733,613,895,640"/>
+<area shape="rect" href="class_i_options.html#aab7ee24774fddd6ccb14bb6801fafdb0" title=" " alt="" coords="737,676,891,703"/>
+</map>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_faster2_root_a50fd46a075ae0a1a1f52b5bb6405047b_icgraph.png" border="0" usemap="#aclass_faster2_root_a50fd46a075ae0a1a1f52b5bb6405047b_icgraph" alt=""/></div>
+<map name="aclass_faster2_root_a50fd46a075ae0a1a1f52b5bb6405047b_icgraph" id="aclass_faster2_root_a50fd46a075ae0a1a1f52b5bb6405047b_icgraph">
+<area shape="rect" title=" " alt="" coords="673,31,867,57"/>
+<area shape="rect" href="class_faster2_root.html#a7d6d5249c6ced2548a58406eca085cdb" title=" " alt="" coords="469,31,625,57"/>
+<area shape="rect" href="class_faster2_root.html#ad07b97d280479aabc26e04d920726ddb" title="Raw conversion :" alt="" coords="237,5,421,32"/>
+<area shape="rect" href="class_faster2_root.html#ad30ccf937150bbd3504ec3a354b76c8f" title=" " alt="" coords="262,56,397,83"/>
+<area shape="rect" href="class_faster2_root.html#aacd4d3fa480eba9bc86b49f4b2040c60" title=" " alt="" coords="5,56,189,83"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a957a45ae197b565da07521a27ee73f53"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a957a45ae197b565da07521a27ee73f53">&#9670;&nbsp;</a></span>setCalibration()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Faster2Root::setCalibration </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_calibration.html">Calibration</a> const &amp;&#160;</td>
+          <td class="paramname"><em>calibration</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a943441baaa37c600a49913339a63e89d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a943441baaa37c600a49913339a63e89d">&#9670;&nbsp;</a></span>setNbFiles()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Faster2Root::setNbFiles </td>
+          <td>(</td>
+          <td class="paramtype">int const &amp;&#160;</td>
+          <td class="paramname"><em>nb_files</em> = <code>-1</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_faster2_root_a943441baaa37c600a49913339a63e89d_icgraph.png" border="0" usemap="#aclass_faster2_root_a943441baaa37c600a49913339a63e89d_icgraph" alt=""/></div>
+<map name="aclass_faster2_root_a943441baaa37c600a49913339a63e89d_icgraph" id="aclass_faster2_root_a943441baaa37c600a49913339a63e89d_icgraph">
+<area shape="rect" title=" " alt="" coords="469,31,644,57"/>
+<area shape="rect" href="class_faster2_root.html#ad07b97d280479aabc26e04d920726ddb" title="Raw conversion :" alt="" coords="237,5,421,32"/>
+<area shape="rect" href="class_faster2_root.html#ad30ccf937150bbd3504ec3a354b76c8f" title=" " alt="" coords="262,56,397,83"/>
+<area shape="rect" href="class_faster2_root.html#aacd4d3fa480eba9bc86b49f4b2040c60" title=" " alt="" coords="5,56,189,83"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a0717c962ce832333110607b30f8370fc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0717c962ce832333110607b30f8370fc">&#9670;&nbsp;</a></span>setNbThreads()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Faster2Root::setNbThreads </td>
+          <td>(</td>
+          <td class="paramtype">int const &amp;&#160;</td>
+          <td class="paramname"><em>nb_threads</em> = <code>-1</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_faster2_root_a0717c962ce832333110607b30f8370fc_icgraph.png" border="0" usemap="#aclass_faster2_root_a0717c962ce832333110607b30f8370fc_icgraph" alt=""/></div>
+<map name="aclass_faster2_root_a0717c962ce832333110607b30f8370fc_icgraph" id="aclass_faster2_root_a0717c962ce832333110607b30f8370fc_icgraph">
+<area shape="rect" title=" " alt="" coords="420,5,617,32"/>
+<area shape="rect" href="class_faster2_root.html#ad30ccf937150bbd3504ec3a354b76c8f" title=" " alt="" coords="237,5,372,32"/>
+<area shape="rect" href="class_faster2_root.html#aacd4d3fa480eba9bc86b49f4b2040c60" title=" " alt="" coords="5,5,189,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ace1cc6bfc486195e5808e946770d5954"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ace1cc6bfc486195e5808e946770d5954">&#9670;&nbsp;</a></span>setTimeshifts()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Faster2Root::setTimeshifts </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_timeshifts.html">Timeshifts</a> const &amp;&#160;</td>
+          <td class="paramname"><em>timeshifts</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aaa5d89a939efb05b6408e65b5f0117c2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa5d89a939efb05b6408e65b5f0117c2">&#9670;&nbsp;</a></span>setTrigger()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Faster2Root::setTrigger </td>
+          <td>(</td>
+          <td class="paramtype">std::function&lt; bool(const <a class="el" href="class_event.html">Event</a> &amp;)&gt;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_faster2_root_aaa5d89a939efb05b6408e65b5f0117c2_icgraph.png" border="0" usemap="#aclass_faster2_root_aaa5d89a939efb05b6408e65b5f0117c2_icgraph" alt=""/></div>
+<map name="aclass_faster2_root_aaa5d89a939efb05b6408e65b5f0117c2_icgraph" id="aclass_faster2_root_aaa5d89a939efb05b6408e65b5f0117c2_icgraph">
+<area shape="rect" title=" " alt="" coords="671,31,841,57"/>
+<area shape="rect" href="class_faster2_root.html#a61a5cc14735e615b6a6389a1ece4f694" title=" " alt="" coords="429,5,613,32"/>
+<area shape="rect" href="class_faster2_root.html#a5b8a78ef8c54117807c770d21fa4acf0" title=" " alt="" coords="420,56,623,83"/>
+<area shape="rect" href="class_faster2_root.html#ad30ccf937150bbd3504ec3a354b76c8f" title=" " alt="" coords="237,56,372,83"/>
+<area shape="rect" href="class_faster2_root.html#aacd4d3fa480eba9bc86b49f4b2040c60" title=" " alt="" coords="5,56,189,83"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a01cccc30e85ee668bbff3827c838173e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a01cccc30e85ee668bbff3827c838173e">&#9670;&nbsp;</a></span>throwSingles()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Faster2Root::throwSingles </td>
+          <td>(</td>
+          <td class="paramtype">bool const &amp;&#160;</td>
+          <td class="paramname"><em>_throw_single</em> = <code>true</code></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -699,8 +1447,8 @@ Here is the caller graph for this function:</div>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="a1f58e3467c5cc7d5f5180fa500ccabbf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1f58e3467c5cc7d5f5180fa500ccabbf">&#9670;&nbsp;</a></span>m_calib</h2>
+<a id="a3c9782dbe54c5b10f21487d2189f4c16"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c9782dbe54c5b10f21487d2189f4c16">&#9670;&nbsp;</a></span>m_calibrate</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -709,20 +1457,20 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_calibration.html">Calibration</a> Faster2Root::m_calib</td>
+          <td class="memname">bool Faster2Root::m_calibrate = false</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a4c3ea322c7446596e00943a074ba4fe3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4c3ea322c7446596e00943a074ba4fe3">&#9670;&nbsp;</a></span>m_converting_rate</h2>
+<a id="a58af91c50f99bd37c48380988292af03"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a58af91c50f99bd37c48380988292af03">&#9670;&nbsp;</a></span>m_calibration</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -731,20 +1479,20 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_m_t_counter.html">MTCounter</a> Faster2Root::m_converting_rate</td>
+          <td class="memname"><a class="el" href="class_calibration.html">Calibration</a> Faster2Root::m_calibration</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="ac3852ce32ee11c8b946d8ccf31b18ec8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac3852ce32ee11c8b946d8ccf31b18ec8">&#9670;&nbsp;</a></span>m_detList</h2>
+<a id="a50b697e84534b9326fcf678b28b5609a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a50b697e84534b9326fcf678b28b5609a">&#9670;&nbsp;</a></span>m_eventbuilding</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -753,20 +1501,20 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_detectors_list.html">DetectorsList</a> Faster2Root::m_detList</td>
+          <td class="memname">bool Faster2Root::m_eventbuilding = false</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="afaf394aeb31e5be8dec7068a01e2ed17"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afaf394aeb31e5be8dec7068a01e2ed17">&#9670;&nbsp;</a></span>m_files</h2>
+<a id="a9b7e63609b4123f6f798f70c2de1128b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b7e63609b4123f6f798f70c2de1128b">&#9670;&nbsp;</a></span>m_loaded_trigger</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -775,20 +1523,20 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_files_manager.html">FilesManager</a> Faster2Root::m_files</td>
+          <td class="memname">bool Faster2Root::m_loaded_trigger = false</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a5be4811856384d4bd56a7ef0920db7a4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5be4811856384d4bd56a7ef0920db7a4">&#9670;&nbsp;</a></span>m_fr_raw_counter</h2>
+<a id="a0eb51359b6d1390a15d2113950bb4bf2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0eb51359b6d1390a15d2113950bb4bf2">&#9670;&nbsp;</a></span>m_nb_files</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -797,20 +1545,20 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_m_t_counter.html">MTCounter</a> Faster2Root::m_fr_raw_counter</td>
+          <td class="memname">int Faster2Root::m_nb_files = -1</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a633f1e69e34ca431c621712bee87e538"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a633f1e69e34ca431c621712bee87e538">&#9670;&nbsp;</a></span>m_fr_raw_run_size</h2>
+<a id="aacad03770af4357e587c8138da57a203"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aacad03770af4357e587c8138da57a203">&#9670;&nbsp;</a></span>m_nb_threads</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -819,56 +1567,12 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_m_t_counter.html">MTCounter</a> Faster2Root::m_fr_raw_run_size</td>
+          <td class="memname">int Faster2Root::m_nb_threads = 1</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a5892e931df9f080ef96794a94f6d93c7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5892e931df9f080ef96794a94f6d93c7">&#9670;&nbsp;</a></span>m_fr_treated_counter</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_m_t_counter.html">MTCounter</a> Faster2Root::m_fr_treated_counter</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a98da08fb565ca87379fef879bd8e7443"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a98da08fb565ca87379fef879bd8e7443">&#9670;&nbsp;</a></span>m_fr_treated_run_size</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_m_t_counter.html">MTCounter</a> Faster2Root::m_fr_treated_run_size</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -885,20 +1589,20 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool Faster2Root::m_ok = true</td>
+          <td class="memname">bool Faster2Root::m_ok = false</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a1b3e29e68d44ac85f9c0e3410c6acc87"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1b3e29e68d44ac85f9c0e3410c6acc87">&#9670;&nbsp;</a></span>m_outDir</h2>
+<a id="a987fb5d9ee8469817296265b1232bb63"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a987fb5d9ee8469817296265b1232bb63">&#9670;&nbsp;</a></span>m_overwrite</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -907,20 +1611,20 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::string Faster2Root::m_outDir = &quot;&quot;</td>
+          <td class="memname">bool Faster2Root::m_overwrite = false</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="ae0e7b92b865ec9a7a44866cf4c0207d6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae0e7b92b865ec9a7a44866cf4c0207d6">&#9670;&nbsp;</a></span>m_reading_rate</h2>
+<a id="a76455ed5fcb82744bb34e0de2f524a0c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a76455ed5fcb82744bb34e0de2f524a0c">&#9670;&nbsp;</a></span>m_throw_single</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -929,20 +1633,20 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_m_t_counter.html">MTCounter</a> Faster2Root::m_reading_rate</td>
+          <td class="memname">bool Faster2Root::m_throw_single = false</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="abde40dbb9943597a7d210126fc290538"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abde40dbb9943597a7d210126fc290538">&#9670;&nbsp;</a></span>m_runpath</h2>
+<a id="a4b32ed9d91512912420c58bab5d4897a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4b32ed9d91512912420c58bab5d4897a">&#9670;&nbsp;</a></span>m_time_window</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -951,56 +1655,12 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::string Faster2Root::m_runpath = &quot;&quot;</td>
+          <td class="memname">Long64_t Faster2Root::m_time_window = 1500000</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a27df88efe6d46d5c6fccd03e64268898"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a27df88efe6d46d5c6fccd03e64268898">&#9670;&nbsp;</a></span>m_size_data</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">float Faster2Root::m_size_data = 0</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="ab006471ebc1b9cdf141d6ad9dbd89196"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab006471ebc1b9cdf141d6ad9dbd89196">&#9670;&nbsp;</a></span>m_timer</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_timer.html">Timer</a> Faster2Root::m_timer</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1022,15 +1682,15 @@ Here is the caller graph for this function:</div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="af18a2a8d98e3a6907de73ca0e1494a66"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af18a2a8d98e3a6907de73ca0e1494a66">&#9670;&nbsp;</a></span>m_verbose</h2>
+<a id="aecbddf92ed9e6e9f518627e024e43e3e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aecbddf92ed9e6e9f518627e024e43e3e">&#9670;&nbsp;</a></span>m_total_events</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1039,20 +1699,20 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool Faster2Root::m_verbose = false</td>
+          <td class="memname"><a class="el" href="class_m_t_counter.html">MTCounter</a> Faster2Root::m_total_events</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="ad99d87e9028534179d3c85820b154ff8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad99d87e9028534179d3c85820b154ff8">&#9670;&nbsp;</a></span>m_writting_rate</h2>
+<a id="adb999cc71caadb30a61f64659ba88a2c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adb999cc71caadb30a61f64659ba88a2c">&#9670;&nbsp;</a></span>m_total_hits</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1061,12 +1721,166 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_m_t_counter.html">MTCounter</a> Faster2Root::m_writting_rate</td>
+          <td class="memname"><a class="el" href="class_m_t_counter.html">MTCounter</a> Faster2Root::m_total_hits</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae62d8cbcbd702ac3691ebdc54677be47"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae62d8cbcbd702ac3691ebdc54677be47">&#9670;&nbsp;</a></span>m_total_timer</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_timer.html">Timer</a> Faster2Root::m_total_timer</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1589ca0222d305ef05b8d622e79fbb8b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1589ca0222d305ef05b8d622e79fbb8b">&#9670;&nbsp;</a></span>m_trigg_events</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_m_t_counter.html">MTCounter</a> Faster2Root::m_trigg_events</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5807435c6403ac0a7fba6da6b43fefce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5807435c6403ac0a7fba6da6b43fefce">&#9670;&nbsp;</a></span>m_trigger</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::function&lt;bool(const <a class="el" href="class_event.html">Event</a>&amp;)&gt; Faster2Root::m_trigger = [](const <a class="el" href="class_event.html">Event</a>&amp;) { return true; }</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae3fce7a9419f8ed5044f8a8cc7302a6b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae3fce7a9419f8ed5044f8a8cc7302a6b">&#9670;&nbsp;</a></span>m_trigger_file</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string Faster2Root::m_trigger_file</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="acf62aae9afb7e5e49508c4a018039fc3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acf62aae9afb7e5e49508c4a018039fc3">&#9670;&nbsp;</a></span>m_triggering_labels</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;<a class="el" href="_hit_8hpp.html#ab5dd24876acad09ec52c250c1668466c">Label</a>&gt; Faster2Root::m_triggering_labels</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a07ce8dd1383dcf7b466ab99604516cd1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a07ce8dd1383dcf7b466ab99604516cd1">&#9670;&nbsp;</a></span>m_use_RF</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Faster2Root::m_use_RF = false</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a29bd04235f0c5c32d1f96695135daba5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a29bd04235f0c5c32d1f96695135daba5">&#9670;&nbsp;</a></span>m_use_trigger</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Faster2Root::m_use_trigger = false</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">

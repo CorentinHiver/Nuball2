@@ -1,0 +1,113 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_class_event_analyse" xml:lang="en-US">
+<title>EventAnalyse Class Reference</title>
+<indexterm><primary>EventAnalyse</primary></indexterm>
+<para>
+<computeroutput>#include &lt;EventAnalyse.hpp&gt;</computeroutput>
+</para>
+Collaboration diagram for EventAnalyse:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_event_analyse__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_class_event_analyse_1ad1a958082173e421e93221ce6759c850">EventAnalyse</link> ()</para>
+</listitem>
+            <listitem><para><link linkend="_class_clovers">Clovers</link> &amp; <link linkend="_class_event_analyse_1ad00469e7b023e281fdf18ea416e9cae8">getClovers</link> ()</para>
+</listitem>
+            <listitem><para><link linkend="_class_d_s_s_d">DSSD</link> &amp; <link linkend="_class_event_analyse_1af2a897dc090cb0438adaae6c433626e1">getDSSD</link> ()</para>
+</listitem>
+            <listitem><para><link linkend="_class_paris">Paris</link> &amp; <link linkend="_class_event_analyse_1abb438066fbb0668c40a184e0bfd2640b">getParis</link> ()</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_event_analyse_1a3667d9363f41262088e0ca5c1f06fc7e">Set</link> (<link linkend="_class_event">Event</link> const &amp;event)</para>
+</listitem>
+            <listitem><para><link linkend="_class_event_analyse_1adb485578886f67319f8d155d90ab6a46">~EventAnalyse</link> ()</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Private Attributes    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_class_clovers">Clovers</link> <link linkend="_class_event_analyse_1a511c0ce19d51b95aed1c3ebf7f69eca0">m_Clovers</link></para>
+</listitem>
+            <listitem><para><link linkend="_class_d_s_s_d">DSSD</link> <link linkend="_class_event_analyse_1a40100d6c72c436119fdad6d203c399ba">m_DSSD</link></para>
+</listitem>
+            <listitem><para><link linkend="_class_paris">Paris</link> <link linkend="_class_event_analyse_1a74a8eeac3500a62a467f8ce6d8dd97b8">m_Paris</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_class_event_analyse_1ad1a958082173e421e93221ce6759c850"/>    <section>
+    <title>EventAnalyse()</title>
+<indexterm><primary>EventAnalyse</primary><secondary>EventAnalyse</secondary></indexterm>
+<indexterm><primary>EventAnalyse</primary><secondary>EventAnalyse</secondary></indexterm>
+<para><computeroutput>EventAnalyse::EventAnalyse ( )</computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_event_analyse_ad1a958082173e421e93221ce6759c850_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_event_analyse_1adb485578886f67319f8d155d90ab6a46"/>    <section>
+    <title>~EventAnalyse()</title>
+<indexterm><primary>~EventAnalyse</primary><secondary>EventAnalyse</secondary></indexterm>
+<indexterm><primary>EventAnalyse</primary><secondary>~EventAnalyse</secondary></indexterm>
+<para><computeroutput>EventAnalyse::~EventAnalyse ( )<computeroutput>[inline]</computeroutput></computeroutput></para></section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_class_event_analyse_1ad00469e7b023e281fdf18ea416e9cae8"/>    <section>
+    <title>getClovers()</title>
+<indexterm><primary>getClovers</primary><secondary>EventAnalyse</secondary></indexterm>
+<indexterm><primary>EventAnalyse</primary><secondary>getClovers</secondary></indexterm>
+<para><computeroutput><link linkend="_class_clovers">Clovers</link>&amp; EventAnalyse::getClovers ( )<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_event_analyse_1af2a897dc090cb0438adaae6c433626e1"/>    <section>
+    <title>getDSSD()</title>
+<indexterm><primary>getDSSD</primary><secondary>EventAnalyse</secondary></indexterm>
+<indexterm><primary>EventAnalyse</primary><secondary>getDSSD</secondary></indexterm>
+<para><computeroutput><link linkend="_class_d_s_s_d">DSSD</link>&amp; EventAnalyse::getDSSD ( )<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_event_analyse_1abb438066fbb0668c40a184e0bfd2640b"/>    <section>
+    <title>getParis()</title>
+<indexterm><primary>getParis</primary><secondary>EventAnalyse</secondary></indexterm>
+<indexterm><primary>EventAnalyse</primary><secondary>getParis</secondary></indexterm>
+<para><computeroutput><link linkend="_class_paris">Paris</link>&amp; EventAnalyse::getParis ( )<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_event_analyse_1a3667d9363f41262088e0ca5c1f06fc7e"/>    <section>
+    <title>Set()</title>
+<indexterm><primary>Set</primary><secondary>EventAnalyse</secondary></indexterm>
+<indexterm><primary>EventAnalyse</primary><secondary>Set</secondary></indexterm>
+<para><computeroutput>void EventAnalyse::Set (<link linkend="_class_event">Event</link> const &amp; event)</computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_event_analyse_a3667d9363f41262088e0ca5c1f06fc7e_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_class_event_analyse_1a511c0ce19d51b95aed1c3ebf7f69eca0"/>    <section>
+    <title>m_Clovers</title>
+<indexterm><primary>m_Clovers</primary><secondary>EventAnalyse</secondary></indexterm>
+<indexterm><primary>EventAnalyse</primary><secondary>m_Clovers</secondary></indexterm>
+<para><computeroutput><link linkend="_class_clovers">Clovers</link> EventAnalyse::m_Clovers<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_event_analyse_1a40100d6c72c436119fdad6d203c399ba"/>    <section>
+    <title>m_DSSD</title>
+<indexterm><primary>m_DSSD</primary><secondary>EventAnalyse</secondary></indexterm>
+<indexterm><primary>EventAnalyse</primary><secondary>m_DSSD</secondary></indexterm>
+<para><computeroutput><link linkend="_class_d_s_s_d">DSSD</link> EventAnalyse::m_DSSD<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_event_analyse_1a74a8eeac3500a62a467f8ce6d8dd97b8"/>    <section>
+    <title>m_Paris</title>
+<indexterm><primary>m_Paris</primary><secondary>EventAnalyse</secondary></indexterm>
+<indexterm><primary>EventAnalyse</primary><secondary>m_Paris</secondary></indexterm>
+<para><computeroutput><link linkend="_class_paris">Paris</link> EventAnalyse::m_Paris<computeroutput>[private]</computeroutput></computeroutput></para></section>
+<para>
+The documentation for this class was generated from the following file:</para>
+lib/Analyse/<link linkend="__event_analyse_8hpp">EventAnalyse.hpp</link></section>
+</section>

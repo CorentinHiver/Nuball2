@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="todo" kind="page">
+    <compoundname>todo</compoundname>
+    <title>Todo List</title>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><variablelist>
+<varlistentry><term>Class <ref refid="class_calibration" kindref="compound">Calibration</ref>  </term></varlistentry>
+<listitem><para><anchor id="todo_1_todo000002"/><ref refid="class_calibration_1a344dc3d6feab3580e859cc693c2fdd4a" kindref="member">Calibration::verify()</ref> DO NOT SUPPORT <ref refid="class_m_t_object" kindref="compound">MTObject</ref> !!  </para>
+</listitem>
+<varlistentry><term>Class <ref refid="class_file" kindref="compound">File</ref>  </term></varlistentry>
+<listitem><para><anchor id="todo_1_todo000001"/>rethink the checkMode logic ...  </para>
+</listitem>
+<varlistentry><term>Class <ref refid="class_m_t_t_hist" kindref="compound">MTTHist&lt; THist &gt;</ref>  </term></varlistentry>
+<listitem><para><anchor id="todo_1_todo000003"/>better memory management </para>
+</listitem>
+</variablelist>
+</para>
+    </detaileddescription>
+    <location file="todo"/>
+  </compounddef>
+</doxygen>

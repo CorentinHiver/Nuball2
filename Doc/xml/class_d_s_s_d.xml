@@ -1,0 +1,484 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="class_d_s_s_d" kind="class" language="C++" prot="public">
+    <compoundname>DSSD</compoundname>
+    <includes refid="_d_s_s_d_8hpp" local="no">DSSD.hpp</includes>
+      <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="class_d_s_s_d_1adb11dca39569b2d7ef71f731354ae73c" prot="public" static="yes" mutable="no">
+        <type>std::array&lt; <ref refid="lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21" kindref="member">uchar</ref>, 1000 &gt;</type>
+        <definition>std::array&lt; uchar, 1000 &gt; DSSD::indexes</definition>
+        <argsstring></argsstring>
+        <name>indexes</name>
+        <initializer>= {255}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/DSSD.hpp" line="62" column="21" bodyfile="lib/Analyse/DSSD.hpp" bodystart="62" bodyend="-1"/>
+        <referencedby refid="class_d_s_s_d_1aeb787f13de411a3e801360d85c6ed00b" compoundref="_d_s_s_d_8hpp" startline="168" endline="193">Fill</referencedby>
+        <referencedby refid="class_d_s_s_d_1a800770306a115e1096108cef2463a103" compoundref="_d_s_s_d_8hpp" startline="64" endline="86">InitializeArrays</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_d_s_s_d_1afeab248c862447291a003301c354feea" prot="public" static="yes" mutable="no">
+        <type>std::array&lt; bool, 1000 &gt;</type>
+        <definition>std::array&lt; bool, 1000 &gt; DSSD::isRing</definition>
+        <argsstring></argsstring>
+        <name>isRing</name>
+        <initializer>= {0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/DSSD.hpp" line="61" column="22" bodyfile="lib/Analyse/DSSD.hpp" bodystart="61" bodyend="-1"/>
+        <referencedby refid="class_d_s_s_d_1aeb787f13de411a3e801360d85c6ed00b" compoundref="_d_s_s_d_8hpp" startline="168" endline="193">Fill</referencedby>
+        <referencedby refid="class_d_s_s_d_1a800770306a115e1096108cef2463a103" compoundref="_d_s_s_d_8hpp" startline="64" endline="86">InitializeArrays</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_d_s_s_d_1aafcc60be25bd96add1fc81b67103d3a7" prot="public" static="yes" mutable="no">
+        <type>std::array&lt; bool, 1000 &gt;</type>
+        <definition>std::array&lt; bool, 1000 &gt; DSSD::isS1</definition>
+        <argsstring></argsstring>
+        <name>isS1</name>
+        <initializer>= {0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/DSSD.hpp" line="58" column="22" bodyfile="lib/Analyse/DSSD.hpp" bodystart="58" bodyend="-1"/>
+        <referencedby refid="class_d_s_s_d_1a800770306a115e1096108cef2463a103" compoundref="_d_s_s_d_8hpp" startline="64" endline="86">InitializeArrays</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_d_s_s_d_1a3a039862cf41c328d2d45b4e1770f943" prot="public" static="yes" mutable="no">
+        <type>std::array&lt; bool, 1000 &gt;</type>
+        <definition>std::array&lt; bool, 1000 &gt; DSSD::isS2</definition>
+        <argsstring></argsstring>
+        <name>isS2</name>
+        <initializer>= {0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/DSSD.hpp" line="59" column="22" bodyfile="lib/Analyse/DSSD.hpp" bodystart="59" bodyend="-1"/>
+        <referencedby refid="class_d_s_s_d_1a800770306a115e1096108cef2463a103" compoundref="_d_s_s_d_8hpp" startline="64" endline="86">InitializeArrays</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_d_s_s_d_1aaa3430553b90ea691874fe56fcb5b3db" prot="public" static="yes" mutable="no">
+        <type>std::array&lt; bool, 1000 &gt;</type>
+        <definition>std::array&lt; bool, 1000 &gt; DSSD::isSector</definition>
+        <argsstring></argsstring>
+        <name>isSector</name>
+        <initializer>= {0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/DSSD.hpp" line="60" column="22" bodyfile="lib/Analyse/DSSD.hpp" bodystart="60" bodyend="-1"/>
+        <referencedby refid="class_d_s_s_d_1a800770306a115e1096108cef2463a103" compoundref="_d_s_s_d_8hpp" startline="64" endline="86">InitializeArrays</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="class_d_s_s_d_1a22ef7a1a4978c25fb7f5f8f8b0ae6b57" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21" kindref="member">uchar</ref> &gt;</type>
+        <definition>std::vector&lt;uchar&gt; DSSD::m_Ring_Hits</definition>
+        <argsstring></argsstring>
+        <name>m_Ring_Hits</name>
+        <initializer>= std::vector&lt;<ref refid="lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21" kindref="member">uchar</ref>&gt;(<ref refid="_d_s_s_d_8hpp_1a6f982e9d8d9c8fd28d6d8384eb058324" kindref="member">nb_rings</ref>)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/DSSD.hpp" line="121" column="15" bodyfile="lib/Analyse/DSSD.hpp" bodystart="121" bodyend="-1"/>
+        <referencedby refid="class_d_s_s_d_1a37ab599b24b18a5555f79f73ee241277" compoundref="_d_s_s_d_8hpp" startline="115" endline="115">angle</referencedby>
+        <referencedby refid="class_d_s_s_d_1aeb787f13de411a3e801360d85c6ed00b" compoundref="_d_s_s_d_8hpp" startline="168" endline="193">Fill</referencedby>
+        <referencedby refid="class_d_s_s_d_1a020959f351a871517e9eb50f08ca7be3" compoundref="_d_s_s_d_8hpp" startline="144" endline="160">Reset</referencedby>
+        <referencedby refid="class_d_s_s_d_1ac2bda0d8a0742f3bd791c6b6cc1cf497" compoundref="_d_s_s_d_8hpp" startline="108" endline="108">rings</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_d_s_s_d_1aa4c767b3f8a9088cc2ff6323ab6e0d80" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21" kindref="member">uchar</ref> &gt;</type>
+        <definition>std::vector&lt;uchar&gt; DSSD::m_Sector_Hits</definition>
+        <argsstring></argsstring>
+        <name>m_Sector_Hits</name>
+        <initializer>= std::vector&lt;<ref refid="lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21" kindref="member">uchar</ref>&gt;(<ref refid="_d_s_s_d_8hpp_1a1727ad97c53a82a3ef1c310b909e4dff" kindref="member">nb_sectors</ref>)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/DSSD.hpp" line="120" column="15" bodyfile="lib/Analyse/DSSD.hpp" bodystart="120" bodyend="-1"/>
+        <referencedby refid="class_d_s_s_d_1ad5b43b9d37891e7df30532ca29b3d19e" compoundref="_d_s_s_d_8hpp" startline="111" endline="111">energy</referencedby>
+        <referencedby refid="class_d_s_s_d_1aeb787f13de411a3e801360d85c6ed00b" compoundref="_d_s_s_d_8hpp" startline="168" endline="193">Fill</referencedby>
+        <referencedby refid="class_d_s_s_d_1a020959f351a871517e9eb50f08ca7be3" compoundref="_d_s_s_d_8hpp" startline="144" endline="160">Reset</referencedby>
+        <referencedby refid="class_d_s_s_d_1a26c1a50b850b574ffaf0563f27416509" compoundref="_d_s_s_d_8hpp" startline="107" endline="107">sectors</referencedby>
+        <referencedby refid="class_d_s_s_d_1af76c53f9a2c3a980ea9d3f598e8afde7" compoundref="_d_s_s_d_8hpp" startline="112" endline="112">time</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_d_s_s_d_1a28d8b2597e7458b29c399e701f048f17" prot="public" static="no" mutable="no">
+        <type><ref refid="lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638" kindref="member">std::size_t</ref></type>
+        <definition>std::size_t DSSD::RingMult</definition>
+        <argsstring></argsstring>
+        <name>RingMult</name>
+        <initializer>= 0u</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/DSSD.hpp" line="127" column="15" bodyfile="lib/Analyse/DSSD.hpp" bodystart="127" bodyend="-1"/>
+        <referencedby refid="class_d_s_s_d_1aeb787f13de411a3e801360d85c6ed00b" compoundref="_d_s_s_d_8hpp" startline="168" endline="193">Fill</referencedby>
+        <referencedby refid="class_d_s_s_d_1a020959f351a871517e9eb50f08ca7be3" compoundref="_d_s_s_d_8hpp" startline="144" endline="160">Reset</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_d_s_s_d_1ac2048ed45b15c5d0c9b7eb749ea40cba" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="class_si_strip" kindref="compound">SiStrip</ref> &gt;</type>
+        <definition>std::vector&lt;SiStrip&gt; DSSD::Rings</definition>
+        <argsstring></argsstring>
+        <name>Rings</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/DSSD.hpp" line="124" column="15" bodyfile="lib/Analyse/DSSD.hpp" bodystart="124" bodyend="-1"/>
+        <referencedby refid="class_d_s_s_d_1a37ab599b24b18a5555f79f73ee241277" compoundref="_d_s_s_d_8hpp" startline="115" endline="115">angle</referencedby>
+        <referencedby refid="class_d_s_s_d_1ad4a5a45596071c4625903146f32737ff" compoundref="_d_s_s_d_8hpp" startline="91" endline="98">DSSD</referencedby>
+        <referencedby refid="class_d_s_s_d_1aeb787f13de411a3e801360d85c6ed00b" compoundref="_d_s_s_d_8hpp" startline="168" endline="193">Fill</referencedby>
+        <referencedby refid="class_d_s_s_d_1a020959f351a871517e9eb50f08ca7be3" compoundref="_d_s_s_d_8hpp" startline="144" endline="160">Reset</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_d_s_s_d_1abfc71d4e8b153e59ffb4da0e60f91bd9" prot="public" static="no" mutable="no">
+        <type><ref refid="lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638" kindref="member">std::size_t</ref></type>
+        <definition>std::size_t DSSD::SectorMult</definition>
+        <argsstring></argsstring>
+        <name>SectorMult</name>
+        <initializer>= 0u</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/DSSD.hpp" line="126" column="15" bodyfile="lib/Analyse/DSSD.hpp" bodystart="126" bodyend="-1"/>
+        <referencedby refid="class_d_s_s_d_1aeb787f13de411a3e801360d85c6ed00b" compoundref="_d_s_s_d_8hpp" startline="168" endline="193">Fill</referencedby>
+        <referencedby refid="class_d_s_s_d_1a020959f351a871517e9eb50f08ca7be3" compoundref="_d_s_s_d_8hpp" startline="144" endline="160">Reset</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_d_s_s_d_1a0b3ccd3ac15793e4ac3037758a8c01da" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="class_si_strip" kindref="compound">SiStrip</ref> &gt;</type>
+        <definition>std::vector&lt;SiStrip&gt; DSSD::Sectors</definition>
+        <argsstring></argsstring>
+        <name>Sectors</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/DSSD.hpp" line="123" column="15" bodyfile="lib/Analyse/DSSD.hpp" bodystart="123" bodyend="-1"/>
+        <referencedby refid="class_d_s_s_d_1a075c89fd3226bf59dab1af979c97eb72" compoundref="_d_s_s_d_8hpp" startline="117" endline="117">begin</referencedby>
+        <referencedby refid="class_d_s_s_d_1ad4a5a45596071c4625903146f32737ff" compoundref="_d_s_s_d_8hpp" startline="91" endline="98">DSSD</referencedby>
+        <referencedby refid="class_d_s_s_d_1a7c150f5f5df303fee55e0d61510bf2dc" compoundref="_d_s_s_d_8hpp" startline="118" endline="118">end</referencedby>
+        <referencedby refid="class_d_s_s_d_1ad5b43b9d37891e7df30532ca29b3d19e" compoundref="_d_s_s_d_8hpp" startline="111" endline="111">energy</referencedby>
+        <referencedby refid="class_d_s_s_d_1aeb787f13de411a3e801360d85c6ed00b" compoundref="_d_s_s_d_8hpp" startline="168" endline="193">Fill</referencedby>
+        <referencedby refid="class_d_s_s_d_1a020959f351a871517e9eb50f08ca7be3" compoundref="_d_s_s_d_8hpp" startline="144" endline="160">Reset</referencedby>
+        <referencedby refid="class_d_s_s_d_1af76c53f9a2c3a980ea9d3f598e8afde7" compoundref="_d_s_s_d_8hpp" startline="112" endline="112">time</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="class_d_s_s_d_1a46729c39d700e850893f997a70bad813" prot="private" static="yes" mutable="no">
+        <type>bool</type>
+        <definition>bool DSSD::s_initialized</definition>
+        <argsstring></argsstring>
+        <name>s_initialized</name>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/DSSD.hpp" line="130" column="15" bodyfile="lib/Analyse/DSSD.hpp" bodystart="130" bodyend="-1"/>
+        <referencedby refid="class_d_s_s_d_1a800770306a115e1096108cef2463a103" compoundref="_d_s_s_d_8hpp" startline="64" endline="86">InitializeArrays</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="class_d_s_s_d_1a800770306a115e1096108cef2463a103" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void DSSD::InitializeArrays</definition>
+        <argsstring>()</argsstring>
+        <name>InitializeArrays</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/DSSD.hpp" line="64" column="15" bodyfile="lib/Analyse/DSSD.hpp" bodystart="64" bodyend="86"/>
+        <references refid="class_d_s_s_d_1adb11dca39569b2d7ef71f731354ae73c" compoundref="_d_s_s_d_8hpp" startline="62">indexes</references>
+        <references refid="class_d_s_s_d_1afeab248c862447291a003301c354feea" compoundref="_d_s_s_d_8hpp" startline="61">isRing</references>
+        <references refid="class_d_s_s_d_1aafcc60be25bd96add1fc81b67103d3a7" compoundref="_d_s_s_d_8hpp" startline="58">isS1</references>
+        <references refid="class_d_s_s_d_1a3a039862cf41c328d2d45b4e1770f943" compoundref="_d_s_s_d_8hpp" startline="59">isS2</references>
+        <references refid="class_d_s_s_d_1aaa3430553b90ea691874fe56fcb5b3db" compoundref="_d_s_s_d_8hpp" startline="60">isSector</references>
+        <references refid="_hit_8hpp_1af181231d97866aa957e8fe8bd67f7f64" compoundref="_hit_8hpp" startline="38" endline="38">Label_cast</references>
+        <references refid="class_m_t_object_1a79d86fbc8837ba0f9a4cd1405fddef1c" compoundref="_m_t_object_8hpp" startline="107">MTObject::mutex</references>
+        <references refid="_histogramor_8hpp_1ab48a2fa7184e6354788989602c8c8c29">print</references>
+        <references refid="class_d_s_s_d_1a46729c39d700e850893f997a70bad813" compoundref="_d_s_s_d_8hpp" startline="130">s_initialized</references>
+        <references refid="lib_co_8hpp_1ade77d1f37b1311b3f80ce429a33fd226" compoundref="lib_co_8hpp" startline="101" endline="101">uchar_cast</references>
+        <referencedby refid="class_d_s_s_d_1ad4a5a45596071c4625903146f32737ff" compoundref="_d_s_s_d_8hpp" startline="91" endline="98">DSSD</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_d_s_s_d_1a37ab599b24b18a5555f79f73ee241277" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto const  &amp;</type>
+        <definition>auto const&amp; DSSD::angle</definition>
+        <argsstring>() const</argsstring>
+        <name>angle</name>
+        <briefdescription>
+<para>Don&apos;t return any angle but really the label of the ring. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/DSSD.hpp" line="115" column="15" bodyfile="lib/Analyse/DSSD.hpp" bodystart="115" bodyend="115"/>
+        <references refid="class_d_s_s_d_1a22ef7a1a4978c25fb7f5f8f8b0ae6b57" compoundref="_d_s_s_d_8hpp" startline="121">m_Ring_Hits</references>
+        <references refid="class_d_s_s_d_1ac2048ed45b15c5d0c9b7eb749ea40cba" compoundref="_d_s_s_d_8hpp" startline="124">Rings</references>
+      </memberdef>
+      <memberdef kind="function" id="class_d_s_s_d_1a075c89fd3226bf59dab1af979c97eb72" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto DSSD::begin</definition>
+        <argsstring>() const</argsstring>
+        <name>begin</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/DSSD.hpp" line="117" column="8" bodyfile="lib/Analyse/DSSD.hpp" bodystart="117" bodyend="117"/>
+        <references refid="class_d_s_s_d_1a0b3ccd3ac15793e4ac3037758a8c01da" compoundref="_d_s_s_d_8hpp" startline="123">Sectors</references>
+      </memberdef>
+      <memberdef kind="function" id="class_d_s_s_d_1ad4a5a45596071c4625903146f32737ff" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>DSSD::DSSD</definition>
+        <argsstring>()</argsstring>
+        <name>DSSD</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/DSSD.hpp" line="91" column="3" bodyfile="lib/Analyse/DSSD.hpp" bodystart="91" bodyend="98"/>
+        <references refid="_d_s_s_d_8hpp_1a79b8e036dca6911e3295a47d99f21f43" compoundref="_d_s_s_d_8hpp" startline="13">distance</references>
+        <references refid="class_d_s_s_d_1a800770306a115e1096108cef2463a103" compoundref="_d_s_s_d_8hpp" startline="64" endline="86">InitializeArrays</references>
+        <references refid="_d_s_s_d_8hpp_1ab2edbac6623ac37db1f0dc2e95ce0e11" compoundref="_d_s_s_d_8hpp" startline="14">innerRadius</references>
+        <references refid="_d_s_s_d_8hpp_1a6f982e9d8d9c8fd28d6d8384eb058324" compoundref="_d_s_s_d_8hpp" startline="16">nb_rings</references>
+        <references refid="_d_s_s_d_8hpp_1a1727ad97c53a82a3ef1c310b909e4dff" compoundref="_d_s_s_d_8hpp" startline="17">nb_sectors</references>
+        <references refid="_d_s_s_d_8hpp_1a130dbffe4a5a42623871be39c19d4a68" compoundref="_d_s_s_d_8hpp" startline="18">ring_thickness</references>
+        <references refid="class_d_s_s_d_1ac2048ed45b15c5d0c9b7eb749ea40cba" compoundref="_d_s_s_d_8hpp" startline="124">Rings</references>
+        <references refid="class_d_s_s_d_1a0b3ccd3ac15793e4ac3037758a8c01da" compoundref="_d_s_s_d_8hpp" startline="123">Sectors</references>
+      </memberdef>
+      <memberdef kind="function" id="class_d_s_s_d_1a7c150f5f5df303fee55e0d61510bf2dc" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto DSSD::end</definition>
+        <argsstring>() const</argsstring>
+        <name>end</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/DSSD.hpp" line="118" column="8" bodyfile="lib/Analyse/DSSD.hpp" bodystart="118" bodyend="118"/>
+        <references refid="class_d_s_s_d_1a0b3ccd3ac15793e4ac3037758a8c01da" compoundref="_d_s_s_d_8hpp" startline="123">Sectors</references>
+      </memberdef>
+      <memberdef kind="function" id="class_d_s_s_d_1ad5b43b9d37891e7df30532ca29b3d19e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto const  &amp;</type>
+        <definition>auto const&amp; DSSD::energy</definition>
+        <argsstring>() const</argsstring>
+        <name>energy</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/DSSD.hpp" line="111" column="15" bodyfile="lib/Analyse/DSSD.hpp" bodystart="111" bodyend="111"/>
+        <references refid="class_d_s_s_d_1aa4c767b3f8a9088cc2ff6323ab6e0d80" compoundref="_d_s_s_d_8hpp" startline="120">m_Sector_Hits</references>
+        <references refid="class_d_s_s_d_1a0b3ccd3ac15793e4ac3037758a8c01da" compoundref="_d_s_s_d_8hpp" startline="123">Sectors</references>
+      </memberdef>
+      <memberdef kind="function" id="class_d_s_s_d_1aeb787f13de411a3e801360d85c6ed00b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void DSSD::Fill</definition>
+        <argsstring>(Event const &amp;evt, int const &amp;index)</argsstring>
+        <name>Fill</name>
+        <param>
+          <type><ref refid="class_event" kindref="compound">Event</ref> const &amp;</type>
+          <declname>evt</declname>
+        </param>
+        <param>
+          <type>int const &amp;</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/DSSD.hpp" line="105" column="8" bodyfile="lib/Analyse/DSSD.hpp" bodystart="168" bodyend="193"/>
+        <references refid="lib_root_8hpp_1ae1911f5a7f54d08592ee0879f4d848f3" compoundref="lib_root_8hpp" startline="64">gRandom</references>
+        <references refid="class_d_s_s_d_1adb11dca39569b2d7ef71f731354ae73c" compoundref="_d_s_s_d_8hpp" startline="62">indexes</references>
+        <references refid="_detectors_8hpp_1a3148345147f51e96aaa73e5d9f8e9d93">isDSSD</references>
+        <references refid="class_d_s_s_d_1afeab248c862447291a003301c354feea" compoundref="_d_s_s_d_8hpp" startline="61">isRing</references>
+        <references refid="class_d_s_s_d_1a22ef7a1a4978c25fb7f5f8f8b0ae6b57" compoundref="_d_s_s_d_8hpp" startline="121">m_Ring_Hits</references>
+        <references refid="class_d_s_s_d_1aa4c767b3f8a9088cc2ff6323ab6e0d80" compoundref="_d_s_s_d_8hpp" startline="120">m_Sector_Hits</references>
+        <references refid="class_d_s_s_d_1a28d8b2597e7458b29c399e701f048f17" compoundref="_d_s_s_d_8hpp" startline="127">RingMult</references>
+        <references refid="class_d_s_s_d_1ac2048ed45b15c5d0c9b7eb749ea40cba" compoundref="_d_s_s_d_8hpp" startline="124">Rings</references>
+        <references refid="class_d_s_s_d_1abfc71d4e8b153e59ffb4da0e60f91bd9" compoundref="_d_s_s_d_8hpp" startline="126">SectorMult</references>
+        <references refid="class_d_s_s_d_1a0b3ccd3ac15793e4ac3037758a8c01da" compoundref="_d_s_s_d_8hpp" startline="123">Sectors</references>
+        <references refid="class_d_s_s_d_1af76c53f9a2c3a980ea9d3f598e8afde7" compoundref="_d_s_s_d_8hpp" startline="112" endline="112">time</references>
+        <referencedby refid="class_d_s_s_d_1adbafd9e43e099f49d3c47b8e597a8926" compoundref="_d_s_s_d_8hpp" startline="162" endline="166">SetEvent</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_d_s_s_d_1a46c68fcb7d0d1da868173aa028fdb4f3" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool DSSD::oneParticle</definition>
+        <argsstring>() const</argsstring>
+        <name>oneParticle</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/DSSD.hpp" line="109" column="8" bodyfile="lib/Analyse/DSSD.hpp" bodystart="109" bodyend="109"/>
+        <references refid="class_d_s_s_d_1ac2bda0d8a0742f3bd791c6b6cc1cf497" compoundref="_d_s_s_d_8hpp" startline="108" endline="108">rings</references>
+        <references refid="class_d_s_s_d_1a26c1a50b850b574ffaf0563f27416509" compoundref="_d_s_s_d_8hpp" startline="107" endline="107">sectors</references>
+      </memberdef>
+      <memberdef kind="function" id="class_d_s_s_d_1a020959f351a871517e9eb50f08ca7be3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void DSSD::Reset</definition>
+        <argsstring>()</argsstring>
+        <name>Reset</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/DSSD.hpp" line="99" column="8" bodyfile="lib/Analyse/DSSD.hpp" bodystart="144" bodyend="160"/>
+        <references refid="class_d_s_s_d_1a22ef7a1a4978c25fb7f5f8f8b0ae6b57" compoundref="_d_s_s_d_8hpp" startline="121">m_Ring_Hits</references>
+        <references refid="class_d_s_s_d_1aa4c767b3f8a9088cc2ff6323ab6e0d80" compoundref="_d_s_s_d_8hpp" startline="120">m_Sector_Hits</references>
+        <references refid="class_d_s_s_d_1a28d8b2597e7458b29c399e701f048f17" compoundref="_d_s_s_d_8hpp" startline="127">RingMult</references>
+        <references refid="class_d_s_s_d_1ac2048ed45b15c5d0c9b7eb749ea40cba" compoundref="_d_s_s_d_8hpp" startline="124">Rings</references>
+        <references refid="class_d_s_s_d_1abfc71d4e8b153e59ffb4da0e60f91bd9" compoundref="_d_s_s_d_8hpp" startline="126">SectorMult</references>
+        <references refid="class_d_s_s_d_1a0b3ccd3ac15793e4ac3037758a8c01da" compoundref="_d_s_s_d_8hpp" startline="123">Sectors</references>
+        <referencedby refid="class_d_s_s_d_1adbafd9e43e099f49d3c47b8e597a8926" compoundref="_d_s_s_d_8hpp" startline="162" endline="166">SetEvent</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_d_s_s_d_1ac2bda0d8a0742f3bd791c6b6cc1cf497" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto DSSD::rings</definition>
+        <argsstring>() const</argsstring>
+        <name>rings</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/DSSD.hpp" line="108" column="8" bodyfile="lib/Analyse/DSSD.hpp" bodystart="108" bodyend="108"/>
+        <references refid="class_d_s_s_d_1a22ef7a1a4978c25fb7f5f8f8b0ae6b57" compoundref="_d_s_s_d_8hpp" startline="121">m_Ring_Hits</references>
+        <referencedby refid="class_d_s_s_d_1a46c68fcb7d0d1da868173aa028fdb4f3" compoundref="_d_s_s_d_8hpp" startline="109" endline="109">oneParticle</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_d_s_s_d_1a26c1a50b850b574ffaf0563f27416509" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto DSSD::sectors</definition>
+        <argsstring>() const</argsstring>
+        <name>sectors</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/DSSD.hpp" line="107" column="8" bodyfile="lib/Analyse/DSSD.hpp" bodystart="107" bodyend="107"/>
+        <references refid="class_d_s_s_d_1aa4c767b3f8a9088cc2ff6323ab6e0d80" compoundref="_d_s_s_d_8hpp" startline="120">m_Sector_Hits</references>
+        <referencedby refid="class_d_s_s_d_1a46c68fcb7d0d1da868173aa028fdb4f3" compoundref="_d_s_s_d_8hpp" startline="109" endline="109">oneParticle</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_d_s_s_d_1adbafd9e43e099f49d3c47b8e597a8926" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void DSSD::SetEvent</definition>
+        <argsstring>(Event const &amp;event)</argsstring>
+        <name>SetEvent</name>
+        <param>
+          <type><ref refid="class_event" kindref="compound">Event</ref> const &amp;</type>
+          <declname>event</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/DSSD.hpp" line="104" column="8" bodyfile="lib/Analyse/DSSD.hpp" bodystart="162" bodyend="166"/>
+        <references refid="class_d_s_s_d_1aeb787f13de411a3e801360d85c6ed00b" compoundref="_d_s_s_d_8hpp" startline="168" endline="193">Fill</references>
+        <references refid="class_d_s_s_d_1a020959f351a871517e9eb50f08ca7be3" compoundref="_d_s_s_d_8hpp" startline="144" endline="160">Reset</references>
+      </memberdef>
+      <memberdef kind="function" id="class_d_s_s_d_1af76c53f9a2c3a980ea9d3f598e8afde7" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto const  &amp;</type>
+        <definition>auto const&amp; DSSD::time</definition>
+        <argsstring>() const</argsstring>
+        <name>time</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/DSSD.hpp" line="112" column="15" bodyfile="lib/Analyse/DSSD.hpp" bodystart="112" bodyend="112"/>
+        <references refid="class_d_s_s_d_1aa4c767b3f8a9088cc2ff6323ab6e0d80" compoundref="_d_s_s_d_8hpp" startline="120">m_Sector_Hits</references>
+        <references refid="class_d_s_s_d_1a0b3ccd3ac15793e4ac3037758a8c01da" compoundref="_d_s_s_d_8hpp" startline="123">Sectors</references>
+        <referencedby refid="class_d_s_s_d_1aeb787f13de411a3e801360d85c6ed00b" compoundref="_d_s_s_d_8hpp" startline="168" endline="193">Fill</referencedby>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="lib/Analyse/DSSD.hpp" line="51" column="1" bodyfile="lib/Analyse/DSSD.hpp" bodystart="52" bodyend="131"/>
+    <listofallmembers>
+      <member refid="class_d_s_s_d_1a37ab599b24b18a5555f79f73ee241277" prot="public" virt="non-virtual"><scope>DSSD</scope><name>angle</name></member>
+      <member refid="class_d_s_s_d_1a075c89fd3226bf59dab1af979c97eb72" prot="public" virt="non-virtual"><scope>DSSD</scope><name>begin</name></member>
+      <member refid="class_d_s_s_d_1ad4a5a45596071c4625903146f32737ff" prot="public" virt="non-virtual"><scope>DSSD</scope><name>DSSD</name></member>
+      <member refid="class_d_s_s_d_1a7c150f5f5df303fee55e0d61510bf2dc" prot="public" virt="non-virtual"><scope>DSSD</scope><name>end</name></member>
+      <member refid="class_d_s_s_d_1ad5b43b9d37891e7df30532ca29b3d19e" prot="public" virt="non-virtual"><scope>DSSD</scope><name>energy</name></member>
+      <member refid="class_d_s_s_d_1aeb787f13de411a3e801360d85c6ed00b" prot="public" virt="non-virtual"><scope>DSSD</scope><name>Fill</name></member>
+      <member refid="class_d_s_s_d_1adb11dca39569b2d7ef71f731354ae73c" prot="public" virt="non-virtual"><scope>DSSD</scope><name>indexes</name></member>
+      <member refid="class_d_s_s_d_1a800770306a115e1096108cef2463a103" prot="public" virt="non-virtual"><scope>DSSD</scope><name>InitializeArrays</name></member>
+      <member refid="class_d_s_s_d_1afeab248c862447291a003301c354feea" prot="public" virt="non-virtual"><scope>DSSD</scope><name>isRing</name></member>
+      <member refid="class_d_s_s_d_1aafcc60be25bd96add1fc81b67103d3a7" prot="public" virt="non-virtual"><scope>DSSD</scope><name>isS1</name></member>
+      <member refid="class_d_s_s_d_1a3a039862cf41c328d2d45b4e1770f943" prot="public" virt="non-virtual"><scope>DSSD</scope><name>isS2</name></member>
+      <member refid="class_d_s_s_d_1aaa3430553b90ea691874fe56fcb5b3db" prot="public" virt="non-virtual"><scope>DSSD</scope><name>isSector</name></member>
+      <member refid="class_d_s_s_d_1a22ef7a1a4978c25fb7f5f8f8b0ae6b57" prot="public" virt="non-virtual"><scope>DSSD</scope><name>m_Ring_Hits</name></member>
+      <member refid="class_d_s_s_d_1aa4c767b3f8a9088cc2ff6323ab6e0d80" prot="public" virt="non-virtual"><scope>DSSD</scope><name>m_Sector_Hits</name></member>
+      <member refid="class_d_s_s_d_1a46c68fcb7d0d1da868173aa028fdb4f3" prot="public" virt="non-virtual"><scope>DSSD</scope><name>oneParticle</name></member>
+      <member refid="class_d_s_s_d_1a020959f351a871517e9eb50f08ca7be3" prot="public" virt="non-virtual"><scope>DSSD</scope><name>Reset</name></member>
+      <member refid="class_d_s_s_d_1a28d8b2597e7458b29c399e701f048f17" prot="public" virt="non-virtual"><scope>DSSD</scope><name>RingMult</name></member>
+      <member refid="class_d_s_s_d_1ac2048ed45b15c5d0c9b7eb749ea40cba" prot="public" virt="non-virtual"><scope>DSSD</scope><name>Rings</name></member>
+      <member refid="class_d_s_s_d_1ac2bda0d8a0742f3bd791c6b6cc1cf497" prot="public" virt="non-virtual"><scope>DSSD</scope><name>rings</name></member>
+      <member refid="class_d_s_s_d_1a46729c39d700e850893f997a70bad813" prot="private" virt="non-virtual"><scope>DSSD</scope><name>s_initialized</name></member>
+      <member refid="class_d_s_s_d_1abfc71d4e8b153e59ffb4da0e60f91bd9" prot="public" virt="non-virtual"><scope>DSSD</scope><name>SectorMult</name></member>
+      <member refid="class_d_s_s_d_1a0b3ccd3ac15793e4ac3037758a8c01da" prot="public" virt="non-virtual"><scope>DSSD</scope><name>Sectors</name></member>
+      <member refid="class_d_s_s_d_1a26c1a50b850b574ffaf0563f27416509" prot="public" virt="non-virtual"><scope>DSSD</scope><name>sectors</name></member>
+      <member refid="class_d_s_s_d_1adbafd9e43e099f49d3c47b8e597a8926" prot="public" virt="non-virtual"><scope>DSSD</scope><name>SetEvent</name></member>
+      <member refid="class_d_s_s_d_1af76c53f9a2c3a980ea9d3f598e8afde7" prot="public" virt="non-virtual"><scope>DSSD</scope><name>time</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

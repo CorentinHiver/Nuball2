@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__faster2_histo_8hpp" xml:lang="en-US">
+<title>lib/Modules/Faster2Histo.hpp File Reference</title>
+<indexterm><primary>lib/Modules/Faster2Histo.hpp</primary></indexterm>
+<programlisting>#include &quot;../Classes/Detectors.hpp&quot;
+#include &quot;../Classes/FilesManager.hpp&quot;
+#include &quot;../Classes/Timer.hpp&quot;
+#include &quot;../Modules/Calibration.hpp&quot;
+#include &quot;../MTObjects/MTFasterReader.hpp&quot;
+#include &quot;../MTObjects/MTTHist.hpp&quot;
+#include &quot;../MTObjects/MTList.hpp&quot;
+</programlisting>Include dependency graph for Faster2Histo.hpp:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="_faster2_histo_8hpp__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>class <link linkend="_class_faster2_histo">Faster2Histo</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>

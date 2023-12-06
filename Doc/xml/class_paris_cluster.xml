@@ -1,0 +1,305 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="class_paris_cluster" kind="class" language="C++" prot="public">
+    <compoundname>ParisCluster</compoundname>
+    <includes refid="_paris_cluster_8hpp" local="no">ParisCluster.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type><ref refid="lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638" kindref="member">std::size_t</ref></type>
+        <declname>nb_phoswitch</declname>
+        <defname>nb_phoswitch</defname>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="class_paris_cluster_1a7f38412e4ead36147fd574a514f51957" prot="public" static="no" mutable="no">
+        <type><ref refid="class_static_vector" kindref="compound">StaticVector</ref>&lt; <ref refid="lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21" kindref="member">uchar</ref> &gt;</type>
+        <definition>StaticVector&lt;uchar&gt; ParisCluster&lt; nb_phoswitch &gt;::Hits</definition>
+        <argsstring></argsstring>
+        <name>Hits</name>
+        <initializer>= <ref refid="class_static_vector" kindref="compound">StaticVector</ref>&lt;<ref refid="lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21" kindref="member">uchar</ref>&gt;(nb_phoswitch)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/ParisCluster.hpp" line="32" column="16" bodyfile="lib/Analyse/ParisCluster.hpp" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_paris_cluster_1a11994303c05bdb81058107585ee8c0d7" prot="public" static="no" mutable="no">
+        <type><ref refid="class_static_vector" kindref="compound">StaticVector</ref>&lt; <ref refid="lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21" kindref="member">uchar</ref> &gt;</type>
+        <definition>StaticVector&lt;uchar&gt; ParisCluster&lt; nb_phoswitch &gt;::hits_LaBr3</definition>
+        <argsstring></argsstring>
+        <name>hits_LaBr3</name>
+        <initializer>= <ref refid="class_static_vector" kindref="compound">StaticVector</ref>&lt;<ref refid="lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21" kindref="member">uchar</ref>&gt;(nb_phoswitch)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/ParisCluster.hpp" line="33" column="16" bodyfile="lib/Analyse/ParisCluster.hpp" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_paris_cluster_1ab619477d09fc37bb82cd44f834f9ff7f" prot="public" static="no" mutable="no">
+        <type><ref refid="class_static_vector" kindref="compound">StaticVector</ref>&lt; <ref refid="lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21" kindref="member">uchar</ref> &gt;</type>
+        <definition>StaticVector&lt;uchar&gt; ParisCluster&lt; nb_phoswitch &gt;::hits_NaI</definition>
+        <argsstring></argsstring>
+        <name>hits_NaI</name>
+        <initializer>= <ref refid="class_static_vector" kindref="compound">StaticVector</ref>&lt;<ref refid="lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21" kindref="member">uchar</ref>&gt;(nb_phoswitch)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/ParisCluster.hpp" line="34" column="16" bodyfile="lib/Analyse/ParisCluster.hpp" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_paris_cluster_1abbfd5136b0904b4f7e1d88bfe26c0b77" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="class_paris_phoswitch" kindref="compound">ParisPhoswitch</ref> &gt;</type>
+        <definition>std::vector&lt;ParisPhoswitch&gt; ParisCluster&lt; nb_phoswitch &gt;::phoswitches</definition>
+        <argsstring></argsstring>
+        <name>phoswitches</name>
+        <initializer>= std::vector&lt;<ref refid="class_paris_phoswitch" kindref="compound">ParisPhoswitch</ref>&gt;(nb_phoswitch)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/ParisCluster.hpp" line="24" column="16" bodyfile="lib/Analyse/ParisCluster.hpp" bodystart="24" bodyend="-1"/>
+        <referencedby refid="class_paris_cluster_1aa19f67c578925ee22516288be580067d" compoundref="_paris_cluster_8hpp" startline="22" endline="22">ParisCluster&lt; nb_phoswitch &gt;::operator[]</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_paris_cluster_1a509903e20d90bb4113ad1eae32cb7a85" prot="private" static="no" mutable="no">
+        <type><ref refid="lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21" kindref="member">uchar</ref> const</type>
+        <definition>uchar const ParisCluster&lt; nb_phoswitch &gt;::m_label</definition>
+        <argsstring></argsstring>
+        <name>m_label</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/ParisCluster.hpp" line="43" column="15" bodyfile="lib/Analyse/ParisCluster.hpp" bodystart="43" bodyend="-1"/>
+        <referencedby refid="class_paris_cluster_1aca48d1fac203059e7c75dfb0656c9f06" compoundref="_paris_cluster_8hpp" startline="19" endline="19">ParisCluster&lt; nb_phoswitch &gt;::label</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="class_paris_cluster_1a525929a3a29e2d70a21ee0cd9810f0fd" prot="private" static="yes" mutable="no">
+        <type>thread_local std::atomic&lt; <ref refid="lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21" kindref="member">uchar</ref> &gt;</type>
+        <definition>thread_local std::atomic&lt; uchar &gt; ParisCluster&lt; nb_phoswitch &gt;::glabel</definition>
+        <argsstring></argsstring>
+        <name>glabel</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/ParisCluster.hpp" line="44" column="35" bodyfile="lib/Analyse/ParisCluster.hpp" bodystart="44" bodyend="-1"/>
+        <referencedby refid="class_paris_cluster_1a66671da3ec66c208b99648a741fceddd" compoundref="_paris_cluster_8hpp" startline="40" endline="40">ParisCluster&lt; nb_phoswitch &gt;::nb_clusters</referencedby>
+        <referencedby refid="class_paris_cluster_1a39bb4df5c209b3b17d7afcfc4d7ef231" compoundref="_paris_cluster_8hpp" startline="13" endline="13">ParisCluster&lt; nb_phoswitch &gt;::ParisCluster</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_paris_cluster_1a6b62c6df3f369da38428d7afa96e2316" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ParisCluster&lt; nb_phoswitch &gt;::Analyse</definition>
+        <argsstring>()</argsstring>
+        <name>Analyse</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/ParisCluster.hpp" line="18" column="8" bodyfile="lib/Analyse/ParisCluster.hpp" bodystart="111" bodyend="145"/>
+        <referencedby refid="class_paris_1ac6fb6d9310b0dd298ebf10862497954a" compoundref="_paris_8hpp" startline="115" endline="119">Paris::Analyse</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_paris_cluster_1a00f32121b8702aae3b51826a8aa36f7b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void ParisCluster&lt; nb_phoswitch &gt;::Fill</definition>
+        <argsstring>(Event const &amp;event, int const &amp;i, uchar const &amp;label)</argsstring>
+        <name>Fill</name>
+        <param>
+          <type><ref refid="class_event" kindref="compound">Event</ref> const &amp;</type>
+          <declname>event</declname>
+        </param>
+        <param>
+          <type>int const &amp;</type>
+          <declname>i</declname>
+        </param>
+        <param>
+          <type><ref refid="lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21" kindref="member">uchar</ref> const &amp;</type>
+          <declname>label</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/ParisCluster.hpp" line="17" column="8" bodyfile="lib/Analyse/ParisCluster.hpp" bodystart="101" bodyend="108"/>
+        <referencedby refid="class_paris_1acfde42a5101236f9f4063c22661563f0" compoundref="_paris_8hpp" startline="109" endline="113">Paris::Fill</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_paris_cluster_1a19e0ba991b1b9326f4df3ceef619823e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ParisCluster&lt; nb_phoswitch &gt;::Initialize</definition>
+        <argsstring>()</argsstring>
+        <name>Initialize</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/ParisCluster.hpp" line="14" column="8" bodyfile="lib/Analyse/ParisCluster.hpp" bodystart="51" bodyend="71"/>
+        <referencedby refid="class_paris_1ac0479d995c00e0ee8170092cdf1b5f51" compoundref="_paris_8hpp" startline="93" endline="101">Paris::Initialize</referencedby>
+        <referencedby refid="class_paris_cluster_1a39bb4df5c209b3b17d7afcfc4d7ef231" compoundref="_paris_cluster_8hpp" startline="13" endline="13">ParisCluster&lt; nb_phoswitch &gt;::ParisCluster</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_paris_cluster_1a913d10bdb2c4e202dfbf83ab61fa416e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ParisCluster&lt; nb_phoswitch &gt;::InitializeBidims</definition>
+        <argsstring>()</argsstring>
+        <name>InitializeBidims</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/ParisCluster.hpp" line="15" column="8" bodyfile="lib/Analyse/ParisCluster.hpp" bodystart="74" bodyend="84"/>
+      </memberdef>
+      <memberdef kind="function" id="class_paris_cluster_1aca48d1fac203059e7c75dfb0656c9f06" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto const  &amp;</type>
+        <definition>auto const&amp; ParisCluster&lt; nb_phoswitch &gt;::label</definition>
+        <argsstring>() const</argsstring>
+        <name>label</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/ParisCluster.hpp" line="19" column="15" bodyfile="lib/Analyse/ParisCluster.hpp" bodystart="19" bodyend="19"/>
+        <references refid="class_paris_cluster_1a509903e20d90bb4113ad1eae32cb7a85" compoundref="_paris_cluster_8hpp" startline="43">ParisCluster&lt; nb_phoswitch &gt;::m_label</references>
+      </memberdef>
+      <memberdef kind="function" id="class_paris_cluster_1aa19f67c578925ee22516288be580067d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_paris_phoswitch" kindref="compound">ParisPhoswitch</ref> &amp;</type>
+        <definition>ParisPhoswitch&amp; ParisCluster&lt; nb_phoswitch &gt;::operator[]</definition>
+        <argsstring>(int const &amp;i)</argsstring>
+        <name>operator[]</name>
+        <param>
+          <type>int const &amp;</type>
+          <declname>i</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/ParisCluster.hpp" line="22" column="19" bodyfile="lib/Analyse/ParisCluster.hpp" bodystart="22" bodyend="22"/>
+        <references refid="class_paris_cluster_1abbfd5136b0904b4f7e1d88bfe26c0b77" compoundref="_paris_cluster_8hpp" startline="24">ParisCluster&lt; nb_phoswitch &gt;::phoswitches</references>
+      </memberdef>
+      <memberdef kind="function" id="class_paris_cluster_1a39bb4df5c209b3b17d7afcfc4d7ef231" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>ParisCluster&lt; nb_phoswitch &gt;::ParisCluster</definition>
+        <argsstring>()</argsstring>
+        <name>ParisCluster</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/ParisCluster.hpp" line="13" column="3" bodyfile="lib/Analyse/ParisCluster.hpp" bodystart="13" bodyend="13"/>
+        <references refid="class_paris_cluster_1a525929a3a29e2d70a21ee0cd9810f0fd" compoundref="_paris_cluster_8hpp" startline="44">ParisCluster&lt; nb_phoswitch &gt;::glabel</references>
+        <references refid="class_paris_cluster_1a19e0ba991b1b9326f4df3ceef619823e" compoundref="_paris_cluster_8hpp" startline="51" endline="71">ParisCluster&lt; nb_phoswitch &gt;::Initialize</references>
+      </memberdef>
+      <memberdef kind="function" id="class_paris_cluster_1aed843cd658540524bb00eaccc16d5c47" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ParisCluster&lt; nb_phoswitch &gt;::Reset</definition>
+        <argsstring>()</argsstring>
+        <name>Reset</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/ParisCluster.hpp" line="16" column="8" bodyfile="lib/Analyse/ParisCluster.hpp" bodystart="87" bodyend="98"/>
+        <referencedby refid="class_paris_1ad9b942023bbc514963ee8742aeccd23c" compoundref="_paris_8hpp" startline="103" endline="107">Paris::Reset</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_paris_cluster_1a2783d51c5d19b988acf6f81464f8f363" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto const  &amp;</type>
+        <definition>auto const&amp; ParisCluster&lt; nb_phoswitch &gt;::size</definition>
+        <argsstring>() const</argsstring>
+        <name>size</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/ParisCluster.hpp" line="20" column="15" bodyfile="lib/Analyse/ParisCluster.hpp" bodystart="20" bodyend="20"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="class_paris_cluster_1a66671da3ec66c208b99648a741fceddd" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto const  &amp;</type>
+        <definition>static auto const&amp; ParisCluster&lt; nb_phoswitch &gt;::nb_clusters</definition>
+        <argsstring>()</argsstring>
+        <name>nb_clusters</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/ParisCluster.hpp" line="40" column="22" bodyfile="lib/Analyse/ParisCluster.hpp" bodystart="40" bodyend="40"/>
+        <references refid="class_paris_cluster_1a525929a3a29e2d70a21ee0cd9810f0fd" compoundref="_paris_cluster_8hpp" startline="44">ParisCluster&lt; nb_phoswitch &gt;::glabel</references>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="2">
+        <label>StaticVector&lt; uchar &gt;</label>
+        <link refid="class_static_vector"/>
+      </node>
+      <node id="1">
+        <label>ParisCluster&lt; nb_phoswitch &gt;</label>
+        <link refid="class_paris_cluster"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>Hits</edgelabel>
+          <edgelabel>hits_LaBr3</edgelabel>
+          <edgelabel>hits_NaI</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="lib/Analyse/ParisCluster.hpp" line="9" column="1" bodyfile="lib/Analyse/ParisCluster.hpp" bodystart="10" bodyend="45"/>
+    <listofallmembers>
+      <member refid="class_paris_cluster_1a6b62c6df3f369da38428d7afa96e2316" prot="public" virt="non-virtual"><scope>ParisCluster</scope><name>Analyse</name></member>
+      <member refid="class_paris_cluster_1a00f32121b8702aae3b51826a8aa36f7b" prot="public" virt="non-virtual"><scope>ParisCluster</scope><name>Fill</name></member>
+      <member refid="class_paris_cluster_1a525929a3a29e2d70a21ee0cd9810f0fd" prot="private" virt="non-virtual"><scope>ParisCluster</scope><name>glabel</name></member>
+      <member refid="class_paris_cluster_1a7f38412e4ead36147fd574a514f51957" prot="public" virt="non-virtual"><scope>ParisCluster</scope><name>Hits</name></member>
+      <member refid="class_paris_cluster_1a11994303c05bdb81058107585ee8c0d7" prot="public" virt="non-virtual"><scope>ParisCluster</scope><name>hits_LaBr3</name></member>
+      <member refid="class_paris_cluster_1ab619477d09fc37bb82cd44f834f9ff7f" prot="public" virt="non-virtual"><scope>ParisCluster</scope><name>hits_NaI</name></member>
+      <member refid="class_paris_cluster_1a19e0ba991b1b9326f4df3ceef619823e" prot="public" virt="non-virtual"><scope>ParisCluster</scope><name>Initialize</name></member>
+      <member refid="class_paris_cluster_1a913d10bdb2c4e202dfbf83ab61fa416e" prot="public" virt="non-virtual"><scope>ParisCluster</scope><name>InitializeBidims</name></member>
+      <member refid="class_paris_cluster_1aca48d1fac203059e7c75dfb0656c9f06" prot="public" virt="non-virtual"><scope>ParisCluster</scope><name>label</name></member>
+      <member refid="class_paris_cluster_1a509903e20d90bb4113ad1eae32cb7a85" prot="private" virt="non-virtual"><scope>ParisCluster</scope><name>m_label</name></member>
+      <member refid="class_paris_cluster_1a66671da3ec66c208b99648a741fceddd" prot="public" virt="non-virtual"><scope>ParisCluster</scope><name>nb_clusters</name></member>
+      <member refid="class_paris_cluster_1aa19f67c578925ee22516288be580067d" prot="public" virt="non-virtual"><scope>ParisCluster</scope><name>operator[]</name></member>
+      <member refid="class_paris_cluster_1a39bb4df5c209b3b17d7afcfc4d7ef231" prot="public" virt="non-virtual"><scope>ParisCluster</scope><name>ParisCluster</name></member>
+      <member refid="class_paris_cluster_1abbfd5136b0904b4f7e1d88bfe26c0b77" prot="public" virt="non-virtual"><scope>ParisCluster</scope><name>phoswitches</name></member>
+      <member refid="class_paris_cluster_1aed843cd658540524bb00eaccc16d5c47" prot="public" virt="non-virtual"><scope>ParisCluster</scope><name>Reset</name></member>
+      <member refid="class_paris_cluster_1a2783d51c5d19b988acf6f81464f8f363" prot="public" virt="non-virtual"><scope>ParisCluster</scope><name>size</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

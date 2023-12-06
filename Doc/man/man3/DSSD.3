@@ -1,0 +1,168 @@
+.TH "DSSD" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+DSSD
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <DSSD\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "auto const  & \fBangle\fP () const"
+.br
+.RI "Don't return any angle but really the label of the ring\&. "
+.ti -1c
+.RI "auto \fBbegin\fP () const"
+.br
+.ti -1c
+.RI "\fBDSSD\fP ()"
+.br
+.ti -1c
+.RI "auto \fBend\fP () const"
+.br
+.ti -1c
+.RI "auto const  & \fBenergy\fP () const"
+.br
+.ti -1c
+.RI "void \fBFill\fP (\fBEvent\fP const &evt, int const &index)"
+.br
+.ti -1c
+.RI "bool \fBoneParticle\fP () const"
+.br
+.ti -1c
+.RI "void \fBReset\fP ()"
+.br
+.ti -1c
+.RI "auto \fBrings\fP () const"
+.br
+.ti -1c
+.RI "auto \fBsectors\fP () const"
+.br
+.ti -1c
+.RI "void \fBSetEvent\fP (\fBEvent\fP const &event)"
+.br
+.ti -1c
+.RI "auto const  & \fBtime\fP () const"
+.br
+.in -1c
+.SS "Static Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "static void \fBInitializeArrays\fP ()"
+.br
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "std::vector< \fBuchar\fP > \fBm_Ring_Hits\fP = std::vector<\fBuchar\fP>(\fBnb_rings\fP)"
+.br
+.ti -1c
+.RI "std::vector< \fBuchar\fP > \fBm_Sector_Hits\fP = std::vector<\fBuchar\fP>(\fBnb_sectors\fP)"
+.br
+.ti -1c
+.RI "\fBstd::size_t\fP \fBRingMult\fP = 0u"
+.br
+.ti -1c
+.RI "std::vector< \fBSiStrip\fP > \fBRings\fP"
+.br
+.ti -1c
+.RI "\fBstd::size_t\fP \fBSectorMult\fP = 0u"
+.br
+.ti -1c
+.RI "std::vector< \fBSiStrip\fP > \fBSectors\fP"
+.br
+.in -1c
+.SS "Static Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "static std::array< \fBuchar\fP, 1000 > \fBindexes\fP = {255}"
+.br
+.ti -1c
+.RI "static std::array< bool, 1000 > \fBisRing\fP = {0}"
+.br
+.ti -1c
+.RI "static std::array< bool, 1000 > \fBisS1\fP = {0}"
+.br
+.ti -1c
+.RI "static std::array< bool, 1000 > \fBisS2\fP = {0}"
+.br
+.ti -1c
+.RI "static std::array< bool, 1000 > \fBisSector\fP = {0}"
+.br
+.in -1c
+.SS "Static Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "static bool \fBs_initialized\fP = false"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "DSSD::DSSD ()\fC [inline]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "auto const& DSSD::angle () const\fC [inline]\fP"
+
+.PP
+Don't return any angle but really the label of the ring\&. 
+.SS "auto DSSD::begin () const\fC [inline]\fP"
+
+.SS "auto DSSD::end () const\fC [inline]\fP"
+
+.SS "auto const& DSSD::energy () const\fC [inline]\fP"
+
+.SS "void DSSD::Fill (\fBEvent\fP const & evt, int const & index)"
+
+.SS "static void DSSD::InitializeArrays ()\fC [inline]\fP, \fC [static]\fP"
+
+.SS "bool DSSD::oneParticle () const\fC [inline]\fP"
+
+.SS "void DSSD::Reset ()"
+
+.SS "auto DSSD::rings () const\fC [inline]\fP"
+
+.SS "auto DSSD::sectors () const\fC [inline]\fP"
+
+.SS "void DSSD::SetEvent (\fBEvent\fP const & event)"
+
+.SS "auto const& DSSD::time () const\fC [inline]\fP"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "std::array< \fBuchar\fP, 1000 > DSSD::indexes = {255}\fC [static]\fP"
+
+.SS "std::array< bool, 1000 > DSSD::isRing = {0}\fC [static]\fP"
+
+.SS "std::array< bool, 1000 > DSSD::isS1 = {0}\fC [static]\fP"
+
+.SS "std::array< bool, 1000 > DSSD::isS2 = {0}\fC [static]\fP"
+
+.SS "std::array< bool, 1000 > DSSD::isSector = {0}\fC [static]\fP"
+
+.SS "std::vector<\fBuchar\fP> DSSD::m_Ring_Hits = std::vector<\fBuchar\fP>(\fBnb_rings\fP)"
+
+.SS "std::vector<\fBuchar\fP> DSSD::m_Sector_Hits = std::vector<\fBuchar\fP>(\fBnb_sectors\fP)"
+
+.SS "\fBstd::size_t\fP DSSD::RingMult = 0u"
+
+.SS "std::vector<\fBSiStrip\fP> DSSD::Rings"
+
+.SS "bool DSSD::s_initialized = false\fC [static]\fP, \fC [private]\fP"
+
+.SS "\fBstd::size_t\fP DSSD::SectorMult = 0u"
+
+.SS "std::vector<\fBSiStrip\fP> DSSD::Sectors"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Nuball2 from the source code\&.

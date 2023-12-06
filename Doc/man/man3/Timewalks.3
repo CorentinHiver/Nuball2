@@ -1,0 +1,107 @@
+.TH "Timewalks" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Timewalks
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <Timewalk\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "float const  & \fBget\fP (int const &label, float const &Q)"
+.br
+.ti -1c
+.RI "void \fBloadFile\fP (std::string const &filename)"
+.br
+.ti -1c
+.RI "std::vector< float > & \fBoperator[]\fP (int const &i)"
+.br
+.ti -1c
+.RI "void \fBresize\fP (int const &i=0)"
+.br
+.ti -1c
+.RI "float \fBtimewalk\fP (float Q, float a, float b, float t0, float factor)"
+.br
+.ti -1c
+.RI "float \fBtimewalk\fP (float Q, \fBTWparameters\fP const &p)"
+.br
+.ti -1c
+.RI "\fBTimewalks\fP ()"
+.br
+.in -1c
+.SS "Static Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "static void \fBsetMax\fP (float const &_max)"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "float \fBEmax\fP = 20000\&."
+.br
+.ti -1c
+.RI "float \fBEmin\fP = 0\&."
+.br
+.ti -1c
+.RI "bool \fBisON\fP = false"
+.br
+.ti -1c
+.RI "std::vector< \fBTWparameters\fP > \fBm_parameters\fP"
+.br
+.ti -1c
+.RI "std::vector< std::vector< float > > \fBm_timewalks\fP"
+.br
+.ti -1c
+.RI "float \fBTmax\fP = 100\&."
+.br
+.ti -1c
+.RI "float \fBTmin\fP = 0\&."
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "Timewalks::Timewalks ()\fC [inline]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "float const  & Timewalks::get (int const & label, float const & Q)"
+
+.SS "void Timewalks::loadFile (std::string const & filename)"
+
+.SS "std::vector<float>& Timewalks::operator[] (int const & i)\fC [inline]\fP"
+
+.SS "void Timewalks::resize (int const & i = \fC0\fP)\fC [inline]\fP"
+
+.SS "static void Timewalks::setMax (float const & _max)\fC [inline]\fP, \fC [static]\fP"
+
+.SS "float Timewalks::timewalk (float Q, float a, float b, float t0, float factor)\fC [inline]\fP"
+
+.SS "float Timewalks::timewalk (float Q, \fBTWparameters\fP const & p)\fC [inline]\fP"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "float Timewalks::Emax = 20000\&.\fC [private]\fP"
+
+.SS "float Timewalks::Emin = 0\&.\fC [private]\fP"
+
+.SS "bool Timewalks::isON = false\fC [private]\fP"
+
+.SS "std::vector<\fBTWparameters\fP> Timewalks::m_parameters\fC [private]\fP"
+
+.SS "std::vector<std::vector<float> > Timewalks::m_timewalks\fC [private]\fP"
+
+.SS "float Timewalks::Tmax = 100\&.\fC [private]\fP"
+
+.SS "float Timewalks::Tmin = 0\&.\fC [private]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Nuball2 from the source code\&.

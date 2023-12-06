@@ -1,0 +1,7 @@
+<map id="Folders::string" name="Folders::string">
+<area shape="rect" id="node1" title=" " alt="" coords="481,31,596,57"/>
+<area shape="rect" id="node2" href="$class_path.html#ac40c8c627d0412be849f1e6cd4cdc556" title="To remove extraneous ./ or ../." alt="" coords="312,31,433,57"/>
+<area shape="rect" id="node3" href="$class_path.html#aa9b3a53718dcd8ba66d90d50b112ddb9" title=" " alt="" coords="177,31,264,57"/>
+<area shape="rect" id="node4" href="$class_path.html#a42f3cfe8b84c3e11afc5d54b47522ab3" title=" " alt="" coords="5,5,129,32"/>
+<area shape="rect" id="node5" href="$class_path.html#ae9ae307831520e338154143243a24a67" title="Turns a string to a path, creating it if create = true and it doesn&#39;t already exists." alt="" coords="24,56,111,83"/>
+</map>

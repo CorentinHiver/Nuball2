@@ -1,0 +1,179 @@
+.TH "CoincBuilder" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+CoincBuilder \- Coincidence builder\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <CoincBuilder\&.hpp>\fP
+.PP
+Inherits \fBBuilder\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "bool \fBbuild\fP (\fBHit\fP const &_hit)"
+.br
+.RI "Add Hits to the event\&. Return true when an event is complete, i\&.e\&. current hit is outside of time window\&. "
+.ti -1c
+.RI "\fBCoincBuilder\fP ()"
+.br
+.ti -1c
+.RI "\fBCoincBuilder\fP (\fBEvent\fP *_event)"
+.br
+.ti -1c
+.RI "\fBCoincBuilder\fP (\fBEvent\fP *_event, \fBTime\fP const &_timeWindow)"
+.br
+.ti -1c
+.RI "bool \fBcoincidence\fP (\fBHit\fP const &hit)"
+.br
+.ti -1c
+.RI "\fBEvent\fP * \fBgetEvent\fP () const"
+.br
+.ti -1c
+.RI "\fBHit\fP const  & \fBgetLastHit\fP () const"
+.br
+.ti -1c
+.RI "bool \fBisBuilding\fP () const"
+.br
+.ti -1c
+.RI "bool \fBisBuilt\fP () const"
+.br
+.ti -1c
+.RI "bool \fBisSingle\fP () const"
+.br
+.ti -1c
+.RI "void \fBprintEvent\fP ()"
+.br
+.ti -1c
+.RI "void \fBreset\fP ()"
+.br
+.ti -1c
+.RI "void \fBset_first_hit\fP (\fBHit\fP const &hit)"
+.br
+.ti -1c
+.RI "void \fBset_last_hit\fP (\fBHit\fP const &hit)"
+.br
+.ti -1c
+.RI "void \fBsetTimeWindow\fP (\fBTime\fP const &timewindow)"
+.br
+.ti -1c
+.RI "void \fBsetTimeWindow_ns\fP (\fBTime_ns\fP const &timewindow_ns)"
+.br
+.ti -1c
+.RI "\fBsize_t\fP \fBsize\fP () const"
+.br
+.ti -1c
+.RI "\fBuchar\fP const  & \fBstatus\fP () const"
+.br
+.in -1c
+.SS "Static Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "static void \fBkeepSingles\fP (bool const &b=true)"
+.br
+.in -1c
+.SS "Protected Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBEvent\fP * \fBm_event\fP = nullptr"
+.br
+.ti -1c
+.RI "\fBHit\fP \fBm_last_hit\fP"
+.br
+.ti -1c
+.RI "\fBuchar\fP \fBm_status\fP = 0"
+.br
+.in -1c
+.SS "Static Protected Attributes"
+
+.in +1c
+.ti -1c
+.RI "static bool \fBm_keep_singles\fP = false"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBTime\fP \fBm_time_window\fP = 500000"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Coincidence builder\&. 
+
+Use this class when you don't have any particular time reference Add one hit after the other using \fBCoincBuilder::build()\fP If two consecutive hits are within a time window, add the following hits This class will return true when the current hit is out of the time window
+.PP
+Using Builder::keepSingles(bool) method will make \fBCoincBuilder::build()\fP return true for lonely hits as well 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "CoincBuilder::CoincBuilder ()\fC [inline]\fP, \fC [explicit]\fP"
+
+.SS "CoincBuilder::CoincBuilder (\fBEvent\fP * _event)\fC [inline]\fP, \fC [explicit]\fP"
+
+.SS "CoincBuilder::CoincBuilder (\fBEvent\fP * _event, \fBTime\fP const & _timeWindow)\fC [inline]\fP, \fC [explicit]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "bool CoincBuilder::build (\fBHit\fP const & _hit)\fC [virtual]\fP"
+
+.PP
+Add Hits to the event\&. Return true when an event is complete, i\&.e\&. current hit is outside of time window\&. 3 status : 0: single | 1: begin of coincidence | 2: coincidence complete 
+.PP
+Implements \fBBuilder\fP\&.
+.SS "bool CoincBuilder::coincidence (\fBHit\fP const & hit)\fC [inline]\fP, \fC [virtual]\fP"
+
+.PP
+Implements \fBBuilder\fP\&.
+.SS "\fBEvent\fP* Builder::getEvent () const\fC [inline]\fP, \fC [inherited]\fP"
+
+.SS "\fBHit\fP const& Builder::getLastHit () const\fC [inline]\fP, \fC [inherited]\fP"
+
+.SS "bool Builder::isBuilding () const\fC [inline]\fP, \fC [inherited]\fP"
+
+.SS "bool Builder::isBuilt () const\fC [inline]\fP, \fC [inherited]\fP"
+
+.SS "bool Builder::isSingle () const\fC [inline]\fP, \fC [inherited]\fP"
+
+.SS "static void Builder::keepSingles (bool const & b = \fCtrue\fP)\fC [inline]\fP, \fC [static]\fP, \fC [inherited]\fP"
+
+.SS "void CoincBuilder::printEvent ()"
+
+.SS "void CoincBuilder::reset ()\fC [inline]\fP, \fC [virtual]\fP"
+
+.PP
+Reimplemented from \fBBuilder\fP\&.
+.SS "void Builder::set_first_hit (\fBHit\fP const & hit)\fC [inline]\fP, \fC [inherited]\fP"
+
+.SS "void Builder::set_last_hit (\fBHit\fP const & hit)\fC [inline]\fP, \fC [inherited]\fP"
+
+.SS "void CoincBuilder::setTimeWindow (\fBTime\fP const & timewindow)\fC [inline]\fP"
+
+.SS "void CoincBuilder::setTimeWindow_ns (\fBTime_ns\fP const & timewindow_ns)\fC [inline]\fP"
+
+.SS "\fBsize_t\fP Builder::size () const\fC [inline]\fP, \fC [inherited]\fP"
+
+.SS "\fBuchar\fP const& Builder::status () const\fC [inline]\fP, \fC [inherited]\fP"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "\fBEvent\fP* Builder::m_event = nullptr\fC [protected]\fP, \fC [inherited]\fP"
+
+.SS "bool Builder::m_keep_singles = false\fC [static]\fP, \fC [protected]\fP, \fC [inherited]\fP"
+
+.SS "\fBHit\fP Builder::m_last_hit\fC [protected]\fP, \fC [inherited]\fP"
+
+.SS "\fBuchar\fP Builder::m_status = 0\fC [protected]\fP, \fC [inherited]\fP"
+
+.SS "\fBTime\fP CoincBuilder::m_time_window = 500000\fC [private]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Nuball2 from the source code\&.

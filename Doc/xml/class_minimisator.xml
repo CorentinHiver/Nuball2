@@ -1,0 +1,714 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="class_minimisator" kind="class" language="C++" prot="public">
+    <compoundname>Minimisator</compoundname>
+    <includes refid="_spectra_alignator_8hpp" local="no">SpectraAlignator.hpp</includes>
+    <innerclass refid="struct_minimisator_1_1_nelder_mead_parameters" prot="private">Minimisator::NelderMeadParameters</innerclass>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_minimisator_1a5475528b2ac14c2c221dcd38444c3e8e" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double Minimisator::m_C</definition>
+        <argsstring></argsstring>
+        <name>m_C</name>
+        <initializer>= 0.0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="772" column="10" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="772" bodyend="-1"/>
+        <referencedby refid="class_minimisator_1a969310853a267ef440163b92c6a7873a" compoundref="_spectra_alignator_8hpp" startline="581" endline="587">chi2</referencedby>
+        <referencedby refid="class_minimisator_1a9111d4088cf501a73b3472dc4565b4e3" compoundref="_spectra_alignator_8hpp" startline="618" endline="640">chi2_second_derivative</referencedby>
+        <referencedby refid="class_minimisator_1af6fb398efd3c8110bb72ffc0b37a218f" compoundref="_spectra_alignator_8hpp" startline="579" endline="579">setC</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_minimisator_1a8233a1a7c73656b4669653f5a8e80fef" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double Minimisator::m_maxa0</definition>
+        <argsstring></argsstring>
+        <name>m_maxa0</name>
+        <initializer>= 0.0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="778" column="10" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="778" bodyend="-1"/>
+        <referencedby refid="class_minimisator_1a4146b62ab538a9c36f9a93855bee198a" compoundref="_spectra_alignator_8hpp" startline="656" endline="762">minimise</referencedby>
+        <referencedby refid="class_minimisator_1ac1669f9a012ed6f484ca0dca26a2c048" compoundref="_spectra_alignator_8hpp" startline="648" endline="648">setMaxa0</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_minimisator_1ad463ba1d2e6345046ed6b53491089320" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double Minimisator::m_maxa1</definition>
+        <argsstring></argsstring>
+        <name>m_maxa1</name>
+        <initializer>= 0.0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="780" column="10" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="780" bodyend="-1"/>
+        <referencedby refid="class_minimisator_1a4146b62ab538a9c36f9a93855bee198a" compoundref="_spectra_alignator_8hpp" startline="656" endline="762">minimise</referencedby>
+        <referencedby refid="class_minimisator_1a3bd6b90aa328de9f06fd18d3a183434e" compoundref="_spectra_alignator_8hpp" startline="650" endline="650">setMaxa1</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_minimisator_1aaf1050a37767d056a0d6e0db975365b3" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double Minimisator::m_maxa2</definition>
+        <argsstring></argsstring>
+        <name>m_maxa2</name>
+        <initializer>= 0.0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="782" column="10" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="782" bodyend="-1"/>
+        <referencedby refid="class_minimisator_1af67f036d5fd92c1e732fe470cd0c020d" compoundref="_spectra_alignator_8hpp" startline="652" endline="652">setMaxa2</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_minimisator_1a9db2d34ee919d9a5bef93cf9c5fc5385" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double Minimisator::m_maxaSqrt</definition>
+        <argsstring></argsstring>
+        <name>m_maxaSqrt</name>
+        <initializer>= 0.0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="784" column="10" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="784" bodyend="-1"/>
+        <referencedby refid="class_minimisator_1a715c87056ad76bec775d48bf2cf9792e" compoundref="_spectra_alignator_8hpp" startline="654" endline="654">setMaxaSqrt</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_minimisator_1a3f0b1cc97a71c7079281ac4eb2ae7a4a" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double Minimisator::m_maxC</definition>
+        <argsstring></argsstring>
+        <name>m_maxC</name>
+        <initializer>= 0.0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="776" column="10" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="776" bodyend="-1"/>
+        <referencedby refid="class_minimisator_1a4146b62ab538a9c36f9a93855bee198a" compoundref="_spectra_alignator_8hpp" startline="656" endline="762">minimise</referencedby>
+        <referencedby refid="class_minimisator_1a9973149b31ccf9cb07f3aec54ca87d78" compoundref="_spectra_alignator_8hpp" startline="646" endline="646">setMaxC</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_minimisator_1afdcd01102bcdfc6db928eb09ddfbdc71" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double Minimisator::m_mina0</definition>
+        <argsstring></argsstring>
+        <name>m_mina0</name>
+        <initializer>= 0.0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="777" column="10" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="777" bodyend="-1"/>
+        <referencedby refid="class_minimisator_1a4146b62ab538a9c36f9a93855bee198a" compoundref="_spectra_alignator_8hpp" startline="656" endline="762">minimise</referencedby>
+        <referencedby refid="class_minimisator_1ae8936e9ea9e3e63711b382b9b09cbf25" compoundref="_spectra_alignator_8hpp" startline="647" endline="647">setMina0</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_minimisator_1a404b364da43dda9ad1d1d87b1fa8ccd5" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double Minimisator::m_mina1</definition>
+        <argsstring></argsstring>
+        <name>m_mina1</name>
+        <initializer>= 0.0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="779" column="10" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="779" bodyend="-1"/>
+        <referencedby refid="class_minimisator_1a4146b62ab538a9c36f9a93855bee198a" compoundref="_spectra_alignator_8hpp" startline="656" endline="762">minimise</referencedby>
+        <referencedby refid="class_minimisator_1a9d82383998a467e338a8ddf05e35f36d" compoundref="_spectra_alignator_8hpp" startline="649" endline="649">setMina1</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_minimisator_1a1a009f968f138cce07f787fb263ca6f5" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double Minimisator::m_mina2</definition>
+        <argsstring></argsstring>
+        <name>m_mina2</name>
+        <initializer>= 0.0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="781" column="10" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="781" bodyend="-1"/>
+        <referencedby refid="class_minimisator_1a19ae44dcc355d36aad823903f9b09204" compoundref="_spectra_alignator_8hpp" startline="651" endline="651">setMina2</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_minimisator_1a9958f8a8d135714afbc348c8e58fb1ae" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double Minimisator::m_minaSqrt</definition>
+        <argsstring></argsstring>
+        <name>m_minaSqrt</name>
+        <initializer>= 0.0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="783" column="10" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="783" bodyend="-1"/>
+        <referencedby refid="class_minimisator_1a15cded5194b589f25d5b7ab20fa669d6" compoundref="_spectra_alignator_8hpp" startline="653" endline="653">setMinaSqrt</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_minimisator_1a7b33b6783d0dab674fe88fd6a5b93c04" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double Minimisator::m_minC</definition>
+        <argsstring></argsstring>
+        <name>m_minC</name>
+        <initializer>= 0.0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="775" column="10" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="775" bodyend="-1"/>
+        <referencedby refid="class_minimisator_1a4146b62ab538a9c36f9a93855bee198a" compoundref="_spectra_alignator_8hpp" startline="656" endline="762">minimise</referencedby>
+        <referencedby refid="class_minimisator_1ac99fb8afd8ea36a67ddd746b0584ab43" compoundref="_spectra_alignator_8hpp" startline="645" endline="645">setMinC</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_minimisator_1a93d39e35dee7cd5df8bb71498b122f86" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int Minimisator::m_nb_freedom_degrees</definition>
+        <argsstring></argsstring>
+        <name>m_nb_freedom_degrees</name>
+        <initializer>= 3</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="794" column="7" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="794" bodyend="-1"/>
+        <referencedby refid="class_minimisator_1a92ceedc5d8e612ed8515faf6657c99a3" compoundref="_spectra_alignator_8hpp" startline="589" endline="616">chi2</referencedby>
+        <referencedby refid="class_minimisator_1a9111d4088cf501a73b3472dc4565b4e3" compoundref="_spectra_alignator_8hpp" startline="618" endline="640">chi2_second_derivative</referencedby>
+        <referencedby refid="class_minimisator_1ae15be466b22ef08ccaf89b759f709e95" compoundref="_spectra_alignator_8hpp" startline="643" endline="643">getDegreesOfFreedom</referencedby>
+        <referencedby refid="class_minimisator_1adb05314210b8a9c6d4bf149e68f733a1" compoundref="_spectra_alignator_8hpp" startline="642" endline="642">setDegreesOfFreedom</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_minimisator_1a70194383b57ea57478e7c4a3e883e684" prot="private" static="no" mutable="no">
+        <type><ref refid="class_recalibration" kindref="compound">Recalibration</ref> *</type>
+        <definition>Recalibration* Minimisator::m_recal</definition>
+        <argsstring></argsstring>
+        <name>m_recal</name>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="769" column="18" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="769" bodyend="-1"/>
+        <referencedby refid="class_minimisator_1a969310853a267ef440163b92c6a7873a" compoundref="_spectra_alignator_8hpp" startline="581" endline="587">chi2</referencedby>
+        <referencedby refid="class_minimisator_1a9111d4088cf501a73b3472dc4565b4e3" compoundref="_spectra_alignator_8hpp" startline="618" endline="640">chi2_second_derivative</referencedby>
+        <referencedby refid="class_minimisator_1a35127a6cdbfe1d07eebfdbda30db6a8a" compoundref="_spectra_alignator_8hpp" startline="764" endline="764">operator-&gt;</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_minimisator_1aaa7dc46c5e2406bb8a4d389996ef3e44" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int Minimisator::m_spectra_threshold</definition>
+        <argsstring></argsstring>
+        <name>m_spectra_threshold</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="795" column="7" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="795" bodyend="-1"/>
+        <referencedby refid="class_minimisator_1ac5caeefc9cb02424158a41d7ef05ecef" compoundref="_spectra_alignator_8hpp" startline="766" endline="766">setThreshold</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_minimisator_1a60fa32272bc0c844926f7910bcb83e50" prot="private" static="no" mutable="no">
+        <type>struct <ref refid="struct_minimisator_1_1_nelder_mead_parameters" kindref="compound">Minimisator::NelderMeadParameters</ref></type>
+        <definition>struct Minimisator::NelderMeadParameters Minimisator::nmParam</definition>
+        <argsstring></argsstring>
+        <name>nmParam</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="792" column="11"/>
+        <referencedby refid="class_minimisator_1a4146b62ab538a9c36f9a93855bee198a" compoundref="_spectra_alignator_8hpp" startline="656" endline="762">minimise</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_minimisator_1a92ceedc5d8e612ed8515faf6657c99a3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double Minimisator::chi2</definition>
+        <argsstring>(SpectraCo const &amp;ref_spectra, SpectraCo const &amp;spectra)</argsstring>
+        <name>chi2</name>
+        <param>
+          <type><ref refid="class_spectra_co" kindref="compound">SpectraCo</ref> const &amp;</type>
+          <declname>ref_spectra</declname>
+        </param>
+        <param>
+          <type><ref refid="class_spectra_co" kindref="compound">SpectraCo</ref> const &amp;</type>
+          <declname>spectra</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="589" column="10" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="589" bodyend="616"/>
+        <references refid="class_recalibration_1a6ce90b10d69409fdbc385ba6f990e073" compoundref="_spectra_alignator_8hpp" startline="51" endline="51">Recalibration::calculate</references>
+        <references refid="class_spectra_co_1a4c094686833d7c19460df10ae16c34ba" compoundref="_spectra_alignator_8hpp" startline="309" endline="309">SpectraCo::interpolate</references>
+        <references refid="class_minimisator_1a5475528b2ac14c2c221dcd38444c3e8e" compoundref="_spectra_alignator_8hpp" startline="772">m_C</references>
+        <references refid="class_minimisator_1a93d39e35dee7cd5df8bb71498b122f86" compoundref="_spectra_alignator_8hpp" startline="794">m_nb_freedom_degrees</references>
+        <references refid="class_minimisator_1a70194383b57ea57478e7c4a3e883e684" compoundref="_spectra_alignator_8hpp" startline="769">m_recal</references>
+        <references refid="class_spectra_co_1af819f84c4dfd2a2bf9ee87809dec1159" compoundref="_spectra_alignator_8hpp" startline="247" endline="247">SpectraCo::size</references>
+      </memberdef>
+      <memberdef kind="function" id="class_minimisator_1a969310853a267ef440163b92c6a7873a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double Minimisator::chi2</definition>
+        <argsstring>(SpectraCo const &amp;ref_spectra, SpectraCo const &amp;spectra, Vertice const &amp;vertice)</argsstring>
+        <name>chi2</name>
+        <param>
+          <type><ref refid="class_spectra_co" kindref="compound">SpectraCo</ref> const &amp;</type>
+          <declname>ref_spectra</declname>
+        </param>
+        <param>
+          <type><ref refid="class_spectra_co" kindref="compound">SpectraCo</ref> const &amp;</type>
+          <declname>spectra</declname>
+        </param>
+        <param>
+          <type><ref refid="class_vertice" kindref="compound">Vertice</ref> const &amp;</type>
+          <declname>vertice</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="581" column="10" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="581" bodyend="587"/>
+        <references refid="class_minimisator_1a5475528b2ac14c2c221dcd38444c3e8e" compoundref="_spectra_alignator_8hpp" startline="772">m_C</references>
+        <references refid="class_minimisator_1a70194383b57ea57478e7c4a3e883e684" compoundref="_spectra_alignator_8hpp" startline="769">m_recal</references>
+        <references refid="class_recalibration_1ac98afc36338de322cde52205b01971ff" compoundref="_spectra_alignator_8hpp" startline="41" endline="41">Recalibration::setParameter</references>
+        <references refid="class_vertice_1a93b6febeec367c7c2211eb1e34dcfce4" compoundref="_spectra_alignator_8hpp" startline="404" endline="404">Vertice::size</references>
+        <referencedby refid="class_minimisator_1a4146b62ab538a9c36f9a93855bee198a" compoundref="_spectra_alignator_8hpp" startline="656" endline="762">minimise</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_minimisator_1a9111d4088cf501a73b3472dc4565b4e3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double Minimisator::chi2_second_derivative</definition>
+        <argsstring>(SpectraCo &amp;ref_spectra, SpectraCo &amp;test_spectra)</argsstring>
+        <name>chi2_second_derivative</name>
+        <param>
+          <type><ref refid="class_spectra_co" kindref="compound">SpectraCo</ref> &amp;</type>
+          <declname>ref_spectra</declname>
+        </param>
+        <param>
+          <type><ref refid="class_spectra_co" kindref="compound">SpectraCo</ref> &amp;</type>
+          <declname>test_spectra</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="618" column="10" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="618" bodyend="640"/>
+        <references refid="class_spectra_co_1acae7e2189022b271400874d523ccbf30" compoundref="_spectra_alignator_8hpp" startline="202" endline="237">SpectraCo::derivate2</references>
+        <references refid="class_spectra_co_1a047126db866b95f6cc6c8bd92db37588" compoundref="_spectra_alignator_8hpp" startline="201" endline="201">SpectraCo::derivative2</references>
+        <references refid="class_minimisator_1a5475528b2ac14c2c221dcd38444c3e8e" compoundref="_spectra_alignator_8hpp" startline="772">m_C</references>
+        <references refid="class_minimisator_1a93d39e35dee7cd5df8bb71498b122f86" compoundref="_spectra_alignator_8hpp" startline="794">m_nb_freedom_degrees</references>
+        <references refid="class_minimisator_1a70194383b57ea57478e7c4a3e883e684" compoundref="_spectra_alignator_8hpp" startline="769">m_recal</references>
+        <references refid="class_spectra_co_1af819f84c4dfd2a2bf9ee87809dec1159" compoundref="_spectra_alignator_8hpp" startline="247" endline="247">SpectraCo::size</references>
+      </memberdef>
+      <memberdef kind="function" id="class_minimisator_1ae15be466b22ef08ccaf89b759f709e95" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto const  &amp;</type>
+        <definition>auto const&amp; Minimisator::getDegreesOfFreedom</definition>
+        <argsstring>() const</argsstring>
+        <name>getDegreesOfFreedom</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="643" column="15" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="643" bodyend="643"/>
+        <references refid="class_minimisator_1a93d39e35dee7cd5df8bb71498b122f86" compoundref="_spectra_alignator_8hpp" startline="794">m_nb_freedom_degrees</references>
+      </memberdef>
+      <memberdef kind="function" id="class_minimisator_1a5840066c8bf50d8e04ee596238324696" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Minimisator::Minimisator</definition>
+        <argsstring>(Recalibration *recal)</argsstring>
+        <name>Minimisator</name>
+        <param>
+          <type><ref refid="class_recalibration" kindref="compound">Recalibration</ref> *</type>
+          <declname>recal</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="574" column="3" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="574" bodyend="577"/>
+      </memberdef>
+      <memberdef kind="function" id="class_minimisator_1a4146b62ab538a9c36f9a93855bee198a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_vertice" kindref="compound">Vertice</ref></type>
+        <definition>Vertice Minimisator::minimise</definition>
+        <argsstring>(SpectraCo const &amp;ref_spectra, SpectraCo const &amp;spectra, std::string const &amp;method=&quot;nelder-mead&quot;)</argsstring>
+        <name>minimise</name>
+        <param>
+          <type><ref refid="class_spectra_co" kindref="compound">SpectraCo</ref> const &amp;</type>
+          <declname>ref_spectra</declname>
+        </param>
+        <param>
+          <type><ref refid="class_spectra_co" kindref="compound">SpectraCo</ref> const &amp;</type>
+          <declname>spectra</declname>
+        </param>
+        <param>
+          <type>std::string const &amp;</type>
+          <declname>method</declname>
+          <defval>&quot;nelder-mead&quot;</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="656" column="11" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="656" bodyend="762"/>
+        <references refid="struct_minimisator_1_1_nelder_mead_parameters_1ad572ad763d40de2c3ef34e50bf71177d" compoundref="_spectra_alignator_8hpp" startline="788">Minimisator::NelderMeadParameters::alpha</references>
+        <references refid="struct_minimisator_1_1_nelder_mead_parameters_1aeec9715878231abdfbea7a5a6801bf1e" compoundref="_spectra_alignator_8hpp" startline="789">Minimisator::NelderMeadParameters::beta</references>
+        <references refid="vector__functions_8hpp_1a28b5494cf9f51ee725e680752955a8e1" compoundref="vector__functions_8hpp" startline="118" endline="138">bubbleSort</references>
+        <references refid="class_minimisator_1a969310853a267ef440163b92c6a7873a" compoundref="_spectra_alignator_8hpp" startline="581" endline="587">chi2</references>
+        <references refid="struct_minimisator_1_1_nelder_mead_parameters_1ae4f64377f468e22558d8bd6fee8bad24" compoundref="_spectra_alignator_8hpp" startline="791">Minimisator::NelderMeadParameters::delta</references>
+        <references refid="struct_minimisator_1_1_nelder_mead_parameters_1a605647638f96b3aaaec933e3b741c392" compoundref="_spectra_alignator_8hpp" startline="790">Minimisator::NelderMeadParameters::gamma</references>
+        <references refid="class_minimisator_1a8233a1a7c73656b4669653f5a8e80fef" compoundref="_spectra_alignator_8hpp" startline="778">m_maxa0</references>
+        <references refid="class_minimisator_1ad463ba1d2e6345046ed6b53491089320" compoundref="_spectra_alignator_8hpp" startline="780">m_maxa1</references>
+        <references refid="class_minimisator_1a3f0b1cc97a71c7079281ac4eb2ae7a4a" compoundref="_spectra_alignator_8hpp" startline="776">m_maxC</references>
+        <references refid="class_minimisator_1afdcd01102bcdfc6db928eb09ddfbdc71" compoundref="_spectra_alignator_8hpp" startline="777">m_mina0</references>
+        <references refid="class_minimisator_1a404b364da43dda9ad1d1d87b1fa8ccd5" compoundref="_spectra_alignator_8hpp" startline="779">m_mina1</references>
+        <references refid="class_minimisator_1a7b33b6783d0dab674fe88fd6a5b93c04" compoundref="_spectra_alignator_8hpp" startline="775">m_minC</references>
+        <references refid="class_minimisator_1a60fa32272bc0c844926f7910bcb83e50">nmParam</references>
+        <references refid="_histogramor_8hpp_1ab48a2fa7184e6354788989602c8c8c29">print</references>
+      </memberdef>
+      <memberdef kind="function" id="class_minimisator_1a35127a6cdbfe1d07eebfdbda30db6a8a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto Minimisator::operator-&gt;</definition>
+        <argsstring>()</argsstring>
+        <name>operator-&gt;</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="764" column="8" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="764" bodyend="764"/>
+        <references refid="class_minimisator_1a70194383b57ea57478e7c4a3e883e684" compoundref="_spectra_alignator_8hpp" startline="769">m_recal</references>
+      </memberdef>
+      <memberdef kind="function" id="class_minimisator_1af6fb398efd3c8110bb72ffc0b37a218f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Minimisator::setC</definition>
+        <argsstring>(double const &amp;_C)</argsstring>
+        <name>setC</name>
+        <param>
+          <type>double const &amp;</type>
+          <declname>_C</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="579" column="8" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="579" bodyend="579"/>
+        <references refid="class_minimisator_1a5475528b2ac14c2c221dcd38444c3e8e" compoundref="_spectra_alignator_8hpp" startline="772">m_C</references>
+      </memberdef>
+      <memberdef kind="function" id="class_minimisator_1adb05314210b8a9c6d4bf149e68f733a1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Minimisator::setDegreesOfFreedom</definition>
+        <argsstring>(int const &amp;degrees)</argsstring>
+        <name>setDegreesOfFreedom</name>
+        <param>
+          <type>int const &amp;</type>
+          <declname>degrees</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="642" column="8" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="642" bodyend="642"/>
+        <references refid="class_minimisator_1a93d39e35dee7cd5df8bb71498b122f86" compoundref="_spectra_alignator_8hpp" startline="794">m_nb_freedom_degrees</references>
+      </memberdef>
+      <memberdef kind="function" id="class_minimisator_1ac1669f9a012ed6f484ca0dca26a2c048" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Minimisator::setMaxa0</definition>
+        <argsstring>(double const &amp;_maxa0)</argsstring>
+        <name>setMaxa0</name>
+        <param>
+          <type>double const &amp;</type>
+          <declname>_maxa0</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="648" column="8" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="648" bodyend="648"/>
+        <references refid="class_minimisator_1a8233a1a7c73656b4669653f5a8e80fef" compoundref="_spectra_alignator_8hpp" startline="778">m_maxa0</references>
+      </memberdef>
+      <memberdef kind="function" id="class_minimisator_1a3bd6b90aa328de9f06fd18d3a183434e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Minimisator::setMaxa1</definition>
+        <argsstring>(double const &amp;_maxa1)</argsstring>
+        <name>setMaxa1</name>
+        <param>
+          <type>double const &amp;</type>
+          <declname>_maxa1</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="650" column="8" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="650" bodyend="650"/>
+        <references refid="class_minimisator_1ad463ba1d2e6345046ed6b53491089320" compoundref="_spectra_alignator_8hpp" startline="780">m_maxa1</references>
+      </memberdef>
+      <memberdef kind="function" id="class_minimisator_1af67f036d5fd92c1e732fe470cd0c020d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Minimisator::setMaxa2</definition>
+        <argsstring>(double const &amp;_maxa2)</argsstring>
+        <name>setMaxa2</name>
+        <param>
+          <type>double const &amp;</type>
+          <declname>_maxa2</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="652" column="8" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="652" bodyend="652"/>
+        <references refid="class_minimisator_1aaf1050a37767d056a0d6e0db975365b3" compoundref="_spectra_alignator_8hpp" startline="782">m_maxa2</references>
+      </memberdef>
+      <memberdef kind="function" id="class_minimisator_1a715c87056ad76bec775d48bf2cf9792e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Minimisator::setMaxaSqrt</definition>
+        <argsstring>(double const &amp;_maxaSqrt)</argsstring>
+        <name>setMaxaSqrt</name>
+        <param>
+          <type>double const &amp;</type>
+          <declname>_maxaSqrt</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="654" column="8" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="654" bodyend="654"/>
+        <references refid="class_minimisator_1a9db2d34ee919d9a5bef93cf9c5fc5385" compoundref="_spectra_alignator_8hpp" startline="784">m_maxaSqrt</references>
+      </memberdef>
+      <memberdef kind="function" id="class_minimisator_1a9973149b31ccf9cb07f3aec54ca87d78" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Minimisator::setMaxC</definition>
+        <argsstring>(double const &amp;_maxC)</argsstring>
+        <name>setMaxC</name>
+        <param>
+          <type>double const &amp;</type>
+          <declname>_maxC</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="646" column="8" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="646" bodyend="646"/>
+        <references refid="class_minimisator_1a3f0b1cc97a71c7079281ac4eb2ae7a4a" compoundref="_spectra_alignator_8hpp" startline="776">m_maxC</references>
+      </memberdef>
+      <memberdef kind="function" id="class_minimisator_1ae8936e9ea9e3e63711b382b9b09cbf25" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Minimisator::setMina0</definition>
+        <argsstring>(double const &amp;_mina0)</argsstring>
+        <name>setMina0</name>
+        <param>
+          <type>double const &amp;</type>
+          <declname>_mina0</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="647" column="8" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="647" bodyend="647"/>
+        <references refid="class_minimisator_1afdcd01102bcdfc6db928eb09ddfbdc71" compoundref="_spectra_alignator_8hpp" startline="777">m_mina0</references>
+      </memberdef>
+      <memberdef kind="function" id="class_minimisator_1a9d82383998a467e338a8ddf05e35f36d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Minimisator::setMina1</definition>
+        <argsstring>(double const &amp;_mina1)</argsstring>
+        <name>setMina1</name>
+        <param>
+          <type>double const &amp;</type>
+          <declname>_mina1</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="649" column="8" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="649" bodyend="649"/>
+        <references refid="class_minimisator_1a404b364da43dda9ad1d1d87b1fa8ccd5" compoundref="_spectra_alignator_8hpp" startline="779">m_mina1</references>
+      </memberdef>
+      <memberdef kind="function" id="class_minimisator_1a19ae44dcc355d36aad823903f9b09204" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Minimisator::setMina2</definition>
+        <argsstring>(double const &amp;_mina2)</argsstring>
+        <name>setMina2</name>
+        <param>
+          <type>double const &amp;</type>
+          <declname>_mina2</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="651" column="8" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="651" bodyend="651"/>
+        <references refid="class_minimisator_1a1a009f968f138cce07f787fb263ca6f5" compoundref="_spectra_alignator_8hpp" startline="781">m_mina2</references>
+      </memberdef>
+      <memberdef kind="function" id="class_minimisator_1a15cded5194b589f25d5b7ab20fa669d6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Minimisator::setMinaSqrt</definition>
+        <argsstring>(double const &amp;_minaSqrt)</argsstring>
+        <name>setMinaSqrt</name>
+        <param>
+          <type>double const &amp;</type>
+          <declname>_minaSqrt</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="653" column="8" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="653" bodyend="653"/>
+        <references refid="class_minimisator_1a9958f8a8d135714afbc348c8e58fb1ae" compoundref="_spectra_alignator_8hpp" startline="783">m_minaSqrt</references>
+      </memberdef>
+      <memberdef kind="function" id="class_minimisator_1ac99fb8afd8ea36a67ddd746b0584ab43" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Minimisator::setMinC</definition>
+        <argsstring>(double const &amp;_minC)</argsstring>
+        <name>setMinC</name>
+        <param>
+          <type>double const &amp;</type>
+          <declname>_minC</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="645" column="8" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="645" bodyend="645"/>
+        <references refid="class_minimisator_1a7b33b6783d0dab674fe88fd6a5b93c04" compoundref="_spectra_alignator_8hpp" startline="775">m_minC</references>
+      </memberdef>
+      <memberdef kind="function" id="class_minimisator_1ac5caeefc9cb02424158a41d7ef05ecef" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Minimisator::setThreshold</definition>
+        <argsstring>(int const &amp;bin)</argsstring>
+        <name>setThreshold</name>
+        <param>
+          <type>int const &amp;</type>
+          <declname>bin</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/SpectraAlignator.hpp" line="766" column="8" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="766" bodyend="766"/>
+        <references refid="class_minimisator_1aaa7dc46c5e2406bb8a4d389996ef3e44" compoundref="_spectra_alignator_8hpp" startline="795">m_spectra_threshold</references>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="3">
+        <label>Recalibration</label>
+        <link refid="class_recalibration"/>
+      </node>
+      <node id="2">
+        <label>Minimisator::NelderMeadParameters</label>
+        <link refid="struct_minimisator_1_1_nelder_mead_parameters"/>
+      </node>
+      <node id="1">
+        <label>Minimisator</label>
+        <link refid="class_minimisator"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>nmParam</edgelabel>
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>m_recal</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="lib/Classes/SpectraAlignator.hpp" line="571" column="1" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="572" bodyend="796"/>
+    <listofallmembers>
+      <member refid="class_minimisator_1a969310853a267ef440163b92c6a7873a" prot="public" virt="non-virtual"><scope>Minimisator</scope><name>chi2</name></member>
+      <member refid="class_minimisator_1a92ceedc5d8e612ed8515faf6657c99a3" prot="public" virt="non-virtual"><scope>Minimisator</scope><name>chi2</name></member>
+      <member refid="class_minimisator_1a9111d4088cf501a73b3472dc4565b4e3" prot="public" virt="non-virtual"><scope>Minimisator</scope><name>chi2_second_derivative</name></member>
+      <member refid="class_minimisator_1ae15be466b22ef08ccaf89b759f709e95" prot="public" virt="non-virtual"><scope>Minimisator</scope><name>getDegreesOfFreedom</name></member>
+      <member refid="class_minimisator_1a5475528b2ac14c2c221dcd38444c3e8e" prot="private" virt="non-virtual"><scope>Minimisator</scope><name>m_C</name></member>
+      <member refid="class_minimisator_1a8233a1a7c73656b4669653f5a8e80fef" prot="private" virt="non-virtual"><scope>Minimisator</scope><name>m_maxa0</name></member>
+      <member refid="class_minimisator_1ad463ba1d2e6345046ed6b53491089320" prot="private" virt="non-virtual"><scope>Minimisator</scope><name>m_maxa1</name></member>
+      <member refid="class_minimisator_1aaf1050a37767d056a0d6e0db975365b3" prot="private" virt="non-virtual"><scope>Minimisator</scope><name>m_maxa2</name></member>
+      <member refid="class_minimisator_1a9db2d34ee919d9a5bef93cf9c5fc5385" prot="private" virt="non-virtual"><scope>Minimisator</scope><name>m_maxaSqrt</name></member>
+      <member refid="class_minimisator_1a3f0b1cc97a71c7079281ac4eb2ae7a4a" prot="private" virt="non-virtual"><scope>Minimisator</scope><name>m_maxC</name></member>
+      <member refid="class_minimisator_1afdcd01102bcdfc6db928eb09ddfbdc71" prot="private" virt="non-virtual"><scope>Minimisator</scope><name>m_mina0</name></member>
+      <member refid="class_minimisator_1a404b364da43dda9ad1d1d87b1fa8ccd5" prot="private" virt="non-virtual"><scope>Minimisator</scope><name>m_mina1</name></member>
+      <member refid="class_minimisator_1a1a009f968f138cce07f787fb263ca6f5" prot="private" virt="non-virtual"><scope>Minimisator</scope><name>m_mina2</name></member>
+      <member refid="class_minimisator_1a9958f8a8d135714afbc348c8e58fb1ae" prot="private" virt="non-virtual"><scope>Minimisator</scope><name>m_minaSqrt</name></member>
+      <member refid="class_minimisator_1a7b33b6783d0dab674fe88fd6a5b93c04" prot="private" virt="non-virtual"><scope>Minimisator</scope><name>m_minC</name></member>
+      <member refid="class_minimisator_1a93d39e35dee7cd5df8bb71498b122f86" prot="private" virt="non-virtual"><scope>Minimisator</scope><name>m_nb_freedom_degrees</name></member>
+      <member refid="class_minimisator_1a70194383b57ea57478e7c4a3e883e684" prot="private" virt="non-virtual"><scope>Minimisator</scope><name>m_recal</name></member>
+      <member refid="class_minimisator_1aaa7dc46c5e2406bb8a4d389996ef3e44" prot="private" virt="non-virtual"><scope>Minimisator</scope><name>m_spectra_threshold</name></member>
+      <member refid="class_minimisator_1a5840066c8bf50d8e04ee596238324696" prot="public" virt="non-virtual"><scope>Minimisator</scope><name>Minimisator</name></member>
+      <member refid="class_minimisator_1a4146b62ab538a9c36f9a93855bee198a" prot="public" virt="non-virtual"><scope>Minimisator</scope><name>minimise</name></member>
+      <member refid="class_minimisator_1a60fa32272bc0c844926f7910bcb83e50" prot="private" virt="non-virtual"><scope>Minimisator</scope><name>nmParam</name></member>
+      <member refid="class_minimisator_1a35127a6cdbfe1d07eebfdbda30db6a8a" prot="public" virt="non-virtual"><scope>Minimisator</scope><name>operator-&gt;</name></member>
+      <member refid="class_minimisator_1af6fb398efd3c8110bb72ffc0b37a218f" prot="public" virt="non-virtual"><scope>Minimisator</scope><name>setC</name></member>
+      <member refid="class_minimisator_1adb05314210b8a9c6d4bf149e68f733a1" prot="public" virt="non-virtual"><scope>Minimisator</scope><name>setDegreesOfFreedom</name></member>
+      <member refid="class_minimisator_1ac1669f9a012ed6f484ca0dca26a2c048" prot="public" virt="non-virtual"><scope>Minimisator</scope><name>setMaxa0</name></member>
+      <member refid="class_minimisator_1a3bd6b90aa328de9f06fd18d3a183434e" prot="public" virt="non-virtual"><scope>Minimisator</scope><name>setMaxa1</name></member>
+      <member refid="class_minimisator_1af67f036d5fd92c1e732fe470cd0c020d" prot="public" virt="non-virtual"><scope>Minimisator</scope><name>setMaxa2</name></member>
+      <member refid="class_minimisator_1a715c87056ad76bec775d48bf2cf9792e" prot="public" virt="non-virtual"><scope>Minimisator</scope><name>setMaxaSqrt</name></member>
+      <member refid="class_minimisator_1a9973149b31ccf9cb07f3aec54ca87d78" prot="public" virt="non-virtual"><scope>Minimisator</scope><name>setMaxC</name></member>
+      <member refid="class_minimisator_1ae8936e9ea9e3e63711b382b9b09cbf25" prot="public" virt="non-virtual"><scope>Minimisator</scope><name>setMina0</name></member>
+      <member refid="class_minimisator_1a9d82383998a467e338a8ddf05e35f36d" prot="public" virt="non-virtual"><scope>Minimisator</scope><name>setMina1</name></member>
+      <member refid="class_minimisator_1a19ae44dcc355d36aad823903f9b09204" prot="public" virt="non-virtual"><scope>Minimisator</scope><name>setMina2</name></member>
+      <member refid="class_minimisator_1a15cded5194b589f25d5b7ab20fa669d6" prot="public" virt="non-virtual"><scope>Minimisator</scope><name>setMinaSqrt</name></member>
+      <member refid="class_minimisator_1ac99fb8afd8ea36a67ddd746b0584ab43" prot="public" virt="non-virtual"><scope>Minimisator</scope><name>setMinC</name></member>
+      <member refid="class_minimisator_1ac5caeefc9cb02424158a41d7ef05ecef" prot="public" virt="non-virtual"><scope>Minimisator</scope><name>setThreshold</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

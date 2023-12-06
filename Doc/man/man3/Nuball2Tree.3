@@ -1,0 +1,102 @@
+.TH "Nuball2Tree" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Nuball2Tree \- test _ not finished  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <Nuball2Tree\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "TTree * \fBget\fP ()"
+.br
+.ti -1c
+.RI "\fBNuball2Tree\fP (std::string const &filename)"
+.br
+.ti -1c
+.RI "\fBNuball2Tree\fP (std::string const &filename, \fBEvent\fP &event)"
+.br
+.ti -1c
+.RI "bool const  & \fBok\fP () const"
+.br
+.ti -1c
+.RI "bool \fBOpen\fP (std::string const &filename)"
+.br
+.ti -1c
+.RI "\fBoperator TTree *\fP ()"
+.br
+.ti -1c
+.RI "TTree * \fBoperator\->\fP ()"
+.br
+.ti -1c
+.RI "\fB~Nuball2Tree\fP ()"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "bool \fBfile_opened\fP = false"
+.br
+.ti -1c
+.RI "TFile * \fBm_file\fP = nullptr"
+.br
+.ti -1c
+.RI "std::string \fBm_name\fP = 'Nuball2'"
+.br
+.ti -1c
+.RI "bool \fBm_ok\fP = false"
+.br
+.ti -1c
+.RI "std::string \fBm_title\fP"
+.br
+.ti -1c
+.RI "TTree * \fBm_tree\fP = nullptr"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+test _ not finished 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "Nuball2Tree::Nuball2Tree (std::string const & filename)\fC [inline]\fP"
+
+.SS "Nuball2Tree::Nuball2Tree (std::string const & filename, \fBEvent\fP & event)\fC [inline]\fP"
+
+.SS "Nuball2Tree::~Nuball2Tree ()\fC [inline]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "TTree* Nuball2Tree::get ()\fC [inline]\fP"
+
+.SS "bool const& Nuball2Tree::ok () const\fC [inline]\fP"
+
+.SS "bool Nuball2Tree::Open (std::string const & filename)"
+
+.SS "Nuball2Tree::operator TTree * ()\fC [inline]\fP"
+
+.SS "TTree* Nuball2Tree::operator\-> ()\fC [inline]\fP"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "bool Nuball2Tree::file_opened = false\fC [private]\fP"
+
+.SS "TFile* Nuball2Tree::m_file = nullptr\fC [private]\fP"
+
+.SS "std::string Nuball2Tree::m_name = 'Nuball2'\fC [private]\fP"
+
+.SS "bool Nuball2Tree::m_ok = false\fC [private]\fP"
+
+.SS "std::string Nuball2Tree::m_title\fC [private]\fP"
+
+.SS "TTree* Nuball2Tree::m_tree = nullptr\fC [private]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Nuball2 from the source code\&.

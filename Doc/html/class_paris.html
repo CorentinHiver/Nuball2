@@ -82,11 +82,12 @@ $(document).ready(function(){initNavTree('class_paris.html',''); initResizable()
 
 <div class="header">
   <div class="summary">
-<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pub-static-attribs">Static Public Attributes</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="#pri-static-attribs">Static Private Attributes</a> &#124;
 <a href="class_paris-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">Paris Class Reference</div>  </div>
@@ -98,29 +99,26 @@ $(document).ready(function(){initNavTree('class_paris.html',''); initResizable()
 Collaboration diagram for Paris:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_paris__coll__graph.png" border="0" usemap="#a_paris_coll__map" alt="Collaboration graph"/></div>
+<map name="a_paris_coll__map" id="a_paris_coll__map">
+<area shape="rect" title=" " alt="" coords="221,95,274,121"/>
+<area shape="rect" href="class_paris_cluster.html" title=" " alt="" coords="5,5,151,32"/>
+<area shape="rect" href="class_paris_cluster.html" title=" " alt="" coords="175,5,320,32"/>
+<area shape="rect" href="class_static_vector.html" title=" " alt="" coords="344,5,511,32"/>
+</map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
-Public Types</h2></td></tr>
-<tr class="memitem:ae8dba29931f6e6bb36e519bb12d75215"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom">{ <a class="el" href="class_paris.html#ae8dba29931f6e6bb36e519bb12d75215aae14897adf5f06fbcd12d74655c866dd">BACK</a>
-, <a class="el" href="class_paris.html#ae8dba29931f6e6bb36e519bb12d75215a12e33403f007fe2ee41cb4913427a9a6">FRONT</a>
- }</td></tr>
-<tr class="separator:ae8dba29931f6e6bb36e519bb12d75215"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ac6fb6d9310b0dd298ebf10862497954a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_paris.html#ac6fb6d9310b0dd298ebf10862497954a">Analyse</a> ()</td></tr>
 <tr class="separator:ac6fb6d9310b0dd298ebf10862497954a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0e52fd73f8042efa89633b5b9697c456"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_paris_cluster.html">ParisCluster</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_paris.html#a0e52fd73f8042efa89633b5b9697c456">back</a> ()</td></tr>
-<tr class="separator:a0e52fd73f8042efa89633b5b9697c456"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acfde42a5101236f9f4063c22661563f0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_paris.html#acfde42a5101236f9f4063c22661563f0">Fill</a> (<a class="el" href="class_event.html">Event</a> const &amp;event, size_t const &amp;i)</td></tr>
+<tr class="memitem:a4fb89c70f74288ffba9041dad5c0b341"><td class="memItemLeft" align="right" valign="top">auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_paris.html#a4fb89c70f74288ffba9041dad5c0b341">back</a> ()</td></tr>
+<tr class="separator:a4fb89c70f74288ffba9041dad5c0b341"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acfde42a5101236f9f4063c22661563f0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_paris.html#acfde42a5101236f9f4063c22661563f0">Fill</a> (<a class="el" href="class_event.html">Event</a> const &amp;event, <a class="el" href="lib_co_8hpp.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a> const &amp;i)</td></tr>
 <tr class="separator:acfde42a5101236f9f4063c22661563f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa94fe4436fb9f0c61ca1549a8edfb26d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_paris_cluster.html">ParisCluster</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_paris.html#aa94fe4436fb9f0c61ca1549a8edfb26d">front</a> ()</td></tr>
-<tr class="separator:aa94fe4436fb9f0c61ca1549a8edfb26d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2f4c2c7179a5ec14230327bc40a137b0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_paris.html#a2f4c2c7179a5ec14230327bc40a137b0">Initialize</a> (std::size_t const &amp;nb_clusters, std::size_t const &amp;nb_modules)</td></tr>
-<tr class="separator:a2f4c2c7179a5ec14230327bc40a137b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab892f92bab6451d3bfcfc73c5f0f9c76"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_paris_cluster.html">ParisCluster</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_paris.html#ab892f92bab6451d3bfcfc73c5f0f9c76">operator[]</a> (int const &amp;i)</td></tr>
-<tr class="separator:ab892f92bab6451d3bfcfc73c5f0f9c76"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf36cdac7f24cbc27ace07ec0afeb6a6"><td class="memItemLeft" align="right" valign="top">auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_paris.html#adf36cdac7f24cbc27ace07ec0afeb6a6">front</a> ()</td></tr>
+<tr class="separator:adf36cdac7f24cbc27ace07ec0afeb6a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac0479d995c00e0ee8170092cdf1b5f51"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_paris.html#ac0479d995c00e0ee8170092cdf1b5f51">Initialize</a> ()</td></tr>
+<tr class="separator:ac0479d995c00e0ee8170092cdf1b5f51"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1f05e7dfce90ff9808cf79ebbbb23008"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_paris.html#a1f05e7dfce90ff9808cf79ebbbb23008">Paris</a> ()</td></tr>
 <tr class="separator:a1f05e7dfce90ff9808cf79ebbbb23008"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad9b942023bbc514963ee8742aeccd23c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_paris.html#ad9b942023bbc514963ee8742aeccd23c">Reset</a> ()</td></tr>
@@ -128,48 +126,41 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:accb2dc0034a5913574a98e2d47409bcf"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_paris.html#accb2dc0034a5913574a98e2d47409bcf">Initialize</a> ()</td></tr>
-<tr class="separator:accb2dc0034a5913574a98e2d47409bcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5e84a66240e195c7743f8c8dae84f800"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_paris.html#a5e84a66240e195c7743f8c8dae84f800">is_paris</a> (<a class="el" href="_detectors_8hpp.html#ab5dd24876acad09ec52c250c1668466c">Label</a> const &amp;l)</td></tr>
+<tr class="memitem:a5218753a8ecec0c9a05c6d3e3ca2db07"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_paris.html#a5218753a8ecec0c9a05c6d3e3ca2db07">InitializeArrays</a> ()</td></tr>
+<tr class="separator:a5218753a8ecec0c9a05c6d3e3ca2db07"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e84a66240e195c7743f8c8dae84f800"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_paris.html#a5e84a66240e195c7743f8c8dae84f800">is_paris</a> (<a class="el" href="_hit_8hpp.html#ab5dd24876acad09ec52c250c1668466c">Label</a> const &amp;l)</td></tr>
 <tr class="separator:a5e84a66240e195c7743f8c8dae84f800"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a060a9d4c6345e7b73ac62ad5aee1bd23"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="lib_co_8hpp.html#a65f85814a8290f9797005d3b28e7e5fc">uchar</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_paris.html#a060a9d4c6345e7b73ac62ad5aee1bd23">label_to_index</a> (<a class="el" href="_detectors_8hpp.html#ab5dd24876acad09ec52c250c1668466c">Label</a> const &amp;l)</td></tr>
+<tr class="memitem:a060a9d4c6345e7b73ac62ad5aee1bd23"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="lib_co_8hpp.html#ae48ac2456c5ad6c956fef86e7bef3a21">uchar</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_paris.html#a060a9d4c6345e7b73ac62ad5aee1bd23">label_to_index</a> (<a class="el" href="_hit_8hpp.html#ab5dd24876acad09ec52c250c1668466c">Label</a> const &amp;l)</td></tr>
 <tr class="separator:a060a9d4c6345e7b73ac62ad5aee1bd23"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:afe49dc3348c20a7d45a35f1ce49e6fbf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_static_vector.html">StaticVector</a>&lt; <a class="el" href="_paris_cluster_8hpp.html#a5fbe7b622e3930af364328454332f047">ParisIndex</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_paris.html#afe49dc3348c20a7d45a35f1ce49e6fbf">Hits</a></td></tr>
-<tr class="separator:afe49dc3348c20a7d45a35f1ce49e6fbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a78bf79222adabab47d77efb3eaaff576"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_paris_cluster.html">ParisCluster</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_paris.html#a78bf79222adabab47d77efb3eaaff576">parisClusters</a></td></tr>
-<tr class="separator:a78bf79222adabab47d77efb3eaaff576"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab8b82c446fd5c617a70be80207894368"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_paris_cluster.html">ParisCluster</a>&lt; 28 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_paris.html#ab8b82c446fd5c617a70be80207894368">clusterBack</a></td></tr>
+<tr class="separator:ab8b82c446fd5c617a70be80207894368"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd25e98773ccf32549495e4c4035db4a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_paris_cluster.html">ParisCluster</a>&lt; 36 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_paris.html#afd25e98773ccf32549495e4c4035db4a">clusterFront</a></td></tr>
+<tr class="separator:afd25e98773ccf32549495e4c4035db4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a35fdae4555744730c04ef90228b50865"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_static_vector.html">StaticVector</a>&lt; <a class="el" href="lib_co_8hpp.html#ae48ac2456c5ad6c956fef86e7bef3a21">uchar</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_paris.html#a35fdae4555744730c04ef90228b50865">Hits</a></td></tr>
+<tr class="separator:a35fdae4555744730c04ef90228b50865"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
-<tr class="memitem:a4598dcb03f0900aa81b9e9cc1954c7cd"><td class="memItemLeft" align="right" valign="top">static std::array&lt; <a class="el" href="lib_co_8hpp.html#a65f85814a8290f9797005d3b28e7e5fc">uchar</a>, 1000 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_paris.html#a4598dcb03f0900aa81b9e9cc1954c7cd">cluster</a></td></tr>
+<tr class="memitem:a4598dcb03f0900aa81b9e9cc1954c7cd"><td class="memItemLeft" align="right" valign="top">static std::array&lt; <a class="el" href="lib_co_8hpp.html#ae48ac2456c5ad6c956fef86e7bef3a21">uchar</a>, 1000 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_paris.html#a4598dcb03f0900aa81b9e9cc1954c7cd">cluster</a></td></tr>
 <tr class="separator:a4598dcb03f0900aa81b9e9cc1954c7cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad870c58010fc1f7608be62b2b8c02b15"><td class="memItemLeft" align="right" valign="top">static std::array&lt; <a class="el" href="lib_co_8hpp.html#a65f85814a8290f9797005d3b28e7e5fc">uchar</a>, 1000 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_paris.html#ad870c58010fc1f7608be62b2b8c02b15">index</a></td></tr>
+<tr class="memitem:ad870c58010fc1f7608be62b2b8c02b15"><td class="memItemLeft" align="right" valign="top">static std::array&lt; <a class="el" href="lib_co_8hpp.html#ae48ac2456c5ad6c956fef86e7bef3a21">uchar</a>, 1000 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_paris.html#ad870c58010fc1f7608be62b2b8c02b15">index</a></td></tr>
 <tr class="separator:ad870c58010fc1f7608be62b2b8c02b15"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a03d3050af7163dfc8c5cc1fb0598885c"><td class="memItemLeft" align="right" valign="top">static std::array&lt; bool, 1000 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_paris.html#a03d3050af7163dfc8c5cc1fb0598885c">is</a></td></tr>
 <tr class="separator:a03d3050af7163dfc8c5cc1fb0598885c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a9efcee0bca9b694ae7993a2c773d6dc3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_paris.html#a9efcee0bca9b694ae7993a2c773d6dc3">m_initialised</a> = false</td></tr>
+<tr class="separator:a9efcee0bca9b694ae7993a2c773d6dc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-static-attribs"></a>
+Static Private Attributes</h2></td></tr>
+<tr class="memitem:a992926f1f1315dbc0949d84fcca9896e"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_paris.html#a992926f1f1315dbc0949d84fcca9896e">s_initialised</a> = false</td></tr>
+<tr class="separator:a992926f1f1315dbc0949d84fcca9896e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Enumeration Documentation</h2>
-<a id="ae8dba29931f6e6bb36e519bb12d75215"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae8dba29931f6e6bb36e519bb12d75215">&#9670;&nbsp;</a></span>anonymous enum</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">anonymous enum</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ae8dba29931f6e6bb36e519bb12d75215aae14897adf5f06fbcd12d74655c866dd"></a>BACK&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="ae8dba29931f6e6bb36e519bb12d75215a12e33403f007fe2ee41cb4913427a9a6"></a>FRONT&#160;</td><td class="fielddoc"></td></tr>
-</table>
-
-</div>
-</div>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a1f05e7dfce90ff9808cf79ebbbb23008"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1f05e7dfce90ff9808cf79ebbbb23008">&#9670;&nbsp;</a></span>Paris()</h2>
@@ -193,6 +184,18 @@ Static Public Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_paris_a1f05e7dfce90ff9808cf79ebbbb23008_cgraph.png" border="0" usemap="#aclass_paris_a1f05e7dfce90ff9808cf79ebbbb23008_cgraph" alt=""/></div>
+<map name="aclass_paris_a1f05e7dfce90ff9808cf79ebbbb23008_cgraph" id="aclass_paris_a1f05e7dfce90ff9808cf79ebbbb23008_cgraph">
+<area shape="rect" title=" " alt="" coords="5,31,97,57"/>
+<area shape="rect" href="class_paris.html#a5218753a8ecec0c9a05c6d3e3ca2db07" title=" " alt="" coords="145,31,304,57"/>
+<area shape="rect" href="class_paris.html#a5e84a66240e195c7743f8c8dae84f800" title=" " alt="" coords="556,5,667,32"/>
+<area shape="rect" href="class_paris.html#a060a9d4c6345e7b73ac62ad5aee1bd23" title=" " alt="" coords="352,31,508,57"/>
+<area shape="rect" href="_histogramor_8hpp.html#ab48a2fa7184e6354788989602c8c8c29" title=" " alt="" coords="404,81,456,108"/>
+</map>
+</div>
 
 </div>
 </div>
@@ -220,15 +223,28 @@ Static Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_paris_ac6fb6d9310b0dd298ebf10862497954a_cgraph.png" border="0" usemap="#aclass_paris_ac6fb6d9310b0dd298ebf10862497954a_cgraph" alt=""/></div>
+<map name="aclass_paris_ac6fb6d9310b0dd298ebf10862497954a_cgraph" id="aclass_paris_ac6fb6d9310b0dd298ebf10862497954a_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,119,32"/>
+<area shape="rect" href="class_paris_cluster.html#a6b62c6df3f369da38428d7afa96e2316" title=" " alt="" coords="167,5,325,32"/>
+</map>
+</div>
+<div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_paris_ac6fb6d9310b0dd298ebf10862497954a_icgraph.png" border="0" usemap="#aclass_paris_ac6fb6d9310b0dd298ebf10862497954a_icgraph" alt=""/></div>
+<map name="aclass_paris_ac6fb6d9310b0dd298ebf10862497954a_icgraph" id="aclass_paris_ac6fb6d9310b0dd298ebf10862497954a_icgraph">
+<area shape="rect" title=" " alt="" coords="193,5,307,32"/>
+<area shape="rect" href="class_event_analyse.html#a3667d9363f41262088e0ca5c1f06fc7e" title=" " alt="" coords="5,5,145,32"/>
+</map>
 </div>
 
 </div>
 </div>
-<a id="a0e52fd73f8042efa89633b5b9697c456"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0e52fd73f8042efa89633b5b9697c456">&#9670;&nbsp;</a></span>back()</h2>
+<a id="a4fb89c70f74288ffba9041dad5c0b341"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4fb89c70f74288ffba9041dad5c0b341">&#9670;&nbsp;</a></span>back()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -237,7 +253,7 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_paris_cluster.html">ParisCluster</a>&amp; Paris::back </td>
+          <td class="memname">auto&amp; Paris::back </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -270,7 +286,7 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="lib_co_8hpp.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a> const &amp;&#160;</td>
           <td class="paramname"><em>i</em>&#160;</td>
         </tr>
         <tr>
@@ -285,11 +301,20 @@ Here is the caller graph for this function:</div>
   </tr>
 </table>
 </div><div class="memdoc">
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_paris_acfde42a5101236f9f4063c22661563f0_cgraph.png" border="0" usemap="#aclass_paris_acfde42a5101236f9f4063c22661563f0_cgraph" alt=""/></div>
+<map name="aclass_paris_acfde42a5101236f9f4063c22661563f0_cgraph" id="aclass_paris_acfde42a5101236f9f4063c22661563f0_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,85,32"/>
+<area shape="rect" href="class_paris_cluster.html#a00f32121b8702aae3b51826a8aa36f7b" title=" " alt="" coords="133,5,260,32"/>
+</map>
+</div>
 
 </div>
 </div>
-<a id="aa94fe4436fb9f0c61ca1549a8edfb26d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa94fe4436fb9f0c61ca1549a8edfb26d">&#9670;&nbsp;</a></span>front()</h2>
+<a id="adf36cdac7f24cbc27ace07ec0afeb6a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adf36cdac7f24cbc27ace07ec0afeb6a6">&#9670;&nbsp;</a></span>front()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -298,7 +323,7 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_paris_cluster.html">ParisCluster</a>&amp; Paris::front </td>
+          <td class="memname">auto&amp; Paris::front </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -313,8 +338,43 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a id="accb2dc0034a5913574a98e2d47409bcf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#accb2dc0034a5913574a98e2d47409bcf">&#9670;&nbsp;</a></span>Initialize() <span class="overload">[1/2]</span></h2>
+<a id="ac0479d995c00e0ee8170092cdf1b5f51"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac0479d995c00e0ee8170092cdf1b5f51">&#9670;&nbsp;</a></span>Initialize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Paris::Initialize </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_paris_ac0479d995c00e0ee8170092cdf1b5f51_cgraph.png" border="0" usemap="#aclass_paris_ac0479d995c00e0ee8170092cdf1b5f51_cgraph" alt=""/></div>
+<map name="aclass_paris_ac0479d995c00e0ee8170092cdf1b5f51_cgraph" id="aclass_paris_ac0479d995c00e0ee8170092cdf1b5f51_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,123,32"/>
+<area shape="rect" href="class_paris_cluster.html#a19e0ba991b1b9326f4df3ceef619823e" title=" " alt="" coords="171,5,333,32"/>
+</map>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_paris_ac0479d995c00e0ee8170092cdf1b5f51_icgraph.png" border="0" usemap="#aclass_paris_ac0479d995c00e0ee8170092cdf1b5f51_icgraph" alt=""/></div>
+<map name="aclass_paris_ac0479d995c00e0ee8170092cdf1b5f51_icgraph" id="aclass_paris_ac0479d995c00e0ee8170092cdf1b5f51_icgraph">
+<area shape="rect" title=" " alt="" coords="261,5,379,32"/>
+<area shape="rect" href="class_event_analyse.html#ad1a958082173e421e93221ce6759c850" title=" " alt="" coords="5,5,213,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a5218753a8ecec0c9a05c6d3e3ca2db07"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5218753a8ecec0c9a05c6d3e3ca2db07">&#9670;&nbsp;</a></span>InitializeArrays()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -323,7 +383,7 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static void Paris::Initialize </td>
+          <td class="memname">static void Paris::InitializeArrays </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -338,45 +398,22 @@ Here is the caller graph for this function:</div>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_paris_accb2dc0034a5913574a98e2d47409bcf_cgraph.png" border="0" usemap="#aclass_paris_accb2dc0034a5913574a98e2d47409bcf_cgraph" alt=""/></div>
+<div class="center"><img src="class_paris_a5218753a8ecec0c9a05c6d3e3ca2db07_cgraph.png" border="0" usemap="#aclass_paris_a5218753a8ecec0c9a05c6d3e3ca2db07_cgraph" alt=""/></div>
+<map name="aclass_paris_a5218753a8ecec0c9a05c6d3e3ca2db07_cgraph" id="aclass_paris_a5218753a8ecec0c9a05c6d3e3ca2db07_cgraph">
+<area shape="rect" title=" " alt="" coords="5,31,164,57"/>
+<area shape="rect" href="class_paris.html#a5e84a66240e195c7743f8c8dae84f800" title=" " alt="" coords="416,5,527,32"/>
+<area shape="rect" href="class_paris.html#a060a9d4c6345e7b73ac62ad5aee1bd23" title=" " alt="" coords="212,31,368,57"/>
+<area shape="rect" href="_histogramor_8hpp.html#ab48a2fa7184e6354788989602c8c8c29" title=" " alt="" coords="264,81,316,108"/>
+</map>
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_paris_accb2dc0034a5913574a98e2d47409bcf_icgraph.png" border="0" usemap="#aclass_paris_accb2dc0034a5913574a98e2d47409bcf_icgraph" alt=""/></div>
-</div>
-
-</div>
-</div>
-<a id="a2f4c2c7179a5ec14230327bc40a137b0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2f4c2c7179a5ec14230327bc40a137b0">&#9670;&nbsp;</a></span>Initialize() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Paris::Initialize </td>
-          <td>(</td>
-          <td class="paramtype">std::size_t const &amp;&#160;</td>
-          <td class="paramname"><em>nb_clusters</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::size_t const &amp;&#160;</td>
-          <td class="paramname"><em>nb_modules</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="class_paris_a2f4c2c7179a5ec14230327bc40a137b0_cgraph.png" border="0" usemap="#aclass_paris_a2f4c2c7179a5ec14230327bc40a137b0_cgraph" alt=""/></div>
+<div class="center"><img src="class_paris_a5218753a8ecec0c9a05c6d3e3ca2db07_icgraph.png" border="0" usemap="#aclass_paris_a5218753a8ecec0c9a05c6d3e3ca2db07_icgraph" alt=""/></div>
+<map name="aclass_paris_a5218753a8ecec0c9a05c6d3e3ca2db07_icgraph" id="aclass_paris_a5218753a8ecec0c9a05c6d3e3ca2db07_icgraph">
+<area shape="rect" title=" " alt="" coords="145,5,304,32"/>
+<area shape="rect" href="class_paris.html#a1f05e7dfce90ff9808cf79ebbbb23008" title=" " alt="" coords="5,5,97,32"/>
+</map>
 </div>
 
 </div>
@@ -393,7 +430,7 @@ Here is the call graph for this function:</div>
         <tr>
           <td class="memname">static bool Paris::is_paris </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="_detectors_8hpp.html#ab5dd24876acad09ec52c250c1668466c">Label</a> const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="_hit_8hpp.html#ab5dd24876acad09ec52c250c1668466c">Label</a> const &amp;&#160;</td>
           <td class="paramname"><em>l</em></td><td>)</td>
           <td></td>
         </tr>
@@ -408,6 +445,12 @@ Here is the call graph for this function:</div>
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_paris_a5e84a66240e195c7743f8c8dae84f800_icgraph.png" border="0" usemap="#aclass_paris_a5e84a66240e195c7743f8c8dae84f800_icgraph" alt=""/></div>
+<map name="aclass_paris_a5e84a66240e195c7743f8c8dae84f800_icgraph" id="aclass_paris_a5e84a66240e195c7743f8c8dae84f800_icgraph">
+<area shape="rect" title=" " alt="" coords="556,5,667,32"/>
+<area shape="rect" href="class_paris.html#a5218753a8ecec0c9a05c6d3e3ca2db07" title=" " alt="" coords="145,5,304,32"/>
+<area shape="rect" href="class_paris.html#a060a9d4c6345e7b73ac62ad5aee1bd23" title=" " alt="" coords="352,31,508,57"/>
+<area shape="rect" href="class_paris.html#a1f05e7dfce90ff9808cf79ebbbb23008" title=" " alt="" coords="5,5,97,32"/>
+</map>
 </div>
 
 </div>
@@ -422,9 +465,9 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="lib_co_8hpp.html#a65f85814a8290f9797005d3b28e7e5fc">uchar</a> Paris::label_to_index </td>
+          <td class="memname">static <a class="el" href="lib_co_8hpp.html#ae48ac2456c5ad6c956fef86e7bef3a21">uchar</a> Paris::label_to_index </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="_detectors_8hpp.html#ab5dd24876acad09ec52c250c1668466c">Label</a> const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="_hit_8hpp.html#ab5dd24876acad09ec52c250c1668466c">Label</a> const &amp;&#160;</td>
           <td class="paramname"><em>l</em></td><td>)</td>
           <td></td>
         </tr>
@@ -439,38 +482,21 @@ Here is the caller graph for this function:</div>
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_paris_a060a9d4c6345e7b73ac62ad5aee1bd23_cgraph.png" border="0" usemap="#aclass_paris_a060a9d4c6345e7b73ac62ad5aee1bd23_cgraph" alt=""/></div>
+<map name="aclass_paris_a060a9d4c6345e7b73ac62ad5aee1bd23_cgraph" id="aclass_paris_a060a9d4c6345e7b73ac62ad5aee1bd23_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,161,32"/>
+<area shape="rect" href="class_paris.html#a5e84a66240e195c7743f8c8dae84f800" title=" " alt="" coords="209,5,320,32"/>
+</map>
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_paris_a060a9d4c6345e7b73ac62ad5aee1bd23_icgraph.png" border="0" usemap="#aclass_paris_a060a9d4c6345e7b73ac62ad5aee1bd23_icgraph" alt=""/></div>
+<map name="aclass_paris_a060a9d4c6345e7b73ac62ad5aee1bd23_icgraph" id="aclass_paris_a060a9d4c6345e7b73ac62ad5aee1bd23_icgraph">
+<area shape="rect" title=" " alt="" coords="352,5,508,32"/>
+<area shape="rect" href="class_paris.html#a5218753a8ecec0c9a05c6d3e3ca2db07" title=" " alt="" coords="145,5,304,32"/>
+<area shape="rect" href="class_paris.html#a1f05e7dfce90ff9808cf79ebbbb23008" title=" " alt="" coords="5,5,97,32"/>
+</map>
 </div>
-
-</div>
-</div>
-<a id="ab892f92bab6451d3bfcfc73c5f0f9c76"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab892f92bab6451d3bfcfc73c5f0f9c76">&#9670;&nbsp;</a></span>operator[]()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_paris_cluster.html">ParisCluster</a>&amp; Paris::operator[] </td>
-          <td>(</td>
-          <td class="paramtype">int const &amp;&#160;</td>
-          <td class="paramname"><em>i</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
 
 </div>
 </div>
@@ -496,6 +522,15 @@ Here is the caller graph for this function:</div>
   </tr>
 </table>
 </div><div class="memdoc">
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_paris_ad9b942023bbc514963ee8742aeccd23c_cgraph.png" border="0" usemap="#aclass_paris_ad9b942023bbc514963ee8742aeccd23c_cgraph" alt=""/></div>
+<map name="aclass_paris_ad9b942023bbc514963ee8742aeccd23c_cgraph" id="aclass_paris_ad9b942023bbc514963ee8742aeccd23c_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,104,32"/>
+<area shape="rect" href="class_paris_cluster.html#aed843cd658540524bb00eaccc16d5c47" title=" " alt="" coords="152,5,296,32"/>
+</map>
+</div>
 
 </div>
 </div>
@@ -510,7 +545,7 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::array&lt; <a class="el" href="lib_co_8hpp.html#a65f85814a8290f9797005d3b28e7e5fc">uchar</a>, 1000 &gt; Paris::cluster</td>
+          <td class="memname">std::array&lt; <a class="el" href="lib_co_8hpp.html#ae48ac2456c5ad6c956fef86e7bef3a21">uchar</a>, 1000 &gt; Paris::cluster</td>
         </tr>
       </table>
   </td>
@@ -522,14 +557,42 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a id="afe49dc3348c20a7d45a35f1ce49e6fbf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afe49dc3348c20a7d45a35f1ce49e6fbf">&#9670;&nbsp;</a></span>Hits</h2>
+<a id="ab8b82c446fd5c617a70be80207894368"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab8b82c446fd5c617a70be80207894368">&#9670;&nbsp;</a></span>clusterBack</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_static_vector.html">StaticVector</a>&lt;<a class="el" href="_paris_cluster_8hpp.html#a5fbe7b622e3930af364328454332f047">ParisIndex</a>&gt; Paris::Hits</td>
+          <td class="memname"><a class="el" href="class_paris_cluster.html">ParisCluster</a>&lt;28&gt; Paris::clusterBack</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afd25e98773ccf32549495e4c4035db4a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afd25e98773ccf32549495e4c4035db4a">&#9670;&nbsp;</a></span>clusterFront</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_paris_cluster.html">ParisCluster</a>&lt;36&gt; Paris::clusterFront</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a35fdae4555744730c04ef90228b50865"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a35fdae4555744730c04ef90228b50865">&#9670;&nbsp;</a></span>Hits</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_static_vector.html">StaticVector</a>&lt;<a class="el" href="lib_co_8hpp.html#ae48ac2456c5ad6c956fef86e7bef3a21">uchar</a>&gt; Paris::Hits</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -546,7 +609,7 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::array&lt; <a class="el" href="lib_co_8hpp.html#a65f85814a8290f9797005d3b28e7e5fc">uchar</a>, 1000 &gt; Paris::index</td>
+          <td class="memname">std::array&lt; <a class="el" href="lib_co_8hpp.html#ae48ac2456c5ad6c956fef86e7bef3a21">uchar</a>, 1000 &gt; Paris::index</td>
         </tr>
       </table>
   </td>
@@ -580,16 +643,46 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a id="a78bf79222adabab47d77efb3eaaff576"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a78bf79222adabab47d77efb3eaaff576">&#9670;&nbsp;</a></span>parisClusters</h2>
+<a id="a9efcee0bca9b694ae7993a2c773d6dc3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9efcee0bca9b694ae7993a2c773d6dc3">&#9670;&nbsp;</a></span>m_initialised</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt;<a class="el" href="class_paris_cluster.html">ParisCluster</a>&gt; Paris::parisClusters</td>
+          <td class="memname">bool Paris::m_initialised = false</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a992926f1f1315dbc0949d84fcca9896e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a992926f1f1315dbc0949d84fcca9896e">&#9670;&nbsp;</a></span>s_initialised</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Paris::s_initialised = false</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 </div>

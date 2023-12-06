@@ -95,20 +95,31 @@ $(document).ready(function(){initNavTree('class_manip.html',''); initResizable()
 Collaboration diagram for Manip:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_manip__coll__graph.png" border="0" usemap="#a_manip_coll__map" alt="Collaboration graph"/></div>
+<map name="a_manip_coll__map" id="a_manip_coll__map">
+<area shape="rect" title=" " alt="" coords="191,184,254,211"/>
+<area shape="rect" href="class_m_t_vector.html" title=" " alt="" coords="5,95,184,121"/>
+<area shape="rect" href="class_path.html" title="EXPERIMENTAL Object used to hold the complete path of a giver folder." alt="" coords="208,95,259,121"/>
+<area shape="rect" href="class_folders.html" title="EXPERIMENTAL Object used to hold a list of folders." alt="" coords="199,5,268,32"/>
+<area shape="rect" href="class_folder.html" title="EXPERIMENTAL Object used to hold a folder&#39;s name." alt="" coords="305,95,367,121"/>
+</map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:a86ed3dd2dc6d3b8b7342a9552bc43e26"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_manip.html#a86ed3dd2dc6d3b8b7342a9552bc43e26">addFolder</a> (std::string const &amp;folder)</td></tr>
+<tr class="separator:a86ed3dd2dc6d3b8b7342a9552bc43e26"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a41dfa1aac77e2340abf4f66934af0092"><td class="memItemLeft" align="right" valign="top">auto const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_manip.html#a41dfa1aac77e2340abf4f66934af0092">get</a> () const</td></tr>
+<tr class="separator:a41dfa1aac77e2340abf4f66934af0092"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0192f178496568056b1d17c9e73db064"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_manip.html#a0192f178496568056b1d17c9e73db064">getNext</a> (std::string &amp;run)</td></tr>
 <tr class="separator:a0192f178496568056b1d17c9e73db064"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1f5a91129d20b2e3924c54bddde521f6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_manip.html#a1f5a91129d20b2e3924c54bddde521f6">Manip</a> ()</td></tr>
 <tr class="separator:a1f5a91129d20b2e3924c54bddde521f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1892affeed8fa28c902d10a2cf77ea4e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_manip.html#a1892affeed8fa28c902d10a2cf77ea4e">Manip</a> (std::string const &amp;datapath, std::string const &amp;manipname, std::string const &amp;filename)</td></tr>
-<tr class="separator:a1892affeed8fa28c902d10a2cf77ea4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aab38d946797ab4e5b03c02d9bf69aa0c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_manip.html#aab38d946797ab4e5b03c02d9bf69aa0c">Manip</a> (std::string const &amp;runs_file)</td></tr>
 <tr class="separator:aab38d946797ab4e5b03c02d9bf69aa0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad509e37dce3d5a639115b54f16ded598"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_manip.html#ad509e37dce3d5a639115b54f16ded598">operator bool</a> () const &amp;</td></tr>
 <tr class="separator:ad509e37dce3d5a639115b54f16ded598"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8e71952b07876be2dc56e180bdfe5f5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_manip.html#aa8e71952b07876be2dc56e180bdfe5f5">operator&gt;&gt;</a> (std::string &amp;string)</td></tr>
+<tr class="separator:aa8e71952b07876be2dc56e180bdfe5f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6390322006ca8d8e7c350a3a915182e8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_manip.html#a6390322006ca8d8e7c350a3a915182e8">Print</a> ()</td></tr>
 <tr class="separator:a6390322006ca8d8e7c350a3a915182e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4da401a6eb5a013a4150e01b81ecf853"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_manip.html#a4da401a6eb5a013a4150e01b81ecf853">readFile</a> ()</td></tr>
@@ -121,6 +132,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aba047d84e5c3eaff3640c2ed8f31aaea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af3f64608a08dd23d186f48e8c1beeba0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_manip.html#af3f64608a08dd23d186f48e8c1beeba0">setFileName</a> (std::string const &amp;filename)</td></tr>
 <tr class="separator:af3f64608a08dd23d186f48e8c1beeba0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec7bc3a8a74d63eda8ad6e6f7496c985"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_manip.html#aec7bc3a8a74d63eda8ad6e6f7496c985">setFolder</a> (std::string const &amp;folder)</td></tr>
+<tr class="separator:aec7bc3a8a74d63eda8ad6e6f7496c985"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7f2aa2947cd843abecac34300b6da94e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_manip.html#a7f2aa2947cd843abecac34300b6da94e">setManipName</a> (std::string const &amp;manipname)</td></tr>
 <tr class="separator:a7f2aa2947cd843abecac34300b6da94e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab0813163118017c1064ec02f091356b8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_manip.html#ab0813163118017c1064ec02f091356b8">setMT</a> (bool const &amp;MTOn=true)</td></tr>
@@ -128,12 +141,12 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
-<tr class="memitem:a48b7346ccf31813912089fe976d9663a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="lib_co_8hpp.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_manip.html#a48b7346ccf31813912089fe976d9663a">i</a> = 0</td></tr>
+<tr class="memitem:a48b7346ccf31813912089fe976d9663a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="lib_co_8hpp.html#a69aa29b598b851b0640aa225a9e5d61d">uint</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_manip.html#a48b7346ccf31813912089fe976d9663a">i</a> = 0</td></tr>
 <tr class="separator:a48b7346ccf31813912089fe976d9663a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1c4ac027f4eed9e755aca5ba641a27ea"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_manip.html#a1c4ac027f4eed9e755aca5ba641a27ea">list_runs</a></td></tr>
 <tr class="separator:a1c4ac027f4eed9e755aca5ba641a27ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a73430f018a492d2402c28f7a2c34f9ce"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_m_t_list.html">MTList</a>&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_manip.html#a73430f018a492d2402c28f7a2c34f9ce">list_runs_MT</a></td></tr>
-<tr class="separator:a73430f018a492d2402c28f7a2c34f9ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac47140bb9d696f5c0cd15edf4171c905"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_m_t_list_8hpp.html#a5645cb48b623bfc2e6e274c70952a8e2">MTList</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_manip.html#ac47140bb9d696f5c0cd15edf4171c905">list_runs_MT</a></td></tr>
+<tr class="separator:ac47140bb9d696f5c0cd15edf4171c905"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac2ac621173f7cd52f01c5b4b50a56e5e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_path.html">Path</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_manip.html#ac2ac621173f7cd52f01c5b4b50a56e5e">m_datapath</a></td></tr>
 <tr class="separator:ac2ac621173f7cd52f01c5b4b50a56e5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8e335c089c27a67924e3955f5707fc9f"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_manip.html#a8e335c089c27a67924e3955f5707fc9f">m_file</a></td></tr>
@@ -149,7 +162,7 @@ Private Attributes</h2></td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a1f5a91129d20b2e3924c54bddde521f6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1f5a91129d20b2e3924c54bddde521f6">&#9670;&nbsp;</a></span>Manip() <span class="overload">[1/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f5a91129d20b2e3924c54bddde521f6">&#9670;&nbsp;</a></span>Manip() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -174,7 +187,7 @@ Private Attributes</h2></td></tr>
 </div>
 </div>
 <a id="aab38d946797ab4e5b03c02d9bf69aa0c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aab38d946797ab4e5b03c02d9bf69aa0c">&#9670;&nbsp;</a></span>Manip() <span class="overload">[2/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aab38d946797ab4e5b03c02d9bf69aa0c">&#9670;&nbsp;</a></span>Manip() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -200,12 +213,17 @@ Private Attributes</h2></td></tr>
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_manip_aab38d946797ab4e5b03c02d9bf69aa0c_cgraph.png" border="0" usemap="#aclass_manip_aab38d946797ab4e5b03c02d9bf69aa0c_cgraph" alt=""/></div>
+<map name="aclass_manip_aab38d946797ab4e5b03c02d9bf69aa0c_cgraph" id="aclass_manip_aab38d946797ab4e5b03c02d9bf69aa0c_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,116,32"/>
+<area shape="rect" href="class_manip.html#a4da401a6eb5a013a4150e01b81ecf853" title=" " alt="" coords="164,5,287,32"/>
+</map>
 </div>
 
 </div>
 </div>
-<a id="a1892affeed8fa28c902d10a2cf77ea4e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1892affeed8fa28c902d10a2cf77ea4e">&#9670;&nbsp;</a></span>Manip() <span class="overload">[3/3]</span></h2>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a86ed3dd2dc6d3b8b7342a9552bc43e26"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a86ed3dd2dc6d3b8b7342a9552bc43e26">&#9670;&nbsp;</a></span>addFolder()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -214,27 +232,36 @@ Here is the call graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">Manip::Manip </td>
+          <td class="memname">void Manip::addFolder </td>
           <td>(</td>
           <td class="paramtype">std::string const &amp;&#160;</td>
-          <td class="paramname"><em>datapath</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramname"><em>folder</em></td><td>)</td>
           <td></td>
-          <td class="paramtype">std::string const &amp;&#160;</td>
-          <td class="paramname"><em>manipname</em>, </td>
         </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a41dfa1aac77e2340abf4f66934af0092"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a41dfa1aac77e2340abf4f66934af0092">&#9670;&nbsp;</a></span>get()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
         <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::string const &amp;&#160;</td>
-          <td class="paramname"><em>filename</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
+          <td class="memname">auto const&amp; Manip::get </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
         </tr>
       </table>
   </td>
@@ -244,14 +271,17 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 <div class="dynheader">
-Here is the call graph for this function:</div>
+Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_manip_a1892affeed8fa28c902d10a2cf77ea4e_cgraph.png" border="0" usemap="#aclass_manip_a1892affeed8fa28c902d10a2cf77ea4e_cgraph" alt=""/></div>
+<div class="center"><img src="class_manip_a41dfa1aac77e2340abf4f66934af0092_icgraph.png" border="0" usemap="#aclass_manip_a41dfa1aac77e2340abf4f66934af0092_icgraph" alt=""/></div>
+<map name="aclass_manip_a41dfa1aac77e2340abf4f66934af0092_icgraph" id="aclass_manip_a41dfa1aac77e2340abf4f66934af0092_icgraph">
+<area shape="rect" title=" " alt="" coords="152,5,243,32"/>
+<area shape="rect" href="_manip_8hpp.html#a42112ddf75a5ec621f893f7817b97837" title=" " alt="" coords="5,5,104,32"/>
+</map>
 </div>
 
 </div>
 </div>
-<h2 class="groupheader">Member Function Documentation</h2>
 <a id="a0192f178496568056b1d17c9e73db064"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0192f178496568056b1d17c9e73db064">&#9670;&nbsp;</a></span>getNext()</h2>
 
@@ -279,6 +309,19 @@ Here is the call graph for this function:</div>
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_manip_a0192f178496568056b1d17c9e73db064_cgraph.png" border="0" usemap="#aclass_manip_a0192f178496568056b1d17c9e73db064_cgraph" alt=""/></div>
+<map name="aclass_manip_a0192f178496568056b1d17c9e73db064_cgraph" id="aclass_manip_a0192f178496568056b1d17c9e73db064_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,128,32"/>
+<area shape="rect" href="class_m_t_vector.html#a824a9ff009dde921eec4759c69f74ca7" title=" " alt="" coords="176,5,319,32"/>
+</map>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_manip_a0192f178496568056b1d17c9e73db064_icgraph.png" border="0" usemap="#aclass_manip_a0192f178496568056b1d17c9e73db064_icgraph" alt=""/></div>
+<map name="aclass_manip_a0192f178496568056b1d17c9e73db064_icgraph" id="aclass_manip_a0192f178496568056b1d17c9e73db064_icgraph">
+<area shape="rect" title=" " alt="" coords="200,5,323,32"/>
+<area shape="rect" href="class_manip.html#aa8e71952b07876be2dc56e180bdfe5f5" title=" " alt="" coords="5,5,152,32"/>
+</map>
 </div>
 
 </div>
@@ -308,6 +351,42 @@ Here is the call graph for this function:</div>
 
 </div>
 </div>
+<a id="aa8e71952b07876be2dc56e180bdfe5f5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa8e71952b07876be2dc56e180bdfe5f5">&#9670;&nbsp;</a></span>operator&gt;&gt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Manip::operator&gt;&gt; </td>
+          <td>(</td>
+          <td class="paramtype">std::string &amp;&#160;</td>
+          <td class="paramname"><em>string</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_manip_aa8e71952b07876be2dc56e180bdfe5f5_cgraph.png" border="0" usemap="#aclass_manip_aa8e71952b07876be2dc56e180bdfe5f5_cgraph" alt=""/></div>
+<map name="aclass_manip_aa8e71952b07876be2dc56e180bdfe5f5_cgraph" id="aclass_manip_aa8e71952b07876be2dc56e180bdfe5f5_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,152,32"/>
+<area shape="rect" href="class_manip.html#a0192f178496568056b1d17c9e73db064" title=" " alt="" coords="200,5,323,32"/>
+<area shape="rect" href="class_m_t_vector.html#a824a9ff009dde921eec4759c69f74ca7" title=" " alt="" coords="371,5,513,32"/>
+</map>
+</div>
+
+</div>
+</div>
 <a id="a6390322006ca8d8e7c350a3a915182e8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6390322006ca8d8e7c350a3a915182e8">&#9670;&nbsp;</a></span>Print()</h2>
 
@@ -334,6 +413,11 @@ Here is the call graph for this function:</div>
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_manip_a6390322006ca8d8e7c350a3a915182e8_cgraph.png" border="0" usemap="#aclass_manip_a6390322006ca8d8e7c350a3a915182e8_cgraph" alt=""/></div>
+<map name="aclass_manip_a6390322006ca8d8e7c350a3a915182e8_cgraph" id="aclass_manip_a6390322006ca8d8e7c350a3a915182e8_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,105,32"/>
+<area shape="rect" href="_histogramor_8hpp.html#ab48a2fa7184e6354788989602c8c8c29" title=" " alt="" coords="323,5,375,32"/>
+<area shape="rect" href="class_m_t_vector.html#a3bca517dd665e4ad48dceab41c6db9f7" title=" " alt="" coords="153,31,275,57"/>
+</map>
 </div>
 
 </div>
@@ -364,6 +448,10 @@ Here is the call graph for this function:</div>
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_manip_a4da401a6eb5a013a4150e01b81ecf853_icgraph.png" border="0" usemap="#aclass_manip_a4da401a6eb5a013a4150e01b81ecf853_icgraph" alt=""/></div>
+<map name="aclass_manip_a4da401a6eb5a013a4150e01b81ecf853_icgraph" id="aclass_manip_a4da401a6eb5a013a4150e01b81ecf853_icgraph">
+<area shape="rect" title=" " alt="" coords="164,5,287,32"/>
+<area shape="rect" href="class_manip.html#aab38d946797ab4e5b03c02d9bf69aa0c" title=" " alt="" coords="5,5,116,32"/>
+</map>
 </div>
 
 </div>
@@ -395,6 +483,10 @@ Here is the caller graph for this function:</div>
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_manip_ad044eafeb71fda443f77377d44d652d0_cgraph.png" border="0" usemap="#aclass_manip_ad044eafeb71fda443f77377d44d652d0_cgraph" alt=""/></div>
+<map name="aclass_manip_ad044eafeb71fda443f77377d44d652d0_cgraph" id="aclass_manip_ad044eafeb71fda443f77377d44d652d0_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,128,32"/>
+<area shape="rect" href="_histogramor_8hpp.html#ab48a2fa7184e6354788989602c8c8c29" title=" " alt="" coords="176,5,228,32"/>
+</map>
 </div>
 
 </div>
@@ -447,11 +539,6 @@ Here is the call graph for this function:</div>
   </tr>
 </table>
 </div><div class="memdoc">
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="class_manip_aba047d84e5c3eaff3640c2ed8f31aaea_icgraph.png" border="0" usemap="#aclass_manip_aba047d84e5c3eaff3640c2ed8f31aaea_icgraph" alt=""/></div>
-</div>
 
 </div>
 </div>
@@ -478,11 +565,32 @@ Here is the caller graph for this function:</div>
   </tr>
 </table>
 </div><div class="memdoc">
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="class_manip_af3f64608a08dd23d186f48e8c1beeba0_icgraph.png" border="0" usemap="#aclass_manip_af3f64608a08dd23d186f48e8c1beeba0_icgraph" alt=""/></div>
+
 </div>
+</div>
+<a id="aec7bc3a8a74d63eda8ad6e6f7496c985"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec7bc3a8a74d63eda8ad6e6f7496c985">&#9670;&nbsp;</a></span>setFolder()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Manip::setFolder </td>
+          <td>(</td>
+          <td class="paramtype">std::string const &amp;&#160;</td>
+          <td class="paramname"><em>folder</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -509,11 +617,6 @@ Here is the caller graph for this function:</div>
   </tr>
 </table>
 </div><div class="memdoc">
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="class_manip_a7f2aa2947cd843abecac34300b6da94e_icgraph.png" border="0" usemap="#aclass_manip_a7f2aa2947cd843abecac34300b6da94e_icgraph" alt=""/></div>
-</div>
 
 </div>
 </div>
@@ -544,6 +647,10 @@ Here is the caller graph for this function:</div>
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_manip_ab0813163118017c1064ec02f091356b8_cgraph.png" border="0" usemap="#aclass_manip_ab0813163118017c1064ec02f091356b8_cgraph" alt=""/></div>
+<map name="aclass_manip_ab0813163118017c1064ec02f091356b8_cgraph" id="aclass_manip_ab0813163118017c1064ec02f091356b8_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,116,32"/>
+<area shape="rect" href="_histogramor_8hpp.html#ab48a2fa7184e6354788989602c8c8c29" title=" " alt="" coords="164,5,216,32"/>
+</map>
 </div>
 
 </div>
@@ -559,7 +666,7 @@ Here is the call graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="lib_co_8hpp.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a> Manip::i = 0</td>
+          <td class="memname"><a class="el" href="lib_co_8hpp.html#a69aa29b598b851b0640aa225a9e5d61d">uint</a> Manip::i = 0</td>
         </tr>
       </table>
   </td>
@@ -593,8 +700,8 @@ Here is the call graph for this function:</div>
 
 </div>
 </div>
-<a id="a73430f018a492d2402c28f7a2c34f9ce"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a73430f018a492d2402c28f7a2c34f9ce">&#9670;&nbsp;</a></span>list_runs_MT</h2>
+<a id="ac47140bb9d696f5c0cd15edf4171c905"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac47140bb9d696f5c0cd15edf4171c905">&#9670;&nbsp;</a></span>list_runs_MT</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -603,7 +710,7 @@ Here is the call graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_m_t_list.html">MTList</a>&lt;std::string&gt; Manip::list_runs_MT</td>
+          <td class="memname"><a class="el" href="_m_t_list_8hpp.html#a5645cb48b623bfc2e6e274c70952a8e2">MTList</a> Manip::list_runs_MT</td>
         </tr>
       </table>
   </td>

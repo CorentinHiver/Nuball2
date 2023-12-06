@@ -1,0 +1,152 @@
+.TH "lib/Analyse/Arrays/Paris.h" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+lib/Analyse/Arrays/Paris.h
+.SH SYNOPSIS
+.br
+.PP
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "std::vector< \fBLabel\fP > \fBparis_back_labels\fP"
+.br
+.ti -1c
+.RI "std::vector< \fBLabel\fP > \fBparis_front_labels\fP"
+.br
+.ti -1c
+.RI "std::vector< \fBLabel\fP > \fBparis_labels\fP"
+.br
+.ti -1c
+.RI "std::vector< int > \fBParis_R1_x\fP"
+.br
+.ti -1c
+.RI "std::vector< int > \fBParis_R1_y\fP"
+.br
+.ti -1c
+.RI "std::vector< int > \fBParis_R2_x\fP"
+.br
+.ti -1c
+.RI "std::vector< int > \fBParis_R2_y\fP"
+.br
+.ti -1c
+.RI "std::vector< int > \fBParis_R3_x\fP"
+.br
+.ti -1c
+.RI "std::vector< int > \fBParis_R3_y\fP"
+.br
+.in -1c
+.SH "Variable Documentation"
+.PP 
+.SS "std::vector<\fBLabel\fP> paris_back_labels"
+\fBInitial value:\fP
+.PP
+.nf
+=
+{
+  501, 502, 503, 504, 505, 506, 507, 508,
+  601, 602, 603, 604, 605, 606, 607, 608, 609, 610, 611, 612, 613, 614, 615, 616,
+  701, 702, 703, 704, 705, 706, 707, 708, 709, 710, 711, 712
+}
+.fi
+.SS "std::vector<\fBLabel\fP> paris_front_labels"
+\fBInitial value:\fP
+.PP
+.nf
+=
+{
+  201, 202, 203, 204, 205, 206, 207, 208,
+  301, 302, 303, 304, 305, 306, 307, 308, 309, 310, 311, 312, 313, 314, 315, 316,
+  401, 402, 403, 404, 405, 406, 407, 408, 409, 410, 411, 412
+}
+.fi
+.SS "std::vector<\fBLabel\fP> paris_labels"
+\fBInitial value:\fP
+.PP
+.nf
+=
+{
+  201, 202, 203, 204, 205, 206, 207, 208,
+  301, 302, 303, 304, 305, 306, 307, 308, 309, 310, 311, 312, 313, 314, 315, 316,
+  401, 402, 403, 404, 405, 406, 407, 408, 409, 410, 411, 412,
+  501, 502, 503, 504, 505, 506, 507, 508,
+  601, 602, 603, 604, 605, 606, 607, 608, 609, 610, 611, 612, 613, 614, 615, 616,
+  701, 702, 703, 704, 705, 706, 707, 708, 709, 710, 711, 712
+}
+.fi
+.SS "std::vector<int> Paris_R1_x"
+\fBInitial value:\fP
+.PP
+.nf
+=
+{
+  -1,  0,  1,
+   1,
+   1,  0, -1,
+  -1
+}
+.fi
+.SS "std::vector<int> Paris_R1_y"
+\fBInitial value:\fP
+.PP
+.nf
+=
+{
+  1,  1,  1,
+  0,
+  -1, -1, -1,
+  0
+}
+.fi
+.SS "std::vector<int> Paris_R2_x"
+\fBInitial value:\fP
+.PP
+.nf
+=
+{
+  -2, -1,  0,  1,  2,
+   2,  2,  2,
+   2,  1,  0, -1, -2,
+  -2, -2, -2
+}
+.fi
+.SS "std::vector<int> Paris_R2_y"
+\fBInitial value:\fP
+.PP
+.nf
+=
+{
+  2,  2,  2,  2,  2,
+  1,  0, -1,
+  -2, -2, -2, -2, -2,
+  -1,  0,  1
+}
+.fi
+.SS "std::vector<int> Paris_R3_x"
+\fBInitial value:\fP
+.PP
+.nf
+=
+{
+  -1,  0,  1,
+   3,  3,  3,
+   1,  0, -1,
+  -3, -3, -3,
+}
+.fi
+.SS "std::vector<int> Paris_R3_y"
+\fBInitial value:\fP
+.PP
+.nf
+=
+{
+   3,  3,  3,
+   1,  0, -1,
+  -3, -3, -3,
+  -1,  0,  1,
+}
+.fi
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Nuball2 from the source code\&.

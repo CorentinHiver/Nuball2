@@ -5,3 +5,4 @@ git pull
 
 chmod +x MAJ.sh
 chmod +x ./**
+chmod +x ./executables/*

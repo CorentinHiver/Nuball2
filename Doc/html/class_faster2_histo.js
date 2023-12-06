@@ -1,0 +1,28 @@
+var class_faster2_histo =
+[
+    [ "Faster2Histo", "class_faster2_histo.html#a3a7440d82f4e9d4103e097f2f202e2f4", null ],
+    [ "Faster2Histo", "class_faster2_histo.html#aed84ab0be7ff45067715733dd7be23d1", null ],
+    [ "addFile", "class_faster2_histo.html#ac20f36c0861a3af085c9546ca1325cc6", null ],
+    [ "addFolder", "class_faster2_histo.html#a8684b0b531e6369ce35bca61f4b1007a", null ],
+    [ "dispatch_threads", "class_faster2_histo.html#a055dca6d53f3a55eacf7e63ae871b928", null ],
+    [ "fillHisto", "class_faster2_histo.html#a327a8348f79c5ecf27a58baef32b81d8", null ],
+    [ "load", "class_faster2_histo.html#a72f8004ae550c02db09791b810c0252d", null ],
+    [ "loadCalibration", "class_faster2_histo.html#a46087c5a676f688d4862304fca62cc24", null ],
+    [ "multirun", "class_faster2_histo.html#a20fd8b47b9a9aecef8682ad5442db16d", null ],
+    [ "overwrite", "class_faster2_histo.html#afadb67cbf1469aebd3133246cf7ba922", null ],
+    [ "printParameters", "class_faster2_histo.html#af5be7bfaa8186926e62e736310dffc26", null ],
+    [ "setNbFiles", "class_faster2_histo.html#aa059538fc470d3de0663e6ec44ebb46d", null ],
+    [ "setNbThreads", "class_faster2_histo.html#aa3d364eba3c8fc7367fdabea68524854", null ],
+    [ "setOutFilename", "class_faster2_histo.html#a479d102c3637023aedeaa0b8e7608781", null ],
+    [ "setWriteMode", "class_faster2_histo.html#aea9828c3cbca9a909cb5f45e4cb659f5", null ],
+    [ "treatFile", "class_faster2_histo.html#a48d7d46929ffbd69ccc3a590c535d3b7", null ],
+    [ "write", "class_faster2_histo.html#a355de92b0dc2822b28ac3f65f87b5db9", null ],
+    [ "m_calibration", "class_faster2_histo.html#a93debc2e47619ed043f25f90aaa16c75", null ],
+    [ "m_labels", "class_faster2_histo.html#a9564f0b9bed4fd3f2d275b4127abedc2", null ],
+    [ "m_MTreader", "class_faster2_histo.html#a2ec4e07c1b3ee37719c9312822515466", null ],
+    [ "m_nb_files", "class_faster2_histo.html#a287be636deda02485fc20e28f37d44d1", null ],
+    [ "m_outFile", "class_faster2_histo.html#a92a1969a8cc0953281ee487c40f6514c", null ],
+    [ "m_overwrite", "class_faster2_histo.html#abb960755db4b68484ac9c9904185093c", null ],
+    [ "m_spectra", "class_faster2_histo.html#a8ae9cc6eca58047e373aa58fa50aa2f2", null ],
+    [ "write_mode", "class_faster2_histo.html#ab989a53d306f9cf1328921d011199e19", null ]
+];

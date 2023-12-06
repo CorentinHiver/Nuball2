@@ -1,0 +1,13 @@
+<map id="Calibration::Calibration" name="Calibration::Calibration">
+<area shape="rect" id="node1" title=" " alt="" coords="5,132,177,159"/>
+<area shape="rect" id="node2" href="$class_calibration.html#a2d2a0d6276fc2c8a4b60c3801ccc16a9" title=" " alt="" coords="225,132,355,159"/>
+<area shape="rect" id="node3" href="$files__functions_8hpp.html#afd584978228fac5fae283c12837378dd" title=" " alt="" coords="414,5,523,32"/>
+<area shape="rect" id="node4" href="$_histogramor_8hpp.html#ab48a2fa7184e6354788989602c8c8c29" title=" " alt="" coords="609,56,661,83"/>
+<area shape="rect" id="node5" href="$class_detectors.html#af2bb20ee60f504df326b87e9ebbaef30" title=" " alt="" coords="403,107,535,133"/>
+<area shape="rect" id="node8" href="$class_calibration.html#ab1502564e126e769e782d221d42608c7" title=" " alt="" coords="408,157,529,184"/>
+<area shape="rect" id="node9" href="$class_detectors.html#a1177661fb15c9825755925faf00c8398" title="Return the value of the maximum label, i.e. the size of the lookup tables." alt="" coords="409,208,528,235"/>
+<area shape="rect" id="node11" href="$class_calibration.html#ac4b8f57b3d896cda20a6aa3ba04a78e7" title="DEV." alt="" coords="405,259,532,285"/>
+<area shape="rect" id="node6" href="$class_bools.html#ab34b97e65a4a23ae25a8b6f746c37a9d" title=" " alt="" coords="583,107,688,133"/>
+<area shape="rect" id="node7" href="$class_bools.html#ad4d74f6e2266b271a8bd060ce6d0e448" title=" " alt="" coords="736,107,828,133"/>
+<area shape="rect" id="node10" href="$_hit_8hpp.html#af181231d97866aa957e8fe8bd67f7f64" title="Data casts ///." alt="" coords="590,208,681,235"/>
+</map>

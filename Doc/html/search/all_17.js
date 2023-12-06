@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['y_944',['y',['../class_paris_x_y.html#a07e28a303ef89eeaf7cc9a4740dee1bd',1,'ParisXY::y()'],['../class_position_x_y.html#adb0113c11672958f3a0f0065ee5622f0',1,'PositionXY::y()']]]
+  ['x_1330',['x',['../class_fit.html#a5a9406e4e285484650609f696d96ffa2',1,'Fit::x()'],['../class_paris_x_y.html#ad176348f497c7645d9282dcc653fe173',1,'ParisXY::x()'],['../class_position_x_y.html#abe9b0b387f47f4526b87fcff899f0d9e',1,'PositionXY::x()']]]
 ];

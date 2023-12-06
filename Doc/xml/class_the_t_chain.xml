@@ -1,0 +1,356 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="class_the_t_chain" kind="class" language="C++" prot="public">
+    <compoundname>TheTChain</compoundname>
+    <includes refid="lib_root_8hpp" local="no">libRoot.hpp</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_the_t_chain_1af8623a59ec85b7047e505898a2e1ca28" prot="private" static="no" mutable="no">
+        <type>ULong64_t</type>
+        <definition>ULong64_t TheTChain::m_evt_cursor</definition>
+        <argsstring></argsstring>
+        <name>m_evt_cursor</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/libRoot.hpp" line="354" column="13" bodyfile="lib/libRoot.hpp" bodystart="354" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_the_t_chain_1acdd69c2f1eddd7ff0b8a122336307f00" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; TFile * &gt;</type>
+        <definition>std::vector&lt;TFile*&gt; TheTChain::m_files</definition>
+        <argsstring></argsstring>
+        <name>m_files</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/libRoot.hpp" line="358" column="15" bodyfile="lib/libRoot.hpp" bodystart="358" bodyend="-1"/>
+        <referencedby refid="class_the_t_chain_1aaa019deecc3a6a2fb214862e479e53a4" compoundref="lib_root_8hpp" startline="344" endline="348">newTTree</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_the_t_chain_1adca1e51c2ca4f6d761db269375a4abdf" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; std::string &gt;</type>
+        <definition>std::vector&lt;std::string&gt; TheTChain::m_files_vec</definition>
+        <argsstring></argsstring>
+        <name>m_files_vec</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/libRoot.hpp" line="351" column="15" bodyfile="lib/libRoot.hpp" bodystart="351" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_the_t_chain_1a2b60d00d493c326b7ef6fe9bd7d75395" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; std::string &gt;</type>
+        <definition>std::vector&lt;std::string&gt; TheTChain::m_input_files_expressions</definition>
+        <argsstring></argsstring>
+        <name>m_input_files_expressions</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/libRoot.hpp" line="350" column="15" bodyfile="lib/libRoot.hpp" bodystart="350" bodyend="-1"/>
+        <referencedby refid="class_the_t_chain_1add0a45b5b2328af8a75ebce7bde98f0c" compoundref="lib_root_8hpp" startline="318" endline="321">Add</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_the_t_chain_1a3e18b727fcdca6044244e2bff67cd704" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string TheTChain::m_name</definition>
+        <argsstring></argsstring>
+        <name>m_name</name>
+        <initializer>= &quot;&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/libRoot.hpp" line="340" column="15" bodyfile="lib/libRoot.hpp" bodystart="340" bodyend="-1"/>
+        <referencedby refid="class_the_t_chain_1aaa019deecc3a6a2fb214862e479e53a4" compoundref="lib_root_8hpp" startline="344" endline="348">newTTree</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_the_t_chain_1a86ebdcbf215c3096476090e80d09dbc0" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string TheTChain::m_read_mode</definition>
+        <argsstring></argsstring>
+        <name>m_read_mode</name>
+        <initializer>= &quot;READ&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/libRoot.hpp" line="341" column="15" bodyfile="lib/libRoot.hpp" bodystart="341" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_the_t_chain_1a8038a5652ad04d3daaf506f3d0807639" prot="private" static="no" mutable="no">
+        <type>ULong64_t</type>
+        <definition>ULong64_t TheTChain::m_size</definition>
+        <argsstring></argsstring>
+        <name>m_size</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/libRoot.hpp" line="355" column="13" bodyfile="lib/libRoot.hpp" bodystart="355" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_the_t_chain_1a819ab9dc6c19972b4bd385f771a2e4ba" prot="private" static="no" mutable="no">
+        <type>UInt_t</type>
+        <definition>UInt_t TheTChain::m_tree_cursor</definition>
+        <argsstring></argsstring>
+        <name>m_tree_cursor</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/libRoot.hpp" line="353" column="13" bodyfile="lib/libRoot.hpp" bodystart="353" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_the_t_chain_1a353e40160c351c0049ae964dfd813847" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; TTree * &gt;</type>
+        <definition>std::vector&lt;TTree*&gt; TheTChain::m_trees</definition>
+        <argsstring></argsstring>
+        <name>m_trees</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/libRoot.hpp" line="357" column="15" bodyfile="lib/libRoot.hpp" bodystart="357" bodyend="-1"/>
+        <referencedby refid="class_the_t_chain_1ae1f6295d54f2ce619bdf5e1555cb5243" compoundref="lib_root_8hpp" startline="336" endline="336">begin</referencedby>
+        <referencedby refid="class_the_t_chain_1a950b7bd4cd253b85bc1108ceb573bfd1" compoundref="lib_root_8hpp" startline="337" endline="337">end</referencedby>
+        <referencedby refid="class_the_t_chain_1aaa019deecc3a6a2fb214862e479e53a4" compoundref="lib_root_8hpp" startline="344" endline="348">newTTree</referencedby>
+        <referencedby refid="class_the_t_chain_1a62880bea2d28ba4963a0784845b5bd66" compoundref="lib_root_8hpp" startline="334" endline="334">operator[]</referencedby>
+        <referencedby refid="class_the_t_chain_1a342da75a59ca99b7f56cc76cece2b580" compoundref="lib_root_8hpp" startline="324" endline="324">SetBranchAddress</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_the_t_chain_1add0a45b5b2328af8a75ebce7bde98f0c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void TheTChain::Add</definition>
+        <argsstring>(std::string const &amp;expression)</argsstring>
+        <name>Add</name>
+        <param>
+          <type>std::string const &amp;</type>
+          <declname>expression</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/libRoot.hpp" line="318" column="8" bodyfile="lib/libRoot.hpp" bodystart="318" bodyend="321"/>
+        <references refid="class_the_t_chain_1a2b60d00d493c326b7ef6fe9bd7d75395" compoundref="lib_root_8hpp" startline="350">m_input_files_expressions</references>
+        <referencedby refid="class_the_t_chain_1abca9ad5e5cd894098e39660de91a3b36" compoundref="lib_root_8hpp" startline="312" endline="315">TheTChain</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_the_t_chain_1ae1f6295d54f2ce619bdf5e1555cb5243" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto TheTChain::begin</definition>
+        <argsstring>()</argsstring>
+        <name>begin</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/libRoot.hpp" line="336" column="8" bodyfile="lib/libRoot.hpp" bodystart="336" bodyend="336"/>
+        <references refid="class_the_t_chain_1a353e40160c351c0049ae964dfd813847" compoundref="lib_root_8hpp" startline="357">m_trees</references>
+      </memberdef>
+      <memberdef kind="function" id="class_the_t_chain_1a950b7bd4cd253b85bc1108ceb573bfd1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto TheTChain::end</definition>
+        <argsstring>()</argsstring>
+        <name>end</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/libRoot.hpp" line="337" column="8" bodyfile="lib/libRoot.hpp" bodystart="337" bodyend="337"/>
+        <references refid="class_the_t_chain_1a353e40160c351c0049ae964dfd813847" compoundref="lib_root_8hpp" startline="357">m_trees</references>
+      </memberdef>
+      <memberdef kind="function" id="class_the_t_chain_1a62880bea2d28ba4963a0784845b5bd66" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>TTree *</type>
+        <definition>TTree* TheTChain::operator[]</definition>
+        <argsstring>(int const &amp;i)</argsstring>
+        <name>operator[]</name>
+        <param>
+          <type>int const &amp;</type>
+          <declname>i</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/libRoot.hpp" line="334" column="9" bodyfile="lib/libRoot.hpp" bodystart="334" bodyend="334"/>
+        <references refid="class_the_t_chain_1a353e40160c351c0049ae964dfd813847" compoundref="lib_root_8hpp" startline="357">m_trees</references>
+      </memberdef>
+      <memberdef kind="function" id="class_the_t_chain_1a5e7c32ab56c040e9fac734db6eb7d6e6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool TheTChain::read</definition>
+        <argsstring>()</argsstring>
+        <name>read</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/libRoot.hpp" line="332" column="8" bodyfile="lib/libRoot.hpp" bodystart="332" bodyend="332"/>
+      </memberdef>
+      <memberdef kind="function" id="class_the_t_chain_1a0858c536e02a0459fd2e101936fe923f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void TheTChain::set</definition>
+        <argsstring>()</argsstring>
+        <name>set</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/libRoot.hpp" line="331" column="8" bodyfile="lib/libRoot.hpp" bodystart="361" bodyend="374"/>
+      </memberdef>
+      <memberdef kind="function" id="class_the_t_chain_1a342da75a59ca99b7f56cc76cece2b580" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class...</type>
+            <declname>ARGS</declname>
+            <defname>ARGS</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void TheTChain::SetBranchAddress</definition>
+        <argsstring>(ARGS &amp;&amp;... args)</argsstring>
+        <name>SetBranchAddress</name>
+        <param>
+          <type>ARGS &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/libRoot.hpp" line="324" column="8" bodyfile="lib/libRoot.hpp" bodystart="324" bodyend="324"/>
+        <references refid="class_the_t_chain_1a353e40160c351c0049ae964dfd813847" compoundref="lib_root_8hpp" startline="357">m_trees</references>
+        <references refid="class_the_t_chain_1a342da75a59ca99b7f56cc76cece2b580" compoundref="lib_root_8hpp" startline="324" endline="324">SetBranchAddress</references>
+        <referencedby refid="class_the_t_chain_1a342da75a59ca99b7f56cc76cece2b580" compoundref="lib_root_8hpp" startline="324" endline="324">SetBranchAddress</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_the_t_chain_1abca9ad5e5cd894098e39660de91a3b36" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>TheTChain::TheTChain</definition>
+        <argsstring>(std::string const &amp;name, std::string const &amp;expression=&quot;&quot;, std::string const &amp;readMode=&quot;READ&quot;)</argsstring>
+        <name>TheTChain</name>
+        <param>
+          <type>std::string const &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>std::string const &amp;</type>
+          <declname>expression</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <param>
+          <type>std::string const &amp;</type>
+          <declname>readMode</declname>
+          <defval>&quot;READ&quot;</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/libRoot.hpp" line="312" column="3" bodyfile="lib/libRoot.hpp" bodystart="312" bodyend="315"/>
+        <references refid="class_the_t_chain_1add0a45b5b2328af8a75ebce7bde98f0c" compoundref="lib_root_8hpp" startline="318" endline="321">Add</references>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="class_the_t_chain_1aaa019deecc3a6a2fb214862e479e53a4" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void TheTChain::newTTree</definition>
+        <argsstring>(std::string const &amp;fileName)</argsstring>
+        <name>newTTree</name>
+        <param>
+          <type>std::string const &amp;</type>
+          <declname>fileName</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/libRoot.hpp" line="344" column="8" bodyfile="lib/libRoot.hpp" bodystart="344" bodyend="348"/>
+        <references refid="class_the_t_chain_1acdd69c2f1eddd7ff0b8a122336307f00" compoundref="lib_root_8hpp" startline="358">m_files</references>
+        <references refid="class_the_t_chain_1a3e18b727fcdca6044244e2bff67cd704" compoundref="lib_root_8hpp" startline="340">m_name</references>
+        <references refid="class_the_t_chain_1a353e40160c351c0049ae964dfd813847" compoundref="lib_root_8hpp" startline="357">m_trees</references>
+      </memberdef>
+      <memberdef kind="function" id="class_the_t_chain_1a0eaf5f8f574cfea07a4e2d1edac3e563" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void TheTChain::set</definition>
+        <argsstring>(std::string const &amp;expression)</argsstring>
+        <name>set</name>
+        <param>
+          <type>std::string const &amp;</type>
+          <declname>expression</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/libRoot.hpp" line="343" column="8"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Not functionnal yet. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>1: Add all the files <ref refid="class_the_t_chain" kindref="compound">TheTChain</ref> chain(&quot;Nuball&quot;, &quot;/path/to/data/files*.root&quot;); chain.Add(&quot;/other_path/to/data/files*.root&quot;)</para>
+<para>2: Setup the chain : chain.set();</para>
+<para>3: Links all the variables chain.SetBranchAddress(&quot;branch&quot;, &amp;variable); </para>
+    </detaileddescription>
+    <location file="lib/libRoot.hpp" line="309" column="1" bodyfile="lib/libRoot.hpp" bodystart="310" bodyend="359"/>
+    <listofallmembers>
+      <member refid="class_the_t_chain_1add0a45b5b2328af8a75ebce7bde98f0c" prot="public" virt="non-virtual"><scope>TheTChain</scope><name>Add</name></member>
+      <member refid="class_the_t_chain_1ae1f6295d54f2ce619bdf5e1555cb5243" prot="public" virt="non-virtual"><scope>TheTChain</scope><name>begin</name></member>
+      <member refid="class_the_t_chain_1a950b7bd4cd253b85bc1108ceb573bfd1" prot="public" virt="non-virtual"><scope>TheTChain</scope><name>end</name></member>
+      <member refid="class_the_t_chain_1af8623a59ec85b7047e505898a2e1ca28" prot="private" virt="non-virtual"><scope>TheTChain</scope><name>m_evt_cursor</name></member>
+      <member refid="class_the_t_chain_1acdd69c2f1eddd7ff0b8a122336307f00" prot="private" virt="non-virtual"><scope>TheTChain</scope><name>m_files</name></member>
+      <member refid="class_the_t_chain_1adca1e51c2ca4f6d761db269375a4abdf" prot="private" virt="non-virtual"><scope>TheTChain</scope><name>m_files_vec</name></member>
+      <member refid="class_the_t_chain_1a2b60d00d493c326b7ef6fe9bd7d75395" prot="private" virt="non-virtual"><scope>TheTChain</scope><name>m_input_files_expressions</name></member>
+      <member refid="class_the_t_chain_1a3e18b727fcdca6044244e2bff67cd704" prot="private" virt="non-virtual"><scope>TheTChain</scope><name>m_name</name></member>
+      <member refid="class_the_t_chain_1a86ebdcbf215c3096476090e80d09dbc0" prot="private" virt="non-virtual"><scope>TheTChain</scope><name>m_read_mode</name></member>
+      <member refid="class_the_t_chain_1a8038a5652ad04d3daaf506f3d0807639" prot="private" virt="non-virtual"><scope>TheTChain</scope><name>m_size</name></member>
+      <member refid="class_the_t_chain_1a819ab9dc6c19972b4bd385f771a2e4ba" prot="private" virt="non-virtual"><scope>TheTChain</scope><name>m_tree_cursor</name></member>
+      <member refid="class_the_t_chain_1a353e40160c351c0049ae964dfd813847" prot="private" virt="non-virtual"><scope>TheTChain</scope><name>m_trees</name></member>
+      <member refid="class_the_t_chain_1aaa019deecc3a6a2fb214862e479e53a4" prot="private" virt="non-virtual"><scope>TheTChain</scope><name>newTTree</name></member>
+      <member refid="class_the_t_chain_1a62880bea2d28ba4963a0784845b5bd66" prot="public" virt="non-virtual"><scope>TheTChain</scope><name>operator[]</name></member>
+      <member refid="class_the_t_chain_1a5e7c32ab56c040e9fac734db6eb7d6e6" prot="public" virt="non-virtual"><scope>TheTChain</scope><name>read</name></member>
+      <member refid="class_the_t_chain_1a0858c536e02a0459fd2e101936fe923f" prot="public" virt="non-virtual"><scope>TheTChain</scope><name>set</name></member>
+      <member refid="class_the_t_chain_1a0eaf5f8f574cfea07a4e2d1edac3e563" prot="private" virt="non-virtual"><scope>TheTChain</scope><name>set</name></member>
+      <member refid="class_the_t_chain_1a342da75a59ca99b7f56cc76cece2b580" prot="public" virt="non-virtual"><scope>TheTChain</scope><name>SetBranchAddress</name></member>
+      <member refid="class_the_t_chain_1abca9ad5e5cd894098e39660de91a3b36" prot="public" virt="non-virtual"><scope>TheTChain</scope><name>TheTChain</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

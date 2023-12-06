@@ -1,0 +1,208 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="_reader_manager_8hpp" kind="file" language="C++">
+    <compoundname>ReaderManager.hpp</compoundname>
+    <includes local="yes">DataMultiReader.h</includes>
+    <includes local="no">dirent.h</includes>
+    <includes local="no">stdio.h</includes>
+    <includes local="no">stdlib.h</includes>
+    <incdepgraph>
+      <node id="5">
+        <label>stdlib.h</label>
+      </node>
+      <node id="1">
+        <label>lib/Classes/ReaderManager.hpp</label>
+        <link refid="_reader_manager_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>DataMultiReader.h</label>
+      </node>
+      <node id="4">
+        <label>stdio.h</label>
+      </node>
+      <node id="3">
+        <label>dirent.h</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="class_reader_manager" prot="public">ReaderManager</innerclass>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="_reader_manager_8hpp_1a60d0931dc6c9bc5b0c252405badd4f97" prot="public" static="no">
+        <type>std::vector&lt; <ref refid="class_hit" kindref="compound">Hit</ref> &gt;</type>
+        <definition>typedef std::vector&lt;Hit&gt; Buffer</definition>
+        <argsstring></argsstring>
+        <name>Buffer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/ReaderManager.hpp" line="10" column="22" bodyfile="lib/Classes/ReaderManager.hpp" bodystart="10" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="_reader_manager_8hpp_1a72f0af09a1480bc3893638955d9c98c8" prot="public" static="no">
+        <type>std::vector&lt; std::string &gt;</type>
+        <definition>typedef std::vector&lt;std::string&gt; Listfiles</definition>
+        <argsstring></argsstring>
+        <name>Listfiles</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/ReaderManager.hpp" line="11" column="21" bodyfile="lib/Classes/ReaderManager.hpp" bodystart="11" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>DATAMULTIREADERMANAGER_H_CO</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>DATAMULTIREADERMANAGER_H_CO</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;DataMultiReader.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="comment">//<sp/>**********<sp/>C<sp/>includes<sp/>************<sp/>//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;dirent.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdio.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdlib.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10" refid="_reader_manager_8hpp_1a60d0931dc6c9bc5b0c252405badd4f97" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/>std::vector<sp/>&lt;Hit&gt;<sp/><ref refid="_reader_manager_8hpp_1a60d0931dc6c9bc5b0c252405badd4f97" kindref="member">Buffer</ref>;</highlight></codeline>
+<codeline lineno="11" refid="_reader_manager_8hpp_1a72f0af09a1480bc3893638955d9c98c8" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/>std::vector&lt;std::string&gt;<sp/><ref refid="_reader_manager_8hpp_1a72f0af09a1480bc3893638955d9c98c8" kindref="member">Listfiles</ref>;</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight></codeline>
+<codeline lineno="13" refid="class_reader_manager" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_reader_manager" kindref="compound">ReaderManager</ref></highlight></codeline>
+<codeline lineno="14"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><ref refid="class_reader_manager_1ae71e730251d5df9b7961528ccea89063" kindref="member">ReaderManager</ref>();</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//Files<sp/>managing</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/>Bool_t<sp/><ref refid="class_reader_manager_1aad6665518797c9242861b43adcd385ef" kindref="member">addFiles</ref><sp/><sp/><sp/>(std::string<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>_filename<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>);</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/>Bool_t<sp/><ref refid="class_reader_manager_1af440d75101cf18d9c7c1515d4c383fa3" kindref="member">addFolder</ref><sp/><sp/>(std::string<sp/>folder,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>nb_files<sp/>=<sp/>-1);</highlight></codeline>
+<codeline lineno="21" refid="class_reader_manager_1aadfc7936950137fe1b5d0b9c74cb1012" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><sp/><sp/><ref refid="class_reader_manager_1aadfc7936950137fe1b5d0b9c74cb1012" kindref="member">flushFiles</ref><sp/>();</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><sp/><sp/><ref refid="class_reader_manager_1aa81218f7a2f8326829c7ccbe3c063ed4" kindref="member">printFiles</ref><sp/>();</highlight></codeline>
+<codeline lineno="23" refid="class_reader_manager_1a94447555428202ac9a69f03fa7a3234a" refkind="member"><highlight class="normal"><sp/><sp/>Int_t<sp/><sp/><ref refid="class_reader_manager_1a94447555428202ac9a69f03fa7a3234a" kindref="member">nbFiles</ref><sp/><sp/><sp/><sp/>(){</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_reader_manager_1a3f547eb400eed21e8c9c38b6a46676a7" kindref="member">m_listFiles</ref>.size();};</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//Multi-reader<sp/>managing</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/>Bool_t<sp/><ref refid="class_reader_manager_1a6267f9d377253e2cc551374dd932922c" kindref="member">readNextFile</ref>();</highlight></codeline>
+<codeline lineno="27" refid="class_reader_manager_1a34cb214c8d458a6b587d74bdd09ebd23" refkind="member"><highlight class="normal"><sp/><sp/>Bool_t<sp/><ref refid="class_reader_manager_1a34cb214c8d458a6b587d74bdd09ebd23" kindref="member">readNextHit</ref>()<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>(<ref refid="class_reader_manager_1a7beaa51448bccfc99b6a69e3bb22620f" kindref="member">m_Reader</ref>.Read())<sp/>;};</highlight></codeline>
+<codeline lineno="28" refid="class_reader_manager_1a060b24131c566c6b12e59e1f6adabd0b" refkind="member"><highlight class="normal"><sp/><sp/>Bool_t<sp/><ref refid="class_reader_manager_1a060b24131c566c6b12e59e1f6adabd0b" kindref="member">readNextHit</ref>(<ref refid="class_hit" kindref="compound">Hit</ref><sp/>&amp;<sp/>_hit)<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>(<ref refid="class_reader_manager_1a7beaa51448bccfc99b6a69e3bb22620f" kindref="member">m_Reader</ref>.Read(_hit))<sp/>;};</highlight></codeline>
+<codeline lineno="29" refid="class_reader_manager_1ae9840b193568c6cdbb9fe5848f5d5e62" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="class_hit" kindref="compound">Hit</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/><ref refid="class_reader_manager_1ae9840b193568c6cdbb9fe5848f5d5e62" kindref="member">getHit</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_reader_manager_1a7beaa51448bccfc99b6a69e3bb22620f" kindref="member">m_Reader</ref>.getHit()<sp/>;};</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/>Bool_t<sp/><ref refid="class_reader_manager_1af4d1e8412d5bcc1c7284be452ffb38ba" kindref="member">setReader</ref>(std::string<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>_filename);</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/>Bool_t<sp/><ref refid="class_reader_manager_1af4d1e8412d5bcc1c7284be452ffb38ba" kindref="member">setReader</ref>(Int_t<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>_filecursor);</highlight></codeline>
+<codeline lineno="34" refid="class_reader_manager_1ac78e1c638eb6a7f87db35aa431a70ac5" refkind="member"><highlight class="normal"><sp/><sp/>Int_t<sp/><ref refid="class_reader_manager_1ac78e1c638eb6a7f87db35aa431a70ac5" kindref="member">m_filesCursor</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="35" refid="class_reader_manager_1a67976d958e239b90ed8263811975d29e" refkind="member"><highlight class="normal"><sp/><sp/>std::string<sp/><ref refid="class_reader_manager_1a67976d958e239b90ed8263811975d29e" kindref="member">m_currentFile</ref><sp/>=<sp/></highlight><highlight class="stringliteral">&quot;&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="36" refid="class_reader_manager_1a3f547eb400eed21e8c9c38b6a46676a7" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="_reader_manager_8hpp_1a72f0af09a1480bc3893638955d9c98c8" kindref="member">Listfiles</ref><sp/><ref refid="class_reader_manager_1a3f547eb400eed21e8c9c38b6a46676a7" kindref="member">m_listFiles</ref>;</highlight></codeline>
+<codeline lineno="37" refid="class_reader_manager_1a7beaa51448bccfc99b6a69e3bb22620f" refkind="member"><highlight class="normal"><sp/><sp/>DataMultiReader<sp/><ref refid="class_reader_manager_1a7beaa51448bccfc99b6a69e3bb22620f" kindref="member">m_Reader</ref>;</highlight></codeline>
+<codeline lineno="38"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight></codeline>
+<codeline lineno="40" refid="class_reader_manager_1ae71e730251d5df9b7961528ccea89063" refkind="member"><highlight class="normal"><ref refid="class_reader_manager_1ae71e730251d5df9b7961528ccea89063" kindref="member">ReaderManager::ReaderManager</ref>()</highlight></codeline>
+<codeline lineno="41"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight></codeline>
+<codeline lineno="45" refid="class_reader_manager_1a6267f9d377253e2cc551374dd932922c" refkind="member"><highlight class="normal">Bool_t<sp/><ref refid="class_reader_manager_1a6267f9d377253e2cc551374dd932922c" kindref="member">ReaderManager::readNextFile</ref>()</highlight></codeline>
+<codeline lineno="46"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(<ref refid="class_reader_manager_1ac78e1c638eb6a7f87db35aa431a70ac5" kindref="member">m_filesCursor</ref>+1&gt;<ref refid="class_reader_manager_1a3f547eb400eed21e8c9c38b6a46676a7" kindref="member">m_listFiles</ref>.size())<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><ref refid="class_reader_manager_1a67976d958e239b90ed8263811975d29e" kindref="member">m_currentFile</ref><sp/>=<sp/><ref refid="class_reader_manager_1a3f547eb400eed21e8c9c38b6a46676a7" kindref="member">m_listFiles</ref>.at(<ref refid="class_reader_manager_1ac78e1c638eb6a7f87db35aa431a70ac5" kindref="member">m_filesCursor</ref>);</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/>Bool_t<sp/>is_file<sp/>=<sp/><ref refid="class_reader_manager_1a7beaa51448bccfc99b6a69e3bb22620f" kindref="member">m_Reader</ref>.Initialize(<ref refid="class_reader_manager_1a67976d958e239b90ed8263811975d29e" kindref="member">m_currentFile</ref>);</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><ref refid="class_reader_manager_1ac78e1c638eb6a7f87db35aa431a70ac5" kindref="member">m_filesCursor</ref>++;</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!is_file)<sp/><ref refid="class_reader_manager_1ac78e1c638eb6a7f87db35aa431a70ac5" kindref="member">m_filesCursor</ref><sp/>=<sp/>0;</highlight><highlight class="comment">//<sp/>Place<sp/>the<sp/>file<sp/>cursor<sp/>back<sp/>to<sp/>0,<sp/>ready<sp/>to<sp/>read<sp/>again<sp/>from<sp/>the<sp/>first<sp/>file</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>is_file;</highlight></codeline>
+<codeline lineno="53"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight></codeline>
+<codeline lineno="55" refid="class_reader_manager_1af4d1e8412d5bcc1c7284be452ffb38ba" refkind="member"><highlight class="normal">Bool_t<sp/><ref refid="class_reader_manager_1af4d1e8412d5bcc1c7284be452ffb38ba" kindref="member">ReaderManager::setReader</ref>(std::string<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>_filename)</highlight></codeline>
+<codeline lineno="56"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><ref refid="class_reader_manager_1a67976d958e239b90ed8263811975d29e" kindref="member">m_currentFile</ref><sp/>=<sp/>_filename;</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><sp/><ref refid="class_reader_manager_1a7beaa51448bccfc99b6a69e3bb22620f" kindref="member">m_Reader</ref>.Initialize(_filename);</highlight></codeline>
+<codeline lineno="59"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight></codeline>
+<codeline lineno="61" refid="class_reader_manager_1ae516880cb56ca96465b57e7893deab86" refkind="member"><highlight class="normal">Bool_t<sp/><ref refid="class_reader_manager_1af4d1e8412d5bcc1c7284be452ffb38ba" kindref="member">ReaderManager::setReader</ref>(Int_t<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>_filecursor)</highlight></codeline>
+<codeline lineno="62"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><ref refid="class_reader_manager_1a67976d958e239b90ed8263811975d29e" kindref="member">m_currentFile</ref><sp/>=<sp/><ref refid="class_reader_manager_1a3f547eb400eed21e8c9c38b6a46676a7" kindref="member">m_listFiles</ref>[_filecursor];</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_reader_manager_1a7beaa51448bccfc99b6a69e3bb22620f" kindref="member">m_Reader</ref>.Initialize(<ref refid="class_reader_manager_1a67976d958e239b90ed8263811975d29e" kindref="member">m_currentFile</ref>);</highlight></codeline>
+<codeline lineno="65"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight></codeline>
+<codeline lineno="67" refid="class_reader_manager_1aad6665518797c9242861b43adcd385ef" refkind="member"><highlight class="normal">Bool_t<sp/><ref refid="class_reader_manager_1aad6665518797c9242861b43adcd385ef" kindref="member">ReaderManager::addFiles</ref>(std::string<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>_filename)</highlight></codeline>
+<codeline lineno="68"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/>UInt_t<sp/>numberFiles<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="files__functions_8hpp_1a321abbd0681c4da012deaf49122389c5" kindref="member">extension</ref>(_filename)<sp/>==<sp/></highlight><highlight class="stringliteral">&quot;dat&quot;</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/>{</highlight><highlight class="comment">//<sp/>using<sp/>the<sp/>&quot;data&quot;<sp/>file<sp/>as<sp/>an<sp/>input<sp/>containing<sp/>the<sp/>path<sp/>to<sp/>the<sp/>actual<sp/>data<sp/>.root<sp/>or<sp/>.fast<sp/>files</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/>std::ifstream<sp/>inputsFile<sp/>(_filename);</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!inputsFile.is_open()<sp/>||<sp/>!inputsFile.good())</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;Impossible<sp/>to<sp/>open<sp/>or<sp/>read<sp/>dat<sp/>file<sp/>&apos;&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>_filename<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;&apos;&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>std::endl;</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/>std::string<sp/>oneline;</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal">(inputsFile.good())</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>getline(inputsFile,<sp/>oneline);</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(<sp/>oneline.size()<sp/>&gt;<sp/>1<sp/><sp/>&amp;&amp;<sp/><sp/>(<ref refid="files__functions_8hpp_1a321abbd0681c4da012deaf49122389c5" kindref="member">extension</ref>(oneline)<sp/>==<sp/></highlight><highlight class="stringliteral">&quot;root&quot;</highlight><highlight class="normal"><sp/>||<sp/><ref refid="files__functions_8hpp_1a321abbd0681c4da012deaf49122389c5" kindref="member">extension</ref>(oneline)<sp/>==<sp/></highlight><highlight class="stringliteral">&quot;fast&quot;</highlight><highlight class="normal">))</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_reader_manager_1a3f547eb400eed21e8c9c38b6a46676a7" kindref="member">m_listFiles</ref>.push_back(oneline);</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>numberFiles++;</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/>inputsFile.close();</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="files__functions_8hpp_1a321abbd0681c4da012deaf49122389c5" kindref="member">extension</ref>(_filename)<sp/>==<sp/></highlight><highlight class="stringliteral">&quot;root&quot;</highlight><highlight class="normal"><sp/>||<sp/><ref refid="files__functions_8hpp_1a321abbd0681c4da012deaf49122389c5" kindref="member">extension</ref>(_filename)<sp/>==<sp/></highlight><highlight class="stringliteral">&quot;fast&quot;</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/>{</highlight><highlight class="comment">//<sp/>there<sp/>is<sp/>only<sp/>one<sp/>.root<sp/>or<sp/>.fast<sp/>file</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_reader_manager_1a3f547eb400eed21e8c9c38b6a46676a7" kindref="member">m_listFiles</ref>.push_back(_filename);</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/>numberFiles<sp/>=<sp/>1;</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{std::cout<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;File<sp/>&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>_filename<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;not<sp/>taken<sp/>into<sp/>account.<sp/>Extension&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/><ref refid="files__functions_8hpp_1a321abbd0681c4da012deaf49122389c5" kindref="member">extension</ref>(_filename)</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;unkown...&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>std::endl<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;Abort...&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>std::endl;</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;}</highlight></codeline>
+<codeline lineno="99"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"></highlight></codeline>
+<codeline lineno="101" refid="class_reader_manager_1af440d75101cf18d9c7c1515d4c383fa3" refkind="member"><highlight class="normal">Bool_t<sp/><ref refid="class_reader_manager_1af440d75101cf18d9c7c1515d4c383fa3" kindref="member">ReaderManager::addFolder</ref>(std::string<sp/>_foldername,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>_nb_files)</highlight></codeline>
+<codeline lineno="102"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(_foldername.back()<sp/>!=<sp/></highlight><highlight class="charliteral">&apos;/&apos;</highlight><highlight class="normal">)<sp/>_foldername.push_back(</highlight><highlight class="charliteral">&apos;/&apos;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">dirent<sp/>*file<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/>DIR<sp/>*dp<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/>dp<sp/>=<sp/>opendir(_foldername.c_str());</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(dp<sp/>==<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">)<sp/>{std::cout<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;Folder<sp/>&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>_foldername<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;<sp/>not<sp/>found...&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>std::endl;<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;}</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/>std::string<sp/>name<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><ref refid="_reader_manager_8hpp_1a72f0af09a1480bc3893638955d9c98c8" kindref="member">Listfiles</ref><sp/>listfile;</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal"><sp/>(<sp/>(file<sp/>=<sp/>readdir(dp)))</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/>name<sp/>=<sp/>file-&gt;d_name;</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="files__functions_8hpp_1a321abbd0681c4da012deaf49122389c5" kindref="member">extension</ref>(name)<sp/>==<sp/></highlight><highlight class="stringliteral">&quot;root&quot;</highlight><highlight class="normal"><sp/>||<sp/><ref refid="files__functions_8hpp_1a321abbd0681c4da012deaf49122389c5" kindref="member">extension</ref>(name)<sp/>==<sp/></highlight><highlight class="stringliteral">&quot;fast&quot;</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>listfile.push_back(_foldername+name);</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/>closedir(dp);</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal"><sp/>file;</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(listfile.size()<sp/>&gt;<sp/>0)</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/>std::sort(listfile.begin(),<sp/>listfile.end());</highlight><highlight class="comment">//<sp/>Sorts<sp/>the<sp/>entries</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_reader_manager_8hpp_1a72f0af09a1480bc3893638955d9c98c8" kindref="member">Listfiles</ref><sp/>cut_listfile<sp/>(listfile.begin(),<sp/>listfile.begin()+_nb_files);</highlight><highlight class="comment">//<sp/>Take<sp/>the<sp/>nb_files<sp/>first<sp/>files</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="class_reader_manager_1a3f547eb400eed21e8c9c38b6a46676a7" kindref="member">m_listFiles</ref>.size()<sp/>==<sp/>0)<sp/><ref refid="class_reader_manager_1a3f547eb400eed21e8c9c38b6a46676a7" kindref="member">m_listFiles</ref><sp/>=<sp/>cut_listfile;</highlight><highlight class="comment">//<sp/>Set<sp/>cut_listfile<sp/>to<sp/>be<sp/>the<sp/>global<sp/>list<sp/>of<sp/>files</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>std::copy(<ref refid="class_reader_manager_1a3f547eb400eed21e8c9c38b6a46676a7" kindref="member">m_listFiles</ref>.begin(),<sp/><ref refid="class_reader_manager_1a3f547eb400eed21e8c9c38b6a46676a7" kindref="member">m_listFiles</ref>.end(),<sp/>std::back_inserter(cut_listfile));</highlight><highlight class="comment">//<sp/>Add<sp/>cut_listfile<sp/>to<sp/>the<sp/>global<sp/>list<sp/>of<sp/>files</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="130"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"></highlight></codeline>
+<codeline lineno="132" refid="class_reader_manager_1aa81218f7a2f8326829c7ccbe3c063ed4" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_reader_manager_1aa81218f7a2f8326829c7ccbe3c063ed4" kindref="member">ReaderManager::printFiles</ref>()</highlight></codeline>
+<codeline lineno="133"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>file<sp/>:<sp/><ref refid="class_reader_manager_1a3f547eb400eed21e8c9c38b6a46676a7" kindref="member">m_listFiles</ref>)<sp/>std::cout<sp/>&lt;&lt;<sp/>file<sp/>&lt;&lt;<sp/>std::endl;</highlight></codeline>
+<codeline lineno="135"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+    </programlisting>
+    <location file="lib/Classes/ReaderManager.hpp"/>
+  </compounddef>
+</doxygen>

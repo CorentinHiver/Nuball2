@@ -1,0 +1,128 @@
+.TH "Alignator" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Alignator
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <Alignator\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBAlignator\fP (TTree *inputTree, TTree *outputTree)"
+.br
+.RI "DEV\&. "
+.ti -1c
+.RI "\fBAlignator\fP (TTree *tree)"
+.br
+.ti -1c
+.RI "auto \fBbegin\fP ()"
+.br
+.ti -1c
+.RI "auto const  & \fBcursor\fP () const"
+.br
+.ti -1c
+.RI "auto \fBend\fP ()"
+.br
+.ti -1c
+.RI "auto \fBGetEntry\fP (int i)"
+.br
+.ti -1c
+.RI "auto \fBgetTree\fP ()"
+.br
+.ti -1c
+.RI "auto const  & \fBnext\fP ()"
+.br
+.ti -1c
+.RI "auto \fBoperator\->\fP ()"
+.br
+.ti -1c
+.RI "auto const  & \fBoperator[]\fP (int const &i) const"
+.br
+.ti -1c
+.RI "void \fBreset\fP ()"
+.br
+.in -1c
+.SS "Private Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBalign\fP ()"
+.br
+.RI "TBD\&. "
+.ti -1c
+.RI "void \fBloadNewIndex\fP ()"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "ULong64_t \fBm_cursor\fP = 0"
+.br
+.ti -1c
+.RI "std::vector< int > \fBm_index\fP"
+.br
+.ti -1c
+.RI "ULong64_t \fBm_nb_data\fP = 0"
+.br
+.ti -1c
+.RI "TTree * \fBm_out_tree\fP"
+.br
+.ti -1c
+.RI "TTree * \fBm_tree\fP"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "Alignator::Alignator (TTree * tree)\fC [inline]\fP"
+
+.SS "Alignator::Alignator (TTree * inputTree, TTree * outputTree)\fC [inline]\fP"
+
+.PP
+DEV\&. 
+.SH "Member Function Documentation"
+.PP 
+.SS "void Alignator::align ()\fC [private]\fP"
+
+.PP
+TBD\&. L'objectif c'est de faire une méthode pour aligner en temps un root tree automatiquement\&. Pour ça par contre, il faut une méthode qui lise automatiquement le contenu du fichier root et connecte l'event correctement 
+.SS "auto Alignator::begin ()\fC [inline]\fP"
+
+.SS "auto const& Alignator::cursor () const\fC [inline]\fP"
+
+.SS "auto Alignator::end ()\fC [inline]\fP"
+
+.SS "auto Alignator::GetEntry (int i)\fC [inline]\fP"
+
+.SS "auto Alignator::getTree ()\fC [inline]\fP"
+
+.SS "void Alignator::loadNewIndex ()\fC [private]\fP"
+
+.SS "auto const& Alignator::next ()\fC [inline]\fP"
+
+.SS "auto Alignator::operator\-> ()\fC [inline]\fP"
+
+.SS "auto const& Alignator::operator[] (int const & i) const\fC [inline]\fP"
+
+.SS "void Alignator::reset ()\fC [inline]\fP"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "ULong64_t Alignator::m_cursor = 0\fC [private]\fP"
+
+.SS "std::vector<int> Alignator::m_index\fC [private]\fP"
+
+.SS "ULong64_t Alignator::m_nb_data = 0\fC [private]\fP"
+
+.SS "TTree* Alignator::m_out_tree\fC [private]\fP"
+
+.SS "TTree* Alignator::m_tree\fC [private]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Nuball2 from the source code\&.

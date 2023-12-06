@@ -261,6 +261,8 @@ inline bool find_value(std::unordered_map<K,V> const & map, V const & value)
 //    MAPS FUNCTIONS   //
 /////////////////////////
 
+/// @brief Returns yes if the key is found in the map
+/// @details This method is only looking in the keys, not in the values
 template<typename K, typename V> 
 inline bool find_key(std::map<K,V> const & map, K const & key)
 {
@@ -268,6 +270,8 @@ inline bool find_key(std::map<K,V> const & map, K const & key)
   return it != map.end();
 }
 
+/// @brief Returns yes if the value is found in the map
+/// @details This method is only looking in the values, not in the keys
 template<typename K, typename V> 
 inline bool find_value(std::map<K,V> const & map, V const & value)
 {
@@ -276,6 +280,8 @@ inline bool find_value(std::map<K,V> const & map, V const & value)
     }));
 }
 
+/// @brief Returns the element with the maximum value
+/// @details This method is only comparing values, not keys
 template<typename K, typename V> 
 inline std::pair<K,V> get_max_element(std::map<K,V> const & map) 
 {
@@ -285,6 +291,8 @@ inline std::pair<K,V> get_max_element(std::map<K,V> const & map)
   }); 
 }
 
+/// @brief Returns the maximum value stored in the map
+/// @details This method is only lookinf for values, not keys
 template<typename K, typename V> 
 inline V get_max_value(std::map<K,V> const & map) 
 {
@@ -294,6 +302,8 @@ inline V get_max_value(std::map<K,V> const & map)
   })->second); 
 }
 
+/// @brief Returns the maximum key stored in the map
+/// @details This method is only looking for values, not keys
 template<typename K, typename V> 
 inline K get_max_key(std::map<K,V> const & map) 
 {
@@ -329,6 +339,23 @@ inline K get_min_key(std::map<K,V> const & map)
         return p1.first > p2.first;
   })->first); 
 }
+
+//////////////////////////////////
+// Strings and vectors together //
+//////////////////////////////////
+
+
+// /// @brief Concatenate any type or class that can be turned into a string
+// template<class... T>
+// std::string concatenate(T... input)
+// {
+//   std::vector<std::string> all_strings;
+//   all_strings.push_back(std::to_string(input)...);
+//   std::string ret;
+//   for (auto const & string : all_strings) ret+=string;
+//   return ret;
+// }
+
 
 /////////////////////////////
 //    TEMPLATE HANDELING   //

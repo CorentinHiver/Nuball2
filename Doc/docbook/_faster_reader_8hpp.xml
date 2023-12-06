@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__faster_reader_8hpp" xml:lang="en-US">
+<title>lib/Classes/FasterReader.hpp File Reference</title>
+<indexterm><primary>lib/Classes/FasterReader.hpp</primary></indexterm>
+<programlisting>#include &quot;Hit.hpp&quot;
+#include &quot;fasterac/adc.h&quot;
+#include &quot;fasterac/group.h&quot;
+#include &quot;fasterac/qdc.h&quot;
+#include &quot;fasterac/rf.h&quot;
+#include &quot;fasterac/utils.h&quot;
+</programlisting>Include dependency graph for FasterReader.hpp:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="_faster_reader_8hpp__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+This graph shows which files directly or indirectly include this file:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="_faster_reader_8hpp__dep__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>class <link linkend="_class_faster_reader">FasterReader</link></para>
+
+<para>Class used to read .fast files. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>

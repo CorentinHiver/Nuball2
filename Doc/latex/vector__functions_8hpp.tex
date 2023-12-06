@@ -1,0 +1,184 @@
+\doxysection{lib/vector\+\_\+functions.hpp File Reference}
+\label{vector__functions_8hpp}\index{lib/vector\_functions.hpp@{lib/vector\_functions.hpp}}
+{\ttfamily \#include \char`\"{}print.\+hpp\char`\"{}}\newline
+Include dependency graph for vector\+\_\+functions.\+hpp\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=214pt]{vector__functions_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{vector__functions_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \textbf{ Static\+Vector$<$ T $>$}
+\begin{DoxyCompactList}\small\item\em An efficient container for dynamic arrays with a known and fixed maximum size. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T $>$ }\\std\+::vector$<$ int $>$ \textbf{ bubble\+Sort} (std\+::vector$<$ T $>$ const \&vector)
+\item 
+{\footnotesize template$<$typename T $>$ }\\std\+::vector$<$ int $>$ \textbf{ bubble\+Sort} (std\+::vector$<$ T $>$ const \&vector, std\+::vector$<$ int $>$ \&indexes)
+\item 
+{\footnotesize template$<$class T $>$ }\\void \textbf{ fill2D} (std\+::vector$<$ std\+::vector$<$ T $>$$>$ \&vec2, \textbf{ size\+\_\+t} const \&size\+\_\+x, \textbf{ size\+\_\+t} const \&size\+\_\+y, T const \&obj)
+\item 
+{\footnotesize template$<$typename T $>$ }\\bool \textbf{ found} (std\+::vector$<$ T $>$ \&vector, T \&t)
+\item 
+{\footnotesize template$<$typename T $>$ }\\bool \textbf{ found} (std\+::vector$<$ T $>$ \&vector, T const \&t)
+\item 
+{\footnotesize template$<$typename T $>$ }\\bool \textbf{ found} (std\+::vector$<$ T $>$ const \&vector, T \&t)
+\item 
+{\footnotesize template$<$typename T $>$ }\\bool \textbf{ found} (std\+::vector$<$ T $>$ const \&vector, T const \&t)
+\item 
+{\footnotesize template$<$typename T $>$ }\\T \textbf{ maximum} (std\+::vector$<$ T $>$ const \&vector)
+\item 
+{\footnotesize template$<$typename T $>$ }\\T \textbf{ maximum\+Index} (std\+::vector$<$ T $>$ const \&vector)
+\item 
+{\footnotesize template$<$typename T $>$ }\\T \textbf{ minimum} (std\+::vector$<$ T $>$ const \&vector)
+\item 
+{\footnotesize template$<$typename T $>$ }\\T \textbf{ minimum\+Index} (std\+::vector$<$ T $>$ const \&vector)
+\item 
+{\footnotesize template$<$class T $>$ }\\std\+::ostream \& \textbf{ operator$<$$<$} (std\+::ostream \&cout, \textbf{ Static\+Vector}$<$ T $>$ const \&vector)
+\item 
+{\footnotesize template$<$class T $>$ }\\std\+::istream \& \textbf{ operator$>$$>$} (std\+::istream \&input, std\+::vector$<$ T $>$ vector)
+\item 
+{\footnotesize template$<$class T $>$ }\\std\+::istringstream \& \textbf{ operator$>$$>$} (std\+::istringstream \&is, std\+::vector$<$ T $>$ \&v)
+\item 
+{\footnotesize template$<$typename T $>$ }\\bool \textbf{ push\+\_\+back\+\_\+unique} (std\+::vector$<$ T $>$ \&vector, T const \&t)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\label{vector__functions_8hpp_a473cc8f4e0f7089c2a1757a435f7ae04}} 
+\index{vector\_functions.hpp@{vector\_functions.hpp}!bubbleSort@{bubbleSort}}
+\index{bubbleSort@{bubbleSort}!vector\_functions.hpp@{vector\_functions.hpp}}
+\doxysubsubsection{bubbleSort()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+std\+::vector$<$int$>$ bubble\+Sort (\begin{DoxyParamCaption}\item[{std\+::vector$<$ T $>$ const \&}]{vector }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=254pt]{vector__functions_8hpp_a473cc8f4e0f7089c2a1757a435f7ae04_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{vector__functions_8hpp_a28b5494cf9f51ee725e680752955a8e1}} 
+\index{vector\_functions.hpp@{vector\_functions.hpp}!bubbleSort@{bubbleSort}}
+\index{bubbleSort@{bubbleSort}!vector\_functions.hpp@{vector\_functions.hpp}}
+\doxysubsubsection{bubbleSort()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+std\+::vector$<$int$>$ bubble\+Sort (\begin{DoxyParamCaption}\item[{std\+::vector$<$ T $>$ const \&}]{vector,  }\item[{std\+::vector$<$ int $>$ \&}]{indexes }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{vector__functions_8hpp_a28b5494cf9f51ee725e680752955a8e1_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{vector__functions_8hpp_a9261ebb5fd81046aa8620dddb2b3ea75}} 
+\index{vector\_functions.hpp@{vector\_functions.hpp}!fill2D@{fill2D}}
+\index{fill2D@{fill2D}!vector\_functions.hpp@{vector\_functions.hpp}}
+\doxysubsubsection{fill2D()}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void fill2D (\begin{DoxyParamCaption}\item[{std\+::vector$<$ std\+::vector$<$ T $>$$>$ \&}]{vec2,  }\item[{\textbf{ size\+\_\+t} const \&}]{size\+\_\+x,  }\item[{\textbf{ size\+\_\+t} const \&}]{size\+\_\+y,  }\item[{T const \&}]{obj }\end{DoxyParamCaption})}
+
+\mbox{\label{vector__functions_8hpp_a14962b41d2983daea3bcdc089a8257ef}} 
+\index{vector\_functions.hpp@{vector\_functions.hpp}!found@{found}}
+\index{found@{found}!vector\_functions.hpp@{vector\_functions.hpp}}
+\doxysubsubsection{found()\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+bool found (\begin{DoxyParamCaption}\item[{std\+::vector$<$ T $>$ \&}]{vector,  }\item[{T \&}]{t }\end{DoxyParamCaption})}
+
+\mbox{\label{vector__functions_8hpp_afc7684c3345171a9a9655f11757aa0fe}} 
+\index{vector\_functions.hpp@{vector\_functions.hpp}!found@{found}}
+\index{found@{found}!vector\_functions.hpp@{vector\_functions.hpp}}
+\doxysubsubsection{found()\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+bool found (\begin{DoxyParamCaption}\item[{std\+::vector$<$ T $>$ \&}]{vector,  }\item[{T const \&}]{t }\end{DoxyParamCaption})}
+
+\mbox{\label{vector__functions_8hpp_adaad9cc33dbf016cd85fd4e57823d667}} 
+\index{vector\_functions.hpp@{vector\_functions.hpp}!found@{found}}
+\index{found@{found}!vector\_functions.hpp@{vector\_functions.hpp}}
+\doxysubsubsection{found()\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+bool found (\begin{DoxyParamCaption}\item[{std\+::vector$<$ T $>$ const \&}]{vector,  }\item[{T \&}]{t }\end{DoxyParamCaption})}
+
+\mbox{\label{vector__functions_8hpp_afbed7719916e5ec83a4dbfc0d3b45460}} 
+\index{vector\_functions.hpp@{vector\_functions.hpp}!found@{found}}
+\index{found@{found}!vector\_functions.hpp@{vector\_functions.hpp}}
+\doxysubsubsection{found()\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+bool found (\begin{DoxyParamCaption}\item[{std\+::vector$<$ T $>$ const \&}]{vector,  }\item[{T const \&}]{t }\end{DoxyParamCaption})}
+
+\mbox{\label{vector__functions_8hpp_a4baf3e978c4b72d0b3c52b064fa3c03e}} 
+\index{vector\_functions.hpp@{vector\_functions.hpp}!maximum@{maximum}}
+\index{maximum@{maximum}!vector\_functions.hpp@{vector\_functions.hpp}}
+\doxysubsubsection{maximum()}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+T maximum (\begin{DoxyParamCaption}\item[{std\+::vector$<$ T $>$ const \&}]{vector }\end{DoxyParamCaption})}
+
+\mbox{\label{vector__functions_8hpp_a66a5408a65e33e909fef9fecfc9837a1}} 
+\index{vector\_functions.hpp@{vector\_functions.hpp}!maximumIndex@{maximumIndex}}
+\index{maximumIndex@{maximumIndex}!vector\_functions.hpp@{vector\_functions.hpp}}
+\doxysubsubsection{maximumIndex()}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+T maximum\+Index (\begin{DoxyParamCaption}\item[{std\+::vector$<$ T $>$ const \&}]{vector }\end{DoxyParamCaption})}
+
+\mbox{\label{vector__functions_8hpp_a233e14aaf671f05f29c0fe50e646f171}} 
+\index{vector\_functions.hpp@{vector\_functions.hpp}!minimum@{minimum}}
+\index{minimum@{minimum}!vector\_functions.hpp@{vector\_functions.hpp}}
+\doxysubsubsection{minimum()}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+T minimum (\begin{DoxyParamCaption}\item[{std\+::vector$<$ T $>$ const \&}]{vector }\end{DoxyParamCaption})}
+
+\mbox{\label{vector__functions_8hpp_a660ee419eb6d35b4ac555e5bb5ab66cd}} 
+\index{vector\_functions.hpp@{vector\_functions.hpp}!minimumIndex@{minimumIndex}}
+\index{minimumIndex@{minimumIndex}!vector\_functions.hpp@{vector\_functions.hpp}}
+\doxysubsubsection{minimumIndex()}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+T minimum\+Index (\begin{DoxyParamCaption}\item[{std\+::vector$<$ T $>$ const \&}]{vector }\end{DoxyParamCaption})}
+
+\mbox{\label{vector__functions_8hpp_a8852828b5aaff87e96c53054a243209d}} 
+\index{vector\_functions.hpp@{vector\_functions.hpp}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!vector\_functions.hpp@{vector\_functions.hpp}}
+\doxysubsubsection{operator$<$$<$()}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+std\+::ostream\& operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{cout,  }\item[{\textbf{ Static\+Vector}$<$ T $>$ const \&}]{vector }\end{DoxyParamCaption})}
+
+\mbox{\label{vector__functions_8hpp_af8f06ed14ec8b1697169763a8d895105}} 
+\index{vector\_functions.hpp@{vector\_functions.hpp}!operator$>$$>$@{operator$>$$>$}}
+\index{operator$>$$>$@{operator$>$$>$}!vector\_functions.hpp@{vector\_functions.hpp}}
+\doxysubsubsection{operator$>$$>$()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+std\+::istream\& operator$>$$>$ (\begin{DoxyParamCaption}\item[{std\+::istream \&}]{input,  }\item[{std\+::vector$<$ T $>$}]{vector }\end{DoxyParamCaption})}
+
+\mbox{\label{vector__functions_8hpp_a197f281dbd89780c3e0c6e50192cf637}} 
+\index{vector\_functions.hpp@{vector\_functions.hpp}!operator$>$$>$@{operator$>$$>$}}
+\index{operator$>$$>$@{operator$>$$>$}!vector\_functions.hpp@{vector\_functions.hpp}}
+\doxysubsubsection{operator$>$$>$()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+std\+::istringstream\& operator$>$$>$ (\begin{DoxyParamCaption}\item[{std\+::istringstream \&}]{is,  }\item[{std\+::vector$<$ T $>$ \&}]{v }\end{DoxyParamCaption})}
+
+\mbox{\label{vector__functions_8hpp_a0714a23fb316299fdee1e44d9f46343b}} 
+\index{vector\_functions.hpp@{vector\_functions.hpp}!push\_back\_unique@{push\_back\_unique}}
+\index{push\_back\_unique@{push\_back\_unique}!vector\_functions.hpp@{vector\_functions.hpp}}
+\doxysubsubsection{push\_back\_unique()}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+bool push\+\_\+back\+\_\+unique (\begin{DoxyParamCaption}\item[{std\+::vector$<$ T $>$ \&}]{vector,  }\item[{T const \&}]{t }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{vector__functions_8hpp_a0714a23fb316299fdee1e44d9f46343b_icgraph}
+\end{center}
+\end{figure}

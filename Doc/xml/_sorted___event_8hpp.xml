@@ -1,0 +1,877 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="_sorted___event_8hpp" kind="file" language="C++">
+    <compoundname>Sorted_Event.hpp</compoundname>
+    <includes refid="_event_8hpp" local="no">Event.hpp</includes>
+    <includes refid="_timewalk_8hpp" local="no">Timewalk.hpp</includes>
+    <includes refid="_clovers_8hpp" local="no">Clovers.hpp</includes>
+    <includes refid="_d_s_s_d_8hpp" local="no">DSSD.hpp</includes>
+    <includes refid="_r_f___manager_8hpp" local="no">RF_Manager.hpp</includes>
+    <incdepgraph>
+      <node id="30">
+        <label>glob.h</label>
+      </node>
+      <node id="54">
+        <label>TH1S.h</label>
+      </node>
+      <node id="13">
+        <label>iomanip</label>
+      </node>
+      <node id="12">
+        <label>functional</label>
+      </node>
+      <node id="19">
+        <label>queue</label>
+      </node>
+      <node id="35">
+        <label>random.hpp</label>
+        <link refid="random_8hpp"/>
+        <childnode refid="36" relation="include">
+        </childnode>
+      </node>
+      <node id="72">
+        <label>TTreeIndex.h</label>
+      </node>
+      <node id="4">
+        <label>../libRoot.hpp</label>
+        <link refid="lib_root_8hpp"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+        <childnode refid="42" relation="include">
+        </childnode>
+        <childnode refid="43" relation="include">
+        </childnode>
+        <childnode refid="44" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
+        <childnode refid="46" relation="include">
+        </childnode>
+        <childnode refid="47" relation="include">
+        </childnode>
+        <childnode refid="48" relation="include">
+        </childnode>
+        <childnode refid="49" relation="include">
+        </childnode>
+        <childnode refid="50" relation="include">
+        </childnode>
+        <childnode refid="51" relation="include">
+        </childnode>
+        <childnode refid="52" relation="include">
+        </childnode>
+        <childnode refid="53" relation="include">
+        </childnode>
+        <childnode refid="54" relation="include">
+        </childnode>
+        <childnode refid="55" relation="include">
+        </childnode>
+        <childnode refid="56" relation="include">
+        </childnode>
+        <childnode refid="57" relation="include">
+        </childnode>
+        <childnode refid="58" relation="include">
+        </childnode>
+        <childnode refid="59" relation="include">
+        </childnode>
+        <childnode refid="60" relation="include">
+        </childnode>
+        <childnode refid="61" relation="include">
+        </childnode>
+        <childnode refid="62" relation="include">
+        </childnode>
+        <childnode refid="63" relation="include">
+        </childnode>
+        <childnode refid="64" relation="include">
+        </childnode>
+        <childnode refid="65" relation="include">
+        </childnode>
+        <childnode refid="66" relation="include">
+        </childnode>
+        <childnode refid="67" relation="include">
+        </childnode>
+        <childnode refid="68" relation="include">
+        </childnode>
+        <childnode refid="69" relation="include">
+        </childnode>
+        <childnode refid="70" relation="include">
+        </childnode>
+        <childnode refid="71" relation="include">
+        </childnode>
+        <childnode refid="72" relation="include">
+        </childnode>
+      </node>
+      <node id="40">
+        <label>filesystem</label>
+      </node>
+      <node id="80">
+        <label>RF_Manager.hpp</label>
+        <link refid="_r_f___manager_8hpp"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="41">
+        <label>TAxis.h</label>
+      </node>
+      <node id="32">
+        <label>stdlib.h</label>
+      </node>
+      <node id="70">
+        <label>TThread.h</label>
+      </node>
+      <node id="75">
+        <label>../Classes/Gate.hpp</label>
+        <link refid="_gate_8hpp"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="77">
+        <label>CloverModule.hpp</label>
+        <link refid="_clover_module_8hpp"/>
+      </node>
+      <node id="53">
+        <label>TH1D.h</label>
+      </node>
+      <node id="78">
+        <label>DSSD.hpp</label>
+        <link refid="_d_s_s_d_8hpp"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="73" relation="include">
+        </childnode>
+        <childnode refid="79" relation="include">
+        </childnode>
+      </node>
+      <node id="66">
+        <label>TStopwatch.h</label>
+      </node>
+      <node id="21">
+        <label>stdexcept</label>
+      </node>
+      <node id="18">
+        <label>numeric</label>
+      </node>
+      <node id="22">
+        <label>string</label>
+      </node>
+      <node id="15">
+        <label>map</label>
+      </node>
+      <node id="3">
+        <label>Hit.hpp</label>
+        <link refid="_hit_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>libCo.hpp</label>
+        <link refid="lib_co_8hpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+      </node>
+      <node id="45">
+        <label>TF1.h</label>
+      </node>
+      <node id="34">
+        <label>print.hpp</label>
+        <link refid="print_8hpp"/>
+      </node>
+      <node id="11">
+        <label>fstream</label>
+      </node>
+      <node id="74">
+        <label>Clovers.hpp</label>
+        <link refid="_clovers_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="75" relation="include">
+        </childnode>
+        <childnode refid="76" relation="include">
+        </childnode>
+        <childnode refid="77" relation="include">
+        </childnode>
+      </node>
+      <node id="73">
+        <label>Timewalk.hpp</label>
+        <link refid="_timewalk_8hpp"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="44">
+        <label>TError.h</label>
+      </node>
+      <node id="68">
+        <label>TStyle.h</label>
+      </node>
+      <node id="6">
+        <label>any</label>
+      </node>
+      <node id="38">
+        <label>files_functions.hpp</label>
+        <link refid="files__functions_8hpp"/>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+      </node>
+      <node id="36">
+        <label>random</label>
+      </node>
+      <node id="64">
+        <label>TROOT.h</label>
+      </node>
+      <node id="33">
+        <label>string.h</label>
+      </node>
+      <node id="26">
+        <label>typeinfo</label>
+      </node>
+      <node id="79">
+        <label>Detectors.hpp</label>
+        <link refid="_detectors_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="43">
+        <label>TChain.h</label>
+      </node>
+      <node id="2">
+        <label>Event.hpp</label>
+        <link refid="_event_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="69">
+        <label>TSystem.h</label>
+      </node>
+      <node id="28">
+        <label>vector</label>
+      </node>
+      <node id="23">
+        <label>stack</label>
+      </node>
+      <node id="46">
+        <label>TF2.h</label>
+      </node>
+      <node id="47">
+        <label>TFile.h</label>
+      </node>
+      <node id="42">
+        <label>TCanvas.h</label>
+      </node>
+      <node id="57">
+        <label>TH3I.h</label>
+      </node>
+      <node id="58">
+        <label>TKey.h</label>
+      </node>
+      <node id="39">
+        <label>vector_functions.hpp</label>
+        <link refid="vector__functions_8hpp"/>
+        <childnode refid="34" relation="include">
+        </childnode>
+      </node>
+      <node id="65">
+        <label>TSpectrum.h</label>
+      </node>
+      <node id="7">
+        <label>array</label>
+      </node>
+      <node id="49">
+        <label>TFitResult.h</label>
+      </node>
+      <node id="20">
+        <label>sstream</label>
+      </node>
+      <node id="1">
+        <label>lib/Analyse/Sorted_Event.hpp</label>
+        <link refid="_sorted___event_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="73" relation="include">
+        </childnode>
+        <childnode refid="74" relation="include">
+        </childnode>
+        <childnode refid="78" relation="include">
+        </childnode>
+        <childnode refid="80" relation="include">
+        </childnode>
+      </node>
+      <node id="61">
+        <label>TMarker.h</label>
+      </node>
+      <node id="51">
+        <label>TGraphErrors.h</label>
+      </node>
+      <node id="55">
+        <label>TH2.h</label>
+      </node>
+      <node id="9">
+        <label>cstdlib</label>
+      </node>
+      <node id="52">
+        <label>TH1F.h</label>
+      </node>
+      <node id="59">
+        <label>TLeaf.h</label>
+      </node>
+      <node id="14">
+        <label>iostream</label>
+      </node>
+      <node id="37">
+        <label>string_functions.hpp</label>
+        <link refid="string__functions_8hpp"/>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>unordered_map</label>
+      </node>
+      <node id="60">
+        <label>TLegend.h</label>
+      </node>
+      <node id="67">
+        <label>TString.h</label>
+      </node>
+      <node id="62">
+        <label>TMath.h</label>
+      </node>
+      <node id="56">
+        <label>TH2F.h</label>
+      </node>
+      <node id="17">
+        <label>mutex</label>
+      </node>
+      <node id="76">
+        <label>../MTObjects/MTObject.hpp</label>
+        <link refid="_m_t_object_8hpp"/>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="24">
+        <label>thread</label>
+      </node>
+      <node id="63">
+        <label>TRandom.h</label>
+      </node>
+      <node id="71">
+        <label>TTree.h</label>
+      </node>
+      <node id="8">
+        <label>algorithm</label>
+      </node>
+      <node id="48">
+        <label>TFitResultPtr.h</label>
+      </node>
+      <node id="31">
+        <label>stdio.h</label>
+      </node>
+      <node id="10">
+        <label>cstring</label>
+      </node>
+      <node id="50">
+        <label>TGraph.h</label>
+      </node>
+      <node id="16">
+        <label>memory</label>
+      </node>
+      <node id="25">
+        <label>typeindex</label>
+      </node>
+      <node id="29">
+        <label>dirent.h</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="struct_la_br3___hit" prot="public">LaBr3_Hit</innerclass>
+    <innerclass refid="class_sorted___event" prot="public">Sorted_Event</innerclass>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="_sorted___event_8hpp_1a95e9ae63401952ba6dd1b9632670c200" prot="public" static="no">
+        <type>std::vector&lt; <ref refid="struct_la_br3___hit" kindref="compound">LaBr3_Hit</ref> &gt;</type>
+        <definition>using LaBr3_Event =  std::vector &lt; LaBr3_Hit &gt;</definition>
+        <argsstring></argsstring>
+        <name>LaBr3_Event</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/Sorted_Event.hpp" line="16" column="1" bodyfile="lib/Analyse/Sorted_Event.hpp" bodystart="16" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>SORTED_EVENT_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SORTED_EVENT_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="_event_8hpp" kindref="compound">Event.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="_timewalk_8hpp" kindref="compound">Timewalk.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="_clovers_8hpp" kindref="compound">Clovers.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="_d_s_s_d_8hpp" kindref="compound">DSSD.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="_r_f___manager_8hpp" kindref="compound">RF_Manager.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10" refid="struct_la_br3___hit" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="struct_la_br3___hit" kindref="compound">LaBr3_Hit</ref></highlight></codeline>
+<codeline lineno="11"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="12" refid="struct_la_br3___hit_1ac232600348d6e8374bd2c80d080adc2a" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21" kindref="member">uchar</ref><sp/><ref refid="struct_la_br3___hit_1ac232600348d6e8374bd2c80d080adc2a" kindref="member">label</ref><sp/><sp/><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="13" refid="struct_la_br3___hit_1ae287180c5639726f2d4905e52a678597" refkind="member"><highlight class="normal"><sp/><sp/>Float_t<sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_la_br3___hit_1ae287180c5639726f2d4905e52a678597" kindref="member">nrjcal</ref><sp/><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="14" refid="struct_la_br3___hit_1a37b178a0c74cf89bd93a94f2765ece64" refkind="member"><highlight class="normal"><sp/><sp/>ULong64_t<sp/><sp/><sp/><sp/><sp/><ref refid="struct_la_br3___hit_1a37b178a0c74cf89bd93a94f2765ece64" kindref="member">time</ref><sp/><sp/><sp/><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="15"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="16" refid="_sorted___event_8hpp_1a95e9ae63401952ba6dd1b9632670c200" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/><ref refid="_sorted___event_8hpp_1a95e9ae63401952ba6dd1b9632670c200" kindref="member">LaBr3_Event</ref><sp/><sp/>=<sp/>std::vector<sp/>&lt;<sp/>LaBr3_Hit<sp/>&gt;;</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight></codeline>
+<codeline lineno="18" refid="class_sorted___event" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_sorted___event" kindref="compound">Sorted_Event</ref></highlight></codeline>
+<codeline lineno="19"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="21" refid="class_sorted___event_1a56053521c62b98b011cc22ef5064fba0" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="class_sorted___event_1a56053521c62b98b011cc22ef5064fba0" kindref="member">Sorted_Event</ref>(){<ref refid="class_sorted___event_1afc0b469d164d06c59dd19b580202ac2b" kindref="member">initialise</ref>();<sp/><ref refid="class_sorted___event_1a9d502b0a90b38c3a02d1d12e19818231" kindref="member">reset</ref>();}</highlight></codeline>
+<codeline lineno="22" refid="class_sorted___event_1ac1284dab08a8b2d8cfa31dfa78db96cd" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="class_sorted___event_1ac1284dab08a8b2d8cfa31dfa78db96cd" kindref="member">Sorted_Event</ref>(<ref refid="class_event" kindref="compound">Event</ref><sp/>*<sp/>event){<ref refid="class_sorted___event_1afc0b469d164d06c59dd19b580202ac2b" kindref="member">initialise</ref>();<sp/><ref refid="class_sorted___event_1a9d502b0a90b38c3a02d1d12e19818231" kindref="member">reset</ref>();<sp/><ref refid="class_sorted___event_1a41583bc5f5ebbc8a5ba5d879ae7717a6" kindref="member">setEvent</ref>(event);}</highlight></codeline>
+<codeline lineno="23" refid="class_sorted___event_1a0c2d3980ba5e8ffb7398c53b846d7592" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_sorted___event_1a0c2d3980ba5e8ffb7398c53b846d7592" kindref="member">Initialize</ref>()<sp/>{Clovers::Initialize();}</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_sorted___event_1afc0b469d164d06c59dd19b580202ac2b" kindref="member">initialise</ref>();</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_sorted___event_1a9d502b0a90b38c3a02d1d12e19818231" kindref="member">reset</ref>();</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight></codeline>
+<codeline lineno="27" refid="class_sorted___event_1a41583bc5f5ebbc8a5ba5d879ae7717a6" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_sorted___event_1a41583bc5f5ebbc8a5ba5d879ae7717a6" kindref="member">setEvent</ref><sp/>(<ref refid="class_event" kindref="compound">Event</ref><sp/>*<sp/>event)<sp/>{<ref refid="class_sorted___event_1a4a79418bf4b7a89cb1a4d47931f4e92d" kindref="member">m_event</ref><sp/>=<sp/>event;}</highlight></codeline>
+<codeline lineno="28" refid="class_sorted___event_1a99b1e8a33fadb6117c9868bd824322b8" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_sorted___event_1a99b1e8a33fadb6117c9868bd824322b8" kindref="member">setRF</ref>(<ref refid="class_r_f___manager" kindref="compound">RF_Manager</ref><sp/>*rf)<sp/>{<ref refid="class_sorted___event_1a5ca1220e7a8817fb46e550a2e1ff6b2a" kindref="member">m_rf</ref><sp/>=<sp/>rf;}</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_sorted___event_1a2f319d8e3d1ba4752d583732ea5ebac5" kindref="member">fillEvent</ref>(<ref refid="class_event" kindref="compound">Event</ref><sp/>&amp;<sp/>event);</highlight></codeline>
+<codeline lineno="30" refid="class_sorted___event_1a834fa3f83720006416bd67eb4e21c1e8" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_sorted___event_1a834fa3f83720006416bd67eb4e21c1e8" kindref="member">addGeGateTrig</ref>(Float_t<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>minE,<sp/>Float_t<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/><ref refid="class_sorted___event_1a5cc067d81bda02f44385c8cd892604d6" kindref="member">maxE</ref>)</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_sorted___event_1abf33c022e34dc4b6bdad6d8fdea7fc4e" kindref="member">m_Ge_gates</ref>.push_back(std::make_pair(minE,<ref refid="class_sorted___event_1a5cc067d81bda02f44385c8cd892604d6" kindref="member">maxE</ref>));<sp/><ref refid="class_sorted___event_1a23d2f4f016d333ccec73efeefe3b6bc2" kindref="member">m_gateON</ref><sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight></codeline>
+<codeline lineno="35" refid="class_sorted___event_1af98dd0f04dfffaf0e40a641326653631" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_sorted___event_1af98dd0f04dfffaf0e40a641326653631" kindref="member">addGeGateTrig</ref>(std::pair&lt;Float_t,Float_t&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>Egate)</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_sorted___event_1abf33c022e34dc4b6bdad6d8fdea7fc4e" kindref="member">m_Ge_gates</ref>.push_back(Egate);<sp/><ref refid="class_sorted___event_1a23d2f4f016d333ccec73efeefe3b6bc2" kindref="member">m_gateON</ref><sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_sorted___event_1ae37ee47028e933026de2f3a2906f8564" kindref="member">setTWcorrectionsDSSD</ref>(std::string<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>filename);</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_sorted___event_1ae41291f8d1975f8ed7b52ad65dfeeac9" kindref="member">setMaxTime</ref>(Float_t<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>max_time);</highlight></codeline>
+<codeline lineno="42" refid="class_sorted___event_1a3fb09052ae07199b3b8912218ca045aa" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_sorted___event_1a3fb09052ae07199b3b8912218ca045aa" kindref="member">setDSSDVeto</ref>(Float_t<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>min_time,<sp/>Float_t<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>max_time,<sp/>Float_t<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>max_E)</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_sorted___event_1af4fbf9443170583d1a658543226f870e" kindref="member">m_max_time_dssd</ref><sp/>=<sp/>max_time;</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_sorted___event_1aba89239da62f60c549457352c6a78812" kindref="member">m_min_time_dssd</ref><sp/>=<sp/>min_time;</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_sorted___event_1a92e44ec90d57492227be6e120e6e20d9" kindref="member">m_max_E_dssd</ref><sp/>=<sp/>max_E;</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="48" refid="class_sorted___event_1af4fbf9443170583d1a658543226f870e" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="class_sorted___event_1af4fbf9443170583d1a658543226f870e" kindref="member">m_max_time_dssd</ref>;</highlight></codeline>
+<codeline lineno="49" refid="class_sorted___event_1aba89239da62f60c549457352c6a78812" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="class_sorted___event_1aba89239da62f60c549457352c6a78812" kindref="member">m_min_time_dssd</ref>;</highlight></codeline>
+<codeline lineno="50" refid="class_sorted___event_1a92e44ec90d57492227be6e120e6e20d9" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="class_sorted___event_1a92e44ec90d57492227be6e120e6e20d9" kindref="member">m_max_E_dssd</ref>;</highlight></codeline>
+<codeline lineno="51" refid="class_sorted___event_1a7c0d86edaf267d454bd0c9a9d1a7ddad" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="class_sorted___event_1a7c0d86edaf267d454bd0c9a9d1a7ddad" kindref="member">dssd_veto</ref><sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight></codeline>
+<codeline lineno="53"><highlight class="normal"></highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_sorted___event_1ad502809ad5cbea67fd40cb42ab2c4b71" kindref="member">sortEvent</ref>(<ref refid="class_event" kindref="compound">Event</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>event);</highlight></codeline>
+<codeline lineno="55" refid="class_sorted___event_1ad502809ad5cbea67fd40cb42ab2c4b71" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_sorted___event_1ad502809ad5cbea67fd40cb42ab2c4b71" kindref="member">sortEvent</ref>(){<ref refid="class_sorted___event_1ad502809ad5cbea67fd40cb42ab2c4b71" kindref="member">sortEvent</ref>(*<ref refid="class_sorted___event_1a4a79418bf4b7a89cb1a4d47931f4e92d" kindref="member">m_event</ref>);}</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="class_sorted___event_1a868a20701f8be649bbaf0a0366c378d0" kindref="member">sortGeClover</ref>(<ref refid="class_event" kindref="compound">Event</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>event,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>i);</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight></codeline>
+<codeline lineno="58" refid="class_sorted___event_1a04b441aec044fff6eaa00e3a9bdfd79d" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/><ref refid="class_sorted___event_1a04b441aec044fff6eaa00e3a9bdfd79d" kindref="member">gateGe</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_sorted___event_1a9f12a37b230451161dd9bf178f8b3b58" kindref="member">m_Ge_gate</ref>;}</highlight></codeline>
+<codeline lineno="59" refid="class_sorted___event_1ad835d42335be97eff221b73194950afd" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/><ref refid="class_sorted___event_1ad835d42335be97eff221b73194950afd" kindref="member">getGatedClover</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_sorted___event_1ac7e90f4a218ef319773a5ddc6a995c8a" kindref="member">m_CloverTrig</ref>;}</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight></codeline>
+<codeline lineno="61"><highlight class="normal"></highlight></codeline>
+<codeline lineno="62" refid="class_sorted___event_1a92097f7b335c6b79b7ef068f555dcddc" refkind="member"><highlight class="normal"><sp/><sp/>std::array&lt;Float_t,<sp/>2000&gt;<sp/><ref refid="class_sorted___event_1a92097f7b335c6b79b7ef068f555dcddc" kindref="member">time2s</ref>;</highlight></codeline>
+<codeline lineno="63" refid="class_sorted___event_1a5ca1220e7a8817fb46e550a2e1ff6b2a" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="class_r_f___manager" kindref="compound">RF_Manager</ref><sp/>*<ref refid="class_sorted___event_1a5ca1220e7a8817fb46e550a2e1ff6b2a" kindref="member">m_rf</ref><sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//Clover<sp/>arrays</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight></codeline>
+<codeline lineno="67" refid="class_sorted___event_1ad051aa059b852a3332a2fa339d51b439" refkind="member"><highlight class="normal"><sp/><sp/>std::vector&lt;uchar&gt;<sp/><ref refid="class_sorted___event_1ad051aa059b852a3332a2fa339d51b439" kindref="member">clover_hits</ref>;<sp/></highlight><highlight class="comment">//<sp/>List<sp/>of<sp/>the<sp/>clovers<sp/>labels<sp/>that<sp/>fired<sp/>(between<sp/>0<sp/>and<sp/>24)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="68" refid="class_sorted___event_1a790240303b1df1a9f60359bcaf667ae6" refkind="member"><highlight class="normal"><sp/><sp/>std::array<sp/>&lt;<sp/>Float_t,<sp/>24<sp/>&gt;<sp/><ref refid="class_sorted___event_1a790240303b1df1a9f60359bcaf667ae6" kindref="member">nrj_clover</ref>;<sp/></highlight><highlight class="comment">//<sp/>Add-backed<sp/>energy<sp/>of<sp/>Clover<sp/>Ge</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="69" refid="class_sorted___event_1ac44a4857dde092f1b32fdcdf9c8679e1" refkind="member"><highlight class="normal"><sp/><sp/>std::array<sp/>&lt;<sp/>Float_t,<sp/>24<sp/>&gt;<sp/><ref refid="class_sorted___event_1ac44a4857dde092f1b32fdcdf9c8679e1" kindref="member">time_clover</ref>;<sp/></highlight><highlight class="comment">//<sp/>Time<sp/>of<sp/>the<sp/>Ge<sp/>crystal<sp/>with<sp/>the<sp/>more<sp/>energy<sp/>of<sp/>a<sp/>Clover</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>std::array<sp/>&lt;<sp/>Float_t,<sp/>24<sp/>&gt;<sp/>nrj_BGO;<sp/>//<sp/>unused</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="71" refid="class_sorted___event_1a89a3ad21720b8c31773799a549da8746" refkind="member"><highlight class="normal"><sp/><sp/>std::array<sp/>&lt;<sp/>Bool_t,<sp/><sp/>24<sp/>&gt;<sp/><ref refid="class_sorted___event_1a89a3ad21720b8c31773799a549da8746" kindref="member">prompt_Ge</ref>;<sp/></highlight><highlight class="comment">//<sp/>Tag<sp/>if<sp/>the<sp/>Clover<sp/>is<sp/>in<sp/>the<sp/>prompt<sp/>window</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="72" refid="class_sorted___event_1a217d7d6f84825fd80c09047168759078" refkind="member"><highlight class="normal"><sp/><sp/>std::array<sp/>&lt;<sp/>Bool_t,<sp/><sp/>24<sp/>&gt;<sp/><ref refid="class_sorted___event_1a217d7d6f84825fd80c09047168759078" kindref="member">delayed_Ge</ref>;<sp/></highlight><highlight class="comment">//<sp/>Tag<sp/>if<sp/>the<sp/>Clover<sp/>is<sp/>in<sp/>the<sp/>delayed<sp/>window</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="73" refid="class_sorted___event_1afe0f8fb89d3ee3065b672d919122c377" refkind="member"><highlight class="normal"><sp/><sp/>std::array<sp/>&lt;<sp/>Int_t,<sp/><sp/><sp/>24<sp/>&gt;<sp/><ref refid="class_sorted___event_1afe0f8fb89d3ee3065b672d919122c377" kindref="member">Ge</ref>;<sp/></highlight><highlight class="comment">//<sp/>The<sp/>number<sp/>of<sp/>Ge<sp/>crystal<sp/>that<sp/>fired<sp/>in<sp/>a<sp/>Germanium</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="74" refid="class_sorted___event_1acc6df50642355743d54630834ff98c4f" refkind="member"><highlight class="normal"><sp/><sp/>std::array<sp/>&lt;<sp/>Int_t,<sp/><sp/><sp/>24<sp/>&gt;<sp/><ref refid="class_sorted___event_1acc6df50642355743d54630834ff98c4f" kindref="member">BGO</ref>;<sp/></highlight><highlight class="comment">//<sp/>The<sp/>number<sp/>of<sp/>BGO<sp/>crystals<sp/>that<sp/>fired<sp/>in<sp/>a<sp/>Germanium</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="75" refid="class_sorted___event_1a5cc067d81bda02f44385c8cd892604d6" refkind="member"><highlight class="normal"><sp/><sp/>std::array<sp/>&lt;<sp/>Float_t,<sp/>24<sp/>&gt;<sp/><ref refid="class_sorted___event_1a5cc067d81bda02f44385c8cd892604d6" kindref="member">maxE</ref>;<sp/></highlight><highlight class="comment">//<sp/>Value<sp/>of<sp/>the<sp/>maximum<sp/>energy<sp/>in<sp/>a<sp/>Ge<sp/>crystal<sp/>of<sp/>a<sp/>Clover</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="76" refid="class_sorted___event_1ab9fc30633428e8bdf601ce500a7c740d" refkind="member"><highlight class="normal"><sp/><sp/>std::array<sp/>&lt;<sp/>Int_t,<sp/><sp/><sp/>24<sp/>&gt;<sp/><ref refid="class_sorted___event_1ab9fc30633428e8bdf601ce500a7c740d" kindref="member">maxE_hit</ref>;<sp/></highlight><highlight class="comment">//<sp/>Position<sp/>in<sp/>the<sp/>event<sp/>of<sp/>the<sp/>Ge<sp/>crystal<sp/>with<sp/>the<sp/>maximum<sp/>energy<sp/>of<sp/>the<sp/>Clover</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="77"><highlight class="normal"></highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Paris<sp/>arrays<sp/>:</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="79" refid="class_sorted___event_1a5a0554eb6b4103e2708c075d90d5102f" refkind="member"><highlight class="normal"><sp/><sp/>std::vector&lt;uchar&gt;<sp/><ref refid="class_sorted___event_1a5a0554eb6b4103e2708c075d90d5102f" kindref="member">paris_hits</ref>;<sp/></highlight><highlight class="comment">//<sp/>Position<sp/>in<sp/>the<sp/>event<sp/>of<sp/>the<sp/>paris<sp/>hits</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="80"><highlight class="normal"></highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>DSSD<sp/>array<sp/>:</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="82" refid="class_sorted___event_1acce53888877edd4b48d39fb839568686" refkind="member"><highlight class="normal"><sp/><sp/>std::vector&lt;uchar&gt;<sp/><ref refid="class_sorted___event_1acce53888877edd4b48d39fb839568686" kindref="member">DSSD_hits</ref>;<sp/></highlight><highlight class="comment">//<sp/>Position<sp/>in<sp/>the<sp/>event<sp/>of<sp/>the<sp/>DSSD<sp/>hits</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="83" refid="class_sorted___event_1adda847aa307f15404d9583a91bc899dd" refkind="member"><highlight class="normal"><sp/><sp/>std::vector&lt;char&gt;<sp/><sp/><ref refid="class_sorted___event_1adda847aa307f15404d9583a91bc899dd" kindref="member">DSSD_is_Ring</ref>;<sp/></highlight><highlight class="comment">//<sp/>Tag<sp/>if<sp/>the<sp/>DSSD<sp/>hit<sp/>is<sp/>a<sp/>ring</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="84" refid="class_sorted___event_1a0b8804fbc01dcca5672ac643f31e5f34" refkind="member"><highlight class="normal"><sp/><sp/>std::vector&lt;char&gt;<sp/><sp/><ref refid="class_sorted___event_1a0b8804fbc01dcca5672ac643f31e5f34" kindref="member">DSSD_is_Prompt</ref>;<sp/></highlight><highlight class="comment">//<sp/>Tag<sp/>if<sp/>the<sp/>DSSD<sp/>hit<sp/>is<sp/>prompt</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="85" refid="class_sorted___event_1a292fd4bcf2f78c6686b3670151a0148b" refkind="member"><highlight class="normal"><sp/><sp/>std::vector&lt;uchar&gt;<sp/><ref refid="class_sorted___event_1a292fd4bcf2f78c6686b3670151a0148b" kindref="member">DSSD_Rings</ref>;<sp/></highlight><highlight class="comment">//<sp/>Position<sp/>in<sp/>the<sp/>event<sp/>of<sp/>the<sp/>DSSD<sp/>rings<sp/>hits</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="86" refid="class_sorted___event_1a38040359f67b3cb549ae25efd11010ca" refkind="member"><highlight class="normal"><sp/><sp/>std::vector&lt;uchar&gt;<sp/><ref refid="class_sorted___event_1a38040359f67b3cb549ae25efd11010ca" kindref="member">DSSD_Sectors</ref>;<sp/></highlight><highlight class="comment">//<sp/>Position<sp/>in<sp/>the<sp/>event<sp/>of<sp/>the<sp/>DSSD<sp/>sectors<sp/>hits</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="87"><highlight class="normal"></highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//Events<sp/>:</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="89" refid="class_sorted___event_1a98cd91158d1cff362fcdd0ba59285578" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="_sorted___event_8hpp_1a95e9ae63401952ba6dd1b9632670c200" kindref="member">LaBr3_Event</ref><sp/><ref refid="class_sorted___event_1a98cd91158d1cff362fcdd0ba59285578" kindref="member">LaBr3_event</ref>;<sp/></highlight><highlight class="comment">//<sp/>Position<sp/>in<sp/>the<sp/>event<sp/>of<sp/>the<sp/>LaBr3<sp/>hits</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="90"><highlight class="normal"></highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//Counters<sp/>:</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="92" refid="class_sorted___event_1a305216fefa6fd71376e828702590fb82" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="class_sorted___event_1a305216fefa6fd71376e828702590fb82" kindref="member">RawMult</ref>=0;<sp/></highlight><highlight class="comment">//<sp/>Number<sp/>of<sp/>hits</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="93"><highlight class="normal"></highlight></codeline>
+<codeline lineno="94" refid="class_sorted___event_1af17ec35e8657df6df0117f86522971e7" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="class_sorted___event_1af17ec35e8657df6df0117f86522971e7" kindref="member">LaBr3Mult</ref>=0;<sp/></highlight><highlight class="comment">//<sp/>Number<sp/>of<sp/>LaBr3<sp/>hits</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="95" refid="class_sorted___event_1ab238484c396ccd1c8e42b47d5667036e" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="class_sorted___event_1ab238484c396ccd1c8e42b47d5667036e" kindref="member">ParisMult</ref>=0;<sp/></highlight><highlight class="comment">//<sp/>Number<sp/>of<sp/>Paris<sp/>hits</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="96" refid="class_sorted___event_1a0953771269326213845c7b5e322d8b9b" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="class_sorted___event_1a0953771269326213845c7b5e322d8b9b" kindref="member">ParisLaBr3Mult</ref>=0;<sp/></highlight><highlight class="comment">//<sp/>Number<sp/>of<sp/>Paris<sp/>hits<sp/>if<sp/>the<sp/>LaBr3<sp/>fired</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="97"><highlight class="normal"></highlight></codeline>
+<codeline lineno="98" refid="class_sorted___event_1a87e18e85b327bc463a15d2d1f8ae2c5c" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="class_sorted___event_1a87e18e85b327bc463a15d2d1f8ae2c5c" kindref="member">RawGeMult</ref>=0;<sp/></highlight><highlight class="comment">//<sp/>Number<sp/>of<sp/>Ge<sp/>crystals<sp/>hits</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="99" refid="class_sorted___event_1a21f62bdd71090a120484f3422e83bf98" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="class_sorted___event_1a21f62bdd71090a120484f3422e83bf98" kindref="member">CloverGeMult</ref>=0;<sp/></highlight><highlight class="comment">//<sp/>Number<sp/>of<sp/>Ge<sp/>Clovers<sp/>hits<sp/>(after<sp/>add-back)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="100" refid="class_sorted___event_1a81716b8c8388f1851d60f9303b222d3a" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="class_sorted___event_1a81716b8c8388f1851d60f9303b222d3a" kindref="member">PromptMult</ref>=0;<sp/></highlight><highlight class="comment">//<sp/>Number<sp/>of<sp/>Ge<sp/>Clovers<sp/>hits<sp/>(after<sp/>add-back)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="101" refid="class_sorted___event_1aff1bffd972d757e223bb585f82497e0c" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="class_sorted___event_1aff1bffd972d757e223bb585f82497e0c" kindref="member">DelayedMult</ref>=0;<sp/></highlight><highlight class="comment">//<sp/>Number<sp/>of<sp/>Ge<sp/>Clovers<sp/>hits<sp/>(after<sp/>add-back)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="102" refid="class_sorted___event_1abe7176d286a1c23d30fc75061ec2f0ad" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="class_sorted___event_1abe7176d286a1c23d30fc75061ec2f0ad" kindref="member">PromptGeMult</ref>=0;<sp/></highlight><highlight class="comment">//<sp/>Number<sp/>of<sp/>Ge<sp/>Clovers<sp/>hits<sp/>(after<sp/>add-back)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="103" refid="class_sorted___event_1ad59e5cf64f9c59e52bd8f67d5650225c" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="class_sorted___event_1ad59e5cf64f9c59e52bd8f67d5650225c" kindref="member">DelayedGeMult</ref>=0;<sp/></highlight><highlight class="comment">//<sp/>Number<sp/>of<sp/>Ge<sp/>Clovers<sp/>hits<sp/>(after<sp/>add-back)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="104" refid="class_sorted___event_1a9eb9e7402daa10c3b44f22c6f69bff39" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="class_sorted___event_1a9eb9e7402daa10c3b44f22c6f69bff39" kindref="member">CloverMult</ref>=0;<sp/></highlight><highlight class="comment">//<sp/>Number<sp/>of<sp/>Clovers<sp/>hits<sp/>(includes<sp/>the<sp/>BGOs)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="105" refid="class_sorted___event_1a8d737abb70590129a32cc2b3aeaa78bb" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="class_sorted___event_1a8d737abb70590129a32cc2b3aeaa78bb" kindref="member">CleanGeMult</ref>=0;<sp/></highlight><highlight class="comment">//<sp/>Number<sp/>of<sp/>Clean<sp/>Clovers<sp/>hits<sp/>(after<sp/>add-back<sp/>and<sp/>compton<sp/>rejection)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="106" refid="class_sorted___event_1a7c3603956ae1ccc8d5e8e2c38685b0ec" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="class_sorted___event_1a7c3603956ae1ccc8d5e8e2c38685b0ec" kindref="member">ComptonVetoMult</ref>=0;<sp/></highlight><highlight class="comment">//<sp/>Number<sp/>of<sp/>rejected<sp/>Clovers</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="107"><highlight class="normal"></highlight></codeline>
+<codeline lineno="108" refid="class_sorted___event_1a07235caacabfe9b670119ca3ecdc43c4" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="class_sorted___event_1a07235caacabfe9b670119ca3ecdc43c4" kindref="member">BGOMult</ref>=0;<sp/></highlight><highlight class="comment">//<sp/>Number<sp/>of<sp/>BGOs<sp/>hits</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="109" refid="class_sorted___event_1ab4365b400a2db27cecf6fc004cd84994" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="class_sorted___event_1ab4365b400a2db27cecf6fc004cd84994" kindref="member">ModulesMult</ref>=0;<sp/></highlight><highlight class="comment">//<sp/>Number<sp/>of<sp/>Modules<sp/>hits<sp/>:<sp/>one<sp/>module<sp/>is<sp/>Clover,<sp/>LaBr3<sp/>or<sp/>Paris</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="110"><highlight class="normal"></highlight></codeline>
+<codeline lineno="111" refid="class_sorted___event_1a65a8b6ce485585984024eced77e49b82" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="class_sorted___event_1a65a8b6ce485585984024eced77e49b82" kindref="member">DSSDMult</ref>=0;<sp/></highlight><highlight class="comment">//<sp/>Number<sp/>of<sp/>DSSD<sp/>hits</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="112" refid="class_sorted___event_1adbdf0fec160de9a231540cf86957f591" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="class_sorted___event_1adbdf0fec160de9a231540cf86957f591" kindref="member">DSSDSectorMult</ref>=0;<sp/></highlight><highlight class="comment">//<sp/>Number<sp/>of<sp/>DSSD<sp/>Sectors<sp/>hits</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="113" refid="class_sorted___event_1aaf85a6d33b35b28d1cb08be625434797" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="class_sorted___event_1aaf85a6d33b35b28d1cb08be625434797" kindref="member">DSSDRingMult</ref>=0;<sp/></highlight><highlight class="comment">//<sp/>Number<sp/>of<sp/>DSSD<sp/>Rings<sp/>hits</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="114"><highlight class="normal"></highlight></codeline>
+<codeline lineno="115" refid="class_sorted___event_1ad27e1c38974aa9d0c33bbc151444f316" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="class_sorted___event_1ad27e1c38974aa9d0c33bbc151444f316" kindref="member">ModulePromptMult</ref>;</highlight></codeline>
+<codeline lineno="116" refid="class_sorted___event_1a121ce38b049de3271b804002dfbd81b3" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="class_sorted___event_1a121ce38b049de3271b804002dfbd81b3" kindref="member">ModuleDelayedMult</ref>;</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"></highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//Pre-analysis</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="119"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>N_SI_129</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/>Bool_t<sp/>DSSDFirstBlob=</highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/>Bool_t<sp/>DSSDSecondBlob=</highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/>Bool_t<sp/>DSSDThirdBlob=</highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/>Bool_t<sp/>DSSDTail=</highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//N_SI_129</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="125" refid="class_sorted___event_1aa2f0ced4d05acb2fb3e6e6a7c22d69f7" refkind="member"><highlight class="normal"><sp/><sp/>Bool_t<sp/><ref refid="class_sorted___event_1aa2f0ced4d05acb2fb3e6e6a7c22d69f7" kindref="member">DSSDPrompt</ref>=</highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"></highlight></codeline>
+<codeline lineno="127"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="128" refid="class_sorted___event_1a4a79418bf4b7a89cb1a4d47931f4e92d" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="class_event" kindref="compound">Event</ref><sp/>*<sp/><ref refid="class_sorted___event_1a4a79418bf4b7a89cb1a4d47931f4e92d" kindref="member">m_event</ref>;</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"></highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>---<sp/>Gating<sp/>---<sp/>//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="131" refid="class_sorted___event_1abf33c022e34dc4b6bdad6d8fdea7fc4e" refkind="member"><highlight class="normal"><sp/><sp/>std::vector&lt;std::pair&lt;Float_t,Float_t&gt;&gt;<sp/><ref refid="class_sorted___event_1abf33c022e34dc4b6bdad6d8fdea7fc4e" kindref="member">m_Ge_gates</ref>;</highlight></codeline>
+<codeline lineno="132" refid="class_sorted___event_1a23d2f4f016d333ccec73efeefe3b6bc2" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="class_sorted___event_1a23d2f4f016d333ccec73efeefe3b6bc2" kindref="member">m_gateON</ref><sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;<sp/></highlight><highlight class="comment">//<sp/>0<sp/>:<sp/>no<sp/>gate,<sp/>n<sp/>:<sp/>n-th<sp/>gate</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="133" refid="class_sorted___event_1a9f12a37b230451161dd9bf178f8b3b58" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="class_sorted___event_1a9f12a37b230451161dd9bf178f8b3b58" kindref="member">m_Ge_gate</ref><sp/>=<sp/>0;<sp/></highlight><highlight class="comment">//<sp/>0<sp/>:<sp/>no<sp/>gate,<sp/>n<sp/>:<sp/>n-th<sp/>gate</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="134" refid="class_sorted___event_1ac7e90f4a218ef319773a5ddc6a995c8a" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="class_sorted___event_1ac7e90f4a218ef319773a5ddc6a995c8a" kindref="member">m_CloverTrig</ref><sp/>=<sp/>0.;</highlight></codeline>
+<codeline lineno="135" refid="class_sorted___event_1af83ca11fecbdf62aa69c1a097e830fb0" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="class_sorted___event_1af83ca11fecbdf62aa69c1a097e830fb0" kindref="member">m_TW_DSSD</ref><sp/>;</highlight></codeline>
+<codeline lineno="136" refid="class_sorted___event_1a3d46dc8c37e87cef27a095383c1d7049" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="class_timewalks" kindref="compound">Timewalks</ref><sp/><ref refid="class_sorted___event_1a3d46dc8c37e87cef27a095383c1d7049" kindref="member">m_Timewalks_DSSD</ref>;</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"></highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//Parameters<sp/>:</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="139" refid="class_sorted___event_1a7bd2e904870df77e81e1e28605ddbab8" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>Float_t<sp/><ref refid="class_sorted___event_1a7bd2e904870df77e81e1e28605ddbab8" kindref="member">m_max_time</ref>;</highlight></codeline>
+<codeline lineno="140"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"></highlight></codeline>
+<codeline lineno="142"><highlight class="normal">Float_t<sp/><ref refid="class_sorted___event_1a7bd2e904870df77e81e1e28605ddbab8" kindref="member">Sorted_Event::m_max_time</ref><sp/>=<sp/>9999999.;<sp/></highlight><highlight class="comment">//<sp/>Dumb<sp/>default<sp/>value</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="143"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="class_sorted___event_1af83ca11fecbdf62aa69c1a097e830fb0" kindref="member">Sorted_Event::m_TW_DSSD</ref><sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><ref refid="class_timewalks" kindref="compound">Timewalks</ref><sp/><ref refid="class_sorted___event_1a3d46dc8c37e87cef27a095383c1d7049" kindref="member">Sorted_Event::m_Timewalks_DSSD</ref>;</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="class_sorted___event_1af4fbf9443170583d1a658543226f870e" kindref="member">Sorted_Event::m_max_time_dssd</ref><sp/>=<sp/>-100;</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="class_sorted___event_1aba89239da62f60c549457352c6a78812" kindref="member">Sorted_Event::m_min_time_dssd</ref><sp/>=<sp/>400;</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="class_sorted___event_1a92e44ec90d57492227be6e120e6e20d9" kindref="member">Sorted_Event::m_max_E_dssd</ref><sp/>=<sp/>1.E+12;</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"></highlight></codeline>
+<codeline lineno="149" refid="class_sorted___event_1ae37ee47028e933026de2f3a2906f8564" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_sorted___event_1ae37ee47028e933026de2f3a2906f8564" kindref="member">Sorted_Event::setTWcorrectionsDSSD</ref>(std::string<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>filename)</highlight></codeline>
+<codeline lineno="150"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/><ref refid="class_sorted___event_1a3d46dc8c37e87cef27a095383c1d7049" kindref="member">m_Timewalks_DSSD</ref>.<ref refid="class_timewalks_1a72fdfa46fc95d2bf895082b30ccb6bbf" kindref="member">resize</ref>(56);</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"><sp/><sp/><ref refid="class_sorted___event_1a3d46dc8c37e87cef27a095383c1d7049" kindref="member">m_Timewalks_DSSD</ref>.<ref refid="class_timewalks_1a4292dfbeb4cff4c470bd04d2206dc28a" kindref="member">loadFile</ref>(filename);</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/><ref refid="class_sorted___event_1af83ca11fecbdf62aa69c1a097e830fb0" kindref="member">m_TW_DSSD</ref><sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="154"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"></highlight></codeline>
+<codeline lineno="156" refid="class_sorted___event_1afc0b469d164d06c59dd19b580202ac2b" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_sorted___event_1afc0b469d164d06c59dd19b580202ac2b" kindref="member">Sorted_Event::initialise</ref>()</highlight></codeline>
+<codeline lineno="157"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"><sp/><sp/><ref refid="class_sorted___event_1a790240303b1df1a9f60359bcaf667ae6" kindref="member">nrj_clover</ref>.fill(0);</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"><sp/><sp/><ref refid="class_sorted___event_1ac44a4857dde092f1b32fdcdf9c8679e1" kindref="member">time_clover</ref>.fill(0);</highlight></codeline>
+<codeline lineno="160"><highlight class="normal"><sp/><sp/><ref refid="class_sorted___event_1a89a3ad21720b8c31773799a549da8746" kindref="member">prompt_Ge</ref>.fill(0);</highlight></codeline>
+<codeline lineno="161"><highlight class="normal"><sp/><sp/><ref refid="class_sorted___event_1a217d7d6f84825fd80c09047168759078" kindref="member">delayed_Ge</ref>.fill(0);</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/><ref refid="class_sorted___event_1afe0f8fb89d3ee3065b672d919122c377" kindref="member">Ge</ref>.fill(0);</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"><sp/><sp/><ref refid="class_sorted___event_1acc6df50642355743d54630834ff98c4f" kindref="member">BGO</ref>.fill(0);</highlight></codeline>
+<codeline lineno="164"><highlight class="normal"><sp/><sp/><ref refid="class_sorted___event_1a5cc067d81bda02f44385c8cd892604d6" kindref="member">maxE</ref>.fill(0);</highlight></codeline>
+<codeline lineno="165"><highlight class="normal"><sp/><sp/><ref refid="class_sorted___event_1ab9fc30633428e8bdf601ce500a7c740d" kindref="member">maxE_hit</ref>.fill(0);</highlight></codeline>
+<codeline lineno="166"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"></highlight></codeline>
+<codeline lineno="168" refid="class_sorted___event_1a2f319d8e3d1ba4752d583732ea5ebac5" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_sorted___event_1a2f319d8e3d1ba4752d583732ea5ebac5" kindref="member">Sorted_Event::fillEvent</ref>(<ref refid="class_event" kindref="compound">Event</ref><sp/>&amp;<sp/>event)</highlight></codeline>
+<codeline lineno="169"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">event</highlight><highlight class="normal">.clear();</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">event</highlight><highlight class="normal">.mult<sp/>=<sp/><ref refid="class_sorted___event_1a305216fefa6fd71376e828702590fb82" kindref="member">RawMult</ref>;</highlight></codeline>
+<codeline lineno="172"><highlight class="normal"></highlight></codeline>
+<codeline lineno="173"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"></highlight></codeline>
+<codeline lineno="175" refid="class_sorted___event_1a9d502b0a90b38c3a02d1d12e19818231" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_sorted___event_1a9d502b0a90b38c3a02d1d12e19818231" kindref="member">Sorted_Event::reset</ref>()</highlight></codeline>
+<codeline lineno="176"><highlight class="normal">{<sp/></highlight><highlight class="comment">//<sp/>Reset<sp/>all<sp/>the<sp/>data<sp/>and<sp/>counters</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="177"><highlight class="normal"></highlight></codeline>
+<codeline lineno="178"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>In<sp/>order<sp/>to<sp/>be<sp/>efficient,<sp/>only<sp/>the<sp/>clovers<sp/>that<sp/>have<sp/>data<sp/>are<sp/>reset</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="179"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>and<sp/>clover_hits<sp/>is<sp/>the<sp/>list<sp/>of<sp/>the<sp/>clovers<sp/>with<sp/>data</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="180"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>i<sp/>:<sp/><ref refid="class_sorted___event_1ad051aa059b852a3332a2fa339d51b439" kindref="member">clover_hits</ref>)</highlight></codeline>
+<codeline lineno="181"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="182"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_sorted___event_1a790240303b1df1a9f60359bcaf667ae6" kindref="member">nrj_clover</ref>[i]<sp/>=<sp/>0.;</highlight></codeline>
+<codeline lineno="183"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_sorted___event_1ac44a4857dde092f1b32fdcdf9c8679e1" kindref="member">time_clover</ref>[i]<sp/>=<sp/>0.;</highlight></codeline>
+<codeline lineno="184"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_sorted___event_1a89a3ad21720b8c31773799a549da8746" kindref="member">prompt_Ge</ref>[i]<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="185"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_sorted___event_1a217d7d6f84825fd80c09047168759078" kindref="member">delayed_Ge</ref>[i]<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="186"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_sorted___event_1afe0f8fb89d3ee3065b672d919122c377" kindref="member">Ge</ref>[i]<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="187"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_sorted___event_1a5cc067d81bda02f44385c8cd892604d6" kindref="member">maxE</ref>[i]<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="188"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_sorted___event_1ab9fc30633428e8bdf601ce500a7c740d" kindref="member">maxE_hit</ref>[i]<sp/>=<sp/>0.;</highlight></codeline>
+<codeline lineno="189"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="190"><highlight class="normal"><sp/><sp/><ref refid="class_sorted___event_1ad051aa059b852a3332a2fa339d51b439" kindref="member">clover_hits</ref>.resize(0);</highlight></codeline>
+<codeline lineno="191"><highlight class="normal"><sp/><sp/><ref refid="class_sorted___event_1acc6df50642355743d54630834ff98c4f" kindref="member">BGO</ref>.fill(0);</highlight></codeline>
+<codeline lineno="192"><highlight class="normal"></highlight></codeline>
+<codeline lineno="193"><highlight class="normal"><sp/><sp/><ref refid="class_sorted___event_1a5a0554eb6b4103e2708c075d90d5102f" kindref="member">paris_hits</ref>.resize(0);</highlight></codeline>
+<codeline lineno="194"><highlight class="normal"></highlight></codeline>
+<codeline lineno="195"><highlight class="normal"><sp/><sp/><ref refid="class_sorted___event_1acce53888877edd4b48d39fb839568686" kindref="member">DSSD_hits</ref>.resize(0);</highlight></codeline>
+<codeline lineno="196"><highlight class="normal"><sp/><sp/><ref refid="class_sorted___event_1a0b8804fbc01dcca5672ac643f31e5f34" kindref="member">DSSD_is_Prompt</ref>.resize(0);</highlight></codeline>
+<codeline lineno="197"><highlight class="normal"><sp/><sp/><ref refid="class_sorted___event_1adda847aa307f15404d9583a91bc899dd" kindref="member">DSSD_is_Ring</ref>.resize(0);</highlight></codeline>
+<codeline lineno="198"><highlight class="normal"><sp/><sp/><ref refid="class_sorted___event_1a292fd4bcf2f78c6686b3670151a0148b" kindref="member">DSSD_Rings</ref>.resize(0);</highlight></codeline>
+<codeline lineno="199"><highlight class="normal"><sp/><sp/><ref refid="class_sorted___event_1a38040359f67b3cb549ae25efd11010ca" kindref="member">DSSD_Sectors</ref>.resize(0);</highlight></codeline>
+<codeline lineno="200"><highlight class="normal"><sp/><sp/><ref refid="class_sorted___event_1a7c0d86edaf267d454bd0c9a9d1a7ddad" kindref="member">dssd_veto</ref><sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="201"><highlight class="normal"></highlight></codeline>
+<codeline lineno="202"><highlight class="normal"><sp/><sp/><ref refid="class_sorted___event_1a98cd91158d1cff362fcdd0ba59285578" kindref="member">LaBr3_event</ref>.resize(0);</highlight></codeline>
+<codeline lineno="203"><highlight class="normal"></highlight></codeline>
+<codeline lineno="204"><highlight class="normal"><sp/><sp/><ref refid="class_sorted___event_1a305216fefa6fd71376e828702590fb82" kindref="member">RawMult</ref>=0;</highlight></codeline>
+<codeline lineno="205"><highlight class="normal"><sp/><sp/><ref refid="class_sorted___event_1af17ec35e8657df6df0117f86522971e7" kindref="member">LaBr3Mult</ref>=0;<sp/><ref refid="class_sorted___event_1ab238484c396ccd1c8e42b47d5667036e" kindref="member">ParisMult</ref>=0;<sp/><ref refid="class_sorted___event_1a0953771269326213845c7b5e322d8b9b" kindref="member">ParisLaBr3Mult</ref>=0;</highlight></codeline>
+<codeline lineno="206"><highlight class="normal"><sp/><sp/><ref refid="class_sorted___event_1a87e18e85b327bc463a15d2d1f8ae2c5c" kindref="member">RawGeMult</ref>=0;<sp/><ref refid="class_sorted___event_1a9eb9e7402daa10c3b44f22c6f69bff39" kindref="member">CloverMult</ref>=0;<sp/><ref refid="class_sorted___event_1a21f62bdd71090a120484f3422e83bf98" kindref="member">CloverGeMult</ref>=0;<sp/><ref refid="class_sorted___event_1a8d737abb70590129a32cc2b3aeaa78bb" kindref="member">CleanGeMult</ref>=0;</highlight></codeline>
+<codeline lineno="207"><highlight class="normal"><sp/><sp/><ref refid="class_sorted___event_1a07235caacabfe9b670119ca3ecdc43c4" kindref="member">BGOMult</ref>=0;<sp/><ref refid="class_sorted___event_1a7c3603956ae1ccc8d5e8e2c38685b0ec" kindref="member">ComptonVetoMult</ref>=0;</highlight></codeline>
+<codeline lineno="208"><highlight class="normal"><sp/><sp/><ref refid="class_sorted___event_1a65a8b6ce485585984024eced77e49b82" kindref="member">DSSDMult</ref><sp/>=<sp/>0;<sp/><ref refid="class_sorted___event_1adbdf0fec160de9a231540cf86957f591" kindref="member">DSSDSectorMult</ref>=0;<sp/><ref refid="class_sorted___event_1aaf85a6d33b35b28d1cb08be625434797" kindref="member">DSSDRingMult</ref>=0;</highlight></codeline>
+<codeline lineno="209"><highlight class="normal"><sp/><sp/><ref refid="class_sorted___event_1ab4365b400a2db27cecf6fc004cd84994" kindref="member">ModulesMult</ref>=0;</highlight></codeline>
+<codeline lineno="210"><highlight class="normal"></highlight></codeline>
+<codeline lineno="211"><highlight class="normal"><sp/><sp/><ref refid="class_sorted___event_1a81716b8c8388f1851d60f9303b222d3a" kindref="member">PromptMult</ref><sp/>=<sp/>0;<sp/><ref refid="class_sorted___event_1aff1bffd972d757e223bb585f82497e0c" kindref="member">DelayedMult</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="212"><highlight class="normal"><sp/><sp/><ref refid="class_sorted___event_1abe7176d286a1c23d30fc75061ec2f0ad" kindref="member">PromptGeMult</ref><sp/>=<sp/>0;<sp/><ref refid="class_sorted___event_1ad59e5cf64f9c59e52bd8f67d5650225c" kindref="member">DelayedGeMult</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="213"><highlight class="normal"><sp/><sp/><ref refid="class_sorted___event_1aa2f0ced4d05acb2fb3e6e6a7c22d69f7" kindref="member">DSSDPrompt</ref>=</highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="214"><highlight class="normal"></highlight></codeline>
+<codeline lineno="215"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>N_SI_129</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="216"><highlight class="normal"><sp/><sp/>DSSDFirstBlob=</highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="217"><highlight class="normal"><sp/><sp/>DSSDSecondBlob=</highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="218"><highlight class="normal"><sp/><sp/>DSSDThirdBlob=</highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="219"><highlight class="normal"><sp/><sp/>DSSDTail<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="220"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//N_SI_129</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="221"><highlight class="normal"></highlight></codeline>
+<codeline lineno="222"><highlight class="normal"><sp/><sp/><ref refid="class_sorted___event_1a9f12a37b230451161dd9bf178f8b3b58" kindref="member">m_Ge_gate</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="223"><highlight class="normal"><sp/><sp/><ref refid="class_sorted___event_1ac7e90f4a218ef319773a5ddc6a995c8a" kindref="member">m_CloverTrig</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="224"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="225"><highlight class="normal"></highlight></codeline>
+<codeline lineno="226" refid="class_sorted___event_1ae41291f8d1975f8ed7b52ad65dfeeac9" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_sorted___event_1ae41291f8d1975f8ed7b52ad65dfeeac9" kindref="member">Sorted_Event::setMaxTime</ref>(Float_t<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>max_time)</highlight></codeline>
+<codeline lineno="227"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="228"><highlight class="normal"><sp/><sp/><ref refid="class_sorted___event_1a7bd2e904870df77e81e1e28605ddbab8" kindref="member">m_max_time</ref><sp/>=<sp/>max_time;</highlight></codeline>
+<codeline lineno="229"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="230"><highlight class="normal"></highlight></codeline>
+<codeline lineno="231" refid="class_sorted___event_1a868a20701f8be649bbaf0a0366c378d0" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="class_sorted___event_1a868a20701f8be649bbaf0a0366c378d0" kindref="member">Sorted_Event::sortGeClover</ref>(<ref refid="class_event" kindref="compound">Event</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>event,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>i)</highlight></codeline>
+<codeline lineno="232"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="233"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>label<sp/>=<sp/></highlight><highlight class="keyword">event</highlight><highlight class="normal">.labels[i];</highlight></codeline>
+<codeline lineno="234"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>nrj<sp/>=<sp/></highlight><highlight class="keyword">event</highlight><highlight class="normal">.nrjs[i];</highlight></codeline>
+<codeline lineno="235"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>clover_label<sp/>=<sp/><ref refid="_detectors_8hpp_1adccbc8332a89f48a35baea4a37255e2c" kindref="member">labelToClover</ref>[label];</highlight></codeline>
+<codeline lineno="236"><highlight class="normal"></highlight></codeline>
+<codeline lineno="237"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(nrj&lt;5)<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="238"><highlight class="normal"></highlight></codeline>
+<codeline lineno="239"><highlight class="normal"><sp/><sp/><ref refid="vector__functions_8hpp_1a0714a23fb316299fdee1e44d9f46343b" kindref="member">push_back_unique</ref>(<ref refid="class_sorted___event_1ad051aa059b852a3332a2fa339d51b439" kindref="member">clover_hits</ref>,<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal"><ref refid="lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21" kindref="member">uchar</ref></highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(clover_label));</highlight></codeline>
+<codeline lineno="240"><highlight class="normal"></highlight></codeline>
+<codeline lineno="241"><highlight class="normal"><sp/><sp/><ref refid="class_sorted___event_1a790240303b1df1a9f60359bcaf667ae6" kindref="member">nrj_clover</ref>[clover_label]<sp/>+=<sp/>nrj;</highlight></codeline>
+<codeline lineno="242"><highlight class="normal"><sp/><sp/><ref refid="class_sorted___event_1afe0f8fb89d3ee3065b672d919122c377" kindref="member">Ge</ref>[clover_label]++;</highlight></codeline>
+<codeline lineno="243"><highlight class="normal"></highlight></codeline>
+<codeline lineno="244"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>To<sp/>get<sp/>the<sp/>crystal<sp/>that<sp/>got<sp/>the<sp/>maximum<sp/>energy<sp/>in<sp/>a<sp/>clover<sp/>:</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="245"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(nrj<sp/>&gt;<sp/><ref refid="class_sorted___event_1a5cc067d81bda02f44385c8cd892604d6" kindref="member">maxE</ref>[clover_label])</highlight></codeline>
+<codeline lineno="246"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="247"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(event.<ref refid="class_event_1a9c01144b3f06d4cc5234ae3736fec9d2" kindref="member">read</ref>.<ref refid="class_i_options_1a48254b9cb7fdeeacf1f42444333a377a" kindref="member">T</ref>)<sp/><ref refid="class_sorted___event_1ac44a4857dde092f1b32fdcdf9c8679e1" kindref="member">time_clover</ref>[clover_label]<sp/>=<sp/><ref refid="class_sorted___event_1a92097f7b335c6b79b7ef068f555dcddc" kindref="member">time2s</ref>[i];</highlight></codeline>
+<codeline lineno="248"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_sorted___event_1a5cc067d81bda02f44385c8cd892604d6" kindref="member">maxE</ref>[clover_label]<sp/>=<sp/>nrj;</highlight></codeline>
+<codeline lineno="249"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_sorted___event_1ab9fc30633428e8bdf601ce500a7c740d" kindref="member">maxE_hit</ref>[clover_label]<sp/>=<sp/>i;</highlight></codeline>
+<codeline lineno="250"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="251"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="252"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="253"><highlight class="normal"></highlight></codeline>
+<codeline lineno="254" refid="class_sorted___event_1a526eefb6a423a59ff6096766c04c98e2" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_sorted___event_1ad502809ad5cbea67fd40cb42ab2c4b71" kindref="member">Sorted_Event::sortEvent</ref>(<ref refid="class_event" kindref="compound">Event</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>event)</highlight></codeline>
+<codeline lineno="255"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="256"><highlight class="normal"><sp/><sp/>this-&gt;<ref refid="class_sorted___event_1a9d502b0a90b38c3a02d1d12e19818231" kindref="member">reset</ref>();</highlight></codeline>
+<codeline lineno="257"><highlight class="normal"><sp/><sp/><ref refid="class_sorted___event_1a305216fefa6fd71376e828702590fb82" kindref="member">RawMult</ref><sp/>=<sp/></highlight><highlight class="keyword">event</highlight><highlight class="normal">.size();</highlight></codeline>
+<codeline lineno="258"><highlight class="normal"></highlight></codeline>
+<codeline lineno="259"><highlight class="normal"><sp/><sp/><ref refid="lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21" kindref="member">uchar</ref><sp/>clover_label<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="260"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(<ref refid="lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21" kindref="member">uchar</ref><sp/>i<sp/>=<sp/>0;<sp/>i&lt;</highlight><highlight class="keyword">event</highlight><highlight class="normal">.size();<sp/>i++)</highlight></codeline>
+<codeline lineno="261"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="262"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(event.<ref refid="class_event_1a9c01144b3f06d4cc5234ae3736fec9d2" kindref="member">read</ref>.<ref refid="class_i_options_1af82eb678f8bb2f7984016b278cc24875" kindref="member">t</ref>)<sp/><ref refid="class_sorted___event_1a92097f7b335c6b79b7ef068f555dcddc" kindref="member">time2s</ref>[i]<sp/>=<sp/>(<ref refid="class_sorted___event_1a5ca1220e7a8817fb46e550a2e1ff6b2a" kindref="member">m_rf</ref>)<sp/>?<sp/><ref refid="class_sorted___event_1a5ca1220e7a8817fb46e550a2e1ff6b2a" kindref="member">m_rf</ref>-&gt;<ref refid="class_r_f___manager_1a15356af241ce65874d01c9479ab48aa4" kindref="member">pulse_ToF</ref>(event.<ref refid="class_event_1a24cba1790b71f725050f229c129e91d4" kindref="member">time2s</ref>[i],<sp/>50000ll)<sp/>:<sp/>(</highlight><highlight class="keyword">event</highlight><highlight class="normal">.time2s[i]-</highlight><highlight class="keyword">event</highlight><highlight class="normal">.time2s[0])/<ref refid="lib_co_8hpp_1a99f92dd785ee1e11e00427fdc8a4f772" kindref="member">_ns</ref>;</highlight></codeline>
+<codeline lineno="263"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(event.<ref refid="class_event_1a9c01144b3f06d4cc5234ae3736fec9d2" kindref="member">read</ref>.<ref refid="class_i_options_1a48254b9cb7fdeeacf1f42444333a377a" kindref="member">T</ref>)<sp/><ref refid="class_sorted___event_1a92097f7b335c6b79b7ef068f555dcddc" kindref="member">time2s</ref>[i]<sp/>=<sp/></highlight><highlight class="keyword">event</highlight><highlight class="normal">.time2s[i];<sp/></highlight><highlight class="comment">//<sp/>Overwrites<sp/>the<sp/>absolute<sp/>time<sp/>if<sp/>relative<sp/>Time<sp/>is<sp/>read<sp/>in<sp/>the<sp/>data<sp/>(parameter<sp/>&apos;T&apos;<sp/>in<sp/>connect()<sp/>Event&apos;s<sp/>method)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="264"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="class_sorted___event_1a92097f7b335c6b79b7ef068f555dcddc" kindref="member">time2s</ref>[i]&gt;<ref refid="class_sorted___event_1a7bd2e904870df77e81e1e28605ddbab8" kindref="member">m_max_time</ref>)<sp/></highlight><highlight class="keywordflow">continue</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="265"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="_detectors_8hpp_1a5da74af4e038f2a435565e2e93a6831e" kindref="member">isGe</ref>[event.<ref refid="class_event_1ad016b65deeaef393a94793ef140e1bb8" kindref="member">labels</ref>[i]])</highlight></codeline>
+<codeline lineno="266"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="267"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!<ref refid="class_sorted___event_1a868a20701f8be649bbaf0a0366c378d0" kindref="member">sortGeClover</ref>(event,<sp/>i))<sp/></highlight><highlight class="keywordflow">continue</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="268"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_sorted___event_1a87e18e85b327bc463a15d2d1f8ae2c5c" kindref="member">RawGeMult</ref>++;</highlight></codeline>
+<codeline lineno="269"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="270"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="_detectors_8hpp_1acad86c343cb1a6d3f382c2468415cc8a" kindref="member">isBGO</ref>[event.<ref refid="class_event_1ad016b65deeaef393a94793ef140e1bb8" kindref="member">labels</ref>[i]])</highlight></codeline>
+<codeline lineno="271"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="272"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>clover_label<sp/>=<sp/><ref refid="_detectors_8hpp_1adccbc8332a89f48a35baea4a37255e2c" kindref="member">labelToClover</ref>[</highlight><highlight class="keyword">event</highlight><highlight class="normal">.labels[i]];</highlight></codeline>
+<codeline lineno="273"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="class_sorted___event_1a5ca1220e7a8817fb46e550a2e1ff6b2a" kindref="member">m_rf</ref>)<sp/><ref refid="class_sorted___event_1ac44a4857dde092f1b32fdcdf9c8679e1" kindref="member">time_clover</ref>[clover_label]<sp/>=<sp/><ref refid="class_sorted___event_1a5ca1220e7a8817fb46e550a2e1ff6b2a" kindref="member">m_rf</ref>-&gt;<ref refid="class_r_f___manager_1a15356af241ce65874d01c9479ab48aa4" kindref="member">pulse_ToF</ref>(event.<ref refid="class_event_1a24cba1790b71f725050f229c129e91d4" kindref="member">time2s</ref>[i],<sp/>50000ll)/<ref refid="lib_co_8hpp_1a99f92dd785ee1e11e00427fdc8a4f772" kindref="member">_ns</ref>;</highlight></codeline>
+<codeline lineno="274"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/><ref refid="class_sorted___event_1ac44a4857dde092f1b32fdcdf9c8679e1" kindref="member">time_clover</ref>[clover_label]<sp/>=<sp/>(</highlight><highlight class="keyword">event</highlight><highlight class="normal">.time2s[i]-</highlight><highlight class="keyword">event</highlight><highlight class="normal">.time2s[0])/<ref refid="lib_co_8hpp_1a99f92dd785ee1e11e00427fdc8a4f772" kindref="member">_ns</ref>;</highlight></codeline>
+<codeline lineno="275"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_sorted___event_1acc6df50642355743d54630834ff98c4f" kindref="member">BGO</ref>[clover_label]++;</highlight></codeline>
+<codeline lineno="276"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="277"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="_detectors_8hpp_1ac1f4e8d98df1dbbcb0c6ccf4a7b9a538" kindref="member">isLaBr3</ref>[event.<ref refid="class_event_1ad016b65deeaef393a94793ef140e1bb8" kindref="member">labels</ref>[i]])</highlight></codeline>
+<codeline lineno="278"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="279"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_la_br3___hit" kindref="compound">LaBr3_Hit</ref><sp/>labr3_hit;</highlight></codeline>
+<codeline lineno="280"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>labr3_hit.<ref refid="struct_la_br3___hit_1ae287180c5639726f2d4905e52a678597" kindref="member">nrjcal</ref><sp/>=<sp/></highlight><highlight class="keyword">event</highlight><highlight class="normal">.nrjs[i];</highlight></codeline>
+<codeline lineno="281"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>labr3_hit.<ref refid="struct_la_br3___hit_1ac232600348d6e8374bd2c80d080adc2a" kindref="member">label</ref><sp/>=<sp/></highlight><highlight class="keyword">event</highlight><highlight class="normal">.labels[i]-199;</highlight></codeline>
+<codeline lineno="282"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="class_sorted___event_1a5ca1220e7a8817fb46e550a2e1ff6b2a" kindref="member">m_rf</ref>)<sp/>labr3_hit.<ref refid="struct_la_br3___hit_1a37b178a0c74cf89bd93a94f2765ece64" kindref="member">time</ref><sp/>=<sp/><ref refid="class_sorted___event_1a5ca1220e7a8817fb46e550a2e1ff6b2a" kindref="member">m_rf</ref>-&gt;<ref refid="class_r_f___manager_1a15356af241ce65874d01c9479ab48aa4" kindref="member">pulse_ToF</ref>(event.<ref refid="class_event_1a24cba1790b71f725050f229c129e91d4" kindref="member">time2s</ref>[i],<sp/>50000ll)/<ref refid="lib_co_8hpp_1a99f92dd785ee1e11e00427fdc8a4f772" kindref="member">_ns</ref>;</highlight></codeline>
+<codeline lineno="283"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>labr3_hit.<ref refid="struct_la_br3___hit_1a37b178a0c74cf89bd93a94f2765ece64" kindref="member">time</ref><sp/>=<sp/>(</highlight><highlight class="keyword">event</highlight><highlight class="normal">.time2s[i]-</highlight><highlight class="keyword">event</highlight><highlight class="normal">.time2s[0])/<ref refid="lib_co_8hpp_1a99f92dd785ee1e11e00427fdc8a4f772" kindref="member">_ns</ref>;</highlight></codeline>
+<codeline lineno="284"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_sorted___event_1a98cd91158d1cff362fcdd0ba59285578" kindref="member">LaBr3_event</ref>.push_back(labr3_hit);</highlight></codeline>
+<codeline lineno="285"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_sorted___event_1ab4365b400a2db27cecf6fc004cd84994" kindref="member">ModulesMult</ref>++;</highlight></codeline>
+<codeline lineno="286"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_sorted___event_1af17ec35e8657df6df0117f86522971e7" kindref="member">LaBr3Mult</ref>++;</highlight></codeline>
+<codeline lineno="287"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="288"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="_detectors_8hpp_1a82c5910e3b4f178c276c8b888c5ac162" kindref="member">isParis</ref>[event.<ref refid="class_event_1ad016b65deeaef393a94793ef140e1bb8" kindref="member">labels</ref>[i]])</highlight></codeline>
+<codeline lineno="289"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="290"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_sorted___event_1a5a0554eb6b4103e2708c075d90d5102f" kindref="member">paris_hits</ref>.push_back(i);</highlight></codeline>
+<codeline lineno="291"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_sorted___event_1ab4365b400a2db27cecf6fc004cd84994" kindref="member">ModulesMult</ref>++;</highlight></codeline>
+<codeline lineno="292"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_sorted___event_1af17ec35e8657df6df0117f86522971e7" kindref="member">LaBr3Mult</ref>++;</highlight></codeline>
+<codeline lineno="293"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_sorted___event_1ab238484c396ccd1c8e42b47d5667036e" kindref="member">ParisMult</ref>++;</highlight></codeline>
+<codeline lineno="294"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="295"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="_detectors_8hpp_1a3148345147f51e96aaa73e5d9f8e9d93" kindref="member">isDSSD</ref>[event.<ref refid="class_event_1ad016b65deeaef393a94793ef140e1bb8" kindref="member">labels</ref>[i]])</highlight></codeline>
+<codeline lineno="296"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="297"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_sorted___event_1acce53888877edd4b48d39fb839568686" kindref="member">DSSD_hits</ref>.push_back(i);</highlight></codeline>
+<codeline lineno="298"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>nrj<sp/>=<sp/></highlight><highlight class="keyword">event</highlight><highlight class="normal">.nrjs[i];</highlight></codeline>
+<codeline lineno="299"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>label<sp/>=<sp/></highlight><highlight class="keyword">event</highlight><highlight class="normal">.labels[i];</highlight></codeline>
+<codeline lineno="300"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/>#ifdef<sp/>N_SI_129</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="301"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>time<sp/>=<sp/><ref refid="class_sorted___event_1a92097f7b335c6b79b7ef068f555dcddc" kindref="member">time2s</ref>[i];</highlight></codeline>
+<codeline lineno="302"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(time&gt;-5<sp/>&amp;&amp;<sp/>time&lt;15<sp/>&amp;&amp;<sp/>nrj&gt;8500<sp/>&amp;&amp;<sp/>nrj&lt;11000)<sp/>DSSDFirstBlob<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="303"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(time&gt;<sp/>3<sp/>&amp;&amp;<sp/>time&lt;18<sp/>&amp;&amp;<sp/>nrj&gt;5500<sp/>&amp;&amp;<sp/>nrj&lt;7500)<sp/>DSSDSecondBlob<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="304"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(time&gt;10<sp/>&amp;&amp;<sp/>time&lt;20<sp/>&amp;&amp;<sp/>nrj&gt;3800<sp/>&amp;&amp;<sp/>nrj&lt;5500)<sp/>DSSDThirdBlob<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="305"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(time&gt;25<sp/>&amp;&amp;<sp/>time&lt;70<sp/>&amp;&amp;<sp/>nrj&gt;2000<sp/>&amp;&amp;<sp/>nrj&lt;3500)<sp/>DSSDTail<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="306"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#endif<sp/></highlight><highlight class="comment">//N_SI_129</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="307"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="class_sorted___event_1af83ca11fecbdf62aa69c1a097e830fb0" kindref="member">m_TW_DSSD</ref>)</highlight></codeline>
+<codeline lineno="308"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="309"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_sorted___event_1a92097f7b335c6b79b7ef068f555dcddc" kindref="member">time2s</ref>[i]<sp/>-=<sp/><ref refid="class_sorted___event_1a3d46dc8c37e87cef27a095383c1d7049" kindref="member">m_Timewalks_DSSD</ref>.<ref refid="class_timewalks_1ab225d0299ef0edc2dc125030f43fcf05" kindref="member">get</ref>(label-800,<sp/>nrj);</highlight></codeline>
+<codeline lineno="310"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_sorted___event_1a0b8804fbc01dcca5672ac643f31e5f34" kindref="member">DSSD_is_Prompt</ref>.push_back((<ref refid="class_sorted___event_1a92097f7b335c6b79b7ef068f555dcddc" kindref="member">time2s</ref>[i]&gt;-10<sp/>&amp;&amp;<sp/><ref refid="class_sorted___event_1a92097f7b335c6b79b7ef068f555dcddc" kindref="member">time2s</ref>[i]&lt;10));</highlight></codeline>
+<codeline lineno="311"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="class_sorted___event_1a92097f7b335c6b79b7ef068f555dcddc" kindref="member">time2s</ref>[i]&lt;<ref refid="class_sorted___event_1aba89239da62f60c549457352c6a78812" kindref="member">m_min_time_dssd</ref><sp/>||<sp/><ref refid="class_sorted___event_1a92097f7b335c6b79b7ef068f555dcddc" kindref="member">time2s</ref>[i]&gt;<ref refid="class_sorted___event_1af4fbf9443170583d1a658543226f870e" kindref="member">m_max_time_dssd</ref><sp/>||<sp/>nrj&gt;<ref refid="class_sorted___event_1a92e44ec90d57492227be6e120e6e20d9" kindref="member">m_max_E_dssd</ref>)<sp/><ref refid="class_sorted___event_1a7c0d86edaf267d454bd0c9a9d1a7ddad" kindref="member">dssd_veto</ref><sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="312"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="313"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/><ref refid="class_sorted___event_1a0b8804fbc01dcca5672ac643f31e5f34" kindref="member">DSSD_is_Prompt</ref>.push_back((<ref refid="class_sorted___event_1a92097f7b335c6b79b7ef068f555dcddc" kindref="member">time2s</ref>[i]&gt;0<sp/>&amp;&amp;<sp/><ref refid="class_sorted___event_1a92097f7b335c6b79b7ef068f555dcddc" kindref="member">time2s</ref>[i]&lt;50));</highlight></codeline>
+<codeline lineno="314"><highlight class="normal"></highlight></codeline>
+<codeline lineno="315"><highlight class="normal"></highlight></codeline>
+<codeline lineno="316"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>is_ring<sp/>=<sp/><ref refid="_detectors_8hpp_1a256ea354de5d7f81049eaf74528626b7" kindref="member">isRing</ref>[</highlight><highlight class="keyword">event</highlight><highlight class="normal">.labels[i]];</highlight></codeline>
+<codeline lineno="317"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_sorted___event_1adda847aa307f15404d9583a91bc899dd" kindref="member">DSSD_is_Ring</ref>.push_back(is_ring);</highlight></codeline>
+<codeline lineno="318"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(is_ring)</highlight></codeline>
+<codeline lineno="319"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="320"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_sorted___event_1a292fd4bcf2f78c6686b3670151a0148b" kindref="member">DSSD_Rings</ref>.push_back(i);</highlight></codeline>
+<codeline lineno="321"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_sorted___event_1aaf85a6d33b35b28d1cb08be625434797" kindref="member">DSSDRingMult</ref>++;</highlight></codeline>
+<codeline lineno="322"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="323"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="324"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="325"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_sorted___event_1a38040359f67b3cb549ae25efd11010ca" kindref="member">DSSD_Sectors</ref>.push_back(i);</highlight></codeline>
+<codeline lineno="326"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_sorted___event_1adbdf0fec160de9a231540cf86957f591" kindref="member">DSSDSectorMult</ref>++;</highlight></codeline>
+<codeline lineno="327"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="328"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_sorted___event_1a65a8b6ce485585984024eced77e49b82" kindref="member">DSSDMult</ref>++;</highlight></codeline>
+<codeline lineno="329"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="330"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="331"><highlight class="normal"></highlight></codeline>
+<codeline lineno="332"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Add-Back<sp/>and<sp/>Compton<sp/>Cleaning<sp/>of<sp/>Clovers<sp/>:</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="333"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>clover<sp/>=<sp/>0;<sp/>clover&lt;24l;<sp/>clover++)</highlight></codeline>
+<codeline lineno="334"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="335"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="class_sorted___event_1afe0f8fb89d3ee3065b672d919122c377" kindref="member">Ge</ref>[clover])</highlight></codeline>
+<codeline lineno="336"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="337"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="class_sorted___event_1ac44a4857dde092f1b32fdcdf9c8679e1" kindref="member">time_clover</ref>[clover_label]&gt;-10<sp/>&amp;&amp;<sp/><ref refid="class_sorted___event_1ac44a4857dde092f1b32fdcdf9c8679e1" kindref="member">time_clover</ref>[clover_label]&lt;70)<sp/><ref refid="class_sorted___event_1a89a3ad21720b8c31773799a549da8746" kindref="member">prompt_Ge</ref>[clover_label]<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="338"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="class_sorted___event_1ac44a4857dde092f1b32fdcdf9c8679e1" kindref="member">time_clover</ref>[clover_label]&gt;70)<sp/><ref refid="class_sorted___event_1a217d7d6f84825fd80c09047168759078" kindref="member">delayed_Ge</ref>[clover_label]<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="339"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_sorted___event_1a9eb9e7402daa10c3b44f22c6f69bff39" kindref="member">CloverMult</ref>++;</highlight></codeline>
+<codeline lineno="340"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_sorted___event_1ab4365b400a2db27cecf6fc004cd84994" kindref="member">ModulesMult</ref>++;</highlight></codeline>
+<codeline lineno="341"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_sorted___event_1a21f62bdd71090a120484f3422e83bf98" kindref="member">CloverGeMult</ref>++;</highlight></codeline>
+<codeline lineno="342"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="class_sorted___event_1acc6df50642355743d54630834ff98c4f" kindref="member">BGO</ref>[clover])<sp/><ref refid="class_sorted___event_1a7c3603956ae1ccc8d5e8e2c38685b0ec" kindref="member">ComptonVetoMult</ref>++;</highlight></codeline>
+<codeline lineno="343"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="344"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="345"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_sorted___event_1a8d737abb70590129a32cc2b3aeaa78bb" kindref="member">CleanGeMult</ref>++;</highlight></codeline>
+<codeline lineno="346"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Energy<sp/>gates<sp/>:</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="347"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="class_sorted___event_1a23d2f4f016d333ccec73efeefe3b6bc2" kindref="member">m_gateON</ref><sp/>&amp;&amp;<sp/><ref refid="class_sorted___event_1a9f12a37b230451161dd9bf178f8b3b58" kindref="member">m_Ge_gate</ref><sp/>==<sp/>0)<sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>gate<sp/>=<sp/>0;<sp/>gate&lt;<ref refid="class_sorted___event_1abf33c022e34dc4b6bdad6d8fdea7fc4e" kindref="member">m_Ge_gates</ref>.size();<sp/>gate++)</highlight></codeline>
+<codeline lineno="348"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="349"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="class_sorted___event_1a790240303b1df1a9f60359bcaf667ae6" kindref="member">nrj_clover</ref>[clover]&gt;<ref refid="class_sorted___event_1abf33c022e34dc4b6bdad6d8fdea7fc4e" kindref="member">m_Ge_gates</ref>[gate].first<sp/>&amp;&amp;<sp/><ref refid="class_sorted___event_1a790240303b1df1a9f60359bcaf667ae6" kindref="member">nrj_clover</ref>[clover]&lt;<ref refid="class_sorted___event_1abf33c022e34dc4b6bdad6d8fdea7fc4e" kindref="member">m_Ge_gates</ref>[gate].second)</highlight></codeline>
+<codeline lineno="350"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="351"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_sorted___event_1a9f12a37b230451161dd9bf178f8b3b58" kindref="member">m_Ge_gate</ref><sp/>=<sp/>gate+1;</highlight></codeline>
+<codeline lineno="352"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_sorted___event_1ac7e90f4a218ef319773a5ddc6a995c8a" kindref="member">m_CloverTrig</ref><sp/>=<sp/>clover;</highlight></codeline>
+<codeline lineno="353"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="354"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="355"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="356"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="357"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="358"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="class_sorted___event_1acc6df50642355743d54630834ff98c4f" kindref="member">BGO</ref>[clover])</highlight></codeline>
+<codeline lineno="359"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="360"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_sorted___event_1a9eb9e7402daa10c3b44f22c6f69bff39" kindref="member">CloverMult</ref>++;</highlight></codeline>
+<codeline lineno="361"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_sorted___event_1ab4365b400a2db27cecf6fc004cd84994" kindref="member">ModulesMult</ref>++;</highlight></codeline>
+<codeline lineno="362"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_sorted___event_1a07235caacabfe9b670119ca3ecdc43c4" kindref="member">BGOMult</ref>++;</highlight></codeline>
+<codeline lineno="363"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="364"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="365"><highlight class="normal"></highlight></codeline>
+<codeline lineno="366"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//Analyse<sp/>DSSD<sp/>:</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="367"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>prompt<sp/>:<sp/><ref refid="class_sorted___event_1a0b8804fbc01dcca5672ac643f31e5f34" kindref="member">DSSD_is_Prompt</ref>)</highlight></codeline>
+<codeline lineno="368"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="369"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(prompt)<sp/><sp/><ref refid="class_sorted___event_1aa2f0ced4d05acb2fb3e6e6a7c22d69f7" kindref="member">DSSDPrompt</ref><sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="370"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{<ref refid="class_sorted___event_1aa2f0ced4d05acb2fb3e6e6a7c22d69f7" kindref="member">DSSDPrompt</ref><sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;<sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;}</highlight></codeline>
+<codeline lineno="371"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="372"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="373"><highlight class="normal"></highlight></codeline>
+<codeline lineno="374"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SORTED_EVENT_H</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="lib/Analyse/Sorted_Event.hpp"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_dir_36293d75d3861a2cc4b09260fc47a5c1" xml:lang="en-US">
+<title>lib/MTObjects Directory Reference</title>
+<indexterm><primary>lib/MTObjects Directory Reference</primary></indexterm>
+Directory dependency graph for MTObjects:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="dir_36293d75d3861a2cc4b09260fc47a5c1_dep.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Files    </title>
+        <itemizedlist>
+            <listitem><para>file <link linkend="__m_t_counter_8hpp">MTCounter.hpp</link></para>
+</listitem>
+            <listitem><para>file <link linkend="__m_t_faster_reader_8hpp">MTFasterReader.hpp</link></para>
+</listitem>
+            <listitem><para>file <link linkend="__m_t_files_manager_8hpp">MTFilesManager.hpp</link></para>
+</listitem>
+            <listitem><para>file <link linkend="__m_t_label_8hpp">MTLabel.hpp</link></para>
+</listitem>
+            <listitem><para>file <link linkend="__m_t_list_8hpp">MTList.hpp</link></para>
+</listitem>
+            <listitem><para>file <link linkend="__m_t_object_8hpp">MTObject.hpp</link></para>
+</listitem>
+            <listitem><para>file <link linkend="__m_t_root_reader_8hpp">MTRootReader.hpp</link></para>
+</listitem>
+            <listitem><para>file <link linkend="__m_t_t_hist_8hpp">MTTHist.hpp</link></para>
+</listitem>
+            <listitem><para>file <link linkend="__m_t_variable_8hpp">MTVariable.hpp</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>

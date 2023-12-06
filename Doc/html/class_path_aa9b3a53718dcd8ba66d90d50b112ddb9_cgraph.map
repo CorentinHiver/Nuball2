@@ -1,0 +1,21 @@
+<map id="Path::load" name="Path::load">
+<area shape="rect" id="node1" title=" " alt="" coords="5,309,92,336"/>
+<area shape="rect" id="node2" href="$class_path.html#ac40c8c627d0412be849f1e6cd4cdc556" title="To remove extraneous ./ or ../." alt="" coords="158,107,279,133"/>
+<area shape="rect" id="node8" href="$class_folders.html#aaa63ca280c10fc90c09cc29e38c80a02" title=" " alt="" coords="164,157,273,184"/>
+<area shape="rect" id="node9" href="$files__functions_8hpp.html#a6d7a6f0ccbecfe41730c211f472cfcb3" title=" " alt="" coords="556,309,663,336"/>
+<area shape="rect" id="node10" href="$files__functions_8hpp.html#a4a072faccd444b8907dffd96e6211461" title=" " alt="" coords="711,259,857,285"/>
+<area shape="rect" id="node11" href="$class_path.html#a08c199926ff5432cd3f35c2df4b07433" title=" " alt="" coords="171,360,266,387"/>
+<area shape="rect" id="node13" href="$class_path.html#a1f94b3b7d475723ead35e54c87078ed7" title=" " alt="" coords="171,411,266,437"/>
+<area shape="rect" id="node15" href="$_histogramor_8hpp.html#ab48a2fa7184e6354788989602c8c8c29" title=" " alt="" coords="583,436,635,463"/>
+<area shape="rect" id="node17" href="$class_path.html#ac9b837b0071ab41b4b0868590786eeae" title=" " alt="" coords="140,512,297,539"/>
+<area shape="rect" id="node19" href="$class_path.html#a0374de2afee27834da4adccf704d4190" title=" " alt="" coords="176,309,261,336"/>
+<area shape="rect" id="node3" href="$class_folders.html#aa6c7cccbbb9de930b9a41dc42dcbb840" title=" " alt="" coords="370,157,483,184"/>
+<area shape="rect" id="node4" href="$class_path.html#a859f02f9224a864b541b15e8db325409" title=" " alt="" coords="379,5,475,32"/>
+<area shape="rect" id="node6" href="$class_folders.html#a6b8b818a0a08a010b9849573883bf189" title=" " alt="" coords="375,56,478,83"/>
+<area shape="rect" id="node7" href="$class_folders.html#a21778cd16e2d1dfa91886bba394a506f" title=" " alt="" coords="369,107,484,133"/>
+<area shape="rect" id="node5" href="$class_folders.html#aab07a96e82a348fe89b817c6d7b60394" title=" " alt="" coords="560,5,659,32"/>
+<area shape="rect" id="node12" href="$class_path.html#af26cfab021ddf49af73da3b2beca85ac" title=" " alt="" coords="383,309,470,336"/>
+<area shape="rect" id="node14" href="$files__functions_8hpp.html#af52310dd2d55713265daa0e58dd7bf21" title=" " alt="" coords="345,411,508,437"/>
+<area shape="rect" id="node16" href="$class_path.html#aecd02f464b364bc26631bcb65e44843b" title=" " alt="" coords="378,360,475,387"/>
+<area shape="rect" id="node18" href="$string__functions_8hpp.html#a44ad60b408ba7b75bdf7ae75f8d2532f" title="Cuts a string into pieces separated by the given separator like &#39;;&#39; or &#39; &#39; or &#39;,&#39; ...." alt="" coords="393,512,460,539"/>
+</map>

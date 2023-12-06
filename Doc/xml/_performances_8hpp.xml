@@ -1,0 +1,476 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="_performances_8hpp" kind="file" language="C++">
+    <compoundname>Performances.hpp</compoundname>
+    <includes refid="lib_co_8hpp" local="yes">../libCo.hpp</includes>
+    <includes refid="_m_t_counter_8hpp" local="yes">../MTObjects/MTCounter.hpp</includes>
+    <includedby refid="_timeshifts_8hpp" local="yes">lib/Modules/Timeshifts.hpp</includedby>
+    <incdepgraph>
+      <node id="27">
+        <label>glob.h</label>
+      </node>
+      <node id="54">
+        <label>TH1S.h</label>
+      </node>
+      <node id="10">
+        <label>iomanip</label>
+      </node>
+      <node id="9">
+        <label>functional</label>
+      </node>
+      <node id="16">
+        <label>queue</label>
+      </node>
+      <node id="32">
+        <label>random.hpp</label>
+        <link refid="random_8hpp"/>
+        <childnode refid="33" relation="include">
+        </childnode>
+      </node>
+      <node id="72">
+        <label>TTreeIndex.h</label>
+      </node>
+      <node id="40">
+        <label>../libRoot.hpp</label>
+        <link refid="lib_root_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+        <childnode refid="42" relation="include">
+        </childnode>
+        <childnode refid="43" relation="include">
+        </childnode>
+        <childnode refid="44" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
+        <childnode refid="46" relation="include">
+        </childnode>
+        <childnode refid="47" relation="include">
+        </childnode>
+        <childnode refid="48" relation="include">
+        </childnode>
+        <childnode refid="49" relation="include">
+        </childnode>
+        <childnode refid="50" relation="include">
+        </childnode>
+        <childnode refid="51" relation="include">
+        </childnode>
+        <childnode refid="52" relation="include">
+        </childnode>
+        <childnode refid="53" relation="include">
+        </childnode>
+        <childnode refid="54" relation="include">
+        </childnode>
+        <childnode refid="55" relation="include">
+        </childnode>
+        <childnode refid="56" relation="include">
+        </childnode>
+        <childnode refid="57" relation="include">
+        </childnode>
+        <childnode refid="58" relation="include">
+        </childnode>
+        <childnode refid="59" relation="include">
+        </childnode>
+        <childnode refid="60" relation="include">
+        </childnode>
+        <childnode refid="61" relation="include">
+        </childnode>
+        <childnode refid="62" relation="include">
+        </childnode>
+        <childnode refid="63" relation="include">
+        </childnode>
+        <childnode refid="64" relation="include">
+        </childnode>
+        <childnode refid="65" relation="include">
+        </childnode>
+        <childnode refid="66" relation="include">
+        </childnode>
+        <childnode refid="67" relation="include">
+        </childnode>
+        <childnode refid="68" relation="include">
+        </childnode>
+        <childnode refid="69" relation="include">
+        </childnode>
+        <childnode refid="70" relation="include">
+        </childnode>
+        <childnode refid="71" relation="include">
+        </childnode>
+        <childnode refid="72" relation="include">
+        </childnode>
+      </node>
+      <node id="37">
+        <label>filesystem</label>
+      </node>
+      <node id="41">
+        <label>TAxis.h</label>
+      </node>
+      <node id="29">
+        <label>stdlib.h</label>
+      </node>
+      <node id="70">
+        <label>TThread.h</label>
+      </node>
+      <node id="53">
+        <label>TH1D.h</label>
+      </node>
+      <node id="66">
+        <label>TStopwatch.h</label>
+      </node>
+      <node id="18">
+        <label>stdexcept</label>
+      </node>
+      <node id="15">
+        <label>numeric</label>
+      </node>
+      <node id="19">
+        <label>string</label>
+      </node>
+      <node id="12">
+        <label>map</label>
+      </node>
+      <node id="38">
+        <label>../MTObjects/MTCounter.hpp</label>
+        <link refid="_m_t_counter_8hpp"/>
+        <childnode refid="39" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>../libCo.hpp</label>
+        <link refid="lib_co_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+      </node>
+      <node id="45">
+        <label>TF1.h</label>
+      </node>
+      <node id="31">
+        <label>print.hpp</label>
+        <link refid="print_8hpp"/>
+      </node>
+      <node id="8">
+        <label>fstream</label>
+      </node>
+      <node id="44">
+        <label>TError.h</label>
+      </node>
+      <node id="68">
+        <label>TStyle.h</label>
+      </node>
+      <node id="3">
+        <label>any</label>
+      </node>
+      <node id="35">
+        <label>files_functions.hpp</label>
+        <link refid="files__functions_8hpp"/>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+      </node>
+      <node id="33">
+        <label>random</label>
+      </node>
+      <node id="64">
+        <label>TROOT.h</label>
+      </node>
+      <node id="30">
+        <label>string.h</label>
+      </node>
+      <node id="23">
+        <label>typeinfo</label>
+      </node>
+      <node id="43">
+        <label>TChain.h</label>
+      </node>
+      <node id="69">
+        <label>TSystem.h</label>
+      </node>
+      <node id="25">
+        <label>vector</label>
+      </node>
+      <node id="20">
+        <label>stack</label>
+      </node>
+      <node id="46">
+        <label>TF2.h</label>
+      </node>
+      <node id="47">
+        <label>TFile.h</label>
+      </node>
+      <node id="42">
+        <label>TCanvas.h</label>
+      </node>
+      <node id="57">
+        <label>TH3I.h</label>
+      </node>
+      <node id="58">
+        <label>TKey.h</label>
+      </node>
+      <node id="36">
+        <label>vector_functions.hpp</label>
+        <link refid="vector__functions_8hpp"/>
+        <childnode refid="31" relation="include">
+        </childnode>
+      </node>
+      <node id="65">
+        <label>TSpectrum.h</label>
+      </node>
+      <node id="4">
+        <label>array</label>
+      </node>
+      <node id="49">
+        <label>TFitResult.h</label>
+      </node>
+      <node id="17">
+        <label>sstream</label>
+      </node>
+      <node id="61">
+        <label>TMarker.h</label>
+      </node>
+      <node id="51">
+        <label>TGraphErrors.h</label>
+      </node>
+      <node id="55">
+        <label>TH2.h</label>
+      </node>
+      <node id="6">
+        <label>cstdlib</label>
+      </node>
+      <node id="52">
+        <label>TH1F.h</label>
+      </node>
+      <node id="59">
+        <label>TLeaf.h</label>
+      </node>
+      <node id="11">
+        <label>iostream</label>
+      </node>
+      <node id="34">
+        <label>string_functions.hpp</label>
+        <link refid="string__functions_8hpp"/>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+      </node>
+      <node id="24">
+        <label>unordered_map</label>
+      </node>
+      <node id="60">
+        <label>TLegend.h</label>
+      </node>
+      <node id="67">
+        <label>TString.h</label>
+      </node>
+      <node id="62">
+        <label>TMath.h</label>
+      </node>
+      <node id="56">
+        <label>TH2F.h</label>
+      </node>
+      <node id="14">
+        <label>mutex</label>
+      </node>
+      <node id="39">
+        <label>MTObject.hpp</label>
+        <link refid="_m_t_object_8hpp"/>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+      </node>
+      <node id="21">
+        <label>thread</label>
+      </node>
+      <node id="63">
+        <label>TRandom.h</label>
+      </node>
+      <node id="71">
+        <label>TTree.h</label>
+      </node>
+      <node id="5">
+        <label>algorithm</label>
+      </node>
+      <node id="48">
+        <label>TFitResultPtr.h</label>
+      </node>
+      <node id="28">
+        <label>stdio.h</label>
+      </node>
+      <node id="7">
+        <label>cstring</label>
+      </node>
+      <node id="50">
+        <label>TGraph.h</label>
+      </node>
+      <node id="13">
+        <label>memory</label>
+      </node>
+      <node id="22">
+        <label>typeindex</label>
+      </node>
+      <node id="1">
+        <label>lib/Classes/Performances.hpp</label>
+        <link refid="_performances_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+      </node>
+      <node id="26">
+        <label>dirent.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="3">
+        <label>lib/Modules/CloverSpectra.hpp</label>
+        <link refid="_clover_spectra_8hpp"/>
+      </node>
+      <node id="4">
+        <label>lib/Modules/Faster2Root.hpp</label>
+        <link refid="_faster2_root_8hpp"/>
+      </node>
+      <node id="5">
+        <label>lib/Modules/RunMatrixator.hpp</label>
+        <link refid="_run_matrixator_8hpp"/>
+      </node>
+      <node id="2">
+        <label>lib/Modules/Timeshifts.hpp</label>
+        <link refid="_timeshifts_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>lib/Classes/Performances.hpp</label>
+        <link refid="_performances_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="class_performances" prot="public">Performances</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>PERFORMANCES_HPP</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>PERFORMANCES_HPP</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;../libCo.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;../MTObjects/MTCounter.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7" refid="class_performances" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_performances" kindref="compound">Performances</ref></highlight></codeline>
+<codeline lineno="8"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="10" refid="class_performances_1abd7b3a4619fb8916ef41650315e3970d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_performances_1abd7b3a4619fb8916ef41650315e3970d" kindref="member">Performances</ref>(){}</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12" refid="class_performances_1a0a0ed2b8332c39dce0bc3761174f881a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_m_t_counter" kindref="compound">MTCounter</ref><sp/><ref refid="class_performances_1a0a0ed2b8332c39dce0bc3761174f881a" kindref="member">nb_hits</ref>;</highlight></codeline>
+<codeline lineno="13" refid="class_performances_1a8e8fcff6992c781cab447c29da39f801" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_m_t_counter" kindref="compound">MTCounter</ref><sp/><ref refid="class_performances_1a8e8fcff6992c781cab447c29da39f801" kindref="member">nb_events</ref>;</highlight></codeline>
+<codeline lineno="14" refid="class_performances_1a4b030c6fb60bb91f6105420ab943cf90" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_m_t_counter" kindref="compound">MTCounter</ref><sp/><ref refid="class_performances_1a4b030c6fb60bb91f6105420ab943cf90" kindref="member">nb_raw_events</ref>;</highlight></codeline>
+<codeline lineno="15" refid="class_performances_1a8497130e4b198e77e82757dab6c3f39d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_m_t_counter" kindref="compound">MTCounter</ref><sp/><ref refid="class_performances_1a8497130e4b198e77e82757dab6c3f39d" kindref="member">nb_kept_events</ref>;</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight></codeline>
+<codeline lineno="17" refid="class_performances_1ada2edd8aeddf080f2c494a8a921e662f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_m_t_counter" kindref="compound">MTCounter</ref><sp/><ref refid="class_performances_1ada2edd8aeddf080f2c494a8a921e662f" kindref="member">nb_total_hits</ref>;</highlight></codeline>
+<codeline lineno="18" refid="class_performances_1ab98612d481594c3b39a759f480742345" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_m_t_counter" kindref="compound">MTCounter</ref><sp/><ref refid="class_performances_1ab98612d481594c3b39a759f480742345" kindref="member">nb_total_events</ref>;</highlight></codeline>
+<codeline lineno="19" refid="class_performances_1a739d118946fd27bbd250d664fdcf72a7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_m_t_counter" kindref="compound">MTCounter</ref><sp/><ref refid="class_performances_1a739d118946fd27bbd250d664fdcf72a7" kindref="member">nb_total_raw_events</ref>;</highlight></codeline>
+<codeline lineno="20" refid="class_performances_1a113fa2db5fa26c78e6c272960209e254" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_m_t_counter" kindref="compound">MTCounter</ref><sp/><ref refid="class_performances_1a113fa2db5fa26c78e6c272960209e254" kindref="member">nb_total_kept_events</ref>;</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight></codeline>
+<codeline lineno="22" refid="class_performances_1ad94ac097e2ffac203b813e9703f9cf50" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_m_t_counter" kindref="compound">MTCounter</ref><sp/><ref refid="class_performances_1ad94ac097e2ffac203b813e9703f9cf50" kindref="member">total_read_size_file</ref>;</highlight></codeline>
+<codeline lineno="23" refid="class_performances_1ae38c3de3b231fbb995c2585cfc148e5c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_m_t_counter" kindref="compound">MTCounter</ref><sp/><ref refid="class_performances_1ae38c3de3b231fbb995c2585cfc148e5c" kindref="member">total_written_size_file</ref>;</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>void<sp/>printIO();</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="comment">//<sp/>void<sp/>Performances::printIO()</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight><highlight class="comment">//<sp/>{</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/>auto<sp/>const<sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/>print</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/>(</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/>&quot;&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/>);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight><highlight class="comment">//<sp/>}</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//PERFORMANCES_HPP</highlight></codeline>
+    </programlisting>
+    <location file="lib/Classes/Performances.hpp"/>
+  </compounddef>
+</doxygen>

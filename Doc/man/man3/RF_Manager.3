@@ -1,0 +1,128 @@
+.TH "RF_Manager" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+RF_Manager \- Class used to manage the RF\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <RF_Manager\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBTime\fP \fBpulse_ToF\fP (\fBHit\fP const &hit) const"
+.br
+.ti -1c
+.RI "\fBTime\fP \fBpulse_ToF\fP (\fBHit\fP const &hit, \fBTime\fP const &\fBoffset\fP) const"
+.br
+.ti -1c
+.RI "\fBTime\fP \fBpulse_ToF\fP (\fBTimestamp\fP const &timestamp) const"
+.br
+.ti -1c
+.RI "\fBTime\fP \fBpulse_ToF\fP (\fBTimestamp\fP const &timestamp, \fBTime\fP const &\fBoffset\fP) const"
+.br
+.ti -1c
+.RI "template<class\&.\&.\&. ARGS> float \fBpulse_ToF_ns\fP (ARGS\&.\&.\&. args)"
+.br
+.ti -1c
+.RI "\fBTimestamp\fP \fBrefTime\fP (\fBTimestamp\fP const &timestamp) const"
+.br
+.ti -1c
+.RI "\fBRF_Manager\fP (\fBTime\fP const &_period=400, \fBLabel\fP const &label_RF=251)"
+.br
+.ti -1c
+.RI "void \fBset\fP (\fBTimestamp\fP new_timestamp, \fBTimestamp\fP _period)"
+.br
+.ti -1c
+.RI "bool \fBsetHit\fP (\fBHit\fP const &hit)"
+.br
+.in -1c
+.SS "Static Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "static auto \fBoffset\fP ()"
+.br
+.ti -1c
+.RI "static void \fBset_offset\fP (\fBTime\fP const &\fBoffset\fP)"
+.br
+.ti -1c
+.RI "static void \fBset_offset_ns\fP (\fBTime\fP const &offset_ns)"
+.br
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBTimestamp\fP \fBlast_hit\fP = 0"
+.br
+.ti -1c
+.RI "\fBTime\fP \fBperiod\fP = 0"
+.br
+.in -1c
+.SS "Static Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "static \fBLabel\fP \fBlabel\fP = 251"
+.br
+.in -1c
+.SS "Static Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "static \fBTime\fP \fBm_offset\fP = 50000"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Class used to manage the RF\&. 
+
+Normal case : the RF reference timestamp is lower than the shifted timestamps (should also be the case of unshifted timestamp) dT = (shifted_time-last_hit) corresponds to the time separating the current hit to the reference RF Therefore, N = dT/period corresponds to the number of periods separating the two hits In other words, it is the number of pulses between the reference RF and the current hit Then, period*N is the timestamp of the pulse relative to the current hit (Remember we are doing integer arithmetic, period*dT/period != dT) And dTperiod is the rest of the integer division, hence the time between the hit and its relative pulse Finally, one need to substract the applied offset in order to get the correct result :
+.PP
+When the data is not correctly ordered : In order to get a correct answer, one need to get a positive difference, so to invert the difference : now last_hit-shifted_time>0 But the result is inverted and we obtain really period-timestamp\&. We get the correct result by doing : relative_timestamp = period - (period-timestamp) 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "RF_Manager::RF_Manager (\fBTime\fP const & _period = \fC400\fP, \fBLabel\fP const & label_RF = \fC251\fP)\fC [inline]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "static auto RF_Manager::offset ()\fC [inline]\fP, \fC [static]\fP"
+
+.SS "\fBTime\fP RF_Manager::pulse_ToF (\fBHit\fP const & hit) const\fC [inline]\fP"
+
+.SS "\fBTime\fP RF_Manager::pulse_ToF (\fBHit\fP const & hit, \fBTime\fP const & offset) const\fC [inline]\fP"
+
+.SS "\fBTime\fP RF_Manager::pulse_ToF (\fBTimestamp\fP const & timestamp) const\fC [inline]\fP"
+
+.SS "\fBTime\fP RF_Manager::pulse_ToF (\fBTimestamp\fP const & timestamp, \fBTime\fP const & offset) const\fC [inline]\fP"
+
+.SS "template<class\&.\&.\&. ARGS> float RF_Manager::pulse_ToF_ns (ARGS\&.\&.\&. args)\fC [inline]\fP"
+
+.SS "\fBTimestamp\fP RF_Manager::refTime (\fBTimestamp\fP const & timestamp) const\fC [inline]\fP"
+
+.SS "void RF_Manager::set (\fBTimestamp\fP new_timestamp, \fBTimestamp\fP _period)\fC [inline]\fP"
+
+.SS "static void RF_Manager::set_offset (\fBTime\fP const & offset)\fC [inline]\fP, \fC [static]\fP"
+
+.SS "static void RF_Manager::set_offset_ns (\fBTime\fP const & offset_ns)\fC [inline]\fP, \fC [static]\fP"
+
+.SS "bool RF_Manager::setHit (\fBHit\fP const & hit)"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "\fBLabel\fP RF_Manager::label = 251\fC [static]\fP"
+
+.SS "\fBTimestamp\fP RF_Manager::last_hit = 0"
+
+.SS "\fBTime\fP RF_Manager::m_offset = 50000\fC [static]\fP, \fC [private]\fP"
+
+.SS "\fBTime\fP RF_Manager::period = 0"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Nuball2 from the source code\&.

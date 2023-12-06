@@ -1,0 +1,12 @@
+<map id="Clovers::SetEvent" name="Clovers::SetEvent">
+<area shape="rect" id="node1" title="Fills the CloverModules for a whole event." alt="" coords="961,78,1099,105"/>
+<area shape="rect" id="node2" href="$class_run_matrixator.html#a8d8f01fad64864d032395e18b10c2a7e" title=" " alt="" coords="715,9,897,51"/>
+<area shape="rect" id="node5" href="$class_run_matrixator.html#a526469f6440d19b85fd142c797056c65" title=" " alt="" coords="699,78,913,105"/>
+<area shape="rect" id="node7" href="$class_clover_spectra.html#a614d7deabde77b0ffea91ca2a6002484" title=" " alt="" coords="715,132,897,173"/>
+<area shape="rect" id="node3" href="$class_run_matrixator.html#a47322f73c6a9f220f49f9fd85993fcd5" title="Multithreading of loadData_faster (you have to pass by a static method in order to multi&#45;thread it)" alt="" coords="461,5,639,47"/>
+<area shape="rect" id="node4" href="$class_run_matrixator.html#aa6d13b08060fef07b50d7ab6b35be0d6" title=" " alt="" coords="244,46,388,73"/>
+<area shape="rect" id="node6" href="$class_run_matrixator.html#a2d5326c4e5b0684552e5d72c88e64ef8" title="Multithreading of loadData_ (you have to pass by a static method in order to multi&#45;thread it)" alt="" coords="461,71,639,112"/>
+<area shape="rect" id="node8" href="$class_clover_spectra.html#ac087194079e7879a2824f4488db96512" title=" " alt="" coords="449,136,651,177"/>
+<area shape="rect" id="node9" href="$class_clover_spectra.html#ae46c582451bada5b2b8957ee44b92e35" title=" " alt="" coords="231,143,401,170"/>
+<area shape="rect" id="node10" href="$class_clover_spectra.html#a353ec66774413feefb33a784ce2159cf" title=" " alt="" coords="5,143,183,170"/>
+</map>

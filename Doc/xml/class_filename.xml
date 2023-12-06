@@ -1,0 +1,352 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="class_filename" kind="class" language="C++" prot="public">
+    <compoundname>Filename</compoundname>
+    <includes refid="files__functions_8hpp" local="no">files_functions.hpp</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_filename_1a8aacdd28091a89bf0e326989383770ec" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string Filename::m_extension</definition>
+        <argsstring></argsstring>
+        <name>m_extension</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/files_functions.hpp" line="663" column="15" bodyfile="lib/files_functions.hpp" bodystart="663" bodyend="-1"/>
+        <referencedby refid="class_filename_1a9a5a8b12e6ffac9d53e54e6410b59c02" compoundref="files__functions_8hpp" startline="633" endline="633">extension</referencedby>
+        <referencedby refid="class_filename_1a4f624193292726bfe15c0c16322ccd07" compoundref="files__functions_8hpp" startline="646" endline="660">fill</referencedby>
+        <referencedby refid="class_filename_1afc649319b4ccdeef296670531a0b4265" compoundref="files__functions_8hpp" startline="607" endline="613">operator=</referencedby>
+        <referencedby refid="class_filename_1a2d925b1dc8e2afbd09e729be3f3603b2" compoundref="files__functions_8hpp" startline="635" endline="635">setExtension</referencedby>
+        <referencedby refid="class_filename_1aaebbbc0d7ac17984013bffbd87d05763" compoundref="files__functions_8hpp" startline="641" endline="644">update</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_filename_1a501c8ba9c8babe9e412c8e2c3013f57d" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string Filename::m_fullName</definition>
+        <argsstring></argsstring>
+        <name>m_fullName</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/files_functions.hpp" line="661" column="15" bodyfile="lib/files_functions.hpp" bodystart="661" bodyend="-1"/>
+        <referencedby refid="class_filename_1a4f624193292726bfe15c0c16322ccd07" compoundref="files__functions_8hpp" startline="646" endline="660">fill</referencedby>
+        <referencedby refid="class_filename_1a00a9c3c47a6c091bc1c49982c6d57233" compoundref="files__functions_8hpp" startline="631" endline="631">fullName</referencedby>
+        <referencedby refid="class_filename_1a6d397a1dc62b7bc35bf84e6e72b9bd03" compoundref="files__functions_8hpp" startline="628" endline="628">get</referencedby>
+        <referencedby refid="class_filename_1acb0d63ddf4b17fc590a9617a8096bd47" compoundref="files__functions_8hpp" startline="627" endline="627">operator std::string</referencedby>
+        <referencedby refid="class_filename_1afc649319b4ccdeef296670531a0b4265" compoundref="files__functions_8hpp" startline="607" endline="613">operator=</referencedby>
+        <referencedby refid="class_filename_1a46cfb960345a190b3971553c65f702b4" compoundref="files__functions_8hpp" startline="629" endline="629">string</referencedby>
+        <referencedby refid="class_filename_1aaebbbc0d7ac17984013bffbd87d05763" compoundref="files__functions_8hpp" startline="641" endline="644">update</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_filename_1adb51101927c9d3a81522d1686464b1b5" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string Filename::m_shortName</definition>
+        <argsstring></argsstring>
+        <name>m_shortName</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/files_functions.hpp" line="662" column="15" bodyfile="lib/files_functions.hpp" bodystart="662" bodyend="-1"/>
+        <referencedby refid="class_filename_1a4f624193292726bfe15c0c16322ccd07" compoundref="files__functions_8hpp" startline="646" endline="660">fill</referencedby>
+        <referencedby refid="class_filename_1afc649319b4ccdeef296670531a0b4265" compoundref="files__functions_8hpp" startline="607" endline="613">operator=</referencedby>
+        <referencedby refid="class_filename_1a16a859ce80a8efeabbf8b28add13c55f" compoundref="files__functions_8hpp" startline="632" endline="632">shortName</referencedby>
+        <referencedby refid="class_filename_1aaebbbc0d7ac17984013bffbd87d05763" compoundref="files__functions_8hpp" startline="641" endline="644">update</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_filename_1a9a5a8b12e6ffac9d53e54e6410b59c02" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string const  &amp;</type>
+        <definition>std::string const&amp; Filename::extension</definition>
+        <argsstring>() const</argsstring>
+        <name>extension</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/files_functions.hpp" line="633" column="22" bodyfile="lib/files_functions.hpp" bodystart="633" bodyend="633"/>
+        <references refid="class_filename_1a8aacdd28091a89bf0e326989383770ec" compoundref="files__functions_8hpp" startline="663">m_extension</references>
+        <referencedby refid="class_file_1ac76f2f11d5ae2a206735e4c9172677e2" compoundref="files__functions_8hpp" startline="752" endline="752">File::extension</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_filename_1a2bba4cdf51d4f8042d55850e0699e80b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Filename::Filename</definition>
+        <argsstring>()</argsstring>
+        <name>Filename</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/files_functions.hpp" line="599" column="3" bodyfile="lib/files_functions.hpp" bodystart="599" bodyend="599"/>
+      </memberdef>
+      <memberdef kind="function" id="class_filename_1a81f6faf691f9eec75771b37b7d29fffc" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Filename::Filename</definition>
+        <argsstring>(Filename const &amp;_filename)</argsstring>
+        <name>Filename</name>
+        <param>
+          <type><ref refid="class_filename" kindref="compound">Filename</ref> const &amp;</type>
+          <declname>_filename</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/files_functions.hpp" line="605" column="3" bodyfile="lib/files_functions.hpp" bodystart="605" bodyend="605"/>
+      </memberdef>
+      <memberdef kind="function" id="class_filename_1ac695bd1e796829d4a40c81111dd8935b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Filename::Filename</definition>
+        <argsstring>(std::string const &amp;_filename)</argsstring>
+        <name>Filename</name>
+        <param>
+          <type>std::string const &amp;</type>
+          <declname>_filename</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/files_functions.hpp" line="600" column="3" bodyfile="lib/files_functions.hpp" bodystart="600" bodyend="603"/>
+        <references refid="class_filename_1a4f624193292726bfe15c0c16322ccd07" compoundref="files__functions_8hpp" startline="646" endline="660">fill</references>
+      </memberdef>
+      <memberdef kind="function" id="class_filename_1a00a9c3c47a6c091bc1c49982c6d57233" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string const  &amp;</type>
+        <definition>std::string const&amp; Filename::fullName</definition>
+        <argsstring>() const</argsstring>
+        <name>fullName</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/files_functions.hpp" line="631" column="22" bodyfile="lib/files_functions.hpp" bodystart="631" bodyend="631"/>
+        <references refid="class_filename_1a501c8ba9c8babe9e412c8e2c3013f57d" compoundref="files__functions_8hpp" startline="661">m_fullName</references>
+        <referencedby refid="files__functions_8hpp_1ad547fe8dfb968f824b36822b258b736a" compoundref="files__functions_8hpp" startline="666" endline="670">operator&lt;&lt;</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_filename_1a6d397a1dc62b7bc35bf84e6e72b9bd03" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string const  &amp;</type>
+        <definition>std::string const&amp; Filename::get</definition>
+        <argsstring>() const</argsstring>
+        <name>get</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/files_functions.hpp" line="628" column="22" bodyfile="lib/files_functions.hpp" bodystart="628" bodyend="628"/>
+        <references refid="class_filename_1a501c8ba9c8babe9e412c8e2c3013f57d" compoundref="files__functions_8hpp" startline="661">m_fullName</references>
+        <referencedby refid="files__functions_8hpp_1a5326a7606384341a1bd2a01f15ca9b06" compoundref="files__functions_8hpp" startline="799" endline="799">operator+</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_filename_1acb0d63ddf4b17fc590a9617a8096bd47" prot="public" static="no" const="yes" explicit="no" inline="yes" refqual="lvalue" virt="non-virtual">
+        <type></type>
+        <definition>Filename::operator std::string</definition>
+        <argsstring>() const &amp;</argsstring>
+        <name>operator std::string</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/files_functions.hpp" line="627" column="3" bodyfile="lib/files_functions.hpp" bodystart="627" bodyend="627"/>
+        <references refid="class_filename_1a501c8ba9c8babe9e412c8e2c3013f57d" compoundref="files__functions_8hpp" startline="661">m_fullName</references>
+      </memberdef>
+      <memberdef kind="function" id="class_filename_1ac7be05fb6397494870cbeff3bb85030e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_filename" kindref="compound">Filename</ref> &amp;</type>
+        <definition>Filename&amp; Filename::operator=</definition>
+        <argsstring>(const char *_filename)</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const char *</type>
+          <declname>_filename</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/files_functions.hpp" line="621" column="13" bodyfile="lib/files_functions.hpp" bodystart="621" bodyend="625"/>
+        <references refid="class_filename_1a4f624193292726bfe15c0c16322ccd07" compoundref="files__functions_8hpp" startline="646" endline="660">fill</references>
+      </memberdef>
+      <memberdef kind="function" id="class_filename_1afc649319b4ccdeef296670531a0b4265" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_filename" kindref="compound">Filename</ref> &amp;</type>
+        <definition>Filename&amp; Filename::operator=</definition>
+        <argsstring>(Filename const &amp;_filename)</argsstring>
+        <name>operator=</name>
+        <param>
+          <type><ref refid="class_filename" kindref="compound">Filename</ref> const &amp;</type>
+          <declname>_filename</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/files_functions.hpp" line="607" column="13" bodyfile="lib/files_functions.hpp" bodystart="607" bodyend="613"/>
+        <references refid="class_filename_1a8aacdd28091a89bf0e326989383770ec" compoundref="files__functions_8hpp" startline="663">m_extension</references>
+        <references refid="class_filename_1a501c8ba9c8babe9e412c8e2c3013f57d" compoundref="files__functions_8hpp" startline="661">m_fullName</references>
+        <references refid="class_filename_1adb51101927c9d3a81522d1686464b1b5" compoundref="files__functions_8hpp" startline="662">m_shortName</references>
+      </memberdef>
+      <memberdef kind="function" id="class_filename_1af717b51b864f3465eace889d46cb9ffe" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_filename" kindref="compound">Filename</ref> &amp;</type>
+        <definition>Filename&amp; Filename::operator=</definition>
+        <argsstring>(std::string const &amp;_filename)</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>std::string const &amp;</type>
+          <declname>_filename</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/files_functions.hpp" line="615" column="13" bodyfile="lib/files_functions.hpp" bodystart="615" bodyend="619"/>
+        <references refid="class_filename_1a4f624193292726bfe15c0c16322ccd07" compoundref="files__functions_8hpp" startline="646" endline="660">fill</references>
+      </memberdef>
+      <memberdef kind="function" id="class_filename_1a2d925b1dc8e2afbd09e729be3f3603b2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Filename::setExtension</definition>
+        <argsstring>(std::string const &amp;new_extension)</argsstring>
+        <name>setExtension</name>
+        <param>
+          <type>std::string const &amp;</type>
+          <declname>new_extension</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/files_functions.hpp" line="635" column="8" bodyfile="lib/files_functions.hpp" bodystart="635" bodyend="635"/>
+        <references refid="class_filename_1a8aacdd28091a89bf0e326989383770ec" compoundref="files__functions_8hpp" startline="663">m_extension</references>
+        <references refid="class_filename_1aaebbbc0d7ac17984013bffbd87d05763" compoundref="files__functions_8hpp" startline="641" endline="644">update</references>
+        <referencedby refid="class_file_1af4dee1c79bf496d505633211177c6ce3" compoundref="files__functions_8hpp" startline="754" endline="754">File::setExtension</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_filename_1a16a859ce80a8efeabbf8b28add13c55f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string const  &amp;</type>
+        <definition>std::string const&amp; Filename::shortName</definition>
+        <argsstring>() const</argsstring>
+        <name>shortName</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/files_functions.hpp" line="632" column="22" bodyfile="lib/files_functions.hpp" bodystart="632" bodyend="632"/>
+        <references refid="class_filename_1adb51101927c9d3a81522d1686464b1b5" compoundref="files__functions_8hpp" startline="662">m_shortName</references>
+        <referencedby refid="class_file_1a4162125761930208891770416c498828" compoundref="files__functions_8hpp" startline="751" endline="751">File::shortName</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_filename_1a46cfb960345a190b3971553c65f702b4" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string const  &amp;</type>
+        <definition>std::string const&amp; Filename::string</definition>
+        <argsstring>() const</argsstring>
+        <name>string</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/files_functions.hpp" line="629" column="22" bodyfile="lib/files_functions.hpp" bodystart="629" bodyend="629"/>
+        <references refid="class_filename_1a501c8ba9c8babe9e412c8e2c3013f57d" compoundref="files__functions_8hpp" startline="661">m_fullName</references>
+        <referencedby refid="class_file_1a8f6a2ccec2d48112847c89541d13bc10" compoundref="files__functions_8hpp" startline="763" endline="763">File::update</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="class_filename_1a4f624193292726bfe15c0c16322ccd07" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Filename::fill</definition>
+        <argsstring>(std::string const &amp;filename)</argsstring>
+        <name>fill</name>
+        <param>
+          <type>std::string const &amp;</type>
+          <declname>filename</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/files_functions.hpp" line="646" column="8" bodyfile="lib/files_functions.hpp" bodystart="646" bodyend="660"/>
+        <references refid="files__functions_8hpp_1a4000ec99a26e146333e62836d01dff5b" compoundref="files__functions_8hpp" startline="21" endline="21">getExtension</references>
+        <references refid="files__functions_8hpp_1a0b4d810562e117c29ca0dda1855a02e3" compoundref="files__functions_8hpp" startline="64" endline="64">hasPath</references>
+        <references refid="class_filename_1a8aacdd28091a89bf0e326989383770ec" compoundref="files__functions_8hpp" startline="663">m_extension</references>
+        <references refid="class_filename_1a501c8ba9c8babe9e412c8e2c3013f57d" compoundref="files__functions_8hpp" startline="661">m_fullName</references>
+        <references refid="class_filename_1adb51101927c9d3a81522d1686464b1b5" compoundref="files__functions_8hpp" startline="662">m_shortName</references>
+        <references refid="_histogramor_8hpp_1ab48a2fa7184e6354788989602c8c8c29">print</references>
+        <references refid="files__functions_8hpp_1a58f50a6390692cff52eef37fdaa94e56" compoundref="files__functions_8hpp" startline="25" endline="28">rmPathAndExt</references>
+        <references refid="class_filename_1aaebbbc0d7ac17984013bffbd87d05763" compoundref="files__functions_8hpp" startline="641" endline="644">update</references>
+        <referencedby refid="class_filename_1ac695bd1e796829d4a40c81111dd8935b" compoundref="files__functions_8hpp" startline="600" endline="603">Filename</referencedby>
+        <referencedby refid="class_filename_1af717b51b864f3465eace889d46cb9ffe" compoundref="files__functions_8hpp" startline="615" endline="619">operator=</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_filename_1aaebbbc0d7ac17984013bffbd87d05763" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Filename::update</definition>
+        <argsstring>()</argsstring>
+        <name>update</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/files_functions.hpp" line="641" column="8" bodyfile="lib/files_functions.hpp" bodystart="641" bodyend="644"/>
+        <references refid="class_filename_1a8aacdd28091a89bf0e326989383770ec" compoundref="files__functions_8hpp" startline="663">m_extension</references>
+        <references refid="class_filename_1a501c8ba9c8babe9e412c8e2c3013f57d" compoundref="files__functions_8hpp" startline="661">m_fullName</references>
+        <references refid="class_filename_1adb51101927c9d3a81522d1686464b1b5" compoundref="files__functions_8hpp" startline="662">m_shortName</references>
+        <referencedby refid="class_filename_1a4f624193292726bfe15c0c16322ccd07" compoundref="files__functions_8hpp" startline="646" endline="660">fill</referencedby>
+        <referencedby refid="class_filename_1a2d925b1dc8e2afbd09e729be3f3603b2" compoundref="files__functions_8hpp" startline="635" endline="635">setExtension</referencedby>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>EXPERIMENTAL Contains the short name and the extension of a given file, without any knowledge of its path. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="lib/files_functions.hpp" line="596" column="1" bodyfile="lib/files_functions.hpp" bodystart="597" bodyend="664"/>
+    <listofallmembers>
+      <member refid="class_filename_1a9a5a8b12e6ffac9d53e54e6410b59c02" prot="public" virt="non-virtual"><scope>Filename</scope><name>extension</name></member>
+      <member refid="class_filename_1a2bba4cdf51d4f8042d55850e0699e80b" prot="public" virt="non-virtual"><scope>Filename</scope><name>Filename</name></member>
+      <member refid="class_filename_1ac695bd1e796829d4a40c81111dd8935b" prot="public" virt="non-virtual"><scope>Filename</scope><name>Filename</name></member>
+      <member refid="class_filename_1a81f6faf691f9eec75771b37b7d29fffc" prot="public" virt="non-virtual"><scope>Filename</scope><name>Filename</name></member>
+      <member refid="class_filename_1a4f624193292726bfe15c0c16322ccd07" prot="private" virt="non-virtual"><scope>Filename</scope><name>fill</name></member>
+      <member refid="class_filename_1a00a9c3c47a6c091bc1c49982c6d57233" prot="public" virt="non-virtual"><scope>Filename</scope><name>fullName</name></member>
+      <member refid="class_filename_1a6d397a1dc62b7bc35bf84e6e72b9bd03" prot="public" virt="non-virtual"><scope>Filename</scope><name>get</name></member>
+      <member refid="class_filename_1a8aacdd28091a89bf0e326989383770ec" prot="private" virt="non-virtual"><scope>Filename</scope><name>m_extension</name></member>
+      <member refid="class_filename_1a501c8ba9c8babe9e412c8e2c3013f57d" prot="private" virt="non-virtual"><scope>Filename</scope><name>m_fullName</name></member>
+      <member refid="class_filename_1adb51101927c9d3a81522d1686464b1b5" prot="private" virt="non-virtual"><scope>Filename</scope><name>m_shortName</name></member>
+      <member refid="class_filename_1acb0d63ddf4b17fc590a9617a8096bd47" prot="public" virt="non-virtual"><scope>Filename</scope><name>operator std::string</name></member>
+      <member refid="class_filename_1afc649319b4ccdeef296670531a0b4265" prot="public" virt="non-virtual"><scope>Filename</scope><name>operator=</name></member>
+      <member refid="class_filename_1af717b51b864f3465eace889d46cb9ffe" prot="public" virt="non-virtual"><scope>Filename</scope><name>operator=</name></member>
+      <member refid="class_filename_1ac7be05fb6397494870cbeff3bb85030e" prot="public" virt="non-virtual"><scope>Filename</scope><name>operator=</name></member>
+      <member refid="class_filename_1a2d925b1dc8e2afbd09e729be3f3603b2" prot="public" virt="non-virtual"><scope>Filename</scope><name>setExtension</name></member>
+      <member refid="class_filename_1a16a859ce80a8efeabbf8b28add13c55f" prot="public" virt="non-virtual"><scope>Filename</scope><name>shortName</name></member>
+      <member refid="class_filename_1a46cfb960345a190b3971553c65f702b4" prot="public" virt="non-virtual"><scope>Filename</scope><name>string</name></member>
+      <member refid="class_filename_1aaebbbc0d7ac17984013bffbd87d05763" prot="private" virt="non-virtual"><scope>Filename</scope><name>update</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

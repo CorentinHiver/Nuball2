@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_deprecated" xml:lang="en-US">
+
+<para><variablelist>
+<varlistentry><term>Member <link linkend="_class_faster_reader_1a152cfc9a0973c4a754e248c3e0326bea">FasterReader::getHit</link>  () const</term>
+<listitem>
+<para><anchor xml:id="_deprecated_1_deprecated000001"/>Get the current <link linkend="_class_hit">Hit</link> </para>
+</listitem></varlistentry>
+</variablelist>
+</para>
+</section>

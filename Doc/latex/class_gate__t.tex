@@ -1,0 +1,135 @@
+\doxysection{Gate\+\_\+t$<$ T $>$ Class Template Reference}
+\label{class_gate__t}\index{Gate\_t$<$ T $>$@{Gate\_t$<$ T $>$}}
+
+
+{\ttfamily \#include $<$Gate.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ Gate\+\_\+t} ()
+\item 
+\textbf{ Gate\+\_\+t} (std\+::initializer\+\_\+list$<$ T $>$ inputs)
+\item 
+bool \textbf{ is\+In} (T const \&e)
+\item 
+bool \textbf{ operator()} (T const \&e)
+\item 
+void \textbf{ operator=} (\textbf{ Gate\+\_\+t} const \&timegate)
+\item 
+void \textbf{ operator=} (std\+::pair$<$ T, T $>$ const \&gate)
+\item 
+void \textbf{ use} (bool const \&\+\_\+use=true)
+\item 
+bool const  \& \textbf{ used} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+T \textbf{ start} = 0.
+\item 
+T \textbf{ stop} = 0.
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \textbf{ m\+\_\+use} = false
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\label{class_gate__t_ad0a2a66e0b675d9b7548e1ee2c821912}} 
+\index{Gate\_t$<$ T $>$@{Gate\_t$<$ T $>$}!Gate\_t@{Gate\_t}}
+\index{Gate\_t@{Gate\_t}!Gate\_t$<$ T $>$@{Gate\_t$<$ T $>$}}
+\doxysubsubsection{Gate\_t()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\textbf{ Gate\+\_\+t}$<$ T $>$\+::\textbf{ Gate\+\_\+t} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_gate__t_a4f8e29c161dd85d2dd5081292f5705b0}} 
+\index{Gate\_t$<$ T $>$@{Gate\_t$<$ T $>$}!Gate\_t@{Gate\_t}}
+\index{Gate\_t@{Gate\_t}!Gate\_t$<$ T $>$@{Gate\_t$<$ T $>$}}
+\doxysubsubsection{Gate\_t()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\textbf{ Gate\+\_\+t}$<$ T $>$\+::\textbf{ Gate\+\_\+t} (\begin{DoxyParamCaption}\item[{std\+::initializer\+\_\+list$<$ T $>$}]{inputs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\label{class_gate__t_a6ece805d91b1c54d4b84cc36e652bc0f}} 
+\index{Gate\_t$<$ T $>$@{Gate\_t$<$ T $>$}!isIn@{isIn}}
+\index{isIn@{isIn}!Gate\_t$<$ T $>$@{Gate\_t$<$ T $>$}}
+\doxysubsubsection{isIn()}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+bool \textbf{ Gate\+\_\+t}$<$ T $>$\+::is\+In (\begin{DoxyParamCaption}\item[{T const \&}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=311pt]{class_gate__t_a6ece805d91b1c54d4b84cc36e652bc0f_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_gate__t_ae9d46dcc1612852d610d153dbdb2e543}} 
+\index{Gate\_t$<$ T $>$@{Gate\_t$<$ T $>$}!operator()@{operator()}}
+\index{operator()@{operator()}!Gate\_t$<$ T $>$@{Gate\_t$<$ T $>$}}
+\doxysubsubsection{operator()()}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+bool \textbf{ Gate\+\_\+t}$<$ T $>$\+::operator() (\begin{DoxyParamCaption}\item[{T const \&}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_gate__t_a5970841a2974301d638fa215a2e1b136}} 
+\index{Gate\_t$<$ T $>$@{Gate\_t$<$ T $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!Gate\_t$<$ T $>$@{Gate\_t$<$ T $>$}}
+\doxysubsubsection{operator=()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void \textbf{ Gate\+\_\+t}$<$ T $>$\+::operator= (\begin{DoxyParamCaption}\item[{\textbf{ Gate\+\_\+t}$<$ T $>$ const \&}]{timegate }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_gate__t_ab746fcf7141d6ad21d142e57e052ff6f}} 
+\index{Gate\_t$<$ T $>$@{Gate\_t$<$ T $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!Gate\_t$<$ T $>$@{Gate\_t$<$ T $>$}}
+\doxysubsubsection{operator=()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void \textbf{ Gate\+\_\+t}$<$ T $>$\+::operator= (\begin{DoxyParamCaption}\item[{std\+::pair$<$ T, T $>$ const \&}]{gate }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_gate__t_afc3fa31b695acb0407ee6ea2cad637c2}} 
+\index{Gate\_t$<$ T $>$@{Gate\_t$<$ T $>$}!use@{use}}
+\index{use@{use}!Gate\_t$<$ T $>$@{Gate\_t$<$ T $>$}}
+\doxysubsubsection{use()}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void \textbf{ Gate\+\_\+t}$<$ T $>$\+::use (\begin{DoxyParamCaption}\item[{bool const \&}]{\+\_\+use = {\ttfamily true} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_gate__t_a038ec18fa86466548ad20abf05f63115}} 
+\index{Gate\_t$<$ T $>$@{Gate\_t$<$ T $>$}!used@{used}}
+\index{used@{used}!Gate\_t$<$ T $>$@{Gate\_t$<$ T $>$}}
+\doxysubsubsection{used()}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+bool const\& \textbf{ Gate\+\_\+t}$<$ T $>$\+::used (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\label{class_gate__t_a793714954181bacd4564a3a866a3d1db}} 
+\index{Gate\_t$<$ T $>$@{Gate\_t$<$ T $>$}!m\_use@{m\_use}}
+\index{m\_use@{m\_use}!Gate\_t$<$ T $>$@{Gate\_t$<$ T $>$}}
+\doxysubsubsection{m\_use}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+bool \textbf{ Gate\+\_\+t}$<$ T $>$\+::m\+\_\+use = false\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_gate__t_a1c49ae7aa44c27b9357e718432c2f93a}} 
+\index{Gate\_t$<$ T $>$@{Gate\_t$<$ T $>$}!start@{start}}
+\index{start@{start}!Gate\_t$<$ T $>$@{Gate\_t$<$ T $>$}}
+\doxysubsubsection{start}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+T \textbf{ Gate\+\_\+t}$<$ T $>$\+::start = 0.}
+
+\mbox{\label{class_gate__t_aa48ef2734b80f70fbbd37f2760e18724}} 
+\index{Gate\_t$<$ T $>$@{Gate\_t$<$ T $>$}!stop@{stop}}
+\index{stop@{stop}!Gate\_t$<$ T $>$@{Gate\_t$<$ T $>$}}
+\doxysubsubsection{stop}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+T \textbf{ Gate\+\_\+t}$<$ T $>$\+::stop = 0.}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+lib/\+Classes/\textbf{ Gate.\+hpp}\end{DoxyCompactItemize}

@@ -1,0 +1,820 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_class_clovers" xml:lang="en-US">
+<title>Clovers Class Reference</title>
+<indexterm><primary>Clovers</primary></indexterm>
+<para>
+
+<para>Analyse the clovers in the event. </para>
+ 
+</para>
+<para>
+<computeroutput>#include &lt;Clovers.hpp&gt;</computeroutput>
+</para>
+Collaboration diagram for Clovers:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_clovers__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>class <link linkend="_class_clovers_1_1_delayed_gate">DelayedGate</link></para>
+</listitem>
+            <listitem><para>class <link linkend="_class_clovers_1_1_prompt_gate">PromptGate</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_class_clovers_1a523aad5d019f23144292c0e23067a43b">Analyse</link> ()</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_clovers_1adaa12173cad2d804f6583001f174fd12">Analyse_more</link> ()</para>
+</listitem>
+            <listitem><para>auto <link linkend="_class_clovers_1ae236f2adb9b2c374babe63b3cef9c970">begin</link> () const</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_clovers_1a10afb56c3c4311007df55386dacba543">CleanFast</link> ()</para>
+</listitem>
+            <listitem><para><link linkend="_class_clovers_1addcd7785b41aec6be8988166a5b04fa0">Clovers</link> ()</para>
+</listitem>
+            <listitem><para>auto <link linkend="_class_clovers_1a5886faa3a7bce241b628e2c7859e7dfd">end</link> () const</para>
+</listitem>
+            <listitem><para>bool <link linkend="_class_clovers_1ab1394e718791a5016aa3e0a19828465c">Fill</link> (<link linkend="_class_event">Event</link> const &amp;event, <link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> const &amp;index)</para>
+</listitem>
+            <listitem><para>bool <link linkend="_class_clovers_1a5f280f8b6d043a949b726c7ff2b1e019">FillFast</link> (<link linkend="_class_event">Event</link> const &amp;event, <link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> const &amp;hit_index)</para>
+</listitem>
+            <listitem><para>bool <link linkend="_class_clovers_1a42f43989153734778e0ba6ad1cb2b983">isDelayed</link> (<link linkend="_class_clover_module">CloverModule</link> const &amp;clover)</para>
+</listitem>
+            <listitem><para>bool <link linkend="_class_clovers_1acf7eee4006e708ff0b2f4a56433d5e38">isPrompt</link> (<link linkend="_class_clover_module">CloverModule</link> const &amp;clover)</para>
+</listitem>
+            <listitem><para>auto <link linkend="_class_clovers_1a378e1b7fea24003b4b56eb855c8ae163">mult</link> () const</para>
+</listitem>
+            <listitem><para><link linkend="_class_clover_module">CloverModule</link> <link linkend="_class_clovers_1ae6002b2880afe9e523ef87a8aa78b368">operator[]</link> (<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> const &amp;i)</para>
+</listitem>
+            <listitem><para><link linkend="_class_clover_module">CloverModule</link> <link linkend="_class_clovers_1a6ba57807510fa592b8c57963c0d3c788">operator[]</link> (<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> const &amp;i) const</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_clovers_1a0d853153f63a1b04ca62756615dfd741">PrintClean</link> ()</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_clovers_1a60b7747d54a60759b4eae02deac50f95">Reset</link> ()</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_clovers_1a264432ef7231d65b77e744858374b8e1">SetEvent</link> (<link linkend="_class_event">Event</link> const &amp;event)</para>
+
+<para>Fills the CloverModules for a whole event. </para>
+</listitem>
+            <listitem><para>void <link linkend="_class_clovers_1a947342842702e2f91a86d0847b15ba3a">SetEvent</link> (<link linkend="_class_event">Event</link> const &amp;event, char const &amp;analyse_mode)</para>
+
+<para>Fills the CloverModules for a whole event. </para>
+</listitem>
+            <listitem><para>auto const  &amp; <link linkend="_class_clovers_1a6f9f1d7a131c9972ded9cf1b4291455d">size</link> () const</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Static Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>static void <link linkend="_class_clovers_1ab97fc40c1f6b24a092f8f92562c2fd9a">InitializeArrays</link> ()</para>
+
+<para>Static initialize. Allows one to use the arrays event if no object has been instantiated. </para>
+</listitem>
+            <listitem><para>static bool <link linkend="_class_clovers_1a9c28e72706c325a4fe3b0aab61c0bfe0">is_clover</link> (<link linkend="__hit_8hpp_1ab5dd24876acad09ec52c250c1668466c">Label</link> const &amp;l)</para>
+</listitem>
+            <listitem><para>static bool <link linkend="_class_clovers_1a4940a14c796f0825697af29156644e9c">is_clover_BGO</link> (<link linkend="__hit_8hpp_1ab5dd24876acad09ec52c250c1668466c">Label</link> const &amp;l)</para>
+</listitem>
+            <listitem><para>static bool <link linkend="_class_clovers_1a434508059d1a1f8e1c31dc793505cdc7">is_clover_Ge</link> (<link linkend="__hit_8hpp_1ab5dd24876acad09ec52c250c1668466c">Label</link> const &amp;l)</para>
+</listitem>
+            <listitem><para>static <link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> <link linkend="_class_clovers_1a9b2bcd83b6884936745b06346b121b73">label_to_clover</link> (<link linkend="__hit_8hpp_1ab5dd24876acad09ec52c250c1668466c">Label</link> const &amp;l)</para>
+</listitem>
+            <listitem><para>static <link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> <link linkend="_class_clovers_1ad047177f1403bb65359a6ad07ba4473a">label_to_cristal</link> (<link linkend="__hit_8hpp_1ab5dd24876acad09ec52c250c1668466c">Label</link> const &amp;l)</para>
+</listitem>
+            <listitem><para>static void <link linkend="_class_clovers_1abe608be3faec9a16f7735dfcaabfe775">setEnergyThreshold</link> (float const &amp;emin)</para>
+</listitem>
+            <listitem><para>static void <link linkend="_class_clovers_1aa641968a47fb9db9363e89be9c29be4c">timePs</link> (bool const &amp;time_ps)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Public Attributes    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_class_static_vector">StaticVector</link>&lt; <link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> &gt; <link linkend="_class_clovers_1a204d1d6808b2e2832dd16fbf5f6c45d9">Bgo</link> = <link linkend="_class_static_vector">StaticVector</link>&lt;<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>&gt;(24)</para>
+</listitem>
+            <listitem><para><link linkend="_class_static_vector">StaticVector</link>&lt; <link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> &gt; <link linkend="_class_clovers_1a94e58fcdccd9a9165933a4f494c93dcf">BGOonly</link> = <link linkend="_class_static_vector">StaticVector</link>&lt;<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>&gt;(24)</para>
+</listitem>
+            <listitem><para><link linkend="_class_static_vector">StaticVector</link>&lt; <link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> &gt; <link linkend="_class_clovers_1a3b6fa093b84451b7ebe304838530997b">CleanGe</link> = <link linkend="_class_static_vector">StaticVector</link>&lt;<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>&gt;(24)</para>
+</listitem>
+            <listitem><para><link linkend="_class_static_vector">StaticVector</link>&lt; <link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> &gt; <link linkend="_class_clovers_1a2cd5ef2adb5347f86d677a6ee78b0cf2">cristaux</link> = <link linkend="_class_static_vector">StaticVector</link>&lt;<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>&gt;(96)</para>
+</listitem>
+            <listitem><para><link linkend="_class_static_vector">StaticVector</link>&lt; <link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> &gt; <link linkend="_class_clovers_1abf3ac879188806ad38a0ebe7c0946ce9">cristaux_BGO</link> = <link linkend="_class_static_vector">StaticVector</link>&lt;<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>&gt;(48)</para>
+</listitem>
+            <listitem><para>std::array&lt; float, 96 &gt; <link linkend="_class_clovers_1a75da7859463f1478187c7f3f13d5f5d7">cristaux_nrj</link> = {0}</para>
+</listitem>
+            <listitem><para>std::array&lt; float, 48 &gt; <link linkend="_class_clovers_1a3dff2c188e41b5a0efe78e52f4f94949">cristaux_nrj_BGO</link> = {0}</para>
+</listitem>
+            <listitem><para>std::array&lt; double, 96 &gt; <link linkend="_class_clovers_1a9b7473b93b1fd7b6330070f1611a42e1">cristaux_time</link> = {0}</para>
+</listitem>
+            <listitem><para>std::array&lt; double, 48 &gt; <link linkend="_class_clovers_1afc0133ff088329bad822a129568edac3">cristaux_time_BGO</link> = {0}</para>
+</listitem>
+            <listitem><para><link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> <link linkend="_class_clovers_1a079d8274f7810d7ee0da013ccdfc759c">CrystalMult</link> = 0</para>
+</listitem>
+            <listitem><para><link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> <link linkend="_class_clovers_1ad586816c3e23df6dac4d648939f23579">CrystalMult_BGO</link> = 0</para>
+</listitem>
+            <listitem><para><link linkend="_class_static_vector">StaticVector</link>&lt; <link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> &gt; <link linkend="_class_clovers_1a49e8eabe53190954b8c7973b0ed39f85">DelayedBGO</link> = <link linkend="_class_static_vector">StaticVector</link>&lt;<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>&gt;(24)</para>
+</listitem>
+            <listitem><para><link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> <link linkend="_class_clovers_1af73ecf57ed32c4670ffe484a5c4c0114">DelayedCleanGeMult</link> = 0</para>
+</listitem>
+            <listitem><para>std::vector&lt; <link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> &gt; <link linkend="_class_clovers_1a2d5bacc7c99a739838cf999e9a70f7ca">delayedClovers</link></para>
+</listitem>
+            <listitem><para>std::vector&lt; <link linkend="_class_clover_module">CloverModule</link> &gt; <link linkend="_class_clovers_1accd03b8ba441c066df69dfda4419d29e">DelayedClovers</link></para>
+</listitem>
+            <listitem><para>class <link linkend="_class_clovers_1_1_delayed_gate">Clovers::DelayedGate</link> <link linkend="_class_clovers_1a61ba76ac7711422e8e3b19d02b1854e4">delayedGate</link></para>
+</listitem>
+            <listitem><para><link linkend="_class_static_vector">StaticVector</link>&lt; <link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> &gt; <link linkend="_class_clovers_1a8b095b47153a05f4ea048dfd1f27cc8a">DelayedGe</link> = <link linkend="_class_static_vector">StaticVector</link>&lt;<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>&gt;(24)</para>
+</listitem>
+            <listitem><para><link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> <link linkend="_class_clovers_1a6f9fa8831c5a512223a979eb7d6e0ff4">DelayedMult</link> = 0</para>
+</listitem>
+            <listitem><para><link linkend="_class_static_vector">StaticVector</link>&lt; <link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> &gt; <link linkend="_class_clovers_1a716473abe5555285f62eaabc6466c847">Ge</link> = <link linkend="_class_static_vector">StaticVector</link>&lt;<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>&gt;(24)</para>
+</listitem>
+            <listitem><para>bool <link linkend="_class_clovers_1a0ad93f05644e9c600d6b3252ccfa019f">has511</link> = false</para>
+</listitem>
+            <listitem><para><link linkend="_class_static_vector">StaticVector</link>&lt; <link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> &gt; <link linkend="_class_clovers_1a4c02a37642baad4cff767619dd48b76b">Hits</link> = <link linkend="_class_static_vector">StaticVector</link>&lt;<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>&gt;(24)</para>
+</listitem>
+            <listitem><para>std::vector&lt; <link linkend="_class_clover_module">CloverModule</link> &gt; <link linkend="_class_clovers_1ad07746b708cc9bea3ef6ed4370d928b9">m_clovers</link></para>
+</listitem>
+            <listitem><para><link linkend="_class_static_vector">StaticVector</link>&lt; <link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> &gt; <link linkend="_class_clovers_1aebe6be652c1225409f400b3961ea9582">PromptBGO</link> = <link linkend="_class_static_vector">StaticVector</link>&lt;<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>&gt;(24)</para>
+</listitem>
+            <listitem><para><link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> <link linkend="_class_clovers_1aa52c6ad2a19f1ccf562194a76b47de0c">PromptCleanGeMult</link> = 0</para>
+</listitem>
+            <listitem><para>std::vector&lt; <link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> &gt; <link linkend="_class_clovers_1a7d84f69dd5d1504df9eb5761bea0b6fe">promptClovers</link></para>
+</listitem>
+            <listitem><para>std::vector&lt; <link linkend="_class_clover_module">CloverModule</link> &gt; <link linkend="_class_clovers_1ac0eb8a13e2f9f4da36b976a6aa78a8ab">PromptClovers</link></para>
+</listitem>
+            <listitem><para>class <link linkend="_class_clovers_1_1_prompt_gate">Clovers::PromptGate</link> <link linkend="_class_clovers_1a82f555f87d8ed08c3266843e01073213">promptGate</link></para>
+</listitem>
+            <listitem><para><link linkend="_class_static_vector">StaticVector</link>&lt; <link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> &gt; <link linkend="_class_clovers_1ad4c54b6baf892e12b7865dad6d109691">PromptGe</link> = <link linkend="_class_static_vector">StaticVector</link>&lt;<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>&gt;(24)</para>
+</listitem>
+            <listitem><para><link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> <link linkend="_class_clovers_1ad305f49ba37a534ff2d55cfdadd21965">PromptMult</link> = 0</para>
+</listitem>
+            <listitem><para><link linkend="_class_static_vector">StaticVector</link>&lt; <link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> &gt; <link linkend="_class_clovers_1a1a2205eb2396ce5fd48b0f12a73f0196">rawBGO</link> = <link linkend="_class_static_vector">StaticVector</link>&lt;<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>&gt;(48)</para>
+</listitem>
+            <listitem><para><link linkend="_class_static_vector">StaticVector</link>&lt; <link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> &gt; <link linkend="_class_clovers_1af84dd10eb878f4385ecd092e23a77e1c">rawGe</link> = <link linkend="_class_static_vector">StaticVector</link>&lt;<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>&gt;(96)</para>
+</listitem>
+            <listitem><para><link linkend="_class_static_vector">StaticVector</link>&lt; <link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> &gt; <link linkend="_class_clovers_1ae853cd7142ff578d6876c38070ef482e">RejectedGe</link> = <link linkend="_class_static_vector">StaticVector</link>&lt;<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>&gt;(24)</para>
+</listitem>
+            <listitem><para><link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> <link linkend="_class_clovers_1a4366bd57c8e4716d5fd63639c5ed2967">TotalMult</link> = 0</para>
+</listitem>
+            <listitem><para>double <link linkend="_class_clovers_1a3a258a7a457632666c0190b4fa04939b">totBGO</link> = 0.0</para>
+</listitem>
+            <listitem><para>double <link linkend="_class_clovers_1a6e3b85032ab5190b5c2a360e6f0d2e4e">totBGO_delayed</link> = -0.1</para>
+</listitem>
+            <listitem><para>double <link linkend="_class_clovers_1a05a4d8b02a5d996da6a1205eb8bd6ca4">totBGO_prompt</link> = -0.1</para>
+</listitem>
+            <listitem><para>double <link linkend="_class_clovers_1a1bad91b9700a464895aacf89166961c5">totGe</link> = 0.0</para>
+</listitem>
+            <listitem><para>double <link linkend="_class_clovers_1abcd4354801aaef249f6a6332dca6c043">totGe_delayed</link> = -0.1</para>
+</listitem>
+            <listitem><para>double <link linkend="_class_clovers_1a94b65546b96444b31ff35570c2d45792">totGe_prompt</link> = -0.1</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Static Public Attributes    </title>
+        <itemizedlist>
+            <listitem><para>static std::array&lt; <link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>, 1000 &gt; <link linkend="_class_clovers_1a899c8b03a2cf2772aa085100292b738e">cristaux_index</link></para>
+</listitem>
+            <listitem><para>static std::array&lt; <link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>, 1000 &gt; <link linkend="_class_clovers_1a8c76fc2f276e19d4b7a8cc70c9f9cebc">cristaux_index_BGO</link></para>
+</listitem>
+            <listitem><para>static <link linkend="__gate_8hpp_1a2b91fd9abbd8bef0ba1f2f2ba1205c1f">Gates</link> <link linkend="_class_clovers_1a3f5e44c3955123ec5535c585c7c295a2">delayedBGOgate</link> = {{60.f, 145.f}}</para>
+</listitem>
+            <listitem><para>static <link linkend="__gate_8hpp_1a2b91fd9abbd8bef0ba1f2f2ba1205c1f">Gates</link> <link linkend="_class_clovers_1af1d3b98f82e408cf31671e72b9884169">delayedGeGate</link> = {{60.f, 145.f}}</para>
+</listitem>
+            <listitem><para>static float <link linkend="_class_clovers_1a2fd19fb7d2b6a38d651a179deda4c3c5">Emin</link> = 5.</para>
+</listitem>
+            <listitem><para>static std::array&lt; bool, 1000 &gt; <link linkend="_class_clovers_1aabda84c85d5315fe8d1f37ba5f4e02c3">isBGO</link></para>
+</listitem>
+            <listitem><para>static std::array&lt; bool, 1000 &gt; <link linkend="_class_clovers_1a2f696c2c36f8f152505dedee19be2ca0">isClover</link></para>
+</listitem>
+            <listitem><para>static std::array&lt; bool, 1000 &gt; <link linkend="_class_clovers_1a8fd25933d58fec7ea47ed1a7ba610ed3">isGe</link></para>
+</listitem>
+            <listitem><para>static std::array&lt; <link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>, 1000 &gt; <link linkend="_class_clovers_1ae7bc9c33c4a997ef7cf615af95059a0c">labels</link></para>
+</listitem>
+            <listitem><para>static <link linkend="__gate_8hpp_1aec153c0c98a059999caa4cfb803777c8">Gate</link> <link linkend="_class_clovers_1a413ff8f90d6bcc0321e500633fd96bd5">promptBGOgate</link> = {-20.f, 10.f }</para>
+</listitem>
+            <listitem><para>static <link linkend="__gate_8hpp_1aec153c0c98a059999caa4cfb803777c8">Gate</link> <link linkend="_class_clovers_1a3189bfc58392c24d6a3dee2ce1a4c663">promptGeGate</link> = {-20.f, 10.f }</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Static Private Attributes    </title>
+        <itemizedlist>
+            <listitem><para>static bool <link linkend="_class_clovers_1a90e876d664b89f0b8b46f4ed07ecd6fe">s_initialised</link> = false</para>
+</listitem>
+            <listitem><para>static bool <link linkend="_class_clovers_1a52066e9d7cf040173f1790470bf9afff">s_time_ps</link> = false</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Detailed Description</title>
+
+<para>Analyse the clovers in the event. </para>
+
+
+
+<para>Typical use case : <literallayout><computeroutput>   // Open tree...
+   Event event(tree, &quot;lTn&quot;);
+
+   auto root_histo = new THisto(...);
+
+   auto maxEvt = tree -&gt; GetEntries();
+   int eventNumber = 0;
+   Clovers clovers;
+   while (eventNumber&lt;maxEvt)
+   {
+     tree -&gt; GetEntry();
+     clovers.SetEvent(event);
+     for (auto const &amp; clover : event.CleanGe)
+     {
+       root_histo-&gt;Fill(clover.nrj);
+     }
+   }
+</computeroutput></literallayout> This class is Thread Safe ! </para>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_class_clovers_1addcd7785b41aec6be8988166a5b04fa0"/>    <section>
+    <title>Clovers()</title>
+<indexterm><primary>Clovers</primary><secondary>Clovers</secondary></indexterm>
+<indexterm><primary>Clovers</primary><secondary>Clovers</secondary></indexterm>
+<para><computeroutput>Clovers::Clovers ( )<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_clovers_addcd7785b41aec6be8988166a5b04fa0_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_class_clovers_1a523aad5d019f23144292c0e23067a43b"/>    <section>
+    <title>Analyse()</title>
+<indexterm><primary>Analyse</primary><secondary>Clovers</secondary></indexterm>
+<indexterm><primary>Clovers</primary><secondary>Analyse</secondary></indexterm>
+<para><computeroutput>void Clovers::Analyse ( )<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_clovers_a523aad5d019f23144292c0e23067a43b_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_clovers_a523aad5d019f23144292c0e23067a43b_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_clovers_1adaa12173cad2d804f6583001f174fd12"/>    <section>
+    <title>Analyse_more()</title>
+<indexterm><primary>Analyse_more</primary><secondary>Clovers</secondary></indexterm>
+<indexterm><primary>Clovers</primary><secondary>Analyse_more</secondary></indexterm>
+<para><computeroutput>void Clovers::Analyse_more ( )</computeroutput></para>    </section><anchor xml:id="_class_clovers_1ae236f2adb9b2c374babe63b3cef9c970"/>    <section>
+    <title>begin()</title>
+<indexterm><primary>begin</primary><secondary>Clovers</secondary></indexterm>
+<indexterm><primary>Clovers</primary><secondary>begin</secondary></indexterm>
+<para><computeroutput>auto Clovers::begin ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_clovers_1a10afb56c3c4311007df55386dacba543"/>    <section>
+    <title>CleanFast()</title>
+<indexterm><primary>CleanFast</primary><secondary>Clovers</secondary></indexterm>
+<indexterm><primary>Clovers</primary><secondary>CleanFast</secondary></indexterm>
+<para><computeroutput>void Clovers::CleanFast ( )<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_clovers_a10afb56c3c4311007df55386dacba543_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_clovers_1a5886faa3a7bce241b628e2c7859e7dfd"/>    <section>
+    <title>end()</title>
+<indexterm><primary>end</primary><secondary>Clovers</secondary></indexterm>
+<indexterm><primary>Clovers</primary><secondary>end</secondary></indexterm>
+<para><computeroutput>auto Clovers::end ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_clovers_1ab1394e718791a5016aa3e0a19828465c"/>    <section>
+    <title>Fill()</title>
+<indexterm><primary>Fill</primary><secondary>Clovers</secondary></indexterm>
+<indexterm><primary>Clovers</primary><secondary>Fill</secondary></indexterm>
+<para><computeroutput>bool Clovers::Fill (<link linkend="_class_event">Event</link> const &amp; event, <link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> const &amp; index)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_clovers_ab1394e718791a5016aa3e0a19828465c_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_clovers_ab1394e718791a5016aa3e0a19828465c_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_clovers_1a5f280f8b6d043a949b726c7ff2b1e019"/>    <section>
+    <title>FillFast()</title>
+<indexterm><primary>FillFast</primary><secondary>Clovers</secondary></indexterm>
+<indexterm><primary>Clovers</primary><secondary>FillFast</secondary></indexterm>
+<para><computeroutput>bool Clovers::FillFast (<link linkend="_class_event">Event</link> const &amp; event, <link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> const &amp; hit_index)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_clovers_a5f280f8b6d043a949b726c7ff2b1e019_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_clovers_a5f280f8b6d043a949b726c7ff2b1e019_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_clovers_1ab97fc40c1f6b24a092f8f92562c2fd9a"/>    <section>
+    <title>InitializeArrays()</title>
+<indexterm><primary>InitializeArrays</primary><secondary>Clovers</secondary></indexterm>
+<indexterm><primary>Clovers</primary><secondary>InitializeArrays</secondary></indexterm>
+<para><computeroutput>static void Clovers::InitializeArrays ( )<computeroutput>[inline]</computeroutput>, <computeroutput>[static]</computeroutput></computeroutput></para><para>
+
+<para>Static initialize. Allows one to use the arrays event if no object has been instantiated. </para>
+</para>
+Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_clovers_ab97fc40c1f6b24a092f8f92562c2fd9a_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_clovers_ab97fc40c1f6b24a092f8f92562c2fd9a_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_clovers_1a9c28e72706c325a4fe3b0aab61c0bfe0"/>    <section>
+    <title>is_clover()</title>
+<indexterm><primary>is_clover</primary><secondary>Clovers</secondary></indexterm>
+<indexterm><primary>Clovers</primary><secondary>is_clover</secondary></indexterm>
+<para><computeroutput>static bool Clovers::is_clover (<link linkend="__hit_8hpp_1ab5dd24876acad09ec52c250c1668466c">Label</link> const &amp; l)<computeroutput>[inline]</computeroutput>, <computeroutput>[static]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_clovers_a9c28e72706c325a4fe3b0aab61c0bfe0_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_clovers_1a4940a14c796f0825697af29156644e9c"/>    <section>
+    <title>is_clover_BGO()</title>
+<indexterm><primary>is_clover_BGO</primary><secondary>Clovers</secondary></indexterm>
+<indexterm><primary>Clovers</primary><secondary>is_clover_BGO</secondary></indexterm>
+<para><computeroutput>static bool Clovers::is_clover_BGO (<link linkend="__hit_8hpp_1ab5dd24876acad09ec52c250c1668466c">Label</link> const &amp; l)<computeroutput>[inline]</computeroutput>, <computeroutput>[static]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_clovers_a4940a14c796f0825697af29156644e9c_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_clovers_a4940a14c796f0825697af29156644e9c_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_clovers_1a434508059d1a1f8e1c31dc793505cdc7"/>    <section>
+    <title>is_clover_Ge()</title>
+<indexterm><primary>is_clover_Ge</primary><secondary>Clovers</secondary></indexterm>
+<indexterm><primary>Clovers</primary><secondary>is_clover_Ge</secondary></indexterm>
+<para><computeroutput>static bool Clovers::is_clover_Ge (<link linkend="__hit_8hpp_1ab5dd24876acad09ec52c250c1668466c">Label</link> const &amp; l)<computeroutput>[inline]</computeroutput>, <computeroutput>[static]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_clovers_a434508059d1a1f8e1c31dc793505cdc7_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_clovers_a434508059d1a1f8e1c31dc793505cdc7_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_clovers_1a42f43989153734778e0ba6ad1cb2b983"/>    <section>
+    <title>isDelayed()</title>
+<indexterm><primary>isDelayed</primary><secondary>Clovers</secondary></indexterm>
+<indexterm><primary>Clovers</primary><secondary>isDelayed</secondary></indexterm>
+<para><computeroutput>bool Clovers::isDelayed (<link linkend="_class_clover_module">CloverModule</link> const &amp; clover)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_clovers_1acf7eee4006e708ff0b2f4a56433d5e38"/>    <section>
+    <title>isPrompt()</title>
+<indexterm><primary>isPrompt</primary><secondary>Clovers</secondary></indexterm>
+<indexterm><primary>Clovers</primary><secondary>isPrompt</secondary></indexterm>
+<para><computeroutput>bool Clovers::isPrompt (<link linkend="_class_clover_module">CloverModule</link> const &amp; clover)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_clovers_1a9b2bcd83b6884936745b06346b121b73"/>    <section>
+    <title>label_to_clover()</title>
+<indexterm><primary>label_to_clover</primary><secondary>Clovers</secondary></indexterm>
+<indexterm><primary>Clovers</primary><secondary>label_to_clover</secondary></indexterm>
+<para><computeroutput>static <link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> Clovers::label_to_clover (<link linkend="__hit_8hpp_1ab5dd24876acad09ec52c250c1668466c">Label</link> const &amp; l)<computeroutput>[inline]</computeroutput>, <computeroutput>[static]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_clovers_a9b2bcd83b6884936745b06346b121b73_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_clovers_1ad047177f1403bb65359a6ad07ba4473a"/>    <section>
+    <title>label_to_cristal()</title>
+<indexterm><primary>label_to_cristal</primary><secondary>Clovers</secondary></indexterm>
+<indexterm><primary>Clovers</primary><secondary>label_to_cristal</secondary></indexterm>
+<para><computeroutput><link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> Clovers::label_to_cristal (<link linkend="__hit_8hpp_1ab5dd24876acad09ec52c250c1668466c">Label</link> const &amp; l)<computeroutput>[static]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_clovers_ad047177f1403bb65359a6ad07ba4473a_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_clovers_1a378e1b7fea24003b4b56eb855c8ae163"/>    <section>
+    <title>mult()</title>
+<indexterm><primary>mult</primary><secondary>Clovers</secondary></indexterm>
+<indexterm><primary>Clovers</primary><secondary>mult</secondary></indexterm>
+<para><computeroutput>auto Clovers::mult ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_clovers_a378e1b7fea24003b4b56eb855c8ae163_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_clovers_1ae6002b2880afe9e523ef87a8aa78b368"/>    <section>
+    <title>operator[]()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>operator[]</primary><secondary>Clovers</secondary></indexterm>
+<indexterm><primary>Clovers</primary><secondary>operator[]</secondary></indexterm>
+<para><computeroutput><link linkend="_class_clover_module">CloverModule</link> Clovers::operator[] (<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> const &amp; i)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_clovers_1a6ba57807510fa592b8c57963c0d3c788"/>    <section>
+    <title>operator[]()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>operator[]</primary><secondary>Clovers</secondary></indexterm>
+<indexterm><primary>Clovers</primary><secondary>operator[]</secondary></indexterm>
+<para><computeroutput><link linkend="_class_clover_module">CloverModule</link> Clovers::operator[] (<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> const &amp; i) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_clovers_1a0d853153f63a1b04ca62756615dfd741"/>    <section>
+    <title>PrintClean()</title>
+<indexterm><primary>PrintClean</primary><secondary>Clovers</secondary></indexterm>
+<indexterm><primary>Clovers</primary><secondary>PrintClean</secondary></indexterm>
+<para><computeroutput>void Clovers::PrintClean ( )<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_clovers_a0d853153f63a1b04ca62756615dfd741_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_clovers_1a60b7747d54a60759b4eae02deac50f95"/>    <section>
+    <title>Reset()</title>
+<indexterm><primary>Reset</primary><secondary>Clovers</secondary></indexterm>
+<indexterm><primary>Clovers</primary><secondary>Reset</secondary></indexterm>
+<para><computeroutput>void Clovers::Reset ( )<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_clovers_a60b7747d54a60759b4eae02deac50f95_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_clovers_a60b7747d54a60759b4eae02deac50f95_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_clovers_1abe608be3faec9a16f7735dfcaabfe775"/>    <section>
+    <title>setEnergyThreshold()</title>
+<indexterm><primary>setEnergyThreshold</primary><secondary>Clovers</secondary></indexterm>
+<indexterm><primary>Clovers</primary><secondary>setEnergyThreshold</secondary></indexterm>
+<para><computeroutput>static void Clovers::setEnergyThreshold (float const &amp; emin)<computeroutput>[inline]</computeroutput>, <computeroutput>[static]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_clovers_1a264432ef7231d65b77e744858374b8e1"/>    <section>
+    <title>SetEvent()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>SetEvent</primary><secondary>Clovers</secondary></indexterm>
+<indexterm><primary>Clovers</primary><secondary>SetEvent</secondary></indexterm>
+<para><computeroutput>void Clovers::SetEvent (<link linkend="_class_event">Event</link> const &amp; event)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>Fills the CloverModules for a whole event. </para>
+</para>
+
+<para>Two modes : 1 : normal mode, skip the compton cleaning 2 : new mode </para>
+Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_clovers_a264432ef7231d65b77e744858374b8e1_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_clovers_a264432ef7231d65b77e744858374b8e1_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_clovers_1a947342842702e2f91a86d0847b15ba3a"/>    <section>
+    <title>SetEvent()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>SetEvent</primary><secondary>Clovers</secondary></indexterm>
+<indexterm><primary>Clovers</primary><secondary>SetEvent</secondary></indexterm>
+<para><computeroutput>void Clovers::SetEvent (<link linkend="_class_event">Event</link> const &amp; event, char const &amp; analyse_mode)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>Fills the CloverModules for a whole event. </para>
+</para>
+
+<para>Two modes : 1 : normal mode, skip the compton cleaning 2 : new mode </para>
+Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_clovers_a947342842702e2f91a86d0847b15ba3a_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_clovers_1a6f9f1d7a131c9972ded9cf1b4291455d"/>    <section>
+    <title>size()</title>
+<indexterm><primary>size</primary><secondary>Clovers</secondary></indexterm>
+<indexterm><primary>Clovers</primary><secondary>size</secondary></indexterm>
+<para><computeroutput>auto const&amp; Clovers::size ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_clovers_a6f9f1d7a131c9972ded9cf1b4291455d_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_clovers_1aa641968a47fb9db9363e89be9c29be4c"/>    <section>
+    <title>timePs()</title>
+<indexterm><primary>timePs</primary><secondary>Clovers</secondary></indexterm>
+<indexterm><primary>Clovers</primary><secondary>timePs</secondary></indexterm>
+<para><computeroutput>static void Clovers::timePs (bool const &amp; time_ps)<computeroutput>[inline]</computeroutput>, <computeroutput>[static]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_clovers_aa641968a47fb9db9363e89be9c29be4c_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_class_clovers_1a204d1d6808b2e2832dd16fbf5f6c45d9"/>    <section>
+    <title>Bgo</title>
+<indexterm><primary>Bgo</primary><secondary>Clovers</secondary></indexterm>
+<indexterm><primary>Clovers</primary><secondary>Bgo</secondary></indexterm>
+<para><computeroutput><link linkend="_class_static_vector">StaticVector</link>&lt;<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>&gt; Clovers::Bgo = <link linkend="_class_static_vector">StaticVector</link>&lt;<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>&gt;(24)</computeroutput></para>    </section><anchor xml:id="_class_clovers_1a94e58fcdccd9a9165933a4f494c93dcf"/>    <section>
+    <title>BGOonly</title>
+<indexterm><primary>BGOonly</primary><secondary>Clovers</secondary></indexterm>
+<indexterm><primary>Clovers</primary><secondary>BGOonly</secondary></indexterm>
+<para><computeroutput><link linkend="_class_static_vector">StaticVector</link>&lt;<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>&gt; Clovers::BGOonly = <link linkend="_class_static_vector">StaticVector</link>&lt;<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>&gt;(24)</computeroutput></para>    </section><anchor xml:id="_class_clovers_1a3b6fa093b84451b7ebe304838530997b"/>    <section>
+    <title>CleanGe</title>
+<indexterm><primary>CleanGe</primary><secondary>Clovers</secondary></indexterm>
+<indexterm><primary>Clovers</primary><secondary>CleanGe</secondary></indexterm>
+<para><computeroutput><link linkend="_class_static_vector">StaticVector</link>&lt;<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>&gt; Clovers::CleanGe = <link linkend="_class_static_vector">StaticVector</link>&lt;<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>&gt;(24)</computeroutput></para>    </section><anchor xml:id="_class_clovers_1a2cd5ef2adb5347f86d677a6ee78b0cf2"/>    <section>
+    <title>cristaux</title>
+<indexterm><primary>cristaux</primary><secondary>Clovers</secondary></indexterm>
+<indexterm><primary>Clovers</primary><secondary>cristaux</secondary></indexterm>
+<para><computeroutput><link linkend="_class_static_vector">StaticVector</link>&lt;<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>&gt; Clovers::cristaux = <link linkend="_class_static_vector">StaticVector</link>&lt;<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>&gt;(96)</computeroutput></para>    </section><anchor xml:id="_class_clovers_1abf3ac879188806ad38a0ebe7c0946ce9"/>    <section>
+    <title>cristaux_BGO</title>
+<indexterm><primary>cristaux_BGO</primary><secondary>Clovers</secondary></indexterm>
+<indexterm><primary>Clovers</primary><secondary>cristaux_BGO</secondary></indexterm>
+<para><computeroutput><link linkend="_class_static_vector">StaticVector</link>&lt;<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>&gt; Clovers::cristaux_BGO = <link linkend="_class_static_vector">StaticVector</link>&lt;<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>&gt;(48)</computeroutput></para>    </section><anchor xml:id="_class_clovers_1a899c8b03a2cf2772aa085100292b738e"/>    <section>
+    <title>cristaux_index</title>
+<indexterm><primary>cristaux_index</primary><secondary>Clovers</secondary></indexterm>
+<indexterm><primary>Clovers</primary><secondary>cristaux_index</secondary></indexterm>
+<para><computeroutput>std::array&lt; <link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>, 1000 &gt; Clovers::cristaux_index<computeroutput>[static]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_clovers_1a8c76fc2f276e19d4b7a8cc70c9f9cebc"/>    <section>
+    <title>cristaux_index_BGO</title>
+<indexterm><primary>cristaux_index_BGO</primary><secondary>Clovers</secondary></indexterm>
+<indexterm><primary>Clovers</primary><secondary>cristaux_index_BGO</secondary></indexterm>
+<para><computeroutput>std::array&lt; <link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>, 1000 &gt; Clovers::cristaux_index_BGO<computeroutput>[static]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_clovers_1a75da7859463f1478187c7f3f13d5f5d7"/>    <section>
+    <title>cristaux_nrj</title>
+<indexterm><primary>cristaux_nrj</primary><secondary>Clovers</secondary></indexterm>
+<indexterm><primary>Clovers</primary><secondary>cristaux_nrj</secondary></indexterm>
+<para><computeroutput>std::array&lt;float, 96&gt; Clovers::cristaux_nrj = {0}</computeroutput></para>    </section><anchor xml:id="_class_clovers_1a3dff2c188e41b5a0efe78e52f4f94949"/>    <section>
+    <title>cristaux_nrj_BGO</title>
+<indexterm><primary>cristaux_nrj_BGO</primary><secondary>Clovers</secondary></indexterm>
+<indexterm><primary>Clovers</primary><secondary>cristaux_nrj_BGO</secondary></indexterm>
+<para><computeroutput>std::array&lt;float, 48&gt; Clovers::cristaux_nrj_BGO = {0}</computeroutput></para>    </section><anchor xml:id="_class_clovers_1a9b7473b93b1fd7b6330070f1611a42e1"/>    <section>
+    <title>cristaux_time</title>
+<indexterm><primary>cristaux_time</primary><secondary>Clovers</secondary></indexterm>
+<indexterm><primary>Clovers</primary><secondary>cristaux_time</secondary></indexterm>
+<para><computeroutput>std::array&lt;double, 96&gt; Clovers::cristaux_time = {0}</computeroutput></para>    </section><anchor xml:id="_class_clovers_1afc0133ff088329bad822a129568edac3"/>    <section>
+    <title>cristaux_time_BGO</title>
+<indexterm><primary>cristaux_time_BGO</primary><secondary>Clovers</secondary></indexterm>
+<indexterm><primary>Clovers</primary><secondary>cristaux_time_BGO</secondary></indexterm>
+<para><computeroutput>std::array&lt;double, 48&gt; Clovers::cristaux_time_BGO = {0}</computeroutput></para>    </section><anchor xml:id="_class_clovers_1a079d8274f7810d7ee0da013ccdfc759c"/>    <section>
+    <title>CrystalMult</title>
+<indexterm><primary>CrystalMult</primary><secondary>Clovers</secondary></indexterm>
+<indexterm><primary>Clovers</primary><secondary>CrystalMult</secondary></indexterm>
+<para><computeroutput><link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> Clovers::CrystalMult = 0</computeroutput></para>    </section><anchor xml:id="_class_clovers_1ad586816c3e23df6dac4d648939f23579"/>    <section>
+    <title>CrystalMult_BGO</title>
+<indexterm><primary>CrystalMult_BGO</primary><secondary>Clovers</secondary></indexterm>
+<indexterm><primary>Clovers</primary><secondary>CrystalMult_BGO</secondary></indexterm>
+<para><computeroutput><link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> Clovers::CrystalMult_BGO = 0</computeroutput></para>    </section><anchor xml:id="_class_clovers_1a49e8eabe53190954b8c7973b0ed39f85"/>    <section>
+    <title>DelayedBGO</title>
+<indexterm><primary>DelayedBGO</primary><secondary>Clovers</secondary></indexterm>
+<indexterm><primary>Clovers</primary><secondary>DelayedBGO</secondary></indexterm>
+<para><computeroutput><link linkend="_class_static_vector">StaticVector</link>&lt;<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>&gt; Clovers::DelayedBGO = <link linkend="_class_static_vector">StaticVector</link>&lt;<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>&gt;(24)</computeroutput></para>    </section><anchor xml:id="_class_clovers_1a3f5e44c3955123ec5535c585c7c295a2"/>    <section>
+    <title>delayedBGOgate</title>
+<indexterm><primary>delayedBGOgate</primary><secondary>Clovers</secondary></indexterm>
+<indexterm><primary>Clovers</primary><secondary>delayedBGOgate</secondary></indexterm>
+<para><computeroutput><link linkend="__gate_8hpp_1a2b91fd9abbd8bef0ba1f2f2ba1205c1f">Gates</link> Clovers::delayedBGOgate = {{60.f, 145.f}}<computeroutput>[static]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_clovers_1af73ecf57ed32c4670ffe484a5c4c0114"/>    <section>
+    <title>DelayedCleanGeMult</title>
+<indexterm><primary>DelayedCleanGeMult</primary><secondary>Clovers</secondary></indexterm>
+<indexterm><primary>Clovers</primary><secondary>DelayedCleanGeMult</secondary></indexterm>
+<para><computeroutput><link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> Clovers::DelayedCleanGeMult = 0</computeroutput></para>    </section><anchor xml:id="_class_clovers_1a2d5bacc7c99a739838cf999e9a70f7ca"/>    <section>
+    <title>delayedClovers</title>
+<indexterm><primary>delayedClovers</primary><secondary>Clovers</secondary></indexterm>
+<indexterm><primary>Clovers</primary><secondary>delayedClovers</secondary></indexterm>
+<para><computeroutput>std::vector&lt;<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>&gt; Clovers::delayedClovers</computeroutput></para>    </section><anchor xml:id="_class_clovers_1accd03b8ba441c066df69dfda4419d29e"/>    <section>
+    <title>DelayedClovers</title>
+<indexterm><primary>DelayedClovers</primary><secondary>Clovers</secondary></indexterm>
+<indexterm><primary>Clovers</primary><secondary>DelayedClovers</secondary></indexterm>
+<para><computeroutput>std::vector&lt;<link linkend="_class_clover_module">CloverModule</link>&gt; Clovers::DelayedClovers</computeroutput></para>    </section><anchor xml:id="_class_clovers_1a61ba76ac7711422e8e3b19d02b1854e4"/>    <section>
+    <title>delayedGate</title>
+<indexterm><primary>delayedGate</primary><secondary>Clovers</secondary></indexterm>
+<indexterm><primary>Clovers</primary><secondary>delayedGate</secondary></indexterm>
+<para><computeroutput>class <link linkend="_class_clovers_1_1_delayed_gate">Clovers::DelayedGate</link> Clovers::delayedGate</computeroutput></para>    </section><anchor xml:id="_class_clovers_1a8b095b47153a05f4ea048dfd1f27cc8a"/>    <section>
+    <title>DelayedGe</title>
+<indexterm><primary>DelayedGe</primary><secondary>Clovers</secondary></indexterm>
+<indexterm><primary>Clovers</primary><secondary>DelayedGe</secondary></indexterm>
+<para><computeroutput><link linkend="_class_static_vector">StaticVector</link>&lt;<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>&gt; Clovers::DelayedGe = <link linkend="_class_static_vector">StaticVector</link>&lt;<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>&gt;(24)</computeroutput></para>    </section><anchor xml:id="_class_clovers_1af1d3b98f82e408cf31671e72b9884169"/>    <section>
+    <title>delayedGeGate</title>
+<indexterm><primary>delayedGeGate</primary><secondary>Clovers</secondary></indexterm>
+<indexterm><primary>Clovers</primary><secondary>delayedGeGate</secondary></indexterm>
+<para><computeroutput><link linkend="__gate_8hpp_1a2b91fd9abbd8bef0ba1f2f2ba1205c1f">Gates</link> Clovers::delayedGeGate = {{60.f, 145.f}}<computeroutput>[static]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_clovers_1a6f9fa8831c5a512223a979eb7d6e0ff4"/>    <section>
+    <title>DelayedMult</title>
+<indexterm><primary>DelayedMult</primary><secondary>Clovers</secondary></indexterm>
+<indexterm><primary>Clovers</primary><secondary>DelayedMult</secondary></indexterm>
+<para><computeroutput><link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> Clovers::DelayedMult = 0</computeroutput></para>    </section><anchor xml:id="_class_clovers_1a2fd19fb7d2b6a38d651a179deda4c3c5"/>    <section>
+    <title>Emin</title>
+<indexterm><primary>Emin</primary><secondary>Clovers</secondary></indexterm>
+<indexterm><primary>Clovers</primary><secondary>Emin</secondary></indexterm>
+<para><computeroutput>float Clovers::Emin = 5.<computeroutput>[static]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_clovers_1a716473abe5555285f62eaabc6466c847"/>    <section>
+    <title>Ge</title>
+<indexterm><primary>Ge</primary><secondary>Clovers</secondary></indexterm>
+<indexterm><primary>Clovers</primary><secondary>Ge</secondary></indexterm>
+<para><computeroutput><link linkend="_class_static_vector">StaticVector</link>&lt;<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>&gt; Clovers::Ge = <link linkend="_class_static_vector">StaticVector</link>&lt;<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>&gt;(24)</computeroutput></para>    </section><anchor xml:id="_class_clovers_1a0ad93f05644e9c600d6b3252ccfa019f"/>    <section>
+    <title>has511</title>
+<indexterm><primary>has511</primary><secondary>Clovers</secondary></indexterm>
+<indexterm><primary>Clovers</primary><secondary>has511</secondary></indexterm>
+<para><computeroutput>bool Clovers::has511 = false</computeroutput></para>    </section><anchor xml:id="_class_clovers_1a4c02a37642baad4cff767619dd48b76b"/>    <section>
+    <title>Hits</title>
+<indexterm><primary>Hits</primary><secondary>Clovers</secondary></indexterm>
+<indexterm><primary>Clovers</primary><secondary>Hits</secondary></indexterm>
+<para><computeroutput><link linkend="_class_static_vector">StaticVector</link>&lt;<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>&gt; Clovers::Hits = <link linkend="_class_static_vector">StaticVector</link>&lt;<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>&gt;(24)</computeroutput></para>    </section><anchor xml:id="_class_clovers_1aabda84c85d5315fe8d1f37ba5f4e02c3"/>    <section>
+    <title>isBGO</title>
+<indexterm><primary>isBGO</primary><secondary>Clovers</secondary></indexterm>
+<indexterm><primary>Clovers</primary><secondary>isBGO</secondary></indexterm>
+<para><computeroutput>std::array&lt; bool, 1000 &gt; Clovers::isBGO<computeroutput>[static]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_clovers_1a2f696c2c36f8f152505dedee19be2ca0"/>    <section>
+    <title>isClover</title>
+<indexterm><primary>isClover</primary><secondary>Clovers</secondary></indexterm>
+<indexterm><primary>Clovers</primary><secondary>isClover</secondary></indexterm>
+<para><computeroutput>std::array&lt; bool, 1000 &gt; Clovers::isClover<computeroutput>[static]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_clovers_1a8fd25933d58fec7ea47ed1a7ba610ed3"/>    <section>
+    <title>isGe</title>
+<indexterm><primary>isGe</primary><secondary>Clovers</secondary></indexterm>
+<indexterm><primary>Clovers</primary><secondary>isGe</secondary></indexterm>
+<para><computeroutput>std::array&lt; bool, 1000 &gt; Clovers::isGe<computeroutput>[static]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_clovers_1ae7bc9c33c4a997ef7cf615af95059a0c"/>    <section>
+    <title>labels</title>
+<indexterm><primary>labels</primary><secondary>Clovers</secondary></indexterm>
+<indexterm><primary>Clovers</primary><secondary>labels</secondary></indexterm>
+<para><computeroutput>std::array&lt; <link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>, 1000 &gt; Clovers::labels<computeroutput>[static]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_clovers_1ad07746b708cc9bea3ef6ed4370d928b9"/>    <section>
+    <title>m_clovers</title>
+<indexterm><primary>m_clovers</primary><secondary>Clovers</secondary></indexterm>
+<indexterm><primary>Clovers</primary><secondary>m_clovers</secondary></indexterm>
+<para><computeroutput>std::vector&lt;<link linkend="_class_clover_module">CloverModule</link>&gt; Clovers::m_clovers</computeroutput></para>    </section><anchor xml:id="_class_clovers_1aebe6be652c1225409f400b3961ea9582"/>    <section>
+    <title>PromptBGO</title>
+<indexterm><primary>PromptBGO</primary><secondary>Clovers</secondary></indexterm>
+<indexterm><primary>Clovers</primary><secondary>PromptBGO</secondary></indexterm>
+<para><computeroutput><link linkend="_class_static_vector">StaticVector</link>&lt;<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>&gt; Clovers::PromptBGO = <link linkend="_class_static_vector">StaticVector</link>&lt;<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>&gt;(24)</computeroutput></para>    </section><anchor xml:id="_class_clovers_1a413ff8f90d6bcc0321e500633fd96bd5"/>    <section>
+    <title>promptBGOgate</title>
+<indexterm><primary>promptBGOgate</primary><secondary>Clovers</secondary></indexterm>
+<indexterm><primary>Clovers</primary><secondary>promptBGOgate</secondary></indexterm>
+<para><computeroutput><link linkend="__gate_8hpp_1aec153c0c98a059999caa4cfb803777c8">Gate</link> Clovers::promptBGOgate = {-20.f, 10.f }<computeroutput>[static]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_clovers_1aa52c6ad2a19f1ccf562194a76b47de0c"/>    <section>
+    <title>PromptCleanGeMult</title>
+<indexterm><primary>PromptCleanGeMult</primary><secondary>Clovers</secondary></indexterm>
+<indexterm><primary>Clovers</primary><secondary>PromptCleanGeMult</secondary></indexterm>
+<para><computeroutput><link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> Clovers::PromptCleanGeMult = 0</computeroutput></para>    </section><anchor xml:id="_class_clovers_1a7d84f69dd5d1504df9eb5761bea0b6fe"/>    <section>
+    <title>promptClovers</title>
+<indexterm><primary>promptClovers</primary><secondary>Clovers</secondary></indexterm>
+<indexterm><primary>Clovers</primary><secondary>promptClovers</secondary></indexterm>
+<para><computeroutput>std::vector&lt;<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>&gt; Clovers::promptClovers</computeroutput></para>    </section><anchor xml:id="_class_clovers_1ac0eb8a13e2f9f4da36b976a6aa78a8ab"/>    <section>
+    <title>PromptClovers</title>
+<indexterm><primary>PromptClovers</primary><secondary>Clovers</secondary></indexterm>
+<indexterm><primary>Clovers</primary><secondary>PromptClovers</secondary></indexterm>
+<para><computeroutput>std::vector&lt;<link linkend="_class_clover_module">CloverModule</link>&gt; Clovers::PromptClovers</computeroutput></para>    </section><anchor xml:id="_class_clovers_1a82f555f87d8ed08c3266843e01073213"/>    <section>
+    <title>promptGate</title>
+<indexterm><primary>promptGate</primary><secondary>Clovers</secondary></indexterm>
+<indexterm><primary>Clovers</primary><secondary>promptGate</secondary></indexterm>
+<para><computeroutput>class <link linkend="_class_clovers_1_1_prompt_gate">Clovers::PromptGate</link> Clovers::promptGate</computeroutput></para>    </section><anchor xml:id="_class_clovers_1ad4c54b6baf892e12b7865dad6d109691"/>    <section>
+    <title>PromptGe</title>
+<indexterm><primary>PromptGe</primary><secondary>Clovers</secondary></indexterm>
+<indexterm><primary>Clovers</primary><secondary>PromptGe</secondary></indexterm>
+<para><computeroutput><link linkend="_class_static_vector">StaticVector</link>&lt;<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>&gt; Clovers::PromptGe = <link linkend="_class_static_vector">StaticVector</link>&lt;<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>&gt;(24)</computeroutput></para>    </section><anchor xml:id="_class_clovers_1a3189bfc58392c24d6a3dee2ce1a4c663"/>    <section>
+    <title>promptGeGate</title>
+<indexterm><primary>promptGeGate</primary><secondary>Clovers</secondary></indexterm>
+<indexterm><primary>Clovers</primary><secondary>promptGeGate</secondary></indexterm>
+<para><computeroutput><link linkend="__gate_8hpp_1aec153c0c98a059999caa4cfb803777c8">Gate</link> Clovers::promptGeGate = {-20.f, 10.f }<computeroutput>[static]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_clovers_1ad305f49ba37a534ff2d55cfdadd21965"/>    <section>
+    <title>PromptMult</title>
+<indexterm><primary>PromptMult</primary><secondary>Clovers</secondary></indexterm>
+<indexterm><primary>Clovers</primary><secondary>PromptMult</secondary></indexterm>
+<para><computeroutput><link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> Clovers::PromptMult = 0</computeroutput></para>    </section><anchor xml:id="_class_clovers_1a1a2205eb2396ce5fd48b0f12a73f0196"/>    <section>
+    <title>rawBGO</title>
+<indexterm><primary>rawBGO</primary><secondary>Clovers</secondary></indexterm>
+<indexterm><primary>Clovers</primary><secondary>rawBGO</secondary></indexterm>
+<para><computeroutput><link linkend="_class_static_vector">StaticVector</link>&lt;<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>&gt; Clovers::rawBGO = <link linkend="_class_static_vector">StaticVector</link>&lt;<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>&gt;(48)</computeroutput></para>    </section><anchor xml:id="_class_clovers_1af84dd10eb878f4385ecd092e23a77e1c"/>    <section>
+    <title>rawGe</title>
+<indexterm><primary>rawGe</primary><secondary>Clovers</secondary></indexterm>
+<indexterm><primary>Clovers</primary><secondary>rawGe</secondary></indexterm>
+<para><computeroutput><link linkend="_class_static_vector">StaticVector</link>&lt;<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>&gt; Clovers::rawGe = <link linkend="_class_static_vector">StaticVector</link>&lt;<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>&gt;(96)</computeroutput></para>    </section><anchor xml:id="_class_clovers_1ae853cd7142ff578d6876c38070ef482e"/>    <section>
+    <title>RejectedGe</title>
+<indexterm><primary>RejectedGe</primary><secondary>Clovers</secondary></indexterm>
+<indexterm><primary>Clovers</primary><secondary>RejectedGe</secondary></indexterm>
+<para><computeroutput><link linkend="_class_static_vector">StaticVector</link>&lt;<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>&gt; Clovers::RejectedGe = <link linkend="_class_static_vector">StaticVector</link>&lt;<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>&gt;(24)</computeroutput></para>    </section><anchor xml:id="_class_clovers_1a90e876d664b89f0b8b46f4ed07ecd6fe"/>    <section>
+    <title>s_initialised</title>
+<indexterm><primary>s_initialised</primary><secondary>Clovers</secondary></indexterm>
+<indexterm><primary>Clovers</primary><secondary>s_initialised</secondary></indexterm>
+<para><computeroutput>bool Clovers::s_initialised = false<computeroutput>[static]</computeroutput>, <computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_clovers_1a52066e9d7cf040173f1790470bf9afff"/>    <section>
+    <title>s_time_ps</title>
+<indexterm><primary>s_time_ps</primary><secondary>Clovers</secondary></indexterm>
+<indexterm><primary>Clovers</primary><secondary>s_time_ps</secondary></indexterm>
+<para><computeroutput>bool Clovers::s_time_ps = false<computeroutput>[static]</computeroutput>, <computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_clovers_1a4366bd57c8e4716d5fd63639c5ed2967"/>    <section>
+    <title>TotalMult</title>
+<indexterm><primary>TotalMult</primary><secondary>Clovers</secondary></indexterm>
+<indexterm><primary>Clovers</primary><secondary>TotalMult</secondary></indexterm>
+<para><computeroutput><link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> Clovers::TotalMult = 0</computeroutput></para>    </section><anchor xml:id="_class_clovers_1a3a258a7a457632666c0190b4fa04939b"/>    <section>
+    <title>totBGO</title>
+<indexterm><primary>totBGO</primary><secondary>Clovers</secondary></indexterm>
+<indexterm><primary>Clovers</primary><secondary>totBGO</secondary></indexterm>
+<para><computeroutput>double Clovers::totBGO = 0.0</computeroutput></para>    </section><anchor xml:id="_class_clovers_1a6e3b85032ab5190b5c2a360e6f0d2e4e"/>    <section>
+    <title>totBGO_delayed</title>
+<indexterm><primary>totBGO_delayed</primary><secondary>Clovers</secondary></indexterm>
+<indexterm><primary>Clovers</primary><secondary>totBGO_delayed</secondary></indexterm>
+<para><computeroutput>double Clovers::totBGO_delayed = -0.1</computeroutput></para>    </section><anchor xml:id="_class_clovers_1a05a4d8b02a5d996da6a1205eb8bd6ca4"/>    <section>
+    <title>totBGO_prompt</title>
+<indexterm><primary>totBGO_prompt</primary><secondary>Clovers</secondary></indexterm>
+<indexterm><primary>Clovers</primary><secondary>totBGO_prompt</secondary></indexterm>
+<para><computeroutput>double Clovers::totBGO_prompt = -0.1</computeroutput></para>    </section><anchor xml:id="_class_clovers_1a1bad91b9700a464895aacf89166961c5"/>    <section>
+    <title>totGe</title>
+<indexterm><primary>totGe</primary><secondary>Clovers</secondary></indexterm>
+<indexterm><primary>Clovers</primary><secondary>totGe</secondary></indexterm>
+<para><computeroutput>double Clovers::totGe = 0.0</computeroutput></para>    </section><anchor xml:id="_class_clovers_1abcd4354801aaef249f6a6332dca6c043"/>    <section>
+    <title>totGe_delayed</title>
+<indexterm><primary>totGe_delayed</primary><secondary>Clovers</secondary></indexterm>
+<indexterm><primary>Clovers</primary><secondary>totGe_delayed</secondary></indexterm>
+<para><computeroutput>double Clovers::totGe_delayed = -0.1</computeroutput></para>    </section><anchor xml:id="_class_clovers_1a94b65546b96444b31ff35570c2d45792"/>    <section>
+    <title>totGe_prompt</title>
+<indexterm><primary>totGe_prompt</primary><secondary>Clovers</secondary></indexterm>
+<indexterm><primary>Clovers</primary><secondary>totGe_prompt</secondary></indexterm>
+<para><computeroutput>double Clovers::totGe_prompt = -0.1</computeroutput></para></section>
+<para>
+The documentation for this class was generated from the following file:</para>
+lib/Analyse/<link linkend="__clovers_8hpp">Clovers.hpp</link></section>
+</section>

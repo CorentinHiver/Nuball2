@@ -1,0 +1,109 @@
+.TH "lib/string_functions.hpp" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+lib/string_functions.hpp
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <vector>\fP
+.br
+\fC#include <string>\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "std::string \fBfirstPart\fP (std::string const &string, char const &sep)"
+.br
+.ti -1c
+.RI "bool \fBfound\fP (std::string const &string, std::string const &substr)"
+.br
+.ti -1c
+.RI "std::vector< std::string > \fBgetList\fP (std::string string, char const &separator, bool const &removeVoids=false)"
+.br
+.RI "Cuts a string into pieces separated by the given separator like ';' or ' ' or ',' \&.\&.\&. "
+.ti -1c
+.RI "bool \fBisNumber\fP (std::string const &string)"
+.br
+.RI "Returns true if all its characters are digits\&. "
+.ti -1c
+.RI "std::string \fBlastPart\fP (std::string const &string, char const &sep)"
+.br
+.ti -1c
+.RI "std::string & \fBpop_front\fP (std::string &string)"
+.br
+.RI "Removes the first character of a string\&. "
+.ti -1c
+.RI "bool \fBremove\fP (std::string &string, std::string const &substr)"
+.br
+.ti -1c
+.RI "std::string \fBremoveBlankSpace\fP (std::string str)"
+.br
+.RI "Remove all the blank space in a string\&. "
+.ti -1c
+.RI "std::string \fBremoveFirstPart\fP (std::string const &string, char const &sep)"
+.br
+.ti -1c
+.RI "std::string \fBremoveLastPart\fP (std::string const &string, char const &sep)"
+.br
+.ti -1c
+.RI "std::string \fBreplaceCharacter\fP (std::string const &istring, char const &ichar, char const &ochar)"
+.br
+.RI "Replaces all the instances of one character with another\&. "
+.ti -1c
+.RI "std::string \fBrpCommaWDots\fP (std::string str)"
+.br
+.RI "Replace all the commas of a std::string with dots\&. "
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "std::string firstPart (std::string const & string, char const & sep)"
+
+.SS "bool found (std::string const & string, std::string const & substr)"
+
+.SS "std::vector<std::string> getList (std::string string, char const & separator, bool const & removeVoids = \fCfalse\fP)"
+
+.PP
+Cuts a string into pieces separated by the given separator like ';' or ' ' or ',' \&.\&.\&. Understand the removeVoids parameter : for instance, we have string = ';1;2;3;;5'
+.PP
+without removeVoids this function returns {'1', '2', '3', '5'} with removeVoids this function returns {'', '1', '2', '3', '', '5'} 
+.SS "bool isNumber (std::string const & string)"
+
+.PP
+Returns true if all its characters are digits\&. 
+.SS "std::string lastPart (std::string const & string, char const & sep)"
+
+.SS "std::string& pop_front (std::string & string)"
+
+.PP
+Removes the first character of a string\&. 
+.PP
+\fBAttention\fP
+.RS 4
+Careful, time complexity makes it really heavy on big string 
+.RE
+.PP
+
+.SS "bool remove (std::string & string, std::string const & substr)"
+
+.SS "std::string removeBlankSpace (std::string str)"
+
+.PP
+Remove all the blank space in a string\&. 
+.SS "std::string removeFirstPart (std::string const & string, char const & sep)"
+
+.SS "std::string removeLastPart (std::string const & string, char const & sep)"
+
+.SS "std::string replaceCharacter (std::string const & istring, char const & ichar, char const & ochar)"
+
+.PP
+Replaces all the instances of one character with another\&. For instance : std::string istring = 'je_suis_ton_pere'; std::string ostring = replaceCharacter(istring, '_', ' '); print(ostring); // output : 'je suis ton pere' 
+.SS "std::string rpCommaWDots (std::string str)"
+
+.PP
+Replace all the commas of a std::string with dots\&. 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Nuball2 from the source code\&.

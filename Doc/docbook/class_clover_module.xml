@@ -1,0 +1,240 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_class_clover_module" xml:lang="en-US">
+<title>CloverModule Class Reference</title>
+<indexterm><primary>CloverModule</primary></indexterm>
+<para>
+
+<para>Describes a Clover module. </para>
+ 
+</para>
+<para>
+<computeroutput>#include &lt;CloverModule.hpp&gt;</computeroutput>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_class_clover_module_1ae3561e8c445db77b574546fe907db7ba">addBGO</link> (float const &amp;_nrj, double const &amp;_time)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_clover_module_1a9c67abf2c39e6a2247763cb88756f993">addGe</link> (float const &amp;_nrj, double const &amp;_time)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_clover_module_1a9be986f66470be8111ee7a6045f365ca">clean</link> ()</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_clover_module_1a1addfbef28cc91bdd1a531b4180c92ba">clear</link> ()</para>
+</listitem>
+            <listitem><para><link linkend="_class_clover_module_1a41e9f4afbfb7644201a9a7d4c82a7f92">CloverModule</link> ()</para>
+</listitem>
+            <listitem><para>auto const  &amp; <link linkend="_class_clover_module_1a9bf510d1a745fcfb7f9bb884a4e23a52">label</link> () const</para>
+</listitem>
+            <listitem><para><link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> <link linkend="_class_clover_module_1a607094481570a484318fff8e794bf639">nbCrystals</link> () const</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_clover_module_1adf77517ab6c0830eed708a1ad77e7530">Reset</link> ()</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Static Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>static void <link linkend="_class_clover_module_1afbff08fa0ebf248267295197f33cbd4b">resetGlobalLabel</link> ()</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Public Attributes    </title>
+        <itemizedlist>
+            <listitem><para>bool <link linkend="_class_clover_module_1ac16769abd1b9d282f2a0c35c09ccecdb">isBGODelayed</link> = false</para>
+</listitem>
+            <listitem><para>bool <link linkend="_class_clover_module_1a48d16ac4006df0d4b1c21b254146a690">isBGOPrompt</link> = false</para>
+</listitem>
+            <listitem><para>bool <link linkend="_class_clover_module_1aac93096810154c2a98f4aeb2f758d0a7">isGeDelayed</link> = false</para>
+</listitem>
+            <listitem><para>bool <link linkend="_class_clover_module_1aa9dbed7e8f20d7f3205d9ba2adb4a664">isGePrompt</link> = false</para>
+</listitem>
+            <listitem><para><link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> <link linkend="_class_clover_module_1a9ce6bd8f9c0fa3e717318bf08b734ee5">maxE_Ge_cristal</link> = 0u</para>
+</listitem>
+            <listitem><para><link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> <link linkend="_class_clover_module_1a7c9ab1d1764e331b5c03827498575a0d">nb</link> = 0</para>
+</listitem>
+            <listitem><para><link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> <link linkend="_class_clover_module_1ab6ae88bdff14bbde9b660f729a87cc59">nb_BGO</link> = 0</para>
+</listitem>
+            <listitem><para>float <link linkend="_class_clover_module_1a5ffbecaa432da9e2c8c24b529610da80">nrj</link> = 0.</para>
+</listitem>
+            <listitem><para>float <link linkend="_class_clover_module_1aee0db7d982d61df2f372c1e67383abb3">nrj_BGO</link> = 0.</para>
+</listitem>
+            <listitem><para>double <link linkend="_class_clover_module_1aa015368cdc852dd79598e8c4bac07a50">time</link> = 0.</para>
+</listitem>
+            <listitem><para>double <link linkend="_class_clover_module_1a834d28b69726bbfb3ec0a79837676ea4">time_BGO</link> = 0.</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Private Attributes    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> const <link linkend="_class_clover_module_1a99e10348194d1eeb291550d80a8aaace">m_label</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Static Private Attributes    </title>
+        <itemizedlist>
+            <listitem><para>static thread_local <link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> <link linkend="_class_clover_module_1a62224aefa3000858c610f9d475ff85fd">glabel</link> = 0</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Detailed Description</title>
+
+<para>Describes a Clover module. </para>
+
+
+
+<para>Each Clover has its own label, between 0 and (nb_labels-1) In Nuball2, they range from 0 to 23</para>
+
+<para>This simple class manages the number of Ge crystals and BGO crystals that fired in the event, </para>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_class_clover_module_1a41e9f4afbfb7644201a9a7d4c82a7f92"/>    <section>
+    <title>CloverModule()</title>
+<indexterm><primary>CloverModule</primary><secondary>CloverModule</secondary></indexterm>
+<indexterm><primary>CloverModule</primary><secondary>CloverModule</secondary></indexterm>
+<para><computeroutput>CloverModule::CloverModule ( )<computeroutput>[inline]</computeroutput></computeroutput></para></section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_class_clover_module_1ae3561e8c445db77b574546fe907db7ba"/>    <section>
+    <title>addBGO()</title>
+<indexterm><primary>addBGO</primary><secondary>CloverModule</secondary></indexterm>
+<indexterm><primary>CloverModule</primary><secondary>addBGO</secondary></indexterm>
+<para><computeroutput>void CloverModule::addBGO (float const &amp; _nrj, double const &amp; _time)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_clover_module_1a9c67abf2c39e6a2247763cb88756f993"/>    <section>
+    <title>addGe()</title>
+<indexterm><primary>addGe</primary><secondary>CloverModule</secondary></indexterm>
+<indexterm><primary>CloverModule</primary><secondary>addGe</secondary></indexterm>
+<para><computeroutput>void CloverModule::addGe (float const &amp; _nrj, double const &amp; _time)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_clover_module_1a9be986f66470be8111ee7a6045f365ca"/>    <section>
+    <title>clean()</title>
+<indexterm><primary>clean</primary><secondary>CloverModule</secondary></indexterm>
+<indexterm><primary>CloverModule</primary><secondary>clean</secondary></indexterm>
+<para><computeroutput>void CloverModule::clean ( )<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_clover_module_a9be986f66470be8111ee7a6045f365ca_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_clover_module_1a1addfbef28cc91bdd1a531b4180c92ba"/>    <section>
+    <title>clear()</title>
+<indexterm><primary>clear</primary><secondary>CloverModule</secondary></indexterm>
+<indexterm><primary>CloverModule</primary><secondary>clear</secondary></indexterm>
+<para><computeroutput>void CloverModule::clear ( )<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_clover_module_a1addfbef28cc91bdd1a531b4180c92ba_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_clover_module_1a9bf510d1a745fcfb7f9bb884a4e23a52"/>    <section>
+    <title>label()</title>
+<indexterm><primary>label</primary><secondary>CloverModule</secondary></indexterm>
+<indexterm><primary>CloverModule</primary><secondary>label</secondary></indexterm>
+<para><computeroutput>auto const&amp; CloverModule::label ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_clover_module_a9bf510d1a745fcfb7f9bb884a4e23a52_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_clover_module_1a607094481570a484318fff8e794bf639"/>    <section>
+    <title>nbCrystals()</title>
+<indexterm><primary>nbCrystals</primary><secondary>CloverModule</secondary></indexterm>
+<indexterm><primary>CloverModule</primary><secondary>nbCrystals</secondary></indexterm>
+<para><computeroutput><link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> CloverModule::nbCrystals ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_clover_module_1adf77517ab6c0830eed708a1ad77e7530"/>    <section>
+    <title>Reset()</title>
+<indexterm><primary>Reset</primary><secondary>CloverModule</secondary></indexterm>
+<indexterm><primary>CloverModule</primary><secondary>Reset</secondary></indexterm>
+<para><computeroutput>void CloverModule::Reset ( )</computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_clover_module_adf77517ab6c0830eed708a1ad77e7530_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_clover_module_1afbff08fa0ebf248267295197f33cbd4b"/>    <section>
+    <title>resetGlobalLabel()</title>
+<indexterm><primary>resetGlobalLabel</primary><secondary>CloverModule</secondary></indexterm>
+<indexterm><primary>CloverModule</primary><secondary>resetGlobalLabel</secondary></indexterm>
+<para><computeroutput>static void CloverModule::resetGlobalLabel ( )<computeroutput>[inline]</computeroutput>, <computeroutput>[static]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_clover_module_afbff08fa0ebf248267295197f33cbd4b_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_class_clover_module_1a62224aefa3000858c610f9d475ff85fd"/>    <section>
+    <title>glabel</title>
+<indexterm><primary>glabel</primary><secondary>CloverModule</secondary></indexterm>
+<indexterm><primary>CloverModule</primary><secondary>glabel</secondary></indexterm>
+<para><computeroutput><link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> thread_local CloverModule::glabel = 0<computeroutput>[static]</computeroutput>, <computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_clover_module_1ac16769abd1b9d282f2a0c35c09ccecdb"/>    <section>
+    <title>isBGODelayed</title>
+<indexterm><primary>isBGODelayed</primary><secondary>CloverModule</secondary></indexterm>
+<indexterm><primary>CloverModule</primary><secondary>isBGODelayed</secondary></indexterm>
+<para><computeroutput>bool CloverModule::isBGODelayed = false</computeroutput></para>    </section><anchor xml:id="_class_clover_module_1a48d16ac4006df0d4b1c21b254146a690"/>    <section>
+    <title>isBGOPrompt</title>
+<indexterm><primary>isBGOPrompt</primary><secondary>CloverModule</secondary></indexterm>
+<indexterm><primary>CloverModule</primary><secondary>isBGOPrompt</secondary></indexterm>
+<para><computeroutput>bool CloverModule::isBGOPrompt = false</computeroutput></para>    </section><anchor xml:id="_class_clover_module_1aac93096810154c2a98f4aeb2f758d0a7"/>    <section>
+    <title>isGeDelayed</title>
+<indexterm><primary>isGeDelayed</primary><secondary>CloverModule</secondary></indexterm>
+<indexterm><primary>CloverModule</primary><secondary>isGeDelayed</secondary></indexterm>
+<para><computeroutput>bool CloverModule::isGeDelayed = false</computeroutput></para>    </section><anchor xml:id="_class_clover_module_1aa9dbed7e8f20d7f3205d9ba2adb4a664"/>    <section>
+    <title>isGePrompt</title>
+<indexterm><primary>isGePrompt</primary><secondary>CloverModule</secondary></indexterm>
+<indexterm><primary>CloverModule</primary><secondary>isGePrompt</secondary></indexterm>
+<para><computeroutput>bool CloverModule::isGePrompt = false</computeroutput></para>    </section><anchor xml:id="_class_clover_module_1a99e10348194d1eeb291550d80a8aaace"/>    <section>
+    <title>m_label</title>
+<indexterm><primary>m_label</primary><secondary>CloverModule</secondary></indexterm>
+<indexterm><primary>CloverModule</primary><secondary>m_label</secondary></indexterm>
+<para><computeroutput><link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> const CloverModule::m_label<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_clover_module_1a9ce6bd8f9c0fa3e717318bf08b734ee5"/>    <section>
+    <title>maxE_Ge_cristal</title>
+<indexterm><primary>maxE_Ge_cristal</primary><secondary>CloverModule</secondary></indexterm>
+<indexterm><primary>CloverModule</primary><secondary>maxE_Ge_cristal</secondary></indexterm>
+<para><computeroutput><link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> CloverModule::maxE_Ge_cristal = 0u</computeroutput></para>    </section><anchor xml:id="_class_clover_module_1a7c9ab1d1764e331b5c03827498575a0d"/>    <section>
+    <title>nb</title>
+<indexterm><primary>nb</primary><secondary>CloverModule</secondary></indexterm>
+<indexterm><primary>CloverModule</primary><secondary>nb</secondary></indexterm>
+<para><computeroutput><link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> CloverModule::nb = 0</computeroutput></para>    </section><anchor xml:id="_class_clover_module_1ab6ae88bdff14bbde9b660f729a87cc59"/>    <section>
+    <title>nb_BGO</title>
+<indexterm><primary>nb_BGO</primary><secondary>CloverModule</secondary></indexterm>
+<indexterm><primary>CloverModule</primary><secondary>nb_BGO</secondary></indexterm>
+<para><computeroutput><link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> CloverModule::nb_BGO = 0</computeroutput></para>    </section><anchor xml:id="_class_clover_module_1a5ffbecaa432da9e2c8c24b529610da80"/>    <section>
+    <title>nrj</title>
+<indexterm><primary>nrj</primary><secondary>CloverModule</secondary></indexterm>
+<indexterm><primary>CloverModule</primary><secondary>nrj</secondary></indexterm>
+<para><computeroutput>float CloverModule::nrj = 0.</computeroutput></para>    </section><anchor xml:id="_class_clover_module_1aee0db7d982d61df2f372c1e67383abb3"/>    <section>
+    <title>nrj_BGO</title>
+<indexterm><primary>nrj_BGO</primary><secondary>CloverModule</secondary></indexterm>
+<indexterm><primary>CloverModule</primary><secondary>nrj_BGO</secondary></indexterm>
+<para><computeroutput>float CloverModule::nrj_BGO = 0.</computeroutput></para>    </section><anchor xml:id="_class_clover_module_1aa015368cdc852dd79598e8c4bac07a50"/>    <section>
+    <title>time</title>
+<indexterm><primary>time</primary><secondary>CloverModule</secondary></indexterm>
+<indexterm><primary>CloverModule</primary><secondary>time</secondary></indexterm>
+<para><computeroutput>double CloverModule::time = 0.</computeroutput></para>    </section><anchor xml:id="_class_clover_module_1a834d28b69726bbfb3ec0a79837676ea4"/>    <section>
+    <title>time_BGO</title>
+<indexterm><primary>time_BGO</primary><secondary>CloverModule</secondary></indexterm>
+<indexterm><primary>CloverModule</primary><secondary>time_BGO</secondary></indexterm>
+<para><computeroutput>double CloverModule::time_BGO = 0.</computeroutput></para></section>
+<para>
+The documentation for this class was generated from the following file:</para>
+lib/Analyse/<link linkend="__clover_module_8hpp">CloverModule.hpp</link></section>
+</section>

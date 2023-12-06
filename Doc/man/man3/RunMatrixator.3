@@ -1,0 +1,252 @@
+.TH "RunMatrixator" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+RunMatrixator \- Matrixator is used to create a bunch of matrixes : each crystal of the setup versus the (add-backed & compton cleaned) clovers\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <RunMatrixator\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBdontMatrixate\fP (\fBdType\fP const &type)"
+.br
+.ti -1c
+.RI "void \fBdontMatrixate\fP (\fBLabel\fP const &label)"
+.br
+.ti -1c
+.RI "void \fBfillMatrixes\fP (\fBClovers\fP const &clovers, \fBEvent\fP const &event)"
+.br
+.ti -1c
+.RI "void \fBInitialize\fP ()"
+.br
+.ti -1c
+.RI "void \fBinitialize_dontMatrixate\fP ()"
+.br
+.ti -1c
+.RI "void \fBkeepSingles\fP (bool const &b=true)"
+.br
+.ti -1c
+.RI "void \fBloadData_faster\fP (\fBHit\fP &hit, \fBFasterReader\fP &reader)"
+.br
+.ti -1c
+.RI "void \fBloadData_root\fP (TTree *tree, \fBEvent\fP &event)"
+.br
+.ti -1c
+.RI "void \fBmaxRawMult\fP (\fBuchar\fP const &max_multiplicity=20)"
+.br
+.ti -1c
+.RI "bool \fBparisIsLaBr\fP (\fBNRJ\fP const &nrj, \fBNRJ\fP const &nrj2)"
+.br
+.ti -1c
+.RI "bool \fBparisIsNaI\fP (\fBNRJ\fP const &nrj, \fBNRJ\fP const &nrj2)"
+.br
+.ti -1c
+.RI "auto \fBparisRatio\fP (\fBNRJ\fP const &nrj, \fBNRJ\fP const &nrj2)"
+.br
+.ti -1c
+.RI "void \fBrun\fP (std::string const &runpath, std::string const &data='fast')"
+.br
+.ti -1c
+.RI "\fBRunMatrixator\fP ()=default"
+.br
+.ti -1c
+.RI "void \fBsetCalibration\fP (\fBCalibration\fP const &calibration)"
+.br
+.ti -1c
+.RI "void \fBsetTimeshifts\fP (\fBTimeshifts\fP const &timeshifts)"
+.br
+.ti -1c
+.RI "void \fBWrite\fP ()"
+.br
+.in -1c
+.SS "Static Private Member Functions"
+
+.in +1c
+.ti -1c
+.RI "static void \fBdispatch_faster_reader\fP (\fBHit\fP &hit, \fBFasterReader\fP &reader, \fBRunMatrixator\fP &rm)"
+.br
+.RI "Multithreading of loadData_faster (you have to pass by a static method in order to multi-thread it) "
+.ti -1c
+.RI "static void \fBdispatch_root_reader\fP (TTree *tree, \fBEvent\fP &event, \fBRunMatrixator\fP &rm)"
+.br
+.RI "Multithreading of loadData_ (you have to pass by a static method in order to multi-thread it) "
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBMTTHist\fP< TH1F > \fBclover_singles_delayed\fP"
+.br
+.ti -1c
+.RI "\fBMTTHist\fP< TH1F > \fBclover_singles_delayed_Compton_veto\fP"
+.br
+.ti -1c
+.RI "\fBMTTHist\fP< TH1F > \fBclover_singles_prompt\fP"
+.br
+.ti -1c
+.RI "\fBMTTHist\fP< TH1F > \fBclover_singles_prompt_Compton_veto\fP"
+.br
+.ti -1c
+.RI "\fBCalibration\fP \fBm_calibration\fP"
+.br
+.ti -1c
+.RI "std::vector< \fBLabel\fP > \fBm_dontMatrixateLabel\fP"
+.br
+.ti -1c
+.RI "std::unordered_map< \fBdType\fP, bool > \fBm_dontMatrixateType\fP"
+.br
+.ti -1c
+.RI "bool \fBm_keep_singles\fP = 0"
+.br
+.ti -1c
+.RI "\fBuchar\fP \fBm_max_multiplicity\fP = 20"
+.br
+.ti -1c
+.RI "\fBPath\fP \fBm_runpath\fP"
+.br
+.ti -1c
+.RI "\fBTimeshifts\fP \fBm_timeshifts\fP"
+.br
+.ti -1c
+.RI "std::unordered_map< \fBdType\fP, \fBVector_MTTHist\fP< TH2F > > \fBmatricesDelayed\fP"
+.br
+.ti -1c
+.RI "std::unordered_map< \fBdType\fP, \fBVector_MTTHist\fP< TH2F > > \fBmatricesDelayed2\fP"
+.br
+.ti -1c
+.RI "std::unordered_map< \fBdType\fP, \fBVector_MTTHist\fP< TH2F > > \fBmatricesPrompt\fP"
+.br
+.ti -1c
+.RI "std::unordered_map< \fBdType\fP, \fBVector_MTTHist\fP< TH2F > > \fBmatricesPrompt2\fP"
+.br
+.ti -1c
+.RI "\fBMTTHist\fP< TH2F > \fBmatrix_Clovers_delayed\fP"
+.br
+.ti -1c
+.RI "\fBMTTHist\fP< TH2F > \fBmatrix_Clovers_delayed_vs_prompt\fP"
+.br
+.ti -1c
+.RI "\fBMTTHist\fP< TH2F > \fBmatrix_Clovers_prompt\fP"
+.br
+.ti -1c
+.RI "std::unordered_map< \fBdType\fP, \fBVector_MTTHist\fP< TH1F > > \fBsinglesDelayed\fP"
+.br
+.ti -1c
+.RI "std::unordered_map< \fBdType\fP, \fBVector_MTTHist\fP< TH1F > > \fBsinglesDelayed2\fP"
+.br
+.ti -1c
+.RI "std::unordered_map< \fBdType\fP, \fBVector_MTTHist\fP< TH1F > > \fBsinglesPrompt\fP"
+.br
+.ti -1c
+.RI "std::unordered_map< \fBdType\fP, \fBVector_MTTHist\fP< TH1F > > \fBsinglesPrompt2\fP"
+.br
+.ti -1c
+.RI "\fBMTTHist\fP< TH2F > \fBtest_paris_vs_mult\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Matrixator is used to create a bunch of matrixes : each crystal of the setup versus the (add-backed & compton cleaned) clovers\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "RunMatrixator::RunMatrixator ()\fC [default]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "void RunMatrixator::dispatch_faster_reader (\fBHit\fP & hit, \fBFasterReader\fP & reader, \fBRunMatrixator\fP & rm)\fC [static]\fP, \fC [private]\fP"
+
+.PP
+Multithreading of loadData_faster (you have to pass by a static method in order to multi-thread it) 
+.SS "void RunMatrixator::dispatch_root_reader (TTree * tree, \fBEvent\fP & event, \fBRunMatrixator\fP & rm)\fC [static]\fP, \fC [private]\fP"
+
+.PP
+Multithreading of loadData_ (you have to pass by a static method in order to multi-thread it) 
+.SS "void RunMatrixator::dontMatrixate (\fBdType\fP const & type)\fC [inline]\fP"
+
+.SS "void RunMatrixator::dontMatrixate (\fBLabel\fP const & label)\fC [inline]\fP"
+
+.SS "void RunMatrixator::fillMatrixes (\fBClovers\fP const & clovers, \fBEvent\fP const & event)"
+
+.SS "void RunMatrixator::Initialize ()"
+
+.SS "void RunMatrixator::initialize_dontMatrixate ()\fC [inline]\fP"
+
+.SS "void RunMatrixator::keepSingles (bool const & b = \fCtrue\fP)\fC [inline]\fP"
+
+.SS "void RunMatrixator::loadData_faster (\fBHit\fP & hit, \fBFasterReader\fP & reader)"
+
+.SS "void RunMatrixator::loadData_root (TTree * tree, \fBEvent\fP & event)"
+
+.SS "void RunMatrixator::maxRawMult (\fBuchar\fP const & max_multiplicity = \fC20\fP)\fC [inline]\fP"
+
+.SS "bool RunMatrixator::parisIsLaBr (\fBNRJ\fP const & nrj, \fBNRJ\fP const & nrj2)\fC [inline]\fP"
+
+.SS "bool RunMatrixator::parisIsNaI (\fBNRJ\fP const & nrj, \fBNRJ\fP const & nrj2)\fC [inline]\fP"
+
+.SS "auto RunMatrixator::parisRatio (\fBNRJ\fP const & nrj, \fBNRJ\fP const & nrj2)\fC [inline]\fP"
+
+.SS "void RunMatrixator::run (std::string const & runpath, std::string const & data = \fC'fast'\fP)"
+
+.SS "void RunMatrixator::setCalibration (\fBCalibration\fP const & calibration)\fC [inline]\fP"
+
+.SS "void RunMatrixator::setTimeshifts (\fBTimeshifts\fP const & timeshifts)\fC [inline]\fP"
+
+.SS "void RunMatrixator::Write ()"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "\fBMTTHist\fP<TH1F> RunMatrixator::clover_singles_delayed\fC [private]\fP"
+
+.SS "\fBMTTHist\fP<TH1F> RunMatrixator::clover_singles_delayed_Compton_veto\fC [private]\fP"
+
+.SS "\fBMTTHist\fP<TH1F> RunMatrixator::clover_singles_prompt\fC [private]\fP"
+
+.SS "\fBMTTHist\fP<TH1F> RunMatrixator::clover_singles_prompt_Compton_veto\fC [private]\fP"
+
+.SS "\fBCalibration\fP RunMatrixator::m_calibration\fC [private]\fP"
+
+.SS "std::vector<\fBLabel\fP> RunMatrixator::m_dontMatrixateLabel\fC [private]\fP"
+
+.SS "std::unordered_map<\fBdType\fP, bool> RunMatrixator::m_dontMatrixateType\fC [private]\fP"
+
+.SS "bool RunMatrixator::m_keep_singles = 0\fC [private]\fP"
+
+.SS "\fBuchar\fP RunMatrixator::m_max_multiplicity = 20\fC [private]\fP"
+
+.SS "\fBPath\fP RunMatrixator::m_runpath\fC [private]\fP"
+
+.SS "\fBTimeshifts\fP RunMatrixator::m_timeshifts\fC [private]\fP"
+
+.SS "std::unordered_map<\fBdType\fP, \fBVector_MTTHist\fP<TH2F> > RunMatrixator::matricesDelayed\fC [private]\fP"
+
+.SS "std::unordered_map<\fBdType\fP, \fBVector_MTTHist\fP<TH2F> > RunMatrixator::matricesDelayed2\fC [private]\fP"
+
+.SS "std::unordered_map<\fBdType\fP, \fBVector_MTTHist\fP<TH2F> > RunMatrixator::matricesPrompt\fC [private]\fP"
+
+.SS "std::unordered_map<\fBdType\fP, \fBVector_MTTHist\fP<TH2F> > RunMatrixator::matricesPrompt2\fC [private]\fP"
+
+.SS "\fBMTTHist\fP<TH2F> RunMatrixator::matrix_Clovers_delayed\fC [private]\fP"
+
+.SS "\fBMTTHist\fP<TH2F> RunMatrixator::matrix_Clovers_delayed_vs_prompt\fC [private]\fP"
+
+.SS "\fBMTTHist\fP<TH2F> RunMatrixator::matrix_Clovers_prompt\fC [private]\fP"
+
+.SS "std::unordered_map<\fBdType\fP, \fBVector_MTTHist\fP<TH1F> > RunMatrixator::singlesDelayed\fC [private]\fP"
+
+.SS "std::unordered_map<\fBdType\fP, \fBVector_MTTHist\fP<TH1F> > RunMatrixator::singlesDelayed2\fC [private]\fP"
+
+.SS "std::unordered_map<\fBdType\fP, \fBVector_MTTHist\fP<TH1F> > RunMatrixator::singlesPrompt\fC [private]\fP"
+
+.SS "std::unordered_map<\fBdType\fP, \fBVector_MTTHist\fP<TH1F> > RunMatrixator::singlesPrompt2\fC [private]\fP"
+
+.SS "\fBMTTHist\fP<TH2F> RunMatrixator::test_paris_vs_mult\fC [private]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Nuball2 from the source code\&.

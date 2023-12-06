@@ -1,5 +1,6 @@
 var files__functions_8hpp =
 [
+    [ "CoDataFrame", "class_co_data_frame.html", "class_co_data_frame" ],
     [ "File", "class_file.html", "class_file" ],
     [ "Filename", "class_filename.html", "class_filename" ],
     [ "Folder", "class_folder.html", "class_folder" ],
@@ -17,11 +18,14 @@ var files__functions_8hpp =
     [ "get_filename_at", "files__functions_8hpp.html#a595eecb3abc2bf6927fee1c77ea1bfa7", null ],
     [ "getExtension", "files__functions_8hpp.html#a4000ec99a26e146333e62836d01dff5b", null ],
     [ "getPath", "files__functions_8hpp.html#ab1e262f27aaad28944f29cd2bbde417f", null ],
+    [ "hasPath", "files__functions_8hpp.html#a0b4d810562e117c29ca0dda1855a02e3", null ],
+    [ "list_files_in_folder", "files__functions_8hpp.html#a8c014ea676bc34e0ec57b1aeb55af4c5", null ],
     [ "listFileReader", "files__functions_8hpp.html#a25af8f31a8b51b38a4c2334e3901acfc", null ],
     [ "nb_files_in_folder", "files__functions_8hpp.html#a5e105952499e9ca713d2a2fd5db3299d", null ],
     [ "operator+", "files__functions_8hpp.html#a4241cbe111be51220d4ff2900f701ade", null ],
     [ "operator+", "files__functions_8hpp.html#a5326a7606384341a1bd2a01f15ca9b06", null ],
     [ "operator+", "files__functions_8hpp.html#ad580345a13bcb93c84b981f67f25b899", null ],
+    [ "operator+=", "files__functions_8hpp.html#a151e488cdb2e927bd293d0e574948f43", null ],
     [ "operator<<", "files__functions_8hpp.html#a159a1e5f9109960956ef172f5b862cf8", null ],
     [ "operator<<", "files__functions_8hpp.html#a40dcd00c07b1ec706cecc30653522e4f", null ],
     [ "operator<<", "files__functions_8hpp.html#aa889cd33a4965fd9590feac2fb26b0f2", null ],
@@ -33,7 +37,7 @@ var files__functions_8hpp =
     [ "removePath", "files__functions_8hpp.html#ad3a78346393c83676348f6bad34b8ce2", null ],
     [ "rmPathAndExt", "files__functions_8hpp.html#a58f50a6390692cff52eef37fdaa94e56", null ],
     [ "size_file", "files__functions_8hpp.html#a3a01792a9cfbdd1f2b358d878559a917", null ],
-    [ "size_file", "files__functions_8hpp.html#af7b1f2a6868cc2bad6d4b9a08cdac3ca", null ],
+    [ "size_file", "files__functions_8hpp.html#a125acb6325acad22f46a038e260ff4c9", null ],
     [ "size_file_conversion", "files__functions_8hpp.html#a30dc160962c758d9ee0aef14c8999912", null ],
     [ "size_file_unit", "files__functions_8hpp.html#aaa642aa8e56dec4354f00dd45a43832f", null ]
 ];

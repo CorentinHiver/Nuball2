@@ -1,0 +1,526 @@
+\doxysection{Event Class Reference}
+\label{class_event}\index{Event@{Event}}
+
+
+\doxyref{Event}{p.}{class_event} used for reading and writting event, event building and trigger.  
+
+
+
+
+{\ttfamily \#include $<$Event.\+hpp$>$}
+
+
+
+Collaboration diagram for Event\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=137pt]{class_event__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \textbf{ clear} ()
+\item 
+\textbf{ Event} ()
+\item 
+\textbf{ Event} (\textbf{ Event} const \&event)
+\item 
+\textbf{ Event} (\textbf{ Hit} const \&hit)
+\item 
+\textbf{ Event} (TTree $\ast$tree)
+\item 
+\textbf{ Event} (TTree $\ast$tree, std\+::string const \&options)
+\item 
+bool \textbf{ is\+Calibrated} () const
+\item 
+bool \textbf{ is\+Empty} () const
+\item 
+bool \textbf{ is\+Single} () const
+\item 
+\textbf{ size\+\_\+t} const  \& \textbf{ max\+Size} () const
+\item 
+\textbf{ Event} \& \textbf{ operator=} (\textbf{ Event} const \&evt)
+\item 
+\textbf{ Event} \& \textbf{ operator=} (\textbf{ Hit} const \&hit)
+\item 
+void \textbf{ Print} () const
+\item 
+void \textbf{ push\+\_\+back} (\textbf{ Hit} const \&hit)
+\item 
+void \textbf{ push\+\_\+front} (\textbf{ Hit} const \&hit)
+\begin{DoxyCompactList}\small\item\em Sometimes, we want to select pre-\/prompt events. In such case, we have to put in in front of the others. \end{DoxyCompactList}\item 
+void \textbf{ reading} (TTree $\ast$tree)
+\begin{DoxyCompactList}\small\item\em Automatically set branches based on the presence or not of branches in the root tree. Reserved for \char`\"{}\+Nuball2\char`\"{} type of trees. \end{DoxyCompactList}\item 
+void \textbf{ reading} (TTree $\ast$tree, std\+::string const \&options)
+\item 
+void \textbf{ set\+T0} (\textbf{ Timestamp} const \&timestamp)
+\item 
+\textbf{ size\+\_\+t} \textbf{ size} () const
+\item 
+\textbf{ Time\+\_\+ns} \textbf{ time\+\_\+ns} (int const \&i) const
+\item 
+void \textbf{ time\+Shift} (\textbf{ Time} const \&shift)
+\item 
+void \textbf{ time\+Shift\+\_\+ns} (double const \&shift)
+\item 
+void \textbf{ writting} (TTree $\ast$tree, std\+::string const \&options=\char`\"{}lst\+Te\+EqQ\char`\"{})
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ ADC} \textbf{ adcs} [255] = \{0\}
+\item 
+\textbf{ Label} \textbf{ labels} [255] = \{0\}
+\item 
+int \textbf{ mult} = 0
+\item 
+\textbf{ NRJ} \textbf{ nrj2s} [255] = \{0\}
+\item 
+\textbf{ NRJ} \textbf{ nrjs} [255] = \{0\}
+\item 
+\textbf{ Pileup} \textbf{ pileups} [255] = \{0\}
+\item 
+\textbf{ ADC} \textbf{ qdc2s} [255] = \{0\}
+\item 
+\textbf{ IOptions} \textbf{ read}
+\item 
+\textbf{ Timestamp} \textbf{ stamp} = 0ull
+\item 
+\textbf{ Time\+\_\+ns} \textbf{ time2s} [255] = \{0\}
+\item 
+\textbf{ Time} \textbf{ times} [255] = \{0\}
+\item 
+\textbf{ IOptions} \textbf{ write}
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \textbf{ is\+Reading} = false
+\item 
+bool \textbf{ is\+Writting} = false
+\item 
+\textbf{ size\+\_\+t} \textbf{ m\+\_\+max\+Size} = 255
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\doxyref{Event}{p.}{class_event} used for reading and writting event, event building and trigger. 
+
+An \doxyref{Event}{p.}{class_event} is in principle a collection of Hits. However, in order to be an efficient interface with ROOT TTree, in practice it consist of a collections of arrays that stores values of a specific branch.
+
+The following are public members (i.\+e. you can call it directly with \doxyref{Event}{p.}{class_event}\+:\+:[array\+\_\+name]) \begin{DoxyVerb}   int mult = 0;                  Number of hits currently stored in the event.
+   Timestamp stamp = 0ull;         Absolute timestamp of the whole event
+   Label   labels  [255] = {0};    Labels of the hits
+   Time    times   [255] = {0};    Time in ps (Long64_t) relative to the first hit
+   Time_ns time2s  [255] = {0};    Time in ns (float) relative either to the first hit or to the pulse
+   ADC     adcs    [255] = {0};    Uncalibrated ADC value of the energy
+   NRJ     nrjs    [255] = {0};    Calibrated (or simply gain matched) energy value in keV
+   ADC     qdc2s   [255] = {0};    Uncalibrated QDC value of the energy measured in the second time gate for QDC2 channels
+   NRJ     nrj2s   [255] = {0};    Calibrated (or simply gain matched) energy value in keV. By default, the energy calibration is the same as the nrj so that the ratio remains the same
+   Pileup  pileups [255] = {0};    Pileup or saturation bit
+\end{DoxyVerb}
+ Format of a branch inside the root tree \+: \begin{DoxyVerb}   "array[mult]/type"
+\end{DoxyVerb}
+ Only the two first members are not arrays because they are true for the entire event.
+
+To read any Nuball2-\/like TTree \+: \begin{DoxyVerb}   // Loads the TTree or TChain ...
+   Event event;
+   event.reading(ttree);
+\end{DoxyVerb}
+ If you are only interested in a few branches, you can choose them by adding an option \+: \begin{DoxyVerb}   event.reading(ttree, "lst"); // Reads only the multiplicity, label, timestamp and relatative time.
+\end{DoxyVerb}
+ Note the multiplicity will always be activated, because it is mandatory to read the root file.
+
+A list of all the options available so far \+: \begin{DoxyVerb}   l : label  label                 ushort
+   s : stamp  absolute timestamp ps ULong64_t
+   t : time   relative timestamp ps Long64_t
+   T : time2  relative timestamp ns float
+   e : adc    energy in ADC         int
+   E : nrj    energy in keV         float
+   q : qdc2   energy qdc2 in ADC    float
+   Q : nrj2   energy qdc2 in keV    float
+   p : pileup pilepup               bool
+\end{DoxyVerb}
+ You can access the readed branches via the \doxyref{Event\+::read}{p.}{class_event_a9c01144b3f06d4cc5234ae3736fec9d2} member (see the Read\+IO struct definition)
+
+You can use this class to write in another root tree. To do so, use the \doxyref{Event\+::writting}{p.}{class_event_a0b93fcd8063a3c02edede96bb53b136d} method \+: \begin{DoxyVerb}   event.writting(outTree, "lstEQ"); Will write the multiplicity, timestamp, relative time and calibrated energy and QDC2
+\end{DoxyVerb}
+ You can as well access the written branches via the \doxyref{Event\+::write}{p.}{class_event_a4db4697dc48d987a650c89b92404f51d} member (see the Write\+IO struct definition)
+
+Interface with \doxyref{Hit}{p.}{class_hit} class \+:
+
+You can add Hits to an event using the \doxyref{Event\+::push\+\_\+back}{p.}{class_event_a65f680e6b4c74419f4aa92e6e772efb0} or \doxyref{Event\+::push\+\_\+front}{p.}{class_event_a78b1cb630e7720f205a9c00e2c111102} methods \+: \begin{DoxyVerb}   event.push_back(hit);
+
+   event.push_front(hit);
+\end{DoxyVerb}
+ When the event is complete (e.\+g. in an event builder), you can for instance write it down or analyse it, then call \doxyref{Event\+::clear()}{p.}{class_event_a0862af1471604bf30a4f50a5e028637a} to empty it. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\label{class_event_a5a40dd4708297f7031e29b39e039ae10}} 
+\index{Event@{Event}!Event@{Event}}
+\index{Event@{Event}!Event@{Event}}
+\doxysubsubsection{Event()\hspace{0.1cm}{\footnotesize\ttfamily [1/5]}}
+{\footnotesize\ttfamily Event\+::\+Event (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_event_a0d67aa7db7d129a551208beb934afe7f}} 
+\index{Event@{Event}!Event@{Event}}
+\index{Event@{Event}!Event@{Event}}
+\doxysubsubsection{Event()\hspace{0.1cm}{\footnotesize\ttfamily [2/5]}}
+{\footnotesize\ttfamily Event\+::\+Event (\begin{DoxyParamCaption}\item[{\textbf{ Hit} const \&}]{hit }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_event_a0e69972fc87ba81fe7ea2b35b53048fa}} 
+\index{Event@{Event}!Event@{Event}}
+\index{Event@{Event}!Event@{Event}}
+\doxysubsubsection{Event()\hspace{0.1cm}{\footnotesize\ttfamily [3/5]}}
+{\footnotesize\ttfamily Event\+::\+Event (\begin{DoxyParamCaption}\item[{\textbf{ Event} const \&}]{event }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_event_a754f98b2802e8ce25f3d6d35dc24e7b2}} 
+\index{Event@{Event}!Event@{Event}}
+\index{Event@{Event}!Event@{Event}}
+\doxysubsubsection{Event()\hspace{0.1cm}{\footnotesize\ttfamily [4/5]}}
+{\footnotesize\ttfamily Event\+::\+Event (\begin{DoxyParamCaption}\item[{TTree $\ast$}]{tree }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_event_a754f98b2802e8ce25f3d6d35dc24e7b2_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_event_a2c3c93926c72b2138bad6194b3083de4}} 
+\index{Event@{Event}!Event@{Event}}
+\index{Event@{Event}!Event@{Event}}
+\doxysubsubsection{Event()\hspace{0.1cm}{\footnotesize\ttfamily [5/5]}}
+{\footnotesize\ttfamily Event\+::\+Event (\begin{DoxyParamCaption}\item[{TTree $\ast$}]{tree,  }\item[{std\+::string const \&}]{options }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_event_a2c3c93926c72b2138bad6194b3083de4_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\label{class_event_a0862af1471604bf30a4f50a5e028637a}} 
+\index{Event@{Event}!clear@{clear}}
+\index{clear@{clear}!Event@{Event}}
+\doxysubsubsection{clear()}
+{\footnotesize\ttfamily void Event\+::clear (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=272pt]{class_event_a0862af1471604bf30a4f50a5e028637a_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_event_a93d81b8139c839326e56f33ef63097e8}} 
+\index{Event@{Event}!isCalibrated@{isCalibrated}}
+\index{isCalibrated@{isCalibrated}!Event@{Event}}
+\doxysubsubsection{isCalibrated()}
+{\footnotesize\ttfamily bool Event\+::is\+Calibrated (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=264pt]{class_event_a93d81b8139c839326e56f33ef63097e8_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_event_ae0da185c1abc7223f0bd0184e0937c24}} 
+\index{Event@{Event}!isEmpty@{isEmpty}}
+\index{isEmpty@{isEmpty}!Event@{Event}}
+\doxysubsubsection{isEmpty()}
+{\footnotesize\ttfamily bool Event\+::is\+Empty (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_event_ac0a49a4178b701a0921ade6bfb1ad143}} 
+\index{Event@{Event}!isSingle@{isSingle}}
+\index{isSingle@{isSingle}!Event@{Event}}
+\doxysubsubsection{isSingle()}
+{\footnotesize\ttfamily bool Event\+::is\+Single (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=300pt]{class_event_ac0a49a4178b701a0921ade6bfb1ad143_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_event_ae94819278665e54966a12c494fb65dbc}} 
+\index{Event@{Event}!maxSize@{maxSize}}
+\index{maxSize@{maxSize}!Event@{Event}}
+\doxysubsubsection{maxSize()}
+{\footnotesize\ttfamily \textbf{ size\+\_\+t} const\& Event\+::max\+Size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_event_ae393238c864abbf268c5172572241778}} 
+\index{Event@{Event}!operator=@{operator=}}
+\index{operator=@{operator=}!Event@{Event}}
+\doxysubsubsection{operator=()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \textbf{ Event} \& Event\+::operator= (\begin{DoxyParamCaption}\item[{\textbf{ Event} const \&}]{evt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_event_a2bb3a8e63ac8be551f02fb0963cf0041}} 
+\index{Event@{Event}!operator=@{operator=}}
+\index{operator=@{operator=}!Event@{Event}}
+\doxysubsubsection{operator=()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \textbf{ Event} \& Event\+::operator= (\begin{DoxyParamCaption}\item[{\textbf{ Hit} const \&}]{hit }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_event_a090d2a02b5c85844e1287e7e693af3a7}} 
+\index{Event@{Event}!Print@{Print}}
+\index{Print@{Print}!Event@{Event}}
+\doxysubsubsection{Print()}
+{\footnotesize\ttfamily void Event\+::\+Print (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=228pt]{class_event_a090d2a02b5c85844e1287e7e693af3a7_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_event_a65f680e6b4c74419f4aa92e6e772efb0}} 
+\index{Event@{Event}!push\_back@{push\_back}}
+\index{push\_back@{push\_back}!Event@{Event}}
+\doxysubsubsection{push\_back()}
+{\footnotesize\ttfamily void Event\+::push\+\_\+back (\begin{DoxyParamCaption}\item[{\textbf{ Hit} const \&}]{hit }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=285pt]{class_event_a65f680e6b4c74419f4aa92e6e772efb0_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_event_a78b1cb630e7720f205a9c00e2c111102}} 
+\index{Event@{Event}!push\_front@{push\_front}}
+\index{push\_front@{push\_front}!Event@{Event}}
+\doxysubsubsection{push\_front()}
+{\footnotesize\ttfamily void Event\+::push\+\_\+front (\begin{DoxyParamCaption}\item[{\textbf{ Hit} const \&}]{hit }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sometimes, we want to select pre-\/prompt events. In such case, we have to put in in front of the others. 
+
+About the timestamp of the event, we keep the same as this additionnal event is located before the first hit that really represents the \char`\"{}0\char`\"{} of the event Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=285pt]{class_event_a78b1cb630e7720f205a9c00e2c111102_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_event_a243e29bac8d969902d32a4d444fc5174}} 
+\index{Event@{Event}!reading@{reading}}
+\index{reading@{reading}!Event@{Event}}
+\doxysubsubsection{reading()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Event\+::reading (\begin{DoxyParamCaption}\item[{TTree $\ast$}]{tree }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Automatically set branches based on the presence or not of branches in the root tree. Reserved for \char`\"{}\+Nuball2\char`\"{} type of trees. 
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=242pt]{class_event_a243e29bac8d969902d32a4d444fc5174_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_event_a243e29bac8d969902d32a4d444fc5174_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_event_af08b47f89112db7279491ab1201ce82d}} 
+\index{Event@{Event}!reading@{reading}}
+\index{reading@{reading}!Event@{Event}}
+\doxysubsubsection{reading()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Event\+::reading (\begin{DoxyParamCaption}\item[{TTree $\ast$}]{tree,  }\item[{std\+::string const \&}]{options }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_event_af08b47f89112db7279491ab1201ce82d_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_event_afd2351e3fb971a5f061e5b1b84f78326}} 
+\index{Event@{Event}!setT0@{setT0}}
+\index{setT0@{setT0}!Event@{Event}}
+\doxysubsubsection{setT0()}
+{\footnotesize\ttfamily void Event\+::set\+T0 (\begin{DoxyParamCaption}\item[{\textbf{ Timestamp} const \&}]{timestamp }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=304pt]{class_event_afd2351e3fb971a5f061e5b1b84f78326_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_event_aadb0c0dcbb31718e69358e9c99a5b633}} 
+\index{Event@{Event}!size@{size}}
+\index{size@{size}!Event@{Event}}
+\doxysubsubsection{size()}
+{\footnotesize\ttfamily \textbf{ size\+\_\+t} Event\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=248pt]{class_event_aadb0c0dcbb31718e69358e9c99a5b633_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_event_a15a45e59b3ce25ab2b72e68578e99c51}} 
+\index{Event@{Event}!time\_ns@{time\_ns}}
+\index{time\_ns@{time\_ns}!Event@{Event}}
+\doxysubsubsection{time\_ns()}
+{\footnotesize\ttfamily \textbf{ Time\+\_\+ns} Event\+::time\+\_\+ns (\begin{DoxyParamCaption}\item[{int const \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=288pt]{class_event_a15a45e59b3ce25ab2b72e68578e99c51_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_event_ad2b15ab9c635d2350f7f03075081ff99}} 
+\index{Event@{Event}!timeShift@{timeShift}}
+\index{timeShift@{timeShift}!Event@{Event}}
+\doxysubsubsection{timeShift()}
+{\footnotesize\ttfamily void Event\+::time\+Shift (\begin{DoxyParamCaption}\item[{\textbf{ Time} const \&}]{shift }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=288pt]{class_event_ad2b15ab9c635d2350f7f03075081ff99_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_event_aa69256b1b2f550541a1bc6104cec62d9}} 
+\index{Event@{Event}!timeShift\_ns@{timeShift\_ns}}
+\index{timeShift\_ns@{timeShift\_ns}!Event@{Event}}
+\doxysubsubsection{timeShift\_ns()}
+{\footnotesize\ttfamily void Event\+::time\+Shift\+\_\+ns (\begin{DoxyParamCaption}\item[{double const \&}]{shift }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=304pt]{class_event_aa69256b1b2f550541a1bc6104cec62d9_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_event_a0b93fcd8063a3c02edede96bb53b136d}} 
+\index{Event@{Event}!writting@{writting}}
+\index{writting@{writting}!Event@{Event}}
+\doxysubsubsection{writting()}
+{\footnotesize\ttfamily void Event\+::writting (\begin{DoxyParamCaption}\item[{TTree $\ast$}]{tree,  }\item[{std\+::string const \&}]{options = {\ttfamily \char`\"{}lstTeEqQ\char`\"{}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_event_a0b93fcd8063a3c02edede96bb53b136d_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\label{class_event_a3e0953c870297eee51ce555908923bb3}} 
+\index{Event@{Event}!adcs@{adcs}}
+\index{adcs@{adcs}!Event@{Event}}
+\doxysubsubsection{adcs}
+{\footnotesize\ttfamily \textbf{ ADC} Event\+::adcs[255] = \{0\}}
+
+\mbox{\label{class_event_adefa26c27b8fe8f5d13ba007107103d2}} 
+\index{Event@{Event}!isReading@{isReading}}
+\index{isReading@{isReading}!Event@{Event}}
+\doxysubsubsection{isReading}
+{\footnotesize\ttfamily bool Event\+::is\+Reading = false\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_event_a9ff9ae9c7506bc68fda3edf8658e16fd}} 
+\index{Event@{Event}!isWritting@{isWritting}}
+\index{isWritting@{isWritting}!Event@{Event}}
+\doxysubsubsection{isWritting}
+{\footnotesize\ttfamily bool Event\+::is\+Writting = false\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_event_ad016b65deeaef393a94793ef140e1bb8}} 
+\index{Event@{Event}!labels@{labels}}
+\index{labels@{labels}!Event@{Event}}
+\doxysubsubsection{labels}
+{\footnotesize\ttfamily \textbf{ Label} Event\+::labels[255] = \{0\}}
+
+\mbox{\label{class_event_afe4f697f53c8ce64e9e7de176ebf27be}} 
+\index{Event@{Event}!m\_maxSize@{m\_maxSize}}
+\index{m\_maxSize@{m\_maxSize}!Event@{Event}}
+\doxysubsubsection{m\_maxSize}
+{\footnotesize\ttfamily \textbf{ size\+\_\+t} Event\+::m\+\_\+max\+Size = 255\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_event_a455861b2470596b9ee0101ccb61faa26}} 
+\index{Event@{Event}!mult@{mult}}
+\index{mult@{mult}!Event@{Event}}
+\doxysubsubsection{mult}
+{\footnotesize\ttfamily int Event\+::mult = 0}
+
+\mbox{\label{class_event_acf99e771da7327b904866b80d6cfc45b}} 
+\index{Event@{Event}!nrj2s@{nrj2s}}
+\index{nrj2s@{nrj2s}!Event@{Event}}
+\doxysubsubsection{nrj2s}
+{\footnotesize\ttfamily \textbf{ NRJ} Event\+::nrj2s[255] = \{0\}}
+
+\mbox{\label{class_event_abdf231115162bb24604c238caceb1b05}} 
+\index{Event@{Event}!nrjs@{nrjs}}
+\index{nrjs@{nrjs}!Event@{Event}}
+\doxysubsubsection{nrjs}
+{\footnotesize\ttfamily \textbf{ NRJ} Event\+::nrjs[255] = \{0\}}
+
+\mbox{\label{class_event_a4d88ce4712ef6353c5767a8270a8528f}} 
+\index{Event@{Event}!pileups@{pileups}}
+\index{pileups@{pileups}!Event@{Event}}
+\doxysubsubsection{pileups}
+{\footnotesize\ttfamily \textbf{ Pileup} Event\+::pileups[255] = \{0\}}
+
+\mbox{\label{class_event_a7bc76ee166649431e9010875202ca6c1}} 
+\index{Event@{Event}!qdc2s@{qdc2s}}
+\index{qdc2s@{qdc2s}!Event@{Event}}
+\doxysubsubsection{qdc2s}
+{\footnotesize\ttfamily \textbf{ ADC} Event\+::qdc2s[255] = \{0\}}
+
+\mbox{\label{class_event_a9c01144b3f06d4cc5234ae3736fec9d2}} 
+\index{Event@{Event}!read@{read}}
+\index{read@{read}!Event@{Event}}
+\doxysubsubsection{read}
+{\footnotesize\ttfamily \textbf{ IOptions} Event\+::read}
+
+\mbox{\label{class_event_a448758bc35a7e830f6385c8c1f17461e}} 
+\index{Event@{Event}!stamp@{stamp}}
+\index{stamp@{stamp}!Event@{Event}}
+\doxysubsubsection{stamp}
+{\footnotesize\ttfamily \textbf{ Timestamp} Event\+::stamp = 0ull}
+
+\mbox{\label{class_event_a24cba1790b71f725050f229c129e91d4}} 
+\index{Event@{Event}!time2s@{time2s}}
+\index{time2s@{time2s}!Event@{Event}}
+\doxysubsubsection{time2s}
+{\footnotesize\ttfamily \textbf{ Time\+\_\+ns} Event\+::time2s[255] = \{0\}}
+
+\mbox{\label{class_event_a433bcb1da05d7a6f477d4d1b9ee0f7b0}} 
+\index{Event@{Event}!times@{times}}
+\index{times@{times}!Event@{Event}}
+\doxysubsubsection{times}
+{\footnotesize\ttfamily \textbf{ Time} Event\+::times[255] = \{0\}}
+
+\mbox{\label{class_event_a4db4697dc48d987a650c89b92404f51d}} 
+\index{Event@{Event}!write@{write}}
+\index{write@{write}!Event@{Event}}
+\doxysubsubsection{write}
+{\footnotesize\ttfamily \textbf{ IOptions} Event\+::write}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+lib/\+Classes/\textbf{ Event.\+hpp}\end{DoxyCompactItemize}

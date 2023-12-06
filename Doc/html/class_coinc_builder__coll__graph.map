@@ -1,0 +1,7 @@
+<map id="CoincBuilder" name="CoincBuilder">
+<area shape="rect" id="node1" title="Coincidence builder." alt="" coords="20,275,124,301"/>
+<area shape="rect" id="node2" href="$class_builder.html" title="Base class of event builders (pure virtual class)" alt="" coords="38,199,106,225"/>
+<area shape="rect" id="node3" href="$class_event.html" title="Event used for reading and writting event, event building and trigger." alt="" coords="5,109,64,136"/>
+<area shape="rect" id="node4" href="$class_i_options.html" title="IO parameters ///." alt="" coords="34,5,110,32"/>
+<area shape="rect" id="node5" href="$class_hit.html" title="Hit class ///." alt="" coords="93,109,134,136"/>
+</map>

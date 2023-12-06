@@ -1,0 +1,258 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_class_folders" xml:lang="en-US">
+<title>Folders Class Reference</title>
+<indexterm><primary>Folders</primary></indexterm>
+<para>
+
+<para>EXPERIMENTAL Object used to hold a list of folders. </para>
+ 
+</para>
+<para>
+<computeroutput>#include &lt;files_functions.hpp&gt;</computeroutput>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>auto <link linkend="_class_folders_1a08d92a79fdced661ca94fb0547dfcbf2">begin</link> () const</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_folders_1aaa63ca280c10fc90c09cc29e38c80a02">clear</link> ()</para>
+</listitem>
+            <listitem><para>auto <link linkend="_class_folders_1a11de303e1a1926a03212fa4b085285ca">end</link> () const</para>
+</listitem>
+            <listitem><para>auto <link linkend="_class_folders_1aa6c7cccbbb9de930b9a41dc42dcbb840">erase</link> (<link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> const &amp;pos)</para>
+</listitem>
+            <listitem><para>auto <link linkend="_class_folders_1a035d2b31430c66fc7a8941a9d938b658">erase</link> (<link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> const &amp;pos, <link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> const &amp;<link linkend="_class_folders_1a6b8b818a0a08a010b9849573883bf189">size</link>)</para>
+</listitem>
+            <listitem><para><link linkend="_class_folders_1abb5ba77dd0b151ddc2479831740e514b">Folders</link> ()</para>
+</listitem>
+            <listitem><para><link linkend="_class_folders_1aa84623a40e39787329ca5ef8dbfa9d6c">Folders</link> (<link linkend="_class_folders">Folders</link> const &amp;folders)</para>
+</listitem>
+            <listitem><para><link linkend="_class_folders_1ae28297a4e83670ce6894c115e6be2592">Folders</link> (std::vector&lt; <link linkend="_class_folder">Folder</link> &gt; const &amp;folders)</para>
+</listitem>
+            <listitem><para><link linkend="_class_folders_1a8be43dfb713e9320014ff37a2e5ca5cb">Folders</link> (std::vector&lt; std::string &gt; const &amp;folders)</para>
+</listitem>
+            <listitem><para>auto const  &amp; <link linkend="_class_folders_1aab07a96e82a348fe89b817c6d7b60394">get</link> () const</para>
+</listitem>
+            <listitem><para>auto const  &amp; <link linkend="_class_folders_1ac590b52776691483bd9647c18d22bd10">list</link> () const</para>
+</listitem>
+            <listitem><para><link linkend="_class_folders_1a8e586d397638ccf72386fadd5d4a6df6">operator std::string</link> ()</para>
+</listitem>
+            <listitem><para><link linkend="_class_folders_1a616485734815d9827798b56a265cdc9e">operator std::vector&lt; Folder &gt;</link> () const &amp;</para>
+</listitem>
+            <listitem><para><link linkend="_class_folders">Folders</link> &amp; <link linkend="_class_folders_1a4a7246912adc54275ac8ded201c7ad3a">operator=</link> (<link linkend="_class_folders">Folders</link> const &amp;folders)</para>
+</listitem>
+            <listitem><para><link linkend="_class_folders">Folders</link> &amp; <link linkend="_class_folders_1a6757711b57054c387a2309302c216eb7">operator=</link> (std::vector&lt; std::string &gt; const &amp;folders)</para>
+</listitem>
+            <listitem><para><link linkend="_class_folder">Folder</link> const  &amp; <link linkend="_class_folders_1ae627977a3c889589d2077f57554301b4">operator[]</link> (<link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> const &amp;i) const</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_folders_1ab7471e5d0263ec69f2c87f184c004395">push_back</link> (<link linkend="_class_folder">Folder</link> const &amp;folder)</para>
+</listitem>
+            <listitem><para><link linkend="_class_folders">Folders</link> &amp; <link linkend="_class_folders_1a9b9a8af61bcaec214ec25ec217b84ef7">resize</link> (int const &amp;<link linkend="_class_folders_1a6b8b818a0a08a010b9849573883bf189">size</link>)</para>
+</listitem>
+            <listitem><para>auto const <link linkend="_class_folders_1a6b8b818a0a08a010b9849573883bf189">size</link> () const</para>
+</listitem>
+            <listitem><para>std::string <link linkend="_class_folders_1a21778cd16e2d1dfa91886bba394a506f">string</link> () const</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Private Attributes    </title>
+        <itemizedlist>
+            <listitem><para>std::vector&lt; <link linkend="_class_folder">Folder</link> &gt; <link linkend="_class_folders_1aeb55402a14a1b9d847838882c43dbd14">m_folders</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Detailed Description</title>
+
+<para>EXPERIMENTAL Object used to hold a list of folders. </para>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_class_folders_1abb5ba77dd0b151ddc2479831740e514b"/>    <section>
+    <title>Folders()<computeroutput>[1/4]</computeroutput></title>
+<indexterm><primary>Folders</primary><secondary>Folders</secondary></indexterm>
+<indexterm><primary>Folders</primary><secondary>Folders</secondary></indexterm>
+<para><computeroutput>Folders::Folders ( )<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_folders_1a8be43dfb713e9320014ff37a2e5ca5cb"/>    <section>
+    <title>Folders()<computeroutput>[2/4]</computeroutput></title>
+<indexterm><primary>Folders</primary><secondary>Folders</secondary></indexterm>
+<indexterm><primary>Folders</primary><secondary>Folders</secondary></indexterm>
+<para><computeroutput>Folders::Folders (std::vector&lt; std::string &gt; const &amp; folders)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_folders_1ae28297a4e83670ce6894c115e6be2592"/>    <section>
+    <title>Folders()<computeroutput>[3/4]</computeroutput></title>
+<indexterm><primary>Folders</primary><secondary>Folders</secondary></indexterm>
+<indexterm><primary>Folders</primary><secondary>Folders</secondary></indexterm>
+<para><computeroutput>Folders::Folders (std::vector&lt; <link linkend="_class_folder">Folder</link> &gt; const &amp; folders)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_folders_1aa84623a40e39787329ca5ef8dbfa9d6c"/>    <section>
+    <title>Folders()<computeroutput>[4/4]</computeroutput></title>
+<indexterm><primary>Folders</primary><secondary>Folders</secondary></indexterm>
+<indexterm><primary>Folders</primary><secondary>Folders</secondary></indexterm>
+<para><computeroutput>Folders::Folders (<link linkend="_class_folders">Folders</link> const &amp; folders)<computeroutput>[inline]</computeroutput></computeroutput></para></section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_class_folders_1a08d92a79fdced661ca94fb0547dfcbf2"/>    <section>
+    <title>begin()</title>
+<indexterm><primary>begin</primary><secondary>Folders</secondary></indexterm>
+<indexterm><primary>Folders</primary><secondary>begin</secondary></indexterm>
+<para><computeroutput>auto Folders::begin ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_folders_1aaa63ca280c10fc90c09cc29e38c80a02"/>    <section>
+    <title>clear()</title>
+<indexterm><primary>clear</primary><secondary>Folders</secondary></indexterm>
+<indexterm><primary>Folders</primary><secondary>clear</secondary></indexterm>
+<para><computeroutput>void Folders::clear ( )<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_folders_aaa63ca280c10fc90c09cc29e38c80a02_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_folders_1a11de303e1a1926a03212fa4b085285ca"/>    <section>
+    <title>end()</title>
+<indexterm><primary>end</primary><secondary>Folders</secondary></indexterm>
+<indexterm><primary>Folders</primary><secondary>end</secondary></indexterm>
+<para><computeroutput>auto Folders::end ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_folders_1aa6c7cccbbb9de930b9a41dc42dcbb840"/>    <section>
+    <title>erase()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>erase</primary><secondary>Folders</secondary></indexterm>
+<indexterm><primary>Folders</primary><secondary>erase</secondary></indexterm>
+<para><computeroutput>auto Folders::erase (<link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> const &amp; pos)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_folders_aa6c7cccbbb9de930b9a41dc42dcbb840_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_folders_1a035d2b31430c66fc7a8941a9d938b658"/>    <section>
+    <title>erase()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>erase</primary><secondary>Folders</secondary></indexterm>
+<indexterm><primary>Folders</primary><secondary>erase</secondary></indexterm>
+<para><computeroutput>auto Folders::erase (<link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> const &amp; pos, <link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> const &amp; size)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_folders_a035d2b31430c66fc7a8941a9d938b658_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_folders_1aab07a96e82a348fe89b817c6d7b60394"/>    <section>
+    <title>get()</title>
+<indexterm><primary>get</primary><secondary>Folders</secondary></indexterm>
+<indexterm><primary>Folders</primary><secondary>get</secondary></indexterm>
+<para><computeroutput>auto const&amp; Folders::get ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_folders_aab07a96e82a348fe89b817c6d7b60394_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_folders_1ac590b52776691483bd9647c18d22bd10"/>    <section>
+    <title>list()</title>
+<indexterm><primary>list</primary><secondary>Folders</secondary></indexterm>
+<indexterm><primary>Folders</primary><secondary>list</secondary></indexterm>
+<para><computeroutput>auto const&amp; Folders::list ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_folders_1a8e586d397638ccf72386fadd5d4a6df6"/>    <section>
+    <title>operator std::string()</title>
+<indexterm><primary>operator std::string</primary><secondary>Folders</secondary></indexterm>
+<indexterm><primary>Folders</primary><secondary>operator std::string</secondary></indexterm>
+<para><computeroutput>Folders::operator std::string ( )<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_folders_a8e586d397638ccf72386fadd5d4a6df6_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_folders_a8e586d397638ccf72386fadd5d4a6df6_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_folders_1a616485734815d9827798b56a265cdc9e"/>    <section>
+    <title>operator std::vector&lt; Folder &gt;()</title>
+<indexterm><primary>operator std::vector&lt; Folder &gt;</primary><secondary>Folders</secondary></indexterm>
+<indexterm><primary>Folders</primary><secondary>operator std::vector&lt; Folder &gt;</secondary></indexterm>
+<para><computeroutput>Folders::operator std::vector&lt; <link linkend="_class_folder">Folder</link> &gt; ( ) const &amp;<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_folders_1a4a7246912adc54275ac8ded201c7ad3a"/>    <section>
+    <title>operator=()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>operator=</primary><secondary>Folders</secondary></indexterm>
+<indexterm><primary>Folders</primary><secondary>operator=</secondary></indexterm>
+<para><computeroutput><link linkend="_class_folders">Folders</link>&amp; Folders::operator= (<link linkend="_class_folders">Folders</link> const &amp; folders)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_folders_1a6757711b57054c387a2309302c216eb7"/>    <section>
+    <title>operator=()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>operator=</primary><secondary>Folders</secondary></indexterm>
+<indexterm><primary>Folders</primary><secondary>operator=</secondary></indexterm>
+<para><computeroutput><link linkend="_class_folders">Folders</link>&amp; Folders::operator= (std::vector&lt; std::string &gt; const &amp; folders)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_folders_1ae627977a3c889589d2077f57554301b4"/>    <section>
+    <title>operator[]()</title>
+<indexterm><primary>operator[]</primary><secondary>Folders</secondary></indexterm>
+<indexterm><primary>Folders</primary><secondary>operator[]</secondary></indexterm>
+<para><computeroutput><link linkend="_class_folder">Folder</link> const&amp; Folders::operator[] (<link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> const &amp; i) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_folders_1ab7471e5d0263ec69f2c87f184c004395"/>    <section>
+    <title>push_back()</title>
+<indexterm><primary>push_back</primary><secondary>Folders</secondary></indexterm>
+<indexterm><primary>Folders</primary><secondary>push_back</secondary></indexterm>
+<para><computeroutput>void Folders::push_back (<link linkend="_class_folder">Folder</link> const &amp; folder)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_folders_ab7471e5d0263ec69f2c87f184c004395_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_folders_1a9b9a8af61bcaec214ec25ec217b84ef7"/>    <section>
+    <title>resize()</title>
+<indexterm><primary>resize</primary><secondary>Folders</secondary></indexterm>
+<indexterm><primary>Folders</primary><secondary>resize</secondary></indexterm>
+<para><computeroutput><link linkend="_class_folders">Folders</link>&amp; Folders::resize (int const &amp; size)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_folders_a9b9a8af61bcaec214ec25ec217b84ef7_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_folders_1a6b8b818a0a08a010b9849573883bf189"/>    <section>
+    <title>size()</title>
+<indexterm><primary>size</primary><secondary>Folders</secondary></indexterm>
+<indexterm><primary>Folders</primary><secondary>size</secondary></indexterm>
+<para><computeroutput>auto const Folders::size ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_folders_a6b8b818a0a08a010b9849573883bf189_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_folders_1a21778cd16e2d1dfa91886bba394a506f"/>    <section>
+    <title>string()</title>
+<indexterm><primary>string</primary><secondary>Folders</secondary></indexterm>
+<indexterm><primary>Folders</primary><secondary>string</secondary></indexterm>
+<para><computeroutput>std::string Folders::string ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_folders_a21778cd16e2d1dfa91886bba394a506f_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_class_folders_1aeb55402a14a1b9d847838882c43dbd14"/>    <section>
+    <title>m_folders</title>
+<indexterm><primary>m_folders</primary><secondary>Folders</secondary></indexterm>
+<indexterm><primary>Folders</primary><secondary>m_folders</secondary></indexterm>
+<para><computeroutput>std::vector&lt;<link linkend="_class_folder">Folder</link>&gt; Folders::m_folders<computeroutput>[private]</computeroutput></computeroutput></para></section>
+<para>
+The documentation for this class was generated from the following file:</para>
+lib/<link linkend="_files__functions_8hpp">files_functions.hpp</link></section>
+</section>

@@ -1,0 +1,163 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_class_bools" xml:lang="en-US">
+<title>Bools Class Reference</title>
+<indexterm><primary>Bools</primary></indexterm>
+<para>
+<computeroutput>#include &lt;libCo.hpp&gt;</computeroutput>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>auto <link linkend="_class_bools_1a241564235788ec089ae157118d17e401">begin</link> ()</para>
+</listitem>
+            <listitem><para>auto <link linkend="_class_bools_1adaae46464e92c6073e068b66737da266">begin</link> () const</para>
+</listitem>
+            <listitem><para><link linkend="_class_bools_1addb0b52571d27932fa8143fcb422fe9b">Bools</link> ()</para>
+</listitem>
+            <listitem><para><link linkend="_class_bools_1a320db9791cebe780ebd6486236f820fd">Bools</link> (<link linkend="_class_bools">Bools</link> &amp;&amp;other) noexcept</para>
+</listitem>
+            <listitem><para><link linkend="_class_bools_1a83a4cfda502a9e83cccb5a0cefd65067">Bools</link> (const <link linkend="_class_bools">Bools</link> &amp;other)</para>
+</listitem>
+            <listitem><para><link linkend="_class_bools_1a88601b65a1ae703d7bbc80e4c8586530">Bools</link> (<link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> <link linkend="_class_bools_1ad4d74f6e2266b271a8bd060ce6d0e448">size</link>, bool const &amp;value=false)</para>
+</listitem>
+            <listitem><para>auto <link linkend="_class_bools_1a940a216bf52d8c93e688e2810cd767e8">end</link> ()</para>
+</listitem>
+            <listitem><para>auto <link linkend="_class_bools_1ae285a4de44d0625f680555e524b8fb27">end</link> () const</para>
+</listitem>
+            <listitem><para><link linkend="_class_bools">Bools</link> &amp; <link linkend="_class_bools_1a28a402a253cb7cef0e58445c126554ce">operator=</link> (<link linkend="_class_bools">Bools</link> &amp;&amp;other) noexcept</para>
+</listitem>
+            <listitem><para><link linkend="_class_bools">Bools</link> &amp; <link linkend="_class_bools_1ab3902a403239bd602aafd094319f3f8f">operator=</link> (const <link linkend="_class_bools">Bools</link> &amp;other)</para>
+</listitem>
+            <listitem><para>bool &amp; <link linkend="_class_bools_1afbd25d68b6e6fb096b95f56b665cf1b7">operator[]</link> (<link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> const &amp;index)</para>
+</listitem>
+            <listitem><para>bool const  &amp; <link linkend="_class_bools_1a0d18d7e936b556355a0ecc844a0daad3">operator[]</link> (<link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> const &amp;index) const</para>
+</listitem>
+            <listitem><para><link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> const  &amp; <link linkend="_class_bools_1ab34b97e65a4a23ae25a8b6f746c37a9d">resize</link> (<link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> <link linkend="_class_bools_1ad4d74f6e2266b271a8bd060ce6d0e448">size</link>, bool const &amp;value=false)</para>
+</listitem>
+            <listitem><para><link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> const  &amp; <link linkend="_class_bools_1ad4d74f6e2266b271a8bd060ce6d0e448">size</link> () const</para>
+</listitem>
+            <listitem><para><link linkend="_class_bools_1a0908affb9f95fbbcd517316c7c81bf53">~Bools</link> ()</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Private Attributes    </title>
+        <itemizedlist>
+            <listitem><para>bool * <link linkend="_class_bools_1a2ac7144e4d610dde76f076eb34dc73f9">m_data</link> = nullptr</para>
+</listitem>
+            <listitem><para><link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> <link linkend="_class_bools_1a445a24b6837a4387946571ea76d95886">m_size</link> = 0</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_class_bools_1addb0b52571d27932fa8143fcb422fe9b"/>    <section>
+    <title>Bools()<computeroutput>[1/4]</computeroutput></title>
+<indexterm><primary>Bools</primary><secondary>Bools</secondary></indexterm>
+<indexterm><primary>Bools</primary><secondary>Bools</secondary></indexterm>
+<para><computeroutput>Bools::Bools ( )<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_bools_1a88601b65a1ae703d7bbc80e4c8586530"/>    <section>
+    <title>Bools()<computeroutput>[2/4]</computeroutput></title>
+<indexterm><primary>Bools</primary><secondary>Bools</secondary></indexterm>
+<indexterm><primary>Bools</primary><secondary>Bools</secondary></indexterm>
+<para><computeroutput>Bools::Bools (<link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> size, bool const &amp; value = <computeroutput>false</computeroutput>
+)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_bools_1a83a4cfda502a9e83cccb5a0cefd65067"/>    <section>
+    <title>Bools()<computeroutput>[3/4]</computeroutput></title>
+<indexterm><primary>Bools</primary><secondary>Bools</secondary></indexterm>
+<indexterm><primary>Bools</primary><secondary>Bools</secondary></indexterm>
+<para><computeroutput>Bools::Bools (const <link linkend="_class_bools">Bools</link> &amp; other)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_bools_1a320db9791cebe780ebd6486236f820fd"/>    <section>
+    <title>Bools()<computeroutput>[4/4]</computeroutput></title>
+<indexterm><primary>Bools</primary><secondary>Bools</secondary></indexterm>
+<indexterm><primary>Bools</primary><secondary>Bools</secondary></indexterm>
+<para><computeroutput>Bools::Bools (<link linkend="_class_bools">Bools</link> &amp;&amp; other)<computeroutput>[inline]</computeroutput>, <computeroutput>[noexcept]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_bools_1a0908affb9f95fbbcd517316c7c81bf53"/>    <section>
+    <title>~Bools()</title>
+<indexterm><primary>~Bools</primary><secondary>Bools</secondary></indexterm>
+<indexterm><primary>Bools</primary><secondary>~Bools</secondary></indexterm>
+<para><computeroutput>Bools::~Bools ( )<computeroutput>[inline]</computeroutput></computeroutput></para></section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_class_bools_1a241564235788ec089ae157118d17e401"/>    <section>
+    <title>begin()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>begin</primary><secondary>Bools</secondary></indexterm>
+<indexterm><primary>Bools</primary><secondary>begin</secondary></indexterm>
+<para><computeroutput>auto Bools::begin ( )<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_bools_1adaae46464e92c6073e068b66737da266"/>    <section>
+    <title>begin()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>begin</primary><secondary>Bools</secondary></indexterm>
+<indexterm><primary>Bools</primary><secondary>begin</secondary></indexterm>
+<para><computeroutput>auto Bools::begin ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_bools_1a940a216bf52d8c93e688e2810cd767e8"/>    <section>
+    <title>end()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>end</primary><secondary>Bools</secondary></indexterm>
+<indexterm><primary>Bools</primary><secondary>end</secondary></indexterm>
+<para><computeroutput>auto Bools::end ( )<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_bools_1ae285a4de44d0625f680555e524b8fb27"/>    <section>
+    <title>end()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>end</primary><secondary>Bools</secondary></indexterm>
+<indexterm><primary>Bools</primary><secondary>end</secondary></indexterm>
+<para><computeroutput>auto Bools::end ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_bools_1a28a402a253cb7cef0e58445c126554ce"/>    <section>
+    <title>operator=()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>operator=</primary><secondary>Bools</secondary></indexterm>
+<indexterm><primary>Bools</primary><secondary>operator=</secondary></indexterm>
+<para><computeroutput><link linkend="_class_bools">Bools</link>&amp; Bools::operator= (<link linkend="_class_bools">Bools</link> &amp;&amp; other)<computeroutput>[inline]</computeroutput>, <computeroutput>[noexcept]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_bools_1ab3902a403239bd602aafd094319f3f8f"/>    <section>
+    <title>operator=()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>operator=</primary><secondary>Bools</secondary></indexterm>
+<indexterm><primary>Bools</primary><secondary>operator=</secondary></indexterm>
+<para><computeroutput><link linkend="_class_bools">Bools</link>&amp; Bools::operator= (const <link linkend="_class_bools">Bools</link> &amp; other)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_bools_1afbd25d68b6e6fb096b95f56b665cf1b7"/>    <section>
+    <title>operator[]()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>operator[]</primary><secondary>Bools</secondary></indexterm>
+<indexterm><primary>Bools</primary><secondary>operator[]</secondary></indexterm>
+<para><computeroutput>bool&amp; Bools::operator[] (<link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> const &amp; index)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_bools_1a0d18d7e936b556355a0ecc844a0daad3"/>    <section>
+    <title>operator[]()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>operator[]</primary><secondary>Bools</secondary></indexterm>
+<indexterm><primary>Bools</primary><secondary>operator[]</secondary></indexterm>
+<para><computeroutput>bool const&amp; Bools::operator[] (<link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> const &amp; index) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_bools_1ab34b97e65a4a23ae25a8b6f746c37a9d"/>    <section>
+    <title>resize()</title>
+<indexterm><primary>resize</primary><secondary>Bools</secondary></indexterm>
+<indexterm><primary>Bools</primary><secondary>resize</secondary></indexterm>
+<para><computeroutput><link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> const&amp; Bools::resize (<link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> size, bool const &amp; value = <computeroutput>false</computeroutput>
+)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_bools_ab34b97e65a4a23ae25a8b6f746c37a9d_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_bools_ab34b97e65a4a23ae25a8b6f746c37a9d_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_bools_1ad4d74f6e2266b271a8bd060ce6d0e448"/>    <section>
+    <title>size()</title>
+<indexterm><primary>size</primary><secondary>Bools</secondary></indexterm>
+<indexterm><primary>Bools</primary><secondary>size</secondary></indexterm>
+<para><computeroutput><link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> const&amp; Bools::size ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_bools_ad4d74f6e2266b271a8bd060ce6d0e448_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_class_bools_1a2ac7144e4d610dde76f076eb34dc73f9"/>    <section>
+    <title>m_data</title>
+<indexterm><primary>m_data</primary><secondary>Bools</secondary></indexterm>
+<indexterm><primary>Bools</primary><secondary>m_data</secondary></indexterm>
+<para><computeroutput>bool* Bools::m_data = nullptr<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_bools_1a445a24b6837a4387946571ea76d95886"/>    <section>
+    <title>m_size</title>
+<indexterm><primary>m_size</primary><secondary>Bools</secondary></indexterm>
+<indexterm><primary>Bools</primary><secondary>m_size</secondary></indexterm>
+<para><computeroutput><link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> Bools::m_size = 0<computeroutput>[private]</computeroutput></computeroutput></para></section>
+<para>
+The documentation for this class was generated from the following file:</para>
+lib/<link linkend="_lib_co_8hpp">libCo.hpp</link></section>
+</section>

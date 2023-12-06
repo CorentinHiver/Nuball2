@@ -1,0 +1,310 @@
+\doxysection{MTObject Class Reference}
+\label{class_m_t_object}\index{MTObject@{MTObject}}
+
+
+{\ttfamily \#include $<$MTObject.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ MTObject} ()
+\item 
+\textbf{ MTObject} (\textbf{ size\+\_\+t} \&\+\_\+nb\+\_\+threads)
+\item 
+\textbf{ operator bool} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \textbf{ adjust\+Threads\+Number} (\textbf{ size\+\_\+t} const \&limiting\+\_\+number, std\+::string const \&print\+\_\+if\+\_\+limit\+\_\+reached=\char`\"{}\char`\"{})
+\item 
+static auto const  \& \textbf{ get\+Thread\+Index} ()
+\item 
+static auto const  \& \textbf{ get\+Threads\+Nb} ()
+\item 
+static auto const  \& \textbf{ get\+Threads\+Number} ()
+\item 
+static auto const  \& \textbf{ index} ()
+\item 
+static void \textbf{ Initialize} ()
+\item 
+static void \textbf{ Initialize} (\textbf{ size\+\_\+t} const \&\+\_\+nb\+\_\+threads, bool force=false)
+\item 
+static bool \textbf{ is\+Master\+Thread} ()
+\item 
+{\footnotesize template$<$class Func , class... ARGS$>$ }\\static void \textbf{ parallelise\+\_\+function} (Func \&\&func, ARGS \&\&... args)
+\item 
+static void \textbf{ set\+Threads\+Nb} (int const \&n, bool force=false)
+\item 
+static void \textbf{ set\+Threads\+Nb} (\textbf{ size\+\_\+t} const \&n, bool force=false)
+\begin{DoxyCompactList}\small\item\em Sets the number of threads. \end{DoxyCompactList}\item 
+static void \textbf{ set\+Threads\+Number} (\textbf{ size\+\_\+t} const \&n, bool force=false)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::mutex \textbf{ mutex}
+\item 
+static \textbf{ size\+\_\+t} \textbf{ nb\+\_\+threads} = 1
+\item 
+static bool \textbf{ ON} = false
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static thread\+\_\+local \textbf{ size\+\_\+t} \textbf{ m\+\_\+thread\+\_\+index} = 0
+\item 
+static std\+::vector$<$ std\+::thread $>$ \textbf{ m\+\_\+threads}
+\item 
+static std\+::thread\+::id \textbf{ master\+\_\+thread\+\_\+id}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\label{class_m_t_object_a12856506adc231bafc0983c881c3fe36}} 
+\index{MTObject@{MTObject}!MTObject@{MTObject}}
+\index{MTObject@{MTObject}!MTObject@{MTObject}}
+\doxysubsubsection{MTObject()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily MTObject\+::\+MTObject (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_m_t_object_a813cbf27a03a3b334ebc9faec99a5158}} 
+\index{MTObject@{MTObject}!MTObject@{MTObject}}
+\index{MTObject@{MTObject}!MTObject@{MTObject}}
+\doxysubsubsection{MTObject()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily MTObject\+::\+MTObject (\begin{DoxyParamCaption}\item[{\textbf{ size\+\_\+t} \&}]{\+\_\+nb\+\_\+threads }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_m_t_object_a813cbf27a03a3b334ebc9faec99a5158_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\label{class_m_t_object_ac76ab61815b5c3a471e6c210b7ba1913}} 
+\index{MTObject@{MTObject}!adjustThreadsNumber@{adjustThreadsNumber}}
+\index{adjustThreadsNumber@{adjustThreadsNumber}!MTObject@{MTObject}}
+\doxysubsubsection{adjustThreadsNumber()}
+{\footnotesize\ttfamily static void MTObject\+::adjust\+Threads\+Number (\begin{DoxyParamCaption}\item[{\textbf{ size\+\_\+t} const \&}]{limiting\+\_\+number,  }\item[{std\+::string const \&}]{print\+\_\+if\+\_\+limit\+\_\+reached = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_m_t_object_ac76ab61815b5c3a471e6c210b7ba1913_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_m_t_object_a9c9a57a49a12e1d408a5354e8520b3fe}} 
+\index{MTObject@{MTObject}!getThreadIndex@{getThreadIndex}}
+\index{getThreadIndex@{getThreadIndex}!MTObject@{MTObject}}
+\doxysubsubsection{getThreadIndex()}
+{\footnotesize\ttfamily static auto const\& MTObject\+::get\+Thread\+Index (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_m_t_object_a9c9a57a49a12e1d408a5354e8520b3fe_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_m_t_object_ac97399bb34f766e41e7f9a1cd1b7eb7a}} 
+\index{MTObject@{MTObject}!getThreadsNb@{getThreadsNb}}
+\index{getThreadsNb@{getThreadsNb}!MTObject@{MTObject}}
+\doxysubsubsection{getThreadsNb()}
+{\footnotesize\ttfamily static auto const\& MTObject\+::get\+Threads\+Nb (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_m_t_object_ac97399bb34f766e41e7f9a1cd1b7eb7a_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_m_t_object_ad156f9b1c68f0e2713abb16890b1fa15}} 
+\index{MTObject@{MTObject}!getThreadsNumber@{getThreadsNumber}}
+\index{getThreadsNumber@{getThreadsNumber}!MTObject@{MTObject}}
+\doxysubsubsection{getThreadsNumber()}
+{\footnotesize\ttfamily static auto const\& MTObject\+::get\+Threads\+Number (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_m_t_object_ad156f9b1c68f0e2713abb16890b1fa15_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_m_t_object_af752e86ec494c50d1af7e6442c09733b}} 
+\index{MTObject@{MTObject}!index@{index}}
+\index{index@{index}!MTObject@{MTObject}}
+\doxysubsubsection{index()}
+{\footnotesize\ttfamily static auto const\& MTObject\+::index (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\mbox{\label{class_m_t_object_aaa3623d88deae3a9311aad39bfff49dc}} 
+\index{MTObject@{MTObject}!Initialize@{Initialize}}
+\index{Initialize@{Initialize}!MTObject@{MTObject}}
+\doxysubsubsection{Initialize()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily static void MTObject\+::\+Initialize (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=266pt]{class_m_t_object_aaa3623d88deae3a9311aad39bfff49dc_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_m_t_object_aaa3623d88deae3a9311aad39bfff49dc_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_m_t_object_aaa5354a0915c26979a49d54f36019df1}} 
+\index{MTObject@{MTObject}!Initialize@{Initialize}}
+\index{Initialize@{Initialize}!MTObject@{MTObject}}
+\doxysubsubsection{Initialize()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily static void MTObject\+::\+Initialize (\begin{DoxyParamCaption}\item[{\textbf{ size\+\_\+t} const \&}]{\+\_\+nb\+\_\+threads,  }\item[{bool}]{force = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_m_t_object_aaa5354a0915c26979a49d54f36019df1_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_m_t_object_a3350577ca839e2abdcd4d6f6449a1408}} 
+\index{MTObject@{MTObject}!isMasterThread@{isMasterThread}}
+\index{isMasterThread@{isMasterThread}!MTObject@{MTObject}}
+\doxysubsubsection{isMasterThread()}
+{\footnotesize\ttfamily static bool MTObject\+::is\+Master\+Thread (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_m_t_object_a3350577ca839e2abdcd4d6f6449a1408_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_m_t_object_a048c52b4b15fc13667559a5b07d71002}} 
+\index{MTObject@{MTObject}!operator bool@{operator bool}}
+\index{operator bool@{operator bool}!MTObject@{MTObject}}
+\doxysubsubsection{operator bool()}
+{\footnotesize\ttfamily MTObject\+::operator bool (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_m_t_object_a35c02650eb403bd54e867f93bb26fc47}} 
+\index{MTObject@{MTObject}!parallelise\_function@{parallelise\_function}}
+\index{parallelise\_function@{parallelise\_function}!MTObject@{MTObject}}
+\doxysubsubsection{parallelise\_function()}
+{\footnotesize\ttfamily template$<$class Func , class... ARGS$>$ \\
+static void MTObject\+::parallelise\+\_\+function (\begin{DoxyParamCaption}\item[{Func \&\&}]{func,  }\item[{ARGS \&\&...}]{args }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=275pt]{class_m_t_object_a35c02650eb403bd54e867f93bb26fc47_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_m_t_object_a35c02650eb403bd54e867f93bb26fc47_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_m_t_object_a872d9518e0a1936df8e70a2dae303f4f}} 
+\index{MTObject@{MTObject}!setThreadsNb@{setThreadsNb}}
+\index{setThreadsNb@{setThreadsNb}!MTObject@{MTObject}}
+\doxysubsubsection{setThreadsNb()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily static void MTObject\+::set\+Threads\+Nb (\begin{DoxyParamCaption}\item[{int const \&}]{n,  }\item[{bool}]{force = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=315pt]{class_m_t_object_a872d9518e0a1936df8e70a2dae303f4f_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_m_t_object_a872d9518e0a1936df8e70a2dae303f4f_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_m_t_object_a8f91c9269a027d1770d7bae3b6d599a5}} 
+\index{MTObject@{MTObject}!setThreadsNb@{setThreadsNb}}
+\index{setThreadsNb@{setThreadsNb}!MTObject@{MTObject}}
+\doxysubsubsection{setThreadsNb()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily static void MTObject\+::set\+Threads\+Nb (\begin{DoxyParamCaption}\item[{\textbf{ size\+\_\+t} const \&}]{n,  }\item[{bool}]{force = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Sets the number of threads. 
+
+Check the number of threads. Usually, over 75\% of cores is the optimal. Set force parameter to true if you want to use all the cores Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=315pt]{class_m_t_object_a8f91c9269a027d1770d7bae3b6d599a5_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_m_t_object_a8b70d4506ed556d5ca4c23703a80ddb6}} 
+\index{MTObject@{MTObject}!setThreadsNumber@{setThreadsNumber}}
+\index{setThreadsNumber@{setThreadsNumber}!MTObject@{MTObject}}
+\doxysubsubsection{setThreadsNumber()}
+{\footnotesize\ttfamily static void MTObject\+::set\+Threads\+Number (\begin{DoxyParamCaption}\item[{\textbf{ size\+\_\+t} const \&}]{n,  }\item[{bool}]{force = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_m_t_object_a8b70d4506ed556d5ca4c23703a80ddb6_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\label{class_m_t_object_ac9efab6b9d255529611a250e91779a48}} 
+\index{MTObject@{MTObject}!m\_thread\_index@{m\_thread\_index}}
+\index{m\_thread\_index@{m\_thread\_index}!MTObject@{MTObject}}
+\doxysubsubsection{m\_thread\_index}
+{\footnotesize\ttfamily thread\+\_\+local \textbf{ size\+\_\+t} MTObject\+::m\+\_\+thread\+\_\+index = 0\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\mbox{\label{class_m_t_object_abf0f47fe00f785c060ba2ec35df9819d}} 
+\index{MTObject@{MTObject}!m\_threads@{m\_threads}}
+\index{m\_threads@{m\_threads}!MTObject@{MTObject}}
+\doxysubsubsection{m\_threads}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::thread $>$ MTObject\+::m\+\_\+threads\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\mbox{\label{class_m_t_object_a16983b3e7be4853da5f32145342fc6b0}} 
+\index{MTObject@{MTObject}!master\_thread\_id@{master\_thread\_id}}
+\index{master\_thread\_id@{master\_thread\_id}!MTObject@{MTObject}}
+\doxysubsubsection{master\_thread\_id}
+{\footnotesize\ttfamily std\+::thread\+::id MTObject\+::master\+\_\+thread\+\_\+id\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\mbox{\label{class_m_t_object_a79d86fbc8837ba0f9a4cd1405fddef1c}} 
+\index{MTObject@{MTObject}!mutex@{mutex}}
+\index{mutex@{mutex}!MTObject@{MTObject}}
+\doxysubsubsection{mutex}
+{\footnotesize\ttfamily std\+::mutex MTObject\+::mutex\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\label{class_m_t_object_a1c2b3cb0cdccca46c8ebba009503ac88}} 
+\index{MTObject@{MTObject}!nb\_threads@{nb\_threads}}
+\index{nb\_threads@{nb\_threads}!MTObject@{MTObject}}
+\doxysubsubsection{nb\_threads}
+{\footnotesize\ttfamily \textbf{ size\+\_\+t} MTObject\+::nb\+\_\+threads = 1\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\label{class_m_t_object_a6fe86ce1ea64ede7e695490bceb264a3}} 
+\index{MTObject@{MTObject}!ON@{ON}}
+\index{ON@{ON}!MTObject@{MTObject}}
+\doxysubsubsection{ON}
+{\footnotesize\ttfamily bool MTObject\+::\+ON = false\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+lib/\+MTObjects/\textbf{ MTObject.\+hpp}\end{DoxyCompactItemize}

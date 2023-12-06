@@ -1,0 +1,13 @@
+<map id="Faster2Histo::loadCalibration" name="Faster2Histo::loadCalibration">
+<area shape="rect" id="node1" title=" " alt="" coords="5,132,216,159"/>
+<area shape="rect" id="node2" href="$class_calibration.html#a2d2a0d6276fc2c8a4b60c3801ccc16a9" title=" " alt="" coords="264,132,393,159"/>
+<area shape="rect" id="node3" href="$files__functions_8hpp.html#afd584978228fac5fae283c12837378dd" title=" " alt="" coords="453,5,562,32"/>
+<area shape="rect" id="node4" href="$_histogramor_8hpp.html#ab48a2fa7184e6354788989602c8c8c29" title=" " alt="" coords="648,56,700,83"/>
+<area shape="rect" id="node5" href="$class_detectors.html#af2bb20ee60f504df326b87e9ebbaef30" title=" " alt="" coords="441,107,573,133"/>
+<area shape="rect" id="node8" href="$class_calibration.html#ab1502564e126e769e782d221d42608c7" title=" " alt="" coords="447,157,568,184"/>
+<area shape="rect" id="node9" href="$class_detectors.html#a1177661fb15c9825755925faf00c8398" title="Return the value of the maximum label, i.e. the size of the lookup tables." alt="" coords="448,208,567,235"/>
+<area shape="rect" id="node11" href="$class_calibration.html#ac4b8f57b3d896cda20a6aa3ba04a78e7" title="DEV." alt="" coords="444,259,571,285"/>
+<area shape="rect" id="node6" href="$class_bools.html#ab34b97e65a4a23ae25a8b6f746c37a9d" title=" " alt="" coords="621,107,727,133"/>
+<area shape="rect" id="node7" href="$class_bools.html#ad4d74f6e2266b271a8bd060ce6d0e448" title=" " alt="" coords="775,107,867,133"/>
+<area shape="rect" id="node10" href="$_hit_8hpp.html#af181231d97866aa957e8fe8bd67f7f64" title="Data casts ///." alt="" coords="629,208,719,235"/>
+</map>

@@ -1,0 +1,62 @@
+.TH "Histogramor" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Histogramor
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <Histogramor\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBHistogramor\fP (int argc, char **argv)"
+.br
+.ti -1c
+.RI "bool \fBload_binning\fP (std::string const &filename)"
+.br
+.ti -1c
+.RI "bool \fBreadParam\fP (int argc, char **argv)"
+.br
+.in -1c
+.SS "Static Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "static \fBprintParameters\fP ()"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBMTTHist\fP< TH2F > \fBm_all_spectra\fP"
+.br
+.ti -1c
+.RI "\fBVector_MTTHist\fP< TH1F > \fBm_each_spectra\fP"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "Histogramor::Histogramor (int argc, char ** argv)"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "bool Histogramor::load_binning (std::string const & filename)"
+
+.SS "Histogramor::printParameters ()\fC [static]\fP"
+
+.SS "bool Histogramor::readParam (int argc, char ** argv)"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "\fBMTTHist\fP<TH2F> Histogramor::m_all_spectra\fC [private]\fP"
+
+.SS "\fBVector_MTTHist\fP<TH1F> Histogramor::m_each_spectra\fC [private]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Nuball2 from the source code\&.

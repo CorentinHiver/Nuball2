@@ -1,0 +1,144 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_print_8hpp" xml:lang="en-US">
+<title>lib/print.hpp File Reference</title>
+<indexterm><primary>lib/print.hpp</primary></indexterm>
+This graph shows which files directly or indirectly include this file:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="print_8hpp__dep__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>template&lt;class... ARGS&gt; </para><para>void <link linkend="_print_8hpp_1a7c50c0690489629965f74c4921570ce5">debug</link> (ARGS &amp;&amp;... args)</para>
+</listitem>
+            <listitem><para>template&lt;class E , size_t size&gt; </para><para>std::ostream &amp; <link linkend="_print_8hpp_1a021f6cc0c03903546e6a63851944f2e8">operator&lt;&lt;</link> (std::ostream &amp;cout, std::array&lt; E, size &gt; const &amp;a)</para>
+</listitem>
+            <listitem><para>template&lt;class K , class V &gt; </para><para>std::ostream &amp; <link linkend="_print_8hpp_1a1fc2e1be374c41706525b8d606242646">operator&lt;&lt;</link> (std::ostream &amp;cout, std::map&lt; K, V &gt; const &amp;m)</para>
+</listitem>
+            <listitem><para>template&lt;class F , class S &gt; </para><para>std::ostream &amp; <link linkend="_print_8hpp_1a305d037b6a2823d9d8d935b1cd5dd2c0">operator&lt;&lt;</link> (std::ostream &amp;cout, std::pair&lt; F, S &gt; const &amp;p)</para>
+</listitem>
+            <listitem><para>template&lt;class E &gt; </para><para>std::ostream &amp; <link linkend="_print_8hpp_1a03b9abfe3f12543c365e9a25848ba566">operator&lt;&lt;</link> (std::ostream &amp;cout, std::vector&lt; E &gt; const &amp;v)</para>
+</listitem>
+            <listitem><para>std::ostream &amp; <link linkend="_print_8hpp_1ad68695d41301547d77d546b80b1bc278">operator&lt;&lt;</link> (std::ostream &amp;cout, unsigned char const &amp;uc)</para>
+</listitem>
+            <listitem><para>template&lt;class T &gt; </para><para>void <link linkend="_print_8hpp_1aaa2383e8fc7f8fa546f4376e1dd4c9b7">print</link> ()</para>
+</listitem>
+            <listitem><para>template&lt;class... T&gt; </para><para>void <link linkend="_print_8hpp_1a527acf8dce9e07a4901d65a23979424b">print</link> (T const &amp;... t)</para>
+</listitem>
+            <listitem><para>template&lt;class T &gt; </para><para>void <link linkend="_print_8hpp_1a02e3acd6b90f83126d840187ee8023d6">print</link> (T const &amp;t)</para>
+</listitem>
+            <listitem><para>template&lt;class T , class... T2&gt; </para><para>void <link linkend="_print_8hpp_1a942a3ac725f791da05ff038fd549a721">print</link> (T const &amp;t, T2 const &amp;... t2)</para>
+</listitem>
+            <listitem><para>void <link linkend="_print_8hpp_1ab97d5aa53eda1f20404d0555d7ffd5de">print_precision</link> (int n=6)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_print_8hpp_1a7c50c0690489629965f74c4921570ce5"/>    <section>
+    <title>debug()</title>
+<indexterm><primary>debug</primary><secondary>print.hpp</secondary></indexterm>
+<indexterm><primary>print.hpp</primary><secondary>debug</secondary></indexterm>
+<computeroutput>template&lt;class... ARGS&gt; </computeroutput><para><computeroutput>void debug (ARGS &amp;&amp;... args)</computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="print_8hpp_a7c50c0690489629965f74c4921570ce5_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="print_8hpp_a7c50c0690489629965f74c4921570ce5_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_print_8hpp_1a021f6cc0c03903546e6a63851944f2e8"/>    <section>
+    <title>operator&lt;&lt;()<computeroutput>[1/5]</computeroutput></title>
+<indexterm><primary>operator&lt;&lt;</primary><secondary>print.hpp</secondary></indexterm>
+<indexterm><primary>print.hpp</primary><secondary>operator&lt;&lt;</secondary></indexterm>
+<computeroutput>template&lt;class E , size_t size&gt; </computeroutput><para><computeroutput>std::ostream&amp; operator&lt;&lt; (std::ostream &amp; cout, std::array&lt; E, size &gt; const &amp; a)</computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="print_8hpp_a021f6cc0c03903546e6a63851944f2e8_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_print_8hpp_1a1fc2e1be374c41706525b8d606242646"/>    <section>
+    <title>operator&lt;&lt;()<computeroutput>[2/5]</computeroutput></title>
+<indexterm><primary>operator&lt;&lt;</primary><secondary>print.hpp</secondary></indexterm>
+<indexterm><primary>print.hpp</primary><secondary>operator&lt;&lt;</secondary></indexterm>
+<computeroutput>template&lt;class K , class V &gt; </computeroutput><para><computeroutput>std::ostream&amp; operator&lt;&lt; (std::ostream &amp; cout, std::map&lt; K, V &gt; const &amp; m)</computeroutput></para>    </section><anchor xml:id="_print_8hpp_1a305d037b6a2823d9d8d935b1cd5dd2c0"/>    <section>
+    <title>operator&lt;&lt;()<computeroutput>[3/5]</computeroutput></title>
+<indexterm><primary>operator&lt;&lt;</primary><secondary>print.hpp</secondary></indexterm>
+<indexterm><primary>print.hpp</primary><secondary>operator&lt;&lt;</secondary></indexterm>
+<computeroutput>template&lt;class F , class S &gt; </computeroutput><para><computeroutput>std::ostream&amp; operator&lt;&lt; (std::ostream &amp; cout, std::pair&lt; F, S &gt; const &amp; p)</computeroutput></para>    </section><anchor xml:id="_print_8hpp_1a03b9abfe3f12543c365e9a25848ba566"/>    <section>
+    <title>operator&lt;&lt;()<computeroutput>[4/5]</computeroutput></title>
+<indexterm><primary>operator&lt;&lt;</primary><secondary>print.hpp</secondary></indexterm>
+<indexterm><primary>print.hpp</primary><secondary>operator&lt;&lt;</secondary></indexterm>
+<computeroutput>template&lt;class E &gt; </computeroutput><para><computeroutput>std::ostream&amp; operator&lt;&lt; (std::ostream &amp; cout, std::vector&lt; E &gt; const &amp; v)</computeroutput></para>    </section><anchor xml:id="_print_8hpp_1ad68695d41301547d77d546b80b1bc278"/>    <section>
+    <title>operator&lt;&lt;()<computeroutput>[5/5]</computeroutput></title>
+<indexterm><primary>operator&lt;&lt;</primary><secondary>print.hpp</secondary></indexterm>
+<indexterm><primary>print.hpp</primary><secondary>operator&lt;&lt;</secondary></indexterm>
+<para><computeroutput>std::ostream&amp; operator&lt;&lt; (std::ostream &amp; cout, unsigned char const &amp; uc)</computeroutput></para>    </section><anchor xml:id="_print_8hpp_1aaa2383e8fc7f8fa546f4376e1dd4c9b7"/>    <section>
+    <title>print()<computeroutput>[1/4]</computeroutput></title>
+<indexterm><primary>print</primary><secondary>print.hpp</secondary></indexterm>
+<indexterm><primary>print.hpp</primary><secondary>print</secondary></indexterm>
+<computeroutput>template&lt;class T &gt; </computeroutput><para><computeroutput>void print ( )</computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="print_8hpp_aaa2383e8fc7f8fa546f4376e1dd4c9b7_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_print_8hpp_1a527acf8dce9e07a4901d65a23979424b"/>    <section>
+    <title>print()<computeroutput>[2/4]</computeroutput></title>
+<indexterm><primary>print</primary><secondary>print.hpp</secondary></indexterm>
+<indexterm><primary>print.hpp</primary><secondary>print</secondary></indexterm>
+<computeroutput>template&lt;class... T&gt; </computeroutput><para><computeroutput>void print (T const &amp;... t)</computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="print_8hpp_a527acf8dce9e07a4901d65a23979424b_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_print_8hpp_1a02e3acd6b90f83126d840187ee8023d6"/>    <section>
+    <title>print()<computeroutput>[3/4]</computeroutput></title>
+<indexterm><primary>print</primary><secondary>print.hpp</secondary></indexterm>
+<indexterm><primary>print.hpp</primary><secondary>print</secondary></indexterm>
+<computeroutput>template&lt;class T &gt; </computeroutput><para><computeroutput>void print (T const &amp; t)</computeroutput></para>    </section><anchor xml:id="_print_8hpp_1a942a3ac725f791da05ff038fd549a721"/>    <section>
+    <title>print()<computeroutput>[4/4]</computeroutput></title>
+<indexterm><primary>print</primary><secondary>print.hpp</secondary></indexterm>
+<indexterm><primary>print.hpp</primary><secondary>print</secondary></indexterm>
+<computeroutput>template&lt;class T , class... T2&gt; </computeroutput><para><computeroutput>void print (T const &amp; t, T2 const &amp;... t2)</computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="print_8hpp_a942a3ac725f791da05ff038fd549a721_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_print_8hpp_1ab97d5aa53eda1f20404d0555d7ffd5de"/>    <section>
+    <title>print_precision()</title>
+<indexterm><primary>print_precision</primary><secondary>print.hpp</secondary></indexterm>
+<indexterm><primary>print.hpp</primary><secondary>print_precision</secondary></indexterm>
+<para><computeroutput>void print_precision (int n = <computeroutput>6</computeroutput>
+)</computeroutput></para></section>
+</section>
+</section>

@@ -1,0 +1,975 @@
+\doxysection{Detectors Class Reference}
+\label{class_detectors}\index{Detectors@{Detectors}}
+
+
+Loads the ID file and fills lookup tables.  
+
+
+
+
+{\ttfamily \#include $<$Detectors.\+hpp$>$}
+
+
+
+Collaboration diagram for Detectors\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=160pt]{class_detectors__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+auto \textbf{ begin} ()
+\item 
+auto \textbf{ begin} () const
+\item 
+\textbf{ Detectors} ()
+\item 
+auto \textbf{ end} ()
+\item 
+auto \textbf{ end} () const
+\item 
+bool \textbf{ exists} (\textbf{ Label} const \&\textbf{ label})
+\item 
+auto const  \& \textbf{ file} ()
+\item 
+auto const  \& \textbf{ file} () const
+\item 
+auto const  \& \textbf{ get} () const
+\item 
+auto const  \& \textbf{ get\+Exists\+Array} () const
+\item 
+auto const  \& \textbf{ get\+Label} (std\+::string const \&\textbf{ name})
+\item 
+auto const  \& \textbf{ get\+Labels\+Array} () const
+\item 
+auto const  \& \textbf{ get\+Name} (\textbf{ Label} const \&\textbf{ label})
+\item 
+auto const  \& \textbf{ get\+Type\+Name} (int const \&type\+\_\+i) const
+\item 
+auto const  \& \textbf{ index} (\textbf{ Label} const \&\textbf{ label}) const
+\begin{DoxyCompactList}\small\item\em Get the type index of the detector. Each type of detector has its own indexing system if you have 3 Germaniums, the Ge indexes ranges from 0 to 2) \end{DoxyCompactList}\item 
+auto const  \& \textbf{ label} (\textbf{ d\+Type} const \&\textbf{ type}, int const \&\textbf{ index})
+\begin{DoxyCompactList}\small\item\em Get the global label of a detector given its type and type index. \end{DoxyCompactList}\item 
+auto const  \& \textbf{ label} (std\+::string const \&\textbf{ name})
+\item 
+auto const  \& \textbf{ labels} () const
+\item 
+auto const  \& \textbf{ list} () const
+\item 
+void \textbf{ load} (std\+::string const \&filename)
+\begin{DoxyCompactList}\small\item\em Reads the file and extracts the list of detectors, then fills the lookup tables. \end{DoxyCompactList}\item 
+void \textbf{ make\+Arrays} ()
+\begin{DoxyCompactList}\small\item\em Fills the lookup tables. \end{DoxyCompactList}\item 
+auto const  \& \textbf{ name} (\textbf{ d\+Type} const \&\textbf{ type}, int const \&\textbf{ index})
+\begin{DoxyCompactList}\small\item\em Get the name of a detector given its type and type index. \end{DoxyCompactList}\item 
+auto const  \& \textbf{ nb\+Of\+Type} (\textbf{ d\+Type} const \&\textbf{ type})
+\begin{DoxyCompactList}\small\item\em Returns the number of detector of each type. \end{DoxyCompactList}\item 
+auto const \textbf{ nb\+Types} ()
+\begin{DoxyCompactList}\small\item\em Returns the number of types in the ID file. \end{DoxyCompactList}\item 
+auto const  \& \textbf{ number} ()
+\begin{DoxyCompactList}\small\item\em Return the number of detectors. \end{DoxyCompactList}\item 
+\textbf{ operator bool} () const \&
+\begin{DoxyCompactList}\small\item\em Returns true only of the detectors ID file has been loaded successfully. \end{DoxyCompactList}\item 
+void \textbf{ operator=} (std\+::string const \&filename)
+\item 
+auto const  \& \textbf{ operator[$\,$]} (\textbf{ Label} const \&\textbf{ label}) const
+\begin{DoxyCompactList}\small\item\em Extracts the name of the detector given its global label. \end{DoxyCompactList}\item 
+auto const  \& \textbf{ operator[$\,$]} (std\+::string const \&\textbf{ name})
+\begin{DoxyCompactList}\small\item\em Extracts the global label given the detector\textquotesingle{}s name. \end{DoxyCompactList}\item 
+void \textbf{ Print} ()
+\begin{DoxyCompactList}\small\item\em Prints out the list of labels. \end{DoxyCompactList}\item 
+void \textbf{ read\+File} (std\+::string const \&\textbf{ file})
+\begin{DoxyCompactList}\small\item\em Reads the file and extracts the list of detectors. \end{DoxyCompactList}\item 
+void \textbf{ resize} (\textbf{ ushort} const \&new\+\_\+size)
+\item 
+auto const \textbf{ size} () const
+\begin{DoxyCompactList}\small\item\em Return the value of the maximum label, i.\+e. the size of the lookup tables. \end{DoxyCompactList}\item 
+auto const  \& \textbf{ type} (\textbf{ Label} const \&\textbf{ label})
+\item 
+auto const  \& \textbf{ type\+Index} (\textbf{ d\+Type} const \&\textbf{ type})
+\item 
+auto const  \& \textbf{ type\+Index} (\textbf{ Label} const \&\textbf{ label})
+\item 
+auto const  \& \textbf{ types} () const
+\item 
+auto const  \& \textbf{ types\+Array} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static auto const  \& \textbf{ ADCBin} (\textbf{ d\+Type} const \&\textbf{ type}=\char`\"{}\char`\"{})
+\begin{DoxyCompactList}\small\item\em Get the default ADC histogram binning for each type of detectors. \end{DoxyCompactList}\item 
+static auto const  \& \textbf{ energy\+Bidim\+Bin} (\textbf{ d\+Type} const \&\textbf{ type}=\char`\"{}\char`\"{})
+\begin{DoxyCompactList}\small\item\em Get the default energy (keV) bidimensionnal histogram binning for each type of detectors. \end{DoxyCompactList}\item 
+static auto const  \& \textbf{ energy\+Bin} (\textbf{ d\+Type} const \&\textbf{ type}=\char`\"{}\char`\"{})
+\begin{DoxyCompactList}\small\item\em Get the default energy (keV) histogram binning for each type of detectors. \end{DoxyCompactList}\item 
+static auto \& \textbf{ get\+ADCBin} ()
+\begin{DoxyCompactList}\small\item\em Get the default energy (keV) bidimensionnal histogram binning for all types of detectors. \end{DoxyCompactList}\item 
+static auto \& \textbf{ get\+Bidim\+Bin} ()
+\begin{DoxyCompactList}\small\item\em Get the default energy (keV) bidimensionnal histogram binning for all types of detectors. \end{DoxyCompactList}\item 
+static auto \& \textbf{ get\+Energy\+Bin} ()
+\begin{DoxyCompactList}\small\item\em Get the default energy (keV) bidimensionnal histogram binning for all types of detectors. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ Strings} \textbf{ types\+\_\+handled} = \{\char`\"{}ge\char`\"{}, \char`\"{}bgo\char`\"{}, \char`\"{}labr\char`\"{}, \char`\"{}paris\char`\"{}, \char`\"{}dssd\char`\"{}, \char`\"{}eden\char`\"{}, \char`\"{}RF\char`\"{}, \char`\"{}default\char`\"{}\}
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ Bools} \textbf{ m\+\_\+exists}
+\item 
+std\+::string \textbf{ m\+\_\+filename}
+\item 
+bool \textbf{ m\+\_\+initialized} = false
+\item 
+std\+::unordered\+\_\+map$<$ \textbf{ d\+Type}, \textbf{ Label\+\_\+vec} $>$ \textbf{ m\+\_\+labels}
+\item 
+std\+::unordered\+\_\+map$<$ std\+::string, \textbf{ Label} $>$ \textbf{ m\+\_\+labels\+\_\+array}
+\item 
+\textbf{ Strings} \textbf{ m\+\_\+list}
+\item 
+bool \textbf{ m\+\_\+loaded} = false
+\item 
+std\+::unordered\+\_\+map$<$ \textbf{ d\+Type}, \textbf{ Strings} $>$ \textbf{ m\+\_\+names}
+\item 
+\textbf{ ushort} \textbf{ m\+\_\+nb\+\_\+detectors} = 0
+\item 
+bool \textbf{ m\+\_\+ok} = false
+\item 
+std\+::unordered\+\_\+map$<$ \textbf{ d\+Type}, \textbf{ size\+\_\+t} $>$ \textbf{ m\+\_\+type\+\_\+counter}
+\item 
+\textbf{ Strings} \textbf{ m\+\_\+types} = \textbf{ Strings}(\textbf{ SIZE\+\_\+\+LOOKUP})
+\item 
+\textbf{ Strings} \textbf{ m\+\_\+types\+\_\+\+ID}
+\item 
+std\+::unordered\+\_\+map$<$ \textbf{ d\+Type}, int $>$ \textbf{ m\+\_\+types\+\_\+index}
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::unordered\+\_\+map$<$ \textbf{ d\+Type}, \textbf{ THBinning} $>$ \textbf{ ADC\+\_\+bins}
+\item 
+static std\+::unordered\+\_\+map$<$ \textbf{ d\+Type}, \textbf{ THBinning} $>$ \textbf{ energy\+\_\+bidim\+\_\+bins}
+\item 
+static std\+::unordered\+\_\+map$<$ \textbf{ d\+Type}, \textbf{ THBinning} $>$ \textbf{ energy\+\_\+bins}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Loads the ID file and fills lookup tables. 
+
+Many lookup tables are created \+: ... Detectors\+::index(\+Label label) \+: Returns the detector\textquotesingle{}s index in its type. For instance, if there are 10 germaniums, and their labels ranges contiguously from 10 to 19, Detectors\+::index(12) = 2;
+
+Detectors\+::type(\+Label label) \+: Returns the detector\textquotesingle{}s type knowing its label. Taking previous example, Detectors\+::type(25) = \char`\"{}null\char`\"{} if there are no detector above label = 19, and Detectors\+::type(13) = \char`\"{}ge\char`\"{}; 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\label{class_detectors_a4f3fbf890600aec5e75cdd943ec274d4}} 
+\index{Detectors@{Detectors}!Detectors@{Detectors}}
+\index{Detectors@{Detectors}!Detectors@{Detectors}}
+\doxysubsubsection{Detectors()}
+{\footnotesize\ttfamily Detectors\+::\+Detectors (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\label{class_detectors_af54374260cdfa1cd60b6364f07f882b4}} 
+\index{Detectors@{Detectors}!ADCBin@{ADCBin}}
+\index{ADCBin@{ADCBin}!Detectors@{Detectors}}
+\doxysubsubsection{ADCBin()}
+{\footnotesize\ttfamily static auto const\& Detectors\+::\+ADCBin (\begin{DoxyParamCaption}\item[{\textbf{ d\+Type} const \&}]{type = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Get the default ADC histogram binning for each type of detectors. 
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_detectors_af54374260cdfa1cd60b6364f07f882b4_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_detectors_af54374260cdfa1cd60b6364f07f882b4_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_detectors_a2990dd023e93c1e50343aa47b94453a0}} 
+\index{Detectors@{Detectors}!begin@{begin}}
+\index{begin@{begin}!Detectors@{Detectors}}
+\doxysubsubsection{begin()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily auto Detectors\+::begin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_detectors_a9b89d5cf2dbdf1e56b6703cfcbc49547}} 
+\index{Detectors@{Detectors}!begin@{begin}}
+\index{begin@{begin}!Detectors@{Detectors}}
+\doxysubsubsection{begin()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily auto Detectors\+::begin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_detectors_aa93345c742983ca53dfde026c8285893}} 
+\index{Detectors@{Detectors}!end@{end}}
+\index{end@{end}!Detectors@{Detectors}}
+\doxysubsubsection{end()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily auto Detectors\+::end (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_detectors_abca6e29645c33e041e8273845f6c6dd9}} 
+\index{Detectors@{Detectors}!end@{end}}
+\index{end@{end}!Detectors@{Detectors}}
+\doxysubsubsection{end()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily auto Detectors\+::end (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_detectors_a4cc1eacca959595eb53a16b75f2d65d8}} 
+\index{Detectors@{Detectors}!energyBidimBin@{energyBidimBin}}
+\index{energyBidimBin@{energyBidimBin}!Detectors@{Detectors}}
+\doxysubsubsection{energyBidimBin()}
+{\footnotesize\ttfamily static auto const\& Detectors\+::energy\+Bidim\+Bin (\begin{DoxyParamCaption}\item[{\textbf{ d\+Type} const \&}]{type = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Get the default energy (keV) bidimensionnal histogram binning for each type of detectors. 
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_detectors_a4cc1eacca959595eb53a16b75f2d65d8_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_detectors_a4cc1eacca959595eb53a16b75f2d65d8_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_detectors_aaadeec0d94fd7daea1b8e4c9d861fbde}} 
+\index{Detectors@{Detectors}!energyBin@{energyBin}}
+\index{energyBin@{energyBin}!Detectors@{Detectors}}
+\doxysubsubsection{energyBin()}
+{\footnotesize\ttfamily static auto const\& Detectors\+::energy\+Bin (\begin{DoxyParamCaption}\item[{\textbf{ d\+Type} const \&}]{type = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Get the default energy (keV) histogram binning for each type of detectors. 
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_detectors_aaadeec0d94fd7daea1b8e4c9d861fbde_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_detectors_aaadeec0d94fd7daea1b8e4c9d861fbde_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_detectors_a47ae394beae7efa2fb8fa1a3c7f8427d}} 
+\index{Detectors@{Detectors}!exists@{exists}}
+\index{exists@{exists}!Detectors@{Detectors}}
+\doxysubsubsection{exists()}
+{\footnotesize\ttfamily bool Detectors\+::exists (\begin{DoxyParamCaption}\item[{\textbf{ Label} const \&}]{label }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_detectors_a47ae394beae7efa2fb8fa1a3c7f8427d_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_detectors_a47ae394beae7efa2fb8fa1a3c7f8427d_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_detectors_abb9cb0d9f8cc7e136ee0ed7f357ee42b}} 
+\index{Detectors@{Detectors}!file@{file}}
+\index{file@{file}!Detectors@{Detectors}}
+\doxysubsubsection{file()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily auto const\& Detectors\+::file (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_detectors_a215f3df7a89de48d67b832a3240bbfa6}} 
+\index{Detectors@{Detectors}!file@{file}}
+\index{file@{file}!Detectors@{Detectors}}
+\doxysubsubsection{file()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily auto const\& Detectors\+::file (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_detectors_ae0bd442e4f8fa32b23f890a3f25e595b}} 
+\index{Detectors@{Detectors}!get@{get}}
+\index{get@{get}!Detectors@{Detectors}}
+\doxysubsubsection{get()}
+{\footnotesize\ttfamily auto const\& Detectors\+::get (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_detectors_aba567529b262d88913de6ccb05a71a99}} 
+\index{Detectors@{Detectors}!getADCBin@{getADCBin}}
+\index{getADCBin@{getADCBin}!Detectors@{Detectors}}
+\doxysubsubsection{getADCBin()}
+{\footnotesize\ttfamily static auto\& Detectors\+::get\+ADCBin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Get the default energy (keV) bidimensionnal histogram binning for all types of detectors. 
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_detectors_aba567529b262d88913de6ccb05a71a99_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_detectors_abb012a70535ce52a84340d656a75252f}} 
+\index{Detectors@{Detectors}!getBidimBin@{getBidimBin}}
+\index{getBidimBin@{getBidimBin}!Detectors@{Detectors}}
+\doxysubsubsection{getBidimBin()}
+{\footnotesize\ttfamily static auto\& Detectors\+::get\+Bidim\+Bin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Get the default energy (keV) bidimensionnal histogram binning for all types of detectors. 
+
+\mbox{\label{class_detectors_ae1ead00f89e7fcb96cefa082f9b4e290}} 
+\index{Detectors@{Detectors}!getEnergyBin@{getEnergyBin}}
+\index{getEnergyBin@{getEnergyBin}!Detectors@{Detectors}}
+\doxysubsubsection{getEnergyBin()}
+{\footnotesize\ttfamily static auto\& Detectors\+::get\+Energy\+Bin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Get the default energy (keV) bidimensionnal histogram binning for all types of detectors. 
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_detectors_ae1ead00f89e7fcb96cefa082f9b4e290_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_detectors_a67986c6e80a0ac1fc78539eff3d52e9e}} 
+\index{Detectors@{Detectors}!getExistsArray@{getExistsArray}}
+\index{getExistsArray@{getExistsArray}!Detectors@{Detectors}}
+\doxysubsubsection{getExistsArray()}
+{\footnotesize\ttfamily auto const\& Detectors\+::get\+Exists\+Array (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_detectors_a538487678aa928ab2956e6fb40c90472}} 
+\index{Detectors@{Detectors}!getLabel@{getLabel}}
+\index{getLabel@{getLabel}!Detectors@{Detectors}}
+\doxysubsubsection{getLabel()}
+{\footnotesize\ttfamily auto const\& Detectors\+::get\+Label (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_detectors_a538487678aa928ab2956e6fb40c90472_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_detectors_a538487678aa928ab2956e6fb40c90472_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_detectors_aeadb2b9222dd4544d5035960befb2902}} 
+\index{Detectors@{Detectors}!getLabelsArray@{getLabelsArray}}
+\index{getLabelsArray@{getLabelsArray}!Detectors@{Detectors}}
+\doxysubsubsection{getLabelsArray()}
+{\footnotesize\ttfamily auto const\& Detectors\+::get\+Labels\+Array (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_detectors_a9f0298ea9621d3680607633908b1daff}} 
+\index{Detectors@{Detectors}!getName@{getName}}
+\index{getName@{getName}!Detectors@{Detectors}}
+\doxysubsubsection{getName()}
+{\footnotesize\ttfamily auto const\& Detectors\+::get\+Name (\begin{DoxyParamCaption}\item[{\textbf{ Label} const \&}]{label }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_detectors_a9f0298ea9621d3680607633908b1daff_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_detectors_a52d1ae2692c70d702883e5c1a637ce51}} 
+\index{Detectors@{Detectors}!getTypeName@{getTypeName}}
+\index{getTypeName@{getTypeName}!Detectors@{Detectors}}
+\doxysubsubsection{getTypeName()}
+{\footnotesize\ttfamily auto const\& Detectors\+::get\+Type\+Name (\begin{DoxyParamCaption}\item[{int const \&}]{type\+\_\+i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_detectors_a3c4f247022eb113c0371899060ea0199}} 
+\index{Detectors@{Detectors}!index@{index}}
+\index{index@{index}!Detectors@{Detectors}}
+\doxysubsubsection{index()}
+{\footnotesize\ttfamily auto const\& Detectors\+::index (\begin{DoxyParamCaption}\item[{\textbf{ Label} const \&}]{label }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the type index of the detector. Each type of detector has its own indexing system if you have 3 Germaniums, the Ge indexes ranges from 0 to 2) 
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_detectors_a3c4f247022eb113c0371899060ea0199_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_detectors_a3c4f247022eb113c0371899060ea0199_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_detectors_afc638e3f514370a477c6445efc11dfcb}} 
+\index{Detectors@{Detectors}!label@{label}}
+\index{label@{label}!Detectors@{Detectors}}
+\doxysubsubsection{label()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily auto const\& Detectors\+::label (\begin{DoxyParamCaption}\item[{\textbf{ d\+Type} const \&}]{type,  }\item[{int const \&}]{index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the global label of a detector given its type and type index. 
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_detectors_afc638e3f514370a477c6445efc11dfcb_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_detectors_a349500ec816bd7761de87c54b95000bc}} 
+\index{Detectors@{Detectors}!label@{label}}
+\index{label@{label}!Detectors@{Detectors}}
+\doxysubsubsection{label()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily auto const\& Detectors\+::label (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_detectors_a349500ec816bd7761de87c54b95000bc_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_detectors_a349500ec816bd7761de87c54b95000bc_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_detectors_abdba5d8991ded8844de7900d8e64d788}} 
+\index{Detectors@{Detectors}!labels@{labels}}
+\index{labels@{labels}!Detectors@{Detectors}}
+\doxysubsubsection{labels()}
+{\footnotesize\ttfamily auto const\& Detectors\+::labels (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_detectors_aae4bbbd3eb0f515868e4160a7091beef}} 
+\index{Detectors@{Detectors}!list@{list}}
+\index{list@{list}!Detectors@{Detectors}}
+\doxysubsubsection{list()}
+{\footnotesize\ttfamily auto const\& Detectors\+::list (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_detectors_a03f6e9974f958b86ddbbc4670d0209a2}} 
+\index{Detectors@{Detectors}!load@{load}}
+\index{load@{load}!Detectors@{Detectors}}
+\doxysubsubsection{load()}
+{\footnotesize\ttfamily void Detectors\+::load (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{filename }\end{DoxyParamCaption})}
+
+
+
+Reads the file and extracts the list of detectors, then fills the lookup tables. 
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_detectors_a03f6e9974f958b86ddbbc4670d0209a2_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_detectors_a03f6e9974f958b86ddbbc4670d0209a2_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_detectors_a8d5c0f2d189ddda12ed3c36f13887cfd}} 
+\index{Detectors@{Detectors}!makeArrays@{makeArrays}}
+\index{makeArrays@{makeArrays}!Detectors@{Detectors}}
+\doxysubsubsection{makeArrays()}
+{\footnotesize\ttfamily void Detectors\+::make\+Arrays (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Fills the lookup tables. 
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_detectors_a8d5c0f2d189ddda12ed3c36f13887cfd_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_detectors_a8d5c0f2d189ddda12ed3c36f13887cfd_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_detectors_afd00ee8a76386f7356a12858b1dd7c6b}} 
+\index{Detectors@{Detectors}!name@{name}}
+\index{name@{name}!Detectors@{Detectors}}
+\doxysubsubsection{name()}
+{\footnotesize\ttfamily auto const\& Detectors\+::name (\begin{DoxyParamCaption}\item[{\textbf{ d\+Type} const \&}]{type,  }\item[{int const \&}]{index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the name of a detector given its type and type index. 
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_detectors_afd00ee8a76386f7356a12858b1dd7c6b_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_detectors_afd00ee8a76386f7356a12858b1dd7c6b_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_detectors_ae5e6ff02bf3d79da3f034f7404e0677c}} 
+\index{Detectors@{Detectors}!nbOfType@{nbOfType}}
+\index{nbOfType@{nbOfType}!Detectors@{Detectors}}
+\doxysubsubsection{nbOfType()}
+{\footnotesize\ttfamily auto const\& Detectors\+::nb\+Of\+Type (\begin{DoxyParamCaption}\item[{\textbf{ d\+Type} const \&}]{type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the number of detector of each type. 
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_detectors_ae5e6ff02bf3d79da3f034f7404e0677c_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_detectors_ae5e6ff02bf3d79da3f034f7404e0677c_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_detectors_a24d220832c2f0a03a0d886e11f2c284c}} 
+\index{Detectors@{Detectors}!nbTypes@{nbTypes}}
+\index{nbTypes@{nbTypes}!Detectors@{Detectors}}
+\doxysubsubsection{nbTypes()}
+{\footnotesize\ttfamily auto const Detectors\+::nb\+Types (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the number of types in the ID file. 
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_detectors_a24d220832c2f0a03a0d886e11f2c284c_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_detectors_a4d20a642176613274e1b8a42f7a0bf01}} 
+\index{Detectors@{Detectors}!number@{number}}
+\index{number@{number}!Detectors@{Detectors}}
+\doxysubsubsection{number()}
+{\footnotesize\ttfamily auto const\& Detectors\+::number (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the number of detectors. 
+
+\mbox{\label{class_detectors_ab18d3d10214de7727199f9090fdde164}} 
+\index{Detectors@{Detectors}!operator bool@{operator bool}}
+\index{operator bool@{operator bool}!Detectors@{Detectors}}
+\doxysubsubsection{operator bool()}
+{\footnotesize\ttfamily Detectors\+::operator bool (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const \&\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns true only of the detectors ID file has been loaded successfully. 
+
+\mbox{\label{class_detectors_a0aa2791c5f5b7133fd5816d2f4dc0b56}} 
+\index{Detectors@{Detectors}!operator=@{operator=}}
+\index{operator=@{operator=}!Detectors@{Detectors}}
+\doxysubsubsection{operator=()}
+{\footnotesize\ttfamily void Detectors\+::operator= (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{filename }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_detectors_a0aa2791c5f5b7133fd5816d2f4dc0b56_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_detectors_a93874c5bc3918096ad880329b89cd632}} 
+\index{Detectors@{Detectors}!operator[]@{operator[]}}
+\index{operator[]@{operator[]}!Detectors@{Detectors}}
+\doxysubsubsection{operator[]()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily auto const\& Detectors\+::operator[$\,$] (\begin{DoxyParamCaption}\item[{\textbf{ Label} const \&}]{label }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Extracts the name of the detector given its global label. 
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_detectors_a93874c5bc3918096ad880329b89cd632_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_detectors_a9feeeb0d176405478ffc53b1eda6c9a8}} 
+\index{Detectors@{Detectors}!operator[]@{operator[]}}
+\index{operator[]@{operator[]}!Detectors@{Detectors}}
+\doxysubsubsection{operator[]()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily auto const\& Detectors\+::operator[$\,$] (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Extracts the global label given the detector\textquotesingle{}s name. 
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_detectors_a9feeeb0d176405478ffc53b1eda6c9a8_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_detectors_a66378b2d41c18a11de52e9590380028f}} 
+\index{Detectors@{Detectors}!Print@{Print}}
+\index{Print@{Print}!Detectors@{Detectors}}
+\doxysubsubsection{Print()}
+{\footnotesize\ttfamily void Detectors\+::\+Print (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Prints out the list of labels. 
+
+\mbox{\label{class_detectors_a3d5631f8fd2770b6b3a2a178130519ad}} 
+\index{Detectors@{Detectors}!readFile@{readFile}}
+\index{readFile@{readFile}!Detectors@{Detectors}}
+\doxysubsubsection{readFile()}
+{\footnotesize\ttfamily void Detectors\+::read\+File (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{file }\end{DoxyParamCaption})}
+
+
+
+Reads the file and extracts the list of detectors. 
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_detectors_a3d5631f8fd2770b6b3a2a178130519ad_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_detectors_a3d5631f8fd2770b6b3a2a178130519ad_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_detectors_af2bb20ee60f504df326b87e9ebbaef30}} 
+\index{Detectors@{Detectors}!resize@{resize}}
+\index{resize@{resize}!Detectors@{Detectors}}
+\doxysubsubsection{resize()}
+{\footnotesize\ttfamily void Detectors\+::resize (\begin{DoxyParamCaption}\item[{\textbf{ ushort} const \&}]{new\+\_\+size }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_detectors_af2bb20ee60f504df326b87e9ebbaef30_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_detectors_af2bb20ee60f504df326b87e9ebbaef30_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_detectors_a1177661fb15c9825755925faf00c8398}} 
+\index{Detectors@{Detectors}!size@{size}}
+\index{size@{size}!Detectors@{Detectors}}
+\doxysubsubsection{size()}
+{\footnotesize\ttfamily auto const Detectors\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the value of the maximum label, i.\+e. the size of the lookup tables. 
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=273pt]{class_detectors_a1177661fb15c9825755925faf00c8398_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_detectors_a1177661fb15c9825755925faf00c8398_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_detectors_a0be56517035f1272af33392665b9ff1f}} 
+\index{Detectors@{Detectors}!type@{type}}
+\index{type@{type}!Detectors@{Detectors}}
+\doxysubsubsection{type()}
+{\footnotesize\ttfamily auto const\& Detectors\+::type (\begin{DoxyParamCaption}\item[{\textbf{ Label} const \&}]{label }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_detectors_a0be56517035f1272af33392665b9ff1f_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_detectors_a0be56517035f1272af33392665b9ff1f_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_detectors_ab4d5e6cc24173a65a35788ba7c680264}} 
+\index{Detectors@{Detectors}!typeIndex@{typeIndex}}
+\index{typeIndex@{typeIndex}!Detectors@{Detectors}}
+\doxysubsubsection{typeIndex()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily auto const\& Detectors\+::type\+Index (\begin{DoxyParamCaption}\item[{\textbf{ d\+Type} const \&}]{type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_detectors_ab4d5e6cc24173a65a35788ba7c680264_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_detectors_ab4d5e6cc24173a65a35788ba7c680264_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_detectors_a8bde22f3796788ad458127147fd3a5d2}} 
+\index{Detectors@{Detectors}!typeIndex@{typeIndex}}
+\index{typeIndex@{typeIndex}!Detectors@{Detectors}}
+\doxysubsubsection{typeIndex()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily auto const\& Detectors\+::type\+Index (\begin{DoxyParamCaption}\item[{\textbf{ Label} const \&}]{label }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_detectors_a8bde22f3796788ad458127147fd3a5d2_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_detectors_a6c368aa8fe9d985fd742371179718d71}} 
+\index{Detectors@{Detectors}!types@{types}}
+\index{types@{types}!Detectors@{Detectors}}
+\doxysubsubsection{types()}
+{\footnotesize\ttfamily auto const\& Detectors\+::types (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_detectors_a6c368aa8fe9d985fd742371179718d71_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_detectors_ae462c1e1acd5b2dc7757715fd68c362d}} 
+\index{Detectors@{Detectors}!typesArray@{typesArray}}
+\index{typesArray@{typesArray}!Detectors@{Detectors}}
+\doxysubsubsection{typesArray()}
+{\footnotesize\ttfamily auto const\& Detectors\+::types\+Array (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_detectors_ae462c1e1acd5b2dc7757715fd68c362d_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\label{class_detectors_a244a6b586bda7fd0054a8217ed005019}} 
+\index{Detectors@{Detectors}!ADC\_bins@{ADC\_bins}}
+\index{ADC\_bins@{ADC\_bins}!Detectors@{Detectors}}
+\doxysubsubsection{ADC\_bins}
+{\footnotesize\ttfamily std\+::unordered\+\_\+map$<$ \textbf{ d\+Type}, \textbf{ THBinning} $>$ Detectors\+::\+ADC\+\_\+bins\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= }
+\DoxyCodeLine{\{}
+\DoxyCodeLine{  \{\textcolor{stringliteral}{"{}ge"{}}     , \{10000, 0., 200000. \}\},}
+\DoxyCodeLine{  \{\textcolor{stringliteral}{"{}bgo"{}}    , \{1000 , 0., 200000. \}\},}
+\DoxyCodeLine{  \{\textcolor{stringliteral}{"{}labr"{}}   , \{2000 , 0., 200000. \}\},}
+\DoxyCodeLine{  \{\textcolor{stringliteral}{"{}paris"{}}  , \{2000 , 0., 200000. \}\},}
+\DoxyCodeLine{  \{\textcolor{stringliteral}{"{}eden"{}}   , \{1000 , 0., 200000. \}\},}
+\DoxyCodeLine{  \{\textcolor{stringliteral}{"{}dssd"{}}   , \{1000 , 0., 200000. \}\},}
+\DoxyCodeLine{  \{\textcolor{stringliteral}{"{}default"{}}, \{10000, 0., 1000000.\}\}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\mbox{\label{class_detectors_a13bd00fc428ecb36ba850e09cc5e147c}} 
+\index{Detectors@{Detectors}!energy\_bidim\_bins@{energy\_bidim\_bins}}
+\index{energy\_bidim\_bins@{energy\_bidim\_bins}!Detectors@{Detectors}}
+\doxysubsubsection{energy\_bidim\_bins}
+{\footnotesize\ttfamily std\+::unordered\+\_\+map$<$ \textbf{ d\+Type}, \textbf{ THBinning} $>$ Detectors\+::energy\+\_\+bidim\+\_\+bins\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= }
+\DoxyCodeLine{\{}
+\DoxyCodeLine{  \{\textcolor{stringliteral}{"{}ge"{}}     , \{5000, 0., 10000.\}\},}
+\DoxyCodeLine{  \{\textcolor{stringliteral}{"{}bgo"{}}    , \{250 , 0., 10000.\}\},}
+\DoxyCodeLine{  \{\textcolor{stringliteral}{"{}labr"{}}   , \{1000, 0., 10000.\}\},}
+\DoxyCodeLine{  \{\textcolor{stringliteral}{"{}paris"{}}  , \{1000, 0., 10000.\}\},}
+\DoxyCodeLine{  \{\textcolor{stringliteral}{"{}eden"{}}   , \{1000,-\/2., 2.    \}\},}
+\DoxyCodeLine{  \{\textcolor{stringliteral}{"{}dssd"{}}   , \{200 , 0., 20000.\}\},}
+\DoxyCodeLine{  \{\textcolor{stringliteral}{"{}default"{}}, \{200 , 0., 20000.\}\}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\mbox{\label{class_detectors_af47d4b9af7b3f9e698b3e0b63a8b77eb}} 
+\index{Detectors@{Detectors}!energy\_bins@{energy\_bins}}
+\index{energy\_bins@{energy\_bins}!Detectors@{Detectors}}
+\doxysubsubsection{energy\_bins}
+{\footnotesize\ttfamily std\+::unordered\+\_\+map$<$ \textbf{ d\+Type}, \textbf{ THBinning} $>$ Detectors\+::energy\+\_\+bins\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= }
+\DoxyCodeLine{\{}
+\DoxyCodeLine{  \{\textcolor{stringliteral}{"{}ge"{}}     , \{10000, 0., 10000.\}\},}
+\DoxyCodeLine{  \{\textcolor{stringliteral}{"{}bgo"{}}    , \{1000 , 0., 10000.\}\},}
+\DoxyCodeLine{  \{\textcolor{stringliteral}{"{}labr"{}}   , \{2000 , 0., 10000.\}\},}
+\DoxyCodeLine{  \{\textcolor{stringliteral}{"{}paris"{}}  , \{2000 , 0., 10000.\}\},}
+\DoxyCodeLine{  \{\textcolor{stringliteral}{"{}eden"{}}   , \{1000 ,-\/2., 2.    \}\},}
+\DoxyCodeLine{  \{\textcolor{stringliteral}{"{}dssd"{}}   , \{1000 , 0., 20000.\}\},}
+\DoxyCodeLine{  \{\textcolor{stringliteral}{"{}default"{}}, \{1000 , 0., 50000.\}\}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\mbox{\label{class_detectors_a29d73ee6f748035ace066db47a923735}} 
+\index{Detectors@{Detectors}!m\_exists@{m\_exists}}
+\index{m\_exists@{m\_exists}!Detectors@{Detectors}}
+\doxysubsubsection{m\_exists}
+{\footnotesize\ttfamily \textbf{ Bools} Detectors\+::m\+\_\+exists\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\label{class_detectors_a28bdd4905a9dd8f89bd74e992c2d5fbd}} 
+\index{Detectors@{Detectors}!m\_filename@{m\_filename}}
+\index{m\_filename@{m\_filename}!Detectors@{Detectors}}
+\doxysubsubsection{m\_filename}
+{\footnotesize\ttfamily std\+::string Detectors\+::m\+\_\+filename\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\label{class_detectors_ab570ead47cf9719ae6f4c1e8c9285b81}} 
+\index{Detectors@{Detectors}!m\_initialized@{m\_initialized}}
+\index{m\_initialized@{m\_initialized}!Detectors@{Detectors}}
+\doxysubsubsection{m\_initialized}
+{\footnotesize\ttfamily bool Detectors\+::m\+\_\+initialized = false\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\label{class_detectors_a5a5289db11cb3ad98c96c69f58f6a6d5}} 
+\index{Detectors@{Detectors}!m\_labels@{m\_labels}}
+\index{m\_labels@{m\_labels}!Detectors@{Detectors}}
+\doxysubsubsection{m\_labels}
+{\footnotesize\ttfamily std\+::unordered\+\_\+map$<$\textbf{ d\+Type}, \textbf{ Label\+\_\+vec}$>$ Detectors\+::m\+\_\+labels\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\label{class_detectors_a8b8f4313aeec18389d1213accb50b52d}} 
+\index{Detectors@{Detectors}!m\_labels\_array@{m\_labels\_array}}
+\index{m\_labels\_array@{m\_labels\_array}!Detectors@{Detectors}}
+\doxysubsubsection{m\_labels\_array}
+{\footnotesize\ttfamily std\+::unordered\+\_\+map$<$std\+::string, \textbf{ Label}$>$ Detectors\+::m\+\_\+labels\+\_\+array\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\label{class_detectors_a6994304445c6fc6137346690683b56ec}} 
+\index{Detectors@{Detectors}!m\_list@{m\_list}}
+\index{m\_list@{m\_list}!Detectors@{Detectors}}
+\doxysubsubsection{m\_list}
+{\footnotesize\ttfamily \textbf{ Strings} Detectors\+::m\+\_\+list\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\label{class_detectors_a76926048c17f155fc444aab17233e0f8}} 
+\index{Detectors@{Detectors}!m\_loaded@{m\_loaded}}
+\index{m\_loaded@{m\_loaded}!Detectors@{Detectors}}
+\doxysubsubsection{m\_loaded}
+{\footnotesize\ttfamily bool Detectors\+::m\+\_\+loaded = false\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\label{class_detectors_a5063cdef991cb6ddbb36be3f55d50e40}} 
+\index{Detectors@{Detectors}!m\_names@{m\_names}}
+\index{m\_names@{m\_names}!Detectors@{Detectors}}
+\doxysubsubsection{m\_names}
+{\footnotesize\ttfamily std\+::unordered\+\_\+map$<$\textbf{ d\+Type}, \textbf{ Strings}$>$ Detectors\+::m\+\_\+names\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\label{class_detectors_aa765faf4ef9745156ccb29d616ff3860}} 
+\index{Detectors@{Detectors}!m\_nb\_detectors@{m\_nb\_detectors}}
+\index{m\_nb\_detectors@{m\_nb\_detectors}!Detectors@{Detectors}}
+\doxysubsubsection{m\_nb\_detectors}
+{\footnotesize\ttfamily \textbf{ ushort} Detectors\+::m\+\_\+nb\+\_\+detectors = 0\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\label{class_detectors_a601c91cb6246165a623dd99eb6c4bdc3}} 
+\index{Detectors@{Detectors}!m\_ok@{m\_ok}}
+\index{m\_ok@{m\_ok}!Detectors@{Detectors}}
+\doxysubsubsection{m\_ok}
+{\footnotesize\ttfamily bool Detectors\+::m\+\_\+ok = false\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\label{class_detectors_a661090e1c43cb00b366d7a5d642de879}} 
+\index{Detectors@{Detectors}!m\_type\_counter@{m\_type\_counter}}
+\index{m\_type\_counter@{m\_type\_counter}!Detectors@{Detectors}}
+\doxysubsubsection{m\_type\_counter}
+{\footnotesize\ttfamily std\+::unordered\+\_\+map$<$\textbf{ d\+Type}, \textbf{ size\+\_\+t}$>$ Detectors\+::m\+\_\+type\+\_\+counter\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\label{class_detectors_a5677eaffae4eea104f04c3f85e2c5fbe}} 
+\index{Detectors@{Detectors}!m\_types@{m\_types}}
+\index{m\_types@{m\_types}!Detectors@{Detectors}}
+\doxysubsubsection{m\_types}
+{\footnotesize\ttfamily \textbf{ Strings} Detectors\+::m\+\_\+types = \textbf{ Strings}(\textbf{ SIZE\+\_\+\+LOOKUP})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\label{class_detectors_a0e9964892db1d2dfdb3a8cbdd6c87aeb}} 
+\index{Detectors@{Detectors}!m\_types\_ID@{m\_types\_ID}}
+\index{m\_types\_ID@{m\_types\_ID}!Detectors@{Detectors}}
+\doxysubsubsection{m\_types\_ID}
+{\footnotesize\ttfamily \textbf{ Strings} Detectors\+::m\+\_\+types\+\_\+\+ID\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\label{class_detectors_acb3bb5bfbb60a5861b87ddc17c7466d8}} 
+\index{Detectors@{Detectors}!m\_types\_index@{m\_types\_index}}
+\index{m\_types\_index@{m\_types\_index}!Detectors@{Detectors}}
+\doxysubsubsection{m\_types\_index}
+{\footnotesize\ttfamily std\+::unordered\+\_\+map$<$\textbf{ d\+Type}, int$>$ Detectors\+::m\+\_\+types\+\_\+index\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\label{class_detectors_a930c2b917e87154c1337ecf8551a3ab4}} 
+\index{Detectors@{Detectors}!types\_handled@{types\_handled}}
+\index{types\_handled@{types\_handled}!Detectors@{Detectors}}
+\doxysubsubsection{types\_handled}
+{\footnotesize\ttfamily \textbf{ Strings} Detectors\+::types\+\_\+handled = \{\char`\"{}ge\char`\"{}, \char`\"{}bgo\char`\"{}, \char`\"{}labr\char`\"{}, \char`\"{}paris\char`\"{}, \char`\"{}dssd\char`\"{}, \char`\"{}eden\char`\"{}, \char`\"{}RF\char`\"{}, \char`\"{}default\char`\"{}\}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+lib/\+Classes/\textbf{ Detectors.\+hpp}\end{DoxyCompactItemize}

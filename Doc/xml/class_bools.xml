@@ -1,0 +1,337 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="class_bools" kind="class" language="C++" prot="public">
+    <compoundname>Bools</compoundname>
+    <includes refid="lib_co_8hpp" local="no">libCo.hpp</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_bools_1a2ac7144e4d610dde76f076eb34dc73f9" prot="private" static="no" mutable="no">
+        <type>bool *</type>
+        <definition>bool* Bools::m_data</definition>
+        <argsstring></argsstring>
+        <name>m_data</name>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/libCo.hpp" line="131" column="10" bodyfile="lib/libCo.hpp" bodystart="131" bodyend="-1"/>
+        <referencedby refid="class_bools_1a241564235788ec089ae157118d17e401" compoundref="lib_co_8hpp" startline="212" endline="212">begin</referencedby>
+        <referencedby refid="class_bools_1a88601b65a1ae703d7bbc80e4c8586530" compoundref="lib_co_8hpp" startline="136" endline="139">Bools</referencedby>
+        <referencedby refid="class_bools_1a940a216bf52d8c93e688e2810cd767e8" compoundref="lib_co_8hpp" startline="213" endline="213">end</referencedby>
+        <referencedby refid="class_bools_1ab3902a403239bd602aafd094319f3f8f" compoundref="lib_co_8hpp" startline="154" endline="162">operator=</referencedby>
+        <referencedby refid="class_bools_1afbd25d68b6e6fb096b95f56b665cf1b7" compoundref="lib_co_8hpp" startline="180" endline="182">operator[]</referencedby>
+        <referencedby refid="class_bools_1ab34b97e65a4a23ae25a8b6f746c37a9d" compoundref="lib_co_8hpp" startline="192" endline="210">resize</referencedby>
+        <referencedby refid="class_bools_1a0908affb9f95fbbcd517316c7c81bf53" compoundref="lib_co_8hpp" startline="176" endline="178">~Bools</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_bools_1a445a24b6837a4387946571ea76d95886" prot="private" static="no" mutable="no">
+        <type><ref refid="lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638" kindref="member">size_t</ref></type>
+        <definition>size_t Bools::m_size</definition>
+        <argsstring></argsstring>
+        <name>m_size</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/libCo.hpp" line="132" column="12" bodyfile="lib/libCo.hpp" bodystart="132" bodyend="-1"/>
+        <referencedby refid="class_bools_1a88601b65a1ae703d7bbc80e4c8586530" compoundref="lib_co_8hpp" startline="136" endline="139">Bools</referencedby>
+        <referencedby refid="class_bools_1a940a216bf52d8c93e688e2810cd767e8" compoundref="lib_co_8hpp" startline="213" endline="213">end</referencedby>
+        <referencedby refid="class_bools_1ab3902a403239bd602aafd094319f3f8f" compoundref="lib_co_8hpp" startline="154" endline="162">operator=</referencedby>
+        <referencedby refid="class_bools_1ab34b97e65a4a23ae25a8b6f746c37a9d" compoundref="lib_co_8hpp" startline="192" endline="210">resize</referencedby>
+        <referencedby refid="class_bools_1ad4d74f6e2266b271a8bd060ce6d0e448" compoundref="lib_co_8hpp" startline="188" endline="190">size</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_bools_1a241564235788ec089ae157118d17e401" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto Bools::begin</definition>
+        <argsstring>()</argsstring>
+        <name>begin</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/libCo.hpp" line="212" column="10" bodyfile="lib/libCo.hpp" bodystart="212" bodyend="212"/>
+        <references refid="class_bools_1a2ac7144e4d610dde76f076eb34dc73f9" compoundref="lib_co_8hpp" startline="131">m_data</references>
+      </memberdef>
+      <memberdef kind="function" id="class_bools_1adaae46464e92c6073e068b66737da266" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto Bools::begin</definition>
+        <argsstring>() const</argsstring>
+        <name>begin</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/libCo.hpp" line="215" column="10" bodyfile="lib/libCo.hpp" bodystart="215" bodyend="215"/>
+        <references refid="class_bools_1a2ac7144e4d610dde76f076eb34dc73f9" compoundref="lib_co_8hpp" startline="131">m_data</references>
+      </memberdef>
+      <memberdef kind="function" id="class_bools_1addb0b52571d27932fa8143fcb422fe9b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Bools::Bools</definition>
+        <argsstring>()</argsstring>
+        <name>Bools</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/libCo.hpp" line="135" column="5" bodyfile="lib/libCo.hpp" bodystart="135" bodyend="135"/>
+      </memberdef>
+      <memberdef kind="function" id="class_bools_1a320db9791cebe780ebd6486236f820fd" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>Bools::Bools</definition>
+        <argsstring>(Bools &amp;&amp;other) noexcept</argsstring>
+        <name>Bools</name>
+        <param>
+          <type><ref refid="class_bools" kindref="compound">Bools</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/libCo.hpp" line="148" column="5" bodyfile="lib/libCo.hpp" bodystart="148" bodyend="151"/>
+      </memberdef>
+      <memberdef kind="function" id="class_bools_1a83a4cfda502a9e83cccb5a0cefd65067" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Bools::Bools</definition>
+        <argsstring>(const Bools &amp;other)</argsstring>
+        <name>Bools</name>
+        <param>
+          <type>const <ref refid="class_bools" kindref="compound">Bools</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/libCo.hpp" line="142" column="5" bodyfile="lib/libCo.hpp" bodystart="142" bodyend="145"/>
+        <references refid="class_bools_1a2ac7144e4d610dde76f076eb34dc73f9" compoundref="lib_co_8hpp" startline="131">m_data</references>
+        <references refid="class_bools_1a445a24b6837a4387946571ea76d95886" compoundref="lib_co_8hpp" startline="132">m_size</references>
+      </memberdef>
+      <memberdef kind="function" id="class_bools_1a88601b65a1ae703d7bbc80e4c8586530" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Bools::Bools</definition>
+        <argsstring>(size_t size, bool const &amp;value=false)</argsstring>
+        <name>Bools</name>
+        <param>
+          <type><ref refid="lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638" kindref="member">size_t</ref></type>
+          <declname>size</declname>
+        </param>
+        <param>
+          <type>bool const &amp;</type>
+          <declname>value</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/libCo.hpp" line="136" column="5" bodyfile="lib/libCo.hpp" bodystart="136" bodyend="139"/>
+        <references refid="class_bools_1a2ac7144e4d610dde76f076eb34dc73f9" compoundref="lib_co_8hpp" startline="131">m_data</references>
+        <references refid="class_bools_1a445a24b6837a4387946571ea76d95886" compoundref="lib_co_8hpp" startline="132">m_size</references>
+      </memberdef>
+      <memberdef kind="function" id="class_bools_1a940a216bf52d8c93e688e2810cd767e8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto Bools::end</definition>
+        <argsstring>()</argsstring>
+        <name>end</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/libCo.hpp" line="213" column="10" bodyfile="lib/libCo.hpp" bodystart="213" bodyend="213"/>
+        <references refid="class_bools_1a2ac7144e4d610dde76f076eb34dc73f9" compoundref="lib_co_8hpp" startline="131">m_data</references>
+        <references refid="class_bools_1a445a24b6837a4387946571ea76d95886" compoundref="lib_co_8hpp" startline="132">m_size</references>
+      </memberdef>
+      <memberdef kind="function" id="class_bools_1ae285a4de44d0625f680555e524b8fb27" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto Bools::end</definition>
+        <argsstring>() const</argsstring>
+        <name>end</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/libCo.hpp" line="216" column="10" bodyfile="lib/libCo.hpp" bodystart="216" bodyend="216"/>
+        <references refid="class_bools_1a2ac7144e4d610dde76f076eb34dc73f9" compoundref="lib_co_8hpp" startline="131">m_data</references>
+        <references refid="class_bools_1a445a24b6837a4387946571ea76d95886" compoundref="lib_co_8hpp" startline="132">m_size</references>
+      </memberdef>
+      <memberdef kind="function" id="class_bools_1a28a402a253cb7cef0e58445c126554ce" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="class_bools" kindref="compound">Bools</ref> &amp;</type>
+        <definition>Bools&amp; Bools::operator=</definition>
+        <argsstring>(Bools &amp;&amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <param>
+          <type><ref refid="class_bools" kindref="compound">Bools</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/libCo.hpp" line="165" column="11" bodyfile="lib/libCo.hpp" bodystart="165" bodyend="174"/>
+        <references refid="class_bools_1a2ac7144e4d610dde76f076eb34dc73f9" compoundref="lib_co_8hpp" startline="131">m_data</references>
+        <references refid="class_bools_1a445a24b6837a4387946571ea76d95886" compoundref="lib_co_8hpp" startline="132">m_size</references>
+      </memberdef>
+      <memberdef kind="function" id="class_bools_1ab3902a403239bd602aafd094319f3f8f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_bools" kindref="compound">Bools</ref> &amp;</type>
+        <definition>Bools&amp; Bools::operator=</definition>
+        <argsstring>(const Bools &amp;other)</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="class_bools" kindref="compound">Bools</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/libCo.hpp" line="154" column="11" bodyfile="lib/libCo.hpp" bodystart="154" bodyend="162"/>
+        <references refid="class_bools_1a2ac7144e4d610dde76f076eb34dc73f9" compoundref="lib_co_8hpp" startline="131">m_data</references>
+        <references refid="class_bools_1a445a24b6837a4387946571ea76d95886" compoundref="lib_co_8hpp" startline="132">m_size</references>
+      </memberdef>
+      <memberdef kind="function" id="class_bools_1afbd25d68b6e6fb096b95f56b665cf1b7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool &amp;</type>
+        <definition>bool&amp; Bools::operator[]</definition>
+        <argsstring>(size_t const &amp;index)</argsstring>
+        <name>operator[]</name>
+        <param>
+          <type><ref refid="lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638" kindref="member">size_t</ref> const &amp;</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/libCo.hpp" line="180" column="10" bodyfile="lib/libCo.hpp" bodystart="180" bodyend="182"/>
+        <references refid="class_bools_1a2ac7144e4d610dde76f076eb34dc73f9" compoundref="lib_co_8hpp" startline="131">m_data</references>
+      </memberdef>
+      <memberdef kind="function" id="class_bools_1a0d18d7e936b556355a0ecc844a0daad3" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool const  &amp;</type>
+        <definition>bool const&amp; Bools::operator[]</definition>
+        <argsstring>(size_t const &amp;index) const</argsstring>
+        <name>operator[]</name>
+        <param>
+          <type><ref refid="lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638" kindref="member">size_t</ref> const &amp;</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/libCo.hpp" line="184" column="17" bodyfile="lib/libCo.hpp" bodystart="184" bodyend="186"/>
+        <references refid="class_bools_1a2ac7144e4d610dde76f076eb34dc73f9" compoundref="lib_co_8hpp" startline="131">m_data</references>
+      </memberdef>
+      <memberdef kind="function" id="class_bools_1ab34b97e65a4a23ae25a8b6f746c37a9d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638" kindref="member">size_t</ref> const  &amp;</type>
+        <definition>size_t const&amp; Bools::resize</definition>
+        <argsstring>(size_t size, bool const &amp;value=false)</argsstring>
+        <name>resize</name>
+        <param>
+          <type><ref refid="lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638" kindref="member">size_t</ref></type>
+          <declname>size</declname>
+        </param>
+        <param>
+          <type>bool const &amp;</type>
+          <declname>value</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/libCo.hpp" line="192" column="19" bodyfile="lib/libCo.hpp" bodystart="192" bodyend="210"/>
+        <references refid="class_bools_1a2ac7144e4d610dde76f076eb34dc73f9" compoundref="lib_co_8hpp" startline="131">m_data</references>
+        <references refid="class_bools_1a445a24b6837a4387946571ea76d95886" compoundref="lib_co_8hpp" startline="132">m_size</references>
+        <references refid="class_bools_1ad4d74f6e2266b271a8bd060ce6d0e448" compoundref="lib_co_8hpp" startline="188" endline="190">size</references>
+        <referencedby refid="class_detectors_1a3d5631f8fd2770b6b3a2a178130519ad" compoundref="_detectors_8hpp" startline="220" endline="269">Detectors::readFile</referencedby>
+        <referencedby refid="class_detectors_1af2bb20ee60f504df326b87e9ebbaef30" compoundref="_detectors_8hpp" startline="200" endline="206">Detectors::resize</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_bools_1ad4d74f6e2266b271a8bd060ce6d0e448" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638" kindref="member">size_t</ref> const  &amp;</type>
+        <definition>size_t const&amp; Bools::size</definition>
+        <argsstring>() const</argsstring>
+        <name>size</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/libCo.hpp" line="188" column="19" bodyfile="lib/libCo.hpp" bodystart="188" bodyend="190"/>
+        <references refid="class_bools_1a445a24b6837a4387946571ea76d95886" compoundref="lib_co_8hpp" startline="132">m_size</references>
+        <referencedby refid="class_m_t_t_hist_1a18ddf8bef1fdb6dfc3a95ffc76e20efb" compoundref="_m_t_t_hist_8hpp" startline="258" endline="267">MTTHist&lt; THist &gt;::reset</referencedby>
+        <referencedby refid="class_bools_1ab34b97e65a4a23ae25a8b6f746c37a9d" compoundref="lib_co_8hpp" startline="192" endline="210">resize</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_bools_1a0908affb9f95fbbcd517316c7c81bf53" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Bools::~Bools</definition>
+        <argsstring>()</argsstring>
+        <name>~Bools</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/libCo.hpp" line="176" column="5" bodyfile="lib/libCo.hpp" bodystart="176" bodyend="178"/>
+        <references refid="class_bools_1a2ac7144e4d610dde76f076eb34dc73f9" compoundref="lib_co_8hpp" startline="131">m_data</references>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="lib/libCo.hpp" line="128" column="1" bodyfile="lib/libCo.hpp" bodystart="129" bodyend="218"/>
+    <listofallmembers>
+      <member refid="class_bools_1a241564235788ec089ae157118d17e401" prot="public" virt="non-virtual"><scope>Bools</scope><name>begin</name></member>
+      <member refid="class_bools_1adaae46464e92c6073e068b66737da266" prot="public" virt="non-virtual"><scope>Bools</scope><name>begin</name></member>
+      <member refid="class_bools_1addb0b52571d27932fa8143fcb422fe9b" prot="public" virt="non-virtual"><scope>Bools</scope><name>Bools</name></member>
+      <member refid="class_bools_1a88601b65a1ae703d7bbc80e4c8586530" prot="public" virt="non-virtual"><scope>Bools</scope><name>Bools</name></member>
+      <member refid="class_bools_1a83a4cfda502a9e83cccb5a0cefd65067" prot="public" virt="non-virtual"><scope>Bools</scope><name>Bools</name></member>
+      <member refid="class_bools_1a320db9791cebe780ebd6486236f820fd" prot="public" virt="non-virtual"><scope>Bools</scope><name>Bools</name></member>
+      <member refid="class_bools_1a940a216bf52d8c93e688e2810cd767e8" prot="public" virt="non-virtual"><scope>Bools</scope><name>end</name></member>
+      <member refid="class_bools_1ae285a4de44d0625f680555e524b8fb27" prot="public" virt="non-virtual"><scope>Bools</scope><name>end</name></member>
+      <member refid="class_bools_1a2ac7144e4d610dde76f076eb34dc73f9" prot="private" virt="non-virtual"><scope>Bools</scope><name>m_data</name></member>
+      <member refid="class_bools_1a445a24b6837a4387946571ea76d95886" prot="private" virt="non-virtual"><scope>Bools</scope><name>m_size</name></member>
+      <member refid="class_bools_1ab3902a403239bd602aafd094319f3f8f" prot="public" virt="non-virtual"><scope>Bools</scope><name>operator=</name></member>
+      <member refid="class_bools_1a28a402a253cb7cef0e58445c126554ce" prot="public" virt="non-virtual"><scope>Bools</scope><name>operator=</name></member>
+      <member refid="class_bools_1afbd25d68b6e6fb096b95f56b665cf1b7" prot="public" virt="non-virtual"><scope>Bools</scope><name>operator[]</name></member>
+      <member refid="class_bools_1a0d18d7e936b556355a0ecc844a0daad3" prot="public" virt="non-virtual"><scope>Bools</scope><name>operator[]</name></member>
+      <member refid="class_bools_1ab34b97e65a4a23ae25a8b6f746c37a9d" prot="public" virt="non-virtual"><scope>Bools</scope><name>resize</name></member>
+      <member refid="class_bools_1ad4d74f6e2266b271a8bd060ce6d0e448" prot="public" virt="non-virtual"><scope>Bools</scope><name>size</name></member>
+      <member refid="class_bools_1a0908affb9f95fbbcd517316c7c81bf53" prot="public" virt="non-virtual"><scope>Bools</scope><name>~Bools</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

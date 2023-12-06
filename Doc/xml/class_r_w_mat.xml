@@ -1,0 +1,530 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="class_r_w_mat" kind="class" language="C++" prot="public">
+    <compoundname>RWMat</compoundname>
+    <includes refid="_r_w_mat_8hxx" local="no">RWMat.hxx</includes>
+      <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="class_r_w_mat_1ab4ce18606ed04d40b50ff6b8f6af6a21" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool RWMat::deleted</definition>
+        <argsstring></argsstring>
+        <name>deleted</name>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/RWMat.hxx" line="46" column="8" bodyfile="lib/Classes/RWMat.hxx" bodystart="46" bodyend="-1"/>
+        <referencedby refid="class_r_w_mat_1add7fb5d29a3eda4401b94481bcddc896" compoundref="_r_w_mat_8hxx" startline="104" endline="116">~RWMat</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_r_w_mat_1a4208d4292b829b19a94c1d089cf7b2c5" prot="protected" static="no" mutable="no">
+        <type>double</type>
+        <definition>double RWMat::fMaxCounts</definition>
+        <argsstring></argsstring>
+        <name>fMaxCounts</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/RWMat.hxx" line="44" column="7" bodyfile="lib/Classes/RWMat.hxx" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_r_w_mat_1a1f1ba15012123f1e9300198569dfc41d" prot="protected" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string RWMat::fName</definition>
+        <argsstring></argsstring>
+        <name>fName</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/RWMat.hxx" line="41" column="13" bodyfile="lib/Classes/RWMat.hxx" bodystart="41" bodyend="-1"/>
+        <referencedby refid="class_r_w_mat_1ae8a3886033955806c9e13a98064e9faa" compoundref="_r_w_mat_8hxx" startline="123" endline="146">Read</referencedby>
+        <referencedby refid="class_r_w_mat_1a2a38f63e3061d82c63f8d87227bef093" compoundref="_r_w_mat_8hxx" startline="76" endline="102">Reset</referencedby>
+        <referencedby refid="class_r_w_mat_1ad245f6dc989a954229821900e5c17458" compoundref="_r_w_mat_8hxx" startline="49" endline="55">RWMat</referencedby>
+        <referencedby refid="class_r_w_mat_1ab155902ca767a777680d3196661a7878" compoundref="_r_w_mat_8hxx" startline="148" endline="177">Write</referencedby>
+        <referencedby refid="class_r_w_mat_1add7fb5d29a3eda4401b94481bcddc896" compoundref="_r_w_mat_8hxx" startline="104" endline="116">~RWMat</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_r_w_mat_1a078fa06934beca6a0b26e8d390b47502" prot="protected" static="no" mutable="no">
+        <type>unsigned short</type>
+        <definition>unsigned short RWMat::fNChannels</definition>
+        <argsstring></argsstring>
+        <name>fNChannels</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/RWMat.hxx" line="40" column="16" bodyfile="lib/Classes/RWMat.hxx" bodystart="40" bodyend="-1"/>
+        <referencedby refid="class_r_w_mat_1ac6ba02395cf6ef6abee70690be8080f3" compoundref="_r_w_mat_8hxx" startline="179" endline="186">Add</referencedby>
+        <referencedby refid="class_r_w_mat_1ace8b6917a8fbc9501a743cf4466b08c6" compoundref="_r_w_mat_8hxx" startline="118" endline="121">Fill</referencedby>
+        <referencedby refid="class_r_w_mat_1a031953fd22b694722f332661ed130110" compoundref="_r_w_mat_8hxx" startline="230" endline="245">FindMinChan</referencedby>
+        <referencedby refid="class_r_w_mat_1af756111c15613e541d22447dde9addc2" compoundref="_r_w_mat_8hxx" startline="210" endline="228">FindMinMax</referencedby>
+        <referencedby refid="class_r_w_mat_1a085345e7c3f8e7c33a2551376bf9d985" compoundref="_r_w_mat_8hxx" startline="188" endline="193">Integral</referencedby>
+        <referencedby refid="class_r_w_mat_1ae8a3886033955806c9e13a98064e9faa" compoundref="_r_w_mat_8hxx" startline="123" endline="146">Read</referencedby>
+        <referencedby refid="class_r_w_mat_1a2a38f63e3061d82c63f8d87227bef093" compoundref="_r_w_mat_8hxx" startline="76" endline="102">Reset</referencedby>
+        <referencedby refid="class_r_w_mat_1a218cbcc341e23f37e9398c038d9353e8" compoundref="_r_w_mat_8hxx" startline="196" endline="208">ReSymmetrise</referencedby>
+        <referencedby refid="class_r_w_mat_1ad245f6dc989a954229821900e5c17458" compoundref="_r_w_mat_8hxx" startline="49" endline="55">RWMat</referencedby>
+        <referencedby refid="class_r_w_mat_1ab155902ca767a777680d3196661a7878" compoundref="_r_w_mat_8hxx" startline="148" endline="177">Write</referencedby>
+        <referencedby refid="class_r_w_mat_1add7fb5d29a3eda4401b94481bcddc896" compoundref="_r_w_mat_8hxx" startline="104" endline="116">~RWMat</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_r_w_mat_1aa0e60afd074b20cdd737fafcd3fced37" prot="protected" static="no" mutable="no">
+        <type>int **</type>
+        <definition>int** RWMat::fRWMat</definition>
+        <argsstring></argsstring>
+        <name>fRWMat</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/RWMat.hxx" line="42" column="6" bodyfile="lib/Classes/RWMat.hxx" bodystart="42" bodyend="-1"/>
+        <referencedby refid="class_r_w_mat_1ac6ba02395cf6ef6abee70690be8080f3" compoundref="_r_w_mat_8hxx" startline="179" endline="186">Add</referencedby>
+        <referencedby refid="class_r_w_mat_1ace8b6917a8fbc9501a743cf4466b08c6" compoundref="_r_w_mat_8hxx" startline="118" endline="121">Fill</referencedby>
+        <referencedby refid="class_r_w_mat_1a031953fd22b694722f332661ed130110" compoundref="_r_w_mat_8hxx" startline="230" endline="245">FindMinChan</referencedby>
+        <referencedby refid="class_r_w_mat_1af756111c15613e541d22447dde9addc2" compoundref="_r_w_mat_8hxx" startline="210" endline="228">FindMinMax</referencedby>
+        <referencedby refid="class_r_w_mat_1a9079d6bdafb40bcf8fc84fee35d5f4b4" compoundref="_r_w_mat_8hxx" startline="29" endline="29">Get</referencedby>
+        <referencedby refid="class_r_w_mat_1a085345e7c3f8e7c33a2551376bf9d985" compoundref="_r_w_mat_8hxx" startline="188" endline="193">Integral</referencedby>
+        <referencedby refid="class_r_w_mat_1ae8a3886033955806c9e13a98064e9faa" compoundref="_r_w_mat_8hxx" startline="123" endline="146">Read</referencedby>
+        <referencedby refid="class_r_w_mat_1a2a38f63e3061d82c63f8d87227bef093" compoundref="_r_w_mat_8hxx" startline="76" endline="102">Reset</referencedby>
+        <referencedby refid="class_r_w_mat_1a218cbcc341e23f37e9398c038d9353e8" compoundref="_r_w_mat_8hxx" startline="196" endline="208">ReSymmetrise</referencedby>
+        <referencedby refid="class_r_w_mat_1ad245f6dc989a954229821900e5c17458" compoundref="_r_w_mat_8hxx" startline="49" endline="55">RWMat</referencedby>
+        <referencedby refid="class_r_w_mat_1a42bd9b2702bcac07a1a332ef1eebb0b6" compoundref="_r_w_mat_8hxx" startline="30" endline="30">Set</referencedby>
+        <referencedby refid="class_r_w_mat_1ab155902ca767a777680d3196661a7878" compoundref="_r_w_mat_8hxx" startline="148" endline="177">Write</referencedby>
+        <referencedby refid="class_r_w_mat_1add7fb5d29a3eda4401b94481bcddc896" compoundref="_r_w_mat_8hxx" startline="104" endline="116">~RWMat</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_r_w_mat_1ac474b466b02ad230cef4547e636cb6ab" prot="protected" static="no" mutable="no">
+        <type>double</type>
+        <definition>double RWMat::fTotalCounts</definition>
+        <argsstring></argsstring>
+        <name>fTotalCounts</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/RWMat.hxx" line="43" column="7" bodyfile="lib/Classes/RWMat.hxx" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_r_w_mat_1a0ec72e725999c7216f1a76ac7d145e9e" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool RWMat::m_ok</definition>
+        <argsstring></argsstring>
+        <name>m_ok</name>
+        <initializer>= true</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/RWMat.hxx" line="45" column="8" bodyfile="lib/Classes/RWMat.hxx" bodystart="45" bodyend="-1"/>
+        <referencedby refid="class_r_w_mat_1a2a38f63e3061d82c63f8d87227bef093" compoundref="_r_w_mat_8hxx" startline="76" endline="102">Reset</referencedby>
+        <referencedby refid="class_r_w_mat_1a2e77ce21675eb416b09dd3c9911be13b" compoundref="_r_w_mat_8hxx" startline="58" endline="68">RWMat</referencedby>
+        <referencedby refid="class_r_w_mat_1ab155902ca767a777680d3196661a7878" compoundref="_r_w_mat_8hxx" startline="148" endline="177">Write</referencedby>
+        <referencedby refid="class_r_w_mat_1add7fb5d29a3eda4401b94481bcddc896" compoundref="_r_w_mat_8hxx" startline="104" endline="116">~RWMat</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_r_w_mat_1ac6ba02395cf6ef6abee70690be8080f3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_r_w_mat" kindref="compound">RWMat</ref> *</type>
+        <definition>RWMat * RWMat::Add</definition>
+        <argsstring>(RWMat *Matrix, double val)</argsstring>
+        <name>Add</name>
+        <param>
+          <type><ref refid="class_r_w_mat" kindref="compound">RWMat</ref> *</type>
+          <declname>Matrix</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>val</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/RWMat.hxx" line="33" column="7" bodyfile="lib/Classes/RWMat.hxx" bodystart="179" bodyend="186"/>
+        <references refid="class_r_w_mat_1a078fa06934beca6a0b26e8d390b47502" compoundref="_r_w_mat_8hxx" startline="40">fNChannels</references>
+        <references refid="class_r_w_mat_1aa0e60afd074b20cdd737fafcd3fced37" compoundref="_r_w_mat_8hxx" startline="42">fRWMat</references>
+        <references refid="class_r_w_mat_1a9079d6bdafb40bcf8fc84fee35d5f4b4" compoundref="_r_w_mat_8hxx" startline="29" endline="29">Get</references>
+        <references refid="class_r_w_mat_1ad245f6dc989a954229821900e5c17458" compoundref="_r_w_mat_8hxx" startline="49" endline="55">RWMat</references>
+        <references refid="class_r_w_mat_1a42bd9b2702bcac07a1a332ef1eebb0b6" compoundref="_r_w_mat_8hxx" startline="30" endline="30">Set</references>
+      </memberdef>
+      <memberdef kind="function" id="class_r_w_mat_1ace8b6917a8fbc9501a743cf4466b08c6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void RWMat::Fill</definition>
+        <argsstring>(unsigned short i, unsigned short j)</argsstring>
+        <name>Fill</name>
+        <param>
+          <type>unsigned short</type>
+          <declname>i</declname>
+        </param>
+        <param>
+          <type>unsigned short</type>
+          <declname>j</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/RWMat.hxx" line="32" column="6" bodyfile="lib/Classes/RWMat.hxx" bodystart="118" bodyend="121"/>
+        <references refid="class_r_w_mat_1a078fa06934beca6a0b26e8d390b47502" compoundref="_r_w_mat_8hxx" startline="40">fNChannels</references>
+        <references refid="class_r_w_mat_1aa0e60afd074b20cdd737fafcd3fced37" compoundref="_r_w_mat_8hxx" startline="42">fRWMat</references>
+      </memberdef>
+      <memberdef kind="function" id="class_r_w_mat_1a031953fd22b694722f332661ed130110" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int RWMat::FindMinChan</definition>
+        <argsstring>()</argsstring>
+        <name>FindMinChan</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/RWMat.hxx" line="37" column="5" bodyfile="lib/Classes/RWMat.hxx" bodystart="230" bodyend="245"/>
+        <references refid="class_r_w_mat_1a078fa06934beca6a0b26e8d390b47502" compoundref="_r_w_mat_8hxx" startline="40">fNChannels</references>
+        <references refid="class_r_w_mat_1aa0e60afd074b20cdd737fafcd3fced37" compoundref="_r_w_mat_8hxx" startline="42">fRWMat</references>
+      </memberdef>
+      <memberdef kind="function" id="class_r_w_mat_1af756111c15613e541d22447dde9addc2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double RWMat::FindMinMax</definition>
+        <argsstring>()</argsstring>
+        <name>FindMinMax</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/RWMat.hxx" line="36" column="8" bodyfile="lib/Classes/RWMat.hxx" bodystart="210" bodyend="228"/>
+        <references refid="class_r_w_mat_1a078fa06934beca6a0b26e8d390b47502" compoundref="_r_w_mat_8hxx" startline="40">fNChannels</references>
+        <references refid="class_r_w_mat_1aa0e60afd074b20cdd737fafcd3fced37" compoundref="_r_w_mat_8hxx" startline="42">fRWMat</references>
+      </memberdef>
+      <memberdef kind="function" id="class_r_w_mat_1a9079d6bdafb40bcf8fc84fee35d5f4b4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double RWMat::Get</definition>
+        <argsstring>(unsigned short i, unsigned short j)</argsstring>
+        <name>Get</name>
+        <param>
+          <type>unsigned short</type>
+          <declname>i</declname>
+        </param>
+        <param>
+          <type>unsigned short</type>
+          <declname>j</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/RWMat.hxx" line="29" column="8" bodyfile="lib/Classes/RWMat.hxx" bodystart="29" bodyend="29"/>
+        <references refid="class_r_w_mat_1aa0e60afd074b20cdd737fafcd3fced37" compoundref="_r_w_mat_8hxx" startline="42">fRWMat</references>
+        <referencedby refid="class_r_w_mat_1ac6ba02395cf6ef6abee70690be8080f3" compoundref="_r_w_mat_8hxx" startline="179" endline="186">Add</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_r_w_mat_1a085345e7c3f8e7c33a2551376bf9d985" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double RWMat::Integral</definition>
+        <argsstring>()</argsstring>
+        <name>Integral</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/RWMat.hxx" line="34" column="8" bodyfile="lib/Classes/RWMat.hxx" bodystart="188" bodyend="193"/>
+        <references refid="class_r_w_mat_1a078fa06934beca6a0b26e8d390b47502" compoundref="_r_w_mat_8hxx" startline="40">fNChannels</references>
+        <references refid="class_r_w_mat_1aa0e60afd074b20cdd737fafcd3fced37" compoundref="_r_w_mat_8hxx" startline="42">fRWMat</references>
+        <referencedby refid="class_r_w_mat_1ab155902ca767a777680d3196661a7878" compoundref="_r_w_mat_8hxx" startline="148" endline="177">Write</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_r_w_mat_1ae8a3886033955806c9e13a98064e9faa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void RWMat::Read</definition>
+        <argsstring>(std::string Filename=&quot;&quot;, bool IsInteger=true)</argsstring>
+        <name>Read</name>
+        <param>
+          <type>std::string</type>
+          <declname>Filename</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>IsInteger</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/RWMat.hxx" line="28" column="6" bodyfile="lib/Classes/RWMat.hxx" bodystart="123" bodyend="146"/>
+        <references refid="class_r_w_mat_1a1f1ba15012123f1e9300198569dfc41d" compoundref="_r_w_mat_8hxx" startline="41">fName</references>
+        <references refid="class_r_w_mat_1a078fa06934beca6a0b26e8d390b47502" compoundref="_r_w_mat_8hxx" startline="40">fNChannels</references>
+        <references refid="class_r_w_mat_1aa0e60afd074b20cdd737fafcd3fced37" compoundref="_r_w_mat_8hxx" startline="42">fRWMat</references>
+      </memberdef>
+      <memberdef kind="function" id="class_r_w_mat_1a2a38f63e3061d82c63f8d87227bef093" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class THist</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void RWMat::Reset</definition>
+        <argsstring>(THist *RootMat)</argsstring>
+        <name>Reset</name>
+        <param>
+          <type>THist *</type>
+          <declname>RootMat</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/RWMat.hxx" line="26" column="8" bodyfile="lib/Classes/RWMat.hxx" bodystart="76" bodyend="102"/>
+        <references refid="class_r_w_mat_1a1f1ba15012123f1e9300198569dfc41d" compoundref="_r_w_mat_8hxx" startline="41">fName</references>
+        <references refid="class_r_w_mat_1a078fa06934beca6a0b26e8d390b47502" compoundref="_r_w_mat_8hxx" startline="40">fNChannels</references>
+        <references refid="class_r_w_mat_1aa0e60afd074b20cdd737fafcd3fced37" compoundref="_r_w_mat_8hxx" startline="42">fRWMat</references>
+        <references refid="class_r_w_mat_1a0ec72e725999c7216f1a76ac7d145e9e" compoundref="_r_w_mat_8hxx" startline="45">m_ok</references>
+        <references refid="_histogramor_8hpp_1ab48a2fa7184e6354788989602c8c8c29">print</references>
+        <referencedby refid="class_r_w_mat_1a2e77ce21675eb416b09dd3c9911be13b" compoundref="_r_w_mat_8hxx" startline="58" endline="68">RWMat</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_r_w_mat_1a218cbcc341e23f37e9398c038d9353e8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void RWMat::ReSymmetrise</definition>
+        <argsstring>()</argsstring>
+        <name>ReSymmetrise</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/RWMat.hxx" line="35" column="6" bodyfile="lib/Classes/RWMat.hxx" bodystart="196" bodyend="208"/>
+        <references refid="class_r_w_mat_1a078fa06934beca6a0b26e8d390b47502" compoundref="_r_w_mat_8hxx" startline="40">fNChannels</references>
+        <references refid="class_r_w_mat_1aa0e60afd074b20cdd737fafcd3fced37" compoundref="_r_w_mat_8hxx" startline="42">fRWMat</references>
+      </memberdef>
+      <memberdef kind="function" id="class_r_w_mat_1a2e77ce21675eb416b09dd3c9911be13b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class T</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>RWMat::RWMat</definition>
+        <argsstring>(MTTHist&lt; T &gt; &amp;MTRootMat)</argsstring>
+        <name>RWMat</name>
+        <param>
+          <type><ref refid="class_m_t_t_hist" kindref="compound">MTTHist</ref>&lt; T &gt; &amp;</type>
+          <declname>MTRootMat</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/RWMat.hxx" line="23" column="1" bodyfile="lib/Classes/RWMat.hxx" bodystart="58" bodyend="68"/>
+        <references refid="class_m_t_t_hist_1a9c2f7d05c9f8506382211635b35bd97b" compoundref="_m_t_t_hist_8hpp" startline="312" endline="312">MTTHist&lt; THist &gt;::get</references>
+        <references refid="class_m_t_t_hist_1a317a4a786844491e45a270e87acd1e89" compoundref="_m_t_t_hist_8hpp" startline="332" endline="332">MTTHist&lt; THist &gt;::GetName</references>
+        <references refid="class_m_t_t_hist_1a5c8a398dfdd3fad0a4529453caf93bd2" compoundref="_m_t_t_hist_8hpp" startline="328" endline="328">MTTHist&lt; THist &gt;::Integral</references>
+        <references refid="class_r_w_mat_1a0ec72e725999c7216f1a76ac7d145e9e" compoundref="_r_w_mat_8hxx" startline="45">m_ok</references>
+        <references refid="class_m_t_t_hist_1a7c92589542fe14a28350712bab17c7ff" compoundref="_m_t_t_hist_8hpp" startline="476" endline="496">MTTHist&lt; THist &gt;::Merge</references>
+        <references refid="_histogramor_8hpp_1ab48a2fa7184e6354788989602c8c8c29">print</references>
+        <references refid="class_r_w_mat_1a2a38f63e3061d82c63f8d87227bef093" compoundref="_r_w_mat_8hxx" startline="76" endline="102">Reset</references>
+      </memberdef>
+      <memberdef kind="function" id="class_r_w_mat_1ad245f6dc989a954229821900e5c17458" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>RWMat::RWMat</definition>
+        <argsstring>(std::string name=&quot;test.m4b&quot;, int nchans=4096)</argsstring>
+        <name>RWMat</name>
+        <param>
+          <type>std::string</type>
+          <declname>name</declname>
+          <defval>&quot;test.m4b&quot;</defval>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nchans</declname>
+          <defval>4096</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/RWMat.hxx" line="20" column="1" bodyfile="lib/Classes/RWMat.hxx" bodystart="49" bodyend="55"/>
+        <references refid="class_r_w_mat_1a1f1ba15012123f1e9300198569dfc41d" compoundref="_r_w_mat_8hxx" startline="41">fName</references>
+        <references refid="class_r_w_mat_1a078fa06934beca6a0b26e8d390b47502" compoundref="_r_w_mat_8hxx" startline="40">fNChannels</references>
+        <references refid="class_r_w_mat_1aa0e60afd074b20cdd737fafcd3fced37" compoundref="_r_w_mat_8hxx" startline="42">fRWMat</references>
+        <referencedby refid="class_r_w_mat_1ac6ba02395cf6ef6abee70690be8080f3" compoundref="_r_w_mat_8hxx" startline="179" endline="186">Add</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_r_w_mat_1a25c4d6ab84120b88df33e44a3539988d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>RWMat::RWMat</definition>
+        <argsstring>(TH2F *RootMat)</argsstring>
+        <name>RWMat</name>
+        <param>
+          <type>TH2F *</type>
+          <declname>RootMat</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/RWMat.hxx" line="21" column="1" bodyfile="lib/Classes/RWMat.hxx" bodystart="70" bodyend="73"/>
+        <references refid="class_r_w_mat_1a2a38f63e3061d82c63f8d87227bef093" compoundref="_r_w_mat_8hxx" startline="76" endline="102">Reset</references>
+      </memberdef>
+      <memberdef kind="function" id="class_r_w_mat_1addc9b12da9c59cb419e487ab133b163e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void RWMat::Set</definition>
+        <argsstring>(unsigned short i, unsigned short j, double val)</argsstring>
+        <name>Set</name>
+        <param>
+          <type>unsigned short</type>
+          <declname>i</declname>
+        </param>
+        <param>
+          <type>unsigned short</type>
+          <declname>j</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>val</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/RWMat.hxx" line="31" column="6" bodyfile="lib/Classes/RWMat.hxx" bodystart="31" bodyend="31"/>
+        <references refid="class_r_w_mat_1aa0e60afd074b20cdd737fafcd3fced37" compoundref="_r_w_mat_8hxx" startline="42">fRWMat</references>
+      </memberdef>
+      <memberdef kind="function" id="class_r_w_mat_1a42bd9b2702bcac07a1a332ef1eebb0b6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void RWMat::Set</definition>
+        <argsstring>(unsigned short i, unsigned short j, int val)</argsstring>
+        <name>Set</name>
+        <param>
+          <type>unsigned short</type>
+          <declname>i</declname>
+        </param>
+        <param>
+          <type>unsigned short</type>
+          <declname>j</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>val</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/RWMat.hxx" line="30" column="6" bodyfile="lib/Classes/RWMat.hxx" bodystart="30" bodyend="30"/>
+        <references refid="class_r_w_mat_1aa0e60afd074b20cdd737fafcd3fced37" compoundref="_r_w_mat_8hxx" startline="42">fRWMat</references>
+        <referencedby refid="class_r_w_mat_1ac6ba02395cf6ef6abee70690be8080f3" compoundref="_r_w_mat_8hxx" startline="179" endline="186">Add</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_r_w_mat_1ab155902ca767a777680d3196661a7878" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void RWMat::Write</definition>
+        <argsstring>(std::string name=&quot;&quot;, std::string path=&quot;./&quot;)</argsstring>
+        <name>Write</name>
+        <param>
+          <type>std::string</type>
+          <declname>name</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>path</declname>
+          <defval>&quot;./&quot;</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/RWMat.hxx" line="27" column="6" bodyfile="lib/Classes/RWMat.hxx" bodystart="148" bodyend="177"/>
+        <references refid="class_r_w_mat_1a1f1ba15012123f1e9300198569dfc41d" compoundref="_r_w_mat_8hxx" startline="41">fName</references>
+        <references refid="class_r_w_mat_1a078fa06934beca6a0b26e8d390b47502" compoundref="_r_w_mat_8hxx" startline="40">fNChannels</references>
+        <references refid="class_r_w_mat_1aa0e60afd074b20cdd737fafcd3fced37" compoundref="_r_w_mat_8hxx" startline="42">fRWMat</references>
+        <references refid="class_r_w_mat_1a085345e7c3f8e7c33a2551376bf9d985" compoundref="_r_w_mat_8hxx" startline="188" endline="193">Integral</references>
+        <references refid="class_r_w_mat_1a0ec72e725999c7216f1a76ac7d145e9e" compoundref="_r_w_mat_8hxx" startline="45">m_ok</references>
+        <references refid="_histogramor_8hpp_1ab48a2fa7184e6354788989602c8c8c29">print</references>
+      </memberdef>
+      <memberdef kind="function" id="class_r_w_mat_1add7fb5d29a3eda4401b94481bcddc896" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>RWMat::~RWMat</definition>
+        <argsstring>()</argsstring>
+        <name>~RWMat</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/RWMat.hxx" line="24" column="1" bodyfile="lib/Classes/RWMat.hxx" bodystart="104" bodyend="116"/>
+        <references refid="class_r_w_mat_1ab4ce18606ed04d40b50ff6b8f6af6a21" compoundref="_r_w_mat_8hxx" startline="46">deleted</references>
+        <references refid="class_r_w_mat_1a1f1ba15012123f1e9300198569dfc41d" compoundref="_r_w_mat_8hxx" startline="41">fName</references>
+        <references refid="class_r_w_mat_1a078fa06934beca6a0b26e8d390b47502" compoundref="_r_w_mat_8hxx" startline="40">fNChannels</references>
+        <references refid="class_r_w_mat_1aa0e60afd074b20cdd737fafcd3fced37" compoundref="_r_w_mat_8hxx" startline="42">fRWMat</references>
+        <references refid="class_r_w_mat_1a0ec72e725999c7216f1a76ac7d145e9e" compoundref="_r_w_mat_8hxx" startline="45">m_ok</references>
+        <references refid="_histogramor_8hpp_1ab48a2fa7184e6354788989602c8c8c29">print</references>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="lib/Classes/RWMat.hxx" line="17" column="1" bodyfile="lib/Classes/RWMat.hxx" bodystart="18" bodyend="47"/>
+    <listofallmembers>
+      <member refid="class_r_w_mat_1ac6ba02395cf6ef6abee70690be8080f3" prot="public" virt="non-virtual"><scope>RWMat</scope><name>Add</name></member>
+      <member refid="class_r_w_mat_1ab4ce18606ed04d40b50ff6b8f6af6a21" prot="protected" virt="non-virtual"><scope>RWMat</scope><name>deleted</name></member>
+      <member refid="class_r_w_mat_1ace8b6917a8fbc9501a743cf4466b08c6" prot="public" virt="non-virtual"><scope>RWMat</scope><name>Fill</name></member>
+      <member refid="class_r_w_mat_1a031953fd22b694722f332661ed130110" prot="public" virt="non-virtual"><scope>RWMat</scope><name>FindMinChan</name></member>
+      <member refid="class_r_w_mat_1af756111c15613e541d22447dde9addc2" prot="public" virt="non-virtual"><scope>RWMat</scope><name>FindMinMax</name></member>
+      <member refid="class_r_w_mat_1a4208d4292b829b19a94c1d089cf7b2c5" prot="protected" virt="non-virtual"><scope>RWMat</scope><name>fMaxCounts</name></member>
+      <member refid="class_r_w_mat_1a1f1ba15012123f1e9300198569dfc41d" prot="protected" virt="non-virtual"><scope>RWMat</scope><name>fName</name></member>
+      <member refid="class_r_w_mat_1a078fa06934beca6a0b26e8d390b47502" prot="protected" virt="non-virtual"><scope>RWMat</scope><name>fNChannels</name></member>
+      <member refid="class_r_w_mat_1aa0e60afd074b20cdd737fafcd3fced37" prot="protected" virt="non-virtual"><scope>RWMat</scope><name>fRWMat</name></member>
+      <member refid="class_r_w_mat_1ac474b466b02ad230cef4547e636cb6ab" prot="protected" virt="non-virtual"><scope>RWMat</scope><name>fTotalCounts</name></member>
+      <member refid="class_r_w_mat_1a9079d6bdafb40bcf8fc84fee35d5f4b4" prot="public" virt="non-virtual"><scope>RWMat</scope><name>Get</name></member>
+      <member refid="class_r_w_mat_1a085345e7c3f8e7c33a2551376bf9d985" prot="public" virt="non-virtual"><scope>RWMat</scope><name>Integral</name></member>
+      <member refid="class_r_w_mat_1a0ec72e725999c7216f1a76ac7d145e9e" prot="protected" virt="non-virtual"><scope>RWMat</scope><name>m_ok</name></member>
+      <member refid="class_r_w_mat_1ae8a3886033955806c9e13a98064e9faa" prot="public" virt="non-virtual"><scope>RWMat</scope><name>Read</name></member>
+      <member refid="class_r_w_mat_1a2a38f63e3061d82c63f8d87227bef093" prot="public" virt="non-virtual"><scope>RWMat</scope><name>Reset</name></member>
+      <member refid="class_r_w_mat_1a218cbcc341e23f37e9398c038d9353e8" prot="public" virt="non-virtual"><scope>RWMat</scope><name>ReSymmetrise</name></member>
+      <member refid="class_r_w_mat_1ad245f6dc989a954229821900e5c17458" prot="public" virt="non-virtual"><scope>RWMat</scope><name>RWMat</name></member>
+      <member refid="class_r_w_mat_1a25c4d6ab84120b88df33e44a3539988d" prot="public" virt="non-virtual"><scope>RWMat</scope><name>RWMat</name></member>
+      <member refid="class_r_w_mat_1a2e77ce21675eb416b09dd3c9911be13b" prot="public" virt="non-virtual"><scope>RWMat</scope><name>RWMat</name></member>
+      <member refid="class_r_w_mat_1a42bd9b2702bcac07a1a332ef1eebb0b6" prot="public" virt="non-virtual"><scope>RWMat</scope><name>Set</name></member>
+      <member refid="class_r_w_mat_1addc9b12da9c59cb419e487ab133b163e" prot="public" virt="non-virtual"><scope>RWMat</scope><name>Set</name></member>
+      <member refid="class_r_w_mat_1ab155902ca767a777680d3196661a7878" prot="public" virt="non-virtual"><scope>RWMat</scope><name>Write</name></member>
+      <member refid="class_r_w_mat_1add7fb5d29a3eda4401b94481bcddc896" prot="public" virt="non-virtual"><scope>RWMat</scope><name>~RWMat</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

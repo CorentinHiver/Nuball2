@@ -1,0 +1,5 @@
+<map id="Timeshifts::setTimeWindow_ns" name="Timeshifts::setTimeWindow_ns">
+<area shape="rect" id="node1" title="Setup the time window for the coincidence in ns." alt="" coords="5,31,231,57"/>
+<area shape="rect" id="node2" href="$_histogramor_8hpp.html#ab48a2fa7184e6354788989602c8c8c29" title=" " alt="" coords="297,5,349,32"/>
+<area shape="rect" id="node3" href="$_hit_8hpp.html#a4ea1ea3a29989c67afc2c4db41e36b15" title="Casts a number into unsigned Time." alt="" coords="279,56,368,83"/>
+</map>

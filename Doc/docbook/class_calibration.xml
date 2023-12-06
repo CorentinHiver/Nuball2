@@ -1,0 +1,996 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_class_calibration" xml:lang="en-US">
+<title>Calibration Class Reference</title>
+<indexterm><primary>Calibration</primary></indexterm>
+<para>
+<computeroutput>#include &lt;Calibration.hpp&gt;</computeroutput>
+</para>
+Collaboration diagram for Calibration:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_calibration__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>struct <link linkend="_struct_calibration_1_1histograms">histograms</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_class_calibration_1ae6bbaf8b283a345c9936a907fcba1849">analyse</link> (std::string const &amp;source=&quot;152Eu&quot;)</para>
+
+<para>Analyse the spectra to extract calibration coefficients. </para>
+</listitem>
+            <listitem><para>void <link linkend="_class_calibration_1aa7e921cbc724d97d1a3ef30a4f988e63">calculate</link> (std::string const &amp;dataDir, int nb_files=-1, std::string const &amp;source=&quot;152Eu&quot;, std::string const &amp;type=&quot;fast&quot;)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_calibration_1a178a349d575d8f0e8b090f828def78b6">calculate</link> (std::string const &amp;<link linkend="_struct_calibration_1_1histograms">histograms</link>, std::string const &amp;source=&quot;152Eu&quot;)</para>
+
+<para>Calculate calibration from .root histograms. </para>
+</listitem>
+            <listitem><para>void <link linkend="_class_calibration_1a1732880c01e21df259b4ff45dba24c59">calibrate</link> (<link linkend="_class_hit">Hit</link> &amp;hit) const</para>
+
+<para>avoid using this one </para>
+</listitem>
+            <listitem><para><link linkend="__hit_8hpp_1aad3a9d2c404fb4cd7f73b16966ae2877">NRJ</link> <link linkend="_class_calibration_1aa09b700f10eaaa69a97a0cc6da973a06">calibrate</link> (<link linkend="__hit_8hpp_1aad3a9d2c404fb4cd7f73b16966ae2877">NRJ</link> const &amp;nrj, <link linkend="__hit_8hpp_1ab5dd24876acad09ec52c250c1668466c">Label</link> const &amp;label) const</para>
+
+<para>calibrate the ADC value using the parameters extracted from the calibration data </para>
+</listitem>
+            <listitem><para>bool const  &amp; <link linkend="_class_calibration_1a1fd883ea005baf150b37cdf8ccf68014">calibrate_data</link> ()</para>
+</listitem>
+            <listitem><para>bool const  &amp; <link linkend="_class_calibration_1a0b91d7d6484d4c4b8af93a0709b94291">calibrate_data</link> () const</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_calibration_1a5931047806db77858db6886d041db100">calibrateFasterData</link> (std::string const &amp;folder, int const &amp;nb_files=-1)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_calibration_1ac7678b0524f8407659a9594b3862e5c3">calibrateRootData</link> (std::string const &amp;folder, int const &amp;nb_files=-1)</para>
+</listitem>
+            <listitem><para><link linkend="_class_calibration_1a80f51a5ff7ec0f44d5388c9a61d1f20b">Calibration</link> ()</para>
+</listitem>
+            <listitem><para><link linkend="_class_calibration_1a8e35cee6894b7e32cb4e6dcbbe26a0c4">Calibration</link> (<link linkend="_class_calibration">Calibration</link> const &amp;otherCalib)</para>
+
+<para>Copy constructor. </para>
+</listitem>
+            <listitem><para><link linkend="_class_calibration_1a336bd1a54676bff92a192e8df26232ac">Calibration</link> (const char *calibFileName)</para>
+</listitem>
+            <listitem><para><link linkend="_class_calibration_1a7f6c78bdfc53cf5adc6ec67c2f182f16">Calibration</link> (std::string const &amp;calibFileName)</para>
+
+<para>Loading calibration from file name. </para>
+</listitem>
+            <listitem><para>auto const  &amp; <link linkend="_class_calibration_1acfdcf94af247e6907aa09d086c1e4186">file</link> () const</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_calibration_1afd14ef8f1b6cee6cf7abc10783ee318e">fillRootDataHisto</link> (std::string const &amp;filename)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_calibration_1aea14328cc8a0ab1cf559cd07f8c6a065">fitCalibration</link> (<link linkend="__calibration_8hpp_1a3e47c22fe90cb9e403d05dc134b6a047">Fits</link> &amp;fits)</para>
+</listitem>
+            <listitem><para>auto const  &amp; <link linkend="_class_calibration_1a723ff9aee7af762a1b7302472008f97b">getBinom</link> () const</para>
+</listitem>
+            <listitem><para>auto const  &amp; <link linkend="_class_calibration_1aedbbf3043605ea4bce5044113484b5dd">getIntercept</link> () const</para>
+</listitem>
+            <listitem><para>auto const  &amp; <link linkend="_class_calibration_1a24ea2b9275978de50b573394840c1f37">getOrder</link> () const</para>
+</listitem>
+            <listitem><para>auto const  &amp; <link linkend="_class_calibration_1abb43af389c40ed02d3bf982ceeb3a8a1">getSlope</link> () const</para>
+</listitem>
+            <listitem><para>auto const  &amp; <link linkend="_class_calibration_1a5cb5385a26267978aa3b9c2846c76ebd">getTrinom</link> () const</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_calibration_1a2f91a6803bf8008bd7b748d4a1688338">Initialize</link> ()</para>
+</listitem>
+            <listitem><para>bool const  &amp; <link linkend="_class_calibration_1abbc453abf77e6b7a2a10cebd21021578">isFilled</link> () const</para>
+</listitem>
+            <listitem><para>bool <link linkend="_class_calibration_1a2d2a0d6276fc2c8a4b60c3801ccc16a9">load</link> (std::string const &amp;calibFileName)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_calibration_1a6514307ca111ecc5d6f02694373dc5ec">loadFasterData</link> (std::string const &amp;dataDir, int const &amp;nb_files=-1)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_calibration_1a6d6d354f65db38acf12addf1efb7c815">loadRootData</link> (std::string const &amp;dataDir, int const &amp;nb_files=-1)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_calibration_1a7835b1d9192d2c9fa8dcd8efbceb8db3">loadRootHisto</link> (std::string const &amp;<link linkend="_struct_calibration_1_1histograms">histograms</link>)</para>
+</listitem>
+            <listitem><para><link linkend="_class_calibration_1a5c7e1af9dbc7e67aee28e8da897fb29e">operator bool</link> () const &amp;</para>
+</listitem>
+            <listitem><para>template&lt;class... ARGS&gt; </para><para>auto <link linkend="_class_calibration_1a7765db4a6f5a278f82d1462bde812c32">operator()</link> (ARGS &amp;&amp;... args) const</para>
+
+<para>Call for calibrate method. </para>
+</listitem>
+            <listitem><para><link linkend="_class_calibration">Calibration</link> const  &amp; <link linkend="_class_calibration_1a8dccc9ef965732a47d4d47df551baa39">operator=</link> (<link linkend="_class_calibration">Calibration</link> const &amp;otherCalib)</para>
+
+<para>Copy operator. </para>
+</listitem>
+            <listitem><para><link linkend="_class_calibration">Calibration</link> const  &amp; <link linkend="_class_calibration_1ab070c5678eee652bbb3186e6cbd37b9e">operator=</link> (std::string const &amp;calibFileName)</para>
+</listitem>
+            <listitem><para>std::vector&lt; <link linkend="__hit_8hpp_1aad3a9d2c404fb4cd7f73b16966ae2877">NRJ</link> &gt; <link linkend="_class_calibration_1aa05242b317e800e0c3661e03f219fd19">operator[]</link> (<link linkend="__hit_8hpp_1ab5dd24876acad09ec52c250c1668466c">Label</link> const &amp;label) const</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_calibration_1ad6db2742477c8ac64787c6fe8a687aff">peakFinder</link> (std::string const &amp;source)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_calibration_1aaba010db225b8b01931d013eefda800b">Print</link> ()</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_calibration_1a72f3838ece8f07239511fac7c09b1e8c">setCalibrationTables</link> ()</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_calibration_1a1309d57acace816189615a841b38e45e">setSource</link> (std::string const &amp;source)</para>
+</listitem>
+            <listitem><para>auto const  &amp; <link linkend="_class_calibration_1ac4b8f57b3d896cda20a6aa3ba04a78e7">size</link> () const</para>
+
+<para>DEV. </para>
+</listitem>
+            <listitem><para>void <link linkend="_class_calibration_1ad7edc19a4eb1ea5d4af680152ce14521">verbose</link> (bool const &amp;_verbose)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_calibration_1a344dc3d6feab3580e859cc693c2fdd4a">verify</link> (std::string const &amp;outfilename=&quot;verify&quot;)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_calibration_1a6ad79450d0bb55baa744f6436f84dbbe">writeCalibratedData</link> (std::string const &amp;outfilename)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_calibration_1a8ff8375eee244f2b22b86914a1d559bc">writeCalibratedHisto</link> (std::string const &amp;outfilename)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_calibration_1a7e89a0c788e7ad97c2a9cea5e02ef3f2">writeData</link> (std::string const &amp;outfilename)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_calibration_1a53565d0fe7d92fd6d5d94eee5a97f1b8">writePosPeaks</link> (std::string const &amp;outfilename)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_calibration_1a062cb134d4b82246ba9c89c567a32963">writeRawRoot</link> (std::string const &amp;outfilename)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Static Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>static void <link linkend="_class_calibration_1ae62aaba8d0f0f77aecf89a5ad1e7605a">fillHisto</link> (<link linkend="_class_hit">Hit</link> &amp;hit, <link linkend="_class_faster_reader">FasterReader</link> &amp;reader, <link linkend="_class_calibration">Calibration</link> &amp;calib)</para>
+</listitem>
+            <listitem><para>static void <link linkend="_class_calibration_1a58f794ed6862bc71c09b440e63ea94f1">loadRootDataThread</link> (<link linkend="_class_calibration">Calibration</link> &amp;calib, <link linkend="__m_t_list_8hpp_1a5645cb48b623bfc2e6e274c70952a8e2">MTList</link> &amp;list)</para>
+</listitem>
+            <listitem><para>static void <link linkend="_class_calibration_1ae0589067deaac25425e5db02d8c06551">treatOnlyGe</link> (bool const &amp;b=true)</para>
+</listitem>
+            <listitem><para>static void <link linkend="_class_calibration_1ac6510b729a9d8f0803760c2939527df5">treatOnlyParis</link> (bool const &amp;b=true)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Public Attributes    </title>
+        <itemizedlist>
+            <listitem><para>struct <link linkend="_struct_calibration_1_1histograms">Calibration::histograms</link> <link linkend="_class_calibration_1ac431b30e91e0ccab87e5488af8fcce2a">m_histos</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Private Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_class_calibration_1ab1502564e126e769e782d221d42608c7">set</link> (<link linkend="__hit_8hpp_1ab5dd24876acad09ec52c250c1668466c">Label</link> label, <link linkend="__hit_8hpp_1aad3a9d2c404fb4cd7f73b16966ae2877">NRJ</link> intercept, <link linkend="__hit_8hpp_1aad3a9d2c404fb4cd7f73b16966ae2877">NRJ</link> slope, <link linkend="__hit_8hpp_1aad3a9d2c404fb4cd7f73b16966ae2877">NRJ</link> binom, <link linkend="__hit_8hpp_1aad3a9d2c404fb4cd7f73b16966ae2877">NRJ</link> trinom)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Private Attributes    </title>
+        <itemizedlist>
+            <listitem><para>std::vector&lt; std::vector&lt; std::vector&lt; <link linkend="__hit_8hpp_1aad3a9d2c404fb4cd7f73b16966ae2877">NRJ</link> &gt; &gt; &gt; <link linkend="_class_calibration_1a6872e57ee372f02373cc14bae2254554">calibration_tables</link></para>
+</listitem>
+            <listitem><para>std::vector&lt; <link linkend="__hit_8hpp_1aad3a9d2c404fb4cd7f73b16966ae2877">NRJ</link> &gt; <link linkend="_class_calibration_1a1095b50522f8d002fc52e0c048c65bc6">m_binom</link></para>
+</listitem>
+            <listitem><para>bool <link linkend="_class_calibration_1afa4ecd691e71e5b13504bfe7d71950ac">m_calibrate_data</link> = false</para>
+</listitem>
+            <listitem><para>std::string <link linkend="_class_calibration_1ada2b7de482524ffd3e0a9b6038e3d6de">m_filename</link> = &quot;&quot;</para>
+</listitem>
+            <listitem><para><link linkend="__calibration_8hpp_1a3e47c22fe90cb9e403d05dc134b6a047">Fits</link> <link linkend="_class_calibration_1ad17169e9dbae0e5ec2e63f60f1eebdf3">m_fits</link></para>
+</listitem>
+            <listitem><para>std::vector&lt; <link linkend="__hit_8hpp_1aad3a9d2c404fb4cd7f73b16966ae2877">NRJ</link> &gt; <link linkend="_class_calibration_1a49f4d0c50b9f7d705fe9b0ddd787722f">m_intercept</link></para>
+</listitem>
+            <listitem><para><link linkend="__hit_8hpp_1ab5dd24876acad09ec52c250c1668466c">Label</link> <link linkend="_class_calibration_1a2988b922363b5d090771be9961254cbc">m_nb_detectors</link> = 0</para>
+</listitem>
+            <listitem><para>bool <link linkend="_class_calibration_1aea5e9bf6d006f5e26702953552e97dec">m_ok</link> = false</para>
+</listitem>
+            <listitem><para>std::vector&lt; char &gt; <link linkend="_class_calibration_1aebce8e9b03e8a2c8b51c0204e81bcd76">m_order</link></para>
+</listitem>
+            <listitem><para>std::string <link linkend="_class_calibration_1aac1e6d5d59bbe89c95efa142544bf754">m_outCalib</link> = &quot;&quot;</para>
+</listitem>
+            <listitem><para>std::string <link linkend="_class_calibration_1aeb59e25057913962bc8ee43d9567e024">m_outDir</link> = &quot;Calibration/&quot;</para>
+</listitem>
+            <listitem><para>std::string <link linkend="_class_calibration_1a29b20b0d12f1b9226e1e8c9355e54e09">m_outRoot</link> = &quot;calibration.root&quot;</para>
+</listitem>
+            <listitem><para>bool <link linkend="_class_calibration_1a70510eaabac228f419cf7c253055292d">m_outRoot_b</link> = false</para>
+</listitem>
+            <listitem><para>bool <link linkend="_class_calibration_1af45a5eab10d1d3eb0b15a34baf1908c7">m_residus</link> = false</para>
+</listitem>
+            <listitem><para><link linkend="__hit_8hpp_1ab5dd24876acad09ec52c250c1668466c">Label</link> <link linkend="_class_calibration_1a8b66733b050e8743b1887fbed7284269">m_size</link> = 0</para>
+</listitem>
+            <listitem><para>std::vector&lt; <link linkend="__hit_8hpp_1aad3a9d2c404fb4cd7f73b16966ae2877">NRJ</link> &gt; <link linkend="_class_calibration_1a0a42451d9596c8378387169d08c6000b">m_slope</link></para>
+</listitem>
+            <listitem><para>std::string <link linkend="_class_calibration_1a9057002e470a0cb2f7b6353ebf8ceb1f">m_source</link> = &quot;&quot;</para>
+</listitem>
+            <listitem><para>std::vector&lt; <link linkend="__hit_8hpp_1aad3a9d2c404fb4cd7f73b16966ae2877">NRJ</link> &gt; <link linkend="_class_calibration_1a33557fc219e93f9afe9ae38e12e649b7">m_trinom</link></para>
+</listitem>
+            <listitem><para>bool <link linkend="_class_calibration_1a8e0d431465c589e805f74aacfabeb1d7">m_verbose</link> = false</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Static Private Attributes    </title>
+        <itemizedlist>
+            <listitem><para>static bool <link linkend="_class_calibration_1a75bc8afd8de82f44b5e698aab02ebedc">m_treatOnlyGe</link> = false</para>
+</listitem>
+            <listitem><para>static bool <link linkend="_class_calibration_1a5198af653597c26d18433c6f28bdc171">m_treatOnlyParis</link> = false</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Detailed Description</title>
+
+<para><para><link linkend="_todo_1_todo000002">Todo</link> 
+<para><link linkend="_class_calibration_1a344dc3d6feab3580e859cc693c2fdd4a">Calibration::verify()</link> DO NOT SUPPORT <link linkend="_class_m_t_object">MTObject</link> !! </para>
+</para></para>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_class_calibration_1a80f51a5ff7ec0f44d5388c9a61d1f20b"/>    <section>
+    <title>Calibration()<computeroutput>[1/4]</computeroutput></title>
+<indexterm><primary>Calibration</primary><secondary>Calibration</secondary></indexterm>
+<indexterm><primary>Calibration</primary><secondary>Calibration</secondary></indexterm>
+<para><computeroutput>Calibration::Calibration ( )<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_calibration_1a8e35cee6894b7e32cb4e6dcbbe26a0c4"/>    <section>
+    <title>Calibration()<computeroutput>[2/4]</computeroutput></title>
+<indexterm><primary>Calibration</primary><secondary>Calibration</secondary></indexterm>
+<indexterm><primary>Calibration</primary><secondary>Calibration</secondary></indexterm>
+<para><computeroutput>Calibration::Calibration (<link linkend="_class_calibration">Calibration</link> const &amp; otherCalib)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>Copy constructor. </para>
+</para>
+    </section><anchor xml:id="_class_calibration_1a7f6c78bdfc53cf5adc6ec67c2f182f16"/>    <section>
+    <title>Calibration()<computeroutput>[3/4]</computeroutput></title>
+<indexterm><primary>Calibration</primary><secondary>Calibration</secondary></indexterm>
+<indexterm><primary>Calibration</primary><secondary>Calibration</secondary></indexterm>
+<para><computeroutput>Calibration::Calibration (std::string const &amp; calibFileName)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>Loading calibration from file name. </para>
+</para>
+Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_calibration_a7f6c78bdfc53cf5adc6ec67c2f182f16_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_calibration_1a336bd1a54676bff92a192e8df26232ac"/>    <section>
+    <title>Calibration()<computeroutput>[4/4]</computeroutput></title>
+<indexterm><primary>Calibration</primary><secondary>Calibration</secondary></indexterm>
+<indexterm><primary>Calibration</primary><secondary>Calibration</secondary></indexterm>
+<para><computeroutput>Calibration::Calibration (const char * calibFileName)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_calibration_a336bd1a54676bff92a192e8df26232ac_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_class_calibration_1ae6bbaf8b283a345c9936a907fcba1849"/>    <section>
+    <title>analyse()</title>
+<indexterm><primary>analyse</primary><secondary>Calibration</secondary></indexterm>
+<indexterm><primary>Calibration</primary><secondary>analyse</secondary></indexterm>
+<para><computeroutput>void Calibration::analyse (std::string const &amp; source = <computeroutput>&quot;152Eu&quot;</computeroutput>
+)</computeroutput></para><para>
+
+<para>Analyse the spectra to extract calibration coefficients. </para>
+</para>
+
+<para>The peak finding follows the following principle : We start from the bin at the very right side of the spectra. Then we add the value of the bin to the integral counter. Then we add the value of the next bin on the left, then the next, etc.. That is, we integrate the spectra from right to left The moment the first peak is found, the higher energy one, the integral will suddenly increase Then we have to determine a threshold above which we say &quot;we have found the first peak&quot; From this we determine a really rough first linear calibration. This allows us to find, for each other peak, an energy windows in which it should be. Once this window established, we find its centroid. Then we create a smaller window and find again the centroid. A third window (which may not me important ?) event narrower is set around the peak. Then the peak is fitted and the mean value of the gaussian fit added to the calibration curve. Finally, the fit of the calibration curve gives the calibration coefficients.</para>
+
+<para>The threshold is taken as the ratio between the integral and the total integral of the spectra, so that the process do not depend neither on different counting rates nor on different calibration duration. Only issue : it depends on the kind of detector and to some extend to the geometry. That is, this calibration is not well suited for paris detectors... Also, if a peak is absent due to for instance high energy threshold of the detector (typically 121keV of 152Eu is absent in some noisy channels) then the calibration will fail</para>
+
+<para><caution><title>Attention</title>
+
+<para>The most difficult part is to find the value of the threshold, wich must be different for each kind of detector. If it is different for differents detectors of the same type (e.g. paris) then the calibration requires additionnal work.</para>
+
+<para>Take care of the binning of the spectra. If there is too much or not enough bins then the peak fitting will fail, if the maximum ADC value is lower than the higher energy peak then the peak findind will fail. Also, everything supposes the minimum bin corresponds to 0, otherwise it might fail. </para>
+</caution>
+</para>
+Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_calibration_ae6bbaf8b283a345c9936a907fcba1849_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_calibration_ae6bbaf8b283a345c9936a907fcba1849_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_calibration_1aa7e921cbc724d97d1a3ef30a4f988e63"/>    <section>
+    <title>calculate()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>calculate</primary><secondary>Calibration</secondary></indexterm>
+<indexterm><primary>Calibration</primary><secondary>calculate</secondary></indexterm>
+<para><computeroutput>void Calibration::calculate (std::string const &amp; dataDir, int nb_files = <computeroutput>-1</computeroutput>
+, std::string const &amp; source = <computeroutput>&quot;152Eu&quot;</computeroutput>
+, std::string const &amp; type = <computeroutput>&quot;fast&quot;</computeroutput>
+)</computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_calibration_aa7e921cbc724d97d1a3ef30a4f988e63_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_calibration_1a178a349d575d8f0e8b090f828def78b6"/>    <section>
+    <title>calculate()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>calculate</primary><secondary>Calibration</secondary></indexterm>
+<indexterm><primary>Calibration</primary><secondary>calculate</secondary></indexterm>
+<para><computeroutput>void Calibration::calculate (std::string const &amp; histograms, std::string const &amp; source = <computeroutput>&quot;152Eu&quot;</computeroutput>
+)</computeroutput></para><para>
+
+<para>Calculate calibration from .root histograms. </para>
+</para>
+
+<para><caution><title>Attention</title>
+
+<para>TODO </para>
+</caution>
+</para>
+Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_calibration_a178a349d575d8f0e8b090f828def78b6_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_calibration_1a1732880c01e21df259b4ff45dba24c59"/>    <section>
+    <title>calibrate()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>calibrate</primary><secondary>Calibration</secondary></indexterm>
+<indexterm><primary>Calibration</primary><secondary>calibrate</secondary></indexterm>
+<para><computeroutput>void Calibration::calibrate (<link linkend="_class_hit">Hit</link> &amp; hit) const<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>avoid using this one </para>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_calibration_a1732880c01e21df259b4ff45dba24c59_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_calibration_1aa09b700f10eaaa69a97a0cc6da973a06"/>    <section>
+    <title>calibrate()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>calibrate</primary><secondary>Calibration</secondary></indexterm>
+<indexterm><primary>Calibration</primary><secondary>calibrate</secondary></indexterm>
+<para><computeroutput><link linkend="__hit_8hpp_1aad3a9d2c404fb4cd7f73b16966ae2877">NRJ</link> Calibration::calibrate (<link linkend="__hit_8hpp_1aad3a9d2c404fb4cd7f73b16966ae2877">NRJ</link> const &amp; nrj, <link linkend="__hit_8hpp_1ab5dd24876acad09ec52c250c1668466c">Label</link> const &amp; label) const<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>calibrate the ADC value using the parameters extracted from the calibration data </para>
+</para>
+
+<para>calibrate the nrj value using the parameters extracted from the calibration data </para>
+Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_calibration_aa09b700f10eaaa69a97a0cc6da973a06_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_calibration_1a1fd883ea005baf150b37cdf8ccf68014"/>    <section>
+    <title>calibrate_data()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>calibrate_data</primary><secondary>Calibration</secondary></indexterm>
+<indexterm><primary>Calibration</primary><secondary>calibrate_data</secondary></indexterm>
+<para><computeroutput>bool const&amp; Calibration::calibrate_data ( )<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_calibration_1a0b91d7d6484d4c4b8af93a0709b94291"/>    <section>
+    <title>calibrate_data()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>calibrate_data</primary><secondary>Calibration</secondary></indexterm>
+<indexterm><primary>Calibration</primary><secondary>calibrate_data</secondary></indexterm>
+<para><computeroutput>bool const&amp; Calibration::calibrate_data ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_calibration_a0b91d7d6484d4c4b8af93a0709b94291_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_calibration_1a5931047806db77858db6886d041db100"/>    <section>
+    <title>calibrateFasterData()</title>
+<indexterm><primary>calibrateFasterData</primary><secondary>Calibration</secondary></indexterm>
+<indexterm><primary>Calibration</primary><secondary>calibrateFasterData</secondary></indexterm>
+<para><computeroutput>void Calibration::calibrateFasterData (std::string const &amp; folder, int const &amp; nb_files = <computeroutput>-1</computeroutput>
+)</computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_calibration_a5931047806db77858db6886d041db100_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_calibration_1ac7678b0524f8407659a9594b3862e5c3"/>    <section>
+    <title>calibrateRootData()</title>
+<indexterm><primary>calibrateRootData</primary><secondary>Calibration</secondary></indexterm>
+<indexterm><primary>Calibration</primary><secondary>calibrateRootData</secondary></indexterm>
+<para><computeroutput>void Calibration::calibrateRootData (std::string const &amp; folder, int const &amp; nb_files = <computeroutput>-1</computeroutput>
+)</computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_calibration_ac7678b0524f8407659a9594b3862e5c3_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_calibration_1acfdcf94af247e6907aa09d086c1e4186"/>    <section>
+    <title>file()</title>
+<indexterm><primary>file</primary><secondary>Calibration</secondary></indexterm>
+<indexterm><primary>Calibration</primary><secondary>file</secondary></indexterm>
+<para><computeroutput>auto const&amp; Calibration::file ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_calibration_acfdcf94af247e6907aa09d086c1e4186_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_calibration_1ae62aaba8d0f0f77aecf89a5ad1e7605a"/>    <section>
+    <title>fillHisto()</title>
+<indexterm><primary>fillHisto</primary><secondary>Calibration</secondary></indexterm>
+<indexterm><primary>Calibration</primary><secondary>fillHisto</secondary></indexterm>
+<para><computeroutput>void Calibration::fillHisto (<link linkend="_class_hit">Hit</link> &amp; hit, <link linkend="_class_faster_reader">FasterReader</link> &amp; reader, <link linkend="_class_calibration">Calibration</link> &amp; calib)<computeroutput>[static]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_calibration_ae62aaba8d0f0f77aecf89a5ad1e7605a_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_calibration_ae62aaba8d0f0f77aecf89a5ad1e7605a_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_calibration_1afd14ef8f1b6cee6cf7abc10783ee318e"/>    <section>
+    <title>fillRootDataHisto()</title>
+<indexterm><primary>fillRootDataHisto</primary><secondary>Calibration</secondary></indexterm>
+<indexterm><primary>Calibration</primary><secondary>fillRootDataHisto</secondary></indexterm>
+<para><computeroutput>void Calibration::fillRootDataHisto (std::string const &amp; filename)</computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_calibration_afd14ef8f1b6cee6cf7abc10783ee318e_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_calibration_afd14ef8f1b6cee6cf7abc10783ee318e_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_calibration_1aea14328cc8a0ab1cf559cd07f8c6a065"/>    <section>
+    <title>fitCalibration()</title>
+<indexterm><primary>fitCalibration</primary><secondary>Calibration</secondary></indexterm>
+<indexterm><primary>Calibration</primary><secondary>fitCalibration</secondary></indexterm>
+<para><computeroutput>void Calibration::fitCalibration (<link linkend="__calibration_8hpp_1a3e47c22fe90cb9e403d05dc134b6a047">Fits</link> &amp; fits)</computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_calibration_aea14328cc8a0ab1cf559cd07f8c6a065_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_calibration_aea14328cc8a0ab1cf559cd07f8c6a065_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_calibration_1a723ff9aee7af762a1b7302472008f97b"/>    <section>
+    <title>getBinom()</title>
+<indexterm><primary>getBinom</primary><secondary>Calibration</secondary></indexterm>
+<indexterm><primary>Calibration</primary><secondary>getBinom</secondary></indexterm>
+<para><computeroutput>auto const&amp; Calibration::getBinom ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_calibration_1aedbbf3043605ea4bce5044113484b5dd"/>    <section>
+    <title>getIntercept()</title>
+<indexterm><primary>getIntercept</primary><secondary>Calibration</secondary></indexterm>
+<indexterm><primary>Calibration</primary><secondary>getIntercept</secondary></indexterm>
+<para><computeroutput>auto const&amp; Calibration::getIntercept ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_calibration_1a24ea2b9275978de50b573394840c1f37"/>    <section>
+    <title>getOrder()</title>
+<indexterm><primary>getOrder</primary><secondary>Calibration</secondary></indexterm>
+<indexterm><primary>Calibration</primary><secondary>getOrder</secondary></indexterm>
+<para><computeroutput>auto const&amp; Calibration::getOrder ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_calibration_1abb43af389c40ed02d3bf982ceeb3a8a1"/>    <section>
+    <title>getSlope()</title>
+<indexterm><primary>getSlope</primary><secondary>Calibration</secondary></indexterm>
+<indexterm><primary>Calibration</primary><secondary>getSlope</secondary></indexterm>
+<para><computeroutput>auto const&amp; Calibration::getSlope ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_calibration_1a5cb5385a26267978aa3b9c2846c76ebd"/>    <section>
+    <title>getTrinom()</title>
+<indexterm><primary>getTrinom</primary><secondary>Calibration</secondary></indexterm>
+<indexterm><primary>Calibration</primary><secondary>getTrinom</secondary></indexterm>
+<para><computeroutput>auto const&amp; Calibration::getTrinom ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_calibration_1a2f91a6803bf8008bd7b748d4a1688338"/>    <section>
+    <title>Initialize()</title>
+<indexterm><primary>Initialize</primary><secondary>Calibration</secondary></indexterm>
+<indexterm><primary>Calibration</primary><secondary>Initialize</secondary></indexterm>
+<para><computeroutput>void Calibration::Initialize ( )<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_calibration_a2f91a6803bf8008bd7b748d4a1688338_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_calibration_a2f91a6803bf8008bd7b748d4a1688338_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_calibration_1abbc453abf77e6b7a2a10cebd21021578"/>    <section>
+    <title>isFilled()</title>
+<indexterm><primary>isFilled</primary><secondary>Calibration</secondary></indexterm>
+<indexterm><primary>Calibration</primary><secondary>isFilled</secondary></indexterm>
+<para><computeroutput>bool const&amp; Calibration::isFilled ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_calibration_1a2d2a0d6276fc2c8a4b60c3801ccc16a9"/>    <section>
+    <title>load()</title>
+<indexterm><primary>load</primary><secondary>Calibration</secondary></indexterm>
+<indexterm><primary>Calibration</primary><secondary>load</secondary></indexterm>
+<para><computeroutput>bool Calibration::load (std::string const &amp; calibFileName)</computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_calibration_a2d2a0d6276fc2c8a4b60c3801ccc16a9_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_calibration_a2d2a0d6276fc2c8a4b60c3801ccc16a9_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_calibration_1a6514307ca111ecc5d6f02694373dc5ec"/>    <section>
+    <title>loadFasterData()</title>
+<indexterm><primary>loadFasterData</primary><secondary>Calibration</secondary></indexterm>
+<indexterm><primary>Calibration</primary><secondary>loadFasterData</secondary></indexterm>
+<para><computeroutput>void Calibration::loadFasterData (std::string const &amp; dataDir, int const &amp; nb_files = <computeroutput>-1</computeroutput>
+)</computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_calibration_a6514307ca111ecc5d6f02694373dc5ec_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_calibration_a6514307ca111ecc5d6f02694373dc5ec_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_calibration_1a6d6d354f65db38acf12addf1efb7c815"/>    <section>
+    <title>loadRootData()</title>
+<indexterm><primary>loadRootData</primary><secondary>Calibration</secondary></indexterm>
+<indexterm><primary>Calibration</primary><secondary>loadRootData</secondary></indexterm>
+<para><computeroutput>void Calibration::loadRootData (std::string const &amp; dataDir, int const &amp; nb_files = <computeroutput>-1</computeroutput>
+)</computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_calibration_a6d6d354f65db38acf12addf1efb7c815_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_calibration_a6d6d354f65db38acf12addf1efb7c815_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_calibration_1a58f794ed6862bc71c09b440e63ea94f1"/>    <section>
+    <title>loadRootDataThread()</title>
+<indexterm><primary>loadRootDataThread</primary><secondary>Calibration</secondary></indexterm>
+<indexterm><primary>Calibration</primary><secondary>loadRootDataThread</secondary></indexterm>
+<para><computeroutput>void Calibration::loadRootDataThread (<link linkend="_class_calibration">Calibration</link> &amp; calib, <link linkend="__m_t_list_8hpp_1a5645cb48b623bfc2e6e274c70952a8e2">MTList</link> &amp; list)<computeroutput>[static]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_calibration_a58f794ed6862bc71c09b440e63ea94f1_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_calibration_a58f794ed6862bc71c09b440e63ea94f1_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_calibration_1a7835b1d9192d2c9fa8dcd8efbceb8db3"/>    <section>
+    <title>loadRootHisto()</title>
+<indexterm><primary>loadRootHisto</primary><secondary>Calibration</secondary></indexterm>
+<indexterm><primary>Calibration</primary><secondary>loadRootHisto</secondary></indexterm>
+<para><computeroutput>void Calibration::loadRootHisto (std::string const &amp; histograms)</computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_calibration_a7835b1d9192d2c9fa8dcd8efbceb8db3_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_calibration_1a5c7e1af9dbc7e67aee28e8da897fb29e"/>    <section>
+    <title>operator bool()</title>
+<indexterm><primary>operator bool</primary><secondary>Calibration</secondary></indexterm>
+<indexterm><primary>Calibration</primary><secondary>operator bool</secondary></indexterm>
+<para><computeroutput>Calibration::operator bool ( ) const &amp;<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_calibration_1a7765db4a6f5a278f82d1462bde812c32"/>    <section>
+    <title>operator()()</title>
+<indexterm><primary>operator()</primary><secondary>Calibration</secondary></indexterm>
+<indexterm><primary>Calibration</primary><secondary>operator()</secondary></indexterm>
+<computeroutput>template&lt;class... ARGS&gt; </computeroutput><para><computeroutput>auto Calibration::operator() (ARGS &amp;&amp;... args) const<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>Call for calibrate method. </para>
+</para>
+Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_calibration_a7765db4a6f5a278f82d1462bde812c32_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_calibration_1a8dccc9ef965732a47d4d47df551baa39"/>    <section>
+    <title>operator=()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>operator=</primary><secondary>Calibration</secondary></indexterm>
+<indexterm><primary>Calibration</primary><secondary>operator=</secondary></indexterm>
+<para><computeroutput><link linkend="_class_calibration">Calibration</link> const&amp; Calibration::operator= (<link linkend="_class_calibration">Calibration</link> const &amp; otherCalib)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>Copy operator. </para>
+</para>
+    </section><anchor xml:id="_class_calibration_1ab070c5678eee652bbb3186e6cbd37b9e"/>    <section>
+    <title>operator=()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>operator=</primary><secondary>Calibration</secondary></indexterm>
+<indexterm><primary>Calibration</primary><secondary>operator=</secondary></indexterm>
+<para><computeroutput><link linkend="_class_calibration">Calibration</link> const&amp; Calibration::operator= (std::string const &amp; calibFileName)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_calibration_ab070c5678eee652bbb3186e6cbd37b9e_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_calibration_1aa05242b317e800e0c3661e03f219fd19"/>    <section>
+    <title>operator[]()</title>
+<indexterm><primary>operator[]</primary><secondary>Calibration</secondary></indexterm>
+<indexterm><primary>Calibration</primary><secondary>operator[]</secondary></indexterm>
+<para><computeroutput>std::vector&lt;<link linkend="__hit_8hpp_1aad3a9d2c404fb4cd7f73b16966ae2877">NRJ</link>&gt; Calibration::operator[] (<link linkend="__hit_8hpp_1ab5dd24876acad09ec52c250c1668466c">Label</link> const &amp; label) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_calibration_1ad6db2742477c8ac64787c6fe8a687aff"/>    <section>
+    <title>peakFinder()</title>
+<indexterm><primary>peakFinder</primary><secondary>Calibration</secondary></indexterm>
+<indexterm><primary>Calibration</primary><secondary>peakFinder</secondary></indexterm>
+<para><computeroutput>void Calibration::peakFinder (std::string const &amp; source)</computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_calibration_ad6db2742477c8ac64787c6fe8a687aff_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_calibration_ad6db2742477c8ac64787c6fe8a687aff_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_calibration_1aaba010db225b8b01931d013eefda800b"/>    <section>
+    <title>Print()</title>
+<indexterm><primary>Print</primary><secondary>Calibration</secondary></indexterm>
+<indexterm><primary>Calibration</primary><secondary>Print</secondary></indexterm>
+<para><computeroutput>void Calibration::Print ( )</computeroutput></para>    </section><anchor xml:id="_class_calibration_1ab1502564e126e769e782d221d42608c7"/>    <section>
+    <title>set()</title>
+<indexterm><primary>set</primary><secondary>Calibration</secondary></indexterm>
+<indexterm><primary>Calibration</primary><secondary>set</secondary></indexterm>
+<para><computeroutput>void Calibration::set (<link linkend="__hit_8hpp_1ab5dd24876acad09ec52c250c1668466c">Label</link> label, <link linkend="__hit_8hpp_1aad3a9d2c404fb4cd7f73b16966ae2877">NRJ</link> intercept = <computeroutput>0.f</computeroutput>
+, <link linkend="__hit_8hpp_1aad3a9d2c404fb4cd7f73b16966ae2877">NRJ</link> slope = <computeroutput>1.f</computeroutput>
+, <link linkend="__hit_8hpp_1aad3a9d2c404fb4cd7f73b16966ae2877">NRJ</link> binom = <computeroutput>0.f</computeroutput>
+, <link linkend="__hit_8hpp_1aad3a9d2c404fb4cd7f73b16966ae2877">NRJ</link> trinom = <computeroutput>0.f</computeroutput>
+)<computeroutput>[private]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_calibration_ab1502564e126e769e782d221d42608c7_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_calibration_1a72f3838ece8f07239511fac7c09b1e8c"/>    <section>
+    <title>setCalibrationTables()</title>
+<indexterm><primary>setCalibrationTables</primary><secondary>Calibration</secondary></indexterm>
+<indexterm><primary>Calibration</primary><secondary>setCalibrationTables</secondary></indexterm>
+<para><computeroutput>void Calibration::setCalibrationTables ( )</computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_calibration_a72f3838ece8f07239511fac7c09b1e8c_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_calibration_1a1309d57acace816189615a841b38e45e"/>    <section>
+    <title>setSource()</title>
+<indexterm><primary>setSource</primary><secondary>Calibration</secondary></indexterm>
+<indexterm><primary>Calibration</primary><secondary>setSource</secondary></indexterm>
+<para><computeroutput>void Calibration::setSource (std::string const &amp; source)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_calibration_1ac4b8f57b3d896cda20a6aa3ba04a78e7"/>    <section>
+    <title>size()</title>
+<indexterm><primary>size</primary><secondary>Calibration</secondary></indexterm>
+<indexterm><primary>Calibration</primary><secondary>size</secondary></indexterm>
+<para><computeroutput>auto const&amp; Calibration::size ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>DEV. </para>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_calibration_ac4b8f57b3d896cda20a6aa3ba04a78e7_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_calibration_1ae0589067deaac25425e5db02d8c06551"/>    <section>
+    <title>treatOnlyGe()</title>
+<indexterm><primary>treatOnlyGe</primary><secondary>Calibration</secondary></indexterm>
+<indexterm><primary>Calibration</primary><secondary>treatOnlyGe</secondary></indexterm>
+<para><computeroutput>static void Calibration::treatOnlyGe (bool const &amp; b = <computeroutput>true</computeroutput>
+)<computeroutput>[inline]</computeroutput>, <computeroutput>[static]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_calibration_1ac6510b729a9d8f0803760c2939527df5"/>    <section>
+    <title>treatOnlyParis()</title>
+<indexterm><primary>treatOnlyParis</primary><secondary>Calibration</secondary></indexterm>
+<indexterm><primary>Calibration</primary><secondary>treatOnlyParis</secondary></indexterm>
+<para><computeroutput>static void Calibration::treatOnlyParis (bool const &amp; b = <computeroutput>true</computeroutput>
+)<computeroutput>[inline]</computeroutput>, <computeroutput>[static]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_calibration_1ad7edc19a4eb1ea5d4af680152ce14521"/>    <section>
+    <title>verbose()</title>
+<indexterm><primary>verbose</primary><secondary>Calibration</secondary></indexterm>
+<indexterm><primary>Calibration</primary><secondary>verbose</secondary></indexterm>
+<para><computeroutput>void Calibration::verbose (bool const &amp; _verbose)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_calibration_1a344dc3d6feab3580e859cc693c2fdd4a"/>    <section>
+    <title>verify()</title>
+<indexterm><primary>verify</primary><secondary>Calibration</secondary></indexterm>
+<indexterm><primary>Calibration</primary><secondary>verify</secondary></indexterm>
+<para><computeroutput>void Calibration::verify (std::string const &amp; outfilename = <computeroutput>&quot;verify&quot;</computeroutput>
+)</computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_calibration_a344dc3d6feab3580e859cc693c2fdd4a_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_calibration_1a6ad79450d0bb55baa744f6436f84dbbe"/>    <section>
+    <title>writeCalibratedData()</title>
+<indexterm><primary>writeCalibratedData</primary><secondary>Calibration</secondary></indexterm>
+<indexterm><primary>Calibration</primary><secondary>writeCalibratedData</secondary></indexterm>
+<para><computeroutput>void Calibration::writeCalibratedData (std::string const &amp; outfilename)</computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_calibration_a6ad79450d0bb55baa744f6436f84dbbe_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_calibration_1a8ff8375eee244f2b22b86914a1d559bc"/>    <section>
+    <title>writeCalibratedHisto()</title>
+<indexterm><primary>writeCalibratedHisto</primary><secondary>Calibration</secondary></indexterm>
+<indexterm><primary>Calibration</primary><secondary>writeCalibratedHisto</secondary></indexterm>
+<para><computeroutput>void Calibration::writeCalibratedHisto (std::string const &amp; outfilename)</computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_calibration_a8ff8375eee244f2b22b86914a1d559bc_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_calibration_a8ff8375eee244f2b22b86914a1d559bc_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_calibration_1a7e89a0c788e7ad97c2a9cea5e02ef3f2"/>    <section>
+    <title>writeData()</title>
+<indexterm><primary>writeData</primary><secondary>Calibration</secondary></indexterm>
+<indexterm><primary>Calibration</primary><secondary>writeData</secondary></indexterm>
+<para><computeroutput>void Calibration::writeData (std::string const &amp; outfilename)</computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_calibration_a7e89a0c788e7ad97c2a9cea5e02ef3f2_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_calibration_a7e89a0c788e7ad97c2a9cea5e02ef3f2_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_calibration_1a53565d0fe7d92fd6d5d94eee5a97f1b8"/>    <section>
+    <title>writePosPeaks()</title>
+<indexterm><primary>writePosPeaks</primary><secondary>Calibration</secondary></indexterm>
+<indexterm><primary>Calibration</primary><secondary>writePosPeaks</secondary></indexterm>
+<para><computeroutput>void Calibration::writePosPeaks (std::string const &amp; outfilename)</computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_calibration_a53565d0fe7d92fd6d5d94eee5a97f1b8_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_calibration_1a062cb134d4b82246ba9c89c567a32963"/>    <section>
+    <title>writeRawRoot()</title>
+<indexterm><primary>writeRawRoot</primary><secondary>Calibration</secondary></indexterm>
+<indexterm><primary>Calibration</primary><secondary>writeRawRoot</secondary></indexterm>
+<para><computeroutput>void Calibration::writeRawRoot (std::string const &amp; outfilename)</computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_calibration_a062cb134d4b82246ba9c89c567a32963_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_calibration_a062cb134d4b82246ba9c89c567a32963_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_class_calibration_1a6872e57ee372f02373cc14bae2254554"/>    <section>
+    <title>calibration_tables</title>
+<indexterm><primary>calibration_tables</primary><secondary>Calibration</secondary></indexterm>
+<indexterm><primary>Calibration</primary><secondary>calibration_tables</secondary></indexterm>
+<para><computeroutput>std::vector&lt;std::vector&lt;std::vector&lt;<link linkend="__hit_8hpp_1aad3a9d2c404fb4cd7f73b16966ae2877">NRJ</link>&gt; &gt; &gt; Calibration::calibration_tables<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_calibration_1a1095b50522f8d002fc52e0c048c65bc6"/>    <section>
+    <title>m_binom</title>
+<indexterm><primary>m_binom</primary><secondary>Calibration</secondary></indexterm>
+<indexterm><primary>Calibration</primary><secondary>m_binom</secondary></indexterm>
+<para><computeroutput>std::vector&lt;<link linkend="__hit_8hpp_1aad3a9d2c404fb4cd7f73b16966ae2877">NRJ</link>&gt; Calibration::m_binom<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_calibration_1afa4ecd691e71e5b13504bfe7d71950ac"/>    <section>
+    <title>m_calibrate_data</title>
+<indexterm><primary>m_calibrate_data</primary><secondary>Calibration</secondary></indexterm>
+<indexterm><primary>Calibration</primary><secondary>m_calibrate_data</secondary></indexterm>
+<para><computeroutput>bool Calibration::m_calibrate_data = false<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_calibration_1ada2b7de482524ffd3e0a9b6038e3d6de"/>    <section>
+    <title>m_filename</title>
+<indexterm><primary>m_filename</primary><secondary>Calibration</secondary></indexterm>
+<indexterm><primary>Calibration</primary><secondary>m_filename</secondary></indexterm>
+<para><computeroutput>std::string Calibration::m_filename = &quot;&quot;<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_calibration_1ad17169e9dbae0e5ec2e63f60f1eebdf3"/>    <section>
+    <title>m_fits</title>
+<indexterm><primary>m_fits</primary><secondary>Calibration</secondary></indexterm>
+<indexterm><primary>Calibration</primary><secondary>m_fits</secondary></indexterm>
+<para><computeroutput><link linkend="__calibration_8hpp_1a3e47c22fe90cb9e403d05dc134b6a047">Fits</link> Calibration::m_fits<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_calibration_1ac431b30e91e0ccab87e5488af8fcce2a"/>    <section>
+    <title>m_histos</title>
+<indexterm><primary>m_histos</primary><secondary>Calibration</secondary></indexterm>
+<indexterm><primary>Calibration</primary><secondary>m_histos</secondary></indexterm>
+<para><computeroutput>struct <link linkend="_struct_calibration_1_1histograms">Calibration::histograms</link> Calibration::m_histos</computeroutput></para>    </section><anchor xml:id="_class_calibration_1a49f4d0c50b9f7d705fe9b0ddd787722f"/>    <section>
+    <title>m_intercept</title>
+<indexterm><primary>m_intercept</primary><secondary>Calibration</secondary></indexterm>
+<indexterm><primary>Calibration</primary><secondary>m_intercept</secondary></indexterm>
+<para><computeroutput>std::vector&lt;<link linkend="__hit_8hpp_1aad3a9d2c404fb4cd7f73b16966ae2877">NRJ</link>&gt; Calibration::m_intercept<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_calibration_1a2988b922363b5d090771be9961254cbc"/>    <section>
+    <title>m_nb_detectors</title>
+<indexterm><primary>m_nb_detectors</primary><secondary>Calibration</secondary></indexterm>
+<indexterm><primary>Calibration</primary><secondary>m_nb_detectors</secondary></indexterm>
+<para><computeroutput><link linkend="__hit_8hpp_1ab5dd24876acad09ec52c250c1668466c">Label</link> Calibration::m_nb_detectors = 0<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_calibration_1aea5e9bf6d006f5e26702953552e97dec"/>    <section>
+    <title>m_ok</title>
+<indexterm><primary>m_ok</primary><secondary>Calibration</secondary></indexterm>
+<indexterm><primary>Calibration</primary><secondary>m_ok</secondary></indexterm>
+<para><computeroutput>bool Calibration::m_ok = false<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_calibration_1aebce8e9b03e8a2c8b51c0204e81bcd76"/>    <section>
+    <title>m_order</title>
+<indexterm><primary>m_order</primary><secondary>Calibration</secondary></indexterm>
+<indexterm><primary>Calibration</primary><secondary>m_order</secondary></indexterm>
+<para><computeroutput>std::vector&lt;char&gt; Calibration::m_order<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_calibration_1aac1e6d5d59bbe89c95efa142544bf754"/>    <section>
+    <title>m_outCalib</title>
+<indexterm><primary>m_outCalib</primary><secondary>Calibration</secondary></indexterm>
+<indexterm><primary>Calibration</primary><secondary>m_outCalib</secondary></indexterm>
+<para><computeroutput>std::string Calibration::m_outCalib = &quot;&quot;<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_calibration_1aeb59e25057913962bc8ee43d9567e024"/>    <section>
+    <title>m_outDir</title>
+<indexterm><primary>m_outDir</primary><secondary>Calibration</secondary></indexterm>
+<indexterm><primary>Calibration</primary><secondary>m_outDir</secondary></indexterm>
+<para><computeroutput>std::string Calibration::m_outDir = &quot;Calibration/&quot;<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_calibration_1a29b20b0d12f1b9226e1e8c9355e54e09"/>    <section>
+    <title>m_outRoot</title>
+<indexterm><primary>m_outRoot</primary><secondary>Calibration</secondary></indexterm>
+<indexterm><primary>Calibration</primary><secondary>m_outRoot</secondary></indexterm>
+<para><computeroutput>std::string Calibration::m_outRoot = &quot;calibration.root&quot;<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_calibration_1a70510eaabac228f419cf7c253055292d"/>    <section>
+    <title>m_outRoot_b</title>
+<indexterm><primary>m_outRoot_b</primary><secondary>Calibration</secondary></indexterm>
+<indexterm><primary>Calibration</primary><secondary>m_outRoot_b</secondary></indexterm>
+<para><computeroutput>bool Calibration::m_outRoot_b = false<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_calibration_1af45a5eab10d1d3eb0b15a34baf1908c7"/>    <section>
+    <title>m_residus</title>
+<indexterm><primary>m_residus</primary><secondary>Calibration</secondary></indexterm>
+<indexterm><primary>Calibration</primary><secondary>m_residus</secondary></indexterm>
+<para><computeroutput>bool Calibration::m_residus = false<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_calibration_1a8b66733b050e8743b1887fbed7284269"/>    <section>
+    <title>m_size</title>
+<indexterm><primary>m_size</primary><secondary>Calibration</secondary></indexterm>
+<indexterm><primary>Calibration</primary><secondary>m_size</secondary></indexterm>
+<para><computeroutput><link linkend="__hit_8hpp_1ab5dd24876acad09ec52c250c1668466c">Label</link> Calibration::m_size = 0<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_calibration_1a0a42451d9596c8378387169d08c6000b"/>    <section>
+    <title>m_slope</title>
+<indexterm><primary>m_slope</primary><secondary>Calibration</secondary></indexterm>
+<indexterm><primary>Calibration</primary><secondary>m_slope</secondary></indexterm>
+<para><computeroutput>std::vector&lt;<link linkend="__hit_8hpp_1aad3a9d2c404fb4cd7f73b16966ae2877">NRJ</link>&gt; Calibration::m_slope<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_calibration_1a9057002e470a0cb2f7b6353ebf8ceb1f"/>    <section>
+    <title>m_source</title>
+<indexterm><primary>m_source</primary><secondary>Calibration</secondary></indexterm>
+<indexterm><primary>Calibration</primary><secondary>m_source</secondary></indexterm>
+<para><computeroutput>std::string Calibration::m_source = &quot;&quot;<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_calibration_1a75bc8afd8de82f44b5e698aab02ebedc"/>    <section>
+    <title>m_treatOnlyGe</title>
+<indexterm><primary>m_treatOnlyGe</primary><secondary>Calibration</secondary></indexterm>
+<indexterm><primary>Calibration</primary><secondary>m_treatOnlyGe</secondary></indexterm>
+<para><computeroutput>bool Calibration::m_treatOnlyGe = false<computeroutput>[static]</computeroutput>, <computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_calibration_1a5198af653597c26d18433c6f28bdc171"/>    <section>
+    <title>m_treatOnlyParis</title>
+<indexterm><primary>m_treatOnlyParis</primary><secondary>Calibration</secondary></indexterm>
+<indexterm><primary>Calibration</primary><secondary>m_treatOnlyParis</secondary></indexterm>
+<para><computeroutput>bool Calibration::m_treatOnlyParis = false<computeroutput>[static]</computeroutput>, <computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_calibration_1a33557fc219e93f9afe9ae38e12e649b7"/>    <section>
+    <title>m_trinom</title>
+<indexterm><primary>m_trinom</primary><secondary>Calibration</secondary></indexterm>
+<indexterm><primary>Calibration</primary><secondary>m_trinom</secondary></indexterm>
+<para><computeroutput>std::vector&lt;<link linkend="__hit_8hpp_1aad3a9d2c404fb4cd7f73b16966ae2877">NRJ</link>&gt; Calibration::m_trinom<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_calibration_1a8e0d431465c589e805f74aacfabeb1d7"/>    <section>
+    <title>m_verbose</title>
+<indexterm><primary>m_verbose</primary><secondary>Calibration</secondary></indexterm>
+<indexterm><primary>Calibration</primary><secondary>m_verbose</secondary></indexterm>
+<para><computeroutput>bool Calibration::m_verbose = false<computeroutput>[private]</computeroutput></computeroutput></para></section>
+<para>
+The documentation for this class was generated from the following file:</para>
+lib/Modules/<link linkend="__calibration_8hpp">Calibration.hpp</link></section>
+</section>

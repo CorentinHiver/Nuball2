@@ -1,0 +1,471 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="class_m_t_object" kind="class" language="C++" prot="public">
+    <compoundname>MTObject</compoundname>
+    <includes refid="_m_t_object_8hpp" local="no">MTObject.hpp</includes>
+      <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="class_m_t_object_1a79d86fbc8837ba0f9a4cd1405fddef1c" prot="public" static="yes" mutable="no">
+        <type>std::mutex</type>
+        <definition>std::mutex MTObject::mutex</definition>
+        <argsstring></argsstring>
+        <name>mutex</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/MTObjects/MTObject.hpp" line="107" column="21" bodyfile="lib/MTObjects/MTObject.hpp" bodystart="107" bodyend="-1"/>
+        <referencedby refid="class_faster2_histo_1a327a8348f79c5ecf27a58baef32b81d8" compoundref="_faster2_histo_8hpp" startline="146" endline="165">Faster2Histo::fillHisto</referencedby>
+        <referencedby refid="class_clovers_1ab97fc40c1f6b24a092f8f92562c2fd9a" compoundref="_clovers_8hpp" startline="102" endline="132">Clovers::InitializeArrays</referencedby>
+        <referencedby refid="class_d_s_s_d_1a800770306a115e1096108cef2463a103" compoundref="_d_s_s_d_8hpp" startline="64" endline="86">DSSD::InitializeArrays</referencedby>
+        <referencedby refid="class_paris_1a5218753a8ecec0c9a05c6d3e3ca2db07" compoundref="_paris_8hpp" startline="42" endline="58">Paris::InitializeArrays</referencedby>
+        <referencedby refid="_m_t_object_8hpp_1acceec6d26d3021217ae83ccd7b029351" compoundref="_m_t_object_8hpp" startline="137" endline="142">printMT</referencedby>
+        <referencedby refid="class_m_t_variable_1af2f966c9e57eb54bd8fb27595e8c39ac" compoundref="_m_t_variable_8hpp" startline="26" endline="31">MTVariable&lt; T &gt;::resize</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_m_t_object_1a1c2b3cb0cdccca46c8ebba009503ac88" prot="public" static="yes" mutable="no">
+        <type><ref refid="lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638" kindref="member">size_t</ref></type>
+        <definition>size_t MTObject::nb_threads</definition>
+        <argsstring></argsstring>
+        <name>nb_threads</name>
+        <initializer>= 1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/MTObjects/MTObject.hpp" line="106" column="17" bodyfile="lib/MTObjects/MTObject.hpp" bodystart="106" bodyend="-1"/>
+        <referencedby refid="class_m_t_object_1ac76ab61815b5c3a471e6c210b7ba1913" compoundref="_m_t_object_8hpp" startline="52" endline="60">adjustThreadsNumber</referencedby>
+        <referencedby refid="class_m_t_object_1ac97399bb34f766e41e7f9a1cd1b7eb7a" compoundref="_m_t_object_8hpp" startline="101" endline="101">getThreadsNb</referencedby>
+        <referencedby refid="class_m_t_object_1ad156f9b1c68f0e2713abb16890b1fa15" compoundref="_m_t_object_8hpp" startline="102" endline="102">getThreadsNumber</referencedby>
+        <referencedby refid="class_m_t_object_1aaa3623d88deae3a9311aad39bfff49dc" compoundref="_m_t_object_8hpp" startline="62" endline="73">Initialize</referencedby>
+        <referencedby refid="class_m_t_object_1a35c02650eb403bd54e867f93bb26fc47" compoundref="_m_t_object_8hpp" startline="76" endline="99">parallelise_function</referencedby>
+        <referencedby refid="class_m_t_object_1a8f91c9269a027d1770d7bae3b6d599a5" compoundref="_m_t_object_8hpp" startline="36" endline="48">setThreadsNb</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_m_t_object_1a6fe86ce1ea64ede7e695490bceb264a3" prot="public" static="yes" mutable="no">
+        <type>bool</type>
+        <definition>bool MTObject::ON</definition>
+        <argsstring></argsstring>
+        <name>ON</name>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/MTObjects/MTObject.hpp" line="108" column="15" bodyfile="lib/MTObjects/MTObject.hpp" bodystart="108" bodyend="-1"/>
+        <referencedby refid="class_m_t_object_1ac76ab61815b5c3a471e6c210b7ba1913" compoundref="_m_t_object_8hpp" startline="52" endline="60">adjustThreadsNumber</referencedby>
+        <referencedby refid="class_m_t_object_1aaa3623d88deae3a9311aad39bfff49dc" compoundref="_m_t_object_8hpp" startline="62" endline="73">Initialize</referencedby>
+        <referencedby refid="class_path_1aa9b3a53718dcd8ba66d90d50b112ddb9" compoundref="files__functions_8hpp" startline="480" endline="515">Path::load</referencedby>
+        <referencedby refid="class_m_t_t_hist_1a7c92589542fe14a28350712bab17c7ff" compoundref="_m_t_t_hist_8hpp" startline="476" endline="496">MTTHist&lt; THist &gt;::Merge</referencedby>
+        <referencedby refid="class_m_t_object_1a048c52b4b15fc13667559a5b07d71002" compoundref="_m_t_object_8hpp" startline="109" endline="109">operator bool</referencedby>
+        <referencedby refid="class_m_t_object_1a35c02650eb403bd54e867f93bb26fc47" compoundref="_m_t_object_8hpp" startline="76" endline="99">parallelise_function</referencedby>
+        <referencedby refid="class_m_t_t_hist_1a6524d02003fa4d77ae22b33e14b977d9" compoundref="_m_t_t_hist_8hpp" startline="373" endline="421">MTTHist&lt; THist &gt;::reset</referencedby>
+        <referencedby refid="class_manip_1ab0813163118017c1064ec02f091356b8" compoundref="_manip_8hpp" startline="78" endline="86">Manip::setMT</referencedby>
+        <referencedby refid="class_timeshifts_1a21dc1e7bf232c6b0637b16aa04e43701" compoundref="_timeshifts_8hpp" startline="526" endline="549">Timeshifts::treatFolder</referencedby>
+        <referencedby refid="class_m_t_t_hist_1ae9163b5b4afca69cfdebdf2cf60064cd" compoundref="_m_t_t_hist_8hpp" startline="531" endline="549">MTTHist&lt; THist &gt;::Write</referencedby>
+        <referencedby refid="class_m_t_t_hist_1a9fc4f9b3947ade70cad19a33c16d69d6" compoundref="_m_t_t_hist_8hpp" startline="562" endline="588">MTTHist&lt; THist &gt;::~MTTHist</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="class_m_t_object_1ac9efab6b9d255529611a250e91779a48" prot="private" static="yes" mutable="no">
+        <type>thread_local <ref refid="lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638" kindref="member">size_t</ref></type>
+        <definition>thread_local size_t MTObject::m_thread_index</definition>
+        <argsstring></argsstring>
+        <name>m_thread_index</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/MTObjects/MTObject.hpp" line="120" column="30" bodyfile="lib/MTObjects/MTObject.hpp" bodystart="120" bodyend="-1"/>
+        <referencedby refid="class_m_t_object_1a9c9a57a49a12e1d408a5354e8520b3fe" compoundref="_m_t_object_8hpp" startline="111" endline="111">getThreadIndex</referencedby>
+        <referencedby refid="class_m_t_object_1af752e86ec494c50d1af7e6442c09733b" compoundref="_m_t_object_8hpp" startline="112" endline="112">index</referencedby>
+        <referencedby refid="class_m_t_object_1a35c02650eb403bd54e867f93bb26fc47" compoundref="_m_t_object_8hpp" startline="76" endline="99">parallelise_function</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_m_t_object_1abf0f47fe00f785c060ba2ec35df9819d" prot="private" static="yes" mutable="no">
+        <type>std::vector&lt; std::thread &gt;</type>
+        <definition>std::vector&lt; std::thread &gt; MTObject::m_threads</definition>
+        <argsstring></argsstring>
+        <name>m_threads</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/MTObjects/MTObject.hpp" line="121" column="22" bodyfile="lib/MTObjects/MTObject.hpp" bodystart="121" bodyend="-1"/>
+        <referencedby refid="class_m_t_object_1a35c02650eb403bd54e867f93bb26fc47" compoundref="_m_t_object_8hpp" startline="76" endline="99">parallelise_function</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_m_t_object_1a16983b3e7be4853da5f32145342fc6b0" prot="private" static="yes" mutable="no">
+        <type>std::thread::id</type>
+        <definition>std::thread::id MTObject::master_thread_id</definition>
+        <argsstring></argsstring>
+        <name>master_thread_id</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/MTObjects/MTObject.hpp" line="119" column="26" bodyfile="lib/MTObjects/MTObject.hpp" bodystart="119" bodyend="-1"/>
+        <referencedby refid="class_m_t_object_1aaa3623d88deae3a9311aad39bfff49dc" compoundref="_m_t_object_8hpp" startline="62" endline="73">Initialize</referencedby>
+        <referencedby refid="class_m_t_object_1a3350577ca839e2abdcd4d6f6449a1408" compoundref="_m_t_object_8hpp" startline="104" endline="104">isMasterThread</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_m_t_object_1a12856506adc231bafc0983c881c3fe36" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>MTObject::MTObject</definition>
+        <argsstring>()</argsstring>
+        <name>MTObject</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/MTObjects/MTObject.hpp" line="21" column="3" bodyfile="lib/MTObjects/MTObject.hpp" bodystart="21" bodyend="21"/>
+      </memberdef>
+      <memberdef kind="function" id="class_m_t_object_1a813cbf27a03a3b334ebc9faec99a5158" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>MTObject::MTObject</definition>
+        <argsstring>(size_t &amp;_nb_threads)</argsstring>
+        <name>MTObject</name>
+        <param>
+          <type><ref refid="lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638" kindref="member">size_t</ref> &amp;</type>
+          <declname>_nb_threads</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/MTObjects/MTObject.hpp" line="22" column="3" bodyfile="lib/MTObjects/MTObject.hpp" bodystart="22" bodyend="22"/>
+        <references refid="class_m_t_object_1aaa3623d88deae3a9311aad39bfff49dc" compoundref="_m_t_object_8hpp" startline="62" endline="73">Initialize</references>
+      </memberdef>
+      <memberdef kind="function" id="class_m_t_object_1a048c52b4b15fc13667559a5b07d71002" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>MTObject::operator bool</definition>
+        <argsstring>()</argsstring>
+        <name>operator bool</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/MTObjects/MTObject.hpp" line="109" column="3" bodyfile="lib/MTObjects/MTObject.hpp" bodystart="109" bodyend="109"/>
+        <references refid="class_m_t_object_1a6fe86ce1ea64ede7e695490bceb264a3" compoundref="_m_t_object_8hpp" startline="108">ON</references>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="class_m_t_object_1ac76ab61815b5c3a471e6c210b7ba1913" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void MTObject::adjustThreadsNumber</definition>
+        <argsstring>(size_t const &amp;limiting_number, std::string const &amp;print_if_limit_reached=&quot;&quot;)</argsstring>
+        <name>adjustThreadsNumber</name>
+        <param>
+          <type><ref refid="lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638" kindref="member">size_t</ref> const &amp;</type>
+          <declname>limiting_number</declname>
+        </param>
+        <param>
+          <type>std::string const &amp;</type>
+          <declname>print_if_limit_reached</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/MTObjects/MTObject.hpp" line="52" column="15" bodyfile="lib/MTObjects/MTObject.hpp" bodystart="52" bodyend="60"/>
+        <references refid="class_m_t_object_1a1c2b3cb0cdccca46c8ebba009503ac88" compoundref="_m_t_object_8hpp" startline="106">nb_threads</references>
+        <references refid="class_m_t_object_1a6fe86ce1ea64ede7e695490bceb264a3" compoundref="_m_t_object_8hpp" startline="108">ON</references>
+        <references refid="_histogramor_8hpp_1ab48a2fa7184e6354788989602c8c8c29">print</references>
+        <references refid="class_m_t_object_1a872d9518e0a1936df8e70a2dae303f4f" compoundref="_m_t_object_8hpp" startline="30" endline="30">setThreadsNb</references>
+      </memberdef>
+      <memberdef kind="function" id="class_m_t_object_1a9c9a57a49a12e1d408a5354e8520b3fe" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto const  &amp;</type>
+        <definition>static auto const&amp; MTObject::getThreadIndex</definition>
+        <argsstring>()</argsstring>
+        <name>getThreadIndex</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/MTObjects/MTObject.hpp" line="111" column="22" bodyfile="lib/MTObjects/MTObject.hpp" bodystart="111" bodyend="111"/>
+        <references refid="class_m_t_object_1ac9efab6b9d255529611a250e91779a48" compoundref="_m_t_object_8hpp" startline="120">m_thread_index</references>
+        <referencedby refid="class_m_t_t_hist_1a3413cee45758fa0ec41020ae067e3e71" compoundref="_m_t_t_hist_8hpp" startline="425" endline="436">MTTHist&lt; THist &gt;::Fill</referencedby>
+        <referencedby refid="class_m_t_t_hist_1a02c41970872fdf5dba693eaa7ef368b6" compoundref="_m_t_t_hist_8hpp" startline="325" endline="325">MTTHist&lt; THist &gt;::Get</referencedby>
+        <referencedby refid="class_histo_analyse_1a3ebd877de62f44cfde794b8a7dad2a78" compoundref="_histo_analyse_8hpp" startline="19" endline="31">HistoAnalyse&lt; THist &gt;::reset</referencedby>
+        <referencedby refid="class_timeshifts_1abef7234fe827ae3c7758788cf22b6921" compoundref="_timeshifts_8hpp" startline="664" endline="705">Timeshifts::treatFasterFile</referencedby>
+        <referencedby refid="class_m_t_t_hist_1ae9163b5b4afca69cfdebdf2cf60064cd" compoundref="_m_t_t_hist_8hpp" startline="531" endline="549">MTTHist&lt; THist &gt;::Write</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_m_t_object_1ac97399bb34f766e41e7f9a1cd1b7eb7a" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto const  &amp;</type>
+        <definition>static auto const&amp; MTObject::getThreadsNb</definition>
+        <argsstring>()</argsstring>
+        <name>getThreadsNb</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/MTObjects/MTObject.hpp" line="101" column="22" bodyfile="lib/MTObjects/MTObject.hpp" bodystart="101" bodyend="101"/>
+        <references refid="class_m_t_object_1a1c2b3cb0cdccca46c8ebba009503ac88" compoundref="_m_t_object_8hpp" startline="106">nb_threads</references>
+        <referencedby refid="class_m_t_t_hist_1a7fea4cd494636bb8c4b103d3cf0d0786" compoundref="_m_t_t_hist_8hpp" startline="458" endline="473">MTTHist&lt; THist &gt;::Merge_thread</referencedby>
+        <referencedby refid="class_m_t_variable_1afeaf590e18d11bba1ca0e82be8d1cb26" compoundref="_m_t_variable_8hpp" startline="13" endline="24">MTVariable&lt; T &gt;::MTVariable</referencedby>
+        <referencedby refid="class_m_t_t_hist_1a6524d02003fa4d77ae22b33e14b977d9" compoundref="_m_t_t_hist_8hpp" startline="373" endline="421">MTTHist&lt; THist &gt;::reset</referencedby>
+        <referencedby refid="class_timeshifts_1a21dc1e7bf232c6b0637b16aa04e43701" compoundref="_timeshifts_8hpp" startline="526" endline="549">Timeshifts::treatFolder</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_m_t_object_1ad156f9b1c68f0e2713abb16890b1fa15" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto const  &amp;</type>
+        <definition>static auto const&amp; MTObject::getThreadsNumber</definition>
+        <argsstring>()</argsstring>
+        <name>getThreadsNumber</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/MTObjects/MTObject.hpp" line="102" column="22" bodyfile="lib/MTObjects/MTObject.hpp" bodystart="102" bodyend="102"/>
+        <references refid="class_m_t_object_1a1c2b3cb0cdccca46c8ebba009503ac88" compoundref="_m_t_object_8hpp" startline="106">nb_threads</references>
+        <referencedby refid="class_timeshifts_1a0753528955e94c43043cd7d68193f960" compoundref="_timeshifts_8hpp" startline="492" endline="524">Timeshifts::Initialize</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_m_t_object_1af752e86ec494c50d1af7e6442c09733b" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto const  &amp;</type>
+        <definition>static auto const&amp; MTObject::index</definition>
+        <argsstring>()</argsstring>
+        <name>index</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/MTObjects/MTObject.hpp" line="112" column="22" bodyfile="lib/MTObjects/MTObject.hpp" bodystart="112" bodyend="112"/>
+        <references refid="class_m_t_object_1ac9efab6b9d255529611a250e91779a48" compoundref="_m_t_object_8hpp" startline="120">m_thread_index</references>
+      </memberdef>
+      <memberdef kind="function" id="class_m_t_object_1aaa3623d88deae3a9311aad39bfff49dc" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void MTObject::Initialize</definition>
+        <argsstring>()</argsstring>
+        <name>Initialize</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/MTObjects/MTObject.hpp" line="62" column="15" bodyfile="lib/MTObjects/MTObject.hpp" bodystart="62" bodyend="73"/>
+        <references refid="class_m_t_object_1a16983b3e7be4853da5f32145342fc6b0" compoundref="_m_t_object_8hpp" startline="119">master_thread_id</references>
+        <references refid="class_m_t_object_1a1c2b3cb0cdccca46c8ebba009503ac88" compoundref="_m_t_object_8hpp" startline="106">nb_threads</references>
+        <references refid="class_m_t_object_1a6fe86ce1ea64ede7e695490bceb264a3" compoundref="_m_t_object_8hpp" startline="108">ON</references>
+        <references refid="_histogramor_8hpp_1ab48a2fa7184e6354788989602c8c8c29">print</references>
+        <referencedby refid="class_clover_spectra_1abf805324f6371f19ef0b3ce45705a115" compoundref="_clover_spectra_8hpp" startline="147" endline="159">CloverSpectra::Initialize</referencedby>
+        <referencedby refid="class_m_t_object_1aaa5354a0915c26979a49d54f36019df1" compoundref="_m_t_object_8hpp" startline="24" endline="28">Initialize</referencedby>
+        <referencedby refid="class_faster2_root_1ad30ccf937150bbd3504ec3a354b76c8f" compoundref="_faster2_root_8hpp" startline="209" endline="263">Faster2Root::load</referencedby>
+        <referencedby refid="class_m_t_object_1a813cbf27a03a3b334ebc9faec99a5158" compoundref="_m_t_object_8hpp" startline="22" endline="22">MTObject</referencedby>
+        <referencedby refid="class_faster2_histo_1a20fd8b47b9a9aecef8682ad5442db16d" compoundref="_faster2_histo_8hpp" startline="123" endline="130">Faster2Histo::multirun</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_m_t_object_1aaa5354a0915c26979a49d54f36019df1" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void MTObject::Initialize</definition>
+        <argsstring>(size_t const &amp;_nb_threads, bool force=false)</argsstring>
+        <name>Initialize</name>
+        <param>
+          <type><ref refid="lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638" kindref="member">size_t</ref> const &amp;</type>
+          <declname>_nb_threads</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>force</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/MTObjects/MTObject.hpp" line="24" column="15" bodyfile="lib/MTObjects/MTObject.hpp" bodystart="24" bodyend="28"/>
+        <references refid="class_m_t_object_1aaa3623d88deae3a9311aad39bfff49dc" compoundref="_m_t_object_8hpp" startline="62" endline="73">Initialize</references>
+        <references refid="class_m_t_object_1a872d9518e0a1936df8e70a2dae303f4f" compoundref="_m_t_object_8hpp" startline="30" endline="30">setThreadsNb</references>
+      </memberdef>
+      <memberdef kind="function" id="class_m_t_object_1a3350577ca839e2abdcd4d6f6449a1408" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool MTObject::isMasterThread</definition>
+        <argsstring>()</argsstring>
+        <name>isMasterThread</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/MTObjects/MTObject.hpp" line="104" column="15" bodyfile="lib/MTObjects/MTObject.hpp" bodystart="104" bodyend="104"/>
+        <references refid="class_m_t_object_1a16983b3e7be4853da5f32145342fc6b0" compoundref="_m_t_object_8hpp" startline="119">master_thread_id</references>
+        <referencedby refid="class_histo_analyse_1a3ebd877de62f44cfde794b8a7dad2a78" compoundref="_histo_analyse_8hpp" startline="19" endline="31">HistoAnalyse&lt; THist &gt;::reset</referencedby>
+        <referencedby refid="class_m_t_t_hist_1ae9163b5b4afca69cfdebdf2cf60064cd" compoundref="_m_t_t_hist_8hpp" startline="531" endline="549">MTTHist&lt; THist &gt;::Write</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_m_t_object_1a35c02650eb403bd54e867f93bb26fc47" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Func</type>
+          </param>
+          <param>
+            <type>class...</type>
+            <declname>ARGS</declname>
+            <defname>ARGS</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>static void MTObject::parallelise_function</definition>
+        <argsstring>(Func &amp;&amp;func, ARGS &amp;&amp;... args)</argsstring>
+        <name>parallelise_function</name>
+        <param>
+          <type>Func &amp;&amp;</type>
+          <declname>func</declname>
+        </param>
+        <param>
+          <type>ARGS &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/MTObjects/MTObject.hpp" line="76" column="15" bodyfile="lib/MTObjects/MTObject.hpp" bodystart="76" bodyend="99"/>
+        <references refid="class_m_t_object_1ac9efab6b9d255529611a250e91779a48" compoundref="_m_t_object_8hpp" startline="120">m_thread_index</references>
+        <references refid="class_m_t_object_1abf0f47fe00f785c060ba2ec35df9819d" compoundref="_m_t_object_8hpp" startline="121">m_threads</references>
+        <references refid="class_m_t_object_1a1c2b3cb0cdccca46c8ebba009503ac88" compoundref="_m_t_object_8hpp" startline="106">nb_threads</references>
+        <references refid="class_m_t_object_1a6fe86ce1ea64ede7e695490bceb264a3" compoundref="_m_t_object_8hpp" startline="108">ON</references>
+        <references refid="_histogramor_8hpp_1ab48a2fa7184e6354788989602c8c8c29">print</references>
+        <referencedby refid="class_m_t_root_reader_1a506f517a4772f5ec3b8bbf5c835a3490" compoundref="_m_t_root_reader_8hpp" startline="34" endline="39">MTRootReader::execute</referencedby>
+        <referencedby refid="class_calibration_1a6d6d354f65db38acf12addf1efb7c815" compoundref="_calibration_8hpp" startline="465" endline="474">Calibration::loadRootData</referencedby>
+        <referencedby refid="class_m_t_faster_reader_1af1ec563da5602cc23d7b0cd98b63bee0" compoundref="_m_t_faster_reader_8hpp" startline="217" endline="223">MTFasterReader::readAligned</referencedby>
+        <referencedby refid="class_m_t_faster_reader_1ae316d31ebcb18ae8689522509d1ba513" compoundref="_m_t_faster_reader_8hpp" startline="184" endline="189">MTFasterReader::readRaw</referencedby>
+        <referencedby refid="class_timeshifts_1a21dc1e7bf232c6b0637b16aa04e43701" compoundref="_timeshifts_8hpp" startline="526" endline="549">Timeshifts::treatFolder</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_m_t_object_1a872d9518e0a1936df8e70a2dae303f4f" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void MTObject::setThreadsNb</definition>
+        <argsstring>(int const &amp;n, bool force=false)</argsstring>
+        <name>setThreadsNb</name>
+        <param>
+          <type>int const &amp;</type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>force</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/MTObjects/MTObject.hpp" line="30" column="15" bodyfile="lib/MTObjects/MTObject.hpp" bodystart="30" bodyend="30"/>
+        <references refid="class_m_t_object_1a872d9518e0a1936df8e70a2dae303f4f" compoundref="_m_t_object_8hpp" startline="30" endline="30">setThreadsNb</references>
+        <references refid="lib_co_8hpp_1a237f678c718382f74a68364c0fc1779a" compoundref="lib_co_8hpp" startline="125" endline="125">size_cast</references>
+        <referencedby refid="class_m_t_object_1ac76ab61815b5c3a471e6c210b7ba1913" compoundref="_m_t_object_8hpp" startline="52" endline="60">adjustThreadsNumber</referencedby>
+        <referencedby refid="class_m_t_object_1aaa5354a0915c26979a49d54f36019df1" compoundref="_m_t_object_8hpp" startline="24" endline="28">Initialize</referencedby>
+        <referencedby refid="class_faster2_histo_1aa3d364eba3c8fc7367fdabea68524854" compoundref="_faster2_histo_8hpp" startline="42" endline="42">Faster2Histo::setNbThreads</referencedby>
+        <referencedby refid="class_m_t_object_1a872d9518e0a1936df8e70a2dae303f4f" compoundref="_m_t_object_8hpp" startline="30" endline="30">setThreadsNb</referencedby>
+        <referencedby refid="class_m_t_object_1a8b70d4506ed556d5ca4c23703a80ddb6" compoundref="_m_t_object_8hpp" startline="50" endline="50">setThreadsNumber</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_m_t_object_1a8f91c9269a027d1770d7bae3b6d599a5" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void MTObject::setThreadsNb</definition>
+        <argsstring>(size_t const &amp;n, bool force=false)</argsstring>
+        <name>setThreadsNb</name>
+        <param>
+          <type><ref refid="lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638" kindref="member">size_t</ref> const &amp;</type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>force</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+<para>Sets the number of threads. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Check the number of threads. Usually, over 75% of cores is the optimal. Set force parameter to true if you want to use all the cores </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/MTObjects/MTObject.hpp" line="36" column="15" bodyfile="lib/MTObjects/MTObject.hpp" bodystart="36" bodyend="48"/>
+        <references refid="class_m_t_object_1a1c2b3cb0cdccca46c8ebba009503ac88" compoundref="_m_t_object_8hpp" startline="106">nb_threads</references>
+        <references refid="lib_co_8hpp_1a237f678c718382f74a68364c0fc1779a" compoundref="lib_co_8hpp" startline="125" endline="125">size_cast</references>
+      </memberdef>
+      <memberdef kind="function" id="class_m_t_object_1a8b70d4506ed556d5ca4c23703a80ddb6" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void MTObject::setThreadsNumber</definition>
+        <argsstring>(size_t const &amp;n, bool force=false)</argsstring>
+        <name>setThreadsNumber</name>
+        <param>
+          <type><ref refid="lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638" kindref="member">size_t</ref> const &amp;</type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>force</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/MTObjects/MTObject.hpp" line="50" column="15" bodyfile="lib/MTObjects/MTObject.hpp" bodystart="50" bodyend="50"/>
+        <references refid="class_m_t_object_1a872d9518e0a1936df8e70a2dae303f4f" compoundref="_m_t_object_8hpp" startline="30" endline="30">setThreadsNb</references>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="lib/MTObjects/MTObject.hpp" line="18" column="1" bodyfile="lib/MTObjects/MTObject.hpp" bodystart="19" bodyend="122"/>
+    <listofallmembers>
+      <member refid="class_m_t_object_1ac76ab61815b5c3a471e6c210b7ba1913" prot="public" virt="non-virtual"><scope>MTObject</scope><name>adjustThreadsNumber</name></member>
+      <member refid="class_m_t_object_1a9c9a57a49a12e1d408a5354e8520b3fe" prot="public" virt="non-virtual"><scope>MTObject</scope><name>getThreadIndex</name></member>
+      <member refid="class_m_t_object_1ac97399bb34f766e41e7f9a1cd1b7eb7a" prot="public" virt="non-virtual"><scope>MTObject</scope><name>getThreadsNb</name></member>
+      <member refid="class_m_t_object_1ad156f9b1c68f0e2713abb16890b1fa15" prot="public" virt="non-virtual"><scope>MTObject</scope><name>getThreadsNumber</name></member>
+      <member refid="class_m_t_object_1af752e86ec494c50d1af7e6442c09733b" prot="public" virt="non-virtual"><scope>MTObject</scope><name>index</name></member>
+      <member refid="class_m_t_object_1aaa5354a0915c26979a49d54f36019df1" prot="public" virt="non-virtual"><scope>MTObject</scope><name>Initialize</name></member>
+      <member refid="class_m_t_object_1aaa3623d88deae3a9311aad39bfff49dc" prot="public" virt="non-virtual"><scope>MTObject</scope><name>Initialize</name></member>
+      <member refid="class_m_t_object_1a3350577ca839e2abdcd4d6f6449a1408" prot="public" virt="non-virtual"><scope>MTObject</scope><name>isMasterThread</name></member>
+      <member refid="class_m_t_object_1ac9efab6b9d255529611a250e91779a48" prot="private" virt="non-virtual"><scope>MTObject</scope><name>m_thread_index</name></member>
+      <member refid="class_m_t_object_1abf0f47fe00f785c060ba2ec35df9819d" prot="private" virt="non-virtual"><scope>MTObject</scope><name>m_threads</name></member>
+      <member refid="class_m_t_object_1a16983b3e7be4853da5f32145342fc6b0" prot="private" virt="non-virtual"><scope>MTObject</scope><name>master_thread_id</name></member>
+      <member refid="class_m_t_object_1a12856506adc231bafc0983c881c3fe36" prot="public" virt="non-virtual"><scope>MTObject</scope><name>MTObject</name></member>
+      <member refid="class_m_t_object_1a813cbf27a03a3b334ebc9faec99a5158" prot="public" virt="non-virtual"><scope>MTObject</scope><name>MTObject</name></member>
+      <member refid="class_m_t_object_1a79d86fbc8837ba0f9a4cd1405fddef1c" prot="public" virt="non-virtual"><scope>MTObject</scope><name>mutex</name></member>
+      <member refid="class_m_t_object_1a1c2b3cb0cdccca46c8ebba009503ac88" prot="public" virt="non-virtual"><scope>MTObject</scope><name>nb_threads</name></member>
+      <member refid="class_m_t_object_1a6fe86ce1ea64ede7e695490bceb264a3" prot="public" virt="non-virtual"><scope>MTObject</scope><name>ON</name></member>
+      <member refid="class_m_t_object_1a048c52b4b15fc13667559a5b07d71002" prot="public" virt="non-virtual"><scope>MTObject</scope><name>operator bool</name></member>
+      <member refid="class_m_t_object_1a35c02650eb403bd54e867f93bb26fc47" prot="public" virt="non-virtual"><scope>MTObject</scope><name>parallelise_function</name></member>
+      <member refid="class_m_t_object_1a872d9518e0a1936df8e70a2dae303f4f" prot="public" virt="non-virtual"><scope>MTObject</scope><name>setThreadsNb</name></member>
+      <member refid="class_m_t_object_1a8f91c9269a027d1770d7bae3b6d599a5" prot="public" virt="non-virtual"><scope>MTObject</scope><name>setThreadsNb</name></member>
+      <member refid="class_m_t_object_1a8b70d4506ed556d5ca4c23703a80ddb6" prot="public" virt="non-virtual"><scope>MTObject</scope><name>setThreadsNumber</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

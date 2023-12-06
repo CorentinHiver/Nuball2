@@ -1,0 +1,254 @@
+\doxysection{Simplex Class Reference}
+\label{class_simplex}\index{Simplex@{Simplex}}
+
+
+{\ttfamily \#include $<$Spectra\+Alignator.\+hpp$>$}
+
+
+
+Collaboration diagram for Simplex\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=166pt]{class_simplex__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+auto \textbf{ begin} ()
+\item 
+auto \textbf{ begin} () const
+\item 
+auto \textbf{ centroid} (std\+::vector$<$ int $>$ const \&sorted\+\_\+vertices\+\_\+indexes)
+\item 
+auto const  \& \textbf{ dim} ()
+\item 
+auto const  \& \textbf{ dim} () const
+\item 
+auto \textbf{ end} ()
+\item 
+auto \textbf{ end} () const
+\item 
+\textbf{ Simplex} \& \textbf{ operator=} (\textbf{ Simplex} \&\&other)
+\item 
+\textbf{ Simplex} \& \textbf{ operator=} (\textbf{ Simplex} const \&other)
+\item 
+auto \& \textbf{ operator[$\,$]} (int const \&i)
+\item 
+auto const  \& \textbf{ operator[$\,$]} (int const \&i) const
+\item 
+void \textbf{ set\+Vertice} (int const \&bin, \textbf{ Vertice} \&\&vertice)
+\item 
+void \textbf{ set\+Vertice} (int const \&bin, \textbf{ Vertice} const \&vertice)
+\item 
+\textbf{ Simplex} (\textbf{ Simplex} \&\&other)
+\item 
+\textbf{ Simplex} (\textbf{ Simplex} const \&other)
+\item 
+\textbf{ Simplex} (\textbf{ size\+\_\+t} const \&\textbf{ dim})
+\item 
+\textbf{ Simplex} (\textbf{ Vertices} const \&vertices)
+\item 
+auto const  \& \textbf{ size} ()
+\item 
+auto const  \& \textbf{ size} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ Vertice} \textbf{ m\+\_\+centroid} = \textbf{ Vertice}(\textbf{ m\+\_\+dim})
+\item 
+\textbf{ size\+\_\+t} \textbf{ m\+\_\+dim} = 0
+\item 
+int \textbf{ m\+\_\+size} = 0
+\item 
+\textbf{ Vertices} \textbf{ m\+\_\+vertices}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\label{class_simplex_ad893ac9de899c841e0e6ada82ea611b9}} 
+\index{Simplex@{Simplex}!Simplex@{Simplex}}
+\index{Simplex@{Simplex}!Simplex@{Simplex}}
+\doxysubsubsection{Simplex()\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily Simplex\+::\+Simplex (\begin{DoxyParamCaption}\item[{\textbf{ size\+\_\+t} const \&}]{dim }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=299pt]{class_simplex_ad893ac9de899c841e0e6ada82ea611b9_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_simplex_abd6e34ab7ace7cf33b13fa0dab907a2a}} 
+\index{Simplex@{Simplex}!Simplex@{Simplex}}
+\index{Simplex@{Simplex}!Simplex@{Simplex}}
+\doxysubsubsection{Simplex()\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily Simplex\+::\+Simplex (\begin{DoxyParamCaption}\item[{\textbf{ Vertices} const \&}]{vertices }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=291pt]{class_simplex_abd6e34ab7ace7cf33b13fa0dab907a2a_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_simplex_a2ff37bbc43bc7c86703f204c3510baa8}} 
+\index{Simplex@{Simplex}!Simplex@{Simplex}}
+\index{Simplex@{Simplex}!Simplex@{Simplex}}
+\doxysubsubsection{Simplex()\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily Simplex\+::\+Simplex (\begin{DoxyParamCaption}\item[{\textbf{ Simplex} const \&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_simplex_a169c2796d3adf036611cdcf6772e46d1}} 
+\index{Simplex@{Simplex}!Simplex@{Simplex}}
+\index{Simplex@{Simplex}!Simplex@{Simplex}}
+\doxysubsubsection{Simplex()\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily Simplex\+::\+Simplex (\begin{DoxyParamCaption}\item[{\textbf{ Simplex} \&\&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\label{class_simplex_af9f387b740699fc83d561b06a5e8305a}} 
+\index{Simplex@{Simplex}!begin@{begin}}
+\index{begin@{begin}!Simplex@{Simplex}}
+\doxysubsubsection{begin()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily auto Simplex\+::begin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_simplex_ad5161ef4f875383b9880f2401cefe71a}} 
+\index{Simplex@{Simplex}!begin@{begin}}
+\index{begin@{begin}!Simplex@{Simplex}}
+\doxysubsubsection{begin()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily auto Simplex\+::begin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_simplex_a033d49e8ac767b72b4c1dd6d38573988}} 
+\index{Simplex@{Simplex}!centroid@{centroid}}
+\index{centroid@{centroid}!Simplex@{Simplex}}
+\doxysubsubsection{centroid()}
+{\footnotesize\ttfamily auto Simplex\+::centroid (\begin{DoxyParamCaption}\item[{std\+::vector$<$ int $>$ const \&}]{sorted\+\_\+vertices\+\_\+indexes }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=294pt]{class_simplex_a033d49e8ac767b72b4c1dd6d38573988_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_simplex_a67925da27ed5cdd6b9ea6b002102d02b}} 
+\index{Simplex@{Simplex}!dim@{dim}}
+\index{dim@{dim}!Simplex@{Simplex}}
+\doxysubsubsection{dim()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily auto const\& Simplex\+::dim (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_simplex_aed93fc950fa50599b289d5ac9e3356c7}} 
+\index{Simplex@{Simplex}!dim@{dim}}
+\index{dim@{dim}!Simplex@{Simplex}}
+\doxysubsubsection{dim()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily auto const\& Simplex\+::dim (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=299pt]{class_simplex_aed93fc950fa50599b289d5ac9e3356c7_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_simplex_a43aa87c378225a78bf764a3c049ed381}} 
+\index{Simplex@{Simplex}!end@{end}}
+\index{end@{end}!Simplex@{Simplex}}
+\doxysubsubsection{end()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily auto Simplex\+::end (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_simplex_ae3a1f652ec439b823610f75846ae8067}} 
+\index{Simplex@{Simplex}!end@{end}}
+\index{end@{end}!Simplex@{Simplex}}
+\doxysubsubsection{end()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily auto Simplex\+::end (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_simplex_a18363c969c478336afe053dc246495ce}} 
+\index{Simplex@{Simplex}!operator=@{operator=}}
+\index{operator=@{operator=}!Simplex@{Simplex}}
+\doxysubsubsection{operator=()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \textbf{ Simplex}\& Simplex\+::operator= (\begin{DoxyParamCaption}\item[{\textbf{ Simplex} \&\&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_simplex_a622f6bed00b73eb0b931cf65ee77d055}} 
+\index{Simplex@{Simplex}!operator=@{operator=}}
+\index{operator=@{operator=}!Simplex@{Simplex}}
+\doxysubsubsection{operator=()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \textbf{ Simplex}\& Simplex\+::operator= (\begin{DoxyParamCaption}\item[{\textbf{ Simplex} const \&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_simplex_a0bbdd7fe5cc1296b7c1da9232d78d182}} 
+\index{Simplex@{Simplex}!operator[]@{operator[]}}
+\index{operator[]@{operator[]}!Simplex@{Simplex}}
+\doxysubsubsection{operator[]()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily auto\& Simplex\+::operator[$\,$] (\begin{DoxyParamCaption}\item[{int const \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_simplex_a08239a3a6b994da2a445a7ea44c7b893}} 
+\index{Simplex@{Simplex}!operator[]@{operator[]}}
+\index{operator[]@{operator[]}!Simplex@{Simplex}}
+\doxysubsubsection{operator[]()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily auto const\& Simplex\+::operator[$\,$] (\begin{DoxyParamCaption}\item[{int const \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_simplex_aa4f7721e6989b27489d84cca5de99c07}} 
+\index{Simplex@{Simplex}!setVertice@{setVertice}}
+\index{setVertice@{setVertice}!Simplex@{Simplex}}
+\doxysubsubsection{setVertice()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Simplex\+::set\+Vertice (\begin{DoxyParamCaption}\item[{int const \&}]{bin,  }\item[{\textbf{ Vertice} \&\&}]{vertice }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_simplex_ade818ac404caab90542e80143cbc63c0}} 
+\index{Simplex@{Simplex}!setVertice@{setVertice}}
+\index{setVertice@{setVertice}!Simplex@{Simplex}}
+\doxysubsubsection{setVertice()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Simplex\+::set\+Vertice (\begin{DoxyParamCaption}\item[{int const \&}]{bin,  }\item[{\textbf{ Vertice} const \&}]{vertice }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_simplex_a321c481eed3e0f60defabaa88f4cba69}} 
+\index{Simplex@{Simplex}!size@{size}}
+\index{size@{size}!Simplex@{Simplex}}
+\doxysubsubsection{size()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily auto const\& Simplex\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_simplex_ae39ce6d0a47986ceabb9a76146a8225b}} 
+\index{Simplex@{Simplex}!size@{size}}
+\index{size@{size}!Simplex@{Simplex}}
+\doxysubsubsection{size()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily auto const\& Simplex\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=272pt]{class_simplex_ae39ce6d0a47986ceabb9a76146a8225b_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\label{class_simplex_a0d352c2bc1248646ccaff4236538a194}} 
+\index{Simplex@{Simplex}!m\_centroid@{m\_centroid}}
+\index{m\_centroid@{m\_centroid}!Simplex@{Simplex}}
+\doxysubsubsection{m\_centroid}
+{\footnotesize\ttfamily \textbf{ Vertice} Simplex\+::m\+\_\+centroid = \textbf{ Vertice}(\textbf{ m\+\_\+dim})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_simplex_aed12d66219db915526fc70cc33c83505}} 
+\index{Simplex@{Simplex}!m\_dim@{m\_dim}}
+\index{m\_dim@{m\_dim}!Simplex@{Simplex}}
+\doxysubsubsection{m\_dim}
+{\footnotesize\ttfamily \textbf{ size\+\_\+t} Simplex\+::m\+\_\+dim = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_simplex_a3e8657a83fb94712f3d5c61a88801e89}} 
+\index{Simplex@{Simplex}!m\_size@{m\_size}}
+\index{m\_size@{m\_size}!Simplex@{Simplex}}
+\doxysubsubsection{m\_size}
+{\footnotesize\ttfamily int Simplex\+::m\+\_\+size = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_simplex_a8e0cd4b76bda7c66a299e4f7c8ea1bc3}} 
+\index{Simplex@{Simplex}!m\_vertices@{m\_vertices}}
+\index{m\_vertices@{m\_vertices}!Simplex@{Simplex}}
+\doxysubsubsection{m\_vertices}
+{\footnotesize\ttfamily \textbf{ Vertices} Simplex\+::m\+\_\+vertices\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+lib/\+Classes/\textbf{ Spectra\+Alignator.\+hpp}\end{DoxyCompactItemize}

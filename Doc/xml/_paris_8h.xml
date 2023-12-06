@@ -1,0 +1,312 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="_paris_8h" kind="file" language="C++">
+    <compoundname>Paris.h</compoundname>
+    <includedby refid="_paris_8hpp" local="yes">lib/Analyse/Paris.hpp</includedby>
+    <includedby refid="_paris_x_y_8hpp" local="yes">lib/Analyse/ParisXY.hpp</includedby>
+    <invincdepgraph>
+      <node id="1">
+        <label>lib/Analyse/Arrays/Paris.h</label>
+        <link refid="_paris_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>lib/Analyse/EventAnalyse.hpp</label>
+        <link refid="_event_analyse_8hpp"/>
+      </node>
+      <node id="4">
+        <label>lib/Analyse/ParisXY.hpp</label>
+        <link refid="_paris_x_y_8hpp"/>
+      </node>
+      <node id="2">
+        <label>lib/Analyse/Paris.hpp</label>
+        <link refid="_paris_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="_paris_8h_1a7a3b23a34ec2629365b794dbf537432f" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="_hit_8hpp_1ab5dd24876acad09ec52c250c1668466c" kindref="member">Label</ref> &gt;</type>
+        <definition>std::vector&lt;Label&gt; paris_back_labels</definition>
+        <argsstring></argsstring>
+        <name>paris_back_labels</name>
+        <initializer>=
+{
+  501, 502, 503, 504, 505, 506, 507, 508,
+  601, 602, 603, 604, 605, 606, 607, 608, 609, 610, 611, 612, 613, 614, 615, 616,
+  701, 702, 703, 704, 705, 706, 707, 708, 709, 710, 711, 712
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/Arrays/Paris.h" line="21" column="13" bodyfile="lib/Analyse/Arrays/Paris.h" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="_paris_8h_1ae74b4ff744165b6e305e7eb46cb6dd3d" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="_hit_8hpp_1ab5dd24876acad09ec52c250c1668466c" kindref="member">Label</ref> &gt;</type>
+        <definition>std::vector&lt;Label&gt; paris_front_labels</definition>
+        <argsstring></argsstring>
+        <name>paris_front_labels</name>
+        <initializer>=
+{
+  201, 202, 203, 204, 205, 206, 207, 208,
+  301, 302, 303, 304, 305, 306, 307, 308, 309, 310, 311, 312, 313, 314, 315, 316,
+  401, 402, 403, 404, 405, 406, 407, 408, 409, 410, 411, 412
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/Arrays/Paris.h" line="14" column="13" bodyfile="lib/Analyse/Arrays/Paris.h" bodystart="14" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="_paris_8h_1adab138f24a10b06a4dc409a8cf76593c" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="_hit_8hpp_1ab5dd24876acad09ec52c250c1668466c" kindref="member">Label</ref> &gt;</type>
+        <definition>std::vector&lt;Label&gt; paris_labels</definition>
+        <argsstring></argsstring>
+        <name>paris_labels</name>
+        <initializer>=
+{
+  201, 202, 203, 204, 205, 206, 207, 208,
+  301, 302, 303, 304, 305, 306, 307, 308, 309, 310, 311, 312, 313, 314, 315, 316,
+  401, 402, 403, 404, 405, 406, 407, 408, 409, 410, 411, 412,
+  501, 502, 503, 504, 505, 506, 507, 508,
+  601, 602, 603, 604, 605, 606, 607, 608, 609, 610, 611, 612, 613, 614, 615, 616,
+  701, 702, 703, 704, 705, 706, 707, 708, 709, 710, 711, 712
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/Arrays/Paris.h" line="4" column="13" bodyfile="lib/Analyse/Arrays/Paris.h" bodystart="4" bodyend="-1"/>
+        <referencedby refid="class_paris_1a5218753a8ecec0c9a05c6d3e3ca2db07" compoundref="_paris_8hpp" startline="42" endline="58">Paris::InitializeArrays</referencedby>
+        <referencedby refid="class_paris_1a5e84a66240e195c7743f8c8dae84f800" compoundref="_paris_8hpp" startline="21" endline="26">Paris::is_paris</referencedby>
+        <referencedby refid="class_paris_1a060a9d4c6345e7b73ac62ad5aee1bd23" compoundref="_paris_8hpp" startline="28" endline="35">Paris::label_to_index</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="_paris_8h_1afbdbd6b5a6e2c512c642383b9ba11ac5" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; int &gt;</type>
+        <definition>std::vector&lt;int&gt; Paris_R1_x</definition>
+        <argsstring></argsstring>
+        <name>Paris_R1_x</name>
+        <initializer>=
+{
+  -1,  0,  1,
+   1,
+   1,  0, -1,
+  -1
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/Arrays/Paris.h" line="29" column="13" bodyfile="lib/Analyse/Arrays/Paris.h" bodystart="29" bodyend="-1"/>
+        <referencedby refid="_paris_8hpp_1a3c82e9291cdf8abbc848c7cb6879c35f" compoundref="_paris_8hpp" startline="8" endline="13">paris_getPositionModule</referencedby>
+        <referencedby refid="class_paris_x_y_1a5457f46da1c0654885ba411edc93a4e0" compoundref="_paris_x_y_8hpp" startline="9" endline="18">ParisXY::ParisXY</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="_paris_8h_1a9cb315707b7013f81d8f16825caf15a3" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; int &gt;</type>
+        <definition>std::vector&lt;int&gt; Paris_R1_y</definition>
+        <argsstring></argsstring>
+        <name>Paris_R1_y</name>
+        <initializer>=
+{
+  1,  1,  1,
+  0,
+  -1, -1, -1,
+  0
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/Arrays/Paris.h" line="53" column="13" bodyfile="lib/Analyse/Arrays/Paris.h" bodystart="53" bodyend="-1"/>
+        <referencedby refid="_paris_8hpp_1a3c82e9291cdf8abbc848c7cb6879c35f" compoundref="_paris_8hpp" startline="8" endline="13">paris_getPositionModule</referencedby>
+        <referencedby refid="class_paris_x_y_1a5457f46da1c0654885ba411edc93a4e0" compoundref="_paris_x_y_8hpp" startline="9" endline="18">ParisXY::ParisXY</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="_paris_8h_1a764556bb85a47eb157e298651f3a1bd0" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; int &gt;</type>
+        <definition>std::vector&lt;int&gt; Paris_R2_x</definition>
+        <argsstring></argsstring>
+        <name>Paris_R2_x</name>
+        <initializer>=
+{
+  -2, -1,  0,  1,  2,
+   2,  2,  2,
+   2,  1,  0, -1, -2,
+  -2, -2, -2
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/Arrays/Paris.h" line="37" column="13" bodyfile="lib/Analyse/Arrays/Paris.h" bodystart="37" bodyend="-1"/>
+        <referencedby refid="_paris_8hpp_1a3c82e9291cdf8abbc848c7cb6879c35f" compoundref="_paris_8hpp" startline="8" endline="13">paris_getPositionModule</referencedby>
+        <referencedby refid="class_paris_x_y_1a5457f46da1c0654885ba411edc93a4e0" compoundref="_paris_x_y_8hpp" startline="9" endline="18">ParisXY::ParisXY</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="_paris_8h_1a83f5c233a4991b23b715dde312171dc2" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; int &gt;</type>
+        <definition>std::vector&lt;int&gt; Paris_R2_y</definition>
+        <argsstring></argsstring>
+        <name>Paris_R2_y</name>
+        <initializer>=
+{
+  2,  2,  2,  2,  2,
+  1,  0, -1,
+  -2, -2, -2, -2, -2,
+  -1,  0,  1
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/Arrays/Paris.h" line="61" column="13" bodyfile="lib/Analyse/Arrays/Paris.h" bodystart="61" bodyend="-1"/>
+        <referencedby refid="_paris_8hpp_1a3c82e9291cdf8abbc848c7cb6879c35f" compoundref="_paris_8hpp" startline="8" endline="13">paris_getPositionModule</referencedby>
+        <referencedby refid="class_paris_x_y_1a5457f46da1c0654885ba411edc93a4e0" compoundref="_paris_x_y_8hpp" startline="9" endline="18">ParisXY::ParisXY</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="_paris_8h_1ae69f9e16a5332c21d2e75e85124a24d5" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; int &gt;</type>
+        <definition>std::vector&lt;int&gt; Paris_R3_x</definition>
+        <argsstring></argsstring>
+        <name>Paris_R3_x</name>
+        <initializer>=
+{
+  -1,  0,  1,
+   3,  3,  3,
+   1,  0, -1,
+  -3, -3, -3,
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/Arrays/Paris.h" line="45" column="13" bodyfile="lib/Analyse/Arrays/Paris.h" bodystart="45" bodyend="-1"/>
+        <referencedby refid="_paris_8hpp_1a3c82e9291cdf8abbc848c7cb6879c35f" compoundref="_paris_8hpp" startline="8" endline="13">paris_getPositionModule</referencedby>
+        <referencedby refid="class_paris_x_y_1a5457f46da1c0654885ba411edc93a4e0" compoundref="_paris_x_y_8hpp" startline="9" endline="18">ParisXY::ParisXY</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="_paris_8h_1a96dc4022d292e420408212f72f523ef1" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; int &gt;</type>
+        <definition>std::vector&lt;int&gt; Paris_R3_y</definition>
+        <argsstring></argsstring>
+        <name>Paris_R3_y</name>
+        <initializer>=
+{
+   3,  3,  3,
+   1,  0, -1,
+  -3, -3, -3,
+  -1,  0,  1,
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/Arrays/Paris.h" line="69" column="13" bodyfile="lib/Analyse/Arrays/Paris.h" bodystart="69" bodyend="-1"/>
+        <referencedby refid="_paris_8hpp_1a3c82e9291cdf8abbc848c7cb6879c35f" compoundref="_paris_8hpp" startline="8" endline="13">paris_getPositionModule</referencedby>
+        <referencedby refid="class_paris_x_y_1a5457f46da1c0654885ba411edc93a4e0" compoundref="_paris_x_y_8hpp" startline="9" endline="18">ParisXY::ParisXY</referencedby>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>PARIS_ARRAYS</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>PARIS_ARRAYS</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4" refid="_paris_8h_1adab138f24a10b06a4dc409a8cf76593c" refkind="member"><highlight class="normal">std::vector&lt;Label&gt;<sp/><ref refid="_paris_8h_1adab138f24a10b06a4dc409a8cf76593c" kindref="member">paris_labels</ref><sp/>=</highlight></codeline>
+<codeline lineno="5"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="6"><highlight class="normal"><sp/><sp/>201,<sp/>202,<sp/>203,<sp/>204,<sp/>205,<sp/>206,<sp/>207,<sp/>208,</highlight></codeline>
+<codeline lineno="7"><highlight class="normal"><sp/><sp/>301,<sp/>302,<sp/>303,<sp/>304,<sp/>305,<sp/>306,<sp/>307,<sp/>308,<sp/>309,<sp/>310,<sp/>311,<sp/>312,<sp/>313,<sp/>314,<sp/>315,<sp/>316,</highlight></codeline>
+<codeline lineno="8"><highlight class="normal"><sp/><sp/>401,<sp/>402,<sp/>403,<sp/>404,<sp/>405,<sp/>406,<sp/>407,<sp/>408,<sp/>409,<sp/>410,<sp/>411,<sp/>412,</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"><sp/><sp/>501,<sp/>502,<sp/>503,<sp/>504,<sp/>505,<sp/>506,<sp/>507,<sp/>508,</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"><sp/><sp/>601,<sp/>602,<sp/>603,<sp/>604,<sp/>605,<sp/>606,<sp/>607,<sp/>608,<sp/>609,<sp/>610,<sp/>611,<sp/>612,<sp/>613,<sp/>614,<sp/>615,<sp/>616,</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"><sp/><sp/>701,<sp/>702,<sp/>703,<sp/>704,<sp/>705,<sp/>706,<sp/>707,<sp/>708,<sp/>709,<sp/>710,<sp/>711,<sp/>712</highlight></codeline>
+<codeline lineno="12"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight></codeline>
+<codeline lineno="14" refid="_paris_8h_1ae74b4ff744165b6e305e7eb46cb6dd3d" refkind="member"><highlight class="normal">std::vector&lt;Label&gt;<sp/><ref refid="_paris_8h_1ae74b4ff744165b6e305e7eb46cb6dd3d" kindref="member">paris_front_labels</ref><sp/>=</highlight></codeline>
+<codeline lineno="15"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/>201,<sp/>202,<sp/>203,<sp/>204,<sp/>205,<sp/>206,<sp/>207,<sp/>208,</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/>301,<sp/>302,<sp/>303,<sp/>304,<sp/>305,<sp/>306,<sp/>307,<sp/>308,<sp/>309,<sp/>310,<sp/>311,<sp/>312,<sp/>313,<sp/>314,<sp/>315,<sp/>316,</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/>401,<sp/>402,<sp/>403,<sp/>404,<sp/>405,<sp/>406,<sp/>407,<sp/>408,<sp/>409,<sp/>410,<sp/>411,<sp/>412</highlight></codeline>
+<codeline lineno="19"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight></codeline>
+<codeline lineno="21" refid="_paris_8h_1a7a3b23a34ec2629365b794dbf537432f" refkind="member"><highlight class="normal">std::vector&lt;Label&gt;<sp/><ref refid="_paris_8h_1a7a3b23a34ec2629365b794dbf537432f" kindref="member">paris_back_labels</ref><sp/>=</highlight></codeline>
+<codeline lineno="22"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/>501,<sp/>502,<sp/>503,<sp/>504,<sp/>505,<sp/>506,<sp/>507,<sp/>508,</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/>601,<sp/>602,<sp/>603,<sp/>604,<sp/>605,<sp/>606,<sp/>607,<sp/>608,<sp/>609,<sp/>610,<sp/>611,<sp/>612,<sp/>613,<sp/>614,<sp/>615,<sp/>616,</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/>701,<sp/>702,<sp/>703,<sp/>704,<sp/>705,<sp/>706,<sp/>707,<sp/>708,<sp/>709,<sp/>710,<sp/>711,<sp/>712</highlight></codeline>
+<codeline lineno="26"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight></codeline>
+<codeline lineno="29" refid="_paris_8h_1afbdbd6b5a6e2c512c642383b9ba11ac5" refkind="member"><highlight class="normal">std::vector&lt;int&gt;<sp/><ref refid="_paris_8h_1afbdbd6b5a6e2c512c642383b9ba11ac5" kindref="member">Paris_R1_x</ref><sp/>=</highlight></codeline>
+<codeline lineno="30"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/>-1,<sp/><sp/>0,<sp/><sp/>1,</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/>1,</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/>1,<sp/><sp/>0,<sp/>-1,</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/>-1</highlight></codeline>
+<codeline lineno="35"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight></codeline>
+<codeline lineno="37" refid="_paris_8h_1a764556bb85a47eb157e298651f3a1bd0" refkind="member"><highlight class="normal">std::vector&lt;int&gt;<sp/><ref refid="_paris_8h_1a764556bb85a47eb157e298651f3a1bd0" kindref="member">Paris_R2_x</ref><sp/>=</highlight></codeline>
+<codeline lineno="38"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/>-2,<sp/>-1,<sp/><sp/>0,<sp/><sp/>1,<sp/><sp/>2,</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/>2,<sp/><sp/>2,<sp/><sp/>2,</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/>2,<sp/><sp/>1,<sp/><sp/>0,<sp/>-1,<sp/>-2,</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/>-2,<sp/>-2,<sp/>-2</highlight></codeline>
+<codeline lineno="43"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight></codeline>
+<codeline lineno="45" refid="_paris_8h_1ae69f9e16a5332c21d2e75e85124a24d5" refkind="member"><highlight class="normal">std::vector&lt;int&gt;<sp/><ref refid="_paris_8h_1ae69f9e16a5332c21d2e75e85124a24d5" kindref="member">Paris_R3_x</ref><sp/>=</highlight></codeline>
+<codeline lineno="46"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/>-1,<sp/><sp/>0,<sp/><sp/>1,</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/>3,<sp/><sp/>3,<sp/><sp/>3,</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/>1,<sp/><sp/>0,<sp/>-1,</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/>-3,<sp/>-3,<sp/>-3,</highlight></codeline>
+<codeline lineno="51"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight></codeline>
+<codeline lineno="53" refid="_paris_8h_1a9cb315707b7013f81d8f16825caf15a3" refkind="member"><highlight class="normal">std::vector&lt;int&gt;<sp/><ref refid="_paris_8h_1a9cb315707b7013f81d8f16825caf15a3" kindref="member">Paris_R1_y</ref><sp/>=</highlight></codeline>
+<codeline lineno="54"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/>1,<sp/><sp/>1,<sp/><sp/>1,</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/>0,</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/>-1,<sp/>-1,<sp/>-1,</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/>0</highlight></codeline>
+<codeline lineno="59"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight></codeline>
+<codeline lineno="61" refid="_paris_8h_1a83f5c233a4991b23b715dde312171dc2" refkind="member"><highlight class="normal">std::vector&lt;int&gt;<sp/><ref refid="_paris_8h_1a83f5c233a4991b23b715dde312171dc2" kindref="member">Paris_R2_y</ref><sp/>=</highlight></codeline>
+<codeline lineno="62"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/>2,<sp/><sp/>2,<sp/><sp/>2,<sp/><sp/>2,<sp/><sp/>2,</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/>1,<sp/><sp/>0,<sp/>-1,</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/>-2,<sp/>-2,<sp/>-2,<sp/>-2,<sp/>-2,</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/>-1,<sp/><sp/>0,<sp/><sp/>1</highlight></codeline>
+<codeline lineno="67"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight></codeline>
+<codeline lineno="69" refid="_paris_8h_1a96dc4022d292e420408212f72f523ef1" refkind="member"><highlight class="normal">std::vector&lt;int&gt;<sp/><ref refid="_paris_8h_1a96dc4022d292e420408212f72f523ef1" kindref="member">Paris_R3_y</ref><sp/>=</highlight></codeline>
+<codeline lineno="70"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/>3,<sp/><sp/>3,<sp/><sp/>3,</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/>1,<sp/><sp/>0,<sp/>-1,</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/>-3,<sp/>-3,<sp/>-3,</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/>-1,<sp/><sp/>0,<sp/><sp/>1,</highlight></codeline>
+<codeline lineno="75"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//PARIS_ARRAYS</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="lib/Analyse/Arrays/Paris.h"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_todo" xml:lang="en-US">
+
+<para><variablelist>
+<varlistentry><term>Class <link linkend="_class_calibration">Calibration</link>  </term>
+<listitem>
+<para><anchor xml:id="_todo_1_todo000002"/><link linkend="_class_calibration_1a344dc3d6feab3580e859cc693c2fdd4a">Calibration::verify()</link> DO NOT SUPPORT <link linkend="_class_m_t_object">MTObject</link> !!  </para>
+</listitem></varlistentry>
+<varlistentry><term>Class <link linkend="_class_file">File</link>  </term>
+<listitem>
+<para><anchor xml:id="_todo_1_todo000001"/>rethink the checkMode logic ...  </para>
+</listitem></varlistentry>
+<varlistentry><term>Class <link linkend="_class_m_t_t_hist">MTTHist&lt; THist &gt;</link>  </term>
+<listitem>
+<para><anchor xml:id="_todo_1_todo000003"/>better memory management </para>
+</listitem></varlistentry>
+</variablelist>
+</para>
+</section>

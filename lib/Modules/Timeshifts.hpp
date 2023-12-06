@@ -895,7 +895,7 @@ void Timeshifts::analyse()
       else
       {
         double mean = 0.;
-        if (getMeanPeak(m_histograms_VS_RF[label], mean)) m_timeshifts[label] = RF_zero-Shift_cast(mean);
+        if (getMeanPeak(m_histograms_VS_RF[label].get(), mean)) m_timeshifts[label] = RF_zero-Shift_cast(mean);
         if (m_verbose) print( "Mean :", m_timeshifts[label], "with max =", int_cast(m_histograms_VS_RF[label] -> GetMaximum()), "counts.");
       }
   #endif //USE_RF

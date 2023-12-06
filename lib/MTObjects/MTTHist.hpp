@@ -386,20 +386,20 @@ inline void MTTHist<THist>::reset(std::string name, ARGS &&... args)
   #else // not MTTHIST_MONO
    
     auto const & thread_nb = MTObject::getThreadsNb();
-    if (MTObject::isMasterThread())
+    // if (MTObject::isMasterThread())
+    // {
+    for (size_t histo = 0; histo<m_collection.size(); histo++) if (!m_is_deleted[histo]) delete m_collection[histo]; 
+    m_collection.resize(thread_nb);
+    m_is_deleted.resize(thread_nb);
+    for (size_t i = 0; i<thread_nb; i++) 
     {
-      for (size_t histo = 0; histo<m_collection.size(); histo++) if (!m_is_deleted[histo]) delete m_collection[histo]; 
-      m_collection.resize(thread_nb);
-      m_is_deleted.resize(thread_nb);
-      for (size_t i = 0; i<thread_nb; i++) 
-      {
-        m_collection[i] = new THist ((name+"_"+std::to_string(i)).c_str(), std::forward<ARGS>(args)...);
-        m_is_deleted[i] = false;
-      }
+      m_collection[i] = new THist ((name+"_"+std::to_string(i)).c_str(), std::forward<ARGS>(args)...);
+      m_is_deleted[i] = false;
     }
-    else
-    {
-      throw_error("CANT PRODUCE A MULTI THREADED ROOT HISTOGRAM (MTTHist) INSIDE OF ONE THREAD (must be done in master thread)");
+    // }
+    // else
+    // {
+      // throw_error("CANT PRODUCE A MULTI THREADED ROOT HISTOGRAM (MTTHist) INSIDE OF ONE THREAD (must be done in master thread)");
       // if (m_collection.size()<thread_nb)
       // {
       //   for (size_t histo = 0; histo<m_collection.size(); histo++) if (!m_is_deleted[histo]) delete m_collection[histo]; 
@@ -409,7 +409,7 @@ inline void MTTHist<THist>::reset(std::string name, ARGS &&... args)
       // auto const & i = MTObject::getThreadIndex();
       // m_collection[i] = new THist (name.c_str(), std::forward<ARGS>(args)...);
       // m_is_deleted[i] = false;
-    }
+    // }
   #endif //MTTHIST_MONO
   }
   else // If MTObject is OFF

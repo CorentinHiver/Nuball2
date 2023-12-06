@@ -1,0 +1,586 @@
+\doxysection{lib/lib\+Co.hpp File Reference}
+\label{lib_co_8hpp}\index{lib/libCo.hpp@{lib/libCo.hpp}}
+{\ttfamily \#include $<$any$>$}\newline
+{\ttfamily \#include $<$array$>$}\newline
+{\ttfamily \#include $<$algorithm$>$}\newline
+{\ttfamily \#include $<$cstdlib$>$}\newline
+{\ttfamily \#include $<$cstring$>$}\newline
+{\ttfamily \#include $<$fstream$>$}\newline
+{\ttfamily \#include $<$functional$>$}\newline
+{\ttfamily \#include $<$iomanip$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$map$>$}\newline
+{\ttfamily \#include $<$memory$>$}\newline
+{\ttfamily \#include $<$mutex$>$}\newline
+{\ttfamily \#include $<$numeric$>$}\newline
+{\ttfamily \#include $<$queue$>$}\newline
+{\ttfamily \#include $<$sstream$>$}\newline
+{\ttfamily \#include $<$stdexcept$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$stack$>$}\newline
+{\ttfamily \#include $<$thread$>$}\newline
+{\ttfamily \#include $<$typeindex$>$}\newline
+{\ttfamily \#include $<$typeinfo$>$}\newline
+{\ttfamily \#include $<$unordered\+\_\+map$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$dirent.\+h$>$}\newline
+{\ttfamily \#include $<$glob.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}print.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}random.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}string\+\_\+functions.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}files\+\_\+functions.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}vector\+\_\+functions.\+hpp\char`\"{}}\newline
+Include dependency graph for lib\+Co.\+hpp\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{lib_co_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{lib_co_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \textbf{ Bools}
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using \textbf{ Ints} = std\+::vector$<$ int $>$
+\item 
+using \textbf{ longlong} = long long int
+\item 
+using \textbf{ size\+\_\+t} = std\+::size\+\_\+t
+\item 
+using \textbf{ Strings} = std\+::vector$<$ std\+::string $>$
+\item 
+{\footnotesize template$<$class T $>$ }\\using \textbf{ T\+\_\+is\+\_\+number} = void
+\item 
+using \textbf{ uchar} = unsigned char
+\item 
+using \textbf{ uint} = unsigned int
+\item 
+using \textbf{ ulong} = unsigned long int
+\item 
+using \textbf{ ulonglong} = unsigned long long int
+\item 
+using \textbf{ ushort} = unsigned short int
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T , typename  = typename std\+::enable\+\_\+if$<$std\+::is\+\_\+arithmetic$<$\+T$>$\+::value$>$\+::type$>$ }\\bool \textbf{ bool\+\_\+cast} (T const \&t)
+\begin{DoxyCompactList}\small\item\em Casts a number into an bool. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T , typename  = typename std\+::enable\+\_\+if$<$std\+::is\+\_\+arithmetic$<$\+T$>$\+::value$>$\+::type$>$ }\\char \textbf{ char\+\_\+cast} (T const \&t)
+\begin{DoxyCompactList}\small\item\em Casts a number into an char. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T , typename  = typename std\+::enable\+\_\+if$<$std\+::is\+\_\+arithmetic$<$\+T$>$\+::value$>$\+::type$>$ }\\double \textbf{ double\+\_\+cast} (T const \&t)
+\begin{DoxyCompactList}\small\item\em Casts a number into an double. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename K , typename V $>$ }\\bool \textbf{ find\+\_\+key} (std\+::map$<$ K, V $>$ const \&map, K const \&key)
+\item 
+{\footnotesize template$<$typename K , typename V $>$ }\\bool \textbf{ find\+\_\+key} (std\+::unordered\+\_\+map$<$ K, V $>$ const \&map, K const \&key)
+\item 
+{\footnotesize template$<$typename K , typename V $>$ }\\bool \textbf{ find\+\_\+value} (std\+::map$<$ K, V $>$ const \&map, V const \&value)
+\item 
+{\footnotesize template$<$typename K , typename V $>$ }\\bool \textbf{ find\+\_\+value} (std\+::unordered\+\_\+map$<$ K, V $>$ const \&map, V const \&value)
+\item 
+{\footnotesize template$<$typename T , typename  = typename std\+::enable\+\_\+if$<$std\+::is\+\_\+arithmetic$<$\+T$>$\+::value$>$\+::type$>$ }\\float \textbf{ float\+\_\+cast} (T const \&t)
+\begin{DoxyCompactList}\small\item\em Casts a number into a float. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename K , typename V $>$ }\\std\+::pair$<$ K, V $>$ \textbf{ get\+\_\+max\+\_\+element} (std\+::map$<$ K, V $>$ const \&map)
+\item 
+{\footnotesize template$<$typename K , typename V $>$ }\\K \textbf{ get\+\_\+max\+\_\+key} (std\+::map$<$ K, V $>$ const \&map)
+\item 
+{\footnotesize template$<$typename K , typename V $>$ }\\V \textbf{ get\+\_\+max\+\_\+value} (std\+::map$<$ K, V $>$ const \&map)
+\item 
+{\footnotesize template$<$typename K , typename V $>$ }\\std\+::pair$<$ K, V $>$ \textbf{ get\+\_\+min} (std\+::map$<$ K, V $>$ const \&map)
+\item 
+{\footnotesize template$<$typename K , typename V $>$ }\\K \textbf{ get\+\_\+min\+\_\+key} (std\+::map$<$ K, V $>$ const \&map)
+\item 
+{\footnotesize template$<$typename K , typename V $>$ }\\V \textbf{ get\+\_\+min\+\_\+value} (std\+::map$<$ K, V $>$ const \&map)
+\item 
+{\footnotesize template$<$typename T , typename  = typename std\+::enable\+\_\+if$<$std\+::is\+\_\+arithmetic$<$\+T$>$\+::value$>$\+::type$>$ }\\int \textbf{ int\+\_\+cast} (T const \&t)
+\begin{DoxyCompactList}\small\item\em Casts a number into an int. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T , typename  = typename std\+::enable\+\_\+if$<$std\+::is\+\_\+arithmetic$<$\+T$>$\+::value$>$\+::type$>$ }\\long \textbf{ long\+\_\+cast} (T const \&t)
+\begin{DoxyCompactList}\small\item\em Casts a number into an long. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T , typename  = typename std\+::enable\+\_\+if$<$std\+::is\+\_\+arithmetic$<$\+T$>$\+::value$>$\+::type$>$ }\\\textbf{ longlong} \textbf{ longlong\+\_\+cast} (T const \&t)
+\begin{DoxyCompactList}\small\item\em Casts a number into long long (longlong) \end{DoxyCompactList}\item 
+std\+::ostream \& \textbf{ operator$>$$>$} (std\+::ostream \&cout, \textbf{ Bools} const \&bools)
+\item 
+auto \textbf{ pause\+Co} ()
+\item 
+auto \textbf{ pause\+Co} (std\+::string const \&message)
+\item 
+{\footnotesize template$<$typename T , typename  = typename std\+::enable\+\_\+if$<$std\+::is\+\_\+arithmetic$<$\+T$>$\+::value$>$\+::type$>$ }\\short \textbf{ short\+\_\+cast} (T const \&t)
+\begin{DoxyCompactList}\small\item\em Casts a number into an short. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T , typename  = typename std\+::enable\+\_\+if$<$std\+::is\+\_\+arithmetic$<$\+T$>$\+::value$>$\+::type$>$ }\\\textbf{ size\+\_\+t} \textbf{ size\+\_\+cast} (T const \&t)
+\begin{DoxyCompactList}\small\item\em Casts a number into std\+::size\+\_\+t. \end{DoxyCompactList}\item 
+void \textbf{ throw\+\_\+error} (std\+::string const \&message)
+\item 
+{\footnotesize template$<$typename T , typename  = typename std\+::enable\+\_\+if$<$std\+::is\+\_\+arithmetic$<$\+T$>$\+::value$>$\+::type$>$ }\\\textbf{ uchar} \textbf{ uchar\+\_\+cast} (T const \&t)
+\begin{DoxyCompactList}\small\item\em Casts a number into unsigned char (uchar) \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T , typename  = typename std\+::enable\+\_\+if$<$std\+::is\+\_\+arithmetic$<$\+T$>$\+::value$>$\+::type$>$ }\\\textbf{ uint} \textbf{ uint\+\_\+cast} (T const \&t)
+\begin{DoxyCompactList}\small\item\em Casts a number into unsigned int (uint) \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T , typename  = typename std\+::enable\+\_\+if$<$std\+::is\+\_\+arithmetic$<$\+T$>$\+::value$>$\+::type$>$ }\\\textbf{ ulong} \textbf{ ulong\+\_\+cast} (T const \&t)
+\begin{DoxyCompactList}\small\item\em Casts a number into unsigned long (ulong) \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T , typename  = typename std\+::enable\+\_\+if$<$std\+::is\+\_\+arithmetic$<$\+T$>$\+::value$>$\+::type$>$ }\\\textbf{ ulonglong} \textbf{ ulonglong\+\_\+cast} (T const \&t)
+\begin{DoxyCompactList}\small\item\em Casts a number into unsigned long long (ulonglong) \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T , typename  = typename std\+::enable\+\_\+if$<$std\+::is\+\_\+arithmetic$<$\+T$>$\+::value$>$\+::type$>$ }\\\textbf{ ushort} \textbf{ ushort\+\_\+cast} (T const \&t)
+\begin{DoxyCompactList}\small\item\em Casts a number into unsigned short (ushort) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+double \textbf{ \+\_\+ns} = 1000.
+\item 
+std\+::map$<$ std\+::string, std\+::string $>$ \textbf{ error\+\_\+message}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\label{lib_co_8hpp_a54161053f7c12fa7dd7bddf119708644}} 
+\index{libCo.hpp@{libCo.hpp}!Ints@{Ints}}
+\index{Ints@{Ints}!libCo.hpp@{libCo.hpp}}
+\doxysubsubsection{Ints}
+{\footnotesize\ttfamily using \textbf{ Ints} =  std\+::vector$<$int$>$}
+
+\mbox{\label{lib_co_8hpp_a38d84fea74b6f31e86b2e282bb232729}} 
+\index{libCo.hpp@{libCo.hpp}!longlong@{longlong}}
+\index{longlong@{longlong}!libCo.hpp@{libCo.hpp}}
+\doxysubsubsection{longlong}
+{\footnotesize\ttfamily using \textbf{ longlong} =  long long int}
+
+\mbox{\label{lib_co_8hpp_a801d6a451a01953ef8cbae6feb6a3638}} 
+\index{libCo.hpp@{libCo.hpp}!size\_t@{size\_t}}
+\index{size\_t@{size\_t}!libCo.hpp@{libCo.hpp}}
+\doxysubsubsection{size\_t}
+{\footnotesize\ttfamily using \textbf{ size\+\_\+t} =  std\+::size\+\_\+t}
+
+\mbox{\label{lib_co_8hpp_a632090884b4aa0585e747446a2683963}} 
+\index{libCo.hpp@{libCo.hpp}!Strings@{Strings}}
+\index{Strings@{Strings}!libCo.hpp@{libCo.hpp}}
+\doxysubsubsection{Strings}
+{\footnotesize\ttfamily using \textbf{ Strings} =  std\+::vector$<$std\+::string$>$}
+
+\mbox{\label{lib_co_8hpp_acbcaeec4b92056a813c1a11e65d5df7d}} 
+\index{libCo.hpp@{libCo.hpp}!T\_is\_number@{T\_is\_number}}
+\index{T\_is\_number@{T\_is\_number}!libCo.hpp@{libCo.hpp}}
+\doxysubsubsection{T\_is\_number}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+using \textbf{ T\+\_\+is\+\_\+number} =  void}
+
+\mbox{\label{lib_co_8hpp_ae48ac2456c5ad6c956fef86e7bef3a21}} 
+\index{libCo.hpp@{libCo.hpp}!uchar@{uchar}}
+\index{uchar@{uchar}!libCo.hpp@{libCo.hpp}}
+\doxysubsubsection{uchar}
+{\footnotesize\ttfamily using \textbf{ uchar} =  unsigned char}
+
+\mbox{\label{lib_co_8hpp_a69aa29b598b851b0640aa225a9e5d61d}} 
+\index{libCo.hpp@{libCo.hpp}!uint@{uint}}
+\index{uint@{uint}!libCo.hpp@{libCo.hpp}}
+\doxysubsubsection{uint}
+{\footnotesize\ttfamily using \textbf{ uint} =  unsigned int}
+
+\mbox{\label{lib_co_8hpp_a92c2ca60527219506deb3325507baee0}} 
+\index{libCo.hpp@{libCo.hpp}!ulong@{ulong}}
+\index{ulong@{ulong}!libCo.hpp@{libCo.hpp}}
+\doxysubsubsection{ulong}
+{\footnotesize\ttfamily using \textbf{ ulong} =  unsigned long int}
+
+\mbox{\label{lib_co_8hpp_a36061a3a05c4802ea9393df730a50d52}} 
+\index{libCo.hpp@{libCo.hpp}!ulonglong@{ulonglong}}
+\index{ulonglong@{ulonglong}!libCo.hpp@{libCo.hpp}}
+\doxysubsubsection{ulonglong}
+{\footnotesize\ttfamily using \textbf{ ulonglong} =  unsigned long long int}
+
+\mbox{\label{lib_co_8hpp_ad29aff8b0f7fde4ef0291331012e596a}} 
+\index{libCo.hpp@{libCo.hpp}!ushort@{ushort}}
+\index{ushort@{ushort}!libCo.hpp@{libCo.hpp}}
+\doxysubsubsection{ushort}
+{\footnotesize\ttfamily using \textbf{ ushort} =  unsigned short int}
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\label{lib_co_8hpp_a79092fe2f0694bdbb860894b0f983e32}} 
+\index{libCo.hpp@{libCo.hpp}!bool\_cast@{bool\_cast}}
+\index{bool\_cast@{bool\_cast}!libCo.hpp@{libCo.hpp}}
+\doxysubsubsection{bool\_cast()}
+{\footnotesize\ttfamily template$<$typename T , typename  = typename std\+::enable\+\_\+if$<$std\+::is\+\_\+arithmetic$<$\+T$>$\+::value$>$\+::type$>$ \\
+bool bool\+\_\+cast (\begin{DoxyParamCaption}\item[{T const \&}]{t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Casts a number into an bool. 
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=291pt]{lib_co_8hpp_a79092fe2f0694bdbb860894b0f983e32_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{lib_co_8hpp_afe72de0c3fabeb8944bfd72ccdbe0d73}} 
+\index{libCo.hpp@{libCo.hpp}!char\_cast@{char\_cast}}
+\index{char\_cast@{char\_cast}!libCo.hpp@{libCo.hpp}}
+\doxysubsubsection{char\_cast()}
+{\footnotesize\ttfamily template$<$typename T , typename  = typename std\+::enable\+\_\+if$<$std\+::is\+\_\+arithmetic$<$\+T$>$\+::value$>$\+::type$>$ \\
+char char\+\_\+cast (\begin{DoxyParamCaption}\item[{T const \&}]{t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Casts a number into an char. 
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=334pt]{lib_co_8hpp_afe72de0c3fabeb8944bfd72ccdbe0d73_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{lib_co_8hpp_a2052317e56aa118e7ffcdb2e398f551c}} 
+\index{libCo.hpp@{libCo.hpp}!double\_cast@{double\_cast}}
+\index{double\_cast@{double\_cast}!libCo.hpp@{libCo.hpp}}
+\doxysubsubsection{double\_cast()}
+{\footnotesize\ttfamily template$<$typename T , typename  = typename std\+::enable\+\_\+if$<$std\+::is\+\_\+arithmetic$<$\+T$>$\+::value$>$\+::type$>$ \\
+double double\+\_\+cast (\begin{DoxyParamCaption}\item[{T const \&}]{t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Casts a number into an double. 
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{lib_co_8hpp_a2052317e56aa118e7ffcdb2e398f551c_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{lib_co_8hpp_a664347fcb6b16fdc63cd601ebcfc2c8e}} 
+\index{libCo.hpp@{libCo.hpp}!find\_key@{find\_key}}
+\index{find\_key@{find\_key}!libCo.hpp@{libCo.hpp}}
+\doxysubsubsection{find\_key()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename K , typename V $>$ \\
+bool find\+\_\+key (\begin{DoxyParamCaption}\item[{std\+::map$<$ K, V $>$ const \&}]{map,  }\item[{K const \&}]{key }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{lib_co_8hpp_a3b8ddb099e22657a31515fbcd8d1bf67}} 
+\index{libCo.hpp@{libCo.hpp}!find\_key@{find\_key}}
+\index{find\_key@{find\_key}!libCo.hpp@{libCo.hpp}}
+\doxysubsubsection{find\_key()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename K , typename V $>$ \\
+bool find\+\_\+key (\begin{DoxyParamCaption}\item[{std\+::unordered\+\_\+map$<$ K, V $>$ const \&}]{map,  }\item[{K const \&}]{key }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=271pt]{lib_co_8hpp_a3b8ddb099e22657a31515fbcd8d1bf67_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{lib_co_8hpp_a1a6d9eab2874e1bf6506aeb84d21506d}} 
+\index{libCo.hpp@{libCo.hpp}!find\_value@{find\_value}}
+\index{find\_value@{find\_value}!libCo.hpp@{libCo.hpp}}
+\doxysubsubsection{find\_value()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename K , typename V $>$ \\
+bool find\+\_\+value (\begin{DoxyParamCaption}\item[{std\+::map$<$ K, V $>$ const \&}]{map,  }\item[{V const \&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{lib_co_8hpp_aaff2134bba0ee7c0b4a509699674251a}} 
+\index{libCo.hpp@{libCo.hpp}!find\_value@{find\_value}}
+\index{find\_value@{find\_value}!libCo.hpp@{libCo.hpp}}
+\doxysubsubsection{find\_value()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename K , typename V $>$ \\
+bool find\+\_\+value (\begin{DoxyParamCaption}\item[{std\+::unordered\+\_\+map$<$ K, V $>$ const \&}]{map,  }\item[{V const \&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{lib_co_8hpp_a075a3c229a21ca4d0e91f72e99a6bf6d}} 
+\index{libCo.hpp@{libCo.hpp}!float\_cast@{float\_cast}}
+\index{float\_cast@{float\_cast}!libCo.hpp@{libCo.hpp}}
+\doxysubsubsection{float\_cast()}
+{\footnotesize\ttfamily template$<$typename T , typename  = typename std\+::enable\+\_\+if$<$std\+::is\+\_\+arithmetic$<$\+T$>$\+::value$>$\+::type$>$ \\
+float float\+\_\+cast (\begin{DoxyParamCaption}\item[{T const \&}]{t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Casts a number into a float. 
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=335pt]{lib_co_8hpp_a075a3c229a21ca4d0e91f72e99a6bf6d_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{lib_co_8hpp_ad15d46f1c6897c587cd64a3efba23585}} 
+\index{libCo.hpp@{libCo.hpp}!get\_max\_element@{get\_max\_element}}
+\index{get\_max\_element@{get\_max\_element}!libCo.hpp@{libCo.hpp}}
+\doxysubsubsection{get\_max\_element()}
+{\footnotesize\ttfamily template$<$typename K , typename V $>$ \\
+std\+::pair$<$K,V$>$ get\+\_\+max\+\_\+element (\begin{DoxyParamCaption}\item[{std\+::map$<$ K, V $>$ const \&}]{map }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{lib_co_8hpp_aecb45c04cc3a1a2386b973014e4fef50}} 
+\index{libCo.hpp@{libCo.hpp}!get\_max\_key@{get\_max\_key}}
+\index{get\_max\_key@{get\_max\_key}!libCo.hpp@{libCo.hpp}}
+\doxysubsubsection{get\_max\_key()}
+{\footnotesize\ttfamily template$<$typename K , typename V $>$ \\
+K get\+\_\+max\+\_\+key (\begin{DoxyParamCaption}\item[{std\+::map$<$ K, V $>$ const \&}]{map }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{lib_co_8hpp_ad4ab9f9247e670a4d9db36ca683e6270}} 
+\index{libCo.hpp@{libCo.hpp}!get\_max\_value@{get\_max\_value}}
+\index{get\_max\_value@{get\_max\_value}!libCo.hpp@{libCo.hpp}}
+\doxysubsubsection{get\_max\_value()}
+{\footnotesize\ttfamily template$<$typename K , typename V $>$ \\
+V get\+\_\+max\+\_\+value (\begin{DoxyParamCaption}\item[{std\+::map$<$ K, V $>$ const \&}]{map }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{lib_co_8hpp_a6f43d67b9c0e4bb6bf5a58906ae0d812}} 
+\index{libCo.hpp@{libCo.hpp}!get\_min@{get\_min}}
+\index{get\_min@{get\_min}!libCo.hpp@{libCo.hpp}}
+\doxysubsubsection{get\_min()}
+{\footnotesize\ttfamily template$<$typename K , typename V $>$ \\
+std\+::pair$<$K,V$>$ get\+\_\+min (\begin{DoxyParamCaption}\item[{std\+::map$<$ K, V $>$ const \&}]{map }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{lib_co_8hpp_aeec208b7dcadd19e1317814c1de441d9}} 
+\index{libCo.hpp@{libCo.hpp}!get\_min\_key@{get\_min\_key}}
+\index{get\_min\_key@{get\_min\_key}!libCo.hpp@{libCo.hpp}}
+\doxysubsubsection{get\_min\_key()}
+{\footnotesize\ttfamily template$<$typename K , typename V $>$ \\
+K get\+\_\+min\+\_\+key (\begin{DoxyParamCaption}\item[{std\+::map$<$ K, V $>$ const \&}]{map }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{lib_co_8hpp_ad1d07d5a6e5c5182a7dc644148cd6fcd}} 
+\index{libCo.hpp@{libCo.hpp}!get\_min\_value@{get\_min\_value}}
+\index{get\_min\_value@{get\_min\_value}!libCo.hpp@{libCo.hpp}}
+\doxysubsubsection{get\_min\_value()}
+{\footnotesize\ttfamily template$<$typename K , typename V $>$ \\
+V get\+\_\+min\+\_\+value (\begin{DoxyParamCaption}\item[{std\+::map$<$ K, V $>$ const \&}]{map }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{lib_co_8hpp_a48e80fbfd11f9fb219b92ba1c29c1b2a}} 
+\index{libCo.hpp@{libCo.hpp}!int\_cast@{int\_cast}}
+\index{int\_cast@{int\_cast}!libCo.hpp@{libCo.hpp}}
+\doxysubsubsection{int\_cast()}
+{\footnotesize\ttfamily template$<$typename T , typename  = typename std\+::enable\+\_\+if$<$std\+::is\+\_\+arithmetic$<$\+T$>$\+::value$>$\+::type$>$ \\
+int int\+\_\+cast (\begin{DoxyParamCaption}\item[{T const \&}]{t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Casts a number into an int. 
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{lib_co_8hpp_a48e80fbfd11f9fb219b92ba1c29c1b2a_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{lib_co_8hpp_a695ead22582e1da41880ee67c2c61d07}} 
+\index{libCo.hpp@{libCo.hpp}!long\_cast@{long\_cast}}
+\index{long\_cast@{long\_cast}!libCo.hpp@{libCo.hpp}}
+\doxysubsubsection{long\_cast()}
+{\footnotesize\ttfamily template$<$typename T , typename  = typename std\+::enable\+\_\+if$<$std\+::is\+\_\+arithmetic$<$\+T$>$\+::value$>$\+::type$>$ \\
+long long\+\_\+cast (\begin{DoxyParamCaption}\item[{T const \&}]{t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Casts a number into an long. 
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=334pt]{lib_co_8hpp_a695ead22582e1da41880ee67c2c61d07_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{lib_co_8hpp_a86b2b990fa7ee3c102db83cdecc9d129}} 
+\index{libCo.hpp@{libCo.hpp}!longlong\_cast@{longlong\_cast}}
+\index{longlong\_cast@{longlong\_cast}!libCo.hpp@{libCo.hpp}}
+\doxysubsubsection{longlong\_cast()}
+{\footnotesize\ttfamily template$<$typename T , typename  = typename std\+::enable\+\_\+if$<$std\+::is\+\_\+arithmetic$<$\+T$>$\+::value$>$\+::type$>$ \\
+\textbf{ longlong} longlong\+\_\+cast (\begin{DoxyParamCaption}\item[{T const \&}]{t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Casts a number into long long (longlong) 
+
+\mbox{\label{lib_co_8hpp_a4944be9c9377ea1853bd55f996b7cb13}} 
+\index{libCo.hpp@{libCo.hpp}!operator$>$$>$@{operator$>$$>$}}
+\index{operator$>$$>$@{operator$>$$>$}!libCo.hpp@{libCo.hpp}}
+\doxysubsubsection{operator$>$$>$()}
+{\footnotesize\ttfamily std\+::ostream\& operator$>$$>$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{cout,  }\item[{\textbf{ Bools} const \&}]{bools }\end{DoxyParamCaption})}
+
+\mbox{\label{lib_co_8hpp_a6cca31a5d1658456b486e6fa135c690b}} 
+\index{libCo.hpp@{libCo.hpp}!pauseCo@{pauseCo}}
+\index{pauseCo@{pauseCo}!libCo.hpp@{libCo.hpp}}
+\doxysubsubsection{pauseCo()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily auto pause\+Co (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{lib_co_8hpp_a6cca31a5d1658456b486e6fa135c690b_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{lib_co_8hpp_ab102b1ac90e2714661a2e757b7f6692e}} 
+\index{libCo.hpp@{libCo.hpp}!pauseCo@{pauseCo}}
+\index{pauseCo@{pauseCo}!libCo.hpp@{libCo.hpp}}
+\doxysubsubsection{pauseCo()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily auto pause\+Co (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{message }\end{DoxyParamCaption})}
+
+\mbox{\label{lib_co_8hpp_af4d9dac78db5e48b5e2c5253754aaa8c}} 
+\index{libCo.hpp@{libCo.hpp}!short\_cast@{short\_cast}}
+\index{short\_cast@{short\_cast}!libCo.hpp@{libCo.hpp}}
+\doxysubsubsection{short\_cast()}
+{\footnotesize\ttfamily template$<$typename T , typename  = typename std\+::enable\+\_\+if$<$std\+::is\+\_\+arithmetic$<$\+T$>$\+::value$>$\+::type$>$ \\
+short short\+\_\+cast (\begin{DoxyParamCaption}\item[{T const \&}]{t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Casts a number into an short. 
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=338pt]{lib_co_8hpp_af4d9dac78db5e48b5e2c5253754aaa8c_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{lib_co_8hpp_a237f678c718382f74a68364c0fc1779a}} 
+\index{libCo.hpp@{libCo.hpp}!size\_cast@{size\_cast}}
+\index{size\_cast@{size\_cast}!libCo.hpp@{libCo.hpp}}
+\doxysubsubsection{size\_cast()}
+{\footnotesize\ttfamily template$<$typename T , typename  = typename std\+::enable\+\_\+if$<$std\+::is\+\_\+arithmetic$<$\+T$>$\+::value$>$\+::type$>$ \\
+\textbf{ size\+\_\+t} size\+\_\+cast (\begin{DoxyParamCaption}\item[{T const \&}]{t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Casts a number into std\+::size\+\_\+t. 
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{lib_co_8hpp_a237f678c718382f74a68364c0fc1779a_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{lib_co_8hpp_a6df2dcd4b1f61c75dc292942bc5ca74d}} 
+\index{libCo.hpp@{libCo.hpp}!throw\_error@{throw\_error}}
+\index{throw\_error@{throw\_error}!libCo.hpp@{libCo.hpp}}
+\doxysubsubsection{throw\_error()}
+{\footnotesize\ttfamily void throw\+\_\+error (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{message }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{lib_co_8hpp_a6df2dcd4b1f61c75dc292942bc5ca74d_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{lib_co_8hpp_ade77d1f37b1311b3f80ce429a33fd226}} 
+\index{libCo.hpp@{libCo.hpp}!uchar\_cast@{uchar\_cast}}
+\index{uchar\_cast@{uchar\_cast}!libCo.hpp@{libCo.hpp}}
+\doxysubsubsection{uchar\_cast()}
+{\footnotesize\ttfamily template$<$typename T , typename  = typename std\+::enable\+\_\+if$<$std\+::is\+\_\+arithmetic$<$\+T$>$\+::value$>$\+::type$>$ \\
+\textbf{ uchar} uchar\+\_\+cast (\begin{DoxyParamCaption}\item[{T const \&}]{t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Casts a number into unsigned char (uchar) 
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{lib_co_8hpp_ade77d1f37b1311b3f80ce429a33fd226_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{lib_co_8hpp_ad4f41fb682fba59b9adc6142282db5a2}} 
+\index{libCo.hpp@{libCo.hpp}!uint\_cast@{uint\_cast}}
+\index{uint\_cast@{uint\_cast}!libCo.hpp@{libCo.hpp}}
+\doxysubsubsection{uint\_cast()}
+{\footnotesize\ttfamily template$<$typename T , typename  = typename std\+::enable\+\_\+if$<$std\+::is\+\_\+arithmetic$<$\+T$>$\+::value$>$\+::type$>$ \\
+\textbf{ uint} uint\+\_\+cast (\begin{DoxyParamCaption}\item[{T const \&}]{t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Casts a number into unsigned int (uint) 
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=332pt]{lib_co_8hpp_ad4f41fb682fba59b9adc6142282db5a2_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{lib_co_8hpp_ac939b8397e82173edff13b3d00dc9d09}} 
+\index{libCo.hpp@{libCo.hpp}!ulong\_cast@{ulong\_cast}}
+\index{ulong\_cast@{ulong\_cast}!libCo.hpp@{libCo.hpp}}
+\doxysubsubsection{ulong\_cast()}
+{\footnotesize\ttfamily template$<$typename T , typename  = typename std\+::enable\+\_\+if$<$std\+::is\+\_\+arithmetic$<$\+T$>$\+::value$>$\+::type$>$ \\
+\textbf{ ulong} ulong\+\_\+cast (\begin{DoxyParamCaption}\item[{T const \&}]{t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Casts a number into unsigned long (ulong) 
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=340pt]{lib_co_8hpp_ac939b8397e82173edff13b3d00dc9d09_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{lib_co_8hpp_a6064e403b0588c46cce0f1cb82471acf}} 
+\index{libCo.hpp@{libCo.hpp}!ulonglong\_cast@{ulonglong\_cast}}
+\index{ulonglong\_cast@{ulonglong\_cast}!libCo.hpp@{libCo.hpp}}
+\doxysubsubsection{ulonglong\_cast()}
+{\footnotesize\ttfamily template$<$typename T , typename  = typename std\+::enable\+\_\+if$<$std\+::is\+\_\+arithmetic$<$\+T$>$\+::value$>$\+::type$>$ \\
+\textbf{ ulonglong} ulonglong\+\_\+cast (\begin{DoxyParamCaption}\item[{T const \&}]{t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Casts a number into unsigned long long (ulonglong) 
+
+\mbox{\label{lib_co_8hpp_ab2f8f9033c2742c4f5ac6d3cce6caf9a}} 
+\index{libCo.hpp@{libCo.hpp}!ushort\_cast@{ushort\_cast}}
+\index{ushort\_cast@{ushort\_cast}!libCo.hpp@{libCo.hpp}}
+\doxysubsubsection{ushort\_cast()}
+{\footnotesize\ttfamily template$<$typename T , typename  = typename std\+::enable\+\_\+if$<$std\+::is\+\_\+arithmetic$<$\+T$>$\+::value$>$\+::type$>$ \\
+\textbf{ ushort} ushort\+\_\+cast (\begin{DoxyParamCaption}\item[{T const \&}]{t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Casts a number into unsigned short (ushort) 
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=344pt]{lib_co_8hpp_ab2f8f9033c2742c4f5ac6d3cce6caf9a_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\label{lib_co_8hpp_a99f92dd785ee1e11e00427fdc8a4f772}} 
+\index{libCo.hpp@{libCo.hpp}!\_ns@{\_ns}}
+\index{\_ns@{\_ns}!libCo.hpp@{libCo.hpp}}
+\doxysubsubsection{\_ns}
+{\footnotesize\ttfamily double \+\_\+ns = 1000.}
+
+\mbox{\label{lib_co_8hpp_af522b6efd63a7f871a8307755b1297bf}} 
+\index{libCo.hpp@{libCo.hpp}!error\_message@{error\_message}}
+\index{error\_message@{error\_message}!libCo.hpp@{libCo.hpp}}
+\doxysubsubsection{error\_message}
+{\footnotesize\ttfamily std\+::map$<$std\+::string, std\+::string$>$ error\+\_\+message}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= }
+\DoxyCodeLine{\{}
+\DoxyCodeLine{  \{\textcolor{stringliteral}{"{}DEV"{}}, \textcolor{stringliteral}{"{}ASK DEV or do it yourself, sry"{}}\}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}

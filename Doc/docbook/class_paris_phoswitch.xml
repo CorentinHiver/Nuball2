@@ -1,0 +1,157 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_class_paris_phoswitch" xml:lang="en-US">
+<title>ParisPhoswitch Class Reference</title>
+<indexterm><primary>ParisPhoswitch</primary></indexterm>
+<para>
+<computeroutput>#include &lt;ParisPhoswitch.hpp&gt;</computeroutput>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_class_paris_phoswitch_1ae42c75c5e5c5a82ebc8e417b7746976e">Fill</link> (<link linkend="_class_event">Event</link> const &amp;event, int const &amp;i)</para>
+</listitem>
+            <listitem><para>auto const  &amp; <link linkend="_class_paris_phoswitch_1a7a0199f0d00c394f06e51cb47df043e1">label</link> () const</para>
+</listitem>
+            <listitem><para><link linkend="_class_paris_phoswitch_1aa85b5ee2cc4f39e145bfb57de1c16a16">operator bool</link> ()</para>
+</listitem>
+            <listitem><para><link linkend="_class_paris_phoswitch_1a1d8293aeabdb473ee09d7a4c4cafa1e2">ParisPhoswitch</link> ()</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_paris_phoswitch_1a56ad50966e9b9a999d402d3c856ecf43">Reset</link> ()</para>
+</listitem>
+            <listitem><para>auto <link linkend="_class_paris_phoswitch_1af72c175e38c3b75136aa75222c2e6bb6">setLabel</link> (<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> const &amp;<link linkend="_class_paris_phoswitch_1a7a0199f0d00c394f06e51cb47df043e1">label</link>)</para>
+</listitem>
+            <listitem><para>char <link linkend="_class_paris_phoswitch_1a1992c9aaafc61e2f5dea0e10d6c81f30">test_gate_classic</link> ()</para>
+</listitem>
+            <listitem><para>char <link linkend="_class_paris_phoswitch_1a1e65db82c8979bfd0a381dbb3940c166">test_gate_tan</link> ()</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Public Attributes    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="__hit_8hpp_1aad3a9d2c404fb4cd7f73b16966ae2877">NRJ</link> <link linkend="_class_paris_phoswitch_1a4f976bd815409e09bea4639f9a9065ac">nrj</link> = 0.</para>
+</listitem>
+            <listitem><para><link linkend="__hit_8hpp_1aad3a9d2c404fb4cd7f73b16966ae2877">NRJ</link> <link linkend="_class_paris_phoswitch_1a1771ab16004c4bc9e16ab5590e1d7afb">nrj2</link> = 0.</para>
+</listitem>
+            <listitem><para><link linkend="__hit_8hpp_1aad3a9d2c404fb4cd7f73b16966ae2877">NRJ</link> <link linkend="_class_paris_phoswitch_1ac84fb1e5c68263ffd8e2ab4b017841ce">ratio</link> = 0.</para>
+</listitem>
+            <listitem><para><link linkend="__hit_8hpp_1ad7cd28c849adeb8fec74d20155b0113d">Time_ns</link> <link linkend="_class_paris_phoswitch_1a948e4a40c9c567bcb5b5885b266779b6">time</link> = 0.</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Private Attributes    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> <link linkend="_class_paris_phoswitch_1af6ce7b7a99ff4755b8629822e7295c7a">m_label</link> = -1</para>
+</listitem>
+            <listitem><para>char <link linkend="_class_paris_phoswitch_1a367f255ba6b644157677a32d4dfe0aae">m_state</link> = -1</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_class_paris_phoswitch_1a1d8293aeabdb473ee09d7a4c4cafa1e2"/>    <section>
+    <title>ParisPhoswitch()</title>
+<indexterm><primary>ParisPhoswitch</primary><secondary>ParisPhoswitch</secondary></indexterm>
+<indexterm><primary>ParisPhoswitch</primary><secondary>ParisPhoswitch</secondary></indexterm>
+<para><computeroutput>ParisPhoswitch::ParisPhoswitch ( )<computeroutput>[inline]</computeroutput></computeroutput></para></section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_class_paris_phoswitch_1ae42c75c5e5c5a82ebc8e417b7746976e"/>    <section>
+    <title>Fill()</title>
+<indexterm><primary>Fill</primary><secondary>ParisPhoswitch</secondary></indexterm>
+<indexterm><primary>ParisPhoswitch</primary><secondary>Fill</secondary></indexterm>
+<para><computeroutput>void ParisPhoswitch::Fill (<link linkend="_class_event">Event</link> const &amp; event, int const &amp; i)</computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_paris_phoswitch_ae42c75c5e5c5a82ebc8e417b7746976e_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_paris_phoswitch_1a7a0199f0d00c394f06e51cb47df043e1"/>    <section>
+    <title>label()</title>
+<indexterm><primary>label</primary><secondary>ParisPhoswitch</secondary></indexterm>
+<indexterm><primary>ParisPhoswitch</primary><secondary>label</secondary></indexterm>
+<para><computeroutput>auto const&amp; ParisPhoswitch::label ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_paris_phoswitch_a7a0199f0d00c394f06e51cb47df043e1_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_paris_phoswitch_1aa85b5ee2cc4f39e145bfb57de1c16a16"/>    <section>
+    <title>operator bool()</title>
+<indexterm><primary>operator bool</primary><secondary>ParisPhoswitch</secondary></indexterm>
+<indexterm><primary>ParisPhoswitch</primary><secondary>operator bool</secondary></indexterm>
+<para><computeroutput>ParisPhoswitch::operator bool ( )<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_paris_phoswitch_1a56ad50966e9b9a999d402d3c856ecf43"/>    <section>
+    <title>Reset()</title>
+<indexterm><primary>Reset</primary><secondary>ParisPhoswitch</secondary></indexterm>
+<indexterm><primary>ParisPhoswitch</primary><secondary>Reset</secondary></indexterm>
+<para><computeroutput>void ParisPhoswitch::Reset ( )<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_paris_phoswitch_1af72c175e38c3b75136aa75222c2e6bb6"/>    <section>
+    <title>setLabel()</title>
+<indexterm><primary>setLabel</primary><secondary>ParisPhoswitch</secondary></indexterm>
+<indexterm><primary>ParisPhoswitch</primary><secondary>setLabel</secondary></indexterm>
+<para><computeroutput>auto ParisPhoswitch::setLabel (<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> const &amp; label)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_paris_phoswitch_af72c175e38c3b75136aa75222c2e6bb6_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_paris_phoswitch_1a1992c9aaafc61e2f5dea0e10d6c81f30"/>    <section>
+    <title>test_gate_classic()</title>
+<indexterm><primary>test_gate_classic</primary><secondary>ParisPhoswitch</secondary></indexterm>
+<indexterm><primary>ParisPhoswitch</primary><secondary>test_gate_classic</secondary></indexterm>
+<para><computeroutput>char ParisPhoswitch::test_gate_classic ( )<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_paris_phoswitch_a1992c9aaafc61e2f5dea0e10d6c81f30_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_paris_phoswitch_1a1e65db82c8979bfd0a381dbb3940c166"/>    <section>
+    <title>test_gate_tan()</title>
+<indexterm><primary>test_gate_tan</primary><secondary>ParisPhoswitch</secondary></indexterm>
+<indexterm><primary>ParisPhoswitch</primary><secondary>test_gate_tan</secondary></indexterm>
+<para><computeroutput>char ParisPhoswitch::test_gate_tan ( )<computeroutput>[inline]</computeroutput></computeroutput></para></section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_class_paris_phoswitch_1af6ce7b7a99ff4755b8629822e7295c7a"/>    <section>
+    <title>m_label</title>
+<indexterm><primary>m_label</primary><secondary>ParisPhoswitch</secondary></indexterm>
+<indexterm><primary>ParisPhoswitch</primary><secondary>m_label</secondary></indexterm>
+<para><computeroutput><link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> ParisPhoswitch::m_label = -1<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_paris_phoswitch_1a367f255ba6b644157677a32d4dfe0aae"/>    <section>
+    <title>m_state</title>
+<indexterm><primary>m_state</primary><secondary>ParisPhoswitch</secondary></indexterm>
+<indexterm><primary>ParisPhoswitch</primary><secondary>m_state</secondary></indexterm>
+<para><computeroutput>char ParisPhoswitch::m_state = -1<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_paris_phoswitch_1a4f976bd815409e09bea4639f9a9065ac"/>    <section>
+    <title>nrj</title>
+<indexterm><primary>nrj</primary><secondary>ParisPhoswitch</secondary></indexterm>
+<indexterm><primary>ParisPhoswitch</primary><secondary>nrj</secondary></indexterm>
+<para><computeroutput><link linkend="__hit_8hpp_1aad3a9d2c404fb4cd7f73b16966ae2877">NRJ</link> ParisPhoswitch::nrj = 0.</computeroutput></para>    </section><anchor xml:id="_class_paris_phoswitch_1a1771ab16004c4bc9e16ab5590e1d7afb"/>    <section>
+    <title>nrj2</title>
+<indexterm><primary>nrj2</primary><secondary>ParisPhoswitch</secondary></indexterm>
+<indexterm><primary>ParisPhoswitch</primary><secondary>nrj2</secondary></indexterm>
+<para><computeroutput><link linkend="__hit_8hpp_1aad3a9d2c404fb4cd7f73b16966ae2877">NRJ</link> ParisPhoswitch::nrj2 = 0.</computeroutput></para>    </section><anchor xml:id="_class_paris_phoswitch_1ac84fb1e5c68263ffd8e2ab4b017841ce"/>    <section>
+    <title>ratio</title>
+<indexterm><primary>ratio</primary><secondary>ParisPhoswitch</secondary></indexterm>
+<indexterm><primary>ParisPhoswitch</primary><secondary>ratio</secondary></indexterm>
+<para><computeroutput><link linkend="__hit_8hpp_1aad3a9d2c404fb4cd7f73b16966ae2877">NRJ</link> ParisPhoswitch::ratio = 0.</computeroutput></para>    </section><anchor xml:id="_class_paris_phoswitch_1a948e4a40c9c567bcb5b5885b266779b6"/>    <section>
+    <title>time</title>
+<indexterm><primary>time</primary><secondary>ParisPhoswitch</secondary></indexterm>
+<indexterm><primary>ParisPhoswitch</primary><secondary>time</secondary></indexterm>
+<para><computeroutput><link linkend="__hit_8hpp_1ad7cd28c849adeb8fec74d20155b0113d">Time_ns</link> ParisPhoswitch::time = 0.</computeroutput></para></section>
+<para>
+The documentation for this class was generated from the following file:</para>
+lib/Analyse/<link linkend="__paris_phoswitch_8hpp">ParisPhoswitch.hpp</link></section>
+</section>

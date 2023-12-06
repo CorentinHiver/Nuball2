@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_class_paris_x_y" xml:lang="en-US">
+<title>ParisXY Class Reference</title>
+<indexterm><primary>ParisXY</primary></indexterm>
+<para>
+<computeroutput>#include &lt;ParisXY.hpp&gt;</computeroutput>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_class_paris_x_y_1a5457f46da1c0654885ba411edc93a4e0">ParisXY</link> (Paris_Label const &amp;l)</para>
+</listitem>
+            <listitem><para>int const  &amp; <link linkend="_class_paris_x_y_1ad176348f497c7645d9282dcc653fe173">x</link> () const</para>
+</listitem>
+            <listitem><para>int const  &amp; <link linkend="_class_paris_x_y_1a07e28a303ef89eeaf7cc9a4740dee1bd">y</link> () const</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Static Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>static Float_t <link linkend="_class_paris_x_y_1a955a78d00e21b9b1d18ae14bab35a603">distance</link> (<link linkend="_class_paris_x_y">ParisXY</link> const &amp;coord_1, <link linkend="_class_paris_x_y">ParisXY</link> const &amp;coord_2)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Private Attributes    </title>
+        <itemizedlist>
+            <listitem><para>int <link linkend="_class_paris_x_y_1abedcff71be3ac3107330b34e03d8aa70">m_x</link> = 0</para>
+</listitem>
+            <listitem><para>int <link linkend="_class_paris_x_y_1ac931b277cedb56ac498f7b8edbe27ae2">m_y</link> = 0</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_class_paris_x_y_1a5457f46da1c0654885ba411edc93a4e0"/>    <section>
+    <title>ParisXY()</title>
+<indexterm><primary>ParisXY</primary><secondary>ParisXY</secondary></indexterm>
+<indexterm><primary>ParisXY</primary><secondary>ParisXY</secondary></indexterm>
+<para><computeroutput>ParisXY::ParisXY (Paris_Label const &amp; l)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_paris_x_y_a5457f46da1c0654885ba411edc93a4e0_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_class_paris_x_y_1a955a78d00e21b9b1d18ae14bab35a603"/>    <section>
+    <title>distance()</title>
+<indexterm><primary>distance</primary><secondary>ParisXY</secondary></indexterm>
+<indexterm><primary>ParisXY</primary><secondary>distance</secondary></indexterm>
+<para><computeroutput>static Float_t ParisXY::distance (<link linkend="_class_paris_x_y">ParisXY</link> const &amp; coord_1, <link linkend="_class_paris_x_y">ParisXY</link> const &amp; coord_2)<computeroutput>[inline]</computeroutput>, <computeroutput>[static]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_paris_x_y_a955a78d00e21b9b1d18ae14bab35a603_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_paris_x_y_1ad176348f497c7645d9282dcc653fe173"/>    <section>
+    <title>x()</title>
+<indexterm><primary>x</primary><secondary>ParisXY</secondary></indexterm>
+<indexterm><primary>ParisXY</primary><secondary>x</secondary></indexterm>
+<para><computeroutput>int const&amp; ParisXY::x ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_paris_x_y_ad176348f497c7645d9282dcc653fe173_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_paris_x_y_1a07e28a303ef89eeaf7cc9a4740dee1bd"/>    <section>
+    <title>y()</title>
+<indexterm><primary>y</primary><secondary>ParisXY</secondary></indexterm>
+<indexterm><primary>ParisXY</primary><secondary>y</secondary></indexterm>
+<para><computeroutput>int const&amp; ParisXY::y ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_paris_x_y_a07e28a303ef89eeaf7cc9a4740dee1bd_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_class_paris_x_y_1abedcff71be3ac3107330b34e03d8aa70"/>    <section>
+    <title>m_x</title>
+<indexterm><primary>m_x</primary><secondary>ParisXY</secondary></indexterm>
+<indexterm><primary>ParisXY</primary><secondary>m_x</secondary></indexterm>
+<para><computeroutput>int ParisXY::m_x = 0<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_paris_x_y_1ac931b277cedb56ac498f7b8edbe27ae2"/>    <section>
+    <title>m_y</title>
+<indexterm><primary>m_y</primary><secondary>ParisXY</secondary></indexterm>
+<indexterm><primary>ParisXY</primary><secondary>m_y</secondary></indexterm>
+<para><computeroutput>int ParisXY::m_y = 0<computeroutput>[private]</computeroutput></computeroutput></para></section>
+<para>
+The documentation for this class was generated from the following file:</para>
+lib/Analyse/<link linkend="__paris_x_y_8hpp">ParisXY.hpp</link></section>
+</section>

@@ -1,0 +1,72 @@
+.TH "MTRootReader" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+MTRootReader
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <MTRootReader\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "bool \fBaddFolder\fP (\fBPath\fP path, int const &nb_files=\-1)"
+.br
+.ti -1c
+.RI "template<class Func , class\&.\&.\&. ARGS> void \fBexecute\fP (Func &&func, ARGS &&\&.\&.\&. args)"
+.br
+.ti -1c
+.RI "\fBMTRootReader\fP ()"
+.br
+.ti -1c
+.RI "\fBMTRootReader\fP (\fBPath\fP foldername, int const &nb_files=\-1)"
+.br
+.ti -1c
+.RI "bool \fBnextFilename\fP (std::string &filename)"
+.br
+.in -1c
+.SS "Static Private Member Functions"
+
+.in +1c
+.ti -1c
+.RI "template<class Func , class\&.\&.\&. ARGS> static void \fBRead\fP (\fBMTRootReader\fP &MTreader, Func function, ARGS &&\&.\&.\&. args)"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBFilesManager\fP \fBm_files\fP"
+.br
+.ti -1c
+.RI "\fBMTList\fP \fBm_MTfiles\fP"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "MTRootReader::MTRootReader ()\fC [inline]\fP"
+
+.SS "MTRootReader::MTRootReader (\fBPath\fP foldername, int const & nb_files = \fC\-1\fP)\fC [inline]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "bool MTRootReader::addFolder (\fBPath\fP path, int const & nb_files = \fC\-1\fP)\fC [inline]\fP"
+
+.SS "template<class Func , class\&.\&.\&. ARGS> void MTRootReader::execute (Func && func, ARGS &&\&.\&.\&. args)"
+
+.SS "bool MTRootReader::nextFilename (std::string & filename)\fC [inline]\fP"
+
+.SS "template<class Func , class\&.\&.\&. ARGS> void MTRootReader::Read (\fBMTRootReader\fP & MTreader, Func function, ARGS &&\&.\&.\&. args)\fC [static]\fP, \fC [private]\fP"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "\fBFilesManager\fP MTRootReader::m_files\fC [private]\fP"
+
+.SS "\fBMTList\fP MTRootReader::m_MTfiles\fC [private]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Nuball2 from the source code\&.

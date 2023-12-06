@@ -1,0 +1,96 @@
+.TH "SiStrip" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+SiStrip \- Silicon Strip\&. Represents a strip of the \fBDSSD\fP\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <DSSD\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "auto const  & \fBangle\fP ()"
+.br
+.ti -1c
+.RI "auto const  & \fBangle\fP () const"
+.br
+.ti -1c
+.RI "auto const  & \fBlabel\fP ()"
+.br
+.ti -1c
+.RI "auto const  & \fBlabel\fP () const"
+.br
+.ti -1c
+.RI "void \fBReset\fP ()"
+.br
+.ti -1c
+.RI "void \fBsetAngle\fP (double const &\fBangle\fP)"
+.br
+.ti -1c
+.RI "\fBSiStrip\fP (\fBushort\fP const &\fBlabel\fP)"
+.br
+.ti -1c
+.RI "\fBSiStrip\fP (\fBushort\fP const &\fBlabel\fP, double const &\fBangle\fP)"
+.br
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "float \fBnrj\fP = 0\&.0"
+.br
+.ti -1c
+.RI "double \fBtime\fP = 0\&.0"
+.br
+.in -1c
+.SS "Protected Attributes"
+
+.in +1c
+.ti -1c
+.RI "double \fBm_angle\fP = 0"
+.br
+.ti -1c
+.RI "\fBushort\fP \fBm_label\fP = 0u"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Silicon Strip\&. Represents a strip of the \fBDSSD\fP\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "SiStrip::SiStrip (\fBushort\fP const & label)\fC [inline]\fP"
+
+.SS "SiStrip::SiStrip (\fBushort\fP const & label, double const & angle)\fC [inline]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "auto const& SiStrip::angle ()\fC [inline]\fP"
+
+.SS "auto const& SiStrip::angle () const\fC [inline]\fP"
+
+.SS "auto const& SiStrip::label ()\fC [inline]\fP"
+
+.SS "auto const& SiStrip::label () const\fC [inline]\fP"
+
+.SS "void SiStrip::Reset ()\fC [inline]\fP"
+
+.SS "void SiStrip::setAngle (double const & angle)\fC [inline]\fP"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "double SiStrip::m_angle = 0\fC [protected]\fP"
+
+.SS "\fBushort\fP SiStrip::m_label = 0u\fC [protected]\fP"
+
+.SS "float SiStrip::nrj = 0\&.0"
+
+.SS "double SiStrip::time = 0\&.0"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Nuball2 from the source code\&.

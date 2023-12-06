@@ -1,0 +1,525 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_class_m_t_faster_reader" xml:lang="en-US">
+<title>MTFasterReader Class Reference</title>
+<indexterm><primary>MTFasterReader</primary></indexterm>
+<para>
+
+<para>Class used to read in parallel .fast files of the same run. </para>
+ 
+</para>
+<para>
+<computeroutput>#include &lt;MTFasterReader.hpp&gt;</computeroutput>
+</para>
+Collaboration diagram for MTFasterReader:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_m_t_faster_reader__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>bool <link linkend="_class_m_t_faster_reader_1a8693e1143a0aea8096a527c7d9df9a63">addFile</link> (<link linkend="_class_file">File</link> file)</para>
+</listitem>
+            <listitem><para>bool <link linkend="_class_m_t_faster_reader_1a58a2fe8f9f9ba39808d43f36f45c8288">addFolder</link> (<link linkend="_class_path">Path</link> path, int const &amp;nb_files=-1)</para>
+</listitem>
+            <listitem><para>auto &amp; <link linkend="_class_m_t_faster_reader_1aa8421439b6ac40fc7513fc85ad5a112b">files</link> ()</para>
+</listitem>
+            <listitem><para>auto const  &amp; <link linkend="_class_m_t_faster_reader_1a5d2beaf7551d9b288eef9509daf8b3b5">files</link> () const</para>
+</listitem>
+            <listitem><para><link linkend="_class_m_t_faster_reader_1ad7f0fc9a9cd713d59870a91c86d8ad9a">MTFasterReader</link> ()</para>
+
+<para>Default constructor. </para>
+</listitem>
+            <listitem><para><link linkend="_class_m_t_faster_reader_1a7b012332b8f9bc617cd666e0ae768fda">MTFasterReader</link> (<link linkend="_class_files_manager">FilesManager</link> const &amp;<link linkend="_class_m_t_faster_reader_1a5d2beaf7551d9b288eef9509daf8b3b5">files</link>)</para>
+</listitem>
+            <listitem><para><link linkend="_class_m_t_faster_reader_1a98a77edc573c4b3cfa5fa384f0d1a085">MTFasterReader</link> (<link linkend="_class_path">Path</link> path, int const &amp;nb_files=-1)</para>
+
+<para>Regular constructor. </para>
+</listitem>
+            <listitem><para>void <link linkend="_class_m_t_faster_reader_1a01bb4c02770855a41d53b3544b3cae3a">printMTFiles</link> ()</para>
+</listitem>
+            <listitem><para>template&lt;class Func , class... ARGS&gt; </para><para>void <link linkend="_class_m_t_faster_reader_1af1ec563da5602cc23d7b0cd98b63bee0">readAligned</link> (Func &amp;&amp;func, ARGS &amp;&amp;... args)</para>
+
+<para>Reads many faster files in parallel, providing a time-aligned. </para>
+</listitem>
+            <listitem><para>template&lt;class Func , class... ARGS&gt; </para><para>void <link linkend="_class_m_t_faster_reader_1a870da58b71c34fbcaf76733f0bc2ba71">readAligned</link> (std::vector&lt; <link linkend="__hit_8hpp_1a808363c27c30b41f6ed40b62ebde3ee7">Time</link> &gt; timeshifts, Func &amp;&amp;func, ARGS &amp;&amp;... args)</para>
+</listitem>
+            <listitem><para>template&lt;class Func , class... ARGS&gt; </para><para>void <link linkend="_class_m_t_faster_reader_1ae316d31ebcb18ae8689522509d1ba513">readRaw</link> (Func &amp;&amp;func, ARGS &amp;&amp;... args)</para>
+
+<para>Reads many faster files in parallel. </para>
+</listitem>
+            <listitem><para>void <link linkend="_class_m_t_faster_reader_1a39cce770cb5f6dc49e2ae2558d709af6">setTimeshifts</link> (std::vector&lt; <link linkend="__hit_8hpp_1a808363c27c30b41f6ed40b62ebde3ee7">Time</link> &gt; const &amp;timeshifts)</para>
+</listitem>
+            <listitem><para>auto const  &amp; <link linkend="_class_m_t_faster_reader_1a2adcc31120c30ac26b0c35a67c0e8822">timeshift</link> (<link linkend="__hit_8hpp_1ab5dd24876acad09ec52c250c1668466c">Label</link> const &amp;label) const</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Private Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>bool <link linkend="_class_m_t_faster_reader_1a63e239df82bf04244bdab829bb73cd20">nextFilename</link> (std::string &amp;filename)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Static Private Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>template&lt;class Func , class... ARGS&gt; </para><para>static void <link linkend="_class_m_t_faster_reader_1a7e26b2201486cd489b66ab12b83427e0">Read</link> (<link linkend="_class_m_t_faster_reader">MTFasterReader</link> &amp;MTreader, Func function, ARGS &amp;&amp;... args)</para>
+</listitem>
+            <listitem><para>template&lt;class Func , class... ARGS&gt; </para><para>static void <link linkend="_class_m_t_faster_reader_1ad4720651ef47aefe5a1901e4659683e1">Realign</link> (<link linkend="_class_m_t_faster_reader">MTFasterReader</link> &amp;MTreader, Func function, ARGS &amp;&amp;... args)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Private Attributes    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_class_files_manager">FilesManager</link> <link linkend="_class_m_t_faster_reader_1ab64bd8c46413ce8e280acc80a33df936">m_files</link></para>
+</listitem>
+            <listitem><para><link linkend="__m_t_list_8hpp_1a5645cb48b623bfc2e6e274c70952a8e2">MTList</link> <link linkend="_class_m_t_faster_reader_1a2ba1ed98c0363d91f5c0c38d6f7f231c">m_MTfiles</link></para>
+</listitem>
+            <listitem><para>std::vector&lt; <link linkend="__hit_8hpp_1a808363c27c30b41f6ed40b62ebde3ee7">Time</link> &gt; <link linkend="_class_m_t_faster_reader_1a2bea00b692984363df66161e172036e1">m_timeshifts</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Detailed Description</title>
+
+<para>Class used to read in parallel .fast files of the same run. </para>
+
+
+
+<para><emphasis role="bold">Look at the <link linkend="_class_faster_reader">FasterReader</link> class for the various options</emphasis></para>
+<section xml:id="_class_m_t_faster_reader_1autotoc_md0">
+<title>How to use this class</title>
+
+<para>First, you&apos;ll need to activate the multithreading :</para>
+
+<para>MTObject::Initialize(nb_threads)</para>
+
+<para>Then instanciate this class :</para>
+
+<para><orderedlist>
+<listitem>
+<para><link linkend="_class_m_t_faster_reader">MTFasterReader</link> reader(folder_name, first_n_files);</para>
+</listitem></orderedlist>
+</para>
+
+<para>To read all the files then leave the second argument empty</para>
+
+<para>Then, use the readRaw(function, arguments...) method to run any user defined function.</para>
+
+<para><orderedlist>
+<listitem>
+<para>reader.readRaw(function, arguments...);</para>
+</listitem></orderedlist>
+</para>
+
+<para>Carefull : this function MUST have the following arguments is this EXACT order :</para>
+
+<para>return_type function(Hit &amp; hit, FasterReader &amp; reader, arguments...)</para>
+
+<para>This function can also be a static method of an object, but CANNOT be a member</para>
+
+<para>The trick to use the object anyway is to pass it as an argument :</para>
+
+<para>static return_type myClass::function(Hit &amp; hit, FasterReader &amp; reader, myClass &amp; class, arguments...);</para>
+
+<para>Here is a minimal code snippet : <literallayout><computeroutput> void function(Hit &amp; hit, FasterReader &amp; reader, Arg &amp; some_argument) 
+ {
+   // This function is now setup to read one specific file
+   while(reader.Read())
+   {
+     // Here, hit contains the data of the current faster data hit beeing read in the binary .fast file
+     Do something with the hit like histo-&gt;Fill(hit.nrj) or tree -&gt; Fill() if you connected a tree to the hit
+   }
+ }
+
+ int main()
+ {
+    MTObject::Initialize(n); // n being an appropriate number of threads.
+    MTFasterReader reader(folder);
+    Arg some_argument;
+    reader.readRaw(function, some_argument);
+    // Do something with the argument like print(some_argument) or some_argument.Write()
+ }
+</computeroutput></literallayout> Here are two function examples. The third parameter has been instanciated before the <link linkend="_class_m_t_faster_reader_1ae316d31ebcb18ae8689522509d1ba513">MTFasterReader::readRaw()</link> method call</para>
+
+<para><literallayout><computeroutput>   void counter(Hit &amp; hit, FasterReader &amp; reader, MTCounter &amp; counterMT)
+    {
+       int counter = 0;
+       while(reader.Read())
+       {
+          counter++;
+       }
+       counterMT += counter;
+    }
+
+
+   void scalers(Hit &amp; hit, FasterReader &amp; reader, MTTHist&lt;TH1&gt; &amp; scaler)
+   {
+      while(reader.Read())
+      {
+         scaler.Fill(hit.label);
+      }
+   }
+</computeroutput></literallayout> (see <link linkend="_class_m_t_t_hist">MTTHist</link> and <link linkend="_class_m_t_counter">MTCounter</link> documentation)</para>
+
+<para>It is recommended to use the &quot;&amp;&quot; symbol (reference) before the other as well parameters so that they are shared between threads, therefore only with thread safe objects, but it is not mandatory. If you want to pass read-only objects (i.e. lookup tables), consider adding the &quot;const&quot; key word like that : (..., type const &amp; lookup_table, ...). Another work-around is simply to declare your parameter at a global scope, although it is not recommended to have too many of them. </para>
+</section>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_class_m_t_faster_reader_1ad7f0fc9a9cd713d59870a91c86d8ad9a"/>    <section>
+    <title>MTFasterReader()<computeroutput>[1/3]</computeroutput></title>
+<indexterm><primary>MTFasterReader</primary><secondary>MTFasterReader</secondary></indexterm>
+<indexterm><primary>MTFasterReader</primary><secondary>MTFasterReader</secondary></indexterm>
+<para><computeroutput>MTFasterReader::MTFasterReader ( )<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>Default constructor. </para>
+</para>
+    </section><anchor xml:id="_class_m_t_faster_reader_1a98a77edc573c4b3cfa5fa384f0d1a085"/>    <section>
+    <title>MTFasterReader()<computeroutput>[2/3]</computeroutput></title>
+<indexterm><primary>MTFasterReader</primary><secondary>MTFasterReader</secondary></indexterm>
+<indexterm><primary>MTFasterReader</primary><secondary>MTFasterReader</secondary></indexterm>
+<para><computeroutput>MTFasterReader::MTFasterReader (<link linkend="_class_path">Path</link> path, int const &amp; nb_files = <computeroutput>-1</computeroutput>
+)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>Regular constructor. </para>
+</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters                    </title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+                                <entry>path</entry>
+                                <entry>
+<para>: The path to the path containing the .fast files to read </para>
+</entry>
+                            </row>
+                            <row>
+                                <entry>nb_files</entry>
+                                <entry>
+<para>: Default -1, takes all the files </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_m_t_faster_reader_a98a77edc573c4b3cfa5fa384f0d1a085_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_m_t_faster_reader_1a7b012332b8f9bc617cd666e0ae768fda"/>    <section>
+    <title>MTFasterReader()<computeroutput>[3/3]</computeroutput></title>
+<indexterm><primary>MTFasterReader</primary><secondary>MTFasterReader</secondary></indexterm>
+<indexterm><primary>MTFasterReader</primary><secondary>MTFasterReader</secondary></indexterm>
+<para><computeroutput>MTFasterReader::MTFasterReader (<link linkend="_class_files_manager">FilesManager</link> const &amp; files)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_m_t_faster_reader_a7b012332b8f9bc617cd666e0ae768fda_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_class_m_t_faster_reader_1a8693e1143a0aea8096a527c7d9df9a63"/>    <section>
+    <title>addFile()</title>
+<indexterm><primary>addFile</primary><secondary>MTFasterReader</secondary></indexterm>
+<indexterm><primary>MTFasterReader</primary><secondary>addFile</secondary></indexterm>
+<para><computeroutput>bool MTFasterReader::addFile (<link linkend="_class_file">File</link> file)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_m_t_faster_reader_a8693e1143a0aea8096a527c7d9df9a63_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_m_t_faster_reader_a8693e1143a0aea8096a527c7d9df9a63_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_m_t_faster_reader_1a58a2fe8f9f9ba39808d43f36f45c8288"/>    <section>
+    <title>addFolder()</title>
+<indexterm><primary>addFolder</primary><secondary>MTFasterReader</secondary></indexterm>
+<indexterm><primary>MTFasterReader</primary><secondary>addFolder</secondary></indexterm>
+<para><computeroutput>bool MTFasterReader::addFolder (<link linkend="_class_path">Path</link> path, int const &amp; nb_files = <computeroutput>-1</computeroutput>
+)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_m_t_faster_reader_a58a2fe8f9f9ba39808d43f36f45c8288_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_m_t_faster_reader_a58a2fe8f9f9ba39808d43f36f45c8288_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_m_t_faster_reader_1aa8421439b6ac40fc7513fc85ad5a112b"/>    <section>
+    <title>files()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>files</primary><secondary>MTFasterReader</secondary></indexterm>
+<indexterm><primary>MTFasterReader</primary><secondary>files</secondary></indexterm>
+<para><computeroutput>auto&amp; MTFasterReader::files ( )<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_m_t_faster_reader_1a5d2beaf7551d9b288eef9509daf8b3b5"/>    <section>
+    <title>files()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>files</primary><secondary>MTFasterReader</secondary></indexterm>
+<indexterm><primary>MTFasterReader</primary><secondary>files</secondary></indexterm>
+<para><computeroutput>auto const&amp; MTFasterReader::files ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_m_t_faster_reader_a5d2beaf7551d9b288eef9509daf8b3b5_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_m_t_faster_reader_1a63e239df82bf04244bdab829bb73cd20"/>    <section>
+    <title>nextFilename()</title>
+<indexterm><primary>nextFilename</primary><secondary>MTFasterReader</secondary></indexterm>
+<indexterm><primary>MTFasterReader</primary><secondary>nextFilename</secondary></indexterm>
+<para><computeroutput>bool MTFasterReader::nextFilename (std::string &amp; filename)<computeroutput>[inline]</computeroutput>, <computeroutput>[private]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_m_t_faster_reader_a63e239df82bf04244bdab829bb73cd20_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_m_t_faster_reader_a63e239df82bf04244bdab829bb73cd20_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_m_t_faster_reader_1a01bb4c02770855a41d53b3544b3cae3a"/>    <section>
+    <title>printMTFiles()</title>
+<indexterm><primary>printMTFiles</primary><secondary>MTFasterReader</secondary></indexterm>
+<indexterm><primary>MTFasterReader</primary><secondary>printMTFiles</secondary></indexterm>
+<para><computeroutput>void MTFasterReader::printMTFiles ( )<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_m_t_faster_reader_a01bb4c02770855a41d53b3544b3cae3a_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_m_t_faster_reader_1a7e26b2201486cd489b66ab12b83427e0"/>    <section>
+    <title>Read()</title>
+<indexterm><primary>Read</primary><secondary>MTFasterReader</secondary></indexterm>
+<indexterm><primary>MTFasterReader</primary><secondary>Read</secondary></indexterm>
+<computeroutput>template&lt;class Func , class... ARGS&gt; </computeroutput><para><computeroutput>void MTFasterReader::Read (<link linkend="_class_m_t_faster_reader">MTFasterReader</link> &amp; MTreader, Func function, ARGS &amp;&amp;... args)<computeroutput>[inline]</computeroutput>, <computeroutput>[static]</computeroutput>, <computeroutput>[private]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_m_t_faster_reader_a7e26b2201486cd489b66ab12b83427e0_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_m_t_faster_reader_1af1ec563da5602cc23d7b0cd98b63bee0"/>    <section>
+    <title>readAligned()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>readAligned</primary><secondary>MTFasterReader</secondary></indexterm>
+<indexterm><primary>MTFasterReader</primary><secondary>readAligned</secondary></indexterm>
+<computeroutput>template&lt;class Func , class... ARGS&gt; </computeroutput><para><computeroutput>void MTFasterReader::readAligned (Func &amp;&amp; func, ARGS &amp;&amp;... args)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>Reads many faster files in parallel, providing a time-aligned. </para>
+</para>
+
+<para>Use this function in the same way as readRaw, with a function like this : func(Hit &amp; hit, Alignator &amp; alignedTree, args...)</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters                    </title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+                                <entry>func</entry>
+                                <entry>
+<para>: Must be of the form func(Hit &amp; hit, Alignator &amp; alignedTree, args...) with args </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_m_t_faster_reader_af1ec563da5602cc23d7b0cd98b63bee0_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_m_t_faster_reader_af1ec563da5602cc23d7b0cd98b63bee0_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_m_t_faster_reader_1a870da58b71c34fbcaf76733f0bc2ba71"/>    <section>
+    <title>readAligned()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>readAligned</primary><secondary>MTFasterReader</secondary></indexterm>
+<indexterm><primary>MTFasterReader</primary><secondary>readAligned</secondary></indexterm>
+<computeroutput>template&lt;class Func , class... ARGS&gt; </computeroutput><para><computeroutput>void MTFasterReader::readAligned (std::vector&lt; <link linkend="__hit_8hpp_1a808363c27c30b41f6ed40b62ebde3ee7">Time</link> &gt; timeshifts, Func &amp;&amp; func, ARGS &amp;&amp;... args)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_m_t_faster_reader_a870da58b71c34fbcaf76733f0bc2ba71_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_m_t_faster_reader_1ae316d31ebcb18ae8689522509d1ba513"/>    <section>
+    <title>readRaw()</title>
+<indexterm><primary>readRaw</primary><secondary>MTFasterReader</secondary></indexterm>
+<indexterm><primary>MTFasterReader</primary><secondary>readRaw</secondary></indexterm>
+<computeroutput>template&lt;class Func , class... ARGS&gt; </computeroutput><para><computeroutput>void MTFasterReader::readRaw (Func &amp;&amp; func, ARGS &amp;&amp;... args)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>Reads many faster files in parallel. </para>
+</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters                    </title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+                                <entry>func</entry>
+                                <entry>
+<para>Function used on each file in parallel. CAREFULL : must be a function or a static method</para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                The declared function MUST have its two first parameters as follow : type function(Hit &amp; hit, FasterReader &amp; reader, ...); You can add any other parameter in the ..., but then you have to call them in the readRaw method call e.g. : <literallayout><computeroutput>   void my_function(Hit &amp; hit, FasterReader &amp; reader, MTCounter &amp; counter){do something...}
+</computeroutput></literallayout> in main <literallayout><computeroutput>   MTFasterReader reader(/path/to/data/folder/, wanted_number_of_files);
+   MTCounter counter;
+   reader.readRaw(my_function, counter);
+</computeroutput></literallayout> That way, my_function will be executed in parallel on each file in /path/to/data/folder/ </para>
+Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_m_t_faster_reader_ae316d31ebcb18ae8689522509d1ba513_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_m_t_faster_reader_ae316d31ebcb18ae8689522509d1ba513_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_m_t_faster_reader_1ad4720651ef47aefe5a1901e4659683e1"/>    <section>
+    <title>Realign()</title>
+<indexterm><primary>Realign</primary><secondary>MTFasterReader</secondary></indexterm>
+<indexterm><primary>MTFasterReader</primary><secondary>Realign</secondary></indexterm>
+<computeroutput>template&lt;class Func , class... ARGS&gt; </computeroutput><para><computeroutput>void MTFasterReader::Realign (<link linkend="_class_m_t_faster_reader">MTFasterReader</link> &amp; MTreader, Func function, ARGS &amp;&amp;... args)<computeroutput>[inline]</computeroutput>, <computeroutput>[static]</computeroutput>, <computeroutput>[private]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_m_t_faster_reader_ad4720651ef47aefe5a1901e4659683e1_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_m_t_faster_reader_1a39cce770cb5f6dc49e2ae2558d709af6"/>    <section>
+    <title>setTimeshifts()</title>
+<indexterm><primary>setTimeshifts</primary><secondary>MTFasterReader</secondary></indexterm>
+<indexterm><primary>MTFasterReader</primary><secondary>setTimeshifts</secondary></indexterm>
+<para><computeroutput>void MTFasterReader::setTimeshifts (std::vector&lt; <link linkend="__hit_8hpp_1a808363c27c30b41f6ed40b62ebde3ee7">Time</link> &gt; const &amp; timeshifts)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_m_t_faster_reader_1a2adcc31120c30ac26b0c35a67c0e8822"/>    <section>
+    <title>timeshift()</title>
+<indexterm><primary>timeshift</primary><secondary>MTFasterReader</secondary></indexterm>
+<indexterm><primary>MTFasterReader</primary><secondary>timeshift</secondary></indexterm>
+<para><computeroutput>auto const&amp; MTFasterReader::timeshift (<link linkend="__hit_8hpp_1ab5dd24876acad09ec52c250c1668466c">Label</link> const &amp; label) const<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_m_t_faster_reader_a2adcc31120c30ac26b0c35a67c0e8822_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_class_m_t_faster_reader_1ab64bd8c46413ce8e280acc80a33df936"/>    <section>
+    <title>m_files</title>
+<indexterm><primary>m_files</primary><secondary>MTFasterReader</secondary></indexterm>
+<indexterm><primary>MTFasterReader</primary><secondary>m_files</secondary></indexterm>
+<para><computeroutput><link linkend="_class_files_manager">FilesManager</link> MTFasterReader::m_files<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_m_t_faster_reader_1a2ba1ed98c0363d91f5c0c38d6f7f231c"/>    <section>
+    <title>m_MTfiles</title>
+<indexterm><primary>m_MTfiles</primary><secondary>MTFasterReader</secondary></indexterm>
+<indexterm><primary>MTFasterReader</primary><secondary>m_MTfiles</secondary></indexterm>
+<para><computeroutput><link linkend="__m_t_list_8hpp_1a5645cb48b623bfc2e6e274c70952a8e2">MTList</link> MTFasterReader::m_MTfiles<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_m_t_faster_reader_1a2bea00b692984363df66161e172036e1"/>    <section>
+    <title>m_timeshifts</title>
+<indexterm><primary>m_timeshifts</primary><secondary>MTFasterReader</secondary></indexterm>
+<indexterm><primary>MTFasterReader</primary><secondary>m_timeshifts</secondary></indexterm>
+<para><computeroutput>std::vector&lt;<link linkend="__hit_8hpp_1a808363c27c30b41f6ed40b62ebde3ee7">Time</link>&gt; MTFasterReader::m_timeshifts<computeroutput>[private]</computeroutput></computeroutput></para></section>
+<para>
+The documentation for this class was generated from the following file:</para>
+lib/MTObjects/<link linkend="__m_t_faster_reader_8hpp">MTFasterReader.hpp</link></section>
+</section>

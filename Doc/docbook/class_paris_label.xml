@@ -1,0 +1,132 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_class_paris_label" xml:lang="en-US">
+<title>ParisLabel Class Reference</title>
+<indexterm><primary>ParisLabel</primary></indexterm>
+<para>
+<computeroutput>#include &lt;ParisLabel.hpp&gt;</computeroutput>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_class_paris_label_1ae438df4d5aa4e04d10e850efd33f39e0">ParisLabel</link> ()</para>
+</listitem>
+            <listitem><para><link linkend="_class_paris_label_1ad96cc663d29c501fdb7a76e0250d4405">ParisLabel</link> (<link linkend="__hit_8hpp_1ab5dd24876acad09ec52c250c1668466c">Label</link> const &amp;l)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_paris_label_1ad6c412d1c581cb24fbb308172d5466e3">setLabel</link> (<link linkend="__hit_8hpp_1ab5dd24876acad09ec52c250c1668466c">Label</link> const &amp;l)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Static Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>static void <link linkend="_class_paris_label_1a4a674202005523f582e0c452d9741729">setArrays</link> ()</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Public Attributes    </title>
+        <itemizedlist>
+            <listitem><para>Bool_t <link linkend="_class_paris_label_1a1013b0876a0c129570e6e8d56259403b">back</link> = false</para>
+</listitem>
+            <listitem><para><link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> <link linkend="_class_paris_label_1a46e76f0cabf8ed30776d3bbd95bdb0bb">label</link> = 0</para>
+</listitem>
+            <listitem><para><link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> <link linkend="_class_paris_label_1a43fed71ff7f0c3efcf3b2938fd60715d">ring</link> = 0</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Static Private Attributes    </title>
+        <itemizedlist>
+            <listitem><para>static bool <link linkend="_class_paris_label_1a17ef0fbe8cabfb5de60f9853fc8dc49d">arrays_set</link> = false</para>
+</listitem>
+            <listitem><para>static LabelsArray&lt; bool &gt; <link linkend="_class_paris_label_1adccc09a3b43e885208ab5a887ac9ba2f">back_array</link></para>
+</listitem>
+            <listitem><para>static LabelsArray&lt; <link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> &gt; <link linkend="_class_paris_label_1a1c553eb956a4a62c89d72ffe542376b6">label_array</link></para>
+</listitem>
+            <listitem><para>static std::vector&lt; Double_t &gt; <link linkend="_class_paris_label_1a8c3e3b49e81cdcadf3ffbac638971497">paris_labels</link></para>
+</listitem>
+            <listitem><para>static LabelsArray&lt; <link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> &gt; <link linkend="_class_paris_label_1a12026f89649ca3d3ef2a5fda9b6395e7">ring_array</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_class_paris_label_1ae438df4d5aa4e04d10e850efd33f39e0"/>    <section>
+    <title>ParisLabel()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>ParisLabel</primary><secondary>ParisLabel</secondary></indexterm>
+<indexterm><primary>ParisLabel</primary><secondary>ParisLabel</secondary></indexterm>
+<para><computeroutput>ParisLabel::ParisLabel ( )<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_paris_label_1ad96cc663d29c501fdb7a76e0250d4405"/>    <section>
+    <title>ParisLabel()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>ParisLabel</primary><secondary>ParisLabel</secondary></indexterm>
+<indexterm><primary>ParisLabel</primary><secondary>ParisLabel</secondary></indexterm>
+<para><computeroutput>ParisLabel::ParisLabel (<link linkend="__hit_8hpp_1ab5dd24876acad09ec52c250c1668466c">Label</link> const &amp; l)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_paris_label_ad96cc663d29c501fdb7a76e0250d4405_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_class_paris_label_1a4a674202005523f582e0c452d9741729"/>    <section>
+    <title>setArrays()</title>
+<indexterm><primary>setArrays</primary><secondary>ParisLabel</secondary></indexterm>
+<indexterm><primary>ParisLabel</primary><secondary>setArrays</secondary></indexterm>
+<para><computeroutput>void ParisLabel::setArrays ( )<computeroutput>[static]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_paris_label_1ad6c412d1c581cb24fbb308172d5466e3"/>    <section>
+    <title>setLabel()</title>
+<indexterm><primary>setLabel</primary><secondary>ParisLabel</secondary></indexterm>
+<indexterm><primary>ParisLabel</primary><secondary>setLabel</secondary></indexterm>
+<para><computeroutput>void ParisLabel::setLabel (<link linkend="__hit_8hpp_1ab5dd24876acad09ec52c250c1668466c">Label</link> const &amp; l)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_paris_label_ad6c412d1c581cb24fbb308172d5466e3_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_class_paris_label_1a17ef0fbe8cabfb5de60f9853fc8dc49d"/>    <section>
+    <title>arrays_set</title>
+<indexterm><primary>arrays_set</primary><secondary>ParisLabel</secondary></indexterm>
+<indexterm><primary>ParisLabel</primary><secondary>arrays_set</secondary></indexterm>
+<para><computeroutput>bool ParisLabel::arrays_set = false<computeroutput>[static]</computeroutput>, <computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_paris_label_1a1013b0876a0c129570e6e8d56259403b"/>    <section>
+    <title>back</title>
+<indexterm><primary>back</primary><secondary>ParisLabel</secondary></indexterm>
+<indexterm><primary>ParisLabel</primary><secondary>back</secondary></indexterm>
+<para><computeroutput>Bool_t ParisLabel::back = false</computeroutput></para>    </section><anchor xml:id="_class_paris_label_1adccc09a3b43e885208ab5a887ac9ba2f"/>    <section>
+    <title>back_array</title>
+<indexterm><primary>back_array</primary><secondary>ParisLabel</secondary></indexterm>
+<indexterm><primary>ParisLabel</primary><secondary>back_array</secondary></indexterm>
+<para><computeroutput>LabelsArray&lt; bool &gt; ParisLabel::back_array<computeroutput>[static]</computeroutput>, <computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_paris_label_1a46e76f0cabf8ed30776d3bbd95bdb0bb"/>    <section>
+    <title>label</title>
+<indexterm><primary>label</primary><secondary>ParisLabel</secondary></indexterm>
+<indexterm><primary>ParisLabel</primary><secondary>label</secondary></indexterm>
+<para><computeroutput><link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> ParisLabel::label = 0</computeroutput></para>    </section><anchor xml:id="_class_paris_label_1a1c553eb956a4a62c89d72ffe542376b6"/>    <section>
+    <title>label_array</title>
+<indexterm><primary>label_array</primary><secondary>ParisLabel</secondary></indexterm>
+<indexterm><primary>ParisLabel</primary><secondary>label_array</secondary></indexterm>
+<para><computeroutput>LabelsArray&lt; <link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> &gt; ParisLabel::label_array<computeroutput>[static]</computeroutput>, <computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_paris_label_1a8c3e3b49e81cdcadf3ffbac638971497"/>    <section>
+    <title>paris_labels</title>
+<indexterm><primary>paris_labels</primary><secondary>ParisLabel</secondary></indexterm>
+<indexterm><primary>ParisLabel</primary><secondary>paris_labels</secondary></indexterm>
+<para><computeroutput>std::vector&lt;Double_t&gt; ParisLabel::paris_labels<computeroutput>[static]</computeroutput>, <computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_paris_label_1a43fed71ff7f0c3efcf3b2938fd60715d"/>    <section>
+    <title>ring</title>
+<indexterm><primary>ring</primary><secondary>ParisLabel</secondary></indexterm>
+<indexterm><primary>ParisLabel</primary><secondary>ring</secondary></indexterm>
+<para><computeroutput><link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> ParisLabel::ring = 0</computeroutput></para>    </section><anchor xml:id="_class_paris_label_1a12026f89649ca3d3ef2a5fda9b6395e7"/>    <section>
+    <title>ring_array</title>
+<indexterm><primary>ring_array</primary><secondary>ParisLabel</secondary></indexterm>
+<indexterm><primary>ParisLabel</primary><secondary>ring_array</secondary></indexterm>
+<para><computeroutput>LabelsArray&lt; <link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> &gt; ParisLabel::ring_array<computeroutput>[static]</computeroutput>, <computeroutput>[private]</computeroutput></computeroutput></para></section>
+<para>
+The documentation for this class was generated from the following file:</para>
+lib/Analyse/<link linkend="__paris_label_8hpp">ParisLabel.hpp</link></section>
+</section>

@@ -1,0 +1,138 @@
+.TH "MTVector< T >" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+MTVector< T >
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <MTList\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "auto \fBbegin\fP ()"
+.br
+.ti -1c
+.RI "void \fBclear\fP ()"
+.br
+.ti -1c
+.RI "auto \fBend\fP ()"
+.br
+.ti -1c
+.RI "std::vector< T > const  & \fBget\fP () const"
+.br
+.ti -1c
+.RI "bool \fBgetNext\fP (T &t)"
+.br
+.ti -1c
+.RI "bool \fBgetNext\fP (T &t, \fBsize_t\fP &index)"
+.br
+.ti -1c
+.RI "\fBMTVector\fP ()=default"
+.br
+.ti -1c
+.RI "\fBMTVector\fP (std::vector< T > const &collection)"
+.br
+.ti -1c
+.RI "\fBoperator std::vector< T >\fP () &"
+.br
+.ti -1c
+.RI "void \fBoperator=\fP (std::vector< T > const &collection)"
+.br
+.ti -1c
+.RI "\fBMTVector\fP & \fBoperator=\fP (T const &t)"
+.br
+.ti -1c
+.RI "T const  & \fBoperator[]\fP (\fBsize_t\fP const &i)"
+.br
+.ti -1c
+.RI "void \fBPrint\fP ()"
+.br
+.ti -1c
+.RI "void \fBpush_back\fP (T const &t)"
+.br
+.ti -1c
+.RI "void \fBresetRead\fP ()"
+.br
+.ti -1c
+.RI "void \fBresize\fP (\fBsize_t\fP const &i=0)"
+.br
+.ti -1c
+.RI "void \fBset\fP (std::vector< T > const &collection)"
+.br
+.ti -1c
+.RI "\fBsize_t\fP const  & \fBsize\fP () const"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "std::vector< T > \fBm_collection\fP"
+.br
+.ti -1c
+.RI "std::mutex \fBm_mutex\fP"
+.br
+.ti -1c
+.RI "\fBsize_t\fP \fBm_read_index\fP = 0"
+.br
+.ti -1c
+.RI "\fBsize_t\fP \fBm_size\fP = 0"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "template<class T > \fBMTVector\fP< T >::\fBMTVector\fP ()\fC [default]\fP"
+
+.SS "template<class T > \fBMTVector\fP< T >::\fBMTVector\fP (std::vector< T > const & collection)\fC [inline]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "template<class T > auto \fBMTVector\fP< T >::begin ()\fC [inline]\fP"
+
+.SS "template<class T > void \fBMTVector\fP< T >::clear ()\fC [inline]\fP"
+
+.SS "template<class T > auto \fBMTVector\fP< T >::end ()\fC [inline]\fP"
+
+.SS "template<class T > std::vector<T> const& \fBMTVector\fP< T >::get () const\fC [inline]\fP"
+
+.SS "template<class T > bool \fBMTVector\fP< T >::getNext (T & t)\fC [inline]\fP"
+
+.SS "template<class T > bool \fBMTVector\fP< T >::getNext (T & t, \fBsize_t\fP & index)\fC [inline]\fP"
+
+.SS "template<class T > \fBMTVector\fP< T >::operator std::vector< T > () &\fC [inline]\fP"
+
+.SS "template<class T > void \fBMTVector\fP< T >::operator= (std::vector< T > const & collection)\fC [inline]\fP"
+
+.SS "template<class T > \fBMTVector\fP& \fBMTVector\fP< T >::operator= (T const & t)\fC [inline]\fP"
+
+.SS "template<class T > T const& \fBMTVector\fP< T >::operator[] (\fBsize_t\fP const & i)\fC [inline]\fP"
+
+.SS "template<class T > void \fBMTVector\fP< T >::Print ()\fC [inline]\fP"
+
+.SS "template<class T > void \fBMTVector\fP< T >::push_back (T const & t)\fC [inline]\fP"
+
+.SS "template<class T > void \fBMTVector\fP< T >::resetRead ()\fC [inline]\fP"
+
+.SS "template<class T > void \fBMTVector\fP< T >::resize (\fBsize_t\fP const & i = \fC0\fP)\fC [inline]\fP"
+
+.SS "template<class T > void \fBMTVector\fP< T >::set (std::vector< T > const & collection)\fC [inline]\fP"
+
+.SS "template<class T > \fBsize_t\fP const& \fBMTVector\fP< T >::size () const\fC [inline]\fP"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "template<class T > std::vector<T> \fBMTVector\fP< T >::m_collection\fC [private]\fP"
+
+.SS "template<class T > std::mutex \fBMTVector\fP< T >::m_mutex\fC [mutable]\fP, \fC [private]\fP"
+
+.SS "template<class T > \fBsize_t\fP \fBMTVector\fP< T >::m_read_index = 0\fC [private]\fP"
+
+.SS "template<class T > \fBsize_t\fP \fBMTVector\fP< T >::m_size = 0\fC [private]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Nuball2 from the source code\&.

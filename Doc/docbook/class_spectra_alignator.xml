@@ -1,0 +1,143 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_class_spectra_alignator" xml:lang="en-US">
+<title>SpectraAlignator Class Reference</title>
+<indexterm><primary>SpectraAlignator</primary></indexterm>
+<para>
+<computeroutput>#include &lt;SpectraAlignator.hpp&gt;</computeroutput>
+</para>
+Collaboration diagram for SpectraAlignator:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_spectra_alignator__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_class_recalibration">Recalibration</link> const  &amp; <link linkend="_class_spectra_alignator_1a1844e2814df35c43677ed678f79fc00d">alignSpectra</link> (TH1 *_spectra, TH1 *spectra_output, int const &amp;degreesOfFreedom=3, double const &amp;energyThreshold=0)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_spectra_alignator_1a06e5ad929499d18d557fd5a37daf8897">setBruteForce</link> (bool const &amp;brute_force=true)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_spectra_alignator_1a2aad91050c99f92c1e217d4c886db883">setIterations</link> (int const &amp;iterations)</para>
+</listitem>
+            <listitem><para><link linkend="_class_spectra_alignator_1a1f75d38f8f9dd676b72689f8adbe3be5">SpectraAlignator</link> (TH1 *ref)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_spectra_alignator_1a6bac228fc1bc0ef5ad041966722642cd">writeChi2Spectra</link> (TFile *file)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Private Attributes    </title>
+        <itemizedlist>
+            <listitem><para>bool <link linkend="_class_spectra_alignator_1a3ae8fddfa8d549fff41f095efb6a9ca4">m_brute_force</link> = false</para>
+</listitem>
+            <listitem><para>TH3F * <link linkend="_class_spectra_alignator_1ad36473470290fcb740440c8952e4b30e">m_chi2_spectra</link> = nullptr</para>
+</listitem>
+            <listitem><para>std::vector&lt; double &gt; <link linkend="_class_spectra_alignator_1a49faa58fd7b8c2bc3a16e0dbc11c9bbe">m_chi2s</link></para>
+</listitem>
+            <listitem><para>std::vector&lt; <link linkend="_class_minimisator">Minimisator</link> &gt; <link linkend="_class_spectra_alignator_1abcc20c4ad4370552aa2730ade1f2b74e">m_minimisator</link></para>
+</listitem>
+            <listitem><para>int <link linkend="_class_spectra_alignator_1a5d2a1ca21ba9deeb943965dbdb51496a">m_nb_iterations</link> = 20</para>
+</listitem>
+            <listitem><para>std::vector&lt; <link linkend="_class_recalibration">Recalibration</link> &gt; <link linkend="_class_spectra_alignator_1a616ff75748e686a5a9bde689b9ec6a1e">m_recals</link></para>
+</listitem>
+            <listitem><para><link linkend="_class_spectra_co">SpectraCo</link> <link linkend="_class_spectra_alignator_1a3ad1731be89ec8af6fc61a8cbe89ba80">m_ref_spectra</link></para>
+</listitem>
+            <listitem><para>std::vector&lt; <link linkend="_class_spectra_co">SpectraCo</link> &gt; <link linkend="_class_spectra_alignator_1a3ab517682bf990b44620a3db9020064e">m_spectra</link></para>
+</listitem>
+            <listitem><para>int <link linkend="_class_spectra_alignator_1ad0175cbe3edb3c577a91a728625c5cf6">m_spectra_threshold</link> = 0</para>
+</listitem>
+            <listitem><para>TH2F * <link linkend="_class_spectra_alignator_1a5098303e559bd1051c6758b2bf6bcf1a">surface_chi2</link> = nullptr</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_class_spectra_alignator_1a1f75d38f8f9dd676b72689f8adbe3be5"/>    <section>
+    <title>SpectraAlignator()</title>
+<indexterm><primary>SpectraAlignator</primary><secondary>SpectraAlignator</secondary></indexterm>
+<indexterm><primary>SpectraAlignator</primary><secondary>SpectraAlignator</secondary></indexterm>
+<para><computeroutput>SpectraAlignator::SpectraAlignator (TH1 * ref)<computeroutput>[inline]</computeroutput></computeroutput></para></section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_class_spectra_alignator_1a1844e2814df35c43677ed678f79fc00d"/>    <section>
+    <title>alignSpectra()</title>
+<indexterm><primary>alignSpectra</primary><secondary>SpectraAlignator</secondary></indexterm>
+<indexterm><primary>SpectraAlignator</primary><secondary>alignSpectra</secondary></indexterm>
+<para><computeroutput><link linkend="_class_recalibration">Recalibration</link> const&amp; SpectraAlignator::alignSpectra (TH1 * _spectra, TH1 * spectra_output, int const &amp; degreesOfFreedom = <computeroutput>3</computeroutput>
+, double const &amp; energyThreshold = <computeroutput>0</computeroutput>
+)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_spectra_alignator_a1844e2814df35c43677ed678f79fc00d_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_spectra_alignator_1a06e5ad929499d18d557fd5a37daf8897"/>    <section>
+    <title>setBruteForce()</title>
+<indexterm><primary>setBruteForce</primary><secondary>SpectraAlignator</secondary></indexterm>
+<indexterm><primary>SpectraAlignator</primary><secondary>setBruteForce</secondary></indexterm>
+<para><computeroutput>void SpectraAlignator::setBruteForce (bool const &amp; brute_force = <computeroutput>true</computeroutput>
+)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_spectra_alignator_1a2aad91050c99f92c1e217d4c886db883"/>    <section>
+    <title>setIterations()</title>
+<indexterm><primary>setIterations</primary><secondary>SpectraAlignator</secondary></indexterm>
+<indexterm><primary>SpectraAlignator</primary><secondary>setIterations</secondary></indexterm>
+<para><computeroutput>void SpectraAlignator::setIterations (int const &amp; iterations)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_spectra_alignator_1a6bac228fc1bc0ef5ad041966722642cd"/>    <section>
+    <title>writeChi2Spectra()</title>
+<indexterm><primary>writeChi2Spectra</primary><secondary>SpectraAlignator</secondary></indexterm>
+<indexterm><primary>SpectraAlignator</primary><secondary>writeChi2Spectra</secondary></indexterm>
+<para><computeroutput>void SpectraAlignator::writeChi2Spectra (TFile * file)<computeroutput>[inline]</computeroutput></computeroutput></para></section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_class_spectra_alignator_1a3ae8fddfa8d549fff41f095efb6a9ca4"/>    <section>
+    <title>m_brute_force</title>
+<indexterm><primary>m_brute_force</primary><secondary>SpectraAlignator</secondary></indexterm>
+<indexterm><primary>SpectraAlignator</primary><secondary>m_brute_force</secondary></indexterm>
+<para><computeroutput>bool SpectraAlignator::m_brute_force = false<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_spectra_alignator_1ad36473470290fcb740440c8952e4b30e"/>    <section>
+    <title>m_chi2_spectra</title>
+<indexterm><primary>m_chi2_spectra</primary><secondary>SpectraAlignator</secondary></indexterm>
+<indexterm><primary>SpectraAlignator</primary><secondary>m_chi2_spectra</secondary></indexterm>
+<para><computeroutput>TH3F* SpectraAlignator::m_chi2_spectra = nullptr<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_spectra_alignator_1a49faa58fd7b8c2bc3a16e0dbc11c9bbe"/>    <section>
+    <title>m_chi2s</title>
+<indexterm><primary>m_chi2s</primary><secondary>SpectraAlignator</secondary></indexterm>
+<indexterm><primary>SpectraAlignator</primary><secondary>m_chi2s</secondary></indexterm>
+<para><computeroutput>std::vector&lt;double&gt; SpectraAlignator::m_chi2s<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_spectra_alignator_1abcc20c4ad4370552aa2730ade1f2b74e"/>    <section>
+    <title>m_minimisator</title>
+<indexterm><primary>m_minimisator</primary><secondary>SpectraAlignator</secondary></indexterm>
+<indexterm><primary>SpectraAlignator</primary><secondary>m_minimisator</secondary></indexterm>
+<para><computeroutput>std::vector&lt;<link linkend="_class_minimisator">Minimisator</link>&gt; SpectraAlignator::m_minimisator<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_spectra_alignator_1a5d2a1ca21ba9deeb943965dbdb51496a"/>    <section>
+    <title>m_nb_iterations</title>
+<indexterm><primary>m_nb_iterations</primary><secondary>SpectraAlignator</secondary></indexterm>
+<indexterm><primary>SpectraAlignator</primary><secondary>m_nb_iterations</secondary></indexterm>
+<para><computeroutput>int SpectraAlignator::m_nb_iterations = 20<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_spectra_alignator_1a616ff75748e686a5a9bde689b9ec6a1e"/>    <section>
+    <title>m_recals</title>
+<indexterm><primary>m_recals</primary><secondary>SpectraAlignator</secondary></indexterm>
+<indexterm><primary>SpectraAlignator</primary><secondary>m_recals</secondary></indexterm>
+<para><computeroutput>std::vector&lt;<link linkend="_class_recalibration">Recalibration</link>&gt; SpectraAlignator::m_recals<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_spectra_alignator_1a3ad1731be89ec8af6fc61a8cbe89ba80"/>    <section>
+    <title>m_ref_spectra</title>
+<indexterm><primary>m_ref_spectra</primary><secondary>SpectraAlignator</secondary></indexterm>
+<indexterm><primary>SpectraAlignator</primary><secondary>m_ref_spectra</secondary></indexterm>
+<para><computeroutput><link linkend="_class_spectra_co">SpectraCo</link> SpectraAlignator::m_ref_spectra<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_spectra_alignator_1a3ab517682bf990b44620a3db9020064e"/>    <section>
+    <title>m_spectra</title>
+<indexterm><primary>m_spectra</primary><secondary>SpectraAlignator</secondary></indexterm>
+<indexterm><primary>SpectraAlignator</primary><secondary>m_spectra</secondary></indexterm>
+<para><computeroutput>std::vector&lt;<link linkend="_class_spectra_co">SpectraCo</link>&gt; SpectraAlignator::m_spectra<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_spectra_alignator_1ad0175cbe3edb3c577a91a728625c5cf6"/>    <section>
+    <title>m_spectra_threshold</title>
+<indexterm><primary>m_spectra_threshold</primary><secondary>SpectraAlignator</secondary></indexterm>
+<indexterm><primary>SpectraAlignator</primary><secondary>m_spectra_threshold</secondary></indexterm>
+<para><computeroutput>int SpectraAlignator::m_spectra_threshold = 0<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_spectra_alignator_1a5098303e559bd1051c6758b2bf6bcf1a"/>    <section>
+    <title>surface_chi2</title>
+<indexterm><primary>surface_chi2</primary><secondary>SpectraAlignator</secondary></indexterm>
+<indexterm><primary>SpectraAlignator</primary><secondary>surface_chi2</secondary></indexterm>
+<para><computeroutput>TH2F* SpectraAlignator::surface_chi2 = nullptr<computeroutput>[private]</computeroutput></computeroutput></para></section>
+<para>
+The documentation for this class was generated from the following file:</para>
+lib/Classes/<link linkend="__spectra_alignator_8hpp">SpectraAlignator.hpp</link></section>
+</section>

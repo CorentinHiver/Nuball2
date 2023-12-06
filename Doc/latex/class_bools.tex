@@ -1,0 +1,183 @@
+\doxysection{Bools Class Reference}
+\label{class_bools}\index{Bools@{Bools}}
+
+
+{\ttfamily \#include $<$lib\+Co.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+auto \textbf{ begin} ()
+\item 
+auto \textbf{ begin} () const
+\item 
+\textbf{ Bools} ()
+\item 
+\textbf{ Bools} (\textbf{ Bools} \&\&other) noexcept
+\item 
+\textbf{ Bools} (const \textbf{ Bools} \&other)
+\item 
+\textbf{ Bools} (\textbf{ size\+\_\+t} \textbf{ size}, bool const \&value=false)
+\item 
+auto \textbf{ end} ()
+\item 
+auto \textbf{ end} () const
+\item 
+\textbf{ Bools} \& \textbf{ operator=} (\textbf{ Bools} \&\&other) noexcept
+\item 
+\textbf{ Bools} \& \textbf{ operator=} (const \textbf{ Bools} \&other)
+\item 
+bool \& \textbf{ operator[$\,$]} (\textbf{ size\+\_\+t} const \&index)
+\item 
+bool const  \& \textbf{ operator[$\,$]} (\textbf{ size\+\_\+t} const \&index) const
+\item 
+\textbf{ size\+\_\+t} const  \& \textbf{ resize} (\textbf{ size\+\_\+t} \textbf{ size}, bool const \&value=false)
+\item 
+\textbf{ size\+\_\+t} const  \& \textbf{ size} () const
+\item 
+\textbf{ $\sim$\+Bools} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool $\ast$ \textbf{ m\+\_\+data} = nullptr
+\item 
+\textbf{ size\+\_\+t} \textbf{ m\+\_\+size} = 0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\label{class_bools_addb0b52571d27932fa8143fcb422fe9b}} 
+\index{Bools@{Bools}!Bools@{Bools}}
+\index{Bools@{Bools}!Bools@{Bools}}
+\doxysubsubsection{Bools()\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily Bools\+::\+Bools (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_bools_a88601b65a1ae703d7bbc80e4c8586530}} 
+\index{Bools@{Bools}!Bools@{Bools}}
+\index{Bools@{Bools}!Bools@{Bools}}
+\doxysubsubsection{Bools()\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily Bools\+::\+Bools (\begin{DoxyParamCaption}\item[{\textbf{ size\+\_\+t}}]{size,  }\item[{bool const \&}]{value = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_bools_a83a4cfda502a9e83cccb5a0cefd65067}} 
+\index{Bools@{Bools}!Bools@{Bools}}
+\index{Bools@{Bools}!Bools@{Bools}}
+\doxysubsubsection{Bools()\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily Bools\+::\+Bools (\begin{DoxyParamCaption}\item[{const \textbf{ Bools} \&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_bools_a320db9791cebe780ebd6486236f820fd}} 
+\index{Bools@{Bools}!Bools@{Bools}}
+\index{Bools@{Bools}!Bools@{Bools}}
+\doxysubsubsection{Bools()\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily Bools\+::\+Bools (\begin{DoxyParamCaption}\item[{\textbf{ Bools} \&\&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+\mbox{\label{class_bools_a0908affb9f95fbbcd517316c7c81bf53}} 
+\index{Bools@{Bools}!````~Bools@{$\sim$Bools}}
+\index{````~Bools@{$\sim$Bools}!Bools@{Bools}}
+\doxysubsubsection{$\sim$Bools()}
+{\footnotesize\ttfamily Bools\+::$\sim$\+Bools (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\label{class_bools_a241564235788ec089ae157118d17e401}} 
+\index{Bools@{Bools}!begin@{begin}}
+\index{begin@{begin}!Bools@{Bools}}
+\doxysubsubsection{begin()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily auto Bools\+::begin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_bools_adaae46464e92c6073e068b66737da266}} 
+\index{Bools@{Bools}!begin@{begin}}
+\index{begin@{begin}!Bools@{Bools}}
+\doxysubsubsection{begin()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily auto Bools\+::begin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_bools_a940a216bf52d8c93e688e2810cd767e8}} 
+\index{Bools@{Bools}!end@{end}}
+\index{end@{end}!Bools@{Bools}}
+\doxysubsubsection{end()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily auto Bools\+::end (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_bools_ae285a4de44d0625f680555e524b8fb27}} 
+\index{Bools@{Bools}!end@{end}}
+\index{end@{end}!Bools@{Bools}}
+\doxysubsubsection{end()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily auto Bools\+::end (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_bools_a28a402a253cb7cef0e58445c126554ce}} 
+\index{Bools@{Bools}!operator=@{operator=}}
+\index{operator=@{operator=}!Bools@{Bools}}
+\doxysubsubsection{operator=()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \textbf{ Bools}\& Bools\+::operator= (\begin{DoxyParamCaption}\item[{\textbf{ Bools} \&\&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+\mbox{\label{class_bools_ab3902a403239bd602aafd094319f3f8f}} 
+\index{Bools@{Bools}!operator=@{operator=}}
+\index{operator=@{operator=}!Bools@{Bools}}
+\doxysubsubsection{operator=()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \textbf{ Bools}\& Bools\+::operator= (\begin{DoxyParamCaption}\item[{const \textbf{ Bools} \&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_bools_afbd25d68b6e6fb096b95f56b665cf1b7}} 
+\index{Bools@{Bools}!operator[]@{operator[]}}
+\index{operator[]@{operator[]}!Bools@{Bools}}
+\doxysubsubsection{operator[]()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily bool\& Bools\+::operator[$\,$] (\begin{DoxyParamCaption}\item[{\textbf{ size\+\_\+t} const \&}]{index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_bools_a0d18d7e936b556355a0ecc844a0daad3}} 
+\index{Bools@{Bools}!operator[]@{operator[]}}
+\index{operator[]@{operator[]}!Bools@{Bools}}
+\doxysubsubsection{operator[]()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily bool const\& Bools\+::operator[$\,$] (\begin{DoxyParamCaption}\item[{\textbf{ size\+\_\+t} const \&}]{index }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_bools_ab34b97e65a4a23ae25a8b6f746c37a9d}} 
+\index{Bools@{Bools}!resize@{resize}}
+\index{resize@{resize}!Bools@{Bools}}
+\doxysubsubsection{resize()}
+{\footnotesize\ttfamily \textbf{ size\+\_\+t} const\& Bools\+::resize (\begin{DoxyParamCaption}\item[{\textbf{ size\+\_\+t}}]{size,  }\item[{bool const \&}]{value = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=264pt]{class_bools_ab34b97e65a4a23ae25a8b6f746c37a9d_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_bools_ab34b97e65a4a23ae25a8b6f746c37a9d_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_bools_ad4d74f6e2266b271a8bd060ce6d0e448}} 
+\index{Bools@{Bools}!size@{size}}
+\index{size@{size}!Bools@{Bools}}
+\doxysubsubsection{size()}
+{\footnotesize\ttfamily \textbf{ size\+\_\+t} const\& Bools\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_bools_ad4d74f6e2266b271a8bd060ce6d0e448_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\label{class_bools_a2ac7144e4d610dde76f076eb34dc73f9}} 
+\index{Bools@{Bools}!m\_data@{m\_data}}
+\index{m\_data@{m\_data}!Bools@{Bools}}
+\doxysubsubsection{m\_data}
+{\footnotesize\ttfamily bool$\ast$ Bools\+::m\+\_\+data = nullptr\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_bools_a445a24b6837a4387946571ea76d95886}} 
+\index{Bools@{Bools}!m\_size@{m\_size}}
+\index{m\_size@{m\_size}!Bools@{Bools}}
+\doxysubsubsection{m\_size}
+{\footnotesize\ttfamily \textbf{ size\+\_\+t} Bools\+::m\+\_\+size = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+lib/\textbf{ lib\+Co.\+hpp}\end{DoxyCompactItemize}

@@ -1,0 +1,461 @@
+.TH "Calibration" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Calibration
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <Calibration\&.hpp>\fP
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "struct \fBhistograms\fP"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBanalyse\fP (std::string const &source='152Eu')"
+.br
+.RI "Analyse the spectra to extract calibration coefficients\&. "
+.ti -1c
+.RI "void \fBcalculate\fP (std::string const &dataDir, int nb_files=\-1, std::string const &source='152Eu', std::string const &type='fast')"
+.br
+.ti -1c
+.RI "void \fBcalculate\fP (std::string const &\fBhistograms\fP, std::string const &source='152Eu')"
+.br
+.RI "Calculate calibration from \&.root histograms\&. "
+.ti -1c
+.RI "void \fBcalibrate\fP (\fBHit\fP &hit) const"
+.br
+.RI "avoid using this one "
+.ti -1c
+.RI "\fBNRJ\fP \fBcalibrate\fP (\fBNRJ\fP const &nrj, \fBLabel\fP const &label) const"
+.br
+.RI "calibrate the ADC value using the parameters extracted from the calibration data "
+.ti -1c
+.RI "bool const  & \fBcalibrate_data\fP ()"
+.br
+.ti -1c
+.RI "bool const  & \fBcalibrate_data\fP () const"
+.br
+.ti -1c
+.RI "void \fBcalibrateFasterData\fP (std::string const &folder, int const &nb_files=\-1)"
+.br
+.ti -1c
+.RI "void \fBcalibrateRootData\fP (std::string const &folder, int const &nb_files=\-1)"
+.br
+.ti -1c
+.RI "\fBCalibration\fP ()"
+.br
+.ti -1c
+.RI "\fBCalibration\fP (\fBCalibration\fP const &otherCalib)"
+.br
+.RI "Copy constructor\&. "
+.ti -1c
+.RI "\fBCalibration\fP (const char *calibFileName)"
+.br
+.ti -1c
+.RI "\fBCalibration\fP (std::string const &calibFileName)"
+.br
+.RI "Loading calibration from file name\&. "
+.ti -1c
+.RI "auto const  & \fBfile\fP () const"
+.br
+.ti -1c
+.RI "void \fBfillRootDataHisto\fP (std::string const &filename)"
+.br
+.ti -1c
+.RI "void \fBfitCalibration\fP (\fBFits\fP &fits)"
+.br
+.ti -1c
+.RI "auto const  & \fBgetBinom\fP () const"
+.br
+.ti -1c
+.RI "auto const  & \fBgetIntercept\fP () const"
+.br
+.ti -1c
+.RI "auto const  & \fBgetOrder\fP () const"
+.br
+.ti -1c
+.RI "auto const  & \fBgetSlope\fP () const"
+.br
+.ti -1c
+.RI "auto const  & \fBgetTrinom\fP () const"
+.br
+.ti -1c
+.RI "void \fBInitialize\fP ()"
+.br
+.ti -1c
+.RI "bool const  & \fBisFilled\fP () const"
+.br
+.ti -1c
+.RI "bool \fBload\fP (std::string const &calibFileName)"
+.br
+.ti -1c
+.RI "void \fBloadFasterData\fP (std::string const &dataDir, int const &nb_files=\-1)"
+.br
+.ti -1c
+.RI "void \fBloadRootData\fP (std::string const &dataDir, int const &nb_files=\-1)"
+.br
+.ti -1c
+.RI "void \fBloadRootHisto\fP (std::string const &\fBhistograms\fP)"
+.br
+.ti -1c
+.RI "\fBoperator bool\fP () const &"
+.br
+.ti -1c
+.RI "template<class\&.\&.\&. ARGS> auto \fBoperator()\fP (ARGS &&\&.\&.\&. args) const"
+.br
+.RI "Call for calibrate method\&. "
+.ti -1c
+.RI "\fBCalibration\fP const  & \fBoperator=\fP (\fBCalibration\fP const &otherCalib)"
+.br
+.RI "Copy operator\&. "
+.ti -1c
+.RI "\fBCalibration\fP const  & \fBoperator=\fP (std::string const &calibFileName)"
+.br
+.ti -1c
+.RI "std::vector< \fBNRJ\fP > \fBoperator[]\fP (\fBLabel\fP const &label) const"
+.br
+.ti -1c
+.RI "void \fBpeakFinder\fP (std::string const &source)"
+.br
+.ti -1c
+.RI "void \fBPrint\fP ()"
+.br
+.ti -1c
+.RI "void \fBsetCalibrationTables\fP ()"
+.br
+.ti -1c
+.RI "void \fBsetSource\fP (std::string const &source)"
+.br
+.ti -1c
+.RI "auto const  & \fBsize\fP () const"
+.br
+.RI "DEV\&. "
+.ti -1c
+.RI "void \fBverbose\fP (bool const &_verbose)"
+.br
+.ti -1c
+.RI "void \fBverify\fP (std::string const &outfilename='verify')"
+.br
+.ti -1c
+.RI "void \fBwriteCalibratedData\fP (std::string const &outfilename)"
+.br
+.ti -1c
+.RI "void \fBwriteCalibratedHisto\fP (std::string const &outfilename)"
+.br
+.ti -1c
+.RI "void \fBwriteData\fP (std::string const &outfilename)"
+.br
+.ti -1c
+.RI "void \fBwritePosPeaks\fP (std::string const &outfilename)"
+.br
+.ti -1c
+.RI "void \fBwriteRawRoot\fP (std::string const &outfilename)"
+.br
+.in -1c
+.SS "Static Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "static void \fBfillHisto\fP (\fBHit\fP &hit, \fBFasterReader\fP &reader, \fBCalibration\fP &calib)"
+.br
+.ti -1c
+.RI "static void \fBloadRootDataThread\fP (\fBCalibration\fP &calib, \fBMTList\fP &list)"
+.br
+.ti -1c
+.RI "static void \fBtreatOnlyGe\fP (bool const &b=true)"
+.br
+.ti -1c
+.RI "static void \fBtreatOnlyParis\fP (bool const &b=true)"
+.br
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "struct \fBCalibration::histograms\fP \fBm_histos\fP"
+.br
+.in -1c
+.SS "Private Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBset\fP (\fBLabel\fP label, \fBNRJ\fP intercept, \fBNRJ\fP slope, \fBNRJ\fP binom, \fBNRJ\fP trinom)"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "std::vector< std::vector< std::vector< \fBNRJ\fP > > > \fBcalibration_tables\fP"
+.br
+.ti -1c
+.RI "std::vector< \fBNRJ\fP > \fBm_binom\fP"
+.br
+.ti -1c
+.RI "bool \fBm_calibrate_data\fP = false"
+.br
+.ti -1c
+.RI "std::string \fBm_filename\fP = ''"
+.br
+.ti -1c
+.RI "\fBFits\fP \fBm_fits\fP"
+.br
+.ti -1c
+.RI "std::vector< \fBNRJ\fP > \fBm_intercept\fP"
+.br
+.ti -1c
+.RI "\fBLabel\fP \fBm_nb_detectors\fP = 0"
+.br
+.ti -1c
+.RI "bool \fBm_ok\fP = false"
+.br
+.ti -1c
+.RI "std::vector< char > \fBm_order\fP"
+.br
+.ti -1c
+.RI "std::string \fBm_outCalib\fP = ''"
+.br
+.ti -1c
+.RI "std::string \fBm_outDir\fP = 'Calibration/'"
+.br
+.ti -1c
+.RI "std::string \fBm_outRoot\fP = 'calibration\&.root'"
+.br
+.ti -1c
+.RI "bool \fBm_outRoot_b\fP = false"
+.br
+.ti -1c
+.RI "bool \fBm_residus\fP = false"
+.br
+.ti -1c
+.RI "\fBLabel\fP \fBm_size\fP = 0"
+.br
+.ti -1c
+.RI "std::vector< \fBNRJ\fP > \fBm_slope\fP"
+.br
+.ti -1c
+.RI "std::string \fBm_source\fP = ''"
+.br
+.ti -1c
+.RI "std::vector< \fBNRJ\fP > \fBm_trinom\fP"
+.br
+.ti -1c
+.RI "bool \fBm_verbose\fP = false"
+.br
+.in -1c
+.SS "Static Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "static bool \fBm_treatOnlyGe\fP = false"
+.br
+.ti -1c
+.RI "static bool \fBm_treatOnlyParis\fP = false"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.PP
+\fBTodo\fP
+.RS 4
+\fBCalibration::verify()\fP DO NOT SUPPORT \fBMTObject\fP !! 
+.RE
+.PP
+
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "Calibration::Calibration ()\fC [inline]\fP"
+
+.SS "Calibration::Calibration (\fBCalibration\fP const & otherCalib)\fC [inline]\fP"
+
+.PP
+Copy constructor\&. 
+.SS "Calibration::Calibration (std::string const & calibFileName)\fC [inline]\fP"
+
+.PP
+Loading calibration from file name\&. 
+.SS "Calibration::Calibration (const char * calibFileName)\fC [inline]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "void Calibration::analyse (std::string const & source = \fC'152Eu'\fP)"
+
+.PP
+Analyse the spectra to extract calibration coefficients\&. The peak finding follows the following principle : We start from the bin at the very right side of the spectra\&. Then we add the value of the bin to the integral counter\&. Then we add the value of the next bin on the left, then the next, etc\&.\&. That is, we integrate the spectra from right to left The moment the first peak is found, the higher energy one, the integral will suddenly increase Then we have to determine a threshold above which we say 'we have found the first peak' From this we determine a really rough first linear calibration\&. This allows us to find, for each other peak, an energy windows in which it should be\&. Once this window established, we find its centroid\&. Then we create a smaller window and find again the centroid\&. A third window (which may not me important ?) event narrower is set around the peak\&. Then the peak is fitted and the mean value of the gaussian fit added to the calibration curve\&. Finally, the fit of the calibration curve gives the calibration coefficients\&.
+.PP
+The threshold is taken as the ratio between the integral and the total integral of the spectra, so that the process do not depend neither on different counting rates nor on different calibration duration\&. Only issue : it depends on the kind of detector and to some extend to the geometry\&. That is, this calibration is not well suited for paris detectors\&.\&.\&. Also, if a peak is absent due to for instance high energy threshold of the detector (typically 121keV of 152Eu is absent in some noisy channels) then the calibration will fail
+.PP
+\fBAttention\fP
+.RS 4
+The most difficult part is to find the value of the threshold, wich must be different for each kind of detector\&. If it is different for differents detectors of the same type (e\&.g\&. paris) then the calibration requires additionnal work\&.
+.PP
+Take care of the binning of the spectra\&. If there is too much or not enough bins then the peak fitting will fail, if the maximum ADC value is lower than the higher energy peak then the peak findind will fail\&. Also, everything supposes the minimum bin corresponds to 0, otherwise it might fail\&. 
+.RE
+.PP
+
+.SS "void Calibration::calculate (std::string const & dataDir, int nb_files = \fC\-1\fP, std::string const & source = \fC'152Eu'\fP, std::string const & type = \fC'fast'\fP)"
+
+.SS "void Calibration::calculate (std::string const & histograms, std::string const & source = \fC'152Eu'\fP)"
+
+.PP
+Calculate calibration from \&.root histograms\&. 
+.PP
+\fBAttention\fP
+.RS 4
+TODO 
+.RE
+.PP
+
+.SS "void Calibration::calibrate (\fBHit\fP & hit) const\fC [inline]\fP"
+
+.PP
+avoid using this one 
+.SS "\fBNRJ\fP Calibration::calibrate (\fBNRJ\fP const & nrj, \fBLabel\fP const & label) const\fC [inline]\fP"
+
+.PP
+calibrate the ADC value using the parameters extracted from the calibration data calibrate the nrj value using the parameters extracted from the calibration data 
+.SS "bool const& Calibration::calibrate_data ()\fC [inline]\fP"
+
+.SS "bool const& Calibration::calibrate_data () const\fC [inline]\fP"
+
+.SS "void Calibration::calibrateFasterData (std::string const & folder, int const & nb_files = \fC\-1\fP)"
+
+.SS "void Calibration::calibrateRootData (std::string const & folder, int const & nb_files = \fC\-1\fP)"
+
+.SS "auto const& Calibration::file () const\fC [inline]\fP"
+
+.SS "void Calibration::fillHisto (\fBHit\fP & hit, \fBFasterReader\fP & reader, \fBCalibration\fP & calib)\fC [static]\fP"
+
+.SS "void Calibration::fillRootDataHisto (std::string const & filename)"
+
+.SS "void Calibration::fitCalibration (\fBFits\fP & fits)"
+
+.SS "auto const& Calibration::getBinom () const\fC [inline]\fP"
+
+.SS "auto const& Calibration::getIntercept () const\fC [inline]\fP"
+
+.SS "auto const& Calibration::getOrder () const\fC [inline]\fP"
+
+.SS "auto const& Calibration::getSlope () const\fC [inline]\fP"
+
+.SS "auto const& Calibration::getTrinom () const\fC [inline]\fP"
+
+.SS "void Calibration::Initialize ()\fC [inline]\fP"
+
+.SS "bool const& Calibration::isFilled () const\fC [inline]\fP"
+
+.SS "bool Calibration::load (std::string const & calibFileName)"
+
+.SS "void Calibration::loadFasterData (std::string const & dataDir, int const & nb_files = \fC\-1\fP)"
+
+.SS "void Calibration::loadRootData (std::string const & dataDir, int const & nb_files = \fC\-1\fP)"
+
+.SS "void Calibration::loadRootDataThread (\fBCalibration\fP & calib, \fBMTList\fP & list)\fC [static]\fP"
+
+.SS "void Calibration::loadRootHisto (std::string const & histograms)"
+
+.SS "Calibration::operator bool () const &\fC [inline]\fP"
+
+.SS "template<class\&.\&.\&. ARGS> auto Calibration::operator() (ARGS &&\&.\&.\&. args) const\fC [inline]\fP"
+
+.PP
+Call for calibrate method\&. 
+.SS "\fBCalibration\fP const& Calibration::operator= (\fBCalibration\fP const & otherCalib)\fC [inline]\fP"
+
+.PP
+Copy operator\&. 
+.SS "\fBCalibration\fP const& Calibration::operator= (std::string const & calibFileName)\fC [inline]\fP"
+
+.SS "std::vector<\fBNRJ\fP> Calibration::operator[] (\fBLabel\fP const & label) const\fC [inline]\fP"
+
+.SS "void Calibration::peakFinder (std::string const & source)"
+
+.SS "void Calibration::Print ()"
+
+.SS "void Calibration::set (\fBLabel\fP label, \fBNRJ\fP intercept = \fC0\&.f\fP, \fBNRJ\fP slope = \fC1\&.f\fP, \fBNRJ\fP binom = \fC0\&.f\fP, \fBNRJ\fP trinom = \fC0\&.f\fP)\fC [private]\fP"
+
+.SS "void Calibration::setCalibrationTables ()"
+
+.SS "void Calibration::setSource (std::string const & source)\fC [inline]\fP"
+
+.SS "auto const& Calibration::size () const\fC [inline]\fP"
+
+.PP
+DEV\&. 
+.SS "static void Calibration::treatOnlyGe (bool const & b = \fCtrue\fP)\fC [inline]\fP, \fC [static]\fP"
+
+.SS "static void Calibration::treatOnlyParis (bool const & b = \fCtrue\fP)\fC [inline]\fP, \fC [static]\fP"
+
+.SS "void Calibration::verbose (bool const & _verbose)\fC [inline]\fP"
+
+.SS "void Calibration::verify (std::string const & outfilename = \fC'verify'\fP)"
+
+.SS "void Calibration::writeCalibratedData (std::string const & outfilename)"
+
+.SS "void Calibration::writeCalibratedHisto (std::string const & outfilename)"
+
+.SS "void Calibration::writeData (std::string const & outfilename)"
+
+.SS "void Calibration::writePosPeaks (std::string const & outfilename)"
+
+.SS "void Calibration::writeRawRoot (std::string const & outfilename)"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "std::vector<std::vector<std::vector<\fBNRJ\fP> > > Calibration::calibration_tables\fC [private]\fP"
+
+.SS "std::vector<\fBNRJ\fP> Calibration::m_binom\fC [private]\fP"
+
+.SS "bool Calibration::m_calibrate_data = false\fC [private]\fP"
+
+.SS "std::string Calibration::m_filename = ''\fC [private]\fP"
+
+.SS "\fBFits\fP Calibration::m_fits\fC [private]\fP"
+
+.SS "struct \fBCalibration::histograms\fP Calibration::m_histos"
+
+.SS "std::vector<\fBNRJ\fP> Calibration::m_intercept\fC [private]\fP"
+
+.SS "\fBLabel\fP Calibration::m_nb_detectors = 0\fC [private]\fP"
+
+.SS "bool Calibration::m_ok = false\fC [private]\fP"
+
+.SS "std::vector<char> Calibration::m_order\fC [private]\fP"
+
+.SS "std::string Calibration::m_outCalib = ''\fC [private]\fP"
+
+.SS "std::string Calibration::m_outDir = 'Calibration/'\fC [private]\fP"
+
+.SS "std::string Calibration::m_outRoot = 'calibration\&.root'\fC [private]\fP"
+
+.SS "bool Calibration::m_outRoot_b = false\fC [private]\fP"
+
+.SS "bool Calibration::m_residus = false\fC [private]\fP"
+
+.SS "\fBLabel\fP Calibration::m_size = 0\fC [private]\fP"
+
+.SS "std::vector<\fBNRJ\fP> Calibration::m_slope\fC [private]\fP"
+
+.SS "std::string Calibration::m_source = ''\fC [private]\fP"
+
+.SS "bool Calibration::m_treatOnlyGe = false\fC [static]\fP, \fC [private]\fP"
+
+.SS "bool Calibration::m_treatOnlyParis = false\fC [static]\fP, \fC [private]\fP"
+
+.SS "std::vector<\fBNRJ\fP> Calibration::m_trinom\fC [private]\fP"
+
+.SS "bool Calibration::m_verbose = false\fC [private]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Nuball2 from the source code\&.

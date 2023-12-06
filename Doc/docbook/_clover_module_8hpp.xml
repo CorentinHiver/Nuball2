@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__clover_module_8hpp" xml:lang="en-US">
+<title>lib/Analyse/CloverModule.hpp File Reference</title>
+<indexterm><primary>lib/Analyse/CloverModule.hpp</primary></indexterm>
+This graph shows which files directly or indirectly include this file:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="_clover_module_8hpp__dep__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>class <link linkend="_class_clover_module">CloverModule</link></para>
+
+<para>Describes a Clover module. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>std::ostream &amp; <link linkend="__clover_module_8hpp_1aae60fbf6c352f4c0682ec1c2a3f04181">operator&lt;&lt;</link> (std::ostream &amp;cout, <link linkend="_class_clover_module">CloverModule</link> const &amp;cloverModule)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="__clover_module_8hpp_1aae60fbf6c352f4c0682ec1c2a3f04181"/>    <section>
+    <title>operator&lt;&lt;()</title>
+<indexterm><primary>operator&lt;&lt;</primary><secondary>CloverModule.hpp</secondary></indexterm>
+<indexterm><primary>CloverModule.hpp</primary><secondary>operator&lt;&lt;</secondary></indexterm>
+<para><computeroutput>std::ostream&amp; operator&lt;&lt; (std::ostream &amp; cout, <link linkend="_class_clover_module">CloverModule</link> const &amp; cloverModule)</computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="_clover_module_8hpp_aae60fbf6c352f4c0682ec1c2a3f04181_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+</section>
+</section>

@@ -1,0 +1,352 @@
+.TH "lib/libCo.hpp" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+lib/libCo.hpp
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <any>\fP
+.br
+\fC#include <array>\fP
+.br
+\fC#include <algorithm>\fP
+.br
+\fC#include <cstdlib>\fP
+.br
+\fC#include <cstring>\fP
+.br
+\fC#include <fstream>\fP
+.br
+\fC#include <functional>\fP
+.br
+\fC#include <iomanip>\fP
+.br
+\fC#include <iostream>\fP
+.br
+\fC#include <map>\fP
+.br
+\fC#include <memory>\fP
+.br
+\fC#include <mutex>\fP
+.br
+\fC#include <numeric>\fP
+.br
+\fC#include <queue>\fP
+.br
+\fC#include <sstream>\fP
+.br
+\fC#include <stdexcept>\fP
+.br
+\fC#include <string>\fP
+.br
+\fC#include <stack>\fP
+.br
+\fC#include <thread>\fP
+.br
+\fC#include <typeindex>\fP
+.br
+\fC#include <typeinfo>\fP
+.br
+\fC#include <unordered_map>\fP
+.br
+\fC#include <vector>\fP
+.br
+\fC#include <dirent\&.h>\fP
+.br
+\fC#include <glob\&.h>\fP
+.br
+\fC#include <stdio\&.h>\fP
+.br
+\fC#include <stdlib\&.h>\fP
+.br
+\fC#include <string\&.h>\fP
+.br
+\fC#include 'print\&.hpp'\fP
+.br
+\fC#include 'random\&.hpp'\fP
+.br
+\fC#include 'string_functions\&.hpp'\fP
+.br
+\fC#include 'files_functions\&.hpp'\fP
+.br
+\fC#include 'vector_functions\&.hpp'\fP
+.br
+
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBBools\fP"
+.br
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "using \fBInts\fP = std::vector< int >"
+.br
+.ti -1c
+.RI "using \fBlonglong\fP = long long int"
+.br
+.ti -1c
+.RI "using \fBsize_t\fP = std::size_t"
+.br
+.ti -1c
+.RI "using \fBStrings\fP = std::vector< std::string >"
+.br
+.ti -1c
+.RI "template<class T > using \fBT_is_number\fP = void"
+.br
+.ti -1c
+.RI "using \fBuchar\fP = unsigned char"
+.br
+.ti -1c
+.RI "using \fBuint\fP = unsigned int"
+.br
+.ti -1c
+.RI "using \fBulong\fP = unsigned long int"
+.br
+.ti -1c
+.RI "using \fBulonglong\fP = unsigned long long int"
+.br
+.ti -1c
+.RI "using \fBushort\fP = unsigned short int"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "template<typename T , typename  = typename std::enable_if<std::is_arithmetic<T>::value>::type> bool \fBbool_cast\fP (T const &t)"
+.br
+.RI "Casts a number into an bool\&. "
+.ti -1c
+.RI "template<typename T , typename  = typename std::enable_if<std::is_arithmetic<T>::value>::type> char \fBchar_cast\fP (T const &t)"
+.br
+.RI "Casts a number into an char\&. "
+.ti -1c
+.RI "template<typename T , typename  = typename std::enable_if<std::is_arithmetic<T>::value>::type> double \fBdouble_cast\fP (T const &t)"
+.br
+.RI "Casts a number into an double\&. "
+.ti -1c
+.RI "template<typename K , typename V > bool \fBfind_key\fP (std::map< K, V > const &map, K const &key)"
+.br
+.ti -1c
+.RI "template<typename K , typename V > bool \fBfind_key\fP (std::unordered_map< K, V > const &map, K const &key)"
+.br
+.ti -1c
+.RI "template<typename K , typename V > bool \fBfind_value\fP (std::map< K, V > const &map, V const &value)"
+.br
+.ti -1c
+.RI "template<typename K , typename V > bool \fBfind_value\fP (std::unordered_map< K, V > const &map, V const &value)"
+.br
+.ti -1c
+.RI "template<typename T , typename  = typename std::enable_if<std::is_arithmetic<T>::value>::type> float \fBfloat_cast\fP (T const &t)"
+.br
+.RI "Casts a number into a float\&. "
+.ti -1c
+.RI "template<typename K , typename V > std::pair< K, V > \fBget_max_element\fP (std::map< K, V > const &map)"
+.br
+.ti -1c
+.RI "template<typename K , typename V > K \fBget_max_key\fP (std::map< K, V > const &map)"
+.br
+.ti -1c
+.RI "template<typename K , typename V > V \fBget_max_value\fP (std::map< K, V > const &map)"
+.br
+.ti -1c
+.RI "template<typename K , typename V > std::pair< K, V > \fBget_min\fP (std::map< K, V > const &map)"
+.br
+.ti -1c
+.RI "template<typename K , typename V > K \fBget_min_key\fP (std::map< K, V > const &map)"
+.br
+.ti -1c
+.RI "template<typename K , typename V > V \fBget_min_value\fP (std::map< K, V > const &map)"
+.br
+.ti -1c
+.RI "template<typename T , typename  = typename std::enable_if<std::is_arithmetic<T>::value>::type> int \fBint_cast\fP (T const &t)"
+.br
+.RI "Casts a number into an int\&. "
+.ti -1c
+.RI "template<typename T , typename  = typename std::enable_if<std::is_arithmetic<T>::value>::type> long \fBlong_cast\fP (T const &t)"
+.br
+.RI "Casts a number into an long\&. "
+.ti -1c
+.RI "template<typename T , typename  = typename std::enable_if<std::is_arithmetic<T>::value>::type> \fBlonglong\fP \fBlonglong_cast\fP (T const &t)"
+.br
+.RI "Casts a number into long long (longlong) "
+.ti -1c
+.RI "std::ostream & \fBoperator>>\fP (std::ostream &cout, \fBBools\fP const &bools)"
+.br
+.ti -1c
+.RI "auto \fBpauseCo\fP ()"
+.br
+.ti -1c
+.RI "auto \fBpauseCo\fP (std::string const &message)"
+.br
+.ti -1c
+.RI "template<typename T , typename  = typename std::enable_if<std::is_arithmetic<T>::value>::type> short \fBshort_cast\fP (T const &t)"
+.br
+.RI "Casts a number into an short\&. "
+.ti -1c
+.RI "template<typename T , typename  = typename std::enable_if<std::is_arithmetic<T>::value>::type> \fBsize_t\fP \fBsize_cast\fP (T const &t)"
+.br
+.RI "Casts a number into std::size_t\&. "
+.ti -1c
+.RI "void \fBthrow_error\fP (std::string const &message)"
+.br
+.ti -1c
+.RI "template<typename T , typename  = typename std::enable_if<std::is_arithmetic<T>::value>::type> \fBuchar\fP \fBuchar_cast\fP (T const &t)"
+.br
+.RI "Casts a number into unsigned char (uchar) "
+.ti -1c
+.RI "template<typename T , typename  = typename std::enable_if<std::is_arithmetic<T>::value>::type> \fBuint\fP \fBuint_cast\fP (T const &t)"
+.br
+.RI "Casts a number into unsigned int (uint) "
+.ti -1c
+.RI "template<typename T , typename  = typename std::enable_if<std::is_arithmetic<T>::value>::type> \fBulong\fP \fBulong_cast\fP (T const &t)"
+.br
+.RI "Casts a number into unsigned long (ulong) "
+.ti -1c
+.RI "template<typename T , typename  = typename std::enable_if<std::is_arithmetic<T>::value>::type> \fBulonglong\fP \fBulonglong_cast\fP (T const &t)"
+.br
+.RI "Casts a number into unsigned long long (ulonglong) "
+.ti -1c
+.RI "template<typename T , typename  = typename std::enable_if<std::is_arithmetic<T>::value>::type> \fBushort\fP \fBushort_cast\fP (T const &t)"
+.br
+.RI "Casts a number into unsigned short (ushort) "
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "double \fB_ns\fP = 1000\&."
+.br
+.ti -1c
+.RI "std::map< std::string, std::string > \fBerror_message\fP"
+.br
+.in -1c
+.SH "Typedef Documentation"
+.PP 
+.SS "using \fBInts\fP =  std::vector<int>"
+
+.SS "using \fBlonglong\fP =  long long int"
+
+.SS "using \fBsize_t\fP =  std::size_t"
+
+.SS "using \fBStrings\fP =  std::vector<std::string>"
+
+.SS "template<class T > using \fBT_is_number\fP =  void"
+
+.SS "using \fBuchar\fP =  unsigned char"
+
+.SS "using \fBuint\fP =  unsigned int"
+
+.SS "using \fBulong\fP =  unsigned long int"
+
+.SS "using \fBulonglong\fP =  unsigned long long int"
+
+.SS "using \fBushort\fP =  unsigned short int"
+
+.SH "Function Documentation"
+.PP 
+.SS "template<typename T , typename  = typename std::enable_if<std::is_arithmetic<T>::value>::type> bool bool_cast (T const & t)\fC [inline]\fP"
+
+.PP
+Casts a number into an bool\&. 
+.SS "template<typename T , typename  = typename std::enable_if<std::is_arithmetic<T>::value>::type> char char_cast (T const & t)\fC [inline]\fP"
+
+.PP
+Casts a number into an char\&. 
+.SS "template<typename T , typename  = typename std::enable_if<std::is_arithmetic<T>::value>::type> double double_cast (T const & t)\fC [inline]\fP"
+
+.PP
+Casts a number into an double\&. 
+.SS "template<typename K , typename V > bool find_key (std::map< K, V > const & map, K const & key)\fC [inline]\fP"
+
+.SS "template<typename K , typename V > bool find_key (std::unordered_map< K, V > const & map, K const & key)\fC [inline]\fP"
+
+.SS "template<typename K , typename V > bool find_value (std::map< K, V > const & map, V const & value)\fC [inline]\fP"
+
+.SS "template<typename K , typename V > bool find_value (std::unordered_map< K, V > const & map, V const & value)\fC [inline]\fP"
+
+.SS "template<typename T , typename  = typename std::enable_if<std::is_arithmetic<T>::value>::type> float float_cast (T const & t)\fC [inline]\fP"
+
+.PP
+Casts a number into a float\&. 
+.SS "template<typename K , typename V > std::pair<K,V> get_max_element (std::map< K, V > const & map)\fC [inline]\fP"
+
+.SS "template<typename K , typename V > K get_max_key (std::map< K, V > const & map)\fC [inline]\fP"
+
+.SS "template<typename K , typename V > V get_max_value (std::map< K, V > const & map)\fC [inline]\fP"
+
+.SS "template<typename K , typename V > std::pair<K,V> get_min (std::map< K, V > const & map)\fC [inline]\fP"
+
+.SS "template<typename K , typename V > K get_min_key (std::map< K, V > const & map)\fC [inline]\fP"
+
+.SS "template<typename K , typename V > V get_min_value (std::map< K, V > const & map)\fC [inline]\fP"
+
+.SS "template<typename T , typename  = typename std::enable_if<std::is_arithmetic<T>::value>::type> int int_cast (T const & t)\fC [inline]\fP"
+
+.PP
+Casts a number into an int\&. 
+.SS "template<typename T , typename  = typename std::enable_if<std::is_arithmetic<T>::value>::type> long long_cast (T const & t)\fC [inline]\fP"
+
+.PP
+Casts a number into an long\&. 
+.SS "template<typename T , typename  = typename std::enable_if<std::is_arithmetic<T>::value>::type> \fBlonglong\fP longlong_cast (T const & t)\fC [inline]\fP"
+
+.PP
+Casts a number into long long (longlong) 
+.SS "std::ostream& operator>> (std::ostream & cout, \fBBools\fP const & bools)"
+
+.SS "auto pauseCo ()"
+
+.SS "auto pauseCo (std::string const & message)"
+
+.SS "template<typename T , typename  = typename std::enable_if<std::is_arithmetic<T>::value>::type> short short_cast (T const & t)\fC [inline]\fP"
+
+.PP
+Casts a number into an short\&. 
+.SS "template<typename T , typename  = typename std::enable_if<std::is_arithmetic<T>::value>::type> \fBsize_t\fP size_cast (T const & t)\fC [inline]\fP"
+
+.PP
+Casts a number into std::size_t\&. 
+.SS "void throw_error (std::string const & message)"
+
+.SS "template<typename T , typename  = typename std::enable_if<std::is_arithmetic<T>::value>::type> \fBuchar\fP uchar_cast (T const & t)\fC [inline]\fP"
+
+.PP
+Casts a number into unsigned char (uchar) 
+.SS "template<typename T , typename  = typename std::enable_if<std::is_arithmetic<T>::value>::type> \fBuint\fP uint_cast (T const & t)\fC [inline]\fP"
+
+.PP
+Casts a number into unsigned int (uint) 
+.SS "template<typename T , typename  = typename std::enable_if<std::is_arithmetic<T>::value>::type> \fBulong\fP ulong_cast (T const & t)\fC [inline]\fP"
+
+.PP
+Casts a number into unsigned long (ulong) 
+.SS "template<typename T , typename  = typename std::enable_if<std::is_arithmetic<T>::value>::type> \fBulonglong\fP ulonglong_cast (T const & t)\fC [inline]\fP"
+
+.PP
+Casts a number into unsigned long long (ulonglong) 
+.SS "template<typename T , typename  = typename std::enable_if<std::is_arithmetic<T>::value>::type> \fBushort\fP ushort_cast (T const & t)\fC [inline]\fP"
+
+.PP
+Casts a number into unsigned short (ushort) 
+.SH "Variable Documentation"
+.PP 
+.SS "double _ns = 1000\&."
+
+.SS "std::map<std::string, std::string> error_message"
+\fBInitial value:\fP
+.PP
+.nf
+= 
+{
+  {"DEV", "ASK DEV or do it yourself, sry"}
+}
+.fi
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Nuball2 from the source code\&.

@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__performances_8hpp" xml:lang="en-US">
+<title>lib/Classes/Performances.hpp File Reference</title>
+<indexterm><primary>lib/Classes/Performances.hpp</primary></indexterm>
+<programlisting>#include &quot;../libCo.hpp&quot;
+#include &quot;../MTObjects/MTCounter.hpp&quot;
+</programlisting>Include dependency graph for Performances.hpp:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="_performances_8hpp__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+This graph shows which files directly or indirectly include this file:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="_performances_8hpp__dep__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>class <link linkend="_class_performances">Performances</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>

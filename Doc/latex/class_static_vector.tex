@@ -1,0 +1,639 @@
+\doxysection{Static\+Vector$<$ T $>$ Class Template Reference}
+\label{class_static_vector}\index{StaticVector$<$ T $>$@{StaticVector$<$ T $>$}}
+
+
+An efficient container for dynamic arrays with a known and fixed maximum size.  
+
+
+
+
+{\ttfamily \#include $<$vector\+\_\+functions.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+T const  \& \textbf{ at} (\textbf{ std\+::size\+\_\+t} const \&i) const
+\begin{DoxyCompactList}\small\item\em Return the ith element and check i do not exceed the size of the vector. \end{DoxyCompactList}\item 
+virtual T $\ast$ \textbf{ begin} ()
+\begin{DoxyCompactList}\small\item\em Return iterator to the beginning of the vector. \end{DoxyCompactList}\item 
+virtual T $\ast$ \textbf{ begin} () const
+\begin{DoxyCompactList}\small\item\em Return iterator to the beginning of the vector. \end{DoxyCompactList}\item 
+void \textbf{ check\+Capacity} ()
+\item 
+void \textbf{ check\+Capacity} () const
+\item 
+void \textbf{ clear} ()
+\item 
+T $\ast$ \textbf{ data} ()
+\begin{DoxyCompactList}\small\item\em Return a pointer to the underlying data. \end{DoxyCompactList}\item 
+void \textbf{ deallocate} ()
+\begin{DoxyCompactList}\small\item\em Deletes the underlying data. \end{DoxyCompactList}\item 
+virtual T $\ast$ \textbf{ end} ()
+\begin{DoxyCompactList}\small\item\em Return iterator to the end of the vector. \end{DoxyCompactList}\item 
+virtual T $\ast$ \textbf{ end} () const
+\begin{DoxyCompactList}\small\item\em Return iterator to the end of the vector. \end{DoxyCompactList}\item 
+void \textbf{ fill} (T const \&e)
+\begin{DoxyCompactList}\small\item\em Fills the vector with element e within user size. \end{DoxyCompactList}\item 
+void \textbf{ fill\+\_\+static} (T const \&e)
+\begin{DoxyCompactList}\small\item\em Fills the vector with element e within static size. \end{DoxyCompactList}\item 
+virtual bool \textbf{ has} (T \&t) const
+\begin{DoxyCompactList}\small\item\em Does the vector contain element e ? \end{DoxyCompactList}\item 
+virtual bool \textbf{ has} (T const \&t) const
+\begin{DoxyCompactList}\small\item\em Does the vector contain element e ? \end{DoxyCompactList}\item 
+void \textbf{ move\+\_\+back} (T \&\&e)
+\begin{DoxyCompactList}\small\item\em Move the element to the back of the vector. Use for performances. Unsafe. define SAFE for less performance but size checking. \end{DoxyCompactList}\item 
+\textbf{ Static\+Vector} \& \textbf{ operator=} (\textbf{ Static\+Vector}$<$ T $>$ const \&vector)
+\begin{DoxyCompactList}\small\item\em Copy the values of another vector. \end{DoxyCompactList}\item 
+T \& \textbf{ operator[$\,$]} (\textbf{ std\+::size\+\_\+t} const \&i) const
+\begin{DoxyCompactList}\small\item\em Return the ith element. \end{DoxyCompactList}\item 
+void \textbf{ push\+\_\+back} (T const \&e)
+\begin{DoxyCompactList}\small\item\em Add element to the back of the vector. Use for performances. Unsafe. define SAFE for less performance but size checking. \end{DoxyCompactList}\item 
+void \textbf{ push\+\_\+back\+\_\+unique} (T const \&t)
+\begin{DoxyCompactList}\small\item\em Add element to the back of the vector only if the vector do not contain it. \end{DoxyCompactList}\item 
+void \textbf{ reserve} ()
+\item 
+void \textbf{ resize} (\textbf{ std\+::size\+\_\+t} const \&new\+\_\+size=0)
+\begin{DoxyCompactList}\small\item\em Only reset the user size to new\+\_\+size (default 0). Do not touch the data. Use for performances. \end{DoxyCompactList}\item 
+auto const  \& \textbf{ size} () const
+\begin{DoxyCompactList}\small\item\em Return the position of the write cursor. \end{DoxyCompactList}\item 
+void \textbf{ static\+\_\+resize} (\textbf{ std\+::size\+\_\+t} const \&new\+\_\+size, T const \&t)
+\item 
+void \textbf{ static\+\_\+resize} (\textbf{ std\+::size\+\_\+t} const \&new\+\_\+size=0)
+\begin{DoxyCompactList}\small\item\em Delete memory, reset the user size to 0 and allocate new\+\_\+size memory. \end{DoxyCompactList}\item 
+\textbf{ Static\+Vector} ()=default
+\item 
+\textbf{ Static\+Vector} (\textbf{ Static\+Vector}$<$ T $>$ \&\&other)
+\begin{DoxyCompactList}\small\item\em Move contructor. \end{DoxyCompactList}\item 
+\textbf{ Static\+Vector} (\textbf{ Static\+Vector}$<$ T $>$ const \&vector)
+\begin{DoxyCompactList}\small\item\em Create a new Static\+\_\+vector by copy (duplicate) \end{DoxyCompactList}\item 
+\textbf{ Static\+Vector} (\textbf{ std\+::size\+\_\+t} const \&static\+\_\+size)
+\begin{DoxyCompactList}\small\item\em Create a new Static\+\_\+vector with size static\+\_\+size. \end{DoxyCompactList}\item 
+\textbf{ Static\+Vector} (\textbf{ std\+::size\+\_\+t} const \&static\+\_\+size, T const \&e)
+\begin{DoxyCompactList}\small\item\em Create a new Static\+\_\+vector with size static\+\_\+size and fill it with element e. \end{DoxyCompactList}\item 
+\textbf{ $\sim$\+Static\+Vector} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+T $\ast$ \textbf{ m\+\_\+data}
+\item 
+bool \textbf{ m\+\_\+deleted} = false
+\item 
+\textbf{ size\+\_\+t} \textbf{ m\+\_\+dynamic\+\_\+size} = 0
+\item 
+\textbf{ size\+\_\+t} \textbf{ m\+\_\+static\+\_\+size} = 0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class T$>$\newline
+class Static\+Vector$<$ T $>$}
+
+An efficient container for dynamic arrays with a known and fixed maximum size. 
+
+\begin{DoxyAttention}{Attention}
+Prototype, have some memory management issues in some cases ...
+\end{DoxyAttention}
+This class is meant to handle a vector of data that needs to be resized a lot. To do so, declare it this way \+: \begin{DoxyVerb} static_vector<T> my_vec = static_vector<T>(maximum_size);
+\end{DoxyVerb}
+ If not in an object prototype, simply \+: \begin{DoxyVerb} auto my_vec = static_vector<T>(maximum_size);
+\end{DoxyVerb}
+ You can fill the whole vector with some value \+: \begin{DoxyVerb} auto my_vec = static_vector<T>(maximum_size, fill_value);
+ // or :
+ my_vec.fill(fill_value);
+\end{DoxyVerb}
+ Now, you can use this vector just like a regular std\+::vector \+: \begin{DoxyVerb} my_vec.push_back(t);
+ my_vec.push_back(t2);
+ my_vec.push_back(t3);
+ // Do some stuff
+ my_vec.resize(0);
+\end{DoxyVerb}
+ \begin{DoxyAttention}{Attention}
+keep in mind you cannot exceed the capacity of the vector.
+\end{DoxyAttention}
+If you want not to crash you application if the capacity is reached, use push\+\_\+back\+\_\+safe instead.
+
+An interesting feature is push\+\_\+back\+\_\+unique(t). This allows one to push\+\_\+back t only if it has not been found in the vector. It may require t to have a comparison operator (not tested yet).
+
+Now, if for some reason you want to modify the capacity of the vector, you can use static\+\_\+resize(new\+\_\+size). 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\label{class_static_vector_a5b3dc3f31d7b676540c171832d244304}} 
+\index{StaticVector$<$ T $>$@{StaticVector$<$ T $>$}!StaticVector@{StaticVector}}
+\index{StaticVector@{StaticVector}!StaticVector$<$ T $>$@{StaticVector$<$ T $>$}}
+\doxysubsubsection{StaticVector()\hspace{0.1cm}{\footnotesize\ttfamily [1/5]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\textbf{ Static\+Vector}$<$ T $>$\+::\textbf{ Static\+Vector} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+\mbox{\label{class_static_vector_a1fd1ac7d3e54a74084f25ecad026c79c}} 
+\index{StaticVector$<$ T $>$@{StaticVector$<$ T $>$}!StaticVector@{StaticVector}}
+\index{StaticVector@{StaticVector}!StaticVector$<$ T $>$@{StaticVector$<$ T $>$}}
+\doxysubsubsection{StaticVector()\hspace{0.1cm}{\footnotesize\ttfamily [2/5]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\textbf{ Static\+Vector}$<$ T $>$\+::\textbf{ Static\+Vector} (\begin{DoxyParamCaption}\item[{\textbf{ std\+::size\+\_\+t} const \&}]{static\+\_\+size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Create a new Static\+\_\+vector with size static\+\_\+size. 
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_static_vector_a1fd1ac7d3e54a74084f25ecad026c79c_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_static_vector_a2c073e13f79566c96c4a28837cbcc358}} 
+\index{StaticVector$<$ T $>$@{StaticVector$<$ T $>$}!StaticVector@{StaticVector}}
+\index{StaticVector@{StaticVector}!StaticVector$<$ T $>$@{StaticVector$<$ T $>$}}
+\doxysubsubsection{StaticVector()\hspace{0.1cm}{\footnotesize\ttfamily [3/5]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\textbf{ Static\+Vector}$<$ T $>$\+::\textbf{ Static\+Vector} (\begin{DoxyParamCaption}\item[{\textbf{ std\+::size\+\_\+t} const \&}]{static\+\_\+size,  }\item[{T const \&}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Create a new Static\+\_\+vector with size static\+\_\+size and fill it with element e. 
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_static_vector_a2c073e13f79566c96c4a28837cbcc358_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_static_vector_a982fd40392e5c546da6ba2360f59fe55}} 
+\index{StaticVector$<$ T $>$@{StaticVector$<$ T $>$}!StaticVector@{StaticVector}}
+\index{StaticVector@{StaticVector}!StaticVector$<$ T $>$@{StaticVector$<$ T $>$}}
+\doxysubsubsection{StaticVector()\hspace{0.1cm}{\footnotesize\ttfamily [4/5]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\textbf{ Static\+Vector}$<$ T $>$\+::\textbf{ Static\+Vector} (\begin{DoxyParamCaption}\item[{\textbf{ Static\+Vector}$<$ T $>$ const \&}]{vector }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Create a new Static\+\_\+vector by copy (duplicate) 
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_static_vector_a982fd40392e5c546da6ba2360f59fe55_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_static_vector_a27bc6181b4ef6643f3abc9c91d728349}} 
+\index{StaticVector$<$ T $>$@{StaticVector$<$ T $>$}!StaticVector@{StaticVector}}
+\index{StaticVector@{StaticVector}!StaticVector$<$ T $>$@{StaticVector$<$ T $>$}}
+\doxysubsubsection{StaticVector()\hspace{0.1cm}{\footnotesize\ttfamily [5/5]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\textbf{ Static\+Vector}$<$ T $>$\+::\textbf{ Static\+Vector} (\begin{DoxyParamCaption}\item[{\textbf{ Static\+Vector}$<$ T $>$ \&\&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Move contructor. 
+
+\mbox{\label{class_static_vector_a5170abb13005d53067431140a679ce4b}} 
+\index{StaticVector$<$ T $>$@{StaticVector$<$ T $>$}!````~StaticVector@{$\sim$StaticVector}}
+\index{````~StaticVector@{$\sim$StaticVector}!StaticVector$<$ T $>$@{StaticVector$<$ T $>$}}
+\doxysubsubsection{$\sim$StaticVector()}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\textbf{ Static\+Vector}$<$ T $>$\+::$\sim$\textbf{ Static\+Vector} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=303pt]{class_static_vector_a5170abb13005d53067431140a679ce4b_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\label{class_static_vector_adb781bb9deb3bb03929efd86ec024ea1}} 
+\index{StaticVector$<$ T $>$@{StaticVector$<$ T $>$}!at@{at}}
+\index{at@{at}!StaticVector$<$ T $>$@{StaticVector$<$ T $>$}}
+\doxysubsubsection{at()}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+T const\& \textbf{ Static\+Vector}$<$ T $>$\+::at (\begin{DoxyParamCaption}\item[{\textbf{ std\+::size\+\_\+t} const \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the ith element and check i do not exceed the size of the vector. 
+
+\mbox{\label{class_static_vector_a78db68071e02cf724af349d0e606ea4e}} 
+\index{StaticVector$<$ T $>$@{StaticVector$<$ T $>$}!begin@{begin}}
+\index{begin@{begin}!StaticVector$<$ T $>$@{StaticVector$<$ T $>$}}
+\doxysubsubsection{begin()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+virtual T$\ast$ \textbf{ Static\+Vector}$<$ T $>$\+::begin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return iterator to the beginning of the vector. 
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_static_vector_a78db68071e02cf724af349d0e606ea4e_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_static_vector_a4adf4196edf343a347c758ac9ad61be1}} 
+\index{StaticVector$<$ T $>$@{StaticVector$<$ T $>$}!begin@{begin}}
+\index{begin@{begin}!StaticVector$<$ T $>$@{StaticVector$<$ T $>$}}
+\doxysubsubsection{begin()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+virtual T$\ast$ \textbf{ Static\+Vector}$<$ T $>$\+::begin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return iterator to the beginning of the vector. 
+
+\mbox{\label{class_static_vector_a581a28f823edc9d3fbfa959465004f12}} 
+\index{StaticVector$<$ T $>$@{StaticVector$<$ T $>$}!checkCapacity@{checkCapacity}}
+\index{checkCapacity@{checkCapacity}!StaticVector$<$ T $>$@{StaticVector$<$ T $>$}}
+\doxysubsubsection{checkCapacity()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void \textbf{ Static\+Vector}$<$ T $>$\+::check\+Capacity (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_static_vector_a28a635b7f2cbd0cbc5a042dc22ab7ea3}} 
+\index{StaticVector$<$ T $>$@{StaticVector$<$ T $>$}!checkCapacity@{checkCapacity}}
+\index{checkCapacity@{checkCapacity}!StaticVector$<$ T $>$@{StaticVector$<$ T $>$}}
+\doxysubsubsection{checkCapacity()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void \textbf{ Static\+Vector}$<$ T $>$\+::check\+Capacity (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_static_vector_a28a635b7f2cbd0cbc5a042dc22ab7ea3_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_static_vector_a9c5d814a81b352ebbb5d8a07cbdd2699}} 
+\index{StaticVector$<$ T $>$@{StaticVector$<$ T $>$}!clear@{clear}}
+\index{clear@{clear}!StaticVector$<$ T $>$@{StaticVector$<$ T $>$}}
+\doxysubsubsection{clear()}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void \textbf{ Static\+Vector}$<$ T $>$\+::clear (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_static_vector_a9c5d814a81b352ebbb5d8a07cbdd2699_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_static_vector_a7d5be1902e52590f04d726d14c25db8d}} 
+\index{StaticVector$<$ T $>$@{StaticVector$<$ T $>$}!data@{data}}
+\index{data@{data}!StaticVector$<$ T $>$@{StaticVector$<$ T $>$}}
+\doxysubsubsection{data()}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+T$\ast$ \textbf{ Static\+Vector}$<$ T $>$\+::data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return a pointer to the underlying data. 
+
+\mbox{\label{class_static_vector_a3e8eb7b20f56c54b32640267e6e797bc}} 
+\index{StaticVector$<$ T $>$@{StaticVector$<$ T $>$}!deallocate@{deallocate}}
+\index{deallocate@{deallocate}!StaticVector$<$ T $>$@{StaticVector$<$ T $>$}}
+\doxysubsubsection{deallocate()}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void \textbf{ Static\+Vector}$<$ T $>$\+::deallocate (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Deletes the underlying data. 
+
+\mbox{\label{class_static_vector_ae80eaa7fb165b6408406870253bd8e5f}} 
+\index{StaticVector$<$ T $>$@{StaticVector$<$ T $>$}!end@{end}}
+\index{end@{end}!StaticVector$<$ T $>$@{StaticVector$<$ T $>$}}
+\doxysubsubsection{end()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+virtual T$\ast$ \textbf{ Static\+Vector}$<$ T $>$\+::end (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return iterator to the end of the vector. 
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_static_vector_ae80eaa7fb165b6408406870253bd8e5f_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_static_vector_aff91554484ba655f02b84fbe17276332}} 
+\index{StaticVector$<$ T $>$@{StaticVector$<$ T $>$}!end@{end}}
+\index{end@{end}!StaticVector$<$ T $>$@{StaticVector$<$ T $>$}}
+\doxysubsubsection{end()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+virtual T$\ast$ \textbf{ Static\+Vector}$<$ T $>$\+::end (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return iterator to the end of the vector. 
+
+\mbox{\label{class_static_vector_aeb818a6ce377300792c49ac51bec0f02}} 
+\index{StaticVector$<$ T $>$@{StaticVector$<$ T $>$}!fill@{fill}}
+\index{fill@{fill}!StaticVector$<$ T $>$@{StaticVector$<$ T $>$}}
+\doxysubsubsection{fill()}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void \textbf{ Static\+Vector}$<$ T $>$\+::fill (\begin{DoxyParamCaption}\item[{T const \&}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Fills the vector with element e within user size. 
+
+\mbox{\label{class_static_vector_a39189c70d033178ce16024a824343409}} 
+\index{StaticVector$<$ T $>$@{StaticVector$<$ T $>$}!fill\_static@{fill\_static}}
+\index{fill\_static@{fill\_static}!StaticVector$<$ T $>$@{StaticVector$<$ T $>$}}
+\doxysubsubsection{fill\_static()}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void \textbf{ Static\+Vector}$<$ T $>$\+::fill\+\_\+static (\begin{DoxyParamCaption}\item[{T const \&}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Fills the vector with element e within static size. 
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=349pt]{class_static_vector_a39189c70d033178ce16024a824343409_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_static_vector_aa5ed2c50cf5c44e9685430f0aa6be160}} 
+\index{StaticVector$<$ T $>$@{StaticVector$<$ T $>$}!has@{has}}
+\index{has@{has}!StaticVector$<$ T $>$@{StaticVector$<$ T $>$}}
+\doxysubsubsection{has()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+virtual bool \textbf{ Static\+Vector}$<$ T $>$\+::has (\begin{DoxyParamCaption}\item[{T \&}]{t }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Does the vector contain element e ? 
+
+
+\begin{DoxyParams}{Parameters}
+{\em t} & direct access to the variable \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=322pt]{class_static_vector_aa5ed2c50cf5c44e9685430f0aa6be160_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_static_vector_ad756be87d5c09054f47d40e38ce4b45f}} 
+\index{StaticVector$<$ T $>$@{StaticVector$<$ T $>$}!has@{has}}
+\index{has@{has}!StaticVector$<$ T $>$@{StaticVector$<$ T $>$}}
+\doxysubsubsection{has()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+virtual bool \textbf{ Static\+Vector}$<$ T $>$\+::has (\begin{DoxyParamCaption}\item[{T const \&}]{t }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Does the vector contain element e ? 
+
+
+\begin{DoxyParams}{Parameters}
+{\em t} & variable in read-\/only mode \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=322pt]{class_static_vector_ad756be87d5c09054f47d40e38ce4b45f_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_static_vector_ad756be87d5c09054f47d40e38ce4b45f_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_static_vector_a20da4a5384ac01b54c19c563888fe3a3}} 
+\index{StaticVector$<$ T $>$@{StaticVector$<$ T $>$}!move\_back@{move\_back}}
+\index{move\_back@{move\_back}!StaticVector$<$ T $>$@{StaticVector$<$ T $>$}}
+\doxysubsubsection{move\_back()}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void \textbf{ Static\+Vector}$<$ T $>$\+::move\+\_\+back (\begin{DoxyParamCaption}\item[{T \&\&}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Move the element to the back of the vector. Use for performances. Unsafe. define SAFE for less performance but size checking. 
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_static_vector_a20da4a5384ac01b54c19c563888fe3a3_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_static_vector_a9b1f4393056e120458e8d10da7222aa7}} 
+\index{StaticVector$<$ T $>$@{StaticVector$<$ T $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!StaticVector$<$ T $>$@{StaticVector$<$ T $>$}}
+\doxysubsubsection{operator=()}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\textbf{ Static\+Vector}\& \textbf{ Static\+Vector}$<$ T $>$\+::operator= (\begin{DoxyParamCaption}\item[{\textbf{ Static\+Vector}$<$ T $>$ const \&}]{vector }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Copy the values of another vector. 
+
+\mbox{\label{class_static_vector_ae2fa694636166997299fc80186d2c7dc}} 
+\index{StaticVector$<$ T $>$@{StaticVector$<$ T $>$}!operator[]@{operator[]}}
+\index{operator[]@{operator[]}!StaticVector$<$ T $>$@{StaticVector$<$ T $>$}}
+\doxysubsubsection{operator[]()}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+T\& \textbf{ Static\+Vector}$<$ T $>$\+::operator[$\,$] (\begin{DoxyParamCaption}\item[{\textbf{ std\+::size\+\_\+t} const \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the ith element. 
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_static_vector_ae2fa694636166997299fc80186d2c7dc_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_static_vector_a8f604b0f4165d95a6b6653907c92ceb3}} 
+\index{StaticVector$<$ T $>$@{StaticVector$<$ T $>$}!push\_back@{push\_back}}
+\index{push\_back@{push\_back}!StaticVector$<$ T $>$@{StaticVector$<$ T $>$}}
+\doxysubsubsection{push\_back()}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void \textbf{ Static\+Vector}$<$ T $>$\+::push\+\_\+back (\begin{DoxyParamCaption}\item[{T const \&}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Add element to the back of the vector. Use for performances. Unsafe. define SAFE for less performance but size checking. 
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_static_vector_a8f604b0f4165d95a6b6653907c92ceb3_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_static_vector_a8f604b0f4165d95a6b6653907c92ceb3_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_static_vector_ac0b86d749f8e35274fbac0506c050465}} 
+\index{StaticVector$<$ T $>$@{StaticVector$<$ T $>$}!push\_back\_unique@{push\_back\_unique}}
+\index{push\_back\_unique@{push\_back\_unique}!StaticVector$<$ T $>$@{StaticVector$<$ T $>$}}
+\doxysubsubsection{push\_back\_unique()}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void \textbf{ Static\+Vector}$<$ T $>$\+::push\+\_\+back\+\_\+unique (\begin{DoxyParamCaption}\item[{T const \&}]{t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Add element to the back of the vector only if the vector do not contain it. 
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_static_vector_ac0b86d749f8e35274fbac0506c050465_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_static_vector_ac0b86d749f8e35274fbac0506c050465_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_static_vector_aac46f946b1d5b09e8713eac121594a06}} 
+\index{StaticVector$<$ T $>$@{StaticVector$<$ T $>$}!reserve@{reserve}}
+\index{reserve@{reserve}!StaticVector$<$ T $>$@{StaticVector$<$ T $>$}}
+\doxysubsubsection{reserve()}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void \textbf{ Static\+Vector}$<$ T $>$\+::reserve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_static_vector_aac46f946b1d5b09e8713eac121594a06_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_static_vector_ae292e425773c82dc9eb20db025963e29}} 
+\index{StaticVector$<$ T $>$@{StaticVector$<$ T $>$}!resize@{resize}}
+\index{resize@{resize}!StaticVector$<$ T $>$@{StaticVector$<$ T $>$}}
+\doxysubsubsection{resize()}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void \textbf{ Static\+Vector}$<$ T $>$\+::resize (\begin{DoxyParamCaption}\item[{\textbf{ std\+::size\+\_\+t} const \&}]{new\+\_\+size = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Only reset the user size to new\+\_\+size (default 0). Do not touch the data. Use for performances. 
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_static_vector_ae292e425773c82dc9eb20db025963e29_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_static_vector_a44b964207cfd132dda347e246a3640c8}} 
+\index{StaticVector$<$ T $>$@{StaticVector$<$ T $>$}!size@{size}}
+\index{size@{size}!StaticVector$<$ T $>$@{StaticVector$<$ T $>$}}
+\doxysubsubsection{size()}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+auto const\& \textbf{ Static\+Vector}$<$ T $>$\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the position of the write cursor. 
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_static_vector_a44b964207cfd132dda347e246a3640c8_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_static_vector_a25564f07e92dd67a4f6bc0dfeaaad31b}} 
+\index{StaticVector$<$ T $>$@{StaticVector$<$ T $>$}!static\_resize@{static\_resize}}
+\index{static\_resize@{static\_resize}!StaticVector$<$ T $>$@{StaticVector$<$ T $>$}}
+\doxysubsubsection{static\_resize()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void \textbf{ Static\+Vector}$<$ T $>$\+::static\+\_\+resize (\begin{DoxyParamCaption}\item[{\textbf{ std\+::size\+\_\+t} const \&}]{new\+\_\+size,  }\item[{T const \&}]{t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_static_vector_a25564f07e92dd67a4f6bc0dfeaaad31b_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_static_vector_a3f31307e19e313fb7b4b93f284194f52}} 
+\index{StaticVector$<$ T $>$@{StaticVector$<$ T $>$}!static\_resize@{static\_resize}}
+\index{static\_resize@{static\_resize}!StaticVector$<$ T $>$@{StaticVector$<$ T $>$}}
+\doxysubsubsection{static\_resize()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void \textbf{ Static\+Vector}$<$ T $>$\+::static\+\_\+resize (\begin{DoxyParamCaption}\item[{\textbf{ std\+::size\+\_\+t} const \&}]{new\+\_\+size = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Delete memory, reset the user size to 0 and allocate new\+\_\+size memory. 
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=342pt]{class_static_vector_a3f31307e19e313fb7b4b93f284194f52_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=332pt]{class_static_vector_a3f31307e19e313fb7b4b93f284194f52_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\label{class_static_vector_af9f68b36479f70b30a68e2a7c1503154}} 
+\index{StaticVector$<$ T $>$@{StaticVector$<$ T $>$}!m\_data@{m\_data}}
+\index{m\_data@{m\_data}!StaticVector$<$ T $>$@{StaticVector$<$ T $>$}}
+\doxysubsubsection{m\_data}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+T$\ast$ \textbf{ Static\+Vector}$<$ T $>$\+::m\+\_\+data\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_static_vector_aad06f563cf46c8038677140a57d928ed}} 
+\index{StaticVector$<$ T $>$@{StaticVector$<$ T $>$}!m\_deleted@{m\_deleted}}
+\index{m\_deleted@{m\_deleted}!StaticVector$<$ T $>$@{StaticVector$<$ T $>$}}
+\doxysubsubsection{m\_deleted}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+bool \textbf{ Static\+Vector}$<$ T $>$\+::m\+\_\+deleted = false\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_static_vector_af728d4c1860a0955dfc05f921ac8cf1a}} 
+\index{StaticVector$<$ T $>$@{StaticVector$<$ T $>$}!m\_dynamic\_size@{m\_dynamic\_size}}
+\index{m\_dynamic\_size@{m\_dynamic\_size}!StaticVector$<$ T $>$@{StaticVector$<$ T $>$}}
+\doxysubsubsection{m\_dynamic\_size}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\textbf{ size\+\_\+t} \textbf{ Static\+Vector}$<$ T $>$\+::m\+\_\+dynamic\+\_\+size = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_static_vector_aaa12257ef000a52e60da489d80027dde}} 
+\index{StaticVector$<$ T $>$@{StaticVector$<$ T $>$}!m\_static\_size@{m\_static\_size}}
+\index{m\_static\_size@{m\_static\_size}!StaticVector$<$ T $>$@{StaticVector$<$ T $>$}}
+\doxysubsubsection{m\_static\_size}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\textbf{ size\+\_\+t} \textbf{ Static\+Vector}$<$ T $>$\+::m\+\_\+static\+\_\+size = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+lib/\textbf{ vector\+\_\+functions.\+hpp}\end{DoxyCompactItemize}

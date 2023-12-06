@@ -1,0 +1,507 @@
+\doxysection{My\+Simple\+Convertor Class Reference}
+\label{class_my_simple_convertor}\index{MySimpleConvertor@{MySimpleConvertor}}
+
+
+{\ttfamily \#include $<$Faster2\+Root.\+hpp$>$}
+
+
+
+Inheritance diagram for My\+Simple\+Convertor\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=193pt]{class_my_simple_convertor__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for My\+Simple\+Convertor\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_my_simple_convertor__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \textbf{ build\+Events} (int time\+\_\+window\+\_\+ns)
+\item 
+void \textbf{ convert} (std\+::string const \&data\+Folder, std\+::string const \&output\+Folder, int const \&nb\+\_\+files=-\/1)
+\item 
+void \textbf{ convert\+File} (\textbf{ Hit} \&hit, \textbf{ Faster\+Reader} \&reader, \textbf{ Path} const \&out\+Path) override
+\item 
+void \textbf{ load\+Calibration} (std\+::string const \&calib\+File)
+\item 
+void \textbf{ load\+Timeshifts} (std\+::string const \&d\+Tfile)
+\item 
+void \textbf{ load\+Trigger\+File} (std\+::string const \&file)
+\item 
+{\footnotesize template$<$class... ARGS$>$ }\\\textbf{ My\+Simple\+Convertor} (ARGS \&\&... args)
+\item 
+void \textbf{ overwrite} (bool const \&\+\_\+overwrite)
+\item 
+void \textbf{ set\+Calibration} (\textbf{ Calibration} const \&calibration)
+\item 
+void \textbf{ set\+Nb\+Files} (int const \&nb\+\_\+files=-\/1)
+\item 
+void \textbf{ set\+Nb\+Threads} (int const \&nb\+\_\+threads=-\/1)
+\item 
+void \textbf{ set\+Timeshifts} (\textbf{ Timeshifts} const \&timeshifts)
+\item 
+void \textbf{ set\+Trigger} (std\+::function$<$ bool(const \textbf{ Event} \&)$>$ other)
+\item 
+void \textbf{ throw\+Singles} (bool const \&\+\_\+throw\+\_\+single=true)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \textbf{ load} (int argc, char $\ast$$\ast$argv)
+\item 
+virtual void \textbf{ print\+Parameters} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \textbf{ s\+\_\+convert\+File} (\textbf{ Hit} \&hit, \textbf{ Faster\+Reader} \&reader, \textbf{ Faster2\+Root} \&convertor, \textbf{ Path} const \&out\+Path)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \textbf{ m\+\_\+calibrate} = false
+\item 
+\textbf{ Calibration} \textbf{ m\+\_\+calibration}
+\item 
+bool \textbf{ m\+\_\+eventbuilding} = false
+\item 
+bool \textbf{ m\+\_\+loaded\+\_\+trigger} = false
+\item 
+int \textbf{ m\+\_\+nb\+\_\+files} = -\/1
+\item 
+int \textbf{ m\+\_\+nb\+\_\+threads} = 1
+\item 
+bool \textbf{ m\+\_\+ok} = false
+\item 
+bool \textbf{ m\+\_\+overwrite} = false
+\item 
+bool \textbf{ m\+\_\+throw\+\_\+single} = false
+\item 
+Long64\+\_\+t \textbf{ m\+\_\+time\+\_\+window} = 1500000
+\item 
+\textbf{ Timeshifts} \textbf{ m\+\_\+timeshifts}
+\item 
+\textbf{ MTCounter} \textbf{ m\+\_\+total\+\_\+events}
+\item 
+\textbf{ MTCounter} \textbf{ m\+\_\+total\+\_\+hits}
+\item 
+\textbf{ Timer} \textbf{ m\+\_\+total\+\_\+timer}
+\item 
+\textbf{ MTCounter} \textbf{ m\+\_\+trigg\+\_\+events}
+\item 
+std\+::function$<$ bool(const \textbf{ Event} \&)$>$ \textbf{ m\+\_\+trigger} = [$\,$](const \textbf{ Event}\&) \{ return true; \}
+\item 
+std\+::string \textbf{ m\+\_\+trigger\+\_\+file}
+\item 
+std\+::vector$<$ \textbf{ Label} $>$ \textbf{ m\+\_\+triggering\+\_\+labels}
+\item 
+bool \textbf{ m\+\_\+use\+\_\+\+RF} = false
+\item 
+bool \textbf{ m\+\_\+use\+\_\+trigger} = false
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\label{class_my_simple_convertor_a98cb80e651f072598ac0eb58264c3fee}} 
+\index{MySimpleConvertor@{MySimpleConvertor}!MySimpleConvertor@{MySimpleConvertor}}
+\index{MySimpleConvertor@{MySimpleConvertor}!MySimpleConvertor@{MySimpleConvertor}}
+\doxysubsubsection{MySimpleConvertor()}
+{\footnotesize\ttfamily template$<$class... ARGS$>$ \\
+My\+Simple\+Convertor\+::\+My\+Simple\+Convertor (\begin{DoxyParamCaption}\item[{ARGS \&\&...}]{args }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\label{class_faster2_root_a5eadd66ea26d632b75a92aa9c2878bf3}} 
+\index{MySimpleConvertor@{MySimpleConvertor}!buildEvents@{buildEvents}}
+\index{buildEvents@{buildEvents}!MySimpleConvertor@{MySimpleConvertor}}
+\doxysubsubsection{buildEvents()}
+{\footnotesize\ttfamily void Faster2\+Root\+::build\+Events (\begin{DoxyParamCaption}\item[{int}]{time\+\_\+window\+\_\+ns }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [inherited]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=292pt]{class_faster2_root_a5eadd66ea26d632b75a92aa9c2878bf3_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_faster2_root_a5eadd66ea26d632b75a92aa9c2878bf3_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_faster2_root_a7d6d5249c6ced2548a58406eca085cdb}} 
+\index{MySimpleConvertor@{MySimpleConvertor}!convert@{convert}}
+\index{convert@{convert}!MySimpleConvertor@{MySimpleConvertor}}
+\doxysubsubsection{convert()}
+{\footnotesize\ttfamily void Faster2\+Root\+::convert (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{data\+Folder,  }\item[{std\+::string const \&}]{output\+Folder,  }\item[{int const \&}]{nb\+\_\+files = {\ttfamily -\/1} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inherited]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_faster2_root_a7d6d5249c6ced2548a58406eca085cdb_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_faster2_root_a7d6d5249c6ced2548a58406eca085cdb_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_my_simple_convertor_a81d6aadfcbadae6e83dbacc86735a0c5}} 
+\index{MySimpleConvertor@{MySimpleConvertor}!convertFile@{convertFile}}
+\index{convertFile@{convertFile}!MySimpleConvertor@{MySimpleConvertor}}
+\doxysubsubsection{convertFile()}
+{\footnotesize\ttfamily void My\+Simple\+Convertor\+::convert\+File (\begin{DoxyParamCaption}\item[{\textbf{ Hit} \&}]{hit,  }\item[{\textbf{ Faster\+Reader} \&}]{reader,  }\item[{\textbf{ Path} const \&}]{out\+Path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em hit} & \\
+\hline
+{\em reader} & \\
+\hline
+{\em out\+Path} & \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \textbf{ Faster2\+Root} \doxyref{}{p.}{class_faster2_root_a2ba93a4814723b6103dc25a701f3dc89}.
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_my_simple_convertor_a81d6aadfcbadae6e83dbacc86735a0c5_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_faster2_root_ad30ccf937150bbd3504ec3a354b76c8f}} 
+\index{MySimpleConvertor@{MySimpleConvertor}!load@{load}}
+\index{load@{load}!MySimpleConvertor@{MySimpleConvertor}}
+\doxysubsubsection{load()}
+{\footnotesize\ttfamily void Faster2\+Root\+::load (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [inherited]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_faster2_root_ad30ccf937150bbd3504ec3a354b76c8f_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_faster2_root_ad30ccf937150bbd3504ec3a354b76c8f_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_faster2_root_afaec1876151390b71c475885157670a3}} 
+\index{MySimpleConvertor@{MySimpleConvertor}!loadCalibration@{loadCalibration}}
+\index{loadCalibration@{loadCalibration}!MySimpleConvertor@{MySimpleConvertor}}
+\doxysubsubsection{loadCalibration()}
+{\footnotesize\ttfamily void Faster2\+Root\+::load\+Calibration (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{calib\+File }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [inherited]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_faster2_root_afaec1876151390b71c475885157670a3_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_faster2_root_afaec1876151390b71c475885157670a3_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_faster2_root_a3953ee6d843802ca12997e146fd7046d}} 
+\index{MySimpleConvertor@{MySimpleConvertor}!loadTimeshifts@{loadTimeshifts}}
+\index{loadTimeshifts@{loadTimeshifts}!MySimpleConvertor@{MySimpleConvertor}}
+\doxysubsubsection{loadTimeshifts()}
+{\footnotesize\ttfamily void Faster2\+Root\+::load\+Timeshifts (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{d\+Tfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [inherited]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_faster2_root_a3953ee6d843802ca12997e146fd7046d_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_faster2_root_a3953ee6d843802ca12997e146fd7046d_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_faster2_root_a5b8a78ef8c54117807c770d21fa4acf0}} 
+\index{MySimpleConvertor@{MySimpleConvertor}!loadTriggerFile@{loadTriggerFile}}
+\index{loadTriggerFile@{loadTriggerFile}!MySimpleConvertor@{MySimpleConvertor}}
+\doxysubsubsection{loadTriggerFile()}
+{\footnotesize\ttfamily void Faster2\+Root\+::load\+Trigger\+File (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{file }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inherited]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_faster2_root_a5b8a78ef8c54117807c770d21fa4acf0_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_faster2_root_a5b8a78ef8c54117807c770d21fa4acf0_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_faster2_root_a19537e5417a0537a0327b91b78982ca2}} 
+\index{MySimpleConvertor@{MySimpleConvertor}!overwrite@{overwrite}}
+\index{overwrite@{overwrite}!MySimpleConvertor@{MySimpleConvertor}}
+\doxysubsubsection{overwrite()}
+{\footnotesize\ttfamily void Faster2\+Root\+::overwrite (\begin{DoxyParamCaption}\item[{bool const \&}]{\+\_\+overwrite }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [inherited]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_faster2_root_a19537e5417a0537a0327b91b78982ca2_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_faster2_root_a6cc6f4731958e8c74ad0e07f4d97f4a0}} 
+\index{MySimpleConvertor@{MySimpleConvertor}!printParameters@{printParameters}}
+\index{printParameters@{printParameters}!MySimpleConvertor@{MySimpleConvertor}}
+\doxysubsubsection{printParameters()}
+{\footnotesize\ttfamily void Faster2\+Root\+::print\+Parameters (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}, {\ttfamily [inherited]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=313pt]{class_faster2_root_a6cc6f4731958e8c74ad0e07f4d97f4a0_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_faster2_root_a6cc6f4731958e8c74ad0e07f4d97f4a0_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_faster2_root_a50fd46a075ae0a1a1f52b5bb6405047b}} 
+\index{MySimpleConvertor@{MySimpleConvertor}!s\_convertFile@{s\_convertFile}}
+\index{s\_convertFile@{s\_convertFile}!MySimpleConvertor@{MySimpleConvertor}}
+\doxysubsubsection{s\_convertFile()}
+{\footnotesize\ttfamily static void Faster2\+Root\+::s\+\_\+convert\+File (\begin{DoxyParamCaption}\item[{\textbf{ Hit} \&}]{hit,  }\item[{\textbf{ Faster\+Reader} \&}]{reader,  }\item[{\textbf{ Faster2\+Root} \&}]{convertor,  }\item[{\textbf{ Path} const \&}]{out\+Path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [protected]}, {\ttfamily [inherited]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_faster2_root_a50fd46a075ae0a1a1f52b5bb6405047b_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_faster2_root_a50fd46a075ae0a1a1f52b5bb6405047b_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_faster2_root_a957a45ae197b565da07521a27ee73f53}} 
+\index{MySimpleConvertor@{MySimpleConvertor}!setCalibration@{setCalibration}}
+\index{setCalibration@{setCalibration}!MySimpleConvertor@{MySimpleConvertor}}
+\doxysubsubsection{setCalibration()}
+{\footnotesize\ttfamily void Faster2\+Root\+::set\+Calibration (\begin{DoxyParamCaption}\item[{\textbf{ Calibration} const \&}]{calibration }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [inherited]}}
+
+\mbox{\label{class_faster2_root_a943441baaa37c600a49913339a63e89d}} 
+\index{MySimpleConvertor@{MySimpleConvertor}!setNbFiles@{setNbFiles}}
+\index{setNbFiles@{setNbFiles}!MySimpleConvertor@{MySimpleConvertor}}
+\doxysubsubsection{setNbFiles()}
+{\footnotesize\ttfamily void Faster2\+Root\+::set\+Nb\+Files (\begin{DoxyParamCaption}\item[{int const \&}]{nb\+\_\+files = {\ttfamily -\/1} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [inherited]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_faster2_root_a943441baaa37c600a49913339a63e89d_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_faster2_root_a0717c962ce832333110607b30f8370fc}} 
+\index{MySimpleConvertor@{MySimpleConvertor}!setNbThreads@{setNbThreads}}
+\index{setNbThreads@{setNbThreads}!MySimpleConvertor@{MySimpleConvertor}}
+\doxysubsubsection{setNbThreads()}
+{\footnotesize\ttfamily void Faster2\+Root\+::set\+Nb\+Threads (\begin{DoxyParamCaption}\item[{int const \&}]{nb\+\_\+threads = {\ttfamily -\/1} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [inherited]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_faster2_root_a0717c962ce832333110607b30f8370fc_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_faster2_root_ace1cc6bfc486195e5808e946770d5954}} 
+\index{MySimpleConvertor@{MySimpleConvertor}!setTimeshifts@{setTimeshifts}}
+\index{setTimeshifts@{setTimeshifts}!MySimpleConvertor@{MySimpleConvertor}}
+\doxysubsubsection{setTimeshifts()}
+{\footnotesize\ttfamily void Faster2\+Root\+::set\+Timeshifts (\begin{DoxyParamCaption}\item[{\textbf{ Timeshifts} const \&}]{timeshifts }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [inherited]}}
+
+\mbox{\label{class_faster2_root_aaa5d89a939efb05b6408e65b5f0117c2}} 
+\index{MySimpleConvertor@{MySimpleConvertor}!setTrigger@{setTrigger}}
+\index{setTrigger@{setTrigger}!MySimpleConvertor@{MySimpleConvertor}}
+\doxysubsubsection{setTrigger()}
+{\footnotesize\ttfamily void Faster2\+Root\+::set\+Trigger (\begin{DoxyParamCaption}\item[{std\+::function$<$ bool(const \textbf{ Event} \&)$>$}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [inherited]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_faster2_root_aaa5d89a939efb05b6408e65b5f0117c2_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_faster2_root_a01cccc30e85ee668bbff3827c838173e}} 
+\index{MySimpleConvertor@{MySimpleConvertor}!throwSingles@{throwSingles}}
+\index{throwSingles@{throwSingles}!MySimpleConvertor@{MySimpleConvertor}}
+\doxysubsubsection{throwSingles()}
+{\footnotesize\ttfamily void Faster2\+Root\+::throw\+Singles (\begin{DoxyParamCaption}\item[{bool const \&}]{\+\_\+throw\+\_\+single = {\ttfamily true} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [inherited]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\label{class_faster2_root_a3c9782dbe54c5b10f21487d2189f4c16}} 
+\index{MySimpleConvertor@{MySimpleConvertor}!m\_calibrate@{m\_calibrate}}
+\index{m\_calibrate@{m\_calibrate}!MySimpleConvertor@{MySimpleConvertor}}
+\doxysubsubsection{m\_calibrate}
+{\footnotesize\ttfamily bool Faster2\+Root\+::m\+\_\+calibrate = false\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [inherited]}}
+
+\mbox{\label{class_faster2_root_a58af91c50f99bd37c48380988292af03}} 
+\index{MySimpleConvertor@{MySimpleConvertor}!m\_calibration@{m\_calibration}}
+\index{m\_calibration@{m\_calibration}!MySimpleConvertor@{MySimpleConvertor}}
+\doxysubsubsection{m\_calibration}
+{\footnotesize\ttfamily \textbf{ Calibration} Faster2\+Root\+::m\+\_\+calibration\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [inherited]}}
+
+\mbox{\label{class_faster2_root_a50b697e84534b9326fcf678b28b5609a}} 
+\index{MySimpleConvertor@{MySimpleConvertor}!m\_eventbuilding@{m\_eventbuilding}}
+\index{m\_eventbuilding@{m\_eventbuilding}!MySimpleConvertor@{MySimpleConvertor}}
+\doxysubsubsection{m\_eventbuilding}
+{\footnotesize\ttfamily bool Faster2\+Root\+::m\+\_\+eventbuilding = false\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [inherited]}}
+
+\mbox{\label{class_faster2_root_a9b7e63609b4123f6f798f70c2de1128b}} 
+\index{MySimpleConvertor@{MySimpleConvertor}!m\_loaded\_trigger@{m\_loaded\_trigger}}
+\index{m\_loaded\_trigger@{m\_loaded\_trigger}!MySimpleConvertor@{MySimpleConvertor}}
+\doxysubsubsection{m\_loaded\_trigger}
+{\footnotesize\ttfamily bool Faster2\+Root\+::m\+\_\+loaded\+\_\+trigger = false\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [inherited]}}
+
+\mbox{\label{class_faster2_root_a0eb51359b6d1390a15d2113950bb4bf2}} 
+\index{MySimpleConvertor@{MySimpleConvertor}!m\_nb\_files@{m\_nb\_files}}
+\index{m\_nb\_files@{m\_nb\_files}!MySimpleConvertor@{MySimpleConvertor}}
+\doxysubsubsection{m\_nb\_files}
+{\footnotesize\ttfamily int Faster2\+Root\+::m\+\_\+nb\+\_\+files = -\/1\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [inherited]}}
+
+\mbox{\label{class_faster2_root_aacad03770af4357e587c8138da57a203}} 
+\index{MySimpleConvertor@{MySimpleConvertor}!m\_nb\_threads@{m\_nb\_threads}}
+\index{m\_nb\_threads@{m\_nb\_threads}!MySimpleConvertor@{MySimpleConvertor}}
+\doxysubsubsection{m\_nb\_threads}
+{\footnotesize\ttfamily int Faster2\+Root\+::m\+\_\+nb\+\_\+threads = 1\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [inherited]}}
+
+\mbox{\label{class_faster2_root_a88e6c196d62d573ba95bf4f62d8cb15d}} 
+\index{MySimpleConvertor@{MySimpleConvertor}!m\_ok@{m\_ok}}
+\index{m\_ok@{m\_ok}!MySimpleConvertor@{MySimpleConvertor}}
+\doxysubsubsection{m\_ok}
+{\footnotesize\ttfamily bool Faster2\+Root\+::m\+\_\+ok = false\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [inherited]}}
+
+\mbox{\label{class_faster2_root_a987fb5d9ee8469817296265b1232bb63}} 
+\index{MySimpleConvertor@{MySimpleConvertor}!m\_overwrite@{m\_overwrite}}
+\index{m\_overwrite@{m\_overwrite}!MySimpleConvertor@{MySimpleConvertor}}
+\doxysubsubsection{m\_overwrite}
+{\footnotesize\ttfamily bool Faster2\+Root\+::m\+\_\+overwrite = false\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [inherited]}}
+
+\mbox{\label{class_faster2_root_a76455ed5fcb82744bb34e0de2f524a0c}} 
+\index{MySimpleConvertor@{MySimpleConvertor}!m\_throw\_single@{m\_throw\_single}}
+\index{m\_throw\_single@{m\_throw\_single}!MySimpleConvertor@{MySimpleConvertor}}
+\doxysubsubsection{m\_throw\_single}
+{\footnotesize\ttfamily bool Faster2\+Root\+::m\+\_\+throw\+\_\+single = false\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [inherited]}}
+
+\mbox{\label{class_faster2_root_a4b32ed9d91512912420c58bab5d4897a}} 
+\index{MySimpleConvertor@{MySimpleConvertor}!m\_time\_window@{m\_time\_window}}
+\index{m\_time\_window@{m\_time\_window}!MySimpleConvertor@{MySimpleConvertor}}
+\doxysubsubsection{m\_time\_window}
+{\footnotesize\ttfamily Long64\+\_\+t Faster2\+Root\+::m\+\_\+time\+\_\+window = 1500000\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [inherited]}}
+
+\mbox{\label{class_faster2_root_a1d145e66d56ef7a8f11cd58185b5666c}} 
+\index{MySimpleConvertor@{MySimpleConvertor}!m\_timeshifts@{m\_timeshifts}}
+\index{m\_timeshifts@{m\_timeshifts}!MySimpleConvertor@{MySimpleConvertor}}
+\doxysubsubsection{m\_timeshifts}
+{\footnotesize\ttfamily \textbf{ Timeshifts} Faster2\+Root\+::m\+\_\+timeshifts\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [inherited]}}
+
+\mbox{\label{class_faster2_root_aecbddf92ed9e6e9f518627e024e43e3e}} 
+\index{MySimpleConvertor@{MySimpleConvertor}!m\_total\_events@{m\_total\_events}}
+\index{m\_total\_events@{m\_total\_events}!MySimpleConvertor@{MySimpleConvertor}}
+\doxysubsubsection{m\_total\_events}
+{\footnotesize\ttfamily \textbf{ MTCounter} Faster2\+Root\+::m\+\_\+total\+\_\+events\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [inherited]}}
+
+\mbox{\label{class_faster2_root_adb999cc71caadb30a61f64659ba88a2c}} 
+\index{MySimpleConvertor@{MySimpleConvertor}!m\_total\_hits@{m\_total\_hits}}
+\index{m\_total\_hits@{m\_total\_hits}!MySimpleConvertor@{MySimpleConvertor}}
+\doxysubsubsection{m\_total\_hits}
+{\footnotesize\ttfamily \textbf{ MTCounter} Faster2\+Root\+::m\+\_\+total\+\_\+hits\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [inherited]}}
+
+\mbox{\label{class_faster2_root_ae62d8cbcbd702ac3691ebdc54677be47}} 
+\index{MySimpleConvertor@{MySimpleConvertor}!m\_total\_timer@{m\_total\_timer}}
+\index{m\_total\_timer@{m\_total\_timer}!MySimpleConvertor@{MySimpleConvertor}}
+\doxysubsubsection{m\_total\_timer}
+{\footnotesize\ttfamily \textbf{ Timer} Faster2\+Root\+::m\+\_\+total\+\_\+timer\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [inherited]}}
+
+\mbox{\label{class_faster2_root_a1589ca0222d305ef05b8d622e79fbb8b}} 
+\index{MySimpleConvertor@{MySimpleConvertor}!m\_trigg\_events@{m\_trigg\_events}}
+\index{m\_trigg\_events@{m\_trigg\_events}!MySimpleConvertor@{MySimpleConvertor}}
+\doxysubsubsection{m\_trigg\_events}
+{\footnotesize\ttfamily \textbf{ MTCounter} Faster2\+Root\+::m\+\_\+trigg\+\_\+events\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [inherited]}}
+
+\mbox{\label{class_faster2_root_a5807435c6403ac0a7fba6da6b43fefce}} 
+\index{MySimpleConvertor@{MySimpleConvertor}!m\_trigger@{m\_trigger}}
+\index{m\_trigger@{m\_trigger}!MySimpleConvertor@{MySimpleConvertor}}
+\doxysubsubsection{m\_trigger}
+{\footnotesize\ttfamily std\+::function$<$bool(const \textbf{ Event}\&)$>$ Faster2\+Root\+::m\+\_\+trigger = [$\,$](const \textbf{ Event}\&) \{ return true; \}\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [inherited]}}
+
+\mbox{\label{class_faster2_root_ae3fce7a9419f8ed5044f8a8cc7302a6b}} 
+\index{MySimpleConvertor@{MySimpleConvertor}!m\_trigger\_file@{m\_trigger\_file}}
+\index{m\_trigger\_file@{m\_trigger\_file}!MySimpleConvertor@{MySimpleConvertor}}
+\doxysubsubsection{m\_trigger\_file}
+{\footnotesize\ttfamily std\+::string Faster2\+Root\+::m\+\_\+trigger\+\_\+file\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [inherited]}}
+
+\mbox{\label{class_faster2_root_acf62aae9afb7e5e49508c4a018039fc3}} 
+\index{MySimpleConvertor@{MySimpleConvertor}!m\_triggering\_labels@{m\_triggering\_labels}}
+\index{m\_triggering\_labels@{m\_triggering\_labels}!MySimpleConvertor@{MySimpleConvertor}}
+\doxysubsubsection{m\_triggering\_labels}
+{\footnotesize\ttfamily std\+::vector$<$\textbf{ Label}$>$ Faster2\+Root\+::m\+\_\+triggering\+\_\+labels\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [inherited]}}
+
+\mbox{\label{class_faster2_root_a07ce8dd1383dcf7b466ab99604516cd1}} 
+\index{MySimpleConvertor@{MySimpleConvertor}!m\_use\_RF@{m\_use\_RF}}
+\index{m\_use\_RF@{m\_use\_RF}!MySimpleConvertor@{MySimpleConvertor}}
+\doxysubsubsection{m\_use\_RF}
+{\footnotesize\ttfamily bool Faster2\+Root\+::m\+\_\+use\+\_\+\+RF = false\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [inherited]}}
+
+\mbox{\label{class_faster2_root_a29bd04235f0c5c32d1f96695135daba5}} 
+\index{MySimpleConvertor@{MySimpleConvertor}!m\_use\_trigger@{m\_use\_trigger}}
+\index{m\_use\_trigger@{m\_use\_trigger}!MySimpleConvertor@{MySimpleConvertor}}
+\doxysubsubsection{m\_use\_trigger}
+{\footnotesize\ttfamily bool Faster2\+Root\+::m\+\_\+use\+\_\+trigger = false\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [inherited]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+lib/\+Modules/\textbf{ Faster2\+Root.\+hpp}\end{DoxyCompactItemize}

@@ -1,0 +1,5 @@
+<map id="Timeshifts::setTimeReference" name="Timeshifts::setTimeReference">
+<area shape="rect" id="node1" title="Set the time reference label." alt="" coords="271,31,488,57"/>
+<area shape="rect" id="node2" href="$class_timeshifts.html#acca1130b271301c5477d4b4a23ae4e5b" title="Use this method to setup the parameters from a string in order to calculate the timeshifts." alt="" coords="18,5,210,32"/>
+<area shape="rect" id="node3" href="$class_timeshifts.html#aa9f8bdcbeef03f8be872602e6c717d4d" title="Set the time reference." alt="" coords="5,56,223,83"/>
+</map>

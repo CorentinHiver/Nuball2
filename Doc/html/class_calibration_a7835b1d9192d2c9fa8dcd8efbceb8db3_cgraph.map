@@ -1,0 +1,11 @@
+<map id="Calibration::loadRootHisto" name="Calibration::loadRootHisto">
+<area shape="rect" id="node1" title=" " alt="" coords="5,56,199,83"/>
+<area shape="rect" id="node2" href="$class_calibration.html#acfdcf94af247e6907aa09d086c1e4186" title=" " alt="" coords="261,5,382,32"/>
+<area shape="rect" id="node3" href="$class_detectors.html#a538487678aa928ab2956e6fb40c90472" title=" " alt="" coords="247,56,396,83"/>
+<area shape="rect" id="node9" href="$lib_co_8hpp.html#a6df2dcd4b1f61c75dc292942bc5ca74d" title=" " alt="" coords="273,107,370,133"/>
+<area shape="rect" id="node4" href="$class_detectors.html#afd00ee8a76386f7356a12858b1dd7c6b" title="Get the name of a detector given its type and type index." alt="" coords="444,56,575,83"/>
+<area shape="rect" id="node5" href="$class_detectors.html#a3c4f247022eb113c0371899060ea0199" title="Get the type index of the detector. Each type of detector has its own indexing system if you have 3 G..." alt="" coords="623,107,752,133"/>
+<area shape="rect" id="node8" href="$class_detectors.html#a0be56517035f1272af33392665b9ff1f" title=" " alt="" coords="626,5,749,32"/>
+<area shape="rect" id="node6" href="$class_detectors.html#a349500ec816bd7761de87c54b95000bc" title=" " alt="" coords="800,56,925,83"/>
+<area shape="rect" id="node7" href="$_detectors_8hpp.html#af8a018699aa5d8544bc4877f40463a5a" title=" " alt="" coords="823,107,902,133"/>
+</map>

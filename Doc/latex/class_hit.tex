@@ -1,0 +1,262 @@
+\doxysection{Hit Class Reference}
+\label{class_hit}\index{Hit@{Hit}}
+
+
+\doxyref{Hit}{p.}{class_hit} class ///.  
+
+
+
+
+{\ttfamily \#include $<$Hit.\+hpp$>$}
+
+
+
+Collaboration diagram for Hit\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=137pt]{class_hit__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ Hit} ()
+\item 
+\textbf{ Hit} (\textbf{ Hit} const \&hit)
+\item 
+\textbf{ Hit} \& \textbf{ operator=} (\textbf{ Hit} const \&hit)
+\item 
+void \textbf{ reading} (TTree $\ast$tree)
+\item 
+void \textbf{ reading} (TTree $\ast$tree, std\+::string const \&options)
+\item 
+void \textbf{ reset} ()
+\item 
+void \textbf{ writting} (TTree $\ast$tree, std\+::string const \&options=\char`\"{}lseqp\char`\"{})
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ ADC} \textbf{ adc} = 0
+\item 
+\textbf{ Label} \textbf{ label} = 0
+\item 
+\textbf{ NRJ} \textbf{ nrj} = 0.f
+\item 
+\textbf{ NRJ} \textbf{ nrj2} = 0.f
+\item 
+\textbf{ NRJ} \textbf{ nrj3} = 0.f
+\item 
+bool \textbf{ pileup} = false
+\item 
+\textbf{ ADC} \textbf{ qdc2} = 0
+\item 
+\textbf{ ADC} \textbf{ qdc3} = 0
+\item 
+\textbf{ Timestamp} \textbf{ stamp} = 0ull
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static \textbf{ IOptions} \textbf{ read}
+\item 
+static \textbf{ IOptions} \textbf{ write}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\doxyref{Hit}{p.}{class_hit} class ///. 
+
+This class is used to store conviniently the data from reading the faster data. You can either treat data directly or write it in root trees
+
+This class is used as an interface between the faster data and root.
+
+Connect it to a \doxyref{Faster\+Reader}{p.}{class_faster_reader} to read data \+: \begin{DoxyVerb} Hit hit;
+ FasterReader.setHit(&hit);
+ while(reader.Read())
+ {
+   doSomething with the hit...
+ }
+\end{DoxyVerb}
+ Connect it to a Root Tree \+:
+
+
+\begin{DoxyEnumerate}
+\item To convert data to a raw root tree \+:
+
+\doxyref{Hit}{p.}{class_hit} hit; TTree $\ast$ tree = new TTree(\char`\"{}\+Nuball2\char`\"{},\char`\"{}\+Nuball2\char`\"{}); Faster\+Reader.\+set\+Hit(\&hit); hit.\+writting(tree); while(reader.\+Read()) \{ tree -\/$>$ Fill(); \}
+\item To read this raw root tree \+:
+
+hit.\+reading(tree); for (int hit = 0; hit$<$tree-\/$>$Get\+Entries(); hit++) \{ do somethign with the hit ... \} 
+\end{DoxyEnumerate}
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\label{class_hit_ac2727a27933c07b60b6a7ccccba12fff}} 
+\index{Hit@{Hit}!Hit@{Hit}}
+\index{Hit@{Hit}!Hit@{Hit}}
+\doxysubsubsection{Hit()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Hit\+::\+Hit (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=229pt]{class_hit_ac2727a27933c07b60b6a7ccccba12fff_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_hit_abcb26fe11278c6fcb80ddec201b402c1}} 
+\index{Hit@{Hit}!Hit@{Hit}}
+\index{Hit@{Hit}!Hit@{Hit}}
+\doxysubsubsection{Hit()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Hit\+::\+Hit (\begin{DoxyParamCaption}\item[{\textbf{ Hit} const \&}]{hit }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\label{class_hit_a77de7b97444e05abb4f31be7f119e9c8}} 
+\index{Hit@{Hit}!operator=@{operator=}}
+\index{operator=@{operator=}!Hit@{Hit}}
+\doxysubsubsection{operator=()}
+{\footnotesize\ttfamily \textbf{ Hit}\& Hit\+::operator= (\begin{DoxyParamCaption}\item[{\textbf{ Hit} const \&}]{hit }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_hit_ad809be4a75a5c588504fa77d442e393d}} 
+\index{Hit@{Hit}!reading@{reading}}
+\index{reading@{reading}!Hit@{Hit}}
+\doxysubsubsection{reading()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Hit\+::reading (\begin{DoxyParamCaption}\item[{TTree $\ast$}]{tree }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=252pt]{class_hit_ad809be4a75a5c588504fa77d442e393d_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_hit_ad809be4a75a5c588504fa77d442e393d_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_hit_aedefb5565ccfc732c322416ef54d015d}} 
+\index{Hit@{Hit}!reading@{reading}}
+\index{reading@{reading}!Hit@{Hit}}
+\doxysubsubsection{reading()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Hit\+::reading (\begin{DoxyParamCaption}\item[{TTree $\ast$}]{tree,  }\item[{std\+::string const \&}]{options }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_hit_aedefb5565ccfc732c322416ef54d015d_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_hit_a11ab514bf16c8173e974b6582ca6d37e}} 
+\index{Hit@{Hit}!reset@{reset}}
+\index{reset@{reset}!Hit@{Hit}}
+\doxysubsubsection{reset()}
+{\footnotesize\ttfamily void Hit\+::reset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_hit_a11ab514bf16c8173e974b6582ca6d37e_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_hit_ab60637cf6f374e4394139c3594e4464e}} 
+\index{Hit@{Hit}!writting@{writting}}
+\index{writting@{writting}!Hit@{Hit}}
+\doxysubsubsection{writting()}
+{\footnotesize\ttfamily void Hit\+::writting (\begin{DoxyParamCaption}\item[{TTree $\ast$}]{tree,  }\item[{std\+::string const \&}]{options = {\ttfamily \char`\"{}lseqp\char`\"{}} }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_hit_ab60637cf6f374e4394139c3594e4464e_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_hit_ab60637cf6f374e4394139c3594e4464e_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\label{class_hit_a3d999e7bbbb470d1d3aa55ee772a98d6}} 
+\index{Hit@{Hit}!adc@{adc}}
+\index{adc@{adc}!Hit@{Hit}}
+\doxysubsubsection{adc}
+{\footnotesize\ttfamily \textbf{ ADC} Hit\+::adc = 0}
+
+\mbox{\label{class_hit_a7742ff02158f94fd0ccd163fc34ee9d1}} 
+\index{Hit@{Hit}!label@{label}}
+\index{label@{label}!Hit@{Hit}}
+\doxysubsubsection{label}
+{\footnotesize\ttfamily \textbf{ Label} Hit\+::label = 0}
+
+\mbox{\label{class_hit_abda4857e925c3a6315a6fb41fad59189}} 
+\index{Hit@{Hit}!nrj@{nrj}}
+\index{nrj@{nrj}!Hit@{Hit}}
+\doxysubsubsection{nrj}
+{\footnotesize\ttfamily \textbf{ NRJ} Hit\+::nrj = 0.f}
+
+\mbox{\label{class_hit_ab4b93fbbb58d5bf2fd3480238d93065a}} 
+\index{Hit@{Hit}!nrj2@{nrj2}}
+\index{nrj2@{nrj2}!Hit@{Hit}}
+\doxysubsubsection{nrj2}
+{\footnotesize\ttfamily \textbf{ NRJ} Hit\+::nrj2 = 0.f}
+
+\mbox{\label{class_hit_a04ef9221b81184bd9617b1b23311cc34}} 
+\index{Hit@{Hit}!nrj3@{nrj3}}
+\index{nrj3@{nrj3}!Hit@{Hit}}
+\doxysubsubsection{nrj3}
+{\footnotesize\ttfamily \textbf{ NRJ} Hit\+::nrj3 = 0.f}
+
+\mbox{\label{class_hit_af11540b09cb070a6c2028546b5a35037}} 
+\index{Hit@{Hit}!pileup@{pileup}}
+\index{pileup@{pileup}!Hit@{Hit}}
+\doxysubsubsection{pileup}
+{\footnotesize\ttfamily bool Hit\+::pileup = false}
+
+\mbox{\label{class_hit_a07541ef2177c95ba3de7df1fed1c986f}} 
+\index{Hit@{Hit}!qdc2@{qdc2}}
+\index{qdc2@{qdc2}!Hit@{Hit}}
+\doxysubsubsection{qdc2}
+{\footnotesize\ttfamily \textbf{ ADC} Hit\+::qdc2 = 0}
+
+\mbox{\label{class_hit_a109d6cdcf0601e11453901833daa7a4b}} 
+\index{Hit@{Hit}!qdc3@{qdc3}}
+\index{qdc3@{qdc3}!Hit@{Hit}}
+\doxysubsubsection{qdc3}
+{\footnotesize\ttfamily \textbf{ ADC} Hit\+::qdc3 = 0}
+
+\mbox{\label{class_hit_a4748672c2bd6987972336e488f67bda7}} 
+\index{Hit@{Hit}!read@{read}}
+\index{read@{read}!Hit@{Hit}}
+\doxysubsubsection{read}
+{\footnotesize\ttfamily \textbf{ IOptions} Hit\+::read\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\label{class_hit_ad98aea75b451b3246f45b25f1ccb9221}} 
+\index{Hit@{Hit}!stamp@{stamp}}
+\index{stamp@{stamp}!Hit@{Hit}}
+\doxysubsubsection{stamp}
+{\footnotesize\ttfamily \textbf{ Timestamp} Hit\+::stamp = 0ull}
+
+\mbox{\label{class_hit_a6e24a7396ce247f7f49bdf4751cc6a2e}} 
+\index{Hit@{Hit}!write@{write}}
+\index{write@{write}!Hit@{Hit}}
+\doxysubsubsection{write}
+{\footnotesize\ttfamily \textbf{ IOptions} Hit\+::write\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+lib/\+Classes/\textbf{ Hit.\+hpp}\end{DoxyCompactItemize}

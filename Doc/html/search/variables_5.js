@@ -1,12 +1,12 @@
 var searchData=
 [
-  ['e_1595',['E',['../class_event.html#a3b0e43f8906a1a9aeda8eef4c5bdd5b3',1,'Event::read::E()'],['../class_event.html#af60cbcdd608ae7760d429e34f4b2b84e',1,'Event::write::E()']]],
-  ['e2_1596',['E2',['../class_event.html#ae69f51dddc83d76c73063b4cb9a6321a',1,'Event::read::E2()'],['../class_event.html#a550e6f99ce8b4d27376fb67e9082edae',1,'Event::write::E2()']]],
-  ['emax_1597',['Emax',['../class_timewalks.html#a84bf1c4d9bfda41ab5ec87ad749ce50a',1,'Timewalks']]],
-  ['emin_1598',['Emin',['../class_clovers.html#a2fd19fb7d2b6a38d651a179deda4c3c5',1,'Clovers::Emin()'],['../class_timewalks.html#a9409425474ec9d2f66c263f81dc414e8',1,'Timewalks::Emin()']]],
-  ['energy_1599',['energy',['../utils_8hpp.html#a8cc397b63c93af01b7179848b2a4af14',1,'GHit']]],
-  ['energy2_1600',['energy2',['../utils_8hpp.html#a85bb0eb698d227f4269223472eedd032',1,'GHit']]],
-  ['eventid_1601',['eventID',['../utils_8hpp.html#a4eeb883cb00f77a71c478929de0562c2',1,'GHit']]],
-  ['exist_1602',['exist',['../classpic__fit__result.html#a253f4b18188540ef789c7e4093bcfa50',1,'pic_fit_result']]],
-  ['exists_1603',['exists',['../class_paris_crystal.html#afaaad25b4e0e0bcc913a6902a377322f',1,'ParisCrystal']]]
+  ['e_2250',['E',['../class_i_options.html#a1a2ef66e7ce7e5af14029dca3b2f7778',1,'IOptions']]],
+  ['e_2251',['e',['../class_i_options.html#a7d3b074e2027dd608b60f69ede73761e',1,'IOptions']]],
+  ['emax_2252',['Emax',['../class_timewalks.html#a0f6e8332a9733536a77d7d33c9462de5',1,'Timewalks']]],
+  ['emin_2253',['Emin',['../class_clovers.html#a2fd19fb7d2b6a38d651a179deda4c3c5',1,'Clovers::Emin()'],['../class_timewalks.html#a6c6a07853a50b8e4bee20d4ca42b6528',1,'Timewalks::Emin()']]],
+  ['energy_5fbidim_5fbins_2254',['energy_bidim_bins',['../class_detectors.html#a13bd00fc428ecb36ba850e09cc5e147c',1,'Detectors']]],
+  ['energy_5fbins_2255',['energy_bins',['../class_detectors.html#af47d4b9af7b3f9e698b3e0b63a8b77eb',1,'Detectors']]],
+  ['error_5fmessage_2256',['error_message',['../class_faster_reader.html#ae21a765c80bcf2f928bfd6e4f6b8abbf',1,'FasterReader::error_message()'],['../lib_co_8hpp.html#af522b6efd63a7f871a8307755b1297bf',1,'error_message():&#160;libCo.hpp']]],
+  ['ex_2257',['ex',['../class_fit.html#afffcdcd0341476a634e763b8bb2158ce',1,'Fit']]],
+  ['ey_2258',['ey',['../class_fit.html#a6777a3d0b233e491b99c6b22ba1b7290',1,'Fit']]]
 ];

@@ -1,0 +1,4 @@
+<map id="Detectors::getEnergyBin" name="Detectors::getEnergyBin">
+<area shape="rect" id="node1" title="Get the default energy (keV) bidimensionnal histogram binning for all types of detectors." alt="" coords="228,13,408,39"/>
+<area shape="rect" id="node2" href="$struct_calibration_1_1histograms.html#a8cf05daf9b9f1ee4ec9d1763acc2c307" title=" " alt="" coords="5,5,180,47"/>
+</map>

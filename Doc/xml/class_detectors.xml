@@ -1,0 +1,1315 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="class_detectors" kind="class" language="C++" prot="public">
+    <compoundname>Detectors</compoundname>
+    <includes refid="_detectors_8hpp" local="no">Detectors.hpp</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="class_detectors_1a930c2b917e87154c1337ecf8551a3ab4" prot="public" static="no" mutable="no">
+        <type><ref refid="lib_co_8hpp_1a632090884b4aa0585e747446a2683963" kindref="member">Strings</ref></type>
+        <definition>Strings Detectors::types_handled</definition>
+        <argsstring></argsstring>
+        <name>types_handled</name>
+        <initializer>= {&quot;ge&quot;, &quot;bgo&quot;, &quot;labr&quot;, &quot;paris&quot;, &quot;dssd&quot;, &quot;eden&quot;, &quot;RF&quot;, &quot;default&quot;}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Detectors.hpp" line="58" column="11" bodyfile="lib/Classes/Detectors.hpp" bodystart="58" bodyend="-1"/>
+        <referencedby refid="class_detectors_1a8d5c0f2d189ddda12ed3c36f13887cfd" compoundref="_detectors_8hpp" startline="271" endline="372">makeArrays</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="class_detectors_1a29d73ee6f748035ace066db47a923735" prot="protected" static="no" mutable="no">
+        <type><ref refid="class_bools" kindref="compound">Bools</ref></type>
+        <definition>Bools Detectors::m_exists</definition>
+        <argsstring></argsstring>
+        <name>m_exists</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Detectors.hpp" line="184" column="11" bodyfile="lib/Classes/Detectors.hpp" bodystart="184" bodyend="-1"/>
+        <referencedby refid="class_detectors_1a47ae394beae7efa2fb8fa1a3c7f8427d" compoundref="_detectors_8hpp" startline="62" endline="62">exists</referencedby>
+        <referencedby refid="class_detectors_1a67986c6e80a0ac1fc78539eff3d52e9e" compoundref="_detectors_8hpp" startline="88" endline="88">getExistsArray</referencedby>
+        <referencedby refid="class_detectors_1a8d5c0f2d189ddda12ed3c36f13887cfd" compoundref="_detectors_8hpp" startline="271" endline="372">makeArrays</referencedby>
+        <referencedby refid="class_detectors_1a3d5631f8fd2770b6b3a2a178130519ad" compoundref="_detectors_8hpp" startline="220" endline="269">readFile</referencedby>
+        <referencedby refid="class_detectors_1af2bb20ee60f504df326b87e9ebbaef30" compoundref="_detectors_8hpp" startline="200" endline="206">resize</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_detectors_1a28bdd4905a9dd8f89bd74e992c2d5fbd" prot="protected" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string Detectors::m_filename</definition>
+        <argsstring></argsstring>
+        <name>m_filename</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Detectors.hpp" line="180" column="15" bodyfile="lib/Classes/Detectors.hpp" bodystart="180" bodyend="-1"/>
+        <referencedby refid="class_detectors_1abb9cb0d9f8cc7e136ee0ed7f357ee42b" compoundref="_detectors_8hpp" startline="170" endline="170">file</referencedby>
+        <referencedby refid="class_detectors_1a3d5631f8fd2770b6b3a2a178130519ad" compoundref="_detectors_8hpp" startline="220" endline="269">readFile</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_detectors_1ab570ead47cf9719ae6f4c1e8c9285b81" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool Detectors::m_initialized</definition>
+        <argsstring></argsstring>
+        <name>m_initialized</name>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Detectors.hpp" line="178" column="8" bodyfile="lib/Classes/Detectors.hpp" bodystart="178" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_detectors_1a5a5289db11cb3ad98c96c69f58f6a6d5" prot="protected" static="no" mutable="no">
+        <type>std::unordered_map&lt; <ref refid="_detectors_8hpp_1a7ea6a1daded60b9200989100a41bbc3a" kindref="member">dType</ref>, <ref refid="_hit_8hpp_1a25e4b8c1ad7e877a2fd808d3c661b22d" kindref="member">Label_vec</ref> &gt;</type>
+        <definition>std::unordered_map&lt;dType, Label_vec&gt; Detectors::m_labels</definition>
+        <argsstring></argsstring>
+        <name>m_labels</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Detectors.hpp" line="192" column="22" bodyfile="lib/Classes/Detectors.hpp" bodystart="192" bodyend="-1"/>
+        <referencedby refid="class_detectors_1afc638e3f514370a477c6445efc11dfcb" compoundref="_detectors_8hpp" startline="127" endline="127">label</referencedby>
+        <referencedby refid="class_detectors_1a8d5c0f2d189ddda12ed3c36f13887cfd" compoundref="_detectors_8hpp" startline="271" endline="372">makeArrays</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_detectors_1a8b8f4313aeec18389d1213accb50b52d" prot="protected" static="no" mutable="no">
+        <type>std::unordered_map&lt; std::string, <ref refid="_hit_8hpp_1ab5dd24876acad09ec52c250c1668466c" kindref="member">Label</ref> &gt;</type>
+        <definition>std::unordered_map&lt;std::string, Label&gt; Detectors::m_labels_array</definition>
+        <argsstring></argsstring>
+        <name>m_labels_array</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Detectors.hpp" line="188" column="22" bodyfile="lib/Classes/Detectors.hpp" bodystart="188" bodyend="-1"/>
+        <referencedby refid="class_detectors_1a538487678aa928ab2956e6fb40c90472" compoundref="_detectors_8hpp" startline="99" endline="99">getLabel</referencedby>
+        <referencedby refid="class_detectors_1aeadb2b9222dd4544d5035960befb2902" compoundref="_detectors_8hpp" startline="89" endline="89">getLabelsArray</referencedby>
+        <referencedby refid="class_detectors_1a349500ec816bd7761de87c54b95000bc" compoundref="_detectors_8hpp" startline="100" endline="100">label</referencedby>
+        <referencedby refid="class_detectors_1abdba5d8991ded8844de7900d8e64d788" compoundref="_detectors_8hpp" startline="90" endline="90">labels</referencedby>
+        <referencedby refid="class_detectors_1a9feeeb0d176405478ffc53b1eda6c9a8" compoundref="_detectors_8hpp" startline="108" endline="108">operator[]</referencedby>
+        <referencedby refid="class_detectors_1a3d5631f8fd2770b6b3a2a178130519ad" compoundref="_detectors_8hpp" startline="220" endline="269">readFile</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_detectors_1a6994304445c6fc6137346690683b56ec" prot="protected" static="no" mutable="no">
+        <type><ref refid="lib_co_8hpp_1a632090884b4aa0585e747446a2683963" kindref="member">Strings</ref></type>
+        <definition>Strings Detectors::m_list</definition>
+        <argsstring></argsstring>
+        <name>m_list</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Detectors.hpp" line="185" column="11" bodyfile="lib/Classes/Detectors.hpp" bodystart="185" bodyend="-1"/>
+        <referencedby refid="class_detectors_1a2990dd023e93c1e50343aa47b94453a0" compoundref="_detectors_8hpp" startline="80" endline="80">begin</referencedby>
+        <referencedby refid="class_detectors_1aa93345c742983ca53dfde026c8285893" compoundref="_detectors_8hpp" startline="81" endline="81">end</referencedby>
+        <referencedby refid="class_detectors_1ae0bd442e4f8fa32b23f890a3f25e595b" compoundref="_detectors_8hpp" startline="86" endline="86">get</referencedby>
+        <referencedby refid="class_detectors_1a9f0298ea9621d3680607633908b1daff" compoundref="_detectors_8hpp" startline="98" endline="98">getName</referencedby>
+        <referencedby refid="class_detectors_1aae4bbbd3eb0f515868e4160a7091beef" compoundref="_detectors_8hpp" startline="87" endline="87">list</referencedby>
+        <referencedby refid="class_detectors_1a8d5c0f2d189ddda12ed3c36f13887cfd" compoundref="_detectors_8hpp" startline="271" endline="372">makeArrays</referencedby>
+        <referencedby refid="class_detectors_1a93874c5bc3918096ad880329b89cd632" compoundref="_detectors_8hpp" startline="105" endline="105">operator[]</referencedby>
+        <referencedby refid="class_detectors_1a3d5631f8fd2770b6b3a2a178130519ad" compoundref="_detectors_8hpp" startline="220" endline="269">readFile</referencedby>
+        <referencedby refid="class_detectors_1af2bb20ee60f504df326b87e9ebbaef30" compoundref="_detectors_8hpp" startline="200" endline="206">resize</referencedby>
+        <referencedby refid="class_detectors_1a1177661fb15c9825755925faf00c8398" compoundref="_detectors_8hpp" startline="74" endline="74">size</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_detectors_1a76926048c17f155fc444aab17233e0f8" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool Detectors::m_loaded</definition>
+        <argsstring></argsstring>
+        <name>m_loaded</name>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Detectors.hpp" line="177" column="8" bodyfile="lib/Classes/Detectors.hpp" bodystart="177" bodyend="-1"/>
+        <referencedby refid="class_detectors_1a8d5c0f2d189ddda12ed3c36f13887cfd" compoundref="_detectors_8hpp" startline="271" endline="372">makeArrays</referencedby>
+        <referencedby refid="class_detectors_1a3d5631f8fd2770b6b3a2a178130519ad" compoundref="_detectors_8hpp" startline="220" endline="269">readFile</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_detectors_1a5063cdef991cb6ddbb36be3f55d50e40" prot="protected" static="no" mutable="no">
+        <type>std::unordered_map&lt; <ref refid="_detectors_8hpp_1a7ea6a1daded60b9200989100a41bbc3a" kindref="member">dType</ref>, <ref refid="lib_co_8hpp_1a632090884b4aa0585e747446a2683963" kindref="member">Strings</ref> &gt;</type>
+        <definition>std::unordered_map&lt;dType, Strings&gt; Detectors::m_names</definition>
+        <argsstring></argsstring>
+        <name>m_names</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Detectors.hpp" line="191" column="22" bodyfile="lib/Classes/Detectors.hpp" bodystart="191" bodyend="-1"/>
+        <referencedby refid="class_detectors_1a8d5c0f2d189ddda12ed3c36f13887cfd" compoundref="_detectors_8hpp" startline="271" endline="372">makeArrays</referencedby>
+        <referencedby refid="class_detectors_1afd00ee8a76386f7356a12858b1dd7c6b" compoundref="_detectors_8hpp" startline="124" endline="124">name</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_detectors_1aa765faf4ef9745156ccb29d616ff3860" prot="protected" static="no" mutable="no">
+        <type><ref refid="lib_co_8hpp_1ad29aff8b0f7fde4ef0291331012e596a" kindref="member">ushort</ref></type>
+        <definition>ushort Detectors::m_nb_detectors</definition>
+        <argsstring></argsstring>
+        <name>m_nb_detectors</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Detectors.hpp" line="179" column="10" bodyfile="lib/Classes/Detectors.hpp" bodystart="179" bodyend="-1"/>
+        <referencedby refid="class_detectors_1a8d5c0f2d189ddda12ed3c36f13887cfd" compoundref="_detectors_8hpp" startline="271" endline="372">makeArrays</referencedby>
+        <referencedby refid="class_detectors_1a4d20a642176613274e1b8a42f7a0bf01" compoundref="_detectors_8hpp" startline="77" endline="77">number</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_detectors_1a601c91cb6246165a623dd99eb6c4bdc3" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool Detectors::m_ok</definition>
+        <argsstring></argsstring>
+        <name>m_ok</name>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Detectors.hpp" line="176" column="8" bodyfile="lib/Classes/Detectors.hpp" bodystart="176" bodyend="-1"/>
+        <referencedby refid="class_detectors_1ab18d3d10214de7727199f9090fdde164" compoundref="_detectors_8hpp" startline="111" endline="111">operator bool</referencedby>
+        <referencedby refid="class_detectors_1a3d5631f8fd2770b6b3a2a178130519ad" compoundref="_detectors_8hpp" startline="220" endline="269">readFile</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_detectors_1a661090e1c43cb00b366d7a5d642de879" prot="protected" static="no" mutable="no">
+        <type>std::unordered_map&lt; <ref refid="_detectors_8hpp_1a7ea6a1daded60b9200989100a41bbc3a" kindref="member">dType</ref>, <ref refid="lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638" kindref="member">size_t</ref> &gt;</type>
+        <definition>std::unordered_map&lt;dType, size_t&gt; Detectors::m_type_counter</definition>
+        <argsstring></argsstring>
+        <name>m_type_counter</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Detectors.hpp" line="190" column="22" bodyfile="lib/Classes/Detectors.hpp" bodystart="190" bodyend="-1"/>
+        <referencedby refid="class_detectors_1a8d5c0f2d189ddda12ed3c36f13887cfd" compoundref="_detectors_8hpp" startline="271" endline="372">makeArrays</referencedby>
+        <referencedby refid="class_detectors_1ae5e6ff02bf3d79da3f034f7404e0677c" compoundref="_detectors_8hpp" startline="117" endline="121">nbOfType</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_detectors_1a5677eaffae4eea104f04c3f85e2c5fbe" prot="protected" static="no" mutable="no">
+        <type><ref refid="lib_co_8hpp_1a632090884b4aa0585e747446a2683963" kindref="member">Strings</ref></type>
+        <definition>Strings Detectors::m_types</definition>
+        <argsstring></argsstring>
+        <name>m_types</name>
+        <initializer>= <ref refid="lib_co_8hpp_1a632090884b4aa0585e747446a2683963" kindref="member">Strings</ref>(<ref refid="_detectors_8hpp_1a66ffad8e00f3e94ca2040082469213c6" kindref="member">SIZE_LOOKUP</ref>)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Detectors.hpp" line="183" column="11" bodyfile="lib/Classes/Detectors.hpp" bodystart="183" bodyend="-1"/>
+        <referencedby refid="class_detectors_1a8d5c0f2d189ddda12ed3c36f13887cfd" compoundref="_detectors_8hpp" startline="271" endline="372">makeArrays</referencedby>
+        <referencedby refid="class_detectors_1ae5e6ff02bf3d79da3f034f7404e0677c" compoundref="_detectors_8hpp" startline="117" endline="121">nbOfType</referencedby>
+        <referencedby refid="class_detectors_1af2bb20ee60f504df326b87e9ebbaef30" compoundref="_detectors_8hpp" startline="200" endline="206">resize</referencedby>
+        <referencedby refid="class_detectors_1a0be56517035f1272af33392665b9ff1f" compoundref="_detectors_8hpp" startline="93" endline="93">type</referencedby>
+        <referencedby refid="class_detectors_1ae462c1e1acd5b2dc7757715fd68c362d" compoundref="_detectors_8hpp" startline="92" endline="92">typesArray</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_detectors_1a0e9964892db1d2dfdb3a8cbdd6c87aeb" prot="protected" static="no" mutable="no">
+        <type><ref refid="lib_co_8hpp_1a632090884b4aa0585e747446a2683963" kindref="member">Strings</ref></type>
+        <definition>Strings Detectors::m_types_ID</definition>
+        <argsstring></argsstring>
+        <name>m_types_ID</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Detectors.hpp" line="186" column="11" bodyfile="lib/Classes/Detectors.hpp" bodystart="186" bodyend="-1"/>
+        <referencedby refid="class_detectors_1a52d1ae2692c70d702883e5c1a637ce51" compoundref="_detectors_8hpp" startline="96" endline="96">getTypeName</referencedby>
+        <referencedby refid="class_detectors_1a8d5c0f2d189ddda12ed3c36f13887cfd" compoundref="_detectors_8hpp" startline="271" endline="372">makeArrays</referencedby>
+        <referencedby refid="class_detectors_1a24d220832c2f0a03a0d886e11f2c284c" compoundref="_detectors_8hpp" startline="114" endline="114">nbTypes</referencedby>
+        <referencedby refid="class_detectors_1a6c368aa8fe9d985fd742371179718d71" compoundref="_detectors_8hpp" startline="91" endline="91">types</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_detectors_1acb3bb5bfbb60a5861b87ddc17c7466d8" prot="protected" static="no" mutable="no">
+        <type>std::unordered_map&lt; <ref refid="_detectors_8hpp_1a7ea6a1daded60b9200989100a41bbc3a" kindref="member">dType</ref>, int &gt;</type>
+        <definition>std::unordered_map&lt;dType, int&gt; Detectors::m_types_index</definition>
+        <argsstring></argsstring>
+        <name>m_types_index</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Detectors.hpp" line="189" column="22" bodyfile="lib/Classes/Detectors.hpp" bodystart="189" bodyend="-1"/>
+        <referencedby refid="class_detectors_1a8d5c0f2d189ddda12ed3c36f13887cfd" compoundref="_detectors_8hpp" startline="271" endline="372">makeArrays</referencedby>
+        <referencedby refid="class_detectors_1ab4d5e6cc24173a65a35788ba7c680264" compoundref="_detectors_8hpp" startline="94" endline="94">typeIndex</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-static-attrib">
+      <memberdef kind="variable" id="class_detectors_1a244a6b586bda7fd0054a8217ed005019" prot="protected" static="yes" mutable="no">
+        <type>std::unordered_map&lt; <ref refid="_detectors_8hpp_1a7ea6a1daded60b9200989100a41bbc3a" kindref="member">dType</ref>, <ref refid="struct_t_h_binning" kindref="compound">THBinning</ref> &gt;</type>
+        <definition>std::unordered_map&lt; dType, THBinning &gt; Detectors::ADC_bins</definition>
+        <argsstring></argsstring>
+        <name>ADC_bins</name>
+        <initializer>= 
+{
+  {&quot;ge&quot;     , {10000, 0., 200000. }},
+  {&quot;bgo&quot;    , {1000 , 0., 200000. }},
+  {&quot;labr&quot;   , {2000 , 0., 200000. }},
+  {&quot;paris&quot;  , {2000 , 0., 200000. }},
+  {&quot;eden&quot;   , {1000 , 0., 200000. }},
+  {&quot;dssd&quot;   , {1000 , 0., 200000. }},
+  {&quot;default&quot;, {10000, 0., 1000000.}}
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Detectors.hpp" line="196" column="29" bodyfile="lib/Classes/Detectors.hpp" bodystart="196" bodyend="-1"/>
+        <referencedby refid="class_detectors_1af54374260cdfa1cd60b6364f07f882b4" compoundref="_detectors_8hpp" startline="134" endline="139">ADCBin</referencedby>
+        <referencedby refid="class_detectors_1aba567529b262d88913de6ccb05a71a99" compoundref="_detectors_8hpp" startline="158" endline="158">getADCBin</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_detectors_1a13bd00fc428ecb36ba850e09cc5e147c" prot="protected" static="yes" mutable="no">
+        <type>std::unordered_map&lt; <ref refid="_detectors_8hpp_1a7ea6a1daded60b9200989100a41bbc3a" kindref="member">dType</ref>, <ref refid="struct_t_h_binning" kindref="compound">THBinning</ref> &gt;</type>
+        <definition>std::unordered_map&lt; dType, THBinning &gt; Detectors::energy_bidim_bins</definition>
+        <argsstring></argsstring>
+        <name>energy_bidim_bins</name>
+        <initializer>= 
+{
+  {&quot;ge&quot;     , {5000, 0., 10000.}},
+  {&quot;bgo&quot;    , {250 , 0., 10000.}},
+  {&quot;labr&quot;   , {1000, 0., 10000.}},
+  {&quot;paris&quot;  , {1000, 0., 10000.}},
+  {&quot;eden&quot;   , {1000,-2., 2.    }},
+  {&quot;dssd&quot;   , {200 , 0., 20000.}},
+  {&quot;default&quot;, {200 , 0., 20000.}}
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Detectors.hpp" line="197" column="29" bodyfile="lib/Classes/Detectors.hpp" bodystart="197" bodyend="-1"/>
+        <referencedby refid="class_detectors_1a4cc1eacca959595eb53a16b75f2d65d8" compoundref="_detectors_8hpp" startline="150" endline="155">energyBidimBin</referencedby>
+        <referencedby refid="class_detectors_1abb012a70535ce52a84340d656a75252f" compoundref="_detectors_8hpp" startline="162" endline="162">getBidimBin</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_detectors_1af47d4b9af7b3f9e698b3e0b63a8b77eb" prot="protected" static="yes" mutable="no">
+        <type>std::unordered_map&lt; <ref refid="_detectors_8hpp_1a7ea6a1daded60b9200989100a41bbc3a" kindref="member">dType</ref>, <ref refid="struct_t_h_binning" kindref="compound">THBinning</ref> &gt;</type>
+        <definition>std::unordered_map&lt; dType, THBinning &gt; Detectors::energy_bins</definition>
+        <argsstring></argsstring>
+        <name>energy_bins</name>
+        <initializer>= 
+{
+  {&quot;ge&quot;     , {10000, 0., 10000.}},
+  {&quot;bgo&quot;    , {1000 , 0., 10000.}},
+  {&quot;labr&quot;   , {2000 , 0., 10000.}},
+  {&quot;paris&quot;  , {2000 , 0., 10000.}},
+  {&quot;eden&quot;   , {1000 ,-2., 2.    }},
+  {&quot;dssd&quot;   , {1000 , 0., 20000.}},
+  {&quot;default&quot;, {1000 , 0., 50000.}}
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Detectors.hpp" line="195" column="29" bodyfile="lib/Classes/Detectors.hpp" bodystart="195" bodyend="-1"/>
+        <referencedby refid="class_detectors_1aaadeec0d94fd7daea1b8e4c9d861fbde" compoundref="_detectors_8hpp" startline="142" endline="147">energyBin</referencedby>
+        <referencedby refid="class_detectors_1ae1ead00f89e7fcb96cefa082f9b4e290" compoundref="_detectors_8hpp" startline="160" endline="160">getEnergyBin</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_detectors_1a2990dd023e93c1e50343aa47b94453a0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto Detectors::begin</definition>
+        <argsstring>()</argsstring>
+        <name>begin</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Detectors.hpp" line="80" column="8" bodyfile="lib/Classes/Detectors.hpp" bodystart="80" bodyend="80"/>
+        <references refid="class_detectors_1a6994304445c6fc6137346690683b56ec" compoundref="_detectors_8hpp" startline="185">m_list</references>
+      </memberdef>
+      <memberdef kind="function" id="class_detectors_1a9b89d5cf2dbdf1e56b6703cfcbc49547" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto Detectors::begin</definition>
+        <argsstring>() const</argsstring>
+        <name>begin</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Detectors.hpp" line="83" column="8" bodyfile="lib/Classes/Detectors.hpp" bodystart="83" bodyend="83"/>
+        <references refid="class_detectors_1a6994304445c6fc6137346690683b56ec" compoundref="_detectors_8hpp" startline="185">m_list</references>
+      </memberdef>
+      <memberdef kind="function" id="class_detectors_1a4f3fbf890600aec5e75cdd943ec274d4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Detectors::Detectors</definition>
+        <argsstring>()</argsstring>
+        <name>Detectors</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Detectors.hpp" line="56" column="3" bodyfile="lib/Classes/Detectors.hpp" bodystart="56" bodyend="56"/>
+      </memberdef>
+      <memberdef kind="function" id="class_detectors_1aa93345c742983ca53dfde026c8285893" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto Detectors::end</definition>
+        <argsstring>()</argsstring>
+        <name>end</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Detectors.hpp" line="81" column="8" bodyfile="lib/Classes/Detectors.hpp" bodystart="81" bodyend="81"/>
+        <references refid="class_detectors_1a6994304445c6fc6137346690683b56ec" compoundref="_detectors_8hpp" startline="185">m_list</references>
+      </memberdef>
+      <memberdef kind="function" id="class_detectors_1abca6e29645c33e041e8273845f6c6dd9" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto Detectors::end</definition>
+        <argsstring>() const</argsstring>
+        <name>end</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Detectors.hpp" line="84" column="8" bodyfile="lib/Classes/Detectors.hpp" bodystart="84" bodyend="84"/>
+        <references refid="class_detectors_1a6994304445c6fc6137346690683b56ec" compoundref="_detectors_8hpp" startline="185">m_list</references>
+      </memberdef>
+      <memberdef kind="function" id="class_detectors_1a47ae394beae7efa2fb8fa1a3c7f8427d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Detectors::exists</definition>
+        <argsstring>(Label const &amp;label)</argsstring>
+        <name>exists</name>
+        <param>
+          <type><ref refid="_hit_8hpp_1ab5dd24876acad09ec52c250c1668466c" kindref="member">Label</ref> const &amp;</type>
+          <declname>label</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Detectors.hpp" line="62" column="8" bodyfile="lib/Classes/Detectors.hpp" bodystart="62" bodyend="62"/>
+        <references refid="class_detectors_1a349500ec816bd7761de87c54b95000bc" compoundref="_detectors_8hpp" startline="100" endline="100">label</references>
+        <references refid="class_detectors_1a29d73ee6f748035ace066db47a923735" compoundref="_detectors_8hpp" startline="184">m_exists</references>
+        <referencedby refid="class_timeshifts_1a608d9443a15dd669920e10dd8baee23a" compoundref="_timeshifts_8hpp" startline="827" endline="926">Timeshifts::analyse</referencedby>
+        <referencedby refid="class_timeshifts_1a715283a5be42b86ca70b4e468ccb2931" compoundref="_timeshifts_8hpp" startline="213" endline="221">Timeshifts::CheckParameters</referencedby>
+        <referencedby refid="class_run_matrixator_1af360ec9f7686353b663ce0bdcfa3e2df" compoundref="_run_matrixator_8hpp" startline="313" endline="499">RunMatrixator::fillMatrixes</referencedby>
+        <referencedby refid="class_timeshifts_1a05ac31a6c49360d94eeff184dc896c6b" compoundref="_timeshifts_8hpp" startline="454" endline="490">Timeshifts::InitializeCorrected</referencedby>
+        <referencedby refid="class_timeshifts_1a40254b2aa53028b1b5c941ee1cb3833d" compoundref="_timeshifts_8hpp" startline="420" endline="452">Timeshifts::InitializeRaw</referencedby>
+        <referencedby refid="_calibration_8hpp_1abacd32722d973dc5cde6c73482b0e615" compoundref="_calibration_8hpp" startline="1203" endline="1211">operator&lt;&lt;</referencedby>
+        <referencedby refid="class_calibration_1ad6db2742477c8ac64787c6fe8a687aff" compoundref="_calibration_8hpp" startline="552" endline="850">Calibration::peakFinder</referencedby>
+        <referencedby refid="class_calibration_1a344dc3d6feab3580e859cc693c2fdd4a" compoundref="_calibration_8hpp" startline="1128" endline="1171">Calibration::verify</referencedby>
+        <referencedby refid="class_calibration_1a7e89a0c788e7ad97c2a9cea5e02ef3f2" compoundref="_calibration_8hpp" startline="1108" endline="1117">Calibration::writeData</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_detectors_1abb9cb0d9f8cc7e136ee0ed7f357ee42b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto const  &amp;</type>
+        <definition>auto const&amp; Detectors::file</definition>
+        <argsstring>()</argsstring>
+        <name>file</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Detectors.hpp" line="170" column="15" bodyfile="lib/Classes/Detectors.hpp" bodystart="170" bodyend="170"/>
+        <references refid="class_detectors_1a28bdd4905a9dd8f89bd74e992c2d5fbd" compoundref="_detectors_8hpp" startline="180">m_filename</references>
+      </memberdef>
+      <memberdef kind="function" id="class_detectors_1a215f3df7a89de48d67b832a3240bbfa6" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto const  &amp;</type>
+        <definition>auto const&amp; Detectors::file</definition>
+        <argsstring>() const</argsstring>
+        <name>file</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Detectors.hpp" line="171" column="15" bodyfile="lib/Classes/Detectors.hpp" bodystart="171" bodyend="171"/>
+        <references refid="class_detectors_1a28bdd4905a9dd8f89bd74e992c2d5fbd" compoundref="_detectors_8hpp" startline="180">m_filename</references>
+      </memberdef>
+      <memberdef kind="function" id="class_detectors_1ae0bd442e4f8fa32b23f890a3f25e595b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto const  &amp;</type>
+        <definition>auto const&amp; Detectors::get</definition>
+        <argsstring>() const</argsstring>
+        <name>get</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Detectors.hpp" line="86" column="15" bodyfile="lib/Classes/Detectors.hpp" bodystart="86" bodyend="86"/>
+        <references refid="class_detectors_1a6994304445c6fc6137346690683b56ec" compoundref="_detectors_8hpp" startline="185">m_list</references>
+      </memberdef>
+      <memberdef kind="function" id="class_detectors_1a67986c6e80a0ac1fc78539eff3d52e9e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto const  &amp;</type>
+        <definition>auto const&amp; Detectors::getExistsArray</definition>
+        <argsstring>() const</argsstring>
+        <name>getExistsArray</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Detectors.hpp" line="88" column="15" bodyfile="lib/Classes/Detectors.hpp" bodystart="88" bodyend="88"/>
+        <references refid="class_detectors_1a29d73ee6f748035ace066db47a923735" compoundref="_detectors_8hpp" startline="184">m_exists</references>
+      </memberdef>
+      <memberdef kind="function" id="class_detectors_1a538487678aa928ab2956e6fb40c90472" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto const  &amp;</type>
+        <definition>auto const&amp; Detectors::getLabel</definition>
+        <argsstring>(std::string const &amp;name)</argsstring>
+        <name>getLabel</name>
+        <param>
+          <type>std::string const &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Detectors.hpp" line="99" column="15" bodyfile="lib/Classes/Detectors.hpp" bodystart="99" bodyend="99"/>
+        <references refid="class_detectors_1a8b8f4313aeec18389d1213accb50b52d" compoundref="_detectors_8hpp" startline="188">m_labels_array</references>
+        <references refid="class_detectors_1afd00ee8a76386f7356a12858b1dd7c6b" compoundref="_detectors_8hpp" startline="124" endline="124">name</references>
+        <referencedby refid="class_calibration_1a7835b1d9192d2c9fa8dcd8efbceb8db3" compoundref="_calibration_8hpp" startline="419" endline="452">Calibration::loadRootHisto</referencedby>
+        <referencedby refid="class_timeshifts_1aa9f8bdcbeef03f8be872602e6c717d4d" compoundref="_timeshifts_8hpp" startline="1026" endline="1033">Timeshifts::setTimeReference</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_detectors_1aeadb2b9222dd4544d5035960befb2902" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto const  &amp;</type>
+        <definition>auto const&amp; Detectors::getLabelsArray</definition>
+        <argsstring>() const</argsstring>
+        <name>getLabelsArray</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Detectors.hpp" line="89" column="15" bodyfile="lib/Classes/Detectors.hpp" bodystart="89" bodyend="89"/>
+        <references refid="class_detectors_1a8b8f4313aeec18389d1213accb50b52d" compoundref="_detectors_8hpp" startline="188">m_labels_array</references>
+      </memberdef>
+      <memberdef kind="function" id="class_detectors_1a9f0298ea9621d3680607633908b1daff" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto const  &amp;</type>
+        <definition>auto const&amp; Detectors::getName</definition>
+        <argsstring>(Label const &amp;label)</argsstring>
+        <name>getName</name>
+        <param>
+          <type><ref refid="_hit_8hpp_1ab5dd24876acad09ec52c250c1668466c" kindref="member">Label</ref> const &amp;</type>
+          <declname>label</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Detectors.hpp" line="98" column="15" bodyfile="lib/Classes/Detectors.hpp" bodystart="98" bodyend="98"/>
+        <references refid="class_detectors_1a349500ec816bd7761de87c54b95000bc" compoundref="_detectors_8hpp" startline="100" endline="100">label</references>
+        <references refid="class_detectors_1a6994304445c6fc6137346690683b56ec" compoundref="_detectors_8hpp" startline="185">m_list</references>
+      </memberdef>
+      <memberdef kind="function" id="class_detectors_1a52d1ae2692c70d702883e5c1a637ce51" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto const  &amp;</type>
+        <definition>auto const&amp; Detectors::getTypeName</definition>
+        <argsstring>(int const &amp;type_i) const</argsstring>
+        <name>getTypeName</name>
+        <param>
+          <type>int const &amp;</type>
+          <declname>type_i</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Detectors.hpp" line="96" column="15" bodyfile="lib/Classes/Detectors.hpp" bodystart="96" bodyend="96"/>
+        <references refid="class_detectors_1a0e9964892db1d2dfdb3a8cbdd6c87aeb" compoundref="_detectors_8hpp" startline="186">m_types_ID</references>
+      </memberdef>
+      <memberdef kind="function" id="class_detectors_1a3c4f247022eb113c0371899060ea0199" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto const  &amp;</type>
+        <definition>auto const&amp; Detectors::index</definition>
+        <argsstring>(Label const &amp;label) const</argsstring>
+        <name>index</name>
+        <param>
+          <type><ref refid="_hit_8hpp_1ab5dd24876acad09ec52c250c1668466c" kindref="member">Label</ref> const &amp;</type>
+          <declname>label</declname>
+        </param>
+        <briefdescription>
+<para>Get the type index of the detector. Each type of detector has its own indexing system if you have 3 Germaniums, the Ge indexes ranges from 0 to 2) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Detectors.hpp" line="131" column="15" bodyfile="lib/Classes/Detectors.hpp" bodystart="131" bodyend="131"/>
+        <references refid="class_detectors_1a349500ec816bd7761de87c54b95000bc" compoundref="_detectors_8hpp" startline="100" endline="100">label</references>
+        <references refid="_detectors_8hpp_1af8a018699aa5d8544bc4877f40463a5a">m_index</references>
+        <referencedby refid="class_run_matrixator_1af360ec9f7686353b663ce0bdcfa3e2df" compoundref="_run_matrixator_8hpp" startline="313" endline="499">RunMatrixator::fillMatrixes</referencedby>
+        <referencedby refid="class_detectors_1afc638e3f514370a477c6445efc11dfcb" compoundref="_detectors_8hpp" startline="127" endline="127">label</referencedby>
+        <referencedby refid="class_detectors_1a8d5c0f2d189ddda12ed3c36f13887cfd" compoundref="_detectors_8hpp" startline="271" endline="372">makeArrays</referencedby>
+        <referencedby refid="class_detectors_1afd00ee8a76386f7356a12858b1dd7c6b" compoundref="_detectors_8hpp" startline="124" endline="124">name</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_detectors_1afc638e3f514370a477c6445efc11dfcb" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto const  &amp;</type>
+        <definition>auto const&amp; Detectors::label</definition>
+        <argsstring>(dType const &amp;type, int const &amp;index)</argsstring>
+        <name>label</name>
+        <param>
+          <type><ref refid="_detectors_8hpp_1a7ea6a1daded60b9200989100a41bbc3a" kindref="member">dType</ref> const &amp;</type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type>int const &amp;</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+<para>Get the global label of a detector given its type and type index. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Detectors.hpp" line="127" column="15" bodyfile="lib/Classes/Detectors.hpp" bodystart="127" bodyend="127"/>
+        <references refid="class_detectors_1a3c4f247022eb113c0371899060ea0199" compoundref="_detectors_8hpp" startline="131" endline="131">index</references>
+        <references refid="class_detectors_1a5a5289db11cb3ad98c96c69f58f6a6d5" compoundref="_detectors_8hpp" startline="192">m_labels</references>
+        <references refid="class_detectors_1a0be56517035f1272af33392665b9ff1f" compoundref="_detectors_8hpp" startline="93" endline="93">type</references>
+      </memberdef>
+      <memberdef kind="function" id="class_detectors_1a349500ec816bd7761de87c54b95000bc" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto const  &amp;</type>
+        <definition>auto const&amp; Detectors::label</definition>
+        <argsstring>(std::string const &amp;name)</argsstring>
+        <name>label</name>
+        <param>
+          <type>std::string const &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Detectors.hpp" line="100" column="15" bodyfile="lib/Classes/Detectors.hpp" bodystart="100" bodyend="100"/>
+        <references refid="class_detectors_1a8b8f4313aeec18389d1213accb50b52d" compoundref="_detectors_8hpp" startline="188">m_labels_array</references>
+        <references refid="class_detectors_1afd00ee8a76386f7356a12858b1dd7c6b" compoundref="_detectors_8hpp" startline="124" endline="124">name</references>
+        <referencedby refid="class_detectors_1a47ae394beae7efa2fb8fa1a3c7f8427d" compoundref="_detectors_8hpp" startline="62" endline="62">exists</referencedby>
+        <referencedby refid="class_detectors_1a9f0298ea9621d3680607633908b1daff" compoundref="_detectors_8hpp" startline="98" endline="98">getName</referencedby>
+        <referencedby refid="class_detectors_1a3c4f247022eb113c0371899060ea0199" compoundref="_detectors_8hpp" startline="131" endline="131">index</referencedby>
+        <referencedby refid="struct_calibration_1_1histograms_1a911cfd2064bd94694cd0731aa6afccfa" compoundref="_calibration_8hpp" startline="330" endline="372">Calibration::histograms::Initialize</referencedby>
+        <referencedby refid="class_run_matrixator_1ad32109c5c279f520ce19602340aa2293" compoundref="_run_matrixator_8hpp" startline="152" endline="239">RunMatrixator::Initialize</referencedby>
+        <referencedby refid="class_detectors_1a8d5c0f2d189ddda12ed3c36f13887cfd" compoundref="_detectors_8hpp" startline="271" endline="372">makeArrays</referencedby>
+        <referencedby refid="class_detectors_1a93874c5bc3918096ad880329b89cd632" compoundref="_detectors_8hpp" startline="105" endline="105">operator[]</referencedby>
+        <referencedby refid="class_detectors_1a3d5631f8fd2770b6b3a2a178130519ad" compoundref="_detectors_8hpp" startline="220" endline="269">readFile</referencedby>
+        <referencedby refid="class_detectors_1a0be56517035f1272af33392665b9ff1f" compoundref="_detectors_8hpp" startline="93" endline="93">type</referencedby>
+        <referencedby refid="class_detectors_1a8bde22f3796788ad458127147fd3a5d2" compoundref="_detectors_8hpp" startline="95" endline="95">typeIndex</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_detectors_1abdba5d8991ded8844de7900d8e64d788" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto const  &amp;</type>
+        <definition>auto const&amp; Detectors::labels</definition>
+        <argsstring>() const</argsstring>
+        <name>labels</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Detectors.hpp" line="90" column="15" bodyfile="lib/Classes/Detectors.hpp" bodystart="90" bodyend="90"/>
+        <references refid="class_detectors_1a8b8f4313aeec18389d1213accb50b52d" compoundref="_detectors_8hpp" startline="188">m_labels_array</references>
+      </memberdef>
+      <memberdef kind="function" id="class_detectors_1aae4bbbd3eb0f515868e4160a7091beef" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto const  &amp;</type>
+        <definition>auto const&amp; Detectors::list</definition>
+        <argsstring>() const</argsstring>
+        <name>list</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Detectors.hpp" line="87" column="15" bodyfile="lib/Classes/Detectors.hpp" bodystart="87" bodyend="87"/>
+        <references refid="class_detectors_1a6994304445c6fc6137346690683b56ec" compoundref="_detectors_8hpp" startline="185">m_list</references>
+      </memberdef>
+      <memberdef kind="function" id="class_detectors_1a03f6e9974f958b86ddbbc4670d0209a2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Detectors::load</definition>
+        <argsstring>(std::string const &amp;filename)</argsstring>
+        <name>load</name>
+        <param>
+          <type>std::string const &amp;</type>
+          <declname>filename</declname>
+        </param>
+        <briefdescription>
+<para>Reads the file and extracts the list of detectors, then fills the lookup tables. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Detectors.hpp" line="65" column="8" bodyfile="lib/Classes/Detectors.hpp" bodystart="214" bodyend="218"/>
+        <references refid="class_detectors_1a8d5c0f2d189ddda12ed3c36f13887cfd" compoundref="_detectors_8hpp" startline="271" endline="372">makeArrays</references>
+        <references refid="class_detectors_1a3d5631f8fd2770b6b3a2a178130519ad" compoundref="_detectors_8hpp" startline="220" endline="269">readFile</references>
+        <referencedby refid="class_clover_spectra_1a353ec66774413feefb33a784ce2159cf" compoundref="_clover_spectra_8hpp" startline="114" endline="145">CloverSpectra::Initialize</referencedby>
+        <referencedby refid="class_faster2_root_1ad30ccf937150bbd3504ec3a354b76c8f" compoundref="_faster2_root_8hpp" startline="209" endline="263">Faster2Root::load</referencedby>
+        <referencedby refid="class_faster2_histo_1a72f8004ae550c02db09791b810c0252d" compoundref="_faster2_histo_8hpp" startline="88" endline="121">Faster2Histo::load</referencedby>
+        <referencedby refid="class_detectors_1a0aa2791c5f5b7133fd5816d2f4dc0b56" compoundref="_detectors_8hpp" startline="102" endline="102">operator=</referencedby>
+        <referencedby refid="class_near_line_1a3280d6187c79a0aaf4f23b97fe3089ee" compoundref="_near_line_8hpp" startline="40" endline="64">NearLine::readParam</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_detectors_1a8d5c0f2d189ddda12ed3c36f13887cfd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Detectors::makeArrays</definition>
+        <argsstring>()</argsstring>
+        <name>makeArrays</name>
+        <briefdescription>
+<para>Fills the lookup tables. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Detectors.hpp" line="71" column="8" bodyfile="lib/Classes/Detectors.hpp" bodystart="271" bodyend="372"/>
+        <references refid="_detectors_8hpp_1aa4d7f26a632b3df166ad7a08cad05af1">clover_pos</references>
+        <references refid="_detectors_8hpp_1adc256156b68f8dd6b9f2c2da57808bd3">compressedLabel</references>
+        <references refid="class_detectors_1a3c4f247022eb113c0371899060ea0199" compoundref="_detectors_8hpp" startline="131" endline="131">index</references>
+        <references refid="_detectors_8hpp_1a4e969925c521d2b624de9829460bf419">isBack</references>
+        <references refid="_detectors_8hpp_1acad86c343cb1a6d3f382c2468415cc8a">isBGO</references>
+        <references refid="_detectors_8hpp_1a7f34eb1e6f5368d8eda70a8558cc971e">isClover</references>
+        <references refid="_detectors_8hpp_1a3148345147f51e96aaa73e5d9f8e9d93">isDSSD</references>
+        <references refid="_detectors_8hpp_1acb7c68db854de8244a7d8149cba30a11">isEden</references>
+        <references refid="_detectors_8hpp_1aa4101394fbd7e5aeb24813175aeb4056">isFront</references>
+        <references refid="_detectors_8hpp_1a5da74af4e038f2a435565e2e93a6831e">isGe</references>
+        <references refid="_detectors_8hpp_1ac1f4e8d98df1dbbcb0c6ccf4a7b9a538">isLaBr3</references>
+        <references refid="_detectors_8hpp_1a82c5910e3b4f178c276c8b888c5ac162">isParis</references>
+        <references refid="_detectors_8hpp_1ae7667a7434fc704d9dcaf6d5e6bd8e39">isRF</references>
+        <references refid="_detectors_8hpp_1a256ea354de5d7f81049eaf74528626b7">isRing</references>
+        <references refid="_detectors_8hpp_1a401c5e7f43ae309c8fcd39c977104f3e">isS1</references>
+        <references refid="_detectors_8hpp_1a2d41f8a0901b30f33b83df128512fc4f">isS2</references>
+        <references refid="_detectors_8hpp_1adee12970e5a76c075d5b98b5c098b22a">isSector</references>
+        <references refid="class_detectors_1a349500ec816bd7761de87c54b95000bc" compoundref="_detectors_8hpp" startline="100" endline="100">label</references>
+        <references refid="_detectors_8hpp_1adccbc8332a89f48a35baea4a37255e2c">labelToClover</references>
+        <references refid="class_detectors_1a29d73ee6f748035ace066db47a923735" compoundref="_detectors_8hpp" startline="184">m_exists</references>
+        <references refid="_detectors_8hpp_1af8a018699aa5d8544bc4877f40463a5a">m_index</references>
+        <references refid="class_detectors_1a5a5289db11cb3ad98c96c69f58f6a6d5" compoundref="_detectors_8hpp" startline="192">m_labels</references>
+        <references refid="class_detectors_1a6994304445c6fc6137346690683b56ec" compoundref="_detectors_8hpp" startline="185">m_list</references>
+        <references refid="class_detectors_1a76926048c17f155fc444aab17233e0f8" compoundref="_detectors_8hpp" startline="177">m_loaded</references>
+        <references refid="class_detectors_1a5063cdef991cb6ddbb36be3f55d50e40" compoundref="_detectors_8hpp" startline="191">m_names</references>
+        <references refid="class_detectors_1aa765faf4ef9745156ccb29d616ff3860" compoundref="_detectors_8hpp" startline="179">m_nb_detectors</references>
+        <references refid="class_detectors_1a661090e1c43cb00b366d7a5d642de879" compoundref="_detectors_8hpp" startline="190">m_type_counter</references>
+        <references refid="class_detectors_1a5677eaffae4eea104f04c3f85e2c5fbe" compoundref="_detectors_8hpp" startline="183">m_types</references>
+        <references refid="class_detectors_1a0e9964892db1d2dfdb3a8cbdd6c87aeb" compoundref="_detectors_8hpp" startline="186">m_types_ID</references>
+        <references refid="class_detectors_1acb3bb5bfbb60a5861b87ddc17c7466d8" compoundref="_detectors_8hpp" startline="189">m_types_index</references>
+        <references refid="string__functions_8hpp_1ab2c67e2ba68d5a42ce9a48dafdbba829" compoundref="string__functions_8hpp" startline="71" endline="81">replaceCharacter</references>
+        <references refid="class_detectors_1a1177661fb15c9825755925faf00c8398" compoundref="_detectors_8hpp" startline="74" endline="74">size</references>
+        <references refid="class_detectors_1a0be56517035f1272af33392665b9ff1f" compoundref="_detectors_8hpp" startline="93" endline="93">type</references>
+        <references refid="class_detectors_1a930c2b917e87154c1337ecf8551a3ab4" compoundref="_detectors_8hpp" startline="58">types_handled</references>
+        <references refid="lib_co_8hpp_1ade77d1f37b1311b3f80ce429a33fd226" compoundref="lib_co_8hpp" startline="101" endline="101">uchar_cast</references>
+        <referencedby refid="class_detectors_1a03f6e9974f958b86ddbbc4670d0209a2" compoundref="_detectors_8hpp" startline="214" endline="218">load</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_detectors_1afd00ee8a76386f7356a12858b1dd7c6b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto const  &amp;</type>
+        <definition>auto const&amp; Detectors::name</definition>
+        <argsstring>(dType const &amp;type, int const &amp;index)</argsstring>
+        <name>name</name>
+        <param>
+          <type><ref refid="_detectors_8hpp_1a7ea6a1daded60b9200989100a41bbc3a" kindref="member">dType</ref> const &amp;</type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type>int const &amp;</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+<para>Get the name of a detector given its type and type index. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Detectors.hpp" line="124" column="15" bodyfile="lib/Classes/Detectors.hpp" bodystart="124" bodyend="124"/>
+        <references refid="class_detectors_1a3c4f247022eb113c0371899060ea0199" compoundref="_detectors_8hpp" startline="131" endline="131">index</references>
+        <references refid="class_detectors_1a5063cdef991cb6ddbb36be3f55d50e40" compoundref="_detectors_8hpp" startline="191">m_names</references>
+        <references refid="class_detectors_1a0be56517035f1272af33392665b9ff1f" compoundref="_detectors_8hpp" startline="93" endline="93">type</references>
+        <referencedby refid="class_detectors_1a538487678aa928ab2956e6fb40c90472" compoundref="_detectors_8hpp" startline="99" endline="99">getLabel</referencedby>
+        <referencedby refid="struct_calibration_1_1histograms_1a911cfd2064bd94694cd0731aa6afccfa" compoundref="_calibration_8hpp" startline="330" endline="372">Calibration::histograms::Initialize</referencedby>
+        <referencedby refid="class_run_matrixator_1ad32109c5c279f520ce19602340aa2293" compoundref="_run_matrixator_8hpp" startline="152" endline="239">RunMatrixator::Initialize</referencedby>
+        <referencedby refid="class_detectors_1a349500ec816bd7761de87c54b95000bc" compoundref="_detectors_8hpp" startline="100" endline="100">label</referencedby>
+        <referencedby refid="class_detectors_1a9feeeb0d176405478ffc53b1eda6c9a8" compoundref="_detectors_8hpp" startline="108" endline="108">operator[]</referencedby>
+        <referencedby refid="class_detectors_1a3d5631f8fd2770b6b3a2a178130519ad" compoundref="_detectors_8hpp" startline="220" endline="269">readFile</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_detectors_1ae5e6ff02bf3d79da3f034f7404e0677c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto const  &amp;</type>
+        <definition>auto const&amp; Detectors::nbOfType</definition>
+        <argsstring>(dType const &amp;type)</argsstring>
+        <name>nbOfType</name>
+        <param>
+          <type><ref refid="_detectors_8hpp_1a7ea6a1daded60b9200989100a41bbc3a" kindref="member">dType</ref> const &amp;</type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+<para>Returns the number of detector of each type. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Detectors.hpp" line="117" column="15" bodyfile="lib/Classes/Detectors.hpp" bodystart="117" bodyend="121"/>
+        <references refid="string__functions_8hpp_1a03fb03d95885354ac3c329693588097b" compoundref="string__functions_8hpp" startline="113" endline="116">found</references>
+        <references refid="class_detectors_1a661090e1c43cb00b366d7a5d642de879" compoundref="_detectors_8hpp" startline="190">m_type_counter</references>
+        <references refid="class_detectors_1a5677eaffae4eea104f04c3f85e2c5fbe" compoundref="_detectors_8hpp" startline="183">m_types</references>
+        <references refid="lib_co_8hpp_1a6df2dcd4b1f61c75dc292942bc5ca74d" compoundref="lib_co_8hpp" startline="234" endline="234">throw_error</references>
+        <references refid="class_detectors_1a0be56517035f1272af33392665b9ff1f" compoundref="_detectors_8hpp" startline="93" endline="93">type</references>
+        <referencedby refid="struct_calibration_1_1histograms_1a911cfd2064bd94694cd0731aa6afccfa" compoundref="_calibration_8hpp" startline="330" endline="372">Calibration::histograms::Initialize</referencedby>
+        <referencedby refid="class_run_matrixator_1ad32109c5c279f520ce19602340aa2293" compoundref="_run_matrixator_8hpp" startline="152" endline="239">RunMatrixator::Initialize</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_detectors_1a24d220832c2f0a03a0d886e11f2c284c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto const</type>
+        <definition>auto const Detectors::nbTypes</definition>
+        <argsstring>()</argsstring>
+        <name>nbTypes</name>
+        <briefdescription>
+<para>Returns the number of types in the ID file. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Detectors.hpp" line="114" column="14" bodyfile="lib/Classes/Detectors.hpp" bodystart="114" bodyend="114"/>
+        <references refid="class_detectors_1a0e9964892db1d2dfdb3a8cbdd6c87aeb" compoundref="_detectors_8hpp" startline="186">m_types_ID</references>
+        <referencedby refid="struct_calibration_1_1histograms_1a911cfd2064bd94694cd0731aa6afccfa" compoundref="_calibration_8hpp" startline="330" endline="372">Calibration::histograms::Initialize</referencedby>
+        <referencedby refid="class_run_matrixator_1ae9e13b02718812681204cad70679385d" compoundref="_run_matrixator_8hpp" startline="53" endline="57">RunMatrixator::initialize_dontMatrixate</referencedby>
+        <referencedby refid="class_calibration_1a344dc3d6feab3580e859cc693c2fdd4a" compoundref="_calibration_8hpp" startline="1128" endline="1171">Calibration::verify</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_detectors_1a4d20a642176613274e1b8a42f7a0bf01" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto const  &amp;</type>
+        <definition>auto const&amp; Detectors::number</definition>
+        <argsstring>()</argsstring>
+        <name>number</name>
+        <briefdescription>
+<para>Return the number of detectors. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Detectors.hpp" line="77" column="15" bodyfile="lib/Classes/Detectors.hpp" bodystart="77" bodyend="77"/>
+        <references refid="class_detectors_1aa765faf4ef9745156ccb29d616ff3860" compoundref="_detectors_8hpp" startline="179">m_nb_detectors</references>
+      </memberdef>
+      <memberdef kind="function" id="class_detectors_1ab18d3d10214de7727199f9090fdde164" prot="public" static="no" const="yes" explicit="no" inline="yes" refqual="lvalue" virt="non-virtual">
+        <type></type>
+        <definition>Detectors::operator bool</definition>
+        <argsstring>() const &amp;</argsstring>
+        <name>operator bool</name>
+        <briefdescription>
+<para>Returns true only of the detectors ID file has been loaded successfully. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Detectors.hpp" line="111" column="3" bodyfile="lib/Classes/Detectors.hpp" bodystart="111" bodyend="111"/>
+        <references refid="class_detectors_1a601c91cb6246165a623dd99eb6c4bdc3" compoundref="_detectors_8hpp" startline="176">m_ok</references>
+      </memberdef>
+      <memberdef kind="function" id="class_detectors_1a0aa2791c5f5b7133fd5816d2f4dc0b56" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Detectors::operator=</definition>
+        <argsstring>(std::string const &amp;filename)</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>std::string const &amp;</type>
+          <declname>filename</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Detectors.hpp" line="102" column="8" bodyfile="lib/Classes/Detectors.hpp" bodystart="102" bodyend="102"/>
+        <references refid="class_detectors_1a03f6e9974f958b86ddbbc4670d0209a2" compoundref="_detectors_8hpp" startline="214" endline="218">load</references>
+      </memberdef>
+      <memberdef kind="function" id="class_detectors_1a93874c5bc3918096ad880329b89cd632" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto const  &amp;</type>
+        <definition>auto const&amp; Detectors::operator[]</definition>
+        <argsstring>(Label const &amp;label) const</argsstring>
+        <name>operator[]</name>
+        <param>
+          <type><ref refid="_hit_8hpp_1ab5dd24876acad09ec52c250c1668466c" kindref="member">Label</ref> const &amp;</type>
+          <declname>label</declname>
+        </param>
+        <briefdescription>
+<para>Extracts the name of the detector given its global label. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Detectors.hpp" line="105" column="15" bodyfile="lib/Classes/Detectors.hpp" bodystart="105" bodyend="105"/>
+        <references refid="class_detectors_1a349500ec816bd7761de87c54b95000bc" compoundref="_detectors_8hpp" startline="100" endline="100">label</references>
+        <references refid="class_detectors_1a6994304445c6fc6137346690683b56ec" compoundref="_detectors_8hpp" startline="185">m_list</references>
+      </memberdef>
+      <memberdef kind="function" id="class_detectors_1a9feeeb0d176405478ffc53b1eda6c9a8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto const  &amp;</type>
+        <definition>auto const&amp; Detectors::operator[]</definition>
+        <argsstring>(std::string const &amp;name)</argsstring>
+        <name>operator[]</name>
+        <param>
+          <type>std::string const &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>Extracts the global label given the detector&apos;s name. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Detectors.hpp" line="108" column="15" bodyfile="lib/Classes/Detectors.hpp" bodystart="108" bodyend="108"/>
+        <references refid="class_detectors_1a8b8f4313aeec18389d1213accb50b52d" compoundref="_detectors_8hpp" startline="188">m_labels_array</references>
+        <references refid="class_detectors_1afd00ee8a76386f7356a12858b1dd7c6b" compoundref="_detectors_8hpp" startline="124" endline="124">name</references>
+      </memberdef>
+      <memberdef kind="function" id="class_detectors_1a66378b2d41c18a11de52e9590380028f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Detectors::Print</definition>
+        <argsstring>()</argsstring>
+        <name>Print</name>
+        <briefdescription>
+<para>Prints out the list of labels. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Detectors.hpp" line="166" column="8" bodyfile="lib/Classes/Detectors.hpp" bodystart="166" bodyend="166"/>
+      </memberdef>
+      <memberdef kind="function" id="class_detectors_1a3d5631f8fd2770b6b3a2a178130519ad" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Detectors::readFile</definition>
+        <argsstring>(std::string const &amp;file)</argsstring>
+        <name>readFile</name>
+        <param>
+          <type>std::string const &amp;</type>
+          <declname>file</declname>
+        </param>
+        <briefdescription>
+<para>Reads the file and extracts the list of detectors. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Detectors.hpp" line="68" column="8" bodyfile="lib/Classes/Detectors.hpp" bodystart="220" bodyend="269"/>
+        <references refid="files__functions_8hpp_1afd584978228fac5fae283c12837378dd" compoundref="files__functions_8hpp" startline="30" endline="30">file_is_empty</references>
+        <references refid="class_detectors_1a349500ec816bd7761de87c54b95000bc" compoundref="_detectors_8hpp" startline="100" endline="100">label</references>
+        <references refid="class_detectors_1a29d73ee6f748035ace066db47a923735" compoundref="_detectors_8hpp" startline="184">m_exists</references>
+        <references refid="class_detectors_1a28bdd4905a9dd8f89bd74e992c2d5fbd" compoundref="_detectors_8hpp" startline="180">m_filename</references>
+        <references refid="class_detectors_1a8b8f4313aeec18389d1213accb50b52d" compoundref="_detectors_8hpp" startline="188">m_labels_array</references>
+        <references refid="class_detectors_1a6994304445c6fc6137346690683b56ec" compoundref="_detectors_8hpp" startline="185">m_list</references>
+        <references refid="class_detectors_1a76926048c17f155fc444aab17233e0f8" compoundref="_detectors_8hpp" startline="177">m_loaded</references>
+        <references refid="class_detectors_1a601c91cb6246165a623dd99eb6c4bdc3" compoundref="_detectors_8hpp" startline="176">m_ok</references>
+        <references refid="class_detectors_1afd00ee8a76386f7356a12858b1dd7c6b" compoundref="_detectors_8hpp" startline="124" endline="124">name</references>
+        <references refid="_histogramor_8hpp_1ab48a2fa7184e6354788989602c8c8c29">print</references>
+        <references refid="class_bools_1ab34b97e65a4a23ae25a8b6f746c37a9d" compoundref="lib_co_8hpp" startline="192" endline="210">Bools::resize</references>
+        <references refid="class_detectors_1a1177661fb15c9825755925faf00c8398" compoundref="_detectors_8hpp" startline="74" endline="74">size</references>
+        <referencedby refid="class_detectors_1a03f6e9974f958b86ddbbc4670d0209a2" compoundref="_detectors_8hpp" startline="214" endline="218">load</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_detectors_1af2bb20ee60f504df326b87e9ebbaef30" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Detectors::resize</definition>
+        <argsstring>(ushort const &amp;new_size)</argsstring>
+        <name>resize</name>
+        <param>
+          <type><ref refid="lib_co_8hpp_1ad29aff8b0f7fde4ef0291331012e596a" kindref="member">ushort</ref> const &amp;</type>
+          <declname>new_size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Detectors.hpp" line="168" column="8" bodyfile="lib/Classes/Detectors.hpp" bodystart="200" bodyend="206"/>
+        <references refid="class_detectors_1a29d73ee6f748035ace066db47a923735" compoundref="_detectors_8hpp" startline="184">m_exists</references>
+        <references refid="class_detectors_1a6994304445c6fc6137346690683b56ec" compoundref="_detectors_8hpp" startline="185">m_list</references>
+        <references refid="class_detectors_1a5677eaffae4eea104f04c3f85e2c5fbe" compoundref="_detectors_8hpp" startline="183">m_types</references>
+        <references refid="_histogramor_8hpp_1ab48a2fa7184e6354788989602c8c8c29">print</references>
+        <references refid="class_bools_1ab34b97e65a4a23ae25a8b6f746c37a9d" compoundref="lib_co_8hpp" startline="192" endline="210">Bools::resize</references>
+        <referencedby refid="class_calibration_1a2d2a0d6276fc2c8a4b60c3801ccc16a9" compoundref="_calibration_8hpp" startline="1016" endline="1063">Calibration::load</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_detectors_1a1177661fb15c9825755925faf00c8398" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto const</type>
+        <definition>auto const Detectors::size</definition>
+        <argsstring>() const</argsstring>
+        <name>size</name>
+        <briefdescription>
+<para>Return the value of the maximum label, i.e. the size of the lookup tables. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Detectors.hpp" line="74" column="14" bodyfile="lib/Classes/Detectors.hpp" bodystart="74" bodyend="74"/>
+        <references refid="_hit_8hpp_1af181231d97866aa957e8fe8bd67f7f64" compoundref="_hit_8hpp" startline="38" endline="38">Label_cast</references>
+        <references refid="class_detectors_1a6994304445c6fc6137346690683b56ec" compoundref="_detectors_8hpp" startline="185">m_list</references>
+        <referencedby refid="class_timeshifts_1a608d9443a15dd669920e10dd8baee23a" compoundref="_timeshifts_8hpp" startline="827" endline="926">Timeshifts::analyse</referencedby>
+        <referencedby refid="class_calibration_1aea14328cc8a0ab1cf559cd07f8c6a065" compoundref="_calibration_8hpp" startline="852" endline="910">Calibration::fitCalibration</referencedby>
+        <referencedby refid="struct_calibration_1_1histograms_1a911cfd2064bd94694cd0731aa6afccfa" compoundref="_calibration_8hpp" startline="330" endline="372">Calibration::histograms::Initialize</referencedby>
+        <referencedby refid="class_timeshifts_1a0753528955e94c43043cd7d68193f960" compoundref="_timeshifts_8hpp" startline="492" endline="524">Timeshifts::Initialize</referencedby>
+        <referencedby refid="class_run_matrixator_1ae9e13b02718812681204cad70679385d" compoundref="_run_matrixator_8hpp" startline="53" endline="57">RunMatrixator::initialize_dontMatrixate</referencedby>
+        <referencedby refid="class_timeshifts_1a05ac31a6c49360d94eeff184dc896c6b" compoundref="_timeshifts_8hpp" startline="454" endline="490">Timeshifts::InitializeCorrected</referencedby>
+        <referencedby refid="class_timeshifts_1a40254b2aa53028b1b5c941ee1cb3833d" compoundref="_timeshifts_8hpp" startline="420" endline="452">Timeshifts::InitializeRaw</referencedby>
+        <referencedby refid="class_calibration_1a2d2a0d6276fc2c8a4b60c3801ccc16a9" compoundref="_calibration_8hpp" startline="1016" endline="1063">Calibration::load</referencedby>
+        <referencedby refid="class_timeshifts_1a28163efe8d487669cf50d5f6e1060d71" compoundref="_timeshifts_8hpp" startline="348" endline="387">Timeshifts::load</referencedby>
+        <referencedby refid="class_detectors_1a8d5c0f2d189ddda12ed3c36f13887cfd" compoundref="_detectors_8hpp" startline="271" endline="372">makeArrays</referencedby>
+        <referencedby refid="_calibration_8hpp_1abacd32722d973dc5cde6c73482b0e615" compoundref="_calibration_8hpp" startline="1203" endline="1211">operator&lt;&lt;</referencedby>
+        <referencedby refid="class_calibration_1ad6db2742477c8ac64787c6fe8a687aff" compoundref="_calibration_8hpp" startline="552" endline="850">Calibration::peakFinder</referencedby>
+        <referencedby refid="class_detectors_1a3d5631f8fd2770b6b3a2a178130519ad" compoundref="_detectors_8hpp" startline="220" endline="269">readFile</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_detectors_1a0be56517035f1272af33392665b9ff1f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto const  &amp;</type>
+        <definition>auto const&amp; Detectors::type</definition>
+        <argsstring>(Label const &amp;label)</argsstring>
+        <name>type</name>
+        <param>
+          <type><ref refid="_hit_8hpp_1ab5dd24876acad09ec52c250c1668466c" kindref="member">Label</ref> const &amp;</type>
+          <declname>label</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Detectors.hpp" line="93" column="15" bodyfile="lib/Classes/Detectors.hpp" bodystart="93" bodyend="93"/>
+        <references refid="class_detectors_1a349500ec816bd7761de87c54b95000bc" compoundref="_detectors_8hpp" startline="100" endline="100">label</references>
+        <references refid="class_detectors_1a5677eaffae4eea104f04c3f85e2c5fbe" compoundref="_detectors_8hpp" startline="183">m_types</references>
+        <referencedby refid="class_detectors_1af54374260cdfa1cd60b6364f07f882b4" compoundref="_detectors_8hpp" startline="134" endline="139">ADCBin</referencedby>
+        <referencedby refid="class_timeshifts_1a608d9443a15dd669920e10dd8baee23a" compoundref="_timeshifts_8hpp" startline="827" endline="926">Timeshifts::analyse</referencedby>
+        <referencedby refid="class_detectors_1a4cc1eacca959595eb53a16b75f2d65d8" compoundref="_detectors_8hpp" startline="150" endline="155">energyBidimBin</referencedby>
+        <referencedby refid="class_detectors_1aaadeec0d94fd7daea1b8e4c9d861fbde" compoundref="_detectors_8hpp" startline="142" endline="147">energyBin</referencedby>
+        <referencedby refid="class_calibration_1ae62aaba8d0f0f77aecf89a5ad1e7605a" compoundref="_calibration_8hpp" startline="527" endline="544">Calibration::fillHisto</referencedby>
+        <referencedby refid="class_run_matrixator_1af360ec9f7686353b663ce0bdcfa3e2df" compoundref="_run_matrixator_8hpp" startline="313" endline="499">RunMatrixator::fillMatrixes</referencedby>
+        <referencedby refid="class_timeshifts_1a05ac31a6c49360d94eeff184dc896c6b" compoundref="_timeshifts_8hpp" startline="454" endline="490">Timeshifts::InitializeCorrected</referencedby>
+        <referencedby refid="class_timeshifts_1a40254b2aa53028b1b5c941ee1cb3833d" compoundref="_timeshifts_8hpp" startline="420" endline="452">Timeshifts::InitializeRaw</referencedby>
+        <referencedby refid="class_detectors_1afc638e3f514370a477c6445efc11dfcb" compoundref="_detectors_8hpp" startline="127" endline="127">label</referencedby>
+        <referencedby refid="class_detectors_1a8d5c0f2d189ddda12ed3c36f13887cfd" compoundref="_detectors_8hpp" startline="271" endline="372">makeArrays</referencedby>
+        <referencedby refid="class_detectors_1afd00ee8a76386f7356a12858b1dd7c6b" compoundref="_detectors_8hpp" startline="124" endline="124">name</referencedby>
+        <referencedby refid="class_detectors_1ae5e6ff02bf3d79da3f034f7404e0677c" compoundref="_detectors_8hpp" startline="117" endline="121">nbOfType</referencedby>
+        <referencedby refid="class_calibration_1ad6db2742477c8ac64787c6fe8a687aff" compoundref="_calibration_8hpp" startline="552" endline="850">Calibration::peakFinder</referencedby>
+        <referencedby refid="class_detectors_1ab4d5e6cc24173a65a35788ba7c680264" compoundref="_detectors_8hpp" startline="94" endline="94">typeIndex</referencedby>
+        <referencedby refid="class_calibration_1a344dc3d6feab3580e859cc693c2fdd4a" compoundref="_calibration_8hpp" startline="1128" endline="1171">Calibration::verify</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_detectors_1ab4d5e6cc24173a65a35788ba7c680264" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto const  &amp;</type>
+        <definition>auto const&amp; Detectors::typeIndex</definition>
+        <argsstring>(dType const &amp;type)</argsstring>
+        <name>typeIndex</name>
+        <param>
+          <type><ref refid="_detectors_8hpp_1a7ea6a1daded60b9200989100a41bbc3a" kindref="member">dType</ref> const &amp;</type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Detectors.hpp" line="94" column="15" bodyfile="lib/Classes/Detectors.hpp" bodystart="94" bodyend="94"/>
+        <references refid="class_detectors_1acb3bb5bfbb60a5861b87ddc17c7466d8" compoundref="_detectors_8hpp" startline="189">m_types_index</references>
+        <references refid="class_detectors_1a0be56517035f1272af33392665b9ff1f" compoundref="_detectors_8hpp" startline="93" endline="93">type</references>
+        <referencedby refid="class_calibration_1ae62aaba8d0f0f77aecf89a5ad1e7605a" compoundref="_calibration_8hpp" startline="527" endline="544">Calibration::fillHisto</referencedby>
+        <referencedby refid="class_calibration_1afd14ef8f1b6cee6cf7abc10783ee318e" compoundref="_calibration_8hpp" startline="485" endline="525">Calibration::fillRootDataHisto</referencedby>
+        <referencedby refid="struct_calibration_1_1histograms_1a911cfd2064bd94694cd0731aa6afccfa" compoundref="_calibration_8hpp" startline="330" endline="372">Calibration::histograms::Initialize</referencedby>
+        <referencedby refid="class_calibration_1a344dc3d6feab3580e859cc693c2fdd4a" compoundref="_calibration_8hpp" startline="1128" endline="1171">Calibration::verify</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_detectors_1a8bde22f3796788ad458127147fd3a5d2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto const  &amp;</type>
+        <definition>auto const&amp; Detectors::typeIndex</definition>
+        <argsstring>(Label const &amp;label)</argsstring>
+        <name>typeIndex</name>
+        <param>
+          <type><ref refid="_hit_8hpp_1ab5dd24876acad09ec52c250c1668466c" kindref="member">Label</ref> const &amp;</type>
+          <declname>label</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Detectors.hpp" line="95" column="15" bodyfile="lib/Classes/Detectors.hpp" bodystart="95" bodyend="95"/>
+        <references refid="class_detectors_1a349500ec816bd7761de87c54b95000bc" compoundref="_detectors_8hpp" startline="100" endline="100">label</references>
+        <references refid="class_detectors_1acb3bb5bfbb60a5861b87ddc17c7466d8" compoundref="_detectors_8hpp" startline="189">m_types_index</references>
+        <references refid="class_detectors_1a0be56517035f1272af33392665b9ff1f" compoundref="_detectors_8hpp" startline="93" endline="93">type</references>
+      </memberdef>
+      <memberdef kind="function" id="class_detectors_1a6c368aa8fe9d985fd742371179718d71" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto const  &amp;</type>
+        <definition>auto const&amp; Detectors::types</definition>
+        <argsstring>() const</argsstring>
+        <name>types</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Detectors.hpp" line="91" column="15" bodyfile="lib/Classes/Detectors.hpp" bodystart="91" bodyend="91"/>
+        <references refid="class_detectors_1a0e9964892db1d2dfdb3a8cbdd6c87aeb" compoundref="_detectors_8hpp" startline="186">m_types_ID</references>
+        <referencedby refid="class_run_matrixator_1a1f6ba04bc894d68a6d72ccedf8367ad4" compoundref="_run_matrixator_8hpp" startline="59" endline="71">RunMatrixator::dontMatrixate</referencedby>
+        <referencedby refid="struct_calibration_1_1histograms_1a911cfd2064bd94694cd0731aa6afccfa" compoundref="_calibration_8hpp" startline="330" endline="372">Calibration::histograms::Initialize</referencedby>
+        <referencedby refid="class_run_matrixator_1ad32109c5c279f520ce19602340aa2293" compoundref="_run_matrixator_8hpp" startline="152" endline="239">RunMatrixator::Initialize</referencedby>
+        <referencedby refid="class_run_matrixator_1ae9e13b02718812681204cad70679385d" compoundref="_run_matrixator_8hpp" startline="53" endline="57">RunMatrixator::initialize_dontMatrixate</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_detectors_1ae462c1e1acd5b2dc7757715fd68c362d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto const  &amp;</type>
+        <definition>auto const&amp; Detectors::typesArray</definition>
+        <argsstring>() const</argsstring>
+        <name>typesArray</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Detectors.hpp" line="92" column="15" bodyfile="lib/Classes/Detectors.hpp" bodystart="92" bodyend="92"/>
+        <references refid="class_detectors_1a5677eaffae4eea104f04c3f85e2c5fbe" compoundref="_detectors_8hpp" startline="183">m_types</references>
+        <referencedby refid="class_run_matrixator_1a1f6ba04bc894d68a6d72ccedf8367ad4" compoundref="_run_matrixator_8hpp" startline="59" endline="71">RunMatrixator::dontMatrixate</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="class_detectors_1af54374260cdfa1cd60b6364f07f882b4" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto const  &amp;</type>
+        <definition>static auto const&amp; Detectors::ADCBin</definition>
+        <argsstring>(dType const &amp;type=&quot;&quot;)</argsstring>
+        <name>ADCBin</name>
+        <param>
+          <type><ref refid="_detectors_8hpp_1a7ea6a1daded60b9200989100a41bbc3a" kindref="member">dType</ref> const &amp;</type>
+          <declname>type</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <briefdescription>
+<para>Get the default ADC histogram binning for each type of detectors. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Detectors.hpp" line="134" column="22" bodyfile="lib/Classes/Detectors.hpp" bodystart="134" bodyend="139"/>
+        <references refid="class_detectors_1a244a6b586bda7fd0054a8217ed005019" compoundref="_detectors_8hpp" startline="196">ADC_bins</references>
+        <references refid="class_detectors_1a0be56517035f1272af33392665b9ff1f" compoundref="_detectors_8hpp" startline="93" endline="93">type</references>
+        <referencedby refid="struct_calibration_1_1histograms_1a911cfd2064bd94694cd0731aa6afccfa" compoundref="_calibration_8hpp" startline="330" endline="372">Calibration::histograms::Initialize</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_detectors_1a4cc1eacca959595eb53a16b75f2d65d8" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto const  &amp;</type>
+        <definition>static auto const&amp; Detectors::energyBidimBin</definition>
+        <argsstring>(dType const &amp;type=&quot;&quot;)</argsstring>
+        <name>energyBidimBin</name>
+        <param>
+          <type><ref refid="_detectors_8hpp_1a7ea6a1daded60b9200989100a41bbc3a" kindref="member">dType</ref> const &amp;</type>
+          <declname>type</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <briefdescription>
+<para>Get the default energy (keV) bidimensionnal histogram binning for each type of detectors. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Detectors.hpp" line="150" column="22" bodyfile="lib/Classes/Detectors.hpp" bodystart="150" bodyend="155"/>
+        <references refid="class_detectors_1a13bd00fc428ecb36ba850e09cc5e147c" compoundref="_detectors_8hpp" startline="197">energy_bidim_bins</references>
+        <references refid="class_detectors_1a0be56517035f1272af33392665b9ff1f" compoundref="_detectors_8hpp" startline="93" endline="93">type</references>
+        <referencedby refid="struct_calibration_1_1histograms_1a911cfd2064bd94694cd0731aa6afccfa" compoundref="_calibration_8hpp" startline="330" endline="372">Calibration::histograms::Initialize</referencedby>
+        <referencedby refid="class_run_matrixator_1ad32109c5c279f520ce19602340aa2293" compoundref="_run_matrixator_8hpp" startline="152" endline="239">RunMatrixator::Initialize</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_detectors_1aaadeec0d94fd7daea1b8e4c9d861fbde" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto const  &amp;</type>
+        <definition>static auto const&amp; Detectors::energyBin</definition>
+        <argsstring>(dType const &amp;type=&quot;&quot;)</argsstring>
+        <name>energyBin</name>
+        <param>
+          <type><ref refid="_detectors_8hpp_1a7ea6a1daded60b9200989100a41bbc3a" kindref="member">dType</ref> const &amp;</type>
+          <declname>type</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <briefdescription>
+<para>Get the default energy (keV) histogram binning for each type of detectors. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Detectors.hpp" line="142" column="22" bodyfile="lib/Classes/Detectors.hpp" bodystart="142" bodyend="147"/>
+        <references refid="class_detectors_1af47d4b9af7b3f9e698b3e0b63a8b77eb" compoundref="_detectors_8hpp" startline="195">energy_bins</references>
+        <references refid="class_detectors_1a0be56517035f1272af33392665b9ff1f" compoundref="_detectors_8hpp" startline="93" endline="93">type</references>
+        <referencedby refid="struct_calibration_1_1histograms_1a911cfd2064bd94694cd0731aa6afccfa" compoundref="_calibration_8hpp" startline="330" endline="372">Calibration::histograms::Initialize</referencedby>
+        <referencedby refid="class_run_matrixator_1ad32109c5c279f520ce19602340aa2293" compoundref="_run_matrixator_8hpp" startline="152" endline="239">RunMatrixator::Initialize</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_detectors_1aba567529b262d88913de6ccb05a71a99" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto &amp;</type>
+        <definition>static auto&amp; Detectors::getADCBin</definition>
+        <argsstring>()</argsstring>
+        <name>getADCBin</name>
+        <briefdescription>
+<para>Get the default energy (keV) bidimensionnal histogram binning for all types of detectors. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Detectors.hpp" line="158" column="16" bodyfile="lib/Classes/Detectors.hpp" bodystart="158" bodyend="158"/>
+        <references refid="class_detectors_1a244a6b586bda7fd0054a8217ed005019" compoundref="_detectors_8hpp" startline="196">ADC_bins</references>
+        <referencedby refid="struct_calibration_1_1histograms_1a8cf05daf9b9f1ee4ec9d1763acc2c307" compoundref="_calibration_8hpp" startline="374" endline="391">Calibration::histograms::setBins</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_detectors_1abb012a70535ce52a84340d656a75252f" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto &amp;</type>
+        <definition>static auto&amp; Detectors::getBidimBin</definition>
+        <argsstring>()</argsstring>
+        <name>getBidimBin</name>
+        <briefdescription>
+<para>Get the default energy (keV) bidimensionnal histogram binning for all types of detectors. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Detectors.hpp" line="162" column="16" bodyfile="lib/Classes/Detectors.hpp" bodystart="162" bodyend="162"/>
+        <references refid="class_detectors_1a13bd00fc428ecb36ba850e09cc5e147c" compoundref="_detectors_8hpp" startline="197">energy_bidim_bins</references>
+      </memberdef>
+      <memberdef kind="function" id="class_detectors_1ae1ead00f89e7fcb96cefa082f9b4e290" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto &amp;</type>
+        <definition>static auto&amp; Detectors::getEnergyBin</definition>
+        <argsstring>()</argsstring>
+        <name>getEnergyBin</name>
+        <briefdescription>
+<para>Get the default energy (keV) bidimensionnal histogram binning for all types of detectors. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Detectors.hpp" line="160" column="16" bodyfile="lib/Classes/Detectors.hpp" bodystart="160" bodyend="160"/>
+        <references refid="class_detectors_1af47d4b9af7b3f9e698b3e0b63a8b77eb" compoundref="_detectors_8hpp" startline="195">energy_bins</references>
+        <referencedby refid="struct_calibration_1_1histograms_1a8cf05daf9b9f1ee4ec9d1763acc2c307" compoundref="_calibration_8hpp" startline="374" endline="391">Calibration::histograms::setBins</referencedby>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Loads the ID file and fills lookup tables. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Many lookup tables are created : ... Detectors::index(Label label) : Returns the detector&apos;s index in its type. For instance, if there are 10 germaniums, and their labels ranges contiguously from 10 to 19, Detectors::index(12) = 2;</para>
+<para>Detectors::type(Label label) : Returns the detector&apos;s type knowing its label. Taking previous example, Detectors::type(25) = &quot;null&quot; if there are no detector above label = 19, and Detectors::type(13) = &quot;ge&quot;; </para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="2">
+        <label>Bools</label>
+        <link refid="class_bools"/>
+      </node>
+      <node id="1">
+        <label>Detectors</label>
+        <link refid="class_detectors"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>m_exists</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="lib/Classes/Detectors.hpp" line="52" column="1" bodyfile="lib/Classes/Detectors.hpp" bodystart="53" bodyend="198"/>
+    <listofallmembers>
+      <member refid="class_detectors_1a244a6b586bda7fd0054a8217ed005019" prot="protected" virt="non-virtual"><scope>Detectors</scope><name>ADC_bins</name></member>
+      <member refid="class_detectors_1af54374260cdfa1cd60b6364f07f882b4" prot="public" virt="non-virtual"><scope>Detectors</scope><name>ADCBin</name></member>
+      <member refid="class_detectors_1a2990dd023e93c1e50343aa47b94453a0" prot="public" virt="non-virtual"><scope>Detectors</scope><name>begin</name></member>
+      <member refid="class_detectors_1a9b89d5cf2dbdf1e56b6703cfcbc49547" prot="public" virt="non-virtual"><scope>Detectors</scope><name>begin</name></member>
+      <member refid="class_detectors_1a4f3fbf890600aec5e75cdd943ec274d4" prot="public" virt="non-virtual"><scope>Detectors</scope><name>Detectors</name></member>
+      <member refid="class_detectors_1aa93345c742983ca53dfde026c8285893" prot="public" virt="non-virtual"><scope>Detectors</scope><name>end</name></member>
+      <member refid="class_detectors_1abca6e29645c33e041e8273845f6c6dd9" prot="public" virt="non-virtual"><scope>Detectors</scope><name>end</name></member>
+      <member refid="class_detectors_1a13bd00fc428ecb36ba850e09cc5e147c" prot="protected" virt="non-virtual"><scope>Detectors</scope><name>energy_bidim_bins</name></member>
+      <member refid="class_detectors_1af47d4b9af7b3f9e698b3e0b63a8b77eb" prot="protected" virt="non-virtual"><scope>Detectors</scope><name>energy_bins</name></member>
+      <member refid="class_detectors_1a4cc1eacca959595eb53a16b75f2d65d8" prot="public" virt="non-virtual"><scope>Detectors</scope><name>energyBidimBin</name></member>
+      <member refid="class_detectors_1aaadeec0d94fd7daea1b8e4c9d861fbde" prot="public" virt="non-virtual"><scope>Detectors</scope><name>energyBin</name></member>
+      <member refid="class_detectors_1a47ae394beae7efa2fb8fa1a3c7f8427d" prot="public" virt="non-virtual"><scope>Detectors</scope><name>exists</name></member>
+      <member refid="class_detectors_1abb9cb0d9f8cc7e136ee0ed7f357ee42b" prot="public" virt="non-virtual"><scope>Detectors</scope><name>file</name></member>
+      <member refid="class_detectors_1a215f3df7a89de48d67b832a3240bbfa6" prot="public" virt="non-virtual"><scope>Detectors</scope><name>file</name></member>
+      <member refid="class_detectors_1ae0bd442e4f8fa32b23f890a3f25e595b" prot="public" virt="non-virtual"><scope>Detectors</scope><name>get</name></member>
+      <member refid="class_detectors_1aba567529b262d88913de6ccb05a71a99" prot="public" virt="non-virtual"><scope>Detectors</scope><name>getADCBin</name></member>
+      <member refid="class_detectors_1abb012a70535ce52a84340d656a75252f" prot="public" virt="non-virtual"><scope>Detectors</scope><name>getBidimBin</name></member>
+      <member refid="class_detectors_1ae1ead00f89e7fcb96cefa082f9b4e290" prot="public" virt="non-virtual"><scope>Detectors</scope><name>getEnergyBin</name></member>
+      <member refid="class_detectors_1a67986c6e80a0ac1fc78539eff3d52e9e" prot="public" virt="non-virtual"><scope>Detectors</scope><name>getExistsArray</name></member>
+      <member refid="class_detectors_1a538487678aa928ab2956e6fb40c90472" prot="public" virt="non-virtual"><scope>Detectors</scope><name>getLabel</name></member>
+      <member refid="class_detectors_1aeadb2b9222dd4544d5035960befb2902" prot="public" virt="non-virtual"><scope>Detectors</scope><name>getLabelsArray</name></member>
+      <member refid="class_detectors_1a9f0298ea9621d3680607633908b1daff" prot="public" virt="non-virtual"><scope>Detectors</scope><name>getName</name></member>
+      <member refid="class_detectors_1a52d1ae2692c70d702883e5c1a637ce51" prot="public" virt="non-virtual"><scope>Detectors</scope><name>getTypeName</name></member>
+      <member refid="class_detectors_1a3c4f247022eb113c0371899060ea0199" prot="public" virt="non-virtual"><scope>Detectors</scope><name>index</name></member>
+      <member refid="class_detectors_1a349500ec816bd7761de87c54b95000bc" prot="public" virt="non-virtual"><scope>Detectors</scope><name>label</name></member>
+      <member refid="class_detectors_1afc638e3f514370a477c6445efc11dfcb" prot="public" virt="non-virtual"><scope>Detectors</scope><name>label</name></member>
+      <member refid="class_detectors_1abdba5d8991ded8844de7900d8e64d788" prot="public" virt="non-virtual"><scope>Detectors</scope><name>labels</name></member>
+      <member refid="class_detectors_1aae4bbbd3eb0f515868e4160a7091beef" prot="public" virt="non-virtual"><scope>Detectors</scope><name>list</name></member>
+      <member refid="class_detectors_1a03f6e9974f958b86ddbbc4670d0209a2" prot="public" virt="non-virtual"><scope>Detectors</scope><name>load</name></member>
+      <member refid="class_detectors_1a29d73ee6f748035ace066db47a923735" prot="protected" virt="non-virtual"><scope>Detectors</scope><name>m_exists</name></member>
+      <member refid="class_detectors_1a28bdd4905a9dd8f89bd74e992c2d5fbd" prot="protected" virt="non-virtual"><scope>Detectors</scope><name>m_filename</name></member>
+      <member refid="class_detectors_1ab570ead47cf9719ae6f4c1e8c9285b81" prot="protected" virt="non-virtual"><scope>Detectors</scope><name>m_initialized</name></member>
+      <member refid="class_detectors_1a5a5289db11cb3ad98c96c69f58f6a6d5" prot="protected" virt="non-virtual"><scope>Detectors</scope><name>m_labels</name></member>
+      <member refid="class_detectors_1a8b8f4313aeec18389d1213accb50b52d" prot="protected" virt="non-virtual"><scope>Detectors</scope><name>m_labels_array</name></member>
+      <member refid="class_detectors_1a6994304445c6fc6137346690683b56ec" prot="protected" virt="non-virtual"><scope>Detectors</scope><name>m_list</name></member>
+      <member refid="class_detectors_1a76926048c17f155fc444aab17233e0f8" prot="protected" virt="non-virtual"><scope>Detectors</scope><name>m_loaded</name></member>
+      <member refid="class_detectors_1a5063cdef991cb6ddbb36be3f55d50e40" prot="protected" virt="non-virtual"><scope>Detectors</scope><name>m_names</name></member>
+      <member refid="class_detectors_1aa765faf4ef9745156ccb29d616ff3860" prot="protected" virt="non-virtual"><scope>Detectors</scope><name>m_nb_detectors</name></member>
+      <member refid="class_detectors_1a601c91cb6246165a623dd99eb6c4bdc3" prot="protected" virt="non-virtual"><scope>Detectors</scope><name>m_ok</name></member>
+      <member refid="class_detectors_1a661090e1c43cb00b366d7a5d642de879" prot="protected" virt="non-virtual"><scope>Detectors</scope><name>m_type_counter</name></member>
+      <member refid="class_detectors_1a5677eaffae4eea104f04c3f85e2c5fbe" prot="protected" virt="non-virtual"><scope>Detectors</scope><name>m_types</name></member>
+      <member refid="class_detectors_1a0e9964892db1d2dfdb3a8cbdd6c87aeb" prot="protected" virt="non-virtual"><scope>Detectors</scope><name>m_types_ID</name></member>
+      <member refid="class_detectors_1acb3bb5bfbb60a5861b87ddc17c7466d8" prot="protected" virt="non-virtual"><scope>Detectors</scope><name>m_types_index</name></member>
+      <member refid="class_detectors_1a8d5c0f2d189ddda12ed3c36f13887cfd" prot="public" virt="non-virtual"><scope>Detectors</scope><name>makeArrays</name></member>
+      <member refid="class_detectors_1afd00ee8a76386f7356a12858b1dd7c6b" prot="public" virt="non-virtual"><scope>Detectors</scope><name>name</name></member>
+      <member refid="class_detectors_1ae5e6ff02bf3d79da3f034f7404e0677c" prot="public" virt="non-virtual"><scope>Detectors</scope><name>nbOfType</name></member>
+      <member refid="class_detectors_1a24d220832c2f0a03a0d886e11f2c284c" prot="public" virt="non-virtual"><scope>Detectors</scope><name>nbTypes</name></member>
+      <member refid="class_detectors_1a4d20a642176613274e1b8a42f7a0bf01" prot="public" virt="non-virtual"><scope>Detectors</scope><name>number</name></member>
+      <member refid="class_detectors_1ab18d3d10214de7727199f9090fdde164" prot="public" virt="non-virtual"><scope>Detectors</scope><name>operator bool</name></member>
+      <member refid="class_detectors_1a0aa2791c5f5b7133fd5816d2f4dc0b56" prot="public" virt="non-virtual"><scope>Detectors</scope><name>operator=</name></member>
+      <member refid="class_detectors_1a93874c5bc3918096ad880329b89cd632" prot="public" virt="non-virtual"><scope>Detectors</scope><name>operator[]</name></member>
+      <member refid="class_detectors_1a9feeeb0d176405478ffc53b1eda6c9a8" prot="public" virt="non-virtual"><scope>Detectors</scope><name>operator[]</name></member>
+      <member refid="class_detectors_1a66378b2d41c18a11de52e9590380028f" prot="public" virt="non-virtual"><scope>Detectors</scope><name>Print</name></member>
+      <member refid="class_detectors_1a3d5631f8fd2770b6b3a2a178130519ad" prot="public" virt="non-virtual"><scope>Detectors</scope><name>readFile</name></member>
+      <member refid="class_detectors_1af2bb20ee60f504df326b87e9ebbaef30" prot="public" virt="non-virtual"><scope>Detectors</scope><name>resize</name></member>
+      <member refid="class_detectors_1a1177661fb15c9825755925faf00c8398" prot="public" virt="non-virtual"><scope>Detectors</scope><name>size</name></member>
+      <member refid="class_detectors_1a0be56517035f1272af33392665b9ff1f" prot="public" virt="non-virtual"><scope>Detectors</scope><name>type</name></member>
+      <member refid="class_detectors_1ab4d5e6cc24173a65a35788ba7c680264" prot="public" virt="non-virtual"><scope>Detectors</scope><name>typeIndex</name></member>
+      <member refid="class_detectors_1a8bde22f3796788ad458127147fd3a5d2" prot="public" virt="non-virtual"><scope>Detectors</scope><name>typeIndex</name></member>
+      <member refid="class_detectors_1a6c368aa8fe9d985fd742371179718d71" prot="public" virt="non-virtual"><scope>Detectors</scope><name>types</name></member>
+      <member refid="class_detectors_1a930c2b917e87154c1337ecf8551a3ab4" prot="public" virt="non-virtual"><scope>Detectors</scope><name>types_handled</name></member>
+      <member refid="class_detectors_1ae462c1e1acd5b2dc7757715fd68c362d" prot="public" virt="non-virtual"><scope>Detectors</scope><name>typesArray</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

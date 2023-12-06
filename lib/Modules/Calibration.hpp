@@ -966,14 +966,9 @@ void Calibration::setCalibrationTables()
   print();
 }
 
-// NRJ Calibration::calibrate(ADC const & adc, Label const & label) const 
-// {
-//   return calibrate(NRJ_cast(adc), label);
-// }
 inline NRJ Calibration::calibrate(NRJ const & nrj, Label const & label) const 
 {
   auto nrj_r = nrj+random_uniform();
-  // auto nrj_r = nrj+gRandom->Uniform(0,1);
   switch(m_order[label])
   {
     case 0: return nrj_r;

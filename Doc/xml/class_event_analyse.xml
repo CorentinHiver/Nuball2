@@ -1,0 +1,270 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="class_event_analyse" kind="class" language="C++" prot="public">
+    <compoundname>EventAnalyse</compoundname>
+    <includes refid="_event_analyse_8hpp" local="no">EventAnalyse.hpp</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_event_analyse_1a511c0ce19d51b95aed1c3ebf7f69eca0" prot="private" static="no" mutable="no">
+        <type><ref refid="class_clovers" kindref="compound">Clovers</ref></type>
+        <definition>Clovers EventAnalyse::m_Clovers</definition>
+        <argsstring></argsstring>
+        <name>m_Clovers</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/EventAnalyse.hpp" line="21" column="11" bodyfile="lib/Analyse/EventAnalyse.hpp" bodystart="21" bodyend="-1"/>
+        <referencedby refid="class_event_analyse_1ad00469e7b023e281fdf18ea416e9cae8" compoundref="_event_analyse_8hpp" startline="16" endline="16">getClovers</referencedby>
+        <referencedby refid="class_event_analyse_1a3667d9363f41262088e0ca5c1f06fc7e" compoundref="_event_analyse_8hpp" startline="36" endline="50">Set</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_event_analyse_1a40100d6c72c436119fdad6d203c399ba" prot="private" static="no" mutable="no">
+        <type><ref refid="class_d_s_s_d" kindref="compound">DSSD</ref></type>
+        <definition>DSSD EventAnalyse::m_DSSD</definition>
+        <argsstring></argsstring>
+        <name>m_DSSD</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/EventAnalyse.hpp" line="23" column="11" bodyfile="lib/Analyse/EventAnalyse.hpp" bodystart="23" bodyend="-1"/>
+        <referencedby refid="class_event_analyse_1af2a897dc090cb0438adaae6c433626e1" compoundref="_event_analyse_8hpp" startline="18" endline="18">getDSSD</referencedby>
+        <referencedby refid="class_event_analyse_1a3667d9363f41262088e0ca5c1f06fc7e" compoundref="_event_analyse_8hpp" startline="36" endline="50">Set</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_event_analyse_1a74a8eeac3500a62a467f8ce6d8dd97b8" prot="private" static="no" mutable="no">
+        <type><ref refid="class_paris" kindref="compound">Paris</ref></type>
+        <definition>Paris EventAnalyse::m_Paris</definition>
+        <argsstring></argsstring>
+        <name>m_Paris</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/EventAnalyse.hpp" line="22" column="11" bodyfile="lib/Analyse/EventAnalyse.hpp" bodystart="22" bodyend="-1"/>
+        <referencedby refid="class_event_analyse_1ad1a958082173e421e93221ce6759c850" compoundref="_event_analyse_8hpp" startline="26" endline="34">EventAnalyse</referencedby>
+        <referencedby refid="class_event_analyse_1abb438066fbb0668c40a184e0bfd2640b" compoundref="_event_analyse_8hpp" startline="17" endline="17">getParis</referencedby>
+        <referencedby refid="class_event_analyse_1a3667d9363f41262088e0ca5c1f06fc7e" compoundref="_event_analyse_8hpp" startline="36" endline="50">Set</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_event_analyse_1ad1a958082173e421e93221ce6759c850" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>EventAnalyse::EventAnalyse</definition>
+        <argsstring>()</argsstring>
+        <name>EventAnalyse</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/EventAnalyse.hpp" line="12" column="3" bodyfile="lib/Analyse/EventAnalyse.hpp" bodystart="26" bodyend="34"/>
+        <references refid="class_paris_1ac0479d995c00e0ee8170092cdf1b5f51" compoundref="_paris_8hpp" startline="93" endline="101">Paris::Initialize</references>
+        <references refid="class_event_analyse_1a74a8eeac3500a62a467f8ce6d8dd97b8" compoundref="_event_analyse_8hpp" startline="22">m_Paris</references>
+      </memberdef>
+      <memberdef kind="function" id="class_event_analyse_1ad00469e7b023e281fdf18ea416e9cae8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_clovers" kindref="compound">Clovers</ref> &amp;</type>
+        <definition>Clovers&amp; EventAnalyse::getClovers</definition>
+        <argsstring>()</argsstring>
+        <name>getClovers</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/EventAnalyse.hpp" line="16" column="12" bodyfile="lib/Analyse/EventAnalyse.hpp" bodystart="16" bodyend="16"/>
+        <references refid="class_event_analyse_1a511c0ce19d51b95aed1c3ebf7f69eca0" compoundref="_event_analyse_8hpp" startline="21">m_Clovers</references>
+      </memberdef>
+      <memberdef kind="function" id="class_event_analyse_1af2a897dc090cb0438adaae6c433626e1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_d_s_s_d" kindref="compound">DSSD</ref> &amp;</type>
+        <definition>DSSD&amp; EventAnalyse::getDSSD</definition>
+        <argsstring>()</argsstring>
+        <name>getDSSD</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/EventAnalyse.hpp" line="18" column="12" bodyfile="lib/Analyse/EventAnalyse.hpp" bodystart="18" bodyend="18"/>
+        <references refid="class_event_analyse_1a40100d6c72c436119fdad6d203c399ba" compoundref="_event_analyse_8hpp" startline="23">m_DSSD</references>
+      </memberdef>
+      <memberdef kind="function" id="class_event_analyse_1abb438066fbb0668c40a184e0bfd2640b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_paris" kindref="compound">Paris</ref> &amp;</type>
+        <definition>Paris&amp; EventAnalyse::getParis</definition>
+        <argsstring>()</argsstring>
+        <name>getParis</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/EventAnalyse.hpp" line="17" column="12" bodyfile="lib/Analyse/EventAnalyse.hpp" bodystart="17" bodyend="17"/>
+        <references refid="class_event_analyse_1a74a8eeac3500a62a467f8ce6d8dd97b8" compoundref="_event_analyse_8hpp" startline="22">m_Paris</references>
+      </memberdef>
+      <memberdef kind="function" id="class_event_analyse_1a3667d9363f41262088e0ca5c1f06fc7e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EventAnalyse::Set</definition>
+        <argsstring>(Event const &amp;event)</argsstring>
+        <name>Set</name>
+        <param>
+          <type><ref refid="class_event" kindref="compound">Event</ref> const &amp;</type>
+          <declname>event</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/EventAnalyse.hpp" line="14" column="8" bodyfile="lib/Analyse/EventAnalyse.hpp" bodystart="36" bodyend="50"/>
+        <references refid="class_clovers_1a523aad5d019f23144292c0e23067a43b" compoundref="_clovers_8hpp" startline="606" endline="630">Clovers::Analyse</references>
+        <references refid="class_paris_1ac6fb6d9310b0dd298ebf10862497954a" compoundref="_paris_8hpp" startline="115" endline="119">Paris::Analyse</references>
+        <references refid="_detectors_8hpp_1a3148345147f51e96aaa73e5d9f8e9d93">isDSSD</references>
+        <references refid="_detectors_8hpp_1a82c5910e3b4f178c276c8b888c5ac162">isParis</references>
+        <references refid="class_event_analyse_1a511c0ce19d51b95aed1c3ebf7f69eca0" compoundref="_event_analyse_8hpp" startline="21">m_Clovers</references>
+        <references refid="class_event_analyse_1a40100d6c72c436119fdad6d203c399ba" compoundref="_event_analyse_8hpp" startline="23">m_DSSD</references>
+        <references refid="class_event_analyse_1a74a8eeac3500a62a467f8ce6d8dd97b8" compoundref="_event_analyse_8hpp" startline="22">m_Paris</references>
+      </memberdef>
+      <memberdef kind="function" id="class_event_analyse_1adb485578886f67319f8d155d90ab6a46" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>EventAnalyse::~EventAnalyse</definition>
+        <argsstring>()</argsstring>
+        <name>~EventAnalyse</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/EventAnalyse.hpp" line="13" column="3" bodyfile="lib/Analyse/EventAnalyse.hpp" bodystart="13" bodyend="13"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="3">
+        <label>Clovers</label>
+        <link refid="class_clovers"/>
+        <childnode refid="4" relation="usage">
+          <edgelabel>delayedGate</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>promptGate</edgelabel>
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>BGOonly</edgelabel>
+          <edgelabel>Bgo</edgelabel>
+          <edgelabel>CleanGe</edgelabel>
+          <edgelabel>DelayedBGO</edgelabel>
+          <edgelabel>DelayedGe</edgelabel>
+          <edgelabel>Ge</edgelabel>
+          <edgelabel>Hits</edgelabel>
+          <edgelabel>PromptBGO</edgelabel>
+          <edgelabel>PromptGe</edgelabel>
+          <edgelabel>RejectedGe</edgelabel>
+          <edgelabel>...</edgelabel>
+        </childnode>
+        <childnode refid="8" relation="usage">
+          <edgelabel>delayedBGOgate</edgelabel>
+          <edgelabel>delayedGeGate</edgelabel>
+        </childnode>
+        <childnode refid="9" relation="usage">
+          <edgelabel>promptBGOgate</edgelabel>
+          <edgelabel>promptGeGate</edgelabel>
+        </childnode>
+      </node>
+      <node id="11">
+        <label>ParisCluster&lt; 28 &gt;</label>
+        <link refid="class_paris_cluster"/>
+      </node>
+      <node id="5">
+        <label>Gate_t&lt; float &gt;</label>
+        <link refid="class_gate__t"/>
+      </node>
+      <node id="6">
+        <label>Clovers::PromptGate</label>
+        <link refid="class_clovers_1_1_prompt_gate"/>
+        <childnode refid="5" relation="usage">
+          <edgelabel>m_high_E_gate</edgelabel>
+          <edgelabel>m_low_E_gate</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>DSSD</label>
+        <link refid="class_d_s_s_d"/>
+      </node>
+      <node id="10">
+        <label>Paris</label>
+        <link refid="class_paris"/>
+        <childnode refid="11" relation="usage">
+          <edgelabel>clusterBack</edgelabel>
+        </childnode>
+        <childnode refid="12" relation="usage">
+          <edgelabel>clusterFront</edgelabel>
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>Hits</edgelabel>
+        </childnode>
+      </node>
+      <node id="12">
+        <label>ParisCluster&lt; 36 &gt;</label>
+        <link refid="class_paris_cluster"/>
+      </node>
+      <node id="8">
+        <label>Gates_t&lt; T &gt;</label>
+        <link refid="class_gates__t"/>
+      </node>
+      <node id="7">
+        <label>StaticVector&lt; uchar &gt;</label>
+        <link refid="class_static_vector"/>
+      </node>
+      <node id="1">
+        <label>EventAnalyse</label>
+        <link refid="class_event_analyse"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>m_DSSD</edgelabel>
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>m_Clovers</edgelabel>
+        </childnode>
+        <childnode refid="10" relation="usage">
+          <edgelabel>m_Paris</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>Clovers::DelayedGate</label>
+        <link refid="class_clovers_1_1_delayed_gate"/>
+        <childnode refid="5" relation="usage">
+          <edgelabel>m_high_E_gate</edgelabel>
+          <edgelabel>m_low_E_gate</edgelabel>
+        </childnode>
+      </node>
+      <node id="9">
+        <label>Gate_t&lt; T &gt;</label>
+        <link refid="class_gate__t"/>
+      </node>
+    </collaborationgraph>
+    <location file="lib/Analyse/EventAnalyse.hpp" line="9" column="1" bodyfile="lib/Analyse/EventAnalyse.hpp" bodystart="10" bodyend="24"/>
+    <listofallmembers>
+      <member refid="class_event_analyse_1ad1a958082173e421e93221ce6759c850" prot="public" virt="non-virtual"><scope>EventAnalyse</scope><name>EventAnalyse</name></member>
+      <member refid="class_event_analyse_1ad00469e7b023e281fdf18ea416e9cae8" prot="public" virt="non-virtual"><scope>EventAnalyse</scope><name>getClovers</name></member>
+      <member refid="class_event_analyse_1af2a897dc090cb0438adaae6c433626e1" prot="public" virt="non-virtual"><scope>EventAnalyse</scope><name>getDSSD</name></member>
+      <member refid="class_event_analyse_1abb438066fbb0668c40a184e0bfd2640b" prot="public" virt="non-virtual"><scope>EventAnalyse</scope><name>getParis</name></member>
+      <member refid="class_event_analyse_1a511c0ce19d51b95aed1c3ebf7f69eca0" prot="private" virt="non-virtual"><scope>EventAnalyse</scope><name>m_Clovers</name></member>
+      <member refid="class_event_analyse_1a40100d6c72c436119fdad6d203c399ba" prot="private" virt="non-virtual"><scope>EventAnalyse</scope><name>m_DSSD</name></member>
+      <member refid="class_event_analyse_1a74a8eeac3500a62a467f8ce6d8dd97b8" prot="private" virt="non-virtual"><scope>EventAnalyse</scope><name>m_Paris</name></member>
+      <member refid="class_event_analyse_1a3667d9363f41262088e0ca5c1f06fc7e" prot="public" virt="non-virtual"><scope>EventAnalyse</scope><name>Set</name></member>
+      <member refid="class_event_analyse_1adb485578886f67319f8d155d90ab6a46" prot="public" virt="non-virtual"><scope>EventAnalyse</scope><name>~EventAnalyse</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

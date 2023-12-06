@@ -1,0 +1,289 @@
+\doxysection{Builder Class Reference}
+\label{class_builder}\index{Builder@{Builder}}
+
+
+Base class of event builders (pure virtual class)  
+
+
+
+
+{\ttfamily \#include $<$Builder.\+hpp$>$}
+
+
+
+Inheritance diagram for Builder\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=256pt]{class_builder__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Builder\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=203pt]{class_builder__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual bool \textbf{ build} (\textbf{ Hit} const \&\+\_\+hit)=0
+\begin{DoxyCompactList}\small\item\em Add Hits to the event. Return true when an event is complete, i.\+e. current hit is outside of time window. \end{DoxyCompactList}\item 
+\textbf{ Builder} ()
+\item 
+\textbf{ Builder} (\textbf{ Event} $\ast$event)
+\item 
+virtual bool \textbf{ coincidence} (\textbf{ Hit} const \&hit)=0
+\item 
+\textbf{ Event} $\ast$ \textbf{ get\+Event} () const
+\item 
+\textbf{ Hit} const  \& \textbf{ get\+Last\+Hit} () const
+\item 
+bool \textbf{ is\+Building} () const
+\item 
+bool \textbf{ is\+Built} () const
+\item 
+bool \textbf{ is\+Single} () const
+\item 
+virtual void \textbf{ reset} ()
+\item 
+void \textbf{ set\+\_\+first\+\_\+hit} (\textbf{ Hit} const \&hit)
+\item 
+void \textbf{ set\+\_\+last\+\_\+hit} (\textbf{ Hit} const \&hit)
+\item 
+\textbf{ size\+\_\+t} \textbf{ size} () const
+\item 
+\textbf{ uchar} const  \& \textbf{ status} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \textbf{ keep\+Singles} (bool const \&b=true)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ Event} $\ast$ \textbf{ m\+\_\+event} = nullptr
+\item 
+\textbf{ Hit} \textbf{ m\+\_\+last\+\_\+hit}
+\item 
+\textbf{ uchar} \textbf{ m\+\_\+status} = 0
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static bool \textbf{ m\+\_\+keep\+\_\+singles} = false
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Base class of event builders (pure virtual class) 
+
+The first thing to do is to set the first hit of the file using Builder\+::set\+\_\+first\+\_\+hit(hit); Then add the following hits using Builder\+::build(hit);
+
+The builder can be in four states \+:
+
+Let\textquotesingle{}s start from the first hit. The next is either in or out of the time window.
+
+Out of the time window \+:
+
+Then the first hit is single. The status is therefore 0. The second hit is then used to determine if the third one is in coincidence with it or not.
+
+In the time window \+:
+
+An event is created, extracting the values of the two first hits in the two first rows of the event. We are in status 1.
+
+Then we have to handle the third hit. It either is in or out of the time window.
+
+If the third hit is out of the time window, then the event is made only of the two previous hits. We are in status 2. We can perform a trigger and write down the event.
+
+If the third hit is in the time window, the values of the third hit are extracted inside of the third row of the event. We are in status 1 still. We then have to handle the next hits and add them to the event until a hit falls out of the time window.
+
+Now, you\textquotesingle{}ll have to create your own event builder by deriving it from this base class \+: \begin{DoxyVerb}   class MyEventBuilder : public Builder
+   {
+       ....
+       build(...);
+   };
+\end{DoxyVerb}
+ You will have to overload the build method 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\label{class_builder_af8e018e77879c6136e6dabbd5eab0634}} 
+\index{Builder@{Builder}!Builder@{Builder}}
+\index{Builder@{Builder}!Builder@{Builder}}
+\doxysubsubsection{Builder()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Builder\+::\+Builder (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_builder_a9cda698e8695141734f5e695a7f24975}} 
+\index{Builder@{Builder}!Builder@{Builder}}
+\index{Builder@{Builder}!Builder@{Builder}}
+\doxysubsubsection{Builder()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Builder\+::\+Builder (\begin{DoxyParamCaption}\item[{\textbf{ Event} $\ast$}]{event }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\label{class_builder_a6174fb0019ff2eafed26644d05e374a5}} 
+\index{Builder@{Builder}!build@{build}}
+\index{build@{build}!Builder@{Builder}}
+\doxysubsubsection{build()}
+{\footnotesize\ttfamily virtual bool Builder\+::build (\begin{DoxyParamCaption}\item[{\textbf{ Hit} const \&}]{\+\_\+hit }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Add Hits to the event. Return true when an event is complete, i.\+e. current hit is outside of time window. 
+
+3 status \+: 0\+: single $\vert$ 1\+: begin of coincidence $\vert$ 2\+: coincidence complete 
+
+Implemented in \textbf{ Event\+Builder} \doxyref{}{p.}{class_event_builder_a721b4b60a459c5a5c00ed3e1b513d636}, and \textbf{ Coinc\+Builder} \doxyref{}{p.}{class_coinc_builder_a6fbd7caa8ab6ac6bbf4d14eb094b6417}.
+
+\mbox{\label{class_builder_aacd0df1ffcecbfb4bbc009e6efd0b541}} 
+\index{Builder@{Builder}!coincidence@{coincidence}}
+\index{coincidence@{coincidence}!Builder@{Builder}}
+\doxysubsubsection{coincidence()}
+{\footnotesize\ttfamily virtual bool Builder\+::coincidence (\begin{DoxyParamCaption}\item[{\textbf{ Hit} const \&}]{hit }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \textbf{ Coinc\+Builder} \doxyref{}{p.}{class_coinc_builder_a7bb003c28d9b4b43bbd10a09771226ae}.
+
+\mbox{\label{class_builder_a8fd6226096d712de58f78e9ef123c45d}} 
+\index{Builder@{Builder}!getEvent@{getEvent}}
+\index{getEvent@{getEvent}!Builder@{Builder}}
+\doxysubsubsection{getEvent()}
+{\footnotesize\ttfamily \textbf{ Event}$\ast$ Builder\+::get\+Event (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_builder_abeb8339305e7a10fb2c67cc0fed9237b}} 
+\index{Builder@{Builder}!getLastHit@{getLastHit}}
+\index{getLastHit@{getLastHit}!Builder@{Builder}}
+\doxysubsubsection{getLastHit()}
+{\footnotesize\ttfamily \textbf{ Hit} const\& Builder\+::get\+Last\+Hit (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_builder_a414690f7964ed158937df8a65b1d4760}} 
+\index{Builder@{Builder}!isBuilding@{isBuilding}}
+\index{isBuilding@{isBuilding}!Builder@{Builder}}
+\doxysubsubsection{isBuilding()}
+{\footnotesize\ttfamily bool Builder\+::is\+Building (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_builder_af7ce79872abc82e734c72e03380a1f34}} 
+\index{Builder@{Builder}!isBuilt@{isBuilt}}
+\index{isBuilt@{isBuilt}!Builder@{Builder}}
+\doxysubsubsection{isBuilt()}
+{\footnotesize\ttfamily bool Builder\+::is\+Built (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_builder_aa476b7d1fd2fe31882a3380769eb60a9}} 
+\index{Builder@{Builder}!isSingle@{isSingle}}
+\index{isSingle@{isSingle}!Builder@{Builder}}
+\doxysubsubsection{isSingle()}
+{\footnotesize\ttfamily bool Builder\+::is\+Single (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=300pt]{class_builder_aa476b7d1fd2fe31882a3380769eb60a9_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_builder_a4d557d96189a42cbc0a4a0d32db45d6c}} 
+\index{Builder@{Builder}!keepSingles@{keepSingles}}
+\index{keepSingles@{keepSingles}!Builder@{Builder}}
+\doxysubsubsection{keepSingles()}
+{\footnotesize\ttfamily static void Builder\+::keep\+Singles (\begin{DoxyParamCaption}\item[{bool const \&}]{b = {\ttfamily true} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_builder_a4d557d96189a42cbc0a4a0d32db45d6c_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_builder_ae2d72f1157ccaaddc45b6963c7971f30}} 
+\index{Builder@{Builder}!reset@{reset}}
+\index{reset@{reset}!Builder@{Builder}}
+\doxysubsubsection{reset()}
+{\footnotesize\ttfamily virtual void Builder\+::reset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented in \textbf{ Event\+Builder} \doxyref{}{p.}{class_event_builder_a96d24bbdba6a9cc0770bc1ec81c7c9e0}, and \textbf{ Coinc\+Builder} \doxyref{}{p.}{class_coinc_builder_ad777d92b1242cafdb594e3fb315ae3a9}.
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=272pt]{class_builder_ae2d72f1157ccaaddc45b6963c7971f30_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_builder_aebad9a247ffe8dfa74d2738ee7cad755}} 
+\index{Builder@{Builder}!set\_first\_hit@{set\_first\_hit}}
+\index{set\_first\_hit@{set\_first\_hit}!Builder@{Builder}}
+\doxysubsubsection{set\_first\_hit()}
+{\footnotesize\ttfamily void Builder\+::set\+\_\+first\+\_\+hit (\begin{DoxyParamCaption}\item[{\textbf{ Hit} const \&}]{hit }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_builder_acc042a420547dc2ee6eb85e6daf43b07}} 
+\index{Builder@{Builder}!set\_last\_hit@{set\_last\_hit}}
+\index{set\_last\_hit@{set\_last\_hit}!Builder@{Builder}}
+\doxysubsubsection{set\_last\_hit()}
+{\footnotesize\ttfamily void Builder\+::set\+\_\+last\+\_\+hit (\begin{DoxyParamCaption}\item[{\textbf{ Hit} const \&}]{hit }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_builder_a3097a8df520a8ab39c953cb8b659b2ee}} 
+\index{Builder@{Builder}!size@{size}}
+\index{size@{size}!Builder@{Builder}}
+\doxysubsubsection{size()}
+{\footnotesize\ttfamily \textbf{ size\+\_\+t} Builder\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=157pt]{class_builder_a3097a8df520a8ab39c953cb8b659b2ee_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=157pt]{class_builder_a3097a8df520a8ab39c953cb8b659b2ee_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_builder_af86b7b9639bb301f191e6263dd871bf7}} 
+\index{Builder@{Builder}!status@{status}}
+\index{status@{status}!Builder@{Builder}}
+\doxysubsubsection{status()}
+{\footnotesize\ttfamily \textbf{ uchar} const\& Builder\+::status (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\label{class_builder_a76749e4cc31025fde18f9cdbeb232cbf}} 
+\index{Builder@{Builder}!m\_event@{m\_event}}
+\index{m\_event@{m\_event}!Builder@{Builder}}
+\doxysubsubsection{m\_event}
+{\footnotesize\ttfamily \textbf{ Event}$\ast$ Builder\+::m\+\_\+event = nullptr\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\label{class_builder_a7b1399ae5a1a58620dd564754d691348}} 
+\index{Builder@{Builder}!m\_keep\_singles@{m\_keep\_singles}}
+\index{m\_keep\_singles@{m\_keep\_singles}!Builder@{Builder}}
+\doxysubsubsection{m\_keep\_singles}
+{\footnotesize\ttfamily bool Builder\+::m\+\_\+keep\+\_\+singles = false\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+
+\mbox{\label{class_builder_a5cce09bc1a95dd0bcaa4f857f1a1b3da}} 
+\index{Builder@{Builder}!m\_last\_hit@{m\_last\_hit}}
+\index{m\_last\_hit@{m\_last\_hit}!Builder@{Builder}}
+\doxysubsubsection{m\_last\_hit}
+{\footnotesize\ttfamily \textbf{ Hit} Builder\+::m\+\_\+last\+\_\+hit\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\label{class_builder_a81c56e91c1951d25faecf88f390b5bcb}} 
+\index{Builder@{Builder}!m\_status@{m\_status}}
+\index{m\_status@{m\_status}!Builder@{Builder}}
+\doxysubsubsection{m\_status}
+{\footnotesize\ttfamily \textbf{ uchar} Builder\+::m\+\_\+status = 0\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+lib/\+Classes/\textbf{ Builder.\+hpp}\end{DoxyCompactItemize}

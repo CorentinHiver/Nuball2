@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="class_m_t_variable" kind="class" language="C++" prot="public">
+    <compoundname>MTVariable</compoundname>
+    <includes refid="_m_t_variable_8hpp" local="no">MTVariable.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class T</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_m_t_variable_1aab1b644bd142eb657d88aecc74450b30" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; T &gt;</type>
+        <definition>std::vector&lt;T&gt; MTVariable&lt; T &gt;::m_variables</definition>
+        <argsstring></argsstring>
+        <name>m_variables</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/MTObjects/MTVariable.hpp" line="34" column="15" bodyfile="lib/MTObjects/MTVariable.hpp" bodystart="34" bodyend="-1"/>
+        <referencedby refid="class_m_t_variable_1afeaf590e18d11bba1ca0e82be8d1cb26" compoundref="_m_t_variable_8hpp" startline="13" endline="24">MTVariable&lt; T &gt;::MTVariable</referencedby>
+        <referencedby refid="class_m_t_variable_1af2f966c9e57eb54bd8fb27595e8c39ac" compoundref="_m_t_variable_8hpp" startline="26" endline="31">MTVariable&lt; T &gt;::resize</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_m_t_variable_1afeaf590e18d11bba1ca0e82be8d1cb26" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>MTVariable&lt; T &gt;::MTVariable</definition>
+        <argsstring>()</argsstring>
+        <name>MTVariable</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/MTObjects/MTVariable.hpp" line="13" column="3" bodyfile="lib/MTObjects/MTVariable.hpp" bodystart="13" bodyend="24"/>
+        <references refid="class_m_t_object_1ac97399bb34f766e41e7f9a1cd1b7eb7a" compoundref="_m_t_object_8hpp" startline="101" endline="101">MTObject::getThreadsNb</references>
+        <references refid="class_m_t_variable_1aab1b644bd142eb657d88aecc74450b30" compoundref="_m_t_variable_8hpp" startline="34">MTVariable&lt; T &gt;::m_variables</references>
+        <references refid="class_m_t_variable_1af2f966c9e57eb54bd8fb27595e8c39ac" compoundref="_m_t_variable_8hpp" startline="26" endline="31">MTVariable&lt; T &gt;::resize</references>
+      </memberdef>
+      <memberdef kind="function" id="class_m_t_variable_1af2f966c9e57eb54bd8fb27595e8c39ac" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void MTVariable&lt; T &gt;::resize</definition>
+        <argsstring>(size_t size)</argsstring>
+        <name>resize</name>
+        <param>
+          <type><ref refid="lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638" kindref="member">size_t</ref></type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/MTObjects/MTVariable.hpp" line="26" column="8" bodyfile="lib/MTObjects/MTVariable.hpp" bodystart="26" bodyend="31"/>
+        <references refid="class_m_t_variable_1aab1b644bd142eb657d88aecc74450b30" compoundref="_m_t_variable_8hpp" startline="34">MTVariable&lt; T &gt;::m_variables</references>
+        <references refid="class_m_t_object_1a79d86fbc8837ba0f9a4cd1405fddef1c" compoundref="_m_t_object_8hpp" startline="107">MTObject::mutex</references>
+        <referencedby refid="class_m_t_variable_1afeaf590e18d11bba1ca0e82be8d1cb26" compoundref="_m_t_variable_8hpp" startline="13" endline="24">MTVariable&lt; T &gt;::MTVariable</referencedby>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>UNUSED. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="lib/MTObjects/MTVariable.hpp" line="10" column="1" bodyfile="lib/MTObjects/MTVariable.hpp" bodystart="11" bodyend="35"/>
+    <listofallmembers>
+      <member refid="class_m_t_variable_1aab1b644bd142eb657d88aecc74450b30" prot="private" virt="non-virtual"><scope>MTVariable</scope><name>m_variables</name></member>
+      <member refid="class_m_t_variable_1afeaf590e18d11bba1ca0e82be8d1cb26" prot="public" virt="non-virtual"><scope>MTVariable</scope><name>MTVariable</name></member>
+      <member refid="class_m_t_variable_1af2f966c9e57eb54bd8fb27595e8c39ac" prot="public" virt="non-virtual"><scope>MTVariable</scope><name>resize</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

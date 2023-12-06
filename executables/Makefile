@@ -17,14 +17,15 @@ FRAMEWORK_LIB_PATH := ../lib
 
 # ----------------------------------------------------
 # Then write down the name of the main file 
-# SRCEXE := faster2root.cpp
 # SRCEXE := faster2histo.cpp
-SRCEXE := manip2root.cpp
+SRCEXE := manip2histo.cpp
+# SRCEXE := faster2root.cpp
+#SRCEXE := manip2root.cpp
 
 
 # ==================================================
 # --------------------------------------------------
-# 			DONT TOUCH THE FOLLOWING !!!!
+#          DONT TOUCH THE FOLLOWING !!!!            
 # --------------------------------------------------
 # ==================================================
 

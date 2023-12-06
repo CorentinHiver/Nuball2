@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__d_s_s_d_8hpp" xml:lang="en-US">
+<title>lib/Analyse/DSSD.hpp File Reference</title>
+<indexterm><primary>lib/Analyse/DSSD.hpp</primary></indexterm>
+<programlisting>#include &lt;libCo.hpp&gt;
+#include &lt;libRoot.hpp&gt;
+#include &lt;Event.hpp&gt;
+#include &lt;Timewalk.hpp&gt;
+#include &lt;Detectors.hpp&gt;
+</programlisting>Include dependency graph for DSSD.hpp:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="_d_s_s_d_8hpp__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+This graph shows which files directly or indirectly include this file:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="_d_s_s_d_8hpp__dep__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>class <link linkend="_class_d_s_s_d">DSSD</link></para>
+</listitem>
+            <listitem><para>class <link linkend="_class_si_strip">SiStrip</link></para>
+
+<para>Silicon Strip. Represents a strip of the <link linkend="_class_d_s_s_d">DSSD</link>. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Variables    </title>
+        <itemizedlist>
+            <listitem><para>double <link linkend="__d_s_s_d_8hpp_1a79b8e036dca6911e3295a47d99f21f43">distance</link> = 20</para>
+</listitem>
+            <listitem><para>double <link linkend="__d_s_s_d_8hpp_1ab2edbac6623ac37db1f0dc2e95ce0e11">innerRadius</link> = 15</para>
+</listitem>
+            <listitem><para>int const <link linkend="__d_s_s_d_8hpp_1a6f982e9d8d9c8fd28d6d8384eb058324">nb_rings</link> = 16</para>
+</listitem>
+            <listitem><para>int const <link linkend="__d_s_s_d_8hpp_1a1727ad97c53a82a3ef1c310b909e4dff">nb_sectors</link> = 32</para>
+</listitem>
+            <listitem><para>double <link linkend="__d_s_s_d_8hpp_1a9b7ffc3533566212552a1ff318432354">outerRadius</link> = 41</para>
+</listitem>
+            <listitem><para>double <link linkend="__d_s_s_d_8hpp_1a171e565222e5ede0a6978e8dc588f2b0">ring_deg_thick</link> = TMath::ATan(<link linkend="__d_s_s_d_8hpp_1a130dbffe4a5a42623871be39c19d4a68">ring_thickness</link>/<link linkend="__d_s_s_d_8hpp_1a79b8e036dca6911e3295a47d99f21f43">distance</link>)</para>
+</listitem>
+            <listitem><para>double <link linkend="__d_s_s_d_8hpp_1a130dbffe4a5a42623871be39c19d4a68">ring_thickness</link> = (<link linkend="__d_s_s_d_8hpp_1a9b7ffc3533566212552a1ff318432354">outerRadius</link>-<link linkend="__d_s_s_d_8hpp_1ab2edbac6623ac37db1f0dc2e95ce0e11">innerRadius</link>)/<link linkend="__d_s_s_d_8hpp_1a6f982e9d8d9c8fd28d6d8384eb058324">nb_rings</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Variable Documentation</title>
+<anchor xml:id="__d_s_s_d_8hpp_1a79b8e036dca6911e3295a47d99f21f43"/>    <section>
+    <title>distance</title>
+<indexterm><primary>distance</primary><secondary>DSSD.hpp</secondary></indexterm>
+<indexterm><primary>DSSD.hpp</primary><secondary>distance</secondary></indexterm>
+<para><computeroutput>double distance = 20</computeroutput></para>    </section><anchor xml:id="__d_s_s_d_8hpp_1ab2edbac6623ac37db1f0dc2e95ce0e11"/>    <section>
+    <title>innerRadius</title>
+<indexterm><primary>innerRadius</primary><secondary>DSSD.hpp</secondary></indexterm>
+<indexterm><primary>DSSD.hpp</primary><secondary>innerRadius</secondary></indexterm>
+<para><computeroutput>double innerRadius = 15</computeroutput></para>    </section><anchor xml:id="__d_s_s_d_8hpp_1a6f982e9d8d9c8fd28d6d8384eb058324"/>    <section>
+    <title>nb_rings</title>
+<indexterm><primary>nb_rings</primary><secondary>DSSD.hpp</secondary></indexterm>
+<indexterm><primary>DSSD.hpp</primary><secondary>nb_rings</secondary></indexterm>
+<para><computeroutput>int const nb_rings = 16</computeroutput></para>    </section><anchor xml:id="__d_s_s_d_8hpp_1a1727ad97c53a82a3ef1c310b909e4dff"/>    <section>
+    <title>nb_sectors</title>
+<indexterm><primary>nb_sectors</primary><secondary>DSSD.hpp</secondary></indexterm>
+<indexterm><primary>DSSD.hpp</primary><secondary>nb_sectors</secondary></indexterm>
+<para><computeroutput>int const nb_sectors = 32</computeroutput></para>    </section><anchor xml:id="__d_s_s_d_8hpp_1a9b7ffc3533566212552a1ff318432354"/>    <section>
+    <title>outerRadius</title>
+<indexterm><primary>outerRadius</primary><secondary>DSSD.hpp</secondary></indexterm>
+<indexterm><primary>DSSD.hpp</primary><secondary>outerRadius</secondary></indexterm>
+<para><computeroutput>double outerRadius = 41</computeroutput></para>    </section><anchor xml:id="__d_s_s_d_8hpp_1a171e565222e5ede0a6978e8dc588f2b0"/>    <section>
+    <title>ring_deg_thick</title>
+<indexterm><primary>ring_deg_thick</primary><secondary>DSSD.hpp</secondary></indexterm>
+<indexterm><primary>DSSD.hpp</primary><secondary>ring_deg_thick</secondary></indexterm>
+<para><computeroutput>double ring_deg_thick = TMath::ATan(<link linkend="__d_s_s_d_8hpp_1a130dbffe4a5a42623871be39c19d4a68">ring_thickness</link>/<link linkend="__d_s_s_d_8hpp_1a79b8e036dca6911e3295a47d99f21f43">distance</link>)</computeroutput></para>    </section><anchor xml:id="__d_s_s_d_8hpp_1a130dbffe4a5a42623871be39c19d4a68"/>    <section>
+    <title>ring_thickness</title>
+<indexterm><primary>ring_thickness</primary><secondary>DSSD.hpp</secondary></indexterm>
+<indexterm><primary>DSSD.hpp</primary><secondary>ring_thickness</secondary></indexterm>
+<para><computeroutput>double ring_thickness = (<link linkend="__d_s_s_d_8hpp_1a9b7ffc3533566212552a1ff318432354">outerRadius</link>-<link linkend="__d_s_s_d_8hpp_1ab2edbac6623ac37db1f0dc2e95ce0e11">innerRadius</link>)/<link linkend="__d_s_s_d_8hpp_1a6f982e9d8d9c8fd28d6d8384eb058324">nb_rings</link></computeroutput></para></section>
+</section>
+</section>

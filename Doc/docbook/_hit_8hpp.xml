@@ -1,0 +1,279 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__hit_8hpp" xml:lang="en-US">
+<title>lib/Classes/Hit.hpp File Reference</title>
+<indexterm><primary>lib/Classes/Hit.hpp</primary></indexterm>
+<programlisting>#include &quot;../libRoot.hpp&quot;
+</programlisting>Include dependency graph for Hit.hpp:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="_hit_8hpp__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+This graph shows which files directly or indirectly include this file:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="_hit_8hpp__dep__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>class <link linkend="_class_hit">Hit</link></para>
+
+<para><link linkend="_class_hit">Hit</link> class ///. </para>
+</listitem>
+            <listitem><para>class <link linkend="_class_i_options">IOptions</link></para>
+
+<para>IO parameters ///. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Typedefs    </title>
+        <itemizedlist>
+            <listitem><para>using <link linkend="__hit_8hpp_1a04b75a9e083a1c44419fdb7c3f87c361">ADC</link> = int</para>
+</listitem>
+            <listitem><para>using <link linkend="__hit_8hpp_1aef44026b31a934229a954352bb500202">ADC_vec</link> = std::vector&lt; <link linkend="__hit_8hpp_1a04b75a9e083a1c44419fdb7c3f87c361">ADC</link> &gt;</para>
+</listitem>
+            <listitem><para>using <link linkend="__hit_8hpp_1a60a11aa033ddd007d68353349ab6d90f">Energy_vec</link> = std::vector&lt; <link linkend="__hit_8hpp_1aad3a9d2c404fb4cd7f73b16966ae2877">NRJ</link> &gt;</para>
+</listitem>
+            <listitem><para>using <link linkend="__hit_8hpp_1ab5dd24876acad09ec52c250c1668466c">Label</link> = <link linkend="_lib_co_8hpp_1ad29aff8b0f7fde4ef0291331012e596a">ushort</link></para>
+
+<para>Data types ///. </para>
+</listitem>
+            <listitem><para>using <link linkend="__hit_8hpp_1a25e4b8c1ad7e877a2fd808d3c661b22d">Label_vec</link> = std::vector&lt; <link linkend="__hit_8hpp_1ab5dd24876acad09ec52c250c1668466c">Label</link> &gt;</para>
+
+<para>Data vectors ///. </para>
+</listitem>
+            <listitem><para>using <link linkend="__hit_8hpp_1aad3a9d2c404fb4cd7f73b16966ae2877">NRJ</link> = float</para>
+</listitem>
+            <listitem><para>using <link linkend="__hit_8hpp_1a32b9c8e0ce5bedbf84e93eff0b198eea">Pileup</link> = bool</para>
+</listitem>
+            <listitem><para>using <link linkend="__hit_8hpp_1ab7c579eea4eff5ec05b4d28e26e4c231">Pileup_vec</link> = std::vector&lt; <link linkend="__hit_8hpp_1a32b9c8e0ce5bedbf84e93eff0b198eea">Pileup</link> &gt;</para>
+</listitem>
+            <listitem><para>using <link linkend="__hit_8hpp_1a808363c27c30b41f6ed40b62ebde3ee7">Time</link> = Long64_t</para>
+</listitem>
+            <listitem><para>using <link linkend="__hit_8hpp_1ad7cd28c849adeb8fec74d20155b0113d">Time_ns</link> = float</para>
+</listitem>
+            <listitem><para>using <link linkend="__hit_8hpp_1a72badb0bc1d4963ea7e36056916cd6c6">Time_ns_vec</link> = std::vector&lt; <link linkend="__hit_8hpp_1ad7cd28c849adeb8fec74d20155b0113d">Time_ns</link> &gt;</para>
+</listitem>
+            <listitem><para>using <link linkend="__hit_8hpp_1a613beddb43860b3568c452fa6620510b">Time_vec</link> = std::vector&lt; <link linkend="__hit_8hpp_1a808363c27c30b41f6ed40b62ebde3ee7">Time</link> &gt;</para>
+</listitem>
+            <listitem><para>using <link linkend="__hit_8hpp_1a36a1e53eff51015f34900948053c0d69">Timestamp</link> = ULong64_t</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>template&lt;typename T , typename  = typename std::enable_if&lt;std::is_arithmetic&lt;T&gt;::value&gt;::type&gt; </para><para><link linkend="__hit_8hpp_1a04b75a9e083a1c44419fdb7c3f87c361">ADC</link> <link linkend="__hit_8hpp_1a42de29176eeb225c09486aa0dcac5362">ADC_cast</link> (T const &amp;t)</para>
+
+<para>Casts a number into unsigned ADC. </para>
+</listitem>
+            <listitem><para>template&lt;typename T , typename  = typename std::enable_if&lt;std::is_arithmetic&lt;T&gt;::value&gt;::type&gt; </para><para><link linkend="__hit_8hpp_1ab5dd24876acad09ec52c250c1668466c">Label</link> <link linkend="__hit_8hpp_1af181231d97866aa957e8fe8bd67f7f64">Label_cast</link> (T const &amp;t)</para>
+
+<para>Data casts ///. </para>
+</listitem>
+            <listitem><para>template&lt;typename T , typename  = typename std::enable_if&lt;std::is_arithmetic&lt;T&gt;::value&gt;::type&gt; </para><para><link linkend="__hit_8hpp_1aad3a9d2c404fb4cd7f73b16966ae2877">NRJ</link> <link linkend="__hit_8hpp_1a394977782e3af344e009b96c7d5bec92">NRJ_cast</link> (T const &amp;t)</para>
+
+<para>Casts a number into unsigned NRJ. </para>
+</listitem>
+            <listitem><para>std::ostream &amp; <link linkend="__hit_8hpp_1a6a8489ad364359132484d320150555a7">operator&lt;&lt;</link> (std::ostream &amp;cout, <link linkend="_class_hit">Hit</link> const &amp;hit)</para>
+</listitem>
+            <listitem><para>template&lt;typename T , typename  = typename std::enable_if&lt;std::is_arithmetic&lt;T&gt;::value&gt;::type&gt; </para><para><link linkend="__hit_8hpp_1a808363c27c30b41f6ed40b62ebde3ee7">Time</link> <link linkend="__hit_8hpp_1a4ea1ea3a29989c67afc2c4db41e36b15">Time_cast</link> (T const &amp;t)</para>
+
+<para>Casts a number into unsigned Time. </para>
+</listitem>
+            <listitem><para>template&lt;typename T , typename  = typename std::enable_if&lt;std::is_arithmetic&lt;T&gt;::value&gt;::type&gt; </para><para><link linkend="__hit_8hpp_1ad7cd28c849adeb8fec74d20155b0113d">Time_ns</link> <link linkend="__hit_8hpp_1a04b1f65fe07e6d731225feecab2b66f6">Time_ns_cast</link> (T const &amp;t)</para>
+
+<para>Casts a number into unsigned Time_ns. </para>
+</listitem>
+            <listitem><para>template&lt;typename T , typename  = typename std::enable_if&lt;std::is_arithmetic&lt;T&gt;::value&gt;::type&gt; </para><para><link linkend="__hit_8hpp_1a36a1e53eff51015f34900948053c0d69">Timestamp</link> <link linkend="__hit_8hpp_1a3bbfcd7f9bbec3174213c2b5eedc2edd">Timestamp_cast</link> (T const &amp;t)</para>
+
+<para>Casts a number into unsigned Timestamp. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Typedef Documentation</title>
+<anchor xml:id="__hit_8hpp_1a04b75a9e083a1c44419fdb7c3f87c361"/>    <section>
+    <title>ADC</title>
+<indexterm><primary>ADC</primary><secondary>Hit.hpp</secondary></indexterm>
+<indexterm><primary>Hit.hpp</primary><secondary>ADC</secondary></indexterm>
+<para><computeroutput>using <link linkend="__hit_8hpp_1a04b75a9e083a1c44419fdb7c3f87c361">ADC</link> =  int</computeroutput></para>    </section><anchor xml:id="__hit_8hpp_1aef44026b31a934229a954352bb500202"/>    <section>
+    <title>ADC_vec</title>
+<indexterm><primary>ADC_vec</primary><secondary>Hit.hpp</secondary></indexterm>
+<indexterm><primary>Hit.hpp</primary><secondary>ADC_vec</secondary></indexterm>
+<para><computeroutput>using <link linkend="__hit_8hpp_1aef44026b31a934229a954352bb500202">ADC_vec</link> =  std::vector&lt;<link linkend="__hit_8hpp_1a04b75a9e083a1c44419fdb7c3f87c361">ADC</link> &gt;</computeroutput></para>    </section><anchor xml:id="__hit_8hpp_1a60a11aa033ddd007d68353349ab6d90f"/>    <section>
+    <title>Energy_vec</title>
+<indexterm><primary>Energy_vec</primary><secondary>Hit.hpp</secondary></indexterm>
+<indexterm><primary>Hit.hpp</primary><secondary>Energy_vec</secondary></indexterm>
+<para><computeroutput>using <link linkend="__hit_8hpp_1a60a11aa033ddd007d68353349ab6d90f">Energy_vec</link> =  std::vector&lt;<link linkend="__hit_8hpp_1aad3a9d2c404fb4cd7f73b16966ae2877">NRJ</link> &gt;</computeroutput></para>    </section><anchor xml:id="__hit_8hpp_1ab5dd24876acad09ec52c250c1668466c"/>    <section>
+    <title>Label</title>
+<indexterm><primary>Label</primary><secondary>Hit.hpp</secondary></indexterm>
+<indexterm><primary>Hit.hpp</primary><secondary>Label</secondary></indexterm>
+<para><computeroutput>using <link linkend="__hit_8hpp_1ab5dd24876acad09ec52c250c1668466c">Label</link> =  <link linkend="_lib_co_8hpp_1ad29aff8b0f7fde4ef0291331012e596a">ushort</link></computeroutput></para><para>
+
+<para>Data types ///. </para>
+</para>
+    </section><anchor xml:id="__hit_8hpp_1a25e4b8c1ad7e877a2fd808d3c661b22d"/>    <section>
+    <title>Label_vec</title>
+<indexterm><primary>Label_vec</primary><secondary>Hit.hpp</secondary></indexterm>
+<indexterm><primary>Hit.hpp</primary><secondary>Label_vec</secondary></indexterm>
+<para><computeroutput>using <link linkend="__hit_8hpp_1a25e4b8c1ad7e877a2fd808d3c661b22d">Label_vec</link> =  std::vector&lt;<link linkend="__hit_8hpp_1ab5dd24876acad09ec52c250c1668466c">Label</link> &gt;</computeroutput></para><para>
+
+<para>Data vectors ///. </para>
+</para>
+    </section><anchor xml:id="__hit_8hpp_1aad3a9d2c404fb4cd7f73b16966ae2877"/>    <section>
+    <title>NRJ</title>
+<indexterm><primary>NRJ</primary><secondary>Hit.hpp</secondary></indexterm>
+<indexterm><primary>Hit.hpp</primary><secondary>NRJ</secondary></indexterm>
+<para><computeroutput>using <link linkend="__hit_8hpp_1aad3a9d2c404fb4cd7f73b16966ae2877">NRJ</link> =  float</computeroutput></para>    </section><anchor xml:id="__hit_8hpp_1a32b9c8e0ce5bedbf84e93eff0b198eea"/>    <section>
+    <title>Pileup</title>
+<indexterm><primary>Pileup</primary><secondary>Hit.hpp</secondary></indexterm>
+<indexterm><primary>Hit.hpp</primary><secondary>Pileup</secondary></indexterm>
+<para><computeroutput>using <link linkend="__hit_8hpp_1a32b9c8e0ce5bedbf84e93eff0b198eea">Pileup</link> =  bool</computeroutput></para>    </section><anchor xml:id="__hit_8hpp_1ab7c579eea4eff5ec05b4d28e26e4c231"/>    <section>
+    <title>Pileup_vec</title>
+<indexterm><primary>Pileup_vec</primary><secondary>Hit.hpp</secondary></indexterm>
+<indexterm><primary>Hit.hpp</primary><secondary>Pileup_vec</secondary></indexterm>
+<para><computeroutput>using <link linkend="__hit_8hpp_1ab7c579eea4eff5ec05b4d28e26e4c231">Pileup_vec</link> =  std::vector&lt;<link linkend="__hit_8hpp_1a32b9c8e0ce5bedbf84e93eff0b198eea">Pileup</link> &gt;</computeroutput></para>    </section><anchor xml:id="__hit_8hpp_1a808363c27c30b41f6ed40b62ebde3ee7"/>    <section>
+    <title>Time</title>
+<indexterm><primary>Time</primary><secondary>Hit.hpp</secondary></indexterm>
+<indexterm><primary>Hit.hpp</primary><secondary>Time</secondary></indexterm>
+<para><computeroutput>using <link linkend="__hit_8hpp_1a808363c27c30b41f6ed40b62ebde3ee7">Time</link> =  Long64_t</computeroutput></para>    </section><anchor xml:id="__hit_8hpp_1ad7cd28c849adeb8fec74d20155b0113d"/>    <section>
+    <title>Time_ns</title>
+<indexterm><primary>Time_ns</primary><secondary>Hit.hpp</secondary></indexterm>
+<indexterm><primary>Hit.hpp</primary><secondary>Time_ns</secondary></indexterm>
+<para><computeroutput>using <link linkend="__hit_8hpp_1ad7cd28c849adeb8fec74d20155b0113d">Time_ns</link> =  float</computeroutput></para>    </section><anchor xml:id="__hit_8hpp_1a72badb0bc1d4963ea7e36056916cd6c6"/>    <section>
+    <title>Time_ns_vec</title>
+<indexterm><primary>Time_ns_vec</primary><secondary>Hit.hpp</secondary></indexterm>
+<indexterm><primary>Hit.hpp</primary><secondary>Time_ns_vec</secondary></indexterm>
+<para><computeroutput>using <link linkend="__hit_8hpp_1a72badb0bc1d4963ea7e36056916cd6c6">Time_ns_vec</link> =  std::vector&lt;<link linkend="__hit_8hpp_1ad7cd28c849adeb8fec74d20155b0113d">Time_ns</link>&gt;</computeroutput></para>    </section><anchor xml:id="__hit_8hpp_1a613beddb43860b3568c452fa6620510b"/>    <section>
+    <title>Time_vec</title>
+<indexterm><primary>Time_vec</primary><secondary>Hit.hpp</secondary></indexterm>
+<indexterm><primary>Hit.hpp</primary><secondary>Time_vec</secondary></indexterm>
+<para><computeroutput>using <link linkend="__hit_8hpp_1a613beddb43860b3568c452fa6620510b">Time_vec</link> =  std::vector&lt;<link linkend="__hit_8hpp_1a808363c27c30b41f6ed40b62ebde3ee7">Time</link> &gt;</computeroutput></para>    </section><anchor xml:id="__hit_8hpp_1a36a1e53eff51015f34900948053c0d69"/>    <section>
+    <title>Timestamp</title>
+<indexterm><primary>Timestamp</primary><secondary>Hit.hpp</secondary></indexterm>
+<indexterm><primary>Hit.hpp</primary><secondary>Timestamp</secondary></indexterm>
+<para><computeroutput>using <link linkend="__hit_8hpp_1a36a1e53eff51015f34900948053c0d69">Timestamp</link> =  ULong64_t</computeroutput></para></section>
+</section>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="__hit_8hpp_1a42de29176eeb225c09486aa0dcac5362"/>    <section>
+    <title>ADC_cast()</title>
+<indexterm><primary>ADC_cast</primary><secondary>Hit.hpp</secondary></indexterm>
+<indexterm><primary>Hit.hpp</primary><secondary>ADC_cast</secondary></indexterm>
+<computeroutput>template&lt;typename T , typename  = typename std::enable_if&lt;std::is_arithmetic&lt;T&gt;::value&gt;::type&gt; </computeroutput><para><computeroutput><link linkend="__hit_8hpp_1a04b75a9e083a1c44419fdb7c3f87c361">ADC</link> ADC_cast (T const &amp; t)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>Casts a number into unsigned ADC. </para>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="_hit_8hpp_a42de29176eeb225c09486aa0dcac5362_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="__hit_8hpp_1af181231d97866aa957e8fe8bd67f7f64"/>    <section>
+    <title>Label_cast()</title>
+<indexterm><primary>Label_cast</primary><secondary>Hit.hpp</secondary></indexterm>
+<indexterm><primary>Hit.hpp</primary><secondary>Label_cast</secondary></indexterm>
+<computeroutput>template&lt;typename T , typename  = typename std::enable_if&lt;std::is_arithmetic&lt;T&gt;::value&gt;::type&gt; </computeroutput><para><computeroutput><link linkend="__hit_8hpp_1ab5dd24876acad09ec52c250c1668466c">Label</link> Label_cast (T const &amp; t)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>Data casts ///. </para>
+</para>
+
+<para>Casts a number into unsigned Label </para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="_hit_8hpp_af181231d97866aa957e8fe8bd67f7f64_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="__hit_8hpp_1a394977782e3af344e009b96c7d5bec92"/>    <section>
+    <title>NRJ_cast()</title>
+<indexterm><primary>NRJ_cast</primary><secondary>Hit.hpp</secondary></indexterm>
+<indexterm><primary>Hit.hpp</primary><secondary>NRJ_cast</secondary></indexterm>
+<computeroutput>template&lt;typename T , typename  = typename std::enable_if&lt;std::is_arithmetic&lt;T&gt;::value&gt;::type&gt; </computeroutput><para><computeroutput><link linkend="__hit_8hpp_1aad3a9d2c404fb4cd7f73b16966ae2877">NRJ</link> NRJ_cast (T const &amp; t)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>Casts a number into unsigned NRJ. </para>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="_hit_8hpp_a394977782e3af344e009b96c7d5bec92_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="__hit_8hpp_1a6a8489ad364359132484d320150555a7"/>    <section>
+    <title>operator&lt;&lt;()</title>
+<indexterm><primary>operator&lt;&lt;</primary><secondary>Hit.hpp</secondary></indexterm>
+<indexterm><primary>Hit.hpp</primary><secondary>operator&lt;&lt;</secondary></indexterm>
+<para><computeroutput>std::ostream&amp; operator&lt;&lt; (std::ostream &amp; cout, <link linkend="_class_hit">Hit</link> const &amp; hit)</computeroutput></para>    </section><anchor xml:id="__hit_8hpp_1a4ea1ea3a29989c67afc2c4db41e36b15"/>    <section>
+    <title>Time_cast()</title>
+<indexterm><primary>Time_cast</primary><secondary>Hit.hpp</secondary></indexterm>
+<indexterm><primary>Hit.hpp</primary><secondary>Time_cast</secondary></indexterm>
+<computeroutput>template&lt;typename T , typename  = typename std::enable_if&lt;std::is_arithmetic&lt;T&gt;::value&gt;::type&gt; </computeroutput><para><computeroutput><link linkend="__hit_8hpp_1a808363c27c30b41f6ed40b62ebde3ee7">Time</link> Time_cast (T const &amp; t)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>Casts a number into unsigned Time. </para>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="_hit_8hpp_a4ea1ea3a29989c67afc2c4db41e36b15_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="__hit_8hpp_1a04b1f65fe07e6d731225feecab2b66f6"/>    <section>
+    <title>Time_ns_cast()</title>
+<indexterm><primary>Time_ns_cast</primary><secondary>Hit.hpp</secondary></indexterm>
+<indexterm><primary>Hit.hpp</primary><secondary>Time_ns_cast</secondary></indexterm>
+<computeroutput>template&lt;typename T , typename  = typename std::enable_if&lt;std::is_arithmetic&lt;T&gt;::value&gt;::type&gt; </computeroutput><para><computeroutput><link linkend="__hit_8hpp_1ad7cd28c849adeb8fec74d20155b0113d">Time_ns</link> Time_ns_cast (T const &amp; t)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>Casts a number into unsigned Time_ns. </para>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="_hit_8hpp_a04b1f65fe07e6d731225feecab2b66f6_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="__hit_8hpp_1a3bbfcd7f9bbec3174213c2b5eedc2edd"/>    <section>
+    <title>Timestamp_cast()</title>
+<indexterm><primary>Timestamp_cast</primary><secondary>Hit.hpp</secondary></indexterm>
+<indexterm><primary>Hit.hpp</primary><secondary>Timestamp_cast</secondary></indexterm>
+<computeroutput>template&lt;typename T , typename  = typename std::enable_if&lt;std::is_arithmetic&lt;T&gt;::value&gt;::type&gt; </computeroutput><para><computeroutput><link linkend="__hit_8hpp_1a36a1e53eff51015f34900948053c0d69">Timestamp</link> Timestamp_cast (T const &amp; t)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>Casts a number into unsigned Timestamp. </para>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="_hit_8hpp_a3bbfcd7f9bbec3174213c2b5eedc2edd_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+</section>
+</section>

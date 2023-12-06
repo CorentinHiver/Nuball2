@@ -16,9 +16,11 @@ var class_r_w_mat =
     [ "Set", "class_r_w_mat.html#addc9b12da9c59cb419e487ab133b163e", null ],
     [ "Set", "class_r_w_mat.html#a42bd9b2702bcac07a1a332ef1eebb0b6", null ],
     [ "Write", "class_r_w_mat.html#ab155902ca767a777680d3196661a7878", null ],
+    [ "deleted", "class_r_w_mat.html#ab4ce18606ed04d40b50ff6b8f6af6a21", null ],
     [ "fMaxCounts", "class_r_w_mat.html#a4208d4292b829b19a94c1d089cf7b2c5", null ],
     [ "fName", "class_r_w_mat.html#a1f1ba15012123f1e9300198569dfc41d", null ],
     [ "fNChannels", "class_r_w_mat.html#a078fa06934beca6a0b26e8d390b47502", null ],
     [ "fRWMat", "class_r_w_mat.html#aa0e60afd074b20cdd737fafcd3fced37", null ],
-    [ "fTotalCounts", "class_r_w_mat.html#ac474b466b02ad230cef4547e636cb6ab", null ]
+    [ "fTotalCounts", "class_r_w_mat.html#ac474b466b02ad230cef4547e636cb6ab", null ],
+    [ "m_ok", "class_r_w_mat.html#a0ec72e725999c7216f1a76ac7d145e9e", null ]
 ];

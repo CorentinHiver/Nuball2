@@ -1,0 +1,279 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="class_paris_phoswitch" kind="class" language="C++" prot="public">
+    <compoundname>ParisPhoswitch</compoundname>
+    <includes refid="_paris_phoswitch_8hpp" local="no">ParisPhoswitch.hpp</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="class_paris_phoswitch_1a4f976bd815409e09bea4639f9a9065ac" prot="public" static="no" mutable="no">
+        <type><ref refid="_hit_8hpp_1aad3a9d2c404fb4cd7f73b16966ae2877" kindref="member">NRJ</ref></type>
+        <definition>NRJ ParisPhoswitch::nrj</definition>
+        <argsstring></argsstring>
+        <name>nrj</name>
+        <initializer>= 0.</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/ParisPhoswitch.hpp" line="24" column="7" bodyfile="lib/Analyse/ParisPhoswitch.hpp" bodystart="24" bodyend="-1"/>
+        <referencedby refid="class_paris_phoswitch_1ae42c75c5e5c5a82ebc8e417b7746976e" compoundref="_paris_phoswitch_8hpp" startline="43" endline="49">Fill</referencedby>
+        <referencedby refid="class_paris_phoswitch_1a56ad50966e9b9a999d402d3c856ecf43" compoundref="_paris_phoswitch_8hpp" startline="34" endline="41">Reset</referencedby>
+        <referencedby refid="class_paris_phoswitch_1a1992c9aaafc61e2f5dea0e10d6c81f30" compoundref="_paris_phoswitch_8hpp" startline="51" endline="59">test_gate_classic</referencedby>
+        <referencedby refid="class_paris_phoswitch_1a1e65db82c8979bfd0a381dbb3940c166" compoundref="_paris_phoswitch_8hpp" startline="61" endline="69">test_gate_tan</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_paris_phoswitch_1a1771ab16004c4bc9e16ab5590e1d7afb" prot="public" static="no" mutable="no">
+        <type><ref refid="_hit_8hpp_1aad3a9d2c404fb4cd7f73b16966ae2877" kindref="member">NRJ</ref></type>
+        <definition>NRJ ParisPhoswitch::nrj2</definition>
+        <argsstring></argsstring>
+        <name>nrj2</name>
+        <initializer>= 0.</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/ParisPhoswitch.hpp" line="25" column="7" bodyfile="lib/Analyse/ParisPhoswitch.hpp" bodystart="25" bodyend="-1"/>
+        <referencedby refid="class_paris_phoswitch_1ae42c75c5e5c5a82ebc8e417b7746976e" compoundref="_paris_phoswitch_8hpp" startline="43" endline="49">Fill</referencedby>
+        <referencedby refid="class_paris_phoswitch_1a56ad50966e9b9a999d402d3c856ecf43" compoundref="_paris_phoswitch_8hpp" startline="34" endline="41">Reset</referencedby>
+        <referencedby refid="class_paris_phoswitch_1a1992c9aaafc61e2f5dea0e10d6c81f30" compoundref="_paris_phoswitch_8hpp" startline="51" endline="59">test_gate_classic</referencedby>
+        <referencedby refid="class_paris_phoswitch_1a1e65db82c8979bfd0a381dbb3940c166" compoundref="_paris_phoswitch_8hpp" startline="61" endline="69">test_gate_tan</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_paris_phoswitch_1ac84fb1e5c68263ffd8e2ab4b017841ce" prot="public" static="no" mutable="no">
+        <type><ref refid="_hit_8hpp_1aad3a9d2c404fb4cd7f73b16966ae2877" kindref="member">NRJ</ref></type>
+        <definition>NRJ ParisPhoswitch::ratio</definition>
+        <argsstring></argsstring>
+        <name>ratio</name>
+        <initializer>= 0.</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/ParisPhoswitch.hpp" line="26" column="7" bodyfile="lib/Analyse/ParisPhoswitch.hpp" bodystart="26" bodyend="-1"/>
+        <referencedby refid="class_paris_phoswitch_1a56ad50966e9b9a999d402d3c856ecf43" compoundref="_paris_phoswitch_8hpp" startline="34" endline="41">Reset</referencedby>
+        <referencedby refid="class_paris_phoswitch_1a1992c9aaafc61e2f5dea0e10d6c81f30" compoundref="_paris_phoswitch_8hpp" startline="51" endline="59">test_gate_classic</referencedby>
+        <referencedby refid="class_paris_phoswitch_1a1e65db82c8979bfd0a381dbb3940c166" compoundref="_paris_phoswitch_8hpp" startline="61" endline="69">test_gate_tan</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_paris_phoswitch_1a948e4a40c9c567bcb5b5885b266779b6" prot="public" static="no" mutable="no">
+        <type><ref refid="_hit_8hpp_1ad7cd28c849adeb8fec74d20155b0113d" kindref="member">Time_ns</ref></type>
+        <definition>Time_ns ParisPhoswitch::time</definition>
+        <argsstring></argsstring>
+        <name>time</name>
+        <initializer>= 0.</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/ParisPhoswitch.hpp" line="23" column="11" bodyfile="lib/Analyse/ParisPhoswitch.hpp" bodystart="23" bodyend="-1"/>
+        <referencedby refid="class_paris_phoswitch_1ae42c75c5e5c5a82ebc8e417b7746976e" compoundref="_paris_phoswitch_8hpp" startline="43" endline="49">Fill</referencedby>
+        <referencedby refid="class_paris_phoswitch_1a56ad50966e9b9a999d402d3c856ecf43" compoundref="_paris_phoswitch_8hpp" startline="34" endline="41">Reset</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_paris_phoswitch_1af6ce7b7a99ff4755b8629822e7295c7a" prot="private" static="no" mutable="no">
+        <type><ref refid="lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21" kindref="member">uchar</ref></type>
+        <definition>uchar ParisPhoswitch::m_label</definition>
+        <argsstring></argsstring>
+        <name>m_label</name>
+        <initializer>= -1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/ParisPhoswitch.hpp" line="29" column="9" bodyfile="lib/Analyse/ParisPhoswitch.hpp" bodystart="29" bodyend="-1"/>
+        <referencedby refid="class_paris_phoswitch_1a7a0199f0d00c394f06e51cb47df043e1" compoundref="_paris_phoswitch_8hpp" startline="12" endline="12">label</referencedby>
+        <referencedby refid="class_paris_phoswitch_1af72c175e38c3b75136aa75222c2e6bb6" compoundref="_paris_phoswitch_8hpp" startline="11" endline="11">setLabel</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_paris_phoswitch_1a367f255ba6b644157677a32d4dfe0aae" prot="private" static="no" mutable="no">
+        <type>char</type>
+        <definition>char ParisPhoswitch::m_state</definition>
+        <argsstring></argsstring>
+        <name>m_state</name>
+        <initializer>= -1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/ParisPhoswitch.hpp" line="30" column="8" bodyfile="lib/Analyse/ParisPhoswitch.hpp" bodystart="30" bodyend="-1"/>
+        <referencedby refid="class_paris_phoswitch_1ae42c75c5e5c5a82ebc8e417b7746976e" compoundref="_paris_phoswitch_8hpp" startline="43" endline="49">Fill</referencedby>
+        <referencedby refid="class_paris_phoswitch_1aa85b5ee2cc4f39e145bfb57de1c16a16" compoundref="_paris_phoswitch_8hpp" startline="14" endline="14">operator bool</referencedby>
+        <referencedby refid="class_paris_phoswitch_1a56ad50966e9b9a999d402d3c856ecf43" compoundref="_paris_phoswitch_8hpp" startline="34" endline="41">Reset</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_paris_phoswitch_1ae42c75c5e5c5a82ebc8e417b7746976e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ParisPhoswitch::Fill</definition>
+        <argsstring>(Event const &amp;event, int const &amp;i)</argsstring>
+        <name>Fill</name>
+        <param>
+          <type><ref refid="class_event" kindref="compound">Event</ref> const &amp;</type>
+          <declname>event</declname>
+        </param>
+        <param>
+          <type>int const &amp;</type>
+          <declname>i</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/ParisPhoswitch.hpp" line="18" column="8" bodyfile="lib/Analyse/ParisPhoswitch.hpp" bodystart="43" bodyend="49"/>
+        <references refid="class_paris_phoswitch_1a367f255ba6b644157677a32d4dfe0aae" compoundref="_paris_phoswitch_8hpp" startline="30">m_state</references>
+        <references refid="class_paris_phoswitch_1a4f976bd815409e09bea4639f9a9065ac" compoundref="_paris_phoswitch_8hpp" startline="24">nrj</references>
+        <references refid="class_paris_phoswitch_1a1771ab16004c4bc9e16ab5590e1d7afb" compoundref="_paris_phoswitch_8hpp" startline="25">nrj2</references>
+        <references refid="class_event_1acf99e771da7327b904866b80d6cfc45b" compoundref="_event_8hpp" startline="184">Event::nrj2s</references>
+        <references refid="_hit_8hpp_1a394977782e3af344e009b96c7d5bec92" compoundref="_hit_8hpp" startline="50" endline="50">NRJ_cast</references>
+        <references refid="class_event_1abdf231115162bb24604c238caceb1b05" compoundref="_event_8hpp" startline="182">Event::nrjs</references>
+        <references refid="class_paris_phoswitch_1a1992c9aaafc61e2f5dea0e10d6c81f30" compoundref="_paris_phoswitch_8hpp" startline="51" endline="59">test_gate_classic</references>
+        <references refid="class_paris_phoswitch_1a948e4a40c9c567bcb5b5885b266779b6" compoundref="_paris_phoswitch_8hpp" startline="23">time</references>
+        <references refid="_hit_8hpp_1a04b1f65fe07e6d731225feecab2b66f6" compoundref="_hit_8hpp" startline="54" endline="54">Time_ns_cast</references>
+        <references refid="class_event_1a433bcb1da05d7a6f477d4d1b9ee0f7b0" compoundref="_event_8hpp" startline="179">Event::times</references>
+      </memberdef>
+      <memberdef kind="function" id="class_paris_phoswitch_1a7a0199f0d00c394f06e51cb47df043e1" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto const  &amp;</type>
+        <definition>auto const&amp; ParisPhoswitch::label</definition>
+        <argsstring>() const</argsstring>
+        <name>label</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/ParisPhoswitch.hpp" line="12" column="15" bodyfile="lib/Analyse/ParisPhoswitch.hpp" bodystart="12" bodyend="12"/>
+        <references refid="class_paris_phoswitch_1af6ce7b7a99ff4755b8629822e7295c7a" compoundref="_paris_phoswitch_8hpp" startline="29">m_label</references>
+        <referencedby refid="class_paris_phoswitch_1af72c175e38c3b75136aa75222c2e6bb6" compoundref="_paris_phoswitch_8hpp" startline="11" endline="11">setLabel</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_paris_phoswitch_1aa85b5ee2cc4f39e145bfb57de1c16a16" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>ParisPhoswitch::operator bool</definition>
+        <argsstring>()</argsstring>
+        <name>operator bool</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/ParisPhoswitch.hpp" line="14" column="3" bodyfile="lib/Analyse/ParisPhoswitch.hpp" bodystart="14" bodyend="14"/>
+        <references refid="class_paris_phoswitch_1a367f255ba6b644157677a32d4dfe0aae" compoundref="_paris_phoswitch_8hpp" startline="30">m_state</references>
+      </memberdef>
+      <memberdef kind="function" id="class_paris_phoswitch_1a1d8293aeabdb473ee09d7a4c4cafa1e2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>ParisPhoswitch::ParisPhoswitch</definition>
+        <argsstring>()</argsstring>
+        <name>ParisPhoswitch</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/ParisPhoswitch.hpp" line="9" column="3" bodyfile="lib/Analyse/ParisPhoswitch.hpp" bodystart="9" bodyend="9"/>
+      </memberdef>
+      <memberdef kind="function" id="class_paris_phoswitch_1a56ad50966e9b9a999d402d3c856ecf43" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void ParisPhoswitch::Reset</definition>
+        <argsstring>()</argsstring>
+        <name>Reset</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/ParisPhoswitch.hpp" line="16" column="8" bodyfile="lib/Analyse/ParisPhoswitch.hpp" bodystart="34" bodyend="41"/>
+        <references refid="class_paris_phoswitch_1a367f255ba6b644157677a32d4dfe0aae" compoundref="_paris_phoswitch_8hpp" startline="30">m_state</references>
+        <references refid="class_paris_phoswitch_1a4f976bd815409e09bea4639f9a9065ac" compoundref="_paris_phoswitch_8hpp" startline="24">nrj</references>
+        <references refid="class_paris_phoswitch_1a1771ab16004c4bc9e16ab5590e1d7afb" compoundref="_paris_phoswitch_8hpp" startline="25">nrj2</references>
+        <references refid="class_paris_phoswitch_1ac84fb1e5c68263ffd8e2ab4b017841ce" compoundref="_paris_phoswitch_8hpp" startline="26">ratio</references>
+        <references refid="class_paris_phoswitch_1a948e4a40c9c567bcb5b5885b266779b6" compoundref="_paris_phoswitch_8hpp" startline="23">time</references>
+      </memberdef>
+      <memberdef kind="function" id="class_paris_phoswitch_1af72c175e38c3b75136aa75222c2e6bb6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto ParisPhoswitch::setLabel</definition>
+        <argsstring>(uchar const &amp;label)</argsstring>
+        <name>setLabel</name>
+        <param>
+          <type><ref refid="lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21" kindref="member">uchar</ref> const &amp;</type>
+          <declname>label</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/ParisPhoswitch.hpp" line="11" column="8" bodyfile="lib/Analyse/ParisPhoswitch.hpp" bodystart="11" bodyend="11"/>
+        <references refid="class_paris_phoswitch_1a7a0199f0d00c394f06e51cb47df043e1" compoundref="_paris_phoswitch_8hpp" startline="12" endline="12">label</references>
+        <references refid="class_paris_phoswitch_1af6ce7b7a99ff4755b8629822e7295c7a" compoundref="_paris_phoswitch_8hpp" startline="29">m_label</references>
+      </memberdef>
+      <memberdef kind="function" id="class_paris_phoswitch_1a1992c9aaafc61e2f5dea0e10d6c81f30" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>char</type>
+        <definition>char ParisPhoswitch::test_gate_classic</definition>
+        <argsstring>()</argsstring>
+        <name>test_gate_classic</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/ParisPhoswitch.hpp" line="20" column="15" bodyfile="lib/Analyse/ParisPhoswitch.hpp" bodystart="51" bodyend="59"/>
+        <references refid="class_paris_phoswitch_1a4f976bd815409e09bea4639f9a9065ac" compoundref="_paris_phoswitch_8hpp" startline="24">nrj</references>
+        <references refid="class_paris_phoswitch_1a1771ab16004c4bc9e16ab5590e1d7afb" compoundref="_paris_phoswitch_8hpp" startline="25">nrj2</references>
+        <references refid="class_paris_phoswitch_1ac84fb1e5c68263ffd8e2ab4b017841ce" compoundref="_paris_phoswitch_8hpp" startline="26">ratio</references>
+        <referencedby refid="class_paris_phoswitch_1ae42c75c5e5c5a82ebc8e417b7746976e" compoundref="_paris_phoswitch_8hpp" startline="43" endline="49">Fill</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_paris_phoswitch_1a1e65db82c8979bfd0a381dbb3940c166" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>char</type>
+        <definition>char ParisPhoswitch::test_gate_tan</definition>
+        <argsstring>()</argsstring>
+        <name>test_gate_tan</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/ParisPhoswitch.hpp" line="21" column="15" bodyfile="lib/Analyse/ParisPhoswitch.hpp" bodystart="61" bodyend="69"/>
+        <references refid="class_paris_phoswitch_1a4f976bd815409e09bea4639f9a9065ac" compoundref="_paris_phoswitch_8hpp" startline="24">nrj</references>
+        <references refid="class_paris_phoswitch_1a1771ab16004c4bc9e16ab5590e1d7afb" compoundref="_paris_phoswitch_8hpp" startline="25">nrj2</references>
+        <references refid="class_paris_phoswitch_1ac84fb1e5c68263ffd8e2ab4b017841ce" compoundref="_paris_phoswitch_8hpp" startline="26">ratio</references>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="lib/Analyse/ParisPhoswitch.hpp" line="6" column="1" bodyfile="lib/Analyse/ParisPhoswitch.hpp" bodystart="7" bodyend="31"/>
+    <listofallmembers>
+      <member refid="class_paris_phoswitch_1ae42c75c5e5c5a82ebc8e417b7746976e" prot="public" virt="non-virtual"><scope>ParisPhoswitch</scope><name>Fill</name></member>
+      <member refid="class_paris_phoswitch_1a7a0199f0d00c394f06e51cb47df043e1" prot="public" virt="non-virtual"><scope>ParisPhoswitch</scope><name>label</name></member>
+      <member refid="class_paris_phoswitch_1af6ce7b7a99ff4755b8629822e7295c7a" prot="private" virt="non-virtual"><scope>ParisPhoswitch</scope><name>m_label</name></member>
+      <member refid="class_paris_phoswitch_1a367f255ba6b644157677a32d4dfe0aae" prot="private" virt="non-virtual"><scope>ParisPhoswitch</scope><name>m_state</name></member>
+      <member refid="class_paris_phoswitch_1a4f976bd815409e09bea4639f9a9065ac" prot="public" virt="non-virtual"><scope>ParisPhoswitch</scope><name>nrj</name></member>
+      <member refid="class_paris_phoswitch_1a1771ab16004c4bc9e16ab5590e1d7afb" prot="public" virt="non-virtual"><scope>ParisPhoswitch</scope><name>nrj2</name></member>
+      <member refid="class_paris_phoswitch_1aa85b5ee2cc4f39e145bfb57de1c16a16" prot="public" virt="non-virtual"><scope>ParisPhoswitch</scope><name>operator bool</name></member>
+      <member refid="class_paris_phoswitch_1a1d8293aeabdb473ee09d7a4c4cafa1e2" prot="public" virt="non-virtual"><scope>ParisPhoswitch</scope><name>ParisPhoswitch</name></member>
+      <member refid="class_paris_phoswitch_1ac84fb1e5c68263ffd8e2ab4b017841ce" prot="public" virt="non-virtual"><scope>ParisPhoswitch</scope><name>ratio</name></member>
+      <member refid="class_paris_phoswitch_1a56ad50966e9b9a999d402d3c856ecf43" prot="public" virt="non-virtual"><scope>ParisPhoswitch</scope><name>Reset</name></member>
+      <member refid="class_paris_phoswitch_1af72c175e38c3b75136aa75222c2e6bb6" prot="public" virt="non-virtual"><scope>ParisPhoswitch</scope><name>setLabel</name></member>
+      <member refid="class_paris_phoswitch_1a1992c9aaafc61e2f5dea0e10d6c81f30" prot="public" virt="non-virtual"><scope>ParisPhoswitch</scope><name>test_gate_classic</name></member>
+      <member refid="class_paris_phoswitch_1a1e65db82c8979bfd0a381dbb3940c166" prot="public" virt="non-virtual"><scope>ParisPhoswitch</scope><name>test_gate_tan</name></member>
+      <member refid="class_paris_phoswitch_1a948e4a40c9c567bcb5b5885b266779b6" prot="public" virt="non-virtual"><scope>ParisPhoswitch</scope><name>time</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

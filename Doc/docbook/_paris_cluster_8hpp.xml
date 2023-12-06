@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__paris_cluster_8hpp" xml:lang="en-US">
+<title>lib/Analyse/ParisCluster.hpp File Reference</title>
+<indexterm><primary>lib/Analyse/ParisCluster.hpp</primary></indexterm>
+<programlisting>#include &quot;../libRoot.hpp&quot;
+#include &quot;ParisPhoswitch.hpp&quot;
+#include &quot;PositionXY.hpp&quot;
+</programlisting>Include dependency graph for ParisCluster.hpp:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="_paris_cluster_8hpp__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+This graph shows which files directly or indirectly include this file:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="_paris_cluster_8hpp__dep__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>class <link linkend="_class_paris_cluster">ParisCluster&lt; nb_phoswitch &gt;</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>

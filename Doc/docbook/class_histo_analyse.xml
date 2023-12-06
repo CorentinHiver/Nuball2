@@ -1,0 +1,212 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_class_histo_analyse" xml:lang="en-US">
+<title>HistoAnalyse&lt; THist &gt; Class Template Reference</title>
+<indexterm><primary>HistoAnalyse&lt; THist &gt;</primary></indexterm>
+<para>
+<computeroutput>#include &lt;HistoAnalyse.hpp&gt;</computeroutput>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_class_histo_analyse_1a36d0e6db9f7f461bc0a344b23b3198f7">HistoAnalyse</link> (<link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt; &amp;histo)</para>
+</listitem>
+            <listitem><para><link linkend="_class_histo_analyse_1af8f987406d09952a30925b68bf3eb3f6">HistoAnalyse</link> (THist *histo)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_histo_analyse_1ae1088555e666c10793ea02bc3c20211a">normalizeX</link> (Float_t const &amp;factor=1)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_histo_analyse_1a9f60116b08ba07ed37e2fee4232c37f8">normalizeXY</link> (Float_t const &amp;factor=1, int const &amp;min_x=0, int const &amp;min_y=0)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_histo_analyse_1aeaf2e3e1d7f2a439a8665de1af548981">normalizeY</link> (Float_t const &amp;factor=1)</para>
+</listitem>
+            <listitem><para>THist * <link linkend="_class_histo_analyse_1ac602edbd4d950bf4169d4da1f882f9d2">operator-&gt;</link> ()</para>
+</listitem>
+            <listitem><para>Float_t <link linkend="_class_histo_analyse_1ad824faf68003f64c8fa56c72bd04b009">peaksOverBackground</link> (std::vector&lt; <link linkend="__gate_8hpp_1aec153c0c98a059999caa4cfb803777c8">Gate</link> &gt; gates)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_histo_analyse_1a32a4ee17c51884e01eb924cec2c42112">removeBackground</link> (int const &amp;nsmooth=10)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_histo_analyse_1a47ce3e061ec4c3a8a5d84234771ab850">reset</link> ()</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_histo_analyse_1a3ebd877de62f44cfde794b8a7dad2a78">reset</link> (<link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt; &amp;histo)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_histo_analyse_1a191ab4e008cfed24b07dc17cea735c9d">reset</link> (THist *histo)</para>
+</listitem>
+            <listitem><para><link linkend="_class_histo_analyse_1a0ed34e82970989578b6d86621cf5a4a3">~HistoAnalyse</link> ()</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Private Attributes    </title>
+        <itemizedlist>
+            <listitem><para>bool <link linkend="_class_histo_analyse_1a4952d45d5866827e5408845a30348898">m_exists</link> = false</para>
+</listitem>
+            <listitem><para>THist * <link linkend="_class_histo_analyse_1a80e37d9d7c18ccb394f0283ede549605">m_histo</link> = nullptr</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_class_histo_analyse_1af8f987406d09952a30925b68bf3eb3f6"/>    <section>
+    <title>HistoAnalyse()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>HistoAnalyse</primary><secondary>HistoAnalyse&lt; THist &gt;</secondary></indexterm>
+<indexterm><primary>HistoAnalyse&lt; THist &gt;</primary><secondary>HistoAnalyse</secondary></indexterm>
+<computeroutput>template&lt;class THist &gt; </computeroutput><para><computeroutput><link linkend="_class_histo_analyse">HistoAnalyse</link>&lt; THist &gt;::<link linkend="_class_histo_analyse">HistoAnalyse</link> (THist * histo)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_histo_analyse_af8f987406d09952a30925b68bf3eb3f6_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_histo_analyse_1a36d0e6db9f7f461bc0a344b23b3198f7"/>    <section>
+    <title>HistoAnalyse()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>HistoAnalyse</primary><secondary>HistoAnalyse&lt; THist &gt;</secondary></indexterm>
+<indexterm><primary>HistoAnalyse&lt; THist &gt;</primary><secondary>HistoAnalyse</secondary></indexterm>
+<computeroutput>template&lt;class THist &gt; </computeroutput><para><computeroutput><link linkend="_class_histo_analyse">HistoAnalyse</link>&lt; THist &gt;::<link linkend="_class_histo_analyse">HistoAnalyse</link> (<link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt; &amp; histo)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_histo_analyse_a36d0e6db9f7f461bc0a344b23b3198f7_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_histo_analyse_1a0ed34e82970989578b6d86621cf5a4a3"/>    <section>
+    <title>~HistoAnalyse()</title>
+<indexterm><primary>~HistoAnalyse</primary><secondary>HistoAnalyse&lt; THist &gt;</secondary></indexterm>
+<indexterm><primary>HistoAnalyse&lt; THist &gt;</primary><secondary>~HistoAnalyse</secondary></indexterm>
+<computeroutput>template&lt;class THist &gt; </computeroutput><para><computeroutput><link linkend="_class_histo_analyse">HistoAnalyse</link>&lt; THist &gt;::~<link linkend="_class_histo_analyse">HistoAnalyse</link></computeroutput></para></section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_class_histo_analyse_1ae1088555e666c10793ea02bc3c20211a"/>    <section>
+    <title>normalizeX()</title>
+<indexterm><primary>normalizeX</primary><secondary>HistoAnalyse&lt; THist &gt;</secondary></indexterm>
+<indexterm><primary>HistoAnalyse&lt; THist &gt;</primary><secondary>normalizeX</secondary></indexterm>
+<computeroutput>template&lt;class THist &gt; </computeroutput><para><computeroutput>void <link linkend="_class_histo_analyse">HistoAnalyse</link>&lt; THist &gt;::normalizeX (Float_t const &amp; factor = <computeroutput>1</computeroutput>
+)</computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_histo_analyse_ae1088555e666c10793ea02bc3c20211a_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_histo_analyse_ae1088555e666c10793ea02bc3c20211a_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_histo_analyse_1a9f60116b08ba07ed37e2fee4232c37f8"/>    <section>
+    <title>normalizeXY()</title>
+<indexterm><primary>normalizeXY</primary><secondary>HistoAnalyse&lt; THist &gt;</secondary></indexterm>
+<indexterm><primary>HistoAnalyse&lt; THist &gt;</primary><secondary>normalizeXY</secondary></indexterm>
+<computeroutput>template&lt;class THist &gt; </computeroutput><para><computeroutput>void <link linkend="_class_histo_analyse">HistoAnalyse</link>&lt; THist &gt;::normalizeXY (Float_t const &amp; factor = <computeroutput>1</computeroutput>
+, int const &amp; min_x = <computeroutput>0</computeroutput>
+, int const &amp; min_y = <computeroutput>0</computeroutput>
+)</computeroutput></para>    </section><anchor xml:id="_class_histo_analyse_1aeaf2e3e1d7f2a439a8665de1af548981"/>    <section>
+    <title>normalizeY()</title>
+<indexterm><primary>normalizeY</primary><secondary>HistoAnalyse&lt; THist &gt;</secondary></indexterm>
+<indexterm><primary>HistoAnalyse&lt; THist &gt;</primary><secondary>normalizeY</secondary></indexterm>
+<computeroutput>template&lt;class THist &gt; </computeroutput><para><computeroutput>void <link linkend="_class_histo_analyse">HistoAnalyse</link>&lt; THist &gt;::normalizeY (Float_t const &amp; factor = <computeroutput>1</computeroutput>
+)</computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_histo_analyse_aeaf2e3e1d7f2a439a8665de1af548981_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_histo_analyse_aeaf2e3e1d7f2a439a8665de1af548981_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_histo_analyse_1ac602edbd4d950bf4169d4da1f882f9d2"/>    <section>
+    <title>operator-&gt;()</title>
+<indexterm><primary>operator-&gt;</primary><secondary>HistoAnalyse&lt; THist &gt;</secondary></indexterm>
+<indexterm><primary>HistoAnalyse&lt; THist &gt;</primary><secondary>operator-&gt;</secondary></indexterm>
+<computeroutput>template&lt;class THist &gt; </computeroutput><para><computeroutput>THist* <link linkend="_class_histo_analyse">HistoAnalyse</link>&lt; THist &gt;::operator-&gt; ( )<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_histo_analyse_1ad824faf68003f64c8fa56c72bd04b009"/>    <section>
+    <title>peaksOverBackground()</title>
+<indexterm><primary>peaksOverBackground</primary><secondary>HistoAnalyse&lt; THist &gt;</secondary></indexterm>
+<indexterm><primary>HistoAnalyse&lt; THist &gt;</primary><secondary>peaksOverBackground</secondary></indexterm>
+<computeroutput>template&lt;class THist &gt; </computeroutput><para><computeroutput>Float_t <link linkend="_class_histo_analyse">HistoAnalyse</link>&lt; THist &gt;::peaksOverBackground (std::vector&lt; <link linkend="__gate_8hpp_1aec153c0c98a059999caa4cfb803777c8">Gate</link> &gt; gates)</computeroutput></para>    </section><anchor xml:id="_class_histo_analyse_1a32a4ee17c51884e01eb924cec2c42112"/>    <section>
+    <title>removeBackground()</title>
+<indexterm><primary>removeBackground</primary><secondary>HistoAnalyse&lt; THist &gt;</secondary></indexterm>
+<indexterm><primary>HistoAnalyse&lt; THist &gt;</primary><secondary>removeBackground</secondary></indexterm>
+<computeroutput>template&lt;class THist &gt; </computeroutput><para><computeroutput>void <link linkend="_class_histo_analyse">HistoAnalyse</link>&lt; THist &gt;::removeBackground (int const &amp; nsmooth = <computeroutput>10</computeroutput>
+)</computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_histo_analyse_a32a4ee17c51884e01eb924cec2c42112_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_histo_analyse_1a47ce3e061ec4c3a8a5d84234771ab850"/>    <section>
+    <title>reset()<computeroutput>[1/3]</computeroutput></title>
+<indexterm><primary>reset</primary><secondary>HistoAnalyse&lt; THist &gt;</secondary></indexterm>
+<indexterm><primary>HistoAnalyse&lt; THist &gt;</primary><secondary>reset</secondary></indexterm>
+<computeroutput>template&lt;class THist &gt; </computeroutput><para><computeroutput>void <link linkend="_class_histo_analyse">HistoAnalyse</link>&lt; THist &gt;::reset ( )<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_histo_analyse_a47ce3e061ec4c3a8a5d84234771ab850_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_histo_analyse_1a3ebd877de62f44cfde794b8a7dad2a78"/>    <section>
+    <title>reset()<computeroutput>[2/3]</computeroutput></title>
+<indexterm><primary>reset</primary><secondary>HistoAnalyse&lt; THist &gt;</secondary></indexterm>
+<indexterm><primary>HistoAnalyse&lt; THist &gt;</primary><secondary>reset</secondary></indexterm>
+<computeroutput>template&lt;class THist &gt; </computeroutput><para><computeroutput>void <link linkend="_class_histo_analyse">HistoAnalyse</link>&lt; THist &gt;::reset (<link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt; &amp; histo)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_histo_analyse_a3ebd877de62f44cfde794b8a7dad2a78_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_histo_analyse_1a191ab4e008cfed24b07dc17cea735c9d"/>    <section>
+    <title>reset()<computeroutput>[3/3]</computeroutput></title>
+<indexterm><primary>reset</primary><secondary>HistoAnalyse&lt; THist &gt;</secondary></indexterm>
+<indexterm><primary>HistoAnalyse&lt; THist &gt;</primary><secondary>reset</secondary></indexterm>
+<computeroutput>template&lt;class THist &gt; </computeroutput><para><computeroutput>void <link linkend="_class_histo_analyse">HistoAnalyse</link>&lt; THist &gt;::reset (THist * histo)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_histo_analyse_a191ab4e008cfed24b07dc17cea735c9d_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_class_histo_analyse_1a4952d45d5866827e5408845a30348898"/>    <section>
+    <title>m_exists</title>
+<indexterm><primary>m_exists</primary><secondary>HistoAnalyse&lt; THist &gt;</secondary></indexterm>
+<indexterm><primary>HistoAnalyse&lt; THist &gt;</primary><secondary>m_exists</secondary></indexterm>
+<computeroutput>template&lt;class THist &gt; </computeroutput><para><computeroutput>bool <link linkend="_class_histo_analyse">HistoAnalyse</link>&lt; THist &gt;::m_exists = false<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_histo_analyse_1a80e37d9d7c18ccb394f0283ede549605"/>    <section>
+    <title>m_histo</title>
+<indexterm><primary>m_histo</primary><secondary>HistoAnalyse&lt; THist &gt;</secondary></indexterm>
+<indexterm><primary>HistoAnalyse&lt; THist &gt;</primary><secondary>m_histo</secondary></indexterm>
+<computeroutput>template&lt;class THist &gt; </computeroutput><para><computeroutput>THist* <link linkend="_class_histo_analyse">HistoAnalyse</link>&lt; THist &gt;::m_histo = nullptr<computeroutput>[private]</computeroutput></computeroutput></para></section>
+<para>
+The documentation for this class was generated from the following file:</para>
+lib/Analyse/<link linkend="__histo_analyse_8hpp">HistoAnalyse.hpp</link></section>
+</section>

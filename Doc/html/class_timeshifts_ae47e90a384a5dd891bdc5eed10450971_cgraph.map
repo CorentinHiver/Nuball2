@@ -1,0 +1,8 @@
+<map id="Timeshifts::Timeshifts" name="Timeshifts::Timeshifts">
+<area shape="rect" id="node1" title="Call the Timeshifts::load() method to load the timeshifts from a .dT file." alt="" coords="5,56,172,83"/>
+<area shape="rect" id="node2" href="$class_timeshifts.html#a28163efe8d487669cf50d5f6e1060d71" title="Use this method to load timeshifts from a .dT file." alt="" coords="220,56,347,83"/>
+<area shape="rect" id="node3" href="$files__functions_8hpp.html#afd584978228fac5fae283c12837378dd" title=" " alt="" coords="399,5,509,32"/>
+<area shape="rect" id="node4" href="$_histogramor_8hpp.html#ab48a2fa7184e6354788989602c8c8c29" title=" " alt="" coords="428,56,480,83"/>
+<area shape="rect" id="node5" href="$class_detectors.html#a1177661fb15c9825755925faf00c8398" title="Return the value of the maximum label, i.e. the size of the lookup tables." alt="" coords="395,107,513,133"/>
+<area shape="rect" id="node6" href="$_hit_8hpp.html#af181231d97866aa957e8fe8bd67f7f64" title="Data casts ///." alt="" coords="561,107,652,133"/>
+</map>

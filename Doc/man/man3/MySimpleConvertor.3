@@ -1,0 +1,236 @@
+.TH "MySimpleConvertor" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+MySimpleConvertor
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <Faster2Root\&.hpp>\fP
+.PP
+Inherits \fBFaster2Root\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBbuildEvents\fP (int time_window_ns)"
+.br
+.ti -1c
+.RI "void \fBconvert\fP (std::string const &dataFolder, std::string const &outputFolder, int const &nb_files=\-1)"
+.br
+.ti -1c
+.RI "void \fBconvertFile\fP (\fBHit\fP &hit, \fBFasterReader\fP &reader, \fBPath\fP const &outPath) override"
+.br
+.ti -1c
+.RI "void \fBloadCalibration\fP (std::string const &calibFile)"
+.br
+.ti -1c
+.RI "void \fBloadTimeshifts\fP (std::string const &dTfile)"
+.br
+.ti -1c
+.RI "void \fBloadTriggerFile\fP (std::string const &file)"
+.br
+.ti -1c
+.RI "template<class\&.\&.\&. ARGS> \fBMySimpleConvertor\fP (ARGS &&\&.\&.\&. args)"
+.br
+.ti -1c
+.RI "void \fBoverwrite\fP (bool const &_overwrite)"
+.br
+.ti -1c
+.RI "void \fBsetCalibration\fP (\fBCalibration\fP const &calibration)"
+.br
+.ti -1c
+.RI "void \fBsetNbFiles\fP (int const &nb_files=\-1)"
+.br
+.ti -1c
+.RI "void \fBsetNbThreads\fP (int const &nb_threads=\-1)"
+.br
+.ti -1c
+.RI "void \fBsetTimeshifts\fP (\fBTimeshifts\fP const &timeshifts)"
+.br
+.ti -1c
+.RI "void \fBsetTrigger\fP (std::function< bool(const \fBEvent\fP &)> other)"
+.br
+.ti -1c
+.RI "void \fBthrowSingles\fP (bool const &_throw_single=true)"
+.br
+.in -1c
+.SS "Protected Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBload\fP (int argc, char **argv)"
+.br
+.ti -1c
+.RI "virtual void \fBprintParameters\fP () const"
+.br
+.in -1c
+.SS "Static Protected Member Functions"
+
+.in +1c
+.ti -1c
+.RI "static void \fBs_convertFile\fP (\fBHit\fP &hit, \fBFasterReader\fP &reader, \fBFaster2Root\fP &convertor, \fBPath\fP const &outPath)"
+.br
+.in -1c
+.SS "Protected Attributes"
+
+.in +1c
+.ti -1c
+.RI "bool \fBm_calibrate\fP = false"
+.br
+.ti -1c
+.RI "\fBCalibration\fP \fBm_calibration\fP"
+.br
+.ti -1c
+.RI "bool \fBm_eventbuilding\fP = false"
+.br
+.ti -1c
+.RI "bool \fBm_loaded_trigger\fP = false"
+.br
+.ti -1c
+.RI "int \fBm_nb_files\fP = \-1"
+.br
+.ti -1c
+.RI "int \fBm_nb_threads\fP = 1"
+.br
+.ti -1c
+.RI "bool \fBm_ok\fP = false"
+.br
+.ti -1c
+.RI "bool \fBm_overwrite\fP = false"
+.br
+.ti -1c
+.RI "bool \fBm_throw_single\fP = false"
+.br
+.ti -1c
+.RI "Long64_t \fBm_time_window\fP = 1500000"
+.br
+.ti -1c
+.RI "\fBTimeshifts\fP \fBm_timeshifts\fP"
+.br
+.ti -1c
+.RI "\fBMTCounter\fP \fBm_total_events\fP"
+.br
+.ti -1c
+.RI "\fBMTCounter\fP \fBm_total_hits\fP"
+.br
+.ti -1c
+.RI "\fBTimer\fP \fBm_total_timer\fP"
+.br
+.ti -1c
+.RI "\fBMTCounter\fP \fBm_trigg_events\fP"
+.br
+.ti -1c
+.RI "std::function< bool(const \fBEvent\fP &)> \fBm_trigger\fP = [](const \fBEvent\fP&) { return true; }"
+.br
+.ti -1c
+.RI "std::string \fBm_trigger_file\fP"
+.br
+.ti -1c
+.RI "std::vector< \fBLabel\fP > \fBm_triggering_labels\fP"
+.br
+.ti -1c
+.RI "bool \fBm_use_RF\fP = false"
+.br
+.ti -1c
+.RI "bool \fBm_use_trigger\fP = false"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "template<class\&.\&.\&. ARGS> MySimpleConvertor::MySimpleConvertor (ARGS &&\&.\&.\&. args)\fC [inline]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "void Faster2Root::buildEvents (int time_window_ns)\fC [inline]\fP, \fC [inherited]\fP"
+
+.SS "void Faster2Root::convert (std::string const & dataFolder, std::string const & outputFolder, int const & nb_files = \fC\-1\fP)\fC [inherited]\fP"
+
+.SS "void MySimpleConvertor::convertFile (\fBHit\fP & hit, \fBFasterReader\fP & reader, \fBPath\fP const & outPath)\fC [override]\fP, \fC [virtual]\fP"
+
+.PP
+\fBParameters\fP
+.RS 4
+\fIhit\fP 
+.br
+\fIreader\fP 
+.br
+\fIoutPath\fP 
+.RE
+.PP
+
+.PP
+Reimplemented from \fBFaster2Root\fP\&.
+.SS "void Faster2Root::load (int argc, char ** argv)\fC [protected]\fP, \fC [inherited]\fP"
+
+.SS "void Faster2Root::loadCalibration (std::string const & calibFile)\fC [inline]\fP, \fC [inherited]\fP"
+
+.SS "void Faster2Root::loadTimeshifts (std::string const & dTfile)\fC [inline]\fP, \fC [inherited]\fP"
+
+.SS "void Faster2Root::loadTriggerFile (std::string const & file)\fC [inherited]\fP"
+
+.SS "void Faster2Root::overwrite (bool const & _overwrite)\fC [inline]\fP, \fC [inherited]\fP"
+
+.SS "void Faster2Root::printParameters () const\fC [protected]\fP, \fC [virtual]\fP, \fC [inherited]\fP"
+
+.SS "static void Faster2Root::s_convertFile (\fBHit\fP & hit, \fBFasterReader\fP & reader, \fBFaster2Root\fP & convertor, \fBPath\fP const & outPath)\fC [inline]\fP, \fC [static]\fP, \fC [protected]\fP, \fC [inherited]\fP"
+
+.SS "void Faster2Root::setCalibration (\fBCalibration\fP const & calibration)\fC [inline]\fP, \fC [inherited]\fP"
+
+.SS "void Faster2Root::setNbFiles (int const & nb_files = \fC\-1\fP)\fC [inline]\fP, \fC [inherited]\fP"
+
+.SS "void Faster2Root::setNbThreads (int const & nb_threads = \fC\-1\fP)\fC [inline]\fP, \fC [inherited]\fP"
+
+.SS "void Faster2Root::setTimeshifts (\fBTimeshifts\fP const & timeshifts)\fC [inline]\fP, \fC [inherited]\fP"
+
+.SS "void Faster2Root::setTrigger (std::function< bool(const \fBEvent\fP &)> other)\fC [inline]\fP, \fC [inherited]\fP"
+
+.SS "void Faster2Root::throwSingles (bool const & _throw_single = \fCtrue\fP)\fC [inline]\fP, \fC [inherited]\fP"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "bool Faster2Root::m_calibrate = false\fC [protected]\fP, \fC [inherited]\fP"
+
+.SS "\fBCalibration\fP Faster2Root::m_calibration\fC [protected]\fP, \fC [inherited]\fP"
+
+.SS "bool Faster2Root::m_eventbuilding = false\fC [protected]\fP, \fC [inherited]\fP"
+
+.SS "bool Faster2Root::m_loaded_trigger = false\fC [protected]\fP, \fC [inherited]\fP"
+
+.SS "int Faster2Root::m_nb_files = \-1\fC [protected]\fP, \fC [inherited]\fP"
+
+.SS "int Faster2Root::m_nb_threads = 1\fC [protected]\fP, \fC [inherited]\fP"
+
+.SS "bool Faster2Root::m_ok = false\fC [protected]\fP, \fC [inherited]\fP"
+
+.SS "bool Faster2Root::m_overwrite = false\fC [protected]\fP, \fC [inherited]\fP"
+
+.SS "bool Faster2Root::m_throw_single = false\fC [protected]\fP, \fC [inherited]\fP"
+
+.SS "Long64_t Faster2Root::m_time_window = 1500000\fC [protected]\fP, \fC [inherited]\fP"
+
+.SS "\fBTimeshifts\fP Faster2Root::m_timeshifts\fC [protected]\fP, \fC [inherited]\fP"
+
+.SS "\fBMTCounter\fP Faster2Root::m_total_events\fC [protected]\fP, \fC [inherited]\fP"
+
+.SS "\fBMTCounter\fP Faster2Root::m_total_hits\fC [protected]\fP, \fC [inherited]\fP"
+
+.SS "\fBTimer\fP Faster2Root::m_total_timer\fC [protected]\fP, \fC [inherited]\fP"
+
+.SS "\fBMTCounter\fP Faster2Root::m_trigg_events\fC [protected]\fP, \fC [inherited]\fP"
+
+.SS "std::function<bool(const \fBEvent\fP&)> Faster2Root::m_trigger = [](const \fBEvent\fP&) { return true; }\fC [protected]\fP, \fC [inherited]\fP"
+
+.SS "std::string Faster2Root::m_trigger_file\fC [protected]\fP, \fC [inherited]\fP"
+
+.SS "std::vector<\fBLabel\fP> Faster2Root::m_triggering_labels\fC [protected]\fP, \fC [inherited]\fP"
+
+.SS "bool Faster2Root::m_use_RF = false\fC [protected]\fP, \fC [inherited]\fP"
+
+.SS "bool Faster2Root::m_use_trigger = false\fC [protected]\fP, \fC [inherited]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Nuball2 from the source code\&.

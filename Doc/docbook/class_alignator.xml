@@ -1,0 +1,213 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_class_alignator" xml:lang="en-US">
+<title>Alignator Class Reference</title>
+<indexterm><primary>Alignator</primary></indexterm>
+<para>
+<computeroutput>#include &lt;Alignator.hpp&gt;</computeroutput>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_class_alignator_1a77097dec7c5f3598142d63c1df1bb78d">Alignator</link> (TTree *inputTree, TTree *outputTree)</para>
+
+<para>DEV. </para>
+</listitem>
+            <listitem><para><link linkend="_class_alignator_1af09796ed3384e2f74bb3c2dae1e83bc9">Alignator</link> (TTree *tree)</para>
+</listitem>
+            <listitem><para>auto <link linkend="_class_alignator_1ac335d9fe9d4d96476f4a964e08773d82">begin</link> ()</para>
+</listitem>
+            <listitem><para>auto const  &amp; <link linkend="_class_alignator_1a4f2f5ea6c53a5037ca7d906b6f45aa23">cursor</link> () const</para>
+</listitem>
+            <listitem><para>auto <link linkend="_class_alignator_1a64edf01aea60eb8fdd7a19a6f0b1a341">end</link> ()</para>
+</listitem>
+            <listitem><para>auto <link linkend="_class_alignator_1afb300fed240c1e094b7f58a5d061c4a0">GetEntry</link> (int i)</para>
+</listitem>
+            <listitem><para>auto <link linkend="_class_alignator_1a3f13f1e4383561e761787e1b38f18c75">getTree</link> ()</para>
+</listitem>
+            <listitem><para>auto const  &amp; <link linkend="_class_alignator_1a45bc066237b8c221590a6be1ddce1739">next</link> ()</para>
+</listitem>
+            <listitem><para>auto <link linkend="_class_alignator_1a645dc87dcffc14053eaac92708c22e17">operator-&gt;</link> ()</para>
+</listitem>
+            <listitem><para>auto const  &amp; <link linkend="_class_alignator_1a03d48bd3422a4f5d9210ba28ff0957a3">operator[]</link> (int const &amp;i) const</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_alignator_1af7f99e69b7cffb8e56b6ac5635ffe012">reset</link> ()</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Private Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_class_alignator_1aef33d1c20ad6433d96eeec4b91fab0c1">align</link> ()</para>
+
+<para>TBD. </para>
+</listitem>
+            <listitem><para>void <link linkend="_class_alignator_1a45f439bebedb99774e387f629cb0dfe9">loadNewIndex</link> ()</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Private Attributes    </title>
+        <itemizedlist>
+            <listitem><para>ULong64_t <link linkend="_class_alignator_1ac1a363be6c31aea520ff2da4c360af65">m_cursor</link> = 0</para>
+</listitem>
+            <listitem><para>std::vector&lt; int &gt; <link linkend="_class_alignator_1af4921d71e017acc7212a7e351fb41901">m_index</link></para>
+</listitem>
+            <listitem><para>ULong64_t <link linkend="_class_alignator_1aa4755777194f1ebae3ada8dd2ac7acbd">m_nb_data</link> = 0</para>
+</listitem>
+            <listitem><para>TTree * <link linkend="_class_alignator_1a9827f1466d50a02e7269f3f2e30ea0dd">m_out_tree</link></para>
+</listitem>
+            <listitem><para>TTree * <link linkend="_class_alignator_1ab4e454069bf5a2f8a392ab7210aff301">m_tree</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_class_alignator_1af09796ed3384e2f74bb3c2dae1e83bc9"/>    <section>
+    <title>Alignator()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>Alignator</primary><secondary>Alignator</secondary></indexterm>
+<indexterm><primary>Alignator</primary><secondary>Alignator</secondary></indexterm>
+<para><computeroutput>Alignator::Alignator (TTree * tree)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_alignator_af09796ed3384e2f74bb3c2dae1e83bc9_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_alignator_1a77097dec7c5f3598142d63c1df1bb78d"/>    <section>
+    <title>Alignator()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>Alignator</primary><secondary>Alignator</secondary></indexterm>
+<indexterm><primary>Alignator</primary><secondary>Alignator</secondary></indexterm>
+<para><computeroutput>Alignator::Alignator (TTree * inputTree, TTree * outputTree)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>DEV. </para>
+</para>
+Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_alignator_a77097dec7c5f3598142d63c1df1bb78d_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_class_alignator_1aef33d1c20ad6433d96eeec4b91fab0c1"/>    <section>
+    <title>align()</title>
+<indexterm><primary>align</primary><secondary>Alignator</secondary></indexterm>
+<indexterm><primary>Alignator</primary><secondary>align</secondary></indexterm>
+<para><computeroutput>void Alignator::align ( )<computeroutput>[private]</computeroutput></computeroutput></para><para>
+
+<para>TBD. </para>
+</para>
+
+<para>L&apos;objectif c&apos;est de faire une méthode pour aligner en temps un root tree automatiquement. Pour ça par contre, il faut une méthode qui lise automatiquement le contenu du fichier root et connecte l&apos;event correctement </para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_alignator_aef33d1c20ad6433d96eeec4b91fab0c1_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_alignator_1ac335d9fe9d4d96476f4a964e08773d82"/>    <section>
+    <title>begin()</title>
+<indexterm><primary>begin</primary><secondary>Alignator</secondary></indexterm>
+<indexterm><primary>Alignator</primary><secondary>begin</secondary></indexterm>
+<para><computeroutput>auto Alignator::begin ( )<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_alignator_1a4f2f5ea6c53a5037ca7d906b6f45aa23"/>    <section>
+    <title>cursor()</title>
+<indexterm><primary>cursor</primary><secondary>Alignator</secondary></indexterm>
+<indexterm><primary>Alignator</primary><secondary>cursor</secondary></indexterm>
+<para><computeroutput>auto const&amp; Alignator::cursor ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_alignator_1a64edf01aea60eb8fdd7a19a6f0b1a341"/>    <section>
+    <title>end()</title>
+<indexterm><primary>end</primary><secondary>Alignator</secondary></indexterm>
+<indexterm><primary>Alignator</primary><secondary>end</secondary></indexterm>
+<para><computeroutput>auto Alignator::end ( )<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_alignator_1afb300fed240c1e094b7f58a5d061c4a0"/>    <section>
+    <title>GetEntry()</title>
+<indexterm><primary>GetEntry</primary><secondary>Alignator</secondary></indexterm>
+<indexterm><primary>Alignator</primary><secondary>GetEntry</secondary></indexterm>
+<para><computeroutput>auto Alignator::GetEntry (int i)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_alignator_afb300fed240c1e094b7f58a5d061c4a0_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_alignator_1a3f13f1e4383561e761787e1b38f18c75"/>    <section>
+    <title>getTree()</title>
+<indexterm><primary>getTree</primary><secondary>Alignator</secondary></indexterm>
+<indexterm><primary>Alignator</primary><secondary>getTree</secondary></indexterm>
+<para><computeroutput>auto Alignator::getTree ( )<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_alignator_1a45f439bebedb99774e387f629cb0dfe9"/>    <section>
+    <title>loadNewIndex()</title>
+<indexterm><primary>loadNewIndex</primary><secondary>Alignator</secondary></indexterm>
+<indexterm><primary>Alignator</primary><secondary>loadNewIndex</secondary></indexterm>
+<para><computeroutput>void Alignator::loadNewIndex ( )<computeroutput>[private]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_alignator_a45f439bebedb99774e387f629cb0dfe9_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_alignator_a45f439bebedb99774e387f629cb0dfe9_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_alignator_1a45bc066237b8c221590a6be1ddce1739"/>    <section>
+    <title>next()</title>
+<indexterm><primary>next</primary><secondary>Alignator</secondary></indexterm>
+<indexterm><primary>Alignator</primary><secondary>next</secondary></indexterm>
+<para><computeroutput>auto const&amp; Alignator::next ( )<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_alignator_1a645dc87dcffc14053eaac92708c22e17"/>    <section>
+    <title>operator-&gt;()</title>
+<indexterm><primary>operator-&gt;</primary><secondary>Alignator</secondary></indexterm>
+<indexterm><primary>Alignator</primary><secondary>operator-&gt;</secondary></indexterm>
+<para><computeroutput>auto Alignator::operator-&gt; ( )<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_alignator_1a03d48bd3422a4f5d9210ba28ff0957a3"/>    <section>
+    <title>operator[]()</title>
+<indexterm><primary>operator[]</primary><secondary>Alignator</secondary></indexterm>
+<indexterm><primary>Alignator</primary><secondary>operator[]</secondary></indexterm>
+<para><computeroutput>auto const&amp; Alignator::operator[] (int const &amp; i) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_alignator_1af7f99e69b7cffb8e56b6ac5635ffe012"/>    <section>
+    <title>reset()</title>
+<indexterm><primary>reset</primary><secondary>Alignator</secondary></indexterm>
+<indexterm><primary>Alignator</primary><secondary>reset</secondary></indexterm>
+<para><computeroutput>void Alignator::reset ( )<computeroutput>[inline]</computeroutput></computeroutput></para></section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_class_alignator_1ac1a363be6c31aea520ff2da4c360af65"/>    <section>
+    <title>m_cursor</title>
+<indexterm><primary>m_cursor</primary><secondary>Alignator</secondary></indexterm>
+<indexterm><primary>Alignator</primary><secondary>m_cursor</secondary></indexterm>
+<para><computeroutput>ULong64_t Alignator::m_cursor = 0<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_alignator_1af4921d71e017acc7212a7e351fb41901"/>    <section>
+    <title>m_index</title>
+<indexterm><primary>m_index</primary><secondary>Alignator</secondary></indexterm>
+<indexterm><primary>Alignator</primary><secondary>m_index</secondary></indexterm>
+<para><computeroutput>std::vector&lt;int&gt; Alignator::m_index<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_alignator_1aa4755777194f1ebae3ada8dd2ac7acbd"/>    <section>
+    <title>m_nb_data</title>
+<indexterm><primary>m_nb_data</primary><secondary>Alignator</secondary></indexterm>
+<indexterm><primary>Alignator</primary><secondary>m_nb_data</secondary></indexterm>
+<para><computeroutput>ULong64_t Alignator::m_nb_data = 0<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_alignator_1a9827f1466d50a02e7269f3f2e30ea0dd"/>    <section>
+    <title>m_out_tree</title>
+<indexterm><primary>m_out_tree</primary><secondary>Alignator</secondary></indexterm>
+<indexterm><primary>Alignator</primary><secondary>m_out_tree</secondary></indexterm>
+<para><computeroutput>TTree* Alignator::m_out_tree<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_alignator_1ab4e454069bf5a2f8a392ab7210aff301"/>    <section>
+    <title>m_tree</title>
+<indexterm><primary>m_tree</primary><secondary>Alignator</secondary></indexterm>
+<indexterm><primary>Alignator</primary><secondary>m_tree</secondary></indexterm>
+<para><computeroutput>TTree* Alignator::m_tree<computeroutput>[private]</computeroutput></computeroutput></para></section>
+<para>
+The documentation for this class was generated from the following file:</para>
+lib/Classes/<link linkend="__alignator_8hpp">Alignator.hpp</link></section>
+</section>

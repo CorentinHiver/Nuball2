@@ -1,0 +1,391 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="class_r_f___manager" kind="class" language="C++" prot="public">
+    <compoundname>RF_Manager</compoundname>
+    <includes refid="_r_f___manager_8hpp" local="no">RF_Manager.hpp</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="class_r_f___manager_1a7738dda837846c1dee405dea4d544630" prot="public" static="no" mutable="no">
+        <type><ref refid="_hit_8hpp_1a36a1e53eff51015f34900948053c0d69" kindref="member">Timestamp</ref></type>
+        <definition>Timestamp RF_Manager::last_hit</definition>
+        <argsstring></argsstring>
+        <name>last_hit</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/RF_Manager.hpp" line="86" column="13" bodyfile="lib/Classes/RF_Manager.hpp" bodystart="86" bodyend="-1"/>
+        <referencedby refid="_r_f___manager_8hpp_1afedbf86a972cc2acc6e415596a2cb496" compoundref="_r_f___manager_8hpp" startline="154" endline="158">operator&lt;&lt;</referencedby>
+        <referencedby refid="class_r_f___manager_1a15356af241ce65874d01c9479ab48aa4" compoundref="_r_f___manager_8hpp" startline="44" endline="66">pulse_ToF</referencedby>
+        <referencedby refid="class_event_builder_1a96d24bbdba6a9cc0770bc1ec81c7c9e0" compoundref="_event_builder_8hpp" startline="119" endline="125">EventBuilder::reset</referencedby>
+        <referencedby refid="class_r_f___manager_1ae63b656a158cd94800fbe542da54a389" compoundref="_r_f___manager_8hpp" startline="75" endline="81">set</referencedby>
+        <referencedby refid="class_event_builder_1a4f56ddbeef9ac86eca830a3742fb30c7" compoundref="_event_builder_8hpp" startline="111" endline="117">EventBuilder::set_last_hit</referencedby>
+        <referencedby refid="class_timeshifts_1abef7234fe827ae3c7758788cf22b6921" compoundref="_timeshifts_8hpp" startline="664" endline="705">Timeshifts::treatFasterFile</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_r_f___manager_1aaafb0a06fe27f4d3121dd41faa6787cd" prot="public" static="no" mutable="no">
+        <type><ref refid="_hit_8hpp_1a808363c27c30b41f6ed40b62ebde3ee7" kindref="member">Time</ref></type>
+        <definition>Time RF_Manager::period</definition>
+        <argsstring></argsstring>
+        <name>period</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/RF_Manager.hpp" line="89" column="8" bodyfile="lib/Classes/RF_Manager.hpp" bodystart="89" bodyend="-1"/>
+        <referencedby refid="class_event_builder_1a721b4b60a459c5a5c00ed3e1b513d636" compoundref="_event_builder_8hpp" startline="49" endline="102">EventBuilder::build</referencedby>
+        <referencedby refid="_r_f___manager_8hpp_1afedbf86a972cc2acc6e415596a2cb496" compoundref="_r_f___manager_8hpp" startline="154" endline="158">operator&lt;&lt;</referencedby>
+        <referencedby refid="class_r_f___manager_1a15356af241ce65874d01c9479ab48aa4" compoundref="_r_f___manager_8hpp" startline="44" endline="66">pulse_ToF</referencedby>
+        <referencedby refid="class_event_builder_1a96d24bbdba6a9cc0770bc1ec81c7c9e0" compoundref="_event_builder_8hpp" startline="119" endline="125">EventBuilder::reset</referencedby>
+        <referencedby refid="class_r_f___manager_1a84a0f90afbd329b182c07f7485d29bc3" compoundref="_r_f___manager_8hpp" startline="31" endline="31">RF_Manager</referencedby>
+        <referencedby refid="class_r_f___manager_1ae63b656a158cd94800fbe542da54a389" compoundref="_r_f___manager_8hpp" startline="75" endline="81">set</referencedby>
+        <referencedby refid="class_event_builder_1a4f56ddbeef9ac86eca830a3742fb30c7" compoundref="_event_builder_8hpp" startline="111" endline="117">EventBuilder::set_last_hit</referencedby>
+        <referencedby refid="class_timeshifts_1abef7234fe827ae3c7758788cf22b6921" compoundref="_timeshifts_8hpp" startline="664" endline="705">Timeshifts::treatFasterFile</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="class_r_f___manager_1af38019b6bb4e45be94b17c5d193f5e45" prot="public" static="yes" mutable="no">
+        <type><ref refid="_hit_8hpp_1ab5dd24876acad09ec52c250c1668466c" kindref="member">Label</ref></type>
+        <definition>Label RF_Manager::label</definition>
+        <argsstring></argsstring>
+        <name>label</name>
+        <initializer>= 251</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/RF_Manager.hpp" line="91" column="16" bodyfile="lib/Classes/RF_Manager.hpp" bodystart="91" bodyend="-1"/>
+        <referencedby refid="class_timeshifts_1a608d9443a15dd669920e10dd8baee23a" compoundref="_timeshifts_8hpp" startline="827" endline="926">Timeshifts::analyse</referencedby>
+        <referencedby refid="_timeshifts_8hpp_1a202a57630e2aa9744043c30964b64bcd" compoundref="_timeshifts_8hpp" startline="612" endline="618">get_first_RF_of_file</referencedby>
+        <referencedby refid="class_r_f___manager_1a84a0f90afbd329b182c07f7485d29bc3" compoundref="_r_f___manager_8hpp" startline="31" endline="31">RF_Manager</referencedby>
+        <referencedby refid="class_r_f___manager_1a0261f2b02176a3e5562603c25f31d9a6" compoundref="_r_f___manager_8hpp" startline="100" endline="108">setHit</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="class_r_f___manager_1a26bbe9a4c07e1019539c2acb0a57e7b5" prot="private" static="yes" mutable="no">
+        <type><ref refid="_hit_8hpp_1a808363c27c30b41f6ed40b62ebde3ee7" kindref="member">Time</ref></type>
+        <definition>Time RF_Manager::m_offset</definition>
+        <argsstring></argsstring>
+        <name>m_offset</name>
+        <initializer>= 50000</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/RF_Manager.hpp" line="94" column="15" bodyfile="lib/Classes/RF_Manager.hpp" bodystart="94" bodyend="-1"/>
+        <referencedby refid="class_r_f___manager_1afd7204c9141bc2556b195a93e757508e" compoundref="_r_f___manager_8hpp" startline="41" endline="41">offset</referencedby>
+        <referencedby refid="class_r_f___manager_1a15356af241ce65874d01c9479ab48aa4" compoundref="_r_f___manager_8hpp" startline="44" endline="66">pulse_ToF</referencedby>
+        <referencedby refid="class_r_f___manager_1ac56cba54c3c01c70e45b40093e3d1a89" compoundref="_r_f___manager_8hpp" startline="39" endline="39">set_offset</referencedby>
+        <referencedby refid="class_r_f___manager_1a7c25dd168ae776c4229195e025ab4365" compoundref="_r_f___manager_8hpp" startline="40" endline="40">set_offset_ns</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_r_f___manager_1a829a6911ee952dc5f3fbcf5cf93b7048" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="_hit_8hpp_1a808363c27c30b41f6ed40b62ebde3ee7" kindref="member">Time</ref></type>
+        <definition>Time RF_Manager::pulse_ToF</definition>
+        <argsstring>(Hit const &amp;hit) const</argsstring>
+        <name>pulse_ToF</name>
+        <param>
+          <type><ref refid="class_hit" kindref="compound">Hit</ref> const &amp;</type>
+          <declname>hit</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/RF_Manager.hpp" line="67" column="8" bodyfile="lib/Classes/RF_Manager.hpp" bodystart="67" bodyend="67"/>
+        <references refid="class_r_f___manager_1a829a6911ee952dc5f3fbcf5cf93b7048" compoundref="_r_f___manager_8hpp" startline="67" endline="67">pulse_ToF</references>
+        <references refid="class_hit_1ad98aea75b451b3246f45b25f1ccb9221" compoundref="_hit_8hpp" startline="197">Hit::stamp</references>
+        <referencedby refid="class_r_f___manager_1a829a6911ee952dc5f3fbcf5cf93b7048" compoundref="_r_f___manager_8hpp" startline="67" endline="67">pulse_ToF</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_r_f___manager_1a56eade01a7891c421108256629d92028" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="_hit_8hpp_1a808363c27c30b41f6ed40b62ebde3ee7" kindref="member">Time</ref></type>
+        <definition>Time RF_Manager::pulse_ToF</definition>
+        <argsstring>(Hit const &amp;hit, Time const &amp;offset) const</argsstring>
+        <name>pulse_ToF</name>
+        <param>
+          <type><ref refid="class_hit" kindref="compound">Hit</ref> const &amp;</type>
+          <declname>hit</declname>
+        </param>
+        <param>
+          <type><ref refid="_hit_8hpp_1a808363c27c30b41f6ed40b62ebde3ee7" kindref="member">Time</ref> const &amp;</type>
+          <declname>offset</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/RF_Manager.hpp" line="69" column="8" bodyfile="lib/Classes/RF_Manager.hpp" bodystart="69" bodyend="69"/>
+        <references refid="class_r_f___manager_1afd7204c9141bc2556b195a93e757508e" compoundref="_r_f___manager_8hpp" startline="41" endline="41">offset</references>
+        <references refid="class_r_f___manager_1a56eade01a7891c421108256629d92028" compoundref="_r_f___manager_8hpp" startline="69" endline="69">pulse_ToF</references>
+        <references refid="class_hit_1ad98aea75b451b3246f45b25f1ccb9221" compoundref="_hit_8hpp" startline="197">Hit::stamp</references>
+        <referencedby refid="class_r_f___manager_1a56eade01a7891c421108256629d92028" compoundref="_r_f___manager_8hpp" startline="69" endline="69">pulse_ToF</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_r_f___manager_1a15356af241ce65874d01c9479ab48aa4" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="_hit_8hpp_1a808363c27c30b41f6ed40b62ebde3ee7" kindref="member">Time</ref></type>
+        <definition>Time RF_Manager::pulse_ToF</definition>
+        <argsstring>(Timestamp const &amp;timestamp) const</argsstring>
+        <name>pulse_ToF</name>
+        <param>
+          <type><ref refid="_hit_8hpp_1a36a1e53eff51015f34900948053c0d69" kindref="member">Timestamp</ref> const &amp;</type>
+          <declname>timestamp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/RF_Manager.hpp" line="44" column="8" bodyfile="lib/Classes/RF_Manager.hpp" bodystart="44" bodyend="66"/>
+        <references refid="class_r_f___manager_1a7738dda837846c1dee405dea4d544630" compoundref="_r_f___manager_8hpp" startline="86">last_hit</references>
+        <references refid="class_r_f___manager_1a26bbe9a4c07e1019539c2acb0a57e7b5" compoundref="_r_f___manager_8hpp" startline="94">m_offset</references>
+        <references refid="class_r_f___manager_1aaafb0a06fe27f4d3121dd41faa6787cd" compoundref="_r_f___manager_8hpp" startline="89">period</references>
+        <references refid="_hit_8hpp_1a4ea1ea3a29989c67afc2c4db41e36b15" compoundref="_hit_8hpp" startline="46" endline="46">Time_cast</references>
+        <references refid="_hit_8hpp_1a3bbfcd7f9bbec3174213c2b5eedc2edd" compoundref="_hit_8hpp" startline="58" endline="58">Timestamp_cast</references>
+        <referencedby refid="class_timeshifts_1a5c037c5bb4b409c3040982c451c6733d" compoundref="_timeshifts_8hpp" startline="712" endline="783">Timeshifts::Fill</referencedby>
+        <referencedby refid="class_r_f___manager_1a1d406ab06d5c992faae4932e59166941" compoundref="_r_f___manager_8hpp" startline="73" endline="73">pulse_ToF_ns</referencedby>
+        <referencedby refid="class_r_f___manager_1a052e59a3c7b80f193a0bbfa8e6995ed9" compoundref="_r_f___manager_8hpp" startline="42" endline="42">refTime</referencedby>
+        <referencedby refid="class_sorted___event_1a526eefb6a423a59ff6096766c04c98e2" compoundref="_sorted___event_8hpp" startline="254" endline="372">Sorted_Event::sortEvent</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_r_f___manager_1ad5d5d6c27fa4e059bc125c5d14a26c3f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="_hit_8hpp_1a808363c27c30b41f6ed40b62ebde3ee7" kindref="member">Time</ref></type>
+        <definition>Time RF_Manager::pulse_ToF</definition>
+        <argsstring>(Timestamp const &amp;timestamp, Time const &amp;offset) const</argsstring>
+        <name>pulse_ToF</name>
+        <param>
+          <type><ref refid="_hit_8hpp_1a36a1e53eff51015f34900948053c0d69" kindref="member">Timestamp</ref> const &amp;</type>
+          <declname>timestamp</declname>
+        </param>
+        <param>
+          <type><ref refid="_hit_8hpp_1a808363c27c30b41f6ed40b62ebde3ee7" kindref="member">Time</ref> const &amp;</type>
+          <declname>offset</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/RF_Manager.hpp" line="70" column="8" bodyfile="lib/Classes/RF_Manager.hpp" bodystart="70" bodyend="70"/>
+        <references refid="class_r_f___manager_1afd7204c9141bc2556b195a93e757508e" compoundref="_r_f___manager_8hpp" startline="41" endline="41">offset</references>
+        <references refid="class_r_f___manager_1ad5d5d6c27fa4e059bc125c5d14a26c3f" compoundref="_r_f___manager_8hpp" startline="70" endline="70">pulse_ToF</references>
+        <referencedby refid="class_r_f___manager_1ad5d5d6c27fa4e059bc125c5d14a26c3f" compoundref="_r_f___manager_8hpp" startline="70" endline="70">pulse_ToF</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_r_f___manager_1a1d406ab06d5c992faae4932e59166941" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class...</type>
+            <declname>ARGS</declname>
+            <defname>ARGS</defname>
+          </param>
+        </templateparamlist>
+        <type>float</type>
+        <definition>float RF_Manager::pulse_ToF_ns</definition>
+        <argsstring>(ARGS... args)</argsstring>
+        <name>pulse_ToF_ns</name>
+        <param>
+          <type>ARGS...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/RF_Manager.hpp" line="73" column="9" bodyfile="lib/Classes/RF_Manager.hpp" bodystart="73" bodyend="73"/>
+        <references refid="class_r_f___manager_1a15356af241ce65874d01c9479ab48aa4" compoundref="_r_f___manager_8hpp" startline="44" endline="66">pulse_ToF</references>
+      </memberdef>
+      <memberdef kind="function" id="class_r_f___manager_1a052e59a3c7b80f193a0bbfa8e6995ed9" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="_hit_8hpp_1a36a1e53eff51015f34900948053c0d69" kindref="member">Timestamp</ref></type>
+        <definition>Timestamp RF_Manager::refTime</definition>
+        <argsstring>(Timestamp const &amp;timestamp) const</argsstring>
+        <name>refTime</name>
+        <param>
+          <type><ref refid="_hit_8hpp_1a36a1e53eff51015f34900948053c0d69" kindref="member">Timestamp</ref> const &amp;</type>
+          <declname>timestamp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/RF_Manager.hpp" line="42" column="13" bodyfile="lib/Classes/RF_Manager.hpp" bodystart="42" bodyend="42"/>
+        <references refid="class_r_f___manager_1a15356af241ce65874d01c9479ab48aa4" compoundref="_r_f___manager_8hpp" startline="44" endline="66">pulse_ToF</references>
+      </memberdef>
+      <memberdef kind="function" id="class_r_f___manager_1a84a0f90afbd329b182c07f7485d29bc3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>RF_Manager::RF_Manager</definition>
+        <argsstring>(Time const &amp;_period=400, Label const &amp;label_RF=251)</argsstring>
+        <name>RF_Manager</name>
+        <param>
+          <type><ref refid="_hit_8hpp_1a808363c27c30b41f6ed40b62ebde3ee7" kindref="member">Time</ref> const &amp;</type>
+          <declname>_period</declname>
+          <defval>400</defval>
+        </param>
+        <param>
+          <type><ref refid="_hit_8hpp_1ab5dd24876acad09ec52c250c1668466c" kindref="member">Label</ref> const &amp;</type>
+          <declname>label_RF</declname>
+          <defval>251</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/RF_Manager.hpp" line="31" column="3" bodyfile="lib/Classes/RF_Manager.hpp" bodystart="31" bodyend="31"/>
+        <references refid="class_r_f___manager_1af38019b6bb4e45be94b17c5d193f5e45" compoundref="_r_f___manager_8hpp" startline="91">label</references>
+        <references refid="class_r_f___manager_1aaafb0a06fe27f4d3121dd41faa6787cd" compoundref="_r_f___manager_8hpp" startline="89">period</references>
+      </memberdef>
+      <memberdef kind="function" id="class_r_f___manager_1ae63b656a158cd94800fbe542da54a389" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void RF_Manager::set</definition>
+        <argsstring>(Timestamp new_timestamp, Timestamp _period)</argsstring>
+        <name>set</name>
+        <param>
+          <type><ref refid="_hit_8hpp_1a36a1e53eff51015f34900948053c0d69" kindref="member">Timestamp</ref></type>
+          <declname>new_timestamp</declname>
+        </param>
+        <param>
+          <type><ref refid="_hit_8hpp_1a36a1e53eff51015f34900948053c0d69" kindref="member">Timestamp</ref></type>
+          <declname>_period</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/RF_Manager.hpp" line="75" column="8" bodyfile="lib/Classes/RF_Manager.hpp" bodystart="75" bodyend="81"/>
+        <references refid="lib_co_8hpp_1a2052317e56aa118e7ffcdb2e398f551c" compoundref="lib_co_8hpp" startline="86" endline="86">double_cast</references>
+        <references refid="class_r_f___manager_1a7738dda837846c1dee405dea4d544630" compoundref="_r_f___manager_8hpp" startline="86">last_hit</references>
+        <references refid="class_r_f___manager_1aaafb0a06fe27f4d3121dd41faa6787cd" compoundref="_r_f___manager_8hpp" startline="89">period</references>
+        <references refid="_hit_8hpp_1a4ea1ea3a29989c67afc2c4db41e36b15" compoundref="_hit_8hpp" startline="46" endline="46">Time_cast</references>
+        <referencedby refid="class_r_f___manager_1a0261f2b02176a3e5562603c25f31d9a6" compoundref="_r_f___manager_8hpp" startline="100" endline="108">setHit</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_r_f___manager_1a0261f2b02176a3e5562603c25f31d9a6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool RF_Manager::setHit</definition>
+        <argsstring>(Hit const &amp;hit)</argsstring>
+        <name>setHit</name>
+        <param>
+          <type><ref refid="class_hit" kindref="compound">Hit</ref> const &amp;</type>
+          <declname>hit</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/RF_Manager.hpp" line="32" column="8" bodyfile="lib/Classes/RF_Manager.hpp" bodystart="100" bodyend="108"/>
+        <references refid="class_hit_1a3d999e7bbbb470d1d3aa55ee772a98d6" compoundref="_hit_8hpp" startline="198">Hit::adc</references>
+        <references refid="class_hit_1a7742ff02158f94fd0ccd163fc34ee9d1" compoundref="_hit_8hpp" startline="196">Hit::label</references>
+        <references refid="class_r_f___manager_1af38019b6bb4e45be94b17c5d193f5e45" compoundref="_r_f___manager_8hpp" startline="91">label</references>
+        <references refid="class_hit_1abda4857e925c3a6315a6fb41fad59189" compoundref="_hit_8hpp" startline="199">Hit::nrj</references>
+        <references refid="class_r_f___manager_1ae63b656a158cd94800fbe542da54a389" compoundref="_r_f___manager_8hpp" startline="75" endline="81">set</references>
+        <references refid="class_hit_1ad98aea75b451b3246f45b25f1ccb9221" compoundref="_hit_8hpp" startline="197">Hit::stamp</references>
+        <references refid="_hit_8hpp_1a3bbfcd7f9bbec3174213c2b5eedc2edd" compoundref="_hit_8hpp" startline="58" endline="58">Timestamp_cast</references>
+        <referencedby refid="_timeshifts_8hpp_1a202a57630e2aa9744043c30964b64bcd" compoundref="_timeshifts_8hpp" startline="612" endline="618">get_first_RF_of_file</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="class_r_f___manager_1afd7204c9141bc2556b195a93e757508e" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>static auto RF_Manager::offset</definition>
+        <argsstring>()</argsstring>
+        <name>offset</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/RF_Manager.hpp" line="41" column="15" bodyfile="lib/Classes/RF_Manager.hpp" bodystart="41" bodyend="41"/>
+        <references refid="class_r_f___manager_1a26bbe9a4c07e1019539c2acb0a57e7b5" compoundref="_r_f___manager_8hpp" startline="94">m_offset</references>
+        <referencedby refid="class_r_f___manager_1a56eade01a7891c421108256629d92028" compoundref="_r_f___manager_8hpp" startline="69" endline="69">pulse_ToF</referencedby>
+        <referencedby refid="class_r_f___manager_1ac56cba54c3c01c70e45b40093e3d1a89" compoundref="_r_f___manager_8hpp" startline="39" endline="39">set_offset</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_r_f___manager_1ac56cba54c3c01c70e45b40093e3d1a89" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void RF_Manager::set_offset</definition>
+        <argsstring>(Time const &amp;offset)</argsstring>
+        <name>set_offset</name>
+        <param>
+          <type><ref refid="_hit_8hpp_1a808363c27c30b41f6ed40b62ebde3ee7" kindref="member">Time</ref> const &amp;</type>
+          <declname>offset</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/RF_Manager.hpp" line="39" column="15" bodyfile="lib/Classes/RF_Manager.hpp" bodystart="39" bodyend="39"/>
+        <references refid="class_r_f___manager_1a26bbe9a4c07e1019539c2acb0a57e7b5" compoundref="_r_f___manager_8hpp" startline="94">m_offset</references>
+        <references refid="class_r_f___manager_1afd7204c9141bc2556b195a93e757508e" compoundref="_r_f___manager_8hpp" startline="41" endline="41">offset</references>
+        <referencedby refid="class_timeshifts_1ac2c3e8e47598e28d49932a3720a6fd58" compoundref="_timeshifts_8hpp" startline="175" endline="175">Timeshifts::setRFOffset</referencedby>
+        <referencedby refid="class_timeshifts_1a0faeccde5623d6808435414d020d1385" compoundref="_timeshifts_8hpp" startline="168" endline="168">Timeshifts::setRFOffset_ns</referencedby>
+        <referencedby refid="class_timeshifts_1af6cb9cffa9322eabb7fe712c6e6ae798" compoundref="_timeshifts_8hpp" startline="161" endline="161">Timeshifts::setRFShift</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_r_f___manager_1a7c25dd168ae776c4229195e025ab4365" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void RF_Manager::set_offset_ns</definition>
+        <argsstring>(Time const &amp;offset_ns)</argsstring>
+        <name>set_offset_ns</name>
+        <param>
+          <type><ref refid="_hit_8hpp_1a808363c27c30b41f6ed40b62ebde3ee7" kindref="member">Time</ref> const &amp;</type>
+          <declname>offset_ns</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/RF_Manager.hpp" line="40" column="15" bodyfile="lib/Classes/RF_Manager.hpp" bodystart="40" bodyend="40"/>
+        <references refid="class_r_f___manager_1a26bbe9a4c07e1019539c2acb0a57e7b5" compoundref="_r_f___manager_8hpp" startline="94">m_offset</references>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Class used to manage the RF. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Normal case : the RF reference timestamp is lower than the shifted timestamps (should also be the case of unshifted timestamp) dT = (shifted_time-last_hit) corresponds to the time separating the current hit to the reference RF Therefore, N = dT/period corresponds to the number of periods separating the two hits In other words, it is the number of pulses between the reference RF and the current hit Then, period*N is the timestamp of the pulse relative to the current hit (Remember we are doing integer arithmetic, period*dT/period != dT) And dTperiod is the rest of the integer division, hence the time between the hit and its relative pulse Finally, one need to substract the applied offset in order to get the correct result :</para>
+<para>When the data is not correctly ordered : In order to get a correct answer, one need to get a positive difference, so to invert the difference : now last_hit-shifted_time&gt;0 But the result is inverted and we obtain really period-timestamp. We get the correct result by doing : relative_timestamp = period - (period-timestamp) </para>
+    </detaileddescription>
+    <location file="lib/Classes/RF_Manager.hpp" line="28" column="1" bodyfile="lib/Classes/RF_Manager.hpp" bodystart="29" bodyend="95"/>
+    <listofallmembers>
+      <member refid="class_r_f___manager_1af38019b6bb4e45be94b17c5d193f5e45" prot="public" virt="non-virtual"><scope>RF_Manager</scope><name>label</name></member>
+      <member refid="class_r_f___manager_1a7738dda837846c1dee405dea4d544630" prot="public" virt="non-virtual"><scope>RF_Manager</scope><name>last_hit</name></member>
+      <member refid="class_r_f___manager_1a26bbe9a4c07e1019539c2acb0a57e7b5" prot="private" virt="non-virtual"><scope>RF_Manager</scope><name>m_offset</name></member>
+      <member refid="class_r_f___manager_1afd7204c9141bc2556b195a93e757508e" prot="public" virt="non-virtual"><scope>RF_Manager</scope><name>offset</name></member>
+      <member refid="class_r_f___manager_1aaafb0a06fe27f4d3121dd41faa6787cd" prot="public" virt="non-virtual"><scope>RF_Manager</scope><name>period</name></member>
+      <member refid="class_r_f___manager_1a15356af241ce65874d01c9479ab48aa4" prot="public" virt="non-virtual"><scope>RF_Manager</scope><name>pulse_ToF</name></member>
+      <member refid="class_r_f___manager_1a829a6911ee952dc5f3fbcf5cf93b7048" prot="public" virt="non-virtual"><scope>RF_Manager</scope><name>pulse_ToF</name></member>
+      <member refid="class_r_f___manager_1a56eade01a7891c421108256629d92028" prot="public" virt="non-virtual"><scope>RF_Manager</scope><name>pulse_ToF</name></member>
+      <member refid="class_r_f___manager_1ad5d5d6c27fa4e059bc125c5d14a26c3f" prot="public" virt="non-virtual"><scope>RF_Manager</scope><name>pulse_ToF</name></member>
+      <member refid="class_r_f___manager_1a1d406ab06d5c992faae4932e59166941" prot="public" virt="non-virtual"><scope>RF_Manager</scope><name>pulse_ToF_ns</name></member>
+      <member refid="class_r_f___manager_1a052e59a3c7b80f193a0bbfa8e6995ed9" prot="public" virt="non-virtual"><scope>RF_Manager</scope><name>refTime</name></member>
+      <member refid="class_r_f___manager_1a84a0f90afbd329b182c07f7485d29bc3" prot="public" virt="non-virtual"><scope>RF_Manager</scope><name>RF_Manager</name></member>
+      <member refid="class_r_f___manager_1ae63b656a158cd94800fbe542da54a389" prot="public" virt="non-virtual"><scope>RF_Manager</scope><name>set</name></member>
+      <member refid="class_r_f___manager_1ac56cba54c3c01c70e45b40093e3d1a89" prot="public" virt="non-virtual"><scope>RF_Manager</scope><name>set_offset</name></member>
+      <member refid="class_r_f___manager_1a7c25dd168ae776c4229195e025ab4365" prot="public" virt="non-virtual"><scope>RF_Manager</scope><name>set_offset_ns</name></member>
+      <member refid="class_r_f___manager_1a0261f2b02176a3e5562603c25f31d9a6" prot="public" virt="non-virtual"><scope>RF_Manager</scope><name>setHit</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

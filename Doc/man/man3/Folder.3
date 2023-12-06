@@ -1,0 +1,117 @@
+.TH "Folder" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Folder \- EXPERIMENTAL Object used to hold a folder's name\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <files_functions\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBFolder\fP ()"
+.br
+.ti -1c
+.RI "\fBFolder\fP (const char *folder)"
+.br
+.ti -1c
+.RI "\fBFolder\fP (std::string const &folder)"
+.br
+.RI "Turns a string to a folder's name\&. "
+.ti -1c
+.RI "std::string const  & \fBget\fP () const"
+.br
+.ti -1c
+.RI "void \fBmake\fP ()"
+.br
+.ti -1c
+.RI "std::string \fBname\fP () const"
+.br
+.ti -1c
+.RI "\fBoperator bool\fP () const &"
+.br
+.ti -1c
+.RI "\fBFolder\fP & \fBoperator+=\fP (\fBFolder\fP const &folder)"
+.br
+.ti -1c
+.RI "\fBFolder\fP & \fBoperator=\fP (const char *folder)"
+.br
+.ti -1c
+.RI "\fBFolder\fP & \fBoperator=\fP (std::string const &folder)"
+.br
+.ti -1c
+.RI "bool \fBoperator==\fP (const char *\fBstring\fP) const"
+.br
+.ti -1c
+.RI "bool \fBoperator==\fP (std::string const &\fBstring\fP) const"
+.br
+.ti -1c
+.RI "std::string \fBstring\fP ()"
+.br
+.ti -1c
+.RI "std::string const  & \fBstring\fP () const"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "std::string \fBm_folder\fP"
+.br
+.ti -1c
+.RI "bool \fBm_ok\fP = false"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+EXPERIMENTAL Object used to hold a folder's name\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "Folder::Folder ()\fC [inline]\fP"
+
+.SS "Folder::Folder (std::string const & folder)\fC [inline]\fP"
+
+.PP
+Turns a string to a folder's name\&. Basically, it is simply ensures that the name ends with a '/'
+.PP
+Also, it is the base class of \fBPath\fP class 
+.SS "Folder::Folder (const char * folder)\fC [inline]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "std::string const& Folder::get () const\fC [inline]\fP"
+
+.SS "void Folder::make ()\fC [inline]\fP"
+
+.SS "std::string Folder::name () const\fC [inline]\fP"
+
+.SS "Folder::operator bool () const &\fC [inline]\fP"
+
+.SS "\fBFolder\fP& Folder::operator+= (\fBFolder\fP const & folder)\fC [inline]\fP"
+
+.SS "\fBFolder\fP& Folder::operator= (const char * folder)\fC [inline]\fP"
+
+.SS "\fBFolder\fP& Folder::operator= (std::string const & folder)\fC [inline]\fP"
+
+.SS "bool Folder::operator== (const char * string) const\fC [inline]\fP"
+
+.SS "bool Folder::operator== (std::string const & string) const\fC [inline]\fP"
+
+.SS "std::string Folder::string ()\fC [inline]\fP"
+
+.SS "std::string const& Folder::string () const\fC [inline]\fP"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "std::string Folder::m_folder\fC [private]\fP"
+
+.SS "bool Folder::m_ok = false\fC [private]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Nuball2 from the source code\&.

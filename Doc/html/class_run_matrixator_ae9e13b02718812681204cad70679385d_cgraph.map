@@ -1,0 +1,7 @@
+<map id="RunMatrixator::initialize_dontMatrixate" name="RunMatrixator::initialize_dontMatrixate">
+<area shape="rect" id="node1" title=" " alt="" coords="5,49,184,90"/>
+<area shape="rect" id="node2" href="$class_detectors.html#a24d220832c2f0a03a0d886e11f2c284c" title="Returns the number of types in the ID file." alt="" coords="232,5,379,32"/>
+<area shape="rect" id="node3" href="$class_detectors.html#a1177661fb15c9825755925faf00c8398" title="Return the value of the maximum label, i.e. the size of the lookup tables." alt="" coords="246,56,365,83"/>
+<area shape="rect" id="node5" href="$class_detectors.html#a6c368aa8fe9d985fd742371179718d71" title=" " alt="" coords="241,107,370,133"/>
+<area shape="rect" id="node4" href="$_hit_8hpp.html#af181231d97866aa957e8fe8bd67f7f64" title="Data casts ///." alt="" coords="427,56,517,83"/>
+</map>

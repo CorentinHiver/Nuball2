@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__reader_manager_8hpp" xml:lang="en-US">
+<title>lib/Classes/ReaderManager.hpp File Reference</title>
+<indexterm><primary>lib/Classes/ReaderManager.hpp</primary></indexterm>
+<programlisting>#include &quot;DataMultiReader.h&quot;
+#include &lt;dirent.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+</programlisting>Include dependency graph for ReaderManager.hpp:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="_reader_manager_8hpp__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>class <link linkend="_class_reader_manager">ReaderManager</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Typedefs    </title>
+        <itemizedlist>
+            <listitem><para>typedef std::vector&lt; <link linkend="_class_hit">Hit</link> &gt; <link linkend="__reader_manager_8hpp_1a60d0931dc6c9bc5b0c252405badd4f97">Buffer</link></para>
+</listitem>
+            <listitem><para>typedef std::vector&lt; std::string &gt; <link linkend="__reader_manager_8hpp_1a72f0af09a1480bc3893638955d9c98c8">Listfiles</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Typedef Documentation</title>
+<anchor xml:id="__reader_manager_8hpp_1a60d0931dc6c9bc5b0c252405badd4f97"/>    <section>
+    <title>Buffer</title>
+<indexterm><primary>Buffer</primary><secondary>ReaderManager.hpp</secondary></indexterm>
+<indexterm><primary>ReaderManager.hpp</primary><secondary>Buffer</secondary></indexterm>
+<para><computeroutput>typedef std::vector&lt;<link linkend="_class_hit">Hit</link>&gt; <link linkend="__reader_manager_8hpp_1a60d0931dc6c9bc5b0c252405badd4f97">Buffer</link></computeroutput></para>    </section><anchor xml:id="__reader_manager_8hpp_1a72f0af09a1480bc3893638955d9c98c8"/>    <section>
+    <title>Listfiles</title>
+<indexterm><primary>Listfiles</primary><secondary>ReaderManager.hpp</secondary></indexterm>
+<indexterm><primary>ReaderManager.hpp</primary><secondary>Listfiles</secondary></indexterm>
+<para><computeroutput>typedef std::vector&lt;std::string&gt; <link linkend="__reader_manager_8hpp_1a72f0af09a1480bc3893638955d9c98c8">Listfiles</link></computeroutput></para></section>
+</section>
+</section>

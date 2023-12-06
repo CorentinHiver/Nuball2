@@ -25,8 +25,17 @@
 var NAVTREE =
 [
   [ "Nuball2", "index.html", [
-    [ "Deprecated List", "deprecated.html", null ],
     [ "Test List", "test.html", null ],
+    [ "Deprecated List", "deprecated.html", null ],
+    [ "Todo List", "todo.html", null ],
+    [ "Namespaces", "namespaces.html", [
+      [ "Namespace List", "namespaces.html", "namespaces_dup" ],
+      [ "Namespace Members", "namespacemembers.html", [
+        [ "All", "namespacemembers.html", null ],
+        [ "Functions", "namespacemembers_func.html", null ],
+        [ "Typedefs", "namespacemembers_type.html", null ]
+      ] ]
+    ] ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
       [ "Class Index", "classes.html", null ],
@@ -34,14 +43,13 @@ var NAVTREE =
       [ "Class Members", "functions.html", [
         [ "All", "functions.html", "functions_dup" ],
         [ "Functions", "functions_func.html", "functions_func" ],
-        [ "Variables", "functions_vars.html", "functions_vars" ],
-        [ "Enumerator", "functions_eval.html", null ]
+        [ "Variables", "functions_vars.html", "functions_vars" ]
       ] ]
     ] ],
     [ "Files", "files.html", [
       [ "File List", "files.html", "files_dup" ],
       [ "File Members", "globals.html", [
-        [ "All", "globals.html", null ],
+        [ "All", "globals.html", "globals_dup" ],
         [ "Functions", "globals_func.html", null ],
         [ "Variables", "globals_vars.html", null ],
         [ "Typedefs", "globals_type.html", null ],
@@ -54,13 +62,15 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_alignator_8hpp.html",
-"class_clovers.html#a57774ac4f1e81cd89fd9c1242bbe2254",
-"class_event.html#ab508f008c0566f9ddcf90208b5aa7c03",
-"class_filename.html#a4f624193292726bfe15c0c16322ccd07",
-"class_m_t_t_hist.html#a9c2f7d05c9f8506382211635b35bd97b",
-"class_reader_manager.html#aadfc7936950137fe1b5d0b9c74cb1012",
-"class_trigger.html#a5c49fbdde13d92a6b76687f28a1fd02c",
-"utils_8hpp.html#a7a645cf361a14868f3e8048b864bf5e2"
+"class_bools.html#a0908affb9f95fbbcd517316c7c81bf53",
+"class_clovers_1_1_delayed_gate.html#ad56e49d7480258ae67105b58e0624bac",
+"class_event_analyse.html#a511c0ce19d51b95aed1c3ebf7f69eca0",
+"class_fit.html#a5a9406e4e285484650609f696d96ffa2",
+"class_m_t_t_hist.html#a08dcc0e1d5db8d111f0459ff47f736e9",
+"class_paris_label.html#a17ef0fbe8cabfb5de60f9853fc8dc49d",
+"class_simplex.html#a321c481eed3e0f60defabaa88f4cba69",
+"class_timeshifts.html#a46a97751e517cc9f21d54d04bb16c5f5",
+"globals.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
