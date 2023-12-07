@@ -16,16 +16,12 @@
 //       General files and folders manipulations      //
 //----------------------------------------------------//
 
-std::string removeExtension (std::string const & string) { return (string.substr(0, string.find_last_of(".")  ));  }
-std::string extension       (std::string const & string) { return (string.substr(   string.find_last_of(".")+1));  }
-std::string getExtension    (std::string const & string) { return (string.substr(   string.find_last_of(".")+1));  }
-std::string getPath         (std::string const & string) { return (string.substr(0, string.find_last_of("/")+1));  }
-std::string removePath      (std::string const & string) { return (string.substr(   string.find_last_of("/")+1));  }
-
-std::string rmPathAndExt(std::string const & string)
-{
-  return (string.substr( string.find_last_of("/")+1, string.find_last_of(".")-string.find_last_of("/")-1)); 
-}
+std::string removeExtension (std::string const & string) { return (string.substr(0, string.find_last_of(".")  ));}
+std::string extension       (std::string const & string) { return (string.substr(   string.find_last_of(".")+1));}
+std::string getExtension    (std::string const & string) { return (string.substr(   string.find_last_of(".")+1));}
+std::string getPath         (std::string const & string) { return (string.substr(0, string.find_last_of("/")+1));}
+std::string removePath      (std::string const & string) { return (string.substr(   string.find_last_of("/")+1));}
+std::string rmPathAndExt    (std::string const & string) { return            removePath(removeExtension(string));}
 
 bool file_is_empty(std::ifstream& file)                { return file.peek() == std::ifstream::traits_type::eof();}
 
@@ -509,6 +505,8 @@ public:
     if (!(m_exists = folder_exists(m_path)) && create) this -> make();
     if (!(m_exists = folder_exists(m_path))) print(m_path+" doesn't exist !!");
 
+    // debug(m_path, (m_exists) ? "exists" : "dont exist");
+
   #ifdef MTOBJECT_HPP
     if (MTObject::ON) MTObject::shared_mutex.unlock();  
   #endif //MTOBJECT_HPP
@@ -517,7 +515,7 @@ public:
   void makeFolderList() {m_recursive_folders = getList(m_path,'/');}
 
   int  nbFiles() {return nb_files_in_folder(m_path);}
-  bool exists() {return folder_exists(m_path);}
+  bool exists() {return m_exists;}
   operator bool() const {return folder_exists(m_path);}
   bool make() { create_folder_if_none(m_path); return this -> exists();}
 
@@ -534,7 +532,7 @@ public:
   
   std::string const & get() const {return m_path;}
   std::string const & string() const {return(get());}
-  operator std::string() const & {return (get());}
+  // operator std::string() const & {return (get());}
   auto c_str() const {return m_path.c_str();}
 
   std::string operator+(std::string const & addString) {return (m_path+addString);}
@@ -553,6 +551,12 @@ public:
     return *this;
   }
   Path & operator=(Path & path) 
+  {
+    m_path = path.m_path;
+    load();
+    return *this;
+  }
+  Path & operator=(Path const & path) 
   {
     m_path = path.m_path;
     load();
@@ -758,6 +762,9 @@ public:
   bool const & ok()       {return m_ok;}
   bool exists() const {return file_exists(m_file);}
   auto size(std::string const & unit = "o") const {return size_file(m_file, unit);}
+
+  bool operator==(File const & other) const {return m_file == other.m_file;}
+
 
 private:
   void update() {m_file = m_path.string()+m_filename.string(); check();}

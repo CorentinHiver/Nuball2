@@ -984,7 +984,7 @@ inline void Calibration::calibrate(Hit & hit) const
   auto const & label = hit.label;
   if (label > m_size) return;
   if (hit.qdc2!=0.0) hit.nrj2 = calibrate(hit.qdc2, label);
-  else hit.nrj = calibrate(hit.adc, label);
+  hit.nrj = calibrate(hit.adc, label);
 }
 
 void Calibration::set(Label _label, NRJ _intercept = 0.f, NRJ _slope = 1.f, NRJ _binom = 0.f, NRJ _trinom = 0.f)

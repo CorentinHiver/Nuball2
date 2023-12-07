@@ -12,18 +12,23 @@ public:
 
   FilesManager(){};
   FilesManager(std::string const & folder, long nb_files = -1){addFolder(folder,nb_files);};
-  FilesManager(Path & folder, long nb_files = -1){addFolder(folder,nb_files);};
+  FilesManager(Path & folder, long nb_files = -1){addFolder(folder.string(),nb_files);};
 
 
   bool nextFileName(std::string & filename, size_t const & step = 1);
 
   // Adds either a single file or reads a .list containing a list of files
-  virtual bool addFiles     (std::string const & _filename        );
+  virtual bool addFiles(std::string const & _filename);
+  virtual bool addFile (std::string const & _filename) {return addFiles(_filename);}
   // Adds a given number of files with a .root or .fast inside the given folder (by default all the files, or the nb_files first ones)
   virtual bool addFolder    (std::string folder, long nb_files = -1, std::vector<std::string> const & extensions = {"root", "fast"});
+  virtual bool addFolder    (Path const & folder, long nb_files = -1, std::vector<std::string> const & extensions = {"root", "fast"})
+  {
+    return this -> addFolder(folder.string(), nb_files, extensions);
+  }
   virtual void flushFiles   ();
-  void   Print        () { for (auto const & file : m_listFiles) print(file);}
-  void   printFolders () { for (auto const & folder : m_listFolder) print(folder);}
+  void Print        () { for (auto const & file : m_listFiles) print(file);}
+  void printFolders () { for (auto const & folder : m_listFolder) print(folder);}
 
   //Getters :
   Path const & path() const {return m_path;}

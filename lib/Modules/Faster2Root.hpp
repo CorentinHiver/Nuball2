@@ -307,7 +307,7 @@ void Faster2Root::convertFile(Hit & hit, FasterReader & reader, Path const & out
   if (!m_overwrite && outputFile.exists()) {print(outputFile, "already exists ! Use option -o or method Faster2Root::overwrite(true)"); return;}
   
   unique_tree tree(new TTree("Nuball2","Nuball2"));
-  tree -> SetDirectory(nullptr); // Set the tree RAM resident : increases memory usage but speeds the process
+  tree -> SetDirectory(nullptr); // Set the tree RAM resident : increases memory usage but speeds the process up
   Event event;
   unique_tree tempTree;
   if (m_eventbuilding)

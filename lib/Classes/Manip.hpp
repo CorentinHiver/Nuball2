@@ -1,8 +1,8 @@
 #ifndef MANIP_HPP
 #define MANIP_HPP
 
-#include "../MTObjects/MTList.hpp"
 #include "../libCo.hpp"
+#include "../MTObjects/MTList.hpp"
 
 class Manip
 {
