@@ -1,4 +1,4 @@
-#include "../Classes/SpectraAlignator.hpp"
+#include "../lib/Classes/SpectraAlignator.hpp"
 void Macro(int nb_iterations = 20)
 {
   // auto file_ref = TFile::Open("histos/run_80_matrixated.root", "READ");

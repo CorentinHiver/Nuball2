@@ -8,13 +8,14 @@
 // #include "/home/corentin/Installation/DataFrame/include/DataFrame/DataFrame.h"
 // #include <SourceCloverSpectra.hpp>
 // #include <Calibration.hpp>
+#include <Calibrator.hpp>
 // #include <RunMatrixator.hpp>
 // #include <SpectraAlignator.hpp>
 // #include <Detectors.hpp>
 // #include <Timeshifts.hpp>
 // #include <Convertor.hpp>
 // #include <MTFasterReader.hpp>
-#include <Faster2Histo.hpp>
+// #include <Faster2Histo.hpp>
 
 int main(int argc, char ** argv)
 {

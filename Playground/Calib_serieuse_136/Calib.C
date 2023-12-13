@@ -1,4 +1,4 @@
-#include "../CaLib.hpp"
+#include "CaLib.hpp"
 
 void analyseSpectra(std::string const & filename = "PARIS/152_Eu_center_after.root", std::string const & source = "152Eu")
 {

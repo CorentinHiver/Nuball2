@@ -13,7 +13,7 @@
 
 # ----------------------------------------------------
 # First set the path to the Nuball2/lib/ folder
-FRAMEWORK_LIB_PATH := ../../lib
+FRAMEWORK_LIB_PATH := ../lib
 
 # ----------------------------------------------------
 # Then write down the name of the main file 

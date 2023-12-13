@@ -1,23 +1,23 @@
 #ifndef CALIB_HPP
 #define CALIB_HPP
 
-#include "../../libRoot.hpp"
+#include "../../lib/libRoot.hpp"
 
-#include "../../Classes/Detectors.hpp"
-#include "../../Classes/FilesManager.hpp"
-#include "../../Classes/CoincBuilder.hpp"
+#include "../../lib/Classes/Detectors.hpp"
+#include "../../lib/Classes/FilesManager.hpp"
+#include "../../lib/Classes/CoincBuilder.hpp"
 
-#include "../../Modules/Timeshifts.hpp"
+#include "../../lib/Modules/Timeshifts.hpp"
 
-#include "../../MTObjects/MTFasterReader.hpp"
-#include "../../MTObjects/MTTHist.hpp"
+#include "../../lib/MTObjects/MTFasterReader.hpp"
+#include "../../lib/MTObjects/MTTHist.hpp"
 
 void GetPoint(TVirtualPad * vpad, double& x, double& y)
 {
   auto pad = static_cast<TPad*>(vpad);
   pad->Update();
   auto cutg = static_cast<TMarker*> (pad->WaitPrimitive("TMarker","Marker"));
-  if (!cutg) {print("CAN'T FIND THE MOUSE CLICK"); return;}
+  if (!cutg) {print("CAN'T FIND THE PAD OR MOUSE CLICK"); return;}
   x = cutg->GetX();
   y = cutg->GetY();
   delete cutg;
@@ -192,14 +192,7 @@ public:
     // Fit the maximum peak :
     {
       auto const & peak = peaks.back();
-      m_pad->SetTitle(("INSTRUCTION : Select the low edge of maximum peak "+ std::to_string((int)peak)).c_str());
-      m_histo->SetTitle(("INSTRUCTION : Select the low edge of maximum peak "+ std::to_string((int)peak)).c_str());
-      m_pad->Update();
-      GetPoint(m_pad->cd(), x, y);
-      m_pad->Update();
-
-      auto low_edge = x;
-
+      
       m_pad->SetTitle(("INSTRUCTION : Select the high edge of maximum peak "+ std::to_string((int)peak)).c_str());
       m_histo->SetTitle(("INSTRUCTION : Select the high edge of maximum peak "+ std::to_string((int)peak)).c_str());
       m_pad->Update();
@@ -210,6 +203,14 @@ public:
       xmax = high_edge;
 
       m_histo->GetXaxis()->SetRangeUser(0, xmax);
+
+      m_pad->SetTitle(("INSTRUCTION : Select the low edge of maximum peak "+ std::to_string((int)peak)).c_str());
+      m_histo->SetTitle(("INSTRUCTION : Select the low edge of maximum peak "+ std::to_string((int)peak)).c_str());
+      m_pad->Update();
+      GetPoint(m_pad->cd(), x, y);
+      m_pad->Update();
+
+      auto low_edge = x;
 
       ParisPeakFitter fit(m_histo, low_edge, high_edge);
 
@@ -266,7 +267,6 @@ private:
   TH1F* m_histo = nullptr;
   double m_kpb = 1; // keV per bin
   double m_cpb = 1; // canal per bin
-  dType()
 
   // Fitting : 
   std::vector<FittedPeak> m_peaks;

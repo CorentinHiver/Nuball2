@@ -55,7 +55,7 @@ public:
       auto const & relative_time = Time_cast((rf_time%period_fm)/1000ull);
       // print(period_fm, rf_time, relative_time, relative_time - m_offset);
       // pauseCo();
-      return relative_time - m_offset ;
+      return relative_time - m_offset;
     }
     else
     {// When the RF is found after the hit

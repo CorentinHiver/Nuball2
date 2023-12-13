@@ -681,9 +681,9 @@ public:
         std::vector<double> chi2s;
         for (auto const & vertice : simplex) chi2s.push_back(this -> chi2(ref_spectra, spectra, vertice));
 
-        print("");
-        print("chi2s");
-        print(chi2s);
+        // print("");
+        // print("chi2s");
+        // print(chi2s);
 
         auto const & dim = chi2s.size()-1;
 

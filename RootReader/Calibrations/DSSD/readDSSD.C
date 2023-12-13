@@ -1,5 +1,6 @@
 #include "../../../lib/libRoot.hpp"
 #include "../../../lib/Classes/Detectors.hpp"
+#include "../../../lib/Classes/SpectraAlignator.hpp"
 #include "TPad.h"
 
   std::vector<std::string> names = 
@@ -214,5 +215,36 @@ void readDSSD(char choix = 0)
       outFile << label << " " << 5250 << " " << mean << std::endl;
     }
     outFile.close();
+  }
+
+  /**
+   * @brief Choice 7 : load the run_75 raw adc spectra straight out of manip2histo for energy calibration
+   */
+  else if (choix == 7)
+  {
+    detectors.load("../index_129.list");
+    ofstream outFile("DSSD_calib_choice7.data");
+
+    auto c1 = new TCanvas("c1");
+    auto file = TFile::Open("run_75_spectra.root", "READ");
+    auto list = file->GetListOfKeys();
+    size_t nb_histos = 0;
+    for (auto&& keyAsObj : *list)
+    {
+      std::unique_ptr<TKey> key (static_cast<TKey*>(keyAsObj));
+      std::string className =  key->GetClassName();
+      if(className == "TH1F")
+      {
+        std::unique_ptr<TObject> obj (key->ReadObj());
+        auto histo = dynamic_cast<TH1*>(obj.get());
+        std::string name = histo->GetName();
+        remove(name, " adc");
+        auto const & label = detectors[name];
+
+        histo->Rebin(8);
+
+        nb_histos++;
+      }
+    }
   }
 }

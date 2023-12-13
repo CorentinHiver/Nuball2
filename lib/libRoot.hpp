@@ -938,7 +938,33 @@ namespace CoAnalyse
 //   Manage histo files   //
 ////////////////////////////
 
-/// @brief allows one to fuse all the histograms with the same name from different repositories
+std::vector<std::string> getTH1FNames(TFile * file)
+{
+  std::vector<std::string> ret;
+  auto list = file->GetListOfKeys();
+  for (auto&& keyAsObj : *list)
+  {
+    std::unique_ptr<TKey> key (static_cast<TKey*>(keyAsObj));
+    std::string className =  key->GetClassName();
+    if(className == "TH1F")
+    {
+      std::unique_ptr<TObject> obj (key->ReadObj()); // (unique_ptr handles the destruction of the object)
+      auto histo = dynamic_cast<TH1*>(obj.get());
+      ret.push_back(histo->GetName());
+    }
+  }
+  return ret;
+}
+
+std::vector<std::string> getTH1FNames(std::string const & filename)
+{
+  auto file = TFile::Open(filename.c_str());
+  auto ret =  getTH1FNames(file);
+  file->Close();
+  return ret;
+}
+
+/// @brief allows one to fuse all the histograms with the same name from different files
 void fuse_all_histo(std::string const & folder, std::string const & outRoot = "fused_histo.root", bool const & bidim = true)
 {
   auto const files = list_files_in_folder(folder, {"root"});

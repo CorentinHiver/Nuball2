@@ -485,6 +485,7 @@ public:
     }
     else if (m_path[0]=='~')
     {// Home path
+      m_path.erase(0,1);
       m_path = home()+m_path;
     }
     else
