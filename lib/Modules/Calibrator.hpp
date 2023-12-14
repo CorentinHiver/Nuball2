@@ -2,10 +2,11 @@
 #define CALIBRATOR_HPP
 
 #include "../libRoot.hpp"
-#include "../Classes/Hit.hpp"
 
+#include "../Classes/Hit.hpp"
 #include "../Classes/Fit.hpp"
 #include "../Classes/Calibration.hpp"
+#include "../Classes/Detectors.hpp"
 #include "../Classes/Event.hpp"
 #include "../Classes/FilesManager.hpp"
 
@@ -22,8 +23,6 @@ class Calibrator
 public:
 
   Calibrator() = default;
-
-  Calibrator(int argc, char** argv);
 
   /// @brief Loading calibration from file name
   bool loadCalibration(Calibration const & calib) {return (m_calib = calib);}
@@ -66,7 +65,6 @@ public:
   bool const & calibrate_data() {return m_calibrate_data;}
   void writeCalibratedData(std::string const & outfilename);
 
-  bool const & isFilled() const {return m_ok;}
 
   /// @brief @todo
   operator bool() const & {return (true);}
@@ -95,22 +93,11 @@ private:
 
   static bool m_treatOnlyParis;
   static bool m_treatOnlyGe;
+  bool m_calibrate_data = false;
 
   Fits m_fits;
 
   Path dataPath;
-
-  //Attributs for the tables :
-  bool m_ok = false;
-  bool m_calibrate_data = false;
-  Label m_nb_detectors = 0;
-  Label m_size = 0;
-  std::vector<char> m_order; //1, 2 or 3 | 0 -> no calibration
-  std::vector<NRJ> m_intercept;
-  std::vector<NRJ> m_slope;
-  std::vector<NRJ> m_binom;
-  std::vector<NRJ> m_trinom;
-  std::vector<std::vector<std::vector<NRJ>>> calibration_tables;
 
 public:
   struct histograms
@@ -127,7 +114,7 @@ public:
     std::map<int, TH1F*> spectra;
 
     void Initialize();
-    void setBins(std::string const & parameters);
+    void setTypeBins(std::string const & parameters);
     bool initialized = false;
   } m_histos;
 };
@@ -135,73 +122,53 @@ public:
 bool Calibrator::m_treatOnlyParis = false;
 bool Calibrator::m_treatOnlyGe = false;
 
-void Calibrator::printParameters()
-{
-  print("Usages of Calibrator : ");
-  print("");
-  print("parameters :");
-  print("-F [[nb_files]]  : Read data files, either .fast or already converted .root file with a root tree.");
-  print("-f               : Reads a .root file containing the histograms you want to use as a calibration run.");
-  print("-o               : Overwrite the ouput file if it already exists.");
-  print("-O               : Setup the name of the output.");
-  exit();
-}
-
-Calibrator::Calibrator(int argc, char** argv)
-{
-  if (argc<2) 
-  {
-    print("Not enough parameters for Calibrator");
-    printParameters();
-  }
-  
-}
-
 void Calibrator::histograms::Initialize()
 {
   if (initialized) return;
-  auto const & max_label = detectors.size();
 
-  if (max_label == 0) 
+  if (detectors)
   {
-    print("Error using Detector class in Calibrator module."); 
-    throw std::runtime_error(error_message["DEV"]);
-  }
-
-  // All the detectors spectra in one plot :
-  all_raw_spectra.reset("All_detectors", "All detectors", 
-      max_label,0,max_label, detectors.ADCBin("default").bins,0,detectors.ADCBin("default").min);
-
-  // All the calibrated detectors spectra of each type in one plot :
-  all_calib.resize(detectors.nbTypes());
-  for (auto const & type : detectors.types())
-  {
-    auto nb_detectors = detectors.nbOfType(type);
-    auto const & binning = detectors.energyBidimBin(type);
-    all_calib[detectors.typeIndex(type)].reset(("All_"+type+"_spectra").c_str(), ("All "+type+" spectra").c_str(), 
-        nb_detectors,0,nb_detectors, binning.bins,binning.min,binning.max);
-  }
-
-  // All the raw and/or calibrated spectra in a separate spectra :
-  calib_spectra.resize(max_label);
-  raw_spectra.resize(max_label);
-  for (auto const & type : detectors.types())
-  {
-    if (type == "null" || type == "RF") continue;
-    for (size_t index = 0; index<detectors.nbOfType(type); index++)
+    auto const & max_label = detectors.size();
+    if (max_label == 0) 
     {
-      auto const & name = detectors.name(type, index);
-      auto const & label = detectors.label(type, index);
-      auto const & bin_raw = detectors.ADCBin(type);
-      auto const & bin_calib = detectors.energyBin(type);
-      raw_spectra[label].reset((name+"_raw").c_str(), (name+" raw spectra").c_str(), bin_raw.bins, bin_raw.min, bin_raw.max);
-      calib_spectra[label].reset((name+"_calib").c_str(), (name+" calibrated spectra").c_str(), bin_calib.bins, bin_calib.min, bin_calib.max);
+      print("Error using Detector class in Calibrator module."); 
+      throw std::runtime_error(error_message["DEV"]);
     }
+    // All the detectors spectra in one plot :
+    all_raw_spectra.reset("All_detectors", "All detectors", 
+        max_label,0,max_label, detectors.ADCBin("default").bins,0,detectors.ADCBin("default").min);
+
+    // All the calibrated detectors spectra of each type in one plot :
+    all_calib.resize(detectors.nbTypes());
+    for (auto const & type : detectors.types())
+    {
+      auto nb_detectors = detectors.nbOfType(type);
+      auto const & binning = detectors.energyBidimBin(type);
+      all_calib[detectors.typeIndex(type)].reset(("All_"+type+"_spectra").c_str(), ("All "+type+" spectra").c_str(), 
+          nb_detectors,0,nb_detectors, binning.bins,binning.min,binning.max);
+    }
+
+    // All the raw and/or calibrated spectra in a separate spectra :
+    calib_spectra.resize(max_label);
+    raw_spectra.resize(max_label);
+    for (auto const & type : detectors.types())
+    {
+      if (type == "null" || type == "RF") continue;
+      for (size_t index = 0; index<detectors.nbOfType(type); index++)
+      {
+        auto const & name = detectors.name(type, index);
+        auto const & label = detectors.label(type, index);
+        auto const & bin_raw = detectors.ADCBin(type);
+        auto const & bin_calib = detectors.energyBin(type);
+        raw_spectra[label].reset((name+"_raw").c_str(), (name+" raw spectra").c_str(), bin_raw.bins, bin_raw.min, bin_raw.max);
+        calib_spectra[label].reset((name+"_calib").c_str(), (name+" calibrated spectra").c_str(), bin_calib.bins, bin_calib.min, bin_calib.max);
+      }
+    }
+    initialized = true;
   }
-  initialized = true;
 }
 
-void Calibrator::histograms::setBins(std::string const & parameters)
+void Calibrator::histograms::setTypeBins(std::string const & parameters)
 {
   std::istringstream param(parameters);
   auto & ADCbins = detectors.getADCBin();
@@ -359,7 +326,7 @@ void Calibrator::fillHisto(Hit & hit, FasterReader & reader, Calibrator & calib)
   {
     auto const & type = detectors.type(hit.label);
     if (type ==  "null" || type ==  "RF") continue;
-    if (calib.m_order[hit.label]<1) continue;
+    if (calib.calibration().getOrder()[hit.label]<1) continue;
     auto const & nrj_cal = calib.calibration()(hit.adc, hit.label);
     calib.m_histos.calib_spectra[hit.label].Fill(nrj_cal);
     calib.m_histos.all_calib[detectors.typeIndex(hit.label)].Fill(compressedLabel[hit.label], nrj_cal);

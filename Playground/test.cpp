@@ -1,11 +1,4 @@
-// #define USE_RF 200
-// #define N_SI_136
-// #define USE_DSSD
-// #define USE_PARIS
-// #define USE_RF 200
-
 // #include "../libRoot.hpp"
-// #include "/home/corentin/Installation/DataFrame/include/DataFrame/DataFrame.h"
 // #include <SourceCloverSpectra.hpp>
 // #include <Calibration.hpp>
 #include <Calibrator.hpp>
@@ -19,6 +12,9 @@
 
 int main(int argc, char ** argv)
 {
+  Calibrator calib;
+  calib.loadCalibration("../136/conversion_200ns/136_v2.calib");
+  // calib.calculate()
   // MTTHist<TH1F>::verbose(false);
   // Faster2Histo convertor;
   // convertor.addFolder("/home/corentin/faster_data/N-SI-136/152_Eu_center_after.fast", 1);

@@ -125,7 +125,24 @@ std::ofstream& operator<<(std::ofstream& fout, Fit const & fit)
   return fout;
 }
 
-using Fits = std::vector <Fit>;
+class Fits 
+{
+public:
+  Fits() = default;
+  Fits(int const & i = 0) {this -> resize(i);}
+  
+  void resize(size_t const & i = 0) {m_fits.resize(i);}
+  void reserve(size_t const & i = 0) {m_fits.reserve(i);}
+
+  auto const & get() const {return m_fits;}
+  auto & get() {return m_fits;}
+
+  operator[](size_t const & i) {return m_fits[i];}
+  operator()()
+
+private:
+  std::vector m_fits<Fit>;
+}
 
 
 #endif //FIT_HPP

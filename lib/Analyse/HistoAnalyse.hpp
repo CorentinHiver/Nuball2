@@ -5,7 +5,11 @@
 #include <MTTHist.hpp>
 
 
-
+/**
+ * @brief Old class
+ * @deprecated
+ * @tparam THist 
+ */
 template<class THist>
 class HistoAnalyse
 {

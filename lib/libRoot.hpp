@@ -948,8 +948,8 @@ std::vector<std::string> getTH1FNames(TFile * file)
     std::string className =  key->GetClassName();
     if(className == "TH1F")
     {
-      std::unique_ptr<TObject> obj (key->ReadObj()); // (unique_ptr handles the destruction of the object)
-      auto histo = dynamic_cast<TH1*>(obj.get());
+      TObject* obj = key->ReadObj();
+      auto histo = dynamic_cast<TH1*>(obj);
       ret.push_back(histo->GetName());
     }
   }
@@ -1077,6 +1077,24 @@ void draw_all_TH1F_with_X_window(std::string const & filename, int minX, int max
     }
   }
 }
+
+/////////////////////////////
+// User friendly functions //
+/////////////////////////////
+
+/// @brief This method allows one to get the x and y values of where the user clicks on the graph
+void GetPoint(TVirtualPad * vpad, double& x, double& y)
+{
+  auto pad = static_cast<TPad*>(vpad);
+  pad->Update();
+  auto cutg = static_cast<TMarker*> (pad->WaitPrimitive("TMarker","Marker"));
+  if (!cutg) {print("CAN'T FIND THE PAD OR MOUSE CLICK"); return;}
+  x = cutg->GetX();
+  y = cutg->GetY();
+  delete cutg;
+  print(x, y);
+}
+
 
 #endif //LIBROOT_HPP
 

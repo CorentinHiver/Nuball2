@@ -50,12 +50,12 @@ public:
   /// @brief Loading calibration from file name
   bool load(File const & calibFileName);
 
-  void writeData(std::string const & outfilename);
+  void write(std::string const & outfilename);
 
   void calibrate(Hit & hit) const noexcept;
 
   /// @brief Calibrate the nrj value using the parameters extracted from the calibration data
-  NRJ calibrate(NRJ const & nrj, Label const & label) const noexcept;
+  float calibrate(float const & nrj, Label const & label) const noexcept;
 
   /// @brief Wrapper around the Calibration::calibrate() methods
   template<class... ARGS>
@@ -66,13 +66,13 @@ public:
 
   //DEV :
   // void calibrate_fast(Hit & hit){}
-  // void calibrate_fast(Label label, ADC energy, NRJ energy_calibrated){}
+  // void calibrate_fast(Label label, ADC energy, float energy_calibrated){}
   void setCalibrationTables();
   //!DEV
 
 
   // Accessors to the calibration parameters :
-  std::vector<NRJ> operator[](Label const & label) const noexcept;
+  std::vector<float> operator[](Label const & label) const noexcept;
 
   auto const & size()         const noexcept {return m_nb_det   ;}
   auto const & getOrder()     const noexcept {return m_order    ;}
@@ -87,18 +87,18 @@ public:
 
 private:
   //Private methods :
-  void set(Label label, NRJ intercept, NRJ slope, NRJ binom, NRJ trinom);
+  void set(Label label, float intercept, float slope, float binom, float trinom);
 
   std::string m_filename;
   bool m_ok = false;
   Label m_nb_det = 0;
   Label m_size = 0;
   std::vector<char> m_order; //1, 2 or 3 | 0 -> no calibration
-  std::vector<NRJ> m_intercept;
-  std::vector<NRJ> m_slope;
-  std::vector<NRJ> m_binom;
-  std::vector<NRJ> m_trinom;
-  std::vector<std::vector<std::vector<NRJ>>> calibration_tables;
+  std::vector<float> m_intercept;
+  std::vector<float> m_slope;
+  std::vector<float> m_binom;
+  std::vector<float> m_trinom;
+  std::vector<std::vector<std::vector<float>>> calibration_tables;
 };
 
 
@@ -107,7 +107,7 @@ void Calibration::setCalibrationTables()
 {
   print("creating calibration tables");
   calibration_tables.resize(m_size);
-  std::vector<std::vector<NRJ>> *calib_vec;
+  std::vector<std::vector<float>> *calib_vec;
   for (Label i = 0; i<m_size; i++)
   {
     calib_vec = &calibration_tables[i];
@@ -117,7 +117,7 @@ void Calibration::setCalibrationTables()
   print();
 }
 
-inline NRJ Calibration::calibrate(NRJ const & nrj, Label const & label) const noexcept
+inline float Calibration::calibrate(float const & nrj, Label const & label) const noexcept
 {
   // First, one has to randomize the nrj within its bin
   auto nrj_r = nrj+random_uniform();
@@ -147,7 +147,7 @@ inline void Calibration::calibrate(Hit & hit) const noexcept
   hit.nrj = calibrate(hit.adc, label);
 }
 
-void Calibration::set(Label _label, NRJ _intercept = 0.f, NRJ _slope = 1.f, NRJ _binom = 0.f, NRJ _trinom = 0.f)
+void Calibration::set(Label _label, float _intercept = 0.f, float _slope = 1.f, float _binom = 0.f, float _trinom = 0.f)
 {
   if (_slope == 1.f && _intercept == 0.f) {m_order[_label] = 0;}
   else if (_binom == 0.f)
@@ -173,7 +173,7 @@ void Calibration::set(Label _label, NRJ _intercept = 0.f, NRJ _slope = 1.f, NRJ 
   }
 }
 
-std::vector<NRJ> Calibration::operator[](Label const & label) const noexcept
+std::vector<float> Calibration::operator[](Label const & label) const noexcept
 {
   if (label>m_size) return {-1};
   switch (m_order[label])
@@ -222,7 +222,7 @@ bool Calibration::load(File const & calibFileName)
   m_slope    .resize(m_size, 1.f);
   m_binom    .resize(m_size, 0.f);
   m_trinom   .resize(m_size, 0.f);
-  NRJ slope = 1.f, binom = 0.f, trinom = 0.f, intercept = 0.f;
+  float slope = 1.f, binom = 0.f, trinom = 0.f, intercept = 0.f;
   while (getline(inputfile, line))
   {
     m_nb_det++;
@@ -262,7 +262,7 @@ void Calibration::Print()
 
 /// @brief 
 /// @todo  
-void Calibration::writeData(std::string const & outfilename)
+void Calibration::write(std::string const & outfilename)
 {
   File outFile(outfilename);
   outFile.setExtension("calib");
