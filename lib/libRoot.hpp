@@ -1039,7 +1039,7 @@ void fuse_all_histo(std::string const & folder, std::string const & outRoot = "f
               continue;
             }
           }
-          if (hist->Get)
+          // if (hist->Get)
           all_TH1F[nb_histos]->Add(histo);
         }
         nb_histos++;
