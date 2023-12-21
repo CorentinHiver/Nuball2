@@ -3,7 +3,6 @@
 
 #include "../libRoot.hpp"
 
-
 //////////////////
 /// Data types ///
 //////////////////
@@ -316,6 +315,13 @@ std::ostream& operator<<(std::ostream& cout, Hit const & hit)
   if (hit.pileup)     cout << " pileup";
   return cout;
 }
+
+
+//////////////////////////
+/// Trigger definition ///
+//////////////////////////
+
+using TriggerHit = std::function<bool(const Hit&)>;
 
 
 #endif //HIT_HPP

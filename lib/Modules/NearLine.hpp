@@ -7,6 +7,10 @@
 
 #include "../Classes/Detectors.hpp"
 
+/**
+ * @brief @todo
+ * 
+ */
 class NearLine
 {
 public:

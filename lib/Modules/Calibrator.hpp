@@ -26,6 +26,7 @@ public:
 
   /// @brief Loading calibration from file name
   bool loadCalibration(Calibration const & calib) {return (m_calib = calib);}
+  bool loadCalibration(std::string const & calib_file) {return (m_calib = calib_file);}
 
   void calculate(std::string const & dataDir, int nb_files = -1, std::string const & source = "152Eu", std::string const & type = "fast");
 
@@ -154,7 +155,7 @@ void Calibrator::histograms::Initialize()
     for (auto const & type : detectors.types())
     {
       if (type == "null" || type == "RF") continue;
-      for (size_t index = 0; index<detectors.nbOfType(type); index++)
+      for (int index = 0; index<detectors.nbOfType(type); index++)
       {
         auto const & name = detectors.name(type, index);
         auto const & label = detectors.label(type, index);
@@ -196,13 +197,12 @@ void Calibrator::calculate(std::string const & dataDir, int nb_files, std::strin
   else {print(type, "unkown data format"); return;}
 
   this -> analyse(source);
-
   this -> writeData(source+".calib");
-
   this -> writeRawRoot(source+".root");
 }
 
-// TBD
+/// @brief TBD
+/// @todo loadRootHisto(file)
 void Calibrator::calculate(std::string const & histograms, std::string const & source)
 {
   print ("Calculating calibrations from histogram data in", histograms);

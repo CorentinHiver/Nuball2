@@ -187,7 +187,7 @@ protected:
 
   std::unordered_map<std::string, Label> m_labels_array;
   std::unordered_map<dType, int> m_types_index;
-  std::unordered_map<dType, size_t> m_type_counter; // To get the number of detectors of each type. 
+  std::unordered_map<dType, int> m_type_counter; // To get the number of detectors of each type. 
   std::unordered_map<dType, Strings> m_names;
   std::unordered_map<dType, Label_vec> m_labels;
 
@@ -200,7 +200,7 @@ protected:
 void Detectors::resize(ushort const & new_size)
 {
   print("Detectors resized to", new_size);
-  print(m_exists.resize(new_size, false));
+  m_exists.resize(new_size, false);
   m_list.resize(new_size, "");
   m_types.resize(new_size, "null");
 }
@@ -368,7 +368,7 @@ void Detectors::makeArrays()
   for (auto const & type : types_handled) if (m_type_counter[type]>0) m_types_ID.push_back(type);
   
   // Reverse lookup : 
-  for (size_t index = 0; index<m_types_ID.size(); index++) m_types_index[m_types_ID[index]] = index;
+  for (size_t index = 0; index<m_types_ID.size(); index++) m_types_index[m_types_ID[index]] = int_cast(index);
 }
 
 std::unordered_map<dType, THBinning> Detectors::ADC_bins = 

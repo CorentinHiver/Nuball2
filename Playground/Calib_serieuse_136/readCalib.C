@@ -68,17 +68,17 @@ void readCalib(std::string const & filename = "136_Eu.calpoints")
       for (int index = 0; index<N; index++)
       {
         auto const & data_index = data_column_index[index];// The actual index of the row in the file
-        try
-        {
-          newLineData[index] = std::stod(data[data_index]);
-        }
-        catch(const std::exception& e)
-        {
-          // m_data[index].push_back(-1);
-          // if (m_warning_is_error) throw_error(e.what());
-          print("line", row_i, "column", index, "raised", e.what());
-        }
-      }
+      //   try
+      //   {
+      //     newLineData[index] = std::stod(data[data_index]);
+      //   }
+      //   catch(const std::exception& e)
+      //   {
+      //     // m_data[index].push_back(-1);
+      //     // if (m_warning_is_error) throw_error(e.what());
+      //     print("line", row_i, "column", index, "raised", e.what());
+      //   }
+      // }
       // Add the line to the whole data :
       m_data.emplace_back(newLineData);
     }

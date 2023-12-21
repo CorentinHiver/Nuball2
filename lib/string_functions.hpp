@@ -2,7 +2,9 @@
 #define STRING_FUNCTIONS_HPP
 
 #include <vector>
+#include <cstring>
 #include <string>
+#include <sstream>
 
 /// @brief Returns the string to the left of the first occurence of sep in the string
 std::string firstPart       (std::string const & string, char const & sep) { return (string.substr(0, string.find_first_of(sep) ));  }
@@ -21,31 +23,37 @@ std::string removeLastPart  (std::string const & string, char const & sep) { ret
  * with removeVoids this function returns {"", "1", "2", "3", "", "5"}
  * 
 */
-std::vector<std::string> getList(std::string string, char const & separator, bool const & removeVoids = false)
+
+void fillList(std::vector<std::string> & list, std::string string, char const & separator, bool const & removeVoids = false)
 {
   size_t pos = 0;
-  std::vector<std::string> ret;
   while((pos = string.find(separator) ) != -1ul)
   {
     if (pos==0) 
     {
-      if (!removeVoids) ret.push_back("");
+      if (!removeVoids) list.push_back("");
       string.erase(0,1);
       continue; 
     }
     else if (pos == string.size())
     {// If the separator is at the end of the string then we have completed the list and can terminate the loop
-      ret.push_back(string.substr(0,pos));
-      break;
+      list.push_back(string.substr(0,pos));
+      return;
     }
     else
     {// If the separator is at the middle of the string then remove the part before and push it into the vector
-      ret.push_back(string.substr(0,pos));
+      list.push_back(string.substr(0,pos));
       string.erase(0,pos+1);
     }
   }
   // If the string does not finish with the character then we must take the last part of it
-  if (string.size() > 0) ret.push_back(string);
+  if (string.size() > 0) list.push_back(string);
+}
+
+std::vector<std::string> getList(std::string string, char const & separator, bool const & removeVoids = false)
+{
+  std::vector<std::string> ret;
+  fillList(ret, string, separator, removeVoids);
   return ret;
 }
 
@@ -113,19 +121,32 @@ bool isNumber(std::string const & string)
 }
 
 /// @brief Returns true if the string has at least one occurence of substr
-bool found(std::string const & string, std::string const & substr)
+bool found(std::string const & string, std::string const & _substr)
 {
-  return (string.find(substr) != std::string::npos);
+  return (string.find(_substr) != std::string::npos);
 }
 
 /// @brief Remove substr to the string if it exists
-bool remove(std::string & string, std::string const & substr)
+bool remove(std::string & string, std::string const & _substr)
 {
-  auto pos = string.find(substr);
+  auto pos = string.find(_substr);
   if (pos!=std::string::npos)
   {
     auto first_str = string.substr(0, pos);
-    string = string.substr(0, pos)+string.substr(pos+substr.size());
+    string = string.substr(0, pos)+string.substr(pos+_substr.size());
+    return true;
+  }
+  else return false;
+}
+
+/// @brief Replace substr to the string if it exists
+bool replace(std::string & string, std::string const & substr_init, std::string const & substr_substitue)
+{
+  auto pos = string.find(substr_init);
+  if (pos!=std::string::npos)
+  {
+    auto first_str = string.substr(0, pos);
+    string = string.substr(0, pos)+substr_substitue+string.substr(pos+substr_init.size());
     return true;
   }
   else return false;
@@ -182,13 +203,15 @@ std::string my_to_string(const T& value)
 
 /// @brief Concatenate a series of arguments into a big string
 /// @example print(concatenate(1, " ", argv[2], " test"));
-template<class... Args>
-std::string concatenate(Args&&... args)
+template<class... ARGS>
+std::string concatenate(ARGS&&... args)
 {
   std::ostringstream oss;
-  (oss << ... << my_to_string(std::forward<Args>(args)));
+  (oss << ... << my_to_string(std::forward<ARGS>(args)));
   return oss.str();
 }
 
+template<class... ARGS>
+const char* concatenate_c(ARGS&&... args){return concatenate(std::forward<ARGS>(args)...).c_str();}
 
 #endif //STRING_FUNCTIONS_HPP

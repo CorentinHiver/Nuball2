@@ -2,11 +2,11 @@
 
 # WARNING: g++, ROOT (cern), pkg-config and fasterac are required to compile this
 
-# Compile using either one of these commands : 
-# 	either default, debug (with extra warning flags) or optimized 
-# $ make -B 
-# $ make debug -B 
-# $ make opt -B 
+# Compile using either one of these commands :
+# 	either default, debug (with extra warning flags) or optimized
+# $ make -B
+# $ make debug -B
+# $ make opt -B
 
 # ----------------------------------------------------
 # Modify ONLY the two next variables :
@@ -16,7 +16,7 @@
 FRAMEWORK_LIB_PATH := ../lib
 
 # ----------------------------------------------------
-# Then write down the name of the main file 
+# Then write down the name of the main file
 SRCEXE := test.cpp
 
 
@@ -42,7 +42,7 @@ HEADER_INCLUDES := $(addprefix -I,$(shell find $(HEADER_DIR) -type d ))
 	${CC} -c $< ${CFLAGS} ${LIBS} ${HEADER_INCLUDES}
 
 CC        = g++
-CFLAGS    = ${FASTERAC_CFLAGS} ${ROOT_CFLAGS} -pthread -std=c++17 -Wall 
+CFLAGS    = ${FASTERAC_CFLAGS} ${ROOT_CFLAGS} -pthread -std=c++17 -Wall
 LIBS      = ${FASTERAC_LIBS}   ${ROOT_LIBS}
 
 # Set SRCEXE to the name of the source file you want to compile
@@ -51,6 +51,7 @@ LIBS      = ${FASTERAC_LIBS}   ${ROOT_LIBS}
 EXE := $(SRCEXE:.cpp=)
 
 default: $(EXE)
+	rm -f *.o
 
 $(EXE): $(SRCEXE:.cpp=.o) ${HEADER_FILES}
 	${CC} $< -o $@ ${CFLAGS} ${LIBS}
@@ -61,8 +62,11 @@ opt: default
 debug: CFLAGS += -g -O0 -DDEBUG -Wextra -ftemplate-depth-25 #-Wold-style-cast
 debug: default
 
-debug_opt: CFLAGS += -g -O2 -DDEBUG -Wextra -ftemplate-depth-25 #-Wold-style-cast
-debug_opt: default
+debugopt: CFLAGS += -g -O2 -DDEBUG -Wextra -ftemplate-depth-25 #-Wold-style-cast
+debugopt: default
+
+harddebug: CFLAGS += -g -O0 -DDEBUG -Wextra -ftemplate-depth-25 -Wconversion -Wno-float-conversion -Wold-style-cast
+harddebug: default
 
 clean:
 	rm -f *.o

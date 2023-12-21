@@ -2,6 +2,15 @@
 #define VECTOR_FUNCTIONS_HPP
 
 #include "print.hpp"
+#include <vector>
+
+template<class T>
+T sum(std::vector<T> const & source)
+{
+  T sum = 0;
+  for (auto const & value : source) sum += value;
+  return sum;
+}
 
 template<class T>
 std::vector<T> push_back(std::vector<T> const & target, T const & value)
@@ -77,12 +86,6 @@ bool found(std::vector<T> & vector, T & t)
 {
   return (std::find(std::begin(vector), std::end(vector), t) != std::end(vector));
 }
-
-// template <class T>
-// T get_max_value(std::vector<T> const & vec)
-// {
-//   return 
-// }
 
 template <typename T>
 T maximum(std::vector<T> const & vector)

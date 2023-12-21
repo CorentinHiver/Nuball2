@@ -2,9 +2,14 @@
 #define FILES_HPP
 
 #include "print.hpp"
-#include "string_functions.hpp"
 #include "vector_functions.hpp"
+#include "string_functions.hpp"
+
+#include <algorithm>
+#include <dirent.h>
 #include <fstream>
+#include <glob.h>
+#include <iostream>
 #include <filesystem>
 #if __cplusplus >= 201703L
   namespace fs = std::filesystem;
@@ -24,6 +29,8 @@ std::string removePath      (std::string const & string) { return (string.substr
 std::string rmPathAndExt    (std::string const & string) { return            removePath(removeExtension(string));}
 
 bool file_is_empty(std::ifstream& file)                { return file.peek() == std::ifstream::traits_type::eof();}
+
+void go_to_beginning(std::ifstream& file) {file.seekg(0, std::ios::beg);}
 
 std::map<std::string, float> size_file_unit =
 {
@@ -138,6 +145,26 @@ int nb_files_in_folder(std::string & folderName)
   return ret;
 }
 
+// /**
+//  * @brief Reads .list file
+//  * 
+//  * @param folderName 
+//  * @return std::vector<std::istringstream> 
+//  */
+// std::vector<std::istringstream> loadFilelist(std::string const & folderName)
+// {
+//   std::vector<std::istringstream> ret;
+//   std::ifstream file(folderName, std::ios::in);
+//   std::string line;
+//   while(getline(file, line))
+//   {
+//     std::istringstream stream(line);
+//     ret.push_back(stream);
+//   }
+//   file.close();
+//   return ret;
+// }
+
 std::string get_filename_at(std::string & folderName, int pos)
 {
   std::string ret;
@@ -172,8 +199,8 @@ std::vector<std::string> list_files_in_folder
   while ( (file = readdir(dp)))
   {
     name = file->d_name;
-    auto const & ext = extension(name);
-    if (extensions[0] == "*" || found(extensions, ext)) ret.push_back(foldername+name);
+    std::string const & ext = extension(name);
+    if (extensions[0] == "*" || find(extensions.begin(), extensions.end(), ext) != extensions.end()) ret.push_back(foldername+name);
   }
   closedir(dp);
   delete file;

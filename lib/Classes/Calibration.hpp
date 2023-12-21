@@ -43,19 +43,47 @@ public:
     return *this;
   }
 
-  /// @brief Loading calibration from file name
-  Calibration(File const & calibFileName) {load(calibFileName);}
-  /// @brief Loading calibration from file name
-  Calibration const & operator=(std::string const & calibFileName) {load(calibFileName); return *this;}
-  /// @brief Loading calibration from file name
-  bool load(File const & calibFileName);
+  /// @brief Constructor loading calibration from a file
+  Calibration(File const & file) {load(file);}
+  /// @brief Copy operator twicked to load calibration from a file
+  Calibration const & operator=(File const & file) {load(file); return *this;}
+  /// @brief Loading calibration from a file
+  bool load(File const & file);
+
+  #ifdef FIT_HPP
+  void loadFits(Fits const & fits);
+  #endif //FIT_HPP
 
   void write(std::string const & outfilename);
+  
+  void resize(int const & size);
+  void clear();
 
   void calibrate(Hit & hit) const noexcept;
 
+#ifdef ROOT_TH1
+  void calibrateAxis(TH1F * histo, Label const & label)
+  {
+    auto const & order = m_order[label];
+         if (order<0) return;
+    else if (order<2) // For linear and affine calibration
+    {
+      // Technical point : we have to cast to int in order to always have the same values
+      // (without it, the floating point of the min and max was always having a slight difference for two identical axis...)
+      int new_min = calibrate(histo->GetXaxis()->GetXmin(), label);
+      int new_max = calibrate(histo->GetXaxis()->GetXmax(), label);
+      histo->GetXaxis()->Set(histo->GetNbinsX(), new_min, new_max);
+      histo->GetXaxis()->SetRangeUser(new_min, new_max);
+    }
+    else throw_error(concatenate("Can't use Calibration::calibrateAxis(TH1F*, Label) with calibration order > 1 yet", error_message["DEV"]));
+  }
+#endif //ROOT_TH1
+
   /// @brief Calibrate the nrj value using the parameters extracted from the calibration data
-  float calibrate(float const & nrj, Label const & label) const noexcept;
+  float calibrate(float  const & nrj, Label const & label) const noexcept;
+  float calibrate(double const & nrj, Label const & label) const noexcept {return calibrate(float_cast(nrj), label);}
+  float calibrate(int    const & adc, Label const & label) const noexcept {return calibrate(float_cast(adc), label);}
+  float calibrate(size_t const & bin, Label const & label) const noexcept {return calibrate(float_cast(bin), label);}
 
   /// @brief Wrapper around the Calibration::calibrate() methods
   template<class... ARGS>
@@ -64,58 +92,85 @@ public:
   /// @brief Return true if the data has been loaded
   operator bool() const & {return (m_ok && m_size>0);}
 
-  //DEV :
-  // void calibrate_fast(Hit & hit){}
-  // void calibrate_fast(Label label, ADC energy, float energy_calibrated){}
-  void setCalibrationTables();
-  //!DEV
-
-
-  // Accessors to the calibration parameters :
+  /// @brief Returns a vector holding the coefficients.
   std::vector<float> operator[](Label const & label) const noexcept;
 
-  auto const & size()         const noexcept {return m_nb_det   ;}
-  auto const & getOrder()     const noexcept {return m_order    ;}
+  /// @brief Get the number of detectors with calibration coefficients
+  auto const & size        () const noexcept {return m_size     ;}
+  /// @brief Get the number of detectors with calibration coefficients
+  auto &       size        ()       noexcept {return m_size     ;}
+  /// @brief Get the number of detectors with calibration coefficients
+  auto const & nb_detectors() const noexcept {return m_nb_det   ;}
+  /// @brief Get the number of detectors with calibration coefficients
+  auto &       nb_detectors()       noexcept {return m_nb_det   ;}
+  /// @brief Returns true if there is at least one coefficient loaded
+  bool const & isFilled    () const noexcept {return m_ok       ;}
+  /// @brief Returns true if there is at least one coefficient loaded
+  bool &       isFilled    ()       noexcept {return m_ok       ;}
+  /// @brief Gets the name of the file from while the data has been loaded
+  auto const & file        () const noexcept {return m_filename ;}
+  /// @brief Gets the name of the file from while the data has been loaded
+  auto &       file        ()       noexcept {return m_filename ;}
+
+  /// @brief Get the order of the calibration (0 : linear, 1 : affine, 2 : quadratic, 3 : 3rd order)
+  auto const & getOrder    () const noexcept {return m_order    ;}
+  /// @brief Get the order of the calibration (0 : linear, 1 : affine, 2 : quadratic, 3 : 3rd order)
+  auto &       getOrder    ()       noexcept {return m_order    ;}
+  /// @brief Get the intercept
   auto const & getIntercept() const noexcept {return m_intercept;}
-  auto const & getSlope()     const noexcept {return m_slope    ;}
-  auto const & getBinom()     const noexcept {return m_binom    ;}
-  auto const & getTrinom()    const noexcept {return m_trinom   ;}
-  bool const & isFilled()     const noexcept {return m_ok       ;}
-  auto const & file()         const noexcept {return m_filename ;}
+  /// @brief Get the intercept
+  auto &       getIntercept()       noexcept {return m_intercept;}
+  /// @brief Get the slope parameter
+  auto const & getSlope    () const noexcept {return m_slope    ;}
+  /// @brief Get the slope parameter
+  auto &       getSlope    ()       noexcept {return m_slope    ;}
+  /// @brief Get the quadratic parameter
+  auto const & getBinom    () const noexcept {return m_binom    ;}
+  /// @brief Get the quadratic parameter
+  auto &       getBinom    ()       noexcept {return m_binom    ;}
+  /// @brief Get the 3rd order parameter
+  auto const & getTrinom   () const noexcept {return m_trinom   ;}
+  /// @brief Get the 3rd order parameter
+  auto &       getTrinom   ()      noexcept {return m_trinom   ;}
+
+  /// @brief Get the order of the calibration (0 : linear, 1 : affine, 2 : quadratic, 3 : 3rd order)
+  auto const & order     (Label const & label) const noexcept {return m_order[label]     ;}
+  /// @brief Get the order of the calibration (0 : linear, 1 : affine, 2 : quadratic, 3 : 3rd order)
+  auto &       order     (Label const & label)       noexcept {return m_order[label]     ;}
+  /// @brief Get the intercept
+  auto const & intercept (Label const & label) const noexcept {return m_intercept[label] ;}
+  /// @brief Get the intercept
+  auto &       intercept (Label const & label)       noexcept {return m_intercept[label] ;}
+  /// @brief Get the slope parameter
+  auto const & slope     (Label const & label) const noexcept {return m_slope[label]     ;}
+  /// @brief Get the slope parameter
+  auto &       slope     (Label const & label)       noexcept {return m_slope[label]     ;}
+  /// @brief Get the quadratic parameter
+  auto const & binom     (Label const & label) const noexcept {return m_binom[label]     ;}
+  /// @brief Get the quadratic parameter
+  auto &       binom     (Label const & label)       noexcept {return m_binom[label]     ;}
+  /// @brief Get the 3rd order parameter
+  auto const & trinom    (Label const & label) const noexcept {return m_trinom[label]    ;}
+  /// @brief Get the 3rd order parameter
+  auto &       trinom    (Label const & label)       noexcept {return m_trinom[label]     ;}
 
   void Print();
 
 private:
   //Private methods :
-  void set(Label label, float intercept, float slope, float binom, float trinom);
+  void set(Label const & _label, float const & _intercept, float const & _slope, float const & _binom, float const &_trinom);
 
   std::string m_filename;
   bool m_ok = false;
   Label m_nb_det = 0;
   Label m_size = 0;
-  std::vector<char> m_order; //1, 2 or 3 | 0 -> no calibration
+  std::vector<char> m_order;
   std::vector<float> m_intercept;
   std::vector<float> m_slope;
   std::vector<float> m_binom;
   std::vector<float> m_trinom;
   std::vector<std::vector<std::vector<float>>> calibration_tables;
 };
-
-
-/// @brief @todo
-void Calibration::setCalibrationTables()
-{
-  print("creating calibration tables");
-  calibration_tables.resize(m_size);
-  std::vector<std::vector<float>> *calib_vec;
-  for (Label i = 0; i<m_size; i++)
-  {
-    calib_vec = &calibration_tables[i];
-    calib_vec->resize(200000);
-  }
-  print("Done !");
-  print();
-}
 
 inline float Calibration::calibrate(float const & nrj, Label const & label) const noexcept
 {
@@ -125,11 +180,12 @@ inline float Calibration::calibrate(float const & nrj, Label const & label) cons
   // Then, return the new value depending on the order of the calibration for this label
   switch(m_order[label])
   {
-    case 0: return nrj_r; // No calibration
-    case 1: return m_intercept[label] + m_slope[label]*nrj_r; // Linear calibration
-    case 2: return m_intercept[label] + m_slope[label]*nrj_r + m_binom[label]*nrj_r*nrj_r; // Quadratic calibration
-    case 3: return m_intercept[label] + m_slope[label]*nrj_r + m_binom[label]*nrj_r*nrj_r + m_trinom[label]*nrj_r*nrj_r*nrj_r; // Third order calibration
-   default: return -1; // This should normally never happen
+    case -1: return nrj_r; // No calibration
+    case  0: return                      m_slope[label]*nrj_r; // Linear calibration (no offset)
+    case  1: return m_intercept[label] + m_slope[label]*nrj_r; // Affine calibration
+    case  2: return m_intercept[label] + m_slope[label]*nrj_r + m_binom[label]*nrj_r*nrj_r; // Quadratic calibration
+    case  3: return m_intercept[label] + m_slope[label]*nrj_r + m_binom[label]*nrj_r*nrj_r + m_trinom[label]*nrj_r*nrj_r*nrj_r; // Third order calibration
+    default: return -1; // This should normally never happen
   }
 }
 
@@ -141,30 +197,37 @@ inline float Calibration::calibrate(float const & nrj, Label const & label) cons
 */ 
 inline void Calibration::calibrate(Hit & hit) const noexcept
 {
-  auto const & label = hit.label;
-  if (label > m_size) return;
-  if (hit.qdc2!=0.0) hit.nrj2 = calibrate(hit.qdc2, label);
-  hit.nrj = calibrate(hit.adc, label);
+  auto const & label = hit.label;      // Extracts the label of the detector
+  if (label > m_size) return;          // If the label is out of range then do no treat it
+  hit.nrj = calibrate(hit.adc, label); // Call to the Calibration::calibrate(energy, label) method
+#ifndef QDC1MAX                        // This line allows one to calibrate a bit faster if not interested in the QDC2 field
+  if (hit.qdc2!=0.0) hit.nrj2 = calibrate(hit.qdc2, label); // Only calibrate the QDC2 if there is a value in the field
+#endif //QDC1MAX
 }
 
-void Calibration::set(Label _label, float _intercept = 0.f, float _slope = 1.f, float _binom = 0.f, float _trinom = 0.f)
+void Calibration::set(Label const & _label, float const & _intercept = 0.f, float const & _slope = 1.f, float const & _binom = 0.f, float const &_trinom = 0.f)
 {
-  if (_slope == 1.f && _intercept == 0.f) {m_order[_label] = 0;}
+  if (_slope == 1.f && _intercept == 0.f) {m_order[_label] = -1;}
+  else if (_intercept == 0.f) 
+  { // Linear calibration
+    m_order     [_label] = 0;
+    m_slope     [_label] = _slope;
+  }
   else if (_binom == 0.f)
-  {
+  {// Affine calibration
     m_order     [_label] = 1;
     m_intercept [_label] = _intercept;
     m_slope     [_label] = _slope;
   }
   else if (_trinom == 0.f)
-  {
+  {// Quadratic calibration
     m_order     [_label] = 2;
     m_intercept [_label] = _intercept;
     m_slope     [_label] = _slope;
     m_binom     [_label] = _binom;
   }
   else
-  {
+  {// Third order calibration
     m_order     [_label] = 3;
     m_intercept [_label] = _intercept;
     m_slope     [_label] = _slope;
@@ -178,17 +241,35 @@ std::vector<float> Calibration::operator[](Label const & label) const noexcept
   if (label>m_size) return {-1};
   switch (m_order[label])
   {
-    case 0 : return {0};
+    case 0 : return {0, m_slope[label]};
     case 1 : return {m_intercept[label], m_slope[label]};
     case 2 : return {m_intercept[label], m_slope[label], m_binom[label]};
     case 3 : return {m_intercept[label], m_slope[label], m_binom[label], m_trinom[label]};
-    default : return {0};
+   default : return {0};
   }
 }
 
-bool Calibration::load(File const & calibFileName)
+void Calibration::resize(int const & size)
 {
-  m_filename = calibFileName.string();
+  m_order    .resize(size,-1  );
+  m_intercept.resize(size, 0.f);
+  m_slope    .resize(size, 1.f);
+  m_binom    .resize(size, 0.f);
+  m_trinom   .resize(size, 0.f);
+}
+
+void Calibration::clear()
+{
+m_order    .clear();
+m_intercept.clear();
+m_slope    .clear();
+m_binom    .clear();
+m_trinom   .clear();
+}
+
+bool Calibration::load(File const & file)
+{
+  m_filename = file.string();
   std::ifstream inputfile(m_filename, std::ifstream::in);
 
   if (!inputfile.good()) {print("CAN'T OPEN THE CALIBRATION FILE " + m_filename); throw std::runtime_error("CALIBRATION");}
@@ -217,11 +298,7 @@ bool Calibration::load(File const & calibFileName)
   m_size = size;
   // ----------------------------------------------------- //
   // Now fill the vectors
-  m_order    .resize(m_size,-1);
-  m_intercept.resize(m_size, 0.f);
-  m_slope    .resize(m_size, 1.f);
-  m_binom    .resize(m_size, 0.f);
-  m_trinom   .resize(m_size, 0.f);
+  this -> resize(m_size);
   float slope = 1.f, binom = 0.f, trinom = 0.f, intercept = 0.f;
   while (getline(inputfile, line))
   {
@@ -235,52 +312,61 @@ bool Calibration::load(File const & calibFileName)
   return (m_ok = true);
 }
 
-void Calibration::Print()
+/// @brief Displays the calibration coefficients
+std::ostream& operator<<(std::ostream& out, Calibration const & calib)
 {
-  for (Label label = 0; label<m_size; label++)
+  for (Label label = 0; label<calib.size(); label++)
   {
-    if (m_order[label] < 0) continue;
-    std::cout << label << " : ";
-    std::cout << m_intercept[label];
-    if (m_order[label] > 0)
+    auto const & calib_order = calib.getOrder()[label];
+    if (calib_order < 0) continue;
+    else if (calib_order == 0) {out << label << " " << 0 << " " << calib.getSlope()[label];}
+    else //if (calib_order > 0)
     {
-      std::cout << " " << m_slope[label];
-      if (m_order[label] > 1)
+      out << label << " " << calib.getIntercept()[label] << " " << calib.getSlope()[label];
+      if (calib_order > 1)
       {
-        std::cout << " " << m_binom[label];
-        if (m_order[label] > 2)
+        out << " " << calib.getBinom()[label];
+        if (calib_order > 2)
         {
-          std::cout << " " << m_trinom[label];
+          out << " " << calib.getTrinom()[label];
         }
       }
     }
-    std::cout << std::endl;
-
-
+    out << "\n";
   }
+  return out;
 }
 
-/// @brief 
-/// @todo  
+void Calibration::Print() {print(*this);}
+
+/// @brief Writes down the calibration file
 void Calibration::write(std::string const & outfilename)
 {
   File outFile(outfilename);
   outFile.setExtension("calib");
   outFile.makePath(); // Create the path if it doesn't already exist
 
-  // std::ofstream outfile(outFile);
-  // for (auto const & fit : m_fits) if (detectors.exists(fit.label())) outfile << fit;
-  // print("Data written to", outfilename);
+  std::ofstream outfile(outFile.string());
+  outfile << *this;
+  outfile.close();
+  print(outFile.string(), "written");
 }
 
-std::ostream& operator<<(std::ostream& cout, Calibration const & calib)
+#ifdef FIT_HPP
+/**
+ * @brief Allows one to load the results of a fit
+ * @attention This function exists only if "lib/Classes/Fits.hpp" has been included before
+ */
+void Calibration::loadFits(Fits const & fits)
 {
-  for (Label label = 0; label<detectors.size(); label++) 
+  this -> clear();
+  this -> resize(fits.size());
+  for (size_t fit_i = 0; fit_i<fits.size(); fit_i++)
   {
-    if (detectors && !detectors.exists(label)) continue;
-     cout << label << " " << calib[label] << std::endl;
+    auto const & fit = fits[fit_i];
+    this->set(fit_i, fit.parameter0, fit.parameter1, fit.parameter2, fit.parameter3);
   }
-  return cout;
 }
+#endif //FIT_HPP
 
 #endif //CALIBRATION_HPP

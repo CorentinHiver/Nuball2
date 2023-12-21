@@ -13,6 +13,11 @@ int main(int argc, char ** argv)
   }
   else
   {
+    std::vector<std::string> m_output_names;
+    // Create all the histo run by run :
+    print();
+    print("Create the histograms run by run :");
+    print();
     Manip manip(argv[1]);
     Path datapath(argv[2]);
     Path outpath(argv[3]);
@@ -23,13 +28,26 @@ int main(int argc, char ** argv)
       std::string run_name = rmPathAndExt(run);
       Path input (concatenate(datapath, run_name, ".fast"));
       File output (outpath, run_name+".root");
+      m_output_names.push_back(output);
       if (!input.exists()) continue;
       char** arguments = string_to_argv(concatenate("faster2histo", argv_to_string(argv, 4), " -F ", input, " -1 -O ", output));
       print(argv_to_string(arguments));
       Faster2Histo(argc+2, arguments);
       delete_argv(arguments);
     }
+
+    // Create all the raw histo sum and evolution 
+    // print();
+    // print("Fuse histograms :");
+    // print();
+
+    // for (auto const & filename : m_output_names)
+    // {
+    //   auto file = TFile::Open()
+    // }
+
   }
+  
   return 1;
 }
 // ./manip2histo parameters/Uranium.list ~/faster_data/N-SI-136 ../Playground/testFolder/

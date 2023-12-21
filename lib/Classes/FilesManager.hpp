@@ -1,5 +1,5 @@
-#ifndef FILEMANAGER_H
-#define FILEMANAGER_H
+#ifndef FILEMANAGER_HPP
+#define FILEMANAGER_HPP
 
 #include "../libCo.hpp"
 
@@ -93,6 +93,8 @@ public:
   auto begin() const {return m_listFiles.begin();}
   auto end()   const {return m_listFiles.end  ();}
 
+  bool operator>>(std::string & filename) {return nextFileName(filename);}
+
 protected:
   Path m_path;
   size_t      m_filesCursor = 0;
@@ -180,4 +182,5 @@ std::ostream& operator<<(std::ostream& cout, FilesManager const & files)
   for (auto const & f : files) cout << f << " ";
   return cout;
 }
-#endif
+
+#endif //FILEMANAGER_HPP

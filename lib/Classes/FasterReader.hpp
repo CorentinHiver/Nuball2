@@ -5,19 +5,9 @@
 
 // ******* fasterac includes ******* //
 #include "fasterac/adc.h"
-// #include "fasterac/electrometer.h"
-// #include "fasterac/farray.h"
-// #include "fasterac/fast_data.h"
-// #include "fasterac/fasterac.h"
 #include "fasterac/group.h"
-// #include "fasterac/jdb_hv.h"
-// #include "fasterac/online.h"
 #include "fasterac/qdc.h"
-// #include "fasterac/qtdc.h"
 #include "fasterac/rf.h"
-// #include "fasterac/sampler.h"
-// #include "fasterac/scaler.h"
-// #include "fasterac/spectro.h"
 #include "fasterac/utils.h"
 
 /** 

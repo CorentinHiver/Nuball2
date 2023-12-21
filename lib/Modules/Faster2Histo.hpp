@@ -4,8 +4,7 @@
 #include "../Classes/Detectors.hpp"
 #include "../Classes/FilesManager.hpp"
 #include "../Classes/Timer.hpp"
-
-#include "../Modules/Calibration.hpp"
+#include "../Classes/Calibration.hpp"
 
 #include "../MTObjects/MTFasterReader.hpp"
 #include "../MTObjects/MTTHist.hpp"
@@ -27,11 +26,14 @@ public:
       setOutFilename(rmPathAndExt(path)+"_spectra.root");
     }
   }
+  
   void addFile(std::string const & file) 
   {
     m_files.addFile(file);
     setOutFilename(rmPathAndExt(file)+"_spectra.root");
   }
+
+  void setTrigger(TriggerHit trigger) {m_trigger = trigger;}
 
   void multirun(int const & nb_threads = -1);
   void treatFile(Hit & hit, FasterReader & reader);
@@ -41,10 +43,10 @@ public:
   void setOutFilename(std::string const & out_filename) noexcept {m_outFile = out_filename;}
   void setWriteMode(const char* mode) noexcept {delete[] write_mode; write_mode = mode;}
   void loadCalibration(std::string const & calibration_file) {m_calibration.load(calibration_file);}
-  void setNbFiles(int const & _nb_files) {m_nb_files = _nb_files;}
+  void setNbFiles(int const & _nb_files) noexcept{m_nb_files = _nb_files;}
   void setNbThreads(int const & _nb_threads) {MTObject::setThreadsNb(_nb_threads);}
-  void setOutPath(Path const & path) {m_outPath = path;}
-  void overwrite(bool const & _overwrite) {m_overwrite = _overwrite;}
+  void setOutPath(Path const & path) noexcept {m_outPath = path;}
+  void overwrite(bool const & _overwrite) noexcept {m_overwrite = _overwrite;}
 
 private:
   void printParameters() const noexcept;
@@ -55,11 +57,15 @@ private:
   std::unordered_map<Label, MTTHist<TH1F>> m_spectra;
   const char* write_mode = "RECREATE";
   Calibration m_calibration;
+  TriggerHit m_trigger = [](Hit const & hit) {return true;};
   
   Path m_outPath = Path::pwd();
   File m_outFile = "spectra.root";
   int m_nb_files = -1;
   int m_overwrite = false;
+
+  int m_nb_bins = 2000000;
+  int m_ADC_per_bin = 100;
 };
 
 Faster2Histo::Faster2Histo(int argc, char** argv)
@@ -159,7 +165,7 @@ void Faster2Histo::treatFile(Hit & _hit, FasterReader & reader)
 inline void Faster2Histo::fillHisto(Hit const & hit)
 {
   try {
-      m_spectra.at(hit.label).Fill(hit.adc); // Fill the 
+      m_spectra.at(hit.label).Fill(hit.adc); // Fill the spectra
     }
     catch(std::out_of_range const & error)
     {// Add a new detector label to the map if it doesn't exist
@@ -170,7 +176,7 @@ inline void Faster2Histo::fillHisto(Hit const & hit)
         std::string name = (detectors) ? detectors[hit.label] : std::to_string(hit.label);
         std::string title = (detectors) ? detectors[hit.label] : std::to_string(hit.label);
         title += (m_calibration) ? " E" : " adc";
-        m_spectra.emplace(hit.label, MTTHist<TH1F>(name.c_str(), title.c_str(), 200000, 0, 2000000));
+        m_spectra.emplace(hit.label, MTTHist<TH1F>(name.c_str(), title.c_str(), m_nb_bins, 0, m_nb_bins*m_ADC_per_bin));
         m_spectra[hit.label].Fill(hit.adc);
       }
     }
@@ -188,8 +194,10 @@ void Faster2Histo::write(std::string const & out_filename) noexcept
   // Write down with ordered labels :
   for (auto & label_index : ordered_labels_indexes) 
   {
-    // m_spectra[m_labels[label_index]].verbosity();
-    m_spectra[m_labels[label_index]].Write();
+    auto & spectra = m_spectra[m_labels[label_index]];
+    spectra.Merge();
+    spectra->GetXaxis()->SetRange(0, spectra->FindLastBinAbove(1));
+    spectra.Write();
   }
   outFile->Write();
   outFile->Close();

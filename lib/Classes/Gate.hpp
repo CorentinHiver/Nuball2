@@ -3,6 +3,11 @@
 
 #include "../libCo.hpp"
 
+/**
+ * @brief Convenient gate class
+ * 
+ * @tparam T: Type of the data
+ */
 template<typename T>
 class Gate_t
 {
@@ -34,6 +39,9 @@ private:
   bool m_use = false;
 };
 
+/**
+ * @brief Gate with mostly used type of data
+ */
 using Gate = Gate_t<float>;
 
 template<typename T>

@@ -4,19 +4,13 @@
 // *********** STD includes ********* //
 #include <any>
 #include <array>
-#include <algorithm>
 #include <cstdlib>
-#include <cstring>
 #include <fstream>
 #include <functional>
-#include <iomanip>
-#include <iostream>
-#include <map>
 #include <memory>
 #include <mutex>
 #include <numeric>
 #include <queue>
-#include <sstream>
 #include <stdexcept>
 #include <string>
 #include <stack>
@@ -24,11 +18,8 @@
 #include <typeindex>
 #include <typeinfo>
 #include <unordered_map>
-#include <vector>
 
 // ********** C includes ************ //
-#include <dirent.h>
-#include <glob.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -43,6 +34,13 @@
 //////////////
 //   UTILS  //
 //////////////
+
+void throw_error(std::string const & message) {throw std::runtime_error(concatenate(RED, message, RESET));}
+
+std::map<std::string, std::string> error_message = 
+{
+  {"DEV", "ASK DEV or do it yourself, sry"}
+};
 
 auto pauseCo() {std::cout << "Programe paused, please press enter"; return std::cin.get();}
 auto pauseCo(std::string const & message) {std::cout << message << std::endl; return std::cin.get();}
@@ -124,100 +122,163 @@ inline longlong longlong_cast(T const & t) {return static_cast<longlong>(t);}
 template<typename T,  typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
 inline size_t size_cast(T const & t) {return static_cast<size_t>(t);}
 
+////////////////////////
+// General converters //
+////////////////////////
+
+class CastImpossible {
+public:
+  CastImpossible() noexcept = default;
+  CastImpossible(std::string const & message) noexcept : m_message (message) {}
+  std::string what() {return m_message;}
+  std::string what() const {return m_message;}
+
+private:
+  std::string m_message;
+};
+
+template<class T>
+T string_to(std::string const & string)
+{
+  T t;
+  std::istringstream iss(string);
+
+  if (!(iss>>t) || !iss.eof())
+  {
+    throw CastImpossible(concatenate("In string_to<T>(std::string const & string) with string = ",
+    string, " the string can't be casted to ", type_of(t)));
+  }
+  return t;
+}
+
 // Containers :
 class Bools 
 {
 private:
-    bool* m_data = nullptr;
-    size_t m_size = 0;
+  bool* m_data = nullptr;
+  size_t m_size = 0;
+  size_t m_reserved_size = 0;
 
 public:
-    Bools() {}
-    Bools(size_t size, bool const & value = false) : m_size(size) {
-        m_data = new bool[m_size];
-        memset(m_data, value ? 1 : 0, m_size * sizeof(bool));
-    }
+  Bools() noexcept = default;
+  Bools(size_t size, bool const & value = false) noexcept : m_size(size), m_reserved_size(2*size) {
+    m_data = new bool[m_reserved_size];
+    memset(m_data, value ? 1 : 0, m_size * sizeof(bool));
+  }
 
-    // Copy constructor
-    Bools(const Bools& other) : m_size(other.m_size) {
-        m_data = new bool[m_size];
-        memcpy(m_data, other.m_data, m_size * sizeof(bool));
-    }
+  // Copy constructor
+  Bools(const Bools& other) noexcept : m_size(other.m_size), m_reserved_size(2*m_size) {
+    m_data = new bool[m_size];
+    memcpy(m_data, other.m_data, m_size * sizeof(bool));
+  }
 
-    // Move constructor
-    Bools(Bools&& other) noexcept : m_data(other.m_data), m_size(other.m_size) {
-        other.m_data = nullptr;
-        other.m_size = 0;
-    }
+  // Move constructor
+  Bools(Bools&& other) noexcept : m_data(other.m_data), m_size(other.m_size), m_reserved_size(other.m_reserved_size) {
+    // Re-initialise the original data in case it is re-used later on
+    other.m_data = nullptr;
+    other.m_size = 0;
+  }
 
-    // Copy assignment
-    Bools& operator=(const Bools& other) {
-        if (this != &other) {
-            delete[] m_data;
-            m_size = other.m_size;
-            m_data = new bool[m_size];
-            memcpy(m_data, other.m_data, m_size * sizeof(bool));
-        }
-        return *this;
-    }
-
-    // Move assignment
-    Bools& operator=(Bools&& other) noexcept {
-        if (this != &other) {
-            delete[] m_data;
-            m_data = other.m_data;
-            m_size = other.m_size;
-            other.m_data = nullptr;
-            other.m_size = 0;
-        }
-        return *this;
-    }
-
-    ~Bools() {
+  // Copy assignment
+  Bools& operator=(const Bools& other) noexcept {
+      if (this != &other) {
         delete[] m_data;
-    }
-
-    bool& operator[](size_t const & index) {
-        return m_data[index];
-    }
-
-    bool const & operator[](size_t const & index) const {
-        return m_data[index];
-    }
-
-    size_t const & size() const {
-        return m_size;
-    }
-
-    size_t const & resize(size_t size, bool const & value = false) {
-      if (size>m_size)
-      {
-        if (m_size==0) 
-        {
-          m_data = new bool[size];
-          for (;m_size<size;m_size++) m_data[m_size] = value;
-        }
-        else 
-        {
-          bool* temp = new bool[size];
-          std::memcpy(temp, m_data, m_size*sizeof(bool));
-          delete[] m_data;
-          for (;m_size<size;m_size++) temp[m_size] = value;// Fills new space with value AND set correct value to m_size
-          m_data = temp;
-        }
+        m_size = other.m_size;
+        m_reserved_size = other.m_reserved_size;
+        m_data = new bool[m_reserved_size];
+        memcpy(m_data, other.m_data, m_size * sizeof(bool));
       }
-      return m_size;
+      return *this;
+  }
+
+  // Move assignment
+  Bools& operator=(Bools&& other) noexcept {
+    if (this != &other) {
+      delete[] m_data;
+      m_data = other.m_data;
+      m_size = other.m_size;
+      other.m_data = nullptr;
+      other.m_size = 0;
     }
+    return *this;
+  }
 
-    auto begin() {return m_data;}
-    auto end()   {return m_data + m_size;}
+  void push_back(bool const & value)
+  {
+    this -> resize(m_size+1);
+    m_data[m_size++] = value;
+  }
 
-    auto begin() const {return m_data;}
-    auto end()   const {return m_data + m_size;}
+  ~Bools() {
+    delete[] m_data;
+  }
 
+  bool       & operator[](size_t const & index)       {
+    return m_data[index];
+  }
+
+  bool const & operator[](size_t const & index) const {
+    return m_data[index];
+  }
+
+  size_t const & size() const {
+    return m_size;
+  }
+
+  void resize(size_t size) {
+         if (m_size == size) return;
+    else if (size>m_reserved_size)
+    {
+      bool* temp = new bool[(m_reserved_size = size*2)];
+      std::memcpy(temp, m_data, m_size*sizeof(bool));
+      delete[] m_data;
+      m_data = temp;
+    }
+    for (;m_size<size;++m_size) m_data[m_size] = false;
+  }
+
+  void resize(size_t size, bool const & value) {
+    if (size>m_reserved_size)
+    {
+      delete[] m_data;
+      m_data = new bool[(m_reserved_size = size*2)];
+    }
+    for (m_size = 0;m_size<size;++m_size) m_data[m_size] = value;
+  }
+
+  auto begin() {return m_data;}
+  auto end()   {return m_data + m_size;}
+
+  auto begin() const {return m_data;}
+  auto end()   const {return m_data + m_size;}
+
+  // Boolean logic :
+  
+  bool AND() const noexcept
+  {
+    for(auto const & value : *this) if (!value) return false;
+    return true;
+  }
+  
+  bool OR() const noexcept
+  {
+    for(auto const & value : *this) if (value) return true;
+    return false;
+  }
+
+  bool XOR() const noexcept
+  {
+    bool _found = false;
+    for(auto const & value : *this) if (value)
+    {
+      if(_found) return false;
+      else _found = true;
+    }
+    return _found;
+  }
 };
 
-std::ostream& operator>>(std::ostream& cout, Bools const & bools)
+std::ostream& operator<<(std::ostream& cout, Bools const & bools)
 {
   for (auto const b : bools) cout << b << " ";
   return cout;
@@ -225,18 +286,6 @@ std::ostream& operator>>(std::ostream& cout, Bools const & bools)
 
 using Strings = std::vector<std::string>;
 using Ints = std::vector<int>;
-
-
-/////////////////////////////
-//    STANDART FUNCTIONS   //
-/////////////////////////////
-
-void throw_error(std::string const & message) {throw std::runtime_error(message);}
-
-std::map<std::string, std::string> error_message = 
-{
-  {"DEV", "ASK DEV or do it yourself, sry"}
-};
 
 ///////////////////////////////////
 //    UNORDERED MAPS FUNCTIONS   //
@@ -339,23 +388,6 @@ inline K get_min_key(std::map<K,V> const & map)
         return p1.first > p2.first;
   })->first); 
 }
-
-//////////////////////////////////
-// Strings and vectors together //
-//////////////////////////////////
-
-
-// /// @brief Concatenate any type or class that can be turned into a string
-// template<class... T>
-// std::string concatenate(T... input)
-// {
-//   std::vector<std::string> all_strings;
-//   all_strings.push_back(std::to_string(input)...);
-//   std::string ret;
-//   for (auto const & string : all_strings) ret+=string;
-//   return ret;
-// }
-
 
 /////////////////////////////
 //    TEMPLATE HANDELING   //

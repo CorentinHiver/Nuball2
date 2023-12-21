@@ -1,7 +1,7 @@
 // #include "../libRoot.hpp"
 // #include <SourceCloverSpectra.hpp>
 // #include <Calibration.hpp>
-#include <Calibrator.hpp>
+// #include <Calibrator.hpp>
 // #include <RunMatrixator.hpp>
 // #include <SpectraAlignator.hpp>
 // #include <Detectors.hpp>
@@ -9,17 +9,44 @@
 // #include <Convertor.hpp>
 // #include <MTFasterReader.hpp>
 // #include <Faster2Histo.hpp>
+#include <EvolutionPeaks.hpp>
+// #include <AnalysedSpectra.hpp>
 
 int main(int argc, char ** argv)
 {
-  Calibrator calib;
-  calib.loadCalibration("../136/conversion_200ns/136_v2.calib");
-  // calib.calculate()
+  // auto file = TFile::Open(argv[1], "RECREATE");
+  // AnalysedSpectra spectra(file->Get<TH1F>("R3A1_red_total"));
+  EvolutionPeaks evol;
+  evol.setPeaks({511, 1779, 5107, 5618, 6129});
+  evol.loadParameters(argc, argv);
+  evol.loadRebin("136_rebin.data");
+  evol.run();
+  // Calibration calib("../136/conversion_200ns/136_v2.calib");
+  // auto file = TFile::Open("~/faster_data/N-SI-136-U_histo/run_75.root");
+  // auto histo = file->Get<TH1F>("R3A1_red");
+  // calib.calibrateAxis(histo, 25);
+  // resizeViewRange(histo, 0);
+  // histo->Draw();
+  // for (int i = 0; i<calib.size(); i++) print(i, (int)calib.getOrder()[i]);
   // MTTHist<TH1F>::verbose(false);
+
+
   // Faster2Histo convertor;
+  // detectors.load("index_129.list");
   // convertor.addFolder("/home/corentin/faster_data/N-SI-136/152_Eu_center_after.fast", 1);
-  // convertor.multirun("", 1);
+  // convertor.setTrigger([](Hit const & hit){
+  //   if (hit.label>300 && hit.label < 800)
+  //   {
+  //     auto const & psd = 1-(hit.nrj/hit.nrj2);
+  //     if (psd>0.5 || psd<-0.2) return false;
+  //     else return true;
+  //   }
+  //   else return true;
+  // });
+  // convertor.multirun(1);
   // convertor.write();
+
+
 // auto file_ref = TFile::Open("histos/run_80_matrixated.root", "READ");
 //   auto file_test = TFile::Open("histos/run_120_matrixated.root", "READ");
 //   // auto histo_ref = file_ref->Get<TH1F>("PARIS_BR3D2_prompt_singles");

@@ -14,8 +14,6 @@
 #include "Timeshifts.hpp"
 #include "Calibration.hpp"
 
-using Trigger = std::function<bool(const Event&)>;
-
 /**
  * @brief Basic class to perform faster to root tree data conversion
  * 
@@ -116,7 +114,7 @@ public:
   Faster2Root() {}
 
   Faster2Root(int argc, char** argv) {load(argc, argv);}
-  Faster2Root(int argc, char** argv, Trigger trigger )
+  Faster2Root(int argc, char** argv, TriggerEvent trigger )
   {
     setTrigger(trigger);
     load(argc, argv);
@@ -151,7 +149,7 @@ public:
 
   void convert(std::string const & dataFolder, std::string const & outputFolder, int const & nb_files = -1);
 
-  void setTrigger(std::function<bool(const Event&)> other) {m_trigger = other; m_use_trigger = true;}
+  void setTrigger(TriggerEvent other) {m_trigger = other; m_use_trigger = true;}
   void loadTriggerFile(std::string const & file);
   void throwSingles(bool const & _throw_single = true) {m_throw_single = _throw_single;}
 
@@ -184,7 +182,7 @@ protected:
   MTCounter m_total_events;
   MTCounter m_trigg_events;
   Timer m_total_timer;
-  std::function<bool(const Event&)> m_trigger = [](const Event&) { return true; };
+  TriggerEvent m_trigger = [](const Event&) { return true; };
   std::vector<Label> m_triggering_labels;
 };
 

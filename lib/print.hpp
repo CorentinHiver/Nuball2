@@ -1,6 +1,37 @@
 #ifndef PRINT_HPP
 #define PRINT_HPP
 
+#include <iostream>
+#include <iomanip>
+#include <vector>
+#include <map>
+
+// Defining the different colors possible of the terminal
+// Usage :  cout<<COLOR<<....
+//          ...
+//          cout << ... << RESET
+
+#define RESET   "\u001b[0m"
+
+#define BLACK   "\u001b[30m"
+#define RED     "\u001b[31m"
+#define GREEN   "\u001b[32m"
+#define YELLOW  "\u001b[33m"
+#define BLUE    "\u001b[34m"
+#define MAGENTA "\u001b[35m"
+#define CYAN    "\u001b[36m"
+#define WHITE   "\u001b[37m"
+
+#define BRIGHTBLACK   "\u001b[30;1m"
+#define BRIGHTRED     "\u001b[31;1m"
+#define BRIGHTGREEN   "\u001b[32;1m"
+#define BRIGHTYELLOW  "\u001b[33;1m"
+#define BRIGHTBLUE    "\u001b[34;1m"
+#define BRIGHTMAGENTA "\u001b[35;1m"
+#define BRIGHTCYAN    "\u001b[36;1m"
+#define BRIGHTWHITE   "\u001b[37;1m"
+
+#define GREY "\u001b[38;5;8m"
 
 // Generic print :
 
@@ -69,8 +100,7 @@ template <class... ARGS> void debug(ARGS &&... args)
 #endif //DEBUG
 }
 
-
-// Print specialization for uchar : 
+// Print specialization for char and uchar : 
 
 std::ostream& operator<<(std::ostream& cout, unsigned char const & uc)
 {
@@ -78,78 +108,26 @@ std::ostream& operator<<(std::ostream& cout, unsigned char const & uc)
   return cout;
 }
 
+// Printing the name of the types :
 
-// Idea to print any class that has a member called getPrintable that returns an object that can be printed 
-// (i.e. a base type or a class for which operator<< have been overloaded like vector or map)
-// Raw idea from chatgpt so it needs refinement
-//
-// template <typename T, typename = void>
-// struct HasRequiredFunction : std::false_type {};
+template<class T>
+std::string type_of(T const & t)
+{
+  return typeid(t).name();
+}
 
-// // Partial specialization for types that have the required function
-// template <typename T>
-// struct HasRequiredFunction<T, std::void_t<decltype(std::declval<T>().getPrintable())>> : std::true_type {};
+// Specialised printing function :
 
-// template <class T>
-// std::ostream& operator<<(std::ostream& cout, T const & t)
-// {
-//   std::static_assert(HasRequiredFunction<T>::value, "must have a getPrintable() method or overloaded operator<< to be printed.");
-//   cout << t.get();
-//   return cout;
-// }
+template <class... T>
+void warning(T const & ... t)
+{
+  print(RED, t..., RESET);
+}
 
-// template <class K, class V> void print (std::map<K,V> const & m)
-// {
-//   print();
-//   print("{");
-//   print();
-//   for (auto const & pair : m)
-//   {
-//     print("key : ");
-//     print(pair.first);
-//     // print();
-//     print("value :");
-//     print(pair.second);
-//     print();
-//   }
-//   print("}");
-//   print();
-// }
-
-// template <class K, class V, class... T> void print (std::map<K,V> const & m, T const & ... t2)
-// {
-//   print(m);
-//   print(t2...);
-// }
-
-
-// // Class Debug, based on template print() :
-// class Debug
-// {
-// public:
-//   template <class... T> Debug(T... t) { (*this)(t...); }
-
-//   template <class... T> void operator () (T... t)
-//   {
-//     if (sizeof...(t) == 0)
-//     {
-//       print("coucou ", i);
-//       i++;
-//       return;
-//     }
-//     print(t...);
-//     std::cout << std::endl;
-//   }
-
-//   void operator () (int _i)
-//   {
-//     std::cout << "coucou " << _i << std::endl;
-//     i = _i+1;
-//   }
-// private:
-//   static int i;
-// };
-
-// int Debug::i = 0;
+template <class... T>
+void information(T const & ... t)
+{
+  print(GREY, t..., RESET);
+}
 
 #endif //PRINT_HPP

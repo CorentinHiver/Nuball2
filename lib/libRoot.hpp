@@ -168,6 +168,16 @@ bool getMeanPeak(TH1F* spectra, double & mean)
   return true;
 }
 
+void getDataTH1F(TH1F* histo, std::vector<float> & data)
+{
+  auto const & size = histo->GetNbinsX()+1;
+  data.reserve(size);
+  for (int bin = 1; bin<size; bin++)
+  {
+    data.push_back(histo->GetBinContent(bin));
+  }
+}
+
 ///////////////////////////
 //   TREE MANIPULATIONS  //
 ///////////////////////////
@@ -295,6 +305,7 @@ auto createBranchArray(TTree* tree, T * array, std::string const & name, std::st
 
 /**
  * @brief Not functionnal yet
+ * @todo maybe
  * 
  * 1: Add all the files
  * TheTChain chain("Nuball", "/path/to/data/files*.root");
@@ -715,8 +726,8 @@ namespace CoAnalyse
       print("Iteration", it);
       if(save_intermediate)
       {
-        save_totProjX.emplace_back(dynamic_cast<TH1D*>(firstTotProjX->Clone(("totProjX_"+std::to_string((int)(it))).c_str())));
-        save_totProjY.emplace_back(dynamic_cast<TH1D*>(firstTotProjY->Clone(("totProjY_"+std::to_string((int)(it))).c_str())));
+        save_totProjX.emplace_back(dynamic_cast<TH1D*>(firstTotProjX->Clone(("totProjX_"+std::to_string(int_cast(it))).c_str())));
+        save_totProjY.emplace_back(dynamic_cast<TH1D*>(firstTotProjY->Clone(("totProjY_"+std::to_string(int_cast(it))).c_str())));
         // if (it>0) save_sub_projX.emplace_back(dynamic_cast<TH1D*>(firstTotProjX->Clone(("sub_projX_"+std::to_string((int)(it-1))).c_str())));
         // if (it>0) save_sub_projY.emplace_back(dynamic_cast<TH1D*>(firstTotProjY->Clone(("sub_projY_"+std::to_string((int)(it-1))).c_str())));
 
@@ -875,7 +886,11 @@ namespace CoAnalyse
     if (dim == 1)
     {
       auto const & background = histo -> ShowBackground(niter, fit_options.c_str());
-      for (int bin=0; bin<histo->GetNbinsX(); bin++) {histo->SetBinContent(bin, histo->GetBinContent(bin) - background->GetBinContent(bin));}
+      for (int bin=0; bin<histo->GetNbinsX(); bin++) 
+      {
+        auto const & new_value = histo->GetBinContent(bin) - background->GetBinContent(bin);
+        histo->SetBinContent(bin, (new_value<1) ? 1 : new_value);
+      }
     }
 
     else if (dim == 2)
@@ -964,6 +979,19 @@ std::vector<std::string> getTH1FNames(std::string const & filename)
   return ret;
 }
 
+////////////
+// OTHERS //
+////////////
+
+void resizeViewRange(TH1F * histo)
+{
+  histo->GetXaxis()->SetRange(histo->FindFirstBinAbove(histo->GetMinimum()), histo->FindLastBinAbove(histo->GetMinimum()));
+}
+void resizeViewRange(TH1F * histo, float const & min)
+{
+  histo->GetXaxis()->SetRange(min, histo->FindLastBinAbove(histo->GetMinimum()));
+}
+
 /// @brief allows one to fuse all the histograms with the same name from different files
 void fuse_all_histo(std::string const & folder, std::string const & outRoot = "fused_histo.root", bool const & bidim = true)
 {
@@ -985,7 +1013,6 @@ void fuse_all_histo(std::string const & folder, std::string const & outRoot = "f
         std::unique_ptr<TObject> obj (key->ReadObj());
         auto histo = dynamic_cast<TH1*>(obj.get());
         std::string name = histo->GetName();
-        // print(name);
         if (first_file) all_TH1F.emplace_back(std::unique_ptr<TH1>(dynamic_cast<TH1*>(histo->Clone((name).c_str()))));
         else
         {
@@ -997,20 +1024,22 @@ void fuse_all_histo(std::string const & folder, std::string const & outRoot = "f
           }
           else if (name != all_TH1F[nb_histos]->GetName()) 
           {
-            print("NOT THE SAME FILES :", nb_histos, "ème file : ", name, all_TH1F[nb_histos]->GetName());
+            print("NOT THE SAME FILES :", nb_histos, "th file : ", name, all_TH1F[nb_histos]->GetName());
             
-            // Trying to find the histogram forward :
+            // If the two files has at least one histogram more or less, one need to find it :
             auto const checkpoint = nb_histos;
             do {nb_histos++;} while (nb_histos<all_TH1F.size() && name != all_TH1F[nb_histos]->GetName());
 
-            // If not found, create it at current position :
-            if (nb_histos == all_TH1F.size()) 
+            // If not found it means it do not exist and need to be created at the current position :
+            if (nb_histos == all_TH1F.size())
             {
-              all_TH1F.emplace(all_TH1F.begin()+checkpoint, std::unique_ptr<TH1>(dynamic_cast<TH1*>(histo->Clone((name).c_str()))));
+              auto const & it = all_TH1F.begin()+checkpoint;
+              all_TH1F.emplace(it, std::unique_ptr<TH1>(dynamic_cast<TH1*>(histo->Clone((name).c_str()))));
               nb_histos = checkpoint+1;
               continue;
             }
           }
+          if (hist->Get)
           all_TH1F[nb_histos]->Add(histo);
         }
         nb_histos++;

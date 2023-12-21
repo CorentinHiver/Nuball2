@@ -1,18 +1,7 @@
 #ifndef _RWMat_
 #define _RWMat_
 
-#include <math.h>
-#include <vector>
-#include <iostream>
-#include <string>
-#include <cstdlib>
-#include <fstream>
-#include <sstream>
-#include <iomanip>
-
-#include "TH2F.h"
-
-#include "../libCo.hpp"
+#include "../libRoot.hpp"
 
 class RWMat
 {

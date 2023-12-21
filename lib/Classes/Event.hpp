@@ -5,6 +5,7 @@
 #include "../libCo.hpp"
 #include "../libRoot.hpp"
 
+
 /**
  * @brief Event used for reading and writting event, event building and trigger
  * @details
@@ -385,5 +386,11 @@ inline std::ostream& operator<<(std::ostream& cout, Event const & event)
   cout << "--- " << std::endl;
   return cout;
 }
+
+//////////////////////////
+/// Trigger definition ///
+//////////////////////////
+
+using TriggerEvent = std::function<bool(const Event&)>;
 
 #endif //EVENT_HPP

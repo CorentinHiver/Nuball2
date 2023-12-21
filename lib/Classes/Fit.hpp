@@ -1,6 +1,9 @@
 #ifndef FIT_HPP
 #define FIT_HPP
 
+#include "../libCo.hpp"
+#include "Hit.hpp"
+
 /**
  * @brief Allows one to manipulate the results of peak fitting
 */
@@ -48,19 +51,19 @@ public:
     m_peaks_found = false;
   }
 
-  Label const & label() const {return m_label;}
+  auto const & label() const {return m_label;}
 
   /// @brief Returns the number of peaks used for calibration
-  size_t size() const {return peaks.size();};
+  auto size() const {return peaks.size();};
 
   /// @brief Returns true if fit succeeded
-  bool const & exists() const {return this->m_exist;}
+  auto const & exists() const {return this->m_exist;}
 
   /// @brief Returns true if fit had enough counts
-  bool enough_counts() const {return this -> m_enough_counts;}
+  auto enough_counts() const {return this -> m_enough_counts;}
 
   /// @brief Returns true if the fit found the peaks
-  bool found_peaks() const {return this -> m_peaks_found;}
+  auto found_peaks() const {return this -> m_peaks_found;}
 
   /// @brief Set the label
   void setLabel(Label const & label) {m_label = label;}
@@ -129,20 +132,46 @@ class Fits
 {
 public:
   Fits() = default;
-  Fits(int const & i = 0) {this -> resize(i);}
+  Fits(int const & _size) {this -> resize(_size);}
   
   void resize(size_t const & i = 0) {m_fits.resize(i);}
   void reserve(size_t const & i = 0) {m_fits.reserve(i);}
+  auto size() {return m_fits.size();}
+  auto size() const {return m_fits.size();}
 
+  /// @brief Accesses the vector of fits
   auto const & get() const {return m_fits;}
+  /// @brief Accesses the vector of fits
   auto & get() {return m_fits;}
 
-  operator[](size_t const & i) {return m_fits[i];}
-  operator()()
+  /// @brief Directly access the fit :
+  auto const & operator[](size_t const & i) const {return m_fits[i];}
+  /// @brief Directly access the fit :
+  auto & operator[](size_t const & i) {return m_fits[i];}
+
+
+  // Range-based iterators :
+
+  /// @brief Returns the iterator to the start of the vector
+  auto begin() const {return m_fits.begin();}
+  /// @brief Returns the iterator to the start of the vector
+  auto begin() {return m_fits.begin();}
+  /// @brief Returns the iterator to the end of the vector
+  auto end  () const {return m_fits.end(  );}
+  /// @brief Returns the iterator to the end of the vector
+  auto end  () {return m_fits.end(  );}
 
 private:
-  std::vector m_fits<Fit>;
-}
+  std::vector<Fit> m_fits;
+};
+
+// std::ostream & operator<<(std::ostream& out, Fits const & fits)
+// {
+//   for (auto const & fit : fits)
+//   {
+//     if (fit.out << fit;
+//   }
+// }
 
 
 #endif //FIT_HPP
