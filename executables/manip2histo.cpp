@@ -1,5 +1,6 @@
 #include <Faster2Histo.hpp>
 #include <Manip.hpp>
+#define QDC1MAX
 
 /**
  * @brief Uses the manip2histo executable to make energy spectra a bunch of runs in the same folder, given a list of runs.
