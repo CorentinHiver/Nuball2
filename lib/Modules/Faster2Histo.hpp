@@ -156,7 +156,7 @@ void Faster2Histo::treatFile(Hit & _hit, FasterReader & reader)
   {// Loop through the hits of the .fast file
     auto const & slope = m_calibration.slope(_hit.label);
     auto const & intercept = m_calibration.intercept(_hit.label);
-    _hit.nrj = hit.adc*slope + intercept;
+    _hit.nrj = _hit.adc*slope + intercept;
     fillHisto(_hit);
   }
   else while(reader.Read()) fillHisto(_hit); // With no calibration
