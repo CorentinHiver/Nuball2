@@ -85,6 +85,7 @@ public:
 
   auto const & get()            const {return m_list          ;}
   auto const & list()           const {return m_list          ;}
+  auto const & names()          const {return m_list          ;}
   auto const & getExistsArray() const {return m_exists        ;}
   auto const & getLabelsArray() const {return m_labels_array  ;}
   auto const & labels()         const {return m_labels_array  ;}
@@ -116,7 +117,7 @@ public:
   /// @brief Returns the number of detector of each type
   auto const & nbOfType(dType const & type) 
   {
-    if (!found(m_types, type)) throw_error("Detectors" + type + "not handled");
+    if (!found(m_types, type)) throw_error("Detectors " + type + " not handled");
     return m_type_counter[type];
   }
 
@@ -170,6 +171,13 @@ public:
   auto const & file()       {return m_filename;}
   auto const & file() const {return m_filename;}
 
+  
+  class Error
+  { public:
+    Error() noexcept {error("Detector ID file not loaded");}
+    Error(std::string const & message) noexcept {error(message);}
+  };
+
 protected:
 
   // Useful informations :
@@ -195,6 +203,7 @@ protected:
   static std::unordered_map<dType, THBinning> energy_bins;
   static std::unordered_map<dType, THBinning> ADC_bins;
   static std::unordered_map<dType, THBinning> energy_bidim_bins;
+
 } detectors;
 
 void Detectors::resize(ushort const & new_size)
@@ -205,10 +214,10 @@ void Detectors::resize(ushort const & new_size)
   m_types.resize(new_size, "null");
 }
 
-std::ostream& operator>>(std::ostream& cout, Detectors const & detectors)
+std::ostream& operator<<(std::ostream& out, Detectors const & detectors)
 {
-  for (auto const & d : detectors) {cout << d << " ";}
-  return cout;
+  for (auto const & d : detectors) {out << d << " ";}
+  return out;
 }
 
 void Detectors::load(std::string const & filename)
@@ -313,7 +322,7 @@ void Detectors::makeArrays()
       // Add here any additionnal detector :
       
       // Additionnal position information :
-      if (str[0] == 'R' && str[2] == 'A')
+      if (str.size()>2 && str[0] == 'R' && str[2] == 'A')
       {
         clover_pos[label] = str;
       }
@@ -404,11 +413,30 @@ std::unordered_map<dType, THBinning> Detectors::energy_bidim_bins =
   {"default", {200 , 0., 20000.}}
 };
 
-// #else 
-// std::unordered_map<dType, THBinning> Detectors::ADC_bins;
-// std::unordered_map<dType, THBinning> Detectors::energy_bins;
-// std::unordered_map<dType, THBinning> Detectors::energy_bidim_bins;
-// #endif
+std::map<Label, TH1F*> loadFormattedTH1F(TFile * file)
+{
+  if (!file || file->IsZombie()) throw_error(concatenate(file->GetName(), " can't be open !!"));
+  if(!detectors) throw_error(concatenate("As the histograms are labeled with names, one has to provide the correct index.list file !! ",
+                                        "Use parameter -i [filename] or detectors.load(filename)."));
+  std::map<Label, TH1F*> ret;
+  auto list_histo = get_TH1F_map(file);
+  // ret.reserve(list_histo.size()); // Might be unnecessary/dangerous optimisation
+
+  for (auto const & pair : list_histo)
+  {
+    std::string name = pair.first;
+    auto const & histo = pair.second;
+    Strings possible_additionnal_text = {"_adc", "_energy", "_calib", "_raw"};
+    for (auto const & text : possible_additionnal_text) remove(name, text);
+    if (found(detectors.names(), name))
+    {// Either the histogram label is already the label in int, or is the name of the detector
+      try                                 {ret.emplace(string_to<Label>(name), histo);}
+      catch(CastImpossible const & error) {ret.emplace(       detectors[name], histo);}
+    }
+  }
+  return ret;
+}
+
 
 #endif //DETECTORS_HPP
 

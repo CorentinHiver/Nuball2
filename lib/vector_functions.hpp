@@ -3,6 +3,12 @@
 
 #include "print.hpp"
 #include <vector>
+#include <algorithm>
+
+
+template<class T>
+using vector2D =  std::vector<std::vector<T>>;
+
 
 template<class T>
 T sum(std::vector<T> const & source)
@@ -56,41 +62,73 @@ bool push_back_unique(std::vector<T> & vector, T const & t)
   }
 }
 
+
 template<class T>
-void fill2D(std::vector<std::vector<T>> & vec2, size_t const & size_x, size_t const & size_y, T const & obj)
+void fill2D(vector2D<T> & vec2, size_t const & size_x, size_t const & size_y, T const & obj)
 {
   vec2.reserve(size_x);
   for (size_t i = 0; i<size_x; i++) vec2.emplace_back(std::vector<T>(size_y, obj));
 }
 
+
+
 template <typename T>
-bool found(std::vector<T> const & vector, T const & t)
+bool found(std::vector<T> const & vec, T const & t)
 {
-  return (std::find(std::begin(vector), std::end(vector), t) != std::end(vector));
+  return (std::find(vec.begin(), vec.end(), t) != vec.end());
 }
 
 template <typename T>
-bool found(std::vector<T> & vector, T const & t)
+bool found(std::vector<T> & vec, T const & t)
 {
-  return (std::find(std::begin(vector), std::end(vector), t) != std::end(vector));
+  return (std::find(vec.begin(), vec.end(), t) != vec.end());
 }
 
 template <typename T>
-bool found(std::vector<T> const & vector, T & t)
+bool found(std::vector<T> const & vec, T & t)
 {
-  return (std::find(std::begin(vector), std::end(vector), t) != std::end(vector));
+  return (std::find(vec.begin(), vec.end(), t) != vec.end());
 }
 
 template <typename T>
-bool found(std::vector<T> & vector, T & t)
+bool found(std::vector<T> & vec, T & t)
 {
-  return (std::find(std::begin(vector), std::end(vector), t) != std::end(vector));
+  return (std::find(vec.begin(), vec.end(), t) != vec.end());
 }
+
+
+
+template <typename T>
+int first_index_in(std::vector<T> & vec, T & t)
+{
+  return (std::distance(vec.begin(), std::find(vec.begin(), vec.end(), t) != vec.end()));
+}
+
+template <typename T>
+int first_index_in(std::vector<T> & vec, T const & t)
+{
+  return (std::distance(vec.begin(), std::find(vec.begin(), vec.end(), t) != vec.end()));
+}
+
+template <typename T>
+int first_index_in(std::vector<T> const & vec, T & t)
+{
+  return (std::distance(vec.begin(), std::find(vec.begin(), vec.end(), t) != vec.end()));
+}
+
+template <typename T>
+int first_index_in(std::vector<T> const & vec, T const & t)
+{
+  return (std::distance(vec.begin(), std::find(vec.begin(), vec.end(), t) != vec.end()));
+}
+
+
 
 template <typename T>
 T maximum(std::vector<T> const & vector)
 {
-  T value = vector[0];
+  if (vector.size() < 1 ) throw std::runtime_error("vector size is 0 !!");
+  auto value = vector[0];
   for (auto const & e : vector) if (e>value) value = e;
   return value;
 }
@@ -98,13 +136,13 @@ T maximum(std::vector<T> const & vector)
 template <typename T>
 T minimum(std::vector<T> const & vector)
 {
-  T value = vector[0];
+  auto value = vector[0];
   for (auto const & e : vector) if (e<value) value = e;
   return value;
 }
 
 template <typename T>
-T maximumIndex(std::vector<T> const & vector)
+T maximum_index(std::vector<T> const & vector)
 {
   int index = 0;
   T value = vector[index];
@@ -117,7 +155,7 @@ T maximumIndex(std::vector<T> const & vector)
 }
 
 template <typename T>
-T minimumIndex(std::vector<T> const & vector)
+T minimum_index(std::vector<T> const & vector)
 {
   int index = 0;
   T value = vector[index];
@@ -129,36 +167,79 @@ T minimumIndex(std::vector<T> const & vector)
   return value;
 }
 
+/// @brief Order the vector from lower to higer value
 template <typename T>
-std::vector<int> bubbleSort(std::vector<T> const & vector, std::vector<int> & indexes)
+std::vector<int> & bubble_sort(std::vector<T> const & vector, std::vector<int> & ordered_indexes)
 {
-  if (vector.size() != indexes.size()) indexes.resize(vector.size());
-  double v = 0;
-  indexes[0] = 0;
+  // Verifications :
+  if (vector.size() == 0) {printC(RED, "In bubble_sort(vector, ordered_indexes) : vector size is zero !", RESET); return ordered_indexes;}
+  if (vector.size() != ordered_indexes.size()) ordered_indexes.resize(vector.size());
+
+  // Initialisations :
+  T v = vector[0];
+  ordered_indexes[0] = 0;
   size_t j = 0;
-  size_t i = 0;
-  for (;j<vector.size(); j++)
+
+  // Loop through the vector :
+  for (size_t i = 0;i<vector.size(); i++)
   {
-    indexes[j] = j;
-    v = vector[j];
-    i = j;
-    while((i>0) && vector[indexes[i-1]] > v)
+    // Initial guess : the ith ordered_indexes's index corresponds to the vector's ith index 
+    // (e.g. the 5th bin has initial value 5 (ordered_indexes[5] = 5))
+    ordered_indexes[i] = i;
+
+    // Check this assumption : v holds the value of ith value of vector
+    v = vector[i];
+
+    // Find the true jth index of the ith vector's index
+    j = i;
+
+    // Loop goes on until the (j-1)th vector's value is lower than the ith value
+    while((j>0) && vector[ordered_indexes[j-1]] > v)
     {
-      indexes[i] = indexes[i-1];
-      i--;
+      // If the (j-1)th value is higher than the ith value then switch the indexes.
+      ordered_indexes[j] = ordered_indexes[j-1];
+      --j;
     }
-    indexes[i] = j;
+
+    // Save the correct position of the index
+    ordered_indexes[j] = i;
   }
-  return indexes;
+
+  // Note that this method is iterative : if the 1st value is higher than the 2nd,
+  // ordered_index[0] = 1 and ordered_index[1] = 0. If now the 3rd value is higher than 
+  // the 2nd but lower than the 1st (for i = 2), vector[ordered_index[1]] > v
+  // but vector[ordered_index[0]] < v : the result is indeed {1, 2, 0}
+
+  return ordered_indexes;
+}
+
+/// @brief Order the vector from lower to higer value
+template <typename T>
+std::vector<int> bubble_sort(std::vector<T> const & vector)
+{
+  std::vector<int> ordered_indexes(vector.size());
+  bubble_sort(vector, ordered_indexes);
+  return ordered_indexes;
 }
 
 template <typename T>
-std::vector<int> bubbleSort(std::vector<T> const & vector)
+void invert(std::vector<T> & vector)
 {
-  std::vector<int> ordered_indexes(vector.size());
-  bubbleSort(vector, ordered_indexes);
-  return ordered_indexes;
+  std::reverse(vector.begin(), vector.end());
 }
+
+template<class K, class V>
+void unpack(std::vector<std::pair<K,V>> const & pairs, std::vector<K> & keys, std::vector<V> & values)
+{
+  keys.reserve(pairs.size());
+  values.reserve(pairs.size());
+  for (auto const & pair : pairs)
+  {
+    keys.push_back(pair.first);
+    values.push_back(pair.second);
+  }
+}
+
 
 ////////////////////////////
 //   CLASS STATIC VECTOR  //
@@ -378,4 +459,50 @@ std::ostream& operator<<(std::ostream& cout, StaticVector<T> const & vector)
   return cout;
 }
 
+/*
+template<T>
+class SmartVector
+{
+public:
+  SmartVector() = default;
+  SmartVector(std::vector<T> const & vector) : m_vector(vector) {}
+  SmartVector(std::vector<T>       & vector) : m_vector(vector) {}
+  SmartVector(std::vector<T>         vector) : m_vector(vector) {}
+  SmartVector(std::initializer_list<T> const & init_list) : m_vector(init_list) {}
+  SmartVector(std::initializer_list<T>       & init_list) : m_vector(init_list) {}
+  SmartVector(std::initializer_list<T>         init_list) : m_vector(init_list) {}
+
+  auto operator=(std::vector<T> const & vector) {m_vector = vector;}
+  auto operator=(std::vector<T>       & vector) {m_vector = vector;}
+  auto operator=(std::vector<T>         vector) {m_vector = vector;}
+  auto operator=(std::initializer_list<T> const & init_list) {m_vector = vector;}
+  auto operator=(std::initializer_list<T>       & init_list) {m_vector = vector;}
+  auto operator=(std::initializer_list<T>         init_list) {m_vector = vector;}
+
+  void bubble_sort() {bubble_sort(m_vector, m_index);}
+  /// @brief @attention you need to check bounds
+  auto const & getNextOrder() const {return m_vector[m_index[m_iterator++]];}
+  /// @brief @attention you need to check bounds
+  auto       & getNextOrder()       {return m_vector[m_index[m_iterator++]];}
+  bool readNextOrder(T & value) 
+  {
+    if (m_iterator>m_vector.size()) 
+    {
+      value = m_vector[m_index[m_iterator++]]; 
+      return true
+    } 
+    else return false;
+  }
+  void   setIterator(int const & i = 0) {m_iterator = i;}
+  void resetIterator()                  {m_iterator = 0;}
+  
+
+private:
+  std::vector<T> m_vector;
+
+  // For bubble sort :
+  std::vector<int> m_index;
+  int m_iterator = 0;
+};
+*/
 #endif //VECTOR_FUNCTIONS_HPP

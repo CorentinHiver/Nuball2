@@ -184,13 +184,14 @@ inline void Faster2Histo::fillHisto(Hit const & hit)
 
 void Faster2Histo::write(std::string const & out_filename) noexcept
 {
-  print("coucou", m_outFile);
   if (out_filename != "") m_outFile = out_filename;
+  File file(m_outFile);
+  if (!file.path())file.makePath();
 
   auto outFile = TFile::Open(m_outFile.c_str(), write_mode);
   outFile->cd();
   // Ordering of the unordered_map keys :
-  auto ordered_labels_indexes = bubbleSort(m_labels);
+  auto ordered_labels_indexes = bubble_sort(m_labels);
   // Write down with ordered labels :
   for (auto & label_index : ordered_labels_indexes) 
   {

@@ -28,7 +28,7 @@
 
 // 3. Declare some global variables :
 std::string IDFile = "index_129.list";
-std::string calibFile = "136_final.calib";
+std::string calibFile = "2024_136.calib";
 Folder manip = "N-SI-136";
 std::string list_runs = "list_runs.list";
 std::string output = "-root_";
@@ -109,16 +109,6 @@ struct Histos
     rf_all_raw.reset("rf_all_raw", "RF Time spectra raw", 2000, -1200, 800);
     energy_each_raw.reset("energy_each_raw", "Energy spectra each raw", nbDet,0,nbDet, 5000,0,15000);
     rf_each_raw.reset("rf_each_raw", "RF timing each raw", nbDet,0,nbDet, 2000, -1200, 800);
-
-    // auto const & nb_paris = detectors.nbOfType("paris");
-    // paris_bidim.resize(nb_paris);
-    // paris_bidim_M_inf_4.resize(nb_paris);
-    // for (size_t paris_i = 0; paris_i<nb_paris; paris_i++)
-    // {
-    //   auto const & name = detectors.name("paris", paris_i);
-    //   paris_bidim[paris_i].reset(name.c_str(), name.c_str(), 100,-2,2, 15000,0,15000);
-    //   paris_bidim_M_inf_4[paris_i].reset((name+"_M<4").c_str(), (name+"_M<4").c_str(), 100,-1,2, 15000,0,15000);
-    // }
 
     energy_all_Ge.reset("Ge_spectra", "Ge spectra", 20000,0,10000);
     rf_all.reset("RF_Time_spectra", "RF Time spectra", 2000, -1200, 800);
@@ -216,7 +206,7 @@ public:
       std::vector<Hit> temp;
       temp.reserve(m_size+n);
       for (int i = 0; i<n; i++) temp[i] = Hit(); // Fill the nth first hits with empty hits
-      for (int i = 0; i<m_size; i++)
+      for (size_t i = 0; i<m_size; i++)
       {// Shifts the other hits
         temp[i+n] = m_buffer[i];
       }
@@ -254,12 +244,13 @@ void convert(Hit & hit, FasterReader & reader,
   // Extracting the run name :
   File raw_datafile = reader.getFilename();   // "/path/to/manip/run_number.fast/run_number_filenumber.fast"
   Filename filename = raw_datafile.filename();// "                               run_number_filenumber.fast"
-  int filenumber = std::stoi(lastPart(filename.shortName(), '_'));
-  std::string run_path = raw_datafile.path(); // "/path/to/manip/run_number.fast/"
-  std::string temp = run_path;                // "/path/to/manip/run_number.fast/"
-  temp.pop_back();                            // "/path/to/manip/run_number.fast"
-  std::string run = rmPathAndExt(temp);       //                "run_number"
-  // int run_number = std::stoi(lastPart(run,'_'));//                   number
+  int filenumber = std::stoi(lastPart(filename.shortName(), '_'));//                        filenumber
+  std::string run = removeLastPart(filename.shortName(), '_'); 
+  // auto const & run_path = raw_datafile.path();// "/path/to/manip/run_number.fast/"
+  // auto temp = run_path.string();              // "/path/to/manip/run_number.fast/"
+  // temp.pop_back();                            // "/path/to/manip/run_number.fast"
+  // std::string run = rmPathAndExt(temp);       //                "run_number"
+  // // int run_number = std::stoi(lastPart(run,'_'));//                   number
 
   // Setting the name of the output file :
   Path outFolder (outPath+run, true);                     // /path/to/manip-root/run_number.fast/
@@ -289,8 +280,6 @@ void convert(Hit & hit, FasterReader & reader,
     hit.nrj = calibration(hit.adc,  hit.label); // Normal calibration
     hit.nrj2 = ((hit.qdc2 == 0) ? 0.f : calibration(hit.qdc2, hit.label)); // Calibrate the qdc2 if any
   
-    if (isGe[hit.label] && hit.nrj>10000) continue;
-
     tempTree -> Fill();
     rawCounts++;
   }
@@ -818,7 +807,7 @@ int main(int argc, char** argv)
     print("Treating ", run_name);
 
     // Timeshifts loading : 
-    Timeshifts timeshifts(outPath, run_name);
+    Timeshifts timeshifts(outPath.string(), run_name);
     if (treat_129) 
     {
       timeshifts.dT_with_raising_edge("dssd");
@@ -829,7 +818,7 @@ int main(int argc, char** argv)
     if (!timeshifts || (only_timeshifts && overwrite)) 
     { 
       timeshifts.setMult(2,4);
-      timeshifts.setOutDir(outPath);
+      timeshifts.setOutDir(outPath.string());
       timeshifts.checkForPreprompt(check_preprompt);
 
       timeshifts.calculate(run_path, nb_files_ts);

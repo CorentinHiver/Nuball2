@@ -3,6 +3,8 @@
 
 #include "../libRoot.hpp"
 
+#include "../Analyse/SpectraCo.hpp"
+
 #include "../Classes/Hit.hpp"
 #include "../Classes/Fit.hpp"
 #include "../Classes/Calibration.hpp"
@@ -23,6 +25,7 @@ class Calibrator
 public:
 
   Calibrator() = default;
+  ~Calibrator() {if (readFile) delete readFile;}
 
   /// @brief Loading calibration from file name
   bool loadCalibration(Calibration const & calib) {return (m_calib = calib);}
@@ -34,15 +37,28 @@ public:
   /// @attention TODO
   void calculate(std::string const & histograms, std::string const & source = "152Eu");
 
-  void Initialize() {m_histos.Initialize(); m_fits.resize(1000);}
+  void calculate2(std::string const & histogramsFilename, std::vector<double> peaks, std::string const & fit_info_file = "fit_info.data");
 
+  // void calculateInteractive(std::string const & histogramsFilename, std::string const & fit_info_file = "fit_info.data", std::vector<double> peaks);
+
+  void Initialize() 
+  {
+    if (m_initialized) return;
+    m_histos.Initialize(); 
+    m_fits.resize(1000); 
+    if (!detectors) throw Detectors::Error(); 
+    m_initialized = true;
+  }
+  
   void loadRootData(std::string const & dataDir, int const & nb_files = -1);
   static void loadRootDataThread(Calibrator & calib, MTList & list);
   void fillRootDataHisto(std::string const & filename);
 
   void loadFasterData(std::string const & dataDir, int const & nb_files = -1);
   static void fillHisto(Hit & hit, FasterReader & reader, Calibrator & calib);
+  void loadFitInfo(std::string const & fit_info_file);
   void analyse(std::string const & source = "152Eu");
+  void analyse2(std::vector<double> peaks);
   void peakFinder(std::string const & source);
   void fitCalibration(Fits & fits);
   void writePosPeaks(std::string const & outfilename);
@@ -64,7 +80,6 @@ public:
   void calibrateRootData(std::string const & folder, int const & nb_files = -1);
   bool const & calibrate_data() const {return m_calibrate_data;}
   bool const & calibrate_data() {return m_calibrate_data;}
-  void writeCalibratedData(std::string const & outfilename);
 
 
   /// @brief @todo
@@ -84,9 +99,10 @@ private:
   Calibration m_calib;
 
   //Attributs for the calculations :
-  bool      m_verbose   = false;
-  bool      m_residus   = false;
-  bool      m_outRoot_b = false;
+  bool      m_verbose     = false;
+  bool      m_initialized = false;
+  bool      m_residus     = false;
+  bool      m_outRoot_b   = false;
   std::string m_source    = "";
   std::string m_outRoot   = "calibration.root";
   std::string m_outCalib  = "";
@@ -100,6 +116,18 @@ private:
 
   Path dataPath;
 
+  TFile* readFile = nullptr;
+
+  // FOR ANALYSE2 :
+  
+  // std::map<Label, int> m_rebin;
+  std::map<int, int> m_rebin;
+  // std::map<Label, double> m_threshold;
+  std::map<int, double> m_threshold;
+  // std::map<Label, int> m_nb_bins_below;
+  std::map<int, int> m_nb_bins_below;
+
+
 public:
   struct histograms
   {
@@ -112,7 +140,7 @@ public:
     Vector_MTTHist<TH2F> all_calib;
 
     // Other spectra :
-    std::map<int, TH1F*> spectra;
+    std::map<Label, TH1F*> spectra;
 
     void Initialize();
     void setTypeBins(std::string const & parameters);
@@ -201,58 +229,92 @@ void Calibrator::calculate(std::string const & dataDir, int nb_files, std::strin
   this -> writeRawRoot(source+".root");
 }
 
-/// @brief TBD
-/// @todo loadRootHisto(file)
+/**
+ * @brief Calculate the calibration coefficients from already calculated histograms
+ * @attention The name of the histograms must correspond either to the name of the
+ * detector or the label declared in the ID file
+ */
 void Calibrator::calculate(std::string const & histograms, std::string const & source)
 {
-  print ("Calculating calibrations from histogram data in", histograms);
+  print ("Calculating calibration coefficients from histogram data in", histograms);
   this -> Initialize();
-  // this -> loadRootHisto(file); TBD
+  this -> loadRootHisto(histograms);
   this -> analyse(source);
   this -> writeData(source+".calib");
   this -> writeRawRoot(source+".root");
 }
 
+void Calibrator::loadFitInfo(std::string const & fit_info_file)
+{
+  std::ifstream file(fit_info_file, std::ios::in);
+  if (!file.good()) throw_error(concatenate("CANT OPEN ", fit_info_file));
+  std::string line;
+  getline(file, line);
+  auto m_header = getList(line, ' ');
+
+  std::string name;
+  int rebin = 0;
+  double threshold = 0;
+  int nb_bins_below = 0;
+
+  while(getline(file, line))
+  {
+    std::istringstream iss(line);
+    iss >> name;
+    auto label = detectors[name];
+    iss >> rebin >> threshold >> nb_bins_below;
+    m_rebin[label] = rebin;
+    m_threshold[label] = threshold;
+    m_nb_bins_below[label] = nb_bins_below;
+  }
+}
+
+void Calibrator::calculate2(std::string const & histogramsFilename, std::vector<double> peaks, std::string const & fit_info_file)
+{
+  print ("Calculating calibration coefficients from histogram data in", histogramsFilename, "version 2");
+  this -> Initialize();
+  this -> loadFitInfo(fit_info_file);
+  this -> loadRootHisto(histogramsFilename);
+  this -> analyse2(peaks);
+  this -> writeData("calibration.calib");
+  this -> writeRawRoot("histograms.root");
+}
+
+/**
+ * @brief Loads non-calibrated spectra
+ * 
+ * @param histograms 
+ */
 void Calibrator::loadRootHisto(std::string const & histograms)
 {
-  unique_TFile file(TFile::Open(histograms.c_str()));
-  if (!file.get()->IsOpen()) throw_error("Can't open"+histograms);
+  this -> Initialize();
   
-  TIter nextKey(file->GetListOfKeys());
-  TKey* key = nullptr;
-
-  while ((key = dynamic_cast<TKey*>(nextKey()))) 
+  readFile = TFile::Open(histograms.c_str());
+  readFile->cd();
+  if (!readFile || !readFile->IsOpen()) throw_error("Can't open"+histograms);
+  auto histos (loadFormattedTH1F(readFile));
+  for (auto const & it : histos) 
   {
-    TObject* obj = key->ReadObj();
-    if (obj->IsA()->InheritsFrom(TH1::Class())) 
-    {
-      if (obj->IsA()->InheritsFrom(TH1F::Class())) 
-      {
-        auto hist = dynamic_cast<TH1F*>(obj);
-        std::string name = hist -> GetName();
-        for (auto const & _name : detectors)
-        {
-          if (_name!="" && name.find(_name) != std::string::npos)
-          {
-            auto const & label = detectors.getLabel(_name);
-            if (name.find("_raw")) m_histos.raw_spectra[label] = hist;
-            else if (name.find("_calib")) m_histos.calib_spectra[label] = dynamic_cast<TH1F*> (hist->Clone(_name.c_str()));
-            else m_histos.spectra[label] = dynamic_cast<TH1F*> (hist->Clone(_name.c_str()));
-            m_histos.raw_spectra[label].Print();
-            break;
-          }
-        }
-      }
-    }
+    auto const & label = it.first;
+    auto const & histo = it.second;
+    m_histos.raw_spectra[label] = histo;
+    // m_histos.spectra[label] = histo;
   }
+  // for (auto const & spectra : m_histos.spectra) print(spectra);
 }
 
 void Calibrator::loadFasterData(std::string const & dataDir, int const & nb_files)
 {
   print("Loading the data from", Path(dataDir).folder());
+
+  // First initialises the histograms :
   this -> Initialize();
+
+  // Then create the data reader :
   MTFasterReader *mt_reader = new MTFasterReader();
+  //Setup the files to read :
   mt_reader->addFolder(dataDir, nb_files);
+  // Gives the reader the function to use on each hit :
   mt_reader->readRaw(fillHisto, *this);
   delete mt_reader;
   print("Data loaded");
@@ -320,23 +382,29 @@ void Calibrator::fillRootDataHisto(std::string const & filename)
   }
 }
 
+/**
+ * @brief Fills histograms
+ * @details
+ * There are two modes : 
+ *    You can either fill the histograms with raw values
+ *    Or you can use the loaded or calculated calibration factors to fille calibrated histograms
+ * 
+ * @param hit 
+ * @param reader 
+ * @param calib 
+ */
 void Calibrator::fillHisto(Hit & hit, FasterReader & reader, Calibrator & calib)
 {
+  // If the option to calibrate histograms is on :
   if (calib.calibrate_data()) while(reader.Read()) 
   {
-    auto const & type = detectors.type(hit.label);
-    if (type ==  "null" || type ==  "RF") continue;
     if (calib.calibration().getOrder()[hit.label]<1) continue;
     auto const & nrj_cal = calib.calibration()(hit.adc, hit.label);
     calib.m_histos.calib_spectra[hit.label].Fill(nrj_cal);
     calib.m_histos.all_calib[detectors.typeIndex(hit.label)].Fill(compressedLabel[hit.label], nrj_cal);
   }
-  else while(reader.Read())
-  {
-    auto const & type = detectors.type(hit.label);
-    if (type ==  "null" || type ==  "RF") continue;
-    calib.m_histos.raw_spectra[hit.label].Fill(hit.adc);
-  }
+  // Fills raw values :
+  else while(reader.Read()) {calib.m_histos.raw_spectra[hit.label].Fill(hit.adc);}
 }
 
 bool isTripleAlpha(std::string const & source_name)
@@ -359,7 +427,7 @@ void Calibrator::peakFinder(std::string const & source)
 
     if (histo.Integral()==0)
     {
-      if (m_verbose) print(name, "has no data in this run");
+      information(name, "has no data in this run");
       continue;
     }
 
@@ -367,7 +435,7 @@ void Calibrator::peakFinder(std::string const & source)
     
     auto & fit = m_fits[label];
     fit.setLabel(label);
-    fit.name = name;
+    print(name);
 
     if (m_verbose) {print(); print(name);}
 
@@ -397,6 +465,7 @@ void Calibrator::peakFinder(std::string const & source)
         peaks = {121.7830, 344.2760, 778.9030, 964.1310, 1408.0110};
         E_right_pic = peaks.back();
         integral_ratio_threshold = 0.011f;
+        if (label == 69 || label == 70) integral_ratio_threshold = 0.009f;
         ADC_threshold = 100;
       }
       else if (source == "232Th")
@@ -706,6 +775,98 @@ void Calibrator::fitCalibration(Fits & fits)
 }
 
 /**
+ * @brief Uses the second version of the peak finder to extract calibration coefficients
+ * 
+ * @details
+ * Uses the second derivative spectra in order to find the peaks.
+ * To do so, uses an input file to set the three main parameter for each detector : 
+ *  The number of bins to use
+ *  The threshold for peak detection
+ *  The number of bins below threshold (by default 2)
+ * 
+ * The spectra's name must be the detector's name (ex R3A1_red)
+ * 
+ * @param source 
+ */
+void Calibrator::analyse2(std::vector<double> peaks)
+{
+  for (auto const & it : detectors.labels())
+  {
+    auto const & name = it.first;
+    auto const & label = it.second;
+
+    debug("coucou1");
+
+    if (!find_key(m_histos.spectra, label)) {printC(GREY, name, " spectra not found ", RESET); continue;}
+    debug("coucou2");
+
+    auto const & rebin = m_rebin[label];
+    auto const & threshold = m_threshold[label];
+    auto const & nb_bins_below = m_nb_bins_below[label];
+
+    print("Treating", name);
+
+    auto spectra = m_histos.spectra[label];
+
+    CoAnalyse::removeBackground(spectra, rebin); // Allows for a cleaner peak finding
+    SpectraCo spectraCo(spectra); // Loads the spectra (copy)
+    spectraCo.derivate2(rebin); // Calculate the second derivative spectra
+    debug("coucou3");
+
+    // Finds the peaks and store them in points (vector of pair<int, double>) :
+    auto points = spectraCo.findPeaks(threshold, nb_bins_below); 
+
+    if (points.size()<1) {print("NO PEAK FOR", name); continue;}// Check that points have been found
+
+    // Each point contains the bin number of the peak and the height of the peak (value)
+    std::vector<int> peaks_bins; std::vector<double> peaks_value; 
+    unpack(points, peaks_bins, peaks_value);
+
+    // Order the peaks from highest to smallest
+    std::vector<int> m_ordered_indexes; 
+    bubble_sort(peaks_value, m_ordered_indexes); // Ordered from lower to higher value
+    invert(m_ordered_indexes);
+
+    debug("coucou5");
+    // Extracts the five highest peaks :
+    std::vector<int> five_max_peaks;
+    for (size_t index_i = 0; (index_i<peaks.size() && index_i<peaks_bins.size()); index_i++)
+    {
+      auto const & peak_i = m_ordered_indexes[index_i];
+      auto const & bin = peaks_bins[peak_i];
+      print(
+        spectraCo.getX(bin),
+        spectraCo[bin]
+      );
+      five_max_peaks.push_back(bin);
+    }
+    
+    debug("coucou6");
+    // Finds the higher energy peak (hep)
+    auto const & hep_bin = maximum(five_max_peaks); // highest energy peak bin
+    auto const & hep_ADC = spectraCo.getX(hep_bin); // highest energy peak ADC
+    auto const & hep_keV = maximum(peaks);          // highest energy peak energy
+
+    // First rough linear calibration :
+    auto const & ADC_to_keV = hep_ADC/hep_keV; // Rough conversion from ADC to energy in keV
+    auto const & keV_to_ADC = 1/ADC_to_keV; // Rough conversion from energy in keV to ADC
+
+    // Some helpers : 
+    auto const & nb_peaks = peaks.size();
+
+    std::vector<double> ADC; ADC.reserve(nb_peaks);
+    debug("coucou7");
+    // print(five_max_peaks);
+
+    // for (auto const & peak : peaks)
+    // {
+    //   auto const & dumb_adc = peak/ADC_to_keV;
+    //   print(five_max_peaks);
+    // }
+  }
+}
+
+/**
  * @brief Analyse the spectra to extract calibration coefficients
  * @details
  * The peak finding follows the following principle : 
@@ -786,39 +947,62 @@ void Calibrator::writeRawRoot(std::string const & outfilename)
   print("Raw root spectra written to", outfilename);
 }
 
+/**
+ * @brief if some spectra and calibration coefficients have been loaded,
+ * or after the calibration coefficients have been calculated, this
+ * allows one to check the calibration
+ * 
+ * @param outfilename 
+ */
 void Calibrator::verify(std::string const & outfilename)
 {
   std::vector<size_t> nb_det_filled(detectors.nbTypes(), 0);
+  std::map<Label, SpectraCo> spectra;
   print("Verification of the calibration");
   for (Label label = 0; label<m_histos.raw_spectra.size(); label++) 
   {
     if (!detectors.exists(label)) continue;
     auto const & name = detectors[label];
     auto & raw_histo = m_histos.raw_spectra[label];
-    if (raw_histo.Integral()<1) {if (m_verbose) print(name, "has no hit"); continue;}
+    if (raw_histo.Integral()<1) {if (m_verbose) information(name, "has no hit"); continue;}
     raw_histo.Merge();
     auto & calib_histo = m_histos.calib_spectra[label];
     calib_histo.Merge();
-    auto const & fit = m_fits[label];
+    auto & fit = m_fits[label];
 
     // Extract useful information : 
     auto const & type = detectors.type(label);
     auto const & type_index = detectors.typeIndex(type);
-    if (!fit.exists()) {nb_det_filled[type_index]++; if (m_verbose) print(name, "has no fit"); continue;}
+    if (!fit.exists()) 
+    {
+      if (m_verbose) information(name, "has no fit"); 
+      if (m_calib && m_calib.size()>=label) 
+      {
+        information("reading Calibration module");
+        print(label, (int)m_calib.order(label), m_calib.intercept(label), m_calib.slope(label));
+        fit.order = m_calib.order(label);
+        fit.parameter0 = m_calib.intercept(label);
+        fit.parameter1 = m_calib.slope(label);
+        fit.parameter2 = m_calib.binom(label);
+      }
+      else continue;
+    }
 
-    auto const xaxis_raw = raw_histo -> GetXaxis();
+    auto const & xaxis_raw = raw_histo -> GetXaxis();
     auto const & nb_bins = xaxis_raw -> GetNbins();
-    auto const bin_width = xaxis_raw -> GetXmax() / nb_bins;
+    auto const & bin_width = xaxis_raw -> GetXmax() / nb_bins;
+
+    if (raw_histo->GetEntries()<1.e+6) // Only for histograms
     for(int bin = 0; bin<nb_bins; bin++)
     {
       auto const & counts_in_bin = raw_histo -> GetBinContent(bin);
-      ADC const raw_ADC = xaxis_raw -> GetBinCenter(bin);
+      ADC const & raw_ADC = xaxis_raw -> GetBinCenter(bin);
       for (int hit = 0; hit<counts_in_bin; hit++)
       {
-        // auto const nrj = calibrate(raw_ADC, label);
         auto nrj = NRJ_cast(raw_ADC + bin_width*gRandom->Uniform(0,1));
         switch(fit.order)
         {
+          case 0 : nrj =                  nrj*fit.parameter1; break;
           case 1 : nrj = fit.parameter0 + nrj*fit.parameter1; break;
           case 2 : nrj = fit.parameter0 + nrj*fit.parameter1 + nrj*nrj*fit.parameter2; break;
         }
@@ -826,17 +1010,32 @@ void Calibrator::verify(std::string const & outfilename)
         m_histos.all_calib[type_index]->Fill(double_cast(nb_det_filled[type_index]), nrj);
       }
     }
+    else
+    {
+      SpectraCo spectrum(raw_histo.get());
+      spectrum.calibrate(m_calib, label);
+      calib_histo = spectrum.createTH1F(name+"_calib");
+      // AddTH1ByValue(m_histos.all_calib[type_index].get(), calib_histo.get(), nb_det_filled[type_index]);
+    }
     nb_det_filled[type_index]++;
   }
+  auto file = TFile::Open((outfilename+"_calib.root").c_str(), "recreate");
+  file->cd();
+  for (auto & it : spectra) it.second.write();
+  file->Write();
+  file->Close();
+  print(outfilename+"_calib.root", "written");
   writeCalibratedHisto(outfilename+"_calib.root");
 }
 
 void Calibrator::writeCalibratedHisto(std::string const & outfilename)
 {
-  unique_TFile outFile(TFile::Open(outfilename.c_str(), "RECREATE"));
+  auto outFile(TFile::Open(outfilename.c_str(), "RECREATE"));
   outFile->cd();
-  for (auto & histo : m_histos.all_calib) histo.Write();
-  for (auto & histo : m_histos.calib_spectra)  histo.Write();
+  for (auto & histo : m_histos.all_calib) if (histo.get()) {histo->Write();}
+  for (auto & histo : m_histos.calib_spectra) if (histo.get()) {print("writting", histo.name()); histo->Write();}
+  outFile->Write();
+  outFile->Close();
   print("Calibrated root spectra written to", outfilename);
 }
 
@@ -850,15 +1049,6 @@ void Calibrator::calibrateRootData(std::string const & folder, int const & nb_fi
 {
   m_calibrate_data = true;
   this -> loadRootData(folder, nb_files);
-}
-
-void Calibrator::writeCalibratedData(std::string const & outfilename)
-{
-  unique_TFile outFile(TFile::Open(outfilename.c_str(), "RECREATE"));
-  outFile->cd();
-  for (auto & histo : m_histos.all_calib) histo.Write();
-  for (auto & histo : m_histos.calib_spectra)  histo.Write();
-  print("Calibrated root spectra written to", outfilename);
 }
 
 #endif //CALIBRATOR_HPP

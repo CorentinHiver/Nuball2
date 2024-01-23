@@ -1,5 +1,17 @@
-#ifndef LIB_HPP_CO
-#define LIB_HPP_CO
+#ifndef LIBCO_HPP
+#define LIBCO_HPP
+
+// This is used in my PC to have better looking errors
+#ifndef _GLIBCXX_USE_CXX11_ABI
+#define _GLIBCXX_USE_CXX11_ABI 0/1
+#endif //_GLIBCXX_USE_CXX11_ABI
+
+// ********** Corentin Lib ************ //
+#include "print.hpp"
+#include "vector_functions.hpp"
+#include "random.hpp"
+#include "string_functions.hpp"
+#include "files_functions.hpp"
 
 // *********** STD includes ********* //
 #include <any>
@@ -24,12 +36,44 @@
 #include <stdlib.h>
 #include <string.h>
 
-// ********** Corentin Lib ************ //
-#include "print.hpp"
-#include "vector_functions.hpp"
-#include "random.hpp"
-#include "string_functions.hpp"
-#include "files_functions.hpp"
+
+///////////////////////////
+// Som specialised print //
+///////////////////////////
+
+
+// ------------------------------------------------------- //
+// Useful overload of operator<< into a std::cout stream :
+
+template <class E>
+std::ostream& operator<<(std::ostream& cout, std::vector<E> const & v)
+{
+  for (auto const & e : v) cout << e << " ";
+  return cout;
+}
+
+template <class F, class S> 
+std::ostream& operator<<(std::ostream& cout, std::pair<F,S> const & p)
+{
+  cout << " {" << p.first << ", " << p.second << "}" << std::endl;
+  return cout;
+}
+
+template <class K, class V> 
+std::ostream& operator<<(std::ostream& cout, std::map<K,V> const & m)
+{
+  cout << "{";
+  for (auto const & pair : m) cout << pair;
+  cout << "}\n";
+  return cout;
+}
+
+template<class E, size_t size> 
+std::ostream& operator<<(std::ostream& cout, std::array<E,size> const & a)
+{
+  for (size_t i = 0; i<size; i++) print(a[i]);
+  return cout;
+}
 
 //////////////
 //   UTILS  //
@@ -55,8 +99,8 @@ double _ns = 1000.;
 //    Types   //
 ////////////////
 
-/// @brief Casts a number into an bool
-template<typename T,  typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
+/// @brief Casts a any type into an bool
+template<typename T>
 inline bool bool_cast(T const & t) {return static_cast<bool>(t);}
 
 /// @brief Casts a number into an char
@@ -93,6 +137,12 @@ using longlong  = long long int ;
 using ulonglong  = unsigned long long int ;
 using size_t = std::size_t;
 
+// Print specialization for uchar : 
+std::ostream& operator<<(std::ostream& cout, uchar const & uc)
+{
+  std::cout << static_cast<int>(uc);
+  return cout;
+}
 
 /// @brief Casts a number into unsigned char (uchar)
 template<typename T,  typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
@@ -151,7 +201,10 @@ T string_to(std::string const & string)
   return t;
 }
 
-// Containers :
+////////////////
+// Containers //
+////////////////
+
 class Bools 
 {
 private:
@@ -230,7 +283,7 @@ public:
     else if (size>m_reserved_size)
     {
       bool* temp = new bool[(m_reserved_size = size*2)];
-      std::memcpy(temp, m_data, m_size*sizeof(bool));
+      if (m_data) std::memcpy(temp, m_data, m_size*sizeof(bool));
       delete[] m_data;
       m_data = temp;
     }
@@ -287,6 +340,9 @@ std::ostream& operator<<(std::ostream& cout, Bools const & bools)
 using Strings = std::vector<std::string>;
 using Ints = std::vector<int>;
 
+// Check if a double holds an int inside
+bool is_int (double const & x) {return std::trunc(x) == x;}
+
 ///////////////////////////////////
 //    UNORDERED MAPS FUNCTIONS   //
 ///////////////////////////////////
@@ -317,6 +373,16 @@ inline bool find_key(std::map<K,V> const & map, K const & key)
 {
   typename std::map<K, V>::const_iterator it = map.find(key);
   return it != map.end();
+}
+
+/// @brief Returns the list of keys in a map
+/// @details This method is only looking in the keys, not the values
+template<typename K, typename V> 
+inline std::vector<K> list_of_key(std::map<K,V> const & map)
+{
+  std::vector<K> ret;
+  for (auto const & it : map) ret.push_back(it.first);
+  return ret;
 }
 
 /// @brief Returns yes if the value is found in the map
@@ -515,4 +581,4 @@ class Slots
 
 // #endif //(__cplusplus >= 201703L)
 
-#endif //LIB_HPP_CO
+#endif //LIBCO_HPP

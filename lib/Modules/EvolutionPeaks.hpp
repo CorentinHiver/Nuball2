@@ -133,8 +133,8 @@ void EvolutionPeaks::run()
     if (totpath.exists()) 
     {
       // Load total file
-      File totFile(totpath+"fused_histo.root");
-      if (totFile.exists()) totalFile.reset(TFile::Open(totFile.c_str()));
+      File totFilename(totpath+"fused_histo.root");
+      if (totFilename.exists()) totalFile.reset(TFile::Open(totFilename.c_str()));
       totalFile->cd();
       auto histo_names = getTH1FNames(totalFile.get());
       std::vector<int> labels;

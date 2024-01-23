@@ -373,7 +373,7 @@ public:
         // 1.b Sorts the chi2s
         std::vector<double> ordered_chi2s;
         std::vector<int> ordered_indexes;
-        bubbleSort(chi2s, ordered_indexes);
+        bubble_sort(chi2s, ordered_indexes);
         for (auto const & index : ordered_indexes) ordered_chi2s.push_back(chi2s[index]);
 
         // Calculate the centroid 

@@ -49,6 +49,7 @@ public:
   Calibration const & operator=(File const & file) {load(file); return *this;}
   /// @brief Loading calibration from a file
   bool load(File const & file);
+  void set(Label const & _label, float const & _intercept, float const & _slope, float const & _binom, float const &_trinom);
 
   #ifdef FIT_HPP
   void loadFits(Fits const & fits);
@@ -157,8 +158,6 @@ public:
   void Print();
 
 private:
-  //Private methods :
-  void set(Label const & _label, float const & _intercept, float const & _slope, float const & _binom, float const &_trinom);
 
   std::string m_filename;
   bool m_ok = false;
@@ -207,6 +206,7 @@ inline void Calibration::calibrate(Hit & hit) const noexcept
 
 void Calibration::set(Label const & _label, float const & _intercept = 0.f, float const & _slope = 1.f, float const & _binom = 0.f, float const &_trinom = 0.f)
 {
+  if (_label+1>m_size) this->resize(_label+1);
   if (_slope == 1.f && _intercept == 0.f) {m_order[_label] = -1;}
   else if (_intercept == 0.f) 
   { // Linear calibration
@@ -256,6 +256,7 @@ void Calibration::resize(int const & size)
   m_slope    .resize(size, 1.f);
   m_binom    .resize(size, 0.f);
   m_trinom   .resize(size, 0.f);
+  m_size = size;
 }
 
 void Calibration::clear()

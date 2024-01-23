@@ -105,11 +105,58 @@ bool AddTH1(TH2* histo2, TH1* histo1, int index, bool x = true)
     return false;
   }
 
-  for (int bin = 0; bin<histo1->GetNbinsX(); bin++)
-  {
-    if (x) histo2->SetBinContent(index, bin, histo1->GetBinContent(bin));
-    else   histo2->SetBinContent(bin, index, histo1->GetBinContent(bin));
+  if (x) for (int bin = 0; bin<histo1->GetNbinsX(); bin++) histo2->SetBinContent(index, bin, histo1->GetBinContent(bin));
+  else   for (int bin = 0; bin<histo1->GetNbinsX(); bin++) histo2->SetBinContent(bin, index, histo1->GetBinContent(bin));
+  
+  return true;
+}
+
+/**
+ * @brief Like AddTH1 but adjusts the binning first
+ * @todo doesn't work for some reason ...
+ * 
+ * @param histo2 
+ * @param histo1 
+ * @param index 
+ * @param x 
+ * @return true 
+ * @return false 
+ */
+bool AddTH1ByValue(TH2* histo2, TH1* histo1, int index, bool x = true)
+{
+  throw_error("DEV !");
+  if (!histo2) {print("TH2 do not exists"); return -1;}
+  if (!histo1) {print("TH1 do not exists"); return -1;}
+  auto axis = (x) ? histo2 -> GetXaxis() : histo2 -> GetYaxis();
+  
+  auto size1 = histo1 ->GetXaxis() -> GetNbins();
+  auto size2 = axis -> GetNbins();
+
+  auto m_min_value_2 = axis -> GetBinLowEdge(0)+1;
+  auto m_max_value_2 = axis -> GetBinLowEdge(size2)+1;
+  
+  auto m_min_value_1 = histo1 -> GetXaxis() -> GetBinLowEdge(0)+1;
+  auto m_max_value_1 = histo1 -> GetXaxis() -> GetBinLowEdge(size1)+1;
+
+  if (m_min_value_2!=m_min_value_1 || m_max_value_2!=m_max_value_1)
+  {// If the ranges are at different
+    double const & slope = (m_max_value_1-m_min_value_1)/(m_max_value_2-m_min_value_2);
+    double const & intercept = m_min_value_1 - slope*m_min_value_2;
+
+    auto filling_histo (new TH1F("temp", "temp", size2, m_min_value_2, m_max_value_2));
+    for (int bin2 = 0; (bin2<size2 && bin2<size1); bin2++)
+    {
+      auto const & value2 = axis->GetBinCenter(bin2);
+      auto const & value1 = value2*slope + intercept;
+      auto const & bin1   = histo1->FindBin(value1);
+      filling_histo->SetBinContent(bin1, histo1->GetBinContent(bin1));
+    }
+
+    AddTH1(histo2, filling_histo, index, x);
+    delete filling_histo;
   }
+  else AddTH1(histo2, histo1, index, x);
+  
   return true;
 }
 
@@ -880,8 +927,9 @@ namespace CoAnalyse
    *    - "S" (symmetric): Loop through the X bins, find the background on the Y projection, then symmetrise the bidim
    *    
    */
-  void removeBackground(TH1 * histo, int const & niter = 10, std::string const & fit_options = "", std::string const & bidim_options = "X")
+  void removeBackground(TH1F * histo, int const & niter = 10, std::string const & fit_options = "", std::string const & bidim_options = "X")
   {
+    if (!histo || histo->IsZombie()) return;
     auto const & dim = histo->GetDimension();
     if (dim == 1)
     {
@@ -953,7 +1001,7 @@ namespace CoAnalyse
 //   Manage histo files   //
 ////////////////////////////
 
-std::vector<std::string> getTH1FNames(TFile * file)
+std::vector<std::string> get_TH1F_names(TFile * file)
 {
   std::vector<std::string> ret;
   auto list = file->GetListOfKeys();
@@ -964,18 +1012,31 @@ std::vector<std::string> getTH1FNames(TFile * file)
     if(className == "TH1F")
     {
       TObject* obj = key->ReadObj();
-      auto histo = dynamic_cast<TH1*>(obj);
+      TH1* histo = dynamic_cast<TH1*>(obj);
       ret.push_back(histo->GetName());
     }
   }
   return ret;
 }
 
-std::vector<std::string> getTH1FNames(std::string const & filename)
+std::vector<std::string> get_TH1F_names(std::string const & filename)
 {
   auto file = TFile::Open(filename.c_str());
-  auto ret =  getTH1FNames(file);
+  auto ret =  get_TH1F_names(file);
   file->Close();
+  return ret;
+}
+
+using TH1F_map = std::map<std::string, TH1F*>;
+
+TH1F_map get_TH1F_map(TFile * file)
+{
+  TH1F_map ret;
+  auto names = get_TH1F_names(file);
+  for (auto const & name : names)
+  {
+    ret.emplace(name, file->Get<TH1F>(name.c_str()));
+  }
   return ret;
 }
 
@@ -983,11 +1044,11 @@ std::vector<std::string> getTH1FNames(std::string const & filename)
 // OTHERS //
 ////////////
 
-void resizeViewRange(TH1F * histo)
+void resize_view_range(TH1F * histo)
 {
   histo->GetXaxis()->SetRange(histo->FindFirstBinAbove(histo->GetMinimum()), histo->FindLastBinAbove(histo->GetMinimum()));
 }
-void resizeViewRange(TH1F * histo, float const & min)
+void resize_view_range(TH1F * histo, float const & min)
 {
   histo->GetXaxis()->SetRange(min, histo->FindLastBinAbove(histo->GetMinimum()));
 }
@@ -1121,7 +1182,6 @@ void GetPoint(TVirtualPad * vpad, double& x, double& y)
   x = cutg->GetX();
   y = cutg->GetY();
   delete cutg;
-  print(x, y);
 }
 
 

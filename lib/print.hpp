@@ -1,13 +1,18 @@
 #ifndef PRINT_HPP
 #define PRINT_HPP
 
+// This is used in my PC to have better looking errors
+#ifndef _GLIBCXX_USE_CXX11_ABI
+#define _GLIBCXX_USE_CXX11_ABI 0/1
+#endif //_GLIBCXX_USE_CXX11_ABI
+
 #include <iostream>
 #include <iomanip>
 #include <vector>
 #include <map>
 
 // Defining the different colors possible of the terminal
-// Usage :  cout<<COLOR<<....
+// Usage :  cout<< <COLOR> <<....
 //          ...
 //          cout << ... << RESET
 
@@ -33,66 +38,45 @@
 
 #define GREY "\u001b[38;5;8m"
 
-// Generic print :
+/// @brief New line
+void print() {std::cout << std::endl;}
 
-template <class T> void print()
-{
-  std::cout << std::endl;
-}
+/// @brief Generic print
+/// @details Automatically adds space between each input. Terminate the output with a "\\n"
+template <class T> 
+void print(T const & t) {std::cout << t << std::endl;}
 
-#ifndef __CINT__
-template <class T> void print(T const & t)
-{
-  std::cout << t << std::endl;
-}
-#endif //__CINT__
-
-template <class... T> void print(T const &... t)
-{
-  ((print(t)),...);
-}
-
-template <class T, class... T2> void print(T const & t, T2 const &... t2)
-{
-  std::cout << t << " ";
-  print(t2...);
-}
+/// @brief Generic print
+/// @details Automatically adds space between each input. Terminate the output with a "\\n"
+template <class T, class... T2> 
+void print(T const & t, T2 const &... t2) {std::cout << t << " "; print(t2...);}
 
 
-// Useful overload of operator<< into a std::cout stream :
+/// @brief Generic print concatenated
+/// @details Concatenate the ouput, i.e. do not add space between each input. Terminate the output with a "\\n"
+template <class T> 
+void printC(T const & t) {std::cout << t << std::endl;}
 
-template <class E>
-std::ostream& operator<<(std::ostream& cout, std::vector<E> const & v)
-{
-  for (auto const & e : v) cout << e << " ";
-  return cout;
-}
+/// @brief Generic print concatenated
+/// @details Concatenate the ouput, i.e. do not add space between each input. Terminate the output with a "\\n"
+template <class T, class... T2> 
+void printC(T const & t, T2 const &... t2) {std::cout << t; printC(t2...);}
 
-template <class F, class S> 
-std::ostream& operator<<(std::ostream& cout, std::pair<F,S> const & p)
-{
-  cout << " {" << p.first << ", " << p.second << "}" << std::endl;
-  return cout;
-}
 
-template <class K, class V> 
-std::ostream& operator<<(std::ostream& cout, std::map<K,V> const & m)
-{
-  cout << "{";
-  for (auto const & pair : m) cout << pair;
-  cout << "}\n";
-  return cout;
-}
+/// @brief Generic print in one line
+/// @details Concatenate the ouput, i.e. do not add space between each input. Do not terminate the output with a "\\n"
+template <class T> 
+void println(T const & t) {std::cout << t;}
 
-template<class E, size_t size> 
-std::ostream& operator<<(std::ostream& cout, std::array<E,size> const & a)
-{
-  for (size_t i = 0; i<size; i++) print(a[i]);
-  return cout;
-}
+/// @brief Generic print in one line
+/// @details Concatenate the ouput, i.e. do not add space between each input. Do not terminate the output with a "\\n"
+template <class T, class... T2> 
+void println(T const & t, T2 const &... t2) {std::cout << t; println(t2...);}
 
+/// @brief Set the floating point precision displayed.
 void print_precision(int n = 6) {std::cout << std::setprecision(n);}
 
+/// @brief Requires #define DEBUG or -DDEBUG in the compile line
 template <class... ARGS> void debug(ARGS &&... args) 
 {
 #ifdef DEBUG
@@ -100,15 +84,7 @@ template <class... ARGS> void debug(ARGS &&... args)
 #endif //DEBUG
 }
 
-// Print specialization for char and uchar : 
-
-std::ostream& operator<<(std::ostream& cout, unsigned char const & uc)
-{
-  std::cout << static_cast<int>(uc);
-  return cout;
-}
-
-// Printing the name of the types :
+// Extracts the name of the types (overloaded for user defined objects):
 
 template<class T>
 std::string type_of(T const & t)
@@ -117,17 +93,31 @@ std::string type_of(T const & t)
 }
 
 // Specialised printing function :
-
+/// @brief Print in bright black
 template <class... T>
 void warning(T const & ... t)
 {
-  print(RED, t..., RESET);
+  std::cout << YELLOW;
+  print(t...);
+  std::cout << RESET;
 }
 
+/// @brief Print in red
+template <class... T>
+void error(T const & ... t)
+{
+  std::cout << RED;
+  print(t...);
+  std::cout << RESET;
+}
+
+/// @brief Print in grey
 template <class... T>
 void information(T const & ... t)
 {
-  print(GREY, t..., RESET);
+  std::cout << GREY;
+  print(t...);
+  std::cout << RESET;
 }
 
 #endif //PRINT_HPP
