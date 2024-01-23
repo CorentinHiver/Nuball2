@@ -113,7 +113,7 @@ void Faster2Histo::load(int const & argc, char** argv)
   {
     std::string command = argv[i];
          if (command == "-c") loadCalibration(argv[++i]);
-         if (command == "-f") {this -> addFile(argv[++i]);}
+    else if (command == "-f") {this -> addFile(argv[++i]);}
     else if (command == "-F") 
     {
       auto const & folder = argv[++i];

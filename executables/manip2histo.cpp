@@ -35,17 +35,6 @@ int main(int argc, char ** argv)
       Faster2Histo(argc+2, arguments);
       delete_argv(arguments);
     }
-
-    // Create all the raw histo sum and evolution 
-    // print();
-    // print("Fuse histograms :");
-    // print();
-
-    // for (auto const & filename : m_output_names)
-    // {
-    //   auto file = TFile::Open()
-    // }
-
   }
   
   return 1;
