@@ -1,14 +1,14 @@
 #include "../libRoot.hpp"
 // #include <SourceCloverSpectra.hpp>
 // #include <Calibration.hpp>
-#include <Calibrator.hpp>
+// #include <Calibrator.hpp>
 // #include <RunMatrixator.hpp>
 // #include <SpectraAlignator.hpp>
 // #include <Detectors.hpp>
 // #include <Timeshifts.hpp>
 // #include <Convertor.hpp>
 // #include <MTFasterReader.hpp>
-// #include <Faster2Histo.hpp>
+#include <Faster2Histo.hpp>
 // #include <EvolutionPeaks.hpp>
 // #include <AnalysedSpectra.hpp>
 // #include <SpectraCo.hpp>
@@ -18,13 +18,14 @@ int main(int argc, char ** argv)
 {
   detectors.load("index_129.list");
 
+  Faster2Histo(argc, argv);
 
-  Calibrator calib;
-  calib.loadCalibration("../136/conversion_200ns/136_2024.calib");
-  calib.verbose(true);
-  calib.loadRootHisto("~/faster_data/N-SI-136-U_histo/total/fused_histo.root");
-  // calib.loadRootHisto("~/faster_data/N-SI-136-sources_histo/152Eu_center.root");
-  calib.verify("test");
+  // Calibrator calib;
+  // calib.loadCalibration("../136/conversion_200ns/136_2024.calib");
+  // calib.verbose(true);
+  // calib.loadRootHisto("~/faster_data/N-SI-136-U_histo/total/fused_histo.root");
+  // // calib.loadRootHisto("~/faster_data/N-SI-136-sources_histo/152Eu_center.root");
+  // calib.verify("test");
 
 
 

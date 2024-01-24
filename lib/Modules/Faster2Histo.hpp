@@ -10,6 +10,8 @@
 #include "../MTObjects/MTTHist.hpp"
 #include "../MTObjects/MTList.hpp"
 
+#define QDC1MAX
+
 class Faster2Histo
 {
 public:
@@ -65,7 +67,7 @@ private:
   int m_overwrite = false;
 
   int m_nb_bins = 2000000;
-  int m_ADC_per_bin = 100;
+  double m_ADC_per_bin = 100;
 };
 
 Faster2Histo::Faster2Histo(int argc, char** argv)
@@ -154,9 +156,11 @@ void Faster2Histo::treatFile(Hit & _hit, FasterReader & reader)
   // If the calibration loaded then calibrate the hits :
   if (m_calibration) while(reader.Read())
   {// Loop through the hits of the .fast file
+    // The following has been added to calibrate faster (the classical way uses a random generator to calibrate)
     auto const & slope = m_calibration.slope(_hit.label);
     auto const & intercept = m_calibration.intercept(_hit.label);
     _hit.nrj = _hit.adc*slope + intercept;
+    // m_calibration(_hit);
     fillHisto(_hit);
   }
   else while(reader.Read()) fillHisto(_hit); // With no calibration
@@ -167,7 +171,7 @@ void Faster2Histo::treatFile(Hit & _hit, FasterReader & reader)
 inline void Faster2Histo::fillHisto(Hit const & hit)
 {
   try {
-      m_spectra.at(hit.label).Fill(hit.adc); // Fill the spectra
+      m_spectra.at(hit.label).Fill((m_calibration) ? hit.nrj : hit.adc); // Fill the spectra
     }
     catch(std::out_of_range const & error)
     {// Add a new detector label to the map if it doesn't exist
@@ -178,6 +182,11 @@ inline void Faster2Histo::fillHisto(Hit const & hit)
         std::string name = (detectors) ? detectors[hit.label] : std::to_string(hit.label);
         std::string title = (detectors) ? detectors[hit.label] : std::to_string(hit.label);
         title += (m_calibration) ? " E" : " adc";
+        if (m_calibration) 
+        {
+          m_nb_bins = 1000000;
+          m_ADC_per_bin = 0.1;
+        }
         m_spectra.emplace(hit.label, MTTHist<TH1F>(name.c_str(), title.c_str(), m_nb_bins, 0, m_nb_bins*m_ADC_per_bin));
         m_spectra[hit.label].Fill(hit.adc);
       }
@@ -198,8 +207,8 @@ void Faster2Histo::write(std::string const & out_filename) noexcept
   for (auto & label_index : ordered_labels_indexes) 
   {
     auto & spectra = m_spectra[m_labels[label_index]];
-    spectra.Merge();
-    spectra->GetXaxis()->SetRange(0, spectra->FindLastBinAbove(1));
+    // spectra.Merge();
+    // spectra->GetXaxis()->SetRange(0, spectra->FindLastBinAbove(1));
     spectra.Write();
   }
   outFile->Write();
