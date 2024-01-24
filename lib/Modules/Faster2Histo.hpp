@@ -150,6 +150,8 @@ inline void Faster2Histo::multirun(int const & nb_threads)
   m_MTreader.readRaw(dispatch_threads, *this);
 }
 
+
+
 void Faster2Histo::treatFile(Hit & _hit, FasterReader & reader)
 {
   Timer timer;
@@ -159,7 +161,7 @@ void Faster2Histo::treatFile(Hit & _hit, FasterReader & reader)
     // The following has been added to calibrate faster (the classical way uses a random generator to calibrate)
     auto const & slope = m_calibration.slope(_hit.label);
     auto const & intercept = m_calibration.intercept(_hit.label);
-    _hit.nrj = _hit.adc*slope + intercept;
+    _hit.nrj = (_hit.adc+random_uniform())*slope + intercept;
     // m_calibration(_hit);
     fillHisto(_hit);
   }

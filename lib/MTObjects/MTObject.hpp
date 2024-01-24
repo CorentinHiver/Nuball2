@@ -119,6 +119,7 @@ private:
   static std::thread::id master_thread_id; 
   static thread_local size_t m_thread_index; // thread_local variable, meaning it will hold different values for each thread it is in
   static std::vector<std::thread> m_threads;
+
 };
 
 // Declaration of static variables :
