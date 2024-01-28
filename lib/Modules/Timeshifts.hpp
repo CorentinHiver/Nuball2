@@ -694,13 +694,10 @@ void Timeshifts::treatFasterFile(std::string const & filename)
     if (hit.label == m_time_ref_label) hit.nrj = NRJ_cast(hit.adc); 
 
   #ifdef USE_RF
-    if(isRF[hit.label]) {rf.last_hit = hit.stamp; rf.period = hit.adc;}
+    if(isRF[hit.label]) {rf.last_downscale = hit.stamp; rf.period = hit.adc;}
   #endif //USE_RF
 
-    if (coincBuilder.build(hit)) 
-    {
-      this -> Fill(event, rf);
-    }
+    if (coincBuilder.build(hit)) {this -> Fill(event, rf);}
   }
 }
 

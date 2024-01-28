@@ -36,7 +36,7 @@ HEADER_DIR := $(shell find $(FRAMEWORK_LIB_PATH) -type d)
 HEADER_FILES := $(shell find $(HEADER_DIR) -type f -name '*.hpp' )
 HEADER_INCLUDES := $(addprefix -I,$(shell find $(HEADER_DIR) -type d ))
 
-.PHONY: debug opt
+.PHONY: debug opt debugopt harddebug
 
 %.o: %.cpp ${HEADER_FILES}
 	${CC} -c $< ${CFLAGS} ${LIBS} ${HEADER_INCLUDES}

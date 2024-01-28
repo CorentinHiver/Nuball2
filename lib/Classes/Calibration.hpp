@@ -168,7 +168,7 @@ private:
   std::vector<float> m_slope;
   std::vector<float> m_binom;
   std::vector<float> m_trinom;
-  std::vector<std::vector<std::vector<float>>> calibration_tables;
+  std::vector<std::vector<std::vector<float>>> calibration_tables; // TODO
 };
 
 inline float Calibration::calibrate(float const & nrj, Label const & label) const noexcept
@@ -201,6 +201,7 @@ inline void Calibration::calibrate(Hit & hit) const noexcept
   hit.nrj = calibrate(hit.adc, label); // Call to the Calibration::calibrate(energy, label) method
 #ifndef QDC1MAX                        // This line allows one to calibrate a bit faster if not interested in the QDC2 field
   if (hit.qdc2!=0.0) hit.nrj2 = calibrate(hit.qdc2, label); // Only calibrate the QDC2 if there is a value in the field
+  else hit.nrj2 = 0.0;
 #endif //QDC1MAX
 }
 

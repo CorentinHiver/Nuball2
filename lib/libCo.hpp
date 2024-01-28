@@ -88,6 +88,12 @@ std::map<std::string, std::string> error_message =
 
 auto pauseCo() {std::cout << "Programe paused, please press enter"; return std::cin.get();}
 auto pauseCo(std::string const & message) {std::cout << message << std::endl; return std::cin.get();}
+void pauseDebug() 
+{
+  #ifdef DEBUG
+  pauseCo();
+  #endif
+}
 
 //////////////
 //   UNITS  //

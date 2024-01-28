@@ -15,7 +15,7 @@
 class Faster2Histo
 {
 public:
-  Faster2Histo() {}
+  Faster2Histo() {TH1::AddDirectory(kFALSE);}
   Faster2Histo(int argc, char** argv);
   void load(int const & argc, char** argv);
   
@@ -72,6 +72,7 @@ private:
 
 Faster2Histo::Faster2Histo(int argc, char** argv)
 {
+  TH1::AddDirectory(kFALSE);
   this -> load(argc, argv);
   this -> multirun();
   this -> write();
@@ -110,11 +111,10 @@ void Faster2Histo::load(int const & argc, char** argv)
     printParameters();
   }
 
-  // Other parameters :
   for (int i = 1; i<argc; i++)
   {
     std::string command = argv[i];
-         if (command == "-c") loadCalibration(argv[++i]);
+         if (command == "-c") {loadCalibration(argv[++i]);}
     else if (command == "-f") {this -> addFile(argv[++i]);}
     else if (command == "-F") 
     {
@@ -122,12 +122,12 @@ void Faster2Histo::load(int const & argc, char** argv)
       auto const & nb_files = std::stoi(argv[++i]);
       this -> addFolder(folder, nb_files);
     }
-    else if (command == "-i") detectors.load(argv[++i]);
-    else if (command == "-m") this -> setNbThreads(std::stoi(argv[++i]));
-    else if (command == "-n") FasterReader::setMaxHits(std::stoi(argv[++i]));
-    else if (command == "-O") this -> setOutFilename(argv[++i]);
-    else if (command == "-o") this -> overwrite(true);
-    else if (command == "--out_path") this -> setOutPath(argv[++i]);
+    else if (command == "-i") {detectors.load(argv[++i]);}
+    else if (command == "-m") {this -> setNbThreads(std::stoi(argv[++i]));}
+    else if (command == "-n") {FasterReader::setMaxHits(std::stoi(argv[++i]));}
+    else if (command == "-O") {this -> setOutFilename(argv[++i]);}
+    else if (command == "-o") {this -> overwrite(true);}
+    else if (command == "--out_path") {this -> setOutPath(argv[++i]);}
     else {throw_error("Unkown command " + command);}
   }
 
@@ -149,8 +149,6 @@ inline void Faster2Histo::multirun(int const & nb_threads)
   // Dispatch Faster2Histo::treatFile() in each thread, i.e. in each file being processed in parallel
   m_MTreader.readRaw(dispatch_threads, *this);
 }
-
-
 
 void Faster2Histo::treatFile(Hit & _hit, FasterReader & reader)
 {
@@ -187,6 +185,7 @@ inline void Faster2Histo::fillHisto(Hit const & hit)
         if (m_calibration) 
         {
           m_nb_bins = 1000000;
+          m_nb_bins = 10000;
           m_ADC_per_bin = 0.1;
         }
         m_spectra.emplace(hit.label, MTTHist<TH1F>(name.c_str(), title.c_str(), m_nb_bins, 0, m_nb_bins*m_ADC_per_bin));

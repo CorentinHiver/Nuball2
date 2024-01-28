@@ -10,6 +10,7 @@ int main(int argc, char ** argv)
   if (argc < 4) 
   {
     print("Usage of manip2histo : runs.list /path/to/manip /path/to/output [[parameters_of_faster2histo]]");
+    print("Disabled Faster2Histo features in manip2histo executable : -O -F -f --out_path");
     Faster2Histo(0, argv);
   }
   else
