@@ -17,6 +17,7 @@
 // 3. Declare some global variables :
 // Data parameters :
 double const & g_adc_threshold = 5000;
+std::vector<double> g_trigger_blacklist = {70, 97};
 
 // Event building parameters :
 double const & g_rf_offset_ns = 25.0;
@@ -931,12 +932,6 @@ int main(int argc, char** argv)
       MTFasterReader readerMT(run_path, nb_files);
       readerMT.readRaw(convert, calibration, timeshifts, outPath, histos, total_read_size);
 
-      // Attempt to bypass the MTFasterReader to see if it is slowing down the process :
-  // FilesManager files
-  // if (!files) {print("NO DATA FILE FOUND"); throw std::runtime_error("DATA");}
-  // MTFile MTfiles = files.getListFiles();
-  // MTObject::parallelise_function(MTfiles, paralellisation, calibration, timeshifts, outPath, histos, total_read_size);
-
       if (histoed)
       {
         auto const name = outPath+run_name+"/histo_"+run_name+".root";
@@ -999,6 +994,11 @@ int main(int argc, char** argv)
       }
     }
     print(run_name, "converted at a rate of", size_file_conversion(total_read_size, "o", "Mo")/timer.TimeSec());
+
+    Path outMerged (outpath.string()+"merged", true);
+
+    std::string merge_command = "hadd -v 1 -j " + std::to_string(nb_threads) + outMerged.string() + run_name + ".root "+run_name+"_*.root";
+    MTObject::parallelise_function(system, merge_command.c_str());
   }
   return 1;
 }

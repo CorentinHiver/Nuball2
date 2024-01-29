@@ -659,9 +659,14 @@ public:
   operator std::string() const & {return m_fullName;}
   std::string const & get() const {return m_fullName;}
   std::string const & string() const {return m_fullName;}
+  std::string c_str() const {return c_str();}
 
+  /// @brief Full name stands for the file name with the path nor the extension
   std::string const & fullName() const {return m_fullName;}
+
+  /// @brief Short name stands for the file name withpout the path nor the extension
   std::string const & shortName() const {return m_shortName;}
+
   std::string const & extension() const {return m_extension;}
 
   void setExtension(std::string const & new_extension) {m_extension = new_extension; update();}
@@ -779,8 +784,13 @@ public:
   Path const & path  () const {return m_path;}
   Folder const & folder() const {return m_path.folder();}
   Filename    const & name    () const {return m_filename;}
+  
+  /// @brief Filename stands for the file name without the path but with the extension
   Filename    const & filename() const {return m_filename;}
-  std::string const & shortName() const {return m_filename.shortName();}
+
+  /// @brief Short name stands for the file name withpout the path nor the extension
+  std::string const & shortName() const {return m_filename.shortName();}  
+
   std::string const & extension() const {return m_filename.extension();}
 
   void setExtension(std::string const & new_extension) {m_filename.setExtension(new_extension); update();}

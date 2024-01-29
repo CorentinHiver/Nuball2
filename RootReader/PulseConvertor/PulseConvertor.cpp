@@ -382,7 +382,7 @@ void convertRuns(MTList & runs)
             clovers.SetEvent(event);
             if (ratio>-0.2 && ratio<0.2) 
             {
-              if (prompt) 
+              if (prompt)
               {
                 BR2D1_labr3->Fill(nrj);
                 for (auto const & index : clovers.promptClean) prompt_LaBr3_VS_Ge->Fill(clovers[index].nrj, nrj);

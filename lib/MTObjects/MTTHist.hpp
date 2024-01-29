@@ -1,5 +1,5 @@
-#ifndef MTTHIST_H
-#define MTTHIST_H
+#ifndef MTTHIST_HPP
+#define MTTHIST_HPP
 // #define MTTHIST_MONO
 #include "MTObject.hpp"
 #include "MTCounter.hpp"
@@ -569,4 +569,4 @@ else if (!m_merged_deleted && m_exists && !m_outscope)
 template <class THist>
 using Vector_MTTHist = std::vector<MTTHist<THist>>;
 
-#endif //MTTHIST_H
+#endif //MTTHIST_HPP
