@@ -821,6 +821,7 @@ int main(int argc, char** argv)
         else if (command == "-Th" || command == "--Thorium")
         {
           list_runs = "Thorium.list";
+          output+="_Th";
         }
         else if (command == "-U" || command == "--Uranium")
         {
@@ -844,10 +845,10 @@ int main(int argc, char** argv)
           print("(-n  || --number-hits)    [hits_number]   : set the number of hit to read in each file.");
           print("(-o  || --overwrite)                      : overwrites the already written folders. If a folder is incomplete, you need to delete it");
           print("(       --only-timeshift)                 : Calculate only timeshifts, force it even if it already has been calculated");
-          print("(-t  || --trigger)        [trigger]       : Default ",list_trigger,"|", trigger_legend);
+          // print("(-t  || --trigger)        [trigger]       : Default ",list_trigger,"|", trigger_legend);
           print("(-Th || --Thorium)                        : Treats only the thorium runs (run_nb < 75)");
           print("(-U  || --Uranium)                        : Treats only the uranium runs (run_nb >= 75)");
-          print("(       --129)                            : Treats the N-SI-129 pulsed runs");
+          // print("(       --129)                            : Treats the N-SI-129 pulsed runs");
           return 0;
         }
       }
