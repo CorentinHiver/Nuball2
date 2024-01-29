@@ -996,7 +996,7 @@ int main(int argc, char** argv)
     }
     print(run_name, "converted at a rate of", size_file_conversion(total_read_size, "o", "Mo")/timer.TimeSec());
 
-    Path outMerged (outpath.string()+"merged", true);
+    Path outMerged (outPath.string()+"merged", true);
 
     std::string merge_command = "hadd -v 1 -j " + std::to_string(nb_threads) + outMerged.string() + run_name + ".root "+run_name+"_*.root";
     MTObject::parallelise_function(system, merge_command.c_str());
