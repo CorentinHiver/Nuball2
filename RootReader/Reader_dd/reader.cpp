@@ -9,7 +9,7 @@
 #include "../../lib/MTObjects/MTList.hpp"
 
 std::string g_outfilename = "all_runs_test.root";
-int nb_threads = 2;
+int nb_threads = 15;
 
 float smear(float const & nrj, Label const & label, TRandom* random)
 {
@@ -21,8 +21,8 @@ float smear(float const & nrj, Label const & label, TRandom* random)
 class Analysator
 {
 public:
-  Analysator(int const & number_files, std::string const & datapath = "~/faster_data/N-SI-136-root_dd/")
-  // Analysator(int const & number_files, std::string const & datapath = "~/nuball2/N-SI-136-root_dd/")
+  // Analysator(int const & number_files, std::string const & datapath = "~/faster_data/N-SI-136-root_dd/")
+  Analysator(int const & number_files, std::string const & datapath = "~/nuball2/N-SI-136-root_dd/")
   {
     FilesManager m_files(Path(datapath).string(), number_files);
     MTfiles = m_files.getListFiles();
