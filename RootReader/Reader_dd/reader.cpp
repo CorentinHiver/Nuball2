@@ -288,7 +288,7 @@ void Analysator::write()
 
   // RWMat RW_dd(dd); RW_dd.Write();
   dd.Write();
-  d_wpd.Write();
+  dd_wp.Write();
 
   prompt_Ge.Write();
   delayed_Ge.Write();
