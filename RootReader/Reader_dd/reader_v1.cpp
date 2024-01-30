@@ -272,7 +272,6 @@ void Analysator::analyse()
 
 void Analysator::write()
 {
-  RWMat RW_dd(dd); RW_dd.Write();
   auto outfile(TFile::Open(g_outfilename.c_str(), "RECREATE"));
   outfile->cd();
 
@@ -307,7 +306,8 @@ void Analysator::write()
   delayed_Ge_VS_delayed_calo_wppE.Write();
 
 
-
+  // RWMat RW_dd(dd); RW_dd.Write();
+  
   outfile->Write();
   outfile->Close();
   print(g_outfilename, "written");
