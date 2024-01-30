@@ -998,7 +998,7 @@ int main(int argc, char** argv)
 
     Path outMerged (outPath.string()+"merged", true);
 
-    std::string merge_command = "hadd -v 1 -j " + std::to_string(nb_threads) + outMerged.string() + run_name + ".root "+run_name+"_*.root";
+    std::string merge_command = "hadd -v 1 -j " + std::to_string(nb_threads) + " " + outMerged.string() + run_name + ".root "+run_name+"_*.root";
     MTObject::parallelise_function(system, merge_command.c_str());
   }
   return 1;

@@ -28,11 +28,11 @@ class RWMat
   int FindMinChan();
 
  protected:
-  unsigned short   fNChannels;
+  unsigned short   fNChannels = 0;
   std::string     fName;
-  int**  fRWMat;
-  double    fTotalCounts;
-  double    fMaxCounts;
+  int**  fRWMat = nullptr;
+  double    fTotalCounts = 0.0;
+  double    fMaxCounts = 0.0;
   bool m_ok = true;
   bool deleted = false;
 };

@@ -19,7 +19,7 @@ FRAMEWORK_LIB_PATH := ../../lib
 
 # ----------------------------------------------------
 # Then write down the name of the main file  :
-SRCEXE := macro.cpp
+SRCEXE := reader.cpp
 # ==================================================
 
 

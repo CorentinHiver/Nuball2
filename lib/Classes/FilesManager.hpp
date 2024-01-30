@@ -147,7 +147,7 @@ bool FilesManager::addFolder(std::string _foldername, long _nb_files, std::vecto
   if (listfile.size() > 0)
   {
     std::sort(listfile.begin(), listfile.end());// Sorts the entries
-    if (_nb_files> static_cast<long>(listfile.size()) || _nb_files == -1) _nb_files = listfile.size();//Sets the correct number of files to keep
+    if (_nb_files > long_cast(listfile.size()) || _nb_files == -1) _nb_files = listfile.size();//Sets the correct number of files to keep
     ListFiles cut_listfile (listfile.begin(), listfile.begin()+_nb_files);// Take the nb_files first files of the folder
     for (auto const & file : cut_listfile) m_listFilesInFolder[_foldername].emplace_back(file);
     if (m_listFiles.size() == 0) m_listFiles = cut_listfile;// Set cut_listfile to be the global list of files
