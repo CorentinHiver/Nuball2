@@ -121,6 +121,7 @@ void Analysator::Initialise()
   // Final bidims
   pp.reset("pp", "pp;E[keV];E[keV]", 3096,0,3096, 3096,0,3096);
   dd.reset("dd", "dd;E[keV];E[keV]", 3096,0,3096, 3096,0,3096);
+  dd_wp.reset("dd_wp", "dd;E[keV];E[keV]", 3096,0,3096, 3096,0,3096);
 }
 
 void Analysator::analyse()
@@ -140,7 +141,7 @@ void Analysator::analyse()
 
     Event event(tree);
     RF_Manager rf;
-    // Clovers clovers;
+    Clovers clovers;
 
     auto const & nb_events = tree->GetEntries();
     for (int event_i = 0; event_i<nb_events; event_i++)
@@ -148,7 +149,7 @@ void Analysator::analyse()
       if(event_i%int_cast(10.e+6) == 0) print(event_i/1.e+6, "Mevts");
 
       tree->GetEntry(event_i);
-      // clovers.Reset();
+      clovers.Reset();
 
       float totalE_prompt = 0;
       float totalE_delayed = 0;
@@ -163,7 +164,7 @@ void Analysator::analyse()
       
       for (int hit_i = 0; hit_i<event.size(); hit_i++)
       {
-        // clovers.Fill(event, hit_i);
+        clovers.Fill(event, hit_i);
         if (rf.setEvent(event)) continue;
         auto const & label = event.labels[hit_i];
         auto const & nrj   = event.nrjs  [hit_i];
@@ -222,7 +223,7 @@ void Analysator::analyse()
         }
       }
       
-      // clovers.Analyse();
+      clovers.Analyse();
 
       if (totalE_prompt>5) 
       {
@@ -259,11 +260,19 @@ void Analysator::analyse()
             {
               for (size_t hit_j = hit_i+1; hit_j<event.size(); hit_j++) if(isGe[event.labels[hit_j]])
               {
-                dd.Fill(event.nrjs[hit_i], event.nrjs[hit_j]);
-                dd.Fill(event.nrjs[hit_j], event.nrjs[hit_i]);
+                dd_wp.Fill(event.nrjs[hit_i], event.nrjs[hit_j]);
+                dd_wp.Fill(event.nrjs[hit_j], event.nrjs[hit_i]);
               }
             }
           }
+        }
+      }
+      if (totalE_delayed > 1000 && totalE_delayed < 3000)
+      {
+        for (size_t hit_i = 0; hit_i<event.size(); hit_i++) if (isGe[event.labels[hit_i]]) for (size_t hit_j = hit_i+1; hit_j<event.size(); hit_j++) if(isGe[event.labels[hit_j]])
+        {
+          dd.Fill(event.nrjs[hit_i], event.nrjs[hit_j]);
+          dd.Fill(event.nrjs[hit_j], event.nrjs[hit_i]);
         }
       }
     }
@@ -273,11 +282,12 @@ void Analysator::analyse()
 
 void Analysator::write()
 {
-  RWMat RW_dd(dd); RW_dd.Write();
   auto outfile(TFile::Open(g_outfilename.c_str(), "RECREATE"));
   outfile->cd();
 
+  // RWMat RW_dd(dd); RW_dd.Write();
   dd.Write();
+  d_wpd.Write();
 
   prompt_Ge.Write();
   delayed_Ge.Write();
@@ -289,7 +299,6 @@ void Analysator::write()
   delayed_calo.Write();
 
   prompt_delayed_calo.Write();
-  print(delayed_Ge_VS_delayed_calo.Integral());
   delayed_Ge_VS_prompt_calo.Write();
 
   delayed_Ge_wp.Write();

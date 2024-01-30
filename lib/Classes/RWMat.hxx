@@ -81,7 +81,7 @@ void RWMat::Reset(THist* RootMat)
     int ychans=RootMat->GetNbinsY();
     fNChannels=4096;
     fName=RootMat->GetName();
-    fName=fName+".m4b";
+    fName+=".m4b";
     print(fName);
     fRWMat=new int*[fNChannels];
     for(int i=0 ; i < fNChannels ; i++) fRWMat[i] = new int[fNChannels];
