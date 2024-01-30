@@ -13,7 +13,7 @@ int nb_threads = 2;
 
 float smear(float const & nrj, Label const & label, TRandom* random)
 {
-  if (isGe[label])    return random->Gaus(nrj, nrj*0.05);
+  if (isGe[label])    return random->Gaus(nrj, nrj*0.1);
   if (isParis[label]) return random->Gaus(nrj, nrj*0.1);
   else return nrj;
 }
@@ -72,6 +72,7 @@ private:
 
   MTTHist<TH2F> pp;
   MTTHist<TH2F> dd;
+  MTTHist<TH2F> dd_wp;
 };
 
 void Analysator::Initialise()
@@ -254,7 +255,7 @@ void Analysator::analyse()
         prompt_delayed_calo.Fill(totalE_prompt, totalE_delayed);
         for (size_t hit_i = 0; hit_i<event.size(); hit_i++) if (isGe[event.labels[hit_i]])
         {
-          if (totalE_delayed < 3000) 
+          if (totalE_delayed < 3500) 
           {
             if (isGe[event.labels[hit_i]]) 
             {
@@ -267,7 +268,7 @@ void Analysator::analyse()
           }
         }
       }
-      if (totalE_delayed > 1000 && totalE_delayed < 3000)
+      if (totalE_delayed > 1000 && totalE_delayed < 3500)
       {
         for (size_t hit_i = 0; hit_i<event.size(); hit_i++) if (isGe[event.labels[hit_i]]) for (size_t hit_j = hit_i+1; hit_j<event.size(); hit_j++) if(isGe[event.labels[hit_j]])
         {
