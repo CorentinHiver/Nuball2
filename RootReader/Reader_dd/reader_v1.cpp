@@ -9,6 +9,7 @@
 #include "../../lib/MTObjects/MTList.hpp"
 
 std::string g_outfilename = "all_runs_test.root";
+int nb_threads = 2;
 
 float smear(float const & nrj, Label const & label, TRandom* random)
 {
@@ -315,8 +316,7 @@ void Analysator::write()
 
 void reader(int number_files = -1)
 {
-  MTObject::Initialize(2);
-  // MTObject::Initialize(15);
+  MTObject::Initialize(nb_threads);
   Analysator analysator(number_files);
 }
 
