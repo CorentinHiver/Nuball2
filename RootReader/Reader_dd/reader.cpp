@@ -142,7 +142,7 @@ void Analysator::analyse()
 
     Event event(tree);
     RF_Manager rf;
-    Clovers clovers;
+    // Clovers clovers;
 
     auto const & nb_events = tree->GetEntries();
     for (int event_i = 0; event_i<nb_events; event_i++)
@@ -150,7 +150,7 @@ void Analysator::analyse()
       if(event_i%int_cast(10.e+6) == 0) print(event_i/1.e+6, "Mevts");
 
       tree->GetEntry(event_i);
-      clovers.Reset();
+      // clovers.Reset();
 
       float totalE_prompt = 0;
       float totalE_delayed = 0;
@@ -165,7 +165,7 @@ void Analysator::analyse()
       
       for (int hit_i = 0; hit_i<event.size(); hit_i++)
       {
-        clovers.Fill(event, hit_i);
+        // clovers.Fill(event, hit_i);
         if (rf.setEvent(event)) continue;
         auto const & label = event.labels[hit_i];
         auto const & nrj   = event.nrjs  [hit_i];
@@ -224,7 +224,7 @@ void Analysator::analyse()
         }
       }
       
-      clovers.Analyse();
+      // clovers.Analyse();
 
       if (totalE_prompt>5) 
       {
