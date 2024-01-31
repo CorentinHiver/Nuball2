@@ -9,20 +9,24 @@
 #include "../../lib/MTObjects/MTList.hpp"
 
 std::string g_outfilename = "all_runs_test.root";
-int nb_threads = 15;
+int nb_threads = 2;
 
 float smear(float const & nrj, Label const & label, TRandom* random)
 {
-  if (isGe[label])    return random->Gaus(nrj, nrj*0.1);
-  if (isParis[label]) return random->Gaus(nrj, nrj*0.1);
-  else return nrj;
+  if (nrj>0)
+  {
+    if (isGe[label])         return random->Gaus(nrj,nrj*((300.0/sqrt(nrj))/100.0)/2.35);
+    else if (isParis[label]) return random->Gaus(nrj,nrj*((200.0/sqrt(nrj))/100.0)/2.35);
+    else return nrj;
+  }
+  else return 0;
 }
 
 class Analysator
 {
 public:
-  // Analysator(int const & number_files, std::string const & datapath = "~/faster_data/N-SI-136-root_dd/")
-  Analysator(int const & number_files, std::string const & datapath = "~/nuball2/N-SI-136-root_dd/")
+  Analysator(int const & number_files, std::string const & datapath = "~/faster_data/N-SI-136-root_dd/")
+  // Analysator(int const & number_files, std::string const & datapath = "~/nuball2/N-SI-136-root_dd/")
   {
     FilesManager m_files(Path(datapath).string(), number_files);
     MTfiles = m_files.getListFiles();
@@ -142,7 +146,7 @@ void Analysator::analyse()
 
     Event event(tree);
     RF_Manager rf;
-    // Clovers clovers;
+    Clovers clovers;
 
     auto const & nb_events = tree->GetEntries();
     for (int event_i = 0; event_i<nb_events; event_i++)
@@ -150,7 +154,12 @@ void Analysator::analyse()
       if(event_i%int_cast(10.e+6) == 0) print(event_i/1.e+6, "Mevts");
 
       tree->GetEntry(event_i);
-      // clovers.Reset();
+      clovers.Reset();
+
+      std::vector<CloverModule> clovers_prompt(24);
+      std::vector<uchar> clovers_prompt_fired;
+      std::vector<CloverModule> clovers_delayed(24);
+      std::vector<uchar> clovers_delayed_fired;
 
       float totalE_prompt = 0;
       float totalE_delayed = 0;
@@ -165,7 +174,7 @@ void Analysator::analyse()
       
       for (int hit_i = 0; hit_i<event.size(); hit_i++)
       {
-        // clovers.Fill(event, hit_i);
+        clovers.Fill(event, hit_i);
         if (rf.setEvent(event)) continue;
         auto const & label = event.labels[hit_i];
         auto const & nrj   = event.nrjs  [hit_i];
@@ -176,8 +185,6 @@ void Analysator::analyse()
         
         float const & time_ns = time/1000.f;
 
-        // First attempt : rejecting all the previous prompt hits
-        if (time_ns<-20) continue;
         if (time_ns<5) 
         {
           has_prompt = true;
@@ -224,7 +231,7 @@ void Analysator::analyse()
         }
       }
       
-      // clovers.Analyse();
+      clovers.Analyse();
 
       if (totalE_prompt>5) 
       {

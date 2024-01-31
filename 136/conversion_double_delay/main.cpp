@@ -927,79 +927,83 @@ int main(int argc, char** argv)
       timeshifts.write(run_name);
     }
 
-    if (!only_timeshifts)
+    if (only_timeshifts) continue;
+    
+    // Loop over the files in parallel :
+    MTFasterReader readerMT(run_path, nb_files);
+    readerMT.readRaw(convert, calibration, timeshifts, outPath, histos, total_read_size);
+
+    if (histoed)
     {
-      // Loop over the files in parallel :
-      MTFasterReader readerMT(run_path, nb_files);
-      readerMT.readRaw(convert, calibration, timeshifts, outPath, histos, total_read_size);
+      auto const name = outPath+run_name+"/histo_"+run_name+".root";
+      std::unique_ptr<TFile> outFile (TFile::Open(name.c_str(), "RECREATE"));
+      outFile -> cd();
+      histos.energy_all_Ge_raw.Write();
+      histos.rf_all_raw.Write();
+      histos.energy_each_raw.Write();
+      histos.rf_each_raw.Write();
+      histos.energy_all_Ge.Write();
+      histos.energy_each.Write();
+      histos.rf_all.Write();
+      histos.rf_each.Write();
+      histos.energy_all_Ge_event.Write();
+      histos.rf_all_event.Write();
+      histos.energy_each_event.Write();
+      histos.rf_each_event.Write();
+      histos.energy_all_Ge_trig.Write();
+      histos.energy_each_trig.Write();
+      histos.rf_all_trig.Write();
+      histos.rf_each_trig.Write();
+      // for (auto & histo : histos.paris_bidim) histo.Write();
+      // for (auto & histo : histos.paris_bidim_M_inf_4) histo.Write();
 
-      if (histoed)
-      {
-        auto const name = outPath+run_name+"/histo_"+run_name+".root";
-        std::unique_ptr<TFile> outFile (TFile::Open(name.c_str(), "RECREATE"));
-        outFile -> cd();
-        histos.energy_all_Ge_raw.Write();
-        histos.rf_all_raw.Write();
-        histos.energy_each_raw.Write();
-        histos.rf_each_raw.Write();
-        histos.energy_all_Ge.Write();
-        histos.energy_each.Write();
-        histos.rf_all.Write();
-        histos.rf_each.Write();
-        histos.energy_all_Ge_event.Write();
-        histos.rf_all_event.Write();
-        histos.energy_each_event.Write();
-        histos.rf_each_event.Write();
-        histos.energy_all_Ge_trig.Write();
-        histos.energy_each_trig.Write();
-        histos.rf_all_trig.Write();
-        histos.rf_each_trig.Write();
-        // for (auto & histo : histos.paris_bidim) histo.Write();
-        // for (auto & histo : histos.paris_bidim_M_inf_4) histo.Write();
+      histos.promptGe.Write();
+      histos.promptGe_clean.Write();
+      histos.promptGe_vetoed.Write();
 
-        histos.promptGe.Write();
-        histos.promptGe_clean.Write();
-        histos.promptGe_vetoed.Write();
+      histos.BGO_VS_Ge_time.Write();
+      histos.BGO_VS_Ge_time_prompt.Write();
+      histos.E_Ge_BGO_dT_Ge_VS.Write();
+      histos.BGO_VS_Ge_label.Write();
+      histos.BGO_VS_Ge_label_vetoed.Write();
+      histos.BGO_VS_Ge_label_clean.Write();
 
-        histos.BGO_VS_Ge_time.Write();
-        histos.BGO_VS_Ge_time_prompt.Write();
-        histos.E_Ge_BGO_dT_Ge_VS.Write();
-        histos.BGO_VS_Ge_label.Write();
-        histos.BGO_VS_Ge_label_vetoed.Write();
-        histos.BGO_VS_Ge_label_clean.Write();
+      histos.first_Ge_spectra.Write();
+      histos.first_Ge_spectra_Clean.Write();
+      histos.first_Ge_spectra_Vetoed.Write();
 
-        histos.first_Ge_spectra.Write();
-        histos.first_Ge_spectra_Clean.Write();
-        histos.first_Ge_spectra_Vetoed.Write();
+      histos.second_Ge_spectra.Write();
+      histos.second_Ge_spectra_Clean.Write();
+      histos.second_Ge_spectra_Vetoed.Write();
 
-        histos.second_Ge_spectra.Write();
-        histos.second_Ge_spectra_Clean.Write();
-        histos.second_Ge_spectra_Vetoed.Write();
+      histos.first_Ge_time_VS_nb_delayed.Write();
+      histos.second_Ge_time_VS_nb_delayed.Write();
 
-        histos.first_Ge_time_VS_nb_delayed.Write();
-        histos.second_Ge_time_VS_nb_delayed.Write();
+      histos.all_Ge_after_trigger.Write();
 
-        histos.all_Ge_after_trigger.Write();
-
-        histos.Ge2_VS_Ge_time.Write();
-        histos.Ge3_VS_Ge_time.Write();
-        histos.Ge3_VS_Ge2_time.Write();
+      histos.Ge2_VS_Ge_time.Write();
+      histos.Ge3_VS_Ge_time.Write();
+      histos.Ge3_VS_Ge2_time.Write();
 
 
-        histos.rf_evolution->Write();
-        delete histos.rf_evolution;
+      histos.rf_evolution->Write();
+      delete histos.rf_evolution;
 
-        outFile -> Write();
-        outFile -> Close();
-        print(name, "written");
-      }
+      outFile -> Write();
+      outFile -> Close();
+      print(name, "written");
     }
+
     print(run_name, "converted at a rate of", size_file_conversion(total_read_size, "o", "Mo")/timer.TimeSec());
 
-    Path outMerged (outPath.string()+"merged", true);
+    Path outDataPath(outPath.string() + "/" + run_name);
+    Path outMergedPath (outPath.string()+"merged", true);
+    File outMergedFile (outMergedPath, run_name+".root");
+    
+    if (outMergedFile.exists()) system(("rm " + outMergedFile.string()).c_str());
 
-    std::string merge_command = "hadd -v 1 -j " + std::to_string(nb_threads) + " " + outMerged.string() + run_name + ".root "+run_name+"_*.root";
-    MTObject::parallelise_function(system, merge_command.c_str());
+    std::string merge_command = "hadd -v 1 -j " + std::to_string(nb_threads) + " " + outMergedPath.string() + run_name + ".root " + outDataPath.string() + run_name + "_*.root";
+    system(merge_command.c_str());
   }
   return 1;
 }

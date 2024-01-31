@@ -27,11 +27,11 @@
 #include "EventBuilder_136.hpp" // Event builder for this experiment
 
 // 3. Declare some global variables :
-std::string IDFile = "index_129.list";
-std::string calibFile = "2024_136.calib";
+std::string IDFile = "../index_129.list";
+std::string calibFile = "../136_2024.calib";
 Folder manip = "N-SI-136";
 std::string list_runs = "list_runs.list";
-std::string output = "-root_";
+std::string output = "-test_";
 int nb_files_ts = 60;
 int nb_files = -1;
 int rf_shift = 40;
@@ -258,9 +258,6 @@ void convert(Hit & hit, FasterReader & reader,
   total_read_size+=raw_datafile.size();
   auto dataSize = float_cast(raw_datafile.size("Mo"));
 
-  total_read_size+=raw_datafile.size();
-  auto dataSize = float_cast(raw_datafile.size("Mo"));
-
   // ------------------------------ //
   // Initialize the temporary TTree //
   // ------------------------------ //
@@ -366,7 +363,6 @@ void convert(Hit & hit, FasterReader & reader,
     }
 
     print_precision(13);
-    Event building :
     if (eventBuilder.build(hit))
     {
       evts_count++;
@@ -379,7 +375,7 @@ void convert(Hit & hit, FasterReader & reader,
         {
           auto const & label  = event.labels[trig_loop];
           auto const & time   = event.times [trig_loop];
-          auto const tof_trig = pulse_ref+time/1000ll;
+          auto const & tof_trig = pulse_ref+time/1000ll;
           auto const & nrj    = calibration(event.nrjs[trig_loop], label);
 
           histos.rf_all_event.Fill(tof_trig);
