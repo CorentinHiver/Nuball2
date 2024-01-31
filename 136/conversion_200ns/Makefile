@@ -5,9 +5,11 @@
 
 # Compile using either one of these commands : 
 # 	either default, debug (with extra warning flags) or optimized 
-# $ make -B 
-# $ make debug -B 
-# $ make opt -B 
+# $ make						default
+# $ make opt				optimized
+# $ make debug			debug symbols with extra warning flags
+# $ make debugopt		optimized with debug symbols
+# $ make harddebug	debug symbols with huge amount of extra warning flags (you may want to modify it if some extra flags are needed)
 
 # ==================================================
 # ----------------------------------------------------
@@ -54,6 +56,7 @@ LIBS      = ${FASTERAC_LIBS}   ${ROOT_LIBS}
 EXE := $(SRCEXE:.cpp=)
 
 default: $(EXE)
+	rm -f *.o
 
 $(EXE): $(SRCEXE:.cpp=.o) ${HEADER_FILES}
 	${CC} $< -o $@ ${CFLAGS} ${LIBS}
@@ -61,10 +64,13 @@ $(EXE): $(SRCEXE:.cpp=.o) ${HEADER_FILES}
 opt: CFLAGS += -O2
 opt: default
 
-debug: CFLAGS += -g -O0 -DDEBUG -Wextra #-Wold-style-cast
+debug: CFLAGS += -g -O0 -DDEBUG -Wextra -ftemplate-depth-25 #-Wold-style-cast
 debug: default
 
-harddebug: CFLAGS += -g -O0 -DDEBUG -Wextra -ftemplate-depth-21 -Wconversion -Wno-float-conversion -Wold-style-cast
+debugopt: CFLAGS += -g -O2 -DDEBUG -Wextra -ftemplate-depth-25 #-Wold-style-cast
+debugopt: default
+
+harddebug: CFLAGS += -g -O0 -DDEBUG -Wextra -ftemplate-depth-25 -Wconversion -Wno-float-conversion -Wold-style-cast
 harddebug: default
 
 clean:

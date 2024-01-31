@@ -343,12 +343,22 @@ private:
   Vector_MTTHist<TH1F> m_time_spectra_corrected_RF; // RF time spectra, one TH1F for each detector, after timeshift
   MTTHist<TH2F> m_time_spectra_corrected_bidim_RF; // RF time spectra, X axis label, Y axis time spectra, after timeshift
 #endif //USE_RF
+
+public:
+  class NotFoundError
+  {
+  public:
+    NotFoundError(std::string const & filename) : m_filename(filename) {error("CAN'T OPEN THE TIMESHIFT FILE", filename);}
+    auto const & getFilename() const {return m_filename;}
+  private:
+    std::string m_filename;
+  };
 };
 
 bool Timeshifts::load(std::string const & filename)
 {
   std::ifstream inputfile(filename, std::ifstream::in);
-  if (!inputfile.good()) {throw_error("CAN'T OPEN THE TIMESHIFT FILE " + filename);return false;}
+  if (!inputfile.good()) {throw NotFoundError(filename);}
   else if (file_is_empty(inputfile)) {print("TIMESHIFT FILE", filename, "EMPTY !");return false;}
   std::string line = ""; // Reading buffer
   Label label = 0; // Reading buffer

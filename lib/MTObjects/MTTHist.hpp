@@ -389,9 +389,8 @@ inline void MTTHist<THist>::reset(std::string name, ARGS &&... args)
   #else // not MTTHIST_MONO
    
     auto const & thread_nb = MTObject::getThreadsNb();
-    // if (MTObject::isMasterThread())
-    // {
-    for (size_t histo = 0; histo<m_collection.size(); histo++) delete m_collection[histo]; 
+    if (!MTObject::isMasterThread()) throw_error(concatenate("Can't reset MTTHist", m_name, " within a thread !"));
+    // for (size_t histo = 0; histo<m_collection.size(); histo++) delete m_collection[histo]; 
     m_collection.resize(thread_nb);
     for (size_t i = 0; i<thread_nb; i++) 
     {

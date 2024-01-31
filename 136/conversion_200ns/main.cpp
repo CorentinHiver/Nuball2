@@ -610,22 +610,29 @@ int main(int argc, char** argv)
     print("Treating ", run_name);
 
     // Timeshifts loading : 
-    Timeshifts timeshifts(outPath.string(), run_name);
-    if (treat_129) 
+    Timeshifts timeshifts;
+    try
     {
-      timeshifts.dT_with_raising_edge("dssd");
-      timeshifts.dT_with_RF("dssd");
+      timeshifts.load(outPath.string()+"Timeshifts/"+run_name+".root");
     }
-
-    // If no timeshifts data for the run already available, calculate it :
-    if (!timeshifts || (only_timeshifts && overwrite)) 
-    { 
+    catch (Timeshifts::NotFoundError & error)
+    {
+      // If no timeshifts data for the run already available, calculate it :
+      if (only_timeshifts && !overwrite) continue;
+      if (treat_129) 
+      {
+        timeshifts.dT_with_raising_edge("dssd");
+        timeshifts.dT_with_RF("dssd");
+      }
+      print("coucou1");
       timeshifts.setMult(2,4);
       timeshifts.setOutDir(outPath.string());
       timeshifts.checkForPreprompt(check_preprompt);
+      print("coucou2");
 
       timeshifts.calculate(run_path, nb_files_ts);
       timeshifts.verify(run_path, 10);
+      print("coucou3");
 
       timeshifts.write(run_name);
     }
