@@ -22,7 +22,7 @@
 #include <Detectors.hpp>      // Eases the manipulation of detector's labels
 #include <Manip.hpp>          // Eases the manipulation of files and folder of an experiments
 #include <RF_Manager.hpp>     // Eases manipulation of RF information
-#include <Clovers.hpp>
+// #include <Clovers.hpp>        // Eases Compton rejection adn Add-Back
 
 #include "EventBuilder_136.hpp" // Event builder for this experiment
 
@@ -333,7 +333,7 @@ void convert(Hit & hit, FasterReader & reader,
   // --------------------------------- //
   // Loop over the temporary root tree //
   // --------------------------------- //
-  Clovers::InitializeArrays();
+  // Clovers::InitializeArrays();
   Timer convert_timer;
   auto const & nb_data = tempTree->GetEntries();
   ulong hits_count = 0;
@@ -362,7 +362,7 @@ void convert(Hit & hit, FasterReader & reader,
       // }
     }
 
-    print_precision(13);
+    // print_precision(13);
     if (eventBuilder.build(hit))
     {
       evts_count++;
@@ -611,28 +611,22 @@ int main(int argc, char** argv)
 
     // Timeshifts loading : 
     Timeshifts timeshifts;
-    try
-    {
-      timeshifts.load(outPath.string()+"Timeshifts/"+run_name+".root");
-    }
+    try {timeshifts.load(outPath.string()+"Timeshifts/"+run_name+".dT");}
     catch (Timeshifts::NotFoundError & error)
     {
-      // If no timeshifts data for the run already available, calculate it :
+      // If no timeshifts data for the run is already available, calculate it :
       if (only_timeshifts && !overwrite) continue;
       if (treat_129) 
       {
         timeshifts.dT_with_raising_edge("dssd");
         timeshifts.dT_with_RF("dssd");
       }
-      print("coucou1");
       timeshifts.setMult(2,4);
       timeshifts.setOutDir(outPath.string());
       timeshifts.checkForPreprompt(check_preprompt);
-      print("coucou2");
 
       timeshifts.calculate(run_path, nb_files_ts);
       timeshifts.verify(run_path, 10);
-      print("coucou3");
 
       timeshifts.write(run_name);
     }

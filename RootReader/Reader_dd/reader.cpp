@@ -275,6 +275,7 @@ void Analysator::analyse()
           }
         }
       }
+      
       if (totalE_delayed > 1000 && totalE_delayed < 3500)
       {
         for (size_t hit_i = 0; hit_i<event.size(); hit_i++) if (isGe[event.labels[hit_i]]) for (size_t hit_j = hit_i+1; hit_j<event.size(); hit_j++) if(isGe[event.labels[hit_j]])

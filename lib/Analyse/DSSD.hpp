@@ -1,22 +1,13 @@
 #ifndef DSSD_HPP
 #define DSSD_HPP
 
-#include <libCo.hpp>
-#include <libRoot.hpp>
+#include "../libCo.hpp"
+#include "../libRoot.hpp"
 
-#include <Event.hpp>
-#include <Timewalk.hpp>
-#include <Detectors.hpp>
+#include "../Classes/Detectors.hpp"
+#include "../Classes/Event.hpp"
+#include "../Classes/Timewalk.hpp"
 
-
-// Dimensions en mm:
-double distance = 20; // Distance of the DSSD to the target
-double innerRadius = 15;
-double outerRadius = 41; 
-int const nb_rings = 16; // Number of ring channels
-int const nb_sectors = 32; // Number of ring channels
-double ring_thickness = (outerRadius-innerRadius)/nb_rings; // Thickness of a 
-double ring_deg_thick = TMath::ATan(ring_thickness/distance);
 
 /**
  * @brief Silicon Strip. Represents a strip of the DSSD
@@ -46,6 +37,7 @@ public:
 protected:
   double m_angle = 0;
   ushort m_label = 0u;
+
 };
 
 class DSSD
@@ -104,21 +96,21 @@ public:
   void SetEvent(Event const & event);
   void Fill(Event const & evt, int const & index);
 
-  auto sectors() const {return m_Sector_Hits.size();}
-  auto rings() const {return m_Ring_Hits.size();}
+  auto sectors() const {return Sector_Hits.size();}
+  auto rings() const {return Ring_Hits.size();}
   bool oneParticle() const {return (sectors() == 1 && rings() == 1);}
 
-  auto const & energy() const {return Sectors[m_Sector_Hits[0]].nrj ;}
-  auto const & time()   const {return Sectors[m_Sector_Hits[0]].time;}
+  auto const & energy() const {return Sectors[Sector_Hits[0]].nrj ;}
+  auto const & time()   const {return Sectors[Sector_Hits[0]].time;}
 
   /// @brief Don't return any angle but really the label of the ring
-  auto const & angle() const {return Rings[m_Ring_Hits[0]].angle();} 
+  auto const & angle() const {return Rings[Ring_Hits[0]].angle();} 
 
   auto begin() const {return Sectors.begin();}
   auto end  () const {return Sectors.end  ();}
 
-  std::vector<uchar> m_Sector_Hits = std::vector<uchar>(nb_sectors);
-  std::vector<uchar> m_Ring_Hits = std::vector<uchar>(nb_rings);
+  std::vector<uchar> Sector_Hits = std::vector<uchar>(nb_sectors);
+  std::vector<uchar> Ring_Hits = std::vector<uchar>(nb_rings);
 
   std::vector<SiStrip> Sectors;
   std::vector<SiStrip> Rings  ;
@@ -126,8 +118,17 @@ public:
   std::size_t SectorMult = 0u;
   std::size_t RingMult   = 0u;
 
+  // Dimensions en mm:
+  double const distance    = 20; // Distance of the DSSD to the target
+  double const innerRadius = 15;
+  double const outerRadius = 41; 
+  int    const nb_rings    = 16; // Number of ring channels
+  int    const nb_sectors  = 32; // Number of sectors channels
+  double const ring_thickness = (outerRadius-innerRadius)/nb_rings;
+
 private:
   bool static s_initialized;
+  
 };
 
 bool DSSD::s_initialized = false;
@@ -143,17 +144,17 @@ std::array<uchar, 1000> DSSD::indexes  = {255};
 
 void DSSD::Reset()
 {
-  for (auto const & sector : m_Sector_Hits)
+  for (auto const & sector : Sector_Hits)
   {
     Sectors[sector].Reset();
   }
-  m_Sector_Hits.clear();
+  Sector_Hits.clear();
 
-  for (auto const & ring : m_Ring_Hits)
+  for (auto const & ring : Ring_Hits)
   {
     Rings[ring].Reset();
   }
-  m_Ring_Hits.clear();
+  Ring_Hits.clear();
 
   SectorMult = 0u;
   RingMult   = 0u;
@@ -178,14 +179,14 @@ void DSSD::Fill(Event const & event, int const & i)
     if (isring)
     {
       RingMult++;
-      m_Ring_Hits.push_back(index);
+      Ring_Hits.push_back(index);
       Rings[index].nrj = nrj;
       Rings[index].time = time;
     }
     else
     {
       SectorMult++;
-      m_Sector_Hits.push_back(index);
+      Sector_Hits.push_back(index);
       Sectors[index].nrj = nrj;
       Sectors[index].time = time;
     }

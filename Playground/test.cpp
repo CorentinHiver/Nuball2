@@ -8,17 +8,29 @@
 // #include <Timeshifts.hpp>
 // #include <Convertor.hpp>
 // #include <MTFasterReader.hpp>
-#include <Faster2Histo.hpp>
+// #include <Faster2Histo.hpp>
 // #include <EvolutionPeaks.hpp>
 // #include <AnalysedSpectra.hpp>
-// #include <SpectraCo.hpp>
+#include <DSSD.hpp>
 
 
 int main(int argc, char ** argv)
 {
-  detectors.load("index_129.list");
+  // detectors.load("index_129.list");
 
-  Faster2Histo(argc, argv);
+  // Faster2Histo(argc, argv);
+  DSSD dssd;
+  auto coeff = 180/3.14159;
+
+  for (auto i = dssd.innerRadius; i<dssd.outerRadius; i+=dssd.ring_thickness)
+  {
+    auto const & begin-1 = i-dssd.ring_thickness;
+    auto const & begin = i;
+    auto const & end = i+dssd.ring_thickness;
+    auto const & begin_angle = atan(begin/dssd.distance)*coeff;
+    auto const & end_angle = atan(end/dssd.distance)*coeff;
+    print(begin, end, " : ",begin_angle, end_angle, end_angle-begin_angle);
+  }
 
   // Calibrator calib;
   // calib.loadCalibration("../136/conversion_200ns/136_2024.calib");
