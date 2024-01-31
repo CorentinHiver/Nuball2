@@ -231,9 +231,9 @@ private:
 
 // 4. Declare the function to run on each file in parallel :
 void convert(Hit & hit, FasterReader & reader, 
-              Calibration const & calibration, 
-              Timeshifts const & timeshifts, 
-              Path const & outPath, 
+              Calibration calibration, 
+              Timeshifts timeshifts, 
+              Path outPath, 
               Histos & histos,
               MTCounter & total_read_size)
 {
