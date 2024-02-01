@@ -13,8 +13,45 @@ using lock_mutex = const std::lock_guard<std::mutex>;
 #include "../libRoot.hpp"
 
 /**
- * @brief 
+ * @brief Class handeling a easy multi threading.
+ * @details
+ * 
+ * If you want to use the power of multithreading, this class can be convenient.
+ * First thing to do is to setup the number of threads then to initialize them :
+ * 
+ *        MTObject::setThreadsNb(nb_threads);
+ *        MTObject::Initialize();
+ * 
+ * Then you can multithread any function or static method : 
+ * 
+ *        MTObject::parallelise_function(function, param1, param2, ....);
+ * 
+ * If you want to multithread a non-static method (regular methods in an object), you need to pass
+ * through a static function first. Example :
+ * 
+ *        class MyClass
+ *        {
+ *        public:
+ *          MyClass() {}
+ *          ret_type function_to_multithread(argument_1, argument_2, ...){....}
+ *
+ *          // Option 1 : pass all the arguments one by one
+ *          static ret_type helper_function(MyClass & myclass, argument_1, argument_2, ...) {return myclass.function_to_multithread(argument_1, argument_2, ...);}
+ *
+ *         //Option 2 : groupe the arguments in a template pack - most efficient because template deduction done at compile time
+ *          template<class... ARGS>
+ *          static ret_type helper_function(MyClass & myclass, ARGS... args) {return myclass.function_to_multithread(std::forward<ARGS>(args)...);}
+ *        };
+ *
+ *        int main()
+ *        {
+ *         ...
+ *          MTObject::parallelise_function(myclass.helper_function, param1, param2, ....);
+ *         ...
+          }
  */
+
+
 class MTObject
 {
 public:
@@ -143,3 +180,4 @@ void printMT(ARGS &&... args)
 }
 
 #endif //MTOBJECT_HPP
+

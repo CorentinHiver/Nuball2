@@ -18,7 +18,7 @@ public:
     return ret;
   }
   template<class Func, class... ARGS>
-  void execute(Func&& func, ARGS &&... args);
+  void read(Func&& func, ARGS &&... args);
 
   bool nextFilename(std::string & filename) {return m_MTfiles.getNext(filename);}
 
@@ -31,7 +31,7 @@ private:
 };
 
 template<class Func, class... ARGS>
-void MTRootReader::execute(Func && func, ARGS &&... args)
+void MTRootReader::read(Func && func, ARGS &&... args)
 {
   if (!m_files) {print("NO DATA FILE FOUND"); throw std::runtime_error("DATA");}
   m_MTfiles = m_files.getListFiles();

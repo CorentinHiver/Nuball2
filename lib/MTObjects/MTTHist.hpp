@@ -389,14 +389,23 @@ inline void MTTHist<THist>::reset(std::string name, ARGS &&... args)
   #else // not MTTHIST_MONO
    
     auto const & thread_nb = MTObject::getThreadsNb();
-    if (!MTObject::isMasterThread()) throw_error(concatenate("Can't reset MTTHist", m_name, " within a thread !"));
-    // for (size_t histo = 0; histo<m_collection.size(); histo++) delete m_collection[histo]; 
-    m_collection.resize(thread_nb);
-    for (size_t i = 0; i<thread_nb; i++) 
-    {
-      m_collection[i] = new THist ((name+"_"+std::to_string(i)).c_str(), std::forward<ARGS>(args)...);
-      m_collection[i]->SetDirectory(nullptr);
+    if (!MTObject::isMasterThread() && m_collection.size() > 0)
+    {// If the initialisation takes place inside a thread, special care is needed
+      auto const & thread_id = MTObject::getThreadIndex();
+      delete m_collection[thread_id];
+      m_collection[thread_id] =  new THist ((name+"_"+std::to_string(thread_id)).c_str(), std::forward<ARGS>(args)...);
+      m_collection[thread_id] -> SetDirectory(nullptr);
     }
+    else
+    {
+      m_collection.resize(thread_nb);
+      for (size_t i = 0; i<thread_nb; i++) 
+      {
+        m_collection[i] = new THist ((name+"_"+std::to_string(i)).c_str(), std::forward<ARGS>(args)...);
+        m_collection[i]->SetDirectory(nullptr);
+      }
+    }
+
   #endif //MTTHIST_MONO
   }
   else // If MTObject is OFF

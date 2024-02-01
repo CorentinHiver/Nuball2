@@ -78,7 +78,7 @@ int main(int argc, char ** argv)
       {
         auto guess_ADC = Eu152[peak_i]/adc_to_keV;
 
-        auto derivative2 = *(spectrum.derivative2());
+        // auto derivative2 = *(spectrum.derivative2());
         auto rebin_keV = derivative2.getX(rebin);
 
         guess_ADC = derivative2.meanInRange(guess_ADC-5*rebin_keV, guess_ADC+5*rebin_keV);

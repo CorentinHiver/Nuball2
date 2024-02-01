@@ -66,8 +66,8 @@ private:
   int m_nb_files = -1;
   int m_overwrite = false;
 
-  int m_nb_bins = 2000000;
-  double m_ADC_per_bin = 100;
+  int m_nb_bins = -1;
+  double m_bin_max = -1;
 };
 
 Faster2Histo::Faster2Histo(int argc, char** argv)
@@ -86,7 +86,7 @@ void Faster2Histo::printParameters() const noexcept
   print("");
   print("parameters :");
   print("");
-  print("-c [calibration_file]  : Loads the calibration file");
+  print("-c [calibration_file]       : Loads the calibration file");
   // print("-e [time_window_ns]    : Perform event building with time_window_ns = 1500 ns by default");
   // print("-f [files_number]      : Choose the total number of files to treat inside a data folder");
   print("-f [file_name]              : add a new .fast file");
@@ -97,6 +97,8 @@ void Faster2Histo::printParameters() const noexcept
   print("-O [outputFile]             : Set the name of the output file");
   print("-o                          : Overwrite the output");
   print("--out_path [output_path]    : Set the output path");
+  print("--bins     [nb_bins]        : Set the number of bins");
+  print("--bin_max  [bin_max]        : Set the maximum bin of the spectra");
   // print("-t [time_window_ns]    : Loads timeshift data");
   // print("--throw-single         : If you are not interested in single hits");
   // print("--trigger [filename]   : Load a trigger file (look at documentation)");
@@ -128,6 +130,8 @@ void Faster2Histo::load(int const & argc, char** argv)
     else if (command == "-O") {this -> setOutFilename(argv[++i]);}
     else if (command == "-o") {this -> overwrite(true);}
     else if (command == "--out_path") {this -> setOutPath(argv[++i]);}
+    else if (command == "--bins")     {m_nb_bins = std::stoi(argv[++i]);}
+    else if (command == "--bin_max")  {m_bin_max = std::stoi(argv[++i]);}
     else {throw_error("Unkown command " + command);}
   }
 
@@ -184,11 +188,15 @@ inline void Faster2Histo::fillHisto(Hit const & hit)
         title += (m_calibration) ? " E" : " adc";
         if (m_calibration) 
         {
-          m_nb_bins = 1000000;
-          m_nb_bins = 10000;
-          m_ADC_per_bin = 0.1;
+          if (m_nb_bins<0) m_nb_bins = 50000;
+          if (m_bin_max<0) m_bin_max = 50000;
         }
-        m_spectra.emplace(hit.label, MTTHist<TH1F>(name.c_str(), title.c_str(), m_nb_bins, 0, m_nb_bins*m_ADC_per_bin));
+        else
+        {
+          if (m_nb_bins<0) m_nb_bins = int_cast(1e+6);
+          if (m_bin_max<0) m_bin_max = 5e+7;
+        }
+        m_spectra.emplace(hit.label, MTTHist<TH1F>(name.c_str(), title.c_str(), m_nb_bins, 0, m_bin_max));
         m_spectra[hit.label].Fill(hit.adc);
       }
     }
