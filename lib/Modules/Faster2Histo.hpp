@@ -5,6 +5,7 @@
 #include "../Classes/FilesManager.hpp"
 #include "../Classes/Timer.hpp"
 #include "../Classes/Calibration.hpp"
+#include "../Modules/Timeshifts.hpp"
 
 #include "../MTObjects/MTFasterReader.hpp"
 #include "../MTObjects/MTTHist.hpp"
@@ -12,6 +13,15 @@
 
 #define QDC1MAX
 
+/**
+ * @brief Convert faster data to histograms.
+ * 
+ * @details
+ * 
+ * @todo
+ * event building, timeshifts
+ * 
+ */
 class Faster2Histo
 {
 public:
@@ -45,6 +55,7 @@ public:
   void setOutFilename(std::string const & out_filename) noexcept {m_outFile = out_filename;}
   void setWriteMode(const char* mode) noexcept {delete[] write_mode; write_mode = mode;}
   void loadCalibration(std::string const & calibration_file) {m_calibration.load(calibration_file);}
+  void loadTimeshifts(Timeshifts const & timeshifts) {m_timeshifts = timeshifts;}
   void setNbFiles(int const & _nb_files) noexcept{m_nb_files = _nb_files;}
   void setNbThreads(int const & _nb_threads) {MTObject::setThreadsNb(_nb_threads);}
   void setOutPath(Path const & path) noexcept {m_outPath = path;}
@@ -57,8 +68,10 @@ private:
   FilesManager m_files;
   std::vector<Label> m_labels;
   std::unordered_map<Label, MTTHist<TH1F>> m_spectra;
+  std::unordered_map<Label, MTTHist<TH2F>> m_bidim;
   const char* write_mode = "RECREATE";
   Calibration m_calibration;
+  Timeshifts m_timeshifts;
   TriggerHit m_trigger = [](Hit const & hit) {return true;};
   
   Path m_outPath = Path::pwd();
@@ -68,6 +81,10 @@ private:
 
   int m_nb_bins = -1;
   double m_bin_max = -1;
+
+  bool m_bidim_paris = false;
+  int m_nb_bins_paris = -1;
+  double m_bin_max_paris = -1;
 };
 
 Faster2Histo::Faster2Histo(int argc, char** argv)
@@ -99,6 +116,11 @@ void Faster2Histo::printParameters() const noexcept
   print("--out_path [output_path]    : Set the output path");
   print("--bins     [nb_bins]        : Set the number of bins");
   print("--bin_max  [bin_max]        : Set the maximum bin of the spectra");
+  print("--paris_bidim               : For paris, do QDC1 VS QDC2 bidim.\n"
+        "                              Requires index file loaded and \"PARIS\" in the name of the paris detectors.\n"
+        "                              ATTENTION : make sure you have enough RAM, especially if using multithreading !!!");
+  print("--paris_bins    [nb_bins]   : For paris, set the number of bins on both axis of the bidim");
+  print("--paris_bin_max [bin_max]   : For paris, set the maximum bin on both axis of the bidim");
   // print("-t [time_window_ns]    : Loads timeshift data");
   // print("--throw-single         : If you are not interested in single hits");
   // print("--trigger [filename]   : Load a trigger file (look at documentation)");
@@ -129,9 +151,13 @@ void Faster2Histo::load(int const & argc, char** argv)
     else if (command == "-n") {FasterReader::setMaxHits(std::stoi(argv[++i]));}
     else if (command == "-O") {this -> setOutFilename(argv[++i]);}
     else if (command == "-o") {this -> overwrite(true);}
+    else if (command == "-t") loadTimeshifts(argv[++i]);
     else if (command == "--out_path") {this -> setOutPath(argv[++i]);}
     else if (command == "--bins")     {m_nb_bins = std::stoi(argv[++i]);}
-    else if (command == "--bin_max")  {m_bin_max = std::stoi(argv[++i]);}
+    else if (command == "--bin_max")  {m_bin_max = std::stod(argv[++i]);}
+    else if (command == "--paris_bidim") { m_bidim_paris = true;}
+    else if (command == "--paris_bins")    {m_nb_bins_paris = std::stoi(argv[++i]);}
+    else if (command == "--paris_bin_max") {m_bin_max_paris = std::stod(argv[++i]);} 
     else {throw_error("Unkown command " + command);}
   }
 
@@ -161,10 +187,7 @@ void Faster2Histo::treatFile(Hit & _hit, FasterReader & reader)
   if (m_calibration) while(reader.Read())
   {// Loop through the hits of the .fast file
     // The following has been added to calibrate faster (the classical way uses a random generator to calibrate)
-    auto const & slope = m_calibration.slope(_hit.label);
-    auto const & intercept = m_calibration.intercept(_hit.label);
-    _hit.nrj = (_hit.adc+random_uniform())*slope + intercept;
-    // m_calibration(_hit);
+    m_calibration(_hit);
     fillHisto(_hit);
   }
   else while(reader.Read()) fillHisto(_hit); // With no calibration
@@ -174,39 +197,60 @@ void Faster2Histo::treatFile(Hit & _hit, FasterReader & reader)
 
 inline void Faster2Histo::fillHisto(Hit const & hit)
 {
-  try {
-      m_spectra.at(hit.label).Fill((m_calibration) ? hit.nrj : hit.adc); // Fill the spectra
-    }
-    catch(std::out_of_range const & error)
-    {// Add a new detector label to the map if it doesn't exist
-      lock_mutex lock(MTObject::mutex);
-      if (!found(m_labels, hit.label))// Check if another thread did not already created it
+  try 
+  {
+    m_spectra.at(hit.label).Fill((m_calibration) ? hit.nrj : hit.adc); // Fill the spectra
+  }
+  catch(std::out_of_range const & error)
+  {// Add a new detector label to the map if it doesn't exist
+    lock_mutex lock(MTObject::mutex);
+    if (!found(m_labels, hit.label))// Check if another thread did not already created it
+    {
+      m_labels.push_back(hit.label);
+      std::string name = (detectors) ? detectors[hit.label] : std::to_string(hit.label);
+      std::string title = (detectors) ? detectors[hit.label] : std::to_string(hit.label);
+      if (m_calibration) 
       {
-        m_labels.push_back(hit.label);
-        std::string name = (detectors) ? detectors[hit.label] : std::to_string(hit.label);
-        std::string title = (detectors) ? detectors[hit.label] : std::to_string(hit.label);
-        title += (m_calibration) ? " E" : " adc";
-        if (m_calibration) 
+        title += " E";
+        if (m_nb_bins<0) m_nb_bins = 50000;
+        if (m_bin_max<0) m_bin_max = 50000;
+      }
+      else
+      {
+        title += " adc";
+        if (m_nb_bins<0) m_nb_bins = int_cast(1e+6);
+        if (m_bin_max<0) m_bin_max = 2e+7;
+      }
+      m_spectra.emplace(hit.label, MTTHist<TH1F>(name.c_str(), title.c_str(), m_nb_bins, 0, m_bin_max));
+      m_spectra.at(hit.label).Fill((m_calibration) ? hit.nrj : hit.adc); // Fill the spectra
+
+      if (m_bidim_paris && detectors)
+      {
+        if (m_nb_bins_paris<0) m_nb_bins_paris = 1000;
+        if (m_bin_max_paris<0) m_bin_max_paris = 1.e+5;
+        if (found(detectors[hit.label], "PARIS"))
         {
-          if (m_nb_bins<0) m_nb_bins = 50000;
-          if (m_bin_max<0) m_bin_max = 50000;
+          auto const & name_bidim = name+"_bidim";
+          auto const & title_bidim = title+" QDC2 VS QDC1;QDC1;QDC2";
+          m_bidim.emplace(hit.label, MTTHist<TH2F>(name_bidim.c_str(), title_bidim.c_str(), 
+                m_nb_bins_paris,0,m_bin_max_paris, m_nb_bins_paris,0,m_bin_max_paris));
         }
-        else
-        {
-          if (m_nb_bins<0) m_nb_bins = int_cast(1e+6);
-          if (m_bin_max<0) m_bin_max = 5e+7;
-        }
-        m_spectra.emplace(hit.label, MTTHist<TH1F>(name.c_str(), title.c_str(), m_nb_bins, 0, m_bin_max));
-        m_spectra[hit.label].Fill(hit.adc);
       }
     }
+  }
+
+  if (m_bidim_paris && detectors && found(detectors[hit.label], "PARIS"))
+  {
+    m_bidim[hit.label].Fill(hit.adc, hit.qdc2);
+  }
 }
 
 void Faster2Histo::write(std::string const & out_filename) noexcept
 {
   if (out_filename != "") m_outFile = out_filename;
-  File file(m_outFile);
-  if (!file.path())file.makePath();
+  File file(m_outPath.string()+m_outFile.filename().string());
+  if (!file.path()) file.makePath();
+  file.setExtension(".root");
 
   auto outFile = TFile::Open(m_outFile.c_str(), write_mode);
   outFile->cd();
@@ -217,8 +261,10 @@ void Faster2Histo::write(std::string const & out_filename) noexcept
   {
     auto & spectra = m_spectra[m_labels[label_index]];
     // spectra.Merge();
-    // spectra->GetXaxis()->SetRange(0, spectra->FindLastBinAbove(1));
+    // spectra->GetXaxis()->SetRange(0, spectra->FindLastBinAbove(0));
     spectra.Write();
+
+    m_bidim[m_labels[label_index]].Write();
   }
   outFile->Write();
   outFile->Close();

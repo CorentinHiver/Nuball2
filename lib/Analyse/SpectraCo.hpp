@@ -424,7 +424,6 @@ void SpectraCo::rebin(int const & factor)
       for (int bin_j = 0; bin_j<factor; bin_j ++){
         new_vector[new_bin_it] += m_spectra[new_bin_it * factor + bin_j];
     }}
-    // for (auto & new_bin : new_vector) new_bin /= factor;
   }
 
   else
