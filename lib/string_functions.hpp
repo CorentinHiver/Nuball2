@@ -126,7 +126,7 @@ bool found(std::string const & string, std::string const & _substr)
   return (string.find(_substr) != std::string::npos);
 }
 
-/// @brief Remove substr to the string if it exists
+/// @brief Remove the first substr to the string if found
 bool remove(std::string & string, std::string const & _substr)
 {
   auto pos = string.find(_substr);
@@ -134,6 +134,19 @@ bool remove(std::string & string, std::string const & _substr)
   {
     auto first_str = string.substr(0, pos);
     string = string.substr(0, pos)+string.substr(pos+_substr.size());
+    return true;
+  }
+  else return false;
+}
+
+/// @brief Remove the first char 'c' to the string if found
+bool remove(std::string & string, char const & c)
+{
+  auto pos = string.find(c);
+  if (pos!=std::string::npos)
+  {
+    auto first_str = string.substr(0, pos);
+    string = string.substr(0, pos)+string.substr(pos+1);
     return true;
   }
   else return false;

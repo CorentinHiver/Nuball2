@@ -124,6 +124,7 @@ void create_folder_if_none(std::string const & folderName)
   if(!folder_exists(folderName))
   {
     print("Creating folder", folderName);
+    // mkdir -p to create the full path if needed (otherwise crashes if some of the path is missing)
     system(("mkdir -p "+folderName).c_str());
   }
 }
@@ -472,80 +473,17 @@ public:
   Path(Path const & path) : m_exists(path.m_exists), m_path(path.m_path) {}
 
   /// @brief Turns a string to a path, creating it if create = true and it doesn't already exists
-  Path(std::string const & path, bool const & create = false) : m_path(path) {load(create);}
+  Path(std::string const & path, bool const & create = false) : m_path(path) {loadPath(create);}
 
   /// @brief Turns a C string to a path, creating it if create = true and it doesn't already exists
-  Path(const char* c_str, bool const & create = false) : m_path(std::string(c_str)) {load(create);}
-
-  /// @brief To remove extraneous ./ or ../
-  void cleanPath()
-  {
-    for (std::size_t i = 0; i<m_recursive_folders.size(); i++)
-    {
-      auto const & folder = m_recursive_folders[i];
-      if (folder == "../")
-      {
-        m_recursive_folders.erase(i);   // Delete ".." folder
-        if (i>0) 
-        {
-          m_recursive_folders.erase(--i); // Delete previous folder that is "cancelled" by ".."
-          --i; // Go back to previous folder
-        }
-      }
-      else if (folder == "./")
-      {
-        m_recursive_folders.erase(i); // Delete "." folder
-      }
-    }
-    m_path = "/"+m_recursive_folders.string();
-  }
-
-  void load(bool const & create = false)
-  {
-  #ifdef MTOBJECT_HPP
-    if (MTObject::ON) MTObject::shared_mutex.lock();
-  #endif //MTOBJECT_HPP
-
-    m_recursive_folders.clear();
-    if (m_path[0]=='/')
-    {// Absolute path
-    }
-    else if (m_path[0]=='~')
-    {// Home path
-      m_path.erase(0,1);
-      m_path = home()+m_path;
-    }
-    else
-    {// Relative path
-      m_path = pwd()+m_path;
-    }
-
-    // To ensure it finishes with a '/' :
-    push_back_if_none(m_path, '/');
-
-    //Additionnal information ;
-    this -> makeFolderList();
-
-    // To clean the path of the ./ and ../
-    this -> cleanPath();
-
-    // Create the folder if it doesn't exist yet :
-    if (!(m_exists = folder_exists(m_path)) && create) this -> make();
-    if (!(m_exists = folder_exists(m_path))) print(m_path+" doesn't exist !!");
-
-    // debug(m_path, (m_exists) ? "exists" : "dont exist");
-
-  #ifdef MTOBJECT_HPP
-    if (MTObject::ON) MTObject::shared_mutex.unlock();  
-  #endif //MTOBJECT_HPP
-  }
+  Path(const char* c_str, bool const & create = false) : m_path(std::string(c_str)) {loadPath(create);}
 
   void makeFolderList() {m_recursive_folders = getList(m_path,'/');}
 
   int  nbFiles() {return nb_files_in_folder(m_path);}
   bool exists() {return m_exists;}
   operator bool() const {return folder_exists(m_path);}
-  bool make() { create_folder_if_none(m_path); return this -> exists();}
+  bool make() { create_folder_if_none(m_path); return m_exists = true;}
 
   Path & addFolder(Folder const & folder)
   {
@@ -575,25 +513,25 @@ public:
   Path & operator=(std::string const & inputString)
   {
     m_path = inputString;
-    load();
+    this -> loadPath();
     return *this;
   }
   Path & operator=(Path & path) 
   {
     m_path = path.m_path;
-    load();
+    this -> loadPath();
     return *this;
   }
   Path & operator=(Path const & path) 
   {
     m_path = path.m_path;
-    load();
+    this -> loadPath();
     return *this;
   }
   Path & operator=(const char* path) 
   {
     m_path = path;
-    load();
+    this -> loadPath();
     return *this;
   }
 
@@ -611,6 +549,69 @@ public:
   static Path pwd() {return Path(std::string(std::getenv("PWD")));}
 
 private:
+
+  void loadPath(bool const & create = false)
+  {
+  #ifdef MTOBJECT_HPP
+    if (MTObject::ON) MTObject::shared_mutex.lock();
+  #endif //MTOBJECT_HPP
+
+    m_recursive_folders.clear();
+    if (m_path[0]=='/')
+    {// Absolute path
+    }
+    else if (m_path[0]=='~')
+    {// Home path
+      m_path.erase(0,1);
+      m_path = home()+m_path;
+    }
+    else
+    {// Relative path
+      m_path = pwd()+m_path;
+    }
+
+    // To ensure it finishes with a '/' :
+    push_back_if_none(m_path, '/');
+
+    //Additionnal information ;
+    this -> makeFolderList();
+
+    // To clean the path of the ./ and ../
+    this -> cleanPath();
+
+    // Create the folder if it doesn't exist yet :
+    if (create) {this -> make();}
+    else if (!(m_exists = folder_exists(m_path))) print(m_path+" doesn't exist !!");
+
+  #ifdef MTOBJECT_HPP
+    if (MTObject::ON) MTObject::shared_mutex.unlock();  
+  #endif //MTOBJECT_HPP
+  }
+
+  /// @brief To remove extraneous ./ or ../
+  void cleanPath()
+  {
+    for (std::size_t i = 0; i<m_recursive_folders.size(); i++)
+    {
+      auto const & folder = m_recursive_folders[i];
+      if (folder == "../")
+      {
+        m_recursive_folders.erase(i);   // Delete ".." folder
+        if (i>0) 
+        {
+          m_recursive_folders.erase(--i); // Delete previous folder that is "cancelled" by ".."
+          --i; // Go back to previous folder
+        }
+      }
+      else if (folder == "./")
+      {
+        m_recursive_folders.erase(i); // Delete "." folder
+      }
+    }
+    m_path = "/"+m_recursive_folders.string();
+  }
+
+
   bool m_exists = false;
   std::string m_path;
   Folders m_recursive_folders;
@@ -669,7 +670,12 @@ public:
 
   std::string const & extension() const {return m_extension;}
 
-  void setExtension(std::string const & new_extension) {m_extension = new_extension; update();}
+  void setExtension(std::string const & new_extension) 
+  {
+    m_extension = new_extension; 
+    remove(m_extension, '.');
+    update();
+  }
 
 
 

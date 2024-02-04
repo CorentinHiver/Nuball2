@@ -58,7 +58,7 @@ public:
   void loadTimeshifts(Timeshifts const & timeshifts) {m_timeshifts = timeshifts;}
   void setNbFiles(int const & _nb_files) noexcept{m_nb_files = _nb_files;}
   void setNbThreads(int const & _nb_threads) {MTObject::setThreadsNb(_nb_threads);}
-  void setOutPath(Path const & path) noexcept {m_outPath = path;}
+  void setOutPath(Path const & path) noexcept {m_outPath = path; m_outPath.make();}
   void overwrite(bool const & _overwrite) noexcept {m_overwrite = _overwrite;}
 
 private:
@@ -225,8 +225,7 @@ inline void Faster2Histo::fillHisto(Hit const & hit)
       }
       MTTHist<TH1F> new_histogram(name.c_str(), title.c_str(), m_nb_bins, 0, m_bin_max);
       m_spectra.emplace(hit.label, std::move(new_histogram));
-      m_spectra[hit.label][MTObject::getThreadIndex()]->Fill(hit.adc); // Fill the spectra
-      // m_spectra[hit.label].Fill((m_calibration) ? hit.nrj : hit.adc); // Fill the spectra
+      m_spectra[hit.label].Fill((m_calibration) ? hit.nrj : hit.adc); // Fill the spectra
 
       if (m_bidim_paris && detectors)
       {
@@ -237,7 +236,7 @@ inline void Faster2Histo::fillHisto(Hit const & hit)
           auto const & name_bidim = name+"_bidim";
           auto const & title_bidim = title+" Q_long VS Q_short;Q_short [ADC]; Q_long [ADC]";
           MTTHist<TH2F> bidim(name_bidim.c_str(), title_bidim.c_str(), 
-                m_nb_bins_paris,0,m_bin_max_paris, m_nb_bins_paris,0,m_bin_max_paris)
+                m_nb_bins_paris,0,m_bin_max_paris, m_nb_bins_paris,0,m_bin_max_paris);
           m_bidim.emplace(hit.label, std::move(bidim));
         }
       }
@@ -246,18 +245,22 @@ inline void Faster2Histo::fillHisto(Hit const & hit)
 
   if (m_bidim_paris && detectors && found(detectors[hit.label], "PARIS"))
   {
-    m_bidim[hit.label].Fill(hit.qdc2, hit.adc);
+    if (m_calibration) m_bidim[hit.label].Fill(hit.nrj2, hit.nrj);
+    else               m_bidim[hit.label].Fill(hit.qdc2, hit.adc);
   }
 }
 
 void Faster2Histo::write(std::string const & out_filename) noexcept
 {
   if (out_filename != "") m_outFile = out_filename;
+  print("-----------------");
   File file(m_outPath.string()+m_outFile.filename().string());
+  print(m_outPath.string());
+  print("-----------------");
   if (!file.path()) file.makePath();
-  file.setExtension(".root");
+  file.setExtension("root");
 
-  auto outFile = TFile::Open(m_outFile.c_str(), write_mode);
+  auto outFile = TFile::Open(file.c_str(), write_mode);
   outFile->cd();
   // Ordering of the unordered_map keys :
   auto ordered_labels_indexes = bubble_sort(m_labels);
@@ -272,7 +275,7 @@ void Faster2Histo::write(std::string const & out_filename) noexcept
   for (auto & label_index : ordered_labels_indexes) m_bidim[m_labels[label_index]].Write();
   outFile->Write();
   outFile->Close();
-  print(m_outFile, "written");
+  print(file, "written");
 }
 
 #endif // FASTER2HISTO_HPP
