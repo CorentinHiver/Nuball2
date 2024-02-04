@@ -202,9 +202,11 @@ inline void Faster2Histo::fillHisto(Hit const & hit)
     m_spectra.at(hit.label).Fill((m_calibration) ? hit.nrj : hit.adc); // Fill the spectra
   }
   catch(std::out_of_range const & error)
-  {// Add a new detector label to the map if it doesn't exist
+  {// Add a new histogram to the map if the label has none existing already
     lock_mutex lock(MTObject::mutex);
-    if (!found(m_labels, hit.label))// Check if another thread did not already created it
+
+    // Check if another thread did not already create it between the try and the catch :
+    if (!found(m_labels, hit.label))
     {
       m_labels.push_back(hit.label);
       std::string name = (detectors) ? detectors[hit.label] : std::to_string(hit.label);
@@ -221,8 +223,10 @@ inline void Faster2Histo::fillHisto(Hit const & hit)
         if (m_nb_bins<0) m_nb_bins = int_cast(1e+6);
         if (m_bin_max<0) m_bin_max = 2e+7;
       }
-      m_spectra.emplace(hit.label, MTTHist<TH1F>(name.c_str(), title.c_str(), m_nb_bins, 0, m_bin_max));
-      m_spectra.at(hit.label).Fill((m_calibration) ? hit.nrj : hit.adc); // Fill the spectra
+      MTTHist<TH1F> new_histogram(name.c_str(), title.c_str(), m_nb_bins, 0, m_bin_max);
+      m_spectra.emplace(hit.label, std::move(new_histogram));
+      m_spectra[hit.label][MTObject::getThreadIndex()]->Fill(hit.adc); // Fill the spectra
+      // m_spectra[hit.label].Fill((m_calibration) ? hit.nrj : hit.adc); // Fill the spectra
 
       if (m_bidim_paris && detectors)
       {

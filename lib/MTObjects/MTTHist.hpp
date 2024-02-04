@@ -6,87 +6,71 @@
 
 /**
  * @brief Multithreading wrapper for all THist spectra of root library
- * @author corentin.hiver@ijclab.in2p3.fr
+ * @author corentin.hiver@free.fr
  * @details
  *
  * Inspiration :
  * https://root.cern.ch/doc/master/TThreadedObject_8hxx_source.html#l00167
  *
- * \attention As for any class deriving from MTObject, first initialize the number of threads :
+ * \attention As for any class using my multithreading, initialize the number of threads 
+ * BEFORE instantiating any object :
  * 
  *      MTObject::Initialize(nb_threads)
  * 
  * 
- * Instantiate this class as follow : 
  * 
- *      MTTHist<TH1F> some_TH1F_histo("name", "title:xaxis:yaxis", bins, min, max);
+ * Instantiation :
+ * 
+ *      MTTHist<TH1F> some_TH1F_histo(<normal arguments for TH1F objects>);
  * 
  * Or
  * 
  *      MTTHist<TH1F> some_TH1F_histo;
  *      some_TH1F_histo.reset("name", "title:xaxis:yaxis", bins, min, max);
  * 
- * \attention Please do not use the copy constructors and operators, may need proper work to make it safe
- * 
- * In default mode, nb_threads histograms are created
+ * In default mode, [nb_threads] sub_histograms are created
  * \test In mono mode (MTTHIST_MONO), only one histogram is created UNDER DEVELOPPEMENT
  * 
- * To fill the histogram from threads : 
+ * To fill the histogram from within one thread : 
  * 
- *          some_TH1F_histo.Fill()
+ *          some_TH1F_histo[MTObject::getThreadIndex()]->Fill(<normal arguments for TH1*::Fill()>)
  * 
- * Once the histogram have been filled, two options : 
+ * Or in a more concise way (preferred) :
  * 
- * - Either write it down directly : 
+ *          some_TH1F_histo.Fill(<normal arguments for TH1*::Fill()>)
  * 
-  *        // Open a TFile
-  *        some_TH1F_histo.Write()
-  *        // Write and close the TFile
+ * Once the histograms have been filled, two options : 
  * 
- * - Or you can merge the histograms :
+ * Either write it down directly : 
+ * 
+ *         // Open a TFile and cd() inside
+ *         some_TH1F_histo.Write(); //Merges the sub_histograms then write it if it has counts
+ *         // Write and close the TFile
+ * 
+ * Or you can merge the histograms :
  * 
  *        some_TH1F_histo.Merge();
  *
  *    You can then address the merged histogram using -> : 
  *        
  *        some_TH1F_histo->Integral();
- * 
- * Special case : you can also instanciate and write down one histogram per thread.
- * 
- * Example : 
- *        void single_thread(MTTHist & histo)
- *        {
- *          histo.reset("name","title", args...);
- *          ... Fill the histo
- *          histo.Write();
- *        }
- * 
- *        int main()
- *        {
- *          MTTHist<TH1> one_histo_per_thread;
- *          std::parallelise_function(single_thread, on_histo_per_thread);
- *          return 1;
- *        }
- * 
- * In this case each histogram is kept separated, no merge occurs. Use this if you want to make the benefits of the user defined
- * method of this class or for consistency with the rest of the code. It is equivalent to declare the histogram directly inside 
- * the funcion
- * 
- * @todo better memory management
+ *        some_TH1F_histo->GetEntries();
+ *        some_TH1F_histo->Write();
+ *        ...
  */
 template <class THist>
 class MTTHist
 {
 public:
-  /**
-   * @brief Construct a new MTTHist object and send the arguments directly to the underlying root histogramm
-   */
+
+  /// @brief Construct a new MTTHist object and send the arguments directly to the underlying root histogramm
   template <class... ARGS>
   MTTHist(ARGS &&... args) 
   {
     this -> reset(std::forward<ARGS>(args)...);
   }
 
+  /// @brief Default initialisator
   template <class... ARGS>
   MTTHist()
   {
@@ -176,55 +160,24 @@ public:
   #endif // NO MTTHIST_MONO
   {
     // The moved object is now in an undefined state.
-    // It is better to put it back to a initialised state :
-    hist.clean(); 
+    // It is better to put it back to a defined state :
+    hist.cleanMove(); 
   }
 
-  void clean()
+  void cleanMove()
   {
     m_comment  = "";
     m_name = "";
     m_exists = false;
     m_written  = false;
     m_integral = 0ull;
-    delete m_merged;
-
-  #ifndef MTTHIST_MONO  
+    m_merged = nullptr;
+    for (auto & histo : m_collection) histo = nullptr;
     m_is_merged  = false;
-    for (auto & histo : m_collection) delete histo;
-  #endif // NO MTTHIST_MONO 
+
   }
 
-  // /**
-  //  * @brief Copy assignement
-  //  * @attention Please do not use, doesn't seems very safe ...
-  // */
-  // void operator=(MTTHist<THist> const & hist)
-  // {
-  //   // throw_error("NO COPY ASSIGNEMENT WORKING YET FOR MTTHist");
-  //   m_comment  = hist.m_comment;
-  //   m_name = hist.m_name;
-  //   m_exists   = hist.m_exists;
-  //   m_written  = hist.m_written;
-  //   m_integral = hist.m_integral;
-  //   m_merged   = hist.m_merged;
-  // #ifndef MTTHIST_MONO
-  //   m_is_merged  = hist.m_is_merged;
-  //   m_collection = hist.m_collection;
-  // #endif // NO MTTHIST_MONO
-  // }
   // void operator=(std::nullptr_t) {reset(nullptr);}
-
-  // void operator=(THist * hist)
-  // {
-
-  //   m_name = hist->GetName();
-  //   m_is_merged = true;
-  //   m_collection.resize(1);
-  //   m_exists = true;
-  //   m_integral = hist->Integral();
-  // }
-
 
 
   // // ---   GENERIC INITIALIZATION --- //
@@ -234,17 +187,20 @@ public:
    */
   auto reset(MTTHist<THist> const & hist) 
   { 
-    m_comment  = hist.m_comment;
-    m_name     = hist.m_name;
-    m_exists   = hist.m_exists;
-    m_written  = hist.m_written;
-    m_integral = hist.m_integral;
-    *m_merged   = *hist.m_merged;
-  #ifndef MTTHIST_MONO
-    m_is_merged  = hist.m_is_merged;
-    m_collection = hist.m_collection;
-  #endif // NO MTTHIST_MONO
-    return *this;
+    throw CopyError(hist);
+    // m_comment  = hist.m_comment;
+    // m_name     = hist.m_name;
+    // m_exists   = hist.m_exists;
+    // m_written  = hist.m_written;
+    // m_integral = hist.m_integral;
+    // *m_merged  = new TH1F(*hist.m_merged);
+    // m_collection.reserve(hist.m_collection.size());
+    // for (auto const & histo : hist.m_collection) 
+    // {
+    //   m_collection.push_back(histo->Clone())
+    // m_collection = hist.m_collection;
+    // m_is_merged  = hist.m_is_merged;
+    // return *this;
   }
 
   MTTHist<THist> & operator=(MTTHist<THist> const & hist)
@@ -263,13 +219,13 @@ public:
   // template <class... ARGS>
   // void reset() {m_exists = false;}
 
-  //Nullptr initialiser, to create a zombie as default initializer :
+  //Nullptr initialiser :
   template <class... ARGS>
   void reset(std::nullptr_t)
   {
     m_exists = false;
     delete m_merged;
-    for (auto & histo : m_collection) delete histo;
+    if (MTObject::ON) for (auto & histo : m_collection) delete histo;
   }
 
   //General initialiser to construct any root histogram vector starting with its name:
@@ -324,7 +280,7 @@ public:
   #else // not MTTHIST_MONO :
   void Merge();
   void Merge_t(); // Used in multithreading
-  void static Merge_thread(MTTHist<THist> & histo); // Used in multithreading
+  // void static Merge_thread(MTTHist<THist> & histo); // Used in multithreading
   THist * Merged();
   THist * Get(ushort const & thread_nb) {return m_collection[thread_nb];}
   THist * Get() {return m_collection[MTObject::getThreadIndex()];}
@@ -362,15 +318,24 @@ private:
   std::vector<THist*> m_collection;
 #endif //MTTHIST_MONO
 
-  static MTCounter m_nb_thread_running;      // Attempt to make the merging in parallel
-  static std::condition_variable m_condition;// Attempt to make the merging in parallel
+  // static MTCounter m_nb_thread_running;      // Attempt to make the merging in parallel
+  // static std::condition_variable m_condition;// Attempt to make the merging in parallel
   static bool m_verbose;
+
+public:
+  class CopyError
+  {public:
+    CopyError(MTTHist<THist> const & histo) 
+    {
+      error("Can't copy MTTHist !! (", histo.name(), "). You need to std::move() it.");
+    }
+  };
 };
 
 template<class THist> bool MTTHist<THist>::m_verbose = true;
 
-template<class THist> MTCounter MTTHist<THist>::m_nb_thread_running{0};
-template<class THist> std::condition_variable MTTHist<THist>::m_condition;
+// template<class THist> MTCounter MTTHist<THist>::m_nb_thread_running{0};
+// template<class THist> std::condition_variable MTTHist<THist>::m_condition;
 
 template <class THist>
 template <class... ARGS>
@@ -448,25 +413,25 @@ inline void MTTHist<THist>::Merge_t()
   }
 }
 
-// We could translate this inside MTObject after testing it really works
-/// @brief do no work
-template <class THist>
-inline void MTTHist<THist>::Merge_thread(MTTHist<THist> & Histos)
-{
-  std::unique_lock<std::mutex> lock(Histos.m_mutex);
-  while (m_nb_thread_running>=MTObject::getThreadsNb()) 
-  {
-    Histos.m_condition.wait(lock);
-  }
-  m_nb_thread_running.increment();
-  lock.unlock();
+// // We could translate this inside MTObject after testing it really works
+// /// @brief do no work
+// template <class THist>
+// inline void MTTHist<THist>::Merge_thread(MTTHist<THist> & Histos)
+// {
+//   std::unique_lock<std::mutex> lock(Histos.m_mutex);
+//   while (m_nb_thread_running>=MTObject::getThreadsNb()) 
+//   {
+//     Histos.m_condition.wait(lock);
+//   }
+//   m_nb_thread_running.increment();
+//   lock.unlock();
 
-  Histos.Merge_t();
+//   Histos.Merge_t();
 
-  lock.lock();
-  m_nb_thread_running.decrement();
-  Histos.m_condition.notify_one();
-}
+//   lock.lock();
+//   m_nb_thread_running.decrement();
+//   Histos.m_condition.notify_one();
+// }
 
 template<class THist>
 void MTTHist<THist>::Merge()
