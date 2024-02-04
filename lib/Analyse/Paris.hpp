@@ -79,6 +79,12 @@ public:
   auto & front () { return clusterFront;}
   // _____________________________________________________________ //
 
+  // _____________________________________________________________ //
+  // ------------ Qshort VS Qlong bidim manipulations ------------
+  static void orthogonalise(TH2F* bidim);
+  static void findAngles(TH2F* bidim, int nb_bins = 1);
+  // _____________________________________________________________ //
+
 private:
   static bool s_initialised;
   bool m_initialised = false;
@@ -117,5 +123,28 @@ void inline Paris::Analyse()
   clusterBack.Analyse();
   clusterFront.Analyse();
 }
+
+void Paris::findAngles(TH2F* bidim, int nb_bins = 1);
+{
+  auto const & nb_bins_long = bidim->GetNbinsX();
+  auto const & nb_bins_short = bidim->GetNbinsY();
+
+  auto const & nb_iterations_long = nb_bins_long/nb_bins;
+  auto const & nb_iterations_short = nb_bins_short/nb_bins;
+
+  std::vector<double> peaks_;
+
+  for (int it = 0; it<nb_iterations_long; it++)
+  {
+    auto proj_long = std::make_unique<TH1F> (bidim->ProjectionX("temp_long"), it*nb_bins, it*(nb_bins+1));
+    
+  }
+}
+
+void Paris::orthogonalise(TH2F* bidim)
+{
+
+}
+
 
 #endif //PARIS_HPP

@@ -7,6 +7,11 @@
 
 #include "../Classes/Calibration.hpp"
 
+class MyError
+{public:
+  MyError(std::string const & message = "") {print((message=="") ? "error" : message);}
+};
+
 using SpectraPoint = std::pair<int, double>;
 using SpectraPoints = std::vector<SpectraPoint>;
 
@@ -220,9 +225,9 @@ public:
   auto       & peaks()          {return m_peaks         ;}
   
   // Calculators :
-  SpectraCo* derivate(uint smooth = 1);
-  SpectraCo* derivate2(uint smooth = 1);
-  void removeBackground(uint const & smooth, std::string const & fit_options = "");
+  SpectraCo* derivate(int smooth = 1) noexcept;
+  SpectraCo* derivate2(int smooth = 1) noexcept;
+  void removeBackground(int const & smooth, std::string const & fit_options = "");
   double integralInRangeBin(int const & bin_min, int const & bin_max);
   double integralInRange(double const & value_min, double const & value_max);
   double meanInRangeBin(int const & bin_min, int const & bin_max);
@@ -239,6 +244,12 @@ public:
 
   SpectraCo* derivative2() {return m_derivative2;}
   SpectraCo* derivative2(std::string const & name);
+
+  /**
+   * @brief Inverses the spectra : negative values become positive and positive values become negative
+   * @details Do not touch the derivatives
+   */
+  void inverse() {for (auto & value : m_spectra) value = -value;}
 
   int lastBinWithValue() const noexcept
   {
@@ -266,10 +277,27 @@ public:
   TH1D* createTH1D(std::string newName = "", std::string newTitle = "");
   TH1F* createTH1F(std::string newName = "", std::string newTitle = "");
   
-  void write()                          {                 this->createTH1F(name())->Write();             }
-  void write(TDirectory* directory)     {directory->cd(); this->createTH1F(name())->Write(); gROOT->cd();}
-  void writeTH1D()                      {                 this->createTH1D(name())->Write();             }
-  void writeTH1D(TDirectory* directory) {directory->cd(); this->createTH1D(name())->Write(); gROOT->cd();}
+  void write() 
+  {
+    this->createTH1F(name())->Write();
+  }
+  void write(TDirectory* directory)
+  {
+    auto histo = this->createTH1F(name()); 
+    directory->cd(); 
+    histo->Write(); 
+    gROOT->cd();
+  }
+  void writeTH1D()
+  {
+    this->createTH1D(name())->Write();
+  }
+  void writeTH1D(TDirectory* directory) 
+  {
+    directory->cd(); 
+    this->createTH1D(name())->Write(); 
+    gROOT->cd();
+  }
 
   // To get the bin's content (TH1::getBinContent):
   auto const & get        (int const & bin) const noexcept {return m_spectra[bin];}
@@ -614,7 +642,7 @@ double SpectraCo::interpolate(double const & bin) const noexcept
  * @param smooth 
  * @param fit_options 
  */
-void SpectraCo::removeBackground(uint const & smooth, std::string const & fit_options)
+void SpectraCo::removeBackground(int const & smooth, std::string const & fit_options)
 {
   auto file = gROOT -> GetFile();
   if (file) gROOT->cd();
@@ -670,57 +698,53 @@ double SpectraCo::meanInRange(double const & value_min, double const & value_max
 }
 
 
-SpectraCo* SpectraCo::derivate(uint smooth)
+SpectraCo* SpectraCo::derivate(int smooth) noexcept
 {
-  // The smooth is too big if > 200, therefore the spectra is first rebin with smooth/100 
-  // TODO
-  // if (smooth>=200)
-  // {
-  //   int nb_rebin = smooth/100;
-  //   this->rebin(nb_rebin);
-  //   smooth = 100;
-  // }
-
-  m_derivative = new SpectraCo(*this); // Optimize here
+  m_derivative = new SpectraCo(*this); // Can optimize here
   m_derivative->name() = m_name+"_der";
 
+  auto const & smooth_range = 2*smooth;
+
+  int lower_bin = 0;
+  int upper_bin = 0;
   double low_sum = 0.0;
   double up_sum = 0.0;
-  int lower_bin = 0;
-  int upper_bin = m_size;
   for (int bin = 0; bin<m_size; bin++)
   {
-    // First, sum the content of all the bins on the left :
-    low_sum = 0.0;
-    for (int bin_low = ((lower_bin = bin-smooth) < 1) ? 0 : lower_bin; bin_low<bin; bin_low++)
-    {
-      low_sum+=m_spectra[bin_low];
+    lower_bin = bin-smooth;
+    upper_bin = bin+smooth;
+
+    // Before all, handle side effects : 
+    // At the beginning and the end of the spectra, there are not enough bins on both sides to smooth correctly
+    // Therefore, we have to set a correct number of bins
+    if (lower_bin<0)
+    {// For the first bins of the histogram
+      lower_bin = 0;
+      upper_bin = 2*bin;
     }
+    else if (upper_bin > m_size-1)
+    {// For the last bins of the histogram
+      lower_bin = 2*bin-m_size;
+      upper_bin = m_size;
+    }
+
+    low_sum = 0.0;
+    up_sum = 0.0;
+
+    // First, sum the content of all the bins on the left :
+    for (int bin_low = lower_bin; bin_low<bin; bin_low++) {low_sum+=m_spectra[bin_low];}
 
     // Second, sum the content of all the bins on the right :
-    up_sum = 0.0;
-    upper_bin = ((upper_bin = bin+smooth)<(m_size+1)) ? upper_bin : m_size;
-    for (int bin_up = bin; bin_up<upper_bin; bin_up++)
-    {
-      up_sum+=m_spectra[bin_up];
-    }
+    for (int bin_up = bin+1; bin_up<upper_bin; bin_up++) {up_sum+=m_spectra[bin_up];}
 
     // Calculate the derivative : (sum_right - sum_left) / (x_right - x_left)
-    (*m_derivative)[bin] = (up_sum-low_sum)/(2*smooth);
+    (*m_derivative)[bin] = (up_sum-low_sum)/(smooth_range);
   }
   return m_derivative;
 }
 
-SpectraCo* SpectraCo::derivate2(uint smooth)
+SpectraCo* SpectraCo::derivate2(int smooth)noexcept
 {
-  // TODO
-  // if (smooth>=200)
-  // {
-  //   int nb_rebin = smooth/100;
-  //   this->rebin(nb_rebin);
-  //   smooth = 100;
-  // }
-
   derivate(smooth);
   m_derivative2 = m_derivative->derivate(smooth);
   return m_derivative2;

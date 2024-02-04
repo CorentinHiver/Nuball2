@@ -1,6 +1,8 @@
 #include "../libRoot.hpp"
 #include <Calibrator.hpp>
 
+#define NSI129
+
 //argv parameters : 1 -> only the source, 2 -> only the runs, default -> both
 int main(int argc, char ** argv)
 {
@@ -11,13 +13,14 @@ int main(int argc, char ** argv)
   // This part uses the 152Eu run to calibrate the BGO and PARIS
   // ----------------------------------------------------------- //
   std::vector<double> Eu152 = {121.7830, 344.2760, 778.9030, 964.1310, 1408.0110};
-  std::vector<double> Th232 = {238.632, 338.32, 510.770, 583.191, 911.204, 968.971, 964.1310, 1408.0110, 2614.533};
+  std::vector<double> Th232 = {238.632, 338.32, 510.770, 583.191, 911.204, 2614.533};
 
   auto file (TFile::Open("~/faster_data/N-SI-136-sources_histo/152Eu_center.root", "READ"));
   auto histo_map (get_TH1F_map(file));
   gROOT -> cd();
 
   double energy = Eu152.back();
+
 
   // Peak finder parameters :
   int rebin = 20;  // Smooth parameter used to calculate the second derivative
@@ -79,7 +82,7 @@ int main(int argc, char ** argv)
       {
         auto guess_ADC = Eu152[peak_i]/adc_to_keV;
 
-        // auto derivative2 = *(spectrum.derivative2());
+        auto derivative2 = *(spectrum.derivative2());
         auto rebin_keV = derivative2.getX(rebin);
 
         guess_ADC = derivative2.meanInRange(guess_ADC-5*rebin_keV, guess_ADC+5*rebin_keV);

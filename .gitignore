@@ -7,3 +7,6 @@
 *.log
 *.ek4
 *.spe
+executables/faster2histo
+executables/faster2root
+executables/manip2root

@@ -9,6 +9,7 @@ void calibrate_spectra
 
 {
   detectors.load("index_129.list");
+  // for (Label label = 0; label<detectors.size(); label++) print(label, detectors.exists(label));
   Calibrator calib_test;
   calib_test.loadCalibration(calibration_file);
   calib_test.verbose(true);

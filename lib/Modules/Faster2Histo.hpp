@@ -227,11 +227,11 @@ inline void Faster2Histo::fillHisto(Hit const & hit)
       if (m_bidim_paris && detectors)
       {
         if (m_nb_bins_paris<0) m_nb_bins_paris = 1000;
-        if (m_bin_max_paris<0) m_bin_max_paris = 1.e+5;
+        if (m_bin_max_paris<0) m_bin_max_paris = 2.e+5;
         if (found(detectors[hit.label], "PARIS"))
         {
           auto const & name_bidim = name+"_bidim";
-          auto const & title_bidim = title+" QDC2 VS QDC1;QDC1;QDC2";
+          auto const & title_bidim = title+" Q_long VS Q_short;Q_short [ADC]; Q_long [ADC]";
           m_bidim.emplace(hit.label, MTTHist<TH2F>(name_bidim.c_str(), title_bidim.c_str(), 
                 m_nb_bins_paris,0,m_bin_max_paris, m_nb_bins_paris,0,m_bin_max_paris));
         }
@@ -241,7 +241,7 @@ inline void Faster2Histo::fillHisto(Hit const & hit)
 
   if (m_bidim_paris && detectors && found(detectors[hit.label], "PARIS"))
   {
-    m_bidim[hit.label].Fill(hit.adc, hit.qdc2);
+    m_bidim[hit.label].Fill(hit.qdc2, hit.adc);
   }
 }
 
@@ -263,9 +263,8 @@ void Faster2Histo::write(std::string const & out_filename) noexcept
     // spectra.Merge();
     // spectra->GetXaxis()->SetRange(0, spectra->FindLastBinAbove(0));
     spectra.Write();
-
-    m_bidim[m_labels[label_index]].Write();
   }
+  for (auto & label_index : ordered_labels_indexes) m_bidim[m_labels[label_index]].Write();
   outFile->Write();
   outFile->Close();
   print(m_outFile, "written");

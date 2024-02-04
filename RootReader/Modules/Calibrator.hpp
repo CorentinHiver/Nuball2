@@ -9,7 +9,7 @@ class Calibrator
 {
 public:
 
-  Calibrator(){};
+  Calibrator(){for (Label label = 0; label<detectors.size(); label++) print(label, detectors.exists(label));};
   bool launch(Parameters & p);
   bool setParameters(std::vector<std::string> const & param);
   void InitializeManip();

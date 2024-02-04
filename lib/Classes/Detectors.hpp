@@ -59,6 +59,8 @@ public:
 
   // static bool typeHandled(int const & id) const {} TODO
   // static bool typeID(int const & id) const {} TODO
+
+  /// @brief Does this label correspond to a detector ?
   bool exists(Label const & label) {return m_exists[label];}
 
   /// @brief Reads the file and extracts the list of detectors, then fills the lookup tables 
@@ -172,12 +174,6 @@ public:
   auto const & file() const {return m_filename;}
 
   
-  class Error
-  { public:
-    Error() noexcept {error("Detector ID file not loaded");}
-    Error(std::string const & message) noexcept {error(message);}
-  };
-
 protected:
 
   // Useful informations :
@@ -203,6 +199,15 @@ protected:
   static std::unordered_map<dType, THBinning> energy_bins;
   static std::unordered_map<dType, THBinning> ADC_bins;
   static std::unordered_map<dType, THBinning> energy_bidim_bins;
+
+  public:
+  
+  class Error
+  { public:
+    Error() noexcept {error("Detector ID file not loaded");}
+    Error(std::string const & message) noexcept {error(message);}
+  };
+
 
 } detectors;
 

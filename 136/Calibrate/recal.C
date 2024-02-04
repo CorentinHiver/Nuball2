@@ -1,6 +1,8 @@
 #include "../../lib/Analyse/AnalysedSpectra.hpp"
 #include "../../lib/Analyse/SpectraCo.hpp"
 
+#define NSI129
+
 /**
  * @brief first step : uses the 152Eu calibration on the run data
  * and perform a manual peak finding. The result is 136_ajustation.calib
@@ -9,7 +11,7 @@
  * the eventual issues by looking at the spectra in 136_recal.root
  * 
  */
-void recal(std::string detectors = "PARIS")
+void recal(std::string _detectors = "PARIS", std::vector<double> peaks = {})
 {
   detectors.load("index_129.list");
   std::string infile = "test_calib.root";
@@ -32,25 +34,24 @@ void recal(std::string detectors = "PARIS")
 
     int rebin = 2;
     int smooth = 10;
-    std::vector<double> peaks;
     if (found(name, "PARIS")) 
     {
+      if (_detectors!="PARIS") continue;
       rebin = 20; 
       smooth = 20; 
-      peaks = {511, 1779};
-      if (detectors!="PARIS") continue;
+      if (peaks.size() == 0) peaks = {511, 1779};
     }
     else if (found(name, "red") || found(name, "blue") || found(name, "green") || found(name, "black")) 
     {
+      if (_detectors!="GE") continue;
       rebin = 10; 
       smooth = 10; 
-      if (detectors!="GE") continue;
     }
     else if (found(name, "BGO")) 
     {
+      if (_detectors!="BGO") continue;
       rebin = 40; 
       smooth = 10; 
-      if (detectors!="BGO") continue;
     }
     else continue;
     
@@ -80,15 +81,22 @@ void recal(std::string detectors = "PARIS")
 
   file->Close();
 
+#ifdef NSI129
+  std::string outname = "129_recal.root";
+#else
   std::string outname = "136_recal.root";
+#endif //NSI129
   auto outFile = TFile::Open(outname.c_str(), "recreate");
   outFile->cd();
   for (auto it : spectra) it.second.write();
   outFile->Write();
   outFile->Close();
   print(outname, "written");
-
+  
+#ifdef NSI129
+  calib.write("129_ajustation"); 
+#else
   calib.write("136_ajustation");
-
+#endif //NSI129
 
 }

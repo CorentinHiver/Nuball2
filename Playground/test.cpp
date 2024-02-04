@@ -11,26 +11,31 @@
 // #include <Faster2Histo.hpp>
 // #include <EvolutionPeaks.hpp>
 // #include <AnalysedSpectra.hpp>
-#include <DSSD.hpp>
+// #include <DSSD.hpp>
+// #include <SpectraCo.hpp>
+#include "../136/Calibrate/calibrate_spectra.C"
 
 
 int main(int argc, char ** argv)
 {
-  // detectors.load("index_129.list");
+  // for (Label label = 0; label<deroottectors.size(); label++) print(label, detectors.exists(label));
+  calibrate_spectra("~/faster_data/N-SI-129-source_histo/152Eu_center_spectra.root", "../136/129_2024.calib");
+  // calibrate_spectra("~/faster_data/N-SI-129-source_histo/Th232_both_sides.root", "../136/129_2024.calib");
 
   // Faster2Histo(argc, argv);
-  DSSD dssd;
-  auto coeff = 180/3.14159;
+  // DSSD dssd;
+  // auto coeff = 180/3.14159;
 
-  for (auto i = dssd.innerRadius; i<dssd.outerRadius; i+=dssd.ring_thickness)
-  {
-    auto const & begin-1 = i-dssd.ring_thickness;
-    auto const & begin = i;
-    auto const & end = i+dssd.ring_thickness;
-    auto const & begin_angle = atan(begin/dssd.distance)*coeff;
-    auto const & end_angle = atan(end/dssd.distance)*coeff;
-    print(begin, end, " : ",begin_angle, end_angle, end_angle-begin_angle);
-  }
+  // for (auto i = dssd.innerRadius; i<dssd.outerRadius; i+=dssd.ring_thickness)
+  // {
+  //   auto const & begin-1 = i-dssd.ring_thickness;
+  //   auto const & begin = i;
+  //   auto const & end = i+dssd.ring_thickness;
+  //   auto const & begin_angle = atan(begin/dssd.distance)*coeff;
+  //   auto const & end_angle = atan(end/dssd.distance)*coeff;
+  //   print(begin, end, " : ",begin_angle, end_angle, end_angle-begin_angle);
+  // }
+
 
   // Calibrator calib;
   // calib.loadCalibration("../136/conversion_200ns/136_2024.calib");

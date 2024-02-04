@@ -112,7 +112,7 @@ private:
   static bool m_treatOnlyGe;
   bool m_calibrate_data = false;
 
-  Fits m_fits;
+  Fits m_fits = Fits(100);
 
   Path dataPath;
 
@@ -127,6 +127,8 @@ private:
   // std::map<Label, int> m_nb_bins_below;
   std::map<int, int> m_nb_bins_below;
 
+  bool m_histo_loaded = false;
+
 
 public:
   struct histograms
@@ -140,7 +142,7 @@ public:
     Vector_MTTHist<TH2F> all_calib;
 
     // Other spectra :
-    std::map<Label, TH1F*> spectra;
+    std::map<Label, SpectraCo> spectra;
 
     void Initialize();
     void setTypeBins(std::string const & parameters);
@@ -288,6 +290,9 @@ void Calibrator::calculate2(std::string const & histogramsFilename, std::vector<
 void Calibrator::loadRootHisto(std::string const & histograms)
 {
   this -> Initialize();
+  m_histo_loaded = true;
+  
+  print("Loading histograms ...");
   
   readFile = TFile::Open(histograms.c_str());
   readFile->cd();
@@ -297,8 +302,8 @@ void Calibrator::loadRootHisto(std::string const & histograms)
   {
     auto const & label = it.first;
     auto const & histo = it.second;
-    m_histos.raw_spectra[label] = histo;
-    // m_histos.spectra[label] = histo;
+    // m_histos.raw_spectra[label] = histo;
+    m_histos.spectra[label].load(histo);
   }
   // for (auto const & spectra : m_histos.spectra) print(spectra);
 }
@@ -806,10 +811,8 @@ void Calibrator::analyse2(std::vector<double> peaks)
 
     print("Treating", name);
 
-    auto spectra = m_histos.spectra[label];
-
-    CoAnalyse::removeBackground(spectra, rebin); // Allows for a cleaner peak finding
-    SpectraCo spectraCo(spectra); // Loads the spectra (copy)
+    auto & spectraCo = m_histos.spectra[label];
+    spectraCo.removeBackground(rebin); // Allows for a cleaner peak finding
     spectraCo.derivate2(rebin); // Calculate the second derivative spectra
     debug("coucou3");
 
@@ -956,18 +959,25 @@ void Calibrator::writeRawRoot(std::string const & outfilename)
  */
 void Calibrator::verify(std::string const & outfilename)
 {
+  if (!detectors) throw Detectors::Error();
   std::vector<size_t> nb_det_filled(detectors.nbTypes(), 0);
-  std::map<Label, SpectraCo> spectra;
   print("Verification of the calibration");
-  for (Label label = 0; label<m_histos.raw_spectra.size(); label++) 
+  for (auto const & it : detectors.labels()) 
   {
-    if (!detectors.exists(label)) continue;
-    auto const & name = detectors[label];
-    auto & raw_histo = m_histos.raw_spectra[label];
-    if (raw_histo.Integral()<1) {if (m_verbose) information(name, "has no hit"); continue;}
-    raw_histo.Merge();
-    auto & calib_histo = m_histos.calib_spectra[label];
-    calib_histo.Merge();
+    auto const & name = it.first;
+    auto const & label = it.second;
+
+    if (!m_histo_loaded)
+    {// If the raw spectra come from the calibration calculation
+      auto & raw_histo = m_histos.raw_spectra[label];
+      raw_histo.Merge();
+      m_histos.spectra[label].load(raw_histo.get());
+    }
+
+    auto & spectrum = m_histos.spectra[label];
+    print(spectrum);
+
+    if (spectrum.integral()<1) {if (m_verbose) information(name, "has no hit"); continue;}
     auto & fit = m_fits[label];
 
     // Extract useful information : 
@@ -979,7 +989,8 @@ void Calibrator::verify(std::string const & outfilename)
       if (m_calib && m_calib.size()>=label) 
       {
         information("reading Calibration module");
-        print(label, (int)m_calib.order(label), m_calib.intercept(label), m_calib.slope(label));
+        information(label, (int)m_calib.order(label), m_calib.intercept(label), m_calib.slope(label));
+        if (fit.order<0) continue;
         fit.order = m_calib.order(label);
         fit.parameter0 = m_calib.intercept(label);
         fit.parameter1 = m_calib.slope(label);
@@ -988,44 +999,29 @@ void Calibrator::verify(std::string const & outfilename)
       else continue;
     }
 
-    auto const & xaxis_raw = raw_histo -> GetXaxis();
-    auto const & nb_bins = xaxis_raw -> GetNbins();
-    auto const & bin_width = xaxis_raw -> GetXmax() / nb_bins;
-
-    if (raw_histo->GetEntries()<1.e+6) // Only for histograms
-    for(int bin = 0; bin<nb_bins; bin++)
-    {
-      auto const & counts_in_bin = raw_histo -> GetBinContent(bin);
-      ADC const & raw_ADC = xaxis_raw -> GetBinCenter(bin);
-      for (int hit = 0; hit<counts_in_bin; hit++)
-      {
-        auto nrj = NRJ_cast(raw_ADC + bin_width*gRandom->Uniform(0,1));
-        switch(fit.order)
-        {
-          case 0 : nrj =                  nrj*fit.parameter1; break;
-          case 1 : nrj = fit.parameter0 + nrj*fit.parameter1; break;
-          case 2 : nrj = fit.parameter0 + nrj*fit.parameter1 + nrj*nrj*fit.parameter2; break;
-        }
-        calib_histo -> Fill(nrj);
-        m_histos.all_calib[type_index]->Fill(double_cast(nb_det_filled[type_index]), nrj);
-      }
-    }
-    else
-    {
-      SpectraCo spectrum(raw_histo.get());
-      spectrum.calibrate(m_calib, label);
-      calib_histo = spectrum.createTH1F(name+"_calib");
-      // AddTH1ByValue(m_histos.all_calib[type_index].get(), calib_histo.get(), nb_det_filled[type_index]);
+    spectrum.name() = spectrum.name() + "_calib";
+    spectrum.calibrate(m_calib, label);
+    double type_id = double_cast(compressedLabel[label]);
+    auto & sum_histo =  m_histos.all_calib[type_index];
+    for (int bin = 0; bin<sum_histo->GetNbinsY(); bin++)
+    { // Target is sum_histo, source is spectrum
+      auto const & target_X_value = sum_histo->GetYaxis()->GetBinCenter(bin);
+      auto const & source_bin = spectrum.getBin(target_X_value);
+      sum_histo->SetBinContent(type_id, bin, spectrum.interpolate(source_bin));
     }
     nb_det_filled[type_index]++;
   }
   auto file = TFile::Open((outfilename+"_calib.root").c_str(), "recreate");
   file->cd();
-  for (auto & it : spectra) it.second.write();
+  for (auto & histo : m_histos.all_calib) if (histo && !histo->IsZombie() && histo->Integral() > 0) histo->Write();
+  for (auto & it : m_histos.spectra) 
+  {
+    it.second.setActualRange();
+    it.second.write(file);
+  }
   file->Write();
   file->Close();
   print(outfilename+"_calib.root", "written");
-  writeCalibratedHisto(outfilename+"_calib.root");
 }
 
 void Calibrator::writeCalibratedHisto(std::string const & outfilename)
