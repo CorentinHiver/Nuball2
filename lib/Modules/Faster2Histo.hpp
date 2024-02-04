@@ -236,8 +236,9 @@ inline void Faster2Histo::fillHisto(Hit const & hit)
         {
           auto const & name_bidim = name+"_bidim";
           auto const & title_bidim = title+" Q_long VS Q_short;Q_short [ADC]; Q_long [ADC]";
-          m_bidim.emplace(hit.label, MTTHist<TH2F>(name_bidim.c_str(), title_bidim.c_str(), 
-                m_nb_bins_paris,0,m_bin_max_paris, m_nb_bins_paris,0,m_bin_max_paris));
+          MTTHist<TH2F> bidim(name_bidim.c_str(), title_bidim.c_str(), 
+                m_nb_bins_paris,0,m_bin_max_paris, m_nb_bins_paris,0,m_bin_max_paris)
+          m_bidim.emplace(hit.label, std::move(bidim));
         }
       }
     }
