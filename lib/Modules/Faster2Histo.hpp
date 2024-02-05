@@ -235,7 +235,7 @@ inline void Faster2Histo::fillHisto(Hit const & hit)
         if (found(detectors[hit.label], "PARIS"))
         {
           auto const & name_bidim = name+"_bidim";
-          auto const & title_bidim = title+" Q_long VS Q_short;Q_short [ADC]; Q_long [ADC]";
+          auto const & title_bidim = title+" Q_long VS Q_short;Q_short [ADC];Q_long [ADC]";
           MTTHist<TH2F> bidim(name_bidim.c_str(), title_bidim.c_str(), 
                 m_nb_bins_paris,0,m_bin_max_paris, m_nb_bins_paris,0,m_bin_max_paris);
           m_bidim.emplace(hit.label, std::move(bidim));

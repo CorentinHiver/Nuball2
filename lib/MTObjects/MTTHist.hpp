@@ -171,8 +171,10 @@ public:
     m_exists = false;
     m_written  = false;
     m_integral = 0ull;
-    m_merged = nullptr;
-    for (auto & histo : m_collection) histo = nullptr;
+    delete m_merged;
+    for (auto & histo : m_collection) delete histo;
+    // m_merged = nullptr;
+    // for (auto & histo : m_collection) histo = nullptr;
     m_is_merged  = false;
 
   }
