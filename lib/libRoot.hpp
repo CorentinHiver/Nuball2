@@ -1058,8 +1058,7 @@ void fuse_all_histo(std::string const & folder, std::string const & outRoot = "f
 {
   auto const files = list_files_in_folder(folder, {"root"});
   bool first_file = true;
-  std::map<std::string, std::unique_ptr<TH1>> all_TH1F;
-  std::vector<std::string> names;
+  std::vector<std::unique_ptr<TH1>> all_TH1F;
   for (auto const & filename : files)
   {
     auto file = TFile::Open(filename.c_str(), "READ");
@@ -1075,11 +1074,9 @@ void fuse_all_histo(std::string const & folder, std::string const & outRoot = "f
         std::unique_ptr<TObject> obj (key->ReadObj());
         auto histo = dynamic_cast<TH1*>(obj.get());
         std::string name = histo->GetName();
-        push_back_unique(names, name);
-        if (first_file) all_TH1F.emplace(name, std::unique_ptr<TH1>(dynamic_cast<TH1*>(histo->Clone((name).c_str()))));
+        if (first_file) all_TH1F.emplace_back(std::unique_ptr<TH1>(dynamic_cast<TH1*>(histo->Clone((name).c_str()))));
         else
         {
-          // if ()
           if (nb_histos >= all_TH1F.size()) 
           {
             all_TH1F.emplace(all_TH1F.begin()+nb_histos, std::unique_ptr<TH1>(dynamic_cast<TH1*>(histo->Clone((name).c_str()))));
