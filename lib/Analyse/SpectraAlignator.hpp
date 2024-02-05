@@ -142,16 +142,16 @@ class Simplex
 {
 public:
   Simplex(size_t const & dim) : 
-    m_size(dim+1)
-    m_dim(dim),
+    m_size(dim+1),
+    m_dim(dim)
   {
     for (int i = 0; i<m_size; i++) m_vertices.push_back(Vertice(dim));
   }
 
   Simplex(Vertices const & vertices) : 
     m_vertices(vertices), 
-    m_size(vertices.size())
-    m_dim(m_size-1),
+    m_size(vertices.size()),
+    m_dim(m_size-1)
   {
     for (auto const & vertex : vertices) if (vertex.size() != this->m_dim) 
       throw_error("in Simplex::Simplex(std::vector<Vertice> const & vertices) : dimension conflict of at least one vertex (simplex must have dim+1 vertices)");
@@ -191,20 +191,12 @@ public:
     return *this;
   }
 
-    Simplex() : 
-    m_vertices(vertices), 
-    m_size(vertices.size())
-    m_dim(m_size-1),
-  {
-    for (auto const & vertex : vertices) if (vertex.size() != this->m_dim) 
-      throw_error("in Simplex::Simplex(std::vector<Vertice> const & vertices) : dimension conflict of at least one vertex (simplex must have dim+1 vertices)");
-  }
-
   Simplex& operator=(Vertices const & vertices)
   {
-    m_vertices(vertices);
-    m_size(vertices.size());
-    m_dim(m_size-1);
+    m_vertices = vertices;
+    m_size = vertices.size();
+    m_dim = m_size-1;
+    return *this;
   }
 
   void setVertice(int const & bin, Vertice const & vertice) {if (bin<m_size) m_vertices[bin] = vertice;}
@@ -298,15 +290,15 @@ public:
     return sum_errors_squared/(nb_bins_studied-m_nb_freedom_degrees);
   }
 
-  double chi2_second_derivative(SpectraCo & ref_spectra, SpectraCo & test_spectra)
+  double chi2_second_derivative(SpectraCo & ref_spectra, SpectraCo & test_spectra, int const & smooth)
   {
-    if (ref_spectra.derivative2().size()<1) ref_spectra.derivate2();
+    if (!ref_spectra.derivative2()) ref_spectra.derivate2(smooth);
     double sum_errors_squared = 0.0;
     // print(test_spectra.size(), m_spectra_threshold);
     // int const & nb_bins_studied = test_spectra.size()-m_spectra_threshold;
     // for (int bin = m_spectra_threshold; bin<test_spectra.size(); bin++) if (test_spectra[bin]>0)
-    SpectraCo recal_spectra(test_spectra, *m_recal);
-    auto & derivative2_spectra = recal_spectra.derivate2();
+    if(!test_spectra.derivative2()) test_spectra.derivate2(smooth);
+    SpectraCo derivative2_spectra(*(test_spectra.derivative2()), *m_recal);
     for (int bin = 0; bin<test_spectra.size(); bin++) if (test_spectra[bin]>0)
     {
       // Variance of the bin :
@@ -581,8 +573,8 @@ public:
               minimisator->a0(a0_value);
               minimisator->a1(a1_value);
               // print(recal);
-              // double const & _chi2 = minimisator.chi2_second_derivative(m_ref_spectra, spectra);
-              double const & _chi2 = minimisator.chi2(m_ref_spectra, spectra);
+              double const & _chi2 = minimisator.chi2_second_derivative(m_ref_spectra, spectra);
+              // double const & _chi2 = minimisator.chi2(m_ref_spectra, spectra);
               // print(a0_value, a1_value, C_value);
               // print(a0_value, a1_value, C_value, _chi2);
               m_chi2_spectra->SetBinContent(a0, a1, C, _chi2);
@@ -634,7 +626,7 @@ public:
     spectra_output = new TH1F(
       (spectra.name()+"_recal").c_str(), 
       (spectra.name()+"_recal").c_str(), 
-      spectra.size(), spectra.minValue(), spectra.maxValue());
+      spectra.size(), spectra.minX(), spectra.maxX());
     for (int bin = 0; bin<spectra.size(); bin++) spectra_output->SetBinContent(bin, spectra[bin]);
     return m_recals.back();
   }

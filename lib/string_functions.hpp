@@ -202,7 +202,7 @@ char** string_to_argv(std::string const & string)
   return charArray;
 }
 
-/// @brief Delete a manually created argv :
+/// @brief Delete an argv manually created by string_to_argv()
 void delete_argv(char** argv) 
 {
   for (std::size_t i = 0; argv[i] != nullptr; ++i)

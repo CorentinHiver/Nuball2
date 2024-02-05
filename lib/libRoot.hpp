@@ -1086,22 +1086,20 @@ void fuse_all_histo(std::string const & folder, std::string const & outRoot = "f
           }
           else if (name != all_TH1F[nb_histos]->GetName()) 
           {
-            print("NOT THE SAME FILES :", nb_histos, "th file : ", name, all_TH1F[nb_histos]->GetName());
-            
             // If the two files has at least one histogram more or less, one need to find it :
             auto const checkpoint = nb_histos;
             do {nb_histos++;} while (nb_histos<all_TH1F.size() && name != all_TH1F[nb_histos]->GetName());
 
-            // If not found it means it do not exist and need to be created at the current position :
+            // If not found it means it does not exist and needs to be created at the current position :
             if (nb_histos == all_TH1F.size())
             {
               auto const & it = all_TH1F.begin()+checkpoint;
               all_TH1F.emplace(it, std::unique_ptr<TH1>(dynamic_cast<TH1*>(histo->Clone((name).c_str()))));
               nb_histos = checkpoint+1;
+              print(all_TH1F[checkpoint]->GetName(), "created");
               continue;
             }
           }
-          // if (hist->Get)
           all_TH1F[nb_histos]->Add(histo);
         }
         nb_histos++;

@@ -3,7 +3,7 @@
 // #include <Calibration.hpp>
 // #include <Calibrator.hpp>
 // #include <RunMatrixator.hpp>
-// #include <SpectraAlignator.hpp>
+#include <SpectraAlignator.hpp>
 // #include <Detectors.hpp>
 // #include <Timeshifts.hpp>
 // #include <Convertor.hpp>
@@ -13,13 +13,13 @@
 // #include <AnalysedSpectra.hpp>
 // #include <DSSD.hpp>
 // #include <SpectraCo.hpp>
-#include "../136/Calibrate/calibrate_spectra.C"
+// #include "../136/Calibrate/calibrate_spectra.C"
 
 
 int main(int argc, char ** argv)
 {
   // for (Label label = 0; label<deroottectors.size(); label++) print(label, detectors.exists(label));
-  calibrate_spectra("~/faster_data/N-SI-129-source_histo/152Eu_center_spectra.root", "../136/129_2024.calib");
+  // calibrate_spectra("~/faster_data/N-SI-129-source_histo/152Eu_center_spectra.root", "../136/129_2024.calib");
   // calibrate_spectra("~/faster_data/N-SI-129-source_histo/Th232_both_sides.root", "../136/129_2024.calib");
 
   // Faster2Histo(argc, argv);
@@ -341,55 +341,55 @@ int main(int argc, char ** argv)
 
 
 
-  // auto file_ref = TFile::Open("histos/run_80_matrixated.root", "READ");
-  // // auto histo_ref = file_ref->Get<TH1F>("R3A1_black_prompt_singles");
-  // auto histo_ref = file_ref->Get<TH1F>("PARIS_BR3D2_delayed_singles");
-  // // auto histo_ref = file_ref->Get<TH1F>("PARIS_BR3D2_prompt_singles");
-  // // SpectraCo spectra(histo_ref);
+  auto file_ref = TFile::Open("histos/run_80_matrixated.root", "READ");
+  // auto histo_ref = file_ref->Get<TH1F>("R3A1_black_prompt_singles");
+  auto histo_ref = file_ref->Get<TH1F>("PARIS_BR3D2_delayed_singles");
+  // auto histo_ref = file_ref->Get<TH1F>("PARIS_BR3D2_prompt_singles");
+  // SpectraCo spectra(histo_ref);
 
-  // // auto histo_ref = file_ref->Get<TH1F>("PARIS_BR3D2_prompt_singles");
-  // // histo_ref->Rebin(2);
-  // SpectraAlignator alignator(histo_ref);
-  // if (argc>1) alignator.setIterations(std::stoi(argv[1]));
-  // alignator.setBruteForce();
+  // auto histo_ref = file_ref->Get<TH1F>("PARIS_BR3D2_prompt_singles");
+  // histo_ref->Rebin(2);
+  SpectraAlignator alignator(histo_ref);
+  if (argc>1) alignator.setIterations(std::stoi(argv[1]));
+  alignator.setBruteForce();
 
-  // auto file_test = TFile::Open("histos/run_101_matrixated.root", "READ");
-  // // auto histo_test = file_test->Get<TH1F>("R3A1_black_prompt_singles");
-  // auto histo_test = file_test->Get<TH1F>("PARIS_BR3D2_delayed_singles");
-  // // auto histo_test = file_test->Get<TH1F>("PARIS_BR3D2_prompt_singles");
-  // // histo_test->Rebin(2);
-  // auto histo_test_realigned = new TH1F();
-  // // auto free_degrees = 4;
-  // // // print(argc);
-  // // // if (argc>3) deg = std::stoi(argv[2]);
-  // alignator.alignSpectra(histo_test, histo_test_realigned);
+  auto file_test = TFile::Open("histos/run_101_matrixated.root", "READ");
+  // auto histo_test = file_test->Get<TH1F>("R3A1_black_prompt_singles");
+  auto histo_test = file_test->Get<TH1F>("PARIS_BR3D2_delayed_singles");
+  // auto histo_test = file_test->Get<TH1F>("PARIS_BR3D2_prompt_singles");
+  // histo_test->Rebin(2);
+  auto histo_test_realigned = new TH1F();
+  // auto free_degrees = 4;
+  // // print(argc);
+  // // if (argc>3) deg = std::stoi(argv[2]);
+  alignator.alignSpectra(histo_test, histo_test_realigned);
 
-  // std::string name = "test_recal.root";
-  // // std::string name = "test_derivatives.root";
+  std::string name = "test_recal.root";
+  // std::string name = "test_derivatives.root";
 
-  // auto file_out = TFile::Open(name.c_str(), "RECREATE");
-  // file_out->cd();
+  auto file_out = TFile::Open(name.c_str(), "RECREATE");
+  file_out->cd();
 
-  // histo_ref->SetLineColor(kRed);
-  // histo_ref->Write();
-  // histo_test->SetName((histo_test->GetName()+std::string("_before")).c_str());
-  // histo_test->SetTitle((histo_test->GetName()+std::string("_before")).c_str());
-  // histo_test->SetLineStyle(2);
-  // histo_test->SetLineColor(kBlue);
-  // auto new = (SpectraCo(histo_ref) - SpectraCo(histo_test_realigned)).createTH1F();
-  // histo_test->Write();
-  // histo_test_realigned->SetLineColor(kBlue);
-  // histo_test_realigned->Write();
-  // alignator.writeChi2Spectra(file_out);
+  histo_ref->SetLineColor(kRed);
+  histo_ref->Write();
+  histo_test->SetName((histo_test->GetName()+std::string("_before")).c_str());
+  histo_test->SetTitle((histo_test->GetName()+std::string("_before")).c_str());
+  histo_test->SetLineStyle(2);
+  histo_test->SetLineColor(kBlue);
+  histo_test->Write();
+  histo_test_realigned->SetLineColor(kBlue);
+  histo_test_realigned->Write();
+  alignator.writeChi2Spectra(file_out);
 
+  // auto diff = (SpectraCo(histo_ref) - SpectraCo(histo_test_realigned)).createTH1F();
   // diff->Write();
 
-  // file_out->Write();
-  // file_out->Close();
-  // print(name, "written");
+  file_out->Write();
+  file_out->Close();
+  print(name, "written");
 
-  // file_ref->Close();
-  // file_test->Close();
+  file_ref->Close();
+  file_test->Close();
 
 
 
