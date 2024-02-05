@@ -203,7 +203,14 @@ char** string_to_argv(std::string const & string)
 }
 
 /// @brief Delete a manually created argv :
-void delete_argv(char** argv) {delete[] argv;}
+void delete_argv(char** argv) 
+{
+  for (std::size_t i = 0; argv[i] != nullptr; ++i)
+    {
+        delete[] argv[i];  // Free individual C-style strings
+    }
+    delete[] argv;  // Free the array of pointers
+}
 
 /// @brief Convert any type into string, including vector of any type
 template<class T>

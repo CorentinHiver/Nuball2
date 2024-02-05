@@ -64,13 +64,13 @@ public:
     Initialize();
   }
 
-  static void setThreadsNb(int const & n, bool force = false) {setThreadsNb(size_cast(n), force);}
+  static void setThreadsNb(int const & n, bool force = false) noexcept {setThreadsNb(size_cast(n), force);}
   /** @brief Sets the number of threads.
    * 
    * @details Check the number of threads. Usually, over 75% of cores is the optimal.
    * Set force parameter to true if you want to use all the cores
    */
-  static void setThreadsNb(size_t const & n, bool force = false) 
+  static void setThreadsNb(size_t const & n, bool force = false) noexcept
   {
     auto const maxThreads = size_cast(std::thread::hardware_concurrency()*((force) ? 1 : 0.75));
 

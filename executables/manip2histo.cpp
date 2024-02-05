@@ -36,6 +36,7 @@ int main(int argc, char ** argv)
       print(argv_to_string(arguments));
       try {Faster2Histo(argc+2, arguments);}
       catch(OverwriteError const & error) {continue;}
+      // delete_argv(arguments);
       delete_argv(arguments);
     }
   }

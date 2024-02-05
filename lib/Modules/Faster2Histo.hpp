@@ -26,9 +26,12 @@ class Faster2Histo
 {
 public:
   Faster2Histo() {TH1::AddDirectory(kFALSE);}
+  /// @brief To launch the application at instanciation
   Faster2Histo(int argc, char** argv);
+  /// @brief To launch the application after instanciation
   void load(int const & argc, char** argv);
   
+  /// @brief Adds [nb_files] files to convert inside of [folder]
   void addFolder(Path folder, int const & nb_files = -1) 
   {
     m_files.addFolder(folder, nb_files);
@@ -39,26 +42,41 @@ public:
     }
   }
   
+  /// @brief Adds one file to convert at the list. Option -f
   void addFile(std::string const & file) 
   {
     m_files.addFile(file);
     setOutFilename(rmPathAndExt(file)+"_spectra.root");
   }
 
+  /// @brief UNUSED
   void setTrigger(TriggerHit trigger) {m_trigger = trigger;}
 
+  /// @brief Setup the threads and launched the application
   void multirun(int const & nb_threads = -1);
+  /// @brief Treats the file with already configured Hit and FasterReader object
   void treatFile(Hit & hit, FasterReader & reader);
+  /// @brief Handles each hit and fills the correct histogram
   void fillHisto(Hit const & hit);
+  /// @brief Write down a [out_filename].root file containing the spectra of the data
   void write(std::string const & out_filename = "") noexcept;
 
+  /// @brief Set the name of the output file
   void setOutFilename(std::string const & out_filename) noexcept {m_outFile = out_filename;}
+  /// @brief Interface with the ROOT write mode. Default = "RECREATE". 
+  /// @details If you want to use "APPEND" for instance, you have to use the overwrite option (-o)
   void setWriteMode(const char* mode) noexcept {delete[] write_mode; write_mode = mode;}
+  /// @brief Loads the .calib file needed. Option -c
   void loadCalibration(std::string const & calibration_file) {m_calibration.load(calibration_file);}
+  /// @brief Loads the .dT file needed. Option -t
   void loadTimeshifts(Timeshifts const & timeshifts) {m_timeshifts = timeshifts;}
+  /// @brief Set the number of files to read in the folder. Second argument of option -F
   void setNbFiles(int const & _nb_files) noexcept{m_nb_files = _nb_files;}
-  void setNbThreads(int const & _nb_threads) {MTObject::setThreadsNb(_nb_threads);}
+  /// @brief Set the number of threads to write down. Option -m
+  void setNbThreads(int const & _nb_threads) noexcept {MTObject::setThreadsNb(_nb_threads);}
+  /// @brief Set the full output path. Option --out_path
   void setOutPath(Path const & path) noexcept {m_outPath = path; m_outPath.make();}
+  /// @brief Allows to overwrite the file if it exists
   void overwrite(bool const & _overwrite) noexcept {m_overwrite = _overwrite;}
 
 private:
