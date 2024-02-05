@@ -438,7 +438,6 @@ void MTTHist<THist>::Merge()
 {
   if (!m_exists || m_collection.size() == 0 || m_collection[0] -> IsZombie() || this -> Integral() < 1)
   {
-    m_exists = false;
     m_is_merged = false;
     delete m_merged;
   }
@@ -528,7 +527,7 @@ MTTHist<THist>::~MTTHist()
 if (MTObject::ON)
 {
   for (auto & histo : m_collection) delete histo;
-  if (m_exists) delete m_merged;
+  delete m_merged;
 }
 else if (!m_merged_deleted && m_exists && !m_outscope)
 {

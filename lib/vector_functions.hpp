@@ -407,7 +407,15 @@ public:
   }
 
   /// @brief Add element to the back of the vector only if the vector do not contain it
-  void push_back_unique(T const & t) {if (!this->has(t)) this -> push_back(t);}
+  bool push_back_unique(T const & t) 
+  {
+    if (!this->has(t)) 
+    {
+      this -> push_back(t);
+      return true;
+    }
+    else return false;
+  }
 
   /// @brief Return iterator to the beginning of the vector
   virtual T* begin() {return m_data;}
