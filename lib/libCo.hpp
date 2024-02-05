@@ -12,6 +12,7 @@
 #include "random.hpp"
 #include "string_functions.hpp"
 #include "files_functions.hpp"
+#include "errors.hpp"
 
 // *********** STD includes ********* //
 #include <any>

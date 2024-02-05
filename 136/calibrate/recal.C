@@ -4,21 +4,25 @@
 #define NSI129
 
 /**
- * @brief first step : uses the 152Eu calibration on the run data
+ * @brief first step : uses the calibration on the run data
  * and perform a manual peak finding. The result is 136_ajustation.calib
  * calibration file, that links the 152Eu calibration data to in-beam calibration.
  * Now you have to copy the data in a file named 136_ajustation_checked.calib and correct
  * the eventual issues by looking at the spectra in 136_recal.root
  * 
  */
-void recal(std::string _detectors = "PARIS", std::vector<double> peaks = {})
+void recal(std::string choice_detectors = "PARIS", std::vector<double> peaks = {})
 {
   detectors.load("index_129.list");
+#ifdef NSI129
+  std::string infile = "~/faster_data/N-SI-129-root_histo/fused_histo_calibrated.root";
+#else
   std::string infile = "test_calib.root";
+#endif //NSI129
   auto file(TFile::Open(infile.c_str()));
   file->cd();
   auto histos = get_TH1F_names(file);
-  Calibration calib;
+  Calibration out_calib;
 
   information("Histos loaded from", infile);
   std::map<Label, SpectraCo> spectra;
@@ -27,7 +31,7 @@ void recal(std::string _detectors = "PARIS", std::vector<double> peaks = {})
   for (auto name : histos)
   {
     auto hist = file->Get<TH1F>(name.c_str());
-    if (hist->Integral()<1) continue;
+    if (hist->Integral()<100) continue;
 
     remove(name, "_calib");
     auto const & label = detectors[name];
@@ -36,20 +40,25 @@ void recal(std::string _detectors = "PARIS", std::vector<double> peaks = {})
     int smooth = 10;
     if (found(name, "PARIS")) 
     {
-      if (_detectors!="PARIS") continue;
+      if (choice_detectors!="PARIS") continue;
+#ifdef NSI129
+      rebin = 2; 
+      smooth = 20; 
+#else
       rebin = 20; 
       smooth = 20; 
+#endif //NSI129
       if (peaks.size() == 0) peaks = {511, 1779};
     }
     else if (found(name, "red") || found(name, "blue") || found(name, "green") || found(name, "black")) 
     {
-      if (_detectors!="GE") continue;
+      if (choice_detectors!="GE") continue;
       rebin = 10; 
       smooth = 10; 
     }
     else if (found(name, "BGO")) 
     {
-      if (_detectors!="BGO") continue;
+      if (choice_detectors!="BGO") continue;
       rebin = 40; 
       smooth = 10; 
     }
@@ -75,8 +84,8 @@ void recal(std::string _detectors = "PARIS", std::vector<double> peaks = {})
     graph->Fit(fit_linear);
 
     // Save the calibration coefficient and use them to calibrated the spectra :
-    calib.set(label, fit_linear->GetParameter(0),  fit_linear->GetParameter(1));
-    spectrum.calibrate(calib, label);
+    out_calib.set(label, fit_linear->GetParameter(0),  fit_linear->GetParameter(1));
+    spectrum.calibrate(out_calib, label);
   }
 
   file->Close();
@@ -94,9 +103,9 @@ void recal(std::string _detectors = "PARIS", std::vector<double> peaks = {})
   print(outname, "written");
   
 #ifdef NSI129
-  calib.write("129_ajustation"); 
+  out_calib.write("129_ajustation"); 
 #else
-  calib.write("136_ajustation");
+  out_calib.write("136_ajustation");
 #endif //NSI129
 
 }

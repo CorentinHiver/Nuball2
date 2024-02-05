@@ -114,7 +114,7 @@ public:
   auto operator->() {return m_histo;}
 
   void setKevPerBin(double const & kpb) {m_kpb = kpb;}
-  void setChannelsPerBin(double const & cpb) {m_cpb = cpb;}
+  void setChannelsPerBin(double const & cpb) {m_apb = cpb;}
   void cd(TVirtualPad * vpad) {m_pad = static_cast<TPad*> (vpad); m_pad->cd();}
   void autoCanvas()
   {
@@ -158,7 +158,7 @@ private:
   TPad* m_pad = nullptr;
   TH1F* m_histo = nullptr;
   double m_kpb = 1; // keV per bin
-  double m_cpb = 1; // canal per bin
+  double m_apb = 1; // canal per bin
   std::string detector = "PARIS";
 
   double range_min = 0;
@@ -206,8 +206,8 @@ std::vector<FittedPeak> & AnalysedSpectra::fitPeaks(std::vector<double> peaks, b
   }
 
   m_kpb = peaks.back()/mean_peakMax; // keV per bin
-  m_cpb = m_histo->GetXaxis()->GetBinLowEdge(mean_peakMax)/xmax; // canal per bin
-  print("keV per bin :", m_kpb, "canal per bin : ", m_cpb);
+  m_apb = m_histo->GetXaxis()->GetBinLowEdge(mean_peakMax)/xmax; // ADC per bin
+  print("keV per bin :", m_kpb, "canal per bin : ", m_apb);
 
   auto const & FWHMr = 2.35*sigma_peakMax/mean_peakMax;// relative FWHM 
   auto const & FWHMp = 100*FWHMr;                      // relative FWHM in percentage
@@ -216,8 +216,9 @@ std::vector<FittedPeak> & AnalysedSpectra::fitPeaks(std::vector<double> peaks, b
   for(size_t peak_i = 0; peak_i<peaks.size(); peak_i++)
   {
     auto const & peak = peaks[peak_i];
-    auto const & peak_min_view_range = peak*0.75;
-    auto const & peak_max_view_range = peak*1.25;
+    auto const & peak_recal = peak/m_kpb;
+    auto const & peak_min_view_range = peak_recal*0.75;
+    auto const & peak_max_view_range = peak_recal*1.25;
     setMinimumRange(peak_min_view_range);
     setMaximumRange(peak_max_view_range);
 

@@ -34,7 +34,8 @@ int main(int argc, char ** argv)
       if (!input.exists()) continue;
       char** arguments = string_to_argv(concatenate("faster2histo", argv_to_string(argv, 4), " -F ", input, " -1 -O ", output));
       print(argv_to_string(arguments));
-      Faster2Histo(argc+2, arguments);
+      try {Faster2Histo(argc+2, arguments);}
+      catch(OverwriteError const & error) {continue;}
       delete_argv(arguments);
     }
   }

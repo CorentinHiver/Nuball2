@@ -164,7 +164,8 @@ void Faster2Histo::load(int const & argc, char** argv)
   // Checking the number of files to treat :
   if (m_files.size()<1) throw_error("NO FILE TO READ !!!");
   // Checking the output filename is not already used :
-  if (!m_overwrite && File(m_outFile).exists()) {throw_error(m_outFile.string()+" already exists ! Use option -o or method Faster2Histo::overwrite(true)");} 
+  if (!m_overwrite && File(m_outFile).exists()) {throw OverwriteError(m_outFile.string()+" already exists ! Use option -o or method Faster2Histo::overwrite(true)");} 
+  // if (!m_overwrite && File(m_outFile).exists()) {throw_error(m_outFile.string()+" already exists ! Use option -o or method Faster2Histo::overwrite(true)");} 
 
 }
 
