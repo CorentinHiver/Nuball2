@@ -226,10 +226,7 @@ inline void Faster2Histo::fillHisto(Hit const & hit)
         if (m_bin_max<0) m_bin_max = 2e+7;
       }
       MTTHist<TH1F> new_histogram(name.c_str(), title.c_str(), m_nb_bins, 0, m_bin_max);
-      print(new_histogram);
       m_spectra.emplace(hit.label, std::move(new_histogram));
-      print(new_histogram);
-      print(m_spectra[hit.label]);
       m_spectra[hit.label].Fill((m_calibration) ? hit.nrj : hit.adc); // Fill the spectra
 
       if (m_bidim_paris && detectors)
