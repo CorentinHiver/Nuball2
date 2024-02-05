@@ -232,7 +232,7 @@ inline void Faster2Histo::fillHisto(Hit const & hit)
       if (m_bidim_paris && detectors)
       {
         if (m_nb_bins_paris<0) m_nb_bins_paris = 1000;
-        if (m_bin_max_paris<0) m_bin_max_paris = 2.e+5;
+        if (m_bin_max_paris<0) m_bin_max_paris = (m_calibration) ? 2.e+5 : 3000;
         if (found(detectors[hit.label], "PARIS"))
         {
           auto const & name_bidim = name+"_bidim";
@@ -254,7 +254,6 @@ inline void Faster2Histo::fillHisto(Hit const & hit)
 
 void Faster2Histo::write(std::string const & out_filename) noexcept
 {
-  pauseCo();
   if (out_filename != "") m_outFile = out_filename;
   print("-----------------");
   File file(m_outPath.string()+m_outFile.filename().string());
