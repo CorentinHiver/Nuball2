@@ -1079,7 +1079,7 @@ void fuse_all_histo(std::string const & folder, std::string const & outRoot = "f
         if (first_file) all_TH1F.emplace(name, std::unique_ptr<TH1>(dynamic_cast<TH1*>(histo->Clone((name).c_str()))));
         else
         {
-          if ()
+          // if ()
           if (nb_histos >= all_TH1F.size()) 
           {
             all_TH1F.emplace(all_TH1F.begin()+nb_histos, std::unique_ptr<TH1>(dynamic_cast<TH1*>(histo->Clone((name).c_str()))));
