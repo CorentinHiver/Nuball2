@@ -24,6 +24,7 @@ int main(int argc, char ** argv)
     Path datapath(argv[2]);
     Path outpath(argv[3]);
     if (!datapath.exists()) throw_error(concatenate(datapath, " doesn't exist !"));
+    
     std::string run;
     while(manip >> run)
     {
@@ -36,7 +37,6 @@ int main(int argc, char ** argv)
       print(argv_to_string(arguments));
       try {Faster2Histo(argc+2, arguments);}
       catch(OverwriteError const & error) {continue;}
-      // delete_argv(arguments);
       delete_argv(arguments);
     }
   }
