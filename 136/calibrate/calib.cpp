@@ -15,11 +15,17 @@ int main(int argc, char ** argv)
   std::vector<double> Eu152 = {121.7830, 344.2760, 778.9030, 964.1310, 1408.0110};
   std::vector<double> Th232 = {238.632, 338.32, 510.770, 583.191, 911.204, 2614.533};
 
+#ifdef NSI129
+  auto peaks_th = Th232;
+  auto file (TFile::Open("~/faster_data/N-SI-129-source_histo/Th232_both_sides.root", "READ"));
+#else 
+  auto peaks_th = Eu152;
   auto file (TFile::Open("~/faster_data/N-SI-136-sources_histo/152Eu_center.root", "READ"));
+#endif //NSI129
   auto histo_map (get_TH1F_map(file));
   gROOT -> cd();
 
-  double energy = Eu152.back();
+  double energy = peaks_th.back();
 
 
   // Peak finder parameters :
@@ -66,7 +72,12 @@ int main(int argc, char ** argv)
     auto adc_to_keV = energy/max_peak_ADC;
     // print(GREY, name, detectors[name], max_peak_ADC, adc_to_keV, RESET);
     
-    std::vector<double> ADCs(Eu152.size());
+  #ifdef NSI129
+    std::vector<double> ADCs(Th232.size());
+  #else 
+    std::vector<double> ADCs(peaks_th.size());
+  #endif //NSI129
+
 
     if (found(name, "BGO")) 
     {
@@ -76,11 +87,11 @@ int main(int argc, char ** argv)
     else if (found(name, "PARIS") || found(name, "red") || found(name, "green") || found(name, "black") || found(name, "blue"))
     {// For paris, try to find the other peaks for a better fit
       std::vector<int> ordered_peaks;
-      bubble_sort(Eu152, ordered_peaks);
+      bubble_sort(peaks_th, ordered_peaks);
       invert(ordered_peaks); // Start from the heigher energy peak
       for (auto const & peak_i : ordered_peaks)
       {
-        auto guess_ADC = Eu152[peak_i]/adc_to_keV;
+        auto guess_ADC = peaks_th[peak_i]/adc_to_keV;
 
         auto derivative2 = *(spectrum.derivative2());
         auto rebin_keV = derivative2.getX(rebin);
@@ -94,7 +105,7 @@ int main(int argc, char ** argv)
 
         ADCs[peak_i] = guess_ADC;
       }
-      auto graph( new TGraph(Eu152.size(), ADCs.data(), Eu152.data()));
+      auto graph( new TGraph(peaks_th.size(), ADCs.data(), peaks_th.data()));
       TF1* linear(new TF1("lin","pol1"));
       graph->Fit(linear,"q");
       calib.set(label, linear->GetParameter(0), linear->GetParameter(1));
@@ -109,10 +120,14 @@ int main(int argc, char ** argv)
   // ---------------------------------------------------- //
   // This part uses the Uranium run to calibrate the DSSD
   // ---------------------------------------------------- //
-  
+
   // Load the run spectra in order to calibrate the DSSD : 
   energy = 11000; // the higher energy peak is the elastic 11Mev deuteron peak
+#ifdef NSI129
+  auto runs (TFile::Open("~/faster_data/N-SI-129-U_histo/total/fused_histo.root", "READ"));
+#else 
   auto runs (TFile::Open("~/faster_data/N-SI-136-U_histo/total/fused_histo.root", "READ"));
+#endif //NSI129
   auto histo_map_runs (get_TH1F_map(runs));
 
   for (auto const & it : histo_map_runs)
@@ -165,7 +180,12 @@ int main(int argc, char ** argv)
   print(outname, "written");
 
   // Write the first raw calibration data
+  #ifdef NSI129
+  calib.write("129");
+#else 
   calib.write("136");
+#endif //NSI129
+
 
   return 0;
 }

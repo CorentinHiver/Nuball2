@@ -206,6 +206,7 @@ inline void Faster2Histo::fillHisto(Hit const & hit)
   {// Add a new histogram to the map if the label has none existing already
     lock_mutex lock(MTObject::mutex);
 
+
     // Check if another thread did not already create it between the try and the catch :
     if (!found(m_labels, hit.label))
     {
@@ -225,7 +226,10 @@ inline void Faster2Histo::fillHisto(Hit const & hit)
         if (m_bin_max<0) m_bin_max = 2e+7;
       }
       MTTHist<TH1F> new_histogram(name.c_str(), title.c_str(), m_nb_bins, 0, m_bin_max);
+      print(new_histogram);
       m_spectra.emplace(hit.label, std::move(new_histogram));
+      print(new_histogram);
+      print(m_spectra[hit.label]);
       m_spectra[hit.label].Fill((m_calibration) ? hit.nrj : hit.adc); // Fill the spectra
 
       if (m_bidim_paris && detectors)
@@ -253,6 +257,7 @@ inline void Faster2Histo::fillHisto(Hit const & hit)
 
 void Faster2Histo::write(std::string const & out_filename) noexcept
 {
+  pauseCo();
   if (out_filename != "") m_outFile = out_filename;
   print("-----------------");
   File file(m_outPath.string()+m_outFile.filename().string());

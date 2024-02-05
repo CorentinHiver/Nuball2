@@ -80,11 +80,7 @@ public:
   ~MTTHist();
 
 
-  /**
-   * @brief Wrapper around an already existing histograms
-   * 
-   * @attention You'll have to manage the life of the pointer (user has to delete it)
-   */
+  /// @brief Wrapper around an already existing histograms
   MTTHist(THist* hist) : m_merged(hist)
   {
     if (!hist || hist -> IsZombie()) 
@@ -92,14 +88,16 @@ public:
       m_merged = nullptr;
       m_is_merged = m_exists = false;
       m_integral = 0;
-      m_name = m_title = "";
+      m_name = m_title = "zombie";
     }
     else
     {
       m_collection.push_back(hist);
       m_is_merged = m_outscope = true;
-      m_exists = true; m_integral = hist->Integral(); 
-      m_name = hist->GetName(); m_title = hist->GetTitle();
+      m_exists = true; 
+      m_integral = hist->Integral();
+      m_name     = hist->GetName ();
+      m_title    = hist->GetTitle();
     }
   }
 
@@ -122,40 +120,36 @@ public:
     }
   }
 
-  /**
-   * @brief Copy constructor
-   */
+  /// @brief Copy constructor
   template <class... ARGS>
   MTTHist<THist>(MTTHist<THist> const & hist) : 
-    m_comment  (hist.m_comment),
-    m_name (hist.m_name),
-    m_exists   (hist.m_exists),
-    m_written  (hist.m_written),
-    m_integral (hist.m_integral),
-    m_merged   (hist.m_merged)
+    m_comment  (hist.m_comment  ),
+    m_name     (hist.m_name     ),
+    m_exists   (hist.m_exists   ),
+    m_written  (hist.m_written  ),
+    m_integral (hist.m_integral ),
+    m_merged   (hist.m_merged   )
     #ifndef MTTHIST_MONO
     ,
     m_is_merged  (hist.m_is_merged),
     m_collection (hist.m_collection)
     #endif // NO MTTHIST_MONO
     {
-      throw_error("NO COPY CONSTRUCTOR WORKING YET FOR MTTHist");
+      throw CopyError();
     }
     
-  /**
-   * @brief Move constructor
-   */
+  /// @brief Move constructor
   template <class... ARGS>
   MTTHist<THist>(MTTHist<THist> && hist) : 
-    m_comment  (std::move(hist.m_comment)),
-    m_name     (std::move(hist.m_name)),
-    m_exists   (std::move(hist.m_exists)),
-    m_written  (std::move(hist.m_written)),
-    m_integral (std::move(hist.m_integral)),
-    m_merged   (std::move(hist.m_merged))
+    m_comment  (std::move(hist.m_comment  )),
+    m_name     (std::move(hist.m_name     )),
+    m_exists   (std::move(hist.m_exists   )),
+    m_written  (std::move(hist.m_written  )),
+    m_integral (std::move(hist.m_integral )),
+    m_merged   (std::move(hist.m_merged   ))
   #ifndef MTTHIST_MONO
     ,
-    m_is_merged  (std::move(hist.m_is_merged)),
+    m_is_merged  (std::move(hist.m_is_merged )),
     m_collection (std::move(hist.m_collection))
   #endif // NO MTTHIST_MONO
   {
@@ -171,44 +165,45 @@ public:
     m_exists = false;
     m_written  = false;
     m_integral = 0ull;
-    delete m_merged;
-    for (auto & histo : m_collection) delete histo;
+    delete m_merged; m_merged = nullptr;
+    if (MTObject::ON) for (auto & histo : m_collection) delete histo;
+    m_collection.clear();
     // m_merged = nullptr;
     // for (auto & histo : m_collection) histo = nullptr;
     m_is_merged  = false;
-
   }
 
   // void operator=(std::nullptr_t) {reset(nullptr);}
 
 
-  // // ---   GENERIC INITIALIZATION --- //
+  // // ---   GENERIC INSTANCIATION --- //
 
-  /**
-   * @brief Copy initializer.
-   */
-  auto reset(MTTHist<THist> const & hist) 
+  /// @brief Copy initializer.
+  MTTHist<THist> & reset(MTTHist<THist> const & hist) 
   { 
+    // Execution stops here : it is fobidden so far to copy this object !!
     throw CopyError(hist);
-    // m_comment  = hist.m_comment;
-    // m_name     = hist.m_name;
-    // m_exists   = hist.m_exists;
-    // m_written  = hist.m_written;
-    // m_integral = hist.m_integral;
-    // *m_merged  = new TH1F(*hist.m_merged);
-    // m_collection.reserve(hist.m_collection.size());
-    // for (auto const & histo : hist.m_collection) 
-    // {
-    //   m_collection.push_back(histo->Clone())
-    // m_collection = hist.m_collection;
-    // m_is_merged  = hist.m_is_merged;
-    // return *this;
+
+    // If want to use this constructor, one has to make the following good looking
+    m_comment  = hist.m_comment ;
+    m_name     = hist.m_name    ;
+    m_exists   = hist.m_exists  ;
+    m_written  = hist.m_written ;
+    m_integral = hist.m_integral;
+    *m_merged  = new TH1F(*hist.m_merged);
+    m_collection.reserve(hist.m_collection.size());
+    for (auto const & histo : hist.m_collection) 
+    {
+      m_collection.push_back(histo->Clone());
+      m_collection = hist.m_collection;
+      m_is_merged  = hist.m_is_merged;
+      return *this;
+    }
   }
 
   MTTHist<THist> & operator=(MTTHist<THist> const & hist)
   {
-    this->reset(hist);
-    return *this;
+    return this->reset(hist);
   }
 
   // // /**
@@ -244,36 +239,42 @@ public:
   void Write(bool const & writeEmpty = false);
   void Write_i(int const & thread_index);
   
-  std::string const & name() const {return m_name;}
-  std::string const & title() const {return m_title;}
+  std::string const & GetName() const {return m_name ;}
+  std::string const & name   () const {return m_name ;}
+  std::string const & title  () const {return m_title;}
 
-  std::string & name() {return m_name;}
+  std::string & name () {return m_name ;}
   std::string & title() {return m_title;}
 
-  std::string const & setName(std::string const & _name) {return (m_name = _name);}
+  std::string const & setName (std::string const & _name)  {return (m_name  = _name );}
   std::string const & setTitle(std::string const & _title) {return (m_title = _title);}
 
-  bool const & exists() const {return m_exists;}  
-  bool const & isWritten() const {return m_exists;}  
-  operator bool() const & {return m_exists;}
+  bool const & exists   () const {return m_exists;}
+  operator bool()        const & {return m_exists;}
 
   std::vector<THist*> const & getCollection() const {return m_collection;}
-  #ifndef UNSAFE
+  std::vector<THist*> & getCollection() {return m_collection;}
+
+#ifdef UNSAFE
+  THist * operator->() {return m_merged;}
+  THist * operator->() const {return m_merged;}
+#else // UNSAFE :
   THist * operator->() 
   {
-    if (m_merged) return m_merged; 
+    if (m_merged) return m_merged;
     else 
     {
-      debug("MTTHist not merged !!!"); 
+      debug("MTTHist not merged !!! Merging ..."); 
       this -> Merge();
       return nullptr;
     }
   }
-  #else 
-  THist * operator->() {return m_merged;}
-  #endif //UNSAFE
+  THist * operator->() const {if (m_merged) return m_merged; else return nullptr;}
+
+#endif //UNSAFE
 
   THist * get() {return m_merged;}
+  THist * get() const {return m_merged;}
   auto size() const {return m_collection.size();}
 
   #ifdef MTTHIST_MONO
@@ -281,6 +282,7 @@ public:
 
   #else // not MTTHIST_MONO :
   void Merge();
+  void Merge() const {this -> Merge();}
   void Merge_t(); // Used in multithreading
   // void static Merge_thread(MTTHist<THist> & histo); // Used in multithreading
   THist * Merged();
@@ -292,24 +294,28 @@ public:
 
   #endif //MTTHIST_MONO
 
-  std::string const & GetName() const {return m_name;}
 
   void setComment(std::string const & comment) {m_comment = comment;}
   std::string const & readComment(std::string const & comment) const {return m_comment;}
 
-  std::mutex m_mutex;
 
   static bool const & verbose(bool const & _verbose = true) {return (m_verbose = _verbose);}
   static bool & verbosity() {return m_verbose;}
 
+  auto & mutex() {return m_mutex;}
+
 private:
 
+  std::mutex m_mutex;
+
   std::string m_comment;
-  std::string m_name;
-  std::string m_title;
-  bool m_exists = false;
-  bool m_written = false;
+  std::string m_name   ;
+  std::string m_title  ;
+
+  bool m_exists   = false;
+  bool m_written  = false;
   bool m_outscope = false;
+  
   ulonglong m_integral = 0ull;
 
   THist* m_merged = nullptr;
@@ -334,7 +340,8 @@ public:
   };
 };
 
-template<class THist> bool MTTHist<THist>::m_verbose = true;
+template<class THist> 
+bool MTTHist<THist>::m_verbose = true;
 
 // template<class THist> MTCounter MTTHist<THist>::m_nb_thread_running{0};
 // template<class THist> std::condition_variable MTTHist<THist>::m_condition;
@@ -356,16 +363,21 @@ inline void MTTHist<THist>::reset(std::string name, ARGS &&... args)
   #else // not MTTHIST_MONO
    
     auto const & thread_nb = MTObject::getThreadsNb();
-    if (!MTObject::isMasterThread() && m_collection.size() > 0)
+    auto const & thread_id = MTObject::getThreadIndex();
+    if (!MTObject::isMasterThread() && m_collection.size() > 0 && !m_collection[thread_id] && thread_id<m_collection.size())
     {// If the initialisation takes place inside a thread, special care is needed
-      auto const & thread_id = MTObject::getThreadIndex();
-      delete m_collection[thread_id];
-      m_collection[thread_id] =  new THist ((name+"_"+std::to_string(thread_id)).c_str(), std::forward<ARGS>(args)...);
+      m_collection[thread_id] = new THist ((name+"_"+std::to_string(thread_id)).c_str(), std::forward<ARGS>(args)...);
       m_collection[thread_id] -> SetDirectory(nullptr);
     }
     else
-    {
-      m_collection.resize(thread_nb);
+    {// In most situations, we end up here
+      if (m_collection.size()>0)
+      {// First delete any previous objects
+        for (auto & histo : m_collection) delete histo;
+        m_collection.clear();
+      }
+      // Reserve enough space in the vector
+      m_collection.resize(thread_nb, nullptr);
       for (size_t i = 0; i<thread_nb; i++) 
       {
         m_collection[i] = new THist ((name+"_"+std::to_string(i)).c_str(), std::forward<ARGS>(args)...);
@@ -377,9 +389,15 @@ inline void MTTHist<THist>::reset(std::string name, ARGS &&... args)
   }
   else // If MTObject is OFF
   {
-    m_collection.resize(1);
+    delete m_merged;
+
+    for (auto & histo : m_collection) delete histo;
+    m_collection.clear();
+    m_collection.resize(1, nullptr);
+
     m_merged = new THist ((name).c_str(), std::forward<ARGS>(args)...);
     m_merged->SetDirectory(nullptr);
+
     m_collection[0] = m_merged;
   }
 }
@@ -404,6 +422,7 @@ template <class THist>
 inline void MTTHist<THist>::Merge_t()
 {
   m_merged = static_cast<THist*> (m_collection[0]->Clone(m_name.c_str()));
+  delete m_collection[0];
   m_merged->SetDirectory(nullptr);
   for (size_t i = 1; i<m_collection.size(); i++) 
   {
@@ -510,34 +529,43 @@ void MTTHist<THist>::Write(bool const & writeEmpty)
 }
 
 template <class THist>
+std::ostream& operator<<(std::ostream& out, MTTHist<THist> const & histo)
+{
+  out << "_________________" << std::endl;
+  out << histo.name() << std::endl;
+  out << histo.size() << " histogram" << ((histo.size() == 1) ? "s" : "") << " :" << std::endl;
+  for (auto const & histo : histo.getCollection()) 
+  {
+    out << histo << " " << ((histo) ? histo->Integral() : -1) << " counts" << std::endl;
+  }
+  out << "Total : " << histo.get() << " " << ((histo.get()) ? histo->Integral() : -1) << " counts";
+  out << std::endl;
+  return out;
+}
+
+template <class THist>
 void MTTHist<THist>::Print()
 {
-  print("_________________");
-  print(m_name);
-  print(m_collection.size(), "histograms :");
-  for (auto const & histo : m_collection) print(histo, (histo) ? histo->Integral() : 0, "counts");
-  print();
+  print(*this);
 }
 
 template <class THist>
 MTTHist<THist>::~MTTHist()
 {
-#ifdef MTTHIST_MONO
-  delete m_merged;
-
-# else // not MTTHIST_MONO
-if (MTObject::ON)
-{
+  // print("---------------");
+  // print(*this);
+  delete m_merged; m_merged = nullptr;
   for (auto & histo : m_collection) delete histo;
-  delete m_merged;
-}
-else if (!m_merged_deleted && m_exists && !m_outscope)
-{
-  delete m_merged;
-  m_merged_deleted = true;
-}
+  m_collection.clear();
+  // print(*this);
 
-#endif //MTTHIST_MONO
+#ifndef MTTHIST_MONO
+  // else if (!MTObject::ON && !m_merged_deleted && m_exists && !m_outscope)
+  // {
+  //   m_merged_deleted = true;
+  // }
+#endif //!MTTHIST_MONO
+
 }
 
 template <class THist>

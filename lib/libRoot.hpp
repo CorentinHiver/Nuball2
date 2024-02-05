@@ -1004,6 +1004,7 @@ namespace CoAnalyse
 std::vector<std::string> get_TH1F_names(TFile * file)
 {
   std::vector<std::string> ret;
+  if (!file) return ret;
   auto list = file->GetListOfKeys();
   for (auto&& keyAsObj : *list)
   {
