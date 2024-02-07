@@ -50,6 +50,7 @@ public:
   /// @brief Loading calibration from a file
   bool load(File const & file);
   void set(Label const & _label, float const & _intercept, float const & _slope, float const & _binom, float const &_trinom);
+  std::vector<float> get(Label const & _label) const noexcept;
 
   #ifdef FIT_HPP
   void loadFits(Fits const & fits);
@@ -58,9 +59,7 @@ public:
   void write(std::string const & outfilename);
   
   void resize(int const & size);
-  void clear();
-
-  void calibrate(Hit & hit) const noexcept;
+  void clear() noexcept;
 
 #ifdef ROOT_TH1
   void calibrateAxis(TH1F * histo, Label const & label)
@@ -86,15 +85,17 @@ public:
   float calibrate(int    const & adc, Label const & label) const noexcept {return calibrate(float_cast(adc), label);}
   float calibrate(size_t const & bin, Label const & label) const noexcept {return calibrate(float_cast(bin), label);}
 
+  void calibrate(Hit & hit) const noexcept;
+
   /// @brief Wrapper around the Calibration::calibrate() methods
   template<class... ARGS>
-  auto operator()(ARGS &&... args) const {return calibrate(std::forward<ARGS>(args)...);}
+  auto operator()(ARGS &&... args) const noexcept {return calibrate(std::forward<ARGS>(args)...);}
 
   /// @brief Return true if the data has been loaded
-  operator bool() const & {return (m_ok && m_size>0);}
+  operator bool() const & noexcept {return (m_ok && m_size>0);}
 
   /// @brief Returns a vector holding the coefficients.
-  std::vector<float> operator[](Label const & label) const noexcept;
+  std::vector<float> operator[](Label const & label) const noexcept {return this->get(label);};
 
   /// @brief Get the number of detectors with calibration coefficients
   auto const & size        () const noexcept {return m_size     ;}
@@ -237,7 +238,7 @@ void Calibration::set(Label const & _label, float const & _intercept = 0.f, floa
   }
 }
 
-std::vector<float> Calibration::operator[](Label const & label) const noexcept
+std::vector<float> Calibration::get(Label const & label) const noexcept
 {
   if (label>m_size) return {-1};
   switch (m_order[label])
@@ -260,7 +261,7 @@ void Calibration::resize(int const & size)
   m_size = size;
 }
 
-void Calibration::clear()
+void Calibration::clear() noexcept
 {
 m_order    .clear();
 m_intercept.clear();

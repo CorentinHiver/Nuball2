@@ -84,7 +84,7 @@ public:
   static inline bool is_clover_BGO (Label const & l) {return ((is_clover(l)) ? ((l-23)%6 < 3) : false);}
 
   // Correspondance between detector label and crystal index :
-  static inline uchar label_to_clover   (Label const & l) {return static_cast<uchar>((l-23)/6);} // Ranges from 0 to 23
+  static inline uchar label_to_clover   (Label const & l) {return uchar_cast(l-23)/6);} // Ranges from 0 to 23
   static        uchar label_to_cristal  (Label const & l);
 
   static std::array<bool, 1000> isClover; // Array used to know if a given detector is a clover
@@ -636,11 +636,11 @@ void Clovers::Analyse_more()
 
 uchar Clovers::label_to_cristal(Label const & l)
 {
-  auto const cristal = static_cast<uchar>(l-23);
-  auto const clover_cristal = static_cast<uchar>(cristal%6);
+  auto const cristal = uchar_cast(l-23);
+  auto const clover_cristal = uchar_cast(cristal%6);
 
   // BGO : 
-  if (clover_cristal<2) return static_cast<uchar>(clover_cristal+2*(cristal/6));
+  if (clover_cristal<2) return uchar_cast(clover_cristal+2*(cristal/6));
   
   // Ge :
   else
@@ -665,10 +665,10 @@ uchar Clovers::label_to_cristal(Label const & l)
     case 17:
       switch(Ge_cristal)
       {
-        case 0: return static_cast<uchar>(cristal_index+0); // Red
-        case 1: return static_cast<uchar>(cristal_index+0); // Green
-        case 2: return static_cast<uchar>(cristal_index+1); // Black
-        case 3: return static_cast<uchar>(cristal_index-1); // Blue
+        case 0: return uchar_cast(cristal_index+0); // Red
+        case 1: return uchar_cast(cristal_index+0); // Green
+        case 2: return uchar_cast(cristal_index+1); // Black
+        case 3: return uchar_cast(cristal_index-1); // Blue
         default : return -1;
       }
 
@@ -676,10 +676,10 @@ uchar Clovers::label_to_cristal(Label const & l)
     case 2: case 3:
       switch(Ge_cristal)
       {
-        case 0: return static_cast<uchar>(cristal_index+3); // Red
-        case 1: return static_cast<uchar>(cristal_index+1); // Green
-        case 2: return static_cast<uchar>(cristal_index-2); // Black
-        case 3: return static_cast<uchar>(cristal_index+0); // Blue
+        case 0: return uchar_cast(cristal_index+3); // Red
+        case 1: return uchar_cast(cristal_index+1); // Green
+        case 2: return uchar_cast(cristal_index-2); // Black
+        case 3: return uchar_cast(cristal_index+0); // Blue
         default : return -1;
       }
 
@@ -687,20 +687,20 @@ uchar Clovers::label_to_cristal(Label const & l)
     case 4:
       switch(Ge_cristal)
       {
-        case 0: return static_cast<uchar>(cristal_index+1); // Red
-        case 1: return static_cast<uchar>(cristal_index+2); // Green
-        case 2: return static_cast<uchar>(cristal_index+0); // Black
-        case 3: return static_cast<uchar>(cristal_index-3); // Blue
+        case 0: return uchar_cast(cristal_index+1); // Red
+        case 1: return uchar_cast(cristal_index+2); // Green
+        case 2: return uchar_cast(cristal_index+0); // Black
+        case 3: return uchar_cast(cristal_index-3); // Blue
         default : return -1;  
       }
 
       default: // All the correctly turned clovers:
       switch(Ge_cristal)
       {
-        case 0: return static_cast<uchar>(cristal_index+2); // Red
-        case 1: return static_cast<uchar>(cristal_index-1); // Green
-        case 2: return static_cast<uchar>(cristal_index-1); // Black
-        case 3: return static_cast<uchar>(cristal_index+0); // Blue
+        case 0: return uchar_cast(cristal_index+2); // Red
+        case 1: return uchar_cast(cristal_index-1); // Green
+        case 2: return uchar_cast(cristal_index-1); // Black
+        case 3: return uchar_cast(cristal_index+0); // Blue
         default : return -1;
       }
     }

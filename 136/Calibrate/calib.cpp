@@ -1,5 +1,5 @@
 #include "../libRoot.hpp"
-#include <Calibrator.hpp>
+#include <SpectraCo.hpp>
 
 #define NSI129
 
@@ -124,7 +124,7 @@ int main(int argc, char ** argv)
   // Load the run spectra in order to calibrate the DSSD : 
   energy = 11000; // the higher energy peak is the elastic 11Mev deuteron peak
 #ifdef NSI129
-  auto runs (TFile::Open("~/faster_data/N-SI-129-U_histo/total/fused_histo.root", "READ"));
+  auto runs (TFile::Open("~/faster_data/N-SI-129-run_histo/merged/fused_histo.root", "READ"));
 #else 
   auto runs (TFile::Open("~/faster_data/N-SI-136-U_histo/total/fused_histo.root", "READ"));
 #endif //NSI129
@@ -143,14 +143,16 @@ int main(int argc, char ** argv)
     { 
       print("found");print();
       histo->Rebin(2);
-      rebin = 100; threshold = 200; nb_below_threshold = 20;
+      rebin = 100; threshold = 100; nb_below_threshold = 20;
 
       spectra.emplace(label, histo);
       auto & spectrum = spectra[label]; // Alias of the spectrum
       spectrum.setActualRange(); // Find the actual end of the spectra, i.e. without energy
+      spectrum.removeBackground(20);
+      spectrum.derivate2(100);
 
       // Find peaks and extract the peaks :
-      auto const & peaks = spectrum.findPeaks(threshold, nb_below_threshold, rebin);
+      auto const & peaks = spectrum.findPeaks(threshold, nb_below_threshold);
       std::vector<int> bins; std::vector<double> heights;
       unpack(peaks, bins, heights);
       if (bins.size() < 1) {warning("Detector", name, "(n°", label, ") has no peaks !"); continue;}

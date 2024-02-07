@@ -270,8 +270,9 @@ public:
     {
       // Calculate new bin value :
       double const & new_bin = m_recal->calculate(bin);
+      debug(*m_recal, new_bin, bin);
 
-      // Do a linear interpolation to get the value of the new bin :
+      // Do a linear interpolation to get the value of the recalibrated bin :
       double const & new_value = spectra.interpolate(new_bin);
 
       // Calculate the error for this bin :
@@ -293,6 +294,7 @@ public:
   double chi2_second_derivative(SpectraCo & ref_spectra, SpectraCo & test_spectra, int const & smooth)
   {
     if (!ref_spectra.derivative2()) ref_spectra.derivate2(smooth);
+    auto const & ref_derder = *ref_spectra.derivative2();
     double sum_errors_squared = 0.0;
     // print(test_spectra.size(), m_spectra_threshold);
     // int const & nb_bins_studied = test_spectra.size()-m_spectra_threshold;
@@ -301,11 +303,11 @@ public:
     SpectraCo derivative2_spectra(*(test_spectra.derivative2()), *m_recal);
     for (int bin = 0; bin<test_spectra.size(); bin++) if (test_spectra[bin]>0)
     {
-      // Variance of the bin :
-      double const & weight = 1/derivative2_spectra[bin];
+      // Variance of the bin of the original spectra :
+      double const & weight = 1/abs(test_spectra[bin]);
 
       // Calculate the error for this bin :
-      double const & error = ref_spectra[bin] - m_C*derivative2_spectra[bin];
+      double const & error = ref_derder[bin] - m_C*derivative2_spectra[bin];
 
       // Add it to the total squared error of the test_spectra :
       sum_errors_squared += error*error*weight;
@@ -493,17 +495,17 @@ public:
     // std::vector<std::vector<std::vector<double>>> minimisation_space;
 
     double const & C_dumb = 1;
-    double const & C_min = C_dumb - 0.1;
-    double const & C_max = C_dumb + 0.1;
+    double const & C_min = C_dumb - 0.3;
+    double const & C_max = C_dumb + 0.3;
     double const & C_0 = (C_min+C_max)/2;
     double const & C_steps = (C_max-C_min)/m_nb_iterations;
     
-    double const & a0_min = -0.5;
-    double const & a0_max = 0.5;
+    double const & a0_min = -1;
+    double const & a0_max = 1;
     double const & a0_0 = (a0_min+a0_max)/2;
     double const & a0_steps = (a0_max-a0_min)/m_nb_iterations;
     
-    double const & a1_min = 0.99;
+    double const & a1_min = 0.98;
     double const & a1_max = 1.005;
     double const & a1_0 = (a1_min+a1_max)/2;
     double const & a1_steps = (a1_max-a1_min)/m_nb_iterations;
@@ -524,7 +526,8 @@ public:
     minimisator->a1(min_a1);
     if (degreesOfFreedom>3) recal.a2(min_a2);
 
-    auto min_chi2 = minimisator.chi2(m_ref_spectra, spectra);
+    // auto min_chi2 = minimisator.chi2(m_ref_spectra, spectra);
+    auto min_chi2 = m_ref_spectra.chi2(spectra);
     if (degreesOfFreedom>3) print(min_chi2, min_C, min_a0, min_a1, min_a2);
     else print(min_chi2, min_C, min_a0, min_a1);
     
@@ -573,14 +576,17 @@ public:
               minimisator->a0(a0_value);
               minimisator->a1(a1_value);
               // print(recal);
-              double const & _chi2 = minimisator.chi2_second_derivative(m_ref_spectra, spectra);
+              // double const & _chi2 = minimisator.chi2_second_derivative(m_ref_spectra, spectra, 20);
               // double const & _chi2 = minimisator.chi2(m_ref_spectra, spectra);
+              SpectraCo new_spectra(spectra*C_value);
+              print(new_spectra[200]);
+              new_spectra.calibrateX(a1_value, a0_value);
+              print(new_spectra[200]);
+              double const & _chi2 = m_ref_spectra.chi2(new_spectra);
               // print(a0_value, a1_value, C_value);
               // print(a0_value, a1_value, C_value, _chi2);
               m_chi2_spectra->SetBinContent(a0, a1, C, _chi2);
-//               print(_chi2, C_value
-// ,a0_value
-// ,a1_value);
+              //print(_chi2, C_value, a0_value, a1_value);
 
               // if ((int)(C_value+a0_value+a1_value)%100 == 0) print(_chi2, C_value, a0_value, a1_value);
 
@@ -621,7 +627,9 @@ public:
     recal.a1(min_a1);
     if (degreesOfFreedom>3) recal.a2(min_a2);
 
-    spectra.recalibrate(recal);
+    print("final recal :", recal);
+    spectra.calibrateX(min_a1, min_a0);
+    // spectra.recalibrate(recal);
     if (spectra_output) delete spectra_output;
     spectra_output = new TH1F(
       (spectra.name()+"_recal").c_str(), 

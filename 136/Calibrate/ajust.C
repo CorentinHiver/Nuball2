@@ -14,10 +14,10 @@ void ajust()
   detectors.load("index_129.list");
 
 #ifdef NSI129
-  Calibration calib_init("../conversion_200ns/129_2024.calib");
+  Calibration calib_init("../129_2024.calib");
   Calibration calib_adjustation("129_ajustation.calib");
 #else
-  Calibration calib_init("../conversion_200ns/136_2024.calib");
+  Calibration calib_init("../136_2024.calib");
   Calibration calib_adjustation("136_ajustation.calib");
 #endif //NSI129
 

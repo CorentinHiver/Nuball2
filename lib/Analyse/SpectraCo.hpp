@@ -227,11 +227,11 @@ public:
   // Calculators :
   SpectraCo* derivate(int smooth = 1) noexcept;
   SpectraCo* derivate2(int smooth = 1) noexcept;
-  void removeBackground(int const & smooth, std::string const & fit_options = "");
-  double integralInRangeBin(int const & bin_min, int const & bin_max);
-  double integralInRange(double const & value_min, double const & value_max);
-  double meanInRangeBin(int const & bin_min, int const & bin_max);
-  double meanInRange(double const & value_min, double const & value_max);
+  void removeBackground(int const & smooth, std::string const & fit_options = "") noexcept;
+  double integralInRangeBin(int const & bin_min, int const & bin_max) noexcept;
+  double integralInRange(double const & value_min, double const & value_max) noexcept;
+  double meanInRangeBin(int const & bin_min, int const & bin_max) noexcept;
+  double meanInRange(double const & value_min, double const & value_max) noexcept;
 
   // Getters :
   /// @attention One has to check that the derivative has already been calculated;
@@ -277,10 +277,7 @@ public:
   TH1D* createTH1D(std::string newName = "", std::string newTitle = "");
   TH1F* createTH1F(std::string newName = "", std::string newTitle = "");
   
-  void write() 
-  {
-    this->createTH1F(name())->Write();
-  }
+  void write() {this->createTH1F(name())->Write();}
   void write(TDirectory* directory)
   {
     auto histo = this->createTH1F(name()); 
@@ -288,10 +285,7 @@ public:
     histo->Write(); 
     gROOT->cd();
   }
-  void writeTH1D()
-  {
-    this->createTH1D(name())->Write();
-  }
+  void writeTH1D() {this->createTH1D(name())->Write();}
   void writeTH1D(TDirectory* directory) 
   {
     directory->cd(); 
@@ -331,6 +325,7 @@ public:
   SpectraCo operator-(SpectraCo const & other);
   SpectraCo operator*(double const & factor);
   SpectraCo operator/(double const & factor);
+  SpectraCo & operator*=(double const & factor);
   void recalibrate(Recalibration const & recal);
   void calibrate(Calibration const & calib, Label const & label);
   void resizeBin(size_t const & new_size);
@@ -343,6 +338,27 @@ public:
 
   // Manage resources :
   void deleteDerivative() {delete m_derivative;}
+
+  // Other operations :
+
+  /// @brief Calculates the chi2 between this spectra and another one
+  double chi2 (SpectraCo & other)
+  {
+    double sum_errors_squared = 0.0;
+    for (int bin = 0; bin<other.size(); bin++) if (other[bin]>0)
+    {
+      // Calculate the error for this bin :
+      auto const & error = m_spectra[bin]-other[bin];
+
+      // Variance of the bin :
+      double const & weight = 1/other[bin]; // V = sigma² = 1/N
+
+      // Add the error to the total squared error of the spectra :
+      sum_errors_squared += error*error*weight;
+
+    }
+    return sum_errors_squared/other.size();
+  }
 
   // Histogram manipulations :
   ///@brief Remove the bins after the last bin with content (= detector's output max range)
@@ -418,6 +434,7 @@ void SpectraCo::calculateCoeff()
 }
 
 /// @brief Fills a bin of the spectra based on the X value
+/// @attention Has not been tested @todo test it
 void SpectraCo::fill(double const & X) noexcept
 {
   int const & bin = getBin(X);
@@ -441,21 +458,28 @@ void SpectraCo::draw(const char* param)
 void SpectraCo::rebin(int const & factor)
 {
   if (factor<1) throw_error("in SpectraCo::rebin(int factor) : factor can't be < 1");
-  m_rebin*=factor; // Saves the rebin factor
   auto const & rest     = m_size % factor;
   int  const & new_size = m_size / factor;
   std::vector<double> new_vector(new_size, 0); // Fills the new vector with 0
 
   if(rest == 0) 
   {
-    for (int new_bin_it = 0; new_bin_it<new_size; new_bin_it++){
+    m_rebin*=factor; // Saves the rebin factor
+    for (int new_bin_it = 0; new_bin_it<new_size; new_bin_it++){ 
+      // pauseCo(); print(new_bin_it);
       for (int bin_j = 0; bin_j<factor; bin_j ++){
-        new_vector[new_bin_it] += m_spectra[new_bin_it * factor + bin_j];
-    }}
+        // print(int_cast(new_bin_it * factor + bin_j), m_spectra[int_cast(new_bin_it * factor + bin_j)]);
+        new_vector[new_bin_it] += m_spectra[int_cast(new_bin_it * factor + bin_j)];
+    }
+    // print(new_vector[new_bin_it]);
+    }
   }
 
   else
   {
+    print("Can't rebin if the factor isn't a diviser of the number of bins");
+    return;
+    m_rebin*=factor; // Saves the rebin factor
     // If the rebin factor is not a divisor of the initial size,
     // one has to extend a little bit each of the new bins. For instance, 
     // if 'size = 20' and 'factor = 3' then 'rest = size%factor = 1' and 'new_size = 6, 
@@ -518,11 +542,11 @@ void SpectraCo::load(TH1* root_spectra)
   
   m_integral = root_spectra->Integral();
   m_size = root_spectra -> GetXaxis() -> GetNbins();
-  m_min_x = root_spectra -> GetXaxis() -> GetBinLowEdge(0)+1;
-  m_max_x = root_spectra -> GetXaxis() -> GetBinLowEdge(m_size)+1;
+  m_min_x = root_spectra -> GetXaxis() -> GetBinLowEdge(1);
+  m_max_x = root_spectra -> GetXaxis() -> GetBinLowEdge(m_size+1);
 
   m_spectra.resize(m_size);
-  for (int bin = 0; bin<m_size; bin++) m_spectra[bin] = double_cast(root_spectra->GetBinContent(bin));
+  for (int bin = 1; bin<m_size; bin++) m_spectra[bin] = double_cast(root_spectra->GetBinContent(bin));
   calculateCoeff();
 }
 
@@ -565,7 +589,11 @@ SpectraCo SpectraCo::operator*(double const & factor)
   return spectra;
 }
 
-
+SpectraCo & SpectraCo::operator*=(double const & factor)
+{
+  for (int bin = 0; bin<m_size; bin++) m_spectra[bin] *= factor;
+  return *this;
+}
 
 /**
  * @brief @todo can be optimized
@@ -630,7 +658,7 @@ double SpectraCo::interpolate(double const & bin) const noexcept
 {
   int i = static_cast<int>(bin); //bin_i
   if (i<0) i = 0;
-  else if (i > (m_size-1)) i = m_size;
+  else if (i > (m_size-1)) i = m_size-1;
   double const & a = m_spectra[i+1] - m_spectra[i];// a  =  y_i+1 - y_i
   double const & b = m_spectra[i]   - a*i;         // b  =  y_i - a*bin_i
   return a*bin+b;
@@ -642,7 +670,7 @@ double SpectraCo::interpolate(double const & bin) const noexcept
  * @param smooth 
  * @param fit_options 
  */
-void SpectraCo::removeBackground(int const & smooth, std::string const & fit_options)
+void SpectraCo::removeBackground(int const & smooth, std::string const & fit_options) noexcept
 {
   auto file = gROOT -> GetFile();
   if (file) gROOT->cd();
@@ -654,14 +682,14 @@ void SpectraCo::removeBackground(int const & smooth, std::string const & fit_opt
 }
 
 
-double SpectraCo::integralInRangeBin(int const & bin_min, int const & bin_max)
+double SpectraCo::integralInRangeBin(int const & bin_min, int const & bin_max) noexcept
 {
   double ret = 0.0;
   for (int bin_it = bin_min; bin_it<bin_max; bin_it++) ret+=m_spectra[bin_it];
   return ret;
 }
 
-double SpectraCo::integralInRange(double const & value_min, double const & value_max)
+double SpectraCo::integralInRange(double const & value_min, double const & value_max) noexcept
 {
   double ret = 0.0; 
   int bin_min = getBin(value_min);
@@ -671,7 +699,7 @@ double SpectraCo::integralInRange(double const & value_min, double const & value
 }
 
 
-double SpectraCo::meanInRangeBin(int const & bin_min, int const & bin_max)
+double SpectraCo::meanInRangeBin(int const & bin_min, int const & bin_max) noexcept
 {
   double mean = 0.0; double integral = 0.0;
   for (int bin_it = bin_min; bin_it<bin_max; bin_it++) 
@@ -683,7 +711,7 @@ double SpectraCo::meanInRangeBin(int const & bin_min, int const & bin_max)
   return this->getX(mean);
 }
 
-double SpectraCo::meanInRange(double const & value_min, double const & value_max)
+double SpectraCo::meanInRange(double const & value_min, double const & value_max) noexcept
 {
   double mean = 0.0; double integral = 0.0;
   int bin_min = getBin(value_min);
@@ -813,7 +841,7 @@ TH1D* SpectraCo::createTH1D(std::string newName, std::string newTitle)
   if (newName == "") newName = m_name;
   if (newTitle == "") newTitle = m_title;
   TH1D* out = new TH1D(m_name.c_str(), m_title.c_str(), m_size, this->minX(), this->maxX());
-  for (int bin = 0; bin<m_size; bin++) out->SetBinContent(bin, m_spectra[bin]);
+  for (int bin = 1; bin<m_size+1; bin++) out->SetBinContent(bin, double_cast(m_spectra[bin-1]));
   root_spectra_pointers.push_back(out);
   return out;
 }
@@ -823,7 +851,7 @@ TH1F* SpectraCo::createTH1F(std::string newName, std::string newTitle)
   if (newName == "") newName = m_name;
   if (newTitle == "") newTitle = m_title;
   TH1F* out = new TH1F(newName.c_str(), newTitle.c_str(), m_size, this->minX(), this->maxX());
-  for (int bin = 0; bin<m_size; bin++) out->SetBinContent(bin, m_spectra[bin]);
+  for (int bin = 1; bin<m_size+1; bin++) out->SetBinContent(bin, m_spectra[bin]);
   root_spectra_pointers.push_back(out);
   return out;
 }
@@ -957,63 +985,63 @@ SpectraPoints const & SpectraCo::findPeaks(int const & threshold, int const & nb
  * Cela permet ensuite de les merge dans un TH2F
  * 
  */
-class SpectraCo2D
-{
-public:
-  SpectraCo2D() noexcept = default;
-  SpectraCo2D(std::vector<SpectraCo> const & spectra) 
-  {
-    m_spectra.reserve(spectra.size());
-    int i = 0;
-    for (auto const & sprectrum : spectra) 
-    {
-      m_spectra.emplace(i, sprectrum);
-      m_indexes.push_back(i);
-    }
-    this->MAJ();
-  }
-  SpectraCo2D(std::map<int, SpectraCo> const & spectra) 
-  {
-    m_spectra.reserve(spectra.size());
-    for (auto const & it : spectra) 
-    {
-      m_spectra[it.first] = it.second;
-      m_indexes.push_back(it.first);
-    }
-    this->MAJ();
-  }
+// class SpectraCo2D
+// {
+// public:
+//   SpectraCo2D() noexcept = default;
+//   SpectraCo2D(std::vector<SpectraCo> const & spectra) 
+//   {
+//     m_spectra.reserve(spectra.size());
+//     int i = 0;
+//     for (auto const & sprectrum : spectra) 
+//     {
+//       m_spectra.emplace(i, sprectrum);
+//       m_indexes.push_back(i);
+//     }
+//     this->MAJ();
+//   }
+//   SpectraCo2D(std::map<int, SpectraCo> const & spectra) 
+//   {
+//     m_spectra.reserve(spectra.size());
+//     for (auto const & it : spectra) 
+//     {
+//       m_spectra[it.first] = it.second;
+//       m_indexes.push_back(it.first);
+//     }
+//     this->MAJ();
+//   }
 
-  void MAJ()
-  {
-    for (auto const & it : m_spectra)
-    {
-      auto const & spectrum = it.second;
-      if (m_min_X>spectrum.minX()) m_min_X = spectrum.minX();
-      if (m_max_X<spectrum.maxX()) m_max_X = spectrum.maxX();
-      if (nb_bins<spectrum.size()) nb_bins = spectrum.size();
-    }
-    // Resize all the spectra at the same size, and setup the same beginning and end
-    for (auto const & spectrum : m_spectra)
-    {
-      print(spectrum);
-    }
-  }
+//   void MAJ()
+//   {
+//     for (auto const & it : m_spectra)
+//     {
+//       auto const & spectrum = it.second;
+//       if (m_min_X>spectrum.minX()) m_min_X = spectrum.minX();
+//       if (m_max_X<spectrum.maxX()) m_max_X = spectrum.maxX();
+//       if (nb_bins<spectrum.size()) nb_bins = spectrum.size();
+//     }
+//     // Resize all the spectra at the same size, and setup the same beginning and end
+//     for (auto const & spectrum : m_spectra)
+//     {
+//       print(spectrum);
+//     }
+//   }
 
-  TH2F* createTH2F(std::string const & name = "all_histo")
-  {
-    TH2F* ret (new TH2F(name.c_str(), 
-                name.c_str(), m_spectra.size(), 0, m_spectra.size(), 
-                nb_bins, m_min_X, m_max_X));
-    return ret;
-  }
+//   TH2F* createTH2F(std::string const & name = "all_histo")
+//   {
+//     TH2F* ret (new TH2F(name.c_str(), 
+//                 name.c_str(), m_spectra.size(), 0, m_spectra.size(), 
+//                 nb_bins, m_min_X, m_max_X));
+//     return ret;
+//   }
 
-private:
-  std::vector<int> m_indexes;
-  std::unordered_map<int, SpectraCo> m_spectra;
+// private:
+//   std::vector<int> m_indexes;
+//   std::unordered_map<int, SpectraCo> m_spectra;
 
-  double m_min_X=0;
-  double m_max_X=0;
-  int nb_bins = 0;
-};
+//   double m_min_X=0;
+//   double m_max_X=0;
+//   int nb_bins = 0;
+// };
 
 #endif //SPECTRACO_HPP

@@ -927,7 +927,7 @@ namespace CoAnalyse
    *    - "S" (symmetric): Loop through the X bins, find the background on the Y projection, then symmetrise the bidim
    *    
    */
-  void removeBackground(TH1F * histo, int const & niter = 10, std::string const & fit_options = "", std::string const & bidim_options = "X")
+  void removeBackground(TH1F * histo, int const & niter = 10, std::string const & fit_options = "", std::string const & bidim_options = "X") noexcept
   {
     if (!histo || histo->IsZombie()) return;
     auto const & dim = histo->GetDimension();
@@ -1182,6 +1182,49 @@ void GetPoint(TVirtualPad * vpad, double& x, double& y)
   y = cutg->GetY();
   delete cutg;
 }
+
+class PeakFitter
+{
+public:
+  PeakFitter(TH1F* histo, double low_edge, double high_edge)
+  {
+    auto const & mean0 = (high_edge+low_edge)/2;
+    auto const & constante0 = histo->GetBinContent(mean0);
+    auto const & sigma0 = (high_edge-low_edge)/5.;
+
+    TF1* gaus0(new TF1("gaus0","gaus"));
+    gaus0 -> SetRange(low_edge, high_edge);
+    gaus0 -> SetParameter(0, constante0);
+    gaus0 -> SetParameter(1, mean0);
+    gaus0 -> SetParameter(2, sigma0);
+    histo -> Fit(gaus0,"RQN+");
+
+    TF1* gaus1(new TF1("gaus1","gaus(0)+pol1(3)"));
+    gaus1 -> SetRange(low_edge, high_edge);
+    gaus1 -> SetParameter(0, gaus0->GetParameter(0));
+    gaus1 -> SetParameter(1, gaus0->GetParameter(1));
+    gaus1 -> SetParameter(2, gaus0->GetParameter(2));
+    histo -> Fit(gaus1,"RQN+");
+
+    TF1* gaus2(new TF1("gaus2","gaus(0)+pol2(3)"));
+    gaus2 -> SetRange(low_edge, high_edge);
+    gaus2 -> SetParameter(0, gaus1->GetParameter(0));
+    gaus2 -> SetParameter(1, gaus1->GetParameter(1));
+    gaus2 -> SetParameter(2, gaus1->GetParameter(2));
+    histo -> Fit(gaus2,"RQN+");
+
+    gaus2->Draw("same");
+    final_fit = gaus2;
+  }
+
+  auto getConstante() const {return final_fit->GetParameter(0);}
+  auto getMean() const {return final_fit->GetParameter(1);}
+  auto getSigma() const {return final_fit->GetParameter(2);}
+
+private:
+  TF1* final_fit = nullptr;
+};
+
 
 
 #endif //LIBROOT_HPP

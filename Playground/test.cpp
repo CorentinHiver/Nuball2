@@ -349,6 +349,9 @@ int main(int argc, char ** argv)
 
   // auto histo_ref = file_ref->Get<TH1F>("PARIS_BR3D2_prompt_singles");
   // histo_ref->Rebin(2);
+  SpectraCo spectra_ref(histo_ref);
+  spectra_ref.removeBackground(20);
+  delete histo_ref; histo_ref = spectra_ref.createTH1F();
   SpectraAlignator alignator(histo_ref);
   if (argc>1) alignator.setIterations(std::stoi(argv[1]));
   alignator.setBruteForce();
@@ -356,16 +359,20 @@ int main(int argc, char ** argv)
   auto file_test = TFile::Open("histos/run_101_matrixated.root", "READ");
   // auto histo_test = file_test->Get<TH1F>("R3A1_black_prompt_singles");
   auto histo_test = file_test->Get<TH1F>("PARIS_BR3D2_delayed_singles");
+  SpectraCo spectra_test(histo_test);
+  spectra_test.removeBackground(20);
   // auto histo_test = file_test->Get<TH1F>("PARIS_BR3D2_prompt_singles");
   // histo_test->Rebin(2);
   auto histo_test_realigned = new TH1F();
   // auto free_degrees = 4;
   // // print(argc);
   // // if (argc>3) deg = std::stoi(argv[2]);
-  alignator.alignSpectra(histo_test, histo_test_realigned);
+  delete histo_test; histo_test = spectra_test.createTH1F();
 
-  std::string name = "test_recal.root";
-  // std::string name = "test_derivatives.root";
+  alignator.alignSpectra(spectra_test.createTH1F(), histo_test_realigned);
+
+  // std::string name = "test_recal.root";
+  std::string name = "test_derivatives.root";
 
   auto file_out = TFile::Open(name.c_str(), "RECREATE");
   file_out->cd();

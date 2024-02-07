@@ -13,9 +13,15 @@
  */
 void recal(std::string choice_detectors = "PARIS", std::vector<double> peaks = {})
 {
+  std::vector<double> Eu152 = {121.7830, 344.2760, 778.9030, 964.1310, 1408.0110};
+  std::vector<double> Th232 = {238.632, 338.32, 510.770, 583.191, 911.204, 2614.533};
+  if (choice_detectors == "DSSD") throw_error("Can't be used for DSSD");
   detectors.load("index_129.list");
 #ifdef NSI129
-  std::string infile = "~/faster_data/N-SI-129-root_histo/fused_histo_calibrated.root";
+  // std::string infile = "~/faster_data/N-SI-129-run_histo/merged/fused_histo.root";
+  std::string infile = "~/faster_data/N-SI-129-source_histo/Th232_both_sides.root";
+  peaks = Th232;
+  Calibration calib("../129_2024.calib");
 #else
   std::string infile = "test_calib.root";
 #endif //NSI129
@@ -69,6 +75,9 @@ void recal(std::string choice_detectors = "PARIS", std::vector<double> peaks = {
     // Load the spectra in a SpectraCo to remove its background
     spectra.emplace(label, hist);
     auto & spectrum = spectra.at(label);
+  #ifdef NSI129
+    spectrum.calibrate(calib, detectors.label(name));
+  #endif //NSI129
     spectrum.rebin(rebin);
     spectrum.removeBackground(smooth);
     spectrum.resizeBin(spectrum.getBin(10000));

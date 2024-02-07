@@ -4,47 +4,6 @@
 #include "../libRoot.hpp"
 #include "../Classes/Fit.hpp"
 
-class PeakFitter
-{
-public:
-  PeakFitter(TH1F* histo, double low_edge, double high_edge)
-  {
-    auto const & mean0 = (high_edge+low_edge)/2;
-    auto const & constante0 = histo->GetBinContent(mean0);
-    auto const & sigma0 = (high_edge-low_edge)/5.;
-
-    TF1* gaus0(new TF1("gaus0","gaus"));
-    gaus0 -> SetRange(low_edge, high_edge);
-    gaus0 -> SetParameter(0, constante0);
-    gaus0 -> SetParameter(1, mean0);
-    gaus0 -> SetParameter(2, sigma0);
-    histo -> Fit(gaus0,"RQN+");
-
-    TF1* gaus1(new TF1("gaus1","gaus(0)+pol1(3)"));
-    gaus1 -> SetRange(low_edge, high_edge);
-    gaus1 -> SetParameter(0, gaus0->GetParameter(0));
-    gaus1 -> SetParameter(1, gaus0->GetParameter(1));
-    gaus1 -> SetParameter(2, gaus0->GetParameter(2));
-    histo -> Fit(gaus1,"RQN+");
-
-    TF1* gaus2(new TF1("gaus2","gaus(0)+pol2(3)"));
-    gaus2 -> SetRange(low_edge, high_edge);
-    gaus2 -> SetParameter(0, gaus1->GetParameter(0));
-    gaus2 -> SetParameter(1, gaus1->GetParameter(1));
-    gaus2 -> SetParameter(2, gaus1->GetParameter(2));
-    histo -> Fit(gaus2,"RQN+");
-
-    gaus2->Draw("same");
-    final_fit = gaus2;
-  }
-
-  auto getConstante() const {return final_fit->GetParameter(0);}
-  auto getMean() const {return final_fit->GetParameter(1);}
-  auto getSigma() const {return final_fit->GetParameter(2);}
-
-private:
-  TF1* final_fit = nullptr;
-};
 
 class BGOPeakFitter
 {
@@ -94,6 +53,15 @@ private:
   double m_sigma      = -1;
 
 };
+
+std::ostream& operator<<(std::ostream & out, FittedPeak const & peak)
+{
+  out << "E : "        << peak.energy() 
+      << " mean : "    << peak.mean() 
+      << " sigma "     << peak.sigma() 
+      << " constante " << peak.constante();
+  return out;
+}
 
 /**
  * @brief Allows one to select which peaks to fit on a spectra
@@ -149,10 +117,17 @@ public:
     m_histo->GetXaxis()->SetRangeUser(range_min, (range_max = _max));
   }
 
+  FittedPeak & fitPeak(double const & peaks, bool const & adjustRange = false);
   std::vector<FittedPeak> & fitPeaks(std::vector<double> peaks, bool const & adjustRange = false);
 
   auto const & getPeaks() const {return m_peaks;}
   void clearPeaks() {m_peaks.clear();}
+
+  void setRatioRange(double const & min, double const & max)
+  {
+    ratio_range_min = min;
+    ratio_range_max = max;
+  }
 
 private:
   TPad* m_pad = nullptr;
@@ -164,10 +139,44 @@ private:
   double range_min = 0;
   double range_max = 0;
 
+  double ratio_range_min = 0.75;
+  double ratio_range_max = 1.25;
+
   // Fitting : 
   std::vector<FittedPeak> m_peaks;
 };
 
+FittedPeak & AnalysedSpectra::fitPeak(double const & peak, bool const & adjustRange)
+{
+  if (m_pad == nullptr) autoCanvas();
+  m_histo->Draw();
+
+  m_pad -> SetLogy(true);
+
+  setMaximumRange(selectX(concatenate("VIEW RANGE : Select ABOVE peak ", (int)peak)));
+  setMinimumRange(selectX(concatenate("VIEW RANGE : Select BELOW peak ", (int)peak)));
+
+  m_pad -> SetLogy(false);
+
+  if (adjustRange)
+  {
+    setMinimumRange(selectX(concatenate("VIEW RANGE : Select BELOW peak ", (int)peak)));
+    setMaximumRange(selectX(concatenate("VIEW RANGE : Select ABOVE peak ", (int)peak)));
+  }
+
+  auto beginPeak = selectX(concatenate("FIT : Select the BEGINNING of peak ",(int)peak));
+  auto endPeak   = selectX(concatenate("FIT : Select the END peak "         ,(int)peak));
+
+  PeakFitter fit(m_histo, beginPeak, endPeak);
+
+  m_peaks.emplace_back(
+    peak,
+    fit.getConstante(),
+    fit.getMean(),
+    fit.getSigma());
+
+  return m_peaks.back();
+}
 
 std::vector<FittedPeak> & AnalysedSpectra::fitPeaks(std::vector<double> peaks, bool const & adjustRange = false)
 {
@@ -217,8 +226,8 @@ std::vector<FittedPeak> & AnalysedSpectra::fitPeaks(std::vector<double> peaks, b
   {
     auto const & peak = peaks[peak_i];
     auto const & peak_recal = peak/m_kpb;
-    auto const & peak_min_view_range = peak_recal*0.75;
-    auto const & peak_max_view_range = peak_recal*1.25;
+    auto const & peak_min_view_range = peak_recal*ratio_range_min;
+    auto const & peak_max_view_range = peak_recal*ratio_range_max;
     setMinimumRange(peak_min_view_range);
     setMaximumRange(peak_max_view_range);
 
