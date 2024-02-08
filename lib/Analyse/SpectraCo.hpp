@@ -269,11 +269,7 @@ public:
   void fill(double const & X) noexcept;
   void draw(const char* param = "");
   /// @brief TODO
-  void rebin(int const & factor);
-  /// @brief TODO
-  void rebin(double const & factor) {information("in SpectraCo::rebin(double factor), factor", factor, "is casted to an integer");}
-  /// @brief TODO
-  void rebin(float  const & factor) {information("in SpectraCo::rebin(float factor), factor" , factor, "is casted to an integer");}
+  void rebin(int const & factor, bool const & rebin_derivatives = false);
   TH1D* createTH1D(std::string newName = "", std::string newTitle = "");
   TH1F* createTH1F(std::string newName = "", std::string newTitle = "");
   
@@ -451,79 +447,16 @@ void SpectraCo::draw(const char* param)
 }
 
 /**
- * @brief TODO
- * @todo this function is not working (issue at 'if (fine_left != 0) new_bin += fine_left * m_spectra[reader_it++];')
- * @param factor 
+ * @brief Uses the TH1::Rebin method;
+ * @todo create a custom method without the use of ROOT (attempt commented at the bottom of the file)
  */
-void SpectraCo::rebin(int const & factor)
+void SpectraCo::rebin(int const & factor, bool const & rebin_derivatives)
 {
-  if (factor<1) throw_error("in SpectraCo::rebin(int factor) : factor can't be < 1");
-  auto const & rest     = m_size % factor;
-  int  const & new_size = m_size / factor;
-  std::vector<double> new_vector(new_size, 0); // Fills the new vector with 0
-
-  if(rest == 0) 
-  {
-    m_rebin*=factor; // Saves the rebin factor
-    for (int new_bin_it = 0; new_bin_it<new_size; new_bin_it++){ 
-      // pauseCo(); print(new_bin_it);
-      for (int bin_j = 0; bin_j<factor; bin_j ++){
-        // print(int_cast(new_bin_it * factor + bin_j), m_spectra[int_cast(new_bin_it * factor + bin_j)]);
-        new_vector[new_bin_it] += m_spectra[int_cast(new_bin_it * factor + bin_j)];
-    }
-    // print(new_vector[new_bin_it]);
-    }
-  }
-
-  else
-  {
-    print("Can't rebin if the factor isn't a diviser of the number of bins");
-    return;
-    m_rebin*=factor; // Saves the rebin factor
-    // If the rebin factor is not a divisor of the initial size,
-    // one has to extend a little bit each of the new bins. For instance, 
-    // if 'size = 20' and 'factor = 3' then 'rest = size%factor = 1' and 'new_size = 6, 
-    // so there is one bin "missing". To compensate, each bin will be extended 
-    // by 'extend = rest/new_size', so here '1/6'.
-
-    double extend = rest / new_size;
-    
-    // Starts to loop over the histograms :
-    for (int old_bin_it = 0; old_bin_it<m_size; old_bin_it++){
-      auto & new_bin = new_vector[old_bin_it / factor]; // Create an alias
-
-      // First, calculate the actual shift for the current bin :
-      double const & shift_left  =  old_bin_it    * extend;
-      double const & shift_right = (old_bin_it+1) * extend;
-
-      // Then calculate the number of bins to shift :
-      int const & bins_shift_left  = int_cast(std::trunc(shift_left));
-      int const & bins_shift_right = int_cast(std::trunc(shift_right));
-
-      // And the 'fine shift' (the rest of the trucation)
-      double const & fine_left  = 1 - (shift_left  - double_cast(bins_shift_left ));
-      double const & fine_right =      shift_right - double_cast(bins_shift_right );
-
-      // The first bin is shifted accordingly :
-      int reader_it = old_bin_it + bins_shift_left;
-
-      // Take the fine left shift into account, which means 
-      if (fine_left != 0) new_bin += fine_left * m_spectra[reader_it++];
-
-      // Calculate the stop bin :
-      auto const & stop_bin = old_bin_it + factor + bins_shift_right;
-
-      // Read all the other bins :
-      for (; reader_it < stop_bin; reader_it ++){
-        new_bin += m_spectra[reader_it];
-      }
-
-      // Take the fine right shift into account :
-      if (fine_right != 0) new_bin += fine_right * m_spectra[reader_it++];
-  }}
-
-  m_spectra = new_vector;
-  m_size    = new_size;
+  m_rebin*=factor; // Saves the rebin factor
+  auto histo = createTH1F(concatenate(name(), " rebinning by ", factor));
+  histo->Rebin(factor);
+  this->load(histo);
+  if (rebin_derivatives && m_derivative) m_derivative->rebin(factor, rebin_derivatives);
 }
 
 void SpectraCo::load(TH1* root_spectra)
@@ -578,7 +511,7 @@ SpectraCo SpectraCo::operator*(double const & factor)
   SpectraCo spectra(*this);// Optimize here
   m_factor = factor;
   for (int bin = 0; bin<m_size; bin++) spectra[bin] = spectra[bin]*m_factor;
-  // TODO if time : 
+  // TODO if time : rename the spectra based on the multiplicative factor
   // if (m_factor!=1)// If the spectra has already been multiplied by another factor :
   // {
   //   auto begin_factor_it = spectra.name().find_last_of("_(x");
@@ -1043,5 +976,81 @@ SpectraPoints const & SpectraCo::findPeaks(int const & threshold, int const & nb
 //   double m_max_X=0;
 //   int nb_bins = 0;
 // };
+
+// /**
+//  * @brief TODO
+//  * @todo this function is not working (issue at 'if (fine_left != 0) new_bin += fine_left * m_spectra[reader_it++];')
+//  * @param factor 
+//  */
+// void SpectraCo::rebin(int const & factor)
+// {
+//   if (factor<1) throw_error("in SpectraCo::rebin(int factor) : factor can't be < 1");
+//   auto const & rest     = m_size % factor;
+//   int  const & new_size = m_size / factor;
+//   std::vector<double> new_vector(new_size, 0); // Fills the new vector with 0
+
+//   if(rest == 0) 
+//   {
+//     m_rebin*=factor; // Saves the rebin factor
+//     for (int new_bin_it = 0; new_bin_it<new_size; new_bin_it++){ 
+//       // pauseCo(); print(new_bin_it);
+//       for (int bin_j = 0; bin_j<factor; bin_j ++){
+//         // print(int_cast(new_bin_it * factor + bin_j), m_spectra[int_cast(new_bin_it * factor + bin_j)]);
+//         new_vector[new_bin_it] += m_spectra[int_cast(new_bin_it * factor + bin_j)];
+//     }
+//     // print(new_vector[new_bin_it]);
+//     }
+//   }
+
+//   else
+//   {
+//     print("Can't rebin if the factor isn't a diviser of the number of bins");
+//     return;
+//     m_rebin*=factor; // Saves the rebin factor
+//     // If the rebin factor is not a divisor of the initial size,
+//     // one has to extend a little bit each of the new bins. For instance, 
+//     // if 'size = 20' and 'factor = 3' then 'rest = size%factor = 1' and 'new_size = 6, 
+//     // so there is one bin "missing". To compensate, each bin will be extended 
+//     // by 'extend = rest/new_size', so here '1/6'.
+
+//     double extend = rest / new_size;
+    
+//     // Starts to loop over the histograms :
+//     for (int old_bin_it = 0; old_bin_it<m_size; old_bin_it++){
+//       auto & new_bin = new_vector[old_bin_it / factor]; // Create an alias
+
+//       // First, calculate the actual shift for the current bin :
+//       double const & shift_left  =  old_bin_it    * extend;
+//       double const & shift_right = (old_bin_it+1) * extend;
+
+//       // Then calculate the number of bins to shift :
+//       int const & bins_shift_left  = int_cast(std::trunc(shift_left));
+//       int const & bins_shift_right = int_cast(std::trunc(shift_right));
+
+//       // And the 'fine shift' (the rest of the trucation)
+//       double const & fine_left  = 1 - (shift_left  - double_cast(bins_shift_left ));
+//       double const & fine_right =      shift_right - double_cast(bins_shift_right );
+
+//       // The first bin is shifted accordingly :
+//       int reader_it = old_bin_it + bins_shift_left;
+
+//       // Take the fine left shift into account, which means 
+//       if (fine_left != 0) new_bin += fine_left * m_spectra[reader_it++];
+
+//       // Calculate the stop bin :
+//       auto const & stop_bin = old_bin_it + factor + bins_shift_right;
+
+//       // Read all the other bins :
+//       for (; reader_it < stop_bin; reader_it ++){
+//         new_bin += m_spectra[reader_it];
+//       }
+
+//       // Take the fine right shift into account :
+//       if (fine_right != 0) new_bin += fine_right * m_spectra[reader_it++];
+//   }}
+
+//   m_spectra = new_vector;
+//   m_size    = new_size;
+// }
 
 #endif //SPECTRACO_HPP

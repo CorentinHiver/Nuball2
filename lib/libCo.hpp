@@ -96,6 +96,18 @@ void pauseDebug()
   #endif
 }
 
+///////////
+// MATHS //
+///////////
+
+template<class T> T positive_modulo(T const & dividend, T const & divisor)
+{
+  auto ret = dividend % divisor;
+  if (ret<0) ret+=divisor;
+  return ret;
+}
+
+
 //////////////
 //   UNITS  //
 //////////////
@@ -385,7 +397,7 @@ inline bool find_key(std::map<K,V> const & map, K const & key)
 /// @brief Returns the list of keys in a map
 /// @details This method is only looking in the keys, not the values
 template<typename K, typename V> 
-inline std::vector<K> list_of_key(std::map<K,V> const & map)
+inline std::vector<K> list_of_keys(std::map<K,V> const & map)
 {
   std::vector<K> ret;
   for (auto const & it : map) ret.push_back(it.first);

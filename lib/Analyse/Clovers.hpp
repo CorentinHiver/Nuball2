@@ -84,7 +84,7 @@ public:
   static inline bool is_clover_BGO (Label const & l) {return ((is_clover(l)) ? ((l-23)%6 < 3) : false);}
 
   // Correspondance between detector label and crystal index :
-  static inline uchar label_to_clover   (Label const & l) {return uchar_cast(l-23)/6);} // Ranges from 0 to 23
+  static inline uchar label_to_clover   (Label const & l) {return static_cast<uchar>((l-23)/6);} // Ranges from 0 to 23
   static        uchar label_to_cristal  (Label const & l);
 
   static std::array<bool, 1000> isClover; // Array used to know if a given detector is a clover
@@ -634,6 +634,13 @@ void Clovers::Analyse_more()
 
 }
 
+template<class T> T positive_modulo(T const & dividend, T const & divisor)
+{
+  auto ret = dividend % divisor;
+  if (ret<0) ret+=divisor;
+  return ret;
+}
+
 uchar Clovers::label_to_cristal(Label const & l)
 {
   auto const cristal = uchar_cast(l-23);
@@ -646,66 +653,43 @@ uchar Clovers::label_to_cristal(Label const & l)
   else
   {
     auto const clover = cristal/6; // Clover number
-    auto const Ge_cristal = clover_cristal-2; // Cristal number inside the clover [0,3]
-    auto cristal_index = Ge_cristal+4*clover;
+    auto Ge_cristal = uchar_cast(clover_cristal-2); // Cristal number inside the clover [0,3]
+    auto cristal_index = uchar_cast(Ge_cristal+4*clover);
 
     // For normally rotated clovers, the following disposition is taken : 
     // With sub_index beeing ranging from 0 to 3 for Ge crystal,
     // With beam from right to left, and the gamma rays going out of the sheet :
     // The color green is top right, black top left, red bottom right and blue bottom left for normally rotated clovers
-    // The sub_index 0 is top right, 1 top left, 2 bottom right, 3 bottom_left
+    // The sub_index 0 is top left, 1 top right, 2 bottom right, 3 bottom_left
     // That is, the angle phi increases with the sub_index
-    //          the even labels are on the right side
-    //          the odd  labels are on the left  side
 
+    switch(Ge_cristal)
+    {
+      case 0: Ge_cristal = 2; // Red
+      case 1: Ge_cristal = 1; // Green
+      case 2: Ge_cristal = 0; // Black
+      case 3: Ge_cristal = 3; // Blue
+      default : return -1;        // Should never happen
+    }
+
+    // Correctly rotate the wrongly rotated clovers :
     switch (clover) 
     { // Rotation is trigowise direction
 
-      // pi/2 rotation : R2A6
+      // pi/2 rotated (-> -pi/2 rotation) : R2A6
     case 17:
-      switch(Ge_cristal)
-      {
-        case 0: return uchar_cast(cristal_index+0); // Red
-        case 1: return uchar_cast(cristal_index+0); // Green
-        case 2: return uchar_cast(cristal_index+1); // Black
-        case 3: return uchar_cast(cristal_index-1); // Blue
-        default : return -1;
-      }
+       Ge_cristal = positive_modulo((Ge_cristal-1), 4);
 
-      // -pi/2 rotation : R3A3, R3A4
+      // -pi/2 rotated (-> pi/2 rotation) : R3A3, R3A4
     case 2: case 3:
-      switch(Ge_cristal)
-      {
-        case 0: return uchar_cast(cristal_index+3); // Red
-        case 1: return uchar_cast(cristal_index+1); // Green
-        case 2: return uchar_cast(cristal_index-2); // Black
-        case 3: return uchar_cast(cristal_index+0); // Blue
-        default : return -1;
-      }
+      Ge_cristal = positive_modulo((Ge_cristal+1), 4)
 
       // pi rotation : R3A5
     case 4:
-      switch(Ge_cristal)
-      {
-        case 0: return uchar_cast(cristal_index+1); // Red
-        case 1: return uchar_cast(cristal_index+2); // Green
-        case 2: return uchar_cast(cristal_index+0); // Black
-        case 3: return uchar_cast(cristal_index-3); // Blue
-        default : return -1;  
-      }
-
-      default: // All the correctly turned clovers:
-      switch(Ge_cristal)
-      {
-        case 0: return uchar_cast(cristal_index+2); // Red
-        case 1: return uchar_cast(cristal_index-1); // Green
-        case 2: return uchar_cast(cristal_index-1); // Black
-        case 3: return uchar_cast(cristal_index+0); // Blue
-        default : return -1;
-      }
+      Ge_cristal = positive_modulo((Ge_cristal+2), 4)
     }
   }
-  return 255u;
+  return clover+Ge_cristal;
 }
 
 inline void Clovers::PrintClean()
@@ -797,4 +781,79 @@ std::ostream& operator<<(std::ostream& cout, Clovers const & clovers)
 //       }
 //     }
 //   }
+// }
+
+
+// uchar Clovers::label_to_cristal(Label const & l)
+// {
+//   auto const cristal = static_cast<uchar>(l-23);
+//   auto const clover_cristal = static_cast<uchar>(cristal%6);
+
+//   // BGO : 
+//   if (clover_cristal<2) return static_cast<uchar>(clover_cristal+2*(cristal/6));
+  
+//   // Ge :
+//   else
+//   {
+//     auto const clover = cristal/6; // Clover number
+//     auto const Ge_cristal = clover_cristal-2; // Cristal number inside the clover [0,3]
+//     auto cristal_index = Ge_cristal+4*clover;
+
+//     // For normally rotated clovers, the following disposition is taken : 
+//     // With sub_index beeing ranging from 0 to 3 for Ge crystal,
+//     // With beam from right to left, and the gamma rays going out of the sheet :
+//     // The color green is top right, black top left, red bottom right and blue bottom left for normally rotated clovers
+//     // The sub_index 0 is top right, 1 top left, 2 bottom right, 3 bottom_left
+//     // That is, the angle phi increases with the sub_index
+//     //          the even labels are on the right side
+//     //          the odd  labels are on the left  side
+
+//     switch (clover) 
+//     { // Rotation is trigowise direction
+
+//       // pi/2 rotation : R2A6
+//     case 17:
+//       switch(Ge_cristal)
+//       {
+//         case 0: return static_cast<uchar>(cristal_index+0); // Red
+//         case 1: return static_cast<uchar>(cristal_index+0); // Green
+//         case 2: return static_cast<uchar>(cristal_index+1); // Black
+//         case 3: return static_cast<uchar>(cristal_index-1); // Blue
+//         default : return -1;
+//       }
+
+//       // -pi/2 rotation : R3A3, R3A4
+//     case 2: case 3:
+//       switch(Ge_cristal)
+//       {
+//         case 0: return static_cast<uchar>(cristal_index+3); // Red
+//         case 1: return static_cast<uchar>(cristal_index+1); // Green
+//         case 2: return static_cast<uchar>(cristal_index-2); // Black
+//         case 3: return static_cast<uchar>(cristal_index+0); // Blue
+//         default : return -1;
+//       }
+
+//       // pi rotation : R3A5
+//     case 4:
+//       switch(Ge_cristal)
+//       {
+//         case 0: return static_cast<uchar>(cristal_index+1); // Red
+//         case 1: return static_cast<uchar>(cristal_index+2); // Green
+//         case 2: return static_cast<uchar>(cristal_index+0); // Black
+//         case 3: return static_cast<uchar>(cristal_index-3); // Blue
+//         default : return -1;  
+//       }
+
+//       default: // All the correctly turned clovers:
+//       switch(Ge_cristal)
+//       {
+//         case 0: return static_cast<uchar>(cristal_index+2); // Red
+//         case 1: return static_cast<uchar>(cristal_index-1); // Green
+//         case 2: return static_cast<uchar>(cristal_index-1); // Black
+//         case 3: return static_cast<uchar>(cristal_index+0); // Blue
+//         default : return -1;
+//       }
+//     }
+//   }
+//   return 255u;
 // }
