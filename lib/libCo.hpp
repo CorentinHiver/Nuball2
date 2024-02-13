@@ -1,7 +1,7 @@
 #ifndef LIBCO_HPP
 #define LIBCO_HPP
 
-// This is used in my PC to have better looking errors
+// This is used in my PC to have better looking std errors
 #ifndef _GLIBCXX_USE_CXX11_ABI
 #define _GLIBCXX_USE_CXX11_ABI 0/1
 #endif //_GLIBCXX_USE_CXX11_ABI
@@ -69,6 +69,15 @@ std::ostream& operator<<(std::ostream& cout, std::map<K,V> const & m)
   return cout;
 }
 
+template <class K, class V> 
+std::ostream& operator<<(std::ostream& cout, std::unordered_map<K,V> const & m)
+{
+  cout << "{";
+  for (auto const & pair : m) cout << pair;
+  cout << "}\n";
+  return cout;
+}
+
 template<class E, size_t size> 
 std::ostream& operator<<(std::ostream& cout, std::array<E,size> const & a)
 {
@@ -95,18 +104,6 @@ void pauseDebug()
   pauseCo();
   #endif
 }
-
-///////////
-// MATHS //
-///////////
-
-template<class T> T positive_modulo(T const & dividend, T const & divisor)
-{
-  auto ret = dividend % divisor;
-  if (ret<0) ret+=divisor;
-  return ret;
-}
-
 
 //////////////
 //   UNITS  //
@@ -190,6 +187,9 @@ inline longlong longlong_cast(T const & t) {return static_cast<longlong>(t);}
 /// @brief Casts a number into std::size_t
 template<typename T,  typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
 inline size_t size_cast(T const & t) {return static_cast<size_t>(t);}
+
+///@brief Check if the given double holds an integer
+bool is_int (double const & x) {return std::trunc(x) == x;}
 
 ////////////////////////
 // General converters //
@@ -359,8 +359,30 @@ std::ostream& operator<<(std::ostream& cout, Bools const & bools)
 using Strings = std::vector<std::string>;
 using Ints = std::vector<int>;
 
-// Check if a double holds an int inside
-bool is_int (double const & x) {return std::trunc(x) == x;}
+template<typename T>
+struct is_container {
+private:
+    template<typename C>
+    static auto test(int) -> decltype(std::begin(std::declval<C>()), std::end(std::declval<C>()), std::true_type());
+
+    template<typename>
+    static std::false_type test(...);
+
+public:
+    static constexpr bool value = decltype(test<T>(0))::value;
+};
+
+
+///////////
+// MATHS //
+///////////
+
+template<class T> T positive_modulo(T const & dividend, T const & divisor)
+{
+  auto ret = dividend % divisor;
+  if (ret<0) ret+=divisor;
+  return ret;
+}
 
 ///////////////////////////////////
 //    UNORDERED MAPS FUNCTIONS   //
@@ -380,6 +402,8 @@ inline bool find_value(std::unordered_map<K,V> const & map, V const & value)
         return pair.second == value;
     }));
 }
+
+
 
 /////////////////////////
 //    MAPS FUNCTIONS   //
@@ -531,6 +555,32 @@ class Slots
 
 };
 #endif //__cplusplus >= 201402L
+
+///////////////////////
+//   SOME COOL STUFF //
+///////////////////////
+
+namespace CoBazar
+{
+  void progress_bar(float const & progress_procent, int width = 50)
+  {
+    auto const & nb_chars = int_cast(progress_procent/100.*width);
+
+    std::cout << "|";
+    for (int i = 0; i<width; i++) 
+    {
+      if (i<nb_chars) std::cout << ".";
+      else            std::cout << " ";
+    }
+    std::cout << "| : " << int_cast(progress_procent) << "%" << std::endl << "\033[F";
+    std::cout.flush();
+  }
+
+  void short_progress_bar(float const & progress_procent) {progress_bar(progress_procent, 10 );}
+  void long_progress_bar (float const & progress_procent) {progress_bar(progress_procent, 100);}
+
+}
+
 
 // #if (__cplusplus >= 201703L)
 

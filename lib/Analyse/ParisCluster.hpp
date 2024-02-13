@@ -10,7 +10,8 @@ class ParisCluster
 {
 public:
   // ParisCluster() {}
-  ParisCluster() : m_label(glabel.fetch_add(1)) {glabel++; this -> Initialize();}
+  // ParisCluster() : m_label(glabel.fetch_add(1)) {this -> Initialize();}
+  ParisCluster() : m_label() {glabel++; this -> Initialize();}
   void Initialize();
   void InitializeBidims();
   void Reset();
@@ -41,11 +42,13 @@ public:
 
 private:
   uchar const m_label;
-  static thread_local std::atomic<uchar> glabel;
+  // static thread_local std::atomic<uchar> glabel;
+  static thread_local uchar glabel;
 };
 
 template<std::size_t nb_phoswitch>
-thread_local std::atomic<uchar> ParisCluster<nb_phoswitch>::glabel = 0;
+// thread_local std::atomic<uchar> ParisCluster<nb_phoswitch>::glabel = 0;
+thread_local uchar ParisCluster<nb_phoswitch>::glabel = 0;
 
 template<std::size_t nb_phoswitch>
 void ParisCluster<nb_phoswitch>::Initialize()

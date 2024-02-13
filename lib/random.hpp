@@ -17,6 +17,13 @@ int intRand(const int & min, const int & max)
   return distribution(generator);
 }
 
+double double_random_uniform(const double & min, const double & max) 
+{
+  static thread_local std::mt19937 generator;
+  std::uniform_real_distribution<double> distribution(min,max);
+  return distribution(generator);
+}
+
 double random_uniform() 
 {
   static thread_local std::mt19937 generator;

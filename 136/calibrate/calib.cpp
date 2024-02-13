@@ -1,5 +1,7 @@
 #include "../libRoot.hpp"
 #include <SpectraCo.hpp>
+#include "../../lib/Analyse/Paris.hpp"
+
 
 #define NSI129
 

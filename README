@@ -3,11 +3,3 @@ For any questions, contact me @ corentin.hiver@free.fr
 ------------------------
 To update git repository
 sh MAJ.sh
-
-------------------------
-To read raw faster data : 
-1. Create a new folder
-2. Copy FasterLib/Makefile_template 
-3. Rename it to Makefile
-4. Follow the instructions inside 
-5. Read the manual -- INCOMING --

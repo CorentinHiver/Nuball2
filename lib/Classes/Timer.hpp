@@ -52,22 +52,19 @@ public:
 
   auto operator() ()
   {
-    auto time = Time();
+    double time = Time();
     m_unit = "ms";
 
-    if (time>1000.) { time/=1000.; m_unit = "s";}
-    else { return time; }
+    if (time>3600000.) {time/=3600000.; m_unit = "h";}
+    else if (time>120000.){time/=120000.; m_unit = "min";}
+    else if (time>1000.){time/=1000.; m_unit = "s";}
 
-    if (time>120.) { time/=60.; m_unit = "min";  }
-    else {  return time; }
-
-    if (time>120.) { time/=60.; m_unit = "h"; return time;}
-    else { return time; }
+    return std::to_string(time)+" "+m_unit;
   }
 
   std::string unit() {(*this)(); return m_unit;}
   
-  auto Unit()
+  float Unit()
   {
          if (m_unit == "ms") return 1.;
     else if (m_unit ==  "s") return 1000.;
@@ -87,5 +84,11 @@ private:
   duration_milli_t d_milli;
   std::string m_unit = "ms";
 };
+
+std::ostream& operator<<(std::ostream& out, Timer & timer)
+{
+  out << timer();
+  return out;
+}
 
 #endif //TIMER_H

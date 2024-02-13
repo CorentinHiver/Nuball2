@@ -97,22 +97,22 @@ public:
   /// @brief Returns a vector holding the coefficients.
   std::vector<float> operator[](Label const & label) const noexcept {return this->get(label);};
 
+  /// @brief Get the maximum label of detectors
+  auto const & size       () const noexcept {return m_size     ;}
+  /// @brief Get the maximum label of detectors
+  auto &       size       ()       noexcept {return m_size     ;}
   /// @brief Get the number of detectors with calibration coefficients
-  auto const & size        () const noexcept {return m_size     ;}
+  auto const & nbDetectors() const noexcept {return m_nb_det   ;}
   /// @brief Get the number of detectors with calibration coefficients
-  auto &       size        ()       noexcept {return m_size     ;}
-  /// @brief Get the number of detectors with calibration coefficients
-  auto const & nb_detectors() const noexcept {return m_nb_det   ;}
-  /// @brief Get the number of detectors with calibration coefficients
-  auto &       nb_detectors()       noexcept {return m_nb_det   ;}
+  auto &       nbDetectors()       noexcept {return m_nb_det   ;}
   /// @brief Returns true if there is at least one coefficient loaded
-  bool const & isFilled    () const noexcept {return m_ok       ;}
+  bool const & isFilled   () const noexcept {return m_ok       ;}
   /// @brief Returns true if there is at least one coefficient loaded
-  bool &       isFilled    ()       noexcept {return m_ok       ;}
+  bool &       isFilled   ()       noexcept {return m_ok       ;}
   /// @brief Gets the name of the file from while the data has been loaded
-  auto const & file        () const noexcept {return m_filename ;}
+  auto const & file       () const noexcept {return m_filename ;}
   /// @brief Gets the name of the file from while the data has been loaded
-  auto &       file        ()       noexcept {return m_filename ;}
+  auto &       file       ()       noexcept {return m_filename ;}
 
   /// @brief Get the order of the calibration (0 : linear, 1 : affine, 2 : quadratic, 3 : 3rd order)
   auto const & getOrder    () const noexcept {return m_order    ;}
@@ -157,6 +157,7 @@ public:
   auto &       trinom    (Label const & label)       noexcept {return m_trinom[label]     ;}
 
   void Print();
+  void Print(Label const & label) ;
 
 private:
 
@@ -275,8 +276,8 @@ bool Calibration::load(File const & file)
   m_filename = file.string();
   std::ifstream inputfile(m_filename, std::ifstream::in);
 
-  if (!inputfile.good()) {print("CAN'T OPEN THE CALIBRATION FILE " + m_filename); throw std::runtime_error("CALIBRATION");}
-  else if (file_is_empty(inputfile)) {print("CALIBRATION FILE", m_filename, "EMPTY !"); throw std::runtime_error("CALIBRATION");}
+  if (!inputfile.good()) {print("CAN'T OPEN THE CALIBRATION FILE " + m_filename); throw_error("CALIBRATION");}
+  else if (file_is_empty(inputfile)) {print("CALIBRATION FILE", m_filename, "EMPTY !"); throw_error("CALIBRATION");}
   std::string line = "";
   Label size = 0;
   Label label = 0;
@@ -341,6 +342,29 @@ std::ostream& operator<<(std::ostream& out, Calibration const & calib)
 }
 
 void Calibration::Print() {print(*this);}
+void Calibration::Print(Label const & label) 
+{
+  auto const & calib_order = m_order[label];
+  if (calib_order < 0) return;
+
+  if(detectors) std::cout << detectors[label] << " : ";
+  else         std::cout <<           label  << " : ";
+
+  if (calib_order == 0) {std::cout << 0 << " " << m_slope[label];}
+  else //if (calib_order > 0)
+  {
+    std::cout << label << " " << m_intercept[label] << " " << m_slope[label];
+    if (calib_order > 1)
+    {
+      std::cout << " " << m_binom[label];
+      if (calib_order > 2)
+      {
+        std::cout << " " << m_trinom[label];
+      }
+    }
+  }
+  std::cout << std::endl;
+}
 
 /// @brief Writes down the calibration file
 void Calibration::write(std::string const & outfilename)
@@ -349,7 +373,7 @@ void Calibration::write(std::string const & outfilename)
   outFile.setExtension("calib");
   outFile.makePath(); // Create the path if it doesn't already exist
 
-  std::ofstream outfile(outFile.string());
+  std::ofstream outfile(outFile.string(), std::ios::out);
   outfile << *this;
   outfile.close();
   print(outFile.string(), "written");

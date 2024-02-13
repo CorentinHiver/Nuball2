@@ -331,9 +331,32 @@ public:
 
     m_graph = new TGraph(m_size, ADCs.data(), energies.data());
     m_graph->Fit(linear_fit);
-    if (order < 1) m_fit.parameter0 = linear_fit->GetParameter(0);
+    if (order > 0) m_fit.parameter0 = linear_fit->GetParameter(0);
     m_fit.parameter1 = linear_fit->GetParameter(1);
   }
+
+  PeaksCalibrator(std::vector<double> const & peaks, std::vector<double> const & ADCs, int const & order) :
+    m_size(peaks.size()),
+    m_order(order)
+  {
+    if (peaks.size() != ADCs.size()) throw_error(concatenate("The peak vector has size ", peaks.size(), " and ADC vector size ", ADCs.size()));
+    if (order>2) throw_error("PeaksCalibrator DONT HANDLE order of fit > 2");
+
+    m_graph = new TGraph(m_size, ADCs.data(), peaks.data());
+    TF1* the_fit = nullptr;
+    switch (order)
+    {
+      case 0 : case 1 : 
+        the_fit = linear_fit;
+      case 2 : 
+        the_fit = square_fit;
+      default : the_fit = linear_fit; // Should never happen
+    }
+    m_graph->Fit(the_fit);
+    m_fit.parameter0 = (order > 0) ? the_fit->GetParameter(0) : 0;
+    m_fit.parameter1 = the_fit->GetParameter(1);
+    if (order>1) m_fit.parameter2 = the_fit->GetParameter(2);
+  } 
 
   ~PeaksCalibrator()
   {
@@ -344,15 +367,19 @@ public:
 
   void Draw(std::string const & opt) {if (m_graph) m_graph->Draw(opt.c_str());}
 
+  auto graph() {return m_graph;}
+
 private :
   size_t m_size = 0;
   int m_order = 0;
 
   TGraph* m_graph;
   static TF1* linear_fit;
+  static TF1* square_fit;
   Fit m_fit;
 };
 
 TF1* PeaksCalibrator::linear_fit = new TF1("linear_PeaksCalibrator", "pol1");
+TF1* PeaksCalibrator::square_fit = new TF1("square_PeaksCalibrator", "pol2");
 
 #endif // ANALYSEDSPECTRA_HPP

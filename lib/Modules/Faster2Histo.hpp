@@ -250,7 +250,7 @@ inline void Faster2Histo::fillHisto(Hit const & hit)
       if (m_bidim_paris && detectors)
       {
         if (m_nb_bins_paris<0) m_nb_bins_paris = 1000;
-        if (m_bin_max_paris<0) m_bin_max_paris = (m_calibration) ? 2.e+5 : 3000;
+        if (m_bin_max_paris<0) m_bin_max_paris = (m_calibration) ? 3000 : 2.e+5;
         if (found(detectors[hit.label], "PARIS"))
         {
           auto const & name_bidim = name+"_bidim";
@@ -265,8 +265,8 @@ inline void Faster2Histo::fillHisto(Hit const & hit)
 
   if (m_bidim_paris && detectors && found(detectors[hit.label], "PARIS"))
   {
-    if (m_calibration) m_bidim[hit.label].Fill(hit.nrj2, hit.nrj);
-    else               m_bidim[hit.label].Fill(hit.qdc2, hit.adc);
+    if (m_calibration) m_bidim[hit.label].Fill(hit.nrj, hit.nrj2);
+    else               m_bidim[hit.label].Fill(hit.adc, hit.qdc2);
   }
 }
 

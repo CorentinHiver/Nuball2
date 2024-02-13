@@ -93,6 +93,17 @@ bool THist_exists(TH1* histo)
   return (histo && !histo->IsZombie() && histo->Integral()>1);
 }
 
+/// @brief Patch to the TH1::Add method when the histograms limits are inconsistent
+void AddTH1(TH1* histo_total, TH1* histo)
+{
+  for (int bin = 0; bin<histo_total->GetNbinsX() + 1; bin++)
+  {
+    auto const & X_value = histo_total->GetBinCenter(bin);
+    auto const & content_other = histo->Interpolate(X_value);
+    histo_total->SetBinContent(bin, histo_total->GetBinContent(bin) + content_other);
+  }
+}
+
 bool AddTH1(TH2* histo2, TH1* histo1, int index, bool x = true)
 {
   if (!histo2) {print("TH2 do not exists"); return -1;}
@@ -124,7 +135,7 @@ bool AddTH1(TH2* histo2, TH1* histo1, int index, bool x = true)
  */
 bool AddTH1ByValue(TH2* histo2, TH1* histo1, int index, bool x = true)
 {
-  throw_error("DEV !");
+  // throw_error("AddTH1ByValue() is DEV !");
   if (!histo2) {print("TH2 do not exists"); return -1;}
   if (!histo1) {print("TH1 do not exists"); return -1;}
   auto axis = (x) ? histo2 -> GetXaxis() : histo2 -> GetYaxis();
@@ -223,6 +234,26 @@ void getDataTH1F(TH1F* histo, std::vector<float> & data)
   {
     data.push_back(histo->GetBinContent(bin));
   }
+}
+
+int findNextBinBelow(TH1* histo, int & bin, double threshold)
+{
+  while(histo->GetBinContent(bin++) > threshold)
+  {
+    if (bin > histo->GetNbinsX()) break;
+    else continue;
+  } 
+  return bin;
+}
+
+int findNextBinAbove(TH1* histo, int & bin, double threshold)
+{
+  while(histo->GetBinContent(bin++) < threshold)
+  {
+    if (bin > histo->GetNbinsX()) break;
+    else continue;
+  } 
+  return bin;
 }
 
 ///////////////////////////
@@ -927,7 +958,7 @@ namespace CoAnalyse
    *    - "S" (symmetric): Loop through the X bins, find the background on the Y projection, then symmetrise the bidim
    *    
    */
-  void removeBackground(TH1F * histo, int const & niter = 10, std::string const & fit_options = "", std::string const & bidim_options = "X") noexcept
+  void removeBackground(TH1 * histo, int const & niter = 10, std::string const & fit_options = "", std::string const & bidim_options = "X") noexcept
   {
     if (!histo || histo->IsZombie()) return;
     auto const & dim = histo->GetDimension();
@@ -1004,7 +1035,7 @@ namespace CoAnalyse
 std::vector<std::string> get_TH1F_names(TFile * file)
 {
   std::vector<std::string> ret;
-  if (!file) return ret;
+  if (!file) {print("in get_TH1F_names(TFile * file) : file is nullptr"); return ret;}
   auto list = file->GetListOfKeys();
   for (auto&& keyAsObj : *list)
   {
@@ -1037,6 +1068,51 @@ TH1F_map get_TH1F_map(TFile * file)
   for (auto const & name : names)
   {
     ret.emplace(name, file->Get<TH1F>(name.c_str()));
+  }
+  return ret;
+}
+
+TH1F_map get_TH1F_map(TFile * file, std::vector<std::string> & names)
+{
+  TH1F_map ret;
+  names = get_TH1F_names(file);
+  for (auto const & name : names)
+  {
+    ret.emplace(name, file->Get<TH1F>(name.c_str()));
+  }
+  return ret;
+}
+
+template<class T>
+std::vector<std::string> get_names_of(TFile * file)
+{
+  std::vector<std::string> ret;
+  T* temp_obj = new T;
+  if (!file) {print("in get_names_of<T>(TFile * file) : file is nullptr"); return ret;}
+  auto list = file->GetListOfKeys();
+  for (auto&& keyAsObj : *list)
+  {
+    std::unique_ptr<TKey> key (static_cast<TKey*>(keyAsObj));
+    if(strcmp(key->GetClassName(), temp_obj->ClassName()) == 0)
+    {
+      TObject* obj = key->ReadObj();
+      T* t = dynamic_cast<T*>(obj);
+      ret.push_back(t->GetName());
+    }
+  }
+  delete temp_obj;
+  return ret;
+}
+
+template<class T>
+std::map<std::string, T> create_map_of(TFile * file)
+{
+  throw_error("create_map_of<T>() DEV !!");
+  std::map<std::string, T> ret;
+  auto names (get_names_of<T>(file));
+  for (auto const & name : names)
+  {
+    ret.emplace(name, file->Get<T>(name.c_str()));
   }
   return ret;
 }
@@ -1126,7 +1202,9 @@ void fuse_all_histo(std::string const & folder, std::string const & outRoot = "f
 //     }
 // }
 
-void draw_all_TH1F_with_X_window(std::string const & filename, int minX, int maxX, int rebin = 1)
+/// @brief Draws all the TH1F of a given file one by one
+/// @attention Only works in CINT environnement (= macro only)
+void draw_all_TH1(std::string const & filename, int minX = 0, int maxX = 0, int rebin = 1)
 {
   auto file = TFile::Open(filename.c_str(), "READ");
   auto list = file->GetListOfKeys();
@@ -1134,35 +1212,20 @@ void draw_all_TH1F_with_X_window(std::string const & filename, int minX, int max
   for (auto&& keyAsObj : *list)
   {
     std::unique_ptr<TKey> key (static_cast<TKey*>(keyAsObj));
-    if(std::string(key->GetClassName()) == "TH1F")
+    if(std::string(key->GetClassName()) == "TH1F" || std::string(key->GetClassName()) == "TH1D")
     {
       std::unique_ptr<TObject> obj (key->ReadObj());
       auto histo = dynamic_cast<TH1F*>(obj.get());
       std::string name = histo->GetName();
       print(name);
       histo->Rebin(rebin);
+      if (maxX == 0) maxX = histo->GetXaxis()->GetBinCenter(histo->GetNbinsX());
       histo->GetXaxis()->SetRangeUser(minX, maxX);
 
-      // Create the TApplication :
-      // int argc = 0; 
-      // char** argv = nullptr;
-      // TApplication app("app", &argc, argv);
-      // TCanvas* c1 = new TCanvas("c1");
       c1->cd();
       histo->Draw();
-
-      // TObjArray* histArray = new TObjArray();
-      // histArray->Add(histo);
-      // c1->Connect("onClick", "onClick(int,int,int,TObject*", 0, 0);
       gPad->WaitPrimitive();
       c1->Update();
-
-      // app.Run();
-
-      // gPad->Update();
-      // gPad->WaitPrimitive();
-      // c1->WaitPrimitive();
-      // pauseCo();
     }
   }
 }
@@ -1183,10 +1246,11 @@ void GetPoint(TVirtualPad * vpad, double& x, double& y)
   delete cutg;
 }
 
+ /// @brief Allows one to fit a peak of a histogram in the range [low_edge, high_edge]
 class PeakFitter
 {
 public:
-  PeakFitter(TH1F* histo, double low_edge, double high_edge)
+  PeakFitter(TH1* histo, double low_edge, double high_edge)
   {
     auto const & mean0 = (high_edge+low_edge)/2;
     auto const & constante0 = histo->GetBinContent(mean0);
@@ -1225,7 +1289,14 @@ private:
   TF1* final_fit = nullptr;
 };
 
+void libRoot()
+{
+  print("Welcome to Corentin's ROOT library. May you find some usefull stuff around !");
+}
 
+////////////////////////////////////////////
+// MODE DIFFICULT ANALYSIS (MAY NOT WORK) //
+////////////////////////////////////////////
 
 #endif //LIBROOT_HPP
 
