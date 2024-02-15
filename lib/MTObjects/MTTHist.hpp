@@ -281,8 +281,8 @@ public:
   THist * Get() {return m_merged;}
 
   #else // not MTTHIST_MONO :
-  void Merge();
-  void Merge() const {this -> Merge();}
+  THist* Merge();
+  THist* Merge() const {this -> Merge();}
   void Merge_t(); // Used in multithreading
   // void static Merge_thread(MTTHist<THist> & histo); // Used in multithreading
   THist * Merged();
@@ -455,12 +455,13 @@ inline void MTTHist<THist>::Merge_t()
 // }
 
 template<class THist>
-void MTTHist<THist>::Merge()
+THist* MTTHist<THist>::Merge()
 {
   if (!m_exists || m_collection.size() == 0 || m_collection[0] -> IsZombie() || this -> Integral() < 1)
   {
     m_is_merged = false;
     delete m_merged;
+    m_merged = nullptr;
   }
   else if (!m_is_merged)
   {
@@ -475,6 +476,7 @@ void MTTHist<THist>::Merge()
     }
     m_is_merged = true;
   }
+  return m_merged;
 }
 
 template<class THist>

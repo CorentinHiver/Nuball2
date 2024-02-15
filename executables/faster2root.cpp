@@ -1,6 +1,6 @@
 #include <Faster2Root.hpp>
-//#define NORMAL
-#define TRIGGER
+#define NORMAL
+// #define TRIGGER
 
 #ifdef TRIGGER
 #include <Clovers.hpp>

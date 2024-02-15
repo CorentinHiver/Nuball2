@@ -136,9 +136,6 @@ std::pair<double, double> Paris::findAngles(TH2F* bidim, int nb_bins, bool write
   auto const & nb_bins_long = bidim->GetNbinsX();
   auto const & nb_iterations_long = nb_bins_long/nb_bins;
 
-  // auto const & nb_bins_short = bidim->GetNbinsY();
-  // auto const & nb_iterations_short = nb_bins_short/nb_bins;
-
   std::vector<double> bins;
   std::vector<double> xbin_max_peak1;
   std::vector<double> xbin_max_peak2;
@@ -193,7 +190,7 @@ std::pair<double, double> Paris::findAngles(TH2F* bidim, int nb_bins, bool write
     // Check that the two peaks are far away enough from one another
     if (peak1_ADC>peak2_ADC*0.5) continue;
 
-    // Check that the current points are not too far away from interpolated values
+    // Check that the current points are not too far away from values interpolated from previous points :
     double mean_slope_peak1 = 0;
     double mean_slope_peak2 = 0;
     for (size_t bin_it = 0; bin_it<bins.size(); bin_it++)
@@ -248,7 +245,6 @@ std::pair<double, double> Paris::findAngles(TH2F* bidim, int nb_bins, bool write
   {
     residues_peak1.push_back(xbin_max_peak1[bin_it ]-first_slope*bins[bin_it]);
     residues_peak2.push_back(xbin_max_peak2[bin_it ]-second_slope*bins[bin_it]);
-    // print(xbin_max_peak1[bin_it ], first_slope*bins[bin_it], xbin_max_peak1[bin_it ]-first_slope*bins[bin_it]);
   }
   // pauseCo();
 
@@ -259,10 +255,9 @@ std::pair<double, double> Paris::findAngles(TH2F* bidim, int nb_bins, bool write
   auto graph_residues_peak2(new TGraph(nb_points, bins.data(), residues_peak2.data()));
   graph_residues_peak2->SetName(concatenate("Second_peak_", bidim->GetName(), "_residues").c_str());
   graph_residues_peak2->SetTitle(concatenate("Second peak ", bidim->GetName(), " residues").c_str());
-
+  
   if (write_graphs)
-  {
-    // Write the graphs in a root file
+  {// Write the graphs in a root file :
     auto file = TFile::Open(outfilename.c_str(), "update");
     file -> cd();
     graph_peak1->Write();
@@ -325,17 +320,21 @@ TH2F* Paris::rotate(TH2F* bidim, double angleLaBr, double angleNaI, bool quickNd
   if (!bidim) throw_error("in Paris::rotate(TH2F* bidim, double angleLaBr, double angleNaI) : bidim is nullptr");
   if (quickNdirty) print("pas beau ...");
 
+  ADC short_shift = 2000;
+  ADC long_shift = 2000;
+
   auto rotated_bidim (static_cast<TH2F*>(bidim->Clone(concatenate(bidim->GetName(), "_rotated").c_str())));
   rotated_bidim->Reset();
 
   auto const & nb_binsx = bidim->GetNbinsX();
   auto const & nb_binsy = bidim->GetNbinsY();
-  double _tan = tan(angleNaI);
-  double _sin = sin(angleNaI);
-  double _cos = cos(angleNaI);
-  // double _tan = tan(angleLaBr);
-  // double _sin = sin(angleLaBr);
-  // double _cos = cos(angleLaBr);
+  auto const & pisur2 = 1.570798;
+  double _sin = sin(-angleLaBr);
+  double _cos = cos(-angleLaBr);
+  // double _sin = sin(angleNaI-angleLaBr);
+  // double _cos = cos(angleNaI-angleLaBr);
+  double _sinLaBr = sin(-pisur2+angleLaBr);
+  double _cosLaBr = cos(-pisur2+angleLaBr);
 
   for (int bin_x = 0; bin_x<nb_binsx; bin_x++)
   {
@@ -346,36 +345,28 @@ TH2F* Paris::rotate(TH2F* bidim, double angleLaBr, double angleNaI, bool quickNd
       auto const & old_short = bidim->GetXaxis()->GetBinCenter(bin_x);
 
       // Reject LaBr3 events :
-      auto const & pid = (old_long-old_short)/old_long;
-      if (pid<0.1) continue;
+      // auto const & pid = (old_long-old_short)/old_long;
+      // if (pid<0.25) continue;
 
-      if (quickNdirty)
+      auto const & old_long_range  = bidim->GetYaxis()->GetBinCenter(bin_y+1)-old_long ;
+      auto const & old_short_range = bidim->GetXaxis()->GetBinCenter(bin_x+1)-old_short;
+      for (int hit_i = 0; hit_i<nb_hits; hit_i++)
       {
-        auto const & new_short = old_long*_sin + old_short*_cos*(abs(_tan)/_tan);
-        auto const & new_long = old_long*_cos - old_short*_sin*(abs(_tan)/_tan);
+        auto const & rand_short = old_short + double_random_uniform(0, old_short_range);
+        auto const & rand_long  = old_long  + double_random_uniform(0, old_long_range);
 
-        auto const & new_y = bidim->GetYaxis()->FindBin(new_long);
-        auto const & new_x = bidim->GetYaxis()->FindBin(new_short);
+        // Rotate the NaI+both toward the long gate :
+        auto const & new_short = rand_short * _cos - rand_long * _sin; // * (abs(_tan)/_tan);
+        auto const & new_long  = rand_short * _sin + rand_long * _cos; // * (abs(_tan)/_tan);
 
-        rotated_bidim->SetBinContent(new_x, new_y, quickNdirty);
+        // Rotate the LaBr3 towards the short gate :
+        // auto const & new_short_LaBr = rand_short * _cosLaBr - rand_long * _sinLaBr; // * (abs(_tan)/_tan);
+        auto const & new_long_LaBr  = rand_short * _sinLaBr + rand_long * _cosLaBr; // * (abs(_tan)/_tan);
+        if (new_long_LaBr<3000) continue;
+
+
+        rotated_bidim->Fill(new_short+short_shift, new_long+long_shift);
       }
-      else
-      {
-        auto const & old_long_range  = bidim->GetYaxis()->GetBinCenter(bin_y+1)-old_long ;
-        auto const & old_short_range = bidim->GetXaxis()->GetBinCenter(bin_x+1)-old_short;
-        for (int hit_i = 0; hit_i<nb_hits; hit_i++)
-        {
-          auto const & rand_short = old_short + double_random_uniform(0, old_short_range);
-          auto const & rand_long  = old_long  + double_random_uniform(0, old_long_range);
-
-          auto const & new_short = rand_short * _cos - rand_long * _sin; // * (abs(_tan)/_tan);
-          auto const & new_long  = rand_short * _sin + rand_long * _cos; // * (abs(_tan)/_tan);
-
-          rotated_bidim->Fill(new_short, new_long);
-        }
-      }
-
-
     }
   }
   return rotated_bidim;

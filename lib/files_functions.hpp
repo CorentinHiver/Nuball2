@@ -794,6 +794,9 @@ public:
   /// @brief Filename stands for the file name without the path but with the extension
   Filename    const & filename() const {return m_filename;}
 
+  /// @brief Filename stands for the file name without the path but with the extension
+  Filename          & filename()       {return m_filename;}
+
   /// @brief Short name stands for the file name withpout the path nor the extension
   std::string const & shortName() const {return m_filename.shortName();}  
 

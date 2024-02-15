@@ -12,54 +12,80 @@
 // #include <EvolutionPeaks.hpp>
 // #include <AnalysedSpectra.hpp>
 // #include <DSSD.hpp>
-#include "../lib/Analyse/Paris.hpp"
+// #include "../lib/Analyse/Paris.hpp"
 // #include <SpectraCo.hpp>
 // #include "../136/Calibrate/calibrate_spectra.C"
+#include <CobaltCalorimeter.hpp>
 
 int main(int argc, char ** argv)
 {
-  std::string filename("~/faster_data/N-SI-129-source_histo/Th232_both_sides_bidim.root");
-  std::string anglesFilename("angles_paris_bidim");
-  // Paris::calculateBidimAngles(filename, anglesFilename);
+  detectors.load("index_129.list");
+  MTObject::Initialize(2);
+  // Timeshifts ts;
+  // ts.calculate("/home/corentin/faster_data/N-SI-136/60Co_center_after.fast", 20);
+  // ts.write("136_Co");
+  // print(ts);
 
-  ParisBidimAngles angles(anglesFilename);
+  CobaltCalorimeter cb;
+  cb.loadCalibration(Calibration("../136/136_2024_Co.calib"));
+  cb.loadTimeshifts(Timeshifts("Timeshifts/136_Co.dT"));
+  // cb.loadTimeshifts(Timeshifts("/home/corentin/faster_data/N-SI-129-root/Timeshifts/run_156.dT"));
+  // cb.loadTimeshifts("../136/136_Co.dT");
+  cb.setTimewindow_ns(75);
+  cb.launch("~/faster_data/N-SI-136/60Co_center_after.fast", 20);
 
-  auto file(TFile::Open(filename.c_str(), "READ"));
-  auto names(get_names_of<TH2F>(file));
-  std::map<std::string, TH2F*> rotated_bidims;
-  for (auto const & name : names)
-  {
-    auto det_name = name;
-    remove(det_name, "_bidim");
-    auto bidim(file->Get<TH2F>(name.c_str()));
-    bidim->Rebin2D(2, 2);
-    auto rotated_bidim(Paris::rotate(bidim, angles.angleLaBr(det_name), angles.angleNaI(det_name)));
-    rotated_bidim->SetDirectory(nullptr);
-    rotated_bidims.emplace(name, rotated_bidim);
-  }
-
-  // auto graph1 (gROOT->Get<TGraph>("First peak"));
-  // auto graph2 (gROOT->Get<TGraph>("Second peak"));
-
-  auto outfile(TFile::Open("test.root", "RECREATE"));
-  outfile->cd();
-  for (auto const & name : names)
-  {
-    auto bidim = rotated_bidims.at(name);
-    if (!bidim) continue;
-    print("writting", bidim->GetName());
-    bidim->SetDirectory(outfile);
-    bidim->Write();
-  }
-  outfile->Write();
-  outfile->Close();
-  print("test.root written");
+  // cb.loadTimeshifts("../129_run.dT");
+  // cb.loadCalibration(Calibration("../136/129_2024.calib"));
+  // cb.launch("~/faster_data/N-SI-129/60Co_center.fast", 6);
 
 
-  // Paris::findAngles()
-  // for (Label label = 0; label<deroottectors.size(); label++) print(label, detectors.exists(label));
-  // calibrate_spectra("~/faster_data/N-SI-129-source_histo/152Eu_center_spectra.root", "../136/129_2024.calib");
-  // calibrate_spectra("~/faster_data/N-SI-129-source_histo/Th232_both_sides.root", "../136/129_2024.calib");
+  ////////////////////////////
+  //   PARIS BIDIM ANGLES   //
+  ////////////////////////////
+
+  // std::string filename("~/faster_data/N-SI-129-source_histo/Th232_both_sides_bidim.root");
+  // std::string anglesFilename("angles_paris_bidim");
+  // std::string outfilename("rotatedParis.root");
+  // // Paris::calculateBidimAngles(filename, anglesFilename);
+
+  // ParisBidimAngles angles(anglesFilename);
+
+  // auto file(TFile::Open(filename.c_str(), "READ"));
+  // auto names(get_names_of<TH2F>(file));
+  // std::map<std::string, TH2F*> rotated_bidims;
+  // for (auto const & name : names)
+  // {
+  //   auto det_name = name;
+  //   remove(det_name, "_bidim");
+  //   auto bidim(file->Get<TH2F>(name.c_str()));
+  //   bidim->Rebin2D(2, 2);
+  //   auto rotated_bidim(Paris::rotate(bidim, angles.angleLaBr(det_name), angles.angleNaI(det_name)));
+  //   rotated_bidim->SetDirectory(nullptr);
+  //   rotated_bidims.emplace(name, rotated_bidim);
+  // }
+
+  // // auto graph1 (gROOT->Get<TGraph>("First peak"));
+  // // auto graph2 (gROOT->Get<TGraph>("Second peak"));
+
+  // auto outfile(TFile::Open(outfilename.c_str(), "RECREATE"));
+  // outfile->cd();
+  // for (auto const & name : names)
+  // {
+  //   auto bidim = rotated_bidims.at(name);
+  //   if (!bidim) continue;
+  //   print("writting", bidim->GetName());
+  //   bidim->SetDirectory(outfile);
+  //   bidim->Write();
+  // }
+  // outfile->Write();
+  // outfile->Close();
+  // print(outfilename, "written");
+
+  ////////////////////////////
+  //   PARIS BIDIM ANGLES   //
+  ////////////////////////////
+
+
 
   // Faster2Histo(argc, argv);
   // DSSD dssd;

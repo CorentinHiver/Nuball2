@@ -64,7 +64,13 @@ public:
     Initialize();
   }
 
+  /** @brief Sets the number of threads.
+   * 
+   * @details Check the number of threads. Usually, over 75% of cores is the optimal.
+   * Set force parameter to true if you want to use all the cores
+   */
   static void setThreadsNb(int const & n, bool force = false) noexcept {setThreadsNb(size_cast(n), force);}
+
   /** @brief Sets the number of threads.
    * 
    * @details Check the number of threads. Usually, over 75% of cores is the optimal.
@@ -83,8 +89,6 @@ public:
 
     // nbThreadsChanged(nb_threads);// Signal
   }
-
-  static void setThreadsNumber(size_t const & n, bool force = false) {setThreadsNb(n, force);}
 
   static void adjustThreadsNumber(size_t const & limiting_number, std::string const & print_if_limit_reached = "") 
   {

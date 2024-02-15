@@ -128,7 +128,7 @@ public:
     Timer timer;
     this -> buildEvents(buildEvents);
     this -> setNbFiles(nb_files);
-    this -> convert(inputFolder, outputFolder);
+    this -> convert(inputFolder.string(), outputFolder.string());
 
     print("Data written to", outputFolder, "in", timer(), timer.unit());
   }
@@ -254,7 +254,7 @@ void Faster2Root::load(int argc, char** argv)
   std::cout << std::setprecision(4);
 
   // Run the conversion :
-  this -> convert(dataPath, outPath);
+  this -> convert(dataPath.string(), outPath.string());
 
   // Print some additionnal informations at the end of the conversion :
   print(m_total_hits/m_total_timer.TimeSec()*1.E-6, "Mhits/s");

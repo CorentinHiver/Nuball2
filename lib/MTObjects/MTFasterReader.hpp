@@ -87,11 +87,10 @@
  * 
  * (see MTTHist and MTCounter documentation)
  * 
- * It is recommended to use the "&" symbol (reference) before the other as well parameters so that they are shared between threads,
- * therefore only with thread safe objects, but it is not mandatory. If you want to pass read-only objects (i.e. lookup tables), 
- * consider adding the "const" key word like that : (..., type const & lookup_table, ...). Another work-around is simply to declare your
- * parameter at a global scope, although it is not recommended to have too many of them.
- * 
+ * It is recommended to pass the variables by reference (adding the '&' character) for the parameters so that they are shared between threads.
+ * Therefore this should only be done for thread safe objects, like any object in the folder MTObjects/ or stl stuff, or read-only variables.
+ * If you want to pass read-only objects (i.e. lookup tables), consider adding the "const" key word (..., type const & lookup_table, ...). 
+ * Another work-around is simply to declare your parameter at a global scope, although it is not recommended to have too many global variables.
  */ 
 class MTFasterReader
 {
@@ -174,9 +173,9 @@ private:
  * 
  * in main
  *  
- *        MTFasterReader reader(/path/to/data/folder/, wanted_number_of_files);
- *        MTCounter counter;
- *        reader.readRaw(my_function, counter);
+ *        MTFasterReader readerMT(/path/to/data/folder/, wanted_number_of_files);
+ *        MTCounter counterMT;
+ *        readerMT.readRaw(my_function, counterMT);
  * 
  * That way, my_function will be executed in parallel on each file in /path/to/data/folder/
 */

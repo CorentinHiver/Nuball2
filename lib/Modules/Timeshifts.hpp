@@ -192,6 +192,7 @@ public:
   operator bool() const & {return m_ok;}
 
   std::vector<Time> const & get() const {return m_timeshifts;}
+  std::vector<Time> const & data() const {return m_timeshifts;}
   Time const & get(int const & i) const {return m_timeshifts[i];}
 
   void write    (std::string const & name);
@@ -954,7 +955,8 @@ void Timeshifts::writeData(std::string const & name)
   m_outPath = Path (m_outDir+m_ts_outdir, true); // /path/to/output/directory/Timeshifts/, create it if needed
   if (!m_outPath) {m_ok = false; return;}
 
-  auto const outData = m_outPath+name+".dT";
+  File outData (m_outPath+name);
+  outData.setExtension(".dT");
 
   std::ofstream outTimeshiftsFile(outData, std::ios::out);
   
@@ -1109,6 +1111,7 @@ TH1F* Timeshifts::shiftTimeSpectra(TH1F* histo, Label const & label, std::string
 
 std::ostream& operator<<(std::ostream& cout, Timeshifts const & ts)
 {
+  // for (Label label = 0; label<)
   cout << ts.get();
   return cout;
 }

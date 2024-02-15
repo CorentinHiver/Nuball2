@@ -1281,9 +1281,19 @@ public:
     final_fit = gaus2;
   }
 
+  auto operator->(){return final_fit;}
+  auto fit() const {return final_fit;}
   auto getConstante() const {return final_fit->GetParameter(0);}
   auto getMean() const {return final_fit->GetParameter(1);}
   auto getSigma() const {return final_fit->GetParameter(2);}
+  auto getBackground() const 
+  {
+    auto background (new TF1("background", "pol2"));
+    background->SetParameter(0, final_fit->GetParameter(3));
+    background->SetParameter(1, final_fit->GetParameter(4));
+    background->SetParameter(2, final_fit->GetParameter(5));
+    return background;
+  }
 
 private:
   TF1* final_fit = nullptr;

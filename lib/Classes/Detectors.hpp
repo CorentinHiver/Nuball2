@@ -213,7 +213,7 @@ protected:
 
 void Detectors::resize(ushort const & new_size)
 {
-  print("Detectors resized to", new_size);
+  print("Maximum label is", new_size);
   m_exists.resize(new_size, false);
   m_list.resize(new_size, "");
   m_types.resize(new_size, "null");
@@ -238,7 +238,7 @@ void Detectors::readFile(std::string const & filename)
   {
     m_ok = m_loaded = false;
     m_list.clear();
-    print("CANNOT OPEN", filename, "!!");
+    error(concatenate("Can't open ID file named '", filename, "'"));
     return;
   }
   else if (file_is_empty(inputfile))

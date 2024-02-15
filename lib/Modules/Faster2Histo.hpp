@@ -122,8 +122,6 @@ void Faster2Histo::printParameters() const noexcept
   print("parameters :");
   print("");
   print("-c [calibration_file]       : Loads the calibration file");
-  // print("-e [time_window_ns]    : Perform event building with time_window_ns = 1500 ns by default");
-  // print("-f [files_number]      : Choose the total number of files to treat inside a data folder");
   print("-f [file_name]              : add a new .fast file");
   print("-F [folder_name] [nb_files] : add a new folder with a certain amount of .fast files (-1 to take all of them)");
   print("-i [ID_file]                : Load ID file and set the name of the histograms accordingly");
@@ -139,9 +137,6 @@ void Faster2Histo::printParameters() const noexcept
         "                              ATTENTION : make sure you have enough RAM, especially if using multithreading !!!");
   print("--paris_bins    [nb_bins]   : For paris, set the number of bins on both axis of the bidim");
   print("--paris_bin_max [bin_max]   : For paris, set the maximum bin on both axis of the bidim");
-  // print("-t [time_window_ns]    : Loads timeshift data");
-  // print("--throw-single         : If you are not interested in single hits");
-  // print("--trigger [filename]   : Load a trigger file (look at documentation)");
   exit(1);
 }
 
