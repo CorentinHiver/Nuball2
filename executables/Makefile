@@ -22,7 +22,8 @@ FRAMEWORK_LIB_PATH := ../lib
 SRCEXE := faster2root.cpp
 #SRCEXE := manip2root.cpp
 
-
+print_message:
+	@echo "\n making" $(SRCEXE) "\n"
 # ==================================================
 # --------------------------------------------------
 #          DONT TOUCH THE FOLLOWING !!!!            
@@ -53,6 +54,7 @@ LIBS      = ${FASTERAC_LIBS}   ${ROOT_LIBS}
 # The name of the executable will be the same as the source file without the .cpp extension
 EXE := $(SRCEXE:.cpp=)
 
+default: print_message
 default: $(EXE)
 default: clean_obj
 

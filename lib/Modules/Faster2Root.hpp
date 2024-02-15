@@ -363,8 +363,6 @@ void Faster2Root::convertFile(Hit & hit, FasterReader & reader, Path const & out
       if (builder.build(hit)) 
       {
         ++evts;
-        print(event);
-        pauseCo();
         if(m_trigger(event)) 
         {
           ++evts_trigg;
