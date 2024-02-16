@@ -20,7 +20,8 @@
 int main(int argc, char ** argv)
 {
   detectors.load("index_129.list");
-  MTObject::Initialize(2);
+  if found(Path::pwd(), "faster") MTObject::Initialize(10);
+  else                            MTObject::Initialize(2);
   // Timeshifts ts;
   // ts.calculate("/home/corentin/faster_data/N-SI-136/60Co_center_after.fast", 20);
   // ts.write("136_Co");
