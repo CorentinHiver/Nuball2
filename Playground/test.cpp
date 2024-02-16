@@ -28,11 +28,12 @@ int main(int argc, char ** argv)
 
   CobaltCalorimeter cb;
   cb.loadCalibration(Calibration("../136/136_2024_Co.calib"));
-  cb.loadTimeshifts(Timeshifts("Timeshifts/136_Co.dT"));
+  cb.launchRoot("~/faster_data/N-SI-136-sources/60Co_center_after");
+  // cb.loadTimeshifts(Timeshifts("Timeshifts/136_Co.dT"));
   // cb.loadTimeshifts(Timeshifts("/home/corentin/faster_data/N-SI-129-root/Timeshifts/run_156.dT"));
   // cb.loadTimeshifts("../136/136_Co.dT");
-  cb.setTimewindow_ns(75);
-  cb.launch("~/faster_data/N-SI-136/60Co_center_after.fast", 20);
+  // cb.setTimewindow_ns(75);
+  // cb.launch("~/faster_data/N-SI-136/60Co_center_after.fast", 20);
 
   // cb.loadTimeshifts("../129_run.dT");
   // cb.loadCalibration(Calibration("../136/129_2024.calib"));

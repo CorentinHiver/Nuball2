@@ -260,6 +260,12 @@ int findNextBinAbove(TH1* histo, int & bin, double threshold)
 //   TREE MANIPULATIONS  //
 ///////////////////////////
 
+std::ostream& operator<<(std::ostream& out, TTree * tree)
+{
+  tree->Print();
+  return out;
+}
+
 void alignator(TTree * tree, int *NewIndex)
 {
   auto const NHits = tree -> GetEntries();

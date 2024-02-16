@@ -184,6 +184,25 @@ public:
   ADC     qdc2s   [255] = {0};
   NRJ     nrj2s   [255] = {0};
   Pileup  pileups [255] = {0};
+      
+  // auto const & label  const (int const & hit_i) {return labels [hit_i];}
+  auto       & label        (int const & hit_i) {return labels [hit_i];}
+  // auto const & time   const (int const & hit_i) {return times  [hit_i];}
+  auto       & time         (int const & hit_i) {return times  [hit_i];}
+  // auto const & time2  const (int const & hit_i) {return time2s [hit_i];}
+  auto       & time2        (int const & hit_i) {return time2s [hit_i];}
+  // auto const & adc    const (int const & hit_i) {return adcs   [hit_i];}
+  auto       & adc          (int const & hit_i) {return adcs   [hit_i];}
+  // auto const & nrj    const (int const & hit_i) {return nrjs   [hit_i];}
+  auto       & nrj          (int const & hit_i) {return nrjs   [hit_i];}
+  // auto const & qdc2   const (int const & hit_i) {return qdc2s  [hit_i];}
+  auto       & qdc2         (int const & hit_i) {return qdc2s  [hit_i];}
+  // auto const & nrj2   const (int const & hit_i) {return nrj2s  [hit_i];}
+  auto       & nrj2         (int const & hit_i) {return nrj2s  [hit_i];}
+  // auto const & pileup const (int const & hit_i) {return pileups[hit_i];}
+  auto       & pileup       (int const & hit_i) {return pileups[hit_i];}
+
+  Hit operator[](int const & hit_i);
 
   // I/O status :
   IOptions read;
@@ -194,6 +213,19 @@ private:
   bool isReading = false;
   bool isWritting = false;
 };
+
+Hit Event::operator[](int const & hit_i) 
+{
+  Hit hit;
+  hit.stamp = stamp + times[hit_i];
+  hit.label = labels[hit_i];
+  hit.adc   = adcs  [hit_i];
+  hit.qdc2  = qdc2s [hit_i];
+  hit.nrj   = nrjs  [hit_i];
+  hit.nrj2  = nrj2s [hit_i];
+  return  (hit);
+}
+
 
 inline Event& Event::operator=(Hit const & hit)
 {

@@ -347,7 +347,6 @@ void Faster2Root::convertFile(Hit & hit, FasterReader & reader, Path const & out
   m_total_hits+=reader.getCounter();
   longlong evts = 0;
   longlong evts_trigg = 0;
-  print();
   if (m_eventbuilding)
   {// Read the temporary tree and perform event building :
     auto const & nb_data = tempTree->GetEntries();
@@ -356,7 +355,7 @@ void Faster2Root::convertFile(Hit & hit, FasterReader & reader, Path const & out
     CoincBuilder builder(&event, m_time_window);
     builder.keepSingles(!m_throw_single);
 
-    longlong loop = 0;
+    longlong loop = 1;
     while (loop<nb_data)
     {
       tempTree -> GetEntry(alignator[loop++]);
@@ -372,6 +371,7 @@ void Faster2Root::convertFile(Hit & hit, FasterReader & reader, Path const & out
     }
   }
 
+
   m_total_events+=evts;
   m_trigg_events+=evts_trigg;
   float trigger_rate = 100.*evts_trigg/evts;
@@ -384,9 +384,10 @@ void Faster2Root::convertFile(Hit & hit, FasterReader & reader, Path const & out
   file -> Close();
 
   std::string m_eventbuilding_output = ")";
-  if (m_eventbuilding) m_eventbuilding_output = "( "+std::to_string(evts*1.E-6)+" Mevts ( trigger in "+std::to_string(trigger_rate)+" % ))";
+  if (m_eventbuilding) m_eventbuilding_output = "( "+std::to_string(evts*1.E-6)+" Mevts";
+  if (m_use_trigger) m_eventbuilding_output += "trigger in "+std::to_string(trigger_rate)+" % ))";
 
-  print(outputFile, "written (", reader.getCounter()*1.E-6, "Mhits in", timer(), timer.unit(), m_eventbuilding_output);
+  print(outputFile, "written (", reader.getCounter()*1.E-6, "Mhits in", timer(), m_eventbuilding_output);
 }
 
 

@@ -177,7 +177,7 @@ inline float Calibration::calibrate(float const & nrj, Label const & label) cons
 {
   // First, one has to randomize the nrj within its bin
   auto nrj_r = nrj+random_uniform();
-  
+
   // Then, return the new value depending on the order of the calibration for this label
   switch(m_order[label])
   {
@@ -306,6 +306,7 @@ bool Calibration::load(File const & file)
   float slope = 1.f, binom = 0.f, trinom = 0.f, intercept = 0.f;
   while (getline(inputfile, line))
   {
+
     m_nb_det++;
     std::istringstream iss (line);
     iss >> label >> intercept >> slope >> binom >> trinom;

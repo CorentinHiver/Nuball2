@@ -5,7 +5,7 @@
 #include "Event.hpp"
 
 /**
- * @brief test _ not finished
+ * @brief Access to the underlying TTree using -> operator (e.g. nuball2tree->GetEntry(n);)
  * 
  */
 class Nuball2Tree
@@ -30,6 +30,7 @@ public:
   bool Open(std::string const & filename);
 
   TTree* get() {return m_tree;}
+  auto const get() const {return m_tree;}
   TTree* operator-> () {return m_tree;}
   operator TTree*() {return m_tree;}
 
@@ -80,6 +81,12 @@ bool Nuball2Tree::Open(std::string const & filename)
   print("Reading", filename);
   
   return (m_ok = true);
+}
+
+std::ostream& operator<<(std::ostream& out, Nuball2Tree const & tree)
+{
+  out << tree.get();
+  return out;
 }
 
 #endif //NUBALL2TREE_HPP
