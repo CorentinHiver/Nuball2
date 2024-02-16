@@ -229,10 +229,11 @@ void CobaltCalorimeter::work(Nuball2Tree & tree, Event & event)
       {
         isNaI[hit_i] = true;
         nrj = m_calib.calibrate(qdc2, label);
+        nrj*=1.1; // TODO
       }
       else nrj = m_calib.calibrate(adc, label);
 
-      if (isBGO[label]) nrj*=1.15;
+      if (isBGO[label]) nrj*=1.15; // TODO
 
       if (isGe[label])        {spectrum_Ge .Fill(nrj);}
       else if (isBGO[label])  {spectrum_BGO.Fill(nrj);}
@@ -311,7 +312,7 @@ void CobaltCalorimeter::work(Nuball2Tree & tree, Event & event)
       nb_trigg++;
       spectrum_calorimetry.Fill(calorimetry);
       spectrum_smeared_calorimetry.Fill(smeared_calorimetry);
-      spectrum_smeared_calorimetry_VS_Multiplicity.Fill(event.mult, smeared_calorimetry);
+      spectrum_smeared_calorimetry_VS_Multiplicity.Fill(event.mult-1, smeared_calorimetry);
 
       calorimetry_Ge_histo  . Fill(calorimetry_Ge);
       calorimetry_BGO_histo . Fill(calorimetry_BGO);
@@ -329,13 +330,15 @@ void CobaltCalorimeter::work(Nuball2Tree & tree, Event & event)
 
         spectra_trigger.Fill(label, nrj);
 
-             if (isGe[label])    {spectrum_Ge_trigger   .Fill(nrj);}
-        else if (isBGO[label])   {spectrum_BGO_trigger        .Fill(nrj);}
+             if (isGe[label])    {spectrum_Ge_trigger .Fill(nrj);}
+        else if (isBGO[label])   {spectrum_BGO_trigger.Fill(nrj);}
         else if (isParis[label])
         {
           if (isNaI[hit_i]) {spectrum_NaI_trigger  .Fill(nrj);}
           else              {spectrum_LaBr3_trigger.Fill(nrj);}
         }
+
+        if (isNaI[hit_i]) spectra_NaI_trigger.Fill(label, nrj);
 
         for (int hit_j = hit_i+1; hit_j<event.mult; hit_j++)
         {
