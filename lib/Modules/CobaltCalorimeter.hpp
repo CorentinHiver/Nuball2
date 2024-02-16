@@ -12,7 +12,7 @@
 class CobaltCalorimeter
 {
 public:
-  CobaltCalorimeter();
+  CobaltCalorimeter() {}
   void loadID(std::string const & filename) {m_IDfilename = filename;}
   void loadCalibration(Calibration calib) {m_calib = calib;}
   void loadTimeshifts(Timeshifts timeshifts) {m_timeshifts = timeshifts;}
