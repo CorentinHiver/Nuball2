@@ -102,6 +102,7 @@ public:
 
   static void Initialize()
   {
+    if (m_initialized) return;
     master_thread_id = std::this_thread::get_id();
     if (nb_threads>1)
     {
@@ -109,6 +110,7 @@ public:
       TThread::Initialize();
       ROOT::EnableThreadSafety();
       MTObject::ON = true;
+      m_initialized = true;
     }
     else MTObject::ON = false;
   }
@@ -160,8 +162,11 @@ private:
   static std::thread::id master_thread_id; 
   static thread_local size_t m_thread_index; // thread_local variable, meaning it will hold different values for each thread it is in
   static std::vector<std::thread> m_threads;
+  static bool m_initialized;
 
 };
+
+bool MTObject::m_initialized = false;
 
 // Declaration of static variables :
 size_t MTObject::nb_threads = 1;

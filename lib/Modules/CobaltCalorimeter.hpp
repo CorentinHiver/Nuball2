@@ -74,9 +74,10 @@ private:
   MTTHist<TH1F> smeared_calorimetry_Paris_histo;
   MTTHist<TH1F> spectrum_calorimetry;
   MTTHist<TH1F> spectrum_smeared_calorimetry;
-  MTTHist<TH1F> spectrum_smeared_calorimetry_double_peak;
+  MTTHist<TH1F> spectrum_smeared_calorimetry_double_cascade;
 
   MTTHist<TH2F> spectrum_smeared_calorimetry_VS_Multiplicity;
+  MTTHist<TH2F> smeared_calorimetry_double_VS_multiplicity;
 
   MTTHist<TH2F> spectra_NaI_trigger;
 
@@ -99,6 +100,10 @@ private:
   MTTHist<TH2F> Ge_NaI_trigger;
 
   MTTHist<TH2F> Ge_VS_smeared_calorimetry;
+  MTTHist<TH2F> Clover_VS_smeared_calorimetry;
+  MTTHist<TH2F> NaI_VS_smeared_calorimetry;
+  MTTHist<TH2F> LaBr_VS_smeared_calorimetry;
+  MTTHist<TH2F> Paris_VS_smeared_calorimetry;
 };
 
 void CobaltCalorimeter::Initialise()
@@ -131,10 +136,17 @@ void CobaltCalorimeter::Initialise()
 
   spectrum_calorimetry                     . reset("spectrum_calorimetry", "Calorimeter spectra;Energy calorimeter[keV]", 2999, 1, 3000);
   spectrum_smeared_calorimetry             . reset("spectrum_smeared_calorimetry", "Smeared calorimeter spectra;Energy calorimeter[keV]", 2999, 1, 3000);
-  spectrum_smeared_calorimetry_double_peak . reset("spectrum_smeared_calorimetry_double_peak", "Smeared calorimeter spectra 2 cascades;Energy calorimeter[keV]", 3999, 1, 4000);
   Ge_VS_smeared_calorimetry.reset("Ge_VS_smeared_calorimetry", "Ge VS calorimeter;Energy calorimeter[keV];Ge [keV]", 299,10,3000, 2000,0,2000);
+  NaI_VS_smeared_calorimetry.reset("NaI_VS_smeared_calorimetry", "NaI VS calorimeter;Energy calorimeter[keV];Energy [keV]", 299,10,3000, 200,0,2000);
+  LaBr_VS_smeared_calorimetry.reset("LaBr_VS_smeared_calorimetry", "LaBr VS calorimeter;Energy calorimeter[keV];Energy [keV]", 299,10,3000, 500,0,2000);
+  Clover_VS_smeared_calorimetry.reset("Clover_VS_smeared_calorimetry", "Ge VS calorimeter;Energy calorimeter[keV];Ge [keV]", 299,10,3000, 500,0,2000);
+  Paris_VS_smeared_calorimetry.reset("Paris_VS_smeared_calorimetry", "Paris VS calorimeter;Energy calorimeter[keV];Energy [keV]", 299,10,3000, 500,0,2000);
   spectrum_smeared_calorimetry_VS_Multiplicity . reset("spectrum_smeared_calorimetry_VS_Multiplicity", 
-                  "Smeared calorimeter spectra multiplicity VS multiplicity;Energy calorimeter[keV]", 10,0,10, 2999,1,3000);
+                  "Smeared calorimeter spectra multiplicity VS multiplicity;Multiplicity;Energy calorimeter[keV]", 10,0,10, 2999,1,3000);
+  
+  spectrum_smeared_calorimetry_double_cascade. reset("spectrum_smeared_calorimetry_double_cascade", "Smeared calorimeter spectra 2 cascades;Energy calorimeter[keV]", 3999, 1, 4000);
+  smeared_calorimetry_double_VS_multiplicity . reset("smeared_calorimetry_double_VS_multiplicity", 
+                  "Smeared calorimeter spectra 2 cascades VS Multiplicity;Multiplicity;Energy calorimeter[keV]", 10,0,10, 3999,1,4000);
 
   timing_VS_trigger.reset("timing_VS_trigger", "timing_VS_trigger;label;time[ps]", 1000,0,1000, 200,-m_timewindow/2,m_timewindow/2);
   timing_VS_ref.reset("timing_VS_ref", "timing_VS_ref;label;time[ps]", 1000,0,1000, 200,-m_timewindow/2,m_timewindow/2);
@@ -227,6 +239,7 @@ void CobaltCalorimeter::work(Nuball2Tree & tree, Event & event)
 
   Bools isNaI;
   double smeared_calorimetry_multiple_cascades = 0;
+  int mult_multitude_cascades = 0;
   int nb_cascades = false;
 
   auto const & nb_evts = tree->GetEntries();
@@ -292,6 +305,7 @@ void CobaltCalorimeter::work(Nuball2Tree & tree, Event & event)
           Ge_hit_i = hit_i;
           trigger1772 = true;
           nb_cascades++;
+          mult_multitude_cascades+=event.mult-1;
           Ge_hit = event[hit_i];
         } 
 
@@ -358,6 +372,15 @@ void CobaltCalorimeter::work(Nuball2Tree & tree, Event & event)
         if (hit_i == Ge_hit_i) continue;
 
         if (isGe[label]) Ge_VS_smeared_calorimetry.Fill(smeared_calorimetry, nrj);
+        else if (isParis[label])
+        {
+          if (isNaI[hit_i]) NaI_VS_smeared_calorimetry.Fill(smeared_calorimetry, nrj);
+          else              LaBr_VS_smeared_calorimetry.Fill(smeared_calorimetry, nrj);
+        }
+
+        // We need add-back for the two following :
+        // Clover_VS_smeared_calorimetry
+        // Paris_VS_smeared_calorimetry
 
         spectra_trigger.Fill(label, nrj);
 
@@ -391,12 +414,15 @@ void CobaltCalorimeter::work(Nuball2Tree & tree, Event & event)
 
       // To simulate a double cascade :
       smeared_calorimetry_multiple_cascades+=smeared_calorimetry;
-      if (nb_cascades == 2)
+      mult_multitude_cascades+=event.mult-1;
+      if (nb_cascades>0 && nb_cascades%2 == 0)
       {
         auto const calo = smeared_calorimetry_multiple_cascades;
-        spectrum_smeared_calorimetry_double_peak.Fill(calo);
-        nb_cascades=0;
+        auto const mult = mult_multitude_cascades;
+        spectrum_smeared_calorimetry_double_cascade.Fill(calo);
+        smeared_calorimetry_double_VS_multiplicity.Fill(mult, calo);
         smeared_calorimetry_multiple_cascades = 0.0;
+        mult_multitude_cascades = 0;
       }
     }
 
@@ -463,8 +489,10 @@ void CobaltCalorimeter::write()
   spectrum_calorimetry.Write();
 
   spectrum_smeared_calorimetry->Write();
-  spectrum_smeared_calorimetry_double_peak.Write();
   spectrum_smeared_calorimetry_VS_Multiplicity.Write();
+  
+  spectrum_smeared_calorimetry_double_cascade.Write();
+  smeared_calorimetry_double_VS_multiplicity.Write();
 
   Ge_Ge.Write();
   Ge_BGO.Write();
@@ -475,6 +503,10 @@ void CobaltCalorimeter::write()
   Ge_LaBr_trigger.Write();
   Ge_NaI_trigger.Write();
   Ge_VS_smeared_calorimetry.Write();
+  Clover_VS_smeared_calorimetry.Write();
+  NaI_VS_smeared_calorimetry.Write();
+  LaBr_VS_smeared_calorimetry.Write();
+  Paris_VS_smeared_calorimetry.Write();
 
   paris_pid.Write();
 
@@ -632,7 +664,7 @@ void CobaltCalorimeter::work(Hit & hit, Alignator & reader)
               --hit_i; // Starting next loop with the hit that closed the event
               spectrum_calorimetry.Fill(calorimetry2);
               spectrum_smeared_calorimetry.Fill(smeared_calorimetry2);
-              spectrum_smeared_calorimetry_double_peak.Fill(smeared_calorimetry+smeared_calorimetry2);
+              spectrum_smeared_calorimetry_double_cascade.Fill(smeared_calorimetry+smeared_calorimetry2);
               break;
             }
           }
