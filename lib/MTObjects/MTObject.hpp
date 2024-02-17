@@ -102,15 +102,19 @@ public:
 
   static void Initialize()
   {
+    // Safety to initialize threads only once :
     if (m_initialized) return;
+    m_initialized = true;
+
+    // Initialising :
     master_thread_id = std::this_thread::get_id();
     if (nb_threads>1)
     {
       print("MTObject initialized with", nb_threads, "threads");
+      // Initialise the root thread management
       TThread::Initialize();
       ROOT::EnableThreadSafety();
       MTObject::ON = true;
-      m_initialized = true;
     }
     else MTObject::ON = false;
   }
@@ -148,7 +152,7 @@ public:
 
   static size_t nb_threads;
   static std::mutex mutex; // A global mutex for everyone to use
-  static bool ON; // State boolean
+  static bool ON; // State boolean : is multithreading activated ?
   operator bool() {return MTObject::ON;} // Can be used only if the class has been instanciated
 
   static auto const & getThreadIndex() {return m_thread_index;}

@@ -234,7 +234,12 @@ public:
   template <class... ARGS>
   void Fill(ARGS &&... args) noexcept;
 
+
   // --- COMMON METHODS --- //
+  template <class... ARGS>
+  void SetBinContent(ARGS &&... args) noexcept;
+  template <class... ARGS>
+  auto GetBinContent(ARGS &&... args) noexcept;
   void Print();
   void Write(bool const & writeEmpty = false);
   void Write_i(int const & thread_index);
@@ -264,7 +269,7 @@ public:
     if (m_merged) return m_merged;
     else 
     {
-      debug("MTTHist not merged !!! Merging ..."); 
+      debug("MTTHist", m_name ,"not merged !!! Merging ..."); 
       this -> Merge();
       return nullptr;
     }
@@ -404,6 +409,22 @@ inline void MTTHist<THist>::reset(std::string name, ARGS &&... args)
 
 template <class THist>
 template <class... ARGS>
+inline void MTTHist<THist>::SetBinContent(ARGS &&... args) noexcept
+{
+  m_integral-=m_collection[MTObject::getThreadIndex()]->Integral();
+  m_collection[MTObject::getThreadIndex()]->SetBinContent(std::forward<ARGS>(args)...);
+  m_integral+=m_collection[MTObject::getThreadIndex()]->Integral();
+}
+
+template <class THist>
+template <class... ARGS>
+inline auto MTTHist<THist>::GetBinContent(ARGS &&... args) noexcept
+{
+  return m_collection[MTObject::getThreadIndex()]->GetBinContent(std::forward<ARGS>(args)...);
+}
+
+template <class THist>
+template <class... ARGS>
 inline void MTTHist<THist>::Fill(ARGS &&... args) noexcept
 {
   m_integral++;
@@ -459,6 +480,8 @@ THist* MTTHist<THist>::Merge()
 {
   if (!m_exists || m_collection.size() == 0 || m_collection[0] -> IsZombie() || this -> Integral() < 1)
   {
+    debug("problem with", m_name, " : exists ?", (m_exists) ? "oui" : "non", " | nb histos : ", m_collection.size(),
+          "| zombie ?", (m_collection[0] -> IsZombie()) ? "oui" : "non", "| integral = ", this -> Integral());
     m_is_merged = false;
     delete m_merged;
     m_merged = nullptr;
