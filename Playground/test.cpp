@@ -34,7 +34,8 @@ int main(int argc, char ** argv)
     cb.setOutName("CobaltCalorimetry_fullstat.root");
     cb.launchRoot("~/nuball2/N-SI-136-sources/60Co_center_after");
   }
-  else cb.launchRoot("~/faster_data/N-SI-136-sources/60Co_center_after", 2);
+  else cb.launchRoot("~/faster_data/N-SI-136-sources/60Co_center_after", 4);
+
   // cb.loadTimeshifts(Timeshifts("Timeshifts/136_Co.dT"));
   // cb.loadTimeshifts(Timeshifts("/home/corentin/faster_data/N-SI-129-root/Timeshifts/run_156.dT"));
   // cb.loadTimeshifts("../136/136_Co.dT");

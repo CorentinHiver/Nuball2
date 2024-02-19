@@ -346,9 +346,8 @@ void CobaltCalorimeter::work(Nuball2Tree & tree, Event & event)
       auto const & label = event.labels[hit_i];
       auto const & adc   = event.adcs  [hit_i];
       auto const & qdc2  = event.qdc2s [hit_i];
-      auto       & nrj   = event.nrjs  [hit_i];
-      auto       & nrj2  = event.nrj2s [hit_i];
 
+      auto       & nrj   = event.nrjs  [hit_i];
 
       if (isParis[label] && parisPiD(adc, qdc2)) 
       {
@@ -428,19 +427,20 @@ void CobaltCalorimeter::work(Nuball2Tree & tree, Event & event)
         smeared_calorimetry_NaI_histo   .Fill(smeared_NaI);
         smeared_calorimetry_Paris_histo .Fill(Paris_calo);
 
-        Ge_calo_VS_smeared_calorimetry    .Fill(smeared_calorimetry, smeared_Ge);
-        BGO_calo_VS_smeared_calorimetry   .Fill(smeared_calorimetry, calorimetry_BGO);
-        LaBr_calo_VS_smeared_calorimetry  .Fill(smeared_calorimetry, smeared_LaBr);
-        NaI_calo_VS_smeared_calorimetry   .Fill(smeared_calorimetry, smeared_NaI);
-        Clover_calo_VS_smeared_calorimetry.Fill(smeared_calorimetry, Clover_calo);
-        Paris_calo_VS_smeared_calorimetry .Fill(smeared_calorimetry, Paris_calo);
      
-        if (event.mult>1)
+        if (multiplicity>1)
         {
+          if (multiplicity>nb_Ge  ) Ge_calo_VS_smeared_calorimetry  .Fill(smeared_calorimetry, smeared_Ge);
+          if (multiplicity>nb_BGO ) BGO_calo_VS_smeared_calorimetry .Fill(smeared_calorimetry, calorimetry_BGO);
+          if (multiplicity>nb_LaBr) LaBr_calo_VS_smeared_calorimetry.Fill(smeared_calorimetry, smeared_LaBr);
+          if (multiplicity>nb_NaI ) NaI_calo_VS_smeared_calorimetry .Fill(smeared_calorimetry, smeared_NaI);
+          if (multiplicity>nb_Ge  +nb_BGO) Clover_calo_VS_smeared_calorimetry.Fill(smeared_calorimetry, Clover_calo);
+          if (multiplicity>nb_LaBr+nb_NaI) Paris_calo_VS_smeared_calorimetry .Fill(smeared_calorimetry, Paris_calo);
+          
           Ge_calo_VS_BGO_calo    .Fill(calorimetry_BGO, smeared_Ge);
           LaBr3_calo_VS_BGO_calo .Fill(calorimetry_BGO, smeared_LaBr);
           NaI_calo_VS_BGO_calo   .Fill(calorimetry_BGO, smeared_NaI);
-          Clover_calo_VS_BGO_calo.Fill(calorimetry_BGO, Clover_calo);
+          if (nb_Ge>0) Clover_calo_VS_BGO_calo.Fill(calorimetry_BGO, Clover_calo);
           Paris_calo_VS_BGO_calo .Fill(calorimetry_BGO, Paris_calo);
 
           if (nb_BGO>0)Ge_calo_VS_Clover_calo.Fill(Clover_calo, smeared_Ge);
@@ -557,7 +557,7 @@ void CobaltCalorimeter::Analyse()
   auto const & background_peak = background->Integral(600, 2000);
   print("Mean of the peak is at : ", pe.getMean());
   auto const & PE_efficiency = (integral_peak-background_peak)/m_nb_trigg;
-  print(PE_efficiency);
+  print(int_cast(PE_efficiency*100.));
   print("----------------");
 
   labels2D_trigger.Merge();
