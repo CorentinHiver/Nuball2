@@ -35,8 +35,8 @@ private:
   static void dispatch_workRoot(Nuball2Tree & tree, Event & event, CobaltCalorimeter & cb) {cb.work(tree, event);}
   void write();
   void Analyse();
-  bool parisPiD(Hit & hit);
-  bool parisPiD(float nrj, float nrj2);
+  bool NaI_pid(Hit & hit);
+  bool NaI_pid(float nrj, float nrj2);
 
   // Some parameters :
   std::string m_IDfilename;
@@ -255,7 +255,7 @@ void CobaltCalorimeter::launchRoot(std::string const & foldername, int nb_files)
   this->write();
 }
 
-bool CobaltCalorimeter::parisPiD(float nrj, float nrj2)
+bool CobaltCalorimeter::NaI_pid(float nrj, float nrj2)
 {
   // debug((nrj2-nrj)/double_cast(nrj2));
   // pauseDebug();
@@ -263,7 +263,7 @@ bool CobaltCalorimeter::parisPiD(float nrj, float nrj2)
   return ((nrj2-nrj)/double_cast(nrj2) > 0.15);
 }
 
-bool CobaltCalorimeter::parisPiD(Hit & hit) 
+bool CobaltCalorimeter::NaI_pid(Hit & hit) 
 {
   if (!isParis[hit.label] ) return false;
   paris_pid.Fill((hit.qdc2-hit.adc)/double_cast(hit.qdc2));
@@ -349,7 +349,7 @@ void CobaltCalorimeter::work(Nuball2Tree & tree, Event & event)
 
       auto       & nrj   = event.nrjs  [hit_i];
 
-      if (isParis[label] && parisPiD(adc, qdc2)) 
+      if (isParis[label] && NaI_pid(adc, qdc2)) 
       {
         isNaI[hit_i] = true;
         nrj = m_calib.calibrate(qdc2, label);
@@ -376,7 +376,7 @@ void CobaltCalorimeter::work(Nuball2Tree & tree, Event & event)
       }
 
       // Trigger on the wanted gamma ray in the Germaniums
-      if (!trigger && inGate(nrj, m_minE, m_maxE))
+      if (isGe[label] && !trigger && inGate(nrj, m_minE, m_maxE))
       {
         trigger = true;
         Ge_hit_i = hit_i;
@@ -693,7 +693,7 @@ void CobaltCalorimeter::work(Hit & hit, Alignator & reader)
   for(int hit_i = 0; hit_i<nb_hits; ++hit_i)
   {
     reader->GetEntry(hit_i);
-    if ( parisPiD(hit) ) continue;
+    if ( NaI_pid(hit) ) continue;
     m_calib(hit);
 
     nrj_each.Fill(hit.label, hit.nrj);
@@ -721,7 +721,7 @@ void CobaltCalorimeter::work(Hit & hit, Alignator & reader)
           labels.Fill(hit.label);
           m_calib(hit); calibBGO(hit);
           timing_VS_trigger.Fill(hit.label, dT);
-          if (parisPiD(hit)) spectra_NaI_trigger.Fill(hit.label, hit.nrj);
+          if (NaI_pid(hit)) spectra_NaI_trigger.Fill(hit.label, hit.nrj);
 
                if (isGe[hit.label]) spectrum_Ge.Fill(hit.nrj);
           else if (isBGO[hit.label]) spectrum_BGO.Fill(hit.nrj);
@@ -742,7 +742,7 @@ void CobaltCalorimeter::work(Hit & hit, Alignator & reader)
           labels.Fill(hit.label);
           m_calib(hit); calibBGO(hit);
           timing_VS_trigger.Fill(hit.label, dT);
-          if (parisPiD(hit)) spectra_NaI_trigger.Fill(hit.label, hit.nrj);
+          if (NaI_pid(hit)) spectra_NaI_trigger.Fill(hit.label, hit.nrj);
 
                if (isGe[hit.label]) spectrum_Ge.Fill(hit.nrj);
           else if (isBGO[hit.label]) spectrum_BGO.Fill(hit.nrj);
@@ -785,7 +785,7 @@ void CobaltCalorimeter::work(Hit & hit, Alignator & reader)
                 labels.Fill(hit.label);
                 m_calib(hit); calibBGO(hit);
                 timing_VS_trigger.Fill(hit.label, dT);
-                if (parisPiD(hit)) spectra_NaI_trigger.Fill(hit.label, hit.nrj);
+                if (NaI_pid(hit)) spectra_NaI_trigger.Fill(hit.label, hit.nrj);
 
                      if (isGe[hit.label]) spectrum_Ge.Fill(hit.nrj);
                 else if (isBGO[hit.label]) spectrum_BGO.Fill(hit.nrj);
@@ -806,7 +806,7 @@ void CobaltCalorimeter::work(Hit & hit, Alignator & reader)
                 labels.Fill(hit.label);
                 m_calib(hit); calibBGO(hit);
                 timing_VS_trigger.Fill(hit.label, dT);
-                if (parisPiD(hit)) spectra_NaI_trigger.Fill(hit.label, hit.nrj);
+                if (NaI_pid(hit)) spectra_NaI_trigger.Fill(hit.label, hit.nrj);
 
                      if (isGe[hit.label]) spectrum_Ge.Fill(hit.nrj);
                 else if (isBGO[hit.label]) spectrum_BGO.Fill(hit.nrj);
