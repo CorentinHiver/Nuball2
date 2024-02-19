@@ -78,6 +78,7 @@ bool Nuball2Tree::Open(std::string const & filename)
     return (m_ok = false);
   }
 
+  
   print("Reading", filename);
   
   return (m_ok = true);

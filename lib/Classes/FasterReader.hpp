@@ -108,9 +108,9 @@ public:
 
    ///@brief Set the number of hits to read inside each file
   static void setMaxHits(ulonglong maxHits) {m_maxHits = maxHits;}
+  static auto getMaxHits()                  {return m_maxHits   ;}
 
   // ------ Getters ------ :
-
   ///@brief \deprecated Get the current Hit 
   Hit* getHit             () const { return m_hit        ;}
 

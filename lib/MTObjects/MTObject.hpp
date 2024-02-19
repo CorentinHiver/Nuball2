@@ -7,13 +7,18 @@
 */
 #include <thread>
 #include <mutex>
+#include <vector>
+#include <iostream>
+#include "TROOT.h"
+#include "TThread.h"
+
+#define MULTITHREADING
 
 using lock_mutex = const std::lock_guard<std::mutex>;
 
-#include "../libRoot.hpp"
-
 /**
  * @brief Class handeling a easy multi threading.
+ * @attention It is much better to includ this class before any other in order to activate multithreading additions
  * @details
  * 
  * If you want to use the power of multithreading, this class can be convenient.
@@ -69,7 +74,7 @@ public:
    * @details Check the number of threads. Usually, over 75% of cores is the optimal.
    * Set force parameter to true if you want to use all the cores
    */
-  static void setThreadsNb(int const & n, bool force = false) noexcept {setThreadsNb(size_cast(n), force);}
+  static void setThreadsNb(int const & n, bool force = false) noexcept {setThreadsNb(static_cast<size_t>(n), force);}
 
   /** @brief Sets the number of threads.
    * 
@@ -78,7 +83,7 @@ public:
    */
   static void setThreadsNb(size_t const & n, bool force = false) noexcept
   {
-    auto const maxThreads = size_cast(std::thread::hardware_concurrency()*((force) ? 1 : 0.75));
+    auto const maxThreads = static_cast<size_t>(std::thread::hardware_concurrency()*((force) ? 1 : 0.75));
 
     if(n > maxThreads)
     {
@@ -95,7 +100,7 @@ public:
     if (limiting_number<nb_threads) 
     {
       setThreadsNb(limiting_number);
-      print(print_if_limit_reached, "thread number reduced to ", nb_threads);
+      std::cout << print_if_limit_reached << " thread number reduced to " << nb_threads << std::endl;
     }
     if (nb_threads == 1) MTObject::ON = false;
   }
@@ -110,11 +115,12 @@ public:
     master_thread_id = std::this_thread::get_id();
     if (nb_threads>1)
     {
-      print("MTObject initialized with", nb_threads, "threads");
       // Initialise the root thread management
+      std::cout << "Initialize ROOT thread management..." << std::endl;
       TThread::Initialize();
       ROOT::EnableThreadSafety();
       MTObject::ON = true;
+      std::cout << "MTObject initialized with " << nb_threads << " threads " << std::endl;
     }
     else MTObject::ON = false;
   }
@@ -133,12 +139,12 @@ public:
       });
       for(size_t i = 0; i < m_threads.size(); i++) m_threads.at(i).join(); //Closes threads, waiting fot everyone to finish
       m_threads.clear(); // Flushes memory
-      print("Multi-threading is over !");
+      std::cout << "Multi-threading is over !" << std::endl;
     }
 
     else
     {
-      print("Running without multithreading ...");
+      std::cout << "Running without multithreading ..." << std::endl;
       m_thread_index = 0;
       func(std::forward<ARGS>(args)...);
       return;
@@ -183,14 +189,6 @@ std::thread::id MTObject::master_thread_id;
 thread_local size_t MTObject::m_thread_index = 0;
 std::vector<std::thread> MTObject::m_threads;
 
-
-template<class... ARGS>
-void printMT(ARGS &&... args) 
-{
-  MTObject::mutex.lock();
-  print(std::forward<ARGS>(args)...);
-  MTObject::mutex.unlock();
-}
 
 #endif //MTOBJECT_HPP
 

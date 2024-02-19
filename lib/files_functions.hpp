@@ -553,7 +553,7 @@ private:
   void loadPath(bool const & create = false)
   {
   #ifdef MTOBJECT_HPP
-    if (MTObject::ON) MTObject::shared_mutex.lock();
+    lock_mutex(MTObject::mutex);
   #endif //MTOBJECT_HPP
 
     m_recursive_folders.clear();
@@ -583,9 +583,6 @@ private:
     if (create) {this -> make();}
     else if (!(m_exists = folder_exists(m_path))) print(m_path+" doesn't exist !!");
 
-  #ifdef MTOBJECT_HPP
-    if (MTObject::ON) MTObject::shared_mutex.unlock();  
-  #endif //MTOBJECT_HPP
   }
 
   /// @brief To remove extraneous ./ or ../

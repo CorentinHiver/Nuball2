@@ -1,6 +1,8 @@
 #ifndef COBALTECALORIMETER_HPP
 #define COBALTECALORIMETER_HPP
 
+#include "../MTObjects/MTObject.hpp"
+
 #include "../Classes/Detectors.hpp"
 #include "../Classes/Calibration.hpp"
 #include "../Classes/Event.hpp"
@@ -44,14 +46,16 @@ private:
   std::string m_outfilename = "CobaltCalorimetry.root";
 
   // Internal variables :
-  int nb_trigg = 0;
-  int m_minE = 1328;
-  int m_maxE = 1338;
+  int m_nb_trigg = 0;
+  int m_nb_missed = 0; // Nb of mult = 1 when trigger (->trigger is alone)
+  int m_minE = 1326;
+  int m_maxE = 1339;
   // int m_minE = 1169;
   // int m_maxE = 1179;
   double m_calo_totale = 0.0;
 
   // Histograms :
+  
   MTTHist<TH1F> spectrum_Ge;
   MTTHist<TH1F> spectrum_BGO;
   MTTHist<TH1F> spectrum_LaBr3;
@@ -66,19 +70,20 @@ private:
   MTTHist<TH1F> calorimetry_LaBr_histo;
   MTTHist<TH1F> calorimetry_BGO_histo;
   MTTHist<TH1F> calorimetry_NaI_histo;
-  MTTHist<TH1F> calorimetry_Paris_histo;
+
   MTTHist<TH1F> smeared_calorimetry_Ge_histo;
   MTTHist<TH1F> smeared_calorimetry_Clover_histo;
   MTTHist<TH1F> smeared_calorimetry_LaBr_histo;
   MTTHist<TH1F> smeared_calorimetry_BGO_histo;
   MTTHist<TH1F> smeared_calorimetry_NaI_histo;
   MTTHist<TH1F> smeared_calorimetry_Paris_histo;
+  
   MTTHist<TH1F> spectrum_calorimetry;
   MTTHist<TH1F> spectrum_smeared_calorimetry;
   MTTHist<TH1F> spectrum_smeared_calorimetry_double_cascade;
 
   MTTHist<TH2F> spectrum_smeared_calorimetry_VS_Multiplicity;
-  MTTHist<TH2F> smeared_calorimetry_double_VS_multiplicity;
+  MTTHist<TH2F> calo_double_cascades_VS_multiplicity;
 
   MTTHist<TH2F> spectra_NaI_trigger;
 
@@ -101,10 +106,38 @@ private:
   MTTHist<TH2F> Ge_NaI_trigger;
 
   MTTHist<TH2F> Ge_VS_smeared_calorimetry;
+  MTTHist<TH2F> BGO_VS_smeared_calorimetry;
   MTTHist<TH2F> Clover_VS_smeared_calorimetry;
   MTTHist<TH2F> NaI_VS_smeared_calorimetry;
   MTTHist<TH2F> LaBr_VS_smeared_calorimetry;
   MTTHist<TH2F> Paris_VS_smeared_calorimetry;
+
+  MTTHist<TH2F> Ge_calo_VS_smeared_calorimetry;
+  MTTHist<TH2F> BGO_calo_VS_smeared_calorimetry;
+  MTTHist<TH2F> NaI_calo_VS_smeared_calorimetry;
+  MTTHist<TH2F> LaBr_calo_VS_smeared_calorimetry;
+  MTTHist<TH2F> Paris_calo_VS_smeared_calorimetry;
+  MTTHist<TH2F> Clover_calo_VS_smeared_calorimetry;
+
+  MTTHist<TH2F> Ge_VS_BGO_calorimetry;
+
+  MTTHist<TH2F> Ge_calo_VS_BGO_calo;
+  MTTHist<TH2F> LaBr3_calo_VS_BGO_calo;
+  MTTHist<TH2F> NaI_calo_VS_BGO_calo;
+  MTTHist<TH2F> Clover_calo_VS_BGO_calo;
+  MTTHist<TH2F> Paris_calo_VS_BGO_calo;
+
+  MTTHist<TH2F> Ge_calo_VS_Clover_calo;
+  MTTHist<TH2F> LaBr3_calo_VS_Clover_calo;
+  MTTHist<TH2F> NaI_calo_VS_Clover_calo;
+  MTTHist<TH2F> BGO_calo_VS_Clover_calo;
+  MTTHist<TH2F> Paris_calo_VS_Clover_calo;
+
+  MTTHist<TH2F> Ge_calo_VS_Paris_calo;
+  MTTHist<TH2F> LaBr3_calo_VS_Paris_calo;
+  MTTHist<TH2F> NaI_calo_VS_Paris_calo;
+  MTTHist<TH2F> Clover_calo_VS_Paris_calo;
+  MTTHist<TH2F> BGO_calo_VS_Paris_calo;
 
   MTTHist<TH1F> total_energy_per_detector;
 };
@@ -113,42 +146,70 @@ void CobaltCalorimeter::Initialise()
 {
   MTObject::Initialize();
 
-  spectrum_Ge    . reset("spectrum_Ge"   , "Ge spectra;Energy [keV]"    , 4000, 0, 2000);
-  spectrum_BGO   . reset("spectrum_BGO"  , "BGO spectra;Energy [keV]"   , 500 , 0, 2000);
-  spectrum_LaBr3 . reset("spectrum_LaBr3", "LaBr3 spectra;Energy [keV]" , 1000, 0, 2000);
-  spectrum_NaI   . reset("spectrum_NaI"  , "NaI spectra;Energy [keV]" , 1000, 0, 2000);
+  spectrum_Ge    . reset("spectrum_Ge"   , "Ge spectra;Energy [keV]"   , 4000, 0, 2000);
+  spectrum_BGO   . reset("spectrum_BGO"  , "BGO spectra;Energy [keV]"  , 500 , 0, 2000);
+  spectrum_LaBr3 . reset("spectrum_LaBr3", "LaBr3 spectra;Energy [keV]", 1000, 0, 2000);
+  spectrum_NaI   . reset("spectrum_NaI"  , "NaI spectra;Energy [keV]"  , 1000, 0, 2000);
+  
   spectrum_Ge_trigger   . reset("spectrum_Ge_trigger"   , "Ge spectra trigger;Energy [keV]"    , 4000, 0, 2000);
   spectrum_BGO_trigger  . reset("spectrum_BGO_trigger"  , "BGO spectra trigger;Energy [keV]"   , 500 , 0, 2000);
   spectrum_LaBr3_trigger. reset("spectrum_LaBr3_trigger", "LaBr3 spectra trigger;Energy [keV]" , 1000, 0, 2000);
   spectrum_NaI_trigger  . reset("spectrum_NaI_trigger"  , "NaI spectra trigger;Energy [keV]"     , 1000, 0, 2000);
 
-  spectra_NaI_trigger . reset("spectra_NaI_trigger" , "NaI spectra;Energy [keV]"    , 1000,0,1000, 100,0,2000);
+  spectra_NaI_trigger . reset("spectra_NaI_trigger", "NaI spectra;Energy [keV]"    , 1000,0,1000, 100,0,2000);
   spectra_trigger     . reset("spectra_trigger"    , "Trigger spectra;Energy [keV]" , 1000,0,1000, 2000, 0, 2000);
   
-  calorimetry_Ge_histo   .reset("calorimetry_Ge_histo"   , "Calorimeter Ge ;Energy calorimeter[keV]"   , 2999, 1, 3000);
-  calorimetry_BGO_histo  .reset("calorimetry_BGO_histo"  , "Calorimeter BGO ;Energy calorimeter[keV]"  , 2999, 1, 3000);
-  calorimetry_LaBr_histo .reset("calorimetry_LaBr_histo" , "Calorimeter LaBr ;Energy calorimeter[keV]" , 2999, 1, 3000);
-  calorimetry_NaI_histo  .reset("calorimetry_NaI_histo"  , "Calorimeter NaI ;Energy calorimeter[keV]"  , 2999, 1, 3000);
-  calorimetry_Paris_histo.reset("calorimetry_Paris_histo", "Calorimeter Paris ;Energy calorimeter[keV]", 2999, 1, 3000);
+  calorimetry_Ge_histo  .reset("calorimetry_Ge_histo"  , "Calorimeter Ge ;Energy calorimeter[keV]"  , 2999, 1, 3000);
+  calorimetry_BGO_histo .reset("calorimetry_BGO_histo" , "Calorimeter BGO ;Energy calorimeter[keV]" , 2999, 1, 3000);
+  calorimetry_LaBr_histo.reset("calorimetry_LaBr_histo", "Calorimeter LaBr ;Energy calorimeter[keV]", 2999, 1, 3000);
+  calorimetry_NaI_histo .reset("calorimetry_NaI_histo" , "Calorimeter NaI ;Energy calorimeter[keV]" , 2999, 1, 3000);
 
-  smeared_calorimetry_Ge_histo  .reset("smeared_calorimetry_Ge_histo", "Calorimeter Ge ;Energy calorimeter[keV]"    , 2999, 1, 3000);
-  smeared_calorimetry_Clover_histo  .reset("smeared_calorimetry_Clover_histo", "Calorimeter Clover ;Energy calorimeter[keV]"    , 2999, 1, 3000);
-  smeared_calorimetry_LaBr_histo.reset("smeared_calorimetry_LaBr_histo", "Calorimeter LaBr ;Energy calorimeter[keV]", 2999, 1, 3000);
-  smeared_calorimetry_NaI_histo .reset("smeared_calorimetry_NaI_histo", "Calorimeter NaI ;Energy calorimeter[keV]"  , 2999, 1, 3000);
-  smeared_calorimetry_Paris_histo .reset("smeared_calorimetry_Paris_histo", "Calorimeter Paris ;Energy calorimeter[keV]"  , 2999, 1, 3000);
+  smeared_calorimetry_Ge_histo    .reset("smeared_calorimetry_Ge_histo"    , "Calorimeter Ge ;Energy calorimeter[keV]"    , 2999, 1, 3000);
+  smeared_calorimetry_Clover_histo.reset("smeared_calorimetry_Clover_histo", "Calorimeter Clover ;Energy calorimeter[keV]", 2999, 1, 3000);
+  smeared_calorimetry_LaBr_histo  .reset("smeared_calorimetry_LaBr_histo"  , "Calorimeter LaBr ;Energy calorimeter[keV]"  , 2999, 1, 3000);
+  smeared_calorimetry_NaI_histo   .reset("smeared_calorimetry_NaI_histo"   , "Calorimeter NaI ;Energy calorimeter[keV]"   , 2999, 1, 3000);
+  smeared_calorimetry_Paris_histo .reset("smeared_calorimetry_Paris_histo" , "Calorimeter Paris ;Energy calorimeter[keV]" , 2999, 1, 3000);
+
+  Ge_VS_BGO_calorimetry.reset("Ge_VS_BGO_calorimetry", "Ge VS BGO calorimeter;BGO calorimeter[keV];Ge [keV]", 299,10,3000, 2000,0,2000);
 
   spectrum_calorimetry . reset("spectrum_calorimetry", "Calorimeter spectra;Energy calorimeter[keV]", 2999, 1, 3000);
   spectrum_smeared_calorimetry . reset("spectrum_smeared_calorimetry", "Smeared calorimeter spectra;Energy calorimeter[keV]", 2999, 1, 3000);
   Ge_VS_smeared_calorimetry.reset("Ge_VS_smeared_calorimetry", "Ge VS calorimeter;Energy calorimeter[keV];Ge [keV]", 299,10,3000, 2000,0,2000);
+  BGO_VS_smeared_calorimetry.reset("BGO_VS_smeared_calorimetry", "BGO VS calorimeter;Energy calorimeter[keV];Energy [keV]", 299,10,3000, 2000,0,2000);
   NaI_VS_smeared_calorimetry.reset("NaI_VS_smeared_calorimetry", "NaI VS calorimeter;Energy calorimeter[keV];Energy [keV]", 299,10,3000, 200,0,2000);
   LaBr_VS_smeared_calorimetry.reset("LaBr_VS_smeared_calorimetry", "LaBr VS calorimeter;Energy calorimeter[keV];Energy [keV]", 299,10,3000, 500,0,2000);
   Clover_VS_smeared_calorimetry.reset("Clover_VS_smeared_calorimetry", "Ge VS calorimeter;Energy calorimeter[keV];Ge [keV]", 299,10,3000, 500,0,2000);
   Paris_VS_smeared_calorimetry.reset("Paris_VS_smeared_calorimetry", "Paris VS calorimeter;Energy calorimeter[keV];Energy [keV]", 299,10,3000, 500,0,2000);
   spectrum_smeared_calorimetry_VS_Multiplicity . reset("spectrum_smeared_calorimetry_VS_Multiplicity", 
                   "Smeared calorimeter spectra multiplicity VS multiplicity;Multiplicity;Energy calorimeter[keV]", 10,0,10, 2999,1,3000);
+
+  Ge_calo_VS_smeared_calorimetry.reset("Ge_calo_VS_smeared_calorimetry", "Ge calorimetry VS calorimeter;Energy calorimeter[keV];Ge calorimetry [keV]", 299,10,3000, 299,10,3000);
+  BGO_calo_VS_smeared_calorimetry.reset("BGO_calo_VS_smeared_calorimetry", "BGO calorimetry VS calorimeter;Energy calorimeter[keV];BGO calorimetry [keV]", 299,10,3000, 299,10,3000);
+  NaI_calo_VS_smeared_calorimetry.reset("NaI_calo_VS_smeared_calorimetry", "NaI calorimetry VS calorimeter;Energy calorimeter[keV];NaI calorimetry [keV]", 299,10,3000, 299,10,3000);
+  LaBr_calo_VS_smeared_calorimetry.reset("LaBr_calo_VS_smeared_calorimetry", "LaBr3 calorimetry VS calorimeter;Energy calorimeter[keV];LaBr3 calorimetry [keV]", 299,10,3000, 299,10,3000);
+  Paris_calo_VS_smeared_calorimetry.reset("Paris_calo_VS_smeared_calorimetry", "Paris calorimetry VS calorimeter;Energy calorimeter[keV];Paris calorimetry [keV]", 299,10,3000, 299,10,3000);
+  Clover_calo_VS_smeared_calorimetry.reset("Clover_calo_VS_smeared_calorimetry", "Clover calorimetry VS calorimeter;Energy calorimeter[keV];Clover calorimetry [keV]", 299,10,3000, 299,10,3000);
+
+  Ge_calo_VS_BGO_calo.reset("Ge_calo_VS_BGO_calo","Ge_calo_VS_BGO_calo;BGO calorimetry[keV];Ge calorimetry[keV]", 299,10,3000, 299,10,3000);
+  LaBr3_calo_VS_BGO_calo.reset("LaBr3_calo_VS_BGO_calo","LaBr3_calo_VS_BGO_calo;BGO calorimetry[keV];LaBr3 calorimetry[keV]", 299,10,3000, 299,10,3000);
+  NaI_calo_VS_BGO_calo.reset("NaI_calo_VS_BGO_calo","NaI_calo_VS_BGO_calo;BGO calorimetry[keV];NaI calorimetry[keV]", 299,10,3000, 299,10,3000);
+  Clover_calo_VS_BGO_calo.reset("Clover_calo_VS_BGO_calo","Clover_calo_VS_BGO_calo;BGO calorimetry[keV];Clover calorimetry[keV]", 299,10,3000, 299,10,3000);
+  Paris_calo_VS_BGO_calo.reset("Paris_calo_VS_BGO_calo","Paris_calo_VS_BGO_calo;BGO calorimetry[keV];Paris calorimetry[keV]", 299,10,3000, 299,10,3000);
+  
+  Ge_calo_VS_Clover_calo.reset("Ge_calo_VS_Clover_calo","Ge_calo_VS_Clover_calo;Clover calorimetry[keV];Ge calorimetry[keV]", 299,10,3000, 299,10,3000);
+  LaBr3_calo_VS_Clover_calo.reset("LaBr3_calo_VS_Clover_calo","LaBr3_calo_VS_Clover_calo;Clover calorimetry[keV];LaBr3 calorimetry[keV]", 299,10,3000, 299,10,3000);
+  NaI_calo_VS_Clover_calo.reset("NaI_calo_VS_Clover_calo","NaI_calo_VS_Clover_calo;Clover calorimetry[keV];NaI calorimetry[keV]", 299,10,3000, 299,10,3000);
+  BGO_calo_VS_Clover_calo.reset("BGO_calo_VS_Clover_calo","BGO_calo_VS_Clover_calo;Clover calorimetry[keV];BGO calorimetry[keV]", 299,10,3000, 299,10,3000);
+  Paris_calo_VS_Clover_calo.reset("Paris_calo_VS_Clover_calo","Paris_calo_VS_Clover_calo;Clover calorimetry[keV];Paris calorimetry[keV]", 299,10,3000, 299,10,3000);
+  
+  Ge_calo_VS_Paris_calo.reset("Ge_calo_VS_Paris_calo","Ge_calo_VS_Paris_calo;Paris calorimetry[keV];Ge calorimetry[keV]", 299,10,3000, 299,10,3000);
+  LaBr3_calo_VS_Paris_calo.reset("LaBr3_calo_VS_Paris_calo","LaBr3_calo_VS_Paris_calo;Paris calorimetry[keV];LaBr3 calorimetry[keV]", 299,10,3000, 299,10,3000);
+  NaI_calo_VS_Paris_calo.reset("NaI_calo_VS_Paris_calo","NaI_calo_VS_Paris_calo;Paris calorimetry[keV];NaI calorimetry[keV]", 299,10,3000, 299,10,3000);
+  Clover_calo_VS_Paris_calo.reset("Clover_calo_VS_Paris_calo","Clover_calo_VS_Paris_calo;Paris calorimetry[keV];Clover calorimetry[keV]", 299,10,3000, 299,10,3000);
+  BGO_calo_VS_Paris_calo.reset("BGO_calo_VS_Paris_calo","BGO_calo_VS_Paris_calo;Paris calorimetry[keV];BGO calorimetry[keV]", 299,10,3000, 299,10,3000);
   
   spectrum_smeared_calorimetry_double_cascade. reset("spectrum_smeared_calorimetry_double_cascade", "Smeared calorimeter spectra 2 cascades;Energy calorimeter[keV]", 3999, 1, 4000);
-  smeared_calorimetry_double_VS_multiplicity . reset("smeared_calorimetry_double_VS_multiplicity", 
+  calo_double_cascades_VS_multiplicity . reset("calo_double_cascades_VS_multiplicity", 
                   "Smeared calorimeter spectra 2 cascades VS Multiplicity;Multiplicity;Energy calorimeter[keV]", 10,0,10, 3999,1,4000);
 
   total_energy_per_detector.reset("total_energy_per_detector", "total_energy_per_detector;label;Total Energy [keV]", 1000,0,1000);
@@ -160,8 +221,6 @@ void CobaltCalorimeter::Initialise()
   labels.reset("labels", "labels;label", 1000, 0, 1000);
   labels2D_trigger.reset("labels2D_trigger", "labels2D_trigger;label trigger;label others", 1000,0,1000, 200,0,200);
 
-  paris_pid.reset("paris_pid", "paris_pid;(long-short)/long", 500,-2,3);
-
   Ge_Ge  .reset("Ge_Ge"  , "Ge Ge;Energy [keV];Energy [keV]", 2000,0,2000, 2000,0,2000);
   Ge_BGO .reset("Ge_BGO" , "BGO;Energy [keV];Energy [keV]"  , 2000,0,2000, 250 ,0,2000);
   Ge_LaBr.reset("Ge_LaBr", "LaBr;Energy [keV];Energy [keV]" , 2000,0,2000, 1000,0,2000);
@@ -171,21 +230,8 @@ void CobaltCalorimeter::Initialise()
   Ge_BGO_trigger .reset("Ge_BGO_trigger" , "BGO VS Ge;Energy [keV];Energy [keV]" , 2000,0,2000, 250 ,0,2000);
   Ge_LaBr_trigger.reset("Ge_LaBr_trigger", "LaBr VS Ge;Energy [keV];Energy [keV]", 2000,0,2000, 1000,0,2000);
   Ge_NaI_trigger .reset("Ge_NaI_trigger" , "NaI VS Ge;Energy [keV];Energy [keV]" , 2000,0,2000, 500 ,0,2000);
-}
 
-void CobaltCalorimeter::launchFaster(std::string const & foldername, int nb_files)
-{
-  if (!detectors) detectors.load(m_IDfilename);
-  if (!detectors) throw Detectors::Error();
-
-  this -> Initialise();
-
-  MTFasterReader reader(foldername, nb_files);
-  reader.setTimeshifts(m_timeshifts.data());
-  reader.readAligned(dispatch_workFaster, *this);
-
-  this->Analyse();
-  this->write();
+  paris_pid.reset("paris_pid", "paris_pid;(long-short)/long", 500,-2,3);
 }
 
 void CobaltCalorimeter::launchRoot(std::string const & foldername, int nb_files)
@@ -194,8 +240,15 @@ void CobaltCalorimeter::launchRoot(std::string const & foldername, int nb_files)
   if (!detectors) throw Detectors::Error();
 
   this -> Initialise();
+  print("Histograms initialized");
+
+  #ifdef DEBUG
+  FasterReader::setMaxHits(1000);
+  print(FasterReader::getMaxHits());
+  #endif //DEBUG
 
   MTRootReader reader(foldername, nb_files);
+  print("Launching the reader");
   reader.read(dispatch_workRoot, *this);
 
   this->Analyse();
@@ -239,50 +292,37 @@ bool inGate(double const & value, double const & min, double const & max) {retur
 
 void CobaltCalorimeter::work(Nuball2Tree & tree, Event & event)
 {
-  TRandom* random = new TRandom();
+  thread_local TRandom* random = new TRandom();
   random->SetSeed(time(0));
 
+  debug("thread", MTObject::getThreadIndex());
+
+  // The following local variables will be fused with the global variable of the object
+  thread_local int nb_trigg = 0;
+  thread_local int nb_missed = 0;
+  thread_local double calo_totale = 0;
+
   Bools isNaI;
-  double smeared_calorimetry_multiple_cascades = 0;
-  int mult_multitude_cascades = 0;
-  int nb_cascades = false;
+  Bools isRejected;
+
+  double calo_double_cascade = 0;
+  int mult_double_cascade = 0;
+  int nb_cascades = 0;
 
   auto const & nb_evts = tree->GetEntries();
   for (int evt_i = 0; evt_i<nb_evts; ++evt_i)
-  {
+  { // Iterate over the events of the file
+
     tree->GetEntry(evt_i);
 
-    // Calibrate data :
     isNaI.resize(event.mult, false);
-    for (int hit_i = 0; hit_i<event.mult; hit_i++) 
-    {
-      auto const & label = event.labels[hit_i];
-      auto const & adc = event.adcs[hit_i];
-      auto const & qdc2 = event.qdc2s[hit_i];
-      auto & nrj = event.nrjs[hit_i];
-      auto & nrj2 = event.nrj2s[hit_i];
+    isRejected.resize(event.mult, false);
+    int nb_Ge = 0;
+    int nb_BGO = 0;
+    int nb_NaI = 0;
+    int nb_LaBr = 0;
 
-      if (isParis[label] && parisPiD(adc, qdc2)) 
-      {
-        isNaI[hit_i] = true;
-        nrj = m_calib.calibrate(qdc2, label);
-        nrj*=1.1; // TODO
-      }
-      else nrj = m_calib.calibrate(adc, label);
-
-      if (isBGO[label]) nrj*=1.11; // TODO
-
-      if (isGe[label])        {spectrum_Ge .Fill(nrj);}
-      else if (isBGO[label])  {spectrum_BGO.Fill(nrj);}
-      else if (isParis[label])
-      {
-        if (isNaI[hit_i])       {spectrum_NaI  .Fill(nrj);}
-        else                    {spectrum_LaBr3.Fill(nrj);}
-      }
-    }
-
-    // Event analysis :
-    bool trigger1772 = false;
+    bool trigger = false;
 
     Hit Ge_hit;
     int Ge_hit_i = -1;
@@ -298,91 +338,142 @@ void CobaltCalorimeter::work(Nuball2Tree & tree, Event & event)
     double smeared_NaI = 0;
     double smeared_LaBr = 0;
 
-    for (int hit_i = 0; hit_i<event.mult; hit_i++)
-    {
-      auto const & label_i = event.labels[hit_i];
-      auto const & nrj_i = event.nrjs[hit_i];
+    int event_multiplicity = event.mult;
 
-      if (isGe[label_i])
+    // Calibrate data and pre-treatment :
+    for (int hit_i = 0; hit_i<event.mult; hit_i++) 
+    {// Iterate over the hits of the event
+      auto const & label = event.labels[hit_i];
+      auto const & adc   = event.adcs  [hit_i];
+      auto const & qdc2  = event.qdc2s [hit_i];
+      auto       & nrj   = event.nrjs  [hit_i];
+      auto       & nrj2  = event.nrj2s [hit_i];
+
+
+      if (isParis[label] && parisPiD(adc, qdc2)) 
       {
-        if (inGate(nrj_i, m_minE, m_maxE))
-        {
-          Ge_hit_i = hit_i;
-          trigger1772 = true;
-          nb_cascades++;
-          mult_multitude_cascades+=event.mult-1;
-          Ge_hit = event[hit_i];
-        } 
-
-        for (int hit_j = hit_i+1; hit_j<event.mult; hit_j++)
-        {
-          auto const & label_j = event.labels[hit_j];
-          auto const & nrj_j = event.nrjs[hit_j];
-
-          if (isGe[label_j])
-          {
-            Ge_Ge.Fill(nrj_i, nrj_j);
-            Ge_Ge.Fill(nrj_j, nrj_i);
-          }
-          else if (isBGO[label_j])   {Ge_BGO.Fill(nrj_i, nrj_j);}
-          else if (isParis[label_j])
-          {
-            if (isNaI[hit_j]) {Ge_NaI .Fill(nrj_i, nrj_j);}
-            else              {Ge_LaBr.Fill(nrj_i, nrj_j );}
-          }
-        }
+        isNaI[hit_i] = true;
+        nrj = m_calib.calibrate(qdc2, label);
+        nrj*=1.1; // CALIBRATE BETTER !!!
       }
+      else nrj = m_calib.calibrate(adc, label);
+
+      if (isBGO[label]) nrj*=1.11; // CALIBRATE BETTER !!!
+
+      if (isGe[label])        {spectrum_Ge .Fill(nrj); nb_Ge++;}
+      else if (isBGO[label])  {spectrum_BGO.Fill(nrj); nb_BGO++;}
+      else if (isParis[label])
+      {
+        if (isNaI[hit_i])       {spectrum_NaI  .Fill(nrj); nb_NaI++;}
+        else                    {spectrum_LaBr3.Fill(nrj); nb_LaBr++;}
+      }
+
+      // Throw events with too low energy :
+      if (nrj<10)
+      {
+        isRejected[hit_i] = true;
+        --event_multiplicity;
+        continue;
+      }
+
+      // Trigger on the wanted gamma ray in the Germaniums
+      if (!trigger && inGate(nrj, m_minE, m_maxE))
+      {
+        trigger = true;
+        Ge_hit_i = hit_i;
+        Ge_hit = event[hit_i];
+      } 
 
       // Calculating the calorimetry :
       if (Ge_hit_i != hit_i)
       {
-        calorimetry+=nrj_i;
-        auto const & smeared_energy = smear(nrj_i, label_i, random);
+        calorimetry+=nrj;
+        auto const & smeared_energy = smear(nrj, label, random);
         smeared_calorimetry += smeared_energy;
-        if (isGe[label_i])       {calorimetry_Ge += nrj_i; smeared_Ge += smeared_energy;}
-        else if (isBGO[label_i]) {calorimetry_BGO +=nrj_i;}
-        else if (isParis[label_i])
+        if (isGe[label])       {calorimetry_Ge += nrj; smeared_Ge += smeared_energy;}
+        else if (isBGO[label]) {calorimetry_BGO +=nrj;}
+        else if (isParis[label])
         {
-          if (isNaI[hit_i]) {calorimetry_NaI +=nrj_i; smeared_NaI +=smeared_energy;}
-          else              {calorimetry_LaBr+=nrj_i; smeared_LaBr+=smeared_energy;}
+          if (isNaI[hit_i]) {calorimetry_NaI +=nrj; smeared_NaI +=smeared_energy;}
+          else              {calorimetry_LaBr+=nrj; smeared_LaBr+=smeared_energy;}
         }
       }
     }
 
     // Treat events of interest :
-    if (trigger1772)
+    if (trigger)
     {
       nb_trigg++;
-      {
-        lock_mutex(MTObject::mutex);
-        m_calo_totale+=calorimetry;
+      auto const & multiplicity = event_multiplicity-1;
+      if (event.mult == 1) {nb_missed++; continue;}
+      ++nb_cascades;
+
+      auto const & Clover_calo = smeared_Ge + calorimetry_BGO;
+      auto const & Paris_calo = smeared_NaI+smeared_LaBr;
+
+      
+      {// Fill calorimeter polts
+        spectrum_calorimetry.Fill(calorimetry);
+        spectrum_smeared_calorimetry.Fill(smeared_calorimetry);
+        spectrum_smeared_calorimetry_VS_Multiplicity.Fill(multiplicity, smeared_calorimetry);
+
+        calorimetry_Ge_histo   .Fill(calorimetry_Ge);
+        calorimetry_BGO_histo  .Fill(calorimetry_BGO);
+        calorimetry_LaBr_histo .Fill(calorimetry_LaBr);
+        calorimetry_NaI_histo  .Fill(calorimetry_NaI);
+
+        smeared_calorimetry_Ge_histo    .Fill(smeared_Ge);
+        smeared_calorimetry_Clover_histo.Fill(Clover_calo);
+        smeared_calorimetry_LaBr_histo  .Fill(smeared_LaBr);
+        smeared_calorimetry_NaI_histo   .Fill(smeared_NaI);
+        smeared_calorimetry_Paris_histo .Fill(Paris_calo);
+
+        Ge_calo_VS_smeared_calorimetry    .Fill(smeared_calorimetry, smeared_Ge);
+        BGO_calo_VS_smeared_calorimetry   .Fill(smeared_calorimetry, calorimetry_BGO);
+        LaBr_calo_VS_smeared_calorimetry  .Fill(smeared_calorimetry, smeared_LaBr);
+        NaI_calo_VS_smeared_calorimetry   .Fill(smeared_calorimetry, smeared_NaI);
+        Clover_calo_VS_smeared_calorimetry.Fill(smeared_calorimetry, Clover_calo);
+        Paris_calo_VS_smeared_calorimetry .Fill(smeared_calorimetry, Paris_calo);
+     
+        if (event.mult>1)
+        {
+          Ge_calo_VS_BGO_calo    .Fill(calorimetry_BGO, smeared_Ge);
+          LaBr3_calo_VS_BGO_calo .Fill(calorimetry_BGO, smeared_LaBr);
+          NaI_calo_VS_BGO_calo   .Fill(calorimetry_BGO, smeared_NaI);
+          Clover_calo_VS_BGO_calo.Fill(calorimetry_BGO, Clover_calo);
+          Paris_calo_VS_BGO_calo .Fill(calorimetry_BGO, Paris_calo);
+
+          if (nb_BGO>0)Ge_calo_VS_Clover_calo.Fill(Clover_calo, smeared_Ge);
+          if (nb_Ge>0)BGO_calo_VS_Clover_calo.Fill(Clover_calo, calorimetry_BGO);
+          LaBr3_calo_VS_Clover_calo.Fill(Clover_calo, smeared_LaBr);
+          NaI_calo_VS_Clover_calo  .Fill(Clover_calo, smeared_NaI);
+          Paris_calo_VS_Clover_calo.Fill(Clover_calo, smeared_NaI);
+
+          Ge_calo_VS_Paris_calo    .Fill(Paris_calo, smeared_Ge);
+          if (nb_NaI>0) LaBr3_calo_VS_Paris_calo.Fill(Paris_calo, smeared_LaBr);
+          if (nb_LaBr>0) NaI_calo_VS_Paris_calo .Fill(Paris_calo, smeared_NaI);
+          Clover_calo_VS_Paris_calo.Fill(Paris_calo, Clover_calo);
+          BGO_calo_VS_Paris_calo   .Fill(Paris_calo, calorimetry_BGO);
+        }
       }
-      spectrum_calorimetry.Fill(calorimetry);
-      spectrum_smeared_calorimetry.Fill(smeared_calorimetry);
-      spectrum_smeared_calorimetry_VS_Multiplicity.Fill(event.mult-1, smeared_calorimetry);
 
-      calorimetry_Ge_histo  . Fill(calorimetry_Ge);
-      calorimetry_BGO_histo . Fill(calorimetry_BGO);
-      calorimetry_LaBr_histo. Fill(calorimetry_LaBr);
-      calorimetry_NaI_histo . Fill(calorimetry_NaI);
-      calorimetry_Paris_histo . Fill(calorimetry_NaI+calorimetry_LaBr);
-
-      smeared_calorimetry_Ge_histo    .Fill(smeared_Ge);
-      smeared_calorimetry_Clover_histo.Fill(smeared_Ge + calorimetry_BGO);
-      smeared_calorimetry_LaBr_histo  .Fill(smeared_LaBr);
-      smeared_calorimetry_NaI_histo   .Fill(smeared_NaI);
-      smeared_calorimetry_Paris_histo .Fill(smeared_NaI+smeared_LaBr);
-
+      // Some gamma-gamma plots :
       for (int hit_i = 0; hit_i<event.mult; hit_i++)
       {
         auto const & label = event.labels[hit_i];
         auto const & nrj   = event.nrjs  [hit_i];
 
-        if (hit_i == Ge_hit_i) continue;
+        if (hit_i == Ge_hit_i || isRejected[hit_i]) continue;
         
         total_energy_per_detector.SetBinContent(label, total_energy_per_detector.GetBinContent(label)+nrj);
 
-        if (isGe[label]) Ge_VS_smeared_calorimetry.Fill(smeared_calorimetry, nrj);
+        if (isGe[label]) 
+        {
+          Ge_VS_smeared_calorimetry.Fill(smeared_calorimetry, nrj);
+          if (nb_BGO>0) Ge_VS_BGO_calorimetry.Fill(calorimetry_BGO, nrj);
+        }
+
+        else if (isBGO[label]) BGO_VS_smeared_calorimetry.Fill(smeared_calorimetry, nrj);
         else if (isParis[label])
         {
           if (isNaI[hit_i]) NaI_VS_smeared_calorimetry.Fill(smeared_calorimetry, nrj);
@@ -410,6 +501,8 @@ void CobaltCalorimeter::work(Nuball2Tree & tree, Event & event)
           auto const & label_j = event.labels[hit_j];
           auto const & nrj_j = event.nrjs[hit_j];
 
+          if (hit_j == Ge_hit_i) continue;
+
           if (isGe[label_j])
           {
             Ge_Ge_trigger.Fill(nrj, nrj_j);
@@ -424,19 +517,27 @@ void CobaltCalorimeter::work(Nuball2Tree & tree, Event & event)
       }
 
       // To simulate a double cascade :
-      smeared_calorimetry_multiple_cascades+=smeared_calorimetry;
-      mult_multitude_cascades+=event.mult-1;
-      if (nb_cascades>0 && nb_cascades%2 == 0)
+      calo_double_cascade+=smeared_calorimetry;
+      mult_double_cascade += multiplicity;
+      if (nb_cascades==2)
       {
-        auto const calo = smeared_calorimetry_multiple_cascades;
-        auto const mult = mult_multitude_cascades;
+        auto const calo = calo_double_cascade;
+        auto const mult = mult_double_cascade;
         spectrum_smeared_calorimetry_double_cascade.Fill(calo);
-        smeared_calorimetry_double_VS_multiplicity.Fill(mult, calo);
-        smeared_calorimetry_multiple_cascades = 0.0;
-        mult_multitude_cascades = 0;
+        calo_double_cascades_VS_multiplicity.Fill(mult, calo);
+        calo_double_cascade = 0.0;
+        mult_double_cascade = 0;
+        nb_cascades = 0;
       }
     }
+  }
 
+  // Update the global variables :
+  {
+    lock_mutex(MTObject::mutex);
+    m_calo_totale += calo_totale;
+    m_nb_trigg    += nb_trigg;
+    m_nb_missed   += nb_missed;
   }
 }
 
@@ -445,16 +546,18 @@ void CobaltCalorimeter::Analyse()
   // Calculate the pic/total of the calorimeter
   print("----------------");
   print("");
+  auto const & total_efficiency = 1. - m_nb_missed/double_cast(m_nb_trigg) ;
+  print("total efficiency :", int_cast(total_efficiency*100.), "%");
+
   auto calo_spectrum = spectrum_smeared_calorimetry.Merge();
   if (!calo_spectrum) return;
-  print("total efficiency :", calo_spectrum->Integral()/nb_trigg*1333, calo_spectrum->Integral(), "/", nb_trigg*1333);
-  
   PeakFitter pe(calo_spectrum, 600, 2000);
-  pe->Draw("same");
   auto background(pe.getBackground());
   auto const & integral_peak = pe->Integral(600, 2000);
   auto const & background_peak = background->Integral(600, 2000);
-  print(integral_peak, (integral_peak-background_peak)/nb_trigg);
+  print("Mean of the peak is at : ", pe.getMean());
+  auto const & PE_efficiency = (integral_peak-background_peak)/m_nb_trigg;
+  print();
   print("----------------");
 
   labels2D_trigger.Merge();
@@ -489,7 +592,6 @@ void CobaltCalorimeter::write()
   calorimetry_LaBr_histo.Write();
   calorimetry_BGO_histo.Write();
   calorimetry_NaI_histo.Write();
-  calorimetry_Paris_histo.Write();
 
   smeared_calorimetry_Ge_histo.Write();
   smeared_calorimetry_LaBr_histo.Write();
@@ -503,21 +605,48 @@ void CobaltCalorimeter::write()
   spectrum_smeared_calorimetry_VS_Multiplicity.Write();
   
   spectrum_smeared_calorimetry_double_cascade.Write();
-  smeared_calorimetry_double_VS_multiplicity.Write();
+  calo_double_cascades_VS_multiplicity.Write();
 
   Ge_Ge.Write();
   Ge_BGO.Write();
   Ge_LaBr.Write();
   Ge_NaI.Write();
+
   Ge_Ge_trigger.Write();
   Ge_BGO_trigger.Write();
   Ge_LaBr_trigger.Write();
   Ge_NaI_trigger.Write();
+
+  Ge_VS_BGO_calorimetry.Write();
+
   Ge_VS_smeared_calorimetry.Write();
   Clover_VS_smeared_calorimetry.Write();
   NaI_VS_smeared_calorimetry.Write();
   LaBr_VS_smeared_calorimetry.Write();
   Paris_VS_smeared_calorimetry.Write();
+  
+  Ge_calo_VS_smeared_calorimetry.Write();
+  BGO_calo_VS_smeared_calorimetry.Write();
+  NaI_calo_VS_smeared_calorimetry.Write();
+  LaBr_calo_VS_smeared_calorimetry.Write();
+
+  Ge_calo_VS_BGO_calo.Write();
+  LaBr3_calo_VS_BGO_calo.Write();
+  NaI_calo_VS_BGO_calo.Write();
+  Clover_calo_VS_BGO_calo.Write();
+  Paris_calo_VS_BGO_calo.Write();
+
+  Ge_calo_VS_Clover_calo.Write();
+  LaBr3_calo_VS_Clover_calo.Write();
+  NaI_calo_VS_Clover_calo.Write();
+  BGO_calo_VS_Clover_calo.Write();
+  Paris_calo_VS_Clover_calo.Write();
+
+  Ge_calo_VS_Paris_calo.Write();
+  LaBr3_calo_VS_Paris_calo.Write();
+  NaI_calo_VS_Paris_calo.Write();
+  Clover_calo_VS_Paris_calo.Write();
+  BGO_calo_VS_Paris_calo.Write();
 
   total_energy_per_detector.Write();
 
@@ -538,7 +667,21 @@ void CobaltCalorimeter::write()
 
 
 
+/// @brief Deprecated @deprecated
+void CobaltCalorimeter::launchFaster(std::string const & foldername, int nb_files)
+{
+  if (!detectors) detectors.load(m_IDfilename);
+  if (!detectors) throw Detectors::Error();
 
+  this -> Initialise();
+
+  MTFasterReader reader(foldername, nb_files);
+  reader.setTimeshifts(m_timeshifts.data());
+  reader.readAligned(dispatch_workFaster, *this);
+
+  this->Analyse();
+  this->write();
+}
 
 /// @brief Deprecated @deprecated
 void CobaltCalorimeter::work(Hit & hit, Alignator & reader)
@@ -567,7 +710,7 @@ void CobaltCalorimeter::work(Hit & hit, Alignator & reader)
       // if (hit.nrj>1325 && hit.nrj<1335)
       if (hit.nrj>1170 && hit.nrj<1178)
       {
-        ++nb_trigg;
+        // ++nb_trigg;
         // spectra_trigger.Fill(hit.nrj);
         while(--hit_i > 0)
         {
@@ -631,7 +774,7 @@ void CobaltCalorimeter::work(Hit & hit, Alignator & reader)
 
             if (hit.nrj>1170 && hit.nrj<1178)
             {
-              ++nb_trigg;
+              // ++nb_trigg;
               // spectra_trigger.Fill(hit.nrj);
               while(--hit_i > 0)
               {

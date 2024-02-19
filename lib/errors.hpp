@@ -1,6 +1,8 @@
 #ifndef ERROR_HPP
 #define ERROR_HPP
 
+#include "print.hpp"
+
 class OverwriteError
 {
 public:
