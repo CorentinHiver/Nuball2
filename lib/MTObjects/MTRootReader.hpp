@@ -46,11 +46,9 @@ void MTRootReader::Read(MTRootReader & MTreader, Func function, ARGS &&... args)
   {
     thread_local Event event;
 
-    MTObject::mutex.lock();
-      debug("Initialising the tree reader", MTObject::getThreadIndex());
-      thread_local Nuball2Tree tree(filename);
-      event.reading(tree.get());
-    MTObject::mutex.unlock();
+    debug("Initialising the tree reader", MTObject::getThreadIndex());
+    thread_local Nuball2Tree tree(filename);
+    event.reading(tree.get());
 
     function(tree, event, std::forward<ARGS>(args)...); // If issues here, check that the parallelised function has the following form : type func(Hit & hit, FasterReader & reader, ARGS... some_args)
   }

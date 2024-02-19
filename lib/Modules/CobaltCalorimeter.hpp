@@ -557,7 +557,7 @@ void CobaltCalorimeter::Analyse()
   auto const & background_peak = background->Integral(600, 2000);
   print("Mean of the peak is at : ", pe.getMean());
   auto const & PE_efficiency = (integral_peak-background_peak)/m_nb_trigg;
-  print();
+  print(PE_efficiency);
   print("----------------");
 
   labels2D_trigger.Merge();
