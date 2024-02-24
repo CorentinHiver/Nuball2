@@ -33,7 +33,7 @@ public:
   Analysator(int const & number_files, std::string const & datapath = "~/faster_data/N-SI-136-root_dd/")
   // Analysator(int const & number_files, std::string const & datapath = "~/nuball2/N-SI-136-root_dd/")
   {
-    if ((Path::pwd(), "faster")) datapath = "~/nuball2/N-SI-136-root_dd/merged/"
+    
     this->Initialise();
     MTRootReader reader(datapath, number_files);
     print("Launching the reader");
@@ -754,7 +754,9 @@ void Analysator::write()
 void reader(int number_files = -1)
 {
   MTObject::Initialize(nb_threads);
-  Analysator analysator(number_files);
+  if (found(Path::pwd().string(), "faster")) Analysator analysator(number_files, "~/nuball2/N-SI-136-root_dd/merged/");
+  else Analysator analysator(number_files);
+  
 }
 
 #ifndef __CINT__
