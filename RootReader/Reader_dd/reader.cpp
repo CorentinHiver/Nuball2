@@ -27,6 +27,16 @@ inline float smear(float const & nrj, Label const & label, TRandom* random)
   else return 0;
 }
 
+inline float smear(float const & nrj, Label const & label)
+{
+  if (nrj>0)
+  {
+    if (isBGO[label]) return nrj;
+    else return random_gaussian(nrj, nrj*((400.0/sqrt(nrj))/100.0)/2.35);
+  }
+  else return 0;
+}
+
 class Analysator
 {
 public:
@@ -156,6 +166,8 @@ private:
 
   MTTHist<TH1F> number_of_pulses_detected;
   MTTHist<TH1F> preprompt_spectra;
+
+  MTTHist<TH2F> time_vs_run;
 };
 
 long Analysator::g_nb_max_hits = -1;
@@ -279,6 +291,11 @@ void Analysator::Initialise()
   delayed_Ge_clean_VS_delayed_calo_wop.reset("delayed_Ge_clean_VS_delayed_calo_wop", "delayed Ge clean VS delayed calo with only one prompt before", 500,0,15000,10000,0,10000);
 
   preprompt_spectra.reset("preprompt_spectra", "preprompt spectra", 10000,0,10000);
+
+
+  // Run quality :
+  time_vs_run.reset("time_vs_run", "time_vs_run;run number;time [ns]", 100,50,150, 1000,-1000, 1000);
+
 }
 
 bool NaI_pid(float nrj, float nrj2)
@@ -358,12 +375,14 @@ void Analysator::analyse(Nuball2Tree & tree, Event & event)
         continue;
       }
 
+
       if ((label == 506 || label == 508) && (run_number==100 || run_number==101)) time+=3500; // BETTER TIME ALIGN !!
       float time_ns = time/1000.;
       time_all.Fill(label, time_ns);
       if (time_ns>180) {rejected[hit_i] = true; continue;}
       is_delayed[hit_i] = isDelayed(time_ns);
 
+      time_vs_run.Fill(run_number, time_ns);
       //////////////
       // Prompt : //
       //////////////
@@ -452,7 +471,7 @@ void Analysator::analyse(Nuball2Tree & tree, Event & event)
       ///////////////////
       // Calorimetry : //
       ///////////////////
-      auto const & smeared_energy = smear(nrj, label, random);
+      auto const & smeared_energy = smear(nrj, label);
       if (is_prompt[hit_i])
       {
         prompt_calorimetry += smeared_energy;
@@ -743,6 +762,9 @@ void Analysator::write()
   delayed_Ge_clean_VS_delayed_calo_wop.Write();
 
   number_of_pulses_detected.Write();
+  preprompt_spectra.Write();
+
+  time_vs_run.Write();
 
   delayed_E_VS_time_Ge_clean.Write();
   delayed_E_VS_time_Ge_clean_wp.Write();
@@ -767,7 +789,7 @@ void reader(int number_files = -1)
   else 
   {
     MTObject::Initialize(nb_threads);
-    Analysator::setMaxHits(1.e+6);
+    // Analysator::setMaxHits(1.e+6);
     Analysator analysator(number_files);
   }
   

@@ -10,24 +10,29 @@ std::uniform_real_distribution<double> uniform_random_generator_double(0, 1);
 // double random_uniform() {return uniform_random_generator_double(gen);}
 
 
+static thread_local std::mt19937 generator;
+
 int intRand(const int & min, const int & max)
 {
-  static thread_local std::mt19937 generator;
   std::uniform_int_distribution<int> distribution(min,max);
   return distribution(generator);
 }
 
 double double_random_uniform(const double & min, const double & max)
 {
-  static thread_local std::mt19937 generator;
   std::uniform_real_distribution<double> distribution(min, max);
   return distribution(generator);
 }
 
 double random_uniform()
 {
-  static thread_local std::mt19937 generator;
   std::uniform_real_distribution<double> distribution(0, 1);
+  return distribution(generator);
+}
+
+double random_gaussian(double mean, double stddev) 
+{
+  std::normal_distribution<double> distribution(mean, stddev);
   return distribution(generator);
 }
 
