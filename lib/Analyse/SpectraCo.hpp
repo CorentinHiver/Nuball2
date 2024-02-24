@@ -65,8 +65,8 @@ public:
     calculateCoeff();
   }
 
-  SpectraCo(SpectraCo const & other) : 
-    m_loaded_TH1 (other.m_loaded_TH1),
+  SpectraCo(SpectraCo const & other, std::string name = "", std::string title = "") : 
+    m_loaded_TH1  (other.m_loaded_TH1),
     m_spectra     (other.m_spectra),
     m_name        (other.m_name),
     m_title       (other.m_title),
@@ -75,10 +75,12 @@ public:
     m_min_x       (other.m_min_x),
     m_max_x       (other.m_max_x)
   {
+    if (name  != "") m_name = name;
+    if (title != "") m_title = title;
     calculateCoeff();
   }
 
-  SpectraCo(SpectraCo* other) : 
+  SpectraCo(SpectraCo* other, std::string name = "", std::string title = "") : 
     m_loaded_TH1 (other->m_loaded_TH1),
     m_spectra     (other->m_spectra),
     m_name        (other->m_name),
@@ -88,6 +90,8 @@ public:
     m_min_x       (other->m_min_x),
     m_max_x       (other->m_max_x)
   {
+    if (name != "") m_name = name;
+    if (title != "") m_title = title;
     calculateCoeff();
   }
 
@@ -163,9 +167,11 @@ public:
     m_spectra.resize(size);
   }
 
-  SpectraCo(TH1* root_spectra)
+  SpectraCo(TH1* root_spectra, std::string name = "", std::string title = "")
   {
     load(root_spectra);
+    if (name != "") m_name = name;
+    if (title != "") m_title = title;
   }
 
   SpectraCo& operator=(SpectraCo const & other)

@@ -1,23 +1,28 @@
+#include <MTRootReader.hpp>
 #include "../../lib/Classes/Detectors.hpp"
 #include "../../lib/Classes/Event.hpp"
 #include "../../lib/Classes/RF_Manager.hpp"
 #include "../../lib/Classes/FilesManager.hpp"
-// #include "../../lib/Analyse/SpectraCo.hpp"
 #include "../../lib/Analyse/Clovers.hpp"
 #include "../../lib/MTObjects/MTTHist.hpp"
 #include "../../lib/Classes/RWMat.hxx"
 #include "../../lib/MTObjects/MTList.hpp"
 
-std::string g_outfilename = "all_runs_test.root";
+Label_vec const blacklist = {800, 801};
+std::unordered_map<Label, double> const maxE_Ge = {{28, 7500}, {33, 8250}, {46, 9000}, {55, 7500}, {57, 6000}, 
+                                                   {68, 7000}, {71, 9500}, {85, 7500}, {91, 8000}, {134, 8500}, 
+                                                   {135, 8500}, {136, 9000}, {142, 6000}, {145, 8000}, {146, 9000},
+                                                   {147, 9000}, {157, 9000}, {158, 9000}, {159, 9000}};
+
+std::string g_outfilename = "all_runs_tests.root";
 int nb_threads = 2;
 
-float smear(float const & nrj, Label const & label, TRandom* random)
+inline float smear(float const & nrj, Label const & label, TRandom* random)
 {
   if (nrj>0)
   {
-    if (isGe[label])         return random->Gaus(nrj,nrj*((300.0/sqrt(nrj))/100.0)/2.35);
-    else if (isParis[label]) return random->Gaus(nrj,nrj*((200.0/sqrt(nrj))/100.0)/2.35);
-    else return nrj;
+    if (isBGO[label]) return nrj;
+    else return random->Gaus(nrj,nrj*((400.0/sqrt(nrj))/100.0)/2.35);
   }
   else return 0;
 }
@@ -28,20 +33,21 @@ public:
   Analysator(int const & number_files, std::string const & datapath = "~/faster_data/N-SI-136-root_dd/")
   // Analysator(int const & number_files, std::string const & datapath = "~/nuball2/N-SI-136-root_dd/")
   {
-    FilesManager m_files(Path(datapath).string(), number_files);
-    MTfiles = m_files.getListFiles();
+    if ((Path::pwd(), "faster")) datapath = "~/nuball2/N-SI-136-root_dd/merged/"
     this->Initialise();
-    MTObject::parallelise_function(analyse_t, *this);
+    MTRootReader reader(datapath, number_files);
+    print("Launching the reader");
+    reader.read(analyse_t, *this);
     write();
   }
 
   void Initialise();
-  void analyse();
+  void analyse(Nuball2Tree & tree, Event & event);
   void write();
 
 private:
   /// @brief static 
-  static void analyse_t(Analysator & analysator) {analysator.analyse();}
+  static void analyse_t(Nuball2Tree & tree, Event & event, Analysator & analysator) {analysator.analyse(tree, event);}
 
   TRandom* random = new TRandom();
   MTList MTfiles;
@@ -52,16 +58,69 @@ private:
   MTTHist<TH1F> delayed_Ge;
   MTTHist<TH1F> prompt_BGO;
   MTTHist<TH1F> delayed_BGO;
-  MTTHist<TH1F> prompt_Paris;
-  MTTHist<TH1F> delayed_Paris;
+  MTTHist<TH1F> prompt_NaI;
+  MTTHist<TH1F> delayed_NaI;
+  MTTHist<TH1F> prompt_LaBr;
+  MTTHist<TH1F> delayed_LaBr;
+
+  MTTHist<TH1F> prompt_clean_Ge;
+  MTTHist<TH1F> delayed_clean_Ge;
+
+  MTTHist<TH1F> prompt_Ge_wp;
+  MTTHist<TH1F> delayed_Ge_wp;
+  MTTHist<TH1F> prompt_BGO_wp;
+  MTTHist<TH1F> delayed_BGO_wp;
+  MTTHist<TH1F> prompt_NaI_wp;
+  MTTHist<TH1F> delayed_NaI_wp;
+  MTTHist<TH1F> prompt_LaBr_wp;
+  MTTHist<TH1F> delayed_LaBr_wp;
+
+  MTTHist<TH1F> prompt_Ge_Clover_wp;
+  
   MTTHist<TH1F> prompt_calo;
+  MTTHist<TH1F> prompt_calo_A;
+  MTTHist<TH1F> prompt_calo_B;
+  MTTHist<TH1F> prompt_calo_C;
+  MTTHist<TH1F> prompt_calo_D;
+  MTTHist<TH1F> prompt_calo_E;
+  MTTHist<TH1F> closest_prompt_calo_histo;
   MTTHist<TH1F> delayed_calo;
 
   MTTHist<TH2F> prompt_delayed_calo;
   MTTHist<TH2F> delayed_Ge_VS_delayed_calo;
   MTTHist<TH2F> delayed_Ge_VS_prompt_calo;
 
-  MTTHist<TH1F> delayed_Ge_wp;
+  MTTHist<TH2F> spectra_all;
+  MTTHist<TH2F> spectra_Ge_VS_run;
+  MTTHist<TH2F> spectra_BGO_VS_run;
+  MTTHist<TH2F> spectra_LaBr_VS_run;
+  MTTHist<TH2F> spectra_NaI_VS_run;
+
+
+  MTTHist<TH2F> delayed_E_VS_time_Ge_clean;
+  MTTHist<TH2F> delayed_E_VS_time_Ge_clean_wp;
+  MTTHist<TH2F> E_VS_time_BGO_wp;
+  MTTHist<TH2F> E_VS_time_LaBr_wp;
+  MTTHist<TH2F> E_VS_time_NaI_wp;
+  MTTHist<TH2F> time_all;
+  MTTHist<TH2F> time_NaI;
+  MTTHist<TH2F> time_all_knowing_pulse_A;
+  MTTHist<TH2F> time_all_knowing_pulse_B;
+  MTTHist<TH2F> time_all_knowing_pulse_C;
+  MTTHist<TH2F> time_all_knowing_pulse_D;
+  MTTHist<TH2F> time_all_knowing_pulse_E;
+  MTTHist<TH2F> time_all_knowing_only_pulse_A;
+  MTTHist<TH2F> time_all_knowing_only_pulse_B;
+  MTTHist<TH2F> time_all_knowing_only_pulse_C;
+  MTTHist<TH2F> time_all_knowing_only_pulse_D;
+  MTTHist<TH2F> time_all_knowing_only_pulse_E;
+  MTTHist<TH2F> time_all_pulse_A;
+  MTTHist<TH2F> time_all_pulse_B;
+  MTTHist<TH2F> time_all_pulse_C;
+  MTTHist<TH2F> time_all_pulse_D;
+
+
+  // MTTHist<TH1F> delayed_Ge_wp;
   MTTHist<TH1F> delayed_calo_wp;
   MTTHist<TH2F> delayed_Ge_VS_delayed_calo_wp;
 
@@ -77,6 +136,23 @@ private:
   MTTHist<TH2F> pp;
   MTTHist<TH2F> dd;
   MTTHist<TH2F> dd_wp;
+  MTTHist<TH2F> dd_wpp;
+  MTTHist<TH2F> dd_wppE;
+  MTTHist<TH2F> dp;
+
+  MTTHist<TH1F> delayed_clean_Ge_last_pulse_A;
+  MTTHist<TH1F> delayed_clean_Ge_last_pulse_B;
+  MTTHist<TH1F> delayed_clean_Ge_last_pulse_C;
+  MTTHist<TH1F> delayed_clean_Ge_last_pulse_D;
+  MTTHist<TH1F> delayed_clean_Ge_last_pulse_E;
+
+  MTTHist<TH2F> dd_time_Ge_clean;
+  MTTHist<TH2F> dd_time_Ge_clean_wp;
+  MTTHist<TH2F> delayed_Ge_clean_VS_prompt_calo;
+  MTTHist<TH2F> delayed_Ge_clean_VS_delayed_calo_wop; // With one prompt
+
+  MTTHist<TH1F> number_of_pulses_detected;
+  MTTHist<TH1F> preprompt_spectra;
 };
 
 void Analysator::Initialise()
@@ -84,19 +160,42 @@ void Analysator::Initialise()
   
   detectors.load("index_129.list");
   random->SetSeed(time(0));
+  Clovers::InitializeArrays();
+  Clovers::timePs(true);
 
 
   prompt_Ge.reset("prompt_Ge" , "prompt Ge;E[keV]" , 20000,0,10000);
   delayed_Ge.reset("delayed_Ge", "delayed Ge;E[keV]", 20000,0,10000);
   prompt_BGO.reset("prompt_BGO" , "prompt BGO;E[keV]" , 2000,0,10000);
   delayed_BGO.reset("delayed_BGO", "delayed BGO;E[keV]", 2000,0,10000);
-  prompt_Paris.reset("prompt_Paris" , "prompt Paris;E[keV]" , 5000,0,10000);
-  delayed_Paris.reset("delayed_Paris", "delayed Paris;E[keV]", 5000,0,10000);
+  prompt_NaI.reset("prompt_NaI" , "prompt NaI;E[keV]" , 5000,0,10000);
+  delayed_NaI.reset("delayed_NaI" , "delayed NaI;E[keV]" , 5000,0,10000);
+  prompt_LaBr.reset("prompt_LaBr" , "prompt LaBr;E[keV]" , 5000,0,10000);
+  delayed_LaBr.reset("delayed_LaBr" , "delayed LaBr;E[keV]" , 5000,0,10000);
+
+  prompt_Ge_wp.reset("prompt_Ge_wp" , "prompt Ge with at least one prompt gamma;E[keV]" , 20000,0,10000);
+  delayed_Ge_wp.reset("delayed_Ge_wp", "delayed Ge with at least one prompt gamma;E[keV]", 20000,0,10000);
+  prompt_BGO_wp.reset("prompt_BGO_wp" , "prompt BGO with at least one prompt gamma;E[keV]" , 2000,0,10000);
+  delayed_BGO_wp.reset("delayed_BGO_wp", "delayed BGO with at least one prompt gamma;E[keV]", 2000,0,10000);
+  prompt_NaI_wp.reset("prompt_NaI_wp" , "prompt NaI with at least one prompt gamma;E[keV]" , 5000,0,10000);
+  delayed_NaI_wp.reset("delayed_NaI_wp" , "delayed NaI with at least one prompt gamma;E[keV]" , 5000,0,10000);
+  prompt_LaBr_wp.reset("prompt_LaBr_wp" , "prompt LaBr with at least one prompt gamma;E[keV]" , 5000,0,10000);
+  delayed_LaBr_wp.reset("delayed_LaBr_wp" , "delayed LaBr with at least one prompt gamma;E[keV]" , 5000,0,10000);
+
+  number_of_pulses_detected.reset("number_of_pulses_detected","number of pulses detected", 5,0,5);
+
+  prompt_Ge_Clover_wp.reset("prompt_Ge_Clover_wp" , "prompt Ge Clover with at least one prompt gamma;E[keV]" , 20000,0,10000);
 
   // Calorimetry
   prompt_calo.reset("prompt_calo" , "prompt calorimetry;E[keV]" , 5000,0,10000);
+  prompt_calo_A.reset("prompt_calo_A" , "prompt calorimetry;E[keV]" , 5000,0,10000);
+  prompt_calo_B.reset("prompt_calo_B" , "prompt calorimetry;E[keV]" , 5000,0,10000);
+  prompt_calo_C.reset("prompt_calo_C" , "prompt calorimetry;E[keV]" , 5000,0,10000);
+  prompt_calo_D.reset("prompt_calo_D" , "prompt calorimetry;E[keV]" , 5000,0,10000);
+  prompt_calo_E.reset("prompt_calo_E" , "prompt calorimetry;E[keV]" , 5000,0,10000);
+  closest_prompt_calo_histo.reset("closest_prompt_calo_histo" , "closest prompt calorimetry;E[keV]" , 5000,0,10000);
   delayed_calo.reset("delayed_calo", "delayed calorimetry;E[keV]", 5000,0,10000);
-  prompt_delayed_calo.reset("prompt_delayed_calo", "Delayed VS prompt calorimetry;Prompt Calorimetry[keV];Delayed Calorimetry[keV]", 
+  prompt_delayed_calo.reset("prompt_delayed_calo", "Delayed VS clostest prompt calorimetry;Prompt Calorimetry[keV];Delayed Calorimetry[keV]", 
       1000,0,20000, 1000,0,20000);
   delayed_Ge_VS_delayed_calo.reset("delayed_Ge_VS_delayed_calo", "Delayed Ge VS delayed calorimetry;Delayed Calorimetry[keV];E[keV]", 
       500,0,10000, 5000,0,10000);
@@ -124,169 +223,428 @@ void Analysator::Initialise()
 
 
   // Final bidims
-  pp.reset("pp", "pp;E[keV];E[keV]", 3096,0,3096, 3096,0,3096);
-  dd.reset("dd", "dd;E[keV];E[keV]", 3096,0,3096, 3096,0,3096);
-  dd_wp.reset("dd_wp", "dd;E[keV];E[keV]", 3096,0,3096, 3096,0,3096);
+  pp.reset("pp", "pp;E[keV];E[keV]", 4096,0,4096, 4096,0,4096);
+  dd.reset("dd", "dd;E[keV];E[keV]", 4096,0,4096, 4096,0,4096);
+  dd_wp.reset("dd_wp", "dd;E[keV];E[keV]", 4096,0,4096, 4096,0,4096);
+  dd_wpp.reset("dd_wp", "dd;E[keV];E[keV]", 4096,0,4096, 4096,0,4096);
+  dd_wppE.reset("dd_wp", "dd;E[keV];E[keV]", 4096,0,4096, 4096,0,4096);
+  dp.reset("dp", "delaed VS prompt;E[keV];E[keV]", 4096,0,4096, 4096,0,4096);
+
+  spectra_all.reset("spectra_all", "Spectra;label;Energy [keV]", 1000,0,1000, 10000,0,10000);
+
+  spectra_Ge_VS_run.reset("spectra_Ge_VS_run", "Spectra;run number;Energy [keV]", 100,50,150, 2000,0,2000);
+  spectra_BGO_VS_run.reset("spectra_BGO_VS_run", "Spectra;run number;Energy [keV]", 100,50,150, 2000,0,2000);
+  spectra_LaBr_VS_run.reset("spectra_LaBr_VS_run", "Spectra;run number;Energy [keV]", 100,50,150, 2000,0,2000);
+  spectra_NaI_VS_run.reset("spectra_NaI_VS_run", "Spectra;run number;Energy [keV]", 100,50,150, 2000,0,2000);
+
+  // Timing
+  time_all.reset("time_all", "Time", 1000,0,1000, 2000,-1000,1000);
+  time_NaI.reset("time_NaI", "Time NaI", 1000,0,1000, 2000,-1000,1000);
+  time_all_knowing_pulse_A.reset("time_all_knowing_pulse_A", "Time knownig the pulse 0 has hits;label;time [ns]", 1000,0,1000, 2000,-1000,1000);
+  time_all_knowing_pulse_B.reset("time_all_knowing_pulse_B", "Time knownig the pulse -1 has hits;label;time [ns]", 1000,0,1000, 2000,-1000,1000);
+  time_all_knowing_pulse_C.reset("time_all_knowing_pulse_C", "Time knownig the pulse -2 has hits;label;time [ns]", 1000,0,1000, 2000,-1000,1000);
+  time_all_knowing_pulse_D.reset("time_all_knowing_pulse_D", "Time knownig the pulse -3 has hits;label;time [ns]", 1000,0,1000, 2000,-1000,1000);
+  time_all_knowing_pulse_E.reset("time_all_knowing_pulse_E", "Time knownig the pulse -3 has hits;label;time [ns]", 1000,0,1000, 2000,-1000,1000);
+  time_all_knowing_only_pulse_A.reset("time_all_knowing_only_pulse_A", "Time knownig the pulse 0 is the only one;label,time [ns]", 1000,0,1000, 2000,-1000,1000);
+  time_all_knowing_only_pulse_B.reset("time_all_knowing_only_pulse_B", "Time knownig the pulse -1 is the only one;label,time [ns]", 1000,0,1000, 2000,-1000,1000);
+  time_all_knowing_only_pulse_C.reset("time_all_knowing_only_pulse_C", "Time knownig the pulse -2 is the only one;label,time [ns]", 1000,0,1000, 2000,-1000,1000);
+  time_all_knowing_only_pulse_D.reset("time_all_knowing_only_pulse_D", "Time knownig the pulse -3 is the only one;label,time [ns]", 1000,0,1000, 2000,-1000,1000);
+  time_all_knowing_only_pulse_E.reset("time_all_knowing_only_pulse_E", "Time knownig the pulse -4 is the only one;label,time [ns]", 1000,0,1000, 2000,-1000,1000);
+  time_all_pulse_A.reset("time_all_pulse_A", "Time of the pulse 0;label;time [ns]", 1000,0,1000, 2000,-1000,1000);
+  time_all_pulse_B.reset("time_all_pulse_B", "Time of the pulse -1;label;time [ns]", 1000,0,1000, 2000,-1000,1000);
+  time_all_pulse_C.reset("time_all_pulse_C", "Time of the pulse -2;label;time [ns]", 1000,0,1000, 2000,-1000,1000);
+  time_all_pulse_D.reset("time_all_pulse_D", "Time of the pulse -3;label;time [ns]", 1000,0,1000, 2000,-1000,1000);
+
+  delayed_E_VS_time_Ge_clean.reset("delayed_E_VS_time_Ge_clean", "Energy vs time delayed;time [ns];Energy [keV]", 500,-1000,1000, 5000,0,10000);
+  delayed_E_VS_time_Ge_clean_wp.reset("delayed_E_VS_time_Ge_clean_wp", "Energy Ge vs time delayed requiring one prompt;time [ns];Energy [keV]", 500,-1000,1000, 5000,0,10000);
+
+  E_VS_time_BGO_wp.reset("E_VS_time_BGO_wp", "Energy BGO vs time requiring one prompt;time [ns];Energy [keV]", 500,-1000,1000, 5000,0,10000);
+  E_VS_time_LaBr_wp.reset("E_VS_time_LaBr_wp", "Energy LaBr vs time requiring one prompt;time [ns];Energy [keV]", 500,-1000,1000, 5000,0,10000);
+  E_VS_time_NaI_wp.reset("E_VS_time_NaI_wp", "Energy Nai vs time requiring one prompt;time [ns];Energy [keV]", 500,-1000,1000, 5000,0,10000);
+
+  delayed_clean_Ge_last_pulse_A.reset("delayed_clean_Ge_last_pulse_A", "clean Ge last pulse A;Energy [keV]", 10000,0,10000);
+  delayed_clean_Ge_last_pulse_B.reset("delayed_clean_Ge_last_pulse_B", "clean Ge last pulse B;Energy [keV]", 10000,0,10000);
+  delayed_clean_Ge_last_pulse_C.reset("delayed_clean_Ge_last_pulse_C", "clean Ge last pulse C;Energy [keV]", 10000,0,10000);
+  delayed_clean_Ge_last_pulse_D.reset("delayed_clean_Ge_last_pulse_D", "clean Ge last pulse D;Energy [keV]", 10000,0,10000);
+  delayed_clean_Ge_last_pulse_E.reset("delayed_clean_Ge_last_pulse_E", "clean Ge last pulse E;Energy [keV]", 10000,0,10000);
+
+  dd_time_Ge_clean.reset("dd_time_Ge_clean", "dd time Ge clean;time [ns];time [ns]", 500,0,500,500,0,500);
+  dd_time_Ge_clean_wp.reset("dd_time_Ge_clean_wp", "dd time Ge clean wp;time [ns];time [ns]", 500,0,500,500,0,500);
+  delayed_Ge_clean_VS_prompt_calo.reset("delayed_Ge_clean_VS_prompt_calo", "delayed Ge clean VS prompt calo", 500,0,15000,10000,0,10000);
+  delayed_Ge_clean_VS_delayed_calo_wop.reset("delayed_Ge_clean_VS_delayed_calo_wop", "delayed Ge clean VS delayed calo with only one prompt before", 500,0,15000,10000,0,10000);
+
+  preprompt_spectra.reset("preprompt_spectra", "preprompt spectra", 10000,0,10000);
 }
 
-void Analysator::analyse()
+bool NaI_pid(float nrj, float nrj2)
 {
-  std::string _file;
-  while(MTfiles.getNext(_file))
-  {
-    File file(_file);
-    if (!found(file.string(), "run")) continue;
-    int run_number = std::stoi(getList(file.shortName(), '_')[1]);
+  return ((nrj2-nrj)/double_cast(nrj2) > 0.15);
+}
 
-    auto tfile (TFile::Open(file.c_str(), "READ"));
-    tfile->cd();
-    auto tree (tfile->Get<TTree>("Nuball2"));
+bool isDelayed(Time_ns const & time_ns) {return (time_ns>20 && time_ns<180);}
 
-    print("reading from", file);
+void Analysator::analyse(Nuball2Tree & tree, Event & event)
+{
+  File file(tree.filename());
+  int run_number = std::stoi(getList(file.shortName(), '_')[1]);
 
-    Event event(tree);
-    RF_Manager rf;
-    Clovers clovers;
+  Bools isNaI;
+  Bools isLaBr;
+  Bools rejected;
 
-    auto const & nb_events = tree->GetEntries();
-    for (int event_i = 0; event_i<nb_events; event_i++)
-    {
-      if(event_i%int_cast(10.e+6) == 0) print(event_i/1.e+6, "Mevts");
+  RF_Manager rf;
 
-      tree->GetEntry(event_i);
-      clovers.Reset();
+  auto const & nb_evts = tree->GetEntries();
+  for (int evt_i = 0; evt_i<nb_evts; ++evt_i)
+  { // Iterate over the events of the file
+    if(evt_i%int_cast(10.e+6) == 0) print(evt_i/1.e+6, "Mevts"); 
+    if (evt_i>1.e+6) break;
 
-      std::vector<CloverModule> clovers_prompt(24);
-      std::vector<uchar> clovers_prompt_fired;
-      std::vector<CloverModule> clovers_delayed(24);
-      std::vector<uchar> clovers_delayed_fired;
+    tree->GetEntry(evt_i);
 
-      float totalE_prompt = 0;
-      float totalE_delayed = 0;
-      float energyDSSD = 0;
+    if (rf.setEvent(event)) continue;
 
-      // Some triggers :
-      bool has_prompt = false;
-      bool has_prompt_particle = false;
-      bool has_prompt_particle_E5 = false; // Particle prompt with energy<5MeV
+    isNaI.resize(event.mult, false);
+    isLaBr.resize(event.mult, false);
+    rejected.resize(event.mult, false);
 
-      if (event.size()==1) continue;
-      
-      for (int hit_i = 0; hit_i<event.size(); hit_i++)
+    double prompt_calorimetry = 0;
+    double prompt_calorimetry_Ge = 0;
+    double prompt_calorimetry_LaBr = 0;
+    double prompt_calorimetry_BGO = 0;
+    double prompt_calorimetry_NaI = 0;
+
+    double delayed_calorimetry = 0;
+    double delayed_calorimetry_Ge = 0;
+    double delayed_calorimetry_LaBr = 0;
+    double delayed_calorimetry_BGO = 0;
+    double delayed_calorimetry_NaI = 0;
+
+    int multiplicity_prompt = 0;
+    int multiplicity_delayed = 0;
+
+    Clovers clovers_delayed;
+
+    int nb_prompts = 6;
+
+    std::vector<int> nb_gamma_in_prompts(nb_prompts, 0);
+    bool only_prompt_with_gamma = false;
+    std::vector<double> calo_prompts(nb_prompts, 0.0);
+    std::vector<Clovers> prompt_clovers(nb_prompts);
+    std::vector<bool> particle_associated_with_prompt(nb_prompts, false); // Deal with DSSD later
+
+    std::vector<bool> is_prompt(event.mult, false);
+    std::vector<bool> is_delayed(event.mult, false);
+
+    // Fine tune data and pre-treatment :
+    for (int hit_i = 0; hit_i<event.mult; hit_i++) 
+    {// Iterate over the hits of the event
+      auto const & label = event.labels[hit_i];
+      auto       & time  = event.times [hit_i];
+      auto const & nrj2  = event.nrj2s [hit_i];
+      auto       & nrj = event.nrjs[hit_i];
+
+      if (isDSSD[label]) continue; // There is nothing to do with paris now
+      if (found(blacklist, label)) {rejected[hit_i] = true; continue;}
+      // Throw events with too low energy
+      if (nrj<5)
       {
-        clovers.Fill(event, hit_i);
-        if (rf.setEvent(event)) continue;
-        auto const & label = event.labels[hit_i];
-        auto const & nrj   = event.nrjs  [hit_i];
-        auto const & nrj2  = event.nrj2s [hit_i];
-        auto const & time  = event.times [hit_i];
+        rejected[hit_i] = true;
+        continue;
+      }
 
-        if (nrj<5) continue;
-        
-        float const & time_ns = time/1000.f;
+      if ((label == 506 || label == 508) && (run_number==100 || run_number==101)) time+=3500; // BETTER TIME ALIGN !!
+      float time_ns = time/1000.;
+      time_all.Fill(label, time_ns);
+      if (time_ns>180) {rejected[hit_i] = true; continue;}
+      is_delayed[hit_i] = isDelayed(time_ns);
 
-        if (time_ns<5) 
+      //////////////
+      // Prompt : //
+      //////////////
+
+      // Range les gammas dans leurs prompts respectifs:
+      int index_prompt = -1;
+      int min_T = -15;
+      int max_T = 5;
+      int pulse_freq = 200;
+      if (isParis[label]) {min_T = -5; max_T = 4;}
+      if (time_ns<max_T && !isDSSD[label])
+      {                                                                 // Let's take an example : time = -798 and max_T = 5;
+        auto const & shifted_time = abs(time_ns)+max_T;                 // shifted_time = 803
+                     index_prompt = (int_cast(shifted_time)/pulse_freq);// index_prompt = 4
+        auto const & dT = shifted_time-index_prompt*pulse_freq;         // dT = 3 -> It is prompt !
+        if (dT>0 && dT<abs(min_T)+max_T) 
         {
-          has_prompt = true;
-          if (isDSSD[label]) 
+          is_prompt[hit_i] = true;
+          nb_gamma_in_prompts[index_prompt]++;
+          switch(index_prompt)
           {
-            has_prompt_particle = true;
-            if (isSector[label])
-            {
-              energyDSSD = nrj;
-              if (nrj<5000) has_prompt_particle_E5 = true;
-            }
+            case 0: time_all_pulse_A.Fill(label, time_ns);break;
+            case 1: time_all_pulse_B.Fill(label, time_ns);break;
+            case 2: time_all_pulse_C.Fill(label, time_ns);break;
+            case 3: time_all_pulse_D.Fill(label, time_ns);break;
+            default: break;
           }
         }
+      }
 
-        // Calculate calorimetry :
-        if (isParis[label] || isBGO[label] || isGe[label]) 
+      //////////////////
+      // GERMANIUMS : //
+      //////////////////
+      if (isGe[label])
+      {
+        if (find_key(maxE_Ge, label) && nrj>maxE_Ge.at(label))
         {
-          if(time_ns<5) totalE_prompt+=smear(nrj, label, random);
-          else if(time_ns>20) totalE_delayed+=smear(nrj, label, random);
-          // print(nrj,smear(nrj, label, random), totalE_prompt, totalE_delayed);
-          // pauseCo();
+          rejected[hit_i] = true;
+          continue;
         }
+        if (is_prompt[hit_i]) 
+        {
+          prompt_clovers[index_prompt].Fill(event, hit_i);
+          prompt_Ge.Fill(nrj);
+        }
+        else if (is_delayed[hit_i]) 
+        {
+          delayed_Ge.Fill(nrj);
+          clovers_delayed.Fill(event, hit_i);
+        }
+      }
+      
+      /////////////
+      // PARIS : //
+      /////////////
+      else if (isParis[label]) 
+      {
+        if (NaI_pid(nrj, nrj2))
+        {
+          isNaI[hit_i] = true;
+          nrj=nrj2*1.1; // CALIBRATE BETTER !!!
 
-        if (isGe[label])
-        {
-          if (time_ns<20) prompt_Ge.Fill(nrj);
-          else
-          {
-            delayed_Ge.Fill(nrj);
-            if (has_prompt) delayed_Ge_wp.Fill(nrj);
-            if (has_prompt_particle) delayed_Ge_wpp.Fill(nrj);
-            if (has_prompt_particle_E5) delayed_Ge_wppE.Fill(nrj);
-          }
+          time_all.Fill(label, time_ns, -1);
+          time_NaI.Fill(label, time_ns);
+               if (is_prompt [hit_i]) {prompt_NaI .Fill(nrj);}
+          else if (is_delayed[hit_i]) {delayed_NaI.Fill(nrj);}
         }
+        else
+        {
+          isLaBr[hit_i] = true;
+               if (is_prompt [hit_i]) {prompt_LaBr .Fill(nrj);}
+          else if (is_delayed[hit_i]) {delayed_LaBr.Fill(nrj);}
+        }
+      }
+
+      ///////////
+      // BGO : //
+      ///////////
+      else if (isBGO[label]) 
+      {
+        nrj*=1.11; // CALIBRATE BETTER !!!
+             if (is_prompt [hit_i]) {prompt_BGO .Fill(nrj);}
+        else if (is_delayed[hit_i]) {delayed_BGO.Fill(nrj);}
+      }
+      
+      ///////////////////
+      // Calorimetry : //
+      ///////////////////
+      auto const & smeared_energy = smear(nrj, label, random);
+      if (is_prompt[hit_i])
+      {
+        prompt_calorimetry += smeared_energy;
+
+        calo_prompts[index_prompt] += smeared_energy;
+
+             if (isGe[label])  {prompt_calorimetry_Ge  += smeared_energy;}
+        else if (isBGO[label]) {prompt_calorimetry_BGO +=nrj;}
+        else if (isNaI[hit_i]) {prompt_calorimetry_NaI  += smeared_energy;}
+        else if (isLaBr[hit_i]){prompt_calorimetry_LaBr += smeared_energy;}
+
+        ++multiplicity_prompt;
+      }
+      else if (is_delayed[hit_i])
+      {
+        delayed_calorimetry += smeared_energy;
+            if (isGe[label])  {delayed_calorimetry_Ge += smeared_energy;}
+        else if (isBGO[label]) {delayed_calorimetry_BGO +=nrj;}
         else if (isParis[label])
         {
-          if (time_ns<5) prompt_Paris.Fill(nrj);
-          else if (time_ns>20) delayed_Paris.Fill(nrj);
+          if (isNaI[hit_i])    {delayed_calorimetry_NaI  += smeared_energy;}
+          else                 {delayed_calorimetry_LaBr += smeared_energy;}
         }
+        ++multiplicity_delayed;
+      }
+
+      spectra_all.Fill(label, nrj);
+    }
+    
+    ///////////////////
+    // Calorimetry : //
+    ///////////////////
+
+    int closest_prompt = 0;
+    double all_prompt_calo = 0.0;
+
+    if (multiplicity_prompt>0)
+    {
+      prompt_calo.Fill(prompt_calorimetry);
+
+      // Find the closest prompt :
+      for (int prompt_i = nb_prompts; prompt_i>-1; --prompt_i) 
+      {
+        all_prompt_calo += calo_prompts[prompt_i];
+        if (nb_gamma_in_prompts[prompt_i]>0) closest_prompt = prompt_i;
+      }
+
+      closest_prompt_calo_histo.Fill(calo_prompts[closest_prompt]);
+
+      if (nb_gamma_in_prompts[0]>0) prompt_calo_A.Fill(calo_prompts[0]);
+      if (nb_gamma_in_prompts[1]>0) prompt_calo_B.Fill(calo_prompts[1]);
+      if (nb_gamma_in_prompts[2]>0) prompt_calo_C.Fill(calo_prompts[2]);
+      if (nb_gamma_in_prompts[3]>0) prompt_calo_D.Fill(calo_prompts[3]);
+      if (nb_gamma_in_prompts[4]>0) prompt_calo_E.Fill(calo_prompts[4]);
+    
+      prompt_delayed_calo.Fill(calo_prompts[closest_prompt], delayed_calorimetry);
+    }
+
+    delayed_calo.Fill(delayed_calorimetry);
+
+    ///////////
+    // OTHER //
+    ///////////
+
+    int nb_prompts_with_gammas = 0;
+    for (auto const & nb_hits : nb_gamma_in_prompts) if (nb_hits>0) ++nb_prompts_with_gammas;
+    number_of_pulses_detected.Fill(nb_prompts_with_gammas);
+
+    std::vector<bool> only_prompt; // Set true if there is only this prompt that fired
+    for (auto const & nb_hits : nb_gamma_in_prompts) only_prompt.push_back((nb_hits>0 && nb_prompts_with_gammas == 1));
+
+
+    /////////////////////
+    // Treated Event : //
+    /////////////////////
+    for (int hit_i = 0; hit_i<event.mult; hit_i++)
+    {
+      auto const & label = event.labels[hit_i];
+      auto const & nrj   = event.nrjs  [hit_i];
+      auto const & time  = event.times [hit_i];
+      auto const & time_ns = time/1000.;
+
+      if(rejected[hit_i]) continue;
+
+      if (multiplicity_prompt>0)
+      {
+             if (isGe[label])
+        {
+          if (is_delayed[hit_i]) delayed_Ge_wp.Fill(nrj);
+        }
+
         else if (isBGO[label])
         {
-          if(time_ns<5) prompt_BGO.Fill(nrj);
-          else if(time_ns>20) delayed_BGO.Fill(nrj);
+          if(is_delayed[hit_i]) delayed_BGO_wp .Fill(nrj);
+          E_VS_time_BGO_wp.Fill(time_ns, nrj);
         }
-      }
-      
-      clovers.Analyse();
-
-      if (totalE_prompt>5) 
-      {
-        prompt_calo.Fill(totalE_prompt);
-      }
-
-      if (totalE_delayed>5)
-      {
-        delayed_calo.Fill(totalE_delayed);
-        if(has_prompt) delayed_calo_wp.Fill(totalE_delayed);
-        if(has_prompt_particle) delayed_calo_wpp.Fill(totalE_delayed);
-        if(has_prompt_particle_E5) delayed_calo_wppE.Fill(totalE_delayed);
-        // for (size_t hit_i = 0; hit_i<clovers.CleanGe.size(); hit_i++)
-        for (size_t hit_i = 0; hit_i<event.size(); hit_i++) 
+        else if (isLaBr[hit_i])
         {
-          if (isGe[event.labels[hit_i]] && event.times[hit_i]>20000)
+          if(is_delayed[hit_i]) delayed_LaBr_wp.Fill(nrj);
+          E_VS_time_LaBr_wp.Fill(time_ns, nrj);
+        }
+        else if (isNaI[hit_i])
+        {
+          if(is_delayed[hit_i]) delayed_NaI_wp .Fill(nrj);
+          E_VS_time_NaI_wp.Fill(time_ns, nrj);
+        }
+
+        if (nb_gamma_in_prompts[0]>0) time_all_knowing_pulse_A.Fill(label, time_ns);
+        if (nb_gamma_in_prompts[1]>0) time_all_knowing_pulse_B.Fill(label, time_ns);
+        if (nb_gamma_in_prompts[2]>0) time_all_knowing_pulse_C.Fill(label, time_ns);
+        if (nb_gamma_in_prompts[3]>0) time_all_knowing_pulse_D.Fill(label, time_ns);
+        if (nb_gamma_in_prompts[4]>0) time_all_knowing_pulse_E.Fill(label, time_ns);
+
+        if (only_prompt[0]) time_all_knowing_only_pulse_A.Fill(label, time_ns);
+        if (only_prompt[1]) time_all_knowing_only_pulse_B.Fill(label, time_ns);
+        if (only_prompt[2]) time_all_knowing_only_pulse_C.Fill(label, time_ns);
+        if (only_prompt[3]) time_all_knowing_only_pulse_D.Fill(label, time_ns);
+        if (only_prompt[4]) time_all_knowing_only_pulse_E.Fill(label, time_ns);
+      }
+    } 
+
+    clovers_delayed.Analyse();
+
+    ///////////////////////
+    // Clovers delayed : //
+    ///////////////////////
+    auto const & clean_indexes = clovers_delayed.CleanGe;
+    for (size_t clover_it_i = 0; clover_it_i<clean_indexes.size(); ++clover_it_i)
+    {
+      auto const & clover_i = clovers_delayed[clean_indexes[clover_it_i]];
+      auto const & nrj_i = clover_i.nrj;
+      auto const & time_i = clover_i.time;
+
+      delayed_E_VS_time_Ge_clean.Fill(time_i, nrj_i);
+      delayed_E_VS_time_Ge_clean_wp.Fill(time_i, nrj_i);
+
+      if (nb_prompts_with_gammas == 1)
+      {
+        if (nb_gamma_in_prompts[0]>0) delayed_clean_Ge_last_pulse_A.Fill(nrj_i);
+        if (nb_gamma_in_prompts[1]>0) delayed_clean_Ge_last_pulse_B.Fill(nrj_i);
+        if (nb_gamma_in_prompts[2]>0) delayed_clean_Ge_last_pulse_C.Fill(nrj_i);
+        if (nb_gamma_in_prompts[3]>0) delayed_clean_Ge_last_pulse_D.Fill(nrj_i);
+        if (nb_gamma_in_prompts[4]>0) delayed_clean_Ge_last_pulse_E.Fill(nrj_i);
+      }
+
+      // Taking the pre-prompt delayed events :
+      auto const & prompt_ref_time = -closest_prompt*200;
+      if (time_i>prompt_ref_time && time_i>prompt_ref_time+150) preprompt_spectra.Fill(nrj_i);
+
+      // Now, the point is to clean a maximum the data based on all the informations we have on the event,
+      // in order to have to cleanest gamma-gamma matrices possible.
+
+      // We are only interested in the events that has at least one prompt event :
+      if (multiplicity_prompt==0) continue;
+
+      // This removes the events that have the latest prompt at more than 2*pulse_rf : 
+      if (closest_prompt>2) continue;
+
+      // This removes the events that have a prompt event preceeding the latest prompt :
+      if (nb_gamma_in_prompts[closest_prompt+1]>0) continue;
+
+      // Creating the gamma-gamma matrices :
+      for (size_t clover_it_j = clover_it_i+1; clover_it_j<clean_indexes.size(); ++clover_it_j)
+      {
+        auto const & clover_j = clovers_delayed[clean_indexes[clover_it_j]];
+        auto const & nrj_j = clover_j.nrj;
+        auto const & time_j = clover_j.time;
+        
+        // dd.Fill(nrj_i, nrj_j);
+        // dd.Fill(nrj_j, nrj_i);
+
+        // dd_time_Ge_clean.Fill(time_j, time_i);
+        // dd_time_Ge_clean.Fill(time_i, time_j);
+
+        dd_wp.Fill(nrj_i, nrj_j);
+        dd_wp.Fill(nrj_j, nrj_i);
+
+        dd_time_Ge_clean_wp.Fill(time_i, time_j);
+        dd_time_Ge_clean_wp.Fill(time_j, time_i);
+      }
+
+      // Some other interesting plots :
+      if (nb_prompts_with_gammas == 1)
+      {
+        delayed_Ge_clean_VS_prompt_calo.Fill(calo_prompts[0], nrj_i);
+
+        for (int prompt_i = 0; prompt_i<nb_prompts; ++prompt_i)
+        {
+          if (only_prompt[prompt_i] && prompt_i<3)
           {
-            delayed_Ge_VS_delayed_calo.Fill(totalE_delayed, event.nrjs[hit_i]);
-            if(has_prompt) delayed_Ge_VS_delayed_calo_wp.Fill(totalE_delayed, event.nrjs[hit_i]);
-            if(has_prompt_particle) delayed_Ge_VS_delayed_calo_wpp.Fill(totalE_delayed, event.nrjs[hit_i]);
-            if(has_prompt_particle_E5) delayed_Ge_VS_delayed_calo_wppE.Fill(totalE_delayed, event.nrjs[hit_i]);
+            delayed_Ge_clean_VS_delayed_calo_wop.Fill(delayed_calorimetry, nrj_i);
           }
-        }
-      }
-
-      if (totalE_prompt>5 && totalE_delayed>5) 
-      {
-        prompt_delayed_calo.Fill(totalE_prompt, totalE_delayed);
-        for (size_t hit_i = 0; hit_i<event.size(); hit_i++) if (isGe[event.labels[hit_i]])
-        {
-          if (totalE_delayed < 3500) 
-          {
-            if (isGe[event.labels[hit_i]]) 
-            {
-              for (size_t hit_j = hit_i+1; hit_j<event.size(); hit_j++) if(isGe[event.labels[hit_j]])
-              {
-                dd_wp.Fill(event.nrjs[hit_i], event.nrjs[hit_j]);
-                dd_wp.Fill(event.nrjs[hit_j], event.nrjs[hit_i]);
-              }
-            }
-          }
-        }
-      }
-      
-      if (totalE_delayed > 1000 && totalE_delayed < 3500)
-      {
-        for (size_t hit_i = 0; hit_i<event.size(); hit_i++) if (isGe[event.labels[hit_i]]) for (size_t hit_j = hit_i+1; hit_j<event.size(); hit_j++) if(isGe[event.labels[hit_j]])
-        {
-          dd.Fill(event.nrjs[hit_i], event.nrjs[hit_j]);
-          dd.Fill(event.nrjs[hit_j], event.nrjs[hit_i]);
         }
       }
     }
-    tfile->Close();
   }
+
 }
 
 void Analysator::write()
@@ -296,15 +654,35 @@ void Analysator::write()
 
   // RWMat RW_dd(dd); RW_dd.Write();
   dd.Write();
+  dp.Write();
   dd_wp.Write();
+  dd_wpp.Write();
+  dd_wppE.Write();
 
   prompt_Ge.Write();
   delayed_Ge.Write();
   prompt_BGO.Write();
   delayed_BGO.Write();
-  prompt_Paris.Write();
-  delayed_Paris.Write();
+  prompt_NaI.Write();
+  delayed_NaI.Write();
+  prompt_LaBr.Write();
+  delayed_LaBr.Write();
+  delayed_clean_Ge.Write();
+
+  delayed_Ge_wp.Write();
+  delayed_BGO_wp.Write();
+  delayed_NaI_wp.Write();
+  delayed_LaBr_wp.Write();
+
+  prompt_Ge_Clover_wp.Write();
+
   prompt_calo.Write();
+  prompt_calo_A.Write();
+  prompt_calo_B.Write();
+  prompt_calo_C.Write();
+  prompt_calo_D.Write();
+  prompt_calo_E.Write();
+  closest_prompt_calo_histo.Write();
   delayed_calo.Write();
 
   prompt_delayed_calo.Write();
@@ -325,7 +703,48 @@ void Analysator::write()
   delayed_Ge_VS_delayed_calo_wpp.Write();
   delayed_Ge_VS_delayed_calo_wppE.Write();
 
+  spectra_all.Write();
+  spectra_Ge_VS_run.Write();
+  spectra_BGO_VS_run.Write();
+  spectra_LaBr_VS_run.Write();
+  spectra_NaI_VS_run.Write();
 
+  time_all.Write();
+  time_NaI.Write();
+  time_all_knowing_pulse_A.Write();
+  time_all_knowing_pulse_B.Write();
+  time_all_knowing_pulse_C.Write();
+  time_all_knowing_pulse_D.Write();
+  time_all_knowing_pulse_E.Write();
+  time_all_knowing_only_pulse_A.Write();
+  time_all_knowing_only_pulse_B.Write();
+  time_all_knowing_only_pulse_C.Write();
+  time_all_knowing_only_pulse_D.Write();
+  time_all_knowing_only_pulse_E.Write();
+  time_all_pulse_A.Write();
+  time_all_pulse_B.Write();
+  time_all_pulse_C.Write();
+  time_all_pulse_D.Write();
+
+  delayed_clean_Ge_last_pulse_A.Write();
+  delayed_clean_Ge_last_pulse_B.Write();
+  delayed_clean_Ge_last_pulse_C.Write();
+  delayed_clean_Ge_last_pulse_D.Write();
+  delayed_clean_Ge_last_pulse_E.Write();
+
+  dd_time_Ge_clean.Write();
+  dd_time_Ge_clean_wp.Write();
+  delayed_Ge_clean_VS_prompt_calo.Write();
+  delayed_Ge_clean_VS_delayed_calo_wop.Write();
+
+  number_of_pulses_detected.Write();
+
+  delayed_E_VS_time_Ge_clean.Write();
+  delayed_E_VS_time_Ge_clean_wp.Write();
+
+  E_VS_time_BGO_wp.Write();
+  E_VS_time_LaBr_wp.Write();
+  E_VS_time_NaI_wp.Write();
 
   outfile->Write();
   outfile->Close();
@@ -345,3 +764,204 @@ int main(int argc, char** argv)
   return 1;
 }
 #endif //__CINT__
+
+
+
+
+//////////////////////////////////////
+//            DEPRECATED            //
+//////////////////////////////////////
+
+
+
+
+
+
+    // RF_Manager rf;
+
+    // Clovers clovers;
+
+    // auto const & nb_events = tree->GetEntries();
+    // for (int event_i = 0; event_i<nb_events; event_i++)
+    // {
+    //   if(event_i%int_cast(10.e+6) == 0) print(event_i/1.e+6, "Mevts");
+
+    //   tree->GetEntry(event_i);
+    //   // clovers.Reset();
+
+    //   std::vector<CloverModule> clovers_prompt(24);
+    //   std::vector<uchar> clovers_prompt_fired;
+    //   CloverModule::resetGlobalLabel();
+    //   std::vector<CloverModule> clovers_delayed(24);
+    //   std::vector<uchar> clovers_delayed_fired;
+
+    //   float totalE_prompt = 0;
+    //   float totalE_prompt_200ns = 0;
+    //   float totalE_delayed = 0;
+    //   float energyDSSD = 0;
+
+    //   // Some triggers :
+    //   bool has_prompt = false;
+    //   bool has_prompt_particle = false;
+    //   bool has_prompt_particle_E5 = false; // Particle prompt with energy<5MeV
+
+    //   if (event.size()==1) continue;
+
+    //   Time_ns last_prompt_time = -1000;
+    //   for (int hit_i = 0; hit_i<event.mult; hit_i++)
+    //   {
+    //     // clovers.Fill(event, hit_i);
+    //     if (rf.setEvent(event)) continue;
+    //     auto const & label = event.labels[hit_i];
+    //     auto const & nrj2  = event.nrj2s [hit_i];
+    //     auto const & time  = event.times [hit_i];
+    //     auto       & nrj   = event.nrjs  [hit_i];
+        
+    //     float const & time_ns = time/1000.f;
+
+    //     if (time_ns<-20) continue;
+
+    //     if (nrj<5) continue;
+
+    //     // To correct for wrong BGO calibration :
+    //     if (isBGO[label]) nrj *= 1.15;
+
+    //     // To correct the NaI calibration :
+    //     if(isParis[label] && NaI_pid(nrj, nrj2)) nrj = nrj2*1.1;
+        
+    //     if (isPrompt(time_ns)) 
+    //     {
+    //       has_prompt = true;
+    //       if (isDSSD[label]) 
+    //       {
+    //         has_prompt_particle = true;
+    //         if (isSector[label])
+    //         {
+    //           energyDSSD = nrj;
+    //           if (nrj<5000) has_prompt_particle_E5 = true;
+    //         }
+    //       }
+    //     }
+
+    //     if (Clovers::isClover[label])
+    //     {
+    //       auto const & clover_label = Clovers::labels[label];
+    //       if (isPrompt(time_ns))
+    //       {
+    //         push_back_unique(clovers_prompt_fired, clover_label);
+    //         if (isGe[label])  clovers_prompt[clover_label].addGe (time, nrj);
+    //         if (isBGO[label]) clovers_prompt[clover_label].addBGO(time, nrj);
+    //       }
+    //       else if (isDelayed(time_ns))
+    //       {
+    //         push_back_unique(clovers_delayed_fired, clover_label);
+    //         if (isGe[label])  clovers_delayed[clover_label].addGe (time, nrj);
+    //         if (isBGO[label]) clovers_delayed[clover_label].addBGO(time, nrj);
+    //       }
+    //     }
+
+    //     // Calculate calorimetry :
+    //     if (isParis[label] || isBGO[label] || isGe[label]) 
+    //     {
+    //       auto const & smeared_energy = smear(nrj, label, random);
+    //       if(isPrompt(time_ns)) 
+    //       {
+    //         totalE_prompt+=smeared_energy;
+    //       }
+    //       else if(isDelayed(time_ns)) totalE_delayed+=smeared_energy;
+    //       // print(nrj,smear(nrj, label, random), totalE_prompt, totalE_delayed);
+    //       // pauseCo();
+    //     }
+
+    //     if (isGe[label])
+    //     {
+    //       if (time_ns<20) prompt_Ge.Fill(nrj);
+    //       else
+    //       {
+    //         delayed_Ge.Fill(nrj);
+    //         if (has_prompt) delayed_Ge_wp.Fill(nrj);
+    //         if (has_prompt_particle) delayed_Ge_wpp.Fill(nrj);
+    //         if (has_prompt_particle_E5) delayed_Ge_wppE.Fill(nrj);
+    //       }
+    //     }
+    //     else if (isParis[label])
+    //     {
+    //       if (isPrompt(time_ns)) prompt_NaI.Fill(nrj);
+    //       if (isPrompt(time_ns)) prompt_LaBr.Fill(nrj);
+    //     }
+    //     else if (isBGO[label])
+    //     {
+    //       if(isPrompt(time_ns)) prompt_BGO.Fill(nrj);
+    //       else if(isDelayed(time_ns)) delayed_BGO.Fill(nrj);
+    //     }
+    //   }
+      
+    //   if (totalE_prompt>5) 
+    //   {
+    //     prompt_calo.Fill(totalE_prompt);
+    //     closest_prompt_calo_histo.Fill(totalE_prompt);
+    //   }
+
+    //   if (totalE_delayed>5)
+    //   {
+    //     delayed_calo.Fill(totalE_delayed);
+    //     if(has_prompt) delayed_calo_wp.Fill(totalE_delayed);
+    //     if(has_prompt_particle) delayed_calo_wpp.Fill(totalE_delayed);
+    //     if(has_prompt_particle_E5) delayed_calo_wppE.Fill(totalE_delayed);
+    //     for (size_t hit_i = 0; hit_i<event.size(); hit_i++) 
+    //     {
+    //       if (isGe[event.labels[hit_i]])
+    //       {
+    //         if (event.times[hit_i]>20000)
+    //         {
+    //           delayed_Ge_VS_delayed_calo.Fill(totalE_delayed, event.nrjs[hit_i]);
+    //           if(has_prompt) delayed_Ge_VS_delayed_calo_wp.Fill(totalE_delayed, event.nrjs[hit_i]);
+    //           if(has_prompt_particle) delayed_Ge_VS_delayed_calo_wpp.Fill(totalE_delayed, event.nrjs[hit_i]);
+    //           if(has_prompt_particle_E5) delayed_Ge_VS_delayed_calo_wppE.Fill(totalE_delayed, event.nrjs[hit_i]);
+    //         }
+    //         else // for prompt
+    //         {
+    //           delayed_Ge_VS_prompt_calo.Fill(totalE_prompt, event.nrjs[hit_i]);
+    //         }
+    //       } 
+    //     }
+    //   }
+
+    //   if (totalE_prompt>5 && totalE_delayed>5) 
+    //   {
+    //     prompt_delayed_calo.Fill(totalE_prompt, totalE_delayed);
+    //     for (size_t hit_i = 0; hit_i<event.size(); hit_i++) if (isGe[event.labels[hit_i]])
+    //     {
+    //        if (isGe[event.labels[hit_i]]) 
+    //       {
+    //         for (size_t hit_j = hit_i+1; hit_j<event.size(); hit_j++) if(isGe[event.labels[hit_j]])
+    //         {
+    //           dd_wp.Fill(event.nrjs[hit_i], event.nrjs[hit_j]);
+    //           dd_wp.Fill(event.nrjs[hit_j], event.nrjs[hit_i]);
+
+    //           if(has_prompt_particle)
+    //           {
+    //             dd_wpp.Fill(event.nrjs[hit_i], event.nrjs[hit_j]);
+    //             dd_wpp.Fill(event.nrjs[hit_j], event.nrjs[hit_i]);
+    //           }
+
+    //           if(has_prompt_particle_E5)
+    //           {
+    //             dd_wppE.Fill(event.nrjs[hit_i], event.nrjs[hit_j]);
+    //             dd_wppE.Fill(event.nrjs[hit_j], event.nrjs[hit_i]);
+    //           }
+    //         }
+    //       }
+    //     }
+    //   }
+      
+    //   if (totalE_delayed > 1000 && totalE_delayed < 3500)
+    //   {
+    //     for (size_t hit_i = 0; hit_i<event.size(); hit_i++) if (isGe[event.labels[hit_i]]) for (size_t hit_j = hit_i+1; hit_j<event.size(); hit_j++) if(isGe[event.labels[hit_j]])
+    //     {
+    //       dd.Fill(event.nrjs[hit_i], event.nrjs[hit_j]);
+    //       dd.Fill(event.nrjs[hit_j], event.nrjs[hit_i]);
+    //     }
+    //   }
+    // }
+    

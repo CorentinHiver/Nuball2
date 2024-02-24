@@ -17,15 +17,22 @@
 using lock_mutex = const std::lock_guard<std::mutex>;
 
 /**
- * @brief Class handeling a easy multi threading.
- * @attention It is much better to includ this class before any other in order to activate multithreading additions
+ * @brief Class handeling an easy multi threading.
+ * @attention Include this class before any other in order to activate multithreading additions
  * @details
  * 
+ * POSIX-based multithreading.
  * If you want to use the power of multithreading, this class can be convenient.
+ * Please include this class before any other in order to activate multithreading additions.
+ * 
  * First thing to do is to setup the number of threads then to initialize them :
  * 
  *        MTObject::setThreadsNb(nb_threads);
  *        MTObject::Initialize();
+ * 
+ * Or more consisley : 
+ * 
+ *        MTObject::Initialize(nb_threads);
  * 
  * Then you can multithread any function or static method : 
  * 
@@ -38,22 +45,22 @@ using lock_mutex = const std::lock_guard<std::mutex>;
  *        {
  *        public:
  *          MyClass() {}
- *          ret_type function_to_multithread(argument_1, argument_2, ...){....}
+ *          void function_to_multithread(argument_1, argument_2, ...){....}
  *
- *          // Option 1 : pass all the arguments one by one
- *          static ret_type helper_function(MyClass & myclass, argument_1, argument_2, ...) {return myclass.function_to_multithread(argument_1, argument_2, ...);}
- *
- *         //Option 2 : groupe the arguments in a template pack - most efficient because template deduction done at compile time
- *          template<class... ARGS>
- *          static ret_type helper_function(MyClass & myclass, ARGS... args) {return myclass.function_to_multithread(std::forward<ARGS>(args)...);}
+ *          static void helper_function(MyClass & myclass, argument_1, argument_2, ...) {return myclass.function_to_multithread(argument_1, argument_2, ...);}
  *        };
  *
  *        int main()
  *        {
  *         ...
- *          MTObject::parallelise_function(myclass.helper_function, param1, param2, ....);
+ *          MTObject::parallelise_function(myclass.helper_function, argument_1, argument_2, ....);
  *         ...
-          }
+ *        }
+ * 
+ * @todo 
+ * Trying to make this work :
+ * template<class... ARGS>
+ * static ret_type helper_function(MyClass & myclass, ARGS... args) {return myclass.function_to_multithread(std::forward<ARGS>(args)...);}
  */
 
 
@@ -133,7 +140,6 @@ public:
       m_threads.reserve(nb_threads); // Memory pre-allocation (used for performances reasons)
       for (size_t i = 0; i<nb_threads; i++) m_threads.emplace_back( [i, &func, &args...] ()
       {// Inside this lambda function, we already are inside the threads, so the parallelised section starts NOW :
-        // threads_ID[std::this_thread::get_id()] = i; // Old indexing system
         m_thread_index = i; // Index the thread
         func(std::forward<ARGS>(args)...); // Run the function inside thread
       });
@@ -163,12 +169,10 @@ public:
 
   static auto const & getThreadIndex() {return m_thread_index;}
   static auto const & index() {return m_thread_index;}
-  // static int const & getThreadIndex() {return threads_ID[std::this_thread::get_id()];} // Old indexing system
 
   // static Signal<int> nbThreadsChanged;
 
 private:
-  // static std::map<std::thread::id, int> threads_ID; // Old indexing system
   static std::thread::id master_thread_id; 
   static thread_local size_t m_thread_index; // thread_local variable, meaning it will hold different values for each thread it is in
   static std::vector<std::thread> m_threads;
@@ -184,7 +188,6 @@ bool MTObject::ON = false;
 std::mutex MTObject::mutex;
 std::mutex MTmutex;
 
-// std::map<std::thread::id, int> MTObject::threads_ID;
 std::thread::id MTObject::master_thread_id;
 thread_local size_t MTObject::m_thread_index = 0;
 std::vector<std::thread> MTObject::m_threads;

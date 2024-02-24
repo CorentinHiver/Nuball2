@@ -215,7 +215,7 @@ private:
 };
 
 Hit Event::operator[](int const & hit_i) 
-{
+{// Problem about the time here ...
   Hit hit;
   hit.stamp = stamp + times[hit_i];
   hit.label = labels[hit_i];

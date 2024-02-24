@@ -96,20 +96,33 @@ std::map<std::string, std::string> error_message =
   {"DEV", "ASK DEV or do it yourself, sry"}
 };
 
-auto pauseCo() {std::cout << "Programe paused, please press enter"; return std::cin.get();}
-auto pauseCo(std::string const & message) {std::cout << message << std::endl; return std::cin.get();}
-void pauseDebug() 
+auto pauseCo() 
 {
-  #ifdef DEBUG
-  pauseCo();
-  #endif
+  #ifdef MULTITHREADING
+  lock_mutex lock(MTObject::mutex);
+  #endif //MULTITHREADING
+
+  std::cout << "Programe paused, please press enter"; 
+  return std::cin.get();
 }
 
-//////////////
-//   UNITS  //
-//////////////
+auto pauseCo(std::string const & message) 
+{
+  #ifdef MULTITHREADING
+  lock_mutex lock(MTObject::mutex);
+  #endif //MULTITHREADING
 
-double _ns = 1000.;
+  std::cout << message << std::endl;
+  return std::cin.get();
+}
+
+void pauseDebug(std::string const & message = "") 
+{
+  #ifdef DEBUG
+  if (message == "") pauseCo();
+  else pauseCo(message);
+  #endif
+}
 
 ////////////////
 //    Types   //

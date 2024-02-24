@@ -1,7 +1,7 @@
 #ifndef NUBALL2TREE_HPP
 #define NUBALL2TREE_HPP
 
-#include "../libCo.hpp"
+#include "../libRoot.hpp"
 #include "Event.hpp"
 
 /**
@@ -11,23 +11,19 @@
 class Nuball2Tree
 {
 public:
-  Nuball2Tree(std::string const & filename){this -> Open(filename);}
-  Nuball2Tree(std::string const & filename, Event & event)
+  Nuball2Tree(std::string const & filename) : m_filename(filename) {this -> Open(m_filename);}
+  Nuball2Tree(std::string const & filename, Event & event) : m_filename(filename)
   {
-    this -> Open(filename);
+    this -> Open(m_filename);
     event.reading(*this);
   }
 
-  ~Nuball2Tree() 
-  {
-    if (file_opened)
-    {
-      m_file->Close();
-      delete m_file;
-    }
-  }
+  ~Nuball2Tree() {if (file_opened) this->Close();}
 
   bool Open(std::string const & filename);
+  void Close() {if (file_opened) {m_file -> Close(); file_opened = false; delete m_file;} else {print(m_filename, "not open");}}
+
+  auto const & filename() {return m_filename;}
 
   TTree* get() {return m_tree;}
   auto const get() const {return m_tree;}
@@ -41,6 +37,7 @@ private:
   TTree* m_tree = nullptr;
   bool m_ok = false;
   bool file_opened = false;
+  std::string m_filename;
   std::string m_name = "Nuball2";
   std::string m_title;
 };

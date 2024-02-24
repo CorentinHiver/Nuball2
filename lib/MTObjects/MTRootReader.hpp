@@ -41,11 +41,11 @@ void MTRootReader::read(Func && func, ARGS &&... args)
 template<class Func, class... ARGS>
 void MTRootReader::Read(MTRootReader & MTreader, Func function, ARGS &&... args)
 { // Here we are inside each thread :
-  thread_local std::string filename;
+  std::string filename;
   while(MTreader.nextFilename(filename))
   {
-    Event event;
-    Nuball2Tree tree(filename);
+    thread_local Event event;
+    thread_local Nuball2Tree tree(filename);
     event.reading(tree.get());
     function(tree, event, std::forward<ARGS>(args)...); // If issues here, check that the parallelised function has the following form : type func(Hit & hit, FasterReader & reader, ARGS... some_args)
   }

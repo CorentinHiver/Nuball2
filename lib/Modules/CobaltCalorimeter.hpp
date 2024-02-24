@@ -47,6 +47,10 @@ private:
 
   // Internal variables :
   int m_nb_trigg = 0;
+  int m_nb_trigg_Ge = 0;
+  int m_nb_trigg_BGO = 0;
+  int m_nb_trigg_LaBr = 0;
+  int m_nb_trigg_NaI = 0;
   int m_nb_missed = 0; // Nb of mult = 1 when trigger (->trigger is alone)
   int m_minE = 1326;
   int m_maxE = 1339;
@@ -271,6 +275,7 @@ void CobaltCalorimeter::Initialise()
   Ge_NaI_trigger .reset("Ge_NaI_trigger" , "NaI VS Ge;Energy [keV];Energy [keV]" , 2000,0,2000, 500 ,0,2000);
 
   paris_pid.reset("paris_pid", "paris_pid;(long-short)/long", 500,-2,3);
+
 }
 
 void CobaltCalorimeter::launchRoot(std::string const & foldername, int nb_files)
@@ -333,6 +338,11 @@ void CobaltCalorimeter::work(Nuball2Tree & tree, Event & event)
 
   // The following local variables will be fused with the global variable of the object
   thread_local int nb_trigg = 0;
+  thread_local int nb_trigg_Ge = 0;
+  thread_local int nb_trigg_BGO = 0;
+  thread_local int nb_trigg_LaBr = 0;
+  thread_local int nb_trigg_NaI = 0;
+
   thread_local int nb_missed = 0;
   thread_local double calo_totale = 0;
   thread_local double calo_totale_Ge = 0;
@@ -414,6 +424,7 @@ void CobaltCalorimeter::work(Nuball2Tree & tree, Event & event)
         if (isNaI[hit_i])     {spectrum_NaI  .Fill(nrj); nb_NaI++; }
         else                  {spectrum_LaBr3.Fill(nrj); nb_LaBr++;}
       }
+      else if (isLaBr3[])
 
       // Trigger on the wanted gamma ray in the Germaniums
       if (!trigger && isGe[label] && inGate(nrj, m_minE, m_maxE))
@@ -422,7 +433,7 @@ void CobaltCalorimeter::work(Nuball2Tree & tree, Event & event)
         --multiplicity;
         --nb_Ge; 
 
-        // Toggle the trigger boolean on
+        // Toggle the trigger
         trigger = true;
         
         // Save the hit for later use
@@ -463,6 +474,10 @@ void CobaltCalorimeter::work(Nuball2Tree & tree, Event & event)
       calo_totale_BGO +=calorimetry_BGO;
       calo_totale_LaBr+=calorimetry_LaBr;
       calo_totale_NaI +=calorimetry_NaI;
+      nb_trigg_Ge  += nb_Ge;
+      nb_trigg_BGO += nb_BGO;
+      nb_trigg_LaBr+= nb_LaBr;
+      nb_trigg_NaI += nb_NaI;
       
       // Fill calorimeter polts :
       if (multiplicity>0)
@@ -637,6 +652,10 @@ void CobaltCalorimeter::work(Nuball2Tree & tree, Event & event)
     m_calo_totale_BGO   += calo_totale_BGO;
     m_calo_totale_LaBr3 += calo_totale_LaBr;
     m_calo_totale_NaI   += calo_totale_NaI;
+    m_nb_trigg_Ge   += nb_trigg_Ge;
+    m_nb_trigg_BGO  += nb_trigg_BGO;
+    m_nb_trigg_LaBr += nb_trigg_LaBr;
+    m_nb_trigg_NaI  += nb_trigg_NaI;
   }
 }
 
@@ -644,7 +663,7 @@ void CobaltCalorimeter::Analyse()
 {
   // Calculate the pic/total of the calorimeter
   print("----------------");
-  print("");
+  print();
   auto const & counting_efficiency = 1. - m_nb_missed/double_cast(m_nb_trigg) ;
 
   auto calo_spectrum = spectrum_smeared_calorimetry.Merge();
@@ -660,14 +679,22 @@ void CobaltCalorimeter::Analyse()
 
   print("Total energy released =", total_energy);
   print("calo totale : ", m_calo_totale);
-  print("counting efficiency :", int_cast(counting_efficiency*100.), "%");
-  print("total efficiency : ", int_cast(100*m_calo_totale/total_energy), "%");
-  print("calo totale Ge : ", int_cast(100*m_calo_totale_Ge/m_calo_totale), "%");
-  print("calo totale BGO : ", int_cast(100*m_calo_totale_BGO/m_calo_totale), "%");
-  print("calo totale LaBr3 : ", int_cast(100*m_calo_totale_LaBr3/m_calo_totale), "%");
-  print("calo totale NaI : ", int_cast(100*m_calo_totale_NaI/m_calo_totale), "%");
+
+  print("counting efficiency :", int_cast(counting_efficiency*100.)       , "%");
+  print("counting in Ge : "    , m_nb_trigg_Ge, int_cast(100.*m_nb_trigg_Ge  /m_nb_trigg), "%");
+  print("counting in BGO : "   , m_nb_trigg_BGO, int_cast(100.*m_nb_trigg_BGO /m_nb_trigg), "%");
+  print("counting in LaBr : "  , m_nb_trigg_LaBr, int_cast(100.*m_nb_trigg_LaBr/m_nb_trigg), "%");
+  print("counting in NaI : "   , m_nb_trigg_NaI, int_cast(100.*m_nb_trigg_NaI /m_nb_trigg), "%");
+
+  print("total efficiency : "  , int_cast(100.*m_calo_totale/total_energy)       , "%");
+  print("calo totale Ge : "    , int_cast(100.*m_calo_totale_Ge/m_calo_totale)   , "%");
+  print("calo totale BGO : "   , int_cast(100.*m_calo_totale_BGO/m_calo_totale)  , "%");
+  print("calo totale LaBr3 : " , int_cast(100.*m_calo_totale_LaBr3/m_calo_totale), "%");
+  print("calo totale NaI : "   , int_cast(100.*m_calo_totale_NaI/m_calo_totale)  , "%");
 
   print("full energy efficiency : ", int_cast(PE_efficiency*100.), "%");
+
+  pauseCo();
 
   print("----------------");
 

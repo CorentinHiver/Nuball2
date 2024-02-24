@@ -404,30 +404,30 @@ inline void Clovers::Reset()
   Ge.clear();
   CleanGe.clear();
   RejectedGe.clear();
-  // PromptGe.clear();
-  // DelayedGe.clear();
+  PromptGe.clear();
+  DelayedGe.clear();
 
   Bgo.clear();
   BGOonly.clear();
-  // PromptBGO.clear();
-  // DelayedBGO.clear();
+  PromptBGO.clear();
+  DelayedBGO.clear();
 
-  // TotalMult = 0;
-  // PromptMult = 0; // NOT USED in normal mode
-  // DelayedMult = 0;// NOT USED in normal mode
-  // PromptCleanGeMult = 0;// NOT USED in normal mode
-  // DelayedCleanGeMult = 0;// NOT USED in normal mode
+  TotalMult = 0;
+  PromptMult = 0; // NOT USED in normal mode
+  DelayedMult = 0;// NOT USED in normal mode
+  PromptCleanGeMult = 0;// NOT USED in normal mode
+  DelayedCleanGeMult = 0;// NOT USED in normal mode
 
   CrystalMult = 0;
   CrystalMult_BGO = 0;
 
-  // has511 = false;
+  has511 = false;
   totGe = -1.E-12;
   totBGO = -1.E-12;
-  // totGe_prompt = -1.E-12;
-  // totBGO_prompt = -1.E-12;
-  // totGe_delayed = -1.E-12;
-  // totBGO_delayed = -1.E-12;
+  totGe_prompt = -1.E-12;
+  totBGO_prompt = -1.E-12;
+  totGe_delayed = -1.E-12;
+  totBGO_delayed = -1.E-12;
 }
 
 /**
@@ -512,7 +512,6 @@ inline bool Clovers::Fill(Event const & event, size_t const & hit_index)
 
     auto const & nrj  = event.nrjs[hit_index];
     
-    if(nrj<5) return false;
 
     auto const & time = (s_time_ps) ? event.times[hit_index]/1000.0 : event.time2s[hit_index];
 
@@ -634,12 +633,12 @@ void Clovers::Analyse_more()
 
 }
 
-template<class T> T positive_modulo(T const & dividend, T const & divisor)
-{
-  auto ret = dividend % divisor;
-  if (ret<0) ret+=divisor;
-  return ret;
-}
+// template<class T> T positive_modulo(T const & dividend, T const & divisor)
+// {
+//   auto ret = dividend % divisor;
+//   if (ret<0) ret+=divisor;
+//   return ret;
+// }
 
 uchar Clovers::label_to_cristal(Label const & l)
 {
@@ -665,10 +664,10 @@ uchar Clovers::label_to_cristal(Label const & l)
 
     switch(Ge_cristal)
     {
-      case 0: Ge_cristal = 2; // Red
-      case 1: Ge_cristal = 1; // Green
-      case 2: Ge_cristal = 0; // Black
-      case 3: Ge_cristal = 3; // Blue
+      case 0: Ge_cristal = 2; break; // Red
+      case 1: Ge_cristal = 1; break; // Green
+      case 2: Ge_cristal = 0; break; // Black
+      case 3: Ge_cristal = 3; break; // Blue
       default : return -1;        // Should never happen
     }
 
@@ -678,18 +677,18 @@ uchar Clovers::label_to_cristal(Label const & l)
 
       // pi/2 rotated (-> -pi/2 rotation) : R2A6
     case 17:
-       Ge_cristal = positive_modulo((Ge_cristal-1), 4);
+       Ge_cristal = positive_modulo((Ge_cristal-1), 4); break;
 
       // -pi/2 rotated (-> pi/2 rotation) : R3A3, R3A4
     case 2: case 3:
-      Ge_cristal = positive_modulo((Ge_cristal+1), 4)
+      Ge_cristal = positive_modulo((Ge_cristal+1), 4); break;
 
       // pi rotation : R3A5
     case 4:
-      Ge_cristal = positive_modulo((Ge_cristal+2), 4)
+      Ge_cristal = positive_modulo((Ge_cristal+2), 4); break;
     }
+    return clover+Ge_cristal;
   }
-  return clover+Ge_cristal;
 }
 
 inline void Clovers::PrintClean()
