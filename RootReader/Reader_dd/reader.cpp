@@ -753,9 +753,17 @@ void Analysator::write()
 
 void reader(int number_files = -1)
 {
-  MTObject::Initialize(nb_threads);
-  if (found(Path::pwd().string(), "faster")) Analysator analysator(number_files, "~/nuball2/N-SI-136-root_dd/merged/");
-  else Analysator analysator(number_files);
+  
+  if (found(Path::pwd().string(), "faster")) 
+  {
+    MTObject::Initialize(10);
+    Analysator analysator(number_files, "~/nuball2/N-SI-136-root_dd/merged/");
+  }
+  else 
+  {
+    MTObject::Initialize(nb_threads);
+    Analysator analysator(number_files);
+  }
   
 }
 
