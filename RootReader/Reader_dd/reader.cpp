@@ -45,9 +45,12 @@ public:
   void analyse(Nuball2Tree & tree, Event & event);
   void write();
 
+  static void setMaxHits(int const & nb_max_hits) {g_nb_max_hits = nb_max_hits;}
+
 private:
   /// @brief static 
   static void analyse_t(Nuball2Tree & tree, Event & event, Analysator & analysator) {analysator.analyse(tree, event);}
+  static long g_nb_max_hits;
 
   TRandom* random = new TRandom();
   MTList MTfiles;
@@ -154,6 +157,8 @@ private:
   MTTHist<TH1F> number_of_pulses_detected;
   MTTHist<TH1F> preprompt_spectra;
 };
+
+long Analysator::g_nb_max_hits = -1;
 
 void Analysator::Initialise()
 {
@@ -294,11 +299,11 @@ void Analysator::analyse(Nuball2Tree & tree, Event & event)
 
   RF_Manager rf;
 
-  auto const & nb_evts = tree->GetEntries();
+  auto nb_evts = tree->GetEntries();
+  if (g_nb_max_hits>-1) nb_evts = g_nb_max_hits;
   for (int evt_i = 0; evt_i<nb_evts; ++evt_i)
   { // Iterate over the events of the file
     if(evt_i%int_cast(10.e+6) == 0) print(evt_i/1.e+6, "Mevts"); 
-    if (evt_i>1.e+6) break;
 
     tree->GetEntry(evt_i);
 
@@ -342,7 +347,7 @@ void Analysator::analyse(Nuball2Tree & tree, Event & event)
       auto const & label = event.labels[hit_i];
       auto       & time  = event.times [hit_i];
       auto const & nrj2  = event.nrj2s [hit_i];
-      auto       & nrj = event.nrjs[hit_i];
+      auto       & nrj   = event.nrjs[hit_i];
 
       if (isDSSD[label]) continue; // There is nothing to do with paris now
       if (found(blacklist, label)) {rejected[hit_i] = true; continue;}
@@ -762,6 +767,7 @@ void reader(int number_files = -1)
   else 
   {
     MTObject::Initialize(nb_threads);
+    Analysator::setMaxHits(1.e+6);
     Analysator analysator(number_files);
   }
   
