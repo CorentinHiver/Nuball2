@@ -1,11 +1,11 @@
-// #include "../libRoot.hpp"
+#include "../libRoot.hpp"
 // #include <SourceCloverSpectra.hpp>
 // #include <Calibration.hpp>
 // #include <Calibrator.hpp>
 // #include <RunMatrixator.hpp>
 // #include <SpectraAlignator.hpp>
 // #include <Detectors.hpp>
-#include <Timeshifts.hpp>
+// #include <Timeshifts.hpp>
 // #include <Convertor.hpp>
 // #include <MTFasterReader.hpp>
 // #include <Faster2Histo.hpp>
@@ -23,8 +23,8 @@ int main(int argc, char ** argv)
   //   Timeshifts   //
   ////////////////////
 
-  Timeshifts ts;
-  ts.set
+  // Timeshifts ts;
+  // ts.set
 
 
 

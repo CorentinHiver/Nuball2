@@ -190,7 +190,7 @@ int getBin0(TH1F* spectra)
 bool getMeanPeak(TH1F* spectra, double & mean)
 {
   // Declaration :
-  double pospic, amppic, dump_sigma;
+  double pospic, amppic, widthpic;
   double cte, Mean, sigma;
 
   // Histogram characteristics :
@@ -204,22 +204,28 @@ bool getMeanPeak(TH1F* spectra, double & mean)
   // Extract dump parameters :
   amppic = spectra -> GetMaximum();
   pospic = static_cast<double>( (spectra->GetMaximumBin() - bin0)*xPerBin );
-  dump_sigma = static_cast<double>( (spectra->FindLastBinAbove(amppic*0.8) - spectra->FindFirstBinAbove(amppic*0.8)) * xPerBin);
+  widthpic = static_cast<double>( (spectra->FindLastBinAbove(amppic*0.8) - spectra->FindFirstBinAbove(amppic*0.8)) * xPerBin);
 
   // Fits the peak :
-  auto gaus_pol0 = new TF1("gaus+pol0","gaus(0)+pol0(3)",pospic-20*dump_sigma,pospic+20*dump_sigma);
-  gaus_pol0 -> SetParameters(amppic, pospic, dump_sigma, 1);
-  gaus_pol0 -> SetRange(pospic-dump_sigma*20,pospic+dump_sigma*20);
+  auto gaus_pol0 = new TF1("gaus+pol0","gaus(0)+pol0(3)",pospic-20*widthpic,pospic+20*widthpic);
+  gaus_pol0 -> SetParameters(amppic, pospic, widthpic, 1);
+  gaus_pol0 -> SetRange(pospic-widthpic*20,pospic+widthpic*20);
   spectra -> Fit(gaus_pol0,"R+q");
 
-  auto gaus_pol1 = new TF1("gaus+pol1","gaus(0)+pol1(3)",pospic-20*dump_sigma,pospic+20*dump_sigma);
+  pospic = gaus_pol0->GetParameter(0);
+  widthpic = gaus_pol0->GetParameter(1);
+
+  auto gaus_pol1 = new TF1("gaus+pol1","gaus(0)+pol1(3)",pospic-20*widthpic,pospic+20*widthpic);
   gaus_pol1 -> SetParameters(gaus_pol0->GetParameter(0), gaus_pol0->GetParameter(1), gaus_pol0->GetParameter(2), gaus_pol0->GetParameter(3), 0);
-  gaus_pol1 -> SetRange(pospic-dump_sigma*20,pospic+dump_sigma*20);
+  gaus_pol1 -> SetRange(pospic-widthpic*20,pospic+widthpic*20);
   spectra -> Fit(gaus_pol1,"R+q");
 
-  auto gaus_pol2 = new TF1("gaus+pol2","gaus(0)+pol2(3)",pospic-20*dump_sigma,pospic+20*dump_sigma);
+  pospic = gaus_pol0->GetParameter(0);
+  widthpic = gaus_pol0->GetParameter(1);
+
+  auto gaus_pol2 = new TF1("gaus+pol2","gaus(0)+pol2(3)",pospic-10*widthpic,pospic+10*widthpic);
   gaus_pol2 -> SetParameters(gaus_pol1->GetParameter(0), gaus_pol1->GetParameter(1), gaus_pol1->GetParameter(2), gaus_pol1->GetParameter(3), gaus_pol1->GetParameter(4), 0);
-  gaus_pol2 -> SetRange(pospic-dump_sigma*20,pospic+dump_sigma*20);
+  gaus_pol2 -> SetRange(pospic-widthpic*10,pospic+widthpic*10);
   spectra -> Fit(gaus_pol2,"R+q");
 
   delete gaus_pol0;
