@@ -918,8 +918,9 @@ int main(int argc, char** argv)
       if (treat_129) 
       {
         timeshifts.dT_with_raising_edge("dssd");
-        timeshifts.dT_with_RF("dssd");
       }
+
+      for (int i = 800; i<856; i++) timeshifts.dT_with_RF(i);
 
       timeshifts.periodRF_ns(200);
       timeshifts.setMult(2,4);

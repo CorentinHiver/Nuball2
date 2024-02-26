@@ -202,6 +202,7 @@ public:
   void setEminADC(ADC const & EminADC) {m_Emin_ADC = EminADC;}
 
   void dT_with_RF(dType const & type) {m_RF_preferred[type] = true;}
+  void dT_with_RF(Label const & label) {m_RF_preferred_label[label] = true;}
   void dT_with_raising_edge(dType const & type) {m_edge_preferred[type] = true;}
 
   /**
@@ -458,7 +459,6 @@ bool Timeshifts::InitializeRaw()
       m_histograms_VS_RF[label].reset((name+"_RF").c_str(), (name+"_RF").c_str(), m_timewindow_ns*m_bins_per_ns[type], -m_timewindow/2, m_timewindow/2);
       if (type == "RF")
       {
-        // m_time_spectra[label].reset(nullptr);
         m_time_spectra[label].reset(name.c_str(), name.c_str(), 1000, -100, 100);
       }
     }
