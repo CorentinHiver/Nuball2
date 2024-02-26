@@ -222,8 +222,8 @@ bool getMeanPeak(TH1F* spectra, double & mean)
   gaus_pol2 -> SetRange(pospic-dump_sigma*20,pospic+dump_sigma*20);
   spectra -> Fit(gaus_pol2,"R+q");
 
+  delete gaus_pol0;
   delete gaus_pol1;
-  delete gaus_pol2;
 
   // Extracts the fitted parameters :
   auto fittedPic = gaus_pol2;
