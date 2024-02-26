@@ -210,17 +210,17 @@ bool getMeanPeak(TH1F* spectra, double & mean)
   auto gaus_pol0 = new TF1("gaus+pol0","gaus(0)+pol0(3)",pospic-20*dump_sigma,pospic+20*dump_sigma);
   gaus_pol0 -> SetParameters(amppic, pospic, dump_sigma, 1);
   gaus_pol0 -> SetRange(pospic-dump_sigma*20,pospic+dump_sigma*20);
-  spectra -> Fit(gaus_pol0.get(),"R+q");
+  spectra -> Fit(gaus_pol0,"R+q");
 
   auto gaus_pol1 = new TF1("gaus+pol1","gaus(0)+pol1(3)",pospic-20*dump_sigma,pospic+20*dump_sigma);
   gaus_pol1 -> SetParameters(amppic, pospic, dump_sigma, 1);
   gaus_pol1 -> SetRange(pospic-dump_sigma*20,pospic+dump_sigma*20);
-  spectra -> Fit(gaus_pol1.get(),"R+q");
+  spectra -> Fit(gaus_pol1,"R+q");
 
   auto gaus_pol2 = new TF1("gaus+pol2","gaus(0)+pol2(3)",pospic-20*dump_sigma,pospic+20*dump_sigma);
   gaus_pol2 -> SetParameters(amppic, pospic, dump_sigma, 1);
   gaus_pol2 -> SetRange(pospic-dump_sigma*20,pospic+dump_sigma*20);
-  spectra -> Fit(gaus_pol2.get(),"R+q");
+  spectra -> Fit(gaus_pol2,"R+q");
 
   // Extracts the fitted parameters :
   auto fittedPic = gaus_pol2;
