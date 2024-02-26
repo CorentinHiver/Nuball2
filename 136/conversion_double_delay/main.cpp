@@ -41,6 +41,7 @@ Folder manip = "N-SI-136";
 std::string list_runs = "list_runs.list";
 std::string output = "-root_dd";
 int nb_files_ts = 100;
+int nb_files_ts_verify = 50;
 int nb_files = -1;
 bool only_timeshifts = false; // No conversion : only calculate the timeshifts
 bool overwrite = false; // Overwrite already existing converted root files. Works also with -t options (only_timeshifts)
@@ -923,11 +924,8 @@ int main(int argc, char** argv)
       timeshifts.setMult(2,4);
       timeshifts.setOutDir(outPath.string());
 
-      pauseCo("calculating ...");
       timeshifts.calculate(run_path, nb_files_ts);
-      pauseCo("verifiying ...");
-      timeshifts.verify(run_path, 10);
-      pauseCo("writting ...");
+      timeshifts.verify(run_path, nb_files_ts_verify);
 
       timeshifts.write(run_name);
     }
