@@ -190,8 +190,6 @@ int getBin0(TH1F* spectra)
 bool getMeanPeak(TH1F* spectra, double & mean)
 {
   // Declaration :
-  std::unique_ptr<TF1> gaus_pol0;
-  std::unique_ptr<TF1> fittedPic;
   double pospic, amppic, dump_sigma;
   double cte, Mean, sigma;
 
@@ -209,13 +207,23 @@ bool getMeanPeak(TH1F* spectra, double & mean)
   dump_sigma = static_cast<double>( (spectra->FindLastBinAbove(amppic*0.8) - spectra->FindFirstBinAbove(amppic*0.8)) * xPerBin);
 
   // Fits the peak :
-  gaus_pol0.reset(new TF1("gaus+pol0","gaus(0)+pol0(3)",pospic-20*dump_sigma,pospic+20*dump_sigma));
+  auto gaus_pol0 = new TF1("gaus+pol0","gaus(0)+pol0(3)",pospic-20*dump_sigma,pospic+20*dump_sigma);
   gaus_pol0 -> SetParameters(amppic, pospic, dump_sigma, 1);
   gaus_pol0 -> SetRange(pospic-dump_sigma*20,pospic+dump_sigma*20);
   spectra -> Fit(gaus_pol0.get(),"R+q");
 
+  auto gaus_pol1 = new TF1("gaus+pol1","gaus(0)+pol1(3)",pospic-20*dump_sigma,pospic+20*dump_sigma);
+  gaus_pol1 -> SetParameters(amppic, pospic, dump_sigma, 1);
+  gaus_pol1 -> SetRange(pospic-dump_sigma*20,pospic+dump_sigma*20);
+  spectra -> Fit(gaus_pol1.get(),"R+q");
+
+  auto gaus_pol2 = new TF1("gaus+pol2","gaus(0)+pol2(3)",pospic-20*dump_sigma,pospic+20*dump_sigma);
+  gaus_pol2 -> SetParameters(amppic, pospic, dump_sigma, 1);
+  gaus_pol2 -> SetRange(pospic-dump_sigma*20,pospic+dump_sigma*20);
+  spectra -> Fit(gaus_pol2.get(),"R+q");
+
   // Extracts the fitted parameters :
-  fittedPic.reset (spectra -> GetFunction("gaus+pol0"));
+  auto fittedPic = gaus_pol2;
   if (!fittedPic) return false; // Eliminate non existing fits, when not enough statistics fit doesn't converge
   cte = fittedPic -> GetParameter(0);
   mean = Mean = fittedPic -> GetParameter(1);
