@@ -215,30 +215,30 @@ bool getMeanPeak(TH1F* spectra, double & mean)
   Mean = gaus_pol0->GetParameter(1);
   sigma = gaus_pol0->GetParameter(2);
 
-  auto gaus_pol1 = new TF1("gaus+pol1","gaus(0)+pol1(3)",Mean-5*sigma,Mean+5*sigma);
-  gaus_pol1 -> SetParameters(gaus_pol0->GetParameter(0), gaus_pol0->GetParameter(1), gaus_pol0->GetParameter(2), gaus_pol0->GetParameter(3), 1);
-  // gaus_pol1 -> SetRange(Mean-sigma*5,Mean+sigma*5);
+  auto gaus_pol1 = new TF1("gaus+pol1","gaus(0)+pol1(3)");//, Mean-5*sigma,Mean+5*sigma);
+  gaus_pol1 -> SetParameters(gaus_pol0->GetParameter(0), gaus_pol0->GetParameter(1), gaus_pol0->GetParameter(2), gaus_pol0->GetParameter(3), 0);
+  gaus_pol1 -> SetRange(Mean-sigma*5,Mean+sigma*5);
   spectra -> Fit(gaus_pol1,"R+q");
 
   Mean = gaus_pol1->GetParameter(1);
   sigma = gaus_pol1->GetParameter(2);
 
-  auto gaus_pol2 = new TF1("gaus+pol2","gaus(0)+pol2(3)",Mean-3*sigma,Mean+3*sigma);
-  gaus_pol2 -> SetParameters(gaus_pol1->GetParameter(0), gaus_pol1->GetParameter(1), gaus_pol1->GetParameter(2), gaus_pol1->GetParameter(3), gaus_pol1->GetParameter(4), 0);
-  // gaus_pol2 -> SetRange(Mean-sigma*5,Mean+sigma*5);
-  spectra -> Fit(gaus_pol2,"R+q");
+  auto gaus_pol1_bis = new TF1("gaus+pol2","gaus(0)+pol1(3)");//,Mean-3*sigma,Mean+3*sigma);
+  gaus_pol1_bis -> SetParameters(gaus_pol1->GetParameter(0), gaus_pol1->GetParameter(1), gaus_pol1->GetParameter(2), gaus_pol1->GetParameter(3), gaus_pol1->GetParameter(4));
+  gaus_pol1_bis -> SetRange(Mean-sigma*3,Mean+sigma*3);
+  spectra -> Fit(gaus_pol1_bis,"R+q");
 
   delete gaus_pol0;
   delete gaus_pol1;
 
   // Extracts the fitted parameters :
-  auto fittedPic = gaus_pol2;
+  auto fittedPic = gaus_pol1_bis;
   if (!fittedPic) return false; // Eliminate non existing fits, when not enough statistics fit doesn't converge
   cte = fittedPic -> GetParameter(0);
   mean = Mean = fittedPic -> GetParameter(1);
   sigma = fittedPic -> GetParameter(2);
 
-  if (false) print("cte", cte, "Mean", Mean, "sigma", sigma);
+  // print("cte", cte, "Mean", Mean, "sigma", sigma);
 
   return true;
 }

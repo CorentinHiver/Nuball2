@@ -911,8 +911,9 @@ int main(int argc, char** argv)
     Timeshifts timeshifts(outPath.string(), run_name);
 
     // If no timeshifts data for the run already available, calculate it :
-    if (!timeshifts || (only_timeshifts && overwrite)) 
+    if (!timeshifts || only_timeshifts) 
     { 
+      if (only_timeshifts && !overwrite) {print("Not overwritting", run_name, "timeshift file because it already exist ! To change this, add option -o"); continue;}
       if (treat_129) 
       {
         timeshifts.dT_with_raising_edge("dssd");
@@ -922,8 +923,11 @@ int main(int argc, char** argv)
       timeshifts.setMult(2,4);
       timeshifts.setOutDir(outPath.string());
 
+      pauseCo("calculating ...");
       timeshifts.calculate(run_path, nb_files_ts);
+      pauseCo("verifiying ...");
       timeshifts.verify(run_path, 10);
+      pauseCo("writting ...");
 
       timeshifts.write(run_name);
     }
