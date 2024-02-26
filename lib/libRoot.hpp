@@ -218,7 +218,7 @@ bool getMeanPeak(TH1F* spectra, double & mean)
   print(Mean, sigma);
 
   auto gaus_pol1 = new TF1("gaus+pol1","gaus(0)+pol1(3)",Mean-10*sigma,Mean+10*sigma);
-  gaus_pol1 -> SetParameters(gaus_pol0->GetParameter(0), gaus_pol0->GetParameter(1), gaus_pol0->GetParameter(2), gaus_pol0->GetParameter(3), 0);
+  gaus_pol1 -> SetParameters(gaus_pol0->GetParameter(0), gaus_pol0->GetParameter(1), gaus_pol0->GetParameter(2), gaus_pol0->GetParameter(3), 1);
   gaus_pol1 -> SetRange(Mean-sigma*10,Mean+sigma*10);
   spectra -> Fit(gaus_pol1,"R+q");
 
