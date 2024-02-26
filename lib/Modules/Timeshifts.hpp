@@ -231,6 +231,8 @@ public:
     m_bins_per_ns[detector] = bin_size_ns;
   }
 
+  void periodRF_ns(int const & period_ns) {m_use_rf = true; m_rf_period = period_ns;}
+
   // TODO :
   // void rebin(Label const & label, Time_ns const & bin_size_ns)
   // {
@@ -279,6 +281,10 @@ private:
   ulong m_max_hits = -1;
   ADC m_Emin_ADC = 0.;
   int m_nb_detectors = 0;
+
+  // RF : 
+  bool m_use_rf = false;
+  Time m_rf_period = 0;
 
   // This map holds the number of bins per ns (e.g. for LaBr3 there is one bin every 100 ps)
   std::map<dType, Time_ns> m_bins_per_ns = 
@@ -333,9 +339,6 @@ private:
   Vector_MTTHist<TH1F> m_time_spectra_corrected; // Time spectra from coincidence with the time reference detector, one TH1F for each detector, after timeshift
   MTTHist<TH2F> m_time_spectra_corrected_bidim; // Time spectra from coincidence with the time reference detector, X axis label, Y axis time spectra, after timeshift
 
-#ifdef USE_RF
-  int m_period = USE_RF;
-
   MTTHist<TH1F> m_histo_ref_VS_RF; // RF time spectra of the time reference detector
   MTTHist<TH2F> m_histo_ref_vs_RF_VS_mult; // RF time spectra VS multiplicity of the time reference detector
   MTTHist<TH1F> m_time_spectra_reference_RF_corrected; // RF time spectra VS multiplicity of the time reference detector, after timeshift
@@ -343,7 +346,6 @@ private:
   Vector_MTTHist<TH1F> m_histograms_VS_RF; // RF time spectra, one TH1F for each detector
   Vector_MTTHist<TH1F> m_time_spectra_corrected_RF; // RF time spectra, one TH1F for each detector, after timeshift
   MTTHist<TH2F> m_time_spectra_corrected_bidim_RF; // RF time spectra, X axis label, Y axis time spectra, after timeshift
-#endif //USE_RF
 
 public:
   class NotFoundError
@@ -435,12 +437,13 @@ bool Timeshifts::InitializeRaw()
   // Raw Timeshifts spectra :
   m_time_spectra.resize(detectors.size());
 
-#ifdef USE_RF
-  // Raw RF Timeshifts spectra :
-  m_histograms_VS_RF.resize(detectors.size());
-  m_histo_ref_VS_RF.reset( "Ref_RF_calculated", "Reference RF calculated;Time[ps];#", m_timewindow_ns*m_bins_per_ns["RF"], -m_timewindow/2, m_timewindow/2);
-  m_histo_ref_vs_RF_VS_mult.reset( "Ref_RF_VS_mult", "Reference RF VS multiplicity;Time[ps];Multiplicity", m_timewindow_ns*m_bins_per_ns["RF"],-m_timewindow/2,m_timewindow/2, 10,0,10 );
-#endif //USE_RF
+  if (m_use_rf)
+  {
+    // Raw RF Timeshifts spectra :
+    m_histograms_VS_RF.resize(detectors.size());
+    m_histo_ref_VS_RF.reset( "Ref_RF_calculated", "Reference RF calculated;Time[ps];#", m_timewindow_ns*m_bins_per_ns["RF"], -m_timewindow/2, m_timewindow/2);
+    m_histo_ref_vs_RF_VS_mult.reset( "Ref_RF_VS_mult", "Reference RF VS multiplicity;Time[ps];Multiplicity", m_timewindow_ns*m_bins_per_ns["RF"],-m_timewindow/2,m_timewindow/2, 10,0,10 );
+  }
 
   for (ushort label = 0; label<detectors.size(); label++)
   {
@@ -450,14 +453,15 @@ bool Timeshifts::InitializeRaw()
 
     m_time_spectra[label].reset(name.c_str(), name.c_str(), m_timewindow_ns*m_bins_per_ns[type], -m_timewindow/2, m_timewindow/2);
 
-  #ifdef USE_RF
-    m_histograms_VS_RF[label].reset((name+"_RF").c_str(), (name+"_RF").c_str(), m_timewindow_ns*m_bins_per_ns[type], -m_timewindow/2, m_timewindow/2);
-    if (type == "RF")
+    if (m_use_rf)
     {
-      m_time_spectra[label].reset(nullptr);
-      m_time_spectra[label].reset(name.c_str(), name.c_str(), 1000, -100, 100);
+      m_histograms_VS_RF[label].reset((name+"_RF").c_str(), (name+"_RF").c_str(), m_timewindow_ns*m_bins_per_ns[type], -m_timewindow/2, m_timewindow/2);
+      if (type == "RF")
+      {
+        m_time_spectra[label].reset(nullptr);
+        m_time_spectra[label].reset(name.c_str(), name.c_str(), 1000, -100, 100);
+      }
     }
-  #endif //USE_RF
   }
   return (m_initializedRaw = true);
 }
@@ -471,20 +475,22 @@ bool Timeshifts::InitializeCorrected()
   m_time_spectra_corrected_bidim.reset("All corrected time spectra", "All corrected time spectra;Channel;Time[ps];#", 
           detectors.size(), 0, detectors.size(), 1000, -m_timewindow/2, m_timewindow/2);
 
-#ifdef USE_RF
+  
   float borne_inf = -100000.f;
-  float borne_sup = (USE_RF+100.f)*1000.f;
+  float borne_sup = (m_rf_period+100.f)*1000.f;
   float RF_time_window = borne_sup-borne_inf;
   float RF_time_window_ns = RF_time_window/1000.f;
 
-  // Corrected RF timeshifts spectra :
-  m_time_spectra_corrected_RF.resize(detectors.size());// Initialize the vector
-  m_time_spectra_reference_RF_corrected.reset( "Ref_RF_corrected", "Reference RF corrected;Time[ps];#", RF_time_window_ns*m_bins_per_ns["RF"], borne_inf, borne_sup);
-  m_time_spectra_corrected_bidim_RF.reset("All_corrected_time_spectra_RF", "All corrected time spectra VS RF;Channel;Time[ps];#", 
-          detectors.size(), 0, detectors.size(), RF_time_window_ns*2, borne_inf, borne_sup);
-#endif //USE_RF
+  if(m_use_rf)
+  {
+    // Corrected RF timeshifts spectra :
+    m_time_spectra_corrected_RF.resize(detectors.size());// Initialize the vector
+    m_time_spectra_reference_RF_corrected.reset( "Ref_RF_corrected", "Reference RF corrected;Time[ps];#", RF_time_window_ns*m_bins_per_ns["RF"], borne_inf, borne_sup);
+    m_time_spectra_corrected_bidim_RF.reset("All_corrected_time_spectra_RF", "All corrected time spectra VS RF;Channel;Time[ps];#", 
+            detectors.size(), 0, detectors.size(), RF_time_window_ns*2, borne_inf, borne_sup);
+  }
 
-for (ushort label = 0; label<detectors.size(); label++)
+  for (ushort label = 0; label<detectors.size(); label++)
   {
     if (!detectors.exists(label)) continue;
     auto const & name = detectors[label];
@@ -492,11 +498,9 @@ for (ushort label = 0; label<detectors.size(); label++)
 
     m_time_spectra_corrected[label].reset((name+"_corrected").c_str(), (name+" corrected;Time[ps];#").c_str(), m_timewindow_ns*m_bins_per_ns[type], -m_timewindow/2, m_timewindow/2);
   
-  #ifdef USE_RF
-    m_time_spectra_corrected_RF[label].reset((name+"_RF_corrected").c_str(), (name+" RF corrected;Time[ps];#").c_str(), RF_time_window_ns*m_bins_per_ns[type], borne_inf, borne_sup);
-  #endif //USE_RF
+    if(m_use_rf) m_time_spectra_corrected_RF[label].reset((name+"_RF_corrected").c_str(), (name+" RF corrected;Time[ps];#").c_str(), 
+                    RF_time_window_ns*m_bins_per_ns[type], borne_inf, borne_sup);
   }
-
   return (m_initializedCorrected = true);
 }
 
@@ -511,7 +515,6 @@ bool Timeshifts::Initialize(bool const & initializeRaw, bool const & initializeC
     // Energy spectra :
     m_EnergyRef.reset("Energy_spectra", "Energy_spectra;ADC;#", 10000, 0, 1000000);
     m_energySpectraInitialized = true;
-    // m_EnergyRef_bidim.reset("Energy_VS_time", "Energy VS time", 100,-1,1, 1000,0,1000000); // Not used yet
   }
 
   if (m_initialized) return true; // To prevent multiple initializations
@@ -683,9 +686,12 @@ void Timeshifts::treatFasterFile(std::string const & filename)
   bool const maxHitsToRead = (m_max_hits>0);
 
   RF_Manager rf;
-#ifdef USE_RF
-  get_first_RF_of_file(reader, hit, rf);
-#endif //USE_RF
+  rf.set_period_ns(m_rf_period);
+
+  if(m_use_rf)
+  {
+    get_first_RF_of_file(reader, hit, rf);
+  }
 
   // Handle the first hit :
   reader.Read(); 
@@ -704,9 +710,7 @@ void Timeshifts::treatFasterFile(std::string const & filename)
     // This is used to put the energy value of the time reference in the Event (used in the Fill method) :
     if (hit.label == m_time_ref_label) hit.nrj = NRJ_cast(hit.adc); 
 
-  #ifdef USE_RF
-    if(isRF[hit.label]) {rf.last_downscale = hit.stamp; rf.period = hit.adc;}
-  #endif //USE_RF
+  if(m_use_rf) if(isRF[hit.label]) {rf.last_downscale = hit.stamp; rf.period = hit.adc;}
 
     if (coincBuilder.build(hit)) {this -> Fill(event, rf);}
   }
@@ -725,34 +729,34 @@ void Timeshifts::Fill(Event const & event, RF_Manager & rf)
 
   // There are 2 imbricated loops : the first one fills the time spectra and looks for the time reference.
   // If found, it opens another loop to fill the coincidence time spectra
-#ifdef USE_RF
   auto const & rf_Ref = rf.pulse_ToF(event.stamp);
-#endif //USE_RF
+
   for (int loop_i = 0; loop_i < mult; loop_i++)
   {
     bool coincFilled = false; // To only fill the coincidence once.
 
-  #ifdef USE_RF
-    auto const & label = event.labels[loop_i];
-    auto const & time = event.times[loop_i];
-    auto const & nrj = event.nrjs[loop_i];
-    auto const & ToF = Time_cast(rf_Ref+time);
-
-    if (m_corrected)
+    if(m_use_rf)
     {
-      if (label == m_time_ref_label && nrj>m_Emin_ADC && mult>5) m_time_spectra_reference_RF_corrected.Fill(ToF);
-      m_time_spectra_corrected_RF[label].Fill(ToF);
-      m_time_spectra_corrected_bidim_RF.Fill(label, ToF);
-    }
-    else 
-    {// Raw data :
-      if (label == m_time_ref_label && nrj>m_Emin_ADC) m_histo_ref_VS_RF.Fill(ToF);
-      else
+      auto const & label = event.labels[loop_i];
+      auto const & time = event.times[loop_i];
+      auto const & nrj = event.nrjs[loop_i];
+      auto const & ToF = Time_cast(rf_Ref+time);
+
+      if (m_corrected)
       {
-        m_histograms_VS_RF[label].Fill(ToF);
+        if (label == m_time_ref_label && nrj>m_Emin_ADC && mult>5) m_time_spectra_reference_RF_corrected.Fill(ToF);
+        m_time_spectra_corrected_RF[label].Fill(ToF);
+        m_time_spectra_corrected_bidim_RF.Fill(label, ToF);
+      }
+      else 
+      {// Raw data :
+        if (label == m_time_ref_label && nrj>m_Emin_ADC) m_histo_ref_VS_RF.Fill(ToF);
+        else
+        {
+          m_histograms_VS_RF[label].Fill(ToF);
+        }
       }
     }
-  #endif //USE_RF
 
     // We require the reference detector in the event :
     if (event.labels[loop_i] == m_time_ref_label && !coincFilled)
@@ -846,21 +850,22 @@ void Timeshifts::analyse()
 
   bool has_RF = false;
 
-#ifdef USE_RF
-  has_RF = (m_histo_ref_VS_RF.Integral() > 0);
-  if (has_RF)
+  if(m_use_rf)
   {
-    // Calculating the RF time shift :
-    m_histo_ref_VS_RF.Merge();
-    m_timeshifts[RF_Manager::label] = Time_cast(getRFGammaPrompt(m_histo_ref_VS_RF.get(), m_check_preprompt));
+    has_RF = (m_histo_ref_VS_RF.Integral() > 0);
+    if (has_RF)
+    {
+      // Calculating the RF time shift :
+      m_histo_ref_VS_RF.Merge();
+      m_timeshifts[RF_Manager::label] = Time_cast(getRFGammaPrompt(m_histo_ref_VS_RF.get(), m_check_preprompt));
+    }
+    else 
+    {
+      print("ATTENTION : THIS RUN DOES NOT APPEAR TO CONTAIN ANY RF");
+      print("RF label is :", RF_Manager::label);
+      print("Timing reference is :", m_time_ref_label);
+    }
   }
-  else 
-  {
-    print("ATTENTION : THIS RUN DOES NOT APPEAR TO CONTAIN ANY RF");
-    print("RF label is :", RF_Manager::label);
-    print("Timing reference is :", m_time_ref_label);
-  }
-#endif //USE_RF
 
   // Loop over all the channels time spectra :
   for (Label label = 0; label<detectors.size(); label++)
@@ -884,9 +889,8 @@ void Timeshifts::analyse()
 
     // A. If RF, one can decide to use the RF time spectra to calculate the time shifts.
     // Attention !!! This works only if the peak lies bewteen 0 and the RF period, otherwise there will be a shift
-    if ((m_RF_preferred[type] || m_RF_preferred_label[label]) && has_RF)
+    if (m_use_rf && (m_RF_preferred[type] || m_RF_preferred_label[label]) && has_RF)
     {
-  #ifdef USE_RF
       auto const & RF_zero = m_timeshifts[RF_Manager::label];
       m_histograms_VS_RF[label].Merge();
       if (m_histograms_VS_RF[label].Integral() < 50 ) {print("Not a lot of hits : only", m_histograms_VS_RF[label].Integral(), "for", name); continue;}
@@ -906,7 +910,6 @@ void Timeshifts::analyse()
         if (getMeanPeak(m_histograms_VS_RF[label].get(), mean)) m_timeshifts[label] = RF_zero-Shift_cast(mean);
         if (m_verbose) print( "Mean :", m_timeshifts[label], "with max =", int_cast(m_histograms_VS_RF[label] -> GetMaximum()), "counts.");
       }
-  #endif //USE_RF
     }
 
     // B. Using normal coincidence time spectra : 
@@ -989,19 +992,21 @@ void Timeshifts::writeRoot(std::string const & name)
   m_EnergyRef.Write();
   m_time_spectra_corrected_bidim.Write();
 
-#ifdef USE_RF
-  m_histo_ref_vs_RF_VS_mult.Write();
-  m_histo_ref_VS_RF.Write();
-  m_time_spectra_corrected_bidim_RF.Write();
-#endif //USE_RF
+  if (m_use_rf)
+  {
+    m_histo_ref_vs_RF_VS_mult.Write();
+    m_histo_ref_VS_RF.Write();
+    m_time_spectra_corrected_bidim_RF.Write();
+  }
 
   for (auto & histo : m_time_spectra) histo.Write();
   for (auto & histo : m_time_spectra_corrected) histo.Write();
 
-#ifdef USE_RF
-  for (auto & histo : m_histograms_VS_RF) histo.Write();
-  for (auto & histo : m_time_spectra_corrected_RF) histo.Write();
-#endif //USE_RF
+  if (m_use_rf)
+  {
+    for (auto & histo : m_histograms_VS_RF) histo.Write();
+    for (auto & histo : m_time_spectra_corrected_RF) histo.Write();
+  }
 
   outFile -> Write();
   outFile -> Close();

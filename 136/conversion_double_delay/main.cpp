@@ -921,6 +921,7 @@ int main(int argc, char** argv)
         timeshifts.dT_with_RF("dssd");
       }
 
+      timeshifts.periodRF_ns(200);
       timeshifts.setMult(2,4);
       timeshifts.setOutDir(outPath.string());
 
