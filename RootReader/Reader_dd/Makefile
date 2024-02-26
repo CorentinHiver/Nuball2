@@ -71,6 +71,9 @@ debugopt: default
 harddebug: CFLAGS += -g -O0 -DDEBUG -Wextra -ftemplate-depth-25 -Wconversion -Wno-float-conversion -Wold-style-cast
 harddebug: default
 
+quality: CFLAGS += -DQUALITY
+quality: opt
+
 clean:
 	rm -f *.o
 	rm -f *__*.*

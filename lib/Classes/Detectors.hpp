@@ -89,8 +89,8 @@ public:
   auto const & list()           const {return m_list          ;}
   auto const & names()          const {return m_list          ;}
   auto const & getExistsArray() const {return m_exists        ;}
-  auto const & getLabelsArray() const {return m_labels_array  ;}
-  auto const & labels()         const {return m_labels_array  ;}
+  auto const & getLabelsMap()   const {return m_labels_map    ;}
+  auto const & labels()         const {return m_labels_vector ;}
   auto const & types()          const {return m_types_ID;}
   auto const & typesArray()     const {return m_types;}
   auto const & type(Label const & label) {return m_types[label];}
@@ -99,8 +99,8 @@ public:
   auto const & getTypeName(int const & type_i) const {return m_types_ID[type_i];}
 
   auto const & getName (Label       const & label) {return m_list[label]        ;}
-  auto const & getLabel(std::string const & name ) {return m_labels_array[name];}
-  auto const & label(std::string const & name )    {return m_labels_array[name];}
+  auto const & getLabel(std::string const & name ) {return m_labels_map[name];}
+  auto const & label(std::string const & name )    {return m_labels_map[name];}
 
   void operator=(std::string const & filename) {this -> load(filename);}
 
@@ -108,7 +108,7 @@ public:
   auto const & operator[] (Label const & label) const {return m_list[label];}
 
   /// @brief Extracts the global label given the detector's name
-  auto const & operator[] (std::string const & name) {return m_labels_array[name];}
+  auto const & operator[] (std::string const & name) {return m_labels_map[name];}
 
   /// @brief Returns true only of the detectors ID file has been loaded successfully
   operator bool() const & {return m_ok;}
@@ -189,7 +189,8 @@ protected:
   Strings m_list;
   Strings m_types_ID;
 
-  std::unordered_map<std::string, Label> m_labels_array;
+  std::vector<Label> m_labels_vector;
+  std::unordered_map<std::string, Label> m_labels_map;
   std::unordered_map<dType, int> m_types_index;
   std::unordered_map<dType, int> m_type_counter; // To get the number of detectors of each type. 
   std::unordered_map<dType, Strings> m_names;
@@ -274,9 +275,14 @@ void Detectors::readFile(std::string const & filename)
     {
       m_exists[label] = true;
       m_list[label] = name;
-      if (name!="") m_labels_array[name] = label;
+      if (name!="") 
+      {
+        m_labels_map[name] = label;
+        m_labels_vector.push_back(label);
+      }
     }
   }
+  std::sort(m_labels_vector.begin(), m_labels_vector.end());
   inputfile.close();
   print("Labels extracted from", filename);
   m_ok = m_loaded = true;
@@ -469,7 +475,7 @@ std::map<Label, TH1F*> loadFormattedTH1F(TFile * file)
   //   m_ok            = otherList.m_ok;
   //   m_filename      = otherList.m_filename;
   //   m_list          = otherList.m_list;
-  //   m_labels_array = otherList.m_labels_array;
+  //   m_labels_map = otherList.m_labels_map;
   //   m_type_counter = otherList.m_type_counter;
   //   return *this;
   // }

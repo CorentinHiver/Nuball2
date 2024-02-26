@@ -596,4 +596,7 @@ MTTHist<THist>::~MTTHist()
 template <class THist>
 using Vector_MTTHist = std::vector<MTTHist<THist>>;
 
+template <class THist>
+using Map_MTTHist = std::unordered_map<int, MTTHist<THist>>;
+
 #endif //MTTHIST_HPP

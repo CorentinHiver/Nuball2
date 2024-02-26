@@ -49,7 +49,7 @@ public:
     setOutFilename(rmPathAndExt(file)+"_spectra.root");
   }
 
-  /// @brief UNUSED
+  /// @brief @todo UNUSED until event building is done
   void setTrigger(TriggerHit trigger) {m_trigger = trigger;}
 
   /// @brief Setup the threads and launched the application
@@ -76,7 +76,7 @@ public:
   void setNbThreads(int const & _nb_threads) noexcept {MTObject::setThreadsNb(_nb_threads);}
   /// @brief Set the full output path. Option --out_path
   void setOutPath(Path const & path) noexcept {m_outPath = path; m_outPath.make();}
-  /// @brief Allows to overwrite the file if it exists
+  /// @brief Allows to overwrite the output file if it exists. Option -o
   void overwrite(bool const & _overwrite) noexcept {m_overwrite = _overwrite;}
 
 private:

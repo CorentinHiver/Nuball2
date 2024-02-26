@@ -40,7 +40,7 @@ std::string calibFile = "../136_2024.calib";
 Folder manip = "N-SI-136";
 std::string list_runs = "list_runs.list";
 std::string output = "-root_dd";
-int nb_files_ts = 60;
+int nb_files_ts = 100;
 int nb_files = -1;
 bool only_timeshifts = false; // No conversion : only calculate the timeshifts
 bool overwrite = false; // Overwrite already existing converted root files. Works also with -t options (only_timeshifts)
@@ -909,15 +909,16 @@ int main(int argc, char** argv)
 
     // Timeshifts loading : 
     Timeshifts timeshifts(outPath.string(), run_name);
-    if (treat_129) 
-    {
-      timeshifts.dT_with_raising_edge("dssd");
-      timeshifts.dT_with_RF("dssd");
-    }
 
     // If no timeshifts data for the run already available, calculate it :
     if (!timeshifts || (only_timeshifts && overwrite)) 
     { 
+      if (treat_129) 
+      {
+        timeshifts.dT_with_raising_edge("dssd");
+        timeshifts.dT_with_RF("dssd");
+      }
+
       timeshifts.setMult(2,4);
       timeshifts.setOutDir(outPath.string());
 

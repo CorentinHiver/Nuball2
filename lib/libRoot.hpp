@@ -206,7 +206,7 @@ bool getMeanPeak(TH1F* spectra, double & mean)
   // Extract dump parameters :
   amppic = spectra -> GetMaximum();
   pospic = static_cast<double>( (spectra->GetMaximumBin() - bin0)*xPerBin );
-  dump_sigma = static_cast<double>( (spectra->FindLastBinAbove(amppic/2) - spectra->FindFirstBinAbove(amppic/2)) * xPerBin/2 );
+  dump_sigma = static_cast<double>( (spectra->FindLastBinAbove(amppic*0.8) - spectra->FindFirstBinAbove(amppic*0.8)) * xPerBin);
 
   // Fits the peak :
   gaus_pol0.reset(new TF1("gaus+pol0","gaus(0)+pol0(3)",pospic-20*dump_sigma,pospic+20*dump_sigma));

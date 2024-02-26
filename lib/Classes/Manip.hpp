@@ -4,6 +4,8 @@
 #include "../libCo.hpp"
 #include "../MTObjects/MTList.hpp"
 
+/// @brief Loads the list file containing the list of the names of the folder containing the faster files to convert
+/// @todo make it better !!
 class Manip
 {
 public:
@@ -11,21 +13,6 @@ public:
   Manip(){}
 
   Manip(std::string const & runs_file) : m_runs_files(runs_file) {readFile(m_runs_files);}
-
-  // void operator=(std::string const & datapath, std::string const & runs_file) 
-  // {
-  //   m_datapath = datapath;
-  //   m_runs_files = runs_file;
-  //   readFile ( runs_file );
-  // }
-  
-  // Manip(std::string const & datapath, std::string const & manipname, std::string const & filename) 
-  // {
-  //   setDataPath(datapath);
-  //   setManipName(manipname);
-  //   setFileName(filename);
-  //   readFile();
-  // }
 
   void readFile(std::string const & runs_file)
   {
@@ -41,6 +28,7 @@ public:
 
   auto const & get() const {return list_runs;}
 
+  /// @brief Clears the previously set list of folders and replace it with folder.
   void setFolder(std::string const & folder)
   {
     list_runs.clear();
@@ -49,22 +37,27 @@ public:
     m_ok = true;
   }
 
+  /// @brief Clears the previously set list of folders and replace it with folder.
   void addFolder(std::string const & folder)
   {
     list_runs.push_back(folder);
+    if (m_MTOn) list_runs_MT.push_back(folder);
   }
 
+  /// @brief @deprecated Reads the list file containing the list of folders
   bool readFile()
   {
     m_runs_files = m_datapath + m_manip + m_file;
     return readFile();
   }
 
+  /// @brief @deprecated Set the path of the list file containing the list of folders
   void setDataPath(std::string const & datapath)
   {
     m_datapath = datapath;
   }
 
+  /// @brief @deprecated Set the name of the folder inside the datapath containing the list file containing the list of folders
   void setManipName(std::string const & manipname)
   {
     m_manip = manipname;
@@ -75,6 +68,8 @@ public:
     m_file = filename;
   }
 
+  ///@brief To allow several threads to work on different runs on parallel
+  ///@details MTObject needs to have been initialized before creating the 
   bool setMT(bool const & MTOn = true)
   { // To enable the parallel reading of the runs
     if(MTObject::ON) return (m_MTOn = MTOn);

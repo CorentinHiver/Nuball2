@@ -168,6 +168,10 @@ private:
   MTTHist<TH1F> preprompt_spectra;
 
   MTTHist<TH2F> time_vs_run;
+
+  // Quality check :
+  Map_MTTHist<TH2F> time_vs_run_each_det;
+  Map_MTTHist<TH2F> time_vs_det_each_run;
 };
 
 long Analysator::g_nb_max_hits = -1;
@@ -180,6 +184,7 @@ void Analysator::Initialise()
   Clovers::InitializeArrays();
   Clovers::timePs(true);
 
+#ifndef QUALITY
 
   prompt_Ge.reset("prompt_Ge" , "prompt Ge;E[keV]" , 20000,0,10000);
   delayed_Ge.reset("delayed_Ge", "delayed Ge;E[keV]", 20000,0,10000);
@@ -294,7 +299,22 @@ void Analysator::Initialise()
 
 
   // Run quality :
-  time_vs_run.reset("time_vs_run", "time_vs_run;run number;time [ns]", 100,50,150, 1000,-1000, 1000);
+#else // if QuALITY
+  int run_min = 70;
+  int run_max = 130;
+  int nb_runs = run_max-run_min;
+  for (auto const & label : detectors.labels())
+  {
+    std::string name = "time_vs_run_"+detectors[label];
+    time_vs_run_each_det.emplace(label, MTTHist<TH2F>(name.c_str(), "time vs run each;run number;time [ns]", nb_runs,run_min,run_max, 1500,-1000,500));
+  }
+  for (int run_i = run_min; run_i<run_max+1; run_i++)
+  {
+    auto name = "time_vs_det_run_"+std::string(run_i).c_str();
+    auto title = concatenate("time vs det run", run_i, ";run number;time [ns]").c_str();
+    time_vs_run_each_det.emplace(run_i, MTTHist<TH2F>(name, title, 100,50,150, 1500,-1000,500));
+  }
+#endif //QUALITY
 
 }
 
@@ -326,8 +346,8 @@ void Analysator::analyse(Nuball2Tree & tree, Event & event)
 
     if (rf.setEvent(event)) continue;
 
-    isNaI.resize(event.mult, false);
-    isLaBr.resize(event.mult, false);
+    isNaI   .resize(event.mult, false);
+    isLaBr  .resize(event.mult, false);
     rejected.resize(event.mult, false);
 
     double prompt_calorimetry = 0;
@@ -345,12 +365,14 @@ void Analysator::analyse(Nuball2Tree & tree, Event & event)
     int multiplicity_prompt = 0;
     int multiplicity_delayed = 0;
 
+    #ifndef QUALITY
+
     Clovers clovers_delayed;
 
     int nb_prompts = 6;
 
-    std::vector<int> nb_gamma_in_prompts(nb_prompts, 0);
     bool only_prompt_with_gamma = false;
+    std::vector<int> nb_gamma_in_prompts(nb_prompts, 0);
     std::vector<double> calo_prompts(nb_prompts, 0.0);
     std::vector<Clovers> prompt_clovers(nb_prompts);
     std::vector<bool> particle_associated_with_prompt(nb_prompts, false); // Deal with DSSD later
@@ -667,12 +689,29 @@ void Analysator::analyse(Nuball2Tree & tree, Event & event)
         }
       }
     }
+  
+  #else // if QUALITY
+
+    for (int hit_i = 0; hit_i<event.mult; hit_i++)
+    {
+      auto const & label = event.labels[hit_i];
+      auto const & nrj   = event.nrjs  [hit_i];
+      auto const & time  = event.times [hit_i];
+      auto const & time_ns = time/1000.;
+
+      time_vs_run_each_det[label].Fill(run_number, time_ns);
+    }
+
+  #endif // QUALITY
   }
 
 }
 
 void Analysator::write()
 {
+#ifdef QUALITY
+  g_outfilename = "run_quality.root";
+#endif //QUALITY
   auto outfile(TFile::Open(g_outfilename.c_str(), "RECREATE"));
   outfile->cd();
 
@@ -773,6 +812,11 @@ void Analysator::write()
   E_VS_time_LaBr_wp.Write();
   E_VS_time_NaI_wp.Write();
 
+  for (auto const label : detectors.labels())
+  {
+    time_vs_run_each_det.at(label).Write();
+  }
+
   outfile->Write();
   outfile->Close();
   print(g_outfilename, "written");
@@ -789,7 +833,7 @@ void reader(int number_files = -1)
   else 
   {
     MTObject::Initialize(nb_threads);
-    // Analysator::setMaxHits(1.e+6);
+    Analysator::setMaxHits(1.e+6);
     Analysator analysator(number_files);
   }
   
