@@ -212,16 +212,16 @@ bool getMeanPeak(TH1F* spectra, double & mean)
   gaus_pol0 -> SetRange(pospic-widthpic*20,pospic+widthpic*20);
   spectra -> Fit(gaus_pol0,"R+q");
 
-  pospic = gaus_pol0->GetParameter(0);
-  widthpic = gaus_pol0->GetParameter(1);
+  pospic = gaus_pol0->GetParameter(0)/xPerBin;
+  widthpic = gaus_pol0->GetParameter(1)/xPerBin;
 
   auto gaus_pol1 = new TF1("gaus+pol1","gaus(0)+pol1(3)",pospic-20*widthpic,pospic+20*widthpic);
   gaus_pol1 -> SetParameters(gaus_pol0->GetParameter(0), gaus_pol0->GetParameter(1), gaus_pol0->GetParameter(2), gaus_pol0->GetParameter(3), 0);
   gaus_pol1 -> SetRange(pospic-widthpic*20,pospic+widthpic*20);
   spectra -> Fit(gaus_pol1,"R+q");
 
-  pospic = gaus_pol0->GetParameter(0);
-  widthpic = gaus_pol0->GetParameter(1);
+  pospic = gaus_pol0->GetParameter(0)/xPerBin;
+  widthpic = gaus_pol0->GetParameter(1)/xPerBin;
 
   auto gaus_pol2 = new TF1("gaus+pol2","gaus(0)+pol2(3)",pospic-10*widthpic,pospic+10*widthpic);
   gaus_pol2 -> SetParameters(gaus_pol1->GetParameter(0), gaus_pol1->GetParameter(1), gaus_pol1->GetParameter(2), gaus_pol1->GetParameter(3), gaus_pol1->GetParameter(4), 0);
