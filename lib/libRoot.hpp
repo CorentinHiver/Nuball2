@@ -222,8 +222,8 @@ bool getMeanPeak(TH1F* spectra, double & mean)
   gaus_pol1 -> SetRange(Mean-sigma*10,Mean+sigma*10);
   spectra -> Fit(gaus_pol1,"R+q");
 
-  Mean = gaus_pol0->GetParameter(1);
-  sigma = gaus_pol0->GetParameter(2);
+  Mean = gaus_pol1->GetParameter(1);
+  sigma = gaus_pol1->GetParameter(2);
   
   print(Mean, sigma);
 
