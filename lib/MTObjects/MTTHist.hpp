@@ -514,7 +514,7 @@ THist* MTTHist<THist>::Merged()
 {
   if (!m_is_merged)
   {
-    print("No merged histogram yet");
+    debug("No merged histogram yet for");
     return (m_merged = new THist());
   }
   else return m_merged;
@@ -549,10 +549,9 @@ void MTTHist<THist>::Write()
     m_written = true;
   }
   
-  if (MTObject::ON && MTObject::isMasterThread()) this -> Merge();
-  // if (MTObject::ON && !MTObject::isMasterThread()) this -> Write_i(MTObject::getThreadIndex());
-  else
+  if (MTObject::ON && MTObject::isMasterThread()) 
   {
+    this -> Merge();
     if (   !m_exists
         || !m_merged
         ||  m_merged -> IsZombie()
@@ -564,6 +563,7 @@ void MTTHist<THist>::Write()
       m_written = true;
     }
   }
+  // if (MTObject::ON && !MTObject::isMasterThread()) this -> Write_i(MTObject::getThreadIndex());
 }
 
 template <class THist>
