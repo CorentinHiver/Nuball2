@@ -916,15 +916,14 @@ int main(int argc, char** argv)
     { 
       if (only_timeshifts && !overwrite) {print("Not overwritting", run_name, "timeshift file because it already exist ! To change this, add option -o"); continue;}
       
-      for (int i = 800; i<856; i++) timeshifts.dT_with_RF(i);
       if (treat_129)// for N-SI-129 :
       {
+        for (int i = 800; i<856; i++) timeshifts.dT_with_RF(i);
         for (int i = 800; i<856; i++) timeshifts.dT_with_raising_edge(i);
         timeshifts.periodRF_ns(400);
       }
       else // for N-SI-136 :
       {
-        for (int i = 840; i<856; i++) timeshifts.dT_with_raising_edge(i);
         timeshifts.periodRF_ns(200);
       }
 
