@@ -36,7 +36,7 @@
 
 /// @brief Casts a number into unsigned Time
 template<typename T,  typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
-inline Time Shift_cast(T const & t) {return static_cast<Time>(t);}
+inline Time Timeshift_cast(T const & t) {return static_cast<Time>(t);}
 
 class Timeshifts
 {
@@ -45,7 +45,7 @@ public:
   Timeshifts() {}
 
   ///@brief Call the Timeshifts::load() method to load the timeshifts from a .dT file 
-  Timeshifts(std::string const & filename) : m_filename(filename) {this -> load(m_filename);}
+  Timeshifts(std::string const & filename) : m_filename(filename) {this -> load(m_filename); this -> Initialize();}
 
   ///@brief Call the Timeshifts::load() method to load the timeshifts from a .dT file 
   Timeshifts(const char * filename) : m_filename(filename) {this -> load(m_filename);}
@@ -359,6 +359,12 @@ public:
     std::string m_filename;
   };
 };
+
+void Timeshifts::Initialise()
+{
+  m_RF_preferred_label.resize(detectors.size(), false);
+  m_edge_preferred_label.resize(detectors.size(), false);
+}
 
 bool Timeshifts::load(std::string const & filename)
 {
@@ -889,7 +895,7 @@ void Timeshifts::analyse()
     }
 
     // A. If RF, one can decide to use the RF time spectra to calculate the time shifts.
-    // Attention !!! This works only if the peak lies bewteen 0 and the RF period, otherwise there will be a shift
+    // Attention !!! This works only if the normal dT peak is bewteen 0 and the RF period, otherwise there will be a shift
     if (m_use_rf && (m_RF_preferred[type] || m_RF_preferred_label[label]) && has_RF)
     {
       auto const & RF_zero = m_timeshifts[RF_Manager::label];
@@ -897,18 +903,18 @@ void Timeshifts::analyse()
       if (m_histograms_VS_RF[label].Integral() < 50 ) {print("Not a lot of hits : only", m_histograms_VS_RF[label].Integral(), "for", name); continue;}
       
       if (m_edge_preferred[type] || m_edge_preferred_label[label])
-      { // Not taking the maximum but the raising edge of the time spectra :
+      { // Not taking the maximum but the rising edge of the time spectra :
         auto const & amppic = m_histograms_VS_RF[label] -> GetMaximum();
         auto const & peak_begin = m_histograms_VS_RF[label] -> FindFirstBinAbove(amppic*0.8);
         auto const & peak_begin_ps = m_histograms_VS_RF[label]->GetBinCenter(peak_begin); // In ps
-        m_timeshifts[label] = RF_zero - Shift_cast(peak_begin_ps); 
+        m_timeshifts[label] = RF_zero - Timeshift_cast(peak_begin_ps);
         if (m_verbose) print( "Edge :", m_timeshifts[label], "with max =", int_cast(amppic), "counts.");
       }
 
       else
       {
         double mean = 0.;
-        if (getMeanPeak(m_histograms_VS_RF[label].get(), mean)) m_timeshifts[label] = RF_zero-Shift_cast(mean);
+        if (getMeanPeak(m_histograms_VS_RF[label].get(), mean)) m_timeshifts[label] = RF_zero-Timeshift_cast(mean);
         if (m_verbose) print( "Mean :", m_timeshifts[label], "with max =", int_cast(m_histograms_VS_RF[label] -> GetMaximum()), "counts.");
       }
     }
@@ -922,15 +928,15 @@ void Timeshifts::analyse()
       if (m_edge_preferred[type])
       {
         auto const & amppic = m_time_spectra[label] -> GetMaximum();
-        auto const & peak_begin = m_time_spectra[label] -> FindLastBinAbove(amppic*0.8);
+        auto const & peak_begin = m_time_spectra[label] -> FindFirstBinAbove(amppic*0.8);
         auto const & peak_bins = m_time_spectra[label] -> GetBinCenter(peak_begin);
-        m_timeshifts[label] = Shift_cast(peak_bins); // In ps
+        m_timeshifts[label] = Timeshift_cast(peak_bins); // In ps
         if (m_verbose) print( "Edge :", m_timeshifts[label], "with max =", int_cast(m_time_spectra[label] -> GetMaximum()), "counts.");
       }
       else
       {// For all the other detectors :
         double mean = 0.;
-        if (getMeanPeak(m_time_spectra[label].get(), mean)) m_timeshifts[label] = Shift_cast(mean); else m_timeshifts[label] = 0;
+        if (getMeanPeak(m_time_spectra[label].get(), mean)) m_timeshifts[label] = Timeshift_cast(mean); else m_timeshifts[label] = 0;
         if (m_verbose) print( "Mean :", m_timeshifts[label], "with max =", int_cast(m_time_spectra[label] -> GetMaximum()), "counts.");
       }
     }
@@ -1102,7 +1108,7 @@ TH1F* Timeshifts::shiftTimeSpectra(TH1F* histo, Label const & label, std::string
 
   for (int bin = 1; bin<bins; bin++)
   {
-    auto const time_ps = time_to_ps*Shift_cast(binToTime*bin + timeMin); // time_to_ps * (coeff*bin + offset_time)
+    auto const time_ps = time_to_ps*Timeshift_cast(binToTime*bin + timeMin); // time_to_ps * (coeff*bin + offset_time)
     auto const new_time_ps = time_ps + m_timeshifts[label];
     auto const new_time = new_time_ps/time_to_ps;
     auto const newbin = int_cast(( double_cast(new_time) - timeMin ) / binToTime); // ( (time_ps/time_to_ps) - offset_time) / coeff

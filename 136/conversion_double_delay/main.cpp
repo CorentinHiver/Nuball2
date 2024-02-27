@@ -915,14 +915,19 @@ int main(int argc, char** argv)
     if (!timeshifts || only_timeshifts) 
     { 
       if (only_timeshifts && !overwrite) {print("Not overwritting", run_name, "timeshift file because it already exist ! To change this, add option -o"); continue;}
-      if (treat_129) 
+      
+      for (int i = 800; i<856; i++) timeshifts.dT_with_RF(i);
+      if (treat_129)// for N-SI-129 :
       {
-        timeshifts.dT_with_raising_edge("dssd");
+        for (int i = 800; i<856; i++) timeshifts.dT_with_raising_edge(i);
+        timeshifts.periodRF_ns(400);
+      }
+      else // for N-SI-136 :
+      {
+        for (int i = 840; i<856; i++) timeshifts.dT_with_raising_edge(i);
+        timeshifts.periodRF_ns(200);
       }
 
-      for (int i = 800; i<856; i++) timeshifts.dT_with_RF(i);
-
-      timeshifts.periodRF_ns(200);
       timeshifts.setMult(2, 4);
       timeshifts.setOutDir(outPath.string());
 
