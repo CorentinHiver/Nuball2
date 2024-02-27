@@ -243,6 +243,7 @@ public:
 
 private:
 
+  void Initialise();
   bool Initialize(bool const & initializeRaw = false, bool const & initializeCorrected = false);
   bool InitializeRaw();
   bool InitializeCorrected();
