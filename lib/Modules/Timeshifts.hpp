@@ -202,9 +202,9 @@ public:
   void setEminADC(ADC const & EminADC) {m_Emin_ADC = EminADC;}
 
   void dT_with_RF(dType const & type) {m_RF_preferred[type] = true;}
-  void dT_with_RF(Label const & label) {m_RF_preferred_label[label] = true;}
+  void dT_with_RF(Label const & label) {InitialisePreferencesArrays(); m_RF_preferred_label[label] = true;}
   void dT_with_raising_edge(dType const & type) {m_edge_preferred[type] = true;}
-  void dT_with_raising_edge(Label const & label) {m_edge_preferred_label[label] = true;}
+  void dT_with_raising_edge(Label const & label) {InitialisePreferencesArrays(); m_edge_preferred_label[label] = true;}
 
   /**
    * @brief 
@@ -243,7 +243,8 @@ public:
 
 private:
 
-  void Initialise();
+  void InitialisePreferencesArrays();
+  bool m_pref_arrays_init = false;
   bool Initialize(bool const & initializeRaw = false, bool const & initializeCorrected = false);
   bool InitializeRaw();
   bool InitializeCorrected();
@@ -361,10 +362,14 @@ public:
   };
 };
 
-void Timeshifts::Initialise()
+void Timeshifts::InitialisePreferencesArrays()
 {
-  m_RF_preferred_label.resize(detectors.size(), false);
-  m_edge_preferred_label.resize(detectors.size(), false);
+  if (!m_pref_arrays_init)
+  {
+    m_RF_preferred_label.resize(detectors.size(), false);
+    m_edge_preferred_label.resize(detectors.size(), false);
+    m_pref_arrays_init = true;
+  }
 }
 
 bool Timeshifts::load(std::string const & filename)
