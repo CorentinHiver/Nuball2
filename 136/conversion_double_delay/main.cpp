@@ -931,6 +931,7 @@ int main(int argc, char** argv)
       timeshifts.setOutDir(outPath.string());
 
       timeshifts.calculate(run_path, nb_files_ts);
+      MTObject::setThreadsNb(10);
       timeshifts.verify(run_path, nb_files_ts_verify);
 
       timeshifts.write(run_name);
