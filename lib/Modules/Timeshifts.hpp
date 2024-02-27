@@ -179,7 +179,7 @@ public:
   bool verify(std::string const & folder, int const & nb_files = -1);
 
   /**
-   * @brief Used to create 
+   * @brief Used to create @todo caption
    * 
    */
   bool const & verification(bool const & verif = true) {return (m_verification = verif);}
@@ -204,6 +204,7 @@ public:
   void dT_with_RF(dType const & type) {m_RF_preferred[type] = true;}
   void dT_with_RF(Label const & label) {m_RF_preferred_label[label] = true;}
   void dT_with_raising_edge(dType const & type) {m_edge_preferred[type] = true;}
+  void dT_with_raising_edge(Label const & label) {m_edge_preferred_label[label] = true;}
 
   /**
    * @brief 
@@ -223,8 +224,8 @@ public:
   }
 
   std::vector<bool>  m_RF_preferred_label; // Used to force RF measurement for specific labels;
-  std::vector<uchar> m_nb_shifts_RF_peak;  // If the peak is not within [+- RF_period] then one need to shift it accordingly
   std::vector<bool>  m_edge_preferred_label; // Used to force RF measurement for specific labels;
+  std::vector<int> m_nb_shifts_RF_peak;  // If the dT peak used with the RF is not within [+- RF_period] then one need to shift it accordingly
 
   void rebin(std::string const & detector, Time_ns const & bin_size_ns)
   {

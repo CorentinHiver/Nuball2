@@ -923,7 +923,7 @@ int main(int argc, char** argv)
       for (int i = 800; i<856; i++) timeshifts.dT_with_RF(i);
 
       timeshifts.periodRF_ns(200);
-      timeshifts.setMult(2,4);
+      timeshifts.setMult(2, 4);
       timeshifts.setOutDir(outPath.string());
 
       timeshifts.calculate(run_path, nb_files_ts);
