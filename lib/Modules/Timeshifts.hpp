@@ -593,7 +593,7 @@ bool Timeshifts::calculate(std::string const & folder, int const & nb_files)
   // Once the histograms have been filled, fit the peaks :
   this -> analyse();
 
-  print("Timeshifts calculated in", timer(), timer.unit());
+  print("Timeshifts calculated in", timer());
 
   return true;
 }
@@ -618,7 +618,7 @@ bool Timeshifts::verify(std::string const & folder, int const & nb_files)
   this -> treatFolder(folder, nb_files);
   m_corrected = false;
 
-  print("Timeshifts verified in", timer(), timer.unit());
+  print("Timeshifts verified in", timer());
 
   return true;
 }

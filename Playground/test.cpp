@@ -16,6 +16,7 @@
 // #include <SpectraCo.hpp>
 // #include "../136/Calibrate/calibrate_spectra.C"
 // #include <CobaltCalorimeter.hpp>
+#include <MTTHist.hpp>
 
 int main(int argc, char ** argv)
 { 
@@ -25,6 +26,16 @@ int main(int argc, char ** argv)
 
   // Timeshifts ts;
   // ts.set
+  MTObject::Initialize(2);
+  MTTHist<TH1F> test("test", "test", 1000,0,1000);
+  MTObject::parallelise_function([&](){
+    print(MTObject::getThreadIndex()); for(int i = 0; i<1000000; i++) test.Fill(random_gaussian(500, 100));
+    });
+  auto outfile(TFile::Open("test.root", "RECREATE"));
+  outfile->cd();
+  test.Write();
+  outfile->Write();
+  outfile->Close();
 
 
 

@@ -1,10 +1,6 @@
 #ifndef MTOBJECT_HPP
 #define MTOBJECT_HPP
-/*
-  * This object is meant to be a base class for any other multithreaded object
-  * It's only point is to manage this nb_threads static member variable
-  * That is, all classes inheriting from MTObject will share this variable
-*/
+
 #include <thread>
 #include <mutex>
 #include <vector>
@@ -23,7 +19,7 @@ using lock_mutex = const std::lock_guard<std::mutex>;
  * 
  * POSIX-based multithreading.
  * If you want to use the power of multithreading, this class can be convenient.
- * Please include this class before any other in order to activate multithreading additions.
+ * Please include this class before any other in order to activate multithreading additions in the rest of the library.
  * 
  * First thing to do is to setup the number of threads then to initialize them :
  * 
@@ -39,7 +35,53 @@ using lock_mutex = const std::lock_guard<std::mutex>;
  *        MTObject::parallelise_function(function, param1, param2, ....);
  * 
  * If you want to multithread a non-static method (regular methods in an object), you need to pass
- * through a static function first. Example :
+ * through a static function first. 
+ * 
+ * 
+ * Example 1 : simplest example : parallelise a lambda.
+ * 
+ *        main()
+ *        {
+ *          MTObject::Initialize(2); // Using two concurrent threads
+ *          int a = 0;
+ *          int b = 0;
+ *          // Here, the [&] allows the lambda to have access at everything that has been declared above. 
+ *          // Therefore, in this case the lambda don't need any argument and the '()' is empty
+ *          MTObject::parallelise_function([&](){
+ *            if (random_uniform(0, 1)>0.5) ++a; // the random_uniform() is thread safe if '#include<MTObject>' is included first
+ *            else                          ++b;
+ *          });
+ *          print(a, b);
+ * 
+ * Example 2 : parallelise a lambda and fill a histogram using MTTHist
+ * 
+ *        main()
+ *        {
+ *          MTObject::Initialize(2); // Using two concurrent threads
+ *          MTTHist<TH1F> test("test", "test", 1000,0,1000); // MTTHist holds a vector of TH1F to be filled using its own Fill method
+ *          
+ *          MTObject::parallelise_function([&]()
+ *          { // Here starts the parallelised portion of code
+ *            print("thread id :", MTObject::getThreadIndex()); // You can access the current thread index (0 or 1 in this case)
+ *            // This method automatically fills the copy of the histogram that corresponds to its thread index :
+ *            for(int i = 0; i<10000000; i++) test.Fill(random_gaussian(500, 100)); 
+ *          });
+ *          // Now, you may want to perform some operations on the MTTHist. 
+ *          // But before, you need to merge the copies into one single spectra using MTTHist::Merge
+ *          test.Merge();
+ *          // Now, you can access the fused histogram using '->' operator.
+ *          // It calls the TH1F itself, so you have access at all the 
+ *          print(test->GetMean());
+ *          auto outfile(TFile::Open("test.root", "RECREATE"));
+ *          outfile->cd();
+ *          // Note : you can use the MTTHist::Write method without already merged it
+ *          test.Write();
+ *          outfile->Write();
+ *          outfile->Close();
+ *          return 0;
+ *        }
+ * 
+ * Example 3 : paralellise a non-static method of a class :
  * 
  *        class MyClass
  *        {

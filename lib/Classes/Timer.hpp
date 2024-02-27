@@ -56,7 +56,7 @@ public:
     m_unit = "ms";
 
     if (time>3600000.) {time/=3600000.; m_unit = "h";}
-    else if (time>120000.){time/=120000.; m_unit = "min";}
+    else if (time>120000.){time/=60000.; m_unit = "min";}
     else if (time>1000.){time/=1000.; m_unit = "s";}
 
     return std::to_string(time)+" "+m_unit;
