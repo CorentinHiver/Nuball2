@@ -265,6 +265,7 @@ private:
   bool m_verbose = false;
   bool m_verification = true;
   bool m_corrected = false;
+  bool m_folder_treated = false;
 
   bool m_initialized = false;
   bool m_energySpectraInitialized = false;
@@ -302,7 +303,7 @@ private:
     {"bgo",    2.}, 
     {"eden",   2.}, 
     {"RF",    10.}, 
-    {"paris", 10.}, 
+    {"paris",  5.}, 
     {"dssd",  0.5}
   };
 
@@ -363,6 +364,12 @@ public:
     auto const & getFilename() const {return m_filename;}
   private:
     std::string m_filename;
+  };
+
+  class EmptyError
+  {
+    public:
+      EmptyError() {error("No timeshift provided");}
   };
 };
 
@@ -578,6 +585,7 @@ void Timeshifts::treatFolder(std::string const & folder, int const & nb_files)
       treatFile(filename);
     }
   }
+  m_folder_treated = true;
 }
 
 bool Timeshifts::calculate(std::string const & folder, int const & nb_files)
@@ -616,12 +624,30 @@ bool Timeshifts::verify(std::string const & folder, int const & nb_files)
     return false;
   }
 
-  print();
-  print("Timeshifts calculated, now verification time !");
-  print();
-  m_corrected = true;
-  this -> treatFolder(folder, nb_files);
-  m_corrected = false;
+  if (!m_ok) throw EmptyError();
+
+  if (!detectors) throw Detectors::EmptyError();
+
+  if (m_folder_treated)
+  {
+    print();
+    print("Timeshifts calculated, now verification time !");
+    print();
+    for (auto const & label : detectors.labels())
+    {
+      if (m_use_rf) shiftX(m_histograms_VS_RF[label].get(), -m_timeshifts[label]);
+      shiftX(m_time_spectra[label].get(), -m_timeshifts[label]);
+    }
+  }
+  else // If no time spectra already exist :
+  {
+    print();
+    print("Timeshifts loaded, now verification time !");
+    print();
+    m_corrected = true;
+    this -> treatFolder(folder, nb_files);
+    m_corrected = false;
+  }
 
   print("Timeshifts verified in", timer());
 
@@ -728,7 +754,7 @@ void Timeshifts::treatFasterFile(std::string const & filename)
     // This is used to put the energy value of the time reference in the Event (used in the Fill method) :
     if (hit.label == m_time_ref_label) hit.nrj = NRJ_cast(hit.adc); 
 
-  if(m_use_rf) if(isRF[hit.label]) {rf.last_downscale = hit.stamp; rf.period = hit.adc;}
+    if(m_use_rf) if(isRF[hit.label]) {rf.last_downscale = hit.stamp; rf.period = hit.adc;}
 
     if (coincBuilder.build(hit)) {this -> Fill(event, rf);}
   }

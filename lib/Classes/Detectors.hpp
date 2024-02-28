@@ -208,6 +208,11 @@ protected:
     Error() noexcept {error("Detector ID file not loaded");}
     Error(std::string const & message) noexcept {error(message);}
   };
+
+  class EmptyError
+  { public:
+    EmptyError() noexcept {error("Detector ID file empty !");}
+  };
 } detectors;
 
 void Detectors::resize(ushort const & new_size)

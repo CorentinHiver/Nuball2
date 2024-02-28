@@ -193,14 +193,6 @@ bool getMeanPeak(TH1F* spectra, double & mean)
   double pospic, amppic, widthpic;
   double Mean, sigma;
 
-  // Histogram characteristics :
-  // auto const & bins = spectra -> GetXaxis() -> GetNbins();
-  // auto const & xmax = spectra -> GetXaxis() -> GetXmax();
-  // auto const & xmin = spectra -> GetXaxis() -> GetXmin();
-
-  // double const & xPerBin = (xmax-xmin)/bins;
-  // double const bin0 = spectra->FindBin(0);
-  
   // Extract dump parameters :
   amppic = spectra -> GetMaximum();
   pospic = spectra->GetBinCenter(spectra->GetMaximumBin());
@@ -243,13 +235,25 @@ bool getMeanPeak(TH1F* spectra, double & mean)
   return true;
 }
 
-void getDataTH1F(TH1F* histo, std::vector<float> & data)
+void getData(TH1* histo, std::vector<float> & data)
 {
   auto const & size = histo->GetNbinsX()+1;
+  data.clear();
   data.reserve(size);
   for (int bin = 1; bin<size; bin++)
   {
-    data.push_back(histo->GetBinContent(bin));
+    data.push_back(float_cast(histo->GetBinContent(bin)));
+  }
+}
+
+void getData(TH1* histo, std::vector<double> & data)
+{
+  auto const & size = histo->GetNbinsX()+1;
+  data.clear();
+  data.reserve(size);
+  for (int bin = 1; bin<size; bin++)
+  {
+    data.push_back(double_cast(histo->GetBinContent(bin)));
   }
 }
 
@@ -271,6 +275,27 @@ int findNextBinAbove(TH1* histo, int & bin, double threshold)
     else continue;
   } 
   return bin;
+}
+
+/// @brief Shifts a histogram by 'shift' X value
+/// @param shift Shifts each bin content by 'shift' units of the x axis
+void shiftX(TH1* histo, double shift)
+{
+  auto temp = static_cast<TH1*> (histo->Clone(concatenate(histo->GetName(), "_shifted").c_str()));
+  auto const & xmin = histo->GetXaxis()->GetXmin();
+  auto const & xmax = histo->GetXaxis()->GetXmax();
+
+  auto const & nb_bins = histo->GetNbinsX();
+  for (int bin_i = 1; bin_i<nb_bins+1; ++bin_i)
+  {
+    auto const & value = histo->GetBinCenter(bin_i);
+    auto const & shifted_value = value-shift;
+    if (shifted_value < xmin|| shifted_value > xmax) 
+         temp->SetBinContent(bin_i, 0);
+    else temp->SetBinContent(bin_i, histo->Interpolate(shifted_value));
+  }
+  for (int bin_i = 1; bin_i<nb_bins+1; ++bin_i) histo->SetBinContent(bin_i, temp->GetBinContent(bin_i));
+  delete temp;
 }
 
 ///////////////////////////
@@ -1340,7 +1365,7 @@ public:
     mean = (mean+histo->GetBinCenter(histo->GetMaximumBin()))/2;
 
     TF1* gaus1(new TF1("gaus1","gaus(0)+pol1(3)"));
-    gaus1 -> SetRange(mean-4*sigma, mean+4*sigma);
+    gaus1 -> SetRange(mean-5*sigma, mean+5*sigma);
     gaus1 -> SetParameters(gaus0->GetParameter(0), gaus0->GetParameter(1), gaus0->GetParameter(2));
     histo -> Fit(gaus1,"RQN+");
 
@@ -1365,9 +1390,7 @@ public:
   auto getBackground() const 
   {
     auto background (new TF1("background", "pol2"));
-    background->SetParameter(0, final_fit->GetParameter(3));
-    background->SetParameter(1, final_fit->GetParameter(4));
-    background->SetParameter(2, final_fit->GetParameter(5));
+    background->SetParameters(final_fit->GetParameter(3), final_fit->GetParameter(4), final_fit->GetParameter(5));
     return background;
   }
 
@@ -1380,8 +1403,12 @@ private:
 };
 
 
-/// @brief Allows one to find the most significant peak in the range [low_edge, high_edge]
-/// @details Requires very little background so you need to make a background substraction first
+/**
+ * @brief Allows one to find the most significant peak in the range [low_edge, high_edge]
+ * @details 
+ * Requires little background so you may need to make a background substraction first
+ * requires the number of counts of the most significant bin to be at least 1.2x higher than in the other peaks
+ */
 class BiggestPeakFitter
 {
 public:
@@ -1394,48 +1421,22 @@ public:
     if (low_edge  == -1) low_edge  = initialRangeMin;
     if (high_edge == -1) high_edge = initialRangeMax;
 
-    auto const & low_edge_bin = histo->FindBin(low_edge);
-    auto const & high_edge_bin = histo->FindBin(high_edge);
-
     histo->GetXaxis()->SetRangeUser(low_edge, high_edge);
+    gPad->Update();
 
     // Dumb sigma of the maximum peak :
-    auto const & max = histo->GetMaximum();
-    auto const & maxbin = histo->GetMaximumBin();
+    double max = histo->GetMaximum();
+    double maxbin = histo->GetMaximumBin();
 
     // First, trying to find the edges starting at the center :
-    int begin_peak_bin = 0;
-    int end_peak_bin = 0;
-    for (int bin_i = maxbin; bin_i<high_edge_bin; ++bin_i)
-    {
-      print(histo->GetBinContent(bin_i), max*0.7);
-      if (histo->GetBinContent(bin_i)<max*0.7) {end_peak_bin = bin_i; break;}
-    }
-    for (int bin_i = maxbin; bin_i>low_edge_bin; --bin_i)
-    {
-      print(histo->GetBinContent(bin_i), max*0.7);
-      if (histo->GetBinContent(bin_i)<max*0.7) {begin_peak_bin = bin_i; break;}
-    }
+    int begin_peak_bin = histo->FindFirstBinAbove(max*0.8);
+    if (maxbin-begin_peak_bin < 2) begin_peak_bin = maxbin-2;
+    int end_peak_bin   = histo->FindLastBinAbove(max*0.8);
+    if (end_peak_bin-maxbin < 2) end_peak_bin = maxbin+2;
 
-    // Try again to find the edges. If found too far away, this means we had to peak the first time.
-    auto const & first_left_displacement = maxbin-begin_peak_bin;
-    auto const & first_right_displacement = maxbin+end_peak_bin;
-    int begin_peak_bin_bis = 0;
-    int end_peak_bin_bis = 0;
-    for (int bin_i = maxbin; bin_i<first_left_displacement; ++bin_i)
-    {
-      if (histo->GetBinContent(bin_i)<max*0.7) {begin_peak_bin_bis = bin_i; break;}
-    }
-    for (int bin_i = maxbin; bin_i>first_right_displacement; --bin_i)
-    {
-      if (histo->GetBinContent(bin_i)<max*0.7) {end_peak_bin_bis = bin_i; break;}
-    }
 
-    int begin_peak_bin_finale = (begin_peak_bin_bis+begin_peak_bin)/2;
-    int end_peak_bin_finale = (end_peak_bin_bis+end_peak_bin)/2;
-
-    auto const & sigma = histo->GetBinCenter(end_peak_bin_finale) - histo->GetBinCenter(begin_peak_bin_finale);
-    auto const & mean = histo->GetBinCenter(maxbin);
+    auto const & sigma = histo->GetBinCenter(end_peak_bin) - histo->GetBinCenter(begin_peak_bin);
+    auto const & mean  = histo->GetBinCenter(maxbin);
 
     m_fit.fit(histo, mean-5*sigma, mean+5*sigma);
 
@@ -1494,3 +1495,32 @@ void libRoot()
     // delete key;
     // file->Close();
     // first_file = false; // Usefull only at the first iteration*/
+
+
+
+    //  0;
+    // int end_peak_bin = 0;
+    // for (int bin_i = maxbin; bin_i<high_edge_bin; ++bin_i)
+    // {
+    //   print(histo->GetBinContent(bin_i), max*0.7);
+    //   if (histo->GetBinContent(bin_i)<max*0.7) {end_peak_bin = bin_i; break;}
+    // }
+    // for (int bin_i = maxbin; bin_i>low_edge_bin; --bin_i)
+    // {
+    //   print(histo->GetBinContent(bin_i), max*0.7);
+    //   if (histo->GetBinContent(bin_i)<max*0.7) {begin_peak_bin = bin_i; break;}
+    // }
+
+    // // Try again to find the edges. If found too far away, this means we had to peak the first time.
+    // auto const & first_left_displacement = maxbin-begin_peak_bin;
+    // auto const & first_right_displacement = maxbin+end_peak_bin;
+    // int begin_peak_bin_bis = 0;
+    // int end_peak_bin_bis = 0;
+    // for (int bin_i = maxbin; bin_i<first_left_displacement; ++bin_i)
+    // {
+    //   if (histo->GetBinContent(bin_i)<max*0.7) {end_peak_bin = bin_i; break;}
+    // }
+    // for (int bin_i = maxbin; bin_i>low_edge_bin; --bin_i)
+    // {
+    //   if (histo->GetBinContent(bin_i)<max*0.7) {begin_peak_bin = bin_i; break;}
+    // }
