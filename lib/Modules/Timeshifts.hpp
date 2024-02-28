@@ -954,9 +954,9 @@ void Timeshifts::analyse()
 
       else if (m_biggest_peak_finder || m_biggest_peak_finder_label[label])
       {
-        BiggestPeakFitter fitter(m_histograms_VS_RF[label].get());
+        BiggestPeakFitter fitter(m_time_spectra[label].get());
         m_timeshifts[label] = Timeshift_cast(fitter.fit().getMean());
-        if (m_verbose) print( "Mean :", m_timeshifts[label], "with max =", int_cast(m_histograms_VS_RF[label] -> GetMaximum()), "counts.");
+        if (m_verbose) print( "Mean :", m_timeshifts[label], "with max =", int_cast(m_time_spectra[label] -> GetMaximum()), "counts.");
       }
 
       else
