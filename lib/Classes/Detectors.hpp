@@ -73,7 +73,7 @@ public:
   void makeArrays();
 
   /// @brief Return the value of the maximum label, i.e. the size of the lookup tables
-  Label const size() const {return Label_cast(m_list.size());}
+  Label size() const {return Label_cast(m_list.size());}
 
   /// @brief  Return the number of detectors
   auto const & number() {return m_nb_detectors;}

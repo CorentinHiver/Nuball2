@@ -194,25 +194,25 @@ bool getMeanPeak(TH1F* spectra, double & mean)
   double Mean, sigma;
 
   // Histogram characteristics :
-  auto const bins = spectra -> GetXaxis() -> GetNbins();
-  auto const xmax = spectra -> GetXaxis() -> GetXmax();
-  auto const xmin = spectra -> GetXaxis() -> GetXmin();
+  // auto const & bins = spectra -> GetXaxis() -> GetNbins();
+  // auto const & xmax = spectra -> GetXaxis() -> GetXmax();
+  // auto const & xmin = spectra -> GetXaxis() -> GetXmin();
 
-  auto const xPerBin = (xmax-xmin)/bins;
-  auto const bin0 = getBin0(spectra);
+  // double const & xPerBin = (xmax-xmin)/bins;
+  // double const bin0 = spectra->FindBin(0);
   
   // Extract dump parameters :
   amppic = spectra -> GetMaximum();
-  pospic = static_cast<double>( (spectra->GetMaximumBin() - bin0)*xPerBin );
-  widthpic = static_cast<double>( (spectra->FindLastBinAbove(amppic*0.8) - spectra->FindFirstBinAbove(amppic*0.8)) * xPerBin);
+  pospic = spectra->GetBinCenter(spectra->GetMaximumBin());
+  widthpic = spectra->GetBinCenter(spectra->FindLastBinAbove(amppic*0.8)) - spectra->GetBinCenter(spectra->FindFirstBinAbove(amppic*0.8));
 
-  // Fits the peak :
+  // Fit the peak :
   auto gaus_pol0 = new TF1("gaus+pol0","gaus(0)+pol0(3)",pospic-20*widthpic,pospic+20*widthpic);
   gaus_pol0 -> SetParameters(amppic, pospic, widthpic, 1);
   gaus_pol0 -> SetRange(pospic-widthpic*20,pospic+widthpic*20);
   spectra -> Fit(gaus_pol0,"R+q");
 
-  if (!gaus_pol0) return false; // Eliminate non existing fits, when not enough statistics fit doesn't converge
+  if (!gaus_pol0) return false; // Eliminate non existing fits, when fits doesn't converge
   Mean = gaus_pol0->GetParameter(1);
   sigma = gaus_pol0->GetParameter(2);
 
@@ -1253,9 +1253,42 @@ void draw_all_TH1(std::string const & filename, int minX = 0, int maxX = 0, int 
   }
 }
 
+double MeanBetweenEdges(TH1F* hist, double edge1, double edge2) 
+{
+  // Find the bin indices corresponding to the edges
+  int bin1 = hist->FindBin(edge1);
+  int bin2 = hist->FindBin(edge2);
+
+  // Calculate the mean value of bin centers between the edges
+  double sum = 0.0;
+  int count = 0;
+  for (int i = bin1; i <= bin2; ++i) {
+      sum += hist->GetBinCenter(i) * hist->GetBinContent(i);
+      count += hist->GetBinContent(i);
+  }
+
+  // Return the mean value :
+  return (count != 0) ? sum / count : 0.0;
+}
+
 /////////////////////////////
 // User friendly functions //
 /////////////////////////////
+
+void removeFits(TH1* histo)
+{
+  auto funcs = histo->GetListOfFunctions();
+  for (int i = 0; i < funcs->GetSize(); ++i) 
+  {
+    TObject* obj = funcs->At(i);
+    if (obj && obj->InheritsFrom(TF1::Class())) 
+    {
+      funcs->Remove(obj);
+      delete obj; // Delete the fit function object
+      --i; // Decrement index because funcs size has changed
+    }
+  }
+}
 
 /// @brief This method allows one to get the x and y values of where the user clicks on the graph
 void GetPoint(TVirtualPad * vpad, double& x, double& y)
@@ -1269,35 +1302,55 @@ void GetPoint(TVirtualPad * vpad, double& x, double& y)
   delete cutg;
 }
 
+
  /// @brief Allows one to fit a peak of a histogram in the range [low_edge, high_edge]
+ /// @attention The edges must be well centered, this is not a peak finder.
 class PeakFitter
 {
 public:
-  PeakFitter(TH1* histo, double low_edge, double high_edge)
+  PeakFitter() = default;
+
+  PeakFitter(TH1* histo, double low_edge, double high_edge) : 
+  m_histo (histo),
+  m_low_edge  (low_edge),
+  m_high_edge (high_edge)
   {
-    auto const & mean0 = (high_edge+low_edge)/2;
-    auto const & constante0 = histo->GetBinContent(mean0);
-    auto const & sigma0 = (high_edge-low_edge)/5.;
+    this -> fit();
+  }
+
+  /// @brief Allows one to fit a peak of a histogram in the range [low_edge, high_edge]
+  void fit() {this -> fit(m_histo, m_low_edge, m_high_edge);}
+
+  /// @brief Allows one to fit a peak of a histogram in the range [low_edge, high_edge]
+  void fit(TH1* histo, double low_edge, double high_edge)
+  {
+    double mean = (high_edge+low_edge)/2;
+    double constante = histo->GetBinContent(mean);
+    double sigma = (high_edge-low_edge)/5.;
 
     TF1* gaus0(new TF1("gaus0","gaus"));
     gaus0 -> SetRange(low_edge, high_edge);
-    gaus0 -> SetParameter(0, constante0);
-    gaus0 -> SetParameter(1, mean0);
-    gaus0 -> SetParameter(2, sigma0);
+    gaus0 -> SetParameters( constante, mean, sigma);
     histo -> Fit(gaus0,"RQN+");
 
+    sigma= gaus0->GetParameter(2);
+    mean = gaus0->GetParameter(1);
+    // The mean can be shifted away from the actual peak position because of the background
+    // Therefore, I get the mean position from the mean of the fitted mean and the maximum bin :
+    mean = (mean+histo->GetBinCenter(histo->GetMaximumBin()))/2;
+
     TF1* gaus1(new TF1("gaus1","gaus(0)+pol1(3)"));
-    gaus1 -> SetRange(low_edge, high_edge);
-    gaus1 -> SetParameter(0, gaus0->GetParameter(0));
-    gaus1 -> SetParameter(1, gaus0->GetParameter(1));
-    gaus1 -> SetParameter(2, gaus0->GetParameter(2));
+    gaus1 -> SetRange(mean-4*sigma, mean+4*sigma);
+    gaus1 -> SetParameters(gaus0->GetParameter(0), gaus0->GetParameter(1), gaus0->GetParameter(2));
     histo -> Fit(gaus1,"RQN+");
 
+    sigma= gaus1->GetParameter(2);
+    mean = gaus1->GetParameter(1);
+    mean = (mean+histo->GetBinCenter(histo->GetMaximumBin()))/2;
+
     TF1* gaus2(new TF1("gaus2","gaus(0)+pol2(3)"));
-    gaus2 -> SetRange(low_edge, high_edge);
-    gaus2 -> SetParameter(0, gaus1->GetParameter(0));
-    gaus2 -> SetParameter(1, gaus1->GetParameter(1));
-    gaus2 -> SetParameter(2, gaus1->GetParameter(2));
+    gaus2 -> SetRange(mean-sigma, mean+sigma);
+    gaus2 -> SetParameters(gaus1->GetParameter(0), gaus1->GetParameter(1), gaus1->GetParameter(2));
     histo -> Fit(gaus2,"RQN+");
 
     gaus2->Draw("same");
@@ -1305,7 +1358,7 @@ public:
   }
 
   auto operator->(){return final_fit;}
-  auto fit() const {return final_fit;}
+  auto const & getFit() const {return final_fit;}
   auto getConstante() const {return final_fit->GetParameter(0);}
   auto getMean() const {return final_fit->GetParameter(1);}
   auto getSigma() const {return final_fit->GetParameter(2);}
@@ -1319,17 +1372,87 @@ public:
   }
 
 private:
+  TH1* m_histo;
+  double m_low_edge = 0.0;
+  double m_high_edge = 0.0;
+
   TF1* final_fit = nullptr;
+};
+
+
+/// @brief Allows one to find the most significant peak in the range [low_edge, high_edge]
+/// @details Requires very little background so you need to make a background substraction first
+class BiggestPeakFitter
+{
+public:
+  /// @brief Allows one to find the most significant peak in the range [low_edge, high_edge]
+  BiggestPeakFitter(TH1* histo, double low_edge = -1, double high_edge = -1)
+  {
+    auto const & initialRangeMin = histo->GetXaxis()->GetXmin();
+    auto const & initialRangeMax = histo->GetXaxis()->GetXmax();
+
+    if (low_edge  == -1) low_edge  = initialRangeMin;
+    if (high_edge == -1) high_edge = initialRangeMax;
+
+    auto const & low_edge_bin = histo->FindBin(low_edge);
+    auto const & high_edge_bin = histo->FindBin(high_edge);
+
+    histo->GetXaxis()->SetRangeUser(low_edge, high_edge);
+
+    // Dumb sigma of the maximum peak :
+    auto const & max = histo->GetMaximum();
+    auto const & maxbin = histo->GetMaximumBin();
+
+    // First, trying to find the edges starting at the center :
+    int begin_peak_bin = 0;
+    int end_peak_bin = 0;
+    for (int bin_i = maxbin; bin_i<high_edge_bin; ++bin_i)
+    {
+      print(histo->GetBinContent(bin_i), max*0.7);
+      if (histo->GetBinContent(bin_i)<max*0.7) {end_peak_bin = bin_i; break;}
+    }
+    for (int bin_i = maxbin; bin_i>low_edge_bin; --bin_i)
+    {
+      print(histo->GetBinContent(bin_i), max*0.7);
+      if (histo->GetBinContent(bin_i)<max*0.7) {begin_peak_bin = bin_i; break;}
+    }
+
+    // Try again to find the edges. If found too far away, this means we had to peak the first time.
+    auto const & first_left_displacement = maxbin-begin_peak_bin;
+    auto const & first_right_displacement = maxbin+end_peak_bin;
+    int begin_peak_bin_bis = 0;
+    int end_peak_bin_bis = 0;
+    for (int bin_i = maxbin; bin_i<first_left_displacement; ++bin_i)
+    {
+      if (histo->GetBinContent(bin_i)<max*0.7) {begin_peak_bin_bis = bin_i; break;}
+    }
+    for (int bin_i = maxbin; bin_i>first_right_displacement; --bin_i)
+    {
+      if (histo->GetBinContent(bin_i)<max*0.7) {end_peak_bin_bis = bin_i; break;}
+    }
+
+    int begin_peak_bin_finale = (begin_peak_bin_bis+begin_peak_bin)/2;
+    int end_peak_bin_finale = (end_peak_bin_bis+end_peak_bin)/2;
+
+    auto const & sigma = histo->GetBinCenter(end_peak_bin_finale) - histo->GetBinCenter(begin_peak_bin_finale);
+    auto const & mean = histo->GetBinCenter(maxbin);
+
+    m_fit.fit(histo, mean-5*sigma, mean+5*sigma);
+
+    histo->GetXaxis()->SetRangeUser(initialRangeMin, initialRangeMax);
+  }
+
+  auto operator->() {return m_fit.getFit();}
+  auto fit() const {return m_fit;}
+
+private:
+  PeakFitter m_fit;
 };
 
 void libRoot()
 {
   print("Welcome to Corentin's ROOT library. May you find some usefull stuff around !");
 }
-
-////////////////////////////////////////////
-// MODE DIFFICULT ANALYSIS (MAY NOT WORK) //
-////////////////////////////////////////////
 
 #endif //LIBROOT_HPP
 

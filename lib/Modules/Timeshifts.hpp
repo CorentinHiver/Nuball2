@@ -205,6 +205,8 @@ public:
   void dT_with_RF(Label const & label) {InitialisePreferencesArrays(); m_RF_preferred_label[label] = true;}
   void dT_with_raising_edge(dType const & type) {m_edge_preferred[type] = true;}
   void dT_with_raising_edge(Label const & label) {InitialisePreferencesArrays(); m_edge_preferred_label[label] = true;}
+  void dT_with_biggest_peak_finder(Label const & label) {InitialisePreferencesArrays(); m_biggest_peak_finder_label[label] = true;}
+  void dT_with_biggest_peak_finder() {m_biggest_peak_finder = true;}
 
   /**
    * @brief 
@@ -225,6 +227,8 @@ public:
 
   std::vector<bool>  m_RF_preferred_label; // Used to force RF measurement for specific labels;
   std::vector<bool>  m_edge_preferred_label; // Used to force RF measurement for specific labels;
+  std::vector<bool>  m_biggest_peak_finder_label; // Use to use BigestPeakFitter - best suited for well binned and low background peaks for which the traditionnal peak fitter fails
+  bool  m_biggest_peak_finder = false; // Use to use BigestPeakFitter - best suited for well binned and low background peaks for which the traditionnal peak fitter fails
   std::vector<int> m_nb_shifts_RF_peak;  // If the dT peak used with the RF is not within [+- RF_period] then one need to shift it accordingly
 
   void rebin(std::string const & detector, Time_ns const & bin_size_ns)
@@ -368,6 +372,7 @@ void Timeshifts::InitialisePreferencesArrays()
   {
     m_RF_preferred_label.resize(detectors.size(), false);
     m_edge_preferred_label.resize(detectors.size(), false);
+    m_biggest_peak_finder_label.resize(detectors.size(), false);
     m_pref_arrays_init = true;
   }
 }
@@ -917,6 +922,13 @@ void Timeshifts::analyse()
         if (m_verbose) print( "Edge :", m_timeshifts[label], "with max =", int_cast(amppic), "counts.");
       }
 
+      else if (m_biggest_peak_finder || m_biggest_peak_finder_label[label])
+      {
+        BiggestPeakFitter fitter(m_histograms_VS_RF[label].get());
+        m_timeshifts[label] = RF_zero-Timeshift_cast(fitter.fit().getMean());
+        if (m_verbose) print( "Mean :", m_timeshifts[label], "with max =", int_cast(m_histograms_VS_RF[label] -> GetMaximum()), "counts.");
+      }
+
       else
       {
         double mean = 0.;
@@ -939,6 +951,14 @@ void Timeshifts::analyse()
         m_timeshifts[label] = Timeshift_cast(peak_bins); // In ps
         if (m_verbose) print( "Edge :", m_timeshifts[label], "with max =", int_cast(m_time_spectra[label] -> GetMaximum()), "counts.");
       }
+
+      else if (m_biggest_peak_finder || m_biggest_peak_finder_label[label])
+      {
+        BiggestPeakFitter fitter(m_histograms_VS_RF[label].get());
+        m_timeshifts[label] = Timeshift_cast(fitter.fit().getMean());
+        if (m_verbose) print( "Mean :", m_timeshifts[label], "with max =", int_cast(m_histograms_VS_RF[label] -> GetMaximum()), "counts.");
+      }
+
       else
       {// For all the other detectors :
         double mean = 0.;

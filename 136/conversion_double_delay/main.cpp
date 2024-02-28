@@ -927,6 +927,7 @@ int main(int argc, char** argv)
         timeshifts.periodRF_ns(200);
       }
 
+      timeshifts.dT_with_biggest_peak_finder();
       timeshifts.setMult(2, 4);
       timeshifts.setOutDir(outPath.string());
 
