@@ -1422,7 +1422,6 @@ public:
     if (high_edge == -1) high_edge = initialRangeMax;
 
     histo->GetXaxis()->SetRangeUser(low_edge, high_edge);
-    gPad->Update();
 
     // Dumb sigma of the maximum peak :
     double max = histo->GetMaximum();
