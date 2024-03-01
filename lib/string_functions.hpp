@@ -222,7 +222,7 @@ std::string my_to_string(const T& value)
 }
 
 /// @brief Concatenate a series of arguments into a big string
-/// @example print(concatenate(1, " ", argv[2], " test"));
+/// @example std::string mystring = (concatenate(1, " ", argv[2], " test");
 template<class... ARGS>
 std::string concatenate(ARGS&&... args)
 {
@@ -231,7 +231,16 @@ std::string concatenate(ARGS&&... args)
   return oss.str();
 }
 
+/// @brief Concatenate a series of arguments into a big string (alias)
+template<class... ARGS>
+std::string ctstr(ARGS&&... args) {return concatenate(std::forward<ARGS>(args)...);}
+
+/// @brief concatenate string, returns a c_str (char**)
 template<class... ARGS>
 const char* concatenate_c(ARGS&&... args){return concatenate(std::forward<ARGS>(args)...).c_str();}
+
+/// @brief concatenate string, returns a c_str (char**)
+template<class... ARGS>
+std::string ctcstr(ARGS&&... args) {return concatenate(std::forward<ARGS>(args)...);}
 
 #endif //STRING_FUNCTIONS_HPP

@@ -397,6 +397,16 @@ template<class T> T positive_modulo(T const & dividend, T const & divisor)
   return ret;
 }
 
+namespace CoBazar
+{
+  template<class T, class... ARGS>
+  inline T sum(T i, ARGS... args) {return i+sum(args...);}
+
+  template<class... ARGS>
+  inline double mean(ARGS... args) {return double_cast(sum(args...) / sizeof...(args));}
+}
+
+
 ///////////////////////////////////
 //    UNORDERED MAPS FUNCTIONS   //
 ///////////////////////////////////

@@ -1252,7 +1252,7 @@ void fuse_all_histo(std::string const & folder, std::string const & outRoot = "f
 
 /// @brief Draws all the TH1F of a given file one by one
 /// @attention Only works in CINT environnement (= macro only)
-void draw_all_TH1(std::string const & filename, int minX = 0, int maxX = 0, int rebin = 1)
+void draw_all_TH1(std::string const & filename, int minX = 0, int maxX = 0, int rebin = 1, std::string pattern = "")
 {
   auto file = TFile::Open(filename.c_str(), "READ");
   auto list = file->GetListOfKeys();
@@ -1265,7 +1265,9 @@ void draw_all_TH1(std::string const & filename, int minX = 0, int maxX = 0, int 
       std::unique_ptr<TObject> obj (key->ReadObj());
       auto histo = dynamic_cast<TH1F*>(obj.get());
       std::string name = histo->GetName();
+      if (pattern != "" && !found(name, pattern)) continue;
       print(name);
+      if (histo->Integral()<2) continue;
       histo->Rebin(rebin);
       if (maxX == 0) maxX = histo->GetXaxis()->GetBinCenter(histo->GetNbinsX());
       histo->GetXaxis()->SetRangeUser(minX, maxX);
@@ -1334,6 +1336,10 @@ class PeakFitter
 {
 public:
   PeakFitter() = default;
+  ~PeakFitter()
+  {
+
+  }
 
   PeakFitter(TH1* histo, double low_edge, double high_edge) : 
   m_histo (histo),
@@ -1347,11 +1353,18 @@ public:
   void fit() {this -> fit(m_histo, m_low_edge, m_high_edge);}
 
   /// @brief Allows one to fit a peak of a histogram in the range [low_edge, high_edge]
-  void fit(TH1* histo, double low_edge, double high_edge)
+  void fit(TH1* histo, double low_edge, double high_edge, double mean = -1, double sigma = -1, double constante = -1)
   {
-    double mean = (high_edge+low_edge)/2;
-    double constante = histo->GetBinContent(mean);
-    double sigma = (high_edge-low_edge)/5.;
+    #ifdef __CINT__
+    histo->GetXaxis()->SetRangeUser(low_edge, high_edge);
+    histo->Draw();
+    gPad->Update();
+    gPad->WaitPrimitive();
+    #endif //__CINT__
+    if (mean == -1) mean = (high_edge+low_edge)/2;
+    if (constante == -1) constante = histo->GetMaximum();
+    if (sigma == -1) sigma = (high_edge-low_edge)/5.;
+
 
     TF1* gaus0(new TF1("gaus0","gaus"));
     gaus0 -> SetRange(low_edge, high_edge);
@@ -1361,25 +1374,41 @@ public:
     sigma= gaus0->GetParameter(2);
     mean = gaus0->GetParameter(1);
     // The mean can be shifted away from the actual peak position because of the background
-    // Therefore, I get the mean position from the mean of the fitted mean and the maximum bin :
-    mean = (mean+histo->GetBinCenter(histo->GetMaximumBin()))/2;
+    // Therefore, I get the mean position from the mean of the fitted peak and the weighted
+    // the X value of the bin with maximum content and the two bins around it :
+    double mean_max_bins = 0.; double content_max_bins = 0;
+    auto max_bin = histo->GetMaximumBin();
+    if (max_bin<1) max_bin = 1;
+    for (int i = -1; i<2; i++) 
+    {
+      mean_max_bins+=histo->GetBinCenter(max_bin+i) * histo->GetBinContent(max_bin+i);
+      content_max_bins+=histo->GetBinContent(max_bin+i);
+    }
+
+    mean = (mean+mean_max_bins/content_max_bins)/2;
+
+
+    if (m_order_background<2) {final_fit = gaus0; return;}
 
     TF1* gaus1(new TF1("gaus1","gaus(0)+pol1(3)"));
     gaus1 -> SetRange(mean-5*sigma, mean+5*sigma);
     gaus1 -> SetParameters(gaus0->GetParameter(0), gaus0->GetParameter(1), gaus0->GetParameter(2));
     histo -> Fit(gaus1,"RQN+");
 
+    if (m_order_background<3) {final_fit = gaus1; return;}
+
     sigma= gaus1->GetParameter(2);
     mean = gaus1->GetParameter(1);
     mean = (mean+histo->GetBinCenter(histo->GetMaximumBin()))/2;
 
     TF1* gaus2(new TF1("gaus2","gaus(0)+pol2(3)"));
-    gaus2 -> SetRange(mean-sigma, mean+sigma);
+    if (m_low_binning) gaus2 -> SetRange(mean-4*sigma, mean+4*sigma);
+    else               gaus2 -> SetRange(mean-2*sigma, mean+2*sigma);
     gaus2 -> SetParameters(gaus1->GetParameter(0), gaus1->GetParameter(1), gaus1->GetParameter(2));
     histo -> Fit(gaus2,"RQN+");
 
-    gaus2->Draw("same");
     final_fit = gaus2;
+    final_fit->Draw("same");
   }
 
   auto operator->(){return final_fit;}
@@ -1394,10 +1423,15 @@ public:
     return background;
   }
 
-private:
+  auto setBackgroundOrder(int const & order_background) {m_order_background = order_background;}
+
+protected:
   TH1* m_histo;
   double m_low_edge = 0.0;
   double m_high_edge = 0.0;
+  double m_order_background = 3;
+
+  bool m_low_binning = true;
 
   TF1* final_fit = nullptr;
 };
@@ -1409,11 +1443,11 @@ private:
  * Requires little background so you may need to make a background substraction first
  * requires the number of counts of the most significant bin to be at least 1.2x higher than in the other peaks
  */
-class BiggestPeakFitter
+class BiggestPeakFitter : public PeakFitter
 {
 public:
   /// @brief Allows one to find the most significant peak in the range [low_edge, high_edge]
-  BiggestPeakFitter(TH1* histo, double low_edge = -1, double high_edge = -1)
+  BiggestPeakFitter(TH1* histo, double low_edge = -1, double high_edge = -1, int const & m_order_background = 3)
   {
     auto const & initialRangeMin = histo->GetXaxis()->GetXmin();
     auto const & initialRangeMax = histo->GetXaxis()->GetXmax();
@@ -1429,24 +1463,22 @@ public:
 
     // First, trying to find the edges starting at the center :
     int begin_peak_bin = histo->FindFirstBinAbove(max*0.8);
-    if (maxbin-begin_peak_bin < 2) begin_peak_bin = maxbin-2;
     int end_peak_bin   = histo->FindLastBinAbove(max*0.8);
-    if (end_peak_bin-maxbin < 2) end_peak_bin = maxbin+2;
-
+    auto sigma_bin = end_peak_bin-begin_peak_bin;
 
     auto const & sigma = histo->GetBinCenter(end_peak_bin) - histo->GetBinCenter(begin_peak_bin);
     auto const & mean  = histo->GetBinCenter(maxbin);
 
-    m_fit.fit(histo, mean-5*sigma, mean+5*sigma);
+    if (sigma_bin < 4) PeakFitter::m_low_binning = true;
+    PeakFitter::fit(histo, mean-5*sigma, mean+5*sigma, mean, sigma);
 
     histo->GetXaxis()->SetRangeUser(initialRangeMin, initialRangeMax);
+
+  #ifdef __CINT__
+    histo->Draw();
+    this->Draw("same");
+  #endif //__CINT__
   }
-
-  auto operator->() {return m_fit.getFit();}
-  auto fit() const {return m_fit;}
-
-private:
-  PeakFitter m_fit;
 };
 
 void libRoot()

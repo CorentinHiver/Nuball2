@@ -115,7 +115,7 @@ public:
       this -> clean();
       if (m_collection.size()<1) m_collection.reserve(1);
       m_merged = hist; m_is_merged = true; 
-      m_exists = m_outscope =true; m_integral = hist->Integral(); 
+      m_exists = m_outscope = true; m_integral = hist->Integral(); 
       m_name = hist->GetName(); m_title = hist->GetTitle();
     }
   }
@@ -158,6 +158,19 @@ public:
     hist.cleanMove(); 
   }
 
+  void clean()
+  {
+    m_comment  = "";
+    m_name = "";
+    m_exists = false;
+    m_written  = false;
+    m_integral = 0ull;
+    delete m_merged; m_merged = nullptr;
+    for (auto & histo : m_collection) delete histo;
+    m_collection.clear();
+    m_is_merged  = false;
+  }
+
   void cleanMove()
   {
     m_comment  = "";
@@ -168,8 +181,6 @@ public:
     delete m_merged; m_merged = nullptr;
     if (MTObject::ON) for (auto & histo : m_collection) delete histo;
     m_collection.clear();
-    // m_merged = nullptr;
-    // for (auto & histo : m_collection) histo = nullptr;
     m_is_merged  = false;
   }
 

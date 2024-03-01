@@ -635,8 +635,15 @@ bool Timeshifts::verify(std::string const & folder, int const & nb_files)
     print();
     for (auto const & label : detectors.labels())
     {
-      if (m_use_rf) shiftX(m_histograms_VS_RF[label].get(), -m_timeshifts[label]);
-      shiftX(m_time_spectra[label].get(), -m_timeshifts[label]);
+      if (!m_time_spectra[label].Merged()) continue;
+      m_time_spectra_corrected[label] = static_cast<TH1F*>(m_time_spectra[label].get()->Clone(concatenate(m_time_spectra[label].name(), "_corrected").c_str()));
+      shiftX(m_time_spectra_corrected[label].get(), -m_timeshifts[label]);
+      if (m_use_rf) 
+      {
+        if (!m_histograms_VS_RF[label].Merged()) continue;
+        m_time_spectra_corrected_RF[label] = static_cast<TH1F*>(m_histograms_VS_RF[label].get()->Clone(concatenate(m_histograms_VS_RF[label].name(), "_corrected").c_str()));
+        shiftX(m_time_spectra_corrected_RF[label].get(), -m_timeshifts[label]);
+      }
     }
   }
   else // If no time spectra already exist :
@@ -894,13 +901,13 @@ void Timeshifts::analyse()
 
   bool has_RF = false;
 
+  m_histo_ref_VS_RF.Merge();
   if(m_use_rf)
   {
     has_RF = (m_histo_ref_VS_RF.Integral() > 0);
     if (has_RF)
     {
       // Calculating the RF time shift :
-      m_histo_ref_VS_RF.Merge();
       m_timeshifts[RF_Manager::label] = Time_cast(getRFGammaPrompt(m_histo_ref_VS_RF.get(), m_check_preprompt));
     }
     else 
@@ -924,6 +931,9 @@ void Timeshifts::analyse()
 
     if (type == "eden" || type == "RF") continue;
 
+    m_time_spectra[label].Merge();
+   if (m_use_rf) m_histograms_VS_RF[label].Merge();
+
     // Need to change that afterwards !!!
     if (forced_shifts[label] != 0)
     {
@@ -936,7 +946,6 @@ void Timeshifts::analyse()
     if (m_use_rf && (m_RF_preferred[type] || m_RF_preferred_label[label]) && has_RF)
     {
       auto const & RF_zero = m_timeshifts[RF_Manager::label];
-      m_histograms_VS_RF[label].Merge();
       if (m_histograms_VS_RF[label].Integral() < 50 ) {print("Not a lot of hits : only", m_histograms_VS_RF[label].Integral(), "for", name); continue;}
       
       if (m_edge_preferred[type] || m_edge_preferred_label[label])
@@ -951,7 +960,7 @@ void Timeshifts::analyse()
       else if (m_biggest_peak_finder || m_biggest_peak_finder_label[label])
       {
         BiggestPeakFitter fitter(m_histograms_VS_RF[label].get());
-        m_timeshifts[label] = RF_zero-Timeshift_cast(fitter.fit().getMean());
+        m_timeshifts[label] = RF_zero-Timeshift_cast(fitter.getMean());
         if (m_verbose) print( "Mean :", m_timeshifts[label], "with max =", int_cast(m_histograms_VS_RF[label] -> GetMaximum()), "counts.");
       }
 
@@ -967,7 +976,6 @@ void Timeshifts::analyse()
     else
     {
       if (m_time_spectra[label].Integral() < 50 ) {print("Not a lot of hits : only", m_time_spectra[label].Integral(), "for", name); continue;}
-      m_time_spectra[label].Merge();
 
       if (m_edge_preferred[type])
       {
@@ -981,7 +989,7 @@ void Timeshifts::analyse()
       else if (m_biggest_peak_finder || m_biggest_peak_finder_label[label])
       {
         BiggestPeakFitter fitter(m_time_spectra[label].get());
-        m_timeshifts[label] = Timeshift_cast(fitter.fit().getMean());
+        m_timeshifts[label] = Timeshift_cast(fitter.getMean());
         if (m_verbose) print( "Mean :", m_timeshifts[label], "with max =", int_cast(m_time_spectra[label] -> GetMaximum()), "counts.");
       }
 
