@@ -1447,8 +1447,10 @@ class BiggestPeakFitter : public PeakFitter
 {
 public:
   /// @brief Allows one to find the most significant peak in the range [low_edge, high_edge]
-  BiggestPeakFitter(TH1* histo, double low_edge = -1, double high_edge = -1, int const & m_order_background = 3)
+  BiggestPeakFitter(TH1* histo, double low_edge = -1, double high_edge = -1, int const & order_background = 3)
   {
+    PeakFitter::setBackgroundOrder(order_background);
+    
     auto const & initialRangeMin = histo->GetXaxis()->GetXmin();
     auto const & initialRangeMax = histo->GetXaxis()->GetXmax();
 

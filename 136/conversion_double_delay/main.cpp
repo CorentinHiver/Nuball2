@@ -1,6 +1,7 @@
 // 2. Include library
+#include <MTObject.hpp>       // This class allows for multithreading additions (needs to be loaded first)
 #include <libCo.hpp>
-#include <FasterReader.hpp>   // This class is the base for mono  threaded code
+#include <FasterReader.hpp>   // This class is the base for mono threaded code
 #include <Alignator.hpp>      // Align a TTree if some events are shuffled in time
 #include <MTFasterReader.hpp> // This class is the base for multi threaded code
 #include <MTCounter.hpp>      // Use this to thread safely count what you want²
@@ -727,7 +728,6 @@ void convert(Hit & hit, FasterReader & reader,
       }
       buffer.clear();
     }
-
   }
   convert_timer.Stop();
   print("Conversion finished here done in", convert_timer.TimeElapsedSec() , "s (",dataSize/convert_timer.TimeElapsedSec() ,"Mo/s)");
@@ -742,29 +742,12 @@ void convert(Hit & hit, FasterReader & reader,
 
   write_timer.Stop();
 
-  auto outSize  = float_cast(size_file_conversion(float_cast(outFile->GetSize()), "o", "Mo"));
+  auto outSize = float_cast(size_file_conversion(float_cast(outFile->GetSize()), "o", "Mo"));
 
   print_precision(4);
   print(outfile, "written in", timer(), timer.unit(),"(",dataSize/timer.TimeSec(),"Mo/s). Input file", dataSize, 
         "Mo and output file", outSize, "Mo : compression factor ", dataSize/outSize,"-", (100.*double_cast(hits_count))/double_cast(rawCounts),"% hits kept");
 }
-
-// Attempt to bypass the MTFasterReader to see if it is slowing down the process :
-// void paralellisation(MTList & list,
-//               Calibration const & calibration, 
-//               Timeshifts const & timeshifts, 
-//               Path const & outPath, 
-//               Histos & histos,
-//               MTCounter & total_read_size)
-// {
-//   std::string filename;
-//   while(list.getNext(filename))
-//   {
-//     Hit hit;
-//     FasterReader reader(&hit, filename);
-//     convert(hit, reader, calibration, timeshifts, outPath, histos, total_read_size); 
-//   }
-// }
 
 // 5. Main
 int main(int argc, char** argv)
@@ -860,12 +843,12 @@ int main(int argc, char** argv)
     }
   }
 
-  // MANDATORY : initialize the multithreading !
+  // MANDATORY : initialize the multithreading according to the number required, the number of files and the hardware limitations :
   MTObject::setThreadsNb(nb_threads);
   MTObject::adjustThreadsNumber(nb_files);
   MTObject::Initialize();
 
-  // Setup the path accordingly to the machine :
+  // Setup the path accordingly to the machine - to be changed ...
   Path datapath = Path::home();
        if ( datapath == "/home/corentin/") datapath+="faster_data/";
   else if ( datapath == "/home/faster/") datapath="/srv/data/nuball2/";
@@ -918,8 +901,8 @@ int main(int argc, char** argv)
       
       if (treat_129)// for N-SI-129 :
       {
-        for (int i = 800; i<856; i++) timeshifts.dT_with_RF(i);
-        for (int i = 800; i<856; i++) timeshifts.dT_with_raising_edge(i);
+        for (int i = 800; i<856; i++) timeshifts.dT_with_RF(i); // Using RF to align the DSSD
+        for (int i = 800; i<856; i++) timeshifts.dT_with_raising_edge(i); // Use the raising edge of the dT spectra because of the timewalk of DSSD in this experiment
         timeshifts.periodRF_ns(400);
       }
       else // for N-SI-136 :
@@ -927,10 +910,10 @@ int main(int argc, char** argv)
         timeshifts.periodRF_ns(200);
       }
 
-      timeshifts.dT_with_biggest_peak_finder();
-      timeshifts.setMult(2, 4);
-      timeshifts.setOutDir(outPath.string());
+      timeshifts.dT_with_biggest_peak_finder(); // Best peak finder for N-SI-136
+      timeshifts.setMult(2, 4);// Only events with 2 to 4 hits are included
 
+      timeshifts.setOutDir(outPath.string());
       timeshifts.calculate(run_path, nb_files_ts);
       timeshifts.verify(run_path, nb_files_ts_verify);
 
