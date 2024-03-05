@@ -1466,7 +1466,10 @@ public:
     // First, trying to find the edges starting at the center :
     int begin_peak_bin = histo->FindFirstBinAbove(max*0.8);
     int end_peak_bin   = histo->FindLastBinAbove(max*0.8);
+    if (end_peak_bin-begin_peak_bin<3) {--begin_peak_bin; ++end_peak_bin;}
     auto sigma_bin = end_peak_bin-begin_peak_bin;
+
+    print(histo->GetBinCenter(end_peak_bin), histo->GetBinCenter(begin_peak_bin));
 
     auto const & sigma = histo->GetBinCenter(end_peak_bin) - histo->GetBinCenter(begin_peak_bin);
     auto const & mean  = histo->GetBinCenter(maxbin);

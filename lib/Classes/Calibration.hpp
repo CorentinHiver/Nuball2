@@ -86,6 +86,7 @@ public:
   float calibrate(size_t const & bin, Label const & label) const noexcept {return calibrate(float_cast(bin), label);}
 
   void calibrate(Hit & hit) const noexcept;
+  float apply(float const & nrj, Label const & label) const noexcept;
 
   /// @brief Wrapper around the Calibration::calibrate() methods
   template<class... ARGS>
@@ -173,21 +174,29 @@ private:
   std::vector<std::vector<std::vector<float>>> calibration_tables; // TODO
 };
 
+/// @brief Applies the calibration coefficients of the given label to the given energy
+inline float Calibration::apply(float const & nrj, Label const & label) const noexcept
+{
+  // Applies the calibration coefficients to the giver value
+  switch(m_order[label])
+  {
+    case -1: return nrj; // No calibration
+    case  0: return                      m_slope[label]*nrj; // Linear calibration (no offset)
+    case  1: return m_intercept[label] + m_slope[label]*nrj; // Affine calibration
+    case  2: return m_intercept[label] + m_slope[label]*nrj + m_binom[label]*nrj*nrj; // Quadratic calibration
+    case  3: return m_intercept[label] + m_slope[label]*nrj + m_binom[label]*nrj*nrj + m_trinom[label]*nrj*nrj*nrj; // Third order calibration
+    default: return -1; // This should normally never happen
+  }
+}
+
+/// @brief Calibrate the energy using the coefficients of the given label to the given energy. Shifts the nrj by a value between 0 and 1
 inline float Calibration::calibrate(float const & nrj, Label const & label) const noexcept
 {
   // First, one has to randomize the nrj within its bin
   auto nrj_r = nrj+random_uniform();
 
   // Then, return the new value depending on the order of the calibration for this label
-  switch(m_order[label])
-  {
-    case -1: return nrj_r; // No calibration
-    case  0: return                      m_slope[label]*nrj_r; // Linear calibration (no offset)
-    case  1: return m_intercept[label] + m_slope[label]*nrj_r; // Affine calibration
-    case  2: return m_intercept[label] + m_slope[label]*nrj_r + m_binom[label]*nrj_r*nrj_r; // Quadratic calibration
-    case  3: return m_intercept[label] + m_slope[label]*nrj_r + m_binom[label]*nrj_r*nrj_r + m_trinom[label]*nrj_r*nrj_r*nrj_r; // Third order calibration
-    default: return -1; // This should normally never happen
-  }
+  return apply(nrj_r, label);
 }
 
 /**

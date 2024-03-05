@@ -14,9 +14,17 @@
 class Vertice
 {
 public:
+  Vertice() = default;
+
   Vertice(std::vector<double> const & coords) : 
     m_dim(coords.size()),
     m_coordinates(coords)
+  {
+  }
+
+  Vertice(std::initializer_list<double> const & init_list) : 
+    m_dim(init_list.size()),
+    m_coordinates(init_list)
   {
   }
 
@@ -34,39 +42,54 @@ public:
 
   Vertice(size_t size) : 
     m_dim(size),
-    m_coordinates(std::vector<double>(m_dim))
+    m_coordinates(std::vector<double>(m_dim, 0))
   {
   }
 
   auto & operator[] (int const & i) {return m_coordinates[i];}
   auto const & operator[] (int const & i) const {return m_coordinates[i];}
 
-  Vertice& operator=(std::vector<double> const & point) {this->set(point); return *this;}
+  Vertice& operator=(std::vector<double> const & point) {this->copy(point); return *this;}
+  Vertice& operator=(Vertice const & vertice) {this->copy(vertice); return *this;}
+  Vertice& operator=(Vertice && vertice) {this->copy(std::move(vertice)); return *this;}
 
-  Vertice& operator=(Vertice const & vertice) {this->set(vertice); return *this;}
-
-  Vertice& operator=(Vertice && vertice) {this->set(std::move(vertice)); return *this;}
-
-  void set(Vertice const & _vertice)
+  void copy(Vertice const & _vertice)
   {
-    if (this -> m_dim != _vertice.m_dim) throw_error("in Vertice::set(Vertice const & _vertice) : dimension of _vertice different from that of the vertice");
+    if (this -> m_dim != _vertice.m_dim) throw_error("in Vertice::copy(Vertice const & _vertice) : dimension of _vertice different from that of the vertice");
     this->m_coordinates = _vertice.m_coordinates;
   }
 
-  void set(Vertice && _vertice)
+  void copy(Vertice && _vertice)
   {
-    if (this -> m_dim != _vertice.m_dim) throw_error("in Vertice::set(Vertice && _vertice) : dimension of _vertice different from that of the vertice");
+    if (this -> m_dim != _vertice.m_dim) throw_error("in Vertice::copy(Vertice && _vertice) : dimension of _vertice different from that of the vertice");
     this->m_coordinates = std::move(_vertice.m_coordinates);
   }
 
-  void set(std::vector<double> const & point)
+  void copy(std::vector<double> const & point)
   {
-    if (point.size()!=(size_t)(m_dim)) throw_error("in Vertice::set(std::vector<double> const & point) : dimension of point different from that of the vertice");
+    if (point.size()!=(size_t)(m_dim)) throw_error("in Vertice::copy(std::vector<double> const & point) : dimension of point different from that of the vertice");
     m_coordinates = point;
+  }
+
+  void set(Vertice const & _vertice) {this->m_coordinates = _vertice.m_coordinates; this->m_dim = _vertice.m_dim;}
+  void set(Vertice && _vertice) {this->m_coordinates = std::move(_vertice.m_coordinates); this->m_dim = std::move(_vertice.m_dim);}
+  void set(std::vector<double> const & point) {m_coordinates = point; m_dim = m_coordinates.size();}
+
+  void set(int const & coordinate_i, double const & coordinate) {m_coordinates[coordinate_i] = coordinate;}
+
+  void fill(double const & value) {std::fill(m_coordinates.begin(), m_coordinates.end(), value);}
+  void resize(size_t const & size) {if (m_dim!=size) {m_dim = size; m_coordinates.resize(m_dim);}}
+  void resize(size_t const & size, double const & value) 
+  {
+    this->resize(size);
+    this->fill(value);
   }
 
   auto const & get() const {return m_coordinates;}
   auto & get() {return m_coordinates;}
+
+  auto const & get(int const & coordinate_i) const {return m_coordinates[coordinate_i];}
+  auto & get(int const & coordinate_i) {return m_coordinates[coordinate_i];}
 
   auto & size() {return m_dim;}
   auto const & size() const {return m_dim;}
@@ -78,7 +101,7 @@ public:
   auto end() const {return m_coordinates.end();}
 
 
-  Vertice operator+(Vertice const & other)
+  Vertice operator+(Vertice const & other) const
   {
     if (other.size() != m_dim) throw_error("in Vertice::operator+(Vertice const & other) : other and vertice not the same size !!");
     std::vector<double> coords;
@@ -86,11 +109,11 @@ public:
     return Vertice(coords);
   }
 
-  Vertice operator-(Vertice const & other)
+  Vertice operator-(Vertice const & other) const
   {
     if (other.size() != m_dim) 
     {
-      throw_error("in Vertice::operator+(Vertice const & other) : other and vertice not the same size !!");
+      throw_error("in Vertice::operator-(Vertice const & other) : other and vertice not the same size !!");
     }
     std::vector<double> coords;
     for (size_t i = 0; i<other.size(); i++) coords.push_back(m_coordinates[i] - other[i]);
@@ -98,7 +121,7 @@ public:
   }
 
   // Vectorial product : TBD !!!
-  Vertice operator*(Vertice const & other)
+  Vertice operator*(Vertice const & other) const
   {
     throw_error("operator Vertice*Vertice not implemented yet !!");
     // if (other.size() != m_dim) throw_error("in Vertice::operator+(Vertice const & other) : other and vertice not the same size !!");
@@ -108,7 +131,14 @@ public:
     return coords;
   }
 
-  Vertice& operator*(double const & constant)
+  Vertice operator*(double const & constant) const
+  {
+    std::vector<double> coords = this->get();
+    for (auto & coord : coords) coord*=constant;
+    return coords;
+  }
+
+  Vertice& operator*=(double const & constant)
   {
     for (auto & coord : m_coordinates) coord*=constant;
     return *this;
@@ -148,6 +178,21 @@ public:
     for (int i = 0; i<m_size; i++) m_vertices.push_back(Vertice(dim));
   }
 
+  /**
+   * @brief Construct a simplex based on a vertice.
+   * @details The simplex is built based on the dimension of the given vertex, 
+   * which is then duplicated
+  */
+  Simplex(Vertice const & vertice) : 
+    m_size(vertice.size()+1),
+    m_dim(vertice.size())
+  {
+    print("taille :", vertice.size());
+    print(vertice);
+    for (int i = 0; i<m_size; i++) m_vertices.push_back(vertice);
+  }
+
+
   Simplex(Vertices const & vertices) : 
     m_vertices(vertices), 
     m_size(vertices.size()),
@@ -156,6 +201,7 @@ public:
     for (auto const & vertex : vertices) if (vertex.size() != this->m_dim) 
       throw_error("in Simplex::Simplex(std::vector<Vertice> const & vertices) : dimension conflict of at least one vertex (simplex must have dim+1 vertices)");
   }
+
 
   Simplex(Simplex const & other) : 
     m_vertices(other.m_vertices),
@@ -243,10 +289,269 @@ std::ostream& operator<<(std::ostream& out, Simplex const & simplex)
   return out;
 }
 
+
+/////////////
+// Functor //
+/////////////
+
+class ObjectiveFunction
+{
+public:
+  ObjectiveFunction() noexcept = default;
+  virtual double evaluate(std::vector<double> const & coefficients) const = 0;
+};
+
+class TestObjectiveFunction : public ObjectiveFunction
+{
+public:
+  TestObjectiveFunction() noexcept = default;
+  double evaluate(std::vector<double> const & coefficients) const override
+  {
+    double result = 0.0;
+    for (double val : coefficients)
+    {
+      result =+ std::pow(val-2, 2);
+    }
+    return result;
+  }
+};
+
+class ObjectiveFunctionChi2 : public ObjectiveFunction
+{
+public:
+  ObjectiveFunctionChi2(SpectraCo *spectra_ref, SpectraCo *spectra_test) : m_spectra_ref(spectra_ref), m_spectra_test(spectra_test) {}
+  double evaluate(std::vector<double> const & coefficients) const override
+  {
+    auto const & spectra_ref = *m_spectra_ref; // Simple aliasing
+    SpectraCo spectra_test (*m_spectra_test); // Copy the spectra to calibrate it afterwards
+
+    // In this minimisation, the last coefficient corresponds to the normalisation factor :
+    auto norm = coefficients.back();
+
+    // Calibrating the X axis of the test spectra :
+    spectra_test.calibrate(sub_vec(coefficients, 0, coefficients.size()-1));
+    spectra_test *= norm;
+
+    if (spectra_ref.size() != spectra_test.size()) {print ("in ObjectiveFunctionChi2::evaluate(): both spectra don't have the same size"); return 0;}
+
+    double sum_errors_squared = 0.0;
+
+    int const & nb_bins_studied = spectra_ref.size();
+
+    for (int bin = 0; bin<nb_bins_studied; bin++) 
+    {
+      if (spectra_ref[bin] == 0 || spectra_test[bin] == 0) continue;
+
+      // Variance of the bin (here the mean between both histograms is taken):
+      double const & weight = 1/(2*spectra_ref[bin]) + 1/(2*spectra_test[bin]); // V = sigma² = 1/N,
+      if (weight == 0) continue;
+
+      // Calculate the error for this bin :
+      double const & error = spectra_ref[bin] - spectra_test[bin];
+
+      // Add the error to the total squared error of the spectra :
+      sum_errors_squared += error*error*weight;
+    }
+    return sum_errors_squared/nb_bins_studied;
+  }
+
+  
+private:
+  SpectraCo* m_spectra_ref = nullptr;
+  SpectraCo* m_spectra_test = nullptr;
+};
+
 class Minimisator
 {
 public:
-  Minimisator(Recalibration * recal) : m_recal(recal)
+  Minimisator() = default;
+  void nelderMead(ObjectiveFunction const & function)
+  {
+    // Alias the call to the objective function :
+    auto computeFunction = [&](Vertice const & vertice) {
+      return function.evaluate(vertice.get());
+    };
+
+    // Create the lambdas to be use in the nelder-mead algorithm :
+    auto computeReflexion = [this](Vertice const & centroid, Vertice const & worst_vertice, double const & alpha) {
+      return centroid + alpha * (centroid - worst_vertice);
+    };
+
+    auto terminate = [this](Simplex const & simplex, std::vector<int> ordered_indexes){return true;};
+
+    // Initialize the simplex :
+    Simplex simplex(m_initial_vertice);
+
+    // Add noise to the initial guess to form the tetrahedre
+    for (auto & vertice : simplex)
+    {
+      for (size_t coord_i = 0; coord_i<vertice.size(); ++coord_i)
+      {
+        vertice[coord_i]+=random_uniform(-m_steps[coord_i], m_steps[coord_i]);
+      }
+    }
+    
+    print("initial guess : ");
+    print(m_initial_vertice);
+    print("first simplex : ");
+    print(simplex);
+    print();
+
+    double last_minimum = computeFunction(simplex[0]); // First dumb chi2
+
+    int loop_i = 0;
+    while(loop_i++<g_nb_rounds)
+    {
+      // 1.a Calculate the chi2 for each vertice of the simplex :
+      auto const & dim = simplex.dim();
+      std::vector<double> chi2s;
+      for (auto const & vertice : simplex) chi2s.push_back(computeFunction(vertice));
+
+      // 1.b Sorts the chi2s
+      std::vector<double> ordered_values;
+      std::vector<int> ordered_indexes; // Holds the indexes of the aligned chi2s
+      std::sort(ordered_indexes.begin(), ordered_indexes.end(), [&chi2s](int i, int j){return chi2s[i] < chi2s[j];});
+      for (auto const & index : ordered_indexes) ordered_values.push_back(chi2s[index]); 
+
+      // TERMINATION CHECK
+      if (terminate(simplex, ordered_indexes))
+      
+      // 1.c Calculate the centroid 
+      Vertice centroid (simplex.centroid(ordered_indexes)); // centroid
+      debug(centroid);
+
+
+      // 2.a Compute the reflexion point : centroid + alpha * (centroid-worst_vertice)
+      Vertice reflection (computeReflexion(centroid, simplex[ordered_indexes.back()], nmParam.alpha));
+
+      // 2.b Compute its chi2
+      auto const & chi2_reflection = computeFunction(reflection);
+      debug("chi2_reflection", chi2_reflection);
+
+           if (chi2_reflection <  ordered_values[0    ])
+      { // If chi2_reflection is better than the best calculated chi2 
+
+        // 3.a Compute the expansion point : centroid + beta * (reflection-centroid)
+        Vertice expansion(centroid + nmParam.beta*(reflection-centroid));
+
+        // 3.b Compute its chi2
+        auto chi2_expansion = computeFunction(expansion);
+        if (chi2_expansion < chi2_reflection) simplex[ordered_indexes.back()] = expansion;
+        else                                  simplex[ordered_indexes.back()] = reflection;
+        debug("chi2_expansion", chi2_expansion);
+      }
+      else if (chi2_reflection <  ordered_values[dim-1])
+      {
+        simplex[ordered_indexes.back()] = reflection;
+      } 
+      else if (chi2_reflection <  ordered_values[dim])
+      {
+        // 4.a Compute the outside contraction point : centroid + beta * (reflection-centroid)
+        Vertice outsideContraction(centroid + nmParam.gamma*(reflection-centroid));
+        // 4.b Compute its chi2
+        auto chi2_outside_contraction = computeFunction(outsideContraction);
+        debug("chi2_outside_contraction", chi2_outside_contraction);
+        if (chi2_outside_contraction < chi2_reflection) simplex[ordered_indexes.back()] = outsideContraction;
+      }
+      else if (chi2_reflection >= ordered_values[dim-1])
+      {
+        // 5.a Compute the inside contraction point : centroid + beta * (reflection-centroid)
+        Vertice insideContraction(centroid - nmParam.gamma*(reflection-centroid));
+        // 5.b Compute its chi2
+        auto chi2_inside_contraction = computeFunction(insideContraction);
+        debug("chi2_inside_contraction", chi2_inside_contraction);
+        if (chi2_inside_contraction < chi2_reflection) simplex[ordered_indexes.back()] = insideContraction;
+      }
+
+      // 6. Shrinks the simplex :
+      Simplex tempSimplex(simplex);
+      tempSimplex[0] = simplex[ordered_indexes[0]]; // this is the best point
+      for (size_t point_i = 2; point_i<dim+1; point_i++)
+      {
+        tempSimplex[point_i] = tempSimplex[0] + nmParam.delta * (simplex[ordered_indexes[point_i]] - tempSimplex[0]);
+      }
+
+      last_minimum = computeFunction(simplex[0]);
+      debug(last_minimum);
+
+      g_chi2s.push_back(last_minimum);
+
+      simplex = tempSimplex;
+      debug("second simplex : ");
+      debug(simplex);
+
+      // 7. Additionnal checks :
+      // 7.a. If there are two identical
+    }
+    print(simplex);
+  }
+
+  auto const & getMinimum() const {return minimum;}
+  void setInitialGuess(Vertice const & init_vertice) 
+  {
+    g_order = init_vertice.size();
+    m_initial_vertice.set(init_vertice);
+  }
+
+  void setInitialSteps(Vertice const & steps)
+  {
+    m_steps.set(steps);
+  }
+
+  /// @brief C'est peut-être une fausse piste ...
+  /// @param func 
+  void simpleGrad(ObjectiveFunction & func)
+  {
+    m_grad_vertices.resize(g_order, m_initial_vertice);
+    m_weights.resize(g_order, 1.0);
+    for (int coeff_i = 0; coeff_i<g_order; ++coeff_i)
+    {
+      Vertice test_vertice(m_initial_vertice);
+      m_grad_vertices[coeff_i].resize(g_order);
+      for (int step = 0; step<m_nb_steps_grad; step++)
+      {
+        auto const & before = func.evaluate(m_grad_vertices[coeff_i].get());
+        m_grad_vertices[coeff_i].set(coeff_i, m_grad_vertices[coeff_i][coeff_i]+m_weights[coeff_i]*step);
+        auto const & after = func.evaluate(m_grad_vertices[coeff_i].get());
+        print(m_grad_vertices[coeff_i].get(), before, after, before-after);
+        if (before == after) m_weights[coeff_i]*=10;
+        else m_weights[coeff_i]/= after - before;
+        pauseCo(" ");
+      }
+    }
+    print(m_weights);
+  }
+
+  static int g_order;
+  static int g_nb_rounds;// Provisoire
+  std::vector<double> g_chi2s;
+
+private:
+  int m_nb_steps_grad = 10; // Should be an even number
+  double minimum = 0.0;
+  Vertice m_weights;
+  Vertice m_steps;
+  Vertice m_initial_vertice;
+  Vertices m_grad_vertices;
+
+  struct NelderMeadParameters
+  {
+    double alpha = 1;
+    double beta  = 2;
+    double gamma = 0.5;
+    double delta = 0.8;
+  } nmParam;
+
+};
+
+int Minimisator::g_order = 3; // By default, first order calibration + Y axis scaling
+int Minimisator::g_nb_rounds = 5; 
+
+
+class OldMinimisator
+{
+public:
+  OldMinimisator(Recalibration * recal) : m_recal(recal)
   {
     
   }
@@ -473,6 +778,7 @@ private:
   int m_spectra_threshold = 0;
 };
 
+
 class SpectraAlignator
 {
 public:
@@ -480,6 +786,19 @@ public:
     m_ref_spectra(ref)
   {
   }
+
+  void newAlignement(TH1* _spectra, TH1* spectra_output)
+  {
+    SpectraCo test_spectra(_spectra);
+    ObjectiveFunctionChi2 func(&m_ref_spectra, &test_spectra);
+    Minimisator min;
+    min.setInitialGuess({0, 1, 1});
+    min.setInitialSteps({10, 1, 0.5});
+    // min.simpleGrad(func);
+    min.nelderMead(func);
+    print(min.getMinimum());
+  }
+
 
   Recalibration const & alignSpectra(TH1* _spectra, TH1* spectra_output, int const & degreesOfFreedom = 3, double const & energyThreshold = 0)
   {
@@ -543,7 +862,7 @@ public:
         {
           for (int a1 = 0; a1<m_nb_iterations; a1++)
           {
-            if (degreesOfFreedom>3) for (int a2 = 0; a2<m_nb_iterations; a2++)
+            if (degreesOfFreedom>3) for (int a2 = 0; a2<m_nb_iterations; ++a2)
             {
               tries++;
               double const & C_value = C_min+C*C_steps;
@@ -653,7 +972,7 @@ private:
   SpectraCo m_ref_spectra;
 
   std::vector<SpectraCo> m_spectra;
-  std::vector<Minimisator> m_minimisator;
+  std::vector<OldMinimisator> m_minimisator;
   std::vector<Recalibration> m_recals;
   std::vector<double> m_chi2s;
 
@@ -664,5 +983,7 @@ private:
   TH3F* m_chi2_spectra = nullptr;
   int m_spectra_threshold = 0;
 };
+
+
 
 #endif //SPECTRAALINGATOR_HPP

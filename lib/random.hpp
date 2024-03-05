@@ -12,21 +12,29 @@ std::uniform_real_distribution<double> uniform_random_generator_double(0, 1);
 
 static thread_local std::mt19937 generator;
 
-int intRand(const int & min, const int & max)
+template<class T>
+double random_uniform_t()
 {
-  std::uniform_int_distribution<int> distribution(min,max);
+  std::uniform_real_distribution<T> distribution(0, 1);
   return distribution(generator);
 }
 
-double double_random_uniform(const double & min, const double & max)
+template<class T>
+double random_uniform_t(T const & min, T const & max)
 {
-  std::uniform_real_distribution<double> distribution(min, max);
+  std::uniform_real_distribution<T> distribution(0, 1);
   return distribution(generator);
 }
 
 double random_uniform()
 {
   std::uniform_real_distribution<double> distribution(0, 1);
+  return distribution(generator);
+}
+
+double random_uniform(const double & min, const double & max)
+{
+  std::uniform_real_distribution<double> distribution(min, max);
   return distribution(generator);
 }
 

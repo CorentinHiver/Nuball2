@@ -213,7 +213,7 @@ std::vector<int> & bubble_sort(std::vector<T> const & vector, std::vector<int> &
   return ordered_indexes;
 }
 
-/// @brief Order the vector from lower to higer value
+/// @brief Order the vector from lower to higher value
 template <typename T>
 std::vector<int> bubble_sort(std::vector<T> const & vector)
 {
@@ -240,6 +240,13 @@ void unpack(std::vector<std::pair<K,V>> const & pairs, std::vector<K> & keys, st
   }
 }
 
+/// @brief Returns the vector in the range [start, start+length[.
+/// @details E.g. vec = {1,2,3,4,5} ; sub_vec(vec, 1, 3) -> {2, 3, 4};
+template<class T>
+auto sub_vec(std::vector<T> const & vec, int const & start, int const & length)
+{
+  return std::vector<T>(vec.begin() + start, vec.begin() + start + length);
+}
 
 ////////////////////////////
 //   CLASS STATIC VECTOR  //
@@ -247,7 +254,8 @@ void unpack(std::vector<std::pair<K,V>> const & pairs, std::vector<K> & keys, st
 
 /**
  * @brief An efficient container for dynamic arrays with a known and fixed maximum size
- * @attention Prototype, have some memory management issues in some cases ...
+ * @attention Prototype, has some memory management issues in some cases ...
+ * @deprecated With optimisation option, std::vector is almost as efficient as this class ...
  * @details
  * This class is meant to handle a vector of data that needs to be resized a lot.
  * To do so, declare it this way :

@@ -299,7 +299,7 @@ void Analysator::Initialise()
 
 
   // Run quality :
-#else // if QuALITY
+#else // if QUALITY
   int run_min = 70;
   int run_max = 130;
   int nb_runs = run_max-run_min;
@@ -833,7 +833,7 @@ void reader(int number_files = -1)
   else 
   {
     MTObject::Initialize(nb_threads);
-    Analysator::setMaxHits(1.e+6);
+    Analysator::setMaxHits(1.e+7);
     Analysator analysator(number_files);
   }
   

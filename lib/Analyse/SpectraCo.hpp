@@ -314,6 +314,7 @@ public:
     return (ret>-1) ? ret : 0;
   }
 
+  /// @brief First order calibration
   void calibrateX(double const & slope, double const & intercept = 0)
   {
     m_min_x = m_min_x * slope + intercept;
@@ -330,6 +331,7 @@ public:
   SpectraCo & operator*=(double const & factor);
   void recalibrate(Recalibration const & recal);
   void calibrate(Calibration const & calib, Label const & label);
+  void calibrate(std::vector<double> const & coeffs);
   void resizeBin(size_t const & new_size);
   void resizeX(double const & maxX);
   void resizeX(double const & minX, double const & maxX);
@@ -571,21 +573,21 @@ void SpectraCo::calibrate(Calibration const & calib, Label const & label)
 {
   if (calib.order(label)<2)
   {
-    m_min_x = calib(m_min_x, label);
-    m_max_x = calib(m_max_x, label);
+    m_min_x = calib.apply(m_min_x, label);
+    m_max_x = calib.apply(m_max_x, label);
   }
   else 
   {
     std::vector<double> newSpectra(m_size);
     for (int bin = 0; bin<m_size; bin++)
     {
-      auto const & new_bin = calib(bin, label);
-      newSpectra[bin] = interpolate(new_bin);
+      auto const & new_bin = calib.apply(bin, label);
+      newSpectra[bin] = this->interpolate(new_bin);
     }
     m_spectra = newSpectra;
   }
 
-  // replaces "adc" with "energy" if found in the name and/or title :
+  // Replaces "adc" with "Energy" if found in the name and/or title :
   replace(m_name, "adc", "Energy");
   replace(m_title, "adc", "Energy");
 
@@ -593,14 +595,44 @@ void SpectraCo::calibrate(Calibration const & calib, Label const & label)
   calculateCoeff();
 }
 
-double SpectraCo::interpolate(double const & bin) const noexcept
+void SpectraCo::calibrate(std::vector<double> const & coeffs)
 {
-  int i = static_cast<int>(bin); //bin_i
-  if (i<0) i = 0;
-  else if (i > (m_size-1)) i = m_size-1;
-  double const & a = m_spectra[i+1] - m_spectra[i];// a  =  y_i+1 - y_i
-  double const & b = m_spectra[i]   - a*i;         // b  =  y_i - a*bin_i
-  return a*bin+b;
+  int order = coeffs.size()-1;
+  if (order<0) return;
+  else if (order<2)
+  {
+    this->calibrateX(coeffs[1], coeffs[0]); // calibrateX(slope, intercept(default = 0))
+  }
+  else 
+  {
+    std::vector<double> newSpectra(m_size);
+    for (int bin = 0; bin<m_size; bin++)
+    {
+      switch(order)
+      {
+        case 2 : newSpectra[bin] = this->interpolate(coeffs[0] + bin*coeffs[1] + bin*bin*coeffs[2]); break;
+        case 3 : newSpectra[bin] = this->interpolate(coeffs[0] + bin*coeffs[1] + bin*bin*coeffs[2] + bin*bin*bin*coeffs[3]); break;
+        default: error("SpectraCo::calibrate(vector<double> coeffs) : can't handle", order+1, "coefficients");
+      }
+    }
+    m_spectra = newSpectra;
+  }
+
+  // Replaces "adc" with "Energy" if found in the name and/or title :
+  replace(m_name, "adc", "Energy");
+  replace(m_title, "adc", "Energy");
+
+  if (m_derivative) m_derivative->calibrate(coeffs);
+  calculateCoeff();
+}
+
+double SpectraCo::interpolate(double const & _bin) const noexcept
+{
+  int bin_i = static_cast<int>(_bin); //bin_i
+  if (bin_i<0 || bin_i > (m_size-2)) return 0;
+  double const & a = m_spectra[bin_i+1] - m_spectra[bin_i];// a  =  y_i+1 - y_i
+  double const & b = m_spectra[bin_i]   - a*bin_i;         // b  =  y_i - a*bin_i
+  return a*_bin+b;
 } 
 
 /**
@@ -790,7 +822,7 @@ TH1F* SpectraCo::createTH1F(std::string newName, std::string newTitle)
   if (newName == "") newName = m_name;
   if (newTitle == "") newTitle = m_title;
   TH1F* out = new TH1F(newName.c_str(), newTitle.c_str(), m_size, this->minX(), this->maxX());
-  for (int bin = 1; bin<m_size+1; bin++) out->SetBinContent(bin, m_spectra[bin]);
+  for (int bin = 1; bin<m_size; bin++) out->SetBinContent(bin, m_spectra[bin]);
   root_spectra_pointers.push_back(out);
   return out;
 }
