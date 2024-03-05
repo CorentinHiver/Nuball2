@@ -499,7 +499,7 @@ public:
   std::string const & get() const {return m_path;}
   std::string const & string() const {return(get());}
   // operator std::string() const & {return (get());}
-  auto c_str() const {return m_path.c_str();}
+  auto c_str() {return m_path.c_str();}
 
   std::string operator+(std::string const & addString) {return (m_path+addString);}
   std::string operator+(const char* addString) {return (m_path+static_cast<std::string>(addString));}

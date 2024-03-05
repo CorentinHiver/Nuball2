@@ -1,12 +1,14 @@
 #include <MTRootReader.hpp>
-#include "../../lib/Classes/Detectors.hpp"
-#include "../../lib/Classes/Event.hpp"
-#include "../../lib/Classes/RF_Manager.hpp"
-#include "../../lib/Classes/FilesManager.hpp"
-#include "../../lib/Analyse/Clovers.hpp"
-#include "../../lib/MTObjects/MTTHist.hpp"
-#include "../../lib/Classes/RWMat.hxx"
-#include "../../lib/MTObjects/MTList.hpp"
+#include <Detectors.hpp>
+#include <Event.hpp>
+#include <RF_Manager.hpp>
+#include <FilesManager.hpp>
+#include <Clovers.hpp>
+#include <MTTHist.hpp>
+#include <RWMat.hxx>
+#include <MTList.hpp>
+
+// #define QUALITY
 
 Label_vec const blacklist = {800, 801};
 std::unordered_map<Label, double> const maxE_Ge = {{28, 7500}, {33, 8250}, {46, 9000}, {55, 7500}, {57, 6000}, 
@@ -64,6 +66,7 @@ private:
 
   TRandom* random = new TRandom();
   MTList MTfiles;
+  std::vector<int> runs;
 
   // Histograms :
 
@@ -168,6 +171,8 @@ private:
   MTTHist<TH1F> preprompt_spectra;
 
   MTTHist<TH2F> time_vs_run;
+
+  MTTHist<TH2F> delayed_Ge_M2_VS_total_Ge;
 
   // Quality check :
   Map_MTTHist<TH2F> time_vs_run_each_det;
@@ -295,14 +300,19 @@ void Analysator::Initialise()
   delayed_Ge_clean_VS_prompt_calo.reset("delayed_Ge_clean_VS_prompt_calo", "delayed Ge clean VS prompt calo", 500,0,15000,10000,0,10000);
   delayed_Ge_clean_VS_delayed_calo_wop.reset("delayed_Ge_clean_VS_delayed_calo_wop", "delayed Ge clean VS delayed calo with only one prompt before", 500,0,15000,10000,0,10000);
 
+  // When only 2 germaniums, plot both germaniums VS the sum of both
+  delayed_Ge_M2_VS_total_Ge.reset("delayed_Ge_M2_VS_total_Ge", "Clean Ge VS sum clean Ge", 5000,0,5000, 3000,0,3000);
+
   preprompt_spectra.reset("preprompt_spectra", "preprompt spectra", 10000,0,10000);
+
+  int run_min = 70;
+  int run_max = 130;
+  int nb_runs = run_max-run_min;
+  time_vs_run.reset("time_vs_run","time vs run", nb_runs,run_min,run_max, 750, -1000, 500);
 
 
   // Run quality :
 #else // if QUALITY
-  int run_min = 70;
-  int run_max = 130;
-  int nb_runs = run_max-run_min;
   for (auto const & label : detectors.labels())
   {
     std::string name = "time_vs_run_"+detectors[label];
@@ -310,12 +320,11 @@ void Analysator::Initialise()
   }
   for (int run_i = run_min; run_i<run_max+1; run_i++)
   {
-    auto name = "time_vs_det_run_"+std::string(run_i).c_str();
-    auto title = concatenate("time vs det run", run_i, ";run number;time [ns]").c_str();
-    time_vs_run_each_det.emplace(run_i, MTTHist<TH2F>(name, title, 100,50,150, 1500,-1000,500));
+    auto name = ("time_vs_det_run_"+std::to_string(run_i));
+    auto title = concatenate("time vs det run", run_i, ";run number;time [ns]");
+    time_vs_det_each_run.emplace(run_i, MTTHist<TH2F>(name.c_str(), title.c_str(), 900,0,900, 750,-1000,500));
   }
 #endif //QUALITY
-
 }
 
 bool NaI_pid(float nrj, float nrj2)
@@ -329,6 +338,9 @@ void Analysator::analyse(Nuball2Tree & tree, Event & event)
 {
   File file(tree.filename());
   int run_number = std::stoi(getList(file.shortName(), '_')[1]);
+  MTObject::mutex.lock();
+    runs.push_back(run_number);
+  MTObject::mutex.unlock();
 
   Bools isNaI;
   Bools isLaBr;
@@ -340,11 +352,12 @@ void Analysator::analyse(Nuball2Tree & tree, Event & event)
   if (g_nb_max_hits>-1) nb_evts = g_nb_max_hits;
   for (int evt_i = 0; evt_i<nb_evts; ++evt_i)
   { // Iterate over the events of the file
-    if(evt_i%int_cast(10.e+6) == 0) print(evt_i/1.e+6, "Mevts"); 
+    if(evt_i>0 && evt_i%int_cast(10.e+6) == 0) print(evt_i/1.e+6, "Mevts"); 
 
     tree->GetEntry(evt_i);
 
     if (rf.setEvent(event)) continue;
+    #ifndef QUALITY
 
     isNaI   .resize(event.mult, false);
     isLaBr  .resize(event.mult, false);
@@ -365,7 +378,6 @@ void Analysator::analyse(Nuball2Tree & tree, Event & event)
     int multiplicity_prompt = 0;
     int multiplicity_delayed = 0;
 
-    #ifndef QUALITY
 
     Clovers clovers_delayed;
 
@@ -398,7 +410,7 @@ void Analysator::analyse(Nuball2Tree & tree, Event & event)
       }
 
 
-      if ((label == 506 || label == 508) && (run_number==100 || run_number==101)) time+=3500; // BETTER TIME ALIGN !!
+      // if ((label == 506 || label == 508) && (run_number==100 || run_number==101)) time+=3500; // BETTER TIME ALIGN !!
       float time_ns = time/1000.;
       time_all.Fill(label, time_ns);
       if (time_ns>180) {rejected[hit_i] = true; continue;}
@@ -621,11 +633,20 @@ void Analysator::analyse(Nuball2Tree & tree, Event & event)
     // Clovers delayed : //
     ///////////////////////
     auto const & clean_indexes = clovers_delayed.CleanGe;
+
+    // Calculate delayed calorimetry when 2 germaniums :
+    double calo_2_Ge = 0.0;
+    bool M2P = (clean_indexes.size() == 2) && (nb_prompts_with_gammas == 1);
+    if (M2P) for (auto const & clover_index : clean_indexes) calo_2_Ge+=clovers_delayed[clover_index].nrj;
+
+    // Others :
     for (size_t clover_it_i = 0; clover_it_i<clean_indexes.size(); ++clover_it_i)
     {
       auto const & clover_i = clovers_delayed[clean_indexes[clover_it_i]];
       auto const & nrj_i = clover_i.nrj;
       auto const & time_i = clover_i.time;
+
+      if (M2P) delayed_Ge_M2_VS_total_Ge.Fill(calo_2_Ge, nrj_i);
 
       delayed_E_VS_time_Ge_clean.Fill(time_i, nrj_i);
       delayed_E_VS_time_Ge_clean_wp.Fill(time_i, nrj_i);
@@ -700,6 +721,7 @@ void Analysator::analyse(Nuball2Tree & tree, Event & event)
       auto const & time_ns = time/1000.;
 
       time_vs_run_each_det[label].Fill(run_number, time_ns);
+      time_vs_det_each_run[run_number].Fill(label, time_ns);
     }
 
   #endif // QUALITY
@@ -808,14 +830,21 @@ void Analysator::write()
   delayed_E_VS_time_Ge_clean.Write();
   delayed_E_VS_time_Ge_clean_wp.Write();
 
+  delayed_Ge_M2_VS_total_Ge.Write();
+
   E_VS_time_BGO_wp.Write();
   E_VS_time_LaBr_wp.Write();
   E_VS_time_NaI_wp.Write();
 
+  // QUALITY
+  #ifdef QUALITY
+  std::sort(runs.begin(), runs.end());
   for (auto const label : detectors.labels())
   {
     time_vs_run_each_det.at(label).Write();
   }
+  for (auto & run : runs) time_vs_det_each_run.at(run).Write();
+  #endif //QUALITY
 
   outfile->Write();
   outfile->Close();
@@ -833,7 +862,7 @@ void reader(int number_files = -1)
   else 
   {
     MTObject::Initialize(nb_threads);
-    Analysator::setMaxHits(1.e+7);
+    Analysator::setMaxHits(1.e+6);
     Analysator analysator(number_files);
   }
   
