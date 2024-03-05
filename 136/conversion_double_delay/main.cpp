@@ -891,14 +891,8 @@ int main(int argc, char** argv)
     print("----------------");
     print("Treating ", run_name);
 
-    // Timeshifts loading : 
-    Timeshifts timeshifts(outPath.string(), run_name);
-
-    // If no timeshifts data for the run already available, calculate it :
-    if (!timeshifts || only_timeshifts) 
-    { 
-      if (only_timeshifts && !overwrite) {print("Not overwritting", run_name, "timeshift file because it already exist ! To change this, add option -o"); continue;}
-      
+    // Creating a lambda that calculates the timeshifts directly from the data :
+    auto calculateTimeshifts = [&](Timeshifts & timeshifts){
       if (treat_129)// for N-SI-129 :
       {
         for (int i = 800; i<856; i++) timeshifts.dT_with_RF(i); // Using RF to align the DSSD
@@ -918,9 +912,26 @@ int main(int argc, char** argv)
       timeshifts.verify(run_path, nb_files_ts_verify);
 
       timeshifts.write(run_name);
+    };
+
+    // Timeshifts loading : 
+    Timeshifts timeshifts;
+    File file(outPath.string() + "Timeshifts/" + run_name + ".dT");
+    try
+    {
+      timeshifts.load(file.string());
+    }
+    catch(Timeshifts::NotFoundError & error)
+    { // If no timeshifts data if available for the run already, calculate it :
+      calculateTimeshifts(timeshifts);
     }
 
-    if (only_timeshifts) continue;
+    if (only_timeshifts) 
+    {
+      if(!overwrite) print("Not overwritting", run_name, "timeshift file because it already exist ! To change this, add option -o"); 
+      else calculateTimeshifts(timeshifts);
+      continue;
+    }
     
     // Loop over the files in parallel :
     MTFasterReader readerMT(run_path, nb_files);

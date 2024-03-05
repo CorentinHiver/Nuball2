@@ -360,7 +360,7 @@ public:
   class NotFoundError
   {
   public:
-    NotFoundError(std::string const & filename) : m_filename(filename) {error("CAN'T OPEN THE TIMESHIFT FILE", filename);}
+    NotFoundError(std::string const & filename) : m_filename(filename) {error("Timeshifts::NotFoundError", filename);}
     auto const & getFilename() const {return m_filename;}
   private:
     std::string m_filename;
