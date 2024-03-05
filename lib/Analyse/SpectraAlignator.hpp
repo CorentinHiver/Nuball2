@@ -259,13 +259,13 @@ public:
 
   auto centroid(std::vector<int> const & sorted_vertices_indexes)
   {
-    auto const & nb_good_points = sorted_vertices_indexes.size()-1;
+    auto const & nb_points = sorted_vertices_indexes.size();
     for (auto & coord : m_centroid) coord = 0;
-    for (size_t point_i = 0; point_i<nb_good_points; point_i++) for (size_t coord_i = 0; coord_i<m_centroid.size(); coord_i++)
+    for (size_t point_i = 0; point_i<nb_points; point_i++) for (size_t coord_i = 0; coord_i<m_centroid.size(); coord_i++)
     {
       m_centroid[coord_i] += m_vertices[sorted_vertices_indexes[point_i]][coord_i];
     }
-    for (auto & coord : m_centroid) coord /= (double)(nb_good_points);
+    for (auto & coord : m_centroid) coord /= (double)(nb_points);
     return m_centroid;
   }
 
