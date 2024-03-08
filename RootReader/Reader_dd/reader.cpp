@@ -865,6 +865,9 @@ void Analysator::write()
 
 void reader(int number_files = -1)
 {
+#ifdef QUALITY
+  Analysator::setMaxHits(1.e+7);
+#endif //QUALITY
   
   if (found(Path::pwd().string(), "faster")) 
   {
@@ -874,7 +877,6 @@ void reader(int number_files = -1)
   else 
   {
     MTObject::Initialize(nb_threads);
-    // Analysator::setMaxHits(1.e+6);
     Analysator analysator(number_files);
   }
   
