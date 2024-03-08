@@ -165,7 +165,9 @@ public:
     if (nb_threads>1)
     {
       // Initialise the root thread management
+      #ifdef DEBUG
       std::cout << "Initialize ROOT thread management..." << std::endl;
+      #endif //DEBUG
       TThread::Initialize();
       ROOT::EnableThreadSafety();
       MTObject::ON = true;
@@ -174,6 +176,8 @@ public:
     else MTObject::ON = false;
   }
 
+  /// @brief 
+  /// @todo check if I can replace Func by std::function
   template <class Func, class... ARGS>
   static void parallelise_function(Func && func, ARGS &&... args)
   {

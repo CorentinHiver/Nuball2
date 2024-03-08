@@ -27,7 +27,7 @@ double const & g_end_prompt_ns = 5;
 double const & g_begin_delayed_ns = 30.0;// The first Ge must hit after this
 double const & g_end_delayed_ns = 180.0;// The first Ge must hit before this
 bool const & g_prompt_trigger = false; // If we require a prompt or not
-int const & g_n_prev_pulses = 4; // Number of pulses before the trigger to take
+int g_n_prev_pulses = 4; // Number of pulses before the trigger to take
 
   // Time windows :
 Time const & g_Ge_coinc_tw_ns = 50; // time window in ns
@@ -48,6 +48,7 @@ bool only_timeshifts = false; // No conversion : only calculate the timeshifts
 bool overwrite = false; // Overwrite already existing converted root files. Works also with -t options (only_timeshifts)
 bool histoed = false;
 bool one_run = false;
+bool single_clean = false;
 std::string one_run_folder = "";
 ulonglong max_hits = -1;
 bool treat_129 = false;
@@ -545,7 +546,14 @@ void convert(Hit & hit, FasterReader & reader,
             // ------------------------//
             Timestamp front_window = hit_first_Ge.stamp + g_Ge_coinc_tw_ns*1000;
             std::vector<int> next_Ge_indexes;
-            while (++r_buffer_it < buffer.size())
+            bool single_clean_coinc = false;
+            if (single_clean)
+            {
+              for (auto const & )
+              if (500>hit_it.label && )
+              continue;
+            }
+            else while (++r_buffer_it < buffer.size())
             {
               auto const & hit_it = buffer[r_buffer_it];
 
@@ -652,7 +660,6 @@ void convert(Hit & hit, FasterReader & reader,
               }
             }
             
-
             r_buffer_it = init_it;
 
             // if (!one_prompt_before) continue;
@@ -778,6 +785,11 @@ int main(int argc, char** argv)
         {
           histoed = true;
         }
+        else if (command == "-d" || command == "--single-clean")
+        {
+          single_clean = true;
+          replace(output, "_dd", "_d");
+        }
         else if (command == "-m" || command == "--multithread")
         {// Multithreading : number of threads
           nb_threads = atoi(argv[++i]);
@@ -789,6 +801,10 @@ int main(int argc, char** argv)
         else if (command == "-o" || command == "--overwrite")
         {// Overwright already existing .root files
           overwrite = true;
+        }
+        else if (command == "-p" || command == "--number_pulses")
+        {
+          g_n_prev_pulses = std::atoi(argv[++i]);
         }
         else if (command == "-O" || command == "--output")
         {
@@ -821,6 +837,7 @@ int main(int argc, char** argv)
         else if (command == "-h" || command == "--help")
         {
           print("List of the commands :");
+          print("(-d  || --single-clean)                   : only requires one clean Ge and one other module");
           print("(-f  || --files-number)   [files-number]  : set the number of files");
           print("(       --run)            [runname]       : set only one folder to convert");
           print("(-h  || --help)                           : display this help");
@@ -828,6 +845,7 @@ int main(int argc, char** argv)
           print("(-m  || --multithread)    [thread_number] : set the number of threads to use. Maximum allowed : 3/4 of the total number of threads");
           print("(-n  || --number-hits)    [hits_number]   : set the number of hit to read in each file.");
           print("(-o  || --overwrite)                      : overwrites the already written folders. If a folder is incomplete, you need to delete it");
+          print("(-p  || --number_pulses)  [nb_pulses]     : Sets the number of pulses to look backward from the trigger. Default : 4 pulses");
           print("(       --only-timeshift)                 : Calculate only timeshifts, force it even if it already has been calculated");
           // print("(-t  || --trigger)        [trigger]       : Default ",list_trigger,"|", trigger_legend);
           print("(-Th || --Thorium)                        : Treats only the thorium runs (run_nb < 75)");

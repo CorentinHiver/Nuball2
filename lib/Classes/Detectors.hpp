@@ -114,7 +114,8 @@ public:
   operator bool() const & {return m_ok;}
 
   /// @brief Returns the number of types in the ID file
-  auto const nbTypes() {return m_types_ID.size();}
+  auto nbTypes() {return m_types_ID.size();}
+  auto nbTypes() const {return m_types_ID.size();}
 
   /// @brief Returns the number of detector of each type
   auto const & nbOfType(dType const & type) 

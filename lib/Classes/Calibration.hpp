@@ -193,7 +193,7 @@ inline float Calibration::apply(float const & nrj, Label const & label) const no
 inline float Calibration::calibrate(float const & nrj, Label const & label) const noexcept
 {
   // First, one has to randomize the nrj within its bin
-  auto nrj_r = nrj+random_uniform();
+  auto nrj_r = nrj+randomCo::uniform();
 
   // Then, return the new value depending on the order of the calibration for this label
   return apply(nrj_r, label);

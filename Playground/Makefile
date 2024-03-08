@@ -68,6 +68,10 @@ debugopt: default
 harddebug: CFLAGS += -fno-inline -g -O0 -DDEBUG -Wextra -ftemplate-depth-25 -Wconversion -Wno-float-conversion -Wold-style-cast
 harddebug: default
 
+debug_clang: CC = clang
+#debug_clang: CFLAGS += -Wno-unused-command-line-argument
+debug_clang: debug
+
 clean:
 	rm -f *.o
 	rm -f *__*.*

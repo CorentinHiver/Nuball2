@@ -393,8 +393,6 @@ std::ostream& operator<<(std::ostream& cout, Folder const & folder)
 Folder operator+(std::string const & string, Folder const & folder) { return (string + folder.string());}
 Folder operator+(const char * string, Folder const & folder) { return (std::string(string) + folder.string());}
 
-std::string operator+=(std::string const & string, Folder const & folder) { return (string += folder.string());}
-
 /**
  * @brief EXPERIMENTAL Object used to hold a list of folders
  */
@@ -436,7 +434,7 @@ public:
   void clear() {m_folders.resize(0);}
   Folders & resize(int const & size) {m_folders.resize(size); return *this;}
 
-  auto const size() const {return m_folders.size();}
+  auto size() const {return m_folders.size();}
 
   auto begin() const {return m_folders.begin();}
   auto end  () const {return m_folders.end();}
@@ -507,7 +505,7 @@ public:
 
   Folder const & operator[] (uint const & i) const {return m_recursive_folders[i];}
   Folder const & folder() const {return m_recursive_folders.get().back();}
-  auto const size() const {return m_recursive_folders.size();}
+  auto size() const {return m_recursive_folders.size();}
   Folders const & getFolders() const {return m_recursive_folders;}
 
   Path & operator=(std::string const & inputString)
@@ -657,7 +655,7 @@ public:
   operator std::string() const & {return m_fullName;}
   std::string const & get() const {return m_fullName;}
   std::string const & string() const {return m_fullName;}
-  std::string c_str() const {return c_str();}
+  std::string c_str() const {return m_fullName.c_str();}
 
   /// @brief Full name stands for the file name with the path nor the extension
   std::string const & fullName() const {return m_fullName;}

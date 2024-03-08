@@ -9,7 +9,7 @@
 // ********** Corentin Lib ************ //
 #include "print.hpp"
 #include "vector_functions.hpp"
-#include "random.hpp"
+#include "randomCo.hpp"
 #include "string_functions.hpp"
 #include "files_functions.hpp"
 #include "errors.hpp"

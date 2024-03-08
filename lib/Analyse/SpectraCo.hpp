@@ -308,14 +308,14 @@ public:
   // Get the X value : 
   double getX(double const & bin) {return bin * (m_max_x/m_size);}
   // Get the bin corresponding for a given X value
-  double getBin(double const & x) 
+  double getBin(double const & x) const
   {
     auto const & ret = int_cast(std::trunc(x*m_slope + m_intercept));
     return (ret>-1) ? ret : 0;
   }
 
   /// @brief First order calibration
-  void calibrateX(double const & slope, double const & intercept = 0)
+  void calibrateX(double const & intercept, double const & slope = 1)
   {
     m_min_x = m_min_x * slope + intercept;
     m_max_x = m_max_x * slope + intercept;
@@ -323,15 +323,20 @@ public:
     if (m_derivative) m_derivative->calibrateX(intercept, slope);
   }
   
+  // double difference(SpectraCo const & other, int const & bin)
+  // {
+  //   return m_spectra[bin] - other[other.getBin(spectra.getX(bin))];
+  // }
   
-  SpectraCo operator+(SpectraCo const & other);
-  SpectraCo operator-(SpectraCo const & other);
+  SpectraCo operator+(SpectraCo const & other) const;
+  SpectraCo operator-(SpectraCo const & other) const;
   SpectraCo operator*(double const & factor);
   SpectraCo operator/(double const & factor);
-  SpectraCo & operator*=(double const & factor);
+  SpectraCo& operator*=(double const & factor);
   void recalibrate(Recalibration const & recal);
   void calibrate(Calibration const & calib, Label const & label);
   void calibrate(std::vector<double> const & coeffs);
+  void calibrateAndScale(std::vector<double> const & coeffs);
   void resizeBin(size_t const & new_size);
   void resizeX(double const & maxX);
   void resizeX(double const & minX, double const & maxX);
@@ -477,7 +482,6 @@ void SpectraCo::load(TH1* root_spectra)
   }
   m_loaded_TH1 = root_spectra;
 
-
   m_name = root_spectra->GetName();
   m_title = root_spectra->GetTitle();
   
@@ -491,7 +495,7 @@ void SpectraCo::load(TH1* root_spectra)
   calculateCoeff();
 }
 
-SpectraCo SpectraCo::operator+(SpectraCo const & other)
+SpectraCo SpectraCo::operator+(SpectraCo const & other) const
 {
   if (other.m_size != m_size) throw SizeMissmatch("in operator+(SpectraCo const & other) : other size is different from that of this spectra");
   SpectraCo spectra(*this);// Optimize here
@@ -501,11 +505,11 @@ SpectraCo SpectraCo::operator+(SpectraCo const & other)
   return spectra;
 }
 
-SpectraCo SpectraCo::operator-(SpectraCo const & other)
+SpectraCo SpectraCo::operator-(SpectraCo const & other) const
 {
   if (other.m_size != m_size) throw SizeMissmatch("in operator+(SpectraCo const & other) : other size is different from that of this spectra");
   SpectraCo spectra(*this);// Optimize here
-  for (int bin = 0; bin<m_size; bin++) spectra[bin] -= other[bin];
+  for (int bin = 0; bin<m_size; bin++) spectra[bin] -= other[other.getBin(spectra.getX(bin))];
   spectra.name(spectra.name()+" - "+other.name());
   spectra.title(spectra.title()+" - "+other.title());
   return spectra;
@@ -597,13 +601,11 @@ void SpectraCo::calibrate(Calibration const & calib, Label const & label)
 
 void SpectraCo::calibrate(std::vector<double> const & coeffs)
 {
-  int order = coeffs.size()-1;
-  if (order<0) return;
-  else if (order<2)
-  {
-    this->calibrateX(coeffs[1], coeffs[0]); // calibrateX(slope, intercept(default = 0))
-  }
-  else 
+  int order = int_cast(coeffs.size()) - 1; // int_cast to avoid underflow issue do to size_t being unsigned
+       if (order<0) return;
+  else if (order == 0) {this->calibrateX(coeffs[0]);} // calibrateX(slope, intercept(default = 0))
+  else if (order == 1) {this->calibrateX(coeffs[0], coeffs[1]);}
+  else
   {
     std::vector<double> newSpectra(m_size);
     for (int bin = 0; bin<m_size; bin++)
@@ -612,18 +614,31 @@ void SpectraCo::calibrate(std::vector<double> const & coeffs)
       {
         case 2 : newSpectra[bin] = this->interpolate(coeffs[0] + bin*coeffs[1] + bin*bin*coeffs[2]); break;
         case 3 : newSpectra[bin] = this->interpolate(coeffs[0] + bin*coeffs[1] + bin*bin*coeffs[2] + bin*bin*bin*coeffs[3]); break;
+        case 4 : newSpectra[bin] = this->interpolate(coeffs[0] + bin*coeffs[1] + bin*bin*coeffs[2] + bin*bin*bin*coeffs[3] + bin*bin*bin*bin*coeffs[4]); break;
         default: error("SpectraCo::calibrate(vector<double> coeffs) : can't handle", order+1, "coefficients");
       }
     }
     m_spectra = newSpectra;
   }
 
-  // Replaces "adc" with "Energy" if found in the name and/or title :
+  // Estetics : Replaces "adc" with "Energy" if found in the name and/or title :
   replace(m_name, "adc", "Energy");
   replace(m_title, "adc", "Energy");
 
+  // Calibrate the derivative spectra if it exists as well
   if (m_derivative) m_derivative->calibrate(coeffs);
   calculateCoeff();
+}
+
+/**
+ * @brief Calibrates using the coeffs[0:n-1] coefficient then scale it using the coeffs.back() coefficient (spectra*=coeffs.back())
+ * @param coeffs: The last coefficient is used to scale, the other firsts to calibrate the x axis
+ */
+void SpectraCo::calibrateAndScale(std::vector<double> const & coeffs)
+{
+  if (coeffs.size() < 2) throw_error("in SpectraCo::calibrateAndScale(coeffs) : coeffs size needs to be at least 2 (first coeff is offset and second is scaling)");
+  this->calibrate(sub_vec(coeffs, 0, coeffs.size()-1));
+  (*this)*=coeffs.back();
 }
 
 double SpectraCo::interpolate(double const & _bin) const noexcept
@@ -651,7 +666,6 @@ void SpectraCo::removeBackground(int const & smooth, std::string const & fit_opt
   delete root_histo;
   if (file) file->cd();
 }
-
 
 double SpectraCo::integralInRangeBin(int const & bin_min, int const & bin_max) noexcept
 {

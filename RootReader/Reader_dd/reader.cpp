@@ -8,7 +8,7 @@
 #include <RWMat.hxx>
 #include <MTList.hpp>
 
-// #define QUALITY
+#define QUALITY
 
 Label_vec const blacklist = {800, 801};
 std::unordered_map<Label, double> const maxE_Ge = {{28, 7500}, {33, 8250}, {46, 9000}, {55, 7500}, {57, 6000}, 
@@ -34,7 +34,7 @@ inline float smear(float const & nrj, Label const & label)
   if (nrj>0)
   {
     if (isBGO[label]) return nrj;
-    else return random_gaussian(nrj, nrj*((400.0/sqrt(nrj))/100.0)/2.35);
+    else return randomCo::gaussian(nrj, nrj*((400.0/sqrt(nrj))/100.0)/2.35);
   }
   else return 0;
 }
@@ -69,7 +69,7 @@ private:
   std::vector<int> runs;
 
   // Histograms :
-
+#ifndef QUALITY
   MTTHist<TH1F> prompt_Ge;
   MTTHist<TH1F> delayed_Ge;
   MTTHist<TH1F> prompt_BGO;
@@ -172,18 +172,22 @@ private:
 
   MTTHist<TH2F> time_vs_run;
 
-  MTTHist<TH2F> delayed_Ge_M2_VS_total_Ge;
+  MTTHist<TH2F> delayed_Ge_C2_VS_total_Ge;
+  MTTHist<TH2F> delayed_Ge_C3_VS_total_Ge;
 
-  // Quality check :
+  #else //QUALITY
+
   Map_MTTHist<TH2F> time_vs_run_each_det;
   Map_MTTHist<TH2F> time_vs_det_each_run;
+
+  #endif//QUALITY
 };
 
 long Analysator::g_nb_max_hits = -1;
 
 void Analysator::Initialise()
 {
-  
+  randomCo::setSeed(time(0));
   detectors.load("index_129.list");
   random->SetSeed(time(0));
   Clovers::InitializeArrays();
@@ -300,19 +304,20 @@ void Analysator::Initialise()
   delayed_Ge_clean_VS_prompt_calo.reset("delayed_Ge_clean_VS_prompt_calo", "delayed Ge clean VS prompt calo", 500,0,15000,10000,0,10000);
   delayed_Ge_clean_VS_delayed_calo_wop.reset("delayed_Ge_clean_VS_delayed_calo_wop", "delayed Ge clean VS delayed calo with only one prompt before", 500,0,15000,10000,0,10000);
 
-  // When only 2 germaniums, plot both germaniums VS the sum of both
-  delayed_Ge_M2_VS_total_Ge.reset("delayed_Ge_M2_VS_total_Ge", "Clean Ge VS sum clean Ge", 5000,0,5000, 3000,0,3000);
+  // When only 2-3 germaniums, plot germaniums VS the sum of them
+  delayed_Ge_C2_VS_total_Ge.reset("delayed_Ge_C2_VS_total_Ge", "Clean Ge VS sum clean Ge C2", 5000,0,5000, 2000,0,4000);
+  delayed_Ge_C3_VS_total_Ge.reset("delayed_Ge_C3_VS_total_Ge", "Clean Ge VS sum clean Ge C3", 5000,0,5000, 2000,0,4000);
 
   preprompt_spectra.reset("preprompt_spectra", "preprompt spectra", 10000,0,10000);
 
-  int run_min = 70;
-  int run_max = 130;
-  int nb_runs = run_max-run_min;
-  time_vs_run.reset("time_vs_run","time vs run", nb_runs,run_min,run_max, 750, -1000, 500);
+  // time_vs_run.reset("time_vs_run","time vs run", nb_runs,run_min,run_max, 750, -1000, 500);
 
 
   // Run quality :
 #else // if QUALITY
+  int run_min = 70;
+  int run_max = 130;
+  int nb_runs = run_max-run_min;
   for (auto const & label : detectors.labels())
   {
     std::string name = "time_vs_run_"+detectors[label];
@@ -531,7 +536,6 @@ void Analysator::analyse(Nuball2Tree & tree, Event & event)
         }
         ++multiplicity_delayed;
       }
-
       spectra_all.Fill(label, nrj);
     }
     
@@ -632,12 +636,25 @@ void Analysator::analyse(Nuball2Tree & tree, Event & event)
     ///////////////////////
     // Clovers delayed : //
     ///////////////////////
-    auto const & clean_indexes = clovers_delayed.CleanGe;
+    auto const & clean_indexes = clovers_delayed.CleanGe; // Simple alias
 
-    // Calculate delayed calorimetry when 2 germaniums :
+    // Trigger : only one prompt in maximum 3*rf_period: 
+    bool one_close_prompt = false;
+    if (nb_prompts_with_gammas == 1) for (int prompt_i = 0; prompt_i<nb_prompts; ++prompt_i){
+      if (only_prompt[prompt_i] && prompt_i<3)
+      {
+        one_close_prompt = true;
+        break;
+    }}
+
+    // Calculate delayed calorimetry with 2 or 3 clean germaniums :
     double calo_2_Ge = 0.0;
-    bool M2P = (clean_indexes.size() == 2) && (nb_prompts_with_gammas == 1);
+    bool M2P = (clean_indexes.size() == 2) && one_close_prompt;
     if (M2P) for (auto const & clover_index : clean_indexes) calo_2_Ge+=clovers_delayed[clover_index].nrj;
+
+    double calo_3_Ge = 0.0;
+    bool M3P = (clean_indexes.size() == 3) && one_close_prompt;
+    if (M3P) for (auto const & clover_index : clean_indexes) calo_3_Ge+=clovers_delayed[clover_index].nrj;
 
     // Others :
     for (size_t clover_it_i = 0; clover_it_i<clean_indexes.size(); ++clover_it_i)
@@ -646,7 +663,8 @@ void Analysator::analyse(Nuball2Tree & tree, Event & event)
       auto const & nrj_i = clover_i.nrj;
       auto const & time_i = clover_i.time;
 
-      if (M2P) delayed_Ge_M2_VS_total_Ge.Fill(calo_2_Ge, nrj_i);
+      if (M2P) delayed_Ge_C2_VS_total_Ge.Fill(calo_2_Ge, nrj_i);
+      if (M3P) delayed_Ge_C3_VS_total_Ge.Fill(calo_3_Ge, nrj_i);
 
       delayed_E_VS_time_Ge_clean.Fill(time_i, nrj_i);
       delayed_E_VS_time_Ge_clean_wp.Fill(time_i, nrj_i);
@@ -700,14 +718,7 @@ void Analysator::analyse(Nuball2Tree & tree, Event & event)
       if (nb_prompts_with_gammas == 1)
       {
         delayed_Ge_clean_VS_prompt_calo.Fill(calo_prompts[0], nrj_i);
-
-        for (int prompt_i = 0; prompt_i<nb_prompts; ++prompt_i)
-        {
-          if (only_prompt[prompt_i] && prompt_i<3)
-          {
-            delayed_Ge_clean_VS_delayed_calo_wop.Fill(delayed_calorimetry, nrj_i);
-          }
-        }
+        if (one_close_prompt) delayed_Ge_clean_VS_delayed_calo_wop.Fill(delayed_calorimetry, nrj_i);
       }
     }
   
@@ -716,7 +727,7 @@ void Analysator::analyse(Nuball2Tree & tree, Event & event)
     for (int hit_i = 0; hit_i<event.mult; hit_i++)
     {
       auto const & label = event.labels[hit_i];
-      auto const & nrj   = event.nrjs  [hit_i];
+      // auto const & nrj   = event.nrjs  [hit_i];
       auto const & time  = event.times [hit_i];
       auto const & time_ns = time/1000.;
 
@@ -737,6 +748,7 @@ void Analysator::write()
   auto outfile(TFile::Open(g_outfilename.c_str(), "RECREATE"));
   outfile->cd();
 
+#ifndef QUALITY
   // RWMat RW_dd(dd); RW_dd.Write();
   dd.Write();
   dp.Write();
@@ -830,14 +842,14 @@ void Analysator::write()
   delayed_E_VS_time_Ge_clean.Write();
   delayed_E_VS_time_Ge_clean_wp.Write();
 
-  delayed_Ge_M2_VS_total_Ge.Write();
+  delayed_Ge_C2_VS_total_Ge.Write();
+  delayed_Ge_C3_VS_total_Ge.Write();
 
   E_VS_time_BGO_wp.Write();
   E_VS_time_LaBr_wp.Write();
   E_VS_time_NaI_wp.Write();
 
-  // QUALITY
-  #ifdef QUALITY
+  #else //QUALITY
   std::sort(runs.begin(), runs.end());
   for (auto const label : detectors.labels())
   {
@@ -862,7 +874,7 @@ void reader(int number_files = -1)
   else 
   {
     MTObject::Initialize(nb_threads);
-    Analysator::setMaxHits(1.e+6);
+    // Analysator::setMaxHits(1.e+6);
     Analysator analysator(number_files);
   }
   
