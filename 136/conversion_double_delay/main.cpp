@@ -756,7 +756,7 @@ void convert(Hit & hit, FasterReader & reader,
             if (!one_prompt_before) continue;
 
             r_buffer_it = last_prompt_pulse_index;
-            histos.time_first_prompt.Fill(buffer[last_prompt_pulse_index].label, dT_ns(ref_pulse_timestamp, buffer[last_prompt_pulse_index].stamp));
+            if (histoed) histos.time_first_prompt.Fill(buffer[last_prompt_pulse_index].label, dT_ns(ref_pulse_timestamp, buffer[last_prompt_pulse_index].stamp));
 
           // ||||||||||||||||||||||||||||||||||||||||||||||||||| //
           // ||| SECOND PART : CREATE THE EVENT AND WRITE IT ||| //
@@ -772,9 +772,12 @@ void convert(Hit & hit, FasterReader & reader,
             if (r_buffer_it > buffer.step()) while (--r_buffer_it > 0)
               if(buffer[r_buffer_it].stamp < back_event_window) break; // Here r_buffer_it points to the hit before the first hit of the event
 
-            histos.time_before_to_first_prompt.Fill(buffer[r_buffer_it].label, dT_ns(ref_pulse_timestamp, buffer[r_buffer_it].stamp));
-            histos.time_found_prompt.Fill(buffer[r_buffer_it+1].label, dT_ns(ref_pulse_timestamp, buffer[r_buffer_it+1].stamp));
-            histos.time_back_event_window.Fill(dT_ns(back_event_window, ref_pulse_timestamp));
+            if (histoed)
+            {
+              histos.time_before_to_first_prompt.Fill(buffer[r_buffer_it].label, dT_ns(ref_pulse_timestamp, buffer[r_buffer_it].stamp));
+              histos.time_found_prompt.Fill(buffer[r_buffer_it+1].label, dT_ns(ref_pulse_timestamp, buffer[r_buffer_it+1].stamp));
+              histos.time_back_event_window.Fill(dT_ns(back_event_window, ref_pulse_timestamp));
+            }
 
             // -------------------------//
             //7. --- Fill the Event --- //
