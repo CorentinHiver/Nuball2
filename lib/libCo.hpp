@@ -6,6 +6,15 @@
 #define _GLIBCXX_USE_CXX11_ABI 0/1
 #endif //_GLIBCXX_USE_CXX11_ABI
 
+// This is used to generate better debug symbols for drd :
+#ifdef DEBUG
+  #include <valgrind/drd.h>
+  #undef _GLIBCXX_SYNCHRONIZATION_HAPPENS_BEFORE
+  #undef _GLIBCXX_SYNCHRONIZATION_HAPPENS_AFTER
+  #define _GLIBCXX_SYNCHRONIZATION_HAPPENS_BEFORE(addr) ANNOTATE_HAPPENS_BEFORE(addr)
+  #define _GLIBCXX_SYNCHRONIZATION_HAPPENS_AFTER(addr)  ANNOTATE_HAPPENS_AFTER(addr)
+#endif //DEBUG
+
 // ********** Corentin Lib ************ //
 #include "print.hpp"
 #include "vector_functions.hpp"
@@ -219,7 +228,7 @@ using uchar  = unsigned char       ;
 using ushort = unsigned short int  ;
 using uint   = unsigned int        ;
 using ulong  = unsigned long int   ;
-using longlong  = long long int ;
+using longlong  = long long int    ;
 using ulonglong  = unsigned long long int ;
 using size_t = std::size_t;
 

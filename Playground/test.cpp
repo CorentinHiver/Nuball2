@@ -3,7 +3,8 @@
 // #include <Calibration.hpp>
 // #include <Calibrator.hpp>
 // #include <RunMatrixator.hpp>
-#include <SpectraAlignator.hpp>
+// #include <SpectraAlignator.hpp>
+// #include <FasterReader.hpp>
 // #include <Detectors.hpp>
 // #include <Timeshifts.hpp>
 // #include <Convertor.hpp>
@@ -24,9 +25,15 @@ int main(int argc, char ** argv)
   //   Timeshifts   //
   ////////////////////
 
-  // Timeshifts ts;
-  // ts.set
+  std::vector<std::thread> threads;
 
+  for (int thread_i = 0; thread_i<2; ++thread_i){
+    threads.emplace_back([&](){
+      thread_local std::unique_ptr<TTree> tempTree (new TTree("temp","temp"));
+    tempTree -> SetDirectory(nullptr); // Force it to be created on RAM rather than on disk - much faster if enough RAM
+    hit.writting(tempTree.get(), "lsEQp");
+    })
+  }
 
 
   // detectors.load("index_129.list");
@@ -436,193 +443,206 @@ int main(int argc, char ** argv)
 
   // // fuse_all_histo("histos/", true);
 
-  Minimisator::g_nb_rounds = 100;
 
-  auto file_ref = TFile::Open("histos/run_80_matrixated.root", "READ");
-  file_ref->cd();
-  // auto histo_ref = file_ref->Get<TH1F>("R3A1_BGO1_prompt_singles");
-  auto histo_ref = file_ref->Get<TH1F>("R3A1_black_prompt_singles");
-  // auto histo_ref = file_ref->Get<TH1F>("PARIS_BR3D2_delayed_singles");
-  // // auto histo_ref = file_ref->Get<TH1F>("PARIS_BR3D2_prompt_singles");
-  SpectraCo spectrum_ref(histo_ref);
-  spectrum_ref.name()+="_ref";
 
-  // // auto histo_ref = file_ref->Get<TH1F>("PARIS_BR3D2_prompt_singles");
-  // // histo_ref->Rebin(2);
+
+  //////////////////
+  // MINIMISATEUR //
+  //////////////////
+
+
+
+  // Minimisator::g_nb_rounds = 100;
+
+  // auto file_ref = TFile::Open("histos/run_80_matrixated.root", "READ");
+  // file_ref->cd();
+  // // auto histo_ref = file_ref->Get<TH1F>("R3A1_BGO1_prompt_singles");
+  // auto histo_ref = file_ref->Get<TH1F>("R3A1_black_prompt_singles");
+  // // auto histo_ref = file_ref->Get<TH1F>("PARIS_BR3D2_delayed_singles");
+  // // // auto histo_ref = file_ref->Get<TH1F>("PARIS_BR3D2_prompt_singles");
   // SpectraCo spectrum_ref(histo_ref);
-  // spectrum_ref.removeBackground(20);
-  // delete histo_ref; histo_ref = spectrum_ref.createTH1F();
-  // SpectraAlignator alignator(histo_ref);
-  // if (argc>1) alignator.setIterations(std::stoi(argv[1]));
-  // alignator.setBruteForce();
+  // spectrum_ref.name()+="_ref";
 
-  auto file_test = TFile::Open("histos/run_101_matrixated.root", "READ");
-  // auto histo_test = file_test->Get<TH1F>("R3A1_BGO1_prompt_singles");
-  auto histo_test = file_test->Get<TH1F>("R3A1_black_prompt_singles");
-  // auto histo_test = file_test->Get<TH1F>("PARIS_BR3D2_delayed_singles");
-  SpectraCo spectrum_test(histo_test);
-  spectrum_test.name()+="_test";
-  // spectrum_test.removeBackground(20);
-  // // auto histo_test = file_test->Get<TH1F>("PARIS_BR3D2_prompt_singles");
-  // // histo_test->Rebin(2);
-  // auto histo_test_realigned = new TH1F();
-  // // auto free_degrees = 4;
-  // // // print(argc);
-  // // // if (argc>3) deg = std::stoi(argv[2]);
-  // delete histo_test; histo_test = spectrum_test.createTH1F();
+  // // // auto histo_ref = file_ref->Get<TH1F>("PARIS_BR3D2_prompt_singles");
+  // // // histo_ref->Rebin(2);
+  // // SpectraCo spectrum_ref(histo_ref);
+  // // spectrum_ref.removeBackground(20);
+  // // delete histo_ref; histo_ref = spectrum_ref.createTH1F();
+  // // SpectraAlignator alignator(histo_ref);
+  // // if (argc>1) alignator.setIterations(std::stoi(argv[1]));
+  // // alignator.setBruteForce();
 
-  // alignator.alignSpectra(spectrum_test.createTH1F(), histo_test_realigned);
-  // alignator.newAlignement(spectrum_test.createTH1F(), histo_test_realigned);
+  // auto file_test = TFile::Open("histos/run_101_matrixated.root", "READ");
+  // // auto histo_test = file_test->Get<TH1F>("R3A1_BGO1_prompt_singles");
+  // auto histo_test = file_test->Get<TH1F>("R3A1_black_prompt_singles");
+  // // auto histo_test = file_test->Get<TH1F>("PARIS_BR3D2_delayed_singles");
+  // SpectraCo spectrum_test(histo_test);
+  // spectrum_test.name()+="_test";
+  // // spectrum_test.removeBackground(20);
+  // // // auto histo_test = file_test->Get<TH1F>("PARIS_BR3D2_prompt_singles");
+  // // // histo_test->Rebin(2);
+  // // auto histo_test_realigned = new TH1F();
+  // // // auto free_degrees = 4;
+  // // // // print(argc);
+  // // // // if (argc>3) deg = std::stoi(argv[2]);
+  // // delete histo_test; histo_test = spectrum_test.createTH1F();
 
-  auto diff = spectrum_ref-spectrum_test;
-  diff.name ("diff");
-  diff.title("diff");
+  // // alignator.alignSpectra(spectrum_test.createTH1F(), histo_test_realigned);
+  // // alignator.newAlignement(spectrum_test.createTH1F(), histo_test_realigned);
 
-  auto diffSquare(diff);
-  diffSquare.name ("diff calc");
-  diffSquare.title("diff calc");
-  for (int bin_i = 0; bin_i<diffSquare.size(); bin_i++)
-  {
-    if (spectrum_ref[bin_i]==0 || spectrum_test[bin_i]==0) continue;
-    double const & weight = (1/spectrum_ref[bin_i] + 1/spectrum_test[bin_i])/2; // V = sigma² = 1/N,
-    diffSquare[bin_i] = diff[bin_i]*diff[bin_i]*weight;
-  }
-  
-  Minimisator min;
+  // auto diff = spectrum_ref-spectrum_test;
+  // diff.name ("diff");
+  // diff.title("diff");
 
-  ObjectiveFunctionChi2 func(&spectrum_ref, &spectrum_test);
-  // print(func.evaluate({5, 1, 1}));
-  // print(func.evaluate({0, 1, 1}));
-  // min.setInitialGuess({ -4, 0.9, 0.5});
-  // min.setInitialSteps({8, 0.2, 1});
-  min.setInitialGuess({ -4, 0.9, -1.e-4, 0.5});
-  min.setInitialSteps({8, 0.2, 2.e-4, 1});
-  min.nelderMead(func);
-  auto minVertice = min.getMinimum();
-  print("optimized minimum :", minVertice);
-  // min.setInitialSteps({-10, -0.1, 0.5});
-  // min.nelderMead(func);
-  // auto minVertice2 = min.getMinimum();
-  // auto minVertice(std::min(minVertice1, minVertice2));
-
-  auto spectrum_test_recal(spectrum_test);
-  spectrum_test_recal.name()+="_recal";
-  spectrum_test_recal.calibrate(sub_vec(minVertice.get(), 0, minVertice.size()-1));
-
-  // TestObjectiveFunction func;
-  // min.setInitialGuess({0.0, 10.0});
-  // min.setInitialSteps({2.0, 2.0});
-  // min.nelderMead(func);
-
-  print("creating chi2 graph");
-  std::vector<double> x; 
-  for (size_t i = 0; i<min.g_minimums.size(); i++) x.push_back(i);
-  auto graph = new TGraph(x.size(), x.data(), min.g_minimums.data());
-
-  std::string name = "test_recal.root";
-  // std::string name = "test_derivatives.root";
-
-  auto minima = new TH2F("minima", "minima", 1000, -5, 5, 1000, 0.9, 1.1);
-  for (auto const & vertice : min.g_minima_history)
-  {
-    minima->Fill(vertice[0], vertice[1]);
-  }
-
-  int nb_points = 500;
-  auto function = new TH2F("function", "function", nb_points, -5, 5, nb_points, 0.9, 1.1);
-  auto const & min_a2 = minVertice[2];
-  auto const & min_a3 = minVertice[3];
-  auto const & min_C = minVertice.get().back();
-  for (double bin_a0 = 0; bin_a0<nb_points; bin_a0++) {for (double bin_a1 = 0; bin_a1<nb_points; bin_a1++)
-  {
-    auto const & a0 = function->GetXaxis()->GetBinCenter(bin_a0);
-    auto const & a1 = function->GetYaxis()->GetBinCenter(bin_a1);
-    if (minVertice.size() == 3) function->Fill(a0, a1, func.evaluate({a0, a1, min_C}));
-    if (minVertice.size() == 4) function->Fill(a0, a1, func.evaluate({a0, a1, min_a2, min_C}));
-    if (minVertice.size() == 5) function->Fill(a0, a1, func.evaluate({a0, a1, min_a2, min_a3, min_C}));
-  }
-    // pauseCo();
-  }
-
-  // print("creating chi2 graph 3D");
-  // int nb_points_3D = 100;
-  // auto function3D = new TH3F("function3D", "function3D", nb_points_3D,-10,10, nb_points_3D,0.9,1.1, nb_points_3D,0.8, 1.2);
-  // for (double bin_a0 = 0; bin_a0<nb_points_3D; bin_a0++) {for (double bin_a1 = 0; bin_a1<nb_points_3D; bin_a1++) for (double bin_C = 0; bin_C<nb_points_3D; bin_C++)
+  // auto diffSquare(diff);
+  // diffSquare.name ("diff calc");
+  // diffSquare.title("diff calc");
+  // for (int bin_i = 0; bin_i<diffSquare.size(); bin_i++)
   // {
-  //   auto const & a0 = function3D->GetXaxis()->GetBinCenter(bin_a0);
-  //   auto const & a1 = function3D->GetYaxis()->GetBinCenter(bin_a1);
-  //   auto const & C = function3D->GetZaxis()->GetBinCenter(bin_C);
-  //   function3D->Fill(a0, a1, C, func.evaluate({a0, a1, C}));
+  //   if (spectrum_ref[bin_i]==0 || spectrum_test[bin_i]==0) continue;
+  //   double const & weight = (1/spectrum_ref[bin_i] + 1/spectrum_test[bin_i])/2; // V = sigma² = 1/N,
+  //   diffSquare[bin_i] = diff[bin_i]*diff[bin_i]*weight;
+  // }
+  
+  // Minimisator min;
+
+  // ObjectiveFunctionChi2 func(&spectrum_ref, &spectrum_test);
+  // // print(func.evaluate({5, 1, 1}));
+  // // print(func.evaluate({0, 1, 1}));
+  // // min.setInitialGuess({ -4, 0.9, 0.5});
+  // // min.setInitialSteps({8, 0.2, 1});
+  // min.setInitialGuess({ -4, 0.9, -1.e-4, 0.5});
+  // min.setInitialSteps({8, 0.2, 2.e-4, 1});
+  // min.nelderMead(func);
+  // auto minVertice = min.getMinimum();
+  // print("optimized minimum :", minVertice);
+  // // min.setInitialSteps({-10, -0.1, 0.5});
+  // // min.nelderMead(func);
+  // // auto minVertice2 = min.getMinimum();
+  // // auto minVertice(std::min(minVertice1, minVertice2));
+
+  // auto spectrum_test_recal(spectrum_test);
+  // spectrum_test_recal.name()+="_recal";
+  // spectrum_test_recal.calibrate(sub_vec(minVertice.get(), 0, minVertice.size()-1));
+
+  // // TestObjectiveFunction func;
+  // // min.setInitialGuess({0.0, 10.0});
+  // // min.setInitialSteps({2.0, 2.0});
+  // // min.nelderMead(func);
+
+  // print("creating chi2 graph");
+  // std::vector<double> x; 
+  // for (size_t i = 0; i<min.g_minimums.size(); i++) x.push_back(i);
+  // auto graph = new TGraph(x.size(), x.data(), min.g_minimums.data());
+
+  // std::string name = "test_recal.root";
+  // // std::string name = "test_derivatives.root";
+
+  // auto minima = new TH2F("minima", "minima", 1000, -5, 5, 1000, 0.9, 1.1);
+  // for (auto const & vertice : min.g_minima_history)
+  // {
+  //   minima->Fill(vertice[0], vertice[1]);
+  // }
+
+  // int nb_points = 500;
+  // auto function = new TH2F("function", "function", nb_points, -5, 5, nb_points, 0.9, 1.1);
+  // auto const & min_a2 = minVertice[2];
+  // auto const & min_a3 = minVertice[3];
+  // auto const & min_C = minVertice.get().back();
+  // for (double bin_a0 = 0; bin_a0<nb_points; bin_a0++) {for (double bin_a1 = 0; bin_a1<nb_points; bin_a1++)
+  // {
+  //   auto const & a0 = function->GetXaxis()->GetBinCenter(bin_a0);
+  //   auto const & a1 = function->GetYaxis()->GetBinCenter(bin_a1);
+  //   if (minVertice.size() == 3) function->Fill(a0, a1, func.evaluate({a0, a1, min_C}));
+  //   if (minVertice.size() == 4) function->Fill(a0, a1, func.evaluate({a0, a1, min_a2, min_C}));
+  //   if (minVertice.size() == 5) function->Fill(a0, a1, func.evaluate({a0, a1, min_a2, min_a3, min_C}));
   // }
   //   // pauseCo();
   // }
 
-  std::vector<TGraph*> graphs;
-  int i = 0;
-  for (auto const & simplex : min.g_simplex_history)
-  {
-    i++;
-    std::vector<double> x;
-    std::vector<double> y;
-    for (auto const & vertice : simplex)
-    {
-      x.push_back(vertice[0]);
-      y.push_back(vertice[1]);
-    }
-    graphs.push_back(new TGraph(simplex.size(), x.data(), y.data()));
-    auto & graph = graphs.back(); // alias
-    graph->SetName(("g"+std::to_string(i)).c_str());
-    graph->SetLineColor(kBlue);
-    graph->SetLineWidth(2);
-    graph->SetMarkerColor(kRed);
-    graph->SetMarkerSize(2);
-  }
+  // // print("creating chi2 graph 3D");
+  // // int nb_points_3D = 100;
+  // // auto function3D = new TH3F("function3D", "function3D", nb_points_3D,-10,10, nb_points_3D,0.9,1.1, nb_points_3D,0.8, 1.2);
+  // // for (double bin_a0 = 0; bin_a0<nb_points_3D; bin_a0++) {for (double bin_a1 = 0; bin_a1<nb_points_3D; bin_a1++) for (double bin_C = 0; bin_C<nb_points_3D; bin_C++)
+  // // {
+  // //   auto const & a0 = function3D->GetXaxis()->GetBinCenter(bin_a0);
+  // //   auto const & a1 = function3D->GetYaxis()->GetBinCenter(bin_a1);
+  // //   auto const & C = function3D->GetZaxis()->GetBinCenter(bin_C);
+  // //   function3D->Fill(a0, a1, C, func.evaluate({a0, a1, C}));
+  // // }
+  // //   // pauseCo();
+  // // }
 
-  auto file_out = TFile::Open(name.c_str(), "RECREATE");
-  file_out->cd();
-  graph->Write();
-  function->Write();
-  // function3D->Write();
-  minima->Write();
+  // std::vector<TGraph*> graphs;
+  // int i = 0;
+  // for (auto const & simplex : min.g_simplex_history)
+  // {
+  //   i++;
+  //   std::vector<double> x;
+  //   std::vector<double> y;
+  //   for (auto const & vertice : simplex)
+  //   {
+  //     x.push_back(vertice[0]);
+  //     y.push_back(vertice[1]);
+  //   }
+  //   graphs.push_back(new TGraph(simplex.size(), x.data(), y.data()));
+  //   auto & graph = graphs.back(); // alias
+  //   graph->SetName(("g"+std::to_string(i)).c_str());
+  //   graph->SetLineColor(kBlue);
+  //   graph->SetLineWidth(2);
+  //   graph->SetMarkerColor(kRed);
+  //   graph->SetMarkerSize(2);
+  // }
 
-
-  // histo_ref->SetLineColor(kRed);
-  // histo_ref->Write();
-  // histo_test->SetName((histo_test->GetName()+std::string("_before")).c_str());
-  // histo_test->SetTitle((histo_test->GetName()+std::string("_before")).c_str());
-  // histo_test->SetLineStyle(2);
-  diff.write();
-  diffSquare.write();
-  auto ref_histo = spectrum_ref.createTH1F();
-  auto test_histo = spectrum_test.createTH1F();
-  auto test_recal_histo = spectrum_test_recal.createTH1F();
-  ref_histo->SetLineColor(kRed);
-  test_histo->SetLineColor(kBlue);
-  test_recal_histo->SetLineColor(kBlue);
-  test_recal_histo->SetLineStyle(2);
-  ref_histo->Write();
-  test_histo->Write();
-  test_recal_histo->Write();
-
-  for (auto & graph : graphs) graph->Write();
-  // histo_test->SetLineColor(kBlue);
-  // histo_test->Write();
-  // histo_test_realigned->SetLineColor(kBlue);
-  // spectrum_test.write();
-  // spectrum_test_recal.write();
-  // alignator.writeChi2Spectra(file_out);
-
-  // // auto diff = (SpectraCo(histo_ref) - SpectraCo(histo_test_realigned)).createTH1F();
-  // // diff->Write();
-
-  file_out->Write();
-  file_out->Close();
-  print(name, "written");
-
-  file_ref->Close();
-  file_test->Close();
+  // auto file_out = TFile::Open(name.c_str(), "RECREATE");
+  // file_out->cd();
+  // graph->Write();
+  // function->Write();
+  // // function3D->Write();
+  // minima->Write();
 
 
+  // // histo_ref->SetLineColor(kRed);
+  // // histo_ref->Write();
+  // // histo_test->SetName((histo_test->GetName()+std::string("_before")).c_str());
+  // // histo_test->SetTitle((histo_test->GetName()+std::string("_before")).c_str());
+  // // histo_test->SetLineStyle(2);
+  // diff.write();
+  // diffSquare.write();
+  // auto ref_histo = spectrum_ref.createTH1F();
+  // auto test_histo = spectrum_test.createTH1F();
+  // auto test_recal_histo = spectrum_test_recal.createTH1F();
+  // ref_histo->SetLineColor(kRed);
+  // test_histo->SetLineColor(kBlue);
+  // test_recal_histo->SetLineColor(kBlue);
+  // test_recal_histo->SetLineStyle(2);
+  // ref_histo->Write();
+  // test_histo->Write();
+  // test_recal_histo->Write();
+
+  // for (auto & graph : graphs) graph->Write();
+  // // histo_test->SetLineColor(kBlue);
+  // // histo_test->Write();
+  // // histo_test_realigned->SetLineColor(kBlue);
+  // // spectrum_test.write();
+  // // spectrum_test_recal.write();
+  // // alignator.writeChi2Spectra(file_out);
+
+  // // // auto diff = (SpectraCo(histo_ref) - SpectraCo(histo_test_realigned)).createTH1F();
+  // // // diff->Write();
+
+  // file_out->Write();
+  // file_out->Close();
+  // print(name, "written");
+
+  // file_ref->Close();
+  // file_test->Close();
+
+
+
+  //////////////////
+  // MINIMISATEUR //
+  //////////////////
 
 
 

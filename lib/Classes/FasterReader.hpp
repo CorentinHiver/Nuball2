@@ -200,18 +200,18 @@ bool inline FasterReader::Initialize()
   // Check if the file can be open and read :
   if (m_filename == "")
   {
-    std::cout << "No file " << m_filename << std::endl;
+    print("No file ", m_filename);
     return false;
   }
-  std::ifstream file(m_filename);
+  thread_local std::ifstream file(m_filename);
   if (!file.is_open())
   {
-    std::cout << "File " << m_filename << " not found..." << std::endl;
+    print("File ", m_filename, " not found...");
     return false;
   }
   else if (!file.good())
   {
-    std::cout << "File " << m_filename << " not good..." << std::endl;
+    print("File ", m_filename, " not good...");
     return false;
   }
   file.close();
@@ -219,12 +219,12 @@ bool inline FasterReader::Initialize()
   // Check the extension of the file, then initialise the reader :
   if (extension(m_filename) == "fast")
   {
-    std::cout << "Reader set to " << m_filename << std::endl;
+    print("Reader set to ", m_filename );
     return InitializeReader();
   }
   else
   {
-    std::cout << "File " << m_filename << " not a .fast file !!" << std::endl;
+    print("File ", m_filename, " not a .fast file !!");
     m_kReady = false; return false;
   }
   return (m_kReady = true);
@@ -236,7 +236,7 @@ bool FasterReader::InitializeReader()
   m_reader = faster_file_reader_open ( m_filename.c_str() );
   if (m_reader == NULL)
   {
-    std::cout << "Faster file " << m_filename << " impossible to open" << std::endl;
+    print("Faster file ", m_filename, " impossible to open");
     m_kReady = false; return false;
   }
   return true;
@@ -348,7 +348,7 @@ bool inline FasterReader::ReadData(faster_data_p const & _data)
     // When read a label of a group, then go to ReadDataGroup() to fill in m_hit_group_buffer recursively
     ReadDataGroup(_data);
   #else //!FASTER_GROUP
-    std::cout << "COMPILE IN GROUP MODE !!!" << std::endl;
+    print("COMPILE IN GROUP MODE !!!");
   #endif //FASTER_GROUP
   }
   m_hit -> stamp = Timestamp_cast(faster_data_hr_clock_ns(_data) * 1000);// Stores the timestamp in ps
@@ -517,7 +517,7 @@ void inline FasterReader::TreatQDC2(const faster_data_p& data)
 #ifdef QDC1MAX
   if (!error_message["QDC2"])
   {
-    std::cout << "QDC2 found despite #define QDC1MAX " << std::endl;
+    print("QDC2 found despite #define QDC1MAX ");
     error_message["QDC2"] = true;
   }
 #else
@@ -525,7 +525,7 @@ void inline FasterReader::TreatQDC2(const faster_data_p& data)
   #ifdef QDC2MAX
   if (!error_message["QDC2"])
   {
-    std::cout << "QDC2 found despite #define QDC1MAX or #define QDC2MAX" << std::endl;
+    print("QDC2 found despite #define QDC1MAX or #define QDC2MAX");
     error_message["QDC2"] = true;
   }
   #else 
@@ -549,7 +549,7 @@ void inline FasterReader::TreatQDC3(const faster_data_p& data)
 #ifdef QDC1MAX
   if (!error_message["QDC3"])
   {
-    std::cout << "QDC3 found despite #define QDC1MAX " << std::endl;
+    print("QDC3 found despite #define QDC1MAX ");
     error_message["QDC3"] = true;
   }
 #else
@@ -557,7 +557,7 @@ void inline FasterReader::TreatQDC3(const faster_data_p& data)
   #ifdef QDC2MAX
   if (!error_message["QDC3"])
   {
-    std::cout << "QDC3 found despite #define QDC1MAX or #define QDC2MAX" << std::endl;
+    print("QDC3 found despite #define QDC1MAX or #define QDC2MAX");
     error_message["QDC3"] = true;
   }
   #else 

@@ -463,7 +463,8 @@ void convert(Hit & hit, FasterReader & reader,
   // ------------------------------ //
   // Initialize the temporary TTree //
   // ------------------------------ //
-  std::unique_ptr<TTree> tempTree (new TTree("temp","temp"));
+  std::string const & tempTree_name = "temp"+std::to_string(MTObject::getThreadIndex());
+  std::unique_ptr<TTree> tempTree (new TTree(tempTree_name.c_str(),tempTree_name.c_str()));
   tempTree -> SetDirectory(nullptr); // Force it to be created on RAM rather than on disk - much faster if enough RAM
   hit.writting(tempTree.get(), "lsEQp");
 
