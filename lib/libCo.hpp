@@ -18,6 +18,7 @@
 #include <any>
 #include <array>
 #include <cstdlib>
+#include <ctime>
 #include <fstream>
 #include <functional>
 #include <memory>
@@ -88,6 +89,62 @@ std::ostream& operator<<(std::ostream& cout, std::array<E,size> const & a)
 //////////////
 //   UTILS  //
 //////////////
+
+/// @brief Returns a string in the format mm_hh_dd_mm_yy
+std::string time_string()
+{
+  std::time_t currentTime = std::time(nullptr);
+  std::tm* timeinfo = std::localtime(&currentTime);
+  if (timeinfo != nullptr) {
+    // Extract hours, day, and year
+    int min  = timeinfo->tm_min;
+    int hour = timeinfo->tm_hour;
+    int day  = timeinfo->tm_mday;
+    int mon  = timeinfo->tm_mon;
+    int year = timeinfo->tm_year % 100; // Get last two digits of the year
+
+    std::stringstream ss;
+    // Print the time in the desired format
+    ss << std::setfill('0') 
+       << std::setw(2) << min  << "_" 
+       << std::setw(2) << hour << "_"
+       << std::setw(2) << day  << "_"
+       << std::setw(2) << mon  << "_"
+       << std::setw(2) << year;
+    return ss.str();
+  } else {
+    std::cerr << "Failed to get current time." << std::endl;
+    return "";
+  }
+}
+
+/// @brief Returns a string in the format yy_mm_dd_hh_mm
+std::string time_string_inverse()
+{
+  std::time_t currentTime = std::time(nullptr);
+  std::tm* timeinfo = std::localtime(&currentTime);
+  if (timeinfo != nullptr) {
+    // Extract hours, day, and year
+    int min  = timeinfo->tm_min;
+    int hour = timeinfo->tm_hour;
+    int day  = timeinfo->tm_mday;
+    int mon  = timeinfo->tm_mon;
+    int year = timeinfo->tm_year % 100; // Get last two digits of the year
+
+    std::stringstream ss;
+    // Print the time in the desired format
+    ss << std::setfill('0') 
+       << std::setw(2) << year << "_"
+       << std::setw(2) << mon  << "_" 
+       << std::setw(2) << day  << "_"
+       << std::setw(2) << hour << "_"
+       << std::setw(2) << min;
+    return ss.str();
+  } else {
+    std::cerr << "Failed to get current time." << std::endl;
+    return "";
+  }
+}
 
 void throw_error(std::string const & message) {throw std::runtime_error(concatenate(RED, message, RESET));}
 

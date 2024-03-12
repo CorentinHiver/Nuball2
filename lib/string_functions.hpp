@@ -7,6 +7,15 @@
 #include <sstream>
 
 /// @brief Returns the string to the left of the first occurence of sep in the string
+std::string firstPart       (std::string const & string, std::string const & sep) { return (string.substr(0, string.find_first_of(sep) ));  }
+/// @brief Returns the string to the right of the last occurence of sep in the string
+std::string lastPart        (std::string const & string, std::string const & sep) { return (string.substr(   string.find_last_of(sep)+1));  }
+/// @brief Returns the string to the right of the first occurence of sep in the string
+std::string removeFirstPart (std::string const & string, std::string const & sep) { return (string.substr(   string.find_first_of(sep) ));  }
+/// @brief Returns the string to the left of the last occurence of sep in the string
+std::string removeLastPart  (std::string const & string, std::string const & sep) { return (string.substr(0, string.find_last_of(sep)  ));  }
+
+/// @brief Returns the string to the left of the first occurence of sep in the string
 std::string firstPart       (std::string const & string, char const & sep) { return (string.substr(0, string.find_first_of(sep) ));  }
 /// @brief Returns the string to the right of the last occurence of sep in the string
 std::string lastPart        (std::string const & string, char const & sep) { return (string.substr(   string.find_last_of(sep)+1));  }
@@ -23,7 +32,6 @@ std::string removeLastPart  (std::string const & string, char const & sep) { ret
  * with removeVoids this function returns {"", "1", "2", "3", "", "5"}
  * 
 */
-
 void fillList(std::vector<std::string> & list, std::string string, char const & separator, bool const & removeVoids = false)
 {
   size_t pos = 0;
@@ -55,6 +63,11 @@ std::vector<std::string> getList(std::string string, char const & separator, boo
   std::vector<std::string> ret;
   fillList(ret, string, separator, removeVoids);
   return ret;
+}
+
+std::vector<std::string> split(std::string string, char const & separator, bool const & removeVoids = false)
+{
+  return getList(string, separator, removeVoids);
 }
 
 /// @brief Remove all the blank space in a string

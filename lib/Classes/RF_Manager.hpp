@@ -81,7 +81,7 @@ public:
   template<class... ARGS>
   float pulse_ToF_ns(ARGS... args) {return (static_cast<float>(pulse_ToF(std::forward<ARGS>(args)...))/1000.f);}
 
-  void set(Timestamp new_timestamp, Timestamp _period) 
+  void inline set(Timestamp new_timestamp, Timestamp _period) 
   {
     auto const & tperiod = Time_cast(new_timestamp-last_downscale);
     if (tperiod > 0 && tperiod<1.5*period*1000000) period = double_cast(tperiod)/1000.;
@@ -99,7 +99,7 @@ public:
   static Label label;
 
 private:
-  Time static m_offset;
+  static Time m_offset;
 };
 
 Time  RF_Manager::m_offset = 50000 ;

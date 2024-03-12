@@ -129,7 +129,7 @@ public:
   void setT0(Timestamp const & timestamp)
   {
     auto const & shift = Time_cast(this->stamp - timestamp);
-    (read.T) ? this -> timeShift_ns(shift/1000.) : this -> timeShift(shift);
+    this -> timeShift(shift);
   }
 
   void timeShift(Time const & shift)

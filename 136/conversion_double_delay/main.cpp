@@ -24,14 +24,15 @@ std::vector<double> g_trigger_blacklist = {70, 97};
 double const & g_rf_offset_ns = 25.0;
 double const & g_begin_prompt_ns = -10;
 double const & g_end_prompt_ns = 5;
-double const & g_begin_delayed_ns = 30.0;// The first Ge must hit after this
-double const & g_end_delayed_ns = 180.0;// The first Ge must hit before this
+double const & g_begin_prompt_PARIS_ns = -5;
+double const & g_end_prompt_PARIS_ns = 3;
+double const & g_begin_delayed_ns = 30.0;// The first Ge must hit after this timestamp
+double const & g_end_delayed_ns = 180.0;// The first Ge must hit before this timestamp
 bool const & g_prompt_trigger = false; // If we require a prompt or not
 int g_n_prev_pulses = 4; // Number of pulses before the trigger to take
 
   // Time windows :
-Time const & g_Ge_coinc_tw_ns = 50; // time window in ns
-Time const & g_BGO_coinc_tw_ns = 100; // time window in ns
+Time const & g_coinc_tw_ns = 50; // time window in ns
 
 // std::vector<Label> g_trigger_blacklist = {70};
 
@@ -52,6 +53,7 @@ bool single_clean = false;
 std::string one_run_folder = "";
 ulonglong max_hits = -1;
 bool treat_129 = false;
+std::string output_fileinfo_name = "";
 
 bool extend_periods = false; // To take more than one period after a event trigger
 uint nb_periods_more = 0; // Number of periods to extend after an event that triggered
@@ -77,9 +79,31 @@ std::map<char, std::string> trigger_name =
 
 std::string trigger_legend = "Legend : P = particle. G = Germanium. M = Module. _ = OR.";
 
+struct RunInfo
+{
+  RunInfo() noexcept = default;
+
+  static inline void writeHeader(std::ofstream& outfile)
+  {
+    outfile << "run_name run_number compression_factor trigger_efficiency nb_files Mo_per_sec" << std::endl;
+  }
+
+  inline void writeLine(std::ofstream& outfile)
+  {
+    outfile << run_name << " " << run_number << " " << compression_factor << " " << trigger_efficiency << " " << nb_files << " " << Mo_per_sec;
+  }
+
+  std::string run_name;
+  int    run_number = 0;
+  double compression_factor = 0.0;
+  double trigger_efficiency = 0.0;
+  int    nb_files = 0;
+  double Mo_per_sec = 0.0;
+};
+
 struct Histos
 {
-  MTTHist<TH1F> energy_all_Ge_raw;
+  MTTHist<TH1F> energy_all_Ge_trigg;
   MTTHist<TH1F> rf_all_raw;
   MTTHist<TH2F> energy_each_raw;
   MTTHist<TH2F> rf_each_raw;
@@ -131,6 +155,12 @@ struct Histos
   MTTHist<TH1F> promptGe_clean;
   MTTHist<TH1F> promptGe_vetoed;
 
+  MTTHist<TH2F> time_VS_det;
+  MTTHist<TH2F> time_first_prompt;
+  MTTHist<TH2F> time_found_prompt;
+  MTTHist<TH1F> time_back_event_window;
+  MTTHist<TH2F> time_before_to_first_prompt;
+
   
   TH1F* rf_evolution = nullptr;
 
@@ -138,7 +168,13 @@ struct Histos
   {
     auto const & nbDet = detectors.number();
 
-    energy_all_Ge_raw.reset("energy_all_Ge_raw", "Ge spectra raw", 20000,0,10000);
+    time_VS_det.reset("time_VS_det", "time VS det", 1000,0,1000, 500,-500,500);
+    time_first_prompt.reset("time_first_prompt", "time first prompt", 1000,0,1000, 1000,-1000,500);
+    time_found_prompt.reset("time_found_prompt", "time found prompt", 1000,0,1000, 1000,-1000,500);
+    time_back_event_window.reset("time_back_event_window", "time back event window", 1000,-1000,500);
+    time_before_to_first_prompt.reset("time_before_to_first_prompt", "time before to first prompt", 1000,0,1000, 10000,-10000,500);
+    
+    energy_all_Ge_trigg.reset("energy_all_Ge_trigg", "Ge spectra raw", 20000,0,10000);
     rf_all_raw.reset("rf_all_raw", "RF Time spectra raw", 2000, -1200, 800);
     energy_each_raw.reset("energy_each_raw", "Energy spectra each raw", nbDet,0,nbDet, 5000,0,15000);
     rf_each_raw.reset("rf_each_raw", "RF timing each raw", nbDet,0,nbDet, 2000, -1200, 800);
@@ -207,10 +243,18 @@ inline bool handleRf(RF_Manager & rf, Hit const & hit, Event & event, TTree * tr
   else return false;
 }
 
-double dT_ns(Time const & start, Time const & stop) {return(double_cast(stop-start)/1000.0);}
+double dT_ns(Timestamp const & start, Timestamp const & stop) 
+{
+  auto const & dT_Time = Time_cast(stop - start);
+  return(double_cast(dT_Time)/1000.0);
+}
 
-bool isPrompt(double const & rf_time) {return (rf_time>-g_begin_prompt_ns && rf_time<g_end_prompt_ns);}
-bool isDelayed(double const & rf_time) {return (rf_time>g_begin_delayed_ns && rf_time<g_end_delayed_ns);}
+bool isPrompt_ns(double const & rel_time_ns, int const & label) 
+{
+  if (isParis[label]) return (rel_time_ns > g_begin_prompt_PARIS_ns && rel_time_ns < g_end_prompt_PARIS_ns);
+  else                return (rel_time_ns > g_begin_prompt_ns       && rel_time_ns < g_end_prompt_ns      );
+}
+bool isDelayed_ns(double const & rel_time_ns) {return (rel_time_ns>g_begin_delayed_ns && rel_time_ns<g_end_delayed_ns);}
 
 /**
  * @brief Hits container
@@ -245,7 +289,8 @@ public:
   auto end  ()       {return m_buffer.end  ();}
   auto end  () const {return m_buffer.end  ();}
 
-  bool isFull() const {return m_size+1 >= m_max_size;}
+  /// @brief Are all the slots used ?
+  bool isFull() const {return m_size+2 > m_max_size;}
 
   auto const & nbClear() const {return m_nb_clear;}
   auto       & nbClear()       {return m_nb_clear;}
@@ -256,17 +301,18 @@ public:
 
   /**
    * @brief Shifts the buffer of hits by a certain amount
+   * @todo Make it functionnal maybe ?
    * 
    * @param n:
    * if n == 0 nothing happens
-   * if n>0 shifts the buffer to the right by n indexes, expends the size if needed
-   * if n<0 moves the n last cells to the beginning, size stays the same
+   * if n>0 shifts the buffer to the right by n indexes, expends the size if needed. Creates empty slots at beginning.
+   * if n<0 moves the n last cells to the beginning, size stays the same. Overflow logic : the first hits are moved to the end
    * @details
    * Example : 
    * HitBuffer buffer = {hit1, hit2, hit3, hit4};
    * buffer.shift( 2); // buffer = {empty1, empty2, hit1, hit2, hit3, hit4}
    * buffer.shift(-2); // buffer = {hit3, hit4, hit1, hit2}
-   * Carefull : for n>0 , need to copy twice the data, so it can be very long
+   * Carefull : for n>0 , need to copy twice the data, so it can be very long for big buffers
    */
   void shift(int n)
   {
@@ -319,7 +365,7 @@ bool comptonClean(HitBuffer const & buffer, size_t & it, RF_Manager & rf, Histos
     if (!isBGO[hit_it.label]) continue;
 
     auto const & time_diff = dT_ns(hit_it.stamp, hit_Ge.stamp); // dT_ns(start, stop)
-    if(time_diff>g_BGO_coinc_tw_ns/2) break;
+    if(time_diff>g_coinc_tw_ns) break;
 
     // Checking prompt window :  We don't look inside the prompt peak for Compton suppression
     auto const & rf_time = time_Ge-time_diff;
@@ -351,7 +397,7 @@ bool comptonClean(HitBuffer const & buffer, size_t & it, RF_Manager & rf, Histos
     if (!isBGO[hit_it.label]) continue;
 
     auto const & time_diff = dT_ns(hit_Ge.stamp, hit_it.stamp); // dT_ns(start, stop)
-    if(time_diff>g_BGO_coinc_tw_ns/2) break; // No coincident forward BGO
+    if(time_diff>g_coinc_tw_ns) break; // No coincident forward BGO
 
     // if (delayed && rf_time > (rf.period_ns()-20)) break; // We don't look inside the prompt peak for Compton suppression
 
@@ -386,7 +432,8 @@ void convert(Hit & hit, FasterReader & reader,
               Timeshifts const & timeshifts, 
               Path const & outPath, 
               Histos & histos,
-              MTCounter & total_read_size)
+              MTCounter & total_read_size,
+              RunInfo & run_infos)
 {
   // ------------------ //
   // Initialize helpers //
@@ -399,12 +446,13 @@ void convert(Hit & hit, FasterReader & reader,
   File raw_datafile = reader.getFilename();   // "/path/to/manip/run_number.fast/run_number_filenumber.fast"
   Filename filename = raw_datafile.filename();// "                               run_number_filenumber.fast"
   int filenumber = std::stoi(lastPart(filename.shortName(), '_'));//                        filenumber
-  std::string run = removeLastPart(filename.shortName(), '_'); 
+  std::string run = removeLastPart(filename.shortName(), '_');    //             run_number
+  int run_number = std::stoi(lastPart(run, '_')); //                                            number
 
   // Setting the name of the output file :
-  Path outFolder (outPath+run, true);                     // /path/to/manip-root/run_number.fast/
-  Filename outFilename(raw_datafile.shortName()+".root"); //                                     run_number_filenumber.root
-  File outfile (outFolder, outFilename);                  // /path/to/manip-root/run_number.fast/run_number_filenumber.root
+  Path outFolder (outPath+run, true);                     // /outPath/run_number.fast/
+  Filename outFilename(raw_datafile.shortName()+".root"); //                          run_number_filenumber.root
+  File outfile (outFolder, outFilename);                  // /outPath/run_number.fast/run_number_filenumber.root
 
   // Important : if the output file already exists, then do not overwrite it !
   if ( !overwrite && file_exists(outfile) ) {print(outfile, "already exists !"); return;}
@@ -488,7 +536,7 @@ void convert(Hit & hit, FasterReader & reader,
   auto const & nb_data = tempTree->GetEntries();
   // ulong evts_count = 0;
   ulong trig_count = 0;
-  HitBuffer buffer(5000);
+  HitBuffer buffer(50000);
   size_t hits_count = 0;
   int count_rf = 0;
   while (loop<nb_data)
@@ -499,7 +547,7 @@ void convert(Hit & hit, FasterReader & reader,
     buffer.push_back(hit);
     if (buffer.isFull())
     {
-      for (size_t r_buffer_it = 0; r_buffer_it<buffer.size(); r_buffer_it ++)
+      for (size_t r_buffer_it = 0; r_buffer_it<buffer.size(); ++r_buffer_it)
       {
         auto const & hit_r = buffer[r_buffer_it];
         if (handleRf(rf, hit_r, event, outTree.get())) 
@@ -507,26 +555,29 @@ void convert(Hit & hit, FasterReader & reader,
           if (histoed)
           {
             histos.rf_evolution->SetBinContent(count_rf, rf.period);
-            count_rf++;
+            ++count_rf;
           }
           continue;
         }
-        // ||||||||||||||||||||||||||||||||||||||||||||||||||||||||| //
-        // ||| FIRST PART : TRIGGER ON TWO DELAYED CLEAN CLOVERS ||| //
-        // ||||||||||||||||||||||||||||||||||||||||||||||||||||||||| //
+
+        // ||||||||||||||||||||||||||||| //
+        // ||| FIRST PART : TRIGGER  ||| //
+        // ||||||||||||||||||||||||||||| //
 
         if(isGe[hit_r.label])
         {// Trigger on Germaniums
-          auto const & hit_first_Ge = hit_r;
-          auto const & rel_time_first_Ge = rf.pulse_ToF_ns(hit_first_Ge);
+          auto const & hit_first_Ge = hit_r; // The Germanium hit
+          auto const & rel_time_first_Ge = rf.pulse_ToF_ns(hit_first_Ge); // The time of the Germanium relative to the beam pulsation
 
           // ---------------------------------//
           //1. ---  Treat only delayed Ge --- //
           // ---------------------------------//
-          if (isDelayed(rel_time_first_Ge))
+          if (isDelayed_ns(rel_time_first_Ge))
           {// If the Germanium is in the delayed window, try to create the event :
-            auto const init_it = r_buffer_it; // To easily come back to the first Ge
-            std::vector<uchar> clover_modules = {Clovers::labels[hit_first_Ge.label]}; // List of the modules that fired in the event
+            auto const init_it = r_buffer_it; // The buffer's index of the first Germanium hit
+            auto const & first_Ge_Clover_label = Clovers::labels[hit_first_Ge.label]; // The Clover label of the first Germanium
+            auto const & ref_pulse_timestamp = rf.refTime(hit_first_Ge.stamp); // The absolute timestamp of the beam pulse (relative to the delayed Germanium we're trying to trigger on)
+            std::vector<uchar> clover_modules = {first_Ge_Clover_label}; // List of the modules that fired in the event
 
             // -----------------------------//
             //2. --- BGO clean first Ge --- //
@@ -539,122 +590,162 @@ void convert(Hit & hit, FasterReader & reader,
               continue;
             }
 
+            r_buffer_it = init_it;
+
             if (histoed) histos.first_Ge_spectra_Clean.Fill(hit_first_Ge.nrj);
 
-            // ------------------------//
-            //3. --- Find next Ges --- //
-            // ------------------------//
-            Timestamp front_window = hit_first_Ge.stamp + g_Ge_coinc_tw_ns*1000;
-            std::vector<int> next_Ge_indexes;
-            bool single_clean_coinc = false;
+            // ------------------------------//
+            //3. --- Find next detectors --- //
+            // ------------------------------//
+
+            Timestamp front_coinc_window = hit_first_Ge.stamp + Time_cast(g_coinc_tw_ns*1000.); // The timestamp of the front delayed time window
+            Timestamp back_coinc_window  = hit_first_Ge.stamp - Time_cast(g_coinc_tw_ns*1000.); // The timestamp of the back  delayed time window
+            
+            // If the front window is outside of the end of the delayed time window, shift it to it.
+            if (front_coinc_window > ref_pulse_timestamp+rf.period+g_begin_prompt_ns) front_coinc_window = ref_pulse_timestamp+g_end_delayed_ns; 
+
+            // ------------------------------------------------//
+            //3.A --- Any other coincident gamma detector  --- //
+            // ------------------------------------------------//
             if (single_clean)
             {
-              for (auto const & )
-              if (500>hit_it.label && )
-              continue;
-            }
-            else while (++r_buffer_it < buffer.size())
-            {
-              auto const & hit_it = buffer[r_buffer_it];
-
-              //1. Checking the time coincidence
-              if(hit_it.stamp>front_window) break;
-
-              //2. Remove hits of the prompt of next pulse
-              auto const & time_diff_ns = dT_ns(hit_first_Ge.stamp, hit_it.stamp);// dT_ns(start, stop)
-              if (rel_time_first_Ge + time_diff_ns > g_end_delayed_ns) break; 
-
-              if (isGe[hit_it.label])
+              bool single_clean_coinc = false; // Single clean Germanium option : require only another detector in coincidence with a clean Germanium
+              // Looking at last hit wether it is in the time window :
+              if (r_buffer_it-1 > buffer.step())
               {
-                // 3. Add-Back : Checking if the label of the germanium's clover module have already fired
-                auto const & clover_module_it = Clovers::labels[hit_it.label];
-                if (found(clover_modules, clover_module_it)) continue;
-                clover_modules.push_back(clover_module_it);
+                auto const & hit_before = buffer[r_buffer_it-1];
+                if (isDSSD[hit_before.label]) continue; // The DSSD does not count as a trigger. Only the gamma detectors do.
+                if (!isDelayed_ns(rf.pulse_ToF_ns(hit_before.stamp))) continue;
+                if (back_coinc_window < hit_before.stamp) single_clean_coinc = true;
+              }
+
+              // Looking at next hit wether it is in the time window :
+              if (!single_clean_coinc && r_buffer_it+1 < buffer.size())
+              {
+                auto const & hit_after = buffer[r_buffer_it+1];
+                if (isDSSD[hit_after.label]) continue; // The DSSD does not count as a trigger. Only the gamma detectors do.
+                if (!isDelayed_ns(rf.pulse_ToF_ns(hit_after.stamp))) continue;
+                if (hit_after.stamp < front_coinc_window) single_clean_coinc = true;
+              }
+
+              if (!single_clean_coinc) continue;
+            }
+
+            // ----------------------------//
+            //3.B --- Another clean Ge --- //
+            // ----------------------------//
+            else 
+            {
+              std::vector<int> next_Ge_indexes; // List the indices of the next Germaniums potentially in the event
+              while (++r_buffer_it < buffer.size())
+              {// Normal double delayed mode :
+                auto const & hit_it = buffer[r_buffer_it];
+
+                //1. Checking the time coincidence
+                if(hit_it.stamp>front_coinc_window) break;
+
+                auto const & time_diff_ns = dT_ns(hit_first_Ge.stamp, hit_it.stamp);// dT_ns(start, stop)
+
+                //2. Remove hits of the prompt of next pulse
+                if (rel_time_first_Ge + time_diff_ns > g_end_delayed_ns) break; 
+
+                if (isGe[hit_it.label])
+                {
+                  // 3. Add-Back : Checking if the label of the germanium's clover module have already fired
+                  auto const & clover_module_it = Clovers::labels[hit_it.label];
+                  if (found(clover_modules, clover_module_it)) continue;
+                  clover_modules.push_back(clover_module_it);
+                  
+                  // 4. Register the hit
+                  next_Ge_indexes.push_back(r_buffer_it);
+                }
+              } 
+
+              r_buffer_it = init_it;
+
+              if (histoed) histos.first_Ge_time_VS_nb_delayed.Fill(next_Ge_indexes.size(), rel_time_first_Ge);
+
+              // Trigger : there needs to be at least another clover that fired
+              if (next_Ge_indexes.size() < 1) continue;
+
+              // debug();
+              // debug(hit_first_Ge);
+              // debug(buffer[next_Ge_indexes.front()]);
+
+              if (histoed)
+              {
+                auto const & time_Ge2 = rel_time_first_Ge + dT_ns(hit_first_Ge.stamp, buffer[next_Ge_indexes[0]].stamp);
+                histos.second_Ge_time_VS_nb_delayed.Fill(next_Ge_indexes.size(), time_Ge2);
+                histos.Ge2_VS_Ge_time.Fill(rel_time_first_Ge, time_Ge2);
                 
-                // 4. Register the hit
-                next_Ge_indexes.push_back(r_buffer_it);
+                if (next_Ge_indexes.size() > 2)
+                {
+                  auto const & time_Ge3 = rel_time_first_Ge + dT_ns(hit_first_Ge.stamp, buffer[next_Ge_indexes[1]].stamp);
+                  histos.Ge3_VS_Ge_time.Fill(rel_time_first_Ge, time_Ge3);
+                  histos.Ge3_VS_Ge2_time.Fill(time_Ge2, time_Ge3);
+                }
               }
-            } 
 
-            r_buffer_it = init_it;
+              // ------------------------------------------//
+              //4. --- BGO clean and Add-back next Ges --- //
+              // ------------------------------------------//
 
-            if (histoed) histos.first_Ge_time_VS_nb_delayed.Fill(next_Ge_indexes.size(), rel_time_first_Ge);
-
-            // Trigger : there needs to be at least another clover that fired
-            if (next_Ge_indexes.size() < 1) continue;
-
-            // debug();
-            // debug(hit_first_Ge);
-            // debug(buffer[next_Ge_indexes.front()]);
-
-            if (histoed)
-            {
-              auto const & time_Ge2 = rel_time_first_Ge + dT_ns(hit_first_Ge.stamp, buffer[next_Ge_indexes[0]].stamp);
-              histos.second_Ge_time_VS_nb_delayed.Fill(next_Ge_indexes.size(), time_Ge2);
-              histos.Ge2_VS_Ge_time.Fill(rel_time_first_Ge, time_Ge2);
-              
-              if (next_Ge_indexes.size() > 2)
+              bool trigger_Ge_clean = false;
+              // Loop through the other Ges in time window
+              for(size_t index_it = 0; index_it<next_Ge_indexes.size(); index_it++)
               {
-                auto const & time_Ge3 = rel_time_first_Ge + dT_ns(hit_first_Ge.stamp, buffer[next_Ge_indexes[1]].stamp);
-                histos.Ge3_VS_Ge_time.Fill(rel_time_first_Ge, time_Ge3);
-                histos.Ge3_VS_Ge2_time.Fill(time_Ge2, time_Ge3);
+                auto const & next_Ge_index = next_Ge_indexes[index_it];
+                r_buffer_it = next_Ge_index;
+                auto const & hit_Ge2 = buffer[r_buffer_it];
+                auto const & index_next_clover = Clovers::labels[hit_Ge2.label];
+
+                if (histoed && index_it == 0) histos.second_Ge_spectra.Fill(buffer[next_Ge_indexes[0]].nrj);
+
+                // 4.b Compton cleaning
+                // If the Germanium is Clean, then the trigger is complete
+                if (comptonClean(buffer, r_buffer_it, rf, histos, histoed))
+                {
+                  if (histoed && index_it == 0) histos.second_Ge_spectra_Clean.Fill(buffer[next_Ge_index].nrj);
+                  trigger_Ge_clean = true;
+                  break;
+                }
+
+                // If a BGO vetoed this Ge, move to next one to check wether he's rejected
+                else
+                {
+                  if (histoed && index_it == 0) histos.second_Ge_spectra_Vetoed.Fill(buffer[next_Ge_index].nrj);
+                  continue;
+                }
+              }
+
+              r_buffer_it = init_it;
+
+              if (!trigger_Ge_clean) continue;
+
+              if (histoed) 
+              {
+                histos.all_Ge_after_trigger.Fill(hit_first_Ge.nrj);
+                for (auto const & _it_ : next_Ge_indexes) histos.all_Ge_after_trigger.Fill(buffer[_it_].nrj);
               }
             }
-
-            // ------------------------------------------//
-            //4. --- BGO clean and Add-back next Ges --- //
-            // ------------------------------------------//
-
-            bool trigger_Ge_clean = false;
-            // Loop through the other Ges in time window
-            for(size_t index_it = 0; index_it<next_Ge_indexes.size(); index_it++)
-            {
-              auto const & next_Ge_index = next_Ge_indexes[index_it];
-              r_buffer_it = next_Ge_index;
-              auto const & hit_Ge2 = buffer[r_buffer_it];
-              auto const & index_next_clover = Clovers::labels[hit_Ge2.label];
-
-              if (histoed && index_it == 0) histos.second_Ge_spectra.Fill(buffer[next_Ge_indexes[0]].nrj);
-
-              // 4.b Compton cleaning
-              // If the Germanium is Clean, then the trigger is complete
-              if (comptonClean(buffer, r_buffer_it, rf, histos, histoed))
-              {
-                if (histoed && index_it == 0) histos.second_Ge_spectra_Clean.Fill(buffer[next_Ge_index].nrj);
-                trigger_Ge_clean = true;
-                break;
-              }
-
-              // If a BGO vetoed this Ge, move to next one to check wether he's rejected
-              else
-              {
-                if (histoed && index_it == 0) histos.second_Ge_spectra_Vetoed.Fill(buffer[next_Ge_index].nrj);
-                continue;
-              }
-            }
-
-            r_buffer_it = init_it;
-
-            if (!trigger_Ge_clean) continue;
-
-            if (histoed) 
-            {
-              histos.all_Ge_after_trigger.Fill(hit_first_Ge.nrj);
-              for (auto const & _it_ : next_Ge_indexes) histos.all_Ge_after_trigger.Fill(buffer[_it_].nrj);
-            }
-
+            
             // ------------------------------------------------------------------------------//
             //5. --- Requiring at least one prompt hit within few RF cycles in the past  --- //
             // ------------------------------------------------------------------------------//
-            // (This prompt event is likely to be prompt decay feeding isomeric states)
+            // (This prompt event is likely to be a prompt decay feeding isomeric states)
+            Timestamp const last_prompt_time_window_ps = ref_pulse_timestamp - Time_cast(g_n_prev_pulses*rf.period-rf.offset());
             bool one_prompt_before = false;
-            for (;r_buffer_it>buffer.step();r_buffer_it--)
+            Timestamp last_prompt_ref_pulse_timestamp = 0;
+            size_t last_prompt_pulse_index = 0;
+            while(--r_buffer_it > buffer.step())
             {
               auto const & hit_it = buffer[r_buffer_it];
-              auto const & pulse_time_ns = rf.pulse_ToF_ns(hit_it.stamp);
-              if (isPrompt(pulse_time_ns)) 
+              if (isDSSD[hit_it.label]) continue; // The DSSD does not count as a trigger. Only the gamma detectors do.
+              if (hit_it.stamp < last_prompt_time_window_ps) break;
+              if (isPrompt_ns(rf.pulse_ToF_ns(hit_it.stamp), hit_it.label)) 
               {
-                // all_Ge_after_trigger_with_prompt.Fill();
+                last_prompt_ref_pulse_timestamp = rf.refTime(hit_it.stamp);
+                last_prompt_pulse_index = r_buffer_it;
                 one_prompt_before = true;
                 break;
               }
@@ -662,49 +753,66 @@ void convert(Hit & hit, FasterReader & reader,
             
             r_buffer_it = init_it;
 
-            // if (!one_prompt_before) continue;
+            if (!one_prompt_before) continue;
 
-            
-        // ||||||||||||||||||||||||||||||||||||||||||||||||||| //
-        // ||| SECOND PART : CREATE THE EVENT AND WRITE IT ||| //
-        // ||||||||||||||||||||||||||||||||||||||||||||||||||| //
+            r_buffer_it = last_prompt_pulse_index;
+            histos.time_first_prompt.Fill(buffer[last_prompt_pulse_index].label, dT_ns(ref_pulse_timestamp, buffer[last_prompt_pulse_index].stamp));
 
-            // Extract some usefull informations :
-            Timestamp ref_time = rf.refTime(hit_first_Ge.stamp);
-            Timestamp back_window = ref_time - g_n_prev_pulses*rf.period - rf.offset();
-            
+          // ||||||||||||||||||||||||||||||||||||||||||||||||||| //
+          // ||| SECOND PART : CREATE THE EVENT AND WRITE IT ||| //
+          // ||||||||||||||||||||||||||||||||||||||||||||||||||| //
+
+            // Extract some useful informations :
+            Timestamp back_event_window = last_prompt_ref_pulse_timestamp + Time_cast(g_begin_prompt_ns*1000); // Beginning of the last prompt pulse (last_prompt_timestamp) - abs(g_begin_prompt_ns)
+            // Timestamp back_event_window = ref_pulse_timestamp - g_n_prev_pulses*rf.period - rf.offset(); // Beginning of the
+
             // ----------------------------------------------//
             //6. --- Locate the first hit in time window --- //
             // ----------------------------------------------//
-            int pos = 0;
-            if (r_buffer_it>0) while (--r_buffer_it>buffer.step())
-            {
-              if(buffer[r_buffer_it].stamp<back_window) break;
-              pos++;
-            }
+            if (r_buffer_it > buffer.step()) while (--r_buffer_it > 0)
+              if(buffer[r_buffer_it].stamp < back_event_window) break; // Here r_buffer_it points to the hit before the first hit of the event
+
+            histos.time_before_to_first_prompt.Fill(buffer[r_buffer_it].label, dT_ns(ref_pulse_timestamp, buffer[r_buffer_it].stamp));
+            histos.time_found_prompt.Fill(buffer[r_buffer_it+1].label, dT_ns(ref_pulse_timestamp, buffer[r_buffer_it+1].stamp));
+            histos.time_back_event_window.Fill(dT_ns(back_event_window, ref_pulse_timestamp));
 
             // -------------------------//
             //7. --- Fill the Event --- //
             // -------------------------//
-            int count = 0;
             while (++r_buffer_it<buffer.size())
             {
-              auto const & hit_it = buffer[r_buffer_it];
-              // debug(hit_it, Long64_cast(front_window-hit_it.stamp));
-              if (hit_it.stamp>front_window) break;
-              if (handleRf(rf, hit_it, event, outTree.get())) continue;
-              // Add this line if too much data is written :
-              // auto const & time_j = rf.pulse_ToF_ns(hit_it);
-              // if (isPrompt(time_j))  
-              // {
-                if (hit_it.stamp == 0) print(hit_it);
-              event.push_back(hit_it);
-              // }
-              count++;
+              auto const & hit_i = buffer[r_buffer_it];
+              // debug(hit_i, Long64_cast(front_coinc_window-hit_i.stamp));
+              if (hit_i.stamp > front_coinc_window) break;
+              if (handleRf(rf, hit_i, event, outTree.get())) continue;
+              auto const & time_ns = rf.pulse_ToF_ns(hit_i.stamp);
+
+              // Removes non-prompt hits between previous pulses :
+              // auto const & time_j = rf.pulse_ToF_ns(hit_i);
+              // if (hit_i.stamp<isPrompt_ns(time_j)) event.push_back(hit_i);
+
+              // Always write all the DSSD hits :
+              if (isDSSD[hit_i.label]) 
+              {
+                event.push_back(hit_i);
+              }
+
+              // Handles the delayed hits : 
+              else if (isDelayed_ns(time_ns))
+              {
+                // Removes delayed hits not in coincidence with the opening Germanium :
+                if (hit_i.stamp < back_coinc_window) continue;
+                if (front_coinc_window < hit_i.stamp) break; // After the end of the coincidence window, the hits are of no interest
+                event.push_back(hit_i);
+              }
+              else if (isPrompt_ns(time_ns, hit_i.label))
+              {
+                event.push_back(hit_i);
+              }
             }
-            // The t0 is set to be the closest prompt peak
-            // !!! to be changed afterwards to be the closest prompt clean event !!!
-            event.setT0(ref_time);
+            
+            // event.setT0(ref_pulse_timestamp); // The t0 is set to be the closest prompt pulse
+            event.setT0(last_prompt_ref_pulse_timestamp);// The t0 is set to be the closest prompt pulse with gamma hits
 
             // debug(event);
             // pauseDebug();
@@ -712,11 +820,18 @@ void convert(Hit & hit, FasterReader & reader,
             // --------------------------//
             //8. --- Write the Event --- //
             // --------------------------//
+            if (histoed) for (int hit_i = 0; hit_i<event.mult; hit_i++) 
+            {
+              // debug(event.labels[hit_i], (event.times[hit_i])/1000.);
+              // pauseDebug();
+              histos.time_VS_det.Fill(event.labels[hit_i], (event.times[hit_i])/1000.);
+              if (isGe[event.labels[hit_i]]) histos.energy_all_Ge_trigg.Fill(event.nrjs[hit_i]);
+              // histos.time_VS_det.Fill(event.labels[hit_i], event.times[hit_i]/1000.);
+            }
+
             outTree -> Fill();
             buffer.setStep(r_buffer_it);
 
-            if (histoed) for (size_t i = 0; i<event.size(); i++) if (isGe[event.labels[i]])
-              histos.energy_all_Ge_raw.Fill(event.nrjs[i]);
 
             // --------------//
             //9. --- END --- //
@@ -725,7 +840,7 @@ void convert(Hit & hit, FasterReader & reader,
             event.clear();
             r_buffer_it = init_it;
           }
-          else if (isPrompt(rel_time_first_Ge) && histoed)
+          else if (histoed && isPrompt_ns(rel_time_first_Ge, hit_r.label))
           {
             histos.promptGe.Fill(hit_r.nrj);
             if (comptonClean(buffer, r_buffer_it, rf, histos, histoed, false)) histos.promptGe_clean.Fill(hit_r.nrj);
@@ -751,9 +866,22 @@ void convert(Hit & hit, FasterReader & reader,
 
   auto outSize = float_cast(size_file_conversion(float_cast(outFile->GetSize()), "o", "Mo"));
 
+  auto const & compression_factor = dataSize/outSize;
+  auto const & trigger_efficiency = double_cast(hits_count)/double_cast(rawCounts);
+  auto const & Mo_per_sec = dataSize/timer.TimeSec();
+
   print_precision(4);
-  print(outfile, "written in", timer(), timer.unit(),"(",dataSize/timer.TimeSec(),"Mo/s). Input file", dataSize, 
-        "Mo and output file", outSize, "Mo : compression factor ", dataSize/outSize,"-", (100.*double_cast(hits_count))/double_cast(rawCounts),"% hits kept");
+
+  print(outfile, " written in ", timer()," (", Mo_per_sec, "Mo/s). Input file ", dataSize, " Mo and output file " 
+    , outSize, " Mo : compression factor ", compression_factor, " - ", 100.*trigger_efficiency , " % hits kept");
+
+  { // Zone locked by a mutex, meaning this piece of code is thread safe...
+    lock_mutex lock(MTObject::mutex);
+    run_infos.compression_factor += compression_factor/run_infos.nb_files;
+    run_infos.trigger_efficiency += trigger_efficiency/run_infos.nb_files;
+    run_infos.Mo_per_sec += Mo_per_sec/run_infos.nb_files;
+  }
+
 }
 
 // 5. Main
@@ -882,6 +1010,8 @@ int main(int argc, char** argv)
   print("Reading :", manipPath.string());
   print("Writting in : ", outPath.string());
 
+  output_fileinfo_name = "info/" + outPath.folder().name() + "_" +time_string_inverse() + ".info";
+
   // Load some modules :
   detectors.load(IDFile);
   Calibration calibration(calibFile);
@@ -893,7 +1023,10 @@ int main(int argc, char** argv)
 
   // Setup some parameters :
   RF_Manager::set_offset_ns(g_rf_offset_ns);
-  
+
+  // Create the info file :
+  std::ofstream output_fileinfo(output_fileinfo_name, std::ios::out);
+  RunInfo::writeHeader(output_fileinfo);
   // Loop sequentially through the runs and treat their files in parallel :
   std::string run;
   while(runs.getNext(run))
@@ -902,6 +1035,13 @@ int main(int argc, char** argv)
     Timer timer;
     auto const & run_path = manipPath+run;
     auto const & run_name = removeExtension(run);
+    auto const & run_number = std::stoi(lastPart(run_name, '_'));
+
+    RunInfo run_infos;
+    run_infos.nb_files = Path(run_path).nbFiles();
+    run_infos.run_name = run_name;
+    run_infos.run_number = run_number;
+    if (nb_files<0) run_infos.nb_files = nb_files;
 
     Histos histos;
     if (histoed && !only_timeshifts) histos.Initialize();
@@ -919,10 +1059,10 @@ int main(int argc, char** argv)
       }
       else // for N-SI-136 :
       {
+        timeshifts.dT_with_biggest_peak_finder(); // Best peak finder for N-SI-136
         timeshifts.periodRF_ns(200);
       }
 
-      timeshifts.dT_with_biggest_peak_finder(); // Best peak finder for N-SI-136
       timeshifts.setMult(2, 4);// Only events with 2 to 4 hits are included
 
       timeshifts.setOutDir(outPath.string());
@@ -953,14 +1093,21 @@ int main(int argc, char** argv)
     
     // Loop over the files in parallel :
     MTFasterReader readerMT(run_path, nb_files);
-    readerMT.readRaw(convert, calibration, timeshifts, outPath, histos, total_read_size);
+    readerMT.readRaw(convert, calibration, timeshifts, outPath, histos, total_read_size, run_infos);
 
     if (histoed)
     {
       auto const name = outPath+run_name+"/histo_"+run_name+".root";
       std::unique_ptr<TFile> outFile (TFile::Open(name.c_str(), "RECREATE"));
       outFile -> cd();
-      histos.energy_all_Ge_raw.Write();
+
+      histos.time_VS_det.Write();
+      histos.time_first_prompt.Write();
+      histos.time_found_prompt.Write();
+      histos.time_back_event_window.Write();
+      histos.time_before_to_first_prompt.Write();
+
+      histos.energy_all_Ge_trigg.Write();
       histos.rf_all_raw.Write();
       histos.energy_each_raw.Write();
       histos.rf_each_raw.Write();
@@ -1007,7 +1154,6 @@ int main(int argc, char** argv)
       histos.Ge3_VS_Ge_time.Write();
       histos.Ge3_VS_Ge2_time.Write();
 
-
       histos.rf_evolution->Write();
       delete histos.rf_evolution;
 
@@ -1026,6 +1172,10 @@ int main(int argc, char** argv)
 
     std::string merge_command = "hadd -v 1 -j " + std::to_string(nb_threads) + " " + outMergedPath.string() + run_name + ".root " + outDataPath.string() + run_name + "_*.root";
     system(merge_command.c_str());
+
+    run_infos.writeLine(output_fileinfo);
   }
+  output_fileinfo.close();
+  print(output_fileinfo_name, "written");
   return 1;
 }
