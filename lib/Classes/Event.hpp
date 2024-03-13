@@ -5,6 +5,9 @@
 #include "../libCo.hpp"
 #include "../libRoot.hpp"
 
+#ifdef MULTITHREADING
+  std::mutex mutex_events;
+#endif //MULTITHREADING
 
 /**
  * @brief Event used for reading and writting event, event building and trigger
@@ -174,7 +177,7 @@ public:
   }
 
   // Public members :
-  int mult = 0;
+  ulong mult = 0;
   Timestamp stamp = 0ull;
   Label   labels  [255] = {0};
   Time    times   [255] = {0};
@@ -266,6 +269,11 @@ inline Event& Event::operator=(Event const & event)
  */
 void inline Event::reading(TTree * tree)
 {
+
+#ifdef MULTITHREADING
+  lock_mutex lock(mutex_events);
+#endif //MULTITHREADING
+
   if (!tree) {print("Input tree at address 0x00 !"); return;}
 
   isReading  = true;
@@ -296,6 +304,10 @@ void inline Event::reading(TTree * tree)
 
 void inline Event::reading(TTree * tree, std::string const & options)
 {
+#ifdef MULTITHREADING
+  lock_mutex lock(mutex_events);
+#endif //MULTITHREADING
+
   if (!tree) {print("Input tree at address 0x00 !"); return;}
 
   isReading  = true;
@@ -321,6 +333,10 @@ void inline Event::reading(TTree * tree, std::string const & options)
 
 void inline Event::writting(TTree * tree, std::string const & options)
 {
+#ifdef MULTITHREADING
+  lock_mutex lock(mutex_events);
+#endif //MULTITHREADING
+
   if (!tree) {print("Output tree at address 0x00 !"); return;}
 
   isReading  = false;
@@ -399,6 +415,10 @@ inline void Event::Print() const
 
 inline std::ostream& operator<<(std::ostream& cout, Event const & event)
 {
+#ifdef MULTITHREADING
+  lock_mutex lock(mutex_events);
+#endif //MULTITHREADING
+
   cout << std::endl << "---" << std::endl;
   cout << event.mult << " hits : ";
   if (event.stamp != 0) cout << "Timestamp : " << event.stamp << " ps";

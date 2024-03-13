@@ -463,11 +463,13 @@ void convert(Hit & hit, FasterReader & reader,
   // ------------------------------ //
   // Initialize the temporary TTree //
   // ------------------------------ //
+mutex_Root.lock();
   std::string const & tempTree_name = "temp"+std::to_string(MTObject::getThreadIndex());
-  std::unique_ptr<TTree> tempTree (new TTree(tempTree_name.c_str(),tempTree_name.c_str()));
+  TTree* tempTree (new TTree(tempTree_name.c_str(),tempTree_name.c_str()));
   tempTree -> SetDirectory(nullptr); // Force it to be created on RAM rather than on disk - much faster if enough RAM
-  hit.writting(tempTree.get(), "lsEQ"); // The pileup bit has been removed because of weird errors raised by valgrind drd
-  // hit.writting(tempTree.get(), "lsEQp");
+mutex_Root.unlock();
+  hit.writting(tempTree, "lsEQ"); // The pileup bit has been removed because of weird errors raised by valgrind drd
+  // hit.writting(tempTree, "lsEQp");
 
   // ------------------------ //
   // Loop over the .fast file //
@@ -495,30 +497,32 @@ void convert(Hit & hit, FasterReader & reader,
   // -------------------------------------- //
   // Realign switched hits after timeshifts //
   // -------------------------------------- //
-  Alignator gindex(tempTree.get());
+  Alignator gindex(tempTree);
 
   // ------------------------------------------------------ //
   // Prepare the reading of the TTree and the output Events //
   // ------------------------------------------------------ //
   // Switch the temporary TTree to reading mode :
   hit.reset();
-  hit.reading(tempTree.get(), "lsEQ"); // The pileup bit has been removed because of weird errors raised by valgrind drd
-  // hit.reading(tempTree.get(), "lsEQp");
+  hit.reading(tempTree, "lsEQ"); // The pileup bit has been removed because of weird errors raised by valgrind drd
+  // hit.reading(tempTree, "lsEQp");
 
   // Create output tree and Event 
+mutex_Root.lock();
   std::string const name = "Nuball2"+std::to_string(MTObject::getThreadIndex());
-  unique_tree outTree (new TTree(name.c_str(),name.c_str()));
+  TTree* outTree (new TTree(name.c_str(),name.c_str()));
   outTree -> SetDirectory(nullptr); // Force it to be created on RAM rather than on disk - much faster if enough RAM
+mutex_Root.unlock();
   Event event;
-  event.writting(outTree.get(), "lstEQ");// The pileup bit has been removed because of weird errors raised by valgrind drd
-  // event.writting(outTree.get(), "lstEQp");
+  event.writting(outTree, "lstEQ");// The pileup bit has been removed because of weird errors raised by valgrind drd
+  // event.writting(outTree, "lstEQp");
 
   // Initialize RF manager :
   RF_Manager rf;
   rf.set_period_ns(200);
 
   // Handle the first RF downscaled hit :
-  RF_Extractor first_rf(tempTree.get(), rf, hit, gindex);
+  RF_Extractor first_rf(tempTree, rf, hit, gindex);
   if (!first_rf) return;
 
   // debug("first RF found at hit n°", first_rf.cursor());
@@ -555,7 +559,7 @@ void convert(Hit & hit, FasterReader & reader,
       for (size_t r_buffer_it = 0; r_buffer_it<buffer.size(); ++r_buffer_it)
       {
         auto const & hit_r = buffer[r_buffer_it];
-        if (handleRf(rf, hit_r, event, outTree.get())) 
+        if (handleRf(rf, hit_r, event, outTree)) 
         {
           if (histoed)
           {
@@ -792,7 +796,7 @@ void convert(Hit & hit, FasterReader & reader,
               auto const & hit_i = buffer[r_buffer_it];
               // debug(hit_i, Long64_cast(front_coinc_window-hit_i.stamp));
               if (hit_i.stamp > front_coinc_window) break;
-              if (handleRf(rf, hit_i, event, outTree.get())) continue;
+              if (handleRf(rf, hit_i, event, outTree)) continue;
               auto const & time_ns = rf.pulse_ToF_ns(hit_i.stamp);
 
               // Removes non-prompt hits between previous pulses :
@@ -859,15 +863,19 @@ void convert(Hit & hit, FasterReader & reader,
       buffer.clear();
     }
   }
+mutex_Root.lock();
+  delete tempTree;
+mutex_Root.unlock();
   convert_timer.Stop();
   print("Conversion finished here done in", convert_timer.TimeElapsedSec() , "s (",dataSize/convert_timer.TimeElapsedSec() ,"Mo/s)");
   Timer write_timer;
 
   // Initialize output TTree :
-  MTObject::mutex.lock();
-  unique_TFile outFile (TFile::Open(outfile.c_str(), "RECREATE"));
-  MTObject::mutex.unlock();
+mutex_Root.lock();
+  TFile* outFile (TFile::Open(outfile.c_str(), "RECREATE"));
   outFile -> cd();
+  outTree->SetDirectory(outFile);
+mutex_Root.unlock();
   outTree -> Write();
   outFile -> Write();
   outFile -> Close();
@@ -884,6 +892,10 @@ void convert(Hit & hit, FasterReader & reader,
 
   print(outfile, " written in ", timer()," (", Mo_per_sec, "Mo/s). Input file ", dataSize, " Mo and output file " 
     , outSize, " Mo : compression factor ", compression_factor, " - ", 100.*trigger_efficiency , " % hits kept");
+
+mutex_Root.lock();
+  delete outFile;
+mutex_Root.unlock();
 
   { // Zone locked by a mutex, meaning this piece of code is thread safe...
     lock_mutex lock(MTObject::mutex);
@@ -1096,8 +1108,8 @@ int main(int argc, char** argv)
 
     if (only_timeshifts) 
     {
-      if(!overwrite) print("Not overwritting", run_name, "timeshift file because it already exist ! To change this, add option -o"); 
-      else calculateTimeshifts(timeshifts);
+      if(overwrite) calculateTimeshifts(timeshifts);
+      else print("Not overwritting", run_name, "timeshift file because it already exist ! To change this, add option -o"); 
       continue;
     }
     
@@ -1178,7 +1190,7 @@ int main(int argc, char** argv)
     Path outMergedPath (outPath.string()+"merged", true);
     File outMergedFile (outMergedPath, run_name+".root");
     
-    if (outMergedFile.exists()) system(("rm " + outMergedFile.string()).c_str());
+    if (outMergedFile.exists() && overwrite) system(("rm " + outMergedFile.string()).c_str());
 
     std::string merge_command = "hadd -v 1 -j " + std::to_string(nb_threads) + " " + outMergedPath.string() + run_name + ".root " + outDataPath.string() + run_name + "_*.root";
     system(merge_command.c_str());

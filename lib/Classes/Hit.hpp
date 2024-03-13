@@ -3,6 +3,10 @@
 
 #include "../libRoot.hpp"
 
+#ifdef MULTITHREADING
+  std::mutex mutex_hits;
+#endif //MULTITHREADING
+
 //////////////////
 /// Data types ///
 //////////////////
@@ -242,6 +246,10 @@ IOptions Hit::write;
 
 void Hit::reading(TTree * tree)
 {
+#ifdef MULTITHREADING
+  lock_mutex lock(mutex_hits);
+#endif //MULTITHREADING
+
   if (!tree) {print("Input tree at address 0x00 !"); return;}
 
   this->reset();
@@ -269,6 +277,10 @@ void Hit::reading(TTree * tree)
 
 void Hit::reading(TTree * tree, std::string const & options)
 {
+#ifdef MULTITHREADING
+  lock_mutex lock(mutex_hits);
+#endif //MULTITHREADING
+
   if (!tree) {print("Input tree at address 0x00 !"); return;}
 
   this->reset();
@@ -290,6 +302,10 @@ void Hit::reading(TTree * tree, std::string const & options)
 
 void Hit::writting(TTree * tree, std::string const & options)
 {
+#ifdef MULTITHREADING
+  lock_mutex lock(mutex_hits);
+#endif //MULTITHREADING
+
   if (!tree) {print("Input tree at address 0x00 !"); return;}
 
   write.setOptions(options);

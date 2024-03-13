@@ -1,12 +1,12 @@
 #ifndef MT_FASTER_READER_HPP
 #define MT_FASTER_READER_HPP
 
+#include "MTObject.hpp"
+#include "MTList.hpp"
 #include "../Classes/FasterReader.hpp"
 #include "../Classes/Alignator.hpp"
 #include "../Classes/FilesManager.hpp"
 
-#include "MTObject.hpp"
-#include "MTList.hpp"
 
 /**
  * @class MTFasterReader

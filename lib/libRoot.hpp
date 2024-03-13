@@ -61,6 +61,10 @@ inline Long64_t Long64_cast(T const & t) {return static_cast<Long64_t>(t);}
 // Some Initialisiations //
 ///////////////////////////
 
+#ifdef MULTITHREADING
+std::mutex mutex_Root;
+#endif //MULTITHREADING
+
 // TRandom gRandom(time(0));
 
 

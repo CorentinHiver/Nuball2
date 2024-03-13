@@ -113,7 +113,7 @@ void print(T const & t, T2 const &... t2) {print_mutex.lock(); std::cout << t <<
 /// @brief Generic print concatenated
 /// @details Concatenate the ouput, i.e. do not add space between each input. Terminate the output with a "\\n"
 template <class T> 
-void printC(T const & t) {std::cout << t << std::endl;}
+void printC(T const & t) {print_mutex.lock(); std::cout << t << std::endl; print_mutex.unlock();}
 
 /// @brief Generic print concatenated
 /// @details Concatenate the ouput, i.e. do not add space between each input. Terminate the output with a "\\n"
@@ -124,7 +124,7 @@ void printC(T const & t, T2 const &... t2) {print_mutex.lock(); std::cout << t; 
 /// @brief Generic print in one line
 /// @details Concatenate the ouput, i.e. do not add space between each input. Do not terminate the output with a "\\n"
 template <class T> 
-void println(T const & t) {std::cout << t;}
+void println(T const & t) {print_mutex.lock(); std::cout << t; print_mutex.unlock();}
 
 /// @brief Generic print in one line
 /// @details Concatenate the ouput, i.e. do not add space between each input. Do not terminate the output with a "\\n"
@@ -132,7 +132,7 @@ template <class T, class... T2>
 void println(T const & t, T2 const &... t2) {print_mutex.lock(); std::cout << t; print_mutex.unlock();  println(t2...);}
 
 /// @brief Set the floating point precision displayed.
-void print_precision(int n = 6) {std::cout << std::setprecision(n);}
+void print_precision(int n = 6) {print_mutex.lock(); std::cout << std::setprecision(n); print_mutex.unlock();}
 
 /// @brief Requires #define DEBUG or -DDEBUG in the compile line
 template <class... ARGS> void debug(ARGS &&... args) 

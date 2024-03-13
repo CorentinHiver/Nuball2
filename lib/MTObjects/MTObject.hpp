@@ -189,7 +189,7 @@ public:
         m_thread_index = i; // Index the thread
         func(std::forward<ARGS>(args)...); // Run the function inside thread
       });
-      for(size_t i = 0; i < m_threads.size(); i++) m_threads.at(i).join(); //Closes threads, waiting fot everyone to finish
+      for(size_t i = 0; i < nb_threads; i++) m_threads.at(i).join(); //Closes threads, waiting fot everyone to finish
       m_threads.clear(); // Flushes memory
       std::cout << "Multi-threading is over !" << std::endl;
     }

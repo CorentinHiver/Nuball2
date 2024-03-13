@@ -35,13 +35,15 @@ int main()
   std::cout << "Done !" << std::endl;
 
   std::vector<std::thread> threads;
+  threads.reserve(2);
 
-  std::cout << "Vectors created" << std::endl;
+  std::cout << "threads created" << std::endl;
 
   for (int thread_i = 0; thread_i<2; ++thread_i){
     threads.emplace_back([&](){
-      std::string name = "myTree"+std::to_string(thread_i);
-      TTree* tree (new TTree(name.c_str(),name.c_str()));
+      // std::string name = "myTree"+std::to_string(thread_i);
+      // TTree* tree (new TTree(name.c_str(),name.c_str()));
+      TTree* tree (new TTree("myTree", "myTree"));
       tree -> SetDirectory(nullptr);
       double test = 0.0;
       tree->Branch("test", &test, "D");
@@ -54,6 +56,7 @@ int main()
       delete tree;
     });
     for (auto & thread : threads) thread.join();
+    threads.clear();
   }
 
 
