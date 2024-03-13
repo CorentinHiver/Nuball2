@@ -72,8 +72,9 @@ inline Timestamp Timestamp_cast(T const & t) {return static_cast<Timestamp>(t);}
  * E : nrj    energy in keV         float
  * q : qdc2   energy qdc2 in ADC    float
  * Q : nrj2   energy qdc2 in keV    float
+ * 3 : qdc3   energy qdc3 in ADC    float
+ * R : nrj3   energy qdc3 in keV    float
  * p : pileup pilepup               bool
- * 
  */
 class IOptions
 {
@@ -86,29 +87,33 @@ public:
     {
       switch (option)
       {
-        case ('l') : l   = true;  break;
-        case ('s') : s   = true;  break;
-        case ('t') : t   = true;  break;
-        case ('T') : T   = true;  break;
-        case ('e') : e   = true;  break;
-        case ('E') : E   = true;  break;
-        case ('q') : q   = true;  break;
-        case ('Q') : Q   = true;  break;
-        case ('p') : p   = true;  break;
+        case ('l') : l  = true; break;
+        case ('s') : s  = true; break;
+        case ('t') : t  = true; break;
+        case ('T') : T  = true; break;
+        case ('e') : e  = true; break;
+        case ('E') : E  = true; break;
+        case ('q') : q  = true; break;
+        case ('Q') : Q  = true; break;
+        case ('3') : q3 = true; break;
+        case ('R') : Q3 = true; break;
+        case ('p') : p  = true; break;
         default : print("Unkown parameter", option, "for io event");
       }
     }
   }
 
-  bool l = false; // label
-  bool s = false; // Timestamp
-  bool t = false; // relative time ps
-  bool T = false; // relative time ns
-  bool e = false; // energy in ADC
-  bool E = false; // calibrated energy
-  bool q = false; // qdc2
-  bool Q = false; // calibrated qdc2
-  bool p = false; // pileup
+  bool l  = false; // label
+  bool s  = false; // Timestamp
+  bool t  = false; // relative time ps
+  bool T  = false; // relative time ns
+  bool e  = false; // energy in ADC
+  bool E  = false; // calibrated energy
+  bool q  = false; // qdc2
+  bool Q  = false; // calibrated qdc2
+  bool q3 = false; // qdc3
+  bool Q3 = false; // calibrated qdc3
+  bool p  = false; // pileup
 };
 
 /////////////////
@@ -250,15 +255,15 @@ void Hit::reading(TTree * tree)
     const char* branchName = branch->GetName();
     std::string branchNameStr(branchName);
   
-    if(branchNameStr == "label" ) {read.l = true; tree -> SetBranchAddress("label" , & label );}
-    if(branchNameStr == "stamp" ) {read.s = true; tree -> SetBranchAddress("stamp" , & stamp );}
-    if(branchNameStr == "adc"   ) {read.e = true; tree -> SetBranchAddress("adc"   , & adc   );}
-    if(branchNameStr == "nrj"   ) {read.E = true; tree -> SetBranchAddress("nrj"   , & nrj   );}
-    if(branchNameStr == "qdc2"  ) {read.e = true; tree -> SetBranchAddress("qdc2"  , & qdc2  );}
-    if(branchNameStr == "nrj2"  ) {read.E = true; tree -> SetBranchAddress("nrj2"  , & nrj2  );}
-    if(branchNameStr == "qdc3"  ) {read.q = true; tree -> SetBranchAddress("qdc3"  , & qdc3  );}
-    if(branchNameStr == "nrj3"  ) {read.q = true; tree -> SetBranchAddress("nrj3"  , & nrj3  );}
-    if(branchNameStr == "pileup") {read.p = true; tree -> SetBranchAddress("pileup", & pileup);}
+    if(branchNameStr == "label" ) {read.l  = true; tree -> SetBranchAddress("label" , & label );}
+    if(branchNameStr == "stamp" ) {read.s  = true; tree -> SetBranchAddress("stamp" , & stamp );}
+    if(branchNameStr == "adc"   ) {read.e  = true; tree -> SetBranchAddress("adc"   , & adc   );}
+    if(branchNameStr == "nrj"   ) {read.E  = true; tree -> SetBranchAddress("nrj"   , & nrj   );}
+    if(branchNameStr == "qdc2"  ) {read.q  = true; tree -> SetBranchAddress("qdc2"  , & qdc2  );}
+    if(branchNameStr == "nrj2"  ) {read.Q  = true; tree -> SetBranchAddress("nrj2"  , & nrj2  );}
+    if(branchNameStr == "qdc3"  ) {read.q3 = true; tree -> SetBranchAddress("qdc3"  , & qdc3  );}
+    if(branchNameStr == "nrj3"  ) {read.Q3 = true; tree -> SetBranchAddress("nrj3"  , & nrj3  );}
+    if(branchNameStr == "pileup") {read.p  = true; tree -> SetBranchAddress("pileup", & pileup);}
   }
 } 
 
@@ -272,15 +277,15 @@ void Hit::reading(TTree * tree, std::string const & options)
 
   tree -> ResetBranchAddresses();
   
-  if (read.l) tree -> SetBranchAddress("label"  , & label  );
-  if (read.s) tree -> SetBranchAddress("stamp"  , & stamp  );
-  if (read.e) tree -> SetBranchAddress("adc"    , & adc    );
-  if (read.E) tree -> SetBranchAddress("nrj"    , & nrj    );
-  if (read.q) tree -> SetBranchAddress("qdc2"   , & qdc2   );
-  if (read.Q) tree -> SetBranchAddress("nrj2"   , & nrj2   );
-  if (read.q) tree -> SetBranchAddress("qdc3"   , & qdc3   );
-  if (read.Q) tree -> SetBranchAddress("nrj3"   , & nrj3   );
-  if (read.p) tree -> SetBranchAddress("pileup" , & pileup );
+  if (read.l ) tree -> SetBranchAddress("label"  , & label  );
+  if (read.s ) tree -> SetBranchAddress("stamp"  , & stamp  );
+  if (read.e ) tree -> SetBranchAddress("adc"    , & adc    );
+  if (read.E ) tree -> SetBranchAddress("nrj"    , & nrj    );
+  if (read.q ) tree -> SetBranchAddress("qdc2"   , & qdc2   );
+  if (read.Q ) tree -> SetBranchAddress("nrj2"   , & nrj2   );
+  if (read.q3) tree -> SetBranchAddress("qdc3"   , & qdc3   );
+  if (read.Q3) tree -> SetBranchAddress("nrj3"   , & nrj3   );
+  if (read.p ) tree -> SetBranchAddress("pileup" , & pileup );
 } 
 
 void Hit::writting(TTree * tree, std::string const & options)
@@ -291,27 +296,27 @@ void Hit::writting(TTree * tree, std::string const & options)
 
   tree -> ResetBranchAddresses();
 
-  if (write.l) tree -> Branch("label"  , & label  );
-  if (write.s) tree -> Branch("stamp"  , & stamp  );
-  if (write.e) tree -> Branch("adc"    , & adc    );
-  if (write.E) tree -> Branch("nrj"    , & nrj    );
-  if (write.q) tree -> Branch("qdc2"   , & qdc2   );
-  if (write.Q) tree -> Branch("nrj2"   , & nrj2   );
-  if (write.q) tree -> Branch("qdc3"   , & qdc3   );
-  if (write.Q) tree -> Branch("nrj3"   , & nrj3   );
-  if (write.p) tree -> Branch("pileup" , & pileup );
+  if (write.l ) tree -> Branch("label"  , & label  );
+  if (write.s ) tree -> Branch("stamp"  , & stamp  );
+  if (write.e ) tree -> Branch("adc"    , & adc    );
+  if (write.E ) tree -> Branch("nrj"    , & nrj    );
+  if (write.q ) tree -> Branch("qdc2"   , & qdc2   );
+  if (write.Q ) tree -> Branch("nrj2"   , & nrj2   );
+  if (write.q3) tree -> Branch("qdc3"   , & qdc3   );
+  if (write.Q3) tree -> Branch("nrj3"   , & nrj3   );
+  if (write.p ) tree -> Branch("pileup" , & pileup );
 }
 
 std::ostream& operator<<(std::ostream& cout, Hit const & hit)
 {
   cout << "l : " << hit.label;
-  if (hit.stamp  != 0) cout << " timestamp : "    << hit.stamp;
-  if (hit.adc   != 0) cout << " adc : "     << hit.adc ;
-  if (hit.qdc2  != 0) cout << " qdc2 : "    << hit.qdc2;
-  if (hit.qdc3  != 0) cout << " qdc3 : "    << hit.qdc3;
-  if (hit.nrj   != 0) cout << " nrj : "     << hit.nrj ;
-  if (hit.nrj2  != 0) cout << " nrj2 : "    << hit.nrj2;
-  if (hit.nrj3  != 0) cout << " nrj3 : "    << hit.nrj3;
+  if (hit.stamp != 0) cout << " timestamp : " << hit.stamp;
+  if (hit.adc   != 0) cout << " adc : "       << hit.adc ;
+  if (hit.qdc2  != 0) cout << " qdc2 : "      << hit.qdc2;
+  if (hit.qdc3  != 0) cout << " qdc3 : "      << hit.qdc3;
+  if (hit.nrj   != 0) cout << " nrj : "       << hit.nrj ;
+  if (hit.nrj2  != 0) cout << " nrj2 : "      << hit.nrj2;
+  if (hit.nrj3  != 0) cout << " nrj3 : "      << hit.nrj3;
   if (hit.pileup)     cout << " pileup";
   return cout;
 }

@@ -203,7 +203,7 @@ bool inline FasterReader::Initialize()
     print("No file ", m_filename);
     return false;
   }
-  thread_local std::ifstream file(m_filename);
+  std::ifstream file(m_filename);
   if (!file.is_open())
   {
     print("File ", m_filename, " not found...");

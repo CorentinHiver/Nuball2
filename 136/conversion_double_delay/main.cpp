@@ -466,7 +466,8 @@ void convert(Hit & hit, FasterReader & reader,
   std::string const & tempTree_name = "temp"+std::to_string(MTObject::getThreadIndex());
   std::unique_ptr<TTree> tempTree (new TTree(tempTree_name.c_str(),tempTree_name.c_str()));
   tempTree -> SetDirectory(nullptr); // Force it to be created on RAM rather than on disk - much faster if enough RAM
-  hit.writting(tempTree.get(), "lsEQp");
+  hit.writting(tempTree.get(), "lsEQ"); // The pileup bit has been removed because of weird errors raised by valgrind drd
+  // hit.writting(tempTree.get(), "lsEQp");
 
   // ------------------------ //
   // Loop over the .fast file //
@@ -501,13 +502,16 @@ void convert(Hit & hit, FasterReader & reader,
   // ------------------------------------------------------ //
   // Switch the temporary TTree to reading mode :
   hit.reset();
-  hit.reading(tempTree.get(), "lsEQp");
+  hit.reading(tempTree.get(), "lsEQ"); // The pileup bit has been removed because of weird errors raised by valgrind drd
+  // hit.reading(tempTree.get(), "lsEQp");
 
   // Create output tree and Event 
-  unique_tree outTree (new TTree("Nuball2","Nuball2"));
+  std::string const name = "Nuball2"+std::to_string(MTObject::getThreadIndex());
+  unique_tree outTree (new TTree(name.c_str(),name.c_str()));
   outTree -> SetDirectory(nullptr); // Force it to be created on RAM rather than on disk - much faster if enough RAM
   Event event;
-  event.writting(outTree.get(), "lstEQp");
+  event.writting(outTree.get(), "lstEQ");// The pileup bit has been removed because of weird errors raised by valgrind drd
+  // event.writting(outTree.get(), "lstEQp");
 
   // Initialize RF manager :
   RF_Manager rf;
@@ -860,7 +864,9 @@ void convert(Hit & hit, FasterReader & reader,
   Timer write_timer;
 
   // Initialize output TTree :
+  MTObject::mutex.lock();
   unique_TFile outFile (TFile::Open(outfile.c_str(), "RECREATE"));
+  MTObject::mutex.unlock();
   outFile -> cd();
   outTree -> Write();
   outFile -> Write();

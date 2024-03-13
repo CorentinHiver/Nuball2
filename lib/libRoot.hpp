@@ -410,18 +410,20 @@ bool TypeRootMap::initialized = false;
 
 /// @brief Create a branch for a given value and name
 template<class T>
-auto createBranch(TTree* tree, T * value, std::string const & name)
+auto createBranch(TTree* tree, T * value, std::string const & name, int buffsize = 64000, int splitlevel = 99)
 {
-  return (tree -> Branch(name.c_str(), value, (name+"/"+typeRootMap(*value)).c_str()), 64000);
+  auto const & type_root_format = name+"/"+typeRootMap(*value);
+  return (tree -> Branch(name.c_str(), value, type_root_format.c_str()), buffsize, splitlevel);
 }
 
 /// @brief Create a branch for a given array and name
 /// @param name_size: The name of the leaf that holds the size of the array
 template<class T>
-auto createBranchArray(TTree* tree, T * array, std::string const & name, std::string const & name_size)
+auto createBranchArray(TTree* tree, T * array, std::string const & name, std::string const & name_size, int buffsize = 64000, int splitlevel = 99)
 {
-  // using **array because it is an array, so *array takes the first element of the array
-  return (tree -> Branch(name.c_str(), array, (name+"["+name_size+"]/"+typeRootMap(**array)).c_str()), 64000);
+  // using **array because it is an array, so *array dereferences the array and **array the first element of the array
+  auto const & type_root_format = name+"["+name_size+"]/"+typeRootMap(**array);
+  return (tree -> Branch(name.c_str(), array, type_root_format.c_str()), buffsize, splitlevel);
 }
 
 
