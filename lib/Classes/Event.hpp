@@ -177,7 +177,7 @@ public:
   }
 
   // Public members :
-  ulong mult = 0;
+  int mult = 0;
   Timestamp stamp = 0ull;
   Label   labels  [255] = {0};
   Time    times   [255] = {0};
