@@ -1,4 +1,5 @@
-#include "../libRoot.hpp"
+// #include <MTObject.hpp>
+// #include "../libRoot.hpp"
 // #include <SourceCloverSpectra.hpp>
 // #include <Calibration.hpp>
 // #include <Calibrator.hpp>
@@ -19,20 +20,40 @@
 // #include <CobaltCalorimeter.hpp>
 // #include <MTTHist.hpp>
 
-int main(int argc, char ** argv)
+#include <TROOT.h>
+#include <TThread.h>
+#include <TTree.h>
+#include <thread>
+#include <vector>
+#include <iostream>
+
+int main()
 { 
-  ////////////////////
-  //   Timeshifts   //
-  ////////////////////
+  std::cout << "initializing threads...." << std::endl;
+  TThread::Initialize();
+  ROOT::EnableThreadSafety();
+  std::cout << "Done !" << std::endl;
 
   std::vector<std::thread> threads;
 
+  std::cout << "Vectors created" << std::endl;
+
   for (int thread_i = 0; thread_i<2; ++thread_i){
     threads.emplace_back([&](){
-      thread_local std::unique_ptr<TTree> tempTree (new TTree("temp","temp"));
-    tempTree -> SetDirectory(nullptr); // Force it to be created on RAM rather than on disk - much faster if enough RAM
-    hit.writting(tempTree.get(), "lsEQp");
-    })
+      std::string name = "myTree"+std::to_string(thread_i);
+      TTree* tree (new TTree(name.c_str(),name.c_str()));
+      tree -> SetDirectory(nullptr);
+      double test = 0.0;
+      tree->Branch("test", &test, "D");
+      for (int i = 0; i<20; i++)
+      {
+        test = static_cast<double>(i);
+        tree->Fill();
+      }
+      std::cout << tree->GetEntries() << std::endl;
+      delete tree;
+    });
+    for (auto & thread : threads) thread.join();
   }
 
 
