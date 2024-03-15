@@ -168,7 +168,7 @@ public:
       #ifdef DEBUG
       std::cout << "Initialize ROOT thread management..." << std::endl;
       #endif //DEBUG
-      TThread::Initialize();
+      // TThread::Initialize();
       ROOT::EnableThreadSafety();
       MTObject::ON = true;
       std::cout << "MTObject initialized with " << nb_threads << " threads " << std::endl;

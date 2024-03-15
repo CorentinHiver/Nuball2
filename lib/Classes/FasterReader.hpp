@@ -190,8 +190,17 @@ bool inline FasterReader::Reset()
   return true;
 }
 
+#ifndef MULTITHREADING
+std::mutex fasterReaderMutex;
+#endif //MULTITHREADING
+
 bool inline FasterReader::Initialize()
 {
+  
+#ifndef MULTITHREADING
+  lock_mutex lock(fasterReaderMutex);
+#endif //MULTITHREADING
+
 #ifdef FASTER_GROUP
   m_hit_group_buffer.resize(5000, &m_empty_hit); //If the number of hits in one group exceeds 5000 then it will crash
   m_group_write_cursor = 0; m_group_read_cursor = 0;
@@ -227,6 +236,7 @@ bool inline FasterReader::Initialize()
     print("File ", m_filename, " not a .fast file !!");
     m_kReady = false; return false;
   }
+
   return (m_kReady = true);
 }
 

@@ -467,9 +467,9 @@ mutex_Root.lock();
   std::string const & tempTree_name = "temp"+std::to_string(MTObject::getThreadIndex());
   TTree* tempTree (new TTree(tempTree_name.c_str(),tempTree_name.c_str()));
   tempTree -> SetDirectory(nullptr); // Force it to be created on RAM rather than on disk - much faster if enough RAM
-mutex_Root.unlock();
   hit.writting(tempTree, "lsEQ"); // The pileup bit has been removed because of weird errors raised by valgrind drd
   // hit.writting(tempTree, "lsEQp");
+mutex_Root.unlock();
 
   // ------------------------ //
   // Loop over the .fast file //
@@ -875,10 +875,10 @@ mutex_Root.lock();
   TFile* outFile (TFile::Open(outfile.c_str(), "RECREATE"));
   outFile -> cd();
   outTree->SetDirectory(outFile);
-mutex_Root.unlock();
   outTree -> Write();
   outFile -> Write();
   outFile -> Close();
+mutex_Root.unlock();
 
   write_timer.Stop();
 
@@ -1190,12 +1190,17 @@ int main(int argc, char** argv)
     Path outMergedPath (outPath.string()+"merged", true);
     File outMergedFile (outMergedPath, run_name+".root");
     
-    if (outMergedFile.exists() && overwrite) system(("rm " + outMergedFile.string()).c_str());
+    run_infos.writeLine(output_fileinfo);
+    
+    if (outMergedFile.exists())
+    {
+      if (overwrite) system(("rm " + outMergedFile.string()).c_str());
+      else continue;
+    } 
 
     std::string merge_command = "hadd -v 1 -j " + std::to_string(nb_threads) + " " + outMergedPath.string() + run_name + ".root " + outDataPath.string() + run_name + "_*.root";
     system(merge_command.c_str());
 
-    run_infos.writeLine(output_fileinfo);
   }
   output_fileinfo.close();
   print(output_fileinfo_name, "written");

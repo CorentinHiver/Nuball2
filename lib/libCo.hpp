@@ -7,13 +7,13 @@
 #endif //_GLIBCXX_USE_CXX11_ABI
 
 // This is used to generate better debug symbols for drd :
-#ifdef DEBUG
+#ifdef DEBUGVALGRIND
   #include <valgrind/drd.h>
   #undef _GLIBCXX_SYNCHRONIZATION_HAPPENS_BEFORE
   #undef _GLIBCXX_SYNCHRONIZATION_HAPPENS_AFTER
   #define _GLIBCXX_SYNCHRONIZATION_HAPPENS_BEFORE(addr) ANNOTATE_HAPPENS_BEFORE(addr)
   #define _GLIBCXX_SYNCHRONIZATION_HAPPENS_AFTER(addr)  ANNOTATE_HAPPENS_AFTER(addr)
-#endif //DEBUG
+#endif //DEBUGVALGRIND
 
 // ********** Corentin Lib ************ //
 #include "print.hpp"

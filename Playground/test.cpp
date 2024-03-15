@@ -1,5 +1,7 @@
-// #include <MTObject.hpp>
-// #include "../libRoot.hpp"
+#include <MTObject.hpp>
+#include "../libRoot.hpp"
+#include <Hit.hpp>
+#include <FasterReader.hpp>
 // #include <SourceCloverSpectra.hpp>
 // #include <Calibration.hpp>
 // #include <Calibrator.hpp>
@@ -29,7 +31,7 @@
 
 int main()
 { 
-  std::cout << "initializing threads...." << std::endl;
+  std::cout << "Initializing the threads..." << std::endl;
   TThread::Initialize();
   ROOT::EnableThreadSafety();
   std::cout << "Done !" << std::endl;
@@ -38,26 +40,57 @@ int main()
   threads.reserve(2);
 
   std::cout << "threads created" << std::endl;
+  FasterReader::setMaxHits(1000000);
 
-  for (int thread_i = 0; thread_i<2; ++thread_i){
-    threads.emplace_back([&](){
-      // std::string name = "myTree"+std::to_string(thread_i);
-      // TTree* tree (new TTree(name.c_str(),name.c_str()));
-      TTree* tree (new TTree("myTree", "myTree"));
-      tree -> SetDirectory(nullptr);
-      double test = 0.0;
-      tree->Branch("test", &test, "D");
-      for (int i = 0; i<20; i++)
+  std::mutex myMutex;
+
+  for (int thread_i = 0; thread_i<2; ++thread_i){threads.emplace_back([&](){
+
+    TTree* tree (new TTree("myTree", "myTree"));
+    tree->SetDirectory(nullptr);
+
+    Hit hit;
+
+    if (MTObject::getThreadIndex() == 0)
+    {
+      FasterReader reader(&hit, "/home/corentin/faster_data/N-SI-136/run_75.fast/run_75_0002.fast");
+      
+      myMutex.lock();
+        tree -> Branch("label"  , &hit.label  );
+        tree -> Branch("stamp"  , &hit.stamp  );
+        tree -> Branch("nrj"    , &hit.nrj    );
+        tree -> Branch("nrj2"   , &hit.nrj2   );
+        tree -> Branch("pileup" , &hit.pileup );
+      myMutex.unlock();
+
+      while(reader.Read())
       {
-        test = static_cast<double>(i);
         tree->Fill();
       }
-      std::cout << tree->GetEntries() << std::endl;
-      delete tree;
-    });
-    for (auto & thread : threads) thread.join();
-    threads.clear();
+    }
+
+    else if (MTObject::getThreadIndex() == 1)
+    {
+      FasterReader reader(&hit, "/home/corentin/faster_data/N-SI-136/run_75.fast/run_75_0003.fast");
+      
+      myMutex.lock();
+        tree -> Branch("label"  , &hit.label  );
+        tree -> Branch("stamp"  , &hit.stamp  );
+        tree -> Branch("nrj"    , &hit.nrj    );
+        tree -> Branch("nrj2"   , &hit.nrj2   );
+        tree -> Branch("pileup" , &hit.pileup );
+      myMutex.unlock();
+
+      while(reader.Read())
+      {
+        tree->Fill();
+      }
+    }
+  });
   }
+  for (auto & thread : threads) thread.join();
+  threads.clear();
+
 
 
   // detectors.load("index_129.list");
