@@ -2,14 +2,14 @@
 #include "../libRoot.hpp"
 #include <Hit.hpp>
 #include <FasterReader.hpp>
+#include <Detectors.hpp>
+#include <Timeshifts.hpp>
 // #include <SourceCloverSpectra.hpp>
 // #include <Calibration.hpp>
 // #include <Calibrator.hpp>
 // #include <RunMatrixator.hpp>
 // #include <SpectraAlignator.hpp>
 // #include <FasterReader.hpp>
-#include <Detectors.hpp>
-#include <Timeshifts.hpp>
 // #include <Convertor.hpp>
 // #include <MTFasterReader.hpp>
 // #include <Faster2Histo.hpp>
@@ -75,11 +75,11 @@ int main()
   // for (auto & thread : threads) thread.join();
   // threads.clear();
 
-
-
-  detectors.load("index_129.list");
   if (found(Path::pwd().string(), "faster")) MTObject::Initialize(10);
   else                              MTObject::Initialize(2);
+
+  MTObject::Initialize(2);
+  detectors.load("index_129.list");
   Timeshifts ts;
   ts.calculate("/home/corentin/faster_data/N-SI-136/152_Eu_center_after.fast", 20);
   ts.verify("/home/corentin/faster_data/N-SI-136/152_Eu_center_after.fast", 20);

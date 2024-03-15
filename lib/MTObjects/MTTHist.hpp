@@ -495,10 +495,10 @@ template<class THist>
 THist* MTTHist<THist>::Merge()
 {
   if (m_is_merged) return m_merged; // Can only merge once
-  if (!m_exists || m_collection.size() == 0 || m_collection[0] -> IsZombie() || this -> Integral() < 1)
+  if (!m_exists || !m_collection[0] || this -> Integral() < 1)
   {
     debug("problem with", m_name, " : exists ?", (m_exists) ? "oui" : "non", " | nb histos : ", m_collection.size(),
-          "| zombie ?", (m_collection[0] -> IsZombie()) ? "oui" : "non", "| integral = ", this -> Integral());
+          "| integral = ", this -> Integral());
     m_is_merged = false;
     delete m_merged;
     m_merged = nullptr;

@@ -531,6 +531,8 @@ bool Timeshifts::InitializeCorrected()
 
 bool Timeshifts::Initialize(bool const & initializeRaw, bool const & initializeCorrected)
 {
+  Timeshifts::InitialisePreferencesArrays();
+  
   if (initializeRaw) this -> InitializeRaw();
 
   if (initializeCorrected) this -> InitializeCorrected();    
