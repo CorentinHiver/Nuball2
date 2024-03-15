@@ -45,7 +45,7 @@ HEADER_INCLUDES := $(addprefix -I,$(shell find $(HEADER_DIR) -type d ))
 	${CC} -c $< ${CFLAGS} ${LIBS} ${HEADER_INCLUDES}
 
 CC        = g++
-CFLAGS    = ${FASTERAC_CFLAGS} ${ROOT_CFLAGS} -pthread -std=c++17 -Wall 
+CFLAGS    = ${FASTERAC_CFLAGS} ${ROOT_CFLAGS} -pthread -std=c++17 -Wall -lstdc++
 LIBS      = ${FASTERAC_LIBS}   ${ROOT_LIBS}
 
 # Set SRCEXE to the name of the source file you want to compile
@@ -62,14 +62,26 @@ $(EXE): $(SRCEXE:.cpp=.o) ${HEADER_FILES}
 opt: CFLAGS += -O2
 opt: default
 
-debug: CFLAGS += -g -O0 -DDEBUG -Wextra -ftemplate-depth-25 #-Wold-style-cast
+opt_clang: CC = clang
+opt_clang: CFLAGS += -Wno-unused-command-line-argument
+opt_clang: opt
+
+debug: CFLAGS += -fno-inline -g -O0 -DDEBUG -Wextra -ftemplate-depth-25 #-Wold-style-cast
 debug: default
 
-debugopt: CFLAGS += -g -O2 -DDEBUG -Wextra -ftemplate-depth-25 #-Wold-style-cast
+debugopt: CFLAGS += -fno-inline -g -O2 -DDEBUG -Wextra -ftemplate-depth-25 #-Wold-style-cast
 debugopt: default
 
-harddebug: CFLAGS += -g -O0 -DDEBUG -Wextra -ftemplate-depth-25 -Wconversion -Wno-float-conversion -Wold-style-cast
+harddebug: CFLAGS += -fno-inline -g -O0 -DDEBUG -Wextra -ftemplate-depth-25 -Wconversion -Wno-float-conversion -Wold-style-cast
 harddebug: default
+
+debug_clang: CC = clang
+debug_clang: CFLAGS += -Wno-unused-command-line-argument
+debug_clang: debug
+
+debug_clang_16: CC = clang
+debug_clang_16: CFLAGS += -Wno-unused-command-line-argument
+debug_clang_16: debug
 
 debugvalgrind: CFLAGS += -DDEBUGVALGRIND
 debugvalgrind: debug

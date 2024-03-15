@@ -27,7 +27,7 @@ public:
 
   void resize(size_t size) 
   {
-    lock_mutex(MTObject::mutex);
+    lock_mutex lock(MTObject::mutex);
     m_variables.clear();
     m_variables.resize(size);
   }

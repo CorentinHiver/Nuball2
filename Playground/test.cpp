@@ -8,8 +8,8 @@
 // #include <RunMatrixator.hpp>
 // #include <SpectraAlignator.hpp>
 // #include <FasterReader.hpp>
-// #include <Detectors.hpp>
-// #include <Timeshifts.hpp>
+#include <Detectors.hpp>
+#include <Timeshifts.hpp>
 // #include <Convertor.hpp>
 // #include <MTFasterReader.hpp>
 // #include <Faster2Histo.hpp>
@@ -31,59 +31,60 @@
 
 int main()
 { 
-  std::cout << "Initializing the threads..." << std::endl;
-  // TThread::Initialize();
-  ROOT::EnableThreadSafety();
-  std::cout << "Done !" << std::endl;
+  // std::cout << "Initializing the threads..." << std::endl;
+  // // TThread::Initialize();
+  // ROOT::EnableThreadSafety();
+  // std::cout << "Done !" << std::endl;
 
-  std::vector<std::thread> threads;
-  threads.reserve(2);
+  // std::vector<std::thread> threads;
+  // threads.reserve(2);
 
-  std::cout << "threads created" << std::endl;
-  FasterReader::setMaxHits(1000000);
+  // std::cout << "threads created" << std::endl;
+  // FasterReader::setMaxHits(1000000);
 
-  std::mutex myMutex;
-  std::vector<std::string> names = 
-  {
-    "/home/corentin/faster_data/N-SI-136/run_75.fast/run_75_0002.fast",
-    "/home/corentin/faster_data/N-SI-136/run_75.fast/run_75_0003.fast"
-  };
+  // std::mutex myMutex;
+  // std::vector<std::string> names = 
+  // {
+  //   "/home/corentin/faster_data/N-SI-136/run_75.fast/run_75_0002.fast",
+  //   "/home/corentin/faster_data/N-SI-136/run_75.fast/run_75_0003.fast"
+  // };
 
-  for (int thread_i = 0; thread_i<2; ++thread_i){threads.emplace_back([&](){
+  // for (int thread_i = 0; thread_i<2; ++thread_i){threads.emplace_back([&](){
 
-    TTree* tree (new TTree("myTree", "myTree"));
-    tree->SetDirectory(nullptr);
+  //   TTree* tree (new TTree("myTree", "myTree"));
+  //   tree->SetDirectory(nullptr);
 
-    Hit hit;
+  //   Hit hit;
 
-    FasterReader reader(&hit, names[MTObject::getThreadIndex()]);
+  //   FasterReader reader(&hit, names[MTObject::getThreadIndex()]);
     
-    myMutex.lock();
-      tree -> Branch("label"  , &hit.label  );
-      tree -> Branch("stamp"  , &hit.stamp  );
-      tree -> Branch("nrj"    , &hit.nrj    );
-      tree -> Branch("nrj2"   , &hit.nrj2   );
-      tree -> Branch("pileup" , &hit.pileup );
-    myMutex.unlock();
+  //   myMutex.lock();
+  //     tree -> Branch("label"  , &hit.label  );
+  //     tree -> Branch("stamp"  , &hit.stamp  );
+  //     tree -> Branch("nrj"    , &hit.nrj    );
+  //     tree -> Branch("nrj2"   , &hit.nrj2   );
+  //     tree -> Branch("pileup" , &hit.pileup );
+  //   myMutex.unlock();
 
-    while(reader.Read())
-    {
-      tree->Fill();
-    }
-  });
-  }
-  for (auto & thread : threads) thread.join();
-  threads.clear();
+  //   while(reader.Read())
+  //   {
+  //     tree->Fill();
+  //   }
+  // });
+  // }
+  // for (auto & thread : threads) thread.join();
+  // threads.clear();
 
 
 
-  // detectors.load("index_129.list");
-  // if (found(Path::pwd().string(), "faster")) MTObject::Initialize(10);
-  // else                              MTObject::Initialize(2);
-  // // Timeshifts ts;
-  // // ts.calculate("/home/corentin/faster_data/N-SI-136/60Co_center_after.fast", 20);
-  // // ts.write("136_Co");
-  // // print(ts);
+  detectors.load("index_129.list");
+  if (found(Path::pwd().string(), "faster")) MTObject::Initialize(10);
+  else                              MTObject::Initialize(2);
+  Timeshifts ts;
+  ts.calculate("/home/corentin/faster_data/N-SI-136/152_Eu_center_after.fast", 20);
+  ts.verify("/home/corentin/faster_data/N-SI-136/152_Eu_center_after.fast", 20);
+  ts.write("136_Co");
+  print(ts);
 
 
 

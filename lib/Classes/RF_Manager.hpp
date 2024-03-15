@@ -59,11 +59,6 @@ public:
     {// Normal case
       auto const & rf_time = (shifted_timestamp-last_downscale);
       auto const & relative_time = Time_cast((rf_time%period));
-      // if (relative_time - m_offset > 181000) 
-      // {
-      //   print(rf_time, period, relative_time, relative_time - m_offset);
-      //   pauseCo();
-      // }
       return relative_time - m_offset;
     }
     else
@@ -74,9 +69,6 @@ public:
     }
   }
   Time pulse_ToF(Hit const & hit) const {return pulse_ToF(hit.stamp);}
-
-  Time pulse_ToF(Hit const & hit, Time const & offset) const {return pulse_ToF(hit.stamp, offset);}
-  Time pulse_ToF(Timestamp const & timestamp, Time const & offset) const {return pulse_ToF(timestamp, offset);}
 
   template<class... ARGS>
   float pulse_ToF_ns(ARGS... args) {return (static_cast<float>(pulse_ToF(std::forward<ARGS>(args)...))/1000.f);}

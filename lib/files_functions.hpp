@@ -451,7 +451,8 @@ private:
 
 std::ostream& operator<<(std::ostream& cout, Folders const & folders)
 {
-  cout << folders.get();
+  auto const & vector = folders.get();
+  for (auto folder : vector) cout << folder << " ";
   return cout;
 }
 
@@ -550,9 +551,9 @@ private:
 
   void loadPath(bool const & create = false)
   {
-  #ifdef MTOBJECT_HPP
-    lock_mutex(MTObject::mutex);
-  #endif //MTOBJECT_HPP
+  #ifdef MULTITHREADING
+    // lock_mutex lock(MTObject::mutex);
+  #endif //MULTITHREADING
 
     m_recursive_folders.clear();
     if (m_path[0]=='/')

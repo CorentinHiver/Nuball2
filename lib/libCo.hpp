@@ -48,9 +48,9 @@
 #include <string.h>
 
 
-///////////////////////////
-// Som specialised print //
-///////////////////////////
+////////////////////////////
+// Some specialised print //
+////////////////////////////
 
 
 // ------------------------------------------------------- //
@@ -631,11 +631,11 @@ class Slots
   public:
   Slots() = default;
 
-  template<class... ARGS>
-  static void connect(std::function<void(ARGS...)> signal, std::function<void(ARGS...)> slot)
-  {
+  // template<class... ARGS>
+  // static void connect(std::function<void(ARGS...)> signal, std::function<void(ARGS...)> slot)
+  // {
 
-  }
+  // }
 
   private:
 
@@ -645,9 +645,9 @@ class Slots
 };
 #endif //__cplusplus >= 201402L
 
-///////////////////////
-//   SOME COOL STUFF //
-///////////////////////
+/////////////////////////
+//   SOME COOL STUFF   //
+/////////////////////////
 
 namespace CoBazar
 {

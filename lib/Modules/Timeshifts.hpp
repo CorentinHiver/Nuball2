@@ -780,7 +780,6 @@ void Timeshifts::Fill(Event const & event, RF_Manager & rf)
 
   // There are 2 imbricated loops : the first one fills the time spectra and looks for the time reference.
   // If found, it opens another loop to fill the coincidence time spectra
-  auto const & rf_Ref = rf.pulse_ToF(event.stamp);
 
   for (int loop_i = 0; loop_i < mult; loop_i++)
   {
@@ -788,6 +787,7 @@ void Timeshifts::Fill(Event const & event, RF_Manager & rf)
 
     if(m_use_rf)
     {
+      auto const & rf_Ref = rf.pulse_ToF(event.stamp);
       auto const & label = event.labels[loop_i];
       auto const & time = event.times[loop_i];
       auto const & nrj = event.nrjs[loop_i];

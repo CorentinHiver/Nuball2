@@ -44,11 +44,11 @@ public:
     if (m_MTOn) list_runs_MT.push_back(folder);
   }
 
-  /// @brief @deprecated Reads the list file containing the list of folders
-  bool readFile()
+  /// @brief Reads the list file containing the list of folders
+  void readFile()
   {
     m_runs_files = m_datapath + m_manip + m_file;
-    return readFile();
+    readFile(m_runs_files);
   }
 
   /// @brief @deprecated Set the path of the list file containing the list of folders
@@ -82,7 +82,7 @@ public:
 
   operator bool() const & {return m_ok;}
 
-  void Print() { (m_MTOn) ? list_runs_MT.Print() : print(list_runs); }
+  // void Print() { (m_MTOn) ? list_runs_MT.Print() : print(list_runs); }
 
   bool getNext(std::string & run)
   {

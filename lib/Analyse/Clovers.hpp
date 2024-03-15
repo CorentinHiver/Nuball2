@@ -78,6 +78,8 @@ public:
   //  - the label is the raw detector label as declared in faster and index_1**.0at
   //  - the Ge  crystal index ranges from 0 to 95 and is then used for angles and visualisation purposes
   //  - the BGO crystal index ranges from 0 to 47 and "                                                "
+  
+  static int constexpr nb_det = 1000; // This refers to the total number
 
   static inline bool is_clover(Label const & l) {return  (l>22 && l<167);}
   static inline bool is_clover_Ge  (Label const & l) {return ((is_clover(l)) ? ((l-23)%6 > 2) : false);}
@@ -87,32 +89,27 @@ public:
   static inline uchar label_to_clover   (Label const & l) {return static_cast<uchar>((l-23)/6);} // Ranges from 0 to 23
   static        uchar label_to_cristal  (Label const & l);
 
-  static std::array<bool, 1000> isClover; // Array used to know if a given detector is a clover
-  static std::array<bool, 1000> isGe;     // Array used to know if a given detector is a Germanium clover
-  static std::array<bool, 1000> isBGO;    // Array used to know if a given detector is a BGO clover
-  // static std::array<bool, 1000> blacklist;// Array used to know if a given detector is in the blacklist
+  static std::array<bool, nb_det> isClover; // Array used to know if a given detector is a clover
+  static std::array<bool, nb_det> isGe;     // Array used to know if a given detector is a Germanium clover
+  static std::array<bool, nb_det> isBGO;    // Array used to know if a given detector is a BGO clover
+  // static std::array<bool, nb_det> blacklist;// Array used to know if a given detector is in the blacklist
 
-  static std::array<uchar, 1000> labels;  // Array used to make correspondance between a detector label and its clover label
+  static std::array<uchar, nb_det> labels;  // Array used to make correspondance between a detector label and its clover label
 
-  static std::array<uchar, 1000> cristaux_index;     // Array used to make correspondance between the detector label and the Ge or BGO index
-  static std::array<uchar, 1000> cristaux_index_BGO; // Array used to make correspondance between the detector label and the BGO index
+  static std::array<uchar, nb_det> cristaux_index;     // Array used to make correspondance between the detector label and the Ge or BGO index
+  static std::array<uchar, nb_det> cristaux_index_BGO; // Array used to make correspondance between the detector label and the BGO index
   // static std::vector <uchar> cristaux_opposite;// Array used to make correspondance between a detector and the label of the detector at 180° 
 
   /// @brief Static initialize. Allows one to use the arrays event if no object has been instantiated
   static void InitializeArrays()
   {
+    #ifdef MULTITHREADING
+      lock_mutex lock(MTObject::mutex);
+    #endif //MULTITHREADING
     if (!s_initialised)
     {
-    #ifdef MTOBJECT_HPP
-      #if __cplusplus >= 201703L
-        lock_mutex lock(MTObject::mutex);
-      #else
-        MTObject::mutex.lock();
-      #endif //__cplusplus >= 201703L
-    #endif //MTOBJECT_HPP
-
       print("Initialising clovers arrays");
-      for (Label l = 0; l<1000; l++)
+      for (Label l = 0; l<nb_det; l++)
       {
         isClover[l] = is_clover(l);
         isGe[l] = is_clover_Ge(l);  // Already exist in libCo
@@ -123,11 +120,6 @@ public:
         cristaux_index_BGO[l] = (isBGO[l]) ? label_to_cristal(l) : -1;
       }
       s_initialised = true;
-
-    #if defined (MTOBJECT_HPP) && __cplusplus < 201703L
-      MTObject::mutex.unlock();
-    #endif
-
     }
   }
   // ----------------------  End lookup tables ---------------------- //
@@ -253,7 +245,7 @@ public:
 
 private:
   // Parameters :
-  static bool s_initialised;
+  static thread_local bool s_initialised;
   static bool s_time_ps;
 
   // -----------------------  Clovers Class  ----------------------- //
@@ -356,18 +348,18 @@ public:
 
 // ---- InitializeArrays static members : ----- //
 // Lookup tables :
-std::array<bool, 1000> Clovers::isClover;
-std::array<bool, 1000> Clovers::isGe;
-std::array<bool, 1000> Clovers::isBGO;
-std::array<uchar, 1000> Clovers::labels;
-std::array<uchar, 1000> Clovers::cristaux_index;
-std::array<uchar, 1000> Clovers::cristaux_index_BGO;
-// std::array<bool, 1000> Clovers::blacklist;
+std::array<bool, Clovers::nb_det> Clovers::isClover;
+std::array<bool, Clovers::nb_det> Clovers::isGe;
+std::array<bool, Clovers::nb_det> Clovers::isBGO;
+std::array<uchar, Clovers::nb_det> Clovers::labels;
+std::array<uchar, Clovers::nb_det> Clovers::cristaux_index;
+std::array<uchar, Clovers::nb_det> Clovers::cristaux_index_BGO;
+// std::array<bool, Clovers::nb_det> Clovers::blacklist;
 // std::vector <uchar> Clovers::cristaux_opposite;
 
 // Parameters :
 float Clovers::Emin = 5.; // by default 5 keV threshold
-bool Clovers::s_initialised = false;
+thread_local bool Clovers::s_initialised = false;
 bool Clovers::s_time_ps = false;
 Gate Clovers::promptBGOgate = {-20.f, 10.f };
 Gates Clovers::delayedBGOgate = {{60.f, 145.f}};
@@ -527,8 +519,6 @@ inline bool Clovers::Fill(Event const & event, size_t const & hit_index)
 
       // Ge crystal index (ranges from 0 to 96):
       auto const & index_cristal = cristaux_index[label];
-
-      // if (nrj>10000) return false; // Set a maximum nrj deposition in a single crystal (can be more in the total clover of course)
 
       CrystalMult++;
 

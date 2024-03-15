@@ -46,9 +46,9 @@ public:
   {
     if (!s_initialised)
     {
-    #ifdef MTOBJECT_HPP
-      lock_mutex(MTObject::mutex);
-    #endif //MTOBJECT_HPP
+    #ifdef MULTITHREADING
+      lock_mutex lock(MTObject::mutex);
+    #endif //MULTITHREADING
       print("Initialising Paris arrays");
       for (int l = 0; l<1000; l++)
       {

@@ -314,7 +314,7 @@ public:
 
 
   void setComment(std::string const & comment) {m_comment = comment;}
-  std::string const & readComment(std::string const & comment) const {return m_comment;}
+  std::string const & readComment() const {return m_comment;}
 
 
   static bool const & verbose(bool const & _verbose = true) {return (m_verbose = _verbose);}

@@ -143,8 +143,8 @@ private:
   bool InitializeReader();
 
   static ulonglong m_maxHits;
-  ulonglong m_cursor  =  0,
-            m_counter =  0;
+  // ulonglong m_cursor  =  0;
+  ulonglong m_counter =  0;
 
   Hit*   m_hit = nullptr;
   Hit    m_empty_hit;
@@ -207,8 +207,6 @@ bool inline FasterReader::Initialize()
 #endif //FASTER_GROUP
 
   // Check if the file can be open and read :
-
-
   if (m_filename == "")
   {
     print("No file ", m_filename);

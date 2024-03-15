@@ -42,7 +42,7 @@ HEADER_INCLUDES := $(addprefix -I,$(shell find $(HEADER_DIR) -type d ))
 	${CC} -c $< ${CFLAGS} ${LIBS} ${HEADER_INCLUDES}
 
 CC        = g++
-CFLAGS    = ${FASTERAC_CFLAGS} ${ROOT_CFLAGS} -pthread -std=c++17 -Wall
+CFLAGS    = ${FASTERAC_CFLAGS} ${ROOT_CFLAGS} -pthread -std=c++17 -Wall -lstdc++
 LIBS      = ${FASTERAC_LIBS}   ${ROOT_LIBS}
 
 # Set SRCEXE to the name of the source file you want to compile
@@ -56,8 +56,15 @@ default: $(EXE)
 $(EXE): $(SRCEXE:.cpp=.o) ${HEADER_FILES}
 	${CC} $< -o $@ ${CFLAGS} ${LIBS}
 
+#Used when wanting to compile with clang
+clang: CC = clang
+clang: CFLAGS += -Wno-unused-command-line-argument
+
 opt: CFLAGS += -O2
 opt: default
+
+opt_clang: clang
+opt_clang: opt
 
 debug: CFLAGS += -fno-inline -g -O0 -DDEBUG -Wextra -ftemplate-depth-25 #-Wold-style-cast
 debug: default
@@ -68,9 +75,11 @@ debugopt: default
 harddebug: CFLAGS += -fno-inline -g -O0 -DDEBUG -Wextra -ftemplate-depth-25 -Wconversion -Wno-float-conversion -Wold-style-cast
 harddebug: default
 
-debug_clang: CC = clang
-#debug_clang: CFLAGS += -Wno-unused-command-line-argument
+debug_clang: clang
 debug_clang: debug
+
+debug_valgrind: CFLAGS += -DDEBUGVALGRIND
+debug_valgrind: debug
 
 clean:
 	rm -f *.o

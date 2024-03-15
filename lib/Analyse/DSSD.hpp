@@ -55,11 +55,11 @@ public:
 
   void static InitializeArrays()
   {
+    #ifdef MULTITHREADING
+      lock_mutex lock(MTObject::mutex);
+    #endif //MULTITHREADING
     if (!s_initialized)
     {
-    #ifdef MTOBJECT_HPP
-      lock_mutex(MTObject::mutex);
-    #endif //MTOBJECT_HPP
       print("Initialising DSSD arrays");
       for (Label label = 0; label<Label_cast(1000); label++)
       {
