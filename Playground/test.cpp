@@ -32,7 +32,7 @@
 int main()
 { 
   std::cout << "Initializing the threads..." << std::endl;
-  TThread::Initialize();
+  // TThread::Initialize();
   ROOT::EnableThreadSafety();
   std::cout << "Done !" << std::endl;
 
@@ -43,6 +43,11 @@ int main()
   FasterReader::setMaxHits(1000000);
 
   std::mutex myMutex;
+  std::vector<std::string> names = 
+  {
+    "/home/corentin/faster_data/N-SI-136/run_75.fast/run_75_0002.fast",
+    "/home/corentin/faster_data/N-SI-136/run_75.fast/run_75_0003.fast"
+  };
 
   for (int thread_i = 0; thread_i<2; ++thread_i){threads.emplace_back([&](){
 
@@ -51,40 +56,19 @@ int main()
 
     Hit hit;
 
-    if (MTObject::getThreadIndex() == 0)
+    FasterReader reader(&hit, names[MTObject::getThreadIndex()]);
+    
+    myMutex.lock();
+      tree -> Branch("label"  , &hit.label  );
+      tree -> Branch("stamp"  , &hit.stamp  );
+      tree -> Branch("nrj"    , &hit.nrj    );
+      tree -> Branch("nrj2"   , &hit.nrj2   );
+      tree -> Branch("pileup" , &hit.pileup );
+    myMutex.unlock();
+
+    while(reader.Read())
     {
-      FasterReader reader(&hit, "/home/corentin/faster_data/N-SI-136/run_75.fast/run_75_0002.fast");
-      
-      myMutex.lock();
-        tree -> Branch("label"  , &hit.label  );
-        tree -> Branch("stamp"  , &hit.stamp  );
-        tree -> Branch("nrj"    , &hit.nrj    );
-        tree -> Branch("nrj2"   , &hit.nrj2   );
-        tree -> Branch("pileup" , &hit.pileup );
-      myMutex.unlock();
-
-      while(reader.Read())
-      {
-        tree->Fill();
-      }
-    }
-
-    else if (MTObject::getThreadIndex() == 1)
-    {
-      FasterReader reader(&hit, "/home/corentin/faster_data/N-SI-136/run_75.fast/run_75_0003.fast");
-      
-      myMutex.lock();
-        tree -> Branch("label"  , &hit.label  );
-        tree -> Branch("stamp"  , &hit.stamp  );
-        tree -> Branch("nrj"    , &hit.nrj    );
-        tree -> Branch("nrj2"   , &hit.nrj2   );
-        tree -> Branch("pileup" , &hit.pileup );
-      myMutex.unlock();
-
-      while(reader.Read())
-      {
-        tree->Fill();
-      }
+      tree->Fill();
     }
   });
   }

@@ -196,7 +196,7 @@ std::mutex fasterReaderMutex;
 
 bool inline FasterReader::Initialize()
 {
-  
+
 #ifndef MULTITHREADING
   lock_mutex lock(fasterReaderMutex);
 #endif //MULTITHREADING
@@ -207,6 +207,8 @@ bool inline FasterReader::Initialize()
 #endif //FASTER_GROUP
 
   // Check if the file can be open and read :
+
+
   if (m_filename == "")
   {
     print("No file ", m_filename);
