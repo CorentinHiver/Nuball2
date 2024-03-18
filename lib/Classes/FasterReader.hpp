@@ -10,6 +10,10 @@
 #include "fasterac/rf.h"
 #include "fasterac/utils.h"
 
+#ifdef MULTITHREADING
+  std::mutex fasterReaderMutex;
+#endif //MULTITHREADING
+
 /** 
  * @class FasterReader
  * @brief Class used to read .fast files
@@ -72,7 +76,10 @@ class FasterReader
 {
 public:
    ///@brief Construct a new Faster Reader object
-  FasterReader(Hit* _hit, std::string _filename) : m_hit(_hit), m_filename(_filename) {m_kReady = Initialize();}
+  FasterReader(Hit* _hit, std::string _filename) : m_hit(_hit), m_filename(_filename) 
+  {    
+    m_kReady = Initialize();
+  }    
 
    ///@brief Destroy the Faster Reader object
   ~FasterReader()
@@ -92,7 +99,7 @@ public:
    * 
    *      while(reader.Read())
    *      {
-   *         // This hit is filled/updated at each iteration by the data read in the ReadData() private method
+   *         // This hit is filled/updated at each iteration
    *         print(hit); 
    *      }
    * 
@@ -190,16 +197,10 @@ bool inline FasterReader::Reset()
   return true;
 }
 
-#ifndef MULTITHREADING
-std::mutex fasterReaderMutex;
-#endif //MULTITHREADING
 
 bool inline FasterReader::Initialize()
 {
 
-#ifndef MULTITHREADING
-  lock_mutex lock(fasterReaderMutex);
-#endif //MULTITHREADING
 
 #ifdef FASTER_GROUP
   m_hit_group_buffer.resize(5000, &m_empty_hit); //If the number of hits in one group exceeds 5000 then it will crash

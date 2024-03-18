@@ -17,27 +17,28 @@
 #include "../MTObjects/MTList.hpp"
 #include "../MTObjects/MTTHist.hpp"
 
-/* 
- * Author : Corentin Hiver
- * Module part of the NearLine software
- * The timestamps are in picoseconds, so are the timeshifts
- * Goal 1 : calculate the time shifts between detectors
- * How : 
- * * Use one detector as reference, preferencially with good time resolution
- * * Create coincidences using the CoincBuilder event builder
- * * Calculate the difference in timestamp as follow : ref_time - detector_time
- * * Finally, output the (.dT) file containing the time shifts of all the detectors
- * * Also produces a .root file containing the raw and corrected time spectra.
- * * This module includes multithreading management using MTObject::parallelise_function(function, parameters...)
- * Goal 2 : read a timeshift file (.dT) previously calculated by this module
- * Goal 3 : apply the timeshifts by calling the operator[] : time_correct = time_shifted + timeshifts[label];
- * Example at the end
-*/
 
 /// @brief Casts a number into unsigned Time
 template<typename T,  typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
 inline Time Timeshift_cast(T const & t) {return static_cast<Time>(t);}
 
+/**
+ * @brief Calculates the time difference between all detectors and a reference detector
+ * @details
+ *  * The timestamps and timeshifts are in picoseconds
+ * Goal 1 : calculate the time shifts between detectors
+ * How : 
+ *   Use one detector as reference, preferencially with good time resolution
+ *   Create coincidences using the CoincBuilder event builder
+ *   Calculate the difference in timestamp as follow : ref_time - detector_time
+ *   Finally, output the (.dT) file containing the time shifts of all the detectors
+ *   Also produces a .root file containing the raw and corrected time spectra.
+ *   This module includes multithreading management using MTObject::parallelise_function(function, parameters...)
+ * Goal 2 : read a timeshift file (.dT) previously calculated by this module
+ * Goal 3 : apply the timeshifts by calling the operator[] : time_correct = time_shifted + timeshifts[label];
+ * Example at the end
+ * 
+ */
 class Timeshifts
 {
 public:
@@ -532,7 +533,7 @@ bool Timeshifts::InitializeCorrected()
 bool Timeshifts::Initialize(bool const & initializeRaw, bool const & initializeCorrected)
 {
   Timeshifts::InitialisePreferencesArrays();
-  
+
   if (initializeRaw) this -> InitializeRaw();
 
   if (initializeCorrected) this -> InitializeCorrected();    
@@ -1013,8 +1014,8 @@ void Timeshifts::analyse()
  */
 void Timeshifts::write(std::string const & name)
 {
-  writeRoot(name);
   writeData(name);
+  writeRoot(name);
 }
 
 /**

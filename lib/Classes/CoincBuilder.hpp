@@ -43,7 +43,7 @@ public:
 
 private:
   // Attributes :
-  Time m_time_window = 500000; // 500 000 ps by default (ull = unsigned long long)
+  Time m_time_window = 500000ll; // 500 000 ps by default (ll = long long)
 };
 
 bool CoincBuilder::build(Hit const & hit)
@@ -55,14 +55,14 @@ bool CoincBuilder::build(Hit const & hit)
     m_event -> clear();
     *m_event = m_last_hit;
     if (coincidence(hit))
-    {// Situation 1 :
+    {// Case 1 :
       // The previous and current hit are in the same event.
       // In next call, we'll check if the next hits also belong to this event (situations 1' or 2)
       m_event -> push_back(hit);
       m_status = 1; // Now, the event is being filled
     }
     else
-    {// Situation 0 :
+    {// Case 0 :
       // The last and current hits aren't in the same event.
       // The last hit is therefore a single hit, alone in the time window
       m_last_hit = hit; // Building next event based on the last hit

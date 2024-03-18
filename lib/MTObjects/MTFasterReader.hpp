@@ -18,27 +18,27 @@
  * 
  * First, you'll need to activate the multithreading : 
  * 
- *    MTObject::Initialize(nb_threads)
+ *        MTObject::Initialize(nb_threads)
  * 
  * Then instanciate this class :
  * 
- * 2. MTFasterReader reader(folder_name, first_n_files);
+ *        MTFasterReader reader(folder_name, first_n_files);
  * 
  * To read all the files then leave the second argument empty
  * 
  * Then, use the readRaw(function, arguments...) method to run any user defined function.
  * 
- * 3. reader.readRaw(function, arguments...);
+ *        reader.readRaw(function, arguments...);
  * 
  * Carefull : this function MUST have the following arguments is this EXACT order : 
  * 
- * return_type function(Hit & hit, FasterReader & reader, arguments...)
+ *        return_type function(Hit & hit, FasterReader & reader, arguments...)
  * 
  * This function can also be a static method of an object, but CANNOT be a member
  * 
  * The trick to use the object anyway is to pass it as an argument : 
  * 
- * static return_type myClass::function(Hit & hit, FasterReader & reader, myClass & class, arguments...);
+ *        static return_type myClass::function(Hit & hit, FasterReader & reader, myClass & class, arguments...);
  * 
  * 
  * 
@@ -64,7 +64,6 @@
  *      }
  * 
  * Here are two function examples. The third parameter has been instanciated before the MTFasterReader::readRaw() method call
- * 
  *      
  *        void counter(Hit & hit, FasterReader & reader, MTCounter & counterMT)
  *         {
@@ -193,8 +192,10 @@ inline void MTFasterReader::Read(MTFasterReader & MTreader, Func function, ARGS 
   std::string filename;
   while(MTreader.nextFilename(filename))
   {
-    Hit hit;
-    FasterReader reader(&hit, filename);
+    fasterReaderMutex.lock();
+      Hit hit;
+      FasterReader reader(&hit, filename);
+    fasterReaderMutex.unlock();
     function(hit, reader, std::forward<ARGS>(args)...); // If issues here, check that the parallelised function has the following form : type func(Hit & hit, FasterReader & reader, ARGS... some_args)
   }
 }
