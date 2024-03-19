@@ -211,7 +211,8 @@ inline void MTFasterReader::Read(MTFasterReader & MTreader, Func function, ARGS 
  * Use this function in the same way as readRaw, with a function like this : 
  *  func(Hit & hit, Alignator & alignedTree, args...)
  * 
- * @param func : Must be of the form func(Hit & hit, Alignator & alignedTree, args...) with args
+ * @param func : Must be of the form func(Hit & hit, Alignator & alignedTree, args...). 
+ * Alignator is a simple wrapper around a tree. Use alignedTree::GetEntry
  */
 template<class Func, class... ARGS>
 inline void MTFasterReader::readAligned(Func&& func, ARGS &&... args)

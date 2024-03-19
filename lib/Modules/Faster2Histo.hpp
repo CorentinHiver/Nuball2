@@ -1,6 +1,8 @@
 #ifndef FASTER2HISTO_HPP
 #define FASTER2HISTO_HPP
 
+#include "../MTObjects/MTObject.hpp"
+
 #include "../Classes/Detectors.hpp"
 #include "../Classes/FilesManager.hpp"
 #include "../Classes/Timer.hpp"

@@ -418,8 +418,8 @@ mutex_Root.unlock();
 
   // Create output tree and Event 
 mutex_Root.lock();
-  std::string const name = "Nuball2"+std::to_string(MTObject::getThreadIndex());
-  TTree* outTree (new TTree(name.c_str(),name.c_str()));
+  std::string const outTree_name = "Nuball2"+std::to_string(MTObject::getThreadIndex());
+  TTree* outTree (new TTree(outTree_name.c_str(),outTree_name.c_str()));
   outTree -> SetDirectory(nullptr); // Force it to be created on RAM rather than on disk - much faster if enough RAM
 mutex_Root.unlock();
   Event event;
@@ -783,7 +783,8 @@ mutex_Root.unlock();
 mutex_Root.lock();
   TFile* outFile (TFile::Open(outfile.c_str(), "RECREATE"));
   outFile -> cd();
-  outTree->SetDirectory(outFile);
+  outTree -> SetDirectory(outFile);
+  outTree -> SetName(outTree_name);
   outTree -> Write();
   outFile -> Write();
   outFile -> Close();
@@ -1109,7 +1110,7 @@ int main(int argc, char** argv)
 
     auto nb_threads_hadd = int_cast(std::thread::hardware_concurrency()*0.25);
 
-    std::string merge_command = "hadd -v 1 -j " + std::to_string(nb_threads) + " " + outMergedPath.string() + run_name + ".root " + outDataPath.string() + run_name + "_*.root";
+    std::string merge_command = "hadd -v 1 -j " + std::to_string(nb_threads_hadd) + " " + outMergedPath.string() + run_name + ".root " + outDataPath.string() + run_name + "_*.root";
     system(merge_command.c_str());
 
   }

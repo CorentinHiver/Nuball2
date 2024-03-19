@@ -9,11 +9,14 @@ class Alignator
 public:
   Alignator(TTree* tree) : m_tree(tree) {loadNewIndex();}
 
-  /// @brief DEV
+  /// @brief TBD
   Alignator(TTree* inputTree, TTree* outputTree) : 
     m_tree(inputTree), 
     m_out_tree(outputTree) 
-  {align();}
+  {
+    loadNewIndex();
+    align();
+  }
 
   auto const & operator[](int const & i) const {return m_index[i];}
 
@@ -50,32 +53,32 @@ void Alignator::loadNewIndex()
   m_index.resize(static_cast<int>(m_nb_data));
   std::iota(std::begin(m_index), std::end(m_index), 0); // Fill with 0,1,2,...,m_nb_data
 
-  auto const NHits = m_tree -> GetEntries();
+  auto const nb_hits = m_tree -> GetEntries();
   m_tree -> SetBranchStatus("*", false);// Disables all the branches readability
   m_tree -> SetBranchStatus("stamp", true);// Read only the time
 
-  std::vector<ULong64_t> TimeStampBuffer(NHits, 0);
-  ULong64_t TimeStamp = 0; 
-  m_tree->SetBranchAddress("stamp", &TimeStamp);
+  ULong64_t timestamp = 0; 
+  std::vector<ULong64_t> timestamp_buffer(nb_hits, 0);
+  m_tree->SetBranchAddress("stamp", &timestamp);
 
   // First creates a buffer of all the timestamps :
-  for (int i = 0; i<NHits; i++)
+  for (int i = 0; i<nb_hits; i++)
   {
     m_tree -> GetEntry(i);
-    TimeStampBuffer[i]=TimeStamp;
+    timestamp_buffer[i]=timestamp;
   }
 
   // Then computes the correct order :
   int i = 0, j = 0;
   ULong64_t a = 0;
   m_index[0]=0;
- for (j=0; j<NHits;j++)
+ for (j=0; j<nb_hits;j++)
  {
    m_index[j]=j;
-   a=TimeStampBuffer[j]; //Focus on this time stamp
+   a=timestamp_buffer[j]; //Focus on this time stamp
    i=j;
   // Find the place to insert it amongst the previously sorted timestamps
-   while((i > 0) && (TimeStampBuffer[m_index[i-1]] > a))
+   while((i > 0) && (timestamp_buffer[m_index[i-1]] > a))
    {
      m_index[i]=m_index[i-1];
      i--;
@@ -93,45 +96,7 @@ void Alignator::loadNewIndex()
  */
 void Alignator::align()
 {
-  // m_nb_data = m_tree -> GetEntries();
-
-  // if (m_nb_data==0) {print("NO DATA IN ROOT TREE !"); return;}
-
-  // m_index.resize(static_cast<int>(m_nb_data));
-  // std::iota(std::begin(m_index), std::end(m_index), 0); // Fill with 0,1,2,...,m_nb_data
-
-  // Event event
-
-  // auto const NHits = tree -> GetEntries();
-  // std::vector<ULong64_t> TimeStampBuffer(NHits, 0);
-  // ULong64_t TimeStamp = 0; 
-  // tree->SetBranchAddress("time", &TimeStamp);
-
-  // // First creates a buffer of all the timestamps :
-  // for (int i = 0; i<NHits; i++)
-  // {
-  //   tree -> GetEntry(i);
-  //   TimeStampBuffer[i]=TimeStamp;
-  // }
-
-  // // Then computes the correct order :
-  // int i = 0, j = 0;
-  // ULong64_t a = 0;
-  // m_index[0]=0;
-  // for (j=0; j<NHits;j++)
-  // {
-  //   m_index[j]=j;
-  //   a=TimeStampBuffer[j]; //Focus on this time stamp
-  //   i=j;
-  //   // Find the place to insert it amongst the previously sorted timestamps
-  //   while((i > 0) && (TimeStampBuffer[m_index[i-1]] > a))
-  //   {
-  //     m_index[i]=m_index[i-1];
-  //     i--;
-  //   }
-  //   m_index[i]=j;
-  // }
-  // tree -> SetBranchStatus("*", true); //enables again the whole tree to be read
+  
 }
 
 #endif //ALIGNATOR_HPP

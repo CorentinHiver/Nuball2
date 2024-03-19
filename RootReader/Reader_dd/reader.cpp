@@ -8,7 +8,7 @@
 #include <RWMat.hxx>
 #include <MTList.hpp>
 
-#define QUALITY
+bool simple_d = false;
 
 Label_vec const blacklist = {800, 801};
 std::unordered_map<Label, double> const maxE_Ge = {{28, 7500}, {33, 8250}, {46, 9000}, {55, 7500}, {57, 6000}, 
@@ -45,11 +45,10 @@ public:
   Analysator(int const & number_files, std::string const & datapath = "~/faster_data/N-SI-136-root_dd/")
   // Analysator(int const & number_files, std::string const & datapath = "~/nuball2/N-SI-136-root_dd/")
   {
-    
     this->Initialise();
     MTRootReader reader(datapath, number_files);
     print("Launching the reader");
-    reader.read(analyse_t, *this);
+    reader.read(dispatch_threads, *this);
     write();
   }
 
@@ -61,7 +60,7 @@ public:
 
 private:
   /// @brief static 
-  static void analyse_t(Nuball2Tree & tree, Event & event, Analysator & analysator) {analysator.analyse(tree, event);}
+  static void dispatch_threads(Nuball2Tree & tree, Event & event, Analysator & analysator) {analysator.analyse(tree, event);}
   static long g_nb_max_hits;
 
   TRandom* random = new TRandom();
@@ -172,6 +171,7 @@ private:
 
   MTTHist<TH2F> time_vs_run;
 
+  MTTHist<TH2F> dT_VS_sumGe;
   MTTHist<TH2F> delayed_Ge_C2_VS_total_Ge;
   MTTHist<TH2F> delayed_Ge_C3_VS_total_Ge;
 
@@ -192,6 +192,9 @@ void Analysator::Initialise()
   random->SetSeed(time(0));
   Clovers::InitializeArrays();
   Clovers::timePs(true);
+  int run_min = 70;
+  int run_max = 130;
+  int nb_runs = run_max-run_min;
 
 #ifndef QUALITY
 
@@ -308,16 +311,19 @@ void Analysator::Initialise()
   delayed_Ge_C2_VS_total_Ge.reset("delayed_Ge_C2_VS_total_Ge", "Clean Ge VS sum clean Ge C2", 5000,0,5000, 2000,0,4000);
   delayed_Ge_C3_VS_total_Ge.reset("delayed_Ge_C3_VS_total_Ge", "Clean Ge VS sum clean Ge C3", 5000,0,5000, 2000,0,4000);
 
+  // For TSC method :
+  dT_VS_sumGe.reset("dT_VS_Esum_Ge", "dT VS Esum Ge", 10000,0,10000, 100,-200,200);
+
   preprompt_spectra.reset("preprompt_spectra", "preprompt spectra", 10000,0,10000);
 
-  // time_vs_run.reset("time_vs_run","time vs run", nb_runs,run_min,run_max, 750, -1000, 500);
+  time_vs_run.reset("time_vs_run","time vs run", nb_runs,run_min,run_max, 750, -1000, 500);
 
 
   // Run quality :
 #else // if QUALITY
-  int run_min = 70;
-  int run_max = 130;
-  int nb_runs = run_max-run_min;
+  print("_______________");
+  print("Running quality check");
+
   for (auto const & label : detectors.labels())
   {
     std::string name = "time_vs_run_"+detectors[label];
@@ -648,13 +654,18 @@ void Analysator::analyse(Nuball2Tree & tree, Event & event)
     }}
 
     // Calculate delayed calorimetry with 2 or 3 clean germaniums :
-    double calo_2_Ge = 0.0;
+    double calo_Ge = 0.0;
+    for (auto const & clover_index : clean_indexes) calo_Ge+=clovers_delayed[clover_index].nrj;
     bool M2P = (clean_indexes.size() == 2) && one_close_prompt;
-    if (M2P) for (auto const & clover_index : clean_indexes) calo_2_Ge+=clovers_delayed[clover_index].nrj;
 
-    double calo_3_Ge = 0.0;
+    if (M2P) 
+    {
+      auto const & dT = clovers_delayed[clean_indexes[1]].time - clovers_delayed[clean_indexes[0]].time;
+      dT_VS_sumGe.Fill(calo_Ge, dT);
+      // dT_VS_sumGe.Fill(-dT, calo_Ge);
+    }
+
     bool M3P = (clean_indexes.size() == 3) && one_close_prompt;
-    if (M3P) for (auto const & clover_index : clean_indexes) calo_3_Ge+=clovers_delayed[clover_index].nrj;
 
     // Others :
     for (size_t clover_it_i = 0; clover_it_i<clean_indexes.size(); ++clover_it_i)
@@ -663,8 +674,8 @@ void Analysator::analyse(Nuball2Tree & tree, Event & event)
       auto const & nrj_i = clover_i.nrj;
       auto const & time_i = clover_i.time;
 
-      if (M2P) delayed_Ge_C2_VS_total_Ge.Fill(calo_2_Ge, nrj_i);
-      if (M3P) delayed_Ge_C3_VS_total_Ge.Fill(calo_3_Ge, nrj_i);
+      if (M2P) delayed_Ge_C2_VS_total_Ge.Fill(calo_Ge, nrj_i);
+      if (M3P) delayed_Ge_C3_VS_total_Ge.Fill(calo_Ge, nrj_i);
 
       delayed_E_VS_time_Ge_clean.Fill(time_i, nrj_i);
       delayed_E_VS_time_Ge_clean_wp.Fill(time_i, nrj_i);
@@ -842,6 +853,7 @@ void Analysator::write()
   delayed_E_VS_time_Ge_clean.Write();
   delayed_E_VS_time_Ge_clean_wp.Write();
 
+  dT_VS_sumGe.Write();
   delayed_Ge_C2_VS_total_Ge.Write();
   delayed_Ge_C3_VS_total_Ge.Write();
 
@@ -868,27 +880,38 @@ void reader(int number_files = -1)
 #ifdef QUALITY
   Analysator::setMaxHits(1.e+7);
 #endif //QUALITY
+#ifdef DEBUG
+  Analysator::setMaxHits(1.e+7);
+#endif //DEBUG
   
   if (found(Path::pwd().string(), "faster")) 
   {
     MTObject::Initialize(10);
-    Analysator analysator(number_files, "~/nuball2/N-SI-136-root_dd/merged/");
+    if (simple_d) Analysator analysator(number_files, "~/nuball2/N-SI-136-root_d/merged/");
+    else          Analysator analysator(number_files, "~/nuball2/N-SI-136-root_dd/merged/");
   }
   else 
   {
     MTObject::Initialize(nb_threads);
-    Analysator analysator(number_files);
+    if (simple_d) Analysator analysator(number_files, "~/faster_data/N-SI-136-root_d/");
+    else          Analysator analysator(number_files);
   }
-  
 }
 
-#ifndef __CINT__
 int main(int argc, char** argv)
 {
-  reader((argc>1) ? std::stoi(argv[1]) : -1);
+  int nb_files = -1;
+
+  for (int i = 1; i<argc; ++i)
+  {
+    std::string param(argv[i]);
+         if (param == "-f") nb_files = std::stoi(argv[++i]);
+    else if (param == "-n") Analysator::setMaxHits(std::stoi(argv[++i]));
+    else if (param == "-d") simple_d = true;
+  }
+  reader(nb_files);
   return 1;
 }
-#endif //__CINT__
 
 
 

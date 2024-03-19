@@ -32,38 +32,38 @@
 
 int main()
 { 
-  MTObject::Initialize(2);
-  FasterReader::setMaxHits(1000000);
+  // MTObject::Initialize(2);
+  // FasterReader::setMaxHits(1000000);
 
-  std::mutex myMutex;
-  std::vector<std::string> names = 
-  {
-    "/home/corentin/faster_data/N-SI-136/run_75.fast/run_75_0002.fast",
-    "/home/corentin/faster_data/N-SI-136/run_75.fast/run_75_0003.fast"
-  };
+  // std::mutex myMutex;
+  // std::vector<std::string> names = 
+  // {
+  //   "/home/corentin/faster_data/N-SI-136/run_75.fast/run_75_0002.fast",
+  //   "/home/corentin/faster_data/N-SI-136/run_75.fast/run_75_0003.fast"
+  // };
 
-  MTObject::parallelise_function([&](){
+  // MTObject::parallelise_function([&](){
 
-    TTree* tree (new TTree("myTree", "myTree"));
-    tree->SetDirectory(nullptr);
+  //   TTree* tree (new TTree("myTree", "myTree"));
+  //   tree->SetDirectory(nullptr);
 
-    Hit hit;
+  //   Hit hit;
 
-    FasterReader reader(&hit, names[MTObject::getThreadIndex()]);
+  //   FasterReader reader(&hit, names[MTObject::getThreadIndex()]);
     
-    myMutex.lock();
-      tree -> Branch("label"  , &hit.label  );
-      tree -> Branch("stamp"  , &hit.stamp  );
-      tree -> Branch("nrj"    , &hit.nrj    );
-      tree -> Branch("nrj2"   , &hit.nrj2   );
-      tree -> Branch("pileup" , &hit.pileup );
-    myMutex.unlock();
+  //   myMutex.lock();
+  //     tree -> Branch("label"  , &hit.label  );
+  //     tree -> Branch("stamp"  , &hit.stamp  );
+  //     tree -> Branch("nrj"    , &hit.nrj    );
+  //     tree -> Branch("nrj2"   , &hit.nrj2   );
+  //     tree -> Branch("pileup" , &hit.pileup );
+  //   myMutex.unlock();
 
-    while(reader.Read())
-    {
-      tree->Fill();
-    }
-  });
+  //   while(reader.Read())
+  //   {
+  //     tree->Fill();
+  //   }
+  // });
 
 
 

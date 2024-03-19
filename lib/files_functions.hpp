@@ -186,7 +186,7 @@ std::string get_filename_at(std::string & folderName, int pos)
 
 std::vector<std::string> list_files_in_folder
 (
-  std::string const & foldername, 
+  std::string const & foldername = "./", 
   std::vector<std::string> const & extensions = {"*"},
   bool const & reorder = true
 )
@@ -202,6 +202,31 @@ std::vector<std::string> list_files_in_folder
     name = file->d_name;
     std::string const & ext = extension(name);
     if (extensions[0] == "*" || find(extensions.begin(), extensions.end(), ext) != extensions.end()) ret.push_back(foldername+name);
+  }
+  closedir(dp);
+  delete file;
+  if (reorder) std::sort(ret.begin(), ret.end());
+  return ret;
+}
+
+std::vector<std::string> list_file_names_in_folder
+(
+  std::string const & foldername = "./", 
+  std::vector<std::string> const & extensions = {"*"},
+  bool const & reorder = true
+)
+{
+  std::vector<std::string> ret;
+  struct dirent *file = nullptr;
+  DIR *dp = nullptr;
+  dp = opendir(foldername.c_str());
+  if (dp == nullptr) {std::cout << "Folder " << foldername << " not found..." << std::endl; return ret;}
+  std::string name = "";
+  while ( (file = readdir(dp)))
+  {
+    name = file->d_name;
+    std::string const & ext = extension(name);
+    if (extensions[0] == "*" || find(extensions.begin(), extensions.end(), ext) != extensions.end()) ret.push_back(name);
   }
   closedir(dp);
   delete file;
