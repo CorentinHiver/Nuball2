@@ -197,6 +197,7 @@ inline void MTFasterReader::Read(MTFasterReader & MTReader, Func function, ARGS 
   CoProgressBar progress(&MTReader.getFilesList().getIndex(), MTReader.getFilesList().size());
   while(MTReader.nextFilename(filename))
   {
+    if (MTObject::kill) {print("Killing thread", MTObject::getThreadIndex()); break;}
     fasterReaderMutex.lock();
       Hit hit;
       FasterReader reader(&hit, filename);

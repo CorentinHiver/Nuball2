@@ -156,18 +156,30 @@ public:
     if (nb_threads == 1) MTObject::ON = false;
   }
 
+  static bool kill;
+
   static void signalHandler(int signal)
   {
     if (signal == SIGINT)
     {
-      std::cout << "\nCtrl+C pressed but is might not be taken into account ... Please close the terminal to shut the process !" << std::endl;
-      // lock_mutex lock(mutex);
-      // std::cout << "\nCtrl+C pressed, quitting the multithreaded environement safely" << std::endl;
-      // std::cout << "Waiting for the current threads to finish...." << std::endl;
-      // for (auto & thread : m_threads) thread.join();
-      // std::cout << "All threads terminated" << std::endl;
-      // m_threads.clear();
-      // exit(EXIT_SUCCESS);
+      if (MTObject::kill)
+      {
+        std::cout << "\nCtrl+C pressed twice, killing violently the program... (but should be fine, maybe, hopefully...)" << std::endl;
+      }
+      else
+      {
+        {
+          lock_mutex lock(mutex);
+          std::cout << "\nCtrl+C pressed, quitting the multithreaded environement safely" << std::endl;
+          std::cout << "Waiting for the current threads to finish...." << std::endl;
+          std::cout << "If the threads do not stop are still created, you'll have to close the terminal (nothing will happens by default)" << std::endl;
+          MTObject::kill = true;
+        }
+        for (auto & thread : m_threads) thread.join();
+        m_threads.clear();
+        std::cout << "All threads terminated" << std::endl;
+      }
+      exit(42);
     }
   }
 
@@ -203,7 +215,7 @@ public:
     if (MTObject::ON)
     {
       m_threads.reserve(nb_threads); // Memory pre-allocation (used for performances reasons)
-      for (size_t i = 0; i<nb_threads; i++) m_threads.emplace_back( [&] ()
+      for (size_t i = 0; i<nb_threads; i++) m_threads.emplace_back( [i, &func, &args...] ()
       {// Inside this lambda function, we already are inside the threads, so the parallelised section starts NOW :
         m_thread_index = i; // Index the thread
         func(std::forward<ARGS>(args)...); // Run the function inside thread
@@ -246,6 +258,7 @@ private:
 };
 
 bool MTObject::m_initialized = false;
+bool MTObject::kill = false;
 
 // Declaration of static variables :
 size_t MTObject::nb_threads = 1;

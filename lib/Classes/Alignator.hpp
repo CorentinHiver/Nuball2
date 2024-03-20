@@ -33,6 +33,10 @@ public:
 
   auto getTree() {return m_tree;}
 
+  #ifdef MULTITHREADING
+  std::mutex mutex;
+  #endif //MULTITHREADING
+
 private:
   void loadNewIndex();
   void align(); //TBD
@@ -46,6 +50,7 @@ private:
 
 void Alignator::loadNewIndex()
 {
+mutex.lock();
   m_nb_data = m_tree -> GetEntries();
 
   if (m_nb_data==0) {print("NO DATA IN ROOT TREE !"); return;}
@@ -60,6 +65,7 @@ void Alignator::loadNewIndex()
   ULong64_t timestamp = 0; 
   std::vector<ULong64_t> timestamp_buffer(nb_hits, 0);
   m_tree->SetBranchAddress("stamp", &timestamp);
+mutex.unlock();
 
   // First creates a buffer of all the timestamps :
   for (int i = 0; i<nb_hits; i++)
@@ -68,10 +74,12 @@ void Alignator::loadNewIndex()
     timestamp_buffer[i]=timestamp;
   }
 
+mutex.lock();
   // Then computes the correct order :
   int i = 0, j = 0;
   ULong64_t a = 0;
   m_index[0]=0;
+mutex.unlock();
  for (j=0; j<nb_hits;j++)
  {
    m_index[j]=j;
@@ -85,7 +93,9 @@ void Alignator::loadNewIndex()
    }
    m_index[i]=j;
  }
+mutex.lock();
   m_tree -> SetBranchStatus("*", true); //enables again the whole tree to be read
+mutex.unlock();
 }
 
 /**

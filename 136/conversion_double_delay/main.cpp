@@ -336,6 +336,9 @@ bool comptonClean(HitBuffer const & buffer, size_t & it, RF_Manager & rf, Histos
   return true;
 }
 
+std::mutex temp_tree_mutex;
+std::mutex output_mutex;
+
 // 4. Declare the function to run on each file in parallel :
 void convert(Hit & hit, FasterReader & reader, 
               Calibration const & calibration, 
@@ -374,13 +377,13 @@ void convert(Hit & hit, FasterReader & reader,
   // ------------------------------ //
   // Initialize the temporary TTree //
   // ------------------------------ //
-mutex_Root.lock();
+temp_tree_mutex.lock();
   std::string const & tempTree_name = "temp"+std::to_string(MTObject::getThreadIndex());
   TTree* tempTree (new TTree(tempTree_name.c_str(),tempTree_name.c_str()));
   tempTree -> SetDirectory(nullptr); // Force it to be created on RAM rather than on disk - much faster if enough RAM
   hit.writting(tempTree, "lsEQ"); // The pileup bit has been removed because of weird errors raised by valgrind drd
   // hit.writting(tempTree, "lsEQp");
-mutex_Root.unlock();
+temp_tree_mutex.unlock();
 
   // ------------------------ //
   // Loop over the .fast file //
@@ -408,29 +411,31 @@ mutex_Root.unlock();
   // -------------------------------------- //
   // Realign switched hits after timeshifts //
   // -------------------------------------- //
-mutex_Root.lock();
   Alignator gindex(tempTree);
 
   // ------------------------------------------------------ //
   // Prepare the reading of the TTree and the output Events //
   // ------------------------------------------------------ //
   // Switch the temporary TTree to reading mode :
+temp_tree_mutex.lock();
   hit.reset();
   hit.reading(tempTree, "lsEQ"); // The pileup bit has been removed because of weird errors raised by valgrind drd
   // hit.reading(tempTree, "lsEQp");
+temp_tree_mutex.unlock();
 
   // Create output tree and Event 
+output_mutex.lock();
   std::string const outTree_name = "Nuball2"+std::to_string(MTObject::getThreadIndex());
   TTree* outTree (new TTree(outTree_name.c_str(),"Nuball2"));
   outTree -> SetDirectory(nullptr); // Force it to be created on RAM rather than on disk - much faster if enough RAM
   Event event;
   event.writting(outTree, "lstEQ");// The pileup bit has been removed because of weird errors raised by valgrind drd
+output_mutex.unlock();
   // event.writting(outTree, "lstEQp");
 
   // Initialize RF manager :
   RF_Manager rf;
   rf.set_period_ns(200);
-mutex_Root.unlock();
 
   // Handle the first RF downscaled hit :
   RF_Extractor first_rf(tempTree, rf, hit, gindex);
@@ -776,22 +781,23 @@ mutex_Root.unlock();
       buffer.clear();
     }
   }
-mutex_Root.lock();
+
+temp_tree_mutex.lock();
   delete tempTree;
-mutex_Root.unlock();
+temp_tree_mutex.unlock();
+
   convert_timer.Stop();
   if (verbose>1) print("Conversion finished here done in", convert_timer.TimeElapsedSec() , "s (",dataSize/convert_timer.TimeElapsedSec() ,"Mo/s)");
   Timer write_timer;
 
-  // Initialize output TTree :
-mutex_Root.lock();
+  // Create output TTree :
+output_mutex.lock();
   TFile* outFile (TFile::Open(outfile.c_str(), "RECREATE"));
   outFile -> cd();
   outTree -> SetDirectory(outFile);
   outTree -> Write("Nuball2", TObject::kOverwrite);
-  // outFile -> Write();
   outFile -> Close();
-mutex_Root.unlock();
+output_mutex.unlock();
 
   write_timer.Stop();
 
@@ -808,9 +814,9 @@ mutex_Root.unlock();
     , outSize, " Mo : compression factor ", compression_factor, " - ", 100.*trigger_efficiency , " % hits kept");
   }
 
-mutex_Root.lock();
+output_mutex.lock();
   delete outFile;
-mutex_Root.unlock();
+output_mutex.unlock();
 
   { // Zone locked by a mutex, meaning this piece of code is thread safe...
     lock_mutex lock(MTObject::mutex);
@@ -1042,6 +1048,8 @@ int main(int argc, char** argv)
     MTFasterReader readerMT(run_path, nb_files);
     readerMT.readRaw(convert, calibration, timeshifts, outPath, histos, total_read_size, run_infos);
 
+    if (MTObject::kill) print("All threads correctly stopped !");
+
     if (histoed)
     {
       auto const name = outPath+run_name+"/histo_"+run_name+".root";
@@ -1131,5 +1139,9 @@ int main(int argc, char** argv)
   }
   output_fileinfo.close();
   print(output_fileinfo_name, "written");
+  if (MTObject::kill) 
+  {
+    print(output_fileinfo_name, "file will be broken ...");
+  }
   return 1;
 }

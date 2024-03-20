@@ -30,38 +30,63 @@
 // #include <vector>
 // #include <iostream>
 
+static thread_local std::mt19937 generator;
+
 int main()
 { 
-  // std::mutex myMutex;
+  std::mutex myMutex;
   unsigned nb_threads = 2;
 
   // MTObject::Initialize(nb_threads);
-  // MTObject::parallelise_function(
-    // auto thread_i = MTObject::getThreadIndex();
+  // MTObject::parallelise_function([&](){
+  //   auto thread_i = MTObject::getThreadIndex();
 
+  print("Initialising root thread safety");
   ROOT::EnableThreadSafety();
   std::vector<std::thread> threads;
   threads.reserve(nb_threads);
-  for (unsigned thread_i = 0; thread_i<nb_threads; ++thread_i){threads.emplace_back(
+  for (unsigned thread_i = 0; thread_i<nb_threads; ++thread_i){threads.emplace_back([&](){
+    myMutex.lock();
+      generator.seed(time(0));
+      // std::string const tree_name = "myTree"+std::to_string(thread_i);
+      // TTree* tree (new TTree(tree_name.c_str(), tree_name.c_str()));
+      // print(tree_name, "created in memory");
+      TTree* tree (new TTree("myTree", "myTree"));
+      tree->SetDirectory(nullptr);
 
-    [&](){
-    TTree* tree (new TTree("myTree", "myTree"));
-    tree->SetDirectory(nullptr);
 
-    print("Tree created in memory");
+      ushort label = 0;
+      ULong64_t stamp = 0ull;
+      float nrj = 0.0f;
+      bool  pileup = false;
 
-    ushort label = 0;
-    ULong64_t stamp = 0ull;
-    float nrj = 0.0f;
-    bool  pileup = false;
+      tree -> Branch("label"  , &label  );
+      tree -> Branch("stamp"  , &stamp  );
+      tree -> Branch("nrj"    , &nrj    );
+      tree -> Branch("pileup" , &pileup );
 
-    tree -> Branch("label"  , &label  );
-    tree -> Branch("stamp"  , &stamp  );
-    tree -> Branch("nrj"    , &nrj    );
-    tree -> Branch("pileup" , &pileup );
+      print("Variables set to branches");
+    myMutex.unlock();
 
-    print("Variables set to branches");
-  });
+      for(int i = 0; i<10000; i++)
+      {
+        std::normal_distribution<double> distribution(20, 10);
+        double value = distribution(generator);
+
+        label = static_cast<int>(value);
+        stamp = static_cast<ULong64_t>(abs(value));
+        nrj = static_cast<float>(value);
+        pileup = static_cast<bool>(value);
+
+        tree->Fill();
+      }
+
+      print("tree filled");
+
+    myMutex.lock();
+      delete tree;
+    myMutex.unlock();
+    });
   }
   for (auto & thread : threads) thread.join();
   threads.clear();
