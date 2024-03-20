@@ -203,7 +203,7 @@ public:
     if (MTObject::ON)
     {
       m_threads.reserve(nb_threads); // Memory pre-allocation (used for performances reasons)
-      for (size_t i = 0; i<nb_threads; i++) m_threads.emplace_back( [i, &func, &args...] ()
+      for (size_t i = 0; i<nb_threads; i++) m_threads.emplace_back( [&] ()
       {// Inside this lambda function, we already are inside the threads, so the parallelised section starts NOW :
         m_thread_index = i; // Index the thread
         func(std::forward<ARGS>(args)...); // Run the function inside thread

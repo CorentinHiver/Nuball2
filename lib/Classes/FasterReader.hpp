@@ -150,8 +150,8 @@ private:
 
   bool InitializeReader();
 
-  static ulonglong m_maxHits;
-  static int m_verbose; 
+  thread_local static ulonglong m_maxHits;
+  thread_local static int m_verbose; 
   // ulonglong m_cursor  =  0;
   ulonglong m_counter =  0;
 
@@ -180,8 +180,8 @@ private:
   std::unordered_map<std::string, bool> error_message;
 };
 
-ulonglong FasterReader::m_maxHits = -1;
-int FasterReader::m_verbose = 1;
+thread_local ulonglong FasterReader::m_maxHits = -1;
+thread_local int FasterReader::m_verbose = 1;
 // ================== //
 //   INITIALIZATION   //
 // ================== //

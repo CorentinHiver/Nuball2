@@ -125,6 +125,9 @@ void create_folder_if_none(std::string const & folderName)
   {
     print("Creating folder", folderName);
     // mkdir -p to create the full path if needed (otherwise crashes if some of the path is missing)
+  #ifdef MULTITHREADING
+    lock_mutex lock(MTObject::mutex);
+  #endif //MULTITHREADING
     system(("mkdir -p "+folderName).c_str());
   }
 }

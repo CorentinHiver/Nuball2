@@ -1,7 +1,7 @@
 #include <MTObject.hpp>
-// #include "../libRoot.hpp"
+#include "../libRoot.hpp"
 // #include <Hit.hpp>
-// #include <FasterReader.hpp>
+#include <FasterReader.hpp>
 // #include <Detectors.hpp>
 // #include <Timeshifts.hpp>
 // #include <HitBuffer.hpp>
@@ -32,41 +32,59 @@
 
 int main()
 { 
-  MTObject::Initialize(2);
-  MTObject::parallelise_function([](){while(true) continue;});
-  return EXIT_SUCCESS;
-  // MTObject::Initialize(2);
-  // FasterReader::setMaxHits(1000000);
-
   // std::mutex myMutex;
-  // std::vector<std::string> names = 
+  unsigned nb_threads = 2;
+
+  // MTObject::Initialize(nb_threads);
+  // MTObject::parallelise_function(
+    // auto thread_i = MTObject::getThreadIndex();
+
+  ROOT::EnableThreadSafety();
+  std::vector<std::thread> threads;
+  threads.reserve(nb_threads);
+  for (unsigned thread_i = 0; thread_i<nb_threads; ++thread_i){threads.emplace_back(
+
+    [&](){
+    TTree* tree (new TTree("myTree", "myTree"));
+    tree->SetDirectory(nullptr);
+
+    print("Tree created in memory");
+
+    ushort label = 0;
+    ULong64_t stamp = 0ull;
+    float nrj = 0.0f;
+    bool  pileup = false;
+
+    tree -> Branch("label"  , &label  );
+    tree -> Branch("stamp"  , &stamp  );
+    tree -> Branch("nrj"    , &nrj    );
+    tree -> Branch("pileup" , &pileup );
+
+    print("Variables set to branches");
+  });
+  }
+  for (auto & thread : threads) thread.join();
+  threads.clear();
+
+  // MTObject::Initialize(2);
+  //   std::vector<std::string> names = 
   // {
   //   "/home/corentin/faster_data/N-SI-136/run_75.fast/run_75_0002.fast",
   //   "/home/corentin/faster_data/N-SI-136/run_75.fast/run_75_0003.fast"
   // };
 
-  // MTObject::parallelise_function([&](){
+    // while(reader.Read())
+    // // for (int i = 0; i<10000000; i++)
+    // {
+    //   hit.label = random->Gaus();
+    //   hit.stamp = random->Gaus();
+    //   hit.nrj = random->Gaus();
+    //   hit.nrj2 = random->Gaus();
+    //   hit.pileup = random->Gaus();
 
-  //   TTree* tree (new TTree("myTree", "myTree"));
-  //   tree->SetDirectory(nullptr);
-
-  //   Hit hit;
-
-  //   FasterReader reader(&hit, names[MTObject::getThreadIndex()]);
-    
-  //   myMutex.lock();
-  //     tree -> Branch("label"  , &hit.label  );
-  //     tree -> Branch("stamp"  , &hit.stamp  );
-  //     tree -> Branch("nrj"    , &hit.nrj    );
-  //     tree -> Branch("nrj2"   , &hit.nrj2   );
-  //     tree -> Branch("pileup" , &hit.pileup );
-  //   myMutex.unlock();
-
-  //   while(reader.Read())
-  //   {
-  //     tree->Fill();
-  //   }
-  // });
+    //   // tree->Fill();
+    // }
+  //MTObject::parallelise_function([&](){);
 
 
 
