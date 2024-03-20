@@ -54,6 +54,7 @@ std::string one_run_folder = "";
 ulonglong max_hits = -1;
 bool treat_129 = false;
 std::string output_fileinfo_name = "";
+int verbose = 1;
 
 bool extend_periods = false; // To take more than one period after a event trigger
 uint nb_periods_more = 0; // Number of periods to extend after an event that triggered
@@ -364,10 +365,11 @@ void convert(Hit & hit, FasterReader & reader,
   File outfile (outFolder, outFilename);                  // /outPath/run_number.fast/run_number_filenumber.root
 
   // Important : if the output file already exists, then do not overwrite it !
-  if ( !overwrite && file_exists(outfile) ) {print(outfile, "already exists !"); return;}
+  if ( !overwrite && file_exists(outfile) ) {if(verbose) print(outfile, "already exists !"); return;}
 
   total_read_size+=raw_datafile.size();
   auto dataSize = float_cast(raw_datafile.size("Mo"));
+
 
   // ------------------------------ //
   // Initialize the temporary TTree //
@@ -399,13 +401,14 @@ mutex_Root.unlock();
 
   read_timer.Stop();
   
-  print("Read of",raw_datafile.shortName(),"finished here,", rawCounts,"counts in", read_timer.TimeElapsedSec(),"s (", dataSize/read_timer.TimeElapsedSec(), "Mo/s)");
+  if (verbose) print("Read of",raw_datafile.shortName(),"finished here,", rawCounts,"counts in", read_timer.TimeElapsedSec(),"s (", dataSize/read_timer.TimeElapsedSec(), "Mo/s)");
 
   if (rawCounts==0) {print("NO HITS IN",run); return;}
 
   // -------------------------------------- //
   // Realign switched hits after timeshifts //
   // -------------------------------------- //
+mutex_Root.lock();
   Alignator gindex(tempTree);
 
   // ------------------------------------------------------ //
@@ -417,11 +420,9 @@ mutex_Root.unlock();
   // hit.reading(tempTree, "lsEQp");
 
   // Create output tree and Event 
-mutex_Root.lock();
   std::string const outTree_name = "Nuball2"+std::to_string(MTObject::getThreadIndex());
   TTree* outTree (new TTree(outTree_name.c_str(),outTree_name.c_str()));
   outTree -> SetDirectory(nullptr); // Force it to be created on RAM rather than on disk - much faster if enough RAM
-mutex_Root.unlock();
   Event event;
   event.writting(outTree, "lstEQ");// The pileup bit has been removed because of weird errors raised by valgrind drd
   // event.writting(outTree, "lstEQp");
@@ -429,6 +430,7 @@ mutex_Root.unlock();
   // Initialize RF manager :
   RF_Manager rf;
   rf.set_period_ns(200);
+mutex_Root.unlock();
 
   // Handle the first RF downscaled hit :
   RF_Extractor first_rf(tempTree, rf, hit, gindex);
@@ -493,7 +495,9 @@ mutex_Root.unlock();
           if (isDelayed_ns(rel_time_first_Ge))
           {// If the Germanium is in the delayed window, try to create the event :
             auto const init_it = r_buffer_it; // The buffer's index of the first Germanium hit
-            auto const & first_Ge_Clover_label = Clovers::labels[hit_first_Ge.label]; // The Clover label of the first Germanium
+            MTObject::mutex.lock();
+            auto first_Ge_Clover_label = Clovers::labels[hit_first_Ge.label]; // The Clover label of the first Germanium
+            MTObject::mutex.unlock();
             auto const & ref_pulse_timestamp = rf.refTime(hit_first_Ge.stamp); // The absolute timestamp of the beam pulse (relative to the delayed Germanium we're trying to trigger on)
             std::vector<uchar> clover_modules = {first_Ge_Clover_label}; // List of the modules that fired in the event
 
@@ -776,7 +780,7 @@ mutex_Root.lock();
   delete tempTree;
 mutex_Root.unlock();
   convert_timer.Stop();
-  print("Conversion finished here done in", convert_timer.TimeElapsedSec() , "s (",dataSize/convert_timer.TimeElapsedSec() ,"Mo/s)");
+  if (verbose) print("Conversion finished here done in", convert_timer.TimeElapsedSec() , "s (",dataSize/convert_timer.TimeElapsedSec() ,"Mo/s)");
   Timer write_timer;
 
   // Initialize output TTree :
@@ -784,7 +788,7 @@ mutex_Root.lock();
   TFile* outFile (TFile::Open(outfile.c_str(), "RECREATE"));
   outFile -> cd();
   outTree -> SetDirectory(outFile);
-  outTree -> SetName(outTree_name);
+  outTree -> SetName(outTree_name.c_str());
   outTree -> Write();
   outFile -> Write();
   outFile -> Close();
@@ -798,10 +802,12 @@ mutex_Root.unlock();
   auto const & trigger_efficiency = double_cast(hits_count)/double_cast(rawCounts);
   auto const & Mo_per_sec = dataSize/timer.TimeSec();
 
-  print_precision(4);
-
-  print(outfile, " written in ", timer()," (", Mo_per_sec, "Mo/s). Input file ", dataSize, " Mo and output file " 
+  if (verbose) 
+  {
+    print_precision(4);
+    print(outfile, " written in ", timer()," (", Mo_per_sec, "Mo/s). Input file ", dataSize, " Mo and output file " 
     , outSize, " Mo : compression factor ", compression_factor, " - ", 100.*trigger_efficiency , " % hits kept");
+  }
 
 mutex_Root.lock();
   delete outFile;
@@ -886,6 +892,12 @@ int main(int argc, char** argv)
         else if (command == "-U" || command == "--Uranium")
         {
           list_runs = "Uranium.list";
+        }
+        else if (                   command == "--progress")
+        {
+          // FasterReader::setVerbose(0);
+          verbose = 0;
+          MTFasterReader::showProgressBar();
         }
         else if (                   command == "--129")
         {

@@ -98,6 +98,7 @@ private:
   File m_outFile = "spectra.root";
   int m_nb_files = -1;
   int m_overwrite = false;
+  int m_maximum_hits = -1;
 
   int m_nb_bins = -1;
   double m_bin_max = -1;
@@ -164,6 +165,7 @@ void Faster2Histo::load(int const & argc, char** argv)
     else if (command == "-i") {detectors.load(argv[++i]);}
     else if (command == "-m") {this -> setNbThreads(std::stoi(argv[++i]));}
     else if (command == "-n") {FasterReader::setMaxHits(std::stoi(argv[++i]));}
+    else if (command == "-N") {m_maximum_hits = std::stoi(argv[++i]);}
     else if (command == "-O") {this -> setOutFilename(argv[++i]);}
     else if (command == "-o") {this -> overwrite(true);}
     else if (command == "-t") loadTimeshifts(argv[++i]);

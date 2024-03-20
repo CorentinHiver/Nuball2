@@ -26,8 +26,6 @@
 // *********** STD includes ********* //
 #include <any>
 #include <array>
-#include <cstdlib>
-#include <ctime>
 #include <fstream>
 #include <functional>
 #include <memory>
@@ -43,10 +41,10 @@
 #include <unordered_map>
 
 // ********** C includes ************ //
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
+#include <csignal>
+#include <cstdlib>
+#include <cstring>
+#include <ctime>
 
 ////////////////////////////
 // Some specialised print //

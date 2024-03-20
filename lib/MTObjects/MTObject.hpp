@@ -1,6 +1,8 @@
 #ifndef MTOBJECT_HPP
 #define MTOBJECT_HPP
 
+#include <csignal>
+#include <future>
 #include <thread>
 #include <mutex>
 #include <vector>
@@ -154,11 +156,28 @@ public:
     if (nb_threads == 1) MTObject::ON = false;
   }
 
+  static void signalHandler(int signal)
+  {
+    if (signal == SIGINT)
+    {
+      std::cout << "\nCtrl+C pressed but is might not be taken into account ... Please close the terminal to shut the process !" << std::endl;
+      // lock_mutex lock(mutex);
+      // std::cout << "\nCtrl+C pressed, quitting the multithreaded environement safely" << std::endl;
+      // std::cout << "Waiting for the current threads to finish...." << std::endl;
+      // for (auto & thread : m_threads) thread.join();
+      // std::cout << "All threads terminated" << std::endl;
+      // m_threads.clear();
+      // exit(EXIT_SUCCESS);
+    }
+  }
+
   static void Initialize()
   {
     // Safety to initialize threads only once :
     if (m_initialized) return;
     m_initialized = true;
+
+    signal(SIGINT, signalHandler);
 
     // Initialising :
     master_thread_id = std::this_thread::get_id();
@@ -189,7 +208,7 @@ public:
         m_thread_index = i; // Index the thread
         func(std::forward<ARGS>(args)...); // Run the function inside thread
       });
-      for(size_t i = 0; i < nb_threads; i++) m_threads.at(i).join(); //Closes threads, waiting fot everyone to finish
+      for(auto & thread : m_threads) thread.join(); //Closes threads, waiting fot everyone to finish
       m_threads.clear(); // Flushes memory
       std::cout << "Multi-threading is over !" << std::endl;
     }

@@ -6,6 +6,7 @@
 #include "../Classes/FasterReader.hpp"
 #include "../Classes/Alignator.hpp"
 #include "../Classes/FilesManager.hpp"
+#include "../Classes/CoProgressBar.hpp"
 
 
 /**
@@ -133,12 +134,14 @@ public:
   }
 
   void printMTFiles() {for (auto const & file : m_MTfiles) print(file);}
+  auto & getFilesList() {return m_MTfiles;}
   auto const & files() const {return m_files;}
   auto & files() {return m_files;}
 
   // Other parameters :
   void setTimeshifts(std::vector<Time> const & timeshifts) {m_timeshifts = timeshifts;}
   auto const & timeshift(Label const & label) const {return m_timeshifts[label];}
+  static void showProgressBar(bool const & choice = true) {s_progressBar = choice;}
 
 private:
 
@@ -155,8 +158,9 @@ private:
   MTList m_MTfiles;
 
   std::vector<Time> m_timeshifts;
+  static bool s_progressBar;
 };
-
+bool MTFasterReader::s_progressBar = false;
 //////////////////////////////
 //   Read raw faster data   //
 //////////////////////////////
@@ -187,14 +191,16 @@ inline void MTFasterReader::readRaw(Func && func, ARGS &&... args)
 }
 
 template<class Func, class... ARGS>
-inline void MTFasterReader::Read(MTFasterReader & MTreader, Func function, ARGS &&... args)
+inline void MTFasterReader::Read(MTFasterReader & MTReader, Func function, ARGS &&... args)
 { // Here we are inside each thread :
   std::string filename;
-  while(MTreader.nextFilename(filename))
+  CoProgressBar progress(&MTReader.getFilesList().getIndex(), MTReader.getFilesList().size());
+  while(MTReader.nextFilename(filename))
   {
     fasterReaderMutex.lock();
       Hit hit;
       FasterReader reader(&hit, filename);
+      if (s_progressBar)progress.show();
     fasterReaderMutex.unlock();
     function(hit, reader, std::forward<ARGS>(args)...); // If issues here, check that the parallelised function has the following form : type func(Hit & hit, FasterReader & reader, ARGS... some_args)
   }

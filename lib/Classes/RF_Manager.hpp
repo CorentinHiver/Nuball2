@@ -88,14 +88,14 @@ public:
 
   Time period = 0;
 
-  static Label label;
+  thread_local static Label label;
 
 private:
-  static Time m_offset;
+  thread_local static Time m_offset;
 };
 
-Time  RF_Manager::m_offset = 50000 ;
-Label RF_Manager::label  = 251;
+thread_local Time  RF_Manager::m_offset = 50000 ;
+thread_local Label RF_Manager::label  = 251;
 
 bool inline RF_Manager::setHit(Hit const & hit)
 {

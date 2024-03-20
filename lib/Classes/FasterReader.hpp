@@ -116,6 +116,7 @@ public:
    ///@brief Set the number of hits to read inside each file
   static void setMaxHits(ulonglong maxHits) {m_maxHits = maxHits;}
   static auto getMaxHits()                  {return m_maxHits   ;}
+  static void setVerbose(int i = 1) {m_verbose = i;}
 
   // ------ Getters ------ :
   ///@brief \deprecated Get the current Hit 
@@ -150,6 +151,7 @@ private:
   bool InitializeReader();
 
   static ulonglong m_maxHits;
+  static int m_verbose; 
   // ulonglong m_cursor  =  0;
   ulonglong m_counter =  0;
 
@@ -179,6 +181,7 @@ private:
 };
 
 ulonglong FasterReader::m_maxHits = -1;
+int FasterReader::m_verbose = 1;
 // ================== //
 //   INITIALIZATION   //
 // ================== //
@@ -229,12 +232,12 @@ bool inline FasterReader::Initialize()
   // Check the extension of the file, then initialise the reader :
   if (extension(m_filename) == "fast")
   {
-    print("Reader set to ", m_filename );
+    if (m_verbose>0) print("Reader set to ", m_filename );
     return InitializeReader();
   }
   else
   {
-    print("File ", m_filename, " not a .fast file !!");
+    if (m_verbose>0) print("File ", m_filename, " not a .fast file !!");
     m_kReady = false; return false;
   }
 
@@ -247,7 +250,7 @@ bool FasterReader::InitializeReader()
   m_reader = faster_file_reader_open ( m_filename.c_str() );
   if (m_reader == NULL)
   {
-    print("Faster file ", m_filename, " impossible to open");
+    if (m_verbose>0) print("Faster file ", m_filename, " impossible to open");
     m_kReady = false; return false;
   }
   return true;

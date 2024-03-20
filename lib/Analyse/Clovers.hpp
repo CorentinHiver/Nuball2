@@ -108,7 +108,7 @@ public:
     #endif //MULTITHREADING
     if (!s_initialised)
     {
-      print("Initialising clovers arrays");
+      // debug("Initialising clovers arrays");
       for (Label l = 0; l<nb_det; l++)
       {
         isClover[l] = is_clover(l);

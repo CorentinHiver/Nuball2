@@ -158,8 +158,8 @@ public:
 
 protected:
   void load(int argc, char** argv);
-  static void s_convertFile(Hit & hit, FasterReader & reader, 
-                            Faster2Root & convertor, Path const & outPath) 
+  /// @brief Dispatch the Faster2Root::convertFile() method through the threads
+  static void dispatch_threads(Hit & hit, FasterReader & reader, Faster2Root & convertor, Path const & outPath) 
   {convertor.convertFile(hit, reader, outPath);}
   virtual void printParameters() const;
 
@@ -296,7 +296,7 @@ void Faster2Root::convert(std::string const & dataFolder, std::string const & ou
   if (!dataPath) {print(dataFolder, "NOT FOUND"); throw std::runtime_error("DATA");}
   Path outPath(outputFolder, 1);
   MTFasterReader readerMT(dataPath, (nb_files>0) ? nb_files : m_nb_files);
-  readerMT.readRaw(s_convertFile, *this, outputFolder);
+  readerMT.readRaw(dispatch_threads, *this, outputFolder);
 }
 
 /**

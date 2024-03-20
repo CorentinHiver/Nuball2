@@ -37,7 +37,7 @@ public:
   bool setValueMax(float const & value_max) {return (m_value_max = value_max);}
 
   // Show methods :
-  void show();
+  void show(std::string const & message = "");
   void showFast();
 
 private:
@@ -73,7 +73,7 @@ void CoProgressBar<T>::showFast()
 }
 
 template<class T>
-void CoProgressBar<T>::show()
+void CoProgressBar<T>::show(std::string const & message)
 {
   if (!m_value)              throw_error("in CoProgressBar<T>::show() : the value has not been set !!");
   else if (m_value_max == 0) throw_error("in CoProgressBar<T>::show() : the maximum value has not been set !!");
@@ -91,7 +91,9 @@ void CoProgressBar<T>::show()
     if (i<nb_chars) std::cout << ".";
     else            std::cout << " ";
   }
-  std::cout << "| : " << int_cast(real_procentage*100) << "% (" << std::setprecision(3) << speed << " %/s)" << std::endl << "\033[F";
+  std::cout << "| : " << int_cast(real_procentage*100) << "% (" << std::setprecision(3) << speed << " %/s)";
+  if (message!="") std::cout << message ;
+  std::cout << std::endl << "\033[F";// This code flushes the previous line
   std::cout.flush();
   timer.Restart();
   m_last_value = *m_value;

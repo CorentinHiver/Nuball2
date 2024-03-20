@@ -66,7 +66,7 @@ opt: default
 opt_clang: clang
 opt_clang: opt
 
-debug: CFLAGS += -fno-inline -g -O0 -DDEBUG -Wextra -ftemplate-depth-25 #-Wold-style-cast
+debug: CFLAGS += -fno-inline -g -O0 -DDEBUG -Wextra -ftemplate-depth-25 -fsanitize=thread #-Wold-style-cast
 debug: default
 
 debugopt: CFLAGS += -fno-inline -g -O2 -DDEBUG -Wextra -ftemplate-depth-25 #-Wold-style-cast

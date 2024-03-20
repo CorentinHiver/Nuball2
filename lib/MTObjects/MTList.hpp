@@ -26,6 +26,7 @@ public:
   bool getNext(T & t);
   bool getNext(T & t, size_t & index);
   void resetRead() {m_read_index = 0;}
+  auto & getIndex() {return m_read_index;}
   void clear() {m_collection.clear();}
   void resize(size_t const & i = 0) 
   {

@@ -69,6 +69,9 @@ opt_clang: opt
 debug: CFLAGS += -fno-inline -g -O0 -DDEBUG -Wextra -ftemplate-depth-25 #-Wold-style-cast
 debug: default
 
+debug_threads: CFLAGS += -fsanitize=thread
+debug_threads: debug
+
 debugopt: CFLAGS += -fno-inline -g -O2 -DDEBUG -Wextra -ftemplate-depth-25 #-Wold-style-cast
 debugopt: default
 
@@ -78,6 +81,9 @@ harddebug: default
 debug_clang: CC = clang
 debug_clang: CFLAGS += -Wno-unused-command-line-argument
 debug_clang: debug
+
+debug_clang_threads: CFLAGS += -fsanitize=thread
+debug_clang_threads: debug_clang
 
 debug_clang_16: CC = clang
 debug_clang_16: CFLAGS += -Wno-unused-command-line-argument

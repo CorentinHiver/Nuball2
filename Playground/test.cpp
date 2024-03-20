@@ -1,10 +1,10 @@
 #include <MTObject.hpp>
-#include "../libRoot.hpp"
-#include <Hit.hpp>
-#include <FasterReader.hpp>
-#include <Detectors.hpp>
-#include <Timeshifts.hpp>
-#include <HitBuffer.hpp>
+// #include "../libRoot.hpp"
+// #include <Hit.hpp>
+// #include <FasterReader.hpp>
+// #include <Detectors.hpp>
+// #include <Timeshifts.hpp>
+// #include <HitBuffer.hpp>
 // #include <SourceCloverSpectra.hpp>
 // #include <Calibration.hpp>
 // #include <Calibrator.hpp>
@@ -23,15 +23,18 @@
 // #include <CobaltCalorimeter.hpp>
 // #include <MTTHist.hpp>
 
-#include <TROOT.h>
-#include <TThread.h>
-#include <TTree.h>
-#include <thread>
-#include <vector>
-#include <iostream>
+// #include <TROOT.h>
+// #include <TThread.h>
+// #include <TTree.h>
+// #include <thread>
+// #include <vector>
+// #include <iostream>
 
 int main()
 { 
+  MTObject::Initialize(2);
+  MTObject::parallelise_function([](){while(true) continue;});
+  return EXIT_SUCCESS;
   // MTObject::Initialize(2);
   // FasterReader::setMaxHits(1000000);
 
@@ -120,7 +123,7 @@ int main()
   // std::string filename("~/faster_data/N-SI-129-source_histo/Th232_both_sides_bidim.root");
   // std::string anglesFilename("angles_paris_bidim");
   // std::string outfilename("rotatedParis.root");
-  // // Paris::calculateBidimAngles(filename, anglesFilename);
+  // Paris::calculateBidimAngles(filename, anglesFilename);
 
   // ParisBidimAngles angles(anglesFilename);
 
