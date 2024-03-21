@@ -16,7 +16,7 @@ std::unordered_map<Label, double> const maxE_Ge = {{28, 7500}, {33, 8250}, {46, 
                                                    {135, 8500}, {136, 9000}, {142, 6000}, {145, 8000}, {146, 9000},
                                                    {147, 9000}, {157, 9000}, {158, 9000}, {159, 9000}};
 
-std::string g_outfilename = "all_runs_tests.root";
+std::string g_outfilename = "tests.root";
 int nb_threads = -1;
 
 inline float smear(float const & nrj, Label const & label, TRandom* random)
@@ -173,6 +173,7 @@ private:
 
   MTTHist<TH2F> dT_VS_sumGe;
   MTTHist<TH2F> delayed_Ge_C2_VS_total_Ge;
+  MTTHist<TH2F> delayed_Ge_C2_VS_total_Ge_cleaned;
   MTTHist<TH2F> delayed_Ge_C3_VS_total_Ge;
   MTTHist<TH2F> delayed_Ge_C3_tot3_VS_total_Ge;
 
@@ -310,6 +311,7 @@ void Analysator::Initialise()
 
   // When only 2-3 germaniums, plot germaniums VS the sum of them
   delayed_Ge_C2_VS_total_Ge.reset("delayed_Ge_C2_VS_total_Ge", "Clean Ge VS sum clean Ge C2", 5000,0,5000, 2000,0,4000);
+  delayed_Ge_C2_VS_total_Ge_cleaned.reset("delayed_Ge_C2_VS_total_Ge_cleaned", "Clean Ge VS sum clean Ge C2", 5000,0,5000, 2000,0,4000);
   delayed_Ge_C3_VS_total_Ge.reset("delayed_Ge_C3_VS_total_Ge", "Clean Ge VS sum clean Ge C3", 5000,0,5000, 2000,0,4000);
   delayed_Ge_C3_tot3_VS_total_Ge.reset("delayed_Ge_C3_tot3_VS_total_Ge", "Clean Ge VS sum clean Ge C3", 5000,0,5000, 2000,0,4000);
 
@@ -666,6 +668,13 @@ void Analysator::analyse(Nuball2Tree & tree, Event & event)
       auto const & calo = nrj_0+nrj_1;
       delayed_Ge_C2_VS_total_Ge.Fill(calo, nrj_0);
       delayed_Ge_C2_VS_total_Ge.Fill(calo, nrj_1);
+      if(nb_gamma_in_prompts[closest_prompt]>3 && calo_prompts[closest_prompt]>515 && calo_prompts[closest_prompt]<2000)
+      {
+        delayed_Ge_C2_VS_total_Ge_cleaned.Fill(calo, nrj_0);
+        delayed_Ge_C2_VS_total_Ge_cleaned.Fill(calo, nrj_1);
+        dd_wp.Fill(nrj_0, nrj_1);
+        dd_wp.Fill(nrj_1, nrj_0);
+      }
     }
 
     if ((clean_indexes.size() == 3) && one_close_prompt) 
@@ -751,8 +760,8 @@ void Analysator::analyse(Nuball2Tree & tree, Event & event)
         // dd_time_Ge_clean.Fill(time_j, time_i);
         // dd_time_Ge_clean.Fill(time_i, time_j);
 
-        dd_wp.Fill(nrj_i, nrj_j);
-        dd_wp.Fill(nrj_j, nrj_i);
+        // dd_wp.Fill(nrj_i, nrj_j);
+        // dd_wp.Fill(nrj_j, nrj_i);
 
         dd_time_Ge_clean_wp.Fill(time_i, time_j);
         dd_time_Ge_clean_wp.Fill(time_j, time_i);
@@ -793,7 +802,7 @@ void Analysator::write()
   outfile->cd();
 
 #ifndef QUALITY
-  // RWMat RW_dd(dd); RW_dd.Write();
+  RWMat RW_dd_wp(dd_wp); RW_dd_wp.Write();
   dd.Write();
   dp.Write();
   dd_wp.Write();
@@ -888,6 +897,7 @@ void Analysator::write()
 
   dT_VS_sumGe.Write();
   delayed_Ge_C2_VS_total_Ge.Write();
+  delayed_Ge_C2_VS_total_Ge_cleaned.Write();
   delayed_Ge_C3_VS_total_Ge.Write();
   delayed_Ge_C3_tot3_VS_total_Ge.Write();
 
