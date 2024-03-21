@@ -776,7 +776,7 @@ void Analysator::analyse(Nuball2Tree & tree, Event & event)
     }
 
     // Others :
-    for (size_t clover_it_i = 0; clover_it_i<clean_indexes.size(); ++clover_it_i)
+    /*for (size_t clover_it_i = 0; clover_it_i<clean_indexes.size(); ++clover_it_i)
     {
       continue;
       auto const & clover_i = clovers_delayed[clean_indexes[clover_it_i]];
@@ -837,7 +837,7 @@ void Analysator::analyse(Nuball2Tree & tree, Event & event)
         delayed_Ge_clean_VS_prompt_calo.Fill(calo_prompts[0], nrj_i);
         if (one_close_prompt) delayed_Ge_clean_VS_delayed_calo_wop.Fill(delayed_calorimetry, nrj_i);
       }
-    }
+    }*/
   
   #else // if QUALITY
 
