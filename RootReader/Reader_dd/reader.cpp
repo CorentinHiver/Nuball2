@@ -668,7 +668,7 @@ void Analysator::analyse(Nuball2Tree & tree, Event & event)
       auto const & calo = nrj_0+nrj_1;
       delayed_Ge_C2_VS_total_Ge.Fill(calo, nrj_0);
       delayed_Ge_C2_VS_total_Ge.Fill(calo, nrj_1);
-      if(nb_gamma_in_prompts[closest_prompt]>3 && calo_prompts[closest_prompt]>515 && calo_prompts[closest_prompt]<2000)
+      if(nb_gamma_in_prompts[closest_prompt]<4 && calo_prompts[closest_prompt]>515 && calo_prompts[closest_prompt]<2000)
       {
         delayed_Ge_C2_VS_total_Ge_cleaned.Fill(calo, nrj_0);
         delayed_Ge_C2_VS_total_Ge_cleaned.Fill(calo, nrj_1);
