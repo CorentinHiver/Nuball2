@@ -687,7 +687,7 @@ void Analysator::analyse(Nuball2Tree & tree, Event & event)
         delayed_Ge_C2_VS_total_Ge_rejected.Fill(calo, nrj_1);
       }
       // Prompt VS delayed :
-      for (auto const & clean_index : prompt_clovers.CleanGe)
+      for (auto const & clean_index : prompt_clovers[closest_prompt].CleanGe)
       {
         auto const & clover = prompt_clovers[clean_index];
         delayed_Ge_C2_VS_prompt_Ge.Fill(clover.nrj, nrj_1);
