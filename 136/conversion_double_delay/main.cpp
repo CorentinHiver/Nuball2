@@ -918,7 +918,7 @@ int main(int argc, char** argv)
         else if (command == "-h" || command == "--help")
         {
           print("List of the commands :");
-          print("(-d  || --single-clean)                   : only requires one clean Ge and one other module");
+          print("(-d  || --single-clean)                   : trigger : only requires one clean Ge and one other module");
           print("(-f  || --files-number)   [files-number]  : set the number of files");
           print("(       --run)            [runname]       : set only one folder to convert");
           print("(-h  || --help)                           : display this help");
@@ -927,6 +927,7 @@ int main(int argc, char** argv)
           print("(-n  || --number-hits)    [hits_number]   : set the number of hit to read in each file.");
           print("(-o  || --overwrite)                      : overwrites the already written folders. If a folder is incomplete, you need to delete it");
           print("(-p  || --number_pulses)  [nb_pulses]     : Sets the number of pulses to look backward from the trigger. Default : 4 pulses");
+          print("(-P  || --particle-trig)                  : trigger : requires one DSSD hit before the clean Ge (TODO)");
           print("(       --only-timeshift)                 : Calculate only timeshifts, force it even if it already has been calculated");
           // print("(-t  || --trigger)        [trigger]       : Default ",list_trigger,"|", trigger_legend);
           print("(-Th || --Thorium)                        : Treats only the thorium runs (run_nb < 75)");

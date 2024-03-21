@@ -1,0 +1,14 @@
+21-Mar-24 15:10:55: Created new escl8r data file dd.e4k_log
+      ...from matrix file dd_wp.m4b
+      ...by taking all 4k channels.
+21-Mar-24 15:11:02: Energy calibration file = ../nuball.aca
+21-Mar-24 15:11:05: Efficiency calibration file = ../nuball.aef
+21-Mar-24 15:11:07: Error for energy calibration = 0.030000
+21-Mar-24 15:11:07: Percentage error on efficiency = 3.000000
+21-Mar-24 15:11:09: Gaussian peak shapes selected.
+21-Mar-24 15:11:10: Peak width parameters = 3.000000 1.414214 0.000000
+21-Mar-24 15:11:10: New background spectra, no E2-enhancement.
+       ...Total projection spectrum file name =  dd_wp_px.spe
+       ...Total background spectrum file name =  dd_wp_bx.spe
+21-Mar-24 15:11:44: Percentage error on background = 5.000000
+21-Mar-24 15:11:44:  2D Scaling factor = 0.951365

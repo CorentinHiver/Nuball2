@@ -174,6 +174,7 @@ private:
   MTTHist<TH2F> dT_VS_sumGe;
   MTTHist<TH2F> delayed_Ge_C2_VS_total_Ge;
   MTTHist<TH2F> delayed_Ge_C2_VS_total_Ge_cleaned;
+  MTTHist<TH2F> delayed_Ge_C2_VS_total_Ge_rejected;
   MTTHist<TH2F> delayed_Ge_C3_VS_total_Ge;
   MTTHist<TH2F> delayed_Ge_C3_tot3_VS_total_Ge;
 
@@ -310,10 +311,11 @@ void Analysator::Initialise()
   delayed_Ge_clean_VS_delayed_calo_wop.reset("delayed_Ge_clean_VS_delayed_calo_wop", "delayed Ge clean VS delayed calo with only one prompt before", 500,0,15000,10000,0,10000);
 
   // When only 2-3 germaniums, plot germaniums VS the sum of them
-  delayed_Ge_C2_VS_total_Ge.reset("delayed_Ge_C2_VS_total_Ge", "Clean Ge VS sum clean Ge C2", 5000,0,5000, 2000,0,4000);
-  delayed_Ge_C2_VS_total_Ge_cleaned.reset("delayed_Ge_C2_VS_total_Ge_cleaned", "Clean Ge VS sum clean Ge C2", 5000,0,5000, 2000,0,4000);
-  delayed_Ge_C3_VS_total_Ge.reset("delayed_Ge_C3_VS_total_Ge", "Clean Ge VS sum clean Ge C3", 5000,0,5000, 2000,0,4000);
-  delayed_Ge_C3_tot3_VS_total_Ge.reset("delayed_Ge_C3_tot3_VS_total_Ge", "Clean Ge VS sum clean Ge C3", 5000,0,5000, 2000,0,4000);
+  delayed_Ge_C2_VS_total_Ge.reset("delayed_Ge_C2_VS_total_Ge", "Clean Ge VS sum clean Ge C2", 5000,0,5000, 4000,0,4000);
+  delayed_Ge_C2_VS_total_Ge_cleaned.reset("delayed_Ge_C2_VS_total_Ge_cleaned", "Clean Ge VS sum clean Ge C2 cleaned", 5000,0,5000, 4000,0,4000);
+  delayed_Ge_C2_VS_total_Ge_rejected.reset("delayed_Ge_C2_VS_total_Ge_rejected", "Clean Ge VS sum clean Ge C2 rejected", 5000,0,5000, 4000,0,4000);
+  delayed_Ge_C3_VS_total_Ge.reset("delayed_Ge_C3_VS_total_Ge", "Clean Ge VS sum clean Ge C3 - only 2 by 2", 5000,0,5000, 4000,0,4000);
+  delayed_Ge_C3_tot3_VS_total_Ge.reset("delayed_Ge_C3_tot3_VS_total_Ge", "Clean Ge VS sum clean Ge C3", 5000,0,5000, 4000,0,4000);
 
   // For TSC method :
   dT_VS_sumGe.reset("dT_VS_Esum_Ge", "dT VS Esum Ge", 10000,0,10000, 100,-200,200);
@@ -675,6 +677,11 @@ void Analysator::analyse(Nuball2Tree & tree, Event & event)
         dd_wp.Fill(nrj_0, nrj_1);
         dd_wp.Fill(nrj_1, nrj_0);
       }
+      else
+      {
+        delayed_Ge_C2_VS_total_Ge_rejected.Fill(calo, nrj_0);
+        delayed_Ge_C2_VS_total_Ge_rejected.Fill(calo, nrj_1);
+      }
     }
 
     if ((clean_indexes.size() == 3) && one_close_prompt) 
@@ -898,6 +905,7 @@ void Analysator::write()
   dT_VS_sumGe.Write();
   delayed_Ge_C2_VS_total_Ge.Write();
   delayed_Ge_C2_VS_total_Ge_cleaned.Write();
+  delayed_Ge_C2_VS_total_Ge_rejected.Write();
   delayed_Ge_C3_VS_total_Ge.Write();
   delayed_Ge_C3_tot3_VS_total_Ge.Write();
 
@@ -928,13 +936,13 @@ void reader(int number_files = -1)
   if (found(Path::pwd().string(), "faster")) 
   {
     MTObject::Initialize((nb_threads<0) ? 10 : nb_threads);
-    if (simple_d) Analysator analysator(number_files, "~/nuball2/N-SI-136-root_d/merged/ ");
+    if (simple_d) Analysator analysator(number_files, "~/nuball2/N-SI-136-root_d/merged/");
     else          Analysator analysator(number_files, "~/nuball2/N-SI-136-root_dd/merged/");
   }
   else 
   {
     MTObject::Initialize((nb_threads<0) ? 2 : nb_threads);
-    if (simple_d) Analysator analysator(number_files, "~/faster_data/N-SI-136-root_d/ ");
+    if (simple_d) Analysator analysator(number_files, "~/faster_data/N-SI-136-root_d/");
     else          Analysator analysator(number_files, "~/faster_data/N-SI-136-root_dd/");
   }
 }
