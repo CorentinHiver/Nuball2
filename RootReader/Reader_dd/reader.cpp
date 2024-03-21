@@ -689,7 +689,7 @@ void Analysator::analyse(Nuball2Tree & tree, Event & event)
       // Prompt VS delayed :
       for (auto const & clean_index : prompt_clovers[closest_prompt].CleanGe)
       {
-        auto const & clover = prompt_clovers[clean_index];
+        auto const & clover = prompt_clovers[closest_prompt][clean_index][];
         delayed_Ge_C2_VS_prompt_Ge.Fill(clover.nrj, nrj_1);
         delayed_Ge_C2_VS_prompt_Ge.Fill(clover.nrj, nrj_0);
       }
