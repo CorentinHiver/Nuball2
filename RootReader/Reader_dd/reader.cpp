@@ -174,7 +174,7 @@ private:
   MTTHist<TH2F> dT_VS_sumGe;
   MTTHist<TH2F> delayed_Ge_C2_VS_total_Ge;
   MTTHist<TH2F> delayed_Ge_C2_VS_prompt_Ge;
-  MTTHist<TH2F> delayed_Ge_C2_VS_prompt_Ge_mult;
+  MTTHist<TH2F> delayed_Ge_C2_VS_prompt_mult;
   MTTHist<TH2F> delayed_Ge_C2_VS_total_Ge_cleaned;
   MTTHist<TH2F> delayed_Ge_C2_VS_total_Ge_rejected;
   MTTHist<TH2F> delayed_Ge_C3_VS_total_Ge;
@@ -182,6 +182,7 @@ private:
   
   // simple clean Ge delayed trigger :
   MTTHist<TH2F> delayed_Ge_C1_VS_prompt_Ge;
+  MTTHist<TH2F> delayed_Ge_C1_VS_delayed_calo;
 
   #else //QUALITY
 
@@ -318,7 +319,7 @@ void Analysator::Initialise()
   // When only 2-3 germaniums, plot germaniums VS the sum of them
   delayed_Ge_C2_VS_total_Ge.reset("delayed_Ge_C2_VS_total_Ge", "Clean Ge VS sum clean Ge C2", 5000,0,5000, 2000,0,4000);
   delayed_Ge_C2_VS_prompt_Ge.reset("delayed_Ge_C2_VS_prompt_Ge", "Clean Ge C2 VS prompt Ge", 5000,0,5000, 2000,0,4000);
-  delayed_Ge_C2_VS_prompt_Ge_mult.reset("delayed_Ge_C2_VS_prompt_Ge_mult", "Clean Ge C2 VS prompt Ge mult", 15,0,15, 2000,0,4000);
+  delayed_Ge_C2_VS_prompt_mult.reset("delayed_Ge_C2_VS_prompt_mult", "Clean Ge C2 VS prompt Ge mult", 15,0,15, 2000,0,4000);
   delayed_Ge_C2_VS_total_Ge_cleaned.reset("delayed_Ge_C2_VS_total_Ge_cleaned", "Clean Ge VS sum clean Ge C2 cleaned", 5000,0,5000, 2000,0,4000);
   delayed_Ge_C2_VS_total_Ge_rejected.reset("delayed_Ge_C2_VS_total_Ge_rejected", "Clean Ge VS sum clean Ge C2 rejected", 5000,0,5000, 2000,0,4000);
   delayed_Ge_C3_VS_total_Ge.reset("delayed_Ge_C3_VS_total_Ge", "Clean Ge VS sum clean Ge C3 - only 2 by 2", 5000,0,5000, 2000,0,4000);
@@ -333,6 +334,7 @@ void Analysator::Initialise()
   
   if (simple_d)
   {
+    delayed_Ge_C1_VS_delayed_calo.reset("delayed_Ge_C1_VS_delayed_calo", "Clean Ge C1 VS delayed calo", 500,0,5000, 5000,0,5000);
     delayed_Ge_C1_VS_prompt_Ge.reset("delayed_Ge_C1_VS_prompt_Ge", "Clean Ge C1 VS prompt Ge mult", 5000,0,5000, 2000,0,4000);
   }
 
@@ -415,6 +417,8 @@ void Analysator::analyse(Nuball2Tree & tree, Event & event)
     std::vector<int> nb_gamma_in_prompts(nb_prompts, 0);
     std::vector<double> calo_prompts(nb_prompts, 0.0);
     std::vector<Clovers> prompt_clovers(nb_prompts);
+    Clovers prompt_clovers_d;
+    int nb_gamma_in_prompts_d = 0;
     std::vector<bool> particle_associated_with_prompt(nb_prompts, false); // Deal with DSSD later
 
     std::vector<bool> is_prompt(event.mult, false);
@@ -455,7 +459,12 @@ void Analysator::analyse(Nuball2Tree & tree, Event & event)
       int max_T = 5;
       int pulse_freq = 200;
       if (isParis[label]) {min_T = -5; max_T = 4;}
-      if (time_ns<max_T && !isDSSD[label])
+      if (simple_d && !isDSSD[label] && -10<time_ns && time_ns<10)
+      {
+        ++nb_gamma_in_prompts_d;
+        is_prompt[hit_i] = true;
+      }
+      if (!simple_d && time_ns<max_T && !isDSSD[label])
       {                                                                 // Let's take an example : time = -798 and max_T = 5;
         auto const & shifted_time = abs(time_ns)+max_T;                 // shifted_time = 803
                      index_prompt = (int_cast(shifted_time)/pulse_freq);// index_prompt = 4
@@ -488,8 +497,13 @@ void Analysator::analyse(Nuball2Tree & tree, Event & event)
         if (is_prompt[hit_i]) 
         {
           prompt_clovers[index_prompt].Fill(event, hit_i);
-          if (simple_d) prompt_clovers[0].Fill(event, hit_i);
+          if (simple_d) 
+          {
+            prompt_clovers_d.Fill(event, hit_i);
+            prompt_clovers[0].Fill(event, hit_i);
+          }
           prompt_Ge.Fill(nrj);
+          
         }
         else if (is_delayed[hit_i]) 
         {
@@ -671,30 +685,37 @@ void Analysator::analyse(Nuball2Tree & tree, Event & event)
         break;
     }}
 
-    if (simple_d && clean_indexes.size() == 1)
+    if (simple_d)
     {
-      closest_prompt = 0;
-      auto const & time = clovers_delayed[clean_indexes[0]].time;
-      auto const & nrj = clovers_delayed[clean_indexes[0]].nrj;
-      for (auto const & clean_index : prompt_clovers[closest_prompt].CleanGe)
+      prompt_clovers_d.Analyse();
+      if (clean_indexes.size() == 1)
       {
-        delayed_Ge_C1_VS_prompt_Ge.Fill(prompt_clovers[closest_prompt][clean_index].nrj, nrj);
+        auto const & time = clovers_delayed[clean_indexes[0]].time;
+        auto const & nrj = clovers_delayed[clean_indexes[0]].nrj;
+        delayed_Ge_C1_VS_delayed_calo.Fill(delayed_calorimetry, nrj);
+        for (auto const & clean_index : prompt_clovers_d.CleanGe)
+        {
+          delayed_Ge_C1_VS_prompt_Ge.Fill(prompt_clovers[closest_prompt][clean_index].nrj, nrj);
+        }
       }
     }
 
+    bool C2_PM24 = false; // 2 clean delayed and 1<prompt mult<5
+
     // Calculate delayed calorimetry with 2 or 3 clean germaniums :
-    if ((clean_indexes.size() == 2) && one_close_prompt)
+    if ((clean_indexes.size() == 2) && (simple_d || one_close_prompt))
     {
       auto const & time_0 = clovers_delayed[clean_indexes[0]].time;
       auto const & time_1 = clovers_delayed[clean_indexes[1]].time;
       auto const & nrj_0 = clovers_delayed[clean_indexes[0]].nrj;
       auto const & nrj_1 = clovers_delayed[clean_indexes[1]].nrj;
       auto const & dT = time_1 - time_0;
+      auto const & prompt_mult = (simple_d) ? : nb_gamma_in_prompts[closest_prompt];
       if (dT>50) continue;
       auto const & calo = nrj_0+nrj_1;
       delayed_Ge_C2_VS_total_Ge.Fill(calo, nrj_0);
       delayed_Ge_C2_VS_total_Ge.Fill(calo, nrj_1);
-      if(nb_gamma_in_prompts[closest_prompt] > 1 && nb_gamma_in_prompts[closest_prompt]<5 
+      if(prompt_mult > 1 && prompt_mult<5 
       && calo_prompts[closest_prompt]>515 && calo_prompts[closest_prompt]<2000)
       {
         delayed_Ge_C2_VS_total_Ge_cleaned.Fill(calo, nrj_0);
@@ -715,11 +736,11 @@ void Analysator::analyse(Nuball2Tree & tree, Event & event)
         delayed_Ge_C2_VS_prompt_Ge.Fill(clover.nrj, nrj_1);
         delayed_Ge_C2_VS_prompt_Ge.Fill(clover.nrj, nrj_0);
       }
-      delayed_Ge_C2_VS_prompt_Ge_mult.Fill(nb_gamma_in_prompts[closest_prompt], nrj_0);
-      delayed_Ge_C2_VS_prompt_Ge_mult.Fill(nb_gamma_in_prompts[closest_prompt], nrj_1);
+      delayed_Ge_C2_VS_prompt_mult.Fill(prompt_mult, nrj_0);
+      delayed_Ge_C2_VS_prompt_mult.Fill(prompt_mult, nrj_1);
     }
 
-    if ((clean_indexes.size() == 3) && one_close_prompt) 
+    if ((clean_indexes.size() == 3) && (simple_d || one_close_prompt)) 
     {
       auto const & time_0 = clovers_delayed[clean_indexes[0]].time;
       auto const & time_1 = clovers_delayed[clean_indexes[1]].time;
@@ -940,13 +961,14 @@ void Analysator::write()
   dT_VS_sumGe.Write();
   delayed_Ge_C2_VS_total_Ge.Write();
   delayed_Ge_C2_VS_prompt_Ge.Write();
-  delayed_Ge_C2_VS_prompt_Ge_mult.Write();
+  delayed_Ge_C2_VS_prompt_mult.Write();
   delayed_Ge_C2_VS_total_Ge_cleaned.Write();
   delayed_Ge_C2_VS_total_Ge_rejected.Write();
   delayed_Ge_C3_VS_total_Ge.Write();
   delayed_Ge_C3_tot3_VS_total_Ge.Write();
 
   delayed_Ge_C1_VS_prompt_Ge.Write();
+  delayed_Ge_C1_VS_delayed_calo.Write();
 
   E_VS_time_BGO_wp.Write();
   E_VS_time_LaBr_wp.Write();
@@ -995,7 +1017,7 @@ int main(int argc, char** argv)
     std::string param(argv[i]);
          if (param == "-f") nb_files = std::stoi(argv[++i]);
     else if (param == "-n") Analysator::setMaxHits(std::stoi(argv[++i]));
-    else if (param == "-d") simple_d = true;
+    else if (param == "-d") {simple_d = true; print("Reading N-SI-136-root_d");}
     else if (param == "-m") nb_threads = std::stoi(argv[++i]);
     else
     {

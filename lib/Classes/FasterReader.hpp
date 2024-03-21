@@ -114,8 +114,8 @@ public:
   void setHit(Hit* hit) {m_hit = hit;}
 
    ///@brief Set the number of hits to read inside each file
-  static void setMaxHits(ulonglong maxHits) {m_maxHits = maxHits;}
-  static auto getMaxHits()                  {return m_maxHits   ;}
+  static void setMaxHits(ulonglong maxHits) {lock_mutex(MTObject::mutex); s_maxHits = maxHits; print(s_maxHits, "hits to read");}
+  static auto getMaxHits()                  {return s_maxHits   ;}
   static void setVerbose(int i = 1) {m_verbose = i;}
 
   // ------ Getters ------ :
@@ -150,7 +150,7 @@ private:
 
   bool InitializeReader();
 
-  thread_local static ulonglong m_maxHits;
+  static ulonglong s_maxHits;
   thread_local static int m_verbose; 
   // ulonglong m_cursor  =  0;
   ulonglong m_counter =  0;
@@ -180,7 +180,7 @@ private:
   std::unordered_map<std::string, bool> error_message;
 };
 
-thread_local ulonglong FasterReader::m_maxHits = -1;
+thread_local ulonglong FasterReader::s_maxHits = -1;
 thread_local int FasterReader::m_verbose = 1;
 // ================== //
 //   INITIALIZATION   //
@@ -262,7 +262,7 @@ bool FasterReader::InitializeReader()
 
 bool inline FasterReader::Read()
 {
-  if (++m_counter>m_maxHits) 
+  if (++m_counter>s_maxHits) 
   {
     return (m_write = false);
   }

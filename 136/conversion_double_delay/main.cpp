@@ -11,9 +11,24 @@
 #include <Detectors.hpp>      // Eases the manipulation of detector's labels
 #include <Manip.hpp>          // Eases the manipulation of files and folder of an experiments
 #include <RF_Manager.hpp>     // Eases manipulation of RF information
-#include <Clovers.hpp>        // Analysis module for clovers
+// #include <Clovers.hpp>        // Analysis module for clovers
 #include <HitBuffer.hpp>      // A buffer for hits
 // #include "EventBuilder_136.hpp" // Event builder for this experiment
+
+namespace Clovers_namespace
+{
+  thread_local static std::array<uchar, 1000> labels;  // Array used to make correspondance between a detector label and its clover label
+  thread_local bool initialized = false;
+  void initialize()
+  {
+    if (!initialized)
+    {
+      std::fill(labels.begin(), labels.end(), -1);
+      for (int l = 23; l<167; l++) labels[l] = static_cast<uchar>((l-23)/6);
+      initialized = true;
+    }
+  }
+}
 
 // 3. Declare some global variables :
 // Data parameters :
@@ -263,7 +278,7 @@ bool comptonClean(HitBuffer const & buffer, size_t & it, RF_Manager & rf, Histos
 {
   auto const init_it = it;
   auto const & hit_Ge = buffer[init_it];
-  auto const & clover_Ge = Clovers::labels[hit_Ge.label];
+  auto const & clover_Ge = Clovers_namespace::labels[hit_Ge.label];
   auto const & time_Ge = rf.pulse_ToF_ns(hit_Ge);
 
   // --- a. Look backward to look for potential BGO within the time window before the hit --- //
@@ -284,7 +299,7 @@ bool comptonClean(HitBuffer const & buffer, size_t & it, RF_Manager & rf, Histos
     if (histoed && delayed) histos.BGO_VS_Ge_label.Fill(hit_Ge.label, hit_it.label);
 
     // Looking for BGO of the same clover module as the germanium
-    if (clover_Ge==Clovers::labels[hit_it.label]) 
+    if (clover_Ge==Clovers_namespace::labels[hit_it.label]) 
     {
       if (histoed) 
       {
@@ -313,7 +328,7 @@ bool comptonClean(HitBuffer const & buffer, size_t & it, RF_Manager & rf, Histos
 
     if (histoed && delayed) histos.BGO_VS_Ge_label.Fill(hit_Ge.label, hit_it.label);
 
-    if (clover_Ge==Clovers::labels[hit_it.label])
+    if (clover_Ge==Clovers_namespace::labels[hit_it.label])
     {// If the hit is a BGO and is in the same Clover as the Germanium, it most probably means it is a scattering from one to another
       if (histoed)
       {
@@ -351,6 +366,7 @@ void convert(Hit & hit, FasterReader & reader,
   // ------------------ //
   // Initialize helpers //
   // ------------------ //
+  Clovers_namespace::initialize();
   Timer timer;
   // Checking the lookup tables :
   if (!timeshifts || !calibration || !reader) return;
@@ -454,7 +470,6 @@ output_mutex.unlock();
   // --------------------------------- //
   // Loop over the temporary root tree //
   // --------------------------------- //
-  Clovers::InitializeArrays();
   
   // Helpers :
   Timer convert_timer;
@@ -501,7 +516,7 @@ output_mutex.unlock();
           {// If the Germanium is in the delayed window, try to create the event :
             auto const init_it = r_buffer_it; // The buffer's index of the first Germanium hit
             MTObject::mutex.lock();
-            auto first_Ge_Clover_label = Clovers::labels[hit_first_Ge.label]; // The Clover label of the first Germanium
+            auto first_Ge_Clover_label = Clovers_namespace::labels[hit_first_Ge.label]; // The Clover label of the first Germanium
             MTObject::mutex.unlock();
             auto const & ref_pulse_timestamp = rf.refTime(hit_first_Ge.stamp); // The absolute timestamp of the beam pulse (relative to the delayed Germanium we're trying to trigger on)
             std::vector<uchar> clover_modules = {first_Ge_Clover_label}; // List of the modules that fired in the event
@@ -579,7 +594,7 @@ output_mutex.unlock();
                 if (isGe[hit_it.label])
                 {
                   // 3. Add-Back : Checking if the label of the germanium's clover module have already fired
-                  auto const & clover_module_it = Clovers::labels[hit_it.label];
+                  auto const & clover_module_it = Clovers_namespace::labels[hit_it.label];
                   if (found(clover_modules, clover_module_it)) continue;
                   clover_modules.push_back(clover_module_it);
                   
@@ -624,7 +639,7 @@ output_mutex.unlock();
                 auto const & next_Ge_index = next_Ge_indexes[index_it];
                 r_buffer_it = next_Ge_index;
                 auto const & hit_Ge2 = buffer[r_buffer_it];
-                auto const & index_next_clover = Clovers::labels[hit_Ge2.label];
+                auto const & index_next_clover = Clovers_namespace::labels[hit_Ge2.label];
 
                 if (histoed && index_it == 0) histos.second_Ge_spectra.Fill(buffer[next_Ge_indexes[0]].nrj);
 
