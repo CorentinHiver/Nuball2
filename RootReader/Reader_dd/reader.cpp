@@ -179,6 +179,9 @@ private:
   MTTHist<TH2F> delayed_Ge_C2_VS_total_Ge_rejected;
   MTTHist<TH2F> delayed_Ge_C3_VS_total_Ge;
   MTTHist<TH2F> delayed_Ge_C3_tot3_VS_total_Ge;
+  
+  // simple clean Ge delayed trigger :
+  MTTHist<TH2F> delayed_Ge_C1_VS_prompt_Ge;
 
   #else //QUALITY
 
@@ -327,6 +330,11 @@ void Analysator::Initialise()
   preprompt_spectra.reset("preprompt_spectra", "preprompt spectra", 10000,0,10000);
 
   time_vs_run.reset("time_vs_run","time vs run", nb_runs,run_min,run_max, 750, -1000, 500);
+  
+  if (simple_d)
+  {
+    delayed_Ge_C1_VS_prompt_Ge.reset("delayed_Ge_C1_VS_prompt_Ge", "Clean Ge C1 VS prompt Ge mult", 5000,0,5000, 2000,0,4000);
+  }
 
   // Run quality :
 #else // if QUALITY
@@ -480,6 +488,7 @@ void Analysator::analyse(Nuball2Tree & tree, Event & event)
         if (is_prompt[hit_i]) 
         {
           prompt_clovers[index_prompt].Fill(event, hit_i);
+          if (simple_d) prompt_clovers[0].Fill(event, hit_i);
           prompt_Ge.Fill(nrj);
         }
         else if (is_delayed[hit_i]) 
@@ -662,6 +671,17 @@ void Analysator::analyse(Nuball2Tree & tree, Event & event)
         break;
     }}
 
+    if (simple_d && clean_indexes.size() == 1)
+    {
+      closest_prompt = 0:
+      auto const & time = clovers_delayed[clean_indexes][0].time;
+      auto const & nrj = clovers_delayed[clean_indexes[0]].nrj;
+      for (auto const & clean_index : prompt_clovers[closest_prompt].CleanGe)
+      {
+        delayed_Ge_C1_VS_prompt_Ge.Fill(prompt_clovers[closest_prompt][clean_index].nrj, nrj);
+      }
+    }
+
     // Calculate delayed calorimetry with 2 or 3 clean germaniums :
     if ((clean_indexes.size() == 2) && one_close_prompt)
     {
@@ -674,7 +694,8 @@ void Analysator::analyse(Nuball2Tree & tree, Event & event)
       auto const & calo = nrj_0+nrj_1;
       delayed_Ge_C2_VS_total_Ge.Fill(calo, nrj_0);
       delayed_Ge_C2_VS_total_Ge.Fill(calo, nrj_1);
-      if(nb_gamma_in_prompts[closest_prompt]<4 && calo_prompts[closest_prompt]>515 && calo_prompts[closest_prompt]<2000)
+      if(nb_gamma_in_prompts[closest_prompt] > 1 && nb_gamma_in_prompts[closest_prompt]<5 
+      && calo_prompts[closest_prompt]>515 && calo_prompts[closest_prompt]<2000)
       {
         delayed_Ge_C2_VS_total_Ge_cleaned.Fill(calo, nrj_0);
         delayed_Ge_C2_VS_total_Ge_cleaned.Fill(calo, nrj_1);
@@ -686,6 +707,7 @@ void Analysator::analyse(Nuball2Tree & tree, Event & event)
         delayed_Ge_C2_VS_total_Ge_rejected.Fill(calo, nrj_0);
         delayed_Ge_C2_VS_total_Ge_rejected.Fill(calo, nrj_1);
       }
+
       // Prompt VS delayed :
       for (auto const & clean_index : prompt_clovers[closest_prompt].CleanGe)
       {
@@ -923,6 +945,8 @@ void Analysator::write()
   delayed_Ge_C2_VS_total_Ge_rejected.Write();
   delayed_Ge_C3_VS_total_Ge.Write();
   delayed_Ge_C3_tot3_VS_total_Ge.Write();
+
+  delayed_Ge_C1_VS_prompt_Ge.Write();
 
   E_VS_time_BGO_wp.Write();
   E_VS_time_LaBr_wp.Write();
