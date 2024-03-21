@@ -162,7 +162,8 @@ public:
   {
     if (signal == SIGINT)
     {
-      if (MTObject::kill)
+      if (!activated) exit(41);
+      else if (MTObject::kill)
       {
         std::cout << "\nCtrl+C pressed twice, killing violently the program... (but should be fine, maybe, hopefully...)" << std::endl;
       }
@@ -214,6 +215,7 @@ public:
   {
     if (MTObject::ON)
     {
+      activated = true;
       m_threads.reserve(nb_threads); // Memory pre-allocation (used for performances reasons)
       for (size_t i = 0; i<nb_threads; i++) m_threads.emplace_back( [i, &func, &args...] ()
       {// Inside this lambda function, we already are inside the threads, so the parallelised section starts NOW :
@@ -223,6 +225,7 @@ public:
       for(auto & thread : m_threads) thread.join(); //Closes threads, waiting fot everyone to finish
       m_threads.clear(); // Flushes memory
       std::cout << "Multi-threading is over !" << std::endl;
+      activated = false;
     }
 
     else
@@ -242,7 +245,7 @@ public:
   static size_t nb_threads;
   static std::mutex mutex; // A global mutex for everyone to use
   static bool ON; // State boolean : is multithreading activated ?
-  operator bool() {return MTObject::ON;} // Can be used only if the class has been instanciated
+  static bool activated; // State boolean : is multithreading activated ?
 
   static auto const & getThreadIndex() {return m_thread_index;}
   static auto const & index() {return m_thread_index;}

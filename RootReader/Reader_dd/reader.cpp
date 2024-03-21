@@ -173,6 +173,8 @@ private:
 
   MTTHist<TH2F> dT_VS_sumGe;
   MTTHist<TH2F> delayed_Ge_C2_VS_total_Ge;
+  MTTHist<TH2F> delayed_Ge_C2_VS_prompt_Ge;
+  MTTHist<TH2F> delayed_Ge_C2_VS_prompt_Ge_mult;
   MTTHist<TH2F> delayed_Ge_C2_VS_total_Ge_cleaned;
   MTTHist<TH2F> delayed_Ge_C2_VS_total_Ge_rejected;
   MTTHist<TH2F> delayed_Ge_C3_VS_total_Ge;
@@ -311,11 +313,13 @@ void Analysator::Initialise()
   delayed_Ge_clean_VS_delayed_calo_wop.reset("delayed_Ge_clean_VS_delayed_calo_wop", "delayed Ge clean VS delayed calo with only one prompt before", 500,0,15000,10000,0,10000);
 
   // When only 2-3 germaniums, plot germaniums VS the sum of them
-  delayed_Ge_C2_VS_total_Ge.reset("delayed_Ge_C2_VS_total_Ge", "Clean Ge VS sum clean Ge C2", 5000,0,5000, 4000,0,4000);
-  delayed_Ge_C2_VS_total_Ge_cleaned.reset("delayed_Ge_C2_VS_total_Ge_cleaned", "Clean Ge VS sum clean Ge C2 cleaned", 5000,0,5000, 4000,0,4000);
-  delayed_Ge_C2_VS_total_Ge_rejected.reset("delayed_Ge_C2_VS_total_Ge_rejected", "Clean Ge VS sum clean Ge C2 rejected", 5000,0,5000, 4000,0,4000);
-  delayed_Ge_C3_VS_total_Ge.reset("delayed_Ge_C3_VS_total_Ge", "Clean Ge VS sum clean Ge C3 - only 2 by 2", 5000,0,5000, 4000,0,4000);
-  delayed_Ge_C3_tot3_VS_total_Ge.reset("delayed_Ge_C3_tot3_VS_total_Ge", "Clean Ge VS sum clean Ge C3", 5000,0,5000, 4000,0,4000);
+  delayed_Ge_C2_VS_total_Ge.reset("delayed_Ge_C2_VS_total_Ge", "Clean Ge VS sum clean Ge C2", 5000,0,5000, 2000,0,4000);
+  delayed_Ge_C2_VS_prompt_Ge.reset("delayed_Ge_C2_VS_prompt_Ge", "Clean Ge C2 VS prompt Ge", 5000,0,5000, 2000,0,4000);
+  delayed_Ge_C2_VS_prompt_Ge_mult.reset("delayed_Ge_C2_VS_prompt_Ge_mult", "Clean Ge C2 VS prompt Ge mult", 15,0,15, 2000,0,4000);
+  delayed_Ge_C2_VS_total_Ge_cleaned.reset("delayed_Ge_C2_VS_total_Ge_cleaned", "Clean Ge VS sum clean Ge C2 cleaned", 5000,0,5000, 2000,0,4000);
+  delayed_Ge_C2_VS_total_Ge_rejected.reset("delayed_Ge_C2_VS_total_Ge_rejected", "Clean Ge VS sum clean Ge C2 rejected", 5000,0,5000, 2000,0,4000);
+  delayed_Ge_C3_VS_total_Ge.reset("delayed_Ge_C3_VS_total_Ge", "Clean Ge VS sum clean Ge C3 - only 2 by 2", 5000,0,5000, 2000,0,4000);
+  delayed_Ge_C3_tot3_VS_total_Ge.reset("delayed_Ge_C3_tot3_VS_total_Ge", "Clean Ge VS sum clean Ge C3", 5000,0,5000, 2000,0,4000);
 
   // For TSC method :
   dT_VS_sumGe.reset("dT_VS_Esum_Ge", "dT VS Esum Ge", 10000,0,10000, 100,-200,200);
@@ -682,6 +686,15 @@ void Analysator::analyse(Nuball2Tree & tree, Event & event)
         delayed_Ge_C2_VS_total_Ge_rejected.Fill(calo, nrj_0);
         delayed_Ge_C2_VS_total_Ge_rejected.Fill(calo, nrj_1);
       }
+      // Prompt VS delayed :
+      for (auto const & clean_index : prompt_clovers.CleanGe)
+      {
+        auto const & clover = prompt_clovers[clean_index];
+        delayed_Ge_C2_VS_prompt_Ge.Fill(clover.nrj, nrj_1);
+        delayed_Ge_C2_VS_prompt_Ge.Fill(clover.nrj, nrj_0);
+      }
+      delayed_Ge_C2_VS_prompt_Ge_mult.Fill(nb_gamma_in_prompts[closest_prompt], nrj_0);
+      delayed_Ge_C2_VS_prompt_Ge_mult.Fill(nb_gamma_in_prompts[closest_prompt], nrj_1);
     }
 
     if ((clean_indexes.size() == 3) && one_close_prompt) 
@@ -904,6 +917,8 @@ void Analysator::write()
 
   dT_VS_sumGe.Write();
   delayed_Ge_C2_VS_total_Ge.Write();
+  delayed_Ge_C2_VS_prompt_Ge.Write();
+  delayed_Ge_C2_VS_prompt_Ge_mult.Write();
   delayed_Ge_C2_VS_total_Ge_cleaned.Write();
   delayed_Ge_C2_VS_total_Ge_rejected.Write();
   delayed_Ge_C3_VS_total_Ge.Write();
