@@ -16,7 +16,9 @@ while true; do
       break # Sortir de la boucle si la commande s'est terminée avec succès
   else
       echo "conversion failed... Waiting 60 seconds before restart"
-      sleep 60 # Attendre 60 secondes avant de relancer la commande
+      sleep 15 # Attendre 30 secondes avant de relancer la commande
+      make opt # build the executable in case the source cod ehas changed
+      sleep 15 # Attendre 30 secondes avant de relancer la commande
   fi
 done
 
