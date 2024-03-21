@@ -262,6 +262,7 @@ private:
 
 bool MTObject::m_initialized = false;
 bool MTObject::kill = false;
+bool MTObject::activated = false;
 
 // Declaration of static variables :
 size_t MTObject::nb_threads = 1;
