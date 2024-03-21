@@ -673,8 +673,8 @@ void Analysator::analyse(Nuball2Tree & tree, Event & event)
 
     if (simple_d && clean_indexes.size() == 1)
     {
-      closest_prompt = 0:
-      auto const & time = clovers_delayed[clean_indexes][0].time;
+      closest_prompt = 0;
+      auto const & time = clovers_delayed[clean_indexes[0]].time;
       auto const & nrj = clovers_delayed[clean_indexes[0]].nrj;
       for (auto const & clean_index : prompt_clovers[closest_prompt].CleanGe)
       {
