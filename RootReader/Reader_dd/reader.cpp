@@ -710,7 +710,7 @@ void Analysator::analyse(Nuball2Tree & tree, Event & event)
       auto const & nrj_0 = clovers_delayed[clean_indexes[0]].nrj;
       auto const & nrj_1 = clovers_delayed[clean_indexes[1]].nrj;
       auto const & dT = time_1 - time_0;
-      auto const & prompt_mult = (simple_d) ? : nb_gamma_in_prompts[closest_prompt];
+      auto const & prompt_mult = (simple_d) ? nb_gamma_in_prompts_d : nb_gamma_in_prompts[closest_prompt];
       if (dT>50) continue;
       auto const & calo = nrj_0+nrj_1;
       delayed_Ge_C2_VS_total_Ge.Fill(calo, nrj_0);
