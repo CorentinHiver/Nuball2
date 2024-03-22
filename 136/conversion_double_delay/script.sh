@@ -31,7 +31,7 @@ while true; do
   fi
 
   # Launch the multi-threaded command
-  "$multi_threaded_command"
+  $multi_threaded_command
 
   # Check the exit code of the command
   if [ $? -eq 0 ]; then
@@ -41,7 +41,7 @@ while true; do
     echo "Conversion failed... Switching to mono-threaded mode for 5 minutes."
 
     # Launch the mono-threaded command in the background
-    "$mono_threaded_command" &
+    $mono_threaded_command &
     background_pid=$!
 
     # Wait for 5 minutes
