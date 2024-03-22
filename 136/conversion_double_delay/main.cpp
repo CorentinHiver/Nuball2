@@ -862,7 +862,7 @@ int main(int argc, char** argv)
         {
           nb_files = atoi(argv[++i]);
         }
-        else if (command == "--run")
+        else if (                   command == "--run")
         {
           one_run = true;
           one_run_folder = argv[++i];
@@ -888,13 +888,13 @@ int main(int argc, char** argv)
         {// Overwright already existing .root files
           overwrite = true;
         }
-        else if (command == "-p" || command == "--number_pulses")
-        {
-          g_n_prev_pulses = std::atoi(argv[++i]);
-        }
         else if (command == "-O" || command == "--output")
         {
           output = argv[++i];
+        }
+        else if (command == "-p" || command == "--number_pulses")
+        {
+          g_n_prev_pulses = std::atoi(argv[++i]);
         }
         else if (command == "-t" || command == "--trigger")
         {
@@ -943,6 +943,7 @@ int main(int argc, char** argv)
           print("(-o  || --overwrite)                      : overwrites the already written folders. If a folder is incomplete, you need to delete it");
           print("(-p  || --number_pulses)  [nb_pulses]     : Sets the number of pulses to look backward from the trigger. Default : 4 pulses");
           print("(-P  || --particle-trig)                  : trigger : requires one DSSD hit before the clean Ge (TODO)");
+          print("(       --run)                            : Treats only the given run (don't forget the .fast at the end)");
           print("(       --only-timeshift)                 : Calculate only timeshifts, force it even if it already has been calculated");
           // print("(-t  || --trigger)        [trigger]       : Default ",list_trigger,"|", trigger_legend);
           print("(-Th || --Thorium)                        : Treats only the thorium runs (run_nb < 75)");

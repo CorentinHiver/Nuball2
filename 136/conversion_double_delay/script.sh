@@ -1,24 +1,29 @@
 #!/bin/bash
 
 # Définition de la commande à exécuter
-commande_a_executer="./main -U -m 10 -p 2 -d"
+multithreaded_command="./main -U -m 10 -p 2 -d"
+monothreaded_command="./main -U -m 1 -p 2 -d"
 nombre_de_tentatives=0
 
 # Boucle jusqu'à ce que le programme s'exécute avec succès
 while true; do
-  nombre_de_tentatives=$((nombre_de_tentatives + 1)) #Nombre de tentatives
-  echo "Launching forced conversion..."
-  $commande_a_executer # Exécuter la commande
+  ((nombre_de_tentatives++)) #Nombre de tentatives
+  echo "Launching forced conversion for the &nombre_de_tentatives time..."
+  $multithreaded_command # Exécuter la commande
 
   # Vérifier le code de retour de la commande
   if [ $? -eq 0 ]; then
       echo "conversion finished with success !!"
       break # Sortir de la boucle si la commande s'est terminée avec succès
   else
-      echo "conversion failed... Waiting 30 seconds before restart"
-      sleep 15 # Attendre 30 secondes avant de relancer la commande
-      make opt # build the executable in case the source cod ehas changed
-      sleep 15 # Attendre 30 secondes avant de relancer la commande
+      echo "conversion failed... Back to monothread for 5 minutes"
+      $monothreaded_command &
+      background_pid=$!
+      sleep 300
+      if ps -p $secondary_pid > /dev/null; then
+        echo "Sending SIGINT to secondary command..."
+        kill -2 $secondary_pid
+      fi
   fi
 done
 

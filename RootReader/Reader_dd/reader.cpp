@@ -346,13 +346,13 @@ void Analysator::Initialise()
   for (auto const & label : detectors.labels())
   {
     std::string name = "time_vs_run_"+detectors[label];
-    time_vs_run_each_det.emplace(label, MTTHist<TH2F>(name.c_str(), "time vs run each;run number;time [ns]", nb_runs,run_min,run_max, 1500,-1000,500));
+    time_vs_run_each_det.emplace(label, MTTHist<TH2F>(name.c_str(), "time vs run each;run number;time [ns]", nb_runs,run_min,run_max, 2000,-1000,1000));
   }
   for (int run_i = run_min; run_i<run_max+1; run_i++)
   {
     auto name = ("time_vs_det_run_"+std::to_string(run_i));
     auto title = concatenate("time vs det run", run_i, ";run number;time [ns]");
-    time_vs_det_each_run.emplace(run_i, MTTHist<TH2F>(name.c_str(), title.c_str(), 900,0,900, 750,-1000,500));
+    time_vs_det_each_run.emplace(run_i, MTTHist<TH2F>(name.c_str(), title.c_str(), 900,0,900, 2000,-1000,1000));
   }
 #endif //QUALITY
 }
@@ -430,9 +430,9 @@ void Analysator::analyse(Nuball2Tree & tree, Event & event)
       auto const & label = event.labels[hit_i];
       auto       & time  = event.times [hit_i];
       auto const & nrj2  = event.nrj2s [hit_i];
-      auto       & nrj   = event.nrjs[hit_i];
+      auto       & nrj   = event.nrjs  [hit_i];
 
-      if (isDSSD[label]) continue; // There is nothing to do with paris now
+      if (isDSSD[label]) continue; // There is nothing to do with the dssd now
       if (found(blacklist, label)) {rejected[hit_i] = true; continue;}
       // Throw events with too low energy
       if (nrj<5)
@@ -772,7 +772,6 @@ void Analysator::analyse(Nuball2Tree & tree, Event & event)
         delayed_Ge_C3_tot3_VS_total_Ge.Fill(nrj_0+nrj_1+nrj_2, nrj_1);
         delayed_Ge_C3_tot3_VS_total_Ge.Fill(nrj_0+nrj_1+nrj_2, nrj_2);
       }
-
     }
 
     // Others :
