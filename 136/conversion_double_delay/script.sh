@@ -8,7 +8,7 @@ nombre_de_tentatives=0
 
 # Boucle jusqu'à ce que le programme s'exécute avec succès
 while true; do
-  ((nombre_de_tentatives++)) #Nombre de tentatives
+  nombre_de_tentatives = $((nombre_de_tentatives + 1)) #Nombre de tentatives
   echo "Launching forced conversion for the &nombre_de_tentatives time..."
 
   #If no access to the executable, make it again :
