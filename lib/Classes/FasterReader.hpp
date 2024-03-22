@@ -180,7 +180,7 @@ private:
   std::unordered_map<std::string, bool> error_message;
 };
 
-thread_local ulonglong FasterReader::s_maxHits = -1;
+ulonglong FasterReader::s_maxHits = -1;
 thread_local int FasterReader::m_verbose = 1;
 // ================== //
 //   INITIALIZATION   //

@@ -968,7 +968,7 @@ int main(int argc, char** argv)
   Path datapath = Path::home();
        if ( datapath == "/home/corentin/") datapath+="faster_data/";
   else if ( datapath == "/home/faster/") datapath="/srv/data/nuball2/";
-  else {print("Unkown HOME path -",datapath,"- please add yours on top of this line in the main.cpp ^^^^^^^^"); return -1;}
+  else {print("Unkown HOME path -",datapath,"- please add yours on top of this line in the main.cpp ^^^^^^^^"); return 0;}
 
   // Input file :
   Path manipPath = datapath+manip;
@@ -989,7 +989,7 @@ int main(int argc, char** argv)
   if (one_run) runs.setFolder(one_run_folder);
 
   // Checking that all the modules have been loaded correctly :
-  if (!calibration || !runs) return -1;
+  if (!calibration || !runs) return 0;
 
   // Setup some parameters :
   RF_Manager::set_offset_ns(g_rf_offset_ns);
@@ -1160,5 +1160,5 @@ int main(int argc, char** argv)
   {
     print(output_fileinfo_name, "file will be broken ...");
   }
-  return 1;
+  return 0;
 }
