@@ -66,8 +66,6 @@
  *          }
  *        }
  * 
- * This class is Thread Safe !
- * 
  */
 class Clovers
 {

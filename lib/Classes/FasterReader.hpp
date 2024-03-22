@@ -76,10 +76,10 @@ class FasterReader
 {
 public:
    ///@brief Construct a new Faster Reader object
-  FasterReader(Hit* _hit, std::string _filename) : m_hit(_hit), m_filename(_filename) 
-  {    
+  FasterReader(Hit *_hit, std::string _filename) : m_hit(_hit), m_filename(_filename)
+  {
     m_kReady = Initialize();
-  }    
+  }
 
    ///@brief Destroy the Faster Reader object
   ~FasterReader()
