@@ -6,7 +6,7 @@ multi_threaded_command="$executable -U -m 10 -p 2"
 mono_threaded_command="$executable -U -m 1 -p 2"
 
 # Add -d option if specified
-if [ "$1" == "d" ]; then
+if [ "$1" = "d" ]; then
   multi_threaded_command="$multi_threaded_command -d"
   mono_threaded_command="$mono_threaded_command -d"
 fi
