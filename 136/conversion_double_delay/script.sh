@@ -1,56 +1,58 @@
 #!/bin/bash
 
-# Définition de la commande à exécuter
-executable=./main
-multithreaded_command="$executable -U -m 10 -p 2 -d"
-monothreaded_command="$executable -U -m 1 -p 2 -d"
-nombre_de_tentatives=0
+# Definition of the command to execute
+executable="./main"
+multi_threaded_command="$executable -U -m 10 -p 2"
+mono_threaded_command="$executable -U -m 1 -p 2"
 
-# Boucle jusqu'à ce que le programme s'exécute avec succès
+# Add -d option if specified
+if [ "$1" == "d" ]; then
+  multi_threaded_command="$multi_threaded_command -d"
+  mono_threaded_command="$mono_threaded_command -d"
+fi
+
+number_of_attempts=0
+
+# Loop until the program executes successfully
 while true; do
-  nombre_de_tentatives = $((nombre_de_tentatives + 1)) #Nombre de tentatives
-  echo "Launching forced conversion for the &nombre_de_tentatives time..."
+  ((number_of_attempts++)) # Increment the number of attempts
+  echo "Launching forced conversion for the $number_of_attempts time..."
 
-  #If no access to the executable, make it again :
+  # If the executable doesn't exist or not executable, rebuild it
   if ! [ -x "$executable" ]; then
     make opt
-    #if the make failed, exit :
+    # Check if make was successful
     if [ $? -eq 0 ]; then
       echo "Make completed successfully."
     else
       echo "Make encountered an error."
+      exit 1
     fi
   fi
 
-  #launch the command :
-  $multithreaded_command 
+  # Launch the multi-threaded command
+  "$multi_threaded_command"
 
-  # Vérifier le code de retour de la commande
+  # Check the exit code of the command
   if [ $? -eq 0 ]; then
-      echo "conversion finished with success !!"
-      break # Sortir de la boucle si la commande s'est terminée avec succès
+    echo "Conversion finished successfully!"
+    break # Exit the loop if the command succeeded
   else
-    echo "conversion failed... Back to monothread for 5 minutes"
-    #If no access to the executable, make it again :
-    if ! [ -x "$executable" ]; then
-      make opt
-      #if the make failed, exit :
-      if [ $? -eq 0 ]; then
-        echo "Make completed successfully."
-      else
-        echo "Make encountered an error."
-      fi
-    fi
+    echo "Conversion failed... Switching to mono-threaded mode for 5 minutes."
 
-    # launch the executable with multithread deactivated
-    $monothreaded_command &
+    # Launch the mono-threaded command in the background
+    "$mono_threaded_command" &
     background_pid=$!
+
+    # Wait for 5 minutes
     sleep 300
-    if ps -p $secondary_pid > /dev/null; then
-      echo "Sending SIGINT to secondary command..."
-      kill -2 $secondary_pid
+
+    # Check if the background process is still running, send SIGINT if it is
+    if ps -p $background_pid > /dev/null; then
+      echo "Sending SIGINT to the background process..."
+      kill -2 $background_pid
     fi
   fi
 done
 
-echo "Conversion should be finished by now ! only &nombre_de_tentatives tentatives"
+echo "Conversion should be finished by now! Total attempts: $number_of_attempts"
