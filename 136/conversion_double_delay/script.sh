@@ -15,7 +15,7 @@ number_of_attempts=0
 
 # Loop until the program executes successfully
 while true; do
-  ((number_of_attempts++)) # Increment the number of attempts
+  nombre_de_tentatives=$((nombre_de_tentatives + 1)) # Increment the number of attempts
   echo "Launching forced conversion for the $number_of_attempts time..."
 
   # If the executable doesn't exist or not executable, rebuild it
